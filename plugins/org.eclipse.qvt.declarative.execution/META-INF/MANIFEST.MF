@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Declarative QVT Execution Plug-in
+Bundle-SymbolicName: org.eclipse.qvt.declarative.execution
+Bundle-Version: 0.0.1
+Bundle-Activator: org.eclipse.qvt.declarative.execution.Activator
+Bundle-Vendor: %pluginProvider
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.qvt.declarative.common,
+ org.eclipse.core.resources
+Eclipse-LazyStart: true
+Export-Package: org.eclipse.qvt.declarative.execution
