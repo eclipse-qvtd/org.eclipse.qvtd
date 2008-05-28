@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Declarative QVT Common Plug-in
+Bundle-SymbolicName: org.eclipse.qvt.declarative.common
+Bundle-Version: 1.0.0
+Bundle-Activator: org.eclipse.qvt.declarative.common.Activator
+Bundle-Vendor: %plginProvider
+Require-Bundle: org.eclipse.core.runtime
+Eclipse-LazyStart: true
+Export-Package: org.eclipse.qvt.declarative.common
