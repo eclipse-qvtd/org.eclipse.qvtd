@@ -1,4 +1,4 @@
-package org.eclipse.qvt.declarative.common;
+package org.eclipse.qvt.declarative.common.framework.service;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
