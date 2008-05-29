@@ -7,6 +7,7 @@ Bundle-Activator: org.eclipse.qvt.declarative.compilation.Activator
 Bundle-Vendor: %pluginProvider
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.qvt.declarative.common;visibility:=reexport
+ org.eclipse.qvt.declarative.common;visibility:=reexport,
+ org.eclipse.core.resources;bundle-version="3.4.0"
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.qvt.declarative.compilation
