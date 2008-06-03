@@ -1,0 +1,267 @@
+package org.eclipse.qvt.declarative.relations.atlvm;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.InvalidPropertiesFormatException;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.m2m.atl.drivers.emf4atl.ASMEMFModel;
+import org.eclipse.m2m.atl.engine.vm.ASM;
+import org.eclipse.m2m.atl.engine.vm.ASMExecEnv;
+import org.eclipse.m2m.atl.engine.vm.ASMInterpreter;
+import org.eclipse.m2m.atl.engine.vm.ASMXMLReader;
+import org.eclipse.m2m.atl.engine.vm.Debugger;
+import org.eclipse.m2m.atl.engine.vm.SimpleDebugger;
+import org.eclipse.m2m.atl.engine.vm.nativelib.ASMModule;
+import org.eclipse.m2m.qvt.relations.problem.problem.ProblemPackage;
+import org.eclipse.qvt.declarative.common.framework.service.Operation;
+import org.eclipse.qvt.declarative.compilation.CompilationProvider;
+import org.eclipse.qvt.declarative.compilation.CompileOperation;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage;
+import org.eclipse.qvt.declarative.relations.atlvm.utils.ATLVMUtils;
+import org.eclipse.qvt.declarative.relations.atlvm.utils.DirectionUtilies;
+import org.osgi.framework.Bundle;
+
+public class ATLVMCompiler implements CompilationProvider {
+
+	private static final String COMPILER_ASM_LOCATION = "resources/QVTR.asm"; //$NON-NLS-1$
+	
+	private static final String DEFAULT_DEBUGGER_PROPERTIES_LOCATION = "resources/debugger.properties.xml"; //$NON-NLS-1$
+	
+	private static final String DEFAULT_COMPILATION_PARAMETERS_LOCATION = "resources/compilation.parameters.xml"; //$NON-NLS-1$
+
+	private static final String EXECUTABLE_SUFFIX = "asm"; //$NON-NLS-1$
+	
+	private static final String OUT_FILE_PARAMETER_NAME = "WriteTo"; //$NON-NLS-1$
+	
+	private static final String DIRECTION_PARAMETER_NAME = "direction"; //$NON-NLS-1$
+
+	private static final ASM COMPILER_ASM;
+
+	private static final ASMEMFModel QVTR_METAMODEL;
+
+	/**
+	 * The Problem metamodel. This is the way problems are reported during
+	 * the compilation: instances of the Problem class are created inside a
+	 * model. This model can be then interpreted to exhibit problems.
+	 */
+	private static final ASMEMFModel PROBLEM_METAMODEL;
+
+	private static final Debugger DEFAULT_DEBUGGER;
+
+	private static final Properties DEFAULT_COMPILATION_PARAMETERS;
+	
+	static {
+		// start the static initializations
+		COMPILER_ASM = loadQVTRCompiler();
+		QVTR_METAMODEL = ATLVMUtils.loadModel(QVTRelationPackage.eINSTANCE);
+		PROBLEM_METAMODEL = ATLVMUtils.loadModel(ProblemPackage.eINSTANCE);
+		DEFAULT_DEBUGGER = createDefaultDebugger();
+		DEFAULT_COMPILATION_PARAMETERS = loadDefaultCompilationProperties();
+	}
+
+	/**
+	 * Load the compiled version (i.e ASM codes) of the QVTR compiler.
+	 */
+	private static final ASM loadQVTRCompiler() {
+		Bundle bundle = Activator.getDefault().getBundle();
+
+		ASM compilerASM = null;
+		URL compilerUrl = FileLocator.find(bundle, new Path(
+				COMPILER_ASM_LOCATION), Collections.EMPTY_MAP);
+		try {
+			compilerASM = new ASMXMLReader().read(new BufferedInputStream(
+					compilerUrl.openStream()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		return compilerASM;
+	}
+
+	
+
+	/**
+	 * Create a default debugger with the parameters stored in the corresponding
+	 * configuration file
+	 */
+	private static Debugger createDefaultDebugger() {
+		Bundle bundle = Activator.getDefault().getBundle();
+		Properties debuggerProperties = new Properties();
+		URL debuggerPropertiesURL = FileLocator.find(bundle, new Path(
+				DEFAULT_DEBUGGER_PROPERTIES_LOCATION), Collections.EMPTY_MAP);
+		try {
+			debuggerProperties.loadFromXML(debuggerPropertiesURL.openStream());
+		} catch (InvalidPropertiesFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Debugger result = new SimpleDebugger(
+				/* step = */Boolean.toString(true).equals(debuggerProperties.get("step")), //$NON-NLS-1$
+				/* stepops = */new ArrayList<String>(),
+				/* deepstepops = */new ArrayList<String>(),
+				/* nostepops = */new ArrayList<String>(),
+				/* deepnostepops = */new ArrayList<String>(),
+				/* showStackTrace = */true,
+				Boolean.toString(true).equals(debuggerProperties.get("showSummary")), //$NON-NLS-1$
+				Boolean.toString(true).equals(debuggerProperties.get("profile")), //$NON-NLS-1$
+				Boolean.toString(true).equals(debuggerProperties.get("continueAfterError")) //$NON-NLS-1$
+		);
+		return result;
+	}
+
+	/**
+	 * Load the default compilation properties.
+	 */
+	private static Properties loadDefaultCompilationProperties() {
+		Bundle bundle = Activator.getDefault().getBundle();
+		Properties compilationParameters = new Properties();
+		URL compilationParametersUrl = FileLocator
+				.find(bundle,
+						new Path(DEFAULT_COMPILATION_PARAMETERS_LOCATION),
+						Collections.EMPTY_MAP);
+		try {
+			compilationParameters.loadFromXML(compilationParametersUrl
+					.openStream());
+		} catch (InvalidPropertiesFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return compilationParameters;
+	}
+
+	public List<IFile> compile(Object abstractSyntaxTree, Map<String, String> parameters, IFolder sourceFolder, IFolder buildFolder)
+			throws IllegalArgumentException {
+
+		String executablePath;
+		URI abstactSyntaxTreeURI;
+
+		/*
+		 * handle the direction parameter
+		 */
+		String directionDomainName = parameters.remove("direction"); //$NON-NLS-1$
+		if (directionDomainName == null)
+			throw new IllegalArgumentException(
+					"Missing the direction parameter"); //$NON-NLS-1$
+		ASM directionASM = DirectionUtilies
+				.createDirectionLibrary(directionDomainName);
+
+		/*
+		 * Grab AST URI and set up the default executable path
+		 */
+		if (abstractSyntaxTree instanceof Resource) {
+			Resource packageResource = (Resource) abstractSyntaxTree;
+			URI sourceFolderURI = URI.createURI(sourceFolder.getLocationURI().toString());
+			URI buildFolderURI = URI.createURI(buildFolder.getLocationURI().toString());
+			
+			abstactSyntaxTreeURI = packageResource.getURI();
+			URI executableURI = abstactSyntaxTreeURI.replacePrefix(sourceFolderURI, buildFolderURI);
+			executableURI.trimFileExtension();
+			executableURI.appendFileExtension(EXECUTABLE_SUFFIX);
+			executablePath = executableURI.toString();
+			
+		} else {
+			throw new IllegalArgumentException(
+					"Bad source type: " + abstractSyntaxTree.getClass().getName()); //$NON-NLS-1$
+		}
+		
+		if (!parameters.containsKey(OUT_FILE_PARAMETER_NAME)) {
+			parameters.put(OUT_FILE_PARAMETER_NAME, executablePath);
+		}
+
+		/*
+		 * Load the transformation
+		 */
+		ASMEMFModel qvtrTransformation = null;
+		try {
+			qvtrTransformation = ASMEMFModel.loadASMEMFModel(
+					"transfoAST", QVTR_METAMODEL, abstactSyntaxTreeURI, null); //$NON-NLS-1$
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		/*
+		 * Create a model to receive the compilation problems
+		 */
+		ASMEMFModel myProblems = null;
+		try {
+			String problemFileName = abstactSyntaxTreeURI.trimFileExtension()
+					.appendFileExtension("pbm.xmi").toString();//$NON-NLS-1$
+			myProblems = ASMEMFModel.newASMEMFModel("transfoProblems",//$NON-NLS-1$
+					problemFileName, PROBLEM_METAMODEL, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		Properties effectiveParameters = new Properties();
+		effectiveParameters.putAll(DEFAULT_COMPILATION_PARAMETERS);
+		effectiveParameters.putAll(parameters);
+
+		IFile resultFile = compile(qvtrTransformation, directionASM, myProblems,
+				DEFAULT_DEBUGGER, effectiveParameters);
+		return Collections.singletonList(resultFile);
+	}
+
+	public boolean provides(Operation operation) {
+		if (operation instanceof CompileOperation) {
+			CompileOperation compileOperation = (CompileOperation) operation;
+			Object source = compileOperation.getSource();
+			boolean canHandleSource = source instanceof Resource;
+			
+			return canHandleSource && compileOperation.getParameters() != null && compileOperation.getParameters().containsKey(DIRECTION_PARAMETER_NAME);
+		}
+		return false;
+	}
+
+	protected IFile compile(final ASMEMFModel qvtrTransformation,
+			final ASM directionLibary, final ASMEMFModel myProblems,
+			final Debugger debugger, final Properties compilationParameters) {
+
+		ASMModule asmModule = new ASMModule(COMPILER_ASM);
+
+		/*
+		 * Create an execution environment with the handled models
+		 */
+		ASMExecEnv env = new ASMExecEnv(asmModule, debugger, true);
+		env.addPermission("file.read"); //$NON-NLS-1$
+		env.addPermission("file.write"); //$NON-NLS-1$
+
+		env.addModel("QVTR", QVTR_METAMODEL); //$NON-NLS-1$
+		env.addModel("IN", qvtrTransformation); //$NON-NLS-1$
+		env.addModel("Problem", PROBLEM_METAMODEL); //$NON-NLS-1$
+		env.addModel("OUT", myProblems); //$NON-NLS-1$
+		env.registerOperations(directionLibary);
+		env.registerOperations(COMPILER_ASM);
+
+		/*
+		 * Launch the interpretation of the compiler on the QVTR abstract syntax
+		 * tree
+		 */
+		try {
+			new ASMInterpreter(COMPILER_ASM, asmModule, env,
+					compilationParameters);
+		} catch (Exception e) {
+			return null;
+		}
+		
+		IPath resultPath = new Path(compilationParameters.getProperty(OUT_FILE_PARAMETER_NAME));
+		return ResourcesPlugin.getWorkspace().getRoot().getFile(resultPath);
+	}
+
+}

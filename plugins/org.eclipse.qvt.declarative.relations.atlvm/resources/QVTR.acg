@@ -1,0 +1,1927 @@
+acg QVTR startsWith RelationalTransformation {
+
+	attribute EObject::location =
+		self.__xmiID__;
+		
+	attribute EObject::__debug = true;
+	
+	
+--***************************************************************************
+--*  Begin OCL																*
+--***************************************************************************
+
+	function PrimitiveType::encodeType() =
+		if self.name = 'Integer' or self.name = 'EInt' or self.name = 'EIntegerObject' then				'I'
+		else if self.name = 'String' or self.name = 'EString' then										'S'
+		else if self.name = 'Boolean' or self.name = 'EBoolean' or self.name = 'EBooleanObject' then	'B'
+		else if self.name = 'UnlimitedNatural' or self.name = 'EReal' then								'D'
+		else																							'J'
+		endif endif endif endif;
+	function SequenceType::encodeType() = 'Q'+ self.elementType.encodeType();
+	function BagType::encodeType() = 'G'+ self.elementType.encodeType();
+	function SetType::encodeType() = 'E'+ self.elementType.encodeType();
+	function OrderedSetType::encodeType() = 'O'+ self.elementType.encodeType();
+	function CollectionType::encodeType() = 'C'+ self.elementType.encodeType();
+	function AnyType::encodeType() = 'J';
+	function VoidType::encodeType() = 'J';
+	--Ecore specific:
+	--	function TupleType::encodeType() = 'T'+ self.ownedAttribute->collect(a | a.encodeType()).prepend('').sum();
+	function TupleType::encodeType() = 'T'+ self.eAttributes->collect(a | a.encodeType()).prepend('').sum();
+	function EClass::encodeType() = 'M'+ self.getRootPackage().name +'!'+ self.name +';';
+	--Ecore specific:
+	--	function Operation::encodeType() = self.type.encodeType() +'.'+ self.name +'('+ self.ownedParameter->collect(e | e.type.encodeType()).prepend('').sum() +'):'+ self.getType();
+	function EOperation::encodeType() = self.eType.encodeType() +'.'+ self.name +'('+ self.eParameters->collect(e | e.eType.encodeType()).prepend('').sum() +'):J';
+	-- @end Simpletypes 	 
+
+	function CollectionType::getTypeName() = let n = self.eClass().name in n.substring(1, n.lastIndexOf('Type'));
+
+
+--***************************************************************************
+--*  8.2 The Types Package from OCL formal/06-05-01							*
+--***************************************************************************
+
+EClass {
+	push self.name
+	push self.getRootPackage().name
+	findme
+}
+
+--EClass mode createInstance {
+--	getasm
+--	push self.name
+--	push self.package.name
+--	call 'A.__createModelInstance(SS):J'
+--}
+
+CollectionType {
+	push self.getTypeName()
+	push '#native'
+	new
+}
+
+CollectionType mode createInstance {
+	push self.getTypeName()
+	push '#native'
+	new
+}	
+
+PrimitiveType { 
+	push 'OclSimpleType'
+	push '#native'
+	new
+	dup
+	push self.name
+	call 'J.setName(S):V'
+}
+
+PrimitiveType mode createInstance { 
+	push 'OclUndefined'
+	push '#native'
+	new
+}
+
+CollectionType {
+	push 'OclSimpleType'
+	push '#native'
+	new
+	dup
+	push self.getTypeName()
+	call 'J.setName(S):V'
+}
+
+--***************************************************************************
+--*  8.3 The Expressions Package from OCL formal/06-05-01					*
+--***************************************************************************
+
+TypeExp {
+	push self.referredType.name
+	if (self.referredType.package.name='ecore') { --TODO find more general solution
+		push '%EMF'
+	} else {
+		push self.referredType.package.name
+	}
+	findme
+}
+
+IfExp {
+	analyze self.condition
+	if thn
+	analyze self.elseExpression
+	goto end
+	thn:
+	analyze self.thenExpression
+	end:
+	
+}
+
+VariableExp {
+	load self.referredVariable
+}
+
+PropertyCallExp { --TODO move check to operation
+	analyze self.source
+	get self.referredProperty.name
+}
+
+OperationCallExp | if not(self.source.oclIsUndefined()) then
+		self.source.eType isa CollectionType and self.eType isa PrimitiveType and self.eType.name = 'Integer' 
+		else false endif {
+	analyze self.source
+	analyze self.argument
+	pushi 0 --TODO?
+	call self.eType.encodeType() +'.including(J):'+ self.eType.encodeType()
+	call self.referredOperation.encodeType()
+}
+
+
+OperationCallExp | self.source isa VariableExp and self.referredOperation.name = '=' {
+	analyze self.argument						--JA
+	analyze self.source							--JA,JS
+	dup											--JA,JS,JS
+	call 'J.oclIsUndefined():B'					--JA,JS,B
+	if unbound_variable							--JA,JS
+	call self.referredOperation.encodeType()	--B
+--	if (self.__debug ) {
+--		push 'Call to equality with '+self.source.referredVariable.name + ' returned : '
+--		call 'J.debug(S):J'
+--	}
+	goto endop									--B
+	unbound_variable:							--JA,JS
+	pop											--JA
+--	if (self.__debug ) {
+--		push 'Assignment on the fly of '+self.source.referredVariable.name
+--		call 'J.debug(S):J'
+--	}
+	store self.source.referredVariable			--
+	pusht										--B
+	endop:										--B
+} 
+
+OperationCallExp | self.source isa VariableExp and (self.referredOperation.name = '=') = false {
+	if (self.source.oclIsUndefined()) {
+		getasm
+	} else {
+		analyze self.source
+	}
+	analyze self.argument						--J,B,J
+	call self.referredOperation.encodeType()
+--	if (self.__debug ) {
+--		push 'Call to Operation '+ self.referredOperation.encodeType() + ' returned : '
+--		call 'J.debug(S):J'
+--	}
+} 
+
+	
+OperationCallExp {
+	if (self.source.oclIsUndefined()) {
+		getasm
+	} else {
+		analyze self.source
+	}
+	analyze self.argument
+	call self.referredOperation.encodeType()
+} 
+
+--***************************************************************************
+--*  8.3.5 Literal Expressions from OCL formal/06-05-01						*
+--***************************************************************************
+BooleanLiteralExp | self.booleanSymbol {
+	pusht
+}
+
+BooleanLiteralExp {
+	pushf
+}
+
+IntegerLiteralExp {
+	pushi self.integerSymbol
+}
+
+RealLiteralExp {
+	pushd self.realSymbol
+}
+	
+StringLiteralExp {
+	push self.stringSymbol
+}
+
+NullLiteralExp {
+	push 'OclUndefined'
+	push '#native'
+	new
+}
+
+
+CollectionLiteralExp {
+	push self.kind.toString()
+	push '#native'
+	new
+	foreach (part in self.part) {
+		analyze part
+		if (part isa CollectionItem) {
+			call 'CJ.including(J):CJ' --FIXME
+		} else { if (part isa CollectionItem) {
+			call 'CJ.union(CJ):CJ'--FIXME
+		} else {
+			report error 'CollectionLiteralExp can only contain CollectionItem or CollectionRange'
+		}}
+	}
+}
+
+CollectionItem {
+	analyze self.item
+}
+
+CollectionRange { --TODO
+	push 'Sequence'
+	push '#native'
+	new
+	analyze self.last
+	analyze self.first
+	
+	call 'QJ.including(J):QJ'--FIXME
+}
+
+--***************************************************************************
+--*  11.9 Mapping Rules for Predefined Iterator Expressions					*
+--*  from OCL formal/06-05-01												*
+--***************************************************************************
+
+IterateExp | self.name = 'iterate' {
+	if (self.result isa CollectionType) {
+		push self.eType.getTypeName()
+		push '#native'
+		new	
+	} else {
+		push 'OclUndefined'
+		push '#native'
+		new
+	}
+	variable self.result named self.result.name {
+		analyze self.result mode initit
+		analyze self.source
+		foreach (i in self.iterator) {
+			if (i<>self.iterator.last()) {
+				dup
+			}
+		}
+		foreach (i in self.iterator) {
+			push 'OclUndefined'
+			push '#native'
+			new
+			variable i named i.name {[
+				foreach (j in self.iterator) {
+					iterate
+					store j --we cant use variable here, so we store explicitly
+					[
+						analyze self.body mode withResult
+						analyze self.result mode storeit
+					]
+				}
+			]}
+			enditerate
+		}
+	}
+}
+
+IteratorExp | self.name = 'collect' or self.name = 'collectNested' {
+	if (self.iterator.size() <> 1) {
+		report error 'Iterator expression '+ self.name +' must have at most one iterator'
+	}
+	let colType = self.eType.getTypeName() {
+		if (colType='Set') {
+			push 'Bag'
+		} else {
+			push colType
+		} 
+	}
+	push '#native'
+	new
+	analyze self.source
+	let i = self.iterator.first() {
+		iterate
+			variable i named i.name {
+				analyze self.body mode withResult
+				call 'CJ.including(J):CJ'
+			}
+		enditerate
+	}
+}
+
+IteratorExp | self.name = 'select' {
+	if (self.iterator.size() <> 1) {
+		report error 'Iterator expression '+ self.name +' must have at most one iterator'
+	}
+	push self.eType.getTypeName()
+	push '#native'
+	new
+	analyze self.source
+	let i = self.iterator.first() {
+		iterate
+			variable i named i.name {
+				analyze self.body mode withResult
+				if skip
+					load i
+					call self.eType.encodeType() +'.including(J):'+ self.eType.encodeType()
+				skip:
+			}
+		enditerate
+	}
+}
+	
+IteratorExp | self.name = 'reject' and self.source.eType isa SetType {
+	if (self.iterator.size() <> 1) {
+		report error 'Iterator expression '+ self.name +' must have at most one iterator'
+	}
+	push self.eType.getTypeName()
+	push '#native'
+	new
+	analyze self.source
+	let i = self.iterator.first() {
+		iterate
+			variable i named i.name {
+				analyze self.body mode withResult
+				call 'B.not():B'
+				if skip
+					load i
+					call self.eType.encodeType() +'.including(J):'+ self.eType.encodeType()
+				skip:
+			}
+		enditerate
+	}
+}
+
+IteratorExp | self.name = 'exists' {
+	pushf
+	analyze self.source
+	foreach (i in self.iterator) {
+		if (i<>self.iterator.last()) {
+			dup
+		}
+	}
+	foreach (i in self.iterator) {
+		push 'OclUndefined'
+		push '#native'
+		new
+		variable i named i.name {[
+			
+			foreach (j in self.iterator) {
+				iterate
+				store j --we cant use ACG's variable construct here, so we store explicitly
+				[
+					dup
+					if found2 --TODO: optimize for other loops?
+						analyze self.body mode withResult
+						call 'B.or(B):B'
+					found2: --shortcut the iteration
+				]
+			}
+		]}
+		enditerate
+	}
+}
+
+--TODO iterate IteratorExp
+IteratorExp | self.name = 'forAll' {
+	pushf
+	analyze self.source
+	foreach (i in self.iterator) {
+		if (i<>self.iterator.last()) {
+			dup
+		}
+	}
+	foreach (i in self.iterator) {
+		push 'OclUndefined'
+		push '#native'
+		new
+		variable i named i.name {[
+			
+			foreach (j in self.iterator) {
+				iterate
+				store j --we cant use ACG's variable construct here, so we store explicitly
+				[
+					dup
+					if foundfalse
+						call 'B.not():B'
+						analyze self.body mode withResult
+						call 'B.xor(B):B'
+					foundfalse:
+				]
+			}
+		]}
+		enditerate
+	}
+}	
+
+IteratorExp | self.name = 'isUnique' { --TODO test
+	if (self.iterator.size() <> 1) {
+		report error 'Iterator expression '+ self.name +' must have at most one iterator'
+	}
+	pusht
+	variable self named 'result' {
+		push 'Set'
+		push '#native'
+		new
+		analyze self.source
+		let i = self.iterator.first() {
+			iterate --SE
+				variable i named i.name { --TODO: optimize by shortcutting loop body
+					dup --SS
+					analyze self.body mode withResult --SSR
+					dup_x1 --SRSR
+					call 'EJ.includes(J):B'	--SRB
+					if found
+						call 'EJ.include(J):EJ'
+						goto next
+					found:
+						pop
+						pushf
+						store self
+					next:
+				}
+			enditerate
+		}
+		pop
+		load self
+	}
+}
+
+IteratorExp | self.name = 'any' { --TODO test
+	if (self.iterator.size() <> 1) {
+		report error 'Iterator expression '+ self.name +' must have at most one iterator'
+	}
+	pusht										--B
+	analyze self.source 						--BS
+	let i = self.iterator.first() {
+			iterate 							--BE 
+				swap							--EB
+				dup_x1							--BEB
+				if notfound						--BE
+					pop							--B
+					goto next
+				notfound:
+				variable i named i.name { 		--B
+						analyze self.body mode withResult		--BB
+						call 'B.and(B):B'		--B
+				}
+				next:						
+			enditerate
+			if none
+				load i
+				goto end
+			none:
+				push 'OclUndefined'
+				push '#native'
+				new
+			end:
+	}
+}
+	
+IteratorExp | self.name = 'one' { --TODO test
+	if (self.iterator.size() <> 1) {
+		report error 'Iterator expression '+ self.name +' must have at most one iterator'
+	}
+	pushi 0
+	analyze self.source						--IS
+	let i = self.iterator.first() {
+		iterate								--IE
+			variable i named i.name {		--I
+				analyze self.body mode withResult			--IB
+				call 'B.not():B'			--IB
+				if nfound					--I
+					pushi 1
+					call 'I.+(I):I'
+				nfound:
+			}
+		enditerate
+		pushi 1
+		call 'I.=(I):B'
+	}
+}
+
+IteratorExp | self.name = 'sortedBy' { --TODO test
+	if (self.iterator.size() <> 1) {
+		report error 'Iterator expression '+ self.name +' must have at most one iterator'
+	}
+	let colType = self.eType.getTypeName() {
+		if (colType='Set' or 'OrderedSet') {
+			push 'OrderedSet'
+		} else { --Bag or Sequence
+			push 'Sequence'
+		} 
+	}
+	push '#native'
+	new										--R
+	analyze self.source						--RS
+	let i = self.iterator.first() {
+		iterate 							--RE
+			dup								--REE
+			variable self named 'val' {		--RE
+			variable i named i.name {		--R
+				pushi 0
+				variable self.body named 'count' {
+					analyze self.body mode withResult			--RV
+					swap						--VR
+					dup_x1						--RVR
+					iterate						--RVE
+						store i 				--RV
+						dup						--RVV
+						analyze self.body mode withResult		--RVVV
+						call 'B.<(B):B'			--RVB
+						if nocount				--RV
+							load self.body
+							pushi 1
+							call 'I.+(I):I'
+							store self.body
+						nocount:
+					enditerate					--RV
+					pop							--R
+					load self					--RE
+					load self.body				--REI
+					call 'CJ.insertAt(JI):CJ'	--R
+				}
+			}}
+		enditerate
+	}
+}
+
+
+
+--***************************************************************************
+--*  Begin Relations														*
+--***************************************************************************
+
+	asm RelationalTransformation name self.name {
+			
+		field 'matchings' : 'NMap;'
+		field 'missings' : 'NMap;'
+		field 'isCheckOnly' : 'B'
+		field 'relationsCalls' : 'NMap;'
+		
+		operation context 'A' name 'main' {
+			param 'checkOnly' : 'S'
+			
+			getasm
+			load 'checkOnly'
+			push 'true'
+			call 'S.=(S):B'
+			set 'isCheckOnly'
+			
+			getasm
+			push 'Map'
+			push '#native'
+			new
+			foreach (r in self.rule){
+				push r.name
+				push 'Sequence'
+				push '#native'
+				new
+				call 'NMap;.including(SJ):NMap;'
+			}
+			set 'matchings'
+
+			getasm
+			push 'Map'
+			push '#native'
+			new
+			foreach (r in self.rule){
+				push r.name
+				push 'Sequence'
+				push '#native'
+				new
+				call 'NMap;.including(SJ):NMap;'
+			}
+			set 'missings'
+			
+			getasm
+			push 'Map'
+			push '#native'
+			new
+			foreach (r in self.rule){
+				push '__check_'+r.name
+				pushf
+				call 'NMap;.including(SJ):NMap;'
+				push '__enforce_'+r.name
+				pushf
+				call 'NMap;.including(SJ):NMap;'
+			}
+			set 'relationsCalls'
+			
+			pusht
+			foreach (r in self.rule->select(r | r.isTopLevel)){
+				if (r.direction_domain().isEnforceable) {
+					getasm															
+					get 'isCheckOnly'												
+					if checkOnly													
+					getasm															
+					call r.encodeCall('__enforce_')
+					call 'B.and(B):B'									
+					goto endCall
+				}
+				checkOnly(r):														
+				getasm																
+				call r.encodeCall('__check_')
+				call 'B.and(B):B'										
+				endCall(r):			
+			}
+			if end
+			
+			getasm
+			get 'missings'					--NMap
+			dup								--NMap,NMap
+			call 'NMap;.getKeys():ES'		--NMap,ES
+			iterate							--NMap,S
+				swap						--S,NMap
+				dup_x1						--NMap,S,NMap
+				swap						--NMap,NMap,S
+				dup_x1						--NMap,S,NMap,S
+				call 'NMap;.get(S):QJ'		--NMap,S,QJ
+				iterate						--NMap,S,J
+					swap					--NMap,J,S
+					dup_x1					--NMap,S,J,S
+					push ': missing -> '	--NMap,S,J,S,S
+					call 'S.+(S):S'			--NMap,S,J,S
+					call 'J.debug(S):J'		--NMap,S,J
+					pop
+				enditerate
+				pop
+			enditerate
+			end:
+
+		}
+				
+		analyze self.rule mode operations
+		analyze self.rule mode createOrUpdateOp
+		analyze self.eOperations
+	}
+	
+--***************************************************************************
+--*  metamodel requests														*
+--***************************************************************************
+	function Pattern::variable_set() =
+		self.predicate->collect(p | p.conditionExpression.variable_set()).asSet().flatten()
+	;
+	
+	function DomainPattern::variable_set() =
+		self.templateExpression.variable_set()
+	;
+	
+	function ObjectTemplateExp::variable_set() =
+		let result =
+		self.bindsTo.asSet().union(self.part->collect(pti | pti.variable_set())).flatten().asSet()
+		in result
+	;
+	
+	function PropertyTemplateItem::variable_set() =
+		if self.value isa ObjectTemplateExp then
+			self.value.variable_set()
+		else
+			if self.value isa VariableExp then
+				self.value.referredVariable.asSet()
+			else
+				Sequence{}.asSet()
+			endif
+		endif
+		;
+	
+	function RelationCallExp::variable_set() =
+		self.argument->collect(a | a.variable_set()).asSet()
+	;
+	
+	function OperationCallExp::variable_set() =
+		let source = if self.source.oclIsUndefined() then Sequence{}.asSet() else self.source.variable_set() endif in
+		source.union(self.argument->collect(a | a.variable_set()).asSet().flatten())
+	;
+	
+	function VariableExp::variable_set() =
+		self.referredVariable.asSet()
+	;
+	
+	function PropertyCallExp::variable_set() =
+		self.source.variable_set()
+	;
+	
+	function Relation::variable_set() =
+		self.variable.asSet()
+	;
+	
+	function RelationDomain::variable_set() =
+		let patternVarSet = if self.pattern.oclIsUndefined() then Sequence{}.asSet() else self.pattern.variable_set() endif in 
+		patternVarSet.including(self.rootVariable)
+		;
+		
+	function StringLiteralExp::variable_set() =
+		Sequence{}.asSet()
+	;
+	
+	function IfExp::variable_set() =
+		self.condition.variable_set().union(self.thenExpression.variable_set()).union(self.elseExpression.variable_set())
+	;
+	
+	function Relation::parameter_variables_set() =
+		self.domain->collect(d | d.rootVariable).asSet()
+	;
+	
+	function RelationDomain::exclusive_variable_set() =
+		let srcPatterns = self.rule.source_domains()->collect(d | d.pattern) in
+		let preEvaluation = srcPatterns.including(self.rule.when)->select(obj | not obj.oclIsUndefined())  in
+		let preEvaluated = preEvaluation->collect(d | d.variable_set()).flatten().asSet() in
+		self.variable_set() - preEvaluated
+	;
+	
+	function ObjectTemplateExp::property_set() =
+		self.property_template_item_set()->collect(pti | pti.referredProperty)
+	;
+	
+	function ObjectTemplateExp::property_template_item_set() =
+		self.part.asSet().union(self.part->select(p | p.value isa ObjectTemplateExp)->collect(pti | pti.value.property_template_item_set())).flatten().asSet()
+	;
+	
+	function EObject::getRootContainer() =
+		if self.refImmediateComposite().oclIsUndefined() then self
+		else self.refImmediateComposite().getRootContainer()
+		endif
+	;
+	
+	function EObject::getRelationContainer() =
+		if self.refImmediateComposite() isa Relation then self.refImmediateComposite()
+		else self.refImmediateComposite().getRelationContainer()
+		endif
+	;
+	
+	function Relation::evaluable_variable() =
+	let evaluable_where_variable =  
+		if self.where.oclIsUndefined() then Sequence{}.asSet() 
+		else self.where.predicate
+			->collect(p | p.conditionExpression)
+			->select(ce | ce isa RelationCallExp = false)
+			->collect(ce | ce.variable_set()).asSet() 
+			- self.direction_domain().rootVariable.asSet()
+	endif in
+	let unevaluable_variable = self.direction_domain().exclusive_variable_set() - evaluable_where_variable  in
+		self.variable_set() - unevaluable_variable
+	;
+		
+	
+--***************************************************************************
+--*  Directionality handling												*
+--***************************************************************************
+
+	--direction_domain() must be defined in a library passed at compile time
+	function Relation::source_domains() = 
+		self.domain.asSet() - self.direction_domain().asSet()
+	;
+	
+--***************************************************************************
+--*  Model element localization												*
+--***************************************************************************
+	
+	function Variable::getDeclarationDomain() =
+		let declarings = self.eContainer().domain->select(d | let varSet = d.variable_set() in varSet.includes(self)) in
+		if (not declarings.oclIsUndefined()) then
+			if (declarings.size() = 1) then
+				declarings.first()
+			else
+				OclUndefined
+			endif
+		else 
+			OclUndefined
+		endif
+	;
+	
+	function EObject::getDeclarationDomain() =
+	 if self isa RelationDomain then self else self.refImmediateComposite().getDeclarationDomain() endif
+	;
+	
+	function EObject::getRootPackage() =
+		if self.eContainer().oclIsUndefined() then self else self.eContainer().getRootPackage() endif
+	;
+	
+	function Variable:: getMetamodel() =
+		--metamodels passed to the virtual machine are supposed to be named like their first root package
+		let rootPackage = self.eType.getRootPackage() in
+		self.eContainer().transformation.modelParameter->select(mp | mp.usedPackage.includes(rootPackage)).first().usedPackage.first()
+	;
+
+--***************************************************************************
+--*  QVTR Encoding															*
+--***************************************************************************
+
+	function Relation::encodeCall(callMode) =
+		if callMode = '__createOrUpdate_' then
+			if self.isTopLevel then
+				'A.'+callMode+self.name+'(' + (self.variable_set() - self.direction_domain().exclusive_variable_set())->collect(v | v.eType.encodeType()).sum() + '):B'
+			else
+				'A.'+callMode+self.name+'(' + ((self.variable_set() - self.direction_domain().exclusive_variable_set()).including(self.direction_domain().rootVariable))->collect(v | v.eType.encodeType()).sum() + '):B'
+			endif
+		else 
+			if self.isTopLevel then
+				'A.'+callMode+self.name+'():B'
+			else
+				'A.'+callMode+self.name+'(' + self.domain->collect(d | d.rootVariable.eType.encodeType()).sum() + '):B'
+			endif
+		endif
+		;	
+		
+	Relation mode operations | self.isTopLevel {
+		operation context 'A' name '__check_'+self.name {
+			if (self.__debug) {getasm push '__check_'+self.name call 'J.debug(S):J' pop}
+			getasm
+				getasm
+				get 'relationsCalls'
+					push '__check_'+self.name
+					pusht
+				call 'NMap;.including(SB):NMap;'
+			set 'relationsCalls'
+			pusht
+			variable self named 'result' {
+				let whenVarSet = if self.when.oclIsUndefined() then Sequence{}.asSet() else self.when.variable_set() endif {
+					foreach (var in whenVarSet) {
+						analyze var mode chip_in_bindings_scan																				--NMap1,(J|QJ)
+						if (var.eType isa EClass){iterate}
+						variable var named var.name {
+							[
+								if (not self.when.oclIsUndefined()){
+									analyze self.when																							--NMap1,NMap2,B
+									call 'B.not():B'
+									if when_doesnt_match
+								}
+								let destDomExclVarSet = self.direction_domain().exclusive_variable_set() {
+								let srcVarSet = self.variable_set() - whenVarSet.union(destDomExclVarSet) {
+									foreach (var2 in srcVarSet){
+										analyze var2 mode chip_in_bindings_scan																				--NMap1,(J|QJ)
+										if (var2.eType isa EClass){iterate}
+										variable var2 named var2.name {
+											[
+												foreach (domain in self.source_domains()){
+													analyze domain mode condition
+													call 'B.not():B'
+													if source_domains_dont_match
+												}
+												
+												pushf
+												variable self.direction_domain() named 'exist_binding' {
+													foreach (var3 in destDomExclVarSet) {
+														analyze var3 mode chip_in_bindings_scan																				--NMap1,(J|QJ)
+														if (var3.eType isa EClass){iterate}
+														variable var3 named var3.name {
+															[
+																load self.direction_domain()
+																if end
+																analyze self.direction_domain() mode condition
+																call 'B.not():B'
+																if destination_element_doesnt_fit
+																if (self.where.oclIsUndefined() = false) {
+																	analyze self.where
+																	if (self.__debug) {push 'where evaluates to' call 'J.debug(S):J'}
+																	if destination_element_doesnt_fit
+																}
+																
+																analyze self mode addBinding
+																pusht
+																store self.direction_domain()
+																
+																destination_element_doesnt_fit:
+																end:
+																	
+																foreach (var3End in destDomExclVarSet->select(v | not (v.eType isa EClass))) {
+																	push 'OclUndefined'
+																	push '#native'
+																	new
+																	store var3End
+																}
+															]
+														}
+														if (var3.eType isa EClass){enditerate}
+													}
+													load self.direction_domain()
+													if element_found
+													
+													analyze self mode addMissing
+													pushf
+													store self
+													element_found:
+												}
+												source_domains_dont_match :
+												foreach (var2End in srcVarSet->select(v | not (v.eType isa EClass))) {
+													push 'OclUndefined'
+													push '#native'
+													new
+													store var2End
+												}
+											]
+										}
+										if (var2.eType isa EClass){enditerate}	
+									}
+								}}
+								when_doesnt_match:
+								foreach (varEnd in whenVarSet->select(v | not (v.eType isa EClass))) {
+									push 'OclUndefined'
+									push '#native'
+									new
+									store varEnd
+								}
+							]
+						}
+						if (var.eType isa EClass){enditerate}
+					}
+				}
+				load self
+			}
+			if (self.__debug) {push 'operation __check_'+self.name+' returns ' call 'J.debug(S):J'}
+		}
+		
+---------------------------------------------------------------------------------------
+
+		operation context 'A' name '__enforce_'+self.name {
+			if (self.__debug) {getasm push '__enforce_'+self.name call 'J.debug(S):J' pop}
+			getasm
+				getasm
+				get 'relationsCalls'
+					push '__enforce_'+self.name
+					pusht
+				call 'NMap;.including(SB):NMap;'
+					push '__check_'+self.name
+					pusht
+				call 'NMap;.including(SB):NMap;'
+			set 'relationsCalls'			
+			pusht
+			variable self named 'result' {
+				let whenVarSet = if self.when.oclIsUndefined() then Sequence{}.asSet() else self.when.variable_set() endif {
+					foreach (var in whenVarSet) {
+						analyze var mode chip_in_bindings_scan																				--NMap1,(J|QJ)
+						if (var.eType isa EClass){iterate}
+						variable var named var.name {
+							[
+								if (not self.when.oclIsUndefined()){
+									analyze self.when																							--NMap1,NMap2,B
+									call 'B.not():B'
+									if when_doesnt_match
+								}
+								let destDomExclVarSet = self.direction_domain().exclusive_variable_set() {
+								let srcVarSet = self.variable_set() - whenVarSet.union(destDomExclVarSet) {
+									foreach (var2 in srcVarSet){
+										analyze var2 mode chip_in_bindings_scan																				--NMap1,(J|QJ)
+										if (var2.eType isa EClass){iterate}
+										variable var2 named var2.name {
+											[
+												foreach (domain in self.source_domains()){
+													analyze domain mode condition
+													call 'B.not():B'
+													if source_domains_dont_match
+												}
+												pushf
+												variable self.direction_domain() named 'exist_binding' {
+													foreach (var3 in destDomExclVarSet) {
+														analyze var3 mode chip_in_bindings_scan																				--NMap1,(J|QJ)
+														if (var3.eType isa EClass){iterate}
+														variable var3 named var3.name {
+															[
+																load self.direction_domain()
+																if end
+																analyze self.direction_domain() mode condition
+																call 'B.not():B'
+																if destination_element_doesnt_fit
+																if (self.where.oclIsUndefined() = false) {
+																	analyze self.where
+																	call 'B.not():B'
+																	if destination_element_doesnt_fit
+																}
+																analyze self mode addBinding
+																pusht															--B
+																store self.direction_domain()									--
+																destination_element_doesnt_fit:
+																end:
+																foreach (var3End in destDomExclVarSet->select(v | not(v.eType isa EClass))){
+																	push 'OclUndefined'
+																	push '#native'
+																	new
+																	store var3End
+																}
+																
+															]
+														}
+														if (var3.eType isa EClass){enditerate}
+													}
+													load self.direction_domain()											--B
+													if (self.__debug) {push 'matching found for '+self.name call 'J.debug(S):J'}
+													if element_found																--
+													getasm																			--asm
+													foreach (var in self.variable_set() - destDomExclVarSet){
+														load var
+													}
+													call self.encodeCall('__createOrUpdate_')
+													element_found:
+												}
+												source_domains_dont_match :
+												
+												foreach (var2End in srcVarSet->select(v | not(v.eType isa EClass))){
+													push 'OclUndefined'
+													push '#native'
+													new
+													store var2End
+												}
+												
+											]
+										}
+										if (var2.eType isa EClass){enditerate}	
+									}
+								}}
+								when_doesnt_match:
+								foreach (varEnd in whenVarSet->select(v | not(v.eType isa EClass))){
+									push 'OclUndefined'
+									push '#native'
+									new
+									store varEnd
+								}
+							]
+						}
+						if (var.eType isa EClass){enditerate}
+					}
+				}
+				load self
+			}
+			if (self.__debug) {push '__enforce_'+self.name+' returns ' call 'J.debug(S):J'}
+		}	
+	} --Relation mode operations
+	
+	
+	Relation mode createOrUpdateOp | self.isTopLevel {
+		operation context 'A' name '__createOrUpdate_'+self.name {
+			let destDomExclVarSet = self.direction_domain().exclusive_variable_set() {
+				foreach (var in self.variable_set() - destDomExclVarSet){
+					param var.name : var.eType.encodeType()
+				}
+				
+				if (self.__debug) {
+					push ''
+					let nonDestExclVars = (self.variable_set() - destDomExclVarSet).asSequence() {
+						foreach(d in nonDestExclVars){
+							push d.name + ' = ' + '"'	--SS
+							call 'S.concat(S):S'					--S
+							load d.name				--S,J
+							call 'J.toString():S'					--S,S
+							call 'S.concat(S):S'					--S
+							if (not (d = nonDestExclVars.last())) {
+								push '", '								--S,S
+								call 'S.concat(S):S'					--S
+							}
+						}
+					} 
+					push '__createOrUpdate_'+self.name
+					call 'J.debug(S):B' pop
+				}
+				
+				foreach (var in self.variable_set() - destDomExclVarSet){
+					load var.name
+					variable var named var.name {
+						[
+							foreach (var2 in destDomExclVarSet) {
+								push 'OclUndefined'
+								push '#native'
+								new
+								variable var2 named var2.name{
+									[
+										if (self.where.oclIsUndefined() = false) {analyze self.where mode evaluate_destination_independant}
+										analyze self.direction_domain() mode createOrUpdate
+										analyze self mode addBinding
+										if (self.where.oclIsUndefined() = false) {analyze self.where mode evaluate_destination_dependant}
+									]
+								}
+							}
+						]
+					}
+				}
+			}
+		}
+	}
+	
+	
+	--particularity: the direction root variable must be passed so that to be updated and not created
+	Relation mode createOrUpdateOp {
+		operation context 'A' name '__createOrUpdate_'+self.name {
+			let destDomExclVarSet = self.direction_domain().exclusive_variable_set() {
+				foreach (var in (self.variable_set() - destDomExclVarSet).including(self.direction_domain().rootVariable)){
+					param var.name : var.eType.encodeType()
+				}
+				
+				if (self.__debug) {
+					push ''
+					let nonDestExclVars = ((self.variable_set() - destDomExclVarSet).including(self.direction_domain().rootVariable)).asSequence() {
+						foreach(d in nonDestExclVars){
+							push d.name + ' = ' + '"'	--SS
+							call 'S.concat(S):S'					--S
+							load d.name				--S,J
+							call 'J.toString():S'					--S,S
+							call 'S.concat(S):S'					--S
+							if (not (d = nonDestExclVars.last())) {
+								push '", '								--S,S
+								call 'S.concat(S):S'					--S
+							}
+						}
+					} 
+					push '__createOrUpdate_'+self.name
+					call 'J.debug(S):B' pop
+				}
+				
+				foreach (var in (self.variable_set() - destDomExclVarSet).including(self.direction_domain().rootVariable)){
+					load var.name
+					variable var named var.name {
+						[
+							foreach (var2 in destDomExclVarSet.excluding(self.direction_domain().rootVariable)) {
+								push 'OclUndefined'
+								push '#native'
+								new
+								variable var2 named var2.name{
+									[
+										if (self.where.oclIsUndefined() = false) {analyze self.where mode evaluate_destination_independant}
+										analyze self.direction_domain() mode primed_createOrUpdate
+										analyze self mode addBinding
+										if (self.where.oclIsUndefined() = false) {analyze self.where mode evaluate_destination_dependant}
+									]
+								}
+							}
+						]
+					}
+				}
+			}
+		}
+	}
+	
+	Relation mode addBinding {
+		getasm													--asm
+		getasm													--asm,asm
+		get 'matchings'											--asm,NMap<S,QNMap>
+		push self.name											--asm,NMap<S,QNMap>,S
+		getasm													--asm,NMap<S,QNMap>,S,asm
+		get 'matchings'											--asm,NMap<S,QNMap>,S,NMap<S,QNMap>
+		push self.name											--asm,NMap<S,QNMap>,S,NMap<S,QNMap>,S
+		call 'NMap;.get(S):QNMap;'								--asm,NMap<S,QNMap>,S,QNMap
+		push 'Map'												--asm,NMap<S,QNMap>,S,QNMap,S
+		push '#native'											--asm,NMap<S,QNMap>,S,QNMap,S,S
+		new														--asm,NMap<S,QNMap>,S,QNMap,NMap
+		foreach (d in self.domain){
+			push d.rootVariable.name							--asm,NMap<S,QNMap>,S,QNMap,NMap,S
+			load d.rootVariable									--asm,NMap<S,QNMap>,S,QNMap,NMap,S,J
+			call 'NMap;.including(SJ):NMap;'					--asm,NMap<S,QNMap>,S,QNMap,NMap
+		}
+		if (self.__debug) {
+			push self.name + ' links'
+			call 'J.debug(S):J'
+		}
+		call 'QNMap;.including(NMap;):QNMap;'					--asm,NMap<S,QNMap>,S,QNMap
+		call 'NMap;.including(SJ):NMap;'						--asm,NMap<S,QNMap>
+		set 'matchings'											--
+	}
+	
+	Relation mode addMissing {
+		getasm
+		getasm									--asm
+		get 'missings'							--NMap<S,QNMap>
+		push self.name							--NMap<S,QNMap>,S
+		--new test				
+		getasm									--asm
+		get 'missings'							--NMap<S,QNMap>
+		push self.name							--NMap<S,QNMap>,S
+		--end new test
+		call 'NMap;.get(S):QNMap;'				--QNMap
+		push 'Map'								--QNMap,S
+		push '#native'							--QNMap,S,S
+		new										--QNMap,NMap
+		let destDomExclVarSet = self.direction_domain().exclusive_variable_set() {
+			foreach (v in self.variable_set() - destDomExclVarSet){
+				push v.name							--QNMap,NMap,S
+				load v								--QNMap,NMap,S,J
+				call 'NMap;.including(SJ):NMap;'	--QNMap,NMap
+			}
+		}
+		if (self.__debug) {
+			push 'registering as missing'
+			call 'J.debug(S):J'
+		}
+		call 'QJ.including(J):J'	--QNMap
+		call 'NMap;.including(SJ):NMap;'
+		set 'missings'
+	}
+	
+	
+	Relation mode operations {
+		operation context 'A' name '__check_'+self.name {
+			foreach (d in self.domain){
+				param d.rootVariable.name : d.rootVariable.eType.encodeType()
+			}
+			if (self.__debug) {
+				push ''
+				foreach(d in self.domain){
+					push d.rootVariable.name + ' = ' + '"'	--SS
+					call 'S.concat(S):S'					--S
+					load d.rootVariable.name				--S,J
+					call 'J.toString():S'					--S,S
+					call 'S.concat(S):S'					--S
+					if (not (d = self.domain.last())) {
+						push '", '								--S,S
+						call 'S.concat(S):S'					--S
+					}
+				} 
+					push '__check_'+self.name call 'J.debug(S):B' pop
+			}
+			
+			foreach (d in self.domain){
+				load d.rootVariable.name
+				call 'J.oclIsUndefined():B'
+				if uninitialized
+			}
+			
+			pusht
+			variable self named 'result' {
+				foreach (d in self.domain){
+					load d.rootVariable.name
+					variable d.rootVariable named d.rootVariable.name {
+						[
+							let paramBoundVar = self.domain->collect(d | d.rootVariable).asSet(){
+								let whenVarSet = if self.when.oclIsUndefined() then Sequence{}.asSet() else self.when.variable_set() - self.domain->collect(d | d.rootVariable) endif {
+								let reducedWhenVarSet = whenVarSet - paramBoundVar {
+									foreach (var in reducedWhenVarSet) {
+										analyze var mode chip_in_bindings_scan																				--NMap1,(J|QJ)
+										if (var.eType isa EClass){iterate}
+										variable var named var.name {
+											[
+												if (not self.when.oclIsUndefined()){
+													analyze self.when																							--NMap1,NMap2,B
+													call 'B.not():B'
+													if when_doesnt_match
+												}
+												let destDomExclVarSet = self.direction_domain().exclusive_variable_set() {
+												let srcVarSet = self.variable_set() - whenVarSet.union(destDomExclVarSet).union(paramBoundVar) {
+													foreach (var2 in srcVarSet){
+														analyze var2 mode chip_in_bindings_scan																				--NMap1,(J|QJ)
+														if (var2.eType isa EClass){iterate}
+														variable var2 named var2.name {
+															[
+																foreach (domain in self.source_domains()){
+																	analyze domain mode condition
+																	call 'B.not():B'
+																	if source_domains_dont_match
+																}
+																if(self.__debug){pusht push 'sources domains match' call 'J.debug(S):J' pop}
+																pushf
+																variable self.direction_domain() named 'exist_binding' {
+																	let reducedDestVarSet = destDomExclVarSet - paramBoundVar {
+																	foreach (var3 in reducedDestVarSet) {
+																		analyze var3 mode chip_in_bindings_scan																				--NMap1,(J|QJ)
+																		if (var3.eType isa EClass){iterate}
+																		variable var3 named var3.name {
+																			[
+																				load self.direction_domain()
+																				if end
+																				analyze self.direction_domain() mode condition
+--																				if(self.__debug){push 'direction domains matched' call 'J.debug(S):J'}
+																				call 'B.not():B'
+																				if destination_element_doesnt_fit
+																				if (self.where.oclIsUndefined() = false) {
+																					analyze self.where
+																					if (self.__debug) {push 'where evaluates to' call 'J.debug(S):J'}
+																					call 'B.not():B'
+																					if destination_element_doesnt_fit
+																				}
+																				
+																				analyze self mode addBinding
+																				pusht
+																				store self.direction_domain()
+																				
+																				destination_element_doesnt_fit:
+																				end:
+																				
+																				foreach (var3End in reducedDestVarSet->select(v|not(v.eType isa EClass))) {
+																					push 'OclUndefined'
+																					push '#native'
+																					new
+--																					if (self.__debug){push var3End.name+' reset to ' call 'J.debug(S):J'}
+																					store var3End
+																				}
+																			]
+																		}
+																		if (var3.eType isa EClass){enditerate}
+																	}}
+																	load self.direction_domain()
+																	if element_found
+																	
+																	analyze self mode addMissing
+																	pushf
+																	store self
+																	element_found:
+																}
+																source_domains_dont_match :
+																
+																foreach (var2End in srcVarSet->select(v|not(v.eType isa EClass))){
+																	push 'OclUndefined'
+																	push '#native'
+																	new
+--																	if (self.__debug){push var2End.name+' reset to ' call 'J.debug(S):J'}
+																	store var2End
+																}
+															]
+														}
+														if (var2.eType isa EClass){enditerate}	
+													}
+												}}
+												when_doesnt_match:
+												foreach (varEnd in reducedWhenVarSet->select(v|not(v.eType isa EClass))) {
+													push 'OclUndefined'
+													push '#native'
+													new
+--													if (self.__debug){push varEnd.name+' reset to ' call 'J.debug(S):J'}
+													store varEnd
+												}
+											]
+										}
+										if (var.eType isa EClass){enditerate}
+									}
+								}}
+							}
+							load self
+						]
+					}
+				}
+			}
+			goto end
+			uninitialized:
+			pushf	
+			end:
+			if (self.__debug) {push '__check_'+self.name+' returns ' call 'J.debug(S):J'}
+		}
+		
+---------------------------------------------------------------------------------------
+
+		operation context 'A' name '__enforce_'+self.name {
+			foreach (d in self.domain){
+				param d.rootVariable.name : 'J'
+			}
+			if (self.__debug) {
+				push ''
+				foreach(d in self.domain){
+					push d.rootVariable.name + ' = ' + '"'	--SS
+					call 'S.concat(S):S'					--S
+					load d.rootVariable.name				--S,J
+					call 'J.toString():S'					--S,S
+					call 'S.concat(S):S'					--S
+					if (not (d = self.domain.last())) {
+						push '", '								--S,S
+						call 'S.concat(S):S'					--S
+					}
+				} 
+					push '__enforce_'+self.name call 'J.debug(S):B' pop
+			}
+			pusht
+			variable self named 'result' {
+				foreach (d in self.domain){
+					load d.rootVariable.name
+					variable d.rootVariable named d.rootVariable.name {
+						[
+							let paramBoundVar = self.domain->collect(d | d.rootVariable).asSet() {
+								let whenVarSet = if self.when.oclIsUndefined() then Sequence{}.asSet() else self.when.variable_set() endif {
+									foreach (var in whenVarSet - paramBoundVar) {
+										analyze var mode chip_in_bindings_scan																				--NMap1,(J|QJ)
+										if (var.eType isa EClass){iterate}
+										variable var named var.name {
+											[
+												if (not self.when.oclIsUndefined()){
+													analyze self.when																							--NMap1,NMap2,B
+													call 'B.not():B'
+--													if (self.__debug) {push 'when fails = ' call 'J.debug(S):J'}
+													if when_doesnt_match
+												}
+												let destDomExclVarSet = self.direction_domain().exclusive_variable_set() {
+												let srcVarSet = self.variable_set() - whenVarSet.union(destDomExclVarSet).union(paramBoundVar) {
+													foreach (var2 in srcVarSet){
+														analyze var2 mode chip_in_bindings_scan																				--NMap1,(J|QJ)
+														if (var2.eType isa EClass){iterate}
+														variable var2 named var2.name {
+--															if (self.__debug){load var2 push 'current value for ' +var2.name call 'J.debug(S):J' pop}
+															[
+																foreach (domain in self.source_domains()){
+																	analyze domain mode condition
+																	call 'B.not():B'
+																	if source_domains_dont_match
+																}
+																pushf
+																variable self.direction_domain() named 'exist_binding' {
+																	foreach (var3 in destDomExclVarSet - paramBoundVar) {
+																		analyze var3 mode chip_in_bindings_scan																				--NMap1,(J|QJ)
+																		if (var3.eType isa EClass){iterate}
+																		variable var3 named var3.name {
+																			[
+																				load self.direction_domain()
+																				if end
+																				analyze self.direction_domain() mode condition
+																				call 'B.not():B'
+																				if destination_element_doesnt_fit
+																				if (self.where.oclIsUndefined() = false) {
+																					analyze self.where
+																					call 'B.not():B'
+																					if destination_element_doesnt_fit
+																				}
+																				analyze self mode addBinding
+																				pusht															--B
+																				store self.direction_domain()									--
+																				destination_element_doesnt_fit:
+																				end:
+																				
+																				foreach (var3End in (destDomExclVarSet - paramBoundVar)->select(v|not(v.eType isa EClass))) {
+																					push 'OclUndefined'
+																					push '#native'
+																					new
+																					store var3End
+																				}
+																				
+																			]
+																		}
+																		if (var3.eType isa EClass){enditerate}
+																	}
+																	load self.direction_domain()											--B
+--																	if (self.__debug) {push 'matching found for '+self.name call 'J.debug(S):J'}
+																	if element_found
+																	getasm																			--asm
+																	foreach (var in (self.variable_set() - destDomExclVarSet).including(self.direction_domain().rootVariable)){
+																		load var
+																	}
+																	call self.encodeCall('__createOrUpdate_')
+																	element_found:
+																}
+																source_domains_dont_match :
+																
+																foreach (var2End in srcVarSet->select(v|not(v.eType isa EClass))) {
+																	push 'OclUndefined'
+																	push '#native'
+																	new
+																	store var2End
+																}
+															]
+														}
+														if (var2.eType isa EClass){enditerate}	
+													}
+												}}
+												when_doesnt_match:
+												foreach (varEnd in (whenVarSet - paramBoundVar)->select(v|not(v.eType isa EClass))) {
+													push 'OclUndefined'
+													push '#native'
+													new
+													store varEnd
+												}
+											]
+										}
+										if (var.eType isa EClass){enditerate}
+									}
+								}
+								load self
+							}
+						]
+					}
+				}	
+			}
+			if (self.__debug) {push '__enforce_'+self.name+' returns ' call 'J.debug(S):J'}
+		}
+	} --Relation mode operations
+	
+	Function {
+		operation context 'A' name self.name {
+			foreach (p in self.eParameters) {
+				param p.name : p.eType.encodeType()
+			}
+			foreach (p in self.eParameters) {
+				load p.name
+				variable p named p.name {
+					[
+						analyze self.queryExpression
+					]
+				}
+			}
+		}
+	}
+	
+--***************************************************************************
+--*  QVT Base package														*
+--***************************************************************************
+	
+	--evaluates to true if all its predicates evaluates to true
+	Pattern {
+		foreach (condition in self.predicate->collect(p | p.conditionExpression)){
+			analyze condition								--B
+			call 'B.not():B'							
+			if do_not_match
+		}
+		pusht
+		goto end
+		do_not_match :
+		pushf
+		end :
+	}
+	
+	Pattern mode evaluate_destination_independant{
+		foreach (condition in 
+					self.predicate->collect(p | p.conditionExpression)->select(c | 
+						c.variable_set().flatten() --.debug('conditionVariables')
+						.excludesAll(self.refImmediateComposite().direction_domain().variable_set()->select(v | v.eType isa EClass) --.debug('directionVariable')
+						) --.debug('exclusion')
+					) --.debug('selectedVariable')
+				){
+			analyze condition								--B
+			call 'B.not():B'							
+			if do_not_match1
+		}
+		pusht
+		goto hell
+		do_not_match1:
+		pushf
+		hell:
+	}
+	
+	Pattern mode evaluate_destination_dependant{
+		foreach (condition in 
+					self.predicate->collect(p | p.conditionExpression)->select(c | 
+						c.variable_set().flatten()
+						.excludesAll(self.refImmediateComposite().direction_domain().variable_set()->select(v | v.eType isa EClass)) = false
+					) 
+				){
+			if (condition isa RelationCallExp){
+				analyze condition mode launch
+			} else {
+				analyze condition
+			}
+			call 'B.not():B'							
+			if do_not_match2
+		}
+		pusht
+		goto hell
+		do_not_match2:
+		pushf
+		hell:
+	}
+	
+	
+--***************************************************************************
+--*  QVT Templates package													*
+--***************************************************************************
+
+	--evaluates to the object in the context if it matches the definition
+	--or to OclUndefined otherwise 
+	ObjectTemplateExp {
+		if (self.part.size()>0) {
+			load self.bindsTo
+			call 'J.oclIsUndefined():B'
+			if endObjTempExp
+			foreach (pti in self.part) {
+				analyze pti					--J,B
+				call 'B.not():B'			--J,B
+				if dont_matchope				--J
+			}
+			goto endObjTempExp
+			dont_matchope:
+			push 'OclUndefined'
+			push '#native'
+			new
+			goto endope
+		}
+		endObjTempExp:
+		load self.bindsTo
+		endope:
+--		if (self.__debug){dup call 'J.oclIsUndefined():B' if end_debug push 'Object Template '+self.bindsTo.name+' evaluates to ' call 'J.debug(S):J' end_debug:}
+	}
+
+	--evaluates to an existing object in target model if one exists
+	--or to a newly creates otherwise
+	ObjectTemplateExp  mode enforce {
+		analyze self mode fetching															--J
+		dup																					--J,J
+		call 'J.oclIsUndefined():B'															--J,B
+		if create_afresh_opee																--J
+		if (self.__debug) {push 'Existing '+ self.bindsTo.eType.name +' fetched ' call 'J.debug(S):J'}
+		goto end_search_opee
+		create_afresh_opee:																	--QJ
+		pop																				--
+		push self.bindsTo.eType.name													--S
+		push self.bindsTo.getMetamodel().name											--S,S
+		new																				--ME
+		if (self.__debug) {push self.bindsTo.eType.name + ' created ' call 'J.debug(S):J'}
+		end_search_opee:
+		store self.bindsTo
+		analyze self mode primed_enforce
+	}
+	
+	ObjectTemplateExp mode fetching {
+		let container = self.refImmediateComposite() {
+		let containerRef = if container isa PropertyTemplateItem then container.referredProperty.eOpposite else OclUndefined endif {
+		let ObjectTemplateProperties = if containerRef.oclIsUndefined() then self.part->collect( p | p.referredProperty) else self.part->collect( p | p.referredProperty).including(containerRef) endif {
+		let validKey = self.getRootContainer().ownedKey->select(ok | ok.identifies = self.eType and ObjectTemplateProperties.includesAll(ok.part)).first() {
+		let filter = if validKey.oclIsUndefined() then self.part else self.part->select(pti | validKey.part.includes(pti.referredProperty)) endif {
+		
+		if (not filter.isEmpty()){
+			push 'Sequence'
+			push '#native'
+			new
+		}
+		push self.bindsTo.eType.name													--S
+		push self.bindsTo.getMetamodel().name											--S,S
+		findme																			--ME
+		push self.getDeclarationDomain().name											--ME,S
+		call 'MMOF!Classifier.allInstancesFrom(S):QJ'
+		if (not (filter.isEmpty())){
+--		if (not validKey.oclIsUndefined()){
+--		if (not(validKey.part.includes(containerRef))){
+			iterate
+				store self.bindsTo
+				if (not validKey.oclIsUndefined()){
+				if (validKey.part.includes(containerRef)){
+					load container.objContainer.bindsTo
+					get container.referredProperty.name
+					load self.bindsTo
+					if (container.referredProperty.many){
+						call 'CJ.includes(J):B'
+					} else {
+						call 'J.=(J):B'
+					}
+					call 'B.not():B'
+					if nope
+				}}
+				foreach (p in filter){
+					analyze p mode fetching
+					call 'B.not():B'
+					if nope
+				}
+				load self.bindsTo
+				call 'CJ.including(J):CJ'
+				nope:
+			enditerate
+		}
+--		}}
+		call 'CJ.first():J'
+		
+		}}}}}
+	}
+	
+	PropertyTemplateItem mode fetching | self.value isa ObjectTemplateExp {
+		analyze self.value mode fetching
+		call 'J.oclIsUndefined():B'
+		call 'B.not():B'
+	}
+	
+	PropertyTemplateItem mode fetching {
+		analyze self
+	}
+	
+	--sets all the properties of the object in context
+	--used either after an element creation
+	--or by non top level rule call because its root variables are already created
+	ObjectTemplateExp mode primed_enforce {
+		analyze self.part mode enforce
+		load self.bindsTo
+	}
+	
+	--evaluates to true if the property is verified in the current context	
+	PropertyTemplateItem {						
+		load self.objContainer.bindsTo
+		get self.referredProperty.name		--J
+		analyze self.value					--J,J
+		if (self.referredProperty.many){
+			call 'CJ.includes(J):B'
+		} else {
+			call 'J.=(J):B'
+		}
+	}
+	
+	--particularity: unification process (first evaluation is an assignment returning true) 
+	PropertyTemplateItem | self.value isa VariableExp{
+		load self.objContainer.bindsTo					--J
+		get self.referredProperty.name					--J
+		load self.value.referredVariable				--J,J
+		call 'J.oclIsUndefined():B'						--J,B
+		if value_unbound_pti								--J
+		load self.value.referredVariable
+--		if (self.__debug) {swap dup_x1 call 'J.toString():S' push ' ? == ? ' call 'S.concat(S):S' call 'J.debug(S):J'}
+		if (self.referredProperty.many){
+			call 'CJ.includes(J):B'
+		} else {
+			call 'J.=(J):B'
+		}				
+		goto end_pti
+		value_unbound_pti:									--J
+--		if(self.__debug){push 'assignment of '+self.value.name+ ' on the fly to' call 'J.debug(S):J' }
+		store self.value.referredVariable				--
+		pusht											--B
+		end_pti:											--B
+	}
+	
+	--particularity: the ObjectTemplateExp OclUndefined value
+	--means that the sub pattern does not meet its criteria 
+	PropertyTemplateItem | self.value isa ObjectTemplateExp {
+		analyze self.value										--J
+		dup														--J,J
+		call 'J.oclIsUndefined():B'								--J,B
+		if no_value_pti1												--J
+		load self.objContainer.bindsTo							--J,J
+		get self.referredProperty.name							--J,J
+		swap													--J,J
+		if (self.referredProperty.many){
+			call 'CJ.includes(J):B'								--B
+		} else {
+			call 'J.=(J):B'										--B
+		}
+		goto end_pti1												--B
+		no_value_pti1:												--J
+		pop														--														--
+		pushf													--B
+		end_pti1:													--B
+	}
+	
+
+	--sets the property of the object in current context to the wanted value
+	--no evaluation
+	PropertyTemplateItem mode enforce {
+		load self.objContainer.bindsTo
+--		if (self.__debug) {push self.referredProperty.name + ' assignment for the ' +self.objContainer.bindsTo.eType.name call 'J.debug(S):J'}
+		analyze self.value
+--		if (self.__debug) {
+--			swap
+--			dup_x1
+--			call 'J.toString():S'
+--			push '.'+self.referredProperty.name+' set to '
+--			call 'S.concat(S):S'
+--			call 'J.debug(S):J'
+--		}
+		set self.referredProperty.name
+	}
+		
+	--particularity: value is an object that must be created on the fly
+	PropertyTemplateItem mode enforce | self.value isa ObjectTemplateExp {
+		load self.objContainer.bindsTo
+--		if (self.__debug) {push self.objContainer.bindsTo.eType.name+' whose ' + self.value.eType.name + ' is modified by an ObjectTemplateExp' call 'J.debug(S):J'}
+		analyze self.value mode enforce
+--		if (self.__debug) {
+--			swap
+--			dup_x1
+--			call 'J.toString():S'
+--			push '.'+self.referredProperty.name+' set to '
+--			call 'S.concat(S):S'
+--			call 'J.debug(S):J'
+--		}
+		set self.referredProperty.name
+	}
+	
+	CollectionTemplateExp {
+		load 'self'
+		push 'CollectionTemplateExp not supported yet'
+		call 'J.debug(S):J'
+		push 'OclUndefined'
+		push '#native'
+		new
+	}
+
+--***************************************************************************
+--*  QVT Relations package													*
+--***************************************************************************	
+	
+	--launch the relation in the wanted mode
+	RelationCallExp mode launch {
+		getasm
+		foreach (arg in self.argument){
+			load arg.referredVariable
+		}
+		if (self.referredRelation.direction_domain().isEnforceable) {
+			getasm															--A
+			get 'isCheckOnly'												--B
+			call 'B.not():B'												--B
+			if enforce_launch												--
+		}
+		call self.referredRelation.encodeCall('__check_')
+		if (self.referredRelation.direction_domain().isEnforceable) {
+			goto end
+			enforce_launch:
+			call self.referredRelation.encodeCall('__enforce_')
+			end:
+		}
+	}
+
+	--particularity: no arguments are needed	
+	RelationCallExp mode launch | self.referredRelation.isTopLevel {
+		if (self.referredRelation.direction_domain().isEnforceable) {
+			getasm															--A
+			get 'isCheckOnly'												--B
+			if checkOnly													--
+			getasm															--A
+			call self.referredRelation.encodeCall('__enforce_')				--B
+			goto endCall
+		}
+		checkOnly:															--
+		getasm																--A
+		call self.referredRelation.encodeCall('__check_')					--B
+		endCall:															--B
+	}
+	
+	
+	--evaluates to the relation call (true if the relation hold just after the call)
+	RelationCallExp {
+		getasm
+		foreach (arg in self.argument){
+			load arg.referredVariable
+		}
+		call self.referredRelation.encodeCall('__check_')
+--		analyze self mode launch											--B
+--		if (self.__debug) {push 'binding belongs to '+self.referredRelation.name call 'J.debug(S):J'}
+	}
+	
+	--particularity: top level relation bindings are cached
+	RelationCallExp | self.referredRelation.isTopLevel {
+		--1)check in a table if the relation has already been called, otherwise, call it
+		getasm																--A
+		get 'relationsCalls'												--NMap
+		push '__check_'+self.referredRelation.name										--NMap,S
+		call 'NMap;.get(S):B'												--B
+		if already_called													--
+		if (self.__debug) {getasm push 'must call '+self.referredRelation.name+' first' call 'J.debug(S):J' pop}
+		analyze self mode launch											--B
+		pop																	--
+		already_called:														--
+		--2)search into the traceability table the wanted partaker set
+		getasm																--A
+		get 'matchings'														--NMap
+		push self.referredRelation.name										--NMap,S
+		call 'NMap;.get(S):QNMap;'											--QNMap
+		push 'Map'															--QNMap,S
+		push '#native'														--QNMap,S,S
+		new																	--QNMap,NMap
+		foreach (arg in self.argument){
+			push self.referredRelation.domain->collect(d | d.rootVariable.name).at(self.argument.indexOf(arg))
+			load arg.referredVariable
+			call 'NMap;.including(SJ):NMap;'
+		}
+--		if (self.__debug) {push 'must search among already created '+self.referredRelation.name+' bindings' call 'J.debug(S):J'}
+		call 'QNMap;.includes(NMap;):B'
+--		if (self.__debug) {push 'binding belongs to '+self.referredRelation.name call 'J.debug(S):J'}
+	}
+
+--***************************************************************************
+--*  Semantics specific														*
+--***************************************************************************
+
+	Variable mode chip_in_bindings_scan | self.eType isa EClass {
+		analyze self.eType
+		let declDom = self.getDeclarationDomain(){
+			if (declDom.oclIsUndefined()){
+				call 'MMOF!Classifier;.allInstances():QJ'
+			} else {
+				push declDom.typedModel.name																							--ModElem,S
+				call 'MMOF!Classifier;.allInstancesFrom(S):QJ'
+			}
+		}
+	}
+	
+	Variable mode chip_in_bindings_scan {
+		push 'OclUndefined'
+		push '#native'
+		new
+	}
+	
+	RelationDomain mode createOrUpdate {
+		analyze self.pattern.templateExpression mode enforce
+		if (self.__debug){push 'root variable created' call 'J.debug(S):J'}
+		store self.rootVariable
+		pusht
+	}
+	
+	RelationDomain mode primed_createOrUpdate {
+		analyze self.pattern.templateExpression mode primed_enforce
+		if (self.__debug){push 'root variable updated' call 'J.debug(S):J'}
+		store self.rootVariable
+		pusht
+	}
+	
+	--evaluates to true if root variable found
+	RelationDomain mode condition {
+		if (not self.pattern.oclIsUndefined()){
+			analyze self.pattern.templateExpression
+			call 'J.oclIsUndefined():B'
+			call 'B.not():B'
+		} else {
+			pusht
+		}
+	}
+	
+
+--***************************************************************************
+--*  Rules used for the iterate OCL statement								*
+--***************************************************************************
+	ObjectTemplateExp mode init {
+		push self.bindsTo.eType.name
+		push self.bindsTo.getMetamodel().name
+		new
+		store self.bindsTo
+		analyze self.part mode init
+	}
+	
+	PropertyTemplateItem mode init {
+		load self.objContainer.bindsTo
+		analyze self.value
+		set self.referredProperty.name	
+	}
+	
+}
