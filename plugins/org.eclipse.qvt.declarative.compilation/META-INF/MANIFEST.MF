@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Declarative QVT Compilation Plug-in
-Bundle-SymbolicName: org.eclipse.qvt.declarative.compilation
+Bundle-SymbolicName: org.eclipse.qvt.declarative.compilation;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Activator: org.eclipse.qvt.declarative.compilation.Activator
 Bundle-Vendor: %pluginProvider

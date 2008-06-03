@@ -5,19 +5,18 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.qvt.declarative.common.framework.service.Operation;
 import org.eclipse.qvt.declarative.common.framework.service.Provider;
 
 public class CompileOperation implements Operation {
 	
-	protected IAdaptable source;
+	protected Object abstractSyntaxTree;
 	protected Map<String, String> parameters;
 	protected IFolder sourceFolder;
 	protected IFolder buildFolder;
 	
-	public CompileOperation(IAdaptable source, Map<String, String> parameters, IFolder sourceFolder, IFolder buildFolder) {
-		this.source = source;
+	public CompileOperation(Object abstractSyntaxTree, Map<String, String> parameters, IFolder sourceFolder, IFolder buildFolder) {
+		this.abstractSyntaxTree = abstractSyntaxTree;
 		this.parameters = parameters;
 		this.sourceFolder = sourceFolder;
 		this.buildFolder = buildFolder;
@@ -28,17 +27,17 @@ public class CompileOperation implements Operation {
 		List<IFile> result = null;
 		if (provider instanceof CompilationProvider) {
 			CompilationProvider compilationProvider = (CompilationProvider) provider;
-			result = compilationProvider.compile(source, parameters, sourceFolder, buildFolder);
+			result = compilationProvider.compile(abstractSyntaxTree, parameters, sourceFolder, buildFolder);
 		}
 		return result;
 	}
 
-	public IAdaptable getSource() {
-		return source;
+	public Object getSource() {
+		return abstractSyntaxTree;
 	}
 
-	public void setSource(IAdaptable source) {
-		this.source = source;
+	public void setSource(Object source) {
+		this.abstractSyntaxTree = source;
 	}
 
 	public Map<String, String> getParameters() {
