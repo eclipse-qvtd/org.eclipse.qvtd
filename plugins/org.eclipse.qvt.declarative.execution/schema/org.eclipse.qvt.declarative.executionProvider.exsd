@@ -3,10 +3,10 @@
 <schema targetNamespace="org.eclipse.qvt.declarative.execution" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.eclipse.qvt.declarative.execution" id="org.eclipse.qvt.declarative.execution_provider" name="org.eclipse.qvt.declarative.execution_provider"/>
+         <meta.schema plugin="org.eclipse.qvt.declarative.execution" id="org.eclipse.qvt.declarative.executionProvider" name="executionProvider"/>
       </appinfo>
       <documentation>
-         This extension point allows a plug-in to register an execution provider to redefine the default execution engine of a declarative QVT transformation.
+         This extension point allows a plug-in to register a execution provider to redefine the default engine or provide a engine for a particular structured executable type.
       </documentation>
    </annotation>
 
@@ -17,9 +17,6 @@
          </appinfo>
       </annotation>
       <complexType>
-         <sequence minOccurs="1" maxOccurs="unbounded">
-            <element ref="execution_provider"/>
-         </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
                <documentation>
@@ -47,9 +44,9 @@
       </complexType>
    </element>
 
-   <element name="execution_provider">
+   <element name="executionProvider">
       <complexType>
-         <attribute name="executorClass" type="string">
+         <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
                   The fully qualified name of a Java class implementing &lt;code&gt;org.eclipse.qvt.declarative.execution.ExecutionProvider&lt;/code&gt;.
@@ -59,10 +56,10 @@
                </appinfo>
             </annotation>
          </attribute>
-         <attribute name="priority">
+         <attribute name="priority" use="default" value="normal">
             <annotation>
                <documentation>
-                  The priority of this engine. Values can be &lt;code&gt;lowest&lt;/code&gt;, &lt;code&gt;low&lt;/code&gt;, &lt;code&gt;normal&lt;/code&gt;, &lt;code&gt;high&lt;/code&gt;, &lt;code&gt;highest&lt;/code&gt;.
+                  The priority of this provider. Values can be &lt;code&gt;lowest&lt;/code&gt;, &lt;code&gt;low&lt;/code&gt;, &lt;code&gt;normal&lt;/code&gt;, &lt;code&gt;high&lt;/code&gt;, &lt;code&gt;highest&lt;/code&gt;.
                </documentation>
             </annotation>
             <simpleType>
@@ -88,7 +85,7 @@
          <meta.section type="since"/>
       </appinfo>
       <documentation>
-         0.1
+         [Enter the first release in which this extension point appears.]
       </documentation>
    </annotation>
 

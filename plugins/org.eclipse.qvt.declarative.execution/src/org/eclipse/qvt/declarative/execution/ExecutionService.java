@@ -10,7 +10,11 @@ import org.eclipse.qvt.declarative.common.framework.service.Service;
 
 public class ExecutionService extends Service implements ExecutionProvider {
 	
-	protected static final ExecutionService INSTANCE = new ExecutionService(); 
+	protected static final ExecutionService INSTANCE = new ExecutionService();
+	
+	static {
+		INSTANCE.registerProviders(Activator.PLUGIN_ID, "executionProvider"); //$NON-NLS-1$
+	}
 	
 	protected ExecutionService() {
 		super();
