@@ -15,7 +15,7 @@ public abstract class ExecutionStrategy {
 			assert null != operation : "null operation"; //$NON-NLS-1$
 			Provider provider = service.getFirstProvider(operation);
 			if (provider != null) {
-				Collections.singleton(operation.execute(provider));
+				return Collections.singletonList(operation.execute(provider));
 			}
 			return null;
 		}

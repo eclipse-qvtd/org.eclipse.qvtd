@@ -9,10 +9,8 @@ public class ProviderDescriptor implements Provider{
 		lowest, low, normal, high, highest
 	}
 
-	private static final String PRIORITY_ELEMENT = "Priority"; //$NON-NLS-1$
-	
-	private static final String NAME_ATTRIBUTE = "name"; //$NON-NLS-1$
-	
+	private static final String PRIORITY_ATTRIBUTE = "priority"; //$NON-NLS-1$
+		
 	protected static final String CLASS_ATTRIBUTE = "class"; //$NON-NLS-1$
 
 	private final IConfigurationElement element;
@@ -25,7 +23,7 @@ public class ProviderDescriptor implements Provider{
 
 	private boolean providerClassInstantiationFailed = false;
 	
-	protected ProviderDescriptor(IConfigurationElement element) {
+	public ProviderDescriptor(IConfigurationElement element) {
 		this.element = element;
 	}
 
@@ -47,7 +45,7 @@ public class ProviderDescriptor implements Provider{
 	public Priority getPriority() {
 		if (providerPriority == null) {	
 			if (element != null && element.isValid()) {
-				String priority = element.getChildren(PRIORITY_ELEMENT)[0].getAttribute(NAME_ATTRIBUTE);
+				String priority = element.getAttribute(PRIORITY_ATTRIBUTE);
 				providerPriority =  Priority.valueOf(priority);	
 			}
 		}

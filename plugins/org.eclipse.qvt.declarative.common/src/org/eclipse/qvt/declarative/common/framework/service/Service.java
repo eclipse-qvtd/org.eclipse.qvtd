@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.Platform;
 
 public class Service implements Provider {
 		
-	private final Map<ProviderDescriptor.Priority, ArrayList<Provider>> providers;
+	protected final Map<ProviderDescriptor.Priority, ArrayList<Provider>> providers;
 	
 	
 	protected final List<? extends Object> execute(ExecutionStrategy strategy, Operation operation) {
