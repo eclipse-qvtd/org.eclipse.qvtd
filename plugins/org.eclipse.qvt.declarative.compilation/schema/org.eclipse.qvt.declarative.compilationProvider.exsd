@@ -3,7 +3,7 @@
 <schema targetNamespace="org.eclipse.qvt.declarative.compilation" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.eclipse.qvt.declarative.compilation" id="org.eclipse.qvt.declarative.compiler_provider" name="org.eclipse.qvt.declarative.compiler_provider"/>
+         <meta.schema plugin="org.eclipse.qvt.declarative.compilation" id="org.eclipse.qvt.declarative.compilationProvider" name="compilationProvider"/>
       </appinfo>
       <documentation>
          This extension point allows a plug-in to register a compilation provider to redefine the default compiler or provide a compiler for a particular structured source type.
@@ -18,7 +18,7 @@
       </annotation>
       <complexType>
          <sequence minOccurs="1" maxOccurs="unbounded">
-            <element ref="compilation_provider"/>
+            <element ref="compilationProvider"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,9 +47,9 @@
       </complexType>
    </element>
 
-   <element name="compilation_provider">
+   <element name="compilationProvider">
       <complexType>
-         <attribute name="compilationProvderClass" type="string" use="required">
+         <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
                   The fully qualified name of a Java class implementing &lt;code&gt;org.eclipse.qvt.declarative.compilation.CompilationProvider&lt;/code&gt;.
@@ -62,7 +62,7 @@
          <attribute name="priority" use="default" value="low">
             <annotation>
                <documentation>
-                  The priority of this engine. Values can be &lt;code&gt;lowest&lt;/code&gt;, &lt;code&gt;low&lt;/code&gt;, &lt;code&gt;normal&lt;/code&gt;, &lt;code&gt;high&lt;/code&gt;, &lt;code&gt;highest&lt;/code&gt;.
+                  The priority of this provider. Values can be &lt;code&gt;lowest&lt;/code&gt;, &lt;code&gt;low&lt;/code&gt;, &lt;code&gt;normal&lt;/code&gt;, &lt;code&gt;high&lt;/code&gt;, &lt;code&gt;highest&lt;/code&gt;.
                </documentation>
             </annotation>
             <simpleType>

@@ -11,10 +11,10 @@ import org.eclipse.qvt.declarative.common.framework.service.Service;
 
 public class CompilationService extends Service implements CompilationProvider {
 	
-	protected static final CompilationService instance = new CompilationService();
+	protected static final CompilationService INSTANCE = new CompilationService();
 	
 	static {
-		instance.registerProviders(Activator.PLUGIN_ID, "org.eclipse.qvt.declarative.compiler_provider"); //$NON-NLS-1$
+		INSTANCE.registerProviders(Activator.PLUGIN_ID, "compilerProvider"); //$NON-NLS-1$
 	}
 	
 	protected CompilationService() {
@@ -22,7 +22,7 @@ public class CompilationService extends Service implements CompilationProvider {
 	}
 	
 	public CompilationService getInstance() {
-		return instance;
+		return INSTANCE;
 	}
 
 	@Override
