@@ -59,7 +59,7 @@
                </appinfo>
             </annotation>
          </attribute>
-         <attribute name="priority" use="default" value="low">
+         <attribute name="priority" use="default" value="normal">
             <annotation>
                <documentation>
                   The priority of this provider. Values can be &lt;code&gt;lowest&lt;/code&gt;, &lt;code&gt;low&lt;/code&gt;, &lt;code&gt;normal&lt;/code&gt;, &lt;code&gt;high&lt;/code&gt;, &lt;code&gt;highest&lt;/code&gt;.
