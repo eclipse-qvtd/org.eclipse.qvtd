@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.m2m.atl.drivers.emf4atl.ASMEMFModel;
 import org.eclipse.m2m.atl.engine.vm.ASM;
@@ -31,6 +32,7 @@ import org.eclipse.qvt.declarative.common.framework.service.Operation;
 import org.eclipse.qvt.declarative.compilation.CompilationProvider;
 import org.eclipse.qvt.declarative.compilation.CompileOperation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.relations.atlvm.utils.ATLVMUtils;
 import org.eclipse.qvt.declarative.relations.atlvm.utils.DirectionUtilies;
 import org.osgi.framework.Bundle;
@@ -43,11 +45,11 @@ public class ATLVMCompiler implements CompilationProvider {
 
 	private static final String DEFAULT_COMPILATION_PARAMETERS_LOCATION = "resources/compilation.parameters.xml"; //$NON-NLS-1$
 
-	private static final String EXECUTABLE_SUFFIX = "asm"; //$NON-NLS-1$
+	protected static final String EXECUTABLE_SUFFIX = "asm"; //$NON-NLS-1$
 
-	private static final String OUT_FILE_PARAMETER_NAME = "WriteTo"; //$NON-NLS-1$
+	public static final String OUT_FILE_PARAMETER_NAME = "WriteTo"; //$NON-NLS-1$
 
-	private static final String DIRECTION_PARAMETER_NAME = "direction"; //$NON-NLS-1$
+	public static final String DIRECTION_PARAMETER_NAME = "direction"; //$NON-NLS-1$
 
 	private static final String TRANSFORMATION_MODEL_NAME = "transformation"; //$NON-NLS-1$
 
@@ -151,18 +153,21 @@ public class ATLVMCompiler implements CompilationProvider {
 		}
 		return compilationParameters;
 	}
+	
+	protected URI getPrefixURI (IFolder folder) {
+		IPath path = folder.getLocation().addTrailingSeparator();
+		return URI.createFileURI(path.toString());
+	}
 
 	protected String getDefaultExecutablePath(Resource abstractSyntaxTree,
 			IFolder sourceFolder, IFolder buildFolder) {
-		URI sourceFolderURI = URI.createURI(sourceFolder.getLocationURI()
-				.toString());
-		URI buildFolderURI = URI.createURI(buildFolder.getLocationURI()
-				.toString());
-
+		URI sourceFolderURI = getPrefixURI(sourceFolder);
+		URI buildFolderURI = getPrefixURI(buildFolder);
+		
 		URI executableURI = abstractSyntaxTree.getURI().replacePrefix(
 				sourceFolderURI, buildFolderURI);
-		executableURI.trimFileExtension();
-		executableURI.appendFileExtension(EXECUTABLE_SUFFIX);
+		executableURI = executableURI.trimFileExtension();
+		executableURI = executableURI.appendFileExtension(EXECUTABLE_SUFFIX);
 		return executableURI.toString();
 	}
 
@@ -183,11 +188,11 @@ public class ATLVMCompiler implements CompilationProvider {
 	}
 
 	protected Properties createCompilationsProperties(
-			Resource abstractSyntaxTreeResource,
-			Map<String, String> parameters, IFolder sourceFolder,
+			Resource abstractSyntaxTree,
+			final Map<String, String> parameters, IFolder sourceFolder,
 			IFolder buildFolder) {
 		String executablePath = getDefaultExecutablePath(
-				abstractSyntaxTreeResource, sourceFolder, buildFolder);
+				abstractSyntaxTree, sourceFolder, buildFolder);
 		Properties effectiveParameters = new Properties();
 		effectiveParameters.putAll(DEFAULT_COMPILATION_PARAMETERS);
 		effectiveParameters.putAll(parameters);
@@ -238,12 +243,27 @@ public class ATLVMCompiler implements CompilationProvider {
 		if (operation instanceof CompileOperation) {
 			CompileOperation compileOperation = (CompileOperation) operation;
 			Object source = compileOperation.getSource();
+			Map<String, String> parameters = compileOperation.getParameters();
 			boolean canHandleSource = source instanceof Resource;
+			boolean canHandleDirection = parameters != null;
 
-			return canHandleSource
-					&& compileOperation.getParameters() != null
-					&& compileOperation.getParameters().containsKey(
-							DIRECTION_PARAMETER_NAME);
+			if (canHandleSource && canHandleDirection) {
+				Resource resource = (Resource) source;
+				if (! resource.getContents().isEmpty()) {
+					EObject object = resource.getContents().get(0);
+					if (object instanceof RelationalTransformation) {
+						RelationalTransformation relationalTransformation = (RelationalTransformation) object;
+						String direction = compileOperation.getParameters().get(DIRECTION_PARAMETER_NAME);
+						canHandleDirection = relationalTransformation.getModelParameter(direction) != null  ;
+					} else { //base object is not a relational transformation
+						return false;
+					}
+				}
+				else { //resource is empty
+					return false;
+				}
+			}
+			return canHandleSource && canHandleDirection;
 		}
 		return false;
 	}

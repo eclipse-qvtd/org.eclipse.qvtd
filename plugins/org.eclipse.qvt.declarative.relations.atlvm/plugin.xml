@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.qvt.declarative.compilationProvider">
+      <compilationProvider
+            class="org.eclipse.qvt.declarative.relations.atlvm.ATLVMCompiler"
+            priority="low">
+      </compilationProvider>
+   </extension>
+   <extension
+         point="org.eclipse.qvt.declarative.executionProvider">
+      <executionProvider
+            class="org.eclipse.qvt.declarative.relations.atlvm.ATLVMExecutor"
+            priority="low">
+      </executionProvider>
+   </extension>
+
+</plugin>
