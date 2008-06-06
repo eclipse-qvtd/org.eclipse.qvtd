@@ -18,7 +18,7 @@ public class DirectionUtilies {
 
 	protected static int PUSH_DIRECTION_DOMAIN_NAME_INSTRUCTION_INDEX = 9;
 
-	protected static String REFERENCE_DIRECTION_LIBRARY_LOACTION = "resources/direction.asm";
+	protected static String REFERENCE_DIRECTION_LIBRARY_LOACTION = "/resources/direction.asm";
 
 	public static ASM createDirectionLibrary(String domainName) {
 		Bundle bundle = Activator.getDefault().getBundle();

@@ -51,7 +51,7 @@ public class ATLVMCompiler implements CompilationProvider {
 
 	public static final String DIRECTION_PARAMETER_NAME = "direction"; //$NON-NLS-1$
 
-	private static final String TRANSFORMATION_MODEL_NAME = "transformation"; //$NON-NLS-1$
+	public static final String TRANSFORMATION_MODEL_NAME = "transformation"; //$NON-NLS-1$
 
 	private static final String PROBLEM_MODEL_FILE_EXTENSION = "pbm.xmi"; //$NON-NLS-1$
 
@@ -163,7 +163,7 @@ public class ATLVMCompiler implements CompilationProvider {
 			IFolder sourceFolder, IFolder buildFolder) {
 		URI sourceFolderURI = getPrefixURI(sourceFolder);
 		URI buildFolderURI = getPrefixURI(buildFolder);
-		
+
 		URI executableURI = abstractSyntaxTree.getURI().replacePrefix(
 				sourceFolderURI, buildFolderURI);
 		executableURI = executableURI.trimFileExtension();
