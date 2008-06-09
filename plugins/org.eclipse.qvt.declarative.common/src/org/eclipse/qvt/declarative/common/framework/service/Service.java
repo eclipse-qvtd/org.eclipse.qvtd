@@ -15,7 +15,7 @@ public class Service implements Provider {
 	protected final Map<ProviderDescriptor.Priority, ArrayList<Provider>> providers;
 	
 	
-	protected final List<? extends Object> execute(ExecutionStrategy strategy, Operation operation) {
+	protected final List<? extends Object> execute(ExecutionStrategy strategy, Operation operation) throws Exception {
 		assert null != operation : "null operation"; //$NON-NLS-1$
 		return strategy.execute(this, operation);
 	}
