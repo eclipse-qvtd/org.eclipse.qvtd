@@ -2,6 +2,8 @@ package org.eclipse.qvt.declarative.test.relations.atlvm;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,6 +17,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
@@ -37,11 +40,30 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 	protected IProject testProject;
 	protected IFolder sourceFolder;
 	protected IFolder buildFolder;
-	protected IFile testFile;
+	protected IFile transformationFile;
+	protected IFile umlModelFile;
+	protected IFile rdbmsModelFile;
 	protected ResourceSet testResourceSet;
 	protected Resource workspaceAbstractSyntaxTree;
-	protected Resource contentAbstractSyntaxTree;
-	protected File file;
+	
+	protected Resource importEcoreFileToWorkspace(String pluginPath, IFile workspaceFile, ResourceSet resourceSet) throws IOException, CoreException {
+		File file;
+		URL astURL = FileLocator.find(Activator.getDefault().getBundle(),
+				new Path(pluginPath),Collections.EMPTY_MAP);
+		if (!workspaceFile.exists()) {
+			file = workspaceFile.getLocation().toFile();
+			file.createNewFile();
+			workspaceFile.create(new FileInputStream(file), true, null);
+		}
+		workspaceFile.setContents(astURL.openStream(), false, false, null);
+		return resourceSet.createResource(URI.createURI(workspaceFile.getLocationURI().toURL().toString()));
+	}
+	
+	protected Resource createResource (ResourceSet resourceSet, String pluginPath) throws URISyntaxException {
+		URL astURL = FileLocator.find(Activator.getDefault().getBundle(),
+				new Path(pluginPath),Collections.EMPTY_MAP);
+		return resourceSet.createResource(URI.createURI(astURL.toURI().toString()));
+	}
 
 	public ATLVMCompilerTest() {
 		try {
@@ -55,26 +77,20 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 			if (!sourceFolder.exists()) {
 				sourceFolder.create(true, true, null);
 			}
-			testFile = sourceFolder.getFile("transfo.xmi");
+			transformationFile = sourceFolder.getFile("transfo.xmi");
+			umlModelFile = sourceFolder.getFile("SimpleUml.ecore");
+			rdbmsModelFile = sourceFolder.getFile("SimpleRdbms.ecore");
+			
 			buildFolder = testProject.getFolder("build");
 			if (!buildFolder.exists()) {
 				buildFolder.create(true, true, null);
 			}
 			testResourceSet = new ResourceSetImpl();
-			URL astURL = FileLocator.find(Activator.getDefault().getBundle(),
-					new Path("/resources/SimpleUMLtoRDBMS.eqvtrelation"),
-					Collections.EMPTY_MAP);
-			if (!testFile.exists()) {
-				file = new File(testFile.getLocationURI().toURL().getFile());
-				file.createNewFile();
-				testFile.create(new FileInputStream(file), true, null);
-			}
-			testFile.setContents(astURL.openStream(), false, false, null);
-			ResourceSet resourceSet = new ResourceSetImpl();
-			contentAbstractSyntaxTree = resourceSet.createResource(URI
-					.createURI(astURL.toURI().toString()));
-			workspaceAbstractSyntaxTree = testResourceSet.createResource(URI
-					.createURI(testFile.getLocationURI().toString()));
+			
+			workspaceAbstractSyntaxTree = importEcoreFileToWorkspace("/resources/SimpleUMLtoRDBMS.eqvtrelation", transformationFile, testResourceSet);
+			importEcoreFileToWorkspace("/resources/SimpleUml.ecore", umlModelFile, testResourceSet);
+			importEcoreFileToWorkspace("/resources/SimpleRdbms.ecore", rdbmsModelFile, testResourceSet);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -90,9 +106,7 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 	public void testGetDefaultExecutablePath() {
 		String actual = getDefaultExecutablePath(workspaceAbstractSyntaxTree,
 				sourceFolder, buildFolder);
-		String expected = ResourcesPlugin.getWorkspace().getRoot()
-				.getLocationURI().toString()
-				+ "/test/build/transfo.asm";
+		String expected = ResourcesPlugin.getWorkspace().getRoot().getLocation().append(new Path("test/build/transfo.asm")).toOSString();
 		Assert.assertEquals(expected, actual);
 	}
 
@@ -142,19 +156,19 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 	public void testCompileObjectMapOfStringStringIFolderIFolder() {
 		Map<String, String> parameters = new HashMap<String, String>();
 
-		// try {
-		// compile("", parameters, sourceFolder, buildFolder);
-		// Assert.fail();
-		// } catch (IllegalArgumentException e) {}
-		// try {
-		// compile(contentAbstractSyntaxTree, parameters, sourceFolder,
-		// buildFolder);
-		// Assert.fail();
-		// } catch (IllegalArgumentException e) {}
-		parameters.put(ATLVMCompiler.DIRECTION_PARAMETER_NAME, "SimpleRDBMS");
+		 try {
+		 compile("", parameters, sourceFolder, buildFolder);
+		 Assert.fail();
+		 } catch (IllegalArgumentException e) {}
+		 try {
+		 compile(workspaceAbstractSyntaxTree, parameters, sourceFolder,
+		 buildFolder);
+		 Assert.fail();
+		 } catch (IllegalArgumentException e) {}
+		parameters.put(ATLVMCompiler.DIRECTION_PARAMETER_NAME, "rdbms");
 		List<IFile> actual = compile(workspaceAbstractSyntaxTree, parameters,
 				sourceFolder, buildFolder);
-		Assert.assertFalse(actual.isEmpty());
+		Assert.assertTrue(actual.get(0) instanceof IFile);
 	}
 
 	@Test
@@ -173,11 +187,6 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 		typedModel.setName("toto");
 		relationalTransformation.getModelParameter().add(typedModel);
 		Assert.assertTrue(provides(operation));
-	}
-
-	@Test
-	public void testCompileASMEMFModelASMASMEMFModelDebuggerProperties() {
-		Assert.fail("Not yet implemented");
 	}
 
 }
