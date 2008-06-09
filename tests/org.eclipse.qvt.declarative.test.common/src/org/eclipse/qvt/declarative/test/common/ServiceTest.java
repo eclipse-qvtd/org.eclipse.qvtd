@@ -33,7 +33,7 @@ public class ServiceTest extends Service {
 	}
 
 	@Test
-	public void testExecute() {
+	public void testExecute() throws Exception {
 		providers.get(Priority.highest).add(new DummyProvider());
 		Object result = execute(ExecutionStrategy.FIRST, new FakeOperation());
 		if (result instanceof List<?>) {
