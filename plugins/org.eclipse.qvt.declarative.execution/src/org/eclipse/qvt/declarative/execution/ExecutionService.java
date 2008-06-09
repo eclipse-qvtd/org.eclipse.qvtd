@@ -31,7 +31,13 @@ public class ExecutionService extends Service implements ExecutionProvider {
 	}
 	
 	private List<? extends Object> execute(Operation operation) {
-		return execute(ExecutionStrategy.FIRST, operation);
+		try {
+			return execute(ExecutionStrategy.FIRST, operation);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
