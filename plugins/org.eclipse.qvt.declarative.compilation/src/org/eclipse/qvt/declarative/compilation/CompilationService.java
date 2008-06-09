@@ -28,12 +28,12 @@ public class CompilationService extends Service implements CompilationProvider {
 	@Override
 	public List<IFile> compile(Object abstractSyntaxTree,
 			Map<String, String> parameters, IFolder sourceFolder,
-			IFolder buildFolder) {
+			IFolder buildFolder) throws Exception {
 		return execute(new CompileOperation(abstractSyntaxTree, parameters, sourceFolder, buildFolder));
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<IFile> execute(Operation operation) {
+	private List<IFile> execute(Operation operation) throws Exception {
 		return (List<IFile>) execute(ExecutionStrategy.FIRST, operation);
 	}
 	

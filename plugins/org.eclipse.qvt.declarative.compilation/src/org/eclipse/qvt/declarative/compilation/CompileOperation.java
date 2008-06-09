@@ -23,11 +23,15 @@ public class CompileOperation implements Operation {
 	}
 
 	@Override
-	public List<IFile> execute(Provider provider) {
+	public List<IFile> execute(Provider provider) throws Exception {
 		List<IFile> result = null;
 		if (provider instanceof CompilationProvider) {
 			CompilationProvider compilationProvider = (CompilationProvider) provider;
-			result = compilationProvider.compile(abstractSyntaxTree, parameters, sourceFolder, buildFolder);
+//			try {
+				result = compilationProvider.compile(abstractSyntaxTree, parameters, sourceFolder, buildFolder);
+//			} catch (DeclarativeQVTCompilationException e) {
+//				e.printStackTrace();
+//			}
 		}
 		return result;
 	}

@@ -9,6 +9,6 @@ import org.eclipse.qvt.declarative.common.framework.service.Provider;
 
 public interface CompilationProvider extends Provider{
 	
-	public List<IFile> compile (Object abstractSyntaxTree, Map<String, String> parameters, IFolder sourceFolder, IFolder buildFolder);
+	public List<IFile> compile (Object abstractSyntaxTree, Map<String, String> parameters, IFolder sourceFolder, IFolder buildFolder) throws Exception;
 
 }
