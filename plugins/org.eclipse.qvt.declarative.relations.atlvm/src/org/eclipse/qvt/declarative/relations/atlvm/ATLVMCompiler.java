@@ -27,7 +27,7 @@ import org.eclipse.m2m.atl.engine.vm.ASMXMLReader;
 import org.eclipse.m2m.atl.engine.vm.Debugger;
 import org.eclipse.m2m.atl.engine.vm.SimpleDebugger;
 import org.eclipse.m2m.atl.engine.vm.nativelib.ASMModule;
-import org.eclipse.m2m.qvt.relations.problem.problem.ProblemPackage;
+import org.eclipse.qvt.declarative.atlvm.problems.problems.ProblemsPackage;
 import org.eclipse.qvt.declarative.common.framework.service.Operation;
 import org.eclipse.qvt.declarative.compilation.CompilationProvider;
 import org.eclipse.qvt.declarative.compilation.CompileOperation;
@@ -77,7 +77,7 @@ public class ATLVMCompiler implements CompilationProvider {
 		// start the static initializations
 		COMPILER_ASM = loadQVTRCompiler();
 		QVTR_METAMODEL = ATLVMUtils.loadModel(QVTRelationPackage.eINSTANCE);
-		PROBLEM_METAMODEL = ATLVMUtils.loadModel(ProblemPackage.eINSTANCE);
+		PROBLEM_METAMODEL = ATLVMUtils.loadModel(ProblemsPackage.eINSTANCE);
 		DEFAULT_DEBUGGER = createDefaultDebugger();
 		DEFAULT_COMPILATION_PARAMETERS = loadDefaultCompilationProperties();
 	}
