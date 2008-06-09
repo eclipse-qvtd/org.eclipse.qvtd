@@ -168,7 +168,7 @@ public class ATLVMCompiler implements CompilationProvider {
 				sourceFolderURI, buildFolderURI);
 		executableURI = executableURI.trimFileExtension();
 		executableURI = executableURI.appendFileExtension(EXECUTABLE_SUFFIX);
-		return executableURI.toString();
+		return executableURI.toFileString();
 	}
 
 	protected ASMEMFModel loadQVTTransformation(Resource abstractSyntaxTree)
@@ -296,6 +296,7 @@ public class ATLVMCompiler implements CompilationProvider {
 			new ASMInterpreter(COMPILER_ASM, asmModule, env,
 					compilationParameters);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 
