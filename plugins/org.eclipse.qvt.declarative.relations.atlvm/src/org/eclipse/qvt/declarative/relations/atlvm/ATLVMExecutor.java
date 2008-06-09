@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.m2m.atl.drivers.emf4atl.ASMEMFModel;
@@ -21,18 +22,23 @@ import org.eclipse.qvt.declarative.execution.ExecutionContext;
 import org.eclipse.qvt.declarative.execution.ExecutionProvider;
 
 public class ATLVMExecutor implements ExecutionProvider {
-	
+
 	protected static final String EXECUTABLE_FILE_EXTENSION = "asm";
-		
+
 	public boolean provides(Operation operation) {
 		if (operation instanceof ExecuteOperation) {
 			ExecuteOperation executeOperation = (ExecuteOperation) operation;
-			IPath sourcePath = executeOperation.getSourceFile().getProjectRelativePath();
-			IPath sourceFolderPath = executeOperation.getSourceFile().getProjectRelativePath();
+			IPath sourcePath = executeOperation.getSourceFile()
+					.getProjectRelativePath();
+			IPath sourceFolderPath = executeOperation.getSourceFile()
+					.getProjectRelativePath();
 			if (sourceFolderPath.isPrefixOf(sourcePath)) {
-				int commonSegments = sourceFolderPath.matchingFirstSegments(sourceFolderPath);
-				IPath sourceRelativePath = sourceFolderPath.removeFirstSegments(commonSegments);
-				IPath executablePath = sourceRelativePath.removeFileExtension().addFileExtension(EXECUTABLE_FILE_EXTENSION);
+				int commonSegments = sourceFolderPath
+						.matchingFirstSegments(sourceFolderPath);
+				IPath sourceRelativePath = sourceFolderPath
+						.removeFirstSegments(commonSegments);
+				IPath executablePath = sourceRelativePath.removeFileExtension()
+						.addFileExtension(EXECUTABLE_FILE_EXTENSION);
 				return executeOperation.getBuildFolder().exists(executablePath);
 			}
 			return false;
@@ -40,10 +46,18 @@ public class ATLVMExecutor implements ExecutionProvider {
 		return false;
 	}
 
-	//TODO: Implement
-	public List<Object> execute(IFile sourceFile, ExecutionContext parameters, IFolder sourceFolder, IFolder buildFolder) {
+	// TODO: Implement
+	public List<Object> execute(IFile sourceFile, ExecutionContext parameters,
+			IFolder sourceFolder, IFolder buildFolder) {
+
+		IPath executablePath = ATLVMCompiler.getInstance()
+				.getDefaultExecutablePath(sourceFile.getLocation(),
+						sourceFolder, buildFolder);
+		IFile executableFile = ResourcesPlugin.getWorkspace().getRoot()
+				.getFile(executablePath);
 		try {
-			ASM qvtrTransformation = new ASMXMLReader().read(sourceFile.getContents());
+			ASM qvtrTransformation = new ASMXMLReader().read(executableFile
+					.getContents());
 			List<ASMEMFModel> participatingModels = new ArrayList<ASMEMFModel>();
 			for (Object model : parameters.getModels()) {
 				if (model instanceof ASMEMFModel) {
@@ -51,15 +65,15 @@ public class ATLVMExecutor implements ExecutionProvider {
 					participatingModels.add(ASMModel);
 				}
 			}
-			
+
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	protected Object execute (final ASM qvtrTransformation,
+
+	protected Object execute(final ASM qvtrTransformation,
 			final List<ASMEMFModel> linkedModels, final List<ASM> libraries,
 			final Debugger debugger) {
 
@@ -76,9 +90,9 @@ public class ATLVMExecutor implements ExecutionProvider {
 			env.addModel(model.getName(), model);
 		}
 		env.registerOperations(qvtrTransformation);
-		
+
 		/*
-		 * libraries overriding operations 
+		 * libraries overriding operations
 		 */
 		for (ASM asm : libraries) {
 			env.registerOperations(asm);
@@ -89,11 +103,12 @@ public class ATLVMExecutor implements ExecutionProvider {
 		 * tree
 		 */
 		try {
-			new ASMInterpreter(qvtrTransformation, asmModule, env,Collections.EMPTY_MAP);
+			new ASMInterpreter(qvtrTransformation, asmModule, env,
+					Collections.EMPTY_MAP);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return linkedModels.get(linkedModels.size()-1);
+		return linkedModels.get(linkedModels.size() - 1);
 	}
 }

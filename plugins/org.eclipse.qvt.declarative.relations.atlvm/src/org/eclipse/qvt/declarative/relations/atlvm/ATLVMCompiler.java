@@ -9,6 +9,7 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -27,10 +28,13 @@ import org.eclipse.m2m.atl.engine.vm.ASMXMLReader;
 import org.eclipse.m2m.atl.engine.vm.Debugger;
 import org.eclipse.m2m.atl.engine.vm.SimpleDebugger;
 import org.eclipse.m2m.atl.engine.vm.nativelib.ASMModule;
+import org.eclipse.qvt.declarative.atlvm.problems.problems.Problem;
 import org.eclipse.qvt.declarative.atlvm.problems.problems.ProblemsPackage;
 import org.eclipse.qvt.declarative.common.framework.service.Operation;
 import org.eclipse.qvt.declarative.compilation.CompilationProvider;
 import org.eclipse.qvt.declarative.compilation.CompileOperation;
+import org.eclipse.qvt.declarative.compilation.DeclarativeQVTCompilationException;
+import org.eclipse.qvt.declarative.compilation.QVTRelationsCompilationException;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.relations.atlvm.utils.ATLVMUtils;
@@ -73,6 +77,8 @@ public class ATLVMCompiler implements CompilationProvider {
 
 	private static final Properties DEFAULT_COMPILATION_PARAMETERS;
 
+	private static final ATLVMCompiler instance = new ATLVMCompiler();
+
 	static {
 		// start the static initializations
 		COMPILER_ASM = loadQVTRCompiler();
@@ -80,6 +86,14 @@ public class ATLVMCompiler implements CompilationProvider {
 		PROBLEM_METAMODEL = ATLVMUtils.loadModel(ProblemsPackage.eINSTANCE);
 		DEFAULT_DEBUGGER = createDefaultDebugger();
 		DEFAULT_COMPILATION_PARAMETERS = loadDefaultCompilationProperties();
+	}
+
+	protected ATLVMCompiler() {
+
+	}
+
+	protected static ATLVMCompiler getInstance() {
+		return instance;
 	}
 
 	/**
@@ -153,22 +167,33 @@ public class ATLVMCompiler implements CompilationProvider {
 		}
 		return compilationParameters;
 	}
-	
-	protected URI getPrefixURI (IFolder folder) {
+
+	protected URI getPrefixURI(IFolder folder) {
 		IPath path = folder.getLocation().addTrailingSeparator();
 		return URI.createFileURI(path.toString());
 	}
 
+	protected IPath getDefaultExecutablePath(IPath abstractSyntaxTreePath,
+			IFolder sourceFolder, IFolder buildFolder) {
+		IPath sourceFolderPath = sourceFolder.getLocation();
+		if (sourceFolderPath.isPrefixOf(abstractSyntaxTreePath)) {
+			IPath relativeASTPath = abstractSyntaxTreePath
+					.removeFirstSegments(sourceFolderPath.segmentCount());
+			IPath relativeExecutablePath = relativeASTPath
+					.removeFileExtension().addFileExtension(EXECUTABLE_SUFFIX);
+			IPath result = buildFolder.getLocation().append(
+					relativeExecutablePath);
+			return result;
+		}
+		return null;
+	}
+
 	protected String getDefaultExecutablePath(Resource abstractSyntaxTree,
 			IFolder sourceFolder, IFolder buildFolder) {
-		URI sourceFolderURI = getPrefixURI(sourceFolder);
-		URI buildFolderURI = getPrefixURI(buildFolder);
-
-		URI executableURI = abstractSyntaxTree.getURI().replacePrefix(
-				sourceFolderURI, buildFolderURI);
-		executableURI = executableURI.trimFileExtension();
-		executableURI = executableURI.appendFileExtension(EXECUTABLE_SUFFIX);
-		return executableURI.toFileString();
+		IPath abstractSyntaxTreePath = new Path(abstractSyntaxTree.getURI()
+				.toFileString());
+		return getDefaultExecutablePath(abstractSyntaxTreePath, sourceFolder,
+				buildFolder).toOSString();
 	}
 
 	protected ASMEMFModel loadQVTTransformation(Resource abstractSyntaxTree)
@@ -188,21 +213,23 @@ public class ATLVMCompiler implements CompilationProvider {
 	}
 
 	protected Properties createCompilationsProperties(
-			Resource abstractSyntaxTree,
-			final Map<String, String> parameters, IFolder sourceFolder,
-			IFolder buildFolder) {
-		String executablePath = getDefaultExecutablePath(
-				abstractSyntaxTree, sourceFolder, buildFolder);
+			Resource abstractSyntaxTree, final Map<String, String> parameters,
+			IFolder sourceFolder, IFolder buildFolder) {
 		Properties effectiveParameters = new Properties();
 		effectiveParameters.putAll(DEFAULT_COMPILATION_PARAMETERS);
 		effectiveParameters.putAll(parameters);
-		effectiveParameters.put(OUT_FILE_PARAMETER_NAME, executablePath);
+		if (!effectiveParameters.containsKey(OUT_FILE_PARAMETER_NAME)) {
+			String executablePath = getDefaultExecutablePath(
+					abstractSyntaxTree, sourceFolder, buildFolder);
+			effectiveParameters.put(OUT_FILE_PARAMETER_NAME, executablePath);
+		}
+
 		return effectiveParameters;
 	}
 
 	public List<IFile> compile(Object abstractSyntaxTree,
 			Map<String, String> parameters, IFolder sourceFolder,
-			IFolder buildFolder) {
+			IFolder buildFolder) throws DeclarativeQVTCompilationException {
 		if (!(abstractSyntaxTree instanceof Resource)) {
 			throw new IllegalArgumentException(
 					"Abstract Syntax is not in an EMF Resource form: "
@@ -232,6 +259,17 @@ public class ATLVMCompiler implements CompilationProvider {
 			IFile resultFile = compile(qvtrTransformation, directionASM,
 					myProblems, DEFAULT_DEBUGGER, effectiveParameters);
 
+			Set<?> problemSet = myProblems.getElementsByType("Problem");
+			for (Object object : problemSet) {
+				if (object instanceof Problem) {
+					Problem problem = (Problem) object;
+					throw new QVTRelationsCompilationException(problem
+							.getStartLine().intValue(), problem
+							.getStartColumn().intValue(), problem
+							.getEndColumn().intValue());
+				}
+			}
+
 			return Collections.singletonList(resultFile);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -249,17 +287,18 @@ public class ATLVMCompiler implements CompilationProvider {
 
 			if (canHandleSource && canHandleDirection) {
 				Resource resource = (Resource) source;
-				if (! resource.getContents().isEmpty()) {
+				if (!resource.getContents().isEmpty()) {
 					EObject object = resource.getContents().get(0);
 					if (object instanceof RelationalTransformation) {
 						RelationalTransformation relationalTransformation = (RelationalTransformation) object;
-						String direction = compileOperation.getParameters().get(DIRECTION_PARAMETER_NAME);
-						canHandleDirection = relationalTransformation.getModelParameter(direction) != null  ;
-					} else { //base object is not a relational transformation
+						String direction = compileOperation.getParameters()
+								.get(DIRECTION_PARAMETER_NAME);
+						canHandleDirection = relationalTransformation
+								.getModelParameter(direction) != null;
+					} else { // base object is not a relational transformation
 						return false;
 					}
-				}
-				else { //resource is empty
+				} else { // resource is empty
 					return false;
 				}
 			}
