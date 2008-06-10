@@ -114,10 +114,10 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 
 	@Test
 	public void testGetDefaultExecutablePath() {
-		String actual = getDefaultExecutablePath(workspaceAbstractSyntaxTree,
+		String actual = getDefaultExecutablePath(workspaceAbstractSyntaxTree, "rdbms",
 				sourceFolder, buildFolder);
 		String expected = ResourcesPlugin.getWorkspace().getRoot()
-				.getLocation().append(new Path("test/build/transfo.asm"))
+				.getLocation().append(new Path("test/build/transfo.rdbms.asm"))
 				.toOSString();
 		Assert.assertEquals(expected, actual);
 	}
@@ -150,7 +150,7 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 	public void testCreateCompilationsProperties() {
 		Map<String, String> parameters = new HashMap<String, String>();
 		Properties result = createCompilationsProperties(
-				workspaceAbstractSyntaxTree, parameters, sourceFolder,
+				workspaceAbstractSyntaxTree, parameters, "", sourceFolder,
 				buildFolder);
 		Assert.assertNotNull(result);
 		Assert.assertTrue(result.size() > 0);
