@@ -173,14 +173,14 @@ public class ATLVMCompiler implements CompilationProvider {
 		return URI.createFileURI(path.toString());
 	}
 
-	protected IPath getDefaultExecutablePath(IPath abstractSyntaxTreePath,
+	protected IPath getDefaultExecutablePath(IPath abstractSyntaxTreePath, String direction,
 			IFolder sourceFolder, IFolder buildFolder) {
 		IPath sourceFolderPath = sourceFolder.getLocation();
 		if (sourceFolderPath.isPrefixOf(abstractSyntaxTreePath)) {
 			IPath relativeASTPath = abstractSyntaxTreePath
 					.removeFirstSegments(sourceFolderPath.segmentCount());
 			IPath relativeExecutablePath = relativeASTPath
-					.removeFileExtension().addFileExtension(EXECUTABLE_SUFFIX);
+					.removeFileExtension().addFileExtension(direction).addFileExtension(EXECUTABLE_SUFFIX);
 			IPath result = buildFolder.getLocation().append(
 					relativeExecutablePath);
 			return result;
@@ -188,11 +188,11 @@ public class ATLVMCompiler implements CompilationProvider {
 		return null;
 	}
 
-	protected String getDefaultExecutablePath(Resource abstractSyntaxTree,
+	protected String getDefaultExecutablePath(Resource abstractSyntaxTree, String direction,
 			IFolder sourceFolder, IFolder buildFolder) {
 		IPath abstractSyntaxTreePath = new Path(abstractSyntaxTree.getURI()
 				.toFileString());
-		return getDefaultExecutablePath(abstractSyntaxTreePath, sourceFolder,
+		return getDefaultExecutablePath(abstractSyntaxTreePath, direction, sourceFolder,
 				buildFolder).toOSString();
 	}
 
@@ -213,14 +213,14 @@ public class ATLVMCompiler implements CompilationProvider {
 	}
 
 	protected Properties createCompilationsProperties(
-			Resource abstractSyntaxTree, final Map<String, String> parameters,
+			Resource abstractSyntaxTree, final Map<String, String> parameters, String direction,
 			IFolder sourceFolder, IFolder buildFolder) {
 		Properties effectiveParameters = new Properties();
 		effectiveParameters.putAll(DEFAULT_COMPILATION_PARAMETERS);
 		effectiveParameters.putAll(parameters);
 		if (!effectiveParameters.containsKey(OUT_FILE_PARAMETER_NAME)) {
 			String executablePath = getDefaultExecutablePath(
-					abstractSyntaxTree, sourceFolder, buildFolder);
+					abstractSyntaxTree, direction, sourceFolder, buildFolder);
 			effectiveParameters.put(OUT_FILE_PARAMETER_NAME, executablePath);
 		}
 
@@ -253,7 +253,7 @@ public class ATLVMCompiler implements CompilationProvider {
 			ASMEMFModel myProblems = createProblemModel(abstractSyntaxTreeResource);
 
 			Properties effectiveParameters = createCompilationsProperties(
-					abstractSyntaxTreeResource, parameters, sourceFolder,
+					abstractSyntaxTreeResource, parameters, directionDomainName,  sourceFolder,
 					buildFolder);
 
 			IFile resultFile = compile(qvtrTransformation, directionASM,
