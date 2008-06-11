@@ -2,19 +2,19 @@ package org.eclipse.qvt.declarative.execution;
 
 import java.util.List;
 
-public class ExecutionContextImpl implements ExecutionContext {
+public class ExecutionContextImpl<M> implements ExecutionContext<M> {
 	
 	public static enum ExecutionMode {
 		enforcement, checkOnly
 	}
 	
-	protected List<Object> models;
-	protected Object directionModel;
+	protected List<NamedModel<M>> sourceModels;
+	protected NamedModel<M> directionModel;
 	protected ExecutionMode mode;
 	
-	public ExecutionContextImpl(List<Object> models, Object directionModel, ExecutionMode mode) throws IllegalArgumentException{
+	public ExecutionContextImpl(List<NamedModel<M>> sourceModels, NamedModel<M> directionModel, ExecutionMode mode) throws IllegalArgumentException{
 		super();
-		this.models = models;
+		this.sourceModels = sourceModels;
 		setDirectionModel(directionModel);
 		this.mode = mode;
 	}
@@ -22,17 +22,14 @@ public class ExecutionContextImpl implements ExecutionContext {
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvt.declarative.execution.ExecutionContext#getDirectionModel()
 	 */
-	public Object getDirectionModel() {
+	public NamedModel<M> getDirectionModel() {
 		return directionModel;
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvt.declarative.execution.ExecutionContext#setDirectionModel(M)
 	 */
-	public void setDirectionModel(Object directionModel) throws IllegalArgumentException{
-		if (! models.contains(directionModel)) {
-			throw new IllegalArgumentException("Direction model is not part of the models");
-		}
+	public void setDirectionModel(NamedModel<M> directionModel) {
 		this.directionModel = directionModel;
 		
 	}
@@ -54,15 +51,15 @@ public class ExecutionContextImpl implements ExecutionContext {
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvt.declarative.execution.ExecutionContext#addModel(M)
 	 */
-	public void addModel(Object model) {
-		models.add(model);
+	public void addSourceModel(NamedModel<M> model) {
+		sourceModels.add(model);
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvt.declarative.execution.ExecutionContext#getModels()
 	 */
-	public List<Object> getModels() {
-		return models;
+	public List<NamedModel<M>> getSourceModels() {
+		return sourceModels;
 	}
 	
 

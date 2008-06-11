@@ -5,14 +5,14 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.qvt.declarative.common.framework.service.Operation;
 import org.eclipse.qvt.declarative.common.framework.service.Provider;
 
-public class ExecuteOperation implements Operation {
+public class ExecuteOperation<M> implements Operation {
 
 	protected IFile sourceFile;
-	protected ExecutionContext parameters;
+	protected ExecutionContext<M> parameters;
 	protected IFolder sourceFolder;
 	protected IFolder buildFolder;
 
-	public ExecuteOperation(IFile sourceFile, ExecutionContext parameters, IFolder sourceFolder, IFolder buildFolder) {
+	public ExecuteOperation(IFile sourceFile, ExecutionContext<M> parameters, IFolder sourceFolder, IFolder buildFolder) {
 		super();
 		this.sourceFile = sourceFile;
 		this.parameters = parameters;
@@ -20,10 +20,11 @@ public class ExecuteOperation implements Operation {
 		this.buildFolder = buildFolder;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object execute(Provider provider) {
 		if (provider instanceof ExecutionProvider) {
-			ExecutionProvider executionProvider = (ExecutionProvider) provider;
+			ExecutionProvider<M> executionProvider = (ExecutionProvider<M>) provider;
 			return executionProvider.execute(sourceFile, parameters, sourceFolder, buildFolder);
 		}
 		return null;
@@ -53,11 +54,11 @@ public class ExecuteOperation implements Operation {
 		this.sourceFile = sourceFile;
 	}
 
-	public ExecutionContext getParameters() {
+	public ExecutionContext<M> getParameters() {
 		return parameters;
 	}
 
-	public void setParameters(ExecutionContext parameters) {
+	public void setParameters(ExecutionContext<M> parameters) {
 		this.parameters = parameters;
 	}
 	

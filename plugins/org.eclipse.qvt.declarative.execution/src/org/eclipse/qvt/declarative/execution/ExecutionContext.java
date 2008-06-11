@@ -4,19 +4,18 @@ import java.util.List;
 
 import org.eclipse.qvt.declarative.execution.ExecutionContextImpl.ExecutionMode;
 
-public interface ExecutionContext {
+public interface ExecutionContext<M> {
 
-	public abstract Object getDirectionModel();
+	public abstract NamedModel<M> getDirectionModel();
 
-	public abstract void setDirectionModel(Object directionModel)
-			throws IllegalArgumentException;
+	public abstract void setDirectionModel(NamedModel<M> directionModel);
 
 	public abstract ExecutionMode getMode();
 
 	public abstract void setMode(ExecutionMode mode);
 
-	public abstract void addModel(Object model);
+	public abstract void addSourceModel(NamedModel<M> model);
 
-	public abstract List<Object> getModels();
+	public abstract List<NamedModel<M>> getSourceModels();
 
 }

@@ -8,7 +8,7 @@ import org.eclipse.qvt.declarative.common.framework.service.ExecutionStrategy;
 import org.eclipse.qvt.declarative.common.framework.service.Operation;
 import org.eclipse.qvt.declarative.common.framework.service.Service;
 
-public class ExecutionService extends Service implements ExecutionProvider {
+public class ExecutionService extends Service implements ExecutionProvider<Object> {
 	
 	protected static final ExecutionService INSTANCE = new ExecutionService();
 	
@@ -25,9 +25,9 @@ public class ExecutionService extends Service implements ExecutionProvider {
 	}
 
 	@Override
-	public List<? extends Object> execute(IFile sourceFile, ExecutionContext parameters,
+	public List<? extends Object> execute(IFile sourceFile, ExecutionContext<Object> parameters,
 			IFolder sourceFolder, IFolder buildFolder) {
-		return execute(new ExecuteOperation(sourceFile, parameters, sourceFolder, buildFolder));
+		return execute(new ExecuteOperation<Object>(sourceFile, parameters, sourceFolder, buildFolder));
 	}
 	
 	private List<? extends Object> execute(Operation operation) {
