@@ -14,11 +14,11 @@ import org.eclipse.m2m.atl.engine.vm.ASMXMLReader;
 import org.eclipse.qvt.declarative.relations.atlvm.Activator;
 import org.osgi.framework.Bundle;
 
-public class DirectionUtilies {
+public class ASMUtils {
 
 	protected static int PUSH_DIRECTION_DOMAIN_NAME_INSTRUCTION_INDEX = 9;
 
-	protected static String REFERENCE_DIRECTION_LIBRARY_LOACTION = "/resources/direction.asm";
+	protected static String REFERENCE_DIRECTION_LIBRARY_LOACTION = "/resources/direction.asm"; //$NON-NLS-1$
 
 	public static ASM createDirectionLibrary(String domainName) {
 		Bundle bundle = Activator.getDefault().getBundle();
