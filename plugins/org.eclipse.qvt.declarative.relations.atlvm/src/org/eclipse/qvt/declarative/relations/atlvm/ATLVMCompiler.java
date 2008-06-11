@@ -35,10 +35,9 @@ import org.eclipse.qvt.declarative.compilation.CompilationProvider;
 import org.eclipse.qvt.declarative.compilation.CompileOperation;
 import org.eclipse.qvt.declarative.compilation.DeclarativeQVTCompilationException;
 import org.eclipse.qvt.declarative.compilation.QVTRelationsCompilationException;
-import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
-import org.eclipse.qvt.declarative.relations.atlvm.utils.ATLVMUtils;
-import org.eclipse.qvt.declarative.relations.atlvm.utils.DirectionUtilies;
+import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMEMFModelUtils;
+import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMUtils;
 import org.osgi.framework.Bundle;
 
 public class ATLVMCompiler implements CompilationProvider {
@@ -55,16 +54,15 @@ public class ATLVMCompiler implements CompilationProvider {
 
 	public static final String DIRECTION_PARAMETER_NAME = "direction"; //$NON-NLS-1$
 
-	public static final String TRANSFORMATION_MODEL_NAME = "transformation"; //$NON-NLS-1$
+	public static final String TRANSFORMATION_MODEL_NAME = "IN"; //$NON-NLS-1$
 
 	private static final String PROBLEM_MODEL_FILE_EXTENSION = "pbm.xmi"; //$NON-NLS-1$
 
-	private static final String PROBLEM_MODEL_NAME = DIRECTION_PARAMETER_NAME
-			+ "CompilationProblems";
+	private static final String PROBLEM_MODEL_NAME = "OUT";
 
 	private static final ASM COMPILER_ASM;
 
-	private static final ASMEMFModel QVTR_METAMODEL;
+	private static final String RELATION_METAMODEL_ALIAS = "QVTR";
 
 	/**
 	 * The Problem metamodel. This is the way problems are reported during the
@@ -82,8 +80,8 @@ public class ATLVMCompiler implements CompilationProvider {
 	static {
 		// start the static initializations
 		COMPILER_ASM = loadQVTRCompiler();
-		QVTR_METAMODEL = ATLVMUtils.loadModel(QVTRelationPackage.eINSTANCE);
-		PROBLEM_METAMODEL = ATLVMUtils.loadModel(ProblemsPackage.eINSTANCE);
+		PROBLEM_METAMODEL = ASMEMFModelUtils
+				.getASMEMFModelFrom(ProblemsPackage.eINSTANCE);
 		DEFAULT_DEBUGGER = createDefaultDebugger();
 		DEFAULT_COMPILATION_PARAMETERS = loadDefaultCompilationProperties();
 	}
@@ -173,14 +171,15 @@ public class ATLVMCompiler implements CompilationProvider {
 		return URI.createFileURI(path.toString());
 	}
 
-	protected IPath getDefaultExecutablePath(IPath abstractSyntaxTreePath, String direction,
-			IFolder sourceFolder, IFolder buildFolder) {
+	protected IPath getDefaultExecutablePath(IPath abstractSyntaxTreePath,
+			String direction, IFolder sourceFolder, IFolder buildFolder) {
 		IPath sourceFolderPath = sourceFolder.getLocation();
 		if (sourceFolderPath.isPrefixOf(abstractSyntaxTreePath)) {
 			IPath relativeASTPath = abstractSyntaxTreePath
 					.removeFirstSegments(sourceFolderPath.segmentCount());
 			IPath relativeExecutablePath = relativeASTPath
-					.removeFileExtension().addFileExtension(direction).addFileExtension(EXECUTABLE_SUFFIX);
+					.removeFileExtension().addFileExtension(direction)
+					.addFileExtension(EXECUTABLE_SUFFIX);
 			IPath result = buildFolder.getLocation().append(
 					relativeExecutablePath);
 			return result;
@@ -188,21 +187,15 @@ public class ATLVMCompiler implements CompilationProvider {
 		return null;
 	}
 
-	protected String getDefaultExecutablePath(Resource abstractSyntaxTree, String direction,
-			IFolder sourceFolder, IFolder buildFolder) {
+	protected String getDefaultExecutablePath(Resource abstractSyntaxTree,
+			String direction, IFolder sourceFolder, IFolder buildFolder) {
 		IPath abstractSyntaxTreePath = new Path(abstractSyntaxTree.getURI()
 				.toFileString());
-		return getDefaultExecutablePath(abstractSyntaxTreePath, direction, sourceFolder,
-				buildFolder).toOSString();
+		return getDefaultExecutablePath(abstractSyntaxTreePath, direction,
+				sourceFolder, buildFolder).toOSString();
 	}
 
-	protected ASMEMFModel loadQVTTransformation(Resource abstractSyntaxTree)
-			throws Exception {
-		return ASMEMFModel.loadASMEMFModel(TRANSFORMATION_MODEL_NAME,
-				QVTR_METAMODEL, abstractSyntaxTree.getURI(), null); //$NON-NLS-1$
-	}
-
-	protected ASMEMFModel createProblemModel(Resource abstractSyntaxTree)
+	protected ASMEMFModel createProblemModelFor(Resource abstractSyntaxTree)
 			throws Exception {
 		URI abstractSyntaxTreeURI = abstractSyntaxTree.getURI();
 		String problemFileName = abstractSyntaxTreeURI.trimFileExtension()
@@ -213,8 +206,8 @@ public class ATLVMCompiler implements CompilationProvider {
 	}
 
 	protected Properties createCompilationsProperties(
-			Resource abstractSyntaxTree, final Map<String, String> parameters, String direction,
-			IFolder sourceFolder, IFolder buildFolder) {
+			Resource abstractSyntaxTree, final Map<String, String> parameters,
+			String direction, IFolder sourceFolder, IFolder buildFolder) {
 		Properties effectiveParameters = new Properties();
 		effectiveParameters.putAll(DEFAULT_COMPILATION_PARAMETERS);
 		effectiveParameters.putAll(parameters);
@@ -223,7 +216,6 @@ public class ATLVMCompiler implements CompilationProvider {
 					abstractSyntaxTree, direction, sourceFolder, buildFolder);
 			effectiveParameters.put(OUT_FILE_PARAMETER_NAME, executablePath);
 		}
-
 		return effectiveParameters;
 	}
 
@@ -243,18 +235,19 @@ public class ATLVMCompiler implements CompilationProvider {
 		Resource abstractSyntaxTreeResource = (Resource) abstractSyntaxTree;
 
 		try {
-			ASMEMFModel qvtrTransformation = loadQVTTransformation(abstractSyntaxTreeResource);
-
+			ASMEMFModel qvtrTransformation = ASMEMFModelUtils
+					.getASMEMFModelFrom(abstractSyntaxTreeResource,
+							TRANSFORMATION_MODEL_NAME);
 			String directionDomainName = parameters
 					.remove(DIRECTION_PARAMETER_NAME);
-			ASM directionASM = DirectionUtilies
+			ASM directionASM = ASMUtils
 					.createDirectionLibrary(directionDomainName);
 
-			ASMEMFModel myProblems = createProblemModel(abstractSyntaxTreeResource);
+			ASMEMFModel myProblems = createProblemModelFor(abstractSyntaxTreeResource);
 
 			Properties effectiveParameters = createCompilationsProperties(
-					abstractSyntaxTreeResource, parameters, directionDomainName,  sourceFolder,
-					buildFolder);
+					abstractSyntaxTreeResource, parameters,
+					directionDomainName, sourceFolder, buildFolder);
 
 			IFile resultFile = compile(qvtrTransformation, directionASM,
 					myProblems, DEFAULT_DEBUGGER, effectiveParameters);
@@ -272,7 +265,6 @@ public class ATLVMCompiler implements CompilationProvider {
 
 			return Collections.singletonList(resultFile);
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new IllegalArgumentException("Problem loading models");
 		}
 	}
@@ -320,10 +312,12 @@ public class ATLVMCompiler implements CompilationProvider {
 		env.addPermission("file.read"); //$NON-NLS-1$
 		env.addPermission("file.write"); //$NON-NLS-1$
 
-		env.addModel("QVTR", QVTR_METAMODEL); //$NON-NLS-1$
-		env.addModel("IN", qvtrTransformation); //$NON-NLS-1$
-		env.addModel("Problem", PROBLEM_METAMODEL); //$NON-NLS-1$
-		env.addModel("OUT", myProblems); //$NON-NLS-1$
+		env.addModel(RELATION_METAMODEL_ALIAS, qvtrTransformation
+				.getMetamodel());
+		env.addModel(qvtrTransformation.getName(), qvtrTransformation);
+		env.addModel(myProblems.getMetamodel().getName(), myProblems
+				.getMetamodel());
+		env.addModel(myProblems.getName(), myProblems);
 		env.registerOperations(directionLibary);
 		env.registerOperations(COMPILER_ASM);
 
