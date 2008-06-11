@@ -24,30 +24,25 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.m2m.atl.drivers.emf4atl.ASMEMFModel;
 import org.eclipse.qvt.declarative.common.framework.service.Operation;
 import org.eclipse.qvt.declarative.compilation.CompileOperation;
 import org.eclipse.qvt.declarative.compilation.DeclarativeQVTCompilationException;
-import org.eclipse.qvt.declarative.ecore.QVTBase.QVTBaseFactory;
-import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
-import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationFactory;
-import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage;
-import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.relations.atlvm.ATLVMCompiler;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ATLVMCompilerTest extends ATLVMCompiler {
 
-	protected IProject testProject;
-	protected IFolder sourceFolder;
-	protected IFolder buildFolder;
-	protected IFile transformationFile;
-	protected IFile umlModelFile;
-	protected IFile rdbmsModelFile;
-	protected ResourceSet testResourceSet;
-	protected Resource workspaceAbstractSyntaxTree;
+	protected static IProject testProject;
+	protected static IFolder sourceFolder;
+	protected static IFolder buildFolder;
+	protected static IFile transformationFile;
+	protected static IFile umlModelFile;
+	protected static IFile rdbmsModelFile;
+	protected static ResourceSet testResourceSet;
+	protected static Resource workspaceAbstractSyntaxTree;
 
-	protected Resource importEcoreFileToWorkspace(String pluginPath,
+	protected static Resource importEcoreFileToWorkspace(String pluginPath,
 			IFile workspaceFile, ResourceSet resourceSet) throws IOException,
 			CoreException {
 		File file;
@@ -71,7 +66,8 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 				.toString()));
 	}
 
-	public ATLVMCompilerTest() {
+	@BeforeClass
+	public static void setUpBeforeClass() {
 		try {
 			testProject = ResourcesPlugin.getWorkspace().getRoot().getProject(
 					"test");
@@ -101,6 +97,7 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 			importEcoreFileToWorkspace("/resources/SimpleRdbms.ecore",
 					rdbmsModelFile, testResourceSet);
 
+			workspaceAbstractSyntaxTree.load(Collections.EMPTY_MAP);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -114,8 +111,8 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 
 	@Test
 	public void testGetDefaultExecutablePath() {
-		String actual = getDefaultExecutablePath(workspaceAbstractSyntaxTree, "rdbms",
-				sourceFolder, buildFolder);
+		String actual = getDefaultExecutablePath(workspaceAbstractSyntaxTree,
+				"rdbms", sourceFolder, buildFolder);
 		String expected = ResourcesPlugin.getWorkspace().getRoot()
 				.getLocation().append(new Path("test/build/transfo.rdbms.asm"))
 				.toOSString();
@@ -123,27 +120,9 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 	}
 
 	@Test
-	public void testLoadQVTTransformation() throws Exception {
-		URL astURL = FileLocator.find(Activator.getDefault().getBundle(),
-				new Path("/resources/SimpleUMLtoRDBMS.eqvtrelation"),
-				Collections.EMPTY_MAP);
-		ResourceSet resourceSet = new ResourceSetImpl();
-
-		Resource resource = resourceSet.createResource(URI.createURI(astURL
-				.toURI().toString()));
-		ASMEMFModel model = loadQVTTransformation(resource);
-		Assert.assertNotNull(model);
-		Assert.assertEquals(model.getName(),
-				ATLVMCompiler.TRANSFORMATION_MODEL_NAME);
-		Assert.assertEquals(((ASMEMFModel) model.getMetamodel()).getExtent(),
-				QVTRelationPackage.eINSTANCE.eResource());
-		Assert.assertFalse(model.getElementsByType("EObject").isEmpty());
-
-	}
-
-	@Test
 	public void testCreateProblemModel() throws Exception {
-		Assert.assertNotNull(createProblemModel(workspaceAbstractSyntaxTree));
+		Assert
+				.assertNotNull(createProblemModelFor(workspaceAbstractSyntaxTree));
 	}
 
 	@Test
@@ -186,13 +165,7 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 		Assert.assertFalse(provides(operation));
 		parameters.put(ATLVMCompiler.DIRECTION_PARAMETER_NAME, "toto");
 		Assert.assertFalse(provides(operation));
-		RelationalTransformation relationalTransformation = QVTRelationFactory.eINSTANCE
-				.createRelationalTransformation();
-		workspaceAbstractSyntaxTree.getContents().add(relationalTransformation);
-		Assert.assertFalse(provides(operation));
-		TypedModel typedModel = QVTBaseFactory.eINSTANCE.createTypedModel();
-		typedModel.setName("toto");
-		relationalTransformation.getModelParameter().add(typedModel);
+		parameters.put(ATLVMCompiler.DIRECTION_PARAMETER_NAME, "rdbms");
 		Assert.assertTrue(provides(operation));
 	}
 
