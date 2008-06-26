@@ -4,18 +4,18 @@ import java.util.List;
 
 import org.eclipse.qvt.declarative.execution.ExecutionContextImpl.ExecutionMode;
 
-public interface ExecutionContext<M> {
+public interface ExecutionContext {
 
-	public abstract NamedModel<M> getDirectionModel();
+	public abstract LabelledModel getDirectionModel();
 
-	public abstract void setDirectionModel(NamedModel<M> directionModel);
+	public abstract void setDirectionModel(LabelledModel directionModel);
 
 	public abstract ExecutionMode getMode();
 
 	public abstract void setMode(ExecutionMode mode);
 
-	public abstract void addSourceModel(NamedModel<M> model);
+	public abstract void addSourceModel(LabelledModel model);
 
-	public abstract List<NamedModel<M>> getSourceModels();
+	public abstract List<LabelledModel> getSourceModels();
 
 }
