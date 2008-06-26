@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ASCII"?>
+<SimpleUML:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SimpleUML="http:///SimpleUML.ecore" xsi:schemaLocation="http:///SimpleUML.ecore SimpleUml.ecore" kind="" name="Billing">
+  <elements xsi:type="SimpleUML:Class" kind="Persistent" name="Order" reverse="//@elements.6 //@elements.11">
+    <attribute name="date" type="//@elements.4"/>
+    <attribute name="isPrepaid" type="//@elements.3"/>
+    <attribute name="price" type="//@elements.2"/>
+  </elements>
+  <elements xsi:type="SimpleUML:PrimitiveDataType" name="String"/>
+  <elements xsi:type="SimpleUML:PrimitiveDataType" name="INTEGER"/>
+  <elements xsi:type="SimpleUML:PrimitiveDataType" name="BOOLEAN"/>
+  <elements xsi:type="SimpleUML:PrimitiveDataType" name="Date"/>
+  <elements xsi:type="SimpleUML:Class" kind="" name="Customer" forward="//@elements.6">
+    <attribute name="name" type="//@elements.1"/>
+    <attribute name="address" type="//@elements.1"/>
+  </elements>
+  <elements xsi:type="SimpleUML:Association" name="belongsTo" source="//@elements.0" destination="//@elements.5"/>
+  <elements xsi:type="SimpleUML:Class" kind="Persistent" name="CorporateCustomer" general="//@elements.5">
+    <attribute name="contactName" type="//@elements.1"/>
+    <attribute name="creditLimit" type="//@elements.2"/>
+  </elements>
+  <elements xsi:type="SimpleUML:Class" kind="Persistent" name="PersonnalCustomer" general="//@elements.5">
+    <attribute name="creditCardNumber" type="//@elements.2"/>
+  </elements>
+  <elements xsi:type="SimpleUML:Class" kind="Persistent" name="OrderDetail" reverse="//@elements.12" forward="//@elements.11">
+    <attribute name="quantity" type="//@elements.2"/>
+  </elements>
+  <elements xsi:type="SimpleUML:Class" kind="Persistent" name="Item" forward="//@elements.12">
+    <attribute name="description" type="//@elements.1"/>
+    <attribute name="price" type="//@elements.2"/>
+  </elements>
+  <elements xsi:type="SimpleUML:Association" name="ComposedOf" source="//@elements.0" destination="//@elements.9"/>
+  <elements xsi:type="SimpleUML:Association" name="refersTo" source="//@elements.9" destination="//@elements.10"/>
+</SimpleUML:Package>

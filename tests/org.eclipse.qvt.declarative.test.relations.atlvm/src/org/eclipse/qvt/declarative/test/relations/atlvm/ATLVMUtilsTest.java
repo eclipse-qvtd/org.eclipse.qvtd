@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.atl.drivers.emf4atl.ASMEMFModel;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage;
+import org.eclipse.qvt.declarative.execution.LabelledModel;
+import org.eclipse.qvt.declarative.execution.LabelledModelFactory;
 import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMEMFModelUtils;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -35,9 +37,12 @@ public class ATLVMUtilsTest {
 	protected static IFolder buildFolder;
 	protected static IFile transformationFile;
 	protected static IFile umlModelFile;
+	protected static IFile unknownFile;
 	protected static IFile rdbmsModelFile;
 	protected static ResourceSet testResourceSet;
 	protected static Resource workspaceAbstractSyntaxTree;
+	protected static Resource unknownResource;
+	protected static Resource umlMetamodelResource;
 
 	protected static Resource importEcoreFileToWorkspace(String pluginPath,
 			IFile workspaceFile, ResourceSet resourceSet) throws IOException,
@@ -51,6 +56,7 @@ public class ATLVMUtilsTest {
 			workspaceFile.create(new FileInputStream(file), true, null);
 		}
 		workspaceFile.setContents(astURL.openStream(), false, false, null);
+
 		return resourceSet.createResource(URI.createURI(workspaceFile
 				.getLocationURI().toURL().toString()));
 	}
@@ -70,6 +76,7 @@ public class ATLVMUtilsTest {
 		transformationFile = sourceFolder.getFile("transfo.xmi");
 		umlModelFile = sourceFolder.getFile("SimpleUml.ecore");
 		rdbmsModelFile = sourceFolder.getFile("SimpleRdbms.ecore");
+		unknownFile = sourceFolder.getFile("My.simpleuml");
 
 		buildFolder = testProject.getFolder("build");
 		if (!buildFolder.exists()) {
@@ -80,10 +87,12 @@ public class ATLVMUtilsTest {
 		workspaceAbstractSyntaxTree = importEcoreFileToWorkspace(
 				"/resources/SimpleUMLtoRDBMS.eqvtrelation", transformationFile,
 				testResourceSet);
-		importEcoreFileToWorkspace("/resources/SimpleUml.ecore", umlModelFile,
-				testResourceSet);
+		umlMetamodelResource = importEcoreFileToWorkspace(
+				"/resources/SimpleUml.ecore", umlModelFile, testResourceSet);
 		importEcoreFileToWorkspace("/resources/SimpleRdbms.ecore",
 				rdbmsModelFile, testResourceSet);
+		unknownResource = importEcoreFileToWorkspace("/resources/My.simpleuml",
+				unknownFile, testResourceSet);
 
 	}
 
@@ -111,19 +120,49 @@ public class ATLVMUtilsTest {
 	@Test
 	public void testGetASMEMFModelFromResourceString() throws Exception {
 		ASMEMFModel model = ASMEMFModelUtils.getASMEMFModelFrom(
-				workspaceAbstractSyntaxTree, "uml2Rdbms");
+				workspaceAbstractSyntaxTree, "uml2Rdbms", null);
 		Assert.assertNotNull(model);
 		Assert.assertEquals(model.getName(), "uml2Rdbms");
 		Assert.assertEquals(model.getMetamodel().getName(), "QVTRelation");
 	}
 
+	// @Test
+	// public void testGetASMEMFModelFromIFileString() throws Exception {
+	// ASMEMFModel model = ASMEMFModelUtils.getASMEMFModelFrom(
+	// transformationFile, "uml2Rdbms");
+	// Assert.assertNotNull(model);
+	// Assert.assertEquals(model.getName(), "uml2Rdbms");
+	// Assert.assertEquals(model.getMetamodel().getName(), "QVTRelation");
+	// }
+
 	@Test
-	public void testGetASMEMFModelFromIFileString() throws Exception {
-		ASMEMFModel model = ASMEMFModelUtils.getASMEMFModelFrom(
-				transformationFile, "uml2Rdbms");
+	public void testToto() throws Exception {
+		LabelledModel namedMetamodel = LabelledModelFactory.INSTANCE
+				.createLabelledMetamodel("QVTR", QVTRelationPackage.eNS_URI);
+		LabelledModel namedModel = LabelledModelFactory.INSTANCE
+				.createLabelledModel("uml2rdbms", workspaceAbstractSyntaxTree
+						.getURI().toString(), namedMetamodel);
+
+		ASMEMFModel model = ASMEMFModelUtils.getASMEMFModelFrom(namedModel,
+				false);
 		Assert.assertNotNull(model);
-		Assert.assertEquals(model.getName(), "uml2Rdbms");
-		Assert.assertEquals(model.getMetamodel().getName(), "QVTRelation");
+		Assert.assertEquals("uml2rdbms", model.getName());
+		Assert.assertEquals("QVTRelation", model.getMetamodel().getName());
+		Assert.assertEquals(QVTRelationPackage.eINSTANCE.eResource(),
+				((ASMEMFModel) model.getMetamodel()).getExtent());
+		// namedModel = new NamedModelImpl<URI>("aliasUML",
+		// unknownResource.getURI());
+		// try {
+		// model = ASMEMFModelUtils.getASMEMFModelFrom(namedModel, false);
+		// Assert.fail();
+		// } catch (WrappedException iowe) {}
+		namedModel = LabelledModelFactory.INSTANCE
+				.createLabelledModel("aliasUML", unknownResource.getURI()
+						.toString(), namedMetamodel);
+		// = new LabelledModelImpl<URI>("aliasUML", unknownResource.getURI(),
+		// umlMetamodelResource.getURI());
+		model = ASMEMFModelUtils.getASMEMFModelFrom(namedModel, false);
+		Assert.assertEquals("aliasUML", model.getName());
 	}
 
 }

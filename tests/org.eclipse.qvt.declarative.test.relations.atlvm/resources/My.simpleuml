@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimpleUML:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SimpleUML="http:///SimpleUML.ecore" name="Billing">
+  <elements xsi:type="SimpleUML:Class" name="Customer" reverse="//@elements.2"/>
+  <elements xsi:type="SimpleUML:Class" name="Account" forward="//@elements.2"/>
+  <elements xsi:type="SimpleUML:Association" name="owns" source="//@elements.0" destination="//@elements.1"/>
+</SimpleUML:Package>
