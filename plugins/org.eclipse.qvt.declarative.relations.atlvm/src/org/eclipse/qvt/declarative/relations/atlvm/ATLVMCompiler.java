@@ -237,7 +237,7 @@ public class ATLVMCompiler implements CompilationProvider {
 		try {
 			ASMEMFModel qvtrTransformation = ASMEMFModelUtils
 					.getASMEMFModelFrom(abstractSyntaxTreeResource,
-							TRANSFORMATION_MODEL_NAME);
+							TRANSFORMATION_MODEL_NAME, null);
 			String directionDomainName = parameters
 					.remove(DIRECTION_PARAMETER_NAME);
 			ASM directionASM = ASMUtils

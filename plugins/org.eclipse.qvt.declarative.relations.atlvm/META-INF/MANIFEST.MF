@@ -14,4 +14,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.qvt.declarative.ecore.qvtrelation;bundle-version="0.7.0",
  org.eclipse.qvt.declarative.atlvm.problems;bundle-version="0.7.0"
 Eclipse-LazyStart: true
-Export-Package: org.eclipse.qvt.declarative.relations.atlvm
+Export-Package: org.eclipse.qvt.declarative.relations.atlvm,
+ org.eclipse.qvt.declarative.relations.atlvm.utils
