@@ -3,13 +3,13 @@ package org.eclipse.qvt.declarative.execution;
 public class LabelledModelImpl implements LabelledModel {
 
 	protected String name;
-	protected String model;
+	protected String accessor;
 	protected LabelledModel metamodel;
 
 	protected LabelledModelImpl(String name, String model) {
 		super();
 		this.metamodel = this;
-		this.model = model;
+		this.accessor = model;
 		this.name = name;
 	}
 
@@ -17,7 +17,7 @@ public class LabelledModelImpl implements LabelledModel {
 			LabelledModel metamodel) {
 		super();
 		this.metamodel = metamodel;
-		this.model = model;
+		this.accessor = model;
 		this.name = name;
 	}
 
@@ -28,7 +28,7 @@ public class LabelledModelImpl implements LabelledModel {
 
 	@Override
 	public String getAccessor() {
-		return model;
+		return accessor;
 	}
 
 	@Override
