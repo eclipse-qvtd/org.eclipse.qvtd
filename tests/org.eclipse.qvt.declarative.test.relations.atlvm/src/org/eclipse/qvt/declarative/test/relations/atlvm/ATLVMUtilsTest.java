@@ -36,9 +36,9 @@ public class ATLVMUtilsTest {
 	protected static IFolder sourceFolder;
 	protected static IFolder buildFolder;
 	protected static IFile transformationFile;
-	protected static IFile umlModelFile;
+	protected static IFile umlMetamodelFile;
 	protected static IFile unknownFile;
-	protected static IFile rdbmsModelFile;
+	protected static IFile rdbmsMetamodelFile;
 	protected static ResourceSet testResourceSet;
 	protected static Resource workspaceAbstractSyntaxTree;
 	protected static Resource unknownResource;
@@ -74,8 +74,8 @@ public class ATLVMUtilsTest {
 			sourceFolder.create(true, true, null);
 		}
 		transformationFile = sourceFolder.getFile("transfo.xmi");
-		umlModelFile = sourceFolder.getFile("SimpleUml.ecore");
-		rdbmsModelFile = sourceFolder.getFile("SimpleRdbms.ecore");
+		umlMetamodelFile = sourceFolder.getFile("SimpleUml.ecore");
+		rdbmsMetamodelFile = sourceFolder.getFile("SimpleRdbms.ecore");
 		unknownFile = sourceFolder.getFile("My.simpleuml");
 
 		buildFolder = testProject.getFolder("build");
@@ -88,9 +88,9 @@ public class ATLVMUtilsTest {
 				"/resources/SimpleUMLtoRDBMS.eqvtrelation", transformationFile,
 				testResourceSet);
 		umlMetamodelResource = importEcoreFileToWorkspace(
-				"/resources/SimpleUml.ecore", umlModelFile, testResourceSet);
+				"/resources/SimpleUml.ecore", umlMetamodelFile, testResourceSet);
 		importEcoreFileToWorkspace("/resources/SimpleRdbms.ecore",
-				rdbmsModelFile, testResourceSet);
+				rdbmsMetamodelFile, testResourceSet);
 		unknownResource = importEcoreFileToWorkspace("/resources/My.simpleuml",
 				unknownFile, testResourceSet);
 
@@ -111,32 +111,14 @@ public class ATLVMUtilsTest {
 	@Test
 	public void testGetASMEMFModelFromEPackage() {
 		EPackage package1 = QVTRelationPackage.eINSTANCE;
-		ASMEMFModel model = ASMEMFModelUtils.getASMEMFModelFrom(package1);
+		ASMEMFModel model = ASMEMFModelUtils.getASMEMFModelFrom(package1, null);
 		Assert.assertEquals(model.getName(), "QVTRelation");
 		Assert.assertEquals(model.getExtent().getURI().toString(),
 				QVTRelationPackage.eNS_URI);
 	}
 
 	@Test
-	public void testGetASMEMFModelFromResourceString() throws Exception {
-		ASMEMFModel model = ASMEMFModelUtils.getASMEMFModelFrom(
-				workspaceAbstractSyntaxTree, "uml2Rdbms", null);
-		Assert.assertNotNull(model);
-		Assert.assertEquals(model.getName(), "uml2Rdbms");
-		Assert.assertEquals(model.getMetamodel().getName(), "QVTRelation");
-	}
-
-	// @Test
-	// public void testGetASMEMFModelFromIFileString() throws Exception {
-	// ASMEMFModel model = ASMEMFModelUtils.getASMEMFModelFrom(
-	// transformationFile, "uml2Rdbms");
-	// Assert.assertNotNull(model);
-	// Assert.assertEquals(model.getName(), "uml2Rdbms");
-	// Assert.assertEquals(model.getMetamodel().getName(), "QVTRelation");
-	// }
-
-	@Test
-	public void testToto() throws Exception {
+	public void testgetASMEMFModelFromLabeledModelBoolean() throws Exception {
 		LabelledModel namedMetamodel = LabelledModelFactory.INSTANCE
 				.createLabelledMetamodel("QVTR", QVTRelationPackage.eNS_URI);
 		LabelledModel namedModel = LabelledModelFactory.INSTANCE
@@ -147,22 +129,18 @@ public class ATLVMUtilsTest {
 				false);
 		Assert.assertNotNull(model);
 		Assert.assertEquals("uml2rdbms", model.getName());
-		Assert.assertEquals("QVTRelation", model.getMetamodel().getName());
+		Assert.assertEquals("QVTR", model.getMetamodel().getName());
 		Assert.assertEquals(QVTRelationPackage.eINSTANCE.eResource(),
 				((ASMEMFModel) model.getMetamodel()).getExtent());
-		// namedModel = new NamedModelImpl<URI>("aliasUML",
-		// unknownResource.getURI());
-		// try {
-		// model = ASMEMFModelUtils.getASMEMFModelFrom(namedModel, false);
-		// Assert.fail();
-		// } catch (WrappedException iowe) {}
-		namedModel = LabelledModelFactory.INSTANCE
-				.createLabelledModel("aliasUML", unknownResource.getURI()
-						.toString(), namedMetamodel);
-		// = new LabelledModelImpl<URI>("aliasUML", unknownResource.getURI(),
-		// umlMetamodelResource.getURI());
+	
+		namedMetamodel = LabelledModelFactory.INSTANCE.createLabelledMetamodel("SimpleUML", umlMetamodelResource.getURI().toString());
+		namedModel = LabelledModelFactory.INSTANCE.createLabelledModel("aliasUML", unknownResource.getURI().toString(), namedMetamodel);
 		model = ASMEMFModelUtils.getASMEMFModelFrom(namedModel, false);
+		Assert.assertNotNull(model);
 		Assert.assertEquals("aliasUML", model.getName());
+		Assert.assertEquals("SimpleUML", model.getMetamodel().getName());
+		Assert.assertEquals(umlMetamodelResource.getURI(),((ASMEMFModel) model.getMetamodel()).getExtent().getURI());
+		Assert.assertTrue(model.getElementsByType("EObject").size() > 0);
 	}
 
 }

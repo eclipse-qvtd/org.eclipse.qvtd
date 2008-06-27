@@ -138,10 +138,6 @@ public class ATLVMExecutorTest extends ATLVMExecutor {
 	@Test
 	public void testExecuteIFileExecutionContextOfURIIFolderIFolder()
 			throws MalformedURLException {
-		// URI inputMMURI =
-		// URI.createURI(umlMetamodelFile.getLocationURI().toURL().toString());
-		// URI inputURI =
-		// URI.createURI(umlModel.getLocationURI().toURL().toString());
 		LabelledModel inputMetaModel = LabelledModelFactory.INSTANCE
 				.createLabelledMetamodel("SimpleUML", umlMetamodelFile
 						.getLocationURI().toString());
@@ -152,11 +148,6 @@ public class ATLVMExecutorTest extends ATLVMExecutor {
 		List<LabelledModel> inputModels = new ArrayList<LabelledModel>();
 		inputModels.add(inputModel);
 		IFile outFile = modelFolder.getFile("my.rdbms");
-		// URI outputURI =
-		// URI.createURI(outFile.getLocationURI().toURL().toString());
-		// URI outputMMURI =
-		// URI.createURI(rdbmsMetamodelFile.getLocationURI().toURL
-		// ().toString());
 
 		LabelledModel outputMetaModel = LabelledModelFactory.INSTANCE
 				.createLabelledMetamodel("SimpleRDBMS", rdbmsMetamodelFile
@@ -169,12 +160,6 @@ public class ATLVMExecutorTest extends ATLVMExecutor {
 				outputModel, ExecutionMode.enforcement);
 
 		execute(transformationFile, parameters, sourceFolder, buildFolder);
-		// try {
-		// System.out.println(outFile.getContents());
-		// } catch (CoreException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
 	}
 
 	@Test
