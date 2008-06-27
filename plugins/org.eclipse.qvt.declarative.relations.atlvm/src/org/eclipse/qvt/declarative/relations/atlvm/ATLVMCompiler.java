@@ -40,6 +40,13 @@ import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMEMFModelUtils;
 import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMUtils;
 import org.osgi.framework.Bundle;
 
+/**
+ * A client implementation to provide a compilation of QVT Relations in ATLVM
+ * byte code
+ * 
+ * @author Quentin Glineur
+ * 
+ */
 public class ATLVMCompiler implements CompilationProvider {
 
 	private static final String COMPILER_ASM_LOCATION = "resources/QVTR.asm"; //$NON-NLS-1$
@@ -78,10 +85,10 @@ public class ATLVMCompiler implements CompilationProvider {
 	private static final ATLVMCompiler instance = new ATLVMCompiler();
 
 	static {
-		// start the static initializations
+		// static initializations
 		COMPILER_ASM = loadQVTRCompiler();
-		PROBLEM_METAMODEL = ASMEMFModelUtils
-				.getASMEMFModelFrom(ProblemsPackage.eINSTANCE);
+		PROBLEM_METAMODEL = ASMEMFModelUtils.getASMEMFModelFrom(
+				ProblemsPackage.eINSTANCE, null);
 		DEFAULT_DEBUGGER = createDefaultDebugger();
 		DEFAULT_COMPILATION_PARAMETERS = loadDefaultCompilationProperties();
 	}
@@ -219,6 +226,14 @@ public class ATLVMCompiler implements CompilationProvider {
 		return effectiveParameters;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.qvt.declarative.compilation.CompilationProvider#compile(java
+	 * .lang.Object, java.util.Map, org.eclipse.core.resources.IFolder,
+	 * org.eclipse.core.resources.IFolder)
+	 */
 	public List<IFile> compile(Object abstractSyntaxTree,
 			Map<String, String> parameters, IFolder sourceFolder,
 			IFolder buildFolder) throws DeclarativeQVTCompilationException {
@@ -237,7 +252,7 @@ public class ATLVMCompiler implements CompilationProvider {
 		try {
 			ASMEMFModel qvtrTransformation = ASMEMFModelUtils
 					.getASMEMFModelFrom(abstractSyntaxTreeResource,
-							TRANSFORMATION_MODEL_NAME, null);
+							TRANSFORMATION_MODEL_NAME);
 			String directionDomainName = parameters
 					.remove(DIRECTION_PARAMETER_NAME);
 			ASM directionASM = ASMUtils
@@ -269,6 +284,13 @@ public class ATLVMCompiler implements CompilationProvider {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.qvt.declarative.common.framework.service.Provider#provides
+	 * (org.eclipse.qvt.declarative.common.framework.service.Operation)
+	 */
 	public boolean provides(Operation operation) {
 		if (operation instanceof CompileOperation) {
 			CompileOperation compileOperation = (CompileOperation) operation;

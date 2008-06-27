@@ -17,6 +17,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.m2m.atl.drivers.emf4atl.ASMEMFModel;
 import org.eclipse.m2m.atl.engine.vm.ASM;
 import org.eclipse.m2m.atl.engine.vm.ASMExecEnv;
@@ -30,9 +32,17 @@ import org.eclipse.qvt.declarative.execution.ExecuteOperation;
 import org.eclipse.qvt.declarative.execution.ExecutionContext;
 import org.eclipse.qvt.declarative.execution.ExecutionProvider;
 import org.eclipse.qvt.declarative.execution.LabelledModel;
+import org.eclipse.qvt.declarative.execution.ExecutionContextImpl.ExecutionMode;
 import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMEMFModelUtils;
 import org.osgi.framework.Bundle;
 
+/**
+ * A client implementation to provide an execution of QVT Relations by the
+ * regular ATL VM.
+ * 
+ * @author Quentin Glineur
+ * 
+ */
 public class ATLVMExecutor implements ExecutionProvider {
 
 	private static final String DEFAULT_DEBUGGER_PROPERTIES_LOCATION = "resources/debugger.properties.xml"; //$NON-NLS-1$
@@ -43,7 +53,7 @@ public class ATLVMExecutor implements ExecutionProvider {
 		DEFAULT_DEBUGGER = createDefaultDebugger();
 	}
 
-	// TODO: remove duplicate with ATLVM compiler
+	// TODO remove duplicate with ATLVM compiler
 	/**
 	 * Create a default debugger with the parameters stored in the corresponding
 	 * configuration file
@@ -77,6 +87,13 @@ public class ATLVMExecutor implements ExecutionProvider {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.qvt.declarative.common.framework.service.Provider#provides
+	 * (org.eclipse.qvt.declarative.common.framework.service.Operation)
+	 */
 	public boolean provides(Operation operation) {
 		if (operation instanceof ExecuteOperation) {
 			try {
@@ -99,7 +116,16 @@ public class ATLVMExecutor implements ExecutionProvider {
 		return false;
 	}
 
-	// FIXME: libraries for overriding transformations
+	// FIXME libraries for overriding transformations
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.qvt.declarative.execution.ExecutionProvider#execute(org.eclipse
+	 * .core.resources.IFile,
+	 * org.eclipse.qvt.declarative.execution.ExecutionContext,
+	 * org.eclipse.core.resources.IFolder, org.eclipse.core.resources.IFolder)
+	 */
 	public List<?> execute(IFile sourceFile, ExecutionContext parameters,
 			IFolder sourceFolder, IFolder buildFolder) {
 
@@ -111,10 +137,11 @@ public class ATLVMExecutor implements ExecutionProvider {
 				.getFileForLocation(executablePath);
 
 		LabelledModel direction = parameters.getDirectionModel();
-		String directionName = direction.getName();
 
 		Map<String, String> transformationParameters = new HashMap<String, String>();
-		transformationParameters.put("direction", directionName);
+		boolean isCheckOnly = parameters.getMode() == ExecutionMode.checkOnly;
+		transformationParameters
+				.put("checkOnly", Boolean.toString(isCheckOnly));
 
 		List<ASMEMFModel> linkedModels = new ArrayList<ASMEMFModel>();
 		try {
@@ -135,9 +162,22 @@ public class ATLVMExecutor implements ExecutionProvider {
 			Object result = execute(qvtrTransformation, linkedModels,
 					Collections.EMPTY_LIST, transformationParameters,
 					DEFAULT_DEBUGGER);
+			for (ASMEMFModel model : linkedModels) {
+				Map<String, Boolean> serializationParameters = new HashMap<String, Boolean>();
+				URI metamodelURI = ((ASMEMFModel) model.getMetamodel())
+						.getExtent().getURI();
+				if (metamodelURI.isFile()) {
+					serializationParameters.put(
+							XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+				}
+				model.getExtent().save(serializationParameters);
+			}
 			return Collections.singletonList(result);
 
 		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -175,19 +215,11 @@ public class ATLVMExecutor implements ExecutionProvider {
 		 * tree
 		 */
 		try {
-			new ASMInterpreter(qvtrTransformation, asmModule, env,
-					Collections.EMPTY_MAP);
+			new ASMInterpreter(qvtrTransformation, asmModule, env, parameters);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		return linkedModels.get(linkedModels.size() - 1);
 	}
-
-	// public <M> List<?> execute(IFile sourceFile,
-	// ExecutionContext<M> parameters, IFolder sourceFolder,
-	// IFolder buildFolder) {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
 }
