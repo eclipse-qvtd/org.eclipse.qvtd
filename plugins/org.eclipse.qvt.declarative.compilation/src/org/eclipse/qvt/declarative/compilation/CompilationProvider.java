@@ -1,10 +1,9 @@
 package org.eclipse.qvt.declarative.compilation;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.qvt.declarative.common.framework.service.Provider;
 
 /**
@@ -29,14 +28,14 @@ public interface CompilationProvider extends Provider {
 	 * @param sourceFolder
 	 *            The folder considered as the repository of textual
 	 *            transformation (handy for base namespace).
-	 * @param buildFolder
+	 * @param binFolder
 	 *            The folder considered as the repository of executable
 	 *            transformation (where to write the compiled file).
 	 * @return The list of file resulting from the compilation.
 	 * @throws Exception
 	 */
-	public List<IFile> compile(Object abstractSyntaxTree,
-			Map<String, String> parameters, IFolder sourceFolder,
-			IFolder buildFolder) throws Exception;
+	public List<File> compile(Object abstractSyntaxTree,
+			Map<String, String> parameters, File sourceFolder, File binFolder)
+			throws Exception;
 
 }

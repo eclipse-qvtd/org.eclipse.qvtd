@@ -1,37 +1,40 @@
 package org.eclipse.qvt.declarative.compilation;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.qvt.declarative.common.framework.service.Operation;
 import org.eclipse.qvt.declarative.common.framework.service.Provider;
+import org.eclipse.qvt.declarative.common.framework.service.ProviderDescriptor;
 
 public class CompileOperation implements Operation {
-	
+
 	protected Object abstractSyntaxTree;
 	protected Map<String, String> parameters;
-	protected IFolder sourceFolder;
-	protected IFolder buildFolder;
-	
-	public CompileOperation(Object abstractSyntaxTree, Map<String, String> parameters, IFolder sourceFolder, IFolder buildFolder) {
+	protected File sourceFolder;
+	protected File binFolder;
+
+	public CompileOperation(Object abstractSyntaxTree,
+			Map<String, String> parameters, File sourceFolder, File buildFolder) {
 		this.abstractSyntaxTree = abstractSyntaxTree;
 		this.parameters = parameters;
 		this.sourceFolder = sourceFolder;
-		this.buildFolder = buildFolder;
+		this.binFolder = buildFolder;
 	}
 
 	@Override
-	public List<IFile> execute(Provider provider) throws Exception {
-		List<IFile> result = null;
+	public List<File> execute(Provider provider) throws Exception {
+		List<File> result = null;
+		if (provider instanceof ProviderDescriptor) {
+			ProviderDescriptor descriptor = (ProviderDescriptor) provider;
+			provider = descriptor.getDescribedProvider();
+		}
 		if (provider instanceof CompilationProvider) {
 			CompilationProvider compilationProvider = (CompilationProvider) provider;
-//			try {
-				result = compilationProvider.compile(abstractSyntaxTree, parameters, sourceFolder, buildFolder);
-//			} catch (DeclarativeQVTCompilationException e) {
-//				e.printStackTrace();
-//			}
+			result = compilationProvider.compile(abstractSyntaxTree,
+					parameters, sourceFolder, binFolder);
+
 		}
 		return result;
 	}
@@ -52,20 +55,20 @@ public class CompileOperation implements Operation {
 		this.parameters = parameters;
 	}
 
-	public IFolder getSourceFolder() {
+	public File getSourceFolder() {
 		return sourceFolder;
 	}
 
-	public void setSourceFolder(IFolder sourceFolder) {
+	public void setSourceFolder(File sourceFolder) {
 		this.sourceFolder = sourceFolder;
 	}
 
-	public IFolder getBuildFolder() {
-		return buildFolder;
+	public File getBinFolder() {
+		return binFolder;
 	}
 
-	public void setBuildFolder(IFolder buildFolder) {
-		this.buildFolder = buildFolder;
+	public void setBinFolder(File buildFolder) {
+		this.binFolder = buildFolder;
 	}
 
 }
