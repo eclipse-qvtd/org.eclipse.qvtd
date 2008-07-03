@@ -1,24 +1,24 @@
 package org.eclipse.qvt.declarative.execution;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
+import java.io.File;
+
 import org.eclipse.qvt.declarative.common.framework.service.Operation;
 import org.eclipse.qvt.declarative.common.framework.service.Provider;
 
 public class ExecuteOperation implements Operation {
 
-	protected IFile sourceFile;
+	protected File sourceFile;
 	protected ExecutionContext parameters;
-	protected IFolder sourceFolder;
-	protected IFolder buildFolder;
+	protected File sourceFolder;
+	protected File binFolder;
 
-	public ExecuteOperation(IFile sourceFile, ExecutionContext parameters,
-			IFolder sourceFolder, IFolder buildFolder) {
+	public ExecuteOperation(File sourceFile, ExecutionContext parameters,
+			File sourceFolder, File binFolder) {
 		super();
 		this.sourceFile = sourceFile;
 		this.parameters = parameters;
 		this.sourceFolder = sourceFolder;
-		this.buildFolder = buildFolder;
+		this.binFolder = binFolder;
 	}
 
 	@Override
@@ -26,32 +26,32 @@ public class ExecuteOperation implements Operation {
 		if (provider instanceof ExecutionProvider) {
 			ExecutionProvider executionProvider = (ExecutionProvider) provider;
 			return executionProvider.execute(sourceFile, parameters,
-					sourceFolder, buildFolder);
+					sourceFolder, binFolder);
 		}
 		return null;
 	}
 
-	public IFolder getSourceFolder() {
+	public File getSourceFolder() {
 		return sourceFolder;
 	}
 
-	public void setSourceFolder(IFolder sourceFolder) {
+	public void setSourceFolder(File sourceFolder) {
 		this.sourceFolder = sourceFolder;
 	}
 
-	public IFolder getBuildFolder() {
-		return buildFolder;
+	public File getBinFolder() {
+		return binFolder;
 	}
 
-	public void setBuildFolder(IFolder buildFolder) {
-		this.buildFolder = buildFolder;
+	public void setBinFolder(File binFolder) {
+		this.binFolder = binFolder;
 	}
 
-	public IFile getSourceFile() {
+	public File getSourceFile() {
 		return sourceFile;
 	}
 
-	public void setSourceFile(IFile sourceFile) {
+	public void setSourceFile(File sourceFile) {
 		this.sourceFile = sourceFile;
 	}
 

@@ -1,9 +1,8 @@
 package org.eclipse.qvt.declarative.execution;
 
+import java.io.File;
 import java.util.List;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.qvt.declarative.common.framework.service.ExecutionStrategy;
 import org.eclipse.qvt.declarative.common.framework.service.Operation;
 import org.eclipse.qvt.declarative.common.framework.service.Service;
@@ -25,11 +24,10 @@ public class ExecutionService extends Service implements ExecutionProvider {
 	}
 
 	@Override
-	public List<? extends Object> execute(IFile sourceFile,
-			ExecutionContext parameters, IFolder sourceFolder,
-			IFolder buildFolder) {
+	public List<? extends Object> execute(File sourceFile,
+			ExecutionContext parameters, File sourceFolder, File binFolder) {
 		return execute(new ExecuteOperation(sourceFile, parameters,
-				sourceFolder, buildFolder));
+				sourceFolder, binFolder));
 	}
 
 	private List<? extends Object> execute(Operation operation) {
