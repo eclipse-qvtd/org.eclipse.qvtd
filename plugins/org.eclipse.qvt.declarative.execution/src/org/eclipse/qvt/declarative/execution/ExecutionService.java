@@ -7,6 +7,13 @@ import org.eclipse.qvt.declarative.common.framework.service.ExecutionStrategy;
 import org.eclipse.qvt.declarative.common.framework.service.Operation;
 import org.eclipse.qvt.declarative.common.framework.service.Service;
 
+/**
+ * A service to gather the providers able to run a transformation from a
+ * compiled file.
+ * 
+ * @author Quentin Glineur
+ * 
+ */
 public class ExecutionService extends Service implements ExecutionProvider {
 
 	protected static final ExecutionService INSTANCE = new ExecutionService();
@@ -19,22 +26,32 @@ public class ExecutionService extends Service implements ExecutionProvider {
 		super();
 	}
 
+	/**
+	 * Get the execution service singleton
+	 * 
+	 * @return
+	 */
 	public static final ExecutionService getInstance() {
 		return INSTANCE;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.qvt.declarative.execution.ExecutionProvider#execute(java.
+	 * io.File, org.eclipse.qvt.declarative.execution.ExecutionContext)
+	 */
 	@Override
 	public List<? extends Object> execute(File sourceFile,
-			ExecutionContext parameters, File sourceFolder, File binFolder) {
-		return execute(new ExecuteOperation(sourceFile, parameters,
-				sourceFolder, binFolder));
+			ExecutionContext parameters) {
+		return execute(new ExecuteOperation(sourceFile, parameters));
 	}
 
 	private List<? extends Object> execute(Operation operation) {
 		try {
 			return execute(ExecutionStrategy.FIRST, operation);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
