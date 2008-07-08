@@ -9,7 +9,7 @@
       </compilationProvider>
    </extension>
    <extension
-         point="org.eclipse.qvt.declarative.executionProvider">
+         point="org.eclipse.qvt.declarative.execution.executionProvider">
       <executionProvider
             class="org.eclipse.qvt.declarative.relations.atlvm.ATLVMExecutor"
             priority="low">
