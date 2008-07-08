@@ -160,13 +160,13 @@ public class ASMEMFModelUtils {
 		URI modelURI = URI.createURI(labelledModel.getAccessor(), false);
 		if (modelURI.isRelative()) {
 			modelURI = URI.createPlatformResourceURI(labelledModel
-				.getAccessor(), false);
+					.getAccessor(), false);
 		}
 		URI metamodelURI = URI.createURI(labelledModel.getMetamodel()
 				.getAccessor(), false);
 		if (metamodelURI.isRelative()) {
-			metamodelURI = URI.createPlatformResourceURI(labelledModel.getMetamodel()
-				.getAccessor(), false);
+			metamodelURI = URI.createPlatformResourceURI(labelledModel
+					.getMetamodel().getAccessor(), false);
 		}
 
 		ASMEMFModel metamodel = null;
