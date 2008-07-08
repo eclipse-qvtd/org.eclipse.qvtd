@@ -7,12 +7,11 @@ Bundle-Activator: org.eclipse.qvt.declarative.relations.atlvm.Activator
 Bundle-Vendor: %pluginProvider
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.qvt.declarative.compilation;visibility:=reexport,
- org.eclipse.core.resources,
  org.eclipse.qvt.declarative.execution,
- org.eclipse.m2m.atl.drivers.emf4atl;bundle-version="2.0.0",
- org.eclipse.m2m.atl.engine.vm;bundle-version="2.0.0",
+ org.eclipse.m2m.atl.drivers.emf4atl;bundle-version="2.0.0";visibility:=reexport,
+ org.eclipse.m2m.atl.engine.vm;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.qvt.declarative.ecore.qvtrelation;bundle-version="0.7.0",
  org.eclipse.qvt.declarative.atlvm.problems;bundle-version="0.7.0"
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.qvt.declarative.relations.atlvm,
  org.eclipse.qvt.declarative.relations.atlvm.utils
