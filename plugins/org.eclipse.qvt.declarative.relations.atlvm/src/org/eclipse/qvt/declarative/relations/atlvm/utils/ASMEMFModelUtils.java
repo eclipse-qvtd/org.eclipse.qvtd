@@ -1,16 +1,11 @@
 package org.eclipse.qvt.declarative.relations.atlvm.utils;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -107,14 +102,11 @@ public class ASMEMFModelUtils {
 				null);
 	}
 
-	// FIXME: getResource loadOnDemand
-	protected static Resource getResourceFrom(IFile file, boolean autoCreate)
+	protected static Resource getResourceFrom(File file, boolean autoCreate)
 			throws IOException, CoreException {
-		URI fileURI = URI.createFileURI(file.getLocation().toString());
+		URI fileURI = URI.createFileURI(file.getPath());
 		if (!file.exists() && autoCreate) {
-			File newFile = file.getLocation().toFile();
-			newFile.createNewFile();
-			file.create(new FileInputStream(newFile), true, null);
+			file.createNewFile();
 			Resource resource = ASMEMFModel.getResourceSet().createResource(
 					fileURI);
 			resource.save(null);
@@ -126,14 +118,8 @@ public class ASMEMFModelUtils {
 		return resource;
 	}
 
-	protected static IFile getFileFrom(URI uri) throws Exception {
-		String fileString = uri.toFileString();
-		IPath filePath = new Path(fileString);
-		IFile[] files = ResourcesPlugin.getWorkspace().getRoot()
-				.findFilesForLocation(filePath);
-		if (files.length > 0)
-			return files[0];
-		throw new Exception("Cannot find file from uri: " + uri);
+	protected static File getFileFrom(URI uri) throws Exception {
+		return new File(uri.toFileString());
 	}
 
 	protected static ASMEMFModel getASMEMFModelFromDynamicEcore(URI modelURI,
@@ -171,16 +157,24 @@ public class ASMEMFModelUtils {
 	 */
 	public static ASMEMFModel getASMEMFModelFrom(LabelledModel labelledModel,
 			boolean autoCreate) throws Exception {
-		URI modelURI = URI.createURI(labelledModel.getAccessor());
+		URI modelURI = URI.createURI(labelledModel.getAccessor(), false);
+		if (modelURI.isRelative()) {
+			modelURI = URI.createPlatformResourceURI(labelledModel
+				.getAccessor(), false);
+		}
 		URI metamodelURI = URI.createURI(labelledModel.getMetamodel()
-				.getAccessor());
+				.getAccessor(), false);
+		if (metamodelURI.isRelative()) {
+			metamodelURI = URI.createPlatformResourceURI(labelledModel.getMetamodel()
+				.getAccessor(), false);
+		}
 
 		ASMEMFModel metamodel = null;
 		String modelName = labelledModel.getName();
 		String metamodelName = labelledModel.getMetamodel().getName();
 
 		// load the metamodel if needed
-		if (metamodelURI.isFile()) {
+		if (metamodelURI.isFile() || metamodelURI.isPlatformResource()) {
 			metamodel = getASMEMFModelFromDynamicEcore(metamodelURI,
 					labelledModel.getMetamodel().getName());
 		} else {
@@ -193,15 +187,12 @@ public class ASMEMFModelUtils {
 			}
 		}
 
-		if (modelURI.isFile()) {
-			IFile modelFile = getFileFrom(modelURI);
-			Resource modelResource = getResourceFrom(modelFile, autoCreate);
-			ASMEMFModel result = getASMEMFModelFrom(modelResource, modelName,
-					metamodel);
-			result.setIsTarget(true);
-			return result;
-		}
-		throw new Exception("Invalid model URI: " + modelURI);
+		File modelFile = getFileFrom(modelURI);
+		Resource modelResource = getResourceFrom(modelFile, autoCreate);
+		ASMEMFModel result = getASMEMFModelFrom(modelResource, modelName,
+				metamodel);
+		result.setIsTarget(true);
+		return result;
 	}
 
 }
