@@ -1,5 +1,8 @@
 package org.eclipse.qvt.declarative.relations.atlvm;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -10,13 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.m2m.atl.drivers.emf4atl.ASMEMFModel;
@@ -34,7 +30,6 @@ import org.eclipse.qvt.declarative.execution.ExecutionProvider;
 import org.eclipse.qvt.declarative.execution.LabelledModel;
 import org.eclipse.qvt.declarative.execution.ExecutionContextImpl.ExecutionMode;
 import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMEMFModelUtils;
-import org.osgi.framework.Bundle;
 
 /**
  * A client implementation to provide an execution of QVT Relations by the
@@ -45,8 +40,12 @@ import org.osgi.framework.Bundle;
  */
 public class ATLVMExecutor implements ExecutionProvider {
 
-	private static final String DEFAULT_DEBUGGER_PROPERTIES_LOCATION = "resources/debugger.properties.xml"; //$NON-NLS-1$
+	private static final String DEFAULT_DEBUGGER_PROPERTIES_LOCATION = "debugger.properties.xml"; //$NON-NLS-1$
 	private static final Debugger DEFAULT_DEBUGGER;
+	private static final String STEP_PROPERTY = "step"; //$NON-NLS-1$
+	private static final String SHOW_SUMMARY_PROPERTY = "showSummary"; //$NON-NLS-1$
+	private static final String PROFILE_PROPERTY = "profile"; //$NON-NLS-1$
+	private static final String CONTINUE_AFTER_ERROR_PROPERTY = "continueAfterError"; //$NON-NLS-1$
 
 	static {
 		// start the static initializations
@@ -59,10 +58,10 @@ public class ATLVMExecutor implements ExecutionProvider {
 	 * configuration file
 	 */
 	private static Debugger createDefaultDebugger() {
-		Bundle bundle = Activator.getDefault().getBundle();
 		Properties debuggerProperties = new Properties();
-		URL debuggerPropertiesURL = FileLocator.find(bundle, new Path(
-				DEFAULT_DEBUGGER_PROPERTIES_LOCATION), Collections.EMPTY_MAP);
+		URL debuggerPropertiesURL = ATLVMExecutor.class
+				.getResource(DEFAULT_DEBUGGER_PROPERTIES_LOCATION);
+
 		try {
 			debuggerProperties.loadFromXML(debuggerPropertiesURL.openStream());
 		} catch (InvalidPropertiesFormatException e) {
@@ -70,20 +69,19 @@ public class ATLVMExecutor implements ExecutionProvider {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Debugger result = new SimpleDebugger(
-		/* step = */Boolean.toString(true).equals(
-				debuggerProperties.get("step")), //$NON-NLS-1$
-				/* stepops = */new ArrayList<String>(),
-				/* deepstepops = */new ArrayList<String>(),
-				/* nostepops = */new ArrayList<String>(),
-				/* deepnostepops = */new ArrayList<String>(),
-				/* showStackTrace = */true, Boolean.toString(true).equals(
-						debuggerProperties.get("showSummary")), //$NON-NLS-1$
-				Boolean.toString(true)
-						.equals(debuggerProperties.get("profile")), //$NON-NLS-1$
-				Boolean.toString(true).equals(
-						debuggerProperties.get("continueAfterError")) //$NON-NLS-1$
-		);
+
+		boolean showSummary = Boolean.toString(true).equals(
+				debuggerProperties.get(SHOW_SUMMARY_PROPERTY));
+		boolean profile = Boolean.toString(true).equals(
+				debuggerProperties.get(PROFILE_PROPERTY));
+		boolean continueAfterError = Boolean.toString(true).equals(
+				debuggerProperties.get(CONTINUE_AFTER_ERROR_PROPERTY));
+
+		Debugger result = new SimpleDebugger(Boolean.toString(true).equals(
+				debuggerProperties.get(STEP_PROPERTY)),
+				new ArrayList<String>(), new ArrayList<String>(),
+				new ArrayList<String>(), new ArrayList<String>(), true,
+				showSummary, profile, continueAfterError);
 		return result;
 	}
 
@@ -97,18 +95,24 @@ public class ATLVMExecutor implements ExecutionProvider {
 	public boolean provides(Operation operation) {
 		if (operation instanceof ExecuteOperation) {
 			try {
-				ExecuteOperation executeOperation = (ExecuteOperation) operation;
-				IPath abstractSyntaxTreePath = executeOperation.getSourceFile()
-						.getLocation();
-				String direction = executeOperation.getParameters()
-						.getDirectionModel().getName();
-				IFolder sourceFolder = executeOperation.getSourceFolder();
-				IFolder buildFolder = executeOperation.getBuildFolder();
-
-				IPath executablePath = ATLVMCompiler.getInstance()
-						.getDefaultExecutablePath(abstractSyntaxTreePath,
-								direction, sourceFolder, buildFolder);
-				return executablePath.toFile().canRead();
+				// TODO
+				// ExecuteOperation executeOperation = (ExecuteOperation)
+				// operation;
+				// IPath abstractSyntaxTreePath =
+				// executeOperation.getSourceFile()
+				// .getLocation();
+				// String direction = executeOperation.getParameters()
+				// .getDirectionModel().getName();
+				// IFolder sourceFolder = executeOperation.getSourceFolder();
+				// IFolder buildFolder = executeOperation.getBinFolder();
+				// TODO
+				//
+				// IPath executablePath =
+				// ATLVMCompiler.getDefaultExecutablePath(
+				// abstractSyntaxTreePath,
+				// direction, sourceFolder, buildFolder);
+				// return executablePath.toFile().canRead();
+				return true;
 			} catch (ClassCastException exception) {
 				return false;
 			}
@@ -126,18 +130,7 @@ public class ATLVMExecutor implements ExecutionProvider {
 	 * org.eclipse.qvt.declarative.execution.ExecutionContext,
 	 * org.eclipse.core.resources.IFolder, org.eclipse.core.resources.IFolder)
 	 */
-	public List<?> execute(IFile sourceFile, ExecutionContext parameters,
-			IFolder sourceFolder, IFolder buildFolder) {
-
-		IPath executablePath = ATLVMCompiler.getInstance()
-				.getDefaultExecutablePath(sourceFile.getLocation(),
-						parameters.getDirectionModel().getName(), sourceFolder,
-						buildFolder);
-		IFile executableFile = ResourcesPlugin.getWorkspace().getRoot()
-				.getFileForLocation(executablePath);
-
-		LabelledModel direction = parameters.getDirectionModel();
-
+	public List<?> execute(File executableFile, ExecutionContext parameters) {
 		Map<String, String> transformationParameters = new HashMap<String, String>();
 		boolean isCheckOnly = parameters.getMode() == ExecutionMode.checkOnly;
 		transformationParameters
@@ -155,12 +148,12 @@ public class ATLVMExecutor implements ExecutionProvider {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		try {
-			ASM qvtrTransformation = new ASMXMLReader().read(executableFile
-					.getContents());
+			ASM qvtrTransformation = new ASMXMLReader()
+					.read(new BufferedInputStream(new FileInputStream(
+							executableFile)));
 			Object result = execute(qvtrTransformation, linkedModels,
-					Collections.EMPTY_LIST, transformationParameters,
+					Collections.<ASM> emptyList(), transformationParameters,
 					DEFAULT_DEBUGGER);
 			for (ASMEMFModel model : linkedModels) {
 				Map<String, Boolean> serializationParameters = new HashMap<String, Boolean>();
@@ -173,10 +166,6 @@ public class ATLVMExecutor implements ExecutionProvider {
 				model.getExtent().save(serializationParameters);
 			}
 			return Collections.singletonList(result);
-
-		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
