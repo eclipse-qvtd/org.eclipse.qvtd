@@ -12,23 +12,18 @@ import org.eclipse.qvt.declarative.common.framework.service.Provider;
  */
 public interface ExecutionProvider extends Provider {
 
-	// TODO API change to consider directly the executable and not the source
-	// (do it in the builder)
 	/**
 	 * Creates and return the result of the execution of the given
 	 * transformation.
 	 * 
-	 * @param sourceFile
-	 *            The textual representation of the transformation
+	 * @param executableFile
+	 *            The compiled version of the transformation
 	 * @param parameters
 	 *            An execution context to set runtime transformation parameters
-	 * @param sourceFolder
-	 *            The root folder of transformation source file
-	 * @param buildFolder
-	 *            The root folder of executable files
+	 * 
 	 * @return The result of the transformation
 	 */
-	public List<? extends Object> execute(File sourceFile,
-			ExecutionContext parameters, File sourceFolder, File binFolder);
+	public List<? extends Object> execute(File executableFile,
+			ExecutionContext parameters);
 
 }
