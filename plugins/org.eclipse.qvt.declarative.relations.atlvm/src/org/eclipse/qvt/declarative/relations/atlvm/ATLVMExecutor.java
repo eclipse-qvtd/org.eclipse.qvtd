@@ -28,7 +28,7 @@ import org.eclipse.qvt.declarative.execution.ExecuteOperation;
 import org.eclipse.qvt.declarative.execution.ExecutionContext;
 import org.eclipse.qvt.declarative.execution.ExecutionProvider;
 import org.eclipse.qvt.declarative.execution.LabelledModel;
-import org.eclipse.qvt.declarative.execution.ExecutionContextImpl.ExecutionMode;
+import org.eclipse.qvt.declarative.execution.ExecutionContext.ExecutionMode;
 import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMEMFModelUtils;
 
 /**
