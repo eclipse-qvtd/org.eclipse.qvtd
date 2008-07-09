@@ -4,10 +4,6 @@ import java.util.List;
 
 public class ExecutionContextImpl implements ExecutionContext {
 
-	public static enum ExecutionMode {
-		enforcement, checkOnly
-	}
-
 	protected List<LabelledModel> sourceModels;
 	protected LabelledModel directionModel;
 	protected ExecutionMode mode;

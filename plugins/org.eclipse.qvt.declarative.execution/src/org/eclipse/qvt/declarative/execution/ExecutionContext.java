@@ -2,9 +2,11 @@ package org.eclipse.qvt.declarative.execution;
 
 import java.util.List;
 
-import org.eclipse.qvt.declarative.execution.ExecutionContextImpl.ExecutionMode;
-
 public interface ExecutionContext {
+	
+	public static enum ExecutionMode {
+		enforcement, checkOnly
+	}
 
 	public abstract LabelledModel getDirectionModel();
 
