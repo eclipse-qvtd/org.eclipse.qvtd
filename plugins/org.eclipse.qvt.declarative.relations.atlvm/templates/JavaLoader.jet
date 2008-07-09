@@ -1,0 +1,69 @@
+<%@ jet 
+package="org.eclipse.qvt.declarative.relations.atlvm.runner"
+class="ATLVMCodeJavaRunnerWriter" 
+imports = "org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel
+			java.util.Iterator
+			org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation"
+%>
+<%ATLVMCodeJavaRunnerWriterParameters parameter = (ATLVMCodeJavaRunnerWriterParameters) argument; %>
+<%RelationalTransformation transformation = parameter.getTransformation(); %>
+/*******************************************************************************
+ * Copyright (c) 2008 Obeo.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Obeo - initial API and implementation
+ *******************************************************************************/
+ <%if(parameter.getBasePackage().length() > 0) {%>
+package <%=parameter.getBasePackage()%>;
+
+<%}%>
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.qvt.declarative.execution.ExecutionContext;
+import org.eclipse.qvt.declarative.execution.ExecutionContext.ExecutionMode;
+import org.eclipse.qvt.declarative.execution.ExecutionContextFactory;
+import org.eclipse.qvt.declarative.execution.ExecutionProvider;
+import org.eclipse.qvt.declarative.execution.LabelledModel;
+import org.eclipse.qvt.declarative.execution.LabelledModelFactory;
+import org.eclipse.qvt.declarative.relations.atlvm.ATLVMExecutor;
+
+public class <%=parameter.getClassName()%> {
+<%for (TypedModel model : transformation.getModelParameter()) {%>
+	protected static final File <%=model.getName()%>DirectionASMFile = new File(<%=parameter.getClassName()%>.class.getResource("<%=parameter.getASMFileName()%>.<%=model.getName()%>.asm").getFile());
+	
+<%}%>
+
+	public enum Direction {<%for (Iterator<TypedModel> iterator = transformation.getModelParameter().iterator(); iterator.hasNext();) {%><%=iterator.next().getName()%><%if (iterator.hasNext()) {%>, <%}%><%}%>}
+
+	public static List<?> executeByATLVM (ExecutionContext parameters) {
+		ExecutionProvider provider = new ATLVMExecutor();
+		switch (Direction.valueOf(parameters.getDirectionModel().getName())){
+		<%for (TypedModel model : transformation.getModelParameter()) {%>
+			case <%=model.getName()%> : return provider.execute(<%=model.getName()%>DirectionASMFile, parameters);
+		<%}%>
+		}
+		return null;
+	}
+	
+	public static List<?> executeByATLVM (<%for (TypedModel model : transformation.getModelParameter()) {%>String <%=model.getName()%>FileURI, String <%=model.getName()%>MetamodelURI, <%}%>Direction direction, ExecutionMode executionMode) {
+		List<LabelledModel> inputModels = new ArrayList<LabelledModel>();
+		LabelledModel outputModel = null;
+		<%for (TypedModel model : transformation.getModelParameter()) {%>
+		LabelledModel <%=model.getName()%>MetaModel = LabelledModelFactory.INSTANCE.createLabelledMetamodel("<%=model.getUsedPackage().get(0).getName()%>", <%=model.getName()%>MetamodelURI);
+		LabelledModel <%=model.getName()%>Model = LabelledModelFactory.INSTANCE.createLabelledModel("<%=model.getName()%>", <%=model.getName()%>FileURI, <%=model.getName()%>MetaModel);
+		if (!Direction.valueOf(<%=model.getName()%>Model.getName()).equals(direction)) {
+			inputModels.add(<%=model.getName()%>Model);
+		} else {
+			outputModel = <%=model.getName()%>Model;
+		}
+		<%}%>
+		ExecutionContext executionContext = ExecutionContextFactory.INSTANCE.createExecutionContext(inputModels, outputModel, executionMode);
+		return executeByATLVM(executionContext);	
+	}
+}

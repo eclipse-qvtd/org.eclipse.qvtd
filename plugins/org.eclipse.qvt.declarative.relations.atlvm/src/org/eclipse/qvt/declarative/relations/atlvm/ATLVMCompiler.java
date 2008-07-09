@@ -9,7 +9,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InvalidPropertiesFormatException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -37,8 +36,9 @@ import org.eclipse.qvt.declarative.compilation.CompilationProvider;
 import org.eclipse.qvt.declarative.compilation.CompileOperation;
 import org.eclipse.qvt.declarative.compilation.DeclarativeQVTCompilationException;
 import org.eclipse.qvt.declarative.compilation.QVTRelationsCompilationException;
-import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
+import org.eclipse.qvt.declarative.relations.atlvm.runner.ATLVMCodeJavaRunnerWriter;
+import org.eclipse.qvt.declarative.relations.atlvm.runner.ATLVMCodeJavaRunnerWriterParameters;
 import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMEMFModelUtils;
 import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMUtils;
 import org.osgi.framework.Bundle;
@@ -54,7 +54,7 @@ public class ATLVMCompiler implements CompilationProvider {
 
 	private static final String COMPILER_ASM_LOCATION = "resources/QVTR.asm"; //$NON-NLS-1$
 
-	private static final String DEFAULT_DEBUGGER_PROPERTIES_LOCATION = "resources/debugger.properties.xml"; //$NON-NLS-1$
+	private static final String DEFAULT_DEBUGGER_PROPERTIES_LOCATION = "debugger.properties.xml"; //$NON-NLS-1$
 
 	private static final String DEFAULT_COMPILATION_PARAMETERS_LOCATION = "resources/compilation.parameters.xml"; //$NON-NLS-1$
 
@@ -121,10 +121,9 @@ public class ATLVMCompiler implements CompilationProvider {
 	 * configuration file
 	 */
 	private static Debugger createDefaultDebugger() {
-		Bundle bundle = Activator.getDefault().getBundle();
+//		Bundle bundle = Activator.getDefault().getBundle();
 		Properties debuggerProperties = new Properties();
-		URL debuggerPropertiesURL = FileLocator.find(bundle, new Path(
-				DEFAULT_DEBUGGER_PROPERTIES_LOCATION), Collections.EMPTY_MAP);
+		URL debuggerPropertiesURL = ATLVMCompiler.class.getResource(DEFAULT_DEBUGGER_PROPERTIES_LOCATION);
 		try {
 			debuggerProperties.loadFromXML(debuggerPropertiesURL.openStream());
 		} catch (InvalidPropertiesFormatException e) {
@@ -301,8 +300,10 @@ public class ATLVMCompiler implements CompilationProvider {
 		javaLoaderSourceFile.createNewFile();
 		BufferedWriter writer = new BufferedWriter(new FileWriter(
 				javaLoaderSourceFile));
-		writer.write(createJavaLoaderSource(abstractSyntaxTreeResource,
-				sourceFolderURI));
+		ATLVMCodeJavaRunnerWriterParameters writerParameters = new ATLVMCodeJavaRunnerWriterParameters(abstractSyntaxTreeResource, sourceFolderURI);
+		ATLVMCodeJavaRunnerWriter javaRunnerWriter = new ATLVMCodeJavaRunnerWriter();
+		String content = javaRunnerWriter.generate(writerParameters);
+		writer.write(content);
 		writer.close();
 	}
 
@@ -314,109 +315,11 @@ public class ATLVMCompiler implements CompilationProvider {
 		return null;
 	}
 
-	protected String getPackageName(URI abstractSyntaxTreeURI,
-			URI sourceFolderURI) {
-		URI base = abstractSyntaxTreeURI.trimSegments(1).appendSegment("");
-		URI relativeBase = base.deresolve(sourceFolderURI);
-		String packageName = relativeBase.toFileString().replace(
-				File.separator, ".");
-		return packageName;
-	}
-
 	protected String getClassName(Resource abstractSyntaxTreeResource) {
 		RelationalTransformation transformation = getTransformation(abstractSyntaxTreeResource);
 		String unformatedName = transformation.getName();
 		return unformatedName.substring(0, 1).toUpperCase()
 				+ unformatedName.substring(1);
-	}
-
-	protected String getASMFileName(URI abstractSyntaxTreeURI, String direction) {
-		URI fileURI = abstractSyntaxTreeURI.trimFileExtension()
-				.appendFileExtension(direction).appendFileExtension("asm");
-		return fileURI.lastSegment();
-	}
-
-	protected String createJavaLoaderSource(
-			Resource abstractSyntaxTreeResource, URI sourceFolderURI) {
-		String packageName = getPackageName(
-				abstractSyntaxTreeResource.getURI(), sourceFolderURI);
-		String className = getClassName(abstractSyntaxTreeResource);
-		RelationalTransformation transformation = getTransformation(abstractSyntaxTreeResource);
-
-		StringBuffer source = new StringBuffer();
-		if (packageName.length() > 0) {
-			source.append("package ").append(packageName).append("\n");
-			source.append("\n");
-		}
-		source.append("import java.io.File;\n"); //$NON-NLS-1$
-		source.append("import java.util.List;\n"); //$NON-NLS-1$
-		source
-				.append("import org.eclipse.qvt.declarative.execution.ExecutionContext;\n"); //$NON-NLS-1$
-		source
-				.append("import org.eclipse.qvt.declarative.execution.ExecutionProvider;\n"); //$NON-NLS-1$
-		source
-				.append("import org.eclipse.qvt.declarative.execution.ExecutionService;\n"); //$NON-NLS-1$
-		source
-				.append("org.eclipse.qvt.declarative.relations.atlvm.ATLVMExecutor;\n"); //$NON-NLS-1$
-		source.append("\n"); //$NON-NLS-1$
-		source.append(String.format("public class %1$s {\n", className)); //$NON-NLS-1$
-		source.append("\n"); //$NON-NLS-1$
-		for (TypedModel typedModel : transformation.getModelParameter()) {
-			source
-					.append(String
-							.format(
-									"\tprotected static final File %1$sDirectionASMFile = new File(%2$s.class.getResource(\"%3$s\").getFile());\n", //$NON-NLS-1$
-									typedModel.getName(),
-									getClassName(abstractSyntaxTreeResource),
-									getASMFileName(abstractSyntaxTreeResource
-											.getURI(), typedModel.getName())));
-			source.append("\n"); //$NON-NLS-1$
-		}
-		source.append("\tprotected enum Direction {"); //$NON-NLS-1$
-		for (Iterator<TypedModel> iterator = transformation.getModelParameter()
-				.iterator(); iterator.hasNext();) {
-			source.append(iterator.next().getName());
-			if (iterator.hasNext()) {
-				source.append(", ");
-			}
-		}
-		source.append("};\n");
-		source.append("\n");
-		source
-				.append("\tpublic static List<?> execute (ExecutionContext parameters) {\n"); //$NON-NLS-1$
-		source
-				.append("\t\tswitch (Direction.valueOf(parameters.getDirectionModel().getName())){\n"); //$NON-NLS-1$
-		for (TypedModel typedModel : transformation.getModelParameter()) {
-			source
-					.append(String
-							.format(
-									"\t\t\tcase %1$s : return ExecutionService.getInstance().execute(%1$sDirectionASMFile, parameters);\n", //$NON-NLS-1$
-									typedModel.getName()));
-		}
-		source.append("\t\t}\n"); //$NON-NLS-1$
-		source.append("\t\treturn null;\n"); //$NON-NLS-1$
-		source.append("\t}\n"); //$NON-NLS-1$
-		source.append("\n");
-		source
-				.append("\tpublic static List<?> executeByATLVM (ExecutionContext parameters) {\n"); //$NON-NLS-1$
-		source.append("\t\tExecutionProvider provider = new ATLVMExecutor();");
-		source
-				.append("\t\tswitch (Direction.valueOf(parameters.getDirectionModel().getName())){\n"); //$NON-NLS-1$
-		for (TypedModel typedModel : transformation.getModelParameter()) {
-			source
-					.append(String
-							.format(
-									"\t\t\tcase %1$s : return provider.execute(%1$sDirectionASMFile, parameters);\n", //$NON-NLS-1$
-									typedModel.getName()));
-		}
-		source.append("\t\t}\n"); //$NON-NLS-1$
-		source.append("\t\treturn null;\n"); //$NON-NLS-1$
-		source.append("\t}\n"); //$NON-NLS-1$
-		source.append("\n");
-
-		source.append("}\n"); //$NON-NLS-1$
-
-		return source.toString();
 	}
 
 	/*
