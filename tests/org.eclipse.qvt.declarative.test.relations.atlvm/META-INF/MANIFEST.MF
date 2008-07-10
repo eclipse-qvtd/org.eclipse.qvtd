@@ -1,17 +1,14 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ATLVM Relations Implementation Test Plug-in
-Bundle-SymbolicName: org.eclipse.qvt.declarative.test.relations.atlvm
+Bundle-SymbolicName: org.eclipse.qvt.declarative.test.relations.atlvm;singleton:=true
 Bundle-Version: 0.7.0
 Bundle-Activator: org.eclipse.qvt.declarative.test.relations.atlvm.Activator
 Bundle-Vendor: %pluginProvider
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.qvt.declarative.relations.atlvm;bundle-version="0.7.0",
  org.junit4,
- org.eclipse.emf.ecore;bundle-version="2.4.0",
  org.eclipse.core.resources;bundle-version="3.4.0",
- org.eclipse.m2m.atl.drivers.emf4atl;bundle-version="2.0.0",
- org.eclipse.m2m.atl.engine.vm;bundle-version="2.0.0",
  org.eclipse.qvt.declarative.ecore.qvtrelation;bundle-version="0.7.0",
  org.eclipse.qvt.declarative.execution;bundle-version="0.7.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

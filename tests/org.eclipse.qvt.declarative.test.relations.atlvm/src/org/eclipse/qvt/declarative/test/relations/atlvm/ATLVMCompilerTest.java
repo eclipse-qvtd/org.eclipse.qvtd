@@ -1,11 +1,6 @@
 package org.eclipse.qvt.declarative.test.relations.atlvm;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +8,6 @@ import java.util.Properties;
 
 import junit.framework.Assert;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -33,104 +21,40 @@ import org.junit.Test;
 
 public class ATLVMCompilerTest extends ATLVMCompiler {
 
-	protected static IProject testProject;
-	protected static IFolder sourceFolder;
-	protected static IFolder buildFolder;
-	protected static IFile transformationFile;
-	protected static IFile umlModelFile;
-	protected static IFile rdbmsModelFile;
+	protected static File sourceFolder;
+	protected static File binFolder;
+	protected static File transformationFile;
+
 	protected static ResourceSet testResourceSet;
-	protected static Resource workspaceAbstractSyntaxTree;
-
-	protected static Resource importEcoreFileToWorkspace(String pluginPath,
-			IFile workspaceFile, ResourceSet resourceSet) throws IOException,
-			CoreException {
-		File file;
-		URL astURL = FileLocator.find(Activator.getDefault().getBundle(),
-				new Path(pluginPath), Collections.EMPTY_MAP);
-		if (!workspaceFile.exists()) {
-			file = workspaceFile.getLocation().toFile();
-			file.createNewFile();
-			workspaceFile.create(new FileInputStream(file), true, null);
-		}
-		workspaceFile.setContents(astURL.openStream(), false, false, null);
-		return resourceSet.createResource(URI.createURI(workspaceFile
-				.getLocationURI().toURL().toString()));
-	}
-
-	protected Resource createResource(ResourceSet resourceSet, String pluginPath)
-			throws URISyntaxException {
-		URL astURL = FileLocator.find(Activator.getDefault().getBundle(),
-				new Path(pluginPath), Collections.EMPTY_MAP);
-		return resourceSet.createResource(URI.createURI(astURL.toURI()
-				.toString()));
-	}
+	protected static Resource transformationResource;
 
 	@BeforeClass
 	public static void setUpBeforeClass() {
 		try {
-			testProject = ResourcesPlugin.getWorkspace().getRoot().getProject(
-					"test");
-			if (!testProject.exists()) {
-				testProject.create(null);
-			}
-			testProject.open(null);
-			sourceFolder = testProject.getFolder("src");
-			if (!sourceFolder.exists()) {
-				sourceFolder.create(true, true, null);
-			}
-			transformationFile = sourceFolder.getFile("transfo.xmi");
-			umlModelFile = sourceFolder.getFile("SimpleUml.ecore");
-			rdbmsModelFile = sourceFolder.getFile("SimpleRdbms.ecore");
-
-			buildFolder = testProject.getFolder("build");
-			if (!buildFolder.exists()) {
-				buildFolder.create(true, true, null);
-			}
 			testResourceSet = new ResourceSetImpl();
-
-			workspaceAbstractSyntaxTree = importEcoreFileToWorkspace(
-					"/resources/SimpleUMLtoRDBMS.eqvtrelation",
-					transformationFile, testResourceSet);
-			importEcoreFileToWorkspace("/resources/SimpleUml.ecore",
-					umlModelFile, testResourceSet);
-			importEcoreFileToWorkspace("/resources/SimpleRdbms.ecore",
-					rdbmsModelFile, testResourceSet);
-
-			workspaceAbstractSyntaxTree.load(Collections.EMPTY_MAP);
+			ProjectInitializer.createProject();
+			ProjectInitializer.addSources(testResourceSet);
+			transformationResource = ProjectInitializer
+					.getTransformationResource();
+			sourceFolder = ProjectInitializer.getSourceFolder();
+			binFolder = ProjectInitializer.getBinFolder();
+			transformationFile = ProjectInitializer.getTransformationFile();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Test
-	public void testGetPrefixURI() {
-		Assert.assertTrue(getPrefixURI(sourceFolder).isPrefix());
-		Assert.assertTrue(getPrefixURI(buildFolder).isPrefix());
-	}
-
-	@Test
-	public void testGetDefaultExecutablePath() {
-		String actual = getDefaultExecutablePath(workspaceAbstractSyntaxTree,
-				"rdbms", sourceFolder, buildFolder);
-		String expected = ResourcesPlugin.getWorkspace().getRoot()
-				.getLocation().append(new Path("test/build/transfo.rdbms.asm"))
-				.toOSString();
-		Assert.assertEquals(expected, actual);
-	}
-
-	@Test
 	public void testCreateProblemModel() throws Exception {
-		Assert
-				.assertNotNull(createProblemModelFor(workspaceAbstractSyntaxTree));
+		Assert.assertNotNull(createProblemModelFor(transformationResource));
 	}
 
 	@Test
 	public void testCreateCompilationsProperties() {
 		Map<String, String> parameters = new HashMap<String, String>();
-		Properties result = createCompilationsProperties(
-				workspaceAbstractSyntaxTree, parameters, "", sourceFolder,
-				buildFolder);
+		URI binFolderURI = URI.createFileURI(binFolder.getAbsolutePath());
+		Properties result = createCompilationsProperties(transformationResource
+				.getURI(), parameters, "", binFolderURI);
 		Assert.assertNotNull(result);
 		Assert.assertTrue(result.size() > 0);
 	}
@@ -141,27 +65,27 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 		Map<String, String> parameters = new HashMap<String, String>();
 
 		try {
-			compile("", parameters, sourceFolder, buildFolder);
+			compile("", parameters, sourceFolder, binFolder);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 		}
 		try {
-			compile(workspaceAbstractSyntaxTree, parameters, sourceFolder,
-					buildFolder);
+			compile(transformationResource, parameters, sourceFolder, binFolder);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 		}
 		parameters.put(ATLVMCompiler.DIRECTION_PARAMETER_NAME, "rdbms");
-		List<IFile> actual = compile(workspaceAbstractSyntaxTree, parameters,
-				sourceFolder, buildFolder);
-		Assert.assertTrue(actual.get(0) instanceof IFile);
+		List<File> actual = compile(transformationFile, parameters,
+				sourceFolder, binFolder);
+		Assert.assertFalse(actual.isEmpty());
+		Assert.assertTrue(actual.get(0) instanceof File);
 	}
 
 	@Test
 	public void testProvides() {
 		Map<String, String> parameters = new HashMap<String, String>();
-		Operation operation = new CompileOperation(workspaceAbstractSyntaxTree,
-				parameters, sourceFolder, buildFolder);
+		Operation operation = new CompileOperation(transformationFile,
+				parameters, sourceFolder, binFolder);
 		Assert.assertFalse(provides(operation));
 		parameters.put(ATLVMCompiler.DIRECTION_PARAMETER_NAME, "toto");
 		Assert.assertFalse(provides(operation));
