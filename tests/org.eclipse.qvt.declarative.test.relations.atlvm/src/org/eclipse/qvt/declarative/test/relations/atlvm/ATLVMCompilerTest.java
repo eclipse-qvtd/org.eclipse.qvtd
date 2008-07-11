@@ -84,12 +84,11 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 	@Test
 	public void testProvides() {
 		Map<String, String> parameters = new HashMap<String, String>();
-		Operation operation = new CompileOperation(transformationFile,
+		Operation operation = new CompileOperation("",
 				parameters, sourceFolder, binFolder);
 		Assert.assertFalse(provides(operation));
-		parameters.put(ATLVMCompiler.DIRECTION_PARAMETER_NAME, "toto");
-		Assert.assertFalse(provides(operation));
-		parameters.put(ATLVMCompiler.DIRECTION_PARAMETER_NAME, "rdbms");
+		operation = new CompileOperation(transformationFile,
+				parameters, sourceFolder, binFolder);
 		Assert.assertTrue(provides(operation));
 	}
 
