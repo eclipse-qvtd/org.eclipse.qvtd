@@ -210,6 +210,23 @@ public class ATLVMCompiler implements CompilationProvider {
 		return effectiveParameters;
 	}
 
+	protected URI[] getSplittedSourceURI(List<File> sourceFolders,
+			File sourceFile) {
+		URI sourceFileURI = URI.createFileURI(sourceFile.getAbsolutePath());
+		URI currentFolderURI = URI.createURI("./");
+		URI relativeURI = null;
+		for (File folder : sourceFolders) {
+			URI folderURI = URI.createFileURI(folder.getAbsolutePath())
+					.appendSegment("");
+			relativeURI = sourceFileURI.replacePrefix(folderURI,
+					currentFolderURI);
+			if (relativeURI != null) {
+				return new URI[] { folderURI, relativeURI };
+			}
+		}
+		return new URI[] { null, null };
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -219,8 +236,8 @@ public class ATLVMCompiler implements CompilationProvider {
 	 * org.eclipse.core.resources.IFolder)
 	 */
 	public List<File> compile(Object abstractSyntaxTree,
-			Map<String, String> parameters, File sourceFolder, File binFolder)
-			throws DeclarativeQVTCompilationException {
+			Map<String, String> parameters, List<File> sourceFolders,
+			File binFolder) throws DeclarativeQVTCompilationException {
 		if (!(abstractSyntaxTree instanceof File)) {
 			throw new IllegalArgumentException(
 					"Abstract Syntax is not a file: "
@@ -228,16 +245,17 @@ public class ATLVMCompiler implements CompilationProvider {
 		}
 
 		File abstractSyntaxTreeFile = (File) abstractSyntaxTree;
-		URI sourceFolderURI = URI.createFileURI(sourceFolder.getAbsolutePath())
-				.appendSegment("");
-		URI binFolderURI = URI.createFileURI(binFolder.getAbsolutePath())
-				.appendSegment("");
-		URI abstractSyntaxTreeURI = URI.createFileURI(abstractSyntaxTreeFile
-				.getAbsolutePath());
-		URI relativeAbstractSyntaxTreeURI = abstractSyntaxTreeURI
-				.replacePrefix(sourceFolderURI, URI.createURI("./"));
+		URI[] splittedSourceURI = getSplittedSourceURI(sourceFolders,
+				abstractSyntaxTreeFile);
+		URI sourceFolderURI = splittedSourceURI[0];
+		URI relativeAbstractSyntaxTreeURI = splittedSourceURI[1];
 
-		if (relativeAbstractSyntaxTreeURI != null) {
+		if (sourceFolderURI != null && relativeAbstractSyntaxTreeURI != null) {
+
+			URI binFolderURI = URI.createFileURI(binFolder.getAbsolutePath())
+					.appendSegment("");
+			URI abstractSyntaxTreeURI = URI
+					.createFileURI(abstractSyntaxTreeFile.getAbsolutePath());
 
 			ResourceSet resourceSet = new ResourceSetImpl();
 			Resource abstractSyntaxTreeResource = resourceSet
@@ -351,7 +369,7 @@ public class ATLVMCompiler implements CompilationProvider {
 			CompileOperation compileOperation = (CompileOperation) operation;
 			Object source = compileOperation.getSource();
 			if (source instanceof File
-					&& compileOperation.getSourceFolder() != null
+					&& compileOperation.getSourceFolders() != null
 					&& compileOperation.getBinFolder() != null) {
 				File sourceFile = (File) source;
 				boolean canHandleSource = sourceFile.canRead()
