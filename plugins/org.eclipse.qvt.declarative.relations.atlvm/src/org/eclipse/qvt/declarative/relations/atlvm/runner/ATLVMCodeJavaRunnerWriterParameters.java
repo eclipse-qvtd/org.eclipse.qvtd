@@ -34,7 +34,7 @@ public class ATLVMCodeJavaRunnerWriterParameters {
 	}
 	
 	public String getBasePackage() {
-		URI base = transformationURI.trimSegments(1);
+		URI base = transformationURI.trimSegments(1).appendSegment("");
 		URI relativeBase = base.deresolve(sourceFolderURI);
 		String packageName = relativeBase.toFileString().replace(
 				File.separator, ".");
