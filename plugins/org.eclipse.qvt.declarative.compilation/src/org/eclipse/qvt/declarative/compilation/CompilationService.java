@@ -8,6 +8,13 @@ import org.eclipse.qvt.declarative.common.framework.service.ExecutionStrategy;
 import org.eclipse.qvt.declarative.common.framework.service.Operation;
 import org.eclipse.qvt.declarative.common.framework.service.Service;
 
+/**
+ * A service to gather the providers able to compile transformation from a its
+ * abstract syntax tree.
+ * 
+ * @author Quentin Glineur
+ * 
+ */
 public class CompilationService extends Service implements CompilationProvider {
 
 	protected static final CompilationService INSTANCE = new CompilationService();
@@ -20,16 +27,21 @@ public class CompilationService extends Service implements CompilationProvider {
 		super();
 	}
 
+	/**
+	 * Get the compilation service singleton.
+	 * 
+	 * @return the compilation service instance
+	 */
 	public static CompilationService getInstance() {
 		return INSTANCE;
 	}
 
 	@Override
 	public List<File> compile(Object abstractSyntaxTree,
-			Map<String, String> parameters, File sourceFolder, File binFolder)
-			throws Exception {
+			Map<String, String> parameters, List<File> sourceFolders,
+			File binFolder) throws Exception {
 		return execute(new CompileOperation(abstractSyntaxTree, parameters,
-				sourceFolder, binFolder));
+				sourceFolders, binFolder));
 	}
 
 	@SuppressWarnings("unchecked")

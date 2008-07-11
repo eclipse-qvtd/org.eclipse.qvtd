@@ -25,9 +25,9 @@ public interface CompilationProvider extends Provider {
 	 * @param parameters
 	 *            A map associating a property name to a string value so that
 	 *            the compilation can be parametrized.
-	 * @param sourceFolder
-	 *            The folder considered as the repository of textual
-	 *            transformation (handy for base namespace).
+	 * @param sourceFolders
+	 *            The folders considered as the repository of textual
+	 *            transformations (handy for base namespace).
 	 * @param binFolder
 	 *            The folder considered as the repository of executable
 	 *            transformation (where to write the compiled file).
@@ -35,7 +35,7 @@ public interface CompilationProvider extends Provider {
 	 * @throws Exception
 	 */
 	public List<File> compile(Object abstractSyntaxTree,
-			Map<String, String> parameters, File sourceFolder, File binFolder)
-			throws Exception;
+			Map<String, String> parameters, List<File> sourceFolders,
+			File binFolder) throws Exception;
 
 }
