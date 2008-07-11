@@ -36,6 +36,7 @@ import org.eclipse.qvt.declarative.compilation.CompilationProvider;
 import org.eclipse.qvt.declarative.compilation.CompileOperation;
 import org.eclipse.qvt.declarative.compilation.DeclarativeQVTCompilationException;
 import org.eclipse.qvt.declarative.compilation.QVTRelationsCompilationException;
+import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.relations.atlvm.runner.ATLVMCodeJavaRunnerWriter;
 import org.eclipse.qvt.declarative.relations.atlvm.runner.ATLVMCodeJavaRunnerWriterParameters;
@@ -94,6 +95,10 @@ public class ATLVMCompiler implements CompilationProvider {
 		DEFAULT_COMPILATION_PARAMETERS = loadDefaultCompilationProperties();
 	}
 
+	/**
+	 * Construct a new compiler producing ATLVM byte code from a QVT Relations
+	 * source
+	 */
 	public ATLVMCompiler() {
 
 	}
@@ -121,9 +126,9 @@ public class ATLVMCompiler implements CompilationProvider {
 	 * configuration file
 	 */
 	private static Debugger createDefaultDebugger() {
-//		Bundle bundle = Activator.getDefault().getBundle();
 		Properties debuggerProperties = new Properties();
-		URL debuggerPropertiesURL = ATLVMCompiler.class.getResource(DEFAULT_DEBUGGER_PROPERTIES_LOCATION);
+		URL debuggerPropertiesURL = ATLVMCompiler.class
+				.getResource(DEFAULT_DEBUGGER_PROPERTIES_LOCATION);
 		try {
 			debuggerProperties.loadFromXML(debuggerPropertiesURL.openStream());
 		} catch (InvalidPropertiesFormatException e) {
@@ -221,19 +226,14 @@ public class ATLVMCompiler implements CompilationProvider {
 					"Abstract Syntax is not a file: "
 							+ abstractSyntaxTree.toString());
 		}
-		if (!parameters.containsKey(DIRECTION_PARAMETER_NAME)) {
-			throw new IllegalArgumentException(
-					"No direction given in parameters: "
-							+ parameters.toString());
-		}
 
 		File abstractSyntaxTreeFile = (File) abstractSyntaxTree;
-		URI sourceFolderURI = URI.createFileURI(sourceFolder.getPath())
+		URI sourceFolderURI = URI.createFileURI(sourceFolder.getAbsolutePath())
 				.appendSegment("");
-		URI binFolderURI = URI.createFileURI(binFolder.getPath())
+		URI binFolderURI = URI.createFileURI(binFolder.getAbsolutePath())
 				.appendSegment("");
 		URI abstractSyntaxTreeURI = URI.createFileURI(abstractSyntaxTreeFile
-				.getPath());
+				.getAbsolutePath());
 		URI relativeAbstractSyntaxTreeURI = abstractSyntaxTreeURI
 				.replacePrefix(sourceFolderURI, URI.createURI("./"));
 
@@ -248,28 +248,44 @@ public class ATLVMCompiler implements CompilationProvider {
 						.getASMEMFModelFrom(abstractSyntaxTreeResource,
 								TRANSFORMATION_MODEL_NAME);
 
-				String directionDomainName = parameters
-						.remove(DIRECTION_PARAMETER_NAME);
+				List<String> directions = getDirections(abstractSyntaxTreeResource);
 
-				ASM directionASM = ASMUtils
-						.createDirectionLibrary(directionDomainName);
+				List<File> result = new ArrayList<File>(directions.size());
+				for (String directionDomainName : directions) {
+					ASM directionASM = ASMUtils
+							.createDirectionLibrary(directionDomainName);
+					ASMEMFModel myProblems = createProblemModelFor(abstractSyntaxTreeResource);
+					Properties effectiveParameters = createCompilationsProperties(
+							relativeAbstractSyntaxTreeURI, parameters,
+							directionDomainName, binFolderURI);
 
-				ASMEMFModel myProblems = createProblemModelFor(abstractSyntaxTreeResource);
-
-				Properties effectiveParameters = createCompilationsProperties(
-						relativeAbstractSyntaxTreeURI, parameters,
-						directionDomainName, binFolderURI);
-
-				File resultFile = compile(qvtrTransformation, directionASM,
-						myProblems, DEFAULT_DEBUGGER, effectiveParameters);
-
-				handleProblems(myProblems);
-
+					File resultFile = compile(qvtrTransformation, directionASM,
+							myProblems, DEFAULT_DEBUGGER, effectiveParameters);
+					result.add(resultFile);
+					handleProblems(myProblems);
+				}
 				createJavaLauncher(abstractSyntaxTreeResource, sourceFolderURI);
 
-				return Collections.singletonList(resultFile);
+				return result;
 			} catch (Exception e) {
 				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	protected List<String> getDirections(Resource resource) {
+		List<String> result = new ArrayList<String>();
+		List<EObject> contents = resource.getContents();
+		if (!contents.isEmpty()) {
+			if (contents.get(0) instanceof RelationalTransformation) {
+				RelationalTransformation relationalTransformation = (RelationalTransformation) contents
+						.get(0);
+				for (TypedModel typedModel : relationalTransformation
+						.getModelParameter()) {
+					result.add(typedModel.getName());
+				}
+				return result;
 			}
 		}
 		return null;
@@ -300,7 +316,8 @@ public class ATLVMCompiler implements CompilationProvider {
 		javaLoaderSourceFile.createNewFile();
 		BufferedWriter writer = new BufferedWriter(new FileWriter(
 				javaLoaderSourceFile));
-		ATLVMCodeJavaRunnerWriterParameters writerParameters = new ATLVMCodeJavaRunnerWriterParameters(abstractSyntaxTreeResource, sourceFolderURI);
+		ATLVMCodeJavaRunnerWriterParameters writerParameters = new ATLVMCodeJavaRunnerWriterParameters(
+				abstractSyntaxTreeResource, sourceFolderURI);
 		ATLVMCodeJavaRunnerWriter javaRunnerWriter = new ATLVMCodeJavaRunnerWriter();
 		String content = javaRunnerWriter.generate(writerParameters);
 		writer.write(content);
@@ -333,38 +350,26 @@ public class ATLVMCompiler implements CompilationProvider {
 		if (operation instanceof CompileOperation) {
 			CompileOperation compileOperation = (CompileOperation) operation;
 			Object source = compileOperation.getSource();
-			Map<String, String> parameters = compileOperation.getParameters();
-			if (source instanceof File) {
+			if (source instanceof File
+					&& compileOperation.getSourceFolder() != null
+					&& compileOperation.getBinFolder() != null) {
 				File sourceFile = (File) source;
 				boolean canHandleSource = sourceFile.canRead()
 						&& sourceFile.isFile();
-				boolean canHandleDirection = parameters != null;
-
-				if (canHandleSource && canHandleDirection) {
+				if (canHandleSource) {
 					URI sourceURI = URI.createFileURI(sourceFile.getPath());
 					ResourceSet resourceSet = new ResourceSetImpl();
 					Resource resource = resourceSet
 							.getResource(sourceURI, true);
 					if (!resource.getContents().isEmpty()) {
-						EObject object = resource.getContents().get(0);
-						if (object instanceof RelationalTransformation) {
-							RelationalTransformation relationalTransformation = (RelationalTransformation) object;
-							String direction = compileOperation.getParameters()
-									.get(DIRECTION_PARAMETER_NAME);
-							canHandleDirection = relationalTransformation
-									.getModelParameter(direction) != null;
-						} else { // base object is not a relational
-							// transformation
-							canHandleSource = false;
-						}
+						EObject eObject = resource.getContents().get(0);
+						canHandleSource = eObject instanceof RelationalTransformation;
 					} else { // resource is empty
 						canHandleSource = false;
 					}
 					resource.unload();
 				}
-				return canHandleSource && canHandleDirection;
-			} else {
-				return false;
+				return canHandleSource;
 			}
 		}
 		return false;
