@@ -18,7 +18,7 @@ public interface CompilationProvider extends Provider {
 
 	/**
 	 * Create and return a list of executable files from the abstract syntax
-	 * tree originated from syntax analysis.
+	 * tree originating from a syntax analysis.
 	 * 
 	 * @param abstractSyntaxTree
 	 *            A representation of the abstract syntax tree.
