@@ -1,6 +1,7 @@
 package org.eclipse.qvt.declarative.test.relations.atlvm;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ import org.junit.Test;
 
 public class ATLVMCompilerTest extends ATLVMCompiler {
 
-	protected static File sourceFolder;
+	protected static List<File> sourceFolders;
 	protected static File binFolder;
 	protected static File transformationFile;
 
@@ -36,7 +37,7 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 			ProjectInitializer.addSources(testResourceSet);
 			transformationResource = ProjectInitializer
 					.getTransformationResource();
-			sourceFolder = ProjectInitializer.getSourceFolder();
+			sourceFolders = Collections.singletonList(ProjectInitializer.getSourceFolder());
 			binFolder = ProjectInitializer.getBinFolder();
 			transformationFile = ProjectInitializer.getTransformationFile();
 		} catch (Exception e) {
@@ -65,18 +66,18 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 		Map<String, String> parameters = new HashMap<String, String>();
 
 		try {
-			compile("", parameters, sourceFolder, binFolder);
+			compile("", parameters, sourceFolders, binFolder);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 		}
 		try {
-			compile(transformationResource, parameters, sourceFolder, binFolder);
+			compile(transformationResource, parameters, sourceFolders, binFolder);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 		}
 		parameters.put(ATLVMCompiler.DIRECTION_PARAMETER_NAME, "rdbms");
 		List<File> actual = compile(transformationFile, parameters,
-				sourceFolder, binFolder);
+				sourceFolders, binFolder);
 		Assert.assertFalse(actual.isEmpty());
 		Assert.assertTrue(actual.get(0) instanceof File);
 	}
@@ -85,10 +86,10 @@ public class ATLVMCompilerTest extends ATLVMCompiler {
 	public void testProvides() {
 		Map<String, String> parameters = new HashMap<String, String>();
 		Operation operation = new CompileOperation("",
-				parameters, sourceFolder, binFolder);
+				parameters, sourceFolders, binFolder);
 		Assert.assertFalse(provides(operation));
 		operation = new CompileOperation(transformationFile,
-				parameters, sourceFolder, binFolder);
+				parameters, sourceFolders, binFolder);
 		Assert.assertTrue(provides(operation));
 	}
 
