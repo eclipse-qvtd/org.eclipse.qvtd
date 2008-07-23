@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="(QVT Declarative) Rose UML Importer Guide" topic="html/index.html">
+   <topic label="Administrivia"> 
+		<topic label="Changes" href="html/changes.html"/> 
+		<topic label="Bugs" href="html/bugs.html"/> 
+		<topic label="Installation" href="html/installation.html"/> 
+		<topic label="License" href="html/epl-v10.html"/> 
+	</topic>
+</toc>

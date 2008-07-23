@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>QVT Rose UML Importer</title>
+</head>
+
+<body>
+<h1>QVT Rose UML Importer</h1>
+<p>
+The QVT Rose UML Importer supports conversion of a UML model defined by class diagrams
+in an IBM Rational Rose MDL file to Ecore or EMOF files suitable for use with
+EMF and other modeling tools.
+</p>
+<p>
+Subtle but critical differences between the Rose UML Importer and the Rose Importer that
+forms part of EMF are discussed below.
+</p>
+<h3>Operation</h3>
+<p>
+The QVT Rose UML Importer supports two interactive modes of operation.
+</p>
+<p>
+The traditional Import model behavior is available, when loading a genmodel as
+part of EMF model or project creation, or when reloading a genmodel.
+</p>
+<p>
+An alternative conversion action is available for MDL files.
+</p>
+<p>
+The traditional import is also available as a standalone program or Ant task for
+those skilled in resolving Eclipse class paths (see <a href="readme.html">readme.html</a>).
+</p>
+
+<h2> Differences between QVT Rose UML Importer and EMF Rose Importer</h2>
+
+<h3>EReference.ordered</h3>
+<p>
+The standard EMF Rose Importer does not define EReference.ordered so it takes the Ecore default
+which is ordered.
+</p>
+<p>
+The QVT RoseUML Importer sets EReference.ordered according to the presence of the ordered
+keyword as one of the constraints on an Association. For unit upper-bound features ordered
+is enforced.
+</p>
+<p>
+[This is arguably a bug fix, however the Rose Importer behavior is well-established.
+Fixing this bug would have widespread albeit probably trivial impact on existing clients
+and so failure to observe the ordered constraint is a feature not a bug.]
+</p>
+
+<h3>Navigability</h3>
+<p>
+The standard EMF Rose Importer generates a pair of mutually opposite EReferences for bidirectional
+associations and a single EReference for unidirectional associations. This is appropriate
+for code generation style use of the subsequent model, but, because it discards the role
+name and multiplicity of the opposite end, it is inadequate for meta-modelling purposes.
+</p>
+<p>
+The QVT Rose UML Importer, when invoked as a conversion action, provides the missing unnavigable
+role name as an EMOF comment or as an Ecore EAnnotation in accoradnce with the parctice
+defined by <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=229998">Bugzilla 229998</a>.
+</p>
+<h3>Omitted EReference.name</h3>
+<p>
+The standard EMF Rose Importer generates names for missing roles from the associated type.
+</p>
+<p>
+The QVT Rose UML Importer does the same but converts the first letter to lowercase
+as required by OCL 06-05-01 7.5.3 Missing AssocoiationEnd names.
+</p>
+
+<h2>Operation</h2>
+
+<h3>genmodel load/reload</h2>
+<p>
+The traditional Import model behavior is available when creating a genmodel as
+part of a new
+EMF model (e.g. <tt>New->Other...->EMF Modeling Framework->EMF Model</tt>)
+or project
+(e.g. <tt>New->Project...->EMF Modeling Framework->EMF Model</tt>),
+and when reloading the genmodel (<tt>Reload...</tt> from the *.genmodel context-sensitive menu).
+</p>
+<p align=center><img src="SelectAModelImporter.png" border="0"/>
+<p>
+The Rose UML behavior differs by observing ordered constriants.
+</p>
+
+<h3>MDL conversion</h2>
+
+The alternative conversion action is available from the *.mdl context-sensitive menu.
+<p align=center><img src="ConversionAction.png" border="0"/>
+</p>
+<p>
+The action initiates loading of the <tt><i>model</i>.mdl</tt> and generation of:
+<li>Ecore files (with <tt>*.ecore</tt> extension in an <tt>ecore</tt> folder)</li>
+<li>EMOF files (with <tt>*.xml</tt> extension in an <tt>emof</tt> folder)</li>
+</p>
+<p>Three distinct packaging options
+<li>one package per file (named <tt><i>package</i>.*</tt>)
+<li>all packages in one file (named <tt><i>model</i>.*</tt>)
+<li>all package contents in a file containing a flattened package (named <tt>Flat<i>model</i>.*</tt>)
+</p>
+<p>Three distinct unidirectional association representation options
+<li>semi-opposite with two EReferences but only one non-null eOpposite (named <tt>*.*</tt>)
+<li>navigability increased by using two EReferences with mutual eOpposites (named <tt>*.max.*</tt>)
+<li>elimination of non-navigable EReferences (named <tt>*.min.*</tt>)
+</p>
+<p>
+This facility was developed to support the OMG QVT 1.0 specification, for which
+EMOF is needed to support OMG standards and Ecore as a convenience for many users.
+</p>
+<p>
+The one file per package and all packages in one file formats provide alternatives
+for slightly defective tools that may have problems with multi-package meta-models.
+The flattened representation gives a further option for very defective tools.
+</p>
+<p>
+QVT requires that all associations are navigable in both directions for the purposes
+of transformation pattern matching. This conflicts with the conventional EMF usage
+in which non-navigable ends of associations have no corresponding EReference
+to define their roles and multiplicities. The three navigability representations
+provide the traditional minimal representation for code generation, and an exact
+representation for transformation pattern matching. Since the exact representation
+uses asymmetric opposites, it may cause trouble for some tools. A further option
+in which all associations are bidirectional is provided for these tools.
+</p>
+<p>
+The QVT models with enhanced navigability add additional EReferences to EMOF
+and EssentialOCL classes, and comply with the EMOF specification of a PrimitiveTypes
+package. The  <tt>http://schema.omg.org/spec/mof/2.0/emof.xml</tt> is used for a combined
+EMOF and PrimitiveTypes package. Therefore if the source UML model contains an EMOF
+and a PrimitiveTypes package, a further set of Ecore files are generated in the
+<tt>traditionalEcore</tt> folder. These files omit
+non-navigable EReferences and the PrimitiveTypes package whose contents
+are moved to the EMOF package. Additionally the namespace of the EMOF
+package is changed to <tt>http://schema.omg.org/spec/MOF/2.0/emof.xml</tt>.
+</p>
+
+</body>
+</html>

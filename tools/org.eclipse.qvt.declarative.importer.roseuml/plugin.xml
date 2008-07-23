@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+  <extension id="RoseUML2GenModel" point="org.eclipse.core.runtime.applications">
+    <application>
+      <run class="org.eclipse.qvt.declarative.importer.roseuml.RoseUMLImporterApplication" />
+    </application>
+  </extension>
+
+  <extension point="org.eclipse.emf.importer.modelImporterDescriptors">
+    <modelImporterDescriptor id="org.eclipse.qvt.declarative.importer.roseuml" name="%_UI_RoseUMLModelImporter_label" icon="icons/full/obj16/RoseModelFile.gif" extensions="mdl" description="%_UI_RoseUMLModelImporter_description" wizard="org.eclipse.qvt.declarative.importer.roseuml.ui.RoseUMLImporterWizard" />
+  </extension>
+
+  <extension point="org.eclipse.ant.core.extraClasspathEntries">
+    <extraClasspathEntry library="ant_tasks/importer.roseuml.tasks.jar" />
+  </extension>
+
+  <extension point="org.eclipse.ant.core.antTasks">
+    <antTask library="ant_tasks/importer.roseuml.tasks.jar" name="emf.RoseUML2Java" headless="true" class="org.eclipse.qvt.declarative.importer.roseuml.taskdefs.RoseUMLGeneratorTask" />
+  </extension>
+
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution id="org.eclipse.qvt.declarative.importer.roseuml.contribution1"
+            objectClass="org.eclipse.core.resources.IFile"
+             nameFilter="*.mdl" >
+         <menu id="org.eclipse.qvt.declarative.importer.roseuml.menu1"
+               label="Rose UML Tools"
+               path="additions">
+            <separator name="group1"/>
+         </menu>
+         <action id="org.eclipse.qvt.declarative.importer.roseuml.newAction"
+               label="MDL to Ecore and EMOF"
+               class="org.eclipse.qvt.declarative.importer.roseuml.actions.ConversionAction"
+               menubarPath="org.eclipse.qvt.declarative.importer.roseuml.menu1/group1"
+               enablesFor="1"/>
+      </objectContribution>
+   </extension>
+
+   <extension point="org.eclipse.help.toc">
+      <toc file="toc.xml" primary="true"/>
+   </extension>
+  
+</plugin>
