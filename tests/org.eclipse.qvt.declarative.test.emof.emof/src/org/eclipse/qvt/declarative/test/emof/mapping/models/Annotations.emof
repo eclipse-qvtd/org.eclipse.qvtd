@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emof:Package xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/mof/2.0/emof.xmi" xmi:id="p"
+    name="p" uri="http://p">
+  <ownedType xmi:type="emof:Class" xmi:id="p.A" name="A">
+    <ownedAttribute xmi:id="p.A.b" name="b" isOrdered="true" lower="0" type="p.B"
+        isComposite="true">
+      <ownedComment body="owner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations source="anotherSource">
+          <details key="yetAnotherKey" value="yetAnotherOwner"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="p.B" name="B">
+    <ownedComment body="This is a simple single element comment"/>
+    <ownedComment body="This is a multiple element comment"/>
+  </ownedType>
+  <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <nsPrefix>p</nsPrefix>
+  </xmi:Extension>
+</emof:Package>

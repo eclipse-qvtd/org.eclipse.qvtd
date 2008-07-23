@@ -1,0 +1,1010 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This EMOF generated from Ecore using EMF 2.3.0 and then manually repaired to address
+  the eTypeParamters and unsettable issues from Bugzilla 195736. -->
+<emof:Package xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="ecore"
+    name="ecore" uri="http://www.eclipse.org/emf/2002/Ecore">
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EAttribute" name="EAttribute" superClass="ecore.EStructuralFeature">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="ConsistentTransient"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <ownedAttribute xmi:id="ecore.EAttribute.iD" isOrdered="true" lower="0" name="iD">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EAttribute.eAttributeType" isOrdered="true" name="eAttributeType"
+        type="ecore.EDataType" isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EAnnotation" name="EAnnotation" superClass="ecore.EModelElement">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="WellFormedSourceURI"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <ownedAttribute xmi:id="ecore.EAnnotation.source" isOrdered="true" lower="0" name="source">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EAnnotation.details" isOrdered="true" lower="0" name="details" upper="*" type="ecore.EStringToStringMapEntry"
+        isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EAnnotation.eModelElement" isOrdered="true" lower="0" name="eModelElement"
+        type="ecore.EModelElement" opposite="ecore.EModelElement.eAnnotations">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EAnnotation.contents" isOrdered="true" lower="0" name="contents" upper="*"
+        type="ecore.EObject" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EAnnotation.references" isOrdered="true" lower="0" name="references" upper="*"
+        type="ecore.EObject"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EClass" name="EClass" superClass="ecore.EClassifier">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="InterfaceIsAbstract AtMostOneID UniqueFeatureNames UniqueOperationSignatures NoCircularSuperTypes WellFormedMapEntryClass ConsistentSuperTypes"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <ownedOperation xmi:id="ecore.EClass.isSuperTypeOf" isOrdered="true" lower="0" name="isSuperTypeOf">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+      <ownedParameter xmi:id="ecore.EClass.isSuperTypeOf.someClass" isOrdered="true" lower="0" name="someClass"
+          type="ecore.EClass"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EClass.getFeatureCount" isOrdered="true" lower="0" name="getFeatureCount">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Integer"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EClass.getEStructuralFeature" isOrdered="true" lower="0" name="getEStructuralFeature"
+        type="ecore.EStructuralFeature">
+      <ownedParameter xmi:id="ecore.EClass.getEStructuralFeature.featureID" isOrdered="true" lower="0" name="featureID">
+        <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EClass.getFeatureID" isOrdered="true" lower="0" name="getFeatureID">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Integer"/>
+      <ownedParameter xmi:id="ecore.EClass.getFeatureID.feature" isOrdered="true" lower="0" name="feature" type="ecore.EStructuralFeature"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EClass.getEStructuralFeature.1" isOrdered="true" lower="0" name="getEStructuralFeature"
+        type="ecore.EStructuralFeature">
+      <ownedParameter xmi:id="ecore.EClass.getEStructuralFeature.1.featureName" isOrdered="true" lower="0" name="featureName">
+        <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedAttribute xmi:id="ecore.EClass.abstract" isOrdered="true" lower="0" name="abstract">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClass.interface" isOrdered="true" lower="0" name="interface">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClass.eSuperTypes" isOrdered="true" lower="0" name="eSuperTypes" upper="*"
+        type="ecore.EClass">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="suppressedIsSetVisibility" value="true"/>
+          <details key="suppressedUnsetVisibility" value="true"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <unsettable>true</unsettable>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClass.eOperations" isOrdered="true" lower="0" name="eOperations" upper="*"
+        type="ecore.EOperation" isComposite="true" opposite="ecore.EOperation.eContainingClass">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClass.eAllAttributes" isOrdered="true" lower="0" name="eAllAttributes" upper="*"
+        type="ecore.EAttribute" isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClass.eAllReferences" isOrdered="true" lower="0" name="eAllReferences" upper="*"
+        type="ecore.EReference" isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClass.eReferences" isOrdered="true" lower="0" name="eReferences" upper="*"
+        type="ecore.EReference" isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClass.eAttributes" isOrdered="true" lower="0" name="eAttributes" upper="*"
+        type="ecore.EAttribute" isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClass.eAllContainments" isOrdered="true" lower="0" name="eAllContainments"
+        upper="*" type="ecore.EReference" isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClass.eAllOperations" isOrdered="true" lower="0" name="eAllOperations" upper="*"
+        type="ecore.EOperation" isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClass.eAllStructuralFeatures" isOrdered="true" lower="0" name="eAllStructuralFeatures"
+        upper="*" type="ecore.EStructuralFeature" isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClass.eAllSuperTypes" isOrdered="true" lower="0" name="eAllSuperTypes" upper="*"
+        type="ecore.EClass" isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClass.eIDAttribute" isOrdered="true" lower="0" name="eIDAttribute" type="ecore.EAttribute"
+        isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClass.eStructuralFeatures" isOrdered="true" lower="0" name="eStructuralFeatures"
+        upper="*" type="ecore.EStructuralFeature" isComposite="true" opposite="ecore.EStructuralFeature.eContainingClass">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClass.eGenericSuperTypes" isOrdered="true" lower="0" name="eGenericSuperTypes"
+        upper="*" type="ecore.EGenericType" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="suppressedIsSetVisibility" value="true"/>
+          <details key="suppressedUnsetVisibility" value="true"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <unsettable>true</unsettable>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClass.eAllGenericSuperTypes" isOrdered="true" lower="0" name="eAllGenericSuperTypes"
+        upper="*" type="ecore.EGenericType" isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EClassifier" name="EClassifier" isAbstract="true"
+      superClass="ecore.ENamedElement">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="WellFormedInstanceTypeName UniqueTypeParameterNames"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <ownedOperation xmi:id="ecore.EClassifier.isInstance" isOrdered="true" lower="0" name="isInstance">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+      <ownedParameter xmi:id="ecore.EClassifier.isInstance.object" isOrdered="true" lower="0" name="object" type="ecore.EJavaObject"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EClassifier.getClassifierID" isOrdered="true" lower="0" name="getClassifierID">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Integer"/>
+    </ownedOperation>
+    <ownedAttribute xmi:id="ecore.EClassifier.instanceClassName" isOrdered="true" lower="0" name="instanceClassName">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="suppressedIsSetVisibility" value="true"/>
+          <details key="suppressedUnsetVisibility" value="true"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <unsettable>true</unsettable>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClassifier.instanceClass" isOrdered="true" lower="0" name="instanceClass"
+        type="ecore.EJavaClass" isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eGenericType xmi:id="ecore.EClassifier.instanceClass.@eGenericType" eClassifier="ecore.EJavaClass">
+          <eTypeArguments xmi:id="ecore.EClassifier.instanceClass.@eGenericType.@eTypeArguments.0"/>
+        </eGenericType>
+      </xmi:Extension>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClassifier.defaultValue" isOrdered="true" lower="0" name="defaultValue" type="ecore.EJavaObject"
+        isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClassifier.instanceTypeName" isOrdered="true" lower="0" name="instanceTypeName">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="suppressedIsSetVisibility" value="true"/>
+          <details key="suppressedUnsetVisibility" value="true"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <unsettable>true</unsettable>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClassifier.ePackage" isOrdered="true" lower="0" name="ePackage" type="ecore.EPackage"
+        isReadOnly="true" opposite="ecore.EPackage.eClassifiers">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EClassifier.eTypeParameters" isOrdered="true" lower="0" name="eTypeParameters"
+        upper="*" type="ecore.ETypeParameter" isComposite="true"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EDataType" name="EDataType" superClass="ecore.EClassifier">
+    <ownedAttribute xmi:id="ecore.EDataType.serializable" isOrdered="true" lower="0" name="serializable" default="true">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EEnum" name="EEnum" superClass="ecore.EDataType">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="UniqueEnumeratorNames UniqueEnumeratorLiterals"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <ownedOperation xmi:id="ecore.EEnum.getEEnumLiteral" isOrdered="true" lower="0" name="getEEnumLiteral" type="ecore.EEnumLiteral">
+      <ownedParameter xmi:id="ecore.EEnum.getEEnumLiteral.name" isOrdered="true" lower="0" name="name">
+        <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EEnum.getEEnumLiteral.1" isOrdered="true" lower="0" name="getEEnumLiteral"
+        type="ecore.EEnumLiteral">
+      <ownedParameter xmi:id="ecore.EEnum.getEEnumLiteral.1.value" isOrdered="true" lower="0" name="value">
+        <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EEnum.getEEnumLiteralByLiteral" isOrdered="true" lower="0" name="getEEnumLiteralByLiteral"
+        type="ecore.EEnumLiteral">
+      <ownedParameter xmi:id="ecore.EEnum.getEEnumLiteralByLiteral.literal" isOrdered="true" lower="0" name="literal">
+        <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedAttribute xmi:id="ecore.EEnum.eLiterals" isOrdered="true" lower="0" name="eLiterals" upper="*" type="ecore.EEnumLiteral"
+        isComposite="true" opposite="ecore.EEnumLiteral.eEnum">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EEnumLiteral" name="EEnumLiteral"
+      superClass="ecore.ENamedElement">
+    <ownedAttribute xmi:id="ecore.EEnumLiteral.value" isOrdered="true" lower="0" name="value">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EEnumLiteral.instance" isOrdered="true" lower="0" name="instance" type="ecore.EEnumerator">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EEnumLiteral.literal" isOrdered="true" lower="0" name="literal">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EEnumLiteral.eEnum" isOrdered="true" lower="0" name="eEnum" type="ecore.EEnum"
+        isReadOnly="true" opposite="ecore.EEnum.eLiterals">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EFactory" name="EFactory" superClass="ecore.EModelElement">
+    <ownedOperation xmi:id="ecore.EFactory.create" isOrdered="true" lower="0" name="create" type="ecore.EObject">
+      <ownedParameter xmi:id="ecore.EFactory.create.eClass" isOrdered="true" lower="0" name="eClass" type="ecore.EClass"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EFactory.createFromString" isOrdered="true" lower="0" name="createFromString"
+        type="ecore.EJavaObject">
+      <ownedParameter xmi:id="ecore.EFactory.createFromString.eDataType" isOrdered="true" lower="0" name="eDataType"
+          type="ecore.EDataType"/>
+      <ownedParameter xmi:id="ecore.EFactory.createFromString.literalValue" isOrdered="true" lower="0" name="literalValue">
+        <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EFactory.convertToString" isOrdered="true" lower="0" name="convertToString">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+      <ownedParameter xmi:id="ecore.EFactory.convertToString.eDataType" isOrdered="true" lower="0" name="eDataType"
+          type="ecore.EDataType"/>
+      <ownedParameter xmi:id="ecore.EFactory.convertToString.instanceValue" isOrdered="true" lower="0" name="instanceValue"
+          type="ecore.EJavaObject"/>
+    </ownedOperation>
+    <ownedAttribute xmi:id="ecore.EFactory.ePackage" isOrdered="true" name="ePackage" type="ecore.EPackage"
+        opposite="ecore.EPackage.eFactoryInstance">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EModelElement" name="EModelElement"
+      isAbstract="true" superClass="ecore.EObject">
+    <ownedOperation xmi:id="ecore.EModelElement.getEAnnotation" isOrdered="true" lower="0" name="getEAnnotation"
+        type="ecore.EAnnotation">
+      <ownedParameter xmi:id="ecore.EModelElement.getEAnnotation.source" isOrdered="true" lower="0" name="source">
+        <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedAttribute xmi:id="ecore.EModelElement.eAnnotations" isOrdered="true" lower="0" name="eAnnotations"
+        upper="*" type="ecore.EAnnotation" isComposite="true" opposite="ecore.EAnnotation.eModelElement">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.ENamedElement" name="ENamedElement"
+      isAbstract="true" superClass="ecore.EModelElement">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="WellFormedName"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <ownedAttribute xmi:id="ecore.ENamedElement.name" isOrdered="true" lower="0" name="name">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EObject" name="EObject">
+    <ownedOperation xmi:id="ecore.EObject.eClass" isOrdered="true" lower="0" name="eClass" type="ecore.EClass"/>
+    <ownedOperation xmi:id="ecore.EObject.eIsProxy" isOrdered="true" lower="0" name="eIsProxy">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EObject.eResource" isOrdered="true" lower="0" name="eResource" type="ecore.EResource"/>
+    <ownedOperation xmi:id="ecore.EObject.eContainer" isOrdered="true" lower="0" name="eContainer" type="ecore.EObject"/>
+    <ownedOperation xmi:id="ecore.EObject.eContainingFeature" isOrdered="true" lower="0" name="eContainingFeature"
+        type="ecore.EStructuralFeature"/>
+    <ownedOperation xmi:id="ecore.EObject.eContainmentFeature" isOrdered="true" lower="0" name="eContainmentFeature"
+        type="ecore.EReference"/>
+    <ownedOperation xmi:id="ecore.EObject.eContents" isOrdered="true" lower="0" name="eContents" type="ecore.EEList">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eGenericType xmi:id="ecore.EObject.eContents.@eGenericType" eClassifier="ecore.EEList">
+          <eTypeArguments xmi:id="ecore.EObject.eContents.@eGenericType.@eTypeArguments.0"
+              eClassifier="ecore.EObject"/>
+        </eGenericType>
+      </xmi:Extension>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EObject.eAllContents" isOrdered="true" lower="0" name="eAllContents" type="ecore.ETreeIterator">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eGenericType xmi:id="ecore.EObject.eAllContents.@eGenericType" eClassifier="ecore.ETreeIterator">
+          <eTypeArguments xmi:id="ecore.EObject.eAllContents.@eGenericType.@eTypeArguments.0"
+              eClassifier="ecore.EObject"/>
+        </eGenericType>
+      </xmi:Extension>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EObject.eCrossReferences" isOrdered="true" lower="0" name="eCrossReferences"
+        type="ecore.EEList">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eGenericType xmi:id="ecore.EObject.eCrossReferences.@eGenericType" eClassifier="ecore.EEList">
+          <eTypeArguments xmi:id="ecore.EObject.eCrossReferences.@eGenericType.@eTypeArguments.0"
+              eClassifier="ecore.EObject"/>
+        </eGenericType>
+      </xmi:Extension>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EObject.eGet" isOrdered="true" lower="0" name="eGet" type="ecore.EJavaObject">
+      <ownedParameter xmi:id="ecore.EObject.eGet.feature" isOrdered="true" lower="0" name="feature" type="ecore.EStructuralFeature"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EObject.eGet.1" isOrdered="true" lower="0" name="eGet" type="ecore.EJavaObject">
+      <ownedParameter xmi:id="ecore.EObject.eGet.1.feature" isOrdered="true" lower="0" name="feature" type="ecore.EStructuralFeature"/>
+      <ownedParameter xmi:id="ecore.EObject.eGet.1.resolve" isOrdered="true" lower="0" name="resolve">
+        <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EObject.eSet" isOrdered="true" lower="0" name="eSet">
+      <ownedParameter xmi:id="ecore.EObject.eSet.feature" isOrdered="true" lower="0" name="feature" type="ecore.EStructuralFeature"/>
+      <ownedParameter xmi:id="ecore.EObject.eSet.newValue" isOrdered="true" lower="0" name="newValue" type="ecore.EJavaObject"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EObject.eIsSet" isOrdered="true" lower="0" name="eIsSet">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+      <ownedParameter xmi:id="ecore.EObject.eIsSet.feature" isOrdered="true" lower="0" name="feature" type="ecore.EStructuralFeature"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EObject.eUnset" isOrdered="true" lower="0" name="eUnset">
+      <ownedParameter xmi:id="ecore.EObject.eUnset.feature" isOrdered="true" lower="0" name="feature" type="ecore.EStructuralFeature"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EOperation" name="EOperation" superClass="ecore.ETypedElement">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="UniqueParameterNames UniqueTypeParameterNames NoRepeatingVoid"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <ownedAttribute xmi:id="ecore.EOperation.eContainingClass" isOrdered="true" lower="0" name="eContainingClass"
+        type="ecore.EClass" isReadOnly="true" opposite="ecore.EClass.eOperations">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EOperation.eTypeParameters" isOrdered="true" lower="0" name="eTypeParameters"
+        upper="*" type="ecore.ETypeParameter" isComposite="true"/>
+    <ownedAttribute xmi:id="ecore.EOperation.eParameters" isOrdered="true" lower="0" name="eParameters" upper="*"
+        type="ecore.EParameter" isComposite="true" opposite="ecore.EParameter.eOperation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EOperation.eExceptions" isOrdered="true" lower="0" name="eExceptions" upper="*"
+        type="ecore.EClassifier">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="suppressedIsSetVisibility" value="true"/>
+          <details key="suppressedUnsetVisibility" value="true"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <unsettable>true</unsettable>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EOperation.eGenericExceptions" isOrdered="true" lower="0" name="eGenericExceptions"
+        upper="*" type="ecore.EGenericType" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="suppressedIsSetVisibility" value="true"/>
+          <details key="suppressedUnsetVisibility" value="true"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <unsettable>true</unsettable>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EPackage" name="EPackage" superClass="ecore.ENamedElement">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="WellFormedNsURI WellFormedNsPrefix UniqueSubpackageNames UniqueClassifierNames UniqueNsURIs"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <ownedOperation xmi:id="ecore.EPackage.getEClassifier" isOrdered="true" lower="0" name="getEClassifier" type="ecore.EClassifier">
+      <ownedParameter xmi:id="ecore.EPackage.getEClassifier.name" isOrdered="true" lower="0" name="name">
+        <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedAttribute xmi:id="ecore.EPackage.nsURI" isOrdered="true" lower="0" name="nsURI">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EPackage.nsPrefix" isOrdered="true" lower="0" name="nsPrefix">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EPackage.eFactoryInstance" isOrdered="true" name="eFactoryInstance"
+        type="ecore.EFactory" opposite="ecore.EFactory.ePackage">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EPackage.eClassifiers" isOrdered="true" lower="0" name="eClassifiers" upper="*"
+        type="ecore.EClassifier" isComposite="true" opposite="ecore.EClassifier.ePackage"/>
+    <ownedAttribute xmi:id="ecore.EPackage.eSubpackages" isOrdered="true" lower="0" name="eSubpackages" upper="*"
+        type="ecore.EPackage" isComposite="true" opposite="ecore.EPackage.eSuperPackage"/>
+    <ownedAttribute xmi:id="ecore.EPackage.eSuperPackage" isOrdered="true" lower="0" name="eSuperPackage" type="ecore.EPackage"
+        isReadOnly="true" opposite="ecore.EPackage.eSubpackages">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EParameter" name="EParameter" superClass="ecore.ETypedElement">
+    <ownedAttribute xmi:id="ecore.EParameter.eOperation" isOrdered="true" lower="0" name="eOperation" type="ecore.EOperation"
+        isReadOnly="true" opposite="ecore.EOperation.eParameters">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EReference" name="EReference" superClass="ecore.EStructuralFeature">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="ConsistentOpposite SingleContainer ConsistentKeys"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <ownedAttribute xmi:id="ecore.EReference.containment" isOrdered="true" lower="0" name="containment">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EReference.container" isOrdered="true" lower="0" name="container" isReadOnly="true"
+        isDerived="true">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EReference.resolveProxies" isOrdered="true" lower="0" name="resolveProxies"
+        default="true">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EReference.eOpposite" isOrdered="true" lower="0" name="eOpposite" type="ecore.EReference"/>
+    <ownedAttribute xmi:id="ecore.EReference.eReferenceType" isOrdered="true" name="eReferenceType"
+        type="ecore.EClass" isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EReference.eKeys" isOrdered="true" lower="0" name="eKeys" upper="*" type="ecore.EAttribute"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EStructuralFeature" name="EStructuralFeature"
+      isAbstract="true" superClass="ecore.ETypedElement">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="ValidDefaultValueLiteral"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <ownedOperation xmi:id="ecore.EStructuralFeature.getFeatureID" isOrdered="true" lower="0" name="getFeatureID">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Integer"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="ecore.EStructuralFeature.getContainerClass" isOrdered="true" lower="0" name="getContainerClass"
+        type="ecore.EJavaClass">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eGenericType xmi:id="ecore.EStructuralFeature.getContainerClass.@eGenericType"
+            eClassifier="ecore.EJavaClass">
+          <eTypeArguments xmi:id="ecore.EStructuralFeature.getContainerClass.@eGenericType.@eTypeArguments.0"/>
+        </eGenericType>
+      </xmi:Extension>
+    </ownedOperation>
+    <ownedAttribute xmi:id="ecore.EStructuralFeature.changeable" isOrdered="true" lower="0" name="changeable"
+        default="true">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EStructuralFeature.volatile" isOrdered="true" lower="0" name="volatile">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EStructuralFeature.transient" isOrdered="true" lower="0" name="transient">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EStructuralFeature.defaultValueLiteral" isOrdered="true" lower="0" name="defaultValueLiteral">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EStructuralFeature.defaultValue" isOrdered="true" lower="0" name="defaultValue"
+        type="ecore.EJavaObject" isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EStructuralFeature.unsettable" isOrdered="true" lower="0" name="unsettable">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EStructuralFeature.derived" isOrdered="true" lower="0" name="derived">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EStructuralFeature.eContainingClass" isOrdered="true" lower="0" name="eContainingClass"
+        type="ecore.EClass" isReadOnly="true" opposite="ecore.EClass.eStructuralFeatures">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.ETypedElement" name="ETypedElement"
+      isAbstract="true" superClass="ecore.ENamedElement">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="ValidLowerBound ValidUpperBound ConsistentBounds ValidType"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <ownedAttribute xmi:id="ecore.ETypedElement.ordered" isOrdered="true" lower="0" name="ordered" default="true">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.ETypedElement.unique" isOrdered="true" lower="0" name="unique" default="true">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.ETypedElement.lowerBound" isOrdered="true" lower="0" name="lowerBound">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.ETypedElement.upperBound" isOrdered="true" lower="0" name="upperBound" default="1">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.ETypedElement.many" isOrdered="true" lower="0" name="many" isReadOnly="true"
+        isDerived="true">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.ETypedElement.required" isOrdered="true" lower="0" name="required" isReadOnly="true"
+        isDerived="true">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#Boolean"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.ETypedElement.eType" isOrdered="true" lower="0" name="eType" type="ecore.EClassifier">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="suppressedIsSetVisibility" value="true"/>
+          <details key="suppressedUnsetVisibility" value="true"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <unsettable>true</unsettable>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.ETypedElement.eGenericType" isOrdered="true" lower="0" name="eGenericType"
+        type="ecore.EGenericType" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="suppressedIsSetVisibility" value="true"/>
+          <details key="suppressedUnsetVisibility" value="true"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <volatile>true</volatile>
+        <resolveProxies>false</resolveProxies>
+        <unsettable>true</unsettable>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EBigDecimal" name="EBigDecimal">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#decimal"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.math.BigDecimal</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EBigInteger" name="EBigInteger">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#integer"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.math.BigInteger</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EBoolean" name="EBoolean">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#boolean"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>boolean</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EBooleanObject" name="EBooleanObject">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="EBoolean"/>
+        <details key="name" value="EBoolean:Object"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Boolean</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EByte" name="EByte">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#byte"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>byte</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EByteArray" name="EByteArray">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#hexBinary"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>byte[]</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EByteObject" name="EByteObject">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="EByte"/>
+        <details key="name" value="EByte:Object"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Byte</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EChar" name="EChar">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>char</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.ECharacterObject" name="ECharacterObject">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="EChar"/>
+        <details key="name" value="EChar:Object"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Character</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EDate" name="EDate">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.util.Date</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EDiagnosticChain" name="EDiagnosticChain">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>org.eclipse.emf.common.util.DiagnosticChain</instanceClassName>
+      <serializable>false</serializable>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EDouble" name="EDouble">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#double"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>double</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EDoubleObject" name="EDoubleObject">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="EDouble"/>
+        <details key="name" value="EDouble:Object"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Double</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EEList" name="EEList">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>org.eclipse.emf.common.util.EList</instanceClassName>
+      <serializable>false</serializable>
+      <eTypeParameters xmi:id="ecore.EEList.E" name="E"/>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EEnumerator" name="EEnumerator">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>org.eclipse.emf.common.util.Enumerator</instanceClassName>
+      <serializable>false</serializable>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EFeatureMap" name="EFeatureMap">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>org.eclipse.emf.ecore.util.FeatureMap</instanceClassName>
+      <serializable>false</serializable>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EFeatureMapEntry" name="EFeatureMapEntry">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>org.eclipse.emf.ecore.util.FeatureMap$Entry</instanceClassName>
+      <serializable>false</serializable>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EFloat" name="EFloat">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#float"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>float</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EFloatObject" name="EFloatObject">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="EFloat"/>
+        <details key="name" value="EFloat:Object"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Float</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EInt" name="EInt">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#int"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>int</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EIntegerObject" name="EIntegerObject">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="EInt"/>
+        <details key="name" value="EInt:Object"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Integer</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EJavaClass" name="EJavaClass">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Class</instanceClassName>
+      <eTypeParameters xmi:id="ecore.EJavaClass.T" name="T"/>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EJavaObject" name="EJavaObject">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Object</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.ELong" name="ELong">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#long"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>long</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.ELongObject" name="ELongObject">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="ELong"/>
+        <details key="name" value="ELong:Object"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Long</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EMap" name="EMap">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.util.Map</instanceClassName>
+      <serializable>false</serializable>
+      <eTypeParameters xmi:id="ecore.EMap.K" name="K"/>
+      <eTypeParameters xmi:id="ecore.EMap.V" name="V"/>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EResource" name="EResource">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>org.eclipse.emf.ecore.resource.Resource</instanceClassName>
+      <serializable>false</serializable>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EResourceSet" name="EResourceSet">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>org.eclipse.emf.ecore.resource.ResourceSet</instanceClassName>
+      <serializable>false</serializable>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EShort" name="EShort">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#short"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>short</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EShortObject" name="EShortObject">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="EShort"/>
+        <details key="name" value="EShort:Object"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Short</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EString" name="EString">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#string"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.String</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EStringToStringMapEntry" name="EStringToStringMapEntry">
+    <ownedAttribute xmi:id="ecore.EStringToStringMapEntry.key" isOrdered="true" lower="0" name="key">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EStringToStringMapEntry.value" isOrdered="true" lower="0" name="value">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+    </ownedAttribute>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.util.Map$Entry</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.ETreeIterator" name="ETreeIterator">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>org.eclipse.emf.common.util.TreeIterator</instanceClassName>
+      <serializable>false</serializable>
+      <eTypeParameters xmi:id="ecore.ETreeIterator.E" name="E"/>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EGenericType" name="EGenericType"
+      superClass="ecore.EObject">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="ConsistentType ConsistentBounds ConsistentArguments"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <ownedAttribute xmi:id="ecore.EGenericType.eUpperBound" isOrdered="true" lower="0" name="eUpperBound" type="ecore.EGenericType"
+        isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EGenericType.eTypeArguments" isOrdered="true" lower="0" name="eTypeArguments"
+        upper="*" type="ecore.EGenericType" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EGenericType.eRawType" isOrdered="true" name="eRawType"
+        type="ecore.EClassifier" isReadOnly="true" isDerived="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EGenericType.eLowerBound" isOrdered="true" lower="0" name="eLowerBound" type="ecore.EGenericType"
+        isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EGenericType.eTypeParameter" isOrdered="true" lower="0" name="eTypeParameter"
+        type="ecore.ETypeParameter">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ecore.EGenericType.eClassifier" isOrdered="true" lower="0" name="eClassifier" type="ecore.EClassifier"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.ETypeParameter" name="ETypeParameter"
+      superClass="ecore.ENamedElement">
+    <ownedAttribute xmi:id="ecore.ETypeParameter.eBounds" isOrdered="true" lower="0" name="eBounds" upper="*"
+        type="ecore.EGenericType" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <nsPrefix>ecore</nsPrefix>
+  </xmi:Extension>
+</emof:Package>

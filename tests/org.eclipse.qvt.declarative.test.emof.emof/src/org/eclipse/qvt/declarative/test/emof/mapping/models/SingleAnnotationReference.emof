@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emof:Package xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/mof/2.0/emof.xmi" xmi:id="root"
+    name="root">
+  <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <eAnnotations references="root.A"/>
+  </xmi:Extension>
+  <ownedType xmi:type="emof:Class" xmi:id="root.A" name="A"/>
+  <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <nsPrefix></nsPrefix>
+  </xmi:Extension>
+</emof:Package>
