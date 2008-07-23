@@ -1,0 +1,3 @@
+transformation umlRdbms {
+	middle imports xyzzy;
+}

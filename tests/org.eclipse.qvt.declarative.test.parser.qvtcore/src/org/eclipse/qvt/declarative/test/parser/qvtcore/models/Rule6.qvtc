@@ -1,0 +1,35 @@
+transformation umlRdbms {
+	middle imports tuml2rdbms;
+	uml imports umlMM;
+	rdbms imports rdbmsMM;
+}
+
+map AttributeColumn_ClassToTable_rdbms in umlRdbms
+{
+	check uml (c:Class) {
+		a:Attribute, p:PrimitiveDataType|
+		c.attribute = Set{a};														--** added Set{}
+		a.type = p;
+	}
+	check enforce rdbms (t:Table) {
+		realize cl:Column |
+		t.column := cl;
+	}
+	where middle (v1:TClassToTable| v1.c = c; v1.t = t;) {
+		realize v2:TAttributeToColumn, an:String, pn:String, sqlType:String |		--** changed AttributeToColumn to TAttributeToColumn
+		v2.c := c;
+		v2.a := a;
+		v2.p := p;
+		v2.t := t;
+		v2.cl := cl;
+		an := a.name;
+		pn := p.name;
+		cl.name := an;
+		sqltype := if (pn ='INTEGER') then 'NUMBER' else 'VARCHAR' endif;			--** added ;
+	}
+	map {
+		where () {
+			cl.type := sqlType;
+		}
+	}
+}

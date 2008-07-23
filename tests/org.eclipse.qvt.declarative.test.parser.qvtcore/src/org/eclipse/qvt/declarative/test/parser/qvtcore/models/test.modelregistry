@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<mreg:ModelRegistrySettings xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:mreg="http://www.eclipse.org/gmt/umlx/2007/ModelRegistry">
+  <resource name="">
+    <entry accessor="rdbmsMM" kind="Model Name" uri="rdbmsMM.emof"/>
+    <entry accessor="tuml2rdbms" kind="Model Name" uri="TumlRdbms.ecore"/>
+    <entry accessor="umlMM" kind="Model Name" uri="umlMM.emof"/>
+  </resource>
+</mreg:ModelRegistrySettings>

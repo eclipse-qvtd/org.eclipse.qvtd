@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ASCII"?>
+<eqvtbase:Transformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:eqvtbase="http://www.eclipse.org/gmt/umlx/EQVTbase" xmlns:eqvtcore="http://www.eclipse.org/gmt/umlx/EQVTcore" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore" xmi:id="ast1" name="umlRdbms" nsURI="http://models/visibility.qvtc/umlRdbms" nsPrefix="umlRdbms">
+  <modelParameter xmi:id="ast9" name="middle">
+    <usedPackage href="TumlRdbms.ecore#/"/>
+  </modelParameter>
+  <modelParameter xmi:id="ast7" name="uml">
+    <usedPackage href="umlMM.emof#umlMM"/>
+  </modelParameter>
+  <modelParameter xmi:id="ast18" name="rdbms">
+    <usedPackage href="rdbmsMM.emof#rdbmsMM"/>
+  </modelParameter>
+  <rule xsi:type="eqvtcore:Mapping" xmi:id="ast31" name="ClassToTable0">
+    <domain xsi:type="eqvtcore:CoreDomain" xmi:id="ast30" name="uml" isCheckable="true" isEnforceable="true" typedModel="ast7">
+      <guardPattern xmi:id="ast17">
+        <variable xmi:id="ast24" name="error">
+          <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+        </variable>
+        <variable xmi:id="ast60" name="error2">
+          <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern xmi:id="ast23"/>
+    </domain>
+    <domain xsi:type="eqvtcore:CoreDomain" xmi:id="ast54" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast18">
+      <guardPattern xmi:id="ast8">
+        <variable xmi:id="ast134" name="error4">
+          <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern xmi:id="ast136"/>
+    </domain>
+    <guardPattern xmi:id="ast165"/>
+    <bottomPattern xmi:id="ast115"/>
+  </rule>
+  <rule xsi:type="eqvtcore:Mapping" xmi:id="ast0" name="ClassToTable1">
+    <domain xsi:type="eqvtcore:CoreDomain" xmi:id="ast139" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast18">
+      <guardPattern xmi:id="ast84">
+        <variable xmi:id="ast36" name="error4">
+          <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern xmi:id="ast148"/>
+    </domain>
+    <domain xsi:type="eqvtcore:CoreDomain" xmi:id="ast80" name="uml" isCheckable="true" isEnforceable="true" typedModel="ast7">
+      <guardPattern xmi:id="ast96">
+        <variable xmi:id="ast124" name="error">
+          <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+        </variable>
+        <variable xmi:id="ast158" name="error2">
+          <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern xmi:id="ast34"/>
+    </domain>
+    <guardPattern xmi:id="ast314"/>
+    <bottomPattern xmi:id="ast303"/>
+  </rule>
+  <rule xsi:type="eqvtcore:Mapping" xmi:id="ast74" name="ClassToTable2">
+    <domain xsi:type="eqvtcore:CoreDomain" xmi:id="ast349" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast18">
+      <guardPattern xmi:id="ast192">
+        <variable xmi:id="ast356" name="error4">
+          <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern xmi:id="ast131"/>
+    </domain>
+    <guardPattern xmi:id="ast396"/>
+    <bottomPattern xmi:id="ast287"/>
+  </rule>
+</eqvtbase:Transformation>

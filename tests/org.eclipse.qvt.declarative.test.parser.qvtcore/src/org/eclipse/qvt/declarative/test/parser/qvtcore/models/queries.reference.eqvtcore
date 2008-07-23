@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtbase="http://www.eclipse.org/gmt/umlx/EQVTbase" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
+  <ecore:EPackage xmi:id="ast1" name="A" nsURI="http://models/queries.qvtc/A" nsPrefix="A">
+    <eSubpackages xsi:type="eqvtbase:Transformation" xmi:id="ast8" name="tx1" nsURI="http://models/queries.qvtc/A.tx1" nsPrefix="tx1">
+      <eOperations xsi:type="eqvtbase:Function" xmi:id="ast16" name="q1">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters xsi:type="eqvtbase:FunctionParameter" xmi:id="ast9" name="x">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </eParameters>
+        <queryExpression xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast19">
+          <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+        </queryExpression>
+      </eOperations>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EPackage xmi:id="ast69" name="B" nsURI="http://models/queries.qvtc/B" nsPrefix="B">
+    <eSubpackages xmi:id="ast60" name="A" nsURI="http://models/queries.qvtc/B.A" nsPrefix="A">
+      <eSubpackages xsi:type="eqvtbase:Transformation" xmi:id="ast84" name="tx2" nsURI="http://models/queries.qvtc/B.A.tx2" nsPrefix="tx2">
+        <eOperations xsi:type="eqvtbase:Function" xmi:id="ast81" name="q2">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          <eParameters xsi:type="eqvtbase:FunctionParameter" xmi:id="ast47" name="x">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </eParameters>
+          <queryExpression xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast131">
+            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+          </queryExpression>
+        </eOperations>
+      </eSubpackages>
+    </eSubpackages>
+  </ecore:EPackage>
+  <eqvtbase:Transformation xmi:id="ast83" name="tx0" nsURI="http://models/queries.qvtc/tx0" nsPrefix="tx0">
+    <eOperations xsi:type="eqvtbase:Function" xmi:id="ast103" name="q0">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      <eParameters xsi:type="eqvtbase:FunctionParameter" xmi:id="ast23" name="x">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </eParameters>
+      <queryExpression xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast45">
+        <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+      </queryExpression>
+    </eOperations>
+  </eqvtbase:Transformation>
+</xmi:XMI>

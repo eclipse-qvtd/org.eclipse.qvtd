@@ -1,0 +1,39 @@
+transformation umlRdbms {
+	middle imports tuml2rdbms;
+	uml imports umlMM;
+	rdbms imports rdbmsMM;
+}
+
+map ClassToTable in umlRdbms
+{
+	check uml (p:Package) {
+		c: Class|
+		c.namespace = p;
+		c.kind = 'Persistent';
+		creation umlRdbms::q0('a');
+		deletion umlRdbms::q0('a');
+	}
+	check rdbms (s:Schema) {
+		realize xx:String,								-- warning not in enforceable domain
+		t:Table|
+		t.schema = s;
+		default t.name := xx;							-- warning not in enforceable domain
+	}
+	where middle (v1: TPackageToSchema| v1.p = p; v1.s = s;) {
+		realize v2: TClassToTable,						-- warning no enforceable domain
+		cn:String |
+		v2.p := p;
+		v2.s := s;
+		v2.c := c;
+		v2.t := t;
+		c.name = cn;
+		default t.name := cn;							-- warning no enforceable domain
+	}
+	map {
+		where () {
+			t.description := cn;
+		}
+	}
+}
+
+query umlRdbms::q0(x:String) : String { null }
