@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.qvt.declarative.test.emof.qvtbase;singleton:=true
+Bundle-Version: 0.7.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.qvt.declarative.test.emof.essentialocl;visibility:=reexport,
+ org.eclipse.qvt.declarative.ecore.qvtbase;visibility:=reexport,
+ org.eclipse.qvt.declarative.emof.qvtbase;visibility:=reexport
+Eclipse-LazyStart: false
+Export-Package: org.eclipse.qvt.declarative.test.emof.qvtbase
