@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.qvt.declarative.editor.qvtrelation.ui;singleton:=true
+Bundle-Version: 1.2.0.qualifier
+Require-Bundle: org.eclipse.qvt.declarative.editor.ui;visibility:=reexport,
+ org.eclipse.qvt.declarative.parser.qvtrelation;visibility:=reexport
+Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: org.eclipse.qvt.declarative.editor.qvtrelation.ui
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.eclipse.qvt.declarative.emof.QVTRelation.facade

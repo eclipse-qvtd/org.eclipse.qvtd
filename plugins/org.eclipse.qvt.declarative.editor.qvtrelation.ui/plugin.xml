@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension point="org.eclipse.core.resources.builders"
+         id="QVTrBuilder" name="QVT Relation Project Builder">
+      <builder hasNature="true">
+         <run class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrBuilder"/>
+      </builder>
+   </extension>
+   
+   <extension point="org.eclipse.core.resources.markers"
+         id="qvtrProblem" name="QVT Relation Problem">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <persistent value="true"/>
+   </extension>
+   
+   <extension point="org.eclipse.core.resources.natures"
+         id="QVTrNature" name="QVT Relation Project Nature" >
+      <runtime>
+         <run class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrNature"/>
+      </runtime>
+      <builder id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrBuilder"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.contribution1"
+            adaptable="true" nameFilter="*"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.addRemoveNatureAction"
+               label="Add QVT Relation Nature" menubarPath="org.eclipse.qvt.declarative.naturesMenu/group1" enablesFor="+"
+               class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrToggleNatureAction"/>
+          <visibility>
+            <not>
+               <objectState name="projectNature" value="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrNature"/>
+            </not>
+         </visibility>
+      </objectContribution>
+      <objectContribution id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.contribution1"
+            adaptable="true" nameFilter="*"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.addRemoveNatureAction"
+               label="Remove QVT Relation Nature" menubarPath="org.eclipse.qvt.declarative.naturesMenu/group1" enablesFor="+"
+               class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrToggleNatureAction"/>
+          <visibility>
+            <objectState name="projectNature" value="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrNature"/>
+         </visibility>
+      </objectContribution>
+   </extension>
+   
+   <extension point="org.eclipse.ui.editors">
+      <editor id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrEditor"
+            name="QVT Relation Text Editor"
+            extensions="qvtr,qvt,qvtrelation,eqvtrelation"
+            icon="icons/QVTrModelFile.gif"
+            contributorClass="org.eclipse.qvt.declarative.editor.ui.actions.PagedActionBarContributor"
+            class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrEditor"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.newWizards">
+      <wizard id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrNewWizard"
+            name="QVT Relation Text file"
+            icon="icons/QVTrModelFile.gif"
+            category="org.eclipse.qvt.declarative.editor.ui"
+            class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrNewWizard"/>
+   </extension>
+
+</plugin>
