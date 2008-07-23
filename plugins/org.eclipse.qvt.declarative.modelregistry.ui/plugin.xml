@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.1 2008/07/23 10:04:26 qglineur Exp $
+-->
+
+<plugin>
+
+
+   <extension point="org.eclipse.ui.propertyPages">
+      <page id="org.eclipse.qvt.declarative.modelregistry.properties.ModelRegistryPropertyPage"
+            class="org.eclipse.qvt.declarative.modelregistry.ui.properties.PropertyPage"           
+            name="%modelRegistryPageName">
+         <enabledWhen>
+		     <adapt type="org.eclipse.core.resources.IResource">
+		          <test property="org.eclipse.core.resources.projectNature" value="org.eclipse.qvt.declarative.modelregistry.ui.ModelRegistryNature"/>
+		     </adapt>         
+         </enabledWhen>
+         <!--keywordReference id="org.eclipse.jdt.ui.todo"/>-->
+      </page>
+   </extension>
+   
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution id="org.eclipse.qvt.declarative.modelregistry.ui.naturesMenu" 
+         adaptable="true" nameFilter="*"
+         objectClass="org.eclipse.core.resources.IProject">
+         <menu id="org.eclipse.qvt.declarative.naturesMenu" 
+            path="additions" label="QVT Declarative Natures"> 
+            <separator name="group1"/> 
+         </menu> 
+      </objectContribution> 
+      <objectContribution id="org.eclipse.qvt.declarative.modelregistry.ui.contribution1"         
+            objectClass="org.eclipse.core.resources.IProject" nameFilter="*" adaptable="true">
+         <action id="org.eclipse.qvt.declarative.modelregistry.ui.addRemoveNatureAction"
+               menubarPath="org.eclipse.qvt.declarative.naturesMenu/group1" label="Add Model Registry Nature" enablesFor="+"
+               class="org.eclipse.qvt.declarative.modelregistry.ui.builder.ToggleNatureAction"/>
+         <visibility>
+            <not>
+               <objectState name="projectNature" value="org.eclipse.qvt.declarative.modelregistry.ui.ModelRegistryNature"/>
+            </not>
+         </visibility>
+      </objectContribution>
+      <objectContribution id="org.eclipse.qvt.declarative.modelregistry.ui.contribution1"         
+            objectClass="org.eclipse.core.resources.IProject" nameFilter="*" adaptable="true">
+         <action id="org.eclipse.qvt.declarative.modelregistry.ui.addRemoveNatureAction"
+               menubarPath="org.eclipse.qvt.declarative.naturesMenu/group1" label="Remove Model Registry Nature" enablesFor="+"
+               class="org.eclipse.qvt.declarative.modelregistry.ui.builder.ToggleNatureAction"/>
+         <visibility>
+            <objectState name="projectNature" value="org.eclipse.qvt.declarative.modelregistry.ui.ModelRegistryNature"/>
+         </visibility>
+      </objectContribution>
+   </extension>
+   
+   <extension point="org.eclipse.core.resources.natures"
+   		id="ModelRegistryNature"  name="QVT Model Registry Nature">
+      <runtime>
+         <run class="org.eclipse.qvt.declarative.modelregistry.ui.builder.ModelRegistryNature"/>
+      </runtime>
+   </extension>
+</plugin>
