@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.qvt.declarative.ecore;singleton:=true
+Bundle-Version: 0.7.0.qualifier
+Bundle-Activator: org.eclipse.qvt.declarative.ecore.Activator$Implementation
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.eclipse.qvt.declarative.ecore,
+ org.eclipse.qvt.declarative.ecore.adapters,
+ org.eclipse.qvt.declarative.ecore.mappings,
+ org.eclipse.qvt.declarative.ecore.utils
+Bundle-Vendor: %providerName
