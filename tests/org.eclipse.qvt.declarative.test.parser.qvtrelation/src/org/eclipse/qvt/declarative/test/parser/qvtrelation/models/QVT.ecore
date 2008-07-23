@@ -1,0 +1,1564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EPackage xmi:id="PrimitiveTypes" name="PrimitiveTypes" nsURI="http://schema.omg.org/spec/QVT/1.0/primitivetypes.xml"
+      nsPrefix="primitivetypes">
+    <eClassifiers xsi:type="ecore:EDataType" xmi:id="PrimitiveTypes.Boolean" name="Boolean"
+        instanceClassName="java.lang.Boolean"/>
+    <eClassifiers xsi:type="ecore:EDataType" xmi:id="PrimitiveTypes.Integer" name="Integer"
+        instanceClassName="java.lang.Integer"/>
+    <eClassifiers xsi:type="ecore:EDataType" xmi:id="PrimitiveTypes.Real" name="Real"
+        instanceClassName="java.lang.Float"/>
+    <eClassifiers xsi:type="ecore:EDataType" xmi:id="PrimitiveTypes.String" name="String"
+        instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EDataType" xmi:id="PrimitiveTypes.UnlimitedNatural"
+        name="UnlimitedNatural" instanceClassName="java.lang.Integer"/>
+  </ecore:EPackage>
+  <ecore:EPackage xmi:id="EMOF" name="EMOF" nsURI="http://schema.omg.org/spec/QVT/1.0/emof.xml"
+      nsPrefix="emof">
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Class" name="Class" eSuperTypes="#EMOF.Type">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.contextualProperty"
+          name="contextualProperty" ordered="false" upperBound="-1" eType="#QVTOperational.ContextualProperty"
+          eOpposite="#QVTOperational.ContextualProperty.context"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.derivedClass"
+          name="derivedClass" ordered="false" upperBound="-1" eType="#EMOF.Class"
+          eOpposite="#EMOF.Class.superClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.instantiationExp"
+          name="instantiationExp" ordered="false" upperBound="-1" eType="#ImperativeOCL.InstantiationExp"
+          eOpposite="#ImperativeOCL.InstantiationExp.instantiatedClass"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Class.isAbstract"
+          name="isAbstract" eType="#PrimitiveTypes.Boolean" defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.key" name="key"
+          ordered="false" upperBound="-1" eType="#QVTRelation.Key" eOpposite="#QVTRelation.Key.identifies"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.objectTemplateExp"
+          name="objectTemplateExp" ordered="false" upperBound="-1" eType="#QVTTemplate.ObjectTemplateExp"
+          eOpposite="#QVTTemplate.ObjectTemplateExp.referredClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.ownedAttribute"
+          name="ownedAttribute" upperBound="-1" eType="#EMOF.Property" containment="true"
+          eOpposite="#EMOF.Property.class"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.ownedOperation"
+          name="ownedOperation" upperBound="-1" eType="#EMOF.Operation" containment="true"
+          eOpposite="#EMOF.Operation.class"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.superClass"
+          name="superClass" ordered="false" upperBound="-1" eType="#EMOF.Class"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.transfClient"
+          name="transfClient" ordered="false" upperBound="-1" eType="#QVTOperational.OperationalTransformation"
+          eOpposite="#QVTOperational.OperationalTransformation.intermediateClass"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Comment" name="Comment" eSuperTypes="#EMOF.Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Comment.annotatedElement"
+          name="annotatedElement" ordered="false" upperBound="-1" eType="#EMOF.NamedElement"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Comment.body"
+          name="body" eType="#PrimitiveTypes.String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Comment.owningElement"
+          name="owningElement" ordered="false" eType="#EMOF.Element" transient="true"
+          eOpposite="#EMOF.Element.ownedComment"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.DataType" name="DataType" eSuperTypes="#EMOF.Type"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Element" name="Element" abstract="true"
+        eSuperTypes="#EMOF.Object">
+      <eOperations xmi:id="EMOF.Element.container" name="container" eType="#EMOF.Element">
+        <eAnnotations xmi:id="EMOF.Element.container.%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%"
+            source="http://www.eclipse.org/emf/2002/GenModel">
+          <details xmi:id="EMOF.Element.container.%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%.@details.0"
+              key="documentation" value="Returns the owner association inherited from Element"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations xmi:id="EMOF.Element.equals" name="equals" eType="#PrimitiveTypes.Boolean">
+        <eParameters xmi:id="EMOF.Element.equals.object" name="object" eType="#EMOF.Object"/>
+      </eOperations>
+      <eOperations xmi:id="EMOF.Element.get" name="get" eType="#EMOF.Object">
+        <eParameters xmi:id="EMOF.Element.get.property" name="property" eType="#EMOF.Property"/>
+      </eOperations>
+      <eOperations xmi:id="EMOF.Element.getMetaClass" name="getMetaClass" eType="#EMOF.Class"/>
+      <eOperations xmi:id="EMOF.Element.isSet" name="isSet" eType="#PrimitiveTypes.Boolean">
+        <eParameters xmi:id="EMOF.Element.isSet.property" name="property" eType="#EMOF.Property"/>
+      </eOperations>
+      <eOperations xmi:id="EMOF.Element.set" name="set">
+        <eParameters xmi:id="EMOF.Element.set.property" name="property" eType="#EMOF.Property"/>
+        <eParameters xmi:id="EMOF.Element.set.object" name="object" eType="#EMOF.Object"/>
+      </eOperations>
+      <eOperations xmi:id="EMOF.Element.unset" name="unset">
+        <eParameters xmi:id="EMOF.Element.unset.property" name="property" eType="#EMOF.Property"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Element.ownedComment"
+          name="ownedComment" ordered="false" upperBound="-1" eType="#EMOF.Comment"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Element.tag" name="tag"
+          ordered="false" upperBound="-1" eType="#EMOF.Tag" eOpposite="#EMOF.Tag.element"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Enumeration" name="Enumeration"
+        eSuperTypes="#EMOF.DataType">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Enumeration.ownedLiteral"
+          name="ownedLiteral" upperBound="-1" eType="#EMOF.EnumerationLiteral" containment="true"
+          eOpposite="#EMOF.EnumerationLiteral.enumeration"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.EnumerationLiteral" name="EnumerationLiteral"
+        eSuperTypes="#EMOF.NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.EnumerationLiteral.enumeration"
+          name="enumeration" ordered="false" eType="#EMOF.Enumeration" transient="true"
+          eOpposite="#EMOF.Enumeration.ownedLiteral"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.EnumerationLiteral.literalExp"
+          name="literalExp" ordered="false" upperBound="-1" eType="#EssentialOCL.EnumLiteralExp"
+          eOpposite="#EssentialOCL.EnumLiteralExp.referredEnumLiteral"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Extent" name="Extent" eSuperTypes="#EMOF.Object">
+      <eOperations xmi:id="EMOF.Extent.elements" name="elements" eType="#EMOF.ReflectiveSequence"/>
+      <eOperations xmi:id="EMOF.Extent.useContainment" name="useContainment" eType="#PrimitiveTypes.Boolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Factory" name="Factory" eSuperTypes="#EMOF.Element">
+      <eOperations xmi:id="EMOF.Factory.convertToString" name="convertToString" eType="#PrimitiveTypes.String">
+        <eParameters xmi:id="EMOF.Factory.convertToString.dataType" name="dataType"
+            eType="#EMOF.DataType"/>
+        <eParameters xmi:id="EMOF.Factory.convertToString.object" name="object" eType="#EMOF.Object"/>
+      </eOperations>
+      <eOperations xmi:id="EMOF.Factory.create" name="create" eType="#EMOF.Element">
+        <eParameters xmi:id="EMOF.Factory.create.metaClass" name="metaClass" eType="#EMOF.Class"/>
+      </eOperations>
+      <eOperations xmi:id="EMOF.Factory.createFromString" name="createFromString"
+          eType="#EMOF.Object">
+        <eParameters xmi:id="EMOF.Factory.createFromString.dataType" name="dataType"
+            eType="#EMOF.DataType"/>
+        <eParameters xmi:id="EMOF.Factory.createFromString.string" name="string" eType="#PrimitiveTypes.String"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Factory.package"
+          name="package" ordered="false" lowerBound="1" eType="#EMOF.Package"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.MultiplicityElement" name="MultiplicityElement"
+        abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.MultiplicityElement.isOrdered"
+          name="isOrdered" eType="#PrimitiveTypes.Boolean" defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.MultiplicityElement.isUnique"
+          name="isUnique" eType="#PrimitiveTypes.Boolean" defaultValueLiteral="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.MultiplicityElement.lower"
+          name="lower" eType="#PrimitiveTypes.Integer" defaultValueLiteral="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.MultiplicityElement.upper"
+          name="upper" eType="#PrimitiveTypes.UnlimitedNatural" defaultValueLiteral="1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.NamedElement" name="NamedElement"
+        abstract="true" eSuperTypes="#EMOF.Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.NamedElement.comment"
+          name="comment" ordered="false" upperBound="-1" eType="#EMOF.Comment" eOpposite="#EMOF.Comment.annotatedElement"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.NamedElement.name"
+          name="name" eType="#PrimitiveTypes.String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Object" name="Object"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Operation" name="Operation"
+        eSuperTypes="#EMOF.TypedElement #EMOF.MultiplicityElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Operation.class"
+          name="class" ordered="false" eType="#EMOF.Class" transient="true" eOpposite="#EMOF.Class.ownedOperation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Operation.ownedParameter"
+          name="ownedParameter" upperBound="-1" eType="#EMOF.Parameter" containment="true"
+          eOpposite="#EMOF.Parameter.operation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Operation.raisedException"
+          name="raisedException" ordered="false" upperBound="-1" eType="#EMOF.Type"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Operation.referringExp"
+          name="referringExp" ordered="false" upperBound="-1" eType="#EssentialOCL.OperationCallExp"
+          eOpposite="#EssentialOCL.OperationCallExp.referredOperation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Operation.relationImplementation"
+          name="relationImplementation" ordered="false" upperBound="-1" eType="#QVTRelation.RelationImplementation"
+          eOpposite="#QVTRelation.RelationImplementation.impl"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Package" name="Package" eSuperTypes="#EMOF.NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Package.factory"
+          name="factory" ordered="false" upperBound="-1" eType="#EMOF.Factory" eOpposite="#EMOF.Factory.package"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Package.modelType"
+          name="modelType" ordered="false" eType="#QVTOperational.ModelType" eOpposite="#QVTOperational.ModelType.metamodel"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Package.nestedPackage"
+          name="nestedPackage" ordered="false" upperBound="-1" eType="#EMOF.Package"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Package.nestingPackage"
+          name="nestingPackage" ordered="false" eType="#EMOF.Package" transient="true"
+          eOpposite="#EMOF.Package.nestedPackage"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Package.ownedType"
+          name="ownedType" ordered="false" upperBound="-1" eType="#EMOF.Type" containment="true"
+          eOpposite="#EMOF.Type.package"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Package.typedModel"
+          name="typedModel" ordered="false" upperBound="-1" eType="#QVTBase.TypedModel"
+          eOpposite="#QVTBase.TypedModel.usedPackage"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Package.uri" name="uri"
+          eType="#PrimitiveTypes.String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Parameter" name="Parameter"
+        eSuperTypes="#EMOF.TypedElement #EMOF.MultiplicityElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Parameter.operation"
+          name="operation" ordered="false" eType="#EMOF.Operation" transient="true"
+          eOpposite="#EMOF.Operation.ownedParameter"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Parameter.variable"
+          name="variable" ordered="false" upperBound="-1" eType="#EssentialOCL.Variable"
+          eOpposite="#EssentialOCL.Variable.representedParameter"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.PrimitiveType" name="PrimitiveType"
+        eSuperTypes="#EMOF.DataType"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Property" name="Property" eSuperTypes="#EMOF.TypedElement #EMOF.MultiplicityElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Property.assignment"
+          name="assignment" ordered="false" upperBound="-1" eType="#QVTCore.PropertyAssignment"
+          eOpposite="#QVTCore.PropertyAssignment.targetProperty"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Property.class"
+          name="class" ordered="false" eType="#EMOF.Class" transient="true" eOpposite="#EMOF.Class.ownedAttribute"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Property.default"
+          name="default" eType="#PrimitiveTypes.String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Property.invOpposite"
+          name="invOpposite" ordered="false" lowerBound="1" eType="#EMOF.Property"
+          eOpposite="#EMOF.Property.opposite"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Property.isComposite"
+          name="isComposite" eType="#PrimitiveTypes.Boolean" defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Property.isDerived"
+          name="isDerived" eType="#PrimitiveTypes.Boolean" defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Property.isID"
+          name="isID" eType="#PrimitiveTypes.Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Property.isReadOnly"
+          name="isReadOnly" eType="#PrimitiveTypes.Boolean" defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Property.key"
+          name="key" ordered="false" upperBound="-1" eType="#QVTRelation.Key" eOpposite="#QVTRelation.Key.part"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Property.module"
+          name="module" ordered="false" eType="#QVTOperational.Module" eOpposite="#QVTOperational.Module.configProperty"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Property.opposite"
+          name="opposite" ordered="false" eType="#EMOF.Property"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Property.overriding"
+          name="overriding" ordered="false" upperBound="-1" eType="#QVTOperational.ContextualProperty"
+          eOpposite="#QVTOperational.ContextualProperty.overridden"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Property.propertyItem"
+          name="propertyItem" ordered="false" upperBound="-1" eType="#QVTTemplate.PropertyTemplateItem"
+          eOpposite="#QVTTemplate.PropertyTemplateItem.referredProperty"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Property.referringExp"
+          name="referringExp" ordered="false" upperBound="-1" eType="#EssentialOCL.PropertyCallExp"
+          eOpposite="#EssentialOCL.PropertyCallExp.referredProperty"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Property.tranfClient"
+          name="tranfClient" ordered="false" eType="#QVTOperational.OperationalTransformation"
+          eOpposite="#QVTOperational.OperationalTransformation.intermediateProperty"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Property.tupleLiteralPart"
+          name="tupleLiteralPart" ordered="false" eType="#EssentialOCL.TupleLiteralPart"
+          transient="true" eOpposite="#EssentialOCL.TupleLiteralPart.attribute"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.ReflectiveCollection" name="ReflectiveCollection"
+        eSuperTypes="#EMOF.Object">
+      <eOperations xmi:id="EMOF.ReflectiveCollection.add" name="add" eType="#PrimitiveTypes.Boolean">
+        <eParameters xmi:id="EMOF.ReflectiveCollection.add.object" name="object" eType="#EMOF.Object"/>
+      </eOperations>
+      <eOperations xmi:id="EMOF.ReflectiveCollection.addAll" name="addAll" eType="#PrimitiveTypes.Boolean">
+        <eParameters xmi:id="EMOF.ReflectiveCollection.addAll.objects" name="objects"
+            eType="#EMOF.ReflectiveSequence"/>
+      </eOperations>
+      <eOperations xmi:id="EMOF.ReflectiveCollection.clear" name="clear"/>
+      <eOperations xmi:id="EMOF.ReflectiveCollection.remove" name="remove" eType="#PrimitiveTypes.Boolean">
+        <eParameters xmi:id="EMOF.ReflectiveCollection.remove.object" name="object"
+            eType="#EMOF.Object"/>
+      </eOperations>
+      <eOperations xmi:id="EMOF.ReflectiveCollection.size" name="size" eType="#PrimitiveTypes.Integer"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.ReflectiveSequence" name="ReflectiveSequence"
+        eSuperTypes="#EMOF.ReflectiveCollection">
+      <eOperations xmi:id="EMOF.ReflectiveSequence.add" name="add">
+        <eParameters xmi:id="EMOF.ReflectiveSequence.add.index" name="index" eType="#PrimitiveTypes.Integer"/>
+        <eParameters xmi:id="EMOF.ReflectiveSequence.add.object" name="object" eType="#EMOF.Object"/>
+      </eOperations>
+      <eOperations xmi:id="EMOF.ReflectiveSequence.get" name="get" eType="#EMOF.Object">
+        <eParameters xmi:id="EMOF.ReflectiveSequence.get.index" name="index" eType="#PrimitiveTypes.Integer"/>
+      </eOperations>
+      <eOperations xmi:id="EMOF.ReflectiveSequence.remove" name="remove" eType="#EMOF.Object">
+        <eParameters xmi:id="EMOF.ReflectiveSequence.remove.index" name="index" eType="#PrimitiveTypes.Integer"/>
+      </eOperations>
+      <eOperations xmi:id="EMOF.ReflectiveSequence.set" name="set" eType="#EMOF.Object">
+        <eParameters xmi:id="EMOF.ReflectiveSequence.set.index" name="index" eType="#PrimitiveTypes.Integer"/>
+        <eParameters xmi:id="EMOF.ReflectiveSequence.set.object" name="object" eType="#EMOF.Object"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Tag" name="Tag" eSuperTypes="#EMOF.Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Tag.element" name="element"
+          ordered="false" upperBound="-1" eType="#EMOF.Element"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Tag.name" name="name"
+          eType="#PrimitiveTypes.String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Tag.owner" name="owner"
+          ordered="false" eType="#QVTOperational.Module" transient="true" eOpposite="#QVTOperational.Module.ownedTag"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Tag.transformation"
+          name="transformation" ordered="false" eType="#QVTBase.Transformation" transient="true"
+          eOpposite="#QVTBase.Transformation.ownedTag"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Tag.value" name="value"
+          eType="#PrimitiveTypes.String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Type" name="Type" abstract="true"
+        eSuperTypes="#EMOF.NamedElement">
+      <eOperations xmi:id="EMOF.Type.isInstance" name="isInstance" eType="#PrimitiveTypes.Boolean">
+        <eParameters xmi:id="EMOF.Type.isInstance.object" name="object" eType="#EMOF.Object"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Type.collectionType"
+          name="collectionType" ordered="false" upperBound="-1" eType="#EssentialOCL.CollectionType"
+          eOpposite="#EssentialOCL.CollectionType.elementType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Type.eltTuple"
+          name="eltTuple" ordered="false" upperBound="-1" eType="#ImperativeOCL.OrderedTupleType"
+          eOpposite="#ImperativeOCL.OrderedTupleType.elementType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Type.keyDict"
+          name="keyDict" ordered="false" upperBound="-1" eType="#ImperativeOCL.DictionaryType"
+          eOpposite="#ImperativeOCL.DictionaryType.keyType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Type.operation"
+          name="operation" ordered="false" upperBound="-1" eType="#EMOF.Operation"
+          eOpposite="#EMOF.Operation.raisedException"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Type.package"
+          name="package" ordered="false" eType="#EMOF.Package" transient="true" eOpposite="#EMOF.Package.ownedType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Type.raiseExpression"
+          name="raiseExpression" ordered="false" upperBound="-1" eType="#ImperativeOCL.RaiseExp"
+          eOpposite="#ImperativeOCL.RaiseExp.exception"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Type.tryExpression"
+          name="tryExpression" ordered="false" upperBound="-1" eType="#ImperativeOCL.CatchExp"
+          eOpposite="#ImperativeOCL.CatchExp.exception"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Type.typeExp"
+          name="typeExp" ordered="false" upperBound="-1" eType="#EssentialOCL.TypeExp"
+          eOpposite="#EssentialOCL.TypeExp.referredType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Type.typedElement"
+          name="typedElement" ordered="false" upperBound="-1" eType="#EMOF.TypedElement"
+          eOpposite="#EMOF.TypedElement.type"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Type.typedef"
+          name="typedef" ordered="false" upperBound="-1" eType="#ImperativeOCL.Typedef"
+          eOpposite="#ImperativeOCL.Typedef.base"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.TypedElement" name="TypedElement"
+        abstract="true" eSuperTypes="#EMOF.NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.TypedElement.type"
+          name="type" ordered="false" eType="#EMOF.Type"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.URIExtent" name="URIExtent"
+        eSuperTypes="#EMOF.Extent">
+      <eOperations xmi:id="EMOF.URIExtent.contextURI" name="contextURI" eType="#PrimitiveTypes.String"/>
+      <eOperations xmi:id="EMOF.URIExtent.element" name="element" eType="#EMOF.Element">
+        <eParameters xmi:id="EMOF.URIExtent.element.uri" name="uri" eType="#PrimitiveTypes.String"/>
+      </eOperations>
+      <eOperations xmi:id="EMOF.URIExtent.uri" name="uri" eType="#PrimitiveTypes.String">
+        <eParameters xmi:id="EMOF.URIExtent.uri.element" name="element" eType="#EMOF.Element"/>
+      </eOperations>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ecore:EPackage xmi:id="EssentialOCL" name="EssentialOCL" nsURI="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml"
+      nsPrefix="essentialocl">
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.AnyType" name="AnyType"
+        eSuperTypes="#EMOF.Type"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.BagType" name="BagType"
+        eSuperTypes="#EssentialOCL.CollectionType"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.BooleanLiteralExp"
+        name="BooleanLiteralExp" eSuperTypes="#EssentialOCL.PrimitiveLiteralExp">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EssentialOCL.BooleanLiteralExp.booleanSymbol"
+          name="booleanSymbol" eType="#PrimitiveTypes.Boolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.CallExp" name="CallExp"
+        abstract="true" eSuperTypes="#EssentialOCL.OclExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.CallExp.source"
+          name="source" ordered="false" eType="#EssentialOCL.OclExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.CollectionItem" name="CollectionItem"
+        eSuperTypes="#EssentialOCL.CollectionLiteralPart">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.CollectionItem.item"
+          name="item" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" xmi:id="EssentialOCL.CollectionKind" name="CollectionKind">
+      <eLiterals xmi:id="EssentialOCL.CollectionKind.Set" name="Set"/>
+      <eLiterals xmi:id="EssentialOCL.CollectionKind.OrderedSet" name="OrderedSet"
+          value="1"/>
+      <eLiterals xmi:id="EssentialOCL.CollectionKind.Bag" name="Bag" value="2"/>
+      <eLiterals xmi:id="EssentialOCL.CollectionKind.Sequence" name="Sequence" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.CollectionLiteralExp"
+        name="CollectionLiteralExp" eSuperTypes="#EssentialOCL.LiteralExp">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EssentialOCL.CollectionLiteralExp.kind"
+          name="kind" eType="#EssentialOCL.CollectionKind"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.CollectionLiteralExp.part"
+          name="part" ordered="false" upperBound="-1" eType="#EssentialOCL.CollectionLiteralPart"
+          containment="true" eOpposite="#EssentialOCL.CollectionLiteralPart.collectionLiteralExp"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.CollectionLiteralPart"
+        name="CollectionLiteralPart" abstract="true" eSuperTypes="#EMOF.TypedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.CollectionLiteralPart.collectionLiteralExp"
+          name="collectionLiteralExp" ordered="false" lowerBound="1" eType="#EssentialOCL.CollectionLiteralExp"
+          transient="true" eOpposite="#EssentialOCL.CollectionLiteralExp.part"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.CollectionRange" name="CollectionRange"
+        eSuperTypes="#EssentialOCL.CollectionLiteralPart">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.CollectionRange.first"
+          name="first" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.CollectionRange.last"
+          name="last" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.CollectionType" name="CollectionType"
+        abstract="true" eSuperTypes="#EMOF.DataType">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.CollectionType.collectionTemplateExp"
+          name="collectionTemplateExp" ordered="false" upperBound="-1" eType="#QVTTemplate.CollectionTemplateExp"
+          eOpposite="#QVTTemplate.CollectionTemplateExp.referredCollectionType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.CollectionType.elementType"
+          name="elementType" ordered="false" lowerBound="1" eType="#EMOF.Type"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.EnumLiteralExp" name="EnumLiteralExp"
+        eSuperTypes="#EssentialOCL.LiteralExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.EnumLiteralExp.referredEnumLiteral"
+          name="referredEnumLiteral" ordered="false" eType="#EMOF.EnumerationLiteral"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.ExpressionInOcl" name="ExpressionInOcl"
+        eSuperTypes="#EMOF.TypedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.ExpressionInOcl.bodyExpression"
+          name="bodyExpression" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.ExpressionInOcl.contextVariable"
+          name="contextVariable" ordered="false" eType="#EssentialOCL.Variable" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.ExpressionInOcl.parameterVariable"
+          name="parameterVariable" ordered="false" upperBound="-1" eType="#EssentialOCL.Variable"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.ExpressionInOcl.resultVariable"
+          name="resultVariable" ordered="false" eType="#EssentialOCL.Variable" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.FeatureCallExp" name="FeatureCallExp"
+        abstract="true" eSuperTypes="#EssentialOCL.CallExp"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.IfExp" name="IfExp"
+        eSuperTypes="#EssentialOCL.OclExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.IfExp.condition"
+          name="condition" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.IfExp.elseExpression"
+          name="elseExpression" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.IfExp.thenExpression"
+          name="thenExpression" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.IntegerLiteralExp"
+        name="IntegerLiteralExp" eSuperTypes="#EssentialOCL.NumericLiteralExp">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EssentialOCL.IntegerLiteralExp.integerSymbol"
+          name="integerSymbol" eType="#PrimitiveTypes.Integer"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.InvalidLiteralExp"
+        name="InvalidLiteralExp" eSuperTypes="#EssentialOCL.LiteralExp"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.InvalidType" name="InvalidType"
+        eSuperTypes="#EMOF.Type"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.IterateExp" name="IterateExp"
+        eSuperTypes="#EssentialOCL.LoopExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.IterateExp.result"
+          name="result" ordered="false" eType="#EssentialOCL.Variable" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.IteratorExp" name="IteratorExp"
+        eSuperTypes="#EssentialOCL.LoopExp"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.LetExp" name="LetExp"
+        eSuperTypes="#EssentialOCL.OclExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.LetExp.in"
+          name="in" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.LetExp.variable"
+          name="variable" ordered="false" lowerBound="1" eType="#EssentialOCL.Variable"
+          containment="true" eOpposite="#EssentialOCL.Variable.letExp"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.LiteralExp" name="LiteralExp"
+        abstract="true" eSuperTypes="#EssentialOCL.OclExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.LoopExp" name="LoopExp"
+        abstract="true" eSuperTypes="#EssentialOCL.CallExp #EssentialOCL.OclExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.LoopExp.body"
+          name="body" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.LoopExp.iterator"
+          name="iterator" ordered="false" upperBound="-1" eType="#EssentialOCL.Variable"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.NavigationCallExp"
+        name="NavigationCallExp" eSuperTypes="#EssentialOCL.FeatureCallExp"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.NullLiteralExp" name="NullLiteralExp"
+        eSuperTypes="#EssentialOCL.LiteralExp"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.NumericLiteralExp"
+        name="NumericLiteralExp" abstract="true" eSuperTypes="#EssentialOCL.PrimitiveLiteralExp"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.OclExpression" name="OclExpression"
+        abstract="true" eSuperTypes="#EMOF.TypedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.altBodyOwner"
+          name="altBodyOwner" ordered="false" eType="#ImperativeOCL.AltExp" transient="true"
+          eOpposite="#ImperativeOCL.AltExp.body"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.altCondOwner"
+          name="altCondOwner" ordered="false" eType="#ImperativeOCL.AltExp" transient="true"
+          eOpposite="#ImperativeOCL.AltExp.condition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.appliedElement"
+          name="appliedElement" ordered="false" eType="#EssentialOCL.CallExp" transient="true"
+          eOpposite="#EssentialOCL.CallExp.source"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.argOwner"
+          name="argOwner" ordered="false" eType="#ImperativeOCL.InstantiationExp"
+          transient="true" eOpposite="#ImperativeOCL.InstantiationExp.argument"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.assertOwner"
+          name="assertOwner" ordered="false" eType="#ImperativeOCL.AssertExp" transient="true"
+          eOpposite="#ImperativeOCL.AssertExp.assertion"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.blockOwner"
+          name="blockOwner" ordered="false" eType="#ImperativeOCL.BlockExp" transient="true"
+          eOpposite="#ImperativeOCL.BlockExp.body"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.catchExp"
+          name="catchExp" ordered="false" eType="#ImperativeOCL.CatchExp" transient="true"
+          eOpposite="#ImperativeOCL.CatchExp.body"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.collectionItem"
+          name="collectionItem" ordered="false" eType="#EssentialOCL.CollectionItem"
+          transient="true" eOpposite="#EssentialOCL.CollectionItem.item"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.computeOwner"
+          name="computeOwner" ordered="false" eType="#ImperativeOCL.ComputeExp" transient="true"
+          eOpposite="#ImperativeOCL.ComputeExp.body"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.condOwner"
+          name="condOwner" ordered="false" eType="#QVTOperational.ModelType" transient="true"
+          eOpposite="#QVTOperational.ModelType.additionalCondition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.contentOwner"
+          name="contentOwner" ordered="false" eType="#QVTOperational.OperationBody"
+          transient="true" eOpposite="#QVTOperational.OperationBody.content"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.defaultOwner"
+          name="defaultOwner" ordered="false" eType="#ImperativeOCL.AssignExp" transient="true"
+          eOpposite="#ImperativeOCL.AssignExp.defaultValue"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.domainAssignment"
+          name="domainAssignment" ordered="false" eType="#QVTRelation.RelationDomainAssignment"
+          transient="true" eOpposite="#QVTRelation.RelationDomainAssignment.valueExp"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.elseOwner"
+          name="elseOwner" ordered="false" eType="#EssentialOCL.IfExp" transient="true"
+          eOpposite="#EssentialOCL.IfExp.elseExpression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.elsePartOwner"
+          name="elsePartOwner" ordered="false" eType="#ImperativeOCL.SwitchExp" transient="true"
+          eOpposite="#ImperativeOCL.SwitchExp.elsePart"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.endOwner"
+          name="endOwner" ordered="false" eType="#QVTOperational.MappingBody" transient="true"
+          eOpposite="#QVTOperational.MappingBody.endSection"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.firstOwner"
+          name="firstOwner" ordered="false" eType="#EssentialOCL.CollectionRange"
+          transient="true" eOpposite="#EssentialOCL.CollectionRange.first"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.function"
+          name="function" ordered="false" eType="#QVTBase.Function" transient="true"
+          eOpposite="#QVTBase.Function.queryExpression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.ifOwner"
+          name="ifOwner" ordered="false" eType="#EssentialOCL.IfExp" transient="true"
+          eOpposite="#EssentialOCL.IfExp.condition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.initOwner"
+          name="initOwner" ordered="false" eType="#QVTOperational.MappingBody" transient="true"
+          eOpposite="#QVTOperational.MappingBody.initSection"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.initializedElement"
+          name="initializedElement" ordered="false" eType="#EssentialOCL.Variable"
+          transient="true" eOpposite="#EssentialOCL.Variable.initExpression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.itemUnlink"
+          name="itemUnlink" ordered="false" eType="#ImperativeOCL.UnlinkExp" transient="true"
+          eOpposite="#ImperativeOCL.UnlinkExp.item"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.keyOwner"
+          name="keyOwner" ordered="false" eType="#ImperativeOCL.DictLiteralPart" transient="true"
+          eOpposite="#ImperativeOCL.DictLiteralPart.key"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.lastOwner"
+          name="lastOwner" ordered="false" eType="#EssentialOCL.CollectionRange" transient="true"
+          eOpposite="#EssentialOCL.CollectionRange.last"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.leftOwner"
+          name="leftOwner" ordered="false" eType="#ImperativeOCL.AssignExp" transient="true"
+          eOpposite="#ImperativeOCL.AssignExp.left"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.letExp"
+          name="letExp" ordered="false" eType="#EssentialOCL.LetExp" transient="true"
+          eOpposite="#EssentialOCL.LetExp.in"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.listContainer"
+          name="listContainer" ordered="false" eType="#QVTTemplate.CollectionTemplateExp"
+          transient="true" eOpposite="#QVTTemplate.CollectionTemplateExp.member"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.logOwner"
+          name="logOwner" ordered="false" eType="#ImperativeOCL.LogExp" transient="true"
+          eOpposite="#ImperativeOCL.LogExp.condition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.loopBodyOwner"
+          name="loopBodyOwner" ordered="false" eType="#EssentialOCL.LoopExp" transient="true"
+          eOpposite="#EssentialOCL.LoopExp.body"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.loopCondOwner"
+          name="loopCondOwner" ordered="false" eType="#ImperativeOCL.ImperativeLoopExp"
+          transient="true" eOpposite="#ImperativeOCL.ImperativeLoopExp.condition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.owner"
+          name="owner" ordered="false" eType="#QVTTemplate.TemplateExp" transient="true"
+          eOpposite="#QVTTemplate.TemplateExp.where"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.ownerProperty"
+          name="ownerProperty" ordered="false" eType="#QVTOperational.ContextualProperty"
+          transient="true" eOpposite="#QVTOperational.ContextualProperty.initExpression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.parentCall"
+          name="parentCall" ordered="false" eType="#EssentialOCL.OperationCallExp"
+          transient="true" eOpposite="#EssentialOCL.OperationCallExp.argument"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.predicate"
+          name="predicate" ordered="false" eType="#QVTBase.Predicate" transient="true"
+          eOpposite="#QVTBase.Predicate.conditionExpression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.propertyItem"
+          name="propertyItem" ordered="false" eType="#QVTTemplate.PropertyTemplateItem"
+          transient="true" eOpposite="#QVTTemplate.PropertyTemplateItem.value"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.raiseExp"
+          name="raiseExp" ordered="false" eType="#ImperativeOCL.RaiseExp" transient="true"
+          eOpposite="#ImperativeOCL.RaiseExp.argument"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.relationCallExp"
+          name="relationCallExp" ordered="false" eType="#QVTRelation.RelationCallExp"
+          transient="true" eOpposite="#QVTRelation.RelationCallExp.argument"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.resolveExp"
+          name="resolveExp" ordered="false" eType="#QVTOperational.ResolveExp" transient="true"
+          eOpposite="#QVTOperational.ResolveExp.condition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.returnExp"
+          name="returnExp" ordered="false" eType="#ImperativeOCL.ReturnExp" transient="true"
+          eOpposite="#ImperativeOCL.ReturnExp.value"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.slotAssignment"
+          name="slotAssignment" ordered="false" eType="#QVTCore.Assignment" transient="true"
+          eOpposite="#QVTCore.Assignment.slotExpression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.tgtUnlink"
+          name="tgtUnlink" ordered="false" eType="#ImperativeOCL.UnlinkExp" transient="true"
+          eOpposite="#ImperativeOCL.UnlinkExp.target"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.thenOwner"
+          name="thenOwner" ordered="false" eType="#EssentialOCL.IfExp" transient="true"
+          eOpposite="#EssentialOCL.IfExp.thenExpression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.topExpression"
+          name="topExpression" ordered="false" eType="#EssentialOCL.ExpressionInOcl"
+          transient="true" eOpposite="#EssentialOCL.ExpressionInOcl.bodyExpression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.tryBodyOwner"
+          name="tryBodyOwner" ordered="false" eType="#ImperativeOCL.TryExp" transient="true"
+          eOpposite="#ImperativeOCL.TryExp.tryBody"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.tupValOwner"
+          name="tupValOwner" ordered="false" eType="#ImperativeOCL.OrderedTupleLiteralPart"
+          transient="true" eOpposite="#ImperativeOCL.OrderedTupleLiteralPart.value"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.tupleLiteralPart"
+          name="tupleLiteralPart" ordered="false" eType="#EssentialOCL.TupleLiteralPart"
+          transient="true" eOpposite="#EssentialOCL.TupleLiteralPart.value"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.typedef"
+          name="typedef" ordered="false" eType="#ImperativeOCL.Typedef" transient="true"
+          eOpposite="#ImperativeOCL.Typedef.condition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.unpackExp"
+          name="unpackExp" ordered="false" eType="#ImperativeOCL.UnpackExp" transient="true"
+          eOpposite="#ImperativeOCL.UnpackExp.source"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.valOwner"
+          name="valOwner" ordered="false" eType="#ImperativeOCL.DictLiteralPart" transient="true"
+          eOpposite="#ImperativeOCL.DictLiteralPart.value"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.valueAssignment"
+          name="valueAssignment" ordered="false" eType="#QVTCore.Assignment" transient="true"
+          eOpposite="#QVTCore.Assignment.value"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.valueOwner"
+          name="valueOwner" ordered="false" eType="#ImperativeOCL.AssignExp" transient="true"
+          eOpposite="#ImperativeOCL.AssignExp.value"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.whenOwner"
+          name="whenOwner" ordered="false" eType="#QVTOperational.MappingOperation"
+          transient="true" eOpposite="#QVTOperational.MappingOperation.when"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.whereOwner"
+          name="whereOwner" ordered="false" eType="#QVTOperational.MappingOperation"
+          transient="true" eOpposite="#QVTOperational.MappingOperation.where"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.whileExpression"
+          name="whileExpression" ordered="false" eType="#ImperativeOCL.WhileExp" transient="true"
+          eOpposite="#ImperativeOCL.WhileExp.condition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OclExpression.whileOwner"
+          name="whileOwner" ordered="false" eType="#ImperativeOCL.WhileExp" transient="true"
+          eOpposite="#ImperativeOCL.WhileExp.body"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.OperationCallExp" name="OperationCallExp"
+        eSuperTypes="#EssentialOCL.FeatureCallExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OperationCallExp.argument"
+          name="argument" upperBound="-1" eType="#EssentialOCL.OclExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OperationCallExp.enforcementOperation"
+          name="enforcementOperation" ordered="false" upperBound="-1" eType="#QVTCore.EnforcementOperation"
+          eOpposite="#QVTCore.EnforcementOperation.operationCallExp"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.OperationCallExp.referredOperation"
+          name="referredOperation" ordered="false" eType="#EMOF.Operation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.OrderedSetType" name="OrderedSetType"
+        eSuperTypes="#EssentialOCL.CollectionType"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.PrimitiveLiteralExp"
+        name="PrimitiveLiteralExp" abstract="true" eSuperTypes="#EssentialOCL.LiteralExp"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.PropertyCallExp" name="PropertyCallExp"
+        eSuperTypes="#EssentialOCL.NavigationCallExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.PropertyCallExp.referredProperty"
+          name="referredProperty" ordered="false" eType="#EMOF.Property"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.RealLiteralExp" name="RealLiteralExp"
+        eSuperTypes="#EssentialOCL.NumericLiteralExp">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EssentialOCL.RealLiteralExp.realSymbol"
+          name="realSymbol" eType="#PrimitiveTypes.Real"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.SequenceType" name="SequenceType"
+        eSuperTypes="#EssentialOCL.CollectionType"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.SetType" name="SetType"
+        eSuperTypes="#EssentialOCL.CollectionType"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.StringLiteralExp" name="StringLiteralExp"
+        eSuperTypes="#EssentialOCL.PrimitiveLiteralExp">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EssentialOCL.StringLiteralExp.stringSymbol"
+          name="stringSymbol" eType="#PrimitiveTypes.String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.TupleLiteralExp" name="TupleLiteralExp"
+        eSuperTypes="#EssentialOCL.LiteralExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.TupleLiteralExp.part"
+          name="part" ordered="false" upperBound="-1" eType="#EssentialOCL.TupleLiteralPart"
+          containment="true" eOpposite="#EssentialOCL.TupleLiteralPart.tupleLiteralExp"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.TupleLiteralPart" name="TupleLiteralPart"
+        eSuperTypes="#EMOF.TypedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.TupleLiteralPart.attribute"
+          name="attribute" ordered="false" eType="#EMOF.Property" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.TupleLiteralPart.tupleLiteralExp"
+          name="tupleLiteralExp" ordered="false" eType="#EssentialOCL.TupleLiteralExp"
+          transient="true" eOpposite="#EssentialOCL.TupleLiteralExp.part"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.TupleLiteralPart.value"
+          name="value" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.TupleType" name="TupleType"
+        eSuperTypes="#EMOF.Class #EMOF.DataType"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.TypeExp" name="TypeExp"
+        eSuperTypes="#EssentialOCL.OclExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.TypeExp.referredType"
+          name="referredType" ordered="false" eType="#EMOF.Type"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.TypeType" name="TypeType"
+        eSuperTypes="#EMOF.Type"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.UnlimitedNaturalExp"
+        name="UnlimitedNaturalExp" eSuperTypes="#EssentialOCL.NumericLiteralExp">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EssentialOCL.UnlimitedNaturalExp.symbol"
+          name="symbol" eType="#PrimitiveTypes.UnlimitedNatural"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.Variable" name="Variable"
+        eSuperTypes="#EMOF.TypedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.assignment"
+          name="assignment" ordered="false" upperBound="-1" eType="#QVTCore.VariableAssignment"
+          eOpposite="#QVTCore.VariableAssignment.targetVariable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.baseExp"
+          name="baseExp" ordered="false" eType="#EssentialOCL.IterateExp" transient="true"
+          eOpposite="#EssentialOCL.IterateExp.result"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.computeOwner"
+          name="computeOwner" ordered="false" eType="#ImperativeOCL.ComputeExp" transient="true"
+          eOpposite="#ImperativeOCL.ComputeExp.returnedElement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.declaration"
+          name="declaration" ordered="false" eType="#ImperativeOCL.VariableInitExp"
+          eOpposite="#ImperativeOCL.VariableInitExp.referredVariable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.domainAssignment"
+          name="domainAssignment" ordered="false" upperBound="-1" eType="#QVTRelation.RelationDomainAssignment"
+          eOpposite="#QVTRelation.RelationDomainAssignment.variable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.initExpression"
+          name="initExpression" ordered="false" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.instantiationExp"
+          name="instantiationExp" ordered="false" upperBound="-1" eType="#ImperativeOCL.InstantiationExp"
+          eOpposite="#ImperativeOCL.InstantiationExp.extent"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.letExp"
+          name="letExp" ordered="false" eType="#EssentialOCL.LetExp" transient="true"
+          eOpposite="#EssentialOCL.LetExp.variable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.loopExp"
+          name="loopExp" ordered="false" eType="#EssentialOCL.LoopExp" transient="true"
+          eOpposite="#EssentialOCL.LoopExp.iterator"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.matchingExp"
+          name="matchingExp" ordered="false" eType="#QVTTemplate.CollectionTemplateExp"
+          eOpposite="#QVTTemplate.CollectionTemplateExp.rest"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.objectExpression"
+          name="objectExpression" ordered="false" upperBound="-1" eType="#QVTOperational.ObjectExp"
+          eOpposite="#QVTOperational.ObjectExp.referredObject"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.opBody"
+          name="opBody" ordered="false" eType="#QVTOperational.OperationBody" transient="true"
+          eOpposite="#QVTOperational.OperationBody.variable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.pattern"
+          name="pattern" ordered="false" upperBound="-1" eType="#QVTBase.Pattern"
+          eOpposite="#QVTBase.Pattern.bindsTo"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.referringExp"
+          name="referringExp" ordered="false" upperBound="-1" eType="#EssentialOCL.VariableExp"
+          eOpposite="#EssentialOCL.VariableExp.referredVariable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.relation"
+          name="relation" ordered="false" eType="#QVTRelation.Relation" transient="true"
+          eOpposite="#QVTRelation.Relation.variable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.relationDomain"
+          name="relationDomain" ordered="false" eType="#QVTRelation.RelationDomain"
+          eOpposite="#QVTRelation.RelationDomain.rootVariable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.representedParameter"
+          name="representedParameter" ordered="false" eType="#EMOF.Parameter"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.resolveExp"
+          name="resolveExp" ordered="false" eType="#QVTOperational.ResolveExp" transient="true"
+          eOpposite="#QVTOperational.ResolveExp.target"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.resultOwner"
+          name="resultOwner" ordered="false" eType="#EssentialOCL.ExpressionInOcl"
+          transient="true" eOpposite="#EssentialOCL.ExpressionInOcl.resultVariable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.selfOwner"
+          name="selfOwner" ordered="false" eType="#EssentialOCL.ExpressionInOcl" transient="true"
+          eOpposite="#EssentialOCL.ExpressionInOcl.contextVariable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.templateExp"
+          name="templateExp" ordered="false" upperBound="-1" eType="#QVTTemplate.TemplateExp"
+          eOpposite="#QVTTemplate.TemplateExp.bindsTo"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.tgtOwner"
+          name="tgtOwner" ordered="false" eType="#ImperativeOCL.ImperativeIterateExp"
+          transient="true" eOpposite="#ImperativeOCL.ImperativeIterateExp.target"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.unpackExp"
+          name="unpackExp" ordered="false" eType="#ImperativeOCL.UnpackExp" transient="true"
+          eOpposite="#ImperativeOCL.UnpackExp.targetVariable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.varOwner"
+          name="varOwner" ordered="false" eType="#EssentialOCL.ExpressionInOcl" transient="true"
+          eOpposite="#EssentialOCL.ExpressionInOcl.parameterVariable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.Variable.variableOwner"
+          name="variableOwner" ordered="false" eType="#QVTOperational.Module" transient="true"
+          eOpposite="#QVTOperational.Module.ownedVariable"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.VariableExp" name="VariableExp"
+        eSuperTypes="#EssentialOCL.OclExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.VariableExp.referredVariable"
+          name="referredVariable" ordered="false" eType="#EssentialOCL.Variable"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.VoidType" name="VoidType"
+        eSuperTypes="#EMOF.Type"/>
+  </ecore:EPackage>
+  <ecore:EPackage xmi:id="ImperativeOCL" name="ImperativeOCL" nsURI="http://schema.omg.org/spec/QVT/1.0/imperativeocl.xml"
+      nsPrefix="imperativeocl">
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.AltExp" name="AltExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.AltExp.altOwner"
+          name="altOwner" ordered="false" eType="#ImperativeOCL.SwitchExp" transient="true"
+          eOpposite="#ImperativeOCL.SwitchExp.alternativePart"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.AltExp.body"
+          name="body" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.AltExp.condition"
+          name="condition" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.AssertExp" name="AssertExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.AssertExp.assertion"
+          name="assertion" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.AssertExp.log"
+          name="log" ordered="false" eType="#ImperativeOCL.LogExp" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="ImperativeOCL.AssertExp.severity"
+          name="severity" eType="#ImperativeOCL.SeverityKind"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.AssignExp" name="AssignExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.AssignExp.defaultValue"
+          name="defaultValue" ordered="false" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="ImperativeOCL.AssignExp.isReset"
+          name="isReset" eType="#PrimitiveTypes.Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.AssignExp.left"
+          name="left" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.AssignExp.value"
+          name="value" upperBound="-1" eType="#EssentialOCL.OclExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.BlockExp" name="BlockExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.BlockExp.body"
+          name="body" upperBound="-1" eType="#EssentialOCL.OclExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.BreakExp" name="BreakExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.CatchExp" name="CatchExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.CatchExp.body"
+          name="body" upperBound="-1" eType="#EssentialOCL.OclExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.CatchExp.exceptOwner"
+          name="exceptOwner" ordered="false" eType="#ImperativeOCL.TryExp" transient="true"
+          eOpposite="#ImperativeOCL.TryExp.exceptClause"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.CatchExp.exception"
+          name="exception" upperBound="-1" eType="#EMOF.Type"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.ComputeExp" name="ComputeExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.ComputeExp.body"
+          name="body" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.ComputeExp.returnedElement"
+          name="returnedElement" ordered="false" lowerBound="1" eType="#EssentialOCL.Variable"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.ContinueExp" name="ContinueExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.DictLiteralExp" name="DictLiteralExp"
+        eSuperTypes="#EssentialOCL.LiteralExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.DictLiteralExp.part"
+          name="part" ordered="false" upperBound="-1" eType="#ImperativeOCL.DictLiteralPart"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.DictLiteralPart" name="DictLiteralPart"
+        eSuperTypes="#EMOF.Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.DictLiteralPart.key"
+          name="key" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.DictLiteralPart.partOwner"
+          name="partOwner" ordered="false" lowerBound="1" eType="#ImperativeOCL.DictLiteralExp"
+          transient="true" eOpposite="#ImperativeOCL.DictLiteralExp.part"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.DictLiteralPart.value"
+          name="value" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.DictionaryType" name="DictionaryType"
+        eSuperTypes="#EssentialOCL.CollectionType">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.DictionaryType.keyType"
+          name="keyType" ordered="false" eType="#EMOF.Type"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.ForExp" name="ForExp"
+        eSuperTypes="#ImperativeOCL.ImperativeLoopExp"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.ImperativeExpression"
+        name="ImperativeExpression" abstract="true" eSuperTypes="#EssentialOCL.OclExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.ImperativeIterateExp"
+        name="ImperativeIterateExp" eSuperTypes="#ImperativeOCL.ImperativeLoopExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.ImperativeIterateExp.target"
+          name="target" ordered="false" eType="#EssentialOCL.Variable" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.ImperativeLoopExp"
+        name="ImperativeLoopExp" abstract="true" eSuperTypes="#EssentialOCL.LoopExp #ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.ImperativeLoopExp.condition"
+          name="condition" ordered="false" eType="#EssentialOCL.OclExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.InstantiationExp"
+        name="InstantiationExp" eSuperTypes="#ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.InstantiationExp.argument"
+          name="argument" upperBound="-1" eType="#EssentialOCL.OclExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.InstantiationExp.extent"
+          name="extent" ordered="false" eType="#EssentialOCL.Variable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.InstantiationExp.instantiatedClass"
+          name="instantiatedClass" ordered="false" lowerBound="1" eType="#EMOF.Class"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.ListType" name="ListType"
+        eSuperTypes="#EssentialOCL.CollectionType"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.LogExp" name="LogExp"
+        eSuperTypes="#EssentialOCL.OperationCallExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.LogExp.assertExp"
+          name="assertExp" ordered="false" eType="#ImperativeOCL.AssertExp" transient="true"
+          eOpposite="#ImperativeOCL.AssertExp.log"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.LogExp.condition"
+          name="condition" ordered="false" eType="#EssentialOCL.OclExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.OrderedTupleLiteralExp"
+        name="OrderedTupleLiteralExp" eSuperTypes="#EssentialOCL.LiteralExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.OrderedTupleLiteralExp.part"
+          name="part" upperBound="-1" eType="#ImperativeOCL.OrderedTupleLiteralPart"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.OrderedTupleLiteralPart"
+        name="OrderedTupleLiteralPart" eSuperTypes="#EMOF.Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.OrderedTupleLiteralPart.partOwner"
+          name="partOwner" ordered="false" lowerBound="1" eType="#ImperativeOCL.OrderedTupleLiteralExp"
+          transient="true" eOpposite="#ImperativeOCL.OrderedTupleLiteralExp.part"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.OrderedTupleLiteralPart.value"
+          name="value" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.OrderedTupleType"
+        name="OrderedTupleType" eSuperTypes="#EMOF.Class">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.OrderedTupleType.elementType"
+          name="elementType" upperBound="-1" eType="#EMOF.Type"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.RaiseExp" name="RaiseExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.RaiseExp.argument"
+          name="argument" ordered="false" eType="#EssentialOCL.OclExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.RaiseExp.exception"
+          name="exception" ordered="false" lowerBound="1" eType="#EMOF.Type"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.ReturnExp" name="ReturnExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.ReturnExp.value"
+          name="value" ordered="false" eType="#EssentialOCL.OclExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" xmi:id="ImperativeOCL.SeverityKind" name="SeverityKind">
+      <eLiterals xmi:id="ImperativeOCL.SeverityKind.error" name="error"/>
+      <eLiterals xmi:id="ImperativeOCL.SeverityKind.warning" name="warning" value="1"/>
+      <eLiterals xmi:id="ImperativeOCL.SeverityKind.fatal" name="fatal" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.SwitchExp" name="SwitchExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.SwitchExp.alternativePart"
+          name="alternativePart" upperBound="-1" eType="#ImperativeOCL.AltExp" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.SwitchExp.elsePart"
+          name="elsePart" ordered="false" eType="#EssentialOCL.OclExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.TemplateParameterType"
+        name="TemplateParameterType" eSuperTypes="#EMOF.Type">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="ImperativeOCL.TemplateParameterType.specification"
+          name="specification" eType="#PrimitiveTypes.String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.TryExp" name="TryExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.TryExp.exceptClause"
+          name="exceptClause" upperBound="-1" eType="#ImperativeOCL.CatchExp" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.TryExp.tryBody"
+          name="tryBody" upperBound="-1" eType="#EssentialOCL.OclExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.Typedef" name="Typedef"
+        eSuperTypes="#EMOF.Class">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.Typedef.base"
+          name="base" ordered="false" lowerBound="1" eType="#EMOF.Type"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.Typedef.condition"
+          name="condition" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.UnlinkExp" name="UnlinkExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.UnlinkExp.item"
+          name="item" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.UnlinkExp.target"
+          name="target" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.UnpackExp" name="UnpackExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.UnpackExp.source"
+          name="source" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.UnpackExp.targetVariable"
+          name="targetVariable" lowerBound="1" upperBound="-1" eType="#EssentialOCL.Variable"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.VariableInitExp" name="VariableInitExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.VariableInitExp.referredVariable"
+          name="referredVariable" ordered="false" lowerBound="1" eType="#EssentialOCL.Variable"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="ImperativeOCL.VariableInitExp.withResult"
+          name="withResult" eType="#PrimitiveTypes.Boolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.WhileExp" name="WhileExp"
+        eSuperTypes="#ImperativeOCL.ImperativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.WhileExp.body"
+          name="body" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.WhileExp.condition"
+          name="condition" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ecore:EPackage xmi:id="QVTBase" name="QVTBase" nsURI="http://schema.omg.org/spec/QVT/1.0/qvtbase.xml"
+      nsPrefix="qvtbase">
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTBase.Domain" name="Domain" abstract="true"
+        eSuperTypes="#EMOF.NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTBase.Domain.isCheckable"
+          name="isCheckable" eType="#PrimitiveTypes.Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTBase.Domain.isEnforceable"
+          name="isEnforceable" eType="#PrimitiveTypes.Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Domain.rule"
+          name="rule" ordered="false" lowerBound="1" eType="#QVTBase.Rule" transient="true"
+          eOpposite="#QVTBase.Rule.domain"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Domain.typedModel"
+          name="typedModel" ordered="false" lowerBound="1" eType="#QVTBase.TypedModel"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTBase.Function" name="Function"
+        eSuperTypes="#EMOF.Operation">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Function.queryExpression"
+          name="queryExpression" ordered="false" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTBase.FunctionParameter" name="FunctionParameter"
+        eSuperTypes="#EssentialOCL.Variable #EMOF.Parameter"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTBase.Pattern" name="Pattern"
+        eSuperTypes="#EMOF.Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Pattern.bindsTo"
+          name="bindsTo" ordered="false" upperBound="-1" eType="#EssentialOCL.Variable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Pattern.predicate"
+          name="predicate" ordered="false" upperBound="-1" eType="#QVTBase.Predicate"
+          containment="true" eOpposite="#QVTBase.Predicate.pattern"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Pattern.whenOwner"
+          name="whenOwner" ordered="false" eType="#QVTRelation.Relation" transient="true"
+          eOpposite="#QVTRelation.Relation.when"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Pattern.whereOwner"
+          name="whereOwner" ordered="false" eType="#QVTRelation.Relation" transient="true"
+          eOpposite="#QVTRelation.Relation.where"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTBase.Predicate" name="Predicate"
+        eSuperTypes="#EMOF.Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Predicate.conditionExpression"
+          name="conditionExpression" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Predicate.pattern"
+          name="pattern" ordered="false" lowerBound="1" eType="#QVTBase.Pattern" transient="true"
+          eOpposite="#QVTBase.Pattern.predicate"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTBase.Rule" name="Rule" abstract="true"
+        eSuperTypes="#EMOF.NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Rule.domain"
+          name="domain" ordered="false" upperBound="-1" eType="#QVTBase.Domain" containment="true"
+          eOpposite="#QVTBase.Domain.rule"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Rule.overriden"
+          name="overriden" ordered="false" upperBound="-1" eType="#QVTBase.Rule" eOpposite="#QVTBase.Rule.overrides"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Rule.overrides"
+          name="overrides" ordered="false" eType="#QVTBase.Rule"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Rule.transformation"
+          name="transformation" ordered="false" lowerBound="1" eType="#QVTBase.Transformation"
+          transient="true" eOpposite="#QVTBase.Transformation.rule"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTBase.Transformation" name="Transformation"
+        eSuperTypes="#EMOF.Class #EMOF.Package">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.extendedBy"
+          name="extendedBy" ordered="false" upperBound="-1" eType="#QVTBase.Transformation"
+          eOpposite="#QVTBase.Transformation.extends"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.extends"
+          name="extends" ordered="false" eType="#QVTBase.Transformation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.modelParameter"
+          name="modelParameter" ordered="false" upperBound="-1" eType="#QVTBase.TypedModel"
+          containment="true" eOpposite="#QVTBase.TypedModel.transformation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.ownedTag"
+          name="ownedTag" ordered="false" upperBound="-1" eType="#EMOF.Tag" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.rule"
+          name="rule" ordered="false" upperBound="-1" eType="#QVTBase.Rule" containment="true"
+          eOpposite="#QVTBase.Rule.transformation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTBase.TypedModel" name="TypedModel"
+        eSuperTypes="#EMOF.NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.TypedModel.dependent"
+          name="dependent" ordered="false" upperBound="-1" eType="#QVTBase.TypedModel"
+          eOpposite="#QVTBase.TypedModel.dependsOn"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.TypedModel.dependsOn"
+          name="dependsOn" ordered="false" upperBound="-1" eType="#QVTBase.TypedModel"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.TypedModel.domain"
+          name="domain" ordered="false" upperBound="-1" eType="#QVTBase.Domain" eOpposite="#QVTBase.Domain.typedModel"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.TypedModel.relationImplementation"
+          name="relationImplementation" ordered="false" upperBound="-1" eType="#QVTRelation.RelationImplementation"
+          eOpposite="#QVTRelation.RelationImplementation.inDirectionOf"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.TypedModel.transformation"
+          name="transformation" ordered="false" lowerBound="1" eType="#QVTBase.Transformation"
+          transient="true" eOpposite="#QVTBase.Transformation.modelParameter"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.TypedModel.usedPackage"
+          name="usedPackage" ordered="false" lowerBound="1" upperBound="-1" eType="#EMOF.Package"/>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ecore:EPackage xmi:id="QVTCore" name="QVTCore" nsURI="http://schema.omg.org/spec/QVT/1.0/qvtcore.xml"
+      nsPrefix="qvtcore">
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.Area" name="Area" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.Area.bottomPattern"
+          name="bottomPattern" ordered="false" lowerBound="1" eType="#QVTCore.BottomPattern"
+          containment="true" eOpposite="#QVTCore.BottomPattern.area"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.Area.guardPattern"
+          name="guardPattern" ordered="false" lowerBound="1" eType="#QVTCore.GuardPattern"
+          containment="true" eOpposite="#QVTCore.GuardPattern.area"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.Assignment" name="Assignment"
+        eSuperTypes="#EMOF.Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.Assignment.bottomPattern"
+          name="bottomPattern" ordered="false" lowerBound="1" eType="#QVTCore.BottomPattern"
+          transient="true" eOpposite="#QVTCore.BottomPattern.assignment"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTCore.Assignment.isDefault"
+          name="isDefault" eType="#PrimitiveTypes.Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.Assignment.slotExpression"
+          name="slotExpression" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.Assignment.value"
+          name="value" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.BottomPattern" name="BottomPattern"
+        eSuperTypes="#QVTCore.CorePattern">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.BottomPattern.area"
+          name="area" ordered="false" lowerBound="1" eType="#QVTCore.Area" transient="true"
+          eOpposite="#QVTCore.Area.bottomPattern"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.BottomPattern.assignment"
+          name="assignment" ordered="false" upperBound="-1" eType="#QVTCore.Assignment"
+          containment="true" eOpposite="#QVTCore.Assignment.bottomPattern"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.BottomPattern.enforcementOperation"
+          name="enforcementOperation" ordered="false" upperBound="-1" eType="#QVTCore.EnforcementOperation"
+          containment="true" eOpposite="#QVTCore.EnforcementOperation.bottomPattern"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.BottomPattern.realizedVariable"
+          name="realizedVariable" ordered="false" upperBound="-1" eType="#QVTCore.RealizedVariable"
+          containment="true" eOpposite="#QVTCore.RealizedVariable.bottomPattern"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.CoreDomain" name="CoreDomain"
+        eSuperTypes="#QVTBase.Domain #QVTCore.Area"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.CorePattern" name="CorePattern"
+        eSuperTypes="#QVTBase.Pattern"/>
+    <eClassifiers xsi:type="ecore:EEnum" xmi:id="QVTCore.EnforcementMode" name="EnforcementMode">
+      <eLiterals xmi:id="QVTCore.EnforcementMode.Creation" name="Creation"/>
+      <eLiterals xmi:id="QVTCore.EnforcementMode.Deletion" name="Deletion" value="1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.EnforcementOperation" name="EnforcementOperation"
+        eSuperTypes="#EMOF.Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.EnforcementOperation.bottomPattern"
+          name="bottomPattern" ordered="false" lowerBound="1" eType="#QVTCore.BottomPattern"
+          transient="true" eOpposite="#QVTCore.BottomPattern.enforcementOperation"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTCore.EnforcementOperation.enforcementMode"
+          name="enforcementMode" eType="#QVTCore.EnforcementMode"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.EnforcementOperation.operationCallExp"
+          name="operationCallExp" ordered="false" lowerBound="1" eType="#EssentialOCL.OperationCallExp"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.GuardPattern" name="GuardPattern"
+        eSuperTypes="#QVTCore.CorePattern">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.GuardPattern.area"
+          name="area" ordered="false" lowerBound="1" eType="#QVTCore.Area" transient="true"
+          eOpposite="#QVTCore.Area.guardPattern"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.Mapping" name="Mapping"
+        eSuperTypes="#QVTBase.Rule #QVTCore.Area">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.Mapping.context"
+          name="context" ordered="false" eType="#QVTCore.Mapping" transient="true"
+          eOpposite="#QVTCore.Mapping.local"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.Mapping.local"
+          name="local" ordered="false" upperBound="-1" eType="#QVTCore.Mapping" containment="true"
+          eOpposite="#QVTCore.Mapping.context"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.Mapping.refinement"
+          name="refinement" ordered="false" upperBound="-1" eType="#QVTCore.Mapping"
+          eOpposite="#QVTCore.Mapping.specification"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.Mapping.specification"
+          name="specification" ordered="false" upperBound="-1" eType="#QVTCore.Mapping"
+          eOpposite="#QVTCore.Mapping.refinement"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.PropertyAssignment" name="PropertyAssignment"
+        eSuperTypes="#QVTCore.Assignment">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.PropertyAssignment.targetProperty"
+          name="targetProperty" ordered="false" lowerBound="1" eType="#EMOF.Property"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.RealizedVariable" name="RealizedVariable"
+        eSuperTypes="#EssentialOCL.Variable">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.RealizedVariable.bottomPattern"
+          name="bottomPattern" ordered="false" lowerBound="1" eType="#QVTCore.BottomPattern"
+          transient="true" eOpposite="#QVTCore.BottomPattern.realizedVariable"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.VariableAssignment" name="VariableAssignment"
+        eSuperTypes="#QVTCore.Assignment">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.VariableAssignment.targetVariable"
+          name="targetVariable" ordered="false" lowerBound="1" eType="#EssentialOCL.Variable"/>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ecore:EPackage xmi:id="QVTTemplate" name="QVTTemplate" nsURI="http://schema.omg.org/spec/QVT/1.0/qvttemplate.xml"
+      nsPrefix="qvttemplate">
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTTemplate.CollectionTemplateExp"
+        name="CollectionTemplateExp" eSuperTypes="#QVTTemplate.TemplateExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.CollectionTemplateExp.member"
+          name="member" ordered="false" lowerBound="1" upperBound="-1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.CollectionTemplateExp.referredCollectionType"
+          name="referredCollectionType" ordered="false" lowerBound="1" eType="#EssentialOCL.CollectionType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.CollectionTemplateExp.rest"
+          name="rest" ordered="false" lowerBound="1" eType="#EssentialOCL.Variable"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTTemplate.ObjectTemplateExp" name="ObjectTemplateExp"
+        eSuperTypes="#QVTTemplate.TemplateExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.ObjectTemplateExp.part"
+          name="part" ordered="false" upperBound="-1" eType="#QVTTemplate.PropertyTemplateItem"
+          containment="true" eOpposite="#QVTTemplate.PropertyTemplateItem.objContainer"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.ObjectTemplateExp.referredClass"
+          name="referredClass" ordered="false" lowerBound="1" eType="#EMOF.Class"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTTemplate.PropertyTemplateItem"
+        name="PropertyTemplateItem" eSuperTypes="#EMOF.Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.PropertyTemplateItem.objContainer"
+          name="objContainer" ordered="false" lowerBound="1" eType="#QVTTemplate.ObjectTemplateExp"
+          transient="true" eOpposite="#QVTTemplate.ObjectTemplateExp.part"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.PropertyTemplateItem.referredProperty"
+          name="referredProperty" ordered="false" lowerBound="1" eType="#EMOF.Property"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.PropertyTemplateItem.value"
+          name="value" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTTemplate.TemplateExp" name="TemplateExp"
+        abstract="true" eSuperTypes="#EssentialOCL.LiteralExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.TemplateExp.bindsTo"
+          name="bindsTo" ordered="false" eType="#EssentialOCL.Variable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.TemplateExp.domainPattern"
+          name="domainPattern" ordered="false" lowerBound="1" eType="#QVTRelation.DomainPattern"
+          transient="true" eOpposite="#QVTRelation.DomainPattern.templateExpression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.TemplateExp.where"
+          name="where" ordered="false" eType="#EssentialOCL.OclExpression" containment="true"/>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ecore:EPackage xmi:id="QVTRelation" name="QVTRelation" nsURI="http://schema.omg.org/spec/QVT/1.0/qvtrelation.xml"
+      nsPrefix="qvtrelation">
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.DomainPattern" name="DomainPattern"
+        eSuperTypes="#QVTBase.Pattern">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.DomainPattern.relationDomain"
+          name="relationDomain" ordered="false" lowerBound="1" eType="#QVTRelation.RelationDomain"
+          transient="true" eOpposite="#QVTRelation.RelationDomain.pattern"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.DomainPattern.templateExpression"
+          name="templateExpression" ordered="false" eType="#QVTTemplate.TemplateExp"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.Key" name="Key" eSuperTypes="#EMOF.Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Key.identifies"
+          name="identifies" ordered="false" lowerBound="1" eType="#EMOF.Class"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Key.part"
+          name="part" ordered="false" lowerBound="1" upperBound="-1" eType="#EMOF.Property"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Key.transformation"
+          name="transformation" ordered="false" eType="#QVTRelation.RelationalTransformation"
+          transient="true" eOpposite="#QVTRelation.RelationalTransformation.ownedKey"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.Relation" name="Relation"
+        eSuperTypes="#QVTBase.Rule">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTRelation.Relation.isTopLevel"
+          name="isTopLevel" eType="#PrimitiveTypes.Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Relation.operationalImpl"
+          name="operationalImpl" ordered="false" upperBound="-1" eType="#QVTRelation.RelationImplementation"
+          containment="true" eOpposite="#QVTRelation.RelationImplementation.relation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Relation.owner"
+          name="owner" ordered="false" eType="#QVTOperational.OperationalTransformation"
+          transient="true" eOpposite="#QVTOperational.OperationalTransformation.relation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Relation.refiningOperation"
+          name="refiningOperation" ordered="false" upperBound="-1" eType="#QVTOperational.MappingOperation"
+          eOpposite="#QVTOperational.MappingOperation.refinedRelation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Relation.relationCallExp"
+          name="relationCallExp" ordered="false" upperBound="-1" eType="#QVTRelation.RelationCallExp"
+          eOpposite="#QVTRelation.RelationCallExp.referredRelation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Relation.variable"
+          name="variable" ordered="false" upperBound="-1" eType="#EssentialOCL.Variable"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Relation.when"
+          name="when" ordered="false" eType="#QVTBase.Pattern" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Relation.where"
+          name="where" ordered="false" eType="#QVTBase.Pattern" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.RelationCallExp" name="RelationCallExp"
+        eSuperTypes="#EssentialOCL.OclExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationCallExp.argument"
+          name="argument" lowerBound="2" upperBound="-1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationCallExp.referredRelation"
+          name="referredRelation" ordered="false" lowerBound="1" eType="#QVTRelation.Relation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.RelationDomain" name="RelationDomain"
+        eSuperTypes="#QVTBase.Domain">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomain.defaultAssignment"
+          name="defaultAssignment" ordered="false" upperBound="-1" eType="#QVTRelation.RelationDomainAssignment"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomain.pattern"
+          name="pattern" ordered="false" lowerBound="1" eType="#QVTRelation.DomainPattern"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomain.referringParameter"
+          name="referringParameter" ordered="false" upperBound="-1" eType="#QVTOperational.MappingParameter"
+          eOpposite="#QVTOperational.MappingParameter.referredDomain"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomain.rootVariable"
+          name="rootVariable" ordered="false" lowerBound="1" eType="#EssentialOCL.Variable"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.RelationDomainAssignment"
+        name="RelationDomainAssignment" eSuperTypes="#EMOF.Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomainAssignment.owner"
+          name="owner" ordered="false" lowerBound="1" eType="#QVTRelation.RelationDomain"
+          transient="true" eOpposite="#QVTRelation.RelationDomain.defaultAssignment"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomainAssignment.valueExp"
+          name="valueExp" ordered="false" lowerBound="1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomainAssignment.variable"
+          name="variable" ordered="false" lowerBound="1" eType="#EssentialOCL.Variable"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.RelationImplementation"
+        name="RelationImplementation" eSuperTypes="#EMOF.Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationImplementation.impl"
+          name="impl" ordered="false" lowerBound="1" eType="#EMOF.Operation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationImplementation.inDirectionOf"
+          name="inDirectionOf" ordered="false" lowerBound="1" eType="#QVTBase.TypedModel"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationImplementation.relation"
+          name="relation" ordered="false" lowerBound="1" eType="#QVTRelation.Relation"
+          transient="true" eOpposite="#QVTRelation.Relation.operationalImpl"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.RelationalTransformation"
+        name="RelationalTransformation" eSuperTypes="#QVTBase.Transformation">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationalTransformation.ownedKey"
+          name="ownedKey" ordered="false" upperBound="-1" eType="#QVTRelation.Key"
+          containment="true" eOpposite="#QVTRelation.Key.transformation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationalTransformation.refinement"
+          name="refinement" ordered="false" upperBound="-1" eType="#QVTOperational.OperationalTransformation"
+          eOpposite="#QVTOperational.OperationalTransformation.refined"/>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ecore:EPackage xmi:id="QVTOperational" name="QVTOperational" nsURI="http://schema.omg.org/spec/QVT/1.0/qvtoperational.xml"
+      nsPrefix="qvtoperational">
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.Constructor" name="Constructor"
+        eSuperTypes="#QVTOperational.ImperativeOperation"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.ConstructorBody"
+        name="ConstructorBody" eSuperTypes="#QVTOperational.OperationBody">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ConstructorBody.objectExp"
+          name="objectExp" ordered="false" eType="#QVTOperational.ObjectExp" transient="true"
+          eOpposite="#QVTOperational.ObjectExp.body"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.ContextualProperty"
+        name="ContextualProperty" eSuperTypes="#EMOF.Property">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ContextualProperty.context"
+          name="context" ordered="false" lowerBound="1" eType="#EMOF.Class"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ContextualProperty.initExpression"
+          name="initExpression" ordered="false" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ContextualProperty.overridden"
+          name="overridden" ordered="false" lowerBound="1" eType="#EMOF.Property"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" xmi:id="QVTOperational.DirectionKind" name="DirectionKind">
+      <eLiterals xmi:id="QVTOperational.DirectionKind.in" name="in"/>
+      <eLiterals xmi:id="QVTOperational.DirectionKind.inout" name="inout" value="1"/>
+      <eLiterals xmi:id="QVTOperational.DirectionKind.out" name="out" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.EntryOperation" name="EntryOperation"
+        eSuperTypes="#QVTOperational.ImperativeOperation">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.EntryOperation.entryContext"
+          name="entryContext" ordered="false" lowerBound="1" eType="#QVTOperational.Module"
+          eOpposite="#QVTOperational.Module.entry"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.Helper" name="Helper"
+        eSuperTypes="#QVTOperational.ImperativeOperation">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTOperational.Helper.isQuery"
+          name="isQuery" eType="#PrimitiveTypes.Boolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.ImperativeCallExp"
+        name="ImperativeCallExp" eSuperTypes="#EssentialOCL.OperationCallExp">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTOperational.ImperativeCallExp.isVirtual"
+          name="isVirtual" eType="#PrimitiveTypes.Boolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.ImperativeOperation"
+        name="ImperativeOperation" eSuperTypes="#EMOF.Operation">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ImperativeOperation.body"
+          name="body" ordered="false" eType="#QVTOperational.OperationBody" containment="true"
+          eOpposite="#QVTOperational.OperationBody.operation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ImperativeOperation.context"
+          name="context" ordered="false" eType="#QVTOperational.VarParameter" containment="true"
+          eOpposite="#QVTOperational.VarParameter.ctxOwner"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTOperational.ImperativeOperation.isBlackbox"
+          name="isBlackbox" eType="#PrimitiveTypes.Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ImperativeOperation.overridden"
+          name="overridden" ordered="false" eType="#QVTOperational.ImperativeOperation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ImperativeOperation.overriding"
+          name="overriding" ordered="false" upperBound="-1" eType="#QVTOperational.ImperativeOperation"
+          eOpposite="#QVTOperational.ImperativeOperation.overridden"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ImperativeOperation.result"
+          name="result" upperBound="-1" eType="#QVTOperational.VarParameter" containment="true"
+          eOpposite="#QVTOperational.VarParameter.resOwner"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" xmi:id="QVTOperational.ImportKind" name="ImportKind">
+      <eLiterals xmi:id="QVTOperational.ImportKind.extension" name="extension"/>
+      <eLiterals xmi:id="QVTOperational.ImportKind.access" name="access" value="1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.Library" name="Library"
+        eSuperTypes="#QVTOperational.Module"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.MappingBody" name="MappingBody"
+        eSuperTypes="#QVTOperational.OperationBody">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingBody.endSection"
+          name="endSection" upperBound="-1" eType="#EssentialOCL.OclExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingBody.initSection"
+          name="initSection" upperBound="-1" eType="#EssentialOCL.OclExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.MappingCallExp" name="MappingCallExp"
+        eSuperTypes="#QVTOperational.ImperativeCallExp">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTOperational.MappingCallExp.isStrict"
+          name="isStrict" eType="#PrimitiveTypes.Boolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.MappingOperation"
+        name="MappingOperation" eSuperTypes="#QVTOperational.ImperativeOperation">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingOperation.disjunct"
+          name="disjunct" upperBound="-1" eType="#QVTOperational.MappingOperation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingOperation.disjuncter"
+          name="disjuncter" ordered="false" upperBound="-1" eType="#QVTOperational.MappingOperation"
+          eOpposite="#QVTOperational.MappingOperation.disjunct"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingOperation.inherited"
+          name="inherited" upperBound="-1" eType="#QVTOperational.MappingOperation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingOperation.inheriting"
+          name="inheriting" ordered="false" upperBound="-1" eType="#QVTOperational.MappingOperation"
+          eOpposite="#QVTOperational.MappingOperation.inherited"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingOperation.merged"
+          name="merged" upperBound="-1" eType="#QVTOperational.MappingOperation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingOperation.merging"
+          name="merging" ordered="false" upperBound="-1" eType="#QVTOperational.MappingOperation"
+          eOpposite="#QVTOperational.MappingOperation.merged"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingOperation.refinedRelation"
+          name="refinedRelation" ordered="false" eType="#QVTRelation.Relation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingOperation.resolveExpression"
+          name="resolveExpression" ordered="false" upperBound="-1" eType="#QVTOperational.ResolveInExp"
+          eOpposite="#QVTOperational.ResolveInExp.inMapping"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingOperation.when"
+          name="when" ordered="false" eType="#EssentialOCL.OclExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingOperation.where"
+          name="where" ordered="false" eType="#EssentialOCL.OclExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.MappingParameter"
+        name="MappingParameter" eSuperTypes="#QVTOperational.VarParameter">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingParameter.extent"
+          name="extent" ordered="false" eType="#QVTOperational.ModelParameter"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingParameter.referredDomain"
+          name="referredDomain" ordered="false" eType="#QVTRelation.RelationDomain"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.ModelParameter" name="ModelParameter"
+        eSuperTypes="#QVTOperational.VarParameter">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ModelParameter.mappingParameter"
+          name="mappingParameter" ordered="false" upperBound="-1" eType="#QVTOperational.MappingParameter"
+          eOpposite="#QVTOperational.MappingParameter.extent"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ModelParameter.module"
+          name="module" ordered="false" lowerBound="1" eType="#QVTOperational.OperationalTransformation"
+          transient="true" eOpposite="#QVTOperational.OperationalTransformation.modelParameter"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.ModelType" name="ModelType"
+        eSuperTypes="#EMOF.Class">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ModelType.additionalCondition"
+          name="additionalCondition" upperBound="-1" eType="#EssentialOCL.OclExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTOperational.ModelType.conformanceKind"
+          name="conformanceKind" eType="#PrimitiveTypes.String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ModelType.metamodel"
+          name="metamodel" lowerBound="1" upperBound="-1" eType="#EMOF.Package"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ModelType.module"
+          name="module" ordered="false" upperBound="-1" eType="#QVTOperational.Module"
+          eOpposite="#QVTOperational.Module.usedModelType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ModelType.moduleImport"
+          name="moduleImport" ordered="false" upperBound="-1" eType="#QVTOperational.ModuleImport"
+          eOpposite="#QVTOperational.ModuleImport.binding"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.Module" name="Module"
+        eSuperTypes="#EMOF.Class #EMOF.Package">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.Module.configProperty"
+          name="configProperty" upperBound="-1" eType="#EMOF.Property"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.Module.entry"
+          name="entry" ordered="false" eType="#QVTOperational.EntryOperation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.Module.importingElement"
+          name="importingElement" ordered="false" upperBound="-1" eType="#QVTOperational.ModuleImport"
+          eOpposite="#QVTOperational.ModuleImport.importedModule"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTOperational.Module.isBlackbox"
+          name="isBlackbox" eType="#PrimitiveTypes.Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.Module.moduleImport"
+          name="moduleImport" upperBound="-1" eType="#QVTOperational.ModuleImport"
+          containment="true" eOpposite="#QVTOperational.ModuleImport.module"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.Module.ownedTag"
+          name="ownedTag" upperBound="-1" eType="#EMOF.Tag" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.Module.ownedVariable"
+          name="ownedVariable" ordered="false" upperBound="-1" eType="#EssentialOCL.Variable"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.Module.usedModelType"
+          name="usedModelType" upperBound="-1" eType="#QVTOperational.ModelType"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.ModuleImport" name="ModuleImport"
+        eSuperTypes="#EMOF.Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ModuleImport.binding"
+          name="binding" upperBound="-1" eType="#QVTOperational.ModelType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ModuleImport.importedModule"
+          name="importedModule" ordered="false" lowerBound="1" eType="#QVTOperational.Module"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTOperational.ModuleImport.kind"
+          name="kind" eType="#QVTOperational.ImportKind"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ModuleImport.module"
+          name="module" ordered="false" eType="#QVTOperational.Module" transient="true"
+          eOpposite="#QVTOperational.Module.moduleImport"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.ObjectExp" name="ObjectExp"
+        eSuperTypes="#ImperativeOCL.InstantiationExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ObjectExp.body"
+          name="body" ordered="false" lowerBound="1" eType="#QVTOperational.ConstructorBody"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ObjectExp.referredObject"
+          name="referredObject" ordered="false" lowerBound="1" eType="#EssentialOCL.Variable"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.OperationBody" name="OperationBody"
+        eSuperTypes="#EMOF.Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.OperationBody.content"
+          name="content" upperBound="-1" eType="#EssentialOCL.OclExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.OperationBody.operation"
+          name="operation" ordered="false" eType="#QVTOperational.ImperativeOperation"
+          transient="true" eOpposite="#QVTOperational.ImperativeOperation.body"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.OperationBody.variable"
+          name="variable" ordered="false" upperBound="-1" eType="#EssentialOCL.Variable"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.OperationalTransformation"
+        name="OperationalTransformation" eSuperTypes="#QVTOperational.Module">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.OperationalTransformation.intermediateClass"
+          name="intermediateClass" upperBound="-1" eType="#EMOF.Class"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.OperationalTransformation.intermediateProperty"
+          name="intermediateProperty" upperBound="-1" eType="#EMOF.Property"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.OperationalTransformation.modelParameter"
+          name="modelParameter" upperBound="-1" eType="#QVTOperational.ModelParameter"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.OperationalTransformation.refined"
+          name="refined" ordered="false" eType="#QVTRelation.RelationalTransformation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.OperationalTransformation.relation"
+          name="relation" upperBound="-1" eType="#QVTRelation.Relation" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.ResolveExp" name="ResolveExp"
+        eSuperTypes="#EssentialOCL.CallExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ResolveExp.condition"
+          name="condition" ordered="false" eType="#EssentialOCL.OclExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTOperational.ResolveExp.isDeferred"
+          name="isDeferred" eType="#PrimitiveTypes.Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTOperational.ResolveExp.isInverse"
+          name="isInverse" eType="#PrimitiveTypes.Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTOperational.ResolveExp.one"
+          name="one" eType="#PrimitiveTypes.Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ResolveExp.target"
+          name="target" ordered="false" eType="#EssentialOCL.Variable" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.ResolveInExp" name="ResolveInExp"
+        eSuperTypes="#QVTOperational.ResolveExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ResolveInExp.inMapping"
+          name="inMapping" ordered="false" eType="#QVTOperational.MappingOperation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.VarParameter" name="VarParameter"
+        eSuperTypes="#EssentialOCL.Variable #EMOF.Parameter">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.VarParameter.ctxOwner"
+          name="ctxOwner" ordered="false" eType="#QVTOperational.ImperativeOperation"
+          transient="true" eOpposite="#QVTOperational.ImperativeOperation.context"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTOperational.VarParameter.kind"
+          name="kind" eType="#QVTOperational.DirectionKind"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.VarParameter.resOwner"
+          name="resOwner" ordered="false" eType="#QVTOperational.ImperativeOperation"
+          transient="true" eOpposite="#QVTOperational.ImperativeOperation.result"/>
+    </eClassifiers>
+  </ecore:EPackage>
+</xmi:XMI>
