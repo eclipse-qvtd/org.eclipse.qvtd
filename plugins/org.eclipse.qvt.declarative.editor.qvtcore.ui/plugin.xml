@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension point="org.eclipse.core.resources.builders"
+         id="QVTcBuilder" name="QVT Core Project Builder">
+      <builder hasNature="true">
+         <run class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcBuilder"/>
+      </builder>
+   </extension>
+   
+   <extension point="org.eclipse.core.resources.markers"
+         id="qvtcProblem" name="QVT Core Problem">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <persistent value="true"/>
+   </extension>
+   
+   <extension point="org.eclipse.core.resources.natures"
+         id="QVTcNature" name="QVT Core Project Nature" >
+      <runtime>
+         <run class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcNature"/>
+      </runtime>
+      <builder id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcBuilder"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution id="org.eclipse.qvt.declarative.editor.qvtcore.ui.contribution1"
+            adaptable="true" nameFilter="*"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action id="org.eclipse.qvt.declarative.editor.qvtcore.ui.addRemoveNatureAction"
+               label="Add QVT Core Nature" menubarPath="org.eclipse.qvt.declarative.naturesMenu/group1" enablesFor="+"
+               class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcToggleNatureAction"/>
+          <visibility>
+            <not>
+               <objectState name="projectNature" value="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcNature"/>
+            </not>
+         </visibility>
+      </objectContribution>
+      <objectContribution id="org.eclipse.qvt.declarative.editor.qvtcore.ui.contribution2"
+            adaptable="true" nameFilter="*"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action id="org.eclipse.qvt.declarative.editor.qvtcore.ui.addRemoveNatureAction"
+               label="Remove QVT Core Nature" menubarPath="org.eclipse.qvt.declarative.naturesMenu/group1" enablesFor="+"
+               class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcToggleNatureAction"/>
+          <visibility>
+            <objectState name="projectNature" value="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcNature"/>
+         </visibility>
+      </objectContribution>
+   </extension>
+   
+   <extension point="org.eclipse.ui.editors">
+      <editor id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor"
+            name="QVT Core Text Editor"
+            extensions="qvtc,qvtcore,eqvtcore"
+            icon="icons/QVTcModelFile.gif"
+            contributorClass="org.eclipse.qvt.declarative.editor.ui.actions.PagedActionBarContributor"
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.newWizards">
+      <wizard id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcNewWizard"
+            name="QVT Core Text file"
+            icon="icons/QVTcModelFile.gif"
+            category="org.eclipse.qvt.declarative.editor"
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcNewWizard"/>
+   </extension>
+   
+   <extension point="org.eclipse.qvt.declarative.editor.ui.pageDefinition">
+     <page name="QVT Core" creationFactory="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcCreationFactory"
+      	pageFactory="org.eclipse.qvt.declarative.editor.ui.text.TextPageFactory"/>
+   </extension>
+
+</plugin>
