@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvt.declarative.parser/src"
+    modelPluginID="org.eclipse.qvt.declarative.parser" modelName="QVTCST" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" usedGenPackages="../../org.eclipse.ocl/model/OCLCST.genmodel#//ocl">
+  <foreignModel>QVTCST.ecore</foreignModel>
+  <genPackages prefix="QVT" basePackage="org.eclipse.qvt.declarative.parser" disposableProviderFactory="true"
+      ecorePackage="QVTCST.ecore#/">
+    <nestedGenPackages prefix="QVTCST" basePackage="org.eclipse.qvt.declarative.parser.qvt"
+        disposableProviderFactory="true" ecorePackage="QVTCST.ecore#//cst">
+      <genClasses ecoreClass="QVTCST.ecore#//cst/IdentifiedCS">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTCST.ecore#//cst/IdentifiedCS/identifier"/>
+      </genClasses>
+      <genClasses ecoreClass="QVTCST.ecore#//cst/IdentifierCS">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTCST.ecore#//cst/IdentifierCS/value"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="QVTCST.ecore#//cst/IHasName"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

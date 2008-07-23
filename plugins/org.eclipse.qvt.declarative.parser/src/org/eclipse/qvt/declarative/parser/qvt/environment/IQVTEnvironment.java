@@ -1,0 +1,66 @@
+/*******************************************************************************
+ * Copyright (c) 2007,2008 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *******************************************************************************/
+package org.eclipse.qvt.declarative.parser.qvt.environment;
+
+import java.util.List;
+
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.LookupException;
+import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.ocl.ecore.OCLExpression;
+import org.eclipse.ocl.ecore.Variable;
+import org.eclipse.ocl.utilities.TypedElement;
+import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
+import org.eclipse.qvt.declarative.parser.environment.ICSTEnvironment;
+
+public interface IQVTEnvironment extends ICSTEnvironment
+{
+	public boolean checkFeatureCompatibility(CSTNode cstNode, EClassifier featureType, OCLExpression oclExpression);
+	
+	/**
+	 * Return the error message for a LookupException, typically by appending details
+	 * of the ambiguities to the standard exception message.
+	 * 
+	 * @param e lookup exception
+	 * @return full message
+	 */
+	public String formatLookupException(LookupException e);
+	
+	public QVTFormattingHelper getFormatter();
+
+	/**
+	 * Return the source model name prefix that identifies the origin of eObject. 
+	 * @param eObject
+	 * @return the prefix or null if not known
+	 */
+	public String getModelName(EObject eObject);
+	public Transformation getTransformation();
+	
+	/**
+	 * Return the implicit source for an operation by delegating to the parent environment if possible,
+	 * otherwise performing the inherited OCL lookup.
+	 */
+	public Variable lookupImplicitSourceForOperation(String name, List<? extends TypedElement<EClassifier>> params);
+	
+	/**
+	 * Return the implicit source for a property by delegating to the parent environment if possible,
+	 * otherwise performing the inherited OCL lookup.
+	 */
+	public Variable lookupImplicitSourceForProperty(String name);
+	public Transformation lookupImportedTransformation(String name);
+	public Transformation tryLookupTransformation(List<String> pathName) throws LookupException;
+
+	/**
+	 * Return the Variable visible as name in this environment.
+     */
+	public Variable tryLookupVariable(String name) throws LookupException;
+}

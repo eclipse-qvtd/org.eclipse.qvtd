@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvt"
+    nsURI="http://www.eclipse.org/qvt/1.0/QVT" nsPrefix="qvt">
+  <eSubpackages name="cst" nsURI="http://www.eclipse.org/qvt/1.0/QVTcst" nsPrefix="eqvtrcst">
+    <eClassifiers xsi:type="ecore:EClass" name="IdentifiedCS" eSuperTypes="../../org.eclipse.ocl/model/OCLCST.ecore#//cst/CSTNode #//cst/IHasName">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" eType="#//cst/IdentifierCS"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IdentifierCS" eSuperTypes="../../org.eclipse.ocl/model/OCLCST.ecore#//cst/CSTNode #//cst/IHasName">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IHasName" instanceClassName="org.eclipse.qvt.declarative.parser.environment.IHasName"
+        abstract="true" interface="true"/>
+  </eSubpackages>
+</ecore:EPackage>
