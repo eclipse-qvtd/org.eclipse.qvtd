@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.eclipse.qvt.declarative.modelregistry" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="org.eclipse.qvt.declarative.modelregistry" id="model_content" name="%ExtPoint.model_content"/>
+      </appinfo>
+      <documentation>
+         The model_content extension point supports registration of different types of model to be loaded as Ecore models by &lt;tt&gt;EcoreFamilyResourceSetImpl&lt;/tt&gt;. 
+&lt;p&gt;
+XML files may be registered for distinct action according to the namespace of the root element. Thus the EMOF namespace &lt;tt&gt;http://schema.omg.org/spec/mof/2.0/emof.xmi&lt;/tt&gt; is registered by this mechanism so that EMOF files are loaded via &lt;tt&gt;EMOFResourceFactoryImpl&lt;/tt&gt;, which supervises their transformation to Ecore.
+&lt;p&gt;
+Non-XML files may registered for distinct action arbitrated by registration of a textual analysis class. Thus an analyser can be registered for the KM3 textual meta-modelling notation, so that translation to Ecore occurs whenever a KM3 model is referenced. [This facility is perhaps better realised by defining the model serialisation as KM3 when registering the model in the model registry.]
+&lt;p&gt;
+This facility allows models to be stored with arbitrary representation and file extension, most notably EMOF and other models may all share the .xml file extension.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <choice>
+            <element ref="xml" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="text" minOccurs="0" maxOccurs="unbounded"/>
+         </choice>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The standard extension point type name.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  The optional extension point identifier.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  The optional extension point name.
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="xml">
+      <annotation>
+         <documentation>
+            Defines a model content that is identified by the root namespace of an XML file.
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="uri" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The root namespace value that identifies the content.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="factory" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The Resource.Factory class that creates and loads resources of this content type.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.eclipse.emf.ecore.resource.Resource$Factory"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="text">
+      <annotation>
+         <documentation>
+            Defines a model content that is identified by textual analysis.
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="analyser" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The Java class that performs the textual analysis of a candidate input stream produce a Resource if successful.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.eclipse.gmt.umlx.registry.resource.ModelContentAnalyser"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         ? a candidate for Eclipse EMF 2.3.0.
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         The EMOF and Ecore registrations are:
+&lt;pre&gt;
+  &lt;extension point=&quot;org.eclipse.gmt.umlx.registry.model_content&quot;&gt;
+     &lt;xml uri=&quot;http://schema.omg.org/spec/mof/2.0/emof.xmi&quot;
+          factory=&quot;org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl&quot;/&gt;
+     &lt;xml uri=&quot;http://www.eclipse.org/emf/2002/Ecore&quot;
+          factory=&quot;org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl&quot;/&gt;
+  &lt;/extension&gt;
+&lt;/pre&gt;
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiInfo"/>
+      </appinfo>
+      <documentation>
+         Registered XML contents must implement the &lt;tt&gt;Resource.Factory&lt;/tt&gt; interface.
+
+Registered textual contents must implement the &lt;tt&gt;ModelContentAnalyser&lt;/tt&gt; interface.
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="implementation"/>
+      </appinfo>
+      <documentation>
+         Registrations for the EMOF and Ecore namespaces are provided.
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="copyright"/>
+      </appinfo>
+      <documentation>
+         Copyright (c) 2007 E.D.Willink and others.&lt;br&gt;
+All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at &lt;a 
+href=&quot;http://www.eclipse.org/legal/epl-v10.html&quot;&gt;http://www.eclipse.org/legal/epl-v10.html&lt;/a&gt;
+      </documentation>
+   </annotation>
+
+</schema>

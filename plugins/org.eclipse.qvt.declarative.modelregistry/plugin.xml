@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="accessor_kind" name="%ExtPoint.accessor_kind" schema="schema/accessor_kind.exsd"/>
+   <extension-point id="model_content" name="%ExtPoint.model_content" schema="schema/model_content.exsd"/>
+   <extension-point id="model_serialization" name="%ExtPoint.model_serialization" schema="schema/model_serialization.exsd"/>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package uri="http://www.eclipse.org/gmt/umlx/2007/ModelRegistry" 
+       class="org.eclipse.qvt.declarative.modelregistry.ModelRegistryPackage"
+       genModel="model/registry.genmodel" /> 
+    <package uri="http://www.eclipse.org/qvt/1.0/ModelRegistry" 
+       class="org.eclipse.qvt.declarative.modelregistry.ModelRegistryPackage"
+       genModel="model/registry.genmodel" /> 
+  </extension>
+  
+  <extension point="org.eclipse.qvt.declarative.modelregistry.accessor_kind">
+     <accessor class="org.eclipse.qvt.declarative.modelregistry.model.ModelNameAccessor"/>
+     <accessor class="org.eclipse.qvt.declarative.modelregistry.model.URIAccessor"/>
+  </extension>
+  
+  <!--extension point="org.eclipse.gmt.umlx.registry.model_content">
+     <xml uri="http://www.eclipse.org/emf/2002/Ecore"
+          factory="org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl"/>
+     <xml uri="http://schema.omg.org/spec/mof/2.0/emof.xmi"
+          factory="org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl"/>
+  </extension-->
+
+  <extension point="org.eclipse.qvt.declarative.modelregistry.model_serialization">
+     <entry name="XML" factory="org.eclipse.qvt.declarative.modelregistry.resource.EcoreFamilyResourceFactoryImpl"/>
+  </extension>
+
+</plugin>
