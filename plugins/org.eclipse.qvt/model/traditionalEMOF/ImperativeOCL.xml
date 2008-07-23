@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emof:Package xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="ImperativeOCL"
+    name="ImperativeOCL" uri="http://schema.omg.org/spec/QVT/1.0/imperativeocl.xml">
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.AltExp" name="AltExp" superClass="ImperativeOCL.ImperativeExpression">
+    <ownedAttribute xmi:id="ImperativeOCL.AltExp.body" name="body" isOrdered="true"
+        isComposite="true">
+      <ownedComment body="altBodyOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.AltExp.condition" name="condition" isOrdered="true"
+        isComposite="true">
+      <ownedComment body="altCondOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.AssertExp" name="AssertExp"
+      superClass="ImperativeOCL.ImperativeExpression">
+    <ownedAttribute xmi:id="ImperativeOCL.AssertExp.assertion" name="assertion" isOrdered="true"
+        isComposite="true">
+      <ownedComment body="assertOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.AssertExp.log" name="log" isOrdered="true"
+        lower="0" type="ImperativeOCL.LogExp" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.AssertExp.severity" name="severity" isOrdered="true"
+        lower="0" type="ImperativeOCL.SeverityKind" default="error"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.AssignExp" name="AssignExp"
+      superClass="ImperativeOCL.ImperativeExpression">
+    <ownedAttribute xmi:id="ImperativeOCL.AssignExp.defaultValue" name="defaultValue"
+        isOrdered="true" lower="0" isComposite="true">
+      <ownedComment body="defaultOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.AssignExp.isReset" name="isReset" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="EMOF.xml#EMOF.Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.AssignExp.left" name="left" isOrdered="true"
+        isComposite="true">
+      <ownedComment body="leftOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.AssignExp.value" name="value" isOrdered="true"
+        lower="0" upper="*" isComposite="true">
+      <ownedComment body="valueOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.BlockExp" name="BlockExp"
+      superClass="ImperativeOCL.ImperativeExpression">
+    <ownedAttribute xmi:id="ImperativeOCL.BlockExp.body" name="body" isOrdered="true"
+        lower="0" upper="*" isComposite="true">
+      <ownedComment body="blockOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.BreakExp" name="BreakExp"
+      superClass="ImperativeOCL.ImperativeExpression"/>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.CatchExp" name="CatchExp"
+      superClass="ImperativeOCL.ImperativeExpression">
+    <ownedAttribute xmi:id="ImperativeOCL.CatchExp.body" name="body" isOrdered="true"
+        lower="0" upper="*" isComposite="true">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.CatchExp.exception" name="exception" isOrdered="true"
+        lower="0" upper="*">
+      <ownedComment body="tryExpression">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Type"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.ComputeExp" name="ComputeExp"
+      superClass="ImperativeOCL.ImperativeExpression">
+    <ownedAttribute xmi:id="ImperativeOCL.ComputeExp.body" name="body" isOrdered="true"
+        isComposite="true">
+      <ownedComment body="computeOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.ComputeExp.returnedElement" name="returnedElement"
+        isOrdered="true" isComposite="true">
+      <ownedComment body="computeOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.Variable"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.ContinueExp" name="ContinueExp"
+      superClass="ImperativeOCL.ImperativeExpression"/>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.DictLiteralExp" name="DictLiteralExp">
+    <superClass href="EssentialOCL.xml#EssentialOCL.LiteralExp"/>
+    <ownedAttribute xmi:id="ImperativeOCL.DictLiteralExp.part" name="part" lower="0"
+        upper="*" type="ImperativeOCL.DictLiteralPart" isComposite="true">
+      <ownedComment body="partOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.DictLiteralPart" name="DictLiteralPart">
+    <superClass href="EMOF.xml#EMOF.Element"/>
+    <ownedAttribute xmi:id="ImperativeOCL.DictLiteralPart.key" name="key" isOrdered="true"
+        isComposite="true">
+      <ownedComment body="keyOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.DictLiteralPart.value" name="value" isOrdered="true"
+        isComposite="true">
+      <ownedComment body="valOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.DictionaryType" name="DictionaryType">
+    <superClass href="EssentialOCL.xml#EssentialOCL.CollectionType"/>
+    <ownedAttribute xmi:id="ImperativeOCL.DictionaryType.keyType" name="keyType" isOrdered="true"
+        lower="0">
+      <ownedComment body="keyDict">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Type"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.ForExp" name="ForExp" superClass="ImperativeOCL.ImperativeLoopExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.ImperativeExpression" name="ImperativeExpression"
+      isAbstract="true">
+    <superClass href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.ImperativeIterateExp" name="ImperativeIterateExp"
+      superClass="ImperativeOCL.ImperativeLoopExp">
+    <ownedAttribute xmi:id="ImperativeOCL.ImperativeIterateExp.target" name="target"
+        isOrdered="true" lower="0" isComposite="true">
+      <ownedComment body="tgtOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.Variable"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.ImperativeLoopExp" name="ImperativeLoopExp"
+      isAbstract="true">
+    <superClass href="EssentialOCL.xml#EssentialOCL.LoopExp"/>
+    <superClass href="#ImperativeOCL.ImperativeExpression"/>
+    <ownedAttribute xmi:id="ImperativeOCL.ImperativeLoopExp.condition" name="condition"
+        isOrdered="true" lower="0" isComposite="true">
+      <ownedComment body="loopCondOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.InstantiationExp" name="InstantiationExp"
+      superClass="ImperativeOCL.ImperativeExpression">
+    <ownedAttribute xmi:id="ImperativeOCL.InstantiationExp.argument" name="argument"
+        isOrdered="true" lower="0" upper="*" isComposite="true">
+      <ownedComment body="argOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.InstantiationExp.extent" name="extent" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.Variable"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.InstantiationExp.instantiatedClass" name="instantiatedClass"
+        isOrdered="true">
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Class"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.ListType" name="ListType">
+    <superClass href="EssentialOCL.xml#EssentialOCL.CollectionType"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.LogExp" name="LogExp">
+    <superClass href="EssentialOCL.xml#EssentialOCL.OperationCallExp"/>
+    <superClass href="#ImperativeOCL.ImperativeExpression"/>
+    <ownedAttribute xmi:id="ImperativeOCL.LogExp.condition" name="condition" isOrdered="true"
+        lower="0" isComposite="true">
+      <ownedComment body="logOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.OrderedTupleLiteralExp" name="OrderedTupleLiteralExp">
+    <superClass href="EssentialOCL.xml#EssentialOCL.LiteralExp"/>
+    <ownedAttribute xmi:id="ImperativeOCL.OrderedTupleLiteralExp.part" name="part"
+        isOrdered="true" lower="0" upper="*" type="ImperativeOCL.OrderedTupleLiteralPart"
+        isComposite="true">
+      <ownedComment body="partOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.OrderedTupleLiteralPart"
+      name="OrderedTupleLiteralPart">
+    <superClass href="EMOF.xml#EMOF.Element"/>
+    <ownedAttribute xmi:id="ImperativeOCL.OrderedTupleLiteralPart.value" name="value"
+        isOrdered="true" isComposite="true">
+      <ownedComment body="tupValOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.OrderedTupleType" name="OrderedTupleType">
+    <superClass href="EMOF.xml#EMOF.Class"/>
+    <ownedAttribute xmi:id="ImperativeOCL.OrderedTupleType.elementType" name="elementType"
+        isOrdered="true" lower="0" upper="*">
+      <ownedComment body="eltTuple">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Type"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.RaiseExp" name="RaiseExp"
+      superClass="ImperativeOCL.ImperativeExpression">
+    <ownedAttribute xmi:id="ImperativeOCL.RaiseExp.argument" name="argument" isOrdered="true"
+        lower="0" isComposite="true">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.RaiseExp.exception" name="exception" isOrdered="true">
+      <ownedComment body="raiseExpression">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Type"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.ReturnExp" name="ReturnExp"
+      superClass="ImperativeOCL.ImperativeExpression">
+    <ownedAttribute xmi:id="ImperativeOCL.ReturnExp.value" name="value" isOrdered="true"
+        lower="0" isComposite="true">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Enumeration" xmi:id="ImperativeOCL.SeverityKind" name="SeverityKind">
+    <ownedLiteral xmi:id="ImperativeOCL.SeverityKind.error" name="error"/>
+    <ownedLiteral xmi:id="ImperativeOCL.SeverityKind.warning" name="warning">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <value>1</value>
+      </xmi:Extension>
+    </ownedLiteral>
+    <ownedLiteral xmi:id="ImperativeOCL.SeverityKind.fatal" name="fatal">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <value>2</value>
+      </xmi:Extension>
+    </ownedLiteral>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.SwitchExp" name="SwitchExp"
+      superClass="ImperativeOCL.ImperativeExpression">
+    <ownedAttribute xmi:id="ImperativeOCL.SwitchExp.alternativePart" name="alternativePart"
+        isOrdered="true" lower="0" upper="*" type="ImperativeOCL.AltExp" isComposite="true">
+      <ownedComment body="altOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.SwitchExp.elsePart" name="elsePart" isOrdered="true"
+        lower="0" isComposite="true">
+      <ownedComment body="elsePartOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.TemplateParameterType" name="TemplateParameterType">
+    <superClass href="EMOF.xml#EMOF.Type"/>
+    <ownedAttribute xmi:id="ImperativeOCL.TemplateParameterType.specification" name="specification"
+        isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="EMOF.xml#EMOF.String"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.TryExp" name="TryExp" superClass="ImperativeOCL.ImperativeExpression">
+    <ownedAttribute xmi:id="ImperativeOCL.TryExp.exceptClause" name="exceptClause"
+        isOrdered="true" lower="0" upper="*" type="ImperativeOCL.CatchExp" isComposite="true">
+      <ownedComment body="exceptOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.TryExp.tryBody" name="tryBody" isOrdered="true"
+        lower="0" upper="*" isComposite="true">
+      <ownedComment body="tryBodyOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.Typedef" name="Typedef">
+    <superClass href="EMOF.xml#EMOF.Class"/>
+    <ownedAttribute xmi:id="ImperativeOCL.Typedef.base" name="base" isOrdered="true">
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Type"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.Typedef.condition" name="condition" isOrdered="true"
+        lower="0" isComposite="true">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.UnlinkExp" name="UnlinkExp"
+      superClass="ImperativeOCL.ImperativeExpression">
+    <ownedAttribute xmi:id="ImperativeOCL.UnlinkExp.item" name="item" isOrdered="true"
+        isComposite="true">
+      <ownedComment body="itemUnlink">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.UnlinkExp.target" name="target" isOrdered="true"
+        isComposite="true">
+      <ownedComment body="tgtUnlink">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.UnpackExp" name="UnpackExp"
+      superClass="ImperativeOCL.ImperativeExpression">
+    <ownedAttribute xmi:id="ImperativeOCL.UnpackExp.source" name="source" isOrdered="true"
+        isComposite="true">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.UnpackExp.targetVariable" name="targetVariable"
+        isOrdered="true" upper="*">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.Variable"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.VariableInitExp" name="VariableInitExp"
+      superClass="ImperativeOCL.ImperativeExpression">
+    <ownedAttribute xmi:id="ImperativeOCL.VariableInitExp.referredVariable" name="referredVariable"
+        isOrdered="true" isComposite="true">
+      <ownedComment body="declaration">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.Variable"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.VariableInitExp.withResult" name="withResult"
+        isOrdered="true" lower="0" default="false">
+      <type xmi:type="emof:PrimitiveType" href="EMOF.xml#EMOF.Boolean"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.WhileExp" name="WhileExp"
+      superClass="ImperativeOCL.ImperativeExpression">
+    <ownedAttribute xmi:id="ImperativeOCL.WhileExp.body" name="body" isOrdered="true"
+        isComposite="true">
+      <ownedComment body="whileOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOCL.WhileExp.condition" name="condition" isOrdered="true"
+        isComposite="true">
+      <ownedComment body="whileExpression">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <nsPrefix>imperativeocl</nsPrefix>
+  </xmi:Extension>
+</emof:Package>

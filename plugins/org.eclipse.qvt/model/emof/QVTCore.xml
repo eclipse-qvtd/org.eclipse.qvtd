@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emof:Package xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="QVTCore"
+    name="QVTCore" uri="http://schema.omg.org/spec/QVT/1.0/qvtcore.xml">
+  <ownedType xmi:type="emof:Class" xmi:id="QVTCore.Area" name="Area" isAbstract="true">
+    <ownedAttribute xmi:id="QVTCore.Area.bottomPattern" name="bottomPattern" isOrdered="true"
+        type="QVTCore.BottomPattern" isComposite="true" opposite="QVTCore.BottomPattern.area">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTCore.Area.guardPattern" name="guardPattern" isOrdered="true"
+        type="QVTCore.GuardPattern" isComposite="true" opposite="QVTCore.GuardPattern.area">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTCore.Assignment" name="Assignment" isAbstract="true">
+    <superClass href="EMOF.xml#EMOF.Element"/>
+    <ownedAttribute xmi:id="QVTCore.Assignment.bottomPattern" name="bottomPattern"
+        isOrdered="true" type="QVTCore.BottomPattern" opposite="QVTCore.BottomPattern.assignment">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTCore.Assignment.isDefault" name="isDefault" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="PrimitiveTypes.xml#PrimitiveTypes.Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTCore.Assignment.value" name="value" isOrdered="true"
+        isComposite="true">
+      <ownedComment body="valueAssignment">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTCore.BottomPattern" name="BottomPattern"
+      superClass="QVTCore.CorePattern">
+    <ownedAttribute xmi:id="QVTCore.BottomPattern.area" name="area" isOrdered="true"
+        type="QVTCore.Area" opposite="QVTCore.Area.bottomPattern">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTCore.BottomPattern.assignment" name="assignment" lower="0"
+        upper="*" type="QVTCore.Assignment" isComposite="true" opposite="QVTCore.Assignment.bottomPattern">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTCore.BottomPattern.enforcementOperation" name="enforcementOperation"
+        lower="0" upper="*" type="QVTCore.EnforcementOperation" isComposite="true"
+        opposite="QVTCore.EnforcementOperation.bottomPattern">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTCore.BottomPattern.realizedVariable" name="realizedVariable"
+        lower="0" upper="*" type="QVTCore.RealizedVariable" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTCore.CoreDomain" name="CoreDomain">
+    <superClass href="QVTBase.xml#QVTBase.Domain"/>
+    <superClass href="#QVTCore.Area"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTCore.CorePattern" name="CorePattern">
+    <superClass href="QVTBase.xml#QVTBase.Pattern"/>
+    <ownedAttribute xmi:id="QVTCore.CorePattern.variable" name="variable" lower="0"
+        upper="*" isComposite="true">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.Variable"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Enumeration" xmi:id="QVTCore.EnforcementMode" name="EnforcementMode">
+    <ownedLiteral xmi:id="QVTCore.EnforcementMode.Creation" name="Creation"/>
+    <ownedLiteral xmi:id="QVTCore.EnforcementMode.Deletion" name="Deletion">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <value>1</value>
+      </xmi:Extension>
+    </ownedLiteral>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTCore.EnforcementOperation" name="EnforcementOperation">
+    <superClass href="EMOF.xml#EMOF.Element"/>
+    <ownedAttribute xmi:id="QVTCore.EnforcementOperation.bottomPattern" name="bottomPattern"
+        isOrdered="true" lower="0" type="QVTCore.BottomPattern" opposite="QVTCore.BottomPattern.enforcementOperation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTCore.EnforcementOperation.enforcementMode" name="enforcementMode"
+        isOrdered="true" lower="0" type="QVTCore.EnforcementMode"/>
+    <ownedAttribute xmi:id="QVTCore.EnforcementOperation.operationCallExp" name="operationCallExp"
+        isOrdered="true" isComposite="true">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OperationCallExp"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTCore.GuardPattern" name="GuardPattern"
+      superClass="QVTCore.CorePattern">
+    <ownedAttribute xmi:id="QVTCore.GuardPattern.area" name="area" isOrdered="true"
+        type="QVTCore.Area" opposite="QVTCore.Area.guardPattern">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTCore.Mapping" name="Mapping">
+    <superClass href="QVTBase.xml#QVTBase.Rule"/>
+    <superClass href="#QVTCore.Area"/>
+    <ownedAttribute xmi:id="QVTCore.Mapping.context" name="context" isOrdered="true"
+        lower="0" type="QVTCore.Mapping" opposite="QVTCore.Mapping.local">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTCore.Mapping.local" name="local" lower="0" upper="*"
+        type="QVTCore.Mapping" isComposite="true" opposite="QVTCore.Mapping.context">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTCore.Mapping.refinement" name="refinement" lower="0"
+        upper="*" type="QVTCore.Mapping" opposite="QVTCore.Mapping.specification"/>
+    <ownedAttribute xmi:id="QVTCore.Mapping.specification" name="specification" lower="0"
+        upper="*" type="QVTCore.Mapping" opposite="QVTCore.Mapping.refinement"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTCore.PropertyAssignment" name="PropertyAssignment"
+      superClass="QVTCore.Assignment">
+    <ownedAttribute xmi:id="QVTCore.PropertyAssignment.slotExpression" name="slotExpression"
+        isOrdered="true" isComposite="true">
+      <ownedComment body="slotAssignment">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTCore.PropertyAssignment.targetProperty" name="targetProperty"
+        isOrdered="true">
+      <ownedComment body="assignment">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Property"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTCore.RealizedVariable" name="RealizedVariable">
+    <superClass href="EssentialOCL.xml#EssentialOCL.Variable"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTCore.VariableAssignment" name="VariableAssignment"
+      superClass="QVTCore.Assignment">
+    <ownedAttribute xmi:id="QVTCore.VariableAssignment.targetVariable" name="targetVariable"
+        isOrdered="true">
+      <ownedComment body="assignment">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.Variable"/>
+    </ownedAttribute>
+  </ownedType>
+  <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <nsPrefix>qvtcore</nsPrefix>
+  </xmi:Extension>
+</emof:Package>

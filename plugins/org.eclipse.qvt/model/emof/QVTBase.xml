@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emof:Package xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="QVTBase"
+    name="QVTBase" uri="http://schema.omg.org/spec/QVT/1.0/qvtbase.xml">
+  <ownedType xmi:type="emof:Class" xmi:id="QVTBase.Domain" name="Domain" isAbstract="true">
+    <superClass href="EMOF.xml#EMOF.NamedElement"/>
+    <ownedAttribute xmi:id="QVTBase.Domain.isCheckable" name="isCheckable" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="PrimitiveTypes.xml#PrimitiveTypes.Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTBase.Domain.isEnforceable" name="isEnforceable" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="PrimitiveTypes.xml#PrimitiveTypes.Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTBase.Domain.rule" name="rule" isOrdered="true" type="QVTBase.Rule"
+        opposite="QVTBase.Rule.domain">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTBase.Domain.typedModel" name="typedModel" isOrdered="true"
+        lower="0" type="QVTBase.TypedModel"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTBase.Function" name="Function">
+    <superClass href="EMOF.xml#EMOF.Operation"/>
+    <ownedAttribute xmi:id="QVTBase.Function.queryExpression" name="queryExpression"
+        isOrdered="true" lower="0" isComposite="true">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTBase.FunctionParameter" name="FunctionParameter">
+    <superClass href="EssentialOCL.xml#EssentialOCL.Variable"/>
+    <superClass href="EMOF.xml#EMOF.Parameter"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTBase.Pattern" name="Pattern">
+    <superClass href="EMOF.xml#EMOF.Element"/>
+    <ownedAttribute xmi:id="QVTBase.Pattern.bindsTo" name="bindsTo" lower="0" upper="*">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.Variable"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTBase.Pattern.predicate" name="predicate" lower="0"
+        upper="*" type="QVTBase.Predicate" isComposite="true" opposite="QVTBase.Predicate.pattern">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTBase.Predicate" name="Predicate">
+    <superClass href="EMOF.xml#EMOF.Element"/>
+    <ownedAttribute xmi:id="QVTBase.Predicate.conditionExpression" name="conditionExpression"
+        isOrdered="true" isComposite="true">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTBase.Predicate.pattern" name="pattern" isOrdered="true"
+        type="QVTBase.Pattern" opposite="QVTBase.Pattern.predicate">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTBase.Rule" name="Rule" isAbstract="true">
+    <superClass href="EMOF.xml#EMOF.NamedElement"/>
+    <ownedAttribute xmi:id="QVTBase.Rule.domain" name="domain" lower="0" upper="*"
+        type="QVTBase.Domain" isComposite="true" opposite="QVTBase.Domain.rule">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTBase.Rule.overrides" name="overrides" isOrdered="true"
+        lower="0" type="QVTBase.Rule">
+      <ownedComment body="overriden">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTBase.Rule.transformation" name="transformation" isOrdered="true"
+        lower="0" type="QVTBase.Transformation" opposite="QVTBase.Transformation.rule">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTBase.Transformation" name="Transformation">
+    <superClass href="EMOF.xml#EMOF.Class"/>
+    <superClass href="EMOF.xml#EMOF.Package"/>
+    <ownedAttribute xmi:id="QVTBase.Transformation.extends" name="extends" isOrdered="true"
+        lower="0" type="QVTBase.Transformation">
+      <ownedComment body="extendedBy">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTBase.Transformation.modelParameter" name="modelParameter"
+        lower="0" upper="*" type="QVTBase.TypedModel" isComposite="true" opposite="QVTBase.TypedModel.transformation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTBase.Transformation.ownedTag" name="ownedTag" lower="0"
+        upper="*" isComposite="true">
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Tag"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTBase.Transformation.rule" name="rule" lower="0" upper="*"
+        type="QVTBase.Rule" isComposite="true" opposite="QVTBase.Rule.transformation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTBase.TypedModel" name="TypedModel">
+    <superClass href="EMOF.xml#EMOF.NamedElement"/>
+    <ownedAttribute xmi:id="QVTBase.TypedModel.dependsOn" name="dependsOn" lower="0"
+        upper="*" type="QVTBase.TypedModel">
+      <ownedComment body="dependent">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTBase.TypedModel.transformation" name="transformation"
+        isOrdered="true" type="QVTBase.Transformation" opposite="QVTBase.Transformation.modelParameter">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTBase.TypedModel.usedPackage" name="usedPackage" upper="*">
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Package"/>
+    </ownedAttribute>
+  </ownedType>
+  <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <nsPrefix>qvtbase</nsPrefix>
+  </xmi:Extension>
+</emof:Package>

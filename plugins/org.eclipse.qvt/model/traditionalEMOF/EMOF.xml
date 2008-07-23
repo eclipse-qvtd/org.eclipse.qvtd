@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emof:Package xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="EMOF"
+    name="EMOF" uri="http://schema.omg.org/spec/MOF/2.0/emof.xml">
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="EMOF.Boolean" name="Boolean">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Boolean</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.Class" name="Class" superClass="EMOF.Type">
+    <ownedAttribute xmi:id="EMOF.Class.isAbstract" name="isAbstract" isOrdered="true"
+        lower="0" type="EMOF.Boolean" default="false"/>
+    <ownedAttribute xmi:id="EMOF.Class.ownedAttribute" name="ownedAttribute" isOrdered="true"
+        lower="0" upper="*" type="EMOF.Property" isComposite="true" opposite="EMOF.Property.class">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="EMOF.Class.ownedOperation" name="ownedOperation" isOrdered="true"
+        lower="0" upper="*" type="EMOF.Operation" isComposite="true" opposite="EMOF.Operation.class">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="EMOF.Class.superClass" name="superClass" lower="0" upper="*"
+        type="EMOF.Class">
+      <ownedComment body="derivedClass">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.Comment" name="Comment" superClass="EMOF.Element">
+    <ownedAttribute xmi:id="EMOF.Comment.annotatedElement" name="annotatedElement"
+        lower="0" upper="*" type="EMOF.NamedElement"/>
+    <ownedAttribute xmi:id="EMOF.Comment.body" name="body" isOrdered="true" lower="0"
+        type="EMOF.String"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.DataType" name="DataType" superClass="EMOF.Type"/>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.Element" name="Element" isAbstract="true"
+      superClass="EMOF.Object">
+    <ownedOperation xmi:id="EMOF.Element.container" name="container" isOrdered="true"
+        lower="0" type="EMOF.Element"/>
+    <ownedOperation xmi:id="EMOF.Element.equals" name="equals" isOrdered="true" lower="0"
+        type="EMOF.Boolean">
+      <ownedParameter xmi:id="EMOF.Element.equals.object" name="object" isOrdered="true"
+          lower="0" type="EMOF.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="EMOF.Element.get" name="get" isOrdered="true" lower="0"
+        type="EMOF.Object">
+      <ownedParameter xmi:id="EMOF.Element.get.property" name="property" isOrdered="true"
+          lower="0" type="EMOF.Property"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="EMOF.Element.getMetaClass" name="getMetaClass" isOrdered="true"
+        lower="0" type="EMOF.Class"/>
+    <ownedOperation xmi:id="EMOF.Element.isSet" name="isSet" isOrdered="true" lower="0"
+        type="EMOF.Boolean">
+      <ownedParameter xmi:id="EMOF.Element.isSet.property" name="property" isOrdered="true"
+          lower="0" type="EMOF.Property"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="EMOF.Element.set" name="set" isOrdered="true" lower="0">
+      <ownedParameter xmi:id="EMOF.Element.set.property" name="property" isOrdered="true"
+          lower="0" type="EMOF.Property"/>
+      <ownedParameter xmi:id="EMOF.Element.set.object" name="object" isOrdered="true"
+          lower="0" type="EMOF.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="EMOF.Element.unset" name="unset" isOrdered="true" lower="0">
+      <ownedParameter xmi:id="EMOF.Element.unset.property" name="property" isOrdered="true"
+          lower="0" type="EMOF.Property"/>
+    </ownedOperation>
+    <ownedAttribute xmi:id="EMOF.Element.ownedComment" name="ownedComment" lower="0"
+        upper="*" type="EMOF.Comment" isComposite="true">
+      <ownedComment body="owningElement">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.Enumeration" name="Enumeration" superClass="EMOF.DataType">
+    <ownedAttribute xmi:id="EMOF.Enumeration.ownedLiteral" name="ownedLiteral" isOrdered="true"
+        lower="0" upper="*" type="EMOF.EnumerationLiteral" isComposite="true" opposite="EMOF.EnumerationLiteral.enumeration">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.EnumerationLiteral" name="EnumerationLiteral"
+      superClass="EMOF.NamedElement">
+    <ownedAttribute xmi:id="EMOF.EnumerationLiteral.enumeration" name="enumeration"
+        isOrdered="true" lower="0" type="EMOF.Enumeration" opposite="EMOF.Enumeration.ownedLiteral">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.Extent" name="Extent" superClass="EMOF.Object">
+    <ownedOperation xmi:id="EMOF.Extent.elements" name="elements" isOrdered="true"
+        lower="0" type="EMOF.ReflectiveSequence"/>
+    <ownedOperation xmi:id="EMOF.Extent.useContainment" name="useContainment" isOrdered="true"
+        lower="0" type="EMOF.Boolean"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.Factory" name="Factory" superClass="EMOF.Element">
+    <ownedOperation xmi:id="EMOF.Factory.convertToString" name="convertToString" isOrdered="true"
+        lower="0" type="EMOF.String">
+      <ownedParameter xmi:id="EMOF.Factory.convertToString.dataType" name="dataType"
+          isOrdered="true" lower="0" type="EMOF.DataType"/>
+      <ownedParameter xmi:id="EMOF.Factory.convertToString.object" name="object" isOrdered="true"
+          lower="0" type="EMOF.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="EMOF.Factory.create" name="create" isOrdered="true" lower="0"
+        type="EMOF.Element">
+      <ownedParameter xmi:id="EMOF.Factory.create.metaClass" name="metaClass" isOrdered="true"
+          lower="0" type="EMOF.Class"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="EMOF.Factory.createFromString" name="createFromString"
+        isOrdered="true" lower="0" type="EMOF.Object">
+      <ownedParameter xmi:id="EMOF.Factory.createFromString.dataType" name="dataType"
+          isOrdered="true" lower="0" type="EMOF.DataType"/>
+      <ownedParameter xmi:id="EMOF.Factory.createFromString.string" name="string"
+          isOrdered="true" lower="0" type="EMOF.String"/>
+    </ownedOperation>
+    <ownedAttribute xmi:id="EMOF.Factory.package" name="package" isOrdered="true"
+        type="EMOF.Package"/>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="EMOF.Integer" name="Integer">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Integer</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.MultiplicityElement" name="MultiplicityElement"
+      isAbstract="true">
+    <ownedAttribute xmi:id="EMOF.MultiplicityElement.isOrdered" name="isOrdered" isOrdered="true"
+        lower="0" type="EMOF.Boolean" default="false"/>
+    <ownedAttribute xmi:id="EMOF.MultiplicityElement.isUnique" name="isUnique" isOrdered="true"
+        lower="0" type="EMOF.Boolean" default="true"/>
+    <ownedAttribute xmi:id="EMOF.MultiplicityElement.lower" name="lower" isOrdered="true"
+        lower="0" type="EMOF.Integer" default="1"/>
+    <ownedAttribute xmi:id="EMOF.MultiplicityElement.upper" name="upper" isOrdered="true"
+        lower="0" type="EMOF.UnlimitedNatural" default="1"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.NamedElement" name="NamedElement"
+      isAbstract="true" superClass="EMOF.Element">
+    <ownedAttribute xmi:id="EMOF.NamedElement.name" name="name" isOrdered="true" lower="0"
+        type="EMOF.String"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.Object" name="Object"/>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.Operation" name="Operation" superClass="EMOF.TypedElement EMOF.MultiplicityElement">
+    <ownedAttribute xmi:id="EMOF.Operation.class" name="class" isOrdered="true" lower="0"
+        type="EMOF.Class" opposite="EMOF.Class.ownedOperation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="EMOF.Operation.ownedParameter" name="ownedParameter" isOrdered="true"
+        lower="0" upper="*" type="EMOF.Parameter" isComposite="true" opposite="EMOF.Parameter.operation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="EMOF.Operation.raisedException" name="raisedException"
+        lower="0" upper="*" type="EMOF.Type"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.Package" name="Package" superClass="EMOF.NamedElement">
+    <ownedAttribute xmi:id="EMOF.Package.nestedPackage" name="nestedPackage" lower="0"
+        upper="*" type="EMOF.Package" isComposite="true">
+      <ownedComment body="nestingPackage">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="EMOF.Package.ownedType" name="ownedType" lower="0" upper="*"
+        type="EMOF.Type" isComposite="true" opposite="EMOF.Type.package">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="EMOF.Package.uri" name="uri" isOrdered="true" lower="0"
+        type="EMOF.String"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.Parameter" name="Parameter" superClass="EMOF.TypedElement EMOF.MultiplicityElement">
+    <ownedAttribute xmi:id="EMOF.Parameter.operation" name="operation" isOrdered="true"
+        lower="0" type="EMOF.Operation" opposite="EMOF.Operation.ownedParameter">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.PrimitiveType" name="PrimitiveType"
+      superClass="EMOF.DataType"/>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.Property" name="Property" superClass="EMOF.TypedElement EMOF.MultiplicityElement">
+    <ownedAttribute xmi:id="EMOF.Property.class" name="class" isOrdered="true" lower="0"
+        type="EMOF.Class" opposite="EMOF.Class.ownedAttribute">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="EMOF.Property.default" name="default" isOrdered="true"
+        lower="0" type="EMOF.String"/>
+    <ownedAttribute xmi:id="EMOF.Property.isComposite" name="isComposite" isOrdered="true"
+        lower="0" type="EMOF.Boolean" default="false"/>
+    <ownedAttribute xmi:id="EMOF.Property.isDerived" name="isDerived" isOrdered="true"
+        lower="0" type="EMOF.Boolean" default="false"/>
+    <ownedAttribute xmi:id="EMOF.Property.isID" name="isID" isOrdered="true" lower="0"
+        type="EMOF.Boolean"/>
+    <ownedAttribute xmi:id="EMOF.Property.isReadOnly" name="isReadOnly" isOrdered="true"
+        lower="0" type="EMOF.Boolean" default="false"/>
+    <ownedAttribute xmi:id="EMOF.Property.opposite" name="opposite" isOrdered="true"
+        lower="0" type="EMOF.Property">
+      <ownedComment body="invOpposite">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="EMOF.Real" name="Real">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Float</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.ReflectiveCollection" name="ReflectiveCollection"
+      superClass="EMOF.Object">
+    <ownedOperation xmi:id="EMOF.ReflectiveCollection.add" name="add" isOrdered="true"
+        lower="0" type="EMOF.Boolean">
+      <ownedParameter xmi:id="EMOF.ReflectiveCollection.add.object" name="object"
+          isOrdered="true" lower="0" type="EMOF.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="EMOF.ReflectiveCollection.addAll" name="addAll" isOrdered="true"
+        lower="0" type="EMOF.Boolean">
+      <ownedParameter xmi:id="EMOF.ReflectiveCollection.addAll.objects" name="objects"
+          isOrdered="true" lower="0" type="EMOF.ReflectiveSequence"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="EMOF.ReflectiveCollection.clear" name="clear" isOrdered="true"
+        lower="0"/>
+    <ownedOperation xmi:id="EMOF.ReflectiveCollection.remove" name="remove" isOrdered="true"
+        lower="0" type="EMOF.Boolean">
+      <ownedParameter xmi:id="EMOF.ReflectiveCollection.remove.object" name="object"
+          isOrdered="true" lower="0" type="EMOF.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="EMOF.ReflectiveCollection.size" name="size" isOrdered="true"
+        lower="0" type="EMOF.Integer"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.ReflectiveSequence" name="ReflectiveSequence"
+      superClass="EMOF.ReflectiveCollection">
+    <ownedOperation xmi:id="EMOF.ReflectiveSequence.add" name="add" isOrdered="true"
+        lower="0">
+      <ownedParameter xmi:id="EMOF.ReflectiveSequence.add.index" name="index" isOrdered="true"
+          lower="0" type="EMOF.Integer"/>
+      <ownedParameter xmi:id="EMOF.ReflectiveSequence.add.object" name="object" isOrdered="true"
+          lower="0" type="EMOF.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="EMOF.ReflectiveSequence.get" name="get" isOrdered="true"
+        lower="0" type="EMOF.Object">
+      <ownedParameter xmi:id="EMOF.ReflectiveSequence.get.index" name="index" isOrdered="true"
+          lower="0" type="EMOF.Integer"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="EMOF.ReflectiveSequence.remove" name="remove" isOrdered="true"
+        lower="0" type="EMOF.Object">
+      <ownedParameter xmi:id="EMOF.ReflectiveSequence.remove.index" name="index" isOrdered="true"
+          lower="0" type="EMOF.Integer"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="EMOF.ReflectiveSequence.set" name="set" isOrdered="true"
+        lower="0" type="EMOF.Object">
+      <ownedParameter xmi:id="EMOF.ReflectiveSequence.set.index" name="index" isOrdered="true"
+          lower="0" type="EMOF.Integer"/>
+      <ownedParameter xmi:id="EMOF.ReflectiveSequence.set.object" name="object" isOrdered="true"
+          lower="0" type="EMOF.Object"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="EMOF.String" name="String">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.String</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.Tag" name="Tag" superClass="EMOF.Element">
+    <ownedAttribute xmi:id="EMOF.Tag.element" name="element" lower="0" upper="*" type="EMOF.Element"/>
+    <ownedAttribute xmi:id="EMOF.Tag.name" name="name" isOrdered="true" lower="0"
+        type="EMOF.String"/>
+    <ownedAttribute xmi:id="EMOF.Tag.value" name="value" isOrdered="true" lower="0"
+        type="EMOF.String"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.Type" name="Type" isAbstract="true"
+      superClass="EMOF.NamedElement">
+    <ownedOperation xmi:id="EMOF.Type.isInstance" name="isInstance" isOrdered="true"
+        lower="0" type="EMOF.Boolean">
+      <ownedParameter xmi:id="EMOF.Type.isInstance.object" name="object" isOrdered="true"
+          lower="0" type="EMOF.Object"/>
+    </ownedOperation>
+    <ownedAttribute xmi:id="EMOF.Type.package" name="package" isOrdered="true" lower="0"
+        type="EMOF.Package" opposite="EMOF.Package.ownedType">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.TypedElement" name="TypedElement"
+      isAbstract="true" superClass="EMOF.NamedElement">
+    <ownedAttribute xmi:id="EMOF.TypedElement.type" name="type" isOrdered="true" lower="0"
+        type="EMOF.Type"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EMOF.URIExtent" name="URIExtent" superClass="EMOF.Extent">
+    <ownedOperation xmi:id="EMOF.URIExtent.contextURI" name="contextURI" isOrdered="true"
+        lower="0" type="EMOF.String"/>
+    <ownedOperation xmi:id="EMOF.URIExtent.element" name="element" isOrdered="true"
+        lower="0" type="EMOF.Element">
+      <ownedParameter xmi:id="EMOF.URIExtent.element.uri" name="uri" isOrdered="true"
+          lower="0" type="EMOF.String"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="EMOF.URIExtent.uri" name="uri" isOrdered="true" lower="0"
+        type="EMOF.String">
+      <ownedParameter xmi:id="EMOF.URIExtent.uri.element" name="element" isOrdered="true"
+          lower="0" type="EMOF.Element"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="EMOF.UnlimitedNatural" name="UnlimitedNatural">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Integer</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <nsPrefix>emof</nsPrefix>
+  </xmi:Extension>
+</emof:Package>

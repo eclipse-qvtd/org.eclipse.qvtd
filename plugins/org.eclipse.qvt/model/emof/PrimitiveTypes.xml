@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emof:Package xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="PrimitiveTypes"
+    name="PrimitiveTypes" uri="http://schema.omg.org/spec/QVT/1.0/primitivetypes.xml">
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="PrimitiveTypes.Boolean" name="Boolean">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Boolean</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="PrimitiveTypes.Integer" name="Integer">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Integer</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="PrimitiveTypes.Real" name="Real">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Float</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="PrimitiveTypes.String" name="String">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.String</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="PrimitiveTypes.UnlimitedNatural"
+      name="UnlimitedNatural">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Integer</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <nsPrefix>primitivetypes</nsPrefix>
+  </xmi:Extension>
+</emof:Package>

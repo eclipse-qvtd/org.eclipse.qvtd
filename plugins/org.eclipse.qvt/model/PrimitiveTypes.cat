@@ -1,0 +1,74 @@
+
+(object Petal
+    version    	47
+    _written   	"Rose 8.0.0303.1400"
+    charSet    	0)
+
+(object Class_Category "PrimitiveTypes"
+    is_unit    	TRUE
+    is_loaded  	TRUE
+    attributes 	(list Attribute_Set
+	(object Attribute
+	    tool       	"Ecore"
+	    name       	"nsPrefix"
+	    value      	(value Text "primitivetypes"))
+	(object Attribute
+	    tool       	"Ecore"
+	    name       	"nsURI"
+	    value      	(value Text "http://schema.omg.org/spec/QVT/1.0/primitivetypes.xml"))
+	(object Attribute
+	    tool       	"Ecore"
+	    name       	"basePackage"
+	    value      	(value Text "org.omg.qvt"))
+	(object Attribute
+	    tool       	"Ecore"
+	    name       	"packageName"
+	    value      	(value Text "PrimitiveTypes"))
+	(object Attribute
+	    tool       	"Ecore"
+	    name       	"prefix"
+	    value      	(value Text "PrimitiveTypes")))
+    quid       	"46D9305D0032"
+    exportControl 	"Public"
+    logical_models 	(list unit_reference_list
+	(object Class "Boolean"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MOF"
+		    name       	"uml2mof.corbaType"
+		    value      	(value Text "Boolean")))
+	    quid       	"40CB2ECB0038"
+	    stereotype 	"primitive")
+	(object Class "Integer"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MOF"
+		    name       	"uml2mof.corbaType"
+		    value      	(value Text "Integer")))
+	    quid       	"40CB2F0E025B"
+	    stereotype 	"primitive")
+	(object Class "Real"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MOF"
+		    name       	"uml2mof.corbaType"
+		    value      	(value Text "Float")))
+	    quid       	"40CB2EFC0101"
+	    stereotype 	"primitive")
+	(object Class "String"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MOF"
+		    name       	"uml2mof.corbaType"
+		    value      	(value Text "String")))
+	    quid       	"40CB2EDE0252"
+	    stereotype 	"primitive")
+	(object Class "UnlimitedNatural"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MOF"
+		    name       	"uml2mof.corbaType"
+		    value      	(value Text "Integer")))
+	    quid       	"40CB2F2E0366"
+	    stereotype 	"primitive"))
+    logical_presentations 	(list unit_reference_list))

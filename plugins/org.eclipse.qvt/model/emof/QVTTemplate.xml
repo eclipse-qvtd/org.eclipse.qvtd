@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emof:Package xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="QVTTemplate"
+    name="QVTTemplate" uri="http://schema.omg.org/spec/QVT/1.0/qvttemplate.xml">
+  <ownedType xmi:type="emof:Class" xmi:id="QVTTemplate.CollectionTemplateExp" name="CollectionTemplateExp"
+      superClass="QVTTemplate.TemplateExp">
+    <ownedAttribute xmi:id="QVTTemplate.CollectionTemplateExp.member" name="member"
+        lower="0" upper="*" isComposite="true">
+      <ownedComment body="listContainer">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTTemplate.CollectionTemplateExp.referredCollectionType"
+        name="referredCollectionType" isOrdered="true">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.CollectionType"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTTemplate.CollectionTemplateExp.rest" name="rest" isOrdered="true"
+        lower="0">
+      <ownedComment body="matchingExp">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.Variable"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTTemplate.ObjectTemplateExp" name="ObjectTemplateExp"
+      superClass="QVTTemplate.TemplateExp">
+    <ownedAttribute xmi:id="QVTTemplate.ObjectTemplateExp.part" name="part" lower="0"
+        upper="*" type="QVTTemplate.PropertyTemplateItem" isComposite="true" opposite="QVTTemplate.PropertyTemplateItem.objContainer">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTTemplate.ObjectTemplateExp.referredClass" name="referredClass"
+        isOrdered="true">
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Class"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTTemplate.PropertyTemplateItem" name="PropertyTemplateItem">
+    <superClass href="EMOF.xml#EMOF.Element"/>
+    <ownedAttribute xmi:id="QVTTemplate.PropertyTemplateItem.objContainer" name="objContainer"
+        isOrdered="true" type="QVTTemplate.ObjectTemplateExp" opposite="QVTTemplate.ObjectTemplateExp.part">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTTemplate.PropertyTemplateItem.referredProperty" name="referredProperty"
+        isOrdered="true">
+      <ownedComment body="propertyItem">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Property"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTTemplate.PropertyTemplateItem.value" name="value" isOrdered="true"
+        isComposite="true">
+      <ownedComment body="propertyItem">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTTemplate.TemplateExp" name="TemplateExp"
+      isAbstract="true">
+    <superClass href="EssentialOCL.xml#EssentialOCL.LiteralExp"/>
+    <ownedAttribute xmi:id="QVTTemplate.TemplateExp.bindsTo" name="bindsTo" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.Variable"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTTemplate.TemplateExp.where" name="where" isOrdered="true"
+        lower="0" isComposite="true">
+      <ownedComment body="owner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <nsPrefix>qvttemplate</nsPrefix>
+  </xmi:Extension>
+</emof:Package>

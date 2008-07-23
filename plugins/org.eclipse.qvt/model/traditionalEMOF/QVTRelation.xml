@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emof:Package xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="QVTRelation"
+    name="QVTRelation" uri="http://schema.omg.org/spec/QVT/1.0/qvtrelation.xml">
+  <ownedType xmi:type="emof:Class" xmi:id="QVTRelation.DomainPattern" name="DomainPattern">
+    <superClass href="QVTBase.xml#QVTBase.Pattern"/>
+    <ownedAttribute xmi:id="QVTRelation.DomainPattern.templateExpression" name="templateExpression"
+        isOrdered="true" lower="0" isComposite="true">
+      <type xmi:type="emof:Class" href="QVTTemplate.xml#QVTTemplate.TemplateExp"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTRelation.Key" name="Key">
+    <superClass href="EMOF.xml#EMOF.Element"/>
+    <ownedAttribute xmi:id="QVTRelation.Key.identifies" name="identifies" isOrdered="true">
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Class"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTRelation.Key.part" name="part" upper="*">
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Property"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTRelation.Key.transformation" name="transformation"
+        isOrdered="true" lower="0" type="QVTRelation.RelationalTransformation" opposite="QVTRelation.RelationalTransformation.ownedKey">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTRelation.Relation" name="Relation">
+    <superClass href="QVTBase.xml#QVTBase.Rule"/>
+    <ownedAttribute xmi:id="QVTRelation.Relation.isTopLevel" name="isTopLevel" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="EMOF.xml#EMOF.Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTRelation.Relation.operationalImpl" name="operationalImpl"
+        lower="0" upper="*" type="QVTRelation.RelationImplementation" isComposite="true"
+        opposite="QVTRelation.RelationImplementation.relation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTRelation.Relation.variable" name="variable" lower="0"
+        upper="*" isComposite="true">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.Variable"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTRelation.Relation.when" name="when" isOrdered="true"
+        lower="0" isComposite="true">
+      <ownedComment body="whenOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="QVTBase.xml#QVTBase.Pattern"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTRelation.Relation.where" name="where" isOrdered="true"
+        lower="0" isComposite="true">
+      <ownedComment body="whereOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="QVTBase.xml#QVTBase.Pattern"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTRelation.RelationCallExp" name="RelationCallExp">
+    <superClass href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+    <ownedAttribute xmi:id="QVTRelation.RelationCallExp.argument" name="argument"
+        isOrdered="true" lower="2" upper="*" isComposite="true">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTRelation.RelationCallExp.referredRelation" name="referredRelation"
+        isOrdered="true" type="QVTRelation.Relation"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTRelation.RelationDomain" name="RelationDomain">
+    <superClass href="QVTBase.xml#QVTBase.Domain"/>
+    <ownedAttribute xmi:id="QVTRelation.RelationDomain.defaultAssignment" name="defaultAssignment"
+        lower="0" upper="*" type="QVTRelation.RelationDomainAssignment" isComposite="true">
+      <ownedComment body="owner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTRelation.RelationDomain.pattern" name="pattern" isOrdered="true"
+        lower="0" type="QVTRelation.DomainPattern" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTRelation.RelationDomain.rootVariable" name="rootVariable"
+        isOrdered="true">
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.Variable"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTRelation.RelationDomainAssignment" name="RelationDomainAssignment">
+    <superClass href="EMOF.xml#EMOF.Element"/>
+    <ownedAttribute xmi:id="QVTRelation.RelationDomainAssignment.valueExp" name="valueExp"
+        isOrdered="true" isComposite="true">
+      <ownedComment body="domainAssignment">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTRelation.RelationDomainAssignment.variable" name="variable"
+        isOrdered="true">
+      <ownedComment body="domainAssignment">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.Variable"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTRelation.RelationImplementation" name="RelationImplementation">
+    <superClass href="EMOF.xml#EMOF.Element"/>
+    <ownedAttribute xmi:id="QVTRelation.RelationImplementation.impl" name="impl" isOrdered="true">
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Operation"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTRelation.RelationImplementation.inDirectionOf" name="inDirectionOf"
+        isOrdered="true">
+      <type xmi:type="emof:Class" href="QVTBase.xml#QVTBase.TypedModel"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTRelation.RelationImplementation.relation" name="relation"
+        isOrdered="true" lower="0" type="QVTRelation.Relation" opposite="QVTRelation.Relation.operationalImpl">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTRelation.RelationalTransformation" name="RelationalTransformation">
+    <superClass href="QVTBase.xml#QVTBase.Transformation"/>
+    <ownedAttribute xmi:id="QVTRelation.RelationalTransformation.ownedKey" name="ownedKey"
+        lower="0" upper="*" type="QVTRelation.Key" isComposite="true" opposite="QVTRelation.Key.transformation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <nsPrefix>qvtrelation</nsPrefix>
+  </xmi:Extension>
+</emof:Package>
