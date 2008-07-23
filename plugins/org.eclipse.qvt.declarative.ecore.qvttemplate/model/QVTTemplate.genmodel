@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvt.declarative.ecore.qvttemplate/src"
+    modelPluginID="org.eclipse.qvt.declarative.ecore.qvttemplate" modelName="QVTTemplate"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore platform:/plugin/org.eclipse.ocl/model/OCL.genmodel#//ocl platform:/plugin/org.eclipse.ocl.ecore/model/OCLEcore.genmodel#//ocl">
+  <foreignModel>QVTTemplate.ecore</foreignModel>
+  <genPackages prefix="QVTTemplate" basePackage="org.eclipse.qvt.declarative.ecore"
+      disposableProviderFactory="true" contentTypeIdentifier="org.eclipse.qvt.declarative.ecore.qvttemplate"
+      fileExtensions="eqvttemplate" ecorePackage="QVTTemplate.ecore#/">
+    <genClasses image="false" ecoreClass="QVTTemplate.ecore#//TemplateExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTTemplate.ecore#//TemplateExp/bindsTo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTTemplate.ecore#//TemplateExp/where"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTTemplate.ecore#//ObjectTemplateExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTTemplate.ecore#//ObjectTemplateExp/part"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTTemplate.ecore#//ObjectTemplateExp/referredClass"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTTemplate.ecore#//CollectionTemplateExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTTemplate.ecore#//CollectionTemplateExp/member"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTTemplate.ecore#//CollectionTemplateExp/referredCollectionType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTTemplate.ecore#//CollectionTemplateExp/rest"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTTemplate.ecore#//PropertyTemplateItem">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTTemplate.ecore#//PropertyTemplateItem/objContainer"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTTemplate.ecore#//PropertyTemplateItem/referredProperty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTTemplate.ecore#//PropertyTemplateItem/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.qvt.declarative.ecore.qvttemplate;singleton:=true
+Bundle-Version: 0.7.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.eclipse.qvt.declarative.ecore.QVTTemplate,
+ org.eclipse.qvt.declarative.ecore.QVTTemplate.impl,
+ org.eclipse.qvt.declarative.ecore.QVTTemplate.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.qvt.declarative.ecore.qvtbase;visibility:=reexport
+Bundle-ActivationPolicy: lazy
