@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvt.declarative.emof.essentialocl/src"
+    modelPluginID="org.eclipse.qvt.declarative.emof.essentialocl" modelName="EssentialOCL"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    usedGenPackages="platform:/plugin/org.eclipse.qvt.declarative.emof.emof/model/EMOF.genmodel#//EMOF">
+  <foreignModel>EssentialOCL.ecore</foreignModel>
+  <genPackages prefix="EssentialOCL" basePackage="org.eclipse.qvt.declarative.emof"
+      disposableProviderFactory="true" contentTypeIdentifier="org.eclipse.qvt.declarative.emof.essentialocl"
+      ecorePackage="EssentialOCL.ecore#EssentialOCL">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="EssentialOCL.ecore#EssentialOCL.CollectionKind">
+      <genEnumLiterals ecoreEnumLiteral="EssentialOCL.ecore#EssentialOCL.CollectionKind.Set"/>
+      <genEnumLiterals ecoreEnumLiteral="EssentialOCL.ecore#EssentialOCL.CollectionKind.OrderedSet"/>
+      <genEnumLiterals ecoreEnumLiteral="EssentialOCL.ecore#EssentialOCL.CollectionKind.Bag"/>
+      <genEnumLiterals ecoreEnumLiteral="EssentialOCL.ecore#EssentialOCL.CollectionKind.Sequence"/>
+      <genEnumLiterals ecoreEnumLiteral="EssentialOCL.ecore#EssentialOCL.CollectionKind.Collection"/>
+    </genEnums>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.AnyType"/>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.BagType"/>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.BooleanLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCL.ecore#EssentialOCL.BooleanLiteralExp.booleanSymbol"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="EssentialOCL.ecore#EssentialOCL.CallExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.CallExp.source"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.CollectionItem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.CollectionItem.item"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.CollectionLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCL.ecore#EssentialOCL.CollectionLiteralExp.kind"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.CollectionLiteralExp.part"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="EssentialOCL.ecore#EssentialOCL.CollectionLiteralPart">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.CollectionLiteralPart.collectionLiteralExp"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.CollectionRange">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.CollectionRange.first"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.CollectionRange.last"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="EssentialOCL.ecore#EssentialOCL.CollectionType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.CollectionType.elementType"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.EnumLiteralExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.EnumLiteralExp.referredEnumLiteral"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.ExpressionInOcl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.ExpressionInOcl.bodyExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.ExpressionInOcl.contextVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.ExpressionInOcl.parameterVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.ExpressionInOcl.resultVariable"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="EssentialOCL.ecore#EssentialOCL.FeatureCallExp"/>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.IfExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.IfExp.condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.IfExp.elseExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.IfExp.thenExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.IntegerLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCL.ecore#EssentialOCL.IntegerLiteralExp.integerSymbol"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.InvalidLiteralExp"/>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.InvalidType"/>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.IterateExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.IterateExp.result"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.IteratorExp"/>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.LetExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.LetExp.in"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.LetExp.variable"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="EssentialOCL.ecore#EssentialOCL.LiteralExp"/>
+    <genClasses image="false" ecoreClass="EssentialOCL.ecore#EssentialOCL.LoopExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.LoopExp.body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.LoopExp.iterator"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.NavigationCallExp"/>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.NullLiteralExp"/>
+    <genClasses image="false" ecoreClass="EssentialOCL.ecore#EssentialOCL.NumericLiteralExp"/>
+    <genClasses image="false" ecoreClass="EssentialOCL.ecore#EssentialOCL.OclExpression"/>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.OperationCallExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.OperationCallExp.argument"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.OperationCallExp.referredOperation"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.OrderedSetType"/>
+    <genClasses image="false" ecoreClass="EssentialOCL.ecore#EssentialOCL.PrimitiveLiteralExp"/>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.PropertyCallExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.PropertyCallExp.referredProperty"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.RealLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCL.ecore#EssentialOCL.RealLiteralExp.realSymbol"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.SequenceType"/>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.SetType"/>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.StringLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCL.ecore#EssentialOCL.StringLiteralExp.stringSymbol"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.TupleLiteralExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.TupleLiteralExp.part"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.TupleLiteralPart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.TupleLiteralPart.attribute"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.TupleLiteralPart.tupleLiteralExp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.TupleLiteralPart.value"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.TupleType"/>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.TypeExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.TypeExp.referredType"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.TypeType"/>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.UnlimitedNaturalExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCL.ecore#EssentialOCL.UnlimitedNaturalExp.symbol"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.Variable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.Variable.initExpression"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.Variable.letExp"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.Variable.representedParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.VariableExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EssentialOCL.ecore#EssentialOCL.VariableExp.referredVariable"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCL.ecore#EssentialOCL.VoidType"/>
+  </genPackages>
+</genmodel:GenModel>
