@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.qvt.declarative.emof.qvtcore;singleton:=true
+Bundle-Version: 0.7.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.eclipse.qvt.declarative.emof.QVTCore,
+ org.eclipse.qvt.declarative.emof.QVTCore.facade,
+ org.eclipse.qvt.declarative.emof.QVTCore.impl,
+ org.eclipse.qvt.declarative.emof.QVTCore.util
+Require-Bundle: org.eclipse.qvt.declarative.ecore.qvtcore,
+ org.eclipse.qvt.declarative.emof.qvtbase;visibility:=reexport
+Bundle-ActivationPolicy: lazy
