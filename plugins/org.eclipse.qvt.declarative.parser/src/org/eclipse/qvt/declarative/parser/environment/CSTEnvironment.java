@@ -531,6 +531,8 @@ public abstract class CSTEnvironment<E extends ICSTEnvironment, P extends E> ext
 					;
 				else if (eObject instanceof TypeType)
 					;
+				else if (eObject instanceof InvalidLiteralExp)	// FIXME Workaround bug 237126
+					;
 				else
 					System.out.println(formatName(eObject.eClass()) + " : " + formatQualifiedName(eObject) + " has no mapping to a CST node");
 			}
