@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationCallExp.java,v 1.1 2008/07/23 09:46:09 qglineur Exp $
+ * $Id: RelationCallExp.java,v 1.2 2008/08/07 05:03:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation;
 
@@ -34,7 +34,7 @@ import org.eclipse.ocl.ecore.OCLExpression;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage#getRelationCallExp()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NoSource'"
+ * @model
  * @generated
  */
 public interface RelationCallExp extends OCLExpression {

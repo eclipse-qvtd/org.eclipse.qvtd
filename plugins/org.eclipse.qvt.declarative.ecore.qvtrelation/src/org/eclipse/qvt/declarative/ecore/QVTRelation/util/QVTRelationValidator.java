@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationValidator.java,v 1.1 2008/07/23 09:46:08 qglineur Exp $
+ * $Id: QVTRelationValidator.java,v 1.2 2008/08/07 05:03:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.util;
 
@@ -199,8 +199,36 @@ public class QVTRelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(relationDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationDomain, diagnostics, context);
-		if (result || diagnostics != null) result &= ecoreValidator.validateENamedElement_WellFormedName(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationDomain_WellFormedName(relationDomain, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the WellFormedName constraint of '<em>Relation Domain</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateRelationDomain_WellFormedName(RelationDomain relationDomain, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		String message = null;
+		if (relationDomain.getPattern() != null)
+			return ecoreValidator.validateENamedElement_WellFormedName(relationDomain, diagnostics, context);
+		if (relationDomain.getName() != null)
+			message = "Primitive RelationDomain '" + relationDomain.getName() + "' must be unnamed";
+		if (message == null)
+			return true;
+		if (diagnostics != null) {
+			diagnostics.add
+				(createDiagnostic
+					(Diagnostic.ERROR,
+					 DIAGNOSTIC_SOURCE,
+					 0,
+					 "_UI_GenericConstraint_diagnostic",
+					 new Object[] { "WellFormedName", getObjectLabel(relationDomain, context) },
+					 new Object[] { relationDomain },
+					 context));
+		}
+		return false;
 	}
 
 	/**
@@ -239,36 +267,7 @@ public class QVTRelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= ecoreValidator.validateETypedElement_ValidUpperBound(relationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateETypedElement_ConsistentBounds(relationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateETypedElement_ValidType(relationCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelationCallExp_NoSource(relationCallExp, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the NoSource constraint of '<em>Relation Call Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelationCallExp_NoSource(RelationCallExp relationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "NoSource", getObjectLabel(relationCallExp, context) },
-						 new Object[] { relationCallExp },
-						 context));
-			}
-			return false;
-		}
-		return true;
 	}
 
 	/**

@@ -37,6 +37,9 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationDomain" eSuperTypes="../../org.eclipse.qvt.declarative.ecore.qvtbase/model/QVTBase.ecore#//Domain">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="WellFormedName"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="#//DomainPattern"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rootVariable" lowerBound="1"
@@ -71,9 +74,6 @@
         eType="ecore:EClass ../../org.eclipse.qvt.declarative.ecore.qvtbase/model/QVTBase.ecore#//TypedModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationCallExp" eSuperTypes="../../org.eclipse.ocl.ecore/model/OCLEcore.ecore#//ecore/OCLExpression">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="NoSource"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="argument" lowerBound="2"
         upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.ecore/model/OCLEcore.ecore#//ecore/OCLExpression"
         containment="true"/>

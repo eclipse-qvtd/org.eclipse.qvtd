@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationPackageImpl.java,v 1.1 2008/07/23 09:46:09 qglineur Exp $
+ * $Id: QVTRelationPackageImpl.java,v 1.2 2008/08/07 05:03:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.impl;
 
@@ -646,13 +646,13 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";							
+		String source = "http://www.eclipse.org/emf/2002/Ecore";				
 		addAnnotation
-		  (relationCallExpEClass, 
+		  (relationDomainEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "NoSource"
-		   });
+			 "constraints", "WellFormedName"
+		   });			
 	}
 
 } //QVTRelationPackageImpl
