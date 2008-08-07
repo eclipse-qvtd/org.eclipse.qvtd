@@ -46,7 +46,7 @@ public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyT
 		missingOperation(differences, helper, getOperation(org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATIONAL_TRANSFORMATION, "getRelation"));
 		changeOfSize(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATIONAL_TRANSFORMATION, EcorePackage.Literals.ECLASS__EOPERATIONS);		
 		missingOperation(differences, helper, getOperation(org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATION, "getRelationalTransformation"));
-		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATION_CALL_EXP);
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATION_DOMAIN);
 	}
 
 	public static void expectedEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
