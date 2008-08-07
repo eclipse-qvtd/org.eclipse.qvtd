@@ -168,7 +168,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 								env.addMetaModelPackage(metaModelId, (EPackage) eObject);
 							}
 							else
-								ERROR(metaModelIdCS, "metaModelIdCS", "Non-package '" + formatName(eObject) + "' ignored");
+								ERROR(metaModelIdCS, "metaModelIdCS", "Non-EPackage '" + formatName(eObject) + "' ignored");
 						}
 					}
 				}
