@@ -69,6 +69,31 @@ import org.eclipse.qvt.declarative.parser.unresolved.UnresolvedPackage;
  */
 public abstract class CSTEnvironment<E extends ICSTEnvironment, P extends E> extends EcoreEnvironment implements ICSTEnvironment
 {
+	private final class WorkaroundDiagnostician extends Diagnostician {
+		private final class WorkaroundOclValidator extends org.eclipse.ocl.ecore.util.EcoreValidator {
+			public WorkaroundOclValidator(WorkaroundEmfValidator emfValidator) {
+				ecoreValidator = emfValidator;
+			}
+		}
+
+		private final class WorkaroundEmfValidator extends
+				org.eclipse.emf.ecore.util.EcoreValidator {
+			@Override
+			public boolean validateEClassifier_WellFormedInstanceTypeName(EClassifier classifier, DiagnosticChain diagnostics, Map<Object, Object> context) {
+				if (classifier instanceof TypeType)		// FIXME Workaround Bug 241426
+					return true;
+				return super.validateEClassifier_WellFormedInstanceTypeName(classifier, diagnostics, context);
+			}
+		}
+
+		public WorkaroundDiagnostician() {
+			WorkaroundEmfValidator newEmfValidator = new WorkaroundEmfValidator();
+			WorkaroundOclValidator newOclValidator = new WorkaroundOclValidator(newEmfValidator);
+			eValidatorRegistry.put(org.eclipse.emf.ecore.EcorePackage.eINSTANCE, newEmfValidator);
+			eValidatorRegistry.put(org.eclipse.ocl.ecore.EcorePackage.eINSTANCE, newOclValidator);
+		}
+	}
+
 	protected final ICSTEnvironment rootEnvironment;
 	protected CSTNode cstNode;
 	protected int errorStart = 0;
@@ -105,7 +130,7 @@ public abstract class CSTEnvironment<E extends ICSTEnvironment, P extends E> ext
 	 * @return the Diagnostician
 	 */
 	protected Diagnostician createDiagnostician() {
-		return new Diagnostician();
+		return new WorkaroundDiagnostician();
 	}
 
 	public InvalidLiteralExp createInvalidLiteralExp(CSTNode cstNode) {
