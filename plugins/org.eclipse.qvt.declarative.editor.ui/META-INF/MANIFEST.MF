@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvt.declarative.editor.ui;singleton:=true
-Bundle-Version: 1.2.0.qualifier
+Bundle-Version: 0.7.0.qualifier
 Require-Bundle: org.eclipse.jface.text;visibility:=reexport,
  org.eclipse.ui.editors;visibility:=reexport,
  org.eclipse.ui.views.properties.tabbed;visibility:=reexport,
@@ -11,6 +11,8 @@ Require-Bundle: org.eclipse.jface.text;visibility:=reexport,
  org.eclipse.emf.transaction.ui;visibility:=reexport,
  org.eclipse.emf.workspace;visibility:=reexport,
  org.eclipse.emf.workspace.ui;visibility:=reexport,
+ org.eclipse.imp.runtime;visibility:=reexport,
+ org.eclipse.qvt.declarative.editor.model;visibility:=reexport,
  org.eclipse.qvt.declarative.parser;visibility:=reexport,
  org.eclipse.qvt.declarative.parser.ui;visibility:=reexport
 Eclipse-LazyStart: true
@@ -22,6 +24,7 @@ Export-Package: org.eclipse.qvt.declarative.editor.ui,
  org.eclipse.qvt.declarative.editor.ui.builder,
  org.eclipse.qvt.declarative.editor.ui.commands,
  org.eclipse.qvt.declarative.editor.ui.common,
+ org.eclipse.qvt.declarative.editor.ui.imp,
  org.eclipse.qvt.declarative.editor.ui.operations,
  org.eclipse.qvt.declarative.editor.ui.paged,
  org.eclipse.qvt.declarative.editor.ui.pages,
