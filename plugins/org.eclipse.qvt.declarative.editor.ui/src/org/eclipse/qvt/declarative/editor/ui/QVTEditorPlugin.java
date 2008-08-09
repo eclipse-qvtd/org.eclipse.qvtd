@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.qvt.declarative.ecore.utils.TracingOption;
 import org.eclipse.swt.widgets.Display;
 import org.osgi.framework.BundleContext;
 
@@ -28,6 +29,14 @@ public class QVTEditorPlugin extends EclipseUIPlugin
 	public static final String PLUGIN_ID = QVTEditorPlugin.class.getPackage().getName();
 
 	public static final String ID = QVTEditorPlugin.class.getPackage().getName();
+
+	public static final TracingOption EDITOR_SAVE = new TracingOption(PLUGIN_ID, "editor/save"); //$NON-NLS-1$
+
+	public static final TracingOption RESOURCE_LOAD = new TracingOption(PLUGIN_ID, "resource/load"); //$NON-NLS-1$
+
+	public static final TracingOption VISITOR_SELECTION = new TracingOption(PLUGIN_ID, "visitor/selection"); //$NON-NLS-1$
+
+	public static final TracingOption VISITOR_TRACE = new TracingOption(PLUGIN_ID, "visitor/trace"); //$NON-NLS-1$
 
 	// The shared instance
 	public static QVTEditorPlugin INSTANCE;
@@ -65,9 +74,9 @@ public class QVTEditorPlugin extends EclipseUIPlugin
 	 *
 	 * @return the shared instance
 	 */
-//	public static QVTEditorPlugin getDefault() {
-//		return INSTANCE;
-//	}
+	public static QVTEditorPlugin getDefault() {
+		return INSTANCE;
+	}
 
 	/**
 	 * Returns an image descriptor for the image file at the given
