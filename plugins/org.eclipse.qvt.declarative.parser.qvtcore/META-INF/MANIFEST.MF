@@ -7,6 +7,7 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: org.eclipse.qvt.declarative.parser.qvtcore,
+ org.eclipse.qvt.declarative.parser.qvtcore.cst,
  org.eclipse.qvt.declarative.parser.qvtcore.cst.impl,
  org.eclipse.qvt.declarative.parser.qvtcore.cst.util,
  org.eclipse.qvt.declarative.parser.qvtcore.environment,
