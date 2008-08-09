@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OutlineBehaviorItemProvider.java,v 1.1 2008/08/08 16:39:46 ewillink Exp $
+ * $Id: OutlineBehaviorItemProvider.java,v 1.2 2008/08/09 17:34:37 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -62,6 +62,7 @@ public class OutlineBehaviorItemProvider
 			super.getPropertyDescriptors(object);
 
 			addContainerPropertyDescriptor(object);
+			addTerminalPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -80,6 +81,28 @@ public class OutlineBehaviorItemProvider
 				 getString("_UI_OutlineBehavior_container_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_OutlineBehavior_container_feature", "_UI_OutlineBehavior_type"),
 				 EditorPackage.Literals.OUTLINE_BEHAVIOR__CONTAINER,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Terminal feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTerminalPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_OutlineBehavior_terminal_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_OutlineBehavior_terminal_feature", "_UI_OutlineBehavior_type"),
+				 EditorPackage.Literals.OUTLINE_BEHAVIOR__TERMINAL,
 				 true,
 				 false,
 				 false,
@@ -124,6 +147,7 @@ public class OutlineBehaviorItemProvider
 
 		switch (notification.getFeatureID(OutlineBehavior.class)) {
 			case EditorPackage.OUTLINE_BEHAVIOR__CONTAINER:
+			case EditorPackage.OUTLINE_BEHAVIOR__TERMINAL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
