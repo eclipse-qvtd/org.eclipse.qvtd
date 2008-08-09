@@ -58,7 +58,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.ui.text.TextResource;
-import org.eclipse.qvt.declarative.editor.ui.utils.TracingOption;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.MouseAdapter;
@@ -159,8 +158,8 @@ implements /*ISelectionProvider,*/ IMenuListener, IViewerProvider
 					URI uri = URI.createURI(delta.getFullPath().toString(), true);		// See Bugzilla 236362
 						Resource resource = resourceSet.getResource(uri, false);
 						if (resource != null) {
-								if (TracingOption.EDITOR_SAVE.isActive())
-									TracingOption.EDITOR_SAVE.println(getClass(), "Removed " + resource.getURI().toString());
+								if (QVTEditorPlugin.EDITOR_SAVE.isActive())
+									QVTEditorPlugin.EDITOR_SAVE.println(getClass(), "Removed " + resource.getURI().toString());
 						refactoredResources.put(resource, delta.getMovedToPath());
 					}
 				}
@@ -171,12 +170,12 @@ implements /*ISelectionProvider,*/ IMenuListener, IViewerProvider
 						if ((resource instanceof TextResource) && (((TextResource)resource).isSaveInProgress()))
 							;
 						else if (!savedResources.remove(resource)) {
-								if (TracingOption.EDITOR_SAVE.isActive())
-									TracingOption.EDITOR_SAVE.println(getClass(), "Changed " + resource.getURI().toString());
+								if (QVTEditorPlugin.EDITOR_SAVE.isActive())
+									QVTEditorPlugin.EDITOR_SAVE.println(getClass(), "Changed " + resource.getURI().toString());
 								changedResources.add(resource);
 							} else {
-								if (TracingOption.EDITOR_SAVE.isActive())
-									TracingOption.EDITOR_SAVE.println(getClass(), "Saved " + resource.getURI().toString());
+								if (QVTEditorPlugin.EDITOR_SAVE.isActive())
+									QVTEditorPlugin.EDITOR_SAVE.println(getClass(), "Saved " + resource.getURI().toString());
 							}
 						}
 					}
@@ -205,9 +204,9 @@ implements /*ISelectionProvider,*/ IMenuListener, IViewerProvider
 					delta.accept(visitor);
 					Map<Resource, IPath> refactoredResources = visitor.getRefactoredResources();
 					if (!refactoredResources.isEmpty()) {
-						if (TracingOption.EDITOR_SAVE.isActive())
+						if (QVTEditorPlugin.EDITOR_SAVE.isActive())
 							for (Resource removedResource : refactoredResources.keySet())
-								TracingOption.EDITOR_SAVE.println(getClass(), "Removed " + removedResource.getURI().toString());
+								QVTEditorPlugin.EDITOR_SAVE.println(getClass(), "Removed " + removedResource.getURI().toString());
 						removedResources.addAll(refactoredResources.keySet());
 						if (!isDirty())
 							getDisplay().asyncExec(new ResourceRemovedRunnable());
@@ -222,9 +221,9 @@ implements /*ISelectionProvider,*/ IMenuListener, IViewerProvider
 						}
 					}
 					if (!visitor.getChangedResources().isEmpty()) {
-						if (TracingOption.EDITOR_SAVE.isActive())
+						if (QVTEditorPlugin.EDITOR_SAVE.isActive())
 							for (Resource changedResource : visitor.getChangedResources())
-								TracingOption.EDITOR_SAVE.println(getClass(), "Changed " + changedResource.getURI().toString());
+								QVTEditorPlugin.EDITOR_SAVE.println(getClass(), "Changed " + changedResource.getURI().toString());
 						changedResources.addAll(visitor.getChangedResources());
 						if (getSite().getPage().getActiveEditor() == BaseEditor.this) {
 							getDisplay().asyncExec(new ResourceChangedRunnable());
@@ -240,8 +239,8 @@ implements /*ISelectionProvider,*/ IMenuListener, IViewerProvider
 	private final class ResourceChangedRunnable implements Runnable
 	{
 		public void run() {
-			if (TracingOption.EDITOR_SAVE.isActive())
-				TracingOption.EDITOR_SAVE.println(getClass(), "run");
+			if (QVTEditorPlugin.EDITOR_SAVE.isActive())
+				QVTEditorPlugin.EDITOR_SAVE.println(getClass(), "run");
 			handleActivate();
 		}
 	}
@@ -249,8 +248,8 @@ implements /*ISelectionProvider,*/ IMenuListener, IViewerProvider
 	private final class ResourceRemovedRunnable implements Runnable
 	{
 		public void run() {
-			if (TracingOption.EDITOR_SAVE.isActive())
-				TracingOption.EDITOR_SAVE.println(getClass(), "run");
+			if (QVTEditorPlugin.EDITOR_SAVE.isActive())
+				QVTEditorPlugin.EDITOR_SAVE.println(getClass(), "run");
 			getSite().getPage().closeEditor(BaseEditor.this, false);
 		}
 	}
@@ -293,16 +292,16 @@ implements /*ISelectionProvider,*/ IMenuListener, IViewerProvider
 					{
 						savingResources.add(resource);
 						savedResources.add(resource);
-						if (TracingOption.EDITOR_SAVE.isActive())
-							TracingOption.EDITOR_SAVE.println(getClass(), "Save " + resource.getURI().toString());
+						if (QVTEditorPlugin.EDITOR_SAVE.isActive())
+							QVTEditorPlugin.EDITOR_SAVE.println(getClass(), "Save " + resource.getURI().toString());
 						resource.save(saveOptions);
 					}
 					catch (Exception exception)
 					{
 						resourceToDiagnosticMap.put(resource, analyzeResourceProblems(resource, exception));
 					} finally {
-						if (TracingOption.EDITOR_SAVE.isActive())
-							TracingOption.EDITOR_SAVE.println(getClass(), "Saved all");
+						if (QVTEditorPlugin.EDITOR_SAVE.isActive())
+							QVTEditorPlugin.EDITOR_SAVE.println(getClass(), "Saved all");
 					}
 					first = false;
 				}
@@ -320,8 +319,8 @@ implements /*ISelectionProvider,*/ IMenuListener, IViewerProvider
 		public void execute(IProgressMonitor monitor)
 		{
 			resumeResourceListening();
-			if (TracingOption.EDITOR_SAVE.isActive())
-				TracingOption.EDITOR_SAVE.println(getClass(), "Saved all2");
+			if (QVTEditorPlugin.EDITOR_SAVE.isActive())
+				QVTEditorPlugin.EDITOR_SAVE.println(getClass(), "Saved all2");
 		}
 	}
 
@@ -479,8 +478,8 @@ implements /*ISelectionProvider,*/ IMenuListener, IViewerProvider
 
 			// Refresh the necessary state.
 			//
-			if (TracingOption.EDITOR_SAVE.isActive())
-				TracingOption.EDITOR_SAVE.println(getClass(), "Saved all");
+			if (QVTEditorPlugin.EDITOR_SAVE.isActive())
+				QVTEditorPlugin.EDITOR_SAVE.println(getClass(), "Saved all");
 			try
 			{
 				// This runs the options, and shows progress.
@@ -489,8 +488,8 @@ implements /*ISelectionProvider,*/ IMenuListener, IViewerProvider
 
 				// Refresh the necessary state.
 				//
-				if (TracingOption.EDITOR_SAVE.isActive())
-					TracingOption.EDITOR_SAVE.println(getClass(), "Saved all2");
+				if (QVTEditorPlugin.EDITOR_SAVE.isActive())
+					QVTEditorPlugin.EDITOR_SAVE.println(getClass(), "Saved all2");
 				savingResources.clear();
 			}
 			catch (Exception exception)
@@ -680,8 +679,8 @@ implements /*ISelectionProvider,*/ IMenuListener, IViewerProvider
 				removedResources.clear();
 				changedResources.clear();
 				savedResources.clear();
-				if (TracingOption.EDITOR_SAVE.isActive())
-					TracingOption.EDITOR_SAVE.println(getClass(), "Clear saved after removed");
+				if (QVTEditorPlugin.EDITOR_SAVE.isActive())
+					QVTEditorPlugin.EDITOR_SAVE.println(getClass(), "Clear saved after removed");
 			}
 		}
 		else if (!changedResources.isEmpty())
@@ -690,8 +689,8 @@ implements /*ISelectionProvider,*/ IMenuListener, IViewerProvider
 			handleChangedResources();
 			changedResources.clear();
 			savedResources.clear();
-			if (TracingOption.EDITOR_SAVE.isActive())
-				TracingOption.EDITOR_SAVE.println(getClass(), "Clear saved after changed");
+			if (QVTEditorPlugin.EDITOR_SAVE.isActive())
+				QVTEditorPlugin.EDITOR_SAVE.println(getClass(), "Clear saved after changed");
 		}
 	}
 
