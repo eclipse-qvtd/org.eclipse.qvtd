@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackageImpl.java,v 1.1 2008/08/08 16:39:55 ewillink Exp $
+ * $Id: EditorPackageImpl.java,v 1.2 2008/08/09 17:33:58 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -356,6 +356,15 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getOutlineBehavior_Terminal() {
+		return (EAttribute)outlineBehaviorEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EditorFactory getEditorFactory() {
 		return (EditorFactory)getEFactoryInstance();
 	}
@@ -407,6 +416,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		outlineBehaviorEClass = createEClass(OUTLINE_BEHAVIOR);
 		createEAttribute(outlineBehaviorEClass, OUTLINE_BEHAVIOR__CONTAINER);
+		createEAttribute(outlineBehaviorEClass, OUTLINE_BEHAVIOR__TERMINAL);
 	}
 
 	/**
@@ -472,6 +482,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		initEClass(outlineBehaviorEClass, OutlineBehavior.class, "OutlineBehavior", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOutlineBehavior_Container(), ecorePackage.getEBoolean(), "container", "false", 0, 1, OutlineBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOutlineBehavior_Terminal(), ecorePackage.getEBoolean(), "terminal", "false", 0, 1, OutlineBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

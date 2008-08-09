@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackage.java,v 1.1 2008/08/08 16:39:54 ewillink Exp $
+ * $Id: EditorPackage.java,v 1.2 2008/08/09 17:33:58 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -367,13 +367,22 @@ public interface EditorPackage extends EPackage {
 	int OUTLINE_BEHAVIOR__CONTAINER = BEHAVIOR_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Terminal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTLINE_BEHAVIOR__TERMINAL = BEHAVIOR_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Outline Behavior</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OUTLINE_BEHAVIOR_FEATURE_COUNT = BEHAVIOR_FEATURE_COUNT + 1;
+	int OUTLINE_BEHAVIOR_FEATURE_COUNT = BEHAVIOR_FEATURE_COUNT + 2;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.Behavior <em>Behavior</em>}'.
@@ -587,6 +596,17 @@ public interface EditorPackage extends EPackage {
 	EAttribute getOutlineBehavior_Container();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.OutlineBehavior#isTerminal <em>Terminal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Terminal</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.OutlineBehavior#isTerminal()
+	 * @see #getOutlineBehavior()
+	 * @generated
+	 */
+	EAttribute getOutlineBehavior_Terminal();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -785,6 +805,14 @@ public interface EditorPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OUTLINE_BEHAVIOR__CONTAINER = eINSTANCE.getOutlineBehavior_Container();
+
+		/**
+		 * The meta object literal for the '<em><b>Terminal</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OUTLINE_BEHAVIOR__TERMINAL = eINSTANCE.getOutlineBehavior_Terminal();
 
 	}
 

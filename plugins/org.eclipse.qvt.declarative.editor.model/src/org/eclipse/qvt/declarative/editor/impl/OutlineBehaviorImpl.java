@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OutlineBehaviorImpl.java,v 1.1 2008/08/08 16:39:54 ewillink Exp $
+ * $Id: OutlineBehaviorImpl.java,v 1.2 2008/08/09 17:33:58 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -30,6 +30,7 @@ import org.eclipse.qvt.declarative.editor.OutlineBehavior;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.OutlineBehaviorImpl#isContainer <em>Container</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.OutlineBehaviorImpl#isTerminal <em>Terminal</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,6 +56,26 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 	 * @ordered
 	 */
 	protected boolean container = CONTAINER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isTerminal() <em>Terminal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTerminal()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean TERMINAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isTerminal() <em>Terminal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTerminal()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean terminal = TERMINAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -101,11 +122,34 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isTerminal() {
+		return terminal;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTerminal(boolean newTerminal) {
+		boolean oldTerminal = terminal;
+		terminal = newTerminal;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.OUTLINE_BEHAVIOR__TERMINAL, oldTerminal, terminal));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case EditorPackage.OUTLINE_BEHAVIOR__CONTAINER:
 				return isContainer() ? Boolean.TRUE : Boolean.FALSE;
+			case EditorPackage.OUTLINE_BEHAVIOR__TERMINAL:
+				return isTerminal() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -120,6 +164,9 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 		switch (featureID) {
 			case EditorPackage.OUTLINE_BEHAVIOR__CONTAINER:
 				setContainer(((Boolean)newValue).booleanValue());
+				return;
+			case EditorPackage.OUTLINE_BEHAVIOR__TERMINAL:
+				setTerminal(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,6 +183,9 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 			case EditorPackage.OUTLINE_BEHAVIOR__CONTAINER:
 				setContainer(CONTAINER_EDEFAULT);
 				return;
+			case EditorPackage.OUTLINE_BEHAVIOR__TERMINAL:
+				setTerminal(TERMINAL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -150,6 +200,8 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 		switch (featureID) {
 			case EditorPackage.OUTLINE_BEHAVIOR__CONTAINER:
 				return container != CONTAINER_EDEFAULT;
+			case EditorPackage.OUTLINE_BEHAVIOR__TERMINAL:
+				return terminal != TERMINAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -166,6 +218,8 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (container: ");
 		result.append(container);
+		result.append(", terminal: ");
+		result.append(terminal);
 		result.append(')');
 		return result.toString();
 	}

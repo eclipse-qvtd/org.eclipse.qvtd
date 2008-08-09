@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OutlineBehavior.java,v 1.1 2008/08/08 16:39:54 ewillink Exp $
+ * $Id: OutlineBehavior.java,v 1.2 2008/08/09 17:33:58 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -26,6 +26,7 @@ package org.eclipse.qvt.declarative.editor;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.qvt.declarative.editor.OutlineBehavior#isContainer <em>Container</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.OutlineBehavior#isTerminal <em>Terminal</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,5 +61,32 @@ public interface OutlineBehavior extends Behavior {
 	 * @generated
 	 */
 	void setContainer(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Terminal</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Terminal</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Terminal</em>' attribute.
+	 * @see #setTerminal(boolean)
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getOutlineBehavior_Terminal()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isTerminal();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.OutlineBehavior#isTerminal <em>Terminal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Terminal</em>' attribute.
+	 * @see #isTerminal()
+	 * @generated
+	 */
+	void setTerminal(boolean value);
 
 } // OutlineBehavior
