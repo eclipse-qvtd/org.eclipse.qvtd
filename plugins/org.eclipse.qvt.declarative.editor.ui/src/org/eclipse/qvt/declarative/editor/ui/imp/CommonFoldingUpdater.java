@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonFoldingUpdater.java,v 1.1 2008/08/08 16:42:46 ewillink Exp $
+ * $Id: CommonFoldingUpdater.java,v 1.2 2008/08/09 17:47:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -126,10 +126,13 @@ public abstract class CommonFoldingUpdater extends FolderBase
 	public void sendVisitorToAST(HashMap<Annotation,Position> newAnnotations, List<Annotation> annotations, Object ast) {
 		CSTNode theCST = ((ASTandCST) ast).getCST();
 		if (theCST != null) {
-			prsStream = CSTNodeTokenAdapter.getStartToken(theCST).getPrsStream();
-			FoldingCSTVisitor visitor = new FoldingCSTVisitor(getPlugin().getEditorDefinition());
-			FoldingCSTVisitor.acceptAt(visitor, theCST);
-			makeAdjunctAnnotations(theCST);
+			IToken startToken = CSTNodeTokenAdapter.getStartToken(theCST);
+			if (startToken != null) {
+				prsStream = startToken.getPrsStream();
+				FoldingCSTVisitor visitor = new FoldingCSTVisitor(getPlugin().getEditorDefinition());
+				FoldingCSTVisitor.acceptAt(visitor, theCST);
+				makeAdjunctAnnotations(theCST);
+			}
 		}
 	}
 }
