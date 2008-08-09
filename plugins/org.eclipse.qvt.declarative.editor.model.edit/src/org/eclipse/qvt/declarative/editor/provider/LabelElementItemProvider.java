@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LabelElementItemProvider.java,v 1.1 2008/08/08 16:39:45 ewillink Exp $
+ * $Id: LabelElementItemProvider.java,v 1.2 2008/08/09 17:34:22 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -184,5 +184,4 @@ public class LabelElementItemProvider
 	public ResourceLocator getResourceLocator() {
 		return EditorEditPlugin.INSTANCE;
 	}
-
 }
