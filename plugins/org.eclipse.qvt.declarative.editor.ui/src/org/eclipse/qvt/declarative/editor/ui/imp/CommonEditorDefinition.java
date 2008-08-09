@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonEditorDefinition.java,v 1.1 2008/08/08 16:42:46 ewillink Exp $
+ * $Id: CommonEditorDefinition.java,v 1.2 2008/08/09 17:47:20 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -106,12 +106,25 @@ public class CommonEditorDefinition
 			}
 			return ecoreNode;
 		}
-		Class<?> oClass = object.getClass();
-		JavaNode javaNode = javaMap != null ? javaMap.get(oClass) : null;
-		if (javaNode == null) {
-			// FIXME inheritance search
+		return javaMap != null ? findJavaClass(object.getClass()) : null; 
+	}
+
+	protected JavaNode findJavaClass(Class<?> aClass) {
+		JavaNode javaNode = javaMap.get(aClass);
+		if (javaNode != null)
+			return javaNode; 
+		Class<?> bClass = aClass.getSuperclass();
+		if (bClass != null) {
+			javaNode = findJavaClass(bClass);
+			if (javaNode != null)
+				return javaNode; 
 		}
-		return javaNode;
+		for (Class<?> cClass : aClass.getInterfaces()) {
+			javaNode = findJavaClass(cClass);
+			if (javaNode != null)
+				return javaNode; 
+		}
+		return null;
 	}
 
 	public <T extends Behavior> T getBehavior(Object object, Class<T> behaviorClass) {
