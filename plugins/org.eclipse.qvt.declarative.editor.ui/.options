@@ -1,0 +1,16 @@
+# Debugging options for the org.eclipse.qvt.declarative.editor.ui plug-in
+
+# Turn on general debugging for the org.eclipse.qvt.declarative.editor.ui plug-in
+org.eclipse.qvt.declarative.editor.ui/debug=true
+
+# Generate a diagnostic for editor saving
+org.eclipse.qvt.declarative.editor.ui/editor/save=false
+
+# Generate a diagnostic for resource loading
+org.eclipse.qvt.declarative.editor.ui/resource/load=false
+
+# Generate a diagnostic for each visit
+org.eclipse.qvt.declarative.editor.ui/visitor/trace=false
+
+# Generate a diagnostic for each visit result
+org.eclipse.qvt.declarative.editor.ui/visitor/selection=false
