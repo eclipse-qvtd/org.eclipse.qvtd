@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.qvt.declarative.editor.ui.plugin.QVTEditorPlugin;
+import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 
 /**
  * DebugString supports generation of debug identification of objects, determining a name usuing
