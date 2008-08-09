@@ -1,0 +1,85 @@
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2008 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: QVTcPlugin.java,v 1.1 2008/08/09 17:54:33 ewillink Exp $
+ */
+package org.eclipse.qvt.declarative.editor.qvtcore.ui;
+
+import java.net.URL;
+
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.preferences.DefaultScope;
+import org.eclipse.imp.preferences.PreferencesService;
+import org.eclipse.imp.runtime.PluginBase;
+import org.eclipse.qvt.declarative.editor.ui.imp.CommonEditorDefinition;
+import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
+
+public class QVTcPlugin extends PluginBase implements ICommonPlugin
+{
+	public static final String kPluginID = "org.eclipse.qvt.declarative.editor.qvtcore.ui";
+	public static final String kLanguageName = "qvtc";
+
+	/**
+	 * The unique instance of this plugin class
+	 */
+	protected static QVTcPlugin sPlugin;
+
+	public static QVTcPlugin getInstance() {
+		// SMS 11 Jul 2007
+		// Added conditional call to constructor in case the plugin
+		// class has not been auto-started
+		if (sPlugin == null)
+			new QVTcPlugin();
+		return sPlugin;
+	}
+
+	public static PreferencesService getPreferencesService() {
+		if (preferencesService == null) {
+			preferencesService = new PreferencesService(ResourcesPlugin.getWorkspace().getRoot().getProject());
+			preferencesService.setLanguageName(kLanguageName);
+			// To trigger the invocation of the preferences initializer:
+			try {
+				new DefaultScope().getNode(kPluginID);
+			} catch (Exception e) {
+				// If this ever happens, it will probably be because the preferences
+				// and their initializer haven't been defined yet.  In that situation
+				// there's not really anything to do--you can't initialize preferences
+				// that don't exist.  So swallow the exception and continue ...
+			}
+		}
+		return preferencesService;
+	}
+	
+	public /*static*/ CommonEditorDefinition kEditorDefinition = null;  // FIXME Make static once development over
+
+	public QVTcPlugin() {
+		super();
+		sPlugin = this;
+	}
+
+	public CommonEditorDefinition getEditorDefinition() {
+		if (kEditorDefinition == null) {
+			Path path = new Path("model/" + kLanguageName + ".editor");
+			URL url = FileLocator.find(getBundle(), path, null);
+			kEditorDefinition = new CommonEditorDefinition(url);			
+		}
+		return kEditorDefinition;
+	}
+
+	public String getID() {
+		return kPluginID;
+	}
+}
