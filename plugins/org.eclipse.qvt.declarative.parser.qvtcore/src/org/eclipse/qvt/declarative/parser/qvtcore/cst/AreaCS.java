@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AreaCS.java,v 1.1 2008/07/23 10:06:41 qglineur Exp $
+ * $Id: AreaCS.java,v 1.2 2008/08/09 17:42:08 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore.cst;
 
@@ -26,8 +26,8 @@ import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.AreaCS#getBottomPattern <em>Bottom Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.AreaCS#getGuardPattern <em>Guard Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.AreaCS#getBottomPattern <em>Bottom Pattern</em>}</li>
  * </ul>
  * </p>
  *

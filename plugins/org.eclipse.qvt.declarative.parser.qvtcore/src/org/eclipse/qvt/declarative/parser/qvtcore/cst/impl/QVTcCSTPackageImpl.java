@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcCSTPackageImpl.java,v 1.1 2008/07/23 10:06:41 qglineur Exp $
+ * $Id: QVTcCSTPackageImpl.java,v 1.2 2008/08/09 17:42:09 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore.cst.impl;
 
@@ -247,7 +247,7 @@ public class QVTcCSTPackageImpl extends EPackageImpl implements QVTcCSTPackage {
 	 * @generated
 	 */
 	public EReference getAreaCS_BottomPattern() {
-		return (EReference)areaCSEClass.getEStructuralFeatures().get(0);
+		return (EReference)areaCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -256,7 +256,7 @@ public class QVTcCSTPackageImpl extends EPackageImpl implements QVTcCSTPackage {
 	 * @generated
 	 */
 	public EReference getAreaCS_GuardPattern() {
-		return (EReference)areaCSEClass.getEStructuralFeatures().get(1);
+		return (EReference)areaCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -537,7 +537,7 @@ public class QVTcCSTPackageImpl extends EPackageImpl implements QVTcCSTPackage {
 	 * @generated
 	 */
 	public EReference getTopLevelCS_Mappings() {
-		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(0);
+		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -555,7 +555,7 @@ public class QVTcCSTPackageImpl extends EPackageImpl implements QVTcCSTPackage {
 	 * @generated
 	 */
 	public EReference getTopLevelCS_Transformations() {
-		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(2);
+		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -698,8 +698,8 @@ public class QVTcCSTPackageImpl extends EPackageImpl implements QVTcCSTPackage {
 
 		// Create classes and their features
 		areaCSEClass = createEClass(AREA_CS);
-		createEReference(areaCSEClass, AREA_CS__BOTTOM_PATTERN);
 		createEReference(areaCSEClass, AREA_CS__GUARD_PATTERN);
+		createEReference(areaCSEClass, AREA_CS__BOTTOM_PATTERN);
 
 		assignmentCSEClass = createEClass(ASSIGNMENT_CS);
 		createEReference(assignmentCSEClass, ASSIGNMENT_CS__TARGET);
@@ -751,9 +751,9 @@ public class QVTcCSTPackageImpl extends EPackageImpl implements QVTcCSTPackage {
 		realizedVariableCSEClass = createEClass(REALIZED_VARIABLE_CS);
 
 		topLevelCSEClass = createEClass(TOP_LEVEL_CS);
-		createEReference(topLevelCSEClass, TOP_LEVEL_CS__MAPPINGS);
-		createEReference(topLevelCSEClass, TOP_LEVEL_CS__QUERIES);
 		createEReference(topLevelCSEClass, TOP_LEVEL_CS__TRANSFORMATIONS);
+		createEReference(topLevelCSEClass, TOP_LEVEL_CS__QUERIES);
+		createEReference(topLevelCSEClass, TOP_LEVEL_CS__MAPPINGS);
 
 		transformationCSEClass = createEClass(TRANSFORMATION_CS);
 		createEReference(transformationCSEClass, TRANSFORMATION_CS__DIRECTIONS);
@@ -815,8 +815,8 @@ public class QVTcCSTPackageImpl extends EPackageImpl implements QVTcCSTPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(areaCSEClass, AreaCS.class, "AreaCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAreaCS_BottomPattern(), this.getBottomPatternCS(), null, "bottomPattern", null, 0, 1, AreaCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAreaCS_GuardPattern(), this.getGuardPatternCS(), null, "guardPattern", null, 0, 1, AreaCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAreaCS_BottomPattern(), this.getBottomPatternCS(), null, "bottomPattern", null, 0, 1, AreaCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(assignmentCSEClass, AssignmentCS.class, "AssignmentCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAssignmentCS_Target(), theCSTPackage.getOCLExpressionCS(), null, "target", null, 1, 1, AssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -868,9 +868,9 @@ public class QVTcCSTPackageImpl extends EPackageImpl implements QVTcCSTPackage {
 		initEClass(realizedVariableCSEClass, RealizedVariableCS.class, "RealizedVariableCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(topLevelCSEClass, TopLevelCS.class, "TopLevelCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTopLevelCS_Mappings(), this.getMappingCS(), null, "mappings", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTopLevelCS_Queries(), this.getQueryCS(), null, "queries", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopLevelCS_Transformations(), this.getTransformationCS(), null, "transformations", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopLevelCS_Queries(), this.getQueryCS(), null, "queries", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopLevelCS_Mappings(), this.getMappingCS(), null, "mappings", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transformationCSEClass, TransformationCS.class, "TransformationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransformationCS_Directions(), this.getDirectionCS(), null, "directions", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

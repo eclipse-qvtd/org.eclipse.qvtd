@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TopLevelCSImpl.java,v 1.1 2008/07/23 10:06:41 qglineur Exp $
+ * $Id: TopLevelCSImpl.java,v 1.2 2008/08/09 17:42:09 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore.cst.impl;
 
@@ -38,9 +38,9 @@ import org.eclipse.qvt.declarative.parser.qvtcore.cst.TransformationCS;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.impl.TopLevelCSImpl#getMappings <em>Mappings</em>}</li>
- *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.impl.TopLevelCSImpl#getQueries <em>Queries</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.impl.TopLevelCSImpl#getTransformations <em>Transformations</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.impl.TopLevelCSImpl#getQueries <em>Queries</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.impl.TopLevelCSImpl#getMappings <em>Mappings</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,14 +48,14 @@ import org.eclipse.qvt.declarative.parser.qvtcore.cst.TransformationCS;
  */
 public class TopLevelCSImpl extends CSTNodeImpl implements TopLevelCS {
 	/**
-	 * The cached value of the '{@link #getMappings() <em>Mappings</em>}' containment reference list.
+	 * The cached value of the '{@link #getTransformations() <em>Transformations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMappings()
+	 * @see #getTransformations()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MappingCS> mappings;
+	protected EList<TransformationCS> transformations;
 
 	/**
 	 * The cached value of the '{@link #getQueries() <em>Queries</em>}' containment reference list.
@@ -68,14 +68,14 @@ public class TopLevelCSImpl extends CSTNodeImpl implements TopLevelCS {
 	protected EList<QueryCS> queries;
 
 	/**
-	 * The cached value of the '{@link #getTransformations() <em>Transformations</em>}' containment reference list.
+	 * The cached value of the '{@link #getMappings() <em>Mappings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTransformations()
+	 * @see #getMappings()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TransformationCS> transformations;
+	protected EList<MappingCS> mappings;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -140,12 +140,12 @@ public class TopLevelCSImpl extends CSTNodeImpl implements TopLevelCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcCSTPackage.TOP_LEVEL_CS__MAPPINGS:
-				return ((InternalEList<?>)getMappings()).basicRemove(otherEnd, msgs);
-			case QVTcCSTPackage.TOP_LEVEL_CS__QUERIES:
-				return ((InternalEList<?>)getQueries()).basicRemove(otherEnd, msgs);
 			case QVTcCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
 				return ((InternalEList<?>)getTransformations()).basicRemove(otherEnd, msgs);
+			case QVTcCSTPackage.TOP_LEVEL_CS__QUERIES:
+				return ((InternalEList<?>)getQueries()).basicRemove(otherEnd, msgs);
+			case QVTcCSTPackage.TOP_LEVEL_CS__MAPPINGS:
+				return ((InternalEList<?>)getMappings()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -158,12 +158,12 @@ public class TopLevelCSImpl extends CSTNodeImpl implements TopLevelCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcCSTPackage.TOP_LEVEL_CS__MAPPINGS:
-				return getMappings();
-			case QVTcCSTPackage.TOP_LEVEL_CS__QUERIES:
-				return getQueries();
 			case QVTcCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
 				return getTransformations();
+			case QVTcCSTPackage.TOP_LEVEL_CS__QUERIES:
+				return getQueries();
+			case QVTcCSTPackage.TOP_LEVEL_CS__MAPPINGS:
+				return getMappings();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -177,17 +177,17 @@ public class TopLevelCSImpl extends CSTNodeImpl implements TopLevelCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcCSTPackage.TOP_LEVEL_CS__MAPPINGS:
-				getMappings().clear();
-				getMappings().addAll((Collection<? extends MappingCS>)newValue);
+			case QVTcCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
+				getTransformations().clear();
+				getTransformations().addAll((Collection<? extends TransformationCS>)newValue);
 				return;
 			case QVTcCSTPackage.TOP_LEVEL_CS__QUERIES:
 				getQueries().clear();
 				getQueries().addAll((Collection<? extends QueryCS>)newValue);
 				return;
-			case QVTcCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
-				getTransformations().clear();
-				getTransformations().addAll((Collection<? extends TransformationCS>)newValue);
+			case QVTcCSTPackage.TOP_LEVEL_CS__MAPPINGS:
+				getMappings().clear();
+				getMappings().addAll((Collection<? extends MappingCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -201,14 +201,14 @@ public class TopLevelCSImpl extends CSTNodeImpl implements TopLevelCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcCSTPackage.TOP_LEVEL_CS__MAPPINGS:
-				getMappings().clear();
+			case QVTcCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
+				getTransformations().clear();
 				return;
 			case QVTcCSTPackage.TOP_LEVEL_CS__QUERIES:
 				getQueries().clear();
 				return;
-			case QVTcCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
-				getTransformations().clear();
+			case QVTcCSTPackage.TOP_LEVEL_CS__MAPPINGS:
+				getMappings().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -222,12 +222,12 @@ public class TopLevelCSImpl extends CSTNodeImpl implements TopLevelCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcCSTPackage.TOP_LEVEL_CS__MAPPINGS:
-				return mappings != null && !mappings.isEmpty();
-			case QVTcCSTPackage.TOP_LEVEL_CS__QUERIES:
-				return queries != null && !queries.isEmpty();
 			case QVTcCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
 				return transformations != null && !transformations.isEmpty();
+			case QVTcCSTPackage.TOP_LEVEL_CS__QUERIES:
+				return queries != null && !queries.isEmpty();
+			case QVTcCSTPackage.TOP_LEVEL_CS__MAPPINGS:
+				return mappings != null && !mappings.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TopLevelCS.java,v 1.1 2008/07/23 10:06:42 qglineur Exp $
+ * $Id: TopLevelCS.java,v 1.2 2008/08/09 17:42:09 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore.cst;
 
@@ -27,9 +27,9 @@ import org.eclipse.ocl.cst.CSTNode;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.TopLevelCS#getMappings <em>Mappings</em>}</li>
- *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.TopLevelCS#getQueries <em>Queries</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.TopLevelCS#getTransformations <em>Transformations</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.TopLevelCS#getQueries <em>Queries</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.TopLevelCS#getMappings <em>Mappings</em>}</li>
  * </ul>
  * </p>
  *

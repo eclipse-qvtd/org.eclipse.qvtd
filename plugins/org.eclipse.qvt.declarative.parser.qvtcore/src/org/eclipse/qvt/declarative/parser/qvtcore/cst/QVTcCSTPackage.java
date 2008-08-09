@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcCSTPackage.java,v 1.1 2008/07/23 10:06:41 qglineur Exp $
+ * $Id: QVTcCSTPackage.java,v 1.2 2008/08/09 17:42:08 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore.cst;
 
@@ -109,22 +109,22 @@ public interface QVTcCSTPackage extends EPackage {
 	int AREA_CS__IDENTIFIER = QVTCSTPackage.IDENTIFIED_CS__IDENTIFIER;
 
 	/**
-	 * The feature id for the '<em><b>Bottom Pattern</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AREA_CS__BOTTOM_PATTERN = QVTCSTPackage.IDENTIFIED_CS_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Guard Pattern</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AREA_CS__GUARD_PATTERN = QVTCSTPackage.IDENTIFIED_CS_FEATURE_COUNT + 1;
+	int AREA_CS__GUARD_PATTERN = QVTCSTPackage.IDENTIFIED_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Bottom Pattern</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AREA_CS__BOTTOM_PATTERN = QVTCSTPackage.IDENTIFIED_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Area CS</em>' class.
@@ -459,15 +459,6 @@ public interface QVTcCSTPackage extends EPackage {
 	int DOMAIN_CS__IDENTIFIER = AREA_CS__IDENTIFIER;
 
 	/**
-	 * The feature id for the '<em><b>Bottom Pattern</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_CS__BOTTOM_PATTERN = AREA_CS__BOTTOM_PATTERN;
-
-	/**
 	 * The feature id for the '<em><b>Guard Pattern</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -475,6 +466,15 @@ public interface QVTcCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_CS__GUARD_PATTERN = AREA_CS__GUARD_PATTERN;
+
+	/**
+	 * The feature id for the '<em><b>Bottom Pattern</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_CS__BOTTOM_PATTERN = AREA_CS__BOTTOM_PATTERN;
 
 	/**
 	 * The feature id for the '<em><b>Check</b></em>' attribute.
@@ -961,13 +961,13 @@ public interface QVTcCSTPackage extends EPackage {
 	int TOP_LEVEL_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
 
 	/**
-	 * The feature id for the '<em><b>Mappings</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Transformations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__MAPPINGS = CSTPackage.CST_NODE_FEATURE_COUNT + 0;
+	int TOP_LEVEL_CS__TRANSFORMATIONS = CSTPackage.CST_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Queries</b></em>' containment reference list.
@@ -979,13 +979,13 @@ public interface QVTcCSTPackage extends EPackage {
 	int TOP_LEVEL_CS__QUERIES = CSTPackage.CST_NODE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Transformations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Mappings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__TRANSFORMATIONS = CSTPackage.CST_NODE_FEATURE_COUNT + 2;
+	int TOP_LEVEL_CS__MAPPINGS = CSTPackage.CST_NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Top Level CS</em>' class.

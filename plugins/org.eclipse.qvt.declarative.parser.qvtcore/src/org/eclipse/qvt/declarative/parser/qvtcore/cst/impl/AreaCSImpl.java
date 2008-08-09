@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AreaCSImpl.java,v 1.1 2008/07/23 10:06:41 qglineur Exp $
+ * $Id: AreaCSImpl.java,v 1.2 2008/08/09 17:42:09 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore.cst.impl;
 
@@ -34,24 +34,14 @@ import org.eclipse.qvt.declarative.parser.qvtcore.cst.GuardPatternCS;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.impl.AreaCSImpl#getBottomPattern <em>Bottom Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.impl.AreaCSImpl#getGuardPattern <em>Guard Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.parser.qvtcore.cst.impl.AreaCSImpl#getBottomPattern <em>Bottom Pattern</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public abstract class AreaCSImpl extends IdentifiedCSImpl implements AreaCS {
-	/**
-	 * The cached value of the '{@link #getBottomPattern() <em>Bottom Pattern</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBottomPattern()
-	 * @generated
-	 * @ordered
-	 */
-	protected BottomPatternCS bottomPattern;
-
 	/**
 	 * The cached value of the '{@link #getGuardPattern() <em>Guard Pattern</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -61,6 +51,16 @@ public abstract class AreaCSImpl extends IdentifiedCSImpl implements AreaCS {
 	 * @ordered
 	 */
 	protected GuardPatternCS guardPattern;
+
+	/**
+	 * The cached value of the '{@link #getBottomPattern() <em>Bottom Pattern</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBottomPattern()
+	 * @generated
+	 * @ordered
+	 */
+	protected BottomPatternCS bottomPattern;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -175,10 +175,10 @@ public abstract class AreaCSImpl extends IdentifiedCSImpl implements AreaCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcCSTPackage.AREA_CS__BOTTOM_PATTERN:
-				return basicSetBottomPattern(null, msgs);
 			case QVTcCSTPackage.AREA_CS__GUARD_PATTERN:
 				return basicSetGuardPattern(null, msgs);
+			case QVTcCSTPackage.AREA_CS__BOTTOM_PATTERN:
+				return basicSetBottomPattern(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -191,10 +191,10 @@ public abstract class AreaCSImpl extends IdentifiedCSImpl implements AreaCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcCSTPackage.AREA_CS__BOTTOM_PATTERN:
-				return getBottomPattern();
 			case QVTcCSTPackage.AREA_CS__GUARD_PATTERN:
 				return getGuardPattern();
+			case QVTcCSTPackage.AREA_CS__BOTTOM_PATTERN:
+				return getBottomPattern();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -207,11 +207,11 @@ public abstract class AreaCSImpl extends IdentifiedCSImpl implements AreaCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcCSTPackage.AREA_CS__BOTTOM_PATTERN:
-				setBottomPattern((BottomPatternCS)newValue);
-				return;
 			case QVTcCSTPackage.AREA_CS__GUARD_PATTERN:
 				setGuardPattern((GuardPatternCS)newValue);
+				return;
+			case QVTcCSTPackage.AREA_CS__BOTTOM_PATTERN:
+				setBottomPattern((BottomPatternCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -225,11 +225,11 @@ public abstract class AreaCSImpl extends IdentifiedCSImpl implements AreaCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcCSTPackage.AREA_CS__BOTTOM_PATTERN:
-				setBottomPattern((BottomPatternCS)null);
-				return;
 			case QVTcCSTPackage.AREA_CS__GUARD_PATTERN:
 				setGuardPattern((GuardPatternCS)null);
+				return;
+			case QVTcCSTPackage.AREA_CS__BOTTOM_PATTERN:
+				setBottomPattern((BottomPatternCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -243,10 +243,10 @@ public abstract class AreaCSImpl extends IdentifiedCSImpl implements AreaCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcCSTPackage.AREA_CS__BOTTOM_PATTERN:
-				return bottomPattern != null;
 			case QVTcCSTPackage.AREA_CS__GUARD_PATTERN:
 				return guardPattern != null;
+			case QVTcCSTPackage.AREA_CS__BOTTOM_PATTERN:
+				return bottomPattern != null;
 		}
 		return super.eIsSet(featureID);
 	}
