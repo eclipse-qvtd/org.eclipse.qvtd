@@ -1,13 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2007,2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: QVTcAnalyzer.java,v 1.2 2008/08/09 17:39:35 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.parser.qvtcore;
 
 import java.io.IOException;
@@ -25,7 +31,7 @@ public class QVTcAnalyzer extends AbstractQVTcAnalyzer
 	protected final QVTcTopLevelEnvironment topLevelEnvironment;
 	
 	public QVTcAnalyzer(QVTcTopLevelEnvironment environment) {
-		super(new QVTcParser(new QVTcLexer(environment)));
+		super(new DerivedQVTcParser(new QVTcLexer(environment)));
 		topLevelEnvironment = environment;
 	}
     
