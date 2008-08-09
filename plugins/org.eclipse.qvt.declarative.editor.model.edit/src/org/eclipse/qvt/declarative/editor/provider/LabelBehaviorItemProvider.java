@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LabelBehaviorItemProvider.java,v 1.1 2008/08/08 16:39:46 ewillink Exp $
+ * $Id: LabelBehaviorItemProvider.java,v 1.2 2008/08/09 17:35:14 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -159,14 +159,24 @@ public class LabelBehaviorItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
+		StringBuffer s = new StringBuffer();
+		s.append(getString("_UI_LabelBehavior_type"));
 		String label = ((LabelBehavior)object).getFormat();
-		return label == null || label.length() == 0 ?
-			getString("_UI_LabelBehavior_type") :
-			getString("_UI_LabelBehavior_type") + " " + label;
+		if (label != null) {
+			s.append(" ");
+			s.append(label);
+		}
+		String image = ((LabelBehavior)object).getImage();
+		if (image != null) {
+			s.append(" [");
+			s.append(image);
+			s.append("]");
+		}
+		return s.toString();
 	}
 
 	/**
