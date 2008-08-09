@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.qvt.environment;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -45,8 +46,22 @@ import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
 
 public abstract class QVTTopLevelEnvironment<E extends IQVTEnvironment> extends QVTEnvironment<E, E> implements IFileEnvironment
 {
+	public static class LPGProgressMonitor implements Monitor
+	{
+		protected final IProgressMonitor monitor;
+
+		public LPGProgressMonitor(IProgressMonitor monitor) {
+			this.monitor = monitor;
+		}
+
+		public boolean isCancelled() {
+			return (monitor != null) && monitor.isCanceled();
+		}
+	}
+
 	private final EPackage.Registry qvtRegistry;
 	protected AbstractFileHandle file;					// FIXME only used in parseToAST
+	private AbstractQVTAnalyzer<E> analyzer = null;
 	protected AbstractModelResolver resolver = null;
 	
 	protected QVTTopLevelEnvironment(EPackage.Registry reg, CSTNode cstNode) {
@@ -86,6 +101,12 @@ public abstract class QVTTopLevelEnvironment<E extends IQVTEnvironment> extends 
 
 	protected abstract AbstractQVTAnalyzer<E> createAnalyzer();
 
+	public AbstractQVTAnalyzer<E> getAnalyzer() {
+		if (analyzer == null)
+			analyzer = createAnalyzer();
+		return analyzer;
+	}
+
 	protected abstract String getContentTypeIdentifier();
 
 	public List<EPackage> getEPackages() {
@@ -107,6 +128,23 @@ public abstract class QVTTopLevelEnvironment<E extends IQVTEnvironment> extends 
 
 	public ResourceSet getResourceSet() {
 		return resolver.getResourceSet();
+	}
+
+	protected AbstractQVTAnalyzer<E> initializeAnalyzer(Reader reader) throws CoreException, FileNotFoundException, IOException {
+		AbstractQVTAnalyzer<E> analyzer = getAnalyzer();
+// FIXME		analyzer.reset();
+		analyzer.setFileName(file.getName());
+		analyzer.setResolver(resolver);
+		if (reader == null)
+			reader = new InputStreamReader(file.getContents());
+		else if (!file.exists())
+			return null;
+		analyzer.initialize(reader);
+		return analyzer;
+	}
+
+	protected void initializeMonitor(IProgressMonitor monitor) {
+		setMonitor(new LPGProgressMonitor(monitor));
 	}
 
 	protected void initializePackageNs(EPackage ePackage) {
@@ -160,22 +198,24 @@ public abstract class QVTTopLevelEnvironment<E extends IQVTEnvironment> extends 
 		return null;
 	}
 
-	public Collection<? extends EObject> parseToAST(Reader reader, final IProgressMonitor monitor)
+	public Collection<? extends EObject> parseToAST(Reader reader, IProgressMonitor monitor)
 			throws IOException, CoreException {
-		setMonitor(new Monitor() {
-			public boolean isCancelled() {
-				return (monitor != null) && monitor.isCanceled();
-			}});
-		AbstractQVTAnalyzer<E> analyzer = createAnalyzer();
-		analyzer.setFileName(file.getName());
-		analyzer.setResolver(resolver);
-		if (reader == null)
-			reader = new InputStreamReader(file.getContents());
-		else if (!file.exists())
-			return null;
-		analyzer.initialize(reader);
+		initializeMonitor(monitor);
+		AbstractQVTAnalyzer<E> analyzer = initializeAnalyzer(reader);
 		URI sourceURI = file.getURI();
 		return analyzer.parseToAST(sourceURI);
+	}
+
+	public CSTNode parseToCST(Reader reader, IProgressMonitor monitor) throws IOException, CoreException {
+		initializeMonitor(monitor);
+		AbstractQVTAnalyzer<E> analyzer = initializeAnalyzer(reader);
+		return analyzer.parseToCST();
+	}
+
+	public AbstractQVTAnalyzer<E> parseToTokens(Reader reader, IProgressMonitor monitor) throws IOException, CoreException {
+		initializeMonitor(monitor);
+		AbstractQVTAnalyzer<E> analyzer = initializeAnalyzer(reader);
+		return analyzer;
 	}
 
 	protected String resolveSynonym(EClassifier owner, String name, List<? extends TypedElement<EClassifier>> args) {
