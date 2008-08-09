@@ -5,9 +5,9 @@
     nsURI="http://www.eclipse.org/qvt/1.0/QVTCore" nsPrefix="qvtcore">
   <eSubpackages name="cst" nsURI="http://www.eclipse.org/qvt/1.0/QVTCorecst" nsPrefix="qvtccst">
     <eClassifiers xsi:type="ecore:EClass" name="AreaCS" abstract="true" eSuperTypes="../../org.eclipse.qvt.declarative.parser/model/QVTCST.ecore#//cst/IdentifiedCS">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="bottomPattern" eType="#//cst/BottomPatternCS"
-          containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="guardPattern" eType="#//cst/GuardPatternCS"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bottomPattern" eType="#//cst/BottomPatternCS"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AssignmentCS" eSuperTypes="../../org.eclipse.ocl/model/OCLCST.ecore#//cst/OCLExpressionCS">
@@ -86,12 +86,12 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="RealizedVariableCS" eSuperTypes="#//cst/RealizeableVariableCS"/>
     <eClassifiers xsi:type="ecore:EClass" name="TopLevelCS" eSuperTypes="../../org.eclipse.ocl/model/OCLCST.ecore#//cst/CSTNode">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="mappings" upperBound="-1"
-          eType="#//cst/MappingCS" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="queries" upperBound="-1"
-          eType="#//cst/QueryCS" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="transformations" upperBound="-1"
           eType="#//cst/TransformationCS" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="queries" upperBound="-1"
+          eType="#//cst/QueryCS" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="mappings" upperBound="-1"
+          eType="#//cst/MappingCS" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TransformationCS" eSuperTypes="../../org.eclipse.ocl/model/OCLCST.ecore#//cst/CSTNode ../../org.eclipse.qvt.declarative.parser/model/QVTCST.ecore#//cst/IHasName">
       <eStructuralFeatures xsi:type="ecore:EReference" name="directions" upperBound="-1"
