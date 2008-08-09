@@ -12,21 +12,19 @@
  * 
  * </copyright>
  *
- * $Id: ICommonPlugin.java,v 1.1 2008/08/08 16:42:46 ewillink Exp $
+ * $Id: ICommonPlugin.java,v 1.2 2008/08/09 17:45:34 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
 import org.eclipse.imp.runtime.IPluginLog;
-import org.eclipse.jface.resource.ImageRegistry;
 import org.osgi.framework.Bundle;
 
 /**
  * ICommonPlugin defines capabilities that an editing plugin should
- * proivide to support the common editing framework.
+ * provide to support the common editing framework.
  */
 public interface ICommonPlugin extends IPluginLog
 {
 	public Bundle getBundle();
 	public CommonEditorDefinition getEditorDefinition();
-	public ImageRegistry getImageRegistry();
 }
