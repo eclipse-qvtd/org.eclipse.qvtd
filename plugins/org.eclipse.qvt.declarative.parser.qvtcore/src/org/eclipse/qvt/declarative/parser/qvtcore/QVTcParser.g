@@ -92,7 +92,7 @@ $Headers
 		protected IdentifierCS createUniqueIdentifierCS(int token) {
 			IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 			result.setValue(createUniqueIdentifier());
-			setOffsets(result, getIToken(token), getIToken(token));
+			setOffsets(result, getIToken(token));
 			return result;
 		}
 	./
@@ -102,7 +102,7 @@ $Rules
 	TopLevelCS ::= $empty
 		/.$BeginJava
 					TopLevelCS result = QVTcCSTFactory.eINSTANCE.createTopLevelCS();
-					setOffsets(result);
+					setOffsets(result, getIToken($getToken(1)));
 					$setResult(result);
 		  $EndJava
 		./
@@ -170,7 +170,7 @@ $Rules
 					IdentifierCS directionNameCS = (IdentifierCS)$getSym(1);
 					DirectionCS result = QVTcCSTFactory.eINSTANCE.createDirectionCS();
 					result.setIdentifier(directionNameCS);
-					setOffsets(result, directionNameCS, directionNameCS);
+					setOffsets(result, directionNameCS);
 					$setResult(result);
 		  $EndJava
 		./
@@ -210,7 +210,7 @@ $Rules
 					MappingCS result = QVTcCSTFactory.eINSTANCE.createMappingCS();
 //					IdentifierCS identifierCS = createUniqueIdentifierCS($getToken(1));
 //					result.setIdentifier(identifierCS);
-					setOffsets(result, getIToken($getToken(1)), getIToken($getToken(1)));
+					setOffsets(result, getIToken($getToken(1)));
 					$setResult(result);
 		  $EndJava
 		./
@@ -267,9 +267,10 @@ $Rules
 					MappingCS result = (MappingCS)$getSym(1);
 					IdentifierCS directionNameCS = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 					directionNameCS.setValue("");
-					setOffsets(directionNameCS, getIToken($getToken(2)), getIToken($getToken(2)));
+					setOffsets(directionNameCS, getIToken($getToken(2)));
 					DomainCS domainCS = (DomainCS)$getSym(3);
 					domainCS.setIdentifier(directionNameCS);
+					setOffsets(domainCS, directionNameCS, domainCS);
 					result.setMiddle(domainCS);
 					setOffsets(result, result, domainCS);
 					$setResult(result);
@@ -279,8 +280,10 @@ $Rules
 		/.$BeginJava
 					MappingCS result = (MappingCS)$getSym(1);
 					IdentifierCS directionNameCS = (IdentifierCS)$getSym(3);
+					setOffsets(directionNameCS, getIToken($getToken(2)), directionNameCS);
 					DomainCS domainCS = (DomainCS)$getSym(4);
 					domainCS.setIdentifier(directionNameCS);
+					setOffsets(domainCS, directionNameCS, domainCS);
 					result.setMiddle(domainCS);
 					setOffsets(result, result, domainCS);
 					$setResult(result);
@@ -357,7 +360,7 @@ $Rules
 	GuardPatternCS_0_ ::= $empty
 		/.$BeginJava
 					GuardPatternCS result = QVTcCSTFactory.eINSTANCE.createGuardPatternCS();
-					setOffsets(result);
+					setOffsets(result, getIToken($getToken(1)));
 					$setResult(result);
 		  $EndJava
 		./
@@ -374,7 +377,7 @@ $Rules
 	GuardPatternCS_2_ ::= $empty
 		/.$BeginJava
 					GuardPatternCS result = QVTcCSTFactory.eINSTANCE.createGuardPatternCS();
-					setOffsets(result);
+					setOffsets(result, getIToken($getToken(1)));
 					$setResult(result);
 		  $EndJava
 		./
@@ -395,7 +398,7 @@ $Rules
 	BottomPatternCS_0_ ::= $empty
 		/.$BeginJava
 					BottomPatternCS result = QVTcCSTFactory.eINSTANCE.createBottomPatternCS();
-					setOffsets(result);
+					setOffsets(result, getIToken($getToken(1)));
 					$setResult(result);
 		  $EndJava
 		./
@@ -421,7 +424,7 @@ $Rules
 	BottomPatternCS_2_ ::= $empty
 		/.$BeginJava
 					BottomPatternCS result = QVTcCSTFactory.eINSTANCE.createBottomPatternCS();
-					setOffsets(result);
+					setOffsets(result, getIToken($getToken(1)));
 					$setResult(result);
 		  $EndJava
 		./
@@ -431,7 +434,7 @@ $Rules
 					BottomPatternCS result = (BottomPatternCS)$getSym(1);
 					OCLExpressionCS constraintCS = (OCLExpressionCS)$getSym(2);
 					result.getConstraints().add(constraintCS);
-					setOffsets(result, result, getIToken($getToken(1)));
+					setOffsets(result, result, getIToken($getToken(3)));
 					$setResult(result);
 		  $EndJava
 		./	
@@ -620,7 +623,7 @@ $Rules
 					int token = $getToken(1);
 					PathNameCS result = createPathNameCS();
 					result.getSequenceOfNames().add(getTokenText(token));
-					setOffsets(result, getIToken(token), getIToken(token));
+					setOffsets(result, getIToken(token));
 					$setResult(result);
 		  $EndJava
 		./
@@ -630,7 +633,7 @@ $Rules
 		/.$BeginJava
 					int token = $getToken(1);
 					SimpleNameCS result = createSimpleNameCS(SimpleTypeEnum.IDENTIFIER_LITERAL, getTokenText(token));
-					setOffsets(result, getIToken(token), getIToken(token));
+					setOffsets(result, getIToken(token));
 					$setResult(result);
 		  $EndJava
 		./
@@ -640,7 +643,7 @@ $Rules
 					int token = $getToken(1);
 					IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 					result.setValue(getTokenText(token));
-					setOffsets(result, getIToken(token), getIToken(token));
+					setOffsets(result, getIToken(token));
 					$setResult(result);
 		  $EndJava
 		./
@@ -650,7 +653,7 @@ $Rules
 					IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 					String string = getTokenText(token);
 					result.setValue(string.substring(1, string.length()-1));
-					setOffsets(result, getIToken(token), getIToken(token));
+					setOffsets(result, getIToken(token));
 					$setResult(result);
 		  $EndJava
 		./

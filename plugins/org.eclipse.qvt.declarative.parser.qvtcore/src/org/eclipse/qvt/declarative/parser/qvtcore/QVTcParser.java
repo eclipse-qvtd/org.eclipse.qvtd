@@ -16,7 +16,7 @@
 *
 * </copyright>
 *
-* $Id: QVTcParser.java,v 1.1 2008/07/23 10:06:42 qglineur Exp $
+* $Id: QVTcParser.java,v 1.2 2008/08/09 17:40:35 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;
@@ -135,7 +135,7 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 	protected IdentifierCS createUniqueIdentifierCS(int token) {
 		IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 		result.setValue(createUniqueIdentifier());
-		setOffsets(result, getIToken(token), getIToken(token));
+		setOffsets(result, getIToken(token));
 		return result;
 	}
 
@@ -2018,7 +2018,7 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 			case 240: {
 				
 				TopLevelCS result = QVTcCSTFactory.eINSTANCE.createTopLevelCS();
-				setOffsets(result);
+				setOffsets(result, getIToken(dtParser.getToken(1)));
 				dtParser.setSym1(result);
 	  		  break;
 			}
@@ -2106,7 +2106,7 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 				IdentifierCS directionNameCS = (IdentifierCS)dtParser.getSym(1);
 				DirectionCS result = QVTcCSTFactory.eINSTANCE.createDirectionCS();
 				result.setIdentifier(directionNameCS);
-				setOffsets(result, directionNameCS, directionNameCS);
+				setOffsets(result, directionNameCS);
 				dtParser.setSym1(result);
 	  		  break;
 			}
@@ -2145,7 +2145,7 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 				MappingCS result = QVTcCSTFactory.eINSTANCE.createMappingCS();
 //					IdentifierCS identifierCS = createUniqueIdentifierCS(dtParser.getToken(1));
 //					result.setIdentifier(identifierCS);
-				setOffsets(result, getIToken(dtParser.getToken(1)), getIToken(dtParser.getToken(1)));
+				setOffsets(result, getIToken(dtParser.getToken(1)));
 				dtParser.setSym1(result);
 	  		  break;
 			}
@@ -2223,9 +2223,10 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 				MappingCS result = (MappingCS)dtParser.getSym(1);
 				IdentifierCS directionNameCS = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 				directionNameCS.setValue("");
-				setOffsets(directionNameCS, getIToken(dtParser.getToken(2)), getIToken(dtParser.getToken(2)));
+				setOffsets(directionNameCS, getIToken(dtParser.getToken(2)));
 				DomainCS domainCS = (DomainCS)dtParser.getSym(3);
 				domainCS.setIdentifier(directionNameCS);
+				setOffsets(domainCS, directionNameCS, domainCS);
 				result.setMiddle(domainCS);
 				setOffsets(result, result, domainCS);
 				dtParser.setSym1(result);
@@ -2239,8 +2240,10 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 				
 				MappingCS result = (MappingCS)dtParser.getSym(1);
 				IdentifierCS directionNameCS = (IdentifierCS)dtParser.getSym(3);
+				setOffsets(directionNameCS, getIToken(dtParser.getToken(2)), directionNameCS);
 				DomainCS domainCS = (DomainCS)dtParser.getSym(4);
 				domainCS.setIdentifier(directionNameCS);
+				setOffsets(domainCS, directionNameCS, domainCS);
 				result.setMiddle(domainCS);
 				setOffsets(result, result, domainCS);
 				dtParser.setSym1(result);
@@ -2329,7 +2332,7 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 			case 282: {
 				
 				GuardPatternCS result = QVTcCSTFactory.eINSTANCE.createGuardPatternCS();
-				setOffsets(result);
+				setOffsets(result, getIToken(dtParser.getToken(1)));
 				dtParser.setSym1(result);
 	  		  break;
 			}
@@ -2353,7 +2356,7 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 			case 285: {
 				
 				GuardPatternCS result = QVTcCSTFactory.eINSTANCE.createGuardPatternCS();
-				setOffsets(result);
+				setOffsets(result, getIToken(dtParser.getToken(1)));
 				dtParser.setSym1(result);
 	  		  break;
 			}
@@ -2377,7 +2380,7 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 			case 290: {
 				
 				BottomPatternCS result = QVTcCSTFactory.eINSTANCE.createBottomPatternCS();
-				setOffsets(result);
+				setOffsets(result, getIToken(dtParser.getToken(1)));
 				dtParser.setSym1(result);
 	  		  break;
 			}
@@ -2414,7 +2417,7 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 			case 294: {
 				
 				BottomPatternCS result = QVTcCSTFactory.eINSTANCE.createBottomPatternCS();
-				setOffsets(result);
+				setOffsets(result, getIToken(dtParser.getToken(1)));
 				dtParser.setSym1(result);
 	  		  break;
 			}
@@ -2427,7 +2430,7 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 				BottomPatternCS result = (BottomPatternCS)dtParser.getSym(1);
 				OCLExpressionCS constraintCS = (OCLExpressionCS)dtParser.getSym(2);
 				result.getConstraints().add(constraintCS);
-				setOffsets(result, result, getIToken(dtParser.getToken(1)));
+				setOffsets(result, result, getIToken(dtParser.getToken(3)));
 				dtParser.setSym1(result);
 	  		  break;
 			}
@@ -2623,7 +2626,7 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 				int token = dtParser.getToken(1);
 				PathNameCS result = createPathNameCS();
 				result.getSequenceOfNames().add(getTokenText(token));
-				setOffsets(result, getIToken(token), getIToken(token));
+				setOffsets(result, getIToken(token));
 				dtParser.setSym1(result);
 	  		  break;
 			}
@@ -2635,7 +2638,7 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 				
 				int token = dtParser.getToken(1);
 				SimpleNameCS result = createSimpleNameCS(SimpleTypeEnum.IDENTIFIER_LITERAL, getTokenText(token));
-				setOffsets(result, getIToken(token), getIToken(token));
+				setOffsets(result, getIToken(token));
 				dtParser.setSym1(result);
 	  		  break;
 			}
@@ -2648,7 +2651,7 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 				int token = dtParser.getToken(1);
 				IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 				result.setValue(getTokenText(token));
-				setOffsets(result, getIToken(token), getIToken(token));
+				setOffsets(result, getIToken(token));
 				dtParser.setSym1(result);
 	  		  break;
 			}
@@ -2662,7 +2665,7 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 				IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 				String string = getTokenText(token);
 				result.setValue(string.substring(1, string.length()-1));
-				setOffsets(result, getIToken(token), getIToken(token));
+				setOffsets(result, getIToken(token));
 				dtParser.setSym1(result);
 	  		  break;
 			}
