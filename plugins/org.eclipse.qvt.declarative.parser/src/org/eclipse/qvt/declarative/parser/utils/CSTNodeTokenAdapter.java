@@ -46,10 +46,14 @@ public class CSTNodeTokenAdapter extends AdapterImpl
 
 	public static void setEndToken(CSTNode cstNode, IToken token) {
 		getAdapter(cstNode).setEndToken(token);
+		if (token != null)
+			cstNode.setEndOffset(token.getEndOffset());
 	}
 
 	public static void setStartToken(CSTNode cstNode, IToken token) {
 		getAdapter(cstNode).setStartToken(token);
+		if (token != null)
+			cstNode.setStartOffset(token.getStartOffset());
 	}
 
 	protected IToken endToken = null;
