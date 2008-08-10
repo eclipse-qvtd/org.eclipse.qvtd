@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcLabelProvider.java,v 1.1 2008/08/09 17:55:46 ewillink Exp $
+ * $Id: QVTcLabelProvider.java,v 1.2 2008/08/10 07:30:39 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.treeModelBuilder;
 
@@ -26,11 +26,6 @@ import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 
 public class QVTcLabelProvider extends CommonLabelProvider
 {
-//	private static ImageRegistry sImageRegistry = QVTcPlugin.getInstance().getImageRegistry();
-
-//	private static Image DEFAULT_IMAGE = sImageRegistry
-//			.get(IQVTcResources.QVTC_DEFAULT_IMAGE);
-
 	@Override
 	protected String formatObject(Object object, Object node, int index) {
 		if (object instanceof List) {
