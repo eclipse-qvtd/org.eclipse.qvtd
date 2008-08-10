@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonEditorDefinition.java,v 1.2 2008/08/09 17:47:20 ewillink Exp $
+ * $Id: CommonEditorDefinition.java,v 1.3 2008/08/10 13:46:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -22,7 +22,16 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.IResourceDeltaVisitor;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -34,17 +43,34 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.qvt.declarative.editor.Behavior;
 import org.eclipse.qvt.declarative.editor.EcoreNode;
 import org.eclipse.qvt.declarative.editor.EditorDefinition;
+import org.eclipse.qvt.declarative.editor.EditorFactory;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
 import org.eclipse.qvt.declarative.editor.JavaNode;
 import org.eclipse.qvt.declarative.editor.Node;
 
 /**
- * CommonEditorDefinition, typically instantiated as a stic in an
+ * CommonEditorDefinition, typically instantiated in an
  * editing plugin, provides facilities to use the model-defined editor
  * definition provided by URL as its construction argument.
  */
-public class CommonEditorDefinition
+public class CommonEditorDefinition implements IResourceChangeListener, IResourceDeltaVisitor
 {
+	public static CommonEditorDefinition create(ICommonPlugin plugin, String editorFile) {
+		CommonEditorDefinition editorDefinition = null;
+		Path path = new Path(editorFile);
+		URL url = FileLocator.find(plugin.getBundle(), path, null);
+		try {
+			URL resolvedURL = FileLocator.resolve(url);
+			editorDefinition = new CommonEditorDefinition(resolvedURL);			
+		} catch (IOException e) {
+			plugin.logException("Failed to load '" + String.valueOf(path) + "'", e);
+		} finally {
+			if (editorDefinition == null)
+				editorDefinition = new CommonEditorDefinition(null);			
+		}
+		return editorDefinition;
+	}
+
 	protected final URL editorURL;
     protected EditorDefinition editorDefinition = null;
 	private Map<EClassifier, EcoreNode> ecoreMap = null;
@@ -53,16 +79,22 @@ public class CommonEditorDefinition
     public CommonEditorDefinition(URL editorURL) {
     	this.editorURL = editorURL;
 		EditorPackage.eINSTANCE.getClass();
+		if (editorURL != null)
+			ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
     }
 
+    public void dispose() {
+    	if (editorURL != null)
+			ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
+    }
+    
 	public EditorDefinition getEditorDefinition() {
-		if (editorDefinition == null) {
+		if ((editorDefinition == null) && (editorURL != null)) {
 			try {
-				URL resolvedURL = FileLocator.resolve(editorURL);
 				ResourceSet resourceSet = new ResourceSetImpl();
 				resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("editor", new XMIResourceFactoryImpl());
-				Resource resource = resourceSet.createResource(URI.createURI(resolvedURL.toString()));
-				resource.load(resolvedURL.openStream(), null);
+				Resource resource = resourceSet.createResource(URI.createURI(editorURL.toString()));
+				resource.load(editorURL.openStream(), null);
 				editorDefinition = (EditorDefinition) resource.getContents().get(0);	// FIXME cast, multiplicity checks
 				EcoreUtil.resolveAll(editorDefinition);
 				for (Node node : editorDefinition.getNode()) {
@@ -88,6 +120,9 @@ public class CommonEditorDefinition
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} finally {
+				if (editorDefinition == null)
+					editorDefinition = EditorFactory.eINSTANCE.createEditorDefinition();			
 			}
 		}
 		return editorDefinition;
@@ -138,5 +173,35 @@ public class CommonEditorDefinition
 			}
 		}
 		return null;
+	}
+	
+	public void resourceChanged(IResourceChangeEvent event) {
+		if (event.getType() == IResourceChangeEvent.POST_CHANGE) {
+			IResourceDelta delta = event.getDelta();
+			try {
+				delta.accept(this);
+			} catch (CoreException e) {
+			}
+		}
+	}
+
+	public boolean visit(IResourceDelta delta) throws CoreException {
+		IResource resource = delta.getResource();
+		if (resource instanceof IFile) {
+			int deltaKind = delta.getKind();
+			if ((deltaKind == IResourceDelta.REMOVED)
+			 || (deltaKind == IResourceDelta.CHANGED)
+			 || (deltaKind == IResourceDelta.REPLACED)) {
+				try {
+					URL fileURL = resource.getLocationURI().toURL();
+					if (fileURL.equals(editorURL)) {
+						editorDefinition = null;
+						return false;
+					}
+				} catch (MalformedURLException e) {
+				}
+			}
+		}
+		return true;
 	}
 }
