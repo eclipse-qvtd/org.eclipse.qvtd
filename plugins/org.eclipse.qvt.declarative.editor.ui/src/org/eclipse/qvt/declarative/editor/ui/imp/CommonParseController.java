@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.1 2008/08/08 16:42:46 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.2 2008/08/10 13:47:37 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -34,6 +34,7 @@ import lpg.lpgjavaruntime.IToken;
 import lpg.lpgjavaruntime.Monitor;
 import lpg.lpgjavaruntime.PrsStream;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.imp.language.Language;
@@ -46,6 +47,9 @@ import org.eclipse.imp.services.IAnnotationTypeInfo;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.ocl.lpg.AbstractLexer;
 import org.eclipse.ocl.lpg.AbstractParser;
+import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseFileHandle;
+import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseProjectHandle;
+import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 
 /**
  * Base class for an IParseController implementation that encapsulates a simple LPG-based
@@ -56,21 +60,26 @@ import org.eclipse.ocl.lpg.AbstractParser;
  */
 public abstract class CommonParseController implements IParseController
 {
+	public enum TokenKind {
+		EOF,
+		IDENTIFIER,
+		INTEGER,
+		REAL,
+		STRING,
+		KEYWORD,
+		LINE_COMMENT,			// e.g. a Java // comment
+		PARAGRAPH_COMMENT,		// e.g. a Java /* ... */ comment
+		OTHER
+	}
+	
 	protected final Language fLanguage;
-
     protected ISourceProject fProject;
-
     protected IPath fFilePath;
-
-    protected IMessageHandler handler;
-    
+    protected IMessageHandler handler;   
     protected Object fCurrentAst;
-
     private char fKeywords[][];
-
     private boolean fIsKeyword[];
-
-    private final SimpleAnnotationTypeInfo fSimpleAnnotationTypeInfo= new SimpleAnnotationTypeInfo();
+    private final SimpleAnnotationTypeInfo fSimpleAnnotationTypeInfo = new SimpleAnnotationTypeInfo();
     
     /**
      * An adapter from an Eclipse IProgressMonitor to an LPG Monitor
@@ -99,42 +108,61 @@ public abstract class CommonParseController implements IParseController
         fLanguage= LanguageRegistry.findLanguage(languageID);
     }
 
-    public Language getLanguage() {
-        return fLanguage;
+    protected void cacheKeywordsOnce() {
+        if (fKeywords == null) {
+            // SMS 25 Jun 2007
+            // Added try-catch block in case parser is null
+            try {
+                String tokenKindNames[]= getParser().orderedTerminalSymbols();
+                this.fIsKeyword= new boolean[tokenKindNames.length];
+                this.fKeywords= new char[tokenKindNames.length][];
+                int[] keywordKinds= getKeywordKinds();
+                for(int i= 1; i < keywordKinds.length; i++) {
+                    int index= getParser().mapKind(keywordKinds[i]);
+                    fIsKeyword[index]= true;
+                    fKeywords[index]= tokenKindNames[index].toCharArray();
+                }
+            } catch (NullPointerException e) {
+                System.err.println("SimpleLPGParseController.cacheKeywordsOnce():  NullPointerException; trapped and discarded");
+            }
+        }
     }
 
-    /*
-     * Defined in the IParseController interface.  The implementation here serves
-     * as a super method to support initialization of lexer and parser in a concrete
-     * subtype where the concrete lexer and parser types are known.
-     * 
-     * The handler parameter is required by the IParseController interface and is
-     * used in a concrete subtype along with a concrete parser type.
-     */
-    public void initialize(IPath filePath, ISourceProject project, IMessageHandler handler) {
-		this.fProject= project;
-		this.fFilePath= filePath;	
-		this.handler = handler;
+    public IAnnotationTypeInfo getAnnotationTypeInfo() {
+        return fSimpleAnnotationTypeInfo;
     }
 
-    public abstract AbstractParser getParser();
-
-    public abstract AbstractLexer getLexer();
-
-    public ISourceProject getProject() {
-	return fProject;
+    public Object getCurrentAst() {
+    	return fCurrentAst;
     }
 
-    public IPath getPath() {
-	return fFilePath;
-    }
+	protected AbstractFileHandle getFileHandle() {
+		IProject rawProject = fProject.getRawProject();
+		EclipseProjectHandle projectHandle = new EclipseProjectHandle(rawProject);
+		EclipseFileHandle fileHandle = projectHandle.getFileHandle(fFilePath.toString());
+		return fileHandle;
+	}
 
     public IMessageHandler getHandler() {
     	return handler;
     }
 
-    public Object getCurrentAst() {
-	return fCurrentAst;
+	protected abstract int[] getKeywordKinds();
+
+    public Language getLanguage() {
+        return fLanguage;
+    }
+
+    public abstract AbstractLexer getLexer();
+
+    public abstract AbstractParser getParser();
+
+    public IPath getPath() {
+    	return fFilePath;
+    }
+
+    public ISourceProject getProject() {
+    	return fProject;
     }
 
     public Iterator<IToken> getTokenIterator(IRegion region) {
@@ -204,34 +232,28 @@ public abstract class CommonParseController implements IParseController
         };
     }
 
-    public IAnnotationTypeInfo getAnnotationTypeInfo() {
-        return fSimpleAnnotationTypeInfo;
+    public abstract TokenKind getTokenKind(int kind);
+
+    /*
+     * Defined in the IParseController interface.  The implementation here serves
+     * as a super method to support initialization of lexer and parser in a concrete
+     * subtype where the concrete lexer and parser types are known.
+     * 
+     * The handler parameter is required by the IParseController interface and is
+     * used in a concrete subtype along with a concrete parser type.
+     */
+    public void initialize(IPath filePath, ISourceProject project, IMessageHandler handler) {
+		this.fProject= project;
+		this.fFilePath= filePath;	
+		this.handler = handler;
+    }
+
+    public boolean isIdentifier(int kind) {
+    	return getTokenKind(kind) == TokenKind.IDENTIFIER;
     }
 
     public boolean isKeyword(int kind) {
         String tokenKindNames[]= getParser().orderedTerminalSymbols();
     	return kind < tokenKindNames.length && fIsKeyword[kind];
     }
-
-    protected void cacheKeywordsOnce() {
-        if (fKeywords == null) {
-            // SMS 25 Jun 2007
-            // Added try-catch block in case parser is null
-            try {
-                String tokenKindNames[]= getParser().orderedTerminalSymbols();
-                this.fIsKeyword= new boolean[tokenKindNames.length];
-                this.fKeywords= new char[tokenKindNames.length][];
-                int[] keywordKinds= getKeywordKinds();
-                for(int i= 1; i < keywordKinds.length; i++) {
-                    int index= getParser().mapKind(keywordKinds[i]);
-                    fIsKeyword[index]= true;
-                    fKeywords[index]= tokenKindNames[index].toCharArray();
-                }
-            } catch (NullPointerException e) {
-                System.err.println("SimpleLPGParseController.cacheKeywordsOnce():  NullPointerException; trapped and discarded");
-            }
-        }
-    }
-
-	protected abstract int[] getKeywordKinds();
 }

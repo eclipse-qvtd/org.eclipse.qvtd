@@ -12,10 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: CommonTokenColorer.java,v 1.1 2008/08/09 17:49:00 ewillink Exp $
+ * $Id: CommonTokenColorer.java,v 1.2 2008/08/10 13:47:37 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
+import lpg.lpgjavaruntime.IToken;
+
+import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.services.ITokenColorer;
 import org.eclipse.imp.services.base.TokenColorerBase;
 import org.eclipse.jface.text.IRegion;
@@ -25,26 +28,51 @@ import org.eclipse.swt.widgets.Display;
 
 public class CommonTokenColorer extends TokenColorerBase implements ITokenColorer
 {
-	protected TextAttribute commentAttribute;
+	protected TextAttribute lineCommentAttribute;
+	protected TextAttribute paragraphCommentAttribute;
 	protected TextAttribute keywordAttribute;
 	protected TextAttribute stringAttribute;
-	protected TextAttribute numberAttribute;
-	protected TextAttribute doubleAttribute;
+	protected TextAttribute integerAttribute;
+	protected TextAttribute realAttribute;
 	protected TextAttribute identifierAttribute;
 
 	public CommonTokenColorer() {
 		// TODO:  Define text attributes for the various
 		// token types that will have their text colored
 		Display display = Display.getDefault();
-		commentAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_DARK_RED), null, SWT.ITALIC);
+		lineCommentAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_DARK_RED), null, SWT.ITALIC);
+		paragraphCommentAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_DARK_RED), null, SWT.ITALIC);
 		stringAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_DARK_BLUE), null, SWT.BOLD);
 		identifierAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_BLACK), null, SWT.NORMAL);
-		doubleAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_DARK_GREEN), null, SWT.BOLD);
-		numberAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_DARK_YELLOW), null, SWT.BOLD);
+		realAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_DARK_GREEN), null, SWT.BOLD);
+		integerAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_DARK_YELLOW), null, SWT.BOLD);
 		keywordAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_DARK_MAGENTA), null, SWT.BOLD);
 	}
 
 	public IRegion calculateDamageExtent(IRegion seed) {
 		return seed;
+	}
+	
+	@Override
+	public TextAttribute getColoring(IParseController controller, Object token) {
+		CommonParseController.TokenKind tokenKind = ((CommonParseController)controller).getTokenKind(((IToken)token).getKind());
+		switch (tokenKind) {
+		case IDENTIFIER:
+			return identifierAttribute;
+		case INTEGER:
+			return integerAttribute;
+		case REAL:
+			return realAttribute;
+        case STRING:
+            return stringAttribute;
+        case KEYWORD:
+            return keywordAttribute;
+        case LINE_COMMENT:
+            return lineCommentAttribute;
+        case PARAGRAPH_COMMENT:
+            return paragraphCommentAttribute;
+		default:
+			return super.getColoring(controller, token);
+		}
 	}
 }
