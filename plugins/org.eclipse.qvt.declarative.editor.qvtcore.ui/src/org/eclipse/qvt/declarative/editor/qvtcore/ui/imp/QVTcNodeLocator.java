@@ -12,9 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: QVTcNodeLocator.java,v 1.1 2008/08/09 17:55:46 ewillink Exp $
+ * $Id: QVTcNodeLocator.java,v 1.1 2008/08/10 13:52:19 ewillink Exp $
  */
-package org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.parser;
+package org.eclipse.qvt.declarative.editor.qvtcore.ui.imp;
 
 import org.eclipse.ocl.lpg.BasicEnvironment;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonNodeLocator;

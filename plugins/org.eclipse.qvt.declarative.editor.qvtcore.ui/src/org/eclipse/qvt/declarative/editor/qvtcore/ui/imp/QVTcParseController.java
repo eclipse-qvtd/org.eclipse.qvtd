@@ -12,16 +12,15 @@
  * 
  * </copyright>
  *
- * $Id: QVTcParseController.java,v 1.1 2008/08/09 17:55:46 ewillink Exp $
+ * $Id: QVTcParseController.java,v 1.1 2008/08/10 13:52:19 ewillink Exp $
  */
-package org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.parser;
+package org.eclipse.qvt.declarative.editor.qvtcore.ui.imp;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.Collection;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -37,8 +36,6 @@ import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcPlugin;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonProblemHandler;
-import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseFileHandle;
-import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseProjectHandle;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.AbstractQVTAnalyzer;
 import org.eclipse.qvt.declarative.parser.qvtcore.QVTcLexer;
@@ -48,29 +45,6 @@ import org.eclipse.qvt.declarative.parser.qvtcore.environment.IQVTcEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcTopLevelEnvironment;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 
-
-/**
- * NOTE:  This version of the Parse Controller is for use when the Parse
- * Controller and corresponding Node Locator are generated separately from
- * a corresponding set of LPG grammar templates and possibly in the absence
- * of the lexer, parser, and AST-related types that would be generated from
- * those templates.  It is assumed that either a) the Controller will be
- * used with a suitable set of lexer, parser, and AST-related types
- * that are provided by some means other than LPG, or b) the Controller will
- * be used with a set of lexer, parser, and AST types that have been, or will
- * be, separately generated based on LPG.  In order to enable this version of
- * the Parse Controller to compile, dummy lexer, parser, and AST-related types
- * have been included as member types in the Controller.  These types are not
- * operational and are merely placeholders for types that would support a
- * functioning implementation.  Apart from the inclusion of these dummy types,
- * this representation of the Parse Controller is the same as that used
- * with LPG.
- * 	
- * @author Stan Sutton (suttons@us.ibm.com)
- * @since May 1,  2007	Addition of marker types
- * @since May 10, 2007	Conversion IProject -> ISourceProject
- * @since May 15, 2007	Addition of dummy types
- */
 public class QVTcParseController extends CommonParseController
 {
 	public QVTcParseController() {
@@ -79,13 +53,6 @@ public class QVTcParseController extends CommonParseController
 	}
 
 	private QVTcTopLevelEnvironment environment;
-
-	protected AbstractFileHandle getFileHandle() {
-		IProject rawProject = fProject.getRawProject();
-		EclipseProjectHandle projectHandle = new EclipseProjectHandle(rawProject);
-		EclipseFileHandle fileHandle = projectHandle.getFileHandle(fFilePath.toString());
-		return fileHandle;
-	}
 
 	protected QVTcTopLevelEnvironment createEnvironment(AbstractFileHandle fileHandle) {
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -110,6 +77,26 @@ public class QVTcParseController extends CommonParseController
 
 	public ILanguageSyntaxProperties getSyntaxProperties() {
 		return null;
+	}
+
+	@Override
+	public TokenKind getTokenKind(int kind) {
+		switch (kind) {
+		case QVTcLexer.TK_EOF_TOKEN:
+			return TokenKind.EOF;
+		case QVTcLexer.TK_IDENTIFIER:
+			return TokenKind.IDENTIFIER;
+		case QVTcLexer.TK_INTEGER_LITERAL:
+			return TokenKind.INTEGER;
+		case QVTcLexer.TK_REAL_LITERAL:
+			return TokenKind.REAL;
+        case QVTcLexer.TK_STRING_LITERAL:
+             return TokenKind.STRING;
+		default:
+			if (isKeyword(kind))
+				return TokenKind.KEYWORD;
+			return TokenKind.OTHER;
+		}
 	}
 
 	public Object parse(String contents, boolean scanOnly, IProgressMonitor monitor) {

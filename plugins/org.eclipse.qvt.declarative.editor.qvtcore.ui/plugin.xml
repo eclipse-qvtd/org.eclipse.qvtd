@@ -91,7 +91,8 @@
             id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor">
       </editor>
    </extension>
-   <extension point="org.eclipse.ui.newWizards">
+   <extension
+         point="org.eclipse.ui.newWizards">
       <wizard
             name="QVT Core Text file"
             icon="icons/QVTcModelFile.gif"
@@ -100,37 +101,88 @@
             id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcNewWizard">
       </wizard>
    </extension>
-   <extension point="org.eclipse.qvt.declarative.editor.ui.pageDefinition">
+   <extension
+         point="org.eclipse.qvt.declarative.editor.ui.pageDefinition">
       <page
             pageFactory="org.eclipse.qvt.declarative.editor.ui.text.TextPageFactory"
             creationFactory="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcCreationFactory"
             name="QVT Core">
       </page>
    </extension>
-   <extension point="org.eclipse.imp.runtime.languageDescription">
-      <language language="qvtc" extensions="qvtc" description="QVT Core"/>
+   <extension
+         point="org.eclipse.imp.runtime.languageDescription">
+      <language
+            extensions="qvtc"
+            description="QVT Core"
+            language="qvtc">
+      </language>
    </extension>
-   <extension point="org.eclipse.imp.runtime.parser"
+   <extension
          id="org.eclipse.qvt.declarative.editor.qvtcore.ui.parserWrapper"
-         name="qvtc Parser Wrapper">
-      <parser language="qvtc"
-            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.parser.QVTcParseController"/>
+         name="QVT Core Parser Wrapper"
+         point="org.eclipse.imp.runtime.parser">
+      <parser
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcParseController"
+            language="qvtc">
+      </parser>
    </extension>
-   <extension point="org.eclipse.imp.runtime.tokenColorer">
-      <tokenColorer language="qvtc"
-            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.tokenColorer.QVTcTokenColorer"/>
+   <extension
+         point="org.eclipse.imp.runtime.tokenColorer">
+      <tokenColorer
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcTokenColorer"
+            language="qvtc">
+      </tokenColorer>
    </extension>
-   <extension point="org.eclipse.imp.runtime.foldingUpdater">
-      <foldingUpdater language="qvtc"
-            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.foldingUpdater.QVTcFoldingUpdater"/>
+   <extension
+         point="org.eclipse.imp.runtime.foldingUpdater">
+      <foldingUpdater
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcFoldingUpdater"
+            language="qvtc">
+      </foldingUpdater>
    </extension>
-   <extension point="org.eclipse.imp.runtime.modelTreeBuilder">
-      <treeBuilder language="qvtc"
-            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.treeModelBuilder.QVTcTreeModelBuilder"/>
+   <extension
+         point="org.eclipse.imp.runtime.modelTreeBuilder">
+      <treeBuilder
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcTreeModelBuilder"
+            language="qvtc">
+      </treeBuilder>
    </extension>
-   <extension point="org.eclipse.imp.runtime.labelProvider">
-      <labelProvider language="qvtc"
-            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.treeModelBuilder.QVTcLabelProvider"/>
+   <extension
+         point="org.eclipse.imp.runtime.labelProvider">
+      <labelProvider
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcLabelProvider"
+            language="qvtc">
+      </labelProvider>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.referenceResolvers">
+      <referenceResolver
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcReferenceResolver"
+            language="qvtc">
+      </referenceResolver>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.documentationProvider">
+      <docProvider
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcDocumentationProvider"
+            language="qvtc">
+      </docProvider>
+   </extension>
+   <extension
+         id="org.eclipse.qvt.declarative.editor.qvtcore.ui.hoverHelper"
+         name="QVT Core Hover Helper"
+         point="org.eclipse.imp.runtime.hoverHelper">
+      <hoverHelper
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcHoverHelper"
+            language="qvtc">
+      </hoverHelper>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.contentProposer">
+      <proposer
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcContentProposer"
+            language="qvtc">
+      </proposer>
    </extension>
 
 </plugin>

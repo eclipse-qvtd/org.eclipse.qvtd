@@ -12,9 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: QVTcLabelProvider.java,v 1.2 2008/08/10 07:30:39 ewillink Exp $
+ * $Id: QVTcLabelProvider.java,v 1.1 2008/08/10 13:52:19 ewillink Exp $
  */
-package org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.treeModelBuilder;
+package org.eclipse.qvt.declarative.editor.qvtcore.ui.imp;
 
 import java.util.List;
 
