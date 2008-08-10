@@ -63,5 +63,61 @@
             category="org.eclipse.qvt.declarative.editor.ui"
             class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrNewWizard"/>
    </extension>
+   
+   <extension point="org.eclipse.imp.runtime.languageDescription">
+      <language language="qvtr" extensions="qvtr" description="QVT Relation"/>
+   </extension>
+   <extension point="org.eclipse.imp.runtime.parser"
+         id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.parserWrapper"
+         name="QVT Relation Parser Wrapper">
+      <parser language="qvtr"
+            class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrParseController"/>
+   </extension>
+   <extension point="org.eclipse.imp.runtime.tokenColorer">
+      <tokenColorer language="qvtr"
+            class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrTokenColorer"/>
+   </extension>
+   <extension point="org.eclipse.imp.runtime.foldingUpdater">
+      <foldingUpdater language="qvtr"
+            class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrFoldingUpdater"/>
+   </extension>
+   <extension point="org.eclipse.imp.runtime.modelTreeBuilder">
+      <treeBuilder language="qvtr"
+            class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrTreeModelBuilder"/>
+   </extension>
+   <extension point="org.eclipse.imp.runtime.labelProvider">
+      <labelProvider language="qvtr"
+            class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrLabelProvider"/>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.referenceResolvers">
+      <referenceResolver
+            class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrReferenceResolver"
+            language="qvtr">
+      </referenceResolver>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.documentationProvider">
+      <docProvider
+            class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrDocumentationProvider"
+            language="qvtr">
+      </docProvider>
+   </extension>
+   <extension
+         id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.hoverHelper"
+         name="QVT Relation Hover Helper"
+         point="org.eclipse.imp.runtime.hoverHelper">
+      <hoverHelper
+            class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrHoverHelper"
+            language="qvtr">
+      </hoverHelper>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.contentProposer">
+      <proposer
+            class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrContentProposer"
+            language="qvtr">
+      </proposer>
+   </extension>
 
 </plugin>
