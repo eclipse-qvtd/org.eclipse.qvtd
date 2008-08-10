@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: DerivedQVTcParser.java,v 1.1 2008/08/09 17:39:19 ewillink Exp $
+ * $Id: DerivedQVTcParser.java,v 1.2 2008/08/10 07:31:36 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore;
 
@@ -21,6 +21,12 @@ import lpg.lpgjavaruntime.IToken;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.qvt.declarative.parser.utils.CSTNodeTokenAdapter;
 
+/**
+ * DerivedQVTcParser reimplements all setOffsets methods, so that CSTNode appears to have startToken and endToken members.
+ * Pending provision of true fields as per Bugzilla 242153, the fields are emulated by CSTNodeTokenAdapter.
+ * 
+ * FIXME Workaround for Bugzilla 242153.
+ */
 public class DerivedQVTcParser extends QVTcParser
 {	
 	public DerivedQVTcParser(QVTcLexer lexer) {
@@ -29,7 +35,7 @@ public class DerivedQVTcParser extends QVTcParser
 
 	@Override
 	protected void setOffsets(CSTNode cstNode) {
-		throw new UnsupportedOperationException();	// Caller must recode to pass an IToken
+		throw new UnsupportedOperationException("Rewrite setOffsets(result) as setOffsets(result, getIToken($getToken(1))");	// Caller must recode to pass an IToken
 	}
 
 	/**
