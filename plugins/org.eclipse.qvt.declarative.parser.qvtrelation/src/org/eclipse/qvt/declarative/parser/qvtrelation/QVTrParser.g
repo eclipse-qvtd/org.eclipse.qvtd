@@ -91,7 +91,7 @@ $Headers
 		protected IdentifierCS createIdentifierCS(int token) {
 			IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 			result.setValue(getTokenText(token));
-			setOffsets(result, getIToken(token), getIToken(token));
+			setOffsets(result, getIToken(token));
 			return result;
 		}
 
@@ -124,7 +124,7 @@ $Headers
 		protected IdentifierCS createUniqueIdentifierCS(int token) {
 			IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 			result.setValue(createUniqueIdentifier());
-			setOffsets(result, getIToken(token), getIToken(token));
+			setOffsets(result, getIToken(token));
 			return result;
 		}
 	./
@@ -135,7 +135,7 @@ $Rules
 	topLevelCS_0_ ::= $empty
 		/.$BeginJava
 					TopLevelCS result = QVTrCSTFactory.eINSTANCE.createTopLevelCS();
-					setOffsets(result);
+					setOffsets(result, getIToken($getToken(1)));
 					$setResult(result);
 		  $EndJava
 		./
@@ -164,7 +164,7 @@ $Rules
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(1);
 					UnitCS result = QVTrCSTFactory.eINSTANCE.createUnitCS();
 					result.getIdentifier().add(identifierCS);
-					setOffsets(result, identifierCS, identifierCS);
+					setOffsets(result, identifierCS);
 					$setResult(result);
 		  $EndJava
 		./
@@ -202,7 +202,13 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
-	transformationCS_1_ -> transformationCS_0_ ')'
+	transformationCS_1_ ::= transformationCS_0_ ')'
+		/.$BeginJava
+					TransformationCS result = (TransformationCS)$getSym(1);
+					setOffsets(result, result, getIToken($getToken(3)));
+					$setResult(result);
+		  $EndJava
+		./
 	transformationCS_2_ -> transformationCS_1_
 	transformationCS_2_ ::= transformationCS_1_ extends identifierCS
 		/.$BeginJava
@@ -242,7 +248,13 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
-	transformationCS -> transformationCS_4_ '}'
+	transformationCS ::= transformationCS_4_ '}'
+		/.$BeginJava
+					TransformationCS result = (TransformationCS)$getSym(1);
+					setOffsets(result, result, getIToken($getToken(2)));
+					$setResult(result);
+		  $EndJava
+		./
 	
 --<modelDecl> ::= <modelId> ':' <metaModelId>
 --**<modelDecl> ::= <modelId> ':' '{' <metaModelId> (',' <metaModelId>)* '}'
@@ -302,7 +314,13 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
-	keyDeclCS -> keyDeclCS_1_ '}' ';'
+	keyDeclCS ::= keyDeclCS_1_ '}' ';'
+		/.$BeginJava
+					KeyDeclCS result = (KeyDeclCS)$getSym(1);
+					setOffsets(result, result, getIToken($getToken(3)));
+					$setResult(result);
+		  $EndJava
+		./
 	
 --<classId> ::= <PathNameCS>
 	classIdCS -> pathNameCS
@@ -313,7 +331,7 @@ $Rules
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(1);
 					IdentifiedCS result = QVTCSTFactory.eINSTANCE.createIdentifiedCS();
 					result.setIdentifier(identifierCS);
-					setOffsets(result, identifierCS, identifierCS);
+					setOffsets(result, identifierCS);
 					$setResult(result);
 		  $EndJava
 		./
@@ -428,7 +446,7 @@ $Rules
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(1);
 					VarDeclarationCS result = QVTrCSTFactory.eINSTANCE.createVarDeclarationCS();
 					result.getVarDeclarationId().add(identifierCS);
-					setOffsets(result, identifierCS, identifierCS);
+					setOffsets(result, identifierCS);
 					$setResult(result);
 		  $EndJava
 		./
@@ -681,7 +699,7 @@ $Rules
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(1);
 					IdentifiedCS result = QVTCSTFactory.eINSTANCE.createIdentifiedCS();
 					result.setIdentifier(identifierCS);
-					setOffsets(result, identifierCS, identifierCS);
+					setOffsets(result, identifierCS);
 					$setResult(result);
 		  $EndJava
 		./	
@@ -731,7 +749,13 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
-	queryCS -> queryCS_postType ';'
+	queryCS ::= queryCS_postType ';'
+		/.$BeginJava
+					QueryCS result = (QueryCS)$getSym(1);
+					setOffsets(result, result, getIToken($getToken(3)));
+					$setResult(result);
+		  $EndJava
+		./
 	queryCS ::= queryCS_postType '{' oclExpressionCS '}'
 		/.$BeginJava
 					QueryCS result = (QueryCS)$getSym(1);
@@ -791,7 +815,7 @@ $Rules
 		/.$BeginJava
 					PathNameCS result = createPathNameCS();
 					result.getSequenceOfNames().add(createIdentifierOrUnderscore($getToken(1)));
-					setOffsets(result, getIToken($getToken(1)), getIToken($getToken(1)));
+					setOffsets(result, getIToken($getToken(1)));
 					$setResult(result);
 		  $EndJava
 		./
@@ -802,7 +826,7 @@ $Rules
 								SimpleTypeEnum.IDENTIFIER_LITERAL,
 								createIdentifierOrUnderscore($getToken(1))
 							);
-					setOffsets(result, getIToken($getToken(1)), getIToken($getToken(1)));
+					setOffsets(result, getIToken($getToken(1)));
 					$setResult(result);
 		  $EndJava
 		./
