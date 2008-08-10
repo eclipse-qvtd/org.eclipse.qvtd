@@ -12,15 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: QVTcPlugin.java,v 1.1 2008/08/09 17:54:33 ewillink Exp $
+ * $Id: QVTcPlugin.java,v 1.2 2008/08/10 13:48:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
-import java.net.URL;
-
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.imp.preferences.PreferencesService;
 import org.eclipse.imp.runtime.PluginBase;
@@ -63,7 +59,7 @@ public class QVTcPlugin extends PluginBase implements ICommonPlugin
 		return preferencesService;
 	}
 	
-	public /*static*/ CommonEditorDefinition kEditorDefinition = null;  // FIXME Make static once development over
+	public CommonEditorDefinition editorDefinition = null;
 
 	public QVTcPlugin() {
 		super();
@@ -71,12 +67,9 @@ public class QVTcPlugin extends PluginBase implements ICommonPlugin
 	}
 
 	public CommonEditorDefinition getEditorDefinition() {
-		if (kEditorDefinition == null) {
-			Path path = new Path("model/" + kLanguageName + ".editor");
-			URL url = FileLocator.find(getBundle(), path, null);
-			kEditorDefinition = new CommonEditorDefinition(url);			
-		}
-		return kEditorDefinition;
+		if (editorDefinition == null)
+			editorDefinition = CommonEditorDefinition.create(this, "model/" + kLanguageName + ".editor");
+		return editorDefinition;
 	}
 
 	public String getID() {
