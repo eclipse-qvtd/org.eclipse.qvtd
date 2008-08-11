@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LabelElementItemProvider.java,v 1.2 2008/08/09 17:34:22 ewillink Exp $
+ * $Id: LabelElementItemProvider.java,v 1.3 2008/08/11 08:03:47 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -22,7 +23,9 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
 import org.eclipse.qvt.declarative.editor.LabelElement;
 
@@ -63,6 +66,7 @@ public class LabelElementItemProvider
 
 			addPathPropertyDescriptor(object);
 			addEndPropertyDescriptor(object);
+			addSeparatorPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -112,6 +116,28 @@ public class LabelElementItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Separator feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSeparatorPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_LabelElement_separator_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LabelElement_separator_feature", "_UI_LabelElement_type"),
+				 EditorPackage.Literals.LABEL_ELEMENT__SEPARATOR,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns LabelElement.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -120,6 +146,11 @@ public class LabelElementItemProvider
 	@Override
 	public Object getImage(Object object) {
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/LabelElement"));
+	}
+
+	public String getLocalName(ENamedElement object) {
+		String name = object != null ? object.getName() : null;
+		return name != null ? name : "<???>";
 	}
 
 	/**
@@ -134,17 +165,17 @@ public class LabelElementItemProvider
 		for (EReference ref : ((LabelElement)object).getPath()) {
 			if (s.length() != 0)
 				s.append(", ");
-			s.append(ref.getEContainingClass().getName());
+			s.append(getLocalName(ref.getEContainingClass()));
 			s.append(".");
-			s.append(ref.getName());				
+			s.append(getLocalName(ref));				
 		}
 		EStructuralFeature end = ((LabelElement)object).getEnd();
 		if (end != null) {
 			if (s.length() != 0)
 				s.append(", ");
-			s.append(end.getEContainingClass().getName());
+			s.append(getLocalName(end.getEContainingClass()));
 			s.append(".");
-			s.append(end.getName());				
+			s.append(getLocalName(end));				
 		}
 		return s.toString();
 	}
@@ -159,6 +190,12 @@ public class LabelElementItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(LabelElement.class)) {
+			case EditorPackage.LABEL_ELEMENT__SEPARATOR:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
