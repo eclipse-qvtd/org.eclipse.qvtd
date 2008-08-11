@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonNodeLocator.java,v 1.1 2008/08/09 17:49:00 ewillink Exp $
+ * $Id: CommonNodeLocator.java,v 1.2 2008/08/11 08:02:37 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -84,13 +84,13 @@ public abstract class CommonNodeLocator implements ISourcePositionLocator
 			int nodeStartOffset = cstNode.getStartOffset();
 			int nodeEndOffset = cstNode.getEndOffset();
 			if (QVTEditorPlugin.VISITOR_TRACE.isActive())
-				QVTEditorPlugin.VISITOR_TRACE.println(getClass().getSimpleName() + ".preVisit(ASTNode):  Examining " + cstNode.getClass().getName() +
+				QVTEditorPlugin.VISITOR_TRACE.println(getClass().getSimpleName() + ".preVisit(CSTNode):  Examining " + cstNode.getClass().getName() +
 			    " @ [" + nodeStartOffset + "->" + nodeEndOffset + ']');
 
 			// If this node contains the span of interest then record it
-			if (nodeStartOffset <= fStartOffset && nodeEndOffset >= fEndOffset) {
+			if ((nodeStartOffset <= fStartOffset) && (fEndOffset <= nodeEndOffset)) {
 				if (QVTEditorPlugin.VISITOR_TRACE.isActive())
-					QVTEditorPlugin.VISITOR_TRACE.println(getClass().getSimpleName() + ".preVisit(ASTNode) SELECTED for offsets [" + fStartOffset + ".." + fEndOffset + "]");
+					QVTEditorPlugin.VISITOR_TRACE.println(getClass().getSimpleName() + ".preVisit(CSTNode) SELECTED for offsets [" + fStartOffset + ".." + fEndOffset + "]");
 				result = cstNode;
 				return true; // to continue visiting here?
 			}
