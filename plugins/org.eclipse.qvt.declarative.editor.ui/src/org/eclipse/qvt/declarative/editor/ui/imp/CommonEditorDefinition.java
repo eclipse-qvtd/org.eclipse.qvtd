@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonEditorDefinition.java,v 1.3 2008/08/10 13:46:48 ewillink Exp $
+ * $Id: CommonEditorDefinition.java,v 1.4 2008/08/11 08:01:45 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -33,6 +33,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -88,6 +89,49 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 			ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
     }
     
+	protected EcoreNode findEcoreClass(EClass aClass) {
+		EcoreNode ecoreNode = ecoreMap.get(aClass);
+		if (ecoreNode != null)
+			return ecoreNode; 
+		for (EClass cClass : aClass.getESuperTypes()) {
+			ecoreNode = findEcoreClass(cClass);
+			if (ecoreNode != null)
+				return ecoreNode; 
+		}
+		return null;
+	}
+
+	protected JavaNode findJavaClass(Class<?> aClass) {
+		JavaNode javaNode = javaMap.get(aClass);
+		if (javaNode != null)
+			return javaNode; 
+		Class<?> bClass = aClass.getSuperclass();
+		if (bClass != null) {
+			javaNode = findJavaClass(bClass);
+			if (javaNode != null)
+				return javaNode; 
+		}
+		for (Class<?> cClass : aClass.getInterfaces()) {
+			javaNode = findJavaClass(cClass);
+			if (javaNode != null)
+				return javaNode; 
+		}
+		return null;
+	}
+
+	public <T extends Behavior> T getBehavior(Object object, Class<T> behaviorClass) {
+		for (Node node = getNode(object); node != null; node = node.getBase()) {
+			for (Behavior behavior : node.getBehavior()) {
+				if (behaviorClass.isAssignableFrom(behavior.getClass())) {
+					@SuppressWarnings("unchecked")
+					T castBehavior = (T) behavior;
+					return castBehavior;
+				}
+			}
+		}
+		return null;
+	}
+
 	public EditorDefinition getEditorDefinition() {
 		if ((editorDefinition == null) && (editorURL != null)) {
 			try {
@@ -133,48 +177,12 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 			return null;
 		if (editorDefinition == null)
 			getEditorDefinition();
-		if (object instanceof EObject) {
-			EClassifier eClassifier = ((EObject)object).eClass();
-			EcoreNode ecoreNode = ecoreMap != null ? ecoreMap.get(eClassifier) : null;
-			if (ecoreNode == null) {
-				// FIXME inheritance search
-			}
-			return ecoreNode;
-		}
-		return javaMap != null ? findJavaClass(object.getClass()) : null; 
+		if (object instanceof EObject)
+			return ecoreMap != null ? findEcoreClass(((EObject)object).eClass()) : null; 
+		else
+			return javaMap != null ? findJavaClass(object.getClass()) : null; 
 	}
 
-	protected JavaNode findJavaClass(Class<?> aClass) {
-		JavaNode javaNode = javaMap.get(aClass);
-		if (javaNode != null)
-			return javaNode; 
-		Class<?> bClass = aClass.getSuperclass();
-		if (bClass != null) {
-			javaNode = findJavaClass(bClass);
-			if (javaNode != null)
-				return javaNode; 
-		}
-		for (Class<?> cClass : aClass.getInterfaces()) {
-			javaNode = findJavaClass(cClass);
-			if (javaNode != null)
-				return javaNode; 
-		}
-		return null;
-	}
-
-	public <T extends Behavior> T getBehavior(Object object, Class<T> behaviorClass) {
-		for (Node node = getNode(object); node != null; node = node.getBase()) {
-			for (Behavior behavior : node.getBehavior()) {
-				if (behaviorClass.isAssignableFrom(behavior.getClass())) {
-					@SuppressWarnings("unchecked")
-					T castBehavior = (T) behavior;
-					return castBehavior;
-				}
-			}
-		}
-		return null;
-	}
-	
 	public void resourceChanged(IResourceChangeEvent event) {
 		if (event.getType() == IResourceChangeEvent.POST_CHANGE) {
 			IResourceDelta delta = event.getDelta();
