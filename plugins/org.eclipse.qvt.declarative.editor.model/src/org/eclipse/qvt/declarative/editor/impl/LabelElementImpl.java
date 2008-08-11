@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: LabelElementImpl.java,v 1.1 2008/08/08 16:39:55 ewillink Exp $
+ * $Id: LabelElementImpl.java,v 1.2 2008/08/11 08:03:43 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -44,6 +44,7 @@ import org.eclipse.qvt.declarative.editor.LabelElement;
  * <ul>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelElementImpl#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelElementImpl#getEnd <em>End</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelElementImpl#getSeparator <em>Separator</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,6 +70,26 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 	 * @ordered
 	 */
 	protected EStructuralFeature end;
+
+	/**
+	 * The default value of the '{@link #getSeparator() <em>Separator</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSeparator()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SEPARATOR_EDEFAULT = " ";
+
+	/**
+	 * The cached value of the '{@link #getSeparator() <em>Separator</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSeparator()
+	 * @generated
+	 * @ordered
+	 */
+	protected String separator = SEPARATOR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -144,6 +165,27 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getSeparator() {
+		return separator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSeparator(String newSeparator) {
+		String oldSeparator = separator;
+		separator = newSeparator;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.LABEL_ELEMENT__SEPARATOR, oldSeparator, separator));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -152,6 +194,8 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 			case EditorPackage.LABEL_ELEMENT__END:
 				if (resolve) return getEnd();
 				return basicGetEnd();
+			case EditorPackage.LABEL_ELEMENT__SEPARATOR:
+				return getSeparator();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -172,6 +216,9 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 			case EditorPackage.LABEL_ELEMENT__END:
 				setEnd((EStructuralFeature)newValue);
 				return;
+			case EditorPackage.LABEL_ELEMENT__SEPARATOR:
+				setSeparator((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -190,6 +237,9 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 			case EditorPackage.LABEL_ELEMENT__END:
 				setEnd((EStructuralFeature)null);
 				return;
+			case EditorPackage.LABEL_ELEMENT__SEPARATOR:
+				setSeparator(SEPARATOR_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -206,8 +256,26 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 				return path != null && !path.isEmpty();
 			case EditorPackage.LABEL_ELEMENT__END:
 				return end != null;
+			case EditorPackage.LABEL_ELEMENT__SEPARATOR:
+				return SEPARATOR_EDEFAULT == null ? separator != null : !SEPARATOR_EDEFAULT.equals(separator);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (separator: ");
+		result.append(separator);
+		result.append(')');
+		return result.toString();
 	}
 
 } //LabelElementImpl

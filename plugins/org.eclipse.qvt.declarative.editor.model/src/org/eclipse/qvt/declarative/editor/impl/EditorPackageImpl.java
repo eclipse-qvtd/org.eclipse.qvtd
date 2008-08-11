@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackageImpl.java,v 1.2 2008/08/09 17:33:58 ewillink Exp $
+ * $Id: EditorPackageImpl.java,v 1.3 2008/08/11 08:03:43 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -311,6 +311,15 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getLabelElement_Separator() {
+		return (EAttribute)labelElementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getNode() {
 		return nodeEClass;
 	}
@@ -409,6 +418,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		labelElementEClass = createEClass(LABEL_ELEMENT);
 		createEReference(labelElementEClass, LABEL_ELEMENT__PATH);
 		createEReference(labelElementEClass, LABEL_ELEMENT__END);
+		createEAttribute(labelElementEClass, LABEL_ELEMENT__SEPARATOR);
 
 		nodeEClass = createEClass(NODE);
 		createEReference(nodeEClass, NODE__BEHAVIOR);
@@ -475,6 +485,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		initEClass(labelElementEClass, LabelElement.class, "LabelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLabelElement_Path(), ecorePackage.getEReference(), null, "path", null, 0, -1, LabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLabelElement_End(), ecorePackage.getEStructuralFeature(), null, "end", null, 1, 1, LabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLabelElement_Separator(), ecorePackage.getEString(), "separator", " ", 0, 1, LabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nodeEClass, Node.class, "Node", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNode_Behavior(), this.getBehavior(), null, "behavior", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

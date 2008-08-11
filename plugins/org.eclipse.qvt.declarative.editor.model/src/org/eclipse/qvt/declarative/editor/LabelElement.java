@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: LabelElement.java,v 1.1 2008/08/08 16:39:54 ewillink Exp $
+ * $Id: LabelElement.java,v 1.2 2008/08/11 08:03:43 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * <ul>
  *   <li>{@link org.eclipse.qvt.declarative.editor.LabelElement#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.LabelElement#getEnd <em>End</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.LabelElement#getSeparator <em>Separator</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,5 +82,32 @@ public interface LabelElement extends EObject {
 	 * @generated
 	 */
 	void setEnd(EStructuralFeature value);
+
+	/**
+	 * Returns the value of the '<em><b>Separator</b></em>' attribute.
+	 * The default value is <code>" "</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Separator</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Separator</em>' attribute.
+	 * @see #setSeparator(String)
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getLabelElement_Separator()
+	 * @model default=" "
+	 * @generated
+	 */
+	String getSeparator();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.LabelElement#getSeparator <em>Separator</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Separator</em>' attribute.
+	 * @see #getSeparator()
+	 * @generated
+	 */
+	void setSeparator(String value);
 
 } // LabelElement

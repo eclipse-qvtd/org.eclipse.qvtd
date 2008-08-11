@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackage.java,v 1.2 2008/08/09 17:33:58 ewillink Exp $
+ * $Id: EditorPackage.java,v 1.3 2008/08/11 08:03:43 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -339,13 +339,22 @@ public interface EditorPackage extends EPackage {
 	int LABEL_ELEMENT__END = 1;
 
 	/**
+	 * The feature id for the '<em><b>Separator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL_ELEMENT__SEPARATOR = 2;
+
+	/**
 	 * The number of structural features of the '<em>Label Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LABEL_ELEMENT_FEATURE_COUNT = 2;
+	int LABEL_ELEMENT_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.OutlineBehaviorImpl <em>Outline Behavior</em>}' class.
@@ -541,6 +550,17 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getLabelElement_End();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.LabelElement#getSeparator <em>Separator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Separator</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.LabelElement#getSeparator()
+	 * @see #getLabelElement()
+	 * @generated
+	 */
+	EAttribute getLabelElement_Separator();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.Node <em>Node</em>}'.
@@ -761,6 +781,14 @@ public interface EditorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference LABEL_ELEMENT__END = eINSTANCE.getLabelElement_End();
+
+		/**
+		 * The meta object literal for the '<em><b>Separator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LABEL_ELEMENT__SEPARATOR = eINSTANCE.getLabelElement_Separator();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.NodeImpl <em>Node</em>}' class.
