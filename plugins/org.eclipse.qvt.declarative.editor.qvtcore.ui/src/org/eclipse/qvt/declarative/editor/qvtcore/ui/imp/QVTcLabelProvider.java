@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcLabelProvider.java,v 1.1 2008/08/10 13:52:19 ewillink Exp $
+ * $Id: QVTcLabelProvider.java,v 1.2 2008/08/11 08:04:15 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui.imp;
 
@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.eclipse.ocl.cst.OCLExpressionCS;
 import org.eclipse.ocl.cst.TypeCS;
+import org.eclipse.qvt.declarative.editor.LabelElement;
 import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcPlugin;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonLabelProvider;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
@@ -27,13 +28,13 @@ import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 public class QVTcLabelProvider extends CommonLabelProvider
 {
 	@Override
-	protected String formatObject(Object object, Object node, int index) {
+	protected String formatObject(Object object, Object node, LabelElement labelElement) {
 		if (object instanceof List) {
 			StringBuffer s = new StringBuffer();
 			for (Object o : (List<?>)object) {
 				if (s.length() > 0)
-					s.append("::");
-				s.append(formatObject(o, node, index));
+					s.append(labelElement.getSeparator());
+				s.append(getText(o));
 			}
 			return s.toString();
 		}
@@ -44,7 +45,7 @@ public class QVTcLabelProvider extends CommonLabelProvider
 			return formatExpression((OCLExpressionCS)object);
 		}
 		else
-			return super.formatObject(object, node, index);
+			return super.formatObject(object, node, labelElement);
 	}
 	
 	@Override
