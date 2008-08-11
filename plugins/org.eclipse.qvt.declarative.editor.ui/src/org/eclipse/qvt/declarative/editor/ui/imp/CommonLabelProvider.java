@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.2 2008/08/09 17:48:40 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.3 2008/08/11 08:02:18 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -42,13 +42,18 @@ import org.eclipse.imp.editor.ModelTreeNode;
 import org.eclipse.imp.services.ILabelProvider;
 import org.eclipse.imp.utils.MarkerUtils;
 import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.ocl.cst.CollectionTypeCS;
 import org.eclipse.ocl.cst.OCLExpressionCS;
+import org.eclipse.ocl.cst.PathNameCS;
 import org.eclipse.ocl.cst.PrimitiveTypeCS;
+import org.eclipse.ocl.cst.SimpleNameCS;
 import org.eclipse.ocl.cst.TypeCS;
+import org.eclipse.ocl.cst.util.CSTSwitch;
 import org.eclipse.qvt.declarative.editor.LabelBehavior;
 import org.eclipse.qvt.declarative.editor.LabelElement;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
+import org.eclipse.qvt.declarative.parser.utils.StringUtils;
 import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.Bundle;
 
@@ -58,10 +63,40 @@ import org.osgi.framework.Bundle;
  */
 public abstract class CommonLabelProvider implements ILabelProvider
 {
+	protected class TypesLabelProvider extends CSTSwitch<String>
+	{
+		@Override
+		public String caseCollectionTypeCS(CollectionTypeCS object) {
+			return object.getCollectionTypeIdentifier() + "(" + formatType(object.getTypeCS()) + ")";
+		}
+
+		@Override
+		public String casePathNameCS(PathNameCS object) {
+			return StringUtils.splice(object.getSequenceOfNames(), "::");
+		}
+
+		@Override
+		public String casePrimitiveTypeCS(PrimitiveTypeCS object) {
+			return object.getValue();
+		}
+
+		@Override
+		public String caseSimpleNameCS(SimpleNameCS object) {
+			return object.getValue();
+		}
+
+//		@Override
+//		public String caseTupleTypeCS(TupleTypeCS object) {
+			// TODO Auto-generated method stub
+//			return super.caseTupleTypeCS(object);
+//		}
+	}
+
 	private Set<ILabelProviderListener> fListeners = new HashSet<ILabelProviderListener>();
 	protected ExtendedImageRegistry imageRegistry = new ExtendedImageRegistry();
 	private Image errorImageOverlay = null;
 	private Image warningImageOverlay = null;
+	private CSTSwitch<String> typesLabelProvider = null;
 
 	public void addListener(ILabelProviderListener listener) {
 		fListeners.add(listener);
@@ -81,6 +116,10 @@ public abstract class CommonLabelProvider implements ILabelProvider
 		return ((EObject)object).eGet(path);
 	}
 
+	protected TypesLabelProvider createTypesLabelProvider() {
+		return new TypesLabelProvider();
+	}
+
 	public void dispose() {}
 
 	/**
@@ -96,27 +135,18 @@ public abstract class CommonLabelProvider implements ILabelProvider
 	}
 
 	/**
-	 * Provide a formatted string for object contributing to the index'th part of node's label.
+	 * Provide a formatted string for object contributing to the labelElement part of node's label.
 	 */
-	protected String formatObject(Object object, Object node, int index) {
-		String s = object != null ? object.toString() : null;
-		return s != null ? s : "";
-	}
-
-	/**
-	 * Provide a formatted string for object contributing to the index'th part of node's label.
-	 */
-	protected String formatObjects(Object[] object, Object node, int index) {
+	protected String formatObject(Object object, Object node, LabelElement labelElement) {
 		String s = object != null ? object.toString() : null;
 		return s != null ? s : "";
 	}
 
 	protected String formatType(TypeCS type) {
-		if (type instanceof PrimitiveTypeCS) {
-			return ((PrimitiveTypeCS)type).getValue();
-		}
-		// FIXME Rest of the types
-		return "<" + type.getClass().getSimpleName() + ">";
+		if (typesLabelProvider == null)
+			typesLabelProvider = createTypesLabelProvider();
+		String s = typesLabelProvider.doSwitch(type);
+		return s != null ? s : "<" + type.getClass().getSimpleName() + ">";
 	}
 
 	protected Object getASTorCSTNode(Object element) {
@@ -158,9 +188,13 @@ public abstract class CommonLabelProvider implements ILabelProvider
 		if (imagePath.startsWith("/")) {
 			int index = imagePath.indexOf('/', 1);
 			if (index > 1) {
+				imageFile = imagePath.substring(index+1);
 				String bundlePath = imagePath.substring(1, index);
 				bundle = Platform.getBundle(bundlePath);
-				imageFile = imagePath.substring(index+1);
+				if (bundle == null) {
+					getPlugin().logException("No such bundle '" + bundlePath + "'", null);
+					return null;
+				}
 			}
 		}
 		Path path = new Path(imageFile);
@@ -213,7 +247,7 @@ public abstract class CommonLabelProvider implements ILabelProvider
 					object = checkedGet(object, path);
 				if (object instanceof EObject) 
 					object = checkedGet(object, labelElement.getEnd());
-				objects[i] = formatObject(object, node, i);
+				objects[i] = formatObject(object, node, labelElement);
 			}
 			catch (Throwable e) {
 				objects[i] = formatException(e, node, i);
