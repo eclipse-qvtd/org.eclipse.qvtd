@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 /**
  * CommonCSTVisitor defines a default visitor to a Notifier-based
  * (EObject or Resource or ResourceSet) AST using EObject.eContents(),
- * Resource.getContents(), REsourceSet.getResources() to perform tree descent.
+ * Resource.getContents(), ResourceSet.getResources() to perform tree descent.
  */
 public abstract class CommonASTVisitor<T> implements ICommonASTVisitor<T>
 {
