@@ -16,7 +16,7 @@
 *
 * </copyright>
 *
-* $Id: QVTcParser.java,v 1.2 2008/08/09 17:40:35 ewillink Exp $
+* $Id: QVTcParser.java,v 1.3 2008/08/14 07:57:56 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;
@@ -120,8 +120,8 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
      */
 	protected void setOffsets(CSTNode cstNode) {
 		IToken firstToken = getIToken(dtParser.getToken(1));
-		cstNode.setStartOffset(firstToken.getStartOffset());
-		cstNode.setEndOffset(firstToken.getEndOffset()-1);
+		cstNode.setStartToken(firstToken);
+		cstNode.setEndToken(firstToken);
 	}
 
 
@@ -623,12 +623,15 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 				String simpleName = text.substring(index + 1);
 
 				// create the IntegerLiteralExpCS
-				int startOffset = getIToken(dtParser.getToken(1)).getStartOffset();
+				IToken numericToken = getIToken(dtParser.getToken(1));
+				int startOffset = numericToken.getStartOffset();
 				int endOffset = startOffset + integer.length() - 1; // inclusive
 
 				IntegerLiteralExpCS integerLiteralExpCS = createIntegerLiteralExpCS(integer);
-				integerLiteralExpCS.setStartOffset(startOffset);
-				integerLiteralExpCS.setEndOffset(endOffset);
+//					integerLiteralExpCS.setStartOffset(startOffset);
+//					integerLiteralExpCS.setEndOffset(endOffset);
+				integerLiteralExpCS.setStartToken(numericToken);
+				integerLiteralExpCS.setEndToken(numericToken);
 
 				startOffset = endOffset + 2; // end of integerLiteral + 1('.') + 1(start of simpleName)
 				endOffset = getIToken(dtParser.getToken(1)).getEndOffset();
@@ -638,8 +641,10 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 							SimpleTypeEnum.IDENTIFIER_LITERAL,
 							simpleName
 						);
-				simpleNameCS.setStartOffset(startOffset);
-				simpleNameCS.setEndOffset(endOffset);
+//					simpleNameCS.setStartOffset(startOffset);
+//					simpleNameCS.setEndOffset(endOffset);
+				simpleNameCS.setStartToken(numericToken);
+				simpleNameCS.setEndToken(numericToken);
 
 				// create the OperationCallExpCS
 				CSTNode result = createOperationCallExpCS(

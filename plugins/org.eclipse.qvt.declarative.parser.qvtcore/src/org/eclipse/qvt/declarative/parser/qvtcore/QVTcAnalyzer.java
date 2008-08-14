@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcAnalyzer.java,v 1.2 2008/08/09 17:39:35 ewillink Exp $
+ * $Id: QVTcAnalyzer.java,v 1.3 2008/08/14 07:57:56 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore;
 
@@ -31,7 +31,7 @@ public class QVTcAnalyzer extends AbstractQVTcAnalyzer
 	protected final QVTcTopLevelEnvironment topLevelEnvironment;
 	
 	public QVTcAnalyzer(QVTcTopLevelEnvironment environment) {
-		super(new DerivedQVTcParser(new QVTcLexer(environment)));
+		super(new QVTcParser(new QVTcLexer(environment)));
 		topLevelEnvironment = environment;
 	}
     
