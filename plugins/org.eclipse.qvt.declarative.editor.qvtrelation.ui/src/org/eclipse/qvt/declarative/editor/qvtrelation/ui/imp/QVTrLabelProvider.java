@@ -12,49 +12,27 @@
  * 
  * </copyright>
  *
- * $Id: QVTrLabelProvider.java,v 1.2 2008/08/11 08:04:14 ewillink Exp $
+ * $Id: QVTrLabelProvider.java,v 1.3 2008/08/14 07:58:19 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp;
 
-import java.util.List;
-
-import org.eclipse.ocl.cst.OCLExpressionCS;
-import org.eclipse.ocl.cst.TypeCS;
-import org.eclipse.qvt.declarative.editor.LabelElement;
+import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLLabelProvider;
 import org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrPlugin;
-import org.eclipse.qvt.declarative.editor.ui.imp.CommonLabelProvider;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.QueryCS;
 
-public class QVTrLabelProvider extends CommonLabelProvider
+public class QVTrLabelProvider extends OCLLabelProvider
 {
 	@Override
-	protected String formatObject(Object object, Object node, LabelElement labelElement) {
-		if (object instanceof List) {
-			StringBuffer s = new StringBuffer();
-			for (Object o : (List<?>)object) {
-				if (s.length() > 0)
-					s.append(labelElement.getSeparator());
-				s.append(getText(o));
-			}
-			return s.toString();
-		}
-		else if (object instanceof TypeCS) {
-			return formatType((TypeCS)object);
-		}
-		else if (object instanceof OCLExpressionCS) {
-			return formatExpression((OCLExpressionCS)object);
-		}
+	protected String formatObject(Object node) {
+		if (node instanceof QueryCS)
+			return super.formatObject(node);
 		else
-			return super.formatObject(object, node, labelElement);
+			return super.formatObject(node);
 	}
-	
+
 	@Override
 	protected ICommonPlugin getPlugin() {
 		return QVTrPlugin.getInstance();
-	}
-	
-	public String getText(Object element) {
-		String text = super.getText(element);
-		return (text != null) ? text : "<???>";
 	}
 }
