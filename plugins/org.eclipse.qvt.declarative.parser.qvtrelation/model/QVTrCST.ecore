@@ -37,11 +37,6 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="implementedBy" eType="ecore:EClass ../../org.eclipse.ocl/model/OCLCST.ecore#//cst/OperationCallExpCS"
           containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="UnitCS" eSuperTypes="../../org.eclipse.ocl/model/OCLCST.ecore#//cst/CSTNode">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" lowerBound="1"
-          upperBound="-1" eType="ecore:EClass ../../org.eclipse.qvt.declarative.parser/model/QVTCST.ecore#//cst/IdentifierCS"
-          containment="true"/>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="KeyDeclCS" eSuperTypes="../../org.eclipse.ocl/model/OCLCST.ecore#//cst/CSTNode">
       <eStructuralFeatures xsi:type="ecore:EReference" name="classId" eType="ecore:EClass ../../org.eclipse.ocl/model/OCLCST.ecore#//cst/PathNameCS"
           containment="true"/>
@@ -130,6 +125,11 @@
           eType="#//cst/QueryCS" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="relation" upperBound="-1"
           eType="#//cst/RelationCS" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UnitCS" eSuperTypes="../../org.eclipse.ocl/model/OCLCST.ecore#//cst/CSTNode">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" lowerBound="1"
+          upperBound="-1" eType="ecore:EClass ../../org.eclipse.qvt.declarative.parser/model/QVTCST.ecore#//cst/IdentifierCS"
+          containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="VarDeclarationCS" eSuperTypes="../../org.eclipse.ocl/model/OCLCST.ecore#//cst/CSTNode">
       <eStructuralFeatures xsi:type="ecore:EReference" name="varDeclarationId" upperBound="-1"
