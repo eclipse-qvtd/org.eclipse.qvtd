@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.3 2008/08/11 08:02:18 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.4 2008/08/14 06:28:34 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -42,18 +42,10 @@ import org.eclipse.imp.editor.ModelTreeNode;
 import org.eclipse.imp.services.ILabelProvider;
 import org.eclipse.imp.utils.MarkerUtils;
 import org.eclipse.jface.viewers.ILabelProviderListener;
-import org.eclipse.ocl.cst.CollectionTypeCS;
-import org.eclipse.ocl.cst.OCLExpressionCS;
-import org.eclipse.ocl.cst.PathNameCS;
-import org.eclipse.ocl.cst.PrimitiveTypeCS;
-import org.eclipse.ocl.cst.SimpleNameCS;
-import org.eclipse.ocl.cst.TypeCS;
-import org.eclipse.ocl.cst.util.CSTSwitch;
 import org.eclipse.qvt.declarative.editor.LabelBehavior;
 import org.eclipse.qvt.declarative.editor.LabelElement;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
-import org.eclipse.qvt.declarative.parser.utils.StringUtils;
 import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.Bundle;
 
@@ -63,40 +55,10 @@ import org.osgi.framework.Bundle;
  */
 public abstract class CommonLabelProvider implements ILabelProvider
 {
-	protected class TypesLabelProvider extends CSTSwitch<String>
-	{
-		@Override
-		public String caseCollectionTypeCS(CollectionTypeCS object) {
-			return object.getCollectionTypeIdentifier() + "(" + formatType(object.getTypeCS()) + ")";
-		}
-
-		@Override
-		public String casePathNameCS(PathNameCS object) {
-			return StringUtils.splice(object.getSequenceOfNames(), "::");
-		}
-
-		@Override
-		public String casePrimitiveTypeCS(PrimitiveTypeCS object) {
-			return object.getValue();
-		}
-
-		@Override
-		public String caseSimpleNameCS(SimpleNameCS object) {
-			return object.getValue();
-		}
-
-//		@Override
-//		public String caseTupleTypeCS(TupleTypeCS object) {
-			// TODO Auto-generated method stub
-//			return super.caseTupleTypeCS(object);
-//		}
-	}
-
 	private Set<ILabelProviderListener> fListeners = new HashSet<ILabelProviderListener>();
 	protected ExtendedImageRegistry imageRegistry = new ExtendedImageRegistry();
 	private Image errorImageOverlay = null;
 	private Image warningImageOverlay = null;
-	private CSTSwitch<String> typesLabelProvider = null;
 
 	public void addListener(ILabelProviderListener listener) {
 		fListeners.add(listener);
@@ -116,37 +78,80 @@ public abstract class CommonLabelProvider implements ILabelProvider
 		return ((EObject)object).eGet(path);
 	}
 
-	protected TypesLabelProvider createTypesLabelProvider() {
-		return new TypesLabelProvider();
-	}
-
 	public void dispose() {}
+
+	protected String formatCollection(Collection<?> objects, LabelElement labelElement) {
+	String string;
+	{
+		StringBuffer s = new StringBuffer();
+		for (Object object : objects) {
+			if (s.length() > 0)
+				s.append(labelElement.getSeparator());
+			s.append(object instanceof String ? (String)object : formatObject(object));
+		}
+		string = s.toString();
+	}
+	return string;
+}
+
+	protected String formatEnum(Enum<?> object) {
+		return object.toString();
+	}
 
 	/**
 	 * Provide a formatted exception arising while identifying the object contributing to the index'th part of node's label.
 	 */
 	protected String formatException(Throwable e, Object node, int index) {
-		return "<" + e.getClass().getSimpleName() + ">";
+		return "<!" + e.getClass().getSimpleName() + "!>";
 	}
 
-	protected String formatExpression(OCLExpressionCS expr) {
-		// FIXME Rest of the expressions
-		return "<" + expr.getClass().getSimpleName() + ">";
+	protected String formatNull() {
+		return "";
 	}
 
-	/**
-	 * Provide a formatted string for object contributing to the labelElement part of node's label.
-	 */
-	protected String formatObject(Object object, Object node, LabelElement labelElement) {
-		String s = object != null ? object.toString() : null;
-		return s != null ? s : "";
-	}
-
-	protected String formatType(TypeCS type) {
-		if (typesLabelProvider == null)
-			typesLabelProvider = createTypesLabelProvider();
-		String s = typesLabelProvider.doSwitch(type);
-		return s != null ? s : "<" + type.getClass().getSimpleName() + ">";
+	protected String formatObject(Object node) {
+		CommonEditorDefinition commonEditorDefinition = getPlugin().getEditorDefinition();
+		LabelBehavior behavior = commonEditorDefinition.getBehavior(node, LabelBehavior.class);
+		if (behavior == null)
+			return null;
+		if (!(node instanceof EObject))
+			return null;
+		String format = behavior.getFormat();
+		EList<LabelElement> labelElements = behavior.getElements();
+		int iMax = labelElements.size();
+		Object[] strings = new String[iMax];
+		for (int i = 0; i < iMax; i++) {
+			try {
+				LabelElement labelElement = labelElements.get(i);
+				Object object = node;
+				for (EReference path : labelElement.getPath())
+					object = checkedGet(object, path);
+				if (object instanceof EObject) {
+					EStructuralFeature end = labelElement.getEnd();
+					if (end == null)
+						object = "<" + ((EObject)object).eClass().getName() + ">";
+					else {
+						object = checkedGet(object, end);
+					}
+				}
+				String string;
+				if (object == null)
+					string = formatNull();
+				else if (object instanceof Collection)
+					string = formatCollection((Collection<?>)object, labelElement);
+				else if (object instanceof Enum)
+					string = formatEnum((Enum<?>)object);
+				else if (!(object instanceof String))
+					string = formatObject(object);
+				else 
+					string = (String) object;
+				strings[i] = string;
+			}
+			catch (Throwable e) {
+				strings[i] = formatException(e, node, i);
+			}
+		}
+	    return MessageFormat.format(format, strings);
 	}
 
 	protected Object getASTorCSTNode(Object element) {
@@ -228,32 +233,8 @@ public abstract class CommonLabelProvider implements ILabelProvider
 	protected abstract ICommonPlugin getPlugin();
 
 	public String getText(Object element) {
-		Object node = getASTorCSTNode(element);
-		CommonEditorDefinition commonEditorDefinition = getPlugin().getEditorDefinition();
-		LabelBehavior behavior = commonEditorDefinition.getBehavior(node, LabelBehavior.class);
-		if (behavior == null)
-			return null;
-		if (!(node instanceof EObject))
-			return null;
-		String format = behavior.getFormat();
-		EList<LabelElement> labelElements = behavior.getElements();
-		int iMax = labelElements.size();
-		Object[] objects = new Object[iMax];
-		for (int i = 0; i < iMax; i++) {
-			try {
-				LabelElement labelElement = labelElements.get(i);
-				Object object = node;
-				for (EReference path : labelElement.getPath())
-					object = checkedGet(object, path);
-				if (object instanceof EObject) 
-					object = checkedGet(object, labelElement.getEnd());
-				objects[i] = formatObject(object, node, labelElement);
-			}
-			catch (Throwable e) {
-				objects[i] = formatException(e, node, i);
-			}
-		}
-	    return MessageFormat.format(format, objects);
+		String text = formatObject(getASTorCSTNode(element));
+		return (text != null) ? text : "<!null!>";
 	}
 
 	public boolean isLabelProperty(Object element, String property) {
