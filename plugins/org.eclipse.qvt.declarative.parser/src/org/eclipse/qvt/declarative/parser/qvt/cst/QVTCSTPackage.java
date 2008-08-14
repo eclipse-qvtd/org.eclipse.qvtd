@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTCSTPackage.java,v 1.1 2008/07/23 10:05:07 qglineur Exp $
+ * $Id: QVTCSTPackage.java,v 1.2 2008/08/14 07:55:32 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvt.cst;
 
@@ -82,22 +82,22 @@ public interface QVTCSTPackage extends EPackage {
 	int IDENTIFIED_CS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IDENTIFIED_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+	int IDENTIFIED_CS__START_TOKEN = CSTPackage.CST_NODE__START_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * The feature id for the '<em><b>End Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IDENTIFIED_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+	int IDENTIFIED_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -128,22 +128,22 @@ public interface QVTCSTPackage extends EPackage {
 	int IDENTIFIER_CS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IDENTIFIER_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+	int IDENTIFIER_CS__START_TOKEN = CSTPackage.CST_NODE__START_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * The feature id for the '<em><b>End Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IDENTIFIER_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+	int IDENTIFIER_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
