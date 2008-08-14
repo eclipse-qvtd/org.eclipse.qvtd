@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonDocumentationProvider.java,v 1.1 2008/08/10 13:46:14 ewillink Exp $
+ * $Id: CommonDocumentationProvider.java,v 1.2 2008/08/14 07:57:47 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -20,7 +20,6 @@ import org.eclipse.imp.language.ILanguageService;
 import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.services.IDocumentationProvider;
 import org.eclipse.ocl.cst.CSTNode;
-import org.eclipse.qvt.declarative.parser.utils.CSTNodeTokenAdapter;
 
 public abstract class CommonDocumentationProvider implements IDocumentationProvider, ILanguageService
 {
@@ -66,6 +65,6 @@ public abstract class CommonDocumentationProvider implements IDocumentationProvi
 		// If you want some token for a node
 		// other than the right token, compute
 		// that here ...
-		return CSTNodeTokenAdapter.getEndToken(node).getKind();
+		return node.getEndToken().getKind();
 	}
 }

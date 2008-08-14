@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonFoldingUpdater.java,v 1.2 2008/08/09 17:47:44 ewillink Exp $
+ * $Id: CommonFoldingUpdater.java,v 1.3 2008/08/14 07:57:47 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -32,7 +32,6 @@ import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.qvt.declarative.editor.FoldingBehavior;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 import org.eclipse.qvt.declarative.parser.utils.CommonCSTVisitor;
-import org.eclipse.qvt.declarative.parser.utils.CSTNodeTokenAdapter;
 
 /**
  * CommonFoldingUpdater provides the FoldingUpdater functionality for
@@ -113,7 +112,7 @@ public abstract class CommonFoldingUpdater extends FolderBase
 	}
 
 	protected void makeAnnotation(CSTNode n) {
-		makeAnnotation(CSTNodeTokenAdapter.getStartToken(n), CSTNodeTokenAdapter.getEndToken(n));
+		makeAnnotation(n.getStartToken(), n.getEndToken());
 	}
 
 	public void makeAnnotationWithOffsets(int first_offset, int last_offset) {
@@ -126,7 +125,7 @@ public abstract class CommonFoldingUpdater extends FolderBase
 	public void sendVisitorToAST(HashMap<Annotation,Position> newAnnotations, List<Annotation> annotations, Object ast) {
 		CSTNode theCST = ((ASTandCST) ast).getCST();
 		if (theCST != null) {
-			IToken startToken = CSTNodeTokenAdapter.getStartToken(theCST);
+			IToken startToken = theCST.getStartToken();
 			if (startToken != null) {
 				prsStream = startToken.getPrsStream();
 				FoldingCSTVisitor visitor = new FoldingCSTVisitor(getPlugin().getEditorDefinition());
