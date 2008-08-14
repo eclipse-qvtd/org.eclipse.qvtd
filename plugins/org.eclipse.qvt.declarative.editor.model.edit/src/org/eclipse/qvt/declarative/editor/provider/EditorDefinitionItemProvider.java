@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EditorDefinitionItemProvider.java,v 1.1 2008/08/08 16:39:46 ewillink Exp $
+ * $Id: EditorDefinitionItemProvider.java,v 1.2 2008/08/14 07:29:08 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -17,12 +17,14 @@ import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
@@ -65,8 +67,54 @@ public class EditorDefinitionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addLanguagePropertyDescriptor(object);
+			addExtendsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Language feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLanguagePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EditorDefinition_language_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EditorDefinition_language_feature", "_UI_EditorDefinition_type"),
+				 EditorPackage.Literals.EDITOR_DEFINITION__LANGUAGE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Extends feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addExtendsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EditorDefinition_extends_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EditorDefinition_extends_feature", "_UI_EditorDefinition_type"),
+				 EditorPackage.Literals.EDITOR_DEFINITION__EXTENDS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -118,7 +166,10 @@ public class EditorDefinitionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_EditorDefinition_type");
+		String label = ((EditorDefinition)object).getLanguage();
+		return label == null || label.length() == 0 ?
+			getString("_UI_EditorDefinition_type") :
+			getString("_UI_EditorDefinition_type") + " " + label;
 	}
 
 	/**
@@ -133,6 +184,9 @@ public class EditorDefinitionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(EditorDefinition.class)) {
+			case EditorPackage.EDITOR_DEFINITION__LANGUAGE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case EditorPackage.EDITOR_DEFINITION__NODE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
