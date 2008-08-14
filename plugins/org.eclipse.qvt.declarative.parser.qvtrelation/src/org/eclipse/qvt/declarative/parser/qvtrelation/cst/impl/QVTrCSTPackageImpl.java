@@ -877,9 +877,6 @@ public class QVTrCSTPackageImpl extends EPackageImpl implements QVTrCSTPackage {
 		createEReference(domainCSEClass, DOMAIN_CS__DEFAULT_VALUE);
 		createEReference(domainCSEClass, DOMAIN_CS__IMPLEMENTED_BY);
 
-		unitCSEClass = createEClass(UNIT_CS);
-		createEReference(unitCSEClass, UNIT_CS__IDENTIFIER);
-
 		keyDeclCSEClass = createEClass(KEY_DECL_CS);
 		createEReference(keyDeclCSEClass, KEY_DECL_CS__CLASS_ID);
 		createEReference(keyDeclCSEClass, KEY_DECL_CS__PROPERTY_ID);
@@ -936,6 +933,9 @@ public class QVTrCSTPackageImpl extends EPackageImpl implements QVTrCSTPackage {
 		createEReference(transformationCSEClass, TRANSFORMATION_CS__QUERY);
 		createEReference(transformationCSEClass, TRANSFORMATION_CS__RELATION);
 
+		unitCSEClass = createEClass(UNIT_CS);
+		createEReference(unitCSEClass, UNIT_CS__IDENTIFIER);
+
 		varDeclarationCSEClass = createEClass(VAR_DECLARATION_CS);
 		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__VAR_DECLARATION_ID);
 		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__TYPE);
@@ -978,7 +978,6 @@ public class QVTrCSTPackageImpl extends EPackageImpl implements QVTrCSTPackage {
 		collectionTemplateCSEClass.getESuperTypes().add(this.getTemplateCS());
 		defaultValueCSEClass.getESuperTypes().add(theCSTPackage.getCSTNode());
 		domainCSEClass.getESuperTypes().add(this.getAbstractDomainCS());
-		unitCSEClass.getESuperTypes().add(theCSTPackage.getCSTNode());
 		keyDeclCSEClass.getESuperTypes().add(theCSTPackage.getCSTNode());
 		modelDeclCSEClass.getESuperTypes().add(theCSTPackage.getCSTNode());
 		objectTemplateCSEClass.getESuperTypes().add(this.getTemplateCS());
@@ -993,6 +992,7 @@ public class QVTrCSTPackageImpl extends EPackageImpl implements QVTrCSTPackage {
 		templateVariableCSEClass.getESuperTypes().add(theQVTCSTPackage.getIdentifiedCS());
 		topLevelCSEClass.getESuperTypes().add(theCSTPackage.getCSTNode());
 		transformationCSEClass.getESuperTypes().add(theCSTPackage.getCSTNode());
+		unitCSEClass.getESuperTypes().add(theCSTPackage.getCSTNode());
 		varDeclarationCSEClass.getESuperTypes().add(theCSTPackage.getCSTNode());
 
 		// Initialize classes and features; add operations and parameters
@@ -1015,9 +1015,6 @@ public class QVTrCSTPackageImpl extends EPackageImpl implements QVTrCSTPackage {
 		initEReference(getDomainCS_Template(), this.getTemplateCS(), null, "template", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainCS_DefaultValue(), this.getDefaultValueCS(), null, "defaultValue", null, 0, -1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainCS_ImplementedBy(), theCSTPackage.getOperationCallExpCS(), null, "implementedBy", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(unitCSEClass, UnitCS.class, "UnitCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getUnitCS_Identifier(), theQVTCSTPackage.getIdentifierCS(), null, "identifier", null, 1, -1, UnitCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(keyDeclCSEClass, KeyDeclCS.class, "KeyDeclCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKeyDeclCS_ClassId(), theCSTPackage.getPathNameCS(), null, "classId", null, 0, 1, KeyDeclCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1074,6 +1071,9 @@ public class QVTrCSTPackageImpl extends EPackageImpl implements QVTrCSTPackage {
 		initEReference(getTransformationCS_KeyDecl(), this.getKeyDeclCS(), null, "keyDecl", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformationCS_Query(), this.getQueryCS(), null, "query", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformationCS_Relation(), this.getRelationCS(), null, "relation", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(unitCSEClass, UnitCS.class, "UnitCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUnitCS_Identifier(), theQVTCSTPackage.getIdentifierCS(), null, "identifier", null, 1, -1, UnitCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(varDeclarationCSEClass, VarDeclarationCS.class, "VarDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVarDeclarationCS_VarDeclarationId(), theQVTCSTPackage.getIdentifierCS(), null, "varDeclarationId", null, 0, -1, VarDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

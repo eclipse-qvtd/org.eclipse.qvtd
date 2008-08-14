@@ -80,7 +80,6 @@ public class QVTrCSTFactoryImpl extends EFactoryImpl implements QVTrCSTFactory {
 			case QVTrCSTPackage.COLLECTION_TEMPLATE_CS: return createCollectionTemplateCS();
 			case QVTrCSTPackage.DEFAULT_VALUE_CS: return createDefaultValueCS();
 			case QVTrCSTPackage.DOMAIN_CS: return createDomainCS();
-			case QVTrCSTPackage.UNIT_CS: return createUnitCS();
 			case QVTrCSTPackage.KEY_DECL_CS: return createKeyDeclCS();
 			case QVTrCSTPackage.MODEL_DECL_CS: return createModelDeclCS();
 			case QVTrCSTPackage.OBJECT_TEMPLATE_CS: return createObjectTemplateCS();
@@ -91,6 +90,7 @@ public class QVTrCSTFactoryImpl extends EFactoryImpl implements QVTrCSTFactory {
 			case QVTrCSTPackage.RELATION_CS: return createRelationCS();
 			case QVTrCSTPackage.TOP_LEVEL_CS: return createTopLevelCS();
 			case QVTrCSTPackage.TRANSFORMATION_CS: return createTransformationCS();
+			case QVTrCSTPackage.UNIT_CS: return createUnitCS();
 			case QVTrCSTPackage.VAR_DECLARATION_CS: return createVarDeclarationCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");

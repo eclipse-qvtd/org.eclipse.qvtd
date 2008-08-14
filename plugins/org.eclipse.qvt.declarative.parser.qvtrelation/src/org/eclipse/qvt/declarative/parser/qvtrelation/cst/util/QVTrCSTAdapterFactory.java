@@ -111,10 +111,6 @@ public class QVTrCSTAdapterFactory extends AdapterFactoryImpl {
 				return createDomainCSAdapter();
 			}
 			@Override
-			public Adapter caseUnitCS(UnitCS object) {
-				return createUnitCSAdapter();
-			}
-			@Override
 			public Adapter caseKeyDeclCS(KeyDeclCS object) {
 				return createKeyDeclCSAdapter();
 			}
@@ -161,6 +157,10 @@ public class QVTrCSTAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTransformationCS(TransformationCS object) {
 				return createTransformationCSAdapter();
+			}
+			@Override
+			public Adapter caseUnitCS(UnitCS object) {
+				return createUnitCSAdapter();
 			}
 			@Override
 			public Adapter caseVarDeclarationCS(VarDeclarationCS object) {

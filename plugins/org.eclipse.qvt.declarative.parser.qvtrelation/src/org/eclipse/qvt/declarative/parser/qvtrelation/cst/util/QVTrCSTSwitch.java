@@ -146,13 +146,6 @@ public class QVTrCSTSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrCSTPackage.UNIT_CS: {
-				UnitCS unitCS = (UnitCS)theEObject;
-				T result = caseUnitCS(unitCS);
-				if (result == null) result = caseCSTNode(unitCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTrCSTPackage.KEY_DECL_CS: {
 				KeyDeclCS keyDeclCS = (KeyDeclCS)theEObject;
 				T result = caseKeyDeclCS(keyDeclCS);
@@ -249,6 +242,13 @@ public class QVTrCSTSwitch<T> {
 				TransformationCS transformationCS = (TransformationCS)theEObject;
 				T result = caseTransformationCS(transformationCS);
 				if (result == null) result = caseCSTNode(transformationCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTrCSTPackage.UNIT_CS: {
+				UnitCS unitCS = (UnitCS)theEObject;
+				T result = caseUnitCS(unitCS);
+				if (result == null) result = caseCSTNode(unitCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

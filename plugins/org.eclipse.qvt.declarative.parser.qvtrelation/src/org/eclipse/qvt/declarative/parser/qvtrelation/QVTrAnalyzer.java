@@ -26,7 +26,7 @@ public class QVTrAnalyzer extends AbstractQVTrAnalyzer
 	protected final QVTrTopLevelEnvironment topLevelEnvironment;
 	
 	public QVTrAnalyzer(QVTrTopLevelEnvironment environment) {
-		super(new DerivedQVTrParser(new QVTrLexer(environment)));
+		super(new QVTrParser(new QVTrLexer(environment)));
 		topLevelEnvironment = environment;
 	}
     
