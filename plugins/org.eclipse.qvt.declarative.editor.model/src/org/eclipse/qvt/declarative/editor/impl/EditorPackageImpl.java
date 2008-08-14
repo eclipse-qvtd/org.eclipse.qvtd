@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackageImpl.java,v 1.3 2008/08/11 08:03:43 ewillink Exp $
+ * $Id: EditorPackageImpl.java,v 1.4 2008/08/14 06:24:14 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -212,8 +212,26 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getEditorDefinition_Language() {
+		return (EAttribute)editorDefinitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEditorDefinition_Extends() {
+		return (EReference)editorDefinitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getEditorDefinition_Node() {
-		return (EReference)editorDefinitionEClass.getEStructuralFeatures().get(0);
+		return (EReference)editorDefinitionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -403,6 +421,8 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		createEReference(ecoreNodeEClass, ECORE_NODE__ELEMENT);
 
 		editorDefinitionEClass = createEClass(EDITOR_DEFINITION);
+		createEAttribute(editorDefinitionEClass, EDITOR_DEFINITION__LANGUAGE);
+		createEReference(editorDefinitionEClass, EDITOR_DEFINITION__EXTENDS);
 		createEReference(editorDefinitionEClass, EDITOR_DEFINITION__NODE);
 
 		foldingBehaviorEClass = createEClass(FOLDING_BEHAVIOR);
@@ -470,6 +490,8 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		initEReference(getEcoreNode_Element(), ecorePackage.getEClassifier(), null, "element", null, 1, 1, EcoreNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(editorDefinitionEClass, EditorDefinition.class, "EditorDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEditorDefinition_Language(), ecorePackage.getEString(), "language", null, 1, 1, EditorDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEditorDefinition_Extends(), this.getEditorDefinition(), null, "extends", null, 0, -1, EditorDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEditorDefinition_Node(), this.getNode(), null, "node", null, 0, -1, EditorDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(foldingBehaviorEClass, FoldingBehavior.class, "FoldingBehavior", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

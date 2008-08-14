@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorDefinition.java,v 1.1 2008/08/08 16:39:54 ewillink Exp $
+ * $Id: EditorDefinition.java,v 1.2 2008/08/14 06:24:14 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -28,6 +28,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.EditorDefinition#getLanguage <em>Language</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.EditorDefinition#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.EditorDefinition#getNode <em>Node</em>}</li>
  * </ul>
  * </p>
@@ -37,6 +39,48 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface EditorDefinition extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Language</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Language</em>' attribute.
+	 * @see #setLanguage(String)
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getEditorDefinition_Language()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getLanguage();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.EditorDefinition#getLanguage <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Language</em>' attribute.
+	 * @see #getLanguage()
+	 * @generated
+	 */
+	void setLanguage(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Extends</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvt.declarative.editor.EditorDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Extends</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Extends</em>' reference list.
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getEditorDefinition_Extends()
+	 * @model
+	 * @generated
+	 */
+	EList<EditorDefinition> getExtends();
+
 	/**
 	 * Returns the value of the '<em><b>Node</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvt.declarative.editor.Node}.

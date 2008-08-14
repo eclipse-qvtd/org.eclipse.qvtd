@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackage.java,v 1.3 2008/08/11 08:03:43 ewillink Exp $
+ * $Id: EditorPackage.java,v 1.4 2008/08/14 06:24:14 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -202,13 +202,31 @@ public interface EditorPackage extends EPackage {
 	int ECORE_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDITOR_DEFINITION__LANGUAGE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Extends</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDITOR_DEFINITION__EXTENDS = 1;
+
+	/**
 	 * The feature id for the '<em><b>Node</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EDITOR_DEFINITION__NODE = 0;
+	int EDITOR_DEFINITION__NODE = 2;
 
 	/**
 	 * The number of structural features of the '<em>Definition</em>' class.
@@ -217,7 +235,7 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDITOR_DEFINITION_FEATURE_COUNT = 1;
+	int EDITOR_DEFINITION_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of structural features of the '<em>Folding Behavior</em>' class.
@@ -433,6 +451,28 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getEditorDefinition();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.EditorDefinition#getLanguage <em>Language</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Language</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.EditorDefinition#getLanguage()
+	 * @see #getEditorDefinition()
+	 * @generated
+	 */
+	EAttribute getEditorDefinition_Language();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvt.declarative.editor.EditorDefinition#getExtends <em>Extends</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Extends</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.EditorDefinition#getExtends()
+	 * @see #getEditorDefinition()
+	 * @generated
+	 */
+	EReference getEditorDefinition_Extends();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvt.declarative.editor.EditorDefinition#getNode <em>Node</em>}'.
@@ -685,6 +725,22 @@ public interface EditorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EDITOR_DEFINITION = eINSTANCE.getEditorDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EDITOR_DEFINITION__LANGUAGE = eINSTANCE.getEditorDefinition_Language();
+
+		/**
+		 * The meta object literal for the '<em><b>Extends</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EDITOR_DEFINITION__EXTENDS = eINSTANCE.getEditorDefinition_Extends();
 
 		/**
 		 * The meta object literal for the '<em><b>Node</b></em>' containment reference list feature.
