@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonEditorDefinition.java,v 1.4 2008/08/11 08:01:45 ewillink Exp $
+ * $Id: CommonEditorDefinition.java,v 1.5 2008/08/14 07:57:49 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -48,6 +48,7 @@ import org.eclipse.qvt.declarative.editor.EditorFactory;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
 import org.eclipse.qvt.declarative.editor.JavaNode;
 import org.eclipse.qvt.declarative.editor.Node;
+import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 
 /**
  * CommonEditorDefinition, typically instantiated in an
@@ -89,30 +90,33 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 			ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
     }
     
-	protected EcoreNode findEcoreClass(EClass aClass) {
-		EcoreNode ecoreNode = ecoreMap.get(aClass);
-		if (ecoreNode != null)
-			return ecoreNode; 
-		for (EClass cClass : aClass.getESuperTypes()) {
-			ecoreNode = findEcoreClass(cClass);
+	protected EcoreNode findEcoreClass(EClass subType) {
+		for (EClass superType : subType.getESuperTypes()) {
+			EcoreNode ecoreNode = ecoreMap.get(superType);
+			if (ecoreNode != null)
+				return ecoreNode; 
+			ecoreNode = findEcoreClass(superType);
 			if (ecoreNode != null)
 				return ecoreNode; 
 		}
 		return null;
 	}
 
-	protected JavaNode findJavaClass(Class<?> aClass) {
-		JavaNode javaNode = javaMap.get(aClass);
-		if (javaNode != null)
-			return javaNode; 
-		Class<?> bClass = aClass.getSuperclass();
-		if (bClass != null) {
-			javaNode = findJavaClass(bClass);
+	protected JavaNode findJavaClass(Class<?> subClass) {
+		Class<?> superClass = subClass.getSuperclass();
+		if (superClass != null) {
+			JavaNode javaNode = javaMap.get(superClass);
+			if (javaNode != null)
+				return javaNode; 
+			javaNode = findJavaClass(superClass);
 			if (javaNode != null)
 				return javaNode; 
 		}
-		for (Class<?> cClass : aClass.getInterfaces()) {
-			javaNode = findJavaClass(cClass);
+		for (Class<?> superInterface : subClass.getInterfaces()) {
+			JavaNode javaNode = javaMap.get(superInterface);
+			if (javaNode != null)
+				return javaNode; 
+			javaNode = findJavaClass(superInterface);
 			if (javaNode != null)
 				return javaNode; 
 		}
@@ -139,31 +143,10 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 				resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("editor", new XMIResourceFactoryImpl());
 				Resource resource = resourceSet.createResource(URI.createURI(editorURL.toString()));
 				resource.load(editorURL.openStream(), null);
-				editorDefinition = (EditorDefinition) resource.getContents().get(0);	// FIXME cast, multiplicity checks
-				EcoreUtil.resolveAll(editorDefinition);
-				for (Node node : editorDefinition.getNode()) {
-					if (node instanceof EcoreNode) {
-						if (ecoreMap == null)
-							ecoreMap = new HashMap<EClassifier, EcoreNode>();
-						ecoreMap.put(((EcoreNode)node).getElement(), (EcoreNode)node);
-					}
-					else if (node instanceof JavaNode) {
-						if (javaMap == null)
-							javaMap = new HashMap<Class<?>, JavaNode>();
-						try {
-							javaMap.put(Class.forName(((JavaNode)node).getName()), (JavaNode)node);
-						} catch (ClassNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				editorDefinition = (EditorDefinition) resource.getContents().get(0);
+				installEditorDefinition(editorDefinition);
+			} catch (Exception e) {
+				QVTEditorPlugin.logError("Failed to load '" + editorURL.toString() + "'", e);
 			} finally {
 				if (editorDefinition == null)
 					editorDefinition = EditorFactory.eINSTANCE.createEditorDefinition();			
@@ -172,15 +155,69 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 		return editorDefinition;
 	}
 
+	protected void installEditorDefinition(EditorDefinition editorDefinition) {
+		EcoreUtil.resolveAll(editorDefinition);
+		for (Node node : editorDefinition.getNode()) {
+			if (node instanceof EcoreNode) {
+				if (ecoreMap == null)
+					ecoreMap = new HashMap<EClassifier, EcoreNode>();
+				EcoreNode ecoreNode = (EcoreNode)node;
+				EClassifier ecoreKey = ecoreNode.getElement();
+				if (!ecoreMap.containsKey(ecoreKey))
+					ecoreMap.put(ecoreKey, ecoreNode);
+			}
+			else if (node instanceof JavaNode) {
+				if (javaMap == null)
+					javaMap = new HashMap<Class<?>, JavaNode>();
+				try {
+					JavaNode javaNode = (JavaNode)node;
+					Class<?> javaKey = Class.forName(javaNode.getName());
+					if (!javaMap.containsKey(javaKey))
+						javaMap.put(javaKey, javaNode);
+				} catch (ClassNotFoundException e) {
+					QVTEditorPlugin.logError("In '" + editorDefinition.getLanguage() + "'.editor definition", e);
+				}
+			}
+		}
+		for (EditorDefinition ed : editorDefinition.getExtends())
+			installEditorDefinition(ed);
+	}
+
+	protected EcoreNode getEcoreNode(EClass ecoreClass) {
+		if (ecoreMap == null)
+			return null;
+		EcoreNode ecoreNode = ecoreMap.get(ecoreClass);
+		if (ecoreNode != null)
+			return ecoreNode; 
+		if (ecoreMap.containsKey(ecoreClass))
+			return null;
+		ecoreNode = findEcoreClass(ecoreClass);
+		ecoreMap.put(ecoreClass, ecoreNode); 
+		return ecoreNode;
+	}
+
+	protected JavaNode getJavaNode(Class<?> javaClass) {
+		if (javaMap == null)
+			return null;
+		JavaNode javaNode = javaMap.get(javaClass);
+		if (javaNode != null)
+			return javaNode; 
+		if (javaMap.containsKey(javaClass))
+			return null;
+		javaNode = findJavaClass(javaClass);
+		javaMap.put(javaClass, javaNode); 
+		return javaNode;
+	}
+
 	public Node getNode(Object object) {
 		if (object == null)
 			return null;
 		if (editorDefinition == null)
 			getEditorDefinition();
 		if (object instanceof EObject)
-			return ecoreMap != null ? findEcoreClass(((EObject)object).eClass()) : null; 
+			return getEcoreNode(((EObject)object).eClass());
 		else
-			return javaMap != null ? findJavaClass(object.getClass()) : null; 
+			return getJavaNode(object.getClass());			
 	}
 
 	public void resourceChanged(IResourceChangeEvent event) {
@@ -204,6 +241,8 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 					URL fileURL = resource.getLocationURI().toURL();
 					if (fileURL.equals(editorURL)) {
 						editorDefinition = null;
+						ecoreMap.clear();
+						javaMap.clear();
 						return false;
 					}
 				} catch (MalformedURLException e) {
