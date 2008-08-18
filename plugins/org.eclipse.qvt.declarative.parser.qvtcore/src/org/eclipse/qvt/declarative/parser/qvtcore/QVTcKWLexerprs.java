@@ -14,7 +14,7 @@
 *
 * </copyright>
 *
-* $Id: QVTcKWLexerprs.java,v 1.3 2008/08/14 07:57:56 ewillink Exp $
+* $Id: QVTcKWLexerprs.java,v 1.4 2008/08/18 07:48:56 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;
