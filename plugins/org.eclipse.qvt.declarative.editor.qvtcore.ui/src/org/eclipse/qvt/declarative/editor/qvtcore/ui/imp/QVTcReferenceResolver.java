@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcReferenceResolver.java,v 1.1 2008/08/10 13:52:32 ewillink Exp $
+ * $Id: QVTcReferenceResolver.java,v 1.2 2008/08/18 07:57:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui.imp;
 
@@ -27,6 +27,7 @@ public class QVTcReferenceResolver extends CommonReferenceResolver
 	 * Get the target for a given source node in the AST represented by a
 	 * given Parse Controller.
 	 */
+	@Override
 	public Object getLinkTarget(Object node, IParseController controller) {
 		// START_HERE
 		// Replace the given implementation with an implementation

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcPlugin.java,v 1.2 2008/08/10 13:48:29 ewillink Exp $
+ * $Id: QVTcPlugin.java,v 1.3 2008/08/18 07:57:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
@@ -72,7 +72,13 @@ public class QVTcPlugin extends PluginBase implements ICommonPlugin
 		return editorDefinition;
 	}
 
+	@Override
 	public String getID() {
 		return kPluginID;
+	}
+
+	@Override
+	public String getLanguageName() {
+		return kLanguageName;
 	}
 }

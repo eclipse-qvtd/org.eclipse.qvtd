@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcTextDefaultContentScanner.java,v 1.2 2008/08/09 17:56:12 ewillink Exp $
+ * $Id: QVTcTextDefaultContentScanner.java,v 1.3 2008/08/18 07:57:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
@@ -27,6 +27,7 @@ import org.eclipse.qvt.declarative.editor.ui.text.TextDefaultContentScanner;
 /**
  * Defines a scanner to process the residual NiceXSL partition.
  */
+@Deprecated // Use UniversalTextEditor
 public class QVTcTextDefaultContentScanner extends TextDefaultContentScanner {
     public QVTcTextDefaultContentScanner(TextColorManager colorManager) {
     	super(colorManager);

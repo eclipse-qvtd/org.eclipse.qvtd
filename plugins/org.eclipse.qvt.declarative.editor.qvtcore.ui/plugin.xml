@@ -3,7 +3,7 @@
 <plugin>
 
    <extension
-         id="QVTcBuilder"
+         id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcBuilder"
          name="QVT Core Project Builder"
          point="org.eclipse.core.resources.builders">
       <builder
@@ -14,18 +14,15 @@
       </builder>
    </extension>
    <extension
-         id="qvtcProblem"
+         id="org.eclipse.qvt.declarative.editor.qvtcore.ui.qvtcProblem"
          name="QVT Core Problem"
          point="org.eclipse.core.resources.markers">
       <super
             type="org.eclipse.core.resources.problemmarker">
       </super>
-      <persistent
-            value="true">
-      </persistent>
    </extension>
    <extension
-         id="QVTcNature"
+         id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcNature"
          name="QVT Core Project Nature"
          point="org.eclipse.core.resources.natures">
       <runtime>
@@ -79,17 +76,6 @@
             </objectState>
          </visibility>
       </objectContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ui.editors">
-      <editor
-            name="QVT Core Text Editor"
-            icon="icons/QVTcModelFile.gif"
-            extensions="qvtc,qvtcore,eqvtcore"
-            contributorClass="org.eclipse.qvt.declarative.editor.ui.actions.PagedActionBarContributor"
-            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor"
-            id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor">
-      </editor>
    </extension>
    <extension
          point="org.eclipse.ui.newWizards">
@@ -183,6 +169,24 @@
             class="org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcContentProposer"
             language="qvtc">
       </proposer>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.editorActionContributions">
+      <editorActionContributor
+            class="org.eclipse.qvt.declarative.editor.ui.actions.CommonActionContributor"
+            language="qvtc">
+      </editorActionContributor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="QVT Core Multi-View Editor"
+            icon="icons/QVTcModelFile.gif"
+            extensions="qvtc,qvtcore,eqvtcore"
+            contributorClass="org.eclipse.qvt.declarative.editor.ui.actions.PagedActionBarContributor"
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor"
+            id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor">
+      </editor>
    </extension>
 
 </plugin>

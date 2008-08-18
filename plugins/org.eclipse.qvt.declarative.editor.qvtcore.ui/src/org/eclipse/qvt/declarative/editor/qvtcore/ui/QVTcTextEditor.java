@@ -12,17 +12,16 @@
  * 
  * </copyright>
  *
- * $Id: QVTcTextEditor.java,v 1.2 2008/08/09 17:56:11 ewillink Exp $
+ * $Id: QVTcTextEditor.java,v 1.3 2008/08/18 07:57:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
 import org.eclipse.qvt.declarative.editor.ui.IPageManager;
-import org.eclipse.qvt.declarative.editor.ui.text.TextPageEditor;
+import org.eclipse.qvt.declarative.editor.ui.text.UniversalTextEditor;
 
-public class QVTcTextEditor extends TextPageEditor
+public class QVTcTextEditor extends UniversalTextEditor
 {
 	public QVTcTextEditor(IPageManager editorPageManager) {
 		super(editorPageManager);
-		setSourceViewerConfiguration(new QVTcTextConfiguration(colorManager));
 	}
 }

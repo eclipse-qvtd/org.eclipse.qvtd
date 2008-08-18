@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcTextConfiguration.java,v 1.2 2008/08/09 17:56:11 ewillink Exp $
+ * $Id: QVTcTextConfiguration.java,v 1.3 2008/08/18 07:57:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
@@ -28,6 +28,7 @@ import org.eclipse.qvt.declarative.editor.ui.text.TextPartitionScanner;
 import org.eclipse.qvt.declarative.editor.ui.text.QVTTextSourceViewerConfiguration;
 import org.eclipse.ui.editors.text.EditorsUI;
 
+@Deprecated // Use UniversalTextEditor
 public class QVTcTextConfiguration extends QVTTextSourceViewerConfiguration {
 	private TextDoubleClickStrategy doubleClickStrategy;
 	private QVTcTextDefaultContentScanner scanner = null;

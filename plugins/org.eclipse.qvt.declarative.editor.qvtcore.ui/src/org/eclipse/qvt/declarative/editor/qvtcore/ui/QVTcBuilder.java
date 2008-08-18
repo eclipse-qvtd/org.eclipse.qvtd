@@ -12,13 +12,14 @@
  * 
  * </copyright>
  *
- * $Id: QVTcBuilder.java,v 1.2 2008/08/09 17:56:12 ewillink Exp $
+ * $Id: QVTcBuilder.java,v 1.3 2008/08/18 07:57:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
-import org.eclipse.qvt.declarative.editor.ui.builder.AbstractBuilder;
+import org.eclipse.qvt.declarative.editor.ui.builder.CommonBuilder;
 
-public class QVTcBuilder extends AbstractBuilder
+
+public class QVTcBuilder extends CommonBuilder
 {
 	public QVTcBuilder() {
 		super(QVTcCreationFactory.INSTANCE);
