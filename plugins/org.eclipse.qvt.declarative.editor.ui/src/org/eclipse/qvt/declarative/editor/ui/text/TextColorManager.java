@@ -15,6 +15,7 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.swt.SWT;
 
+@Deprecated // Use UniversalTextEditor
 public class TextColorManager extends ColorManager {
 
     private IToken defaultContextToken = null;

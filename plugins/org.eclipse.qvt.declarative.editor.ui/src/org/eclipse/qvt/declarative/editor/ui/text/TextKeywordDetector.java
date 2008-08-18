@@ -15,6 +15,7 @@ import org.eclipse.jface.text.rules.IWordDetector;
 /**
  * Defines a detector for QVT keywords.
  */
+@Deprecated // Use UniversalTextEditor
 public class TextKeywordDetector implements IWordDetector {
 
 public TextKeywordDetector() {}

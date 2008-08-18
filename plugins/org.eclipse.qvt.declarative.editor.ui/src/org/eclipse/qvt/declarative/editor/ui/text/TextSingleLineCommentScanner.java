@@ -16,6 +16,7 @@ import org.eclipse.jface.text.rules.RuleBasedScanner;
  * Defines a scanner to process an XML_SINGLE_LINE_COMMENT partition
  * starting with --.
  */
+@Deprecated // Use UniversalTextEditor
 public class TextSingleLineCommentScanner extends RuleBasedScanner {
 
     public TextSingleLineCommentScanner(TextColorManager manager) {}

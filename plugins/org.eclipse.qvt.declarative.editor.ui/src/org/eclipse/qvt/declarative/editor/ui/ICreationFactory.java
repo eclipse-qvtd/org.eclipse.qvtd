@@ -14,9 +14,14 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.imp.language.Language;
+import org.eclipse.imp.parser.IParseController;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
-import org.eclipse.qvt.declarative.editor.ui.text.TextPageEditor;
+import org.eclipse.qvt.declarative.editor.ui.builder.CommonNature;
+import org.eclipse.qvt.declarative.editor.ui.imp.CommonEditorDefinition;
+import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
+import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
 import org.eclipse.qvt.declarative.parser.unparser.AbstractUnparser;
@@ -35,12 +40,16 @@ public interface ICreationFactory
 	 */
 	public IFileEnvironment createFileEnvironment(AbstractFileHandle fileHandle, ResourceSet resourceSet);
 
+	public CommonNature createNature();
+
+	public IParseController createParseController();
+
 	/**
 	 * Create the problem handler and associated marker creation support.
 	 */
 	public ProblemHandler createProblemHandler(IFile file);
 
-	public TextPageEditor createTextEditor(IPageManager editorPageManager);
+	public ITextEditorWithUndoContext createTextEditor(IPageManager editorPageManager);
 	public AbstractUnparser createUnparser(Resource resource);	
 
 	/**
@@ -60,11 +69,27 @@ public interface ICreationFactory
 	public String getEcoreExtension();
 
 	public String[] getEcoreExtensions();
+	
+	public CommonEditorDefinition getEditorDefinition();
 
 	/**
 	 * Return a name to be used to describe the associated type of editor.
 	 */
 	public String getEditorName();
+
+	/**
+	 * Return the Marker ID for errors.
+	 */
+	public String getErrorMarkerId();
+
+	/**
+	 * Return the Marker ID for infos.
+	 */
+	public String getInfoMarkerId();
+
+	public Language getLanguage();
+
+	public String getLanguageName();
 	
 	/**
 	 * Return the EMOF to/from Ecore mapping description.
@@ -77,6 +102,11 @@ public interface ICreationFactory
 	public String getNatureId();
 
 	/**
+	 * Return the plugin that defines the language.
+	 */
+	public ICommonPlugin getPlugin();
+
+	/**
 	 * Return the Marker ID for problems.
 	 */
 	public String getProblemMarkerId();
@@ -87,6 +117,11 @@ public interface ICreationFactory
 	 * Return the extensions for which checkResource should invoke compile.
 	 */
 	public String[] getTextExtensions();
+
+	/**
+	 * Return the Marker ID for warnings.
+	 */
+	public String getWarningMarkerId();
 
 	public String getXMLExtension();
 }

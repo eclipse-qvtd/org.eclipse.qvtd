@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.4 2008/08/14 06:28:34 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.5 2008/08/18 07:46:26 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -233,7 +233,8 @@ public abstract class CommonLabelProvider implements ILabelProvider
 	protected abstract ICommonPlugin getPlugin();
 
 	public String getText(Object element) {
-		String text = formatObject(getASTorCSTNode(element));
+		Object node = getASTorCSTNode(element);
+		String text = formatObject(node);
 		return (text != null) ? text : "<!null!>";
 	}
 

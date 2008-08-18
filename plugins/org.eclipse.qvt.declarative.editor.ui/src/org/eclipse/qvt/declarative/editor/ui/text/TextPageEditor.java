@@ -12,6 +12,7 @@ package org.eclipse.qvt.declarative.editor.ui.text;
 
 import org.eclipse.qvt.declarative.editor.ui.IPageManager;
 
+@Deprecated // Use UniversalTextEditor
 public class TextPageEditor extends LazyTextPageEditor
 {
 	protected TextColorManager colorManager;

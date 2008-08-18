@@ -17,6 +17,7 @@ import org.eclipse.jface.text.rules.FastPartitioner;
 import org.eclipse.qvt.declarative.editor.ui.IPageManager;
 import org.eclipse.qvt.declarative.editor.ui.paged.PagedFileDocumentProvider;
 
+@Deprecated // Use UniversalTextEditor
 public class TextDocumentProvider extends PagedFileDocumentProvider
 {
 	public TextDocumentProvider(IPageManager pageManager) {

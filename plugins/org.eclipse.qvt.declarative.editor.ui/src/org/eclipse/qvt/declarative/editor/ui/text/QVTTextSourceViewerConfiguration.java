@@ -32,6 +32,7 @@ import org.eclipse.ui.texteditor.spelling.SpellingService;
 //
 // FIXME Eliminate getReconciler as soon as Eclipse 3.3.1 dependence acceptable.
 //
+@Deprecated // Use UniversalTextEditor
 public class QVTTextSourceViewerConfiguration extends TextSourceViewerConfiguration
 {
 	/**

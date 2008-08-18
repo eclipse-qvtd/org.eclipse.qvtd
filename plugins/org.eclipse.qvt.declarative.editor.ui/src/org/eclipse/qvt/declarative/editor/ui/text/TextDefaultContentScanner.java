@@ -24,6 +24,7 @@ import org.eclipse.qvt.declarative.editor.ui.text.TextWhitespaceDetector;
 /**
  * Defines a scanner to process the residual NiceXSL partition.
  */
+@Deprecated // Use UniversalTextEditor
 public class TextDefaultContentScanner extends RuleBasedScanner {
     public TextDefaultContentScanner(TextColorManager colorManager) {
     	List<IRule> rules = new ArrayList<IRule>();

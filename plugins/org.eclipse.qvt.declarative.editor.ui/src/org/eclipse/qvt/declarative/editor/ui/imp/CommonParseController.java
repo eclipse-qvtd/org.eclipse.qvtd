@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.3 2008/08/14 06:27:14 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.4 2008/08/18 07:46:26 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -28,6 +28,10 @@ package org.eclipse.qvt.declarative.editor.ui.imp;
 
 *******************************************************************************/
 
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+import java.util.Collection;
 import java.util.Iterator;
 
 import lpg.lpgjavaruntime.IToken;
@@ -35,21 +39,33 @@ import lpg.lpgjavaruntime.Monitor;
 import lpg.lpgjavaruntime.PrsStream;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.eclipse.imp.core.ErrorHandler;
 import org.eclipse.imp.language.Language;
-import org.eclipse.imp.language.LanguageRegistry;
 import org.eclipse.imp.model.ISourceProject;
 import org.eclipse.imp.parser.IMessageHandler;
 import org.eclipse.imp.parser.IParseController;
+import org.eclipse.imp.parser.ISourcePositionLocator;
 import org.eclipse.imp.parser.SimpleAnnotationTypeInfo;
 import org.eclipse.imp.services.IAnnotationTypeInfo;
+import org.eclipse.imp.services.ILanguageSyntaxProperties;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.lpg.AbstractLexer;
 import org.eclipse.ocl.lpg.AbstractParser;
+import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseFileHandle;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseProjectHandle;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
+import org.eclipse.qvt.declarative.parser.environment.IFileAnalyzer;
+import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
+import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 
 /**
  * Base class for an IParseController implementation that encapsulates a simple LPG-based
@@ -72,6 +88,7 @@ public abstract class CommonParseController implements IParseController
 		OTHER
 	}
 	
+	protected final ICreationFactory creationFactory;
 	protected final Language fLanguage;
     protected ISourceProject fProject;
     protected IPath fFilePath;
@@ -80,6 +97,8 @@ public abstract class CommonParseController implements IParseController
     private char fKeywords[][];
     private boolean fIsKeyword[];
     private final SimpleAnnotationTypeInfo fSimpleAnnotationTypeInfo = new SimpleAnnotationTypeInfo();
+	protected IFileEnvironment environment;
+	private boolean useAST = false;
     
     /**
      * An adapter from an Eclipse IProgressMonitor to an LPG Monitor
@@ -104,8 +123,9 @@ public abstract class CommonParseController implements IParseController
     	}
     }
 
-    public CommonParseController(String languageID) {
-        fLanguage= LanguageRegistry.findLanguage(languageID);
+    public CommonParseController(ICreationFactory creationFactory) {
+		this.creationFactory = creationFactory;
+        fLanguage= creationFactory.getLanguage();
     }
 
     protected void cacheKeywordsOnce() {
@@ -128,6 +148,16 @@ public abstract class CommonParseController implements IParseController
         }
     }
 
+	protected abstract IFileEnvironment createEnvironment(AbstractFileHandle fileHandle);
+
+	protected CommonProblemHandler createProblemHandler() {
+		return new CommonProblemHandler(environment.getParser(), handler);
+	}
+
+	protected PMMonitor createProgressMonitor(IProgressMonitor monitor) {
+		return new PMMonitor(monitor);
+	}
+	
     public IAnnotationTypeInfo getAnnotationTypeInfo() {
         return fSimpleAnnotationTypeInfo;
     }
@@ -147,15 +177,25 @@ public abstract class CommonParseController implements IParseController
     	return handler;
     }
 
-	protected abstract int[] getKeywordKinds();
+	protected int[] getKeywordKinds() {
+		return getLexer().getKeywordKinds();
+	}
 
     public Language getLanguage() {
         return fLanguage;
     }
 
-    public abstract AbstractLexer getLexer();
+	public AbstractLexer getLexer() {
+		return getParser().getLexer();
+	}
 
-    public abstract AbstractParser getParser();
+	public ISourcePositionLocator getNodeLocator() {
+		return new CommonNodeLocator(environment);
+	}
+
+	public AbstractParser getParser() {
+		return environment.getParser();
+	}
 
     public IPath getPath() {
     	return fFilePath;
@@ -163,6 +203,14 @@ public abstract class CommonParseController implements IParseController
 
     public ISourceProject getProject() {
     	return fProject;
+    }
+
+	public ILanguageSyntaxProperties getSyntaxProperties() {
+		return null;
+	}
+
+    public boolean getUseAST() {
+    	return useAST;
     }
 
     public Iterator<IToken> getTokenIterator(IRegion region) {
@@ -256,4 +304,49 @@ public abstract class CommonParseController implements IParseController
         String tokenKindNames[] = getParser().orderedTerminalSymbols();
     	return kind < tokenKindNames.length && fIsKeyword[kind];
     }
+
+	public Object parse(String contents, boolean scanOnly, IProgressMonitor monitor) {
+//		FIXME scanOnly appears to be false always
+//		System.out.println("Parse " + fLanguage + " scanOnly = " + scanOnly);
+		PMMonitor my_monitor = createProgressMonitor(monitor);
+		if (my_monitor.isCancelled())
+			return fCurrentAst; // TODO currentAst might (probably will) be inconsistent wrt the lex stream now
+		AbstractFileHandle fileHandle = getFileHandle();
+		environment = createEnvironment(fileHandle);
+		environment.getAnalyzer();		// Create parser
+		environment.setProblemHandler(createProblemHandler());
+		ASTandCST astAndCst = new ASTandCST(useAST);
+		fCurrentAst = astAndCst;
+		Reader reader = new StringReader(contents);
+		try {
+			IFileAnalyzer analyzer = environment.parseToTokens(reader, monitor);
+			if (analyzer != null) {
+				CSTNode cstNode = analyzer.parseToCST();
+				astAndCst.setCST(cstNode);
+				if (cstNode != null) {
+					URI uri = fileHandle.getURI();
+					Collection<? extends EObject> astNodes = analyzer.parseCSTtoAST(cstNode, uri);
+					if (astNodes != null) {
+						Resource resource = new XMIResourceImpl(uri);
+						resource.getContents().addAll(astNodes);
+						environment.initASTMapping(resource, cstNode);
+						astAndCst.setAST(resource);
+					}
+				}
+			}
+		} catch (IOException e) {
+            ErrorHandler.reportError("Failed to parse language " + getLanguage().getName() + " and input " + getPath() + ":", e);
+		} catch (CoreException e) {
+            ErrorHandler.reportError("Failed to parse language " + getLanguage().getName() + " and input " + getPath() + ":", e);
+		}
+		// FIXME my_monitor
+		cacheKeywordsOnce();
+		return fCurrentAst;
+	}
+
+	public void setUseAST(boolean useAST) {
+		this.useAST  = useAST;
+		if (fCurrentAst instanceof ASTandCST)
+			((ASTandCST)fCurrentAst).setUseAST(useAST);
+	}
 }

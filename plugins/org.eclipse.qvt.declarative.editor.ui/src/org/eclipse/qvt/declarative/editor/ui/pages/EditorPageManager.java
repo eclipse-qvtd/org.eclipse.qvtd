@@ -32,15 +32,15 @@ import org.eclipse.qvt.declarative.ecore.mappings.MappingConfigurationException;
 import org.eclipse.qvt.declarative.editor.ui.IMasterPageManager;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.ui.paged.PagedEditor;
+import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
 import org.eclipse.qvt.declarative.editor.ui.text.LazyFileEditorInput;
-import org.eclipse.qvt.declarative.editor.ui.text.LazyTextPageEditor;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseProjectHandle;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 
-public abstract class EditorPageManager extends AbstractPageManager<LazyTextPageEditor> implements IMasterPageManager
+public abstract class EditorPageManager extends AbstractPageManager<ITextEditorWithUndoContext> implements IMasterPageManager
 {
 	public static final class ByteArrayOutputStream2InputStream extends ByteArrayOutputStream
 	{
@@ -137,8 +137,9 @@ public abstract class EditorPageManager extends AbstractPageManager<LazyTextPage
 
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {}
 
-	protected abstract LazyTextPageEditor createEditor();
+	protected abstract ITextEditorWithUndoContext createEditor();
 
+	@Deprecated // Use UniversalTextEditor
 	protected LazyFileEditorInput createLazyEditorInput() throws CoreException {
 		IFile masterFile = pagedEditor.getEditorInputFile();
 		return new LazyFileEditorInput(pagedEditor.getTmpDir(), masterFile.getName(), getFileExtension());

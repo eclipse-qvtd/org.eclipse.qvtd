@@ -15,6 +15,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextDoubleClickStrategy;
 import org.eclipse.jface.text.ITextViewer;
 
+@Deprecated // Use UniversalTextEditor
 public class TextDoubleClickStrategy implements ITextDoubleClickStrategy {
 	protected ITextViewer fText;
 

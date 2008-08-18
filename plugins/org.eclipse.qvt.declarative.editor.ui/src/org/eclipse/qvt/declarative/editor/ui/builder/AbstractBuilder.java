@@ -43,6 +43,7 @@ import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseProjectHandle;
 import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
 import org.eclipse.qvt.declarative.parser.ui.preferences.QVTPreferences;
 
+@Deprecated // Use CommonBuilder
 public abstract class AbstractBuilder extends IncrementalProjectBuilder
 {
 	protected class DeltaVisitor implements IResourceDeltaVisitor

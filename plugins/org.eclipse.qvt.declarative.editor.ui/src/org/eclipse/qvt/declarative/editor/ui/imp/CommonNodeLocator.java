@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonNodeLocator.java,v 1.2 2008/08/11 08:02:37 ewillink Exp $
+ * $Id: CommonNodeLocator.java,v 1.3 2008/08/18 07:46:26 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -48,7 +48,7 @@ import org.eclipse.qvt.declarative.parser.utils.CommonCSTVisitor;
  * @since May 15, 2007
  * 
  */
-public abstract class CommonNodeLocator implements ISourcePositionLocator
+public class CommonNodeLocator implements ISourcePositionLocator
 {
 	protected final BasicEnvironment environment;
 	private int fStartOffset;

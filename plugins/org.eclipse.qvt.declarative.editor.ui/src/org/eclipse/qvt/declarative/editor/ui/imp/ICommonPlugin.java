@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ICommonPlugin.java,v 1.3 2008/08/10 13:47:02 ewillink Exp $
+ * $Id: ICommonPlugin.java,v 1.4 2008/08/18 07:46:26 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -27,5 +27,7 @@ public interface ICommonPlugin extends IPluginLog
 {
 	public Bundle getBundle();
 	public CommonEditorDefinition getEditorDefinition();
+	public String getID();
+	public String getLanguageName();
 	public void logException(String string, Throwable e);
 }

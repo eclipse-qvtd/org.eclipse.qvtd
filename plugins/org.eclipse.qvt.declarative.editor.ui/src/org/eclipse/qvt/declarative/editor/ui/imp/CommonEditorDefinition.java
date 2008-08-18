@@ -12,13 +12,14 @@
  * 
  * </copyright>
  *
- * $Id: CommonEditorDefinition.java,v 1.5 2008/08/14 07:57:49 ewillink Exp $
+ * $Id: CommonEditorDefinition.java,v 1.6 2008/08/18 07:46:26 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,11 +37,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 import org.eclipse.qvt.declarative.editor.Behavior;
 import org.eclipse.qvt.declarative.editor.EcoreNode;
 import org.eclipse.qvt.declarative.editor.EditorDefinition;
@@ -157,6 +160,10 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 
 	protected void installEditorDefinition(EditorDefinition editorDefinition) {
 		EcoreUtil.resolveAll(editorDefinition);
+	    Map<EObject, Collection<Setting>> unresolvedMap = EcoreUtil.UnresolvedProxyCrossReferencer.find(editorDefinition);
+		String diagnosis = EcoreUtils.diagnoseUnresolvedProxies(EcoreUtil.getURI(editorDefinition), unresolvedMap);
+		if (diagnosis != null)
+			QVTEditorPlugin.logError(diagnosis, null);
 		for (Node node : editorDefinition.getNode()) {
 			if (node instanceof EcoreNode) {
 				if (ecoreMap == null)

@@ -1,26 +1,30 @@
-/*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2007,2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: AbstractToggleNatureAction.java,v 1.2 2008/08/18 07:46:26 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
-import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
@@ -50,7 +54,14 @@ public abstract class AbstractToggleNatureAction implements IObjectActionDelegat
 							.getAdapter(IProject.class);
 				}
 				if (project != null) {
-					toggleNature(project);
+					String natureId = creationFactory.getNatureId();
+					try {
+						CommonNature nature = creationFactory.createNature();
+						if (!nature.removeFromProject(project))
+							nature.addToProject(project);
+					} catch (CoreException e) {
+						creationFactory.getPlugin().logException("Failed to toggle nature " + natureId, e);
+					}
 				}
 			}
 		}
@@ -73,40 +84,5 @@ public abstract class AbstractToggleNatureAction implements IObjectActionDelegat
 	 *      org.eclipse.ui.IWorkbenchPart)
 	 */
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
-	}
-
-	/**
-	 * Toggles sample nature on a project
-	 * 
-	 * @param project
-	 *            to have sample nature added or removed
-	 */
-	private void toggleNature(IProject project) {
-		String natureId = creationFactory.getNatureId();
-		try {
-			IProjectDescription description = project.getDescription();
-			String[] natures = description.getNatureIds();
-			for (int i = 0; i < natures.length; ++i) {
-				if (natureId.equals(natures[i])) {
-					// Remove the nature
-					String[] newNatures = new String[natures.length - 1];
-					System.arraycopy(natures, 0, newNatures, 0, i);
-					System.arraycopy(natures, i + 1, newNatures, i,
-							natures.length - i - 1);
-					description.setNatureIds(newNatures);
-					project.setDescription(description, null);
-					return;
-				}
-			}
-
-			// Add the nature
-			String[] newNatures = new String[natures.length + 1];
-			System.arraycopy(natures, 0, newNatures, 0, natures.length);
-			newNatures[natures.length] = natureId;
-			description.setNatureIds(newNatures);
-			project.setDescription(description, null);
-		} catch (CoreException e) {
-			QVTEditorPlugin.logError("Failed to toggle nature " + natureId, e);
-		}
 	}
 }

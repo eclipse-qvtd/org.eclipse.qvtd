@@ -18,6 +18,7 @@ import org.eclipse.qvt.declarative.editor.ui.text.TextKeywordDetector;
 /**
  * Defines a rule to recognise the QVT keywords.
  */
+@Deprecated // Use UniversalTextEditor
 public class EssentialOCLTextKeywordRule extends WordRule {
 
     public EssentialOCLTextKeywordRule(TextColorManager colorManager, IToken defaultToken) {

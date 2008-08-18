@@ -36,7 +36,7 @@ import org.eclipse.ui.texteditor.ITextEditorActionConstants;
  * If no content is available, as may be the case for an editor page in a multi-page editor that
  * has yet to be activated, a NullProvider satisfies the inherited requirement for a provider. 
  */
-public class LazyTextPageEditor extends TextEditor
+public class LazyTextPageEditor extends TextEditor implements ITextEditorWithUndoContext
 {
 	protected final IPageManager pageManager;
 	private IDocumentProvider activeDocumentProvider;

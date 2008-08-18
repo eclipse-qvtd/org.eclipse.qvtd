@@ -21,6 +21,7 @@ import org.eclipse.jface.text.rules.RuleBasedPartitionScanner;
  * Defines the scanner that provides the top level partitioing of a document
  * into its contributory content, comment regions.
  */
+@Deprecated // Use UniversalTextEditor
 public class TextPartitionScanner extends RuleBasedPartitionScanner {
 //	public final static String MULTI_LINE_COMMENT = "__multi_line_comment";
     private final static String[] configuredContentTypes =

@@ -13,6 +13,7 @@ package org.eclipse.qvt.declarative.editor.ui.text;
 import org.eclipse.jface.text.rules.IWhitespaceDetector;
 
 
+@Deprecated // Use UniversalTextEditor
 public class TextWhitespaceDetector implements IWhitespaceDetector {
 
 	public boolean isWhitespace(char c) {

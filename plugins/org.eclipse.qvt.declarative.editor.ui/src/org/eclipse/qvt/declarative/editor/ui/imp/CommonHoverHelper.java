@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonHoverHelper.java,v 1.1 2008/08/10 13:46:14 ewillink Exp $
+ * $Id: CommonHoverHelper.java,v 1.2 2008/08/18 07:46:26 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -119,7 +119,7 @@ public abstract class CommonHoverHelper extends HoverHelperBase implements IHove
 			}
 		}
 		if (docProvider != null) {
-			msg = (docProvider != null) ? docProvider.getDocumentation(helpNode, parseController) : null;
+			msg = docProvider.getDocumentation(helpNode, parseController);
 			if (msg != null)
 				return msg;
 		}

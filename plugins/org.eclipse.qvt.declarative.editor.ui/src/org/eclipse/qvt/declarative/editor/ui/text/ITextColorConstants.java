@@ -12,6 +12,7 @@ package org.eclipse.qvt.declarative.editor.ui.text;
 
 import org.eclipse.swt.graphics.RGB;
 
+@Deprecated // Use UniversalTextEditor
 public interface ITextColorConstants {
 	RGB DEFAULT =            		new RGB(  0,   0,   0);
 	RGB DOUBLE_QUOTED_STRING =      new RGB(  0,   0, 255);

@@ -83,7 +83,7 @@ public class TextPageManager extends EditorPageManager
 	    outputStream.write(unparser.getBytes());
 	}
 			
-	@Override protected LazyTextPageEditor createEditor() {
+	@Override protected ITextEditorWithUndoContext createEditor() {
 		return getCreationFactory().createTextEditor(this);
 	}
 
