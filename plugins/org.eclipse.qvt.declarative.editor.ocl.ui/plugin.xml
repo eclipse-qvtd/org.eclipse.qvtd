@@ -2,8 +2,8 @@
 <?eclipse version="3.2"?>
 <plugin>
 
-   <!--extension
-         id="OCLBuilder"
+   <extension
+         id="org.eclipse.qvt.declarative.editor.ocl.ui.OCLBuilder"
          name="OCL Project Builder"
          point="org.eclipse.core.resources.builders">
       <builder
@@ -12,20 +12,17 @@
                class="org.eclipse.qvt.declarative.editor.ocl.ui.OCLBuilder">
          </run>
       </builder>
-   </extension-->
-   <!--extension
-         id="oclProblem"
+   </extension>
+   <extension
+         id="org.eclipse.qvt.declarative.editor.ocl.ui.oclProblem"
          name="OCL Problem"
          point="org.eclipse.core.resources.markers">
       <super
             type="org.eclipse.core.resources.problemmarker">
       </super>
-      <persistent
-            value="true">
-      </persistent>
-   </extension-->
-   <!--extension
-         id="OCLNature"
+   </extension>
+   <extension
+         id="org.eclipse.qvt.declarative.editor.ocl.ui.OCLNature"
          name="OCL Project Nature"
          point="org.eclipse.core.resources.natures">
       <runtime>
@@ -36,8 +33,8 @@
       <builder
             id="org.eclipse.qvt.declarative.editor.ocl.ui.OCLBuilder">
       </builder>
-   </extension-->
-   <!--extension
+   </extension>
+   <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
             objectClass="org.eclipse.core.resources.IProject"
@@ -79,7 +76,7 @@
             </objectState>
          </visibility>
       </objectContribution>
-   </extension-->
+   </extension>
    <!--extension
          point="org.eclipse.ui.editors">
       <editor
@@ -183,6 +180,13 @@
             class="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLContentProposer"
             language="ocl">
       </proposer>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.editorActionContributions">
+      <editorActionContributor
+            class="org.eclipse.qvt.declarative.editor.ui.actions.CommonActionContributor"
+            language="ocl">
+      </editorActionContributor>
    </extension>
 
 </plugin>
