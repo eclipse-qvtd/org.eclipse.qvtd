@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonActionContributor.java,v 1.1 2008/08/18 07:46:26 ewillink Exp $
+ * $Id: CommonActionContributor.java,v 1.2 2008/08/18 20:36:56 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.actions;
 
@@ -35,5 +35,5 @@ public class CommonActionContributor extends DefaultLanguageActionsContributor
 		};
 	}
 
-	public static ResourceBundle ResBundle= ResourceBundle.getBundle("org.eclipse.qvt.declarative.editor.ui.imp.actions.ActionMessages");
+	public static ResourceBundle ResBundle = ResourceBundle.getBundle("org.eclipse.qvt.declarative.editor.ui.actions.ActionMessages");
 }
