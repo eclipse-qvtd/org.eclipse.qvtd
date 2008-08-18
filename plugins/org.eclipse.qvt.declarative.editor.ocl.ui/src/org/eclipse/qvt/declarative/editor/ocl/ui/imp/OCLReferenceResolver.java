@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLReferenceResolver.java,v 1.1 2008/08/14 07:51:10 ewillink Exp $
+ * $Id: OCLReferenceResolver.java,v 1.2 2008/08/18 07:42:37 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui.imp;
 
@@ -27,6 +27,7 @@ public class OCLReferenceResolver extends CommonReferenceResolver
 	 * Get the target for a given source node in the AST represented by a
 	 * given Parse Controller.
 	 */
+	@Override
 	public Object getLinkTarget(Object node, IParseController controller) {
 		// START_HERE
 		// Replace the given implementation with an implementation
