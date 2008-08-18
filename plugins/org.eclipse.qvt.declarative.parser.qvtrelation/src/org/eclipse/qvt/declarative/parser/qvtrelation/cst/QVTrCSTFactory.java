@@ -1,13 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2007, 2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: QVTrCSTFactory.java,v 1.2 2008/08/18 07:55:54 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.parser.qvtrelation.cst;
 
 import org.eclipse.emf.ecore.EFactory;
@@ -154,6 +160,24 @@ public interface QVTrCSTFactory extends EFactory {
 	 * @generated
 	 */
 	VarDeclarationCS createVarDeclarationCS();
+
+	/**
+	 * Returns a new object of class '<em>When CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>When CS</em>'.
+	 * @generated
+	 */
+	WhenCS createWhenCS();
+
+	/**
+	 * Returns a new object of class '<em>Where CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Where CS</em>'.
+	 * @generated
+	 */
+	WhereCS createWhereCS();
 
 	/**
 	 * Returns the package supported by this factory.

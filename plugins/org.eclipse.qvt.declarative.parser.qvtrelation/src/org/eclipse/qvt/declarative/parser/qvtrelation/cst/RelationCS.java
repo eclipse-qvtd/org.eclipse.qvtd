@@ -1,18 +1,23 @@
-/*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2007, 2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: RelationCS.java,v 1.2 2008/08/18 07:55:54 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.parser.qvtrelation.cst;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.cst.CSTNode;
-import org.eclipse.ocl.cst.OCLExpressionCS;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 
 /**
@@ -149,35 +154,55 @@ public interface RelationCS extends CSTNode {
 	EList<AbstractDomainCS> getDomain();
 
 	/**
-	 * Returns the value of the '<em><b>When</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.cst.OCLExpressionCS}.
+	 * Returns the value of the '<em><b>When</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>When</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>When</em>' containment reference list.
+	 * @return the value of the '<em>When</em>' containment reference.
+	 * @see #setWhen(WhenCS)
 	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.QVTrCSTPackage#getRelationCS_When()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<OCLExpressionCS> getWhen();
+	WhenCS getWhen();
 
 	/**
-	 * Returns the value of the '<em><b>Where</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.cst.OCLExpressionCS}.
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.RelationCS#getWhen <em>When</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>When</em>' containment reference.
+	 * @see #getWhen()
+	 * @generated
+	 */
+	void setWhen(WhenCS value);
+
+	/**
+	 * Returns the value of the '<em><b>Where</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Where</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Where</em>' containment reference list.
+	 * @return the value of the '<em>Where</em>' containment reference.
+	 * @see #setWhere(WhereCS)
 	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.QVTrCSTPackage#getRelationCS_Where()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<OCLExpressionCS> getWhere();
+	WhereCS getWhere();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.RelationCS#getWhere <em>Where</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Where</em>' containment reference.
+	 * @see #getWhere()
+	 * @generated
+	 */
+	void setWhere(WhereCS value);
 
 } // RelationCS

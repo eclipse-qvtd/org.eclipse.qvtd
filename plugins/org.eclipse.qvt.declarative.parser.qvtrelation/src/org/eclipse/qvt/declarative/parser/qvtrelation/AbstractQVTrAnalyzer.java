@@ -51,15 +51,15 @@ import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.ecore.VariableExp;
 import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
-import org.eclipse.qvt.declarative.ecore.QVTBase.QVTBaseFactory;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
 import org.eclipse.qvt.declarative.ecore.QVTBase.FunctionParameter;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Pattern;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Predicate;
+import org.eclipse.qvt.declarative.ecore.QVTBase.QVTBaseFactory;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.DomainPattern;
-import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationFactory;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Key;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationFactory;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationCallExp;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomain;
@@ -67,9 +67,9 @@ import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomainAssignment;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationImplementation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.CollectionTemplateExp;
-import org.eclipse.qvt.declarative.ecore.QVTTemplate.QVTTemplateFactory;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.ObjectTemplateExp;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem;
+import org.eclipse.qvt.declarative.ecore.QVTTemplate.QVTTemplateFactory;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.TemplateExp;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 import org.eclipse.qvt.declarative.modelregistry.util.ClassUtils;
@@ -94,6 +94,8 @@ import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TopLevelCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TransformationCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.UnitCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.VarDeclarationCS;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhenCS;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhereCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.environment.IQVTrEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtrelation.environment.QVTrDomainEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtrelation.environment.QVTrNestedEnvironment;
@@ -265,8 +267,8 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 			return;
 		}
 		for (int i = 0; i < invokedCount; i++) {
-			@SuppressWarnings("null") RelationDomain domain = (RelationDomain) invokedDomains.get(i);
-			@SuppressWarnings("null") OCLExpressionCS argument = invokingArguments.get(i);
+			RelationDomain domain = (RelationDomain) invokedDomains.get(i);
+			OCLExpressionCS argument = invokingArguments.get(i);
 			if (argument instanceof VariableExpCS)
 				env.createVariableDeclaration((VariableExpCS) argument, domain.getRootVariable().getType(), domain, true);
 		}
@@ -571,14 +573,14 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 				declareTemplateCS(domainEnv, templateCS, rootClassifier);
 			}
 		}
-		List<OCLExpressionCS> whenCSs = relationCS.getWhen();
-		List<OCLExpressionCS> whereCSs = relationCS.getWhere();
-		if ((whenCSs != null) && (whenCSs.size() > 0))
-			for (OCLExpressionCS whenCS : whenCSs)
-				declarePredicateCS(env, whenCS);
-		if ((whereCSs != null) && (whereCSs.size() > 0))
-			for (OCLExpressionCS whereCS : whereCSs)
-				declarePredicateCS(env, whereCS);
+		WhenCS whenCS = relationCS.getWhen();
+		WhereCS whereCS = relationCS.getWhere();
+		if ((whenCS != null) && (whenCS.getExpr().size() > 0))
+			for (OCLExpressionCS exprCS : whenCS.getExpr())
+				declarePredicateCS(env, exprCS);
+		if ((whereCS != null) && (whereCS.getExpr().size() > 0))
+			for (OCLExpressionCS exprCS : whereCS.getExpr())
+				declarePredicateCS(env, exprCS);
 		env.createReferencedVariables(this);
 		IdentifierCS overridesCS = relationCS.getOverrides();
 		if (overridesCS != null) {
@@ -597,16 +599,16 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 			if (domainCS instanceof DomainCS)
 				defineDomainCS(env, domain, (DomainCS) domainCS);
 		}
-		if ((whenCSs != null) && (whenCSs.size() > 0)) {
+		if ((whenCS != null) && (whenCS.getExpr().size() > 0)) {
 			Pattern pattern = QVTBaseFactory.eINSTANCE.createPattern();
-			env.initASTMapping(pattern, relationCS);
-			definePredicateCS(env, pattern, whenCSs);
+			env.initASTMapping(pattern, whenCS);
+			definePredicateCS(env, pattern, whenCS.getExpr());
 			relation.setWhen(pattern);
 		}
-		if ((whereCSs != null) && (whereCSs.size() > 0)) {
+		if ((whereCS != null) && (whereCS.getExpr().size() > 0)) {
 			Pattern pattern = QVTBaseFactory.eINSTANCE.createPattern();
-			env.initASTMapping(pattern, relationCS);
-			definePredicateCS(env, pattern, whereCSs);
+			env.initASTMapping(pattern, whereCS);
+			definePredicateCS(env, pattern, whereCS.getExpr());
 			relation.setWhere(pattern);
 		}
 		return relation;

@@ -1,13 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2007, 2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: QVTrCSTPackageImpl.java,v 1.3 2008/08/18 07:55:54 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -22,14 +28,14 @@ import org.eclipse.qvt.declarative.parser.qvtrelation.cst.AbstractDomainCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.CollectionTemplateCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.DefaultValueCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.DomainCS;
-import org.eclipse.qvt.declarative.parser.qvtrelation.cst.QVTrCSTFactory;
-import org.eclipse.qvt.declarative.parser.qvtrelation.cst.QVTrCSTPackage;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.KeyDeclCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.ModelDeclCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.ObjectTemplateCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.ParamDeclarationCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.PrimitiveTypeDomainCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.PropertyTemplateCS;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.QVTrCSTFactory;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.QVTrCSTPackage;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.QueryCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.RelationCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TemplateCS;
@@ -38,6 +44,8 @@ import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TopLevelCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TransformationCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.UnitCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.VarDeclarationCS;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhenCS;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhereCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -164,6 +172,20 @@ public class QVTrCSTPackageImpl extends EPackageImpl implements QVTrCSTPackage {
 	 * @generated
 	 */
 	private EClass varDeclarationCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass whenCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass whereCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -807,6 +829,42 @@ public class QVTrCSTPackageImpl extends EPackageImpl implements QVTrCSTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getWhenCS() {
+		return whenCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getWhenCS_Expr() {
+		return (EReference)whenCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getWhereCS() {
+		return whereCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getWhereCS_Expr() {
+		return (EReference)whereCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public QVTrCSTFactory getQVTrCSTFactory() {
 		return (QVTrCSTFactory)getEFactoryInstance();
 	}
@@ -939,6 +997,12 @@ public class QVTrCSTPackageImpl extends EPackageImpl implements QVTrCSTPackage {
 		varDeclarationCSEClass = createEClass(VAR_DECLARATION_CS);
 		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__VAR_DECLARATION_ID);
 		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__TYPE);
+
+		whenCSEClass = createEClass(WHEN_CS);
+		createEReference(whenCSEClass, WHEN_CS__EXPR);
+
+		whereCSEClass = createEClass(WHERE_CS);
+		createEReference(whereCSEClass, WHERE_CS__EXPR);
 	}
 
 	/**
@@ -994,6 +1058,8 @@ public class QVTrCSTPackageImpl extends EPackageImpl implements QVTrCSTPackage {
 		transformationCSEClass.getESuperTypes().add(theCSTPackage.getCSTNode());
 		unitCSEClass.getESuperTypes().add(theCSTPackage.getCSTNode());
 		varDeclarationCSEClass.getESuperTypes().add(theCSTPackage.getCSTNode());
+		whenCSEClass.getESuperTypes().add(theCSTPackage.getCSTNode());
+		whereCSEClass.getESuperTypes().add(theCSTPackage.getCSTNode());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(abstractDomainCSEClass, AbstractDomainCS.class, "AbstractDomainCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1051,8 +1117,8 @@ public class QVTrCSTPackageImpl extends EPackageImpl implements QVTrCSTPackage {
 		initEReference(getRelationCS_Overrides(), theQVTCSTPackage.getIdentifierCS(), null, "overrides", null, 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationCS_VarDeclaration(), this.getVarDeclarationCS(), null, "varDeclaration", null, 0, -1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationCS_Domain(), this.getAbstractDomainCS(), null, "domain", null, 0, -1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRelationCS_When(), theCSTPackage.getOCLExpressionCS(), null, "when", null, 0, -1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRelationCS_Where(), theCSTPackage.getOCLExpressionCS(), null, "where", null, 0, -1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRelationCS_When(), this.getWhenCS(), null, "when", null, 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRelationCS_Where(), this.getWhereCS(), null, "where", null, 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(templateCSEClass, TemplateCS.class, "TemplateCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTemplateCS_GuardExpression(), theCSTPackage.getOCLExpressionCS(), null, "guardExpression", null, 0, 1, TemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1078,6 +1144,12 @@ public class QVTrCSTPackageImpl extends EPackageImpl implements QVTrCSTPackage {
 		initEClass(varDeclarationCSEClass, VarDeclarationCS.class, "VarDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVarDeclarationCS_VarDeclarationId(), theQVTCSTPackage.getIdentifierCS(), null, "varDeclarationId", null, 0, -1, VarDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVarDeclarationCS_Type(), theCSTPackage.getTypeCS(), null, "type", null, 0, 1, VarDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(whenCSEClass, WhenCS.class, "WhenCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getWhenCS_Expr(), theCSTPackage.getOCLExpressionCS(), null, "expr", null, 1, -1, WhenCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(whereCSEClass, WhereCS.class, "WhereCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getWhereCS_Expr(), theCSTPackage.getOCLExpressionCS(), null, "expr", null, 1, -1, WhereCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -396,39 +396,23 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
-	relationCS_preWhenExpression -> relationCS_postDomain when '{'
-	relationCS_preWhenExpression ::= relationCS_preWhenExpression oclExpressionCS ';'
-		/.$BeginJava
-					RelationCS result = (RelationCS)$getSym(1);
-					OCLExpressionCS oclExpressionCS = (OCLExpressionCS)$getSym(2);
-					result.getWhen().add(oclExpressionCS);
-					setOffsets(result, result, getIToken($getToken(3)));
-					$setResult(result);
-		  $EndJava
-		./
 	relationCS_postWhen -> relationCS_postDomain
-	relationCS_postWhen ::= relationCS_preWhenExpression '}'
+	relationCS_postWhen ::= relationCS_postDomain whenCS
 		/.$BeginJava
 					RelationCS result = (RelationCS)$getSym(1);
-					setOffsets(result, result, getIToken($getToken(2)));
-					$setResult(result);
-		  $EndJava
-		./
-	relationCS_preWhereExpression -> relationCS_postWhen where '{'
-	relationCS_preWhereExpression ::= relationCS_preWhereExpression oclExpressionCS ';'
-		/.$BeginJava
-					RelationCS result = (RelationCS)$getSym(1);
-					OCLExpressionCS oclExpressionCS = (OCLExpressionCS)$getSym(2);
-					result.getWhere().add(oclExpressionCS);
-					setOffsets(result, result, getIToken($getToken(3)));
+					WhenCS whenCS = (WhenCS)$getSym(2);
+					result.setWhen(whenCS);
+					setOffsets(result, result, whenCS);
 					$setResult(result);
 		  $EndJava
 		./
 	relationCS_postWhere -> relationCS_postWhen
-	relationCS_postWhere ::= relationCS_preWhereExpression '}'
+	relationCS_postWhere ::= relationCS_postWhen whereCS
 		/.$BeginJava
 					RelationCS result = (RelationCS)$getSym(1);
-					setOffsets(result, result, getIToken($getToken(2)));
+					WhereCS whereCS = (WhereCS)$getSym(2);
+					result.setWhere(whereCS);
+					setOffsets(result, result, whereCS);
 					$setResult(result);
 		  $EndJava
 		./
@@ -439,6 +423,58 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
+
+	whenCS_0 ::= when '{'
+		/.$BeginJava
+					WhenCS result = QVTrCSTFactory.eINSTANCE.createWhenCS();
+					setOffsets(result, getIToken($getToken(1)), getIToken($getToken(2)));
+					$setResult(result);
+		  $EndJava
+		./
+	whenCS_1 -> whenCS_0
+	whenCS_1 ::= whenCS_1 oclExpressionCS ';'
+		/.$BeginJava
+					WhenCS result = (WhenCS)$getSym(1);
+					OCLExpressionCS oclExpressionCS = (OCLExpressionCS)$getSym(2);
+					result.getExpr().add(oclExpressionCS);
+					setOffsets(result, result, getIToken($getToken(3)));
+					$setResult(result);
+		  $EndJava
+		./
+	whenCS ::= whenCS_1 '}'
+		/.$BeginJava
+					WhenCS result = (WhenCS)$getSym(1);
+					setOffsets(result, result, getIToken($getToken(2)));
+					$setResult(result);
+		  $EndJava
+		./
+
+
+	whereCS_0 ::= where '{'
+		/.$BeginJava
+					WhereCS result = QVTrCSTFactory.eINSTANCE.createWhereCS();
+					setOffsets(result, getIToken($getToken(1)), getIToken($getToken(2)));
+					$setResult(result);
+		  $EndJava
+		./
+	whereCS_1 -> whereCS_0
+	whereCS_1 ::= whereCS_1 oclExpressionCS ';'
+		/.$BeginJava
+					WhereCS result = (WhereCS)$getSym(1);
+					OCLExpressionCS oclExpressionCS = (OCLExpressionCS)$getSym(2);
+					result.getExpr().add(oclExpressionCS);
+					setOffsets(result, result, getIToken($getToken(3)));
+					$setResult(result);
+		  $EndJava
+		./
+	whereCS ::= whereCS_1 '}'
+		/.$BeginJava
+					WhereCS result = (WhereCS)$getSym(1);
+					setOffsets(result, result, getIToken($getToken(2)));
+					$setResult(result);
+		  $EndJava
+		./
+
 
 --<varDeclaration> ::= <identifier> (, <identifier>)* ':' <TypeCS> ';'
 	varDeclarationCS_0 ::= identifierCS

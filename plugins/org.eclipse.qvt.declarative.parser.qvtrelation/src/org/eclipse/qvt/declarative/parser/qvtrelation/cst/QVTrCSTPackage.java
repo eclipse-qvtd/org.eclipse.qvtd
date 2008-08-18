@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTrCSTPackage.java,v 1.2 2008/08/14 07:57:22 ewillink Exp $
+ * $Id: QVTrCSTPackage.java,v 1.3 2008/08/18 07:55:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtrelation.cst;
 
@@ -996,7 +996,7 @@ public interface QVTrCSTPackage extends EPackage {
 	int RELATION_CS__DOMAIN = CSTPackage.CST_NODE_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>When</b></em>' containment reference list.
+	 * The feature id for the '<em><b>When</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1005,7 +1005,7 @@ public interface QVTrCSTPackage extends EPackage {
 	int RELATION_CS__WHEN = CSTPackage.CST_NODE_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Where</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Where</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1259,6 +1259,98 @@ public interface QVTrCSTPackage extends EPackage {
 	 */
 	int VAR_DECLARATION_CS_FEATURE_COUNT = CSTPackage.CST_NODE_FEATURE_COUNT + 2;
 
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl.WhenCSImpl <em>When CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl.WhenCSImpl
+	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl.QVTrCSTPackageImpl#getWhenCS()
+	 * @generated
+	 */
+	int WHEN_CS = 18;
+
+	/**
+	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHEN_CS__START_TOKEN = CSTPackage.CST_NODE__START_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>End Token</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHEN_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>Expr</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHEN_CS__EXPR = CSTPackage.CST_NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>When CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHEN_CS_FEATURE_COUNT = CSTPackage.CST_NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl.WhereCSImpl <em>Where CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl.WhereCSImpl
+	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl.QVTrCSTPackageImpl#getWhereCS()
+	 * @generated
+	 */
+	int WHERE_CS = 19;
+
+	/**
+	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHERE_CS__START_TOKEN = CSTPackage.CST_NODE__START_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>End Token</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHERE_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>Expr</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHERE_CS__EXPR = CSTPackage.CST_NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Where CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHERE_CS_FEATURE_COUNT = CSTPackage.CST_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.AbstractDomainCS <em>Abstract Domain CS</em>}'.
@@ -1754,10 +1846,10 @@ public interface QVTrCSTPackage extends EPackage {
 	EReference getRelationCS_Domain();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.RelationCS#getWhen <em>When</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.RelationCS#getWhen <em>When</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>When</em>'.
+	 * @return the meta object for the containment reference '<em>When</em>'.
 	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.RelationCS#getWhen()
 	 * @see #getRelationCS()
 	 * @generated
@@ -1765,10 +1857,10 @@ public interface QVTrCSTPackage extends EPackage {
 	EReference getRelationCS_When();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.RelationCS#getWhere <em>Where</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.RelationCS#getWhere <em>Where</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Where</em>'.
+	 * @return the meta object for the containment reference '<em>Where</em>'.
 	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.RelationCS#getWhere()
 	 * @see #getRelationCS()
 	 * @generated
@@ -1956,6 +2048,48 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getVarDeclarationCS_Type();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhenCS <em>When CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>When CS</em>'.
+	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhenCS
+	 * @generated
+	 */
+	EClass getWhenCS();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhenCS#getExpr <em>Expr</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Expr</em>'.
+	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhenCS#getExpr()
+	 * @see #getWhenCS()
+	 * @generated
+	 */
+	EReference getWhenCS_Expr();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhereCS <em>Where CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Where CS</em>'.
+	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhereCS
+	 * @generated
+	 */
+	EClass getWhereCS();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhereCS#getExpr <em>Expr</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Expr</em>'.
+	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhereCS#getExpr()
+	 * @see #getWhereCS()
+	 * @generated
+	 */
+	EReference getWhereCS_Expr();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2374,7 +2508,7 @@ public interface QVTrCSTPackage extends EPackage {
 		EReference RELATION_CS__DOMAIN = eINSTANCE.getRelationCS_Domain();
 
 		/**
-		 * The meta object literal for the '<em><b>When</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>When</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2382,7 +2516,7 @@ public interface QVTrCSTPackage extends EPackage {
 		EReference RELATION_CS__WHEN = eINSTANCE.getRelationCS_When();
 
 		/**
-		 * The meta object literal for the '<em><b>Where</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Where</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2534,6 +2668,42 @@ public interface QVTrCSTPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VAR_DECLARATION_CS__TYPE = eINSTANCE.getVarDeclarationCS_Type();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl.WhenCSImpl <em>When CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl.WhenCSImpl
+		 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl.QVTrCSTPackageImpl#getWhenCS()
+		 * @generated
+		 */
+		EClass WHEN_CS = eINSTANCE.getWhenCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Expr</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WHEN_CS__EXPR = eINSTANCE.getWhenCS_Expr();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl.WhereCSImpl <em>Where CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl.WhereCSImpl
+		 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl.QVTrCSTPackageImpl#getWhereCS()
+		 * @generated
+		 */
+		EClass WHERE_CS = eINSTANCE.getWhereCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Expr</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WHERE_CS__EXPR = eINSTANCE.getWhereCS_Expr();
 
 	}
 

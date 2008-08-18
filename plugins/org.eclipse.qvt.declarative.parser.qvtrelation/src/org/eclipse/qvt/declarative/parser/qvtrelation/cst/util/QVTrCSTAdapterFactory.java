@@ -1,13 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2007, 2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: QVTrCSTAdapterFactory.java,v 1.3 2008/08/18 07:55:54 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.parser.qvtrelation.cst.util;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -18,6 +24,7 @@ import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.cst.OCLExpressionCS;
 import org.eclipse.qvt.declarative.parser.environment.IHasName;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.*;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.AbstractDomainCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.CollectionTemplateCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.DefaultValueCS;
@@ -165,6 +172,14 @@ public class QVTrCSTAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseVarDeclarationCS(VarDeclarationCS object) {
 				return createVarDeclarationCSAdapter();
+			}
+			@Override
+			public Adapter caseWhenCS(WhenCS object) {
+				return createWhenCSAdapter();
+			}
+			@Override
+			public Adapter caseWhereCS(WhereCS object) {
+				return createWhereCSAdapter();
 			}
 			@Override
 			public Adapter caseCSTNode(CSTNode object) {
@@ -339,6 +354,34 @@ public class QVTrCSTAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVarDeclarationCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhenCS <em>When CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhenCS
+	 * @generated
+	 */
+	public Adapter createWhenCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhereCS <em>Where CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhereCS
+	 * @generated
+	 */
+	public Adapter createWhereCSAdapter() {
 		return null;
 	}
 

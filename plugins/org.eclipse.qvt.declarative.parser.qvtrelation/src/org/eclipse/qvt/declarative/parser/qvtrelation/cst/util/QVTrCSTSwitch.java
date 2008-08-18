@@ -1,13 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2007, 2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: QVTrCSTSwitch.java,v 1.3 2008/08/18 07:55:54 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.parser.qvtrelation.cst.util;
 
 import java.util.List;
@@ -18,6 +24,7 @@ import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.cst.OCLExpressionCS;
 import org.eclipse.qvt.declarative.parser.environment.IHasName;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.*;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.AbstractDomainCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.CollectionTemplateCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.DefaultValueCS;
@@ -259,6 +266,20 @@ public class QVTrCSTSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTrCSTPackage.WHEN_CS: {
+				WhenCS whenCS = (WhenCS)theEObject;
+				T result = caseWhenCS(whenCS);
+				if (result == null) result = caseCSTNode(whenCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTrCSTPackage.WHERE_CS: {
+				WhereCS whereCS = (WhereCS)theEObject;
+				T result = caseWhereCS(whereCS);
+				if (result == null) result = caseCSTNode(whereCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -410,6 +431,36 @@ public class QVTrCSTSwitch<T> {
 	 * @generated
 	 */
 	public T caseVarDeclarationCS(VarDeclarationCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>When CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>When CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWhenCS(WhenCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Where CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Where CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWhereCS(WhereCS object) {
 		return null;
 	}
 

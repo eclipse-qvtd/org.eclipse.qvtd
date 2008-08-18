@@ -1,13 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2007, 2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: ObjectTemplateCSImpl.java,v 1.2 2008/08/18 07:55:54 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl;
 
 import java.util.Collection;
@@ -20,9 +26,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.qvt.declarative.parser.qvtrelation.cst.QVTrCSTPackage;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.ObjectTemplateCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.PropertyTemplateCS;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.QVTrCSTPackage;
 
 /**
  * <!-- begin-user-doc -->

@@ -1,13 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2007, 2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: RelationCSImpl.java,v 1.2 2008/08/18 07:55:54 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl;
 
 import java.util.Collection;
@@ -20,13 +26,14 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.cst.OCLExpressionCS;
 import org.eclipse.ocl.cst.impl.CSTNodeImpl;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.AbstractDomainCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.QVTrCSTPackage;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.RelationCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.VarDeclarationCS;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhenCS;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhereCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -109,24 +116,24 @@ public class RelationCSImpl extends CSTNodeImpl implements RelationCS {
 	protected EList<AbstractDomainCS> domain;
 
 	/**
-	 * The cached value of the '{@link #getWhen() <em>When</em>}' containment reference list.
+	 * The cached value of the '{@link #getWhen() <em>When</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getWhen()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<OCLExpressionCS> when;
+	protected WhenCS when;
 
 	/**
-	 * The cached value of the '{@link #getWhere() <em>Where</em>}' containment reference list.
+	 * The cached value of the '{@link #getWhere() <em>Where</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getWhere()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<OCLExpressionCS> where;
+	protected WhereCS where;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -283,10 +290,7 @@ public class RelationCSImpl extends CSTNodeImpl implements RelationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<OCLExpressionCS> getWhen() {
-		if (when == null) {
-			when = new EObjectContainmentEList<OCLExpressionCS>(OCLExpressionCS.class, this, QVTrCSTPackage.RELATION_CS__WHEN);
-		}
+	public WhenCS getWhen() {
 		return when;
 	}
 
@@ -295,11 +299,76 @@ public class RelationCSImpl extends CSTNodeImpl implements RelationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<OCLExpressionCS> getWhere() {
-		if (where == null) {
-			where = new EObjectContainmentEList<OCLExpressionCS>(OCLExpressionCS.class, this, QVTrCSTPackage.RELATION_CS__WHERE);
+	public NotificationChain basicSetWhen(WhenCS newWhen, NotificationChain msgs) {
+		WhenCS oldWhen = when;
+		when = newWhen;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrCSTPackage.RELATION_CS__WHEN, oldWhen, newWhen);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWhen(WhenCS newWhen) {
+		if (newWhen != when) {
+			NotificationChain msgs = null;
+			if (when != null)
+				msgs = ((InternalEObject)when).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrCSTPackage.RELATION_CS__WHEN, null, msgs);
+			if (newWhen != null)
+				msgs = ((InternalEObject)newWhen).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrCSTPackage.RELATION_CS__WHEN, null, msgs);
+			msgs = basicSetWhen(newWhen, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrCSTPackage.RELATION_CS__WHEN, newWhen, newWhen));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WhereCS getWhere() {
 		return where;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetWhere(WhereCS newWhere, NotificationChain msgs) {
+		WhereCS oldWhere = where;
+		where = newWhere;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrCSTPackage.RELATION_CS__WHERE, oldWhere, newWhere);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWhere(WhereCS newWhere) {
+		if (newWhere != where) {
+			NotificationChain msgs = null;
+			if (where != null)
+				msgs = ((InternalEObject)where).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrCSTPackage.RELATION_CS__WHERE, null, msgs);
+			if (newWhere != null)
+				msgs = ((InternalEObject)newWhere).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrCSTPackage.RELATION_CS__WHERE, null, msgs);
+			msgs = basicSetWhere(newWhere, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrCSTPackage.RELATION_CS__WHERE, newWhere, newWhere));
 	}
 
 	/**
@@ -319,9 +388,9 @@ public class RelationCSImpl extends CSTNodeImpl implements RelationCS {
 			case QVTrCSTPackage.RELATION_CS__DOMAIN:
 				return ((InternalEList<?>)getDomain()).basicRemove(otherEnd, msgs);
 			case QVTrCSTPackage.RELATION_CS__WHEN:
-				return ((InternalEList<?>)getWhen()).basicRemove(otherEnd, msgs);
+				return basicSetWhen(null, msgs);
 			case QVTrCSTPackage.RELATION_CS__WHERE:
-				return ((InternalEList<?>)getWhere()).basicRemove(otherEnd, msgs);
+				return basicSetWhere(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -379,12 +448,10 @@ public class RelationCSImpl extends CSTNodeImpl implements RelationCS {
 				getDomain().addAll((Collection<? extends AbstractDomainCS>)newValue);
 				return;
 			case QVTrCSTPackage.RELATION_CS__WHEN:
-				getWhen().clear();
-				getWhen().addAll((Collection<? extends OCLExpressionCS>)newValue);
+				setWhen((WhenCS)newValue);
 				return;
 			case QVTrCSTPackage.RELATION_CS__WHERE:
-				getWhere().clear();
-				getWhere().addAll((Collection<? extends OCLExpressionCS>)newValue);
+				setWhere((WhereCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -414,10 +481,10 @@ public class RelationCSImpl extends CSTNodeImpl implements RelationCS {
 				getDomain().clear();
 				return;
 			case QVTrCSTPackage.RELATION_CS__WHEN:
-				getWhen().clear();
+				setWhen((WhenCS)null);
 				return;
 			case QVTrCSTPackage.RELATION_CS__WHERE:
-				getWhere().clear();
+				setWhere((WhereCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -442,9 +509,9 @@ public class RelationCSImpl extends CSTNodeImpl implements RelationCS {
 			case QVTrCSTPackage.RELATION_CS__DOMAIN:
 				return domain != null && !domain.isEmpty();
 			case QVTrCSTPackage.RELATION_CS__WHEN:
-				return when != null && !when.isEmpty();
+				return when != null;
 			case QVTrCSTPackage.RELATION_CS__WHERE:
-				return where != null && !where.isEmpty();
+				return where != null;
 		}
 		return super.eIsSet(featureID);
 	}

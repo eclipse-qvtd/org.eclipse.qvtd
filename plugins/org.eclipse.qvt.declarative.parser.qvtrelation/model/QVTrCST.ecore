@@ -90,11 +90,9 @@
           eType="#//cst/VarDeclarationCS" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="domain" upperBound="-1"
           eType="#//cst/AbstractDomainCS" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="when" upperBound="-1"
-          eType="ecore:EClass ../../org.eclipse.ocl/model/OCLCST.ecore#//cst/OCLExpressionCS"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="when" eType="#//cst/WhenCS"
           containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="where" upperBound="-1"
-          eType="ecore:EClass ../../org.eclipse.ocl/model/OCLCST.ecore#//cst/OCLExpressionCS"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="where" eType="#//cst/WhereCS"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TemplateCS" abstract="true" eSuperTypes="#//cst/TemplateVariableCS ../../org.eclipse.ocl/model/OCLCST.ecore#//cst/OCLExpressionCS">
@@ -136,6 +134,16 @@
           eType="ecore:EClass ../../org.eclipse.qvt.declarative.parser/model/QVTCST.ecore#//cst/IdentifierCS"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.ocl/model/OCLCST.ecore#//cst/TypeCS"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="WhenCS" eSuperTypes="../../org.eclipse.ocl/model/OCLCST.ecore#//cst/CSTNode">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1"
+          upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl/model/OCLCST.ecore#//cst/OCLExpressionCS"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="WhereCS" eSuperTypes="../../org.eclipse.ocl/model/OCLCST.ecore#//cst/CSTNode">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1"
+          upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl/model/OCLCST.ecore#//cst/OCLExpressionCS"
           containment="true"/>
     </eClassifiers>
   </eSubpackages>

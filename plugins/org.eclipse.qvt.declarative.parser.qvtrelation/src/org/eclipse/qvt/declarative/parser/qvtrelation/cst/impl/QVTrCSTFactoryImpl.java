@@ -1,13 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2007, 2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: QVTrCSTFactoryImpl.java,v 1.3 2008/08/18 07:55:54 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl;
 
 import org.eclipse.emf.ecore.EClass;
@@ -32,6 +38,8 @@ import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TopLevelCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TransformationCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.UnitCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.VarDeclarationCS;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhenCS;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhereCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -92,6 +100,8 @@ public class QVTrCSTFactoryImpl extends EFactoryImpl implements QVTrCSTFactory {
 			case QVTrCSTPackage.TRANSFORMATION_CS: return createTransformationCS();
 			case QVTrCSTPackage.UNIT_CS: return createUnitCS();
 			case QVTrCSTPackage.VAR_DECLARATION_CS: return createVarDeclarationCS();
+			case QVTrCSTPackage.WHEN_CS: return createWhenCS();
+			case QVTrCSTPackage.WHERE_CS: return createWhereCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -235,6 +245,26 @@ public class QVTrCSTFactoryImpl extends EFactoryImpl implements QVTrCSTFactory {
 	public VarDeclarationCS createVarDeclarationCS() {
 		VarDeclarationCSImpl varDeclarationCS = new VarDeclarationCSImpl();
 		return varDeclarationCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WhenCS createWhenCS() {
+		WhenCSImpl whenCS = new WhenCSImpl();
+		return whenCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WhereCS createWhereCS() {
+		WhereCSImpl whereCS = new WhereCSImpl();
+		return whereCS;
 	}
 
 	/**

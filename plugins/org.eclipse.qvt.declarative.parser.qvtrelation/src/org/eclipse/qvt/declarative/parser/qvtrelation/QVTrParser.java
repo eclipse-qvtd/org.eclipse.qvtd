@@ -16,7 +16,7 @@
 *
 * </copyright>
 *
-* $Id: QVTrParser.java,v 1.3 2008/08/14 07:57:22 ewillink Exp $
+* $Id: QVTrParser.java,v 1.4 2008/08/18 07:55:54 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;
@@ -2371,68 +2371,116 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 283:  relationCS_preWhenExpression ::= relationCS_preWhenExpression oclExpressionCS ;
+			// Rule 283:  relationCS_postWhen ::= relationCS_postDomain whenCS
 			//
 			case 283: {
 				
 				RelationCS result = (RelationCS)dtParser.getSym(1);
-				OCLExpressionCS oclExpressionCS = (OCLExpressionCS)dtParser.getSym(2);
-				result.getWhen().add(oclExpressionCS);
-				setOffsets(result, result, getIToken(dtParser.getToken(3)));
+				WhenCS whenCS = (WhenCS)dtParser.getSym(2);
+				result.setWhen(whenCS);
+				setOffsets(result, result, whenCS);
 				dtParser.setSym1(result);
 	  		  break;
 			}
 	 
 			//
-			// Rule 285:  relationCS_postWhen ::= relationCS_preWhenExpression }
+			// Rule 285:  relationCS_postWhere ::= relationCS_postWhen whereCS
 			//
 			case 285: {
 				
 				RelationCS result = (RelationCS)dtParser.getSym(1);
+				WhereCS whereCS = (WhereCS)dtParser.getSym(2);
+				result.setWhere(whereCS);
+				setOffsets(result, result, whereCS);
+				dtParser.setSym1(result);
+	  		  break;
+			}
+	 
+			//
+			// Rule 286:  relationCS ::= relationCS_postWhere }
+			//
+			case 286: {
+				
+				RelationCS result = (RelationCS)dtParser.getSym(1);
 				setOffsets(result, result, getIToken(dtParser.getToken(2)));
 				dtParser.setSym1(result);
 	  		  break;
 			}
 	 
 			//
-			// Rule 287:  relationCS_preWhereExpression ::= relationCS_preWhereExpression oclExpressionCS ;
+			// Rule 287:  whenCS_0 ::= when {
 			//
 			case 287: {
 				
-				RelationCS result = (RelationCS)dtParser.getSym(1);
+				WhenCS result = QVTrCSTFactory.eINSTANCE.createWhenCS();
+				setOffsets(result, getIToken(dtParser.getToken(1)), getIToken(dtParser.getToken(2)));
+				dtParser.setSym1(result);
+	  		  break;
+			}
+	 
+			//
+			// Rule 289:  whenCS_1 ::= whenCS_1 oclExpressionCS ;
+			//
+			case 289: {
+				
+				WhenCS result = (WhenCS)dtParser.getSym(1);
 				OCLExpressionCS oclExpressionCS = (OCLExpressionCS)dtParser.getSym(2);
-				result.getWhere().add(oclExpressionCS);
+				result.getExpr().add(oclExpressionCS);
 				setOffsets(result, result, getIToken(dtParser.getToken(3)));
 				dtParser.setSym1(result);
 	  		  break;
 			}
 	 
 			//
-			// Rule 289:  relationCS_postWhere ::= relationCS_preWhereExpression }
-			//
-			case 289: {
-				
-				RelationCS result = (RelationCS)dtParser.getSym(1);
-				setOffsets(result, result, getIToken(dtParser.getToken(2)));
-				dtParser.setSym1(result);
-	  		  break;
-			}
-	 
-			//
-			// Rule 290:  relationCS ::= relationCS_postWhere }
+			// Rule 290:  whenCS ::= whenCS_1 }
 			//
 			case 290: {
 				
-				RelationCS result = (RelationCS)dtParser.getSym(1);
+				WhenCS result = (WhenCS)dtParser.getSym(1);
 				setOffsets(result, result, getIToken(dtParser.getToken(2)));
 				dtParser.setSym1(result);
 	  		  break;
 			}
 	 
 			//
-			// Rule 291:  varDeclarationCS_0 ::= identifierCS
+			// Rule 291:  whereCS_0 ::= where {
 			//
 			case 291: {
+				
+				WhereCS result = QVTrCSTFactory.eINSTANCE.createWhereCS();
+				setOffsets(result, getIToken(dtParser.getToken(1)), getIToken(dtParser.getToken(2)));
+				dtParser.setSym1(result);
+	  		  break;
+			}
+	 
+			//
+			// Rule 293:  whereCS_1 ::= whereCS_1 oclExpressionCS ;
+			//
+			case 293: {
+				
+				WhereCS result = (WhereCS)dtParser.getSym(1);
+				OCLExpressionCS oclExpressionCS = (OCLExpressionCS)dtParser.getSym(2);
+				result.getExpr().add(oclExpressionCS);
+				setOffsets(result, result, getIToken(dtParser.getToken(3)));
+				dtParser.setSym1(result);
+	  		  break;
+			}
+	 
+			//
+			// Rule 294:  whereCS ::= whereCS_1 }
+			//
+			case 294: {
+				
+				WhereCS result = (WhereCS)dtParser.getSym(1);
+				setOffsets(result, result, getIToken(dtParser.getToken(2)));
+				dtParser.setSym1(result);
+	  		  break;
+			}
+	 
+			//
+			// Rule 295:  varDeclarationCS_0 ::= identifierCS
+			//
+			case 295: {
 				
 				IdentifierCS identifierCS = (IdentifierCS)dtParser.getSym(1);
 				VarDeclarationCS result = QVTrCSTFactory.eINSTANCE.createVarDeclarationCS();
@@ -2443,9 +2491,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 292:  varDeclarationCS_0 ::= varDeclarationCS_0 , identifierCS
+			// Rule 296:  varDeclarationCS_0 ::= varDeclarationCS_0 , identifierCS
 			//
-			case 292: {
+			case 296: {
 				
 				IdentifierCS identifierCS = (IdentifierCS)dtParser.getSym(3);
 				VarDeclarationCS result = (VarDeclarationCS)dtParser.getSym(1);
@@ -2456,9 +2504,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 293:  varDeclarationCS ::= varDeclarationCS_0 : typeCS ;
+			// Rule 297:  varDeclarationCS ::= varDeclarationCS_0 : typeCS ;
 			//
-			case 293: {
+			case 297: {
 				
 				VarDeclarationCS result = (VarDeclarationCS)dtParser.getSym(1);
 				result.setType((TypeCS)dtParser.getSym(3));
@@ -2468,9 +2516,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 294:  domainCS_0_ ::= domain modelIdCS templateCS
+			// Rule 298:  domainCS_0_ ::= domain modelIdCS templateCS
 			//
-			case 294: {
+			case 298: {
 				
 				IdentifierCS identifierCS = (IdentifierCS)dtParser.getSym(2);
 				TemplateCS templateCS = (TemplateCS)dtParser.getSym(3);
@@ -2483,9 +2531,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 296:  domainCS_1_ ::= checkonly domainCS_0_
+			// Rule 300:  domainCS_1_ ::= checkonly domainCS_0_
 			//
-			case 296: {
+			case 300: {
 				
 				DomainCS result = (DomainCS)dtParser.getSym(2);
 				result.setCheckonly(true);
@@ -2495,9 +2543,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 297:  domainCS_1_ ::= enforce domainCS_0_
+			// Rule 301:  domainCS_1_ ::= enforce domainCS_0_
 			//
-			case 297: {
+			case 301: {
 				
 				DomainCS result = (DomainCS)dtParser.getSym(2);
 				result.setEnforce(true);
@@ -2507,9 +2555,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 298:  domainCS_1_ ::= replace domainCS_0_
+			// Rule 302:  domainCS_1_ ::= replace domainCS_0_
 			//
-			case 298: {
+			case 302: {
 				
 				DomainCS result = (DomainCS)dtParser.getSym(2);
 				result.setReplace(true);
@@ -2519,9 +2567,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 300:  domainCS_postImplementedby ::= domainCS_1_ implementedby operationCallExpCS
+			// Rule 304:  domainCS_postImplementedby ::= domainCS_1_ implementedby operationCallExpCS
 			//
-			case 300: {
+			case 304: {
 				
 				DomainCS result = (DomainCS)dtParser.getSym(1);
 				OperationCallExpCS operationCallExpCS =(OperationCallExpCS)dtParser.getSym(3);
@@ -2532,9 +2580,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 302:  domainCS_preDefaultValue ::= domainCS_preDefaultValue defaultValueCS
+			// Rule 306:  domainCS_preDefaultValue ::= domainCS_preDefaultValue defaultValueCS
 			//
-			case 302: {
+			case 306: {
 				
 				DomainCS result = (DomainCS)dtParser.getSym(1);
 				DefaultValueCS defaultValueCS = (DefaultValueCS)dtParser.getSym(2);
@@ -2545,9 +2593,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 304:  domainCS_postDefaultValues ::= domainCS_preDefaultValue }
+			// Rule 308:  domainCS_postDefaultValues ::= domainCS_preDefaultValue }
 			//
-			case 304: {
+			case 308: {
 				
 				DomainCS result = (DomainCS)dtParser.getSym(1);
 				setOffsets(result, result, getIToken(dtParser.getToken(2)));
@@ -2556,9 +2604,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 305:  domainCS ::= domainCS_postDefaultValues ;
+			// Rule 309:  domainCS ::= domainCS_postDefaultValues ;
 			//
-			case 305: {
+			case 309: {
 				
 				DomainCS result = (DomainCS)dtParser.getSym(1);
 				setOffsets(result, result, getIToken(dtParser.getToken(2)));
@@ -2567,9 +2615,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 306:  primitiveTypeDomainCS ::= primitive domain identifierCS : typeCS ;
+			// Rule 310:  primitiveTypeDomainCS ::= primitive domain identifierCS : typeCS ;
 			//
-			case 306: {
+			case 310: {
 				
 				IdentifierCS identifierCS = (IdentifierCS)dtParser.getSym(3);
 				TypeCS typeCS = (TypeCS)dtParser.getSym(5);
@@ -2582,9 +2630,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 310:  templateCS ::= templateCS_0_ { oclExpressionCS }
+			// Rule 314:  templateCS ::= templateCS_0_ { oclExpressionCS }
 			//
-			case 310: {
+			case 314: {
 				
 				TemplateCS result = (TemplateCS)dtParser.getSym(1);
 				OCLExpressionCS oclExpressionCS = (OCLExpressionCS)dtParser.getSym(3);
@@ -2595,19 +2643,19 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 311:  objectTemplateCS_prePropertyTemplates ::= IDENTIFIER : pathNameCS {
+			// Rule 315:  objectTemplateCS_prePropertyTemplates ::= IDENTIFIER : pathNameCS {
 			//
-			case 311:
+			case 315:
  
 			//
-			// Rule 312:  objectTemplateCS_prePropertyTemplates ::= relationIdentifier : pathNameCS {
+			// Rule 316:  objectTemplateCS_prePropertyTemplates ::= relationIdentifier : pathNameCS {
 			//
-			case 312:
+			case 316:
  
 			//
-			// Rule 313:  objectTemplateCS_prePropertyTemplates ::= self : pathNameCS {
+			// Rule 317:  objectTemplateCS_prePropertyTemplates ::= self : pathNameCS {
 			//
-			case 313: {
+			case 317: {
 				
 				IdentifierCS identifierCS = createIdentifierOrUnderscoreCS(dtParser.getToken(1));
 				TypeCS typeCS = (TypeCS)dtParser.getSym(3);
@@ -2620,9 +2668,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 314:  objectTemplateCS_prePropertyTemplates ::= : pathNameCS {
+			// Rule 318:  objectTemplateCS_prePropertyTemplates ::= : pathNameCS {
 			//
-			case 314: {
+			case 318: {
 				
 				ObjectTemplateCS result = QVTrCSTFactory.eINSTANCE.createObjectTemplateCS();
 				result.setIdentifier(createUniqueIdentifierCS(dtParser.getToken(1)));
@@ -2633,9 +2681,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 317:  objectTemplateCS_postPropertyTemplate ::= objectTemplateCS_prePropertyTemplate propertyTemplateCS
+			// Rule 321:  objectTemplateCS_postPropertyTemplate ::= objectTemplateCS_prePropertyTemplate propertyTemplateCS
 			//
-			case 317: {
+			case 321: {
 				
 				ObjectTemplateCS result = (ObjectTemplateCS)dtParser.getSym(1);
 				PropertyTemplateCS propertyTemplateCS = (PropertyTemplateCS)dtParser.getSym(2);
@@ -2646,14 +2694,14 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 318:  objectTemplateCS ::= objectTemplateCS_prePropertyTemplates }
+			// Rule 322:  objectTemplateCS ::= objectTemplateCS_prePropertyTemplates }
 			//
-			case 318:
+			case 322:
  
 			//
-			// Rule 319:  objectTemplateCS ::= objectTemplateCS_postPropertyTemplate }
+			// Rule 323:  objectTemplateCS ::= objectTemplateCS_postPropertyTemplate }
 			//
-			case 319: {
+			case 323: {
 				
 				ObjectTemplateCS result = (ObjectTemplateCS)dtParser.getSym(1);
 				setOffsets(result, result, getIToken(dtParser.getToken(2)));
@@ -2662,9 +2710,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 320:  propertyTemplateCS ::= propertyIdCS = oclExpressionCS
+			// Rule 324:  propertyTemplateCS ::= propertyIdCS = oclExpressionCS
 			//
-			case 320: {
+			case 324: {
 				
 				IdentifiedCS propertyIdCS = (IdentifiedCS)dtParser.getSym(1);
 				PropertyTemplateCS result = QVTrCSTFactory.eINSTANCE.createPropertyTemplateCS();
@@ -2677,9 +2725,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 321:  collectionTemplateCS_1_ ::= : collectionTypeCS
+			// Rule 325:  collectionTemplateCS_1_ ::= : collectionTypeCS
 			//
-			case 321: {
+			case 325: {
 				
 				CollectionTypeCS collectionTypeCS = (CollectionTypeCS)dtParser.getSym(2);
 				CollectionTemplateCS result = QVTrCSTFactory.eINSTANCE.createCollectionTemplateCS();
@@ -2690,19 +2738,19 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 322:  collectionTemplateCS_1_ ::= IDENTIFIER : collectionTypeCS
+			// Rule 326:  collectionTemplateCS_1_ ::= IDENTIFIER : collectionTypeCS
 			//
-			case 322:
+			case 326:
  
 			//
-			// Rule 323:  collectionTemplateCS_1_ ::= relationIdentifier : collectionTypeCS
+			// Rule 327:  collectionTemplateCS_1_ ::= relationIdentifier : collectionTypeCS
 			//
-			case 323:
+			case 327:
  
 			//
-			// Rule 324:  collectionTemplateCS_1_ ::= self : collectionTypeCS
+			// Rule 328:  collectionTemplateCS_1_ ::= self : collectionTypeCS
 			//
-			case 324: {
+			case 328: {
 				
 				IdentifierCS identifierCS = createIdentifierOrUnderscoreCS(dtParser.getToken(1));
 				CollectionTypeCS collectionTypeCS = (CollectionTypeCS)dtParser.getSym(3);
@@ -2715,9 +2763,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 328:  collectionTemplateCS_postMemberSelection ::= collectionTemplateCS_preMemberSelection memberSelectorCS
+			// Rule 332:  collectionTemplateCS_postMemberSelection ::= collectionTemplateCS_preMemberSelection memberSelectorCS
 			//
-			case 328: {
+			case 332: {
 				
 				IdentifiedCS memberSelectorCS = (IdentifiedCS)dtParser.getSym(2);
 				CollectionTemplateCS result = (CollectionTemplateCS)dtParser.getSym(1);
@@ -2728,9 +2776,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 329:  collectionTemplateCS ::= collectionTemplateCS_postMemberSelection PLUS_PLUS identifierCS }
+			// Rule 333:  collectionTemplateCS ::= collectionTemplateCS_postMemberSelection PLUS_PLUS identifierCS }
 			//
-			case 329: {
+			case 333: {
 				
 				IdentifierCS restIdentifier = (IdentifierCS)dtParser.getSym(3);
 				CollectionTemplateCS result = (CollectionTemplateCS)dtParser.getSym(1);
@@ -2741,9 +2789,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 330:  collectionTemplateCS ::= collectionTemplateCS_preMemberSelections }
+			// Rule 334:  collectionTemplateCS ::= collectionTemplateCS_preMemberSelections }
 			//
-			case 330: {
+			case 334: {
 				
 				CollectionTemplateCS result = (CollectionTemplateCS)dtParser.getSym(1);
 				setOffsets(result, result, getIToken(dtParser.getToken(2)));
@@ -2752,9 +2800,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 331:  memberSelectorCS ::= identifierCS
+			// Rule 335:  memberSelectorCS ::= identifierCS
 			//
-			case 331: {
+			case 335: {
 				
 				IdentifierCS identifierCS = (IdentifierCS)dtParser.getSym(1);
 				IdentifiedCS result = QVTCSTFactory.eINSTANCE.createIdentifiedCS();
@@ -2765,9 +2813,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 333:  defaultValueCS ::= identifierCS = oclExpressionCS ;
+			// Rule 337:  defaultValueCS ::= identifierCS = oclExpressionCS ;
 			//
-			case 333: {
+			case 337: {
 				
 				IdentifierCS identifierCS = (IdentifierCS)dtParser.getSym(1);
 				OCLExpressionCS oclExpressionCS = (OCLExpressionCS)dtParser.getSym(3);
@@ -2780,9 +2828,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 334:  queryCS_preParamDeclaration ::= query pathNameCS (
+			// Rule 338:  queryCS_preParamDeclaration ::= query pathNameCS (
 			//
-			case 334: {
+			case 338: {
 				
 				QueryCS result = QVTrCSTFactory.eINSTANCE.createQueryCS();
 				result.setPathName((PathNameCS)dtParser.getSym(2));
@@ -2792,9 +2840,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 336:  queryCS_postParamDeclaration ::= queryCS_preParamDeclaration paramDeclarationCS
+			// Rule 340:  queryCS_postParamDeclaration ::= queryCS_preParamDeclaration paramDeclarationCS
 			//
-			case 336: {
+			case 340: {
 				
 				ParamDeclarationCS paramDeclarationCS = (ParamDeclarationCS)dtParser.getSym(2);
 				QueryCS result = (QueryCS)dtParser.getSym(1);
@@ -2805,9 +2853,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 337:  queryCS_postType ::= queryCS_postParamDeclaration ) : typeCS
+			// Rule 341:  queryCS_postType ::= queryCS_postParamDeclaration ) : typeCS
 			//
-			case 337: {
+			case 341: {
 				
 				TypeCS typeCS = (TypeCS)dtParser.getSym(4);
 				QueryCS result = (QueryCS)dtParser.getSym(1);
@@ -2818,9 +2866,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 338:  queryCS ::= queryCS_postType ;
+			// Rule 342:  queryCS ::= queryCS_postType ;
 			//
-			case 338: {
+			case 342: {
 				
 				QueryCS result = (QueryCS)dtParser.getSym(1);
 				setOffsets(result, result, getIToken(dtParser.getToken(3)));
@@ -2829,9 +2877,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 339:  queryCS ::= queryCS_postType { oclExpressionCS }
+			// Rule 343:  queryCS ::= queryCS_postType { oclExpressionCS }
 			//
-			case 339: {
+			case 343: {
 				
 				QueryCS result = (QueryCS)dtParser.getSym(1);
 				result.setOclExpression((OCLExpressionCS)dtParser.getSym(3));
@@ -2841,9 +2889,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 340:  paramDeclarationCS ::= identifierCS : typeCS
+			// Rule 344:  paramDeclarationCS ::= identifierCS : typeCS
 			//
-			case 340: {
+			case 344: {
 				
 				IdentifierCS identifierCS = (IdentifierCS)dtParser.getSym(1);
 				TypeCS typeCS = (TypeCS)dtParser.getSym(3);
@@ -2856,9 +2904,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 364:  pathNameCS ::= relationIdentifier
+			// Rule 368:  pathNameCS ::= relationIdentifier
 			//
-			case 364: {
+			case 368: {
 				
 				PathNameCS result = createPathNameCS();
 				result.getSequenceOfNames().add(createIdentifierOrUnderscore(dtParser.getToken(1)));
@@ -2868,9 +2916,9 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 365:  simpleNameCS ::= relationIdentifier
+			// Rule 369:  simpleNameCS ::= relationIdentifier
 			//
-			case 365: {
+			case 369: {
 				
 				SimpleNameCS result = createSimpleNameCS(
 							SimpleTypeEnum.IDENTIFIER_LITERAL,
@@ -2882,19 +2930,19 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 366:  identifierCS ::= IDENTIFIER
+			// Rule 370:  identifierCS ::= IDENTIFIER
 			//
-			case 366: 
+			case 370: 
  
 			//
-			// Rule 367:  identifierCS ::= relationIdentifier
+			// Rule 371:  identifierCS ::= relationIdentifier
 			//
-			case 367: 
+			case 371: 
  
 			//
-			// Rule 368:  identifierCS ::= self
+			// Rule 372:  identifierCS ::= self
 			//
-			case 368: {
+			case 372: {
 				
 				IdentifierCS result = createIdentifierOrUnderscoreCS(dtParser.getToken(1));
 				dtParser.setSym1(result);
