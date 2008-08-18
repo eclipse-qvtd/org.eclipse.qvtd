@@ -1,13 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2007,2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: IFileEnvironment.java,v 1.2 2008/08/18 07:47:09 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.parser.environment;
 
 import java.io.IOException;
@@ -24,6 +30,8 @@ import org.eclipse.ocl.lpg.BasicEnvironment;
 public interface IFileEnvironment extends BasicEnvironment
 {
 	public Resource createASTResource(Collection<? extends EObject> ePackages, URI uri);
+
+	public IFileAnalyzer getAnalyzer();
 	
 	/**
 	 * Parse the source text and return an AST forest.
@@ -36,4 +44,6 @@ public interface IFileEnvironment extends BasicEnvironment
 	public Collection<? extends EObject> parseToAST(Reader reader, IProgressMonitor monitor) throws IOException, CoreException;
 
 	public void validate(Resource resource);
+
+	public IFileAnalyzer parseToTokens(Reader reader, IProgressMonitor monitor) throws IOException, CoreException;
 }

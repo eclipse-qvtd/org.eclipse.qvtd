@@ -52,4 +52,8 @@ public class ASTandCST
 	public void setCST(CSTNode cst) {
 		this.cst = cst;
 	}
+
+	public void setUseAST(boolean useAST) {
+		astPreferred = useAST;	
+	}
 }
