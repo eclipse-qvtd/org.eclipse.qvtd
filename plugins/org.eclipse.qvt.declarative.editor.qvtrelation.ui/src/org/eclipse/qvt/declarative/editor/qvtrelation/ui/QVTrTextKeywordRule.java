@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTrTextKeywordRule.java,v 1.2 2008/08/10 06:44:18 ewillink Exp $
+ * $Id: QVTrTextKeywordRule.java,v 1.3 2008/08/18 07:57:37 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtrelation.ui;
 
@@ -23,6 +23,7 @@ import org.eclipse.qvt.declarative.editor.ui.text.TextColorManager;
 /**
  * Defines a rule to recognise the QVT keywords.
  */
+@Deprecated // Use UniversalTextEditor
 public class QVTrTextKeywordRule extends EssentialOCLTextKeywordRule {
 
     public QVTrTextKeywordRule(TextColorManager colorManager, IToken defaultToken) {

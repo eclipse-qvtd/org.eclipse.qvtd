@@ -12,13 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: QVTrBuilder.java,v 1.2 2008/08/10 06:44:17 ewillink Exp $
+ * $Id: QVTrBuilder.java,v 1.3 2008/08/18 07:57:37 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtrelation.ui;
 
-import org.eclipse.qvt.declarative.editor.ui.builder.AbstractBuilder;
+import org.eclipse.qvt.declarative.editor.ui.builder.CommonBuilder;
 
-public class QVTrBuilder extends AbstractBuilder
+public class QVTrBuilder extends CommonBuilder
 {
 	public QVTrBuilder() {
 		super(QVTrCreationFactory.INSTANCE);

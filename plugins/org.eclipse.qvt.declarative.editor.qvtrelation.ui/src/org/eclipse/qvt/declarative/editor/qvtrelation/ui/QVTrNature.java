@@ -12,13 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: QVTrNature.java,v 1.2 2008/08/10 06:44:17 ewillink Exp $
+ * $Id: QVTrNature.java,v 1.3 2008/08/18 07:57:37 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtrelation.ui;
 
-import org.eclipse.qvt.declarative.editor.ui.builder.AbstractNature;
+import org.eclipse.qvt.declarative.editor.ui.builder.CommonNature;
 
-public class QVTrNature extends AbstractNature
+public class QVTrNature extends CommonNature
 {
 	public QVTrNature() {
 		super(QVTrCreationFactory.INSTANCE);

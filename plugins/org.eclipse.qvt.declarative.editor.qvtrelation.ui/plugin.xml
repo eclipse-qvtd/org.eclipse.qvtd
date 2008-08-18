@@ -2,20 +2,19 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension point="org.eclipse.core.resources.builders"
-         id="QVTrBuilder" name="QVT Relation Project Builder">
+         id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrBuilder" name="QVT Relation Project Builder">
       <builder hasNature="true">
          <run class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrBuilder"/>
       </builder>
    </extension>
    
    <extension point="org.eclipse.core.resources.markers"
-         id="qvtrProblem" name="QVT Relation Problem">
+         id="org.eclipse.qvt.declarative.editor.qvtcore.ui.qvtrProblem" name="QVT Relation Problem">
       <super type="org.eclipse.core.resources.problemmarker"/>
-      <persistent value="true"/>
    </extension>
    
    <extension point="org.eclipse.core.resources.natures"
-         id="QVTrNature" name="QVT Relation Project Nature" >
+         id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrNature" name="QVT Relation Project Nature" >
       <runtime>
          <run class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrNature"/>
       </runtime>
@@ -118,6 +117,13 @@
             class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrContentProposer"
             language="qvtr">
       </proposer>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.editorActionContributions">
+      <editorActionContributor
+            class="org.eclipse.qvt.declarative.editor.ui.actions.CommonActionContributor"
+            language="qvtr">
+      </editorActionContributor>
    </extension>
 
 </plugin>
