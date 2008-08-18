@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLPlugin.java,v 1.1 2008/08/14 07:51:10 ewillink Exp $
+ * $Id: OCLPlugin.java,v 1.2 2008/08/18 07:43:58 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui;
 
@@ -72,7 +72,13 @@ public class OCLPlugin extends PluginBase implements ICommonPlugin
 		return editorDefinition;
 	}
 
+	@Override
 	public String getID() {
 		return kPluginID;
+	}
+
+	@Override
+	public String getLanguageName() {
+		return kLanguageName;
 	}
 }
