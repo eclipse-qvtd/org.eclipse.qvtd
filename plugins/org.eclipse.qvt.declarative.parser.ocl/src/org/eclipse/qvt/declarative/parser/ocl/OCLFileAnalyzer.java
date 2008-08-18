@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLFileAnalyzer.java,v 1.1 2008/08/14 07:52:38 ewillink Exp $
+ * $Id: OCLFileAnalyzer.java,v 1.2 2008/08/18 07:56:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl;
 
@@ -42,11 +42,12 @@ import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.ocl.parser.OCLAnalyzer;
 import org.eclipse.ocl.parser.OCLLexer;
 import org.eclipse.ocl.parser.OCLParser;
+import org.eclipse.qvt.declarative.parser.environment.IFileAnalyzer;
 import org.eclipse.qvt.declarative.parser.ocl.environment.OCLTopLevelEnvironment;
 
 public final class OCLFileAnalyzer extends
 		OCLAnalyzer<EPackage, EClassifier, EOperation, EStructuralFeature, 
-		EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject>
+		EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> implements IFileAnalyzer
 {
 	private Monitor monitor;
 
