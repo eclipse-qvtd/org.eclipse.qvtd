@@ -12,18 +12,22 @@
  * 
  * </copyright>
  *
- * $Id: EcoreUtils.java,v 1.2 2008/08/08 17:00:10 ewillink Exp $
+ * $Id: EcoreUtils.java,v 1.3 2008/08/18 07:38:09 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.utils;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
@@ -32,6 +36,35 @@ public class EcoreUtils
 	@SuppressWarnings("unchecked")
 	public static <E extends EObject> E copy(E newObject) {
 		return (E) EcoreUtil.copy(newObject);
+	}
+
+	/**
+	 * Convert the map return from EcoreUtil.UnresolvedProxyCrossReferencer.find(xx)
+	 * int a textual diagnosis.
+	 * <br>
+	 * Returns null if there are no nresolved URIs.
+	 * <br>
+	 * Returns a String containing a title line containing the contextURI and
+	 * subsequent lines identifying each distinct unresolved URI. 
+	 */
+	public static String diagnoseUnresolvedProxies(URI contextURI, Map<EObject, Collection<EStructuralFeature.Setting>> map) {
+	    if (map.isEmpty())
+	    	return null;	    
+    	Map<String, Map.Entry<EObject, Collection<EStructuralFeature.Setting>>> unresolvedURIs = new HashMap<String, Map.Entry<EObject, Collection<EStructuralFeature.Setting>>>(map.size());
+    	for (Map.Entry<EObject, Collection<EStructuralFeature.Setting>> entry : map.entrySet()) {
+    		EObject key = entry.getKey();
+    		URI uri = EcoreUtil.getURI(key);
+			if (uri != null) {
+				String uriString = uri.toString();
+				if (!unresolvedURIs.containsKey(uriString))
+					unresolvedURIs.put(uriString, entry);
+			}
+    	}
+    	StringBuffer s = new StringBuffer();
+		s.append("Unresolved URIs in '" + String.valueOf(contextURI) + "' :");
+    	for (Map.Entry<String, Map.Entry<EObject, Collection<EStructuralFeature.Setting>>> unresolvedURI : unresolvedURIs.entrySet())
+ 			s.append("\n    '" + unresolvedURI.getKey() + "'");
+    	return s.toString();
 	}
 	
 	public static String formatFullName(Object object) {
