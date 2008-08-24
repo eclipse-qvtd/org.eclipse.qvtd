@@ -12,19 +12,20 @@
  * 
  * </copyright>
  *
- * $Id: QVTcTreeModelBuilder.java,v 1.1 2008/08/10 13:52:19 ewillink Exp $
+ * $Id: QVTcTreeModelBuilder.java,v 1.2 2008/08/24 18:59:23 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui.imp;
 
-import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcPlugin;
+import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcCreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
-import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
-
 
 public class QVTcTreeModelBuilder extends CommonTreeModelBuilder
 {
-	@Override
-	protected ICommonPlugin getPlugin() {
-		return QVTcPlugin.getInstance();
+	public QVTcTreeModelBuilder() {
+		this(true);
+	}
+
+	public QVTcTreeModelBuilder(boolean showAST) {
+		super(QVTcCreationFactory.INSTANCE, showAST);
 	}
 }
