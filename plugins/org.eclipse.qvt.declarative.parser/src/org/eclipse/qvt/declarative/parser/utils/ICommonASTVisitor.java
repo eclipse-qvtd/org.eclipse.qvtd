@@ -10,17 +10,14 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.utils;
 
-import org.eclipse.emf.common.notify.Notifier;
-
 /**
- * ICommonASTVisitor defines an API for a visitor to a Notifier-based
- * (EObject or Resource or ResourceSet) AST.
+ * ICommonASTVisitor defines an API for a visitor to an AST for which
+ * all nodes are subtypes of N.
  */
-public interface ICommonASTVisitor<T>
+public interface ICommonASTVisitor<T, N>
 {
-	public boolean preVisit(Notifier astNode);
-
-	public T postVisit(Notifier astNode);
-
-	public T visit(Notifier astNode);
+	/**
+	 * Visit astNode and return some typed value.
+	 */
+	public T visit(N astNode);
 }

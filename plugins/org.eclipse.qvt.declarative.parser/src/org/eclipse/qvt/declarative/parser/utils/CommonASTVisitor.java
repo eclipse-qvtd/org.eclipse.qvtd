@@ -10,62 +10,136 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.utils;
 
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.qvt.declarative.parser.plugin.QVTParserPlugin;
 
 /**
- * CommonCSTVisitor defines a default visitor to a Notifier-based
+ * CommonCSTVisitor defines a default visitor to an Ecore
  * (EObject or Resource or ResourceSet) AST using EObject.eContents(),
  * Resource.getContents(), ResourceSet.getResources() to perform tree descent.
  */
-public abstract class CommonASTVisitor<T> implements ICommonASTVisitor<T>
+public abstract class CommonASTVisitor<T, N> implements ICommonASTVisitor<T, N>
 {
-	public static <T, V extends CommonASTVisitor<T>> T acceptAt(V v, Notifier astNode) {
-		return astNode != null ? v.visit(astNode) : null;
-	}
-
+	protected final Class<N> nodeClass;
 	protected T result = null;
-
-	public boolean preVisit(Notifier astNode) {
-		return true;
+	
+	/**
+	 * Construct a visit for a tree of objects that subtype nodeClass.
+	 */
+	protected CommonASTVisitor(Class<N> nodeClass) {
+		this.nodeClass = nodeClass;
 	}
 
-	public T postVisit(Notifier astNode) {
+	/**
+	 * Perform the visit of object.
+	 * <br>
+	 * The default implementation returns the result of invoking visit, if the
+	 * object satisfies the node class predicate, or unexpectedVisit if not.
+	 */
+	public T enter(Object object) {
+		if (object == null)
+			return null;
+		else if (nodeClass.isAssignableFrom(object.getClass())) {
+			@SuppressWarnings("unchecked")
+			N astNode = (N) object;
+			return visit(astNode);
+		}
+		else
+			return unexpectedVisit(object);
+	}
+
+	/**
+	 * Perform any post-order activity at the end of a visit to astNode.
+	 * Return the visit result.
+	 * <br>
+	 * Default result is returned from the result field.
+	 */
+	protected T postVisit(N astNode) {
 		return result;
 	}
 
-	public T visit(Notifier astNode) {
+	/**
+	 * Perform any pre-order activity at the start of a visit to astNode.
+	 * Return true to continue with the visit, false to inhibit the
+	 * visit to astNode and its children.
+	 * <br>
+	 * Default implementation returns true.
+	 */
+	protected boolean preVisit(N astNode) {
+		return true;
+	}
+
+	/**
+	 * Perform any activity associated with visiting an astNode that does
+	 * not satisfy the AST tree node type predicate.
+	 * <br>
+	 * Default logs an error.
+	 */
+	protected T unexpectedVisit(Object astNode) {
+		QVTParserPlugin.logError("Unexpected visit to a '" + astNode.getClass().getName() + "' by a '" + getClass().getSimpleName() + "'", null);
+		return null;
+	}
+
+	/**
+	 * Perform the visit to astNode returning an appropriate result.
+	 * <br>
+	 * The default implementation first invokes preVisit, which may return
+	 * to curtail the visit. One of visitEObject, visitResource,
+	 * visitResourceSet or else vistNode to perform the actual
+	 * visit. Finally postVisit is invoked to provide the return.
+	 */
+	public T visit(N astNode) {
 		if (!preVisit(astNode))
 			return null;
 		if (astNode instanceof EObject)
-			visitEObject((EObject)astNode);
+			visitEObject(astNode);
 		else if (astNode instanceof Resource)
 			visitResource((Resource)astNode);
 		else if (astNode instanceof ResourceSet)
 			visitResourceSet((ResourceSet)astNode);
 		else
-			visitNotifier(astNode);
+			vistNode(astNode);
 		return postVisit(astNode);		
 	}
 
-	protected void visitEObject(EObject astNode) {
-		for (EObject eObject : astNode.eContents())
-			visit(eObject);
+	/**
+	 * Perform the node visit to an EObject astNode.
+	 * <br>
+	 * The default implementation enters each of astNode.eContents().
+	 */
+	protected void visitEObject(N astNode) {
+		for (EObject eObject : ((EObject)astNode).eContents())
+			enter(eObject);
 	}
 
-	protected void visitNotifier(Notifier astNode) {
-		System.out.println(getClass().getSimpleName() + ".unimplementedVisitor: " + astNode.getClass().getName());
+	/**
+	 * Perform the node visit to a non-EObject, non-Ressource, non-ResourceSet astNode.
+	 * <br>
+	 * The default implementation logs an error.
+	 */
+	protected void vistNode(Object astNode) {
+		QVTParserPlugin.logError("Unimplemented visit to a '" + astNode.getClass().getName() + "' by a '" + getClass().getSimpleName() + "'", null);
 	}
 
+	/**
+	 * Perform the node visit to an Resource astNode.
+	 * <br>
+	 * The default implementation enters each of astNode.getContents().
+	 */
 	protected void visitResource(Resource astNode) {
 		for (EObject eObject : astNode.getContents())
-			visit(eObject);
+			enter(eObject);
 	}
 
+	/**
+	 * Perform the node visit to an ResourceSet astNode.
+	 * <br>
+	 * The default implementation enters each of astNode.getResources().
+	 */
 	protected void visitResourceSet(ResourceSet astNode) {
 		for (Resource resource : astNode.getResources())
-			visit(resource);
+			enter(resource);
 	}
 }
