@@ -177,16 +177,19 @@
             language="qvtc">
       </editorActionContributor>
    </extension>
-   <extension
-         point="org.eclipse.ui.editors">
-      <editor
+   <extension point="org.eclipse.ui.editors">
+      <editor id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor"
+            name="QVT Core Editor"
+            icon="icons/QVTcModelFile.gif"
+            extensions="qvtc"
+            contributorClass="org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditorActionContributor"
+            class="org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditor"/>
+      <editor id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcMultiEditor"
             name="QVT Core Multi-View Editor"
             icon="icons/QVTcModelFile.gif"
             extensions="qvtc,qvtcore,eqvtcore"
             contributorClass="org.eclipse.qvt.declarative.editor.ui.actions.PagedActionBarContributor"
-            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor"
-            id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor">
-      </editor>
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor"/>
    </extension>
 
 </plugin>
