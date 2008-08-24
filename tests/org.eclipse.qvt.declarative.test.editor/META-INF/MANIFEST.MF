@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.qvt.declarative.editor.ui;visibility:=reexport,
  org.eclipse.qvt.declarative.test.parser.qvtcore
 Eclipse-LazyStart: false
 Import-Package: org.eclipse.qvt.declarative.emof.QVTRelation.util
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.qvt.declarative.test.editor
 
  
