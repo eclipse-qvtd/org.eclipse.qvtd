@@ -78,5 +78,17 @@
 	  </propertySections>
    </extension>   
 
+   <extension
+         point="org.eclipse.ui.views">
+      <category name="Modeling (QVT)"
+            id="org.eclipse.qvt.declarative.editor.ui">
+      </category>
+      <view id="org.eclipse.qvt.declarative.editor.ui.cst"
+            name="CST Outline"
+            icon="icons/cstview.gif"
+            category="org.eclipse.qvt.declarative.editor.ui"
+            class="org.eclipse.qvt.declarative.editor.ui.cst.CSTOutline"/>
+   </extension>
+   
 
 </plugin>
