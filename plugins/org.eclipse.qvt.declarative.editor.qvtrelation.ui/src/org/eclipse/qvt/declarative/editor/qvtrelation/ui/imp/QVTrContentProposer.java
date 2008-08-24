@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTrContentProposer.java,v 1.1 2008/08/10 13:51:13 ewillink Exp $
+ * $Id: QVTrContentProposer.java,v 1.2 2008/08/24 18:57:59 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp;
 
@@ -115,6 +115,7 @@ public class QVTrContentProposer  extends CommonContentProposer
 		CSTNode cstRoot = cstAndAST != null ? cstAndAST.getCST() : null;
 		if (cstRoot != null) {
 			IToken token = getToken((CommonParseController) controller, offset);
+			@SuppressWarnings("unused")
 			String prefix = getPrefix((CommonParseController) controller, token, offset);
 			QVTrNodeLocator locator = new QVTrNodeLocator(null);
 			CSTNode node = (CSTNode) locator.findNode(cstRoot, token.getStartOffset(), token.getEndOffset());
