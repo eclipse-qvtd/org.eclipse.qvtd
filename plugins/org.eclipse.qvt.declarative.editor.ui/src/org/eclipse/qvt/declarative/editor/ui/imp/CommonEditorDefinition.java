@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonEditorDefinition.java,v 1.6 2008/08/18 07:46:26 ewillink Exp $
+ * $Id: CommonEditorDefinition.java,v 1.7 2008/08/24 19:12:55 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -44,13 +44,13 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
+import org.eclipse.qvt.declarative.editor.AbstractNode;
 import org.eclipse.qvt.declarative.editor.Behavior;
 import org.eclipse.qvt.declarative.editor.EcoreNode;
 import org.eclipse.qvt.declarative.editor.EditorDefinition;
 import org.eclipse.qvt.declarative.editor.EditorFactory;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
 import org.eclipse.qvt.declarative.editor.JavaNode;
-import org.eclipse.qvt.declarative.editor.Node;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 
 /**
@@ -127,7 +127,7 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 	}
 
 	public <T extends Behavior> T getBehavior(Object object, Class<T> behaviorClass) {
-		for (Node node = getNode(object); node != null; node = node.getBase()) {
+		for (AbstractNode node = getNode(object); node != null; node = node.getBase()) {
 			for (Behavior behavior : node.getBehavior()) {
 				if (behaviorClass.isAssignableFrom(behavior.getClass())) {
 					@SuppressWarnings("unchecked")
@@ -164,7 +164,7 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 		String diagnosis = EcoreUtils.diagnoseUnresolvedProxies(EcoreUtil.getURI(editorDefinition), unresolvedMap);
 		if (diagnosis != null)
 			QVTEditorPlugin.logError(diagnosis, null);
-		for (Node node : editorDefinition.getNode()) {
+		for (AbstractNode node : editorDefinition.getNode()) {
 			if (node instanceof EcoreNode) {
 				if (ecoreMap == null)
 					ecoreMap = new HashMap<EClassifier, EcoreNode>();
@@ -216,7 +216,7 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 		return javaNode;
 	}
 
-	public Node getNode(Object object) {
+	public AbstractNode getNode(Object object) {
 		if (object == null)
 			return null;
 		if (editorDefinition == null)
