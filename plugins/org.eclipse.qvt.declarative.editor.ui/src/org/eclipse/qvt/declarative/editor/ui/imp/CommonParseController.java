@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.4 2008/08/18 07:46:26 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.5 2008/08/24 19:15:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -45,8 +45,11 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.imp.core.ErrorHandler;
+import org.eclipse.imp.editor.ModelTreeNode;
 import org.eclipse.imp.language.Language;
 import org.eclipse.imp.model.ISourceProject;
 import org.eclipse.imp.parser.IMessageHandler;
@@ -93,13 +96,11 @@ public abstract class CommonParseController implements IParseController
     protected ISourceProject fProject;
     protected IPath fFilePath;
     protected IMessageHandler handler;   
-    protected Object fCurrentAst;
+    protected ASTandCST fCurrentAst;
     private char fKeywords[][];
     private boolean fIsKeyword[];
     private final SimpleAnnotationTypeInfo fSimpleAnnotationTypeInfo = new SimpleAnnotationTypeInfo();
 	protected IFileEnvironment environment;
-	private boolean useAST = false;
-    
     /**
      * An adapter from an Eclipse IProgressMonitor to an LPG Monitor
      */
@@ -148,7 +149,10 @@ public abstract class CommonParseController implements IParseController
         }
     }
 
-	protected abstract IFileEnvironment createEnvironment(AbstractFileHandle fileHandle);
+	protected IFileEnvironment createEnvironment(AbstractFileHandle fileHandle) {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		return creationFactory.createFileEnvironment(fileHandle, resourceSet);
+	}
 
 	protected CommonProblemHandler createProblemHandler() {
 		return new CommonProblemHandler(environment.getParser(), handler);
@@ -157,12 +161,36 @@ public abstract class CommonParseController implements IParseController
 	protected PMMonitor createProgressMonitor(IProgressMonitor monitor) {
 		return new PMMonitor(monitor);
 	}
+
+	public Object getASTNode(Object object) {
+		if (object instanceof ModelTreeNode)
+			object = ((ModelTreeNode)object).getASTNode();
+		if (object instanceof CSTNode)
+			object = ((CSTNode) object).getAstNode();
+		return object;
+	}
+
+	public Object getASTorCSTNode(Object object) {
+		if (object instanceof ModelTreeNode)
+			object = ((ModelTreeNode)object).getASTNode();
+		return object;
+	}
 	
     public IAnnotationTypeInfo getAnnotationTypeInfo() {
         return fSimpleAnnotationTypeInfo;
     }
 
-    public Object getCurrentAst() {
+	public CSTNode getCSTNode(Object object) {
+		if (object instanceof ModelTreeNode)
+			object = ((ModelTreeNode)object).getASTNode();
+		return environment.getASTMapping(object);
+	}
+
+    public ICreationFactory getCreationFactory() {
+		return creationFactory;
+	}
+
+	public ASTandCST getCurrentAst() {
     	return fCurrentAst;
     }
 
@@ -190,7 +218,7 @@ public abstract class CommonParseController implements IParseController
 	}
 
 	public ISourcePositionLocator getNodeLocator() {
-		return new CommonNodeLocator(environment);
+		return creationFactory.createNodeLocator(environment);
 	}
 
 	public AbstractParser getParser() {
@@ -208,10 +236,6 @@ public abstract class CommonParseController implements IParseController
 	public ILanguageSyntaxProperties getSyntaxProperties() {
 		return null;
 	}
-
-    public boolean getUseAST() {
-    	return useAST;
-    }
 
     public Iterator<IToken> getTokenIterator(IRegion region) {
         final int offset= region.getOffset();
@@ -315,7 +339,7 @@ public abstract class CommonParseController implements IParseController
 		environment = createEnvironment(fileHandle);
 		environment.getAnalyzer();		// Create parser
 		environment.setProblemHandler(createProblemHandler());
-		ASTandCST astAndCst = new ASTandCST(useAST);
+		ASTandCST astAndCst = new ASTandCST();
 		fCurrentAst = astAndCst;
 		Reader reader = new StringReader(contents);
 		try {
@@ -342,11 +366,5 @@ public abstract class CommonParseController implements IParseController
 		// FIXME my_monitor
 		cacheKeywordsOnce();
 		return fCurrentAst;
-	}
-
-	public void setUseAST(boolean useAST) {
-		this.useAST  = useAST;
-		if (fCurrentAst instanceof ASTandCST)
-			((ASTandCST)fCurrentAst).setUseAST(useAST);
 	}
 }
