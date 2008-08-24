@@ -6,10 +6,11 @@ Bundle-Version: 0.7.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.qvt.declarative.editor,
  org.eclipse.qvt.declarative.editor.impl,
  org.eclipse.qvt.declarative.editor.util
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.ocl;visibility:=reexport
+ org.eclipse.ocl;visibility:=reexport,
+ org.eclipse.qvt.declarative.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy
