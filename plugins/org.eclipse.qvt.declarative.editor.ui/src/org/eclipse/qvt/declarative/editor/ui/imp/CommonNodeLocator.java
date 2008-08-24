@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonNodeLocator.java,v 1.3 2008/08/18 07:46:26 ewillink Exp $
+ * $Id: CommonNodeLocator.java,v 1.4 2008/08/24 19:06:07 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -27,7 +27,6 @@ import org.eclipse.ocl.lpg.BasicEnvironment;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 import org.eclipse.qvt.declarative.parser.utils.CommonASTVisitor;
-import org.eclipse.qvt.declarative.parser.utils.CommonCSTVisitor;
 
 /**
  * NOTE:  This version of the Node Locator is for use when the Node
@@ -54,10 +53,14 @@ public class CommonNodeLocator implements ISourcePositionLocator
 	private int fStartOffset;
 	private int fEndOffset;
 
-	protected final class ASTNodeVisitor extends CommonASTVisitor<Notifier>
+	protected final class ASTNodeVisitor<N> extends CommonASTVisitor<CSTNode, N>
 	{
+		protected ASTNodeVisitor(Class<N> nodeClass) {
+			super(nodeClass);
+		}
+
 		@Override
-		public boolean preVisit(Notifier astNode) {
+		public boolean preVisit(N astNode) {
 			CSTNode cstNode = environment.getASTMapping(astNode);
 			if (cstNode == null)
 				return true;
@@ -70,27 +73,6 @@ public class CommonNodeLocator implements ISourcePositionLocator
 			if (nodeStartOffset <= fStartOffset && nodeEndOffset >= fEndOffset) {
 				if (QVTEditorPlugin.VISITOR_TRACE.isActive())
 					QVTEditorPlugin.VISITOR_TRACE.println(getClass().getSimpleName() + ".preVisit(ASTNode) SELECTED for offsets [" + fStartOffset + ".." + fEndOffset + "]");
-				result = astNode;
-				return true; // to continue visiting here?
-			}
-			return false; // to stop visiting here?
-		}
-	}
-
-	protected final class CSTNodeVisitor extends CommonCSTVisitor<CSTNode>
-	{
-		@Override
-		public boolean preVisit(CSTNode cstNode) {
-			int nodeStartOffset = cstNode.getStartOffset();
-			int nodeEndOffset = cstNode.getEndOffset();
-			if (QVTEditorPlugin.VISITOR_TRACE.isActive())
-				QVTEditorPlugin.VISITOR_TRACE.println(getClass().getSimpleName() + ".preVisit(CSTNode):  Examining " + cstNode.getClass().getName() +
-			    " @ [" + nodeStartOffset + "->" + nodeEndOffset + ']');
-
-			// If this node contains the span of interest then record it
-			if ((nodeStartOffset <= fStartOffset) && (fEndOffset <= nodeEndOffset)) {
-				if (QVTEditorPlugin.VISITOR_TRACE.isActive())
-					QVTEditorPlugin.VISITOR_TRACE.println(getClass().getSimpleName() + ".preVisit(CSTNode) SELECTED for offsets [" + fStartOffset + ".." + fEndOffset + "]");
 				result = cstNode;
 				return true; // to continue visiting here?
 			}
@@ -102,8 +84,8 @@ public class CommonNodeLocator implements ISourcePositionLocator
 		this.environment = environment;
 	}
 
-	private ASTNodeVisitor astVisitor = new ASTNodeVisitor();
-	private CSTNodeVisitor cstVisitor = new CSTNodeVisitor();
+	private ASTNodeVisitor<Notifier> astVisitor = new ASTNodeVisitor<Notifier>(Notifier.class);
+	private ASTNodeVisitor<CSTNode> cstVisitor = new ASTNodeVisitor<CSTNode>(CSTNode.class);
 
 	public Object findNode(Object node, int offset) {
 		return findNode(node, offset, offset);
@@ -111,7 +93,7 @@ public class CommonNodeLocator implements ISourcePositionLocator
 
 	public Object findNode(Object node, int startOffset, int endOffset) {
 		if (node instanceof ASTandCST)
-			node = ((ASTandCST) node).resolve();
+			node = ((ASTandCST) node).getCST();
 		if (node instanceof CSTNode)
 			return findCSTNode((CSTNode)node, startOffset, endOffset);
 		else if (node instanceof Notifier)
@@ -127,7 +109,7 @@ public class CommonNodeLocator implements ISourcePositionLocator
 		// ????The following could be treated as an IASTNodeToken, but ASTNode
 		// is required for the visit/preVisit method, and there's no reason
 		// to use both of those types
-		Notifier astNode = CommonASTVisitor.acceptAt(astVisitor, ast);
+		Notifier astNode = astVisitor.enter(ast);
 		if (QVTEditorPlugin.VISITOR_SELECTION.isActive()) {
 			if (astNode == null)
 				QVTEditorPlugin.VISITOR_SELECTION.println("Selected node:  null");
@@ -148,7 +130,7 @@ public class CommonNodeLocator implements ISourcePositionLocator
 		// ????The following could be treated as an IASTNodeToken, but ASTNode
 		// is required for the visit/preVisit method, and there's no reason
 		// to use both of those types
-		CSTNode cstNode = CommonCSTVisitor.acceptAt(cstVisitor, cst);
+		CSTNode cstNode = cstVisitor.enter(cst);
 		if (QVTEditorPlugin.VISITOR_SELECTION.isActive()) {
 			if (cstNode == null)
 				QVTEditorPlugin.VISITOR_SELECTION.println("Selected node:  null");
@@ -161,7 +143,7 @@ public class CommonNodeLocator implements ISourcePositionLocator
 
 	public int getEndOffset(Object node) {
 		if (node instanceof ASTandCST)
-			node = ((ASTandCST) node).resolve();
+			node = ((ASTandCST) node).getCST();
 		if (node instanceof CSTNode) {
 			CSTNode n = (CSTNode) node;
 			return n.getEndOffset();
@@ -186,7 +168,7 @@ public class CommonNodeLocator implements ISourcePositionLocator
 
 	public int getStartOffset(Object node) {
 		if (node instanceof ASTandCST)
-			node = ((ASTandCST) node).resolve();
+			node = ((ASTandCST) node).getCST();
 		if (node instanceof CSTNode) {
 			CSTNode n = (CSTNode) node;
 			return n.getStartOffset();

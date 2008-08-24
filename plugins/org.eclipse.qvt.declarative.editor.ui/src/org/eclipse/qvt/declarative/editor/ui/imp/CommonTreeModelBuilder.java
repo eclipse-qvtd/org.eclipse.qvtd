@@ -12,44 +12,74 @@
  * 
  * </copyright>
  *
- * $Id: CommonTreeModelBuilder.java,v 1.1 2008/08/09 17:49:00 ewillink Exp $
+ * $Id: CommonTreeModelBuilder.java,v 1.2 2008/08/24 19:06:07 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.imp.editor.ModelTreeNode;
 import org.eclipse.imp.services.base.TreeModelBuilderBase;
-import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.qvt.declarative.editor.AbstractOutlineElement;
+import org.eclipse.qvt.declarative.editor.EditorPackage;
 import org.eclipse.qvt.declarative.editor.OutlineBehavior;
+import org.eclipse.qvt.declarative.editor.OutlineElement;
+import org.eclipse.qvt.declarative.editor.OutlineGroup;
+import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
+import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 import org.eclipse.qvt.declarative.parser.utils.CommonASTVisitor;
-import org.eclipse.qvt.declarative.parser.utils.CommonCSTVisitor;
 
-public abstract class CommonTreeModelBuilder extends TreeModelBuilderBase
+public class CommonTreeModelBuilder extends TreeModelBuilderBase
 {
-	protected class CommonASTModelVisitor extends CommonASTVisitor<Object>
+	protected class CommonASTModelVisitor<N> extends CommonASTVisitor<Object, N>
 	{
 		protected final CommonEditorDefinition editorDefinition;
 		
-		public CommonASTModelVisitor(CommonEditorDefinition editorDefinition) {
+		public CommonASTModelVisitor(CommonEditorDefinition editorDefinition, Class<N> nodeClass) {
+			super(nodeClass);
 			this.editorDefinition = editorDefinition;
+		}
+
+		protected void enterElement(N astNode, AbstractOutlineElement element) {
+			if (element instanceof OutlineElement)
+				enterOutlineElement(astNode, ((OutlineElement) element));
+			else if (element instanceof OutlineGroup)
+				enterOutlineGroup(astNode, ((OutlineGroup) element));
+			else
+				unexpectedEnterOutline(astNode, element);
+		}
+
+		protected void enterOutlineElement(N astNode, OutlineElement element) {
+			if (astNode instanceof EObject)
+				enter(((EObject)astNode).eGet(element.getFeature(), false));
+			else
+				unexpectedEnterOutline(astNode, element);
+		}
+
+		protected void enterOutlineGroup(N astNode, OutlineGroup group) {
+			for (AbstractOutlineElement element : group.getElements())
+				enterElement(astNode, element);
 		}
 		
 		@Override
-		public Object postVisit(Notifier astNode) {
+		public Object postVisit(N astNode) {
 			OutlineBehavior behavior = editorDefinition.getBehavior(astNode, OutlineBehavior.class);
-			if (behavior != null) {
-				if (behavior.isContainer())
-					popSubItem();
-			}
+			if (behavior != null)
+				popSubItem();
 			return super.postVisit(astNode);
 		}
 
 		@Override
-		public boolean preVisit(Notifier astNode) {
+		public boolean preVisit(N astNode) {
 			OutlineBehavior behavior = editorDefinition.getBehavior(astNode, OutlineBehavior.class);
 			if (behavior != null) {
-				boolean terminal = behavior.isTerminal();
-				if (behavior.isContainer() && !terminal)
+				boolean terminal = behavior.eIsSet(EditorPackage.Literals.OUTLINE_BEHAVIOR__ELEMENTS)
+					&& behavior.getElements().isEmpty();
+				if (!terminal)
 					pushSubItem(astNode);
 				else
 					createSubItem(astNode);
@@ -58,62 +88,68 @@ public abstract class CommonTreeModelBuilder extends TreeModelBuilderBase
 			}
 			return true;
 		}
-	}
-
-	protected class CommonCSTModelVisitor extends CommonCSTVisitor<Object>
-	{
-		protected final CommonEditorDefinition editorDefinition;
 		
-		public CommonCSTModelVisitor(CommonEditorDefinition editorDefinition) {
-			this.editorDefinition = editorDefinition;
-		}
-		
-		@Override
-		public Object postVisit(CSTNode cstNode) {
-			OutlineBehavior behavior = editorDefinition.getBehavior(cstNode, OutlineBehavior.class);
-			if (behavior != null) {
-				if (behavior.isContainer())
-					popSubItem();
-			}
-			return super.postVisit(cstNode);
+		protected void unexpectedEnterOutline(N astNode, AbstractOutlineElement element) {
+			QVTEditorPlugin.logError("Unexpected enter outline for a '" + element.getClass().getName() + "' at a '" + astNode.getClass().getSimpleName() + "' by a '" + getClass().getSimpleName() + "'", null);
 		}
 
 		@Override
-		public boolean preVisit(CSTNode cstNode) {
-			OutlineBehavior behavior = editorDefinition.getBehavior(cstNode, OutlineBehavior.class);
-			if (behavior != null) {
-				boolean terminal = behavior.isTerminal();
-				if (behavior.isContainer() && !terminal)
-					pushSubItem(cstNode);
-				else
-					createSubItem(cstNode);
-				if (terminal)
-					return false;
+		public void visitEObject(N astNode) {
+			OutlineBehavior behavior = editorDefinition.getBehavior(astNode, OutlineBehavior.class);
+			if ((behavior != null) && behavior.eIsSet(EditorPackage.Literals.OUTLINE_BEHAVIOR__ELEMENTS)) {
+				for (AbstractOutlineElement element : behavior.getElements())
+					enterElement(astNode, element);
+				return;
 			}
-			return true;
+			super.visitEObject(astNode);
 		}
 	}
 
-	protected CommonASTModelVisitor createASTVisitor(
-			CommonEditorDefinition editorDefinition) {
-		return new CommonASTModelVisitor(editorDefinition);
+	protected final ICreationFactory creationFactory;
+	protected final boolean showAST;
+	protected final Map<Object, ModelTreeNode> itemMap = new HashMap<Object, ModelTreeNode>();
+	
+	public CommonTreeModelBuilder(ICreationFactory creationFactory, boolean showAST) {
+		this.creationFactory = creationFactory;
+		this.showAST = showAST;
 	}
 
-	protected CommonCSTModelVisitor createCSTVisitor(
-			CommonEditorDefinition editorDefinition) {
-		return new CommonCSTModelVisitor(editorDefinition);
+	protected CommonASTModelVisitor<Notifier> createASTVisitor(CommonEditorDefinition editorDefinition) {
+		return new CommonASTModelVisitor<Notifier>(editorDefinition, Notifier.class);
 	}
 
-	protected abstract ICommonPlugin getPlugin();
+	@Override
+	protected ModelTreeNode createSubItem(Object n, int category) {
+		ModelTreeNode item = super.createSubItem(n, category);
+		itemMap.put(n, item);
+		return item;
+	}
+
+	@Override
+	protected ModelTreeNode createTopItem(Object n, int category) {
+		ModelTreeNode item = super.createTopItem(n, category);
+		itemMap.clear();
+		itemMap.put(n, item);
+		return item;
+	}
+
+	public ICreationFactory getCreationFactory() {
+		return creationFactory;
+	}
+
+	public ModelTreeNode getItem(Object n) {
+		return itemMap.get(n);
+	}
+	
+	public ICommonPlugin getPlugin() {
+		return creationFactory.getPlugin();
+	}
 
 	@Override
 	public void visitTree(Object root) {
 		if (root instanceof ASTandCST)
-			root = ((ASTandCST) root).resolve();
+			root = showAST ? ((ASTandCST) root).getAST() : ((ASTandCST) root).getCST();
 		CommonEditorDefinition editorDefinition = getPlugin().getEditorDefinition();
-		if (root instanceof CSTNode)
-			CommonCSTModelVisitor.acceptAt(createCSTVisitor(editorDefinition), ((CSTNode)root));
-		else if (root instanceof Notifier)
-			CommonASTModelVisitor.acceptAt(createASTVisitor(editorDefinition), ((Notifier)root));
+		createASTVisitor(editorDefinition).enter(root);
 	}
 }
