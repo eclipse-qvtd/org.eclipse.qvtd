@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcContentProposer.java,v 1.1 2008/08/10 13:52:32 ewillink Exp $
+ * $Id: QVTcContentProposer.java,v 1.2 2008/08/24 18:57:58 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui.imp;
 
@@ -115,6 +115,7 @@ public class QVTcContentProposer  extends CommonContentProposer
 		CSTNode cstRoot = cstAndAST != null ? cstAndAST.getCST() : null;
 		if (cstRoot != null) {
 			IToken token = getToken((CommonParseController) controller, offset);
+			@SuppressWarnings("unused")
 			String prefix = getPrefix((CommonParseController) controller, token, offset);
 			QVTcNodeLocator locator = new QVTcNodeLocator(null);
 			CSTNode node = (CSTNode) locator.findNode(cstRoot, token.getStartOffset(), token.getEndOffset());
