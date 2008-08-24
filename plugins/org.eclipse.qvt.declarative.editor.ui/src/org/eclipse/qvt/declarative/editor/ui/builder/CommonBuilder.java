@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.1 2008/08/18 07:46:26 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.2 2008/08/24 19:12:14 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -57,15 +57,11 @@ public abstract class CommonBuilder extends BuilderBase
 	 */
 	@Override
 	protected void collectDependencies(IFile file) {
-		String fromPath = file.getFullPath().toString();
-	
-		getPlugin().writeInfoMsg(
-				"Collecting dependencies from ${LANG_NAME} file: "
-						+ file.getName());
-	
-		// TODO: implement dependency collector
-		// E.g. for each dependency:
-		// fDependencyInfo.addDependency(fromPath, uponPath);
+//		String fromPath = file.getFullPath().toString();	
+//		getPlugin().writeInfoMsg("Collecting dependencies from ${LANG_NAME} file: " + file.getName());	
+// T O D O : implement dependency collector
+// E.g. for each dependency:
+// fDependencyInfo.addDependency(fromPath, uponPath);
 	}
 
 	/**
