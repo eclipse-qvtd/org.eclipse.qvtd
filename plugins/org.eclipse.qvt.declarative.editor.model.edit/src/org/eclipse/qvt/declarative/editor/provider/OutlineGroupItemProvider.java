@@ -1,8 +1,18 @@
 /**
  * <copyright>
+ * 
+ * Copyright (c) 2008 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * E.D.Willink - initial API and implementation
+ * 
  * </copyright>
  *
- * $Id: NodeItemProvider.java,v 1.1 2008/08/08 16:39:45 ewillink Exp $
+ * $Id: OutlineGroupItemProvider.java,v 1.1 2008/08/24 18:56:41 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -12,8 +22,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -21,20 +32,21 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
 import org.eclipse.qvt.declarative.editor.EditorFactory;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
-import org.eclipse.qvt.declarative.editor.Node;
+import org.eclipse.qvt.declarative.editor.OutlineGroup;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.qvt.declarative.editor.Node} object.
+ * This is the item provider adapter for a {@link org.eclipse.qvt.declarative.editor.OutlineGroup} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class NodeItemProvider
-	extends ItemProviderAdapter
+public class OutlineGroupItemProvider
+	extends AbstractOutlineElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -47,7 +59,7 @@ public class NodeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NodeItemProvider(AdapterFactory adapterFactory) {
+	public OutlineGroupItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,29 +74,52 @@ public class NodeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addBasePropertyDescriptor(object);
+			addImagePropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Base feature.
+	 * This adds a property descriptor for the Image feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addBasePropertyDescriptor(Object object) {
+	protected void addImagePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Node_base_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Node_base_feature", "_UI_Node_type"),
-				 EditorPackage.Literals.NODE__BASE,
+				 getString("_UI_OutlineGroup_image_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_OutlineGroup_image_feature", "_UI_OutlineGroup_type"),
+				 EditorPackage.Literals.OUTLINE_GROUP__IMAGE,
 				 true,
 				 false,
-				 true,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_OutlineGroup_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_OutlineGroup_name_feature", "_UI_OutlineGroup_type"),
+				 EditorPackage.Literals.OUTLINE_GROUP__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -101,7 +136,7 @@ public class NodeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(EditorPackage.Literals.NODE__BEHAVIOR);
+			childrenFeatures.add(EditorPackage.Literals.OUTLINE_GROUP__ELEMENTS);
 		}
 		return childrenFeatures;
 	}
@@ -120,16 +155,16 @@ public class NodeItemProvider
 	}
 
 	/**
-	 * This returns Node.gif.
+	 * This returns OutlineGroup.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Node"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/OutlineGroup"));
 	}
-	
+
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
@@ -138,7 +173,10 @@ public class NodeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Node_type");
+		String label = ((OutlineGroup)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_OutlineGroup_type") :
+			getString("_UI_OutlineGroup_type") + " " + label;
 	}
 
 	/**
@@ -152,8 +190,12 @@ public class NodeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Node.class)) {
-			case EditorPackage.NODE__BEHAVIOR:
+		switch (notification.getFeatureID(OutlineGroup.class)) {
+			case EditorPackage.OUTLINE_GROUP__IMAGE:
+			case EditorPackage.OUTLINE_GROUP__NAME:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case EditorPackage.OUTLINE_GROUP__ELEMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -173,29 +215,13 @@ public class NodeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(EditorPackage.Literals.NODE__BEHAVIOR,
-				 EditorFactory.eINSTANCE.createFoldingBehavior()));
+				(EditorPackage.Literals.OUTLINE_GROUP__ELEMENTS,
+				 EditorFactory.eINSTANCE.createOutlineElement()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(EditorPackage.Literals.NODE__BEHAVIOR,
-				 EditorFactory.eINSTANCE.createLabelBehavior()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(EditorPackage.Literals.NODE__BEHAVIOR,
-				 EditorFactory.eINSTANCE.createOutlineBehavior()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return EditorEditPlugin.INSTANCE;
+				(EditorPackage.Literals.OUTLINE_GROUP__ELEMENTS,
+				 EditorFactory.eINSTANCE.createOutlineGroup()));
 	}
 
 }

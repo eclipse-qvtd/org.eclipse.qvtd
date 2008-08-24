@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: JavaNodeItemProvider.java,v 1.2 2008/08/24 18:56:40 ewillink Exp $
+ * $Id: AbstractNodeItemProvider.java,v 1.1 2008/08/24 18:56:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -22,6 +22,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.ResourceLocator;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -29,19 +34,21 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import org.eclipse.qvt.declarative.editor.AbstractNode;
+import org.eclipse.qvt.declarative.editor.EditorFactory;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
-import org.eclipse.qvt.declarative.editor.JavaNode;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.qvt.declarative.editor.JavaNode} object.
+ * This is the item provider adapter for a {@link org.eclipse.qvt.declarative.editor.AbstractNode} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class JavaNodeItemProvider
-	extends AbstractNodeItemProvider
+public class AbstractNodeItemProvider
+	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -54,7 +61,7 @@ public class JavaNodeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JavaNodeItemProvider(AdapterFactory adapterFactory) {
+	public AbstractNodeItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -69,56 +76,72 @@ public class JavaNodeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
+			addBasePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
+	 * This adds a property descriptor for the Base feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object) {
+	protected void addBasePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_JavaNode_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_JavaNode_name_feature", "_UI_JavaNode_type"),
-				 EditorPackage.Literals.JAVA_NODE__NAME,
+				 getString("_UI_AbstractNode_base_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractNode_base_feature", "_UI_AbstractNode_type"),
+				 EditorPackage.Literals.ABSTRACT_NODE__BASE,
 				 true,
 				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 true,
+				 null,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This returns JavaNode.gif.
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/JavaNode"));
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(EditorPackage.Literals.ABSTRACT_NODE__BEHAVIOR);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((JavaNode)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_JavaNode_type") :
-			label;
+		return getString("_UI_AbstractNode_type");
 	}
 
 	/**
@@ -132,9 +155,9 @@ public class JavaNodeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JavaNode.class)) {
-			case EditorPackage.JAVA_NODE__NAME:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+		switch (notification.getFeatureID(AbstractNode.class)) {
+			case EditorPackage.ABSTRACT_NODE__BEHAVIOR:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -150,6 +173,32 @@ public class JavaNodeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(EditorPackage.Literals.ABSTRACT_NODE__BEHAVIOR,
+				 EditorFactory.eINSTANCE.createFoldingBehavior()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(EditorPackage.Literals.ABSTRACT_NODE__BEHAVIOR,
+				 EditorFactory.eINSTANCE.createLabelBehavior()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(EditorPackage.Literals.ABSTRACT_NODE__BEHAVIOR,
+				 EditorFactory.eINSTANCE.createOutlineBehavior()));
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return EditorEditPlugin.INSTANCE;
 	}
 
 }

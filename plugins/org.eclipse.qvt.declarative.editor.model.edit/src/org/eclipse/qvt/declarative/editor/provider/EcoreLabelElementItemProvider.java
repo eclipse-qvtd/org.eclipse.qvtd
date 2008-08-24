@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: JavaNodeItemProvider.java,v 1.2 2008/08/24 18:56:40 ewillink Exp $
+ * $Id: EcoreLabelElementItemProvider.java,v 1.1 2008/08/24 18:56:41 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -22,6 +22,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -32,16 +35,16 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
-import org.eclipse.qvt.declarative.editor.JavaNode;
+import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.qvt.declarative.editor.JavaNode} object.
+ * This is the item provider adapter for a {@link org.eclipse.qvt.declarative.editor.EcoreLabelElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class JavaNodeItemProvider
-	extends AbstractNodeItemProvider
+public class EcoreLabelElementItemProvider
+	extends AbstractLabelElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -54,7 +57,7 @@ public class JavaNodeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JavaNodeItemProvider(AdapterFactory adapterFactory) {
+	public EcoreLabelElementItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -69,25 +72,71 @@ public class JavaNodeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
+			addPathPropertyDescriptor(object);
+			addEndPropertyDescriptor(object);
+			addSeparatorPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
+	 * This adds a property descriptor for the Path feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object) {
+	protected void addPathPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_JavaNode_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_JavaNode_name_feature", "_UI_JavaNode_type"),
-				 EditorPackage.Literals.JAVA_NODE__NAME,
+				 getString("_UI_EcoreLabelElement_path_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EcoreLabelElement_path_feature", "_UI_EcoreLabelElement_type"),
+				 EditorPackage.Literals.ECORE_LABEL_ELEMENT__PATH,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the End feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEndPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EcoreLabelElement_end_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EcoreLabelElement_end_feature", "_UI_EcoreLabelElement_type"),
+				 EditorPackage.Literals.ECORE_LABEL_ELEMENT__END,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Separator feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSeparatorPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EcoreLabelElement_separator_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EcoreLabelElement_separator_feature", "_UI_EcoreLabelElement_type"),
+				 EditorPackage.Literals.ECORE_LABEL_ELEMENT__SEPARATOR,
 				 true,
 				 false,
 				 false,
@@ -97,14 +146,19 @@ public class JavaNodeItemProvider
 	}
 
 	/**
-	 * This returns JavaNode.gif.
+	 * This returns EcoreLabelElement.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/JavaNode"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/EcoreLabelElement"));
+	}
+
+	public String getLocalName(ENamedElement object) {
+		String name = object != null ? object.getName() : null;
+		return name != null ? name : "<???>";
 	}
 
 	/**
@@ -115,10 +169,23 @@ public class JavaNodeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((JavaNode)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_JavaNode_type") :
-			label;
+		StringBuffer s = new StringBuffer();
+		for (EReference ref : ((EcoreLabelElement)object).getPath()) {
+			if (s.length() != 0)
+				s.append(", ");
+			s.append(getLocalName(ref.getEContainingClass()));
+			s.append(".");
+			s.append(getLocalName(ref));				
+		}
+		EStructuralFeature end = ((EcoreLabelElement)object).getEnd();
+		if (end != null) {
+			if (s.length() != 0)
+				s.append(", ");
+			s.append(getLocalName(end.getEContainingClass()));
+			s.append(".");
+			s.append(getLocalName(end));				
+		}
+		return s.toString();
 	}
 
 	/**
@@ -132,8 +199,8 @@ public class JavaNodeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JavaNode.class)) {
-			case EditorPackage.JAVA_NODE__NAME:
+		switch (notification.getFeatureID(EcoreLabelElement.class)) {
+			case EditorPackage.ECORE_LABEL_ELEMENT__SEPARATOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -151,5 +218,4 @@ public class JavaNodeItemProvider
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
-
 }

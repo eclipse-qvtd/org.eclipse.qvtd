@@ -1,8 +1,18 @@
 /**
  * <copyright>
+ * 
+ * Copyright (c) 2008 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * E.D.Willink - initial API and implementation
+ * 
  * </copyright>
  *
- * $Id: LabelBehaviorItemProvider.java,v 1.2 2008/08/09 17:35:14 ewillink Exp $
+ * $Id: LabelBehaviorItemProvider.java,v 1.3 2008/08/24 18:56:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -216,7 +226,12 @@ public class LabelBehaviorItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(EditorPackage.Literals.LABEL_BEHAVIOR__ELEMENTS,
-				 EditorFactory.eINSTANCE.createLabelElement()));
+				 EditorFactory.eINSTANCE.createEcoreLabelElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(EditorPackage.Literals.LABEL_BEHAVIOR__ELEMENTS,
+				 EditorFactory.eINSTANCE.createJavaLabelElement()));
 	}
 
 }

@@ -1,8 +1,18 @@
 /**
  * <copyright>
+ * 
+ * Copyright (c) 2008 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * E.D.Willink - initial API and implementation
+ * 
  * </copyright>
  *
- * $Id: EditorItemProviderAdapterFactory.java,v 1.1 2008/08/08 16:39:46 ewillink Exp $
+ * $Id: EditorItemProviderAdapterFactory.java,v 1.2 2008/08/24 18:56:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -76,6 +86,29 @@ public class EditorItemProviderAdapterFactory extends EditorAdapterFactory imple
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.qvt.declarative.editor.EcoreLabelElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EcoreLabelElementItemProvider ecoreLabelElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.qvt.declarative.editor.EcoreLabelElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEcoreLabelElementAdapter() {
+		if (ecoreLabelElementItemProvider == null) {
+			ecoreLabelElementItemProvider = new EcoreLabelElementItemProvider(this);
+		}
+
+		return ecoreLabelElementItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.eclipse.qvt.declarative.editor.EcoreNode} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -145,6 +178,29 @@ public class EditorItemProviderAdapterFactory extends EditorAdapterFactory imple
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.qvt.declarative.editor.JavaLabelElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JavaLabelElementItemProvider javaLabelElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.qvt.declarative.editor.JavaLabelElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJavaLabelElementAdapter() {
+		if (javaLabelElementItemProvider == null) {
+			javaLabelElementItemProvider = new JavaLabelElementItemProvider(this);
+		}
+
+		return javaLabelElementItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.eclipse.qvt.declarative.editor.JavaNode} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -191,29 +247,6 @@ public class EditorItemProviderAdapterFactory extends EditorAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.qvt.declarative.editor.LabelElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected LabelElementItemProvider labelElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipse.qvt.declarative.editor.LabelElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createLabelElementAdapter() {
-		if (labelElementItemProvider == null) {
-			labelElementItemProvider = new LabelElementItemProvider(this);
-		}
-
-		return labelElementItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.eclipse.qvt.declarative.editor.OutlineBehavior} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -234,6 +267,52 @@ public class EditorItemProviderAdapterFactory extends EditorAdapterFactory imple
 		}
 
 		return outlineBehaviorItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.qvt.declarative.editor.OutlineElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OutlineElementItemProvider outlineElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.qvt.declarative.editor.OutlineElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOutlineElementAdapter() {
+		if (outlineElementItemProvider == null) {
+			outlineElementItemProvider = new OutlineElementItemProvider(this);
+		}
+
+		return outlineElementItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.qvt.declarative.editor.OutlineGroup} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OutlineGroupItemProvider outlineGroupItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.qvt.declarative.editor.OutlineGroup}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOutlineGroupAdapter() {
+		if (outlineGroupItemProvider == null) {
+			outlineGroupItemProvider = new OutlineGroupItemProvider(this);
+		}
+
+		return outlineGroupItemProvider;
 	}
 
 	/**
@@ -335,13 +414,16 @@ public class EditorItemProviderAdapterFactory extends EditorAdapterFactory imple
 	 * @generated
 	 */
 	public void dispose() {
+		if (ecoreLabelElementItemProvider != null) ecoreLabelElementItemProvider.dispose();
 		if (ecoreNodeItemProvider != null) ecoreNodeItemProvider.dispose();
 		if (editorDefinitionItemProvider != null) editorDefinitionItemProvider.dispose();
 		if (foldingBehaviorItemProvider != null) foldingBehaviorItemProvider.dispose();
+		if (javaLabelElementItemProvider != null) javaLabelElementItemProvider.dispose();
 		if (javaNodeItemProvider != null) javaNodeItemProvider.dispose();
 		if (labelBehaviorItemProvider != null) labelBehaviorItemProvider.dispose();
-		if (labelElementItemProvider != null) labelElementItemProvider.dispose();
 		if (outlineBehaviorItemProvider != null) outlineBehaviorItemProvider.dispose();
+		if (outlineElementItemProvider != null) outlineElementItemProvider.dispose();
+		if (outlineGroupItemProvider != null) outlineGroupItemProvider.dispose();
 	}
 
 }

@@ -1,8 +1,18 @@
 /**
  * <copyright>
+ * 
+ * Copyright (c) 2008 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * E.D.Willink - initial API and implementation
+ * 
  * </copyright>
  *
- * $Id: LabelElementItemProvider.java,v 1.3 2008/08/11 08:03:47 ewillink Exp $
+ * $Id: JavaLabelElementItemProvider.java,v 1.1 2008/08/24 18:56:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -12,10 +22,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.ecore.ENamedElement;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -24,19 +31,19 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
 import org.eclipse.qvt.declarative.editor.EditorPackage;
-import org.eclipse.qvt.declarative.editor.LabelElement;
+import org.eclipse.qvt.declarative.editor.JavaLabelElement;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.qvt.declarative.editor.LabelElement} object.
+ * This is the item provider adapter for a {@link org.eclipse.qvt.declarative.editor.JavaLabelElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class LabelElementItemProvider
-	extends ItemProviderAdapter
+public class JavaLabelElementItemProvider
+	extends AbstractLabelElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -49,7 +56,7 @@ public class LabelElementItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LabelElementItemProvider(AdapterFactory adapterFactory) {
+	public JavaLabelElementItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -64,71 +71,26 @@ public class LabelElementItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addPathPropertyDescriptor(object);
-			addEndPropertyDescriptor(object);
-			addSeparatorPropertyDescriptor(object);
+			addClassPropertyDescriptor(object);
+			addMethodPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Path feature.
+	 * This adds a property descriptor for the Class feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addPathPropertyDescriptor(Object object) {
+	protected void addClassPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_LabelElement_path_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_LabelElement_path_feature", "_UI_LabelElement_type"),
-				 EditorPackage.Literals.LABEL_ELEMENT__PATH,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the End feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addEndPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_LabelElement_end_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_LabelElement_end_feature", "_UI_LabelElement_type"),
-				 EditorPackage.Literals.LABEL_ELEMENT__END,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Separator feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSeparatorPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_LabelElement_separator_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_LabelElement_separator_feature", "_UI_LabelElement_type"),
-				 EditorPackage.Literals.LABEL_ELEMENT__SEPARATOR,
+				 getString("_UI_JavaLabelElement_class_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JavaLabelElement_class_feature", "_UI_JavaLabelElement_type"),
+				 EditorPackage.Literals.JAVA_LABEL_ELEMENT__CLASS,
 				 true,
 				 false,
 				 false,
@@ -138,19 +100,36 @@ public class LabelElementItemProvider
 	}
 
 	/**
-	 * This returns LabelElement.gif.
+	 * This adds a property descriptor for the Method feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMethodPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JavaLabelElement_method_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JavaLabelElement_method_feature", "_UI_JavaLabelElement_type"),
+				 EditorPackage.Literals.JAVA_LABEL_ELEMENT__METHOD,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This returns JavaLabelElement.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/LabelElement"));
-	}
-
-	public String getLocalName(ENamedElement object) {
-		String name = object != null ? object.getName() : null;
-		return name != null ? name : "<???>";
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/JavaLabelElement"));
 	}
 
 	/**
@@ -162,21 +141,11 @@ public class LabelElementItemProvider
 	@Override
 	public String getText(Object object) {
 		StringBuffer s = new StringBuffer();
-		for (EReference ref : ((LabelElement)object).getPath()) {
-			if (s.length() != 0)
-				s.append(", ");
-			s.append(getLocalName(ref.getEContainingClass()));
-			s.append(".");
-			s.append(getLocalName(ref));				
-		}
-		EStructuralFeature end = ((LabelElement)object).getEnd();
-		if (end != null) {
-			if (s.length() != 0)
-				s.append(", ");
-			s.append(getLocalName(end.getEContainingClass()));
-			s.append(".");
-			s.append(getLocalName(end));				
-		}
+		String label = ((JavaLabelElement)object).getClass_();
+		s.append(label != null ? label : "this");
+		s.append(".");
+		s.append(String.valueOf(((JavaLabelElement)object).getMethod()));
+		s.append("()");
 		return s.toString();
 	}
 
@@ -191,8 +160,9 @@ public class LabelElementItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(LabelElement.class)) {
-			case EditorPackage.LABEL_ELEMENT__SEPARATOR:
+		switch (notification.getFeatureID(JavaLabelElement.class)) {
+			case EditorPackage.JAVA_LABEL_ELEMENT__CLASS:
+			case EditorPackage.JAVA_LABEL_ELEMENT__METHOD:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -211,14 +181,4 @@ public class LabelElementItemProvider
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return EditorEditPlugin.INSTANCE;
-	}
 }
