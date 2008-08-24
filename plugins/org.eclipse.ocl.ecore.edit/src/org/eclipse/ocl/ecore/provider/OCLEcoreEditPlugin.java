@@ -12,16 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: OCLEcoreEditPlugin.java,v 1.1 2008/07/23 09:24:41 qglineur Exp $
+ * $Id: OCLEcoreEditPlugin.java,v 1.2 2008/08/24 19:27:47 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
-
 import org.eclipse.ocl.edit.internal.OCLEditPlugin;
 
 /**

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CollectionItemItemProvider.java,v 1.1 2008/07/23 09:24:41 qglineur Exp $
+ * $Id: CollectionItemItemProvider.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
 
@@ -22,9 +22,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.ResourceLocator;
-
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -32,9 +30,11 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.ocl.ecore.CollectionItem;
-
+import org.eclipse.ocl.ecore.EcoreFactory;
+import org.eclipse.ocl.ecore.EcorePackage;
+import org.eclipse.ocl.expressions.ExpressionsFactory;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
 
 /**
@@ -100,6 +100,36 @@ public class CollectionItemItemProvider
 	}
 
 	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
+	}
+
+	/**
 	 * This returns CollectionItem.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -134,6 +164,12 @@ public class CollectionItemItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(CollectionItem.class)) {
+			case EcorePackage.COLLECTION_ITEM__ITEM:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -147,17 +183,226 @@ public class CollectionItemItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
 
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return OCLEcoreEditPlugin.INSTANCE;
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createAssociationClassCallExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createBooleanLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createCollectionLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createEnumLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createIfExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createIntegerLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createUnlimitedNaturalLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createInvalidLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createIterateExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createIteratorExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createLetExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createMessageExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createNullLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createOperationCallExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createPropertyCallExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createRealLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createStateExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createStringLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createTupleLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createTypeExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createUnspecifiedValueExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 EcoreFactory.eINSTANCE.createVariableExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createAssociationClassCallExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createBooleanLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createCollectionLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createEnumLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createIfExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createIntegerLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createUnlimitedNaturalLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createInvalidLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createIterateExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createIteratorExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createLetExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createMessageExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createNullLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createOperationCallExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createPropertyCallExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createRealLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createStateExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createStringLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createTupleLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createTypeExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createUnspecifiedValueExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.COLLECTION_ITEM__ITEM,
+				 ExpressionsFactory.eINSTANCE.createVariableExp()));
 	}
 
 }

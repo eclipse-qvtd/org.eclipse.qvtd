@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EcoreItemProviderAdapterFactory.java,v 1.1 2008/07/23 09:24:42 qglineur Exp $
+ * $Id: EcoreItemProviderAdapterFactory.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
 
@@ -22,7 +22,6 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -34,7 +33,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
 import org.eclipse.ocl.ecore.util.EcoreAdapterFactory;
 
 /**

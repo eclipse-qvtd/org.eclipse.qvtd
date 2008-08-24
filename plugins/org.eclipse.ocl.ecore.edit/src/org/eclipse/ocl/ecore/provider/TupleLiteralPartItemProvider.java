@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TupleLiteralPartItemProvider.java,v 1.1 2008/07/23 09:24:41 qglineur Exp $
+ * $Id: TupleLiteralPartItemProvider.java,v 1.2 2008/08/24 19:27:47 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
 
@@ -22,13 +22,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.ecore.provider.ETypedElementItemProvider;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -38,16 +34,12 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.eclipse.ocl.ecore.EcoreFactory;
 import org.eclipse.ocl.ecore.EcorePackage;
 import org.eclipse.ocl.ecore.TupleLiteralPart;
-
 import org.eclipse.ocl.expressions.ExpressionsFactory;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
-
 import org.eclipse.ocl.types.TypesFactory;
-
 import org.eclipse.ocl.utilities.UtilitiesPackage;
 
 /**
@@ -907,6 +899,11 @@ public class TupleLiteralPartItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.TUPLE_LITERAL_PART__ATTRIBUTE,
+				 ExpressionsFactory.eINSTANCE.createVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.TUPLE_LITERAL_PART__ATTRIBUTE,
 				 ExpressionsFactory.eINSTANCE.createIteratorExp()));
 
 		newChildDescriptors.add
@@ -968,11 +965,6 @@ public class TupleLiteralPartItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.TUPLE_LITERAL_PART__ATTRIBUTE,
 				 ExpressionsFactory.eINSTANCE.createUnspecifiedValueExp()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.TUPLE_LITERAL_PART__ATTRIBUTE,
-				 ExpressionsFactory.eINSTANCE.createVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter

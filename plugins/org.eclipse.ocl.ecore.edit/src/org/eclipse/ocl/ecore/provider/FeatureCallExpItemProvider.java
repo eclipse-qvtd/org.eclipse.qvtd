@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: FeatureCallExpItemProvider.java,v 1.1 2008/07/23 09:24:41 qglineur Exp $
+ * $Id: FeatureCallExpItemProvider.java,v 1.2 2008/08/24 19:27:47 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
 
@@ -22,9 +22,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -34,10 +31,8 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.eclipse.ocl.ecore.EcorePackage;
 import org.eclipse.ocl.ecore.FeatureCallExp;
-
 import org.eclipse.ocl.expressions.ExpressionsPackage;
 
 /**
@@ -145,17 +140,6 @@ public class FeatureCallExpItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return OCLEcoreEditPlugin.INSTANCE;
 	}
 
 }

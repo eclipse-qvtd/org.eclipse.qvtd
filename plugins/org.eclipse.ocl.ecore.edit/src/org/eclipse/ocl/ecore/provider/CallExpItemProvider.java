@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CallExpItemProvider.java,v 1.1 2008/07/23 09:24:41 qglineur Exp $
+ * $Id: CallExpItemProvider.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
 
@@ -22,11 +22,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -36,14 +32,11 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.eclipse.ocl.ecore.CallExp;
 import org.eclipse.ocl.ecore.EcoreFactory;
 import org.eclipse.ocl.ecore.EcorePackage;
-
 import org.eclipse.ocl.expressions.ExpressionsFactory;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
-
 import org.eclipse.ocl.utilities.UtilitiesPackage;
 
 /**
@@ -428,17 +421,6 @@ public class CallExpItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.CALL_EXP__SOURCE,
 				 ExpressionsFactory.eINSTANCE.createVariableExp()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return OCLEcoreEditPlugin.INSTANCE;
 	}
 
 }

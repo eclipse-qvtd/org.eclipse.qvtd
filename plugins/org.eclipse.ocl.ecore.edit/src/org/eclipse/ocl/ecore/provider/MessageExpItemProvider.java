@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: MessageExpItemProvider.java,v 1.1 2008/07/23 09:24:41 qglineur Exp $
+ * $Id: MessageExpItemProvider.java,v 1.2 2008/08/24 19:27:47 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
 
@@ -22,11 +22,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -36,16 +32,12 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.eclipse.ocl.ecore.EcoreFactory;
 import org.eclipse.ocl.ecore.EcorePackage;
 import org.eclipse.ocl.ecore.MessageExp;
-
 import org.eclipse.ocl.expressions.ExpressionsFactory;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
-
 import org.eclipse.ocl.types.TypesFactory;
-
 import org.eclipse.ocl.utilities.UtilitiesPackage;
 
 /**
@@ -1081,6 +1073,11 @@ public class MessageExpItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.MESSAGE_EXP__CALLED_OPERATION,
+				 ExpressionsFactory.eINSTANCE.createVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.MESSAGE_EXP__CALLED_OPERATION,
 				 ExpressionsFactory.eINSTANCE.createIteratorExp()));
 
 		newChildDescriptors.add
@@ -1142,11 +1139,6 @@ public class MessageExpItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.MESSAGE_EXP__CALLED_OPERATION,
 				 ExpressionsFactory.eINSTANCE.createUnspecifiedValueExp()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.MESSAGE_EXP__CALLED_OPERATION,
-				 ExpressionsFactory.eINSTANCE.createVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -1566,6 +1558,11 @@ public class MessageExpItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.MESSAGE_EXP__SENT_SIGNAL,
+				 ExpressionsFactory.eINSTANCE.createVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.MESSAGE_EXP__SENT_SIGNAL,
 				 ExpressionsFactory.eINSTANCE.createIteratorExp()));
 
 		newChildDescriptors.add
@@ -1631,11 +1628,6 @@ public class MessageExpItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.MESSAGE_EXP__SENT_SIGNAL,
-				 ExpressionsFactory.eINSTANCE.createVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.MESSAGE_EXP__SENT_SIGNAL,
 				 ExpressionsFactory.eINSTANCE.createVariableExp()));
 	}
 
@@ -1664,17 +1656,6 @@ public class MessageExpItemProvider
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return OCLEcoreEditPlugin.INSTANCE;
 	}
 
 }

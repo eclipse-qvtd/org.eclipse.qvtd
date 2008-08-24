@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TupleTypeItemProvider.java,v 1.1 2008/07/23 09:24:41 qglineur Exp $
+ * $Id: TupleTypeItemProvider.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
 
@@ -22,18 +22,18 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.provider.EClassItemProvider;
-
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.ocl.ecore.TupleType;
 
 /**
@@ -71,8 +71,31 @@ public class TupleTypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addSerializablePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Serializable feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSerializablePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EDataType_serializable_feature"), //$NON-NLS-1$
+				 getString("_UI_EDataType_serializable_description"), //$NON-NLS-1$
+				 EcorePackage.Literals.EDATA_TYPE__SERIALIZABLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -110,6 +133,12 @@ public class TupleTypeItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(TupleType.class)) {
+			case org.eclipse.ocl.ecore.EcorePackage.TUPLE_TYPE__SERIALIZABLE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
