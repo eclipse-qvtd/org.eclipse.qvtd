@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLContentProposer.java,v 1.1 2008/08/14 07:51:10 ewillink Exp $
+ * $Id: OCLContentProposer.java,v 1.2 2008/08/24 18:58:00 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui.imp;
 
@@ -115,6 +115,7 @@ public class OCLContentProposer  extends CommonContentProposer
 		CSTNode cstRoot = cstAndAST != null ? cstAndAST.getCST() : null;
 		if (cstRoot != null) {
 			IToken token = getToken((CommonParseController) controller, offset);
+			@SuppressWarnings("unused")
 			String prefix = getPrefix((CommonParseController) controller, token, offset);
 			OCLNodeLocator locator = new OCLNodeLocator(null);
 			CSTNode node = (CSTNode) locator.findNode(cstRoot, token.getStartOffset(), token.getEndOffset());
