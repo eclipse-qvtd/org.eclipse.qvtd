@@ -20,4 +20,4 @@ Export-Package: org.eclipse.qvt.declarative.modelregistry,
  org.eclipse.qvt.declarative.modelregistry.standalone,
  org.eclipse.qvt.declarative.modelregistry.util
 Bundle-Vendor: %providerName
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
