@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.utils;
 
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.cst.CSTNode;
 
@@ -22,11 +21,6 @@ public class ASTandCST
 {
 	private CSTNode cst = null;
 	private Resource ast = null;
-	private boolean astPreferred;
-
-	public ASTandCST(boolean astPreferred) {
-		this.astPreferred = astPreferred;
-	}
 
 	public Resource getAST() {
 		return ast;
@@ -41,19 +35,11 @@ public class ASTandCST
 		this.cst = null;
 	}
 
-	public Notifier resolve() {
-		return astPreferred ? ast != null ? ast : cst : cst != null ? cst : ast;
-	}
-
 	public void setAST(Resource ast) {
 		this.ast = ast;
 	}
 
 	public void setCST(CSTNode cst) {
 		this.cst = cst;
-	}
-
-	public void setUseAST(boolean useAST) {
-		astPreferred = useAST;	
 	}
 }
