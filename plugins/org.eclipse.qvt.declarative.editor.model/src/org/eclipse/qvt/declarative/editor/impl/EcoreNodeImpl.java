@@ -12,18 +12,15 @@
  * 
  * </copyright>
  *
- * $Id: EcoreNodeImpl.java,v 1.1 2008/08/08 16:39:55 ewillink Exp $
+ * $Id: EcoreNodeImpl.java,v 1.2 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.qvt.declarative.editor.EcoreNode;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
 
@@ -40,7 +37,7 @@ import org.eclipse.qvt.declarative.editor.EditorPackage;
  *
  * @generated
  */
-public class EcoreNodeImpl extends NodeImpl implements EcoreNode {
+public class EcoreNodeImpl extends AbstractNodeImpl implements EcoreNode {
 	/**
 	 * The cached value of the '{@link #getElement() <em>Element</em>}' reference.
 	 * <!-- begin-user-doc -->

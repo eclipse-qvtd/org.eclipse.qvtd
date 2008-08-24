@@ -12,13 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: LabelElement.java,v 1.2 2008/08/11 08:03:43 ewillink Exp $
+ * $Id: EcoreLabelElement.java,v 1.1 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
@@ -30,17 +28,17 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvt.declarative.editor.LabelElement#getPath <em>Path</em>}</li>
- *   <li>{@link org.eclipse.qvt.declarative.editor.LabelElement#getEnd <em>End</em>}</li>
- *   <li>{@link org.eclipse.qvt.declarative.editor.LabelElement#getSeparator <em>Separator</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getPath <em>Path</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getEnd <em>End</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getSeparator <em>Separator</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.qvt.declarative.editor.EditorPackage#getLabelElement()
+ * @see org.eclipse.qvt.declarative.editor.EditorPackage#getEcoreLabelElement()
  * @model
  * @generated
  */
-public interface LabelElement extends EObject {
+public interface EcoreLabelElement extends AbstractLabelElement {
 	/**
 	 * Returns the value of the '<em><b>Path</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.emf.ecore.EReference}.
@@ -51,7 +49,7 @@ public interface LabelElement extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Path</em>' reference list.
-	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getLabelElement_Path()
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getEcoreLabelElement_Path()
 	 * @model
 	 * @generated
 	 */
@@ -67,14 +65,14 @@ public interface LabelElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>End</em>' reference.
 	 * @see #setEnd(EStructuralFeature)
-	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getLabelElement_End()
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getEcoreLabelElement_End()
 	 * @model required="true"
 	 * @generated
 	 */
 	EStructuralFeature getEnd();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.LabelElement#getEnd <em>End</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getEnd <em>End</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>End</em>' reference.
@@ -94,14 +92,14 @@ public interface LabelElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Separator</em>' attribute.
 	 * @see #setSeparator(String)
-	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getLabelElement_Separator()
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getEcoreLabelElement_Separator()
 	 * @model default=" "
 	 * @generated
 	 */
 	String getSeparator();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.LabelElement#getSeparator <em>Separator</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getSeparator <em>Separator</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Separator</em>' attribute.

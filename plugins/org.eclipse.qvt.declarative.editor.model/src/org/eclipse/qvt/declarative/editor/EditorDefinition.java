@@ -12,12 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: EditorDefinition.java,v 1.2 2008/08/14 06:24:14 ewillink Exp $
+ * $Id: EditorDefinition.java,v 1.3 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -83,7 +82,7 @@ public interface EditorDefinition extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Node</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvt.declarative.editor.Node}.
+	 * The list contents are of type {@link org.eclipse.qvt.declarative.editor.AbstractNode}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Node</em>' containment reference list isn't clear,
@@ -95,6 +94,6 @@ public interface EditorDefinition extends EObject {
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<Node> getNode();
+	EList<AbstractNode> getNode();
 
 } // EditorDefinition

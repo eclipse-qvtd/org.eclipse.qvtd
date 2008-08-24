@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorDefinitionImpl.java,v 1.2 2008/08/14 06:24:14 ewillink Exp $
+ * $Id: EditorDefinitionImpl.java,v 1.3 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -20,22 +20,17 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.eclipse.qvt.declarative.editor.AbstractNode;
 import org.eclipse.qvt.declarative.editor.EditorDefinition;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
-import org.eclipse.qvt.declarative.editor.Node;
 
 /**
  * <!-- begin-user-doc -->
@@ -88,7 +83,7 @@ public class EditorDefinitionImpl extends EObjectImpl implements EditorDefinitio
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Node> node;
+	protected EList<AbstractNode> node;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -147,9 +142,9 @@ public class EditorDefinitionImpl extends EObjectImpl implements EditorDefinitio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Node> getNode() {
+	public EList<AbstractNode> getNode() {
 		if (node == null) {
-			node = new EObjectContainmentEList<Node>(Node.class, this, EditorPackage.EDITOR_DEFINITION__NODE);
+			node = new EObjectContainmentEList<AbstractNode>(AbstractNode.class, this, EditorPackage.EDITOR_DEFINITION__NODE);
 		}
 		return node;
 	}
@@ -204,7 +199,7 @@ public class EditorDefinitionImpl extends EObjectImpl implements EditorDefinitio
 				return;
 			case EditorPackage.EDITOR_DEFINITION__NODE:
 				getNode().clear();
-				getNode().addAll((Collection<? extends Node>)newValue);
+				getNode().addAll((Collection<? extends AbstractNode>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

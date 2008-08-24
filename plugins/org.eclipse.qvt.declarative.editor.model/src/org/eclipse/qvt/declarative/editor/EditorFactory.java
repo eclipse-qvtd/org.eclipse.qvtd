@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorFactory.java,v 1.1 2008/08/08 16:39:54 ewillink Exp $
+ * $Id: EditorFactory.java,v 1.2 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -34,6 +34,15 @@ public interface EditorFactory extends EFactory {
 	 * @generated
 	 */
 	EditorFactory eINSTANCE = org.eclipse.qvt.declarative.editor.impl.EditorFactoryImpl.init();
+
+	/**
+	 * Returns a new object of class '<em>Ecore Label Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Ecore Label Element</em>'.
+	 * @generated
+	 */
+	EcoreLabelElement createEcoreLabelElement();
 
 	/**
 	 * Returns a new object of class '<em>Ecore Node</em>'.
@@ -63,6 +72,15 @@ public interface EditorFactory extends EFactory {
 	FoldingBehavior createFoldingBehavior();
 
 	/**
+	 * Returns a new object of class '<em>Java Label Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Java Label Element</em>'.
+	 * @generated
+	 */
+	JavaLabelElement createJavaLabelElement();
+
+	/**
 	 * Returns a new object of class '<em>Java Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -81,15 +99,6 @@ public interface EditorFactory extends EFactory {
 	LabelBehavior createLabelBehavior();
 
 	/**
-	 * Returns a new object of class '<em>Label Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Label Element</em>'.
-	 * @generated
-	 */
-	LabelElement createLabelElement();
-
-	/**
 	 * Returns a new object of class '<em>Outline Behavior</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -97,6 +106,24 @@ public interface EditorFactory extends EFactory {
 	 * @generated
 	 */
 	OutlineBehavior createOutlineBehavior();
+
+	/**
+	 * Returns a new object of class '<em>Outline Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Outline Element</em>'.
+	 * @generated
+	 */
+	OutlineElement createOutlineElement();
+
+	/**
+	 * Returns a new object of class '<em>Outline Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Outline Group</em>'.
+	 * @generated
+	 */
+	OutlineGroup createOutlineGroup();
 
 	/**
 	 * Returns the package supported by this factory.

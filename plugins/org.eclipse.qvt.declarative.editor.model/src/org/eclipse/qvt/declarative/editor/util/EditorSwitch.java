@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorSwitch.java,v 1.1 2008/08/08 16:39:55 ewillink Exp $
+ * $Id: EditorSwitch.java,v 1.2 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.util;
 
@@ -97,16 +97,41 @@ public class EditorSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case EditorPackage.ABSTRACT_LABEL_ELEMENT: {
+				AbstractLabelElement abstractLabelElement = (AbstractLabelElement)theEObject;
+				T result = caseAbstractLabelElement(abstractLabelElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EditorPackage.ABSTRACT_NODE: {
+				AbstractNode abstractNode = (AbstractNode)theEObject;
+				T result = caseAbstractNode(abstractNode);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EditorPackage.ABSTRACT_OUTLINE_ELEMENT: {
+				AbstractOutlineElement abstractOutlineElement = (AbstractOutlineElement)theEObject;
+				T result = caseAbstractOutlineElement(abstractOutlineElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case EditorPackage.BEHAVIOR: {
 				Behavior behavior = (Behavior)theEObject;
 				T result = caseBehavior(behavior);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case EditorPackage.ECORE_LABEL_ELEMENT: {
+				EcoreLabelElement ecoreLabelElement = (EcoreLabelElement)theEObject;
+				T result = caseEcoreLabelElement(ecoreLabelElement);
+				if (result == null) result = caseAbstractLabelElement(ecoreLabelElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case EditorPackage.ECORE_NODE: {
 				EcoreNode ecoreNode = (EcoreNode)theEObject;
 				T result = caseEcoreNode(ecoreNode);
-				if (result == null) result = caseNode(ecoreNode);
+				if (result == null) result = caseAbstractNode(ecoreNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -123,10 +148,17 @@ public class EditorSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case EditorPackage.JAVA_LABEL_ELEMENT: {
+				JavaLabelElement javaLabelElement = (JavaLabelElement)theEObject;
+				T result = caseJavaLabelElement(javaLabelElement);
+				if (result == null) result = caseAbstractLabelElement(javaLabelElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case EditorPackage.JAVA_NODE: {
 				JavaNode javaNode = (JavaNode)theEObject;
 				T result = caseJavaNode(javaNode);
-				if (result == null) result = caseNode(javaNode);
+				if (result == null) result = caseAbstractNode(javaNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -137,18 +169,6 @@ public class EditorSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EditorPackage.LABEL_ELEMENT: {
-				LabelElement labelElement = (LabelElement)theEObject;
-				T result = caseLabelElement(labelElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case EditorPackage.NODE: {
-				Node node = (Node)theEObject;
-				T result = caseNode(node);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case EditorPackage.OUTLINE_BEHAVIOR: {
 				OutlineBehavior outlineBehavior = (OutlineBehavior)theEObject;
 				T result = caseOutlineBehavior(outlineBehavior);
@@ -156,8 +176,67 @@ public class EditorSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case EditorPackage.OUTLINE_ELEMENT: {
+				OutlineElement outlineElement = (OutlineElement)theEObject;
+				T result = caseOutlineElement(outlineElement);
+				if (result == null) result = caseAbstractOutlineElement(outlineElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EditorPackage.OUTLINE_GROUP: {
+				OutlineGroup outlineGroup = (OutlineGroup)theEObject;
+				T result = caseOutlineGroup(outlineGroup);
+				if (result == null) result = caseAbstractOutlineElement(outlineGroup);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Label Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Label Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractLabelElement(AbstractLabelElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractNode(AbstractNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Outline Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Outline Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractOutlineElement(AbstractOutlineElement object) {
+		return null;
 	}
 
 	/**
@@ -172,6 +251,21 @@ public class EditorSwitch<T> {
 	 * @generated
 	 */
 	public T caseBehavior(Behavior object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ecore Label Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ecore Label Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEcoreLabelElement(EcoreLabelElement object) {
 		return null;
 	}
 
@@ -221,6 +315,21 @@ public class EditorSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Java Label Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Java Label Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJavaLabelElement(JavaLabelElement object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Java Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -251,36 +360,6 @@ public class EditorSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Label Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Label Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLabelElement(LabelElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNode(Node object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Outline Behavior</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -292,6 +371,36 @@ public class EditorSwitch<T> {
 	 * @generated
 	 */
 	public T caseOutlineBehavior(OutlineBehavior object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Outline Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Outline Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOutlineElement(OutlineElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Outline Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Outline Group</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOutlineGroup(OutlineGroup object) {
 		return null;
 	}
 

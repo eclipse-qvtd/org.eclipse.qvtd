@@ -12,56 +12,51 @@
  * 
  * </copyright>
  *
- * $Id: JavaNodeImpl.java,v 1.2 2008/08/24 18:56:21 ewillink Exp $
+ * $Id: OutlineElementImpl.java,v 1.1 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.qvt.declarative.editor.EditorPackage;
-import org.eclipse.qvt.declarative.editor.JavaNode;
+import org.eclipse.qvt.declarative.editor.OutlineElement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Java Node</b></em>'.
+ * An implementation of the model object '<em><b>Outline Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvt.declarative.editor.impl.JavaNodeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.OutlineElementImpl#getFeature <em>Feature</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class JavaNodeImpl extends AbstractNodeImpl implements JavaNode {
+public class OutlineElementImpl extends AbstractOutlineElementImpl implements OutlineElement {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getFeature() <em>Feature</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getFeature()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
+	protected EStructuralFeature feature;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected JavaNodeImpl() {
+	protected OutlineElementImpl() {
 		super();
 	}
 
@@ -72,7 +67,7 @@ public class JavaNodeImpl extends AbstractNodeImpl implements JavaNode {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return EditorPackage.Literals.JAVA_NODE;
+		return EditorPackage.Literals.OUTLINE_ELEMENT;
 	}
 
 	/**
@@ -80,8 +75,16 @@ public class JavaNodeImpl extends AbstractNodeImpl implements JavaNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
+	public EStructuralFeature getFeature() {
+		if (feature != null && feature.eIsProxy()) {
+			InternalEObject oldFeature = (InternalEObject)feature;
+			feature = (EStructuralFeature)eResolveProxy(oldFeature);
+			if (feature != oldFeature) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EditorPackage.OUTLINE_ELEMENT__FEATURE, oldFeature, feature));
+			}
+		}
+		return feature;
 	}
 
 	/**
@@ -89,11 +92,20 @@ public class JavaNodeImpl extends AbstractNodeImpl implements JavaNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
+	public EStructuralFeature basicGetFeature() {
+		return feature;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFeature(EStructuralFeature newFeature) {
+		EStructuralFeature oldFeature = feature;
+		feature = newFeature;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.JAVA_NODE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.OUTLINE_ELEMENT__FEATURE, oldFeature, feature));
 	}
 
 	/**
@@ -104,8 +116,9 @@ public class JavaNodeImpl extends AbstractNodeImpl implements JavaNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EditorPackage.JAVA_NODE__NAME:
-				return getName();
+			case EditorPackage.OUTLINE_ELEMENT__FEATURE:
+				if (resolve) return getFeature();
+				return basicGetFeature();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,8 +131,8 @@ public class JavaNodeImpl extends AbstractNodeImpl implements JavaNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EditorPackage.JAVA_NODE__NAME:
-				setName((String)newValue);
+			case EditorPackage.OUTLINE_ELEMENT__FEATURE:
+				setFeature((EStructuralFeature)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -133,8 +146,8 @@ public class JavaNodeImpl extends AbstractNodeImpl implements JavaNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EditorPackage.JAVA_NODE__NAME:
-				setName(NAME_EDEFAULT);
+			case EditorPackage.OUTLINE_ELEMENT__FEATURE:
+				setFeature((EStructuralFeature)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -148,26 +161,10 @@ public class JavaNodeImpl extends AbstractNodeImpl implements JavaNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EditorPackage.JAVA_NODE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case EditorPackage.OUTLINE_ELEMENT__FEATURE:
+				return feature != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
-	}
-
-} //JavaNodeImpl
+} //OutlineElementImpl

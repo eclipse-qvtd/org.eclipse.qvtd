@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: LabelBehaviorImpl.java,v 1.2 2008/08/24 18:56:21 ewillink Exp $
+ * $Id: OutlineGroupImpl.java,v 1.1 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -20,32 +20,37 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.qvt.declarative.editor.AbstractLabelElement;
+
+import org.eclipse.qvt.declarative.editor.AbstractOutlineElement;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
-import org.eclipse.qvt.declarative.editor.LabelBehavior;
+import org.eclipse.qvt.declarative.editor.OutlineGroup;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Label Behavior</b></em>'.
+ * An implementation of the model object '<em><b>Outline Group</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelBehaviorImpl#getImage <em>Image</em>}</li>
- *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelBehaviorImpl#getFormat <em>Format</em>}</li>
- *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelBehaviorImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.OutlineGroupImpl#getImage <em>Image</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.OutlineGroupImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.OutlineGroupImpl#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
+public class OutlineGroupImpl extends AbstractOutlineElementImpl implements OutlineGroup {
 	/**
 	 * The default value of the '{@link #getImage() <em>Image</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -67,24 +72,24 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	protected String image = IMAGE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getFormat() <em>Format</em>}' attribute.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFormat()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String FORMAT_EDEFAULT = null;
+	protected static final String NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getFormat() <em>Format</em>}' attribute.
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFormat()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String format = FORMAT_EDEFAULT;
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
@@ -94,14 +99,14 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractLabelElement> elements;
+	protected EList<AbstractOutlineElement> elements;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected LabelBehaviorImpl() {
+	protected OutlineGroupImpl() {
 		super();
 	}
 
@@ -112,7 +117,7 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return EditorPackage.Literals.LABEL_BEHAVIOR;
+		return EditorPackage.Literals.OUTLINE_GROUP;
 	}
 
 	/**
@@ -133,7 +138,7 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 		String oldImage = image;
 		image = newImage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.LABEL_BEHAVIOR__IMAGE, oldImage, image));
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.OUTLINE_GROUP__IMAGE, oldImage, image));
 	}
 
 	/**
@@ -141,8 +146,8 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getFormat() {
-		return format;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -150,11 +155,11 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFormat(String newFormat) {
-		String oldFormat = format;
-		format = newFormat;
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.LABEL_BEHAVIOR__FORMAT, oldFormat, format));
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.OUTLINE_GROUP__NAME, oldName, name));
 	}
 
 	/**
@@ -162,11 +167,29 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AbstractLabelElement> getElements() {
+	public EList<AbstractOutlineElement> getElements() {
 		if (elements == null) {
-			elements = new EObjectContainmentEList<AbstractLabelElement>(AbstractLabelElement.class, this, EditorPackage.LABEL_BEHAVIOR__ELEMENTS);
+			elements = new EObjectContainmentEList.Unsettable<AbstractOutlineElement>(AbstractOutlineElement.class, this, EditorPackage.OUTLINE_GROUP__ELEMENTS);
 		}
 		return elements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void unsetElements() {
+		if (elements != null) ((InternalEList.Unsettable<?>)elements).unset();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSetElements() {
+		return elements != null && ((InternalEList.Unsettable<?>)elements).isSet();
 	}
 
 	/**
@@ -177,7 +200,7 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case EditorPackage.LABEL_BEHAVIOR__ELEMENTS:
+			case EditorPackage.OUTLINE_GROUP__ELEMENTS:
 				return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -191,11 +214,11 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EditorPackage.LABEL_BEHAVIOR__IMAGE:
+			case EditorPackage.OUTLINE_GROUP__IMAGE:
 				return getImage();
-			case EditorPackage.LABEL_BEHAVIOR__FORMAT:
-				return getFormat();
-			case EditorPackage.LABEL_BEHAVIOR__ELEMENTS:
+			case EditorPackage.OUTLINE_GROUP__NAME:
+				return getName();
+			case EditorPackage.OUTLINE_GROUP__ELEMENTS:
 				return getElements();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -210,15 +233,15 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EditorPackage.LABEL_BEHAVIOR__IMAGE:
+			case EditorPackage.OUTLINE_GROUP__IMAGE:
 				setImage((String)newValue);
 				return;
-			case EditorPackage.LABEL_BEHAVIOR__FORMAT:
-				setFormat((String)newValue);
+			case EditorPackage.OUTLINE_GROUP__NAME:
+				setName((String)newValue);
 				return;
-			case EditorPackage.LABEL_BEHAVIOR__ELEMENTS:
+			case EditorPackage.OUTLINE_GROUP__ELEMENTS:
 				getElements().clear();
-				getElements().addAll((Collection<? extends AbstractLabelElement>)newValue);
+				getElements().addAll((Collection<? extends AbstractOutlineElement>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -232,14 +255,14 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EditorPackage.LABEL_BEHAVIOR__IMAGE:
+			case EditorPackage.OUTLINE_GROUP__IMAGE:
 				setImage(IMAGE_EDEFAULT);
 				return;
-			case EditorPackage.LABEL_BEHAVIOR__FORMAT:
-				setFormat(FORMAT_EDEFAULT);
+			case EditorPackage.OUTLINE_GROUP__NAME:
+				setName(NAME_EDEFAULT);
 				return;
-			case EditorPackage.LABEL_BEHAVIOR__ELEMENTS:
-				getElements().clear();
+			case EditorPackage.OUTLINE_GROUP__ELEMENTS:
+				unsetElements();
 				return;
 		}
 		super.eUnset(featureID);
@@ -253,12 +276,12 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EditorPackage.LABEL_BEHAVIOR__IMAGE:
+			case EditorPackage.OUTLINE_GROUP__IMAGE:
 				return IMAGE_EDEFAULT == null ? image != null : !IMAGE_EDEFAULT.equals(image);
-			case EditorPackage.LABEL_BEHAVIOR__FORMAT:
-				return FORMAT_EDEFAULT == null ? format != null : !FORMAT_EDEFAULT.equals(format);
-			case EditorPackage.LABEL_BEHAVIOR__ELEMENTS:
-				return elements != null && !elements.isEmpty();
+			case EditorPackage.OUTLINE_GROUP__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case EditorPackage.OUTLINE_GROUP__ELEMENTS:
+				return isSetElements();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -275,10 +298,10 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (image: ");
 		result.append(image);
-		result.append(", format: ");
-		result.append(format);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}
 
-} //LabelBehaviorImpl
+} //OutlineGroupImpl

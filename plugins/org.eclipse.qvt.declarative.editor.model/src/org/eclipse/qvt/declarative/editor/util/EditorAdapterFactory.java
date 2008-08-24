@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorAdapterFactory.java,v 1.1 2008/08/08 16:39:56 ewillink Exp $
+ * $Id: EditorAdapterFactory.java,v 1.2 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.util;
 
@@ -82,8 +82,24 @@ public class EditorAdapterFactory extends AdapterFactoryImpl {
 	protected EditorSwitch<Adapter> modelSwitch =
 		new EditorSwitch<Adapter>() {
 			@Override
+			public Adapter caseAbstractLabelElement(AbstractLabelElement object) {
+				return createAbstractLabelElementAdapter();
+			}
+			@Override
+			public Adapter caseAbstractNode(AbstractNode object) {
+				return createAbstractNodeAdapter();
+			}
+			@Override
+			public Adapter caseAbstractOutlineElement(AbstractOutlineElement object) {
+				return createAbstractOutlineElementAdapter();
+			}
+			@Override
 			public Adapter caseBehavior(Behavior object) {
 				return createBehaviorAdapter();
+			}
+			@Override
+			public Adapter caseEcoreLabelElement(EcoreLabelElement object) {
+				return createEcoreLabelElementAdapter();
 			}
 			@Override
 			public Adapter caseEcoreNode(EcoreNode object) {
@@ -98,6 +114,10 @@ public class EditorAdapterFactory extends AdapterFactoryImpl {
 				return createFoldingBehaviorAdapter();
 			}
 			@Override
+			public Adapter caseJavaLabelElement(JavaLabelElement object) {
+				return createJavaLabelElementAdapter();
+			}
+			@Override
 			public Adapter caseJavaNode(JavaNode object) {
 				return createJavaNodeAdapter();
 			}
@@ -106,16 +126,16 @@ public class EditorAdapterFactory extends AdapterFactoryImpl {
 				return createLabelBehaviorAdapter();
 			}
 			@Override
-			public Adapter caseLabelElement(LabelElement object) {
-				return createLabelElementAdapter();
-			}
-			@Override
-			public Adapter caseNode(Node object) {
-				return createNodeAdapter();
-			}
-			@Override
 			public Adapter caseOutlineBehavior(OutlineBehavior object) {
 				return createOutlineBehaviorAdapter();
+			}
+			@Override
+			public Adapter caseOutlineElement(OutlineElement object) {
+				return createOutlineElementAdapter();
+			}
+			@Override
+			public Adapter caseOutlineGroup(OutlineGroup object) {
+				return createOutlineGroupAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -138,6 +158,48 @@ public class EditorAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.editor.AbstractLabelElement <em>Abstract Label Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.editor.AbstractLabelElement
+	 * @generated
+	 */
+	public Adapter createAbstractLabelElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.editor.AbstractNode <em>Abstract Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.editor.AbstractNode
+	 * @generated
+	 */
+	public Adapter createAbstractNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.editor.AbstractOutlineElement <em>Abstract Outline Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.editor.AbstractOutlineElement
+	 * @generated
+	 */
+	public Adapter createAbstractOutlineElementAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.editor.Behavior <em>Behavior</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -148,6 +210,20 @@ public class EditorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBehaviorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement <em>Ecore Label Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.editor.EcoreLabelElement
+	 * @generated
+	 */
+	public Adapter createEcoreLabelElementAdapter() {
 		return null;
 	}
 
@@ -194,6 +270,20 @@ public class EditorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.editor.JavaLabelElement <em>Java Label Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.editor.JavaLabelElement
+	 * @generated
+	 */
+	public Adapter createJavaLabelElementAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.editor.JavaNode <em>Java Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -222,34 +312,6 @@ public class EditorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.editor.LabelElement <em>Label Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvt.declarative.editor.LabelElement
-	 * @generated
-	 */
-	public Adapter createLabelElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.editor.Node <em>Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvt.declarative.editor.Node
-	 * @generated
-	 */
-	public Adapter createNodeAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.editor.OutlineBehavior <em>Outline Behavior</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -260,6 +322,34 @@ public class EditorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOutlineBehaviorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.editor.OutlineElement <em>Outline Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.editor.OutlineElement
+	 * @generated
+	 */
+	public Adapter createOutlineElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.editor.OutlineGroup <em>Outline Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.editor.OutlineGroup
+	 * @generated
+	 */
+	public Adapter createOutlineGroupAdapter() {
 		return null;
 	}
 

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: LabelBehavior.java,v 1.1 2008/08/08 16:39:54 ewillink Exp $
+ * $Id: LabelBehavior.java,v 1.2 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -91,7 +91,7 @@ public interface LabelBehavior extends Behavior {
 
 	/**
 	 * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvt.declarative.editor.LabelElement}.
+	 * The list contents are of type {@link org.eclipse.qvt.declarative.editor.AbstractLabelElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Elements</em>' containment reference list isn't clear,
@@ -103,6 +103,6 @@ public interface LabelBehavior extends Behavior {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<LabelElement> getElements();
+	EList<AbstractLabelElement> getElements();
 
 } // LabelBehavior

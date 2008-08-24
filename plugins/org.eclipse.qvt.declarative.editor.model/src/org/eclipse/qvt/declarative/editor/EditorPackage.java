@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackage.java,v 1.4 2008/08/14 06:24:14 ewillink Exp $
+ * $Id: EditorPackage.java,v 1.5 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -70,6 +70,81 @@ public interface EditorPackage extends EPackage {
 	EditorPackage eINSTANCE = org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.AbstractLabelElementImpl <em>Abstract Label Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.editor.impl.AbstractLabelElementImpl
+	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getAbstractLabelElement()
+	 * @generated
+	 */
+	int ABSTRACT_LABEL_ELEMENT = 0;
+
+	/**
+	 * The number of structural features of the '<em>Abstract Label Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.AbstractNodeImpl <em>Abstract Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.editor.impl.AbstractNodeImpl
+	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getAbstractNode()
+	 * @generated
+	 */
+	int ABSTRACT_NODE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Behavior</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__BEHAVIOR = 0;
+
+	/**
+	 * The feature id for the '<em><b>Base</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__BASE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Abstract Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.AbstractOutlineElementImpl <em>Abstract Outline Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.editor.impl.AbstractOutlineElementImpl
+	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getAbstractOutlineElement()
+	 * @generated
+	 */
+	int ABSTRACT_OUTLINE_ELEMENT = 2;
+
+	/**
+	 * The number of structural features of the '<em>Abstract Outline Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_OUTLINE_ELEMENT_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.BehaviorImpl <em>Behavior</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,7 +152,7 @@ public interface EditorPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getBehavior()
 	 * @generated
 	 */
-	int BEHAVIOR = 0;
+	int BEHAVIOR = 3;
 
 	/**
 	 * The number of structural features of the '<em>Behavior</em>' class.
@@ -89,6 +164,52 @@ public interface EditorPackage extends EPackage {
 	int BEHAVIOR_FEATURE_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl <em>Ecore Label Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl
+	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getEcoreLabelElement()
+	 * @generated
+	 */
+	int ECORE_LABEL_ELEMENT = 4;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_LABEL_ELEMENT__PATH = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>End</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_LABEL_ELEMENT__END = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Separator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_LABEL_ELEMENT__SEPARATOR = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Ecore Label Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_LABEL_ELEMENT_FEATURE_COUNT = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.EditorDefinitionImpl <em>Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -96,7 +217,7 @@ public interface EditorPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getEditorDefinition()
 	 * @generated
 	 */
-	int EDITOR_DEFINITION = 2;
+	int EDITOR_DEFINITION = 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.FoldingBehaviorImpl <em>Folding Behavior</em>}' class.
@@ -106,7 +227,7 @@ public interface EditorPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getFoldingBehavior()
 	 * @generated
 	 */
-	int FOLDING_BEHAVIOR = 3;
+	int FOLDING_BEHAVIOR = 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.JavaNodeImpl <em>Java Node</em>}' class.
@@ -116,44 +237,7 @@ public interface EditorPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getJavaNode()
 	 * @generated
 	 */
-	int JAVA_NODE = 4;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.NodeImpl <em>Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvt.declarative.editor.impl.NodeImpl
-	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getNode()
-	 * @generated
-	 */
-	int NODE = 7;
-
-	/**
-	 * The feature id for the '<em><b>Behavior</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE__BEHAVIOR = 0;
-
-	/**
-	 * The feature id for the '<em><b>Base</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE__BASE = 1;
-
-	/**
-	 * The number of structural features of the '<em>Node</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_FEATURE_COUNT = 2;
+	int JAVA_NODE = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.EcoreNodeImpl <em>Ecore Node</em>}' class.
@@ -163,7 +247,7 @@ public interface EditorPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getEcoreNode()
 	 * @generated
 	 */
-	int ECORE_NODE = 1;
+	int ECORE_NODE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Behavior</b></em>' containment reference list.
@@ -172,7 +256,7 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ECORE_NODE__BEHAVIOR = NODE__BEHAVIOR;
+	int ECORE_NODE__BEHAVIOR = ABSTRACT_NODE__BEHAVIOR;
 
 	/**
 	 * The feature id for the '<em><b>Base</b></em>' reference.
@@ -181,7 +265,7 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ECORE_NODE__BASE = NODE__BASE;
+	int ECORE_NODE__BASE = ABSTRACT_NODE__BASE;
 
 	/**
 	 * The feature id for the '<em><b>Element</b></em>' reference.
@@ -190,7 +274,7 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ECORE_NODE__ELEMENT = NODE_FEATURE_COUNT + 0;
+	int ECORE_NODE__ELEMENT = ABSTRACT_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Ecore Node</em>' class.
@@ -199,7 +283,7 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ECORE_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 1;
+	int ECORE_NODE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -247,13 +331,50 @@ public interface EditorPackage extends EPackage {
 	int FOLDING_BEHAVIOR_FEATURE_COUNT = BEHAVIOR_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.JavaLabelElementImpl <em>Java Label Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.editor.impl.JavaLabelElementImpl
+	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getJavaLabelElement()
+	 * @generated
+	 */
+	int JAVA_LABEL_ELEMENT = 8;
+
+	/**
+	 * The feature id for the '<em><b>Class</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_LABEL_ELEMENT__CLASS = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Method</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_LABEL_ELEMENT__METHOD = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Java Label Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_LABEL_ELEMENT_FEATURE_COUNT = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Behavior</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_NODE__BEHAVIOR = NODE__BEHAVIOR;
+	int JAVA_NODE__BEHAVIOR = ABSTRACT_NODE__BEHAVIOR;
 
 	/**
 	 * The feature id for the '<em><b>Base</b></em>' reference.
@@ -262,7 +383,7 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_NODE__BASE = NODE__BASE;
+	int JAVA_NODE__BASE = ABSTRACT_NODE__BASE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -271,7 +392,7 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_NODE__NAME = NODE_FEATURE_COUNT + 0;
+	int JAVA_NODE__NAME = ABSTRACT_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Java Node</em>' class.
@@ -280,7 +401,7 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 1;
+	int JAVA_NODE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.LabelBehaviorImpl <em>Label Behavior</em>}' class.
@@ -290,7 +411,7 @@ public interface EditorPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getLabelBehavior()
 	 * @generated
 	 */
-	int LABEL_BEHAVIOR = 5;
+	int LABEL_BEHAVIOR = 10;
 
 	/**
 	 * The feature id for the '<em><b>Image</b></em>' attribute.
@@ -329,52 +450,6 @@ public interface EditorPackage extends EPackage {
 	int LABEL_BEHAVIOR_FEATURE_COUNT = BEHAVIOR_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.LabelElementImpl <em>Label Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvt.declarative.editor.impl.LabelElementImpl
-	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getLabelElement()
-	 * @generated
-	 */
-	int LABEL_ELEMENT = 6;
-
-	/**
-	 * The feature id for the '<em><b>Path</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LABEL_ELEMENT__PATH = 0;
-
-	/**
-	 * The feature id for the '<em><b>End</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LABEL_ELEMENT__END = 1;
-
-	/**
-	 * The feature id for the '<em><b>Separator</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LABEL_ELEMENT__SEPARATOR = 2;
-
-	/**
-	 * The number of structural features of the '<em>Label Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LABEL_ELEMENT_FEATURE_COUNT = 3;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.OutlineBehaviorImpl <em>Outline Behavior</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -382,25 +457,16 @@ public interface EditorPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getOutlineBehavior()
 	 * @generated
 	 */
-	int OUTLINE_BEHAVIOR = 8;
+	int OUTLINE_BEHAVIOR = 11;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * The feature id for the '<em><b>Elements</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OUTLINE_BEHAVIOR__CONTAINER = BEHAVIOR_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Terminal</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OUTLINE_BEHAVIOR__TERMINAL = BEHAVIOR_FEATURE_COUNT + 1;
+	int OUTLINE_BEHAVIOR__ELEMENTS = BEHAVIOR_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Outline Behavior</em>' class.
@@ -409,7 +475,133 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OUTLINE_BEHAVIOR_FEATURE_COUNT = BEHAVIOR_FEATURE_COUNT + 2;
+	int OUTLINE_BEHAVIOR_FEATURE_COUNT = BEHAVIOR_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.OutlineElementImpl <em>Outline Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.editor.impl.OutlineElementImpl
+	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getOutlineElement()
+	 * @generated
+	 */
+	int OUTLINE_ELEMENT = 12;
+
+	/**
+	 * The feature id for the '<em><b>Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTLINE_ELEMENT__FEATURE = ABSTRACT_OUTLINE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Outline Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTLINE_ELEMENT_FEATURE_COUNT = ABSTRACT_OUTLINE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.OutlineGroupImpl <em>Outline Group</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.editor.impl.OutlineGroupImpl
+	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getOutlineGroup()
+	 * @generated
+	 */
+	int OUTLINE_GROUP = 13;
+
+	/**
+	 * The feature id for the '<em><b>Image</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTLINE_GROUP__IMAGE = ABSTRACT_OUTLINE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTLINE_GROUP__NAME = ABSTRACT_OUTLINE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTLINE_GROUP__ELEMENTS = ABSTRACT_OUTLINE_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Outline Group</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTLINE_GROUP_FEATURE_COUNT = ABSTRACT_OUTLINE_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.AbstractLabelElement <em>Abstract Label Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstract Label Element</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.AbstractLabelElement
+	 * @generated
+	 */
+	EClass getAbstractLabelElement();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.AbstractNode <em>Abstract Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstract Node</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.AbstractNode
+	 * @generated
+	 */
+	EClass getAbstractNode();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvt.declarative.editor.AbstractNode#getBehavior <em>Behavior</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Behavior</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.AbstractNode#getBehavior()
+	 * @see #getAbstractNode()
+	 * @generated
+	 */
+	EReference getAbstractNode_Behavior();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvt.declarative.editor.AbstractNode#getBase <em>Base</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Base</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.AbstractNode#getBase()
+	 * @see #getAbstractNode()
+	 * @generated
+	 */
+	EReference getAbstractNode_Base();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.AbstractOutlineElement <em>Abstract Outline Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstract Outline Element</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.AbstractOutlineElement
+	 * @generated
+	 */
+	EClass getAbstractOutlineElement();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.Behavior <em>Behavior</em>}'.
@@ -420,6 +612,49 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getBehavior();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement <em>Ecore Label Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Ecore Label Element</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.EcoreLabelElement
+	 * @generated
+	 */
+	EClass getEcoreLabelElement();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getPath <em>Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Path</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.EcoreLabelElement#getPath()
+	 * @see #getEcoreLabelElement()
+	 * @generated
+	 */
+	EReference getEcoreLabelElement_Path();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getEnd <em>End</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>End</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.EcoreLabelElement#getEnd()
+	 * @see #getEcoreLabelElement()
+	 * @generated
+	 */
+	EReference getEcoreLabelElement_End();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getSeparator <em>Separator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Separator</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.EcoreLabelElement#getSeparator()
+	 * @see #getEcoreLabelElement()
+	 * @generated
+	 */
+	EAttribute getEcoreLabelElement_Separator();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.EcoreNode <em>Ecore Node</em>}'.
@@ -496,6 +731,38 @@ public interface EditorPackage extends EPackage {
 	EClass getFoldingBehavior();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.JavaLabelElement <em>Java Label Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Java Label Element</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.JavaLabelElement
+	 * @generated
+	 */
+	EClass getJavaLabelElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.JavaLabelElement#getClass_ <em>Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Class</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.JavaLabelElement#getClass_()
+	 * @see #getJavaLabelElement()
+	 * @generated
+	 */
+	EAttribute getJavaLabelElement_Class();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.JavaLabelElement#getMethod <em>Method</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Method</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.JavaLabelElement#getMethod()
+	 * @see #getJavaLabelElement()
+	 * @generated
+	 */
+	EAttribute getJavaLabelElement_Method();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.JavaNode <em>Java Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -560,81 +827,6 @@ public interface EditorPackage extends EPackage {
 	EReference getLabelBehavior_Elements();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.LabelElement <em>Label Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Label Element</em>'.
-	 * @see org.eclipse.qvt.declarative.editor.LabelElement
-	 * @generated
-	 */
-	EClass getLabelElement();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvt.declarative.editor.LabelElement#getPath <em>Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Path</em>'.
-	 * @see org.eclipse.qvt.declarative.editor.LabelElement#getPath()
-	 * @see #getLabelElement()
-	 * @generated
-	 */
-	EReference getLabelElement_Path();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvt.declarative.editor.LabelElement#getEnd <em>End</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>End</em>'.
-	 * @see org.eclipse.qvt.declarative.editor.LabelElement#getEnd()
-	 * @see #getLabelElement()
-	 * @generated
-	 */
-	EReference getLabelElement_End();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.LabelElement#getSeparator <em>Separator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Separator</em>'.
-	 * @see org.eclipse.qvt.declarative.editor.LabelElement#getSeparator()
-	 * @see #getLabelElement()
-	 * @generated
-	 */
-	EAttribute getLabelElement_Separator();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.Node <em>Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Node</em>'.
-	 * @see org.eclipse.qvt.declarative.editor.Node
-	 * @generated
-	 */
-	EClass getNode();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvt.declarative.editor.Node#getBehavior <em>Behavior</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Behavior</em>'.
-	 * @see org.eclipse.qvt.declarative.editor.Node#getBehavior()
-	 * @see #getNode()
-	 * @generated
-	 */
-	EReference getNode_Behavior();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvt.declarative.editor.Node#getBase <em>Base</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Base</em>'.
-	 * @see org.eclipse.qvt.declarative.editor.Node#getBase()
-	 * @see #getNode()
-	 * @generated
-	 */
-	EReference getNode_Base();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.OutlineBehavior <em>Outline Behavior</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -645,26 +837,79 @@ public interface EditorPackage extends EPackage {
 	EClass getOutlineBehavior();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.OutlineBehavior#isContainer <em>Container</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvt.declarative.editor.OutlineBehavior#getElements <em>Elements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Container</em>'.
-	 * @see org.eclipse.qvt.declarative.editor.OutlineBehavior#isContainer()
+	 * @return the meta object for the reference list '<em>Elements</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.OutlineBehavior#getElements()
 	 * @see #getOutlineBehavior()
 	 * @generated
 	 */
-	EAttribute getOutlineBehavior_Container();
+	EReference getOutlineBehavior_Elements();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.OutlineBehavior#isTerminal <em>Terminal</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.OutlineElement <em>Outline Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Terminal</em>'.
-	 * @see org.eclipse.qvt.declarative.editor.OutlineBehavior#isTerminal()
-	 * @see #getOutlineBehavior()
+	 * @return the meta object for class '<em>Outline Element</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.OutlineElement
 	 * @generated
 	 */
-	EAttribute getOutlineBehavior_Terminal();
+	EClass getOutlineElement();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvt.declarative.editor.OutlineElement#getFeature <em>Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Feature</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.OutlineElement#getFeature()
+	 * @see #getOutlineElement()
+	 * @generated
+	 */
+	EReference getOutlineElement_Feature();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.OutlineGroup <em>Outline Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Outline Group</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.OutlineGroup
+	 * @generated
+	 */
+	EClass getOutlineGroup();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.OutlineGroup#getImage <em>Image</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Image</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.OutlineGroup#getImage()
+	 * @see #getOutlineGroup()
+	 * @generated
+	 */
+	EAttribute getOutlineGroup_Image();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.OutlineGroup#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.OutlineGroup#getName()
+	 * @see #getOutlineGroup()
+	 * @generated
+	 */
+	EAttribute getOutlineGroup_Name();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvt.declarative.editor.OutlineGroup#getElements <em>Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Elements</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.OutlineGroup#getElements()
+	 * @see #getOutlineGroup()
+	 * @generated
+	 */
+	EReference getOutlineGroup_Elements();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -689,6 +934,52 @@ public interface EditorPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.AbstractLabelElementImpl <em>Abstract Label Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.editor.impl.AbstractLabelElementImpl
+		 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getAbstractLabelElement()
+		 * @generated
+		 */
+		EClass ABSTRACT_LABEL_ELEMENT = eINSTANCE.getAbstractLabelElement();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.AbstractNodeImpl <em>Abstract Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.editor.impl.AbstractNodeImpl
+		 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getAbstractNode()
+		 * @generated
+		 */
+		EClass ABSTRACT_NODE = eINSTANCE.getAbstractNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Behavior</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_NODE__BEHAVIOR = eINSTANCE.getAbstractNode_Behavior();
+
+		/**
+		 * The meta object literal for the '<em><b>Base</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_NODE__BASE = eINSTANCE.getAbstractNode_Base();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.AbstractOutlineElementImpl <em>Abstract Outline Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.editor.impl.AbstractOutlineElementImpl
+		 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getAbstractOutlineElement()
+		 * @generated
+		 */
+		EClass ABSTRACT_OUTLINE_ELEMENT = eINSTANCE.getAbstractOutlineElement();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.BehaviorImpl <em>Behavior</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -697,6 +988,40 @@ public interface EditorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass BEHAVIOR = eINSTANCE.getBehavior();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl <em>Ecore Label Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl
+		 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getEcoreLabelElement()
+		 * @generated
+		 */
+		EClass ECORE_LABEL_ELEMENT = eINSTANCE.getEcoreLabelElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Path</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ECORE_LABEL_ELEMENT__PATH = eINSTANCE.getEcoreLabelElement_Path();
+
+		/**
+		 * The meta object literal for the '<em><b>End</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ECORE_LABEL_ELEMENT__END = eINSTANCE.getEcoreLabelElement_End();
+
+		/**
+		 * The meta object literal for the '<em><b>Separator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ECORE_LABEL_ELEMENT__SEPARATOR = eINSTANCE.getEcoreLabelElement_Separator();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.EcoreNodeImpl <em>Ecore Node</em>}' class.
@@ -761,6 +1086,32 @@ public interface EditorPackage extends EPackage {
 		EClass FOLDING_BEHAVIOR = eINSTANCE.getFoldingBehavior();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.JavaLabelElementImpl <em>Java Label Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.editor.impl.JavaLabelElementImpl
+		 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getJavaLabelElement()
+		 * @generated
+		 */
+		EClass JAVA_LABEL_ELEMENT = eINSTANCE.getJavaLabelElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Class</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JAVA_LABEL_ELEMENT__CLASS = eINSTANCE.getJavaLabelElement_Class();
+
+		/**
+		 * The meta object literal for the '<em><b>Method</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JAVA_LABEL_ELEMENT__METHOD = eINSTANCE.getJavaLabelElement_Method();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.JavaNodeImpl <em>Java Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -813,66 +1164,6 @@ public interface EditorPackage extends EPackage {
 		EReference LABEL_BEHAVIOR__ELEMENTS = eINSTANCE.getLabelBehavior_Elements();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.LabelElementImpl <em>Label Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvt.declarative.editor.impl.LabelElementImpl
-		 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getLabelElement()
-		 * @generated
-		 */
-		EClass LABEL_ELEMENT = eINSTANCE.getLabelElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Path</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LABEL_ELEMENT__PATH = eINSTANCE.getLabelElement_Path();
-
-		/**
-		 * The meta object literal for the '<em><b>End</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LABEL_ELEMENT__END = eINSTANCE.getLabelElement_End();
-
-		/**
-		 * The meta object literal for the '<em><b>Separator</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LABEL_ELEMENT__SEPARATOR = eINSTANCE.getLabelElement_Separator();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.NodeImpl <em>Node</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvt.declarative.editor.impl.NodeImpl
-		 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getNode()
-		 * @generated
-		 */
-		EClass NODE = eINSTANCE.getNode();
-
-		/**
-		 * The meta object literal for the '<em><b>Behavior</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NODE__BEHAVIOR = eINSTANCE.getNode_Behavior();
-
-		/**
-		 * The meta object literal for the '<em><b>Base</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NODE__BASE = eINSTANCE.getNode_Base();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.OutlineBehaviorImpl <em>Outline Behavior</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -883,20 +1174,64 @@ public interface EditorPackage extends EPackage {
 		EClass OUTLINE_BEHAVIOR = eINSTANCE.getOutlineBehavior();
 
 		/**
-		 * The meta object literal for the '<em><b>Container</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Elements</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute OUTLINE_BEHAVIOR__CONTAINER = eINSTANCE.getOutlineBehavior_Container();
+		EReference OUTLINE_BEHAVIOR__ELEMENTS = eINSTANCE.getOutlineBehavior_Elements();
 
 		/**
-		 * The meta object literal for the '<em><b>Terminal</b></em>' attribute feature.
+		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.OutlineElementImpl <em>Outline Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.editor.impl.OutlineElementImpl
+		 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getOutlineElement()
+		 * @generated
+		 */
+		EClass OUTLINE_ELEMENT = eINSTANCE.getOutlineElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Feature</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute OUTLINE_BEHAVIOR__TERMINAL = eINSTANCE.getOutlineBehavior_Terminal();
+		EReference OUTLINE_ELEMENT__FEATURE = eINSTANCE.getOutlineElement_Feature();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.OutlineGroupImpl <em>Outline Group</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.editor.impl.OutlineGroupImpl
+		 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getOutlineGroup()
+		 * @generated
+		 */
+		EClass OUTLINE_GROUP = eINSTANCE.getOutlineGroup();
+
+		/**
+		 * The meta object literal for the '<em><b>Image</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OUTLINE_GROUP__IMAGE = eINSTANCE.getOutlineGroup_Image();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OUTLINE_GROUP__NAME = eINSTANCE.getOutlineGroup_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OUTLINE_GROUP__ELEMENTS = eINSTANCE.getOutlineGroup_Elements();
 
 	}
 

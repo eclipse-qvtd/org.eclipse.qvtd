@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Node.java,v 1.1 2008/08/08 16:39:54 ewillink Exp $
+ * $Id: AbstractNode.java,v 1.1 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -21,22 +21,22 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Node</b></em>'.
+ * A representation of the model object '<em><b>Abstract Node</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvt.declarative.editor.Node#getBehavior <em>Behavior</em>}</li>
- *   <li>{@link org.eclipse.qvt.declarative.editor.Node#getBase <em>Base</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.AbstractNode#getBehavior <em>Behavior</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.AbstractNode#getBase <em>Base</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.qvt.declarative.editor.EditorPackage#getNode()
+ * @see org.eclipse.qvt.declarative.editor.EditorPackage#getAbstractNode()
  * @model abstract="true"
  * @generated
  */
-public interface Node extends EObject {
+public interface AbstractNode extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Behavior</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvt.declarative.editor.Behavior}.
@@ -47,7 +47,7 @@ public interface Node extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Behavior</em>' containment reference list.
-	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getNode_Behavior()
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getAbstractNode_Behavior()
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
@@ -62,21 +62,21 @@ public interface Node extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Base</em>' reference.
-	 * @see #setBase(Node)
-	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getNode_Base()
+	 * @see #setBase(AbstractNode)
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getAbstractNode_Base()
 	 * @model
 	 * @generated
 	 */
-	Node getBase();
+	AbstractNode getBase();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.Node#getBase <em>Base</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.AbstractNode#getBase <em>Base</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Base</em>' reference.
 	 * @see #getBase()
 	 * @generated
 	 */
-	void setBase(Node value);
+	void setBase(AbstractNode value);
 
-} // Node
+} // AbstractNode

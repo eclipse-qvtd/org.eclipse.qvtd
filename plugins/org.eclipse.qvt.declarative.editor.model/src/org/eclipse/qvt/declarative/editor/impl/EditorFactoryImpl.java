@@ -12,19 +12,26 @@
  * 
  * </copyright>
  *
- * $Id: EditorFactoryImpl.java,v 1.1 2008/08/08 16:39:55 ewillink Exp $
+ * $Id: EditorFactoryImpl.java,v 1.2 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import org.eclipse.qvt.declarative.editor.*;
+import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
+import org.eclipse.qvt.declarative.editor.EcoreNode;
+import org.eclipse.qvt.declarative.editor.EditorDefinition;
+import org.eclipse.qvt.declarative.editor.EditorFactory;
+import org.eclipse.qvt.declarative.editor.EditorPackage;
+import org.eclipse.qvt.declarative.editor.FoldingBehavior;
+import org.eclipse.qvt.declarative.editor.JavaLabelElement;
+import org.eclipse.qvt.declarative.editor.JavaNode;
+import org.eclipse.qvt.declarative.editor.LabelBehavior;
+import org.eclipse.qvt.declarative.editor.OutlineBehavior;
 
 /**
  * <!-- begin-user-doc -->
@@ -70,16 +77,29 @@ public class EditorFactoryImpl extends EFactoryImpl implements EditorFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case EditorPackage.ECORE_LABEL_ELEMENT: return createEcoreLabelElement();
 			case EditorPackage.ECORE_NODE: return createEcoreNode();
 			case EditorPackage.EDITOR_DEFINITION: return createEditorDefinition();
 			case EditorPackage.FOLDING_BEHAVIOR: return createFoldingBehavior();
+			case EditorPackage.JAVA_LABEL_ELEMENT: return createJavaLabelElement();
 			case EditorPackage.JAVA_NODE: return createJavaNode();
 			case EditorPackage.LABEL_BEHAVIOR: return createLabelBehavior();
-			case EditorPackage.LABEL_ELEMENT: return createLabelElement();
 			case EditorPackage.OUTLINE_BEHAVIOR: return createOutlineBehavior();
+			case EditorPackage.OUTLINE_ELEMENT: return createOutlineElement();
+			case EditorPackage.OUTLINE_GROUP: return createOutlineGroup();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EcoreLabelElement createEcoreLabelElement() {
+		EcoreLabelElementImpl ecoreLabelElement = new EcoreLabelElementImpl();
+		return ecoreLabelElement;
 	}
 
 	/**
@@ -117,6 +137,16 @@ public class EditorFactoryImpl extends EFactoryImpl implements EditorFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JavaLabelElement createJavaLabelElement() {
+		JavaLabelElementImpl javaLabelElement = new JavaLabelElementImpl();
+		return javaLabelElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public JavaNode createJavaNode() {
 		JavaNodeImpl javaNode = new JavaNodeImpl();
 		return javaNode;
@@ -137,9 +167,9 @@ public class EditorFactoryImpl extends EFactoryImpl implements EditorFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LabelElement createLabelElement() {
-		LabelElementImpl labelElement = new LabelElementImpl();
-		return labelElement;
+	public OutlineBehavior createOutlineBehavior() {
+		OutlineBehaviorImpl outlineBehavior = new OutlineBehaviorImpl();
+		return outlineBehavior;
 	}
 
 	/**
@@ -147,9 +177,19 @@ public class EditorFactoryImpl extends EFactoryImpl implements EditorFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OutlineBehavior createOutlineBehavior() {
-		OutlineBehaviorImpl outlineBehavior = new OutlineBehaviorImpl();
-		return outlineBehavior;
+	public OutlineElement createOutlineElement() {
+		OutlineElementImpl outlineElement = new OutlineElementImpl();
+		return outlineElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OutlineGroup createOutlineGroup() {
+		OutlineGroupImpl outlineGroup = new OutlineGroupImpl();
+		return outlineGroup;
 	}
 
 	/**

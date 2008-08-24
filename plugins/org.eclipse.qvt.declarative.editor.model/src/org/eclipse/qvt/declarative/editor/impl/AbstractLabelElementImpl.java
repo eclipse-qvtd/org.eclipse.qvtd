@@ -12,31 +12,31 @@
  * 
  * </copyright>
  *
- * $Id: BehaviorImpl.java,v 1.2 2008/08/24 18:56:21 ewillink Exp $
+ * $Id: AbstractLabelElementImpl.java,v 1.1 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.qvt.declarative.editor.Behavior;
+import org.eclipse.qvt.declarative.editor.AbstractLabelElement;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Behavior</b></em>'.
+ * An implementation of the model object '<em><b>Abstract Label Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public abstract class BehaviorImpl extends EObjectImpl implements Behavior {
+public abstract class AbstractLabelElementImpl extends EObjectImpl implements AbstractLabelElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BehaviorImpl() {
+	protected AbstractLabelElementImpl() {
 		super();
 	}
 
@@ -47,7 +47,7 @@ public abstract class BehaviorImpl extends EObjectImpl implements Behavior {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return EditorPackage.Literals.BEHAVIOR;
+		return EditorPackage.Literals.ABSTRACT_LABEL_ELEMENT;
 	}
 
-} //BehaviorImpl
+} //AbstractLabelElementImpl

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: JavaNode.java,v 1.1 2008/08/08 16:39:54 ewillink Exp $
+ * $Id: JavaNode.java,v 1.2 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -33,7 +33,7 @@ package org.eclipse.qvt.declarative.editor;
  * @model
  * @generated
  */
-public interface JavaNode extends Node {
+public interface JavaNode extends AbstractNode {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

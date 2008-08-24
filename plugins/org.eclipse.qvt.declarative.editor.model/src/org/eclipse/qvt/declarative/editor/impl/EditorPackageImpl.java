@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackageImpl.java,v 1.4 2008/08/14 06:24:14 ewillink Exp $
+ * $Id: EditorPackageImpl.java,v 1.5 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -20,18 +20,24 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.qvt.declarative.editor.AbstractLabelElement;
+import org.eclipse.qvt.declarative.editor.AbstractNode;
+import org.eclipse.qvt.declarative.editor.AbstractOutlineElement;
 import org.eclipse.qvt.declarative.editor.Behavior;
 import org.eclipse.qvt.declarative.editor.EcoreNode;
 import org.eclipse.qvt.declarative.editor.EditorDefinition;
 import org.eclipse.qvt.declarative.editor.EditorFactory;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
 import org.eclipse.qvt.declarative.editor.FoldingBehavior;
+import org.eclipse.qvt.declarative.editor.JavaLabelElement;
 import org.eclipse.qvt.declarative.editor.JavaNode;
 import org.eclipse.qvt.declarative.editor.LabelBehavior;
-import org.eclipse.qvt.declarative.editor.LabelElement;
-import org.eclipse.qvt.declarative.editor.Node;
+import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
 import org.eclipse.qvt.declarative.editor.OutlineBehavior;
+import org.eclipse.qvt.declarative.editor.OutlineElement;
+import org.eclipse.qvt.declarative.editor.OutlineGroup;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,7 +51,35 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass abstractLabelElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass abstractNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass abstractOutlineElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass behaviorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass ecoreLabelElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -73,6 +107,13 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass javaLabelElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass javaNodeEClass = null;
 
 	/**
@@ -87,21 +128,21 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass labelElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass nodeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass outlineBehaviorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass outlineElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass outlineGroupEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -159,6 +200,9 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		isInited = true;
 
+		// Initialize simple dependencies
+		EcorePackage.eINSTANCE.eClass();
+
 		// Create package meta-data objects
 		theEditorPackage.createPackageContents();
 
@@ -176,8 +220,89 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAbstractLabelElement() {
+		return abstractLabelElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAbstractNode() {
+		return abstractNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractNode_Behavior() {
+		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractNode_Base() {
+		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAbstractOutlineElement() {
+		return abstractOutlineElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBehavior() {
 		return behaviorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEcoreLabelElement() {
+		return ecoreLabelElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEcoreLabelElement_Path() {
+		return (EReference)ecoreLabelElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEcoreLabelElement_End() {
+		return (EReference)ecoreLabelElementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEcoreLabelElement_Separator() {
+		return (EAttribute)ecoreLabelElementEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -248,6 +373,33 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getJavaLabelElement() {
+		return javaLabelElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getJavaLabelElement_Class() {
+		return (EAttribute)javaLabelElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getJavaLabelElement_Method() {
+		return (EAttribute)javaLabelElementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getJavaNode() {
 		return javaNodeEClass;
 	}
@@ -302,69 +454,6 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getLabelElement() {
-		return labelElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getLabelElement_Path() {
-		return (EReference)labelElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getLabelElement_End() {
-		return (EReference)labelElementEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getLabelElement_Separator() {
-		return (EAttribute)labelElementEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getNode() {
-		return nodeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getNode_Behavior() {
-		return (EReference)nodeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getNode_Base() {
-		return (EReference)nodeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getOutlineBehavior() {
 		return outlineBehaviorEClass;
 	}
@@ -374,8 +463,8 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getOutlineBehavior_Container() {
-		return (EAttribute)outlineBehaviorEClass.getEStructuralFeatures().get(0);
+	public EReference getOutlineBehavior_Elements() {
+		return (EReference)outlineBehaviorEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -383,8 +472,53 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getOutlineBehavior_Terminal() {
-		return (EAttribute)outlineBehaviorEClass.getEStructuralFeatures().get(1);
+	public EClass getOutlineElement() {
+		return outlineElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOutlineElement_Feature() {
+		return (EReference)outlineElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOutlineGroup() {
+		return outlineGroupEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOutlineGroup_Image() {
+		return (EAttribute)outlineGroupEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOutlineGroup_Name() {
+		return (EAttribute)outlineGroupEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOutlineGroup_Elements() {
+		return (EReference)outlineGroupEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -415,7 +549,20 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		isCreated = true;
 
 		// Create classes and their features
+		abstractLabelElementEClass = createEClass(ABSTRACT_LABEL_ELEMENT);
+
+		abstractNodeEClass = createEClass(ABSTRACT_NODE);
+		createEReference(abstractNodeEClass, ABSTRACT_NODE__BEHAVIOR);
+		createEReference(abstractNodeEClass, ABSTRACT_NODE__BASE);
+
+		abstractOutlineElementEClass = createEClass(ABSTRACT_OUTLINE_ELEMENT);
+
 		behaviorEClass = createEClass(BEHAVIOR);
+
+		ecoreLabelElementEClass = createEClass(ECORE_LABEL_ELEMENT);
+		createEReference(ecoreLabelElementEClass, ECORE_LABEL_ELEMENT__PATH);
+		createEReference(ecoreLabelElementEClass, ECORE_LABEL_ELEMENT__END);
+		createEAttribute(ecoreLabelElementEClass, ECORE_LABEL_ELEMENT__SEPARATOR);
 
 		ecoreNodeEClass = createEClass(ECORE_NODE);
 		createEReference(ecoreNodeEClass, ECORE_NODE__ELEMENT);
@@ -427,6 +574,10 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		foldingBehaviorEClass = createEClass(FOLDING_BEHAVIOR);
 
+		javaLabelElementEClass = createEClass(JAVA_LABEL_ELEMENT);
+		createEAttribute(javaLabelElementEClass, JAVA_LABEL_ELEMENT__CLASS);
+		createEAttribute(javaLabelElementEClass, JAVA_LABEL_ELEMENT__METHOD);
+
 		javaNodeEClass = createEClass(JAVA_NODE);
 		createEAttribute(javaNodeEClass, JAVA_NODE__NAME);
 
@@ -435,18 +586,16 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		createEAttribute(labelBehaviorEClass, LABEL_BEHAVIOR__FORMAT);
 		createEReference(labelBehaviorEClass, LABEL_BEHAVIOR__ELEMENTS);
 
-		labelElementEClass = createEClass(LABEL_ELEMENT);
-		createEReference(labelElementEClass, LABEL_ELEMENT__PATH);
-		createEReference(labelElementEClass, LABEL_ELEMENT__END);
-		createEAttribute(labelElementEClass, LABEL_ELEMENT__SEPARATOR);
-
-		nodeEClass = createEClass(NODE);
-		createEReference(nodeEClass, NODE__BEHAVIOR);
-		createEReference(nodeEClass, NODE__BASE);
-
 		outlineBehaviorEClass = createEClass(OUTLINE_BEHAVIOR);
-		createEAttribute(outlineBehaviorEClass, OUTLINE_BEHAVIOR__CONTAINER);
-		createEAttribute(outlineBehaviorEClass, OUTLINE_BEHAVIOR__TERMINAL);
+		createEReference(outlineBehaviorEClass, OUTLINE_BEHAVIOR__ELEMENTS);
+
+		outlineElementEClass = createEClass(OUTLINE_ELEMENT);
+		createEReference(outlineElementEClass, OUTLINE_ELEMENT__FEATURE);
+
+		outlineGroupEClass = createEClass(OUTLINE_GROUP);
+		createEAttribute(outlineGroupEClass, OUTLINE_GROUP__IMAGE);
+		createEAttribute(outlineGroupEClass, OUTLINE_GROUP__NAME);
+		createEReference(outlineGroupEClass, OUTLINE_GROUP__ELEMENTS);
 	}
 
 	/**
@@ -472,50 +621,72 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		ecoreNodeEClass.getESuperTypes().add(this.getNode());
+		ecoreLabelElementEClass.getESuperTypes().add(this.getAbstractLabelElement());
+		ecoreNodeEClass.getESuperTypes().add(this.getAbstractNode());
 		foldingBehaviorEClass.getESuperTypes().add(this.getBehavior());
-		javaNodeEClass.getESuperTypes().add(this.getNode());
+		javaLabelElementEClass.getESuperTypes().add(this.getAbstractLabelElement());
+		javaNodeEClass.getESuperTypes().add(this.getAbstractNode());
 		labelBehaviorEClass.getESuperTypes().add(this.getBehavior());
 		outlineBehaviorEClass.getESuperTypes().add(this.getBehavior());
+		outlineElementEClass.getESuperTypes().add(this.getAbstractOutlineElement());
+		outlineGroupEClass.getESuperTypes().add(this.getAbstractOutlineElement());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(abstractLabelElementEClass, AbstractLabelElement.class, "AbstractLabelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(abstractNodeEClass, AbstractNode.class, "AbstractNode", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAbstractNode_Behavior(), this.getBehavior(), null, "behavior", null, 0, -1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getAbstractNode_Base(), this.getAbstractNode(), null, "base", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(abstractOutlineElementEClass, AbstractOutlineElement.class, "AbstractOutlineElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(behaviorEClass, Behavior.class, "Behavior", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(ecoreLabelElementEClass, EcoreLabelElement.class, "EcoreLabelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEcoreLabelElement_Path(), theEcorePackage.getEReference(), null, "path", null, 0, -1, EcoreLabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEcoreLabelElement_End(), theEcorePackage.getEStructuralFeature(), null, "end", null, 1, 1, EcoreLabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEcoreLabelElement_Separator(), theEcorePackage.getEString(), "separator", " ", 0, 1, EcoreLabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(ecoreNodeEClass, EcoreNode.class, "EcoreNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEcoreNode_Element(), ecorePackage.getEClassifier(), null, "element", null, 1, 1, EcoreNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEcoreNode_Element(), theEcorePackage.getEClassifier(), null, "element", null, 1, 1, EcoreNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(editorDefinitionEClass, EditorDefinition.class, "EditorDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEditorDefinition_Language(), ecorePackage.getEString(), "language", null, 1, 1, EditorDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEditorDefinition_Language(), theEcorePackage.getEString(), "language", null, 1, 1, EditorDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEditorDefinition_Extends(), this.getEditorDefinition(), null, "extends", null, 0, -1, EditorDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEditorDefinition_Node(), this.getNode(), null, "node", null, 0, -1, EditorDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getEditorDefinition_Node(), this.getAbstractNode(), null, "node", null, 0, -1, EditorDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(foldingBehaviorEClass, FoldingBehavior.class, "FoldingBehavior", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(javaLabelElementEClass, JavaLabelElement.class, "JavaLabelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getJavaLabelElement_Class(), theEcorePackage.getEString(), "class", null, 0, 1, JavaLabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJavaLabelElement_Method(), theEcorePackage.getEString(), "method", "toString", 1, 1, JavaLabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(javaNodeEClass, JavaNode.class, "JavaNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getJavaNode_Name(), ecorePackage.getEString(), "name", null, 1, 1, JavaNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJavaNode_Name(), theEcorePackage.getEString(), "name", null, 1, 1, JavaNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(labelBehaviorEClass, LabelBehavior.class, "LabelBehavior", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getLabelBehavior_Image(), ecorePackage.getEString(), "image", null, 0, 1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLabelBehavior_Format(), ecorePackage.getEString(), "format", null, 1, 1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLabelBehavior_Elements(), this.getLabelElement(), null, "elements", null, 0, -1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(labelElementEClass, LabelElement.class, "LabelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLabelElement_Path(), ecorePackage.getEReference(), null, "path", null, 0, -1, LabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLabelElement_End(), ecorePackage.getEStructuralFeature(), null, "end", null, 1, 1, LabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLabelElement_Separator(), ecorePackage.getEString(), "separator", " ", 0, 1, LabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(nodeEClass, Node.class, "Node", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNode_Behavior(), this.getBehavior(), null, "behavior", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getNode_Base(), this.getNode(), null, "base", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLabelBehavior_Image(), theEcorePackage.getEString(), "image", null, 0, 1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLabelBehavior_Format(), theEcorePackage.getEString(), "format", null, 1, 1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLabelBehavior_Elements(), this.getAbstractLabelElement(), null, "elements", null, 0, -1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(outlineBehaviorEClass, OutlineBehavior.class, "OutlineBehavior", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOutlineBehavior_Container(), ecorePackage.getEBoolean(), "container", "false", 0, 1, OutlineBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getOutlineBehavior_Terminal(), ecorePackage.getEBoolean(), "terminal", "false", 0, 1, OutlineBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOutlineBehavior_Elements(), this.getAbstractOutlineElement(), null, "elements", null, 0, -1, OutlineBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(outlineElementEClass, OutlineElement.class, "OutlineElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOutlineElement_Feature(), theEcorePackage.getEStructuralFeature(), null, "feature", null, 1, 1, OutlineElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(outlineGroupEClass, OutlineGroup.class, "OutlineGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOutlineGroup_Image(), theEcorePackage.getEString(), "image", null, 0, 1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOutlineGroup_Name(), theEcorePackage.getEString(), "name", null, 1, 1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOutlineGroup_Elements(), this.getAbstractOutlineElement(), null, "elements", null, 0, -1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

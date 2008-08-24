@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EcoreNode.java,v 1.1 2008/08/08 16:39:54 ewillink Exp $
+ * $Id: EcoreNode.java,v 1.2 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.EClassifier;
  * @model
  * @generated
  */
-public interface EcoreNode extends Node {
+public interface EcoreNode extends AbstractNode {
 	/**
 	 * Returns the value of the '<em><b>Element</b></em>' reference.
 	 * <!-- begin-user-doc -->

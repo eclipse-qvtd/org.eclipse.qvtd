@@ -12,9 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: OutlineBehavior.java,v 1.2 2008/08/09 17:33:58 ewillink Exp $
+ * $Id: OutlineBehavior.java,v 1.3 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
+
+import org.eclipse.emf.common.util.EList;
 
 
 /**
@@ -25,8 +27,7 @@ package org.eclipse.qvt.declarative.editor;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvt.declarative.editor.OutlineBehavior#isContainer <em>Container</em>}</li>
- *   <li>{@link org.eclipse.qvt.declarative.editor.OutlineBehavior#isTerminal <em>Terminal</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.OutlineBehavior#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,57 +37,42 @@ package org.eclipse.qvt.declarative.editor;
  */
 public interface OutlineBehavior extends Behavior {
 	/**
-	 * Returns the value of the '<em><b>Container</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
+	 * Returns the value of the '<em><b>Elements</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvt.declarative.editor.AbstractOutlineElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Container</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Elements</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Container</em>' attribute.
-	 * @see #setContainer(boolean)
-	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getOutlineBehavior_Container()
-	 * @model default="false"
+	 * @return the value of the '<em>Elements</em>' reference list.
+	 * @see #isSetElements()
+	 * @see #unsetElements()
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getOutlineBehavior_Elements()
+	 * @model unsettable="true"
 	 * @generated
 	 */
-	boolean isContainer();
+	EList<AbstractOutlineElement> getElements();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.OutlineBehavior#isContainer <em>Container</em>}' attribute.
+	 * Unsets the value of the '{@link org.eclipse.qvt.declarative.editor.OutlineBehavior#getElements <em>Elements</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Container</em>' attribute.
-	 * @see #isContainer()
+	 * @see #isSetElements()
+	 * @see #getElements()
 	 * @generated
 	 */
-	void setContainer(boolean value);
+	void unsetElements();
 
 	/**
-	 * Returns the value of the '<em><b>Terminal</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Terminal</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Terminal</em>' attribute.
-	 * @see #setTerminal(boolean)
-	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getOutlineBehavior_Terminal()
-	 * @model default="false"
-	 * @generated
-	 */
-	boolean isTerminal();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.OutlineBehavior#isTerminal <em>Terminal</em>}' attribute.
+	 * Returns whether the value of the '{@link org.eclipse.qvt.declarative.editor.OutlineBehavior#getElements <em>Elements</em>}' reference list is set.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Terminal</em>' attribute.
-	 * @see #isTerminal()
+	 * @return whether the value of the '<em>Elements</em>' reference list is set.
+	 * @see #unsetElements()
+	 * @see #getElements()
 	 * @generated
 	 */
-	void setTerminal(boolean value);
+	boolean isSetElements();
 
 } // OutlineBehavior

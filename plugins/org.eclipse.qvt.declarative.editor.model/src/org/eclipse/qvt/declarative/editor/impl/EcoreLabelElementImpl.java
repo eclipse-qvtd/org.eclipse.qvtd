@@ -12,28 +12,22 @@
  * 
  * </copyright>
  *
- * $Id: LabelElementImpl.java,v 1.2 2008/08/11 08:03:43 ewillink Exp $
+ * $Id: EcoreLabelElementImpl.java,v 1.1 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.eclipse.qvt.declarative.editor.EditorPackage;
-import org.eclipse.qvt.declarative.editor.LabelElement;
+import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,15 +36,15 @@ import org.eclipse.qvt.declarative.editor.LabelElement;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelElementImpl#getPath <em>Path</em>}</li>
- *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelElementImpl#getEnd <em>End</em>}</li>
- *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelElementImpl#getSeparator <em>Separator</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl#getPath <em>Path</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl#getEnd <em>End</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl#getSeparator <em>Separator</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class LabelElementImpl extends EObjectImpl implements LabelElement {
+public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements EcoreLabelElement {
 	/**
 	 * The cached value of the '{@link #getPath() <em>Path</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -96,7 +90,7 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected LabelElementImpl() {
+	protected EcoreLabelElementImpl() {
 		super();
 	}
 
@@ -107,7 +101,7 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return EditorPackage.Literals.LABEL_ELEMENT;
+		return EditorPackage.Literals.ECORE_LABEL_ELEMENT;
 	}
 
 	/**
@@ -117,7 +111,7 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 	 */
 	public EList<EReference> getPath() {
 		if (path == null) {
-			path = new EObjectResolvingEList<EReference>(EReference.class, this, EditorPackage.LABEL_ELEMENT__PATH);
+			path = new EObjectResolvingEList<EReference>(EReference.class, this, EditorPackage.ECORE_LABEL_ELEMENT__PATH);
 		}
 		return path;
 	}
@@ -133,7 +127,7 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 			end = (EStructuralFeature)eResolveProxy(oldEnd);
 			if (end != oldEnd) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EditorPackage.LABEL_ELEMENT__END, oldEnd, end));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EditorPackage.ECORE_LABEL_ELEMENT__END, oldEnd, end));
 			}
 		}
 		return end;
@@ -157,7 +151,7 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 		EStructuralFeature oldEnd = end;
 		end = newEnd;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.LABEL_ELEMENT__END, oldEnd, end));
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.ECORE_LABEL_ELEMENT__END, oldEnd, end));
 	}
 
 	/**
@@ -178,7 +172,7 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 		String oldSeparator = separator;
 		separator = newSeparator;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.LABEL_ELEMENT__SEPARATOR, oldSeparator, separator));
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.ECORE_LABEL_ELEMENT__SEPARATOR, oldSeparator, separator));
 	}
 
 	/**
@@ -189,12 +183,12 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EditorPackage.LABEL_ELEMENT__PATH:
+			case EditorPackage.ECORE_LABEL_ELEMENT__PATH:
 				return getPath();
-			case EditorPackage.LABEL_ELEMENT__END:
+			case EditorPackage.ECORE_LABEL_ELEMENT__END:
 				if (resolve) return getEnd();
 				return basicGetEnd();
-			case EditorPackage.LABEL_ELEMENT__SEPARATOR:
+			case EditorPackage.ECORE_LABEL_ELEMENT__SEPARATOR:
 				return getSeparator();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -209,14 +203,14 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EditorPackage.LABEL_ELEMENT__PATH:
+			case EditorPackage.ECORE_LABEL_ELEMENT__PATH:
 				getPath().clear();
 				getPath().addAll((Collection<? extends EReference>)newValue);
 				return;
-			case EditorPackage.LABEL_ELEMENT__END:
+			case EditorPackage.ECORE_LABEL_ELEMENT__END:
 				setEnd((EStructuralFeature)newValue);
 				return;
-			case EditorPackage.LABEL_ELEMENT__SEPARATOR:
+			case EditorPackage.ECORE_LABEL_ELEMENT__SEPARATOR:
 				setSeparator((String)newValue);
 				return;
 		}
@@ -231,13 +225,13 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EditorPackage.LABEL_ELEMENT__PATH:
+			case EditorPackage.ECORE_LABEL_ELEMENT__PATH:
 				getPath().clear();
 				return;
-			case EditorPackage.LABEL_ELEMENT__END:
+			case EditorPackage.ECORE_LABEL_ELEMENT__END:
 				setEnd((EStructuralFeature)null);
 				return;
-			case EditorPackage.LABEL_ELEMENT__SEPARATOR:
+			case EditorPackage.ECORE_LABEL_ELEMENT__SEPARATOR:
 				setSeparator(SEPARATOR_EDEFAULT);
 				return;
 		}
@@ -252,11 +246,11 @@ public class LabelElementImpl extends EObjectImpl implements LabelElement {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EditorPackage.LABEL_ELEMENT__PATH:
+			case EditorPackage.ECORE_LABEL_ELEMENT__PATH:
 				return path != null && !path.isEmpty();
-			case EditorPackage.LABEL_ELEMENT__END:
+			case EditorPackage.ECORE_LABEL_ELEMENT__END:
 				return end != null;
-			case EditorPackage.LABEL_ELEMENT__SEPARATOR:
+			case EditorPackage.ECORE_LABEL_ELEMENT__SEPARATOR:
 				return SEPARATOR_EDEFAULT == null ? separator != null : !SEPARATOR_EDEFAULT.equals(separator);
 		}
 		return super.eIsSet(featureID);

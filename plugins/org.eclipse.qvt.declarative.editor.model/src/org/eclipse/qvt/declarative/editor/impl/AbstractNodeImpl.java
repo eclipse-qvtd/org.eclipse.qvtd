@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: NodeImpl.java,v 1.1 2008/08/08 16:39:54 ewillink Exp $
+ * $Id: AbstractNodeImpl.java,v 1.1 2008/08/24 18:56:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -27,25 +27,25 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.qvt.declarative.editor.AbstractNode;
 import org.eclipse.qvt.declarative.editor.Behavior;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
-import org.eclipse.qvt.declarative.editor.Node;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Node</b></em>'.
+ * An implementation of the model object '<em><b>Abstract Node</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvt.declarative.editor.impl.NodeImpl#getBehavior <em>Behavior</em>}</li>
- *   <li>{@link org.eclipse.qvt.declarative.editor.impl.NodeImpl#getBase <em>Base</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.AbstractNodeImpl#getBehavior <em>Behavior</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.AbstractNodeImpl#getBase <em>Base</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class NodeImpl extends EObjectImpl implements Node {
+public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNode {
 	/**
 	 * The cached value of the '{@link #getBehavior() <em>Behavior</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -64,14 +64,14 @@ public abstract class NodeImpl extends EObjectImpl implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected Node base;
+	protected AbstractNode base;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected NodeImpl() {
+	protected AbstractNodeImpl() {
 		super();
 	}
 
@@ -82,7 +82,7 @@ public abstract class NodeImpl extends EObjectImpl implements Node {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return EditorPackage.Literals.NODE;
+		return EditorPackage.Literals.ABSTRACT_NODE;
 	}
 
 	/**
@@ -92,7 +92,7 @@ public abstract class NodeImpl extends EObjectImpl implements Node {
 	 */
 	public EList<Behavior> getBehavior() {
 		if (behavior == null) {
-			behavior = new EObjectContainmentEList<Behavior>(Behavior.class, this, EditorPackage.NODE__BEHAVIOR);
+			behavior = new EObjectContainmentEList<Behavior>(Behavior.class, this, EditorPackage.ABSTRACT_NODE__BEHAVIOR);
 		}
 		return behavior;
 	}
@@ -102,13 +102,13 @@ public abstract class NodeImpl extends EObjectImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Node getBase() {
+	public AbstractNode getBase() {
 		if (base != null && base.eIsProxy()) {
 			InternalEObject oldBase = (InternalEObject)base;
-			base = (Node)eResolveProxy(oldBase);
+			base = (AbstractNode)eResolveProxy(oldBase);
 			if (base != oldBase) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EditorPackage.NODE__BASE, oldBase, base));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EditorPackage.ABSTRACT_NODE__BASE, oldBase, base));
 			}
 		}
 		return base;
@@ -119,7 +119,7 @@ public abstract class NodeImpl extends EObjectImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Node basicGetBase() {
+	public AbstractNode basicGetBase() {
 		return base;
 	}
 
@@ -128,11 +128,11 @@ public abstract class NodeImpl extends EObjectImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setBase(Node newBase) {
-		Node oldBase = base;
+	public void setBase(AbstractNode newBase) {
+		AbstractNode oldBase = base;
 		base = newBase;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.NODE__BASE, oldBase, base));
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.ABSTRACT_NODE__BASE, oldBase, base));
 	}
 
 	/**
@@ -143,7 +143,7 @@ public abstract class NodeImpl extends EObjectImpl implements Node {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case EditorPackage.NODE__BEHAVIOR:
+			case EditorPackage.ABSTRACT_NODE__BEHAVIOR:
 				return ((InternalEList<?>)getBehavior()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -157,9 +157,9 @@ public abstract class NodeImpl extends EObjectImpl implements Node {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EditorPackage.NODE__BEHAVIOR:
+			case EditorPackage.ABSTRACT_NODE__BEHAVIOR:
 				return getBehavior();
-			case EditorPackage.NODE__BASE:
+			case EditorPackage.ABSTRACT_NODE__BASE:
 				if (resolve) return getBase();
 				return basicGetBase();
 		}
@@ -175,12 +175,12 @@ public abstract class NodeImpl extends EObjectImpl implements Node {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EditorPackage.NODE__BEHAVIOR:
+			case EditorPackage.ABSTRACT_NODE__BEHAVIOR:
 				getBehavior().clear();
 				getBehavior().addAll((Collection<? extends Behavior>)newValue);
 				return;
-			case EditorPackage.NODE__BASE:
-				setBase((Node)newValue);
+			case EditorPackage.ABSTRACT_NODE__BASE:
+				setBase((AbstractNode)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -194,11 +194,11 @@ public abstract class NodeImpl extends EObjectImpl implements Node {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EditorPackage.NODE__BEHAVIOR:
+			case EditorPackage.ABSTRACT_NODE__BEHAVIOR:
 				getBehavior().clear();
 				return;
-			case EditorPackage.NODE__BASE:
-				setBase((Node)null);
+			case EditorPackage.ABSTRACT_NODE__BASE:
+				setBase((AbstractNode)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -212,12 +212,12 @@ public abstract class NodeImpl extends EObjectImpl implements Node {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EditorPackage.NODE__BEHAVIOR:
+			case EditorPackage.ABSTRACT_NODE__BEHAVIOR:
 				return behavior != null && !behavior.isEmpty();
-			case EditorPackage.NODE__BASE:
+			case EditorPackage.ABSTRACT_NODE__BASE:
 				return base != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //NodeImpl
+} //AbstractNodeImpl
