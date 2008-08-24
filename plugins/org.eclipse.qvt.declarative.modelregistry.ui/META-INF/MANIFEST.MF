@@ -14,5 +14,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.qvt.declarative.modelregistry.editor;visibility:=reexport
 Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: org.eclipse.qvt.declarative.modelregistry.ui.ModelRegistryUIPlugin
