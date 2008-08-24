@@ -1,8 +1,18 @@
 /**
  * <copyright>
+ * 
+ * Copyright (c) 2008 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * E.D.Willink - initial API and implementation
+ * 
  * </copyright>
  *
- * $Id: EditorEditorPlugin.java,v 1.1 2008/08/08 16:39:35 ewillink Exp $
+ * $Id: EditorEditorPlugin.java,v 1.2 2008/08/24 18:56:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.presentation;
 
@@ -11,6 +21,7 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
 
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
 
 /**
  * This is the central singleton for the Editor editor plugin.
@@ -44,6 +55,7 @@ public final class EditorEditorPlugin extends EMFPlugin {
 	public EditorEditorPlugin() {
 		super
 			(new ResourceLocator [] {
+				EcoreEditPlugin.INSTANCE,
 			});
 	}
 

@@ -1,8 +1,18 @@
 /**
  * <copyright>
+ * 
+ * Copyright (c) 2008 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * E.D.Willink - initial API and implementation
+ * 
  * </copyright>
  *
- * $Id: EditorEditor.java,v 1.1 2008/08/08 16:39:35 ewillink Exp $
+ * $Id: EditorEditor.java,v 1.2 2008/08/24 18:56:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.presentation;
 
@@ -46,6 +56,8 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
@@ -68,7 +80,6 @@ import org.eclipse.emf.edit.ui.provider.UnwrappingSelectionProvider;
 import org.eclipse.emf.edit.ui.util.EditUIMarkerHelper;
 import org.eclipse.emf.edit.ui.util.EditUIUtil;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
-import org.eclipse.qvt.declarative.editor.provider.EditorItemProviderAdapterFactory;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IStatusLineManager;
@@ -90,6 +101,7 @@ import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.qvt.declarative.editor.provider.EditorItemProviderAdapterFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.dnd.DND;
@@ -433,7 +445,7 @@ public class EditorEditor
 							if (delta.getResource().getType() == IResource.FILE) {
 								if (delta.getKind() == IResourceDelta.REMOVED ||
 								    delta.getKind() == IResourceDelta.CHANGED && delta.getFlags() != IResourceDelta.MARKERS) {
-									Resource resource = resourceSet.getResource(URI.createURI(delta.getFullPath().toString()), false);
+									Resource resource = resourceSet.getResource(URI.createPlatformResourceURI(delta.getFullPath().toString(), true), false);
 									if (resource != null) {
 										if (delta.getKind() == IResourceDelta.REMOVED) {
 											removedResources.add(resource);
@@ -650,13 +662,14 @@ public class EditorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void initializeEditingDomain() {
+	protected void initializeEditingDomainGen() {
 		// Create an adapter factory that yields item providers.
 		//
 		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new EditorItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 
 		// Create the command stack that will notify this editor as commands are executed.
@@ -691,7 +704,14 @@ public class EditorEditor
 		//
 		editingDomain = new AdapterFactoryEditingDomain(adapterFactory, commandStack, new HashMap<Resource, Boolean>());
 	}
-
+	protected void initializeEditingDomain() {
+		initializeEditingDomainGen();
+		AdapterFactory ecoreAdapterFactory = adapterFactory.getFactoryForType(EcorePackage.eINSTANCE);
+		if (ecoreAdapterFactory instanceof EcoreItemProviderAdapterFactory)
+			adapterFactory.removeAdapterFactory(ecoreAdapterFactory);
+		adapterFactory.insertAdapterFactory(new EcoreItemProviderAdapterFactoryEx());
+	}
+	
 	/**
 	 * This is here for the listener to be able to call it.
 	 * <!-- begin-user-doc -->
