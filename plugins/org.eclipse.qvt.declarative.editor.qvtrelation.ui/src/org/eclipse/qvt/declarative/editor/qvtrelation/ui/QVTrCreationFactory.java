@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTrCreationFactory.java,v 1.3 2008/08/18 07:57:37 ewillink Exp $
+ * $Id: QVTrCreationFactory.java,v 1.4 2008/08/24 19:00:52 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtrelation.ui;
 
@@ -20,15 +20,20 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.imp.parser.IParseController;
+import org.eclipse.imp.parser.ISourcePositionLocator;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
+import org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrNodeLocator;
 import org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrParseController;
+import org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.IPageManager;
 import org.eclipse.qvt.declarative.editor.ui.builder.CommonNature;
 import org.eclipse.qvt.declarative.editor.ui.common.AbstractCreationFactory;
+import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.emof.QVTRelation.facade.QVTRelationFacade;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
+import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtrelation.environment.QVTrTopLevelEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtrelation.unparser.QVTrUnparser;
 import org.eclipse.qvt.declarative.parser.ui.preferences.QVTPreferences;
@@ -50,6 +55,10 @@ public class QVTrCreationFactory extends AbstractCreationFactory
 	public CommonNature createNature() {
 		return new QVTrNature();
 	}
+
+	public ISourcePositionLocator createNodeLocator(IFileEnvironment environment) {
+		return new QVTrNodeLocator(environment);
+	}
 	
 	public IParseController createParseController() {
 		return new QVTrParseController();
@@ -61,6 +70,11 @@ public class QVTrCreationFactory extends AbstractCreationFactory
 
 	public QVTrTextEditor createTextEditor(IPageManager editorPageManager) {
 		return new QVTrTextEditor(editorPageManager);
+	}
+
+	@Override
+	public CommonTreeModelBuilder createTreeModelBuilder(boolean showAST) {
+		return new QVTrTreeModelBuilder(showAST);
 	}
 
 	public QVTrUnparser createUnparser(Resource resource) {
