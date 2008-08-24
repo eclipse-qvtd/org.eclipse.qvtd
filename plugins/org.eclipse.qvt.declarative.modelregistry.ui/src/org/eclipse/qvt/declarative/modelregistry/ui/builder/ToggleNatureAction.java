@@ -1,13 +1,19 @@
-/*******************************************************************************
+/**
+ * <copyright>
+ * 
  * Copyright (c) 2007,2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: ToggleNatureAction.java,v 1.3 2008/08/24 18:36:19 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.modelregistry.ui.builder;
 
 import java.util.Iterator;
@@ -23,7 +29,10 @@ import org.eclipse.qvt.declarative.modelregistry.ui.ModelRegistryUIPlugin;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
-public class ToggleNatureAction implements IObjectActionDelegate {
+public class ToggleNatureAction implements IObjectActionDelegate
+{
+	@SuppressWarnings("deprecation")
+	private static final String UMLX_NATURE_ID = ModelRegistryNature.UMLX_NATURE_ID;
 
 	private ISelection selection;
 
@@ -82,7 +91,7 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 			String[] natures = description.getNatureIds();
 
 			for (int i = 0; i < natures.length; ++i) {
-				if (ModelRegistryNature.UMLX_NATURE_ID.equals(natures[i])) {
+				if (UMLX_NATURE_ID.equals(natures[i])) {
 					// Remove the nature
 					String[] newNatures = new String[natures.length - 1];
 					System.arraycopy(natures, 0, newNatures, 0, i);
