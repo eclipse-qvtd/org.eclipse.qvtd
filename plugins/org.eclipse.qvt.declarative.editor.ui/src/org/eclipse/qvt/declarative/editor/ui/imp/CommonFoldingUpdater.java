@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonFoldingUpdater.java,v 1.3 2008/08/14 07:57:47 ewillink Exp $
+ * $Id: CommonFoldingUpdater.java,v 1.4 2008/08/24 19:13:36 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -31,7 +31,7 @@ import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.qvt.declarative.editor.FoldingBehavior;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
-import org.eclipse.qvt.declarative.parser.utils.CommonCSTVisitor;
+import org.eclipse.qvt.declarative.parser.utils.CommonASTVisitor;
 
 /**
  * CommonFoldingUpdater provides the FoldingUpdater functionality for
@@ -45,11 +45,12 @@ public abstract class CommonFoldingUpdater extends FolderBase
 	 * text ranges computed from AST nodes.  Projection annotations appear
 	 * in the editor as the widgets that control folding.
 	 */
-	protected class FoldingCSTVisitor extends CommonCSTVisitor<Object>
+	protected class FoldingCSTVisitor extends CommonASTVisitor<Object, CSTNode>
 	{
 		protected final CommonEditorDefinition editorDefinition;
 		
 		public FoldingCSTVisitor(CommonEditorDefinition editorDefinition) {
+			super(CSTNode.class);
 			this.editorDefinition = editorDefinition;
 		}
 
@@ -129,7 +130,7 @@ public abstract class CommonFoldingUpdater extends FolderBase
 			if (startToken != null) {
 				prsStream = startToken.getPrsStream();
 				FoldingCSTVisitor visitor = new FoldingCSTVisitor(getPlugin().getEditorDefinition());
-				FoldingCSTVisitor.acceptAt(visitor, theCST);
+				visitor.enter(theCST);
 				makeAdjunctAnnotations(theCST);
 			}
 		}
