@@ -12,10 +12,12 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.5 2008/08/18 07:46:26 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.6 2008/08/24 19:18:00 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -31,7 +33,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -42,8 +43,10 @@ import org.eclipse.imp.editor.ModelTreeNode;
 import org.eclipse.imp.services.ILabelProvider;
 import org.eclipse.imp.utils.MarkerUtils;
 import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.qvt.declarative.editor.AbstractLabelElement;
+import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
+import org.eclipse.qvt.declarative.editor.JavaLabelElement;
 import org.eclipse.qvt.declarative.editor.LabelBehavior;
-import org.eclipse.qvt.declarative.editor.LabelElement;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 import org.eclipse.swt.graphics.Image;
@@ -80,7 +83,7 @@ public abstract class CommonLabelProvider implements ILabelProvider
 
 	public void dispose() {}
 
-	protected String formatCollection(Collection<?> objects, LabelElement labelElement) {
+	protected String formatCollection(Collection<?> objects, EcoreLabelElement labelElement) {
 	String string;
 	{
 		StringBuffer s = new StringBuffer();
@@ -94,6 +97,32 @@ public abstract class CommonLabelProvider implements ILabelProvider
 	return string;
 }
 
+	protected String formatEcoreLabelElement(Object node, EcoreLabelElement labelElement) {
+		Object object = node;
+		for (EReference path : labelElement.getPath())
+			object = checkedGet(object, path);
+		if (object instanceof EObject) {
+			EStructuralFeature end = labelElement.getEnd();
+			if (end == null)
+				object = "<" + ((EObject)object).eClass().getName() + ">";
+			else {
+				object = checkedGet(object, end);
+			}
+		}
+		String string;
+		if (object == null)
+			string = formatNull();
+		else if (object instanceof Collection)
+			string = formatCollection((Collection<?>)object, labelElement);
+		else if (object instanceof Enum)
+			string = formatEnum((Enum<?>)object);
+		else if (!(object instanceof String))
+			string = formatObject(object);
+		else 
+			string = (String) object;
+		return string;
+	}
+
 	protected String formatEnum(Enum<?> object) {
 		return object.toString();
 	}
@@ -105,6 +134,21 @@ public abstract class CommonLabelProvider implements ILabelProvider
 		return "<!" + e.getClass().getSimpleName() + "!>";
 	}
 
+	protected Object formatJavaLabelElement(Object node, JavaLabelElement labelElement) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
+		String methodName = labelElement.getMethod();
+		String className = labelElement.getClass_();
+		if (className == null) {
+			Class<?> methodClass = node.getClass();
+			Method method = methodClass.getMethod(methodName);
+			return String.valueOf(method.invoke(node));
+		}
+		else {
+			Class<?> methodClass = Class.forName(className);
+			Method method = methodClass.getMethod(methodName, node.getClass());
+			return String.valueOf(method.invoke(null, node));
+		}
+	}
+
 	protected String formatNull() {
 		return "";
 	}
@@ -114,38 +158,19 @@ public abstract class CommonLabelProvider implements ILabelProvider
 		LabelBehavior behavior = commonEditorDefinition.getBehavior(node, LabelBehavior.class);
 		if (behavior == null)
 			return null;
-		if (!(node instanceof EObject))
-			return null;
 		String format = behavior.getFormat();
-		EList<LabelElement> labelElements = behavior.getElements();
+		List<AbstractLabelElement> labelElements = behavior.getElements();
 		int iMax = labelElements.size();
 		Object[] strings = new String[iMax];
 		for (int i = 0; i < iMax; i++) {
 			try {
-				LabelElement labelElement = labelElements.get(i);
-				Object object = node;
-				for (EReference path : labelElement.getPath())
-					object = checkedGet(object, path);
-				if (object instanceof EObject) {
-					EStructuralFeature end = labelElement.getEnd();
-					if (end == null)
-						object = "<" + ((EObject)object).eClass().getName() + ">";
-					else {
-						object = checkedGet(object, end);
-					}
-				}
-				String string;
-				if (object == null)
-					string = formatNull();
-				else if (object instanceof Collection)
-					string = formatCollection((Collection<?>)object, labelElement);
-				else if (object instanceof Enum)
-					string = formatEnum((Enum<?>)object);
-				else if (!(object instanceof String))
-					string = formatObject(object);
-				else 
-					string = (String) object;
-				strings[i] = string;
+				AbstractLabelElement labelElement = labelElements.get(i);
+				if (labelElement instanceof EcoreLabelElement)
+					strings[i] = formatEcoreLabelElement(node, (EcoreLabelElement) labelElement);
+				else if (labelElement instanceof JavaLabelElement)
+					strings[i] = formatJavaLabelElement(node, (JavaLabelElement) labelElement);
+				else
+					strings[i] = "<?" + labelElement.getClass().getSimpleName() + "?>";
 			}
 			catch (Throwable e) {
 				strings[i] = formatException(e, node, i);
@@ -158,7 +183,7 @@ public abstract class CommonLabelProvider implements ILabelProvider
 		if (element instanceof ModelTreeNode)
 			return ((ModelTreeNode) element).getASTNode();
 		else if (element instanceof ASTandCST)
-			return ((ASTandCST) element).resolve();
+			return ((ASTandCST) element).getCST();
 		else
 			return element;
 	}
