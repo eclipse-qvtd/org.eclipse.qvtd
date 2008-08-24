@@ -12,36 +12,20 @@
  * 
  * </copyright>
  *
- * $Id: QVTcParseController.java,v 1.2 2008/08/18 07:57:40 ewillink Exp $
+ * $Id: QVTcParseController.java,v 1.3 2008/08/24 18:58:34 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui.imp;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.imp.parser.ISourcePositionLocator;
 import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcCreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.qvtcore.QVTcLexer;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.QVTcCSTPackage;
-import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcTopLevelEnvironment;
 
 public class QVTcParseController extends CommonParseController
 {
 	public QVTcParseController() {
 		super(QVTcCreationFactory.INSTANCE);
 		QVTcCSTPackage.eINSTANCE.getClass();
-	}
-
-	@Override
-	protected QVTcTopLevelEnvironment createEnvironment(AbstractFileHandle fileHandle) {
-		ResourceSet resourceSet = new ResourceSetImpl();
-		return new QVTcTopLevelEnvironment(fileHandle, resourceSet);
-	}
-
-	@Override
-	public ISourcePositionLocator getNodeLocator() {
-		return new QVTcNodeLocator(environment);
 	}
 
 	@Override
