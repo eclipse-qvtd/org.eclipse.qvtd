@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLCreationFactory.java,v 1.1 2008/08/18 07:45:00 ewillink Exp $
+ * $Id: OCLCreationFactory.java,v 1.2 2008/08/24 19:00:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui;
 
@@ -20,14 +20,19 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.imp.parser.IParseController;
+import org.eclipse.imp.parser.ISourcePositionLocator;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
+import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLNodeLocator;
 import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLParseController;
+import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.IPageManager;
 import org.eclipse.qvt.declarative.editor.ui.builder.CommonNature;
 import org.eclipse.qvt.declarative.editor.ui.common.AbstractCreationFactory;
+import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
+import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
 import org.eclipse.qvt.declarative.parser.ocl.environment.OCLTopLevelEnvironment;
 import org.eclipse.qvt.declarative.parser.ui.preferences.QVTPreferences;
 import org.eclipse.qvt.declarative.parser.unparser.OCLUnparser;
@@ -48,6 +53,10 @@ public class OCLCreationFactory extends AbstractCreationFactory
 	public CommonNature createNature() {
 		return new OCLNature();
 	}
+
+	public ISourcePositionLocator createNodeLocator(IFileEnvironment environment) {
+		return new OCLNodeLocator(environment);
+	}
 	
 	public IParseController createParseController() {
 		return new OCLParseController();
@@ -59,6 +68,11 @@ public class OCLCreationFactory extends AbstractCreationFactory
 
 	public OCLTextEditor createTextEditor(IPageManager editorPageManager) {
 		return new OCLTextEditor(editorPageManager);
+	}
+
+	@Override
+	public CommonTreeModelBuilder createTreeModelBuilder(boolean showAST) {
+		return new OCLTreeModelBuilder(showAST);
 	}
 
 	public OCLUnparser createUnparser(Resource resource) {
