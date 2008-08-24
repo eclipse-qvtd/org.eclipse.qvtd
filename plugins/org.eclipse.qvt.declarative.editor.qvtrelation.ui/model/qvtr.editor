@@ -5,9 +5,9 @@
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.editor.qvtrelation.ui/icons/QVTrModelFile.gif" format="&lt;file-name>"/>
   </node>
   <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/DomainPattern.gif" format="domainPattern {0}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <path href="http://www.eclipse.org/qvt/1.0/QVTBase#//Pattern/bindsTo"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
       </elements>
@@ -17,10 +17,10 @@
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/Key.gif" format="{0}({1})">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelation#//Key/identifies"/>
       </elements>
-      <elements separator=",">
+      <elements xsi:type="ed:EcoreLabelElement" separator=",">
         <path href="http://www.eclipse.org/qvt/1.0/QVTRelation#//Key/part"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
       </elements>
@@ -28,57 +28,78 @@
     <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTRelation#//Key"/>
   </node>
   <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/Relation.gif" format="{0}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
       </elements>
     </behavior>
     <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTRelation#//Relation"/>
   </node>
   <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/RelationCallExp.gif" format="{0}()">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelation#//RelationCallExp/referredRelation"/>
       </elements>
     </behavior>
     <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTRelation#//RelationCallExp"/>
   </node>
   <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/RelationDomain.gif" format="{0}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
       </elements>
     </behavior>
     <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTRelation#//RelationDomain"/>
   </node>
   <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/RelationDomainAssignment.gif" format="{0} = {1}">
+      <elements xsi:type="ed:EcoreLabelElement">
+        <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelation#//RelationDomainAssignment/variable"/>
+      </elements>
+      <elements xsi:type="ed:EcoreLabelElement">
+        <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelation#//RelationDomainAssignment/valueExp"/>
+      </elements>
+    </behavior>
+    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTRelation#//RelationDomainAssignment"/>
+  </node>
+  <node xsi:type="ed:EcoreNode">
+    <behavior xsi:type="ed:OutlineBehavior"/>
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/RelationImplementation.gif" format="{0}">
+      <elements xsi:type="ed:EcoreLabelElement">
+        <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelation#//RelationImplementation/impl"/>
+      </elements>
+    </behavior>
+    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTRelation#//RelationImplementation"/>
+  </node>
+  <node xsi:type="ed:EcoreNode">
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtbase.edit/icons/full/obj16/Transformation.gif" format="{0}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
       </elements>
     </behavior>
     <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTRelation#//RelationalTransformation"/>
   </node>
   <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvttemplate.edit/icons/full/obj16/CollectionTemplateExp.gif" format="{0} : {1} '{' {2} ++ {3} '}'">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <path href="http://www.eclipse.org/qvt/1.0/QVTTemplate#//TemplateExp/bindsTo"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
       </elements>
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTTemplate#//CollectionTemplateExp/referredCollectionType"/>
       </elements>
-      <elements separator=",">
+      <elements xsi:type="ed:EcoreLabelElement" separator=",">
         <path href="http://www.eclipse.org/qvt/1.0/QVTTemplate#//CollectionTemplateExp/member"/>
         <path href="http://www.eclipse.org/qvt/1.0/QVTTemplate#//PropertyTemplateItem/referredProperty"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
       </elements>
-      <elements separator="">
+      <elements xsi:type="ed:EcoreLabelElement" separator="">
         <path href="http://www.eclipse.org/qvt/1.0/QVTTemplate#//CollectionTemplateExp/rest"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
       </elements>
@@ -86,22 +107,22 @@
     <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTTemplate#//CollectionTemplateExp"/>
   </node>
   <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvttemplate.edit/icons/full/obj16/ObjectTemplateExp.gif" format="{0} : {1}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <path href="http://www.eclipse.org/qvt/1.0/QVTTemplate#//TemplateExp/bindsTo"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
       </elements>
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
       </elements>
     </behavior>
     <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTTemplate#//ObjectTemplateExp"/>
   </node>
   <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvttemplate.edit/icons/full/obj16/PropertyTemplateItem.gif" format="{0}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <path href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//PropertyTemplateCS/referredProperty"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
       </elements>
@@ -109,19 +130,19 @@
     <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTTemplate#//PropertyTemplateItem"/>
   </node>
   <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvttemplate.edit/icons/full/obj16/CollectionTemplateExp.gif" format="{0} : {1} '{' {2} ++ {3} '}'">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <path href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
       </elements>
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//TemplateVariableCS/type"/>
       </elements>
-      <elements separator=",">
+      <elements xsi:type="ed:EcoreLabelElement" separator=",">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//CollectionTemplateCS/memberIdentifier"/>
       </elements>
-      <elements separator="">
+      <elements xsi:type="ed:EcoreLabelElement" separator="">
         <path href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//CollectionTemplateCS/restIdentifier"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
       </elements>
@@ -135,9 +156,9 @@
   </node>
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/RelationDomain.gif" format="{0}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <path href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//DomainCS/modelId"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
       </elements>
@@ -146,7 +167,7 @@
   </node>
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:LabelBehavior" format=" {0}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <path href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
       </elements>
@@ -155,7 +176,7 @@
   </node>
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:LabelBehavior" format=" {0}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
       </elements>
     </behavior>
@@ -164,10 +185,10 @@
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/Key.gif" format="{0}({1})">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//KeyDeclCS/classId"/>
       </elements>
-      <elements separator=",">
+      <elements xsi:type="ed:EcoreLabelElement" separator=",">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//KeyDeclCS/propertyId"/>
       </elements>
     </behavior>
@@ -176,24 +197,24 @@
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/Direction.gif" format="{0} : '{'{1}'}'">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <path href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//ModelDeclCS/modelId"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
       </elements>
-      <elements separator=",">
+      <elements xsi:type="ed:EcoreLabelElement" separator=",">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//ModelDeclCS/metaModelId"/>
       </elements>
     </behavior>
     <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//ModelDeclCS"/>
   </node>
   <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvttemplate.edit/icons/full/obj16/ObjectTemplateExp.gif" format="{0} : {1}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <path href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
       </elements>
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//TemplateVariableCS/type"/>
       </elements>
     </behavior>
@@ -202,11 +223,11 @@
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.emf.ecore.edit/icons/full/obj16/EParameter.gif" format="{0} : {1}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <path href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//ParamDeclarationCS/identifier"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
       </elements>
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//ParamDeclarationCS/type"/>
       </elements>
     </behavior>
@@ -214,14 +235,14 @@
   </node>
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/RelationDomain.gif" format=""/>
     <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//PrimitiveTypeDomainCS"/>
   </node>
   <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvttemplate.edit/icons/full/obj16/PropertyTemplateItem.gif" format="{0}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <path href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//PropertyTemplateCS/propertyId"/>
         <path href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
@@ -232,12 +253,12 @@
   </node>
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.emf.ecore.edit/icons/full/obj16/EOperation.gif" format="{0} : {1}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//QueryCS/pathName"/>
       </elements>
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//QueryCS/type"/>
       </elements>
     </behavior>
@@ -245,9 +266,9 @@
   </node>
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/Relation.gif" format="{0}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <path href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//RelationCS/identifier"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
       </elements>
@@ -260,9 +281,9 @@
   </node>
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/RelationalTransformation.gif" format="{0}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <path href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//TransformationCS/identifier"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
       </elements>
@@ -272,19 +293,19 @@
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtbase.edit/icons/full/obj16/Domain.gif" format="{0}">
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//UnitCS/identifier"/>
       </elements>
     </behavior>
     <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//UnitCS"/>
   </node>
   <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior" container="true" terminal="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Variable.gif" format="{0} : {1}">
-      <elements separator=",">
+      <elements xsi:type="ed:EcoreLabelElement" separator=",">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//VarDeclarationCS/varDeclarationId"/>
       </elements>
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//VarDeclarationCS/type"/>
       </elements>
     </behavior>
@@ -292,12 +313,12 @@
   </node>
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Variable.gif" format="when">
-      <elements separator=",">
+      <elements xsi:type="ed:EcoreLabelElement" separator=",">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//VarDeclarationCS/varDeclarationId"/>
       </elements>
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//VarDeclarationCS/type"/>
       </elements>
     </behavior>
@@ -305,12 +326,12 @@
   </node>
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:OutlineBehavior" container="true"/>
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Variable.gif" format="where">
-      <elements separator=",">
+      <elements xsi:type="ed:EcoreLabelElement" separator=",">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//VarDeclarationCS/varDeclarationId"/>
       </elements>
-      <elements>
+      <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//VarDeclarationCS/type"/>
       </elements>
     </behavior>
