@@ -12,19 +12,21 @@
  * 
  * </copyright>
  *
- * $Id: OCLTreeModelBuilder.java,v 1.1 2008/08/14 07:51:10 ewillink Exp $
+ * $Id: OCLTreeModelBuilder.java,v 1.2 2008/08/24 18:59:25 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui.imp;
 
-import org.eclipse.qvt.declarative.editor.ocl.ui.OCLPlugin;
+import org.eclipse.qvt.declarative.editor.ocl.ui.OCLCreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
-import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 
 
 public class OCLTreeModelBuilder extends CommonTreeModelBuilder
 {
-	@Override
-	protected ICommonPlugin getPlugin() {
-		return OCLPlugin.getInstance();
+	public OCLTreeModelBuilder() {
+		this(true);
+	}
+
+	public OCLTreeModelBuilder(boolean showAST) {
+		super(OCLCreationFactory.INSTANCE, showAST);
 	}
 }
