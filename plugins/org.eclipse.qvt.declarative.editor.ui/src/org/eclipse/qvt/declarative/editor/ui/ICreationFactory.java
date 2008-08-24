@@ -1,13 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2007,2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: ICreationFactory.java,v 1.3 2008/08/24 19:07:59 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.editor.ui;
 
 import org.eclipse.core.resources.IFile;
@@ -16,10 +22,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.imp.language.Language;
 import org.eclipse.imp.parser.IParseController;
+import org.eclipse.imp.parser.ISourcePositionLocator;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
 import org.eclipse.qvt.declarative.editor.ui.builder.CommonNature;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonEditorDefinition;
+import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
@@ -42,6 +50,8 @@ public interface ICreationFactory
 
 	public CommonNature createNature();
 
+	public ISourcePositionLocator createNodeLocator(IFileEnvironment environment);
+
 	public IParseController createParseController();
 
 	/**
@@ -50,6 +60,9 @@ public interface ICreationFactory
 	public ProblemHandler createProblemHandler(IFile file);
 
 	public ITextEditorWithUndoContext createTextEditor(IPageManager editorPageManager);
+
+	public CommonTreeModelBuilder createTreeModelBuilder(boolean showAST);
+	
 	public AbstractUnparser createUnparser(Resource resource);	
 
 	/**
