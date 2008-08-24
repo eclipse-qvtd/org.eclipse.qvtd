@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.1 2008/07/23 09:55:17 qglineur Exp $
+ $Id: plugin.xml,v 1.2 2008/08/24 18:33:52 ewillink Exp $
 -->
 
 <plugin>
@@ -24,7 +24,7 @@
             class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
    </extension-->
 
-   <extension point="org.eclipse.core.runtime.contentTypes">
+   <extension point="org.eclipse.core.contenttype.contentTypes">
       <content-type id="org.eclipse.qvt.declarative.emof.emof"
             base-type="org.eclipse.emf.emof"
             file-extensions="emof,xmi,xml"           
