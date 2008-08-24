@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractCreationFactory.java,v 1.2 2008/08/18 07:46:26 ewillink Exp $
+ * $Id: AbstractCreationFactory.java,v 1.3 2008/08/24 19:12:32 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.common;
 
@@ -22,6 +22,7 @@ import org.eclipse.imp.language.LanguageRegistry;
 import org.eclipse.qvt.declarative.ecore.utils.XMIUtils;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonEditorDefinition;
+import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.parser.ui.preferences.QVTPreferences;
 
 public abstract class AbstractCreationFactory implements ICreationFactory
@@ -30,6 +31,10 @@ public abstract class AbstractCreationFactory implements ICreationFactory
 
 	public void assignXmiIds(XMLResource resource) {
 		XMIUtils.assignIds(resource, XMIUtils.uuidCreator, null);
+	}
+
+	public CommonTreeModelBuilder createTreeModelBuilder(boolean showAST) {
+		return new CommonTreeModelBuilder(this, showAST);
 	}
 
 	@SuppressWarnings("unchecked")
