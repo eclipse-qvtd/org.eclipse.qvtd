@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.5 2008/08/24 19:15:53 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.6 2008/08/26 19:13:46 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -62,7 +62,10 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.lpg.AbstractLexer;
 import org.eclipse.ocl.lpg.AbstractParser;
+import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
+import org.eclipse.qvt.declarative.editor.ui.builder.MarkerProblemHandler;
+import org.eclipse.qvt.declarative.editor.ui.builder.ProblemLimit;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseFileHandle;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseProjectHandle;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
@@ -154,8 +157,18 @@ public abstract class CommonParseController implements IParseController
 		return creationFactory.createFileEnvironment(fileHandle, resourceSet);
 	}
 
-	protected CommonProblemHandler createProblemHandler() {
-		return new CommonProblemHandler(environment.getParser(), handler);
+	protected ProblemHandler createProblemHandler() {
+		if (handler instanceof ProblemHandler) {
+			((ProblemHandler)handler).setParser(environment.getParser());
+			if (handler instanceof MarkerProblemHandler)
+				((MarkerProblemHandler<?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?>)handler).setProblemLimit(new ProblemLimit(50, 50, 50));
+			return (ProblemHandler) handler;
+		}
+		else {
+			CommonProblemHandler commonProblemHandler = new CommonProblemHandler(environment.getParser(), handler);
+			commonProblemHandler.setProblemLimit(new ProblemLimit(50, 50, 50));
+			return commonProblemHandler;
+		}
 	}
 
 	protected PMMonitor createProgressMonitor(IProgressMonitor monitor) {
@@ -331,7 +344,7 @@ public abstract class CommonParseController implements IParseController
 
 	public Object parse(String contents, boolean scanOnly, IProgressMonitor monitor) {
 //		FIXME scanOnly appears to be false always
-//		System.out.println("Parse " + fLanguage + " scanOnly = " + scanOnly);
+		System.out.println("Parse " + fLanguage + " scanOnly = " + scanOnly + " handler = " + handler.getClass().getName());
 		PMMonitor my_monitor = createProgressMonitor(monitor);
 		if (my_monitor.isCancelled())
 			return fCurrentAst; // TODO currentAst might (probably will) be inconsistent wrt the lex stream now
