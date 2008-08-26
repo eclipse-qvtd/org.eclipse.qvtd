@@ -12,13 +12,16 @@
  * 
  * </copyright>
  *
- * $Id: CommonProblemHandler.java,v 1.1 2008/08/08 16:42:46 ewillink Exp $
+ * $Id: CommonProblemHandler.java,v 1.2 2008/08/26 19:11:06 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.imp.parser.IMessageHandler;
 import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.ocl.lpg.AbstractProblemHandler;
+import org.eclipse.qvt.declarative.editor.ui.builder.MarkerProblemHandler;
+import org.eclipse.qvt.declarative.editor.ui.builder.ProblemLimit;
 
 /**
  * A CommonProblemHandler arranges for errors, reported via the MDT OCL
@@ -27,6 +30,7 @@ import org.eclipse.ocl.lpg.AbstractProblemHandler;
 public class CommonProblemHandler extends AbstractProblemHandler
 {
 	protected final IMessageHandler handler;
+	private ProblemLimit problemLimit = null;
 	
 	public CommonProblemHandler(AbstractParser parser, IMessageHandler handler) {
 		super(parser);
@@ -42,7 +46,20 @@ public class CommonProblemHandler extends AbstractProblemHandler
 		int startCol = getParser().getTokenAtCharacter(startOffset).getColumn();
 		int endLine = getParser().getTokenAtCharacter(endOffset).getLine();
 		int endCol = getParser().getTokenAtCharacter(startOffset).getColumn();
+		String adjustedMessage = problemMessage;
+		if (problemLimit != null) {
+			Integer severity = MarkerProblemHandler.severityMap.get(problemSeverity);
+			adjustedMessage = problemLimit.check(severity != null ? severity.intValue() : IMarker.SEVERITY_ERROR, adjustedMessage);
+			if (adjustedMessage == null)
+				return;
+		}
 		handler.handleSimpleMessage(problemMessage, startOffset, endOffset,
 	            startCol, endCol, startLine, endLine);
+		if (adjustedMessage != problemMessage)
+			throw new ProblemLimit.LimitExceededException(adjustedMessage);
 	}		
+	
+	public void setProblemLimit(ProblemLimit problemLimit) {
+		this.problemLimit = problemLimit;
+	}
 }
