@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonEditorDefinition.java,v 1.7 2008/08/24 19:12:55 ewillink Exp $
+ * $Id: CommonEditorDefinition.java,v 1.8 2008/08/26 19:09:56 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -244,15 +244,18 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 			if ((deltaKind == IResourceDelta.REMOVED)
 			 || (deltaKind == IResourceDelta.CHANGED)
 			 || (deltaKind == IResourceDelta.REPLACED)) {
-				try {
-					URL fileURL = resource.getLocationURI().toURL();
-					if (fileURL.equals(editorURL)) {
-						editorDefinition = null;
-						ecoreMap.clear();
-						javaMap.clear();
-						return false;
+				java.net.URI locationURI = resource.getLocationURI();
+				if (locationURI != null) {
+					try {
+						URL fileURL = locationURI.toURL();
+						if (fileURL.equals(editorURL)) {
+							editorDefinition = null;
+							ecoreMap.clear();
+							javaMap.clear();
+							return false;
+						}
+					} catch (MalformedURLException e) {
 					}
-				} catch (MalformedURLException e) {
 				}
 			}
 		}
