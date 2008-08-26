@@ -25,7 +25,7 @@ import org.eclipse.qvt.declarative.emof.EssentialOCL.util.EssentialOCLMappingMet
 
 /**
  * QVTBaseMappingMetaData defines the mapping between an EMOF-based QVT Base
- * adapting model and an Ecore-based EQVT Base model.
+ * adapting model and an Ecore-based QVT Base model.
  * The mapping is established by adapting model elements that adapt their Ecore counterparts.
  * The mapping is established lazily, typically by invoking load or save on an
  * AdaptingXMIResource.
