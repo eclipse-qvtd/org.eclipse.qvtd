@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLPlugin.java,v 1.2 2008/08/18 07:43:58 ewillink Exp $
+ * $Id: OCLPlugin.java,v 1.3 2008/08/26 19:05:02 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui;
 
@@ -77,7 +77,6 @@ public class OCLPlugin extends PluginBase implements ICommonPlugin
 		return kPluginID;
 	}
 
-	@Override
 	public String getLanguageName() {
 		return kLanguageName;
 	}

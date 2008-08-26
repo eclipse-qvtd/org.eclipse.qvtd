@@ -77,35 +77,39 @@
          </visibility>
       </objectContribution>
    </extension>
-   <!--extension
+   <extension
          point="org.eclipse.ui.editors">
-      <editor
-            name="OCL Text Editor"
+      <editor id="org.eclipse.qvt.declarative.editor.ocl.ui.OCLEditor"
+            name="OCL Editor"
             icon="icons/OCLModelFile.gif"
+            extensions="ocl"
+            contributorClass="org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditorActionContributor"
+            class="org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditor"/>
+      <editor id="org.eclipse.qvt.declarative.editor.ocl.ui.OCLMultiEditor"
+            name="OCL Multi-View Editor"
             extensions="ocl,eocl"
+            icon="icons/OCLModelFile.gif"
             contributorClass="org.eclipse.qvt.declarative.editor.ui.actions.PagedActionBarContributor"
-            class="org.eclipse.qvt.declarative.editor.ocl.ui.OCLEditor"
-            id="org.eclipse.qvt.declarative.editor.ocl.ui.OCLEditor">
-      </editor>
-   </extension-->
-   <!--extension
+            class="org.eclipse.qvt.declarative.editor.ocl.ui.OCLEditor"/>
+   </extension>
+   <extension
          point="org.eclipse.ui.newWizards">
       <wizard
-            name="OCL Text file"
+            name="OCL Text File"
             icon="icons/OCLModelFile.gif"
-            category="org.eclipse.qvt.declarative.editor"
+            category="org.eclipse.qvt.declarative.editor.ui"
             class="org.eclipse.qvt.declarative.editor.ocl.ui.OCLNewWizard"
             id="org.eclipse.qvt.declarative.editor.ocl.ui.OCLNewWizard">
       </wizard>
-   </extension-->
-   <!--extension
+   </extension>
+   <extension
          point="org.eclipse.qvt.declarative.editor.ui.pageDefinition">
       <page
             pageFactory="org.eclipse.qvt.declarative.editor.ui.text.TextPageFactory"
             creationFactory="org.eclipse.qvt.declarative.editor.ocl.ui.OCLCreationFactory"
             name="OCL">
       </page>
-   </extension-->
+   </extension>
    <extension
          point="org.eclipse.imp.runtime.languageDescription">
       <language
