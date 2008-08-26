@@ -12,11 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: CommonOutlinePage.java,v 1.1 2008/08/24 19:03:19 ewillink Exp $
+ * $Id: CommonOutlinePage.java,v 1.2 2008/08/26 19:10:36 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.cst;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.imp.editor.IMPOutlinePage;
+import org.eclipse.imp.parser.IParseController;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -94,7 +96,6 @@ public abstract class CommonOutlinePage extends IMPOutlinePage implements ICSTOu
         }      
 	}
 
-	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		if (!isChangingSelection())
 			setSelection(selection);
@@ -113,5 +114,11 @@ public abstract class CommonOutlinePage extends IMPOutlinePage implements ICSTOu
         		changingSelection = false;
         	}
         }      
+	}
+
+	@Override
+	public void update(IParseController parseController, IProgressMonitor monitor) {
+	    if ((getTreeViewer() != null) && (getTreeViewer().getContentProvider() != null))
+	    	super.update(parseController, monitor);
 	}
 }
