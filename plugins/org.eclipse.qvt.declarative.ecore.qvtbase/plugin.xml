@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.2 2008/08/24 18:33:56 ewillink Exp $
+ $Id: plugin.xml,v 1.3 2008/08/26 19:17:43 ewillink Exp $
 -->
 
 <plugin>
@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package uri="http://www.eclipse.org/qvt/1.0/QVTBase"
             class="org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage"
-            genModel="model/EQVTBase.genmodel"/>
+            genModel="model/QVTBase.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">
