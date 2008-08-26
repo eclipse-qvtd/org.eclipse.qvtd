@@ -12,12 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: CommonTextEditor.java,v 1.1 2008/08/24 19:16:21 ewillink Exp $
+ * $Id: CommonTextEditor.java,v 1.2 2008/08/26 19:13:17 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -63,9 +64,18 @@ public class CommonTextEditor extends UniversalEditor
 	 * This is the property sheet page.
 	 */
 	protected IPropertySheetPage propertySheetPage = null;
-	private IShowInTargetList showInTargetList = null;
-	private IContentOutlinePage astOutlinePage = null;
-	private ICSTOutlinePage cstOutlinePage = null;
+	/**
+	 * This is the AST outline page.
+	 */
+	protected IContentOutlinePage astOutlinePage = null;
+	/**
+	 * This is the CST outline page.
+	 */
+	protected ICSTOutlinePage cstOutlinePage = null;
+	/**
+	 * This is the list of extra views for the Show In menu.
+	 */
+	protected IShowInTargetList showInTargetList = null;
 
 	public CommonTextEditor() {
 	    initializeEditingDomain();
@@ -88,7 +98,6 @@ public class CommonTextEditor extends UniversalEditor
 	protected IShowInTargetList createShowInTargetList() {
 		return new IShowInTargetList()
 		{
-			@Override
 			public String[] getShowInTargetIds() {
 				return new String[] {
 					"org.eclipse.ui.views.PropertySheet",
@@ -112,43 +121,47 @@ public class CommonTextEditor extends UniversalEditor
 		return node;
 	}
 
-	protected Object[] getASTNodes(ISelection selection) {
+	protected List<Object> getASTNodes(ISelection selection) {
 		CommonParseController parseController = getParseController();
-		Object[] selections = ((IStructuredSelection)selection).toArray();
-		Object[] unwrappedSelections = new Object[selections.length];
-		for (int i = 0; i < selections.length; i++)
-			unwrappedSelections[i] = parseController.getASTNode(selections[i]);
+		List<Object> unwrappedSelections = new ArrayList<Object>(((IStructuredSelection)selection).size());
+		for (Iterator<?> i = ((IStructuredSelection)selection).iterator(); i.hasNext(); ) {
+			Object node = parseController.getASTNode(i.next());
+			if (node != null)
+				unwrappedSelections.add(node);
+		}
 		return unwrappedSelections;
 	}
 
 	public ISelection getASTSelection(ISelection selection) {
 		if (selection instanceof TextSelection) {
 			Object node = getASTNode(selection);
-			selection = new StructuredSelection(node);
+			selection = node != null ? new StructuredSelection(node) : StructuredSelection.EMPTY;
 		}
 		else if ((selection instanceof IStructuredSelection) && !selection.isEmpty()) {
-			Object[] unwrappedSelections = getASTNodes(selection);
+			List<Object> unwrappedSelections = getASTNodes(selection);
 			selection = new StructuredSelection(unwrappedSelections);		
 		}
 		return selection;
 	}
 
-	protected Object[] getASTorCSTNodes(ISelection selection) {
+	protected List<Object> getASTorCSTNodes(ISelection selection) {
 		CommonParseController parseController = getParseController();
-		Object[] selections = ((IStructuredSelection)selection).toArray();
-		Object[] unwrappedSelections = new Object[selections.length];
-		for (int i = 0; i < selections.length; i++)
-			unwrappedSelections[i] = parseController.getASTorCSTNode(selections[i]);
+		List<Object> unwrappedSelections = new ArrayList<Object>(((IStructuredSelection)selection).size());
+		for (Iterator<?> i = ((IStructuredSelection)selection).iterator(); i.hasNext(); ) {
+			Object node = parseController.getASTorCSTNode(i.next());
+			if (node != null)
+				unwrappedSelections.add(node);
+		}
 		return unwrappedSelections;
 	}
 
 	public ISelection getASTorCSTSelection(ISelection selection) {
 		if (selection instanceof TextSelection) {
 			Object node = getASTNode(selection);
-			selection = new StructuredSelection(node);
+			selection = node != null ? new StructuredSelection(node) : StructuredSelection.EMPTY;
 		}
 		else if ((selection instanceof IStructuredSelection) && !selection.isEmpty()) {
-			Object[] unwrappedSelections = getASTorCSTNodes(selection);
+			List<Object> unwrappedSelections = getASTorCSTNodes(selection);
 			selection = new StructuredSelection(unwrappedSelections);			
 		}
 		return selection;
@@ -163,22 +176,24 @@ public class CommonTextEditor extends UniversalEditor
 		return nodeLocator.findNode(currentAst.getCST(), offset, offset+length);
 	}
 
-	protected Object[] getCSTNodes(ISelection selection) {
+	protected List<CSTNode> getCSTNodes(ISelection selection) {
 		CommonParseController parseController = getParseController();
-		Object[] selections = ((IStructuredSelection)selection).toArray();
-		Object[] unwrappedSelections = new Object[selections.length];
-		for (int i = 0; i < selections.length; i++)
-			unwrappedSelections[i] = parseController.getCSTNode(selections[i]);
+		List<CSTNode> unwrappedSelections = new ArrayList<CSTNode>(((IStructuredSelection)selection).size());
+		for (Iterator<?> i = ((IStructuredSelection)selection).iterator(); i.hasNext(); ) {
+			CSTNode node = parseController.getCSTNode(i.next());
+			if (node != null)
+				unwrappedSelections.add(node);
+		}
 		return unwrappedSelections;
 	}
 
 	public ISelection getCSTSelection(ISelection selection) {
 		if (selection instanceof TextSelection) {
 			Object node = getCSTNode((TextSelection) selection);
-			selection = new StructuredSelection(node);
+			selection = node != null ? new StructuredSelection(node) : StructuredSelection.EMPTY;
 		}
 		else if ((selection instanceof IStructuredSelection) && !selection.isEmpty()) {
-			Object[] unwrappedSelections = getCSTNodes(selection);
+			List<CSTNode> unwrappedSelections = getCSTNodes(selection);
 			selection = new StructuredSelection(unwrappedSelections);			
 		}
 		return selection;
@@ -190,28 +205,28 @@ public class CommonTextEditor extends UniversalEditor
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Object getAdapter(Class required) {
-		if (required.equals(IPropertySheetPage.class)) {
+	public Object getAdapter(Class key) {
+		if (key.equals(IPropertySheetPage.class)) {
 			if (propertySheetPage == null)
 				propertySheetPage = createPropertySheetPage();
 			return propertySheetPage;
 		}
-        if (IContentOutlinePage.class.equals(required)) {
+        if (key.equals(IContentOutlinePage.class)) {
 			if (astOutlinePage  == null)
 				astOutlinePage = createASTOutlinePage();
 			return astOutlinePage;
         }
-        if (ICSTOutlinePage.class.equals(required)) {
+        if (key.equals(ICSTOutlinePage.class)) {
 			if (cstOutlinePage  == null)
 				cstOutlinePage = createCSTOutlinePage();
 			return cstOutlinePage;
         }
-        if (IShowInTargetList.class.equals(required)) {
+        if (key.equals(IShowInTargetList.class)) {
 			if (showInTargetList  == null)
 				showInTargetList = createShowInTargetList();
 			return showInTargetList;
         }
-		return super.getAdapter(required);
+		return super.getAdapter(key);
 	}
 
 	public AdapterFactory getAdapterFactory() {
