@@ -25,7 +25,7 @@ import org.eclipse.qvt.declarative.emof.QVTBase.util.QVTBaseMappingMetaData;
 
 /**
  * QVTTemplateMappingMetaData defines the mapping between an EMOF-based QVT Template
- * adapting model and an Ecore-based EQVT Template model.
+ * adapting model and an Ecore-based QVT Template model.
  * The mapping is established by adapting model elements that adapt their Ecore counterparts.
  * The mapping is established lazily, typically by invoking load or save on an
  * AdaptingXMIResource.
