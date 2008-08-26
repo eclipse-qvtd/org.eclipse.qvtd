@@ -7,10 +7,11 @@ import org.eclipse.ocl.ecore.internal.UMLReflectionImpl;
 import org.eclipse.ocl.utilities.TypedElement;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
 
+@SuppressWarnings("restriction")		// FIXME awaiting Bugzilla 182994
 public class QVTReflectionImpl extends UMLReflectionImpl
 {
     /** Shared instance of the stateless reflection service. */
-    public static final UMLReflectionImpl INSTANCE = new QVTReflectionImpl();
+	public static final UMLReflectionImpl INSTANCE = new QVTReflectionImpl();
 
 	@Override public String getName(Object object) {
 		if (object == null)

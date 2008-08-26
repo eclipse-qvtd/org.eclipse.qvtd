@@ -26,6 +26,7 @@ import org.eclipse.ocl.ecore.internal.OCLStandardLibraryImpl;
 import org.eclipse.ocl.types.TypeType;
 import org.eclipse.qvt.declarative.parser.utils.OCLUtils;
 
+@SuppressWarnings("restriction")		// FIXME awaiting Bugzilla 182994
 public class QVTTypeResolverImpl extends AbstractTypeResolver<EPackage, EClassifier, EOperation, EStructuralFeature, EParameter>
 {	// FIXME derive from org.eclipse.ocl.ecore.TypeResolverImpl and eliminate TupleFactory once bugzilla 182994 resolved
 	private EPackage orphanPackage = null;

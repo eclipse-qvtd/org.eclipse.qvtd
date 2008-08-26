@@ -60,6 +60,7 @@ import org.eclipse.qvt.declarative.parser.utils.OCLUtils;
  * @param <E> The derived IQVTEnvironment from which all environments derive
  * @param <P> The derived E of the parent environment
  */
+@SuppressWarnings("restriction")		// FIXME awaiting Bugzilla 182994
 public abstract class QVTEnvironment<E extends IQVTEnvironment, P extends E> extends CSTEnvironment<E,P> implements IQVTEnvironment
 {
 	protected QVTFormattingHelper formatter;
