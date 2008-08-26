@@ -13,13 +13,10 @@
          </run>
       </builder>
    </extension>
-   <extension
-         id="org.eclipse.qvt.declarative.editor.qvtcore.ui.qvtcProblem"
-         name="QVT Core Problem"
-         point="org.eclipse.core.resources.markers">
-      <super
-            type="org.eclipse.core.resources.problemmarker">
-      </super>
+   <extension point="org.eclipse.core.resources.markers"
+   		id="org.eclipse.qvt.declarative.editor.qvtcore.ui.qvtcProblem" name="QVT Core Problem">
+      <persistent value="true"/>
+      <super type="org.eclipse.core.resources.problemmarker"/>
    </extension>
    <extension
          id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcNature"
@@ -80,9 +77,9 @@
    <extension
          point="org.eclipse.ui.newWizards">
       <wizard
-            name="QVT Core Text file"
+            name="QVT Core Text File"
             icon="icons/QVTcModelFile.gif"
-            category="org.eclipse.qvt.declarative.editor"
+            category="org.eclipse.qvt.declarative.editor.ui"
             class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcNewWizard"
             id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcNewWizard">
       </wizard>
