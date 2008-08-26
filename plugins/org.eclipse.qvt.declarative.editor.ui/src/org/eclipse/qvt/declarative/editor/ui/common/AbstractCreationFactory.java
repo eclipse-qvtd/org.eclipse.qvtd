@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractCreationFactory.java,v 1.3 2008/08/24 19:12:32 ewillink Exp $
+ * $Id: AbstractCreationFactory.java,v 1.4 2008/08/26 19:12:30 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.common;
 
@@ -56,12 +56,10 @@ public abstract class AbstractCreationFactory implements ICreationFactory
 		return getPlugin().getEditorDefinition();
 	}
 
-	@Override
 	public String getErrorMarkerId() {
 		return getProblemMarkerId();
 	}
 
-	@Override
 	public String getInfoMarkerId() {
 		return getProblemMarkerId();
 	}
@@ -76,7 +74,6 @@ public abstract class AbstractCreationFactory implements ICreationFactory
 		return getPlugin().getLanguageName();
 	}
 	
-	@Override
 	public String getWarningMarkerId() {
 		return getProblemMarkerId();
 	}
