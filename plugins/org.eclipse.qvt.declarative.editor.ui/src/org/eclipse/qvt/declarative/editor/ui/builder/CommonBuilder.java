@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.2 2008/08/24 19:12:14 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.3 2008/08/26 19:12:12 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -21,20 +21,22 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.imp.builder.BuilderBase;
 import org.eclipse.imp.builder.BuilderUtils;
-import org.eclipse.imp.builder.MarkerCreator;
 import org.eclipse.imp.language.Language;
 import org.eclipse.imp.model.ISourceProject;
 import org.eclipse.imp.model.ModelFactory;
+import org.eclipse.imp.parser.IMessageHandler;
 import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.runtime.PluginBase;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 
@@ -83,12 +85,12 @@ public abstract class CommonBuilder extends BuilderBase
 		workspaceRelativeOutputPath = workspaceRelativeOutputPath.addFileExtension(creationFactory.getXMLExtension());
 		IFile outputFile = getProject().getFile(workspaceRelativeOutputPath.removeFirstSegments(1));
 		getPlugin().writeInfoMsg("Building " + creationFactory.getLanguageName() + " input file: '" + inputFile.getName() + "', output file: '" + outputFile.getName() + "'");
+		ProblemHandler problemHandler = creationFactory.createProblemHandler(inputFile);
 		try {
 			IParseController parseController = createParseController();
-			MarkerCreator markerCreator = new MarkerCreator(inputFile, parseController, getErrorMarkerID());
 			parseController.getAnnotationTypeInfo().addProblemMarkerType(getErrorMarkerID());
 			ISourceProject sourceProject = ModelFactory.open(inputFile.getProject());
-			parseController.initialize(projectRelativeInputPath, sourceProject, markerCreator);
+			parseController.initialize(projectRelativeInputPath, sourceProject, (IMessageHandler) problemHandler);
 			String contents = BuilderUtils.getFileContents(inputFile);
 			Object ast = parseController.parse(contents, false, monitor);
 			URI uri = URI.createPlatformResourceURI(workspaceRelativeOutputPath.toString(), true);
@@ -98,6 +100,8 @@ public abstract class CommonBuilder extends BuilderBase
 			doRefresh(outputFile.getParent());
 		} catch (Exception e) {
 			getPlugin().logException("Failed to compile '" + inputFile.toString() + "'", e);
+		} finally {
+			problemHandler.flush(BasicMonitor.toMonitor(monitor));
 		}
 	}
 
