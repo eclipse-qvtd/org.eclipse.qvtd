@@ -5,7 +5,7 @@
    
    <extension point="org.eclipse.ui.newWizards">
       <category id="org.eclipse.qvt.declarative.editor.ui"
-            name="QVT File Creation Wizards"/>
+            name="Modeling (QVT) File Creation Wizards"/>
    </extension>
    
    <extension point="org.eclipse.emf.transaction.editingDomains">

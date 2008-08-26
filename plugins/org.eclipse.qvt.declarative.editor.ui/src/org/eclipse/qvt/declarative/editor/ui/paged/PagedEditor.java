@@ -97,6 +97,7 @@ import org.eclipse.qvt.declarative.editor.ui.commands.MasterPageSaveCommand;
 import org.eclipse.qvt.declarative.editor.ui.commands.PageChangeCommand;
 import org.eclipse.qvt.declarative.editor.ui.commands.PageSaveCommand;
 import org.eclipse.qvt.declarative.editor.ui.commands.ResourceSetSaveCommand;
+import org.eclipse.qvt.declarative.editor.ui.cst.CSTOutline;
 import org.eclipse.qvt.declarative.editor.ui.operations.OperationHistoryListener;
 import org.eclipse.qvt.declarative.editor.ui.pages.IPageFactoryRegistry;
 import org.eclipse.qvt.declarative.editor.ui.pages.PageDefinitions;
@@ -122,6 +123,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.dialogs.SaveAsDialog;
 import org.eclipse.ui.ide.IGotoMarker;
+import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
@@ -406,6 +408,11 @@ public class PagedEditor extends BaseEditor implements IEditingDomainProvider, I
 	 */
 	private PageDefinitions pageFactoryRegistries = null;
 
+	/**
+	 * This is the list of extra views for the Show In menu.
+	 */
+	protected IShowInTargetList showInTargetList = null;
+
 	protected PagedEditor(ICreationFactory creationFactory) {
 		this.creationFactory = creationFactory;
 //		selectionProvider = new PagedSelectionProvider(this);
@@ -620,6 +627,20 @@ public class PagedEditor extends BaseEditor implements IEditingDomainProvider, I
 		return resourceItemProviderAdapterFactory.createResourceAdapter();
 	}
 	
+	protected IShowInTargetList createShowInTargetList() {
+		return new IShowInTargetList()
+		{
+			public String[] getShowInTargetIds() {
+				return new String[] {
+					"org.eclipse.ui.views.PropertySheet",
+					"org.eclipse.ui.views.ContentOutline",
+					CSTOutline.VIEW_ID
+				};
+			}
+			
+		};
+	}
+	
 	protected IUndoContext createUndoContext() {
 		return new ObjectUndoContext(this, getString("UndoContext_label"));
 	}
@@ -745,6 +766,11 @@ public class PagedEditor extends BaseEditor implements IEditingDomainProvider, I
 				propertySheetPage = createPropertySheetPage();
 			return propertySheetPage;
 		}
+        if (key.equals(IShowInTargetList.class)) {
+			if (showInTargetList  == null)
+				showInTargetList = createShowInTargetList();
+			return showInTargetList;
+        }
 		if (key.equals(IGotoMarker.class))
 			return this;
 		if (key.equals(IUndoContext.class))
