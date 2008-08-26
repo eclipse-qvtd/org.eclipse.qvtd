@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: MarkerProblemHandler.java,v 1.2 2008/08/18 07:46:26 ewillink Exp $
+ * $Id: MarkerProblemHandler.java,v 1.3 2008/08/26 19:11:36 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -31,12 +31,13 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
+import org.eclipse.imp.parser.IMessageHandler;
 import org.eclipse.ocl.lpg.AbstractProblemHandler;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 
-public abstract class MarkerProblemHandler<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> extends AbstractProblemHandler
+public abstract class MarkerProblemHandler<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> extends AbstractProblemHandler implements IMessageHandler
 {
 	public static final String BUILDER_ID = "builderId";
 	public static Map<ProblemHandler.Severity, Integer> severityMap = new HashMap<ProblemHandler.Severity, Integer>();
@@ -52,6 +53,7 @@ public abstract class MarkerProblemHandler<PK, C, O, P, EL, PM, S, COA, SSA, CT,
 	protected final IResource resource;
 	protected String page = null;
 	protected Map<Integer, List<Map<String, Object>>> entries = null;		// Map of line number to list of markers attributes for line
+	private ProblemLimit problemLimit = null;
 
 	public MarkerProblemHandler(ICreationFactory creationFactory, IResource resource) {
 		super(null);
@@ -60,8 +62,14 @@ public abstract class MarkerProblemHandler<PK, C, O, P, EL, PM, S, COA, SSA, CT,
 	}
 
 	public void addMarker(int severity, String message, int lineNumber, int charStart, int charEnd) {
+		String adjustedMessage = message;
+		if (problemLimit != null) {
+			adjustedMessage = problemLimit.check(severity, message);
+			if (adjustedMessage == null)
+				return;
+		}
 		Map<String, Object> attributes = new HashMap<String, Object>();
-		attributes.put(IMarker.MESSAGE, message);
+		attributes.put(IMarker.MESSAGE, adjustedMessage);
 		attributes.put(IMarker.SEVERITY, Integer.valueOf(severity));
 		if (lineNumber == -1) {
 			lineNumber = 1;
@@ -81,7 +89,16 @@ public abstract class MarkerProblemHandler<PK, C, O, P, EL, PM, S, COA, SSA, CT,
 			entries.put(lineKey, lineEntries);
 		}
 		lineEntries.add(attributes);
+		if (adjustedMessage != message)
+			throw new ProblemLimit.LimitExceededException(adjustedMessage);
 	}
+
+	public void clearMessages() {
+		// TODO Auto-generated method stub
+		
+	}
+
+    public void endMessageGroup() { }
 	
 	@Override public void flush(Monitor monitor) {
 		//	Re-use existing markers wherever possible
@@ -143,6 +160,11 @@ public abstract class MarkerProblemHandler<PK, C, O, P, EL, PM, S, COA, SSA, CT,
 				processingPhase + ": " + problemMessage, line, startOffset, endOffset+1);
 	}		
 
+	public void handleSimpleMessage(String msg, int startOffset, int endOffset,
+			int startCol, int endCol, int startLine, int endLine) {
+		addMarker(IMarker.SEVERITY_ERROR, msg, startLine, startOffset, endOffset+1);
+	}
+
 	/**
 	 * Return true if newAttributes and oldAttributes provide the same marker description.
 	 */
@@ -168,7 +190,13 @@ public abstract class MarkerProblemHandler<PK, C, O, P, EL, PM, S, COA, SSA, CT,
 		return true;
 	}			
 	
+	public void setProblemLimit(ProblemLimit problemLimit) {
+		this.problemLimit = problemLimit;
+	}
+	
 	public void setPage(String page) {
 		this.page = page;
 	}
+
+    public void startMessageGroup(String groupName) { }
 }
