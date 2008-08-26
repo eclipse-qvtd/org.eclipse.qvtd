@@ -9,7 +9,8 @@
    </extension>
    
    <extension point="org.eclipse.core.resources.markers"
-         id="org.eclipse.qvt.declarative.editor.qvtcore.ui.qvtrProblem" name="QVT Relations Problem">
+         id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.qvtrProblem" name="QVT Relations Problem">
+      <persistent value="true"/>
       <super type="org.eclipse.core.resources.problemmarker"/>
    </extension>
    
@@ -63,7 +64,7 @@
    
    <extension point="org.eclipse.ui.newWizards">
       <wizard id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrNewWizard"
-            name="QVT Relations Text file"
+            name="QVT Relations Text File"
             icon="icons/QVTrModelFile.gif"
             category="org.eclipse.qvt.declarative.editor.ui"
             class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrNewWizard"/>
