@@ -25,7 +25,7 @@ import org.eclipse.qvt.declarative.emof.QVTTemplate.util.QVTTemplateMappingMetaD
 
 /**
  * QVTRelationMappingMetaData defines the mapping between an EMOF-based QVT Relation
- * adapting model and an Ecore-based EQVT Relation model.
+ * adapting model and an Ecore-based QVT Relation model.
  * The mapping is established by adapting model elements that adapt their Ecore counterparts.
  * The mapping is established lazily, typically by invoking load or save on an
  * AdaptingXMIResource.
