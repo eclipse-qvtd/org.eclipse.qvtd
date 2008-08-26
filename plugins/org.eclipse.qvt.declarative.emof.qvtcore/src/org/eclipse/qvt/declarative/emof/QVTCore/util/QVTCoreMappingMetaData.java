@@ -27,7 +27,7 @@ import org.eclipse.qvt.declarative.emof.QVTBase.util.QVTBaseMappingMetaData;
 
 /**
  * QVTCoreMappingMetaData defines the mapping between an EMOF-based QVT Core
- * adapting model and an Ecore-based EQVT Core model.
+ * adapting model and an Ecore-based QVT Core model.
  * The mapping is established by adapting model elements that adapt their Ecore counterparts.
  * The mapping is established lazily, typically by invoking load or save on an
  * AdaptingXMIResource.
