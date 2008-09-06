@@ -1,5 +1,6 @@
 package org.eclipse.qvt.declarative.test.all;
 
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 

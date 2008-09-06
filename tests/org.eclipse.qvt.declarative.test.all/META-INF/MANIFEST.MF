@@ -7,8 +7,6 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.qvt.declarative.test.editor.qvtcore,
- org.eclipse.qvt.declarative.test.emof.qvtcore,
- org.eclipse.qvt.declarative.test.parser.qvtcore,
- org.eclipse.qvt.declarative.test.parser.qvtrelation
+ org.eclipse.qvt.declarative.test.emof.all;visibility:=reexport
 Eclipse-LazyStart: false
 Export-Package: org.eclipse.qvt.declarative.test.all
