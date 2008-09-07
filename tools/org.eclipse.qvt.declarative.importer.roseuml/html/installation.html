@@ -14,5 +14,31 @@ usage with and generation of Ecore.
 <li><a href="http://download.eclipse.org/eclipse/downloads">Eclipse 3.4</a></li>,
 <li><a href="http://www.eclipse.org/modeling/emf/downloads/?project=emf">EMF 2.4.0</a></li>,
 </ul>
+<h2>Installation and Building</h2>
+Check out each of 
+<ul>
+<li><tt>org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.ant</tt>
+<li><tt>org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.importer.rose</tt>
+<li><tt>org.eclipse.m2m/org.eclipse.qvt.declarative/tools/org.eclipse.qvt.declarative.importer.roseuml</tt>
+</ul>
+from <tt>dev.eclipse.org</tt> <tt>/cvsroot/modeling</tt> into the default workspace location.
+<br>
+(N.B. use of a non-default may fail to build properly - see Bugzilla 233944).
+<p>
+Select <tt>org.eclipse.emf.ant/plugin.xml</tt> and invoke <tt>PDE Tools->Create Ant Build File</tt>.
+<br>
+Select <tt>org.eclipse.emf.ant/build.xml</tt> and invoke <tt>Run As->Ant Build</tt>.
+<p>
+Select <tt>org.eclipse.emf.importer.rose/plugin.xml</tt> and invoke <tt>PDE Tools->Create Ant Build File</tt>.
+<br>
+Select <tt>org.eclipse.emf.importer.rose/build.xml</tt> and invoke <tt>Run As->Ant Build</tt>.
+<p>
+Select <tt>org.eclipse.qvt.declarative.importer.roseuml/plugin.xml</tt> and invoke <tt>PDE Tools->Create Ant Build File</tt>.
+<br>
+Select <tt>org.eclipse.qvt.declarative.importer.roseuml/build.xml</tt> and invoke <tt>Run As->Ant Build</tt>.
+<p>
+Now invoke a nested Eclipse Configuration that includes the above plug-ins,
+select a Rose <tt>*.mdl</tt> file and invoke <tt>Rose UML Tools->MDL to Ecore and EMOF</tt>. 
+
 </body>
 </html>
