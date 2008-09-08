@@ -10,10 +10,10 @@
 	
 	<target name="zip.examples" depends="init">
 		<!-- This example may have been compiled already in the Master feature -->
-		<zip destfile="zips/royalandloyal.zip" basedir="../org.eclipse.qvt.declarative.examples.ocl.royalandloyal">
+		<zip destfile="zips/royalandloyal.zip" basedir="../../examples/org.eclipse.qvt.declarative.examples.ocl.royalandloyal">
 			<patternset refid="ocl.excludes"/>
 		</zip>
-		<zip destfile="zips/reltocore.zip" basedir="../org.eclipse.qvt.declarative.examples.qvtrelation.reltocore">
+		<zip destfile="zips/reltocore.zip" basedir="../../examples/org.eclipse.qvt.declarative.examples.qvtrelation.reltocore">
 			<patternset refid="qvtr.excludes"/>
 		</zip>
 		<antcall target="refresh"/>
