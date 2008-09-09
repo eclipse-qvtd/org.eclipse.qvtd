@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Key.java,v 1.1 2008/07/23 09:59:44 qglineur Exp $
+ * $Id: Key.java,v 1.2 2008/09/09 21:00:32 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTRelation;
 
@@ -32,6 +32,7 @@ import org.eclipse.qvt.declarative.emof.EMOF.Property;
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTRelation.Key#getIdentifies <em>Identifies</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTRelation.Key#getPart <em>Part</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTRelation.Key#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.emof.QVTRelation.Key#getOppositePart <em>Opposite Part</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,7 +78,7 @@ public interface Key extends Element {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Part</em>' reference list.
 	 * @see org.eclipse.qvt.declarative.emof.QVTRelation.QVTRelationPackage#getKey_Part()
-	 * @model required="true" ordered="false"
+	 * @model ordered="false"
 	 * @generated
 	 */
 	EList<Property> getPart();
@@ -109,5 +110,22 @@ public interface Key extends Element {
 	 * @generated
 	 */
 	void setTransformation(RelationalTransformation value);
+
+	/**
+	 * Returns the value of the '<em><b>Opposite Part</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvt.declarative.emof.EMOF.Property}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Opposite Part</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Opposite Part</em>' reference list.
+	 * @see org.eclipse.qvt.declarative.emof.QVTRelation.QVTRelationPackage#getKey_OppositePart()
+	 * @model ordered="false"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='oppositeKey'"
+	 * @generated
+	 */
+	EList<Property> getOppositePart();
 
 } // Key

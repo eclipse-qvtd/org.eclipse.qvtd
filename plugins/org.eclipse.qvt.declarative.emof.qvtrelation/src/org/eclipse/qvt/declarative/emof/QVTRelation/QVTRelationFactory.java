@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationFactory.java,v 1.1 2008/07/23 09:59:44 qglineur Exp $
+ * $Id: QVTRelationFactory.java,v 1.2 2008/09/09 21:00:32 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTRelation;
 
@@ -52,6 +52,15 @@ public interface QVTRelationFactory extends EFactory {
 	 * @generated
 	 */
 	Key createKey();
+
+	/**
+	 * Returns a new object of class '<em>Opposite Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Opposite Property Call Exp</em>'.
+	 * @generated
+	 */
+	OppositePropertyCallExp createOppositePropertyCallExp();
 
 	/**
 	 * Returns a new object of class '<em>Relation</em>'.

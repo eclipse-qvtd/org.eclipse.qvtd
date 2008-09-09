@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: KeyImpl.java,v 1.1 2008/07/23 09:59:44 qglineur Exp $
+ * $Id: KeyImpl.java,v 1.2 2008/09/09 21:00:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTRelation.impl;
 
@@ -49,6 +49,7 @@ import org.eclipse.qvt.declarative.emof.QVTRelation.RelationalTransformation;
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTRelation.impl.KeyImpl#getIdentifies <em>Identifies</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTRelation.impl.KeyImpl#getPart <em>Part</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTRelation.impl.KeyImpl#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.emof.QVTRelation.impl.KeyImpl#getOppositePart <em>Opposite Part</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,6 +75,16 @@ public class KeyImpl extends ElementImpl implements Key {
 	 * @ordered
 	 */
 	protected EList<Property> part;
+
+	/**
+	 * The cached value of the '{@link #getOppositePart() <em>Opposite Part</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOppositePart()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Property> oppositePart;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,6 +201,18 @@ public class KeyImpl extends ElementImpl implements Key {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Property> getOppositePart() {
+		if (oppositePart == null) {
+			oppositePart = new EObjectResolvingEList<Property>(Property.class, this, QVTRelationPackage.KEY__OPPOSITE_PART);
+		}
+		return oppositePart;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -244,6 +267,8 @@ public class KeyImpl extends ElementImpl implements Key {
 				return getPart();
 			case QVTRelationPackage.KEY__TRANSFORMATION:
 				return getTransformation();
+			case QVTRelationPackage.KEY__OPPOSITE_PART:
+				return getOppositePart();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -267,6 +292,10 @@ public class KeyImpl extends ElementImpl implements Key {
 			case QVTRelationPackage.KEY__TRANSFORMATION:
 				setTransformation((RelationalTransformation)newValue);
 				return;
+			case QVTRelationPackage.KEY__OPPOSITE_PART:
+				getOppositePart().clear();
+				getOppositePart().addAll((Collection<? extends Property>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -288,6 +317,9 @@ public class KeyImpl extends ElementImpl implements Key {
 			case QVTRelationPackage.KEY__TRANSFORMATION:
 				setTransformation((RelationalTransformation)null);
 				return;
+			case QVTRelationPackage.KEY__OPPOSITE_PART:
+				getOppositePart().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -306,6 +338,8 @@ public class KeyImpl extends ElementImpl implements Key {
 				return part != null && !part.isEmpty();
 			case QVTRelationPackage.KEY__TRANSFORMATION:
 				return getTransformation() != null;
+			case QVTRelationPackage.KEY__OPPOSITE_PART:
+				return oppositePart != null && !oppositePart.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

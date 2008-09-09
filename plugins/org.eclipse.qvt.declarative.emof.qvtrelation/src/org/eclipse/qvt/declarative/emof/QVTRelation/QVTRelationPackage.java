@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationPackage.java,v 1.1 2008/07/23 09:59:44 qglineur Exp $
+ * $Id: QVTRelationPackage.java,v 1.2 2008/09/09 21:00:32 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTRelation;
 
@@ -185,13 +185,86 @@ public interface QVTRelationPackage extends EPackage {
 	int KEY__TRANSFORMATION = EMOFPackage.ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Opposite Part</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY__OPPOSITE_PART = EMOFPackage.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Key</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEY_FEATURE_COUNT = EMOFPackage.ELEMENT_FEATURE_COUNT + 3;
+	int KEY_FEATURE_COUNT = EMOFPackage.ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvt.declarative.emof.QVTRelation.impl.OppositePropertyCallExpImpl <em>Opposite Property Call Exp</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.emof.QVTRelation.impl.OppositePropertyCallExpImpl
+	 * @see org.eclipse.qvt.declarative.emof.QVTRelation.impl.QVTRelationPackageImpl#getOppositePropertyCallExp()
+	 * @generated
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP = 2;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__OWNED_COMMENT = EssentialOCLPackage.PROPERTY_CALL_EXP__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__NAME = EssentialOCLPackage.PROPERTY_CALL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__TYPE = EssentialOCLPackage.PROPERTY_CALL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__SOURCE = EssentialOCLPackage.PROPERTY_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY = EssentialOCLPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY;
+
+	/**
+	 * The number of structural features of the '<em>Opposite Property Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT = EssentialOCLPackage.PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.emof.QVTRelation.impl.RelationImpl <em>Relation</em>}' class.
@@ -201,7 +274,7 @@ public interface QVTRelationPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.emof.QVTRelation.impl.QVTRelationPackageImpl#getRelation()
 	 * @generated
 	 */
-	int RELATION = 2;
+	int RELATION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -310,7 +383,7 @@ public interface QVTRelationPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.emof.QVTRelation.impl.QVTRelationPackageImpl#getRelationCallExp()
 	 * @generated
 	 */
-	int RELATION_CALL_EXP = 3;
+	int RELATION_CALL_EXP = 4;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -374,7 +447,7 @@ public interface QVTRelationPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.emof.QVTRelation.impl.QVTRelationPackageImpl#getRelationDomain()
 	 * @generated
 	 */
-	int RELATION_DOMAIN = 4;
+	int RELATION_DOMAIN = 5;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -474,7 +547,7 @@ public interface QVTRelationPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.emof.QVTRelation.impl.QVTRelationPackageImpl#getRelationDomainAssignment()
 	 * @generated
 	 */
-	int RELATION_DOMAIN_ASSIGNMENT = 5;
+	int RELATION_DOMAIN_ASSIGNMENT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -520,7 +593,7 @@ public interface QVTRelationPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.emof.QVTRelation.impl.QVTRelationPackageImpl#getRelationImplementation()
 	 * @generated
 	 */
-	int RELATION_IMPLEMENTATION = 6;
+	int RELATION_IMPLEMENTATION = 7;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -575,7 +648,7 @@ public interface QVTRelationPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.emof.QVTRelation.impl.QVTRelationPackageImpl#getRelationalTransformation()
 	 * @generated
 	 */
-	int RELATIONAL_TRANSFORMATION = 7;
+	int RELATIONAL_TRANSFORMATION = 8;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -785,6 +858,27 @@ public interface QVTRelationPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getKey_Transformation();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvt.declarative.emof.QVTRelation.Key#getOppositePart <em>Opposite Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Opposite Part</em>'.
+	 * @see org.eclipse.qvt.declarative.emof.QVTRelation.Key#getOppositePart()
+	 * @see #getKey()
+	 * @generated
+	 */
+	EReference getKey_OppositePart();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.emof.QVTRelation.OppositePropertyCallExp <em>Opposite Property Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Opposite Property Call Exp</em>'.
+	 * @see org.eclipse.qvt.declarative.emof.QVTRelation.OppositePropertyCallExp
+	 * @generated
+	 */
+	EClass getOppositePropertyCallExp();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.emof.QVTRelation.Relation <em>Relation</em>}'.
@@ -1095,6 +1189,24 @@ public interface QVTRelationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference KEY__TRANSFORMATION = eINSTANCE.getKey_Transformation();
+
+		/**
+		 * The meta object literal for the '<em><b>Opposite Part</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KEY__OPPOSITE_PART = eINSTANCE.getKey_OppositePart();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.emof.QVTRelation.impl.OppositePropertyCallExpImpl <em>Opposite Property Call Exp</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.emof.QVTRelation.impl.OppositePropertyCallExpImpl
+		 * @see org.eclipse.qvt.declarative.emof.QVTRelation.impl.QVTRelationPackageImpl#getOppositePropertyCallExp()
+		 * @generated
+		 */
+		EClass OPPOSITE_PROPERTY_CALL_EXP = eINSTANCE.getOppositePropertyCallExp();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.emof.QVTRelation.impl.RelationImpl <em>Relation</em>}' class.

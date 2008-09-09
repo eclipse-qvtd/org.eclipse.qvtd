@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationAdapterFactory.java,v 1.1 2008/07/23 09:59:45 qglineur Exp $
+ * $Id: QVTRelationAdapterFactory.java,v 1.2 2008/09/09 21:00:32 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTRelation.util;
 
@@ -28,8 +28,12 @@ import org.eclipse.qvt.declarative.emof.EMOF.NamedElement;
 import org.eclipse.qvt.declarative.emof.EMOF.Type;
 import org.eclipse.qvt.declarative.emof.EMOF.TypedElement;
 
+import org.eclipse.qvt.declarative.emof.EssentialOCL.CallExp;
+import org.eclipse.qvt.declarative.emof.EssentialOCL.FeatureCallExp;
+import org.eclipse.qvt.declarative.emof.EssentialOCL.NavigationCallExp;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.OclExpression;
 
+import org.eclipse.qvt.declarative.emof.EssentialOCL.PropertyCallExp;
 import org.eclipse.qvt.declarative.emof.QVTBase.Domain;
 import org.eclipse.qvt.declarative.emof.QVTBase.Pattern;
 import org.eclipse.qvt.declarative.emof.QVTBase.Rule;
@@ -102,6 +106,10 @@ public class QVTRelationAdapterFactory extends AdapterFactoryImpl {
 				return createKeyAdapter();
 			}
 			@Override
+			public Adapter caseOppositePropertyCallExp(OppositePropertyCallExp object) {
+				return createOppositePropertyCallExpAdapter();
+			}
+			@Override
 			public Adapter caseRelation(Relation object) {
 				return createRelationAdapter();
 			}
@@ -142,16 +150,32 @@ public class QVTRelationAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementAdapter();
 			}
 			@Override
-			public Adapter caseRule(Rule object) {
-				return createRuleAdapter();
-			}
-			@Override
 			public Adapter caseTypedElement(TypedElement object) {
 				return createTypedElementAdapter();
 			}
 			@Override
 			public Adapter caseOclExpression(OclExpression object) {
 				return createOclExpressionAdapter();
+			}
+			@Override
+			public Adapter caseCallExp(CallExp object) {
+				return createCallExpAdapter();
+			}
+			@Override
+			public Adapter caseFeatureCallExp(FeatureCallExp object) {
+				return createFeatureCallExpAdapter();
+			}
+			@Override
+			public Adapter caseNavigationCallExp(NavigationCallExp object) {
+				return createNavigationCallExpAdapter();
+			}
+			@Override
+			public Adapter casePropertyCallExp(PropertyCallExp object) {
+				return createPropertyCallExpAdapter();
+			}
+			@Override
+			public Adapter caseRule(Rule object) {
+				return createRuleAdapter();
 			}
 			@Override
 			public Adapter caseDomain(Domain object) {
@@ -218,6 +242,20 @@ public class QVTRelationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createKeyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.emof.QVTRelation.OppositePropertyCallExp <em>Opposite Property Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.emof.QVTRelation.OppositePropertyCallExp
+	 * @generated
+	 */
+	public Adapter createOppositePropertyCallExpAdapter() {
 		return null;
 	}
 
@@ -400,6 +438,62 @@ public class QVTRelationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOclExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.CallExp <em>Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.CallExp
+	 * @generated
+	 */
+	public Adapter createCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.FeatureCallExp <em>Feature Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.FeatureCallExp
+	 * @generated
+	 */
+	public Adapter createFeatureCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.NavigationCallExp <em>Navigation Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.NavigationCallExp
+	 * @generated
+	 */
+	public Adapter createNavigationCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.PropertyCallExp <em>Property Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.PropertyCallExp
+	 * @generated
+	 */
+	public Adapter createPropertyCallExpAdapter() {
 		return null;
 	}
 
