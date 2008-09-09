@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationValidator.java,v 1.2 2008/08/07 05:03:27 ewillink Exp $
+ * $Id: QVTRelationValidator.java,v 1.3 2008/09/09 20:59:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.util;
 
@@ -21,24 +21,33 @@ import java.util.Map;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreValidator;
-
+import org.eclipse.ocl.expressions.util.ExpressionsValidator;
 import org.eclipse.qvt.declarative.ecore.QVTBase.util.QVTBaseValidator;
-
-import org.eclipse.qvt.declarative.ecore.QVTRelation.*;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.DomainPattern;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.Key;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.OppositePropertyCallExp;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationCallExp;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomain;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomainAssignment;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationImplementation;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.operations.KeyOperations;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.operations.RelationalTransformationOperations;
+import org.eclipse.qvt.declarative.ecore.operations.EValidatorWithOperations;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Validator</b> for the model.
  * <!-- end-user-doc -->
  * @see org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage
- * @generated
+ * @generated NOT
  */
-public class QVTRelationValidator extends EObjectValidator {
+public class QVTRelationValidator extends EObjectValidator implements EValidatorWithOperations {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -95,6 +104,14 @@ public class QVTRelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	protected ExpressionsValidator expressionsValidator;
+
+	/**
+	 * The cached base package validator.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	protected QVTBaseValidator qvtBaseValidator;
 
 	/**
@@ -107,9 +124,14 @@ public class QVTRelationValidator extends EObjectValidator {
 		super();
 		ecoreValidator = EcoreValidator.INSTANCE;
 		ecore_1Validator = org.eclipse.ocl.ecore.util.EcoreValidator.INSTANCE;
+		expressionsValidator = ExpressionsValidator.INSTANCE;
 		qvtBaseValidator = QVTBaseValidator.INSTANCE;
 	}
 
+	public String getDiagnosticSource() {
+		return DIAGNOSTIC_SOURCE;
+	}
+	
 	/**
 	 * Returns the package of this validator switch.
 	 * <!-- begin-user-doc -->
@@ -134,6 +156,8 @@ public class QVTRelationValidator extends EObjectValidator {
 				return validateDomainPattern((DomainPattern)value, diagnostics, context);
 			case QVTRelationPackage.KEY:
 				return validateKey((Key)value, diagnostics, context);
+			case QVTRelationPackage.OPPOSITE_PROPERTY_CALL_EXP:
+				return validateOppositePropertyCallExp((OppositePropertyCallExp)value, diagnostics, context);
 			case QVTRelationPackage.RELATION:
 				return validateRelation((Relation)value, diagnostics, context);
 			case QVTRelationPackage.RELATION_DOMAIN:
@@ -166,7 +190,63 @@ public class QVTRelationValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateKey(Key key, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(key, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(key, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(key, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(key, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(key, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(key, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(key, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(key, diagnostics, context);
+		if (result || diagnostics != null) result &= validateKey_AtLeastOnePart(key, diagnostics, context);
+		if (result || diagnostics != null) result &= validateKey_PartSourceIsIdentifiedClass(key, diagnostics, context);
+		if (result || diagnostics != null) result &= validateKey_OppositePartTargetIsIdentifiedClass(key, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the AtLeastOnePart constraint of '<em>Key</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateKey_AtLeastOnePart(Key key, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return KeyOperations.INSTANCE.checkAtLeastOnePart(key, diagnostics, context);
+	}
+
+	/**
+	 * Validates the PartSourceIsIdentifiedClass constraint of '<em>Key</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateKey_PartSourceIsIdentifiedClass(Key key, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return KeyOperations.INSTANCE.checkPartSourceIsIdentifiedClass(key, diagnostics, context);
+	}
+
+	/**
+	 * Validates the OppositePartTargetIsIdentifiedClass constraint of '<em>Key</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateKey_OppositePartTargetIsIdentifiedClass(Key key, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return KeyOperations.INSTANCE.checkOppositePartTargetIsIdentifiedClass(key, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOppositePropertyCallExp(OppositePropertyCallExp oppositePropertyCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(oppositePropertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(oppositePropertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(oppositePropertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(oppositePropertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(oppositePropertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(oppositePropertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(oppositePropertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= ecore_1Validator.validateOCLExpression_WellFormedName(oppositePropertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= ecoreValidator.validateETypedElement_ValidLowerBound(oppositePropertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= ecoreValidator.validateETypedElement_ValidUpperBound(oppositePropertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= ecoreValidator.validateETypedElement_ConsistentBounds(oppositePropertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= ecoreValidator.validateETypedElement_ValidType(oppositePropertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= expressionsValidator.validatePropertyCallExp_checkPropertyType(oppositePropertyCallExp, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -299,21 +379,25 @@ public class QVTRelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= ecoreValidator.validateEPackage_UniqueSubpackageNames(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateEPackage_UniqueClassifierNames(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateTransformation_UniqueNsURIs(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationalTransformation_KeyClassesAreDistinct(relationalTransformation, diagnostics, context);
 		return result;
 	}
 
 	/**
+	 * Validates the KeyClassesAreDistinct constraint of '<em>Relational Transformation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationalTransformation_KeyClassesAreDistinct(RelationalTransformation relationalTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationalTransformationOperations.INSTANCE.checkKeyClassesAreDistinct(relationalTransformation, diagnostics, context);
+	}
+
+	/**
 	 * Returns the resource locator that will be used to fetch messages for this validator's diagnostics.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		// TODO
-		// Specialize this to return a resource locator for messages specific to this validator.
-		// Ensure that you remove @generated or mark it @generated NOT
-		return super.getResourceLocator();
+		return QVTRelationPlugin.INSTANCE;
 	}
 
 } //QVTRelationValidator
