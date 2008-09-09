@@ -12,10 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplatePackageImpl.java,v 1.1 2008/07/23 09:48:47 qglineur Exp $
+ * $Id: QVTTemplatePackageImpl.java,v 1.2 2008/09/09 20:54:22 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -276,6 +277,15 @@ public class QVTTemplatePackageImpl extends EPackageImpl implements QVTTemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPropertyTemplateItem_IsOpposite() {
+		return (EAttribute)propertyTemplateItemEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public QVTTemplateFactory getQVTTemplateFactory() {
 		return (QVTTemplateFactory)getEFactoryInstance();
 	}
@@ -316,6 +326,7 @@ public class QVTTemplatePackageImpl extends EPackageImpl implements QVTTemplateP
 		createEReference(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER);
 		createEReference(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM__REFERRED_PROPERTY);
 		createEReference(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM__VALUE);
+		createEAttribute(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE);
 	}
 
 	/**
@@ -373,6 +384,7 @@ public class QVTTemplatePackageImpl extends EPackageImpl implements QVTTemplateP
 		initEReference(getPropertyTemplateItem_ObjContainer(), this.getObjectTemplateExp(), this.getObjectTemplateExp_Part(), "objContainer", null, 1, 1, PropertyTemplateItem.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyTemplateItem_ReferredProperty(), theEcorePackage_1.getEStructuralFeature(), null, "referredProperty", null, 1, 1, PropertyTemplateItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyTemplateItem_Value(), theEcorePackage.getOCLExpression(), null, "value", null, 1, 1, PropertyTemplateItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPropertyTemplateItem_IsOpposite(), theEcorePackage_1.getEBoolean(), "isOpposite", "false", 0, 1, PropertyTemplateItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

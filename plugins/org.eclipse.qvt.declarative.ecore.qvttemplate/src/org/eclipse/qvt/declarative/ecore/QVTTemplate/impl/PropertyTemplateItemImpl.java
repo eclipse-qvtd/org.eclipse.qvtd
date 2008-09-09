@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: PropertyTemplateItemImpl.java,v 1.1 2008/07/23 09:48:47 qglineur Exp $
+ * $Id: PropertyTemplateItemImpl.java,v 1.2 2008/09/09 20:54:22 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.impl;
 
@@ -48,6 +48,7 @@ import org.eclipse.qvt.declarative.ecore.QVTTemplate.util.QVTTemplateVisitor;
  *   <li>{@link org.eclipse.qvt.declarative.ecore.QVTTemplate.impl.PropertyTemplateItemImpl#getObjContainer <em>Obj Container</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.ecore.QVTTemplate.impl.PropertyTemplateItemImpl#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.ecore.QVTTemplate.impl.PropertyTemplateItemImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.ecore.QVTTemplate.impl.PropertyTemplateItemImpl#isIsOpposite <em>Is Opposite</em>}</li>
  * </ul>
  * </p>
  *
@@ -73,6 +74,26 @@ public class PropertyTemplateItemImpl extends EModelElementImpl implements Prope
 	 * @ordered
 	 */
 	protected OCLExpression value;
+
+	/**
+	 * The default value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsOpposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_OPPOSITE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsOpposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isOpposite = IS_OPPOSITE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -216,6 +237,27 @@ public class PropertyTemplateItemImpl extends EModelElementImpl implements Prope
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isIsOpposite() {
+		return isOpposite;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsOpposite(boolean newIsOpposite) {
+		boolean oldIsOpposite = isOpposite;
+		isOpposite = newIsOpposite;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE, oldIsOpposite, isOpposite));
+	}
+
+	/**
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unchecked")
@@ -286,6 +328,8 @@ public class PropertyTemplateItemImpl extends EModelElementImpl implements Prope
 				return basicGetReferredProperty();
 			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__VALUE:
 				return getValue();
+			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE:
+				return isIsOpposite() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -306,6 +350,9 @@ public class PropertyTemplateItemImpl extends EModelElementImpl implements Prope
 				return;
 			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__VALUE:
 				setValue((OCLExpression)newValue);
+				return;
+			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE:
+				setIsOpposite(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -328,6 +375,9 @@ public class PropertyTemplateItemImpl extends EModelElementImpl implements Prope
 			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__VALUE:
 				setValue((OCLExpression)null);
 				return;
+			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE:
+				setIsOpposite(IS_OPPOSITE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -346,6 +396,8 @@ public class PropertyTemplateItemImpl extends EModelElementImpl implements Prope
 				return referredProperty != null;
 			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__VALUE:
 				return value != null;
+			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE:
+				return isOpposite != IS_OPPOSITE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

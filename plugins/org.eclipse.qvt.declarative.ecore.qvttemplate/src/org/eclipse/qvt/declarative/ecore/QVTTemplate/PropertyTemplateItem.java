@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: PropertyTemplateItem.java,v 1.1 2008/07/23 09:48:47 qglineur Exp $
+ * $Id: PropertyTemplateItem.java,v 1.2 2008/09/09 20:54:22 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate;
 
@@ -31,6 +31,7 @@ import org.eclipse.ocl.ecore.OCLExpression;
  *   <li>{@link org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem#getObjContainer <em>Obj Container</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem#isIsOpposite <em>Is Opposite</em>}</li>
  * </ul>
  * </p>
  *
@@ -120,5 +121,32 @@ public interface PropertyTemplateItem extends EModelElement {
 	 * @generated
 	 */
 	void setValue(OCLExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Opposite</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Opposite</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Opposite</em>' attribute.
+	 * @see #setIsOpposite(boolean)
+	 * @see org.eclipse.qvt.declarative.ecore.QVTTemplate.QVTTemplatePackage#getPropertyTemplateItem_IsOpposite()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isIsOpposite();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem#isIsOpposite <em>Is Opposite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Opposite</em>' attribute.
+	 * @see #isIsOpposite()
+	 * @generated
+	 */
+	void setIsOpposite(boolean value);
 
 } // PropertyTemplateItem
