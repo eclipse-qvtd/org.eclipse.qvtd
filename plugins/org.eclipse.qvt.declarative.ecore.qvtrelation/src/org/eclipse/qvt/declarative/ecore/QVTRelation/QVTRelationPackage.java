@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationPackage.java,v 1.1 2008/07/23 09:46:09 qglineur Exp $
+ * $Id: QVTRelationPackage.java,v 1.2 2008/09/09 21:00:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation;
 
@@ -182,13 +182,212 @@ public interface QVTRelationPackage extends EPackage {
 	int KEY__TRANSFORMATION = EcorePackage.EMODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Opposite Part</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY__OPPOSITE_PART = EcorePackage.EMODEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Key</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEY_FEATURE_COUNT = EcorePackage.EMODEL_ELEMENT_FEATURE_COUNT + 3;
+	int KEY_FEATURE_COUNT = EcorePackage.EMODEL_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvt.declarative.ecore.QVTRelation.impl.OppositePropertyCallExpImpl <em>Opposite Property Call Exp</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.ecore.QVTRelation.impl.OppositePropertyCallExpImpl
+	 * @see org.eclipse.qvt.declarative.ecore.QVTRelation.impl.QVTRelationPackageImpl#getOppositePropertyCallExp()
+	 * @generated
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP = 2;
+
+	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__EANNOTATIONS = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__EANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__NAME = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Ordered</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__ORDERED = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__ORDERED;
+
+	/**
+	 * The feature id for the '<em><b>Unique</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__UNIQUE = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__UNIQUE;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__LOWER_BOUND = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__LOWER_BOUND;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__UPPER_BOUND = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__UPPER_BOUND;
+
+	/**
+	 * The feature id for the '<em><b>Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__MANY = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__MANY;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__REQUIRED = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>EType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__ETYPE = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__ETYPE;
+
+	/**
+	 * The feature id for the '<em><b>EGeneric Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__EGENERIC_TYPE = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__EGENERIC_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Start Position</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__START_POSITION = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__START_POSITION;
+
+	/**
+	 * The feature id for the '<em><b>End Position</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__END_POSITION = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__END_POSITION;
+
+	/**
+	 * The feature id for the '<em><b>Property Start Position</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__PROPERTY_START_POSITION = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__PROPERTY_START_POSITION;
+
+	/**
+	 * The feature id for the '<em><b>Property End Position</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__PROPERTY_END_POSITION = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__PROPERTY_END_POSITION;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__SOURCE = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Marked Pre</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__MARKED_PRE = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__MARKED_PRE;
+
+	/**
+	 * The feature id for the '<em><b>Qualifier</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__QUALIFIER = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__QUALIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Navigation Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__NAVIGATION_SOURCE = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__NAVIGATION_SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY;
+
+	/**
+	 * The number of structural features of the '<em>Opposite Property Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT = org.eclipse.ocl.ecore.EcorePackage.PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.ecore.QVTRelation.impl.RelationImpl <em>Relation</em>}' class.
@@ -198,7 +397,7 @@ public interface QVTRelationPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.ecore.QVTRelation.impl.QVTRelationPackageImpl#getRelation()
 	 * @generated
 	 */
-	int RELATION = 2;
+	int RELATION = 3;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -307,7 +506,7 @@ public interface QVTRelationPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.ecore.QVTRelation.impl.QVTRelationPackageImpl#getRelationDomain()
 	 * @generated
 	 */
-	int RELATION_DOMAIN = 3;
+	int RELATION_DOMAIN = 4;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -407,7 +606,7 @@ public interface QVTRelationPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.ecore.QVTRelation.impl.QVTRelationPackageImpl#getRelationDomainAssignment()
 	 * @generated
 	 */
-	int RELATION_DOMAIN_ASSIGNMENT = 4;
+	int RELATION_DOMAIN_ASSIGNMENT = 5;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -453,7 +652,7 @@ public interface QVTRelationPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.ecore.QVTRelation.impl.QVTRelationPackageImpl#getRelationImplementation()
 	 * @generated
 	 */
-	int RELATION_IMPLEMENTATION = 5;
+	int RELATION_IMPLEMENTATION = 6;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -508,7 +707,7 @@ public interface QVTRelationPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.ecore.QVTRelation.impl.QVTRelationPackageImpl#getRelationCallExp()
 	 * @generated
 	 */
-	int RELATION_CALL_EXP = 6;
+	int RELATION_CALL_EXP = 7;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -653,7 +852,7 @@ public interface QVTRelationPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.ecore.QVTRelation.impl.QVTRelationPackageImpl#getRelationalTransformation()
 	 * @generated
 	 */
-	int RELATIONAL_TRANSFORMATION = 7;
+	int RELATIONAL_TRANSFORMATION = 8;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -1045,6 +1244,27 @@ public interface QVTRelationPackage extends EPackage {
 	EReference getKey_Transformation();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvt.declarative.ecore.QVTRelation.Key#getOppositePart <em>Opposite Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Opposite Part</em>'.
+	 * @see org.eclipse.qvt.declarative.ecore.QVTRelation.Key#getOppositePart()
+	 * @see #getKey()
+	 * @generated
+	 */
+	EReference getKey_OppositePart();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.ecore.QVTRelation.OppositePropertyCallExp <em>Opposite Property Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Opposite Property Call Exp</em>'.
+	 * @see org.eclipse.qvt.declarative.ecore.QVTRelation.OppositePropertyCallExp
+	 * @generated
+	 */
+	EClass getOppositePropertyCallExp();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.ecore.QVTRelation.Relation <em>Relation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1353,6 +1573,24 @@ public interface QVTRelationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference KEY__TRANSFORMATION = eINSTANCE.getKey_Transformation();
+
+		/**
+		 * The meta object literal for the '<em><b>Opposite Part</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KEY__OPPOSITE_PART = eINSTANCE.getKey_OppositePart();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.ecore.QVTRelation.impl.OppositePropertyCallExpImpl <em>Opposite Property Call Exp</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.ecore.QVTRelation.impl.OppositePropertyCallExpImpl
+		 * @see org.eclipse.qvt.declarative.ecore.QVTRelation.impl.QVTRelationPackageImpl#getOppositePropertyCallExp()
+		 * @generated
+		 */
+		EClass OPPOSITE_PROPERTY_CALL_EXP = eINSTANCE.getOppositePropertyCallExp();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.ecore.QVTRelation.impl.RelationImpl <em>Relation</em>}' class.

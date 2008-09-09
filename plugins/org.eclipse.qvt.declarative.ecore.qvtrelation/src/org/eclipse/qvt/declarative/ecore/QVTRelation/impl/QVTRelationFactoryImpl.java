@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationFactoryImpl.java,v 1.1 2008/07/23 09:46:09 qglineur Exp $
+ * $Id: QVTRelationFactoryImpl.java,v 1.2 2008/09/09 21:00:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.impl;
 
@@ -72,6 +72,7 @@ public class QVTRelationFactoryImpl extends EFactoryImpl implements QVTRelationF
 		switch (eClass.getClassifierID()) {
 			case QVTRelationPackage.DOMAIN_PATTERN: return createDomainPattern();
 			case QVTRelationPackage.KEY: return createKey();
+			case QVTRelationPackage.OPPOSITE_PROPERTY_CALL_EXP: return createOppositePropertyCallExp();
 			case QVTRelationPackage.RELATION: return createRelation();
 			case QVTRelationPackage.RELATION_DOMAIN: return createRelationDomain();
 			case QVTRelationPackage.RELATION_DOMAIN_ASSIGNMENT: return createRelationDomainAssignment();
@@ -101,6 +102,16 @@ public class QVTRelationFactoryImpl extends EFactoryImpl implements QVTRelationF
 	public Key createKey() {
 		KeyImpl key = new KeyImpl();
 		return key;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OppositePropertyCallExp createOppositePropertyCallExp() {
+		OppositePropertyCallExpImpl oppositePropertyCallExp = new OppositePropertyCallExpImpl();
+		return oppositePropertyCallExp;
 	}
 
 	/**

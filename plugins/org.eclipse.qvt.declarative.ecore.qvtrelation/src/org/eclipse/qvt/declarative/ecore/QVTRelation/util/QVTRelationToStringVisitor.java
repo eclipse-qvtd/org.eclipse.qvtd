@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+ * Copyright (c) 2007, 2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,9 @@
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
 package org.eclipse.qvt.declarative.ecore.QVTRelation.util;
+
+import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClassifier;
@@ -22,7 +25,9 @@ import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.SendSignalAction;
+import org.eclipse.ocl.expressions.PropertyCallExp;
 import org.eclipse.ocl.utilities.TypedElement;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.OppositePropertyCallExp;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationCallExp;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.util.QVTTemplateToStringVisitor;
@@ -57,6 +62,44 @@ public class QVTRelationToStringVisitor extends QVTTemplateToStringVisitor imple
 	}
 	public QVTRelationToStringVisitor(Environment<?, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, ?, ?> env) {
 		super(env);
+	}
+
+	@Override
+	protected String handlePropertyCallExp(
+			PropertyCallExp<EClassifier, EStructuralFeature> pc,
+			String sourceResult, List<String> qualifierResults) {
+		if (!(pc instanceof OppositePropertyCallExp))
+			return super.handlePropertyCallExp(pc, sourceResult, qualifierResults);
+		EStructuralFeature property = pc.getReferredProperty();
+
+        if (sourceResult == null) {
+			// if we are the qualifier of an association class call, then
+			//   we just return our name, because our source is null (implied)
+			return getName(property);
+		}
+		
+		StringBuffer result = new StringBuffer(
+		   sourceResult + ".opposite(" + getName(property) + ")");//$NON-NLS-1$
+		
+		if (!qualifierResults.isEmpty()) {
+			result.append('[');
+			
+			for (Iterator<String> iter = qualifierResults.iterator(); iter.hasNext();) {
+				result.append(iter.next());
+				
+				if (iter.hasNext()) {
+					result.append(", "); //$NON-NLS-1$
+				}
+			}
+			
+			result.append(']');
+		}
+		
+		return result.toString();
+	}
+
+	public String visitOppositePropertyCallExp(OppositePropertyCallExp opc) {
+        return super.visitPropertyCallExp(opc);
 	}
 
 	public String visitRelationCallExp(RelationCallExp relationCallExp) {

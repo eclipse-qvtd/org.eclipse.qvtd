@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Key.java,v 1.1 2008/07/23 09:46:09 qglineur Exp $
+ * $Id: Key.java,v 1.2 2008/09/09 21:00:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation;
 
@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
@@ -33,11 +34,12 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  *   <li>{@link org.eclipse.qvt.declarative.ecore.QVTRelation.Key#getIdentifies <em>Identifies</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.ecore.QVTRelation.Key#getPart <em>Part</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.ecore.QVTRelation.Key#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.ecore.QVTRelation.Key#getOppositePart <em>Opposite Part</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage#getKey()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='AtLeastOnePart\r\nPartSourceIsIdentifiedClass\r\nOppositePartTargetIsIdentifiedClass'"
  * @generated
  */
 public interface Key extends EModelElement {
@@ -78,7 +80,7 @@ public interface Key extends EModelElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Part</em>' reference list.
 	 * @see org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage#getKey_Part()
-	 * @model required="true" ordered="false"
+	 * @model ordered="false"
 	 * @generated
 	 */
 	EList<EStructuralFeature> getPart();
@@ -110,5 +112,22 @@ public interface Key extends EModelElement {
 	 * @generated
 	 */
 	void setTransformation(RelationalTransformation value);
+
+	/**
+	 * Returns the value of the '<em><b>Opposite Part</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.EReference}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Opposite Part</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Opposite Part</em>' reference list.
+	 * @see org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage#getKey_OppositePart()
+	 * @model ordered="false"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='oppositeKey'"
+	 * @generated
+	 */
+	EList<EReference> getOppositePart();
 
 } // Key

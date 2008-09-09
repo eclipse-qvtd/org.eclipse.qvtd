@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationalTransformation.java,v 1.1 2008/07/23 09:46:09 qglineur Exp $
+ * $Id: RelationalTransformation.java,v 1.2 2008/09/09 21:00:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation;
 
@@ -33,7 +33,7 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage#getRelationalTransformation()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='KeyClassesAreDistinct'"
  * @generated
  */
 public interface RelationalTransformation extends Transformation {

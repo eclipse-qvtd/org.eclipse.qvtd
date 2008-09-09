@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationSwitch.java,v 1.1 2008/07/23 09:46:08 qglineur Exp $
+ * $Id: QVTRelationSwitch.java,v 1.2 2008/09/09 21:00:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.util;
 
@@ -26,9 +26,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.ETypedElement;
 
+import org.eclipse.ocl.expressions.CallExp;
+import org.eclipse.ocl.expressions.FeatureCallExp;
+import org.eclipse.ocl.expressions.NavigationCallExp;
 import org.eclipse.ocl.expressions.OCLExpression;
 
+import org.eclipse.ocl.expressions.PropertyCallExp;
 import org.eclipse.ocl.utilities.ASTNode;
+import org.eclipse.ocl.utilities.CallingASTNode;
 import org.eclipse.ocl.utilities.TypedElement;
 import org.eclipse.ocl.utilities.Visitable;
 
@@ -128,6 +133,29 @@ public class QVTRelationSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTRelationPackage.OPPOSITE_PROPERTY_CALL_EXP: {
+				OppositePropertyCallExp oppositePropertyCallExp = (OppositePropertyCallExp)theEObject;
+				T result = caseOppositePropertyCallExp(oppositePropertyCallExp);
+				if (result == null) result = casePropertyCallExp_1(oppositePropertyCallExp);
+				if (result == null) result = caseNavigationCallExp_1(oppositePropertyCallExp);
+				if (result == null) result = casePropertyCallExp(oppositePropertyCallExp);
+				if (result == null) result = caseFeatureCallExp_1(oppositePropertyCallExp);
+				if (result == null) result = caseNavigationCallExp(oppositePropertyCallExp);
+				if (result == null) result = caseCallExp_1(oppositePropertyCallExp);
+				if (result == null) result = caseFeatureCallExp(oppositePropertyCallExp);
+				if (result == null) result = caseOCLExpression_1(oppositePropertyCallExp);
+				if (result == null) result = caseCallExp(oppositePropertyCallExp);
+				if (result == null) result = caseETypedElement(oppositePropertyCallExp);
+				if (result == null) result = caseOCLExpression(oppositePropertyCallExp);
+				if (result == null) result = caseCallingASTNode(oppositePropertyCallExp);
+				if (result == null) result = caseENamedElement(oppositePropertyCallExp);
+				if (result == null) result = caseTypedElement(oppositePropertyCallExp);
+				if (result == null) result = caseVisitable(oppositePropertyCallExp);
+				if (result == null) result = caseASTNode(oppositePropertyCallExp);
+				if (result == null) result = caseEModelElement(oppositePropertyCallExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTRelationPackage.RELATION: {
 				Relation relation = (Relation)theEObject;
 				T result = caseRelation(relation);
@@ -217,6 +245,21 @@ public class QVTRelationSwitch<T> {
 	 * @generated
 	 */
 	public T caseKey(Key object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Opposite Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Opposite Property Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOppositePropertyCallExp(OppositePropertyCallExp object) {
 		return null;
 	}
 
@@ -472,6 +515,141 @@ public class QVTRelationSwitch<T> {
 	 * @generated
 	 */
 	public T caseOCLExpression_1(org.eclipse.ocl.ecore.OCLExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Calling AST Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Calling AST Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCallingASTNode(CallingASTNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <C> T caseCallExp(CallExp<C> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCallExp_1(org.eclipse.ocl.ecore.CallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Feature Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Feature Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <C> T caseFeatureCallExp(FeatureCallExp<C> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Feature Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Feature Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFeatureCallExp_1(org.eclipse.ocl.ecore.FeatureCallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Navigation Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Navigation Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <C, P> T caseNavigationCallExp(NavigationCallExp<C, P> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Navigation Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Navigation Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNavigationCallExp_1(org.eclipse.ocl.ecore.NavigationCallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <C, P> T casePropertyCallExp(PropertyCallExp<C, P> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyCallExp_1(org.eclipse.ocl.ecore.PropertyCallExp object) {
 		return null;
 	}
 

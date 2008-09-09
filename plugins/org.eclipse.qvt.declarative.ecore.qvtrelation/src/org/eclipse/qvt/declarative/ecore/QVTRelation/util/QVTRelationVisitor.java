@@ -10,10 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.ecore.QVTRelation.util;
 
+import org.eclipse.qvt.declarative.ecore.QVTRelation.OppositePropertyCallExp;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationCallExp;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.util.QVTTemplateVisitor;
 
 public interface QVTRelationVisitor<T> extends QVTTemplateVisitor<T>
 {
+    T visitOppositePropertyCallExp(OppositePropertyCallExp oppositePropertyCallExp);
     T visitRelationCallExp(RelationCallExp relationCallExp);
 }

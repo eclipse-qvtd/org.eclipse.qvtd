@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationPackageImpl.java,v 1.2 2008/08/07 05:03:27 ewillink Exp $
+ * $Id: QVTRelationPackageImpl.java,v 1.3 2008/09/09 21:00:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.impl;
 
@@ -30,6 +30,7 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage;
 
 import org.eclipse.qvt.declarative.ecore.QVTRelation.DomainPattern;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Key;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.OppositePropertyCallExp;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationFactory;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
@@ -63,6 +64,13 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 	 * @generated
 	 */
 	private EClass keyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass oppositePropertyCallExpEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -239,6 +247,24 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 	 */
 	public EReference getKey_Transformation() {
 		return (EReference)keyEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getKey_OppositePart() {
+		return (EReference)keyEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOppositePropertyCallExp() {
+		return oppositePropertyCallExpEClass;
 	}
 
 	/**
@@ -474,6 +500,9 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 		createEReference(keyEClass, KEY__IDENTIFIES);
 		createEReference(keyEClass, KEY__PART);
 		createEReference(keyEClass, KEY__TRANSFORMATION);
+		createEReference(keyEClass, KEY__OPPOSITE_PART);
+
+		oppositePropertyCallExpEClass = createEClass(OPPOSITE_PROPERTY_CALL_EXP);
 
 		relationEClass = createEClass(RELATION);
 		createEAttribute(relationEClass, RELATION__IS_TOP_LEVEL);
@@ -540,6 +569,7 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 		// Add supertypes to classes
 		domainPatternEClass.getESuperTypes().add(theQVTBasePackage.getPattern());
 		keyEClass.getESuperTypes().add(theEcorePackage.getEModelElement());
+		oppositePropertyCallExpEClass.getESuperTypes().add(theEcorePackage_1.getPropertyCallExp());
 		relationEClass.getESuperTypes().add(theQVTBasePackage.getRule());
 		relationDomainEClass.getESuperTypes().add(theQVTBasePackage.getDomain());
 		relationDomainAssignmentEClass.getESuperTypes().add(theEcorePackage.getEModelElement());
@@ -553,8 +583,11 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 
 		initEClass(keyEClass, Key.class, "Key", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKey_Identifies(), theEcorePackage.getEClass(), null, "identifies", null, 1, 1, Key.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKey_Part(), theEcorePackage.getEStructuralFeature(), null, "part", null, 1, -1, Key.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getKey_Part(), theEcorePackage.getEStructuralFeature(), null, "part", null, 0, -1, Key.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getKey_Transformation(), this.getRelationalTransformation(), this.getRelationalTransformation_OwnedKey(), "transformation", null, 0, 1, Key.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKey_OppositePart(), theEcorePackage.getEReference(), null, "oppositePart", null, 0, -1, Key.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(oppositePropertyCallExpEClass, OppositePropertyCallExp.class, "OppositePropertyCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(relationEClass, Relation.class, "Relation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRelation_IsTopLevel(), ecorePackage.getEBoolean(), "isTopLevel", null, 0, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -593,10 +626,10 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 		createResource(eNS_URI);
 
 		// Create annotations
-		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
-		createEmofAnnotations();
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
+		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
+		createEmofAnnotations();
 	}
 
 	/**
@@ -606,7 +639,13 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";		
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";			
+		addAnnotation
+		  (getKey_OppositePart(), 
+		   source, 
+		   new String[] {
+			 "body", "oppositeKey"
+		   });		
 		addAnnotation
 		  (getRelation_When(), 
 		   source, 
@@ -618,7 +657,7 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 		   source, 
 		   new String[] {
 			 "body", "whereOwner"
-		   });		
+		   });			
 		addAnnotation
 		  (getRelationDomain_DefaultAssignment(), 
 		   source, 
@@ -646,13 +685,25 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";				
+		String source = "http://www.eclipse.org/emf/2002/Ecore";		
+		addAnnotation
+		  (keyEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "AtLeastOnePart\r\nPartSourceIsIdentifiedClass\r\nOppositePartTargetIsIdentifiedClass"
+		   });					
 		addAnnotation
 		  (relationDomainEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "WellFormedName"
-		   });			
+		   });					
+		addAnnotation
+		  (relationalTransformationEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "KeyClassesAreDistinct"
+		   });
 	}
 
 } //QVTRelationPackageImpl
