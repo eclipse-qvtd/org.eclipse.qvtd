@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: PropertyTemplateItemItemProvider.java,v 1.1 2008/07/23 09:49:26 qglineur Exp $
+ * $Id: PropertyTemplateItemItemProvider.java,v 1.2 2008/09/09 20:54:19 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.provider;
 
@@ -36,6 +36,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.eclipse.ocl.ecore.EcoreFactory;
@@ -80,6 +81,7 @@ public class PropertyTemplateItemItemProvider
 			super.getPropertyDescriptors(object);
 
 			addReferredPropertyPropertyDescriptor(object);
+			addIsOppositePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -102,6 +104,28 @@ public class PropertyTemplateItemItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Is Opposite feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIsOppositePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_PropertyTemplateItem_isOpposite_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyTemplateItem_isOpposite_feature", "_UI_PropertyTemplateItem_type"),
+				 QVTTemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -155,7 +179,8 @@ public class PropertyTemplateItemItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_PropertyTemplateItem_type");
+		PropertyTemplateItem propertyTemplateItem = (PropertyTemplateItem)object;
+		return getString("_UI_PropertyTemplateItem_type") + " " + propertyTemplateItem.isIsOpposite();
 	}
 
 	/**
@@ -170,6 +195,9 @@ public class PropertyTemplateItemItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(PropertyTemplateItem.class)) {
+			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
