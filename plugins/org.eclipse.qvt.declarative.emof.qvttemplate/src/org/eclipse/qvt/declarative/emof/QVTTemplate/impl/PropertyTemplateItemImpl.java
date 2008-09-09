@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: PropertyTemplateItemImpl.java,v 1.1 2008/07/23 10:00:30 qglineur Exp $
+ * $Id: PropertyTemplateItemImpl.java,v 1.2 2008/09/09 20:54:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTTemplate.impl;
 
@@ -46,6 +46,7 @@ import org.eclipse.qvt.declarative.emof.QVTTemplate.QVTTemplatePackage;
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTTemplate.impl.PropertyTemplateItemImpl#getObjContainer <em>Obj Container</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTTemplate.impl.PropertyTemplateItemImpl#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTTemplate.impl.PropertyTemplateItemImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.emof.QVTTemplate.impl.PropertyTemplateItemImpl#getIsOpposite <em>Is Opposite</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,6 +72,26 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * @ordered
 	 */
 	protected OclExpression value;
+
+	/**
+	 * The default value of the '{@link #getIsOpposite() <em>Is Opposite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsOpposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_OPPOSITE_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getIsOpposite() <em>Is Opposite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsOpposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isOpposite = IS_OPPOSITE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -218,6 +239,27 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Boolean getIsOpposite() {
+		return isOpposite;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsOpposite(Boolean newIsOpposite) {
+		Boolean oldIsOpposite = isOpposite;
+		isOpposite = newIsOpposite;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE, oldIsOpposite, isOpposite));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -274,6 +316,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 				return basicGetReferredProperty();
 			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__VALUE:
 				return getValue();
+			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE:
+				return getIsOpposite();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -294,6 +338,9 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 				return;
 			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__VALUE:
 				setValue((OclExpression)newValue);
+				return;
+			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE:
+				setIsOpposite((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -316,6 +363,9 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__VALUE:
 				setValue((OclExpression)null);
 				return;
+			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE:
+				setIsOpposite(IS_OPPOSITE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -334,8 +384,26 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 				return referredProperty != null;
 			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__VALUE:
 				return value != null;
+			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE:
+				return IS_OPPOSITE_EDEFAULT == null ? isOpposite != null : !IS_OPPOSITE_EDEFAULT.equals(isOpposite);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (isOpposite: ");
+		result.append(isOpposite);
+		result.append(')');
+		return result.toString();
 	}
 
 } //PropertyTemplateItemImpl

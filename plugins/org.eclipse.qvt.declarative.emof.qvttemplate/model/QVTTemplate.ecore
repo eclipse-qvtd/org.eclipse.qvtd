@@ -48,6 +48,8 @@
         <details key="body" value="propertyItem"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOpposite" eType="ecore:EDataType ../../org.eclipse.qvt.declarative.emof.emof/model/EMOF.ecore#PrimitiveTypes.Boolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTTemplate.TemplateExp" name="TemplateExp"
       abstract="true" eSuperTypes="../../org.eclipse.qvt.declarative.emof.essentialocl/model/EssentialOCL.ecore#EssentialOCL.LiteralExp">

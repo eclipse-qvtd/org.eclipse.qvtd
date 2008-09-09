@@ -12,10 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplatePackage.java,v 1.1 2008/07/23 10:00:30 qglineur Exp $
+ * $Id: QVTTemplatePackage.java,v 1.2 2008/09/09 20:54:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTTemplate;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -364,13 +365,22 @@ public interface QVTTemplatePackage extends EPackage {
 	int PROPERTY_TEMPLATE_ITEM__VALUE = EMOFPackage.ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Is Opposite</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE = EMOFPackage.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Property Template Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_ITEM_FEATURE_COUNT = EMOFPackage.ELEMENT_FEATURE_COUNT + 3;
+	int PROPERTY_TEMPLATE_ITEM_FEATURE_COUNT = EMOFPackage.ELEMENT_FEATURE_COUNT + 4;
 
 
 	/**
@@ -490,6 +500,17 @@ public interface QVTTemplatePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPropertyTemplateItem_Value();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.emof.QVTTemplate.PropertyTemplateItem#getIsOpposite <em>Is Opposite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Opposite</em>'.
+	 * @see org.eclipse.qvt.declarative.emof.QVTTemplate.PropertyTemplateItem#getIsOpposite()
+	 * @see #getPropertyTemplateItem()
+	 * @generated
+	 */
+	EAttribute getPropertyTemplateItem_IsOpposite();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.emof.QVTTemplate.TemplateExp <em>Template Exp</em>}'.
@@ -638,6 +659,14 @@ public interface QVTTemplatePackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROPERTY_TEMPLATE_ITEM__VALUE = eINSTANCE.getPropertyTemplateItem_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Opposite</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE = eINSTANCE.getPropertyTemplateItem_IsOpposite();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.emof.QVTTemplate.impl.TemplateExpImpl <em>Template Exp</em>}' class.

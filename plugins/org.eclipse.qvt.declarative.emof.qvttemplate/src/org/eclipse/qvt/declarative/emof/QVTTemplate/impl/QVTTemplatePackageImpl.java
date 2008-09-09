@@ -12,20 +12,17 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplatePackageImpl.java,v 1.1 2008/07/23 10:00:30 qglineur Exp $
+ * $Id: QVTTemplatePackageImpl.java,v 1.2 2008/09/09 20:54:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTTemplate.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.qvt.declarative.emof.EMOF.EMOFPackage;
-
 import org.eclipse.qvt.declarative.emof.EssentialOCL.EssentialOCLPackage;
-
 import org.eclipse.qvt.declarative.emof.QVTTemplate.CollectionTemplateExp;
 import org.eclipse.qvt.declarative.emof.QVTTemplate.ObjectTemplateExp;
 import org.eclipse.qvt.declarative.emof.QVTTemplate.PropertyTemplateItem;
@@ -243,6 +240,15 @@ public class QVTTemplatePackageImpl extends EPackageImpl implements QVTTemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPropertyTemplateItem_IsOpposite() {
+		return (EAttribute)propertyTemplateItemEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTemplateExp() {
 		return templateExpEClass;
 	}
@@ -306,6 +312,7 @@ public class QVTTemplatePackageImpl extends EPackageImpl implements QVTTemplateP
 		createEReference(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER);
 		createEReference(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM__REFERRED_PROPERTY);
 		createEReference(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM__VALUE);
+		createEAttribute(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE);
 
 		templateExpEClass = createEClass(TEMPLATE_EXP);
 		createEReference(templateExpEClass, TEMPLATE_EXP__BINDS_TO);
@@ -363,6 +370,7 @@ public class QVTTemplatePackageImpl extends EPackageImpl implements QVTTemplateP
 		initEReference(getPropertyTemplateItem_ObjContainer(), this.getObjectTemplateExp(), this.getObjectTemplateExp_Part(), "objContainer", null, 1, 1, PropertyTemplateItem.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyTemplateItem_ReferredProperty(), theEMOFPackage.getProperty(), null, "referredProperty", null, 1, 1, PropertyTemplateItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyTemplateItem_Value(), theEssentialOCLPackage.getOclExpression(), null, "value", null, 1, 1, PropertyTemplateItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPropertyTemplateItem_IsOpposite(), theEMOFPackage.getBoolean(), "isOpposite", "false", 0, 1, PropertyTemplateItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(templateExpEClass, TemplateExp.class, "TemplateExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTemplateExp_BindsTo(), theEssentialOCLPackage.getVariable(), null, "bindsTo", null, 0, 1, TemplateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

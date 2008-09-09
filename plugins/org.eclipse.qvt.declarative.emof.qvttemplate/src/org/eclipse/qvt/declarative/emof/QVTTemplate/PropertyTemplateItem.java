@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: PropertyTemplateItem.java,v 1.1 2008/07/23 10:00:30 qglineur Exp $
+ * $Id: PropertyTemplateItem.java,v 1.2 2008/09/09 20:54:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTTemplate;
 
@@ -32,6 +32,7 @@ import org.eclipse.qvt.declarative.emof.EssentialOCL.OclExpression;
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTTemplate.PropertyTemplateItem#getObjContainer <em>Obj Container</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTTemplate.PropertyTemplateItem#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTTemplate.PropertyTemplateItem#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.emof.QVTTemplate.PropertyTemplateItem#getIsOpposite <em>Is Opposite</em>}</li>
  * </ul>
  * </p>
  *
@@ -121,5 +122,32 @@ public interface PropertyTemplateItem extends Element {
 	 * @generated
 	 */
 	void setValue(OclExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Opposite</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Opposite</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Opposite</em>' attribute.
+	 * @see #setIsOpposite(Boolean)
+	 * @see org.eclipse.qvt.declarative.emof.QVTTemplate.QVTTemplatePackage#getPropertyTemplateItem_IsOpposite()
+	 * @model default="false" dataType="org.eclipse.qvt.declarative.emof.EMOF.Boolean"
+	 * @generated
+	 */
+	Boolean getIsOpposite();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.emof.QVTTemplate.PropertyTemplateItem#getIsOpposite <em>Is Opposite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Opposite</em>' attribute.
+	 * @see #getIsOpposite()
+	 * @generated
+	 */
+	void setIsOpposite(Boolean value);
 
 } // PropertyTemplateItem
