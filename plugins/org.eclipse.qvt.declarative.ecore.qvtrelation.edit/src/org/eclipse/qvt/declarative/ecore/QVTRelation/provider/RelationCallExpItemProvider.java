@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationCallExpItemProvider.java,v 1.1 2008/07/23 09:47:22 qglineur Exp $
+ * $Id: RelationCallExpItemProvider.java,v 1.2 2008/09/09 21:00:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.provider;
 
@@ -192,6 +192,11 @@ public class RelationCallExpItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(QVTRelationPackage.Literals.RELATION_CALL_EXP__ARGUMENT,
+				 QVTRelationFactory.eINSTANCE.createOppositePropertyCallExp()));
 
 		newChildDescriptors.add
 			(createChildParameter

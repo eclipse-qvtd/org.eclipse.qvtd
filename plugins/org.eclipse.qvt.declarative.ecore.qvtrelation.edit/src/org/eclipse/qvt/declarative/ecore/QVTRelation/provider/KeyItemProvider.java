@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: KeyItemProvider.java,v 1.1 2008/07/23 09:47:22 qglineur Exp $
+ * $Id: KeyItemProvider.java,v 1.2 2008/09/09 21:00:45 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.provider;
 
@@ -78,6 +78,7 @@ public class KeyItemProvider
 			super.getPropertyDescriptors(object);
 
 			addIdentifiesPropertyDescriptor(object);
+			addOppositePartPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -96,6 +97,28 @@ public class KeyItemProvider
 				 getString("_UI_Key_identifies_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Key_identifies_feature", "_UI_Key_type"),
 				 QVTRelationPackage.Literals.KEY__IDENTIFIES,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Opposite Part feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addOppositePartPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Key_oppositePart_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Key_oppositePart_feature", "_UI_Key_type"),
+				 QVTRelationPackage.Literals.KEY__OPPOSITE_PART,
 				 true,
 				 false,
 				 true,

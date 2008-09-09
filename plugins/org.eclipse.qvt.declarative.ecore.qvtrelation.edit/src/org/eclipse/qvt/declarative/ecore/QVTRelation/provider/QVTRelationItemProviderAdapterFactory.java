@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationItemProviderAdapterFactory.java,v 1.1 2008/07/23 09:47:23 qglineur Exp $
+ * $Id: QVTRelationItemProviderAdapterFactory.java,v 1.2 2008/09/09 21:00:45 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.provider;
 
@@ -129,6 +129,29 @@ public class QVTRelationItemProviderAdapterFactory extends QVTRelationAdapterFac
 		}
 
 		return keyItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.qvt.declarative.ecore.QVTRelation.OppositePropertyCallExp} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OppositePropertyCallExpItemProvider oppositePropertyCallExpItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.qvt.declarative.ecore.QVTRelation.OppositePropertyCallExp}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOppositePropertyCallExpAdapter() {
+		if (oppositePropertyCallExpItemProvider == null) {
+			oppositePropertyCallExpItemProvider = new OppositePropertyCallExpItemProvider(this);
+		}
+
+		return oppositePropertyCallExpItemProvider;
 	}
 
 	/**
@@ -370,6 +393,7 @@ public class QVTRelationItemProviderAdapterFactory extends QVTRelationAdapterFac
 	public void dispose() {
 		if (domainPatternItemProvider != null) domainPatternItemProvider.dispose();
 		if (keyItemProvider != null) keyItemProvider.dispose();
+		if (oppositePropertyCallExpItemProvider != null) oppositePropertyCallExpItemProvider.dispose();
 		if (relationItemProvider != null) relationItemProvider.dispose();
 		if (relationDomainItemProvider != null) relationDomainItemProvider.dispose();
 		if (relationDomainAssignmentItemProvider != null) relationDomainAssignmentItemProvider.dispose();
