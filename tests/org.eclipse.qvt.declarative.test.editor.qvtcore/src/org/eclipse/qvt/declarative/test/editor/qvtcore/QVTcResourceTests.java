@@ -8,6 +8,7 @@ import org.eclipse.jface.text.AbstractDocument;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcCreationFactory;
 import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor;
+import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
 import org.eclipse.qvt.declarative.editor.ui.text.TextPageManager;
 import org.eclipse.qvt.declarative.test.editor.EditorTestCase;
 import org.eclipse.swt.SWT;
@@ -19,7 +20,6 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 
@@ -115,7 +115,7 @@ public class QVTcResourceTests extends EditorTestCase
 			TextPageManager textPageManager = (TextPageManager) editor.getActivePageManager();
 			assertEquals("Page managers", 4, editor.getPageManagers().size());
 			
-			TextEditor textEditor = textPageManager.getEditor();
+			ITextEditorWithUndoContext textEditor = textPageManager.getEditor();
 			IDocumentProvider documentProvider = textEditor.getDocumentProvider();
 			AbstractDocument document = (AbstractDocument) documentProvider.getDocument(editorInput);
 			document.replace(0, 0, " ");
@@ -153,7 +153,7 @@ public class QVTcResourceTests extends EditorTestCase
 			TextPageManager textPageManager = (TextPageManager) editor.getActivePageManager();
 			assertEquals("Page managers", 4, editor.getPageManagers().size());
 			
-			TextEditor textEditor = textPageManager.getEditor();
+			ITextEditorWithUndoContext textEditor = textPageManager.getEditor();
 			IDocumentProvider documentProvider = textEditor.getDocumentProvider();
 			AbstractDocument document = (AbstractDocument) documentProvider.getDocument(editorInput);
 			document.replace(0, 0, " ");
@@ -198,7 +198,7 @@ public class QVTcResourceTests extends EditorTestCase
 			TextPageManager textPageManager = (TextPageManager) editor.getActivePageManager();
 			assertEquals("Page managers", 4, editor.getPageManagers().size());
 			
-			TextEditor textEditor = textPageManager.getEditor();
+			ITextEditorWithUndoContext textEditor = textPageManager.getEditor();
 			IDocumentProvider documentProvider = textEditor.getDocumentProvider();
 			AbstractDocument document = (AbstractDocument) documentProvider.getDocument(editorInput);
 			document.replace(0, 0, " ");

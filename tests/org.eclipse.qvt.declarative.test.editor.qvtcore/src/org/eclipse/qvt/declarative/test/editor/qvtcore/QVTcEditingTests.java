@@ -15,11 +15,11 @@ import org.eclipse.qvt.declarative.ecore.adapters.AdapterNotFoundException;
 import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcCreationFactory;
 import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
+import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
 import org.eclipse.qvt.declarative.editor.ui.text.TextPageManager;
 import org.eclipse.qvt.declarative.test.editor.EditorTestCase;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 
@@ -47,7 +47,7 @@ public class QVTcEditingTests extends EditorTestCase
 			TextPageManager textPageManager = (TextPageManager) editor.getActivePageManager();
 			assertEquals("Page managers", 4, editor.getPageManagers().size());
 			
-			TextEditor textEditor = textPageManager.getEditor();
+			ITextEditorWithUndoContext textEditor = textPageManager.getEditor();
 			IDocumentProvider documentProvider = textEditor.getDocumentProvider();
 			AbstractDocument document = (AbstractDocument) documentProvider.getDocument(editorInput);
 			IMarker[] markers = file.findMarkers(markerId, true, IResource.DEPTH_INFINITE);
@@ -104,7 +104,7 @@ public class QVTcEditingTests extends EditorTestCase
 			TextPageManager textPageManager = (TextPageManager) editor.getActivePageManager();
 			assertEquals("Page managers", 4, editor.getPageManagers().size());
 			
-			TextEditor textEditor = textPageManager.getEditor();
+			ITextEditorWithUndoContext textEditor = textPageManager.getEditor();
 			IDocumentProvider documentProvider = textEditor.getDocumentProvider();
 			AbstractDocument document = (AbstractDocument) documentProvider.getDocument(editorInput);
 			IMarker[] markers = file.findMarkers(markerId, true, IResource.DEPTH_INFINITE);
@@ -190,7 +190,7 @@ public class QVTcEditingTests extends EditorTestCase
 			TextPageManager textPageManager = (TextPageManager) editor.getActivePageManager();
 			assertEquals("Page managers", 4, editor.getPageManagers().size());
 			
-			TextEditor textEditor = textPageManager.getEditor();
+			ITextEditorWithUndoContext textEditor = textPageManager.getEditor();
 			IDocumentProvider documentProvider = textEditor.getDocumentProvider();
 			AbstractDocument document = (AbstractDocument) documentProvider.getDocument(editorInput);
 			IMarker[] markers = file.findMarkers(markerId, true, IResource.DEPTH_INFINITE);
@@ -261,7 +261,7 @@ public class QVTcEditingTests extends EditorTestCase
 			TextPageManager textPageManager = (TextPageManager) editor.getActivePageManager();
 			assertEquals("Page managers", 4, editor.getPageManagers().size());
 			
-			TextEditor textEditor = textPageManager.getEditor();
+			ITextEditorWithUndoContext textEditor = textPageManager.getEditor();
 			IDocumentProvider documentProvider = textEditor.getDocumentProvider();
 			AbstractDocument document = (AbstractDocument) documentProvider.getDocument(editorInput);
 			IMarker[] markers = file.findMarkers(markerId, true, IResource.DEPTH_INFINITE);
@@ -328,8 +328,8 @@ public class QVTcEditingTests extends EditorTestCase
 			assertEquals("Page managers A", 4, editorA.getPageManagers().size());
 			assertEquals("Page managers B", 4, editorB.getPageManagers().size());
 			
-			TextEditor textEditorA = textPageManagerA.getEditor();
-			TextEditor textEditorB = textPageManagerB.getEditor();
+			ITextEditorWithUndoContext textEditorA = textPageManagerA.getEditor();
+			ITextEditorWithUndoContext textEditorB = textPageManagerB.getEditor();
 			IDocumentProvider documentProviderA = textEditorA.getDocumentProvider();
 			IDocumentProvider documentProviderB = textEditorB.getDocumentProvider();
 			AbstractDocument documentA = (AbstractDocument) documentProviderA.getDocument(editorInputA);
