@@ -82,6 +82,12 @@ public class QVTTemplateConsistencyTest extends AbstractEssentialOCLConsistencyT
 		missingOpposite(differences, helper, QVTTemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__REFERRED_PROPERTY);
 		missingOpposite(differences, helper, QVTTemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__VALUE);
 		missingOpposite(differences, helper, QVTTemplatePackage.Literals.TEMPLATE_EXP__WHERE);
+		//
+		//	Support for opposite navigation
+		//
+		changeOfSize(differences, helper, QVTTemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES);
+		missingObject(differences, helper, QVTTemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE);		
+
 		helper.setLogStream(null);
 		EMOFConsistencyTest.expectedEmofDifferences(differences, helper);		
 		EssentialOCLConsistencyTest.expectedEmofDifferences(differences, helper);
@@ -105,6 +111,12 @@ public class QVTTemplateConsistencyTest extends AbstractEssentialOCLConsistencyT
 		missingOpposite(differences, helper, QVTTemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__REFERRED_PROPERTY);
 		missingOpposite(differences, helper, QVTTemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__VALUE);
 		missingOpposite(differences, helper, QVTTemplatePackage.Literals.TEMPLATE_EXP__WHERE);
+		//
+		//	Support for opposite navigation
+		//
+		changeOfSize(differences, helper, QVTTemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES);
+		missingObject(differences, helper, QVTTemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE);		
+
 		helper.setLogStream(null);
 		missingPrefix(differences, helper, QVTTemplatePackage.eINSTANCE);
 		EssentialOCLConsistencyTest.expectedEmo2OmgEmofDifferences(differences, helper);
@@ -121,6 +133,12 @@ public class QVTTemplateConsistencyTest extends AbstractEssentialOCLConsistencyT
 		changeOfLower(differences, helper, QVTTemplatePackage.Literals.COLLECTION_TEMPLATE_EXP__MEMBER);
 		changeOfLower(differences, helper, QVTTemplatePackage.Literals.COLLECTION_TEMPLATE_EXP__REST);
 		changeOfLower(differences, helper, QVTTemplatePackage.Literals.COLLECTION_TEMPLATE_EXP__REFERRED_COLLECTION_TYPE);
+		//
+		//	Support for opposite navigation
+		//
+		changeOfSize(differences, helper, QVTTemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES);
+		missingObject(differences, helper, QVTTemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE);		
+		
 		helper.setLogStream(null);
 		EMOFConsistencyTest.expectedEmofDifferences(differences, helper);		
 		EssentialOCLConsistencyTest.expectedEmofDifferences(differences, helper);
