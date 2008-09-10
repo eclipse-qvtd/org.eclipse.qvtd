@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTCSTPackage.java,v 1.2 2008/08/14 07:55:32 ewillink Exp $
+ * $Id: QVTCSTPackage.java,v 1.3 2008/09/10 05:29:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvt.cst;
 
@@ -100,6 +100,15 @@ public interface QVTCSTPackage extends EPackage {
 	int IDENTIFIED_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IDENTIFIED_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+
+	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -144,6 +153,15 @@ public interface QVTCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int IDENTIFIER_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IDENTIFIER_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
