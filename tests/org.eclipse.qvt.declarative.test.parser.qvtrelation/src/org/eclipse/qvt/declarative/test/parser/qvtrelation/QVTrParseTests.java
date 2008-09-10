@@ -79,7 +79,7 @@ public class QVTrParseTests extends AbstractQVTrTestCase
 	}
 	
 	public void testParseEqvtRelation_Scoping() throws IOException, CoreException, MappingConfigurationException {
-		ProblemLog expectedProblems = new ProblemLog();
+		ExpectedProblemLog expectedProblems = new ExpectedProblemLog();
 		expectedProblems.handleProblem(ProblemHandler.Severity.ERROR, ProblemHandler.Phase.ANALYZER,
 				"Unknown type (ScopeA::a::abZ)", "typeCS", -1, -1);
 		expectedProblems.handleProblem(ProblemHandler.Severity.ERROR, ProblemHandler.Phase.ANALYZER,
@@ -96,7 +96,34 @@ public class QVTrParseTests extends AbstractQVTrTestCase
 				"Ambiguous name 'A' { ScopeA::a::A, ScopeA::b::A }", "lookupClassifier", -1, -1);
 		expectedProblems.handleProblem(ProblemHandler.Severity.ERROR, ProblemHandler.Phase.ANALYZER,
 				"Ambiguous name 'A' { ScopeB::a::A, ScopeB::b::A }", "lookupClassifier", -1, -1);
-
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "ScopeA::b::A"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "ScopeA::b::A"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "ScopeA::b::a::A"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "ScopeA::b::a::A"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "ScopeA::a::b::abZ"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "ScopeA::a::b::abZ"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "ScopeA::a::b::abZ"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "ScopeA::a::b::abZ"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "ScopeB::b::a::baZ"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "ScopeB::b::a::baZ"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "ScopeB::b::a::baZ"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "ScopeB::b::a::baZ"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "Unresolved::unresolved::UnresolvedClass"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "Unresolved::unresolved::UnresolvedClass"} );
 		problemTest("Scoping", expectedProblems);
 	}
 	
