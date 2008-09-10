@@ -108,7 +108,7 @@ public abstract class QVTTopLevelEnvironment<E extends IQVTEnvironment> extends 
 	}
 
 	protected abstract String getContentTypeIdentifier();
-
+	
 	public List<EPackage> getEPackages() {
 		List<EPackage> ePackages = new ArrayList<EPackage>();
 		for (Object object : qvtRegistry.values())
@@ -120,6 +120,10 @@ public abstract class QVTTopLevelEnvironment<E extends IQVTEnvironment> extends 
 			firstPackage.getEClassifiers().addAll(orphanPackage.getEClassifiers());
 		}
 		return ePackages;
+	}
+
+	public AbstractFileHandle getFile() {
+		return file;
 	}
 
 	public AbstractModelResolver getResolver() {
