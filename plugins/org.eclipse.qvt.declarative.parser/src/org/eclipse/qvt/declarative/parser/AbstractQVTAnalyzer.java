@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+ * Copyright (c) 2007,2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.LookupException;
@@ -56,6 +57,7 @@ import org.eclipse.ocl.util.OCLStandardLibraryUtil;
 import org.eclipse.ocl.utilities.TypedElement;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
 import org.eclipse.qvt.declarative.modelregistry.environment.ModelResolver;
+import org.eclipse.qvt.declarative.parser.environment.IFileAnalyzer;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvt.environment.IQVTEnvironment;
@@ -64,8 +66,8 @@ import org.eclipse.qvt.declarative.parser.utils.OCLUtils;
 
 public abstract class AbstractQVTAnalyzer<E extends IQVTEnvironment> extends AbstractOCLAnalyzer<
 	EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter,
-	EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject>
-{
+	EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> implements IFileAnalyzer
+{	
 	private ModelResolver resolver = null;
 	private Monitor monitor;
 		
@@ -315,24 +317,49 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTEnvironment> extends Abs
 		return env.getUnresolvedDataType();
 	}
 	
-	protected EStructuralFeature resolveProperty(E env, EClass parentType, String rule, IdentifiedCS propertyIdCS) {
+	protected EStructuralFeature resolveForwardProperty(E env, EClass parentType, String rule, IdentifiedCS propertyIdCS) {
 		if (parentType == null)
 			return null;
 		String propertyName = identifierCS(propertyIdCS.getIdentifier());
-		EStructuralFeature referredProperty = MoreEcoreForeignMethods.getEStructuralFeature(parentType, propertyName);
-		if (referredProperty == null) {
-			if (!OCLUtils.isUnresolved(parentType))
-				ERROR(propertyIdCS, rule, "No '" + formatString(propertyName) + "' property in '" + formatName(parentType) + "'");
-			referredProperty = env.getUnresolvedProperty();
+		return MoreEcoreForeignMethods.getEStructuralFeature(parentType, propertyName);
+	}
+	
+	protected EReference resolveReverseProperty(E env, EClass parentType, String rule, IdentifiedCS propertyIdCS) {
+		if (parentType == null)
+			return null;
+		EReference referredProperty;
+		String propertyName = identifierCS(propertyIdCS.getIdentifier());
+		try {
+			referredProperty = env.tryLookupOppositeProperty(parentType, propertyName);
+	        if ((referredProperty == null) && isEscaped(propertyName)) {
+	            // try the unescaped name
+	        	referredProperty = env.tryLookupOppositeProperty(parentType, unescape(propertyName));
+	        }
+		} catch (LookupException e) {
+			env.analyzerError(env.formatLookupException(e), "lookup", propertyIdCS);
+			List<?> ambiguousMatches = e.getAmbiguousMatches();
+			if (ambiguousMatches.size() > 0)
+				referredProperty = (EReference) ambiguousMatches.get(0);
+			else
+				referredProperty = env.getUnresolvedReference();
 		}
 		return referredProperty;
+	}
+	
+	protected EStructuralFeature resolveUnresolvedProperty(E env, EClass parentType, String rule, IdentifiedCS propertyIdCS) {
+		if (parentType == null)
+			return null;
+		String propertyName = identifierCS(propertyIdCS.getIdentifier());
+		if (!OCLUtils.isUnresolved(parentType))
+			ERROR(propertyIdCS, rule, "No '" + formatString(propertyName) + "' property in '" + formatName(parentType) + "'");
+		return env.getUnresolvedProperty();
 	}
 
     public void setResolver(ModelResolver resolver) {
 		this.resolver = resolver;
 	}
 
-	@Override		/* Workaround 226083 */
+	@Override		// FIXME Workaround Bug 226083
 	protected OCLExpression<EClassifier> simpleNameCS(SimpleNameCS simpleNameCS,
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
 			OCLExpression<EClassifier> source) {
@@ -343,6 +370,11 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTEnvironment> extends Abs
 		CSTNode savedNode = cstEnv.setCSTNode(simpleNameCS);
 		try {
 			return super.simpleNameCS(simpleNameCS, env, source);
+		} catch (Exception e) {		// Workaround bug 241421
+			ERROR(simpleNameCS, "simpleNameCS", e.getMessage());
+			InvalidLiteralExp<EClassifier> invalidLiteralExp = createDummyInvalidLiteralExp();	// FIXME simplify when Bug 242153 fix visible
+			initASTMapping(env, invalidLiteralExp, simpleNameCS);
+			return invalidLiteralExp;
 		} finally {
 			cstEnv.setCSTNode(savedNode);
 		}
