@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: IFileEnvironment.java,v 1.2 2008/08/18 07:47:09 ewillink Exp $
+ * $Id: IFileEnvironment.java,v 1.3 2008/09/10 05:26:23 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.environment;
 
@@ -26,12 +26,15 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.lpg.BasicEnvironment;
+import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 
 public interface IFileEnvironment extends BasicEnvironment
 {
 	public Resource createASTResource(Collection<? extends EObject> ePackages, URI uri);
 
 	public IFileAnalyzer getAnalyzer();
+
+	public AbstractFileHandle getFile();
 	
 	/**
 	 * Parse the source text and return an AST forest.
