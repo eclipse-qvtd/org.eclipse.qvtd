@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLTopLevelEnvironment.java,v 1.1 2008/08/14 07:52:38 ewillink Exp $
+ * $Id: OCLTopLevelEnvironment.java,v 1.2 2008/09/10 05:24:09 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl.environment;
 
@@ -181,6 +181,10 @@ public class OCLTopLevelEnvironment extends OCLEnvironment implements IFileEnvir
 		if (derivedFactory == null)
 			derivedFactory = new OCLEnvironmentFactory();
 		return derivedFactory;
+	}
+
+	public AbstractFileHandle getFile() {
+		return file;
 	}
 
 	public Map<String, List<EPackage>> getPackagePath() {
