@@ -12,14 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: QVTcCreationFactory.java,v 1.4 2008/08/24 19:00:51 ewillink Exp $
+ * $Id: QVTcCreationFactory.java,v 1.5 2008/09/10 05:30:59 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.parser.ISourcePositionLocator;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
@@ -64,7 +63,7 @@ public class QVTcCreationFactory extends AbstractCreationFactory
 		return new QVTcNodeLocator(environment);
 	}
 	
-	public IParseController createParseController() {
+	public QVTcParseController createParseController() {
 		return new QVTcParseController();
 	}
 
