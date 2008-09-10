@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTrCSTPackageImpl.java,v 1.3 2008/08/18 07:55:54 ewillink Exp $
+ * $Id: QVTrCSTPackageImpl.java,v 1.4 2008/09/10 05:23:32 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl;
 
@@ -559,6 +559,15 @@ public class QVTrCSTPackageImpl extends EPackageImpl implements QVTrCSTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPropertyTemplateCS_Opposite() {
+		return (EAttribute)propertyTemplateCSEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getQueryCS() {
 		return queryCSEClass;
 	}
@@ -957,6 +966,7 @@ public class QVTrCSTPackageImpl extends EPackageImpl implements QVTrCSTPackage {
 		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__PROPERTY_ID);
 		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__OCL_EXPRESSION);
 		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__REFERRED_PROPERTY);
+		createEAttribute(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__OPPOSITE);
 
 		queryCSEClass = createEClass(QUERY_CS);
 		createEReference(queryCSEClass, QUERY_CS__PATH_NAME);
@@ -1104,6 +1114,7 @@ public class QVTrCSTPackageImpl extends EPackageImpl implements QVTrCSTPackage {
 		initEReference(getPropertyTemplateCS_PropertyId(), theQVTCSTPackage.getIdentifiedCS(), null, "propertyId", null, 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyTemplateCS_OclExpression(), theCSTPackage.getOCLExpressionCS(), null, "oclExpression", null, 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyTemplateCS_ReferredProperty(), theEcorePackage.getEStructuralFeature(), null, "referredProperty", null, 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPropertyTemplateCS_Opposite(), ecorePackage.getEBoolean(), "opposite", "false", 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(queryCSEClass, QueryCS.class, "QueryCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQueryCS_PathName(), theCSTPackage.getPathNameCS(), null, "pathName", null, 0, 1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

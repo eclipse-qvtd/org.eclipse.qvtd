@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.Environment;
@@ -38,6 +39,7 @@ import org.eclipse.ocl.cst.DotOrArrowEnum;
 import org.eclipse.ocl.cst.OCLExpressionCS;
 import org.eclipse.ocl.cst.OperationCallExpCS;
 import org.eclipse.ocl.cst.PathNameCS;
+import org.eclipse.ocl.cst.SimpleNameCS;
 import org.eclipse.ocl.cst.TypeCS;
 import org.eclipse.ocl.cst.VariableExpCS;
 import org.eclipse.ocl.ecore.CallOperationAction;
@@ -49,6 +51,7 @@ import org.eclipse.ocl.ecore.OperationCallExp;
 import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.ecore.VariableExp;
+import org.eclipse.ocl.expressions.PropertyCallExp;
 import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
@@ -76,6 +79,7 @@ import org.eclipse.qvt.declarative.modelregistry.util.ClassUtils;
 import org.eclipse.qvt.declarative.parser.AbstractQVTAnalyzer;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
+import org.eclipse.qvt.declarative.parser.qvt.environment.IQVTEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.AbstractDomainCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.CollectionTemplateCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.DefaultValueCS;
@@ -231,9 +235,22 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 
 	protected void declarePropertyTemplateCS(QVTrDomainEnvironment env, EClass parentType, PropertyTemplateCS propertyTemplateCS) {
 		IdentifiedCS propertyIdCS = propertyTemplateCS.getPropertyId();
-		EStructuralFeature property = resolveProperty(env, parentType, "propertyTemplateCS", propertyIdCS);
-		propertyTemplateCS.setReferredProperty(property);
-		EClassifier propertyType = property != null ? uml.getOCLType(property) : null;
+		EClassifier propertyType = null;
+		EStructuralFeature resolvedProperty = resolveForwardProperty(env, parentType, "propertyTemplateCS", propertyIdCS);
+		if (resolvedProperty != null) {
+			propertyTemplateCS.setReferredProperty(resolvedProperty);
+			propertyType = uml.getOCLType(resolvedProperty);
+		}
+		else if ((resolvedProperty = resolveReverseProperty(env, parentType, "propertyTemplateCS", propertyIdCS)) != null) {
+			propertyTemplateCS.setReferredProperty(resolvedProperty);
+			propertyTemplateCS.setOpposite(true);
+			propertyType = uml.getOCLType(resolvedProperty.getEContainingClass());
+		}
+		else {
+			resolvedProperty = resolveUnresolvedProperty(env, parentType, "propertyTemplateCS", propertyIdCS);
+			propertyTemplateCS.setReferredProperty(resolvedProperty);
+			propertyType = uml.getOCLType(resolvedProperty);
+		}
 		propertyType = TypeUtil.resolveType(env, propertyType);
 		OCLExpressionCS oclExpressionCS = propertyTemplateCS.getOclExpression();
 		declareOCLExpressionCS(env, propertyType, oclExpressionCS);
@@ -460,9 +477,17 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		if (identifiedClass != null) {
 			key.setIdentifies(identifiedClass);
 			for (IdentifiedCS  propertyIdCS : keyDeclCS.getPropertyId()) {
-				EStructuralFeature part = resolveProperty(env, identifiedClass, "keyDeclCS", propertyIdCS);
-				if (part != null)
-					key.getPart().add(part);
+				EStructuralFeature resolvedProperty = resolveForwardProperty(env, identifiedClass, "keyDeclCS", propertyIdCS);
+				if (resolvedProperty != null) {
+					key.getPart().add(resolvedProperty);;
+				}
+				else if ((resolvedProperty = resolveReverseProperty(env, identifiedClass, "propertyTemplateCS", propertyIdCS)) != null) {
+					key.getOppositePart().add((EReference) resolvedProperty);
+				}
+				else {
+					resolvedProperty = resolveUnresolvedProperty(env, identifiedClass, "propertyTemplateCS", propertyIdCS);
+					key.getPart().add(resolvedProperty);;
+				}
 			}
 		}
 		return key;
@@ -528,20 +553,22 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 	protected PropertyTemplateItem definePropertyTemplateCS(IQVTrEnvironment env, EClass referredClass, PropertyTemplateCS propertyTemplateCS) {
 		PropertyTemplateItem propertyTemplateItem = QVTTemplateFactory.eINSTANCE.createPropertyTemplateItem();
 		env.initASTMapping(propertyTemplateItem, propertyTemplateCS);
-		IdentifiedCS propertyIdCS = propertyTemplateCS.getPropertyId();
 		EStructuralFeature eStructuralFeature = propertyTemplateCS.getReferredProperty();
-		if (eStructuralFeature == null) {					// Not yet resolved if in a literal context
+/*		IdentifiedCS propertyIdCS = propertyTemplateCS.getPropertyId();
+		if (resolvedProperty == null) {					// Not yet resolved if in a literal context
 			IdentifierCS identifierCS = propertyIdCS.getIdentifier();
 			String propertyName = identifierCS(identifierCS);
 			eStructuralFeature = referredClass != null ? referredClass.getEStructuralFeature(propertyName) : null;
 			if (eStructuralFeature == null)
 				ERROR(identifierCS, "propertyTemplate", "No '" + formatType(referredClass) + "." + formatString(propertyName) + "' property");
-		}
+		} */
 		OCLExpression oclExpression = oclExpressionCS(propertyTemplateCS.getOclExpression(), env);
 		propertyTemplateItem.setReferredProperty(eStructuralFeature);
+		boolean isOpposite = propertyTemplateCS.isOpposite();
+		propertyTemplateItem.setIsOpposite(isOpposite);
 		propertyTemplateItem.setValue(oclExpression);
 		if ((eStructuralFeature != null) && (oclExpression != null)) {
-			EClassifier featureType = uml.getOCLType(eStructuralFeature);
+			EClassifier featureType = uml.getOCLType(isOpposite ? eStructuralFeature.getEContainingClass() : eStructuralFeature);
 			featureType = TypeUtil.resolveType(env, featureType);
 			env.checkFeatureCompatibility(propertyTemplateCS.getPropertyId(), featureType, oclExpression);
 		}
@@ -790,5 +817,48 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		if (queryCall != null)
 			return queryCall;
 		return super.operationCallExpCS(operationCallExpCS, env);
+	}
+
+	@Override
+	protected PropertyCallExp<EClassifier, EStructuralFeature> simplePropertyName(
+			SimpleNameCS simpleNameCS,
+			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
+			org.eclipse.ocl.expressions.OCLExpression<EClassifier> source,
+			EClassifier sourceElementType, String simpleName) {
+		PropertyCallExp<EClassifier, EStructuralFeature> propertyCall = super.simplePropertyName(simpleNameCS, env, source, sourceElementType, simpleName);
+		if (propertyCall != null)
+			return propertyCall;
+		if (!(sourceElementType instanceof EClass))
+			return null;
+		EStructuralFeature property;
+		try {
+			property = ((IQVTrEnvironment)env).tryLookupOppositeProperty((EClass)sourceElementType, simpleName);
+		} catch (LookupException e) {
+			ERROR(simpleNameCS, "SimpleNameCS", ((IQVTEnvironment) env).formatLookupException(e));
+			List<?> matches = e.getAmbiguousMatches();
+			if (matches.isEmpty())
+				return null;
+			property = (EStructuralFeature) matches.get(0);
+		}
+		if (property == null)
+			return null;
+		TRACE("variableExpCS", "Property: " + simpleName);//$NON-NLS-2$//$NON-NLS-1$
+		propertyCall = QVTRelationFactory.eINSTANCE.createOppositePropertyCallExp();
+		initASTMapping(env, propertyCall, simpleNameCS);
+		propertyCall.setReferredProperty(property);
+		propertyCall.setType(TypeUtil.resolveSetType(env, property.getEContainingClass()));
+		if (source != null) {
+			propertyCall.setSource(source);
+		} else {
+			org.eclipse.ocl.expressions.VariableExp<EClassifier, EParameter> src = oclFactory.createVariableExp();
+			initASTMapping(env, src, simpleNameCS);
+			org.eclipse.ocl.expressions.Variable<EClassifier, EParameter> implicitSource =
+				env.lookupImplicitSourceForProperty(simpleName);
+			src.setType(implicitSource.getType());
+			src.setReferredVariable(implicitSource);			
+			propertyCall.setSource(src);
+		}
+		initPropertyPositions(propertyCall, simpleNameCS);
+		return propertyCall;
 	}
 }

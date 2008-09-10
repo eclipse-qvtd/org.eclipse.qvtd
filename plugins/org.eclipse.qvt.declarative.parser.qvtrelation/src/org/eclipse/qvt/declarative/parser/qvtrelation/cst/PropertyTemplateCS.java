@@ -26,6 +26,7 @@ import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS;
  *   <li>{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.PropertyTemplateCS#getPropertyId <em>Property Id</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.PropertyTemplateCS#getOclExpression <em>Ocl Expression</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.PropertyTemplateCS#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.PropertyTemplateCS#isOpposite <em>Opposite</em>}</li>
  * </ul>
  * </p>
  *
@@ -111,5 +112,32 @@ public interface PropertyTemplateCS extends CSTNode {
 	 * @generated
 	 */
 	void setReferredProperty(EStructuralFeature value);
+
+	/**
+	 * Returns the value of the '<em><b>Opposite</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Opposite</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Opposite</em>' attribute.
+	 * @see #setOpposite(boolean)
+	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.QVTrCSTPackage#getPropertyTemplateCS_Opposite()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isOpposite();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.PropertyTemplateCS#isOpposite <em>Opposite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Opposite</em>' attribute.
+	 * @see #isOpposite()
+	 * @generated
+	 */
+	void setOpposite(boolean value);
 
 } // PropertyTemplateCS

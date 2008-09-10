@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTrCSTPackage.java,v 1.3 2008/08/18 07:55:54 ewillink Exp $
+ * $Id: QVTrCSTPackage.java,v 1.4 2008/09/10 05:23:32 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtrelation.cst;
 
@@ -100,6 +100,15 @@ public interface QVTrCSTPackage extends EPackage {
 	int ABSTRACT_DOMAIN_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DOMAIN_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+
+	/**
 	 * The number of structural features of the '<em>Abstract Domain CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -135,6 +144,15 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEMPLATE_VARIABLE_CS__END_TOKEN = QVTCSTPackage.IDENTIFIED_CS__END_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_VARIABLE_CS__AST_NODE = QVTCSTPackage.IDENTIFIED_CS__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -190,6 +208,15 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEMPLATE_CS__END_TOKEN = TEMPLATE_VARIABLE_CS__END_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_CS__AST_NODE = TEMPLATE_VARIABLE_CS__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -254,6 +281,15 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLECTION_TEMPLATE_CS__END_TOKEN = TEMPLATE_CS__END_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_CS__AST_NODE = TEMPLATE_CS__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -347,6 +383,15 @@ public interface QVTrCSTPackage extends EPackage {
 	int DEFAULT_VALUE_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFAULT_VALUE_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+
+	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -400,6 +445,15 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_CS__END_TOKEN = ABSTRACT_DOMAIN_CS__END_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_CS__AST_NODE = ABSTRACT_DOMAIN_CS__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Checkonly</b></em>' attribute.
@@ -512,6 +566,15 @@ public interface QVTrCSTPackage extends EPackage {
 	int KEY_DECL_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_DECL_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+
+	/**
 	 * The feature id for the '<em><b>Class Id</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -567,6 +630,15 @@ public interface QVTrCSTPackage extends EPackage {
 	int MODEL_DECL_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_DECL_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+
+	/**
 	 * The feature id for the '<em><b>Model Id</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -620,6 +692,15 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int OBJECT_TEMPLATE_CS__END_TOKEN = TEMPLATE_CS__END_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_CS__AST_NODE = TEMPLATE_CS__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -704,6 +785,15 @@ public interface QVTrCSTPackage extends EPackage {
 	int PARAM_DECLARATION_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM_DECLARATION_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+
+	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -757,6 +847,15 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int PRIMITIVE_TYPE_DOMAIN_CS__END_TOKEN = TEMPLATE_VARIABLE_CS__END_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE_DOMAIN_CS__AST_NODE = TEMPLATE_VARIABLE_CS__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -814,6 +913,15 @@ public interface QVTrCSTPackage extends EPackage {
 	int PROPERTY_TEMPLATE_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+
+	/**
 	 * The feature id for the '<em><b>Property Id</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -841,13 +949,22 @@ public interface QVTrCSTPackage extends EPackage {
 	int PROPERTY_TEMPLATE_CS__REFERRED_PROPERTY = CSTPackage.CST_NODE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Opposite</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_CS__OPPOSITE = CSTPackage.CST_NODE_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Property Template CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_CS_FEATURE_COUNT = CSTPackage.CST_NODE_FEATURE_COUNT + 3;
+	int PROPERTY_TEMPLATE_CS_FEATURE_COUNT = CSTPackage.CST_NODE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl.QueryCSImpl <em>Query CS</em>}' class.
@@ -876,6 +993,15 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int QUERY_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Path Name</b></em>' containment reference.
@@ -949,6 +1075,15 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Top</b></em>' attribute.
@@ -1051,6 +1186,15 @@ public interface QVTrCSTPackage extends EPackage {
 	int TOP_LEVEL_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_LEVEL_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+
+	/**
 	 * The feature id for the '<em><b>Import Clause</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1104,6 +1248,15 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRANSFORMATION_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Model Decl</b></em>' containment reference list.
@@ -1187,6 +1340,15 @@ public interface QVTrCSTPackage extends EPackage {
 	int UNIT_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+
+	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1231,6 +1393,15 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int VAR_DECLARATION_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DECLARATION_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Var Declaration Id</b></em>' containment reference list.
@@ -1289,6 +1460,15 @@ public interface QVTrCSTPackage extends EPackage {
 	int WHEN_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHEN_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+
+	/**
 	 * The feature id for the '<em><b>Expr</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1333,6 +1513,15 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int WHERE_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHERE_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' containment reference list.
@@ -1725,6 +1914,17 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPropertyTemplateCS_ReferredProperty();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.PropertyTemplateCS#isOpposite <em>Opposite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Opposite</em>'.
+	 * @see org.eclipse.qvt.declarative.parser.qvtrelation.cst.PropertyTemplateCS#isOpposite()
+	 * @see #getPropertyTemplateCS()
+	 * @generated
+	 */
+	EAttribute getPropertyTemplateCS_Opposite();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.QueryCS <em>Query CS</em>}'.
@@ -2414,6 +2614,14 @@ public interface QVTrCSTPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROPERTY_TEMPLATE_CS__REFERRED_PROPERTY = eINSTANCE.getPropertyTemplateCS_ReferredProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Opposite</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY_TEMPLATE_CS__OPPOSITE = eINSTANCE.getPropertyTemplateCS_Opposite();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.parser.qvtrelation.cst.impl.QueryCSImpl <em>Query CS</em>}' class.

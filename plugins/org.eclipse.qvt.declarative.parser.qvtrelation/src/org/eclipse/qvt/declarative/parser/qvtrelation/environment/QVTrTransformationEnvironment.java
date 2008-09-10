@@ -10,19 +10,23 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.qvtrelation.environment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.ocl.AmbiguousLookupException;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
@@ -46,12 +50,38 @@ import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TransformationCS;
 
 public class QVTrTransformationEnvironment extends QVTrEnvironment<QVTrTopLevelEnvironment>
 {
+/*	public static class EOppositeReference extends EReferenceImpl
+	{
+		protected final EReference oppositeReference;
+
+		public EOppositeReference(String propertyName, EReference oppositeReference) {
+			setName(propertyName);
+			this.oppositeReference = oppositeReference;
+		}
+		
+		@Override
+		public EClassifier basicGetEType() {
+			return oppositeReference.getEContainingClass();
+		}
+
+		public EReference getOppositeReference() {
+			return oppositeReference;
+		}
+
+		@Override
+		public void setEOpposite(EReference newEOpposite) {
+			throw new UnsupportedOperationException(getClass().getName() + ".setEOpposite()");
+		}
+	} */
+
 	private final RelationalTransformation transformation;
 	private Map<RelationCS, QVTrRelationEnvironment> relEnvMap = new HashMap<RelationCS, QVTrRelationEnvironment>(); 
 	private Map<QueryCS, QVTrQueryEnvironment> queryEnvMap = new HashMap<QueryCS, QVTrQueryEnvironment>(); 
 	private Map<String, QVTrTypedModelEnvironment> modelIdToTypedModelEnvironment = new HashMap<String, QVTrTypedModelEnvironment>(); 
 	private final Map<String,Set<EPackage>> metaModelIdToPackages = new HashMap<String,Set<EPackage>>();
 	private final Set<EPackage> allMetaModelPackages = new HashSet<EPackage>();
+	protected Map<String, List<EReference>> oppositeFeaturesMap = null;		// Unnavigable opposite name to forward reference
+//	protected Map<EReference, EReference> oppositeReferenceMap = null;		// Navigable to pseudo-opposite
 
 	public QVTrTransformationEnvironment(QVTrTopLevelEnvironment env, TransformationCS transformationCS) {
 		super(env, transformationCS);
@@ -138,6 +168,28 @@ public class QVTrTransformationEnvironment extends QVTrEnvironment<QVTrTopLevelE
 	
 	@Override public RelationalTransformation getRelationalTransformation() { return transformation; }
 
+	protected void initializeFeatures(EPackage ePackage) {
+		for (EClassifier eClassifier : ePackage.getEClassifiers()) {
+			if (eClassifier instanceof EClass) {
+				EClass eClass = (EClass)eClassifier;
+				for (EStructuralFeature eFeature : eClass.getEStructuralFeatures()) {				
+					if (eFeature instanceof EReference) {
+						EReference eReference = (EReference)eFeature;
+						if (eReference.getEOpposite() == null) {
+							String oppositeName = getOppositeName(eReference);
+							List<EReference> features = oppositeFeaturesMap.get(oppositeName);
+							if (features == null) {
+								features = new ArrayList<EReference>();
+								oppositeFeaturesMap.put(oppositeName, features);
+							}
+							features.add(eReference);
+						}
+					}
+				}		
+			}
+		}		
+	}
+
 	@Override public Variable lookupImplicitSourceForOperation(String name, List<? extends TypedElement<EClassifier>> params) {
 		Relation relation = transformation.getRelation(name);
 		if (relation != null)
@@ -180,5 +232,60 @@ public class QVTrTransformationEnvironment extends QVTrEnvironment<QVTrTopLevelE
         UMLReflection<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint> uml = getUMLReflection();
 		owner = uml.getOCLType(owner);				// Workaround bugzilla 172782
 		return super.tryLookupOperation(owner, name, args);
+	}
+	
+	@Override
+	public EReference tryLookupOppositeProperty(EClass eClass, String propertyName) throws LookupException {
+		if (oppositeFeaturesMap == null) {
+			oppositeFeaturesMap = new HashMap<String, List<EReference>>();
+			for (EPackage ePackage : allMetaModelPackages)
+				initializeFeatures(ePackage);				
+		}
+		List<EReference> references = oppositeFeaturesMap.get(propertyName);
+		if (references == null)
+			return null;
+		EReference oppositeReference = null;
+		List<EReference> ambiguousReferences = null;
+		for (EReference reference : references) {
+			
+			if (reference.getEReferenceType().isSuperTypeOf(eClass)) {
+				if (oppositeReference == null)
+					oppositeReference = reference;
+				else {
+					if (ambiguousReferences == null) {
+						ambiguousReferences = new ArrayList<EReference>();
+						ambiguousReferences.add(oppositeReference);
+					}
+					ambiguousReferences.add(reference);
+				}
+			}
+		}
+		if (ambiguousReferences != null)
+			throw new AmbiguousLookupException("Ambiguous property", ambiguousReferences);
+//		if (oppositeReferenceMap == null)
+//			oppositeReferenceMap = new HashMap<EReference, EReference>();
+//		EReference pseudoOpposite = oppositeReferenceMap.get(oppositeReference);
+//		if (pseudoOpposite == null) {
+//			pseudoOpposite = new EOppositeReference(propertyName, oppositeReference);
+//			oppositeReferenceMap.put(oppositeReference, pseudoOpposite);
+//		}
+		return oppositeReference;
+	}
+
+	@Override
+	public EStructuralFeature tryLookupProperty(EClassifier owner, String name)
+			throws LookupException {
+		EStructuralFeature result = super.lookupOCLProperty(owner, name);
+		if (result != null)
+			return result;
+//		if (owner instanceof EClass) {
+//			result = tryLookupOppositeProperty((EClass) owner, name);
+//			if (result != null)
+//				return result;
+//		}
+		QVTrTopLevelEnvironment parent = getParentEnvironment();
+		if (parent != null)
+			return parent.tryLookupProperty(owner, name);
+		return null;
 	}
 }
