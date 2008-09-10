@@ -12,14 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: OCLCreationFactory.java,v 1.2 2008/08/24 19:00:53 ewillink Exp $
+ * $Id: OCLCreationFactory.java,v 1.3 2008/09/10 05:31:00 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.parser.ISourcePositionLocator;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
@@ -58,7 +57,7 @@ public class OCLCreationFactory extends AbstractCreationFactory
 		return new OCLNodeLocator(environment);
 	}
 	
-	public IParseController createParseController() {
+	public OCLParseController createParseController() {
 		return new OCLParseController();
 	}
 
