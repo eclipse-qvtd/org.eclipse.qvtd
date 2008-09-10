@@ -1,0 +1,9 @@
+
+transformation Keys(mm:{qvtrelation, emof})
+{
+     key Key{identifies};
+     key Key{identifies, part};
+     key Class{key};
+     key Class{key, name};
+--     key Class{};
+}

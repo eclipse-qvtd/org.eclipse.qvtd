@@ -13,13 +13,36 @@ package org.eclipse.qvt.declarative.test.parser.qvtrelation;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.ocl.lpg.ProblemHandler;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.util.QVTRelationValidator;
 import org.eclipse.qvt.declarative.ecore.mappings.MappingConfigurationException;
+import org.eclipse.qvt.declarative.ecore.operations.EValidatorWithOperations;
 import org.eclipse.qvt.declarative.parser.utils.ProblemLog;
 
 public class QVTrParseTests extends AbstractQVTrTestCase
 {
+	public static class ExpectedProblemLog extends ProblemLog
+	{
+		public void expectValidatorError(String key, String[] substitutions) {
+			EValidatorWithOperations validator = QVTRelationValidator.INSTANCE;
+			ResourceLocator resourceLocator = validator.getResourceLocator();
+			String problemMessage = substitutions == null ? resourceLocator.getString(key) : resourceLocator.getString(key, substitutions);
+			String processingContext = validator.getDiagnosticSource();
+			super.handleProblem(ProblemHandler.Severity.ERROR, ProblemHandler.Phase.VALIDATOR, problemMessage,
+					processingContext, -1, -1);
+		}
+		public void expectValidatorWarning(String key, String[] substitutions) {
+			EValidatorWithOperations validator = QVTRelationValidator.INSTANCE;
+			ResourceLocator resourceLocator = validator.getResourceLocator();
+			String problemMessage = substitutions == null ? resourceLocator.getString(key) : resourceLocator.getString(key, substitutions);
+			String processingContext = validator.getDiagnosticSource();
+			super.handleProblem(ProblemHandler.Severity.WARNING, ProblemHandler.Phase.VALIDATOR, problemMessage,
+					processingContext, -1, -1);
+		}
+	}
+
 	public void testParseEqvtRelation_empty() throws IOException, CoreException, MappingConfigurationException {
 		parserTest("empty", null);
 	}
@@ -75,6 +98,44 @@ public class QVTrParseTests extends AbstractQVTrTestCase
 				"Ambiguous name 'A' { ScopeB::a::A, ScopeB::b::A }", "lookupClassifier", -1, -1);
 
 		problemTest("Scoping", expectedProblems);
+	}
+	
+	public void testParse_Keys() throws IOException, CoreException {
+		ExpectedProblemLog expectedProblems = new ExpectedProblemLog();
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "qvtrelation::QVTRelation::Key"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "qvtrelation::QVTRelation::Key"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "emof::EMOF::Class"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "emof::EMOF::Class"} );
+		parserTest("Keys", expectedProblems);
+	}
+	
+	public void testValidate_Keys() throws IOException, CoreException {
+		ExpectedProblemLog expectedProblems = new ExpectedProblemLog();
+		expectedProblems.expectValidatorError("_UI_KeyMustHaveAtLeastOnePart_diagnostic",
+				new String[] { "KeysValidation.reference.eqvtrelation::Keys::Key" });
+		expectedProblems.expectValidatorError("_UI_KeyPartSourceMustBeKeyIdentifies_diagnostic",
+				new String[] {
+					"EMOF.ecore::EMOF::Tag::element",
+					"KeysValidation.reference.eqvtrelation::Keys::Key",
+					"EMOF.ecore::EMOF::Property"});
+		expectedProblems.expectValidatorError("_UI_KeyOppositePartTargetMustBeKeyIdentifies_diagnostic",
+				new String[] {
+					"EMOF.ecore::EMOF::Parameter::operation",
+					"KeysValidation.reference.eqvtrelation::Keys::Key",
+					"EMOF.ecore::EMOF::Parameter"});
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "QVTRelation.ecore::QVTRelation::Key"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "QVTRelation.ecore::QVTRelation::Key"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "EMOF.ecore::EMOF::Class"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "EMOF.ecore::EMOF::Class"} );
+		validationTest("KeysValidation", expectedProblems);
 	}
 	
 	public void testValidation_RelToCore() throws IOException, CoreException {

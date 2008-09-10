@@ -17,6 +17,10 @@
     <entry accessor="SeqMM" kind="Model Name" uri="SeqMM.xml"/>
     <entry accessor="StmcMM" kind="Model Name" uri="StmcMM.xml"/>
   </resource>
+  <resource name="Keys.qvtr">
+    <entry accessor="emof" kind="Model Name" uri="EMOF.ecore"/>
+    <entry accessor="qvtrelation" kind="Model Name" uri="QVTRelation.ecore"/>
+  </resource>
   <resource name="RelToCore.qvtr">
     <entry accessor="emof" kind="Model Name" uri="QVT.ecore"/>
     <entry accessor="essentialocl" kind="Model Name" uri="QVT.ecore"/>
