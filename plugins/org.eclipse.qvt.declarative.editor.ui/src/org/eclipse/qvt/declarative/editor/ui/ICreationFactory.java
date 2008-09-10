@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ICreationFactory.java,v 1.3 2008/08/24 19:07:59 ewillink Exp $
+ * $Id: ICreationFactory.java,v 1.4 2008/09/10 05:31:01 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui;
 
@@ -21,12 +21,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.imp.language.Language;
-import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.parser.ISourcePositionLocator;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
 import org.eclipse.qvt.declarative.editor.ui.builder.CommonNature;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonEditorDefinition;
+import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
@@ -52,7 +52,7 @@ public interface ICreationFactory
 
 	public ISourcePositionLocator createNodeLocator(IFileEnvironment environment);
 
-	public IParseController createParseController();
+	public CommonParseController createParseController();
 
 	/**
 	 * Create the problem handler and associated marker creation support.
