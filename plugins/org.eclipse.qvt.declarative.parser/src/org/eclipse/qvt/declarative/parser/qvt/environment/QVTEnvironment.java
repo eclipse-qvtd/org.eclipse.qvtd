@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -23,8 +24,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.ecore.CallOperationAction;
@@ -63,7 +66,7 @@ import org.eclipse.qvt.declarative.parser.utils.OCLUtils;
 @SuppressWarnings("restriction")		// FIXME awaiting Bugzilla 182994
 public abstract class QVTEnvironment<E extends IQVTEnvironment, P extends E> extends CSTEnvironment<E,P> implements IQVTEnvironment
 {
-	protected QVTFormattingHelper formatter;
+	protected QVTFormattingHelper formatter;	// FIXME remove this shadow one bug 245760 addressed.
 
 	protected QVTEnvironment(EPackage.Registry reg) {
 		super(reg);
@@ -224,6 +227,7 @@ public abstract class QVTEnvironment<E extends IQVTEnvironment, P extends E> ext
 		}
 		return match;
 	}
+
 	@Override
 	public QVTFormattingHelper getFormatter() {
 		if (formatter == null) {
@@ -291,6 +295,16 @@ public abstract class QVTEnvironment<E extends IQVTEnvironment, P extends E> ext
 			if (getPackagedClassifiers(resolutions, ePackage, names, false))
 				found = true;
 		return found;
+	}
+
+	protected String getOppositeName(EReference reference) {
+		EReference eOpposite = reference.getEOpposite();
+		if (eOpposite != null)
+			return eOpposite.getName();
+		EAnnotation annotation = reference.getEAnnotation(EMOFExtendedMetaData.EMOF_PROPERTY_OPPOSITE_ROLE_NAME_ANNOTATION_SOURCE);
+		if (annotation != null)
+			return annotation.getDetails().get(EMOFExtendedMetaData.EMOF_COMMENT_BODY);
+		return initialLower(reference.getEContainingClass());
 	}
 
 	protected EClassifier getPackagedClassifier(EPackage currentPackage, String classifierName) {
@@ -438,6 +452,13 @@ public abstract class QVTEnvironment<E extends IQVTEnvironment, P extends E> ext
 			return parent.tryLookupTransformation(pathName);
 		else
 			return null;
+	}
+
+	public EReference tryLookupOppositeProperty(EClass eClass, String propertyName) throws LookupException {
+		P parent = getParentEnvironment();
+		if (parent != null)
+			return parent.tryLookupOppositeProperty(eClass, propertyName);
+		return null;
 	}
 
 	public Variable tryLookupVariable(String name) throws LookupException {

@@ -12,8 +12,10 @@ package org.eclipse.qvt.declarative.parser.qvt.environment;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.ecore.OCLExpression;
@@ -57,6 +59,14 @@ public interface IQVTEnvironment extends ICSTEnvironment
 	 */
 	public Variable lookupImplicitSourceForProperty(String name);
 	public Transformation lookupImportedTransformation(String name);
+
+	/**
+	 * Return the property with a non-navigable opposite named propertyName
+	 * that may have an eClass as its target. Return null if no such property
+	 * available. Throw a LookupException if more than one is available.
+	 */
+	public EReference tryLookupOppositeProperty(EClass eClass, String propertyName) throws LookupException;
+	
 	public Transformation tryLookupTransformation(List<String> pathName) throws LookupException;
 
 	/**
