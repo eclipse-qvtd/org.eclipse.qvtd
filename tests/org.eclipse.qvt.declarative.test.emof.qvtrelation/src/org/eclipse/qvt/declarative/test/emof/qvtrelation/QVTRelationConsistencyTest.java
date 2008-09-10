@@ -42,23 +42,34 @@ public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyT
 		//
 		//	Ecore added value
 		//
+		changeOfObject(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.KEY__OPPOSITE_PART, EcorePackage.Literals.ETYPED_ELEMENT__ETYPE);	
 		changeOfSize(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATION, EcorePackage.Literals.ECLASS__EOPERATIONS);
 		missingOperation(differences, helper, getOperation(org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATIONAL_TRANSFORMATION, "getRelation"));
 		changeOfSize(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATIONAL_TRANSFORMATION, EcorePackage.Literals.ECLASS__EOPERATIONS);		
 		missingOperation(differences, helper, getOperation(org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATION, "getRelationalTransformation"));
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.KEY);
 		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATION_DOMAIN);
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATIONAL_TRANSFORMATION);
 	}
 
 	public static void expectedEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
 		changeOfURI(differences, helper, QVTRelationPackage.eINSTANCE);
 		changeOfPrefix(differences, helper, QVTRelationPackage.eINSTANCE);
 		changeOfName(differences, helper, QVTRelationPackage.eINSTANCE);
+		//
+		//	Support for opposite navigation
+		//
+		changeOfSize(differences, helper, QVTRelationPackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
 	}
 
 	public static void expectedEmo2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
 		missingURI(differences, helper, QVTRelationPackage.eINSTANCE);
 		missingPrefix(differences, helper, QVTRelationPackage.eINSTANCE);
 		changeOfName(differences, helper, QVTRelationPackage.eINSTANCE);
+		//
+		//	Support for opposite navigation
+		//
+		changeOfSize(differences, helper, QVTRelationPackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
 	}
 
 	@Override
@@ -89,6 +100,16 @@ public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyT
 		missingOpposite(differences, helper, QVTRelationPackage.Literals.RELATION_DOMAIN__DEFAULT_ASSIGNMENT);
 		missingOpposite(differences, helper, QVTRelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP);
 		missingOpposite(differences, helper, QVTRelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT__VARIABLE);
+		//
+		//	Support for opposite navigation
+		//
+		changeOfSize(differences, helper, QVTRelationPackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
+		missingObject(differences, helper, QVTRelationPackage.Literals.OPPOSITE_PROPERTY_CALL_EXP);		
+		changeOfLower(differences, helper, QVTRelationPackage.Literals.KEY__PART);
+		changeOfSize(differences, helper, QVTRelationPackage.Literals.KEY, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES);
+		missingObject(differences, helper, QVTRelationPackage.Literals.KEY__OPPOSITE_PART);		
+		missingOppositeAnnotation(differences, helper, QVTRelationPackage.Literals.KEY__OPPOSITE_PART);
+			
 		helper.setLogStream(null);
 		QVTTemplateConsistencyTest.expectedEmofDifferences(differences, helper);
 		QVTBaseConsistencyTest.expectedEmofDifferences(differences, helper);
@@ -122,6 +143,16 @@ public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyT
 		missingOpposite(differences, helper, QVTRelationPackage.Literals.RELATION_DOMAIN__DEFAULT_ASSIGNMENT);
 		missingOpposite(differences, helper, QVTRelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP);
 		missingOpposite(differences, helper, QVTRelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT__VARIABLE);
+		//
+		//	Support for opposite navigation
+		//
+		changeOfSize(differences, helper, QVTRelationPackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
+		missingObject(differences, helper, QVTRelationPackage.Literals.OPPOSITE_PROPERTY_CALL_EXP);		
+		changeOfLower(differences, helper, QVTRelationPackage.Literals.KEY__PART);
+		changeOfSize(differences, helper, QVTRelationPackage.Literals.KEY, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES);
+		missingObject(differences, helper, QVTRelationPackage.Literals.KEY__OPPOSITE_PART);		
+		missingOppositeAnnotation(differences, helper, QVTRelationPackage.Literals.KEY__OPPOSITE_PART);
+			
 		helper.setLogStream(null);
 		missingPrefix(differences, helper, QVTRelationPackage.eINSTANCE);
 		QVTTemplateConsistencyTest.expectedEmo2OmgEmofDifferences(differences, helper);
@@ -137,6 +168,16 @@ public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyT
 		expectedEmofDifferences(differences, helper);
 		changeOfLower(differences, helper, QVTRelationPackage.Literals.RELATION_CALL_EXP__ARGUMENT);
 		changeOfLower(differences, helper, QVTRelationPackage.Literals.RELATION_CALL_EXP__REFERRED_RELATION);
+		//
+		//	Support for opposite navigation
+		//
+		changeOfSize(differences, helper, QVTRelationPackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
+		missingObject(differences, helper, QVTRelationPackage.Literals.OPPOSITE_PROPERTY_CALL_EXP);		
+		changeOfLower(differences, helper, QVTRelationPackage.Literals.KEY__PART);
+		changeOfSize(differences, helper, QVTRelationPackage.Literals.KEY, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES);
+		missingObject(differences, helper, QVTRelationPackage.Literals.KEY__OPPOSITE_PART);		
+		missingOppositeAnnotation(differences, helper, QVTRelationPackage.Literals.KEY__OPPOSITE_PART);
+			
 		helper.setLogStream(null);
 		QVTTemplateConsistencyTest.expectedEmofDifferences(differences, helper);
 		QVTBaseConsistencyTest.expectedEmofDifferences(differences, helper);
