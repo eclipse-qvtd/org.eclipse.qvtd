@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.6 2008/08/26 19:13:46 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.7 2008/09/10 05:36:06 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -35,7 +35,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import lpg.lpgjavaruntime.IToken;
-import lpg.lpgjavaruntime.Monitor;
 import lpg.lpgjavaruntime.PrsStream;
 
 import org.eclipse.core.resources.IProject;
@@ -82,6 +81,40 @@ import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
  */
 public abstract class CommonParseController implements IParseController
 {
+	private static int counter = 0;
+
+	public static class ParsedResult extends ASTandCST
+	{
+		protected final IFileEnvironment environment;
+
+		public ParsedResult(IFileEnvironment environment) {
+			this.environment = environment;
+		}
+
+		public IFileEnvironment getEnvironment() {
+			return environment;
+		}
+
+		public void parse(String contents, IProgressMonitor monitor) throws IOException, CoreException {
+			Reader reader = new StringReader(contents);
+			IFileAnalyzer analyzer = environment.parseToTokens(reader, monitor);
+			if (analyzer != null) {
+				CSTNode cstNode = analyzer.parseToCST();
+				setCST(cstNode);
+				if (cstNode != null) {
+					URI uri = environment.getFile().getURI();
+					Collection<? extends EObject> astNodes = analyzer.parseCSTtoAST(cstNode, uri);
+					if (astNodes != null) {
+						Resource resource = new XMIResourceImpl(uri);
+						resource.getContents().addAll(astNodes);
+						environment.initASTMapping(resource, cstNode);
+						setAST(resource);
+					}
+				}
+			}
+		}
+	}
+
 	public enum TokenKind {
 		EOF,
 		IDENTIFIER,
@@ -99,37 +132,17 @@ public abstract class CommonParseController implements IParseController
     protected ISourceProject fProject;
     protected IPath fFilePath;
     protected IMessageHandler handler;   
-    protected ASTandCST fCurrentAst;
+    protected ParsedResult fCurrentAst;
     private char fKeywords[][];
     private boolean fIsKeyword[];
     private final SimpleAnnotationTypeInfo fSimpleAnnotationTypeInfo = new SimpleAnnotationTypeInfo();
-	protected IFileEnvironment environment;
-    /**
-     * An adapter from an Eclipse IProgressMonitor to an LPG Monitor
-     */
-    protected static class PMMonitor implements Monitor {
-    	private IProgressMonitor monitor;
-
-    	private boolean wasCancelled= false;
-
-    	public PMMonitor(IProgressMonitor monitor) {
-    		this.monitor= monitor;
-    	}
-
-    	public boolean isCancelled() {
-    		if (!wasCancelled)
-    			wasCancelled= monitor.isCanceled();
-    		return wasCancelled;
-    	}
-
-    	public void setMonitor(IProgressMonitor monitor) {
-    		this.monitor= monitor;
-    	}
-    }
+	private final String id;
 
     public CommonParseController(ICreationFactory creationFactory) {
 		this.creationFactory = creationFactory;
         fLanguage= creationFactory.getLanguage();
+		id = getClass().getSimpleName() + "-" + ++ counter;
+		System.out.println(id + " created");
     }
 
     protected void cacheKeywordsOnce() {
@@ -147,7 +160,7 @@ public abstract class CommonParseController implements IParseController
                     fKeywords[index]= tokenKindNames[index].toCharArray();
                 }
             } catch (NullPointerException e) {
-                System.err.println("SimpleLPGParseController.cacheKeywordsOnce():  NullPointerException; trapped and discarded");
+                System.err.println(getClass().getSimpleName() + ".cacheKeywordsOnce():  NullPointerException; trapped and discarded");
             }
         }
     }
@@ -157,7 +170,7 @@ public abstract class CommonParseController implements IParseController
 		return creationFactory.createFileEnvironment(fileHandle, resourceSet);
 	}
 
-	protected ProblemHandler createProblemHandler() {
+	protected ProblemHandler createProblemHandler(IFileEnvironment environment) {
 		if (handler instanceof ProblemHandler) {
 			((ProblemHandler)handler).setParser(environment.getParser());
 			if (handler instanceof MarkerProblemHandler)
@@ -169,10 +182,6 @@ public abstract class CommonParseController implements IParseController
 			commonProblemHandler.setProblemLimit(new ProblemLimit(50, 50, 50));
 			return commonProblemHandler;
 		}
-	}
-
-	protected PMMonitor createProgressMonitor(IProgressMonitor monitor) {
-		return new PMMonitor(monitor);
 	}
 
 	public Object getASTNode(Object object) {
@@ -194,9 +203,11 @@ public abstract class CommonParseController implements IParseController
     }
 
 	public CSTNode getCSTNode(Object object) {
+		if (fCurrentAst == null)
+			return null;
 		if (object instanceof ModelTreeNode)
 			object = ((ModelTreeNode)object).getASTNode();
-		return environment.getASTMapping(object);
+		return fCurrentAst.getEnvironment().getASTMapping(object);
 	}
 
     public ICreationFactory getCreationFactory() {
@@ -231,11 +242,15 @@ public abstract class CommonParseController implements IParseController
 	}
 
 	public ISourcePositionLocator getNodeLocator() {
-		return creationFactory.createNodeLocator(environment);
+		if (fCurrentAst == null)
+			return null;
+		return creationFactory.createNodeLocator(fCurrentAst.getEnvironment());
 	}
 
 	public AbstractParser getParser() {
-		return environment.getParser();
+		if (fCurrentAst == null)
+			return null;
+		return fCurrentAst.getEnvironment().getParser();
 	}
 
     public IPath getPath() {
@@ -331,6 +346,7 @@ public abstract class CommonParseController implements IParseController
 		this.fProject= project;
 		this.fFilePath= filePath;	
 		this.handler = handler;
+		System.out.println(id + " initialized for " + fFilePath.toString());
     }
 
     public boolean isIdentifier(int kind) {
@@ -342,35 +358,20 @@ public abstract class CommonParseController implements IParseController
     	return kind < tokenKindNames.length && fIsKeyword[kind];
     }
 
-	public Object parse(String contents, boolean scanOnly, IProgressMonitor monitor) {
+	public ParsedResult parse(String contents, boolean scanOnly, IProgressMonitor monitor) {
 //		FIXME scanOnly appears to be false always
-		System.out.println("Parse " + fLanguage + " scanOnly = " + scanOnly + " handler = " + handler.getClass().getName());
-		PMMonitor my_monitor = createProgressMonitor(monitor);
-		if (my_monitor.isCancelled())
-			return fCurrentAst; // TODO currentAst might (probably will) be inconsistent wrt the lex stream now
-		AbstractFileHandle fileHandle = getFileHandle();
-		environment = createEnvironment(fileHandle);
-		environment.getAnalyzer();		// Create parser
-		environment.setProblemHandler(createProblemHandler());
-		ASTandCST astAndCst = new ASTandCST();
-		fCurrentAst = astAndCst;
-		Reader reader = new StringReader(contents);
+		System.out.println(id + " Parse " + fFilePath.toString() + " " + fLanguage + " scanOnly = " + scanOnly + " handler = " + handler.getClass().getName());
+		if (monitor.isCanceled())
+			return fCurrentAst;
 		try {
-			IFileAnalyzer analyzer = environment.parseToTokens(reader, monitor);
-			if (analyzer != null) {
-				CSTNode cstNode = analyzer.parseToCST();
-				astAndCst.setCST(cstNode);
-				if (cstNode != null) {
-					URI uri = fileHandle.getURI();
-					Collection<? extends EObject> astNodes = analyzer.parseCSTtoAST(cstNode, uri);
-					if (astNodes != null) {
-						Resource resource = new XMIResourceImpl(uri);
-						resource.getContents().addAll(astNodes);
-						environment.initASTMapping(resource, cstNode);
-						astAndCst.setAST(resource);
-					}
-				}
-			}
+			AbstractFileHandle fileHandle = getFileHandle();
+			IFileEnvironment environment = createEnvironment(fileHandle);
+			environment.getAnalyzer();		// Create parser
+			ProblemHandler problemHandler = createProblemHandler(environment);
+			environment.setProblemHandler(problemHandler);
+			ParsedResult newResult = new ParsedResult(environment);
+			newResult.parse(contents, monitor);
+			fCurrentAst = newResult;		// Change only when all done.
 		} catch (IOException e) {
             ErrorHandler.reportError("Failed to parse language " + getLanguage().getName() + " and input " + getPath() + ":", e);
 		} catch (CoreException e) {
