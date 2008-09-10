@@ -42,6 +42,11 @@ public interface ICSTEnvironment extends Environment.Internal<
 	 * @return the InvalidLiteralExp
 	 */
 	public InvalidLiteralExp createInvalidLiteralExp(CSTNode cstNode);
+
+	/**
+     * Generates a new, unique name for an implicit iterator variable.
+	 */
+	public String generateImplicitName();   // FIXME Workaround for bug 246469
 	
 	public CSTFormattingHelper getFormatter();
 	public Monitor getMonitor();

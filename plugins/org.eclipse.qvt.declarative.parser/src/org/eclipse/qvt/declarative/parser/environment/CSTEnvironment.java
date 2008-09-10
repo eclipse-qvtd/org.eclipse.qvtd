@@ -99,6 +99,7 @@ public abstract class CSTEnvironment<E extends ICSTEnvironment, P extends E> ext
 	protected int errorStart = 0;
 	protected int errorEnd = 0;
 	private Monitor monitor = null;
+	private int generatorInt = 0;
 
 	protected CSTEnvironment(EPackage.Registry reg) {
 		super(reg);
@@ -114,6 +115,17 @@ public abstract class CSTEnvironment<E extends ICSTEnvironment, P extends E> ext
 		super(parent);
 		setCSTNode(cstNode);
 		this.rootEnvironment = parent.getRootEnvironment();
+	}
+
+	@Override
+	public boolean addElement(String name, org.eclipse.ocl.expressions.Variable<EClassifier, EParameter> elem, boolean isExplicit) {
+		if (name == null) {		// FIXME Workaround for bug 246469
+			name = rootEnvironment.generateImplicitName();
+			while (lookup(name) != null) {
+				name = rootEnvironment.generateImplicitName();
+			}
+		}
+		return super.addElement(name, elem, isExplicit);
 	}
 
 	/**
@@ -192,6 +204,14 @@ public abstract class CSTEnvironment<E extends ICSTEnvironment, P extends E> ext
 
 	public String formatType(Object type) {
 		return getFormatter().formatType(type);
+	}
+	
+	/**
+     * Generates a new, unique name for an implicit iterator variable.
+	 */
+	public String generateImplicitName() {   // FIXME Workaround for bug 246469
+		generatorInt++;
+		return "temp" + generatorInt;//$NON-NLS-1$
 	}
 
 	@Override
