@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.3 2008/08/26 19:12:12 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.4 2008/09/10 05:32:30 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -30,7 +30,6 @@ import org.eclipse.imp.language.Language;
 import org.eclipse.imp.model.ISourceProject;
 import org.eclipse.imp.model.ModelFactory;
 import org.eclipse.imp.parser.IMessageHandler;
-import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.runtime.PluginBase;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -38,7 +37,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
-import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
+import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
 
 /**
  * A builder may be activated on a file containing language code every time it
@@ -74,11 +73,12 @@ public abstract class CommonBuilder extends BuilderBase
 		IPath projectRelativeInputPath = inputFile.getProjectRelativePath();
 		IPath workspaceRelativeInputPath = inputFile.getFullPath();
 		IPath workspaceRelativeOutputPath = workspaceRelativeInputPath;
-		IClasspathEntry classpathEntry = getClasspathEntry(inputFile);
+		IClasspathEntry[] resolvedClasspath = getClasspathEntries(inputFile.getProject());		
+		IClasspathEntry classpathEntry = resolvedClasspath != null ? getClasspathEntry(inputFile, resolvedClasspath) : null;
 		if (classpathEntry != null) {
 			IPath sourcePath = classpathEntry.getPath();
 			IPath outputPath = classpathEntry.getOutputLocation();
-			workspaceRelativeOutputPath = outputPath.append(workspaceRelativeInputPath.removeFirstSegments(sourcePath.segmentCount()));
+			workspaceRelativeOutputPath = outputPath != null ? outputPath.append(workspaceRelativeInputPath.removeFirstSegments(sourcePath.segmentCount())) : workspaceRelativeInputPath;
 		}
 		if (hasTextExtension(inputFile))
 			workspaceRelativeOutputPath = workspaceRelativeOutputPath.removeFileExtension();
@@ -87,15 +87,16 @@ public abstract class CommonBuilder extends BuilderBase
 		getPlugin().writeInfoMsg("Building " + creationFactory.getLanguageName() + " input file: '" + inputFile.getName() + "', output file: '" + outputFile.getName() + "'");
 		ProblemHandler problemHandler = creationFactory.createProblemHandler(inputFile);
 		try {
-			IParseController parseController = createParseController();
+			CommonParseController parseController = createParseController();
 			parseController.getAnnotationTypeInfo().addProblemMarkerType(getErrorMarkerID());
 			ISourceProject sourceProject = ModelFactory.open(inputFile.getProject());
 			parseController.initialize(projectRelativeInputPath, sourceProject, (IMessageHandler) problemHandler);
 			String contents = BuilderUtils.getFileContents(inputFile);
-			Object ast = parseController.parse(contents, false, monitor);
+			CommonParseController.ParsedResult parsedResult = parseController.parse(contents, false, monitor);
 			URI uri = URI.createPlatformResourceURI(workspaceRelativeOutputPath.toString(), true);
-			Resource resource = ((ASTandCST)ast).getAST();
+			Resource resource = parsedResult.getAST();
 			resource.setURI(uri);
+			parsedResult.getEnvironment().validate(resource);
 			resource.save(null);
 			doRefresh(outputFile.getParent());
 		} catch (Exception e) {
@@ -105,7 +106,7 @@ public abstract class CommonBuilder extends BuilderBase
 		}
 	}
 
-	protected IParseController createParseController() {
+	protected CommonParseController createParseController() {
 		return creationFactory.createParseController();
 	}
 
@@ -126,12 +127,9 @@ public abstract class CommonBuilder extends BuilderBase
 
 	/**
 	 * Return the classpath entry applicable to the file.
-	 * Retuyrns null if none available.
+	 * Returns null if none available.
 	 */
-	protected IClasspathEntry getClasspathEntry(IFile file) {
-		IClasspathEntry[] resolvedClasspath = getClasspathEntries(file.getProject());		
-		if (resolvedClasspath == null)
-			return null;
+	protected IClasspathEntry getClasspathEntry(IFile file, IClasspathEntry[] resolvedClasspath) {
 		IPath workspaceRelativeInputPath = file.getFullPath();
 		for (IClasspathEntry resolvedClasspathEntry : resolvedClasspath) {
 			if (resolvedClasspathEntry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
@@ -234,7 +232,10 @@ public abstract class CommonBuilder extends BuilderBase
 	protected boolean isSourceFile(IFile file) {
 		if (!hasTextExtension(file))
 			return false;
-		if (getClasspathEntry(file) == null)
+		IClasspathEntry[] resolvedClasspath = getClasspathEntries(file.getProject());		
+		if (resolvedClasspath == null)
+			return true;			// No Classpath entries so don't restrict usage 
+		if (getClasspathEntry(file, resolvedClasspath) == null)
 			return false;
 		return true;
 	}
