@@ -91,9 +91,7 @@ public class QVTCoreConsistencyTest extends AbstractEssentialOCLConsistencyTest
 		changeOfSize(differences, helper, QVTCorePackage.Literals.CORE_PATTERN, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES);
 		missingObject(differences, helper, QVTCorePackage.Literals.CORE_PATTERN__VARIABLE);		
 
-		changeOfSize(differences, helper, QVTCorePackage.Literals.MAPPING, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES);
-		missingObject(differences, helper, QVTCorePackage.Literals.MAPPING__REFINEMENT);
-		missingOppositeFeature(differences, helper, QVTCorePackage.Literals.MAPPING__SPECIFICATION);
+		missingOppositeFeatureAndContext(differences, helper, QVTCorePackage.Literals.MAPPING__REFINEMENT);
 
 		changeOfOrdered(differences, helper, QVTCorePackage.Literals.BOTTOM_PATTERN__ASSIGNMENT);
 		changeOfOrdered(differences, helper, QVTCorePackage.Literals.BOTTOM_PATTERN__ENFORCEMENT_OPERATION);
