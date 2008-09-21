@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EMOFPackage.java,v 1.1 2008/07/23 09:55:17 qglineur Exp $
+ * $Id: EMOFPackage.java,v 1.2 2008/09/21 12:30:24 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EMOF;
 
@@ -787,13 +787,22 @@ public interface EMOFPackage extends EPackage {
 	int PACKAGE__NESTED_PACKAGE = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Nesting Package</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__NESTING_PACKAGE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__OWNED_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int PACKAGE__OWNED_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Uri</b></em>' attribute.
@@ -802,7 +811,7 @@ public interface EMOFPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__URI = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int PACKAGE__URI = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Package</em>' class.
@@ -811,7 +820,7 @@ public interface EMOFPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int PACKAGE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.emof.EMOF.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -1598,6 +1607,17 @@ public interface EMOFPackage extends EPackage {
 	EReference getPackage_NestedPackage();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvt.declarative.emof.EMOF.Package#getNestingPackage <em>Nesting Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Nesting Package</em>'.
+	 * @see org.eclipse.qvt.declarative.emof.EMOF.Package#getNestingPackage()
+	 * @see #getPackage()
+	 * @generated
+	 */
+	EReference getPackage_NestingPackage();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvt.declarative.emof.EMOF.Package#getOwnedType <em>Owned Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2210,6 +2230,14 @@ public interface EMOFPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PACKAGE__NESTED_PACKAGE = eINSTANCE.getPackage_NestedPackage();
+
+		/**
+		 * The meta object literal for the '<em><b>Nesting Package</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PACKAGE__NESTING_PACKAGE = eINSTANCE.getPackage_NestingPackage();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Type</b></em>' containment reference list feature.

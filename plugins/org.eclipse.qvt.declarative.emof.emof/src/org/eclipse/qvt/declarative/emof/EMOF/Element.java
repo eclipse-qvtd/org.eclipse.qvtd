@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Element.java,v 1.1 2008/07/23 09:55:18 qglineur Exp $
+ * $Id: Element.java,v 1.2 2008/09/21 12:30:24 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EMOF;
 
@@ -47,7 +47,6 @@ public interface Element extends org.eclipse.qvt.declarative.emof.EMOF.Object {
 	 * @return the value of the '<em>Owned Comment</em>' containment reference list.
 	 * @see org.eclipse.qvt.declarative.emof.EMOF.EMOFPackage#getElement_OwnedComment()
 	 * @model containment="true" ordered="false"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='owningElement'"
 	 * @generated
 	 */
 	EList<Comment> getOwnedComment();

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Class.java,v 1.1 2008/07/23 09:55:18 qglineur Exp $
+ * $Id: Class.java,v 1.2 2008/09/21 12:30:24 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EMOF;
 
@@ -113,7 +113,6 @@ public interface Class extends Type {
 	 * @return the value of the '<em>Super Class</em>' reference list.
 	 * @see org.eclipse.qvt.declarative.emof.EMOF.EMOFPackage#getClass_SuperClass()
 	 * @model ordered="false"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='derivedClass'"
 	 * @generated
 	 */
 	EList<Class> getSuperClass();

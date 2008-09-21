@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Property.java,v 1.1 2008/07/23 09:55:18 qglineur Exp $
+ * $Id: Property.java,v 1.2 2008/09/21 12:30:24 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EMOF;
 
@@ -212,7 +212,7 @@ public interface Property extends TypedElement, MultiplicityElement {
 	 * @return the value of the '<em>Opposite</em>' reference.
 	 * @see #setOpposite(Property)
 	 * @see org.eclipse.qvt.declarative.emof.EMOF.EMOFPackage#getProperty_Opposite()
-	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='invOpposite'"
+	 * @model
 	 * @generated
 	 */
 	Property getOpposite();

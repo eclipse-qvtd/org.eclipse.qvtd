@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EMOFPackageImpl.java,v 1.1 2008/07/23 09:55:19 qglineur Exp $
+ * $Id: EMOFPackageImpl.java,v 1.2 2008/09/21 12:30:24 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EMOF.impl;
 
@@ -615,7 +615,7 @@ public class EMOFPackageImpl extends EPackageImpl implements EMOFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPackage_OwnedType() {
+	public EReference getPackage_NestingPackage() {
 		return (EReference)packageEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -624,8 +624,17 @@ public class EMOFPackageImpl extends EPackageImpl implements EMOFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getPackage_OwnedType() {
+		return (EReference)packageEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getPackage_Uri() {
-		return (EAttribute)packageEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)packageEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -943,6 +952,7 @@ public class EMOFPackageImpl extends EPackageImpl implements EMOFPackage {
 
 		packageEClass = createEClass(PACKAGE);
 		createEReference(packageEClass, PACKAGE__NESTED_PACKAGE);
+		createEReference(packageEClass, PACKAGE__NESTING_PACKAGE);
 		createEReference(packageEClass, PACKAGE__OWNED_TYPE);
 		createEAttribute(packageEClass, PACKAGE__URI);
 
@@ -1116,7 +1126,8 @@ public class EMOFPackageImpl extends EPackageImpl implements EMOFPackage {
 		initEReference(getOperation_RaisedException(), this.getType(), null, "raisedException", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(packageEClass, org.eclipse.qvt.declarative.emof.EMOF.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPackage_NestedPackage(), this.getPackage(), null, "nestedPackage", null, 0, -1, org.eclipse.qvt.declarative.emof.EMOF.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getPackage_NestedPackage(), this.getPackage(), this.getPackage_NestingPackage(), "nestedPackage", null, 0, -1, org.eclipse.qvt.declarative.emof.EMOF.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getPackage_NestingPackage(), this.getPackage(), this.getPackage_NestedPackage(), "nestingPackage", null, 0, 1, org.eclipse.qvt.declarative.emof.EMOF.Package.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPackage_OwnedType(), this.getType(), this.getType_Package(), "ownedType", null, 0, -1, org.eclipse.qvt.declarative.emof.EMOF.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getPackage_Uri(), this.getString(), "uri", null, 0, 1, org.eclipse.qvt.declarative.emof.EMOF.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1198,44 +1209,6 @@ public class EMOFPackageImpl extends EPackageImpl implements EMOFPackage {
 
 		// Create resource
 		createResource(eNS_URI);
-
-		// Create annotations
-		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
-		createEmofAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";		
-		addAnnotation
-		  (getClass_SuperClass(), 
-		   source, 
-		   new String[] {
-			 "body", "derivedClass"
-		   });			
-		addAnnotation
-		  (getElement_OwnedComment(), 
-		   source, 
-		   new String[] {
-			 "body", "owningElement"
-		   });		
-		addAnnotation
-		  (getPackage_NestedPackage(), 
-		   source, 
-		   new String[] {
-			 "body", "nestingPackage"
-		   });		
-		addAnnotation
-		  (getProperty_Opposite(), 
-		   source, 
-		   new String[] {
-			 "body", "invOpposite"
-		   });
 	}
 
 } //EMOFPackageImpl
