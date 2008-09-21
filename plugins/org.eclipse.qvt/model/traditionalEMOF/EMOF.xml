@@ -23,11 +23,7 @@
       </xmi:Extension>
     </ownedAttribute>
     <ownedAttribute xmi:id="EMOF.Class.superClass" name="superClass" lower="0" upper="*"
-        type="EMOF.Class">
-      <ownedComment body="derivedClass">
-        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
-      </ownedComment>
-    </ownedAttribute>
+        type="EMOF.Class"/>
   </ownedType>
   <ownedType xmi:type="emof:Class" xmi:id="EMOF.Comment" name="Comment" superClass="EMOF.Element">
     <ownedAttribute xmi:id="EMOF.Comment.annotatedElement" name="annotatedElement"
@@ -69,9 +65,6 @@
     </ownedOperation>
     <ownedAttribute xmi:id="EMOF.Element.ownedComment" name="ownedComment" lower="0"
         upper="*" type="EMOF.Comment" isComposite="true">
-      <ownedComment body="owningElement">
-        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
-      </ownedComment>
       <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
         <resolveProxies>false</resolveProxies>
       </xmi:Extension>
@@ -165,11 +158,15 @@
   </ownedType>
   <ownedType xmi:type="emof:Class" xmi:id="EMOF.Package" name="Package" superClass="EMOF.NamedElement">
     <ownedAttribute xmi:id="EMOF.Package.nestedPackage" name="nestedPackage" lower="0"
-        upper="*" type="EMOF.Package" isComposite="true">
-      <ownedComment body="nestingPackage">
-        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
-      </ownedComment>
+        upper="*" type="EMOF.Package" isComposite="true" opposite="EMOF.Package.nestingPackage">
       <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="EMOF.Package.nestingPackage" name="nestingPackage" isOrdered="true"
+        lower="0" type="EMOF.Package" opposite="EMOF.Package.nestedPackage">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
         <resolveProxies>false</resolveProxies>
       </xmi:Extension>
     </ownedAttribute>
@@ -212,11 +209,7 @@
     <ownedAttribute xmi:id="EMOF.Property.isReadOnly" name="isReadOnly" isOrdered="true"
         lower="0" type="EMOF.Boolean" default="false"/>
     <ownedAttribute xmi:id="EMOF.Property.opposite" name="opposite" isOrdered="true"
-        lower="0" type="EMOF.Property">
-      <ownedComment body="invOpposite">
-        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
-      </ownedComment>
-    </ownedAttribute>
+        lower="0" type="EMOF.Property"/>
   </ownedType>
   <ownedType xmi:type="emof:PrimitiveType" xmi:id="EMOF.Real" name="Real">
     <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">

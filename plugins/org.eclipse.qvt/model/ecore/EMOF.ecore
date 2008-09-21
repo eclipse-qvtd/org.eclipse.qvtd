@@ -6,11 +6,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.ownedAttribute" name="ownedAttribute" upperBound="-1" eType="EMOF.Property" containment="true" resolveProxies="false" eOpposite="EMOF.Property.class"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.ownedOperation" name="ownedOperation" upperBound="-1" eType="EMOF.Operation" containment="true" resolveProxies="false" eOpposite="EMOF.Operation.class"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.superClass" name="superClass" ordered="false" upperBound="-1" eType="EMOF.Class">
-      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
-        <details key="body" value="derivedClass"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.superClass" name="superClass" ordered="false" upperBound="-1" eType="EMOF.Class"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Comment" name="Comment" eSuperTypes="EMOF.Element">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Comment.annotatedElement" name="annotatedElement" ordered="false" upperBound="-1" eType="EMOF.NamedElement"/>
@@ -40,11 +36,7 @@
     <eOperations xmi:id="EMOF.Element.unset" name="unset">
       <eParameters xmi:id="EMOF.Element.unset.property" name="property" eType="EMOF.Property"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Element.ownedComment" name="ownedComment" ordered="false" upperBound="-1" eType="EMOF.Comment" containment="true" resolveProxies="false">
-      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
-        <details key="body" value="owningElement"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Element.ownedComment" name="ownedComment" ordered="false" upperBound="-1" eType="EMOF.Comment" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Enumeration" name="Enumeration" eSuperTypes="EMOF.DataType">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Enumeration.ownedLiteral" name="ownedLiteral" upperBound="-1" eType="EMOF.EnumerationLiteral" containment="true" resolveProxies="false" eOpposite="EMOF.EnumerationLiteral.enumeration"/>
@@ -101,11 +93,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Operation.raisedException" name="raisedException" ordered="false" upperBound="-1" eType="EMOF.Type"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Package" name="Package" eSuperTypes="EMOF.NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Package.nestedPackage" name="nestedPackage" ordered="false" upperBound="-1" eType="EMOF.Package" containment="true" resolveProxies="false">
-      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
-        <details key="body" value="nestingPackage"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Package.nestedPackage" name="nestedPackage" ordered="false" upperBound="-1" eType="EMOF.Package" containment="true" resolveProxies="false" eOpposite="EMOF.Package.nestingPackage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Package.nestingPackage" name="nestingPackage" eType="EMOF.Package" transient="true" resolveProxies="false" eOpposite="EMOF.Package.nestedPackage"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Package.ownedType" name="ownedType" ordered="false" upperBound="-1" eType="EMOF.Type" containment="true" resolveProxies="false" eOpposite="EMOF.Type.package"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Package.uri" name="uri">
       <eType xsi:type="ecore:EDataType" href="PrimitiveTypes.ecore#PrimitiveTypes.String"/>
@@ -132,11 +121,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Property.isReadOnly" name="isReadOnly" defaultValueLiteral="false">
       <eType xsi:type="ecore:EDataType" href="PrimitiveTypes.ecore#PrimitiveTypes.Boolean"/>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Property.opposite" name="opposite" eType="EMOF.Property">
-      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
-        <details key="body" value="invOpposite"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Property.opposite" name="opposite" eType="EMOF.Property"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.ReflectiveCollection" name="ReflectiveCollection" eSuperTypes="EMOF.Object">
     <eOperations xmi:id="EMOF.ReflectiveCollection.add" name="add">
