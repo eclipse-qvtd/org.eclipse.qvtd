@@ -25,6 +25,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTTemplate.PropertyTemplateItem" name="PropertyTemplateItem">
     <eSuperTypes href="EMOF.ecore#EMOF.Element"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTTemplate.PropertyTemplateItem.isOpposite" name="isOpposite" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="EMOF.ecore#PrimitiveTypes.Boolean"/>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.PropertyTemplateItem.objContainer" name="objContainer" lowerBound="1" eType="QVTTemplate.ObjectTemplateExp" transient="true" resolveProxies="false" eOpposite="QVTTemplate.ObjectTemplateExp.part"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.PropertyTemplateItem.referredProperty" name="referredProperty" lowerBound="1">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">

@@ -41,6 +41,10 @@
   </ownedType>
   <ownedType xmi:type="emof:Class" xmi:id="QVTTemplate.PropertyTemplateItem" name="PropertyTemplateItem">
     <superClass href="EMOF.xml#EMOF.Element"/>
+    <ownedAttribute xmi:id="QVTTemplate.PropertyTemplateItem.isOpposite" name="isOpposite"
+        isOrdered="true" lower="0" default="false">
+      <type xmi:type="emof:PrimitiveType" href="EMOF.xml#EMOF.Boolean"/>
+    </ownedAttribute>
     <ownedAttribute xmi:id="QVTTemplate.PropertyTemplateItem.objContainer" name="objContainer"
         isOrdered="true" type="QVTTemplate.ObjectTemplateExp" opposite="QVTTemplate.ObjectTemplateExp.part">
       <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
