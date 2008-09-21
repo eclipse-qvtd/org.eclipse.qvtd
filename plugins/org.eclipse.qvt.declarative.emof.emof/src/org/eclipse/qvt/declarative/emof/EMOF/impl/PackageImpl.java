@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.2 2008/09/21 12:30:24 ewillink Exp $
+ * $Id: PackageImpl.java,v 1.3 2008/09/21 12:34:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EMOF.impl;
 
@@ -20,19 +20,13 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.qvt.declarative.emof.EMOF.EMOFPackage;
 import org.eclipse.qvt.declarative.emof.EMOF.Type;
 
