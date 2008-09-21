@@ -23,11 +23,7 @@
         </xmi:Extension>
       </ownedAttribute>
       <ownedAttribute xmi:id="EMOF.Class.superClass" name="superClass" lower="0" upper="*"
-          type="EMOF.Class">
-        <ownedComment body="derivedClass">
-          <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
-        </ownedComment>
-      </ownedAttribute>
+          type="EMOF.Class"/>
     </ownedType>
     <ownedType xmi:type="emof:Class" xmi:id="EMOF.Comment" name="Comment" superClass="EMOF.Element">
       <ownedAttribute xmi:id="EMOF.Comment.annotatedElement" name="annotatedElement"
@@ -69,9 +65,6 @@
       </ownedOperation>
       <ownedAttribute xmi:id="EMOF.Element.ownedComment" name="ownedComment" lower="0"
           upper="*" type="EMOF.Comment" isComposite="true">
-        <ownedComment body="owningElement">
-          <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
-        </ownedComment>
         <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
           <resolveProxies>false</resolveProxies>
         </xmi:Extension>
@@ -167,11 +160,15 @@
     </ownedType>
     <ownedType xmi:type="emof:Class" xmi:id="EMOF.Package" name="Package" superClass="EMOF.NamedElement">
       <ownedAttribute xmi:id="EMOF.Package.nestedPackage" name="nestedPackage" lower="0"
-          upper="*" type="EMOF.Package" isComposite="true">
-        <ownedComment body="nestingPackage">
-          <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
-        </ownedComment>
+          upper="*" type="EMOF.Package" isComposite="true" opposite="EMOF.Package.nestingPackage">
         <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <resolveProxies>false</resolveProxies>
+        </xmi:Extension>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="EMOF.Package.nestingPackage" name="nestingPackage" isOrdered="true"
+          lower="0" type="EMOF.Package" opposite="EMOF.Package.nestedPackage">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <transient>true</transient>
           <resolveProxies>false</resolveProxies>
         </xmi:Extension>
       </ownedAttribute>
@@ -214,11 +211,7 @@
       <ownedAttribute xmi:id="EMOF.Property.isReadOnly" name="isReadOnly" isOrdered="true"
           lower="0" type="EMOF.Boolean" default="false"/>
       <ownedAttribute xmi:id="EMOF.Property.opposite" name="opposite" isOrdered="true"
-          lower="0" type="EMOF.Property">
-        <ownedComment body="invOpposite">
-          <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
-        </ownedComment>
-      </ownedAttribute>
+          lower="0" type="EMOF.Property"/>
     </ownedType>
     <ownedType xmi:type="emof:PrimitiveType" xmi:id="EMOF.Real" name="Real">
       <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
@@ -1442,6 +1435,8 @@
     </ownedType>
     <ownedType xmi:type="emof:Class" xmi:id="QVTTemplate.PropertyTemplateItem" name="PropertyTemplateItem"
         superClass="EMOF.Element">
+      <ownedAttribute xmi:id="QVTTemplate.PropertyTemplateItem.isOpposite" name="isOpposite"
+          isOrdered="true" lower="0" type="EMOF.Boolean" default="false"/>
       <ownedAttribute xmi:id="QVTTemplate.PropertyTemplateItem.objContainer" name="objContainer"
           isOrdered="true" type="QVTTemplate.ObjectTemplateExp" opposite="QVTTemplate.ObjectTemplateExp.part">
         <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
@@ -1496,7 +1491,14 @@
     <ownedType xmi:type="emof:Class" xmi:id="QVTRelation.Key" name="Key" superClass="EMOF.Element">
       <ownedAttribute xmi:id="QVTRelation.Key.identifies" name="identifies" isOrdered="true"
           type="EMOF.Class"/>
-      <ownedAttribute xmi:id="QVTRelation.Key.part" name="part" upper="*" type="EMOF.Property"/>
+      <ownedAttribute xmi:id="QVTRelation.Key.oppositePart" name="oppositePart" lower="0"
+          upper="*" type="EMOF.Property">
+        <ownedComment body="oppositeKey">
+          <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+        </ownedComment>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="QVTRelation.Key.part" name="part" lower="0" upper="*"
+          type="EMOF.Property"/>
       <ownedAttribute xmi:id="QVTRelation.Key.transformation" name="transformation"
           isOrdered="true" lower="0" type="QVTRelation.RelationalTransformation" opposite="QVTRelation.RelationalTransformation.ownedKey">
         <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
@@ -1505,6 +1507,8 @@
         </xmi:Extension>
       </ownedAttribute>
     </ownedType>
+    <ownedType xmi:type="emof:Class" xmi:id="QVTRelation.OppositePropertyCallExp"
+        name="OppositePropertyCallExp" superClass="EssentialOCL.PropertyCallExp"/>
     <ownedType xmi:type="emof:Class" xmi:id="QVTRelation.Relation" name="Relation"
         superClass="QVTBase.Rule">
       <ownedAttribute xmi:id="QVTRelation.Relation.isTopLevel" name="isTopLevel" isOrdered="true"
