@@ -11,10 +11,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Key.identifies" name="identifies" lowerBound="1">
       <eType xsi:type="ecore:EClass" href="EMOF.ecore#EMOF.Class"/>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Key.part" name="part" ordered="false" lowerBound="1" upperBound="-1">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Key.oppositePart" name="oppositePart" ordered="false" upperBound="-1">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="oppositeKey"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EClass" href="EMOF.ecore#EMOF.Property"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Key.part" name="part" ordered="false" upperBound="-1">
       <eType xsi:type="ecore:EClass" href="EMOF.ecore#EMOF.Property"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Key.transformation" name="transformation" eType="QVTRelation.RelationalTransformation" transient="true" resolveProxies="false" eOpposite="QVTRelation.RelationalTransformation.ownedKey"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.OppositePropertyCallExp" name="OppositePropertyCallExp">
+    <eSuperTypes href="EssentialOCL.ecore#EssentialOCL.PropertyCallExp"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.Relation" name="Relation">
     <eSuperTypes href="QVTBase.ecore#QVTBase.Rule"/>

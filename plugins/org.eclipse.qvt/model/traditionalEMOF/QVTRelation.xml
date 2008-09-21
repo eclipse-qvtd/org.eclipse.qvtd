@@ -17,7 +17,14 @@
     <ownedAttribute xmi:id="QVTRelation.Key.identifies" name="identifies" isOrdered="true">
       <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Class"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="QVTRelation.Key.part" name="part" upper="*">
+    <ownedAttribute xmi:id="QVTRelation.Key.oppositePart" name="oppositePart" lower="0"
+        upper="*">
+      <ownedComment body="oppositeKey">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Property"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="QVTRelation.Key.part" name="part" lower="0" upper="*">
       <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Property"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="QVTRelation.Key.transformation" name="transformation"
@@ -27,6 +34,9 @@
         <resolveProxies>false</resolveProxies>
       </xmi:Extension>
     </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="QVTRelation.OppositePropertyCallExp" name="OppositePropertyCallExp">
+    <superClass href="EssentialOCL.xml#EssentialOCL.PropertyCallExp"/>
   </ownedType>
   <ownedType xmi:type="emof:Class" xmi:id="QVTRelation.Relation" name="Relation">
     <superClass href="QVTBase.xml#QVTBase.Rule"/>
