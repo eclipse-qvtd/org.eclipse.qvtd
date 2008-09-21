@@ -683,9 +683,14 @@ public abstract class AbstractConsistencyTest extends AbstractTestCase
 		helper.println(s.toString());
 	}
 	
-	protected static void extraOpposite(Set<EcoreDifference> differences, EquivalenceHelper helper, EStructuralFeature object) {
-		differences.add(new EcoreDifference(helper, object, EcorePackage.Literals.EMODEL_ELEMENT__EANNOTATIONS, object.getEAnnotations(), null, "Different sizes"));
-		extraOppositeAnnotation(differences, helper, object);
+//	protected static void extraOpposite(Set<EcoreDifference> differences, EquivalenceHelper helper, EStructuralFeature object) {
+//		differences.add(new EcoreDifference(helper, object, EcorePackage.Literals.EMODEL_ELEMENT__EANNOTATIONS, object.getEAnnotations(), null, "Different sizes"));
+//		extraOppositeAnnotation(differences, helper, object);
+//	}
+
+	protected void extraOpposite(Set<EcoreDifference> differences, EquivalenceHelper helper, EModelElement leftObject, EStructuralFeature rightObject) {
+		differences.add(new EcoreDifference(helper, leftObject, EcorePackage.Literals.EMODEL_ELEMENT__EANNOTATIONS, leftObject.getEAnnotations(), rightObject.getEAnnotations(), "Different sizes"));
+		extraOppositeAnnotation(differences, helper, rightObject);
 	}
 	
 	protected static void extraOppositeAnnotation(Set<EcoreDifference> differences, EquivalenceHelper helper, EStructuralFeature object) {
@@ -958,6 +963,12 @@ public abstract class AbstractConsistencyTest extends AbstractTestCase
 		s.append(" should be the 'opposite' of ");
 		s.append(MappingUtils.formatClassAndFeatureName(ref));
 		helper.println(s.toString());
+	}
+
+	protected static void missingOppositeFeatureAndContext(Set<EcoreDifference> differences, EquivalenceHelper helper, EReference ref) {
+		changeOfSize(differences, helper, ref.eContainer(), EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES);
+		missingObject(differences, helper, ref);
+		missingOppositeFeature(differences, helper, ref.getEOpposite());
 	}
 
 	protected static void missingPrefix(Set<EcoreDifference> differences, EquivalenceHelper helper, EPackage object) {
