@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TransformationImpl.java,v 1.1 2008/07/23 09:57:28 qglineur Exp $
+ * $Id: TransformationImpl.java,v 1.2 2008/09/21 12:30:16 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTBase.impl;
 
@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.qvt.declarative.emof.EMOF.EMOFPackage;
@@ -51,6 +52,7 @@ import org.eclipse.qvt.declarative.emof.QVTBase.TypedModel;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTBase.impl.TransformationImpl#getNestedPackage <em>Nested Package</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.emof.QVTBase.impl.TransformationImpl#getNestingPackage <em>Nesting Package</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTBase.impl.TransformationImpl#getOwnedType <em>Owned Type</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTBase.impl.TransformationImpl#getUri <em>Uri</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.QVTBase.impl.TransformationImpl#getExtends <em>Extends</em>}</li>
@@ -169,9 +171,50 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 */
 	public EList<org.eclipse.qvt.declarative.emof.EMOF.Package> getNestedPackage() {
 		if (nestedPackage == null) {
-			nestedPackage = new EObjectContainmentEList<org.eclipse.qvt.declarative.emof.EMOF.Package>(org.eclipse.qvt.declarative.emof.EMOF.Package.class, this, QVTBasePackage.TRANSFORMATION__NESTED_PACKAGE);
+			nestedPackage = new EObjectContainmentWithInverseEList<org.eclipse.qvt.declarative.emof.EMOF.Package>(org.eclipse.qvt.declarative.emof.EMOF.Package.class, this, QVTBasePackage.TRANSFORMATION__NESTED_PACKAGE, EMOFPackage.PACKAGE__NESTING_PACKAGE);
 		}
 		return nestedPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public org.eclipse.qvt.declarative.emof.EMOF.Package getNestingPackage() {
+		if (eContainerFeatureID != QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE) return null;
+		return (org.eclipse.qvt.declarative.emof.EMOF.Package)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetNestingPackage(org.eclipse.qvt.declarative.emof.EMOF.Package newNestingPackage, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newNestingPackage, QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNestingPackage(org.eclipse.qvt.declarative.emof.EMOF.Package newNestingPackage) {
+		if (newNestingPackage != eInternalContainer() || (eContainerFeatureID != QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE && newNestingPackage != null)) {
+			if (EcoreUtil.isAncestor(this, newNestingPackage))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newNestingPackage != null)
+				msgs = ((InternalEObject)newNestingPackage).eInverseAdd(this, EMOFPackage.PACKAGE__NESTED_PACKAGE, org.eclipse.qvt.declarative.emof.EMOF.Package.class, msgs);
+			msgs = basicSetNestingPackage(newNestingPackage, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE, newNestingPackage, newNestingPackage));
 	}
 
 	/**
@@ -290,6 +333,12 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTBasePackage.TRANSFORMATION__NESTED_PACKAGE:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getNestedPackage()).basicAdd(otherEnd, msgs);
+			case QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetNestingPackage((org.eclipse.qvt.declarative.emof.EMOF.Package)otherEnd, msgs);
 			case QVTBasePackage.TRANSFORMATION__OWNED_TYPE:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedType()).basicAdd(otherEnd, msgs);
 			case QVTBasePackage.TRANSFORMATION__MODEL_PARAMETER:
@@ -310,6 +359,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		switch (featureID) {
 			case QVTBasePackage.TRANSFORMATION__NESTED_PACKAGE:
 				return ((InternalEList<?>)getNestedPackage()).basicRemove(otherEnd, msgs);
+			case QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE:
+				return basicSetNestingPackage(null, msgs);
 			case QVTBasePackage.TRANSFORMATION__OWNED_TYPE:
 				return ((InternalEList<?>)getOwnedType()).basicRemove(otherEnd, msgs);
 			case QVTBasePackage.TRANSFORMATION__MODEL_PARAMETER:
@@ -328,10 +379,26 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE:
+				return eInternalContainer().eInverseRemove(this, EMOFPackage.PACKAGE__NESTED_PACKAGE, org.eclipse.qvt.declarative.emof.EMOF.Package.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTBasePackage.TRANSFORMATION__NESTED_PACKAGE:
 				return getNestedPackage();
+			case QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE:
+				return getNestingPackage();
 			case QVTBasePackage.TRANSFORMATION__OWNED_TYPE:
 				return getOwnedType();
 			case QVTBasePackage.TRANSFORMATION__URI:
@@ -361,6 +428,9 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			case QVTBasePackage.TRANSFORMATION__NESTED_PACKAGE:
 				getNestedPackage().clear();
 				getNestedPackage().addAll((Collection<? extends org.eclipse.qvt.declarative.emof.EMOF.Package>)newValue);
+				return;
+			case QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE:
+				setNestingPackage((org.eclipse.qvt.declarative.emof.EMOF.Package)newValue);
 				return;
 			case QVTBasePackage.TRANSFORMATION__OWNED_TYPE:
 				getOwnedType().clear();
@@ -399,6 +469,9 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			case QVTBasePackage.TRANSFORMATION__NESTED_PACKAGE:
 				getNestedPackage().clear();
 				return;
+			case QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE:
+				setNestingPackage((org.eclipse.qvt.declarative.emof.EMOF.Package)null);
+				return;
 			case QVTBasePackage.TRANSFORMATION__OWNED_TYPE:
 				getOwnedType().clear();
 				return;
@@ -431,6 +504,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		switch (featureID) {
 			case QVTBasePackage.TRANSFORMATION__NESTED_PACKAGE:
 				return nestedPackage != null && !nestedPackage.isEmpty();
+			case QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE:
+				return getNestingPackage() != null;
 			case QVTBasePackage.TRANSFORMATION__OWNED_TYPE:
 				return ownedType != null && !ownedType.isEmpty();
 			case QVTBasePackage.TRANSFORMATION__URI:
@@ -457,6 +532,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		if (baseClass == org.eclipse.qvt.declarative.emof.EMOF.Package.class) {
 			switch (derivedFeatureID) {
 				case QVTBasePackage.TRANSFORMATION__NESTED_PACKAGE: return EMOFPackage.PACKAGE__NESTED_PACKAGE;
+				case QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE: return EMOFPackage.PACKAGE__NESTING_PACKAGE;
 				case QVTBasePackage.TRANSFORMATION__OWNED_TYPE: return EMOFPackage.PACKAGE__OWNED_TYPE;
 				case QVTBasePackage.TRANSFORMATION__URI: return EMOFPackage.PACKAGE__URI;
 				default: return -1;
@@ -475,6 +551,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		if (baseClass == org.eclipse.qvt.declarative.emof.EMOF.Package.class) {
 			switch (baseFeatureID) {
 				case EMOFPackage.PACKAGE__NESTED_PACKAGE: return QVTBasePackage.TRANSFORMATION__NESTED_PACKAGE;
+				case EMOFPackage.PACKAGE__NESTING_PACKAGE: return QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE;
 				case EMOFPackage.PACKAGE__OWNED_TYPE: return QVTBasePackage.TRANSFORMATION__OWNED_TYPE;
 				case EMOFPackage.PACKAGE__URI: return QVTBasePackage.TRANSFORMATION__URI;
 				default: return -1;

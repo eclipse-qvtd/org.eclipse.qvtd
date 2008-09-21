@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTBasePackage.java,v 1.1 2008/07/23 09:57:28 qglineur Exp $
+ * $Id: QVTBasePackage.java,v 1.2 2008/09/21 12:30:16 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTBase;
 
@@ -629,13 +629,22 @@ public interface QVTBasePackage extends EPackage {
 	int TRANSFORMATION__NESTED_PACKAGE = EMOFPackage.CLASS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Nesting Package</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION__NESTING_PACKAGE = EMOFPackage.CLASS_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__OWNED_TYPE = EMOFPackage.CLASS_FEATURE_COUNT + 1;
+	int TRANSFORMATION__OWNED_TYPE = EMOFPackage.CLASS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Uri</b></em>' attribute.
@@ -644,7 +653,7 @@ public interface QVTBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__URI = EMOFPackage.CLASS_FEATURE_COUNT + 2;
+	int TRANSFORMATION__URI = EMOFPackage.CLASS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Extends</b></em>' reference.
@@ -653,7 +662,7 @@ public interface QVTBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__EXTENDS = EMOFPackage.CLASS_FEATURE_COUNT + 3;
+	int TRANSFORMATION__EXTENDS = EMOFPackage.CLASS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Model Parameter</b></em>' containment reference list.
@@ -662,7 +671,7 @@ public interface QVTBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__MODEL_PARAMETER = EMOFPackage.CLASS_FEATURE_COUNT + 4;
+	int TRANSFORMATION__MODEL_PARAMETER = EMOFPackage.CLASS_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
@@ -671,7 +680,7 @@ public interface QVTBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__OWNED_TAG = EMOFPackage.CLASS_FEATURE_COUNT + 5;
+	int TRANSFORMATION__OWNED_TAG = EMOFPackage.CLASS_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Rule</b></em>' containment reference list.
@@ -680,7 +689,7 @@ public interface QVTBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__RULE = EMOFPackage.CLASS_FEATURE_COUNT + 6;
+	int TRANSFORMATION__RULE = EMOFPackage.CLASS_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Transformation</em>' class.
@@ -689,7 +698,7 @@ public interface QVTBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_FEATURE_COUNT = EMOFPackage.CLASS_FEATURE_COUNT + 7;
+	int TRANSFORMATION_FEATURE_COUNT = EMOFPackage.CLASS_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.emof.QVTBase.impl.TypedModelImpl <em>Typed Model</em>}' class.
