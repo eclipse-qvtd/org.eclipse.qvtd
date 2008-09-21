@@ -169,11 +169,9 @@ public class EMOFConsistencyTest extends AbstractEMOFConsistencyTest
 		missingOperation(differences, helper, getOperation(EMOFPackage.Literals.URI_EXTENT, "contextURI"));
 		missingOperation(differences, helper, getOperation(EMOFPackage.Literals.URI_EXTENT, "element"));
 		missingOperation(differences, helper, getOperation(EMOFPackage.Literals.URI_EXTENT, "uri"));
+
+		missingOppositeFeatureAndContext(differences, helper, EMOFPackage.Literals.PACKAGE__NESTING_PACKAGE);
 		
-		missingOpposite(differences, helper, EMOFPackage.Literals.CLASS__SUPER_CLASS);
-		missingOpposite(differences, helper, EMOFPackage.Literals.ELEMENT__OWNED_COMMENT);
-		missingOpposite(differences, helper, EMOFPackage.Literals.PACKAGE__NESTED_PACKAGE);
-		missingOpposite(differences, helper, EMOFPackage.Literals.PROPERTY__OPPOSITE);
 		helper.setLogStream(null);
 		
 		return differences;
@@ -287,17 +285,10 @@ public class EMOFConsistencyTest extends AbstractEMOFConsistencyTest
 		missingOperation(differences, helper, getOperation(EMOFPackage.Literals.URI_EXTENT, "contextURI"));
 		missingOperation(differences, helper, getOperation(EMOFPackage.Literals.URI_EXTENT, "element"));
 		missingOperation(differences, helper, getOperation(EMOFPackage.Literals.URI_EXTENT, "uri"));
+
+		missingOppositeFeatureAndContext(differences, helper, EMOFPackage.Literals.PACKAGE__NESTING_PACKAGE);
 		
-		missingOpposite(differences, helper, EMOFPackage.Literals.CLASS__SUPER_CLASS);
-		missingOpposite(differences, helper, EMOFPackage.Literals.ELEMENT__OWNED_COMMENT);
-		missingOpposite(differences, helper, EMOFPackage.Literals.PACKAGE__NESTED_PACKAGE);
-		missingOpposite(differences, helper, EMOFPackage.Literals.PROPERTY__OPPOSITE);
 		helper.setLogStream(null);
-		
-//FIXME**		missingURI(differences, helper, EssentialOCLPackage.eINSTANCE);
-//FIXME**		missingPrefix(differences, helper, EssentialOCLPackage.eINSTANCE);
-//FIXME**		changeOfName(differences, helper, EssentialOCLPackage.eINSTANCE);
-//FIXME**		changeOfSize(differences, helper, EssentialOCLPackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
 
 		missingPrefix(differences, helper, EMOFPackage.eINSTANCE);
 		missingURI(differences, helper, EMOFPackage.eINSTANCE);
@@ -380,8 +371,14 @@ public class EMOFConsistencyTest extends AbstractEMOFConsistencyTest
 		missingOperation(differences, helper, getOperation(EMOFPackage.Literals.URI_EXTENT, "element"));
 		missingOperation(differences, helper, getOperation(EMOFPackage.Literals.URI_EXTENT, "uri"));
 
-		missingOpposite(differences, helper, EMOFPackage.Literals.ELEMENT__OWNED_COMMENT);
-		
+		changeOfSize(differences, helper, EMOFPackage.Literals.PACKAGE, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES);
+		missingObject(differences, helper, EMOFPackage.Literals.PACKAGE__NESTING_PACKAGE);
+		extraOpposite(differences, helper, EMOFPackage.Literals.PACKAGE__NESTED_PACKAGE, getFeature(getClass(rightPackage, "Package"), "nestedPackage"));
+		changeOfFeature(differences, helper, EMOFPackage.Literals.PACKAGE__NESTED_PACKAGE, EcorePackage.Literals.EREFERENCE__EOPPOSITE, helper.getRight(EMOFPackage.Literals.PACKAGE__NESTED_PACKAGE), "Null right feature");
+
+		extraOpposite(differences, helper, EMOFPackage.Literals.CLASS__SUPER_CLASS, getFeature(getClass(rightPackage, "Class"), "superClass"));
+		extraOpposite(differences, helper, EMOFPackage.Literals.PROPERTY__OPPOSITE, getFeature(getClass(rightPackage, "Property"), "opposite"));
+
 		helper.setLogStream(null);		
 		return differences;
 	}
