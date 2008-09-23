@@ -47,7 +47,6 @@ public abstract class Service implements Provider {
 	 * org.eclipse.qvt.declarative.common.framework.service.Provider#provides
 	 * (org.eclipse.qvt.declarative.common.framework.service.Operation)
 	 */
-	@Override
 	public boolean provides(Operation operation) {
 		assert null != operation : "null operation passed to provides(IOperation)"; //$NON-NLS-1$
 
