@@ -36,7 +36,6 @@ public class CompilationService extends Service implements CompilationProvider {
 		return INSTANCE;
 	}
 
-	@Override
 	public List<File> compile(Object abstractSyntaxTree,
 			Map<String, String> parameters, List<File> sourceFolders,
 			File binFolder) throws Exception {

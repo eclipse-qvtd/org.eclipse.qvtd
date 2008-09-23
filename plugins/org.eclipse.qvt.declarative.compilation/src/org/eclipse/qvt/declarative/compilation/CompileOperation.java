@@ -38,7 +38,6 @@ public class CompileOperation implements Operation {
 		this.binFolder = buildFolder;
 	}
 
-	@Override
 	public List<File> execute(Provider provider) throws Exception {
 		List<File> result = null;
 		if (provider instanceof ProviderDescriptor) {
