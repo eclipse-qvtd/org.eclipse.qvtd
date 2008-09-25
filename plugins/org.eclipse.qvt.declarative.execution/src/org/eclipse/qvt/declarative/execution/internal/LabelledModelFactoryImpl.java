@@ -19,7 +19,6 @@ public class LabelledModelFactoryImpl implements LabelledModelFactory {
 
 	}
 
-	@Override
 	public LabelledModel createLabelledMetamodel(String label,
 			String modelAccessor) {
 		LabelledModel result = new LabelledModelImpl(label, modelAccessor,
@@ -27,7 +26,6 @@ public class LabelledModelFactoryImpl implements LabelledModelFactory {
 		return result;
 	}
 
-	@Override
 	public LabelledModel createLabelledModel(String label,
 			String modelAccessor, LabelledModel metamodel) {
 		LabelledModel result = new LabelledModelImpl(label, modelAccessor,

@@ -23,17 +23,14 @@ public class LabelledModelImpl implements LabelledModel {
 		this.name = name;
 	}
 
-	@Override
 	public LabelledModel getMetamodel() {
 		return metamodel;
 	}
 
-	@Override
 	public String getAccessor() {
 		return accessor;
 	}
 
-	@Override
 	public String getName() {
 		return name;
 	}

@@ -19,7 +19,6 @@ public class ExecutionContextFactoryImpl implements ExecutionContextFactory {
 		return INSTANCE;
 	}
 	
-	@Override
 	public ExecutionContext createExecutionContext(
 			List<LabelledModel> sourceModels, LabelledModel directionModel,
 			ExecutionMode mode) {

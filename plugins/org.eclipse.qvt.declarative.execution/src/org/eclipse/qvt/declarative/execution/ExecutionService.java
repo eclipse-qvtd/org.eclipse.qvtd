@@ -42,7 +42,6 @@ public class ExecutionService extends Service implements ExecutionProvider {
 	 * org.eclipse.qvt.declarative.execution.ExecutionProvider#execute(java.
 	 * io.File, org.eclipse.qvt.declarative.execution.ExecutionContext)
 	 */
-	@Override
 	public List<? extends Object> execute(File sourceFile,
 			ExecutionContext parameters) {
 		return execute(new ExecuteOperation(sourceFile, parameters));
