@@ -3,7 +3,7 @@
 <schema targetNamespace="org.eclipse.qvt.declarative.compilation" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.eclipse.qvt.declarative.compilation" id="org.eclipse.qvt.declarative.compilationProvider" name="compilationProvider"/>
+         <meta.schema plugin="org.eclipse.qvt.declarative.compilation" id="compilationProvider" name="Compilation Provider Extension Point"/>
       </appinfo>
       <documentation>
          This extension point allows a plug-in to register a compilation provider to redefine the default compiler or provide a compiler for a particular structured source type.

@@ -19,12 +19,9 @@ public class CompilationService extends Service implements CompilationProvider {
 
 	protected static final CompilationService INSTANCE = new CompilationService();
 
-	static {
-		INSTANCE.registerProviders(Activator.PLUGIN_ID, "compilationProvider"); //$NON-NLS-1$
-	}
-
 	protected CompilationService() {
 		super();
+		registerProviders(Activator.getDefault().getBundle().getSymbolicName(), "compilationProvider"); //$NON-NLS-1$
 	}
 
 	/**
