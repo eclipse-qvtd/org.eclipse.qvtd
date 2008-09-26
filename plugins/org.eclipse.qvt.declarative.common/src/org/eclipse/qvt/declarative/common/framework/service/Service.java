@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
 
 /**
@@ -73,8 +74,9 @@ public abstract class Service implements Provider {
 	 */
 	public final void registerProviders(String namespace,
 			String extensionPointName) {
-		registerProviders(Platform.getExtensionRegistry().getExtensionPoint(
-				namespace, extensionPointName).getConfigurationElements());
+		IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(namespace, extensionPointName);
+		IConfigurationElement[] configurationElements = extensionPoint.getConfigurationElements();
+		registerProviders(configurationElements);
 	}
 
 	/**
