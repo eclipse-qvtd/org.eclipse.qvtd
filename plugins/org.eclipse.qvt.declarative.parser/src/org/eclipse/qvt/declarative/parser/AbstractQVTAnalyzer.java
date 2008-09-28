@@ -11,6 +11,8 @@
 package org.eclipse.qvt.declarative.parser;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import lpg.lpgjavaruntime.Monitor;
@@ -26,6 +28,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
@@ -188,8 +191,17 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTEnvironment> extends Abs
 			return env.tryLookupClassifier(className);
 		} catch (LookupException e) {
 			ERROR(cstNode, "lookupClassifier", env.formatLookupException(e));
-			List<?> matches = e.getAmbiguousMatches();
-			return matches.isEmpty() ? env.getUnresolvedClassifier() : (EClassifier) matches.get(0);
+			@SuppressWarnings("unchecked")
+			List<EClassifier> matches = (List<EClassifier>) e.getAmbiguousMatches();
+			Collections.sort(matches, new Comparator<EClassifier>()	// Establish a deterministic order for predictable unit tests
+			{
+				public int compare(EClassifier o1, EClassifier o2) {
+					String n1 = String.valueOf(EcoreUtil.getURI(o1));
+					String n2 = String.valueOf(EcoreUtil.getURI(o2));
+					return n1.compareTo(n2);
+				}
+			});
+			return matches.isEmpty() ? env.getUnresolvedClassifier() : matches.get(0);
 		}
 	}
 	
