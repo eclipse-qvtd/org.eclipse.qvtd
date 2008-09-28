@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Assignment.java,v 1.1 2008/07/23 09:43:24 qglineur Exp $
+ * $Id: Assignment.java,v 1.2 2008/09/28 11:18:16 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTCore;
 
@@ -104,9 +104,11 @@ public interface Assignment extends EModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Default</em>' attribute.
+	 * @see #isSetIsDefault()
+	 * @see #unsetIsDefault()
 	 * @see #setIsDefault(boolean)
 	 * @see org.eclipse.qvt.declarative.ecore.QVTCore.QVTCorePackage#getAssignment_IsDefault()
-	 * @model
+	 * @model unsettable="true"
 	 * @generated
 	 */
 	boolean isIsDefault();
@@ -116,9 +118,34 @@ public interface Assignment extends EModelElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Default</em>' attribute.
+	 * @see #isSetIsDefault()
+	 * @see #unsetIsDefault()
 	 * @see #isIsDefault()
 	 * @generated
 	 */
 	void setIsDefault(boolean value);
+
+	/**
+	 * Unsets the value of the '{@link org.eclipse.qvt.declarative.ecore.QVTCore.Assignment#isIsDefault <em>Is Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSetIsDefault()
+	 * @see #isIsDefault()
+	 * @see #setIsDefault(boolean)
+	 * @generated
+	 */
+	void unsetIsDefault();
+
+	/**
+	 * Returns whether the value of the '{@link org.eclipse.qvt.declarative.ecore.QVTCore.Assignment#isIsDefault <em>Is Default</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>Is Default</em>' attribute is set.
+	 * @see #unsetIsDefault()
+	 * @see #isIsDefault()
+	 * @see #setIsDefault(boolean)
+	 * @generated
+	 */
+	boolean isSetIsDefault();
 
 } // Assignment

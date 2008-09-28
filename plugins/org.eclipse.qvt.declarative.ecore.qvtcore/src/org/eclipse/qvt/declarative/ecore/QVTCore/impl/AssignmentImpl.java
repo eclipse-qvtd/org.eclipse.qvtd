@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AssignmentImpl.java,v 1.1 2008/07/23 09:43:25 qglineur Exp $
+ * $Id: AssignmentImpl.java,v 1.2 2008/09/28 11:18:16 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTCore.impl;
 
@@ -78,6 +78,15 @@ public abstract class AssignmentImpl extends EModelElementImpl implements Assign
 	 * @ordered
 	 */
 	protected boolean isDefault = IS_DEFAULT_EDEFAULT;
+
+	/**
+	 * This is true if the Is Default attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isDefaultESet;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -199,8 +208,33 @@ public abstract class AssignmentImpl extends EModelElementImpl implements Assign
 	public void setIsDefault(boolean newIsDefault) {
 		boolean oldIsDefault = isDefault;
 		isDefault = newIsDefault;
+		boolean oldIsDefaultESet = isDefaultESet;
+		isDefaultESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTCorePackage.ASSIGNMENT__IS_DEFAULT, oldIsDefault, isDefault));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTCorePackage.ASSIGNMENT__IS_DEFAULT, oldIsDefault, isDefault, !oldIsDefaultESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void unsetIsDefault() {
+		boolean oldIsDefault = isDefault;
+		boolean oldIsDefaultESet = isDefaultESet;
+		isDefault = IS_DEFAULT_EDEFAULT;
+		isDefaultESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, QVTCorePackage.ASSIGNMENT__IS_DEFAULT, oldIsDefault, IS_DEFAULT_EDEFAULT, oldIsDefaultESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSetIsDefault() {
+		return isDefaultESet;
 	}
 
 	/**
@@ -303,7 +337,7 @@ public abstract class AssignmentImpl extends EModelElementImpl implements Assign
 				setValue((OCLExpression)null);
 				return;
 			case QVTCorePackage.ASSIGNMENT__IS_DEFAULT:
-				setIsDefault(IS_DEFAULT_EDEFAULT);
+				unsetIsDefault();
 				return;
 		}
 		super.eUnset(featureID);
@@ -322,7 +356,7 @@ public abstract class AssignmentImpl extends EModelElementImpl implements Assign
 			case QVTCorePackage.ASSIGNMENT__VALUE:
 				return value != null;
 			case QVTCorePackage.ASSIGNMENT__IS_DEFAULT:
-				return isDefault != IS_DEFAULT_EDEFAULT;
+				return isSetIsDefault();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -338,7 +372,7 @@ public abstract class AssignmentImpl extends EModelElementImpl implements Assign
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (isDefault: ");
-		result.append(isDefault);
+		if (isDefaultESet) result.append(isDefault); else result.append("<unset>");
 		result.append(')');
 		return result.toString();
 	}
