@@ -37,6 +37,11 @@ public class QVTBaseConsistencyTest extends AbstractEssentialOCLConsistencyTest
 		changeOfURI(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.eINSTANCE);
 		changeOfObject(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.Literals.TRANSFORMATION__OWNED_TAG, EcorePackage.Literals.ETYPED_ELEMENT__ETYPE);
 		//
+		//	Ecore limitation on EBoolean rather than EBooleanObject
+		//
+		changeOfUnsettable(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.Literals.DOMAIN__IS_CHECKABLE);
+		changeOfUnsettable(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.Literals.DOMAIN__IS_ENFORCEABLE);
+		//
 		//	Ecore added value
 		//
 		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.Literals.TRANSFORMATION);
