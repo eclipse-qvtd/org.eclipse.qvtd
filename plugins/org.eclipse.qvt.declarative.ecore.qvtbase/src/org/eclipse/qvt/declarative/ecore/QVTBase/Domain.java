@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Domain.java,v 1.1 2008/07/23 09:39:07 qglineur Exp $
+ * $Id: Domain.java,v 1.2 2008/09/28 11:18:11 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase;
 
@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.ENamedElement;
  * @generated
  */
 public interface Domain extends ENamedElement {
+
 	/**
 	 * Returns the value of the '<em><b>Is Checkable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -47,9 +48,11 @@ public interface Domain extends ENamedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Checkable</em>' attribute.
+	 * @see #isSetIsCheckable()
+	 * @see #unsetIsCheckable()
 	 * @see #setIsCheckable(boolean)
 	 * @see org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage#getDomain_IsCheckable()
-	 * @model
+	 * @model unsettable="true"
 	 * @generated
 	 */
 	boolean isIsCheckable();
@@ -59,10 +62,35 @@ public interface Domain extends ENamedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Checkable</em>' attribute.
+	 * @see #isSetIsCheckable()
+	 * @see #unsetIsCheckable()
 	 * @see #isIsCheckable()
 	 * @generated
 	 */
 	void setIsCheckable(boolean value);
+
+	/**
+	 * Unsets the value of the '{@link org.eclipse.qvt.declarative.ecore.QVTBase.Domain#isIsCheckable <em>Is Checkable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSetIsCheckable()
+	 * @see #isIsCheckable()
+	 * @see #setIsCheckable(boolean)
+	 * @generated
+	 */
+	void unsetIsCheckable();
+
+	/**
+	 * Returns whether the value of the '{@link org.eclipse.qvt.declarative.ecore.QVTBase.Domain#isIsCheckable <em>Is Checkable</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>Is Checkable</em>' attribute is set.
+	 * @see #unsetIsCheckable()
+	 * @see #isIsCheckable()
+	 * @see #setIsCheckable(boolean)
+	 * @generated
+	 */
+	boolean isSetIsCheckable();
 
 	/**
 	 * Returns the value of the '<em><b>Is Enforceable</b></em>' attribute.
@@ -73,9 +101,11 @@ public interface Domain extends ENamedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Enforceable</em>' attribute.
+	 * @see #isSetIsEnforceable()
+	 * @see #unsetIsEnforceable()
 	 * @see #setIsEnforceable(boolean)
 	 * @see org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage#getDomain_IsEnforceable()
-	 * @model
+	 * @model unsettable="true"
 	 * @generated
 	 */
 	boolean isIsEnforceable();
@@ -85,10 +115,35 @@ public interface Domain extends ENamedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Enforceable</em>' attribute.
+	 * @see #isSetIsEnforceable()
+	 * @see #unsetIsEnforceable()
 	 * @see #isIsEnforceable()
 	 * @generated
 	 */
 	void setIsEnforceable(boolean value);
+
+	/**
+	 * Unsets the value of the '{@link org.eclipse.qvt.declarative.ecore.QVTBase.Domain#isIsEnforceable <em>Is Enforceable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSetIsEnforceable()
+	 * @see #isIsEnforceable()
+	 * @see #setIsEnforceable(boolean)
+	 * @generated
+	 */
+	void unsetIsEnforceable();
+
+	/**
+	 * Returns whether the value of the '{@link org.eclipse.qvt.declarative.ecore.QVTBase.Domain#isIsEnforceable <em>Is Enforceable</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>Is Enforceable</em>' attribute is set.
+	 * @see #unsetIsEnforceable()
+	 * @see #isIsEnforceable()
+	 * @see #setIsEnforceable(boolean)
+	 * @generated
+	 */
+	boolean isSetIsEnforceable();
 
 	/**
 	 * Returns the value of the '<em><b>Rule</b></em>' container reference.
