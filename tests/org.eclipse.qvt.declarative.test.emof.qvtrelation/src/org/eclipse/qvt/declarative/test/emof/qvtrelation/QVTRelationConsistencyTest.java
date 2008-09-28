@@ -40,6 +40,10 @@ public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyT
 		changeOfURI(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.eINSTANCE);
 		changeOfPrefix(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.eINSTANCE);
 		//
+		//	Ecore limitation on EBoolean rather than EBooleanObject
+		//
+		changeOfUnsettable(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATION__IS_TOP_LEVEL);
+		//
 		//	Ecore added value
 		//
 		changeOfObject(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.KEY__OPPOSITE_PART, EcorePackage.Literals.ETYPED_ELEMENT__ETYPE);	
