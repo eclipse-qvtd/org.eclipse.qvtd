@@ -14,3 +14,12 @@ org.eclipse.qvt.declarative.editor.ui/visitor/trace=false
 
 # Generate a diagnostic for each visit result
 org.eclipse.qvt.declarative.editor.ui/visitor/selection=false
+
+# Generate a diagnostic for each applicable operation history
+org.eclipse.qvt.declarative.editor.ui/operation/show/applicable=false
+
+# Generate a diagnostic for each inapplicable operation history
+org.eclipse.qvt.declarative.editor.ui/operation/show/inapplicable=false
+
+# Generate a diagnostic for each dirty change
+org.eclipse.qvt.declarative.editor.ui/operation/show/dirty=false

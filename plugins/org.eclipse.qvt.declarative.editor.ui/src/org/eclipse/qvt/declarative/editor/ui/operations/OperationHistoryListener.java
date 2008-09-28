@@ -18,6 +18,7 @@ import org.eclipse.core.commands.operations.ObjectUndoContext;
 import org.eclipse.core.commands.operations.OperationHistoryEvent;
 import org.eclipse.qvt.declarative.ecore.utils.TracingOption;
 import org.eclipse.qvt.declarative.editor.ui.IUndoableOperationHelper;
+import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.ui.paged.PagedEditor;
 
 /**
@@ -27,8 +28,9 @@ import org.eclipse.qvt.declarative.editor.ui.paged.PagedEditor;
  */
 public abstract class OperationHistoryListener implements IOperationHistoryListener
 {		
-	public static TracingOption showApplicableOperation = new TracingOption("operation/show/applicable");
-	public static TracingOption showInapplicableOperation = new TracingOption("operation/show/inapplicable");
+	public static TracingOption showApplicableOperation = new TracingOption(QVTEditorPlugin.PLUGIN_ID, "operation/show/applicable");
+	public static TracingOption showInapplicableOperation = new TracingOption(QVTEditorPlugin.PLUGIN_ID, "operation/show/inapplicable");
+	public static TracingOption showDirty = new TracingOption(QVTEditorPlugin.PLUGIN_ID, "operation/show/dirty");
 
 	public static String getEventTypeString(OperationHistoryEvent event) {
 		switch (event.getEventType()) {
@@ -172,6 +174,8 @@ public abstract class OperationHistoryListener implements IOperationHistoryListe
 	}
 	
 	protected void resetDirty() {
+		if (isDirty && showDirty.isActive())
+			showDirty.println(pagedEditor.toString() + " resetDirty");
 		isDirty = false;
 		isDirtyPage = false;			// Necessary corrolary
 	}
@@ -185,6 +189,8 @@ public abstract class OperationHistoryListener implements IOperationHistoryListe
 //	}
 	
 	protected void setDirtyPage() {
+		if (!isDirty && showDirty.isActive())
+			showDirty.println(pagedEditor.toString() + " setDirty");
 		isDirty = true;					// Necessary corrolary
 		isDirtyPage = true;
 	}
