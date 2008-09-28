@@ -42,6 +42,10 @@ public class QVTCoreConsistencyTest extends AbstractEssentialOCLConsistencyTest
 		//
 		changeOfInterface(differences, helper, org.eclipse.qvt.declarative.ecore.QVTCore.QVTCorePackage.Literals.AREA);
 		//
+		//	Ecore limitation on EBoolean rather than EBooleanObject
+		//
+		changeOfUnsettable(differences, helper, org.eclipse.qvt.declarative.ecore.QVTCore.QVTCorePackage.Literals.ASSIGNMENT__IS_DEFAULT);
+		//
 		//	Ecore added value
 		//
 		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTCore.QVTCorePackage.Literals.ASSIGNMENT);
