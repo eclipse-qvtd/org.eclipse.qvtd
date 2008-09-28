@@ -403,6 +403,10 @@ public abstract class AbstractConsistencyTest extends AbstractTestCase
 		changeOfFeature(differences, helper, object, EcorePackage.Literals.EPACKAGE__NS_URI);
 	}
 
+	protected static void changeOfUnsettable(Set<EcoreDifference> differences, EquivalenceHelper helper, EStructuralFeature leftObject) {
+		changeOfFeature(differences, helper, leftObject, EcorePackage.Literals.ESTRUCTURAL_FEATURE__UNSETTABLE);
+	}
+
 	protected static void changeOfUpper(Set<EcoreDifference> differences, EquivalenceHelper helper, ETypedElement object) {
 		changeOfFeature(differences, helper, object, EcorePackage.Literals.ETYPED_ELEMENT__UPPER_BOUND);
 	}
