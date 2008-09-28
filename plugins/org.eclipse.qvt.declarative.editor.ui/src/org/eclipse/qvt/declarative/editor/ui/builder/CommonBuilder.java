@@ -12,9 +12,14 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.4 2008/09/10 05:32:30 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.5 2008/09/28 12:13:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -45,7 +50,50 @@ import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
  * chooses to "Build" a project.
  */
 public abstract class CommonBuilder extends BuilderBase
-{	
+{
+	/**
+	 * A BuilderListener can be notified at the start and/or end of a build.
+	 * This is mainly intended for test harnesses that need to observe builders.
+	 */
+	public static interface BuilderListener {
+		public void beginBuild(IFile file);
+		public void endBuild(IFile file);
+	}
+	
+	private static Map<String, Map<IFile, List<BuilderListener>>> builderListenerMap = null;
+	
+	public static void addBuilderListener(String builderId, IFile file, BuilderListener listener) {
+		if (builderListenerMap == null)
+			builderListenerMap = new HashMap<String, Map<IFile, List<BuilderListener>>>();
+		Map<IFile, List<BuilderListener>> map = builderListenerMap.get(builderId);
+		if (map == null) {
+			map = new HashMap<IFile, List<BuilderListener>>();
+			builderListenerMap.put(builderId, map);
+		}
+		List<BuilderListener> builderListeners = map.get(file);
+		if (builderListeners == null) {
+			builderListeners = new ArrayList<BuilderListener>();
+			map.put(file, builderListeners);
+		}
+		builderListeners.add(listener);
+	}
+	
+	public static void removeBuilderListener(String builderId, IFile file, BuilderListener listener) {
+		if (builderListenerMap != null) {
+			Map<IFile, List<BuilderListener>> map = builderListenerMap.get(builderId);
+			if (map != null) {
+				List<BuilderListener> builderListeners = map.get(file);
+				if (builderListeners != null) {
+					builderListeners.remove(listener);
+				}
+			}
+		}
+	}
+	
+	public static void reset() {
+		builderListenerMap = null;
+	}
+	
 	protected final ICreationFactory creationFactory;
 
 	protected CommonBuilder(ICreationFactory creationFactory) {
@@ -70,6 +118,15 @@ public abstract class CommonBuilder extends BuilderBase
 	 */
 	@Override
 	protected void compile(final IFile inputFile, IProgressMonitor monitor) {
+		List<BuilderListener> builderListeners = null;
+		if (builderListenerMap != null) {
+			Map<IFile, List<BuilderListener>> map = builderListenerMap.get(creationFactory.getBuilderId());
+			if (map != null)
+				builderListeners = map.get(inputFile);
+		}
+		if (builderListeners != null)
+			for (BuilderListener builderListener : builderListeners)
+				builderListener.beginBuild(inputFile);
 		IPath projectRelativeInputPath = inputFile.getProjectRelativePath();
 		IPath workspaceRelativeInputPath = inputFile.getFullPath();
 		IPath workspaceRelativeOutputPath = workspaceRelativeInputPath;
@@ -102,6 +159,9 @@ public abstract class CommonBuilder extends BuilderBase
 		} catch (Exception e) {
 			getPlugin().logException("Failed to compile '" + inputFile.toString() + "'", e);
 		} finally {
+			if (builderListeners != null)
+				for (BuilderListener builderListener : builderListeners)
+					builderListener.endBuild(inputFile);
 			problemHandler.flush(BasicMonitor.toMonitor(monitor));
 		}
 	}
