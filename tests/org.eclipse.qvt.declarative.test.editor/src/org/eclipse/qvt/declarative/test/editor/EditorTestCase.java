@@ -7,6 +7,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -34,6 +35,12 @@ public abstract class EditorTestCase extends TestCase
 	protected IFile createFile(String fileName, String contents) throws CoreException {
 		IFile file = project.getFile(fileName);
 		InputStream source = new ByteArrayInputStream(contents.getBytes());
+		IContainer container = file.getParent();
+		if (container instanceof IFolder) {
+			IFolder folder = (IFolder)container;
+			if (!folder.exists())
+				folder.create(true, false, null);
+		}
 		file.create(source, true, monitor);
 		files.add(file);
 		return file;
@@ -54,6 +61,8 @@ public abstract class EditorTestCase extends TestCase
 	}
 
 	protected abstract String getEditorId();
+
+	protected abstract String getMultiEditorId();
 	
 	protected String getProjectId() {
 		return getClass().getPackage().getName();
