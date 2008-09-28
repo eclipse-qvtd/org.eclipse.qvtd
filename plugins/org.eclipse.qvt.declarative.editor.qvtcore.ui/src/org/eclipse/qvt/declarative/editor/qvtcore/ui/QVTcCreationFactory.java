@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcCreationFactory.java,v 1.5 2008/09/10 05:30:59 ewillink Exp $
+ * $Id: QVTcCreationFactory.java,v 1.6 2008/09/28 12:17:10 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
@@ -42,6 +42,7 @@ public class QVTcCreationFactory extends AbstractCreationFactory
 	public static QVTcCreationFactory INSTANCE = new QVTcCreationFactory();
 	public static final String BUILDER_ID = QVTcBuilder.class.getName();
 	public static final String EDITOR_ID = QVTcEditor.class.getName();
+	public static final String MULTI_EDITOR_ID = QVTcMultiEditor.class.getName();
 	public static final String NATURE_ID = QVTcNature.class.getName();
 	public static final String PROBLEM_MARKER_ID = QVTcMarkerProblemHandler.class.getPackage().getName() + ".qvtcProblem";
 

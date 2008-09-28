@@ -180,13 +180,13 @@
             icon="icons/QVTcModelFile.gif"
             extensions="qvtc"
             contributorClass="org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditorActionContributor"
-            class="org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditor"/>
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor"/>
       <editor id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcMultiEditor"
             name="QVT Core Multi-View Editor"
             icon="icons/QVTcModelFile.gif"
             extensions="qvtc,qvtcore,eqvtcore"
             contributorClass="org.eclipse.qvt.declarative.editor.ui.actions.PagedActionBarContributor"
-            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor"/>
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcMultiEditor"/>
    </extension>
 
 </plugin>

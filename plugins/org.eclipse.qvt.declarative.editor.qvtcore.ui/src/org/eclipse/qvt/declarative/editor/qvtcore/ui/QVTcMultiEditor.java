@@ -12,15 +12,15 @@
  * 
  * </copyright>
  *
- * $Id: QVTcEditor.java,v 1.3 2008/09/28 12:17:10 ewillink Exp $
+ * $Id: QVTcMultiEditor.java,v 1.1 2008/09/28 12:17:10 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
-import org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditor;
+import org.eclipse.qvt.declarative.editor.ui.paged.PagedEditor;
 
-public class QVTcEditor extends CommonTextEditor
+public class QVTcMultiEditor extends PagedEditor
 {
-	public QVTcEditor() {
-//		super(QVTcCreationFactory.INSTANCE);
+	public QVTcMultiEditor() {
+		super(QVTcCreationFactory.INSTANCE);
 	}
 }
