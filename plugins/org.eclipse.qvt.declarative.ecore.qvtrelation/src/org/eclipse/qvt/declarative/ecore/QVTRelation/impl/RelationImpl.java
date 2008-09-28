@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationImpl.java,v 1.1 2008/07/23 09:46:09 qglineur Exp $
+ * $Id: RelationImpl.java,v 1.2 2008/09/28 11:18:20 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.impl;
 
@@ -81,6 +81,15 @@ public class RelationImpl extends RuleImpl implements Relation {
 	 * @ordered
 	 */
 	protected boolean isTopLevel = IS_TOP_LEVEL_EDEFAULT;
+
+	/**
+	 * This is true if the Is Top Level attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isTopLevelESet;
 
 	/**
 	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' containment reference list.
@@ -158,8 +167,33 @@ public class RelationImpl extends RuleImpl implements Relation {
 	public void setIsTopLevel(boolean newIsTopLevel) {
 		boolean oldIsTopLevel = isTopLevel;
 		isTopLevel = newIsTopLevel;
+		boolean oldIsTopLevelESet = isTopLevelESet;
+		isTopLevelESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTRelationPackage.RELATION__IS_TOP_LEVEL, oldIsTopLevel, isTopLevel));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTRelationPackage.RELATION__IS_TOP_LEVEL, oldIsTopLevel, isTopLevel, !oldIsTopLevelESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void unsetIsTopLevel() {
+		boolean oldIsTopLevel = isTopLevel;
+		boolean oldIsTopLevelESet = isTopLevelESet;
+		isTopLevel = IS_TOP_LEVEL_EDEFAULT;
+		isTopLevelESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, QVTRelationPackage.RELATION__IS_TOP_LEVEL, oldIsTopLevel, IS_TOP_LEVEL_EDEFAULT, oldIsTopLevelESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSetIsTopLevel() {
+		return isTopLevelESet;
 	}
 
 	/**
@@ -378,7 +412,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTRelationPackage.RELATION__IS_TOP_LEVEL:
-				setIsTopLevel(IS_TOP_LEVEL_EDEFAULT);
+				unsetIsTopLevel();
 				return;
 			case QVTRelationPackage.RELATION__VARIABLE:
 				getVariable().clear();
@@ -405,7 +439,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case QVTRelationPackage.RELATION__IS_TOP_LEVEL:
-				return isTopLevel != IS_TOP_LEVEL_EDEFAULT;
+				return isSetIsTopLevel();
 			case QVTRelationPackage.RELATION__VARIABLE:
 				return variable != null && !variable.isEmpty();
 			case QVTRelationPackage.RELATION__OPERATIONAL_IMPL:
@@ -429,7 +463,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (isTopLevel: ");
-		result.append(isTopLevel);
+		if (isTopLevelESet) result.append(isTopLevel); else result.append("<unset>");
 		result.append(')');
 		return result.toString();
 	}

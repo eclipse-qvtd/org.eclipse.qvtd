@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Relation.java,v 1.1 2008/07/23 09:46:09 qglineur Exp $
+ * $Id: Relation.java,v 1.2 2008/09/28 11:18:20 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation;
 
@@ -44,6 +44,7 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.Rule;
  * @generated
  */
 public interface Relation extends Rule {
+
 	/**
 	 * Returns the value of the '<em><b>Is Top Level</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -53,9 +54,11 @@ public interface Relation extends Rule {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Top Level</em>' attribute.
+	 * @see #isSetIsTopLevel()
+	 * @see #unsetIsTopLevel()
 	 * @see #setIsTopLevel(boolean)
 	 * @see org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage#getRelation_IsTopLevel()
-	 * @model
+	 * @model unsettable="true"
 	 * @generated
 	 */
 	boolean isIsTopLevel();
@@ -65,10 +68,35 @@ public interface Relation extends Rule {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Top Level</em>' attribute.
+	 * @see #isSetIsTopLevel()
+	 * @see #unsetIsTopLevel()
 	 * @see #isIsTopLevel()
 	 * @generated
 	 */
 	void setIsTopLevel(boolean value);
+
+	/**
+	 * Unsets the value of the '{@link org.eclipse.qvt.declarative.ecore.QVTRelation.Relation#isIsTopLevel <em>Is Top Level</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSetIsTopLevel()
+	 * @see #isIsTopLevel()
+	 * @see #setIsTopLevel(boolean)
+	 * @generated
+	 */
+	void unsetIsTopLevel();
+
+	/**
+	 * Returns whether the value of the '{@link org.eclipse.qvt.declarative.ecore.QVTRelation.Relation#isIsTopLevel <em>Is Top Level</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>Is Top Level</em>' attribute is set.
+	 * @see #unsetIsTopLevel()
+	 * @see #isIsTopLevel()
+	 * @see #setIsTopLevel(boolean)
+	 * @generated
+	 */
+	boolean isSetIsTopLevel();
 
 	/**
 	 * Returns the value of the '<em><b>Variable</b></em>' containment reference list.

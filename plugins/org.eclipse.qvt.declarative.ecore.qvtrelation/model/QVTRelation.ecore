@@ -27,7 +27,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="OppositePropertyCallExp" eSuperTypes="../../org.eclipse.ocl.ecore/model/OCLEcore.ecore#//ecore/PropertyCallExp"/>
   <eClassifiers xsi:type="ecore:EClass" name="Relation" eSuperTypes="../../org.eclipse.qvt.declarative.ecore.qvtbase/model/QVTBase.ecore#//Rule">
     <eOperations name="getRelationalTransformation" lowerBound="1" eType="#//RelationalTransformation"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTopLevel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTopLevel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        unsettable="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" ordered="false"
         upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.ecore/model/OCLEcore.ecore#//ecore/Variable"
         containment="true"/>
