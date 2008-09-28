@@ -53,13 +53,13 @@
             icon="icons/QVTrModelFile.gif"
             extensions="qvtr,qvt"
             contributorClass="org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditorActionContributor"
-            class="org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditor"/>
+            class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrEditor"/>
       <editor id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrMultiEditor"
             name="QVT Relations Multi-View Editor"
             extensions="qvtr,qvt,qvtrelation,eqvtrelation"
             icon="icons/QVTrModelFile.gif"
             contributorClass="org.eclipse.qvt.declarative.editor.ui.actions.PagedActionBarContributor"
-            class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrEditor"/>
+            class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrMultiEditor"/>
    </extension>
    
    <extension point="org.eclipse.ui.newWizards">
