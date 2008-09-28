@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.7 2008/09/10 05:36:06 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.8 2008/09/28 12:14:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -274,11 +274,11 @@ public abstract class CommonParseController implements IParseController
             final int firstTokIdx= getTokenIndexAtCharacter(offset);
             final int lastTokIdx= getTokenIndexAtCharacter(offset + length - 1);
             int curTokIdx= Math.max(1, firstTokIdx); // skip bogus initial token
-            IToken[] adjuncts;
+            IToken[] adjuncts = null;
             int adjunctIdx= -1;
-
             {
-                loadPrecedingAdjuncts();
+                if (lastTokIdx > firstTokIdx)		// Skip if not yet parsed
+                	loadPrecedingAdjuncts();
             }
 
             private int getTokenIndexAtCharacter(int offset) {
@@ -363,19 +363,20 @@ public abstract class CommonParseController implements IParseController
 		System.out.println(id + " Parse " + fFilePath.toString() + " " + fLanguage + " scanOnly = " + scanOnly + " handler = " + handler.getClass().getName());
 		if (monitor.isCanceled())
 			return fCurrentAst;
+		AbstractFileHandle fileHandle = getFileHandle();
+		IFileEnvironment environment = createEnvironment(fileHandle);
+		environment.getAnalyzer();		// Create parser
+		ProblemHandler problemHandler = createProblemHandler(environment);
+		environment.setProblemHandler(problemHandler);
+		ParsedResult newResult = new ParsedResult(environment);
 		try {
-			AbstractFileHandle fileHandle = getFileHandle();
-			IFileEnvironment environment = createEnvironment(fileHandle);
-			environment.getAnalyzer();		// Create parser
-			ProblemHandler problemHandler = createProblemHandler(environment);
-			environment.setProblemHandler(problemHandler);
-			ParsedResult newResult = new ParsedResult(environment);
 			newResult.parse(contents, monitor);
-			fCurrentAst = newResult;		// Change only when all done.
 		} catch (IOException e) {
             ErrorHandler.reportError("Failed to parse language " + getLanguage().getName() + " and input " + getPath() + ":", e);
 		} catch (CoreException e) {
             ErrorHandler.reportError("Failed to parse language " + getLanguage().getName() + " and input " + getPath() + ":", e);
+		} finally {
+			fCurrentAst = newResult;		// Change only when all done.			
 		}
 		// FIXME my_monitor
 		cacheKeywordsOnce();
