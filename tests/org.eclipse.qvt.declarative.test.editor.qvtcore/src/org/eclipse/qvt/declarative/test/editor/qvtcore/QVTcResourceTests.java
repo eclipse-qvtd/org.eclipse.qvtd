@@ -6,80 +6,21 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.text.AbstractDocument;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcCreationFactory;
-import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor;
+import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcMultiEditor;
 import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
 import org.eclipse.qvt.declarative.editor.ui.text.TextPageManager;
-import org.eclipse.qvt.declarative.test.editor.EditorTestCase;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
+import org.eclipse.qvt.declarative.test.editor.ButtonPress;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 
-public class QVTcResourceTests extends EditorTestCase
+public class QVTcResourceTests extends QVTcEditorTestCase
 {
-	/**
-	 * A ButtonPress may be queued by Display.asyncExec just before
-	 * triggering the activation of a Dialog, so that a button
-	 * with designated label is pressed on the next opportunity.
-	 * The required button must be a sibling of the default dialog button.
-	 */
-	public static final class ButtonPress implements Runnable
-	{
-		private final Display display;
-		private final String buttonLabel;
-
-		private ButtonPress(Display display, String buttonLabel) {
-			this.display = display;
-			this.buttonLabel = buttonLabel;
-		}
-
-		public void run() {
-			Shell[] shells = display.getShells();
-			for (int i = shells.length; --i >= 0; ) {
-				Shell shell = shells[i];
-				Button defaultButton = shell.getDefaultButton();
-				Composite buttonParent = defaultButton.getParent();
-				for (Control buttonSibling : buttonParent.getChildren()) {
-					if (buttonSibling instanceof Button) {
-						Button button = (Button) buttonSibling;
-						if (buttonLabel.equals(button.getText())) {
-							Event e = new Event();
-							e.type = SWT.Selection;
-							e.widget = button;
-							for (Listener listener : button.getListeners(SWT.Selection))
-								listener.handleEvent(e);
-							return;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	private IFile createTestFile() throws CoreException {
-		final String contents = "transformation tx0 {}\n";
-		final String testFileName = getName() + " .qvtc";
-		IFile file = createFile(testFileName, contents);
-		return file;
-	}
-
-	@Override
-	protected String getEditorId() {
-		return QVTcCreationFactory.EDITOR_ID;
-	}
-
 	public void testOpenAndDelete() throws CoreException, ExecutionException, BadLocationException {
-		IFile file = createTestFile();
+		IFile file = createMinimalTestFile();
 		IFileEditorInput editorInput = new FileEditorInput(file);
-		QVTcEditor editor = (QVTcEditor) workbenchPage.openEditor(editorInput, getEditorId());
+		QVTcMultiEditor editor = (QVTcMultiEditor) workbenchPage.openEditor(editorInput, getMultiEditorId());
 		try {
 			assertNotNull("Editor is open", workbenchPage.findEditor(editorInput));
 			file.delete(true, monitor);
@@ -92,9 +33,9 @@ public class QVTcResourceTests extends EditorTestCase
 	}
 
 	public void testOpenAndRename() throws CoreException, ExecutionException, BadLocationException {
-		IFile file = createTestFile();
+		IFile file = createMinimalTestFile();
 		IFileEditorInput editorInput = new FileEditorInput(file);
-		QVTcEditor editor = (QVTcEditor) workbenchPage.openEditor(editorInput, getEditorId());
+		QVTcMultiEditor editor = (QVTcMultiEditor) workbenchPage.openEditor(editorInput, getMultiEditorId());
 		try {
 			assertNotNull("Editor is open", workbenchPage.findEditor(editorInput));
 			file.move(file.getFullPath().addFileExtension(".rename"), true, monitor);
@@ -107,9 +48,9 @@ public class QVTcResourceTests extends EditorTestCase
 	}
 
 	public void testOpenEditAndDeleteAndKeep() throws CoreException, ExecutionException, BadLocationException {
-		IFile file = createTestFile();
+		IFile file = createMinimalTestFile();
 		IFileEditorInput editorInput = new FileEditorInput(file);
-		QVTcEditor editor = (QVTcEditor) workbenchPage.openEditor(editorInput, getEditorId());
+		QVTcMultiEditor editor = (QVTcMultiEditor) workbenchPage.openEditor(editorInput, getMultiEditorId());
 		try {
 			final Display display = editor.getDisplay();
 			TextPageManager textPageManager = (TextPageManager) editor.getActivePageManager();
@@ -145,9 +86,9 @@ public class QVTcResourceTests extends EditorTestCase
 	}
 
 	public void testOpenEditAndDeleteAndLose() throws CoreException, ExecutionException, BadLocationException {
-		IFile file = createTestFile();
+		IFile file = createMinimalTestFile();
 		IFileEditorInput editorInput = new FileEditorInput(file);
-		QVTcEditor editor = (QVTcEditor) workbenchPage.openEditor(editorInput, getEditorId());
+		QVTcMultiEditor editor = (QVTcMultiEditor) workbenchPage.openEditor(editorInput, getMultiEditorId());
 		try {
 			final Display display = editor.getDisplay();
 			TextPageManager textPageManager = (TextPageManager) editor.getActivePageManager();
@@ -190,9 +131,9 @@ public class QVTcResourceTests extends EditorTestCase
 	}
 
 	public void testOpenEditAndRename() throws CoreException, ExecutionException, BadLocationException {
-		IFile file = createTestFile();
+		IFile file = createMinimalTestFile();
 		IFileEditorInput editorInput = new FileEditorInput(file);
-		QVTcEditor editor = (QVTcEditor) workbenchPage.openEditor(editorInput, getEditorId());
+		QVTcMultiEditor editor = (QVTcMultiEditor) workbenchPage.openEditor(editorInput, getMultiEditorId());
 		try {
 			final Display display = editor.getDisplay();
 			TextPageManager textPageManager = (TextPageManager) editor.getActivePageManager();

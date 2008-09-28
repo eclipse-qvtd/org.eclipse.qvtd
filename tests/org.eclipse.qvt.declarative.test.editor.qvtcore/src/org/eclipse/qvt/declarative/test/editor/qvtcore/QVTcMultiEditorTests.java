@@ -12,24 +12,17 @@ import org.eclipse.emf.ecore.xmi.PackageNotFoundException;
 import org.eclipse.jface.text.AbstractDocument;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.qvt.declarative.ecore.adapters.AdapterNotFoundException;
-import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcCreationFactory;
-import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor;
+import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcMultiEditor;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
 import org.eclipse.qvt.declarative.editor.ui.text.TextPageManager;
-import org.eclipse.qvt.declarative.test.editor.EditorTestCase;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 
-public class QVTcEditingTests extends EditorTestCase
+public class QVTcMultiEditorTests extends QVTcEditorTestCase
 {
-	@Override
-	protected String getEditorId() {
-		return QVTcCreationFactory.EDITOR_ID;
-	}
-
 	public void testDoAndUndo() throws CoreException, ExecutionException, BadLocationException {
 		final String contents1 = "trans";
 		final String contents2 = " ";
@@ -39,7 +32,7 @@ public class QVTcEditingTests extends EditorTestCase
 		final String pageTitle = "QVT core Text";
 		IFile file = createFile(testFileName, contents);
 		IFileEditorInput editorInput = new FileEditorInput(file);
-		QVTcEditor editor = (QVTcEditor) workbenchPage.openEditor(editorInput, getEditorId());
+		QVTcMultiEditor editor = (QVTcMultiEditor) workbenchPage.openEditor(editorInput, getMultiEditorId());
 		try {
 			ICreationFactory creationFactory = editor.getCreationFactory();		
 			String markerId = creationFactory.getProblemMarkerId();	
@@ -96,7 +89,7 @@ public class QVTcEditingTests extends EditorTestCase
 		final String pageTitle = "QVT core Text";
 		IFile file = createFile(testFileName, contents);
 		IFileEditorInput editorInput = new FileEditorInput(file);
-		QVTcEditor editor = (QVTcEditor) workbenchPage.openEditor(editorInput, getEditorId());
+		QVTcMultiEditor editor = (QVTcMultiEditor) workbenchPage.openEditor(editorInput, getMultiEditorId());
 		try {
 			ICreationFactory creationFactory = editor.getCreationFactory();		
 			String markerId = creationFactory.getProblemMarkerId();	
@@ -182,7 +175,7 @@ public class QVTcEditingTests extends EditorTestCase
 		final String pageTitle = "QVT core Text";
 		IFile file = createFile(testFileName, contents);
 		IFileEditorInput editorInput = new FileEditorInput(file);
-		QVTcEditor editor = (QVTcEditor) workbenchPage.openEditor(editorInput, getEditorId());
+		QVTcMultiEditor editor = (QVTcMultiEditor) workbenchPage.openEditor(editorInput, getMultiEditorId());
 		try {
 			ICreationFactory creationFactory = editor.getCreationFactory();		
 			String markerId = creationFactory.getProblemMarkerId();	
@@ -253,7 +246,7 @@ public class QVTcEditingTests extends EditorTestCase
 		final String pageTitle = "QVT core Text";
 		IFile file = createFile(testFileName, contents);
 		IFileEditorInput editorInput = new FileEditorInput(file);
-		QVTcEditor editor = (QVTcEditor) workbenchPage.openEditor(editorInput, getEditorId());
+		QVTcMultiEditor editor = (QVTcMultiEditor) workbenchPage.openEditor(editorInput, getMultiEditorId());
 		try {
 			ICreationFactory creationFactory = editor.getCreationFactory();		
 			String markerId = creationFactory.getProblemMarkerId();	
@@ -317,8 +310,8 @@ public class QVTcEditingTests extends EditorTestCase
 		IFile fileB = createFile(testFileNameB, contentsB);
 		IFileEditorInput editorInputA = new FileEditorInput(fileA);
 		IFileEditorInput editorInputB = new FileEditorInput(fileB);
-		QVTcEditor editorA = (QVTcEditor) workbenchPage.openEditor(editorInputA, getEditorId());
-		QVTcEditor editorB = (QVTcEditor) workbenchPage.openEditor(editorInputB, getEditorId());
+		QVTcMultiEditor editorA = (QVTcMultiEditor) workbenchPage.openEditor(editorInputA, getMultiEditorId());
+		QVTcMultiEditor editorB = (QVTcMultiEditor) workbenchPage.openEditor(editorInputB, getMultiEditorId());
 		try {
 			ICreationFactory creationFactory = editorA.getCreationFactory();		
 			String markerId = creationFactory.getProblemMarkerId();	
@@ -472,7 +465,7 @@ public class QVTcEditingTests extends EditorTestCase
 
 	private void checkOpenCloseDiagnostics(IFile file, Class<?>... expectedDiagnostics) throws PartInitException, CoreException {
 		IFileEditorInput editorInput = new FileEditorInput(file);
-		QVTcEditor editor = (QVTcEditor) workbenchPage.openEditor(editorInput, getEditorId());
+		QVTcMultiEditor editor = (QVTcMultiEditor) workbenchPage.openEditor(editorInput, getMultiEditorId());
 		try {
 			ICreationFactory creationFactory = editor.getCreationFactory();		
 			String markerId = creationFactory.getProblemMarkerId();			
