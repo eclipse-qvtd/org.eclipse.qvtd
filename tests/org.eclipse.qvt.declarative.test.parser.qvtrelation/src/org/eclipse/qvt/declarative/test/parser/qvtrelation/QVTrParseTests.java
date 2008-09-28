@@ -97,13 +97,15 @@ public class QVTrParseTests extends AbstractQVTrTestCase
 		expectedProblems.handleProblem(ProblemHandler.Severity.ERROR, ProblemHandler.Phase.ANALYZER,
 				"Ambiguous name 'A' { ScopeB::a::A, ScopeB::b::A }", "lookupClassifier", -1, -1);
 		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
-				new String[] { "ScopeA::b::A"} );
+				new String[] { "ScopeA::a::A"} );
 		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
-				new String[] { "ScopeA::b::A"} );
+				new String[] { "ScopeA::a::A"} );
 		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
-				new String[] { "ScopeA::b::a::A"} );
+				new String[] { "ScopeA::a::a::A"} );
 		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
-				new String[] { "ScopeA::b::a::A"} );
+				new String[] { "ScopeA::a::a::A"} );
+		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
+				new String[] { "ScopeA::a::a::A"} );
 		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
 				new String[] { "ScopeA::a::b::abZ"} );
 		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
