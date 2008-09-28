@@ -12,18 +12,22 @@
  * 
  * </copyright>
  *
- * $Id: UniversalTextEditor.java,v 1.1 2008/08/18 07:46:26 ewillink Exp $
+ * $Id: UniversalTextEditor.java,v 1.2 2008/09/28 12:14:59 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.text;
 
 import org.eclipse.core.commands.operations.IUndoContext;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.imp.editor.UniversalEditor;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewerExtension6;
 import org.eclipse.jface.text.IUndoManager;
 import org.eclipse.jface.text.IUndoManagerExtension;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.qvt.declarative.editor.ui.IPageManager;
 import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
+import org.eclipse.text.undo.DocumentUndoManagerRegistry;
+import org.eclipse.text.undo.IDocumentUndoManager;
 
 public class UniversalTextEditor extends UniversalEditor implements ITextEditorWithUndoContext
 {
@@ -31,6 +35,20 @@ public class UniversalTextEditor extends UniversalEditor implements ITextEditorW
 
 	public UniversalTextEditor(IPageManager editorPageManager) {
 		this.pageManager = editorPageManager;
+	}
+
+	@Override
+	public void doSave(IProgressMonitor progressMonitor) {
+		//
+		//	Bugzilla 224324 part 1. Ensure that partial text operation does not continue across save.
+		//
+		IDocument document = getDocumentProvider().getDocument(getEditorInput());
+		if (document != null) {
+			IDocumentUndoManager documentUndoManager = DocumentUndoManagerRegistry.getDocumentUndoManager(document);
+			if (documentUndoManager != null)
+				documentUndoManager.commit();
+		}
+		super.doSave(progressMonitor);
 	}
 	
 	public IUndoContext getUndoContext() {

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonTextEditor.java,v 1.2 2008/08/26 19:13:17 ewillink Exp $
+ * $Id: CommonTextEditor.java,v 1.3 2008/09/28 12:14:59 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -21,6 +21,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.commands.operations.IOperationHistory;
+import org.eclipse.core.commands.operations.IUndoContext;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
@@ -32,10 +35,18 @@ import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.impl.TransactionalEditingDomainImpl;
 import org.eclipse.emf.transaction.ui.provider.TransactionalAdapterFactoryContentProvider;
+import org.eclipse.emf.workspace.IWorkspaceCommandStack;
 import org.eclipse.imp.editor.LanguageServiceManager;
 import org.eclipse.imp.editor.UniversalEditor;
 import org.eclipse.imp.parser.ISourcePositionLocator;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.ITextViewerExtension6;
+import org.eclipse.jface.text.IUndoManager;
+import org.eclipse.jface.text.IUndoManagerExtension;
 import org.eclipse.jface.text.TextSelection;
+import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.jface.text.source.IAnnotationModel;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -47,14 +58,19 @@ import org.eclipse.qvt.declarative.editor.ui.cst.CSTOutline;
 import org.eclipse.qvt.declarative.editor.ui.cst.CSTOutlinePage;
 import org.eclipse.qvt.declarative.editor.ui.cst.ICSTOutlinePage;
 import org.eclipse.qvt.declarative.editor.ui.paged.PagedEditingDomainFactory;
+import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.text.undo.DocumentUndoManagerRegistry;
+import org.eclipse.text.undo.IDocumentUndoManager;
 import org.eclipse.ui.IEditorActionBarContributor;
 import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
-public class CommonTextEditor extends UniversalEditor
+public class CommonTextEditor extends UniversalEditor implements ITextEditorWithUndoContext
 {	
 	/**
 	 * This keeps track of the editing domain that is used to track all changes to the model.
@@ -109,6 +125,20 @@ public class CommonTextEditor extends UniversalEditor
 		};
 	}
 
+	@Override
+	public void doSave(IProgressMonitor progressMonitor) {
+		//
+		//	Bugzilla 224324 part 1. Ensure that partial text operation does not continue across save.
+		//
+		IDocument document = getDocumentProvider().getDocument(getEditorInput());
+		if (document != null) {
+			IDocumentUndoManager documentUndoManager = DocumentUndoManagerRegistry.getDocumentUndoManager(document);
+			if (documentUndoManager != null)
+				documentUndoManager.commit();
+		}
+		super.doSave(progressMonitor);
+	}
+	
 	protected Object getASTNode(ISelection selection) {
 		Object node = getCSTNode((TextSelection) selection);
 		if (node instanceof CSTNode) {
@@ -165,6 +195,21 @@ public class CommonTextEditor extends UniversalEditor
 			selection = new StructuredSelection(unwrappedSelections);			
 		}
 		return selection;
+	}
+
+	public IAnnotationModel getAnnotationModel() {	
+		return getDocumentProvider().getAnnotationModel(getEditorInput());
+	}
+
+	public Annotation[] getAnnotations() {
+		IAnnotationModel annotationModel = getAnnotationModel();
+		List<Annotation> annotationList = new ArrayList<Annotation>();
+		for (Iterator<?> i = annotationModel.getAnnotationIterator(); i.hasNext(); ) {
+			Annotation annotation = (Annotation) i.next();
+			if (PARSE_ANNOTATION_TYPE.equals(annotation.getType()))
+				annotationList.add(annotation);
+		}
+		return annotationList.toArray(new Annotation[annotationList.size()]);
 	}
 
 	protected Object getCSTNode(TextSelection selection) {
@@ -242,6 +287,10 @@ public class CommonTextEditor extends UniversalEditor
 		return getParseController().getCreationFactory();
 	}
 
+	public Display getDisplay() {
+		return getShell().getDisplay();
+	}
+
 	/**
 	 * Override to return xxxDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactories()
 	 * @return
@@ -266,6 +315,10 @@ public class CommonTextEditor extends UniversalEditor
 		return fLanguageServiceManager;
 	}
 
+	public IOperationHistory getOperationHistory() {
+		return getWorkspaceCommandStack().getOperationHistory();
+	}
+
 	@Override
 	public CommonParseController getParseController() {
 		return (CommonParseController) super.getParseController();
@@ -275,8 +328,27 @@ public class CommonTextEditor extends UniversalEditor
 		return getSelectionChangedListener();
 	}
 
+	public Shell getShell() {
+		return getSite().getShell();
+	}
+
 	public TransactionalEditingDomain getTransactionalEditingDomain() {
 		return editingDomain;
+	}
+	
+	public IUndoContext getUndoContext() {
+		ISourceViewer sourceViewer = getSourceViewer();
+		if (sourceViewer instanceof ITextViewerExtension6) {
+			IUndoManager undoManager= ((ITextViewerExtension6)sourceViewer).getUndoManager();
+			if (undoManager instanceof IUndoManagerExtension)
+				return ((IUndoManagerExtension)undoManager).getUndoContext();
+		}
+		return null;
+	}
+
+	public IWorkspaceCommandStack getWorkspaceCommandStack() {
+//		return (IWorkspaceCommandStack) super.getCommandStack();
+		return (IWorkspaceCommandStack) editingDomain.getCommandStack();
 	}
 
 	/**
@@ -295,5 +367,19 @@ public class CommonTextEditor extends UniversalEditor
 	    adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 	    for (AdapterFactory domainAdapterFactory : getDomainAdapterFactories())
 	    	adapterFactory.addAdapterFactory(domainAdapterFactory);
+	}
+
+	public boolean refresh() {
+		CommonParseController parseController = getParseController();
+		ASTandCST initialAst = parseController.getCurrentAst();
+		for (int i = 0; i < 50; i++) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+			}
+			if (parseController.getCurrentAst() != initialAst)
+				return true;
+		}
+		return false;
 	}
 }
