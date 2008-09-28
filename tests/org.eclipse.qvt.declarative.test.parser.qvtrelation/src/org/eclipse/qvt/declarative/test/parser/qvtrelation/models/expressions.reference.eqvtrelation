@@ -1,109 +1,109 @@
 <?xml version="1.0" encoding="ASCII"?>
-<eqvtr:RelationalTransformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtr="http://www.eclipse.org/qvt/1.0/QVTRelation" xmlns:eqvttemplate="http://www.eclipse.org/qvt/1.0/QVTTemplate" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore" xmi:id="ast7" name="MyTx" nsURI="http://models/expressions.qvtr/MyTx" nsPrefix="MyTx">
-  <eClassifiers xsi:type="ocl.ecore:SetType" xmi:id="ast5" instanceClassName="java.util.Set">
+<eqvtr:RelationalTransformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtr="http://www.eclipse.org/qvt/1.0/QVTRelation" xmlns:eqvtt="http://www.eclipse.org/qvt/1.0/QVTTemplate" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore" xmi:id="ast3" name="MyTx" nsURI="http://models/expressions.qvtr/MyTx" nsPrefix="MyTx">
+  <eClassifiers xsi:type="ocl.ecore:SetType" xmi:id="ast0" instanceClassName="java.util.Set">
     <elementType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
   </eClassifiers>
-  <modelParameter xmi:id="ast18" name="left">
+  <modelParameter xmi:id="ast11" name="left">
     <usedPackage href="SeqMM.xml#SeqMM"/>
   </modelParameter>
-  <modelParameter xmi:id="ast2" name="right">
+  <modelParameter xmi:id="ast15" name="right">
     <usedPackage href="SeqMM.xml#SeqMM"/>
   </modelParameter>
-  <rule xsi:type="eqvtr:Relation" xmi:id="ast26" name="MyRelation" isTopLevel="false">
-    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast30" name="left" isCheckable="true" isEnforceable="false" typedModel="ast18" rootVariable="ast108">
-      <pattern xmi:id="ast1">
-        <templateExpression xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast24" name="r" bindsTo="ast108">
+  <rule xsi:type="eqvtr:Relation" xmi:id="ast8" name="MyRelation" isTopLevel="false">
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast22" name="left" isCheckable="true" isEnforceable="false" typedModel="ast11" rootVariable="ast58">
+      <pattern xmi:id="ast2">
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast28" name="r" bindsTo="ast58">
           <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
           <referredClass href="SeqMM.xml#SeqMM.Message"/>
         </templateExpression>
       </pattern>
     </domain>
-    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast8" name="right" isCheckable="false" isEnforceable="true" typedModel="ast2" rootVariable="ast89">
-      <pattern xmi:id="ast78">
-        <templateExpression xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast62" name="m" bindsTo="ast89">
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast66" name="right" isCheckable="false" isEnforceable="true" typedModel="ast15" rootVariable="ast35">
+      <pattern xmi:id="ast74">
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast43" name="m" bindsTo="ast35">
           <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
           <referredClass href="SeqMM.xml#SeqMM.Message"/>
         </templateExpression>
       </pattern>
     </domain>
-    <variable xmi:id="ast108" name="r">
+    <variable xmi:id="ast58" name="r">
       <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
     </variable>
-    <variable xmi:id="ast89" name="m">
+    <variable xmi:id="ast35" name="m">
       <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
     </variable>
-    <variable xmi:id="ast25" name="c">
+    <variable xmi:id="ast77" name="c">
       <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
     </variable>
-    <when xmi:id="ast174">
-      <predicate xmi:id="ast111">
-        <conditionExpression xsi:type="ocl.ecore:IteratorExp" xmi:id="ast47" name="exists">
+    <when xmi:id="ast136">
+      <predicate xmi:id="ast199">
+        <conditionExpression xsi:type="ocl.ecore:IteratorExp" xmi:id="ast122" name="exists">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast28" eType="ast5">
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast21" referredVariable="ast25">
+          <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast126" eType="ast0">
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast107" name="c" referredVariable="ast77">
               <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
             </source>
             <referredProperty xsi:type="ecore:EReference" href="SeqMM.xml#SeqMM.Message.event"/>
           </source>
-          <body xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast27">
+          <body xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast23">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast33">
+            <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast200">
               <eType xsi:type="ecore:EEnum" href="SeqMM.xml#SeqMM.MessageEventType"/>
-              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast219" referredVariable="ast240">
+              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast197" name="a1" referredVariable="ast96">
                 <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
               </source>
               <referredProperty xsi:type="ecore:EAttribute" href="SeqMM.xml#SeqMM.MessageEvent.type"/>
             </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast281">
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast244">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/%3C%3E"/>
           </body>
-          <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast240" name="a1">
+          <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast96" name="a1">
             <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
           </iterator>
         </conditionExpression>
       </predicate>
-      <predicate xmi:id="ast360">
-        <conditionExpression xsi:type="ocl.ecore:LetExp" xmi:id="ast310">
+      <predicate xmi:id="ast292">
+        <conditionExpression xsi:type="ocl.ecore:LetExp" xmi:id="ast157">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <in xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast91">
+          <in xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast132">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast73" referredVariable="ast50">
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast14" name="q" referredVariable="ast427">
               <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
             </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast213">
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast156">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/%3C%3E"/>
           </in>
-          <variable xsi:type="ocl.ecore:Variable" xmi:id="ast50" name="q">
+          <variable xsi:type="ocl.ecore:Variable" xmi:id="ast427" name="q">
             <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
-            <initExpression xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast448">
+            <initExpression xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast263">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </initExpression>
           </variable>
         </conditionExpression>
       </predicate>
-      <predicate xmi:id="ast481">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast372">
+      <predicate xmi:id="ast420">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast342">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast447">
+          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast100">
             <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
           </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast258">
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast352">
             <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
           </argument>
           <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/%3C%3E"/>
         </conditionExpression>
       </predicate>
-      <predicate xmi:id="ast303">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast535">
+      <predicate xmi:id="ast95">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast372">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast263">
+          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast519">
             <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
           </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast408">
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast612">
             <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
           </argument>
           <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/%3C%3E"/>
