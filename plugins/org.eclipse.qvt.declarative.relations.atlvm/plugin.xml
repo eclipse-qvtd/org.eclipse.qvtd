@@ -2,14 +2,14 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
-         point="org.eclipse.qvt.declarative.compilation.compilationProvider">
+         point="org.eclipse.qvt.declarative.compilation.ide.compilationProvider">
       <compilationProvider
             class="org.eclipse.qvt.declarative.relations.atlvm.ATLVMCompiler"
             priority="low">
       </compilationProvider>
    </extension>
    <extension
-         point="org.eclipse.qvt.declarative.execution.executionProvider">
+         point="org.eclipse.qvt.declarative.execution.ide.executionProvider">
       <executionProvider
             class="org.eclipse.qvt.declarative.relations.atlvm.ATLVMExecutor"
             priority="low">
