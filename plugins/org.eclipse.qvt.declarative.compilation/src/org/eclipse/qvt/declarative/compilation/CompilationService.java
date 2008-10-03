@@ -21,7 +21,6 @@ public class CompilationService extends Service implements CompilationProvider {
 
 	protected CompilationService() {
 		super();
-		registerProviders(Activator.getDefault().getBundle().getSymbolicName(), "compilationProvider"); //$NON-NLS-1$
 	}
 
 	/**
