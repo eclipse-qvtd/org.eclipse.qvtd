@@ -7,10 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtensionPoint;
-import org.eclipse.core.runtime.Platform;
-
 /**
  * Base class for services. A service is a group of providers classed by
  * priority. It is itself a provider proxy as it delegates the operation to one
@@ -61,45 +57,6 @@ public abstract class Service implements Provider {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Registers all providers that are declaring an extension of a particular
-	 * extension point.
-	 * 
-	 * @param namespace
-	 *            The extension point name space.
-	 * @param extensionPointName
-	 *            The extension point name.
-	 */
-	public final void registerProviders(String namespace,
-			String extensionPointName) {
-		IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(namespace, extensionPointName);
-		IConfigurationElement[] configurationElements = extensionPoint.getConfigurationElements();
-		registerProviders(configurationElements);
-	}
-
-	/**
-	 * Registers all providers that are declaring an extension of a particular
-	 * extension point.
-	 * 
-	 * @param elements
-	 *            The <code>IConfigurationElement</code> array from an extension
-	 *            point representing the extenders.
-	 */
-	public final void registerProviders(IConfigurationElement[] elements) {
-		assert null != elements : "null elements"; //$NON-NLS-1$
-
-		for (int i = 0; i < elements.length; ++i) {
-			IConfigurationElement element = elements[i];
-			ProviderDescriptor descriptor = new ProviderDescriptor(element);
-			addProvider(descriptor.getPriority(), descriptor);
-		}
-
-		for (ProviderDescriptor.Priority providerPriority : ProviderDescriptor.Priority
-				.values()) {
-			providers.get(providerPriority).trimToSize();
-		}
 	}
 
 	protected final void addProvider(ProviderDescriptor.Priority priority,
