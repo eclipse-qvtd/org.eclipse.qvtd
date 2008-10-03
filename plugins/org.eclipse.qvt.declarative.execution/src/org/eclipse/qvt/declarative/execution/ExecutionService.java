@@ -18,10 +18,6 @@ public class ExecutionService extends Service implements ExecutionProvider {
 
 	protected static final ExecutionService INSTANCE = new ExecutionService();
 
-	static {
-		INSTANCE.registerProviders(Activator.PLUGIN_ID, "executionProvider"); //$NON-NLS-1$
-	}
-
 	protected ExecutionService() {
 		super();
 	}
@@ -44,7 +40,8 @@ public class ExecutionService extends Service implements ExecutionProvider {
 	 */
 	public List<? extends Object> execute(File sourceFile,
 			ExecutionContext parameters) {
-		return execute(new ExecuteOperation(sourceFile, parameters));
+		Operation operation = new ExecuteOperation(sourceFile, parameters);
+		return execute(operation);
 	}
 
 	private List<? extends Object> execute(Operation operation) {

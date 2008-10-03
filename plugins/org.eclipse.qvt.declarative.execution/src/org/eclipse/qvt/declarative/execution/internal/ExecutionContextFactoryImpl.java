@@ -22,7 +22,8 @@ public class ExecutionContextFactoryImpl implements ExecutionContextFactory {
 	public ExecutionContext createExecutionContext(
 			List<LabelledModel> sourceModels, LabelledModel directionModel,
 			ExecutionMode mode) {
-		return new ExecutionContextImpl(sourceModels, directionModel, mode);
+		ExecutionContext result = new ExecutionContextImpl(sourceModels, directionModel, mode);
+		return result;
 	}
 	
 
