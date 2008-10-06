@@ -65,7 +65,7 @@ public class DeclarativeQVTLaunchDelegate implements
 			String metamodelPath = (String)metamodelPathList.get(i);
 			LabelledModel metamodel = LabelledModelFactory.INSTANCE.createLabelledMetamodel(metamodelName, metamodelPath);
 			LabelledModel model = LabelledModelFactory.INSTANCE.createLabelledModel(modelName, modelPath, metamodel);
-			if (modelName == direction) {
+			if (modelName.equals(direction)) {
 				directionModel = model;
 			} else {
 				sourceModels.add(model);
