@@ -1,9 +1,11 @@
 package org.eclipse.qvt.declarative.execution;
 
 import java.io.File;
+import java.util.List;
 
 import org.eclipse.qvt.declarative.common.framework.service.Operation;
 import org.eclipse.qvt.declarative.common.framework.service.Provider;
+import org.eclipse.qvt.declarative.common.framework.service.ProviderDescriptor;
 
 /**
  * An operation that execute a compiled file.
@@ -38,11 +40,16 @@ public class ExecuteOperation implements Operation {
 	 * (org.eclipse.qvt.declarative.common.framework.service.Provider)
 	 */
 	public Object execute(Provider provider) {
+		List<?> result = null;
+		if (provider instanceof ProviderDescriptor) {
+			ProviderDescriptor descriptor = (ProviderDescriptor) provider;
+			provider = descriptor.getDescribedProvider();
+		}
 		if (provider instanceof ExecutionProvider) {
 			ExecutionProvider executionProvider = (ExecutionProvider) provider;
-			return executionProvider.execute(executableFile, parameters);
+			result = executionProvider.execute(executableFile, parameters);
 		}
-		return null;
+		return result;
 	}
 
 	/**
