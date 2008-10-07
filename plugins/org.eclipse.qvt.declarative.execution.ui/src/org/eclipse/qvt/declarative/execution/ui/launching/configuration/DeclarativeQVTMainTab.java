@@ -1,8 +1,10 @@
 package org.eclipse.qvt.declarative.execution.ui.launching.configuration;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,7 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -48,6 +51,8 @@ import org.eclipse.qvt.declarative.modelregistry.model.ModelNameAccessor;
 import org.eclipse.qvt.declarative.modelregistry.model.ProjectRegistry;
 import org.eclipse.qvt.declarative.modelregistry.model.Registration;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Font;
@@ -182,6 +187,19 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
     	return g;
     }
 	
+	private static void createLabel(Composite parent, String text, int layoutStyle) {
+		Label tempLabel;
+		tempLabel = new Label(parent, SWT.CENTER);
+		tempLabel.setText(text);
+		tempLabel.setLayoutData(new GridData(layoutStyle));
+	}
+	
+	private static Composite createMainComposite(Composite parent) {
+		Composite comp = createComposite(parent, parent.getFont(), 2, 1, GridData.FILL_HORIZONTAL);
+		((GridLayout)comp.getLayout()).verticalSpacing = 0;
+    	return comp;
+	}
+	
 	private static Text createSingleText(Composite parent, int hspan) {
     	Text t = new Text(parent, SWT.SINGLE | SWT.BORDER);
     	t.setFont(parent.getFont());
@@ -191,10 +209,8 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
     	return t;
     }
 	
-	private static Composite createMainComposite(Composite parent) {
-		Composite comp = createComposite(parent, parent.getFont(), 2, 1, GridData.FILL_HORIZONTAL);
-		((GridLayout)comp.getLayout()).verticalSpacing = 0;
-    	return comp;
+	private static IWorkspaceRoot getWorkspaceRoot() {
+		return ResourcesPlugin.getWorkspace().getRoot();
 	}
 	
 	private void createProjectEditor(Composite parent) {
@@ -211,13 +227,13 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		projectText.setLayoutData(gd);
 		projectText.setFont(font);
-//		projectText.addModifyListener(new ModifyListener() {
-//
-//			public void modifyText(ModifyEvent e) {
-//				updateLaunchConfigurationDialog();
-//			}
-//			
-//		});
+		projectText.addModifyListener(new ModifyListener() {
+
+			public void modifyText(ModifyEvent e) {
+				updateLaunchConfigurationDialog();
+			}
+			
+		});
 		
 		projectButton = createPushButton(group, "Browse...", null); 
 		projectButton.addSelectionListener(new SelectionListener() {
@@ -236,11 +252,11 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 		Composite comp = createComposite(mainGroup, parent.getFont(), 2, 2, GridData.FILL_BOTH);
 		removeCompositeMargin(comp);
 		transformationText = createSingleText(comp, 1);
-//		transformationText.addModifyListener(new ModifyListener() {
-//			public void modifyText(ModifyEvent e) {
-//				updateLaunchConfigurationDialog();
-//			}
-//		});
+		transformationText.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent e) {
+				updateLaunchConfigurationDialog();
+			}
+		});
 		transformationButton = createPushButton(comp, "Search...", null); 
 		transformationButton.addSelectionListener(new TransformationSelectionListener(comp));
 	}
@@ -290,13 +306,6 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 		return null;
 	}
 	
-	private static void createLabel(Composite parent, String text, int layoutStyle) {
-		Label tempLabel;
-		tempLabel = new Label(parent, SWT.CENTER);
-		tempLabel.setText(text);
-		tempLabel.setLayoutData(new GridData(layoutStyle));
-	}
-	
 	private void createAllModelEditors(Composite parent, RelationalTransformation transformation) {
 		if (modelsComposite != null){
 			modelsComposite.dispose();
@@ -333,6 +342,13 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 		Composite subComposite = createComposite(parent, parent.getFont(), 4, 1, GridData.FILL_BOTH);
 		removeCompositeMargin(subComposite);
 		Text text = createSingleText(subComposite, 1);
+		text.addModifyListener(new ModifyListener() {
+
+			public void modifyText(ModifyEvent e) {
+				updateLaunchConfigurationDialog();
+			}
+			
+		});
 		Button searchModelButton = createPushButton(subComposite, "Search", null);
 		searchModelButton.addSelectionListener(new ModelButtonSelectionListener(text, SWT.OPEN));
 		Button newModelButton = createPushButton(subComposite, "New...", null);
@@ -386,11 +402,7 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 	}
 		
 	
-	private static IWorkspaceRoot getWorkspaceRoot() {
-		return ResourcesPlugin.getWorkspace().getRoot();
-	}
-	
-	IProject[] getDeclarativeQVTProjects() {
+	private IProject[] getDeclarativeQVTProjects() {
 		List<IProject> qvtProjectList = new ArrayList<IProject>();
 		for(IProject project : getWorkspaceRoot().getProjects()) {
 			try {
@@ -408,8 +420,61 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 		return TAB_NAME;
 	}
 
+	private static IFile getFileFromURI (String uriString) throws URISyntaxException {
+		java.net.URI uri = new java.net.URI(uriString);
+		String path = uri.toString();
+		if (uri.getScheme().equals("file")) {
+			path = new File(uri).toString();
+		}
+		IFile iFile = getWorkspaceRoot().getFileForLocation(new Path(path));
+		return iFile;
+	}
+	
 	public void initializeFrom(ILaunchConfiguration configuration) {
-		// TODO Auto-generated method stub
+		try {
+			String executablePath = configuration.getAttribute(DeclarativeQVTLaunchDelegate.EXECUTABLE_PATH_ATTRIBUTE_NAME, DeclarativeQVTLaunchDelegate.EMPTY_STRING);
+			List<?> modelNameList = configuration.getAttribute(DeclarativeQVTLaunchDelegate.MODEL_NAME_LIST_ATTRIBUTE_NAME, Collections.EMPTY_LIST);
+			List<?> modelPathList = configuration.getAttribute(DeclarativeQVTLaunchDelegate.MODEL_PATH_LIST_ATTRIBUTE_NAME, Collections.EMPTY_LIST);
+			String directionModel = configuration.getAttribute(DeclarativeQVTLaunchDelegate.DIRECTION_MODEL_PATH_ATTRIBUTE_NAME, DeclarativeQVTLaunchDelegate.EMPTY_STRING);
+
+//			List<String> metamodelNameList = new ArrayList<String>();
+//			List<String> metamodelPathList = new ArrayList<String>();
+			
+			if (executablePath == null || executablePath == DeclarativeQVTLaunchDelegate.EMPTY_STRING)
+				return;
+			
+			IFile sourceFile = getSourceFile(executablePath);
+			
+			if (sourceFile == null)
+				return;
+			
+			currentProject = sourceFile.getProject();
+			projectText.setText(currentProject.getName());
+			currentTransformationFile = sourceFile;
+			currentRelationalTransformation = getTransformation(getModelResource(currentTransformationFile));
+			transformationText.setText(currentTransformationFile.getName());
+			createAllModelEditors(transformationText.getParent(), getTransformation(getModelResource(currentTransformationFile)));
+		
+			
+			for (Object modelNameObject : modelNameList) {
+				int index = modelNameList.indexOf(modelNameObject);
+				String modelname = (String)modelNameObject;
+				List<Widget> widgetList = dynamicModelsWidget.get(modelname);
+				getTargetWiget(widgetList).setSelection(modelname.equals(directionModel));
+				String modelPath = (String) modelPathList.get(index);
+				IFile modelFile = getFileFromURI(modelPath);
+				if (modelFile != null) {
+					String relativePath = URI.createPlatformPluginURI(modelFile.getFullPath().toString(), true).toString();
+					getModelPathWiget(widgetList).setText(relativePath);
+				}				
+			}
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 		
@@ -504,7 +569,57 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 		return null;
 	}
 	
+	private static IPath getExecutablePath(IProject project, IFile sourceFile, String direction) {
+		IJavaProject javaProject = JavaCore.create(project);
+		IPath srcContainer = null;
+		IPath currentTransformationPath = sourceFile.getFullPath();
+		try {
+			for (IClasspathEntry classpathEntry : javaProject.getRawClasspath()) {
+				if (classpathEntry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
+					IPath classPathEntryPath = classpathEntry.getPath(); 
+					if (classPathEntryPath.isPrefixOf(currentTransformationPath)) {
+						srcContainer = classpathEntry.getPath();
+					}
+				}
+			}
+			IPath relativeTransformationPath = currentTransformationPath.removeFirstSegments(srcContainer.segmentCount());
+			IPath binPath;
+			binPath = javaProject.getOutputLocation();
+			IPath relativeExecutablePath = binPath.append(relativeTransformationPath).removeFileExtension().addFileExtension(direction).addFileExtension("asm");
+			IPath absoluteExecutablePath = getWorkspaceRoot().getLocation().append(relativeExecutablePath);
+			return absoluteExecutablePath;
+		} catch (JavaModelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
+	private static IFile getSourceFile (String executablePath) {
+		try {
+			IFile executableFile = getFileFromURI(executablePath);
+			IJavaProject javaProject = JavaCore.create(executableFile.getProject());
+			IPath executableRelativePath = executableFile.getFullPath().removeFirstSegments(javaProject.getOutputLocation().segmentCount());
+			IPath sourceRelativePath = executableRelativePath.removeFileExtension().removeFileExtension().addFileExtension("qvtr");
+			for (IClasspathEntry classpathEntry : javaProject.getRawClasspath()) {
+				if (classpathEntry.getEntryKind() == IClasspathEntry.CPE_SOURCE){
+					IPath classPathPath = classpathEntry.getPath();
+					IFolder classPathFolder = getWorkspaceRoot().getFolder(classPathPath);
+					IFile searchedFile = classPathFolder.getFile(sourceRelativePath);
+					if (searchedFile.exists()){
+						return searchedFile;
+					}
+				}
+			}
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JavaModelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		if (currentProject != null && currentTransformationFile != null) {
@@ -542,28 +657,9 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 					
 				}
 			}
-			IJavaProject javaProject = JavaCore.create(currentProject);
-			IPath srcContainer = null;
-			IPath currentTransformationPath = currentTransformationFile.getFullPath();
-			IPath absoluteExecutablePath = null;
-			try {
-				for (IClasspathEntry classpathEntry : javaProject.getRawClasspath()) {
-					IPath classPathEntryPath = classpathEntry.getPath(); 
-					if (classPathEntryPath.isPrefixOf(currentTransformationPath)) {
-						srcContainer = classpathEntry.getPath();
-					}
-				}
-				IPath relativeTransformationPath = currentTransformationPath.removeFirstSegments(srcContainer.segmentCount());
-				IPath binPath;
-				binPath = javaProject.getOutputLocation();
-				IPath relativeExecutablePath = binPath.append(relativeTransformationPath).removeFileExtension().addFileExtension(direction).addFileExtension("asm");
-				absoluteExecutablePath = getWorkspaceRoot().getLocation().append(relativeExecutablePath);
-				System.out.println("executable path = "+absoluteExecutablePath);
-			} catch (JavaModelException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			configuration.setAttribute(DeclarativeQVTLaunchDelegate.EXECUTABLE_PATH_ATTRIBUTE_NAME, absoluteExecutablePath.toString());
+			String absoluteExecutablePath = getExecutablePath(currentProject, currentTransformationFile, direction).toString();
+			
+			configuration.setAttribute(DeclarativeQVTLaunchDelegate.EXECUTABLE_PATH_ATTRIBUTE_NAME, absoluteExecutablePath);
 			configuration.setAttribute(DeclarativeQVTLaunchDelegate.MODEL_NAME_LIST_ATTRIBUTE_NAME, modelNameList);
 			configuration.setAttribute(DeclarativeQVTLaunchDelegate.MODEL_PATH_LIST_ATTRIBUTE_NAME, modelPathList);
 			configuration.setAttribute(DeclarativeQVTLaunchDelegate.METAMODEL_NAME_LIST_ATTRIBUTE_NAME, metamodelNameList);
@@ -578,5 +674,41 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 		System.out.println("setDefaults");
 
 	}
+	
+	private boolean isProjectValid() {
+		String projectTextValue = projectText.getText().trim();
+		if (projectTextValue.length() == 0) {
+			setErrorMessage("No project specified.");
+			return false;
+		} else {
+			if (getCurrentProject() == null) {
+				setErrorMessage("Project "+projectTextValue+" does not exit.");
+				return false;
+			}
+		}
+		return true;
+	}
 
+	@Override
+	public boolean isValid(ILaunchConfiguration launchConfig) {
+		if (!isProjectValid()) {
+			return false;
+		}
+		String transformationTextValue = transformationText.getText().trim();
+		if (transformationTextValue.length() == 0){
+			setErrorMessage("No transformation specified");
+			return false;
+		}
+		for (Map.Entry<String, List<Widget>> modelEditor: dynamicModelsWidget.entrySet()) {
+			List<Widget> wigetList = modelEditor.getValue();
+			if (getModelPathWiget(wigetList).getText().trim().length() == 0) {
+				setErrorMessage("Path to model "+modelEditor.getKey()+" not specified");
+				return false;
+			}
+		}
+		setErrorMessage(null);
+		setMessage("Launch Declarative QVT Transformation");
+		return true;
+	}
+	
 }
