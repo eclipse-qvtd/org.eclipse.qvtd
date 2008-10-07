@@ -282,7 +282,7 @@ public class ATLVMCompiler implements CompilationProvider {
 					result.add(resultFile);
 					handleProblems(myProblems);
 				}
-				createJavaLauncher(abstractSyntaxTreeResource, sourceFolderURI);
+//				createJavaLauncher(abstractSyntaxTreeResource, sourceFolderURI);
 
 				return result;
 			} catch (Exception e) {
