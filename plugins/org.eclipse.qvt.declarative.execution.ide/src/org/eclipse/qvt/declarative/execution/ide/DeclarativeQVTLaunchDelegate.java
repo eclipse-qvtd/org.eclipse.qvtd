@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
@@ -42,8 +43,11 @@ public class DeclarativeQVTLaunchDelegate implements
 
 		File sourceFile = getSourceFile(configuration);
 		ExecutionContext parameters = getParameters(configuration);
-		
-		ExecutionService.getInstance().execute(sourceFile, parameters);
+		try {
+			ExecutionService.getInstance().execute(sourceFile, parameters);
+		} catch (Exception e) {
+			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, e.getMessage()));
+		}
 
 	}
 
