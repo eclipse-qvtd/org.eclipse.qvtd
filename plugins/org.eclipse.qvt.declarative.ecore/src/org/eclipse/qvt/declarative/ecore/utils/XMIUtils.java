@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: XMIUtils.java,v 1.2 2008/08/08 17:00:10 ewillink Exp $
+ * $Id: XMIUtils.java,v 1.3 2008/10/08 21:12:26 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.utils;
 
@@ -61,7 +61,7 @@ public class XMIUtils
 	}
 	
 	/**
-	 * Create short xmi:id's comprising a prefix and a count
+	 * Create short xmi:id's comprising a prefix and a small random count
 	 */
 	public static class ShortPrefixedIdCreator implements IdCreator
 	{
@@ -79,6 +79,27 @@ public class XMIUtils
                     if ((knownIds == null) || !knownIds.contains(id))
                     	return id;
                  }
+            }
+		}
+	}
+	
+	/**
+	 * Create short xmi:id's comprising a prefix and a linearly increasing count
+	 */
+	public static class LinearPrefixedIdCreator implements IdCreator
+	{
+		protected final String prefix;
+		private int next;
+		
+		public LinearPrefixedIdCreator(String prefix) {
+			this.prefix = prefix;
+		}
+
+		public String createId(EObject eObject, Set<String> knownIds) {
+			while (true) {
+                String id = prefix + ++next;
+                if ((knownIds == null) || !knownIds.contains(id))
+                    return id;
             }
 		}
 	}
@@ -189,6 +210,19 @@ public class XMIUtils
 	        xmiIdPrefix = "_";
 	    assignIds(resource,
 	    		new ShortPrefixedIdCreator(xmiIdPrefix),
+	    		new ExcludedEClassIdFilter(new EClass[]
+	    		{
+	    				XMLTypePackage.Literals.ANY_TYPE/*,
+	    				EcorePackage.Literals.EANNOTATION,
+	    				EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY */
+	    		}));
+	}
+
+	public static void assignLinearIds(Resource resource, String xmiIdPrefix) {
+		if (xmiIdPrefix == null)
+	        xmiIdPrefix = "_";
+	    assignIds(resource,
+	    		new LinearPrefixedIdCreator(xmiIdPrefix),
 	    		new ExcludedEClassIdFilter(new EClass[]
 	    		{
 	    				XMLTypePackage.Literals.ANY_TYPE/*,
