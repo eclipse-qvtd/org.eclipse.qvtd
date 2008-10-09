@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.qvt.declarative.execution.ide" id="executionProvider" name="Execution Provider"/>
       </appinfo>
       <documentation>
-         This extension point allows a plug-in to register a execution provider to redefine the default engine or provide a engine for a particular structured executable type.
+         This extension point is used to register QVT execution engine. A QVT execution engine provides an implementation of the  &lt;code&gt;org.eclipse.qvt.declarative.execution.ExecutionProvider.execute&lt;/code&gt; method which is able to execute the transformation. To do so, it may rely on a compiler to having produced files containing a description of the instructions to perform (see &lt;code&gt;org.eclipse.qvt.declarative.compilation.ide&lt;/code&gt;).
       </documentation>
    </annotation>
 
@@ -88,7 +88,7 @@
          <meta.section type="since"/>
       </appinfo>
       <documentation>
-         [Enter the first release in which this extension point appears.]
+         0.7.0
       </documentation>
    </annotation>
 
@@ -97,7 +97,15 @@
          <meta.section type="examples"/>
       </appinfo>
       <documentation>
-         [Enter extension point usage example here.]
+         Following is an example of how execution engine can be registered:
+&lt;pre&gt;
+	&lt;extension point=&quot;org.eclipse.qvt.declarative.execution.ide.executionProvider&quot;&gt;
+      &lt;executionProvider
+            class=&quot;com.example.MyExecutionEngine&quot;
+            priority=&quot;low&quot;&gt;
+      &lt;/executionProvider&gt;
+   &lt;/extension&gt;
+&lt;/pre&gt;
       </documentation>
    </annotation>
 
@@ -106,18 +114,24 @@
          <meta.section type="apiinfo"/>
       </appinfo>
       <documentation>
-         [Enter API information here.]
+         The value of the &lt;tt&gt;class&lt;/tt&gt; attribute must be the qualified name of an extension of the &lt;tt&gt;org.eclipse.qvt.declarative.execution.ExecutionProvider&lt;/tt&gt; class, that provides a constructor without any arguments.
+
+The value of the &lt;tt&gt;priority&lt;/tt&gt; attribute must be a string either lowest, low, normal, high, highest describing an ordering on providers.
       </documentation>
    </annotation>
+
 
    <annotation>
       <appinfo>
-         <meta.section type="implementation"/>
+         <meta.section type="copyright"/>
       </appinfo>
       <documentation>
-         [Enter information about supplied implementation of this extension point.]
+         Copyright (c) 2007, 2008 Obeo.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
       </documentation>
    </annotation>
-
 
 </schema>
