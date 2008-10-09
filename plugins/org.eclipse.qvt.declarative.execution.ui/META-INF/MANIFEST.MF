@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Declarative QVT Execution UI Plug-in
 Bundle-SymbolicName: org.eclipse.qvt.declarative.execution.ui;singleton:=true
-Bundle-Version: 0.7.0
+Bundle-Version: 0.7.0.qualifier
 Bundle-Activator: org.eclipse.qvt.declarative.execution.ui.Activator
 Bundle-Vendor: %pluginProvider
 Require-Bundle: org.eclipse.ui,
