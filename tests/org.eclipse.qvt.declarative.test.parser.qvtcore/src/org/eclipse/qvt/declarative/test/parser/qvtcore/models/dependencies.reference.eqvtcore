@@ -1,1335 +1,527 @@
 <?xml version="1.0" encoding="ASCII"?>
-<eqvtb:Transformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtb="http://www.eclipse.org/qvt/1.0/QVTBase" xmlns:eqvtc="http://www.eclipse.org/qvt/1.0/QVTCore" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore" xmi:id="ast7" name="Tx" nsURI="http://models/dependencies.qvtc/Tx" nsPrefix="Tx">
-  <modelParameter xmi:id="ast4" name="m">
+<eqvtb:Transformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtb="http://www.eclipse.org/qvt/1.0/QVTBase" xmlns:eqvtc="http://www.eclipse.org/qvt/1.0/QVTCore" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore" xmi:id="ast1" name="Tx" nsURI="http://models/dependencies.qvtc/Tx" nsPrefix="Tx">
+  <modelParameter xmi:id="ast2" name="m">
     <usedPackage href="TumlRdbms.ecore#/"/>
   </modelParameter>
-  <modelParameter xmi:id="ast9" name="l">
+  <modelParameter xmi:id="ast3" name="l">
     <usedPackage href="umlMM.emof#umlMM"/>
   </modelParameter>
-  <modelParameter xmi:id="ast18" name="r">
+  <modelParameter xmi:id="ast4" name="r">
     <usedPackage href="rdbmsMM.emof#rdbmsMM"/>
   </modelParameter>
-  <rule xsi:type="eqvtc:Mapping" xmi:id="ast22" name="Ma" refinement="ast3008">
-    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast30" name="l" isCheckable="true" isEnforceable="false" typedModel="ast9">
-      <guardPattern xmi:id="ast47">
-        <predicate xmi:id="ast52">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast44">
+  <rule xsi:type="eqvtc:Mapping" xmi:id="ast5" name="Ma" refinement="ast190">
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast6" name="l" isCheckable="true" isEnforceable="false" typedModel="ast3">
+      <guardPattern xmi:id="ast7">
+        <predicate xmi:id="ast8">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast9">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast69" name="vMalg2Mal" referredVariable="ast223">
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast10" name="vMalg2Mal" referredVariable="ast24">
               <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast11">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast12">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast13">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast14">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast15">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast16">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast17">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast18">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast19">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast20">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast21">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast22">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast23">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <variable xmi:id="ast24" name="vMalg2Mal">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+        <variable xmi:id="ast25" name="vMalg2Mam">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+        <variable xmi:id="ast26" name="nMalg2Mar">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern xmi:id="ast27">
+        <predicate xmi:id="ast28">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast29">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast30" name="vMalg2Mal" referredVariable="ast24">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast31">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast32">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast33">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast34" name="vMalb2Malb" referredVariable="ast44">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast35">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast36">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast37">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast38">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast39">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast40">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast41">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast42">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast43">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <variable xmi:id="ast44" name="vMalb2Malb">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+        <variable xmi:id="ast45" name="vMalb2Mamb">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+        <variable xmi:id="ast46" name="nMalb2Marb">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+        <variable xmi:id="ast47" name="nMalb2Mag">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+      </bottomPattern>
+    </domain>
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast48" name="r" isCheckable="true" isEnforceable="true" typedModel="ast4">
+      <guardPattern xmi:id="ast49">
+        <predicate xmi:id="ast50">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast51">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast52">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast53">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast54">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast55">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast56">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast57">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+      </guardPattern>
+      <bottomPattern xmi:id="ast58">
+        <predicate xmi:id="ast59">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast60">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast61">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast62">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast63">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast64">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast65">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
             </source>
             <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast66">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast110">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast26">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast82">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast128">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast179">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast219">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast221">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast153">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast68">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast217">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast36">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast75">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <variable xmi:id="ast223" name="vMalg2Mal">
-          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-        </variable>
-        <variable xmi:id="ast147" name="vMalg2Mam">
-          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-        </variable>
-        <variable xmi:id="ast1" name="nMalg2Mar">
-          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-        </variable>
-      </guardPattern>
-      <bottomPattern xmi:id="ast348">
-        <predicate xmi:id="ast373">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast83">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast446" name="vMalg2Mal" referredVariable="ast223">
-              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast355">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast454">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast212">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast38" name="vMalb2Malb" referredVariable="ast367">
-              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast245">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast486">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast32">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast519">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast467">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast10">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast607">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast20">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast312">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <variable xmi:id="ast367" name="vMalb2Malb">
-          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-        </variable>
-        <variable xmi:id="ast578" name="vMalb2Mamb">
-          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-        </variable>
-        <variable xmi:id="ast728" name="nMalb2Marb">
-          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-        </variable>
-        <variable xmi:id="ast458" name="nMalb2Mag">
-          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-        </variable>
-      </bottomPattern>
-    </domain>
-    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast643" name="r" isCheckable="true" isEnforceable="true" typedModel="ast18">
-      <guardPattern xmi:id="ast138">
-        <predicate xmi:id="ast15">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast638">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast513">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast262">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast13">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast188">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast335">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast374">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-      </guardPattern>
-      <bottomPattern xmi:id="ast591">
-        <predicate xmi:id="ast684">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast248">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast768">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast980">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast508">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast404">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast488">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast889">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
           </conditionExpression>
         </predicate>
       </bottomPattern>
     </domain>
-    <guardPattern xmi:id="ast424">
-      <predicate xmi:id="ast231">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast735">
+    <guardPattern xmi:id="ast67">
+      <predicate xmi:id="ast68">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast69">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast858" name="vMalg2Mam" referredVariable="ast147">
+          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast70" name="vMalg2Mam" referredVariable="ast25">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
           </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast448">
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast71">
             <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
           </argument>
           <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
         </conditionExpression>
       </predicate>
-      <predicate xmi:id="ast88">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast831">
+      <predicate xmi:id="ast72">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast73">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast913">
+          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast74">
             <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
           </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast198">
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast75">
             <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
           </argument>
           <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
         </conditionExpression>
       </predicate>
-      <predicate xmi:id="ast573">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1097">
+      <predicate xmi:id="ast76">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast77">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast912" name="vMamg2Mam" referredVariable="ast1013">
+          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast78" name="vMamg2Mam" referredVariable="ast85">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
           </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast978">
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast79">
             <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
           </argument>
           <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
         </conditionExpression>
       </predicate>
-      <predicate xmi:id="ast833">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1153">
+      <predicate xmi:id="ast80">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast81">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast776">
+          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast82">
             <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
           </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast754">
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast83">
             <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
           </argument>
           <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
         </conditionExpression>
       </predicate>
-      <variable xmi:id="ast940" name="v1">
+      <variable xmi:id="ast84" name="v1">
         <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TPackageToSchema"/>
       </variable>
-      <variable xmi:id="ast1013" name="vMamg2Mam">
+      <variable xmi:id="ast85" name="vMamg2Mam">
         <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
       </variable>
-      <variable xmi:id="ast225" name="nMamg2Mal">
+      <variable xmi:id="ast86" name="nMamg2Mal">
         <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
       </variable>
     </guardPattern>
-    <bottomPattern xmi:id="ast967">
-      <predicate xmi:id="ast1321">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast769">
+    <bottomPattern xmi:id="ast87">
+      <predicate xmi:id="ast88">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast89">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast301" name="vMalg2Mam" referredVariable="ast147">
+          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast90" name="vMalg2Mam" referredVariable="ast25">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
           </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast54">
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast91">
             <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
           </argument>
           <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
         </conditionExpression>
       </predicate>
-      <predicate xmi:id="ast157">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast894">
+      <predicate xmi:id="ast92">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast93">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast660" name="vMalb2Mamb" referredVariable="ast578">
+          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast94" name="vMalb2Mamb" referredVariable="ast45">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
           </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast662">
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast95">
             <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
           </argument>
           <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
         </conditionExpression>
       </predicate>
-      <predicate xmi:id="ast512">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast782">
+      <predicate xmi:id="ast96">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast97">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast876" name="vMamg2Mam" referredVariable="ast1013">
+          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast98" name="vMamg2Mam" referredVariable="ast85">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
           </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast848">
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast99">
             <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
           </argument>
           <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
         </conditionExpression>
       </predicate>
-      <predicate xmi:id="ast1579">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast612">
+      <predicate xmi:id="ast100">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast101">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast383" name="vMamb2Mamb" referredVariable="ast87">
+          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast102" name="vMamb2Mamb" referredVariable="ast104">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
           </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1537">
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast103">
             <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
           </argument>
           <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
         </conditionExpression>
       </predicate>
-      <variable xmi:id="ast87" name="vMamb2Mamb">
+      <variable xmi:id="ast104" name="vMamb2Mamb">
         <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
       </variable>
-      <variable xmi:id="ast266" name="nMamb2Mamg">
+      <variable xmi:id="ast105" name="nMamb2Mamg">
         <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
       </variable>
-      <variable xmi:id="ast691" name="nMamb2Mal">
+      <variable xmi:id="ast106" name="nMamb2Mal">
         <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
       </variable>
     </bottomPattern>
   </rule>
-  <rule xsi:type="eqvtc:Mapping" xmi:id="ast960" name="Mb" refinement="ast3008">
-    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast1576" name="l" isCheckable="true" isEnforceable="false" typedModel="ast9">
-      <guardPattern xmi:id="ast696">
-        <predicate xmi:id="ast270">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1285">
+  <rule xsi:type="eqvtc:Mapping" xmi:id="ast107" name="Mb" refinement="ast190">
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast108" name="l" isCheckable="true" isEnforceable="false" typedModel="ast3">
+      <guardPattern xmi:id="ast109">
+        <predicate xmi:id="ast110">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast111">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast845">
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast112">
               <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
             </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1815">
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast113">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
           </conditionExpression>
         </predicate>
-        <predicate xmi:id="ast380">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast664">
+        <predicate xmi:id="ast114">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast115">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast747">
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast116">
               <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
             </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast472">
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast117">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
           </conditionExpression>
         </predicate>
-        <predicate xmi:id="ast1002">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast580">
+        <predicate xmi:id="ast118">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast119">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast137">
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast120">
               <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
             </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast349">
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast121">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
           </conditionExpression>
         </predicate>
-        <predicate xmi:id="ast1377">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1080">
+        <predicate xmi:id="ast122">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast123">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast520">
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast124">
               <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
             </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast24">
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast125">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
           </conditionExpression>
         </predicate>
-        <variable xmi:id="ast1245" name="vMblg2M2l">
+        <variable xmi:id="ast126" name="vMblg2M2l">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
         </variable>
-        <variable xmi:id="ast40" name="vMblg2M2m">
+        <variable xmi:id="ast127" name="vMblg2M2m">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
         </variable>
-        <variable xmi:id="ast1835" name="nMblg2M2r">
+        <variable xmi:id="ast128" name="nMblg2M2r">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast1317">
-        <predicate xmi:id="ast2048">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast649">
+      <bottomPattern xmi:id="ast129">
+        <predicate xmi:id="ast130">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast131">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast2074">
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast132">
               <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
             </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1017">
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast133">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
           </conditionExpression>
         </predicate>
-        <predicate xmi:id="ast1457">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast850">
+        <predicate xmi:id="ast134">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast135">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast1463">
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast136">
               <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
             </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast2220">
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast137">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
           </conditionExpression>
         </predicate>
-        <predicate xmi:id="ast1134">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast641">
+        <predicate xmi:id="ast138">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast139">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast146">
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast140">
               <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
             </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast892">
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast141">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
           </conditionExpression>
         </predicate>
-        <predicate xmi:id="ast1729">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1680">
+        <predicate xmi:id="ast142">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast143">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast1533">
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast144">
               <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
             </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast855">
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast145">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
           </conditionExpression>
         </predicate>
-        <variable xmi:id="ast2253" name="vMblb2M2lb">
+        <variable xmi:id="ast146" name="vMblb2M2lb">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
         </variable>
-        <variable xmi:id="ast1328" name="nMblb2M2lg">
+        <variable xmi:id="ast147" name="nMblb2M2lg">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
         </variable>
-        <variable xmi:id="ast1893" name="nMblb2M2r">
+        <variable xmi:id="ast148" name="nMblb2M2r">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
         </variable>
       </bottomPattern>
     </domain>
-    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast563" name="r" isCheckable="true" isEnforceable="true" typedModel="ast18">
-      <guardPattern xmi:id="ast2392">
-        <predicate xmi:id="ast2470">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1493">
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast149" name="r" isCheckable="true" isEnforceable="true" typedModel="ast4">
+      <guardPattern xmi:id="ast150">
+        <predicate xmi:id="ast151">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast152">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast671">
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast153">
               <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
             </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1518">
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast154">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
           </conditionExpression>
         </predicate>
-        <predicate xmi:id="ast815">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1141">
+        <predicate xmi:id="ast155">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast156">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast1200">
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast157">
               <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
             </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast317">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast1615">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast298">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast2664">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1672">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast2696">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast584">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast2192">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast2115">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-      </guardPattern>
-      <bottomPattern xmi:id="ast2450">
-        <predicate xmi:id="ast433">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1974">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast1534">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast2345">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast1771">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast282">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast423">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast2151">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast2869">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast419">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast659">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1965">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast1126">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast535">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast334">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1233">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-      </bottomPattern>
-    </domain>
-    <guardPattern xmi:id="ast2672">
-      <variable xmi:id="ast2607" name="vMbmg2M2m">
-        <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
-      </variable>
-      <variable xmi:id="ast2028" name="nMbmg2M2l">
-        <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
-      </variable>
-    </guardPattern>
-    <bottomPattern xmi:id="ast734">
-      <variable xmi:id="ast962" name="vMbmb2M2mb">
-        <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
-      </variable>
-      <variable xmi:id="ast1542" name="nMbmb2M2mg">
-        <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
-      </variable>
-    </bottomPattern>
-  </rule>
-  <rule xsi:type="eqvtc:Mapping" xmi:id="ast3008" name="M1" specification="ast22 ast960" refinement="ast3018">
-    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast901" name="l" isCheckable="true" isEnforceable="false" typedModel="ast9">
-      <guardPattern xmi:id="ast2992">
-        <predicate xmi:id="ast3076">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2123">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast1490">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1769">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast2018">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2996">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast2772">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1755">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast2547">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2788">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast699">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast2435">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast112">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2570">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast1280">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3079">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <variable xmi:id="ast3104" name="vM1lg2M1cl">
-          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-        </variable>
-        <variable xmi:id="ast6" name="vM1lg2M1cm">
-          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-        </variable>
-      </guardPattern>
-      <bottomPattern xmi:id="ast3047">
-        <predicate xmi:id="ast2698">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2093">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast540">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3285">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast2818">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1793">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast2584">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast2243">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast2050">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast414">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast740">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3526">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast2509">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2603">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast3293">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3529">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <variable xmi:id="ast2273" name="vM1lb2M1cl">
-          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-        </variable>
-        <variable xmi:id="ast781" name="vM1lb2M1cm">
-          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-        </variable>
-      </bottomPattern>
-    </domain>
-    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast2365" name="r" isCheckable="true" isEnforceable="true" typedModel="ast18">
-      <guardPattern xmi:id="ast2580"/>
-      <bottomPattern xmi:id="ast1430"/>
-    </domain>
-    <guardPattern xmi:id="ast1499">
-      <predicate xmi:id="ast2572">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1196">
-          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast2000">
-            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-          </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast2950">
-            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-          </argument>
-          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-        </conditionExpression>
-      </predicate>
-      <predicate xmi:id="ast3064">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3361">
-          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast1087">
-            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-          </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1923">
-            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-          </argument>
-          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-        </conditionExpression>
-      </predicate>
-      <predicate xmi:id="ast2755">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2414">
-          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast2776">
-            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-          </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1149">
-            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-          </argument>
-          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-        </conditionExpression>
-      </predicate>
-      <predicate xmi:id="ast1630">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1691">
-          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast884">
-            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-          </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast402">
-            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-          </argument>
-          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-        </conditionExpression>
-      </predicate>
-      <variable xmi:id="ast1022" name="nM1mg2M1cl">
-        <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-      </variable>
-      <variable xmi:id="ast2319" name="vM1mg2M1cm">
-        <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-      </variable>
-    </guardPattern>
-    <bottomPattern xmi:id="ast3171">
-      <predicate xmi:id="ast2786">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3481">
-          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast1894">
-            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-          </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3330">
-            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-          </argument>
-          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-        </conditionExpression>
-      </predicate>
-      <predicate xmi:id="ast1041">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast4206">
-          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast3823">
-            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-          </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast4000">
-            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-          </argument>
-          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-        </conditionExpression>
-      </predicate>
-      <predicate xmi:id="ast2482">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast4282">
-          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast1289">
-            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-          </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast709">
-            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-          </argument>
-          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-        </conditionExpression>
-      </predicate>
-      <predicate xmi:id="ast1984">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast770">
-          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast3990">
-            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-          </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast2966">
-            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-          </argument>
-          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-        </conditionExpression>
-      </predicate>
-      <variable xmi:id="ast859" name="nM1mb2M1cl">
-        <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-      </variable>
-      <variable xmi:id="ast2724" name="vM1mb2M1cm">
-        <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-      </variable>
-    </bottomPattern>
-    <local xmi:id="ast4093">
-      <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast4167" name="l" isCheckable="true" isEnforceable="false" typedModel="ast9">
-        <guardPattern xmi:id="ast1904">
-          <predicate xmi:id="ast1264">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3497">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast4247" name="vM1lg2M1cl" referredVariable="ast3104">
-                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast4367">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-            </conditionExpression>
-          </predicate>
-          <predicate xmi:id="ast392">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3264">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast2959" name="vM1lb2M1cl" referredVariable="ast2273">
-                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1315">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-            </conditionExpression>
-          </predicate>
-          <predicate xmi:id="ast1475">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2806">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast4487">
-                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast4726">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-            </conditionExpression>
-          </predicate>
-          <predicate xmi:id="ast4321">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast536">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast1885">
-                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast2884">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-            </conditionExpression>
-          </predicate>
-          <variable xmi:id="ast880" name="nM1clg2M1">
-            <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-          </variable>
-        </guardPattern>
-        <bottomPattern xmi:id="ast1068">
-          <predicate xmi:id="ast4080">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1969">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast3115" name="vM1lg2M1cl" referredVariable="ast3104">
-                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1434">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-            </conditionExpression>
-          </predicate>
-          <predicate xmi:id="ast2292">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast436">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast2651" name="vM1lb2M1cl" referredVariable="ast2273">
-                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1234">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-            </conditionExpression>
-          </predicate>
-          <predicate xmi:id="ast2269">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast545">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast3542">
-                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast2805">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-            </conditionExpression>
-          </predicate>
-          <predicate xmi:id="ast3362">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast240">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast4383">
-                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast253">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-            </conditionExpression>
-          </predicate>
-          <variable xmi:id="ast3288" name="nM1clb2M1">
-            <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-          </variable>
-        </bottomPattern>
-      </domain>
-      <guardPattern xmi:id="ast702">
-        <predicate xmi:id="ast635">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast203">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast4141" name="vM1lg2M1cm" referredVariable="ast6">
-              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3521">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast4649">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast5084">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast4409" name="vM1lb2M1cm" referredVariable="ast781">
-              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3515">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast4486">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast5127">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast4114" name="vM1mg2M1cm" referredVariable="ast2319">
-              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3706">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast2670">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast4433">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast2769" name="vM1mb2M1cm" referredVariable="ast2724">
-              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3494">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <variable xmi:id="ast4637" name="nM1cmg2M1">
-          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-        </variable>
-      </guardPattern>
-      <bottomPattern xmi:id="ast4386">
-        <predicate xmi:id="ast4492">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1992">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast3664" name="vM1lg2M1cm" referredVariable="ast6">
-              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3484">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast23">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2219">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast5257" name="vM1lb2M1cm" referredVariable="ast781">
-              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast2561">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast716">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast5093">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast5474" name="vM1mg2M1cm" referredVariable="ast2319">
-              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast4560">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast614">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast4937">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast1254" name="vM1mb2M1cm" referredVariable="ast2724">
-              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3845">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <variable xmi:id="ast1470" name="nM1cmb2M1">
-          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-        </variable>
-      </bottomPattern>
-    </local>
-    <local xmi:id="ast2042">
-      <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast2501" name="l" isCheckable="true" isEnforceable="false" typedModel="ast9">
-        <guardPattern xmi:id="ast5452">
-          <predicate xmi:id="ast3888">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3978">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast2617">
-                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast4464">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-            </conditionExpression>
-          </predicate>
-          <predicate xmi:id="ast2773">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1166">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast5440">
-                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3830">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-            </conditionExpression>
-          </predicate>
-          <predicate xmi:id="ast4642">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast478">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast997">
-                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast265">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-            </conditionExpression>
-          </predicate>
-          <predicate xmi:id="ast2785">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1651">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast4911">
-                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3495">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-            </conditionExpression>
-          </predicate>
-        </guardPattern>
-        <bottomPattern xmi:id="ast5189">
-          <predicate xmi:id="ast3117">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2453">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast956">
-                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast2565">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-            </conditionExpression>
-          </predicate>
-          <predicate xmi:id="ast1173">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast268">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast974">
-                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast6131">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-            </conditionExpression>
-          </predicate>
-          <predicate xmi:id="ast1284">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast4430">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast3584">
-                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast2582">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-            </conditionExpression>
-          </predicate>
-          <predicate xmi:id="ast142">
-            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3334">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast4774">
-                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-              </source>
-              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast975">
-                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-              </argument>
-              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-            </conditionExpression>
-          </predicate>
-        </bottomPattern>
-      </domain>
-      <guardPattern xmi:id="ast2280">
-        <predicate xmi:id="ast3286">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast6169">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast3607">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast164">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast4933">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3007">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast1681">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast4659">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast5579">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast6289">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast3400">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1507">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast5918">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast6135">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast1754">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast5863">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-      </guardPattern>
-      <bottomPattern xmi:id="ast6121">
-        <predicate xmi:id="ast449">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1389">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast1238">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1011">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast5960">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3461">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast3092">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast5350">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast1556">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3979">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast2339">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast5729">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast4861">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2071">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast6470">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3966">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-      </bottomPattern>
-    </local>
-  </rule>
-  <rule xsi:type="eqvtc:Mapping" xmi:id="ast3018" name="M2" specification="ast3008">
-    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast4643" name="l" isCheckable="true" isEnforceable="false" typedModel="ast9">
-      <guardPattern xmi:id="ast852">
-        <predicate xmi:id="ast5759">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast556">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast4401" name="vMblg2M2l" referredVariable="ast1245">
-              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1818">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast6133">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3613">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast391">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast2031">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast1623">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2167">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast629">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast5719">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <variable xmi:id="ast4521" name="nM2lg2Mb">
-          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-        </variable>
-      </guardPattern>
-      <bottomPattern xmi:id="ast1223">
-        <predicate xmi:id="ast215">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1808">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast6502" name="vMblg2M2l" referredVariable="ast1245">
-              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast4193">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast6219">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast6598">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast5177">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast6102">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <predicate xmi:id="ast3482">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1274">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast5128" name="vMblb2M2lb" referredVariable="ast2253">
-              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3035">
-              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-            </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-          </conditionExpression>
-        </predicate>
-        <variable xmi:id="ast5107" name="nM2lb2Mb">
-          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
-        </variable>
-      </bottomPattern>
-    </domain>
-    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast1160" name="r" isCheckable="true" isEnforceable="false" typedModel="ast18">
-      <guardPattern xmi:id="ast2789">
-        <predicate xmi:id="ast1566">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1964">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast7412">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
-            </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast5050">
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast158">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
           </conditionExpression>
         </predicate>
         <predicate xmi:id="ast159">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast5330">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast160">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast4958">
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast161">
               <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
             </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast7549">
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast162">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast163">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast164">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast165">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast166">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
           </conditionExpression>
         </predicate>
       </guardPattern>
-      <bottomPattern xmi:id="ast1733">
-        <predicate xmi:id="ast1355">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast6170">
+      <bottomPattern xmi:id="ast167">
+        <predicate xmi:id="ast168">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast169">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast1453">
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast170">
               <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
             </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast3696">
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast171">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
           </conditionExpression>
         </predicate>
-        <predicate xmi:id="ast2251">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1117">
+        <predicate xmi:id="ast172">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast173">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast5488">
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast174">
               <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
             </source>
-            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast1150">
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast175">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast176">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast177">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast178">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast179">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast180">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast181">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast182">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast183">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
@@ -1337,85 +529,893 @@
         </predicate>
       </bottomPattern>
     </domain>
-    <guardPattern xmi:id="ast5181">
-      <predicate xmi:id="ast7651">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3597">
+    <guardPattern xmi:id="ast184">
+      <variable xmi:id="ast185" name="vMbmg2M2m">
+        <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
+      </variable>
+      <variable xmi:id="ast186" name="nMbmg2M2l">
+        <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
+      </variable>
+    </guardPattern>
+    <bottomPattern xmi:id="ast187">
+      <variable xmi:id="ast188" name="vMbmb2M2mb">
+        <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
+      </variable>
+      <variable xmi:id="ast189" name="nMbmb2M2mg">
+        <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
+      </variable>
+    </bottomPattern>
+  </rule>
+  <rule xsi:type="eqvtc:Mapping" xmi:id="ast190" name="M1" specification="ast5 ast107" refinement="ast415">
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast191" name="l" isCheckable="true" isEnforceable="false" typedModel="ast3">
+      <guardPattern xmi:id="ast192">
+        <predicate xmi:id="ast193">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast194">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast195">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast196">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast197">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast198">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast199">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast200">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast201">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast202">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast203">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast204">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast205">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast206">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast207">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast208">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <variable xmi:id="ast209" name="vM1lg2M1cl">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+        <variable xmi:id="ast210" name="vM1lg2M1cm">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern xmi:id="ast211">
+        <predicate xmi:id="ast212">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast213">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast214">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast215">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast216">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast217">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast218">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast219">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast220">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast221">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast222">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast223">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast224">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast225">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast226">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast227">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <variable xmi:id="ast228" name="vM1lb2M1cl">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+        <variable xmi:id="ast229" name="vM1lb2M1cm">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+      </bottomPattern>
+    </domain>
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast230" name="r" isCheckable="true" isEnforceable="true" typedModel="ast4">
+      <guardPattern xmi:id="ast231"/>
+      <bottomPattern xmi:id="ast232"/>
+    </domain>
+    <guardPattern xmi:id="ast233">
+      <predicate xmi:id="ast234">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast235">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast396" name="vMbmg2M2m" referredVariable="ast2607">
-            <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
-          </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast4755">
-            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
-          </argument>
-          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
-        </conditionExpression>
-      </predicate>
-      <predicate xmi:id="ast2895">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2233">
-          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast7347">
+          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast236">
             <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
           </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast2341">
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast237">
             <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
           </argument>
           <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
         </conditionExpression>
       </predicate>
-      <predicate xmi:id="ast4405">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast5425">
+      <predicate xmi:id="ast238">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast239">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast1319" name="vMblg2M2m" referredVariable="ast40">
-            <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast240">
+            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
           </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast6083">
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast241">
             <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
           </argument>
-          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
         </conditionExpression>
       </predicate>
-      <variable xmi:id="ast4498" name="nM2mg2Mb">
+      <predicate xmi:id="ast242">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast243">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast244">
+            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+          </source>
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast245">
+            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+        </conditionExpression>
+      </predicate>
+      <predicate xmi:id="ast246">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast247">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast248">
+            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+          </source>
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast249">
+            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+        </conditionExpression>
+      </predicate>
+      <variable xmi:id="ast250" name="nM1mg2M1cl">
+        <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+      </variable>
+      <variable xmi:id="ast251" name="vM1mg2M1cm">
         <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
       </variable>
     </guardPattern>
-    <bottomPattern xmi:id="ast4782">
-      <predicate xmi:id="ast6753">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast345">
+    <bottomPattern xmi:id="ast252">
+      <predicate xmi:id="ast253">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast254">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast3278" name="vMbmg2M2m" referredVariable="ast2607">
+          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast255">
+            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+          </source>
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast256">
+            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+        </conditionExpression>
+      </predicate>
+      <predicate xmi:id="ast257">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast258">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast259">
+            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+          </source>
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast260">
+            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+        </conditionExpression>
+      </predicate>
+      <predicate xmi:id="ast261">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast262">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast263">
+            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+          </source>
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast264">
+            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+        </conditionExpression>
+      </predicate>
+      <predicate xmi:id="ast265">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast266">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast267">
+            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+          </source>
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast268">
+            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+        </conditionExpression>
+      </predicate>
+      <variable xmi:id="ast269" name="nM1mb2M1cl">
+        <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+      </variable>
+      <variable xmi:id="ast270" name="vM1mb2M1cm">
+        <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+      </variable>
+    </bottomPattern>
+    <local xmi:id="ast271">
+      <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast272" name="l" isCheckable="true" isEnforceable="false" typedModel="ast3">
+        <guardPattern xmi:id="ast273">
+          <predicate xmi:id="ast274">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast275">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast276" name="vM1lg2M1cl" referredVariable="ast209">
+                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast277">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+            </conditionExpression>
+          </predicate>
+          <predicate xmi:id="ast278">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast279">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast280" name="vM1lb2M1cl" referredVariable="ast228">
+                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast281">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+            </conditionExpression>
+          </predicate>
+          <predicate xmi:id="ast282">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast283">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast284">
+                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast285">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+            </conditionExpression>
+          </predicate>
+          <predicate xmi:id="ast286">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast287">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast288">
+                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast289">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+            </conditionExpression>
+          </predicate>
+          <variable xmi:id="ast290" name="nM1clg2M1">
+            <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+          </variable>
+        </guardPattern>
+        <bottomPattern xmi:id="ast291">
+          <predicate xmi:id="ast292">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast293">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast294" name="vM1lg2M1cl" referredVariable="ast209">
+                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast295">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+            </conditionExpression>
+          </predicate>
+          <predicate xmi:id="ast296">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast297">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast298" name="vM1lb2M1cl" referredVariable="ast228">
+                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast299">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+            </conditionExpression>
+          </predicate>
+          <predicate xmi:id="ast300">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast301">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast302">
+                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast303">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+            </conditionExpression>
+          </predicate>
+          <predicate xmi:id="ast304">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast305">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast306">
+                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast307">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+            </conditionExpression>
+          </predicate>
+          <variable xmi:id="ast308" name="nM1clb2M1">
+            <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+          </variable>
+        </bottomPattern>
+      </domain>
+      <guardPattern xmi:id="ast309">
+        <predicate xmi:id="ast310">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast311">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast312" name="vM1lg2M1cm" referredVariable="ast210">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast313">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast314">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast315">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast316" name="vM1lb2M1cm" referredVariable="ast229">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast317">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast318">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast319">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast320" name="vM1mg2M1cm" referredVariable="ast251">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast321">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast322">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast323">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast324" name="vM1mb2M1cm" referredVariable="ast270">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast325">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <variable xmi:id="ast326" name="nM1cmg2M1">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern xmi:id="ast327">
+        <predicate xmi:id="ast328">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast329">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast330" name="vM1lg2M1cm" referredVariable="ast210">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast331">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast332">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast333">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast334" name="vM1lb2M1cm" referredVariable="ast229">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast335">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast336">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast337">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast338" name="vM1mg2M1cm" referredVariable="ast251">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast339">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast340">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast341">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast342" name="vM1mb2M1cm" referredVariable="ast270">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast343">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <variable xmi:id="ast344" name="nM1cmb2M1">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+      </bottomPattern>
+    </local>
+    <local xmi:id="ast345">
+      <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast346" name="l" isCheckable="true" isEnforceable="false" typedModel="ast3">
+        <guardPattern xmi:id="ast347">
+          <predicate xmi:id="ast348">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast349">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast350">
+                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast351">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+            </conditionExpression>
+          </predicate>
+          <predicate xmi:id="ast352">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast353">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast354">
+                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast355">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+            </conditionExpression>
+          </predicate>
+          <predicate xmi:id="ast356">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast357">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast358">
+                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast359">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+            </conditionExpression>
+          </predicate>
+          <predicate xmi:id="ast360">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast361">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast362">
+                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast363">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+            </conditionExpression>
+          </predicate>
+        </guardPattern>
+        <bottomPattern xmi:id="ast364">
+          <predicate xmi:id="ast365">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast366">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast367">
+                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast368">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+            </conditionExpression>
+          </predicate>
+          <predicate xmi:id="ast369">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast370">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast371">
+                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast372">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+            </conditionExpression>
+          </predicate>
+          <predicate xmi:id="ast373">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast374">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast375">
+                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast376">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+            </conditionExpression>
+          </predicate>
+          <predicate xmi:id="ast377">
+            <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast378">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast379">
+                <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast380">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+            </conditionExpression>
+          </predicate>
+        </bottomPattern>
+      </domain>
+      <guardPattern xmi:id="ast381">
+        <predicate xmi:id="ast382">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast383">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast384">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast385">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast386">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast387">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast388">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast389">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast390">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast391">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast392">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast393">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast394">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast395">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast396">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast397">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+      </guardPattern>
+      <bottomPattern xmi:id="ast398">
+        <predicate xmi:id="ast399">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast400">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast401">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast402">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast403">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast404">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast405">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast406">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast407">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast408">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast409">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast410">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast411">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast412">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast413">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast414">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+      </bottomPattern>
+    </local>
+  </rule>
+  <rule xsi:type="eqvtc:Mapping" xmi:id="ast415" name="M2" specification="ast190">
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast416" name="l" isCheckable="true" isEnforceable="false" typedModel="ast3">
+      <guardPattern xmi:id="ast417">
+        <predicate xmi:id="ast418">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast419">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast420" name="vMblg2M2l" referredVariable="ast126">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast421">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast422">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast423">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast424">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast425">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast426">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast427">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast428">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast429">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <variable xmi:id="ast430" name="nM2lg2Mb">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern xmi:id="ast431">
+        <predicate xmi:id="ast432">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast433">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast434" name="vMblg2M2l" referredVariable="ast126">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast435">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast436">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast437">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast438">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast439">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast440">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast441">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast442" name="vMblb2M2lb" referredVariable="ast146">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast443">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <variable xmi:id="ast444" name="nM2lb2Mb">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+      </bottomPattern>
+    </domain>
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast445" name="r" isCheckable="true" isEnforceable="false" typedModel="ast4">
+      <guardPattern xmi:id="ast446">
+        <predicate xmi:id="ast447">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast448">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast449">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast450">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast451">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast452">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast453">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast454">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+      </guardPattern>
+      <bottomPattern xmi:id="ast455">
+        <predicate xmi:id="ast456">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast457">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast458">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast459">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast460">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast461">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast462">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast463">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
+          </conditionExpression>
+        </predicate>
+      </bottomPattern>
+    </domain>
+    <guardPattern xmi:id="ast464">
+      <predicate xmi:id="ast465">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast466">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast467" name="vMbmg2M2m" referredVariable="ast185">
             <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
           </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast506">
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast468">
             <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
           </argument>
           <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
         </conditionExpression>
       </predicate>
-      <predicate xmi:id="ast1186">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast7499">
+      <predicate xmi:id="ast469">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast470">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast6586" name="vMbmb2M2mb" referredVariable="ast962">
-            <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
+          <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast471">
+            <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
           </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast6992">
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast472">
             <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
           </argument>
-          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/="/>
         </conditionExpression>
       </predicate>
-      <predicate xmi:id="ast3818">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3094">
+      <predicate xmi:id="ast473">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast474">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast5370" name="vMblg2M2m" referredVariable="ast40">
+          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast475" name="vMblg2M2m" referredVariable="ast127">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
           </source>
-          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast823">
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast476">
             <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
           </argument>
           <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
         </conditionExpression>
       </predicate>
-      <variable xmi:id="ast7135" name="nM2mb2Mb">
+      <variable xmi:id="ast477" name="nM2mg2Mb">
+        <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+      </variable>
+    </guardPattern>
+    <bottomPattern xmi:id="ast478">
+      <predicate xmi:id="ast479">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast480">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast481" name="vMbmg2M2m" referredVariable="ast185">
+            <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
+          </source>
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast482">
+            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+        </conditionExpression>
+      </predicate>
+      <predicate xmi:id="ast483">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast484">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast485" name="vMbmb2M2mb" referredVariable="ast188">
+            <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
+          </source>
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast486">
+            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+        </conditionExpression>
+      </predicate>
+      <predicate xmi:id="ast487">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast488">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast489" name="vMblg2M2m" referredVariable="ast127">
+            <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+          </source>
+          <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast490">
+            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+        </conditionExpression>
+      </predicate>
+      <variable xmi:id="ast491" name="nM2mb2Mb">
         <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
       </variable>
     </bottomPattern>

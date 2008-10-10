@@ -1,233 +1,233 @@
 <?xml version="1.0" encoding="ASCII"?>
-<eqvtb:Transformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtb="http://www.eclipse.org/qvt/1.0/QVTBase" xmlns:eqvtc="http://www.eclipse.org/qvt/1.0/QVTCore" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore" xmi:id="ast0" name="umlRdbms" nsURI="http://models/Rule4b.qvtc/umlRdbms" nsPrefix="umlRdbms">
-  <modelParameter xmi:id="ast1" name="middle">
+<eqvtb:Transformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtb="http://www.eclipse.org/qvt/1.0/QVTBase" xmlns:eqvtc="http://www.eclipse.org/qvt/1.0/QVTCore" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore" xmi:id="ast1" name="umlRdbms" nsURI="http://models/Rule4b.qvtc/umlRdbms" nsPrefix="umlRdbms">
+  <modelParameter xmi:id="ast2" name="middle">
     <usedPackage href="TumlRdbms.ecore#/"/>
   </modelParameter>
-  <modelParameter xmi:id="ast9" name="uml">
+  <modelParameter xmi:id="ast3" name="uml">
     <usedPackage href="umlMM.emof#umlMM"/>
   </modelParameter>
-  <modelParameter xmi:id="ast17" name="rdbms">
+  <modelParameter xmi:id="ast4" name="rdbms">
     <usedPackage href="rdbmsMM.emof#rdbmsMM"/>
   </modelParameter>
-  <rule xsi:type="eqvtc:Mapping" xmi:id="ast2" name="ClassToTable_rdbms">
-    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast6" name="uml" isCheckable="true" isEnforceable="false" typedModel="ast9">
-      <guardPattern xmi:id="ast48">
-        <variable xmi:id="ast67" name="p">
+  <rule xsi:type="eqvtc:Mapping" xmi:id="ast5" name="ClassToTable_rdbms">
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast6" name="uml" isCheckable="true" isEnforceable="false" typedModel="ast3">
+      <guardPattern xmi:id="ast7">
+        <variable xmi:id="ast8" name="p">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast51">
-        <predicate xmi:id="ast19">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast58">
+      <bottomPattern xmi:id="ast9">
+        <predicate xmi:id="ast10">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast11">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast75">
+            <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast12">
               <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
-              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast128" name="c" referredVariable="ast238">
+              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast13" name="c" referredVariable="ast20">
                 <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
               </source>
               <referredProperty xsi:type="ecore:EReference" href="umlMM.emof#umlMM.Classifier.namespace"/>
             </source>
-            <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast22" name="p" referredVariable="ast67">
+            <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast14" name="p" referredVariable="ast8">
               <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
           </conditionExpression>
         </predicate>
-        <predicate xmi:id="ast65">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast28">
+        <predicate xmi:id="ast15">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast16">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast62">
+            <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast17">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast39" name="c" referredVariable="ast238">
+              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast18" name="c" referredVariable="ast20">
                 <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
               </source>
               <referredProperty xsi:type="ecore:EAttribute" href="umlMM.emof#umlMM.Class.kind"/>
             </source>
-            <argument xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast212" stringSymbol="Persistent">
+            <argument xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast19" stringSymbol="Persistent">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
           </conditionExpression>
         </predicate>
-        <variable xmi:id="ast238" name="c">
+        <variable xmi:id="ast20" name="c">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
         </variable>
       </bottomPattern>
     </domain>
-    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast31" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast17">
-      <guardPattern xmi:id="ast126">
-        <variable xmi:id="ast147" name="s">
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast21" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast4">
+      <guardPattern xmi:id="ast22">
+        <variable xmi:id="ast23" name="s">
           <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Schema"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast109">
-        <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast165" isDefault="false">
-          <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast167" name="s" referredVariable="ast147">
+      <bottomPattern xmi:id="ast24">
+        <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast25" isDefault="false">
+          <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast26" name="s" referredVariable="ast23">
             <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Schema"/>
           </value>
-          <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast24" name="t" referredVariable="ast367">
+          <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast27" name="t" referredVariable="ast28">
             <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Table"/>
           </slotExpression>
           <targetProperty xsi:type="ecore:EReference" href="rdbmsMM.emof#rdbmsMM.Table.schema"/>
         </assignment>
-        <realizedVariable xmi:id="ast367" name="t">
+        <realizedVariable xmi:id="ast28" name="t">
           <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Table"/>
         </realizedVariable>
       </bottomPattern>
     </domain>
-    <guardPattern xmi:id="ast94">
-      <predicate xmi:id="ast190">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast228">
+    <guardPattern xmi:id="ast29">
+      <predicate xmi:id="ast30">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast31">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast358">
+          <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast32">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast335" name="v1" referredVariable="ast364">
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast33" name="v1" referredVariable="ast40">
               <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TPackageToSchema"/>
             </source>
             <referredProperty xsi:type="ecore:EReference" href="TumlRdbms.ecore#//TPackageToSchema/p"/>
           </source>
-          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast291" name="p" referredVariable="ast67">
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast34" name="p" referredVariable="ast8">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
           </argument>
           <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
         </conditionExpression>
       </predicate>
-      <predicate xmi:id="ast372">
-        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast451">
+      <predicate xmi:id="ast35">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast36">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast292">
+          <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast37">
             <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Schema"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast70" name="v1" referredVariable="ast364">
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast38" name="v1" referredVariable="ast40">
               <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TPackageToSchema"/>
             </source>
             <referredProperty xsi:type="ecore:EReference" href="TumlRdbms.ecore#//TPackageToSchema/s"/>
           </source>
-          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast318" name="s" referredVariable="ast147">
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast39" name="s" referredVariable="ast23">
             <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Schema"/>
           </argument>
           <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
         </conditionExpression>
       </predicate>
-      <variable xmi:id="ast364" name="v1">
+      <variable xmi:id="ast40" name="v1">
         <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TPackageToSchema"/>
       </variable>
     </guardPattern>
-    <bottomPattern xmi:id="ast221">
-      <variable xmi:id="ast455" name="cn">
+    <bottomPattern xmi:id="ast41">
+      <variable xmi:id="ast42" name="cn">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
       </variable>
-      <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast492" isDefault="false">
-        <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast223" name="p" referredVariable="ast67">
+      <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast43" isDefault="false">
+        <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast44" name="p" referredVariable="ast8">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
         </value>
-        <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast540" name="v2" referredVariable="ast563">
+        <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast45" name="v2" referredVariable="ast61">
           <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
         </slotExpression>
         <targetProperty xsi:type="ecore:EReference" href="TumlRdbms.ecore#//TClassToTable/p"/>
       </assignment>
-      <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast498" isDefault="false">
-        <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast464" name="s" referredVariable="ast147">
+      <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast46" isDefault="false">
+        <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast47" name="s" referredVariable="ast23">
           <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Schema"/>
         </value>
-        <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast575" name="v2" referredVariable="ast563">
+        <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast48" name="v2" referredVariable="ast61">
           <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
         </slotExpression>
         <targetProperty xsi:type="ecore:EReference" href="TumlRdbms.ecore#//TClassToTable/s"/>
       </assignment>
-      <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast258" isDefault="false">
-        <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast108" name="c" referredVariable="ast238">
+      <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast49" isDefault="false">
+        <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast50" name="c" referredVariable="ast20">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
         </value>
-        <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast79" name="v2" referredVariable="ast563">
+        <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast51" name="v2" referredVariable="ast61">
           <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
         </slotExpression>
         <targetProperty xsi:type="ecore:EReference" href="TumlRdbms.ecore#//TClassToTable/c"/>
       </assignment>
-      <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast586" isDefault="false">
-        <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast424" name="t" referredVariable="ast367">
+      <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast52" isDefault="false">
+        <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast53" name="t" referredVariable="ast28">
           <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Table"/>
         </value>
-        <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast207" name="v2" referredVariable="ast563">
+        <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast54" name="v2" referredVariable="ast61">
           <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
         </slotExpression>
         <targetProperty xsi:type="ecore:EReference" href="TumlRdbms.ecore#//TClassToTable/t"/>
       </assignment>
-      <assignment xsi:type="eqvtc:VariableAssignment" xmi:id="ast794" isDefault="false" targetVariable="ast455">
-        <value xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast758">
+      <assignment xsi:type="eqvtc:VariableAssignment" xmi:id="ast55" isDefault="false" targetVariable="ast42">
+        <value xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast56">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast538" name="c" referredVariable="ast238">
+          <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast57" name="c" referredVariable="ast20">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
           </source>
           <referredProperty xsi:type="ecore:EAttribute" href="umlMM.emof#umlMM.Classifier.name"/>
         </value>
       </assignment>
-      <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast285" isDefault="false">
-        <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast814" name="cn" referredVariable="ast455">
+      <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast58" isDefault="false">
+        <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast59" name="cn" referredVariable="ast42">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </value>
-        <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast912" name="t" referredVariable="ast367">
+        <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast60" name="t" referredVariable="ast28">
           <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Table"/>
         </slotExpression>
         <targetProperty xsi:type="ecore:EAttribute" href="rdbmsMM.emof#rdbmsMM.Table.name"/>
       </assignment>
-      <realizedVariable xmi:id="ast563" name="v2">
+      <realizedVariable xmi:id="ast61" name="v2">
         <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
       </realizedVariable>
     </bottomPattern>
-    <local xmi:id="ast340">
-      <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast317" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast17">
-        <guardPattern xmi:id="ast213"/>
-        <bottomPattern xmi:id="ast570">
-          <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast352" isDefault="false">
-            <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast807" name="cl" referredVariable="ast820">
+    <local xmi:id="ast62">
+      <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast63" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast4">
+        <guardPattern xmi:id="ast64"/>
+        <bottomPattern xmi:id="ast65">
+          <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast66" isDefault="false">
+            <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast67" name="cl" referredVariable="ast69">
               <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Column"/>
             </value>
-            <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast777" name="t" referredVariable="ast367">
+            <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast68" name="t" referredVariable="ast28">
               <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Table"/>
             </slotExpression>
             <targetProperty xsi:type="ecore:EReference" href="rdbmsMM.emof#rdbmsMM.Table.column"/>
           </assignment>
-          <realizedVariable xmi:id="ast820" name="cl">
+          <realizedVariable xmi:id="ast69" name="cl">
             <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Column"/>
           </realizedVariable>
         </bottomPattern>
       </domain>
-      <guardPattern xmi:id="ast477"/>
-      <bottomPattern xmi:id="ast1084">
-        <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast739" isDefault="false">
-          <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast870" name="cl" referredVariable="ast820">
+      <guardPattern xmi:id="ast70"/>
+      <bottomPattern xmi:id="ast71">
+        <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast72" isDefault="false">
+          <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast73" name="cl" referredVariable="ast69">
             <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Column"/>
           </value>
-          <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast7" name="v2" referredVariable="ast563">
+          <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast74" name="v2" referredVariable="ast61">
             <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
           </slotExpression>
           <targetProperty xsi:type="ecore:EReference" href="TumlRdbms.ecore#//TClassToTable/cl"/>
         </assignment>
-        <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast974" isDefault="false">
-          <value xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast175">
+        <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast75" isDefault="false">
+          <value xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast76">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast558" name="cn" referredVariable="ast455">
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast77" name="cn" referredVariable="ast42">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
             </source>
-            <argument xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast1183" stringSymbol="_tid">
+            <argument xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast78" stringSymbol="_tid">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
           </value>
-          <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast391" name="cl" referredVariable="ast820">
+          <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast79" name="cl" referredVariable="ast69">
             <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Column"/>
           </slotExpression>
           <targetProperty xsi:type="ecore:EAttribute" href="rdbmsMM.emof#rdbmsMM.Column.name"/>
         </assignment>
       </bottomPattern>
-      <local xmi:id="ast1044">
-        <guardPattern xmi:id="ast161"/>
-        <bottomPattern xmi:id="ast410">
-          <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast1261" isDefault="false">
-            <value xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast1218" stringSymbol="NUMBER">
+      <local xmi:id="ast80">
+        <guardPattern xmi:id="ast81"/>
+        <bottomPattern xmi:id="ast82">
+          <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast83" isDefault="false">
+            <value xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast84" stringSymbol="NUMBER">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
             </value>
-            <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast1078" name="cl" referredVariable="ast820">
+            <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast85" name="cl" referredVariable="ast69">
               <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Column"/>
             </slotExpression>
             <targetProperty xsi:type="ecore:EAttribute" href="rdbmsMM.emof#rdbmsMM.Column.type"/>
@@ -235,77 +235,77 @@
         </bottomPattern>
       </local>
     </local>
-    <local xmi:id="ast129">
-      <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast510" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast17">
-        <guardPattern xmi:id="ast599">
-          <variable xmi:id="ast873" name="cl">
+    <local xmi:id="ast86">
+      <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast87" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast4">
+        <guardPattern xmi:id="ast88">
+          <variable xmi:id="ast89" name="cl">
             <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Column"/>
           </variable>
         </guardPattern>
-        <bottomPattern xmi:id="ast265">
-          <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast555" isDefault="false">
-            <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast81" name="k" referredVariable="ast441">
+        <bottomPattern xmi:id="ast90">
+          <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast91" isDefault="false">
+            <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast92" name="k" referredVariable="ast97">
               <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Key"/>
             </value>
-            <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast1349" name="t" referredVariable="ast367">
+            <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast93" name="t" referredVariable="ast28">
               <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Table"/>
             </slotExpression>
             <targetProperty xsi:type="ecore:EReference" href="rdbmsMM.emof#rdbmsMM.Table.key"/>
           </assignment>
-          <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast1093" isDefault="false">
-            <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast1415" name="cl" referredVariable="ast873">
+          <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast94" isDefault="false">
+            <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast95" name="cl" referredVariable="ast89">
               <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Column"/>
             </value>
-            <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast1466" name="k" referredVariable="ast441">
+            <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast96" name="k" referredVariable="ast97">
               <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Key"/>
             </slotExpression>
             <targetProperty xsi:type="ecore:EReference" href="rdbmsMM.emof#rdbmsMM.Key.column"/>
           </assignment>
-          <realizedVariable xmi:id="ast441" name="k">
+          <realizedVariable xmi:id="ast97" name="k">
             <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Key"/>
           </realizedVariable>
         </bottomPattern>
       </domain>
-      <guardPattern xmi:id="ast629">
-        <predicate xmi:id="ast377">
-          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1323">
+      <guardPattern xmi:id="ast98">
+        <predicate xmi:id="ast99">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast100">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-            <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast1073">
+            <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast101">
               <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Column"/>
-              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast103" name="v2" referredVariable="ast563">
+              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast102" name="v2" referredVariable="ast61">
                 <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
               </source>
               <referredProperty xsi:type="ecore:EReference" href="TumlRdbms.ecore#//TClassToTable/cl"/>
             </source>
-            <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast665" name="cl" referredVariable="ast873">
+            <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast103" name="cl" referredVariable="ast89">
               <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Column"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
           </conditionExpression>
         </predicate>
       </guardPattern>
-      <bottomPattern xmi:id="ast1168">
-        <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast235" isDefault="false">
-          <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast621" name="k" referredVariable="ast441">
+      <bottomPattern xmi:id="ast104">
+        <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast105" isDefault="false">
+          <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast106" name="k" referredVariable="ast97">
             <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Key"/>
           </value>
-          <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast1605" name="v2" referredVariable="ast563">
+          <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast107" name="v2" referredVariable="ast61">
             <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
           </slotExpression>
           <targetProperty xsi:type="ecore:EReference" href="TumlRdbms.ecore#//TClassToTable/k"/>
         </assignment>
-        <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast170" isDefault="false">
-          <value xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast556">
+        <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast108" isDefault="false">
+          <value xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast109">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast889" name="cn" referredVariable="ast455">
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast110" name="cn" referredVariable="ast42">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
             </source>
-            <argument xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast655" stringSymbol="_pk">
+            <argument xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast111" stringSymbol="_pk">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
             </argument>
             <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
           </value>
-          <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast1716" name="k" referredVariable="ast441">
+          <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast112" name="k" referredVariable="ast97">
             <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Key"/>
           </slotExpression>
           <targetProperty xsi:type="ecore:EAttribute" href="rdbmsMM.emof#rdbmsMM.Key.name"/>
