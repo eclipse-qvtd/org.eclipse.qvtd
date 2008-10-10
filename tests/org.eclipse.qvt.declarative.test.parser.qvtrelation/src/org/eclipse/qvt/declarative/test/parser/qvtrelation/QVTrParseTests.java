@@ -123,9 +123,9 @@ public class QVTrParseTests extends AbstractQVTrTestCase
 		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
 				new String[] { "ScopeB::b::a::baZ"} );
 		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
-				new String[] { "Unresolved::unresolved::UnresolvedClass"} );
+				new String[] { "Scoping.qvtr::$unresolved$::$class$"} );
 		expectedProblems.expectValidatorWarning("_UI_DuplicateKeyDefinition_diagnostic",
-				new String[] { "Unresolved::unresolved::UnresolvedClass"} );
+				new String[] { "Scoping.qvtr::$unresolved$::$class$"} );
 		problemTest("Scoping", expectedProblems);
 	}
 	
