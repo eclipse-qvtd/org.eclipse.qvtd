@@ -28,6 +28,6 @@ public class MissingObjectException extends MissingElementException
 
 	@Override
 	public String toString() {
-		return super.toString() + " xmi:id=" + id + " name='" + EcoreUtils.formatFullName(object) + "'";
+		return super.toString() + " xmi:id=" + id + " name='" + EcoreUtils.formatQualifiedName(object) + "'";
 	}
 }
