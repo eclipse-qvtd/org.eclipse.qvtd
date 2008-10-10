@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.5 2008/09/28 12:13:27 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.6 2008/10/10 13:41:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -128,18 +128,7 @@ public abstract class CommonBuilder extends BuilderBase
 			for (BuilderListener builderListener : builderListeners)
 				builderListener.beginBuild(inputFile);
 		IPath projectRelativeInputPath = inputFile.getProjectRelativePath();
-		IPath workspaceRelativeInputPath = inputFile.getFullPath();
-		IPath workspaceRelativeOutputPath = workspaceRelativeInputPath;
-		IClasspathEntry[] resolvedClasspath = getClasspathEntries(inputFile.getProject());		
-		IClasspathEntry classpathEntry = resolvedClasspath != null ? getClasspathEntry(inputFile, resolvedClasspath) : null;
-		if (classpathEntry != null) {
-			IPath sourcePath = classpathEntry.getPath();
-			IPath outputPath = classpathEntry.getOutputLocation();
-			workspaceRelativeOutputPath = outputPath != null ? outputPath.append(workspaceRelativeInputPath.removeFirstSegments(sourcePath.segmentCount())) : workspaceRelativeInputPath;
-		}
-		if (hasTextExtension(inputFile))
-			workspaceRelativeOutputPath = workspaceRelativeOutputPath.removeFileExtension();
-		workspaceRelativeOutputPath = workspaceRelativeOutputPath.addFileExtension(creationFactory.getXMLExtension());
+		IPath workspaceRelativeOutputPath = getWorkspaceRelativeOutputFilePath(inputFile);
 		IFile outputFile = getProject().getFile(workspaceRelativeOutputPath.removeFirstSegments(1));
 		getPlugin().writeInfoMsg("Building " + creationFactory.getLanguageName() + " input file: '" + inputFile.getName() + "', output file: '" + outputFile.getName() + "'");
 		ProblemHandler problemHandler = creationFactory.createProblemHandler(inputFile);
@@ -231,6 +220,21 @@ public abstract class CommonBuilder extends BuilderBase
 	@Override
 	public String getWarningMarkerID() {
 		return creationFactory.getWarningMarkerId();
+	}
+
+	protected IPath getWorkspaceRelativeOutputFilePath(final IFile inputFile) {
+		IPath workspaceRelativeInputPath = inputFile.getFullPath();
+		IPath workspaceRelativeOutputPath = workspaceRelativeInputPath;
+		IClasspathEntry[] resolvedClasspath = getClasspathEntries(inputFile.getProject());		
+		IClasspathEntry classpathEntry = resolvedClasspath != null ? getClasspathEntry(inputFile, resolvedClasspath) : null;
+		if (classpathEntry != null) {
+			IPath sourcePath = classpathEntry.getPath();
+			IPath outputPath = classpathEntry.getOutputLocation();
+			workspaceRelativeOutputPath = outputPath != null ? outputPath.append(workspaceRelativeInputPath.removeFirstSegments(sourcePath.segmentCount())) : workspaceRelativeInputPath;
+		}
+		if (hasTextExtension(inputFile))
+			workspaceRelativeOutputPath = workspaceRelativeOutputPath.removeFileExtension();
+		return workspaceRelativeOutputPath.addFileExtension(creationFactory.getXMLExtension());
 	}
 	
 	/**
