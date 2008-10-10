@@ -123,7 +123,7 @@
     <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvttemplate.edit/icons/full/obj16/PropertyTemplateItem.gif" format="{0}">
       <elements xsi:type="ed:EcoreLabelElement">
-        <path href="http://www.eclipse.org/qvt/1.0/QVTRelationcst#//PropertyTemplateCS/referredProperty"/>
+        <path href="http://www.eclipse.org/qvt/1.0/QVTTemplate#//PropertyTemplateItem/referredProperty"/>
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
       </elements>
     </behavior>
