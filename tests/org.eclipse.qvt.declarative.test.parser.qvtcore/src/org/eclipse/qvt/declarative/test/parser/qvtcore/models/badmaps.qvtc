@@ -46,7 +46,7 @@ map Map1 in umlRdbms refines Map0a, Map0b
 		v2.s := s;
 		v2.c := c;
 	}
-	map {
+	map in umlRdbms {							-- Error nested scoping
 		where () {
 			t.description := cn;
 		}
