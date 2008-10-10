@@ -92,6 +92,7 @@ public class OCLUtils extends CSTUtils
 		return (collectionKind == CollectionKind.ORDERED_SET_LITERAL) || (collectionKind == CollectionKind.SEQUENCE_LITERAL);
 	}
 
+	@Deprecated			// Use UnresolvedEnvironment to create and check unresolved elements
 	public static boolean isUnresolved(EClassifier eClassifier) {
 		return eClassifier.getEPackage() == UnresolvedPackage.eINSTANCE;
 	}
