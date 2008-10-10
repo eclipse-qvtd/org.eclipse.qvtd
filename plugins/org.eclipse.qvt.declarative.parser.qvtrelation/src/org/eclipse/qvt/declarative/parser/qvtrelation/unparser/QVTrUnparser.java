@@ -10,9 +10,10 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.qvtrelation.unparser;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -36,6 +37,7 @@ import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationImplementation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.CollectionTemplateExp;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.ObjectTemplateExp;
+import org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.TemplateExp;
 import org.eclipse.qvt.declarative.parser.qvt.environment.QVTReflectionImpl;
 
@@ -43,6 +45,36 @@ public class QVTrUnparser extends QVTrExpressionUnparser
 {
 	public QVTrUnparser(Resource resource) {
 		super(resource, QVTReflectionImpl.INSTANCE);
+	}
+
+	protected void getPatternVariables(Set<Variable> patternVariables, Relation relation) {
+		for (Domain domain : relation.getDomain()) {
+			if (domain instanceof RelationDomain) {
+				patternVariables.add(((RelationDomain) domain).getRootVariable());
+				DomainPattern pattern = ((RelationDomain) domain).getPattern();
+				if (pattern != null)
+					getPatternVariables(patternVariables, pattern.getTemplateExpression());
+			}
+		}
+	}
+
+	protected void getPatternVariables(Set<Variable> patternVariables, TemplateExp templateExpression) {
+		if (templateExpression == null)
+			return;
+		patternVariables.add(templateExpression.getBindsTo());
+		if (templateExpression instanceof ObjectTemplateExp) {
+			for (PropertyTemplateItem part : ((ObjectTemplateExp)templateExpression).getPart()) {
+				OCLExpression value = part.getValue();
+				if (value instanceof TemplateExp)
+					getPatternVariables(patternVariables, (TemplateExp) value);
+			}
+		}
+		else if (templateExpression instanceof CollectionTemplateExp) {
+			for (OCLExpression value : ((CollectionTemplateExp)templateExpression).getMember()) {
+				if (value instanceof TemplateExp)
+					getPatternVariables(patternVariables, (TemplateExp) value);
+			}
+		}
 	}
 
 	@Override public void unparse() {
@@ -143,11 +175,15 @@ public class QVTrUnparser extends QVTrExpressionUnparser
 		appendName(relation);
 		append(" {\n");
 		indent();
-		EList<Variable> variables = relation.getVariable();
+		Set<Variable> patternVariables = new HashSet<Variable>();
+		getPatternVariables(patternVariables, relation);
+		List<Variable> variables = relation.getVariable();
 		if (variables.size() > 0) {
 			for (Variable variable : variables) {
-				unparseVariable(variable);
-				append(";\n");
+				if (!patternVariables.contains(variable)) {
+					unparseVariable(variable);
+					append(";\n");
+				}
 			}
 		}
 		for (Domain domain : relation.getDomain())
