@@ -160,7 +160,7 @@
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
       </elements>
       <elements xsi:type="ed:EcoreLabelElement">
-        <end xsi:type="ecore:EReference" href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
+        <end xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/1.1.0/OCL/Types#//TypeType/referredType"/>
       </elements>
       <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/1.1.0/OCL/Expressions#//Variable/initExpression"/>
@@ -264,7 +264,7 @@
   </node>
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/PropertyCallExp.gif" format="{0}{1}{2}">
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/PropertyCallExp.gif" format="{0} {1} {2}">
       <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CallExpCS/accessor"/>
       </elements>
