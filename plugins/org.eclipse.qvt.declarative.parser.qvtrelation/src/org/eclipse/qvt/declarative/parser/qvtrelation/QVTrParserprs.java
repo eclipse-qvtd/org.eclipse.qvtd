@@ -1,7 +1,7 @@
 /**
 * <copyright>
 *
-* Copyright (c) 2005, 2008 IBM Corporation and others.
+* Copyright (c) 2005, 2008 IBM Corporation, Zeligsoft Inc., and others.
 * All rights reserved.   This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,12 +11,13 @@
 *   IBM - Initial API and implementation
 *   E.D.Willink - Elimination of some shift-reduce conflicts
 *   E.D.Willink - Remove unnecessary warning suppression
-*   E.D.Willink - 225493 Need ability to set CSTNode offsets
+*   E.D.Willink - Bugs 225493, 243976
+*   Zeligsoft - Bug 243976
 *   E.D.Willink - Extended API and implementation for QVTr
 *
 * </copyright>
 *
-* $Id: QVTrParserprs.java,v 1.4 2008/08/18 07:55:54 ewillink Exp $
+* $Id: QVTrParserprs.java,v 1.5 2008/10/10 07:26:28 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;

@@ -63,7 +63,7 @@ $Globals
 /.
 import org.eclipse.qvt.declarative.parser.qvt.cst.*;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.*;
-import org.eclipse.qvt.declarative.parser.qvtrelation.environment.IQVTrEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
 import org.eclipse.ocl.cst.CollectionTypeCS;
 import org.eclipse.ocl.parser.$prs_stream_class;
 
@@ -79,7 +79,7 @@ $Include
 $End
 
 $Define
-    $environment_class /.IQVTrEnvironment./
+    $environment_class /.IFileEnvironment./
 	$lex_stream_class /.QVTrLexer./
     $LPGParsersym_class /.QVTrParserSymbols./
 	$copyright_contributions /.*   E.D.Willink - Extended API and implementation for QVTr

@@ -1,7 +1,7 @@
 /**
 * <copyright>
 *
-* Copyright (c) 2005, 2008 IBM Corporation and others.
+* Copyright (c) 2005, 2008 IBM Corporation, Zeligsoft Inc., and others.
 * All rights reserved.   This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,19 +11,20 @@
 *   IBM - Initial API and implementation
 *   E.D.Willink - Elimination of some shift-reduce conflicts
 *   E.D.Willink - Remove unnecessary warning suppression
-*   E.D.Willink - 225493 Need ability to set CSTNode offsets
+*   E.D.Willink - Bugs 225493, 243976
+*   Zeligsoft - Bug 243976
 *   E.D.Willink - Extended API and implementation for QVTr
 *
 * </copyright>
 *
-* $Id: QVTrParser.java,v 1.4 2008/08/18 07:55:54 ewillink Exp $
+* $Id: QVTrParser.java,v 1.5 2008/10/10 07:26:28 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;
 
 import org.eclipse.qvt.declarative.parser.qvt.cst.*;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.*;
-import org.eclipse.qvt.declarative.parser.qvtrelation.environment.IQVTrEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
 import org.eclipse.ocl.cst.CollectionTypeCS;
 import org.eclipse.ocl.parser.AbstractOCLParser;
 
@@ -69,7 +70,7 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 
 	public int getEOFTokenKind() { return QVTrParserprs.EOFT_SYMBOL; }
 
-	public IQVTrEnvironment getOCLEnvironment() {
+	public IFileEnvironment getOCLEnvironment() {
 		return getLexer().getOCLEnvironment();
 	}
 	
@@ -123,6 +124,8 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 		IToken firstToken = getIToken(dtParser.getToken(1));
 		cstNode.setStartToken(firstToken);
 		cstNode.setEndToken(firstToken);
+		cstNode.setStartOffset(firstToken.getStartOffset());
+		cstNode.setEndOffset(firstToken.getEndOffset()-1);
 	}
 
 
@@ -656,8 +659,8 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 				int endOffset = startOffset + integer.length() - 1; // inclusive
 
 				IntegerLiteralExpCS integerLiteralExpCS = createIntegerLiteralExpCS(integer);
-//					integerLiteralExpCS.setStartOffset(startOffset);
-//					integerLiteralExpCS.setEndOffset(endOffset);
+				integerLiteralExpCS.setStartOffset(startOffset);
+				integerLiteralExpCS.setEndOffset(endOffset);
 				integerLiteralExpCS.setStartToken(numericToken);
 				integerLiteralExpCS.setEndToken(numericToken);
 
@@ -669,8 +672,8 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 							SimpleTypeEnum.IDENTIFIER_LITERAL,
 							simpleName
 						);
-//					simpleNameCS.setStartOffset(startOffset);
-//					simpleNameCS.setEndOffset(endOffset);
+				simpleNameCS.setStartOffset(startOffset);
+				simpleNameCS.setEndOffset(endOffset);
 				simpleNameCS.setStartToken(numericToken);
 				simpleNameCS.setEndToken(numericToken);
 
