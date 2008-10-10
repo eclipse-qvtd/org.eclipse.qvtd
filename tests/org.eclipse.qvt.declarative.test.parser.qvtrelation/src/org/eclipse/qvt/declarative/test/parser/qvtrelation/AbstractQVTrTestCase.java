@@ -13,47 +13,35 @@ package org.eclipse.qvt.declarative.test.parser.qvtrelation;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaDataRegistry;
-import org.eclipse.qvt.declarative.emof.QVTRelation.util.QVTRelationMappingMetaData;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage;
+import org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrCreationFactory;
+import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.modelregistry.standalone.FileHandle;
 import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
-import org.eclipse.qvt.declarative.parser.qvtrelation.environment.QVTrTopLevelEnvironment;
-import org.eclipse.qvt.declarative.parser.qvtrelation.unparser.QVTrUnparser;
+import org.eclipse.qvt.declarative.parser.qvtrelation.environment.QVTrFileEnvironment;
 import org.eclipse.qvt.declarative.test.parser.AbstractParseTestCase;
 
 public abstract class AbstractQVTrTestCase extends AbstractParseTestCase
 {
-	@Override protected IFileEnvironment createEnvironment(String fileName) throws IOException, CoreException {
+	@Override protected IFileEnvironment createEnvironment(String fileName, URI astURI) throws IOException, CoreException {
 		FileHandle fileHandle = getFileHandle(fileName);
-		QVTrTopLevelEnvironment environment = new QVTrTopLevelEnvironment(fileHandle, resourceSet)
+		XMIResource astResource = (XMIResource) resourceSet.createResource(astURI, QVTRelationPackage.eCONTENT_TYPE);
+		QVTrFileEnvironment environment = new QVTrFileEnvironment(fileHandle, resourceSet, astResource)
 		{
 			@Override
-			protected void initializePackageNs(EPackage ePackage) {
+			public void initializePackageNs(EPackage ePackage) {
 				super.initializePackageNs(ePackage);
 				ePackage.setNsURI(ePackage.getNsURI().replace(".unparsed", ""));
 			}			
 		};
 		return environment;
 	}
-	
-	@Override protected QVTrUnparser createUnparser(Resource referenceResource) {
-		return new QVTrUnparser(referenceResource);
-	}
 
 	@Override
-	protected IMappingMetaDataRegistry getMappingMetaDataRegistry() {
-		IMappingMetaDataRegistry mappingMetaDataRegistry = super.getMappingMetaDataRegistry();
-		QVTRelationMappingMetaData.INSTANCE.getFactory(mappingMetaDataRegistry);
-		return mappingMetaDataRegistry;
-	}
-	
-	@Override protected String getTextExtension() {
-		return "qvtr";
-	}
-
-	@Override protected String getXMLExtension(boolean generateEMOF) {
-		return (generateEMOF ? "qvtrelation" :  "eqvtrelation");
+	protected ICreationFactory getCreationFactory() {
+		return QVTrCreationFactory.INSTANCE;
 	}
 }

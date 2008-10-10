@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.qvt.declarative.emof.qvtrelation,
  org.eclipse.qvt.declarative.parser.qvtrelation;visibility:=reexport,
  org.eclipse.qvt.declarative.test.emof.qvtrelation;visibility:=reexport,
- org.eclipse.qvt.declarative.test.parser;visibility:=reexport
+ org.eclipse.qvt.declarative.test.parser;visibility:=reexport,
+ org.eclipse.qvt.declarative.editor.qvtrelation.ui;visibility:=reexport
 Eclipse-LazyStart: false
 Export-Package: org.eclipse.qvt.declarative.test.parser.qvtrelation,
  org.eclipse.qvt.declarative.test.parser.qvtrelation.models
