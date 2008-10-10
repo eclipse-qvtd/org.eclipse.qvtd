@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: XMIUtils.java,v 1.3 2008/10/08 21:12:26 ewillink Exp $
+ * $Id: XMIUtils.java,v 1.4 2008/10/10 06:38:39 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.utils;
 
@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -212,7 +213,8 @@ public class XMIUtils
 	    		new ShortPrefixedIdCreator(xmiIdPrefix),
 	    		new ExcludedEClassIdFilter(new EClass[]
 	    		{
-	    				XMLTypePackage.Literals.ANY_TYPE/*,
+	    				XMLTypePackage.Literals.ANY_TYPE,
+	    				EcorePackage.Literals.EGENERIC_TYPE/*,
 	    				EcorePackage.Literals.EANNOTATION,
 	    				EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY */
 	    		}));
@@ -225,7 +227,8 @@ public class XMIUtils
 	    		new LinearPrefixedIdCreator(xmiIdPrefix),
 	    		new ExcludedEClassIdFilter(new EClass[]
 	    		{
-	    				XMLTypePackage.Literals.ANY_TYPE/*,
+	    				XMLTypePackage.Literals.ANY_TYPE,
+	    				EcorePackage.Literals.EGENERIC_TYPE/*,
 	    				EcorePackage.Literals.EANNOTATION,
 	    				EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY */
 	    		}));
