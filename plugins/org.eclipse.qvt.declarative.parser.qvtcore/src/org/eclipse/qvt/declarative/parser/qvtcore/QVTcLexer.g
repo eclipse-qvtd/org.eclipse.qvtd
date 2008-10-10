@@ -33,8 +33,8 @@ $End
 
 $Define
 	$kw_lexer_class /.QVTcKWLexer./
-    $environment_class /.IQVTcEnvironment./
-    $environment_import /.org.eclipse.qvt.declarative.parser.qvtcore.environment.IQVTcEnvironment./
+    $environment_class /.IFileEnvironment./
+    $environment_import /.org.eclipse.qvt.declarative.parser.environment.IFileEnvironment./
 	$copyright_contributions /.*   E.D.Willink - Extended API and implementation for QVTc
 *./
 $End
