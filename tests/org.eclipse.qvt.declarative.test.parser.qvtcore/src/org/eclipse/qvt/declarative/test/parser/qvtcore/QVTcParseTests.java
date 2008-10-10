@@ -80,6 +80,8 @@ public class QVTcParseTests extends AbstractQVTcTestCase
 				"Duplicate domain name 'rdbms'", "DomainCS", -1, -1);
 		expectedProblems.handleProblem(ProblemHandler.Severity.WARNING, ProblemHandler.Phase.ANALYZER,
 				"Domain name 'middle' should be distinct from middle domain name 'middle'", "DomainCS", -1, -1);
+		expectedProblems.handleProblem(ProblemHandler.Severity.WARNING, ProblemHandler.Phase.ANALYZER,
+				"Inappropriate 'in' ignored", "InCS", -1, -1);
 		parserTest("badmaps", expectedProblems);
 	}
 	
@@ -170,6 +172,8 @@ public class QVTcParseTests extends AbstractQVTcTestCase
 	
 	public void testParseEqvtcore_queries() throws IOException, CoreException, MappingConfigurationException {
 		ProblemLog expectedProblems = new ProblemLog();
+		expectedProblems.handleProblem(ProblemHandler.Severity.ERROR, ProblemHandler.Phase.ANALYZER,
+				"Redefinition of 'q0' ignored", "QueryCS", -1, -1);
 		expectedProblems.handleProblem(ProblemHandler.Severity.ERROR, ProblemHandler.Phase.ANALYZER,
 				"Invalid transformation 'B::A': Not a transformation", "QueryCS", -1, -1);
 		expectedProblems.handleProblem(ProblemHandler.Severity.ERROR, ProblemHandler.Phase.ANALYZER,
