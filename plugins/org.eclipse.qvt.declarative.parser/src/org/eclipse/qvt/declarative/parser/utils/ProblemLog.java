@@ -30,7 +30,7 @@ public class ProblemLog extends AbstractProblemHandler
 		public int endOffset;
 		
 		public Problem(String problemMessage, String processingContext, int startOffset, int endOffset) {
-			this.problemMessage = problemMessage;
+			this.problemMessage = problemMessage != null ? problemMessage : "";
 			this.processingContext = processingContext;
 			this.startOffset = startOffset;
 			this.endOffset = endOffset;
