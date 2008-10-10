@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.ecore.PrimitiveType;
 import org.eclipse.ocl.ecore.TypeType;
+import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.qvt.declarative.parser.environment.CSTFormattingHelper;
 
 public class QVTFormattingHelper extends CSTFormattingHelper
@@ -32,6 +33,9 @@ public class QVTFormattingHelper extends CSTFormattingHelper
 			EClassifier referredType = ((TypeType)object).getReferredType();
 			if (referredType != null)
 				return "Type(" + formatQualifiedName(referredType) + ")";
+		}
+		if (object instanceof OCLExpression) {
+			return object.toString();
 		}
 		if (object instanceof EObject) {
 			EObject eObject = (EObject)object;
