@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EcoreUtils.java,v 1.3 2008/08/18 07:38:09 ewillink Exp $
+ * $Id: EcoreUtils.java,v 1.4 2008/10/10 06:37:58 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.utils;
 
@@ -67,13 +67,9 @@ public class EcoreUtils
     	return s.toString();
 	}
 	
+	@Deprecated
 	public static String formatFullName(Object object) {
-		if (object instanceof EObject) {
-			Object container = ((EObject)object).eContainer();
-			if (container != null)
-				return formatFullName(container) + "." + formatName(object);
-		}
-		return formatName(object);
+		return formatQualifiedName(object, "::");
 	}
 
 	public static String formatMultiplicity(ETypedElement typedElement) {
@@ -111,6 +107,19 @@ public class EcoreUtils
 	public static String formatOrdered(ETypedElement typedElement) {
 		boolean isOrdered = typedElement != null ? (typedElement.isOrdered() && typedElement.isMany()) : false;
 		return isOrdered ? "{ordered}" : "";
+	}
+	
+	public static String formatQualifiedName(Object object) {
+		return formatQualifiedName(object, "::");
+	}
+	
+	public static String formatQualifiedName(Object object, String separator) {
+		if (object instanceof EObject) {
+			Object container = ((EObject)object).eContainer();
+			if (container != null)
+				return formatQualifiedName(container) + separator + formatName(object);
+		}
+		return formatName(object);
 	}
 
 	public static String formatString(String name) {
