@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTCSTSwitch.java,v 1.1 2008/07/23 10:05:08 qglineur Exp $
+ * $Id: QVTCSTSwitch.java,v 1.2 2008/10/10 07:52:55 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvt.cst.util;
 
@@ -20,10 +20,12 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.qvt.declarative.parser.environment.IHasName;
-import org.eclipse.qvt.declarative.parser.qvt.cst.*;
+import org.eclipse.qvt.declarative.parser.qvt.cst.ErrorNode;
+import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS;
+import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
+import org.eclipse.qvt.declarative.parser.qvt.cst.QVTCSTPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -99,6 +101,12 @@ public class QVTCSTSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case QVTCSTPackage.ERROR_NODE: {
+				ErrorNode errorNode = (ErrorNode)theEObject;
+				T result = caseErrorNode(errorNode);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTCSTPackage.IDENTIFIED_CS: {
 				IdentifiedCS identifiedCS = (IdentifiedCS)theEObject;
 				T result = caseIdentifiedCS(identifiedCS);
@@ -117,6 +125,21 @@ public class QVTCSTSwitch<T> {
 			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Error Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Error Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseErrorNode(ErrorNode object) {
+		return null;
 	}
 
 	/**

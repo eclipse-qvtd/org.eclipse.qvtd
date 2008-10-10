@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTCSTAdapterFactory.java,v 1.1 2008/07/23 10:05:08 qglineur Exp $
+ * $Id: QVTCSTAdapterFactory.java,v 1.2 2008/10/10 07:52:55 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvt.cst.util;
 
@@ -22,6 +22,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.qvt.declarative.parser.environment.IHasName;
+import org.eclipse.qvt.declarative.parser.qvt.cst.ErrorNode;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvt.cst.QVTCSTPackage;
@@ -83,6 +84,10 @@ public class QVTCSTAdapterFactory extends AdapterFactoryImpl {
 	protected QVTCSTSwitch<Adapter> modelSwitch =
 		new QVTCSTSwitch<Adapter>() {
 			@Override
+			public Adapter caseErrorNode(ErrorNode object) {
+				return createErrorNodeAdapter();
+			}
+			@Override
 			public Adapter caseIdentifiedCS(IdentifiedCS object) {
 				return createIdentifiedCSAdapter();
 			}
@@ -117,6 +122,20 @@ public class QVTCSTAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.parser.qvt.cst.ErrorNode <em>Error Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.parser.qvt.cst.ErrorNode
+	 * @generated
+	 */
+	public Adapter createErrorNodeAdapter() {
+		return null;
+	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS <em>Identified CS</em>}'.

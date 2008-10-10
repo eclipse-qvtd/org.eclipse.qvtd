@@ -12,12 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: IdentifiedCS.java,v 1.1 2008/07/23 10:05:07 qglineur Exp $
+ * $Id: IdentifiedCS.java,v 1.2 2008/10/10 07:52:55 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvt.cst;
 
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.qvt.declarative.parser.environment.IHasName;
+
 
 /**
  * <!-- begin-user-doc -->

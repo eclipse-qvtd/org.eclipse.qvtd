@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTCSTPackageImpl.java,v 1.1 2008/07/23 10:05:08 qglineur Exp $
+ * $Id: QVTCSTPackageImpl.java,v 1.2 2008/10/10 07:52:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvt.cst.impl;
 
@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.cst.CSTPackage;
 import org.eclipse.qvt.declarative.parser.environment.IHasName;
+import org.eclipse.qvt.declarative.parser.qvt.cst.ErrorNode;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvt.cst.QVTCSTFactory;
@@ -35,6 +36,13 @@ import org.eclipse.qvt.declarative.parser.qvt.cst.QVTCSTPackage;
  * @generated
  */
 public class QVTCSTPackageImpl extends EPackageImpl implements QVTCSTPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass errorNodeEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -132,6 +140,24 @@ public class QVTCSTPackageImpl extends EPackageImpl implements QVTCSTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getErrorNode() {
+		return errorNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getErrorNode_Message() {
+		return (EAttribute)errorNodeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getIdentifiedCS() {
 		return identifiedCSEClass;
 	}
@@ -200,6 +226,9 @@ public class QVTCSTPackageImpl extends EPackageImpl implements QVTCSTPackage {
 		isCreated = true;
 
 		// Create classes and their features
+		errorNodeEClass = createEClass(ERROR_NODE);
+		createEAttribute(errorNodeEClass, ERROR_NODE__MESSAGE);
+
 		identifiedCSEClass = createEClass(IDENTIFIED_CS);
 		createEReference(identifiedCSEClass, IDENTIFIED_CS__IDENTIFIER);
 
@@ -246,6 +275,9 @@ public class QVTCSTPackageImpl extends EPackageImpl implements QVTCSTPackage {
 		identifierCSEClass.getESuperTypes().add(this.getIHasName());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(errorNodeEClass, ErrorNode.class, "ErrorNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getErrorNode_Message(), ecorePackage.getEString(), "message", null, 1, 1, ErrorNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(identifiedCSEClass, IdentifiedCS.class, "IdentifiedCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getIdentifiedCS_Identifier(), this.getIdentifierCS(), null, "identifier", null, 0, 1, IdentifiedCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

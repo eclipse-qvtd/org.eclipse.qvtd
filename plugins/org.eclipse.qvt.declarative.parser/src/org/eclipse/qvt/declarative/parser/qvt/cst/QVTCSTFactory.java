@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTCSTFactory.java,v 1.1 2008/07/23 10:05:07 qglineur Exp $
+ * $Id: QVTCSTFactory.java,v 1.2 2008/10/10 07:52:55 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvt.cst;
 
@@ -34,6 +34,15 @@ public interface QVTCSTFactory extends EFactory {
 	 * @generated
 	 */
 	QVTCSTFactory eINSTANCE = org.eclipse.qvt.declarative.parser.qvt.cst.impl.QVTCSTFactoryImpl.init();
+
+	/**
+	 * Returns a new object of class '<em>Error Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Error Node</em>'.
+	 * @generated
+	 */
+	ErrorNode createErrorNode();
 
 	/**
 	 * Returns a new object of class '<em>Identified CS</em>'.

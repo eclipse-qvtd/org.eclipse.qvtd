@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTCSTPackage.java,v 1.3 2008/09/10 05:29:53 ewillink Exp $
+ * $Id: QVTCSTPackage.java,v 1.4 2008/10/10 07:52:55 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvt.cst;
 
@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.ocl.cst.CSTPackage;
 
 /**
@@ -72,6 +71,34 @@ public interface QVTCSTPackage extends EPackage {
 	QVTCSTPackage eINSTANCE = org.eclipse.qvt.declarative.parser.qvt.cst.impl.QVTCSTPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvt.declarative.parser.qvt.cst.impl.ErrorNodeImpl <em>Error Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.parser.qvt.cst.impl.ErrorNodeImpl
+	 * @see org.eclipse.qvt.declarative.parser.qvt.cst.impl.QVTCSTPackageImpl#getErrorNode()
+	 * @generated
+	 */
+	int ERROR_NODE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Message</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR_NODE__MESSAGE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Error Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR_NODE_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.parser.qvt.cst.impl.IdentifiedCSImpl <em>Identified CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,7 +106,25 @@ public interface QVTCSTPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.parser.qvt.cst.impl.QVTCSTPackageImpl#getIdentifiedCS()
 	 * @generated
 	 */
-	int IDENTIFIED_CS = 0;
+	int IDENTIFIED_CS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IDENTIFIED_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IDENTIFIED_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
 
 	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
@@ -100,13 +145,13 @@ public interface QVTCSTPackage extends EPackage {
 	int IDENTIFIED_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IDENTIFIED_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int IDENTIFIED_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -134,7 +179,25 @@ public interface QVTCSTPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.parser.qvt.cst.impl.QVTCSTPackageImpl#getIdentifierCS()
 	 * @generated
 	 */
-	int IDENTIFIER_CS = 1;
+	int IDENTIFIER_CS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IDENTIFIER_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IDENTIFIER_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
 
 	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
@@ -155,13 +218,13 @@ public interface QVTCSTPackage extends EPackage {
 	int IDENTIFIER_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IDENTIFIER_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int IDENTIFIER_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -189,7 +252,7 @@ public interface QVTCSTPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.parser.qvt.cst.impl.QVTCSTPackageImpl#getIHasName()
 	 * @generated
 	 */
-	int IHAS_NAME = 2;
+	int IHAS_NAME = 3;
 
 	/**
 	 * The number of structural features of the '<em>IHas Name</em>' class.
@@ -200,6 +263,27 @@ public interface QVTCSTPackage extends EPackage {
 	 */
 	int IHAS_NAME_FEATURE_COUNT = 0;
 
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.parser.qvt.cst.ErrorNode <em>Error Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Error Node</em>'.
+	 * @see org.eclipse.qvt.declarative.parser.qvt.cst.ErrorNode
+	 * @generated
+	 */
+	EClass getErrorNode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.parser.qvt.cst.ErrorNode#getMessage <em>Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Message</em>'.
+	 * @see org.eclipse.qvt.declarative.parser.qvt.cst.ErrorNode#getMessage()
+	 * @see #getErrorNode()
+	 * @generated
+	 */
+	EAttribute getErrorNode_Message();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS <em>Identified CS</em>}'.
@@ -276,6 +360,24 @@ public interface QVTCSTPackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.parser.qvt.cst.impl.ErrorNodeImpl <em>Error Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.parser.qvt.cst.impl.ErrorNodeImpl
+		 * @see org.eclipse.qvt.declarative.parser.qvt.cst.impl.QVTCSTPackageImpl#getErrorNode()
+		 * @generated
+		 */
+		EClass ERROR_NODE = eINSTANCE.getErrorNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Message</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ERROR_NODE__MESSAGE = eINSTANCE.getErrorNode_Message();
+
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.parser.qvt.cst.impl.IdentifiedCSImpl <em>Identified CS</em>}' class.
 		 * <!-- begin-user-doc -->

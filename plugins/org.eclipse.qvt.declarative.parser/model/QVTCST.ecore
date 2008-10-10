@@ -4,6 +4,10 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvt"
     nsURI="http://www.eclipse.org/qvt/1.0/QVT" nsPrefix="qvt">
   <eSubpackages name="cst" nsURI="http://www.eclipse.org/qvt/1.0/QVTcst" nsPrefix="eqvtrcst">
+    <eClassifiers xsi:type="ecore:EClass" name="ErrorNode">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="IdentifiedCS" eSuperTypes="../../org.eclipse.ocl/model/OCLCST.ecore#//cst/CSTNode #//cst/IHasName">
       <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" eType="#//cst/IdentifierCS"
           containment="true"/>
