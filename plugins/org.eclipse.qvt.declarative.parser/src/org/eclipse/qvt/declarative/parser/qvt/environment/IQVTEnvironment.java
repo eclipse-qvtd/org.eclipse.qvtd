@@ -36,8 +36,6 @@ public interface IQVTEnvironment extends ICSTEnvironment
 	 * @return full message
 	 */
 	public String formatLookupException(LookupException e);
-	
-	public QVTFormattingHelper getFormatter();
 
 	/**
 	 * Return the source model name prefix that identifies the origin of eObject. 
