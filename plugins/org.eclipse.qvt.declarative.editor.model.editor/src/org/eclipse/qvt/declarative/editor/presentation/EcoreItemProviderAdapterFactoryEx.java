@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EcoreItemProviderAdapterFactoryEx.java,v 1.1 2008/08/24 18:55:24 ewillink Exp $
+ * $Id: EcoreItemProviderAdapterFactoryEx.java,v 1.2 2008/10/10 13:31:45 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.presentation;
 
@@ -32,7 +32,7 @@ public class EcoreItemProviderAdapterFactoryEx extends EcoreItemProviderAdapterF
 			eAttributeItemProvider = new EAttributeItemProvider(this) {
 				@Override
 				public String getText(Object obj) {
-					return EcoreUtils.formatFullName(obj);
+					return EcoreUtils.formatQualifiedName(obj);
 				}
 			};
 		}
@@ -47,7 +47,7 @@ public class EcoreItemProviderAdapterFactoryEx extends EcoreItemProviderAdapterF
 			eReferenceItemProvider = new EReferenceItemProvider(this) {
 				@Override
 				public String getText(Object obj) {
-					return EcoreUtils.formatFullName(obj);
+					return EcoreUtils.formatQualifiedName(obj);
 				}
 			};
 		}
