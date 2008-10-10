@@ -26,6 +26,6 @@ public class MissingXmiIdException extends MissingElementException
 
 	@Override
 	public String toString() {
-		return super.toString() + " name='" + EcoreUtils.formatFullName(object) + "'";
+		return super.toString() + " name='" + EcoreUtils.formatQualifiedName(object) + "'";
 	}
 }
