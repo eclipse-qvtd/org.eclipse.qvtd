@@ -12,7 +12,6 @@ package org.eclipse.qvt.declarative.test.parser;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -34,7 +33,10 @@ import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.ocl.lpg.AbstractProblemHandler;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.ocl.lpg.StringProblemHandler;
+import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
+import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaDataRegistry;
 import org.eclipse.qvt.declarative.ecore.mappings.MappingConfigurationException;
+import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.modelregistry.standalone.FileHandle;
 import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ProblemHandlerDiagnosticChain;
@@ -156,16 +158,35 @@ public abstract class AbstractParseTestCase extends AbstractTestCase
 		};
 	}
 	
-	protected abstract IFileEnvironment createEnvironment(String fileName) throws IOException, CoreException;
-	protected abstract AbstractUnparser createUnparser(Resource referenceResource);
+	protected abstract IFileEnvironment createEnvironment(String fileName, URI astURI) throws IOException, CoreException;
+
+	protected final AbstractUnparser createUnparser(Resource referenceResource) {
+		return getCreationFactory().createUnparser(referenceResource);
+	}
 	
 	protected void expectUnrecognizedVariable(ProblemLog expectedProblems, String name) {
 		expectedProblems.handleProblem(ProblemHandler.Severity.ERROR, ProblemHandler.Phase.ANALYZER,
 				"Unrecognized variable: (" + name + ")", "variableExpCS", -1, -1);
 	}
 	
-	protected abstract String getTextExtension();
-	protected abstract String getXMLExtension(boolean asEMOF);
+	protected abstract ICreationFactory getCreationFactory();
+	
+	@Override
+	protected IMappingMetaDataRegistry getMappingMetaDataRegistry() {
+		IMappingMetaDataRegistry mappingMetaDataRegistry = super.getMappingMetaDataRegistry();
+		IMappingMetaData mappingMetaData = getCreationFactory().getMappingMetaData();
+		if (mappingMetaData != null)
+			mappingMetaData.getFactory(mappingMetaDataRegistry);
+		return mappingMetaDataRegistry;
+	}
+
+	protected final String getTextExtension() {
+		return getCreationFactory().getTextExtension();
+	}
+	
+	protected final String getXMLExtension(boolean generateEMOF) {
+		return (generateEMOF ? getCreationFactory().getEMOFExtension() : getCreationFactory().getEcoreExtension());
+	}
 	
 	/*
 	 * Parse fileStem to an AST resource, then if doSave save the AST in to Ecore or EMOF according to asEMOF,
@@ -183,7 +204,9 @@ public abstract class AbstractParseTestCase extends AbstractTestCase
 		parserTest(fileStem, expectedProblems);
 	}
 	protected void parserTest(String fileStem, ProblemLog expectedProblems) throws IOException, CoreException, MappingConfigurationException {
-		IFileEnvironment environment = createEnvironment(fileStem + "." + getTextExtension());
+		String generatedName = fileStem + "." + getXMLExtension(asEMOF);
+		URI generatedURI = getProjectFileURI(generatedName);
+		IFileEnvironment environment = createEnvironment(fileStem + "." + getTextExtension(), generatedURI);
 		AbstractProblemHandler actualProblems;
 		if (expectedProblems != null)
 			actualProblems = new ProblemLog();
@@ -191,13 +214,12 @@ public abstract class AbstractParseTestCase extends AbstractTestCase
 			actualProblems = new TestProblemHandler();
 		environment.setProblemHandler(actualProblems);
 		//
-		Collection<? extends EObject> asts = environment.parseToAST(null, null);
+		/*Collection<? extends EObject> asts =*/ environment.parseToAST(null, null);
 //		environment.validate(asts);
 //		actualProblems.flush(null);
 		//
-		String generatedName = fileStem + "." + getXMLExtension(asEMOF);
-		URI generatedURI = getProjectFileURI(generatedName);
-		Resource ecoreResource = environment.createASTResource(asts, generatedURI);
+		Resource ecoreResource = environment.getASTNode();
+//		Resource ecoreResource = environment.createASTResource(asts, generatedURI);
 //		XMIUtils.assignIds(ecoreResource, "ast");
 		if (doSave) {
 			if (asEMOF) {
@@ -238,12 +260,13 @@ public abstract class AbstractParseTestCase extends AbstractTestCase
 	}
 
 	protected void problemTest(String fileStem, ProblemLog expectedProblems) throws IOException, CoreException {
-		ProblemLog actualProblems = new ProblemLog();
-		IFileEnvironment environment = createEnvironment(fileStem + "." + getTextExtension());
-		environment.setProblemHandler(actualProblems);
-		Collection<? extends EObject> asts = environment.parseToAST(null, null);
 		URI uri = URI.createFileURI(fileStem + "." + getTextExtension());
-		Resource resource = environment.createASTResource(asts, uri);
+		ProblemLog actualProblems = new ProblemLog();
+		IFileEnvironment environment = createEnvironment(fileStem + "." + getTextExtension(), uri);
+		environment.setProblemHandler(actualProblems);
+		/*Collection<? extends EObject> asts =*/ environment.parseToAST(null, null);
+		Resource resource = environment.getASTNode();
+//		Resource resource = environment.createASTResource(asts, uri);
 		environment.validate(resource);
 		actualProblems.flush(null);
 		expectedProblems.setParser(environment.getParser());
@@ -273,11 +296,14 @@ public abstract class AbstractParseTestCase extends AbstractTestCase
 		fileWriter.append(unparsedString);
 		fileWriter.close();
 		//
-		IFileEnvironment environment = createEnvironment(fileStem + ".unparsed." + getTextExtension());
+		String generatedName = fileStem + ".unparsed." + getXMLExtension(asEMOF);
+		URI generatedURI = getProjectFileURI(generatedName);
+		//
+		IFileEnvironment environment = createEnvironment(fileStem + ".unparsed." + getTextExtension(), generatedURI);
 		StringProblemHandler problemHandler = new StringProblemHandler(null);
 		environment.setProblemHandler(problemHandler);
 		//
-		Collection<? extends EObject> asts = environment.parseToAST(null, null);
+		/*Collection<? extends EObject> asts =*/ environment.parseToAST(null, null);
 //		environment.validate(asts);
 //		problemHandler.flush(null);
 		//
@@ -285,10 +311,8 @@ public abstract class AbstractParseTestCase extends AbstractTestCase
 		if (errorCount > 0)
 			System.out.println(problemHandler.getProblemString());
 		assertEquals("Parser errors", 0, errorCount);
-		//
-		String generatedName = fileStem + ".unparsed." + getXMLExtension(asEMOF);
-		URI generatedURI = getProjectFileURI(generatedName);
-		Resource ecoreResource = environment.createASTResource(asts, generatedURI);
+		Resource ecoreResource = environment.getASTNode();
+//		Resource ecoreResource = environment.createASTResource(asts, generatedURI);
 //		XMIUtils.assignIds(resource, "ast");
 		if (asEMOF) {
 			Resource emofResource = getMappingMetaDataRegistry().getAdapter(ecoreResource, generatedURI);
