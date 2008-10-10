@@ -41,8 +41,9 @@ import org.eclipse.qvt.declarative.ecore.QVTCore.PropertyAssignment;
 import org.eclipse.qvt.declarative.ecore.QVTCore.RealizedVariable;
 import org.eclipse.qvt.declarative.ecore.QVTCore.VariableAssignment;
 import org.eclipse.qvt.declarative.parser.qvt.environment.QVTReflectionImpl;
+import org.eclipse.qvt.declarative.parser.unparser.OCLExpressionUnparser;
 
-public class QVTcUnparser extends QVTcExpressionUnparser
+public class QVTcUnparser extends OCLExpressionUnparser
 {
 	public QVTcUnparser(Resource resource) {
 		super(resource, QVTReflectionImpl.INSTANCE);
@@ -223,11 +224,13 @@ public class QVTcUnparser extends QVTcExpressionUnparser
 			appendName(mapping);
 			append(" ");
 		}
-		Transformation transformation = mapping.getTransformation();
-		if (transformation != null) {
-			append("in ");
-			appendName(transformation);
-			append(" ");
+		if (mapping.getContext() == null) {
+			Transformation transformation = mapping.getTransformation();
+			if (transformation != null) {
+				append("in ");
+				appendName(transformation);
+				append(" ");
+			}
 		}
 		EList<Mapping> specifications = mapping.getSpecification();
 		if (!specifications.isEmpty()) {
