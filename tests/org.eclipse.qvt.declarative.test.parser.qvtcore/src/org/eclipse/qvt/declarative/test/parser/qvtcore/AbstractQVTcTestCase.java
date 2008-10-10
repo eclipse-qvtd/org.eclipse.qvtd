@@ -13,48 +13,35 @@ package org.eclipse.qvt.declarative.test.parser.qvtcore;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaDataRegistry;
-import org.eclipse.qvt.declarative.emof.QVTCore.util.QVTCoreMappingMetaData;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.qvt.declarative.ecore.QVTCore.QVTCorePackage;
+import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcCreationFactory;
+import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.modelregistry.standalone.FileHandle;
 import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
-import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcTopLevelEnvironment;
-import org.eclipse.qvt.declarative.parser.qvtcore.unparser.QVTcUnparser;
+import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcFileEnvironment;
 import org.eclipse.qvt.declarative.test.parser.AbstractParseTestCase;
 
 public abstract class AbstractQVTcTestCase extends AbstractParseTestCase
 {
-	@Override protected IFileEnvironment createEnvironment(String fileName) throws IOException, CoreException {
+	@Override protected IFileEnvironment createEnvironment(String fileName, URI astURI) throws IOException, CoreException {
 		FileHandle fileHandle = getFileHandle(fileName);
-		QVTcTopLevelEnvironment environment = new QVTcTopLevelEnvironment(fileHandle, resourceSet)
+		XMIResource astResource = (XMIResource) resourceSet.createResource(astURI, QVTCorePackage.eCONTENT_TYPE);
+		QVTcFileEnvironment environment = new QVTcFileEnvironment(fileHandle, resourceSet, astResource)
 		{
 			@Override
-			protected void initializePackageNs(EPackage ePackage) {
+			public void initializePackageNs(EPackage ePackage) {
 				super.initializePackageNs(ePackage);
 				ePackage.setNsURI(ePackage.getNsURI().replace(".unparsed", ""));
 			}			
 		};
 		return environment;
 	}
-	
-	@Override protected QVTcUnparser createUnparser(Resource referenceResource) {
-		return new QVTcUnparser(referenceResource);
-	}
 
 	@Override
-	protected IMappingMetaDataRegistry getMappingMetaDataRegistry() {
-		IMappingMetaDataRegistry mappingMetaDataRegistry = super.getMappingMetaDataRegistry();
-		QVTCoreMappingMetaData.INSTANCE.getFactory(mappingMetaDataRegistry);
-//		QVTCorePlusMappingMetaData.INSTANCE.getInstance(mappingMetaDataRegistry);
-		return mappingMetaDataRegistry;
-	}
-	
-	@Override protected String getTextExtension() {
-		return "qvtc";
-	}
-
-	@Override protected String getXMLExtension(boolean generateEMOF) {
-		return (generateEMOF ? "qvtcore" :  "eqvtcore");
+	protected ICreationFactory getCreationFactory() {
+		return QVTcCreationFactory.INSTANCE;
 	}
 }

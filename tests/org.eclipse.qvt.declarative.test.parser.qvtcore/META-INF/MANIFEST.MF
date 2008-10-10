@@ -9,7 +9,8 @@ Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.qvt.declarative.test.parser;visibility:=reexport,
  org.eclipse.qvt.declarative.parser.qvtcore;visibility:=reexport,
- org.eclipse.qvt.declarative.emof.qvtcore
+ org.eclipse.qvt.declarative.emof.qvtcore,
+ org.eclipse.qvt.declarative.editor.qvtcore.ui;visibility:=reexport
 Eclipse-LazyStart: false
 Export-Package: org.eclipse.qvt.declarative.test.parser.qvtcore,
  org.eclipse.qvt.declarative.test.parser.qvtcore.models
