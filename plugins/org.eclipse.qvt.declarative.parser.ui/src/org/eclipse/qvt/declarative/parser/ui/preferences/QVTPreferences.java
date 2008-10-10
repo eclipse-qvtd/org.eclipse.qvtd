@@ -71,7 +71,9 @@ public class QVTPreferences
 	}
 	
 	public static String[] getExtensions(String preferenceName) {
-		IPreferenceStore store = QVTUIPlugin.getDefault().getPreferenceStore();
+		IPreferenceStore store = getPreferenceStore();
+		if (store == null)
+			return null;
 		String preference = store.getString(preferenceName);
 		if (preference == null)
 			return null;
@@ -81,12 +83,16 @@ public class QVTPreferences
 	public static String[] getCoreEMOFExtensions() {
 		if (coreEMOFExtensions == null)
 			coreEMOFExtensions = getExtensions(QVTPreferenceConstants.P_EMOF_EXTENSIONS.CORE);
+		if (coreEMOFExtensions == null)
+			coreEMOFExtensions = new String[] { "qvtcore" };
 		return coreEMOFExtensions;
 	}
 	
 	public static String[] getCoreEcoreExtensions() {
 		if (coreEcoreExtensions == null)
 			coreEcoreExtensions = getExtensions(QVTPreferenceConstants.P_ECORE_EXTENSIONS.CORE);
+		if (coreEcoreExtensions == null)
+			coreEcoreExtensions = new String[] { "eqvtcore" };
 		return coreEcoreExtensions;
 	}
 	
@@ -97,6 +103,8 @@ public class QVTPreferences
 	public static String[] getCoreTextExtensions() {
 		if (coreTextExtensions == null)
 			coreTextExtensions = getExtensions(QVTPreferenceConstants.P_TEXT_EXTENSIONS.CORE);
+		if (coreTextExtensions == null)
+			coreTextExtensions = new String[] { "qvtc" };
 		return coreTextExtensions;
 	}
 	
@@ -117,6 +125,8 @@ public class QVTPreferences
 	public static String[] getKM3EMOFExtensions() {
 		if (km3EMOFExtensions == null)
 			km3EMOFExtensions = getExtensions(QVTPreferenceConstants.P_EMOF_EXTENSIONS.KM3);
+		if (km3EMOFExtensions == null)
+			km3EMOFExtensions = new String[] { "emof" };
 		return km3EMOFExtensions;
 	}
 	
@@ -127,6 +137,8 @@ public class QVTPreferences
 	public static String[] getKM3EcoreExtensions() {
 		if (km3EcoreExtensions == null)
 			km3EcoreExtensions = getExtensions(QVTPreferenceConstants.P_ECORE_EXTENSIONS.KM3);
+		if (km3EcoreExtensions == null)
+			km3EcoreExtensions = new String[] { "ecore" };
 		return km3EcoreExtensions;
 	}
 
@@ -137,6 +149,8 @@ public class QVTPreferences
 	public static String[] getKM3TextExtensions() {
 		if (km3TextExtensions == null)
 			km3TextExtensions = getExtensions(QVTPreferenceConstants.P_TEXT_EXTENSIONS.KM3);
+		if (km3TextExtensions == null)
+			km3TextExtensions = new String[] { "km3" };
 		return km3TextExtensions;
 	}
 	
@@ -147,6 +161,8 @@ public class QVTPreferences
 	public static String[] getOCLEMOFExtensions() {
 		if (oclEMOFExtensions == null)
 			oclEMOFExtensions = getExtensions(QVTPreferenceConstants.P_EMOF_EXTENSIONS.OCL);
+		if (oclEMOFExtensions == null)
+			oclEMOFExtensions = new String[] { "emofocl" };
 		return oclEMOFExtensions;
 	}
 	
@@ -157,6 +173,8 @@ public class QVTPreferences
 	public static String[] getOCLEcoreExtensions() {
 		if (oclEcoreExtensions == null)
 			oclEcoreExtensions = getExtensions(QVTPreferenceConstants.P_ECORE_EXTENSIONS.OCL);
+		if (oclEcoreExtensions == null)
+			oclEcoreExtensions = new String[] { "ecoreocl" };
 		return oclEcoreExtensions;
 	}
 
@@ -167,6 +185,8 @@ public class QVTPreferences
 	public static String[] getOCLTextExtensions() {
 		if (oclTextExtensions == null)
 			oclTextExtensions = getExtensions(QVTPreferenceConstants.P_TEXT_EXTENSIONS.OCL);
+		if (oclTextExtensions == null)
+			oclTextExtensions = new String[] { "ocl" };
 		return oclTextExtensions;
 	}
 	
@@ -177,6 +197,8 @@ public class QVTPreferences
 	public static String[] getOperationalEMOFExtensions() {
 		if (operationalEMOFExtensions == null)
 			operationalEMOFExtensions = getExtensions(QVTPreferenceConstants.P_EMOF_EXTENSIONS.OPERATIONAL);
+		if (operationalEMOFExtensions == null)
+			operationalEMOFExtensions = new String[] { "qvtoperational" };
 		return operationalEMOFExtensions;
 	}
 	
@@ -187,6 +209,8 @@ public class QVTPreferences
 	public static String[] getOperationalEcoreExtensions() {
 		if (operationalEcoreExtensions == null)
 			operationalEcoreExtensions = getExtensions(QVTPreferenceConstants.P_ECORE_EXTENSIONS.OPERATIONAL);
+		if (operationalEcoreExtensions == null)
+			operationalEcoreExtensions = new String[] { "eqvtoperational" };
 		return operationalEcoreExtensions;
 	}
 
@@ -197,7 +221,16 @@ public class QVTPreferences
 	public static String[] getOperationalTextExtensions() {
 		if (operationalTextExtensions == null)
 			operationalTextExtensions = getExtensions(QVTPreferenceConstants.P_TEXT_EXTENSIONS.OPERATIONAL);
+		if (operationalTextExtensions == null)
+			operationalTextExtensions = new String[] { "qvto" };
 		return operationalTextExtensions;
+	}
+
+	public static IPreferenceStore getPreferenceStore() {
+		QVTUIPlugin plugin = QVTUIPlugin.getDefault();
+		if (plugin == null)
+			return null;
+		return plugin.getPreferenceStore();
 	}
 	
 	public static String getRelationEMOFExtension() {
@@ -207,6 +240,8 @@ public class QVTPreferences
 	public static String[] getRelationEMOFExtensions() {
 		if (relationEMOFExtensions == null)
 			relationEMOFExtensions = getExtensions(QVTPreferenceConstants.P_EMOF_EXTENSIONS.RELATION);
+		if (relationEMOFExtensions == null)
+			relationEMOFExtensions = new String[] { "qvtrelation" };
 		return relationEMOFExtensions;
 	}
 	
@@ -217,6 +252,8 @@ public class QVTPreferences
 	public static String[] getRelationEcoreExtensions() {
 		if (relationEcoreExtensions == null)
 			relationEcoreExtensions = getExtensions(QVTPreferenceConstants.P_ECORE_EXTENSIONS.RELATION);
+		if (relationEcoreExtensions == null)
+			relationEcoreExtensions = new String[] { "eqvtrelation" };
 		return relationEcoreExtensions;
 	}
 	
@@ -227,12 +264,16 @@ public class QVTPreferences
 	public static String[] getRelationTextExtensions() {
 		if (relationTextExtensions == null)
 			relationTextExtensions = getExtensions(QVTPreferenceConstants.P_TEXT_EXTENSIONS.RELATION);
+		if (relationTextExtensions == null)
+			relationTextExtensions = new String[] { "qvtr" };
 		return relationTextExtensions;
 	}
 	
 	public static String getRepresentation() {
 		if (representation == null) {
-			IPreferenceStore store = QVTUIPlugin.getDefault().getPreferenceStore();
+			IPreferenceStore store = getPreferenceStore();
+			if (store == null)
+				return null;
 			representation = store.getString(QVTPreferenceConstants.P_QVT_REPRESENTATION);
 		}
 		return representation;
