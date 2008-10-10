@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTrCSTSwitch.java,v 1.3 2008/08/18 07:55:54 ewillink Exp $
+ * $Id: QVTrCSTSwitch.java,v 1.4 2008/10/10 07:59:24 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtrelation.cst.util;
 
@@ -24,7 +24,6 @@ import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.cst.OCLExpressionCS;
 import org.eclipse.qvt.declarative.parser.environment.IHasName;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS;
-import org.eclipse.qvt.declarative.parser.qvtrelation.cst.*;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.AbstractDomainCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.CollectionTemplateCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.DefaultValueCS;
@@ -44,6 +43,8 @@ import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TopLevelCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TransformationCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.UnitCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.VarDeclarationCS;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhenCS;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhereCS;
 
 /**
  * <!-- begin-user-doc -->

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTrCSTPackage.java,v 1.4 2008/09/10 05:23:32 ewillink Exp $
+ * $Id: QVTrCSTPackage.java,v 1.5 2008/10/10 07:59:24 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtrelation.cst;
 
@@ -82,6 +82,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int ABSTRACT_DOMAIN_CS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DOMAIN_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DOMAIN_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -100,13 +118,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int ABSTRACT_DOMAIN_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DOMAIN_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int ABSTRACT_DOMAIN_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Domain CS</em>' class.
@@ -128,6 +146,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int TEMPLATE_VARIABLE_CS = 13;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_VARIABLE_CS__START_OFFSET = QVTCSTPackage.IDENTIFIED_CS__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_VARIABLE_CS__END_OFFSET = QVTCSTPackage.IDENTIFIED_CS__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -146,13 +182,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int TEMPLATE_VARIABLE_CS__END_TOKEN = QVTCSTPackage.IDENTIFIED_CS__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_VARIABLE_CS__AST_NODE = QVTCSTPackage.IDENTIFIED_CS__AST_NODE;
+	int TEMPLATE_VARIABLE_CS__AST = QVTCSTPackage.IDENTIFIED_CS__AST;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -192,6 +228,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int TEMPLATE_CS = 12;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_CS__START_OFFSET = TEMPLATE_VARIABLE_CS__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_CS__END_OFFSET = TEMPLATE_VARIABLE_CS__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -210,13 +264,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int TEMPLATE_CS__END_TOKEN = TEMPLATE_VARIABLE_CS__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_CS__AST_NODE = TEMPLATE_VARIABLE_CS__AST_NODE;
+	int TEMPLATE_CS__AST = TEMPLATE_VARIABLE_CS__AST;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -265,6 +319,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int COLLECTION_TEMPLATE_CS = 1;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_CS__START_OFFSET = TEMPLATE_CS__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_CS__END_OFFSET = TEMPLATE_CS__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -283,13 +355,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int COLLECTION_TEMPLATE_CS__END_TOKEN = TEMPLATE_CS__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_TEMPLATE_CS__AST_NODE = TEMPLATE_CS__AST_NODE;
+	int COLLECTION_TEMPLATE_CS__AST = TEMPLATE_CS__AST;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -365,6 +437,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int DEFAULT_VALUE_CS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFAULT_VALUE_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFAULT_VALUE_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -383,13 +473,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int DEFAULT_VALUE_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEFAULT_VALUE_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int DEFAULT_VALUE_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -429,6 +519,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int DOMAIN_CS = 3;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_CS__START_OFFSET = ABSTRACT_DOMAIN_CS__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_CS__END_OFFSET = ABSTRACT_DOMAIN_CS__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -447,13 +555,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int DOMAIN_CS__END_TOKEN = ABSTRACT_DOMAIN_CS__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__AST_NODE = ABSTRACT_DOMAIN_CS__AST_NODE;
+	int DOMAIN_CS__AST = ABSTRACT_DOMAIN_CS__AST;
 
 	/**
 	 * The feature id for the '<em><b>Checkonly</b></em>' attribute.
@@ -548,6 +656,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int KEY_DECL_CS = 4;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_DECL_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_DECL_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -566,13 +692,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int KEY_DECL_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEY_DECL_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int KEY_DECL_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The feature id for the '<em><b>Class Id</b></em>' containment reference.
@@ -612,6 +738,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int MODEL_DECL_CS = 5;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_DECL_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_DECL_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -630,13 +774,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int MODEL_DECL_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_DECL_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int MODEL_DECL_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The feature id for the '<em><b>Model Id</b></em>' containment reference.
@@ -676,6 +820,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int OBJECT_TEMPLATE_CS = 6;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_CS__START_OFFSET = TEMPLATE_CS__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_CS__END_OFFSET = TEMPLATE_CS__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -694,13 +856,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int OBJECT_TEMPLATE_CS__END_TOKEN = TEMPLATE_CS__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_TEMPLATE_CS__AST_NODE = TEMPLATE_CS__AST_NODE;
+	int OBJECT_TEMPLATE_CS__AST = TEMPLATE_CS__AST;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -767,6 +929,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int PARAM_DECLARATION_CS = 7;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM_DECLARATION_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM_DECLARATION_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -785,13 +965,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int PARAM_DECLARATION_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_DECLARATION_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int PARAM_DECLARATION_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -831,6 +1011,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int PRIMITIVE_TYPE_DOMAIN_CS = 8;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE_DOMAIN_CS__START_OFFSET = TEMPLATE_VARIABLE_CS__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE_DOMAIN_CS__END_OFFSET = TEMPLATE_VARIABLE_CS__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -849,13 +1047,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int PRIMITIVE_TYPE_DOMAIN_CS__END_TOKEN = TEMPLATE_VARIABLE_CS__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE_DOMAIN_CS__AST_NODE = TEMPLATE_VARIABLE_CS__AST_NODE;
+	int PRIMITIVE_TYPE_DOMAIN_CS__AST = TEMPLATE_VARIABLE_CS__AST;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -895,6 +1093,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int PROPERTY_TEMPLATE_CS = 9;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -913,13 +1129,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int PROPERTY_TEMPLATE_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int PROPERTY_TEMPLATE_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The feature id for the '<em><b>Property Id</b></em>' containment reference.
@@ -977,6 +1193,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int QUERY_CS = 10;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -995,13 +1229,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int QUERY_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int QUERY_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The feature id for the '<em><b>Path Name</b></em>' containment reference.
@@ -1059,6 +1293,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int RELATION_CS = 11;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1077,13 +1329,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int RELATION_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int RELATION_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The feature id for the '<em><b>Top</b></em>' attribute.
@@ -1168,6 +1420,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int TOP_LEVEL_CS = 14;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_LEVEL_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_LEVEL_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1186,13 +1456,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int TOP_LEVEL_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int TOP_LEVEL_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The feature id for the '<em><b>Import Clause</b></em>' containment reference list.
@@ -1232,6 +1502,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int TRANSFORMATION_CS = 15;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1250,13 +1538,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int TRANSFORMATION_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int TRANSFORMATION_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The feature id for the '<em><b>Model Decl</b></em>' containment reference list.
@@ -1322,6 +1610,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int TRANSFORMATION_CS_FEATURE_COUNT = CSTPackage.CST_NODE_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1340,13 +1646,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int UNIT_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNIT_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int UNIT_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference list.
@@ -1377,6 +1683,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int VAR_DECLARATION_CS = 17;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DECLARATION_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DECLARATION_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1395,13 +1719,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int VAR_DECLARATION_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DECLARATION_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int VAR_DECLARATION_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The feature id for the '<em><b>Var Declaration Id</b></em>' containment reference list.
@@ -1442,6 +1766,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int WHEN_CS = 18;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHEN_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHEN_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1460,13 +1802,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int WHEN_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WHEN_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int WHEN_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' containment reference list.
@@ -1497,6 +1839,24 @@ public interface QVTrCSTPackage extends EPackage {
 	int WHERE_CS = 19;
 
 	/**
+	 * The feature id for the '<em><b>Start Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHERE_CS__START_OFFSET = CSTPackage.CST_NODE__START_OFFSET;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHERE_CS__END_OFFSET = CSTPackage.CST_NODE__END_OFFSET;
+
+	/**
 	 * The feature id for the '<em><b>Start Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1515,13 +1875,13 @@ public interface QVTrCSTPackage extends EPackage {
 	int WHERE_CS__END_TOKEN = CSTPackage.CST_NODE__END_TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Ast Node</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WHERE_CS__AST_NODE = CSTPackage.CST_NODE__AST_NODE;
+	int WHERE_CS__AST = CSTPackage.CST_NODE__AST;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' containment reference list.
