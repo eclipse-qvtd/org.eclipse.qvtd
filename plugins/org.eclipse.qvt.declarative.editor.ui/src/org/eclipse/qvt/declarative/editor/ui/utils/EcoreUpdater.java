@@ -20,6 +20,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -68,17 +69,19 @@ public class EcoreUpdater
         List<EObject> idLess = null;
 		for (TreeIterator<EObject> iterator = resource.getAllContents(); iterator.hasNext(); ) {
 	        EObject object = iterator.next();
-	        String id = resource.getID(object);
-	        if (id == null) {
-	            if (idLess == null)
-	            	idLess = new ArrayList<EObject>(100);
-	        	idLess.add(object);
-	        }
-	        else {
-		        idToObjectMap.put(id, object);
-		        if (objectToIdMap != null)
-					objectToIdMap.put(object, id);
-	        }
+            if (!(object instanceof EGenericType)) {
+		        String id = resource.getID(object);
+		        if (id == null) {
+		            if (idLess == null)
+		            	idLess = new ArrayList<EObject>(100);
+		        	idLess.add(object);
+		        }
+		        else {
+			        idToObjectMap.put(id, object);
+			        if (objectToIdMap != null)
+						objectToIdMap.put(object, id);
+		        }
+            }
 	    }
 		if (idLess != null) {
 			if (idCreator == null) {
@@ -142,29 +145,33 @@ public class EcoreUpdater
 	    copier.copyReferences();		
 		for (EObject oldObject : copier.keySet()) {
             EObject newObject = copier.get(oldObject);
-            String id = oldResource.getID(oldObject);
-            if (id == null)
-            	throw new MissingXmiIdException(oldObject);
-            newResource.setID(newObject, id);
-        }
+            if (!(newObject instanceof EGenericType)) {
+	            String id = oldResource.getID(oldObject);
+	            if (id == null)
+	            	throw new MissingXmiIdException(oldObject);
+	            newResource.setID(newObject, id);
+	        }
+		}
         for (TreeIterator<EObject> iterator = newResource.getAllContents(); iterator.hasNext(); ) {
             EObject newObject = iterator.next();
-            String id = newResource.getID(newObject);
-            if (id == null) {
-            	EObject newContainer = newObject.eContainer();
-                String containerId = newResource.getID(newContainer);
-                if (containerId == null)
-                	throw new MissingXmiIdException(newContainer);
-                EStructuralFeature containingFeature = newObject.eContainingFeature();
-            	EObject oldContainer = oldResource.getEObject(containerId);
-            	Object oldObject = oldContainer.eGet(containingFeature);
-            	if (containingFeature.isMany()) {
-            		List<?> newList = (List<?>) newContainer.eGet(containingFeature);
-            		int index = newList.indexOf(newObject);
-                	oldObject = ((List<?>)oldObject).get(index);
-            	}
-        		id = oldResource.getID((EObject) oldObject);
-        		newResource.setID(newObject, id);
+            if (!(newObject instanceof EGenericType)) {
+	            String id = newResource.getID(newObject);
+	            if (id == null) {
+	            	EObject newContainer = newObject.eContainer();
+	                String containerId = newResource.getID(newContainer);
+	                if (containerId == null)
+	                	throw new MissingXmiIdException(newContainer);
+	                EStructuralFeature containingFeature = newObject.eContainingFeature();
+	            	EObject oldContainer = oldResource.getEObject(containerId);
+	            	Object oldObject = oldContainer.eGet(containingFeature);
+	            	if (containingFeature.isMany()) {
+	            		List<?> newList = (List<?>) newContainer.eGet(containingFeature);
+	            		int index = newList.indexOf(newObject);
+	                	oldObject = ((List<?>)oldObject).get(index);
+	            	}
+	        		id = oldResource.getID((EObject) oldObject);
+	        		newResource.setID(newObject, id);
+	            }
             }
         }
 	}
