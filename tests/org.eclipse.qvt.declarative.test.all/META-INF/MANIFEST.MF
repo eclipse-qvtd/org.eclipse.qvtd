@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.qvt.declarative.test.editor.qvtcore,
- org.eclipse.qvt.declarative.test.editor.qvtrelation;bundle-version="0.7.0",
+ org.eclipse.qvt.declarative.test.editor.qvtrelation,
  org.eclipse.qvt.declarative.test.emof.all;visibility:=reexport
 Eclipse-LazyStart: false
 Export-Package: org.eclipse.qvt.declarative.test.all
