@@ -11,21 +11,15 @@
 package org.eclipse.qvt.declarative.parser.utils;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ocl.cst.CSTNode;
-import org.eclipse.ocl.cst.IsMarkedPreCS;
-import org.eclipse.ocl.expressions.InvalidLiteralExp;
 import org.eclipse.qvt.declarative.ecore.utils.ClassUtils;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
-import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
-import org.eclipse.qvt.declarative.parser.environment.UnresolvedEnvironment;
 import org.eclipse.qvt.declarative.parser.qvt.cst.ErrorNode;
 import org.eclipse.qvt.declarative.parser.qvt.cst.QVTCSTFactory;
 
@@ -34,57 +28,6 @@ public class CSTUtils
 	@Deprecated
 	public static <T> T asClassUnchecked(Object object, T requiredClassObject) {
 		return ClassUtils.asClassUnchecked(object, requiredClassObject);
-	}
-
-	/**
-	 * Diagnose and AST nodes not mapped to CST nodes and vice-versa.
-	 * <br>
-	 * This is a debug facility, so output to to System.out.
-	 */
-	public static void checkASTandCSTmappings(IFileEnvironment env) {
-		UnresolvedEnvironment unresolvedEnvironment = env.basicGetUnresolvedEnvironment();
-		EPackage rootUnresolvedEPackage = unresolvedEnvironment != null ? unresolvedEnvironment.getUnresolvedEPackage() : null;
-		for (Iterator<EObject> i = env.getASTNode().getAllContents(); i.hasNext(); ) {
-			EObject astNode = i.next();
-			CSTNode cstNode = env.getASTMapping(astNode);
-			if (cstNode != null)
-				;
-			else if (astNode instanceof EGenericType)
-				;
-			else {
-				boolean hasErrorNode = false;
-				if (rootUnresolvedEPackage != null) {
-					for (EObject eObject = astNode; eObject != null; eObject = eObject.eContainer()) {
-						if (eObject == rootUnresolvedEPackage) {
-							hasErrorNode = true;
-							break;
-						}
-					}
-				}
-				if (!hasErrorNode)		
-					System.out.println("No AST to CST mapping for " + EcoreUtils.formatQualifiedName(astNode));
-			}
-		}
-		for (Iterator<EObject> i = env.getCSTNode().eAllContents(); i.hasNext(); ) {
-			CSTNode cstNode = (CSTNode) i.next();
-			Object astNode = cstNode.getAst();
-			if (astNode != null)
-				;
-			else if (cstNode instanceof IsMarkedPreCS)
-				;
-			else {
-				boolean hasErrorNode = false;
-				for (EObject eObject = cstNode; eObject instanceof CSTNode; eObject = eObject.eContainer()) {
-					Object ast = ((CSTNode)eObject).getAst();
-					if ((ast instanceof ErrorNode) || (ast instanceof InvalidLiteralExp)) {
-						hasErrorNode = true;
-						break;
-					}
-				}
-				if (!hasErrorNode)		
-					System.out.println("No CST to AST mapping for " + EcoreUtils.formatQualifiedName(cstNode));
-			}
-		}
 	}
 
 	/**
