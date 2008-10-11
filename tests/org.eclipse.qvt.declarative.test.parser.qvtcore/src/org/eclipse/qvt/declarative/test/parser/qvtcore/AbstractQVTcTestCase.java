@@ -20,13 +20,14 @@ import org.eclipse.qvt.declarative.ecore.QVTCore.QVTCorePackage;
 import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcCreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.modelregistry.standalone.FileHandle;
-import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcFileEnvironment;
+import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcTopLevelEnvironment;
 import org.eclipse.qvt.declarative.test.parser.AbstractParseTestCase;
 
 public abstract class AbstractQVTcTestCase extends AbstractParseTestCase
 {
-	@Override protected IFileEnvironment createEnvironment(String fileName, URI astURI) throws IOException, CoreException {
+	@Override protected ICSTFileEnvironment createEnvironment(String fileName, URI astURI) throws IOException, CoreException {
 		FileHandle fileHandle = getFileHandle(fileName);
 		XMIResource astResource = (XMIResource) resourceSet.createResource(astURI, QVTCorePackage.eCONTENT_TYPE);
 		QVTcFileEnvironment environment = new QVTcFileEnvironment(fileHandle, resourceSet, astResource)
@@ -36,6 +37,12 @@ public abstract class AbstractQVTcTestCase extends AbstractParseTestCase
 				super.initializePackageNs(ePackage);
 				ePackage.setNsURI(ePackage.getNsURI().replace(".unparsed", ""));
 			}			
+
+			@Override
+			protected void postParse(QVTcTopLevelEnvironment rootEnvironment) {
+				super.postParse(rootEnvironment);
+				rootEnvironment.checkMappings();
+			}
 		};
 		return environment;
 	}
