@@ -32,6 +32,7 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
 import org.eclipse.qvt.declarative.ecore.QVTCore.Mapping;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
+import org.eclipse.qvt.declarative.parser.environment.CSTChildEnvironment;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.DirectionCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.MappingCS;
@@ -39,9 +40,8 @@ import org.eclipse.qvt.declarative.parser.qvtcore.cst.QueryCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.TransformationCS;
 import org.eclipse.qvt.declarative.parser.utils.StringUtils;
 
-public class QVTcTransformationEnvironment extends QVTcEnvironment<IQVTcEnvironment, QVTcTopLevelEnvironment> implements IQVTcEnvironment
+public class QVTcTransformationEnvironment extends QVTcEnvironment<IQVTcNodeEnvironment, QVTcTopLevelEnvironment, Transformation, TransformationCS>
 {
-	private final Transformation transformation;
 	private Map<MappingCS, QVTcRootMappingEnvironment> mappingCSEnvironments = new HashMap<MappingCS, QVTcRootMappingEnvironment>(); 
 	private Map<String, QVTcRootMappingEnvironment> mappingEnvironments = new HashMap<String, QVTcRootMappingEnvironment>(); 
 	private Map<QueryCS, QVTcQueryEnvironment> queryCSEnvironments = new HashMap<QueryCS, QVTcQueryEnvironment>(); 
@@ -49,16 +49,17 @@ public class QVTcTransformationEnvironment extends QVTcEnvironment<IQVTcEnvironm
 	private List<EPackage> allContents = null;
 
 	public QVTcTransformationEnvironment(QVTcTopLevelEnvironment env, TransformationCS transformationCS) {
-		super(env, transformationCS);
-		transformation = QVTBaseFactory.eINSTANCE.createTransformation();
-		env.initASTMapping(transformation, transformationCS);
+		super(env, QVTBaseFactory.eINSTANCE.createTransformation(), transformationCS);
 		List<String> names = transformationCS.getPathName().getSequenceOfNames();
 		String name = names.get(names.size()-1);
-		transformation.setName(name);
-		Variable variable = EcoreFactory.eINSTANCE.createVariable();
-		env.initASTMapping(variable, transformationCS.getPathName());
+		ast.setName(name);
+		transformationCS.getPathName().setAst(ast);
+		Variable variable = EcoreFactory.eINSTANCE.createVariable();	
+		rootEnvironment.getASTNodeToCSTNodeMap().put(variable, transformationCS);
+//		env.initASTMapping(variable, transformationCS.getPathName());
+//		env.initASTMapping(ast, transformationCS.getPathName());
 		variable.setName("self"); //QvtrEnvironmentFactory.SELF_NAME);
-		variable.setType(transformation);
+		variable.setType(ast);
 		setSelfVariable(variable);
 //		IdentifierCS identifierCS = transformationCS.getExtends();
 //		if (identifierCS != null) {
@@ -84,7 +85,7 @@ public class QVTcTransformationEnvironment extends QVTcEnvironment<IQVTcEnvironm
 	public QVTcRootMappingEnvironment createEnvironment(MappingCS mappingCS) {
 		QVTcRootMappingEnvironment environment = new QVTcRootMappingEnvironment(this, mappingCS);
 		Mapping mapping = environment.getMapping();
-		transformation.getRule().add(mapping);
+		ast.getRule().add(mapping);
 		mappingCSEnvironments.put(mappingCS, environment);
 		QVTcRootMappingEnvironment oldEnvironment = mappingEnvironments.put(mappingCS.getName(), environment);
 		if (oldEnvironment != null)
@@ -108,7 +109,7 @@ public class QVTcTransformationEnvironment extends QVTcEnvironment<IQVTcEnvironm
 		else {
 			typedModel = QVTBaseFactory.eINSTANCE.createTypedModel();
 			initASTMapping(typedModel, directionCS);
-			typedModel.setName(identifier);
+			CSTChildEnvironment.setNameFromIdentifier(typedModel, identifierCS);
 			transformation.getModelParameter().add(typedModel);
 		}
 		return typedModel;
@@ -143,7 +144,7 @@ public class QVTcTransformationEnvironment extends QVTcEnvironment<IQVTcEnvironm
 		return queryCSEnvironments.keySet();
 	}
 
-	@Override public Transformation getTransformation() { return transformation; }
+	@Override public Transformation getTransformation() { return ast; }
 
 	public TypedModel getTypedModel(IdentifierCS identifierCS) {
 		String identifier = identifierCS.getValue();
@@ -179,14 +180,14 @@ public class QVTcTransformationEnvironment extends QVTcEnvironment<IQVTcEnvironm
 		if (ePackages == null) {
 			ePackages = new ArrayList<EPackage>();
 			metaModelContents.put(packageName, ePackages);
-			URI uri = getParentEnvironment().getResolver().getURI(packageName);		// FIXME Fix-up error with reference to stub
+			URI uri = getFileEnvironment().getResolver().getURI(packageName);		// FIXME Fix-up error with reference to stub
 			if (uri == null) {
 				String message = "Unknown package '" + formatString(packageName) + "'";
 				analyzerError(message, "ImportCS", packageNameCS);
 			}
 			else {
 				try {
-					Resource resource = getParentEnvironment().getResolver().getResource(uri, true);
+					Resource resource = getFileEnvironment().getResolver().getResource(uri, true);
 					if (resource == null) {
 						String message = "Failed to load package '" + formatString(packageName) + "'";
 						analyzerError(message, "ImportCS", packageNameCS);
@@ -218,10 +219,6 @@ public class QVTcTransformationEnvironment extends QVTcEnvironment<IQVTcEnvironm
 		return ePackages;
 	}
 
-	public void setCSTNode(TransformationCS transformationCS) {
-		super.setCSTNode(transformationCS);	
-	}
-
 	@Override public EClassifier tryLookupClassifier(List<String> names) throws LookupException {
 		if (names == null)
 			return null;
@@ -249,7 +246,7 @@ public class QVTcTransformationEnvironment extends QVTcEnvironment<IQVTcEnvironm
 	public Mapping tryLookupMapping(String name) throws LookupException {
 		Rule firstFind = null;
 		List<Rule> allFinds = null;
-		for (Rule rule : transformation.getRule()) {
+		for (Rule rule : ast.getRule()) {
 			if (name.equals(rule.getName())) {
 				if (allFinds != null)
 					allFinds.add(rule);					

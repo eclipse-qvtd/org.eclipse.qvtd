@@ -18,7 +18,7 @@ import org.eclipse.qvt.declarative.ecore.QVTCore.Area;
 import org.eclipse.qvt.declarative.ecore.QVTCore.Mapping;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.DomainCS;
 
-public class QVTcMiddleEnvironment extends QVTcAreaEnvironment
+public class QVTcMiddleEnvironment extends QVTcAreaEnvironment<Mapping>
 {
 	private static String getMiddleModelName(DomainCS domainCS) {
 		String modelName = domainCS.getIdentifier().getValue();
@@ -28,12 +28,15 @@ public class QVTcMiddleEnvironment extends QVTcAreaEnvironment
 	}
 
 	public QVTcMiddleEnvironment(QVTcMappingEnvironment<?> env, DomainCS domainCS) {
-		super(env, domainCS, getMiddleModelName(domainCS));
+		super(env, null, domainCS, getMiddleModelName(domainCS));
+		internalSetAST(env.getASTNode());
+		domainCS.setAst(ast);
+		domainCS.getIdentifier().setAst(ast);
 	}
 
 	@Override
-	protected Set<QVTcAreaEnvironment> computeAreaEnvironmentPartialClosure() {
-		Set<QVTcAreaEnvironment> areaEnvironmentClosure = new HashSet<QVTcAreaEnvironment>();
+	protected Set<QVTcAreaEnvironment<?>> computeAreaEnvironmentPartialClosure() {
+		Set<QVTcAreaEnvironment<?>> areaEnvironmentClosure = new HashSet<QVTcAreaEnvironment<?>>();
 		for (QVTcMappingEnvironment<?> mappingEnvironment : getParentEnvironment().getMappingEnvironmentClosure()) {
 			areaEnvironmentClosure.add(mappingEnvironment.getMiddleEnvironment());
 			for (QVTcDomainEnvironment domainEnvironment : mappingEnvironment.getDomainEnvironments())

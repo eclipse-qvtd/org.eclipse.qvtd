@@ -31,17 +31,12 @@ import org.eclipse.qvt.declarative.ecore.QVTCore.RealizedVariable;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.PatternCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.RealizedVariableCS;
 
-public class QVTcBottomPatternEnvironment extends QVTcPatternEnvironment
+public class QVTcBottomPatternEnvironment extends QVTcPatternEnvironment<BottomPattern>
 {
-	private final BottomPattern pattern;
-	
-	public QVTcBottomPatternEnvironment(QVTcAreaEnvironment domainEnvironment, PatternCS patternCS) {
-		super(domainEnvironment, patternCS);
+	public QVTcBottomPatternEnvironment(QVTcAreaEnvironment<?> domainEnvironment, PatternCS patternCS) {
+		super(domainEnvironment, QVTCoreFactory.eINSTANCE.createBottomPattern(), patternCS);
 		Area area = domainEnvironment.getArea();
-		BottomPattern bottomPattern = QVTCoreFactory.eINSTANCE.createBottomPattern();
-		initASTMapping(bottomPattern, patternCS);
-		area.setBottomPattern(bottomPattern);
-		pattern = bottomPattern;
+		area.setBottomPattern(ast);
 	}
 
 	public Variable createRealizedVariableDefinition(String name, EClassifier type, RealizedVariableCS cstNode) {
@@ -55,21 +50,20 @@ public class QVTcBottomPatternEnvironment extends QVTcPatternEnvironment
 		else {
 			RealizedVariable realizedVariable = QVTCoreFactory.eINSTANCE.createRealizedVariable();
 			initASTMapping(realizedVariable, cstNode);
+			cstNode.getIdentifier().setAst(realizedVariable);
 			variable = realizedVariable;
 			UMLReflection<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint> uml = getUMLReflection();
 			uml.setName(variable, name);
 			uml.setType(variable, type);
 			variableDefinitions.put(name, variable);
-			getPattern().getRealizedVariable().add(realizedVariable);
+			ast.getRealizedVariable().add(realizedVariable);
 			addElement(name, variable, true);
 		}
 		return variable;
 	}
 
-	@Override public BottomPattern getPattern() { return pattern; }
-
 	@Override
-	public Set<QVTcPatternEnvironment> getPatternEnvironmentClosure() {
+	public Set<QVTcPatternEnvironment<?>> getPatternEnvironmentClosure() {
 		return getParentEnvironment().getBottomPatternEnvironmentClosure();
 	}
 	

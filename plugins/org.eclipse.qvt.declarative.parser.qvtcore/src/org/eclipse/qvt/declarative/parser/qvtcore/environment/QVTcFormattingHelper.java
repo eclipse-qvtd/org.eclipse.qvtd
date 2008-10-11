@@ -16,7 +16,7 @@ import org.eclipse.qvt.declarative.parser.qvt.environment.QVTFormattingHelper;
 
 public class QVTcFormattingHelper extends QVTFormattingHelper
 {	
-	public QVTcFormattingHelper(IQVTcEnvironment environment) {
+	public QVTcFormattingHelper(IQVTcNodeEnvironment environment) {
 		super(environment);
 	}
 		

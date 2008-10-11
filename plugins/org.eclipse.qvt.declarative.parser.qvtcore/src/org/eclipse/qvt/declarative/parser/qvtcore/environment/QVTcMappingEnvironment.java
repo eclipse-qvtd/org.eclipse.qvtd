@@ -22,15 +22,14 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
-import org.eclipse.qvt.declarative.ecore.QVTCore.QVTCoreFactory;
 import org.eclipse.qvt.declarative.ecore.QVTCore.Mapping;
+import org.eclipse.qvt.declarative.ecore.QVTCore.QVTCoreFactory;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.DomainCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.MappingCS;
 
-public abstract class QVTcMappingEnvironment<P extends IQVTcEnvironment> extends QVTcEnvironment<IQVTcEnvironment, P> implements IQVTcEnvironment
+public abstract class QVTcMappingEnvironment<P extends IQVTcNodeEnvironment> extends QVTcEnvironment<IQVTcNodeEnvironment, P, Mapping, MappingCS> implements IQVTcEnvironment
 {
-	private final Mapping mapping;
 	private Map<DomainCS, QVTcDomainEnvironment> domainCSEnvironments = new HashMap<DomainCS, QVTcDomainEnvironment>(); 
 	private Map<String, QVTcDomainEnvironment> domainEnvironments = new HashMap<String, QVTcDomainEnvironment>(); 
 	private Map<MappingCS, QVTcComposedMappingEnvironment> childCSEnvironments = new HashMap<MappingCS, QVTcComposedMappingEnvironment>(); 
@@ -39,12 +38,8 @@ public abstract class QVTcMappingEnvironment<P extends IQVTcEnvironment> extends
 	private QVTcMiddleEnvironment middleEnvironment = null;
 	
 	protected QVTcMappingEnvironment(P env, MappingCS mappingCS) {
-		super(env, mappingCS);
-		mapping = QVTCoreFactory.eINSTANCE.createMapping();
-		initASTMapping(mapping, mappingCS);
-		IdentifierCS identifier = mappingCS.getIdentifier();
-		if (identifier != null)
-			mapping.setName(identifier.getValue());
+		super(env, QVTCoreFactory.eINSTANCE.createMapping(), mappingCS);
+		setNameFromIdentifier(ast, mappingCS.getIdentifier());
 	}
 
 	protected Set<QVTcMappingEnvironment<?>> computeMappingEnvironmentsClosure() {
@@ -99,7 +94,7 @@ public abstract class QVTcMappingEnvironment<P extends IQVTcEnvironment> extends
 		return childCSEnvironments.get(mappingCS);
 	}
 
-	public Mapping getMapping() { return mapping; }
+	public Mapping getMapping() { return ast; }
 
 	public QVTcMappingEnvironment<?> getMappingEnvironment() { return this; }
 

@@ -32,7 +32,8 @@ public class QVTcRootMappingEnvironment extends QVTcMappingEnvironment<QVTcTrans
 		if (closure.add(env)) {
 			for (Mapping specification : env.getMapping().getSpecification()) {
 				QVTcRootMappingEnvironment specificationEnvironment = getParentEnvironment().getEnvironment(specification.getName());
-				computeMappingEnvironmentsClosure(closure, specificationEnvironment);					
+				if (specificationEnvironment != null)			// null for unresolved mappings
+					computeMappingEnvironmentsClosure(closure, specificationEnvironment);					
 			}
 		}
 	}

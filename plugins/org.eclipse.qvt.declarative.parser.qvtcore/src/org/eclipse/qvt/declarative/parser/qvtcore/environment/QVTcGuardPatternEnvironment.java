@@ -17,23 +17,16 @@ import org.eclipse.qvt.declarative.ecore.QVTCore.QVTCoreFactory;
 import org.eclipse.qvt.declarative.ecore.QVTCore.GuardPattern;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.PatternCS;
 
-public class QVTcGuardPatternEnvironment extends QVTcPatternEnvironment
+public class QVTcGuardPatternEnvironment extends QVTcPatternEnvironment<GuardPattern>
 {
-	private final GuardPattern pattern;
-	
-	public QVTcGuardPatternEnvironment(QVTcAreaEnvironment domainEnvironment, PatternCS patternCS) {
-		super(domainEnvironment, patternCS);
+	public QVTcGuardPatternEnvironment(QVTcAreaEnvironment<?> domainEnvironment, PatternCS patternCS) {
+		super(domainEnvironment, QVTCoreFactory.eINSTANCE.createGuardPattern(), patternCS);
 		Area area = domainEnvironment.getArea();
-		GuardPattern guardPattern = QVTCoreFactory.eINSTANCE.createGuardPattern();
-		initASTMapping(guardPattern, patternCS);
-		area.setGuardPattern(guardPattern);
-		pattern = guardPattern;
+		area.setGuardPattern(ast);
 	}
 
-	@Override public GuardPattern getPattern() { return pattern; }
-
 	@Override
-	public Set<QVTcPatternEnvironment> getPatternEnvironmentClosure() {
+	public Set<QVTcPatternEnvironment<?>> getPatternEnvironmentClosure() {
 		return getParentEnvironment().getGuardPatternEnvironmentClosure();
 	}
 	

@@ -20,32 +20,27 @@ import org.eclipse.qvt.declarative.ecore.QVTCore.QVTCoreFactory;
 import org.eclipse.qvt.declarative.ecore.QVTCore.Mapping;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.DomainCS;
 
-public class QVTcDomainEnvironment extends QVTcAreaEnvironment
+public class QVTcDomainEnvironment extends QVTcAreaEnvironment<CoreDomain>
 {
-	private final CoreDomain domain;
-	
 	public QVTcDomainEnvironment(QVTcMappingEnvironment<?> env, DomainCS domainCS) {
-		super(env, domainCS, domainCS.getIdentifier().getValue());
-		domain = QVTCoreFactory.eINSTANCE.createCoreDomain();
-		initASTMapping(domain, domainCS);
-		String name = domainCS.getIdentifier().getValue();
-		domain.setName(name);
-		domain.setIsCheckable(domainCS.isCheck());
-		domain.setIsEnforceable(domainCS.isEnforce());
-		getMapping().getDomain().add(domain);
-		domain.setTypedModel(getTypedModel());		
+		super(env, QVTCoreFactory.eINSTANCE.createCoreDomain(), domainCS, domainCS.getIdentifier().getValue());
+		setNameFromIdentifier(ast, domainCS.getIdentifier());
+		ast.setIsCheckable(domainCS.isCheck());
+		ast.setIsEnforceable(domainCS.isEnforce());
+		getMapping().getDomain().add(ast);
+		ast.setTypedModel(getTypedModel());		
 	}
 
 	@Override
-	protected Set<QVTcAreaEnvironment> computeAreaEnvironmentPartialClosure() {
-		Set<QVTcAreaEnvironment> areaEnvironmentClosure = new HashSet<QVTcAreaEnvironment>();
+	protected Set<QVTcAreaEnvironment<?>> computeAreaEnvironmentPartialClosure() {
+		Set<QVTcAreaEnvironment<?>> areaEnvironmentClosure = new HashSet<QVTcAreaEnvironment<?>>();
 		for (QVTcMappingEnvironment<?> mappingEnvironment : getParentEnvironment().getMappingEnvironmentClosure())
 			areaEnvironmentClosure.add(mappingEnvironment.getDomainEnvironment(modelName));
 		areaEnvironmentClosure.add(this);	// Reduce error messages in case a duplicate domain hides this one
 		return areaEnvironmentClosure;
 	}
 
-	@Override public CoreDomain getArea() { return domain; }
+	@Override public CoreDomain getArea() { return ast; }
 
 	@Override
 	public QVTcDomainEnvironment getContextEnvironment() {

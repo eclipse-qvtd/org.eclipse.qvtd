@@ -10,34 +10,25 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.qvtcore.environment;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
-import org.eclipse.qvt.declarative.ecore.QVTCore.QVTCorePackage;
 import org.eclipse.qvt.declarative.ecore.QVTCore.Mapping;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
+import org.eclipse.qvt.declarative.parser.environment.CSTChildEnvironment;
 import org.eclipse.qvt.declarative.parser.qvt.environment.QVTTopLevelEnvironment;
-import org.eclipse.qvt.declarative.parser.qvtcore.QVTcAnalyzer;
+import org.eclipse.qvt.declarative.parser.qvtcore.cst.TopLevelCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.TransformationCS;
 
-public class QVTcTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTcEnvironment> implements IQVTcEnvironment
+public class QVTcTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTcNodeEnvironment, TopLevelCS> implements IQVTcNodeEnvironment
 {
-	private final Map<Transformation, QVTcTransformationEnvironment> transformationMap = new HashMap<Transformation, QVTcTransformationEnvironment>();
-	
-	public QVTcTopLevelEnvironment(AbstractFileHandle file, ResourceSet resourceSet) {
-		super(file, resourceSet);
-	}
-
-	@Override protected QVTcAnalyzer createAnalyzer() {
-		return new QVTcAnalyzer(this);
+	public QVTcTopLevelEnvironment(QVTcFileEnvironment parent, XMIResource astResource, TopLevelCS cstNode) {
+		super(parent, astResource, cstNode);
 	}
 
 	public QVTcTransformationEnvironment createEnvironment(TransformationCS transformationCS) {
@@ -52,7 +43,6 @@ public class QVTcTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTcEnviron
 		if (environment == null) {
 			environment = new QVTcTransformationEnvironment(this, transformationCS);
 			Transformation transformation = environment.getTransformation();
-			transformationMap.put(transformation, environment);
 			int transformationNameSize = transformationName.size();
 			if (transformationNameSize <= 1)
 				addPackage(transformation);
@@ -83,9 +73,9 @@ public class QVTcTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTcEnviron
 		}
 		else {
 			CSTNode cstNode = environment.getCSTNode();
-			if (!(cstNode instanceof TransformationCS))
+			/*if (!(cstNode instanceof TransformationCS))
 				environment.setCSTNode(transformationCS);
-			else if (cstNode != transformationCS) {
+			else*/ if (cstNode != transformationCS) {
 				analyzerError("Duplicate transformation definition", "transformationCS", transformationCS);
 			}
 		}
@@ -97,6 +87,15 @@ public class QVTcTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTcEnviron
 		return new QVTcFormattingHelper(this);
 	}
 
+	public QVTcNestedEnvironment createNestedEnvironment(CSTNode cstNode) {
+		return new QVTcNestedEnvironment(this, cstNode);
+	}
+
+	@Override
+	protected QVTcUnresolvedEnvironment createUnresolvedEnvironment() {
+		return new QVTcUnresolvedEnvironment(this);
+	}
+
 	public QVTcTransformationEnvironment getEnvironment(TransformationCS transformationCS) {
 		try {
 			return getEnvironment(transformationCS.getPathName().getSequenceOfNames());
@@ -105,14 +104,14 @@ public class QVTcTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTcEnviron
 		}
 	}
 
-	@Override
-	protected String getContentTypeIdentifier() {
-		return QVTCorePackage.eCONTENT_TYPE;
-	}
-
 	public QVTcTransformationEnvironment getEnvironment(List<String> transformationName) throws LookupException {
 		Transformation transformation = tryLookupTransformation(transformationName);
-		return transformationMap.get(transformation);
+		return CSTChildEnvironment.getEnvironmentFromAST(transformation, QVTcTransformationEnvironment.class);
+	}
+
+	@Override
+	public QVTcUnresolvedEnvironment getUnresolvedEnvironment() {
+		return (QVTcUnresolvedEnvironment) super.getUnresolvedEnvironment();
 	}
 
 	public Mapping tryLookupMapping(String name) {

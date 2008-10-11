@@ -36,12 +36,12 @@ import org.eclipse.qvt.declarative.ecore.QVTCore.CorePattern;
 import org.eclipse.qvt.declarative.ecore.QVTCore.GuardPattern;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.PatternCS;
 
-public abstract class QVTcPatternEnvironment extends QVTcEnvironment<IQVTcEnvironment, QVTcAreaEnvironment> implements IQVTcEnvironment
+public abstract class QVTcPatternEnvironment<AST extends CorePattern> extends QVTcEnvironment<IQVTcNodeEnvironment, QVTcAreaEnvironment<?>, AST, PatternCS> implements IQVTcEnvironment
 {
 	protected final Map<String, Variable> variableDefinitions = new HashMap<String, Variable>();	
 
-	public QVTcPatternEnvironment(QVTcAreaEnvironment domainEnvironment, PatternCS patternCS) {
-		super(domainEnvironment, patternCS);
+	public QVTcPatternEnvironment(QVTcAreaEnvironment<?> domainEnvironment, AST astNode, PatternCS patternCS) {
+		super(domainEnvironment, astNode, patternCS);
 	}
 
 	public Variable createUnrealizedVariableDefinition(String name, EClassifier type, CSTNode cstNode) {
@@ -59,7 +59,7 @@ public abstract class QVTcPatternEnvironment extends QVTcEnvironment<IQVTcEnviro
 			uml.setName(variable, name);
 			uml.setType(variable, type);
 			variableDefinitions.put(name, variable);
-			getPattern().getVariable().add(variable);
+			ast.getVariable().add(variable);
 			addElement(name, variable, true);
 		}
 		return variable;
@@ -75,12 +75,10 @@ public abstract class QVTcPatternEnvironment extends QVTcEnvironment<IQVTcEnviro
 			return super.formatName(object);
 	}
 
-	public abstract CorePattern getPattern();
-
 	/**
 	 * Return the set of all guard and bottom patterns that contribute to this pattern.
 	 */
-	public abstract Set<? extends QVTcPatternEnvironment> getPatternEnvironmentClosure();
+	public abstract Set<? extends QVTcPatternEnvironment<?>> getPatternEnvironmentClosure();
 
 	public Variable getVariable(String name) {
 		return variableDefinitions.get(name);
@@ -107,10 +105,10 @@ public abstract class QVTcPatternEnvironment extends QVTcEnvironment<IQVTcEnviro
 
 	@Override
 	public Variable tryLookupVariable(String name) throws LookupException {
-		Set<? extends QVTcPatternEnvironment> patterns = getPatternEnvironmentClosure();
+		Set<? extends QVTcPatternEnvironment<?>> patterns = getPatternEnvironmentClosure();
 		Variable variable = null;
 		List<Variable> variables = null;
-		for (QVTcPatternEnvironment pattern : patterns) {
+		for (QVTcPatternEnvironment<?> pattern : patterns) {
 			Variable v = pattern.getVariable(name);
 			if (v == null)
 				;

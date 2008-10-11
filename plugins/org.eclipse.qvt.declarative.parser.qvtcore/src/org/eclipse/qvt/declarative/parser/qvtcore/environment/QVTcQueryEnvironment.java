@@ -17,22 +17,24 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.ocl.cst.OCLExpressionCS;
 import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
 import org.eclipse.qvt.declarative.ecore.QVTBase.FunctionParameter;
 import org.eclipse.qvt.declarative.ecore.QVTBase.QVTBaseFactory;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
+import org.eclipse.qvt.declarative.parser.environment.CSTChildEnvironment;
 import org.eclipse.qvt.declarative.parser.plugin.QVTParserPlugin;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.QueryCS;
+import org.eclipse.qvt.declarative.parser.utils.CSTUtils;
 
-public class QVTcQueryEnvironment extends QVTcEnvironment<IQVTcEnvironment, QVTcTransformationEnvironment> implements IQVTcEnvironment
+public class QVTcQueryEnvironment extends QVTcEnvironment<IQVTcNodeEnvironment, QVTcTransformationEnvironment, Function, QueryCS>
 {
-	private Function query = null;
 	private final String name;
 	private final List<FunctionParameter> parameters = new ArrayList<FunctionParameter>();
 	
 	public QVTcQueryEnvironment(QVTcTransformationEnvironment env, QueryCS queryCS) {
-		super(env, queryCS);
+		super(env, null, queryCS);
 		List<String> names = queryCS.getPathName().getSequenceOfNames();
 		name = names.get(names.size()-1);
 	}
@@ -50,35 +52,41 @@ public class QVTcQueryEnvironment extends QVTcEnvironment<IQVTcEnvironment, QVTc
 	}
 
 	public Function getQuery() {
-		return query;
+		return ast;
 	}
 
 	public Function resolveQuery(EClassifier returnType) {
 		Transformation transformation = getTransformation();	// FIXME scoping
 		Function match = findMatchingQuery(transformation, name, parameters);
 		if (match == null) {
-			query = QVTBaseFactory.eINSTANCE.createFunction();
-			initASTMapping(query, cstNode);
-			query.setName(name);
-			query.setEType(returnType);
-			query.getEParameters().addAll(parameters);
-			transformation.getEOperations().add(query);
-			return query;
+			internalSetAST(QVTBaseFactory.eINSTANCE.createFunction());
+			internalSetAdapter();
+			rootEnvironment.initASTMapping(ast, cst);
+			cst.getPathName().setAst(ast);
+			ast.setName(name);
+			ast.setEType(returnType);
+			ast.getEParameters().addAll(parameters);
+			transformation.getEOperations().add(ast);
+			return ast;
 		}
 		CSTNode cstNode = getCSTNode();
 		if (match.getEType() != returnType) {
 			String message = "Inconsistent return type previously '" + formatType(match.getEType()) + "'";
-			analyzerError(message, "queryCS", cstNode);
+			analyzerError(message, "QueryCS", cstNode);
 		}
-		query = match;
+		ast = match;
+		cst.setAst(ast);
 		if (((QueryCS)cstNode).getOclExpression() != null) {
-			if (query.getQueryExpression() != null) {
-				String message = "Redefinition of '" + formatName(query) + "' ignored";
-				analyzerError(message, "queryCS", cstNode);
+			QueryCS otherQuery = CSTChildEnvironment.getEnvironmentFromAST(ast, QVTcQueryEnvironment.class).getCSTNode();
+			OCLExpressionCS oclExpression = otherQuery.getOclExpression();
+			if (oclExpression != null) {
+				String message = "Redefinition of '" + formatName(ast) + "' ignored";
+				analyzerError(message, "QueryCS", cstNode);
+				CSTUtils.setASTErrorNode(oclExpression, message);
 			}
 			else {
-				query.getEParameters().clear();
-				query.getEParameters().addAll(parameters);
+				ast.getEParameters().clear();
+				ast.getEParameters().addAll(parameters);
 			}
 		}
 		return null;

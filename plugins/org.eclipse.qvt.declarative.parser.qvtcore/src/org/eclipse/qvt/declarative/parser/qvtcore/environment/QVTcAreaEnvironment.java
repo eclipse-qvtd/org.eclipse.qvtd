@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
@@ -23,7 +24,7 @@ import org.eclipse.qvt.declarative.ecore.QVTCore.Area;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.DomainCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.PatternCS;
 
-public abstract class QVTcAreaEnvironment extends QVTcEnvironment<IQVTcEnvironment, QVTcMappingEnvironment<?>> implements IQVTcEnvironment
+public abstract class QVTcAreaEnvironment<AST extends EModelElement> extends QVTcEnvironment<IQVTcNodeEnvironment, QVTcMappingEnvironment<?>, AST, DomainCS> implements IQVTcEnvironment
 {
 	protected final String modelName;
 	protected final TypedModel typedModel;
@@ -31,12 +32,12 @@ public abstract class QVTcAreaEnvironment extends QVTcEnvironment<IQVTcEnvironme
 	private QVTcGuardPatternEnvironment guardPatternEnvironment = null; 
 	private Set<TypedModel> typedModelClosure = null;
 	private Set<EPackage> usedPackageClosure = null;
-	private Set<QVTcAreaEnvironment> areaEnvironmentPartialClosure = null;
-	private Set<QVTcPatternEnvironment> bottomPatternEnvironmentClosure = null;
-	private Set<QVTcPatternEnvironment> guardPatternEnvironmentClosure = null;
+	private Set<QVTcAreaEnvironment<?>> areaEnvironmentPartialClosure = null;
+	private Set<QVTcPatternEnvironment<?>> bottomPatternEnvironmentClosure = null;
+	private Set<QVTcPatternEnvironment<?>> guardPatternEnvironmentClosure = null;
 
-	protected QVTcAreaEnvironment(QVTcMappingEnvironment<?> env, DomainCS domainCS, String modelName) {
-		super(env, domainCS);
+	protected QVTcAreaEnvironment(QVTcMappingEnvironment<?> env, AST astNode, DomainCS domainCS, String modelName) {
+		super(env, astNode, domainCS);
 		this.modelName = modelName;
 		if (!"".equals(modelName)) {
 			Transformation transformation = getTransformation();
@@ -61,12 +62,12 @@ public abstract class QVTcAreaEnvironment extends QVTcEnvironment<IQVTcEnvironme
 		}
 	}
 	
-	protected abstract Set<QVTcAreaEnvironment> computeAreaEnvironmentPartialClosure();
+	protected abstract Set<QVTcAreaEnvironment<?>> computeAreaEnvironmentPartialClosure();
 
-	protected Set<QVTcPatternEnvironment> computeBottomPatternEnvironmentClosure() {
-		Set<QVTcPatternEnvironment> closure = new HashSet<QVTcPatternEnvironment>();
-		for (QVTcAreaEnvironment contextEnvironment = this; contextEnvironment != null; contextEnvironment = contextEnvironment.getContextEnvironment()) {
-			for (QVTcAreaEnvironment areaEnvironment : contextEnvironment.getAreaEnvironmentPartialClosure()) {
+	protected Set<QVTcPatternEnvironment<?>> computeBottomPatternEnvironmentClosure() {
+		Set<QVTcPatternEnvironment<?>> closure = new HashSet<QVTcPatternEnvironment<?>>();
+		for (QVTcAreaEnvironment<?> contextEnvironment = this; contextEnvironment != null; contextEnvironment = contextEnvironment.getContextEnvironment()) {
+			for (QVTcAreaEnvironment<?> areaEnvironment : contextEnvironment.getAreaEnvironmentPartialClosure()) {
 				closure.add(areaEnvironment.getBottomPatternEnvironment());
 				closure.add(areaEnvironment.getGuardPatternEnvironment());			
 			}
@@ -74,12 +75,12 @@ public abstract class QVTcAreaEnvironment extends QVTcEnvironment<IQVTcEnvironme
 		return closure;
 	}
 
-	protected Set<QVTcPatternEnvironment> computeGuardPatternEnvironmentClosure() {
-		Set<QVTcPatternEnvironment> closure = new HashSet<QVTcPatternEnvironment>();
-		for (QVTcAreaEnvironment areaEnvironment : getAreaEnvironmentPartialClosure())
+	protected Set<QVTcPatternEnvironment<?>> computeGuardPatternEnvironmentClosure() {
+		Set<QVTcPatternEnvironment<?>> closure = new HashSet<QVTcPatternEnvironment<?>>();
+		for (QVTcAreaEnvironment<?> areaEnvironment : getAreaEnvironmentPartialClosure())
 			closure.add(areaEnvironment.getGuardPatternEnvironment());			
-		for (QVTcAreaEnvironment contextEnvironment = getContextEnvironment(); contextEnvironment != null; contextEnvironment = contextEnvironment.getContextEnvironment()) {
-			for (QVTcAreaEnvironment areaEnvironment : contextEnvironment.getAreaEnvironmentPartialClosure()) {
+		for (QVTcAreaEnvironment<?> contextEnvironment = getContextEnvironment(); contextEnvironment != null; contextEnvironment = contextEnvironment.getContextEnvironment()) {
+			for (QVTcAreaEnvironment<?> areaEnvironment : contextEnvironment.getAreaEnvironmentPartialClosure()) {
 				closure.add(areaEnvironment.getBottomPatternEnvironment());
 				closure.add(areaEnvironment.getGuardPatternEnvironment());			
 			}
@@ -133,7 +134,7 @@ public abstract class QVTcAreaEnvironment extends QVTcEnvironment<IQVTcEnvironme
 	 * from this mapping and its transitive refinements. (Does not include further
 	 * contributions from contexts.)
 	 */
-	public Set<QVTcAreaEnvironment> getAreaEnvironmentPartialClosure() {
+	public Set<QVTcAreaEnvironment<?>> getAreaEnvironmentPartialClosure() {
 		if (areaEnvironmentPartialClosure == null)		
 			areaEnvironmentPartialClosure = computeAreaEnvironmentPartialClosure();
 		return areaEnvironmentPartialClosure;
@@ -146,7 +147,7 @@ public abstract class QVTcAreaEnvironment extends QVTcEnvironment<IQVTcEnvironme
 	/**
 	 * Return the set of all guard and bottom patterns that contribute to the bottom pattern of this area.
 	 */
-	public Set<QVTcPatternEnvironment> getBottomPatternEnvironmentClosure() {
+	public Set<QVTcPatternEnvironment<?>> getBottomPatternEnvironmentClosure() {
 		if (bottomPatternEnvironmentClosure == null)		
 			bottomPatternEnvironmentClosure = computeBottomPatternEnvironmentClosure();
 		return bottomPatternEnvironmentClosure;
@@ -155,7 +156,7 @@ public abstract class QVTcAreaEnvironment extends QVTcEnvironment<IQVTcEnvironme
 	/**
 	 * Return the corresponding area environment of the context mapping, or null if this is a root mapping area.
 	 */
-	public abstract QVTcAreaEnvironment getContextEnvironment();
+	public abstract QVTcAreaEnvironment<?> getContextEnvironment();
 	
 	public QVTcGuardPatternEnvironment getGuardPatternEnvironment() {
 		return guardPatternEnvironment;
@@ -164,7 +165,7 @@ public abstract class QVTcAreaEnvironment extends QVTcEnvironment<IQVTcEnvironme
 	/**
 	 * Return the set of all guard and bottom patterns that contribute to the guard pattern of this area.
 	 */
-	public Set<QVTcPatternEnvironment> getGuardPatternEnvironmentClosure() {
+	public Set<QVTcPatternEnvironment<?>> getGuardPatternEnvironmentClosure() {
 		if (guardPatternEnvironmentClosure == null)		
 			guardPatternEnvironmentClosure = computeGuardPatternEnvironmentClosure();
 		return guardPatternEnvironmentClosure;

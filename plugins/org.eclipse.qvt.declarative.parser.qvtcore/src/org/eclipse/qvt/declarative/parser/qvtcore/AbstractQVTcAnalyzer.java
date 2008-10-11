@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractQVTcAnalyzer.java,v 1.2 2008/08/09 17:39:19 ewillink Exp $
+ * $Id: AbstractQVTcAnalyzer.java,v 1.3 2008/10/11 15:27:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore;
 
@@ -22,8 +22,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
+import lpg.lpgjavaruntime.Monitor;
+
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnumLiteral;
@@ -67,7 +68,7 @@ import org.eclipse.qvt.declarative.ecore.QVTCore.VariableAssignment;
 import org.eclipse.qvt.declarative.ecore.utils.ClassUtils;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 import org.eclipse.qvt.declarative.parser.AbstractQVTAnalyzer;
-import org.eclipse.qvt.declarative.parser.environment.CSTEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.CSTChildEnvironment;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.AssignmentCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.BottomPatternCS;
@@ -82,7 +83,7 @@ import org.eclipse.qvt.declarative.parser.qvtcore.cst.RealizedVariableCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.TopLevelCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.TransformationCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.UnrealizedVariableCS;
-import org.eclipse.qvt.declarative.parser.qvtcore.environment.IQVTcEnvironment;
+import org.eclipse.qvt.declarative.parser.qvtcore.environment.IQVTcNodeEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcAreaEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcBottomPatternEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcDomainEnvironment;
@@ -94,9 +95,8 @@ import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcPatternEnviron
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcQueryEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcTopLevelEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcTransformationEnvironment;
-import org.eclipse.qvt.declarative.parser.unresolved.UnresolvedPackage;
 
-public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvironment>
+public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNodeEnvironment>
 {
 	/**
 	 * Support sorting to achieve most refined last.
@@ -129,17 +129,18 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 		}
 		
 	}
-	public AbstractQVTcAnalyzer(QVTcParser parser) {
-		super(parser, parser.getOCLEnvironment().getMonitor());
+	
+	public AbstractQVTcAnalyzer(QVTcParser parser, Monitor monitor) {
+		super(parser, monitor);
 	}
 
 	@Override
-	protected IQVTcEnvironment createdNestedEnvironment(CSTNode cstNode,
+	protected IQVTcNodeEnvironment createdNestedEnvironment(CSTNode cstNode,
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
-		return new QVTcNestedEnvironment((IQVTcEnvironment)env, cstNode);
+		return new QVTcNestedEnvironment((IQVTcNodeEnvironment)env, cstNode);
 	}
 
-	protected void declareDomainCS(QVTcAreaEnvironment env, DomainCS domainCS) {
+	protected void declareDomainCS(QVTcAreaEnvironment<?> env, DomainCS domainCS) {
 		BottomPatternCS bottomPatternCS = domainCS.getBottomPattern();
 		GuardPatternCS guardPatternCS = domainCS.getGuardPattern();
 		env.createBottomPatternEnvironment(bottomPatternCS);
@@ -154,20 +155,16 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 	}
 
 	protected void declareImportCS(QVTcTransformationEnvironment env, TypedModel typedModel, PathNameCS packageNameCS) {
-		List<EPackage> ePackages = env.resolvePackages(packageNameCS);
-		if ((ePackages != null) && (ePackages.size() > 0))
-			typedModel.getUsedPackage().addAll(ePackages);
-		else {
-//			if (ePackages != null)
-//				ERROR(packageNameCS, "metaModelIdCS", "Package '" + formatString(packageName) + "' is empty");
-			typedModel.getUsedPackage().add(UnresolvedPackage.eINSTANCE);
-		}
+		resolvePackages(env, typedModel, packageNameCS);
+		typedModel.getUsedPackage().addAll(resolvePackages(env, typedModel, packageNameCS));
 	}
 	
 	protected void declareInputParamDeclarationCS(QVTcQueryEnvironment env, ParamDeclarationCS inputParamDeclarationCS) {
 		FunctionParameter functionParameter = QVTBaseFactory.eINSTANCE.createFunctionParameter();
 		env.initASTMapping(functionParameter, inputParamDeclarationCS);
-		functionParameter.setName(identifierCS(inputParamDeclarationCS.getIdentifier()));
+		IdentifierCS identifier = inputParamDeclarationCS.getIdentifier();
+		identifier.setAst(functionParameter);
+		functionParameter.setName(identifierCS(identifier));
 		functionParameter.setEType(resolveClassifier(env, "inputParamDeclarationCS", inputParamDeclarationCS.getType()));
 		env.addParameter(functionParameter);
 	}
@@ -182,6 +179,9 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 		}
 		for (MappingCS composedMappingCS : mappingCS.getComposedMappings()) {
 			QVTcMappingEnvironment<?> composedEnv = env.createComposedMappingEnvironment(composedMappingCS);
+			PathNameCS transformationNameCS = composedMappingCS.getIn();
+			if (transformationNameCS != null)
+				WARNING(env, composedMappingCS, "InCS", "Inappropriate 'in' ignored");
 			declareMappingCS(composedEnv, composedMappingCS);
 		}
 	}
@@ -193,7 +193,7 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 			return;
 		int pathSize = pathName.size();
 		if (pathSize < 2) {
-			ERROR(pathNameCS, "QueryCS", "Scope::name required as query name");
+			ERROR(env, queryCS, "QueryCS", "Scope::name required as query name");
 			return;
 		}
 		List<String> transformationName = pathName.subList(0, pathSize-1);
@@ -201,11 +201,11 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 		try {
 			txEnv = env.getEnvironment(transformationName);
 		} catch (LookupException e) {
-			ERROR(pathNameCS, "QueryCS", "Invalid transformation '" + formatPath(transformationName) + "': " + e.getMessage());
+			ERROR(env, queryCS, "QueryCS", "Invalid transformation '" + formatPath(transformationName) + "': " + e.getMessage());
 			return;
 		}
 		if (txEnv == null) {
-			ERROR(pathNameCS, "QueryCS", "Undefined transformation '" + formatPath(transformationName) + "'");
+			ERROR(env, queryCS, "QueryCS", "Undefined transformation '" + formatPath(transformationName) + "'");
 			return;
 		}
 		QVTcQueryEnvironment queryEnv = txEnv.createEnvironment(queryCS);
@@ -225,41 +225,40 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 			defineDirectionCS(env, directionCS);
 	}
 	
-	protected Assignment defineAssignmentCS(QVTcPatternEnvironment env, AssignmentCS assignmentCS) {
+	protected Assignment defineAssignmentCS(QVTcPatternEnvironment<?> env, AssignmentCS assignmentCS) {
 		Assignment assignment = null;
 		OCLExpressionCS targetExpressionCS = assignmentCS.getTarget();
 		OCLExpression assignmentValue = oclExpressionCS(assignmentCS.getInitialiser(), env);
 		if (targetExpressionCS instanceof VariableExpCS) {
-			VariableExpCS variableExp = (VariableExpCS) targetExpressionCS;
+			VariableExpCS variableExpCS = (VariableExpCS) targetExpressionCS;
 			VariableAssignment variableAssignment = QVTCoreFactory.eINSTANCE.createVariableAssignment();
 			env.initASTMapping(variableAssignment, assignmentCS);
-			SimpleNameCS identifierCS = variableExp.getSimpleNameCS();
+//			assignmentCS.getIdentifier().setAst(variableAssignment);
+			SimpleNameCS identifierCS = variableExpCS.getSimpleNameCS();
 			String targetVariableName = identifierCS.getValue();
 			Variable targetVariable = (Variable) env.lookupLocal(targetVariableName);
 			if (targetVariable == null) {
 				ERROR(identifierCS, "AssignmentCS", "Undefined variable '" + formatString(targetVariableName) + "'");
 				EClassifier type = assignmentValue.getType();
 				targetVariable = env.createUnrealizedVariableDefinition(targetVariableName, type, identifierCS);
+				env.initASTMapping(targetVariable, variableExpCS);
+			}
+			else {
+				variableExpCS.setAst(targetVariable);
 			}
 			variableAssignment.setTargetVariable(targetVariable);
+			identifierCS.setAst(targetVariable);
 			assignment = variableAssignment;
 		}
 		else if ((targetExpressionCS instanceof CallExpCS) && (((CallExpCS)targetExpressionCS).getAccessor() == DotOrArrowEnum.DOT_LITERAL)) {
 			CallExpCS callExp = (CallExpCS) targetExpressionCS;
 			PropertyAssignment propertyAssignment = QVTCoreFactory.eINSTANCE.createPropertyAssignment();
-			env.initASTMapping(propertyAssignment, assignmentCS);
+			env.initASTMapping(propertyAssignment, callExp);
+			assignmentCS.setAst(propertyAssignment);
+			callExp.getSimpleNameCS().setAst(propertyAssignment);
 			OCLExpression slotExpression = oclExpressionCS(callExp.getSource(), env);
-			String propertyName = callExp.getSimpleNameCS().getValue();
 			propertyAssignment.setSlotExpression(oclExpressionCS(callExp.getSource(), env));
-			EStructuralFeature property = null;
-			if ((slotExpression != null) && !(slotExpression instanceof InvalidLiteralExp)) {
-				property = lookupProperty(callExp, env, slotExpression.getType(), propertyName);
-				if (property == null)
-					ERROR(callExp.getSimpleNameCS(), "AssignmentCS", "Undefined property '" + formatString(propertyName) + "'");
-			}
-			if (property == null)
-				property = UnresolvedPackage.eINSTANCE.getUnresolvedClass_UnresolvedAttribute();
-			propertyAssignment.setTargetProperty(property);
+			propertyAssignment.setTargetProperty(resolveProperty(env, slotExpression, callExp));
 			assignment = propertyAssignment;
 		}
 		else {
@@ -278,7 +277,7 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 			defineRealizedVariableCS(env, realizedVariableCS);
 		for (UnrealizedVariableCS unrealizedVariableCS : patternCS.getUnrealizedVariables())
 			defineUnrealizedVariableCS(env, unrealizedVariableCS);		
-		BottomPattern bottomPattern = env.getPattern();
+		BottomPattern bottomPattern = env.getASTNode();
 		for (OCLExpressionCS constraintCS : patternCS.getConstraints()) {
 			if (constraintCS instanceof AssignmentCS)
 				bottomPattern.getAssignment().add(defineAssignmentCS(env, (AssignmentCS) constraintCS));
@@ -310,7 +309,7 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 		}
 	}
 
-	protected void defineDomainCS(QVTcAreaEnvironment env, DomainCS domainCS) {
+	protected void defineDomainCS(QVTcAreaEnvironment<?> env, DomainCS domainCS) {
 		BottomPatternCS bottomPatternCS = domainCS.getBottomPattern();
 		GuardPatternCS guardPatternCS = domainCS.getGuardPattern();
 		QVTcBottomPatternEnvironment bottomPatternEnvironment = env.getBottomPatternEnvironment();
@@ -327,13 +326,14 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 			return;
 		for (UnrealizedVariableCS unrealizedVariableCS : patternCS.getUnrealizedVariables())
 			defineUnrealizedVariableCS(env, unrealizedVariableCS);
-		GuardPattern guardPattern = env.getPattern();
+		GuardPattern guardPattern = env.getASTNode();
+		EList<Predicate> predicate = guardPattern.getPredicate();
 		for (OCLExpressionCS constraintCS : patternCS.getConstraints()) {
 			if (constraintCS instanceof AssignmentCS)
 //				guardPattern.getAssignment().add(defineAssignment(env, (AssignmentCS) constraintCS));
 				ERROR(patternCS, "GuardPattern", "Unexpected assignment ignored");
 			else
-				guardPattern.getPredicate().add(definePredicateCS(env, constraintCS));
+				predicate.add(definePredicateCS(env, constraintCS));
 		}
 	}
 	
@@ -358,10 +358,10 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 		Mapping mapping = env.getMapping();
 		for (IdentifierCS refinesCS : mappingCS.getRefines()) {
 			try {
-				Mapping refinedMapping = env.tryLookupMapping(refinesCS.getValue());
+				Mapping refinedMapping = resolveMapping(env, refinesCS);
 				if (refinedMapping != null)
 					mapping.getSpecification().add(refinedMapping);
-				else
+				if ((refinedMapping == null) || !env.isResolved(refinedMapping))
 					ERROR(refinesCS, "RefinesCS", "Undefined mapping '" + formatString(refinesCS.getValue()) + "'");
 			} catch (LookupException e) {
 				ERROR(refinesCS, "MappingCS", env.formatLookupException(e));
@@ -369,7 +369,7 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 		}
 	}
 
-	protected Predicate definePredicateCS(QVTcPatternEnvironment env, OCLExpressionCS constraintCS) {
+	protected Predicate definePredicateCS(QVTcPatternEnvironment<?> env, OCLExpressionCS constraintCS) {
 		Predicate predicate = QVTBaseFactory.eINSTANCE.createPredicate();
 		env.initASTMapping(predicate, constraintCS);
 		predicate.setConditionExpression(oclExpressionCS(constraintCS, env));
@@ -389,7 +389,8 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 		env.createRealizedVariableDefinition(identifierCS.getValue(), type, realizedVariableCS);
 	}
 
-	protected void defineTopLevelCS(QVTcTopLevelEnvironment topLevelEnvironment, TopLevelCS topLevelCS, URI sourceURI) {
+	protected void defineTopLevelCS(QVTcTopLevelEnvironment topLevelEnvironment) {
+		TopLevelCS topLevelCS = topLevelEnvironment.getCSTNode();
 		for (TransformationCS transformationCS : topLevelCS.getTransformations()) {
 			if (!isCancelled())
 				declareTransformationCS(topLevelEnvironment, transformationCS);
@@ -402,7 +403,7 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 			if (!isCancelled()) {
 				PathNameCS transformationNameCS = mappingCS.getIn();
 				if (transformationNameCS == null)
-					ERROR(mappingCS, "InCS", "Missing in");
+					ERROR(mappingCS, "InCS", "Missing 'in'");
 				else {
 					EList<String> transformationName = transformationNameCS.getSequenceOfNames();
 					QVTcTransformationEnvironment txEnv = null;
@@ -415,6 +416,7 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 					if (txEnv == null) {
 						ERROR(transformationNameCS, "InCS", "Undefined transformation '" + formatPath(transformationName) + "'");
 					} else {
+						transformationNameCS.setAst(txEnv.getASTNode());
 						QVTcMappingEnvironment<?> mapEnv = txEnv.createEnvironment(mappingCS);
 						declareMappingCS(mapEnv, mappingCS);
 					}
@@ -435,16 +437,17 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 		for (QueryCS queryCS : txEnv.getQueries()) {
 			if (isCancelled())
 				return;
-			List<String> pathName = queryCS.getPathName().getSequenceOfNames();
+			PathNameCS pathNameCS = queryCS.getPathName();
+			List<String> pathName = pathNameCS.getSequenceOfNames();
 			if (pathName != null) {
 				int pathSize = pathName.size();
 				if (pathSize > 0) {
 					Transformation scope = transformation;
 					if (pathSize > 1) {
 						try {
-							scope = topLevelEnvironment.tryLookupTransformation(pathName.subList(0, pathSize-1));
+							scope = resolveTransformation(topLevelEnvironment, pathNameCS, pathName.subList(0, pathSize-1));
 						} catch (LookupException e) {
-							ERROR(queryCS.getPathName(), "PathNameCS", e.toString());
+							ERROR(pathNameCS, "PathNameCS", e.toString());
 							break;
 						}
 					}
@@ -484,10 +487,11 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 //		return eClassifier;
 //	}
 
-	protected void defineUnrealizedVariableCS(QVTcPatternEnvironment env, UnrealizedVariableCS unrealizedVariableCS) {
+	protected void defineUnrealizedVariableCS(QVTcPatternEnvironment<?> env, UnrealizedVariableCS unrealizedVariableCS) {
 		IdentifierCS identifierCS = unrealizedVariableCS.getIdentifier();
 		EClassifier type = typeCS(unrealizedVariableCS.getType(), env);
-		env.createUnrealizedVariableDefinition(identifierCS.getValue(), type, unrealizedVariableCS);
+		Variable variable = env.createUnrealizedVariableDefinition(identifierCS.getValue(), type, unrealizedVariableCS);
+		identifierCS.setAst(variable);
 	}
 
 	//
@@ -503,8 +507,47 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcEnvi
 			e.printStackTrace();
 		}
 		OCLExpression result = EcoreFactory.eINSTANCE.createInvalidLiteralExp();
-		CSTEnvironment<IQVTcEnvironment, ?> cstEnv = ClassUtils.asClassUnchecked(env);
+		CSTChildEnvironment<IQVTcNodeEnvironment,?,?,?> cstEnv = ClassUtils.asClassUnchecked(env);
 		cstEnv.initASTMapping(result, oclExpressionCS);
 		return result;
+	}
+
+	protected Mapping resolveMapping(QVTcMappingEnvironment<?> env, IdentifierCS identifierCS) throws LookupException {
+		Mapping mapping = env.tryLookupMapping(identifierCS.getValue());
+		if (mapping == null)
+			mapping = env.getUnresolvedEnvironment().getUnresolvedMapping(env.getTransformation(), identifierCS.getValue());
+		identifierCS.setAst(mapping);
+		return mapping;
+	}
+
+	protected List<EPackage> resolvePackages(QVTcTransformationEnvironment env, TypedModel typedModel, PathNameCS packageNameCS) {
+		List<EPackage> ePackages = env.resolvePackages(packageNameCS);
+		if ((ePackages == null) || ePackages.isEmpty())
+			ePackages = Collections.singletonList(env.getUnresolvedEnvironment().getUnresolvedEPackage(packageNameCS.getSequenceOfNames()));
+		packageNameCS.setAst(ePackages.get(0));
+		return ePackages;
+//		else {
+//			if (ePackages != null)
+//				ERROR(packageNameCS, "metaModelIdCS", "Package '" + formatString(packageName) + "' is empty");
+//			typedModel.getUsedPackage().add(UnresolvedPackage.eINSTANCE);
+	}
+
+	protected EStructuralFeature resolveProperty(QVTcPatternEnvironment<?> env, OCLExpression slotExpression, CallExpCS callExp) {
+		String propertyName = callExp.getSimpleNameCS().getValue();
+		EStructuralFeature property = null;
+		if ((slotExpression != null) && !(slotExpression instanceof InvalidLiteralExp)) {
+			property = lookupProperty(callExp, env, slotExpression.getType(), propertyName);
+			if (property == null)
+				ERROR(callExp.getSimpleNameCS(), "AssignmentCS", "Undefined property '" + formatString(propertyName) + "'");
+		}
+		if (property == null)
+			property = env.getUnresolvedEnvironment().getUnresolvedEAttribute(slotExpression != null ? slotExpression.getType() : null, propertyName);
+		return property;
+	}
+
+	protected Transformation resolveTransformation(QVTcTopLevelEnvironment topLevelEnvironment, PathNameCS pathNameCS, List<String> pathNames) throws LookupException {
+		Transformation transformation = topLevelEnvironment.tryLookupTransformation(pathNames);
+		pathNameCS.setAst(transformation);
+		return transformation;
 	}
 }

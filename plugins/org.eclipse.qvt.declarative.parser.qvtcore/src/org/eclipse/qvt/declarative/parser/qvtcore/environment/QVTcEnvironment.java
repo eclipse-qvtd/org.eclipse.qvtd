@@ -10,31 +10,25 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.qvtcore.environment;
 
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.qvt.declarative.ecore.QVTCore.Mapping;
 import org.eclipse.qvt.declarative.parser.qvt.environment.QVTEnvironment;
-import org.eclipse.qvt.declarative.parser.qvt.environment.QVTFormattingHelper;
 
-public abstract class QVTcEnvironment<E extends IQVTcEnvironment, P extends E> extends QVTEnvironment<E,P> implements IQVTcEnvironment
+public abstract class QVTcEnvironment<E extends IQVTcNodeEnvironment, P extends E, AST extends EModelElement, CST extends CSTNode> extends QVTEnvironment<E,P, AST, CST> implements IQVTcNodeEnvironment
 {
-	protected QVTcEnvironment(EPackage.Registry reg) {
-		super(reg);
+	protected QVTcEnvironment(P parent, AST astNode, CST cstNode) {
+		super(parent, astNode, cstNode);
 	}
 
-	protected QVTcEnvironment(EPackage.Registry reg, Resource resource) {
-		super(reg, resource);
-	}
-	
-	protected QVTcEnvironment(P parent, CSTNode cstNode) {
-		super(parent, cstNode);
+	public QVTcNestedEnvironment createNestedEnvironment(CSTNode cstNode) {
+		return new QVTcNestedEnvironment(this, cstNode);
 	}
 
 	@Override
-	protected QVTFormattingHelper createFormatter() {
-		return new QVTcFormattingHelper(this);
+	public QVTcUnresolvedEnvironment getUnresolvedEnvironment() {
+		return (QVTcUnresolvedEnvironment) super.getUnresolvedEnvironment();
 	}
 
 	public Mapping tryLookupMapping(String name) throws LookupException {
