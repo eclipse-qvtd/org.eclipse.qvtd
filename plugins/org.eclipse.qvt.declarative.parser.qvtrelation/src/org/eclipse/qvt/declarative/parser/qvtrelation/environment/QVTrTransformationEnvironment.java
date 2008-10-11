@@ -48,56 +48,28 @@ import org.eclipse.qvt.declarative.parser.qvtrelation.cst.QueryCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.RelationCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TransformationCS;
 
-public class QVTrTransformationEnvironment extends QVTrEnvironment<QVTrTopLevelEnvironment>
+public class QVTrTransformationEnvironment extends QVTrEnvironment<QVTrTopLevelEnvironment, RelationalTransformation, TransformationCS>
 {
-/*	public static class EOppositeReference extends EReferenceImpl
-	{
-		protected final EReference oppositeReference;
-
-		public EOppositeReference(String propertyName, EReference oppositeReference) {
-			setName(propertyName);
-			this.oppositeReference = oppositeReference;
-		}
-		
-		@Override
-		public EClassifier basicGetEType() {
-			return oppositeReference.getEContainingClass();
-		}
-
-		public EReference getOppositeReference() {
-			return oppositeReference;
-		}
-
-		@Override
-		public void setEOpposite(EReference newEOpposite) {
-			throw new UnsupportedOperationException(getClass().getName() + ".setEOpposite()");
-		}
-	} */
-
-	private final RelationalTransformation transformation;
 	private Map<RelationCS, QVTrRelationEnvironment> relEnvMap = new HashMap<RelationCS, QVTrRelationEnvironment>(); 
 	private Map<QueryCS, QVTrQueryEnvironment> queryEnvMap = new HashMap<QueryCS, QVTrQueryEnvironment>(); 
 	private Map<String, QVTrTypedModelEnvironment> modelIdToTypedModelEnvironment = new HashMap<String, QVTrTypedModelEnvironment>(); 
 	private final Map<String,Set<EPackage>> metaModelIdToPackages = new HashMap<String,Set<EPackage>>();
 	private final Set<EPackage> allMetaModelPackages = new HashSet<EPackage>();
 	protected Map<String, List<EReference>> oppositeFeaturesMap = null;		// Unnavigable opposite name to forward reference
-//	protected Map<EReference, EReference> oppositeReferenceMap = null;		// Navigable to pseudo-opposite
 
 	public QVTrTransformationEnvironment(QVTrTopLevelEnvironment env, TransformationCS transformationCS) {
-		super(env, transformationCS);
-		transformation = QVTRelationFactory.eINSTANCE.createRelationalTransformation();
-		env.initASTMapping(transformation, transformationCS);
-		String name = transformationCS.getIdentifier().getValue();
-		transformation.setName(name);
+		super(env, QVTRelationFactory.eINSTANCE.createRelationalTransformation(), transformationCS);
+		IdentifierCS identifier = transformationCS.getIdentifier();
+		setNameFromIdentifier(ast, identifier);
 		Variable variable = EcoreFactory.eINSTANCE.createVariable();
-		initASTMapping(variable, transformationCS.getIdentifier());
+		getASTNodeToCSTNodeMap().put(variable, identifier);
 		variable.setName("self"); //QvtrEnvironmentFactory.SELF_NAME);
-		variable.setType(transformation);
+		variable.setType(ast);
 		setSelfVariable(variable);
 		IdentifierCS identifierCS = transformationCS.getExtends();
 		if (identifierCS != null) {
 			Transformation extendedTransformation = env.lookupImportedTransformation(identifierCS.getValue());
-			transformation.setExtends(extendedTransformation);
+			ast.setExtends(extendedTransformation);
 		}
 	}
 
@@ -120,15 +92,13 @@ public class QVTrTransformationEnvironment extends QVTrEnvironment<QVTrTopLevelE
 		}			
 		environment = new QVTrTypedModelEnvironment(this, modelDeclCS);
 		TypedModel typedModel = environment.getTypedModel();
-		transformation.getModelParameter().add(typedModel);
+		ast.getModelParameter().add(typedModel);
 		modelIdToTypedModelEnvironment.put(modelId, environment);
 		return environment;
 	}
 
 	public QVTrQueryEnvironment createEnvironment(QueryCS queryCS) {
 		QVTrQueryEnvironment environment = new QVTrQueryEnvironment(this, queryCS);
-//		Function query = environment.getQuery();
-//		transformation.getEOperations().add(query);
 		queryEnvMap.put(queryCS, environment);
 		return environment;
 	}
@@ -136,7 +106,7 @@ public class QVTrTransformationEnvironment extends QVTrEnvironment<QVTrTopLevelE
 	public QVTrRelationEnvironment createEnvironment(RelationCS relationCS) {
 		QVTrRelationEnvironment environment = new QVTrRelationEnvironment(this, relationCS);
 		Relation relation = environment.getRelation();
-		transformation.getRule().add(relation);
+		ast.getRule().add(relation);
 		relEnvMap.put(relationCS, environment);
 		return environment;
 	}
@@ -163,10 +133,10 @@ public class QVTrTransformationEnvironment extends QVTrEnvironment<QVTrTopLevelE
 	}	
 
 	@Override public List<Function> getQueries(String queryName, List<OCLExpression> args) {
-		return findMatchingQueries(transformation, queryName, args);
+		return findMatchingQueries(ast, queryName, args);
 	}
 	
-	@Override public RelationalTransformation getRelationalTransformation() { return transformation; }
+	@Override public RelationalTransformation getRelationalTransformation() { return ast; }
 
 	protected void initializeFeatures(EPackage ePackage) {
 		for (EClassifier eClassifier : ePackage.getEClassifiers()) {
@@ -190,17 +160,19 @@ public class QVTrTransformationEnvironment extends QVTrEnvironment<QVTrTopLevelE
 		}		
 	}
 
-	@Override public Variable lookupImplicitSourceForOperation(String name, List<? extends TypedElement<EClassifier>> params) {
-		Relation relation = transformation.getRelation(name);
+	@Override
+	public Variable lookupImplicitSourceForOperation(String name, List<? extends TypedElement<EClassifier>> params) {
+		Relation relation = ast.getRelation(name);
 		if (relation != null)
 			return (Variable) getSelfVariable();
-		Function query = transformation.getFunction(name);
+		Function query = ast.getFunction(name);
 		if (query != null)
 			return (Variable) getSelfVariable();
 		return super.lookupImplicitSourceForOperation(name, params);
 	}
 
-	@Override public EClassifier tryLookupClassifier(List<String> names) throws LookupException {
+	@Override
+	public EClassifier tryLookupClassifier(List<String> names) throws LookupException {
 		if (names == null)
 			return null;
 		int namesSize = names.size();
@@ -224,8 +196,8 @@ public class QVTrTransformationEnvironment extends QVTrEnvironment<QVTrTopLevelE
 	}
 
 	@Override public EOperation tryLookupOperation(EClassifier owner, String name, List<? extends TypedElement<EClassifier>> args) throws LookupException {
-		if (owner == transformation) {
-			Function query = transformation.getFunction(name);
+		if (owner == ast) {
+			Function query = ast.getFunction(name);
 			if (query != null)
 				return query;
 		}
@@ -262,13 +234,6 @@ public class QVTrTransformationEnvironment extends QVTrEnvironment<QVTrTopLevelE
 		}
 		if (ambiguousReferences != null)
 			throw new AmbiguousLookupException("Ambiguous property", ambiguousReferences);
-//		if (oppositeReferenceMap == null)
-//			oppositeReferenceMap = new HashMap<EReference, EReference>();
-//		EReference pseudoOpposite = oppositeReferenceMap.get(oppositeReference);
-//		if (pseudoOpposite == null) {
-//			pseudoOpposite = new EOppositeReference(propertyName, oppositeReference);
-//			oppositeReferenceMap.put(oppositeReference, pseudoOpposite);
-//		}
 		return oppositeReference;
 	}
 
@@ -278,11 +243,6 @@ public class QVTrTransformationEnvironment extends QVTrEnvironment<QVTrTopLevelE
 		EStructuralFeature result = super.lookupOCLProperty(owner, name);
 		if (result != null)
 			return result;
-//		if (owner instanceof EClass) {
-//			result = tryLookupOppositeProperty((EClass) owner, name);
-//			if (result != null)
-//				return result;
-//		}
 		QVTrTopLevelEnvironment parent = getParentEnvironment();
 		if (parent != null)
 			return parent.tryLookupProperty(owner, name);

@@ -10,11 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.qvtrelation.environment;
 
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.ocl.cst.CSTNode;
 
-public class QVTrNestedEnvironment extends QVTrEnvironment<IQVTrEnvironment>
+public class QVTrNestedEnvironment extends QVTrEnvironment<IQVTrNodeEnvironment, EModelElement, CSTNode>
 {
-	public QVTrNestedEnvironment(IQVTrEnvironment env, CSTNode cstNode) {
-		super(env, cstNode);
+	public QVTrNestedEnvironment(IQVTrNodeEnvironment env, CSTNode cstNode) {
+		super(env, null, cstNode);
 	}	
 }

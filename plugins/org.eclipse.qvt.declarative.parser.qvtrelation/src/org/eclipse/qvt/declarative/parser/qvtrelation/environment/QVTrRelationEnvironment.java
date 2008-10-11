@@ -38,7 +38,7 @@ import org.eclipse.qvt.declarative.parser.qvtrelation.cst.PrimitiveTypeDomainCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.RelationCS;
 import org.eclipse.qvt.declarative.parser.utils.OCLUtils;
 
-public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationEnvironment>
+public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationEnvironment, Relation, RelationCS>
 {
 	private static class ImplicitVariable
 	{
@@ -57,18 +57,14 @@ public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationE
 		public boolean isInvocation() { return isInvocation; }
 	}
 	
-	private final Relation relation;
 	private Map<AbstractDomainCS, QVTrDomainEnvironment> domEnvMap = new HashMap<AbstractDomainCS, QVTrDomainEnvironment>(); 
 	private final Map<String, Variable> explicitVariableMap = new HashMap<String, Variable>();
 	private final Map<String, List<ImplicitVariable>> implicitVariableMap = new HashMap<String, List<ImplicitVariable>>();
 	
 	public QVTrRelationEnvironment(QVTrTransformationEnvironment env, RelationCS relationCS) {
-		super(env, relationCS);
-		relation = QVTRelationFactory.eINSTANCE.createRelation();
-		env.initASTMapping(relation, relationCS);
-		String name = relationCS.getIdentifier().getValue();
-		relation.setName(name);
-		for (Domain domain : relation.getDomain()) {
+		super(env, QVTRelationFactory.eINSTANCE.createRelation(), relationCS);
+		setNameFromIdentifier(ast, relationCS.getIdentifier());
+		for (Domain domain : ast.getDomain()) {
 			Variable rootVariable = ((RelationDomain) domain).getRootVariable();
 			String rootVariableName = rootVariable.getName();
 			if (rootVariableName != null) {
@@ -79,7 +75,7 @@ public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationE
 	}
 
 	private void addExplicitVariable(Variable variable) {
-		relation.getVariable().add(variable);
+		ast.getVariable().add(variable);
 		addElement(variable.getName(), variable, true);
 		explicitVariableMap.put(variable.getName(), variable);
 	}
@@ -87,7 +83,7 @@ public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationE
 	public QVTrDomainEnvironment createEnvironment(DomainCS domainCS) {
 		QVTrDomainEnvironment environment = new QVTrDomainEnvironment(this, domainCS);
 		RelationDomain domain = environment.getDomain();
-		relation.getDomain().add(domain);
+		ast.getDomain().add(domain);
 		domEnvMap.put(domainCS, environment);
 		return environment;
 	}
@@ -95,7 +91,7 @@ public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationE
 	public QVTrDomainEnvironment createEnvironment(PrimitiveTypeDomainCS domainCS) {
 		QVTrDomainEnvironment environment = new QVTrDomainEnvironment(this, domainCS);
 		RelationDomain domain = environment.getDomain();
-		relation.getDomain().add(domain);
+		ast.getDomain().add(domain);
 		domEnvMap.put(domainCS, environment);
 		return environment;
 	}
@@ -197,8 +193,9 @@ public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationE
 	}
 	
 	@Override public Variable createVariableDeclaration(IdentifierCS identifierCS, EClassifier type) {
-		String name = identifierCS.getValue();
-		return createVariableDeclaration(name, type, identifierCS);
+		Variable createVariableDeclaration = createVariableDeclaration(identifierCS.getValue(), type, identifierCS);
+//		identifierCS.setAst(createVariableDeclaration);
+		return createVariableDeclaration;
 	}
 
 	private Variable createVariableDeclaration(String name, EClassifier type, CSTNode cstNode) {
@@ -212,6 +209,7 @@ public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationE
 		else {
 			variable = EcoreFactory.eINSTANCE.createVariable();
 			initASTMapping(variable, cstNode);
+//			cstNode.setAst(variable);
 			variable.setName(name);
 			variable.setType(type);
 			addExplicitVariable(variable);
@@ -223,7 +221,7 @@ public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationE
 		return domEnvMap.get(domainCS);
 	}
 
-	public Relation getRelation() { return relation; }
+	public Relation getRelation() { return ast; }
 
 	@Override public Relation getRelation(List<String> pathName, String relationName) {
 		RelationalTransformation transformation = getRelationalTransformation();

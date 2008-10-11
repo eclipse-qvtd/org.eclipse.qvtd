@@ -10,72 +10,20 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.qvtrelation;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
+import lpg.lpgjavaruntime.Monitor;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.ocl.cst.CSTNode;
-import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TopLevelCS;
+import org.eclipse.qvt.declarative.parser.environment.ICSTFileAnalyzer;
+import org.eclipse.qvt.declarative.parser.qvtrelation.environment.QVTrFileEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtrelation.environment.QVTrTopLevelEnvironment;
 
-public class QVTrAnalyzer extends AbstractQVTrAnalyzer
+public class QVTrAnalyzer extends AbstractQVTrAnalyzer implements ICSTFileAnalyzer<QVTrTopLevelEnvironment>
 {
-	protected final QVTrTopLevelEnvironment topLevelEnvironment;
-	
-	public QVTrAnalyzer(QVTrTopLevelEnvironment environment) {
-		super(new QVTrParser(new QVTrLexer(environment)));
-		topLevelEnvironment = environment;
-	}
-    
-	public Collection<EPackage> parseWithDroppings(URI sourceURI, String saveStem) {
-		CSTNode cstNode = parseToCST();
-       if (cstNode == null) {
-        	ERROR("Failed to create Concrete Syntax Tree");
-			return null;
-        }
-		if (isCancelled())
-			return null;
-       	if (saveStem != null) {
-       		try {
-				topLevelEnvironment.saveCST(cstNode, URI.createFileURI(saveStem + ".qvtrcst"));
-    		} catch (IOException e) {
-    			ERROR(cstNode, null, "Failed to save CST : " + e.getMessage());
-			}
-       	}
-		if (isCancelled())
-			return null;
-		Collection<EPackage> ast = parseCSTtoAST(cstNode, sourceURI); // Parse the token stream to produce an AST
-        if (ast == null) {
-        	ERROR(cstNode, null, "Failed to create Abstract Syntax Tree");
-			return null;
-        }
-		if (isCancelled())
-			return null;
-        if (saveStem != null) {
-       		try {
-       			Resource resource = topLevelEnvironment.createASTResource(ast, URI.createFileURI(saveStem + ".qvtrelation"));
-       			resource.save(null);
-			} catch (IOException e) {
-				ERROR(cstNode, null, "Failed to save AST : " + e.getMessage());
-			}
-        }
-        return ast;
+	public QVTrAnalyzer(QVTrFileEnvironment environment, Monitor monitor) {
+		super(new QVTrParser(new QVTrLexer(environment)), monitor);
 	}
 
-	@Override public Collection<EPackage> parseCSTtoAST(CSTNode cstNode, URI sourceURI) {
-		if (cstNode == null)
-			return null;
-		if (cstNode instanceof TopLevelCS) {
-//			QVTrTopLevelEnvironment topLevelEnvironment = getEnvironmentFactory().createTopLevelEnvironment(this, getProblemHandler(), cstNode);
-			defineTopLevelCS(topLevelEnvironment, (TopLevelCS)cstNode, sourceURI);
-			List<EPackage> ePackages = topLevelEnvironment.getEPackages();
-			topLevelEnvironment.validateASTMappings(ePackages);
-			return ePackages;
-		}
-		ERROR(cstNode, "topLevelCS", "Expected a TopLevelCS rather than a " + formatEClassName(cstNode));
-		return null;
+	public boolean analyze(QVTrTopLevelEnvironment environment) {
+		defineTopLevelCS(environment);
+		return true;
 	}
 }

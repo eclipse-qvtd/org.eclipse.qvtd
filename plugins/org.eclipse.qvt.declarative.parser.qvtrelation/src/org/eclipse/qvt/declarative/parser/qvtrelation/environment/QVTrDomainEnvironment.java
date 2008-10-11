@@ -23,47 +23,41 @@ import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationFactory;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomain;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.AbstractDomainCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.DomainCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.PrimitiveTypeDomainCS;
 
-public class QVTrDomainEnvironment extends QVTrEnvironment<QVTrRelationEnvironment>
+public class QVTrDomainEnvironment extends QVTrEnvironment<QVTrRelationEnvironment, RelationDomain, AbstractDomainCS>
 {
-	private final RelationDomain domain;
-//	private final String metaModelId;
 	private final TypedModel typedModel;
 	
 	public QVTrDomainEnvironment(QVTrRelationEnvironment env, DomainCS domainCS) {
-		super(env, domainCS);
-		domain = QVTRelationFactory.eINSTANCE.createRelationDomain();
-		env.initASTMapping(domain, domainCS);
+		super(env, QVTRelationFactory.eINSTANCE.createRelationDomain(), domainCS);
 		IdentifierCS modelIdCS = domainCS.getModelId();
-		String modelId = modelIdCS.getValue();
-		domain.setName(modelId);
+		setNameFromIdentifier(ast, modelIdCS);
 		QVTrTransformationEnvironment txEnv = env.getParentEnvironment();
 //		metaModelId = txEnv.getMetaModelId(modelId);
 		RelationalTransformation transformation = txEnv.getRelationalTransformation();
-		TypedModel typedModel = transformation.getModelParameter(modelId);
+		TypedModel typedModel = transformation.getModelParameter(modelIdCS.getValue());
 		if (typedModel == null) {
-			String message = "Domain identifier '" + modelId + "' must refer to a model parameter";
+			String message = "Domain identifier '" + modelIdCS.getValue() + "' must refer to a model parameter";
 			analyzerError(message, "DomainCS", modelIdCS);
 		}
-		domain.setTypedModel(typedModel);		
+		ast.setTypedModel(typedModel);		
 		this.typedModel = typedModel;
 	}
 	
 	public QVTrDomainEnvironment(QVTrRelationEnvironment env, PrimitiveTypeDomainCS domainCS) {
-		super(env, domainCS);
-		domain = QVTRelationFactory.eINSTANCE.createRelationDomain();
+		super(env, QVTRelationFactory.eINSTANCE.createRelationDomain(), domainCS);
 		typedModel = null;
-		env.initASTMapping(domain, domainCS);
 	}
 
 	public void createVariableDeclaration(VariableExpCS variableExpCS, EClassifier type) {
-		getParentEnvironment().createVariableDeclaration(variableExpCS, type, domain, false);
+		getParentEnvironment().createVariableDeclaration(variableExpCS, type, ast, false);
 	}
 
 	public RelationDomain getDomain() {
-		return domain;
+		return ast;
 	}
 
 	@Override public String getModelName(EObject object) {

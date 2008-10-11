@@ -21,17 +21,13 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.QVTBaseFactory;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.ModelDeclCS;
 
-public class QVTrTypedModelEnvironment extends QVTrEnvironment<QVTrTransformationEnvironment>
+public class QVTrTypedModelEnvironment extends QVTrEnvironment<QVTrTransformationEnvironment, TypedModel, ModelDeclCS>
 {
-	private final TypedModel typedModel;
 	private final Map<String,Set<EPackage>> metaModelIdToPackages = new HashMap<String,Set<EPackage>>();
 
 	public QVTrTypedModelEnvironment(QVTrTransformationEnvironment env, ModelDeclCS modelDeclCS) {
-		super(env, modelDeclCS);
-		typedModel = QVTBaseFactory.eINSTANCE.createTypedModel();
-		initASTMapping(typedModel, modelDeclCS);
-		String name = modelDeclCS.getModelId().getValue();
-		typedModel.setName(name);
+		super(env, QVTBaseFactory.eINSTANCE.createTypedModel(), modelDeclCS);
+		setNameFromIdentifier(ast, modelDeclCS.getModelId());
 	}
 
 	public void addMetaModelPackage(String metaModelId, EPackage ePackage) {
@@ -53,5 +49,5 @@ public class QVTrTypedModelEnvironment extends QVTrEnvironment<QVTrTransformatio
 		return null;
 	}	
 
-	public TypedModel getTypedModel() { return typedModel; }
+	public TypedModel getTypedModel() { return ast; }
 }

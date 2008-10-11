@@ -25,14 +25,14 @@ import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.parser.plugin.QVTParserPlugin;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.QueryCS;
 
-public class QVTrQueryEnvironment extends QVTrEnvironment<QVTrTransformationEnvironment>
+public class QVTrQueryEnvironment extends QVTrEnvironment<QVTrTransformationEnvironment, Function, QueryCS>
 {
 	private Function query = null;
 	private final String name;
 	private final List<FunctionParameter> parameters = new ArrayList<FunctionParameter>();
 	
 	public QVTrQueryEnvironment(QVTrTransformationEnvironment env, QueryCS queryCS) {
-		super(env, queryCS);
+		super(env, null, queryCS);
 		List<String> names = queryCS.getPathName().getSequenceOfNames();	// FIXME scoping
 		if (names.size() != 1)
 			analyzerError("Unqualified name expected for query", "pathNameCS", queryCS.getPathName());
@@ -62,7 +62,8 @@ public class QVTrQueryEnvironment extends QVTrEnvironment<QVTrTransformationEnvi
 		Function match = findMatchingQuery(transformation, name, parameters);
 		if (match == null) {
 			query = QVTBaseFactory.eINSTANCE.createFunction();
-			initASTMapping(query, cstNode);
+			initASTMapping(query, cst);
+			cst.getPathName().setAst(query);
 			query.setName(name);
 			query.setEType(returnType);
 			query.getEParameters().addAll(parameters);

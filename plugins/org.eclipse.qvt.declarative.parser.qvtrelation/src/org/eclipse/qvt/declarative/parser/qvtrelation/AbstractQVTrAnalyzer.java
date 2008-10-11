@@ -17,6 +17,8 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+import lpg.lpgjavaruntime.Monitor;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -75,11 +77,14 @@ import org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.QVTTemplateFactory;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.TemplateExp;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
+import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
+import org.eclipse.qvt.declarative.modelregistry.environment.AbstractModelResolver;
 import org.eclipse.qvt.declarative.modelregistry.util.ClassUtils;
 import org.eclipse.qvt.declarative.parser.AbstractQVTAnalyzer;
+import org.eclipse.qvt.declarative.parser.environment.CSTChildEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTEnvironment;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
-import org.eclipse.qvt.declarative.parser.qvt.environment.IQVTEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.AbstractDomainCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.CollectionTemplateCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.DefaultValueCS;
@@ -100,7 +105,7 @@ import org.eclipse.qvt.declarative.parser.qvtrelation.cst.UnitCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.VarDeclarationCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhenCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.WhereCS;
-import org.eclipse.qvt.declarative.parser.qvtrelation.environment.IQVTrEnvironment;
+import org.eclipse.qvt.declarative.parser.qvtrelation.environment.IQVTrNodeEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtrelation.environment.QVTrDomainEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtrelation.environment.QVTrNestedEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtrelation.environment.QVTrQueryEnvironment;
@@ -110,19 +115,36 @@ import org.eclipse.qvt.declarative.parser.qvtrelation.environment.QVTrTransforma
 import org.eclipse.qvt.declarative.parser.qvtrelation.environment.QVTrTypedModelEnvironment;
 import org.eclipse.qvt.declarative.parser.ui.preferences.QVTPreferences;
 
-public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvironment>
+public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNodeEnvironment>
 {
 	static org.eclipse.emf.ecore.EcoreFactory emfEcoreFactory = org.eclipse.emf.ecore.EcoreFactory.eINSTANCE;
 	static org.eclipse.ocl.ecore.EcoreFactory oclEcoreFactory = org.eclipse.ocl.ecore.EcoreFactory.eINSTANCE;
-
-	public AbstractQVTrAnalyzer(QVTrParser parser) {
-		super(parser, parser.getOCLEnvironment().getMonitor());
+	
+	public AbstractQVTrAnalyzer(QVTrParser parser, Monitor monitor) {
+		super(parser, monitor);
 	}
 	
 	@Override
-	protected IQVTrEnvironment createdNestedEnvironment(CSTNode cstNode,
+	protected IQVTrNodeEnvironment createdNestedEnvironment(CSTNode cstNode,
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
-		return new QVTrNestedEnvironment((IQVTrEnvironment)env, cstNode);
+		return new QVTrNestedEnvironment((IQVTrNodeEnvironment)env, cstNode);
+	}
+	
+	// FIXME Re-use inherited function once non-private
+	private org.eclipse.ocl.expressions.VariableExp<EClassifier, EParameter> createVariableExp(
+			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
+			CSTNode cst, org.eclipse.ocl.expressions.Variable<EClassifier, EParameter> var) {
+		org.eclipse.ocl.expressions.VariableExp<EClassifier, EParameter> result = oclFactory.createVariableExp();
+
+		initASTMapping(env, result, cst);
+
+		if (var != null) {
+			result.setType(var.getType());
+			result.setReferredVariable(var);
+			result.setName(var.getName());
+		}
+
+		return result;
 	}
 	
 	protected void declareCollectionTemplateCS(QVTrDomainEnvironment env, EClassifier type, CollectionTemplateCS collectionTemplateCS) {
@@ -149,7 +171,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 	protected void declareInputParamDeclarationCS(QVTrQueryEnvironment env, ParamDeclarationCS inputParamDeclarationCS) {
 		FunctionParameter functionParameter = QVTBaseFactory.eINSTANCE.createFunctionParameter();
 		env.initASTMapping(functionParameter, inputParamDeclarationCS);
-		functionParameter.setName(identifierCS(inputParamDeclarationCS.getIdentifier()));
+		CSTChildEnvironment.setNameFromIdentifier(functionParameter, inputParamDeclarationCS.getIdentifier());
 		functionParameter.setEType(resolveClassifier(env, "inputParamDeclarationCS", inputParamDeclarationCS.getType()));
 		env.addParameter(functionParameter);
 	}
@@ -157,12 +179,14 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 	protected void declareMetaModelIdCS(QVTrTypedModelEnvironment env, IdentifierCS metaModelIdCS) {
 		TypedModel typedModel = env.getTypedModel();
 		String metaModelId = identifierCS(metaModelIdCS);
-		URI uri = getResolver().getURI(metaModelId);		// FIXME Fix-up error with reference to stub
+		metaModelIdCS.setAst(typedModel);
+		AbstractModelResolver resolver = env.getResolver();
+		URI uri = resolver.getURI(metaModelId);		// FIXME Fix-up error with reference to stub
 		if (uri == null)
 			ERROR(metaModelIdCS, "metaModelIdCS", "Unknown meta-model '" + formatString(metaModelId) + "'");
 		else {
 			try {
-				Resource resource = getResolver().getResource(uri, true);
+				Resource resource = resolver.getResource(uri, true);
 				if (resource == null)
 					ERROR(metaModelIdCS, "metaModelIdCS", "Failed to load meta-model '" + formatString(metaModelId) + "'");
 				else {
@@ -234,24 +258,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 	}
 
 	protected void declarePropertyTemplateCS(QVTrDomainEnvironment env, EClass parentType, PropertyTemplateCS propertyTemplateCS) {
-		IdentifiedCS propertyIdCS = propertyTemplateCS.getPropertyId();
-		EClassifier propertyType = null;
-		EStructuralFeature resolvedProperty = resolveForwardProperty(env, parentType, "propertyTemplateCS", propertyIdCS);
-		if (resolvedProperty != null) {
-			propertyTemplateCS.setReferredProperty(resolvedProperty);
-			propertyType = uml.getOCLType(resolvedProperty);
-		}
-		else if ((resolvedProperty = resolveReverseProperty(env, parentType, "propertyTemplateCS", propertyIdCS)) != null) {
-			propertyTemplateCS.setReferredProperty(resolvedProperty);
-			propertyTemplateCS.setOpposite(true);
-			propertyType = uml.getOCLType(resolvedProperty.getEContainingClass());
-		}
-		else {
-			resolvedProperty = resolveUnresolvedProperty(env, parentType, "propertyTemplateCS", propertyIdCS);
-			propertyTemplateCS.setReferredProperty(resolvedProperty);
-			propertyType = uml.getOCLType(resolvedProperty);
-		}
-		propertyType = TypeUtil.resolveType(env, propertyType);
+		EClassifier propertyType = resolveProperty(env, parentType, propertyTemplateCS);
 		OCLExpressionCS oclExpressionCS = propertyTemplateCS.getOclExpression();
 		declareOCLExpressionCS(env, propertyType, oclExpressionCS);
 	}
@@ -323,15 +330,17 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 				declareRelationCS(env, relationCS);
 	}
 
-	protected CollectionTemplateExp defineCollectionTemplateCS(IQVTrEnvironment env, CollectionTemplateCS collectionTemplateCS) {
+	protected CollectionTemplateExp defineCollectionTemplateCS(IQVTrNodeEnvironment env, CollectionTemplateCS collectionTemplateCS) {
+		IdentifierCS identifier = collectionTemplateCS.getIdentifier();
 		Variable variable = null;
 		try {
-			variable = env.tryLookupVariable(identifierCS(collectionTemplateCS.getIdentifier()));
+			variable = env.tryLookupVariable(identifierCS(identifier));
 		} catch (LookupException e) {
-			ERROR(collectionTemplateCS.getIdentifier(), "CollectionTemplateCS", env.formatLookupException(e));
+			ERROR(identifier, "CollectionTemplateCS", env.formatLookupException(e));
 		}
 		CollectionTemplateExp collectionTemplateExp = QVTTemplateFactory.eINSTANCE.createCollectionTemplateExp();
 		env.initASTMapping(collectionTemplateExp, collectionTemplateCS);
+//		identifier.setAst(collectionTemplateExp);
 		EClassifier referredClassifier;
 		if (variable != null)
 			referredClassifier = variable.getType();
@@ -349,11 +358,13 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 				OCLExpression headExpr = defineTemplateCS(env, (TemplateCS) headIdentifier);
 //				headExpr.setType(type);
 				collectionTemplateExp.getMember().add(headExpr);
+//				headIdentifier.getIdentifier().setAst(headExpr);
 			}
 			else {
 				Variable headVariable = env.createVariableDeclaration(headIdentifier.getIdentifier(), elementType);
 				VariableExp headVariableExp = oclEcoreFactory.createVariableExp();
 				env.initASTMapping(headVariableExp, headIdentifier);
+//				headIdentifier.getIdentifier().setAst(headVariableExp);
 				headVariableExp.setReferredVariable(headVariable);
 				headVariableExp.setType(elementType);
 //				headVariableExp.setName(headVariable.getName());
@@ -364,8 +375,10 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		if (tailIdentifier != null) {
 			Variable tailVariable = env.createVariableDeclaration(tailIdentifier, referredClassifier);
 			collectionTemplateExp.setRest(tailVariable);
+			tailIdentifier.setAst(tailVariable);
+//			env.initASTMapping(tailVariable, tailIdentifier);
 		}
-		collectionTemplateExp.setName(identifierCS(collectionTemplateCS.getIdentifier()));
+		collectionTemplateExp.setName(identifierCS(identifier));
 		collectionTemplateExp.setBindsTo(variable);
 		CollectionType referredCollectionType = ClassUtils.asClass(referredClassifier, CollectionType.class);
 		collectionTemplateExp.setType(referredClassifier);
@@ -403,6 +416,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 					}
 					RelationDomainAssignment defaultInitializer = QVTRelationFactory.eINSTANCE.createRelationDomainAssignment();
 					env.initASTMapping(defaultInitializer, defaultValueCS);
+					identifierCS.setAst(defaultInitializer);
 					defaultInitializer.setVariable(variable);
 					defaultInitializer.setValueExp(initExpression);
 					relationDomain.getDefaultAssignment().add(defaultInitializer);
@@ -432,18 +446,18 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		return relationImplementation;
 	}
 
-	protected List<TransformationCS> defineImportClauseCS(QVTrTopLevelEnvironment env, UnitCS unitCS, URI sourceURI) {
+	protected List<TransformationCS> defineImportClauseCS(QVTrTopLevelEnvironment env, UnitCS unitCS) {
+		String sourceFolder = getSourceFolder(env);
 		StringBuffer fileName = new StringBuffer();
 		for (IdentifierCS id : unitCS.getIdentifier()) {
 			fileName.append(id.getValue());
 			fileName.append(".");				// FIXME need some kind of search path for . separators
 		}
-		File currentFile = new File(sourceURI.toFileString());
 		String fileNameString = null;
 		File file = null;
 		for (String textExtension : QVTPreferences.getRelationTextExtensions()) {
 			fileNameString = fileName.toString() + textExtension;
-			file = new File(currentFile.getParent(), fileNameString);
+			file = new File(sourceFolder, fileNameString);
 			if (file.exists())
 				break;
 			file = null;
@@ -454,7 +468,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		}
 		try {
 			Reader fileReader = new FileReader(file);
-			QVTrLexer lexer = new QVTrLexer(env);
+			QVTrLexer lexer = new QVTrLexer(env.getFileEnvironment());
 			QVTrParser parser = new QVTrParser(lexer);
 			lexer.setFileName(file.toString());
 			lexer.initialize(fileReader); 
@@ -473,10 +487,15 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 	protected Key defineKeyDeclCS(QVTrTransformationEnvironment env, KeyDeclCS keyDeclCS) {
 		Key key = QVTRelationFactory.eINSTANCE.createKey();
 		env.initASTMapping(key, keyDeclCS);
-		EClass identifiedClass = resolveClass(env, "keyDeclCS", keyDeclCS.getClassId());
-		if (identifiedClass != null) {
-			key.setIdentifies(identifiedClass);
-			for (IdentifiedCS  propertyIdCS : keyDeclCS.getPropertyId()) {
+		PathNameCS classId = keyDeclCS.getClassId();
+		if (classId != null)
+			classId.setAst(key);
+		EClass identifiedClass = resolveClass(env, "keyDeclCS", classId);
+		key.setIdentifies(identifiedClass);
+		for (IdentifiedCS  propertyIdCS : keyDeclCS.getPropertyId()) {
+			propertyIdCS.setAst(key);
+			propertyIdCS.getIdentifier().setAst(key);
+			if (identifiedClass != null) {
 				EStructuralFeature resolvedProperty = resolveForwardProperty(env, identifiedClass, "keyDeclCS", propertyIdCS);
 				if (resolvedProperty != null) {
 					key.getPart().add(resolvedProperty);;
@@ -493,16 +512,17 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		return key;
 	}
 
-	protected TemplateExp defineObjectTemplateCS(IQVTrEnvironment env, ObjectTemplateCS templateCS) {
+	protected TemplateExp defineObjectTemplateCS(IQVTrNodeEnvironment env, ObjectTemplateCS templateCS) {
+		IdentifierCS identifier = templateCS.getIdentifier();
 		Variable variable = null;
 		try {
-			variable = env.tryLookupVariable(identifierCS(templateCS.getIdentifier()));
+			variable = env.tryLookupVariable(identifierCS(identifier));
 		} catch (LookupException e) {
-			ERROR(templateCS.getIdentifier(), "ObjectTemplateCS", env.formatLookupException(e));
+			ERROR(identifier, "ObjectTemplateCS", env.formatLookupException(e));
 		}
 		ObjectTemplateExp objectTemplate = QVTTemplateFactory.eINSTANCE.createObjectTemplateExp();
 		env.initASTMapping(objectTemplate, templateCS);
-		objectTemplate.setName(identifierCS(templateCS.getIdentifier()));
+		CSTChildEnvironment.setNameFromIdentifier(objectTemplate, identifier);
 		EClassifier referredClassifier;
 		if (variable != null) {
 			referredClassifier = variable.getType();
@@ -524,7 +544,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		return objectTemplate;
 	}
 
-	protected void definePredicateCS(IQVTrEnvironment env, Pattern pattern, List<OCLExpressionCS> oclExpressionCSlist) {
+	protected void definePredicateCS(IQVTrNodeEnvironment env, Pattern pattern, List<OCLExpressionCS> oclExpressionCSlist) {
 		// FIXME bindsTo
 		for (OCLExpressionCS oclExpressionCS : oclExpressionCSlist) {
 			Predicate predicate = QVTBaseFactory.eINSTANCE.createPredicate();
@@ -534,12 +554,13 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		}
 	}
 	
-	protected OCLExpression definePredicateOCLExpressionCS(IQVTrEnvironment env, OCLExpressionCS oclExpressionCS) {
+	protected OCLExpression definePredicateOCLExpressionCS(IQVTrNodeEnvironment env, OCLExpressionCS oclExpressionCS) {
 		Relation relation = isRelationCallExpCS(env, oclExpressionCS);
 		if (relation == null)
 			return oclExpressionCS(oclExpressionCS, env);
 		RelationCallExp relationCallExp = QVTRelationFactory.eINSTANCE.createRelationCallExp();
 		env.initASTMapping(relationCallExp, oclExpressionCS);
+		((OperationCallExpCS) oclExpressionCS).getSimpleNameCS().setAst(relationCallExp);
 		relationCallExp.setReferredRelation(relation);
 		relationCallExp.setType(getBoolean());
 		for (OCLExpressionCS argumentCS : ((OperationCallExpCS) oclExpressionCS).getArguments()) {
@@ -550,10 +571,14 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		return relationCallExp;
 	}
 
-	protected PropertyTemplateItem definePropertyTemplateCS(IQVTrEnvironment env, EClass referredClass, PropertyTemplateCS propertyTemplateCS) {
+	protected PropertyTemplateItem definePropertyTemplateCS(IQVTrNodeEnvironment env, EClass referredClass, PropertyTemplateCS propertyTemplateCS) {
 		PropertyTemplateItem propertyTemplateItem = QVTTemplateFactory.eINSTANCE.createPropertyTemplateItem();
 		env.initASTMapping(propertyTemplateItem, propertyTemplateCS);
+		
 		EStructuralFeature eStructuralFeature = propertyTemplateCS.getReferredProperty();
+		IdentifiedCS propertyIdCS = propertyTemplateCS.getPropertyId();
+		propertyIdCS.setAst(propertyTemplateItem);
+		propertyIdCS.getIdentifier().setAst(propertyTemplateItem);
 /*		IdentifiedCS propertyIdCS = propertyTemplateCS.getPropertyId();
 		if (resolvedProperty == null) {					// Not yet resolved if in a literal context
 			IdentifierCS identifierCS = propertyIdCS.getIdentifier();
@@ -570,7 +595,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		if ((eStructuralFeature != null) && (oclExpression != null)) {
 			EClassifier featureType = uml.getOCLType(isOpposite ? eStructuralFeature.getEContainingClass() : eStructuralFeature);
 			featureType = TypeUtil.resolveType(env, featureType);
-			env.checkFeatureCompatibility(propertyTemplateCS.getPropertyId(), featureType, oclExpression);
+			env.checkFeatureCompatibility(propertyIdCS, featureType, oclExpression);
 		}
 		return propertyTemplateItem;
 	}
@@ -585,8 +610,10 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 	protected Relation defineRelationCS(QVTrRelationEnvironment env, RelationCS relationCS) {
 		Relation relation = env.getRelation();
 		relation.setIsTopLevel(relationCS.isTop());
-		for (VarDeclarationCS varDeclarationCS : relationCS.getVarDeclaration())
+		for (VarDeclarationCS varDeclarationCS : relationCS.getVarDeclaration()) {
 			defineVarDeclarationCS(env, varDeclarationCS);
+			varDeclarationCS.setAst(relation);			// ?? Perhaps first variable would be better
+		}
 		int i = 0;
 		for (AbstractDomainCS abstractDomainCS : relationCS.getDomain()) {
 			if (isCancelled())
@@ -641,9 +668,10 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		return relation;
 	}
 
-	protected RelationCallExp defineRelationCallExpCS(IQVTrEnvironment env, Relation relation, OperationCallExpCS operationCallExpCS) {
+	protected RelationCallExp defineRelationCallExpCS(IQVTrNodeEnvironment env, Relation relation, OperationCallExpCS operationCallExpCS) {
 		RelationCallExp relationCallExp = QVTRelationFactory.eINSTANCE.createRelationCallExp();
 		env.initASTMapping(relationCallExp, operationCallExpCS);
+		operationCallExpCS.getSimpleNameCS().setAst(relationCallExp);
 		relationCallExp.setReferredRelation(relation);
 		relationCallExp.setType(getBoolean());
 		for (OCLExpressionCS argumentCS : operationCallExpCS.getArguments()) {
@@ -654,7 +682,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		return relationCallExp;
 	}
 
-	protected TemplateExp defineTemplateCS(IQVTrEnvironment env, TemplateCS templateCS) {
+	protected TemplateExp defineTemplateCS(IQVTrNodeEnvironment env, TemplateCS templateCS) {
 		TemplateExp templateExp = null;
 		if (templateCS instanceof ObjectTemplateCS)
 			templateExp = defineObjectTemplateCS(env, (ObjectTemplateCS) templateCS);
@@ -668,11 +696,12 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		return templateExp;
 	}
 
-	protected void defineTopLevelCS(QVTrTopLevelEnvironment topLevelEnvironment, TopLevelCS topLevelCS, URI sourceURI) {
+	protected void defineTopLevelCS(QVTrTopLevelEnvironment topLevelEnvironment) {
+		TopLevelCS topLevelCS = topLevelEnvironment.getCSTNode();
 		for (UnitCS unitCS : topLevelCS.getImportClause()) {
 			if (isCancelled()) 
 				return;
-			List<TransformationCS> transformationCSs = defineImportClauseCS(topLevelEnvironment, unitCS, sourceURI);
+			List<TransformationCS> transformationCSs = defineImportClauseCS(topLevelEnvironment, unitCS);
 			if (transformationCSs != null)
 				topLevelCS.getTransformation().addAll(transformationCSs);
 		}
@@ -729,8 +758,15 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 //				ERROR(typeCS, "VarDeclarationCS", "#Using OCL type '" + formatType(type) + "'");
 		}
 	}
+	
+	protected String getSourceFolder(IQVTrNodeEnvironment env) {
+		AbstractFileHandle file = env.getResolver().getHandle();
+		URI uri = file != null ? file.getURI() : null;
+		File currentFile = uri != null ? new File(uri.toFileString()) : null;
+		return currentFile != null ? currentFile.getParent() : null;
+	}
 
-	protected OCLExpression isQueryCallExpCS(IQVTrEnvironment env, OCLExpressionCS oclExpressionCS) {
+	protected OCLExpression isQueryCallExpCS(IQVTrNodeEnvironment env, OCLExpressionCS oclExpressionCS) {
 		if (!(oclExpressionCS instanceof OperationCallExpCS))
 			return null;
 		OperationCallExpCS operationCallExpCS = (OperationCallExpCS)oclExpressionCS;
@@ -768,7 +804,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		return queryCall;		
 	}
 
-	protected Relation isRelationCallExpCS(IQVTrEnvironment env, OCLExpressionCS oclExpressionCS) {
+	protected Relation isRelationCallExpCS(IQVTrNodeEnvironment env, OCLExpressionCS oclExpressionCS) {
 		if (!(oclExpressionCS instanceof OperationCallExpCS))
 			return null;
 		OperationCallExpCS operationCallExpCS = (OperationCallExpCS)oclExpressionCS;
@@ -791,11 +827,11 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 			EObject, CallOperationAction, SendSignalAction, Constraint,
 			EClass, EObject> env) {
 //		IQVTrEnvironment exprEnv = new QVTrExpressionEnvironment((IQVTrEnvironment)env, oclExpressionCS);
-		IQVTrEnvironment exprEnv = (IQVTrEnvironment)env;
+		IQVTrNodeEnvironment exprEnv = (IQVTrNodeEnvironment)env;
 		OCLExpression oclExpression = null;
 		try {
 			if (oclExpressionCS instanceof TemplateCS)
-				return defineTemplateCS((IQVTrEnvironment)env, (TemplateCS) oclExpressionCS);
+				return defineTemplateCS((IQVTrNodeEnvironment)env, (TemplateCS) oclExpressionCS);
 			Relation relation = isRelationCallExpCS(exprEnv, oclExpressionCS);
 			if (relation != null)
 				return defineRelationCallExpCS(exprEnv, relation, (OperationCallExpCS)oclExpressionCS);
@@ -805,7 +841,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		} catch (Exception e) {
 			ERROR(oclExpressionCS, "oclExpressionCS", "Failed to parse expression : " + e.getClass().getName() + " - " + e.getMessage());
 			e.printStackTrace();
-			oclExpression = ((IQVTrEnvironment)env).createInvalidLiteralExp(oclExpressionCS);
+			oclExpression = ((IQVTrNodeEnvironment)env).createInvalidLiteralExp(oclExpressionCS);
 		}
 		return oclExpression;		// FIXME always return invalidLiteral
 	}
@@ -813,10 +849,38 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 	@Override protected org.eclipse.ocl.expressions.OCLExpression<EClassifier> operationCallExpCS(
 			OperationCallExpCS operationCallExpCS,
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
-		OCLExpression queryCall = isQueryCallExpCS((IQVTrEnvironment) env, operationCallExpCS);
-		if (queryCall != null)
+		OCLExpression queryCall = isQueryCallExpCS((IQVTrNodeEnvironment) env, operationCallExpCS);
+		if (queryCall != null) {
+			checkAndSetAst((ICSTEnvironment) env, operationCallExpCS.getSimpleNameCS(), queryCall);
 			return queryCall;
+		}
 		return super.operationCallExpCS(operationCallExpCS, env);
+	}
+
+	protected EClassifier resolveProperty(QVTrDomainEnvironment env, EClass parentType, PropertyTemplateCS propertyTemplateCS) {
+		IdentifiedCS propertyIdCS = propertyTemplateCS.getPropertyId();
+		EClassifier propertyType = null;
+		EStructuralFeature resolvedProperty = resolveForwardProperty(env, parentType, "propertyTemplateCS", propertyIdCS);
+		if (resolvedProperty != null) {
+			propertyTemplateCS.setReferredProperty(resolvedProperty);
+			propertyType = uml.getOCLType(resolvedProperty);
+		}
+		else if ((resolvedProperty = resolveReverseProperty(env, parentType, "propertyTemplateCS", propertyIdCS)) != null) {
+			propertyTemplateCS.setReferredProperty(resolvedProperty);
+			propertyTemplateCS.setOpposite(true);
+			propertyType = uml.getOCLType(resolvedProperty.getEContainingClass());
+		}
+		else {
+			resolvedProperty = resolveUnresolvedProperty(env, parentType, "propertyTemplateCS", propertyIdCS);
+			propertyTemplateCS.setReferredProperty(resolvedProperty);
+			propertyType = uml.getOCLType(resolvedProperty);
+		}
+		propertyType = TypeUtil.resolveType(env, propertyType);
+		if ((propertyType instanceof CollectionType) && (env.getASTMapping(propertyType) == null))
+			initASTMapping(env, propertyType, propertyTemplateCS);
+		else
+			propertyTemplateCS.setAst(propertyType);
+		return propertyType;
 	}
 
 	@Override
@@ -832,9 +896,9 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 			return null;
 		EStructuralFeature property;
 		try {
-			property = ((IQVTrEnvironment)env).tryLookupOppositeProperty((EClass)sourceElementType, simpleName);
+			property = ((IQVTrNodeEnvironment)env).tryLookupOppositeProperty((EClass)sourceElementType, simpleName);
 		} catch (LookupException e) {
-			ERROR(simpleNameCS, "SimpleNameCS", ((IQVTEnvironment) env).formatLookupException(e));
+			ERROR(simpleNameCS, "SimpleNameCS", ((IQVTrNodeEnvironment) env).formatLookupException(e));
 			List<?> matches = e.getAmbiguousMatches();
 			if (matches.isEmpty())
 				return null;
@@ -846,17 +910,16 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrEnvi
 		propertyCall = QVTRelationFactory.eINSTANCE.createOppositePropertyCallExp();
 		initASTMapping(env, propertyCall, simpleNameCS);
 		propertyCall.setReferredProperty(property);
-		propertyCall.setType(TypeUtil.resolveSetType(env, property.getEContainingClass()));
+		EClassifier resolvedSetType = TypeUtil.resolveSetType(env, property.getEContainingClass());
+		if (resolvedSetType != null)
+			((IQVTrNodeEnvironment)env).getASTNodeToCSTNodeMap().put(resolvedSetType, simpleNameCS);
+		propertyCall.setType(resolvedSetType);
 		if (source != null) {
 			propertyCall.setSource(source);
 		} else {
-			org.eclipse.ocl.expressions.VariableExp<EClassifier, EParameter> src = oclFactory.createVariableExp();
-			initASTMapping(env, src, simpleNameCS);
-			org.eclipse.ocl.expressions.Variable<EClassifier, EParameter> implicitSource =
-				env.lookupImplicitSourceForProperty(simpleName);
-			src.setType(implicitSource.getType());
-			src.setReferredVariable(implicitSource);			
-			propertyCall.setSource(src);
+			org.eclipse.ocl.expressions.Variable<EClassifier, EParameter> var = env.lookupImplicitSourceForProperty(simpleName);
+			org.eclipse.ocl.expressions.VariableExp<EClassifier, EParameter> result = createVariableExp(env, simpleNameCS, var);
+			propertyCall.setSource(result);
 		}
 		initPropertyPositions(propertyCall, simpleNameCS);
 		return propertyCall;

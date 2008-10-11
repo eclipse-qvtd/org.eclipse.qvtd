@@ -13,8 +13,7 @@ package org.eclipse.qvt.declarative.parser.qvtrelation.environment;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.Variable;
@@ -24,23 +23,14 @@ import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvt.environment.QVTEnvironment;
 
-public abstract class QVTrEnvironment<P extends IQVTrEnvironment> extends QVTEnvironment<IQVTrEnvironment, P> implements IQVTrEnvironment
+public abstract class QVTrEnvironment<P extends IQVTrNodeEnvironment, AST extends EModelElement, CST extends CSTNode> extends QVTEnvironment<IQVTrNodeEnvironment, P, AST, CST> implements IQVTrNodeEnvironment
 {
-	protected QVTrEnvironment(EPackage.Registry reg) {
-		super(reg);
-	}
-
-	protected QVTrEnvironment(EPackage.Registry reg, Resource resource) {
-		super(reg, resource);
-	}
-	
-	protected QVTrEnvironment(P parent, CSTNode cstNode) {
-		super(parent, cstNode);
+	protected QVTrEnvironment(P parent, AST astNode, CST cstNode) {
+		super(parent, astNode, cstNode);
 	}	
-	
-	@Override
-	public QVTrFormattingHelper createFormatter() {
-		return new QVTrFormattingHelper(this);
+
+	public QVTrNestedEnvironment createNestedEnvironment(CSTNode cstNode) {
+		return new QVTrNestedEnvironment(this, cstNode);
 	}
 
 	public Variable createVariableDeclaration(IdentifierCS identifierCS, EClassifier type) {
@@ -60,26 +50,18 @@ public abstract class QVTrEnvironment<P extends IQVTrEnvironment> extends QVTEnv
 	}
 
 	public Relation getRelation(List<String> pathName, String name) {
-		P parent = getParentEnvironment();
-		if (parent != null)
-			return parent.getRelation(pathName, name);
-		else
-			return null;
+		return getParentEnvironment().getRelation(pathName, name);
 	}
 	
 	public RelationalTransformation getRelationalTransformation() {
 		P parent = getParentEnvironment();
 		if (parent != null)
-			return parent.getRelationalTransformation();
+			return getParentEnvironment().getRelationalTransformation();
 		else
 			return null;
 	}
 	
 	public RelationalTransformation getRelationalTransformation(List<String> pathName) {
-		P parent = getParentEnvironment();
-		if (parent != null)
-			return parent.getRelationalTransformation(pathName);
-		else
-			return null;
+		return getParentEnvironment().getRelationalTransformation(pathName);
 	}
 }

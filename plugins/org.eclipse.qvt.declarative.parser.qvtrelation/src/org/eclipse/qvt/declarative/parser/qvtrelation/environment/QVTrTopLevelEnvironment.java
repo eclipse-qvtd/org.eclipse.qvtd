@@ -14,51 +14,44 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
-import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
+import org.eclipse.qvt.declarative.parser.environment.CSTChildEnvironment;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvt.environment.QVTTopLevelEnvironment;
-import org.eclipse.qvt.declarative.parser.qvtrelation.QVTrAnalyzer;
+import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TopLevelCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TransformationCS;
 
-public class QVTrTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTrEnvironment> implements IQVTrEnvironment
+public class QVTrTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTrNodeEnvironment, TopLevelCS> implements IQVTrNodeEnvironment
 {
 	private Map<TransformationCS, QVTrTransformationEnvironment> txEnvMap = new HashMap<TransformationCS, QVTrTransformationEnvironment>(); 
 	private final Map<String, RelationalTransformation> transformationMap = new HashMap<String, RelationalTransformation>();
 	
-//	public QVTrTopLevelEnvironment(EPackage.Registry reg, CSTNode cstNode) {
-//		super(reg, cstNode);
-//	}
-	
-	public QVTrTopLevelEnvironment(AbstractFileHandle file, ResourceSet resourceSet) {
-		super(file, resourceSet);
-	}
-
-	@Override protected QVTrAnalyzer createAnalyzer() {
-		return new QVTrAnalyzer(this);
+	public QVTrTopLevelEnvironment(QVTrFileEnvironment parent, XMIResource astResource, TopLevelCS cstNode) {
+		super(parent, astResource, cstNode);
 	}
 
 	public QVTrTransformationEnvironment createEnvironment(TransformationCS transformationCS) {
 		QVTrTransformationEnvironment environment = new QVTrTransformationEnvironment(this, transformationCS);
 		RelationalTransformation relationalTransformation = environment.getRelationalTransformation();
+		ast.getContents().add(relationalTransformation);
 		txEnvMap.put(transformationCS, environment);
 		String name = relationalTransformation.getName();
 		transformationMap.put(name, relationalTransformation);	// FIXME duplicates
 		addPackage(relationalTransformation);	
 		return environment;
 	}
-	
-	@Override
-	public QVTrFormattingHelper createFormatter() {
-		return new QVTrFormattingHelper(this);
+
+	public QVTrNestedEnvironment createNestedEnvironment(CSTNode cstNode) {
+		return new QVTrNestedEnvironment(this, cstNode);
 	}
 
 	public Variable createVariableDeclaration(IdentifierCS identifierCS,
@@ -66,13 +59,8 @@ public class QVTrTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTrEnviron
 		throw new UnsupportedOperationException(getClass().getName() + ".createVariableDeclaration");
 	}
 
-	@Override
-	protected String getContentTypeIdentifier() {
-		return QVTRelationPackage.eCONTENT_TYPE;
-	}
-
 	public QVTrTransformationEnvironment getEnvironment(TransformationCS transformationCS) {
-		return txEnvMap.get(transformationCS);
+		return CSTChildEnvironment.getEnvironmentFromAST((Notifier)transformationCS.getAst(), QVTrTransformationEnvironment.class);
 	}
 
 	@Override
@@ -82,7 +70,7 @@ public class QVTrTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTrEnviron
 			if (modelName != null)
 				return modelName;
 		}
-		return super.getModelName(object);
+		return null;
 	}
 
 	public List<Function> getQueries(String queryName, List<OCLExpression> args) {
