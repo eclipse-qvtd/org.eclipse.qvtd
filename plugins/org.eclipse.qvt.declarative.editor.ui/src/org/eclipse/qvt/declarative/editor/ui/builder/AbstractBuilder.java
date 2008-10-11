@@ -11,7 +11,6 @@
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -27,7 +26,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -40,7 +38,8 @@ import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseFileHandle;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseProjectHandle;
-import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.ui.preferences.QVTPreferences;
 
 @Deprecated // Use CommonBuilder
@@ -163,20 +162,20 @@ public abstract class AbstractBuilder extends IncrementalProjectBuilder
 		}
 	}
 
-	protected void compile(IFile file, final IProgressMonitor monitor) throws IOException, CoreException, MappingConfigurationException {
+	protected void compile(IFile file, final IProgressMonitor progressMonitor) throws IOException, CoreException, MappingConfigurationException {
 		IPath concretePath = file.getFullPath();
 		IPath abstractPath = concretePath.removeFileExtension().addFileExtension(creationFactory.getXMLExtension());
 		EclipseProjectHandle projectHandle = new EclipseProjectHandle(file.getProject());
 		EclipseFileHandle fileHandle = projectHandle.getFileHandle(file);
 		ResourceSet resourceSet = new ResourceSetImpl();
-		IFileEnvironment environment = creationFactory.createFileEnvironment(fileHandle, resourceSet);
-		ProblemHandler reporter = creationFactory.createProblemHandler(file);
-		environment.setProblemHandler(reporter);
-		Collection<? extends EObject> ePackages = environment.parseToAST(null, monitor);
-//		environment.validate(ePackages);
 		URI uri = URI.createPlatformResourceURI(abstractPath.toString(), true);
 		boolean generateEMOF = QVTPreferences.generateEMOF();
-		Resource resource = environment.createASTResource(ePackages, generateEMOF ? uri.appendFileExtension("ecore") : uri);
+		URI ecoreURI = generateEMOF ? uri.appendFileExtension("ecore") : uri;
+		ICSTFileEnvironment environment = creationFactory.createFileEnvironment(fileHandle, resourceSet, ecoreURI);
+		ProblemHandler reporter = creationFactory.createProblemHandler(file);
+		environment.setProblemHandler(reporter);
+		ICSTRootEnvironment rootEnvironment = environment.parse(null, environment.getFile(), progressMonitor);
+		Resource resource = rootEnvironment.getASTNode();
 		try {
     		if (generateEMOF) {
 				IMappingMetaData mappingMetaData = creationFactory.getMappingMetaData();
@@ -184,11 +183,11 @@ public abstract class AbstractBuilder extends IncrementalProjectBuilder
 				resource = mappingMetaDataRegistry.getAdapter(resource, uri);
 			}
 			resource.save(null);
-			environment.validate(resource);
+			rootEnvironment.validate();
 		} catch (IOException e) {
 			QVTEditorPlugin.logError("Failed to save '" + abstractPath.toString() + "'", e);
 		}
-		reporter.flush(BasicMonitor.toMonitor(monitor));
+		reporter.flush(BasicMonitor.toMonitor(progressMonitor));
 	}
 
 	protected DeltaVisitor createDeltaVisitor(IProgressMonitor monitor) {

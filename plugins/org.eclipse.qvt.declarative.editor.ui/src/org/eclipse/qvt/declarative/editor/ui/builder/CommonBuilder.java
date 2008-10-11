@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.6 2008/10/10 13:41:54 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.7 2008/10/11 15:37:19 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -142,7 +142,7 @@ public abstract class CommonBuilder extends BuilderBase
 			URI uri = URI.createPlatformResourceURI(workspaceRelativeOutputPath.toString(), true);
 			Resource resource = parsedResult.getAST();
 			resource.setURI(uri);
-			parsedResult.getEnvironment().validate(resource);
+			parsedResult.getRootEnvironment().validate();
 			resource.save(null);
 			doRefresh(outputFile.getParent());
 		} catch (Exception e) {
