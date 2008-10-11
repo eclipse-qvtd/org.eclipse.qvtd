@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.8 2008/09/28 12:14:31 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.9 2008/10/11 15:37:56 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -31,8 +31,9 @@ package org.eclipse.qvt.declarative.editor.ui.imp;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import lpg.lpgjavaruntime.IToken;
 import lpg.lpgjavaruntime.PrsStream;
@@ -42,14 +43,12 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.imp.core.ErrorHandler;
 import org.eclipse.imp.editor.ModelTreeNode;
 import org.eclipse.imp.language.Language;
+import org.eclipse.imp.language.ServiceFactory;
 import org.eclipse.imp.model.ISourceProject;
 import org.eclipse.imp.parser.IMessageHandler;
 import org.eclipse.imp.parser.IParseController;
@@ -58,6 +57,7 @@ import org.eclipse.imp.parser.SimpleAnnotationTypeInfo;
 import org.eclipse.imp.services.IAnnotationTypeInfo;
 import org.eclipse.imp.services.ILanguageSyntaxProperties;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.lpg.AbstractLexer;
 import org.eclipse.ocl.lpg.AbstractParser;
@@ -68,8 +68,8 @@ import org.eclipse.qvt.declarative.editor.ui.builder.ProblemLimit;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseFileHandle;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseProjectHandle;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
-import org.eclipse.qvt.declarative.parser.environment.IFileAnalyzer;
-import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 
 /**
@@ -85,33 +85,29 @@ public abstract class CommonParseController implements IParseController
 
 	public static class ParsedResult extends ASTandCST
 	{
-		protected final IFileEnvironment environment;
-
-		public ParsedResult(IFileEnvironment environment) {
-			this.environment = environment;
+		protected final ICSTFileEnvironment fileEnvironment;
+		protected ICSTRootEnvironment rootEnvironment;
+		
+		public ParsedResult(ICSTFileEnvironment fileEnvironment) {
+			this.fileEnvironment = fileEnvironment;
 		}
 
-		public IFileEnvironment getEnvironment() {
-			return environment;
+		public ICSTFileEnvironment getFileEnvironment() {
+			return fileEnvironment;
 		}
 
-		public void parse(String contents, IProgressMonitor monitor) throws IOException, CoreException {
-			Reader reader = new StringReader(contents);
-			IFileAnalyzer analyzer = environment.parseToTokens(reader, monitor);
-			if (analyzer != null) {
-				CSTNode cstNode = analyzer.parseToCST();
-				setCST(cstNode);
-				if (cstNode != null) {
-					URI uri = environment.getFile().getURI();
-					Collection<? extends EObject> astNodes = analyzer.parseCSTtoAST(cstNode, uri);
-					if (astNodes != null) {
-						Resource resource = new XMIResourceImpl(uri);
-						resource.getContents().addAll(astNodes);
-						environment.initASTMapping(resource, cstNode);
-						setAST(resource);
-					}
-				}
-			}
+		public ICSTRootEnvironment getRootEnvironment() {
+			return rootEnvironment;
+		}
+
+		public ICSTRootEnvironment parse(Reader reader, IProgressMonitor progressMonitor) throws IOException, CoreException {
+			rootEnvironment = fileEnvironment.parse(reader, fileEnvironment.getFile(), progressMonitor);
+			if (rootEnvironment == null)
+				return null;
+			rootEnvironment.validate();
+			setCST(rootEnvironment.getCSTNode());
+			setAST(rootEnvironment.getASTNode());
+			return rootEnvironment;
 		}
 	}
 
@@ -133,7 +129,8 @@ public abstract class CommonParseController implements IParseController
     protected IPath fFilePath;
     protected IMessageHandler handler;   
     protected ParsedResult fCurrentAst;
-    private char fKeywords[][];
+//    private String fKeywords[];
+    private List<String> keywords = null;
     private boolean fIsKeyword[];
     private final SimpleAnnotationTypeInfo fSimpleAnnotationTypeInfo = new SimpleAnnotationTypeInfo();
 	private final String id;
@@ -146,18 +143,20 @@ public abstract class CommonParseController implements IParseController
     }
 
     protected void cacheKeywordsOnce() {
-        if (fKeywords == null) {
+        if (keywords == null) {
             // SMS 25 Jun 2007
             // Added try-catch block in case parser is null
             try {
                 String tokenKindNames[]= getParser().orderedTerminalSymbols();
                 this.fIsKeyword= new boolean[tokenKindNames.length];
-                this.fKeywords= new char[tokenKindNames.length][];
+//                this.fKeywords= new String[tokenKindNames.length];
+                this.keywords = new ArrayList<String>();
                 int[] keywordKinds= getKeywordKinds();
                 for(int i= 1; i < keywordKinds.length; i++) {
                     int index= getParser().mapKind(keywordKinds[i]);
                     fIsKeyword[index]= true;
-                    fKeywords[index]= tokenKindNames[index].toCharArray();
+//                    fKeywords[index]= tokenKindNames[index];
+                    keywords.add(tokenKindNames[index]);
                 }
             } catch (NullPointerException e) {
                 System.err.println(getClass().getSimpleName() + ".cacheKeywordsOnce():  NullPointerException; trapped and discarded");
@@ -165,12 +164,13 @@ public abstract class CommonParseController implements IParseController
         }
     }
 
-	protected IFileEnvironment createEnvironment(AbstractFileHandle fileHandle) {
+	protected ICSTFileEnvironment createEnvironment(AbstractFileHandle fileHandle) {
 		ResourceSet resourceSet = new ResourceSetImpl();
-		return creationFactory.createFileEnvironment(fileHandle, resourceSet);
+		URI astURI = fileHandle.getURI().appendFileExtension(creationFactory.getXMLExtension());
+		return creationFactory.createFileEnvironment(fileHandle, resourceSet, astURI);
 	}
 
-	protected ProblemHandler createProblemHandler(IFileEnvironment environment) {
+	protected ProblemHandler createProblemHandler(ICSTFileEnvironment environment) {
 		if (handler instanceof ProblemHandler) {
 			((ProblemHandler)handler).setParser(environment.getParser());
 			if (handler instanceof MarkerProblemHandler)
@@ -188,7 +188,7 @@ public abstract class CommonParseController implements IParseController
 		if (object instanceof ModelTreeNode)
 			object = ((ModelTreeNode)object).getASTNode();
 		if (object instanceof CSTNode)
-			object = ((CSTNode) object).getAstNode();
+			object = ((CSTNode) object).getAst();
 		return object;
 	}
 
@@ -207,14 +207,14 @@ public abstract class CommonParseController implements IParseController
 			return null;
 		if (object instanceof ModelTreeNode)
 			object = ((ModelTreeNode)object).getASTNode();
-		return fCurrentAst.getEnvironment().getASTMapping(object);
+		return fCurrentAst.getFileEnvironment().getASTMapping(object);
 	}
 
     public ICreationFactory getCreationFactory() {
 		return creationFactory;
 	}
 
-	public ASTandCST getCurrentAst() {
+	public ParsedResult getCurrentAst() {
     	return fCurrentAst;
     }
 
@@ -233,6 +233,14 @@ public abstract class CommonParseController implements IParseController
 		return getLexer().getKeywordKinds();
 	}
 
+	public List<String> getKeywords() {
+		return keywords;
+	}
+
+	public ILabelProvider getLabelProvider() {
+		return ServiceFactory.getInstance().getLabelProvider(fLanguage);
+	}
+
     public Language getLanguage() {
         return fLanguage;
     }
@@ -244,13 +252,14 @@ public abstract class CommonParseController implements IParseController
 	public ISourcePositionLocator getNodeLocator() {
 		if (fCurrentAst == null)
 			return null;
-		return creationFactory.createNodeLocator(fCurrentAst.getEnvironment());
+		return creationFactory.createNodeLocator(fCurrentAst.getFileEnvironment());
 	}
 
 	public AbstractParser getParser() {
 		if (fCurrentAst == null)
 			return null;
-		return fCurrentAst.getEnvironment().getParser();
+		ICSTFileEnvironment fileEnvironment = fCurrentAst.getFileEnvironment();
+		return fileEnvironment.getParser();
 	}
 
     public IPath getPath() {
@@ -282,7 +291,7 @@ public abstract class CommonParseController implements IParseController
             }
 
             private int getTokenIndexAtCharacter(int offset) {
-                int result= stream.getTokenIndexAtCharacter(offset);
+                int result= stream != null ? stream.getTokenIndexAtCharacter(offset) : 0;
                 // getTokenIndexAtCharacter() answers the negative of the
                 // index of the preceding token if the given offset is not
                 // actually within a token.
@@ -349,6 +358,18 @@ public abstract class CommonParseController implements IParseController
 		System.out.println(id + " initialized for " + fFilePath.toString());
     }
 
+    public boolean isCompleteable(int kind) {
+    	switch (getTokenKind(kind)) {
+	    	case IDENTIFIER:
+	    	case INTEGER:
+	    	case KEYWORD:
+	    	case REAL:
+	    	case STRING:
+	    		return true;
+	    }
+    	return false;
+    }
+
     public boolean isIdentifier(int kind) {
     	return getTokenKind(kind) == TokenKind.IDENTIFIER;
     }
@@ -358,19 +379,18 @@ public abstract class CommonParseController implements IParseController
     	return kind < tokenKindNames.length && fIsKeyword[kind];
     }
 
-	public ParsedResult parse(String contents, boolean scanOnly, IProgressMonitor monitor) {
+	public ParsedResult parse(String contents, boolean scanOnly, IProgressMonitor progressMonitor) {
 //		FIXME scanOnly appears to be false always
 		System.out.println(id + " Parse " + fFilePath.toString() + " " + fLanguage + " scanOnly = " + scanOnly + " handler = " + handler.getClass().getName());
-		if (monitor.isCanceled())
+		if (progressMonitor.isCanceled())
 			return fCurrentAst;
-		AbstractFileHandle fileHandle = getFileHandle();
-		IFileEnvironment environment = createEnvironment(fileHandle);
-		environment.getAnalyzer();		// Create parser
-		ProblemHandler problemHandler = createProblemHandler(environment);
-		environment.setProblemHandler(problemHandler);
-		ParsedResult newResult = new ParsedResult(environment);
+		ICSTFileEnvironment fileEnvironment = createEnvironment(getFileHandle());
+		fileEnvironment.setProblemHandler(createProblemHandler(fileEnvironment));
+		ParsedResult newResult = null;
 		try {
-			newResult.parse(contents, monitor);
+			ParsedResult workingResult = new ParsedResult(fileEnvironment);
+			workingResult.parse(new StringReader(contents), progressMonitor);
+			newResult = workingResult;
 		} catch (IOException e) {
             ErrorHandler.reportError("Failed to parse language " + getLanguage().getName() + " and input " + getPath() + ":", e);
 		} catch (CoreException e) {
