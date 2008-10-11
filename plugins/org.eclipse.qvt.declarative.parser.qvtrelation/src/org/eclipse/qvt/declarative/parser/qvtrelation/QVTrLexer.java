@@ -14,7 +14,7 @@
 *
 * </copyright>
 *
-* $Id: QVTrLexer.java,v 1.5 2008/10/10 07:26:28 ewillink Exp $
+* $Id: QVTrLexer.java,v 1.6 2008/10/11 15:17:31 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;
@@ -22,7 +22,7 @@ package org.eclipse.qvt.declarative.parser.qvtrelation;
 import lpg.lpgjavaruntime.*;
 import org.eclipse.ocl.lpg.AbstractLexer;
 import org.eclipse.ocl.lpg.AbstractParser;
-import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.ocl.lpg.BasicEnvironment;
 import org.eclipse.ocl.util.OCLUtil;
 
@@ -43,24 +43,24 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
     private AbstractParser parser;
     private LexParser lexParser = new LexParser(this, prs, this);
     
-    private final IFileEnvironment oclEnvironment;
+    private final ICSTFileEnvironment oclEnvironment;
 
-    public QVTrLexer(IFileEnvironment environment) {
+    public QVTrLexer(ICSTFileEnvironment environment) {
         super(OCLUtil.getAdapter(environment, BasicEnvironment.class));
         oclEnvironment = environment;
     }
     
-	public QVTrLexer(IFileEnvironment environment, char[] chars) {
+	public QVTrLexer(ICSTFileEnvironment environment, char[] chars) {
 		this(environment, chars, "OCL", ECLIPSE_TAB_VALUE);
 		kwLexer = new QVTrKWLexer(getInputChars(), TK_IDENTIFIER);
 	}
 
-    public QVTrLexer(IFileEnvironment environment, char[] input_chars, String filename, int tab)  {
+    public QVTrLexer(ICSTFileEnvironment environment, char[] input_chars, String filename, int tab)  {
         super(OCLUtil.getAdapter(environment, BasicEnvironment.class), input_chars, filename, tab);
         oclEnvironment = environment;
     }
     
-	public IFileEnvironment getOCLEnvironment() {
+	public ICSTFileEnvironment getOCLEnvironment() {
     	return oclEnvironment;
     }
 
