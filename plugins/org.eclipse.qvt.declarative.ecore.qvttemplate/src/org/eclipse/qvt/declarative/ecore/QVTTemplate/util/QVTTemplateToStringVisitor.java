@@ -130,7 +130,8 @@ public class QVTTemplateToStringVisitor extends QVTBaseToStringVisitor implement
     public String visitPropertyTemplateItem(PropertyTemplateItem propertyTemplateItem) {
         StringBuffer result = new StringBuffer();
 		EStructuralFeature property = propertyTemplateItem.getReferredProperty();
-		result.append(property.getName());
+		if (property != null)
+			result.append(property.getName());
 		result.append(" = ");
 		OCLExpression value = propertyTemplateItem.getValue();
 		if (value != null)
