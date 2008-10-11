@@ -4,7 +4,8 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvt.declarative.editor.ocl.ui;singleton:=true
 Bundle-Version: 0.7.0.qualifier
 Require-Bundle: org.eclipse.qvt.declarative.editor.ui;visibility:=reexport,
- org.eclipse.qvt.declarative.parser.ocl;visibility:=reexport
+ org.eclipse.qvt.declarative.parser.ocl;visibility:=reexport,
+ org.eclipse.qvt.declarative.emof.essentialocl
 Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
