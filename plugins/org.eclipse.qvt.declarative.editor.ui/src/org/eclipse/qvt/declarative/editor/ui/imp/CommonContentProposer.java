@@ -12,57 +12,43 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposer.java,v 1.1 2008/08/10 13:46:14 ewillink Exp $
+ * $Id: CommonContentProposer.java,v 1.2 2008/10/11 15:38:25 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 
-import lpg.lpgjavaruntime.IToken;
-import lpg.lpgjavaruntime.PrsStream;
 
+import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.services.IContentProposer;
-import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.jface.text.ITextViewer;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 
 public abstract class CommonContentProposer implements IContentProposer
 {
-	protected ArrayList<CSTNode> filterSymbols(HashMap<?,CSTNode> in_symbols, String prefix) {
-		ArrayList<CSTNode> symbols = new ArrayList<CSTNode>();
-		for (Iterator<CSTNode> i = in_symbols.values().iterator(); i.hasNext();) {
-			CSTNode decl = i.next();
-			String name = getVariableName(decl);
-			if (name.length() >= prefix.length()
-					&& prefix.equals(name.substring(0, prefix.length())))
-				symbols.add(decl);
-		}
-		return symbols;
+	protected CommonContentProposals createProposals(CommonParseController commonParseController, int offset) {
+		return new CommonContentProposals(commonParseController, offset);
 	}
 
-	protected String getPrefix(CommonParseController controller, IToken token, int offset) {
-		if (controller.isIdentifier(token.getKind()))
-			if ((token.getStartOffset() <= offset) && (offset <= token.getEndOffset() + 1))
-				return token.toString().substring(0, offset - token.getStartOffset());
-		return "";
-	}
-
-	protected IToken getToken(CommonParseController controller, int offset) {
-		PrsStream stream = controller.getParser();
-		int index = stream.getTokenIndexAtCharacter(offset), token_index = (index < 0 ? -(index - 1)
-				: index), previous_index = stream.getPrevious(token_index);
-		int previousIndexKind = stream.getKind(previous_index);
-		boolean isIdentifier = controller.isIdentifier(previousIndexKind);
-		boolean isKeyword = controller.isKeyword(previousIndexKind);
-		boolean atEnd = offset == stream.getEndOffset(previous_index) + 1;
-		return stream.getIToken(((isIdentifier || isKeyword) && atEnd) ? previous_index : token_index);
-	}
-	
-	protected String getVariableName(CSTNode decl) {
-//		if (decl instanceof declaration)
-//			return ((declaration) decl).getidentifier().toString();
-//		else if (decl instanceof functionHeader)
-//			return ((functionHeader) decl).getidentifier().toString();
-		return "";
+	/**
+	 * Returns an array of content proposals applicable relative to the AST of the given
+	 * parse controller at the given position.
+	 * 
+	 * (The provided ITextViewer is not used in the default implementation provided here
+	 * but but is stipulated by the IContentProposer interface for purposes such as accessing
+	 * the IDocument for which content proposals are sought.)
+	 * 
+	 * @param controller	A parse controller from which the AST of the document being edited
+	 * 						can be obtained
+	 * @param int			The offset for which content proposals are sought
+	 * @param viewer		The viewer in which the document represented by the AST in the given
+	 * 						parse controller is being displayed (may be null for some implementations)
+	 * @return				An array of completion proposals applicable relative to the AST of the given
+	 * 						parse controller at the given position
+	 */
+	public ICompletionProposal[] getContentProposals(IParseController controller, int offset, ITextViewer viewer) {
+		CommonParseController commonParseController = (CommonParseController) controller;
+		CommonContentProposals proposals = createProposals(commonParseController, offset); // a list of proposals.
+		proposals.computeProposals();
+		return proposals.sortProposals();
 	}
 }

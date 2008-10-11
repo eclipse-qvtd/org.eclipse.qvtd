@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonTextEditor.java,v 1.3 2008/09/28 12:14:59 ewillink Exp $
+ * $Id: CommonTextEditor.java,v 1.4 2008/10/11 15:38:24 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -143,7 +143,7 @@ public class CommonTextEditor extends UniversalEditor implements ITextEditorWith
 		Object node = getCSTNode((TextSelection) selection);
 		if (node instanceof CSTNode) {
 			for (Object cstNode = node; cstNode instanceof CSTNode; cstNode = ((EObject) cstNode).eContainer()) {
-				node = ((CSTNode)cstNode).getAstNode();
+				node = ((CSTNode)cstNode).getAst();
 				if (node != null)
 					break;
 			}
