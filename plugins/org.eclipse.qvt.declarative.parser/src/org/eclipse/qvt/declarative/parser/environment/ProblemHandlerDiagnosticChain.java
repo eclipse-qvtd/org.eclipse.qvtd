@@ -60,8 +60,8 @@ public class ProblemHandlerDiagnosticChain implements DiagnosticChain
 						cstNode = (CSTNode) object;
 				}
 			}
-			int startOffset = cstNode != null ? cstNode.getStartOffset() : -1;
-			int endOffset = cstNode != null ? cstNode.getEndOffset() : -1;
+			int startOffset = cstNode != null ? cstNode.getStartOffset() : 0;
+			int endOffset = cstNode != null ? cstNode.getEndOffset() : 0;
 			Severity problemSeverity = Severity.INFO;
 			if (diagnostic.getSeverity() >= Diagnostic.ERROR)
 				problemSeverity = Severity.ERROR;
