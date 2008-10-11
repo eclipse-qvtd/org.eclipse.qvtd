@@ -12,14 +12,15 @@
  * 
  * </copyright>
  *
- * $Id: OCLCreationFactory.java,v 1.3 2008/09/10 05:31:00 ewillink Exp $
+ * $Id: OCLCreationFactory.java,v 1.4 2008/10/11 15:30:50 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.imp.parser.ISourcePositionLocator;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
 import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLNodeLocator;
@@ -30,9 +31,10 @@ import org.eclipse.qvt.declarative.editor.ui.builder.CommonNature;
 import org.eclipse.qvt.declarative.editor.ui.common.AbstractCreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
+import org.eclipse.qvt.declarative.emof.EssentialOCL.util.EssentialOCLMappingMetaData;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
-import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
-import org.eclipse.qvt.declarative.parser.ocl.environment.OCLTopLevelEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
+import org.eclipse.qvt.declarative.parser.ocl.environment.OCLFileEnvironment;
 import org.eclipse.qvt.declarative.parser.ui.preferences.QVTPreferences;
 import org.eclipse.qvt.declarative.parser.unparser.OCLUnparser;
 
@@ -45,15 +47,16 @@ public class OCLCreationFactory extends AbstractCreationFactory
 
 	protected OCLCreationFactory() {}
 	
-	public OCLTopLevelEnvironment createFileEnvironment(AbstractFileHandle fileHandle, ResourceSet resourceSet) {
-		return new OCLTopLevelEnvironment(fileHandle, resourceSet);
+	public OCLFileEnvironment createFileEnvironment(AbstractFileHandle fileHandle, ResourceSet resourceSet, URI astURI) {
+		XMIResource astResource = (XMIResource) resourceSet.createResource(astURI, EssentialOCLMappingMetaData.INSTANCE.getEcoreContentTypeIdentifier());
+		return new OCLFileEnvironment(fileHandle, resourceSet, astResource);
 	}
 	
 	public CommonNature createNature() {
 		return new OCLNature();
 	}
 
-	public ISourcePositionLocator createNodeLocator(IFileEnvironment environment) {
+	public OCLNodeLocator createNodeLocator(ICSTFileEnvironment environment) {
 		return new OCLNodeLocator(environment);
 	}
 	
@@ -82,7 +85,7 @@ public class OCLCreationFactory extends AbstractCreationFactory
 	public String[] getEMOFExtensions() { return QVTPreferences.getOCLEMOFExtensions(); }
 	public String[] getEcoreExtensions() { return QVTPreferences.getOCLEcoreExtensions(); }
 	public String getEditorName() { return "OCL"; }
-	public IMappingMetaData getMappingMetaData() { return null; } //FullOCLFacade.MAPPING_META_DATA; }
+	public IMappingMetaData getMappingMetaData() { return null; } //FIXME FullOCLFacade.MAPPING_META_DATA; }
 	public String getNatureId() { return NATURE_ID; }
 	public ICommonPlugin getPlugin() { return OCLPlugin.getInstance(); }
 	public String getProblemMarkerId() { return PROBLEM_MARKER_ID; }
