@@ -10,11 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.qvtcore.environment;
 
-import org.eclipse.ocl.LookupException;
-import org.eclipse.qvt.declarative.ecore.QVTCore.Mapping;
 import org.eclipse.qvt.declarative.parser.qvt.environment.IQVTEnvironment;
 
 public interface IQVTcEnvironment extends IQVTEnvironment
 {
-	public Mapping tryLookupMapping(String name) throws LookupException;
+	public QVTcUnresolvedEnvironment getUnresolvedEnvironment();
 }
