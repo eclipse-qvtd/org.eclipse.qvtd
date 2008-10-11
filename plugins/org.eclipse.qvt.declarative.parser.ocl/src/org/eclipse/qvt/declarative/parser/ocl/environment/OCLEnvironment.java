@@ -12,33 +12,34 @@
  * 
  * </copyright>
  *
- * $Id: OCLEnvironment.java,v 1.1 2008/08/14 07:52:38 ewillink Exp $
+ * $Id: OCLEnvironment.java,v 1.2 2008/10/11 15:27:52 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl.environment;
 
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
-import org.eclipse.qvt.declarative.parser.environment.CSTEnvironment;
+import org.eclipse.ocl.expressions.Variable;
+import org.eclipse.qvt.declarative.parser.environment.CSTChildEnvironment;
 
-public class OCLEnvironment extends CSTEnvironment<OCLEnvironment, OCLEnvironment>
+public class OCLEnvironment<P extends IOCLEnvironment, AST extends Notifier, CST extends CSTNode> extends CSTChildEnvironment<OCLEnvironment<?,?,?>, P, AST, CST> implements IOCLEnvironment
 {
-	protected OCLEnvironment(EPackage.Registry reg) {
-		super(reg);
+	protected OCLEnvironment(P parent, AST ast, CST cst) {
+		super(parent, ast, cst);
 	}
 
-	protected OCLEnvironment(EPackage.Registry reg, Resource resource) {
-		super(reg, resource);
+	@Override
+	protected void addedVariable(String name, Variable<EClassifier, EParameter> variable, boolean isExplicit) {
+		// The Variable is not needed in the resource. Separate variables are created for contexts as required.
 	}
-	
-	protected OCLEnvironment(OCLEnvironment parent, CSTNode cstNode) {
-		super(parent, cstNode);
-		setFactory(parent.getFactory());
-		setASTNodeToCSTNodeMap(parent.getASTNodeToCSTNodeMap());
+
+	public OCLEnvironment<?,?,?> createNestedEnvironment(CSTNode cstNode) {
+		return new OCLEnvironment<OCLEnvironment<?,?,?>,Notifier,CSTNode>(this, null, cstNode);
 	}
 
 	@Override public EClassifier tryLookupClassifier(List<String> names) throws LookupException {
@@ -48,14 +49,14 @@ public class OCLEnvironment extends CSTEnvironment<OCLEnvironment, OCLEnvironmen
 			if (eClassifier != null)
 				return eClassifier;
 		}
-		OCLEnvironment parent = getParentEnvironment();
+		IOCLEnvironment parent = getParentEnvironment();
 		if (parent != null)
 			return parent.tryLookupClassifier(names);
 		return null;
 	}
 
 	@Override public EPackage tryLookupPackage(List<String> path) throws LookupException {
-		OCLEnvironment parent = getParentEnvironment();
+		IOCLEnvironment parent = getParentEnvironment();
 		if (parent == null)
 			return super.tryLookupPackage(path);
 		else
