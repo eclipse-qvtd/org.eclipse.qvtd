@@ -12,26 +12,27 @@
  * 
  * </copyright>
  *
- * $Id: ICreationFactory.java,v 1.4 2008/09/10 05:31:01 ewillink Exp $
+ * $Id: ICreationFactory.java,v 1.5 2008/10/11 15:30:47 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.imp.language.Language;
-import org.eclipse.imp.parser.ISourcePositionLocator;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
 import org.eclipse.qvt.declarative.editor.ui.builder.CommonNature;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonEditorDefinition;
+import org.eclipse.qvt.declarative.editor.ui.imp.CommonNodeLocator;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
-import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.unparser.AbstractUnparser;
 
 public interface ICreationFactory
@@ -44,13 +45,13 @@ public interface ICreationFactory
 	public void assignXmiIds(XMLResource resource);
 
 	/**
-	 * Create the IFileEnvironment for parsing fileHandle within resourceSet.
+	 * Create the IFileEnvironment for parsing fileHandle within resourceSet to produce ecoreURI.
 	 */
-	public IFileEnvironment createFileEnvironment(AbstractFileHandle fileHandle, ResourceSet resourceSet);
+	public ICSTFileEnvironment createFileEnvironment(AbstractFileHandle fileHandle, ResourceSet resourceSet, URI astURI);
 
 	public CommonNature createNature();
 
-	public ISourcePositionLocator createNodeLocator(IFileEnvironment environment);
+	public CommonNodeLocator createNodeLocator(ICSTFileEnvironment environment);
 
 	public CommonParseController createParseController();
 
