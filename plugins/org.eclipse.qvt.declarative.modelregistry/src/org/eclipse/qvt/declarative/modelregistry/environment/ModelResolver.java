@@ -18,6 +18,7 @@ import org.eclipse.qvt.declarative.modelregistry.model.ProjectRegistry;
 
 public interface ModelResolver
 {
+	public AbstractFileHandle getHandle();
 	/**
 	 * Return the project registry, creating and loading it if not already loaded.
 	 * 

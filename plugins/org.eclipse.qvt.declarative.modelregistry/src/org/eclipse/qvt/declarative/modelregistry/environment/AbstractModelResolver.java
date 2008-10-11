@@ -53,6 +53,10 @@ public class AbstractModelResolver implements ModelResolver
 	protected ResourceSet createResourceSet() {
 		return new ResourceSetImpl();
 	}
+	
+	public AbstractFileHandle getHandle() {
+		return handle;
+	}
 
 	/**
 	 * Return a list of packages to be registered for potential resolution against their URIs.
