@@ -101,7 +101,16 @@ public class QVTTypeResolverImpl extends AbstractTypeResolver<EPackage, EClassif
         ((EClass) owner).getEStructuralFeatures().add(property);
     }
 	
-    // Documentation copied from the inherited specification
+//    @Override
+//	protected CollectionType<EClassifier, EOperation> createCollectionType(
+//			CollectionKind kind, EClassifier elementType) {
+//		if ((kind == CollectionKind.SET_LITERAL) && "Key".equals(elementType.getName()))
+//			return super.createCollectionType(kind, elementType);
+//		else
+//			return super.createCollectionType(kind, elementType);
+//	}
+
+	// Documentation copied from the inherited specification
     @Override
 	protected EClass createShadowClass(EClassifier type) {
 		return OCLStandardLibraryImpl.createShadowClass(type);

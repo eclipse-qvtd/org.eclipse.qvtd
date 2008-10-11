@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -26,7 +27,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
@@ -45,7 +45,7 @@ import org.eclipse.ocl.utilities.UMLReflection;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
 import org.eclipse.qvt.declarative.ecore.QVTBase.FunctionParameter;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
-import org.eclipse.qvt.declarative.parser.environment.CSTEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.CSTChildEnvironment;
 import org.eclipse.qvt.declarative.parser.plugin.QVTParserPlugin;
 import org.eclipse.qvt.declarative.parser.utils.OCLUtils;
 
@@ -64,20 +64,10 @@ import org.eclipse.qvt.declarative.parser.utils.OCLUtils;
  * @param <P> The derived E of the parent environment
  */
 @SuppressWarnings("restriction")		// FIXME awaiting Bugzilla 182994
-public abstract class QVTEnvironment<E extends IQVTEnvironment, P extends E> extends CSTEnvironment<E,P> implements IQVTEnvironment
+public abstract class QVTEnvironment<E extends IQVTNodeEnvironment, P extends IQVTNodeEnvironment, AST extends Notifier, CST extends CSTNode> extends CSTChildEnvironment<E,P,AST,CST> implements IQVTEnvironment
 {
-	protected QVTFormattingHelper formatter;	// FIXME remove this shadow one bug 245760 addressed.
-
-	protected QVTEnvironment(EPackage.Registry reg) {
-		super(reg);
-	}
-
-	protected QVTEnvironment(EPackage.Registry reg, Resource resource) {
-		super(reg, resource);
-	}
-	
-	protected QVTEnvironment(P parent, CSTNode cstNode) {
-		super(parent, cstNode);
+	protected QVTEnvironment(P parent, AST astNode, CST cstNode) {
+		super(parent, astNode, cstNode);
 	}
 	
 	@Override protected void addedVariable(String name, org.eclipse.ocl.expressions.Variable<EClassifier, EParameter> variable, boolean isExplicit) {
@@ -85,92 +75,6 @@ public abstract class QVTEnvironment<E extends IQVTEnvironment, P extends E> ext
 			return;
 		if (!(variable instanceof Variable))
 			QVTParserPlugin.logError("non-derived Variable in " + getClass().getName() + ".addedVariable", null);
-	}
-
-	public boolean checkFeatureCompatibility(CSTNode cstNode, EClassifier featureType, OCLExpression oclExpression) {
-		if (featureType == null)
-			return false;
-		if (OCLUtils.isUnresolved(featureType))
-			return false;
-		EClassifier expressionType = getUMLReflection().getOCLType(oclExpression.getType());
-		if (expressionType == null)
-			return false;
-		if (OCLUtils.isUnresolved(expressionType))
-			return false;
-		if (featureType == expressionType)
-			return true;
-		else if (featureType instanceof EEnum) {
-			String enumLiteralText = oclExpression.toString();
-			if (enumLiteralText.length() >= 2)
-				enumLiteralText = enumLiteralText.substring(1, enumLiteralText.length()-1);
-			EEnumLiteral enumLiteral = ((EEnum)featureType).getEEnumLiteral(enumLiteralText);
-			if (enumLiteral != null)
-				return true;
-			String message = "Incompatible enum '" + formatType(featureType) + "' for match with " +  enumLiteralText;
-			analyzerError(message, "FeatureCompatibility", cstNode);
-		}
-		else if (featureType instanceof CollectionType) {
-			CollectionKind featureKind = ((CollectionType) featureType).getKind();
-			EClassifier featureElementType = ((CollectionType) featureType).getElementType();
-			CollectionKind expressionKind = null;
-			EClassifier expressionElementType = expressionType;
-			if (expressionType instanceof CollectionType) {
-				expressionKind = ((CollectionType) expressionType).getKind();
-				expressionElementType = ((CollectionType) expressionType).getElementType();
-			}
-			if (expressionElementType == null)
-				return false;
-			if (OCLUtils.isUnresolved(expressionElementType))
-				return false;
-			if (!(expressionElementType instanceof EClass)) {
-				String message = "Incompatible class '" + formatType(featureElementType) + "' for match with '" +  formatType(expressionElementType) + "'";
-				analyzerError(message, "FeatureCompatibility", cstNode);
-			}
-			else if (!((EClass) featureElementType).isSuperTypeOf((EClass) expressionElementType)) {
-				String message = "Incompatible class '" + formatType(featureElementType) + "' for match with '" +  formatType(expressionElementType) + "'";
-				analyzerError(message, "FeatureCompatibility", cstNode);
-			}
-//			else if ((expressionKind != null) && QVTrUtils.isOrdered(featureKind) && !QVTrUtils.isOrdered(expressionKind))
-//				analyzerWarning(cstNode, null, "Ordered collection '" + formatType(featureType) + "' for match with '" +  formatType(expressionType) + "'");
-			else if ((expressionKind != null) && OCLUtils.isUnique(featureKind) && !OCLUtils.isUnique(expressionKind)) {
-				String message = "Unique collection '" + formatType(featureType) + "' for match with '" +  formatType(expressionType) + "'";
-				analyzerWarning(message, "FeatureCompatibility", cstNode);
-			}
-			else
-				return true;
-		}
-		else if (featureType instanceof EDataType) {
-			String message = "Incompatible data type '" + formatType(featureType) + "' for match with '" +  formatType(expressionType) + "'";
-			analyzerError(message, "FeatureCompatibility", cstNode);
-		}
-		else if (featureType instanceof TupleType) {
-			String message = "Incompatible tuple type '" + formatType(featureType) + "' for match with '" +  formatType(expressionType) + "'";
-			analyzerError(message, "FeatureCompatibility", cstNode);
-		}
-		else if (featureType instanceof EClass) {
-			if (!(expressionType instanceof EClass)) {
-				String message = "Incompatible data type '" + formatType(featureType) + "' for match with '" +  formatType(expressionType) + "'";
-				analyzerError(message, "FeatureCompatibility", cstNode);
-			}
-			else if (!((EClass) featureType).isSuperTypeOf((EClass) expressionType)) {
-				String message = "Incompatible class '" + formatType(featureType) + "' for match with '" +  formatType(expressionType) + "'";
-				analyzerError(message, "FeatureCompatibility", cstNode);
-			}
-			else
-				return true;
-		}
-		else {
-			String message = "Unsupported feature type '" + formatType(featureType) + "'";
-			analyzerError(message, "FeatureCompatibility", cstNode);
-		}
-		return false;
-	}
-
-	protected abstract QVTFormattingHelper createFormatter();
-
-	@Override
-	protected QVTTypeResolverImpl createTypeResolver(Resource resource) {
-		return new QVTTypeResolverImpl(this, resource);
 	}
 
 	public List<Function> findMatchingQueries(Transformation transformation, String queryName, List<OCLExpression> args) {
@@ -228,24 +132,8 @@ public abstract class QVTEnvironment<E extends IQVTEnvironment, P extends E> ext
 		return match;
 	}
 
-	@Override
-	public QVTFormattingHelper getFormatter() {
-		if (formatter == null) {
-			P parent = getParentEnvironment();
-			if (parent != null)
-				formatter = parent.getFormatter();
-			if (formatter == null)
-				formatter = createFormatter();
-		}
-		return formatter;
-	}
-
 	public String getModelName(EObject object) {
-		P parent = getParentEnvironment();
-		if (parent != null)
-			return parent.getModelName(object);
-		else
-			return null;
+		return getParentEnvironment().getModelName(object);
 	}	
 	
 	/**
@@ -318,9 +206,9 @@ public abstract class QVTEnvironment<E extends IQVTEnvironment, P extends E> ext
 		return getParentEnvironment().getTransformation();
 	}
 
-	@Override public QVTTypeResolverImpl getTypeResolver() {
-		return (QVTTypeResolverImpl) super.getTypeResolver();
-	}
+//	@Override public QVTTypeResolverImpl getTypeResolver() {
+//		return (QVTTypeResolverImpl) super.getTypeResolver();
+//	}
 
 	@Override
 	public UMLReflection<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint> getUMLReflection() {
@@ -330,12 +218,12 @@ public abstract class QVTEnvironment<E extends IQVTEnvironment, P extends E> ext
 	public boolean isAssignableTo(EClassifier featureType, OCLExpression oclExpression) {
 		if (featureType == null)
 			return false;
-		if (OCLUtils.isUnresolved(featureType))
+		if (!isResolved(featureType))
 			return false;
 		EClassifier expressionType = getUMLReflection().getOCLType(oclExpression.getType());
 		if (expressionType == null)
 			return false;
-		if (OCLUtils.isUnresolved(expressionType))
+		if (!isResolved(expressionType))
 			return false;
 		if (featureType == expressionType)
 			return true;
@@ -358,7 +246,7 @@ public abstract class QVTEnvironment<E extends IQVTEnvironment, P extends E> ext
 			}
 			if (expressionElementType == null)
 				return false;
-			if (OCLUtils.isUnresolved(expressionElementType))
+			if (!isResolved(expressionElementType))
 				return false;
 			if (!(expressionElementType instanceof EClass))
 				;
@@ -391,29 +279,17 @@ public abstract class QVTEnvironment<E extends IQVTEnvironment, P extends E> ext
 	}
 
 	public Transformation lookupImportedTransformation(String name) {
-		P parent = getParentEnvironment();
-		if (parent != null)
-			return parent.lookupImportedTransformation(name);
-		else
-			return null;
+		return getParentEnvironment().lookupImportedTransformation(name);
 	}
 
 	@Override
 	public Variable lookupImplicitSourceForOperation(String name, List<? extends TypedElement<EClassifier>> params) {
-		P parent = getParentEnvironment();
-		if (parent != null)
-			return parent.lookupImplicitSourceForOperation(name, params);
-		else
-			return lookupOCLImplicitSourceForOperation(name, params);
+		return getParentEnvironment().lookupImplicitSourceForOperation(name, params);
 	}
 
 	@Override
 	public Variable lookupImplicitSourceForProperty(String name) {
-		P parent = getParentEnvironment();
-		if (parent != null)
-			return parent.lookupImplicitSourceForProperty(name);
-		else
-			return lookupOCLImplicitSourceForProperty(name);
+		return getParentEnvironment().lookupImplicitSourceForProperty(name);
 	}
 	
 	@Override protected void removedVariable(String name, org.eclipse.ocl.expressions.Variable<EClassifier, EParameter> variable, boolean isExplicit) {
@@ -424,13 +300,7 @@ public abstract class QVTEnvironment<E extends IQVTEnvironment, P extends E> ext
 	 * The inherited behaviour must therefore be re-implemented by derived classes.
 	 */
 	@Override public EClassifier tryLookupClassifier(List<String> names) throws LookupException {
-//		EClassifier result = super.lookupClassifier(names);
-//		if (result != null)
-//			return result;
-		P parent = getParentEnvironment();
-		if (parent != null)
-			return parent.tryLookupClassifier(names);
-		return null;
+		return getParentEnvironment().tryLookupClassifier(names);
 	}
 	
 	public EClassifier tryLookupClassifier(Collection<EPackage> contextPackages, List<String> names) throws LookupException {
@@ -447,26 +317,15 @@ public abstract class QVTEnvironment<E extends IQVTEnvironment, P extends E> ext
 	}
 	
 	public Transformation tryLookupTransformation(List<String> pathName) throws LookupException {
-		P parent = getParentEnvironment();
-		if (parent != null)
-			return parent.tryLookupTransformation(pathName);
-		else
-			return null;
+		return getParentEnvironment().tryLookupTransformation(pathName);
 	}
 
 	public EReference tryLookupOppositeProperty(EClass eClass, String propertyName) throws LookupException {
-		P parent = getParentEnvironment();
-		if (parent != null)
-			return parent.tryLookupOppositeProperty(eClass, propertyName);
-		return null;
+		return getParentEnvironment().tryLookupOppositeProperty(eClass, propertyName);
 	}
 
 	public Variable tryLookupVariable(String name) throws LookupException {
-		P parent = getParentEnvironment();
-		if (parent != null)
-			return parent.tryLookupVariable(name);
-		else
-			return null;
+		return getParentEnvironment().tryLookupVariable(name);
 	}
 
 	@Override

@@ -10,97 +10,53 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.environment;
 
-import lpg.lpgjavaruntime.Monitor;
+import java.util.Map;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
-import org.eclipse.ocl.ecore.InvalidLiteralExp;
 import org.eclipse.ocl.ecore.SendSignalAction;
+import org.eclipse.qvt.declarative.modelregistry.environment.AbstractModelResolver;
 
+/**
+ * ICSTEnvironment provides the enhanced interface for the CSTEnvironment hierarchy
+ * comprising a ICSTFileEnvironment supervising ICSTNodeEnvironments, of which
+ * there is an ICSTRootEnvironment for the AST resource and top level CST node.
+ * Further ICSTChildEnvironments define nested AST, CST paired scopes.
+ */
 public interface ICSTEnvironment extends Environment.Internal<
 	EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter,
 	EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject>,
 	Environment.Lookup<EPackage, EClassifier, EOperation, EStructuralFeature>
-{
+{	
 	/**
-	 * Create and return an InvalidLiteralExp mapped to cstNode.
-	 * 
-	 * @param cstNode that provoked the invalid literal.
-	 * @return the InvalidLiteralExp
+	 * Return map of AST node to defining CST node. Note that these mappings are not exactly
+	 * equivalent to the set of cstNode to cstNode.getAst() mappings since AST and CST do
+	 * not always form a 1:1 relation.
+	 * <p>
+	 * For instance construct identifiers are usually distinct CST nodes realised by AST properties,
+	 * so the AST node has a symmetric mapping to the CST node defining the construct. The
+	 * identifier has a unidirectional mapping to the AST. Multiple AST nodes are very occasionally
+	 * associated with a single CST node.
 	 */
-	public InvalidLiteralExp createInvalidLiteralExp(CSTNode cstNode);
-
-	/**
-     * Generates a new, unique name for an implicit iterator variable.
-	 */
-	public String generateImplicitName();   // FIXME Workaround for bug 246469
-	
-	public CSTFormattingHelper getFormatter();
-	public Monitor getMonitor();
-	public ICSTEnvironment getRootEnvironment();
-    
-	/**
-	 * Get an error return value whose usage indicates that an error message diagnosing
-	 * an unsuitable attribute has been generated.
-	 */
-	public EAttribute getUnresolvedAttribute();
-
-	/**
-	 * Get an error return value whose usage indicates that an error message diagnosing
-	 * an unsuitable class has been generated.
-	 */
-	public EClass getUnresolvedClass();
-
-	/**
-	 * Get an error return value whose usage indicates that an error message diagnosing
-	 * an unsuitable classifier has been generated. The return value may be silently changed to
-	 * an unresolved data type or class once more context is available.
-	 */
-	public EClassifier getUnresolvedClassifier();
-
-	/**
-	 * Get an error return value whose usage indicates that an error message diagnosing
-	 * an unsuitable data type has been generated.
-	 */
-	public EDataType getUnresolvedDataType();
-
-	/**
-	 * Get an error return value whose usage indicates that an error message diagnosing
-	 * an unsuitable operation has been generated.
-	 */
-	public EOperation getUnresolvedOperation();
-
-	/**
-	 * Get an error return value whose usage indicates that an error message diagnosing
-	 * an unsuitable property has been generated. The return value may be silently changed to
-	 * an unresolved attribute or reference once more context is available.
-	 */
-	public EStructuralFeature getUnresolvedProperty();
-
-	/**
-	 * Get an error return value whose usage indicates that an error message diagnosing
-	 * an unsuitable reference has been generated.
-	 */
-	public EReference getUnresolvedReference();
+	public Map<Object, CSTNode> getASTNodeToCSTNodeMap();
 	
 	/**
-	 * Define the current CSTNode during analysis, returning the previous one.
-	 * The CSTNode is normally correctly set during construction, but may be
-	 * temporarily changed so that a narrower context is available to an error that
-	 * uses the current CST node as its context.
+	 * Return the file environment at the root of the environment hierarchy.
 	 */
-	public CSTNode setCSTNode(CSTNode cstNode);
+	public ICSTFileEnvironment getFileEnvironment();
+
+	/**
+	 * Return the model resolver for model references. 
+	 */
+	public AbstractModelResolver getResolver();
 }

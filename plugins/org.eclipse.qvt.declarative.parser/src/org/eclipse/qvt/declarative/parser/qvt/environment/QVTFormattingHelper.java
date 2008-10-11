@@ -20,9 +20,9 @@ import org.eclipse.qvt.declarative.parser.environment.CSTFormattingHelper;
 
 public class QVTFormattingHelper extends CSTFormattingHelper
 {
-	protected final IQVTEnvironment environment;
+	protected final IQVTNodeEnvironment environment;
 	
-	public QVTFormattingHelper(IQVTEnvironment environment) {
+	public QVTFormattingHelper(IQVTNodeEnvironment environment) {
 		this.environment = environment;
 	}
 

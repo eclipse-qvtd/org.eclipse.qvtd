@@ -10,48 +10,50 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.qvt.environment;
 
-import java.util.Collections;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Map.Entry;
 
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
-import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.utilities.TypedElement;
-import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
-import org.eclipse.qvt.declarative.parser.environment.CSTRootEnvironment;
+import org.eclipse.qvt.declarative.ecore.utils.XMIUtils;
+import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
+import org.eclipse.qvt.declarative.parser.environment.CSTFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 
-public abstract class QVTTopLevelEnvironment<E extends IQVTNodeEnvironment, CST extends CSTNode> extends CSTRootEnvironment<E, CST> implements IQVTNodeEnvironment
+public abstract class QVTFileEnvironment<R extends ICSTRootEnvironment, E extends IQVTNodeEnvironment, CST extends CSTNode> extends CSTFileEnvironment<R, E, CST> implements IQVTFileEnvironment
 {
-	private final EPackage.Registry qvtRegistry;
-	protected QVTFormattingHelper formatter;	// FIXME remove this shadow one bug 245760 addressed.
-
-	protected QVTTopLevelEnvironment(IQVTFileEnvironment parent, XMIResource astResource, CST cstNode) {
-		super(parent, astResource, cstNode);
-		qvtRegistry = parent.getRegistry();
+//	private UnresolvedEnvironment unresolvedEnvironment = null;
+	
+	protected QVTFileEnvironment(AbstractFileHandle file, ResourceSet resourceSet, XMIResource astResource) {
+		super(file, resourceSet, astResource);
 	}
 
-	protected void addPackage(EPackage ePackage) {
-		ast.getContents().add(ePackage);
-		qvtRegistry.put(ePackage.getName(), ePackage);
-		getFileEnvironment().initializePackageNs(ePackage);
-	}
-
-	protected void addSubPackage(EPackage ePackage, EPackage childPackage) {
-		ePackage.getESubpackages().add(childPackage);
-		getFileEnvironment().initializePackageNs(childPackage);
-	}
+/*	public Resource createASTResource(Collection<? extends EObject> asts, URI uri) {
+		XMIResource resource = (XMIResource) getResourceSet().createResource(uri, getContentTypeIdentifier());
+		if (resource != null) {
+			if (asts != null)
+				for (EObject ast : asts)
+					if (ast != null)
+						resource.getContents().add(ast);
+			XMIUtils.assignIds(resource, "ast");
+		}
+		internalSetAST(resource);
+		return resource;
+	} */
 
 	@Override
-	protected QVTFormattingHelper createFormatter() {
-		return new QVTFormattingHelper(this);
+	protected QVTTypeResolverImpl createTypeResolver(Resource resource) {
+		return new QVTTypeResolverImpl(this, resource);
 	}
 	
 /*	public List<EPackage> getEPackages() {
@@ -67,32 +69,20 @@ public abstract class QVTTopLevelEnvironment<E extends IQVTNodeEnvironment, CST 
 		return ePackages;
 	} */
 
-	@Override
-	public QVTFormattingHelper getFormatter() {
-		if (formatter == null)
-			formatter = createFormatter();
-		return formatter;
-	}
-
-	public String getModelName(EObject object) {
-		return null;
-	}	
-
-	public Transformation getTransformation() {
-		return null;			// Never happens
+	public Collection<Resource> getResourcesVisibleAt(EObject astNode) {
+		List<Resource> resources = new ArrayList<Resource>();
+		if (ast != null)
+			resources.add(ast);
+		resources.addAll(getResourceSet().getResources());
+		return resources;
 	}
 
 	@Override
-	public Variable lookupImplicitSourceForOperation(String name, List<? extends TypedElement<EClassifier>> params) {
-		return (Variable) super.lookupImplicitSourceForOperation(name, params);
+	public QVTTypeResolverImpl getTypeResolver() {
+		return (QVTTypeResolverImpl) super.getTypeResolver();
 	}
-
-	@Override
-	public Variable lookupImplicitSourceForProperty(String name) {
-		return (Variable) super.lookupImplicitSourceForProperty(name);
-	}
-
-	public EClass lookupImportedClass(String name) {
+	
+/*	public EClass lookupImportedClass(String name) {
 		for (Entry<String, Object> entry : qvtRegistry.entrySet()) {
 			EPackage ePackage = (EPackage) entry.getValue();
 			EClassifier eClassifier = ePackage.getEClassifier(name);
@@ -112,7 +102,7 @@ public abstract class QVTTopLevelEnvironment<E extends IQVTNodeEnvironment, CST 
 		return null;
 	}
 
-	public Transformation lookupImportedTransformation(String name) {
+	@Override public Transformation lookupImportedTransformation(String name) {
 		for (Entry<String, Object> entry : qvtRegistry.entrySet()) {
 			EPackage ePackage = (EPackage) entry.getValue();
 			EClassifier eClassifier = ePackage.getEClassifier(name);
@@ -120,7 +110,7 @@ public abstract class QVTTopLevelEnvironment<E extends IQVTNodeEnvironment, CST 
 				return (Transformation) eClassifier;
 		}
 		return null;
-	}
+	} */
 
 /*	public void parseToAST(Reader reader, IProgressMonitor monitor) throws IOException, CoreException {
 		initializeMonitor(monitor);
@@ -154,6 +144,22 @@ public abstract class QVTTopLevelEnvironment<E extends IQVTNodeEnvironment, CST 
 		return true;
 	} */
 
+	@Override
+	protected void postParse(R rootEnvironment) {
+		EPackage orphanPackage = getTypeResolver().getOrphanPackage();
+		EList<EObject> astContents = ast.getContents();
+		if (orphanPackage != null) {
+			if (!astContents.isEmpty() && (astContents.get(0) instanceof EPackage)) {
+				((EPackage)astContents.get(0)).getEClassifiers().addAll(orphanPackage.getEClassifiers());
+			}
+			else {
+				initializePackageNs(orphanPackage);
+				astContents.add(orphanPackage);
+			}
+		}
+		super.postParse(rootEnvironment);
+	}
+
 	protected String resolveSynonym(EClassifier owner, String name, List<? extends TypedElement<EClassifier>> args) {
 		if ("+".equals(name) && (args.size() == 1)) {
 			EClassifier oclString = getOCLStandardLibrary().getString();
@@ -165,36 +171,28 @@ public abstract class QVTTopLevelEnvironment<E extends IQVTNodeEnvironment, CST 
 		return name;
 	}
 
-	/**
-	 * QVT classifier lookups must occur with respect to multiple context packages.
-	 * The inherited behaviour must therefore be re-implemented by derived classes.
-	 */
-	@Override
-	public EClassifier tryLookupClassifier(List<String> names) throws LookupException {
-		return null;
+	public void saveCST(CSTNode cstNode, URI uri) throws IOException {
+		Resource resource = getResourceSet().createResource(uri);
+		XMIUtils.assignLinearIds(resource, "cst");
+		resource.save(null);
 	}
 
-	@Override
-	public EOperation tryLookupOperation(EClassifier owner, String name,
+//	public void setCSTNode(CST cstNode) {
+//		internalSetCST(cstNode);	
+//	}
+
+/*	@Override public EOperation tryLookupOperation(EClassifier owner, String name,
 			List<? extends TypedElement<EClassifier>> args) throws LookupException {
 		name = resolveSynonym(owner, name, args);
 		return super.tryLookupOperation(owner, name, args);
 	}
 
-	public EReference tryLookupOppositeProperty(EClass eClass, String propertyName) throws LookupException {
-		return null;
-	}
-
-	public Transformation tryLookupTransformation(List<String> pathName) throws LookupException {
+	@Override public Transformation tryLookupTransformation(List<String> pathName) throws LookupException {
 		EPackage ePackage = tryLookupPackage(pathName);
 		if (ePackage == null)
 			return null;
 		if (ePackage instanceof Transformation)
 			return (Transformation) ePackage;
 		throw new LookupException("Not a transformation", Collections.singletonList(ePackage));
-	}
-
-	public Variable tryLookupVariable(String name) throws LookupException {
-		return null;
-	}
+	} */
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007,2008 E.D.Willink and others.
+ * Copyright (c) 2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,10 +8,22 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvt.declarative.parser.qvt.environment;
+package org.eclipse.qvt.declarative.parser.environment;
 
-import org.eclipse.qvt.declarative.parser.environment.ICSTEnvironment;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 
-public interface IQVTEnvironment extends ICSTEnvironment
-{	
+public interface ICSTRootEnvironment extends ICSTNodeEnvironment
+{
+	/**
+	 * Diagnose and AST nodes not mapped to CST nodes and vice-versa.
+	 * <br>
+	 * This is a debug facility, so output to to System.out.
+	 */
+	public void checkMappings();
+
+	public XMIResource getASTNode();
+	
+	public void postParse();
+
+	public void validate();
 }
