@@ -26,7 +26,7 @@ import org.eclipse.qvt.declarative.editor.ui.paged.PagedEditor;
 import org.eclipse.qvt.declarative.editor.ui.pages.EditorPageManager;
 import org.eclipse.qvt.declarative.editor.ui.text.LazyTextPageEditor;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
-import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.utils.ProblemCounter;
 
 /**
@@ -42,7 +42,7 @@ public abstract class XMLPageManager extends EditorPageManager
 	public ProblemCounter cannotDeactivate(Map<XMLResource,XMLResource> updates, IProgressMonitor monitor) {
 		final ResourceSet resourceSet = getResourceSet();
 		AbstractFileHandle fileHandle = getFileHandle();
-		IFileEnvironment environment = getCreationFactory().createFileEnvironment(fileHandle, resourceSet);
+		ICSTFileEnvironment environment = getCreationFactory().createFileEnvironment(fileHandle, resourceSet, resource.getURI());
 		ProblemCounter reporter = new ProblemCounter();
 		environment.setProblemHandler(reporter);
 		InputStream inputStream = new ByteArrayInputStream(getCurrentContents().getBytes());

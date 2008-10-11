@@ -13,7 +13,6 @@ package org.eclipse.qvt.declarative.editor.ui.text;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringReader;
-import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -22,11 +21,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.ocl.lpg.ProblemHandler.Phase;
 import org.eclipse.ocl.lpg.ProblemHandler.Severity;
@@ -38,7 +33,8 @@ import org.eclipse.qvt.declarative.editor.ui.pages.EditorPageManager;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseFileHandle;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseProjectHandle;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
-import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.unparser.AbstractUnparser;
 import org.eclipse.qvt.declarative.parser.utils.ProblemCounter;
 import org.eclipse.ui.ide.IDE;
@@ -57,18 +53,18 @@ public class TextPageManager extends EditorPageManager
 
 	public ProblemCounter cannotDeactivate(Map<XMLResource,XMLResource> updates, IProgressMonitor monitor) {
 		AbstractFileHandle fileHandle = getFileHandle();
-		IFileEnvironment environment = getCreationFactory().createFileEnvironment(fileHandle, getResourceSet());
+		ICSTFileEnvironment environment = getCreationFactory().createFileEnvironment(fileHandle, getResourceSet(), resource.getURI());
 		ProblemCounter reporter = new ProblemCounter();
 		environment.setProblemHandler(reporter);
 		StringReader reader = new StringReader(getCurrentContents());
 		try {
-			Collection<? extends EObject> newRootObjects = environment.parseToAST(reader, null);
+			/*Collection<? extends EObject> newRootObjects =*/ environment.parse(reader, environment.getFile(), null);
 //			environment.validate(newRootObjects);
-			XMLResource newResource = new XMLResourceImpl(resource.getURI());
-			newResource.getContents().addAll(newRootObjects);
-			environment.validate(newResource);
+//			XMLResource newResource = new XMLResourceImpl(resource.getURI());
+//			newResource.getContents().addAll(newRootObjects);
+//			environment.validate(newResource);
 			// FIXME re-use xmi:id's by CST matching
-			updates.put(resource, newResource);
+			updates.put(resource, environment.getASTResource());
 			reporter.flush(null);
 		} catch (Exception e) {
 			QVTEditorPlugin.logError("Internal error while validating", e);
@@ -124,21 +120,18 @@ public class TextPageManager extends EditorPageManager
 
 	protected void refreshMarkers(IFile file) {
 		// Resolve references wrt to initial editor file name
+		URI uri = URI.createFileURI(file.toString());
 		EclipseProjectHandle projectHandle = new EclipseProjectHandle(pagedEditor.getProject());
 		EclipseFileHandle fileHandle = projectHandle.getFileHandle(pagedEditor.getEditorInputFile()); // FIXME
-		IFileEnvironment environment = getCreationFactory().createFileEnvironment(fileHandle, getResourceSet());
+		ICSTFileEnvironment environment = getCreationFactory().createFileEnvironment(fileHandle, getResourceSet(), uri);
 		// Report errors wrt to current editor file name
 		ProblemHandler reporter = getCreationFactory().createProblemHandler(file);
 		environment.setProblemHandler(reporter);
 		try {
 			StringReader reader = new StringReader(getCurrentContents());
-			Collection<? extends EObject> astNodes = environment.parseToAST(reader, null);
-			URI uri = URI.createFileURI(file.toString());
-			if (astNodes != null) {
-				Resource resource = new ResourceImpl(uri);
-				resource.getContents().addAll(astNodes);
-				environment.validate(resource);
-			}
+			ICSTRootEnvironment rootEnvironment = environment.parse(reader, environment.getFile(), null);
+			if (rootEnvironment != null)
+				rootEnvironment.validate();
 		} catch (Exception e) {
 			reporter.utilityProblem(ProblemHandler.Severity.ERROR, "Failed to refreshMarkers: " + e, null, -1, -1);
 			QVTEditorPlugin.logError("Failed to refreshMarkers on " + file.getFullPath().toString(), e);
