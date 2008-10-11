@@ -12,14 +12,15 @@
  * 
  * </copyright>
  *
- * $Id: QVTcCreationFactory.java,v 1.6 2008/09/28 12:17:10 ewillink Exp $
+ * $Id: QVTcCreationFactory.java,v 1.7 2008/10/11 15:30:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.imp.parser.ISourcePositionLocator;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
 import org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcNodeLocator;
@@ -32,8 +33,8 @@ import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.emof.QVTCore.facade.QVTCoreFacade;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
-import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
-import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcTopLevelEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
+import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcFileEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.unparser.QVTcUnparser;
 import org.eclipse.qvt.declarative.parser.ui.preferences.QVTPreferences;
 
@@ -52,15 +53,16 @@ public class QVTcCreationFactory extends AbstractCreationFactory
 		return new QVTcMarkerProblemHandler(file);
 	}
 	
-	public QVTcTopLevelEnvironment createFileEnvironment(AbstractFileHandle fileHandle, ResourceSet resourceSet) {
-		return new QVTcTopLevelEnvironment(fileHandle, resourceSet);
+	public QVTcFileEnvironment createFileEnvironment(AbstractFileHandle fileHandle, ResourceSet resourceSet, URI astURI) {
+		XMIResource astResource = (XMIResource) resourceSet.createResource(astURI, getMappingMetaData().getEcoreContentTypeIdentifier());
+		return new QVTcFileEnvironment(fileHandle, resourceSet, astResource);
 	}
 	
 	public CommonNature createNature() {
 		return new QVTcNature();
 	}
 
-	public ISourcePositionLocator createNodeLocator(IFileEnvironment environment) {
+	public QVTcNodeLocator createNodeLocator(ICSTFileEnvironment environment) {
 		return new QVTcNodeLocator(environment);
 	}
 	
