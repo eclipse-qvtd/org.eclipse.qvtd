@@ -1141,22 +1141,22 @@
                 </source>
                 <body xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast407">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.DomainPattern"/>
-                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast408" name="temp2" referredVariable="ast409">
+                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast408" name="temp1" referredVariable="ast409">
                     <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.RelationDomain"/>
                   </source>
                   <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTRelation.RelationDomain.pattern"/>
                 </body>
-                <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast409" name="temp2">
+                <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast409" name="temp1">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.RelationDomain"/>
                 </iterator>
               </source>
               <body xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast410" eType="ast181">
-                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast411" name="temp3" referredVariable="ast412">
+                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast411" name="temp1" referredVariable="ast412">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.DomainPattern"/>
                 </source>
                 <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTBase.Pattern.bindsTo"/>
               </body>
-              <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast412" name="temp3">
+              <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast412" name="temp1">
                 <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.DomainPattern"/>
               </iterator>
             </source>
@@ -1852,22 +1852,22 @@
                 </source>
                 <body xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast691">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.DomainPattern"/>
-                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast692" name="temp4" referredVariable="ast693">
+                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast692" name="temp1" referredVariable="ast693">
                     <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.RelationDomain"/>
                   </source>
                   <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTRelation.RelationDomain.pattern"/>
                 </body>
-                <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast693" name="temp4">
+                <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast693" name="temp1">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.RelationDomain"/>
                 </iterator>
               </source>
               <body xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast694" eType="ast181">
-                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast695" name="temp5" referredVariable="ast696">
+                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast695" name="temp1" referredVariable="ast696">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.DomainPattern"/>
                 </source>
                 <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTBase.Pattern.bindsTo"/>
               </body>
-              <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast696" name="temp5">
+              <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast696" name="temp1">
                 <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.DomainPattern"/>
               </iterator>
             </source>
@@ -2588,22 +2588,22 @@
                 </source>
                 <body xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast984">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.DomainPattern"/>
-                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast985" name="temp6" referredVariable="ast986">
+                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast985" name="temp1" referredVariable="ast986">
                     <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.RelationDomain"/>
                   </source>
                   <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTRelation.RelationDomain.pattern"/>
                 </body>
-                <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast986" name="temp6">
+                <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast986" name="temp1">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.RelationDomain"/>
                 </iterator>
               </source>
               <body xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast987" eType="ast181">
-                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast988" name="temp7" referredVariable="ast989">
+                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast988" name="temp1" referredVariable="ast989">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.DomainPattern"/>
                 </source>
                 <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTBase.Pattern.bindsTo"/>
               </body>
-              <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast989" name="temp7">
+              <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast989" name="temp1">
                 <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.DomainPattern"/>
               </iterator>
             </source>
@@ -3214,22 +3214,22 @@
                 </source>
                 <body xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast1221">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.DomainPattern"/>
-                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast1222" name="temp8" referredVariable="ast1223">
+                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast1222" name="temp1" referredVariable="ast1223">
                     <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.RelationDomain"/>
                   </source>
                   <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTRelation.RelationDomain.pattern"/>
                 </body>
-                <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast1223" name="temp8">
+                <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast1223" name="temp1">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.RelationDomain"/>
                 </iterator>
               </source>
               <body xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast1224" eType="ast181">
-                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast1225" name="temp9" referredVariable="ast1226">
+                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast1225" name="temp1" referredVariable="ast1226">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.DomainPattern"/>
                 </source>
                 <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTBase.Pattern.bindsTo"/>
               </body>
-              <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast1226" name="temp9">
+              <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast1226" name="temp1">
                 <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.DomainPattern"/>
               </iterator>
             </source>
@@ -4999,22 +4999,22 @@
                 </source>
                 <body xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast1929">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.DomainPattern"/>
-                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast1930" name="temp10" referredVariable="ast1931">
+                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast1930" name="temp1" referredVariable="ast1931">
                     <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.RelationDomain"/>
                   </source>
                   <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTRelation.RelationDomain.pattern"/>
                 </body>
-                <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast1931" name="temp10">
+                <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast1931" name="temp1">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.RelationDomain"/>
                 </iterator>
               </source>
               <body xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast1932" eType="ast181">
-                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast1933" name="temp11" referredVariable="ast1934">
+                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast1933" name="temp1" referredVariable="ast1934">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.DomainPattern"/>
                 </source>
                 <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTBase.Pattern.bindsTo"/>
               </body>
-              <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast1934" name="temp11">
+              <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast1934" name="temp1">
                 <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.DomainPattern"/>
               </iterator>
             </source>
@@ -7128,12 +7128,12 @@
                   <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTRelation.Key.identifies"/>
                 </source>
                 <body xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast2728" eType="ast213">
-                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast2729" name="temp12" referredVariable="ast2730">
+                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast2729" name="temp1" referredVariable="ast2730">
                     <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Key"/>
                   </source>
                   <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTRelation.Key.part"/>
                 </body>
-                <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast2730" name="temp12">
+                <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast2730" name="temp1">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Key"/>
                 </iterator>
               </source>
@@ -7349,12 +7349,12 @@
                   <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTRelation.Key.identifies"/>
                 </source>
                 <body xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast2807" eType="ast213">
-                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast2808" name="temp13" referredVariable="ast2809">
+                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast2808" name="temp1" referredVariable="ast2809">
                     <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Key"/>
                   </source>
                   <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTRelation.Key.part"/>
                 </body>
-                <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast2809" name="temp13">
+                <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast2809" name="temp1">
                   <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Key"/>
                 </iterator>
               </source>
@@ -8419,12 +8419,12 @@
                       <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTRelation.Key.identifies"/>
                     </source>
                     <body xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast3172" eType="ast213">
-                      <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast3173" name="temp14" referredVariable="ast3174">
+                      <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast3173" name="temp1" referredVariable="ast3174">
                         <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Key"/>
                       </source>
                       <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTRelation.Key.part"/>
                     </body>
-                    <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast3174" name="temp14">
+                    <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast3174" name="temp1">
                       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Key"/>
                     </iterator>
                   </source>
@@ -9229,12 +9229,12 @@
                       <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTRelation.Key.identifies"/>
                     </source>
                     <body xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast3439" eType="ast213">
-                      <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast3440" name="temp15" referredVariable="ast3441">
+                      <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast3440" name="temp1" referredVariable="ast3441">
                         <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Key"/>
                       </source>
                       <referredProperty xsi:type="ecore:EReference" href="QVT.ecore#QVTRelation.Key.part"/>
                     </body>
-                    <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast3441" name="temp15">
+                    <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast3441" name="temp1">
                       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Key"/>
                     </iterator>
                   </source>
