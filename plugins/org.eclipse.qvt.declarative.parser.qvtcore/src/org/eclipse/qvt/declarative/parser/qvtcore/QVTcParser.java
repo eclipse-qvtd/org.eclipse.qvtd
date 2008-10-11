@@ -17,14 +17,14 @@
 *
 * </copyright>
 *
-* $Id: QVTcParser.java,v 1.5 2008/10/10 07:27:22 ewillink Exp $
+* $Id: QVTcParser.java,v 1.6 2008/10/11 15:17:22 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;
 
 import org.eclipse.qvt.declarative.parser.qvt.cst.*;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.*;
-import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.ocl.parser.AbstractOCLParser;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -69,7 +69,7 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 
 	public int getEOFTokenKind() { return QVTcParserprs.EOFT_SYMBOL; }
 
-	public IFileEnvironment getOCLEnvironment() {
+	public ICSTFileEnvironment getOCLEnvironment() {
 		return getLexer().getOCLEnvironment();
 	}
 	
