@@ -1,12 +1,13 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Declarative QVT Common Plug-in
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvt.declarative.common
 Bundle-Version: 0.7.0.qualifier
 Bundle-Activator: org.eclipse.qvt.declarative.common.Activator
-Bundle-Vendor: %pluginProvider
+Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.qvt.declarative.common,
  org.eclipse.qvt.declarative.common.framework.service
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Localization: plugin
