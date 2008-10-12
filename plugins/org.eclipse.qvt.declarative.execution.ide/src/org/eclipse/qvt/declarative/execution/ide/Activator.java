@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: Activator.java,v 1.3 2008/10/09 17:21:11 qglineur Exp $
+ * $Id: Activator.java,v 1.4 2008/10/12 07:17:32 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.execution.ide;
 
@@ -41,6 +41,7 @@ public class Activator extends Plugin {
 	 * (non-Javadoc)
 	 * @see org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
 	 */
+	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
@@ -50,6 +51,7 @@ public class Activator extends Plugin {
 	 * (non-Javadoc)
 	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
 	 */
+	@Override
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
