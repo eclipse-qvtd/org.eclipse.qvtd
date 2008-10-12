@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Declarative QVT Compilation Plug-in
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvt.declarative.compilation;singleton:=true
 Bundle-Version: 0.7.0.qualifier
 Bundle-Activator: org.eclipse.qvt.declarative.compilation.Activator
-Bundle-Vendor: %pluginProvider
+Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.qvt.declarative.common;visibility:=reexport,
@@ -12,3 +12,4 @@ Require-Bundle: org.eclipse.ui,
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.qvt.declarative.compilation
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Localization: plugin
