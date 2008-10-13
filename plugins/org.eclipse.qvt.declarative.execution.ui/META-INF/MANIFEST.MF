@@ -8,9 +8,9 @@ Bundle-Vendor: %pluginProvider
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.debug.ui;bundle-version="3.4.0",
- org.eclipse.qvt.declarative.execution.ide;bundle-version="0.7.0",
+ org.eclipse.qvt.declarative.execution.ide,
  org.eclipse.ui.ide;bundle-version="3.4.0",
- org.eclipse.qvt.declarative.editor.qvtrelation.ui;bundle-version="0.7.0",
- org.eclipse.qvt.declarative.editor.qvtcore.ui;bundle-version="0.7.0"
+ org.eclipse.qvt.declarative.editor.qvtrelation.ui,
+ org.eclipse.qvt.declarative.editor.qvtcore.ui
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
