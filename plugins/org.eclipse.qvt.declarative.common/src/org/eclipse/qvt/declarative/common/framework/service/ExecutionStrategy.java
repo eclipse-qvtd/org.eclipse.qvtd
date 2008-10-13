@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: ExecutionStrategy.java,v 1.4 2008/10/09 17:21:03 qglineur Exp $
+ * $Id: ExecutionStrategy.java,v 1.5 2008/10/13 16:01:02 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.common.framework.service;
 
@@ -26,12 +26,17 @@ public abstract class ExecutionStrategy {
 	
 	public static ExecutionStrategy FIRST = new ExecutionStrategy() {
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public List<Object> execute(Service service, Operation operation) throws Exception {
 			assert null != operation : "null operation"; //$NON-NLS-1$
 			Provider provider = service.getFirstProvider(operation);
 			if (provider != null) {
-				return Collections.singletonList(operation.execute(provider));
+				Object result = operation.execute(provider);
+				if (result instanceof List<?>) {
+					return (List<Object>) result;
+				}
+				return Collections.singletonList(result);
 			}
 			return null;
 		}
