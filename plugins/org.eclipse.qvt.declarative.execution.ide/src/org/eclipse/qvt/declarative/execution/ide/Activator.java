@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: Activator.java,v 1.4 2008/10/12 07:17:32 qglineur Exp $
+ * $Id: Activator.java,v 1.5 2008/10/13 16:21:50 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.execution.ide;
 
@@ -34,7 +34,7 @@ public class Activator extends Plugin {
 	 * The constructor
 	 */
 	public Activator() {
-		new EclipseExecutionServiceConfigurator();
+		EclipseExecutionServiceConfigurator.assertInitialized();
 	}
 
 	/*

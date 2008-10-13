@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: EclipseExecutionServiceConfigurator.java,v 1.2 2008/10/09 17:21:11 qglineur Exp $
+ * $Id: EclipseExecutionServiceConfigurator.java,v 1.3 2008/10/13 16:21:50 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.execution.ide;
 
@@ -27,12 +27,23 @@ public class EclipseExecutionServiceConfigurator extends
 	
 	private final static Map<String, String> parameters = new HashMap<String, String>();
 	
+	private static boolean IS_INITIALIZED;
+	
 	static {
 		parameters.put(NAMESPACE, org.eclipse.qvt.declarative.execution.ide.Activator.PLUGIN_ID);
 		parameters.put(EXTENSION_POINT_NAME, "executionProvider"); //$NON-NLS-1$
+		IS_INITIALIZED = false;
 	}
 	
-	public EclipseExecutionServiceConfigurator(){
+	private EclipseExecutionServiceConfigurator(){
 		super(ExecutionService.getInstance(), parameters);
 	}
+	
+	public static void assertInitialized() {
+		if (!IS_INITIALIZED) {
+			new EclipseExecutionServiceConfigurator();
+			IS_INITIALIZED = true;
+		}
+	}
+	
 }
