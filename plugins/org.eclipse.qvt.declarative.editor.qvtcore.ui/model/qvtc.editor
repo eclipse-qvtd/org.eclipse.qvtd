@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ed:EditorDefinition xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:ed="http://www.eclipse.org/qvt/1.0/Editor" language="qvtc">
-  <extends href="../../org.eclipse.qvt.declarative.editor.ocl.ui/model/ocl.editor#/"/>
+  <extends href="platform:/plugin/org.eclipse.qvt.declarative.editor.ocl.ui/model/ocl.editor#/"/>
   <node xsi:type="ed:JavaNode" name="org.eclipse.core.resources.IFile">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.editor.qvtcore.ui/icons/QVTcModelFile.gif" format="&lt;file-name>"/>
   </node>
