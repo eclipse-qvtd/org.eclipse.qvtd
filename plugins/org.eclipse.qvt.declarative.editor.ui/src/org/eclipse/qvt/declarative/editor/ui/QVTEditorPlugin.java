@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.qvt.declarative.compilation.ide.EclipseCompilationServiceConfigurator;
 import org.eclipse.qvt.declarative.ecore.utils.TracingOption;
 import org.eclipse.swt.widgets.Display;
 import org.osgi.framework.BundleContext;
@@ -45,6 +46,7 @@ public class QVTEditorPlugin extends EclipseUIPlugin
 	 * The constructor
 	 */
 	public QVTEditorPlugin() {
+		new EclipseCompilationServiceConfigurator();		// FIXME Move to start, eliminate dependency
 	}
 
 	/*

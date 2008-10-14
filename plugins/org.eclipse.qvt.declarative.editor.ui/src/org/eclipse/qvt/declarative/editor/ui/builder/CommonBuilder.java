@@ -12,10 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.7 2008/10/11 15:37:19 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.8 2008/10/14 07:08:26 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +25,7 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.BasicMonitor;
@@ -41,6 +43,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.ocl.lpg.ProblemHandler;
+import org.eclipse.qvt.declarative.compilation.CompilationService;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
 
@@ -144,6 +147,13 @@ public abstract class CommonBuilder extends BuilderBase
 			resource.setURI(uri);
 			parsedResult.getRootEnvironment().validate();
 			resource.save(null);
+			//
+			File astFile = getProject().getWorkspace().getRoot().getFile(workspaceRelativeOutputPath).getLocation().toFile();
+			Map<String, String> parameters = new HashMap<String, String>();
+			List<File> srcFolders = getSourceFolders(projectRelativeInputPath);
+			File binFolder = astFile.getParentFile();
+			CompilationService.getInstance().compile(astFile, parameters, srcFolders, binFolder);	// FIXME Resolve dependency
+			//
 			doRefresh(outputFile.getParent());
 		} catch (Exception e) {
 			getPlugin().logException("Failed to compile '" + inputFile.toString() + "'", e);
@@ -215,6 +225,26 @@ public abstract class CommonBuilder extends BuilderBase
 	@Override
 	public PluginBase getPlugin() {
 		return (PluginBase) creationFactory.getPlugin();
+	}
+
+	protected List<File> getSourceFolders(IPath projectRelativeInputPath) {
+		List<File> srcFolders = new ArrayList<File>();
+		IPath inputPathParent = projectRelativeInputPath.removeLastSegments(1);
+		IResource inputContainer = inputPathParent.segmentCount() > 0 ? getProject().getFile(inputPathParent) : getProject();
+		if (inputContainer != null)
+			srcFolders.add(inputContainer.getLocation().toFile());
+		IClasspathEntry[] resolvedClasspath = getClasspathEntries(getProject());	
+		if (resolvedClasspath != null) {
+			IWorkspaceRoot workspaceRoot = getProject().getWorkspace().getRoot();
+			for (IClasspathEntry resolvedClasspathEntry : resolvedClasspath) {
+				if (resolvedClasspathEntry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
+					IFile sourceContainer = workspaceRoot.getFile(resolvedClasspathEntry.getPath());
+					if (sourceContainer != null)
+						srcFolders.add(sourceContainer.getLocation().toFile());
+				}
+			}
+		}
+		return srcFolders;
 	}
 
 	@Override
