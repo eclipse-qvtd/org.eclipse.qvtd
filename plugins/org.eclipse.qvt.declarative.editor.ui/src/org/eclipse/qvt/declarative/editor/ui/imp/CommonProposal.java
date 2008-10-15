@@ -12,38 +12,98 @@
  * 
  * </copyright>
  *
- * $Id: CommonProposal.java,v 1.1 2008/10/11 15:38:25 ewillink Exp $
+ * $Id: CommonProposal.java,v 1.2 2008/10/15 20:00:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
-import org.eclipse.imp.editor.SourceProposal;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 
-public class CommonProposal extends SourceProposal implements ICommonProposal<CommonProposal>
+public class CommonProposal implements ICommonProposal
 {
-	private final Image image;
+    /**
+     * The text shown to the user in the popup view
+     */
+    private final String proposal;
 
-	public CommonProposal(String proposal, String prefix, int offset) {
-		super(proposal, proposal, prefix, offset);
-		this.image = null;
-	}
+    /**
+     * The new text being added if the user accepts this proposal
+     */
+    private final String newText;
 
-	public CommonProposal(String proposal, String newText, String prefix, int offset) {
-		super(proposal, newText, prefix, offset);
-		this.image = null;
-	}
+    /**
+     * The old text being removed if the user accepts this proposal
+     */
+    private final String oldText;
 
-	public CommonProposal(String proposal, String newText, String prefix, int offset, Image image) {
-		super(proposal, newText, prefix, offset);
+    /**
+     * The character index at which both oldText and newText start.
+     */
+    private final int textStart;
+
+    /**
+     * The cursor offset from start of document.
+     */
+    private final int cursorOffset;
+
+    /**
+     * Additional information displayed in the pop-up view to the right of the
+     * main proposal list view when this proposal is selected.
+     */
+    private final String additionalInfo = null;
+
+    private final Image image;
+
+	public CommonProposal(String proposal, int textStart, String newText, String oldText, int cursorOffset, Image image) {
+		this.proposal = proposal;
+		this.textStart = textStart;
+		this.newText = newText;
+		this.oldText = oldText;
+		this.cursorOffset = cursorOffset;
 		this.image = image;
 	}
 
-	public int compareTo(CommonProposal o) {
+    public void apply(IDocument document) {
+		int i = 0;
+		int iMax = Math.min(newText.length(), oldText.length());
+		for ( ; i < iMax; i++)
+			if (newText.charAt(i) != oldText.charAt(i))
+				break;
+        int oldLength = oldText.length() - i;
+        int newLength = newText.length() - i;
+        if ((oldLength > 0) || (newLength > 0)) {
+	        try {
+	 			document.replace(textStart + i, oldLength, newText.substring(i));
+	        } catch (BadLocationException e) {
+	            e.printStackTrace();
+	        }
+        }
+    }
+
+	public int compareTo(ICommonProposal o) {
 		return getDisplayString().compareTo(o.getDisplayString());
 	}
 
-	@Override
+    public String getAdditionalProposalInfo() {
+        return additionalInfo;
+    }
+
+    public IContextInformation getContextInformation() {
+        return null;
+    }
+
+    public String getDisplayString() {
+        return proposal;
+    }
+
 	public Image getImage() {
 		return image;
 	}
+
+    public Point getSelection(IDocument document) {
+        return new Point(cursorOffset, 0);
+    }
 }

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.2 2008/10/15 07:07:56 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.3 2008/10/15 20:00:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -26,7 +26,6 @@ import java.util.Map;
 import lpg.lpgjavaruntime.IToken;
 import lpg.lpgjavaruntime.PrsStream;
 
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -40,6 +39,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.ocl.expressions.StringLiteralExp;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController.TokenKind;
 import org.eclipse.qvt.declarative.parser.environment.IHasName;
@@ -50,7 +50,7 @@ public class CommonContentProposals
 {
 	protected final CommonParseController commonParseController;
 	protected final int offset;
-	protected final Map<Notifier, CommonProposal> map;
+	protected final Map<Object, ICommonProposal> map;
 	protected CommonParseController.ParsedResult parsedResult;
 	protected CSTNode cstRoot;
 	protected IToken tokenAtOffset;
@@ -59,7 +59,7 @@ public class CommonContentProposals
 	public CommonContentProposals(CommonParseController commonParseController, int offset) {
 		this.commonParseController = commonParseController;
 		this.offset = offset;
-		this.map = new HashMap<Notifier, CommonProposal>();
+		this.map = new HashMap<Object, ICommonProposal>();
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class CommonContentProposals
 			String newText = EcoreUtils.formatName(candidate);
 			String displayText = newText + " - " + EcoreUtils.formatQualifiedName(candidate.eContainer(), "::");
 			Image image = labelProvider.getImage(candidate);
-			map.put(candidate, new CommonProposal(displayText, newText, prefixAtOffset, offset, image));
+			map.put(candidate, new CommonProposal(displayText, tokenAtOffset.getStartOffset(), newText, tokenAtOffset.toString(), offset, image));
 		}
 	}
 
@@ -83,7 +83,7 @@ public class CommonContentProposals
 				System.out.println("Missing astNode deduced for " + astNode.getClass().getSimpleName());
 		}
 		if (astNode == null) {
-			map.put(null, new CommonProposal("Internal error: no AST node to select completion proposal for " + cstNode.getClass().getSimpleName(), "", offset));
+			map.put(null, new CommonNonProposal("Internal error: no AST node to select completion proposal for " + cstNode.getClass().getSimpleName(), "", offset));
 			return;
 		}
 		System.out.println("Proposal for '" + prefixAtOffset + "' " + cstNode.getClass().getSimpleName() + " " + (astNode != null ? astNode.getClass().getSimpleName() : "???"));
@@ -94,14 +94,34 @@ public class CommonContentProposals
 					addIdentifierProposalCandidate(usages, i.next());
 		}
 		if (map.isEmpty())
-			map.put(null, new CommonProposal("no completion exists for '" + prefixAtOffset + "' " + cstNode.getClass().getSimpleName() + " " + (astNode != null ? astNode.getClass().getSimpleName() : "???"), "", offset));
+			map.put(null, new CommonNonProposal("no completion exists for '" + prefixAtOffset + "' " + cstNode.getClass().getSimpleName() + " " + (astNode != null ? astNode.getClass().getSimpleName() : "???"), "", offset));
 	}
 
 	protected void addKeywordProposals() {
-		Image image = null;
+		Image image = null;		// FIXME
 		for (String keyword : commonParseController.getKeywords())
 			if (keyword.startsWith(prefixAtOffset))
-				map.put(null, new CommonProposal(keyword, keyword, prefixAtOffset, offset, image));						
+				map.put(keyword, new CommonProposal(keyword, tokenAtOffset.getStartOffset(), keyword, tokenAtOffset.toString(), offset, image));						
+	}
+
+	protected void addStringProposals() {
+		Collection<Resource> resources = parsedResult.getFileEnvironment().getResourcesVisibleAt(null);
+		for (Resource resource : resources)
+			for (TreeIterator<EObject> i = resource.getAllContents(); i.hasNext(); )
+				addStringProposalCandidate(i.next());
+	}
+
+	protected void addStringProposalCandidate(EObject candidate) {
+		if (candidate instanceof StringLiteralExp) {
+			String string = ((StringLiteralExp<?>)candidate).getStringSymbol();
+			if (!map.containsKey(string) && string.startsWith(prefixAtOffset.length() > 0 ? prefixAtOffset.substring(1) : "")) {
+				String newText = "'" + string + "'";
+				String displayText = string;
+//				ILabelProvider labelProvider = commonParseController.getLabelProvider();
+				Image image = null; // FIXME labelProvider.getImage(string);
+				map.put(string, new CommonProposal(displayText, tokenAtOffset.getStartOffset(), newText, tokenAtOffset.toString(), offset, image));
+			}
+		}
 	}
 
 	/**
@@ -135,13 +155,13 @@ public class CommonContentProposals
 		parsedResult = commonParseController.getCurrentAst();
 		if (parsedResult == null) {
 			System.out.println("No Parsed Result");
-			map.put(null, new CommonProposal("no info available due to Internal error", "", offset));
+			map.put(null, new CommonNonProposal("no info available due to Internal error", "", offset));
 			return;
 		}
 		cstRoot = parsedResult.getCST();
 		if (cstRoot == null) {
 			System.out.println("No CST");
-			map.put(null, new CommonProposal("no info available due to Syntax error(s)", "", offset));
+			map.put(null, new CommonNonProposal("no info available due to Syntax error(s)", "", offset));
 			return;
 		}
 		tokenAtOffset = getToken();
@@ -153,7 +173,7 @@ public class CommonContentProposals
 				CSTNode node = (CSTNode) locator.findNode(cstRoot, tokenAtOffset.getStartOffset(), tokenAtOffset.getEndOffset());
 				if (node == null) {
 					System.out.println("No CST node");
-					map.put(null, new CommonProposal("no info available due to Syntax error(s)", "", offset));
+					map.put(null, new CommonNonProposal("no info available due to Syntax error(s)", "", offset));
 				}
 				else
 					addIdentifierProposals(node);
@@ -162,11 +182,17 @@ public class CommonContentProposals
 			case KEYWORD: {
 				addKeywordProposals();
 				if (map.isEmpty())
-					map.put(null, new CommonProposal("no completion exists for keyword: " + prefixAtOffset, "", offset));
+					map.put(null, new CommonNonProposal("no completion exists for keyword: " + prefixAtOffset, "", offset));
+				break;
+			}
+			case STRING: {
+				addStringProposals();
+				if (map.isEmpty())
+					map.put(null, new CommonNonProposal("no completion exists for string: " + prefixAtOffset, "", offset));
 				break;
 			}
 			default: {
-				map.put(null, new CommonProposal("no completion exists for " + tokenKind + ": " + prefixAtOffset, "", offset));
+				map.put(null, new CommonNonProposal("no completion exists for " + tokenKind + ": " + prefixAtOffset, "", offset));
 			}
 		}
 	}
@@ -235,8 +261,8 @@ public class CommonContentProposals
 	 * Sort the computed proposals into the order in which they appear to the user.
 	 */
 	public ICompletionProposal[] sortProposals() {
-		List<CommonProposal> list = new ArrayList<CommonProposal>(map.values());
+		List<ICommonProposal> list = new ArrayList<ICommonProposal>(map.values());
 		Collections.sort(list);
-		return list.toArray(new ICommonProposal<?>[list.size()]);
+		return list.toArray(new ICommonProposal[list.size()]);
 	}
 }

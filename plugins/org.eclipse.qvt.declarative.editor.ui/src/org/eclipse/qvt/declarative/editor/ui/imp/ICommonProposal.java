@@ -12,10 +12,10 @@
  * 
  * </copyright>
  *
- * $Id: ICommonProposal.java,v 1.1 2008/10/11 15:38:24 ewillink Exp $
+ * $Id: ICommonProposal.java,v 1.2 2008/10/15 20:00:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 
-public interface ICommonProposal<T> extends ICompletionProposal, Comparable<T> {}
+public interface ICommonProposal extends ICompletionProposal, Comparable<ICommonProposal> {}
