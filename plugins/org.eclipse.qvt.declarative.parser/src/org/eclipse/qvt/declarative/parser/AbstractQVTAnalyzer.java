@@ -485,9 +485,14 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 	@Override
 	protected OCLExpression<EClassifier> operationCallExpCS(OperationCallExpCS operationCallExpCS,
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
-		OCLExpression<EClassifier> operationCallExp = super.operationCallExpCS(operationCallExpCS, env);
-		checkAndSetAst((ICSTEnvironment) env, operationCallExpCS.getSimpleNameCS(), operationCallExp);
-		return operationCallExp;
+		OCLExpression<EClassifier> expr = super.operationCallExpCS(operationCallExpCS, env);
+		if (expr instanceof OperationCallExp) {
+			@SuppressWarnings("unchecked")
+			OperationCallExp<EClassifier, EStructuralFeature> operationCallExp = (OperationCallExp<EClassifier, EStructuralFeature>)expr;
+			checkAndSetAst((ICSTEnvironment) env, operationCallExpCS.getSimpleNameCS(), operationCallExp.getReferredOperation());
+		} else
+			checkAndSetAst((ICSTEnvironment) env, operationCallExpCS.getSimpleNameCS(), expr);
+		return expr;
 	}
 
 	@Override		// FIXME Workaround Bug 226083
@@ -496,19 +501,14 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 			OCLExpression<EClassifier> source) {
 		if (source instanceof InvalidLiteralExp)
 			return source;
-//		@SuppressWarnings("unchecked")
-//		E cstEnv = (E)env;
 		ICSTNodeEnvironment nestedEnv =  ((ICSTNodeEnvironment)env).createNestedEnvironment(simpleNameCS);
-//		CSTNode savedNode = cstEnv.pushCSTNode(simpleNameCS);
 		try {
-			OCLExpression<EClassifier> expr = super.simpleNameCS(simpleNameCS, nestedEnv, source);
+			OCLExpression<EClassifier> expr = super.simpleNameCS(simpleNameCS, nestedEnv, source);			
 			checkAndSetAst((ICSTEnvironment) env, simpleNameCS, expr);
 			return expr;
 		} catch (Exception e) {		// Workaround bug 241421
 			ERROR(simpleNameCS, "simpleNameCS", e.getMessage());
 			return createDummyInvalidLiteralExp(env, simpleNameCS);
-		} finally {
-//			cstEnv.setCSTNode(savedNode);
 		}
 	}
 
@@ -517,8 +517,10 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
 			OCLExpression<EClassifier> source, EClassifier owner,String simpleName) {
 		PropertyCallExp<EClassifier, EStructuralFeature> propertyCallExp = super.simplePropertyName(simpleNameCS, env, source, owner, simpleName);
-		if (propertyCallExp != null)
-			checkAndSetAst((ICSTEnvironment) env, simpleNameCS, propertyCallExp.getType());
+		if (propertyCallExp != null) {
+			simpleNameCS.setAst(null);		// Fixup bad OCL init
+			checkAndSetAst((ICSTEnvironment) env, simpleNameCS, propertyCallExp.getReferredProperty());
+		}
 		return propertyCallExp;
 	}
 
