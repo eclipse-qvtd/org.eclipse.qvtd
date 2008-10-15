@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.3 2008/10/15 20:00:29 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.4 2008/10/15 20:26:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.ocl.cst.SimpleNameCS;
 import org.eclipse.ocl.expressions.StringLiteralExp;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController.TokenKind;
@@ -180,7 +181,12 @@ public class CommonContentProposals
 				break;
 			}
 			case KEYWORD: {
-				addKeywordProposals();
+				CommonNodeLocator locator = commonParseController.getCreationFactory().createNodeLocator(parsedResult.getFileEnvironment());
+				CSTNode node = (CSTNode) locator.findNode(cstRoot, tokenAtOffset.getStartOffset(), tokenAtOffset.getEndOffset());
+				if ((node instanceof IdentifierCS) || (node instanceof SimpleNameCS))		// FIXME What about PathNameCS and IdentifiedCS ...
+					addIdentifierProposals(node);
+				else
+					addKeywordProposals();
 				if (map.isEmpty())
 					map.put(null, new CommonNonProposal("no completion exists for keyword: " + prefixAtOffset, "", offset));
 				break;
