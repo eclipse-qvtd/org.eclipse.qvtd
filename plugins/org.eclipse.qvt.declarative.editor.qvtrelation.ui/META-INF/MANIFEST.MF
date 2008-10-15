@@ -9,7 +9,8 @@ Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: org.eclipse.qvt.declarative.editor.qvtrelation.ui
+Export-Package: org.eclipse.qvt.declarative.editor.qvtrelation.ui,
+ org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: org.eclipse.qvt.declarative.emof.QVTRelation.facade
 Bundle-Activator: org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrPlugin
