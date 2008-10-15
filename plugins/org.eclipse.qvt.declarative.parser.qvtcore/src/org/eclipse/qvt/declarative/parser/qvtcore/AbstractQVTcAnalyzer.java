@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractQVTcAnalyzer.java,v 1.3 2008/10/11 15:27:40 ewillink Exp $
+ * $Id: AbstractQVTcAnalyzer.java,v 1.4 2008/10/15 20:03:49 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore;
 
@@ -255,10 +255,11 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 			PropertyAssignment propertyAssignment = QVTCoreFactory.eINSTANCE.createPropertyAssignment();
 			env.initASTMapping(propertyAssignment, callExp);
 			assignmentCS.setAst(propertyAssignment);
-			callExp.getSimpleNameCS().setAst(propertyAssignment);
 			OCLExpression slotExpression = oclExpressionCS(callExp.getSource(), env);
 			propertyAssignment.setSlotExpression(oclExpressionCS(callExp.getSource(), env));
-			propertyAssignment.setTargetProperty(resolveProperty(env, slotExpression, callExp));
+			EStructuralFeature property = resolveProperty(env, slotExpression, callExp);
+			propertyAssignment.setTargetProperty(property);
+			callExp.getSimpleNameCS().setAst(property);
 			assignment = propertyAssignment;
 		}
 		else {
