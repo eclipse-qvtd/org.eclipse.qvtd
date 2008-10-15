@@ -494,20 +494,18 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 		key.setIdentifies(identifiedClass);
 		for (IdentifiedCS  propertyIdCS : keyDeclCS.getPropertyId()) {
 			propertyIdCS.setAst(key);
-			propertyIdCS.getIdentifier().setAst(key);
-			if (identifiedClass != null) {
-				EStructuralFeature resolvedProperty = resolveForwardProperty(env, identifiedClass, "keyDeclCS", propertyIdCS);
-				if (resolvedProperty != null) {
-					key.getPart().add(resolvedProperty);;
-				}
-				else if ((resolvedProperty = resolveReverseProperty(env, identifiedClass, "propertyTemplateCS", propertyIdCS)) != null) {
-					key.getOppositePart().add((EReference) resolvedProperty);
-				}
-				else {
-					resolvedProperty = resolveUnresolvedProperty(env, identifiedClass, "propertyTemplateCS", propertyIdCS);
-					key.getPart().add(resolvedProperty);;
-				}
+			EStructuralFeature resolvedProperty = resolveForwardProperty(env, identifiedClass, "keyDeclCS", propertyIdCS);
+			if (resolvedProperty != null) {
+				key.getPart().add(resolvedProperty);;
 			}
+			else if ((resolvedProperty = resolveReverseProperty(env, identifiedClass, "keyDeclCS", propertyIdCS)) != null) {
+				key.getOppositePart().add((EReference) resolvedProperty);
+			}
+			else {
+				resolvedProperty = resolveUnresolvedProperty(env, identifiedClass, "keyDeclCS", propertyIdCS);
+				key.getPart().add(resolvedProperty);;
+			}
+			propertyIdCS.getIdentifier().setAst(resolvedProperty);
 		}
 		return key;
 	}
@@ -578,7 +576,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 		EStructuralFeature eStructuralFeature = propertyTemplateCS.getReferredProperty();
 		IdentifiedCS propertyIdCS = propertyTemplateCS.getPropertyId();
 		propertyIdCS.setAst(propertyTemplateItem);
-		propertyIdCS.getIdentifier().setAst(propertyTemplateItem);
+		propertyIdCS.getIdentifier().setAst(eStructuralFeature);
 /*		IdentifiedCS propertyIdCS = propertyTemplateCS.getPropertyId();
 		if (resolvedProperty == null) {					// Not yet resolved if in a literal context
 			IdentifierCS identifierCS = propertyIdCS.getIdentifier();
@@ -851,7 +849,8 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
 		OCLExpression queryCall = isQueryCallExpCS((IQVTrNodeEnvironment) env, operationCallExpCS);
 		if (queryCall != null) {
-			checkAndSetAst((ICSTEnvironment) env, operationCallExpCS.getSimpleNameCS(), queryCall);
+			if (queryCall instanceof OperationCallExp)
+				checkAndSetAst((ICSTEnvironment) env, operationCallExpCS.getSimpleNameCS(), ((OperationCallExp)queryCall).getReferredOperation());
 			return queryCall;
 		}
 		return super.operationCallExpCS(operationCallExpCS, env);
