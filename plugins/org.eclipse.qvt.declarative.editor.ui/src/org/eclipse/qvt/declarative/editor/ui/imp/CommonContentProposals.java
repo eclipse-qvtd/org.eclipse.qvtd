@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.1 2008/10/11 15:38:25 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.2 2008/10/15 07:07:56 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -32,7 +32,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -73,14 +75,18 @@ public class CommonContentProposals
 		}
 	}
 
-	protected void addIdentifierProposals(CSTNode node) {
-		Object astNode = node.getAst();
-		if ((astNode == null) && (node instanceof IdentifierCS)) {
-			astNode = ((CSTNode) node.eContainer()).getAst();
+	protected void addIdentifierProposals(CSTNode cstNode) {
+		Object astNode = cstNode.getAst();
+		if ((astNode == null) && (cstNode instanceof IdentifierCS)) {
+			astNode = ((CSTNode) cstNode.eContainer()).getAst();
 			if (astNode != null)
 				System.out.println("Missing astNode deduced for " + astNode.getClass().getSimpleName());
 		}
-		System.out.println("Proposal for '" + prefixAtOffset + "' " + node.getClass().getSimpleName() + " " + (astNode != null ? astNode.getClass().getSimpleName() : "???"));
+		if (astNode == null) {
+			map.put(null, new CommonProposal("Internal error: no AST node to select completion proposal for " + cstNode.getClass().getSimpleName(), "", offset));
+			return;
+		}
+		System.out.println("Proposal for '" + prefixAtOffset + "' " + cstNode.getClass().getSimpleName() + " " + (astNode != null ? astNode.getClass().getSimpleName() : "???"));
 		if (astNode instanceof EObject) {
 			List<EStructuralFeature> usages = computeUsage((EObject) astNode);
 			for (Resource resource : getResources(usages, (EObject) astNode))
@@ -88,7 +94,7 @@ public class CommonContentProposals
 					addIdentifierProposalCandidate(usages, i.next());
 		}
 		if (map.isEmpty())
-			map.put(null, new CommonProposal("no completion exists for '" + prefixAtOffset + "' " + node.getClass().getSimpleName() + " " + (astNode != null ? astNode.getClass().getSimpleName() : "???"), "", offset));
+			map.put(null, new CommonProposal("no completion exists for '" + prefixAtOffset + "' " + cstNode.getClass().getSimpleName() + " " + (astNode != null ? astNode.getClass().getSimpleName() : "???"), "", offset));
 	}
 
 	protected void addKeywordProposals() {
@@ -166,7 +172,7 @@ public class CommonContentProposals
 	}
 
 	/**
-	 * Return the most EStructuralFeatures for which astNode is the target.
+	 * Return the most EStructuralFeatures for which astNode is or could be the target.
 	 */
 	protected List<EStructuralFeature> computeUsage(EObject astNode) {
 		List<EStructuralFeature> usages = new ArrayList<EStructuralFeature>();
@@ -175,11 +181,18 @@ public class CommonContentProposals
 		if (resource == null)
 			resource = astNode.eResource();
 		Collection<EStructuralFeature.Setting> settings = EcoreUtil.UsageCrossReferencer.find(astNode, resource);
-		for (EStructuralFeature.Setting setting : settings)
-			usages.add(setting.getEStructuralFeature());
+		for (EStructuralFeature.Setting setting : settings) {
+			EStructuralFeature structuralFeature = setting.getEStructuralFeature();
+			if (!usages.contains(structuralFeature))
+				usages.add(structuralFeature);
+		}
 		EStructuralFeature containingFeature = astNode.eContainingFeature();
-		if (containingFeature != null)
-			usages.add(containingFeature);
+		if ((containingFeature == null) && (astNode instanceof EPackage))			// Provide a plausible containment feature
+			containingFeature = EcorePackage.Literals.EPACKAGE__ESUBPACKAGES;		//  for nodes at the root of the resource 
+		if (containingFeature != null) {
+			if (!usages.contains(containingFeature))
+				usages.add(containingFeature);
+		}
 		return usages;
 	}
 
