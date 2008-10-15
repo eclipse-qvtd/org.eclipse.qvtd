@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLFileAnalyzer.java,v 1.3 2008/10/11 15:27:53 ewillink Exp $
+ * $Id: OCLFileAnalyzer.java,v 1.4 2008/10/15 20:01:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl;
 
@@ -34,6 +34,8 @@ import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.cst.ClassifierContextDeclCS;
 import org.eclipse.ocl.cst.ContextDeclCS;
 import org.eclipse.ocl.cst.InvOrDefCS;
+import org.eclipse.ocl.cst.IterateExpCS;
+import org.eclipse.ocl.cst.IteratorExpCS;
 import org.eclipse.ocl.cst.OperationCS;
 import org.eclipse.ocl.cst.OperationCallExpCS;
 import org.eclipse.ocl.cst.PackageDeclarationCS;
@@ -43,6 +45,8 @@ import org.eclipse.ocl.cst.VariableExpCS;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.SendSignalAction;
+import org.eclipse.ocl.expressions.IterateExp;
+import org.eclipse.ocl.expressions.IteratorExp;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.ocl.parser.OCLAnalyzer;
@@ -135,9 +139,24 @@ public final class OCLFileAnalyzer extends
 	protected Constraint invOrDefCS(InvOrDefCS invOrDefCS,
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
 		Constraint invOrDef = super.invOrDefCS(invOrDefCS, env);
-//		checkAndSetAst(invOrDefCS.getSimpleNameCS(), invOrDefCS.getAst());
 		((IOCLEnvironment)env).initASTMapping(invOrDef.getSpecification().getContextVariable(), invOrDefCS.getSimpleNameCS());
 		return invOrDef;
+	}
+
+	@Override
+	protected IterateExp<EClassifier, EParameter> iterateExpCS(IterateExpCS iterateExpCS,
+			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
+		IterateExp<EClassifier, EParameter> iterateExp = super.iterateExpCS(iterateExpCS, env);
+		((IOCLEnvironment)env).initASTMapping(iterateExp, iterateExpCS.getSimpleNameCS());
+		return iterateExp;
+	}
+
+	@Override
+	protected IteratorExp<EClassifier, EParameter> iteratorExpCS(IteratorExpCS iteratorExpCS,
+			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
+		IteratorExp<EClassifier, EParameter> iteratorExp = super.iteratorExpCS(iteratorExpCS, env);
+		((IOCLEnvironment)env).initASTMapping(iteratorExp, iteratorExpCS.getSimpleNameCS());
+		return iteratorExp;
 	}
 
 	@Override
