@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLTopLevelEnvironment.java,v 1.3 2008/10/11 15:27:52 ewillink Exp $
+ * $Id: OCLTopLevelEnvironment.java,v 1.4 2008/10/15 07:09:52 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl.environment;
 
@@ -87,6 +87,18 @@ public class OCLTopLevelEnvironment extends CSTRootEnvironment<OCLEnvironment<?,
 			}
 		}
 		return packagePath;
+	}
+
+	@Override
+	public void postParse() {
+		super.postParse();
+		for (EObject eObject : ast.getContents()) {		// Fix up the TypeResolver contributions
+			if (eObject instanceof EPackage) {
+				EPackage ePackage = (EPackage) eObject;
+				if (ePackage.getNsURI() == null)
+					getFileEnvironment().initializePackageNs(ePackage);
+			}
+		}
 	}
 
 	@Override public EClassifier tryLookupClassifier(List<String> names) throws LookupException {
