@@ -9,5 +9,14 @@
             type="org.eclipse.qvt.declarative.execution">
       </launchConfigurationTabGroup>
    </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="org.eclipse.qvt.declarative.execution.ui.monitoring.ExecutionEngineMonitorViewPart"
+            id="org.eclipse.qvt.declarative.execution.ui.view1"
+            name="Execution Engine Monitor"
+            restorable="true">
+      </view>
+   </extension>
 
 </plugin>
