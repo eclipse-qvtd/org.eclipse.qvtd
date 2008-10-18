@@ -26,22 +26,17 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
-import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.CollectionType;
-import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.OperationCallExp;
-import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.ecore.TupleType;
 import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.ecore.internal.EcoreForeignMethods;
 import org.eclipse.ocl.expressions.CollectionKind;
 import org.eclipse.ocl.utilities.TypedElement;
-import org.eclipse.ocl.utilities.UMLReflection;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
 import org.eclipse.qvt.declarative.ecore.QVTBase.FunctionParameter;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
@@ -204,15 +199,6 @@ public abstract class QVTEnvironment<E extends IQVTNodeEnvironment, P extends IQ
 
 	public Transformation getTransformation() {
 		return getParentEnvironment().getTransformation();
-	}
-
-//	@Override public QVTTypeResolverImpl getTypeResolver() {
-//		return (QVTTypeResolverImpl) super.getTypeResolver();
-//	}
-
-	@Override
-	public UMLReflection<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint> getUMLReflection() {
-		return QVTReflectionImpl.INSTANCE;
 	}
 
 	public boolean isAssignableTo(EClassifier featureType, OCLExpression oclExpression) {
