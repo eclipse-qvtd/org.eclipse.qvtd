@@ -322,14 +322,16 @@ public class EMOFMappingMetaData extends AbstractEMOFMappingMetaData
 	    		EcoreFeatureElement.create(EcorePackage.Literals.ESTRUCTURAL_FEATURE__CHANGEABLE),
 	    		EcoreFeatureElement.create(EMOFPackage.Literals.PROPERTY__IS_READ_ONLY))
 	    	{
-				@Override protected Object exportValue(EObject adaptingObject, Object ecoreValue) {
+				@Override
+				protected Object exportValue(EObject adaptingObject, Object ecoreValue) {
 					boolean changeable = ((Boolean)ecoreValue).booleanValue();
 					return super.exportValue(adaptingObject, Boolean.valueOf(!changeable));
 				}
 
-				@Override protected Object importValue(EObject adaptingObject, Object adaptingValue) {
+				@Override
+				protected Object importValue(Resource adaptingResource, EObject adaptingObject, Object adaptingValue) {
 					boolean isReadOnly = ((Boolean)adaptingValue).booleanValue();
-					return super.importValue(adaptingObject, Boolean.valueOf(!isReadOnly));
+					return super.importValue(adaptingResource, adaptingObject, Boolean.valueOf(!isReadOnly));
 				}	    		
 	    	}
 	    );    
@@ -413,11 +415,13 @@ public class EMOFMappingMetaData extends AbstractEMOFMappingMetaData
 				EcoreFeatureElement.create(EcorePackage.Literals.ETYPED_ELEMENT__UPPER_BOUND),
 				EcoreFeatureElement.create(EMOFPackage.Literals.MULTIPLICITY_ELEMENT__UPPER))
 			{
-				@Override protected Object exportValue(EObject adaptingObject, Object ecoreValue) {
+				@Override
+				protected Object exportValue(EObject adaptingObject, Object ecoreValue) {
 					return ecoreValue;
 				}
 
-				@Override protected Object importValue(EObject adaptingObject, Object adaptingValue) {
+				@Override
+				protected Object importValue(Resource adaptingResource, EObject adaptingObject, Object adaptingValue) {
 					return adaptingValue;
 				}				
 			});
