@@ -63,7 +63,7 @@ public class QVTrTransformationEnvironment extends QVTrEnvironment<QVTrTopLevelE
 		setNameFromIdentifier(ast, identifier);
 		Variable variable = EcoreFactory.eINSTANCE.createVariable();
 		getASTNodeToCSTNodeMap().put(variable, identifier);
-		variable.setName("self"); //QvtrEnvironmentFactory.SELF_NAME);
+		variable.setName(SELF_VARIABLE_NAME);
 		variable.setType(ast);
 		setSelfVariable(variable);
 		IdentifierCS identifierCS = transformationCS.getExtends();
