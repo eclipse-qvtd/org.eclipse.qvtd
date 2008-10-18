@@ -58,7 +58,7 @@ public class QVTcTransformationEnvironment extends QVTcEnvironment<IQVTcNodeEnvi
 		rootEnvironment.getASTNodeToCSTNodeMap().put(variable, transformationCS);
 //		env.initASTMapping(variable, transformationCS.getPathName());
 //		env.initASTMapping(ast, transformationCS.getPathName());
-		variable.setName("self"); //QvtrEnvironmentFactory.SELF_NAME);
+		variable.setName(SELF_VARIABLE_NAME);
 		variable.setType(ast);
 		setSelfVariable(variable);
 //		IdentifierCS identifierCS = transformationCS.getExtends();
