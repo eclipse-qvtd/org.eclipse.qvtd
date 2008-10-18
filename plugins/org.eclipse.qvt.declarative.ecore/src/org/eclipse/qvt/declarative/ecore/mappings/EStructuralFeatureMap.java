@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EStructuralFeatureMap.java,v 1.2 2008/08/08 17:00:10 ewillink Exp $
+ * $Id: EStructuralFeatureMap.java,v 1.3 2008/10/18 18:46:43 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.mappings;
 
@@ -22,6 +22,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 
@@ -133,12 +134,12 @@ public abstract class EStructuralFeatureMap<FE extends EStructuralFeature>
 		if ((ecoreFeatureElement == null) || (adaptingFeatureElement == null))
 			return;
 		Object adaptingValue = getAdaptingValue(adaptingContainerObject, adaptingObject);
-		Object ecoreValue = importValueOrValues(adaptingObject, adaptingValue);
+		Object ecoreValue = importValueOrValues(adaptingContainerObject.eResource(), adaptingObject, adaptingValue);
 		if (ecoreValue != null)
 			setEcoreValue(ecoreObject, ecoreValue);
 	}
 	
-	protected abstract Object importValue(EObject adaptingObject, Object adaptingValue);
+	protected abstract Object importValue(Resource adaptingResource, EObject adaptingObject, Object adaptingValue);
 
 	/**
 	 * Convert the adaptingValue to an ecoreValue
@@ -147,26 +148,26 @@ public abstract class EStructuralFeatureMap<FE extends EStructuralFeature>
 	 * 
 	 * @return
 	 */
-	public Object importValueOrValues(EObject adaptingObject, Object adaptingValue) {
+	public Object importValueOrValues(Resource adaptingResource, EObject adaptingObject, Object adaptingValue) {
 		if (adaptingValue instanceof FeatureMap) {
 			FeatureMap featureMap = (FeatureMap) adaptingValue;
 			if (featureMap.size() != 1)
-				return importValues(adaptingObject, featureMap);
+				return importValues(adaptingResource, adaptingObject, featureMap);
 			else
-				return importValue(adaptingObject, featureMap.get(0));		
+				return importValue(adaptingResource, adaptingObject, featureMap.get(0));		
 		}
 		else {
 			if (adaptingValue instanceof List)
-				return importValues(adaptingObject, (List<?>)adaptingValue);
+				return importValues(adaptingResource, adaptingObject, (List<?>)adaptingValue);
 			else
-				return importValue(adaptingObject, adaptingValue);		
+				return importValue(adaptingResource, adaptingObject, adaptingValue);		
 		}
 	}
 
-	protected List<Object> importValues(EObject adaptingObject, List<?> adaptingValues) {
+	protected List<Object> importValues(Resource adaptingResource, EObject adaptingObject, List<?> adaptingValues) {
 		List<Object> ecoreValues = new ArrayList<Object>();
 		for (Object adaptingValue : adaptingValues) {
-			Object ecoreValue = importValue(adaptingObject, adaptingValue);
+			Object ecoreValue = importValue(adaptingResource, adaptingObject, adaptingValue);
 			if (ecoreValue != null)
 				ecoreValues.add(ecoreValue);
 		}

@@ -12,13 +12,14 @@
  * 
  * </copyright>
  *
- * $Id: EReferenceToEClassifierMap.java,v 1.2 2008/08/08 17:00:10 ewillink Exp $
+ * $Id: EReferenceToEClassifierMap.java,v 1.3 2008/10/18 18:46:43 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.mappings;
 
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 
 public class EReferenceToEClassifierMap extends EReferenceMap
 {
@@ -28,15 +29,17 @@ public class EReferenceToEClassifierMap extends EReferenceMap
 		super(mappingMetaDataRegistry, ecoreEStructuralFeature, adaptingEStructuralFeature);
 	}
 
-	@Override protected Object exportValue(EObject adaptingObject, Object ecoreValue) {
+	@Override
+	protected Object exportValue(EObject adaptingObject, Object ecoreValue) {
 		if (ecoreValue instanceof EDataType)
 			return super.exportValue(adaptingObject, mappingMetaDataRegistry.exportEDataType((EDataType) ecoreValue));
 		else
 			return super.exportValue(adaptingObject, ecoreValue);
 	}
 
-	@Override protected Object importValue(EObject adaptingObject, Object adaptingValue) {
-		Object ecoreValue = super.importValue(adaptingObject, adaptingValue);
+	@Override
+	protected Object importValue(Resource adaptingResource, EObject adaptingObject, Object adaptingValue) {
+		Object ecoreValue = super.importValue(adaptingResource, adaptingObject, adaptingValue);
 		if (ecoreValue instanceof EDataType)
 			return mappingMetaDataRegistry.importEDataType((EDataType) ecoreValue);
 		else

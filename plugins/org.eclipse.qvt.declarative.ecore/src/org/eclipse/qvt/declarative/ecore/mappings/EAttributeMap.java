@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EAttributeMap.java,v 1.2 2008/08/08 17:00:10 ewillink Exp $
+ * $Id: EAttributeMap.java,v 1.3 2008/10/18 18:46:43 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.mappings;
 
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.BasicInternalEList;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -78,7 +79,8 @@ public class EAttributeMap extends EStructuralFeatureMap<EAttribute>
 		return adaptingValues;
 	}
 	
-	@Override protected Object importValue(EObject adaptingObject, Object adaptingValue) {
+	@Override
+	protected Object importValue(Resource adaptingResource, EObject adaptingObject, Object adaptingValue) {
 		assert !(adaptingValue instanceof AnyType);
 		if (adaptingValue == null)
 			return null;

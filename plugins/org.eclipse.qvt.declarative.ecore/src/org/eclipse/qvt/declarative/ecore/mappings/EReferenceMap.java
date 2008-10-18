@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EReferenceMap.java,v 1.2 2008/08/08 17:00:10 ewillink Exp $
+ * $Id: EReferenceMap.java,v 1.3 2008/10/18 18:46:43 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.mappings;
 
@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 
@@ -50,12 +51,13 @@ public class EReferenceMap extends EStructuralFeatureMap<EReference>
 		return mappingMetaDataRegistry.getAdapters((EList<EObject>)ecoreValues);
 	}
 	
-	@Override protected Object importValue(EObject adaptingObject, Object adaptingValue) {
+	@Override
+	protected Object importValue(Resource adaptingResource, EObject adaptingObject, Object adaptingValue) {
 		if (adaptingValue == null)
 			return null;
 		else if (adaptingValue instanceof AnyType) {
 			if (((AnyType)adaptingValue).eIsProxy()) {	// Resolution necessary to create correct proxy, so no need for proxy at all
-				ResourceSet resourceSet = adaptingObject.eResource().getResourceSet();
+				ResourceSet resourceSet = adaptingResource.getResourceSet();
 				URI proxyURI = ((InternalEObject)adaptingValue).eProxyURI();
 				return resourceSet.getEObject(proxyURI, true);
 			}

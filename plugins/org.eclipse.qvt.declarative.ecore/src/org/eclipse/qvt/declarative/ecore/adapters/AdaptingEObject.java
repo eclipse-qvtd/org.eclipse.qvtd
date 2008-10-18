@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AdaptingEObject.java,v 1.2 2008/08/08 17:00:10 ewillink Exp $
+ * $Id: AdaptingEObject.java,v 1.3 2008/10/18 18:46:43 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.adapters;
 
@@ -223,7 +223,7 @@ public class AdaptingEObject implements Adapter, Notifier, InternalEObject
 		EStructuralFeatureMap<?> featureMap = getClassMap().getAdaptingFeatureMap(target, feature);
 		if (featureMap == null)
 			return;
-		Object ecoreValue = featureMap.importValueOrValues(this, adaptingValue);
+		Object ecoreValue = featureMap.importValueOrValues(eResource(), this, adaptingValue);
 		featureMap.setEcoreValue(target, ecoreValue);
 	}
 
