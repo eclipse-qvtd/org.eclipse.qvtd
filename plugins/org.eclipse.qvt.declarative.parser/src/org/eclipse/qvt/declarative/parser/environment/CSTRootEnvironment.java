@@ -17,6 +17,8 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -24,7 +26,10 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
@@ -32,13 +37,17 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.cst.IsMarkedPreCS;
+import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.CollectionType;
+import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.OCLExpression;
+import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.ecore.TupleType;
 import org.eclipse.ocl.ecore.TypeType;
 import org.eclipse.ocl.expressions.CollectionKind;
 import org.eclipse.ocl.expressions.InvalidLiteralExp;
 import org.eclipse.ocl.lpg.AbstractParser;
+import org.eclipse.ocl.utilities.UMLReflection;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 import org.eclipse.qvt.declarative.ecore.utils.XMIUtils;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractModelResolver;
@@ -94,6 +103,20 @@ public abstract class CSTRootEnvironment<E extends ICSTNodeEnvironment, CST exte
 			if (cstNode != null)
 				;
 			else if (astNode instanceof EGenericType)
+				;
+			else if ((astNode instanceof EPackage) && (((EPackage)astNode).getEAnnotation(OCL_NAMESPACE_URI) != null))	// A shadow package
+				;
+			else if ((astNode instanceof EClassifier) && (((EClassifier)astNode).getEAnnotation(OCL_NAMESPACE_URI) != null))	// A shadow class
+				;
+			else if ((astNode instanceof EAttribute) && (((EAttribute)astNode).getEAnnotation(OCL_NAMESPACE_URI) != null))		// A shadow class attribute
+				;
+			else if ((astNode instanceof EOperation) && (((EOperation)astNode).getEAnnotation(OCL_NAMESPACE_URI) != null))		// A shadow class operation
+				;
+			else if ((astNode instanceof EParameter) && (((EParameter)astNode).getEOperation().getEAnnotation(OCL_NAMESPACE_URI) != null))		// A shadow class parameter
+				;
+			else if ((astNode instanceof EAnnotation) && OCL_NAMESPACE_URI.equals(((EAnnotation)astNode).getSource()))			// A shadow class annotation
+				;
+			else if ((astNode instanceof CollectionType) && (((CollectionType)astNode).getEPackage().getEAnnotation(OCL_NAMESPACE_URI) != null))		// A shadow collection type
 				;
 			else {
 				boolean hasErrorNode = false;
@@ -269,6 +292,11 @@ public abstract class CSTRootEnvironment<E extends ICSTNodeEnvironment, CST exte
 	
 	public ICSTRootEnvironment getRootEnvironment() {
 		return this;
+	}
+
+	@Override
+	public UMLReflection<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint> getUMLReflection() {
+		return fileEnvironment.getUMLReflection();
 	}
 
 	public UnresolvedEnvironment getUnresolvedEnvironment() {

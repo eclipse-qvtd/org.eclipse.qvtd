@@ -16,6 +16,7 @@ import java.util.Map;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -24,14 +25,18 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.CollectionType;
+import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.InvalidLiteralExp;
 import org.eclipse.ocl.ecore.OCLExpression;
+import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.ecore.TypeType;
 import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.ocl.utilities.TypedElement;
+import org.eclipse.ocl.utilities.UMLReflection;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractModelResolver;
 import org.eclipse.qvt.declarative.parser.plugin.QVTParserPlugin;
 public abstract class CSTChildEnvironment<E extends ICSTNodeEnvironment, P extends ICSTNodeEnvironment, AST extends Notifier, CST extends CSTNode> extends CSTNodeEnvironment<E, AST, CST>
@@ -91,6 +96,11 @@ public abstract class CSTChildEnvironment<E extends ICSTNodeEnvironment, P exten
 	
 	public ICSTRootEnvironment getRootEnvironment() {
 		return rootEnvironment;
+	}
+
+	@Override
+	public UMLReflection<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint> getUMLReflection() {
+		return rootEnvironment.getUMLReflection();
 	}
 
 	public UnresolvedEnvironment getUnresolvedEnvironment() {
