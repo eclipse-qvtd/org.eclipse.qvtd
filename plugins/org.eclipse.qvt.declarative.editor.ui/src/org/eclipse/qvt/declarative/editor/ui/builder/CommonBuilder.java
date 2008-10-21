@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.8 2008/10/14 07:08:26 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.9 2008/10/21 20:01:03 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -33,6 +33,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.imp.builder.BuilderBase;
 import org.eclipse.imp.builder.BuilderUtils;
+import org.eclipse.imp.builder.DependencyInfo;
 import org.eclipse.imp.language.Language;
 import org.eclipse.imp.model.ISourceProject;
 import org.eclipse.imp.model.ModelFactory;
@@ -44,7 +45,9 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.compilation.CompilationService;
+import org.eclipse.qvt.declarative.ecore.utils.TracingOption;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
+import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
 
 /**
@@ -54,6 +57,8 @@ import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
  */
 public abstract class CommonBuilder extends BuilderBase
 {
+	public static TracingOption builderDependencies = new TracingOption(QVTEditorPlugin.PLUGIN_ID, "builder/dependencies");
+
 	/**
 	 * A BuilderListener can be notified at the start and/or end of a build.
 	 * This is mainly intended for test harnesses that need to observe builders.
@@ -145,7 +150,6 @@ public abstract class CommonBuilder extends BuilderBase
 			URI uri = URI.createPlatformResourceURI(workspaceRelativeOutputPath.toString(), true);
 			Resource resource = parsedResult.getAST();
 			resource.setURI(uri);
-			parsedResult.getRootEnvironment().validate();
 			resource.save(null);
 			//
 			File astFile = getProject().getWorkspace().getRoot().getFile(workspaceRelativeOutputPath).getLocation().toFile();
@@ -163,6 +167,18 @@ public abstract class CommonBuilder extends BuilderBase
 					builderListener.endBuild(inputFile);
 			problemHandler.flush(BasicMonitor.toMonitor(monitor));
 		}
+	}
+
+	@Override
+	protected DependencyInfo createDependencyInfo(IProject project) {
+        return new DependencyInfo(project)
+        {
+			@Override
+			public void dump() {
+				if (builderDependencies.isActive())
+					super.dump();
+			}      	
+        };
 	}
 
 	protected CommonParseController createParseController() {
