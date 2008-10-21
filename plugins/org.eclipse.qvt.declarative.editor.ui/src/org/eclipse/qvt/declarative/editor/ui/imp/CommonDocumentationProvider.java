@@ -12,14 +12,17 @@
  * 
  * </copyright>
  *
- * $Id: CommonDocumentationProvider.java,v 1.2 2008/08/14 07:57:47 ewillink Exp $
+ * $Id: CommonDocumentationProvider.java,v 1.3 2008/10/21 20:03:52 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.imp.language.ILanguageService;
 import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.services.IDocumentationProvider;
 import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.ocl.expressions.LiteralExp;
+import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 
 public abstract class CommonDocumentationProvider implements IDocumentationProvider, ILanguageService
 {
@@ -31,34 +34,45 @@ public abstract class CommonDocumentationProvider implements IDocumentationProvi
 		return getSubstring(parseController, cstNode.getStartOffset(), cstNode.getEndOffset());
 	}
 
+	protected String getASTDocumentation(Object node) {
+		if (node instanceof LiteralExp) {
+			return EcoreUtils.formatName(((EObject)node).eClass()) + " : " + node.toString();
+		}
+		else if (node instanceof EObject) {
+			return EcoreUtils.formatName(((EObject)node).eClass()) + " : " + EcoreUtils.formatQualifiedName(node);
+		}
+		return null;
+	}
+
+	protected String getCSTDocumentation(CSTNode cstNode, CommonParseController parseController) {
+		CommonParseController.TokenKind tokenKind = parseController.getTokenKind(getTokenKindForNode(cstNode));
+		switch (tokenKind) {
+		case IDENTIFIER:
+			return "'" + getSubstring(parseController, cstNode) + "' is an identifier";
+		case INTEGER:
+			return "'" + getSubstring(parseController, cstNode) + "' is an integer number";
+		case REAL:
+			return "'" + getSubstring(parseController, cstNode) + "' is a floating point number";
+		case KEYWORD:
+			return "'" + getSubstring(parseController, cstNode) + "' is a keyword";
+		case LINE_COMMENT:
+			return "'" + getSubstring(parseController, cstNode) + "' is a line comment";
+		case PARAGRAPH_COMMENT:
+			return "'" + getSubstring(parseController, cstNode) + "' is a paragraph comment";
+		case STRING:
+			return "'" + getSubstring(parseController, cstNode) + "' is a string";
+		default:
+			//return "No documentation available for token kind = " + tokenKind;
+			return null;
+		}
+	}
+
 	public String getDocumentation(Object node, IParseController controller) {
 		if (node == null)
 			return null;
-		if (node instanceof CSTNode) {
-			CommonParseController parseController = (CommonParseController)controller;
-			CSTNode cstNode = (CSTNode) node;
-			CommonParseController.TokenKind tokenKind = parseController.getTokenKind(getTokenKindForNode(cstNode));
-			switch (tokenKind) {
-			case IDENTIFIER:
-				return "'" + getSubstring(parseController, cstNode) + "' is an identifier";
-			case INTEGER:
-				return "'" + getSubstring(parseController, cstNode) + "' is an integer number";
-			case REAL:
-				return "'" + getSubstring(parseController, cstNode) + "' is a floating point number";
-			case KEYWORD:
-				return "'" + getSubstring(parseController, cstNode) + "' is a keyword";
-			case LINE_COMMENT:
-				return "'" + getSubstring(parseController, cstNode) + "' is a line comment";
-			case PARAGRAPH_COMMENT:
-				return "'" + getSubstring(parseController, cstNode) + "' is a paragraph comment";
-			case STRING:
-				return "'" + getSubstring(parseController, cstNode) + "' is a string";
-			default:
-				//return "No documentation available for token kind = " + tokenKind;
-				return null;
-			}
-		}
-		return null;
+		if (node instanceof CSTNode)
+			return getCSTDocumentation((CSTNode)node, (CommonParseController)controller);
+		return getASTDocumentation(node);
 	}
 
 	public int getTokenKindForNode(CSTNode node) {
