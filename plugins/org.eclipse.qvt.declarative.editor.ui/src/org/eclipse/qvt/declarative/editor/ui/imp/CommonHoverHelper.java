@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonHoverHelper.java,v 1.2 2008/08/18 07:46:26 ewillink Exp $
+ * $Id: CommonHoverHelper.java,v 1.3 2008/10/21 20:03:09 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -32,12 +32,40 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.qvt.declarative.ecore.utils.TracingOption;
+import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 
 public abstract class CommonHoverHelper extends HoverHelperBase implements IHoverHelper
 {
+	public static TracingOption hoverDebug = new TracingOption(QVTEditorPlugin.PLUGIN_ID, "hover/debug");
+
 	IReferenceResolver fResolver = null;
+	
+	protected String encode(String value)
+	{
+		if (value == null)
+			return null;
+		StringBuffer result = null;
+		for (int i = 0, len = value.length(); i < len; i++){
+			char c = value.charAt(i);
+			if (c == '<') {
+				if (result == null)
+					result = new StringBuffer(value.substring(0, i));
+				result.append("&lt;");
+			}
+			else if (c == '>') {
+				if (result == null)
+					result = new StringBuffer(value.substring(0, i));
+				result.append("&gt;");
+			}
+			else if (result != null)
+				result.append(c);
+		}
+		return result == null ? value : result.toString();
+	}
 
 	public String getHoverHelpAt(IParseController parseController, ISourceViewer srcViewer, int offset) {
+		CommonParseController commonParseController = (CommonParseController) parseController;
 		// If there are any annotations associated with the line that contains
 		// the given offset, return those
 		try {
@@ -60,8 +88,11 @@ public abstract class CommonHoverHelper extends HoverHelperBase implements IHove
 		// on the node whose representation occurs at the given offset
 
 		// Get the current AST; no AST implies no message
-		Object ast = parseController.getCurrentAst();
-		if (ast == null)
+		CommonParseController.ParsedResult parsedResult = commonParseController.getCurrentAst();
+		if (parsedResult == null)
+			return null;
+		CSTNode cst = parsedResult.getCST();
+		if (cst == null)
 			return null;
 
 		// Declare variables used in formulating the message
@@ -71,8 +102,8 @@ public abstract class CommonHoverHelper extends HoverHelperBase implements IHove
 		String msg = null; // the help message for helpNode
 
 		// Get the node at the given offset; no node implies no message
-		ISourcePositionLocator nodeLocator = parseController.getNodeLocator();
-		sourceNode = nodeLocator.findNode(ast, offset);
+		ISourcePositionLocator nodeLocator = commonParseController.getNodeLocator();
+		sourceNode = nodeLocator.findNode(cst, offset);
 		if (sourceNode == null)
 			return null;
 
@@ -90,9 +121,14 @@ public abstract class CommonHoverHelper extends HoverHelperBase implements IHove
 				}
 			}
 			if (fResolver != null) {
-				targetNode = fResolver.getLinkTarget(sourceNode, parseController);
+				targetNode = fResolver.getLinkTarget(sourceNode, commonParseController);  // FIXME need to pass offset if PathNameCS is to be fragmented
 			}
 		}
+		
+		if (hoverDebug.isActive())
+			hoverDebug.println("Hover at " + offset + " on "
+					+ "source: " + (sourceNode != null ? sourceNode.getClass().getSimpleName() : "null")
+					+ "target: " + (targetNode != null ? targetNode.getClass().getSimpleName() : "null"));
 
 		// If the target node is not null, provide help based on that;
 		// otherwise, provide help based on the source node
@@ -119,16 +155,16 @@ public abstract class CommonHoverHelper extends HoverHelperBase implements IHove
 			}
 		}
 		if (docProvider != null) {
-			msg = docProvider.getDocumentation(helpNode, parseController);
+			msg = docProvider.getDocumentation(helpNode, commonParseController);
 			if (msg != null)
-				return msg;
+				return encode(msg);
 		}
 
 		// Otherwise, base the help message on the text that is represented
 		// by the help node
 		if (helpNode instanceof CSTNode) {
 			CSTNode def = (CSTNode) helpNode;
-			msg = getSubstring(parseController, def.getStartOffset(), def.getEndOffset());
+			msg = getSubstring(commonParseController, def.getStartOffset(), def.getEndOffset());
 			int maxMsgLen = 80;
 			if (msg == null || msg.length() == 0)
 				return "No help available";
