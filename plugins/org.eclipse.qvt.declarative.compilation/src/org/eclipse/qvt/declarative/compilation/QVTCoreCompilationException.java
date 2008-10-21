@@ -12,16 +12,16 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: QVTCoreCompilationException.java,v 1.2 2008/10/09 17:21:10 qglineur Exp $
+ * $Id: QVTCoreCompilationException.java,v 1.3 2008/10/21 08:31:18 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.compilation;
 
 public class QVTCoreCompilationException extends
 		DeclarativeQVTCompilationException {
 
-	public QVTCoreCompilationException(int lineNumber, int startCharacter,
+	public QVTCoreCompilationException(String message, int lineNumber, int startCharacter,
 			int endCharacter) {
-		super(lineNumber, startCharacter, endCharacter);
+		super(message, lineNumber, startCharacter, endCharacter);
 	}
 
 	/**

@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: DeclarativeQVTCompilationException.java,v 1.2 2008/10/09 17:21:10 qglineur Exp $
+ * $Id: DeclarativeQVTCompilationException.java,v 1.3 2008/10/21 08:31:18 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.compilation;
 
@@ -29,9 +29,9 @@ public abstract class DeclarativeQVTCompilationException extends Exception {
 	 */
 	private static final long serialVersionUID = -1492308790290465113L;
 
-	public DeclarativeQVTCompilationException(int lineNumber,
+	public DeclarativeQVTCompilationException(String message, int lineNumber,
 			int startCharacter, int endCharacter ) {
-		super();
+		super(message);
 		this.lineNumber = lineNumber;
 		this.startCharacter = startCharacter;
 		this.endCharacter = endCharacter;
