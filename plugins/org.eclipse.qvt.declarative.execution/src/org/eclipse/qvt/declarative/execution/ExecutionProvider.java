@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: ExecutionProvider.java,v 1.9 2008/10/09 17:21:02 qglineur Exp $
+ * $Id: ExecutionProvider.java,v 1.10 2008/10/21 08:32:02 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.execution;
 
@@ -40,6 +40,6 @@ public interface ExecutionProvider extends Provider {
 	 * @return The result of the transformation
 	 */
 	public List<? extends Object> execute(File executableFile,
-			ExecutionContext parameters);
+			ExecutionContext parameters) throws DeclarativeQVTExecutionException;
 
 }

@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: ExecuteOperation.java,v 1.9 2008/10/09 17:21:02 qglineur Exp $
+ * $Id: ExecuteOperation.java,v 1.10 2008/10/21 08:32:02 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.execution;
 
@@ -55,7 +55,7 @@ public class ExecuteOperation implements Operation {
 	 * org.eclipse.qvt.declarative.common.framework.service.Operation#execute
 	 * (org.eclipse.qvt.declarative.common.framework.service.Provider)
 	 */
-	public Object execute(Provider provider) {
+	public Object execute(Provider provider) throws DeclarativeQVTExecutionException {
 		List<?> result = null;
 		if (provider instanceof ProviderDescriptor) {
 			ProviderDescriptor descriptor = (ProviderDescriptor) provider;
