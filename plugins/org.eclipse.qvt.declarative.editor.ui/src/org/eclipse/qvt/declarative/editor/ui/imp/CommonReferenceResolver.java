@@ -12,13 +12,14 @@
  * 
  * </copyright>
  *
- * $Id: CommonReferenceResolver.java,v 1.1 2008/08/10 13:46:14 ewillink Exp $
+ * $Id: CommonReferenceResolver.java,v 1.2 2008/10/21 20:01:45 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
 import org.eclipse.imp.language.ILanguageService;
 import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.services.IReferenceResolver;
+import org.eclipse.ocl.cst.CSTNode;
 
 public abstract class CommonReferenceResolver implements IReferenceResolver, ILanguageService
 {
@@ -37,6 +38,6 @@ public abstract class CommonReferenceResolver implements IReferenceResolver, ILa
 	 * given Parse Controller.
 	 */
 	public Object getLinkTarget(Object node, IParseController controller) {
-		return null;
+		return node instanceof CSTNode ? ((CSTNode)node).getAst() : null;
 	}
 }
