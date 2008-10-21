@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcCreationFactory.java,v 1.7 2008/10/11 15:30:48 ewillink Exp $
+ * $Id: QVTcCreationFactory.java,v 1.8 2008/10/21 20:07:06 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
@@ -33,7 +33,7 @@ import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.emof.QVTCore.facade.QVTCoreFacade;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
-import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcFileEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.unparser.QVTcUnparser;
 import org.eclipse.qvt.declarative.parser.ui.preferences.QVTPreferences;
@@ -62,7 +62,7 @@ public class QVTcCreationFactory extends AbstractCreationFactory
 		return new QVTcNature();
 	}
 
-	public QVTcNodeLocator createNodeLocator(ICSTFileEnvironment environment) {
+	public QVTcNodeLocator createNodeLocator(ICSTRootEnvironment environment) {
 		return new QVTcNodeLocator(environment);
 	}
 	
