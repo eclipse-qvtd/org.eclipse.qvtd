@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.10 2008/10/11 16:21:47 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.11 2008/10/21 20:06:12 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -62,7 +62,9 @@ import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.lpg.AbstractLexer;
 import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.ocl.lpg.ProblemHandler;
+import org.eclipse.qvt.declarative.ecore.utils.TracingOption;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
+import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.ui.builder.MarkerProblemHandler;
 import org.eclipse.qvt.declarative.editor.ui.builder.ProblemLimit;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseFileHandle;
@@ -81,6 +83,7 @@ import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
  */
 public abstract class CommonParseController implements IParseController
 {
+	public static TracingOption parserProgress = new TracingOption(QVTEditorPlugin.PLUGIN_ID, "parser/progress");
 	private static int counter = 0;
 
 	public static class ParsedResult extends ASTandCST
@@ -139,7 +142,8 @@ public abstract class CommonParseController implements IParseController
 		this.creationFactory = creationFactory;
         fLanguage= creationFactory.getLanguage();
 		id = getClass().getSimpleName() + "-" + ++ counter;
-		System.out.println(id + " created");
+		if (parserProgress.isActive())
+			parserProgress.println(id + " created");
     }
 
     protected void cacheKeywordsOnce() {
@@ -159,7 +163,7 @@ public abstract class CommonParseController implements IParseController
                     keywords.add(tokenKindNames[index]);
                 }
             } catch (NullPointerException e) {
-                System.err.println(getClass().getSimpleName() + ".cacheKeywordsOnce():  NullPointerException; trapped and discarded");
+            	QVTEditorPlugin.logError(getClass().getSimpleName() + ".cacheKeywordsOnce():  NullPointerException; trapped and discarded", e);
             }
         }
     }
@@ -252,7 +256,7 @@ public abstract class CommonParseController implements IParseController
 	public ISourcePositionLocator getNodeLocator() {
 		if (fCurrentAst == null)
 			return null;
-		return creationFactory.createNodeLocator(fCurrentAst.getFileEnvironment());
+		return creationFactory.createNodeLocator(fCurrentAst.getRootEnvironment());
 	}
 
 	public AbstractParser getParser() {
@@ -456,7 +460,8 @@ public abstract class CommonParseController implements IParseController
 		this.fProject= project;
 		this.fFilePath= filePath;	
 		this.handler = handler;
-		System.out.println(id + " initialized for " + fFilePath.toString());
+		if (parserProgress.isActive())
+			parserProgress.println(id + " initialized for " + fFilePath.toString());
     }
 
     public boolean isCompleteable(int kind) {
@@ -482,7 +487,8 @@ public abstract class CommonParseController implements IParseController
 
 	public ParsedResult parse(String contents, boolean scanOnly, IProgressMonitor progressMonitor) {
 //		FIXME scanOnly appears to be false always
-		System.out.println(id + " Parse " + fFilePath.toString() + " " + fLanguage + " scanOnly = " + scanOnly + " handler = " + handler.getClass().getName());
+		if (parserProgress.isActive())
+			parserProgress.println(id + " Parse " + fFilePath.toString() + " " + fLanguage + " scanOnly = " + scanOnly + " handler = " + handler.getClass().getName());
 		if (progressMonitor.isCanceled())
 			return fCurrentAst;
 		ICSTFileEnvironment fileEnvironment = createEnvironment(getFileHandle());
