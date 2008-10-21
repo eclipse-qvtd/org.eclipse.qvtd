@@ -23,3 +23,15 @@ org.eclipse.qvt.declarative.editor.ui/operation/show/inapplicable=false
 
 # Generate a diagnostic for each dirty change
 org.eclipse.qvt.declarative.editor.ui/operation/show/dirty=false
+
+# Generate a diagnostic for each hover proposal
+org.eclipse.qvt.declarative.editor.ui/hover/debug=false
+
+# Generate a diagnostic for parser creation and initialisation
+org.eclipse.qvt.declarative.editor.ui/parser/progress=false
+
+# Generate a diagnostic for each completion proposal
+org.eclipse.qvt.declarative.editor.ui/proposal/debug=false
+
+# Generate a dependency dump for each build
+org.eclipse.qvt.declarative.editor.ui/builder/dependencies=false
