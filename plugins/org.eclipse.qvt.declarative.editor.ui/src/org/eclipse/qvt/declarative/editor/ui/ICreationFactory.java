@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ICreationFactory.java,v 1.5 2008/10/11 15:30:47 ewillink Exp $
+ * $Id: ICreationFactory.java,v 1.6 2008/10/21 20:06:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui;
 
@@ -33,6 +33,7 @@ import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.unparser.AbstractUnparser;
 
 public interface ICreationFactory
@@ -51,7 +52,7 @@ public interface ICreationFactory
 
 	public CommonNature createNature();
 
-	public CommonNodeLocator createNodeLocator(ICSTFileEnvironment environment);
+	public CommonNodeLocator createNodeLocator(ICSTRootEnvironment environment);
 
 	public CommonParseController createParseController();
 
