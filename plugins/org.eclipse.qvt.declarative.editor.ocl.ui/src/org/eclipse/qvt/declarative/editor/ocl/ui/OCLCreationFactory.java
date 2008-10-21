@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLCreationFactory.java,v 1.4 2008/10/11 15:30:50 ewillink Exp $
+ * $Id: OCLCreationFactory.java,v 1.5 2008/10/21 20:07:05 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui;
 
@@ -33,7 +33,7 @@ import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.util.EssentialOCLMappingMetaData;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
-import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.ocl.environment.OCLFileEnvironment;
 import org.eclipse.qvt.declarative.parser.ui.preferences.QVTPreferences;
 import org.eclipse.qvt.declarative.parser.unparser.OCLUnparser;
@@ -56,7 +56,7 @@ public class OCLCreationFactory extends AbstractCreationFactory
 		return new OCLNature();
 	}
 
-	public OCLNodeLocator createNodeLocator(ICSTFileEnvironment environment) {
+	public OCLNodeLocator createNodeLocator(ICSTRootEnvironment environment) {
 		return new OCLNodeLocator(environment);
 	}
 	
