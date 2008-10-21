@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonNodeLocator.java,v 1.4 2008/08/24 19:06:07 ewillink Exp $
+ * $Id: CommonNodeLocator.java,v 1.5 2008/10/21 20:04:13 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -97,7 +97,7 @@ public class CommonNodeLocator implements ISourcePositionLocator
 		if (node instanceof CSTNode)
 			return findCSTNode((CSTNode)node, startOffset, endOffset);
 		else if (node instanceof Notifier)
-			return findASTNode((Notifier)node, startOffset, endOffset);
+			return findASTNode((Notifier)node, startOffset, endOffset);		// FIXME AST is very disjoint so this is suspect
 		else
 			return null;
 	}
