@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: Service.java,v 1.8 2008/10/09 17:21:03 qglineur Exp $
+ * $Id: Service.java,v 1.9 2008/10/21 08:30:31 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.common.framework.service;
 
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -120,6 +121,19 @@ public abstract class Service implements Provider {
 					result.add(provider);
 				}
 			}
+		}
+		return result;
+	}
+	
+	public Provider[] getProviders(ProviderDescriptor.Priority priority) {
+		List<Provider> selectedProviders = providers.get(priority);
+		return selectedProviders.toArray(new Provider[selectedProviders.size()]);
+	}
+	
+	public Map<ProviderDescriptor.Priority, Provider[]> getProviders() {
+		Map<ProviderDescriptor.Priority, Provider[]> result = new LinkedHashMap<ProviderDescriptor.Priority, Provider[]>();
+		for (ProviderDescriptor.Priority priority : ProviderDescriptor.Priority.values()) {
+			result.put(priority, getProviders(priority));
 		}
 		return result;
 	}
