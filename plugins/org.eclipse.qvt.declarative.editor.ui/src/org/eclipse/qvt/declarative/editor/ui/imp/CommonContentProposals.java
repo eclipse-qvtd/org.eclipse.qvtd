@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.4 2008/10/15 20:26:40 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.5 2008/10/21 20:05:49 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -42,6 +42,8 @@ import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.cst.SimpleNameCS;
 import org.eclipse.ocl.expressions.StringLiteralExp;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
+import org.eclipse.qvt.declarative.ecore.utils.TracingOption;
+import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController.TokenKind;
 import org.eclipse.qvt.declarative.parser.environment.IHasName;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
@@ -49,6 +51,8 @@ import org.eclipse.swt.graphics.Image;
 
 public class CommonContentProposals
 {
+	public static TracingOption proposalDebug = new TracingOption(QVTEditorPlugin.PLUGIN_ID, "proposal/debug");
+
 	protected final CommonParseController commonParseController;
 	protected final int offset;
 	protected final Map<Object, ICommonProposal> map;
@@ -80,14 +84,15 @@ public class CommonContentProposals
 		Object astNode = cstNode.getAst();
 		if ((astNode == null) && (cstNode instanceof IdentifierCS)) {
 			astNode = ((CSTNode) cstNode.eContainer()).getAst();
-			if (astNode != null)
-				System.out.println("Missing astNode deduced for " + astNode.getClass().getSimpleName());
+			if ((astNode != null) && proposalDebug.isActive())
+				proposalDebug.println("Missing astNode deduced for " + astNode.getClass().getSimpleName());
 		}
 		if (astNode == null) {
 			map.put(null, new CommonNonProposal("Internal error: no AST node to select completion proposal for " + cstNode.getClass().getSimpleName(), "", offset));
 			return;
 		}
-		System.out.println("Proposal for '" + prefixAtOffset + "' " + cstNode.getClass().getSimpleName() + " " + (astNode != null ? astNode.getClass().getSimpleName() : "???"));
+		if (proposalDebug.isActive())
+			proposalDebug.println("Proposal for '" + prefixAtOffset + "' " + cstNode.getClass().getSimpleName() + " " + (astNode != null ? astNode.getClass().getSimpleName() : "???"));
 		if (astNode instanceof EObject) {
 			List<EStructuralFeature> usages = computeUsage((EObject) astNode);
 			for (Resource resource : getResources(usages, (EObject) astNode))
@@ -155,13 +160,15 @@ public class CommonContentProposals
 	public void computeProposals() {
 		parsedResult = commonParseController.getCurrentAst();
 		if (parsedResult == null) {
-			System.out.println("No Parsed Result");
+			if (proposalDebug.isActive())
+				proposalDebug.println("No Parsed Result");
 			map.put(null, new CommonNonProposal("no info available due to Internal error", "", offset));
 			return;
 		}
 		cstRoot = parsedResult.getCST();
 		if (cstRoot == null) {
-			System.out.println("No CST");
+			if (proposalDebug.isActive())
+				proposalDebug.println("No CST");
 			map.put(null, new CommonNonProposal("no info available due to Syntax error(s)", "", offset));
 			return;
 		}
@@ -170,10 +177,11 @@ public class CommonContentProposals
 		TokenKind tokenKind = commonParseController.getTokenKind(tokenAtOffset.getKind());
 		switch (tokenKind) {
 			case IDENTIFIER: {
-				CommonNodeLocator locator = commonParseController.getCreationFactory().createNodeLocator(parsedResult.getFileEnvironment());
+				CommonNodeLocator locator = commonParseController.getCreationFactory().createNodeLocator(parsedResult.getRootEnvironment());
 				CSTNode node = (CSTNode) locator.findNode(cstRoot, tokenAtOffset.getStartOffset(), tokenAtOffset.getEndOffset());
 				if (node == null) {
-					System.out.println("No CST node");
+					if (proposalDebug.isActive())
+						proposalDebug.println("No CST node");
 					map.put(null, new CommonNonProposal("no info available due to Syntax error(s)", "", offset));
 				}
 				else
@@ -181,7 +189,7 @@ public class CommonContentProposals
 				break;
 			}
 			case KEYWORD: {
-				CommonNodeLocator locator = commonParseController.getCreationFactory().createNodeLocator(parsedResult.getFileEnvironment());
+				CommonNodeLocator locator = commonParseController.getCreationFactory().createNodeLocator(parsedResult.getRootEnvironment());
 				CSTNode node = (CSTNode) locator.findNode(cstRoot, tokenAtOffset.getStartOffset(), tokenAtOffset.getEndOffset());
 				if ((node instanceof IdentifierCS) || (node instanceof SimpleNameCS))		// FIXME What about PathNameCS and IdentifiedCS ...
 					addIdentifierProposals(node);
