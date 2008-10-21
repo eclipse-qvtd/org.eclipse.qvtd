@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: ATLVMCompiler.java,v 1.17 2008/10/09 17:21:06 qglineur Exp $
+ * $Id: ATLVMCompiler.java,v 1.18 2008/10/21 08:33:32 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm;
 
@@ -255,9 +255,11 @@ public class ATLVMCompiler implements CompilationProvider {
 			Map<String, String> parameters, List<File> sourceFolders,
 			File binFolder) throws DeclarativeQVTCompilationException {
 		if (!(abstractSyntaxTree instanceof File)) {
-			throw new IllegalArgumentException(
-					"Abstract Syntax is not a file: "
-							+ abstractSyntaxTree.toString());
+			String message = "Abstract Syntax is not a file: "
+					+ abstractSyntaxTree.toString();
+			DeclarativeQVTCompilationException exception = new QVTRelationsCompilationException(
+					message, 0, 0, 0);
+			throw exception;
 		}
 
 		File abstractSyntaxTreeFile = (File) abstractSyntaxTree;
@@ -277,33 +279,43 @@ public class ATLVMCompiler implements CompilationProvider {
 			Resource abstractSyntaxTreeResource = resourceSet
 					.createResource(abstractSyntaxTreeURI);
 
+			ASMEMFModel qvtrTransformation = null;
 			try {
-				ASMEMFModel qvtrTransformation = ASMEMFModelUtils
-						.getASMEMFModelFrom(abstractSyntaxTreeResource,
-								TRANSFORMATION_MODEL_NAME);
+				qvtrTransformation = ASMEMFModelUtils.getASMEMFModelFrom(
+						abstractSyntaxTreeResource, TRANSFORMATION_MODEL_NAME);
+			} catch (Exception e) {
+				String message = "Unable to load the AST in the ATLVM : " + e.getMessage();
+				QVTRelationsCompilationException exception = new QVTRelationsCompilationException(message, 0,0,0);
+				throw exception;
+			}
 
-				List<String> directions = getDirections(abstractSyntaxTreeResource);
+			List<String> directions = getDirections(abstractSyntaxTreeResource);
 
-				List<File> result = new ArrayList<File>(directions.size());
-				for (String directionDomainName : directions) {
-					ASM directionASM = ASMUtils
-							.createDirectionLibrary(directionDomainName);
-					ASMEMFModel myProblems = createProblemModelFor(abstractSyntaxTreeResource);
-					Properties effectiveParameters = createCompilationsProperties(
-							relativeAbstractSyntaxTreeURI, parameters,
-							directionDomainName, binFolderURI);
-
+			List<File> result = new ArrayList<File>(directions.size());
+			for (String directionDomainName : directions) {
+				ASM directionASM = ASMUtils
+						.createDirectionLibrary(directionDomainName);
+				ASMEMFModel myProblems = null;
+				try {
+					myProblems = createProblemModelFor(abstractSyntaxTreeResource);
+				} catch (Exception e) {
+					String message = "Unable to create a problem model for the ATLVM : " + e.getMessage();
+					QVTRelationsCompilationException exception = new QVTRelationsCompilationException(message, 0,0,0);
+					throw exception;
+				}
+				Properties effectiveParameters = createCompilationsProperties(
+						relativeAbstractSyntaxTreeURI, parameters,
+						directionDomainName, binFolderURI);
+				if (qvtrTransformation != null && myProblems != null) {
 					File resultFile = compile(qvtrTransformation, directionASM,
 							myProblems, DEFAULT_DEBUGGER, effectiveParameters);
 					result.add(resultFile);
 					handleProblems(myProblems);
 				}
-//				createJavaLauncher(abstractSyntaxTreeResource, sourceFolderURI);
-
-				return result;
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
+			// createJavaLauncher(abstractSyntaxTreeResource, sourceFolderURI);
+			return result;
+
 		}
 		return null;
 	}
@@ -331,10 +343,11 @@ public class ATLVMCompiler implements CompilationProvider {
 		for (Object object : problemSet) {
 			if (object instanceof Problem) {
 				Problem problem = (Problem) object;
+				String message = problem.getDescription();
 				int startLine = problem.getStartLine().intValue();
 				int startColumn = problem.getStartColumn().intValue();
 				int endColumn = problem.getEndColumn().intValue();
-				throw new QVTRelationsCompilationException(startLine,
+				throw new QVTRelationsCompilationException(message, startLine,
 						startColumn, endColumn);
 			}
 		}
@@ -411,7 +424,8 @@ public class ATLVMCompiler implements CompilationProvider {
 
 	protected File compile(final ASMEMFModel qvtrTransformation,
 			final ASM directionLibary, final ASMEMFModel myProblems,
-			final Debugger debugger, final Properties compilationParameters) {
+			final Debugger debugger, final Properties compilationParameters)
+			throws QVTRelationsCompilationException {
 
 		ASMModule asmModule = new ASMModule(COMPILER_ASM);
 
@@ -439,8 +453,10 @@ public class ATLVMCompiler implements CompilationProvider {
 			new ASMInterpreter(COMPILER_ASM, asmModule, env,
 					compilationParameters);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
+			String message = e.getMessage();
+			QVTRelationsCompilationException exception = new QVTRelationsCompilationException(
+					message, 0, 0, 0);
+			throw exception;
 		}
 
 		File resultFile = new File(compilationParameters
