@@ -217,17 +217,20 @@ public abstract class AbstractParseTestCase extends AbstractTestCase
 		//
 		ICSTRootEnvironment rootEnvironment = environment.parse(null, environment.getFile(), null);
 		//
-		Resource ecoreResource = rootEnvironment.getASTNode();
-		if (doSave) {
-			if (asEMOF) {
-				Resource emofResource = getMappingMetaDataRegistry().getAdapter(ecoreResource, generatedURI);
-				emofResource.save(null);
+		Resource ecoreResource = null;
+		if (rootEnvironment != null) {
+			ecoreResource = rootEnvironment.getASTNode();
+			if (doSave) {
+				if (asEMOF) {
+					Resource emofResource = getMappingMetaDataRegistry().getAdapter(ecoreResource, generatedURI);
+					emofResource.save(null);
+				}
+				else
+					ecoreResource.save(null);
 			}
-			else
-				ecoreResource.save(null);
+			if (doValidate)
+				rootEnvironment.validate();
 		}
-		if (doValidate && (rootEnvironment != null))
-			rootEnvironment.validate();
 		actualProblems.flush(null);
 		//
 		if (expectedProblems != null) {
