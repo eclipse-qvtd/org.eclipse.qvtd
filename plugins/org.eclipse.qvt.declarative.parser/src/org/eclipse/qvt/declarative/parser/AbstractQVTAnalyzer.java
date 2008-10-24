@@ -27,47 +27,39 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
-import org.eclipse.ocl.cst.CollectionLiteralExpCS;
 import org.eclipse.ocl.cst.CollectionTypeCS;
-import org.eclipse.ocl.cst.EnumLiteralExpCS;
-import org.eclipse.ocl.cst.FeatureCallExpCS;
 import org.eclipse.ocl.cst.IterateExpCS;
 import org.eclipse.ocl.cst.IteratorExpCS;
 import org.eclipse.ocl.cst.LetExpCS;
+import org.eclipse.ocl.cst.OCLExpressionCS;
 import org.eclipse.ocl.cst.OperationCallExpCS;
 import org.eclipse.ocl.cst.PathNameCS;
 import org.eclipse.ocl.cst.PrimitiveTypeCS;
 import org.eclipse.ocl.cst.SimpleNameCS;
 import org.eclipse.ocl.cst.TupleTypeCS;
 import org.eclipse.ocl.cst.TypeCS;
-import org.eclipse.ocl.cst.VariableCS;
-import org.eclipse.ocl.cst.VariableExpCS;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.CollectionType;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.expressions.CollectionKind;
-import org.eclipse.ocl.expressions.CollectionLiteralExp;
-import org.eclipse.ocl.expressions.FeatureCallExp;
 import org.eclipse.ocl.expressions.InvalidLiteralExp;
 import org.eclipse.ocl.expressions.IterateExp;
 import org.eclipse.ocl.expressions.IteratorExp;
 import org.eclipse.ocl.expressions.LetExp;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.expressions.OperationCallExp;
-import org.eclipse.ocl.expressions.PropertyCallExp;
-import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.ocl.parser.AbstractOCLAnalyzer;
 import org.eclipse.ocl.parser.AbstractOCLParser;
 import org.eclipse.ocl.util.OCLStandardLibraryUtil;
 import org.eclipse.ocl.utilities.TypedElement;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
 import org.eclipse.qvt.declarative.parser.environment.ICSTEnvironment;
-import org.eclipse.qvt.declarative.parser.environment.ICSTNodeEnvironment;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvt.environment.IQVTNodeEnvironment;
@@ -79,6 +71,7 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 	EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject>
 {	
 	private Monitor monitor;
+	private EClass iteratorsClass = null;
 		
 	public AbstractQVTAnalyzer(AbstractOCLParser parser, Monitor monitor) {
 		super(parser);
@@ -142,51 +135,8 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 		return true;					// Set to set ?? TODO read the specs
 	}
 
-	protected void checkAndSetAst(ICSTEnvironment env, CSTNode cstNode, EObject astNode) {
-		if (astNode != null) {
-			if (env.getASTMapping(astNode) == null) {
-//				System.out.println("Missing AST mapping for " + env.getFormatter().formatQualifiedName(astNode) + " corrected");
-				env.getASTNodeToCSTNodeMap().put(astNode, cstNode);
-			}
-			if (cstNode.getAst() == null) {
-//				System.out.println("Missing CST mapping for " + EcoreUtils.formatQualifiedName(cstNode) + " corrected");
-				cstNode.setAst(astNode);
-			}
-		}
-	}	
-	
-	@Override
-	protected CollectionLiteralExp<EClassifier> collectionLiteralExpCS(CollectionLiteralExpCS collectionLiteralExpCS,
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
-		CollectionLiteralExp<EClassifier> expr = super.collectionLiteralExpCS(collectionLiteralExpCS, env);
-		EClassifier type = expr != null ? expr.getType() : null;
-		if ((type != null) && (((ICSTEnvironment)env).getASTMapping(type) == null))
-			((ICSTEnvironment)env).initASTMapping(type, collectionLiteralExpCS);
-		return expr;
-	}
-
-	@Override
-	protected IteratorExp<EClassifier, EParameter> createImplicitCollect(OCLExpression<EClassifier> source, FeatureCallExp<EClassifier> propertyCall,
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
-			CSTNode cstNode) {
-		IteratorExp<EClassifier, EParameter> expr = super.createImplicitCollect(source, propertyCall, env, cstNode);
-		EClassifier type = expr != null ? expr.getType() : null;
-		if ((type != null) && (((ICSTEnvironment)env).getASTMapping(type) == null))
-			((ICSTEnvironment)env).initASTMapping(type, cstNode);
-		return expr;
-	}
-
 	protected abstract E createdNestedEnvironment(CSTNode cstNode,
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env);
-	
-    @Override
-	protected OCLExpression<EClassifier> enumLiteralExpCS(EnumLiteralExpCS enumLiteralExpCS,
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
-		OCLExpression<EClassifier> enumLiteralExp = super.enumLiteralExpCS(enumLiteralExpCS, env);
-		checkAndSetAst((ICSTEnvironment) env, enumLiteralExpCS.getPathNameCS(), enumLiteralExp);
-		checkAndSetAst((ICSTEnvironment) env, enumLiteralExpCS.getSimpleNameCS(), enumLiteralExp);
-		return enumLiteralExp;
-	}
 
 	@Override
 	protected OperationCallExp<EClassifier, EOperation> genOperationCallExp(Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env, OperationCallExpCS operationCallExpCS, String rule, String operName, OCLExpression<EClassifier> source, EClassifier ownerType, List<OCLExpression<EClassifier>> args) {
@@ -198,64 +148,28 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 	}
 
 	@Override
-	protected EClassifier getBagType(CSTNode cstNode,
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
-			EClassifier elementType) {
-		EClassifier typeType = super.getBagType(cstNode, env, elementType);
-		if ((typeType != null) && (((ICSTEnvironment)env).getASTMapping(typeType) == null))
-			((ICSTEnvironment)env).initASTMapping(typeType, cstNode);
-		return typeType;
+	protected void resolveIteratorOperation(SimpleNameCS simpleNameCS,
+			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
+		if (iteratorsClass == null) {
+			EPackage iteratorsPackage = EcoreFactory.eINSTANCE.createEPackage();
+			iteratorsPackage.setName("iterators");
+			iteratorsClass = EcoreFactory.eINSTANCE.createEClass();
+			iteratorsClass.setName("Iterators");
+			iteratorsPackage.getEClassifiers().add(iteratorsClass);
+		}
+		EOperation oper = EcoreFactory.eINSTANCE.createEOperation();
+		oper.setName(simpleNameCS.getValue());
+		iteratorsClass.getEOperations().add(oper);
+		simpleNameCS.setAst(oper);
 	}
 
 	public Monitor getMonitor() { return monitor; }
 
 	@Override
-	protected EClassifier getOrderedSetType(CSTNode cstNode,
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
-			EClassifier elementType) {
-		EClassifier orderedSetType = super.getOrderedSetType(cstNode, env, elementType);
-		if ((orderedSetType != null) && (((ICSTEnvironment)env).getASTMapping(orderedSetType) == null))
-			((ICSTEnvironment)env).initASTMapping(orderedSetType, cstNode);
-		return orderedSetType;
-	}
-
-	@Override
-	protected EClassifier getSequenceType(CSTNode cstNode,
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
-			EClassifier elementType) {
-		EClassifier sequenceType = super.getSequenceType(cstNode, env, elementType);
-		if ((sequenceType != null) && (((ICSTEnvironment)env).getASTMapping(sequenceType) == null))
-			((ICSTEnvironment)env).initASTMapping(sequenceType, cstNode);
-		return sequenceType;
-	}
-
-	@Override
-	protected EClassifier getSetType(CSTNode cstNode,
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
-			EClassifier elementType) {
-		EClassifier setType = super.getSetType(cstNode, env, elementType);
-		if ((setType != null) && (((ICSTEnvironment)env).getASTMapping(setType) == null))
-			((ICSTEnvironment)env).initASTMapping(setType, cstNode);
-		return setType;
-	}
-
-	@Override
-	protected EClassifier getTupleType(
-			CSTNode cstNode,
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
-			EList<? extends TypedElement<EClassifier>> parts) {
-		// TODO Auto-generated method stub
-		return super.getTupleType(cstNode, env, parts);
-	}
-
-	@Override
 	protected EClassifier getTypeType(CSTNode cstNode, Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env, EClassifier type) {
 		if (type instanceof Transformation)
 			return type;
-		EClassifier typeType = super.getTypeType(cstNode, env, type);
-		if ((typeType != null) && (((ICSTEnvironment)env).getASTMapping(typeType) == null))
-			((ICSTEnvironment)env).initASTMapping(typeType, cstNode);
-		return typeType;
+		return super.getTypeType(cstNode, env, type);
 	}
 
 	protected String identifierCS(IdentifierCS identifierCS) {
@@ -272,9 +186,7 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 	@Override
 	protected IterateExp<EClassifier, EParameter> iterateExpCS(IterateExpCS iterateExpCS,
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
-		IterateExp<EClassifier, EParameter> iterateExp = super.iterateExpCS(iterateExpCS, createdNestedEnvironment(iterateExpCS, env));
-		checkAndSetAst((ICSTEnvironment) env, iterateExpCS.getSimpleNameCS(), iterateExp);
-		return iterateExp;
+		return super.iterateExpCS(iterateExpCS, createdNestedEnvironment(iterateExpCS, env));
 	}
 
 	/**
@@ -283,9 +195,7 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 	@Override
 	protected IteratorExp<EClassifier, EParameter> iteratorExpCS(IteratorExpCS iteratorExpCS,
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
-		IteratorExp<EClassifier, EParameter> iteratorExp = super.iteratorExpCS(iteratorExpCS, createdNestedEnvironment(iteratorExpCS, env));
-		checkAndSetAst((ICSTEnvironment) env, iteratorExpCS.getSimpleNameCS(), iteratorExp);
-		return iteratorExp;
+		return super.iteratorExpCS(iteratorExpCS, createdNestedEnvironment(iteratorExpCS, env));
 	}
 
 	/**
@@ -305,8 +215,9 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 	}
 
 	protected EClassifier lookupClassifier(CSTNode cstNode, E env, List<String> className) {
+		EClassifier classifier = null;
 		try {
-			return env.tryLookupClassifier(className);
+			classifier = env.tryLookupClassifier(className);
 		} catch (LookupException e) {
 			ERROR(cstNode, "lookupClassifier", env.formatLookupException(e));
 			@SuppressWarnings("unchecked")
@@ -319,8 +230,11 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 					return n1.compareTo(n2);
 				}
 			});
-			return matches.isEmpty() ? env.getUnresolvedEnvironment().getUnresolvedEClass(className) : matches.get(0);
+			classifier = matches.isEmpty() ? env.getUnresolvedEnvironment().getUnresolvedEClass(className) : matches.get(0);
 		}
+		if (cstNode != null)
+			cstNode.setAst(classifier);
+		return classifier;
 	}
 	
 	@SuppressWarnings("unchecked") @Override @Deprecated
@@ -332,13 +246,17 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 	
 	protected EOperation lookupOperation(CSTNode cstNode, E env, EClassifier owner, String name,
 			List<? extends TypedElement<EClassifier>> args) {
+		EOperation operation = null;
 		try {
-			return env.tryLookupOperation(owner, name, args);
+			operation = env.tryLookupOperation(owner, name, args);
 		} catch (LookupException e) {
 			ERROR(cstNode, "lookupOperation", env.formatLookupException(e));
 			List<?> matches = e.getAmbiguousMatches();
-			return matches.isEmpty() ? env.getUnresolvedEnvironment().getUnresolvedEOperation(owner, name) : (EOperation) matches.get(0);
+			operation = matches.isEmpty() ? env.getUnresolvedEnvironment().getUnresolvedEOperation(owner, name) : (EOperation) matches.get(0);
 		}
+        if (cstNode != null)
+        	cstNode.setAst(operation);
+		return operation;
 	}
 
 	@SuppressWarnings("unchecked") @Override @Deprecated
@@ -358,9 +276,23 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 		}
 	}
 
+	//
+	//	Overridden to catch a catastrophic parsing failure closer to its problem
+	//
+	@Override protected OCLExpression<EClassifier> oclExpressionCS(OCLExpressionCS oclExpressionCS, Environment<
+			EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter,
+			EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
+		try {
+			return super.oclExpressionCS(oclExpressionCS, env);
+		} catch (Exception e) {
+			ERROR(oclExpressionCS, "oclExpressionCS", "Failed to parse expression : " + e.getClass().getName() + " - " + e.getMessage());
+			e.printStackTrace();
+		}
+		return createDummyInvalidLiteralExp(env, oclExpressionCS);
+	}
+
 	protected EClass resolveClass(E env, String rule, TypeCS typeCS) {		
-		E typeEnv = env; //createTypeEnvironment(env, typeCS);
-		EClassifier referredClassifier = typeCS(typeCS, typeEnv);
+		EClassifier referredClassifier = typeCS(typeCS, env);
 		if (referredClassifier instanceof EClass) {
 			if (env.isResolved(referredClassifier))
 				return (EClass) referredClassifier;
@@ -379,7 +311,6 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 		E typeEnv = env; //createTypeEnvironment(env, typeCS);
 		EClassifier referredClassifier = typeCS(typeCS, typeEnv);
 		if (referredClassifier != null) {
-//			typeCS.setAst(referredClassifier);
 			if (!(referredClassifier instanceof CollectionType))
 				return referredClassifier;
 			if (((CollectionType)referredClassifier).getElementType() == null) {
@@ -474,78 +405,17 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 		return env.getUnresolvedEnvironment().getUnresolvedEReference(parentType, propertyName);
 	}
 
-	@Override
-	protected OCLExpression<EClassifier> modelPropertyCallExpCS(FeatureCallExpCS modelPropertyCallExpCS,
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
-		OCLExpression<EClassifier> featureCallExp = super.modelPropertyCallExpCS(modelPropertyCallExpCS, env);
-		checkAndSetAst((ICSTEnvironment) env, modelPropertyCallExpCS, featureCallExp);
-		return featureCallExp;
-	}
-
-	@Override
-	protected OCLExpression<EClassifier> operationCallExpCS(OperationCallExpCS operationCallExpCS,
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
-		OCLExpression<EClassifier> expr = super.operationCallExpCS(operationCallExpCS, env);
-		if (expr instanceof OperationCallExp) {
-			@SuppressWarnings("unchecked")
-			OperationCallExp<EClassifier, EStructuralFeature> operationCallExp = (OperationCallExp<EClassifier, EStructuralFeature>)expr;
-			checkAndSetAst((ICSTEnvironment) env, operationCallExpCS.getSimpleNameCS(), operationCallExp.getReferredOperation());
-		} else
-			checkAndSetAst((ICSTEnvironment) env, operationCallExpCS.getSimpleNameCS(), expr);
-		return expr;
-	}
-
 	@Override		// FIXME Workaround Bug 226083
 	protected OCLExpression<EClassifier> simpleNameCS(SimpleNameCS simpleNameCS,
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
 			OCLExpression<EClassifier> source) {
 		if (source instanceof InvalidLiteralExp)
 			return source;
-		ICSTNodeEnvironment nestedEnv =  ((ICSTNodeEnvironment)env).createNestedEnvironment(simpleNameCS);
-		try {
-			OCLExpression<EClassifier> expr = super.simpleNameCS(simpleNameCS, nestedEnv, source);			
-			checkAndSetAst((ICSTEnvironment) env, simpleNameCS, expr);
-			return expr;
-		} catch (Exception e) {		// Workaround bug 241421
-			ERROR(simpleNameCS, "simpleNameCS", e.getMessage());
-			return createDummyInvalidLiteralExp(env, simpleNameCS);
-		}
-	}
-
-	@Override
-	protected PropertyCallExp<EClassifier, EStructuralFeature> simplePropertyName(SimpleNameCS simpleNameCS,
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
-			OCLExpression<EClassifier> source, EClassifier owner,String simpleName) {
-		PropertyCallExp<EClassifier, EStructuralFeature> propertyCallExp = super.simplePropertyName(simpleNameCS, env, source, owner, simpleName);
-		if (propertyCallExp != null) {
-			simpleNameCS.setAst(null);		// Fixup bad OCL init
-			checkAndSetAst((ICSTEnvironment) env, simpleNameCS, propertyCallExp.getReferredProperty());
-		}
-		return propertyCallExp;
-	}
-
-	@Override
-	protected EClassifier typeCS(TypeCS typeCS,
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
-		EClassifier type = super.typeCS(typeCS, env);
-		checkAndSetAst((ICSTEnvironment) env, typeCS, type);
-		return type;
-	}
-
-	@Override
-	protected Variable<EClassifier, EParameter> variableDeclarationCS(VariableCS variableDeclarationCS,
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
-			boolean addToEnvironment) {
-		Variable<EClassifier, EParameter> variable = super.variableDeclarationCS(variableDeclarationCS, env, addToEnvironment);
-//		variableDeclarationCS.setAst(variable);
-		return variable;
-	}
-
-	@Override
-	protected OCLExpression<EClassifier> variableExpCS(VariableExpCS variableExpCS,
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
-		OCLExpression<EClassifier> variableExp = super.variableExpCS(variableExpCS, env);
-		checkAndSetAst((ICSTEnvironment) env, variableExpCS, variableExp);
-		return variableExp;
+//		try {
+			return super.simpleNameCS(simpleNameCS, createdNestedEnvironment(simpleNameCS, env), source);			
+//		} catch (Exception e) {		// Workaround bug 241421
+//			ERROR(simpleNameCS, "simpleNameCS", e.getMessage());
+//			return createDummyInvalidLiteralExp(env, simpleNameCS);
+//		}
 	}
 }
