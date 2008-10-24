@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ICSTNodeEnvironment.java,v 1.1 2008/10/11 15:27:46 ewillink Exp $
+ * $Id: ICSTNodeEnvironment.java,v 1.2 2008/10/24 15:06:37 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.environment;
 
@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EReference;
@@ -28,6 +29,7 @@ import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.ecore.InvalidLiteralExp;
 import org.eclipse.ocl.ecore.OCLExpression;
+import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 
 public interface ICSTNodeEnvironment extends ICSTEnvironment
 {
@@ -129,6 +131,11 @@ public interface ICSTNodeEnvironment extends ICSTEnvironment
 	 */
 	@Deprecated // Use getUnresolvedEnvironment().getXXX to create a context-specific element
 	public EReference getUnresolvedReference();
+
+	/**
+	 * Return false if eObject was created to resolve an unresolved reference.
+	 */
+	public boolean isResolved(EObject eObject);
 	
 	/**
 	 * Define the current CSTNode during analysis, returning the previous one.
@@ -138,9 +145,6 @@ public interface ICSTNodeEnvironment extends ICSTEnvironment
 	 */
 	@Deprecated // Use createNestedEnvironment()
 	public CSTNode setCSTNode(CSTNode cstNode);
-
-	/**
-	 * Return false if eObject was created to resolve an unresolved reference.
-	 */
-	public boolean isResolved(EObject eObject);
+	public void setNameFromIdentifier(ENamedElement astNode, IdentifierCS cstNode);
+	public void setNameFromIdentifier(ENamedElement fromAstNode, IdentifierCS cstNode, Object toAstNode);
 }
