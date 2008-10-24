@@ -51,7 +51,7 @@ public class QVTcTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTcNodeEnv
 					EPackage ePackage = tryLookupPackage(transformationName.subList(0, 1));
 					if (ePackage == null) {
 						ePackage = EcoreFactory.eINSTANCE.createEPackage();
-						initASTMapping(ePackage, transformationCS.getPathName());
+						initASTMapping(ePackage, transformationCS.getPathName(), null);
 						ePackage.setName(transformationName.get(0));
 						addPackage(ePackage);
 					}
@@ -60,7 +60,7 @@ public class QVTcTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTcNodeEnv
 						EPackage childPackage = EcoreUtils.getNamedElement(ePackage.getESubpackages(), name);
 						if (childPackage == null) {
 							childPackage = EcoreFactory.eINSTANCE.createEPackage();
-							initASTMapping(childPackage, transformationCS.getPathName());
+							initASTMapping(childPackage, transformationCS.getPathName(), null);
 							childPackage.setName(name);
 							addSubPackage(ePackage, childPackage);
 						}
