@@ -43,7 +43,7 @@ public class QVTcUnresolvedEnvironment extends UnresolvedEnvironment
 	
 	public Transformation getUnresolvedTransformation(Transformation resolvedTransformation) {
 		EPackage unresolvedEPackage = resolvedTransformation != null ? getUnresolvedEPackage(resolvedTransformation.getEPackage()) : getUnresolvedEPackage();
-		return getUnresolvedTransformation(unresolvedEPackage, resolvedTransformation.getName());
+		return getUnresolvedTransformation(unresolvedEPackage, resolvedTransformation != null ? resolvedTransformation.getName() : "");
 	}
 
 	/**
