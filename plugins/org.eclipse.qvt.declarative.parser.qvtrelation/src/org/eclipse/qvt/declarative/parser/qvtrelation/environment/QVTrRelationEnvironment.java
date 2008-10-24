@@ -205,11 +205,11 @@ public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationE
 				String message = "Conflicting type '" + formatType(type) + "' for variable of type '" + formatType(variable.getType()) + "'";
 				analyzerError(message, "explicit varDeclarationCS", cstNode);
 			}
+			cstNode.setAst(variable);
 		}
 		else {
 			variable = EcoreFactory.eINSTANCE.createVariable();
 			initASTMapping(variable, cstNode);
-//			cstNode.setAst(variable);
 			variable.setName(name);
 			variable.setType(type);
 			addExplicitVariable(variable);
