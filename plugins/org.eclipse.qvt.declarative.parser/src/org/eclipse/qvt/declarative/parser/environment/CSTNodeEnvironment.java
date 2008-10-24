@@ -200,8 +200,10 @@ public abstract class CSTNodeEnvironment<E extends ICSTEnvironment, AST extends 
 	}
 
 	public void setNameFromIdentifier(ENamedElement astNode, IdentifierCS identifier) {
-		astNode.setName(identifier.getValue());
-		identifier.setAst(astNode);
+		if (identifier != null) {
+			astNode.setName(identifier.getValue());
+			identifier.setAst(astNode);
+		}
 	}
 
 	public void setNameFromIdentifier(ENamedElement fromAstNode, IdentifierCS identifier, Object toAstNode) {
