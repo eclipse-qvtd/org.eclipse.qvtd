@@ -32,7 +32,6 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
 import org.eclipse.qvt.declarative.ecore.QVTCore.Mapping;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
-import org.eclipse.qvt.declarative.parser.environment.CSTChildEnvironment;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.DirectionCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.MappingCS;
@@ -109,7 +108,7 @@ public class QVTcTransformationEnvironment extends QVTcEnvironment<IQVTcNodeEnvi
 		else {
 			typedModel = QVTBaseFactory.eINSTANCE.createTypedModel();
 			initASTMapping(typedModel, directionCS);
-			CSTChildEnvironment.setNameFromIdentifier(typedModel, identifierCS);
+			setNameFromIdentifier(typedModel, identifierCS);
 			transformation.getModelParameter().add(typedModel);
 		}
 		return typedModel;
