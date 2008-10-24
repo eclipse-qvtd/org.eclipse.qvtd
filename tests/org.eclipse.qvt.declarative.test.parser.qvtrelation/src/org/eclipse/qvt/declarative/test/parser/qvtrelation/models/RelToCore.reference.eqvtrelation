@@ -596,24 +596,17 @@
     <elementType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.RelationImplementation"/>
   </eClassifiers>
   <modelParameter xmi:id="ast220" name="relations">
-    <usedPackage href="QVT.ecore#EMOF"/>
-    <usedPackage href="QVT.ecore#EssentialOCL"/>
-    <usedPackage href="QVT.ecore#ImperativeOCL"/>
-    <usedPackage href="QVT.ecore#QVTBase"/>
-    <usedPackage href="QVT.ecore#QVTCore"/>
-    <usedPackage href="QVT.ecore#QVTTemplate"/>
     <usedPackage href="QVT.ecore#QVTRelation"/>
-    <usedPackage href="QVT.ecore#QVTOperational"/>
+    <usedPackage href="QVT.ecore#QVTTemplate"/>
+    <usedPackage href="QVT.ecore#QVTBase"/>
+    <usedPackage href="QVT.ecore#EssentialOCL"/>
+    <usedPackage href="QVT.ecore#EMOF"/>
   </modelParameter>
   <modelParameter xmi:id="ast221" name="core">
-    <usedPackage href="QVT.ecore#EMOF"/>
-    <usedPackage href="QVT.ecore#EssentialOCL"/>
-    <usedPackage href="QVT.ecore#ImperativeOCL"/>
-    <usedPackage href="QVT.ecore#QVTBase"/>
     <usedPackage href="QVT.ecore#QVTCore"/>
-    <usedPackage href="QVT.ecore#QVTTemplate"/>
-    <usedPackage href="QVT.ecore#QVTRelation"/>
-    <usedPackage href="QVT.ecore#QVTOperational"/>
+    <usedPackage href="QVT.ecore#QVTBase"/>
+    <usedPackage href="QVT.ecore#EssentialOCL"/>
+    <usedPackage href="QVT.ecore#EMOF"/>
   </modelParameter>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast222" name="RelationalTransformationToMappingTransformation" isTopLevel="true">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast223" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast245">
