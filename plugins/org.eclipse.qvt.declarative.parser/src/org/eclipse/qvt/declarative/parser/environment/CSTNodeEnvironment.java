@@ -98,13 +98,6 @@ public abstract class CSTNodeEnvironment<E extends ICSTEnvironment, AST extends 
 			return null;
 	}
 
-	public static void setNameFromIdentifier(ENamedElement astNode, IdentifierCS identifier) {
-		if (identifier != null) {
-			astNode.setName(identifier.getValue());
-			identifier.setAst(astNode);
-		}
-	}
-
 	protected AST ast;	
 	protected CST cst;
 	
@@ -204,6 +197,19 @@ public abstract class CSTNodeEnvironment<E extends ICSTEnvironment, AST extends 
 		CSTNode oldCSTNode = this.cst;
 		this.cst = (CST)cstNode;
 		return oldCSTNode;
+	}
+
+	public void setNameFromIdentifier(ENamedElement astNode, IdentifierCS identifier) {
+		astNode.setName(identifier.getValue());
+		identifier.setAst(astNode);
+	}
+
+	public void setNameFromIdentifier(ENamedElement fromAstNode, IdentifierCS identifier, Object toAstNode) {
+		if (identifier != null) {
+			fromAstNode.setName(identifier.getValue());
+			if (toAstNode != null)
+				identifier.setAst(toAstNode);
+		}
 	}
 
 	/**
