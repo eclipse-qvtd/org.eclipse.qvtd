@@ -25,6 +25,7 @@ import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.SendSignalAction;
+import org.eclipse.ocl.lpg.BasicEnvironment2;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractModelResolver;
 
 /**
@@ -36,7 +37,7 @@ import org.eclipse.qvt.declarative.modelregistry.environment.AbstractModelResolv
 public interface ICSTEnvironment extends Environment.Internal<
 	EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter,
 	EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject>,
-	Environment.Lookup<EPackage, EClassifier, EOperation, EStructuralFeature>
+	Environment.Lookup<EPackage, EClassifier, EOperation, EStructuralFeature>, BasicEnvironment2
 {	
 	/**
 	 * Return map of AST node to defining CST node. Note that these mappings are not exactly
