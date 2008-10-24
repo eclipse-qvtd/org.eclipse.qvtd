@@ -112,6 +112,11 @@ public abstract class CSTChildEnvironment<E extends ICSTNodeEnvironment, P exten
 		rootEnvironment.initASTMapping(astNode, cstNode);
 	}
 
+	@Override
+	public void initASTMapping(Object fromAstNode, CSTNode cstNode, Object toAstNode) {
+		rootEnvironment.initASTMapping(fromAstNode, cstNode, toAstNode);
+	}
+
 	public boolean isResolved(EObject eObject) {
 		return rootEnvironment.isResolved(eObject);
 	}
@@ -309,6 +314,17 @@ public abstract class CSTChildEnvironment<E extends ICSTNodeEnvironment, P exten
 		EStructuralFeature result = super.lookupProperty(owner, name);
 		if (result != null)
 			return result;
+
+        
+        // looks up non-navigable named ends as well as unnamed ends.  Hence
+        // the possibility of ambiguity
+//        result = lookupNonNavigableEnd(owner, name);
+        
+//        if ((result == null) && AbstractOCLAnalyzer.isEscaped(name)) {
+//            result = lookupNonNavigableEnd(owner, AbstractOCLAnalyzer.unescape(name));
+//        }
+		
+		
 		P parent = getParentEnvironment();
 		if (parent != null)
 			return parent.tryLookupProperty(owner, name);
