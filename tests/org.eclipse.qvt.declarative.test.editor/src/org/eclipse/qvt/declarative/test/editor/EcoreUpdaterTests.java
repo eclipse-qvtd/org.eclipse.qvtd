@@ -48,11 +48,14 @@ public class EcoreUpdaterTests extends AbstractTestCase
 //		assertEquals("URI", expected.getURI(), actual.getURI());
 		EcoreComparator ecoreComparator = new EquivalenceMap(expected, actual);
 		List<EcoreDifference> ecoreDifferences = ecoreComparator.computeDifferences();
-		int ecoreDifferenceCount = ecoreDifferences != null ? ecoreDifferences.size() : 0;
-		if (ecoreDifferenceCount > 0) {
-			System.out.println("URI : " + expected.getURI());
-			for (EcoreDifference ecoreDifference : ecoreDifferences)
-				System.out.println(ecoreDifference);
+		int ecoreDifferenceCount = 0;
+		if (ecoreDifferences != null) {
+			ecoreDifferenceCount = ecoreDifferences.size();
+			if (ecoreDifferenceCount > 0) {
+				System.out.println("URI : " + expected.getURI());
+				for (EcoreDifference ecoreDifference : ecoreDifferences)
+					System.out.println(ecoreDifference);
+			}
 		}
 		assertEquals("Model differences", 0, ecoreDifferenceCount);
 	}
@@ -65,11 +68,14 @@ public class EcoreUpdaterTests extends AbstractTestCase
 		assertEquals("URI", expected.getURI(), actual.getURI());
 		EcoreComparator ecoreComparator = new EquivalenceMap(expected, actual);
 		List<EcoreDifference> ecoreDifferences = ecoreComparator.computeDifferences();
-		int ecoreDifferenceCount = ecoreDifferences != null ? ecoreDifferences.size() : 0;
-		if ((ecoreDifferenceCount != differences)  && (differences >= 0)) {
-			System.out.println("URI : " + expected.getURI());
-			for (EcoreDifference ecoreDifference : ecoreDifferences)
-				System.out.println(ecoreDifference);
+		int ecoreDifferenceCount = 0;
+		if (ecoreDifferences != null) {
+			ecoreDifferenceCount = ecoreDifferences.size();
+			if ((ecoreDifferenceCount != differences)  && (differences >= 0)) {
+				System.out.println("URI : " + expected.getURI());
+				for (EcoreDifference ecoreDifference : ecoreDifferences)
+					System.out.println(ecoreDifference);
+			}
 		}
 		if (differences >= 0)
 			assertEquals("Model differences", differences, ecoreDifferenceCount);
