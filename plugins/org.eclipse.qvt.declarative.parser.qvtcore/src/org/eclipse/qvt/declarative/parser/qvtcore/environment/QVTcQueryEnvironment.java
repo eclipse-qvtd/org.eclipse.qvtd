@@ -16,7 +16,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.ocl.LookupException;
-import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.cst.OCLExpressionCS;
 import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
@@ -69,20 +68,21 @@ public class QVTcQueryEnvironment extends QVTcEnvironment<IQVTcNodeEnvironment, 
 			transformation.getEOperations().add(ast);
 			return ast;
 		}
-		CSTNode cstNode = getCSTNode();
 		if (match.getEType() != returnType) {
 			String message = "Inconsistent return type previously '" + formatType(match.getEType()) + "'";
-			analyzerError(message, "QueryCS", cstNode);
+			analyzerError(message, "QueryCS", cst);
 		}
 		ast = match;
 		cst.setAst(ast);
-		if (((QueryCS)cstNode).getOclExpression() != null) {
+		cst.getPathName().setAst(ast);
+		OCLExpressionCS thisExpression = cst.getOclExpression();
+		if (thisExpression != null) {
 			QueryCS otherQuery = CSTChildEnvironment.getEnvironmentFromAST(ast, QVTcQueryEnvironment.class).getCSTNode();
-			OCLExpressionCS oclExpression = otherQuery.getOclExpression();
-			if (oclExpression != null) {
+			OCLExpressionCS otherExpression = otherQuery.getOclExpression();
+			if (otherExpression != null) {
 				String message = "Redefinition of '" + formatName(ast) + "' ignored";
-				analyzerError(message, "QueryCS", cstNode);
-				CSTUtils.setASTErrorNode(oclExpression, message);
+				analyzerError(message, "QueryCS", cst);
+				CSTUtils.setASTErrorNode(thisExpression, message);
 			}
 			else {
 				ast.getEParameters().clear();
