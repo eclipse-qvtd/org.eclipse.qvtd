@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonHoverHelper.java,v 1.3 2008/10/21 20:03:09 ewillink Exp $
+ * $Id: CommonHoverHelper.java,v 1.4 2008/10/24 15:02:52 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -126,9 +126,9 @@ public abstract class CommonHoverHelper extends HoverHelperBase implements IHove
 		}
 		
 		if (hoverDebug.isActive())
-			hoverDebug.println("Hover at " + offset + " on "
-					+ "source: " + (sourceNode != null ? sourceNode.getClass().getSimpleName() : "null")
-					+ "target: " + (targetNode != null ? targetNode.getClass().getSimpleName() : "null"));
+			hoverDebug.println("Hover at " + offset + " on"
+					+ " source: " + sourceNode.getClass().getSimpleName()
+					+ " target: " + (targetNode != null ? targetNode.getClass().getSimpleName() : "null"));
 
 		// If the target node is not null, provide help based on that;
 		// otherwise, provide help based on the source node

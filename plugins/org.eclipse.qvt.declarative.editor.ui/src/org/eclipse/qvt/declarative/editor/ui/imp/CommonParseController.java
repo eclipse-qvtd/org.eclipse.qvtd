@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.11 2008/10/21 20:06:12 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.12 2008/10/24 15:02:52 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -277,7 +277,7 @@ public abstract class CommonParseController implements IParseController
 	public ILanguageSyntaxProperties getSyntaxProperties() {
 		return null;
 	}
-    public Iterator<IToken> getTokenIterator(final IRegion region) {
+	public Iterator<IToken> getTokenIterator(final IRegion region) {
         final int regionOffset= region.getOffset();
         final int regionLength= region.getLength();
     	final int regionEnd = regionOffset + regionLength - 1;
@@ -289,17 +289,18 @@ public abstract class CommonParseController implements IParseController
             final int lastTokIdx;
             {
             	int endIdx = getTokenIndexAtCharacter(regionEnd);
-            	char[] streamChars = stream != null ? stream.getInputChars() : null;
-            	int streamLen = streamChars != null ? streamChars.length : 0;
-            	try {
-            		if (regionEnd >= 1 && regionEnd < streamLen && streamChars[regionEnd] == IToken.EOF) {
-            			// skip EOF token (assume LPG puts one at end of input character stream, since it does)
-            			endIdx--;
-            		}
-            	} catch (ArrayIndexOutOfBoundsException e) {
-        	        ErrorHandler.logError("SimpleLPGParseController.getTokenIterator(IRegion):  error initializing lastTokIdx", e);
-//            		System.err.println("getTokenIterator:  new Iterator(..)<init>:  ArrayIndexOutOfBoundsException");
-//            		System.err.println("    regionEnd = " + regionEnd + ", endIdx = " + endIdx + ", streamLen = " + streamLen + ", inputChars.length = " + streamChars.length);
+	            char[] streamChars = stream != null ? stream.getInputChars() : null;
+	            if (streamChars != null) {
+	            	try {
+	            		if ((1 <= regionEnd) && (regionEnd < streamChars.length) && (streamChars[regionEnd] == IToken.EOF)) {
+	            			// skip EOF token (assume LPG puts one at end of input character stream, since it does)
+	            			endIdx--;
+	            		}
+	            	} catch (ArrayIndexOutOfBoundsException e) {
+	        	        ErrorHandler.logError("SimpleLPGParseController.getTokenIterator(IRegion):  error initializing lastTokIdx", e);
+//            			System.err.println("getTokenIterator:  new Iterator(..)<init>:  ArrayIndexOutOfBoundsException");
+//            			System.err.println("    regionEnd = " + regionEnd + ", endIdx = " + endIdx + ", streamLen = " + streamLen + ", inputChars.length = " + streamChars.length);
+	            	}
             	}
             	lastTokIdx = endIdx;
             }

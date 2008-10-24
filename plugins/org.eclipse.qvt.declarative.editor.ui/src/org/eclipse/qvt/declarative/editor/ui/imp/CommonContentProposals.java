@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.5 2008/10/21 20:05:49 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.6 2008/10/24 15:02:52 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -92,7 +92,7 @@ public class CommonContentProposals
 			return;
 		}
 		if (proposalDebug.isActive())
-			proposalDebug.println("Proposal for '" + prefixAtOffset + "' " + cstNode.getClass().getSimpleName() + " " + (astNode != null ? astNode.getClass().getSimpleName() : "???"));
+			proposalDebug.println("Proposal for '" + prefixAtOffset + "' " + cstNode.getClass().getSimpleName() + " " + astNode.getClass().getSimpleName());
 		if (astNode instanceof EObject) {
 			List<EStructuralFeature> usages = computeUsage((EObject) astNode);
 			for (Resource resource : getResources(usages, (EObject) astNode))
@@ -100,7 +100,7 @@ public class CommonContentProposals
 					addIdentifierProposalCandidate(usages, i.next());
 		}
 		if (map.isEmpty())
-			map.put(null, new CommonNonProposal("no completion exists for '" + prefixAtOffset + "' " + cstNode.getClass().getSimpleName() + " " + (astNode != null ? astNode.getClass().getSimpleName() : "???"), "", offset));
+			map.put(null, new CommonNonProposal("no completion exists for '" + prefixAtOffset + "' " + cstNode.getClass().getSimpleName() + " " + astNode.getClass().getSimpleName(), "", offset));
 	}
 
 	protected void addKeywordProposals() {
