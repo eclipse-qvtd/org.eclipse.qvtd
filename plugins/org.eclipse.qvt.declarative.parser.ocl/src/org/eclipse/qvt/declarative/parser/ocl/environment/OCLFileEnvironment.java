@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLFileEnvironment.java,v 1.1 2008/10/11 15:27:53 ewillink Exp $
+ * $Id: OCLFileEnvironment.java,v 1.2 2008/10/24 15:22:50 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl.environment;
 
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import lpg.lpgjavaruntime.IToken;
 import lpg.lpgjavaruntime.Monitor;
 
 import org.eclipse.emf.common.notify.Notifier;
@@ -49,6 +50,8 @@ import org.eclipse.qvt.declarative.parser.environment.CSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.ocl.OCLFileAnalyzer;
 import org.eclipse.qvt.declarative.parser.ocl.OCLParsingError;
+import org.eclipse.qvt.declarative.parser.ocl.cst.FullOCLCSTFactory;
+import org.eclipse.qvt.declarative.parser.ocl.cst.TopLevelCS;
 
 public class OCLFileEnvironment extends CSTFileEnvironment<OCLTopLevelEnvironment,OCLEnvironment<?,?,?>,PackageDeclarationCS> implements ICSTFileEnvironment
 {
@@ -118,7 +121,21 @@ public class OCLFileEnvironment extends CSTFileEnvironment<OCLTopLevelEnvironmen
 
 	@Override
 	protected OCLTopLevelEnvironment createRootEnvironment(XMIResource ast, PackageDeclarationCS cst) {
-		return new OCLTopLevelEnvironment(this, ast, cst);
+		TopLevelCS topLevelCS = FullOCLCSTFactory.eINSTANCE.createTopLevelCS();
+		IToken startToken = null;
+		IToken endToken = null;
+		for (PackageDeclarationCS pkgdecl = cst; pkgdecl != null; pkgdecl = pkgdecl.getPackageDeclarationCS()) {
+			topLevelCS.getPackages().add(0, pkgdecl);
+			if ((startToken == null) || (pkgdecl.getStartToken().getStartOffset() < startToken.getStartOffset()))
+				startToken = pkgdecl.getStartToken();
+			if ((endToken == null) || (endToken.getEndOffset() < pkgdecl.getEndToken().getEndOffset()))
+				endToken = pkgdecl.getEndToken();
+		}
+		topLevelCS.setStartToken(startToken);
+		topLevelCS.setEndToken(endToken);
+		topLevelCS.setStartOffset(startToken != null ? startToken.getStartOffset() : 0);
+		topLevelCS.setEndOffset(endToken != null ? endToken.getEndOffset() : 0);
+		return new OCLTopLevelEnvironment(this, ast, topLevelCS);
 	}
 
 	@Override

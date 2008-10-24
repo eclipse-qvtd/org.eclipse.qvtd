@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLTopLevelEnvironment.java,v 1.4 2008/10/15 07:09:52 ewillink Exp $
+ * $Id: OCLTopLevelEnvironment.java,v 1.5 2008/10/24 15:22:50 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl.environment;
 
@@ -32,21 +32,21 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
-import org.eclipse.ocl.cst.PackageDeclarationCS;
 import org.eclipse.ocl.parser.OCLAnalyzer;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractModelResolver;
 import org.eclipse.qvt.declarative.modelregistry.model.ModelNameAccessor;
 import org.eclipse.qvt.declarative.modelregistry.model.Registration;
 import org.eclipse.qvt.declarative.parser.environment.CSTRootEnvironment;
+import org.eclipse.qvt.declarative.parser.ocl.cst.TopLevelCS;
 import org.eclipse.qvt.declarative.parser.plugin.QVTParserPlugin;
 import org.eclipse.qvt.declarative.parser.utils.StringUtils;
 
-public class OCLTopLevelEnvironment extends CSTRootEnvironment<OCLEnvironment<?,?,?>,PackageDeclarationCS> implements IOCLEnvironment
+public class OCLTopLevelEnvironment extends CSTRootEnvironment<OCLEnvironment<?,?,?>,TopLevelCS> implements IOCLEnvironment
 {
 	public static final String PACKAGE_NAME_SEPARATOR = ".";
 	private Map<String, List<EPackage>> packagePath = null;
 
-	public OCLTopLevelEnvironment(OCLFileEnvironment parent, XMIResource astResource, PackageDeclarationCS cstNode) {
+	public OCLTopLevelEnvironment(OCLFileEnvironment parent, XMIResource astResource, TopLevelCS cstNode) {
 		super(parent, astResource, cstNode);
 	}
 
