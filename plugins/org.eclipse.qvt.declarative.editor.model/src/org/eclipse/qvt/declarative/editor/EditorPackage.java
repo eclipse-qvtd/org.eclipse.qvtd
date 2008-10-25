@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackage.java,v 1.5 2008/08/24 18:56:21 ewillink Exp $
+ * $Id: EditorPackage.java,v 1.6 2008/10/25 16:59:00 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -60,6 +60,14 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 */
 	String eNS_PREFIX = "ed";
+
+	/**
+	 * The package content type ID.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eCONTENT_TYPE = "org.eclipse.qvt.declarative.editor";
 
 	/**
 	 * The singleton instance of the package.
