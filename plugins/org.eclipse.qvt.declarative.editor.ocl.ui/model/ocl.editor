@@ -15,6 +15,15 @@
   </node>
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:OutlineBehavior"/>
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.emf.ecore.edit/icons/full/obj16/EAnnotation.gif" format="{0}">
+      <elements xsi:type="ed:EcoreLabelElement">
+        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//EAnnotation/source"/>
+      </elements>
+    </behavior>
+    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EAnnotation"/>
+  </node>
+  <node xsi:type="ed:EcoreNode">
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.emf.ecore.edit/icons/full/obj16/EAttribute.gif" format="{0} : {1}">
       <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
@@ -113,6 +122,21 @@
   </node>
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:OutlineBehavior"/>
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Constraint.gif" format="{0} &lt;{1}> {2}">
+      <elements xsi:type="ed:EcoreLabelElement" separator=",">
+        <end xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/1.1.0/Ecore#//Constraint/constrainedElements"/>
+      </elements>
+      <elements xsi:type="ed:EcoreLabelElement">
+        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/ocl/1.1.0/Ecore#//Constraint/stereotype"/>
+      </elements>
+      <elements xsi:type="ed:EcoreLabelElement">
+        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+      </elements>
+    </behavior>
+    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/1.1.0/Ecore#//Constraint"/>
+  </node>
+  <node xsi:type="ed:EcoreNode">
+    <behavior xsi:type="ed:OutlineBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/IfExp.gif" format="if"/>
     <element xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/1.1.0/Ecore#//IfExp"/>
   </node>
@@ -155,15 +179,9 @@
   </node>
   <node xsi:type="ed:EcoreNode">
     <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/TypeType.gif" format="TypeType">
-      <elements xsi:type="ed:EcoreLabelElement">
-        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-      </elements>
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/TypeType.gif" format="TypeType {0}">
       <elements xsi:type="ed:EcoreLabelElement">
         <end xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/1.1.0/OCL/Types#//TypeType/referredType"/>
-      </elements>
-      <elements xsi:type="ed:EcoreLabelElement">
-        <end xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/1.1.0/OCL/Expressions#//Variable/initExpression"/>
       </elements>
     </behavior>
     <element xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/1.1.0/Ecore#//TypeType"/>
