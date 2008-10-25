@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.6 2008/08/24 19:18:00 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.7 2008/10/25 17:03:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -84,18 +84,14 @@ public abstract class CommonLabelProvider implements ILabelProvider
 	public void dispose() {}
 
 	protected String formatCollection(Collection<?> objects, EcoreLabelElement labelElement) {
-	String string;
-	{
 		StringBuffer s = new StringBuffer();
 		for (Object object : objects) {
 			if (s.length() > 0)
 				s.append(labelElement.getSeparator());
 			s.append(object instanceof String ? (String)object : formatObject(object));
 		}
-		string = s.toString();
+		return s.toString();
 	}
-	return string;
-}
 
 	protected String formatEcoreLabelElement(Object node, EcoreLabelElement labelElement) {
 		Object object = node;
