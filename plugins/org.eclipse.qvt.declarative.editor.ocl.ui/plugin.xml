@@ -193,12 +193,14 @@
       </editorActionContributor>
    </extension>
    <extension point="org.eclipse.ui.editors">
-      <editor id="org.eclipse.qvt.declarative.editor.ocl.ui.OCLEditor"
-            name="OCL Editor"
-            icon="icons/OCLModelFile.gif"
-            extensions="ocl"
+      <editor
+            class="org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditor"
             contributorClass="org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditorActionContributor"
-            class="org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditor"/>
+            default="true"
+            extensions="ocl"
+            icon="icons/OCLModelFile.gif"
+            id="org.eclipse.qvt.declarative.editor.ocl.ui.OCLEditor"
+            name="OCL Editor"/>
    </extension>
 
 </plugin>
