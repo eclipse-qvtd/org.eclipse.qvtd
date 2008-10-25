@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcNewWizard.java,v 1.2 2008/08/09 17:56:11 ewillink Exp $
+ * $Id: QVTcNewWizard.java,v 1.3 2008/10/25 17:03:07 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
@@ -44,6 +44,15 @@ public class QVTcNewWizard extends PagedNewWizard
 	 */
 	@Override protected InputStream openContentStream() {
 		String contents =
+			"--\n" +
+			"-- The errors in this example may be eliminated by:\n" +
+			"-- 1) Adding the Model Registry Nature using the QVT Declarative Natures\n" +
+			"--    menu entry available from the project right button menu\n" +
+			"-- 2) Using the Model Registry to bind leftMM, middleMM and rightMM to Ecore models\n" +
+			"--    that define the Left, Middle and Right classes. The Model Registry is available\n" +
+			"--    as one of the Properties of this file or its parent folders or project.\n" +
+			"--    The Properties menu entry is available from the project right button menu\n" +
+			"--\n" +
 			"transformation MyTx {\n" +
 			"	left imports leftMM;\n" +
 			"	right imports rightMM;\n" +
