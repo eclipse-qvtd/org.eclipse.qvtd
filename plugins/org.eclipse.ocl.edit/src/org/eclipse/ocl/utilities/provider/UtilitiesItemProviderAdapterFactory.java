@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: UtilitiesItemProviderAdapterFactory.java,v 1.1 2008/07/23 09:26:19 qglineur Exp $
+ * $Id: UtilitiesItemProviderAdapterFactory.java,v 1.2 2008/10/25 17:44:49 ewillink Exp $
  */
 package org.eclipse.ocl.utilities.provider;
 
@@ -46,7 +46,9 @@ import org.eclipse.ocl.utilities.util.UtilitiesAdapterFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class UtilitiesItemProviderAdapterFactory extends UtilitiesAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class UtilitiesItemProviderAdapterFactory extends
+		UtilitiesAdapterFactory implements ComposeableAdapterFactory,
+		IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
@@ -92,7 +94,8 @@ public class UtilitiesItemProviderAdapterFactory extends UtilitiesAdapterFactory
 	 * @generated
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+		return parentAdapterFactory == null ? this : parentAdapterFactory
+				.getRootAdapterFactory();
 	}
 
 	/**
@@ -101,7 +104,8 @@ public class UtilitiesItemProviderAdapterFactory extends UtilitiesAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
+	public void setParentAdapterFactory(
+			ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
 
@@ -135,7 +139,8 @@ public class UtilitiesItemProviderAdapterFactory extends UtilitiesAdapterFactory
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
+			if (!(type instanceof Class)
+					|| (((Class<?>) type).isInstance(adapter))) {
 				return adapter;
 			}
 		}

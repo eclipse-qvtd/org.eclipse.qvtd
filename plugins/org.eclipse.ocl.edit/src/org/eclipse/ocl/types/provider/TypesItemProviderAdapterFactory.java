@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TypesItemProviderAdapterFactory.java,v 1.1 2008/07/23 09:26:18 qglineur Exp $
+ * $Id: TypesItemProviderAdapterFactory.java,v 1.2 2008/10/25 17:44:49 ewillink Exp $
  */
 package org.eclipse.ocl.types.provider;
 
@@ -22,7 +22,6 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -34,7 +33,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
 import org.eclipse.ocl.types.util.TypesAdapterFactory;
 
 /**
@@ -46,7 +44,8 @@ import org.eclipse.ocl.types.util.TypesAdapterFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TypesItemProviderAdapterFactory extends TypesAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
+		implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
@@ -391,7 +390,8 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * @generated
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+		return parentAdapterFactory == null ? this : parentAdapterFactory
+				.getRootAdapterFactory();
 	}
 
 	/**
@@ -400,7 +400,8 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
+	public void setParentAdapterFactory(
+			ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
 
@@ -434,7 +435,8 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
+			if (!(type instanceof Class)
+					|| (((Class<?>) type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -483,19 +485,32 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * @generated
 	 */
 	public void dispose() {
-		if (anyTypeItemProvider != null) anyTypeItemProvider.dispose();
-		if (bagTypeItemProvider != null) bagTypeItemProvider.dispose();
-		if (collectionTypeItemProvider != null) collectionTypeItemProvider.dispose();
-		if (elementTypeItemProvider != null) elementTypeItemProvider.dispose();
-		if (invalidTypeItemProvider != null) invalidTypeItemProvider.dispose();
-		if (messageTypeItemProvider != null) messageTypeItemProvider.dispose();
-		if (orderedSetTypeItemProvider != null) orderedSetTypeItemProvider.dispose();
-		if (primitiveTypeItemProvider != null) primitiveTypeItemProvider.dispose();
-		if (sequenceTypeItemProvider != null) sequenceTypeItemProvider.dispose();
-		if (setTypeItemProvider != null) setTypeItemProvider.dispose();
-		if (tupleTypeItemProvider != null) tupleTypeItemProvider.dispose();
-		if (typeTypeItemProvider != null) typeTypeItemProvider.dispose();
-		if (voidTypeItemProvider != null) voidTypeItemProvider.dispose();
+		if (anyTypeItemProvider != null)
+			anyTypeItemProvider.dispose();
+		if (bagTypeItemProvider != null)
+			bagTypeItemProvider.dispose();
+		if (collectionTypeItemProvider != null)
+			collectionTypeItemProvider.dispose();
+		if (elementTypeItemProvider != null)
+			elementTypeItemProvider.dispose();
+		if (invalidTypeItemProvider != null)
+			invalidTypeItemProvider.dispose();
+		if (messageTypeItemProvider != null)
+			messageTypeItemProvider.dispose();
+		if (orderedSetTypeItemProvider != null)
+			orderedSetTypeItemProvider.dispose();
+		if (primitiveTypeItemProvider != null)
+			primitiveTypeItemProvider.dispose();
+		if (sequenceTypeItemProvider != null)
+			sequenceTypeItemProvider.dispose();
+		if (setTypeItemProvider != null)
+			setTypeItemProvider.dispose();
+		if (tupleTypeItemProvider != null)
+			tupleTypeItemProvider.dispose();
+		if (typeTypeItemProvider != null)
+			typeTypeItemProvider.dispose();
+		if (voidTypeItemProvider != null)
+			voidTypeItemProvider.dispose();
 	}
 
 }

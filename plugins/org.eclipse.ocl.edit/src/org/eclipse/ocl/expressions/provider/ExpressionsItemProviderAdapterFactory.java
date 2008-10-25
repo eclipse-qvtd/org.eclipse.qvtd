@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ExpressionsItemProviderAdapterFactory.java,v 1.1 2008/07/23 09:26:17 qglineur Exp $
+ * $Id: ExpressionsItemProviderAdapterFactory.java,v 1.2 2008/10/25 17:44:48 ewillink Exp $
  */
 package org.eclipse.ocl.expressions.provider;
 
@@ -22,7 +22,6 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -34,7 +33,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
 import org.eclipse.ocl.expressions.util.ExpressionsAdapterFactory;
 
 /**
@@ -46,7 +44,9 @@ import org.eclipse.ocl.expressions.util.ExpressionsAdapterFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class ExpressionsItemProviderAdapterFactory extends
+		ExpressionsAdapterFactory implements ComposeableAdapterFactory,
+		IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
@@ -102,7 +102,8 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	@Override
 	public Adapter createAssociationClassCallExpAdapter() {
 		if (associationClassCallExpItemProvider == null) {
-			associationClassCallExpItemProvider = new AssociationClassCallExpItemProvider(this);
+			associationClassCallExpItemProvider = new AssociationClassCallExpItemProvider(
+					this);
 		}
 
 		return associationClassCallExpItemProvider;
@@ -125,7 +126,8 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	@Override
 	public Adapter createBooleanLiteralExpAdapter() {
 		if (booleanLiteralExpItemProvider == null) {
-			booleanLiteralExpItemProvider = new BooleanLiteralExpItemProvider(this);
+			booleanLiteralExpItemProvider = new BooleanLiteralExpItemProvider(
+					this);
 		}
 
 		return booleanLiteralExpItemProvider;
@@ -171,7 +173,8 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	@Override
 	public Adapter createCollectionLiteralExpAdapter() {
 		if (collectionLiteralExpItemProvider == null) {
-			collectionLiteralExpItemProvider = new CollectionLiteralExpItemProvider(this);
+			collectionLiteralExpItemProvider = new CollectionLiteralExpItemProvider(
+					this);
 		}
 
 		return collectionLiteralExpItemProvider;
@@ -263,7 +266,8 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	@Override
 	public Adapter createIntegerLiteralExpAdapter() {
 		if (integerLiteralExpItemProvider == null) {
-			integerLiteralExpItemProvider = new IntegerLiteralExpItemProvider(this);
+			integerLiteralExpItemProvider = new IntegerLiteralExpItemProvider(
+					this);
 		}
 
 		return integerLiteralExpItemProvider;
@@ -286,7 +290,8 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	@Override
 	public Adapter createUnlimitedNaturalLiteralExpAdapter() {
 		if (unlimitedNaturalLiteralExpItemProvider == null) {
-			unlimitedNaturalLiteralExpItemProvider = new UnlimitedNaturalLiteralExpItemProvider(this);
+			unlimitedNaturalLiteralExpItemProvider = new UnlimitedNaturalLiteralExpItemProvider(
+					this);
 		}
 
 		return unlimitedNaturalLiteralExpItemProvider;
@@ -309,7 +314,8 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	@Override
 	public Adapter createInvalidLiteralExpAdapter() {
 		if (invalidLiteralExpItemProvider == null) {
-			invalidLiteralExpItemProvider = new InvalidLiteralExpItemProvider(this);
+			invalidLiteralExpItemProvider = new InvalidLiteralExpItemProvider(
+					this);
 		}
 
 		return invalidLiteralExpItemProvider;
@@ -447,7 +453,8 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	@Override
 	public Adapter createOperationCallExpAdapter() {
 		if (operationCallExpItemProvider == null) {
-			operationCallExpItemProvider = new OperationCallExpItemProvider(this);
+			operationCallExpItemProvider = new OperationCallExpItemProvider(
+					this);
 		}
 
 		return operationCallExpItemProvider;
@@ -539,7 +546,8 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	@Override
 	public Adapter createStringLiteralExpAdapter() {
 		if (stringLiteralExpItemProvider == null) {
-			stringLiteralExpItemProvider = new StringLiteralExpItemProvider(this);
+			stringLiteralExpItemProvider = new StringLiteralExpItemProvider(
+					this);
 		}
 
 		return stringLiteralExpItemProvider;
@@ -585,7 +593,8 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	@Override
 	public Adapter createTupleLiteralPartAdapter() {
 		if (tupleLiteralPartItemProvider == null) {
-			tupleLiteralPartItemProvider = new TupleLiteralPartItemProvider(this);
+			tupleLiteralPartItemProvider = new TupleLiteralPartItemProvider(
+					this);
 		}
 
 		return tupleLiteralPartItemProvider;
@@ -631,7 +640,8 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	@Override
 	public Adapter createUnspecifiedValueExpAdapter() {
 		if (unspecifiedValueExpItemProvider == null) {
-			unspecifiedValueExpItemProvider = new UnspecifiedValueExpItemProvider(this);
+			unspecifiedValueExpItemProvider = new UnspecifiedValueExpItemProvider(
+					this);
 		}
 
 		return unspecifiedValueExpItemProvider;
@@ -690,7 +700,8 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	 * @generated
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+		return parentAdapterFactory == null ? this : parentAdapterFactory
+				.getRootAdapterFactory();
 	}
 
 	/**
@@ -699,7 +710,8 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
+	public void setParentAdapterFactory(
+			ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
 
@@ -733,7 +745,8 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
+			if (!(type instanceof Class)
+					|| (((Class<?>) type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -782,32 +795,58 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	 * @generated
 	 */
 	public void dispose() {
-		if (associationClassCallExpItemProvider != null) associationClassCallExpItemProvider.dispose();
-		if (booleanLiteralExpItemProvider != null) booleanLiteralExpItemProvider.dispose();
-		if (collectionItemItemProvider != null) collectionItemItemProvider.dispose();
-		if (collectionLiteralExpItemProvider != null) collectionLiteralExpItemProvider.dispose();
-		if (collectionRangeItemProvider != null) collectionRangeItemProvider.dispose();
-		if (enumLiteralExpItemProvider != null) enumLiteralExpItemProvider.dispose();
-		if (ifExpItemProvider != null) ifExpItemProvider.dispose();
-		if (integerLiteralExpItemProvider != null) integerLiteralExpItemProvider.dispose();
-		if (unlimitedNaturalLiteralExpItemProvider != null) unlimitedNaturalLiteralExpItemProvider.dispose();
-		if (invalidLiteralExpItemProvider != null) invalidLiteralExpItemProvider.dispose();
-		if (iterateExpItemProvider != null) iterateExpItemProvider.dispose();
-		if (iteratorExpItemProvider != null) iteratorExpItemProvider.dispose();
-		if (letExpItemProvider != null) letExpItemProvider.dispose();
-		if (messageExpItemProvider != null) messageExpItemProvider.dispose();
-		if (nullLiteralExpItemProvider != null) nullLiteralExpItemProvider.dispose();
-		if (operationCallExpItemProvider != null) operationCallExpItemProvider.dispose();
-		if (propertyCallExpItemProvider != null) propertyCallExpItemProvider.dispose();
-		if (realLiteralExpItemProvider != null) realLiteralExpItemProvider.dispose();
-		if (stateExpItemProvider != null) stateExpItemProvider.dispose();
-		if (stringLiteralExpItemProvider != null) stringLiteralExpItemProvider.dispose();
-		if (tupleLiteralExpItemProvider != null) tupleLiteralExpItemProvider.dispose();
-		if (tupleLiteralPartItemProvider != null) tupleLiteralPartItemProvider.dispose();
-		if (typeExpItemProvider != null) typeExpItemProvider.dispose();
-		if (unspecifiedValueExpItemProvider != null) unspecifiedValueExpItemProvider.dispose();
-		if (variableItemProvider != null) variableItemProvider.dispose();
-		if (variableExpItemProvider != null) variableExpItemProvider.dispose();
+		if (associationClassCallExpItemProvider != null)
+			associationClassCallExpItemProvider.dispose();
+		if (booleanLiteralExpItemProvider != null)
+			booleanLiteralExpItemProvider.dispose();
+		if (collectionItemItemProvider != null)
+			collectionItemItemProvider.dispose();
+		if (collectionLiteralExpItemProvider != null)
+			collectionLiteralExpItemProvider.dispose();
+		if (collectionRangeItemProvider != null)
+			collectionRangeItemProvider.dispose();
+		if (enumLiteralExpItemProvider != null)
+			enumLiteralExpItemProvider.dispose();
+		if (ifExpItemProvider != null)
+			ifExpItemProvider.dispose();
+		if (integerLiteralExpItemProvider != null)
+			integerLiteralExpItemProvider.dispose();
+		if (unlimitedNaturalLiteralExpItemProvider != null)
+			unlimitedNaturalLiteralExpItemProvider.dispose();
+		if (invalidLiteralExpItemProvider != null)
+			invalidLiteralExpItemProvider.dispose();
+		if (iterateExpItemProvider != null)
+			iterateExpItemProvider.dispose();
+		if (variableItemProvider != null)
+			variableItemProvider.dispose();
+		if (iteratorExpItemProvider != null)
+			iteratorExpItemProvider.dispose();
+		if (letExpItemProvider != null)
+			letExpItemProvider.dispose();
+		if (messageExpItemProvider != null)
+			messageExpItemProvider.dispose();
+		if (nullLiteralExpItemProvider != null)
+			nullLiteralExpItemProvider.dispose();
+		if (operationCallExpItemProvider != null)
+			operationCallExpItemProvider.dispose();
+		if (propertyCallExpItemProvider != null)
+			propertyCallExpItemProvider.dispose();
+		if (realLiteralExpItemProvider != null)
+			realLiteralExpItemProvider.dispose();
+		if (stateExpItemProvider != null)
+			stateExpItemProvider.dispose();
+		if (stringLiteralExpItemProvider != null)
+			stringLiteralExpItemProvider.dispose();
+		if (tupleLiteralExpItemProvider != null)
+			tupleLiteralExpItemProvider.dispose();
+		if (tupleLiteralPartItemProvider != null)
+			tupleLiteralPartItemProvider.dispose();
+		if (typeExpItemProvider != null)
+			typeExpItemProvider.dispose();
+		if (unspecifiedValueExpItemProvider != null)
+			unspecifiedValueExpItemProvider.dispose();
+		if (variableExpItemProvider != null)
+			variableExpItemProvider.dispose();
 	}
 
 }

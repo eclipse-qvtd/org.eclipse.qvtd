@@ -12,19 +12,15 @@
  * 
  * </copyright>
  *
- * $Id: UnspecifiedValueExpItemProvider.java,v 1.1 2008/07/23 09:26:17 qglineur Exp $
+ * $Id: UnspecifiedValueExpItemProvider.java,v 1.2 2008/10/25 17:44:48 ewillink Exp $
  */
 package org.eclipse.ocl.expressions.provider;
-
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -34,12 +30,8 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.eclipse.ocl.edit.internal.OCLEditPlugin;
-
 import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.ocl.expressions.UnspecifiedValueExp;
-
 import org.eclipse.ocl.utilities.UtilitiesPackage;
 
 /**
@@ -48,14 +40,9 @@ import org.eclipse.ocl.utilities.UtilitiesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class UnspecifiedValueExpItemProvider
-	extends OCLExpressionItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class UnspecifiedValueExpItemProvider extends OCLExpressionItemProvider
+		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -90,19 +77,17 @@ public class UnspecifiedValueExpItemProvider
 	 * @generated
 	 */
 	protected void addTypeStartPositionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TypedASTNode_typeStartPosition_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypedASTNode_typeStartPosition_feature", "_UI_TypedASTNode_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				 UtilitiesPackage.Literals.TYPED_AST_NODE__TYPE_START_POSITION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_TypedASTNode_typeStartPosition_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_TypedASTNode_typeStartPosition_feature", "_UI_TypedASTNode_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						UtilitiesPackage.Literals.TYPED_AST_NODE__TYPE_START_POSITION,
+						true, false, false,
+						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -112,19 +97,17 @@ public class UnspecifiedValueExpItemProvider
 	 * @generated
 	 */
 	protected void addTypeEndPositionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TypedASTNode_typeEndPosition_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypedASTNode_typeEndPosition_feature", "_UI_TypedASTNode_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				 UtilitiesPackage.Literals.TYPED_AST_NODE__TYPE_END_POSITION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_TypedASTNode_typeEndPosition_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_TypedASTNode_typeEndPosition_feature", "_UI_TypedASTNode_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						UtilitiesPackage.Literals.TYPED_AST_NODE__TYPE_END_POSITION,
+						true, false, false,
+						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -135,7 +118,8 @@ public class UnspecifiedValueExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/UnspecifiedValueExp")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/UnspecifiedValueExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -146,7 +130,7 @@ public class UnspecifiedValueExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		UnspecifiedValueExp<?> unspecifiedValueExp = (UnspecifiedValueExp<?>)object;
+		UnspecifiedValueExp<?> unspecifiedValueExp = (UnspecifiedValueExp<?>) object;
 		return getString("_UI_UnspecifiedValueExp_type") + " " + unspecifiedValueExp.getStartPosition(); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
@@ -162,10 +146,11 @@ public class UnspecifiedValueExpItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(UnspecifiedValueExp.class)) {
-			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION:
-			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
+		case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION:
+		case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), false, true));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -178,19 +163,9 @@ public class UnspecifiedValueExpItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return OCLEditPlugin.INSTANCE;
 	}
 
 }

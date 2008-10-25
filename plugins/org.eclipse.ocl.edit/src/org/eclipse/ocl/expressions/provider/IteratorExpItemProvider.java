@@ -12,28 +12,21 @@
  * 
  * </copyright>
  *
- * $Id: IteratorExpItemProvider.java,v 1.1 2008/07/23 09:26:17 qglineur Exp $
+ * $Id: IteratorExpItemProvider.java,v 1.2 2008/10/25 17:44:49 ewillink Exp $
  */
 package org.eclipse.ocl.expressions.provider;
-
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
-import org.eclipse.ocl.edit.internal.OCLEditPlugin;
-
 import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.ocl.expressions.IteratorExp;
 
@@ -43,14 +36,9 @@ import org.eclipse.ocl.expressions.IteratorExp;
  * <!-- end-user-doc -->
  * @generated
  */
-public class IteratorExpItemProvider
-	extends LoopExpItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class IteratorExpItemProvider extends LoopExpItemProvider implements
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -84,7 +72,8 @@ public class IteratorExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IteratorExp")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/IteratorExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -95,7 +84,7 @@ public class IteratorExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		IteratorExp<?, ?> iteratorExp = (IteratorExp<?, ?>)object;
+		IteratorExp<?, ?> iteratorExp = (IteratorExp<?, ?>) object;
 		return getString("_UI_IteratorExp_type") + " " + iteratorExp.getStartPosition(); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
@@ -120,7 +109,8 @@ public class IteratorExpItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -131,31 +121,20 @@ public class IteratorExpItemProvider
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+	public String getCreateChildText(Object owner, Object feature,
+			Object child, Collection<?> selection) {
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify =
-			childFeature == ExpressionsPackage.Literals.CALL_EXP__SOURCE ||
-			childFeature == ExpressionsPackage.Literals.LOOP_EXP__BODY;
+		boolean qualify = childFeature == ExpressionsPackage.Literals.CALL_EXP__SOURCE
+				|| childFeature == ExpressionsPackage.Literals.LOOP_EXP__BODY;
 
 		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2", //$NON-NLS-1$
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+			return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+					new Object[] { getTypeText(childObject),
+							getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return OCLEditPlugin.INSTANCE;
 	}
 
 }

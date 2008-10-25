@@ -12,28 +12,21 @@
  * 
  * </copyright>
  *
- * $Id: NumericLiteralExpItemProvider.java,v 1.1 2008/07/23 09:26:18 qglineur Exp $
+ * $Id: NumericLiteralExpItemProvider.java,v 1.2 2008/10/25 17:44:49 ewillink Exp $
  */
 package org.eclipse.ocl.expressions.provider;
-
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
-import org.eclipse.ocl.edit.internal.OCLEditPlugin;
-
 import org.eclipse.ocl.expressions.NumericLiteralExp;
 
 /**
@@ -42,14 +35,10 @@ import org.eclipse.ocl.expressions.NumericLiteralExp;
  * <!-- end-user-doc -->
  * @generated
  */
-public class NumericLiteralExpItemProvider
-	extends PrimitiveLiteralExpItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class NumericLiteralExpItemProvider extends
+		PrimitiveLiteralExpItemProvider implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider,
+		IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -83,7 +72,8 @@ public class NumericLiteralExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/NumericLiteralExp")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/NumericLiteralExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -94,7 +84,7 @@ public class NumericLiteralExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		NumericLiteralExp<?> numericLiteralExp = (NumericLiteralExp<?>)object;
+		NumericLiteralExp<?> numericLiteralExp = (NumericLiteralExp<?>) object;
 		return getString("_UI_NumericLiteralExp_type") + " " + numericLiteralExp.getStartPosition(); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
@@ -119,19 +109,9 @@ public class NumericLiteralExpItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return OCLEditPlugin.INSTANCE;
 	}
 
 }

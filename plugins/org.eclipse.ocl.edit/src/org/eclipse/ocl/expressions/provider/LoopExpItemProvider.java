@@ -12,21 +12,16 @@
  * 
  * </copyright>
  *
- * $Id: LoopExpItemProvider.java,v 1.1 2008/07/23 09:26:17 qglineur Exp $
+ * $Id: LoopExpItemProvider.java,v 1.2 2008/10/25 17:44:48 ewillink Exp $
  */
 package org.eclipse.ocl.expressions.provider;
-
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -34,9 +29,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.eclipse.ocl.edit.internal.OCLEditPlugin;
-
 import org.eclipse.ocl.expressions.ExpressionsFactory;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.ocl.expressions.LoopExp;
@@ -47,14 +39,9 @@ import org.eclipse.ocl.expressions.LoopExp;
  * <!-- end-user-doc -->
  * @generated
  */
-public class LoopExpItemProvider
-	extends CallExpItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class LoopExpItemProvider extends CallExpItemProvider implements
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -89,11 +76,13 @@ public class LoopExpItemProvider
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(
+			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ExpressionsPackage.Literals.LOOP_EXP__BODY);
-			childrenFeatures.add(ExpressionsPackage.Literals.LOOP_EXP__ITERATOR);
+			childrenFeatures
+					.add(ExpressionsPackage.Literals.LOOP_EXP__ITERATOR);
 		}
 		return childrenFeatures;
 	}
@@ -119,7 +108,8 @@ public class LoopExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/LoopExp")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/LoopExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -130,7 +120,7 @@ public class LoopExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		LoopExp<?, ?> loopExp = (LoopExp<?, ?>)object;
+		LoopExp<?, ?> loopExp = (LoopExp<?, ?>) object;
 		return getString("_UI_LoopExp_type") + " " + loopExp.getStartPosition(); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
@@ -146,10 +136,11 @@ public class LoopExpItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(LoopExp.class)) {
-			case ExpressionsPackage.LOOP_EXP__BODY:
-			case ExpressionsPackage.LOOP_EXP__ITERATOR:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
+		case ExpressionsPackage.LOOP_EXP__BODY:
+		case ExpressionsPackage.LOOP_EXP__ITERATOR:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), true, false));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -162,123 +153,103 @@ public class LoopExpItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createAssociationClassCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createAssociationClassCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createBooleanLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createBooleanLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createCollectionLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createCollectionLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createEnumLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createEnumLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createIfExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createIfExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createIntegerLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createIntegerLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createUnlimitedNaturalLiteralExp()));
+		newChildDescriptors
+				.add(createChildParameter(
+						ExpressionsPackage.Literals.LOOP_EXP__BODY,
+						ExpressionsFactory.eINSTANCE
+								.createUnlimitedNaturalLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createInvalidLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createInvalidLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createIterateExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createIterateExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createIteratorExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createIteratorExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createLetExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createLetExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createMessageExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createMessageExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createNullLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createNullLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createOperationCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createOperationCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createPropertyCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createPropertyCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createRealLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createRealLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createStateExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createStateExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createStringLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createStringLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createTupleLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createTupleLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createTypeExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createTypeExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createUnspecifiedValueExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createUnspecifiedValueExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__BODY,
-				 ExpressionsFactory.eINSTANCE.createVariableExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__BODY,
+				ExpressionsFactory.eINSTANCE.createVariableExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOOP_EXP__ITERATOR,
-				 ExpressionsFactory.eINSTANCE.createVariable()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LOOP_EXP__ITERATOR,
+				ExpressionsFactory.eINSTANCE.createVariable()));
 	}
 
 	/**
@@ -288,31 +259,20 @@ public class LoopExpItemProvider
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+	public String getCreateChildText(Object owner, Object feature,
+			Object child, Collection<?> selection) {
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify =
-			childFeature == ExpressionsPackage.Literals.CALL_EXP__SOURCE ||
-			childFeature == ExpressionsPackage.Literals.LOOP_EXP__BODY;
+		boolean qualify = childFeature == ExpressionsPackage.Literals.CALL_EXP__SOURCE
+				|| childFeature == ExpressionsPackage.Literals.LOOP_EXP__BODY;
 
 		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2", //$NON-NLS-1$
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+			return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+					new Object[] { getTypeText(childObject),
+							getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return OCLEditPlugin.INSTANCE;
 	}
 
 }

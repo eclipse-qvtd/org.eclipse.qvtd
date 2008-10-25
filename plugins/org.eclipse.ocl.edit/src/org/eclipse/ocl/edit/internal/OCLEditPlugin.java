@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLEditPlugin.java,v 1.1 2008/07/23 09:26:19 qglineur Exp $
+ * $Id: OCLEditPlugin.java,v 1.2 2008/10/25 17:44:49 ewillink Exp $
  */
 package org.eclipse.ocl.edit.internal;
 
@@ -50,9 +50,7 @@ public final class OCLEditPlugin extends EMFPlugin {
 	 * @generated
 	 */
 	public OCLEditPlugin() {
-		super
-		  (new ResourceLocator [] {
-		   });
+		super(new ResourceLocator[] {});
 	}
 
 	/**

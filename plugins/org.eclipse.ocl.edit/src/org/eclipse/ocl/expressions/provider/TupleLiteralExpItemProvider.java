@@ -12,21 +12,16 @@
  * 
  * </copyright>
  *
- * $Id: TupleLiteralExpItemProvider.java,v 1.1 2008/07/23 09:26:17 qglineur Exp $
+ * $Id: TupleLiteralExpItemProvider.java,v 1.2 2008/10/25 17:44:48 ewillink Exp $
  */
 package org.eclipse.ocl.expressions.provider;
-
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -34,9 +29,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.eclipse.ocl.edit.internal.OCLEditPlugin;
-
 import org.eclipse.ocl.expressions.ExpressionsFactory;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.ocl.expressions.TupleLiteralExp;
@@ -47,14 +39,9 @@ import org.eclipse.ocl.expressions.TupleLiteralExp;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TupleLiteralExpItemProvider
-	extends LiteralExpItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class TupleLiteralExpItemProvider extends LiteralExpItemProvider
+		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -89,10 +76,12 @@ public class TupleLiteralExpItemProvider
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(
+			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ExpressionsPackage.Literals.TUPLE_LITERAL_EXP__PART);
+			childrenFeatures
+					.add(ExpressionsPackage.Literals.TUPLE_LITERAL_EXP__PART);
 		}
 		return childrenFeatures;
 	}
@@ -118,7 +107,8 @@ public class TupleLiteralExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/TupleLiteralExp")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/TupleLiteralExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -129,7 +119,7 @@ public class TupleLiteralExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		TupleLiteralExp<?, ?> tupleLiteralExp = (TupleLiteralExp<?, ?>)object;
+		TupleLiteralExp<?, ?> tupleLiteralExp = (TupleLiteralExp<?, ?>) object;
 		return getString("_UI_TupleLiteralExp_type") + " " + tupleLiteralExp.getStartPosition(); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
@@ -145,9 +135,10 @@ public class TupleLiteralExpItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TupleLiteralExp.class)) {
-			case ExpressionsPackage.TUPLE_LITERAL_EXP__PART:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
+		case ExpressionsPackage.TUPLE_LITERAL_EXP__PART:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), true, false));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -160,24 +151,13 @@ public class TupleLiteralExpItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.TUPLE_LITERAL_EXP__PART,
-				 ExpressionsFactory.eINSTANCE.createTupleLiteralPart()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return OCLEditPlugin.INSTANCE;
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.TUPLE_LITERAL_EXP__PART,
+				ExpressionsFactory.eINSTANCE.createTupleLiteralPart()));
 	}
 
 }
