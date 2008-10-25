@@ -175,18 +175,22 @@
       </editorActionContributor>
    </extension>
    <extension point="org.eclipse.ui.editors">
-      <editor id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor"
-            name="QVT Core Editor"
-            icon="icons/QVTcModelFile.gif"
-            extensions="qvtc"
+      <editor
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor"
             contributorClass="org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditorActionContributor"
-            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor"/>
-      <editor id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcMultiEditor"
-            name="QVT Core Multi-View Editor"
+            default="true"
+            extensions="qvtc"
             icon="icons/QVTcModelFile.gif"
-            extensions="qvtc,qvtcore,eqvtcore"
+            id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcEditor"
+            name="QVT Core Editor"/>
+      <editor
+            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcMultiEditor"
             contributorClass="org.eclipse.qvt.declarative.editor.ui.actions.PagedActionBarContributor"
-            class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcMultiEditor"/>
+            default="false"
+            extensions="qvtc,qvtcore,eqvtcore"
+            icon="icons/QVTcModelFile.gif"
+            id="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcMultiEditor"
+            name="QVT Core Multi-View Editor"/>
    </extension>
 
 </plugin>
