@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorEditor.java,v 1.2 2008/08/24 18:56:53 ewillink Exp $
+ * $Id: EditorEditor.java,v 1.3 2008/10/25 17:00:45 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.presentation;
 
@@ -57,6 +57,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -922,7 +923,7 @@ public class EditorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void createModel() {
+	public void createModelGen() {
 		URI resourceURI = EditUIUtil.getURI(getEditorInput());
 		Exception exception = null;
 		Resource resource = null;
@@ -941,6 +942,10 @@ public class EditorEditor
 			resourceToDiagnosticMap.put(resource,  analyzeResourceProblems(resource, exception));
 		}
 		editingDomain.getResourceSet().eAdapters().add(problemIndicationAdapter);
+	}
+	public void createModel() {
+		editingDomain.getResourceSet().getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap());;
+		createModelGen();
 	}
 
 	/**
