@@ -12,12 +12,14 @@
  * 
  * </copyright>
  *
- * $Id: CommonOutlinePage.java,v 1.2 2008/08/26 19:10:36 ewillink Exp $
+ * $Id: CommonOutlinePage.java,v 1.3 2008/10/26 19:00:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.cst;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.imp.editor.IMPOutlinePage;
+import org.eclipse.imp.editor.ModelTreeNode;
 import org.eclipse.imp.parser.IParseController;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -48,6 +50,7 @@ public abstract class CommonOutlinePage extends IMPOutlinePage implements ICSTOu
 	@Override
 	public void dispose() {
 		super.dispose();
+		getSite().getPage().removePostSelectionListener(this);
 		getSite().getPage().removeSelectionListener(this);
 // FIXME (bug 230581) editor.removeModelListener(this);
 	}
@@ -56,8 +59,15 @@ public abstract class CommonOutlinePage extends IMPOutlinePage implements ICSTOu
 		if ((selection instanceof IStructuredSelection) && !selection.isEmpty()) {
 			Object[] selections = ((IStructuredSelection)selection).toArray();
 			Object[] unwrappedSelections = new Object[selections.length];
-			for (int i = 0; i < selections.length; i++)
-				unwrappedSelections[i] = treeModelBuilder.getItem(selections[i]);
+			for (int i = 0; i < selections.length; i++) {
+				for (Object n = selections[i]; n != null; n = (n instanceof EObject) ? ((EObject)n).eContainer() : null) {
+					ModelTreeNode item = treeModelBuilder.getItem(n);
+					if (item != null) {
+						unwrappedSelections[i] = item;
+						break;
+					}
+				}
+			}
 			selection = new StructuredSelection(unwrappedSelections);
 			
 		}
@@ -68,6 +78,7 @@ public abstract class CommonOutlinePage extends IMPOutlinePage implements ICSTOu
 	public void init(IPageSite pageSite) {
 		editor.addModelListener(this);
 		pageSite.getPage().addSelectionListener(this);
+		pageSite.getPage().addPostSelectionListener(this);
 		super.init(pageSite);
 	}
 	
