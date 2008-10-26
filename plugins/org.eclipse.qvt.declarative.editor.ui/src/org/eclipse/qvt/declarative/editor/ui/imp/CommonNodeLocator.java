@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonNodeLocator.java,v 1.5 2008/10/21 20:04:13 ewillink Exp $
+ * $Id: CommonNodeLocator.java,v 1.6 2008/10/26 18:55:35 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -70,7 +70,7 @@ public class CommonNodeLocator implements ISourcePositionLocator
 				QVTEditorPlugin.VISITOR_TRACE.println(getClass().getSimpleName() + ".preVisit(ASTNode):  Examining " + astNode.getClass().getName() +
 			    " @ [" + nodeStartOffset + "->" + nodeEndOffset + ']');
 			// If this node contains the span of interest then record it
-			if (nodeStartOffset <= fStartOffset && nodeEndOffset >= fEndOffset) {
+			if ((nodeStartOffset <= fStartOffset) && (fEndOffset <= (nodeEndOffset+1))) {	// nodeEndOffset+1 is the RHS of the last character
 				if (QVTEditorPlugin.VISITOR_TRACE.isActive())
 					QVTEditorPlugin.VISITOR_TRACE.println(getClass().getSimpleName() + ".preVisit(ASTNode) SELECTED for offsets [" + fStartOffset + ".." + fEndOffset + "]");
 				result = cstNode;
