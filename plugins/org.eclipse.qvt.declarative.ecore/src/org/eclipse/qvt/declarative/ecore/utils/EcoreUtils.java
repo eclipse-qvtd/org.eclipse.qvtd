@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EcoreUtils.java,v 1.4 2008/10/10 06:37:58 ewillink Exp $
+ * $Id: EcoreUtils.java,v 1.5 2008/10/26 17:32:12 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.utils;
 
@@ -99,7 +99,7 @@ public class EcoreUtils
             return formatString(((ENamedElement) object).getName());
         } else if (object instanceof EObject) {
             return formatString(((EObject) object).eClass().getName());
-       } else {
+        } else {
             return object.getClass().getName();
         }
 	}
