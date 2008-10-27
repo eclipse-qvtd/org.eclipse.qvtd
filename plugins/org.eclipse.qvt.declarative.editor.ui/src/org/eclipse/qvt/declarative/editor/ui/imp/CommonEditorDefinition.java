@@ -12,16 +12,15 @@
  * 
  * </copyright>
  *
- * $Id: CommonEditorDefinition.java,v 1.8 2008/08/26 19:09:56 ewillink Exp $
+ * $Id: CommonEditorDefinition.java,v 1.9 2008/10/27 21:21:41 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -31,8 +30,6 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -61,35 +58,25 @@ import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 public class CommonEditorDefinition implements IResourceChangeListener, IResourceDeltaVisitor
 {
 	public static CommonEditorDefinition create(ICommonPlugin plugin, String editorFile) {
-		CommonEditorDefinition editorDefinition = null;
-		Path path = new Path(editorFile);
-		URL url = FileLocator.find(plugin.getBundle(), path, null);
-		try {
-			URL resolvedURL = FileLocator.resolve(url);
-			editorDefinition = new CommonEditorDefinition(resolvedURL);			
-		} catch (IOException e) {
-			plugin.logException("Failed to load '" + String.valueOf(path) + "'", e);
-		} finally {
-			if (editorDefinition == null)
-				editorDefinition = new CommonEditorDefinition(null);			
-		}
-		return editorDefinition;
+		URI editorURI = URI.createPlatformPluginURI(plugin.getBundle().getSymbolicName() + "/" + editorFile, true);
+		return new CommonEditorDefinition(editorURI);			
 	}
 
-	protected final URL editorURL;
+	protected final URI editorURI;
     protected EditorDefinition editorDefinition = null;
 	private Map<EClassifier, EcoreNode> ecoreMap = null;
 	private Map<Class<?>, JavaNode> javaMap = null;
+	private Set<URI> editorURIs = null;			// Closure of EditorDefinition._extends
 
-    public CommonEditorDefinition(URL editorURL) {
-    	this.editorURL = editorURL;
+    public CommonEditorDefinition(URI editorURI) {
+    	this.editorURI = editorURI;
 		EditorPackage.eINSTANCE.getClass();
-		if (editorURL != null)
+		if (editorURI != null)
 			ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
     }
 
     public void dispose() {
-    	if (editorURL != null)
+    	if (editorURI != null)
 			ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
     }
     
@@ -140,22 +127,38 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 	}
 
 	public EditorDefinition getEditorDefinition() {
-		if ((editorDefinition == null) && (editorURL != null)) {
+		if ((editorDefinition == null) && (editorURI != null)) {
 			try {
 				ResourceSet resourceSet = new ResourceSetImpl();
 				resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("editor", new XMIResourceFactoryImpl());
-				Resource resource = resourceSet.createResource(URI.createURI(editorURL.toString()));
-				resource.load(editorURL.openStream(), null);
+				Resource resource = resourceSet.createResource(editorURI);
+				resource.load(null);
 				editorDefinition = (EditorDefinition) resource.getContents().get(0);
 				installEditorDefinition(editorDefinition);
 			} catch (Exception e) {
-				QVTEditorPlugin.logError("Failed to load '" + editorURL.toString() + "'", e);
+				QVTEditorPlugin.logError("Failed to load '" + editorURI.toString() + "'", e);
 			} finally {
 				if (editorDefinition == null)
 					editorDefinition = EditorFactory.eINSTANCE.createEditorDefinition();			
 			}
 		}
 		return editorDefinition;
+	}
+
+	protected Set<URI> getEditorURIs() {
+		if (editorURIs == null) {
+			editorURIs = new HashSet<URI>();
+			getEditorURIs(editorURIs, editorDefinition);
+		}
+		return editorURIs;
+	}
+	
+	private void getEditorURIs(Set<URI> editorURIs, EditorDefinition editorDefinition) {
+		URI uri = editorDefinition.eResource().getURI();
+		if (editorURIs.add(uri)) {
+			for (EditorDefinition extendedDefinition : editorDefinition.getExtends())
+				getEditorURIs(editorURIs, extendedDefinition);
+		}		
 	}
 
 	protected void installEditorDefinition(EditorDefinition editorDefinition) {
@@ -244,19 +247,23 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 			if ((deltaKind == IResourceDelta.REMOVED)
 			 || (deltaKind == IResourceDelta.CHANGED)
 			 || (deltaKind == IResourceDelta.REPLACED)) {
-				java.net.URI locationURI = resource.getLocationURI();
-				if (locationURI != null) {
-					try {
-						URL fileURL = locationURI.toURL();
-						if (fileURL.equals(editorURL)) {
+		        URI fileURI = URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
+		        int fileSegments = fileURI.segmentCount();
+		        for (URI uri : getEditorURIs()) {
+			        int editorSegments = uri.segmentCount();
+			        if (editorSegments == fileSegments) {
+			        	int i = editorSegments;
+			        	while (--i > 0)
+			        		if (!fileURI.segment(i).equals(uri.segment(i)))
+			        			break;
+						if (i <= 0) {
 							editorDefinition = null;
 							ecoreMap.clear();
 							javaMap.clear();
 							return false;
 						}
-					} catch (MalformedURLException e) {
-					}
-				}
+			        }
+		        }
 			}
 		}
 		return true;
