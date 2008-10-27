@@ -13,7 +13,7 @@
  *
  * </copyright>
  *
- * $Id: AbstractExampleWizard.java,v 1.1 2008/08/26 21:00:59 ewillink Exp $
+ * $Id: AbstractExampleWizard.java,v 1.2 2008/10/27 21:07:32 ewillink Exp $
  */
 
 package org.eclipse.qvt.declarative.examples.wizards;
@@ -135,7 +135,7 @@ public abstract class AbstractExampleWizard extends Wizard
 							m.beginTask("Unzipping Projects", projectDescriptors.size()); //$NON-NLS-1$
 							
 							for (Iterator<ProjectDescriptor> i = projectDescriptors.iterator(); i.hasNext();) {
-								unzipProject((ProjectDescriptor)i.next(), m);
+								unzipProject(i.next(), m);
 								m.worked(1);
 							}
 						}

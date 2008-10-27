@@ -13,6 +13,9 @@
 		<zip destfile="zips/royalandloyal.zip" basedir="../../examples/org.eclipse.qvt.declarative.examples.ocl.royalandloyal">
 			<patternset refid="ocl.excludes"/>
 		</zip>
+		<zip destfile="zips/modelmorf.zip" basedir="../../examples/org.eclipse.qvt.declarative.examples.qvtrelation.modelmorf">
+			<patternset refid="qvtr.excludes"/>
+		</zip>
 		<zip destfile="zips/reltocore.zip" basedir="../../examples/org.eclipse.qvt.declarative.examples.qvtrelation.reltocore">
 			<patternset refid="qvtr.excludes"/>
 		</zip>

@@ -14,7 +14,7 @@
  *
  * </copyright>
  *
- * $Id: plugin.xml,v 1.1 2008/08/26 21:00:59 ewillink Exp $
+ * $Id: plugin.xml,v 1.2 2008/10/27 21:07:32 ewillink Exp $
  */
 -->
 <?eclipse version="3.0"?>
@@ -32,6 +32,16 @@
             name="%Royal_and_Loyal_name"
             icon="$nl$/icons/OCLModelFile.gif">
          <description>%Royal_and_Loyal_description</description>
+      </wizard>
+      <wizard id="org.eclipse.qvt.declarative.examples.qvtrelation.modelmorf"           
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/org.eclipse.qvt.declarative.examples.category"
+            class="org.eclipse.qvt.declarative.examples.qvtr.wizards.ModelMorfExampleWizard"
+            hasPages="false"
+            project="true"
+            name="%ModelMorf_name"
+            icon="$nl$/icons/QVTrModelFile.gif">
+         <description>%ModelMorf_description</description>
       </wizard>
       <wizard id="org.eclipse.qvt.declarative.examples.qvtrelation.reltocore"           
             canFinishEarly="true"
