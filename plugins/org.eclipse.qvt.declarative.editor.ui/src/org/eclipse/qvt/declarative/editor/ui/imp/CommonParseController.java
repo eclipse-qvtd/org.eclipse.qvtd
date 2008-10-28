@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.12 2008/10/24 15:02:52 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.13 2008/10/28 06:56:09 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -211,7 +211,7 @@ public abstract class CommonParseController implements IParseController
 			return null;
 		if (object instanceof ModelTreeNode)
 			object = ((ModelTreeNode)object).getASTNode();
-		return fCurrentAst.getFileEnvironment().getASTMapping(object);
+		return fCurrentAst.getRootEnvironment().getASTMapping(object);
 	}
 
     public ICreationFactory getCreationFactory() {
