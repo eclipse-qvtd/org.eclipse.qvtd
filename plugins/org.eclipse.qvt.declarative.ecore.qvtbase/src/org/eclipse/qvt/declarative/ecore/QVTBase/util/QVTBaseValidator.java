@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTBaseValidator.java,v 1.1 2008/07/23 09:39:07 qglineur Exp $
+ * $Id: QVTBaseValidator.java,v 1.2 2008/10/30 06:10:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.util;
 
@@ -30,15 +30,17 @@ import org.eclipse.emf.ecore.util.EcoreValidator;
 import org.eclipse.ocl.expressions.util.ExpressionsValidator;
 
 import org.eclipse.qvt.declarative.ecore.QVTBase.*;
+import org.eclipse.qvt.declarative.ecore.operations.EValidatorWithOperations;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Validator</b> for the model.
+ * @extends EValidatorWithOperations
  * <!-- end-user-doc -->
  * @see org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage
  * @generated
  */
-public class QVTBaseValidator extends EObjectValidator {
+public class QVTBaseValidator extends EObjectValidator implements EValidatorWithOperations {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -108,6 +110,10 @@ public class QVTBaseValidator extends EObjectValidator {
 		ecoreValidator = EcoreValidator.INSTANCE;
 		expressionsValidator = ExpressionsValidator.INSTANCE;
 		ecore_1Validator = org.eclipse.ocl.ecore.util.EcoreValidator.INSTANCE;
+	}
+
+	public String getDiagnosticSource() {
+		return DIAGNOSTIC_SOURCE;
 	}
 
 	/**
