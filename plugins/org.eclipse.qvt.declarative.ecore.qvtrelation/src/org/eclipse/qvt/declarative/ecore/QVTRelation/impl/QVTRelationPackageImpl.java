@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationPackageImpl.java,v 1.4 2008/09/28 11:18:20 ewillink Exp $
+ * $Id: QVTRelationPackageImpl.java,v 1.5 2008/10/30 06:32:03 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.impl;
 
@@ -702,7 +702,7 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 		  (relationalTransformationEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "KeyClassesAreDistinct"
+			 "constraints", "KeyClassesAreDistinct UniqueClassifierNames"
 		   });
 	}
 
