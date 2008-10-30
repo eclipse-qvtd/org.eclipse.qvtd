@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplateValidator.java,v 1.1 2008/07/23 09:48:48 qglineur Exp $
+ * $Id: QVTTemplateValidator.java,v 1.2 2008/10/30 06:10:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.util;
 
@@ -28,15 +28,17 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreValidator;
 
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.*;
+import org.eclipse.qvt.declarative.ecore.operations.EValidatorWithOperations;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Validator</b> for the model.
+ * @extends EValidatorWithOperations
  * <!-- end-user-doc -->
  * @see org.eclipse.qvt.declarative.ecore.QVTTemplate.QVTTemplatePackage
  * @generated
  */
-public class QVTTemplateValidator extends EObjectValidator {
+public class QVTTemplateValidator extends EObjectValidator implements EValidatorWithOperations {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -97,6 +99,10 @@ public class QVTTemplateValidator extends EObjectValidator {
 		super();
 		ecoreValidator = EcoreValidator.INSTANCE;
 		ecore_1Validator = org.eclipse.ocl.ecore.util.EcoreValidator.INSTANCE;
+	}
+
+	public String getDiagnosticSource() {
+		return DIAGNOSTIC_SOURCE;
 	}
 
 	/**
