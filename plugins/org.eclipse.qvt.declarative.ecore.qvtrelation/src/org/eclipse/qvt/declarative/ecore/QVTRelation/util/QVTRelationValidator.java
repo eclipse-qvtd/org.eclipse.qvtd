@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationValidator.java,v 1.3 2008/09/09 20:59:48 ewillink Exp $
+ * $Id: QVTRelationValidator.java,v 1.4 2008/10/30 06:32:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.util;
 
@@ -43,11 +43,12 @@ import org.eclipse.qvt.declarative.ecore.operations.EValidatorWithOperations;
 /**
  * <!-- begin-user-doc -->
  * The <b>Validator</b> for the model.
+ * @extends EValidatorWithOperations
  * <!-- end-user-doc -->
  * @see org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage
- * @generated NOT
+ * @generated
  */
-public class QVTRelationValidator extends EObjectValidator implements EValidatorWithOperations {
+public class QVTRelationValidator extends EObjectValidator implements EValidatorWithOperations  {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -377,7 +378,7 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateTransformation_WellFormedNsURI(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateTransformation_WellFormedNsPrefix(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateEPackage_UniqueSubpackageNames(relationalTransformation, diagnostics, context);
-		if (result || diagnostics != null) result &= ecoreValidator.validateEPackage_UniqueClassifierNames(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationalTransformation_UniqueClassifierNames(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateTransformation_UniqueNsURIs(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationalTransformation_KeyClassesAreDistinct(relationalTransformation, diagnostics, context);
 		return result;
@@ -389,6 +390,14 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 	 */
 	public boolean validateRelationalTransformation_KeyClassesAreDistinct(RelationalTransformation relationalTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return RelationalTransformationOperations.INSTANCE.checkKeyClassesAreDistinct(relationalTransformation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the UniqueClassifierNames constraint of '<em>Relational Transformation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationalTransformation_UniqueClassifierNames(RelationalTransformation relationalTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationalTransformationOperations.INSTANCE.checkUniqueClassifierNames(relationalTransformation, diagnostics, context);
 	}
 
 	/**
