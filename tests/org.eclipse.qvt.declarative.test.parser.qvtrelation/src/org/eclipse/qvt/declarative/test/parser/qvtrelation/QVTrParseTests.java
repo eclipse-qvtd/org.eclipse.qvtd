@@ -52,6 +52,14 @@ public class QVTrParseTests extends AbstractQVTrTestCase
 		parserTest("empty", null);
 	}
 	
+	public void testParseEqvtrelation_hstmtostm() throws IOException, CoreException, MappingConfigurationException {
+		ProblemLog expectedProblems = new ProblemLog();
+		expectedProblems.handleProblem(ProblemHandler.Severity.WARNING, ProblemHandler.Phase.VALIDATOR,
+				"The OCL names for 'Set(stmMM_p::Trans)' and 'Set(hstmMM_p::Trans)' are not distinct",
+				QVTRelationValidator.DIAGNOSTIC_SOURCE, -1, -1);
+		parserTest("hstmtostm", expectedProblems);
+	}
+	
 	public void testParseEqvtRelation_SeqToStm() throws IOException, CoreException, MappingConfigurationException {
 		parserTest("SeqToStm", null);
 	}
