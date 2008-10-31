@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.9 2008/10/21 20:01:03 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.10 2008/10/31 20:12:22 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -142,15 +142,17 @@ public abstract class CommonBuilder extends BuilderBase
 		ProblemHandler problemHandler = creationFactory.createProblemHandler(inputFile);
 		try {
 			CommonParseController parseController = createParseController();
-			parseController.getAnnotationTypeInfo().addProblemMarkerType(getErrorMarkerID());
+	//		parseController.getAnnotationTypeInfo().addProblemMarkerType(creationFactory.getErrorMarkerId());
 			ISourceProject sourceProject = ModelFactory.open(inputFile.getProject());
 			parseController.initialize(projectRelativeInputPath, sourceProject, (IMessageHandler) problemHandler);
 			String contents = BuilderUtils.getFileContents(inputFile);
 			CommonParseController.ParsedResult parsedResult = parseController.parse(contents, false, monitor);
 			URI uri = URI.createPlatformResourceURI(workspaceRelativeOutputPath.toString(), true);
 			Resource resource = parsedResult.getAST();
-			resource.setURI(uri);
-			resource.save(null);
+			if (resource != null) {
+				resource.setURI(uri);
+				resource.save(null);
+			}
 			//
 			File astFile = getProject().getWorkspace().getRoot().getFile(workspaceRelativeOutputPath).getLocation().toFile();
 			Map<String, String> parameters = new HashMap<String, String>();
