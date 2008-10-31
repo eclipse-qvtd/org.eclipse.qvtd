@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.13 2008/10/28 06:56:09 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.14 2008/10/31 20:42:07 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -53,7 +53,6 @@ import org.eclipse.imp.model.ISourceProject;
 import org.eclipse.imp.parser.IMessageHandler;
 import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.parser.ISourcePositionLocator;
-import org.eclipse.imp.parser.SimpleAnnotationTypeInfo;
 import org.eclipse.imp.services.IAnnotationTypeInfo;
 import org.eclipse.imp.services.ILanguageSyntaxProperties;
 import org.eclipse.jface.text.IRegion;
@@ -70,8 +69,8 @@ import org.eclipse.qvt.declarative.editor.ui.builder.ProblemLimit;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseFileHandle;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseProjectHandle;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
-import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 
 /**
@@ -135,7 +134,7 @@ public abstract class CommonParseController implements IParseController
 //    private String fKeywords[];
     private List<String> keywords = null;
     private boolean fIsKeyword[];
-    private final SimpleAnnotationTypeInfo fSimpleAnnotationTypeInfo = new SimpleAnnotationTypeInfo();
+    private final CommonAnnotationTypeInfo fSimpleAnnotationTypeInfo = new CommonAnnotationTypeInfo();
 	private final String id;
 
     public CommonParseController(ICreationFactory creationFactory) {
@@ -144,7 +143,8 @@ public abstract class CommonParseController implements IParseController
 		id = getClass().getSimpleName() + "-" + ++ counter;
 		if (parserProgress.isActive())
 			parserProgress.println(id + " created");
-    }
+		getAnnotationTypeInfo().addProblemMarkerType(creationFactory.getErrorMarkerId());
+	}
 
     protected void cacheKeywordsOnce() {
         if (keywords == null) {
