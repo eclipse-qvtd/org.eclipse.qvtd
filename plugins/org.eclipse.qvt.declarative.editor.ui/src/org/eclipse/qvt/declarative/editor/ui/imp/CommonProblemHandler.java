@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonProblemHandler.java,v 1.2 2008/08/26 19:11:06 ewillink Exp $
+ * $Id: CommonProblemHandler.java,v 1.3 2008/10/31 20:41:08 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -53,7 +53,9 @@ public class CommonProblemHandler extends AbstractProblemHandler
 			if (adjustedMessage == null)
 				return;
 		}
-		handler.handleSimpleMessage(problemMessage, startOffset, endOffset,
+		// FIXME Get Annotation to display alternate severities
+		String prefixedMessage = problemSeverity != null ? (problemSeverity.name() + ": " + problemMessage) : problemMessage;
+		handler.handleSimpleMessage(prefixedMessage, startOffset, endOffset,
 	            startCol, endCol, startLine, endLine);
 		if (adjustedMessage != problemMessage)
 			throw new ProblemLimit.LimitExceededException(adjustedMessage);
