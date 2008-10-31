@@ -14,7 +14,7 @@
 *
 * </copyright>
 *
-* $Id: QVTrLexersym.java,v 1.5 2008/10/10 07:26:28 ewillink Exp $
+* $Id: QVTrLexersym.java,v 1.6 2008/10/31 14:44:34 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;

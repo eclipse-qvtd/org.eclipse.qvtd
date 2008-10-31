@@ -36,8 +36,8 @@ $Define
 	-- Definition of macro used in the included file LexerBasicMap.g
 	--
 	$kw_lexer_class /.QVTrKWLexer./
-    $environment_class /.IFileEnvironment./
-    $environment_import /.org.eclipse.qvt.declarative.parser.environment.IFileEnvironment./
+    $environment_class /.ICSTFileEnvironment./
+    $environment_import /.org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment./
 	$copyright_contributions /.*   E.D.Willink - Extended API and implementation for QVTr
 *./
 $End
