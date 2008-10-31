@@ -59,7 +59,7 @@ $Globals
 /.
 import org.eclipse.qvt.declarative.parser.qvt.cst.*;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.*;
-import org.eclipse.qvt.declarative.parser.environment.IFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.ocl.parser.$prs_stream_class;
 
 ./
@@ -74,7 +74,7 @@ $Include
 $End
 
 $Define
-    $environment_class /.IFileEnvironment./
+    $environment_class /.ICSTFileEnvironment./
 	$lex_stream_class /.QVTcLexer./
     $LPGParsersym_class /.QVTcParserSymbols./
 	$copyright_contributions /.*   E.D.Willink - Extended API and implementation for QVTc

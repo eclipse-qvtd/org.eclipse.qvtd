@@ -17,7 +17,7 @@
 *
 * </copyright>
 *
-* $Id: QVTcParser.java,v 1.6 2008/10/11 15:17:22 ewillink Exp $
+* $Id: QVTcParser.java,v 1.7 2008/10/31 14:48:21 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;
@@ -661,7 +661,7 @@ public class QVTcParser extends AbstractOCLParser implements RuleAction
 			}
 	 
 			//
-			// Rule 86:  dotArrowExpCS ::= pathNameCS :: simpleNameCS ( argumentsCSopt )
+			// Rule 86:  operationCallExpCS ::= pathNameCS :: simpleNameCS ( argumentsCSopt )
 			//
 			case 86: {
 				

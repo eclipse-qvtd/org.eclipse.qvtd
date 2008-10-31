@@ -17,7 +17,7 @@
 *
 * </copyright>
 *
-* $Id: QVTcParsersym.java,v 1.5 2008/10/10 07:27:22 ewillink Exp $
+* $Id: QVTcParsersym.java,v 1.6 2008/10/31 14:48:21 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;
@@ -48,8 +48,8 @@ public interface QVTcParsersym {
       TK_ARROW = 95,
       TK_BAR = 88,
       TK_COMMA = 30,
-      TK_COLON = 84,
-      TK_COLONCOLON = 85,
+      TK_COLON = 85,
+      TK_COLONCOLON = 84,
       TK_SEMICOLON = 89,
       TK_DOT = 96,
       TK_DOTDOT = 101,
@@ -223,8 +223,8 @@ public interface QVTcParsersym {
                  "false",
                  "OclInvalid",
                  "LBRACE",
-                 "COLON",
                  "COLONCOLON",
+                 "COLON",
                  "let",
                  "if",
                  "BAR",
