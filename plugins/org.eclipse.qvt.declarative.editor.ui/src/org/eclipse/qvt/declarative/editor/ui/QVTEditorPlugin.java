@@ -31,7 +31,14 @@ public class QVTEditorPlugin extends EclipseUIPlugin
 
 	public static final String ID = QVTEditorPlugin.class.getPackage().getName();
 
+	public static final TracingOption ANNOTATION_CREATE = new TracingOption(PLUGIN_ID, "annotation/create"); //$NON-NLS-1$
+	public static final TracingOption ANNOTATION_DELETE = new TracingOption(PLUGIN_ID, "annotation/delete"); //$NON-NLS-1$
+	public static final TracingOption ANNOTATION_UPDATE = new TracingOption(PLUGIN_ID, "annotation/update"); //$NON-NLS-1$
+
 	public static final TracingOption EDITOR_SAVE = new TracingOption(PLUGIN_ID, "editor/save"); //$NON-NLS-1$
+
+	public static final TracingOption MARKER_CREATE = new TracingOption(PLUGIN_ID, "marker/create"); //$NON-NLS-1$
+	public static final TracingOption MARKER_DELETE = new TracingOption(PLUGIN_ID, "marker/delete"); //$NON-NLS-1$
 
 	public static final TracingOption RESOURCE_LOAD = new TracingOption(PLUGIN_ID, "resource/load"); //$NON-NLS-1$
 

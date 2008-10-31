@@ -35,3 +35,12 @@ org.eclipse.qvt.declarative.editor.ui/proposal/debug=false
 
 # Generate a dependency dump for each build
 org.eclipse.qvt.declarative.editor.ui/builder/dependencies=false
+
+# Generate a dependency dump for each marker creation/deletion
+org.eclipse.qvt.declarative.editor.ui/marker/create=false
+org.eclipse.qvt.declarative.editor.ui/marker/delete=false
+
+# Generate a dependency dump for each annotation creation/deletion/update
+org.eclipse.qvt.declarative.editor.ui/annotation/create=false
+org.eclipse.qvt.declarative.editor.ui/annotation/delete=false
+org.eclipse.qvt.declarative.editor.ui/annotation/update=false
