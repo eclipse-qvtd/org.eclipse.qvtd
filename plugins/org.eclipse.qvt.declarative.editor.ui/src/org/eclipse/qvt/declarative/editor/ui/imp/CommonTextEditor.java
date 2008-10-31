@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonTextEditor.java,v 1.4 2008/10/11 15:38:24 ewillink Exp $
+ * $Id: CommonTextEditor.java,v 1.5 2008/10/31 20:39:59 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -23,6 +23,8 @@ import java.util.List;
 
 import org.eclipse.core.commands.operations.IOperationHistory;
 import org.eclipse.core.commands.operations.IUndoContext;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EObject;
@@ -53,6 +55,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
+import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.ui.cst.ASTOutlinePage;
 import org.eclipse.qvt.declarative.editor.ui.cst.CSTOutline;
 import org.eclipse.qvt.declarative.editor.ui.cst.CSTOutlinePage;
@@ -66,6 +69,8 @@ import org.eclipse.text.undo.DocumentUndoManagerRegistry;
 import org.eclipse.text.undo.IDocumentUndoManager;
 import org.eclipse.ui.IEditorActionBarContributor;
 import org.eclipse.ui.part.IShowInTargetList;
+import org.eclipse.ui.texteditor.IDocumentProvider;
+import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheetPage;
@@ -381,5 +386,37 @@ public class CommonTextEditor extends UniversalEditor implements ITextEditorWith
 				return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void refreshMarkerAnnotations(String problemMarkerType) {
+		if (QVTEditorPlugin.ANNOTATION_UPDATE.isActive())
+			QVTEditorPlugin.ANNOTATION_UPDATE.println("Updating '" + problemMarkerType + "' for '" + getEditorInput().getName() + "'");
+		//
+		// FIXME create the correct annotation model from the outset
+		//	Delete the resource markers which should never have been copied to the annotation model.
+		//		
+		IDocumentProvider documentProvider = getDocumentProvider();
+		IAnnotationModel annotationModel = documentProvider.getAnnotationModel(getEditorInput());
+		try {
+			@SuppressWarnings("unchecked")
+			Iterator<Annotation> annotationIterator = annotationModel.getAnnotationIterator();
+			for (Iterator<Annotation> annIter = annotationIterator; annIter.hasNext(); ) {
+				Annotation ann = annIter.next();
+				if (ann instanceof MarkerAnnotation) {
+					if (QVTEditorPlugin.ANNOTATION_DELETE.isActive()) {
+						IMarker marker = ((MarkerAnnotation)ann).getMarker();
+						String lineNumber = String.valueOf(marker.getAttribute(IMarker.LINE_NUMBER));
+						String charStart = String.valueOf(marker.getAttribute(IMarker.CHAR_START));
+						String charEnd = String.valueOf(marker.getAttribute(IMarker.CHAR_END));
+						String message = String.valueOf(marker.getAttribute(IMarker.MESSAGE));
+						QVTEditorPlugin.ANNOTATION_DELETE.println("Lose '" + lineNumber + ":" + charStart + "-" + charEnd + ": " + message);
+					}
+					annotationModel.removeAnnotation(ann);
+				}
+			}
+		} catch (CoreException e) {
+		}
+		super.refreshMarkerAnnotations(problemMarkerType);
 	}
 }
