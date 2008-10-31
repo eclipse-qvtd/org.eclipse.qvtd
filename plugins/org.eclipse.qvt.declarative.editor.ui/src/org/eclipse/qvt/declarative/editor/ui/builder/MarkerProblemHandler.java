@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: MarkerProblemHandler.java,v 1.3 2008/08/26 19:11:36 ewillink Exp $
+ * $Id: MarkerProblemHandler.java,v 1.4 2008/10/31 20:42:49 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -110,7 +110,7 @@ public abstract class MarkerProblemHandler<PK, C, O, P, EL, PM, S, COA, SSA, CT,
 			{
 				public void run(IProgressMonitor monitor) throws CoreException {
 					String markerId = creationFactory.getProblemMarkerId();
-					if (entries != null) {
+					if ((entries != null) || QVTEditorPlugin.MARKER_DELETE.isActive()) {
 						IMarker[] oldMarkers = resource.findMarkers(markerId, false, IResource.DEPTH_ZERO);
 						for (IMarker oldMarker : oldMarkers) {
 							Map<?, ?> oldAttributes = oldMarker.getAttributes();
@@ -124,13 +124,20 @@ public abstract class MarkerProblemHandler<PK, C, O, P, EL, PM, S, COA, SSA, CT,
 									}							
 								}
 							}
-							if (oldMarker != null)
+							if (oldMarker != null) {
+								if (QVTEditorPlugin.MARKER_DELETE.isActive())
+									QVTEditorPlugin.MARKER_DELETE.println(formatMarker(oldAttributes));
 								oldMarker.delete();
+							}
 						}
-						for (List<Map<String, Object>> lineEntries : entries.values()) {
-							for (Map<String, Object> entry : lineEntries) {
-								IMarker marker = resource.createMarker(markerId);
-								marker.setAttributes(entry);
+						if (entries != null) {
+							for (List<Map<String, Object>> lineEntries : entries.values()) {
+								for (Map<String, Object> entry : lineEntries) {
+									if (QVTEditorPlugin.MARKER_CREATE.isActive())
+										QVTEditorPlugin.MARKER_CREATE.println(formatMarker(entry));
+									IMarker marker = resource.createMarker(markerId);
+									marker.setAttributes(entry);
+								}
 							}
 						}
 					}
@@ -145,6 +152,20 @@ public abstract class MarkerProblemHandler<PK, C, O, P, EL, PM, S, COA, SSA, CT,
 				QVTEditorPlugin.logError("Failed to update resource markers", e);
 			}
 		}
+	}
+
+	protected String formatMarker(Map<?, ?> attributes) {
+		StringBuffer s = new StringBuffer();
+		s.append(resource.getName());
+		s.append(" ");
+		s.append(attributes.get(IMarker.LINE_NUMBER));
+		s.append(":");
+		s.append(attributes.get(IMarker.CHAR_START));
+		s.append("-");
+		s.append(attributes.get(IMarker.CHAR_END));
+		s.append(" ");
+		s.append(attributes.get(IMarker.MESSAGE));
+		return s.toString();
 	}
 
 	@Override public void handleProblem(ProblemHandler.Severity problemSeverity, ProblemHandler.Phase processingPhase,
