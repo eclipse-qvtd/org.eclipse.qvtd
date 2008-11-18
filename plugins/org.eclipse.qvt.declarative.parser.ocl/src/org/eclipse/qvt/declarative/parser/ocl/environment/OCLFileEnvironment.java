@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLFileEnvironment.java,v 1.2 2008/10/24 15:22:50 ewillink Exp $
+ * $Id: OCLFileEnvironment.java,v 1.3 2008/11/18 14:08:25 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl.environment;
 
@@ -152,7 +152,9 @@ public class OCLFileEnvironment extends CSTFileEnvironment<OCLTopLevelEnvironmen
 
 	public Collection<Resource> getResourcesVisibleAt(EObject astNode) {
 		List<Resource> resources = new ArrayList<Resource>();
-		resources.add(astNode.eResource());
+		Resource resource = astNode.eResource();
+		if (resource != null)
+			resources.add(resource);
 		resources.addAll(getResourceSet().getResources());
 		return resources;
 	}
