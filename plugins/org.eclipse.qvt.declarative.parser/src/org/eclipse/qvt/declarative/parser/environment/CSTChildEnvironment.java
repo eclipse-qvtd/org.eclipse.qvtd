@@ -311,6 +311,8 @@ public abstract class CSTChildEnvironment<E extends ICSTNodeEnvironment, P exten
 	@Override
 	public EStructuralFeature tryLookupProperty(EClassifier owner, String name)
 			throws LookupException {
+		if (name == null)
+			return null;
 		EStructuralFeature result = super.lookupProperty(owner, name);
 		if (result != null)
 			return result;
