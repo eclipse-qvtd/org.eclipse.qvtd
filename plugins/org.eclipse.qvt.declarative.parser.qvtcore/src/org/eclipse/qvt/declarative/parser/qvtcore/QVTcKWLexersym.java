@@ -1,7 +1,7 @@
 /**
 * <copyright>
 *
-* Copyright (c) 2005, 2007 IBM Corporation and others.
+* Copyright (c) 2005, 2008 IBM Corporation and others.
 * All rights reserved.   This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -14,7 +14,7 @@
 *
 * </copyright>
 *
-* $Id: QVTcKWLexersym.java,v 1.6 2008/10/31 14:48:21 ewillink Exp $
+* $Id: QVTcKWLexersym.java,v 1.7 2008/11/19 21:37:41 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;

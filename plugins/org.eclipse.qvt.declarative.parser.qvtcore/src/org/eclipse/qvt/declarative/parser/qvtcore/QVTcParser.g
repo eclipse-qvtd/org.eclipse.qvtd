@@ -19,15 +19,15 @@
 %options error-maps
 %options scopes
 %options margin=4
+%options backtrack
 %options noserialize
 %options package=org.eclipse.qvt.declarative.parser.qvtcore
---%options template=dtParserTemplateD.g
 %options import_terminals=QVTcLexer.g
 %options ast_type=CSTNode
 %options programming_language=java
 %options action=("*.java", "/.", "./")
 %options ParseTable=lpg.lpgjavaruntime.ParseTable
-%options include_directory=".;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/parser"
+%options include_directory=".;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/parser;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/parser/backtracking"
 
 $KeyWords
 	check
@@ -61,6 +61,7 @@ import org.eclipse.qvt.declarative.parser.qvt.cst.*;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.*;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.ocl.parser.$prs_stream_class;
+import org.eclipse.ocl.parser.backtracking.OCLParserErrors;
 
 ./
 $End
@@ -73,7 +74,15 @@ $Include
 	EssentialOCL.g
 $End
 
+$Include
+	EssentialOCLErrors.g
+$End
+
 $Define
+	$prs_parser_class /.BacktrackingParser./
+	$prs_parser_exception /.NotBacktrackParseTableException./
+	$prs_parser_throw /.throw new RuntimeException("****Error: Regenerate $prs_type.java with -BACKTRACK option")./
+	$prs_parse_args /.error_repair_count./
     $environment_class /.ICSTFileEnvironment./
 	$lex_stream_class /.QVTcLexer./
     $LPGParsersym_class /.QVTcParserSymbols./
@@ -532,11 +541,14 @@ $Rules
 		./
 		
 	DirectionNameCS -> identifierCS
+	DirectionNameCS -> ERROR_identifierCS
 	MappingNameCS -> identifierCS
+	MappingNameCS -> ERROR_identifierCS
 	PackageNameCS -> pathNameCS
 	QueryNameCS -> pathNameCS
 	TransformationNameCS -> pathNameCS
 	VariableNameCS -> identifierCS
+--	VariableNameCS -> ERROR_identifierCS
 		
 --<query> ::= 'query' <PathNameCS> 
 --            '(' [<paramDeclaration> (',' <paramDeclaration>)*] ')'
@@ -586,6 +598,8 @@ $Rules
 		./
 	
 --<paramDeclaration> ::= <identifier> ':' <TypeCS>	
+	paramDeclarationCS ::= ERROR_identifierCS ':' typeCS
+		/.$NewCase./
 	paramDeclarationCS ::= identifierCS ':' typeCS
 		/.$BeginJava
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(1);
@@ -597,11 +611,20 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
+	paramDeclarationCS ::= identifierCS ERROR_Colon
+		/.$BeginJava
+					IdentifierCS identifierCS = (IdentifierCS)$getSym(1);
+					ParamDeclarationCS result = QVTcCSTFactory.eINSTANCE.createParamDeclarationCS();
+					result.setIdentifier(identifierCS);
+					setOffsets(result, identifierCS, getIToken($getToken(2)));
+					$setResult(result);
+		  $EndJava
+		./
 		
 	coreIdentifier -> check
-	coreIdentifier -> creation
+--	coreIdentifier -> creation
 --	coreIdentifier -> default
-	coreIdentifier -> deletion
+--	coreIdentifier -> deletion
 	coreIdentifier -> enforce
 	coreIdentifier -> imports
 	coreIdentifier -> map
@@ -638,6 +661,16 @@ $Rules
 		  $EndJava
 		./
 	
+	ERROR_identifierCS ::= ERROR_TOKEN
+		/.$BeginJava
+					int token = $getToken(1);
+					reportErrorTokenMessage(token, QVTcParserErrors.MISSING_IDENTIFIER);
+					IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
+					result.setValue(getTokenText(token));
+					setOffsets(result, getIToken(token));
+					$setResult(result);
+		  $EndJava
+		./
 	identifierCS ::= IDENTIFIER
 		/.$BeginJava
 					int token = $getToken(1);
