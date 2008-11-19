@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.1 2008/07/23 09:47:57 qglineur Exp $
+ $Id: plugin.xml,v 1.2 2008/11/19 21:48:08 ewillink Exp $
 -->
 
 <plugin>
@@ -32,7 +32,7 @@
             icon="icons/full/obj16/QVTRelationModelFile.gif"
             class="org.eclipse.qvt.declarative.ecore.QVTRelation.presentation.QVTRelationEditor"
             contributorClass="org.eclipse.qvt.declarative.ecore.QVTRelation.presentation.QVTRelationActionBarContributor">
-         <contentTypeBinding contentTypeId="org.eclipse.qvt.declarative.ecore.QVTRelation"/>
+         <contentTypeBinding contentTypeId="org.eclipse.qvt.declarative.ecore.qvtrelation"/>
       </editor>
    </extension>
 
