@@ -19,15 +19,15 @@
 %options error-maps
 %options scopes
 %options margin=4
+%options backtrack
 %options noserialize
 %options package=org.eclipse.qvt.declarative.parser.qvtrelation
---%options template=dtParserTemplateD.g
 %options import_terminals=QVTrLexer.g
 %options ast_type=CSTNode
 %options programming_language=java
 %options action=("*.java", "/.", "./")
 %options ParseTable=lpg.lpgjavaruntime.ParseTable
-%options include_directory=".;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/parser"
+%options include_directory=".;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/parser;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/parser/backtracking"
 
 $KeyWords
 	checkonly
@@ -66,6 +66,7 @@ import org.eclipse.qvt.declarative.parser.qvtrelation.cst.*;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.ocl.cst.CollectionTypeCS;
 import org.eclipse.ocl.parser.$prs_stream_class;
+import org.eclipse.ocl.parser.backtracking.OCLParserErrors;
 
 ./
 $End
@@ -78,7 +79,15 @@ $Include
 	EssentialOCL.g
 $End
 
+$Include
+	EssentialOCLErrors.g
+$End
+
 $Define
+	$prs_parser_class /.BacktrackingParser./
+	$prs_parser_exception /.NotBacktrackParseTableException./
+	$prs_parser_throw /.throw new RuntimeException("****Error: Regenerate $prs_type.java with -BACKTRACK option")./
+	$prs_parse_args /.error_repair_count./
     $environment_class /.ICSTFileEnvironment./
 	$lex_stream_class /.QVTrLexer./
     $LPGParsersym_class /.QVTrParserSymbols./
@@ -147,8 +156,12 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
-	topLevelCS -> topLevelCS_0_
-	topLevelCS ::= topLevelCS transformationCS
+	topLevelCS_0_ ::= topLevelCS_0_ ERROR_TOKEN
+		/.$BeginJava
+					reportErrorTokenMessage($getToken(2), QVTrParserErrors.INCOMPLETE_TOPLEVEL);
+		  $EndJava
+		./	
+	topLevelCS_1_ ::= topLevelCS transformationCS
 		/.$BeginJava
 					TransformationCS transformationCS = (TransformationCS)$getSym(2);
 					TopLevelCS result = (TopLevelCS)$getSym(1);
@@ -157,6 +170,13 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
+	topLevelCS_1_ ::= topLevelCS_1_ ERROR_TOKEN
+		/.$BeginJava
+					reportErrorTokenMessage($getToken(2), QVTrParserErrors.INCOMPLETE_TRANSFORMATION);
+		  $EndJava
+		./	
+	topLevelCS -> topLevelCS_0_
+	topLevelCS -> topLevelCS_1_
 		
 --<unit> ::= <identifier> ('.' <identifier>)*
 	unitCS ::= identifierCS
@@ -202,6 +222,11 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
+	transformationCS_0_ ::= transformationCS_0_ ERROR_TOKEN
+		/.$BeginJava
+					reportErrorTokenMessage($getToken(2), QVTrParserErrors.INCOMPLETE_MODELDECL);
+		  $EndJava
+		./	
 	transformationCS_1_ ::= transformationCS_0_ ')'
 		/.$BeginJava
 					TransformationCS result = (TransformationCS)$getSym(1);
@@ -248,6 +273,11 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
+	transformationCS_4_ ::= transformationCS_4_ ERROR_TOKEN
+		/.$BeginJava
+					reportErrorTokenMessage($getToken(2), QVTrParserErrors.INCOMPLETE_TRANSFORMATION_ELEMENT);
+		  $EndJava
+		./	
 	transformationCS ::= transformationCS_4_ '}'
 		/.$BeginJava
 					TransformationCS result = (TransformationCS)$getSym(1);
@@ -280,6 +310,13 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
+	modelDeclCS_2_ ::= modelDeclCS_1_ ERROR_TOKEN
+		/.$NewCase ./
+	modelDeclCS ::= modelDeclCS_0_ ERROR_TOKEN
+		/.$BeginJava
+					reportErrorTokenMessage($getToken(2), QVTrParserErrors.INCOMPLETE_MODELDECL_ELEMENT);
+		  $EndJava
+		./	
 	modelDeclCS ::= modelDeclCS_2_ '}'
 		/.$BeginJava
 					ModelDeclCS result = (ModelDeclCS)$getSym(1);
@@ -314,6 +351,11 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
+	keyDeclCS_1_ ::= keyDeclCS_0_ ERROR_TOKEN
+		/.$BeginJava
+					reportErrorTokenMessage($getToken(2), QVTrParserErrors.INCOMPLETE_KEYDECL_ELEMENT);
+		  $EndJava
+		./	
 	keyDeclCS ::= keyDeclCS_1_ '}' ';'
 		/.$BeginJava
 					KeyDeclCS result = (KeyDeclCS)$getSym(1);
@@ -431,6 +473,11 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
+	whenCS_0 ::= when ERROR_TOKEN
+		/.$BeginJava
+					reportErrorTokenMessage($getToken(2), QVTrParserErrors.INCOMPLETE_WHEN);
+		  $EndJava
+		./	
 	whenCS_1 -> whenCS_0
 	whenCS_1 ::= whenCS_1 oclExpressionCS ';'
 		/.$BeginJava
@@ -457,6 +504,11 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
+	whereCS_0 ::= where ERROR_TOKEN
+		/.$BeginJava
+					reportErrorTokenMessage($getToken(2), QVTrParserErrors.INCOMPLETE_WHERE);
+		  $EndJava
+		./	
 	whereCS_1 -> whereCS_0
 	whereCS_1 ::= whereCS_1 oclExpressionCS ';'
 		/.$BeginJava
@@ -813,6 +865,11 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
+	paramDeclarationCS ::= identifierCS ERROR_TOKEN
+		/.$BeginJava
+					reportErrorTokenMessage($getToken(2), QVTrParserErrors.INCOMPLETE_PARAM_DECLARATION);
+		  $EndJava
+		./	
 		
 --<OclExpressionCS> ::= <PropertyCallExpCS> 
 --                    | <VariableExpCS>
