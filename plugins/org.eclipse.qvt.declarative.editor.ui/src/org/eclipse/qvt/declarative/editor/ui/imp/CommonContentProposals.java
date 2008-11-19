@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.6 2008/10/24 15:02:52 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.7 2008/11/19 21:54:04 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -23,8 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lpg.lpgjavaruntime.ErrorToken;
 import lpg.lpgjavaruntime.IToken;
-import lpg.lpgjavaruntime.PrsStream;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
@@ -41,6 +41,7 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.cst.SimpleNameCS;
 import org.eclipse.ocl.expressions.StringLiteralExp;
+import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 import org.eclipse.qvt.declarative.ecore.utils.TracingOption;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
@@ -76,7 +77,8 @@ public class CommonContentProposals
 			String newText = EcoreUtils.formatName(candidate);
 			String displayText = newText + " - " + EcoreUtils.formatQualifiedName(candidate.eContainer(), "::");
 			Image image = labelProvider.getImage(candidate);
-			map.put(candidate, new CommonProposal(displayText, tokenAtOffset.getStartOffset(), newText, tokenAtOffset.toString(), offset, image));
+			String oldText = getTokenAtOffsetString();
+			map.put(candidate, new CommonProposal(displayText, tokenAtOffset.getStartOffset(), newText, oldText, offset, image));
 		}
 	}
 
@@ -105,9 +107,12 @@ public class CommonContentProposals
 
 	protected void addKeywordProposals() {
 		Image image = null;		// FIXME
-		for (String keyword : commonParseController.getKeywords())
-			if (keyword.startsWith(prefixAtOffset))
-				map.put(keyword, new CommonProposal(keyword, tokenAtOffset.getStartOffset(), keyword, tokenAtOffset.toString(), offset, image));						
+		for (String keyword : commonParseController.getKeywords()) {
+			if (offset < tokenAtOffset.getStartOffset())
+				map.put(keyword, new CommonProposal(keyword, offset, keyword, "", offset, image));
+			else if (keyword.startsWith(prefixAtOffset))
+				map.put(keyword, new CommonProposal(keyword, tokenAtOffset.getStartOffset(), keyword, getTokenAtOffsetString(), offset, image));
+		}
 	}
 
 	protected void addStringProposals() {
@@ -125,7 +130,7 @@ public class CommonContentProposals
 				String displayText = string;
 //				ILabelProvider labelProvider = commonParseController.getLabelProvider();
 				Image image = null; // FIXME labelProvider.getImage(string);
-				map.put(string, new CommonProposal(displayText, tokenAtOffset.getStartOffset(), newText, tokenAtOffset.toString(), offset, image));
+				map.put(string, new CommonProposal(displayText, tokenAtOffset.getStartOffset(), newText, getTokenAtOffsetString(), offset, image));
 			}
 		}
 	}
@@ -188,6 +193,15 @@ public class CommonContentProposals
 					addIdentifierProposals(node);
 				break;
 			}
+			case ERROR: {
+				CommonNodeLocator locator = commonParseController.getCreationFactory().createNodeLocator(parsedResult.getRootEnvironment());
+				CSTNode node = (CSTNode) locator.findNode(cstRoot, tokenAtOffset.getStartOffset(), tokenAtOffset.getEndOffset());
+				addIdentifierProposals(node);
+				addKeywordProposals();
+				if (map.isEmpty())
+					map.put(null, new CommonNonProposal("no completion exists for keyword: " + prefixAtOffset, "", offset));
+				break;
+			}
 			case KEYWORD: {
 				CommonNodeLocator locator = commonParseController.getCreationFactory().createNodeLocator(parsedResult.getRootEnvironment());
 				CSTNode node = (CSTNode) locator.findNode(cstRoot, tokenAtOffset.getStartOffset(), tokenAtOffset.getEndOffset());
@@ -248,7 +262,7 @@ public class CommonContentProposals
 	protected String getPrefix() {
 		if (commonParseController.isCompleteable(tokenAtOffset.getKind()))
 			if ((tokenAtOffset.getStartOffset() <= offset) && (offset <= tokenAtOffset.getEndOffset() + 1))
-				return tokenAtOffset.toString().substring(0, offset - tokenAtOffset.getStartOffset());
+				return getTokenAtOffsetString().substring(0, offset - tokenAtOffset.getStartOffset());
 		return "";
 	}
 
@@ -261,14 +275,24 @@ public class CommonContentProposals
 	}
 	
 	protected IToken getToken() {
-		PrsStream stream = commonParseController.getParser();
-		int index = stream.getTokenIndexAtCharacter(offset), token_index = (index < 0 ? -(index - 1)
-				: index), previous_index = stream.getPrevious(token_index);
-		int previousIndexKind = stream.getKind(previous_index);
+		AbstractParser stream = commonParseController.getParser();
+		IToken errorToken = stream.getErrorTokenAtCharacter(offset);
+		if (errorToken != null)
+			return errorToken;
+		int index = stream.getTokenIndexAtCharacter(offset);
+		int tokenIndex = (index < 0 ? -(index - 1) : index);
+		IToken token = stream.getIToken(tokenIndex);
+		int previousIndex = stream.getPrevious(tokenIndex);
+		IToken previousToken = stream.getIToken(previousIndex);
+		int previousIndexKind = previousToken.getKind();
 		boolean isIdentifier = commonParseController.isIdentifier(previousIndexKind);
 		boolean isKeyword = commonParseController.isKeyword(previousIndexKind);
-		boolean atEnd = offset == stream.getEndOffset(previous_index) + 1;
-		return stream.getIToken(((isIdentifier || isKeyword) && atEnd) ? previous_index : token_index);
+		boolean atEnd = offset == previousToken.getEndOffset() + 1;
+		return ((isIdentifier || isKeyword) && atEnd) ? previousToken : token;
+	}
+
+	protected String getTokenAtOffsetString() {
+		return tokenAtOffset instanceof ErrorToken ? "" : tokenAtOffset.toString();
 	}
 
 	/**
