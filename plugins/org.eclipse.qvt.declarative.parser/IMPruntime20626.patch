@@ -1,0 +1,693 @@
+### Eclipse Workspace Patch 1.0
+#P org.eclipse.imp.smapifier
+Index: plugin.properties
+===================================================================
+Index: build.properties
+===================================================================
+--- build.properties	(revision 20550)
++++ build.properties	(working copy)
+@@ -3,4 +3,5 @@
+ bin.includes = META-INF/,\
+                .,\
+                plugin.xml,\
+-               bin/
++               bin/,\
++               plugin.properties
+Index: META-INF/MANIFEST.MF
+===================================================================
+--- META-INF/MANIFEST.MF	(revision 20550)
++++ META-INF/MANIFEST.MF	(working copy)
+@@ -12,6 +12,7 @@
+  org.eclipse.imp.smapi,
+  org.eclipse.imp.runtime
+ Eclipse-LazyStart: true
++Bundle-ActivationPolicy: lazy
+ Export-Package: org.eclipse.imp.smapifier.actions,
+  org.eclipse.imp.smapifier.builder
+ Bundle-Vendor: mvaziri@us.ibm.com
+Index: .classpath
+===================================================================
+--- .classpath	(revision 20550)
++++ .classpath	(working copy)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <classpath>
++	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
++	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+ 	<classpathentry kind="src" path="src"/>
+-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+-	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+ 	<classpathentry kind="output" path="bin"/>
+ </classpath>
+Index: plugin.xml
+===================================================================
+--- plugin.xml	(revision 20550)
++++ plugin.xml	(working copy)
+@@ -17,7 +17,7 @@
+       <runtime>
+          <run class="org.eclipse.imp.smapifier.builder.SmapiProjectNature"/>
+       </runtime>
+-      <builder id="org.eclipse.imp.smapifier.builder.SmapieBuilder"/>
++      <builder id="org.eclipse.imp.smapifier.SmapieBuilder"/>
+       <requires-nature id="org.eclipse.jdt.core.javanature"/>
+    </extension>
+    
+Index: .settings/org.eclipse.jdt.core.prefs
+===================================================================
+--- .settings/org.eclipse.jdt.core.prefs	(revision 20550)
++++ .settings/org.eclipse.jdt.core.prefs	(working copy)
+@@ -1,4 +1,4 @@
+-#Tue Nov 13 14:07:40 EST 2007
++#Thu Aug 21 17:37:04 BST 2008
+ eclipse.preferences.version=1
+ org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
+ org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.5
+@@ -7,6 +7,65 @@
+ org.eclipse.jdt.core.compiler.debug.lineNumber=generate
+ org.eclipse.jdt.core.compiler.debug.localVariable=generate
+ org.eclipse.jdt.core.compiler.debug.sourceFile=generate
++org.eclipse.jdt.core.compiler.problem.annotationSuperInterface=warning
+ org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
++org.eclipse.jdt.core.compiler.problem.autoboxing=ignore
++org.eclipse.jdt.core.compiler.problem.comparingIdentical=warning
++org.eclipse.jdt.core.compiler.problem.deprecation=warning
++org.eclipse.jdt.core.compiler.problem.deprecationInDeprecatedCode=disabled
++org.eclipse.jdt.core.compiler.problem.deprecationWhenOverridingDeprecatedMethod=disabled
++org.eclipse.jdt.core.compiler.problem.discouragedReference=warning
++org.eclipse.jdt.core.compiler.problem.emptyStatement=ignore
+ org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
++org.eclipse.jdt.core.compiler.problem.fallthroughCase=ignore
++org.eclipse.jdt.core.compiler.problem.fatalOptionalError=enabled
++org.eclipse.jdt.core.compiler.problem.fieldHiding=ignore
++org.eclipse.jdt.core.compiler.problem.finalParameterBound=warning
++org.eclipse.jdt.core.compiler.problem.finallyBlockNotCompletingNormally=warning
++org.eclipse.jdt.core.compiler.problem.forbiddenReference=error
++org.eclipse.jdt.core.compiler.problem.hiddenCatchBlock=warning
++org.eclipse.jdt.core.compiler.problem.incompatibleNonInheritedInterfaceMethod=warning
++org.eclipse.jdt.core.compiler.problem.incompleteEnumSwitch=ignore
++org.eclipse.jdt.core.compiler.problem.indirectStaticAccess=ignore
++org.eclipse.jdt.core.compiler.problem.localVariableHiding=ignore
++org.eclipse.jdt.core.compiler.problem.methodWithConstructorName=warning
++org.eclipse.jdt.core.compiler.problem.missingDeprecatedAnnotation=warning
++org.eclipse.jdt.core.compiler.problem.missingOverrideAnnotation=ignore
++org.eclipse.jdt.core.compiler.problem.missingSerialVersion=warning
++org.eclipse.jdt.core.compiler.problem.noEffectAssignment=warning
++org.eclipse.jdt.core.compiler.problem.noImplicitStringConversion=warning
++org.eclipse.jdt.core.compiler.problem.nonExternalizedStringLiteral=ignore
++org.eclipse.jdt.core.compiler.problem.nullReference=warning
++org.eclipse.jdt.core.compiler.problem.overridingPackageDefaultMethod=warning
++org.eclipse.jdt.core.compiler.problem.parameterAssignment=ignore
++org.eclipse.jdt.core.compiler.problem.possibleAccidentalBooleanAssignment=ignore
++org.eclipse.jdt.core.compiler.problem.potentialNullReference=ignore
++org.eclipse.jdt.core.compiler.problem.rawTypeReference=ignore
++org.eclipse.jdt.core.compiler.problem.redundantNullCheck=ignore
++org.eclipse.jdt.core.compiler.problem.redundantSuperinterface=ignore
++org.eclipse.jdt.core.compiler.problem.specialParameterHidingField=disabled
++org.eclipse.jdt.core.compiler.problem.staticAccessReceiver=warning
++org.eclipse.jdt.core.compiler.problem.suppressWarnings=enabled
++org.eclipse.jdt.core.compiler.problem.syntheticAccessEmulation=ignore
++org.eclipse.jdt.core.compiler.problem.typeParameterHiding=warning
++org.eclipse.jdt.core.compiler.problem.uncheckedTypeOperation=ignore
++org.eclipse.jdt.core.compiler.problem.undocumentedEmptyBlock=ignore
++org.eclipse.jdt.core.compiler.problem.unhandledWarningToken=warning
++org.eclipse.jdt.core.compiler.problem.unnecessaryElse=ignore
++org.eclipse.jdt.core.compiler.problem.unnecessaryTypeCheck=ignore
++org.eclipse.jdt.core.compiler.problem.unqualifiedFieldAccess=ignore
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownException=ignore
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionExemptExceptionAndThrowable=enabled
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionIncludeDocCommentReference=enabled
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionWhenOverriding=disabled
++org.eclipse.jdt.core.compiler.problem.unusedImport=warning
++org.eclipse.jdt.core.compiler.problem.unusedLabel=warning
++org.eclipse.jdt.core.compiler.problem.unusedLocal=warning
++org.eclipse.jdt.core.compiler.problem.unusedParameter=ignore
++org.eclipse.jdt.core.compiler.problem.unusedParameterIncludeDocCommentReference=enabled
++org.eclipse.jdt.core.compiler.problem.unusedParameterWhenImplementingAbstract=disabled
++org.eclipse.jdt.core.compiler.problem.unusedParameterWhenOverridingConcrete=disabled
++org.eclipse.jdt.core.compiler.problem.unusedPrivateMember=ignore
++org.eclipse.jdt.core.compiler.problem.unusedWarningToken=warning
++org.eclipse.jdt.core.compiler.problem.varargsArgumentNeedCast=warning
+ org.eclipse.jdt.core.compiler.source=1.5
+#P org.eclipse.imp.smapi
+Index: META-INF/MANIFEST.MF
+===================================================================
+--- META-INF/MANIFEST.MF	(revision 20550)
++++ META-INF/MANIFEST.MF	(working copy)
+@@ -5,6 +5,7 @@
+ Bundle-Version: 0.1.86
+ Bundle-Localization: plugin
+ Eclipse-LazyStart: true
++Bundle-ActivationPolicy: lazy
+ Export-Package: org.eclipse.imp.smapi
+ Require-Bundle: org.junit,
+  com.ibm.wala.shrike
+Index: build.properties
+===================================================================
+--- build.properties	(revision 20550)
++++ build.properties	(working copy)
+@@ -1,6 +1,7 @@
+ bin.includes = META-INF/,\
+                bin/,\
+-			   .
++               .,\
++               plugin.properties
+ src.includes = .cvsignore,\
+                .classpath,\
+                .project,\
+@@ -7,4 +8,4 @@
+                META-INF/,\
+                build.properties,\
+                src/
+-source.. = src/
+\ No newline at end of file
++source.. = src/
+Index: .classpath
+===================================================================
+--- .classpath	(revision 20550)
++++ .classpath	(working copy)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <classpath>
++	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
++	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+ 	<classpathentry kind="src" path="src"/>
+-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+-	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+ 	<classpathentry kind="output" path="bin"/>
+ </classpath>
+Index: .settings/org.eclipse.jdt.core.prefs
+===================================================================
+--- .settings/org.eclipse.jdt.core.prefs	(revision 20550)
++++ .settings/org.eclipse.jdt.core.prefs	(working copy)
+@@ -1,4 +1,4 @@
+-#Tue Nov 13 14:07:22 EST 2007
++#Thu Aug 21 16:49:25 BST 2008
+ eclipse.preferences.version=1
+ org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
+ org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.5
+@@ -7,6 +7,65 @@
+ org.eclipse.jdt.core.compiler.debug.lineNumber=generate
+ org.eclipse.jdt.core.compiler.debug.localVariable=generate
+ org.eclipse.jdt.core.compiler.debug.sourceFile=generate
++org.eclipse.jdt.core.compiler.problem.annotationSuperInterface=warning
+ org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
++org.eclipse.jdt.core.compiler.problem.autoboxing=ignore
++org.eclipse.jdt.core.compiler.problem.comparingIdentical=warning
++org.eclipse.jdt.core.compiler.problem.deprecation=warning
++org.eclipse.jdt.core.compiler.problem.deprecationInDeprecatedCode=disabled
++org.eclipse.jdt.core.compiler.problem.deprecationWhenOverridingDeprecatedMethod=disabled
++org.eclipse.jdt.core.compiler.problem.discouragedReference=warning
++org.eclipse.jdt.core.compiler.problem.emptyStatement=ignore
+ org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
++org.eclipse.jdt.core.compiler.problem.fallthroughCase=ignore
++org.eclipse.jdt.core.compiler.problem.fatalOptionalError=enabled
++org.eclipse.jdt.core.compiler.problem.fieldHiding=ignore
++org.eclipse.jdt.core.compiler.problem.finalParameterBound=warning
++org.eclipse.jdt.core.compiler.problem.finallyBlockNotCompletingNormally=warning
++org.eclipse.jdt.core.compiler.problem.forbiddenReference=error
++org.eclipse.jdt.core.compiler.problem.hiddenCatchBlock=warning
++org.eclipse.jdt.core.compiler.problem.incompatibleNonInheritedInterfaceMethod=warning
++org.eclipse.jdt.core.compiler.problem.incompleteEnumSwitch=ignore
++org.eclipse.jdt.core.compiler.problem.indirectStaticAccess=ignore
++org.eclipse.jdt.core.compiler.problem.localVariableHiding=ignore
++org.eclipse.jdt.core.compiler.problem.methodWithConstructorName=warning
++org.eclipse.jdt.core.compiler.problem.missingDeprecatedAnnotation=warning
++org.eclipse.jdt.core.compiler.problem.missingOverrideAnnotation=warning
++org.eclipse.jdt.core.compiler.problem.missingSerialVersion=warning
++org.eclipse.jdt.core.compiler.problem.noEffectAssignment=warning
++org.eclipse.jdt.core.compiler.problem.noImplicitStringConversion=warning
++org.eclipse.jdt.core.compiler.problem.nonExternalizedStringLiteral=ignore
++org.eclipse.jdt.core.compiler.problem.nullReference=warning
++org.eclipse.jdt.core.compiler.problem.overridingPackageDefaultMethod=warning
++org.eclipse.jdt.core.compiler.problem.parameterAssignment=ignore
++org.eclipse.jdt.core.compiler.problem.possibleAccidentalBooleanAssignment=ignore
++org.eclipse.jdt.core.compiler.problem.potentialNullReference=ignore
++org.eclipse.jdt.core.compiler.problem.rawTypeReference=ignore
++org.eclipse.jdt.core.compiler.problem.redundantNullCheck=ignore
++org.eclipse.jdt.core.compiler.problem.redundantSuperinterface=ignore
++org.eclipse.jdt.core.compiler.problem.specialParameterHidingField=disabled
++org.eclipse.jdt.core.compiler.problem.staticAccessReceiver=warning
++org.eclipse.jdt.core.compiler.problem.suppressWarnings=enabled
++org.eclipse.jdt.core.compiler.problem.syntheticAccessEmulation=ignore
++org.eclipse.jdt.core.compiler.problem.typeParameterHiding=warning
++org.eclipse.jdt.core.compiler.problem.uncheckedTypeOperation=ignore
++org.eclipse.jdt.core.compiler.problem.undocumentedEmptyBlock=ignore
++org.eclipse.jdt.core.compiler.problem.unhandledWarningToken=warning
++org.eclipse.jdt.core.compiler.problem.unnecessaryElse=ignore
++org.eclipse.jdt.core.compiler.problem.unnecessaryTypeCheck=ignore
++org.eclipse.jdt.core.compiler.problem.unqualifiedFieldAccess=ignore
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownException=ignore
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionExemptExceptionAndThrowable=enabled
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionIncludeDocCommentReference=enabled
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionWhenOverriding=disabled
++org.eclipse.jdt.core.compiler.problem.unusedImport=warning
++org.eclipse.jdt.core.compiler.problem.unusedLabel=warning
++org.eclipse.jdt.core.compiler.problem.unusedLocal=warning
++org.eclipse.jdt.core.compiler.problem.unusedParameter=ignore
++org.eclipse.jdt.core.compiler.problem.unusedParameterIncludeDocCommentReference=enabled
++org.eclipse.jdt.core.compiler.problem.unusedParameterWhenImplementingAbstract=disabled
++org.eclipse.jdt.core.compiler.problem.unusedParameterWhenOverridingConcrete=disabled
++org.eclipse.jdt.core.compiler.problem.unusedPrivateMember=warning
++org.eclipse.jdt.core.compiler.problem.unusedWarningToken=warning
++org.eclipse.jdt.core.compiler.problem.varargsArgumentNeedCast=warning
+ org.eclipse.jdt.core.compiler.source=1.5
+Index: plugin.properties
+===================================================================
+#P org.eclipse.imp.runtime
+Index: plugin.properties
+===================================================================
+Index: plugin.xml
+===================================================================
+--- plugin.xml	(revision 20619)
++++ plugin.xml	(working copy)
+@@ -62,6 +62,10 @@
+             markerSeverity="1"
+             name="org.eclipse.imp.editor.parseAnnotation"
+             super="org.eclipse.ui.workbench.texteditor.error"/>
++      <type
++            markerSeverity="1"
++            name="org.eclipse.imp.runtime.occurrenceAnnotation"
++            super="org.eclipse.ui.workbench.texteditor.error"/>
+    </extension>
+    <extension
+          point="org.eclipse.ui.editors.markerAnnotationSpecification">
+Index: .classpath
+===================================================================
+--- .classpath	(revision 20550)
++++ .classpath	(working copy)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <classpath>
++	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
++	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+ 	<classpathentry kind="src" path="src"/>
+-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+-	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+ 	<classpathentry kind="output" path="bin"/>
+ </classpath>
+Index: META-INF/MANIFEST.MF
+===================================================================
+--- META-INF/MANIFEST.MF	(revision 20550)
++++ META-INF/MANIFEST.MF	(working copy)
+@@ -33,6 +33,7 @@
+  com.ibm.icu,
+  org.eclipse.help
+ Eclipse-LazyStart: true
++Bundle-ActivationPolicy: lazy
+ Export-Package: org.eclipse.imp.builder,
+  org.eclipse.imp.core,
+  org.eclipse.imp.editor,
+Index: build.properties
+===================================================================
+--- build.properties	(revision 20550)
++++ build.properties	(working copy)
+@@ -3,5 +3,6 @@
+ bin.includes = META-INF/,\
+                .,\
+                plugin.xml,\
+-               icons/
++               icons/,\
++               plugin.properties
+ src.includes = icons/
+Index: src/org/eclipse/imp/language/LanguageRegistry.java
+===================================================================
+--- src/org/eclipse/imp/language/LanguageRegistry.java	(revision 20550)
++++ src/org/eclipse/imp/language/LanguageRegistry.java	(working copy)
+@@ -25,6 +25,7 @@
+ import java.util.Map;
+ 
+ import org.eclipse.core.runtime.IConfigurationElement;
++import org.eclipse.core.runtime.IExtension;
+ import org.eclipse.core.runtime.IExtensionPoint;
+ import org.eclipse.core.runtime.IPath;
+ import org.eclipse.core.runtime.InvalidRegistryObjectException;
+@@ -38,6 +39,7 @@
+ import org.eclipse.swt.widgets.Display;
+ import org.eclipse.ui.IEditorDescriptor;
+ import org.eclipse.ui.IEditorInput;
++import org.eclipse.ui.IEditorMatchingStrategy;
+ import org.eclipse.ui.IFileEditorMapping;
+ import org.eclipse.ui.PlatformUI;
+ import org.eclipse.ui.internal.registry.EditorDescriptor;
+@@ -317,11 +319,37 @@
+                     FileEditorMapping fem= (FileEditorMapping) mapping;
+ 	        }
+ 	        IEditorDescriptor defaultEditor= mapping.getDefaultEditor();
+-                FileEditorMapping fem= (FileEditorMapping) mapping;
++            FileEditorMapping fem= (FileEditorMapping) mapping;
+ 	        if (defaultEditor == null || defaultEditor.getId().equals("")) {
+ 	            fem.setDefaultEditor((EditorDescriptor) universalEditor);
+-	        } else {
+-                    fem.addEditor((EditorDescriptor) universalEditor);
++	        } else {													// Make sure we have a UniversalEditor
++	        	boolean gotIt = false;
++	        	for (IEditorDescriptor editor : fem.getEditors()) {		// Search for an explicit copy of the UniversalEditor	
++	        		if (editor == universalEditor) {
++	        			gotIt = true;
++	        			break;
++	        		}
++	        	}
++	        	if (!gotIt) {
++	        		for (IEditorDescriptor editor : fem.getEditors()) {	// Search for an implicit copy of a derived UniversalEditor
++		        		EditorDescriptor editorDescriptor = (EditorDescriptor) editor;
++						String className = editorDescriptor.getClassName();
++						IConfigurationElement configurationElement = editorDescriptor.getConfigurationElement();
++						IExtension declaringExtension = configurationElement.getDeclaringExtension();
++						String namespaceIdentifier = declaringExtension.getNamespaceIdentifier();
++						Bundle bundle = Platform.getBundle(namespaceIdentifier);
++		        		try {
++							Class<?> editorClass = bundle.loadClass(className);
++			        		if (UniversalEditor.class.isAssignableFrom(editorClass)) {
++			        			gotIt = true;
++			        			break;
++			        		}
++						} catch (ClassNotFoundException e) {
++						}
++		        	}
++	        	}
++	        	if (!gotIt)
++	        		fem.addEditor((EditorDescriptor) universalEditor);
+ 	        }
+ 	        newMap.add(mapping);
+ 	    }
+Index: src/org/eclipse/imp/wizards/NewProjectWizardSecondPage.java
+===================================================================
+--- src/org/eclipse/imp/wizards/NewProjectWizardSecondPage.java	(revision 20619)
++++ src/org/eclipse/imp/wizards/NewProjectWizardSecondPage.java	(working copy)
+@@ -53,7 +53,6 @@
+ import org.eclipse.jdt.core.IClasspathEntry;
+ import org.eclipse.jdt.core.IJavaProject;
+ import org.eclipse.jdt.core.JavaCore;
+-import org.eclipse.jdt.internal.corext.util.JavaModelUtil;
+ import org.eclipse.jdt.internal.corext.util.Messages;
+ import org.eclipse.jdt.internal.ui.dialogs.StatusInfo;
+ import org.eclipse.jdt.internal.ui.util.CoreUtility;
+@@ -129,7 +128,7 @@
+             if (compliance != null) {
+                 IJavaProject project= JavaCore.create(fCurrProject);
+                 Map options= project.getOptions(false);
+-                JavaModelUtil.setCompilanceOptions(options, compliance);
++                JavaCore.setComplianceOptions(compliance, options);
+                 project.setOptions(options);
+             }
+         } finally {
+Index: src/org/eclipse/imp/utils/HTMLPrinter.java
+===================================================================
+--- src/org/eclipse/imp/utils/HTMLPrinter.java	(revision 20550)
++++ src/org/eclipse/imp/utils/HTMLPrinter.java	(working copy)
+@@ -212,19 +212,7 @@
+      * Formats several messages as HTML text.
+      */
+     public static String formatMultipleMessages(List/*<String>*/ messages) {
+-        if (true) { // until we hook in the HTML-enabled hover viewer
+-            StringBuffer buff= new StringBuffer();
+-            buff.append("Multiple messages:\n");
+-            for(Iterator iter= messages.iterator(); iter.hasNext();) {
+-        	String msg= (String) iter.next();
+-        	buff.append("  ");
+-        	buff.append(msg);
+-        	if (iter.hasNext())
+-        	    buff.append('\n');
+-            }
+-            return buff.toString();
+-        }
+-        StringBuffer buffer= new StringBuffer();
++    	StringBuffer buffer= new StringBuffer();
+         addPageProlog(buffer);
+         addParagraph(buffer, convertToHTMLContent("There are multiple markers on this line."));
+         startBulletList(buffer);
+@@ -240,8 +228,6 @@
+      * Formats a message as HTML text.
+      */
+     public static String formatSingleMessage(String message) {
+-        if (true) // until we hook in the HTML-enabled hover viewer
+-            return message;
+         StringBuffer buffer= new StringBuffer();
+         addPageProlog(buffer);
+         addParagraph(buffer, convertToHTMLContent(message));
+Index: src/org/eclipse/imp/editor/AnnotationHoverBase.java
+===================================================================
+--- src/org/eclipse/imp/editor/AnnotationHoverBase.java	(revision 20550)
++++ src/org/eclipse/imp/editor/AnnotationHoverBase.java	(working copy)
+@@ -166,8 +166,6 @@
+      * Formats a message as HTML text.
+      */
+     public static String formatSingleMessage(String message) {
+-        if (true) // until we hook in the HTML-enabled hover viewer
+-            return message;
+         StringBuffer buffer= new StringBuffer();
+         HTMLPrinter.addPageProlog(buffer);
+         HTMLPrinter.addParagraph(buffer, HTMLPrinter.convertToHTMLContent(message));
+@@ -179,19 +177,6 @@
+      * Formats several messages as HTML text.
+      */
+     public static String formatMultipleMessages(List messages) {
+-        if (true) { // until we hook in the HTML-enabled hover viewer
+-            StringBuffer buff= new StringBuffer();
+-    
+-            buff.append("Multiple messages:\n");
+-            for(Iterator iter= messages.iterator(); iter.hasNext();) {
+-        	String msg= (String) iter.next();
+-        	buff.append("  ");
+-        	buff.append(msg);
+-        	if (iter.hasNext())
+-        	    buff.append('\n');
+-            }
+-            return buff.toString();
+-        }
+         StringBuffer buffer= new StringBuffer();
+         HTMLPrinter.addPageProlog(buffer);
+         HTMLPrinter.addParagraph(buffer, HTMLPrinter.convertToHTMLContent("Multiple messages at this line"));
+Index: src/org/eclipse/imp/editor/internal/PresentationController.java
+===================================================================
+--- src/org/eclipse/imp/editor/internal/PresentationController.java	(revision 20550)
++++ src/org/eclipse/imp/editor/internal/PresentationController.java	(working copy)
+@@ -14,6 +14,8 @@
+ 
+ import java.io.PrintStream;
+ import java.util.ArrayList;
++import java.util.Collections;
++import java.util.Comparator;
+ import java.util.Iterator;
+ import java.util.List;
+ import java.util.Stack;
+@@ -28,6 +30,8 @@
+ import org.eclipse.imp.preferences.PreferenceCache;
+ import org.eclipse.imp.services.ITokenColorer;
+ import org.eclipse.imp.utils.ConsoleUtil;
++import org.eclipse.jface.text.BadLocationException;
++import org.eclipse.jface.text.IDocument;
+ import org.eclipse.jface.text.IRegion;
+ import org.eclipse.jface.text.Region;
+ import org.eclipse.jface.text.TextAttribute;
+@@ -157,8 +161,18 @@
+         }
+     }
+ 
+-    private void submitTextPresentation(final TextPresentation presentation) {
+-
++    private void submitTextPresentation(final TextPresentation uncheckedPresentation) {
++    	int charCount = 0;
++    	if (fSourceViewer != null) {		
++    		IDocument document = fSourceViewer.getDocument();
++			if (document != null)			// EDW 27 Sep 2008 May be null after file deleted
++				charCount = document.getLength();
++    	}
++    	final TextPresentation presentation;
++    	if (!checkPresentation(uncheckedPresentation, charCount))
++			presentation = correctPresentation(uncheckedPresentation, charCount);
++    	else
++    		presentation = uncheckedPresentation;
+         Display.getDefault().asyncExec(new Runnable() {
+             public void run() {
+             	
+@@ -163,11 +177,11 @@
+             public void run() {
+             	
+             	// SMS 16 Sep 2008
+-            	int charCount;
+-            	if (fSourceViewer != null) {
+-            		charCount = fSourceViewer.getDocument().getLength();
+-            	} else {
+-            		charCount = 0;
++            	int charCount = 0;
++            	if (fSourceViewer != null) {		
++            		IDocument document = fSourceViewer.getDocument();
++					if (document != null)			// EDW 27 Sep 2008 May be null after file deleted
++						charCount = document.getLength();
+             	}
+             	
+             	// Attempt to head off exception due to final range extending beyond
+@@ -245,4 +259,78 @@
+             }
+         });
+     }
++
++	private boolean checkPresentation(TextPresentation presentation, int charCount) {		// EDW
++		Iterator presIt = presentation.getAllStyleRangeIterator();
++		int end = -1;
++		while (presIt.hasNext()) {
++			StyleRange nextRange = (StyleRange) presIt.next();
++        	int start = nextRange.start;
++           	int length = nextRange.length;
++            if (start < end) {
++        		System.out.println("Unexpected style start " + start + ":" + length + ":" + (start + length) + "/" + charCount);
++        		return false;
++        	}
++        	if (length < 1) {
++        		System.out.println("Unexpected style length " + start + ":" + length + ":" + (start + length) + "/" + charCount);
++        		return false;
++        	}
++        	end = start + length;      	
++        	if (end > charCount) {
++        		System.out.println("Unexpected style end " + start + ":" + length + ":" + (start + length) + "/" + charCount);
++        		return false;
++        	}
++		}
++		return true;
++	}
++
++	private TextPresentation correctPresentation(TextPresentation presentation, int charCount) {		// EDW
++		List<StyleRange> ranges = new ArrayList<StyleRange>();
++		Iterator presIt = presentation.getAllStyleRangeIterator();
++		for (int styleNumber = 0; presIt.hasNext(); styleNumber++) {
++			StyleRange range = (StyleRange) presIt.next();
++        	int start = range.start;
++        	int length = range.length;
++    		if (length <= 0)
++        		System.out.println("Ignored -ve length style " + styleNumber + ": " + range.start + ":" + range.length + ":" + (range.start + range.length) + "/" + charCount);
++    		else if (start >= charCount)
++        		System.out.println("Ignored past-end style " + styleNumber + ": " + range.start + ":" + range.length + ":" + (range.start + range.length) + "/" + charCount);
++    		else {
++        		int end = start + length;
++        		if (end > charCount) {
++            		System.out.println("Truncated over-end style " + styleNumber + ": " + range.start + ":" + range.length + ":" + (range.start + range.length) + "/" + charCount);
++            		range.length = charCount - start;
++        		}
++        		ranges.add(range);
++        	}
++		}
++		Collections.sort(ranges, new Comparator<StyleRange>()
++		{
++			public int compare(StyleRange o1, StyleRange o2) {
++				return o1.start - o2.start;
++			}
++		});
++		IDocument document = fSourceViewer.getDocument();
++		TextPresentation newPresentation = new TextPresentation();
++		int iMax = ranges.size();
++		for (int i = 0; i < iMax; i++) {
++			StyleRange thisRange = ranges.get(i);
++			if ((i+1) < iMax) {
++				StyleRange nextRange = ranges.get(i+1);
++        		int end = thisRange.start + thisRange.length;
++				if (end > nextRange.start) {
++            		try {
++						System.out.println("Truncated over-lap style " + i + " " +
++								thisRange.start + ":" + thisRange.length + ":" + (thisRange.start + thisRange.length) + ":'" + document.get(thisRange.start, thisRange.length) + "' " +
++								nextRange.start + ":" + nextRange.length + ":" + (nextRange.start + nextRange.length) + ":'" + document.get(nextRange.start, nextRange.length) + "'");
++					} catch (BadLocationException e) {
++						e.printStackTrace();
++					}
++					thisRange.length = nextRange.start - thisRange.start;
++				}
++			}
++			newPresentation.addStyleRange(thisRange);
++		}
++		return newPresentation;
++	}
+ }
+Index: src/org/eclipse/imp/editor/ParserScheduler.java
+===================================================================
+--- src/org/eclipse/imp/editor/ParserScheduler.java	(revision 20550)
++++ src/org/eclipse/imp/editor/ParserScheduler.java	(working copy)
+@@ -68,8 +68,11 @@
+ 
+         IEditorInput editorInput= fEditorPart.getEditorInput();
+         try {
+-            IDocument document= fDocumentProvider.getDocument(editorInput);
+-
++            IDocument document = fDocumentProvider.getDocument(editorInput);
++            if (document == null) {				// EDW 29 Sep 2008
++                /* Editor was deleted */
++                return Status.OK_STATUS;
++            }
+             if (PreferenceCache.emitMessages)
+                 RuntimePlugin.getInstance().writeInfoMsg(
+                         "Parsing language " + fParseController.getLanguage().getName() + " for input " + editorInput.getName());
+Index: .settings/org.eclipse.jdt.core.prefs
+===================================================================
+--- .settings/org.eclipse.jdt.core.prefs	(revision 20550)
++++ .settings/org.eclipse.jdt.core.prefs	(working copy)
+@@ -1,4 +1,4 @@
+-#Wed Oct 18 15:08:27 EDT 2006
++#Thu Aug 21 16:48:50 BST 2008
+ eclipse.preferences.version=1
+ org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
+ org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.5
+@@ -7,6 +7,65 @@
+ org.eclipse.jdt.core.compiler.debug.lineNumber=generate
+ org.eclipse.jdt.core.compiler.debug.localVariable=generate
+ org.eclipse.jdt.core.compiler.debug.sourceFile=generate
++org.eclipse.jdt.core.compiler.problem.annotationSuperInterface=warning
+ org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
++org.eclipse.jdt.core.compiler.problem.autoboxing=ignore
++org.eclipse.jdt.core.compiler.problem.comparingIdentical=warning
++org.eclipse.jdt.core.compiler.problem.deprecation=ignore
++org.eclipse.jdt.core.compiler.problem.deprecationInDeprecatedCode=disabled
++org.eclipse.jdt.core.compiler.problem.deprecationWhenOverridingDeprecatedMethod=disabled
++org.eclipse.jdt.core.compiler.problem.discouragedReference=ignore
++org.eclipse.jdt.core.compiler.problem.emptyStatement=ignore
+ org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
++org.eclipse.jdt.core.compiler.problem.fallthroughCase=ignore
++org.eclipse.jdt.core.compiler.problem.fatalOptionalError=enabled
++org.eclipse.jdt.core.compiler.problem.fieldHiding=ignore
++org.eclipse.jdt.core.compiler.problem.finalParameterBound=warning
++org.eclipse.jdt.core.compiler.problem.finallyBlockNotCompletingNormally=warning
++org.eclipse.jdt.core.compiler.problem.forbiddenReference=error
++org.eclipse.jdt.core.compiler.problem.hiddenCatchBlock=warning
++org.eclipse.jdt.core.compiler.problem.incompatibleNonInheritedInterfaceMethod=warning
++org.eclipse.jdt.core.compiler.problem.incompleteEnumSwitch=ignore
++org.eclipse.jdt.core.compiler.problem.indirectStaticAccess=ignore
++org.eclipse.jdt.core.compiler.problem.localVariableHiding=ignore
++org.eclipse.jdt.core.compiler.problem.methodWithConstructorName=warning
++org.eclipse.jdt.core.compiler.problem.missingDeprecatedAnnotation=ignore
++org.eclipse.jdt.core.compiler.problem.missingOverrideAnnotation=ignore
++org.eclipse.jdt.core.compiler.problem.missingSerialVersion=warning
++org.eclipse.jdt.core.compiler.problem.noEffectAssignment=warning
++org.eclipse.jdt.core.compiler.problem.noImplicitStringConversion=warning
++org.eclipse.jdt.core.compiler.problem.nonExternalizedStringLiteral=ignore
++org.eclipse.jdt.core.compiler.problem.nullReference=warning
++org.eclipse.jdt.core.compiler.problem.overridingPackageDefaultMethod=warning
++org.eclipse.jdt.core.compiler.problem.parameterAssignment=ignore
++org.eclipse.jdt.core.compiler.problem.possibleAccidentalBooleanAssignment=ignore
++org.eclipse.jdt.core.compiler.problem.potentialNullReference=ignore
++org.eclipse.jdt.core.compiler.problem.rawTypeReference=ignore
++org.eclipse.jdt.core.compiler.problem.redundantNullCheck=ignore
++org.eclipse.jdt.core.compiler.problem.redundantSuperinterface=ignore
++org.eclipse.jdt.core.compiler.problem.specialParameterHidingField=disabled
++org.eclipse.jdt.core.compiler.problem.staticAccessReceiver=ignore
++org.eclipse.jdt.core.compiler.problem.suppressWarnings=enabled
++org.eclipse.jdt.core.compiler.problem.syntheticAccessEmulation=ignore
++org.eclipse.jdt.core.compiler.problem.typeParameterHiding=warning
++org.eclipse.jdt.core.compiler.problem.uncheckedTypeOperation=ignore
++org.eclipse.jdt.core.compiler.problem.undocumentedEmptyBlock=ignore
++org.eclipse.jdt.core.compiler.problem.unhandledWarningToken=warning
++org.eclipse.jdt.core.compiler.problem.unnecessaryElse=ignore
++org.eclipse.jdt.core.compiler.problem.unnecessaryTypeCheck=ignore
++org.eclipse.jdt.core.compiler.problem.unqualifiedFieldAccess=ignore
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownException=ignore
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionExemptExceptionAndThrowable=enabled
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionIncludeDocCommentReference=enabled
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionWhenOverriding=disabled
++org.eclipse.jdt.core.compiler.problem.unusedImport=ignore
++org.eclipse.jdt.core.compiler.problem.unusedLabel=warning
++org.eclipse.jdt.core.compiler.problem.unusedLocal=ignore
++org.eclipse.jdt.core.compiler.problem.unusedParameter=ignore
++org.eclipse.jdt.core.compiler.problem.unusedParameterIncludeDocCommentReference=enabled
++org.eclipse.jdt.core.compiler.problem.unusedParameterWhenImplementingAbstract=disabled
++org.eclipse.jdt.core.compiler.problem.unusedParameterWhenOverridingConcrete=disabled
++org.eclipse.jdt.core.compiler.problem.unusedPrivateMember=ignore
++org.eclipse.jdt.core.compiler.problem.unusedWarningToken=ignore
++org.eclipse.jdt.core.compiler.problem.varargsArgumentNeedCast=warning
+ org.eclipse.jdt.core.compiler.source=1.5
