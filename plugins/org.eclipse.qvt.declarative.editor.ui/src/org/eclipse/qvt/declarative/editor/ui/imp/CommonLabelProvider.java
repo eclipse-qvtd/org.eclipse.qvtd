@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.7 2008/10/25 17:03:48 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.8 2008/11/19 21:51:58 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -72,6 +72,7 @@ public abstract class CommonLabelProvider implements ILabelProvider
 			throw new NullPointerException("Null path element");
 		if (object == null)
 			throw new NullPointerException("Null path object");
+		// FIXME object may be a List of EObject
 		if (!(object instanceof EObject))
 			throw new ClassCastException("Non EObject");
 		EClass objectEClass = ((EObject)object).eClass();
