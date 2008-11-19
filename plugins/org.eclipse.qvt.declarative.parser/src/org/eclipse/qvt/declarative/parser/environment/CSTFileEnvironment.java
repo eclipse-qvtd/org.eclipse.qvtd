@@ -107,7 +107,7 @@ public abstract class CSTFileEnvironment<R extends ICSTRootEnvironment, E extend
 		if ((monitor != null) && monitor.isCanceled())
 			return null;
 		@SuppressWarnings("unchecked")		// Maybe this should be a generic parameter
-		CST cst = (CST) parser.parseTokensToCST();
+		CST cst = (CST) parser.parseTokensToCST(lpgMonitor, -1);
 		if (cst == null)
 			return null;
 		if ((monitor != null) && monitor.isCanceled())
