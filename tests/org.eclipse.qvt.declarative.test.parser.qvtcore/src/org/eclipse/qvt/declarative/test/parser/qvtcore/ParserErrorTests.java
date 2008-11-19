@@ -21,7 +21,7 @@ public class ParserErrorTests extends AbstractQVTcTestCase
 	public void testParserErrorNoTxName() throws IOException, CoreException {
 		ProblemLog expectedProblems = new ProblemLog();
 		expectedProblems.handleProblem(ProblemHandler.Severity.ERROR, ProblemHandler.Phase.PARSER,
-				"\"TransformationNameCS\" expected after \"transformation\"", null, -1, -1);
+				"\"<pathName>\" expected after \"transformation\"", null, -1, -1);
 		problemTest("ParserErrorNoTxName", expectedProblems);
 	}
 	
