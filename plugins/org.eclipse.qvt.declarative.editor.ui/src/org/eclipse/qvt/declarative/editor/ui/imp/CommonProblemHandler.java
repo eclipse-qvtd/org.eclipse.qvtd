@@ -12,14 +12,17 @@
  * 
  * </copyright>
  *
- * $Id: CommonProblemHandler.java,v 1.3 2008/10/31 20:41:08 ewillink Exp $
+ * $Id: CommonProblemHandler.java,v 1.4 2008/11/19 21:51:42 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
+
+import lpg.lpgjavaruntime.IToken;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.imp.parser.IMessageHandler;
 import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.ocl.lpg.AbstractProblemHandler;
+import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.ui.builder.MarkerProblemHandler;
 import org.eclipse.qvt.declarative.editor.ui.builder.ProblemLimit;
 
@@ -42,23 +45,33 @@ public class CommonProblemHandler extends AbstractProblemHandler
 	public void handleProblem(Severity problemSeverity,
 			Phase processingPhase, String problemMessage,
 			String processingContext, int startOffset, int endOffset) {
-		int startLine = getParser().getTokenAtCharacter(startOffset).getLine();
-		int startCol = getParser().getTokenAtCharacter(startOffset).getColumn();
-		int endLine = getParser().getTokenAtCharacter(endOffset).getLine();
-		int endCol = getParser().getTokenAtCharacter(startOffset).getColumn();
-		String adjustedMessage = problemMessage;
-		if (problemLimit != null) {
-			Integer severity = MarkerProblemHandler.severityMap.get(problemSeverity);
-			adjustedMessage = problemLimit.check(severity != null ? severity.intValue() : IMarker.SEVERITY_ERROR, adjustedMessage);
-			if (adjustedMessage == null)
-				return;
+		try {
+			if (startOffset < 0)
+				startOffset = 0;
+			if (endOffset < 0)
+				endOffset = 0;
+			IToken startToken = getParser().getTokenAtCharacter(startOffset);
+			IToken endToken = getParser().getTokenAtCharacter(endOffset);
+			int startLine = startToken.getLine();
+			int startCol = startToken.getColumn();
+			int endLine = endToken.getLine();
+			int endCol = endToken.getColumn();
+			String adjustedMessage = problemMessage;
+			if (problemLimit != null) {
+				Integer severity = MarkerProblemHandler.severityMap.get(problemSeverity);
+				adjustedMessage = problemLimit.check(severity != null ? severity.intValue() : IMarker.SEVERITY_ERROR, adjustedMessage);
+				if (adjustedMessage == null)
+					return;
+			}
+			// FIXME Get Annotation to display alternate severities
+			String prefixedMessage = problemSeverity != null ? (problemSeverity.name() + ": " + problemMessage) : problemMessage;
+			handler.handleSimpleMessage(prefixedMessage, startOffset, endOffset,
+		            startCol, endCol, startLine, endLine);
+			if (adjustedMessage != problemMessage)
+				throw new ProblemLimit.LimitExceededException(adjustedMessage);
+		} catch(Throwable e) {
+			QVTEditorPlugin.logError("Failed to handleProblem", e);
 		}
-		// FIXME Get Annotation to display alternate severities
-		String prefixedMessage = problemSeverity != null ? (problemSeverity.name() + ": " + problemMessage) : problemMessage;
-		handler.handleSimpleMessage(prefixedMessage, startOffset, endOffset,
-	            startCol, endCol, startLine, endLine);
-		if (adjustedMessage != problemMessage)
-			throw new ProblemLimit.LimitExceededException(adjustedMessage);
 	}		
 	
 	public void setProblemLimit(ProblemLimit problemLimit) {
