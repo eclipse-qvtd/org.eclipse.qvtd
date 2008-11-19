@@ -285,7 +285,7 @@ public class RegistrationDialog extends StatusDialog
 		else {
 			try {
 				URI ecoreURI = URI.createURI(resourceURI);
-				File file = ModelRegistryEnvironment.getInstance().getFile(ecoreURI);
+				File file = ModelRegistryEnvironment.getInstance().getFile(ecoreURI);	// FIXME Avoid Files rather than URIs wherever possible
 			    if ((file == null) || !file.exists())
 					status.add(new StatusInfo(IStatus.WARNING, PreferencesMessages.RegistrationDialog_error_resource_exists));
 			} catch (URISyntaxException e) {
