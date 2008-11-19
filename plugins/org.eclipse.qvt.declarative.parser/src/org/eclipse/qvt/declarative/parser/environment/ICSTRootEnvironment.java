@@ -22,6 +22,8 @@ public interface ICSTRootEnvironment extends ICSTNodeEnvironment
 	public void checkMappings();
 
 	public XMIResource getASTNode();
+
+	public int getCSTErrorTokens();
 	
 	public void postParse();
 

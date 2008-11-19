@@ -269,6 +269,10 @@ public abstract class CSTRootEnvironment<E extends ICSTNodeEnvironment, CST exte
 	protected UnresolvedEnvironment createUnresolvedEnvironment() {
 		return new UnresolvedEnvironment(this);
 	}
+
+	public int getCSTErrorTokens() {
+		return getParser().getErrorTokens();
+	}
 	
 	public ICSTFileEnvironment getFileEnvironment() {
 		return fileEnvironment;
