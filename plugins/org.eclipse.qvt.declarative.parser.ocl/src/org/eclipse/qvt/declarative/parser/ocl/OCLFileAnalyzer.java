@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLFileAnalyzer.java,v 1.5 2008/10/24 15:23:16 ewillink Exp $
+ * $Id: OCLFileAnalyzer.java,v 1.6 2008/11/19 21:47:08 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl;
 
@@ -36,9 +36,10 @@ import org.eclipse.ocl.cst.SimpleNameCS;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.SendSignalAction;
+import org.eclipse.ocl.lpg.AbstractLexer;
 import org.eclipse.ocl.parser.OCLAnalyzer;
-import org.eclipse.ocl.parser.OCLLexer;
-import org.eclipse.ocl.parser.OCLParser;
+import org.eclipse.ocl.parser.backtracking.OCLBacktrackingLexer;
+import org.eclipse.ocl.parser.backtracking.OCLBacktrackingParser;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileAnalyzer;
 import org.eclipse.qvt.declarative.parser.ocl.environment.OCLFileEnvironment;
 import org.eclipse.qvt.declarative.parser.ocl.environment.OCLTopLevelEnvironment;
@@ -52,7 +53,7 @@ public final class OCLFileAnalyzer extends
 	private EClass iteratorsClass = null;
 
 	public OCLFileAnalyzer(OCLFileEnvironment environment, Monitor monitor) {
-		super(new OCLParser(new OCLLexer(environment)));
+		super(new OCLBacktrackingParser(new OCLBacktrackingLexer(environment)));
 		this.monitor = monitor;
 	}
 
@@ -72,6 +73,11 @@ public final class OCLFileAnalyzer extends
 			PackageDeclarationCS packageDeclarationCS) {
 		return EcoreFactory.eINSTANCE.createEPackage();
 	}
+
+    @Override
+	public AbstractLexer getLexer() {
+    	return getAbstractParser().getLexer();
+    }
 
 	@Override
 	public Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> getOCLEnvironment() {
