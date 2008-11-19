@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonOutlinePage.java,v 1.3 2008/10/26 19:00:33 ewillink Exp $
+ * $Id: CommonOutlinePage.java,v 1.4 2008/11/19 21:55:36 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.cst;
 
@@ -26,6 +26,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
+import org.eclipse.qvt.declarative.editor.ui.format.DefaultFormatManager;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditor;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.ui.ISelectionListener;
@@ -52,7 +54,7 @@ public abstract class CommonOutlinePage extends IMPOutlinePage implements ICSTOu
 		super.dispose();
 		getSite().getPage().removePostSelectionListener(this);
 		getSite().getPage().removeSelectionListener(this);
-// FIXME (bug 230581) editor.removeModelListener(this);
+		editor.removeModelListener(this);
 	}
 
 	protected ISelection getItemSelection(ISelection selection) {
@@ -77,8 +79,8 @@ public abstract class CommonOutlinePage extends IMPOutlinePage implements ICSTOu
 	@Override
 	public void init(IPageSite pageSite) {
 		editor.addModelListener(this);
-		pageSite.getPage().addSelectionListener(this);
-		pageSite.getPage().addPostSelectionListener(this);
+		pageSite.getPage().addSelectionListener(this);			// Outline Click and Text Double Click, Text Single Click after Double Click
+		pageSite.getPage().addPostSelectionListener(this);		// Text Single Click after Single Click	
 		super.init(pageSite);
 	}
 	
@@ -89,6 +91,8 @@ public abstract class CommonOutlinePage extends IMPOutlinePage implements ICSTOu
 	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
         if (!changingSelection) {
+            if (QVTEditorPlugin.SELECTION_OUTER.isActive())
+    			QVTEditorPlugin.SELECTION_OUTER.println(getClass(), "selectionChanged1 " + DefaultFormatManager.formatDebug(event.getSelection()));
 //    		System.out.println(getClass().getSimpleName() + ".selectionChanged");
         	try {
         		changingSelection = true;
@@ -105,11 +109,15 @@ public abstract class CommonOutlinePage extends IMPOutlinePage implements ICSTOu
         		changingSelection = false;
         	}
         }      
+        else if (QVTEditorPlugin.SELECTION_INNER.isActive())
+			QVTEditorPlugin.SELECTION_INNER.println(getClass(), "selectionChanged1 " + DefaultFormatManager.formatDebug(event.getSelection()));
 	}
 
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		if (!isChangingSelection())
 			setSelection(selection);
+        else if (QVTEditorPlugin.SELECTION_INNER.isActive())
+			QVTEditorPlugin.SELECTION_INNER.println(getClass(), "selectionChanged2 " + DefaultFormatManager.formatDebug(selection));
 	}
 
 	@Override
@@ -117,6 +125,8 @@ public abstract class CommonOutlinePage extends IMPOutlinePage implements ICSTOu
         if (!changingSelection) {
 //    		System.out.println(getClass().getSimpleName() + ".setSelection");
         	try {
+    			if (QVTEditorPlugin.SELECTION_OUTER.isActive())
+    				QVTEditorPlugin.SELECTION_OUTER.println(getClass(), "setSelection " + DefaultFormatManager.formatDebug(selection));
         		changingSelection = true;
     			ISelection itemSelection = getItemSelection(selection);
         		super.setSelection(itemSelection);
@@ -124,7 +134,7 @@ public abstract class CommonOutlinePage extends IMPOutlinePage implements ICSTOu
         	finally {
         		changingSelection = false;
         	}
-        }      
+        }
 	}
 
 	@Override

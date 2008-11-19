@@ -13,9 +13,7 @@ package org.eclipse.qvt.declarative.editor.ui.utils;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -24,9 +22,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
+import org.eclipse.qvt.declarative.editor.ui.format.AbstractFormatHelper;
+import org.eclipse.qvt.declarative.editor.ui.format.AbstractFormatManager;
+import org.eclipse.qvt.declarative.editor.ui.format.DefaultFormatResult;
+import org.eclipse.qvt.declarative.editor.ui.format.IFormatResult;
 
 /**
- * DebugString supports generation of debug identification of objects, determining a name usuing
+ * DebugString supports generation of debug identification of objects, determining a name using
  * the following alternatives.
  * <br>The null object is identified as <null-Object>
  * <br>Implementers of IDebugString are identified by IDebugString.toDebugString();
@@ -46,7 +48,7 @@ import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
  * is an exact MethodCall match. This result is then cached and so may occlude a late
  * registration.
  */
-public class DebugString
+public class DebugString extends AbstractFormatManager
 {
 	public static DebugString INSTANCE = new DebugString(true);
 	
@@ -54,22 +56,28 @@ public class DebugString
 		System.out.println(string);	
 	}
 	
-	public static String toDebug(Object object) {
-		DebugStringBuilder s = new DebugStringBuilder(INSTANCE);
-		s.debug(object);
+	public static String format(Object object) {
+		DefaultFormatResult s = new DefaultFormatResult(INSTANCE, null);
+		s.format(object);
 		return s.toString();
 	}
 	
-	protected static class MethodCall {
+	public static String toDebug(Object object) {
+		return format(object);
+	}
+	
+	protected static class MethodCall<T> extends AbstractFormatHelper<T>
+	{
 		protected final Object instance;
 		protected final Method method;
 		
-		public MethodCall(Object instance, Method method) {
+		public MethodCall(DebugString debugger, Class<T> debuggedClass, T instance, Method method) {
+			super(debugger, debuggedClass);
 			this.instance = instance;
 			this.method = method;
 		}
-		
-		public void invoke(DebugStringBuilder s, Object object) {
+
+		public void format(IFormatResult s, Object object) {
 			try {
 				method.invoke(instance, s, object);
 			} catch (IllegalArgumentException e) {
@@ -82,58 +90,28 @@ public class DebugString
 		}
 	}
 	
-	public static void initialize(DebugString debugUtils) {
+	public static void initialize(DebugString debugger) {
 		DebugString instance = new DebugString(false);
-		debugUtils.registerInstanceMethod(instance, "debugBoolean", Boolean.class);
-		debugUtils.registerInstanceMethod(instance, "debugEObject", EObject.class);
-		debugUtils.registerInstanceMethod(instance, "debugEmptyList", List.class, Collections.EMPTY_LIST.getClass());
-		debugUtils.registerInstanceMethod(instance, "debugNumber", Number.class);
-		debugUtils.registerInstanceMethod(instance, "debugResource", Resource.class);
-		debugUtils.registerInstanceMethod(instance, "debugResourceSet", ResourceSet.class);
-		debugUtils.registerInstanceMethod(instance, "debugString", String.class);
-		debugUtils.registerInstanceMethod(instance, "debugURI", URI.class);
+		debugger.registerInstanceMethod(instance, "debugBoolean", Boolean.class);
+		debugger.registerInstanceMethod(instance, "debugEObject", EObject.class);
+		debugger.registerInstanceMethod(instance, "debugEmptyList", List.class, Collections.EMPTY_LIST.getClass());
+		debugger.registerInstanceMethod(instance, "debugNumber", Number.class);
+		debugger.registerInstanceMethod(instance, "debugResource", Resource.class);
+		debugger.registerInstanceMethod(instance, "debugResourceSet", ResourceSet.class);
+		debugger.registerInstanceMethod(instance, "debugString", String.class);
+		debugger.registerInstanceMethod(instance, "debugURI", URI.class);
 	}
-	
-	public Map<Class<?>, MethodCall> map = new HashMap<Class<?>, MethodCall>();
 	
 	public DebugString(boolean doInit) {
 		if (doInit)
 			initialize(this);
 	}
 	
-	public void debug(DebugStringBuilder s, Object object) {
-		if (object == null) {
-			s.append("<null-Object>");
-			return;
-		}
-		if (object instanceof IDebugString) {
-			((IDebugString)object).toDebugString(s);
-			return;
-		}
-		MethodCall methodCall = map.get(object.getClass());
-		if (methodCall == null) {
-			methodCall = getMethod(object.getClass());
-			if (methodCall != null)
-				map.put(object.getClass(), methodCall);
-		}
-		if (methodCall != null) {
-			methodCall.invoke(s, object);
-			return;
-		}
-		else
-			getMethod(object.getClass());		// Debugging
-		s.append("<unknown-");
-		s.append(object.getClass().getSimpleName());
-		s.append(" ");
-		s.append(object.toString());
-		s.append(">");
-	}
-	
-	public void debugBoolean(DebugStringBuilder s, Boolean object) {
+	public void debugBoolean(DefaultFormatResult s, Boolean object) {
 		s.append(object.toString());
 	}
 
-	public void debugEObject(DebugStringBuilder s, EObject object) {
+	public void debugEObject(DefaultFormatResult s, EObject object) {
 		if (object == null) {
 			s.append("<null-EObject>");
 			return;
@@ -163,25 +141,25 @@ public class DebugString
 		}
 	}
 	
-	public void debugEmptyList(DebugStringBuilder s, List<?> object) {
+	public void debugEmptyList(DefaultFormatResult s, List<?> object) {
 		s.append("<empty-list>");
 	}
 	
-	public void debugNumber(DebugStringBuilder s, Number object) {
+	public void debugNumber(DefaultFormatResult s, Number object) {
 		s.append(object.toString());
 	}
 	
-	public void debugResource(DebugStringBuilder s, Resource object) {
+	public void debugResource(DefaultFormatResult s, Resource object) {
 		s.append("Resource(");
 		debugURI(s, object.getURI());
 		s.append(")");
 	}
 	
-	public void debugResourceSet(DebugStringBuilder s, ResourceSet object) {
+	public void debugResourceSet(DefaultFormatResult s, ResourceSet object) {
 		s.append("ResourceSet");
 	}
 	
-	public void debugString(DebugStringBuilder s, String object) {
+	public void debugString(DefaultFormatResult s, String object) {
 		if (object == null)
 			s.append("<null-String>");
 		else {
@@ -191,56 +169,34 @@ public class DebugString
 		}
 	}
 	
-	public void debugURI(DebugStringBuilder s, URI object) {
+	public void debugURI(DefaultFormatResult s, URI object) {
 		debugString(s, object.toString());
 	}
 
-	public MethodCall getMethod(Class<?> cls) {
-		for (Class<?> sCls = cls; sCls != null; sCls = sCls.getSuperclass()) {
-			MethodCall methodCall = map.get(sCls);
-			if (methodCall != null)
-				return methodCall;	
-		}
-		for (Class<?> iCls : cls.getInterfaces()) {
-			MethodCall methodCall = map.get(iCls);
-			if (methodCall != null)
-				return methodCall;	
-		}
-		for (Class<?> iCls : cls.getInterfaces()) {
-			MethodCall methodCall = getMethod(iCls);
-			if (methodCall != null)
-				return methodCall;	
-		}
-		Class<?> sCls = cls.getSuperclass();
-		if (sCls != null)
-			return getMethod(sCls);
-		return null;
-	}
-
-	public void registerInstanceMethod(Object instance, String methodName, Class<?> objectClass) {
+	public <T> void registerInstanceMethod(Object instance, String methodName, Class<T> objectClass) {
 		registerInstanceMethod(instance, methodName, objectClass, objectClass);
 	}
 
-	public void registerInstanceMethod(Object instance, String methodName, Class<?> argClass, Class<?> objectClass) {
+	public <T> void registerInstanceMethod(Object instance, String methodName, Class<?> argClass, Class<T> objectClass) {
 		Class<?> staticClass = instance.getClass();
 		try {
-			Method method = staticClass.getDeclaredMethod(methodName, DebugStringBuilder.class, argClass);
-			map.put(objectClass, new MethodCall(instance, method));
+			Method method = staticClass.getDeclaredMethod(methodName, DefaultFormatResult.class, argClass);
+			install(new MethodCall<T>(this, objectClass, (T)instance, method));
 		} catch (SecurityException e) {
-			QVTEditorPlugin.logError("Failed to register '" + staticClass.getName() + "." + methodName + "'", e);
+			QVTEditorPlugin.logError("Failed to register '" + objectClass.getName() + "." + methodName + "'", e);
 		} catch (NoSuchMethodException e) {
-			QVTEditorPlugin.logError("Failed to register '" + staticClass.getName() + "." + methodName + "'", e);
+			QVTEditorPlugin.logError("Failed to register '" + objectClass.getName() + "." + methodName + "'", e);
 		}
 	}
 
-	public void registerStaticMethod(Class<?> staticClass, String methodName, Class<?> objectClass) {
-		registerStaticMethod(staticClass, methodName, objectClass, objectClass);
+	public <T> void registerStaticMethod(Class<T> staticClass, String methodName) {
+		registerStaticMethod(staticClass, methodName, staticClass);
 	}
 
-	public void registerStaticMethod(Class<?> staticClass, String methodName, Class<?> argClass, Class<?> objectClass) {
+	public <T> void registerStaticMethod(Class<T> staticClass, String methodName, Class<?> argClass) {
 		try {
-			Method method = staticClass.getDeclaredMethod(methodName, DebugStringBuilder.class, argClass);
-			map.put(objectClass, new MethodCall(null, method));
+			Method method = staticClass.getDeclaredMethod(methodName, DefaultFormatResult.class, argClass);
+			install(new MethodCall<T>(this, staticClass, null, method));
 		} catch (SecurityException e) {
 			QVTEditorPlugin.logError("Failed to register '" + staticClass.getName() + "." + methodName + "'", e);
 		} catch (NoSuchMethodException e) {

@@ -12,11 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: CSTOutlinePage.java,v 1.1 2008/08/24 19:03:19 ewillink Exp $
+ * $Id: CSTOutlinePage.java,v 1.2 2008/11/19 21:55:36 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.cst;
 
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
+import org.eclipse.qvt.declarative.editor.ui.format.DefaultFormatManager;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditor;
 
 public class CSTOutlinePage extends CommonOutlinePage implements ICSTOutlinePage
@@ -29,5 +31,7 @@ public class CSTOutlinePage extends CommonOutlinePage implements ICSTOutlinePage
 	public void setSelection(ISelection selection) {
 		if (!isChangingSelection())
 			super.setSelection(editor.getCSTSelection(selection));
+        else if (QVTEditorPlugin.SELECTION_INNER.isActive())
+			QVTEditorPlugin.SELECTION_INNER.println(getClass(), "setSelection " + DefaultFormatManager.formatDebug(selection));
 	}
 }

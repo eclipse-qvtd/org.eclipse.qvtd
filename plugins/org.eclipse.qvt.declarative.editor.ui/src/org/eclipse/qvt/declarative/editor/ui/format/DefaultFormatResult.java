@@ -8,32 +8,28 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvt.declarative.editor.ui.utils;
+package org.eclipse.qvt.declarative.editor.ui.format;
 
-
+import java.util.Map;
 
 /**
- * DebugStringBuilder builds the debug string on behalf of a DebugString.
+ * DefaultFormatResult builds the formatted description on behalf of a
+ * IFormatManager using a StringBuilder.
  */
-public class DebugStringBuilder
+public class DefaultFormatResult extends AbstractFormatResult
 {	
-	protected final DebugString debugUtils;
 	protected final StringBuilder s = new StringBuilder();
 	
-	public DebugStringBuilder(DebugString debugUtils) {
-		this.debugUtils = debugUtils;
+	public DefaultFormatResult(IFormatManager manager, Map<IFormatOption<?>, Object> options) {
+		super(manager, options);
 	}
 
 	public void append(String string) {
 		s.append(string);
 	}
 
-	public void debug(Object object) {
-		debugUtils.debug(this, object);
-	}
-
 	@Override
 	public String toString() {
 		return s.toString();
-	}	
+	}
 }

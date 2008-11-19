@@ -140,7 +140,7 @@ public abstract class ResourceAdapter extends TracingAdapter
 				return false;
 			try {
 				URL url = new URL(uri.toString());
-				URL resolvedURL = FileLocator.resolve(url);
+				URL resolvedURL = FileLocator.resolve(url);		// FIXME Use URI facilities to avoid loss of platform:
 				String protocol = resolvedURL.getProtocol();
 				if ("file".equals(protocol)) {
 					fileName = resolvedURL.getFile();

@@ -18,6 +18,7 @@ import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.qvt.declarative.compilation.ide.EclipseCompilationServiceConfigurator;
 import org.eclipse.qvt.declarative.ecore.utils.TracingOption;
+import org.eclipse.qvt.declarative.editor.ui.format.DefaultFormatManager;
 import org.eclipse.swt.widgets.Display;
 import org.osgi.framework.BundleContext;
 
@@ -42,8 +43,10 @@ public class QVTEditorPlugin extends EclipseUIPlugin
 
 	public static final TracingOption RESOURCE_LOAD = new TracingOption(PLUGIN_ID, "resource/load"); //$NON-NLS-1$
 
-	public static final TracingOption VISITOR_SELECTION = new TracingOption(PLUGIN_ID, "visitor/selection"); //$NON-NLS-1$
+	public static final TracingOption SELECTION_INNER = new TracingOption(PLUGIN_ID, "selection/inner"); //$NON-NLS-1$
+	public static final TracingOption SELECTION_OUTER = new TracingOption(PLUGIN_ID, "selection/outer"); //$NON-NLS-1$
 
+	public static final TracingOption VISITOR_SELECTION = new TracingOption(PLUGIN_ID, "visitor/selection"); //$NON-NLS-1$
 	public static final TracingOption VISITOR_TRACE = new TracingOption(PLUGIN_ID, "visitor/trace"); //$NON-NLS-1$
 
 	// The shared instance
@@ -63,6 +66,7 @@ public class QVTEditorPlugin extends EclipseUIPlugin
 	@Override public void start(BundleContext context) throws Exception {
 		super.start(context);
 		INSTANCE = this;
+		DefaultFormatManager.initialize(DefaultFormatManager.INSTANCE);
 	}
 
 	/*
