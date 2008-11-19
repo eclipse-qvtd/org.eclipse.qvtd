@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonHoverHelper.java,v 1.4 2008/10/24 15:02:52 ewillink Exp $
+ * $Id: CommonHoverHelper.java,v 1.5 2008/11/19 21:53:11 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -28,6 +28,7 @@ import org.eclipse.imp.services.IDocumentationProvider;
 import org.eclipse.imp.services.IHoverHelper;
 import org.eclipse.imp.services.IReferenceResolver;
 import org.eclipse.imp.services.base.HoverHelperBase;
+import org.eclipse.imp.utils.HTMLPrinter;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -40,29 +41,6 @@ public abstract class CommonHoverHelper extends HoverHelperBase implements IHove
 	public static TracingOption hoverDebug = new TracingOption(QVTEditorPlugin.PLUGIN_ID, "hover/debug");
 
 	IReferenceResolver fResolver = null;
-	
-	protected String encode(String value)
-	{
-		if (value == null)
-			return null;
-		StringBuffer result = null;
-		for (int i = 0, len = value.length(); i < len; i++){
-			char c = value.charAt(i);
-			if (c == '<') {
-				if (result == null)
-					result = new StringBuffer(value.substring(0, i));
-				result.append("&lt;");
-			}
-			else if (c == '>') {
-				if (result == null)
-					result = new StringBuffer(value.substring(0, i));
-				result.append("&gt;");
-			}
-			else if (result != null)
-				result.append(c);
-		}
-		return result == null ? value : result.toString();
-	}
 
 	public String getHoverHelpAt(IParseController parseController, ISourceViewer srcViewer, int offset) {
 		CommonParseController commonParseController = (CommonParseController) parseController;
@@ -157,7 +135,7 @@ public abstract class CommonHoverHelper extends HoverHelperBase implements IHove
 		if (docProvider != null) {
 			msg = docProvider.getDocumentation(helpNode, commonParseController);
 			if (msg != null)
-				return encode(msg);
+				return HTMLPrinter.convertToHTMLContent(msg);
 		}
 
 		// Otherwise, base the help message on the text that is represented
