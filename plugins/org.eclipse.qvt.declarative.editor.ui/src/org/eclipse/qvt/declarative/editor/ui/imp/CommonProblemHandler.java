@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonProblemHandler.java,v 1.4 2008/11/19 21:51:42 ewillink Exp $
+ * $Id: CommonProblemHandler.java,v 1.5 2008/11/20 08:10:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -41,6 +41,35 @@ public class CommonProblemHandler extends AbstractProblemHandler
 		handler.clearMessages();
 	}
 
+	public IToken getNearestTokenAtCharacter(int offset) {		// FIXME Move to AbstractParser
+        AbstractParser parser = getParser();
+        int maxIndex = parser.getSize();
+        if (maxIndex <= 0)
+        	return null;
+		int tokenIndex = parser.getTokenIndexAtCharacter(offset);
+		if (tokenIndex >= 0)
+			return parser.getTokenAt(tokenIndex >= maxIndex ? (maxIndex-1) : tokenIndex);
+		tokenIndex = -tokenIndex + 1; 							// offset is between tokens
+		IToken prevToken = parser.getTokenAt(tokenIndex >= maxIndex ? (maxIndex-1) : tokenIndex);
+		IToken nextToken = parser.getTokenAt((tokenIndex+1) >= maxIndex ? (maxIndex-1) : (tokenIndex+1));
+		int prevEndOffset = prevToken.getEndOffset();
+		int nextStartOffset = nextToken.getStartOffset();
+		int postEnd = offset - prevEndOffset;
+		int preStart = nextStartOffset - offset;
+		if (postEnd >= 0) {
+			if (preStart >= 0)
+				return preStart < postEnd ? prevToken : nextToken;
+			else
+				return prevToken;
+		}
+		else {
+			if (preStart >= 0)
+				return nextToken;
+			else
+				return nextToken;		// Anything is better than null
+		}
+	}		
+
 	@Override
 	public void handleProblem(Severity problemSeverity,
 			Phase processingPhase, String problemMessage,
@@ -50,12 +79,12 @@ public class CommonProblemHandler extends AbstractProblemHandler
 				startOffset = 0;
 			if (endOffset < 0)
 				endOffset = 0;
-			IToken startToken = getParser().getTokenAtCharacter(startOffset);
-			IToken endToken = getParser().getTokenAtCharacter(endOffset);
-			int startLine = startToken.getLine();
-			int startCol = startToken.getColumn();
-			int endLine = endToken.getLine();
-			int endCol = endToken.getColumn();
+			IToken startToken = getNearestTokenAtCharacter(startOffset);
+			IToken endToken = getNearestTokenAtCharacter(endOffset);
+			int startLine = startToken != null ? startToken.getLine() : 0;
+			int startCol = startToken != null ? startToken.getColumn() : 0;
+			int endLine = endToken != null ? endToken.getLine() : 0;
+			int endCol = endToken != null ? endToken.getColumn() : 0;
 			String adjustedMessage = problemMessage;
 			if (problemLimit != null) {
 				Integer severity = MarkerProblemHandler.severityMap.get(problemSeverity);
@@ -72,7 +101,7 @@ public class CommonProblemHandler extends AbstractProblemHandler
 		} catch(Throwable e) {
 			QVTEditorPlugin.logError("Failed to handleProblem", e);
 		}
-	}		
+	}
 	
 	public void setProblemLimit(ProblemLimit problemLimit) {
 		this.problemLimit = problemLimit;
