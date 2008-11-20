@@ -228,7 +228,7 @@ public abstract class AbstractParseTestCase extends AbstractTestCase
 				else
 					ecoreResource.save(null);
 			}
-			if (doValidate)
+			if (doValidate && (rootEnvironment.getCSTErrorTokens() <= 0))
 				rootEnvironment.validate();
 		}
 		actualProblems.flush(null);
