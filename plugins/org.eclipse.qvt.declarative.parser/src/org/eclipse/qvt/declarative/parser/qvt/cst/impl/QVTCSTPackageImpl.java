@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTCSTPackageImpl.java,v 1.2 2008/10/10 07:52:54 ewillink Exp $
+ * $Id: QVTCSTPackageImpl.java,v 1.3 2008/11/28 17:23:01 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvt.cst.impl;
 
@@ -176,6 +176,15 @@ public class QVTCSTPackageImpl extends EPackageImpl implements QVTCSTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getIdentifiedCS_AstNode() {
+		return (EReference)identifiedCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getIdentifierCS() {
 		return identifierCSEClass;
 	}
@@ -187,6 +196,15 @@ public class QVTCSTPackageImpl extends EPackageImpl implements QVTCSTPackage {
 	 */
 	public EAttribute getIdentifierCS_Value() {
 		return (EAttribute)identifierCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIdentifierCS_AstNode() {
+		return (EReference)identifierCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -231,9 +249,11 @@ public class QVTCSTPackageImpl extends EPackageImpl implements QVTCSTPackage {
 
 		identifiedCSEClass = createEClass(IDENTIFIED_CS);
 		createEReference(identifiedCSEClass, IDENTIFIED_CS__IDENTIFIER);
+		createEReference(identifiedCSEClass, IDENTIFIED_CS__AST_NODE);
 
 		identifierCSEClass = createEClass(IDENTIFIER_CS);
 		createEAttribute(identifierCSEClass, IDENTIFIER_CS__VALUE);
+		createEReference(identifierCSEClass, IDENTIFIER_CS__AST_NODE);
 
 		iHasNameEClass = createEClass(IHAS_NAME);
 	}
@@ -280,9 +300,11 @@ public class QVTCSTPackageImpl extends EPackageImpl implements QVTCSTPackage {
 
 		initEClass(identifiedCSEClass, IdentifiedCS.class, "IdentifiedCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getIdentifiedCS_Identifier(), this.getIdentifierCS(), null, "identifier", null, 0, 1, IdentifiedCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIdentifiedCS_AstNode(), ecorePackage.getEObject(), null, "astNode", null, 0, 1, IdentifiedCS.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(identifierCSEClass, IdentifierCS.class, "IdentifierCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIdentifierCS_Value(), ecorePackage.getEString(), "value", null, 0, 1, IdentifierCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIdentifierCS_AstNode(), ecorePackage.getEObject(), null, "astNode", null, 0, 1, IdentifierCS.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(iHasNameEClass, IHasName.class, "IHasName", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 

@@ -12,12 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: IdentifierCSImpl.java,v 1.2 2008/10/10 07:52:54 ewillink Exp $
+ * $Id: IdentifierCSImpl.java,v 1.3 2008/11/28 17:23:01 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvt.cst.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.cst.impl.CSTNodeImpl;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
@@ -31,6 +32,7 @@ import org.eclipse.qvt.declarative.parser.qvt.cst.QVTCSTPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.qvt.declarative.parser.qvt.cst.impl.IdentifierCSImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.parser.qvt.cst.impl.IdentifierCSImpl#getAstNode <em>Ast Node</em>}</li>
  * </ul>
  * </p>
  *
@@ -100,6 +102,15 @@ public class IdentifierCSImpl extends CSTNodeImpl implements IdentifierCS {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EObject getAstNode() {
+		return (EObject) getAst();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -107,6 +118,8 @@ public class IdentifierCSImpl extends CSTNodeImpl implements IdentifierCS {
 		switch (featureID) {
 			case QVTCSTPackage.IDENTIFIER_CS__VALUE:
 				return getValue();
+			case QVTCSTPackage.IDENTIFIER_CS__AST_NODE:
+				return getAstNode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -151,6 +164,8 @@ public class IdentifierCSImpl extends CSTNodeImpl implements IdentifierCS {
 		switch (featureID) {
 			case QVTCSTPackage.IDENTIFIER_CS__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case QVTCSTPackage.IDENTIFIER_CS__AST_NODE:
+				return getAstNode() != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -12,10 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: IdentifierCS.java,v 1.2 2008/10/10 07:52:55 ewillink Exp $
+ * $Id: IdentifierCS.java,v 1.3 2008/11/28 17:23:01 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvt.cst;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.qvt.declarative.parser.environment.IHasName;
 
@@ -29,6 +30,7 @@ import org.eclipse.qvt.declarative.parser.environment.IHasName;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS#getAstNode <em>Ast Node</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,5 +64,20 @@ public interface IdentifierCS extends CSTNode, IHasName {
 	 * @generated
 	 */
 	void setValue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Ast Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Ast Node</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ast Node</em>' reference.
+	 * @see org.eclipse.qvt.declarative.parser.qvt.cst.QVTCSTPackage#getIdentifierCS_AstNode()
+	 * @model resolveProxies="false" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	EObject getAstNode();
 
 } // IdentifierCS

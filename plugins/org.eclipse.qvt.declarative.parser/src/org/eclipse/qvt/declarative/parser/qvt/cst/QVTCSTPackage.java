@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTCSTPackage.java,v 1.4 2008/10/10 07:52:55 ewillink Exp $
+ * $Id: QVTCSTPackage.java,v 1.5 2008/11/28 17:23:01 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvt.cst;
 
@@ -163,13 +163,22 @@ public interface QVTCSTPackage extends EPackage {
 	int IDENTIFIED_CS__IDENTIFIER = CSTPackage.CST_NODE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IDENTIFIED_CS__AST_NODE = CSTPackage.CST_NODE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Identified CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IDENTIFIED_CS_FEATURE_COUNT = CSTPackage.CST_NODE_FEATURE_COUNT + 1;
+	int IDENTIFIED_CS_FEATURE_COUNT = CSTPackage.CST_NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.parser.qvt.cst.impl.IdentifierCSImpl <em>Identifier CS</em>}' class.
@@ -236,13 +245,22 @@ public interface QVTCSTPackage extends EPackage {
 	int IDENTIFIER_CS__VALUE = CSTPackage.CST_NODE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IDENTIFIER_CS__AST_NODE = CSTPackage.CST_NODE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Identifier CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IDENTIFIER_CS_FEATURE_COUNT = CSTPackage.CST_NODE_FEATURE_COUNT + 1;
+	int IDENTIFIER_CS_FEATURE_COUNT = CSTPackage.CST_NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.parser.environment.IHasName <em>IHas Name</em>}' class.
@@ -307,6 +325,17 @@ public interface QVTCSTPackage extends EPackage {
 	EReference getIdentifiedCS_Identifier();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS#getAstNode <em>Ast Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ast Node</em>'.
+	 * @see org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS#getAstNode()
+	 * @see #getIdentifiedCS()
+	 * @generated
+	 */
+	EReference getIdentifiedCS_AstNode();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS <em>Identifier CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -326,6 +355,17 @@ public interface QVTCSTPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getIdentifierCS_Value();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS#getAstNode <em>Ast Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ast Node</em>'.
+	 * @see org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS#getAstNode()
+	 * @see #getIdentifierCS()
+	 * @generated
+	 */
+	EReference getIdentifierCS_AstNode();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.parser.environment.IHasName <em>IHas Name</em>}'.
@@ -397,6 +437,14 @@ public interface QVTCSTPackage extends EPackage {
 		EReference IDENTIFIED_CS__IDENTIFIER = eINSTANCE.getIdentifiedCS_Identifier();
 
 		/**
+		 * The meta object literal for the '<em><b>Ast Node</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IDENTIFIED_CS__AST_NODE = eINSTANCE.getIdentifiedCS_AstNode();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.parser.qvt.cst.impl.IdentifierCSImpl <em>Identifier CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -413,6 +461,14 @@ public interface QVTCSTPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute IDENTIFIER_CS__VALUE = eINSTANCE.getIdentifierCS_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Ast Node</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IDENTIFIER_CS__AST_NODE = eINSTANCE.getIdentifierCS_AstNode();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.parser.environment.IHasName <em>IHas Name</em>}' class.
