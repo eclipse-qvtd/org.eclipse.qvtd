@@ -112,7 +112,12 @@ public abstract class CSTFileEnvironment<R extends ICSTRootEnvironment, E extend
 			return null;
 		if ((monitor != null) && monitor.isCanceled())
 			return null;
-		R rootEnvironment = createRootEnvironment(ast, cst);
+		R rootEnvironment;
+		try {
+			rootEnvironment = createRootEnvironment(ast, cst);
+		} catch (ClassCastException e) {	// Occurs if cst is not a CST
+			return null;
+		}
 		if (!analyzer.analyze(rootEnvironment))
  			return null;
 		if ((monitor != null) && monitor.isCanceled())
