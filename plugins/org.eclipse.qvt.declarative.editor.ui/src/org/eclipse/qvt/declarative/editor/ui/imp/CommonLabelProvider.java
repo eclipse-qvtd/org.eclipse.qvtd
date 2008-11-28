@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.8 2008/11/19 21:51:58 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.9 2008/11/28 17:27:05 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -48,6 +48,7 @@ import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
 import org.eclipse.qvt.declarative.editor.JavaLabelElement;
 import org.eclipse.qvt.declarative.editor.LabelBehavior;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
+import org.eclipse.qvt.declarative.editor.util.ImageProvider;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.Bundle;
@@ -113,6 +114,8 @@ public abstract class CommonLabelProvider implements ILabelProvider
 			string = formatCollection((Collection<?>)object, labelElement);
 		else if (object instanceof Enum)
 			string = formatEnum((Enum<?>)object);
+		else if (object instanceof Number)
+			string = formatNumber((Number) object);
 		else if (!(object instanceof String))
 			string = formatObject(object);
 		else 
@@ -148,6 +151,10 @@ public abstract class CommonLabelProvider implements ILabelProvider
 
 	protected String formatNull() {
 		return "";
+	}
+
+	protected String formatNumber(Number number) {
+		return String.valueOf(number);
 	}
 
 	protected String formatObject(Object node) {
@@ -197,7 +204,18 @@ public abstract class CommonLabelProvider implements ILabelProvider
 		LabelBehavior behavior = commonEditorDefinition.getBehavior(node, LabelBehavior.class);
 		if (behavior == null)
 			return null;
-		Image image = getImage(getPlugin().getBundle(), behavior.getImage());
+		String imageName = null;
+		Class<ImageProvider> imageProviderClass = behavior.getImageProvider();
+		if (imageProviderClass != null)
+			try {
+				imageName = imageProviderClass.newInstance().getImage(node);
+			} catch (Exception e) {
+			}
+		if (imageName == null)
+			imageName = behavior.getImage();
+		if (imageName == null)
+			return null;
+		Image image = getImage(getPlugin().getBundle(), imageName);
 		if (image == null)
 			return null;
 		Collection<Image> overlays = getOverlayImages(node);
@@ -257,7 +275,10 @@ public abstract class CommonLabelProvider implements ILabelProvider
 	public String getText(Object element) {
 		Object node = getASTorCSTNode(element);
 		String text = formatObject(node);
-		return (text != null) ? text : "<!null!>";
+		if (text != null)
+			return text;
+		else
+			return "<!null!>";
 	}
 
 	public boolean isLabelProperty(Object element, String property) {
