@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorModelWizard.java,v 1.2 2008/08/24 18:56:53 ewillink Exp $
+ * $Id: EditorModelWizard.java,v 1.3 2008/11/28 17:26:19 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.presentation;
 
@@ -232,7 +232,7 @@ public class EditorModelWizard extends Wizard implements INewWizard {
 
 							// Create a resource for this file.
 							//
-							Resource resource = resourceSet.createResource(fileURI);
+							Resource resource = resourceSet.createResource(fileURI, EditorPackage.eCONTENT_TYPE);
 
 							// Add the initial model object to the contents.
 							//
