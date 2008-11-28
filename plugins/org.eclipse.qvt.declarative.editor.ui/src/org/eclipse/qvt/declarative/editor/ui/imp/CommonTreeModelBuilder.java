@@ -12,19 +12,21 @@
  * 
  * </copyright>
  *
- * $Id: CommonTreeModelBuilder.java,v 1.2 2008/08/24 19:06:07 ewillink Exp $
+ * $Id: CommonTreeModelBuilder.java,v 1.3 2008/11/28 17:27:22 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.imp.editor.ModelTreeNode;
 import org.eclipse.imp.services.base.TreeModelBuilderBase;
 import org.eclipse.qvt.declarative.editor.AbstractOutlineElement;
-import org.eclipse.qvt.declarative.editor.EditorPackage;
 import org.eclipse.qvt.declarative.editor.OutlineBehavior;
 import org.eclipse.qvt.declarative.editor.OutlineElement;
 import org.eclipse.qvt.declarative.editor.OutlineGroup;
@@ -38,10 +40,23 @@ public class CommonTreeModelBuilder extends TreeModelBuilderBase
 	protected class CommonASTModelVisitor<N> extends CommonASTVisitor<Object, N>
 	{
 		protected final CommonEditorDefinition editorDefinition;
-		
+		protected final Class<OutlineBehavior> outlineBehaviorClass;
+
 		public CommonASTModelVisitor(CommonEditorDefinition editorDefinition, Class<N> nodeClass) {
+			this(editorDefinition, nodeClass, OutlineBehavior.class);
+		}
+		
+		public CommonASTModelVisitor(CommonEditorDefinition editorDefinition, Class<N> nodeClass, Class<OutlineBehavior> outlineBehaviorClass) {
 			super(nodeClass);
 			this.editorDefinition = editorDefinition;
+			this.outlineBehaviorClass = outlineBehaviorClass;
+		}
+
+		@Override
+		protected Object enterCollection(Collection<?> collection) {
+			for (Object o : collection)
+				enter(o);
+			return null;
 		}
 
 		protected void enterElement(N astNode, AbstractOutlineElement element) {
@@ -54,39 +69,51 @@ public class CommonTreeModelBuilder extends TreeModelBuilderBase
 		}
 
 		protected void enterOutlineElement(N astNode, OutlineElement element) {
-			if (astNode instanceof EObject)
-				enter(((EObject)astNode).eGet(element.getFeature(), false));
-			else
+			if (astNode instanceof EObject) {
+				EStructuralFeature feature = element.getFeature();
+				Object selection = ((EObject)astNode).eGet(feature, false);
+				enter(selection);
+			} else
 				unexpectedEnterOutline(astNode, element);
 		}
 
 		protected void enterOutlineGroup(N astNode, OutlineGroup group) {
-			for (AbstractOutlineElement element : group.getElements())
-				enterElement(astNode, element);
+			EList<AbstractOutlineElement> elements = group.getElements();
+			if (!elements.isEmpty()) {					// Non-dummy group
+				boolean isFlat = (group.getName() == null) && (group.getImage() == null);
+				if (!isFlat)
+					pushSubItem(group);
+				else
+					createSubItem(group);
+				for (AbstractOutlineElement childElement : elements)
+					enterElement(astNode, childElement);
+				if (!isFlat)
+					popSubItem();
+			}
 		}
 		
 		@Override
 		public Object postVisit(N astNode) {
-			OutlineBehavior behavior = editorDefinition.getBehavior(astNode, OutlineBehavior.class);
-			if (behavior != null)
-				popSubItem();
+			popSubItem();
 			return super.postVisit(astNode);
 		}
 
 		@Override
 		public boolean preVisit(N astNode) {
-			OutlineBehavior behavior = editorDefinition.getBehavior(astNode, OutlineBehavior.class);
-			if (behavior != null) {
-				boolean terminal = behavior.eIsSet(EditorPackage.Literals.OUTLINE_BEHAVIOR__ELEMENTS)
-					&& behavior.getElements().isEmpty();
-				if (!terminal)
-					pushSubItem(astNode);
-				else
-					createSubItem(astNode);
-				if (terminal)
-					return false;
+			OutlineBehavior behavior = editorDefinition.getBehavior(astNode, outlineBehaviorClass);
+			boolean isTerminal = (behavior != null) && behavior.getElements().isEmpty();
+			return preVisit(astNode, isTerminal);
+		}
+
+		protected boolean preVisit(N astNode, boolean isTerminal) {
+			if (isTerminal) {
+				createSubItem(astNode);
+				return false;
 			}
-			return true;
+			else {				
+				pushSubItem(astNode);
+				return true;
+			}
 		}
 		
 		protected void unexpectedEnterOutline(N astNode, AbstractOutlineElement element) {
@@ -95,13 +122,16 @@ public class CommonTreeModelBuilder extends TreeModelBuilderBase
 
 		@Override
 		public void visitEObject(N astNode) {
-			OutlineBehavior behavior = editorDefinition.getBehavior(astNode, OutlineBehavior.class);
-			if ((behavior != null) && behavior.eIsSet(EditorPackage.Literals.OUTLINE_BEHAVIOR__ELEMENTS)) {
-				for (AbstractOutlineElement element : behavior.getElements())
-					enterElement(astNode, element);
-				return;
+			OutlineBehavior behavior = editorDefinition.getBehavior(astNode, outlineBehaviorClass);
+			if (behavior != null) {
+				EList<AbstractOutlineElement> elements = behavior.getElements();
+				if (!elements.isEmpty()) {					// Explicit outline
+					for (AbstractOutlineElement element : elements)
+						enterElement(astNode, element);
+					return;
+				}
 			}
-			super.visitEObject(astNode);
+			super.visitEObject(astNode);					// Default containment outline
 		}
 	}
 
