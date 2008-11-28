@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.utils;
 
+import java.util.Collection;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -46,8 +48,21 @@ public abstract class CommonASTVisitor<T, N> implements ICommonASTVisitor<T, N>
 			N astNode = (N) object;
 			return visit(astNode);
 		}
-		else
+		else if (object instanceof Collection) {
+			Collection<?> collection = (Collection<?>)object;
+			return enterCollection(collection);
+		} else
 			return unexpectedVisit(object);
+	}
+
+	/**
+	 * Perform the visit to an object that procvers to a Collection rather
+	 * than an N as contracted.
+	 * <br>
+	 * The default implementation invokes unexpectedVisit.
+	 */
+	protected T enterCollection(Collection<?> collection) {
+		return unexpectedVisit(collection);
 	}
 
 	/**
