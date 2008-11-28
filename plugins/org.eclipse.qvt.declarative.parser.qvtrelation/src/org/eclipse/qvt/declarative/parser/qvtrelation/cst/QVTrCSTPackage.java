@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTrCSTPackage.java,v 1.5 2008/10/10 07:59:24 ewillink Exp $
+ * $Id: QVTrCSTPackage.java,v 1.6 2008/11/28 17:22:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtrelation.cst;
 
@@ -200,6 +200,15 @@ public interface QVTrCSTPackage extends EPackage {
 	int TEMPLATE_VARIABLE_CS__IDENTIFIER = QVTCSTPackage.IDENTIFIED_CS__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_VARIABLE_CS__AST_NODE = QVTCSTPackage.IDENTIFIED_CS__AST_NODE;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -280,6 +289,15 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEMPLATE_CS__IDENTIFIER = TEMPLATE_VARIABLE_CS__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_CS__AST_NODE = TEMPLATE_VARIABLE_CS__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -371,6 +389,15 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLECTION_TEMPLATE_CS__IDENTIFIER = TEMPLATE_CS__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_CS__AST_NODE = TEMPLATE_CS__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -874,6 +901,15 @@ public interface QVTrCSTPackage extends EPackage {
 	int OBJECT_TEMPLATE_CS__IDENTIFIER = TEMPLATE_CS__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_CS__AST_NODE = TEMPLATE_CS__AST_NODE;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1063,6 +1099,15 @@ public interface QVTrCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int PRIMITIVE_TYPE_DOMAIN_CS__IDENTIFIER = TEMPLATE_VARIABLE_CS__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE_DOMAIN_CS__AST_NODE = TEMPLATE_VARIABLE_CS__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
