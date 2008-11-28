@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OutlineElementItemProvider.java,v 1.1 2008/08/24 18:56:41 ewillink Exp $
+ * $Id: OutlineElementItemProvider.java,v 1.2 2008/11/28 17:26:35 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -22,7 +22,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
+import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -30,8 +31,8 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
 import org.eclipse.qvt.declarative.editor.EditorPackage;
+import org.eclipse.qvt.declarative.editor.OutlineElement;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.qvt.declarative.editor.OutlineElement} object.
@@ -106,15 +107,29 @@ public class OutlineElementItemProvider
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/OutlineElement"));
 	}
 
+	public String getLocalName(ENamedElement object) {
+		String name = object != null ? object.getName() : null;
+		return name != null ? name : "<???>";
+	}
+
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_OutlineElement_type");
+		StringBuffer s = new StringBuffer();
+		EStructuralFeature end = ((OutlineElement)object).getFeature();
+		if (end != null) {
+			if (s.length() != 0)
+				s.append(", ");
+			s.append(getLocalName(end.getEContainingClass()));
+			s.append(".");
+			s.append(getLocalName(end));				
+		}
+		return s.toString();
 	}
 
 	/**

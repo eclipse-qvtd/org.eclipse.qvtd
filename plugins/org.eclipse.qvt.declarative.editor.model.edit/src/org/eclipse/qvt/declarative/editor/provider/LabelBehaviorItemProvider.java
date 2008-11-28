@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: LabelBehaviorItemProvider.java,v 1.3 2008/08/24 18:56:40 ewillink Exp $
+ * $Id: LabelBehaviorItemProvider.java,v 1.4 2008/11/28 17:26:35 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -75,6 +75,7 @@ public class LabelBehaviorItemProvider
 			super.getPropertyDescriptors(object);
 
 			addImagePropertyDescriptor(object);
+			addImageProviderPropertyDescriptor(object);
 			addFormatPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -94,6 +95,28 @@ public class LabelBehaviorItemProvider
 				 getString("_UI_LabelBehavior_image_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_LabelBehavior_image_feature", "_UI_LabelBehavior_type"),
 				 EditorPackage.Literals.LABEL_BEHAVIOR__IMAGE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Image Provider feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addImageProviderPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_LabelBehavior_imageProvider_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LabelBehavior_imageProvider_feature", "_UI_LabelBehavior_type"),
+				 EditorPackage.Literals.LABEL_BEHAVIOR__IMAGE_PROVIDER,
 				 true,
 				 false,
 				 false,
@@ -202,6 +225,7 @@ public class LabelBehaviorItemProvider
 
 		switch (notification.getFeatureID(LabelBehavior.class)) {
 			case EditorPackage.LABEL_BEHAVIOR__IMAGE:
+			case EditorPackage.LABEL_BEHAVIOR__IMAGE_PROVIDER:
 			case EditorPackage.LABEL_BEHAVIOR__FORMAT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
