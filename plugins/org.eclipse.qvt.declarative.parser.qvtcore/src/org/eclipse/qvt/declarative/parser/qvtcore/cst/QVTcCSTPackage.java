@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcCSTPackage.java,v 1.4 2008/10/10 07:58:50 ewillink Exp $
+ * $Id: QVTcCSTPackage.java,v 1.5 2008/11/28 17:22:58 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore.cst;
 
@@ -134,6 +134,15 @@ public interface QVTcCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int AREA_CS__IDENTIFIER = QVTCSTPackage.IDENTIFIED_CS__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AREA_CS__AST_NODE = QVTCSTPackage.IDENTIFIED_CS__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Guard Pattern</b></em>' containment reference.
@@ -510,6 +519,15 @@ public interface QVTcCSTPackage extends EPackage {
 	int DIRECTION_CS__IDENTIFIER = QVTCSTPackage.IDENTIFIED_CS__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIRECTION_CS__AST_NODE = QVTCSTPackage.IDENTIFIED_CS__AST_NODE;
+
+	/**
 	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -619,6 +637,15 @@ public interface QVTcCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_CS__IDENTIFIER = AREA_CS__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_CS__AST_NODE = AREA_CS__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Guard Pattern</b></em>' containment reference.
@@ -934,6 +961,15 @@ public interface QVTcCSTPackage extends EPackage {
 	int MAPPING_CS__IDENTIFIER = QVTCSTPackage.IDENTIFIED_CS__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CS__AST_NODE = QVTCSTPackage.IDENTIFIED_CS__AST_NODE;
+
+	/**
 	 * The feature id for the '<em><b>Composed Mappings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1204,6 +1240,15 @@ public interface QVTcCSTPackage extends EPackage {
 	int REALIZEABLE_VARIABLE_CS__IDENTIFIER = QVTCSTPackage.IDENTIFIED_CS__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REALIZEABLE_VARIABLE_CS__AST_NODE = QVTCSTPackage.IDENTIFIED_CS__AST_NODE;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1274,6 +1319,15 @@ public interface QVTcCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int REALIZED_VARIABLE_CS__IDENTIFIER = REALIZEABLE_VARIABLE_CS__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REALIZED_VARIABLE_CS__AST_NODE = REALIZEABLE_VARIABLE_CS__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1499,6 +1553,15 @@ public interface QVTcCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNREALIZED_VARIABLE_CS__IDENTIFIER = REALIZEABLE_VARIABLE_CS__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Ast Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREALIZED_VARIABLE_CS__AST_NODE = REALIZEABLE_VARIABLE_CS__AST_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
