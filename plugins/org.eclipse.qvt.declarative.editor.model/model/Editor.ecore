@@ -44,6 +44,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LabelBehavior" eSuperTypes="#//Behavior">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="image" unique="false" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageProvider" unique="false">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+        <eTypeArguments eClassifier="#//ImageProvider"/>
+      </eGenericType>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" unique="false"
         lowerBound="1" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" unique="false"
@@ -51,7 +56,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutlineBehavior" eSuperTypes="#//Behavior">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-        eType="#//AbstractOutlineElement" unsettable="true"/>
+        eType="#//AbstractOutlineElement" unsettable="true" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutlineElement" eSuperTypes="#//AbstractOutlineElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" unique="false"
@@ -64,4 +69,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" unique="false"
         upperBound="-1" eType="#//AbstractOutlineElement" unsettable="true" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="ImageProvider" instanceClassName="org.eclipse.qvt.declarative.editor.util.ImageProvider"/>
 </ecore:EPackage>

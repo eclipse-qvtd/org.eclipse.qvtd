@@ -12,15 +12,17 @@
  * 
  * </copyright>
  *
- * $Id: OutlineBehaviorImpl.java,v 1.3 2008/08/24 18:56:21 ewillink Exp $
+ * $Id: OutlineBehaviorImpl.java,v 1.4 2008/11/28 17:25:34 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.qvt.declarative.editor.AbstractOutlineElement;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
@@ -41,7 +43,7 @@ import org.eclipse.qvt.declarative.editor.OutlineBehavior;
  */
 public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior {
 	/**
-	 * The cached value of the '{@link #getElements() <em>Elements</em>}' reference list.
+	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getElements()
@@ -76,7 +78,7 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 	 */
 	public EList<AbstractOutlineElement> getElements() {
 		if (elements == null) {
-			elements = new EObjectResolvingEList.Unsettable<AbstractOutlineElement>(AbstractOutlineElement.class, this, EditorPackage.OUTLINE_BEHAVIOR__ELEMENTS);
+			elements = new EObjectContainmentEList.Unsettable<AbstractOutlineElement>(AbstractOutlineElement.class, this, EditorPackage.OUTLINE_BEHAVIOR__ELEMENTS);
 		}
 		return elements;
 	}
@@ -97,6 +99,20 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 	 */
 	public boolean isSetElements() {
 		return elements != null && ((InternalEList.Unsettable<?>)elements).isSet();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case EditorPackage.OUTLINE_BEHAVIOR__ELEMENTS:
+				return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

@@ -12,11 +12,12 @@
  * 
  * </copyright>
  *
- * $Id: LabelBehavior.java,v 1.2 2008/08/24 18:56:21 ewillink Exp $
+ * $Id: LabelBehavior.java,v 1.3 2008/11/28 17:25:34 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.qvt.declarative.editor.util.ImageProvider;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.qvt.declarative.editor.LabelBehavior#getImage <em>Image</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.LabelBehavior#getImageProvider <em>Image Provider</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.LabelBehavior#getFormat <em>Format</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.LabelBehavior#getElements <em>Elements</em>}</li>
  * </ul>
@@ -62,6 +64,32 @@ public interface LabelBehavior extends Behavior {
 	 * @generated
 	 */
 	void setImage(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Image Provider</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Image Provider</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Image Provider</em>' attribute.
+	 * @see #setImageProvider(Class)
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getLabelBehavior_ImageProvider()
+	 * @model unique="false"
+	 * @generated
+	 */
+	Class<ImageProvider> getImageProvider();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.LabelBehavior#getImageProvider <em>Image Provider</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Image Provider</em>' attribute.
+	 * @see #getImageProvider()
+	 * @generated
+	 */
+	void setImageProvider(Class<ImageProvider> value);
 
 	/**
 	 * Returns the value of the '<em><b>Format</b></em>' attribute.

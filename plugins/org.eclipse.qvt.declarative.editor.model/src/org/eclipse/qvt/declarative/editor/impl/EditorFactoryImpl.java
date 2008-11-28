@@ -12,16 +12,18 @@
  * 
  * </copyright>
  *
- * $Id: EditorFactoryImpl.java,v 1.2 2008/08/24 18:56:21 ewillink Exp $
+ * $Id: EditorFactoryImpl.java,v 1.3 2008/11/28 17:25:34 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.qvt.declarative.editor.*;
+import org.eclipse.qvt.declarative.editor.util.ImageProvider;
 import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
 import org.eclipse.qvt.declarative.editor.EcoreNode;
 import org.eclipse.qvt.declarative.editor.EditorDefinition;
@@ -89,6 +91,36 @@ public class EditorFactoryImpl extends EFactoryImpl implements EditorFactory {
 			case EditorPackage.OUTLINE_GROUP: return createOutlineGroup();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case EditorPackage.IMAGE_PROVIDER:
+				return createImageProviderFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case EditorPackage.IMAGE_PROVIDER:
+				return convertImageProviderToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -190,6 +222,24 @@ public class EditorFactoryImpl extends EFactoryImpl implements EditorFactory {
 	public OutlineGroup createOutlineGroup() {
 		OutlineGroupImpl outlineGroup = new OutlineGroupImpl();
 		return outlineGroup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImageProvider createImageProviderFromString(EDataType eDataType, String initialValue) {
+		return (ImageProvider)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertImageProviderToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

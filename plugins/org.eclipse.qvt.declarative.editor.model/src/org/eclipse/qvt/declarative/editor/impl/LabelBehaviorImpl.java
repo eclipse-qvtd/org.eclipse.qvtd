@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: LabelBehaviorImpl.java,v 1.2 2008/08/24 18:56:21 ewillink Exp $
+ * $Id: LabelBehaviorImpl.java,v 1.3 2008/11/28 17:25:34 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.qvt.declarative.editor.AbstractLabelElement;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
 import org.eclipse.qvt.declarative.editor.LabelBehavior;
+import org.eclipse.qvt.declarative.editor.util.ImageProvider;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,6 +39,7 @@ import org.eclipse.qvt.declarative.editor.LabelBehavior;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelBehaviorImpl#getImage <em>Image</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelBehaviorImpl#getImageProvider <em>Image Provider</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelBehaviorImpl#getFormat <em>Format</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelBehaviorImpl#getElements <em>Elements</em>}</li>
  * </ul>
@@ -65,6 +67,16 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	 * @ordered
 	 */
 	protected String image = IMAGE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getImageProvider() <em>Image Provider</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImageProvider()
+	 * @generated
+	 * @ordered
+	 */
+	protected Class<ImageProvider> imageProvider;
 
 	/**
 	 * The default value of the '{@link #getFormat() <em>Format</em>}' attribute.
@@ -141,6 +153,27 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Class<ImageProvider> getImageProvider() {
+		return imageProvider;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setImageProvider(Class<ImageProvider> newImageProvider) {
+		Class<ImageProvider> oldImageProvider = imageProvider;
+		imageProvider = newImageProvider;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.LABEL_BEHAVIOR__IMAGE_PROVIDER, oldImageProvider, imageProvider));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getFormat() {
 		return format;
 	}
@@ -193,6 +226,8 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 		switch (featureID) {
 			case EditorPackage.LABEL_BEHAVIOR__IMAGE:
 				return getImage();
+			case EditorPackage.LABEL_BEHAVIOR__IMAGE_PROVIDER:
+				return getImageProvider();
 			case EditorPackage.LABEL_BEHAVIOR__FORMAT:
 				return getFormat();
 			case EditorPackage.LABEL_BEHAVIOR__ELEMENTS:
@@ -212,6 +247,9 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 		switch (featureID) {
 			case EditorPackage.LABEL_BEHAVIOR__IMAGE:
 				setImage((String)newValue);
+				return;
+			case EditorPackage.LABEL_BEHAVIOR__IMAGE_PROVIDER:
+				setImageProvider((Class<ImageProvider>)newValue);
 				return;
 			case EditorPackage.LABEL_BEHAVIOR__FORMAT:
 				setFormat((String)newValue);
@@ -235,6 +273,9 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 			case EditorPackage.LABEL_BEHAVIOR__IMAGE:
 				setImage(IMAGE_EDEFAULT);
 				return;
+			case EditorPackage.LABEL_BEHAVIOR__IMAGE_PROVIDER:
+				setImageProvider((Class<ImageProvider>)null);
+				return;
 			case EditorPackage.LABEL_BEHAVIOR__FORMAT:
 				setFormat(FORMAT_EDEFAULT);
 				return;
@@ -255,6 +296,8 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 		switch (featureID) {
 			case EditorPackage.LABEL_BEHAVIOR__IMAGE:
 				return IMAGE_EDEFAULT == null ? image != null : !IMAGE_EDEFAULT.equals(image);
+			case EditorPackage.LABEL_BEHAVIOR__IMAGE_PROVIDER:
+				return imageProvider != null;
 			case EditorPackage.LABEL_BEHAVIOR__FORMAT:
 				return FORMAT_EDEFAULT == null ? format != null : !FORMAT_EDEFAULT.equals(format);
 			case EditorPackage.LABEL_BEHAVIOR__ELEMENTS:
@@ -275,6 +318,8 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (image: ");
 		result.append(image);
+		result.append(", imageProvider: ");
+		result.append(imageProvider);
 		result.append(", format: ");
 		result.append(format);
 		result.append(')');

@@ -7,6 +7,7 @@
   <foreignModel>Editor.ecore</foreignModel>
   <genPackages prefix="Editor" basePackage="org.eclipse.qvt.declarative" disposableProviderFactory="true"
       contentTypeIdentifier="org.eclipse.qvt.declarative.editor" ecorePackage="Editor.ecore#/">
+    <genDataTypes ecoreDataType="Editor.ecore#//ImageProvider"/>
     <genClasses image="false" ecoreClass="Editor.ecore#//AbstractLabelElement"/>
     <genClasses image="false" ecoreClass="Editor.ecore#//AbstractNode">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Editor.ecore#//AbstractNode/behavior"/>
@@ -37,11 +38,12 @@
     </genClasses>
     <genClasses ecoreClass="Editor.ecore#//LabelBehavior" labelFeature="#//editor/LabelBehavior/format">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Editor.ecore#//LabelBehavior/image"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Editor.ecore#//LabelBehavior/imageProvider"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Editor.ecore#//LabelBehavior/format"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Editor.ecore#//LabelBehavior/elements"/>
     </genClasses>
     <genClasses ecoreClass="Editor.ecore#//OutlineBehavior">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Editor.ecore#//OutlineBehavior/elements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Editor.ecore#//OutlineBehavior/elements"/>
     </genClasses>
     <genClasses ecoreClass="Editor.ecore#//OutlineElement">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Editor.ecore#//OutlineElement/feature"/>

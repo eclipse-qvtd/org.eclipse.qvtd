@@ -12,12 +12,14 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackageImpl.java,v 1.5 2008/08/24 18:56:21 ewillink Exp $
+ * $Id: EditorPackageImpl.java,v 1.6 2008/11/28 17:25:34 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -38,6 +40,7 @@ import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
 import org.eclipse.qvt.declarative.editor.OutlineBehavior;
 import org.eclipse.qvt.declarative.editor.OutlineElement;
 import org.eclipse.qvt.declarative.editor.OutlineGroup;
+import org.eclipse.qvt.declarative.editor.util.ImageProvider;
 
 /**
  * <!-- begin-user-doc -->
@@ -143,6 +146,13 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * @generated
 	 */
 	private EClass outlineGroupEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType imageProviderEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -436,7 +446,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLabelBehavior_Format() {
+	public EAttribute getLabelBehavior_ImageProvider() {
 		return (EAttribute)labelBehaviorEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -445,8 +455,17 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getLabelBehavior_Format() {
+		return (EAttribute)labelBehaviorEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getLabelBehavior_Elements() {
-		return (EReference)labelBehaviorEClass.getEStructuralFeatures().get(2);
+		return (EReference)labelBehaviorEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -526,6 +545,15 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getImageProvider() {
+		return imageProviderEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EditorFactory getEditorFactory() {
 		return (EditorFactory)getEFactoryInstance();
 	}
@@ -583,6 +611,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		labelBehaviorEClass = createEClass(LABEL_BEHAVIOR);
 		createEAttribute(labelBehaviorEClass, LABEL_BEHAVIOR__IMAGE);
+		createEAttribute(labelBehaviorEClass, LABEL_BEHAVIOR__IMAGE_PROVIDER);
 		createEAttribute(labelBehaviorEClass, LABEL_BEHAVIOR__FORMAT);
 		createEReference(labelBehaviorEClass, LABEL_BEHAVIOR__ELEMENTS);
 
@@ -596,6 +625,9 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		createEAttribute(outlineGroupEClass, OUTLINE_GROUP__IMAGE);
 		createEAttribute(outlineGroupEClass, OUTLINE_GROUP__NAME);
 		createEReference(outlineGroupEClass, OUTLINE_GROUP__ELEMENTS);
+
+		// Create data types
+		imageProviderEDataType = createEDataType(IMAGE_PROVIDER);
 	}
 
 	/**
@@ -674,11 +706,15 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		initEClass(labelBehaviorEClass, LabelBehavior.class, "LabelBehavior", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLabelBehavior_Image(), theEcorePackage.getEString(), "image", null, 0, 1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		EGenericType g1 = createEGenericType(ecorePackage.getEJavaClass());
+		EGenericType g2 = createEGenericType(this.getImageProvider());
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getLabelBehavior_ImageProvider(), g1, "imageProvider", null, 0, 1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabelBehavior_Format(), theEcorePackage.getEString(), "format", null, 1, 1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLabelBehavior_Elements(), this.getAbstractLabelElement(), null, "elements", null, 0, -1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(outlineBehaviorEClass, OutlineBehavior.class, "OutlineBehavior", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getOutlineBehavior_Elements(), this.getAbstractOutlineElement(), null, "elements", null, 0, -1, OutlineBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOutlineBehavior_Elements(), this.getAbstractOutlineElement(), null, "elements", null, 0, -1, OutlineBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(outlineElementEClass, OutlineElement.class, "OutlineElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOutlineElement_Feature(), theEcorePackage.getEStructuralFeature(), null, "feature", null, 1, 1, OutlineElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -687,6 +723,9 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		initEAttribute(getOutlineGroup_Image(), theEcorePackage.getEString(), "image", null, 0, 1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOutlineGroup_Name(), theEcorePackage.getEString(), "name", null, 1, 1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOutlineGroup_Elements(), this.getAbstractOutlineElement(), null, "elements", null, 0, -1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize data types
+		initEDataType(imageProviderEDataType, ImageProvider.class, "ImageProvider", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
