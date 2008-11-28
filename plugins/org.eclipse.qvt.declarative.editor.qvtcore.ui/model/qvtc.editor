@@ -1,184 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ed:EditorDefinition xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:ed="http://www.eclipse.org/qvt/1.0/Editor" language="qvtc">
-  <extends href="platform:/plugin/org.eclipse.qvt.declarative.editor.ocl.ui/model/ocl.editor#/"/>
+<ed:EditorDefinition xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:ed="http://www.eclipse.org/qvt/1.0/Editor" language="qvtc"
+    extends="platform:/plugin/org.eclipse.qvt.declarative.editor.ocl.ui/model/ocl.editor#/">
   <node xsi:type="ed:JavaNode" name="org.eclipse.core.resources.IFile">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.editor.qvtcore.ui/icons/QVTcModelFile.gif" format="&lt;file-name>"/>
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.editor.qvtcore.ui/icons/QVTcModelFile.gif"
+        format="&lt;file-name>"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTBase#//Domain">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtbase.edit/icons/full/obj16/Domain.gif" format="{0}">
-      <elements xsi:type="ed:EcoreLabelElement">
-        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-      </elements>
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtbase.edit/icons/full/obj16/Domain.gif"
+        format="{0}">
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
     </behavior>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTBase#//Domain"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTBase#//Transformation">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtbase.edit/icons/full/obj16/Transformation.gif" format="{0}">
-      <elements xsi:type="ed:EcoreLabelElement">
-        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-      </elements>
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtbase.edit/icons/full/obj16/Transformation.gif"
+        format="{0}">
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
     </behavior>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTBase#//Transformation"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTCore#//Mapping">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/Mapping.gif" format="{0}">
-      <elements xsi:type="ed:EcoreLabelElement">
-        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-      </elements>
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/Mapping.gif"
+        format="{0}">
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
     </behavior>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTCore#//Mapping"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/Assignment.gif" format=":="/>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//AssignmentCS"/>
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTCorecst#//AssignmentCS">
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/Assignment.gif"
+        format=":="/>
   </node>
-  <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/BottomPattern.gif" format="Bottom"/>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//BottomPatternCS"/>
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTCorecst#//BottomPatternCS">
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/BottomPattern.gif"
+        format="Bottom"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/Direction.gif" format="{0} imports {1} uses {2}">
-      <elements xsi:type="ed:EcoreLabelElement">
-        <path href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"/>
-        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
-      </elements>
-      <elements xsi:type="ed:EcoreLabelElement" separator=",">
-        <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//DirectionCS/imports"/>
-      </elements>
-      <elements xsi:type="ed:EcoreLabelElement" separator=",">
-        <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//DirectionCS/uses"/>
-      </elements>
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTCorecst#//DirectionCS">
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/Direction.gif"
+        format="{0} imports {1} uses {2}">
+      <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"
+          end="ecore:EAttribute http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTCorecst#//DirectionCS/imports"
+          separator=","/>
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTCorecst#//DirectionCS/uses"
+          separator=","/>
     </behavior>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//DirectionCS"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTCorecst#//DomainCS">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/CoreDomain.gif" format="{0}">
-      <elements xsi:type="ed:EcoreLabelElement">
-        <path href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"/>
-        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
-      </elements>
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/CoreDomain.gif"
+        format="{0}">
+      <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"
+          end="ecore:EAttribute http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
     </behavior>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//DomainCS"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/Direction.gif" format="{0}">
-      <elements xsi:type="ed:EcoreLabelElement">
-        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//EnforcementOperationCS/deletion"/>
-      </elements>
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTCorecst#//EnforcementOperationCS">
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/Direction.gif"
+        format="{0}">
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/qvt/1.0/QVTCorecst#//EnforcementOperationCS/deletion"/>
     </behavior>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//EnforcementOperationCS"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/GuardPattern.gif" format="Guard"/>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//GuardPatternCS"/>
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTCorecst#//GuardPatternCS">
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/GuardPattern.gif"
+        format="Guard"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS">
     <behavior xsi:type="ed:LabelBehavior" format=" {0}">
-      <elements xsi:type="ed:EcoreLabelElement">
-        <path href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"/>
-        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
-      </elements>
+      <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"
+          end="ecore:EAttribute http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
     </behavior>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS">
     <behavior xsi:type="ed:LabelBehavior" format=" {0}">
-      <elements xsi:type="ed:EcoreLabelElement">
-        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
-      </elements>
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
     </behavior>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTCorecst#//MappingCS">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/Mapping.gif" format="{0}">
-      <elements xsi:type="ed:EcoreLabelElement">
-        <path href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"/>
-        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
-      </elements>
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/Mapping.gif"
+        format="{0}">
+      <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"
+          end="ecore:EAttribute http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
     </behavior>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//MappingCS"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.emf.ecore.edit/icons/full/obj16/EParameter.gif" format="{0} : {1}">
-      <elements xsi:type="ed:EcoreLabelElement">
-        <path href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//ParamDeclarationCS/identifier"/>
-        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
-      </elements>
-      <elements xsi:type="ed:EcoreLabelElement">
-        <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//ParamDeclarationCS/type"/>
-      </elements>
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTCorecst#//ParamDeclarationCS">
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.emf.ecore.edit/icons/full/obj16/EParameter.gif"
+        format="{0} : {1}">
+      <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/qvt/1.0/QVTCorecst#//ParamDeclarationCS/identifier"
+          end="ecore:EAttribute http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTCorecst#//ParamDeclarationCS/type"/>
     </behavior>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//ParamDeclarationCS"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTCorecst#//QueryCS">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.emf.ecore.edit/icons/full/obj16/EOperation.gif" format="{0} : {1}">
-      <elements xsi:type="ed:EcoreLabelElement">
-        <path href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//QueryCS/pathName"/>
-        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/ocl/1.1.0/OCL/CST#//PathNameCS/sequenceOfNames"/>
-      </elements>
-      <elements xsi:type="ed:EcoreLabelElement">
-        <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//QueryCS/type"/>
-      </elements>
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.emf.ecore.edit/icons/full/obj16/EOperation.gif"
+        format="{0} : {1}">
+      <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/qvt/1.0/QVTCorecst#//QueryCS/pathName"
+          end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//PathNameCS/sequenceOfNames"/>
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTCorecst#//QueryCS/type"/>
     </behavior>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//QueryCS"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtbase.edit/icons/full/obj16/Domain.gif" format="{0} : {1}">
-      <elements xsi:type="ed:EcoreLabelElement">
-        <path href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"/>
-        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
-      </elements>
-      <elements xsi:type="ed:EcoreLabelElement">
-        <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//RealizeableVariableCS/type"/>
-      </elements>
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTCorecst#//RealizeableVariableCS">
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtbase.edit/icons/full/obj16/Domain.gif"
+        format="{0} : {1}">
+      <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"
+          end="ecore:EAttribute http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTCorecst#//RealizeableVariableCS/type"/>
     </behavior>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//RealizeableVariableCS"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:LabelBehavior"/>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//TopLevelCS"/>
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTCorecst#//TopLevelCS">
+    <behavior xsi:type="ed:LabelBehavior" image="" format=""/>
   </node>
-  <node xsi:type="ed:EcoreNode">
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTCorecst#//TransformationCS">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtbase.edit/icons/full/obj16/Transformation.gif" format="{0}">
-      <elements xsi:type="ed:EcoreLabelElement">
-        <path href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//TransformationCS/pathName"/>
-        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/ocl/1.1.0/OCL/CST#//PathNameCS/sequenceOfNames"/>
-      </elements>
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtbase.edit/icons/full/obj16/Transformation.gif"
+        format="{0}">
+      <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/qvt/1.0/QVTCorecst#//TransformationCS/pathName"
+          end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//PathNameCS/sequenceOfNames"/>
     </behavior>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//TransformationCS"/>
   </node>
-  <node xsi:type="ed:EcoreNode">
-    <behavior xsi:type="ed:OutlineBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtbase.edit/icons/full/obj16/Domain.gif" format="{0} : {1}">
-      <elements xsi:type="ed:EcoreLabelElement">
-        <path href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"/>
-        <end xsi:type="ecore:EAttribute" href="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
-      </elements>
-      <elements xsi:type="ed:EcoreLabelElement">
-        <end xsi:type="ecore:EReference" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//RealizeableVariableCS/type"/>
-      </elements>
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTCorecst#//UnrealizedVariableCS">
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtbase.edit/icons/full/obj16/Domain.gif"
+        format="{0} : {1}">
+      <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"
+          end="ecore:EAttribute http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTCorecst#//RealizeableVariableCS/type"/>
     </behavior>
-    <element xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/1.0/QVTCorecst#//UnrealizedVariableCS"/>
   </node>
 </ed:EditorDefinition>
