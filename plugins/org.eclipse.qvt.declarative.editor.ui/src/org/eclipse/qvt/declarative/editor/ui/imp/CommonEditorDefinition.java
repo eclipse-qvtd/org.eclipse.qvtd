@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonEditorDefinition.java,v 1.9 2008/10/27 21:21:41 ewillink Exp $
+ * $Id: CommonEditorDefinition.java,v 1.10 2008/11/28 17:23:41 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -224,10 +224,12 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 			return null;
 		if (editorDefinition == null)
 			getEditorDefinition();
+		AbstractNode node = null;
 		if (object instanceof EObject)
-			return getEcoreNode(((EObject)object).eClass());
-		else
-			return getJavaNode(object.getClass());			
+			node = getEcoreNode(((EObject)object).eClass());
+		if (node == null)
+			node = getJavaNode(object.getClass());			
+		return node;
 	}
 
 	public void resourceChanged(IResourceChangeEvent event) {
