@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.11 2008/11/29 15:08:31 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.12 2008/11/29 15:42:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -231,19 +231,7 @@ public abstract class CommonLabelProvider implements ILabelProvider
 	
 	public Image getImage(Object element) {
 		Object node = getASTorCSTNode(element);
-		CommonEditorDefinition commonEditorDefinition = getPlugin().getEditorDefinition();
-		LabelBehavior behavior = commonEditorDefinition.getBehavior(node, LabelBehavior.class);
-		if (behavior == null)
-			return null;
-		String imageName = null;
-		Class<ImageProvider> imageProviderClass = behavior.getImageProvider();
-		if (imageProviderClass != null)
-			try {
-				imageName = imageProviderClass.newInstance().getImage(node);
-			} catch (Exception e) {
-			}
-		if (imageName == null)
-			imageName = behavior.getImage();
+		String imageName = getImageName(node);
 		if (imageName == null)
 			return null;
 		Image image = getImage(getPlugin().getBundle(), imageName);
@@ -279,6 +267,25 @@ public abstract class CommonLabelProvider implements ILabelProvider
 			return null;
 		Image image = imageRegistry.getImage(url);
 		return image;
+	}
+	
+	public String getImageName(Object node) {
+		if (node instanceof OutlineGroup)
+			return ((OutlineGroup) node).getImage();
+		CommonEditorDefinition commonEditorDefinition = getPlugin().getEditorDefinition();
+		LabelBehavior behavior = commonEditorDefinition.getBehavior(node, LabelBehavior.class);
+		if (behavior == null)
+			return null;
+		String imageName = null;
+		Class<ImageProvider> imageProviderClass = behavior.getImageProvider();
+		if (imageProviderClass != null)
+			try {
+				imageName = imageProviderClass.newInstance().getImage(node);
+			} catch (Exception e) {
+			}
+		if (imageName == null)
+			imageName = behavior.getImage();
+		return imageName;
 	}
 
 	protected Collection<Image> getOverlayImages(Object node) {
