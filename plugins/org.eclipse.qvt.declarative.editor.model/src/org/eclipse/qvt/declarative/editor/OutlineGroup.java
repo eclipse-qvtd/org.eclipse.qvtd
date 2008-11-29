@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OutlineGroup.java,v 1.1 2008/08/24 18:56:21 ewillink Exp $
+ * $Id: OutlineGroup.java,v 1.2 2008/11/29 12:44:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -29,6 +29,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.qvt.declarative.editor.OutlineGroup#getImage <em>Image</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.OutlineGroup#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.OutlineGroup#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.OutlineGroup#isHidden <em>Hidden</em>}</li>
  * </ul>
  * </p>
  *
@@ -127,5 +128,32 @@ public interface OutlineGroup extends AbstractOutlineElement {
 	 * @generated
 	 */
 	boolean isSetElements();
+
+	/**
+	 * Returns the value of the '<em><b>Hidden</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Hidden</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Hidden</em>' attribute.
+	 * @see #setHidden(boolean)
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getOutlineGroup_Hidden()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isHidden();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.OutlineGroup#isHidden <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Hidden</em>' attribute.
+	 * @see #isHidden()
+	 * @generated
+	 */
+	void setHidden(boolean value);
 
 } // OutlineGroup

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EcoreLabelElementImpl.java,v 1.1 2008/08/24 18:56:21 ewillink Exp $
+ * $Id: EcoreLabelElementImpl.java,v 1.2 2008/11/29 12:44:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -38,7 +38,10 @@ import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
  * <ul>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl#getEnd <em>End</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl#isHideIfBlank <em>Hide If Blank</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl#getPrefix <em>Prefix</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl#getSeparator <em>Separator</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl#getSuffix <em>Suffix</em>}</li>
  * </ul>
  * </p>
  *
@@ -66,6 +69,46 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 	protected EStructuralFeature end;
 
 	/**
+	 * The default value of the '{@link #isHideIfBlank() <em>Hide If Blank</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHideIfBlank()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HIDE_IF_BLANK_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isHideIfBlank() <em>Hide If Blank</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHideIfBlank()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hideIfBlank = HIDE_IF_BLANK_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPrefix() <em>Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PREFIX_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getPrefix() <em>Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected String prefix = PREFIX_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getSeparator() <em>Separator</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -84,6 +127,26 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 	 * @ordered
 	 */
 	protected String separator = SEPARATOR_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSuffix() <em>Suffix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuffix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SUFFIX_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getSuffix() <em>Suffix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuffix()
+	 * @generated
+	 * @ordered
+	 */
+	protected String suffix = SUFFIX_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -159,6 +222,48 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isHideIfBlank() {
+		return hideIfBlank;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHideIfBlank(boolean newHideIfBlank) {
+		boolean oldHideIfBlank = hideIfBlank;
+		hideIfBlank = newHideIfBlank;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.ECORE_LABEL_ELEMENT__HIDE_IF_BLANK, oldHideIfBlank, hideIfBlank));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getPrefix() {
+		return prefix;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPrefix(String newPrefix) {
+		String oldPrefix = prefix;
+		prefix = newPrefix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.ECORE_LABEL_ELEMENT__PREFIX, oldPrefix, prefix));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getSeparator() {
 		return separator;
 	}
@@ -180,6 +285,27 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getSuffix() {
+		return suffix;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSuffix(String newSuffix) {
+		String oldSuffix = suffix;
+		suffix = newSuffix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.ECORE_LABEL_ELEMENT__SUFFIX, oldSuffix, suffix));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -188,8 +314,14 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 			case EditorPackage.ECORE_LABEL_ELEMENT__END:
 				if (resolve) return getEnd();
 				return basicGetEnd();
+			case EditorPackage.ECORE_LABEL_ELEMENT__HIDE_IF_BLANK:
+				return isHideIfBlank() ? Boolean.TRUE : Boolean.FALSE;
+			case EditorPackage.ECORE_LABEL_ELEMENT__PREFIX:
+				return getPrefix();
 			case EditorPackage.ECORE_LABEL_ELEMENT__SEPARATOR:
 				return getSeparator();
+			case EditorPackage.ECORE_LABEL_ELEMENT__SUFFIX:
+				return getSuffix();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -210,8 +342,17 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 			case EditorPackage.ECORE_LABEL_ELEMENT__END:
 				setEnd((EStructuralFeature)newValue);
 				return;
+			case EditorPackage.ECORE_LABEL_ELEMENT__HIDE_IF_BLANK:
+				setHideIfBlank(((Boolean)newValue).booleanValue());
+				return;
+			case EditorPackage.ECORE_LABEL_ELEMENT__PREFIX:
+				setPrefix((String)newValue);
+				return;
 			case EditorPackage.ECORE_LABEL_ELEMENT__SEPARATOR:
 				setSeparator((String)newValue);
+				return;
+			case EditorPackage.ECORE_LABEL_ELEMENT__SUFFIX:
+				setSuffix((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -231,8 +372,17 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 			case EditorPackage.ECORE_LABEL_ELEMENT__END:
 				setEnd((EStructuralFeature)null);
 				return;
+			case EditorPackage.ECORE_LABEL_ELEMENT__HIDE_IF_BLANK:
+				setHideIfBlank(HIDE_IF_BLANK_EDEFAULT);
+				return;
+			case EditorPackage.ECORE_LABEL_ELEMENT__PREFIX:
+				setPrefix(PREFIX_EDEFAULT);
+				return;
 			case EditorPackage.ECORE_LABEL_ELEMENT__SEPARATOR:
 				setSeparator(SEPARATOR_EDEFAULT);
+				return;
+			case EditorPackage.ECORE_LABEL_ELEMENT__SUFFIX:
+				setSuffix(SUFFIX_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -250,8 +400,14 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 				return path != null && !path.isEmpty();
 			case EditorPackage.ECORE_LABEL_ELEMENT__END:
 				return end != null;
+			case EditorPackage.ECORE_LABEL_ELEMENT__HIDE_IF_BLANK:
+				return hideIfBlank != HIDE_IF_BLANK_EDEFAULT;
+			case EditorPackage.ECORE_LABEL_ELEMENT__PREFIX:
+				return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
 			case EditorPackage.ECORE_LABEL_ELEMENT__SEPARATOR:
 				return SEPARATOR_EDEFAULT == null ? separator != null : !SEPARATOR_EDEFAULT.equals(separator);
+			case EditorPackage.ECORE_LABEL_ELEMENT__SUFFIX:
+				return SUFFIX_EDEFAULT == null ? suffix != null : !SUFFIX_EDEFAULT.equals(suffix);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -266,8 +422,14 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (separator: ");
+		result.append(" (hideIfBlank: ");
+		result.append(hideIfBlank);
+		result.append(", prefix: ");
+		result.append(prefix);
+		result.append(", separator: ");
 		result.append(separator);
+		result.append(", suffix: ");
+		result.append(suffix);
 		result.append(')');
 		return result.toString();
 	}

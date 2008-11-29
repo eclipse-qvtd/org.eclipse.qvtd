@@ -12,16 +12,18 @@
  * 
  * </copyright>
  *
- * $Id: OutlineBehaviorImpl.java,v 1.4 2008/11/28 17:25:34 ewillink Exp $
+ * $Id: OutlineBehaviorImpl.java,v 1.5 2008/11/29 12:44:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.qvt.declarative.editor.AbstractOutlineElement;
@@ -36,6 +38,7 @@ import org.eclipse.qvt.declarative.editor.OutlineBehavior;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.OutlineBehaviorImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.OutlineBehaviorImpl#isHidden <em>Hidden</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,6 +54,25 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 	 * @ordered
 	 */
 	protected EList<AbstractOutlineElement> elements;
+
+	/**
+	 * The default value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HIDDEN_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hidden = HIDDEN_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -106,6 +128,27 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHidden(boolean newHidden) {
+		boolean oldHidden = hidden;
+		hidden = newHidden;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.OUTLINE_BEHAVIOR__HIDDEN, oldHidden, hidden));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -125,6 +168,8 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 		switch (featureID) {
 			case EditorPackage.OUTLINE_BEHAVIOR__ELEMENTS:
 				return getElements();
+			case EditorPackage.OUTLINE_BEHAVIOR__HIDDEN:
+				return isHidden() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -142,6 +187,9 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 				getElements().clear();
 				getElements().addAll((Collection<? extends AbstractOutlineElement>)newValue);
 				return;
+			case EditorPackage.OUTLINE_BEHAVIOR__HIDDEN:
+				setHidden(((Boolean)newValue).booleanValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -157,6 +205,9 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 			case EditorPackage.OUTLINE_BEHAVIOR__ELEMENTS:
 				unsetElements();
 				return;
+			case EditorPackage.OUTLINE_BEHAVIOR__HIDDEN:
+				setHidden(HIDDEN_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -171,8 +222,26 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 		switch (featureID) {
 			case EditorPackage.OUTLINE_BEHAVIOR__ELEMENTS:
 				return isSetElements();
+			case EditorPackage.OUTLINE_BEHAVIOR__HIDDEN:
+				return hidden != HIDDEN_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (hidden: ");
+		result.append(hidden);
+		result.append(')');
+		return result.toString();
 	}
 
 } //OutlineBehaviorImpl

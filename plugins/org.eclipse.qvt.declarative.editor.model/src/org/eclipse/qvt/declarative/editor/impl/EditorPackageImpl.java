@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackageImpl.java,v 1.6 2008/11/28 17:25:34 ewillink Exp $
+ * $Id: EditorPackageImpl.java,v 1.7 2008/11/29 12:44:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -311,8 +311,35 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEcoreLabelElement_Separator() {
+	public EAttribute getEcoreLabelElement_HideIfBlank() {
 		return (EAttribute)ecoreLabelElementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEcoreLabelElement_Prefix() {
+		return (EAttribute)ecoreLabelElementEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEcoreLabelElement_Separator() {
+		return (EAttribute)ecoreLabelElementEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEcoreLabelElement_Suffix() {
+		return (EAttribute)ecoreLabelElementEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -491,6 +518,15 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getOutlineBehavior_Hidden() {
+		return (EAttribute)outlineBehaviorEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getOutlineElement() {
 		return outlineElementEClass;
 	}
@@ -545,6 +581,15 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getOutlineGroup_Hidden() {
+		return (EAttribute)outlineGroupEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getImageProvider() {
 		return imageProviderEDataType;
 	}
@@ -590,7 +635,10 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		ecoreLabelElementEClass = createEClass(ECORE_LABEL_ELEMENT);
 		createEReference(ecoreLabelElementEClass, ECORE_LABEL_ELEMENT__PATH);
 		createEReference(ecoreLabelElementEClass, ECORE_LABEL_ELEMENT__END);
+		createEAttribute(ecoreLabelElementEClass, ECORE_LABEL_ELEMENT__HIDE_IF_BLANK);
+		createEAttribute(ecoreLabelElementEClass, ECORE_LABEL_ELEMENT__PREFIX);
 		createEAttribute(ecoreLabelElementEClass, ECORE_LABEL_ELEMENT__SEPARATOR);
+		createEAttribute(ecoreLabelElementEClass, ECORE_LABEL_ELEMENT__SUFFIX);
 
 		ecoreNodeEClass = createEClass(ECORE_NODE);
 		createEReference(ecoreNodeEClass, ECORE_NODE__ELEMENT);
@@ -617,6 +665,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		outlineBehaviorEClass = createEClass(OUTLINE_BEHAVIOR);
 		createEReference(outlineBehaviorEClass, OUTLINE_BEHAVIOR__ELEMENTS);
+		createEAttribute(outlineBehaviorEClass, OUTLINE_BEHAVIOR__HIDDEN);
 
 		outlineElementEClass = createEClass(OUTLINE_ELEMENT);
 		createEReference(outlineElementEClass, OUTLINE_ELEMENT__FEATURE);
@@ -625,6 +674,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		createEAttribute(outlineGroupEClass, OUTLINE_GROUP__IMAGE);
 		createEAttribute(outlineGroupEClass, OUTLINE_GROUP__NAME);
 		createEReference(outlineGroupEClass, OUTLINE_GROUP__ELEMENTS);
+		createEAttribute(outlineGroupEClass, OUTLINE_GROUP__HIDDEN);
 
 		// Create data types
 		imageProviderEDataType = createEDataType(IMAGE_PROVIDER);
@@ -685,7 +735,10 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		initEClass(ecoreLabelElementEClass, EcoreLabelElement.class, "EcoreLabelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEcoreLabelElement_Path(), theEcorePackage.getEReference(), null, "path", null, 0, -1, EcoreLabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEcoreLabelElement_End(), theEcorePackage.getEStructuralFeature(), null, "end", null, 1, 1, EcoreLabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEcoreLabelElement_HideIfBlank(), theEcorePackage.getEBoolean(), "hideIfBlank", "false", 0, 1, EcoreLabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEcoreLabelElement_Prefix(), theEcorePackage.getEString(), "prefix", "", 0, 1, EcoreLabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEcoreLabelElement_Separator(), theEcorePackage.getEString(), "separator", " ", 0, 1, EcoreLabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEcoreLabelElement_Suffix(), theEcorePackage.getEString(), "suffix", "", 0, 1, EcoreLabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(ecoreNodeEClass, EcoreNode.class, "EcoreNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEcoreNode_Element(), theEcorePackage.getEClassifier(), null, "element", null, 1, 1, EcoreNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -715,6 +768,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		initEClass(outlineBehaviorEClass, OutlineBehavior.class, "OutlineBehavior", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOutlineBehavior_Elements(), this.getAbstractOutlineElement(), null, "elements", null, 0, -1, OutlineBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOutlineBehavior_Hidden(), theEcorePackage.getEBoolean(), "hidden", "false", 0, 1, OutlineBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(outlineElementEClass, OutlineElement.class, "OutlineElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOutlineElement_Feature(), theEcorePackage.getEStructuralFeature(), null, "feature", null, 1, 1, OutlineElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -723,6 +777,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		initEAttribute(getOutlineGroup_Image(), theEcorePackage.getEString(), "image", null, 0, 1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOutlineGroup_Name(), theEcorePackage.getEString(), "name", null, 1, 1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOutlineGroup_Elements(), this.getAbstractOutlineElement(), null, "elements", null, 0, -1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOutlineGroup_Hidden(), theEcorePackage.getEBoolean(), "hidden", "false", 0, 1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(imageProviderEDataType, ImageProvider.class, "ImageProvider", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

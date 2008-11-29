@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackage.java,v 1.7 2008/11/28 17:25:34 ewillink Exp $
+ * $Id: EditorPackage.java,v 1.8 2008/11/29 12:44:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -201,13 +201,40 @@ public interface EditorPackage extends EPackage {
 	int ECORE_LABEL_ELEMENT__END = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Hide If Blank</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_LABEL_ELEMENT__HIDE_IF_BLANK = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_LABEL_ELEMENT__PREFIX = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Separator</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ECORE_LABEL_ELEMENT__SEPARATOR = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 2;
+	int ECORE_LABEL_ELEMENT__SEPARATOR = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_LABEL_ELEMENT__SUFFIX = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Ecore Label Element</em>' class.
@@ -216,7 +243,7 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ECORE_LABEL_ELEMENT_FEATURE_COUNT = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 3;
+	int ECORE_LABEL_ELEMENT_FEATURE_COUNT = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.EditorDefinitionImpl <em>Definition</em>}' class.
@@ -487,13 +514,22 @@ public interface EditorPackage extends EPackage {
 	int OUTLINE_BEHAVIOR__ELEMENTS = BEHAVIOR_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTLINE_BEHAVIOR__HIDDEN = BEHAVIOR_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Outline Behavior</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OUTLINE_BEHAVIOR_FEATURE_COUNT = BEHAVIOR_FEATURE_COUNT + 1;
+	int OUTLINE_BEHAVIOR_FEATURE_COUNT = BEHAVIOR_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.OutlineElementImpl <em>Outline Element</em>}' class.
@@ -561,13 +597,22 @@ public interface EditorPackage extends EPackage {
 	int OUTLINE_GROUP__ELEMENTS = ABSTRACT_OUTLINE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTLINE_GROUP__HIDDEN = ABSTRACT_OUTLINE_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Outline Group</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OUTLINE_GROUP_FEATURE_COUNT = ABSTRACT_OUTLINE_ELEMENT_FEATURE_COUNT + 3;
+	int OUTLINE_GROUP_FEATURE_COUNT = ABSTRACT_OUTLINE_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '<em>Image Provider</em>' data type.
@@ -674,6 +719,28 @@ public interface EditorPackage extends EPackage {
 	EReference getEcoreLabelElement_End();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#isHideIfBlank <em>Hide If Blank</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Hide If Blank</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.EcoreLabelElement#isHideIfBlank()
+	 * @see #getEcoreLabelElement()
+	 * @generated
+	 */
+	EAttribute getEcoreLabelElement_HideIfBlank();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getPrefix <em>Prefix</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Prefix</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.EcoreLabelElement#getPrefix()
+	 * @see #getEcoreLabelElement()
+	 * @generated
+	 */
+	EAttribute getEcoreLabelElement_Prefix();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getSeparator <em>Separator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -683,6 +750,17 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEcoreLabelElement_Separator();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getSuffix <em>Suffix</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Suffix</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.EcoreLabelElement#getSuffix()
+	 * @see #getEcoreLabelElement()
+	 * @generated
+	 */
+	EAttribute getEcoreLabelElement_Suffix();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.EcoreNode <em>Ecore Node</em>}'.
@@ -887,6 +965,17 @@ public interface EditorPackage extends EPackage {
 	EReference getOutlineBehavior_Elements();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.OutlineBehavior#isHidden <em>Hidden</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Hidden</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.OutlineBehavior#isHidden()
+	 * @see #getOutlineBehavior()
+	 * @generated
+	 */
+	EAttribute getOutlineBehavior_Hidden();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.OutlineElement <em>Outline Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -949,6 +1038,17 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getOutlineGroup_Elements();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.OutlineGroup#isHidden <em>Hidden</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Hidden</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.OutlineGroup#isHidden()
+	 * @see #getOutlineGroup()
+	 * @generated
+	 */
+	EAttribute getOutlineGroup_Hidden();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.qvt.declarative.editor.util.ImageProvider <em>Image Provider</em>}'.
@@ -1066,12 +1166,36 @@ public interface EditorPackage extends EPackage {
 		EReference ECORE_LABEL_ELEMENT__END = eINSTANCE.getEcoreLabelElement_End();
 
 		/**
+		 * The meta object literal for the '<em><b>Hide If Blank</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ECORE_LABEL_ELEMENT__HIDE_IF_BLANK = eINSTANCE.getEcoreLabelElement_HideIfBlank();
+
+		/**
+		 * The meta object literal for the '<em><b>Prefix</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ECORE_LABEL_ELEMENT__PREFIX = eINSTANCE.getEcoreLabelElement_Prefix();
+
+		/**
 		 * The meta object literal for the '<em><b>Separator</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute ECORE_LABEL_ELEMENT__SEPARATOR = eINSTANCE.getEcoreLabelElement_Separator();
+
+		/**
+		 * The meta object literal for the '<em><b>Suffix</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ECORE_LABEL_ELEMENT__SUFFIX = eINSTANCE.getEcoreLabelElement_Suffix();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.EcoreNodeImpl <em>Ecore Node</em>}' class.
@@ -1240,6 +1364,14 @@ public interface EditorPackage extends EPackage {
 		EReference OUTLINE_BEHAVIOR__ELEMENTS = eINSTANCE.getOutlineBehavior_Elements();
 
 		/**
+		 * The meta object literal for the '<em><b>Hidden</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OUTLINE_BEHAVIOR__HIDDEN = eINSTANCE.getOutlineBehavior_Hidden();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.OutlineElementImpl <em>Outline Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1290,6 +1422,14 @@ public interface EditorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference OUTLINE_GROUP__ELEMENTS = eINSTANCE.getOutlineGroup_Elements();
+
+		/**
+		 * The meta object literal for the '<em><b>Hidden</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OUTLINE_GROUP__HIDDEN = eINSTANCE.getOutlineGroup_Hidden();
 
 		/**
 		 * The meta object literal for the '<em>Image Provider</em>' data type.

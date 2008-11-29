@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EcoreLabelElement.java,v 1.1 2008/08/24 18:56:21 ewillink Exp $
+ * $Id: EcoreLabelElement.java,v 1.2 2008/11/29 12:44:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -30,7 +30,10 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * <ul>
  *   <li>{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getEnd <em>End</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#isHideIfBlank <em>Hide If Blank</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getPrefix <em>Prefix</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getSeparator <em>Separator</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getSuffix <em>Suffix</em>}</li>
  * </ul>
  * </p>
  *
@@ -82,6 +85,60 @@ public interface EcoreLabelElement extends AbstractLabelElement {
 	void setEnd(EStructuralFeature value);
 
 	/**
+	 * Returns the value of the '<em><b>Hide If Blank</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Hide If Blank</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Hide If Blank</em>' attribute.
+	 * @see #setHideIfBlank(boolean)
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getEcoreLabelElement_HideIfBlank()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isHideIfBlank();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#isHideIfBlank <em>Hide If Blank</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Hide If Blank</em>' attribute.
+	 * @see #isHideIfBlank()
+	 * @generated
+	 */
+	void setHideIfBlank(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Prefix</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Prefix</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Prefix</em>' attribute.
+	 * @see #setPrefix(String)
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getEcoreLabelElement_Prefix()
+	 * @model default=""
+	 * @generated
+	 */
+	String getPrefix();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getPrefix <em>Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Prefix</em>' attribute.
+	 * @see #getPrefix()
+	 * @generated
+	 */
+	void setPrefix(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Separator</b></em>' attribute.
 	 * The default value is <code>" "</code>.
 	 * <!-- begin-user-doc -->
@@ -107,5 +164,32 @@ public interface EcoreLabelElement extends AbstractLabelElement {
 	 * @generated
 	 */
 	void setSeparator(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Suffix</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Suffix</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Suffix</em>' attribute.
+	 * @see #setSuffix(String)
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getEcoreLabelElement_Suffix()
+	 * @model default=""
+	 * @generated
+	 */
+	String getSuffix();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getSuffix <em>Suffix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Suffix</em>' attribute.
+	 * @see #getSuffix()
+	 * @generated
+	 */
+	void setSuffix(String value);
 
 } // LabelElement

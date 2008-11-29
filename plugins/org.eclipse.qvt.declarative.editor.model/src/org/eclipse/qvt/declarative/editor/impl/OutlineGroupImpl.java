@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OutlineGroupImpl.java,v 1.1 2008/08/24 18:56:21 ewillink Exp $
+ * $Id: OutlineGroupImpl.java,v 1.2 2008/11/29 12:44:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -45,6 +45,7 @@ import org.eclipse.qvt.declarative.editor.OutlineGroup;
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.OutlineGroupImpl#getImage <em>Image</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.OutlineGroupImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.OutlineGroupImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.OutlineGroupImpl#isHidden <em>Hidden</em>}</li>
  * </ul>
  * </p>
  *
@@ -100,6 +101,26 @@ public class OutlineGroupImpl extends AbstractOutlineElementImpl implements Outl
 	 * @ordered
 	 */
 	protected EList<AbstractOutlineElement> elements;
+
+	/**
+	 * The default value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hidden = HIDDEN_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -197,6 +218,27 @@ public class OutlineGroupImpl extends AbstractOutlineElementImpl implements Outl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHidden(boolean newHidden) {
+		boolean oldHidden = hidden;
+		hidden = newHidden;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.OUTLINE_GROUP__HIDDEN, oldHidden, hidden));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -220,6 +262,8 @@ public class OutlineGroupImpl extends AbstractOutlineElementImpl implements Outl
 				return getName();
 			case EditorPackage.OUTLINE_GROUP__ELEMENTS:
 				return getElements();
+			case EditorPackage.OUTLINE_GROUP__HIDDEN:
+				return isHidden() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -243,6 +287,9 @@ public class OutlineGroupImpl extends AbstractOutlineElementImpl implements Outl
 				getElements().clear();
 				getElements().addAll((Collection<? extends AbstractOutlineElement>)newValue);
 				return;
+			case EditorPackage.OUTLINE_GROUP__HIDDEN:
+				setHidden(((Boolean)newValue).booleanValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -264,6 +311,9 @@ public class OutlineGroupImpl extends AbstractOutlineElementImpl implements Outl
 			case EditorPackage.OUTLINE_GROUP__ELEMENTS:
 				unsetElements();
 				return;
+			case EditorPackage.OUTLINE_GROUP__HIDDEN:
+				setHidden(HIDDEN_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -282,6 +332,8 @@ public class OutlineGroupImpl extends AbstractOutlineElementImpl implements Outl
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case EditorPackage.OUTLINE_GROUP__ELEMENTS:
 				return isSetElements();
+			case EditorPackage.OUTLINE_GROUP__HIDDEN:
+				return hidden != HIDDEN_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -300,6 +352,8 @@ public class OutlineGroupImpl extends AbstractOutlineElementImpl implements Outl
 		result.append(image);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", hidden: ");
+		result.append(hidden);
 		result.append(')');
 		return result.toString();
 	}
