@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonTreeModelBuilder.java,v 1.4 2008/11/29 12:45:30 ewillink Exp $
+ * $Id: CommonTreeModelBuilder.java,v 1.5 2008/11/29 15:09:37 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -38,13 +38,12 @@ import org.eclipse.qvt.declarative.parser.utils.CommonASTVisitor;
 
 public class CommonTreeModelBuilder extends TreeModelBuilderBase
 {
-	public static final Integer DEFAULT_CATEGORY = Integer.valueOf(0);
+	public static final Integer DEFAULT_CATEGORY = Integer.valueOf(ModelTreeNode.DEFAULT_CATEGORY);		// Presumed to be 0
 
 	protected class CommonASTModelVisitor<N> extends CommonASTVisitor<Object, N>
 	{
 		protected final CommonEditorDefinition editorDefinition;
 		protected final Class<OutlineBehavior> outlineBehaviorClass;
-		private Integer nextCategory = DEFAULT_CATEGORY;;
 
 		public CommonASTModelVisitor(CommonEditorDefinition editorDefinition, Class<N> nodeClass) {
 			this(editorDefinition, nodeClass, OutlineBehavior.class);
@@ -91,23 +90,29 @@ public class CommonTreeModelBuilder extends TreeModelBuilderBase
 						break;
 				}
 				if (!isEmpty) {
-					categoryStack.push(editorDefinition.getCategory(group));
-					boolean isHidden = group.isHidden();
-					boolean isFlat = (group.getName() == null) && (group.getImage() == null);
-					if (isHidden || isEmpty)
-						nextCategory = categoryStack.peek();
-					else if (!isFlat)
-						pushSubItem(group, categoryStack.peek());
-					else
-						createSubItem(group, categoryStack.peek());
-					for (AbstractOutlineElement childElement : elements)
-						enterElement(astNode, childElement);
-					if (!isHidden && !isEmpty && !isFlat)
-						popSubItem();
-					categoryStack.pop();
+					try {
+						boolean isHidden = group.isHidden();
+						boolean isFlat = (group.getName() == null) && (group.getImage() == null);
+						if (isHidden)
+							categoryStack.push(editorDefinition.getCategory(group));
+						else if (isEmpty)
+							categoryStack.push(DEFAULT_CATEGORY);
+						else {
+							if (!isFlat)
+								pushSubItem(group, categoryStack.peek());
+							else
+								createSubItem(group, categoryStack.peek());							
+							categoryStack.push(DEFAULT_CATEGORY);
+						}
+						for (AbstractOutlineElement childElement : elements)
+							enterElement(astNode, childElement);
+						if (!isHidden && !isEmpty && !isFlat)
+							popSubItem();
+					} finally {
+						categoryStack.pop();
+					}
 				}
 			}
-//			nextCategory = DEFAULT_CATEGORY;
 		}
 
 		protected boolean isEmpty(N astNode, AbstractOutlineElement element) {
@@ -147,6 +152,7 @@ public class CommonTreeModelBuilder extends TreeModelBuilderBase
 			boolean isHidden = (behavior != null) && behavior.isHidden();
 			if (!isHidden)
 				popSubItem();
+			categoryStack.pop();
 			return super.postVisit(astNode);
 		}
 
@@ -154,8 +160,10 @@ public class CommonTreeModelBuilder extends TreeModelBuilderBase
 		public boolean preVisit(N astNode) {
 			OutlineBehavior behavior = editorDefinition.getBehavior(astNode, outlineBehaviorClass);
 			boolean isHidden = (behavior != null) && behavior.isHidden();
-			if (isHidden)
+			if (isHidden) {
+				categoryStack.push(DEFAULT_CATEGORY);
 				return true;
+			}
 			boolean isTerminal = (behavior != null) && behavior.getElements().isEmpty();
 			return preVisit(astNode, isTerminal);
 		}
@@ -167,6 +175,7 @@ public class CommonTreeModelBuilder extends TreeModelBuilderBase
 			}
 			else {				
 				pushSubItem(astNode, categoryStack.peek());
+				categoryStack.push(DEFAULT_CATEGORY);
 				return true;
 			}
 		}
@@ -177,11 +186,9 @@ public class CommonTreeModelBuilder extends TreeModelBuilderBase
 
 		@Override
 		public Object visit(N astNode) {
-			categoryStack.push(nextCategory);
-			nextCategory = DEFAULT_CATEGORY;
+			int size = categoryStack.size();
 			Object result = super.visit(astNode);
-			categoryStack.pop();
-			nextCategory = DEFAULT_CATEGORY;
+			assert size == categoryStack.size();
 			return result;
 		}
 
