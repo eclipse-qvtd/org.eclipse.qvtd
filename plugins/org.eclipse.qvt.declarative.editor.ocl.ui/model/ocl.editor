@@ -122,11 +122,11 @@
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/Ecore#//Constraint">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Constraint.gif"
         imageProvider="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLImageProvider"
-        format="{0} {2} &lt;{1}>">
+        format="{0}{1}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/Ecore#//Constraint/constrainedElements"
           separator=","/>
-      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/Ecore#//Constraint/stereotype"/>
-      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"
+          hideIfBlank="true" prefix=" : "/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
       <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/Ecore#//Constraint/specification"/>
@@ -225,9 +225,8 @@
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/Ecore#//OperationCallExp">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/OperationCallExp.gif"
         imageProvider="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLImageProvider"
-        format="->{0} : {1}">
+        format="->{0}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/Expressions#//OperationCallExp/referredOperation"/>
-      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
       <elements xsi:type="ed:OutlineGroup" name="&lt;source> " hidden="true">
@@ -240,10 +239,9 @@
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/Ecore#//PropertyCallExp">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/PropertyCallExp.gif"
-        format=". {0} : {1}">
+        format=". {0}">
       <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/ocl/1.1.0/OCL/Expressions#//PropertyCallExp/referredProperty"
           end="ecore:EAttribute http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
       <elements xsi:type="ed:OutlineGroup" name="" hidden="true">
@@ -269,10 +267,9 @@
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/Ecore#//TypeExp">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/TypeExp.gif"
-        format="{0} : {1}">
+        format="{0} : Type">
       <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/ocl/1.1.0/OCL/Expressions#//TypeExp/referredType"
           end="ecore:EAttribute http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior" elements=""/>
   </node>
