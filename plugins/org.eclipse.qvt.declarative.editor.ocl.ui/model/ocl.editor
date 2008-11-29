@@ -65,8 +65,11 @@
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EOperation">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.emf.ecore.edit/icons/full/obj16/EOperation.gif"
-        format="{0} : {1}">
+        format="{0}({1}) : {2}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+      <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/emf/2002/Ecore#//EOperation/eParameters http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"
+          end="ecore:EAttribute http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"
+          separator=","/>
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
