@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.10 2008/11/29 12:46:21 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.11 2008/11/29 15:08:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -33,6 +33,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -74,7 +75,6 @@ public abstract class CommonLabelProvider implements ILabelProvider
 			throw new NullPointerException("Null path element");
 		if (object == null)
 			throw new NullPointerException("Null path object");
-		// FIXME object may be a List of EObject
 		if (!(object instanceof EObject))
 			throw new ClassCastException("Non EObject");
 		EClass objectEClass = ((EObject)object).eClass();
@@ -86,50 +86,58 @@ public abstract class CommonLabelProvider implements ILabelProvider
 
 	public void dispose() {}
 
-	protected String formatCollection(Collection<?> objects, EcoreLabelElement labelElement) {
+	protected String formatEcoreLabelElement(Object node, EcoreLabelElement labelElement) {
 		StringBuffer s = new StringBuffer();
-		for (Object object : objects) {
-			if (s.length() > 0)
-				s.append(labelElement.getSeparator());
-			EStructuralFeature end = labelElement.getEnd();
-			if (end == null)
-				object = "<" + ((EObject)object).eClass().getName() + ">";
-			else {
-				object = checkedGet(object, end);
-			}
-			s.append(object instanceof String ? (String)object : formatObject(object));
-		}
+		s.append(labelElement.getPrefix());
+		int prefixSize = s.length();
+		formatEcoreLabelElementStep(s, node, labelElement, 0);
+		if (labelElement.isHideIfBlank() && (prefixSize == s.length()))
+			return "";
+		s.append(labelElement.getSuffix());
 		return s.toString();
 	}
 
-	protected String formatEcoreLabelElement(Object node, EcoreLabelElement labelElement) {
-		Object object = node;
-		for (EReference path : labelElement.getPath())
-			object = checkedGet(object, path);
-		if (object instanceof EObject) {
-			EStructuralFeature end = labelElement.getEnd();
-			if (end == null)
-				object = "<" + ((EObject)object).eClass().getName() + ">";
-			else {
-				object = checkedGet(object, end);
+	protected void formatEcoreLabelElementStep(StringBuffer s, Object object, EcoreLabelElement labelElement, int step) {
+		EList<EReference> path = labelElement.getPath();
+		int maxStep = path.size();
+		if (step < maxStep) {
+			EReference feature = path.get(step);
+			Object nextObject = checkedGet(object, feature);
+			if (feature.isMany()) {
+				boolean isFirst = true;
+				for (Object childObject : (Collection<?>)nextObject) {
+					if (!isFirst)
+						s.append(labelElement.getSeparator());
+					formatEcoreLabelElementStep(s, childObject, labelElement, step+1);
+					isFirst = false;
+				}
 			}
+			else if (nextObject != null)
+				formatEcoreLabelElementStep(s, nextObject, labelElement, step+1);
 		}
-		String string;
-		if (object == null)
-			string = formatNull();
-		else if (object instanceof Collection)
-			string = formatCollection((Collection<?>)object, labelElement);
-		else if (object instanceof Enum)
-			string = formatEnum((Enum<?>)object);
-		else if (object instanceof Number)
-			string = formatNumber((Number) object);
-		else if (!(object instanceof String))
-			string = formatObject(object);
-		else 
-			string = (String) object;
-		if (labelElement.isHideIfBlank() && ((string == null) || (string.length() <= 0)))
-			return "";
-		return labelElement.getPrefix() + string + labelElement.getSuffix();
+		else {
+			EStructuralFeature feature = labelElement.getEnd();
+			if (object instanceof EObject) {
+				if (feature == null)
+					s.append("<" + ((EObject)object).eClass().getName() + ">");
+				else {
+					Object nextObject = checkedGet(object, feature);
+					if (feature.isMany()) {
+						boolean isFirst = true;
+						for (Object childObject : (Collection<?>)nextObject) {
+							if (!isFirst)
+								s.append(labelElement.getSeparator());
+							s.append(formatObject(childObject));
+							isFirst = false;
+						}
+					}
+					else
+						s.append(formatObject(nextObject));
+				}
+			}
+			else
+				s.append("<" + object.getClass().getName() + ">");
+		}
 	}
 
 	protected String formatEnum(Enum<?> object) {
@@ -167,6 +175,16 @@ public abstract class CommonLabelProvider implements ILabelProvider
 	}
 
 	protected String formatObject(Object node) {
+		if (node == null)
+			return formatNull();
+		else if (node instanceof Enum)
+			return formatEnum((Enum<?>)node);
+		else if (node instanceof Number)
+			return formatNumber((Number) node);
+		else if (node instanceof String)
+			return (String) node;
+		else if (node instanceof OutlineGroup)
+			return ((OutlineGroup) node).getName();
 		CommonEditorDefinition commonEditorDefinition = getPlugin().getEditorDefinition();
 		LabelBehavior behavior = commonEditorDefinition.getBehavior(node, LabelBehavior.class);
 		if (behavior == null)
