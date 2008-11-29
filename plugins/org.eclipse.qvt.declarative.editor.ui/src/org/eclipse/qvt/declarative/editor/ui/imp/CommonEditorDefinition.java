@@ -12,13 +12,15 @@
  * 
  * </copyright>
  *
- * $Id: CommonEditorDefinition.java,v 1.10 2008/11/28 17:23:41 ewillink Exp $
+ * $Id: CommonEditorDefinition.java,v 1.11 2008/11/29 12:43:12 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -48,6 +50,7 @@ import org.eclipse.qvt.declarative.editor.EditorDefinition;
 import org.eclipse.qvt.declarative.editor.EditorFactory;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
 import org.eclipse.qvt.declarative.editor.JavaNode;
+import org.eclipse.qvt.declarative.editor.OutlineGroup;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 
 /**
@@ -67,6 +70,8 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 	private Map<EClassifier, EcoreNode> ecoreMap = null;
 	private Map<Class<?>, JavaNode> javaMap = null;
 	private Set<URI> editorURIs = null;			// Closure of EditorDefinition._extends
+	private Map<OutlineGroup, Integer> outlineGroupToCategory = null;
+	private List<OutlineGroup> categoryToOutlineGroup = null;
 
     public CommonEditorDefinition(URI editorURI) {
     	this.editorURI = editorURI;
@@ -125,6 +130,22 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 		}
 		return null;
 	}
+	
+	public int getCategory(OutlineGroup outlineGroup) {
+		if (categoryToOutlineGroup == null) {
+			categoryToOutlineGroup = new ArrayList<OutlineGroup>();
+			outlineGroupToCategory = new HashMap<OutlineGroup, Integer>();
+			outlineGroupToCategory.put(null, Integer.valueOf(0));
+			categoryToOutlineGroup.add(null);
+		}
+		Integer category = outlineGroupToCategory.get(outlineGroup);
+		if (category != null)
+			return category.intValue();
+		int size = categoryToOutlineGroup.size();
+		outlineGroupToCategory.put(outlineGroup, Integer.valueOf(size));
+		categoryToOutlineGroup.add(outlineGroup);
+		return size;
+	}
 
 	public EditorDefinition getEditorDefinition() {
 		if ((editorDefinition == null) && (editorURI != null)) {
@@ -159,6 +180,15 @@ public class CommonEditorDefinition implements IResourceChangeListener, IResourc
 			for (EditorDefinition extendedDefinition : editorDefinition.getExtends())
 				getEditorURIs(editorURIs, extendedDefinition);
 		}		
+	}
+	
+	public OutlineGroup getOutlineGroup(int category) {
+		if (categoryToOutlineGroup == null)
+			return null;
+		else if (category >= categoryToOutlineGroup.size())
+			return null;
+		else
+			return categoryToOutlineGroup.get(category);
 	}
 
 	protected void installEditorDefinition(EditorDefinition editorDefinition) {
