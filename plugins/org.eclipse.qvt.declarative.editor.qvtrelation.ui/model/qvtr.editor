@@ -54,6 +54,25 @@
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior" hidden="true"/>
   </node>
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTBase#//Function">
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.emf.ecore.edit/icons/full/obj16/EOperation.gif"
+        format="{0}({1}) : {2}">
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+      <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/emf/2002/Ecore#//EOperation/eParameters http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"
+          end="ecore:EAttribute http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"
+          separator=","/>
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
+    </behavior>
+    <behavior xsi:type="ed:OutlineBehavior">
+      <elements xsi:type="ed:OutlineGroup" name="" hidden="true">
+        <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/emf/2002/Ecore#//EOperation/eExceptions"/>
+      </elements>
+      <elements xsi:type="ed:OutlineGroup" name="" hidden="true">
+        <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/emf/2002/Ecore#//EOperation/eParameters"/>
+      </elements>
+      <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTBase#//Function/queryExpression"/>
+    </behavior>
+  </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTRelation#//Key">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/Key.gif"
         format="{0}({1})">
@@ -71,7 +90,8 @@
           hideIfBlank="true" prefix=" -> "/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
-      <elements xsi:type="ed:OutlineGroup" name="variables">
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Variable.gif"
+          name="&lt;variable>">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTRelation#//Relation/variable"/>
       </elements>
       <elements xsi:type="ed:OutlineGroup" name="&lt;domain> " hidden="true">
