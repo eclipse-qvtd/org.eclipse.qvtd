@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.9 2008/11/28 17:27:05 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.10 2008/11/29 12:46:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -47,6 +47,7 @@ import org.eclipse.qvt.declarative.editor.AbstractLabelElement;
 import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
 import org.eclipse.qvt.declarative.editor.JavaLabelElement;
 import org.eclipse.qvt.declarative.editor.LabelBehavior;
+import org.eclipse.qvt.declarative.editor.OutlineGroup;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.util.ImageProvider;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
@@ -63,7 +64,7 @@ public abstract class CommonLabelProvider implements ILabelProvider
 	protected ExtendedImageRegistry imageRegistry = new ExtendedImageRegistry();
 	private Image errorImageOverlay = null;
 	private Image warningImageOverlay = null;
-
+	
 	public void addListener(ILabelProviderListener listener) {
 		fListeners.add(listener);
 	}
@@ -90,6 +91,12 @@ public abstract class CommonLabelProvider implements ILabelProvider
 		for (Object object : objects) {
 			if (s.length() > 0)
 				s.append(labelElement.getSeparator());
+			EStructuralFeature end = labelElement.getEnd();
+			if (end == null)
+				object = "<" + ((EObject)object).eClass().getName() + ">";
+			else {
+				object = checkedGet(object, end);
+			}
 			s.append(object instanceof String ? (String)object : formatObject(object));
 		}
 		return s.toString();
@@ -120,7 +127,9 @@ public abstract class CommonLabelProvider implements ILabelProvider
 			string = formatObject(object);
 		else 
 			string = (String) object;
-		return string;
+		if (labelElement.isHideIfBlank() && ((string == null) || (string.length() <= 0)))
+			return "";
+		return labelElement.getPrefix() + string + labelElement.getSuffix();
 	}
 
 	protected String formatEnum(Enum<?> object) {
@@ -161,7 +170,7 @@ public abstract class CommonLabelProvider implements ILabelProvider
 		CommonEditorDefinition commonEditorDefinition = getPlugin().getEditorDefinition();
 		LabelBehavior behavior = commonEditorDefinition.getBehavior(node, LabelBehavior.class);
 		if (behavior == null)
-			return null;
+			return "<" + String.valueOf(node) + ">";
 		String format = behavior.getFormat();
 		List<AbstractLabelElement> labelElements = behavior.getElements();
 		int iMax = labelElements.size();
@@ -190,6 +199,10 @@ public abstract class CommonLabelProvider implements ILabelProvider
 			return ((ASTandCST) element).getCST();
 		else
 			return element;
+	}
+	
+	public CommonEditorDefinition getEditorDefinition() {
+		return getPlugin().getEditorDefinition();
 	}
 
 	protected Image getErrorImageOverlay() {
@@ -275,10 +288,16 @@ public abstract class CommonLabelProvider implements ILabelProvider
 	public String getText(Object element) {
 		Object node = getASTorCSTNode(element);
 		String text = formatObject(node);
-		if (text != null)
-			return text;
-		else
+		if (text == null)
 			return "<!null!>";
+		if (!(element instanceof ModelTreeNode))
+			return text;
+		ModelTreeNode treeNode = (ModelTreeNode)element;
+		int category = treeNode.getCategory();
+		OutlineGroup outlineGroup = getEditorDefinition().getOutlineGroup(category);
+		if (outlineGroup == null)
+			return text;
+		return outlineGroup.getName() + text;		
 	}
 
 	public boolean isLabelProperty(Object element, String property) {
