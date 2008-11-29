@@ -52,6 +52,7 @@
       <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/qvt/1.0/QVTBase#//Pattern/bindsTo"
           end="ecore:EAttribute http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
     </behavior>
+    <behavior xsi:type="ed:OutlineBehavior" hidden="true"/>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTRelation#//Key">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/Key.gif"
@@ -155,22 +156,22 @@
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTTemplate#//CollectionTemplateExp">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvttemplate.edit/icons/full/obj16/CollectionTemplateExp.gif"
-        format="{0} : {1} '{' {2} ++ {3} '}'">
+        format="{0} : {1} '{'{2}{3}'}'">
       <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/qvt/1.0/QVTTemplate#//TemplateExp/bindsTo"
           end="ecore:EAttribute http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTTemplate#//CollectionTemplateExp/referredCollectionType"/>
-      <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/qvt/1.0/QVTTemplate#//CollectionTemplateExp/member http://www.eclipse.org/qvt/1.0/QVTTemplate#//PropertyTemplateItem/referredProperty"
+      <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/qvt/1.0/QVTTemplate#//CollectionTemplateExp/member"
           end="ecore:EAttribute http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"
           separator=","/>
       <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/qvt/1.0/QVTTemplate#//CollectionTemplateExp/rest"
           end="ecore:EAttribute http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"
-          separator=""/>
+          hideIfBlank="true" prefix=" ++ " separator=""/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
       <elements xsi:type="ed:OutlineGroup" name="&lt;where> ">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTTemplate#//TemplateExp/where"/>
       </elements>
-      <elements xsi:type="ed:OutlineGroup" name="&lt;member>" hidden="true">
+      <elements xsi:type="ed:OutlineGroup" name="&lt;member> " hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTTemplate#//CollectionTemplateExp/member"/>
       </elements>
       <elements xsi:type="ed:OutlineGroup" name="&lt;rest> " hidden="true">
@@ -189,9 +190,7 @@
       <elements xsi:type="ed:OutlineGroup" name="&lt;where> ">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTTemplate#//TemplateExp/where"/>
       </elements>
-      <elements xsi:type="ed:OutlineGroup" hidden="true">
-        <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTTemplate#//ObjectTemplateExp/part"/>
-      </elements>
+      <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTTemplate#//ObjectTemplateExp/part"/>
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTTemplate#//PropertyTemplateItem">
