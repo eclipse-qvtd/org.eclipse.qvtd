@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OutlineGroupItemProvider.java,v 1.1 2008/08/24 18:56:41 ewillink Exp $
+ * $Id: OutlineGroupItemProvider.java,v 1.2 2008/11/29 12:44:36 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -76,6 +76,7 @@ public class OutlineGroupItemProvider
 
 			addImagePropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
+			addHiddenPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -120,6 +121,28 @@ public class OutlineGroupItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Hidden feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addHiddenPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_OutlineGroup_hidden_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_OutlineGroup_hidden_feature", "_UI_OutlineGroup_type"),
+				 EditorPackage.Literals.OUTLINE_GROUP__HIDDEN,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -193,6 +216,7 @@ public class OutlineGroupItemProvider
 		switch (notification.getFeatureID(OutlineGroup.class)) {
 			case EditorPackage.OUTLINE_GROUP__IMAGE:
 			case EditorPackage.OUTLINE_GROUP__NAME:
+			case EditorPackage.OUTLINE_GROUP__HIDDEN:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case EditorPackage.OUTLINE_GROUP__ELEMENTS:

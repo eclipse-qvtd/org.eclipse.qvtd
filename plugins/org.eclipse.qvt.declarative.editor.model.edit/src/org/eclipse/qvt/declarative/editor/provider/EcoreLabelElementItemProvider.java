@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EcoreLabelElementItemProvider.java,v 1.1 2008/08/24 18:56:41 ewillink Exp $
+ * $Id: EcoreLabelElementItemProvider.java,v 1.2 2008/11/29 12:44:36 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -74,7 +74,10 @@ public class EcoreLabelElementItemProvider
 
 			addPathPropertyDescriptor(object);
 			addEndPropertyDescriptor(object);
+			addHideIfBlankPropertyDescriptor(object);
+			addPrefixPropertyDescriptor(object);
 			addSeparatorPropertyDescriptor(object);
+			addSuffixPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -124,6 +127,50 @@ public class EcoreLabelElementItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Hide If Blank feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addHideIfBlankPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EcoreLabelElement_hideIfBlank_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EcoreLabelElement_hideIfBlank_feature", "_UI_EcoreLabelElement_type"),
+				 EditorPackage.Literals.ECORE_LABEL_ELEMENT__HIDE_IF_BLANK,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Prefix feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPrefixPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EcoreLabelElement_prefix_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EcoreLabelElement_prefix_feature", "_UI_EcoreLabelElement_type"),
+				 EditorPackage.Literals.ECORE_LABEL_ELEMENT__PREFIX,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Separator feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -137,6 +184,28 @@ public class EcoreLabelElementItemProvider
 				 getString("_UI_EcoreLabelElement_separator_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_EcoreLabelElement_separator_feature", "_UI_EcoreLabelElement_type"),
 				 EditorPackage.Literals.ECORE_LABEL_ELEMENT__SEPARATOR,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Suffix feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSuffixPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EcoreLabelElement_suffix_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EcoreLabelElement_suffix_feature", "_UI_EcoreLabelElement_type"),
+				 EditorPackage.Literals.ECORE_LABEL_ELEMENT__SUFFIX,
 				 true,
 				 false,
 				 false,
@@ -200,7 +269,10 @@ public class EcoreLabelElementItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(EcoreLabelElement.class)) {
+			case EditorPackage.ECORE_LABEL_ELEMENT__HIDE_IF_BLANK:
+			case EditorPackage.ECORE_LABEL_ELEMENT__PREFIX:
 			case EditorPackage.ECORE_LABEL_ELEMENT__SEPARATOR:
+			case EditorPackage.ECORE_LABEL_ELEMENT__SUFFIX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

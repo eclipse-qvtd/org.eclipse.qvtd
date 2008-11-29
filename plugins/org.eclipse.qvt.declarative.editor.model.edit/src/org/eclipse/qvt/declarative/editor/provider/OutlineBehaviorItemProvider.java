@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OutlineBehaviorItemProvider.java,v 1.4 2008/11/28 17:26:35 ewillink Exp $
+ * $Id: OutlineBehaviorItemProvider.java,v 1.5 2008/11/29 12:44:36 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -23,12 +23,14 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.qvt.declarative.editor.EditorFactory;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
@@ -69,8 +71,31 @@ public class OutlineBehaviorItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addHiddenPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Hidden feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addHiddenPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_OutlineBehavior_hidden_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_OutlineBehavior_hidden_feature", "_UI_OutlineBehavior_type"),
+				 EditorPackage.Literals.OUTLINE_BEHAVIOR__HIDDEN,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -122,7 +147,8 @@ public class OutlineBehaviorItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_OutlineBehavior_type");
+		OutlineBehavior outlineBehavior = (OutlineBehavior)object;
+		return getString("_UI_OutlineBehavior_type") + " " + outlineBehavior.isHidden();
 	}
 
 	/**
@@ -137,6 +163,9 @@ public class OutlineBehaviorItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(OutlineBehavior.class)) {
+			case EditorPackage.OUTLINE_BEHAVIOR__HIDDEN:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case EditorPackage.OUTLINE_BEHAVIOR__ELEMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
