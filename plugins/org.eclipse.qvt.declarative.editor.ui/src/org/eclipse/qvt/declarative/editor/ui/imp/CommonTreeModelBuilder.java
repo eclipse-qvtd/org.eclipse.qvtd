@@ -12,13 +12,14 @@
  * 
  * </copyright>
  *
- * $Id: CommonTreeModelBuilder.java,v 1.3 2008/11/28 17:27:22 ewillink Exp $
+ * $Id: CommonTreeModelBuilder.java,v 1.4 2008/11/29 12:45:30 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
@@ -37,10 +38,13 @@ import org.eclipse.qvt.declarative.parser.utils.CommonASTVisitor;
 
 public class CommonTreeModelBuilder extends TreeModelBuilderBase
 {
+	public static final Integer DEFAULT_CATEGORY = Integer.valueOf(0);
+
 	protected class CommonASTModelVisitor<N> extends CommonASTVisitor<Object, N>
 	{
 		protected final CommonEditorDefinition editorDefinition;
 		protected final Class<OutlineBehavior> outlineBehaviorClass;
+		private Integer nextCategory = DEFAULT_CATEGORY;;
 
 		public CommonASTModelVisitor(CommonEditorDefinition editorDefinition, Class<N> nodeClass) {
 			this(editorDefinition, nodeClass, OutlineBehavior.class);
@@ -80,44 +84,105 @@ public class CommonTreeModelBuilder extends TreeModelBuilderBase
 		protected void enterOutlineGroup(N astNode, OutlineGroup group) {
 			EList<AbstractOutlineElement> elements = group.getElements();
 			if (!elements.isEmpty()) {					// Non-dummy group
-				boolean isFlat = (group.getName() == null) && (group.getImage() == null);
-				if (!isFlat)
-					pushSubItem(group);
-				else
-					createSubItem(group);
-				for (AbstractOutlineElement childElement : elements)
-					enterElement(astNode, childElement);
-				if (!isFlat)
-					popSubItem();
+				boolean isEmpty = true;
+				for (AbstractOutlineElement childElement : elements) {
+					if (!isEmpty(astNode, childElement))
+						isEmpty = false;
+						break;
+				}
+				if (!isEmpty) {
+					categoryStack.push(editorDefinition.getCategory(group));
+					boolean isHidden = group.isHidden();
+					boolean isFlat = (group.getName() == null) && (group.getImage() == null);
+					if (isHidden || isEmpty)
+						nextCategory = categoryStack.peek();
+					else if (!isFlat)
+						pushSubItem(group, categoryStack.peek());
+					else
+						createSubItem(group, categoryStack.peek());
+					for (AbstractOutlineElement childElement : elements)
+						enterElement(astNode, childElement);
+					if (!isHidden && !isEmpty && !isFlat)
+						popSubItem();
+					categoryStack.pop();
+				}
 			}
+//			nextCategory = DEFAULT_CATEGORY;
+		}
+
+		protected boolean isEmpty(N astNode, AbstractOutlineElement element) {
+			if (element instanceof OutlineElement)
+				return isEmptyOutlineElement(astNode, ((OutlineElement) element));
+			else if (element instanceof OutlineGroup)
+				return isEmptyOutlineGroup(astNode, ((OutlineGroup) element));
+			else
+				return false;
+		}
+
+		protected boolean isEmptyOutlineElement(N astNode, OutlineElement element) {
+			if (astNode instanceof EObject) {
+				EStructuralFeature feature = element.getFeature();
+				Object selection = ((EObject)astNode).eGet(feature, false);
+				if (feature.isMany())
+					return ((Collection<?>)selection).isEmpty();
+				else
+					return false;
+			} else
+				return false;
+		}
+
+		protected boolean isEmptyOutlineGroup(N astNode, OutlineGroup group) {
+			EList<AbstractOutlineElement> elements = group.getElements();
+			if (elements.isEmpty())
+				return true;
+			for (AbstractOutlineElement childElement : elements)
+				if (!isEmpty(astNode, childElement))
+					return false;
+			return true;
 		}
 		
 		@Override
 		public Object postVisit(N astNode) {
-			popSubItem();
+			OutlineBehavior behavior = editorDefinition.getBehavior(astNode, outlineBehaviorClass);
+			boolean isHidden = (behavior != null) && behavior.isHidden();
+			if (!isHidden)
+				popSubItem();
 			return super.postVisit(astNode);
 		}
 
 		@Override
 		public boolean preVisit(N astNode) {
 			OutlineBehavior behavior = editorDefinition.getBehavior(astNode, outlineBehaviorClass);
+			boolean isHidden = (behavior != null) && behavior.isHidden();
+			if (isHidden)
+				return true;
 			boolean isTerminal = (behavior != null) && behavior.getElements().isEmpty();
 			return preVisit(astNode, isTerminal);
 		}
 
 		protected boolean preVisit(N astNode, boolean isTerminal) {
 			if (isTerminal) {
-				createSubItem(astNode);
+				createSubItem(astNode, categoryStack.peek());
 				return false;
 			}
 			else {				
-				pushSubItem(astNode);
+				pushSubItem(astNode, categoryStack.peek());
 				return true;
 			}
 		}
 		
 		protected void unexpectedEnterOutline(N astNode, AbstractOutlineElement element) {
 			QVTEditorPlugin.logError("Unexpected enter outline for a '" + element.getClass().getName() + "' at a '" + astNode.getClass().getSimpleName() + "' by a '" + getClass().getSimpleName() + "'", null);
+		}
+
+		@Override
+		public Object visit(N astNode) {
+			categoryStack.push(nextCategory);
+			nextCategory = DEFAULT_CATEGORY;
+			Object result = super.visit(astNode);
+			categoryStack.pop();
+			nextCategory = DEFAULT_CATEGORY;
+			return result;
 		}
 
 		@Override
@@ -138,10 +203,13 @@ public class CommonTreeModelBuilder extends TreeModelBuilderBase
 	protected final ICreationFactory creationFactory;
 	protected final boolean showAST;
 	protected final Map<Object, ModelTreeNode> itemMap = new HashMap<Object, ModelTreeNode>();
+	protected final Stack<Integer> categoryStack;
 	
 	public CommonTreeModelBuilder(ICreationFactory creationFactory, boolean showAST) {
 		this.creationFactory = creationFactory;
 		this.showAST = showAST;
+		categoryStack = new Stack<Integer>();
+		categoryStack.push(Integer.valueOf(ModelTreeNode.DEFAULT_CATEGORY));
 	}
 
 	protected CommonASTModelVisitor<Notifier> createASTVisitor(CommonEditorDefinition editorDefinition) {
