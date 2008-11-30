@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: LabelBehaviorImpl.java,v 1.3 2008/11/28 17:25:34 ewillink Exp $
+ * $Id: LabelBehaviorImpl.java,v 1.4 2008/11/30 13:57:57 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -86,7 +86,7 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String FORMAT_EDEFAULT = null;
+	protected static final String FORMAT_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getFormat() <em>Format</em>}' attribute.

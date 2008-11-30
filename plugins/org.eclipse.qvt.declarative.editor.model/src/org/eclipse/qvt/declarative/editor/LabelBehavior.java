@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: LabelBehavior.java,v 1.3 2008/11/28 17:25:34 ewillink Exp $
+ * $Id: LabelBehavior.java,v 1.4 2008/11/30 13:57:57 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -93,6 +93,7 @@ public interface LabelBehavior extends Behavior {
 
 	/**
 	 * Returns the value of the '<em><b>Format</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Format</em>' attribute isn't clear,
@@ -102,7 +103,7 @@ public interface LabelBehavior extends Behavior {
 	 * @return the value of the '<em>Format</em>' attribute.
 	 * @see #setFormat(String)
 	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getLabelBehavior_Format()
-	 * @model unique="false" required="true"
+	 * @model default="" unique="false" required="true"
 	 * @generated
 	 */
 	String getFormat();
