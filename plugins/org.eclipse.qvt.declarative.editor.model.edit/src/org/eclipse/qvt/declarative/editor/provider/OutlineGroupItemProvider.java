@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OutlineGroupItemProvider.java,v 1.2 2008/11/29 12:44:36 ewillink Exp $
+ * $Id: OutlineGroupItemProvider.java,v 1.3 2008/11/30 13:57:20 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -22,9 +22,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -34,7 +32,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.eclipse.qvt.declarative.editor.EditorFactory;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
 import org.eclipse.qvt.declarative.editor.OutlineGroup;
@@ -192,14 +189,24 @@ public class OutlineGroupItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
+		StringBuffer s = new StringBuffer();
+		s.append(getString("_UI_OutlineGroup_type"));
 		String label = ((OutlineGroup)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_OutlineGroup_type") :
-			getString("_UI_OutlineGroup_type") + " " + label;
+		if (label != null) {
+			s.append(" ");
+			s.append(label);
+		}
+		String image = ((OutlineGroup)object).getImage();
+		if (image != null) {
+			s.append(" [");
+			s.append(image);
+			s.append("]");
+		}
+		return s.toString();
 	}
 
 	/**
