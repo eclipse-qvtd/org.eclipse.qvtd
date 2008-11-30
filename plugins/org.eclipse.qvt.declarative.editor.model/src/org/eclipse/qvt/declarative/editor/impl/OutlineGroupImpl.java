@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OutlineGroupImpl.java,v 1.2 2008/11/29 12:44:33 ewillink Exp $
+ * $Id: OutlineGroupImpl.java,v 1.3 2008/11/30 22:06:03 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -80,7 +80,7 @@ public class OutlineGroupImpl extends AbstractOutlineElementImpl implements Outl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
+	protected static final String NAME_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.

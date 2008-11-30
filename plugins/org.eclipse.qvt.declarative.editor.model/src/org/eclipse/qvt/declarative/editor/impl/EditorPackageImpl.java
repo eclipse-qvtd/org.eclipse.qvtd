@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackageImpl.java,v 1.8 2008/11/30 13:57:57 ewillink Exp $
+ * $Id: EditorPackageImpl.java,v 1.9 2008/11/30 22:06:03 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -775,7 +775,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		initEClass(outlineGroupEClass, OutlineGroup.class, "OutlineGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOutlineGroup_Image(), theEcorePackage.getEString(), "image", null, 0, 1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getOutlineGroup_Name(), theEcorePackage.getEString(), "name", null, 1, 1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOutlineGroup_Name(), theEcorePackage.getEString(), "name", "", 1, 1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOutlineGroup_Elements(), this.getAbstractOutlineElement(), null, "elements", null, 0, -1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOutlineGroup_Hidden(), theEcorePackage.getEBoolean(), "hidden", "false", 0, 1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OutlineGroup.java,v 1.2 2008/11/29 12:44:33 ewillink Exp $
+ * $Id: OutlineGroup.java,v 1.3 2008/11/30 22:06:03 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -66,6 +66,7 @@ public interface OutlineGroup extends AbstractOutlineElement {
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
@@ -75,7 +76,7 @@ public interface OutlineGroup extends AbstractOutlineElement {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getOutlineGroup_Name()
-	 * @model unique="false" required="true"
+	 * @model default="" unique="false" required="true"
 	 * @generated
 	 */
 	String getName();
