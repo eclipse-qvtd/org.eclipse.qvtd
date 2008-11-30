@@ -17,7 +17,7 @@
     </behavior>
   </node>
   <node xsi:type="ed:JavaNode" name="org.eclipse.qvt.declarative.editor.OutlineGroup">
-    <behavior xsi:type="ed:LabelBehavior" format=""/>
+    <behavior xsi:type="ed:LabelBehavior"/>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAnnotation">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.emf.ecore.edit/icons/full/obj16/EAnnotation.gif"
@@ -137,8 +137,7 @@
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/Ecore#//ExpressionInOCL">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ExpressionInOCL.gif"
-        imageProvider="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLImageProvider"
-        format=""/>
+        imageProvider="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLImageProvider"/>
     <behavior xsi:type="ed:OutlineBehavior" hidden="true">
       <elements xsi:type="ed:OutlineGroup" name="&lt;context> " hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/Utilities#//ExpressionInOCL/contextVariable"/>
@@ -272,7 +271,7 @@
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/Ecore#//StringLiteralExp">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/StringLiteralExp.gif"
-        format="{0} : {1}">
+        format="''{0}'' : {1}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/Expressions#//StringLiteralExp/stringSymbol"/>
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
     </behavior>
@@ -397,10 +396,22 @@
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//IterateExpCS">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/IterateExp.gif"
         format="->iterate"/>
+    <behavior xsi:type="ed:OutlineBehavior">
+      <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//LoopExpCS/variable1"/>
+      <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//LoopExpCS/variable2"/>
+      <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CallExpCS/source"/>
+      <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//LoopExpCS/body"/>
+    </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//IteratorExpCS">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/IteratorExp.gif"
         format="->iterator"/>
+    <behavior xsi:type="ed:OutlineBehavior">
+      <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//LoopExpCS/variable1"/>
+      <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//LoopExpCS/variable2"/>
+      <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CallExpCS/source"/>
+      <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//LoopExpCS/body"/>
+    </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//LetExpCS">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/LetExp.gif"
@@ -493,6 +504,9 @@
         format="{0}{1}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//VariableExpCS/simpleNameCS"/>
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//VariableExpCS/isMarkedPreCS"/>
+    </behavior>
+    <behavior xsi:type="ed:OutlineBehavior">
+      <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//VariableExpCS/arguments"/>
     </behavior>
   </node>
 </ed:EditorDefinition>
