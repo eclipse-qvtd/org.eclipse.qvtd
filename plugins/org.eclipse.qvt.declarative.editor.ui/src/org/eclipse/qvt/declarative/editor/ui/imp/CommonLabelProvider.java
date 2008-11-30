@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.12 2008/11/29 15:42:53 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.13 2008/11/30 13:56:43 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -230,8 +230,17 @@ public abstract class CommonLabelProvider implements ILabelProvider
 	}
 	
 	public Image getImage(Object element) {
+		String imageName = null;
+		if (element instanceof ModelTreeNode) {
+			ModelTreeNode treeNode = (ModelTreeNode)element;
+			int category = treeNode.getCategory();
+			OutlineGroup outlineGroup = getEditorDefinition().getOutlineGroup(category);
+			if (outlineGroup != null)
+				imageName = outlineGroup.getImage();		
+		}
 		Object node = getASTorCSTNode(element);
-		String imageName = getImageName(node);
+		if (imageName == null)
+			imageName = getImageName(node);
 		if (imageName == null)
 			return null;
 		Image image = getImage(getPlugin().getBundle(), imageName);
