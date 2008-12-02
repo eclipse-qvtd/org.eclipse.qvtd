@@ -33,7 +33,7 @@
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
       <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Variable.gif"
-          name="&lt;variable>">
+          name="variables:">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTRelation#//Relation/variable"/>
       </elements>
       <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTBase#//Rule/domain"/>
@@ -114,7 +114,7 @@
           name="operations:">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/emf/2002/Ecore#//EClass/eOperations"/>
       </elements>
-      <elements xsi:type="ed:OutlineGroup" name="" hidden="true">
+      <elements xsi:type="ed:OutlineGroup" hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTBase#//Transformation/rule"/>
       </elements>
     </behavior>
@@ -134,7 +134,7 @@
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
       <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ConditionQuery.gif"
-          name="" hidden="true">
+          hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTTemplate#//TemplateExp/where"/>
       </elements>
       <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTTemplate#//CollectionTemplateExp/member"/>
@@ -150,7 +150,7 @@
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
       <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ConditionQuery.gif"
-          name="" hidden="true">
+          hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTTemplate#//TemplateExp/where"/>
       </elements>
       <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTTemplate#//ObjectTemplateExp/part"/>
@@ -185,7 +185,7 @@
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTRelationcst#//DefaultValueCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtcore.edit/icons/full/obj16/BottomPattern.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/RelationDomainAssignment.gif"
         format="Bottom"/>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTRelationcst#//DomainCS">
@@ -283,16 +283,16 @@
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
       <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Variable.gif"
-          name="variables">
+          name="variables:">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTRelationcst#//RelationCS/varDeclaration"/>
       </elements>
       <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTRelationcst#//RelationCS/domain"/>
       <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/When.gif"
-          name="" hidden="true">
+          hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTRelationcst#//RelationCS/when"/>
       </elements>
       <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/Where.gif"
-          name="" hidden="true">
+          hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTRelationcst#//RelationCS/where"/>
       </elements>
     </behavior>
@@ -334,7 +334,7 @@
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTRelationcst#//WhenCS">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Variable.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/When.gif"
         format="when">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTRelationcst#//VarDeclarationCS/varDeclarationId"
           separator=","/>
@@ -343,7 +343,7 @@
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTRelationcst#//WhereCS">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Variable.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtrelation.edit/icons/full/obj16/Where.gif"
         format="where">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTRelationcst#//VarDeclarationCS/varDeclarationId"
           separator=","/>
