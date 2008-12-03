@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonTextEditor.java,v 1.6 2008/11/19 21:49:25 ewillink Exp $
+ * $Id: CommonTextEditor.java,v 1.7 2008/12/03 21:53:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -29,6 +29,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -145,11 +146,13 @@ public class CommonTextEditor extends UniversalEditor implements ITextEditorWith
 	}
 	
 	protected Object getASTNode(ISelection selection) {
+		CommonParseController parseController = getParseController();
+		Resource ast = parseController.getCurrentAst().getAST();
 		Object node = getCSTNode((TextSelection) selection);
 		if (node instanceof CSTNode) {
 			for (Object cstNode = node; cstNode instanceof CSTNode; cstNode = ((EObject) cstNode).eContainer()) {
 				node = ((CSTNode)cstNode).getAst();
-				if (node != null)
+				if ((node != null) && (node instanceof EObject) && (((EObject)node).eResource() == ast))
 					break;
 			}
 		}
