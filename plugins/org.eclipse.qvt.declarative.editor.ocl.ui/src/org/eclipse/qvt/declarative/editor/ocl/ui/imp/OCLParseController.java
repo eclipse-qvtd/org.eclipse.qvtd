@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLParseController.java,v 1.4 2008/12/04 07:51:16 ewillink Exp $
+ * $Id: OCLParseController.java,v 1.5 2008/12/04 09:03:35 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui.imp;
 
@@ -41,6 +41,9 @@ public class OCLParseController extends CommonParseController
 	};
 	
 	public static final String[] oclIdentifierKeywords = new String[] {
+		"attr",
+		"oper",
+
 		"allInstances",
 		"oclIsKindOf",
 		"oclIsTypeOf",
