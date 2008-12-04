@@ -12,12 +12,14 @@
  * 
  * </copyright>
  *
- * $Id: QVTcParseController.java,v 1.3 2008/08/24 18:58:34 ewillink Exp $
+ * $Id: QVTcParseController.java,v 1.4 2008/12/04 07:51:26 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui.imp;
 
+import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLParseController;
 import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcCreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
+import org.eclipse.qvt.declarative.editor.ui.imp.ICommonKeyword;
 import org.eclipse.qvt.declarative.parser.qvtcore.QVTcLexer;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.QVTcCSTPackage;
 
@@ -26,6 +28,12 @@ public class QVTcParseController extends CommonParseController
 	public QVTcParseController() {
 		super(QVTcCreationFactory.INSTANCE);
 		QVTcCSTPackage.eINSTANCE.getClass();
+	}
+
+	@Override
+	protected ICommonKeyword createKeyword(String text) {
+		ICommonKeyword keyword = OCLParseController.createOCLKeyword(text);
+		return keyword != null ? keyword : super.createKeyword(text);
 	}
 
 	@Override
