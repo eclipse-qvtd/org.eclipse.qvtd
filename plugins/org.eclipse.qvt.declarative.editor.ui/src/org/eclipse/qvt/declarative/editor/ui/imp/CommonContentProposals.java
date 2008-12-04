@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.7 2008/11/19 21:54:04 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.8 2008/12/04 07:50:55 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -101,17 +101,27 @@ public class CommonContentProposals
 				for (TreeIterator<EObject> i = resource.getAllContents(); i.hasNext(); )
 					addIdentifierProposalCandidate(usages, i.next());
 		}
-		if (map.isEmpty())
-			map.put(null, new CommonNonProposal("no completion exists for '" + prefixAtOffset + "' " + cstNode.getClass().getSimpleName() + " " + astNode.getClass().getSimpleName(), "", offset));
+	}
+
+	protected void addIdentifierKeywordProposals(CSTNode cstNode) {
+		for (ICommonKeyword keyword : commonParseController.getKeywords()) {
+			if (keyword.isIdentifier(cstNode)) {
+				String keywordText = keyword.getText();
+				if (offset < tokenAtOffset.getStartOffset())
+					map.put(keyword, new CommonProposal(keywordText, offset, keywordText, "", offset, null));
+				else if (keywordText.startsWith(prefixAtOffset))
+					map.put(keyword, new CommonProposal(keywordText, tokenAtOffset.getStartOffset(), keywordText, getTokenAtOffsetString(), offset, null));
+			}
+		}
 	}
 
 	protected void addKeywordProposals() {
-		Image image = null;		// FIXME
-		for (String keyword : commonParseController.getKeywords()) {
+		for (ICommonKeyword keyword : commonParseController.getKeywords()) {
+			String keywordText = keyword.getText();
 			if (offset < tokenAtOffset.getStartOffset())
-				map.put(keyword, new CommonProposal(keyword, offset, keyword, "", offset, image));
-			else if (keyword.startsWith(prefixAtOffset))
-				map.put(keyword, new CommonProposal(keyword, tokenAtOffset.getStartOffset(), keyword, getTokenAtOffsetString(), offset, image));
+				map.put(keyword, new CommonProposal(keywordText, offset, keywordText, "", offset, null));
+			else if (keywordText.startsWith(prefixAtOffset))
+				map.put(keyword, new CommonProposal(keywordText, tokenAtOffset.getStartOffset(), keywordText, getTokenAtOffsetString(), offset, null));
 		}
 	}
 
@@ -189,14 +199,19 @@ public class CommonContentProposals
 						proposalDebug.println("No CST node");
 					map.put(null, new CommonNonProposal("no info available due to Syntax error(s)", "", offset));
 				}
-				else
+				else {
 					addIdentifierProposals(node);
+					addIdentifierKeywordProposals(node);
+					if (map.isEmpty())
+						map.put(null, new CommonNonProposal("no completion exists for '" + prefixAtOffset + "' " + node.getClass().getSimpleName() + " " + node.getAst().getClass().getSimpleName(), "", offset));
+				}
 				break;
 			}
 			case ERROR: {
 				CommonNodeLocator locator = commonParseController.getCreationFactory().createNodeLocator(parsedResult.getRootEnvironment());
 				CSTNode node = (CSTNode) locator.findNode(cstRoot, tokenAtOffset.getStartOffset(), tokenAtOffset.getEndOffset());
 				addIdentifierProposals(node);
+				addIdentifierKeywordProposals(node);
 				addKeywordProposals();
 				if (map.isEmpty())
 					map.put(null, new CommonNonProposal("no completion exists for keyword: " + prefixAtOffset, "", offset));
@@ -205,8 +220,10 @@ public class CommonContentProposals
 			case KEYWORD: {
 				CommonNodeLocator locator = commonParseController.getCreationFactory().createNodeLocator(parsedResult.getRootEnvironment());
 				CSTNode node = (CSTNode) locator.findNode(cstRoot, tokenAtOffset.getStartOffset(), tokenAtOffset.getEndOffset());
-				if ((node instanceof IdentifierCS) || (node instanceof SimpleNameCS))		// FIXME What about PathNameCS and IdentifiedCS ...
+				if ((node instanceof IHasName) || (node instanceof SimpleNameCS)) {
 					addIdentifierProposals(node);
+					addIdentifierKeywordProposals(node);
+				}
 				else
 					addKeywordProposals();
 				if (map.isEmpty())

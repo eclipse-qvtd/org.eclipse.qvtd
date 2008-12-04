@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.15 2008/11/19 21:52:43 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.16 2008/12/04 07:50:55 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -317,8 +317,7 @@ public abstract class CommonParseController implements IParseController
     protected IPath fFilePath;
     protected IMessageHandler handler;   
     protected ParsedResult fCurrentAst;
-//    private String fKeywords[];
-    private List<String> keywords = null;
+    private List<ICommonKeyword> keywords = null;
     private boolean fIsKeyword[];
     private final CommonAnnotationTypeInfo fSimpleAnnotationTypeInfo = new CommonAnnotationTypeInfo();
 	private final String id;
@@ -339,14 +338,12 @@ public abstract class CommonParseController implements IParseController
             try {
                 String tokenKindNames[]= getParser().orderedTerminalSymbols();
                 this.fIsKeyword= new boolean[tokenKindNames.length];
-//                this.fKeywords= new String[tokenKindNames.length];
-                this.keywords = new ArrayList<String>();
+                this.keywords = new ArrayList<ICommonKeyword>();
                 int[] keywordKinds= getKeywordKinds();
                 for(int i= 1; i < keywordKinds.length; i++) {
                     int index= getParser().mapKind(keywordKinds[i]);
                     fIsKeyword[index]= true;
-//                    fKeywords[index]= tokenKindNames[index];
-                    keywords.add(tokenKindNames[index]);
+                    keywords.add(createKeyword(tokenKindNames[index]));
                 }
             } catch (NullPointerException e) {
             	QVTEditorPlugin.logError(getClass().getSimpleName() + ".cacheKeywordsOnce():  NullPointerException; trapped and discarded", e);
@@ -358,6 +355,10 @@ public abstract class CommonParseController implements IParseController
 		ResourceSet resourceSet = new ResourceSetImpl();
 		URI astURI = fileHandle.getURI().appendFileExtension(creationFactory.getXMLExtension());
 		return creationFactory.createFileEnvironment(fileHandle, resourceSet, astURI);
+	}
+
+	protected ICommonKeyword createKeyword(String text) {
+		return new CommonKeyword(text);
 	}
 
 	protected ProblemHandler createProblemHandler(ICSTFileEnvironment environment) {
@@ -423,7 +424,7 @@ public abstract class CommonParseController implements IParseController
 		return getLexer().getKeywordKinds();
 	}
 
-	public List<String> getKeywords() {
+	public List<ICommonKeyword> getKeywords() {
 		return keywords;
 	}
 
