@@ -12,12 +12,12 @@
  * 
  * </copyright>
  *
- * $Id: QVTrContentProposer.java,v 1.3 2008/10/10 13:33:51 ewillink Exp $
+ * $Id: QVTrContentProposer.java,v 1.4 2008/12/05 22:18:26 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp;
 
-import org.eclipse.qvt.declarative.editor.ui.imp.CommonContentProposer;
+import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLContentProposer;
 
-public class QVTrContentProposer  extends CommonContentProposer
+public class QVTrContentProposer extends OCLContentProposer
 {
 }
