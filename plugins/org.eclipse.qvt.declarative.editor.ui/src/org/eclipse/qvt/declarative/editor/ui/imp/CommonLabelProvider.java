@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.13 2008/11/30 13:56:43 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.14 2008/12/05 22:17:22 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -51,6 +51,7 @@ import org.eclipse.qvt.declarative.editor.LabelBehavior;
 import org.eclipse.qvt.declarative.editor.OutlineGroup;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.util.ImageProvider;
+import org.eclipse.qvt.declarative.editor.util.TextProvider;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.Bundle;
@@ -116,10 +117,22 @@ public abstract class CommonLabelProvider implements ILabelProvider
 				formatEcoreLabelElementStep(s, nextObject, labelElement, step+1);
 		}
 		else {
+			TextProvider textProvider = null;
+			try {
+				Class<TextProvider> textProviderClass = labelElement.getTextProvider();
+				textProvider = textProviderClass != null ? textProviderClass.newInstance() : null;
+			} catch (Exception e) {
+			}
 			EStructuralFeature feature = labelElement.getEnd();
 			if (object instanceof EObject) {
-				if (feature == null)
-					s.append("<" + ((EObject)object).eClass().getName() + ">");
+				if (feature == null) {
+					String text = null;
+					if (textProvider != null)
+						text = textProvider.getText(object);
+					if (text == null)
+						s.append("<" + ((EObject)object).eClass().getName() + ">");
+					s.append(text);
+				}
 				else {
 					Object nextObject = checkedGet(object, feature);
 					if (feature.isMany()) {
@@ -127,12 +140,23 @@ public abstract class CommonLabelProvider implements ILabelProvider
 						for (Object childObject : (Collection<?>)nextObject) {
 							if (!isFirst)
 								s.append(labelElement.getSeparator());
-							s.append(formatObject(childObject));
+							String text = null;
+							if (textProvider != null)
+								text = textProvider.getText(childObject);
+							if (text == null)
+								text = formatObject(childObject);
+							s.append(text);
 							isFirst = false;
 						}
 					}
-					else
-						s.append(formatObject(nextObject));
+					else {
+						String text = null;
+						if (textProvider != null)
+							text = textProvider.getText(nextObject);
+						if (text == null)
+							text = formatObject(nextObject);
+						s.append(text);
+					}
 				}
 			}
 			else
