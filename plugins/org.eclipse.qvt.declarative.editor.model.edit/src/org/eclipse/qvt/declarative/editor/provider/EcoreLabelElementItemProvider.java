@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EcoreLabelElementItemProvider.java,v 1.2 2008/11/29 12:44:36 ewillink Exp $
+ * $Id: EcoreLabelElementItemProvider.java,v 1.3 2008/12/05 22:20:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -78,6 +78,7 @@ public class EcoreLabelElementItemProvider
 			addPrefixPropertyDescriptor(object);
 			addSeparatorPropertyDescriptor(object);
 			addSuffixPropertyDescriptor(object);
+			addTextProviderPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -215,6 +216,28 @@ public class EcoreLabelElementItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Text Provider feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTextProviderPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EcoreLabelElement_textProvider_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EcoreLabelElement_textProvider_feature", "_UI_EcoreLabelElement_type"),
+				 EditorPackage.Literals.ECORE_LABEL_ELEMENT__TEXT_PROVIDER,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns EcoreLabelElement.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -273,6 +296,7 @@ public class EcoreLabelElementItemProvider
 			case EditorPackage.ECORE_LABEL_ELEMENT__PREFIX:
 			case EditorPackage.ECORE_LABEL_ELEMENT__SEPARATOR:
 			case EditorPackage.ECORE_LABEL_ELEMENT__SUFFIX:
+			case EditorPackage.ECORE_LABEL_ELEMENT__TEXT_PROVIDER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
