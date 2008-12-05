@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackageImpl.java,v 1.9 2008/11/30 22:06:03 ewillink Exp $
+ * $Id: EditorPackageImpl.java,v 1.10 2008/12/05 22:20:01 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -41,6 +41,7 @@ import org.eclipse.qvt.declarative.editor.OutlineBehavior;
 import org.eclipse.qvt.declarative.editor.OutlineElement;
 import org.eclipse.qvt.declarative.editor.OutlineGroup;
 import org.eclipse.qvt.declarative.editor.util.ImageProvider;
+import org.eclipse.qvt.declarative.editor.util.TextProvider;
 
 /**
  * <!-- begin-user-doc -->
@@ -153,6 +154,13 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * @generated
 	 */
 	private EDataType imageProviderEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType textProviderEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -340,6 +348,15 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 */
 	public EAttribute getEcoreLabelElement_Suffix() {
 		return (EAttribute)ecoreLabelElementEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEcoreLabelElement_TextProvider() {
+		return (EAttribute)ecoreLabelElementEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -599,6 +616,15 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getTextProvider() {
+		return textProviderEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EditorFactory getEditorFactory() {
 		return (EditorFactory)getEFactoryInstance();
 	}
@@ -639,6 +665,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		createEAttribute(ecoreLabelElementEClass, ECORE_LABEL_ELEMENT__PREFIX);
 		createEAttribute(ecoreLabelElementEClass, ECORE_LABEL_ELEMENT__SEPARATOR);
 		createEAttribute(ecoreLabelElementEClass, ECORE_LABEL_ELEMENT__SUFFIX);
+		createEAttribute(ecoreLabelElementEClass, ECORE_LABEL_ELEMENT__TEXT_PROVIDER);
 
 		ecoreNodeEClass = createEClass(ECORE_NODE);
 		createEReference(ecoreNodeEClass, ECORE_NODE__ELEMENT);
@@ -678,6 +705,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		// Create data types
 		imageProviderEDataType = createEDataType(IMAGE_PROVIDER);
+		textProviderEDataType = createEDataType(TEXT_PROVIDER);
 	}
 
 	/**
@@ -739,6 +767,10 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		initEAttribute(getEcoreLabelElement_Prefix(), theEcorePackage.getEString(), "prefix", "", 0, 1, EcoreLabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEcoreLabelElement_Separator(), theEcorePackage.getEString(), "separator", " ", 0, 1, EcoreLabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEcoreLabelElement_Suffix(), theEcorePackage.getEString(), "suffix", "", 0, 1, EcoreLabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		EGenericType g1 = createEGenericType(ecorePackage.getEJavaClass());
+		EGenericType g2 = createEGenericType(this.getTextProvider());
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getEcoreLabelElement_TextProvider(), g1, "textProvider", null, 0, 1, EcoreLabelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(ecoreNodeEClass, EcoreNode.class, "EcoreNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEcoreNode_Element(), theEcorePackage.getEClassifier(), null, "element", null, 1, 1, EcoreNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -759,8 +791,8 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		initEClass(labelBehaviorEClass, LabelBehavior.class, "LabelBehavior", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLabelBehavior_Image(), theEcorePackage.getEString(), "image", null, 0, 1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		EGenericType g1 = createEGenericType(ecorePackage.getEJavaClass());
-		EGenericType g2 = createEGenericType(this.getImageProvider());
+		g1 = createEGenericType(ecorePackage.getEJavaClass());
+		g2 = createEGenericType(this.getImageProvider());
 		g1.getETypeArguments().add(g2);
 		initEAttribute(getLabelBehavior_ImageProvider(), g1, "imageProvider", null, 0, 1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabelBehavior_Format(), theEcorePackage.getEString(), "format", "", 1, 1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -781,6 +813,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		// Initialize data types
 		initEDataType(imageProviderEDataType, ImageProvider.class, "ImageProvider", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(textProviderEDataType, TextProvider.class, "TextProvider", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

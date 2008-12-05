@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorFactoryImpl.java,v 1.3 2008/11/28 17:25:34 ewillink Exp $
+ * $Id: EditorFactoryImpl.java,v 1.4 2008/12/05 22:20:01 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.qvt.declarative.editor.*;
 import org.eclipse.qvt.declarative.editor.util.ImageProvider;
+import org.eclipse.qvt.declarative.editor.util.TextProvider;
 import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
 import org.eclipse.qvt.declarative.editor.EcoreNode;
 import org.eclipse.qvt.declarative.editor.EditorDefinition;
@@ -104,6 +105,8 @@ public class EditorFactoryImpl extends EFactoryImpl implements EditorFactory {
 		switch (eDataType.getClassifierID()) {
 			case EditorPackage.IMAGE_PROVIDER:
 				return createImageProviderFromString(eDataType, initialValue);
+			case EditorPackage.TEXT_PROVIDER:
+				return createTextProviderFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -119,6 +122,8 @@ public class EditorFactoryImpl extends EFactoryImpl implements EditorFactory {
 		switch (eDataType.getClassifierID()) {
 			case EditorPackage.IMAGE_PROVIDER:
 				return convertImageProviderToString(eDataType, instanceValue);
+			case EditorPackage.TEXT_PROVIDER:
+				return convertTextProviderToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -239,6 +244,24 @@ public class EditorFactoryImpl extends EFactoryImpl implements EditorFactory {
 	 * @generated
 	 */
 	public String convertImageProviderToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TextProvider createTextProviderFromString(EDataType eDataType, String initialValue) {
+		return (TextProvider)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertTextProviderToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

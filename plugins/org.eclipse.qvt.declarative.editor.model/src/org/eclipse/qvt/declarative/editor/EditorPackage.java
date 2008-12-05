@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackage.java,v 1.8 2008/11/29 12:44:33 ewillink Exp $
+ * $Id: EditorPackage.java,v 1.9 2008/12/05 22:20:00 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -237,13 +237,22 @@ public interface EditorPackage extends EPackage {
 	int ECORE_LABEL_ELEMENT__SUFFIX = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Text Provider</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_LABEL_ELEMENT__TEXT_PROVIDER = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Ecore Label Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ECORE_LABEL_ELEMENT_FEATURE_COUNT = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 6;
+	int ECORE_LABEL_ELEMENT_FEATURE_COUNT = ABSTRACT_LABEL_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.EditorDefinitionImpl <em>Definition</em>}' class.
@@ -625,6 +634,16 @@ public interface EditorPackage extends EPackage {
 	int IMAGE_PROVIDER = 14;
 
 	/**
+	 * The meta object id for the '<em>Text Provider</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.editor.util.TextProvider
+	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getTextProvider()
+	 * @generated
+	 */
+	int TEXT_PROVIDER = 15;
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.AbstractLabelElement <em>Abstract Label Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -761,6 +780,17 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEcoreLabelElement_Suffix();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getTextProvider <em>Text Provider</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Text Provider</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.EcoreLabelElement#getTextProvider()
+	 * @see #getEcoreLabelElement()
+	 * @generated
+	 */
+	EAttribute getEcoreLabelElement_TextProvider();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.EcoreNode <em>Ecore Node</em>}'.
@@ -1062,6 +1092,17 @@ public interface EditorPackage extends EPackage {
 	EDataType getImageProvider();
 
 	/**
+	 * Returns the meta object for data type '{@link org.eclipse.qvt.declarative.editor.util.TextProvider <em>Text Provider</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Text Provider</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.util.TextProvider
+	 * @model instanceClass="org.eclipse.qvt.declarative.editor.util.TextProvider"
+	 * @generated
+	 */
+	EDataType getTextProvider();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1196,6 +1237,14 @@ public interface EditorPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ECORE_LABEL_ELEMENT__SUFFIX = eINSTANCE.getEcoreLabelElement_Suffix();
+
+		/**
+		 * The meta object literal for the '<em><b>Text Provider</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ECORE_LABEL_ELEMENT__TEXT_PROVIDER = eINSTANCE.getEcoreLabelElement_TextProvider();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.editor.impl.EcoreNodeImpl <em>Ecore Node</em>}' class.
@@ -1440,6 +1489,16 @@ public interface EditorPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType IMAGE_PROVIDER = eINSTANCE.getImageProvider();
+
+		/**
+		 * The meta object literal for the '<em>Text Provider</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.editor.util.TextProvider
+		 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getTextProvider()
+		 * @generated
+		 */
+		EDataType TEXT_PROVIDER = eINSTANCE.getTextProvider();
 
 	}
 

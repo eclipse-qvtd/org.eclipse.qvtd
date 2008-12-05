@@ -24,6 +24,11 @@
         defaultValueLiteral=" "/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="suffix" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
         defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="textProvider" unique="false">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+        <eTypeArguments eClassifier="#//TextProvider"/>
+      </eGenericType>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EcoreNode" eSuperTypes="#//AbstractNode">
     <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
@@ -82,4 +87,5 @@
         defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="ImageProvider" instanceClassName="org.eclipse.qvt.declarative.editor.util.ImageProvider"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="TextProvider" instanceClassName="org.eclipse.qvt.declarative.editor.util.TextProvider"/>
 </ecore:EPackage>

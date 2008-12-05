@@ -12,13 +12,14 @@
  * 
  * </copyright>
  *
- * $Id: EcoreLabelElement.java,v 1.2 2008/11/29 12:44:33 ewillink Exp $
+ * $Id: EcoreLabelElement.java,v 1.3 2008/12/05 22:20:00 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.qvt.declarative.editor.util.TextProvider;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,6 +35,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  *   <li>{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getPrefix <em>Prefix</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getSeparator <em>Separator</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getSuffix <em>Suffix</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getTextProvider <em>Text Provider</em>}</li>
  * </ul>
  * </p>
  *
@@ -191,5 +193,31 @@ public interface EcoreLabelElement extends AbstractLabelElement {
 	 * @generated
 	 */
 	void setSuffix(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Text Provider</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Text Provider</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Text Provider</em>' attribute.
+	 * @see #setTextProvider(Class)
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getEcoreLabelElement_TextProvider()
+	 * @model unique="false"
+	 * @generated
+	 */
+	Class<TextProvider> getTextProvider();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.EcoreLabelElement#getTextProvider <em>Text Provider</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Text Provider</em>' attribute.
+	 * @see #getTextProvider()
+	 * @generated
+	 */
+	void setTextProvider(Class<TextProvider> value);
 
 } // LabelElement

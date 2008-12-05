@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EcoreLabelElementImpl.java,v 1.2 2008/11/29 12:44:33 ewillink Exp $
+ * $Id: EcoreLabelElementImpl.java,v 1.3 2008/12/05 22:20:01 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
+import org.eclipse.qvt.declarative.editor.util.TextProvider;
 import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
 
 /**
@@ -42,6 +43,7 @@ import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl#getPrefix <em>Prefix</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl#getSeparator <em>Separator</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl#getSuffix <em>Suffix</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.EcoreLabelElementImpl#getTextProvider <em>Text Provider</em>}</li>
  * </ul>
  * </p>
  *
@@ -147,6 +149,16 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 	 * @ordered
 	 */
 	protected String suffix = SUFFIX_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTextProvider() <em>Text Provider</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTextProvider()
+	 * @generated
+	 * @ordered
+	 */
+	protected Class<TextProvider> textProvider;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -306,6 +318,27 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Class<TextProvider> getTextProvider() {
+		return textProvider;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTextProvider(Class<TextProvider> newTextProvider) {
+		Class<TextProvider> oldTextProvider = textProvider;
+		textProvider = newTextProvider;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.ECORE_LABEL_ELEMENT__TEXT_PROVIDER, oldTextProvider, textProvider));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -322,6 +355,8 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 				return getSeparator();
 			case EditorPackage.ECORE_LABEL_ELEMENT__SUFFIX:
 				return getSuffix();
+			case EditorPackage.ECORE_LABEL_ELEMENT__TEXT_PROVIDER:
+				return getTextProvider();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -354,6 +389,9 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 			case EditorPackage.ECORE_LABEL_ELEMENT__SUFFIX:
 				setSuffix((String)newValue);
 				return;
+			case EditorPackage.ECORE_LABEL_ELEMENT__TEXT_PROVIDER:
+				setTextProvider((Class<TextProvider>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -384,6 +422,9 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 			case EditorPackage.ECORE_LABEL_ELEMENT__SUFFIX:
 				setSuffix(SUFFIX_EDEFAULT);
 				return;
+			case EditorPackage.ECORE_LABEL_ELEMENT__TEXT_PROVIDER:
+				setTextProvider((Class<TextProvider>)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -408,6 +449,8 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 				return SEPARATOR_EDEFAULT == null ? separator != null : !SEPARATOR_EDEFAULT.equals(separator);
 			case EditorPackage.ECORE_LABEL_ELEMENT__SUFFIX:
 				return SUFFIX_EDEFAULT == null ? suffix != null : !SUFFIX_EDEFAULT.equals(suffix);
+			case EditorPackage.ECORE_LABEL_ELEMENT__TEXT_PROVIDER:
+				return textProvider != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -430,6 +473,8 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 		result.append(separator);
 		result.append(", suffix: ");
 		result.append(suffix);
+		result.append(", textProvider: ");
+		result.append(textProvider);
 		result.append(')');
 		return result.toString();
 	}
