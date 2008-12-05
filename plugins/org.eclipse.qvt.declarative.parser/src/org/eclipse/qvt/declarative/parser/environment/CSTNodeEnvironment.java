@@ -77,9 +77,9 @@ import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
  * @param <AST> The type of the associated AST node
  * @param <CST> The type of the associated CST node
  */
-public abstract class CSTNodeEnvironment<E extends ICSTEnvironment, AST extends Notifier, CST extends CSTNode> extends CSTEnvironment<E> implements ICSTNodeEnvironment, Adapter
+public abstract class CSTNodeEnvironment<E extends ICSTNodeEnvironment, AST extends Notifier, CST extends CSTNode> extends CSTEnvironment<E> implements ICSTNodeEnvironment, Adapter
 {	
-	public static <E extends ICSTEnvironment> E getEnvironmentFromAST(Notifier ast, Class<E> envClass) {
+	public static <E extends ICSTNodeEnvironment> E getEnvironmentFromAST(Notifier ast, Class<E> envClass) {
 		if (ast != null) {
 			@SuppressWarnings("unchecked")
 			E adapter = (E) EcoreUtil.getAdapter(ast.eAdapters(), envClass);
@@ -88,7 +88,7 @@ public abstract class CSTNodeEnvironment<E extends ICSTEnvironment, AST extends 
 			return null;
 	}
 
-	public static <E extends ICSTEnvironment> E getEnvironmentFromCST(CSTNode cst, Class<E> envClass) {
+	public static <E extends ICSTNodeEnvironment> E getEnvironmentFromCST(CSTNode cst, Class<E> envClass) {
 		Object ast = cst.getAst();
 		if (ast instanceof Notifier) {
 			@SuppressWarnings("unchecked")
