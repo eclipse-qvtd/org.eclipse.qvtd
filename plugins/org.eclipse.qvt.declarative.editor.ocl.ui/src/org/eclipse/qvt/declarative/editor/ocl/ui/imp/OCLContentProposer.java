@@ -12,12 +12,17 @@
  * 
  * </copyright>
  *
- * $Id: OCLContentProposer.java,v 1.3 2008/10/10 13:33:57 ewillink Exp $
+ * $Id: OCLContentProposer.java,v 1.4 2008/12/05 22:18:25 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui.imp;
 
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonContentProposer;
+import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
 
-public class OCLContentProposer  extends CommonContentProposer
+public class OCLContentProposer extends CommonContentProposer
 {
+	@Override
+	protected OCLContentProposals createProposals(CommonParseController commonParseController, int offset) {
+		return new OCLContentProposals(commonParseController, offset);
+	}
 }
