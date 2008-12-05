@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.8 2008/12/04 07:50:55 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.9 2008/12/05 22:18:28 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -20,8 +20,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import lpg.lpgjavaruntime.ErrorToken;
 import lpg.lpgjavaruntime.IToken;
@@ -163,10 +165,18 @@ public class CommonContentProposals
 			return false;
 		for (EStructuralFeature requiredUsage : usages) {
 			EClassifier requiredType = requiredUsage.getEType();
-			EClass requiredClass = requiredType instanceof EClass ? (EClass)requiredType : null;
+			Set<EClass> completableClasses = getCompletableTypes(requiredType);
+			if (completableClasses == null)
+				return false;
 			EClass eClass = eObject.eClass();
-			boolean okType = (requiredType == eClass) || ((requiredClass != null) && requiredClass.isSuperTypeOf(eClass));
-			if (!okType)
+			boolean completable = false;
+			for (EClass completableClass : completableClasses) {
+				if ((requiredType == completableClass) || completableClass.isSuperTypeOf(eClass)) {
+					completable = true;
+					break;
+				}
+			}
+			if (!completable)
 				return false;
 		}
 		return true;
@@ -265,6 +275,13 @@ public class CommonContentProposals
 				usages.add(containingFeature);
 		}
 		return usages;
+	}
+
+	public Set<EClass> getCompletableTypes(EClassifier requiredType) {
+		Set<EClass> completableClasses = new HashSet<EClass>();
+		if (requiredType instanceof EClass)
+			completableClasses.add((EClass)requiredType);
+		return completableClasses;
 	}
 
 	protected String getName(EObject eObject) {
