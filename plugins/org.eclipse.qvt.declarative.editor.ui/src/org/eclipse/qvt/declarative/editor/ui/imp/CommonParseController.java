@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.16 2008/12/04 07:50:55 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.17 2008/12/11 20:34:45 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -361,6 +361,10 @@ public abstract class CommonParseController implements IParseController
 		return new CommonKeyword(text);
 	}
 
+	protected ParsedResult createParsedResult(ICSTFileEnvironment fileEnvironment) {
+		return new ParsedResult(fileEnvironment);
+	}
+
 	protected ProblemHandler createProblemHandler(ICSTFileEnvironment environment) {
 		if (handler instanceof ProblemHandler) {
 			((ProblemHandler)handler).setParser(environment.getParser());
@@ -525,7 +529,7 @@ public abstract class CommonParseController implements IParseController
 		fileEnvironment.setProblemHandler(createProblemHandler(fileEnvironment));
 		ParsedResult newResult = null;
 		try {
-			ParsedResult workingResult = new ParsedResult(fileEnvironment);
+			ParsedResult workingResult = createParsedResult(fileEnvironment);
 			workingResult.parse(new StringReader(contents), progressMonitor);
 			newResult = workingResult;
 		} catch (IOException e) {
