@@ -44,6 +44,19 @@ public abstract class QVTcPatternEnvironment<AST extends CorePattern> extends QV
 		super(domainEnvironment, astNode, patternCS);
 	}
 
+	public void computeBindsTo() {
+		List<Variable> bindsTo = ast.getBindsTo();
+		for (QVTcMappingEnvironment<?> mappingEnv : getParentEnvironment().getMappingEnvironment().getMappingEnvironmentClosure()) {
+			QVTcPatternEnvironment<?> env = mappingEnv.getPatternEnvironment(this);
+			if ((env != this) && (env != null)) {
+				for (Variable var : env.getASTNode().getBindsTo()) {
+					if (!bindsTo.contains(var))
+						bindsTo.add(var);
+				}	
+			}
+		}
+	}
+
 	public Variable createUnrealizedVariableDefinition(String name, EClassifier type, CSTNode cstNode) {
 		Variable variable = variableDefinitions.get(name);
 		if (variable != null) {
@@ -61,6 +74,7 @@ public abstract class QVTcPatternEnvironment<AST extends CorePattern> extends QV
 			variableDefinitions.put(name, variable);
 			ast.getVariable().add(variable);
 			addElement(name, variable, true);
+			ast.getBindsTo().add(variable);
 		}
 		return variable;
 	}

@@ -58,6 +58,7 @@ public class QVTcBottomPatternEnvironment extends QVTcPatternEnvironment<BottomP
 			variableDefinitions.put(name, variable);
 			ast.getRealizedVariable().add(realizedVariable);
 			addElement(name, variable, true);
+			ast.getBindsTo().add(realizedVariable);
 		}
 		return variable;
 	}

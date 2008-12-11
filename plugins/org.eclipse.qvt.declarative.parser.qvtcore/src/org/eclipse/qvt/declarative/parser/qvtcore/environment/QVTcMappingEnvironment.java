@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
+import org.eclipse.qvt.declarative.ecore.QVTCore.CoreDomain;
 import org.eclipse.qvt.declarative.ecore.QVTCore.Mapping;
 import org.eclipse.qvt.declarative.ecore.QVTCore.QVTCoreFactory;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
@@ -106,6 +107,24 @@ public abstract class QVTcMappingEnvironment<P extends IQVTcNodeEnvironment> ext
 
 	public QVTcMiddleEnvironment getMiddleEnvironment() {
 		return middleEnvironment;
+	}
+
+	public QVTcPatternEnvironment<?> getPatternEnvironment(QVTcPatternEnvironment<?> patternEnv) {
+		QVTcAreaEnvironment<?> areaEnv = patternEnv.getParentEnvironment();
+		QVTcAreaEnvironment<?> domainEnv = null;
+		if (areaEnv instanceof QVTcDomainEnvironment) {
+			CoreDomain domain = ((QVTcDomainEnvironment)areaEnv).getASTNode();
+			if (domain == null)
+				return null;
+			domainEnv = getDomainEnvironment(domain.getName());
+		}
+		else
+			domainEnv = getMiddleEnvironment();
+		if (domainEnv == null)
+			return null;
+		return patternEnv instanceof QVTcGuardPatternEnvironment
+				? domainEnv.getGuardPatternEnvironment()
+				: domainEnv.getBottomPatternEnvironment();
 	}
 
 	@Override public EClassifier tryLookupClassifier(List<String> names) throws LookupException {
