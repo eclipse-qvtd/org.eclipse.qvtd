@@ -20,12 +20,12 @@
   </modelParameter>
   <rule xsi:type="eqvtc:Mapping" xmi:id="ast8" name="ClassToTable">
     <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast9" name="uml" isCheckable="true" isEnforceable="false" typedModel="ast6">
-      <guardPattern xmi:id="ast10">
+      <guardPattern xmi:id="ast10" bindsTo="ast11">
         <variable xmi:id="ast11" name="p">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast12">
+      <bottomPattern xmi:id="ast12" bindsTo="ast23">
         <predicate xmi:id="ast13">
           <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast14">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -82,12 +82,12 @@
       </bottomPattern>
     </domain>
     <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast32" name="rdbms" isCheckable="true" isEnforceable="false" typedModel="ast7">
-      <guardPattern xmi:id="ast33">
+      <guardPattern xmi:id="ast33" bindsTo="ast34">
         <variable xmi:id="ast34" name="s">
           <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Schema"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast35">
+      <bottomPattern xmi:id="ast35" bindsTo="ast45 ast41">
         <predicate xmi:id="ast36">
           <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast37">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -121,7 +121,7 @@
         </realizedVariable>
       </bottomPattern>
     </domain>
-    <guardPattern xmi:id="ast46">
+    <guardPattern xmi:id="ast46" bindsTo="ast57">
       <predicate xmi:id="ast47">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast48">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -158,7 +158,7 @@
         <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TPackageToSchema"/>
       </variable>
     </guardPattern>
-    <bottomPattern xmi:id="ast58">
+    <bottomPattern xmi:id="ast58" bindsTo="ast80 ast64">
       <predicate xmi:id="ast59">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast60">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>

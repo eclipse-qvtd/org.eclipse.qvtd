@@ -1,96 +1,96 @@
 <?xml version="1.0" encoding="ASCII"?>
-<eqvtbase:Transformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtbase="http://www.eclipse.org/gmt/umlx/EQVTbase" xmlns:eqvtcore="http://www.eclipse.org/gmt/umlx/EQVTcore" xmi:id="ast0" name="umlRdbms" nsURI="http://models/redefinition.qvtc/umlRdbms" nsPrefix="umlRdbms">
+<eqvtb:Transformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtb="http://www.eclipse.org/qvt/1.0/QVTBase" xmlns:eqvtc="http://www.eclipse.org/qvt/1.0/QVTCore" xmi:id="ast1" name="umlRdbms" nsURI="http://models/redefinition.qvtc/umlRdbms" nsPrefix="umlRdbms">
   <modelParameter xmi:id="ast2" name="middle">
     <usedPackage href="TumlRdbms.ecore#/"/>
   </modelParameter>
-  <modelParameter xmi:id="ast1" name="uml">
+  <modelParameter xmi:id="ast3" name="uml">
     <usedPackage href="umlMM.emof#umlMM"/>
   </modelParameter>
-  <modelParameter xmi:id="ast10" name="rdbms">
+  <modelParameter xmi:id="ast4" name="rdbms">
     <usedPackage href="rdbmsMM.emof#rdbmsMM"/>
   </modelParameter>
-  <rule xsi:type="eqvtcore:Mapping" xmi:id="ast16" name="Map1" refinement="ast314">
-    <domain xsi:type="eqvtcore:CoreDomain" xmi:id="ast6" name="uml" isCheckable="true" isEnforceable="true" typedModel="ast1">
-      <guardPattern xmi:id="ast3">
-        <variable xmi:id="ast60" name="p1">
+  <rule xsi:type="eqvtc:Mapping" xmi:id="ast5" name="Map1" refinement="ast37">
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast6" name="uml" isCheckable="true" isEnforceable="true" typedModel="ast3">
+      <guardPattern xmi:id="ast7" bindsTo="ast8 ast9 ast10">
+        <variable xmi:id="ast8" name="p1">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
         </variable>
-        <variable xmi:id="ast80" name="p2">
+        <variable xmi:id="ast9" name="p2">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
         </variable>
-        <variable xmi:id="ast37" name="p5">
+        <variable xmi:id="ast10" name="p5">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast33">
-        <realizedVariable xmi:id="ast39" name="p1">
+      <bottomPattern xmi:id="ast11" bindsTo="ast12 ast13 ast14">
+        <realizedVariable xmi:id="ast12" name="p1">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
         </realizedVariable>
-        <realizedVariable xmi:id="ast133" name="p3">
+        <realizedVariable xmi:id="ast13" name="p3">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
         </realizedVariable>
-        <realizedVariable xmi:id="ast54" name="p4">
+        <realizedVariable xmi:id="ast14" name="p4">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
         </realizedVariable>
       </bottomPattern>
     </domain>
-    <domain xsi:type="eqvtcore:CoreDomain" xmi:id="ast4" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast10">
-      <guardPattern xmi:id="ast138"/>
-      <bottomPattern xmi:id="ast127"/>
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast15" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast4">
+      <guardPattern xmi:id="ast16"/>
+      <bottomPattern xmi:id="ast17"/>
     </domain>
-    <guardPattern xmi:id="ast44">
-      <variable xmi:id="ast8" name="p6">
+    <guardPattern xmi:id="ast18" bindsTo="ast19">
+      <variable xmi:id="ast19" name="p6">
         <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Association"/>
       </variable>
     </guardPattern>
-    <bottomPattern xmi:id="ast19"/>
-    <local xmi:id="ast191">
-      <domain xsi:type="eqvtcore:CoreDomain" xmi:id="ast110" name="uml" isCheckable="true" isEnforceable="true" typedModel="ast1">
-        <guardPattern xmi:id="ast129">
-          <variable xmi:id="ast294" name="p2">
+    <bottomPattern xmi:id="ast20"/>
+    <local xmi:id="ast21">
+      <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast22" name="uml" isCheckable="true" isEnforceable="true" typedModel="ast3">
+        <guardPattern xmi:id="ast23" bindsTo="ast24">
+          <variable xmi:id="ast24" name="p2">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
           </variable>
         </guardPattern>
-        <bottomPattern xmi:id="ast199">
-          <realizedVariable xmi:id="ast78" name="p3">
+        <bottomPattern xmi:id="ast25" bindsTo="ast26">
+          <realizedVariable xmi:id="ast26" name="p3">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
           </realizedVariable>
         </bottomPattern>
       </domain>
-      <guardPattern xmi:id="ast74"/>
-      <bottomPattern xmi:id="ast15"/>
+      <guardPattern xmi:id="ast27"/>
+      <bottomPattern xmi:id="ast28"/>
     </local>
-    <local xmi:id="ast75">
-      <domain xsi:type="eqvtcore:CoreDomain" xmi:id="ast30" name="uml" isCheckable="true" isEnforceable="true" typedModel="ast1">
-        <guardPattern xmi:id="ast50"/>
-        <bottomPattern xmi:id="ast49">
-          <realizedVariable xmi:id="ast217" name="p4">
+    <local xmi:id="ast29">
+      <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast30" name="uml" isCheckable="true" isEnforceable="true" typedModel="ast3">
+        <guardPattern xmi:id="ast31"/>
+        <bottomPattern xmi:id="ast32" bindsTo="ast33">
+          <realizedVariable xmi:id="ast33" name="p4">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
           </realizedVariable>
         </bottomPattern>
       </domain>
-      <guardPattern xmi:id="ast65">
-        <variable xmi:id="ast169" name="p5">
+      <guardPattern xmi:id="ast34" bindsTo="ast35">
+        <variable xmi:id="ast35" name="p5">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast264"/>
+      <bottomPattern xmi:id="ast36"/>
     </local>
   </rule>
-  <rule xsi:type="eqvtcore:Mapping" xmi:id="ast314" name="Map2" specification="ast16">
-    <domain xsi:type="eqvtcore:CoreDomain" xmi:id="ast114" name="uml" isCheckable="true" isEnforceable="true" typedModel="ast1">
-      <guardPattern xmi:id="ast471">
-        <variable xmi:id="ast397" name="p6">
+  <rule xsi:type="eqvtc:Mapping" xmi:id="ast37" name="Map2" specification="ast5">
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast38" name="uml" isCheckable="true" isEnforceable="true" typedModel="ast3">
+      <guardPattern xmi:id="ast39" bindsTo="ast40 ast8 ast9 ast10">
+        <variable xmi:id="ast40" name="p6">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Association"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast420"/>
+      <bottomPattern xmi:id="ast41" bindsTo="ast12 ast13 ast14"/>
     </domain>
-    <guardPattern xmi:id="ast7">
-      <variable xmi:id="ast524" name="p5">
+    <guardPattern xmi:id="ast42" bindsTo="ast43 ast19">
+      <variable xmi:id="ast43" name="p5">
         <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
       </variable>
     </guardPattern>
-    <bottomPattern xmi:id="ast35"/>
+    <bottomPattern xmi:id="ast44"/>
   </rule>
-</eqvtbase:Transformation>
+</eqvtb:Transformation>

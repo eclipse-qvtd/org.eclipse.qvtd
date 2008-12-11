@@ -17,12 +17,12 @@
   </modelParameter>
   <rule xsi:type="eqvtc:Mapping" xmi:id="ast7" name="Map">
     <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast8" name="uml" isCheckable="true" isEnforceable="false" typedModel="ast5">
-      <guardPattern xmi:id="ast9">
+      <guardPattern xmi:id="ast9" bindsTo="ast10">
         <variable xmi:id="ast10" name="p">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast11">
+      <bottomPattern xmi:id="ast11" bindsTo="ast12 ast13 ast14">
         <variable xmi:id="ast12" name="b">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </variable>
