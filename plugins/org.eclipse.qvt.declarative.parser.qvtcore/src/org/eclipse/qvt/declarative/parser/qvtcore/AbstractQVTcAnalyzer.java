@@ -12,14 +12,17 @@
  * 
  * </copyright>
  *
- * $Id: AbstractQVTcAnalyzer.java,v 1.5 2008/10/24 15:10:18 ewillink Exp $
+ * $Id: AbstractQVTcAnalyzer.java,v 1.6 2008/12/11 09:21:32 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import lpg.lpgjavaruntime.Monitor;
@@ -89,6 +92,7 @@ import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcMiddleEnvironm
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcNestedEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcPatternEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcQueryEnvironment;
+import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcRootMappingEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcTopLevelEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcTransformationEnvironment;
 
@@ -96,7 +100,10 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 {
 	/**
 	 * Support sorting to achieve most refined last.
+	 * 
+	 * Deprecated, because it uses an invalid algorithm to compare non-overlapping mappings refinements.
 	 */
+	@Deprecated
 	public class MappingRefinementComparator implements Comparator<MappingCS>
 	{
 		protected final QVTcTransformationEnvironment txEnv;
@@ -120,7 +127,7 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 				if (s2.contains(m1))
 					return -1;
 				else
-					return m1.hashCode() - m2.hashCode();
+					return m1.hashCode() - m2.hashCode();	// FIXME Not valid to intermix hash and non-hash compares
 			}
 		}
 		
@@ -276,6 +283,7 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 			defineRealizedVariableCS(env, realizedVariableCS);
 		for (UnrealizedVariableCS unrealizedVariableCS : patternCS.getUnrealizedVariables())
 			defineUnrealizedVariableCS(env, unrealizedVariableCS);		
+		env.computeBindsTo();
 		BottomPattern bottomPattern = env.getASTNode();
 		for (OCLExpressionCS constraintCS : patternCS.getConstraints()) {
 			if (constraintCS instanceof AssignmentCS)
@@ -325,6 +333,7 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 			return;
 		for (UnrealizedVariableCS unrealizedVariableCS : patternCS.getUnrealizedVariables())
 			defineUnrealizedVariableCS(env, unrealizedVariableCS);
+		env.computeBindsTo();
 		GuardPattern guardPattern = env.getASTNode();
 		EList<Predicate> predicate = guardPattern.getPredicate();
 		for (OCLExpressionCS constraintCS : patternCS.getConstraints()) {
@@ -468,11 +477,11 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 				QVTcMappingEnvironment<?> mapEnv = txEnv.getEnvironment(mappingCS);
 				defineMappingRefinementCS(mapEnv, mappingCS);
 			}
-		Collections.sort(mappings, new MappingRefinementComparator(txEnv));
+		List<MappingCS> sortedMappings = sortMappingsIntoLeastRefinedFirstOrder(txEnv, mappings);
 		//
 		// Refined mappings before refining so that refining mapping sees conflicts
 		//
-		for (MappingCS mappingCS : mappings)
+		for (MappingCS mappingCS : sortedMappings)
 			if (!isCancelled()) {
 				QVTcMappingEnvironment<?> mapEnv = txEnv.getEnvironment(mappingCS);
 				defineMappingCS(mapEnv, mappingCS);
@@ -535,4 +544,31 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 //		pathNameCS.setAst(transformation);
 //		return transformation;
 //	}
+
+	protected List<MappingCS> sortMappingsIntoLeastRefinedFirstOrder(QVTcTransformationEnvironment txEnv, List<MappingCS> mappings) {
+		Map<MappingCS, Set<QVTcMappingEnvironment<?>>> envs = new HashMap<MappingCS, Set<QVTcMappingEnvironment<?>>>();
+		for (MappingCS mappingCS : mappings) {
+			QVTcRootMappingEnvironment mappingEnv = txEnv.getEnvironment(mappingCS);
+			Set<QVTcMappingEnvironment<?>> mappingClosure = new HashSet<QVTcMappingEnvironment<?>>(mappingEnv.getMappingEnvironmentClosure());
+			mappingClosure.remove(mappingEnv);
+			envs.put(mappingCS, mappingClosure);
+		}
+		List<MappingCS> sortedMappings = new ArrayList<MappingCS>();
+		int oldSize = -1;
+		while (sortedMappings.size() > oldSize) {
+			oldSize = sortedMappings.size();
+			for (MappingCS unorderedMapping : new ArrayList<MappingCS>(envs.keySet())) {
+				Set<QVTcMappingEnvironment<?>> unorderedMappingClosure = envs.get(unorderedMapping);
+				if (unorderedMappingClosure.size() <= 0) {
+					sortedMappings.add(unorderedMapping);
+					envs.remove(unorderedMapping);
+					QVTcRootMappingEnvironment mappingEnv = txEnv.getEnvironment(unorderedMapping);
+					for (Set<QVTcMappingEnvironment<?>> residualClosure : envs.values())
+						residualClosure.remove(mappingEnv);
+				}
+			}
+		}
+		sortedMappings.addAll(envs.keySet());
+		return sortedMappings;
+	}
 }
