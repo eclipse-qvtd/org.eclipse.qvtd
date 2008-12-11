@@ -35,6 +35,16 @@ public abstract class CSTEnvironment<E extends ICSTEnvironment> extends EcoreEnv
 	public CSTEnvironment(ICSTEnvironment parent) {
 		super(parent);
 	}
+
+	@Override
+	protected CSTFormattingHelper createFormattingHelper() {
+		return CSTFormattingHelper.INSTANCE;
+	}
+	
+	@Override
+	public CSTFormattingHelper getFormatter() {
+		return (CSTFormattingHelper) super.getFormatter();
+	}
 	   
 	@Deprecated
 	public EAttribute getUnresolvedAttribute() {

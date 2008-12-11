@@ -81,7 +81,6 @@ public abstract class CSTRootEnvironment<E extends ICSTNodeEnvironment, CST exte
 		}
 	}
 
-	protected CSTFormattingHelper formatter;	// FIXME remove this shadow one bug 245760 addressed.
 	protected final ICSTFileEnvironment fileEnvironment;
 	private UnresolvedEnvironment unresolvedEnvironment = null;
 
@@ -250,10 +249,6 @@ public abstract class CSTRootEnvironment<E extends ICSTNodeEnvironment, CST exte
 		return new WorkaroundDiagnostician();
 	}
 
-	protected CSTFormattingHelper createFormatter() {
-		return new CSTFormattingHelper();
-	}
-
 	/**
 	 * Create and return the SubstitutionLabelProvider to provide object descriptions
 	 * in validator messages. The diagnostician may be returned directly. The default
@@ -276,13 +271,6 @@ public abstract class CSTRootEnvironment<E extends ICSTNodeEnvironment, CST exte
 	
 	public ICSTFileEnvironment getFileEnvironment() {
 		return fileEnvironment;
-	}
-
-	@Override
-	public CSTFormattingHelper getFormatter() {
-		if (formatter == null)
-			formatter = createFormatter();
-		return formatter;
 	}
 
 	@Override

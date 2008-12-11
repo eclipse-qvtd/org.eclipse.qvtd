@@ -167,9 +167,6 @@ public abstract class CSTNodeEnvironment<E extends ICSTNodeEnvironment, AST exte
 	public CST getCSTNode() {
 		return cst;
 	}	
-	
-	@Override
-	public abstract CSTFormattingHelper getFormatter();
 
 	public Notifier getTarget() {
 		return ast;

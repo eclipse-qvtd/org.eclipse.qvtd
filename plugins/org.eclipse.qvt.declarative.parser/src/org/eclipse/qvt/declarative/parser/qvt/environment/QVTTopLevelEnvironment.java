@@ -31,7 +31,6 @@ import org.eclipse.qvt.declarative.parser.environment.CSTRootEnvironment;
 public abstract class QVTTopLevelEnvironment<E extends IQVTNodeEnvironment, CST extends CSTNode> extends CSTRootEnvironment<E, CST> implements IQVTNodeEnvironment
 {
 	private final EPackage.Registry qvtRegistry;
-	protected QVTFormattingHelper formatter;	// FIXME remove this shadow one bug 245760 addressed.
 
 	protected QVTTopLevelEnvironment(IQVTFileEnvironment parent, XMIResource astResource, CST cstNode) {
 		super(parent, astResource, cstNode);
@@ -50,7 +49,7 @@ public abstract class QVTTopLevelEnvironment<E extends IQVTNodeEnvironment, CST 
 	}
 
 	@Override
-	protected QVTFormattingHelper createFormatter() {
+	protected QVTFormattingHelper createFormattingHelper() {
 		return new QVTFormattingHelper(this);
 	}
 	
@@ -66,13 +65,6 @@ public abstract class QVTTopLevelEnvironment<E extends IQVTNodeEnvironment, CST 
 		}
 		return ePackages;
 	} */
-
-	@Override
-	public QVTFormattingHelper getFormatter() {
-		if (formatter == null)
-			formatter = createFormatter();
-		return formatter;
-	}
 
 	public String getModelName(EObject object) {
 		return null;
