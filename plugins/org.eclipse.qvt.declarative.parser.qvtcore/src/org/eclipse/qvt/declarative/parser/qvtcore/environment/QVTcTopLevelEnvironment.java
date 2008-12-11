@@ -83,7 +83,7 @@ public class QVTcTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTcNodeEnv
 	}
 
 	@Override
-	public QVTcFormattingHelper createFormatter() {
+	public QVTcFormattingHelper createFormattingHelper() {
 		return new QVTcFormattingHelper(this);
 	}
 
