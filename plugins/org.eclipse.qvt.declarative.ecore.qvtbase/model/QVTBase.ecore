@@ -4,6 +4,9 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="QVTBase"
     nsURI="http://www.eclipse.org/qvt/1.0/QVTBase" nsPrefix="eqvtb">
   <eClassifiers xsi:type="ecore:EClass" name="Domain" abstract="true" eSuperTypes="../../org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="TypedModelDefinedByTransformation&#xD;&#xA;NotBothCheckableAndEnforceable"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCheckable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         unsettable="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforceable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
@@ -13,17 +16,26 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" eType="#//TypedModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="../../org.eclipse.emf.ecore/model/Ecore.ecore#//EOperation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="EveryFunctionParameterIsAFunctionParameter"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="queryExpression" eType="ecore:EClass ../../org.eclipse.ocl.ecore/model/OCLEcore.ecore#//ecore/OCLExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionParameter" eSuperTypes="../../org.eclipse.emf.ecore/model/Ecore.ecore#//EParameter ../../org.eclipse.ocl.ecore/model/OCLEcore.ecore#//ecore/Variable"/>
   <eClassifiers xsi:type="ecore:EClass" name="Pattern" eSuperTypes="../../org.eclipse.emf.ecore/model/Ecore.ecore#//EModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="NoVariableIsAFunctionParameter"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="predicate" ordered="false"
         upperBound="-1" eType="#//Predicate" containment="true" eOpposite="#//Predicate/pattern"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bindsTo" ordered="false"
         upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.ecore/model/OCLEcore.ecore#//ecore/Variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Predicate" eSuperTypes="../../org.eclipse.emf.ecore/model/Ecore.ecore#//EModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ConditionExpressionIsBoolean&#xD;&#xA;"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditionExpression" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.ecore/model/OCLEcore.ecore#//ecore/OCLExpression"
         containment="true"/>
@@ -31,6 +43,9 @@
         eType="#//Pattern" transient="true" eOpposite="#//Pattern/predicate"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Rule" abstract="true" eSuperTypes="../../org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="OverridesIsCompatible&#xD;&#xA;OverridesDefinedByTransformation"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="domain" ordered="false"
         upperBound="-1" eType="#//Domain" containment="true" eOpposite="#//Domain/rule"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="overrides" eType="#//Rule">
@@ -43,7 +58,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transformation" eSuperTypes="../../org.eclipse.emf.ecore/model/Ecore.ecore#//EClass ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="WellFormedNsURI WellFormedNsPrefix UniqueNsURIs"/>
+      <details key="constraints" value="WellFormedNsURI&#xD;&#xA;WellFormedNsPrefix&#xD;&#xA;UniqueNsURIs&#xD;&#xA;ExtendsIsAcyclic&#xD;&#xA;ModelParameterNamesAreCompatibleWithExtension&#xD;&#xA;EveryModelParameterUsedPackagesIsCompatibleWithExtension&#xD;&#xA;ModelParameterNamesAreUnique&#xD;&#xA;RuleNamesAreUnique&#xD;&#xA;SynthesizedTypesAreOwned"/>
     </eAnnotations>
     <eOperations name="getFunction" lowerBound="1" eType="#//Function">
       <eParameters name="name" lowerBound="1" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
@@ -54,8 +69,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTag" ordered="false"
         upperBound="-1" eType="ecore:EClass ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EAnnotation"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="modelParameter" ordered="false"
-        upperBound="-1" eType="#//TypedModel" containment="true" eOpposite="#//TypedModel/transformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modelParameter" upperBound="-1"
+        eType="#//TypedModel" containment="true" eOpposite="#//TypedModel/transformation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rule" ordered="false" upperBound="-1"
         eType="#//Rule" containment="true" eOpposite="#//Rule/transformation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="#//Transformation">
@@ -66,7 +81,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypedModel" eSuperTypes="../../org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="AcyclicDependsOn"/>
+      <details key="constraints" value="DependsOnIsAcyclic"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" lowerBound="1"
         eType="#//Transformation" transient="true" eOpposite="#//Transformation/modelParameter"/>

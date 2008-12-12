@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTBasePackageImpl.java,v 1.2 2008/09/28 11:18:11 ewillink Exp $
+ * $Id: QVTBasePackageImpl.java,v 1.3 2008/12/12 15:29:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.impl;
 
@@ -560,7 +560,7 @@ public class QVTBasePackageImpl extends EPackageImpl implements QVTBasePackage {
 
 		initEClass(transformationEClass, Transformation.class, "Transformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransformation_OwnedTag(), theEcorePackage_1.getEAnnotation(), null, "ownedTag", null, 0, -1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getTransformation_ModelParameter(), this.getTypedModel(), this.getTypedModel_Transformation(), "modelParameter", null, 0, -1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getTransformation_ModelParameter(), this.getTypedModel(), this.getTypedModel_Transformation(), "modelParameter", null, 0, -1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformation_Rule(), this.getRule(), this.getRule_Transformation(), "rule", null, 0, -1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTransformation_Extends(), this.getTransformation(), null, "extends", null, 0, 1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -579,10 +579,10 @@ public class QVTBasePackageImpl extends EPackageImpl implements QVTBasePackage {
 		createResource(eNS_URI);
 
 		// Create annotations
-		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
-		createEmofAnnotations();
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
+		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
+		createEmofAnnotations();
 	}
 	public void initializePackageContents() {
 		initializePackageContentsGen();
@@ -596,7 +596,7 @@ public class QVTBasePackageImpl extends EPackageImpl implements QVTBasePackage {
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";		
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";							
 		addAnnotation
 		  (getRule_Overrides(), 
 		   source, 
@@ -624,18 +624,48 @@ public class QVTBasePackageImpl extends EPackageImpl implements QVTBasePackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";			
+		String source = "http://www.eclipse.org/emf/2002/Ecore";		
+		addAnnotation
+		  (domainEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "TypedModelDefinedByTransformation\r\nNotBothCheckableAndEnforceable"
+		   });		
+		addAnnotation
+		  (functionEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "EveryFunctionParameterIsAFunctionParameter"
+		   });		
+		addAnnotation
+		  (patternEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "NoVariableIsAFunctionParameter"
+		   });		
+		addAnnotation
+		  (predicateEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "ConditionExpressionIsBoolean\r\n"
+		   });		
+		addAnnotation
+		  (ruleEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "OverridesIsCompatible\r\nOverridesDefinedByTransformation"
+		   });			
 		addAnnotation
 		  (transformationEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "WellFormedNsURI WellFormedNsPrefix UniqueNsURIs"
+			 "constraints", "WellFormedNsURI\r\nWellFormedNsPrefix\r\nUniqueNsURIs\r\nExtendsIsAcyclic\r\nModelParameterNamesAreCompatibleWithExtension\r\nEveryModelParameterUsedPackagesIsCompatibleWithExtension\r\nModelParameterNamesAreUnique\r\nRuleNamesAreUnique\r\nSynthesizedTypesAreOwned"
 		   });			
 		addAnnotation
 		  (typedModelEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "AcyclicDependsOn"
+			 "constraints", "DependsOnIsAcyclic"
 		   });	
 	}
 
