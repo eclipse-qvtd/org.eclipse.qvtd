@@ -1,0 +1,284 @@
+-----------------------------------------------------------------------
+-- EMOF
+-----------------------------------------------------------------------
+package EMOF
+
+context Class
+def: allOwnedAttributes : Set(Property)
+    = superClass.allOwnedAttributes->asSet()->union(ownedAttribute)
+def: allSuperClasses : Set(Class)
+    = superClass.allSuperClasses->asSet()->union(superClass)
+def: definesProperty(p : Property) : Boolean
+    = allOwnedAttributes->includes(p)
+    
+context Element
+def: ancestors : OrderedSet(Element)
+    = if container() <> null
+    then container().oclAsType(Element).ancestors->append(self)
+    else self->asOrderedSet() endif   
+def: children : Set(Element)
+    = Element.allInstances()->select(e | e.ancestors->includes(self))   
+def: allVariableExps : Set(EssentialOCL::VariableExp)
+    = children->select(oclIsKindOf(EssentialOCL::VariableExp)).oclAsType(EssentialOCL::VariableExp)->asSet()
+def: allReferencedVariables : Set(EssentialOCL::Variable)
+    = allVariableExps.referredVariable->asSet()
+def: allOclExpressions : Set(EssentialOCL::OclExpression)
+    = children->select(oclIsKindOf(EssentialOCL::OclExpression)).oclAsType(EssentialOCL::OclExpression)->asSet()
+def: allCollectionTypes : Set(EssentialOCL::CollectionType)
+    = allOclExpressions.type->select(oclIsKindOf(EssentialOCL::CollectionType)).oclAsType(EssentialOCL::CollectionType)->asSet()
+--def: properAncestors : OrderedSet(Element)
+----    = ancestors->excluding(self)
+--    = ancestors->excluding(self)->asOrderedSet()   
+--def: properChildren : Set(Element)
+--    = children->excluding(self)
+    
+context Type
+def: elementType() : Type
+    = if oclIsKindOf(EssentialOCL::CollectionType)
+    then oclAsType(EssentialOCL::CollectionType).elementType
+    else self endif
+def: assignableFrom(t : Type) : Boolean
+    = t.getMetaClass().allSuperClasses->includes(getMetaClass())   
+def: matches(t : Type) : Boolean
+    = self = t                   -- FIXME   
+
+endpackage
+
+-----------------------------------------------------------------------
+-- EssentialOCL
+-----------------------------------------------------------------------
+package EssentialOCL
+
+context OclExpression
+def: allReferencedTypes : Set(EMOF::Type)
+    = allOclExpressions.type->asSet()
+def: allReferencedCollectionTypes : Set(CollectionType)
+    = allOclExpressions.type->select(oclIsKindOf(CollectionType)).oclAsType(CollectionType)->asSet()
+def: allReferencedElementTypes : Set(EMOF::Type)
+    = allOclExpressions.type.elementType()->asSet()
+def: nonExpressionParent : EMOF::Element
+    = if container().oclIsKindOf(OclExpression)
+    then container().oclAsType(OclExpression).nonExpressionParent
+    else container()
+    endif
+    
+context VariableExp
+inv UnderscoreOnlyUsedAsCollectionTemplateExpRest:
+    name = '_' implies nonExpressionParent.oclIsKindOf(QVTTemplate::CollectionTemplateExp)
+    
+context CollectionType
+def: kind() : CollectionKind
+    = if oclIsKindOf(BagType) then CollectionKind::Bag
+    else if oclIsKindOf(OrderedSetType) then CollectionKind::OrderedSet
+    else if oclIsKindOf(SequenceType) then CollectionKind::Sequence
+    else if oclIsKindOf(SetType) then CollectionKind::Set
+    else CollectionKind::Collection endif endif endif endif
+
+endpackage
+
+-----------------------------------------------------------------------
+-- QVTBase
+-----------------------------------------------------------------------
+package QVTBase
+
+context TypedModel
+def: allDependsOn : Set(TypedModel)
+    = if (dependsOn <> null)
+    then dependsOn.allDependsOn->union(dependsOn)->asSet()
+    else Set{} endif
+def: declaredPackages : Set(EMOF::Package)
+    = dependsOn.declaredPackages->asSet()->union(usedPackage)
+def: declaresType(t : EMOF::Type) : Boolean
+    = declaredPackages->includes(t._package)
+inv DependsOnIsAcyclic :
+    allDependsOn->excludes(self)
+
+context Transformation
+def: allExtends : Set(Transformation)
+    = if (extends <> null)
+    then extends.allExtends->including(extends)
+    else Set{} endif
+def: declaredPackages : Set(EMOF::Package)
+    = modelParameter.declaredPackages->asSet()
+def: declaresRule(r : Rule) : Boolean
+    = rule->includes(r) or extends->exists(declaresRule(r)) 
+def: declaresType(t : EMOF::Type) : Boolean
+    = declaredPackages->includes(t._package)
+def: definesModel(m : TypedModel) : Boolean
+    = modelParameter->includes(m)
+inv ExtendsIsAcyclic :
+    allExtends->excludes(self)
+inv ExtendsIsCompatible :
+    extends <> null implies declaredPackages = extends.declaredPackages
+inv ModelParameterNamesAreUnique :
+    modelParameter->isUnique(name)
+inv RuleNamesAreUnique :
+    rule->isUnique(name)
+inv SynthesizedTypesAreOwned :
+    ownedType->includesAll(allCollectionTypes)
+
+context Domain
+def: transformation : Transformation
+    = rule.transformation
+inv TypedModelDefinedByTransformation :
+    typedModel <> null implies transformation.definesModel(typedModel)
+inv NotBothCheckableAndEnforceable :
+    not (isCheckable and isEnforceable)
+
+context Rule
+inv OverridesIsCompatible :
+    overrides <> null implies true -- FIXME
+inv OverridesDefinedByTransformation :
+    overrides <> null implies transformation.declaresRule(overrides)
+inv DomainNamesAreUnique :
+    domain->isUnique(name)
+
+context Function
+inv IsSideEffectFree :
+    true -- FIXME no RelationCallExp, no ImperativeOCL
+inv EveryFunctionParameterIsAFunctionParameter :
+    ownedParameter->forAll(oclIsKindOf(FunctionParameter))
+
+context Predicate
+inv ConditionExpressionIsBoolean :
+    conditionExpression.type.oclIsKindOf(Boolean)
+inv VariablesAreBoundByPattern :
+    pattern.bindsTo->includesAll(allReferencedVariables)
+
+context Pattern
+inv VariablesAreNotParameters :
+    not bindsTo->exists(oclIsKindOf(FunctionParameter))
+        
+endpackage
+
+-----------------------------------------------------------------------
+-- QVTCore
+-----------------------------------------------------------------------
+package QVTCore
+
+context Mapping
+--def: sideArea(domain : CoreDomain) : CoreDomain
+--    = domain->any(name = domain.name)
+def: allMiddleAreas : Set(Mapping)
+    = let childAreas : Bag(Mapping) = refinement.allMiddleAreas->including(self)
+    in if _context <> null
+    then childAreas->union(_context.allMiddleAreas)->asSet()
+    else childAreas->asSet() endif
+def: allSideAreas(domain : CoreDomain) : Set(CoreDomain)
+    = let childAreas : Bag(CoreDomain) = refinement.allSideAreas(domain)->including(domain)
+    in if _context <> null
+    then childAreas->union(_context.allSideAreas(domain))->asSet()
+    else childAreas->asSet() endif
+def: declaresType(t : EMOF::Type) : Boolean
+    = true -- FIXME declaredPackages->includes(t._package)
+inv ComposedMappingIsUnnamed :
+    _context <> null implies name = null
+inv NonComposedMappingIsNamed :
+    _context = null implies name <> null
+
+context Area
+def: bottomVariables : Set(EssentialOCL::Variable)
+    = bottomPattern.variable->union(bottomPattern.realizedVariable)
+def: guardVariables : Set(EssentialOCL::Variable)
+    = guardPattern.variable
+def: areaVariables : Set(EssentialOCL::Variable)
+    = bottomVariables->union(guardVariables)
+def: isMiddle : Boolean
+    = oclIsKindOf(Mapping)
+def: isEnforceable : Boolean
+    = if (isMiddle)
+    then oclAsType(Mapping).domain->exists(isEnforceable)
+    else oclAsType(CoreDomain).isEnforceable endif
+inv AreaIsCoreDomainOrMapping:
+    oclIsKindOf(CoreDomain) or oclIsKindOf(Mapping)
+
+context CoreDomain
+def: mapping : Mapping
+    = rule.oclAsType(Mapping)
+def: middleArea : Area
+    = mapping
+def: allDomains : Set(CoreDomain)
+    = mapping.allSideAreas(self)
+def: allBottomPatterns : Set(BottomPattern)
+    = allDomains.bottomPattern->asSet()
+def: allGuardPatterns : Set(GuardPattern)
+    = allDomains.guardPattern->asSet()
+def: allTypedModels : Set(QVTBase::TypedModel)
+    = typedModel.allDependsOn
+def: declaredPackages : Set(EMOF::Package)
+    = typedModel.declaredPackages->including(transformation)
+def: domainBottomVariables : Set(EssentialOCL::Variable)
+    = bottomVariables->union(middleArea.bottomVariables)
+def: domainGuardVariables : Set(EssentialOCL::Variable)
+    = guardVariables->union(middleArea.guardVariables)
+def: domainVariables : Set(EssentialOCL::Variable)
+    = domainBottomVariables->union(domainGuardVariables)
+inv HasTypedModel :
+    typedModel <> null
+inv EveryVariableNameIsUnique :
+    domainVariables->isUnique(name)
+
+context GuardPattern
+def: domain : CoreDomain
+    = area.oclAsType(CoreDomain)
+def: mapping : Mapping
+    = domain.mapping
+def: bottomPattern : BottomPattern
+    = area.bottomPattern
+def: guardPatternVariables : Set(EssentialOCL::Variable)
+    = variable
+inv EveryVariableNameIsUnique :
+    guardPatternVariables->isUnique(name)
+inv EveryVariableTypeIsDeclaredByMapping :
+    guardPatternVariables->forAll(v | mapping.declaresType(v.type))
+
+context BottomPattern
+def: domain : CoreDomain
+    = area.oclAsType(CoreDomain)
+def: mapping : Mapping
+    = domain.mapping
+def: guardPattern : GuardPattern
+    = area.guardPattern
+def: bottomPatternVariables : Set(EssentialOCL::Variable)
+    = variable->union(realizedVariable)
+def: patternVariables : Set(EssentialOCL::Variable)
+    = bottomPatternVariables->union(guardPattern.guardPatternVariables)
+def: declaresVariable(v : EssentialOCL::Variable) : Boolean
+    = domain.allBottomPatterns->exists(patternVariables->includes(v))
+inv EveryVariableNameIsUnique :
+    bottomPatternVariables->isUnique(name)
+inv EveryVariableTypeIsDeclaredByMapping :
+    bottomPatternVariables->forAll(v | mapping.declaresType(v.type))
+   
+context Assignment
+def: area : Area
+    = bottomPattern.area
+inv DefaultIsNotEnforceableWarning :
+    isDefault implies area.isEnforceable   
+inv EveryValueVariableIsDeclaredByBottomPattern :
+    value.allReferencedVariables->asSet()->forAll(v | bottomPattern.declaresVariable(v))
+   
+context PropertyAssignment
+inv SlotExpressionTypeIsClass:
+    slotExpression.type.oclIsKindOf(EMOF::Class)
+inv ReferredPropertyIsDefinedByReferredClass:
+    slotExpression.type.oclAsType(EMOF::Class).definesProperty(targetProperty)
+inv ValueTypeMatchesPropertyType:
+    targetProperty.type.assignableFrom(value.type)
+   
+context VariableAssignment
+inv TargetVariableIsDeclaredBy:
+    bottomPattern.declaresVariable(targetVariable)
+inv ValueTypeMatchesVariableType:
+    targetVariable.type.assignableFrom(value.type)
+    
+context RealizedVariable
+inv ParentIsBottomPattern :
+    container().oclIsKindOf(BottomPattern)
+def: bottomPattern : BottomPattern
+    = container().oclAsType(BottomPattern)
+def: area : Area
+    = bottomPattern.area
+inv MappingIsNotEnforceableWarning :
+    area.isEnforceable
+endpackage

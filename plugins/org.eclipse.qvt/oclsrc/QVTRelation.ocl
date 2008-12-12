@@ -15,7 +15,10 @@ context Element
 def: ancestors : OrderedSet(Element)
     = if container() <> null
     then container().oclAsType(Element).ancestors->append(self)
-    else self->asOrderedSet() endif   
+    else self->asOrderedSet() endif
+def: hasAncestor(e : Element) : Boolean
+    = let parent : Element = container()
+    in (parent = e) or ((parent <> null) and parent.hasAncestor(e))
 def: children : Set(Element)
     = Element.allInstances()->select(e | e.ancestors->includes(self))   
 def: allVariableExps : Set(EssentialOCL::VariableExp)
@@ -90,8 +93,6 @@ def: declaredPackages : Set(EMOF::Package)
     = dependsOn.declaredPackages->asSet()->union(usedPackage)
 def: declaresType(t : EMOF::Type) : Boolean
     = declaredPackages->includes(t._package)
---inv TypedModelDefinedByTransformation :
---    transformation.definesModel(self)
 inv DependsOnIsAcyclic :
     allDependsOn->excludes(self)
 
@@ -108,12 +109,14 @@ def: declaresType(t : EMOF::Type) : Boolean
     = declaredPackages->includes(t._package)
 def: definesModel(m : TypedModel) : Boolean
     = modelParameter->includes(m)
+def: modelParameter(requiredName : String) : TypedModel
+    = modelParameter->any(name = requiredName)
 inv ExtendsIsAcyclic :
     allExtends->excludes(self)
-inv ExtendsIsCompatible :
-    extends <> null implies declaredPackages = extends.declaredPackages
-inv KeysAreDistinctWarning :
-    true -- FIXME
+inv ModelParameterNamesAreCompatibleWithExtension :
+    extends <> null implies modelParameter.name = extends.modelParameter.name
+inv EveryModelParameterUsedPackagesIsCompatibleWithExtension :
+    extends <> null implies modelParameter->forAll(t | t.declaredPackages = extends.modelParameter(t.name).declaredPackages)
 inv ModelParameterNamesAreUnique :
     modelParameter->isUnique(name)
 inv RuleNamesAreUnique :
@@ -134,6 +137,8 @@ inv OverridesIsCompatible :
     overrides <> null implies true -- FIXME
 inv OverridesDefinedByTransformation :
     overrides <> null implies transformation.declaresRule(overrides)
+inv DomainNamesAreUnique :
+    domain->isUnique(name)
 
 context Function
 inv IsSideEffectFree :
@@ -144,8 +149,8 @@ inv EveryFunctionParameterIsAFunctionParameter :
 context Predicate
 inv ConditionExpressionIsBoolean :
     conditionExpression.type.oclIsKindOf(Boolean)
-inv VariablesAreBoundByPattern :
-    pattern.bindsTo->includesAll(allReferencedVariables)
+--inv VariablesAreBoundByPattern :
+--    pattern.bindsTo->includesAll(conditionExpression.allReferencedVariables)
 
 context Pattern
 inv VariablesAreNotParameters :
@@ -165,6 +170,8 @@ inv EveryRuleIsARelation :
     rule->forAll(oclIsKindOf(Relation))
 --inv HasTopLevelRelation :
 --    relations->exists(isTopLevel)
+inv KeysAreDistinctWarning :
+    true -- FIXME
 
 context Relation
 def: domains : OrderedSet(RelationDomain)
