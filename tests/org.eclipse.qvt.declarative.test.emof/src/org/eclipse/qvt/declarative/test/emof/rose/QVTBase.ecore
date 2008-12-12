@@ -53,7 +53,7 @@
         <details key="body" value="extendedBy"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.modelParameter" name="modelParameter" ordered="false" upperBound="-1" eType="QVTBase.TypedModel" containment="true" resolveProxies="false" eOpposite="QVTBase.TypedModel.transformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.modelParameter" name="modelParameter" upperBound="-1" eType="QVTBase.TypedModel" containment="true" resolveProxies="false" eOpposite="QVTBase.TypedModel.transformation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.ownedTag" name="ownedTag" ordered="false" upperBound="-1" containment="true" resolveProxies="false">
       <eType xsi:type="ecore:EClass" href="EMOF.ecore#EMOF.Tag"/>
     </eStructuralFeatures>
