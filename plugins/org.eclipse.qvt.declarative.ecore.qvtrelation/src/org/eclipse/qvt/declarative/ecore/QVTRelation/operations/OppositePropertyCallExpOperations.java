@@ -12,13 +12,12 @@
  * 
  * </copyright>
  *
- * $Id: OppositePropertyCallExpOperations.java,v 1.1 2008/09/09 20:59:19 ewillink Exp $
+ * $Id: OppositePropertyCallExpOperations.java,v 1.2 2008/12/12 15:32:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.operations;
 
 import java.util.Map;
 
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -47,17 +46,8 @@ public class OppositePropertyCallExpOperations extends AbstractQVTRelationOperat
 				EClassifier refType = TypeUtil.resolveSetType(env, property.getEContainingClass());			
 				if (!TypeUtil.exactTypeMatch(env, refType, type)) {
 					allOk = false;
-					if (diagnostics != null) {
-						diagnostics.add
-							(createDiagnostic
-								(Diagnostic.ERROR,
-								 DIAGNOSTIC_SOURCE,
-								 0,
-								 "_UI_OppositePropertyCallTypeMustBeSetOfPropertyTarget_diagnostic",
-								 new Object[] { getObjectLabel(propertyCallExp, context), getObjectLabel(refType, context) },
-								 new Object[] { propertyCallExp },
-								 context));
-					}
+					Object[] messageSubstitutions = new Object[] { getObjectLabel(propertyCallExp, context), getObjectLabel(refType, context) };
+					appendError(diagnostics, propertyCallExp, "_UI_OppositePropertyCallTypeMustBeSetOfPropertyTarget_diagnostic", messageSubstitutions);
 				}
 			}
 		}

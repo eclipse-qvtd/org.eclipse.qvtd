@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationalTransformationOperations.java,v 1.2 2008/10/30 06:32:03 ewillink Exp $
+ * $Id: RelationalTransformationOperations.java,v 1.3 2008/12/12 15:32:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.operations;
 
@@ -45,17 +45,8 @@ public class RelationalTransformationOperations extends AbstractQVTRelationOpera
 			for (Key anotherKey : relationalTransformation.getOwnedKey()) {
 				if ((key != anotherKey) && (identifies == anotherKey.getIdentifies())) {
 					allOk = false;
-					if (diagnostics != null) {
-						diagnostics.add
-							(createDiagnostic
-								(Diagnostic.WARNING,
-								 DIAGNOSTIC_SOURCE,
-								 0,
-								 "_UI_DuplicateKeyDefinition_diagnostic",
-								 new Object[] { getObjectLabel(identifies, context) },
-								 new Object[] { key },
-								 context));
-					}
+					Object[] messageSubstitutions = new Object[] { getObjectLabel(identifies, context) };
+					appendWarning(diagnostics, key, "_UI_DuplicateKeyDefinition_diagnostic", messageSubstitutions);
 					break;	
 				}
 			}
@@ -90,37 +81,29 @@ public class RelationalTransformationOperations extends AbstractQVTRelationOpera
 					else
 					{
 						result = false;
-						Diagnostic diagnostic = null;
 						EClassifier otherEClassifier = eClassifiers.get(index);
 						String otherName = otherEClassifier.getName();
+						Object[] astNodes = new Object[] { eClassifier, otherEClassifier };
 						if (!name.equals(otherName)) {
-							diagnostic = createDiagnostic(Diagnostic.WARNING, EcoreValidator.DIAGNOSTIC_SOURCE,
-									EcoreValidator.UNIQUE_CLASSIFIER_NAMES, "_UI_EPackageDissimilarClassifierNames_diagnostic",
-									new Object[] { name, otherName },
-									new Object[] { eClassifier, otherEClassifier },
-									context);
+							Object[] messageSubstitutions = new Object[] { name, otherName };
+							appendDiagnostic(diagnostics, astNodes, DIAGNOSTIC_SOURCE,
+									Diagnostic.WARNING, "_UI_EPackageDissimilarClassifierNames_diagnostic", messageSubstitutions);
 						}
 						else if ((eClassifier instanceof CollectionType)
 							 && (otherEClassifier instanceof CollectionType)
 							 && (((CollectionType<?,?>)eClassifier).getElementType() != ((CollectionType<?,?>)otherEClassifier).getElementType())) {
-							diagnostic = createDiagnostic(Diagnostic.WARNING, DIAGNOSTIC_SOURCE,
-									EcoreValidator.UNIQUE_CLASSIFIER_NAMES, "_UI_CollectionNameCollision_diagnostic",
-									new Object[] { ((CollectionType<?,?>)eClassifier).getKind(),
-												   EcoreUtils.formatQualifiedName(((CollectionType<?,?>)eClassifier).getElementType()),
-												   ((CollectionType<?,?>)otherEClassifier).getKind(),
-												   EcoreUtils.formatQualifiedName(((CollectionType<?,?>)otherEClassifier).getElementType()) },
-									new Object[] { eClassifier, otherEClassifier },
-									context);
-							}
-						 else {
-							diagnostic = createDiagnostic(Diagnostic.ERROR, EcoreValidator.DIAGNOSTIC_SOURCE,
-									EcoreValidator.UNIQUE_CLASSIFIER_NAMES, "_UI_EPackageUniqueClassifierNames_diagnostic",
-									new Object[] { name },
-									new Object[] { eClassifier, otherEClassifier },
-									context);
+							Object[] messageSubstitutions = new Object[] { ((CollectionType<?,?>)eClassifier).getKind(),
+											   EcoreUtils.formatQualifiedName(((CollectionType<?,?>)eClassifier).getElementType()),
+											   ((CollectionType<?,?>)otherEClassifier).getKind(),
+											   EcoreUtils.formatQualifiedName(((CollectionType<?,?>)otherEClassifier).getElementType()) };
+							appendDiagnostic(diagnostics, astNodes, DIAGNOSTIC_SOURCE,
+									Diagnostic.WARNING, "_UI_CollectionNameCollision_diagnostic", messageSubstitutions);
 						}
-						if (diagnostic != null)
-							diagnostics.add(diagnostic);
+						 else {
+							Object[] messageSubstitutions = new Object[] { name };
+							appendDiagnostic(diagnostics, astNodes, EcoreValidator.DIAGNOSTIC_SOURCE,
+									Diagnostic.ERROR, "_UI_EPackageUniqueClassifierNames_diagnostic", messageSubstitutions);
+						}
 					}
 				}
 				names.add(key);
