@@ -1197,7 +1197,8 @@
         </ownedComment>
       </ownedAttribute>
       <ownedAttribute xmi:id="QVTBase.Transformation.modelParameter" name="modelParameter"
-          lower="0" upper="*" type="QVTBase.TypedModel" isComposite="true" opposite="QVTBase.TypedModel.transformation">
+          isOrdered="true" lower="0" upper="*" type="QVTBase.TypedModel" isComposite="true"
+          opposite="QVTBase.TypedModel.transformation">
         <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
           <resolveProxies>false</resolveProxies>
         </xmi:Extension>

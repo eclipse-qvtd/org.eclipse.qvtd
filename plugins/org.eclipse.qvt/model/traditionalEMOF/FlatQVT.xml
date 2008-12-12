@@ -1666,7 +1666,8 @@
       </ownedComment>
     </ownedAttribute>
     <ownedAttribute xmi:id="FlatQVT.Transformation.modelParameter" name="modelParameter"
-        lower="0" upper="*" type="FlatQVT.TypedModel" isComposite="true" opposite="FlatQVT.TypedModel.transformation">
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.TypedModel" isComposite="true"
+        opposite="FlatQVT.TypedModel.transformation">
       <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
         <resolveProxies>false</resolveProxies>
       </xmi:Extension>

@@ -603,7 +603,7 @@
           <details key="body" value="extendedBy"/>
         </eAnnotations>
       </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.modelParameter" name="modelParameter" ordered="false" upperBound="-1" eType="QVTBase.TypedModel" containment="true" resolveProxies="false" eOpposite="QVTBase.TypedModel.transformation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.modelParameter" name="modelParameter" upperBound="-1" eType="QVTBase.TypedModel" containment="true" resolveProxies="false" eOpposite="QVTBase.TypedModel.transformation"/>
       <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.ownedTag" name="ownedTag" ordered="false" upperBound="-1" eType="EMOF.Tag" containment="true" resolveProxies="false"/>
       <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.rule" name="rule" ordered="false" upperBound="-1" eType="QVTBase.Rule" containment="true" resolveProxies="false" eOpposite="QVTBase.Rule.transformation"/>
     </eClassifiers>
