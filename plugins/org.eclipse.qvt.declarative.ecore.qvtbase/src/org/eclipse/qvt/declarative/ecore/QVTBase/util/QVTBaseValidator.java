@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTBaseValidator.java,v 1.2 2008/10/30 06:10:31 ewillink Exp $
+ * $Id: QVTBaseValidator.java,v 1.3 2008/12/12 15:31:45 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.util;
 
@@ -21,15 +21,25 @@ import java.util.Map;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreValidator;
-
 import org.eclipse.ocl.expressions.util.ExpressionsValidator;
-
-import org.eclipse.qvt.declarative.ecore.QVTBase.*;
+import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
+import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
+import org.eclipse.qvt.declarative.ecore.QVTBase.FunctionParameter;
+import org.eclipse.qvt.declarative.ecore.QVTBase.Pattern;
+import org.eclipse.qvt.declarative.ecore.QVTBase.Predicate;
+import org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage;
+import org.eclipse.qvt.declarative.ecore.QVTBase.Rule;
+import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
+import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
+import org.eclipse.qvt.declarative.ecore.QVTBase.operations.DomainOperations;
+import org.eclipse.qvt.declarative.ecore.QVTBase.operations.FunctionOperations;
+import org.eclipse.qvt.declarative.ecore.QVTBase.operations.PatternOperations;
+import org.eclipse.qvt.declarative.ecore.QVTBase.operations.PredicateOperations;
+import org.eclipse.qvt.declarative.ecore.QVTBase.operations.RuleOperations;
+import org.eclipse.qvt.declarative.ecore.QVTBase.operations.TransformationOperations;
 import org.eclipse.qvt.declarative.ecore.operations.EValidatorWithOperations;
 
 /**
@@ -171,7 +181,25 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(domain, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(domain, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateENamedElement_WellFormedName(domain, diagnostics, context);
+		if (result || diagnostics != null) result &= validateDomain_TypedModelDefinedByTransformation(domain, diagnostics, context);
+		if (result || diagnostics != null) result &= validateDomain_NotBothCheckableAndEnforceable(domain, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the TypedModelDefinedByTransformation constraint of '<em>Domain</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateDomain_TypedModelDefinedByTransformation(Domain domain, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return DomainOperations.INSTANCE.checkTypedModelDefinedByTransformation(domain, diagnostics, context);
+	}
+
+	/**
+	 * Validates the NotBothCheckableAndEnforceable constraint of '<em>Domain</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateDomain_NotBothCheckableAndEnforceable(Domain domain, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return DomainOperations.INSTANCE.checkNotBothCheckableAndEnforceable(domain, diagnostics, context);
 	}
 
 	/**
@@ -195,7 +223,16 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= ecoreValidator.validateEOperation_UniqueParameterNames(function, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateEOperation_UniqueTypeParameterNames(function, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateEOperation_NoRepeatingVoid(function, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFunction_EveryFunctionParameterIsAFunctionParameter(function, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the EveryFunctionParameterIsAFunctionParameter constraint of '<em>Function</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateFunction_EveryFunctionParameterIsAFunctionParameter(Function function, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return FunctionOperations.INSTANCE.checkEveryFunctionParameterIsAFunctionParameter(function, diagnostics, context);
 	}
 
 	/**
@@ -226,7 +263,23 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 	 * @generated
 	 */
 	public boolean validatePattern(Pattern pattern, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(pattern, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(pattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(pattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(pattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(pattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(pattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(pattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(pattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePattern_NoVariableIsAFunctionParameter(pattern, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the NoVariableIsAFunctionParameter constraint of '<em>Pattern</em>'.
+	 * @generated NOT
+	 */
+	public boolean validatePattern_NoVariableIsAFunctionParameter(Pattern pattern, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return PatternOperations.INSTANCE.checkNoVariableIsAFunctionParameter(pattern, diagnostics, context);
 	}
 
 	/**
@@ -235,8 +288,32 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 	 * @generated
 	 */
 	public boolean validatePredicate(Predicate predicate, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(predicate, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePredicate_ConditionExpressionIsBoolean(predicate, diagnostics, context);
+		return result;
 	}
+
+	/**
+	 * Validates the ConditionExpressionIsBoolean constraint of '<em>Predicate</em>'.
+	 * @generated NOT
+	 */
+	public boolean validatePredicate_ConditionExpressionIsBoolean(Predicate predicate, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return PredicateOperations.INSTANCE.checkConditionExpressionIsBoolean(predicate, diagnostics, context);
+	}
+
+	/**
+	 * Validates the VariablesAreBoundByPattern constraint of '<em>Predicate</em>'.
+	 * @generated NOT
+	 *
+	public boolean validatePredicate_VariablesAreBoundByPattern(Predicate predicate, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return PredicateOperations.INSTANCE.checkVariablesAreBoundByPattern(predicate, diagnostics, context);
+	} */
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -252,7 +329,25 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(rule, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(rule, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateENamedElement_WellFormedName(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRule_OverridesIsCompatible(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRule_OverridesDefinedByTransformation(rule, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the OverridesIsCompatible constraint of '<em>Rule</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRule_OverridesIsCompatible(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RuleOperations.INSTANCE.checkOverridesIsCompatible(rule, diagnostics, context);
+	}
+
+	/**
+	 * Validates the OverridesDefinedByTransformation constraint of '<em>Rule</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRule_OverridesDefinedByTransformation(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RuleOperations.INSTANCE.checkOverridesDefinedByTransformation(rule, diagnostics, context);
 	}
 
 	/**
@@ -284,6 +379,12 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= ecoreValidator.validateEPackage_UniqueSubpackageNames(transformation, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateEPackage_UniqueClassifierNames(transformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTransformation_UniqueNsURIs(transformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransformation_ExtendsIsAcyclic(transformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransformation_ModelParameterNamesAreCompatibleWithExtension(transformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransformation_EveryModelParameterUsedPackagesIsCompatibleWithExtension(transformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransformation_ModelParameterNamesAreUnique(transformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransformation_RuleNamesAreUnique(transformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransformation_SynthesizedTypesAreOwned(transformation, diagnostics, context);
 		return result;
 	}
 
@@ -321,6 +422,54 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 	}
 
 	/**
+	 * Validates the ExtendsIsAcyclic constraint of '<em>Transformation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateTransformation_ExtendsIsAcyclic(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return TransformationOperations.INSTANCE.checkExtendsIsAcyclic(transformation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the ModelParameterNamesAreCompatibleWithExtension constraint of '<em>Transformation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateTransformation_ModelParameterNamesAreCompatibleWithExtension(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return TransformationOperations.INSTANCE.checkModelParameterNamesAreCompatibleWithExtension(transformation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the EveryModelParameterUsedPackagesIsCompatibleWithExtension constraint of '<em>Transformation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateTransformation_EveryModelParameterUsedPackagesIsCompatibleWithExtension(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return TransformationOperations.INSTANCE.checkEveryModelParameterUsedPackagesIsCompatibleWithExtension(transformation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the ModelParameterNamesAreUnique constraint of '<em>Transformation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateTransformation_ModelParameterNamesAreUnique(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return TransformationOperations.INSTANCE.checkModelParameterNamesAreUnique(transformation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the RuleNamesAreUnique constraint of '<em>Transformation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateTransformation_RuleNamesAreUnique(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return TransformationOperations.INSTANCE.checkRuleNamesAreUnique(transformation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the SynthesizedTypesAreOwned constraint of '<em>Transformation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateTransformation_SynthesizedTypesAreOwned(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return TransformationOperations.INSTANCE.checkSynthesizedTypesAreOwned(transformation, diagnostics, context);
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -334,17 +483,17 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(typedModel, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(typedModel, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateENamedElement_WellFormedName(typedModel, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTypedModel_AcyclicDependsOn(typedModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTypedModel_DependsOnIsAcyclic(typedModel, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the AcyclicDependsOn constraint of '<em>Typed Model</em>'.
+	 * Validates the DependsOnIsAcyclic constraint of '<em>Typed Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateTypedModel_AcyclicDependsOn(TypedModel typedModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateTypedModel_DependsOnIsAcyclic(TypedModel typedModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		// TODO implement the constraint
 		// -> specify the condition that violates the constraint
 		// -> verify the diagnostic details, including severity, code, and message
@@ -357,7 +506,7 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "AcyclicDependsOn", getObjectLabel(typedModel, context) },
+						 new Object[] { "DependsOnIsAcyclic", getObjectLabel(typedModel, context) },
 						 new Object[] { typedModel },
 						 context));
 			}
@@ -368,16 +517,11 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 
 	/**
 	 * Returns the resource locator that will be used to fetch messages for this validator's diagnostics.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		// TODO
-		// Specialize this to return a resource locator for messages specific to this validator.
-		// Ensure that you remove @generated or mark it @generated NOT
-		return super.getResourceLocator();
+	    return QVTBasePlugin.INSTANCE;
 	}
 
 } //QVTBaseValidator

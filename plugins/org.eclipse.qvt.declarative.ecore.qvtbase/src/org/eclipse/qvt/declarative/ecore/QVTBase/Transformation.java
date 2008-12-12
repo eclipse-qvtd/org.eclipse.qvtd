@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Transformation.java,v 1.1 2008/07/23 09:39:07 qglineur Exp $
+ * $Id: Transformation.java,v 1.2 2008/12/12 15:31:45 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase;
 
@@ -38,7 +38,7 @@ import org.eclipse.emf.ecore.EPackage;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage#getTransformation()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='WellFormedNsURI WellFormedNsPrefix UniqueNsURIs'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='WellFormedNsURI\r\nWellFormedNsPrefix\r\nUniqueNsURIs\r\nExtendsIsAcyclic\r\nModelParameterNamesAreCompatibleWithExtension\r\nEveryModelParameterUsedPackagesIsCompatibleWithExtension\r\nModelParameterNamesAreUnique\r\nRuleNamesAreUnique\r\nSynthesizedTypesAreOwned'"
  * @generated
  */
 public interface Transformation extends EClass, EPackage {
@@ -71,7 +71,7 @@ public interface Transformation extends EClass, EPackage {
 	 * @return the value of the '<em>Model Parameter</em>' containment reference list.
 	 * @see org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage#getTransformation_ModelParameter()
 	 * @see org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel#getTransformation
-	 * @model opposite="transformation" containment="true" ordered="false"
+	 * @model opposite="transformation" containment="true"
 	 * @generated
 	 */
 	EList<TypedModel> getModelParameter();

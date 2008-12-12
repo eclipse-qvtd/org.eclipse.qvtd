@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Pattern.java,v 1.1 2008/07/23 09:39:07 qglineur Exp $
+ * $Id: Pattern.java,v 1.2 2008/12/12 15:31:45 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase;
 
@@ -36,7 +36,7 @@ import org.eclipse.ocl.ecore.Variable;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage#getPattern()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NoVariableIsAFunctionParameter'"
  * @generated
  */
 public interface Pattern extends EModelElement {
