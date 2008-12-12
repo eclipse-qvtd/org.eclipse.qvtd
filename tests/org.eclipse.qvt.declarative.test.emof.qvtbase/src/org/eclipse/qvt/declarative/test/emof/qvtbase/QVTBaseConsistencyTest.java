@@ -44,6 +44,11 @@ public class QVTBaseConsistencyTest extends AbstractEssentialOCLConsistencyTest
 		//
 		//	Ecore added value
 		//
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.Literals.DOMAIN);
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.Literals.FUNCTION);
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.Literals.PATTERN);
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.Literals.PREDICATE);
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.Literals.RULE);
 		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.Literals.TRANSFORMATION);
 		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.Literals.TYPED_MODEL);
 		changeOfSize(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.Literals.TRANSFORMATION, EcorePackage.Literals.ECLASS__EOPERATIONS);
@@ -85,7 +90,6 @@ public class QVTBaseConsistencyTest extends AbstractEssentialOCLConsistencyTest
 		changeOfOrdered(differences, helper, QVTBasePackage.Literals.PATTERN__BINDS_TO);
 		changeOfOrdered(differences, helper, QVTBasePackage.Literals.PATTERN__PREDICATE);
 		changeOfOrdered(differences, helper, QVTBasePackage.Literals.RULE__DOMAIN);
-		changeOfOrdered(differences, helper, QVTBasePackage.Literals.TRANSFORMATION__MODEL_PARAMETER);
 		changeOfOrdered(differences, helper, QVTBasePackage.Literals.TRANSFORMATION__OWNED_TAG);
 		changeOfOrdered(differences, helper, QVTBasePackage.Literals.TRANSFORMATION__RULE);
 		changeOfOrdered(differences, helper, QVTBasePackage.Literals.TYPED_MODEL__DEPENDS_ON);
@@ -141,7 +145,6 @@ public class QVTBaseConsistencyTest extends AbstractEssentialOCLConsistencyTest
 		changeOfURI(differences, helper, QVTBasePackage.eINSTANCE);
 		changeOfName(differences, helper, QVTBasePackage.eINSTANCE);
 		changeOfLower(differences, helper, QVTBasePackage.Literals.RULE__TRANSFORMATION);
-		changeOfOrdered(differences, helper, QVTBasePackage.Literals.TRANSFORMATION__MODEL_PARAMETER);
 		helper.setLogStream(null);
 		EMOFConsistencyTest.expectedEmofDifferences(differences, helper);		
 		EssentialOCLConsistencyTest.expectedEmofDifferences(differences, helper);
