@@ -61,8 +61,8 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.modelParameter"
-        name="modelParameter" ordered="false" upperBound="-1" eType="#QVTBase.TypedModel"
-        containment="true" eOpposite="#QVTBase.TypedModel.transformation"/>
+        name="modelParameter" upperBound="-1" eType="#QVTBase.TypedModel" containment="true"
+        eOpposite="#QVTBase.TypedModel.transformation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.ownedTag"
         name="ownedTag" ordered="false" upperBound="-1" eType="ecore:EClass ../../org.eclipse.qvt.declarative.emof.emof/model/EMOF.ecore#EMOF.Tag"
         containment="true"/>

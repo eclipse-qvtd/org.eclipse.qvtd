@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Transformation.java,v 1.1 2008/07/23 09:57:28 qglineur Exp $
+ * $Id: Transformation.java,v 1.2 2008/12/12 15:28:09 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTBase;
 
@@ -79,7 +79,7 @@ public interface Transformation extends org.eclipse.qvt.declarative.emof.EMOF.Cl
 	 * @return the value of the '<em>Model Parameter</em>' containment reference list.
 	 * @see org.eclipse.qvt.declarative.emof.QVTBase.QVTBasePackage#getTransformation_ModelParameter()
 	 * @see org.eclipse.qvt.declarative.emof.QVTBase.TypedModel#getTransformation
-	 * @model opposite="transformation" containment="true" ordered="false"
+	 * @model opposite="transformation" containment="true"
 	 * @generated
 	 */
 	EList<TypedModel> getModelParameter();
