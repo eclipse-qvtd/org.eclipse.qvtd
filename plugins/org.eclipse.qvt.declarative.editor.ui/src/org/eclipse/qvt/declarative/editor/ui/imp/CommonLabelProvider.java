@@ -12,14 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.14 2008/12/05 22:17:22 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.15 2008/12/18 07:16:08 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -44,6 +43,7 @@ import org.eclipse.imp.editor.ModelTreeNode;
 import org.eclipse.imp.services.ILabelProvider;
 import org.eclipse.imp.utils.MarkerUtils;
 import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.qvt.declarative.editor.AbstractLabelElement;
 import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
 import org.eclipse.qvt.declarative.editor.JavaLabelElement;
@@ -231,7 +231,7 @@ public abstract class CommonLabelProvider implements ILabelProvider
 				strings[i] = formatException(e, node, i);
 			}
 		}
-	    return MessageFormat.format(format, strings);
+	    return NLS.bind(format, strings);
 	}
 
 	protected Object getASTorCSTNode(Object element) {
