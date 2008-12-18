@@ -703,7 +703,7 @@
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//StringLiteralExpCS/stringSymbol"/>
     </behavior>
   </node>
-  <node xsi:type="ed:EcoreNode" element="ecore:EClass platform:/plugin/org.eclipse.qvt.declarative.parser.ocl/model/FullOCLCST.ecore#//cst/TopLevelCS">
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//OCLDocumentCS">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/OCLModelFile.gif"/>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//VariableCS">
