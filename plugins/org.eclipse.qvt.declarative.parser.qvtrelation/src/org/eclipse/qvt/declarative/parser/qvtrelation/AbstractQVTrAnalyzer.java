@@ -299,12 +299,15 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 		}
 	}
 
-	protected void declareTemplateCS(QVTrDomainEnvironment env, TemplateCS templateCS, EClassifier referredClassifier) {
-		if (referredClassifier == null) {
+	protected void declareTemplateCS(QVTrDomainEnvironment env, TemplateCS templateCS, Variable rootVariable) {
+		EClassifier referredClassifier;
+		if (rootVariable == null) {
 			TypeCS typeCS = templateCS.getType();
 			referredClassifier = resolveClassifier(env, "templateCS", typeCS);
 			env.createVariableDeclaration(templateCS.getIdentifier(), referredClassifier);
 		}
+		else
+			referredClassifier = rootVariable.getType();
 		if (templateCS instanceof ObjectTemplateCS) {
 			if ((referredClassifier == null) || (referredClassifier instanceof EClass))
 				for (PropertyTemplateCS propertyTemplateCS : ((ObjectTemplateCS) templateCS).getPropertyTemplate())
@@ -508,7 +511,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 		IdentifierCS identifier = templateCS.getIdentifier();
 		Variable variable = null;
 		try {
-			variable = env.tryLookupVariable(identifierCS(identifier));
+			variable = env.tryLookupVariable(identifierCS(identifier));		// FIXME use identifier.getAst();
 		} catch (LookupException e) {
 			ERROR(identifier, "ObjectTemplateCS", env.formatLookupException(e));
 		}
@@ -615,8 +618,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 				QVTrDomainEnvironment domainEnv = env.getEnvironment(domainCS);
 				TemplateCS templateCS = domainCS.getTemplate();
 				Variable rootVariable = env.getVariable(templateCS.getIdentifier().getValue());
-				EClassifier rootClassifier = rootVariable != null ? rootVariable.getType() : null;
-				declareTemplateCS(domainEnv, templateCS, rootClassifier);
+				declareTemplateCS(domainEnv, templateCS, rootVariable);
 			}
 		}
 		WhenCS whenCS = relationCS.getWhen();
