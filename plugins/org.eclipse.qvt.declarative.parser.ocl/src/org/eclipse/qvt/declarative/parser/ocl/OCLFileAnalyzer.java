@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLFileAnalyzer.java,v 1.6 2008/11/19 21:47:08 ewillink Exp $
+ * $Id: OCLFileAnalyzer.java,v 1.7 2008/12/18 07:12:30 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl;
 
@@ -60,7 +60,7 @@ public final class OCLFileAnalyzer extends
 	public boolean analyze(OCLTopLevelEnvironment environment) {
 		this.topLevelEnvironment = environment;
 		List<Constraint> constraints = new ArrayList<Constraint>();
-		for (PackageDeclarationCS pkgdecl : environment.getCSTNode().getPackages())
+		for (PackageDeclarationCS pkgdecl : environment.getCSTNode().getPackageDeclarations())
 			packageDeclarationCS(pkgdecl, constraints);
 		if (!constraints.isEmpty())
 			environment.getASTNode().getContents().addAll(constraints);

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLFileEnvironment.java,v 1.3 2008/11/18 14:08:25 ewillink Exp $
+ * $Id: OCLFileEnvironment.java,v 1.4 2008/12/18 07:12:30 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl.environment;
 
@@ -38,7 +38,9 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.EnvironmentFactory;
 import org.eclipse.ocl.LookupException;
+import org.eclipse.ocl.cst.CSTFactory;
 import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.ocl.cst.OCLDocumentCS;
 import org.eclipse.ocl.cst.PackageDeclarationCS;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
@@ -50,8 +52,6 @@ import org.eclipse.qvt.declarative.parser.environment.CSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.ocl.OCLFileAnalyzer;
 import org.eclipse.qvt.declarative.parser.ocl.OCLParsingError;
-import org.eclipse.qvt.declarative.parser.ocl.cst.FullOCLCSTFactory;
-import org.eclipse.qvt.declarative.parser.ocl.cst.TopLevelCS;
 
 public class OCLFileEnvironment extends CSTFileEnvironment<OCLTopLevelEnvironment,OCLEnvironment<?,?,?>,PackageDeclarationCS> implements ICSTFileEnvironment
 {
@@ -121,11 +121,11 @@ public class OCLFileEnvironment extends CSTFileEnvironment<OCLTopLevelEnvironmen
 
 	@Override
 	protected OCLTopLevelEnvironment createRootEnvironment(XMIResource ast, PackageDeclarationCS cst) {
-		TopLevelCS topLevelCS = FullOCLCSTFactory.eINSTANCE.createTopLevelCS();
+		OCLDocumentCS topLevelCS = CSTFactory.eINSTANCE.createOCLDocumentCS();
 		IToken startToken = null;
 		IToken endToken = null;
 		for (PackageDeclarationCS pkgdecl = cst; pkgdecl != null; pkgdecl = pkgdecl.getPackageDeclarationCS()) {
-			topLevelCS.getPackages().add(0, pkgdecl);
+			topLevelCS.getPackageDeclarations().add(0, pkgdecl);
 			if ((startToken == null) || (pkgdecl.getStartToken().getStartOffset() < startToken.getStartOffset()))
 				startToken = pkgdecl.getStartToken();
 			if ((endToken == null) || (endToken.getEndOffset() < pkgdecl.getEndToken().getEndOffset()))
