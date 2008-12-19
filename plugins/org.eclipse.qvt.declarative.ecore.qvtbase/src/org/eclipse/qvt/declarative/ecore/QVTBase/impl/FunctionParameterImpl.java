@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: FunctionParameterImpl.java,v 1.1 2008/07/23 09:39:08 qglineur Exp $
+ * $Id: FunctionParameterImpl.java,v 1.2 2008/12/19 14:30:55 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.impl;
 
@@ -362,7 +362,7 @@ public class FunctionParameterImpl extends EParameterImpl implements FunctionPar
 		if (v instanceof QVTBaseVisitor)
 			return ((QVTBaseVisitor<T>) v).visitFunctionParameter(this);
 		else
-			return v.visitVariable(this);
+			return ((Visitor<T, EClassifier, ?, ?, ?, EParameter, ?, ?, ?, ?>)v).visitVariable(this);
 	}
 
 	/**
