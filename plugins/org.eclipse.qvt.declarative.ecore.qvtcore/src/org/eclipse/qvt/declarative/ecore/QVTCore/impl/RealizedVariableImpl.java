@@ -12,11 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: RealizedVariableImpl.java,v 1.1 2008/07/23 09:43:25 qglineur Exp $
+ * $Id: RealizedVariableImpl.java,v 1.2 2008/12/19 14:30:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTCore.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EParameter;
 
 import org.eclipse.ocl.ecore.impl.VariableImpl;
 import org.eclipse.ocl.utilities.Visitor;
@@ -63,7 +65,7 @@ public class RealizedVariableImpl extends VariableImpl implements RealizedVariab
 		if (v instanceof QVTCoreVisitor)
 			return ((QVTCoreVisitor<T>) v).visitRealizedVariable(this);
 		else
-			return v.visitVariable(this);
+			return ((Visitor<T, EClassifier, ?, ?, ?, EParameter, ?, ?, ?, ?>)v).visitVariable(this);
 	}
 
 } //RealizedVariableImpl
