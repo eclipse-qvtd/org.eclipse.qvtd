@@ -63,7 +63,6 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.Pattern;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Predicate;
 import org.eclipse.qvt.declarative.ecore.QVTBase.QVTBaseFactory;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
-import org.eclipse.qvt.declarative.ecore.QVTRelation.DomainPattern;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Key;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationFactory;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
@@ -290,9 +289,9 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 			return;
 		}
 		for (int i = 0; i < invokedCount; i++) {
-			@SuppressWarnings("null")
+//			@SuppressWarnings("null")
 			RelationDomain domain = (RelationDomain) invokedDomains.get(i);
-			@SuppressWarnings("null")
+//			@SuppressWarnings("null")
 			OCLExpressionCS argument = invokingArguments.get(i);
 			if (argument instanceof VariableExpCS)
 				env.createVariableDeclaration((VariableExpCS) argument, domain.getRootVariable().getType(), domain, true);
@@ -383,12 +382,11 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 		return collectionTemplateExp;
 	}
 	
-	protected void defineDomainCS(QVTrRelationEnvironment env, RelationDomain relationDomain, DomainCS domainCS) {
+	protected void defineDomainCS(QVTrRelationEnvironment env, DomainCS domainCS) {
 		QVTrDomainEnvironment domainEnv = env.getEnvironment(domainCS);
-		DomainPattern domainPattern = QVTRelationFactory.eINSTANCE.createDomainPattern();
-		env.initASTMapping(domainPattern, domainCS, null);
-		relationDomain.setPattern(domainPattern);
-		domainPattern.setTemplateExpression(defineTemplateCS(domainEnv, domainCS.getTemplate()));
+		RelationDomain relationDomain = domainEnv.getASTNode();
+		TemplateExp templateExpression = defineTemplateCS(domainEnv, domainCS.getTemplate());
+		domainEnv.installPattern(templateExpression);
 		List<DefaultValueCS> defaultValueCSs = domainCS.getDefaultValue();
 		if (defaultValueCSs != null) {
 			for (DefaultValueCS defaultValueCS : defaultValueCSs) {
@@ -609,7 +607,6 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 			defineVarDeclarationCS(env, varDeclarationCS);
 			varDeclarationCS.setAst(relation);			// ?? Perhaps first variable would be better
 		}
-		int i = 0;
 		for (AbstractDomainCS abstractDomainCS : relationCS.getDomain()) {
 			if (isCancelled())
 				return relation;
@@ -639,13 +636,11 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 			else
 				ERROR(overridesCS, "relationCS", "Failed to locate overriden '" + overridesId + "'");
 		}
-		i = 0;
 		for (AbstractDomainCS domainCS : relationCS.getDomain()) {
 			if (isCancelled())
 				return relation;
-			RelationDomain domain = (RelationDomain) relation.getDomain().get(i++);
 			if (domainCS instanceof DomainCS)
-				defineDomainCS(env, domain, (DomainCS) domainCS);
+				defineDomainCS(env, (DomainCS) domainCS);
 		}
 		if ((whenCS != null) && (whenCS.getExpr().size() > 0)) {
 			Pattern pattern = QVTBaseFactory.eINSTANCE.createPattern();

@@ -18,10 +18,17 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.VariableExpCS;
+import org.eclipse.ocl.ecore.OCLExpression;
+import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.DomainPattern;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationFactory;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomain;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
+import org.eclipse.qvt.declarative.ecore.QVTTemplate.CollectionTemplateExp;
+import org.eclipse.qvt.declarative.ecore.QVTTemplate.ObjectTemplateExp;
+import org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem;
+import org.eclipse.qvt.declarative.ecore.QVTTemplate.TemplateExp;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.AbstractDomainCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.DomainCS;
@@ -68,6 +75,36 @@ public class QVTrDomainEnvironment extends QVTrEnvironment<QVTrRelationEnvironme
 			return super.getModelName(object);
 	}	
 
+	public void installPattern(TemplateExp templateExpression) {
+		DomainPattern domainPattern = QVTRelationFactory.eINSTANCE.createDomainPattern();
+		initASTMapping(domainPattern, cst, null);
+		ast.setPattern(domainPattern);
+		domainPattern.setTemplateExpression(templateExpression);
+		installPatternVariables(templateExpression);
+	}
+
+	protected void installPatternVariables(TemplateExp templateExpression) {
+		Variable variable = templateExpression.getBindsTo();
+		if (variable != null) {
+			List<Variable> bindsTo = ast.getPattern().getBindsTo();
+			if (!bindsTo.contains(variable))
+				bindsTo.add(variable);
+		}
+		if (templateExpression instanceof ObjectTemplateExp) {
+			for (PropertyTemplateItem part : ((ObjectTemplateExp)templateExpression).getPart()) {
+				OCLExpression value = part.getValue();
+				if (value instanceof TemplateExp)
+					installPatternVariables((TemplateExp) value);
+			}
+		}
+		else if (templateExpression instanceof CollectionTemplateExp) {
+			for (OCLExpression member : ((CollectionTemplateExp)templateExpression).getMember()) {
+				if (member instanceof TemplateExp)
+					installPatternVariables((TemplateExp) member);
+			}
+		}
+	}
+	
 	public EClass lookupImportedClass(String name) {
 		if (typedModel != null) {
 			for (EPackage ePackage : typedModel.getUsedPackage()) {
