@@ -11,7 +11,7 @@
   </modelParameter>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast5" name="MyRelation" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast6" name="left" isCheckable="true" isEnforceable="false" typedModel="ast3" rootVariable="ast12">
-      <pattern xmi:id="ast7">
+      <pattern xmi:id="ast7" bindsTo="ast12">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast8" name="r" bindsTo="ast12">
           <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
           <referredClass href="SeqMM.xml#SeqMM.Message"/>
@@ -19,7 +19,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast9" name="right" isCheckable="false" isEnforceable="true" typedModel="ast4" rootVariable="ast13">
-      <pattern xmi:id="ast10">
+      <pattern xmi:id="ast10" bindsTo="ast13">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast11" name="m" bindsTo="ast13">
           <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
           <referredClass href="SeqMM.xml#SeqMM.Message"/>

@@ -610,7 +610,7 @@
   </modelParameter>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast222" name="RelationalTransformationToMappingTransformation" isTopLevel="true">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast223" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast245">
-      <pattern xmi:id="ast224">
+      <pattern xmi:id="ast224" bindsTo="ast245 ast249 ast250">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast225" name="rt" bindsTo="ast245">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.RelationalTransformation"/>
           <part xmi:id="ast226">
@@ -644,7 +644,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast234" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast246">
-      <pattern xmi:id="ast235">
+      <pattern xmi:id="ast235" bindsTo="ast246 ast251">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast236" name="mt" bindsTo="ast246">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTBase.Transformation"/>
           <part xmi:id="ast237">
@@ -700,7 +700,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast252" name="RelationToTraceClass" isTopLevel="true">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast253" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast283">
-      <pattern xmi:id="ast254">
+      <pattern xmi:id="ast254" bindsTo="ast283 ast287 ast288 ast289 ast290 ast291">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast255" name="r" bindsTo="ast283">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <part xmi:id="ast256">
@@ -755,7 +755,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast270" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast284">
-      <pattern xmi:id="ast271">
+      <pattern xmi:id="ast271" bindsTo="ast284 ast292">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast272" name="rc" bindsTo="ast284">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#EMOF.Class"/>
           <part xmi:id="ast273">
@@ -840,7 +840,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast298" name="SubTemplateToTraceClassProps" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast299" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast321">
-      <pattern xmi:id="ast300">
+      <pattern xmi:id="ast300" bindsTo="ast321 ast324 ast325 ast326 ast327">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast301" name="t" bindsTo="ast321">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTTemplate.ObjectTemplateExp"/>
           <part xmi:id="ast302">
@@ -882,7 +882,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast312" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast322">
-      <pattern xmi:id="ast313">
+      <pattern xmi:id="ast313" bindsTo="ast322 ast328">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast314" name="rc" bindsTo="ast322">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#EMOF.Class"/>
           <part xmi:id="ast315">
@@ -948,7 +948,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast334" name="TopLevelRelationToMappingForChecking" isTopLevel="true">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast335" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast369">
-      <pattern xmi:id="ast336">
+      <pattern xmi:id="ast336" bindsTo="ast369">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast337" name="r" bindsTo="ast369">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast338">
@@ -1004,7 +1004,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast353" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast370">
-      <pattern xmi:id="ast354">
+      <pattern xmi:id="ast354" bindsTo="ast370 ast380 ast381 ast382 ast383">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast355" name="m" bindsTo="ast370">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast356">
@@ -1296,7 +1296,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast467" name="RWherePatternToMPattern" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast468" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast476">
-      <pattern xmi:id="ast469">
+      <pattern xmi:id="ast469" bindsTo="ast476 ast478">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast470" name="r" bindsTo="ast476">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <part xmi:id="ast471">
@@ -1311,7 +1311,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast473" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast477">
-      <pattern xmi:id="ast474">
+      <pattern xmi:id="ast474" bindsTo="ast477">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast475" name="mp" bindsTo="ast477">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTBase.Pattern"/>
           <referredClass href="QVT.ecore#QVTBase.Pattern"/>
@@ -1343,7 +1343,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast484" name="UnsharedWhenVarsToMgVars" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast485" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast494">
-      <pattern xmi:id="ast486">
+      <pattern xmi:id="ast486" bindsTo="ast494">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast487" name="unsharedWhenVars" eType="ast181" bindsTo="ast494" referredCollectionType="ast181" rest="ast496">
           <member xsi:type="ocl.ecore:VariableExp" xmi:id="ast488" referredVariable="ast498">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
@@ -1352,7 +1352,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast489" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast495">
-      <pattern xmi:id="ast490">
+      <pattern xmi:id="ast490" bindsTo="ast495 ast497">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast491" name="mg" bindsTo="ast495">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.GuardPattern"/>
           <part xmi:id="ast492">
@@ -1387,7 +1387,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast505" name="DomainVarsSharedWithWhenToDgVars" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast506" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast515">
-      <pattern xmi:id="ast507">
+      <pattern xmi:id="ast507" bindsTo="ast515">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast508" name="domainVarsSharedWithWhen" eType="ast181" bindsTo="ast515" referredCollectionType="ast181" rest="ast517">
           <member xsi:type="ocl.ecore:VariableExp" xmi:id="ast509" referredVariable="ast519">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
@@ -1396,7 +1396,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast510" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast516">
-      <pattern xmi:id="ast511">
+      <pattern xmi:id="ast511" bindsTo="ast516 ast518">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast512" name="dg" bindsTo="ast516">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.GuardPattern"/>
           <part xmi:id="ast513">
@@ -1431,7 +1431,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast526" name="DomainBottomUnSharedVarsToDbVars" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast527" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast536">
-      <pattern xmi:id="ast528">
+      <pattern xmi:id="ast528" bindsTo="ast536">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast529" name="domainBottomUnSharedVars" eType="ast181" bindsTo="ast536" referredCollectionType="ast181" rest="ast538">
           <member xsi:type="ocl.ecore:VariableExp" xmi:id="ast530" referredVariable="ast540">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
@@ -1440,7 +1440,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast531" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast537">
-      <pattern xmi:id="ast532">
+      <pattern xmi:id="ast532" bindsTo="ast537 ast539">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast533" name="db" bindsTo="ast537">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast534">
@@ -1475,7 +1475,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast547" name="TopLevelRelationToMappingForEnforcement" isTopLevel="true">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast548" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast622">
-      <pattern xmi:id="ast549">
+      <pattern xmi:id="ast549" bindsTo="ast622 ast651 ast652 ast653 ast654 ast655 ast656 ast657 ast658">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast550" name="r" bindsTo="ast622">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <part xmi:id="ast551">
@@ -1573,7 +1573,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast580" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast623">
-      <pattern xmi:id="ast581">
+      <pattern xmi:id="ast581" bindsTo="ast623 ast659 ast660 ast661 ast662 ast663 ast664 ast665 ast666 ast667">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast582" name="m" bindsTo="ast623">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast583">
@@ -2331,7 +2331,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast891" name="InvokedRelationToMappingForChecking" isTopLevel="true">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast892" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast940">
-      <pattern xmi:id="ast893">
+      <pattern xmi:id="ast893" bindsTo="ast940 ast953 ast954 ast955 ast956">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast894" name="r" bindsTo="ast940">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast895">
@@ -2421,7 +2421,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast920" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast941">
-      <pattern xmi:id="ast921">
+      <pattern xmi:id="ast921" bindsTo="ast941 ast957 ast958 ast959 ast960">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast922" name="m" bindsTo="ast941">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast923">
@@ -2779,7 +2779,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast1058" name="InvokedRelationToMappingForEnforcement" isTopLevel="true">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1059" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast1147">
-      <pattern xmi:id="ast1060">
+      <pattern xmi:id="ast1060" bindsTo="ast1147 ast1177 ast1178 ast1179 ast1180 ast1181 ast1182 ast1183 ast1184 ast1185 ast1186 ast1187 ast1188">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1061" name="r" bindsTo="ast1147">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <part xmi:id="ast1062">
@@ -2911,7 +2911,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1101" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast1148">
-      <pattern xmi:id="ast1102">
+      <pattern xmi:id="ast1102" bindsTo="ast1148 ast1189 ast1190 ast1191 ast1192 ast1193 ast1194 ast1195 ast1196 ast1197">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1103" name="m" bindsTo="ast1148">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast1104">
@@ -3730,7 +3730,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast1436" name="RDomainToMDomainForChecking" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1437" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast1489">
-      <pattern xmi:id="ast1438">
+      <pattern xmi:id="ast1438" bindsTo="ast1489 ast1500 ast1501 ast1502 ast1503 ast1504 ast1505">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1439" name="r" bindsTo="ast1489">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <part xmi:id="ast1440">
@@ -3801,7 +3801,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1460" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast1490">
-      <pattern xmi:id="ast1461">
+      <pattern xmi:id="ast1461" bindsTo="ast1490 ast1506 ast1507 ast1508 ast1509 ast1510">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1462" name="m" bindsTo="ast1490">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast1463">
@@ -4079,7 +4079,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast1566" name="IROppositeDomainsToMappingForEnforcement" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1567" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast1630">
-      <pattern xmi:id="ast1568">
+      <pattern xmi:id="ast1568" bindsTo="ast1630 ast1646 ast1647 ast1649 ast1650 ast1651 ast1652 ast1653 ast1654 ast1655 ast1656">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast1569" name="oppDomainSeq" eType="ast183" bindsTo="ast1630" referredCollectionType="ast183" rest="ast1645">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1570">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -4178,7 +4178,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1599" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast1631">
-      <pattern xmi:id="ast1600">
+      <pattern xmi:id="ast1600" bindsTo="ast1631 ast1657 ast1658 ast1659 ast1660 ast1661 ast1662 ast1663">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1601" name="m" bindsTo="ast1631">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast1602">
@@ -4515,7 +4515,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast1736" name="TROppositeDomainsToMappingForEnforcement" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1737" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast1797">
-      <pattern xmi:id="ast1738">
+      <pattern xmi:id="ast1738" bindsTo="ast1797 ast1813 ast1814 ast1816 ast1817 ast1818 ast1819 ast1820 ast1821">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast1739" name="oppDomainSeq" eType="ast183" bindsTo="ast1797" referredCollectionType="ast183" rest="ast1812">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1740">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -4603,7 +4603,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1766" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast1798">
-      <pattern xmi:id="ast1767">
+      <pattern xmi:id="ast1767" bindsTo="ast1798 ast1822 ast1823 ast1824 ast1825 ast1826 ast1827">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1768" name="m" bindsTo="ast1798">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast1769">
@@ -4916,7 +4916,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast1894" name="RWhenPatternToMGuardPattern" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1895" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast1905">
-      <pattern xmi:id="ast1896">
+      <pattern xmi:id="ast1896" bindsTo="ast1905 ast1909 ast1910">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1897" name="r" bindsTo="ast1905">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <part xmi:id="ast1898">
@@ -4935,7 +4935,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1902" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast1906">
-      <pattern xmi:id="ast1903">
+      <pattern xmi:id="ast1903" bindsTo="ast1906">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1904" name="mg" bindsTo="ast1906">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.GuardPattern"/>
           <referredClass href="QVT.ecore#QVTCore.GuardPattern"/>
@@ -5063,7 +5063,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast1953" name="RVarSetToMVarSet" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1954" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast1962">
-      <pattern xmi:id="ast1955">
+      <pattern xmi:id="ast1955" bindsTo="ast1962 ast1966">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast1956" name="rvSeq" eType="ast184" bindsTo="ast1962" referredCollectionType="ast184" rest="ast1964">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1957" name="rv" bindsTo="ast1966">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
@@ -5073,7 +5073,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1958" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast1963">
-      <pattern xmi:id="ast1959">
+      <pattern xmi:id="ast1959" bindsTo="ast1963 ast1967">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast1960" name="mvSet" eType="ast181" bindsTo="ast1963" referredCollectionType="ast181" rest="ast1965">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1961" name="mv" bindsTo="ast1967">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
@@ -5129,7 +5129,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast1983" name="RVarSetToMBVarSet" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1984" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast1993">
-      <pattern xmi:id="ast1985">
+      <pattern xmi:id="ast1985" bindsTo="ast1993 ast1997">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast1986" name="rvSeq" eType="ast184" bindsTo="ast1993" referredCollectionType="ast184" rest="ast1995">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1987" name="rv" bindsTo="ast1997">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
@@ -5139,7 +5139,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1988" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast1994">
-      <pattern xmi:id="ast1989">
+      <pattern xmi:id="ast1989" bindsTo="ast1994 ast1998">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1990" name="mb" bindsTo="ast1994">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast1991">
@@ -5190,7 +5190,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2008" name="RVarSetToDGVarSet" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2009" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2018">
-      <pattern xmi:id="ast2010">
+      <pattern xmi:id="ast2010" bindsTo="ast2018 ast2022">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2011" name="rvSeq" eType="ast184" bindsTo="ast2018" referredCollectionType="ast184" rest="ast2020">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2012" name="rv" bindsTo="ast2022">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
@@ -5200,7 +5200,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2013" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2019">
-      <pattern xmi:id="ast2014">
+      <pattern xmi:id="ast2014" bindsTo="ast2019 ast2023">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2015" name="dg" bindsTo="ast2019">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.GuardPattern"/>
           <part xmi:id="ast2016">
@@ -5251,7 +5251,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2033" name="RVarToMVar" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2034" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2048">
-      <pattern xmi:id="ast2035">
+      <pattern xmi:id="ast2035" bindsTo="ast2048 ast2051">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2036" name="rv" bindsTo="ast2048">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
           <part xmi:id="ast2037">
@@ -5272,7 +5272,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2041" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2049">
-      <pattern xmi:id="ast2042">
+      <pattern xmi:id="ast2042" bindsTo="ast2049">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2043" name="mv" bindsTo="ast2049">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
           <part xmi:id="ast2044">
@@ -5306,7 +5306,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2052" name="RVarToMRealizedVar" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2053" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2067">
-      <pattern xmi:id="ast2054">
+      <pattern xmi:id="ast2054" bindsTo="ast2067 ast2070">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2055" name="rv" bindsTo="ast2067">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
           <part xmi:id="ast2056">
@@ -5327,7 +5327,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2060" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2068">
-      <pattern xmi:id="ast2061">
+      <pattern xmi:id="ast2061" bindsTo="ast2068">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2062" name="mv" bindsTo="ast2068">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.RealizedVariable"/>
           <part xmi:id="ast2063">
@@ -5361,7 +5361,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2071" name="RSimplePatternToMPattern" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2072" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2090">
-      <pattern xmi:id="ast2073">
+      <pattern xmi:id="ast2073" bindsTo="ast2090 ast2092 ast2093">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2074" name="rp" bindsTo="ast2090">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTBase.Pattern"/>
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2075">
@@ -5397,7 +5397,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2083" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2091">
-      <pattern xmi:id="ast2084">
+      <pattern xmi:id="ast2084" bindsTo="ast2091 ast2094 ast2095">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2085" name="mp" bindsTo="ast2091">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTBase.Pattern"/>
           <part xmi:id="ast2086">
@@ -5452,7 +5452,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2101" name="RWhenRelCallToMGuard" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2102" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2118">
-      <pattern xmi:id="ast2103">
+      <pattern xmi:id="ast2103" bindsTo="ast2118 ast2120 ast2121 ast2122 ast2123 ast2124">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2104" name="rp" bindsTo="ast2118">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTBase.Pattern"/>
           <part xmi:id="ast2105">
@@ -5489,7 +5489,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2115" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2119">
-      <pattern xmi:id="ast2116">
+      <pattern xmi:id="ast2116" bindsTo="ast2119">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2117" name="mp" bindsTo="ast2119">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.GuardPattern"/>
           <referredClass href="QVT.ecore#QVTCore.GuardPattern"/>
@@ -5563,7 +5563,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2143" name="RWhenRelCallArgToMGuardPredicate" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2144" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2195">
-      <pattern xmi:id="ast2145">
+      <pattern xmi:id="ast2145" bindsTo="ast2195 ast2201 ast2202 ast2203 ast2204 ast2205">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2146" name="daSeq" eType="ast183" bindsTo="ast2195" referredCollectionType="ast183" rest="ast2200">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2147" name="r" bindsTo="ast2201">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
@@ -5601,7 +5601,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2156" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2196">
-      <pattern xmi:id="ast2157">
+      <pattern xmi:id="ast2157" bindsTo="ast2196 ast2206 ast2207 ast2208 ast2209 ast2210 ast2211 ast2212 ast2213">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2158" name="mp" bindsTo="ast2196">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.GuardPattern"/>
           <part xmi:id="ast2159">
@@ -5810,7 +5810,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2224" name="RInvokerToMGuard" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2225" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2238">
-      <pattern xmi:id="ast2226">
+      <pattern xmi:id="ast2226" bindsTo="ast2238 ast2241 ast2242 ast2243 ast2244 ast2245">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2227" name="seqForInvoker" eType="ast183" bindsTo="ast2238" referredCollectionType="ast183" rest="ast2240">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2228" name="ir" bindsTo="ast2241">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
@@ -5836,7 +5836,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2235" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2239">
-      <pattern xmi:id="ast2236">
+      <pattern xmi:id="ast2236" bindsTo="ast2239">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2237" name="mg" bindsTo="ast2239">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.GuardPattern"/>
           <referredClass href="QVT.ecore#QVTCore.GuardPattern"/>
@@ -5909,7 +5909,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2264" name="RInvokerToMGuardPredicate" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2265" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2316">
-      <pattern xmi:id="ast2266">
+      <pattern xmi:id="ast2266" bindsTo="ast2316 ast2322 ast2323 ast2324 ast2325 ast2326">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2267" name="seqForInvoker" eType="ast183" bindsTo="ast2316" referredCollectionType="ast183" rest="ast2321">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2268" name="ir" bindsTo="ast2322">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
@@ -5947,7 +5947,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2277" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2317">
-      <pattern xmi:id="ast2278">
+      <pattern xmi:id="ast2278" bindsTo="ast2317 ast2327 ast2328 ast2329 ast2330 ast2331 ast2332 ast2333 ast2334">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2279" name="mg" bindsTo="ast2317">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.GuardPattern"/>
           <part xmi:id="ast2280">
@@ -6156,12 +6156,12 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2345" name="RDomainPatternToMDBottomPattern" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2346" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2360">
-      <pattern xmi:id="ast2347">
+      <pattern xmi:id="ast2347" bindsTo="ast2360">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2348" name="seqForDomainPtrn" eType="ast183" bindsTo="ast2360" referredCollectionType="ast183"/>
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2349" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2361">
-      <pattern xmi:id="ast2350">
+      <pattern xmi:id="ast2350" bindsTo="ast2361 ast2362 ast2363 ast2364">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2351" name="db" bindsTo="ast2361">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast2352">
@@ -6249,7 +6249,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2382" name="RDomainToMDBottomForEnforcement" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2383" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2403">
-      <pattern xmi:id="ast2384">
+      <pattern xmi:id="ast2384" bindsTo="ast2403 ast2417 ast2419 ast2420 ast2421 ast2422">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2385" name="rdtVarsSeq" eType="ast186" bindsTo="ast2403" referredCollectionType="ast186" rest="ast2416">
           <member xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2386" name="rdtSet" eType="ast185" bindsTo="ast2417" referredCollectionType="ast185" rest="ast2418">
             <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2387" name="r" bindsTo="ast2419">
@@ -6276,7 +6276,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2392" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2404">
-      <pattern xmi:id="ast2393">
+      <pattern xmi:id="ast2393" bindsTo="ast2404 ast2423 ast2424 ast2425">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2394" name="db" bindsTo="ast2404">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast2395">
@@ -6539,7 +6539,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2507" name="RDomainVarToMDBottomAssignmnetForEnforcement" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2508" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2540">
-      <pattern xmi:id="ast2509">
+      <pattern xmi:id="ast2509" bindsTo="ast2540 ast2546 ast2548 ast2549 ast2550 ast2551">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2510" name="rdtVarsSeq" eType="ast186" bindsTo="ast2540" referredCollectionType="ast186" rest="ast2545">
           <member xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2511" name="rdtSet" eType="ast185" bindsTo="ast2546" referredCollectionType="ast185" rest="ast2547">
             <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2512" name="r" bindsTo="ast2548">
@@ -6566,7 +6566,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2517" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2541">
-      <pattern xmi:id="ast2518">
+      <pattern xmi:id="ast2518" bindsTo="ast2541 ast2552 ast2553 ast2554 ast2555">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2519" name="mb" bindsTo="ast2541">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast2520">
@@ -6724,7 +6724,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2573" name="RDomainToMBottomPredicateForEnforcement" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2574" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2614">
-      <pattern xmi:id="ast2575">
+      <pattern xmi:id="ast2575" bindsTo="ast2614 ast2624 ast2626 ast2627 ast2628 ast2629">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2576" name="rdtVarsSeq" eType="ast186" bindsTo="ast2614" referredCollectionType="ast186" rest="ast2623">
           <member xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2577" name="rdtSet" eType="ast185" bindsTo="ast2624" referredCollectionType="ast185" rest="ast2625">
             <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2578" name="r" bindsTo="ast2626">
@@ -6751,7 +6751,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2583" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2615">
-      <pattern xmi:id="ast2584">
+      <pattern xmi:id="ast2584" bindsTo="ast2615 ast2630 ast2631 ast2632 ast2633 ast2634 ast2635 ast2636">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2585" name="mb" bindsTo="ast2615">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast2586">
@@ -7023,7 +7023,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2688" name="RPredicateSetToMBPredicateSet" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2689" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2702">
-      <pattern xmi:id="ast2690">
+      <pattern xmi:id="ast2690" bindsTo="ast2702 ast2705 ast2706">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2691" name="predSeq" eType="ast187" bindsTo="ast2702" referredCollectionType="ast187" rest="ast2704">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2692" name="rp" bindsTo="ast2705">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTBase.Predicate"/>
@@ -7040,7 +7040,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2695" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2703">
-      <pattern xmi:id="ast2696">
+      <pattern xmi:id="ast2696" bindsTo="ast2703 ast2707 ast2708">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2697" name="mb" bindsTo="ast2703">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast2698">
@@ -7103,7 +7103,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2718" name="RDomainToMDBottomForEnforcementOfIdentityProp" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2719" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2753">
-      <pattern xmi:id="ast2720">
+      <pattern xmi:id="ast2720" bindsTo="ast2753 ast2757 ast2758 ast2759 ast2760 ast2761 ast2762 ast2763">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2721" name="rtSeq" eType="ast183" bindsTo="ast2753" referredCollectionType="ast183" rest="ast2756">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2722" name="r" bindsTo="ast2757">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
@@ -7176,7 +7176,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2742" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2754">
-      <pattern xmi:id="ast2743">
+      <pattern xmi:id="ast2743" bindsTo="ast2754 ast2764 ast2765 ast2766">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2744" name="db" bindsTo="ast2754">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast2745">
@@ -7320,7 +7320,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2796" name="RDomainToMDBottomForEnforcementOfIdentityPropObject" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2797" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2846">
-      <pattern xmi:id="ast2798">
+      <pattern xmi:id="ast2798" bindsTo="ast2846 ast2853 ast2854 ast2855 ast2856 ast2857 ast2858 ast2859 ast2860 ast2861">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2799" name="rtSeq" eType="ast183" bindsTo="ast2846" referredCollectionType="ast183" rest="ast2852">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2800" name="r" bindsTo="ast2853">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
@@ -7404,7 +7404,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2823" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2847">
-      <pattern xmi:id="ast2824">
+      <pattern xmi:id="ast2824" bindsTo="ast2847 ast2862 ast2863 ast2864 ast2865">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2825" name="mb" bindsTo="ast2847">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast2826">
@@ -7576,7 +7576,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2883" name="RDomainPatternExprToMappingDomainAssignment" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2884" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2922">
-      <pattern xmi:id="ast2885">
+      <pattern xmi:id="ast2885" bindsTo="ast2922 ast2927 ast2928 ast2929">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2886" name="seqForAssignment" eType="ast183" bindsTo="ast2922" referredCollectionType="ast183" rest="ast2926">
           <member xsi:type="ocl.ecore:VariableExp" xmi:id="ast2887" referredVariable="ast2934">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#EMOF.Element"/>
@@ -7635,7 +7635,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2902" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2923">
-      <pattern xmi:id="ast2903">
+      <pattern xmi:id="ast2903" bindsTo="ast2923 ast2930 ast2931 ast2932 ast2933">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2904" name="db" bindsTo="ast2923">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast2905">
@@ -7761,7 +7761,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2944" name="RDomainPatternExprToMappingDomainVarAssignment" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2945" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast2985">
-      <pattern xmi:id="ast2946">
+      <pattern xmi:id="ast2946" bindsTo="ast2985 ast2992 ast2993 ast2994 ast2995">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2947" name="seqForAssignment" eType="ast183" bindsTo="ast2985" referredCollectionType="ast183" rest="ast2991">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2948">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -7811,7 +7811,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2961" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2986">
-      <pattern xmi:id="ast2962">
+      <pattern xmi:id="ast2962" bindsTo="ast2986 ast2996 ast2997 ast2998 ast2999 ast3000">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2963" name="db" bindsTo="ast2986">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast2964">
@@ -7971,7 +7971,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3016" name="RDomainPatternExprToMappingDomainTemplateVarAssignment" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3017" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast3056">
-      <pattern xmi:id="ast3018">
+      <pattern xmi:id="ast3018" bindsTo="ast3056 ast3063 ast3064 ast3065 ast3066">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3019" name="seqForAssignment" eType="ast183" bindsTo="ast3056" referredCollectionType="ast183" rest="ast3062">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3020">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -8017,7 +8017,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3032" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3057">
-      <pattern xmi:id="ast3033">
+      <pattern xmi:id="ast3033" bindsTo="ast3057 ast3067 ast3068 ast3069 ast3070 ast3071">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3034" name="db" bindsTo="ast3057">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3035">
@@ -8177,7 +8177,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3087" name="RDomainPatternExprToMappingBottomVarAssignment" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3088" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast3127">
-      <pattern xmi:id="ast3089">
+      <pattern xmi:id="ast3089" bindsTo="ast3127 ast3134 ast3135 ast3136 ast3137">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3090" name="seqForAssignment" eType="ast183" bindsTo="ast3127" referredCollectionType="ast183" rest="ast3133">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3091">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -8223,7 +8223,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3103" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3128">
-      <pattern xmi:id="ast3104">
+      <pattern xmi:id="ast3104" bindsTo="ast3128 ast3138 ast3139 ast3140 ast3141 ast3142">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3105" name="mb" bindsTo="ast3128">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3106">
@@ -8383,7 +8383,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3158" name="RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3159" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast3228">
-      <pattern xmi:id="ast3160">
+      <pattern xmi:id="ast3160" bindsTo="ast3228 ast3234 ast3235 ast3236 ast3237 ast3238 ast3239 ast3240 ast3241 ast3242 ast3243 ast3244">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3161" name="rtdSeq" eType="ast183" bindsTo="ast3228" referredCollectionType="ast183" rest="ast3233">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3162" name="r" bindsTo="ast3234">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
@@ -8509,7 +8509,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3197" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3229">
-      <pattern xmi:id="ast3198">
+      <pattern xmi:id="ast3198" bindsTo="ast3229 ast3245 ast3246 ast3247 ast3248 ast3249 ast3250 ast3251">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3199" name="m" bindsTo="ast3229">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast3200">
@@ -8759,7 +8759,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3282" name="RDomainToMComposedMappingGuard" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3283" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast3361">
-      <pattern xmi:id="ast3284">
+      <pattern xmi:id="ast3284" bindsTo="ast3361 ast3371 ast3372 ast3373 ast3374 ast3375 ast3376 ast3377 ast3378 ast3379 ast3380">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3285" name="rtdSeq" eType="ast183" bindsTo="ast3361" referredCollectionType="ast183" rest="ast3370">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3286" name="isVarBoundToSomeOtherTemplate" referredOperation="ast147">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -8853,7 +8853,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3312" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3362">
-      <pattern xmi:id="ast3313">
+      <pattern xmi:id="ast3313" bindsTo="ast3362 ast3381 ast3382 ast3383 ast3384 ast3385 ast3386 ast3387 ast3388 ast3389 ast3390 ast3391">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3314" name="cm" bindsTo="ast3362">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast3315">
@@ -9158,7 +9158,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3414" name="RDomainToMDBottomForEnforcementOfNonIdentityPropObject" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3415" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast3513">
-      <pattern xmi:id="ast3416">
+      <pattern xmi:id="ast3416" bindsTo="ast3513 ast3524 ast3526 ast3527 ast3528 ast3529 ast3530 ast3531 ast3532 ast3533 ast3534 ast3535 ast3536 ast3537">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3417" name="rdtVarsSeq" eType="ast186" bindsTo="ast3513" referredCollectionType="ast186" rest="ast3523">
           <member xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3418" name="rdtSet" eType="ast185" bindsTo="ast3524" referredCollectionType="ast185" rest="ast3525">
             <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3419" name="r" bindsTo="ast3526">
@@ -9293,7 +9293,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3457" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3514">
-      <pattern xmi:id="ast3458">
+      <pattern xmi:id="ast3458" bindsTo="ast3514 ast3538 ast3539 ast3540 ast3541 ast3542 ast3543 ast3544 ast3545 ast3546 ast3547 ast3548">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3459" name="m" bindsTo="ast3514">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast3460">
@@ -9690,7 +9690,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3599" name="RDomainPatternToMDBottomPatternComposite" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3600" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast3639">
-      <pattern xmi:id="ast3601">
+      <pattern xmi:id="ast3601" bindsTo="ast3639 ast3647 ast3648 ast3649 ast3650 ast3651 ast3652 ast3653">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3602" name="seqForDomainPtrn" eType="ast183" bindsTo="ast3639" referredCollectionType="ast183" rest="ast3646">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3603" name="r" bindsTo="ast3647">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
@@ -9745,7 +9745,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3617" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3640">
-      <pattern xmi:id="ast3618">
+      <pattern xmi:id="ast3618" bindsTo="ast3640 ast3654 ast3655 ast3656 ast3657">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3619" name="db" bindsTo="ast3640">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3620">
@@ -9921,7 +9921,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3679" name="RDomainPatternToMDBottomPatternSimpleUnSharedVarExpr" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3680" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast3723">
-      <pattern xmi:id="ast3681">
+      <pattern xmi:id="ast3681" bindsTo="ast3723 ast3730 ast3731 ast3732 ast3733 ast3734 ast3735 ast3736">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3682" name="seqForDomainPtrn" eType="ast183" bindsTo="ast3723" referredCollectionType="ast183" rest="ast3729">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3683">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -9988,7 +9988,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3701" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3724">
-      <pattern xmi:id="ast3702">
+      <pattern xmi:id="ast3702" bindsTo="ast3724 ast3737 ast3738 ast3739 ast3740">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3703" name="db" bindsTo="ast3724">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3704">
@@ -10147,7 +10147,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3756" name="RDomainPatternToMDBottomPatternSimpleSharedVarExpr" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3757" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast3799">
-      <pattern xmi:id="ast3758">
+      <pattern xmi:id="ast3758" bindsTo="ast3799 ast3806 ast3807 ast3808 ast3809 ast3810 ast3811 ast3812">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3759" name="seqForDomainPtrn" eType="ast183" bindsTo="ast3799" referredCollectionType="ast183" rest="ast3805">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3760">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -10210,7 +10210,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3777" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3800">
-      <pattern xmi:id="ast3778">
+      <pattern xmi:id="ast3778" bindsTo="ast3800 ast3813 ast3814 ast3815 ast3816">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3779" name="mb" bindsTo="ast3800">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3780">
@@ -10369,7 +10369,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3832" name="RDomainPatternToMDBottomPatternSimpleNonVarExpr" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3833" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast3877">
-      <pattern xmi:id="ast3834">
+      <pattern xmi:id="ast3834" bindsTo="ast3877 ast3882 ast3883 ast3884 ast3885 ast3886">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3835" name="seqForDomainPtrn" eType="ast183" bindsTo="ast3877" referredCollectionType="ast183" rest="ast3881">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3836">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -10448,7 +10448,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3857" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3878">
-      <pattern xmi:id="ast3858">
+      <pattern xmi:id="ast3858" bindsTo="ast3878 ast3887 ast3888 ast3889 ast3890">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3859" name="db" bindsTo="ast3878">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3860">
@@ -10580,7 +10580,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3901" name="RDomainVarsToTraceClassProps" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3902" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast3937">
-      <pattern xmi:id="ast3903">
+      <pattern xmi:id="ast3903" bindsTo="ast3937 ast3941 ast3942 ast3943 ast3945 ast3946">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3904" name="rd" bindsTo="ast3937">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.RelationDomain"/>
           <part xmi:id="ast3905">
@@ -10618,7 +10618,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3914" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3938">
-      <pattern xmi:id="ast3915">
+      <pattern xmi:id="ast3915" bindsTo="ast3938 ast3947 ast3948 ast3949 ast3950">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3916" name="mb" bindsTo="ast3938">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3917">
@@ -10757,7 +10757,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3960" name="ROppositeDomainVarsToTraceClassProps" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3961" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast3994">
-      <pattern xmi:id="ast3962">
+      <pattern xmi:id="ast3962" bindsTo="ast3994 ast4000 ast4002 ast4003 ast4004 ast4006 ast4007">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3963" name="rdVarsSeq" eType="ast186" bindsTo="ast3994" referredCollectionType="ast186" rest="ast3999">
           <member xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3964" name="rdSet" eType="ast185" bindsTo="ast4000" referredCollectionType="ast185" rest="ast4001">
             <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3965" name="r" bindsTo="ast4002">
@@ -10786,7 +10786,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3971" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3995">
-      <pattern xmi:id="ast3972">
+      <pattern xmi:id="ast3972" bindsTo="ast3995 ast4008 ast4009 ast4010 ast4011">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3973" name="mb" bindsTo="ast3995">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3974">
@@ -10950,7 +10950,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast4032" name="RRelImplToMBottomEnforcementOperation" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast4033" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast4065">
-      <pattern xmi:id="ast4034">
+      <pattern xmi:id="ast4034" bindsTo="ast4065 ast4069 ast4070 ast4071 ast4072 ast4073">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast4035" name="repImplSeq" eType="ast183" bindsTo="ast4065" referredCollectionType="ast183" rest="ast4068">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast4036" name="r" bindsTo="ast4069">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
@@ -10992,7 +10992,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast4046" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast4066">
-      <pattern xmi:id="ast4047">
+      <pattern xmi:id="ast4047" bindsTo="ast4066 ast4074 ast4075 ast4076 ast4077">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast4048" name="mb" bindsTo="ast4066">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast4049">
@@ -11093,7 +11093,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast4083" name="RRelDomainsToMOpCallArg" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast4084" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast4100">
-      <pattern xmi:id="ast4085">
+      <pattern xmi:id="ast4085" bindsTo="ast4100 ast4102 ast4103 ast4104">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast4086" name="r" bindsTo="ast4100">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <part xmi:id="ast4087">
@@ -11122,7 +11122,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast4093" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast4101">
-      <pattern xmi:id="ast4094">
+      <pattern xmi:id="ast4094" bindsTo="ast4101 ast4105 ast4106">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast4095" name="oce" bindsTo="ast4101">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.OperationCallExp"/>
           <part xmi:id="ast4096">
@@ -11180,7 +11180,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast4112" name="RelationToTraceClassVar" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast4113" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast4127">
-      <pattern xmi:id="ast4114">
+      <pattern xmi:id="ast4114" bindsTo="ast4127">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast4115" name="r" bindsTo="ast4127">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <part xmi:id="ast4116">
@@ -11194,7 +11194,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast4118" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast4128">
-      <pattern xmi:id="ast4119">
+      <pattern xmi:id="ast4119" bindsTo="ast4128">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast4120" name="tcv" bindsTo="ast4128">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.RealizedVariable"/>
           <part xmi:id="ast4121">
@@ -11248,7 +11248,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast4136" name="RelationDomainToTraceClassVar" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast4137" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast4159">
-      <pattern xmi:id="ast4138">
+      <pattern xmi:id="ast4138" bindsTo="ast4159 ast4165 ast4166">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast4139" name="rdSeq" eType="ast183" bindsTo="ast4159" referredCollectionType="ast183" rest="ast4164">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast4140" name="r" bindsTo="ast4165">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
@@ -11274,7 +11274,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast4146" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast4160">
-      <pattern xmi:id="ast4147">
+      <pattern xmi:id="ast4147" bindsTo="ast4160">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast4148" name="tcv" bindsTo="ast4160">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.RealizedVariable"/>
           <part xmi:id="ast4149">
@@ -11350,7 +11350,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast4172" name="RExpToMExp" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast4173" name="relations" isCheckable="false" isEnforceable="false" typedModel="ast220" rootVariable="ast4179">
-      <pattern xmi:id="ast4174">
+      <pattern xmi:id="ast4174" bindsTo="ast4179">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast4175" name="re" bindsTo="ast4179">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.OclExpression"/>
           <referredClass href="QVT.ecore#EssentialOCL.OclExpression"/>
@@ -11358,7 +11358,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast4176" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast4180">
-      <pattern xmi:id="ast4177">
+      <pattern xmi:id="ast4177" bindsTo="ast4180">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast4178" name="me" bindsTo="ast4180">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.OclExpression"/>
           <referredClass href="QVT.ecore#EssentialOCL.OclExpression"/>

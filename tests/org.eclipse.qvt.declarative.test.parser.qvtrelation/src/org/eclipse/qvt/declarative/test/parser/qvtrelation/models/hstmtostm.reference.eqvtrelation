@@ -81,7 +81,7 @@
   </modelParameter>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast27" name="LStateToState" isTopLevel="true">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast28" name="hstm" isCheckable="false" isEnforceable="false" typedModel="ast25" rootVariable="ast41">
-      <pattern xmi:id="ast29">
+      <pattern xmi:id="ast29" bindsTo="ast41">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast30" name="s1" bindsTo="ast41">
           <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast31">
@@ -105,7 +105,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast36" name="stm" isCheckable="false" isEnforceable="true" typedModel="ast26" rootVariable="ast42">
-      <pattern xmi:id="ast37">
+      <pattern xmi:id="ast37" bindsTo="ast42">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast38" name="s2" bindsTo="ast42">
           <eType xsi:type="ecore:EClass" href="stmMM.emof#stmMM_p.State"/>
           <part xmi:id="ast39">
@@ -130,7 +130,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast44" name="CStateToState" isTopLevel="true">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast45" name="hstm" isCheckable="false" isEnforceable="false" typedModel="ast25" rootVariable="ast63">
-      <pattern xmi:id="ast46">
+      <pattern xmi:id="ast46" bindsTo="ast63 ast70">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast47" name="fs1" bindsTo="ast63">
           <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
           <part xmi:id="ast48">
@@ -157,7 +157,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast54" name="stm" isCheckable="false" isEnforceable="true" typedModel="ast26" rootVariable="ast64">
-      <pattern xmi:id="ast55">
+      <pattern xmi:id="ast55" bindsTo="ast64 ast71">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast56" name="fs2" bindsTo="ast64">
           <eType xsi:type="ecore:EClass" href="stmMM.emof#stmMM_p.State"/>
           <part xmi:id="ast57">

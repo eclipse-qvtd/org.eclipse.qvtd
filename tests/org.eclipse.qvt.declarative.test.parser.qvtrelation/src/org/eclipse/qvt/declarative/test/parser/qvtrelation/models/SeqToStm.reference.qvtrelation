@@ -32,7 +32,7 @@
         isTopLevel="true">
       <domain xmi:type="qvtr:RelationDomain" xmi:id="ast8" name="seqDgm" isCheckable="false"
           isEnforceable="false" typedModel="ast5" rootVariable="ast18">
-        <pattern xmi:id="ast9">
+        <pattern xmi:id="ast9" bindsTo="ast18">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast10" name="i"
               bindsTo="ast18">
             <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Interaction"/>
@@ -49,7 +49,7 @@
       </domain>
       <domain xmi:type="qvtr:RelationDomain" xmi:id="ast13" name="stm" isCheckable="false"
           isEnforceable="true" typedModel="ast6" rootVariable="ast19">
-        <pattern xmi:id="ast14">
+        <pattern xmi:id="ast14" bindsTo="ast19">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast15" name="s"
               bindsTo="ast19">
             <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.StateMachine"/>
@@ -77,7 +77,7 @@
     <rule xmi:type="qvtr:Relation" xmi:id="ast21" name="StateToState" isTopLevel="true">
       <domain xmi:type="qvtr:RelationDomain" xmi:id="ast22" name="seqDgm" isCheckable="false"
           isEnforceable="false" typedModel="ast5" rootVariable="ast38">
-        <pattern xmi:id="ast23">
+        <pattern xmi:id="ast23" bindsTo="ast38 ast41 ast42">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast24" name="st1"
               bindsTo="ast38">
             <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.State"/>
@@ -109,7 +109,7 @@
       </domain>
       <domain xmi:type="qvtr:RelationDomain" xmi:id="ast31" name="stm" isCheckable="false"
           isEnforceable="true" typedModel="ast6" rootVariable="ast39">
-        <pattern xmi:id="ast32">
+        <pattern xmi:id="ast32" bindsTo="ast39 ast43">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast33" name="st2"
               bindsTo="ast39">
             <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.State"/>
@@ -168,7 +168,7 @@
     <rule xmi:type="qvtr:Relation" xmi:id="ast49" name="MessageToTransition" isTopLevel="true">
       <domain xmi:type="qvtr:RelationDomain" xmi:id="ast50" name="seqDgm" isCheckable="false"
           isEnforceable="false" typedModel="ast5" rootVariable="ast86">
-        <pattern xmi:id="ast51">
+        <pattern xmi:id="ast51" bindsTo="ast86 ast89 ast90 ast91 ast92 ast93">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast52" name="m1"
               bindsTo="ast86">
             <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Message"/>
@@ -236,7 +236,7 @@
       </domain>
       <domain xmi:type="qvtr:RelationDomain" xmi:id="ast69" name="stm" isCheckable="false"
           isEnforceable="true" typedModel="ast6" rootVariable="ast87">
-        <pattern xmi:id="ast70">
+        <pattern xmi:id="ast70" bindsTo="ast87 ast94 ast95 ast96 ast97 ast98">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast71" name="tr"
               bindsTo="ast87">
             <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.Transition"/>
@@ -379,7 +379,7 @@
         isTopLevel="true">
       <domain xmi:type="qvtr:RelationDomain" xmi:id="ast113" name="seqDgm" isCheckable="false"
           isEnforceable="false" typedModel="ast5" rootVariable="ast133">
-        <pattern xmi:id="ast114">
+        <pattern xmi:id="ast114" bindsTo="ast133 ast135 ast136 ast137">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast115" name="ev1"
               bindsTo="ast133">
             <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.MessageEvent"/>
@@ -425,7 +425,7 @@
       </domain>
       <domain xmi:type="qvtr:RelationDomain" xmi:id="ast126" name="stm" isCheckable="false"
           isEnforceable="true" typedModel="ast6" rootVariable="ast134">
-        <pattern xmi:id="ast127">
+        <pattern xmi:id="ast127" bindsTo="ast134 ast138 ast139">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast128" name="tr1"
               bindsTo="ast134">
             <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.Transition"/>
