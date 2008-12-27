@@ -25,5 +25,7 @@ transformation Scoping(scopeA: ScopeA, scopeB: ScopeB, scopeC: ScopeC, scopeD: S
 
           domain scopeA i:A {name = sn};									-- ScopeA::a::A, ScopeA::b::A
           enforce domain scopeB s:A {name = sn};							-- ScopeB::a::A, ScopeB::b::A
+          domain scopeC j:A {};									-- ScopeA::a::A, ScopeA::b::A
+          domain scopeD k:A {};									-- ScopeA::a::A, ScopeA::b::A
      }
 }
