@@ -59,8 +59,8 @@ transformation SeqToStm(seqDgm: SeqMM, stm: StmcMM)
           m1:Message 
           {
                messageId = mid,
-               event = send:MessageEvent {type = 'Send', state = ist1:State{}},
-               event = receive:MessageEvent {type = 'Receive', state = ist2:State{}},
+               event = send:MessageEvent {type = MessageEventType::Send, state = ist1:State{}},
+               event = receive:MessageEvent {type = MessageEventType::Receive, state = ist2:State{}},
                interaction = i:Interaction{}
           };
 
@@ -87,9 +87,9 @@ transformation SeqToStm(seqDgm: SeqMM, stm: StmcMM)
           domain seqDgm 
           ev1:MessageEvent 
           {
-               type = 'Receive',
+               type = MessageEventType::Receive,
                message = m1:Message{},
-               next = ev2:MessageEvent{type='Send', message=m2:Message{}}
+               next = ev2:MessageEvent{type=MessageEventType::Send, message=m2:Message{}}
           };
 
           enforce domain stm 
