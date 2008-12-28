@@ -1940,13 +1940,13 @@ relation RRelImplToMBottomEnforcementOperation
    enforce domain core mb:BottomPattern {
       enforcementOperation = eoSet:Set(EnforcementOperation) {
          eoc:EnforcementOperation {
-            enforcementMode = 'Creation',
+            enforcementMode = EnforcementMode::Creation,
             operationCallExp = oce:OperationCallExp {
                referredOperation = op
             }
            },
          eod:EnforcementOperation {
-            enforcementMode = 'Deletion',
+            enforcementMode = EnforcementMode::Deletion,
             operationCallExp = oce
          }
          ++ emptySet

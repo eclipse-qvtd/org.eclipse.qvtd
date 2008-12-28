@@ -11002,8 +11002,9 @@
                 <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.EnforcementOperation"/>
                 <part xmi:id="ast4052">
                   <referredProperty xsi:type="ecore:EAttribute" href="QVT.ecore#QVTCore.EnforcementOperation.enforcementMode"/>
-                  <value xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast4053" stringSymbol="Creation">
-                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  <value xsi:type="ocl.ecore:EnumLiteralExp" xmi:id="ast4053">
+                    <eType xsi:type="ecore:EEnum" href="QVT.ecore#QVTCore.EnforcementMode"/>
+                    <referredEnumLiteral xsi:type="ecore:EEnumLiteral" href="QVT.ecore#QVTCore.EnforcementMode.Creation"/>
                   </value>
                 </part>
                 <part xmi:id="ast4054">
@@ -11025,8 +11026,9 @@
                 <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.EnforcementOperation"/>
                 <part xmi:id="ast4059">
                   <referredProperty xsi:type="ecore:EAttribute" href="QVT.ecore#QVTCore.EnforcementOperation.enforcementMode"/>
-                  <value xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast4060" stringSymbol="Deletion">
-                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  <value xsi:type="ocl.ecore:EnumLiteralExp" xmi:id="ast4060">
+                    <eType xsi:type="ecore:EEnum" href="QVT.ecore#QVTCore.EnforcementMode"/>
+                    <referredEnumLiteral xsi:type="ecore:EEnumLiteral" href="QVT.ecore#QVTCore.EnforcementMode.Deletion"/>
                   </value>
                 </part>
                 <part xmi:id="ast4061">
