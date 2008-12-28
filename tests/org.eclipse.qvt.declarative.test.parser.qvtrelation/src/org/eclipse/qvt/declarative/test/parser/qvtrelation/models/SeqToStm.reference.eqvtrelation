@@ -153,8 +153,9 @@
               <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
               <part xmi:id="ast57">
                 <referredProperty xsi:type="ecore:EAttribute" href="SeqMM.xml#SeqMM.MessageEvent.type"/>
-                <value xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast58" stringSymbol="Send">
-                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <value xsi:type="ocl.ecore:EnumLiteralExp" xmi:id="ast58">
+                  <eType xsi:type="ecore:EEnum" href="SeqMM.xml#SeqMM.MessageEventType"/>
+                  <referredEnumLiteral xsi:type="ecore:EEnumLiteral" href="SeqMM.xml#SeqMM.MessageEventType.Send"/>
                 </value>
               </part>
               <part xmi:id="ast59">
@@ -173,8 +174,9 @@
               <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
               <part xmi:id="ast63">
                 <referredProperty xsi:type="ecore:EAttribute" href="SeqMM.xml#SeqMM.MessageEvent.type"/>
-                <value xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast64" stringSymbol="Receive">
-                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <value xsi:type="ocl.ecore:EnumLiteralExp" xmi:id="ast64">
+                  <eType xsi:type="ecore:EEnum" href="SeqMM.xml#SeqMM.MessageEventType"/>
+                  <referredEnumLiteral xsi:type="ecore:EEnumLiteral" href="SeqMM.xml#SeqMM.MessageEventType.Receive"/>
                 </value>
               </part>
               <part xmi:id="ast65">
@@ -335,8 +337,9 @@
           <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
           <part xmi:id="ast116">
             <referredProperty xsi:type="ecore:EAttribute" href="SeqMM.xml#SeqMM.MessageEvent.type"/>
-            <value xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast117" stringSymbol="Receive">
-              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <value xsi:type="ocl.ecore:EnumLiteralExp" xmi:id="ast117">
+              <eType xsi:type="ecore:EEnum" href="SeqMM.xml#SeqMM.MessageEventType"/>
+              <referredEnumLiteral xsi:type="ecore:EEnumLiteral" href="SeqMM.xml#SeqMM.MessageEventType.Receive"/>
             </value>
           </part>
           <part xmi:id="ast118">
@@ -352,8 +355,9 @@
               <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
               <part xmi:id="ast122">
                 <referredProperty xsi:type="ecore:EAttribute" href="SeqMM.xml#SeqMM.MessageEvent.type"/>
-                <value xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast123" stringSymbol="Send">
-                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <value xsi:type="ocl.ecore:EnumLiteralExp" xmi:id="ast123">
+                  <eType xsi:type="ecore:EEnum" href="SeqMM.xml#SeqMM.MessageEventType"/>
+                  <referredEnumLiteral xsi:type="ecore:EEnumLiteral" href="SeqMM.xml#SeqMM.MessageEventType.Send"/>
                 </value>
               </part>
               <part xmi:id="ast124">
