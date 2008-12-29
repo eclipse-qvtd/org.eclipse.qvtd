@@ -30,8 +30,8 @@
     </modelParameter>
     <rule xmi:type="qvtr:Relation" xmi:id="ast7" name="InteractionToStateMachine"
         isTopLevel="true">
-      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast8" name="seqDgm" isCheckable="false"
-          isEnforceable="false" typedModel="ast5" rootVariable="ast18">
+      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast8" name="seqDgm" isCheckable="true"
+          isEnforceable="true" typedModel="ast5" rootVariable="ast18">
         <pattern xmi:id="ast9" bindsTo="ast18">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast10" name="i"
               bindsTo="ast18">
@@ -75,8 +75,8 @@
       </variable>
     </rule>
     <rule xmi:type="qvtr:Relation" xmi:id="ast21" name="StateToState" isTopLevel="true">
-      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast22" name="seqDgm" isCheckable="false"
-          isEnforceable="false" typedModel="ast5" rootVariable="ast38">
+      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast22" name="seqDgm" isCheckable="true"
+          isEnforceable="true" typedModel="ast5" rootVariable="ast38">
         <pattern xmi:id="ast23" bindsTo="ast38 ast41 ast42">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast24" name="st1"
               bindsTo="ast38">
@@ -166,8 +166,8 @@
       </when>
     </rule>
     <rule xmi:type="qvtr:Relation" xmi:id="ast49" name="MessageToTransition" isTopLevel="true">
-      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast50" name="seqDgm" isCheckable="false"
-          isEnforceable="false" typedModel="ast5" rootVariable="ast86">
+      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast50" name="seqDgm" isCheckable="true"
+          isEnforceable="true" typedModel="ast5" rootVariable="ast86">
         <pattern xmi:id="ast51" bindsTo="ast86 ast89 ast90 ast91 ast92 ast93">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast52" name="m1"
               bindsTo="ast86">
@@ -379,8 +379,8 @@
     </rule>
     <rule xmi:type="qvtr:Relation" xmi:id="ast112" name="MessageSequenceToTransitionSequence"
         isTopLevel="true">
-      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast113" name="seqDgm" isCheckable="false"
-          isEnforceable="false" typedModel="ast5" rootVariable="ast133">
+      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast113" name="seqDgm" isCheckable="true"
+          isEnforceable="true" typedModel="ast5" rootVariable="ast133">
         <pattern xmi:id="ast114" bindsTo="ast133 ast135 ast136 ast137">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast115" name="ev1"
               bindsTo="ast133">

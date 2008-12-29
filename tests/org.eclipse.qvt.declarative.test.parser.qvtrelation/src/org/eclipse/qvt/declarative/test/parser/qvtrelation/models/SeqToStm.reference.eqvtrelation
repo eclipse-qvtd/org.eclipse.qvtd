@@ -16,7 +16,7 @@
     <usedPackage href="StmcMM.xml#StmcMM"/>
   </modelParameter>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast7" name="InteractionToStateMachine" isTopLevel="true">
-    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast8" name="seqDgm" isCheckable="false" isEnforceable="false" typedModel="ast5" rootVariable="ast18">
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast8" name="seqDgm" isCheckable="true" isEnforceable="true" typedModel="ast5" rootVariable="ast18">
       <pattern xmi:id="ast9" bindsTo="ast18">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast10" name="i" bindsTo="ast18">
           <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Interaction"/>
@@ -55,7 +55,7 @@
     </variable>
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast21" name="StateToState" isTopLevel="true">
-    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast22" name="seqDgm" isCheckable="false" isEnforceable="false" typedModel="ast5" rootVariable="ast38">
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast22" name="seqDgm" isCheckable="true" isEnforceable="true" typedModel="ast5" rootVariable="ast38">
       <pattern xmi:id="ast23" bindsTo="ast38 ast41 ast42">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast24" name="st1" bindsTo="ast38">
           <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.State"/>
@@ -137,7 +137,7 @@
     </when>
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast49" name="MessageToTransition" isTopLevel="true">
-    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast50" name="seqDgm" isCheckable="false" isEnforceable="false" typedModel="ast5" rootVariable="ast86">
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast50" name="seqDgm" isCheckable="true" isEnforceable="true" typedModel="ast5" rootVariable="ast86">
       <pattern xmi:id="ast51" bindsTo="ast86 ast89 ast90 ast91 ast92 ast93">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast52" name="m1" bindsTo="ast86">
           <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
@@ -331,7 +331,7 @@
     </when>
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast112" name="MessageSequenceToTransitionSequence" isTopLevel="true">
-    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast113" name="seqDgm" isCheckable="false" isEnforceable="false" typedModel="ast5" rootVariable="ast133">
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast113" name="seqDgm" isCheckable="true" isEnforceable="true" typedModel="ast5" rootVariable="ast133">
       <pattern xmi:id="ast114" bindsTo="ast133 ast135 ast136 ast137">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast115" name="ev1" bindsTo="ast133">
           <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>

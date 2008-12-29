@@ -80,7 +80,7 @@
     <usedPackage href="stmMM.emof#stmMM_p"/>
   </modelParameter>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast27" name="LStateToState" isTopLevel="true">
-    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast28" name="hstm" isCheckable="false" isEnforceable="false" typedModel="ast25" rootVariable="ast41">
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast28" name="hstm" isCheckable="true" isEnforceable="true" typedModel="ast25" rootVariable="ast41">
       <pattern xmi:id="ast29" bindsTo="ast41">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast30" name="s1" bindsTo="ast41">
           <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
@@ -129,7 +129,7 @@
     </variable>
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast44" name="CStateToState" isTopLevel="true">
-    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast45" name="hstm" isCheckable="false" isEnforceable="false" typedModel="ast25" rootVariable="ast63">
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast45" name="hstm" isCheckable="true" isEnforceable="true" typedModel="ast25" rootVariable="ast63">
       <pattern xmi:id="ast46" bindsTo="ast63 ast70">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast47" name="fs1" bindsTo="ast63">
           <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
