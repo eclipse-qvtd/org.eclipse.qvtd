@@ -212,9 +212,9 @@ public class QVTrUnparser extends QVTrExpressionUnparser
 	protected void unparseRelationDomain(RelationDomain domain) {
 		if (domain == null)
 			return;
-		if (domain.isIsCheckable())
+		if (!domain.isIsEnforceable() && domain.isIsCheckable())
 			append("checkonly ");
-		if (domain.isIsEnforceable())
+		if (!domain.isIsCheckable() && domain.isIsEnforceable())
 			append("enforce ");
 		DomainPattern domainPattern = domain.getPattern();
 		if (domainPattern == null)

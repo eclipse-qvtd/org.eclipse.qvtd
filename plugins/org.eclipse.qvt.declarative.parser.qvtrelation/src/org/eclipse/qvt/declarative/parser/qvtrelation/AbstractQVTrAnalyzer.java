@@ -141,8 +141,8 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 	protected void declareDomainCS(QVTrRelationEnvironment env, DomainCS domainCS) {
 		QVTrDomainEnvironment domainEnv = env.createEnvironment(domainCS);
 		RelationDomain domain = domainEnv.getDomain();
-		domain.setIsCheckable(domainCS.isCheckonly());
-		domain.setIsEnforceable(domainCS.isEnforce());
+		domain.setIsCheckable(!domainCS.isEnforce());
+		domain.setIsEnforceable(!domainCS.isCheckonly());
 		TemplateVariableCS templateVariable = domainCS.getTemplate();
 		EClassifier rootVariableType = resolveClassifier(domainEnv, "domainCS", templateVariable.getType());
 		Variable variable = env.createVariableDeclaration(templateVariable.getIdentifier(), rootVariableType);
