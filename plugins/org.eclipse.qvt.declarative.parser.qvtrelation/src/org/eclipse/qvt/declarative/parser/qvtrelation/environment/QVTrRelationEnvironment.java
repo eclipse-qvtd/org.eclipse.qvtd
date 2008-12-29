@@ -30,6 +30,7 @@ import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationFactory;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomain;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
+import org.eclipse.qvt.declarative.ecore.QVTTemplate.util.QVTTemplateConstants;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.AbstractQVTrAnalyzer;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.AbstractDomainCS;
@@ -76,8 +77,10 @@ public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationE
 
 	private void addExplicitVariable(Variable variable) {
 		ast.getVariable().add(variable);
-		addElement(variable.getName(), variable, true);
-		explicitVariableMap.put(variable.getName(), variable);
+		String name = variable.getName();
+		if (!QVTTemplateConstants.WILDCARD_VARIABLE_NAME.equals(name))
+			addElement(name, variable, true);
+		explicitVariableMap.put(name, variable);
 	}
 
 	public QVTrDomainEnvironment createEnvironment(DomainCS domainCS) {
@@ -201,7 +204,7 @@ public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationE
 	private Variable createVariableDeclaration(String name, EClassifier type, CSTNode cstNode) {
 		Variable variable = explicitVariableMap.get(name);
 		if (variable != null) {
-			if (variable.getType() != type) {
+			if ((variable.getType() != type) && !QVTTemplateConstants.WILDCARD_VARIABLE_NAME.equals(name)) {
 				String message = "Conflicting type '" + formatType(type) + "' for variable of type '" + formatType(variable.getType()) + "'";
 				analyzerError(message, "explicit varDeclarationCS", cstNode);
 			}
@@ -211,7 +214,10 @@ public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationE
 			variable = EcoreFactory.eINSTANCE.createVariable();
 			initASTMapping(variable, cstNode);
 			variable.setName(name);
-			variable.setType(type);
+			if (!QVTTemplateConstants.WILDCARD_VARIABLE_NAME.equals(name))
+				variable.setType(type);
+			else
+				variable.setType(getOCLStandardLibrary().getOclAny());
 			addExplicitVariable(variable);
 		}
 		return variable;

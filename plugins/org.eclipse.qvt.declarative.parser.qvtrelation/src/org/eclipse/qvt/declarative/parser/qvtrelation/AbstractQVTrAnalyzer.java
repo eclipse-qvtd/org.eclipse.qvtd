@@ -366,7 +366,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 				VariableExp headVariableExp = oclEcoreFactory.createVariableExp();
 				env.initASTMapping(headVariableExp, headIdentifier);
 				headVariableExp.setReferredVariable(headVariable);
-				headVariableExp.setType(elementType);
+				headVariableExp.setType(headVariable.getType());	// May differ from elementTypoe for _
 //				headVariableExp.setName(headVariable.getName());
 				collectionTemplateExp.getMember().add(headVariableExp);
 			}

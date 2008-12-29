@@ -104,35 +104,11 @@ $Headers
 			return result;
 		}
 
-		protected String createIdentifierOrUnderscore(int token) {
-			String text = getTokenText(token);
-			if ("_".equals(text))
-				return createUniqueIdentifier();
-			else
-				return text;
-		}
-
-		protected IdentifierCS createIdentifierOrUnderscoreCS(int token) {
-			String text = getTokenText(token);
-			if ("_".equals(text))
-				return createUniqueIdentifierCS(token);
-			else
-				return createIdentifierCS(token);
-		}
-		
-		@Override protected SimpleNameCS createSimpleNameCS(SimpleTypeEnum type, String value) {
-			return super.createSimpleNameCS(type, "_".equals(value) ? createUniqueIdentifier() : value);
-		}
-
 		private int _uniqueNameCount = 0;
-
-		protected String createUniqueIdentifier() {
-			return "_unique" + _uniqueNameCount++;
-		}
 
 		protected IdentifierCS createUniqueIdentifierCS(int token) {
 			IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
-			result.setValue(createUniqueIdentifier());
+			result.setValue("_unique" + _uniqueNameCount++);
 			setOffsets(result, getIToken(token));
 			return result;
 		}
@@ -670,7 +646,7 @@ $Rules
 		/.$NewCase./
 	objectTemplateCS_prePropertyTemplates ::= self ':' pathNameCS '{'
 		/.$BeginJava
-					IdentifierCS identifierCS = createIdentifierOrUnderscoreCS($getToken(1));
+					IdentifierCS identifierCS = createIdentifierCS($getToken(1));
 					TypeCS typeCS = (TypeCS)$getSym(3);
 					ObjectTemplateCS result = QVTrCSTFactory.eINSTANCE.createObjectTemplateCS();
 					result.setType(typeCS);
@@ -743,7 +719,7 @@ $Rules
 		/.$NewCase./
 	collectionTemplateCS_1_ ::= self ':' collectionTypeCS
 		/.$BeginJava
-					IdentifierCS identifierCS = createIdentifierOrUnderscoreCS($getToken(1));
+					IdentifierCS identifierCS = createIdentifierCS($getToken(1));
 					CollectionTypeCS collectionTypeCS = (CollectionTypeCS)$getSym(3);
 					CollectionTemplateCS result = QVTrCSTFactory.eINSTANCE.createCollectionTemplateCS();
 					result.setType(collectionTypeCS);
@@ -907,7 +883,7 @@ $Rules
 	pathNameCS ::= relationIdentifier
 		/.$BeginJava
 					PathNameCS result = createPathNameCS();
-					result.getSequenceOfNames().add(createIdentifierOrUnderscore($getToken(1)));
+					result.getSequenceOfNames().add(getTokenText($getToken(1)));
 					setOffsets(result, getIToken($getToken(1)));
 					$setResult(result);
 		  $EndJava
@@ -917,7 +893,7 @@ $Rules
 		/.$BeginJava
 					SimpleNameCS result = createSimpleNameCS(
 								SimpleTypeEnum.IDENTIFIER_LITERAL,
-								createIdentifierOrUnderscore($getToken(1))
+								getTokenText($getToken(1))
 							);
 					setOffsets(result, getIToken($getToken(1)));
 					$setResult(result);
@@ -930,7 +906,7 @@ $Rules
 		/.$NewCase ./
 	identifierCS ::= self
 		/.$BeginJava
-					IdentifierCS result = createIdentifierOrUnderscoreCS($getToken(1));
+					IdentifierCS result = createIdentifierCS($getToken(1));
 					$setResult(result);
 		  $EndJava
 		./

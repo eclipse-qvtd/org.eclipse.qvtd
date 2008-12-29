@@ -17,14 +17,14 @@
 *
 * </copyright>
 *
-* $Id: QVTrParsersym.java,v 1.7 2008/11/19 21:38:07 ewillink Exp $
+* $Id: QVTrParsersym.java,v 1.8 2008/12/29 17:03:26 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;
 
 public interface QVTrParsersym {
     public final static int
-      TK_PLUS_PLUS = 114,
+      TK_PLUS_PLUS = 113,
       TK_NUMERIC_OPERATION = 84,
       TK_STRING_LITERAL = 85,
       TK_INTEGER_LITERAL = 86,
@@ -43,7 +43,7 @@ public interface QVTrParsersym {
       TK_RPAREN = 4,
       TK_LBRACE = 88,
       TK_RBRACE = 57,
-      TK_LBRACKET = 110,
+      TK_LBRACKET = 109,
       TK_RBRACKET = 98,
       TK_ARROW = 102,
       TK_BAR = 96,
@@ -51,24 +51,24 @@ public interface QVTrParsersym {
       TK_COLON = 7,
       TK_COLONCOLON = 95,
       TK_SEMICOLON = 94,
-      TK_DOT = 100,
+      TK_DOT = 99,
       TK_DOTDOT = 103,
       TK_ATPRE = 97,
       TK_CARET = 104,
       TK_CARETCARET = 105,
-      TK_QUESTIONMARK = 111,
+      TK_QUESTIONMARK = 110,
       TK_self = 36,
       TK_inv = 24,
       TK_pre = 25,
       TK_post = 26,
-      TK_context = 116,
-      TK_package = 117,
+      TK_context = 114,
+      TK_package = 115,
       TK_endpackage = 27,
       TK_def = 28,
       TK_if = 93,
       TK_then = 106,
       TK_else = 107,
-      TK_endif = 99,
+      TK_endif = 100,
       TK_and = 37,
       TK_or = 38,
       TK_xor = 39,
@@ -82,8 +82,8 @@ public interface QVTrParsersym {
       TK_derive = 59,
       TK_init = 60,
       TK_null = 61,
-      TK_attr = 118,
-      TK_oper = 119,
+      TK_attr = 116,
+      TK_oper = 117,
       TK_Set = 52,
       TK_Bag = 53,
       TK_Sequence = 54,
@@ -137,12 +137,10 @@ public interface QVTrParsersym {
       TK_transformation = 6,
       TK_when = 22,
       TK_where = 9,
-      TK_EOF_TOKEN = 112,
+      TK_EOF_TOKEN = 111,
       TK_IDENTIFIER = 3,
-      TK_INTEGER_RANGE_START = 113,
-      TK_ERROR_TOKEN = 1,
-      TK_ERROR_simpleNameCS = 115,
-      TK_ERROR_Garbage = 109;
+      TK_INTEGER_RANGE_START = 112,
+      TK_ERROR_TOKEN = 1;
 
       public final static String orderedTerminalSymbols[] = {
                  "",
@@ -244,8 +242,8 @@ public interface QVTrParsersym {
                  "BAR",
                  "ATPRE",
                  "RBRACKET",
-                 "endif",
                  "DOT",
+                 "endif",
                  "in",
                  "ARROW",
                  "DOTDOT",
@@ -254,13 +252,11 @@ public interface QVTrParsersym {
                  "then",
                  "else",
                  "implies",
-                 "ERROR_Garbage",
                  "LBRACKET",
                  "QUESTIONMARK",
                  "EOF_TOKEN",
                  "INTEGER_RANGE_START",
                  "PLUS_PLUS",
-                 "ERROR_simpleNameCS",
                  "context",
                  "package",
                  "attr",
