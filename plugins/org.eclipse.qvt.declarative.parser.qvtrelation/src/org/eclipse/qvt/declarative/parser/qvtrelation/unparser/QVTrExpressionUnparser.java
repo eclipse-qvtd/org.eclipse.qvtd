@@ -12,6 +12,8 @@ package org.eclipse.qvt.declarative.parser.qvtrelation.unparser;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
@@ -19,15 +21,19 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.CollectionType;
 import org.eclipse.ocl.ecore.Constraint;
+import org.eclipse.ocl.ecore.LiteralExp;
 import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.PrimitiveType;
+import org.eclipse.ocl.ecore.PropertyCallExp;
 import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.ecore.util.EcoreSwitch;
 import org.eclipse.ocl.utilities.UMLReflection;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.OppositePropertyCallExp;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationCallExp;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.util.QVTRelationSwitch;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.CollectionTemplateExp;
@@ -35,23 +41,43 @@ import org.eclipse.qvt.declarative.ecore.QVTTemplate.ObjectTemplateExp;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.TemplateExp;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.util.QVTTemplateSwitch;
+import org.eclipse.qvt.declarative.ecore.utils.ClassUtils;
+import org.eclipse.qvt.declarative.emof.EMOF.util.EMOFAnnotationMappingMetaData;
 import org.eclipse.qvt.declarative.parser.unparser.OCLExpressionUnparser;
 
 public abstract class QVTrExpressionUnparser extends OCLExpressionUnparser
 {
 	protected class QVTrExpressionUnparserSwitch extends OCLExpressionUnparserSwitch
 	{
-		@Override public Object caseOCLExpression(OCLExpression object) {
+		@Override
+		public Object caseLiteralExp(LiteralExp object) {
 			if (object instanceof TemplateExp)
 				return templateSwitch.doSwitch(object);
+			return super.caseLiteralExp(object);
+		}
+		
+		@Override public Object caseOCLExpression(OCLExpression object) {
 			if (object instanceof RelationCallExp)
 				return relationSwitch.doSwitch(object);
 			return super.caseOCLExpression(object);
 		}
+		@Override
+		public Object casePropertyCallExp(PropertyCallExp object) {
+			if (object instanceof OppositePropertyCallExp)
+				return relationSwitch.doSwitch(object);
+			return super.casePropertyCallExp(object);
+		}
+
 	}
 
 	protected class QVTrRelationUnparserSwitch extends QVTRelationSwitch<Object>
 	{
+		@Override
+		public Object caseOppositePropertyCallExp(OppositePropertyCallExp object) {
+			unparseOppositePropertyCallExp(object);
+			return this;
+		}
+
 		@Override public Object caseRelationCallExp(RelationCallExp object) {
 			unparseRelationCallExp(object);
 			return this;
@@ -130,6 +156,21 @@ public abstract class QVTrExpressionUnparser extends OCLExpressionUnparser
 			return super.formatQualifiedName(object);
 	}
 
+	protected String getNameForOpposite(EStructuralFeature property) {
+		if (property == null)
+			return null;
+		EAnnotation annotation = property.getEAnnotation(EMOFExtendedMetaData.EMOF_PROPERTY_OPPOSITE_ROLE_NAME_ANNOTATION_SOURCE);
+		if (annotation != null)
+			return annotation.getDetails().get(EMOFAnnotationMappingMetaData.DETAILS_BODY);
+		EClass type = property.getEContainingClass();
+		if (type == null)
+			return null;
+		String name = type.getName();
+		if ((name == null) || (name.length() < 1))
+			return name;
+		return Character.toLowerCase(name.charAt(0)) + name.substring(1);
+	}
+
 	@Override protected void initialize() {
 		super.initialize();
 		if (relationSwitch == null)
@@ -155,12 +196,23 @@ public abstract class QVTrExpressionUnparser extends OCLExpressionUnparser
 			append("\n");
 			indent();
 			doExpressionsSwitch(parts, ",\n");
-			append(" ++ ");
-			doExpressionSwitch(templateExpression.getRest());
+			Variable rest = templateExpression.getRest();
+			if (rest != null) {
+				append("\n++ ");
+				appendName(rest);
+			}
 			exdent();
 			append("\n");
 		}
 		append("}");
+		OCLExpression guard = templateExpression.getWhere();
+		if (guard != null) {
+			append(" {\n");
+			indent();
+			doExpressionSwitch(guard);		
+			exdent();
+			append("\n}");
+		}
 	}
 
 	protected void unparseObjectTemplateExp(ObjectTemplateExp templateExpression) {
@@ -190,11 +242,42 @@ public abstract class QVTrExpressionUnparser extends OCLExpressionUnparser
 		}
 		else
 			append(" {}");
+		OCLExpression guard = templateExpression.getWhere();
+		if (guard != null) {
+			append(" {\n");
+			indent();
+			doExpressionSwitch(guard);		
+			exdent();
+			append("\n}");
+		}
+	}
+
+	public void unparseOppositePropertyCallExp(OppositePropertyCallExp object) {
+		if (object == null)
+			append("_null_property_call_");
+		else {
+	        OCLExpression source = (OCLExpression) object.getSource();
+	        if (source != null) {
+		        doExpressionSwitch(source);
+		        append(".");	        	
+	        }
+	        append(getNameForOpposite(object.getReferredProperty()));	        	
+	        unparseIsMarkedPre(object);
+	        List<OCLExpression> qualifiers = ClassUtils.asClassUnchecked(object.getQualifier(), (List<OCLExpression>)null);
+			if ((qualifiers != null) && (qualifiers.size() > 0)) {
+		        append("[");	        	
+				doExpressionsSwitch(qualifiers, ", ");
+		        append("]");	        	
+			}
+		}
 	}
 
 	protected void unparsePropertyTemplateItem(PropertyTemplateItem part) {
 		EStructuralFeature property = part.getReferredProperty();
-		appendName(property);
+		if (part.isIsOpposite())
+			append(getNameForOpposite(property));
+		else
+			appendName(property);
 		append(" = ");
 		doExpressionSwitch(part.getValue());		
 	}
