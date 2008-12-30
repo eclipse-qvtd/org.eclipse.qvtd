@@ -113,6 +113,7 @@ public class QVTTemplateToStringVisitor extends QVTBaseToStringVisitor implement
 		}
 		List<PropertyTemplateItem> parts = objectTemplateExp.getPart();
 		if (parts.size() > 0) {
+			result.append(" {");
 			boolean first = true;
 			for (PropertyTemplateItem part : parts) {
 				if (!first)
