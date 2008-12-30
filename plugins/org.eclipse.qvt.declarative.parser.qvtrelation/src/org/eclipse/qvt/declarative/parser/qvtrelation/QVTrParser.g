@@ -709,6 +709,7 @@ $Rules
 					CollectionTypeCS collectionTypeCS = (CollectionTypeCS)$getSym(2);
 					CollectionTemplateCS result = QVTrCSTFactory.eINSTANCE.createCollectionTemplateCS();
 					result.setType(collectionTypeCS);
+					result.setIdentifier(createUniqueIdentifierCS($getToken(1)));
 					setOffsets(result, getIToken($getToken(1)), collectionTypeCS);
 					$setResult(result);
 		  $EndJava
@@ -746,6 +747,16 @@ $Rules
 					CollectionTemplateCS result = (CollectionTemplateCS)$getSym(1);
 					result.setRestIdentifier(restIdentifier);
 					setOffsets(result, result, getIToken($getToken(4)));
+					$setResult(result);
+		  $EndJava
+		./
+	collectionTemplateCS ::= collectionTemplateCS_postMemberSelection ERROR_TOKEN '}'
+		/.$BeginJava
+					reportErrorTokenMessage($getToken(2), QVTrParserErrors.INCOMPLETE_REST);
+					IdentifierCS restIdentifier = createUniqueIdentifierCS($getToken(2));
+					CollectionTemplateCS result = (CollectionTemplateCS)$getSym(1);
+					result.setRestIdentifier(restIdentifier);
+					setOffsets(result, result, getIToken($getToken(3)));
 					$setResult(result);
 		  $EndJava
 		./
