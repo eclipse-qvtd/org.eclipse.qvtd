@@ -39,6 +39,7 @@ import org.eclipse.qvt.declarative.ecore.QVTTemplate.CollectionTemplateExp;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.ObjectTemplateExp;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.TemplateExp;
+import org.eclipse.qvt.declarative.ecore.QVTTemplate.util.QVTTemplateConstants;
 import org.eclipse.qvt.declarative.parser.qvt.environment.QVTReflectionImpl;
 
 public class QVTrUnparser extends QVTrExpressionUnparser
@@ -90,7 +91,7 @@ public class QVTrUnparser extends QVTrExpressionUnparser
 	protected void unparseDomainPattern(DomainPattern pattern) {
 		if (pattern == null)
 			return;
-		unparseTemplateExp(pattern.getTemplateExpression());
+		doExpressionSwitch(pattern.getTemplateExpression());		
 		List<Predicate> predicates = pattern.getPredicate();
 		if (predicates.size() > 0) {
 			append("\n{\n");
@@ -113,6 +114,12 @@ public class QVTrUnparser extends QVTrExpressionUnparser
 			if (!first)
 				append(", ");
 			appendName(property);
+			first = false;
+		}
+		for (EStructuralFeature property : key.getOppositePart()) {
+			if (!first)
+				append(", ");
+			append(getNameForOpposite(property));
 			first = false;
 		}
 		append(" };\n");
@@ -180,7 +187,7 @@ public class QVTrUnparser extends QVTrExpressionUnparser
 		List<Variable> variables = relation.getVariable();
 		if (variables.size() > 0) {
 			for (Variable variable : variables) {
-				if (!patternVariables.contains(variable)) {
+				if (!patternVariables.contains(variable) && !QVTTemplateConstants.WILDCARD_VARIABLE_NAME.equals(variable.getName())) {
 					unparseVariable(variable);
 					append(";\n");
 				}
@@ -246,7 +253,7 @@ public class QVTrUnparser extends QVTrExpressionUnparser
 				append("default_values {\n");
 				indent();
 				for (RelationDomainAssignment domainInitializer : domainInitializers) {
-					doExpressionSwitch(domainInitializer.getVariable());
+					appendName(domainInitializer.getVariable());
 					append(" = ");
 					doExpressionSwitch(domainInitializer.getValueExp());
 					append(";\n");
@@ -278,40 +285,25 @@ public class QVTrUnparser extends QVTrExpressionUnparser
 		if (keys.size() > 0) {
 			for (Key key : keys)
 				unparseKey(key);
-			append("\n");
 		}
 		List<EOperation> queries = transformation.getEOperations();
 		if (queries.size() > 0) {
 			for (EOperation query : queries)
-				if (query instanceof Function)
+				if (query instanceof Function) {
+					append("\n");
 					unparseQuery((Function) query);
-			append("\n");
+				}
 		}
 		List<Rule> relations = transformation.getRule();
 		if (relations.size() > 0) {
 			for (Rule relation : relations)
-				if (relation instanceof Relation)
+				if (relation instanceof Relation) {
+					append("\n");
 					unparseRelation((Relation)relation);
+				}
 		}
 		exdent();
 		append("}\n");
-	}
-
-	protected void unparseTemplateExp(TemplateExp templateExpression) {
-		if (templateExpression instanceof CollectionTemplateExp)
-			unparseCollectionTemplateExp((CollectionTemplateExp) templateExpression);
-		else if (templateExpression instanceof ObjectTemplateExp)
-			unparseObjectTemplateExp((ObjectTemplateExp)templateExpression);
-		else
-			unparseUnsupported(templateExpression);
-		OCLExpression guard = templateExpression.getWhere();
-		if (guard != null) {
-			append(" {\n");
-			indent();
-			doExpressionSwitch(guard);		
-			exdent();
-			append("\n}");
-		}
 	}
 
 	protected void unparseTypedModel(TypedModel typedModel) {
