@@ -59,8 +59,13 @@ transformation SeqToStm(seqDgm: SeqMM, stm: StmcMM)
           m1:Message 
           {
                messageId = mid,
-               event = send:MessageEvent {type = MessageEventType::Send, state = ist1:State{}},
-               event = receive:MessageEvent {type = MessageEventType::Receive, state = ist2:State{}},
+--               event = send:MessageEvent {type = MessageEventType::Send, state = ist1:State{}},
+--               event = receive:MessageEvent {type = MessageEventType::Receive, state = ist2:State{}},
+               event = :Set(MessageEvent) {
+                   send:MessageEvent {type = MessageEventType::Send, state = ist1:State{}},
+                   receive:MessageEvent {type = MessageEventType::Receive, state = ist2:State{}}
+                   ++ _
+               },
                interaction = i:Interaction{}
           };
 
