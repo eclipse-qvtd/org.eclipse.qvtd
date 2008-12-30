@@ -610,7 +610,10 @@ public abstract class OCLExpressionUnparser extends UnparserWithReflection<EClas
 					if (precedenceKey != null) {
 						pushPrecedence(precedenceKey);
 						append(operationName);
-						doExpressionsSwitch(ClassUtils.asClassUnchecked(object.getArgument(), (List<OCLExpression>)null), ", ");
+						if (source != null) {
+							append(" ");
+							doExpressionSwitch(source);
+						}
 						popPrecedence(precedenceKey);
 						doneIt = true;
 					}
@@ -776,6 +779,11 @@ public abstract class OCLExpressionUnparser extends UnparserWithReflection<EClas
 			if ((type != null) && !(type instanceof VoidType)) {
 				append(" : ");
 				appendQualifiedName(type);
+			}
+			org.eclipse.ocl.expressions.OCLExpression<EClassifier> init = variable.getInitExpression();
+			if (init != null) {
+				append(" = ");
+				doExpressionSwitch(init);
 			}
 		}
 		return this;
