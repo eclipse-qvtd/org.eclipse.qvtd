@@ -16,6 +16,7 @@ Export-Package: org.eclipse.qvt.declarative.parser.qvtrelation,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.qvt.declarative.parser;visibility:=reexport,
  org.eclipse.qvt.declarative.ecore.qvtrelation;visibility:=reexport,
+ org.eclipse.qvt.declarative.emof.emof,
  org.eclipse.qvt.declarative.parser.ui
 Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
