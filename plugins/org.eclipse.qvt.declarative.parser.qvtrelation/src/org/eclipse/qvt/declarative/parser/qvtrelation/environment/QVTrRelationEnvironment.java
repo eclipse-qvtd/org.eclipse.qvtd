@@ -30,7 +30,6 @@ import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationFactory;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomain;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
-import org.eclipse.qvt.declarative.ecore.QVTTemplate.util.QVTTemplateConstants;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.AbstractQVTrAnalyzer;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.AbstractDomainCS;
@@ -78,9 +77,30 @@ public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationE
 	private void addExplicitVariable(Variable variable) {
 		ast.getVariable().add(variable);
 		String name = variable.getName();
-		if (!QVTTemplateConstants.WILDCARD_VARIABLE_NAME.equals(name))
+		if (!isSpecialVariable(variable))
 			addElement(name, variable, true);
 		explicitVariableMap.put(name, variable);
+	}
+
+	protected boolean checkImplicitElementType(EClass explicitElementClass, ImplicitVariable implicitVariable, EClass implicitElementClass) {
+		boolean isConflicting;
+		if (implicitElementClass == null)
+			isConflicting = true;
+		else if (implicitElementClass == explicitElementClass)
+			isConflicting = false;
+		else if (!implicitVariable.isInvocation() && implicitVariable.isEnforced())
+			isConflicting = !implicitElementClass.isSuperTypeOf(explicitElementClass);	// enforce may refer to supertype of known type
+		else if (!implicitVariable.isInvocation() && !implicitVariable.isEnforced())
+			isConflicting = true;
+		else if (implicitVariable.isInvocation() && implicitVariable.isChecked())
+			isConflicting = !implicitElementClass.isSuperTypeOf(explicitElementClass) && !explicitElementClass.isSuperTypeOf(implicitElementClass);	// checkonly may refer to supertype of known type or vice-versa					
+		else if (implicitVariable.isInvocation() && implicitVariable.isEnforced())
+			isConflicting = !implicitElementClass.isSuperTypeOf(explicitElementClass);	// enforce may refer to supertype of known type					
+		else if (implicitVariable.isInvocation() && !implicitVariable.isEnforced())
+			isConflicting = true;
+		else
+			isConflicting = true;
+		return isConflicting;
 	}
 
 	public QVTrDomainEnvironment createEnvironment(DomainCS domainCS) {
@@ -158,27 +178,6 @@ public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationE
 			}
 		}
 	}
-
-	protected boolean checkImplicitElementType(EClass explicitElementClass, ImplicitVariable implicitVariable, EClass implicitElementClass) {
-		boolean isConflicting;
-		if (implicitElementClass == null)
-			isConflicting = true;
-		else if (implicitElementClass == explicitElementClass)
-			isConflicting = false;
-		else if (!implicitVariable.isInvocation() && implicitVariable.isEnforced())
-			isConflicting = !implicitElementClass.isSuperTypeOf(explicitElementClass);	// enforce may refer to supertype of known type
-		else if (!implicitVariable.isInvocation() && !implicitVariable.isEnforced())
-			isConflicting = true;
-		else if (implicitVariable.isInvocation() && implicitVariable.isChecked())
-			isConflicting = !implicitElementClass.isSuperTypeOf(explicitElementClass) && !explicitElementClass.isSuperTypeOf(implicitElementClass);	// checkonly may refer to supertype of known type or vice-versa					
-		else if (implicitVariable.isInvocation() && implicitVariable.isEnforced())
-			isConflicting = !implicitElementClass.isSuperTypeOf(explicitElementClass);	// enforce may refer to supertype of known type					
-		else if (implicitVariable.isInvocation() && !implicitVariable.isEnforced())
-			isConflicting = true;
-		else
-			isConflicting = true;
-		return isConflicting;
-	}
 	
 	public void createVariableDeclaration(VariableExpCS variableExpCS, EClassifier type, Domain domain, boolean isInvocation) {
 		SimpleNameCS simpleNameCS = variableExpCS.getSimpleNameCS();
@@ -204,7 +203,7 @@ public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationE
 	private Variable createVariableDeclaration(String name, EClassifier type, CSTNode cstNode) {
 		Variable variable = explicitVariableMap.get(name);
 		if (variable != null) {
-			if ((variable.getType() != type) && !QVTTemplateConstants.WILDCARD_VARIABLE_NAME.equals(name)) {
+			if ((variable.getType() != type) && !isSpecialVariable(variable)) {
 				String message = "Conflicting type '" + formatType(type) + "' for variable of type '" + formatType(variable.getType()) + "'";
 				analyzerError(message, "explicit varDeclarationCS", cstNode);
 			}
@@ -214,7 +213,7 @@ public class QVTrRelationEnvironment extends QVTrEnvironment<QVTrTransformationE
 			variable = EcoreFactory.eINSTANCE.createVariable();
 			initASTMapping(variable, cstNode);
 			variable.setName(name);
-			if (!QVTTemplateConstants.WILDCARD_VARIABLE_NAME.equals(name))
+			if (!isSpecialVariable(variable))
 				variable.setType(type);
 			else
 				variable.setType(getOCLStandardLibrary().getOclAny());
