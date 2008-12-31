@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.qvt.declarative.ecore.operations.AbstractOperations;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 import org.eclipse.qvt.declarative.parser.utils.CSTUtils;
 
@@ -31,6 +32,7 @@ import org.eclipse.qvt.declarative.parser.utils.CSTUtils;
  */
 public class UnresolvedEnvironment
 {
+
 	protected final ICSTRootEnvironment rootEnvironment;
 	private EPackage rootPackage = null;
 	
@@ -119,7 +121,7 @@ public class UnresolvedEnvironment
 	public EPackage getUnresolvedEPackage() {
 		if (rootPackage == null) {
 			rootPackage = EcoreFactory.eINSTANCE.createEPackage();
-			rootPackage.setName("$unresolved$");
+			rootPackage.setName(AbstractOperations.UNRESOLVED_PACKAGE_NAME);
 			rootPackage.setNsPrefix("_unresolved_");
 			rootPackage.setNsURI(computePackageNs(rootPackage));
 		}
