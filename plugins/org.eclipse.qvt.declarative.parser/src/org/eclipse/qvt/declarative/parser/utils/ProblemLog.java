@@ -19,10 +19,12 @@ import java.util.Set;
 
 import org.eclipse.ocl.lpg.AbstractProblemHandler;
 import org.eclipse.ocl.lpg.ProblemHandler;
+import org.eclipse.osgi.util.NLS;
+import org.eclipse.qvt.declarative.ecore.operations.EValidatorWithOperations;
 
 public class ProblemLog extends AbstractProblemHandler
 {
-	public static class Problem
+	public static class Problem implements Comparable<Problem>
 	{
 		public final String problemMessage;
 		public final String processingContext;
@@ -34,6 +36,10 @@ public class ProblemLog extends AbstractProblemHandler
 			this.processingContext = processingContext;
 			this.startOffset = startOffset;
 			this.endOffset = endOffset;
+		}
+
+		public int compareTo(Problem o) {
+			return problemMessage.compareTo(o.problemMessage);
 		}		
 	}
 	
@@ -42,6 +48,20 @@ public class ProblemLog extends AbstractProblemHandler
 
 	public ProblemLog() {
 		super(null);
+	}
+	
+	public void expectValidatorError(EValidatorWithOperations validator, String problemMessage, String... substitutions) {
+		String message = NLS.bind(problemMessage, substitutions);
+		String processingContext = validator.getDiagnosticSource();
+		handleProblem(ProblemHandler.Severity.ERROR, ProblemHandler.Phase.VALIDATOR, message,
+				processingContext, -1, -1);
+	}
+	
+	public void expectValidatorWarning(EValidatorWithOperations validator, String problemMessage, String... substitutions) {
+		String message = NLS.bind(problemMessage, substitutions);
+		String processingContext = validator.getDiagnosticSource();
+		handleProblem(ProblemHandler.Severity.WARNING, ProblemHandler.Phase.VALIDATOR, message,
+				processingContext, -1, -1);
 	}
 
 	public int getAllProblems() {
