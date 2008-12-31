@@ -1,13 +1,19 @@
-/*******************************************************************************
+/**
+ * <copyright>
+ * 
  * Copyright (c) 2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: QVTTemplateConsistencyTest.java,v 1.3 2008/12/31 18:18:48 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.test.emof.qvttemplate;
 
 import java.io.IOException;
@@ -39,6 +45,9 @@ public class QVTTemplateConsistencyTest extends AbstractEssentialOCLConsistencyT
 		//	Ecore added value
 		//
 		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTTemplate.QVTTemplatePackage.Literals.COLLECTION_TEMPLATE_EXP);
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTTemplate.QVTTemplatePackage.Literals.OBJECT_TEMPLATE_EXP);
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTTemplate.QVTTemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM);
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTTemplate.QVTTemplatePackage.Literals.TEMPLATE_EXP);
 	}
 
 	public static void expectedEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
