@@ -12,31 +12,48 @@
  * 
  * </copyright>
  *
- * $Id: DomainOperations.java,v 1.1 2008/12/12 15:31:45 ewillink Exp $
+ * $Id: DomainOperations.java,v 1.2 2008/12/31 17:42:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.operations;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
+import org.eclipse.qvt.declarative.ecore.operations.EPackageOperations;
 
 public class DomainOperations extends AbstractQVTBaseOperations
 {
 	public static DomainOperations INSTANCE = new DomainOperations();
 
 	/**
-	 * Validates the NotBothCheckableAndEnforceable constraint of '<em>Domain</em>'.
+	 * Validates the CheckableOrEnforceable constraint of '<em>Domain</em>'.
 	 */
-	public boolean checkNotBothCheckableAndEnforceable(Domain domain, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (domain.isIsCheckable() && domain.isIsEnforceable()) {
+	public boolean checkCheckableOrEnforceable(Domain domain, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!domain.isIsCheckable() && !domain.isIsEnforceable()) {
 			Object[] messageSubstitutions = new Object[] { getObjectLabel(domain, context) };
-			appendError(diagnostics, domain, "_UI_NotBothCheckableAndEnforceable", messageSubstitutions);
+			appendError(diagnostics, domain, QVTBaseMessages._UI_Domain_IsNotCheckableOrEnforceable, messageSubstitutions);
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Validates the TypedModelExistsWarning constraint of '<em>Domain</em>'.
+	 */
+	public boolean checkTypedModelExistsWarning(Domain domain, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		TypedModel typedModel = domain.getTypedModel();
+		if (typedModel != null)
+			return true;
+		Object[] messageSubstitutions = new Object[] { getObjectLabel(domain, context) };
+		appendWarning(diagnostics, domain, QVTBaseMessages._UI_Domain_TypedModelDoesNotExistWarning, messageSubstitutions);
+		return false;
 	}
 
 	/**
@@ -45,11 +62,28 @@ public class DomainOperations extends AbstractQVTBaseOperations
 	public boolean checkTypedModelDefinedByTransformation(Domain domain, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		Transformation transformation = domain.getRule().getTransformation();
 		TypedModel typedModel = domain.getTypedModel();
-		if ((typedModel != null) && !TransformationOperations.INSTANCE.definesModel(transformation, typedModel)) {
-			Object[] messageSubstitutions = new Object[] { getObjectLabel(typedModel, context), getObjectLabel(domain, context), getObjectLabel(transformation, context) };
-			appendError(diagnostics, domain, "_UI_TypedModelDefinedByTransformation", messageSubstitutions);
-			return false;
+		if (typedModel == null)
+			return true;	// TypedModelExistsWarning
+		if (TransformationOperations.INSTANCE.definesModel(transformation, typedModel))
+			return true;
+		Object[] messageSubstitutions = new Object[] { getObjectLabel(typedModel, context), getObjectLabel(domain, context), getObjectLabel(transformation, context) };
+		appendError(diagnostics, domain, QVTBaseMessages._UI_Domain_TypedModelIsNotDefinedByTransformation, messageSubstitutions);
+		return false;
+	}
+
+	public boolean declaresType(Domain domain, EClassifier type) {
+		return isPredefinedType(type) || getDeclaredPackages(domain).contains(type.getEPackage());
+	}
+
+	public Set<EPackage> getDeclaredPackages(Domain domain) {
+		Set<EPackage> declaredPackages = new HashSet<EPackage>();
+		TypedModel typedModel = domain.getTypedModel();
+		if (typedModel != null) {
+			for (EPackage usedPackage : typedModel.getUsedPackage()) {
+				Set<EPackage> allUsedPackages = EPackageOperations.INSTANCE.getAllEPackages(usedPackage);
+				declaredPackages.addAll(allUsedPackages);
+			}
 		}
-		return true;
+		return declaredPackages;
 	}
 }

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: PatternOperations.java,v 1.1 2008/12/12 15:31:45 ewillink Exp $
+ * $Id: PatternOperations.java,v 1.2 2008/12/31 17:42:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.operations;
 
@@ -35,7 +35,7 @@ public class PatternOperations extends AbstractQVTBaseOperations
 		for (Variable variable : pattern.getBindsTo()) {
 			if (variable instanceof FunctionParameter) {
 				Object[] messageSubstitutions = new Object[] { getObjectLabel(variable, context) };
-				appendError(diagnostics, pattern, "_UI_NoVariableIsAFunctionParameter", messageSubstitutions);
+				appendError(diagnostics, pattern, QVTBaseMessages._UI_Pattern_VariableIsNotAFunctionParameter, messageSubstitutions);
 				allOk = false;
 			}
 		}

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Domain.java,v 1.3 2008/12/12 15:31:45 ewillink Exp $
+ * $Id: Domain.java,v 1.4 2008/12/31 17:42:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase;
 
@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.ENamedElement;
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage#getDomain()
  * @model abstract="true"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='TypedModelDefinedByTransformation\r\nNotBothCheckableAndEnforceable'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='TypedModelExistsWarning\r\nTypedModelDefinedByTransformation\r\nCheckableOrEnforceable\r\n\r\n'"
  * @generated
  */
 public interface Domain extends ENamedElement {

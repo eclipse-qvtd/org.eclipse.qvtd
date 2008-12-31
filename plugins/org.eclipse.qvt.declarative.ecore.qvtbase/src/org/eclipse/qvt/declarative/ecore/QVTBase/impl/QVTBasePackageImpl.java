@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTBasePackageImpl.java,v 1.3 2008/12/12 15:29:38 ewillink Exp $
+ * $Id: QVTBasePackageImpl.java,v 1.4 2008/12/31 17:42:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.impl;
 
@@ -629,13 +629,13 @@ public class QVTBasePackageImpl extends EPackageImpl implements QVTBasePackage {
 		  (domainEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "TypedModelDefinedByTransformation\r\nNotBothCheckableAndEnforceable"
+			 "constraints", "TypedModelExistsWarning\r\nTypedModelDefinedByTransformation\r\nCheckableOrEnforceable\r\n\r\n"
 		   });		
 		addAnnotation
 		  (functionEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "EveryFunctionParameterIsAFunctionParameter"
+			 "constraints", "IsSideEffectFree\r\nEveryFunctionParameterIsAFunctionParameter"
 		   });		
 		addAnnotation
 		  (patternEClass, 
@@ -653,13 +653,13 @@ public class QVTBasePackageImpl extends EPackageImpl implements QVTBasePackage {
 		  (ruleEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "OverridesIsCompatible\r\nOverridesDefinedByTransformation"
+			 "constraints", "OverridesIsCompatible\r\nOverridesDefinedByTransformation\r\nDomainNamesAreUnique\r\nTypedModelsAreUnique"
 		   });			
 		addAnnotation
 		  (transformationEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "WellFormedNsURI\r\nWellFormedNsPrefix\r\nUniqueNsURIs\r\nExtendsIsAcyclic\r\nModelParameterNamesAreCompatibleWithExtension\r\nEveryModelParameterUsedPackagesIsCompatibleWithExtension\r\nModelParameterNamesAreUnique\r\nRuleNamesAreUnique\r\nSynthesizedTypesAreOwned"
+			 "constraints", "WellFormedNsURI\r\nWellFormedNsPrefix\r\nUniqueNsURIs\r\nExtendsIsAcyclic\r\nModelParameterNamesAreCompatibleWithExtension\r\nEveryModelParameterUsedPackagesIsCompatibleWithExtension\r\nModelParameterNamesAreUnique\r\nRuleNamesAreUnique\r\nSynthesizedTypesAreOwned\r\n"
 		   });			
 		addAnnotation
 		  (typedModelEClass, 

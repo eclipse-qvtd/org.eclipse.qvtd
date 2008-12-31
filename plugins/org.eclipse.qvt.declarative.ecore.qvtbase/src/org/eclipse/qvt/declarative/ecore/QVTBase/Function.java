@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Function.java,v 1.2 2008/12/12 15:31:45 ewillink Exp $
+ * $Id: Function.java,v 1.3 2008/12/31 17:42:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase;
 
@@ -33,7 +33,7 @@ import org.eclipse.ocl.ecore.OCLExpression;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage#getFunction()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='EveryFunctionParameterIsAFunctionParameter'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='IsSideEffectFree\r\nEveryFunctionParameterIsAFunctionParameter'"
  * @generated
  */
 public interface Function extends EOperation {

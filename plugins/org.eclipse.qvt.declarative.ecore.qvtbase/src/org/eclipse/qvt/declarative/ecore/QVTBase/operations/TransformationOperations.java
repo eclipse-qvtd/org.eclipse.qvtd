@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TransformationOperations.java,v 1.1 2008/12/12 15:31:45 ewillink Exp $
+ * $Id: TransformationOperations.java,v 1.2 2008/12/31 17:42:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.operations;
 
@@ -21,10 +21,17 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.ETypedElement;
+import org.eclipse.ocl.ecore.CollectionType;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Rule;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
+import org.eclipse.qvt.declarative.ecore.operations.EPackageOperations;
 
 public class TransformationOperations extends AbstractQVTBaseOperations
 {
@@ -35,67 +42,64 @@ public class TransformationOperations extends AbstractQVTBaseOperations
 	 */
 	public boolean checkExtendsIsAcyclic(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		Set<Transformation> allExtends = getAllExtends(transformation);
-		if (allExtends.contains(transformation)) {
-			Object[] messageSubstitutions = new Object[] { getObjectLabel(transformation, context) };
-			appendError(diagnostics, transformation, "_UI_ExtendsIsAcyclic", messageSubstitutions);
-			return false;
-		}
-		return true;
+		if (!allExtends.contains(transformation))
+			return true;
+		Object[] messageSubstitutions = new Object[] { getObjectLabel(transformation, context) };
+		appendError(diagnostics, transformation, QVTBaseMessages._UI_Transformation_ExtendsContainsACycle, messageSubstitutions);
+		return false;
 	}
 
 	/**
 	 * Validates the ExtendsIsCompatible constraint of '<em>Transformation</em>'.
 	 */
 	public boolean checkExtendsIsCompatible(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (transformation.getExtends() != null) {
-			Set<EPackage> declaredPackages = getDeclaredPackages(transformation);
-			Set<EPackage> extendedDeclaredPackages = getDeclaredPackages(transformation.getExtends());
-			if (!declaredPackages.equals(extendedDeclaredPackages)) {
-				Object[] messageSubstitutions = new Object[] { "ExtendsIsCompatible", getObjectLabel(transformation, context) };
-				appendError(diagnostics, transformation, "_UI_ExtendsIsCompatible", messageSubstitutions);
-			}
-			return false;
+		if (transformation.getExtends() == null)
+			return true;
+		Set<EPackage> declaredPackages = getDeclaredPackages(transformation);
+		Set<EPackage> extendedDeclaredPackages = getDeclaredPackages(transformation.getExtends());
+		if (!declaredPackages.equals(extendedDeclaredPackages)) {
+			Object[] messageSubstitutions = new Object[] { "ExtendsIsCompatible", getObjectLabel(transformation, context) };
+			appendError(diagnostics, transformation, QVTBaseMessages._UI_Transformation_UsedPackagesAreNotCompatibleWithExtends, messageSubstitutions);
 		}
-		return true;
+		return false;
 	}
 
 	/**
 	 * Validates the ModelParameterNamesAreCompatibleWithExtension constraint of '<em>Transformation</em>'.
 	 */
 	public boolean checkModelParameterNamesAreCompatibleWithExtension(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (transformation.getExtends() != null) {
-			Map<String, TypedModel> names = getNames(transformation.getModelParameter());
-			Map<String, TypedModel> extendedNames = getNames(transformation.getExtends().getModelParameter());
-			if (!names.keySet().equals(extendedNames.keySet())) {
-				Object[] messageSubstitutions = new Object[] { getObjectLabel(transformation, context), getObjectLabel(transformation.getExtends(), context) };
-				appendError(diagnostics, transformation, "_UI_ModelParameterNamesAreCompatibleWithExtension", messageSubstitutions);
-			}
-			return false;
+		if (transformation.getExtends() == null)
+			return true;
+		Map<String, TypedModel> names = getNames(transformation.getModelParameter());
+		Map<String, TypedModel> extendedNames = getNames(transformation.getExtends().getModelParameter());
+		if (!names.keySet().equals(extendedNames.keySet())) {
+			Object[] messageSubstitutions = new Object[] { getObjectLabel(transformation, context), getObjectLabel(transformation.getExtends(), context) };
+			appendError(diagnostics, transformation, QVTBaseMessages._UI_Transformation_ModelParameterNameIsNotCompatibleWithExtension, messageSubstitutions);
 		}
-		return true;
+		return false;
 	}
 
 	/**
 	 * Validates the EveryModelParameterUsedPackagesIsCompatibleWithExtension constraint of '<em>Transformation</em>'.
 	 */
 	public boolean checkEveryModelParameterUsedPackagesIsCompatibleWithExtension(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (transformation.getExtends() == null)
+			return true;
 		boolean allOk = true;
-		if (transformation.getExtends() != null) {
-			Map<String, TypedModel> names = getNames(transformation.getModelParameter());
-			Map<String, TypedModel> extendedNames = getNames(transformation.getExtends().getModelParameter());
-			for (String name : names.keySet()) {
-				TypedModel typedModel = names.get(name);
-				TypedModel extendedTypedModel = extendedNames.get(name);
-				if (extendedTypedModel != null) {	// If null diagnostic is produced by checkModelParameterNamesAreCompatibleWithExtension
-					Set<EPackage> declaredPackages = new HashSet<EPackage>(typedModel.getUsedPackage());
-					Set<EPackage> extendedDeclaredPackages = new HashSet<EPackage>(extendedTypedModel.getUsedPackage());
-					if (!declaredPackages.equals(extendedDeclaredPackages)) {
-						Object[] messageSubstitutions = new Object[] { getObjectLabel(typedModel, context), getObjectLabel(extendedTypedModel, context) };
-						appendError(diagnostics, transformation, "_UI_EveryModelParameterUsedPackagesIsCompatibleWithExtension", messageSubstitutions);
-					}
+		Map<String, TypedModel> names = getNames(transformation.getModelParameter());
+		Map<String, TypedModel> extendedNames = getNames(transformation.getExtends().getModelParameter());
+		for (String name : names.keySet()) {
+			TypedModel typedModel = names.get(name);
+			TypedModel extendedTypedModel = extendedNames.get(name);
+			if (extendedTypedModel != null) {	// If null diagnostic is produced by checkModelParameterNamesAreCompatibleWithExtension
+				Set<EPackage> declaredPackages = new HashSet<EPackage>(typedModel.getUsedPackage());
+				Set<EPackage> extendedDeclaredPackages = new HashSet<EPackage>(extendedTypedModel.getUsedPackage());
+				if (!declaredPackages.equals(extendedDeclaredPackages)) {
+					Object[] messageSubstitutions = new Object[] { getObjectLabel(typedModel, context), getObjectLabel(extendedTypedModel, context) };
+					appendError(diagnostics, transformation, QVTBaseMessages._UI_Transformation_ModelParameterUsedPackagesAreNotCompatibleWithExtension, messageSubstitutions);
 				}
-				allOk = false;
 			}
+			allOk = false;
 		}
 		return allOk;
 	}
@@ -104,31 +108,57 @@ public class TransformationOperations extends AbstractQVTBaseOperations
 	 * Validates the ModelParameterNamesAreUnique constraint of '<em>Transformation</em>'.
 	 */
 	public boolean checkModelParameterNamesAreUnique(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return checkUniqueNames(transformation, transformation.getModelParameter(), "_UI_ModelParameterNamesAreUnique", diagnostics, context);
+		return checkUniqueNames(transformation, transformation.getModelParameter(), QVTBaseMessages._UI_Transformation_ModelParameterNameIsNotUnique, diagnostics, context);
 	}
 
 	/**
 	 * Validates the RuleNamesAreUnique constraint of '<em>Transformation</em>'.
 	 */
 	public boolean checkRuleNamesAreUnique(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return checkUniqueNames(transformation, transformation.getRule(), "_UI_RuleNamesAreUnique", diagnostics, context);
+		return checkUniqueNames(transformation, transformation.getRule(), QVTBaseMessages._UI_Transformation_RuleNameIsNotUnique, diagnostics, context);
 	}
 
 	/**
 	 * Validates the SynthesizedTypesAreOwned constraint of '<em>Transformation</em>'.
 	 */
 	public boolean checkSynthesizedTypesAreOwned(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			Object[] messageSubstitutions = new Object[] { getObjectLabel(transformation, context) };
-			appendError(diagnostics, transformation, "_UI_SynthesizedTypesAreOwned", messageSubstitutions);
-			return false;
+		Set<CollectionType> synthesizedTypes = getSynthesizedTypes(transformation);
+		if (synthesizedTypes == null)
+			return true;
+		boolean allOk = true;
+		for (CollectionType synthesizedType : synthesizedTypes) {
+			if (!hasAncestor(synthesizedType, transformation)) {
+				Object[] messageSubstitutions = new Object[] { getObjectLabel(synthesizedType, context), getObjectLabel(transformation, context) };
+				appendError(diagnostics, transformation, QVTBaseMessages._UI_Transformation_SynthesizedTypeIsNotOwned, messageSubstitutions);
+				allOk = false;
+			}
 		}
-		return true;
+		return allOk;
 	}
+
+	/**
+	 * Validates the SynthesizedTypesAreUnique constraint of '<em>Transformation</em>'.
+	 *
+	public boolean checkSynthesizedTypesAreUnique(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		Set<CollectionType> synthesizedTypes = getSynthesizedTypes(transformation);
+		if (synthesizedTypes == null)
+			return true;
+		boolean allOk = true;
+		Map<String, CollectionType> name2CollectionType = new HashMap<String, CollectionType>();
+		for (CollectionType synthesizedType : synthesizedTypes)
+		{
+			String name = getObjectLabel(synthesizedType, context);
+			CollectionType firstCollectionType = name2CollectionType.get(name);
+			if (firstCollectionType == null)
+				name2CollectionType.put(name, synthesizedType);
+			else {
+				allOk = false;
+				Object[] messageSubstitutions = new Object[] { name, getObjectLabel(transformation, context) };
+				appendError(diagnostics, transformation, QVTBaseMessages._UI_Transformation_SynthesizedTypeIsNotUnique, messageSubstitutions);
+			}
+		}
+		return allOk;
+	} */
 
 	public boolean computeAllExtends(Transformation transformation, Set<Transformation> allExtends) {
 		if (allExtends.contains(transformation))
@@ -147,6 +177,17 @@ public class TransformationOperations extends AbstractQVTBaseOperations
 		return declaresRule(transformation.getExtends(), rule);
 	}
 
+	public boolean declaresType(Transformation transformation, EClass type) {
+		if (type == null)
+			return false;
+		Set<EPackage> declaredPackages = getDeclaredPackages(transformation);
+		if (declaredPackages.contains(type.getEPackage()))
+			return true;
+		if (isUnresolved(type))
+			return true;
+		return false;
+	}
+
 	public boolean definesModel(Transformation transformation, TypedModel typedModel) {
 		return transformation.getModelParameter().contains(typedModel);
 	}
@@ -160,8 +201,27 @@ public class TransformationOperations extends AbstractQVTBaseOperations
 
 	public Set<EPackage> getDeclaredPackages(Transformation transformation) {
 		Set<EPackage> declaredPackages = new HashSet<EPackage>();
-		for (TypedModel modelParameter : transformation.getModelParameter())
-			declaredPackages.addAll(modelParameter.getUsedPackage());
+		for (TypedModel modelParameter : transformation.getModelParameter()) {
+			for (EPackage usedPackage : modelParameter.getUsedPackage()) {
+				Set<EPackage> allUsedPackages = EPackageOperations.INSTANCE.getAllEPackages(usedPackage);
+				declaredPackages.addAll(allUsedPackages);
+			}
+		}
 		return declaredPackages;
+	}
+
+	public Set<CollectionType> getSynthesizedTypes(Transformation transformation) {
+		Set<CollectionType> synthesizedTypes = null;
+		for (TreeIterator<EObject> i = transformation.eAllContents(); i.hasNext(); ) {
+			EObject eObject = i.next();
+			if (eObject instanceof ETypedElement) {
+				for (EClassifier type = ((ETypedElement)eObject).getEType(); type instanceof CollectionType; type = ((CollectionType)type).getElementType()) {
+					if (synthesizedTypes == null)
+						synthesizedTypes = new HashSet<CollectionType>();
+					synthesizedTypes.add((CollectionType) type);
+				}
+			}			
+		}
+		return synthesizedTypes;
 	}
 }

@@ -12,13 +12,12 @@
  * 
  * </copyright>
  *
- * $Id: QVTBaseValidator.java,v 1.3 2008/12/12 15:31:45 ewillink Exp $
+ * $Id: QVTBaseValidator.java,v 1.4 2008/12/31 17:42:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.util;
 
 import java.util.Map;
 
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EPackage;
@@ -40,6 +39,7 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.operations.PatternOperations;
 import org.eclipse.qvt.declarative.ecore.QVTBase.operations.PredicateOperations;
 import org.eclipse.qvt.declarative.ecore.QVTBase.operations.RuleOperations;
 import org.eclipse.qvt.declarative.ecore.QVTBase.operations.TransformationOperations;
+import org.eclipse.qvt.declarative.ecore.QVTBase.operations.TypedModelOperations;
 import org.eclipse.qvt.declarative.ecore.operations.EValidatorWithOperations;
 
 /**
@@ -181,9 +181,18 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(domain, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(domain, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateENamedElement_WellFormedName(domain, diagnostics, context);
+		if (result || diagnostics != null) result &= validateDomain_TypedModelExistsWarning(domain, diagnostics, context);
 		if (result || diagnostics != null) result &= validateDomain_TypedModelDefinedByTransformation(domain, diagnostics, context);
-		if (result || diagnostics != null) result &= validateDomain_NotBothCheckableAndEnforceable(domain, diagnostics, context);
+		if (result || diagnostics != null) result &= validateDomain_CheckableOrEnforceable(domain, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the TypedModelExistsWarning constraint of '<em>Domain</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateDomain_TypedModelExistsWarning(Domain domain, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return DomainOperations.INSTANCE.checkTypedModelExistsWarning(domain, diagnostics, context);
 	}
 
 	/**
@@ -195,11 +204,11 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 	}
 
 	/**
-	 * Validates the NotBothCheckableAndEnforceable constraint of '<em>Domain</em>'.
+	 * Validates the CheckableOrEnforceable constraint of '<em>Domain</em>'.
 	 * @generated NOT
 	 */
-	public boolean validateDomain_NotBothCheckableAndEnforceable(Domain domain, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return DomainOperations.INSTANCE.checkNotBothCheckableAndEnforceable(domain, diagnostics, context);
+	public boolean validateDomain_CheckableOrEnforceable(Domain domain, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return DomainOperations.INSTANCE.checkCheckableOrEnforceable(domain, diagnostics, context);
 	}
 
 	/**
@@ -223,8 +232,17 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= ecoreValidator.validateEOperation_UniqueParameterNames(function, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateEOperation_UniqueTypeParameterNames(function, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateEOperation_NoRepeatingVoid(function, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFunction_IsSideEffectFree(function, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFunction_EveryFunctionParameterIsAFunctionParameter(function, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the IsSideEffectFree constraint of '<em>Function</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateFunction_IsSideEffectFree(Function function, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return FunctionOperations.INSTANCE.checkIsSideEffectFree(function, diagnostics, context);
 	}
 
 	/**
@@ -331,6 +349,8 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= ecoreValidator.validateENamedElement_WellFormedName(rule, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRule_OverridesIsCompatible(rule, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRule_OverridesDefinedByTransformation(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRule_DomainNamesAreUnique(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRule_TypedModelsAreUnique(rule, diagnostics, context);
 		return result;
 	}
 
@@ -348,6 +368,22 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 	 */
 	public boolean validateRule_OverridesDefinedByTransformation(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return RuleOperations.INSTANCE.checkOverridesDefinedByTransformation(rule, diagnostics, context);
+	}
+
+	/**
+	 * Validates the DomainNamesAreUnique constraint of '<em>Rule</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRule_DomainNamesAreUnique(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RuleOperations.INSTANCE.checkDomainNamesAreUnique(rule, diagnostics, context);
+	}
+
+	/**
+	 * Validates the TypedModelsAreUnique constraint of '<em>Rule</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRule_TypedModelsAreUnique(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RuleOperations.INSTANCE.checkTypedModelsAreUnique(rule, diagnostics, context);
 	}
 
 	/**
@@ -470,6 +506,14 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 	}
 
 	/**
+	 * Validates the SynthesizedTypesAreUnique constraint of '<em>Transformation</em>'.
+	 * @generated NOT
+	 *
+	public boolean validateTransformation_SynthesizedTypesAreUnique(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return TransformationOperations.INSTANCE.checkSynthesizedTypesAreUnique(transformation, diagnostics, context);
+	} */
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -489,30 +533,10 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 
 	/**
 	 * Validates the DependsOnIsAcyclic constraint of '<em>Typed Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean validateTypedModel_DependsOnIsAcyclic(TypedModel typedModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "DependsOnIsAcyclic", getObjectLabel(typedModel, context) },
-						 new Object[] { typedModel },
-						 context));
-			}
-			return false;
-		}
-		return true;
+		return TypedModelOperations.INSTANCE.checkDependsOnIsAcyclic(typedModel, diagnostics, context);
 	}
 
 	/**

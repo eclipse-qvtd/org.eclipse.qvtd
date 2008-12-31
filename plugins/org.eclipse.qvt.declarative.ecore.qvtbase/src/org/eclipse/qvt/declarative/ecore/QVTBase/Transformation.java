@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Transformation.java,v 1.2 2008/12/12 15:31:45 ewillink Exp $
+ * $Id: Transformation.java,v 1.3 2008/12/31 17:42:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase;
 
@@ -38,7 +38,7 @@ import org.eclipse.emf.ecore.EPackage;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage#getTransformation()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='WellFormedNsURI\r\nWellFormedNsPrefix\r\nUniqueNsURIs\r\nExtendsIsAcyclic\r\nModelParameterNamesAreCompatibleWithExtension\r\nEveryModelParameterUsedPackagesIsCompatibleWithExtension\r\nModelParameterNamesAreUnique\r\nRuleNamesAreUnique\r\nSynthesizedTypesAreOwned'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='WellFormedNsURI\r\nWellFormedNsPrefix\r\nUniqueNsURIs\r\nExtendsIsAcyclic\r\nModelParameterNamesAreCompatibleWithExtension\r\nEveryModelParameterUsedPackagesIsCompatibleWithExtension\r\nModelParameterNamesAreUnique\r\nRuleNamesAreUnique\r\nSynthesizedTypesAreOwned\r\n'"
  * @generated
  */
 public interface Transformation extends EClass, EPackage {
