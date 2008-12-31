@@ -141,8 +141,8 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 	protected void declareDomainCS(QVTrRelationEnvironment env, DomainCS domainCS) {
 		QVTrDomainEnvironment domainEnv = env.createEnvironment(domainCS);
 		RelationDomain domain = domainEnv.getDomain();
-		domain.setIsCheckable(!domainCS.isEnforce());
-		domain.setIsEnforceable(!domainCS.isCheckonly());
+		domain.setIsCheckable(domainCS.isCheckonly());
+		domain.setIsEnforceable(domainCS.isEnforce());
 		TemplateVariableCS templateVariable = domainCS.getTemplate();
 		EClassifier rootVariableType = resolveClassifier(domainEnv, "domainCS", templateVariable.getType());
 		Variable variable = env.createVariableDeclaration(templateVariable.getIdentifier(), rootVariableType);
@@ -271,11 +271,28 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 
 	protected void declareRelationCS(QVTrTransformationEnvironment env, RelationCS relationCS) {
 		QVTrRelationEnvironment relationEnv = env.createEnvironment(relationCS);
-		for (AbstractDomainCS domainCS : relationCS.getDomain()) {
-			if (domainCS instanceof PrimitiveTypeDomainCS)
-				declarePrimitiveTypeDomainCS(relationEnv, (PrimitiveTypeDomainCS) domainCS);
-			else
-				declareDomainCS(relationEnv, (DomainCS) domainCS);
+		boolean explicitCheckonly = false;
+		boolean explicitEnforce = false;
+		for (AbstractDomainCS abstractDomainCS : relationCS.getDomain()) {
+			if (abstractDomainCS instanceof PrimitiveTypeDomainCS) {
+				declarePrimitiveTypeDomainCS(relationEnv, (PrimitiveTypeDomainCS) abstractDomainCS);
+			}
+			else {
+				DomainCS domainCS = (DomainCS) abstractDomainCS;
+				declareDomainCS(relationEnv, domainCS);
+				if (domainCS.isCheckonly())
+					explicitCheckonly = true;
+				if (domainCS.isEnforce())
+					explicitEnforce = true;
+			}
+		}
+		for (Domain domain : relationEnv.getASTNode().getDomain()) {
+			boolean isCheckonly = domain.isIsCheckable();
+			boolean isEnforced = domain.isIsEnforceable();
+			if (!explicitCheckonly && !isEnforced)
+				domain.setIsCheckable(true);
+			if (!explicitEnforce && !isCheckonly)
+				domain.setIsEnforceable(true);
 		}
 	}
 
