@@ -27,6 +27,7 @@ import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.parser.environment.CSTChildEnvironment;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvt.environment.QVTTopLevelEnvironment;
+import org.eclipse.qvt.declarative.parser.qvtrelation.QVTrFormattingHelper;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TopLevelCS;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.TransformationCS;
 
@@ -48,6 +49,11 @@ public class QVTrTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTrNodeEnv
 		transformationMap.put(name, relationalTransformation);	// FIXME duplicates
 		addPackage(relationalTransformation);	
 		return environment;
+	}
+
+	@Override
+	public QVTrFormattingHelper createFormattingHelper() {
+		return new QVTrFormattingHelper(this);
 	}
 
 	public QVTrNestedEnvironment createNestedEnvironment(CSTNode cstNode) {
