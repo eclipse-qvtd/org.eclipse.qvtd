@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplateValidationTest.java,v 1.1 2008/12/31 18:19:15 ewillink Exp $
+ * $Id: QVTTemplateValidationTest.java,v 1.2 2008/12/31 19:17:46 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.emof.qvttemplate;
 
@@ -108,7 +108,7 @@ public class QVTTemplateValidationTest extends AbstractQVTTemplateValidationTest
 		validationTest(expectedProblems);
 	}
 
-	public void testCollectionTemplateExp_RestVariableIsBoundByPattern() {
+/*	public void testCollectionTemplateExp_RestVariableIsBoundByPattern() {
 		TestTransformation transformation = createTestTransformation(resource.getContents(), "TestTransformation");
 		TypedModel typedModel = createTypedModel(transformation, "TestTypedModel", EcorePackage.eINSTANCE);
 		TestRule rule = createTestRule(transformation.getRule(), "TestRule");
@@ -131,7 +131,7 @@ public class QVTTemplateValidationTest extends AbstractQVTTemplateValidationTest
 		pattern.getBindsTo().add(restVariable);
 		//
 		validationTest(new ProblemLog());
-	}
+	} */
 
 	public void testCollectionTemplateExp_EveryEnforceableItemIsEnforced() {
 		// TODO implement the constraint
@@ -294,7 +294,7 @@ public class QVTTemplateValidationTest extends AbstractQVTTemplateValidationTest
 		validationTest(expectedProblems);
 	}
 
-	public void testPropertyTemplateItem_SimpleVariableIsBoundByPattern() {
+/*	public void testPropertyTemplateItem_SimpleVariableIsBoundByPattern() {
 		TestTransformation transformation = createTestTransformation(resource.getContents(), "TestTransformation");
 		TypedModel typedModel = createTypedModel(transformation, "TestTypedModel", TestQVTBasePackage.eINSTANCE);
 		TestRule rule = createTestRule(transformation.getRule(), "TestRule");
@@ -321,7 +321,7 @@ public class QVTTemplateValidationTest extends AbstractQVTTemplateValidationTest
 		pattern.getBindsTo().add(extraVariable);
 		//
 		validationTest(new ProblemLog());
-	}
+	} */
 
 	public void testTemplateExp_DomainExists() {
 		TestTransformation transformation = createTestTransformation(resource.getContents(), "TestTransformation");
