@@ -84,24 +84,33 @@ public class QVTrDomainEnvironment extends QVTrEnvironment<QVTrRelationEnvironme
 	}
 
 	protected void installPatternVariables(TemplateExp templateExpression) {
-		Variable variable = templateExpression.getBindsTo();
-		if (variable != null) {
-			List<Variable> bindsTo = ast.getPattern().getBindsTo();
-			if (!bindsTo.contains(variable))
-				bindsTo.add(variable);
-		}
+		installPatternVariable(templateExpression.getBindsTo());
 		if (templateExpression instanceof ObjectTemplateExp) {
 			for (PropertyTemplateItem part : ((ObjectTemplateExp)templateExpression).getPart()) {
 				OCLExpression value = part.getValue();
 				if (value instanceof TemplateExp)
 					installPatternVariables((TemplateExp) value);
+//				else if (value instanceof VariableExp)
+//					installPatternVariable((Variable) ((VariableExp) value).getReferredVariable());
 			}
 		}
 		else if (templateExpression instanceof CollectionTemplateExp) {
-			for (OCLExpression member : ((CollectionTemplateExp)templateExpression).getMember()) {
+			CollectionTemplateExp collectionTemplateExpression = (CollectionTemplateExp)templateExpression;
+			for (OCLExpression member : collectionTemplateExpression.getMember()) {
 				if (member instanceof TemplateExp)
 					installPatternVariables((TemplateExp) member);
+//				else if (member instanceof VariableExp)
+//					installPatternVariable((Variable) ((VariableExp) member).getReferredVariable());
 			}
+//			installPatternVariable(collectionTemplateExpression.getRest());
+		}
+	}
+
+	protected void installPatternVariable(Variable variable) {
+		if ((variable != null) && !isSpecialVariable(variable)) {
+			List<Variable> bindsTo = ast.getPattern().getBindsTo();
+			if (!bindsTo.contains(variable))
+				bindsTo.add(variable);
 		}
 	}
 	
