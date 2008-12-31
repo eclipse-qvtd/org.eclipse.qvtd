@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: PropertyTemplateItem.java,v 1.2 2008/09/09 20:54:22 ewillink Exp $
+ * $Id: PropertyTemplateItem.java,v 1.3 2008/12/31 17:43:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate;
 
@@ -36,7 +36,7 @@ import org.eclipse.ocl.ecore.OCLExpression;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTTemplate.QVTTemplatePackage#getPropertyTemplateItem()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ReferredPropertyIsDefinedByReferredClass\r\nValueElementTypeMatchesReferredPropertyElementType\r\nSetMatchesSet\r\nNonBagMatchesNonBag\r\nSimpleVariableIsBoundByPattern'"
  * @generated
  */
 public interface PropertyTemplateItem extends EModelElement {

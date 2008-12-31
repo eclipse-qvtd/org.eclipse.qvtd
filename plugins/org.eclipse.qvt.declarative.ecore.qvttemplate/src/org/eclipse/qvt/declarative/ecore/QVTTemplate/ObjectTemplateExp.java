@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ObjectTemplateExp.java,v 1.1 2008/07/23 09:48:47 qglineur Exp $
+ * $Id: ObjectTemplateExp.java,v 1.2 2008/12/31 17:43:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate;
 
@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTTemplate.QVTTemplatePackage#getObjectTemplateExp()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ReferredClassIsDeclaredByDomain\r\nPartsAreUnique\r\nEveryEnforceablePartIsEnforced'"
  * @generated
  */
 public interface ObjectTemplateExp extends TemplateExp {

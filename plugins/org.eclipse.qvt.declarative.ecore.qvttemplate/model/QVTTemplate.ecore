@@ -4,6 +4,9 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="QVTTemplate"
     nsURI="http://www.eclipse.org/qvt/1.0/QVTTemplate" nsPrefix="eqvtt">
   <eClassifiers xsi:type="ecore:EClass" name="TemplateExp" abstract="true" eSuperTypes="../../org.eclipse.ocl.ecore/model/OCLEcore.ecore#//ecore/LiteralExp">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="DomainExists&#xD;&#xA;PatternExists&#xD;&#xA;VariableIsBoundByPattern&#xD;&#xA;VariableTypeIsDeclaredByDomain&#xD;&#xA;WhereIsBoolean&#xD;&#xA;"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bindsTo" eType="ecore:EClass ../../org.eclipse.ocl.ecore/model/OCLEcore.ecore#//ecore/Variable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="where" eType="ecore:EClass ../../org.eclipse.ocl.ecore/model/OCLEcore.ecore#//ecore/OCLExpression"
         containment="true">
@@ -13,6 +16,9 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectTemplateExp" eSuperTypes="#//TemplateExp">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ReferredClassIsDeclaredByDomain&#xD;&#xA;PartsAreUnique&#xD;&#xA;EveryEnforceablePartIsEnforced"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="part" ordered="false" upperBound="-1"
         eType="#//PropertyTemplateItem" containment="true" eOpposite="#//PropertyTemplateItem/objContainer"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredClass" lowerBound="1"
@@ -20,7 +26,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionTemplateExp" eSuperTypes="#//TemplateExp">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="MatchingKind"/>
+      <details key="constraints" value="ReferredCollectionElementTypeIsDeclaredByDomain&#xD;&#xA;EveryMemberTypeMatchesElementType&#xD;&#xA;RestTypeMatchesCollectionType&#xD;&#xA;RestVariableIsBoundByPattern&#xD;&#xA;EveryEnforceableItemIsEnforced&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="member" ordered="false"
         upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.ecore/model/OCLEcore.ecore#//ecore/OCLExpression"
@@ -38,6 +44,9 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyTemplateItem" eSuperTypes="../../org.eclipse.emf.ecore/model/Ecore.ecore#//EModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ReferredPropertyIsDefinedByReferredClass&#xD;&#xA;ValueElementTypeMatchesReferredPropertyElementType&#xD;&#xA;SetMatchesSet&#xD;&#xA;NonBagMatchesNonBag&#xD;&#xA;SimpleVariableIsBoundByPattern"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="objContainer" lowerBound="1"
         eType="#//ObjectTemplateExp" transient="true" eOpposite="#//ObjectTemplateExp/part"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1"

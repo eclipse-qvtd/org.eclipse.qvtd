@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplatePackageImpl.java,v 1.2 2008/09/09 20:54:22 ewillink Exp $
+ * $Id: QVTTemplatePackageImpl.java,v 1.3 2008/12/31 17:43:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.impl;
 
@@ -390,10 +390,10 @@ public class QVTTemplatePackageImpl extends EPackageImpl implements QVTTemplateP
 		createResource(eNS_URI);
 
 		// Create annotations
-		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
-		createEmofAnnotations();
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
+		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
+		createEmofAnnotations();
 	}
 
 	/**
@@ -403,13 +403,13 @@ public class QVTTemplatePackageImpl extends EPackageImpl implements QVTTemplateP
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";		
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";			
 		addAnnotation
 		  (getTemplateExp_Where(), 
 		   source, 
 		   new String[] {
 			 "body", "owner"
-		   });			
+		   });				
 		addAnnotation
 		  (getCollectionTemplateExp_Member(), 
 		   source, 
@@ -421,7 +421,7 @@ public class QVTTemplatePackageImpl extends EPackageImpl implements QVTTemplateP
 		   source, 
 		   new String[] {
 			 "body", "matchingExp"
-		   });		
+		   });			
 		addAnnotation
 		  (getPropertyTemplateItem_ReferredProperty(), 
 		   source, 
@@ -443,13 +443,31 @@ public class QVTTemplatePackageImpl extends EPackageImpl implements QVTTemplateP
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";			
+		String source = "http://www.eclipse.org/emf/2002/Ecore";		
+		addAnnotation
+		  (templateExpEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "DomainExists\r\nPatternExists\r\nVariableIsBoundByPattern\r\nVariableTypeIsDeclaredByDomain\r\nWhereIsBoolean\r\n"
+		   });			
+		addAnnotation
+		  (objectTemplateExpEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "ReferredClassIsDeclaredByDomain\r\nPartsAreUnique\r\nEveryEnforceablePartIsEnforced"
+		   });		
 		addAnnotation
 		  (collectionTemplateExpEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "MatchingKind"
+			 "constraints", "ReferredCollectionElementTypeIsDeclaredByDomain\r\nEveryMemberTypeMatchesElementType\r\nRestTypeMatchesCollectionType\r\nRestVariableIsBoundByPattern\r\nEveryEnforceableItemIsEnforced\r\n"
 		   });				
+		addAnnotation
+		  (propertyTemplateItemEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "ReferredPropertyIsDefinedByReferredClass\r\nValueElementTypeMatchesReferredPropertyElementType\r\nSetMatchesSet\r\nNonBagMatchesNonBag\r\nSimpleVariableIsBoundByPattern"
+		   });		
 	}
 
 } //QVTTemplatePackageImpl
