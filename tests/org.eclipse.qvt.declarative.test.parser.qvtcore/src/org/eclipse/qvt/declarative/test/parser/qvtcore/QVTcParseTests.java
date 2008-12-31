@@ -1,19 +1,28 @@
-/*******************************************************************************
+/**
+ * <copyright>
+ * 
  * Copyright (c) 2007,2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: QVTcParseTests.java,v 1.3 2008/12/31 18:21:18 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.test.parser.qvtcore;
 
 import java.io.IOException;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.ocl.lpg.ProblemHandler;
+import org.eclipse.qvt.declarative.ecore.QVTBase.operations.QVTBaseMessages;
+import org.eclipse.qvt.declarative.ecore.QVTBase.util.QVTBaseValidator;
+import org.eclipse.qvt.declarative.ecore.QVTCore.operations.QVTCoreMessages;
 import org.eclipse.qvt.declarative.ecore.QVTCore.util.QVTCoreValidator;
 import org.eclipse.qvt.declarative.ecore.mappings.MappingConfigurationException;
 import org.eclipse.qvt.declarative.parser.utils.ProblemLog;
@@ -76,15 +85,20 @@ public class QVTcParseTests extends AbstractQVTcTestCase
 		expectUnrecognizedVariable(expectedProblems, "v1");
 		expectUnrecognizedVariable(expectedProblems, "v2");
 		expectUnrecognizedVariable(expectedProblems, "t");
-		expectedProblems.handleProblem(ProblemHandler.Severity.ERROR, ProblemHandler.Phase.ANALYZER,
-				"Duplicate domain name 'rdbms'", "DomainCS", -1, -1);
+
+		expectedProblems.expectValidatorError(QVTBaseValidator.INSTANCE,
+				QVTBaseMessages._UI_Rule_DomainNameIsNotUnique,
+				"rdbms", "badmaps.eqvtcore::umlRdbms::Map0b::rdbms", "badmaps.eqvtcore::umlRdbms::Map0b::rdbms");
+		expectedProblems.expectValidatorError(QVTBaseValidator.INSTANCE,
+				QVTBaseMessages._UI_Rule_TypedModelIsNotUnique,
+				"badmaps.eqvtcore::umlRdbms::rdbms", "badmaps.eqvtcore::umlRdbms::Map0b::rdbms", "badmaps.eqvtcore::umlRdbms::Map0b::rdbms");
 		expectedProblems.handleProblem(ProblemHandler.Severity.WARNING, ProblemHandler.Phase.ANALYZER,
 				"Domain name 'middle' should be distinct from middle domain name 'middle'", "DomainCS", -1, -1);
 		expectedProblems.handleProblem(ProblemHandler.Severity.WARNING, ProblemHandler.Phase.ANALYZER,
 				"Inappropriate 'in' ignored", "InCS", -1, -1);
 		parserTest("badmaps", expectedProblems);
 	}
-	
+		
 	public void testParseEqvtcore_dependencies() throws IOException, CoreException, MappingConfigurationException {
 		ProblemLog expectedProblems = new ProblemLog();
 		expectUnrecognizedVariable(expectedProblems, "nM2mg2Mb"); 
@@ -187,16 +201,21 @@ public class QVTcParseTests extends AbstractQVTcTestCase
 	
 	public void testParseQVTCore_redefinition() throws IOException, CoreException, MappingConfigurationException {
 		ProblemLog expectedProblems = new ProblemLog();
-		expectedProblems.handleProblem(ProblemHandler.Severity.WARNING, ProblemHandler.Phase.VALIDATOR,
-				"Redefinition of 'redefinition.eqvtcore::umlRdbms::Map1::uml$guard::p1'", QVTCoreValidator.DIAGNOSTIC_SOURCE, -1, -1);
-		expectedProblems.handleProblem(ProblemHandler.Severity.WARNING, ProblemHandler.Phase.VALIDATOR,
-				"Redefinition of 'redefinition.eqvtcore::umlRdbms::Map1::<null>::uml$guard::p2'", QVTCoreValidator.DIAGNOSTIC_SOURCE, -1, -1);
-		expectedProblems.handleProblem(ProblemHandler.Severity.WARNING, ProblemHandler.Phase.VALIDATOR,
-				"Redefinition of 'redefinition.eqvtcore::umlRdbms::Map1::<null>::uml$bottom::p3'", QVTCoreValidator.DIAGNOSTIC_SOURCE, -1, -1);
-		expectedProblems.handleProblem(ProblemHandler.Severity.WARNING, ProblemHandler.Phase.VALIDATOR,
-				"Redefinition of 'redefinition.eqvtcore::umlRdbms::Map1::<null>::uml$bottom::p4'", QVTCoreValidator.DIAGNOSTIC_SOURCE, -1, -1);
-		expectedProblems.handleProblem(ProblemHandler.Severity.WARNING, ProblemHandler.Phase.VALIDATOR,
-				"Redefinition of 'redefinition.eqvtcore::umlRdbms::Map1::uml$guard::p5'", QVTCoreValidator.DIAGNOSTIC_SOURCE, -1, -1);
+		expectedProblems.expectValidatorWarning(QVTCoreValidator.INSTANCE,
+				QVTCoreMessages._UI_BottomPattern_RealizedVariableNameIsNotUnique,
+				"redefinition.eqvtcore::umlRdbms::Map1::uml$guard::p1");
+		expectedProblems.expectValidatorWarning(QVTCoreValidator.INSTANCE,
+				QVTCoreMessages._UI_CorePattern_VariableNameIsNotUnique,
+				"redefinition.eqvtcore::umlRdbms::Map1::<null>::uml$guard::p2");
+		expectedProblems.expectValidatorWarning(QVTCoreValidator.INSTANCE,
+				QVTCoreMessages._UI_BottomPattern_RealizedVariableNameIsNotUnique,
+				"redefinition.eqvtcore::umlRdbms::Map1::<null>::uml$bottom::p3");
+		expectedProblems.expectValidatorWarning(QVTCoreValidator.INSTANCE,
+				QVTCoreMessages._UI_BottomPattern_RealizedVariableNameIsNotUnique,
+				"redefinition.eqvtcore::umlRdbms::Map1::<null>::uml$bottom::p4");
+		expectedProblems.expectValidatorWarning(QVTCoreValidator.INSTANCE,
+				QVTCoreMessages._UI_CorePattern_VariableNameIsNotUnique,
+				"redefinition.eqvtcore::umlRdbms::Map1::uml$guard::p5");
 		parserTest("redefinition", expectedProblems);
 	}
 	
