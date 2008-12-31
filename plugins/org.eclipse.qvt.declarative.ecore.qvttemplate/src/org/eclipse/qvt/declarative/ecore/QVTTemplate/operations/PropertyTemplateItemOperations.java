@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: PropertyTemplateItemOperations.java,v 1.1 2008/12/31 17:43:44 ewillink Exp $
+ * $Id: PropertyTemplateItemOperations.java,v 1.2 2008/12/31 19:16:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.operations;
 
@@ -28,9 +28,6 @@ import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.OrderedSetType;
 import org.eclipse.ocl.ecore.SequenceType;
 import org.eclipse.ocl.ecore.SetType;
-import org.eclipse.ocl.ecore.Variable;
-import org.eclipse.ocl.ecore.VariableExp;
-import org.eclipse.qvt.declarative.ecore.QVTBase.Pattern;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.CollectionTemplateExp;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.ObjectTemplateExp;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem;
@@ -128,7 +125,7 @@ public class PropertyTemplateItemOperations extends AbstractQVTTemplateOperation
 
 	/**
 	 * Validates the SimpleVariableIsBoundByPattern constraint of '<em>Property Template Item</em>'.
-	 */
+	 *
 	public boolean checkSimpleVariableIsBoundByPattern(PropertyTemplateItem propertyTemplateItem, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		OCLExpression value = propertyTemplateItem.getValue();
 		if (!(value instanceof VariableExp))
@@ -144,7 +141,7 @@ public class PropertyTemplateItemOperations extends AbstractQVTTemplateOperation
 		Object[] messageSubstitutions = new Object[] { getObjectLabel(variable, context), getObjectLabel(pattern, context) };
 		appendError(diagnostics, propertyTemplateItem, QVTTemplateMessages._UI_PropertyTemplateItem_SimpleVariableIsNotBoundByPattern, messageSubstitutions);
 		return false;
-	}
+	} */
 
 	protected boolean getReferredPropertyIsOrdered(PropertyTemplateItem propertyTemplateItem) {
 		EStructuralFeature referredProperty = propertyTemplateItem.getReferredProperty();

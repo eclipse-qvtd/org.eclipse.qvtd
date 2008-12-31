@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CollectionTemplateExpOperations.java,v 1.1 2008/12/31 17:43:44 ewillink Exp $
+ * $Id: CollectionTemplateExpOperations.java,v 1.2 2008/12/31 19:16:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.operations;
 
@@ -25,7 +25,6 @@ import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.ecore.VariableExp;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
-import org.eclipse.qvt.declarative.ecore.QVTBase.Pattern;
 import org.eclipse.qvt.declarative.ecore.QVTBase.operations.DomainOperations;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.CollectionTemplateExp;
 
@@ -128,7 +127,7 @@ public class CollectionTemplateExpOperations extends TemplateExpOperations
 
 	/**
 	 * Validates the RestVariableIsBoundByPattern constraint of '<em>Collection Template Exp</em>'.
-	 */
+	 *
 	public boolean checkRestVariableIsBoundByPattern(CollectionTemplateExp collectionTemplateExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		Variable rest = collectionTemplateExp.getRest();
 		if (rest == null)
@@ -143,5 +142,5 @@ public class CollectionTemplateExpOperations extends TemplateExpOperations
 		Object[] messageSubstitutions = new Object[] { getObjectLabel(rest, context), getObjectLabel(pattern, context) };
 		appendError(diagnostics, rest, QVTTemplateMessages._UI_CollectionTemplateExp_RestVariableIsNotBoundByPattern, messageSubstitutions);
 		return false;
-	}
+	} */
 }

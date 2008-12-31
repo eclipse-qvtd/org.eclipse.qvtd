@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplateValidator.java,v 1.3 2008/12/31 17:43:44 ewillink Exp $
+ * $Id: QVTTemplateValidator.java,v 1.4 2008/12/31 19:16:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.util;
 
@@ -321,7 +321,7 @@ public class QVTTemplateValidator extends EObjectValidator implements EValidator
 	 * @generated NOT
 	 */
 	public boolean validateCollectionTemplateExp_RestVariableIsBoundByPattern(CollectionTemplateExp collectionTemplateExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return CollectionTemplateExpOperations.INSTANCE.checkRestVariableIsBoundByPattern(collectionTemplateExp, diagnostics, context);
+		return true; // TODO probably redundant CollectionTemplateExpOperations.INSTANCE.checkRestVariableIsBoundByPattern(collectionTemplateExp, diagnostics, context);
 	}
 
 	/**
@@ -390,7 +390,7 @@ public class QVTTemplateValidator extends EObjectValidator implements EValidator
 	 * @generated NOT
 	 */
 	public boolean validatePropertyTemplateItem_SimpleVariableIsBoundByPattern(PropertyTemplateItem propertyTemplateItem, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return PropertyTemplateItemOperations.INSTANCE.checkSimpleVariableIsBoundByPattern(propertyTemplateItem, diagnostics, context);
+		return true; // TODO probably redundant PropertyTemplateItemOperations.INSTANCE.checkSimpleVariableIsBoundByPattern(propertyTemplateItem, diagnostics, context);
 	}
 
 	/**
