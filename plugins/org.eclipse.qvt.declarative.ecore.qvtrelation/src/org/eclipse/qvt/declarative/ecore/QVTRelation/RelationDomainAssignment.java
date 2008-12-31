@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationDomainAssignment.java,v 1.1 2008/07/23 09:46:09 qglineur Exp $
+ * $Id: RelationDomainAssignment.java,v 1.2 2008/12/31 17:43:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation;
 
@@ -35,7 +35,7 @@ import org.eclipse.ocl.ecore.Variable;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage#getRelationDomainAssignment()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='VariableDefinedByRelation\r\nVariableTypeMatchesValueType\r\n'"
  * @generated
  */
 public interface RelationDomainAssignment extends EModelElement {

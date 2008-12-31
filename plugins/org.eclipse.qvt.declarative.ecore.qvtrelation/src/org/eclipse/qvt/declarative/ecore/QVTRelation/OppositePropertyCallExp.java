@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OppositePropertyCallExp.java,v 1.1 2008/09/09 21:00:53 ewillink Exp $
+ * $Id: OppositePropertyCallExp.java,v 1.2 2008/12/31 17:43:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation;
 
@@ -25,7 +25,7 @@ import org.eclipse.ocl.ecore.PropertyCallExp;
  *
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage#getOppositePropertyCallExp()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='PropertyIsReference\r\nPropertyIsUnidirectional'"
  * @generated
  */
 public interface OppositePropertyCallExp extends PropertyCallExp {

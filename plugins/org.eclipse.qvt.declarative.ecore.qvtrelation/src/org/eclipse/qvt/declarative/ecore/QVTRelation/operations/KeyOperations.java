@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: KeyOperations.java,v 1.2 2008/12/12 15:32:44 ewillink Exp $
+ * $Id: KeyOperations.java,v 1.3 2008/12/31 17:43:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.operations;
 
@@ -22,6 +22,8 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
+import org.eclipse.qvt.declarative.ecore.QVTBase.operations.TransformationOperations;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Key;
 
 public class KeyOperations extends AbstractQVTRelationOperations
@@ -35,41 +37,59 @@ public class KeyOperations extends AbstractQVTRelationOperations
 		int partCount = key.getPart().size() + key.getOppositePart().size();
 		if (partCount <= 0) {
 			Object[] messageSubstitutions = new Object[] { getObjectLabel(key, context) };
-			appendError(diagnostics, key, "_UI_KeyMustHaveAtLeastOnePart_diagnostic", messageSubstitutions);
+			appendError(diagnostics, key, QVTRelationMessages._UI_Key_NoParts, messageSubstitutions);
 			return false;
 		}
 		return true;
 	}
 
 	/**
-	 * Validates the PartSourceIsIdentifiedClass constraint of '<em>Key</em>'.
+	 * Validates the IdentifiesTypeIsDeclaredByTransformation constraint of '<em>Key</em>'.
 	 */
-	public boolean checkPartSourceIsIdentifiedClass(Key key, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean checkIdentifiesTypeIsDeclaredByTransformation(Key key, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		Transformation transformation = key.getTransformation();
+		EClass identifiedClass = key.getIdentifies();
+		if (identifiedClass == null)
+			return true;		// Error from multiplicity	
+		if (!TransformationOperations.INSTANCE.declaresType(transformation, identifiedClass)) {
+			Object[] messageSubstitutions = new Object[] { getObjectLabel(identifiedClass, context), getObjectLabel(transformation, context) };
+			appendError(diagnostics, key, QVTRelationMessages._UI_Key_IdentifiesTypeIsNotDeclaredByTransformation, messageSubstitutions);
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the EveryPartIsDeclaredByIdentifies constraint of '<em>Key</em>'.
+	 */
+	public boolean checkEveryPartIsDeclaredByIdentifies(Key key, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean allOk = true;
 		EClass identifiedClass = key.getIdentifies();
+		if (identifiedClass == null)
+			return true;		// Error from multiplicity	
 		for (EStructuralFeature part : key.getPart()) {
-			EClass partSource = part.getEContainingClass();
-			if (!partSource.isSuperTypeOf(identifiedClass)) {
+			if (!definesProperty(identifiedClass, part)) {
 				allOk = false;
 				Object[] messageSubstitutions = new Object[] { getObjectLabel(part, context), getObjectLabel(key, context), getObjectLabel(identifiedClass, context) };
-				appendError(diagnostics, part, "_UI_KeyPartSourceMustBeKeyIdentifies_diagnostic", messageSubstitutions);
+				appendError(diagnostics, key, QVTRelationMessages._UI_Key_PartIsNotDeclaredByIdentifies, messageSubstitutions);
 			}				
 		}
 		return allOk;
 	}
 
 	/**
-	 * Validates the OppositePartTargetIsIdentifiedClass constraint of '<em>Key</em>'.
+	 * Validates the EveryOppositePartReferencesIdentifies constraint of '<em>Key</em>'.
 	 */
-	public boolean checkOppositePartTargetIsIdentifiedClass(Key key, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean checkEveryOppositePartReferencesIdentifies(Key key, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean allOk = true;
 		EClass identifiedClass = key.getIdentifies();
+		if (identifiedClass == null)
+			return true;		// Error from multiplicity	
 		for (EReference oppositePart : key.getOppositePart()) {
-			EClass partTarget = oppositePart.getEReferenceType();
-			if (!partTarget.isSuperTypeOf(identifiedClass)) {
+			if (!definesOppositeProperty(identifiedClass, oppositePart)) {
 				allOk = false;
 				Object[] messageSubstitutions = new Object[] { getObjectLabel(oppositePart, context), getObjectLabel(key, context), getObjectLabel(identifiedClass, context) };
-				appendError(diagnostics, oppositePart, "_UI_KeyOppositePartTargetMustBeKeyIdentifies_diagnostic", messageSubstitutions);
+				appendError(diagnostics, key, QVTRelationMessages._UI_Key_OppositePartDoesNotReferenceIdentifies, messageSubstitutions);
 			}				
 		}
 		return allOk;

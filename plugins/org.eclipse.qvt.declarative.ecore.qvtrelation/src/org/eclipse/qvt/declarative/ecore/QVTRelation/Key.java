@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Key.java,v 1.2 2008/09/09 21:00:53 ewillink Exp $
+ * $Id: Key.java,v 1.3 2008/12/31 17:43:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation;
 
@@ -39,7 +39,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage#getKey()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='AtLeastOnePart\r\nPartSourceIsIdentifiedClass\r\nOppositePartTargetIsIdentifiedClass'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='AtLeastOnePart\r\nIdentifiesTypeIsDeclaredByTransformation\r\nEveryPartIsDeclaredByIdentifies\r\nEveryOppositePartReferencesIdentifies\r\n'"
  * @generated
  */
 public interface Key extends EModelElement {

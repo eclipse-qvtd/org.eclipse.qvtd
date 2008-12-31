@@ -12,17 +12,15 @@
  * 
  * </copyright>
  *
- * $Id: AbstractQVTRelationOperations.java,v 1.1 2008/09/09 20:59:19 ewillink Exp $
+ * $Id: AbstractQVTRelationOperations.java,v 1.2 2008/12/31 17:43:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.operations;
 
 import org.eclipse.qvt.declarative.ecore.QVTRelation.util.QVTRelationValidator;
-import org.eclipse.qvt.declarative.ecore.operations.AbstractOperations;
+import org.eclipse.qvt.declarative.ecore.QVTTemplate.operations.AbstractQVTTemplateOperations;
 
-public class AbstractQVTRelationOperations extends AbstractOperations
+public class AbstractQVTRelationOperations extends AbstractQVTTemplateOperations
 {
-	public static final String DIAGNOSTIC_SOURCE = QVTRelationValidator.INSTANCE.getDiagnosticSource();
-
 	protected AbstractQVTRelationOperations() {
 		super(QVTRelationValidator.INSTANCE);
 	}

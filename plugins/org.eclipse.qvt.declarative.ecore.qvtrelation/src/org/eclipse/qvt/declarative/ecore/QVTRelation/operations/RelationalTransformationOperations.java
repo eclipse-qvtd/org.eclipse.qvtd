@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationalTransformationOperations.java,v 1.3 2008/12/12 15:32:44 ewillink Exp $
+ * $Id: RelationalTransformationOperations.java,v 1.4 2008/12/31 17:43:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.operations;
 
@@ -20,14 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.util.EcoreValidator;
 import org.eclipse.ocl.types.CollectionType;
+import org.eclipse.qvt.declarative.ecore.QVTBase.Rule;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Key;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 
@@ -36,9 +36,24 @@ public class RelationalTransformationOperations extends AbstractQVTRelationOpera
 	public static RelationalTransformationOperations INSTANCE = new RelationalTransformationOperations();
 
 	/**
-	 * Validates the KeyClassesAreDistinct constraint of '<em>Relational Transformation</em>'.
+	 * Validates the EveryRuleIsARelation constraint of '<em>Relational Transformation</em>'.
 	 */
-	public boolean checkKeyClassesAreDistinct(RelationalTransformation relationalTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean checkEveryRuleIsARelation(RelationalTransformation relationalTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean allOk = true;
+		for (Rule rule : relationalTransformation.getRule()) {
+			if (!(rule instanceof Relation)) {
+				Object[] messageSubstitutions = new Object[] { getObjectLabel(rule, context) };
+				appendError(diagnostics, rule, QVTRelationMessages._UI_RelationalTransformation_RuleIsNotARelation, messageSubstitutions);
+				allOk = false;
+			}
+		}
+		return allOk;
+	}
+
+	/**
+	 * Validates the KeysAreUnique constraint of '<em>Relational Transformation</em>'.
+	 */
+	public boolean checkKeysAreUnique(RelationalTransformation relationalTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean allOk = true;
 		for (Key key : relationalTransformation.getOwnedKey()) {
 			EClass identifies = key.getIdentifies();
@@ -46,7 +61,7 @@ public class RelationalTransformationOperations extends AbstractQVTRelationOpera
 				if ((key != anotherKey) && (identifies == anotherKey.getIdentifies())) {
 					allOk = false;
 					Object[] messageSubstitutions = new Object[] { getObjectLabel(identifies, context) };
-					appendWarning(diagnostics, key, "_UI_DuplicateKeyDefinition_diagnostic", messageSubstitutions);
+					appendWarning(diagnostics, key, QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique, messageSubstitutions);
 					break;	
 				}
 			}
@@ -86,8 +101,7 @@ public class RelationalTransformationOperations extends AbstractQVTRelationOpera
 						Object[] astNodes = new Object[] { eClassifier, otherEClassifier };
 						if (!name.equals(otherName)) {
 							Object[] messageSubstitutions = new Object[] { name, otherName };
-							appendDiagnostic(diagnostics, astNodes, DIAGNOSTIC_SOURCE,
-									Diagnostic.WARNING, "_UI_EPackageDissimilarClassifierNames_diagnostic", messageSubstitutions);
+							appendWarning(diagnostics, astNodes, QVTRelationMessages._UI_RelationalTransformation_ClassifierNameIsSimilar, messageSubstitutions);
 						}
 						else if ((eClassifier instanceof CollectionType)
 							 && (otherEClassifier instanceof CollectionType)
@@ -96,13 +110,11 @@ public class RelationalTransformationOperations extends AbstractQVTRelationOpera
 											   EcoreUtils.formatQualifiedName(((CollectionType<?,?>)eClassifier).getElementType()),
 											   ((CollectionType<?,?>)otherEClassifier).getKind(),
 											   EcoreUtils.formatQualifiedName(((CollectionType<?,?>)otherEClassifier).getElementType()) };
-							appendDiagnostic(diagnostics, astNodes, DIAGNOSTIC_SOURCE,
-									Diagnostic.WARNING, "_UI_CollectionNameCollision_diagnostic", messageSubstitutions);
+							appendWarning(diagnostics, astNodes, QVTRelationMessages._UI_RelationalTransformation_CollectionNameIsNotUnique, messageSubstitutions);
 						}
-						 else {
+						else {
 							Object[] messageSubstitutions = new Object[] { name };
-							appendDiagnostic(diagnostics, astNodes, EcoreValidator.DIAGNOSTIC_SOURCE,
-									Diagnostic.ERROR, "_UI_EPackageUniqueClassifierNames_diagnostic", messageSubstitutions);
+							appendError(diagnostics, astNodes, QVTRelationMessages._UI_RelationalTransformation_ClassifierNameIsNotUnique, messageSubstitutions);
 						}
 					}
 				}

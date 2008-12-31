@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationValidator.java,v 1.4 2008/10/30 06:32:29 ewillink Exp $
+ * $Id: QVTRelationValidator.java,v 1.5 2008/12/31 17:43:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.util;
 
@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreValidator;
 import org.eclipse.ocl.expressions.util.ExpressionsValidator;
+import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
 import org.eclipse.qvt.declarative.ecore.QVTBase.util.QVTBaseValidator;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.DomainPattern;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Key;
@@ -36,7 +37,15 @@ import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomain;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomainAssignment;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationImplementation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.operations.DomainPatternOperations;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.operations.KeyOperations;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.operations.OppositePropertyCallExpOperations;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.operations.QueryOperations;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.operations.RelationCallExpOperations;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.operations.RelationDomainAssignmentOperations;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.operations.RelationDomainOperations;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.operations.RelationImplementationOperations;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.operations.RelationOperations;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.operations.RelationalTransformationOperations;
 import org.eclipse.qvt.declarative.ecore.operations.EValidatorWithOperations;
 
@@ -119,14 +128,20 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 	 * Creates an instance of the switch.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public QVTRelationValidator() {
 		super();
+		qvtBaseValidator = new QVTBaseValidator()
+		{
+			@Override
+			public boolean validateFunction_IsSideEffectFree(Function function, DiagnosticChain diagnostics, Map<Object, Object> context) {
+				return QueryOperations.INSTANCE.checkIsSideEffectFree(function, diagnostics, context);
+			}			
+		};
 		ecoreValidator = EcoreValidator.INSTANCE;
 		ecore_1Validator = org.eclipse.ocl.ecore.util.EcoreValidator.INSTANCE;
 		expressionsValidator = ExpressionsValidator.INSTANCE;
-		qvtBaseValidator = QVTBaseValidator.INSTANCE;
 	}
 
 	public String getDiagnosticSource() {
@@ -182,7 +197,42 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 	 * @generated
 	 */
 	public boolean validateDomainPattern(DomainPattern domainPattern, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(domainPattern, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(domainPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(domainPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(domainPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(domainPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(domainPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(domainPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(domainPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validatePattern_NoVariableIsAFunctionParameter(domainPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validateDomainPattern_EveryVariableIsDefinedByRelation(domainPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validateDomainPattern_RootTemplateExpressionIsBoundToRootVariable(domainPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validateDomainPattern_RootTemplateExpressionTypeIsRootVariableType(domainPattern, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the EveryVariableIsDefinedByRelation constraint of '<em>Domain Pattern</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateDomainPattern_EveryVariableIsDefinedByRelation(DomainPattern domainPattern, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return DomainPatternOperations.INSTANCE.checkEveryVariableIsDefinedByRelation(domainPattern, diagnostics, context);
+	}
+
+	/**
+	 * Validates the RootTemplateExpressionIsBoundToRootVariable constraint of '<em>Domain Pattern</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateDomainPattern_RootTemplateExpressionIsBoundToRootVariable(DomainPattern domainPattern, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return DomainPatternOperations.INSTANCE.checkRootTemplateExpressionIsBoundToRootVariable(domainPattern, diagnostics, context);
+	}
+
+	/**
+	 * Validates the RootTemplateExpressionTypeIsRootVariableType constraint of '<em>Domain Pattern</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateDomainPattern_RootTemplateExpressionTypeIsRootVariableType(DomainPattern domainPattern, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return DomainPatternOperations.INSTANCE.checkRootTemplateExpressionTypeIsRootVariableType(domainPattern, diagnostics, context);
 	}
 
 	/**
@@ -199,8 +249,9 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(key, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(key, diagnostics, context);
 		if (result || diagnostics != null) result &= validateKey_AtLeastOnePart(key, diagnostics, context);
-		if (result || diagnostics != null) result &= validateKey_PartSourceIsIdentifiedClass(key, diagnostics, context);
-		if (result || diagnostics != null) result &= validateKey_OppositePartTargetIsIdentifiedClass(key, diagnostics, context);
+		if (result || diagnostics != null) result &= validateKey_IdentifiesTypeIsDeclaredByTransformation(key, diagnostics, context);
+		if (result || diagnostics != null) result &= validateKey_EveryPartIsDeclaredByIdentifies(key, diagnostics, context);
+		if (result || diagnostics != null) result &= validateKey_EveryOppositePartReferencesIdentifies(key, diagnostics, context);
 		return result;
 	}
 
@@ -213,19 +264,27 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 	}
 
 	/**
-	 * Validates the PartSourceIsIdentifiedClass constraint of '<em>Key</em>'.
+	 * Validates the IdentifiesTypeIsDeclaredByTransformation constraint of '<em>Key</em>'.
 	 * @generated NOT
 	 */
-	public boolean validateKey_PartSourceIsIdentifiedClass(Key key, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return KeyOperations.INSTANCE.checkPartSourceIsIdentifiedClass(key, diagnostics, context);
+	public boolean validateKey_IdentifiesTypeIsDeclaredByTransformation(Key key, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return KeyOperations.INSTANCE.checkIdentifiesTypeIsDeclaredByTransformation(key, diagnostics, context);
 	}
 
 	/**
-	 * Validates the OppositePartTargetIsIdentifiedClass constraint of '<em>Key</em>'.
+	 * Validates the EveryPartIsDeclaredByIdentifies constraint of '<em>Key</em>'.
 	 * @generated NOT
 	 */
-	public boolean validateKey_OppositePartTargetIsIdentifiedClass(Key key, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return KeyOperations.INSTANCE.checkOppositePartTargetIsIdentifiedClass(key, diagnostics, context);
+	public boolean validateKey_EveryPartIsDeclaredByIdentifies(Key key, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return KeyOperations.INSTANCE.checkEveryPartIsDeclaredByIdentifies(key, diagnostics, context);
+	}
+
+	/**
+	 * Validates the EveryOppositePartReferencesIdentifies constraint of '<em>Key</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateKey_EveryOppositePartReferencesIdentifies(Key key, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return KeyOperations.INSTANCE.checkEveryOppositePartReferencesIdentifies(key, diagnostics, context);
 	}
 
 	/**
@@ -247,7 +306,25 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 		if (result || diagnostics != null) result &= ecoreValidator.validateETypedElement_ConsistentBounds(oppositePropertyCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateETypedElement_ValidType(oppositePropertyCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= expressionsValidator.validatePropertyCallExp_checkPropertyType(oppositePropertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOppositePropertyCallExp_PropertyIsReference(oppositePropertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOppositePropertyCallExp_PropertyIsUnidirectional(oppositePropertyCallExp, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the PropertyIsReference constraint of '<em>Opposite Property Call Exp</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateOppositePropertyCallExp_PropertyIsReference(OppositePropertyCallExp oppositePropertyCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return OppositePropertyCallExpOperations.INSTANCE.checkPropertyIsReference(oppositePropertyCallExp, diagnostics, context);
+	}
+
+	/**
+	 * Validates the PropertyIsUnidirectional constraint of '<em>Opposite Property Call Exp</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateOppositePropertyCallExp_PropertyIsUnidirectional(OppositePropertyCallExp oppositePropertyCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return OppositePropertyCallExpOperations.INSTANCE.checkPropertyIsUnidirectional(oppositePropertyCallExp, diagnostics, context);
 	}
 
 	/**
@@ -264,7 +341,101 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateENamedElement_WellFormedName(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_OverridesIsCompatible(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_OverridesDefinedByTransformation(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_DomainNamesAreUnique(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_TypedModelsAreUnique(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelation_AtLeastTwoDomains(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelation_DomainNumberMatches(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelation_EveryDomainIsARelationDomain(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelation_NonTopLevelIsNotInvokedWarning(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelation_RelationImplsAreUniqueWarning(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelation_VariablesAreUnique(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelation_WhenTypesAreDeclaredByRelation(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelation_WhenVariablesAreDefinedByRelation(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelation_WhereTypesAreDeclaredByRelation(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelation_WhereVariablesAreDefinedByRelation(relation, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the EveryDomainIsARelationDomain constraint of '<em>Relation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelation_EveryDomainIsARelationDomain(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationOperations.INSTANCE.checkEveryDomainIsARelationDomain(relation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the AtLeastTwoDomains constraint of '<em>Relation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelation_AtLeastTwoDomains(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationOperations.INSTANCE.checkAtLeastTwoDomains(relation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the DomainNumberMatches constraint of '<em>Relation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelation_DomainNumberMatches(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationOperations.INSTANCE.checkDomainNumberMatches(relation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the NonTopLevelIsNotInvokedWarning constraint of '<em>Relation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelation_NonTopLevelIsNotInvokedWarning(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationOperations.INSTANCE.checkNonTopLevelIsNotInvokedWarning(relation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the RelationImplsAreUniqueWarning constraint of '<em>Relation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelation_RelationImplsAreUniqueWarning(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationOperations.INSTANCE.checkRelationImplsAreUniqueWarning(relation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the VariablesAreUnique constraint of '<em>Relation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelation_VariablesAreUnique(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationOperations.INSTANCE.checkVariablesAreUnique(relation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the WhenTypesAreDeclaredByRelation constraint of '<em>Relation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelation_WhenTypesAreDeclaredByRelation(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationOperations.INSTANCE.checkWhenTypesAreDeclaredByRelation(relation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the WhenVariablesAreDefinedByRelation constraint of '<em>Relation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelation_WhenVariablesAreDefinedByRelation(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationOperations.INSTANCE.checkWhenVariablesAreDefinedByRelation(relation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the WhereTypesAreDeclaredByRelation constraint of '<em>Relation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelation_WhereTypesAreDeclaredByRelation(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationOperations.INSTANCE.checkWhereTypesAreDeclaredByRelation(relation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the WhereVariablesAreDefinedByRelation constraint of '<em>Relation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelation_WhereVariablesAreDefinedByRelation(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationOperations.INSTANCE.checkWhereVariablesAreDefinedByRelation(relation, diagnostics, context);
 	}
 
 	/**
@@ -281,6 +452,12 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationDomain_WellFormedName(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateDomain_TypedModelExistsWarning(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateDomain_TypedModelDefinedByTransformation(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateDomain_CheckableOrEnforceable(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationDomain_RootVariableIsDefinedByRelation(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationDomain_RootVariableTypeIsDeclaredByDomainTypedModel(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationDomain_EveryEnforceableVariableIsMatchedOrAssigned(relationDomain, diagnostics, context);
 		return result;
 	}
 
@@ -313,12 +490,61 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 	}
 
 	/**
+	 * Validates the RootVariableIsDefinedByRelation constraint of '<em>Relation Domain</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationDomain_RootVariableIsDefinedByRelation(RelationDomain relationDomain, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationDomainOperations.INSTANCE.checkRootVariableIsDefinedByRelation(relationDomain, diagnostics, context);
+	}
+	
+	/**
+	 * Validates the RootVariableTypeIsDeclaredByDomainTypedModel constraint of '<em>Relation Domain</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationDomain_RootVariableTypeIsDeclaredByDomainTypedModel(RelationDomain relationDomain, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationDomainOperations.INSTANCE.checkRootVariableTypeIsDeclaredByDomainTypedModel(relationDomain, diagnostics, context);
+	}
+
+	/**
+	 * Validates the EveryEnforceableVariableIsMatchedOrAssigned constraint of '<em>Relation Domain</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationDomain_EveryEnforceableVariableIsMatchedOrAssigned(RelationDomain relationDomain, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationDomainOperations.INSTANCE.checkEveryEnforceableVariableIsMatchedOrAssigned(relationDomain, diagnostics, context);
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean validateRelationDomainAssignment(RelationDomainAssignment relationDomainAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(relationDomainAssignment, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(relationDomainAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(relationDomainAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(relationDomainAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(relationDomainAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(relationDomainAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationDomainAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationDomainAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationDomainAssignment_VariableDefinedByRelation(relationDomainAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationDomainAssignment_VariableTypeMatchesValueType(relationDomainAssignment, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the VariableDefinedByRelation constraint of '<em>Relation Domain Assignment</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationDomainAssignment_VariableDefinedByRelation(RelationDomainAssignment relationDomainAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationDomainAssignmentOperations.INSTANCE.checkVariableDefinedByRelation(relationDomainAssignment, diagnostics, context);
+	}
+
+	/**
+	 * Validates the VariableTypeMatchesValueType constraint of '<em>Relation Domain Assignment</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationDomainAssignment_VariableTypeMatchesValueType(RelationDomainAssignment relationDomainAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationDomainAssignmentOperations.INSTANCE.checkVariableTypeMatchesValueType(relationDomainAssignment, diagnostics, context);
 	}
 
 	/**
@@ -327,7 +553,41 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 	 * @generated
 	 */
 	public boolean validateRelationImplementation(RelationImplementation relationImplementation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(relationImplementation, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(relationImplementation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(relationImplementation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(relationImplementation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(relationImplementation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(relationImplementation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationImplementation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationImplementation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationImplementation_RootNodeIsBoundToRootVariable(relationImplementation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationImplementation_InDirectionOfIsDefinedByTransformation(relationImplementation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationImplementation_EveryArgumentTypeMatchesDomainRootVariableType(relationImplementation, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the RootNodeIsBoundToRootVariable constraint of '<em>Relation Implementation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationImplementation_RootNodeIsBoundToRootVariable(RelationImplementation relationImplementation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationImplementationOperations.INSTANCE.checkRootNodeIsBoundToRootVariable(relationImplementation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the InDirectionOfIsDefinedByTransformation constraint of '<em>Relation Implementation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationImplementation_InDirectionOfIsDefinedByTransformation(RelationImplementation relationImplementation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationImplementationOperations.INSTANCE.checkInDirectionOfIsDefinedByTransformation(relationImplementation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the EveryArgumentTypeMatchesDomainRootVariableType constraint of '<em>Relation Implementation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationImplementation_EveryArgumentTypeMatchesDomainRootVariableType(RelationImplementation relationImplementation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationImplementationOperations.INSTANCE.checkEveryArgumentTypeMatchesDomainRootVariableType(relationImplementation, diagnostics, context);
 	}
 
 	/**
@@ -348,7 +608,70 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 		if (result || diagnostics != null) result &= ecoreValidator.validateETypedElement_ValidUpperBound(relationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateETypedElement_ConsistentBounds(relationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateETypedElement_ValidType(relationCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationCallExp_PatternExists(relationCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationCallExp_RelationExists(relationCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationCallExp_InvokedFromWhenOrWhereClause(relationCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationCallExp_ReferredRelationDeclaredByTransformation(relationCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationCallExp_ReferredRelationArgumentNumberMatches(relationCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationCallExp_EveryWhenReferredRelationArgumentTypeMatches(relationCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationCallExp_EveryWhereReferredRelationArgumentTypeIsMatchableWarning(relationCallExp, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the PatternExists constraint of '<em>Relation Call Exp</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationCallExp_PatternExists(RelationCallExp relationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationCallExpOperations.INSTANCE.checkPatternExists(relationCallExp, diagnostics, context);
+	}
+
+	/**
+	 * Validates the RelationExists constraint of '<em>Relation Call Exp</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationCallExp_RelationExists(RelationCallExp relationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationCallExpOperations.INSTANCE.checkRelationExists(relationCallExp, diagnostics, context);
+	}
+
+	/**
+	 * Validates the InvokedFromWhenOrWhereClause constraint of '<em>Relation Call Exp</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationCallExp_InvokedFromWhenOrWhereClause(RelationCallExp relationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationCallExpOperations.INSTANCE.checkInvokedFromWhenOrWhereClause(relationCallExp, diagnostics, context);
+	}
+
+	/**
+	 * Validates the ReferredRelationDeclaredByTransformation constraint of '<em>Relation Call Exp</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationCallExp_ReferredRelationDeclaredByTransformation(RelationCallExp relationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationCallExpOperations.INSTANCE.checkReferredRelationDeclaredByTransformation(relationCallExp, diagnostics, context);
+	}
+
+	/**
+	 * Validates the ReferredRelationArgumentNumberMatches constraint of '<em>Relation Call Exp</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationCallExp_ReferredRelationArgumentNumberMatches(RelationCallExp relationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationCallExpOperations.INSTANCE.checkReferredRelationArgumentNumberMatches(relationCallExp, diagnostics, context);
+	}
+
+	/**
+	 * Validates the EveryWhenReferredRelationArgumentTypeMatches constraint of '<em>Relation Call Exp</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationCallExp_EveryWhenReferredRelationArgumentTypeMatches(RelationCallExp relationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationCallExpOperations.INSTANCE.checkEveryWhenReferredRelationArgumentTypeMatches(relationCallExp, diagnostics, context);
+	}
+
+	/**
+	 * Validates the EveryWhereReferredRelationArgumentTypeIsMatchableWarning constraint of '<em>Relation Call Exp</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationCallExp_EveryWhereReferredRelationArgumentTypeIsMatchableWarning(RelationCallExp relationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationCallExpOperations.INSTANCE.checkEveryWhereReferredRelationArgumentTypeIsMatchableWarning(relationCallExp, diagnostics, context);
 	}
 
 	/**
@@ -380,16 +703,23 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 		if (result || diagnostics != null) result &= ecoreValidator.validateEPackage_UniqueSubpackageNames(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationalTransformation_UniqueClassifierNames(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateTransformation_UniqueNsURIs(relationalTransformation, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelationalTransformation_KeyClassesAreDistinct(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateTransformation_ExtendsIsAcyclic(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateTransformation_ModelParameterNamesAreCompatibleWithExtension(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateTransformation_EveryModelParameterUsedPackagesIsCompatibleWithExtension(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateTransformation_ModelParameterNamesAreUnique(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateTransformation_RuleNamesAreUnique(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateTransformation_SynthesizedTypesAreOwned(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationalTransformation_EveryRuleIsARelation(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationalTransformation_KeysAreUnique(relationalTransformation, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the KeyClassesAreDistinct constraint of '<em>Relational Transformation</em>'.
+	 * Validates the KeysAreUnique constraint of '<em>Relational Transformation</em>'.
 	 * @generated NOT
 	 */
-	public boolean validateRelationalTransformation_KeyClassesAreDistinct(RelationalTransformation relationalTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return RelationalTransformationOperations.INSTANCE.checkKeyClassesAreDistinct(relationalTransformation, diagnostics, context);
+	public boolean validateRelationalTransformation_KeysAreUnique(RelationalTransformation relationalTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationalTransformationOperations.INSTANCE.checkKeysAreUnique(relationalTransformation, diagnostics, context);
 	}
 
 	/**
@@ -398,6 +728,14 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 	 */
 	public boolean validateRelationalTransformation_UniqueClassifierNames(RelationalTransformation relationalTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return RelationalTransformationOperations.INSTANCE.checkUniqueClassifierNames(relationalTransformation, diagnostics, context);
+	}
+
+	/**
+	 * Validates the EveryRuleIsARelation constraint of '<em>Relational Transformation</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationalTransformation_EveryRuleIsARelation(RelationalTransformation relationalTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationalTransformationOperations.INSTANCE.checkEveryRuleIsARelation(relationalTransformation, diagnostics, context);
 	}
 
 	/**

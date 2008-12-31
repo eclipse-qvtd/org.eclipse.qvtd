@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationDomain.java,v 1.2 2008/08/07 05:03:27 ewillink Exp $
+ * $Id: RelationDomain.java,v 1.3 2008/12/31 17:43:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation;
 
@@ -37,7 +37,7 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage#getRelationDomain()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='WellFormedName'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='WellFormedName\r\nRootVariableIsDefinedByRelation\r\nRootVariableTypeIsDeclaredByDomainTypedModel\r\nEveryEnforceableVariableIsMatchedOrAssigned\r\n'"
  * @generated
  */
 public interface RelationDomain extends Domain {

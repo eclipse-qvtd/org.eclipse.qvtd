@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationPackageImpl.java,v 1.5 2008/10/30 06:32:03 ewillink Exp $
+ * $Id: QVTRelationPackageImpl.java,v 1.6 2008/12/31 17:43:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.impl;
 
@@ -639,13 +639,13 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";			
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";				
 		addAnnotation
 		  (getKey_OppositePart(), 
 		   source, 
 		   new String[] {
 			 "body", "oppositeKey"
-		   });		
+		   });				
 		addAnnotation
 		  (getRelation_When(), 
 		   source, 
@@ -663,7 +663,7 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 		   source, 
 		   new String[] {
 			 "body", "owner"
-		   });		
+		   });			
 		addAnnotation
 		  (getRelationDomainAssignment_Variable(), 
 		   source, 
@@ -675,7 +675,7 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 		   source, 
 		   new String[] {
 			 "body", "domainAssignment"
-		   });	
+		   });			
 	}
 
 	/**
@@ -687,22 +687,58 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";		
 		addAnnotation
+		  (domainPatternEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "EveryVariableIsDefinedByRelation\r\nRootTemplateExpressionIsBoundToRootVariable\r\nRootTemplateExpressionTypeIsRootVariableType\r\n"
+		   });		
+		addAnnotation
 		  (keyEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "AtLeastOnePart\r\nPartSourceIsIdentifiedClass\r\nOppositePartTargetIsIdentifiedClass"
-		   });					
+			 "constraints", "AtLeastOnePart\r\nIdentifiesTypeIsDeclaredByTransformation\r\nEveryPartIsDeclaredByIdentifies\r\nEveryOppositePartReferencesIdentifies\r\n"
+		   });			
+		addAnnotation
+		  (oppositePropertyCallExpEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "PropertyIsReference\r\nPropertyIsUnidirectional"
+		   });		
+		addAnnotation
+		  (relationEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "AtLeastTwoDomains\r\nDomainNumberMatches\r\nEveryDomainIsARelationDomain\r\nNonTopLevelIsNotInvokedWarning\r\nRelationImplsAreUniqueWarning\r\nVariablesAreUnique\r\nWhenTypesAreDeclaredByRelation\r\nWhenVariablesAreDefinedByRelation\r\nWhereTypesAreDeclaredByRelation\r\nWhereVariablesAreDefinedByRelation\r\n"
+		   });				
 		addAnnotation
 		  (relationDomainEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "WellFormedName"
-		   });					
+			 "constraints", "WellFormedName\r\nRootVariableIsDefinedByRelation\r\nRootVariableTypeIsDeclaredByDomainTypedModel\r\nEveryEnforceableVariableIsMatchedOrAssigned\r\n"
+		   });			
+		addAnnotation
+		  (relationDomainAssignmentEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "VariableDefinedByRelation\r\nVariableTypeMatchesValueType\r\n"
+		   });				
+		addAnnotation
+		  (relationImplementationEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "RootNodeIsBoundToRootVariable\r\nInDirectionOfIsDefinedByTransformation\r\nEveryArgumentTypeMatchesDomainRootVariableType\r\n"
+		   });		
+		addAnnotation
+		  (relationCallExpEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "PatternExists\r\nRelationExists\r\nInvokedFromWhenOrWhereClause\r\nReferredRelationDeclaredByTransformation\r\nReferredRelationArgumentNumberMatches\r\nEveryWhenReferredRelationArgumentTypeMatches\r\nEveryWhereReferredRelationArgumentTypeIsMatchableWarning\r\n"
+		   });		
 		addAnnotation
 		  (relationalTransformationEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "KeyClassesAreDistinct UniqueClassifierNames"
+			 "constraints", "UniqueClassifierNames\r\nEveryRuleIsARelation\r\nKeysAreUnique"
 		   });
 	}
 

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationImplementation.java,v 1.1 2008/07/23 09:46:09 qglineur Exp $
+ * $Id: RelationImplementation.java,v 1.2 2008/12/31 17:43:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation;
 
@@ -36,7 +36,7 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage#getRelationImplementation()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='RootNodeIsBoundToRootVariable\r\nInDirectionOfIsDefinedByTransformation\r\nEveryArgumentTypeMatchesDomainRootVariableType\r\n'"
  * @generated
  */
 public interface RelationImplementation extends EModelElement {
