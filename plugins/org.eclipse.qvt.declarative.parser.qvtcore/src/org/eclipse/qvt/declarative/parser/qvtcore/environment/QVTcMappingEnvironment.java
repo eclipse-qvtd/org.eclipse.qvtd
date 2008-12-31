@@ -61,9 +61,10 @@ public abstract class QVTcMappingEnvironment<P extends IQVTcNodeEnvironment> ext
 		IdentifierCS identifierCS = domainCS.getIdentifier();
 		if (identifierCS != null) {
 			String name = identifierCS.getValue();
+			@SuppressWarnings("unused")
 			QVTcDomainEnvironment oldEnvironment = domainEnvironments.put(name, environment);
-			if (oldEnvironment != null)
-				analyzerError("Duplicate domain name '" + name + "'", "DomainCS", identifierCS);
+//			if (oldEnvironment != null)
+//				analyzerError("Duplicate domain name '" + name + "'", "DomainCS", identifierCS); -- moved to validation
 			String middleModelName = middleEnvironment.getModelName();
 			if (name.equals(middleModelName))
 				analyzerWarning("Domain name '" + name + "' should be distinct from middle domain name '" + middleModelName + "'", "DomainCS", identifierCS);
