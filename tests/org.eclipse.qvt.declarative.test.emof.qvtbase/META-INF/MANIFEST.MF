@@ -7,9 +7,9 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.qvt.declarative.test.emof.essentialocl;visibility:=reexport,
- org.eclipse.qvt.declarative.ecore.qvtrelation;visibility:=reexport,
  org.eclipse.qvt.declarative.emof.qvtbase;visibility:=reexport,
  org.eclipse.qvt.declarative.parser;visibility:=reexport,
- org.eclipse.qvt.declarative.test.parser;visibility:=reexport
+ org.eclipse.qvt.declarative.test.parser;visibility:=reexport,
+ org.eclipse.qvt.declarative.test.testqvtbase;visibility:=reexport
 Eclipse-LazyStart: false
 Export-Package: org.eclipse.qvt.declarative.test.emof.qvtbase
