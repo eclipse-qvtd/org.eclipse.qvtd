@@ -1,13 +1,19 @@
-/*******************************************************************************
+/**
+ * <copyright>
+ * 
  * Copyright (c) 2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: QVTRelationConsistencyTest.java,v 1.5 2008/12/31 18:18:50 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.test.emof.qvtrelation;
 
 import java.io.IOException;
@@ -51,8 +57,14 @@ public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyT
 		missingOperation(differences, helper, getOperation(org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATIONAL_TRANSFORMATION, "getRelation"));
 		changeOfSize(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATIONAL_TRANSFORMATION, EcorePackage.Literals.ECLASS__EOPERATIONS);		
 		missingOperation(differences, helper, getOperation(org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATION, "getRelationalTransformation"));
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.DOMAIN_PATTERN);
 		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.KEY);
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.OPPOSITE_PROPERTY_CALL_EXP);
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATION);
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATION_CALL_EXP);
 		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATION_DOMAIN);
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT);
+		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATION_IMPLEMENTATION);
 		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATIONAL_TRANSFORMATION);
 	}
 
