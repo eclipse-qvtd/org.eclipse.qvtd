@@ -23,6 +23,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.ocl.ecore.CollectionType;
+import org.eclipse.ocl.ecore.PrimitiveType;
 import org.eclipse.ocl.lpg.AbstractFormattingHelper;
 
 public class CSTFormattingHelper extends AbstractFormattingHelper implements EValidator.SubstitutionLabelProvider
@@ -65,6 +67,10 @@ public class CSTFormattingHelper extends AbstractFormattingHelper implements EVa
 	}
 
 	@Override public String formatQualifiedName(Object object) {
+		if (object instanceof CollectionType)
+			return formatName(object);
+		if (object instanceof PrimitiveType)
+			return formatName(object);
 		if (object instanceof EObject) {
 			EObject eObject = (EObject)object;
 			EObject container = eObject.eContainer();
