@@ -1,19 +1,24 @@
-/*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2007,2008 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: AbstractParseTestCase.java,v 1.6 2008/12/31 18:20:23 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.test.parser;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,8 +43,8 @@ import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaDataRegistry;
 import org.eclipse.qvt.declarative.ecore.mappings.MappingConfigurationException;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.modelregistry.standalone.FileHandle;
-import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ProblemHandlerDiagnosticChain;
 import org.eclipse.qvt.declarative.parser.unparser.AbstractUnparser;
 import org.eclipse.qvt.declarative.parser.utils.ProblemLog;
@@ -49,7 +54,7 @@ import org.eclipse.qvt.declarative.test.emof.tools.EcoreEquivalenceHelper;
 import org.eclipse.qvt.declarative.test.emof.tools.EquivalenceHelper;
 
 public abstract class AbstractParseTestCase extends AbstractTestCase
-{
+{	
 	private final class TestProblemHandler extends StringProblemHandler
 	{
 		private TestProblemHandler() {
@@ -78,15 +83,6 @@ public abstract class AbstractParseTestCase extends AbstractTestCase
 		}
 	}
 
-	public static class ProblemComparator implements Comparator<Problem>
-	{
-		public static final Comparator<? super Problem> INSTANCE = new ProblemComparator();
-
-		public int compare(Problem o1, Problem o2) {
-			return o1.problemMessage.compareTo(o2.problemMessage);
-		}
-	}
-
 	/**
 	 * Asserts that two objects are equal. If they are not
 	 * an AssertionFailedError is thrown.
@@ -112,8 +108,8 @@ public abstract class AbstractParseTestCase extends AbstractTestCase
 				for (ProblemHandler.Severity severity : actualSeverities) {
 					List<Problem> actualProblems = actualPhaseProblems.get(severity);
 					List<Problem> expectedProblems = expectedPhaseProblems.get(severity);
-					Collections.sort(actualProblems, ProblemComparator.INSTANCE);
-					Collections.sort(expectedProblems, ProblemComparator.INSTANCE);
+					Collections.sort(actualProblems);
+					Collections.sort(expectedProblems);
 					int actualProblemCount = actualProblems.size();
 					int expectedProblemCount = expectedProblems.size();
 					assertEquals("Problem count", expectedProblemCount, actualProblemCount);
