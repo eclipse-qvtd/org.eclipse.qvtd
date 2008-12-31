@@ -7,9 +7,12 @@ import org.eclipse.qvt.declarative.test.editor.qvtrelation.QVTrEditorTests;
 import org.eclipse.qvt.declarative.test.editor.qvtrelation.QVTrMultiEditorTests;
 import org.eclipse.qvt.declarative.test.editor.qvtrelation.QVTrResourceTests;
 import org.eclipse.qvt.declarative.test.emof.qvtbase.QVTBaseConsistencyTest;
+import org.eclipse.qvt.declarative.test.emof.qvtbase.QVTBaseValidationTest;
 import org.eclipse.qvt.declarative.test.emof.qvtrelation.QVTRelationConsistencyTest;
 import org.eclipse.qvt.declarative.test.emof.qvtrelation.QVTRelationMapperTest;
+import org.eclipse.qvt.declarative.test.emof.qvtrelation.QVTRelationValidationTest;
 import org.eclipse.qvt.declarative.test.emof.qvttemplate.QVTTemplateConsistencyTest;
+import org.eclipse.qvt.declarative.test.emof.qvttemplate.QVTTemplateValidationTest;
 import org.eclipse.qvt.declarative.test.parser.qvtrelation.QVTrParseTests;
 import org.eclipse.qvt.declarative.test.parser.qvtrelation.QVTrUnparseTests;
 
@@ -23,8 +26,11 @@ public class AllQVTRelationTests
 
 	public static void buildSuite(TestSuite suite) {
 		suite.addTestSuite(QVTBaseConsistencyTest.class);
+		suite.addTestSuite(QVTBaseValidationTest.class);
 		suite.addTestSuite(QVTTemplateConsistencyTest.class);
+		suite.addTestSuite(QVTTemplateValidationTest.class);
 		suite.addTestSuite(QVTRelationConsistencyTest.class);
+		suite.addTestSuite(QVTRelationValidationTest.class);
 		suite.addTestSuite(QVTRelationMapperTest.class);
 		suite.addTestSuite(QVTrParseTests.class);
 		suite.addTestSuite(QVTrUnparseTests.class);
