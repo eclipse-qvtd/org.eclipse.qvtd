@@ -20,6 +20,7 @@ import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
+import org.eclipse.qvt.declarative.ecore.QVTTemplate.util.QVTTemplateConstants;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvt.environment.QVTEnvironment;
 
@@ -63,5 +64,9 @@ public abstract class QVTrEnvironment<P extends IQVTrNodeEnvironment, AST extend
 	
 	public RelationalTransformation getRelationalTransformation(List<String> pathName) {
 		return getParentEnvironment().getRelationalTransformation(pathName);
+	}
+
+	public boolean isSpecialVariable(Variable variable) {
+		return QVTTemplateConstants.WILDCARD_VARIABLE_NAME.equals(variable.getName());
 	}
 }
