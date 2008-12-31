@@ -12,20 +12,15 @@
  * 
  * </copyright>
  *
- * $Id: QVTCoreValidator.java,v 1.2 2008/10/30 06:10:45 ewillink Exp $
+ * $Id: QVTCoreValidator.java,v 1.3 2008/12/31 17:42:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTCore.util;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -43,13 +38,10 @@ import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.EcoreEnvironment;
-import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.SendSignalAction;
-import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.expressions.util.ExpressionsValidator;
-import org.eclipse.ocl.util.TypeUtil;
-import org.eclipse.ocl.utilities.UMLReflection;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
+import org.eclipse.qvt.declarative.ecore.QVTBase.util.QVTBaseValidator;
 import org.eclipse.qvt.declarative.ecore.QVTCore.Area;
 import org.eclipse.qvt.declarative.ecore.QVTCore.Assignment;
 import org.eclipse.qvt.declarative.ecore.QVTCore.BottomPattern;
@@ -63,6 +55,10 @@ import org.eclipse.qvt.declarative.ecore.QVTCore.PropertyAssignment;
 import org.eclipse.qvt.declarative.ecore.QVTCore.QVTCorePackage;
 import org.eclipse.qvt.declarative.ecore.QVTCore.RealizedVariable;
 import org.eclipse.qvt.declarative.ecore.QVTCore.VariableAssignment;
+import org.eclipse.qvt.declarative.ecore.QVTCore.operations.BottomPatternOperations;
+import org.eclipse.qvt.declarative.ecore.QVTCore.operations.CorePatternOperations;
+import org.eclipse.qvt.declarative.ecore.QVTCore.operations.PropertyAssignmentOperations;
+import org.eclipse.qvt.declarative.ecore.QVTCore.operations.VariableAssignmentOperations;
 import org.eclipse.qvt.declarative.ecore.operations.EValidatorWithOperations;
 
 /**
@@ -114,6 +110,14 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	protected QVTBaseValidator qvtBaseValidator;
+
+	/**
+	 * The cached base package validator.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	protected EcoreValidator ecoreValidator;
 
 	/**
@@ -147,6 +151,7 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 	 */
 	public QVTCoreValidator() {
 		super();
+		qvtBaseValidator = QVTBaseValidator.INSTANCE;
 		ecoreValidator = EcoreValidator.INSTANCE;
 		expressionsValidator = ExpressionsValidator.INSTANCE;
 		ecore_1Validator = org.eclipse.ocl.ecore.util.EcoreValidator.INSTANCE;
@@ -277,6 +282,7 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= validate_UniqueID(bottomPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(bottomPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(bottomPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validatePattern_NoVariableIsAFunctionParameter(bottomPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCorePattern_VariableNamesAreUnique(bottomPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validateBottomPattern_RealizedVariableNamesAreUnique(bottomPattern, diagnostics, context);
 		return result;
@@ -287,25 +293,7 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 	 * @generated NOT
 	 */
 	public boolean validateBottomPattern_RealizedVariableNamesAreUnique(BottomPattern bottomPattern, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		EList<RealizedVariable> myVariables = bottomPattern.getRealizedVariable();
-		List<List<Variable>> conflicts = findVariableNameConflicts(bottomPattern, myVariables);
-		if (conflicts.size() > 0) {
-			if (diagnostics != null) {
-				for (List<Variable> conflict : conflicts) {
-					diagnostics.add
-						(createDiagnostic
-							(Diagnostic.WARNING,
-							 DIAGNOSTIC_SOURCE,
-							 0,
-							 "_UI_Redefinition_diagnostic",
-							 new Object[] { getObjectLabel(conflict.get(1), context) },
-							 new Object[] { conflict.get(0) },
-							 context));
-				}
-			}
-			return false;
-		}
-		return true;
+		return BottomPatternOperations.INSTANCE.checkRealizedVariableNamesAreUnique(bottomPattern, diagnostics, context);
 	}
 
 	/**
@@ -322,6 +310,9 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(coreDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(coreDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateENamedElement_WellFormedName(coreDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateDomain_TypedModelExistsWarning(coreDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateDomain_TypedModelDefinedByTransformation(coreDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateDomain_CheckableOrEnforceable(coreDomain, diagnostics, context);
 		return result;
 	}
 
@@ -338,6 +329,7 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= validate_UniqueID(corePattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(corePattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(corePattern, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validatePattern_NoVariableIsAFunctionParameter(corePattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCorePattern_VariableNamesAreUnique(corePattern, diagnostics, context);
 		return result;
 	}
@@ -347,25 +339,7 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 	 * @generated NOT
 	 */
 	public boolean validateCorePattern_VariableNamesAreUnique(CorePattern corePattern, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		EList<Variable> myVariables = corePattern.getVariable();
-		List<List<Variable>> conflicts = findVariableNameConflicts(corePattern, myVariables);
-		if (conflicts.size() > 0) {
-			if (diagnostics != null) {
-				for (List<Variable> conflict : conflicts) {
-					diagnostics.add
-						(createDiagnostic
-							(Diagnostic.WARNING,
-							 DIAGNOSTIC_SOURCE,
-							 0,
-							 "_UI_Redefinition_diagnostic",
-							 new Object[] { getObjectLabel(conflict.get(1), context) },
-							 new Object[] { conflict.get(0) },
-							 context));
-				}
-			}
-			return false;
-		}
-		return true;
+		return CorePatternOperations.INSTANCE.checkVariableNamesAreUnique(corePattern, diagnostics, context);
 	}
 
 	/**
@@ -390,6 +364,7 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= validate_UniqueID(guardPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(guardPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(guardPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validatePattern_NoVariableIsAFunctionParameter(guardPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCorePattern_VariableNamesAreUnique(guardPattern, diagnostics, context);
 		return result;
 	}
@@ -408,6 +383,10 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validateMapping_WellFormedName(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_OverridesIsCompatible(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_OverridesDefinedByTransformation(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_DomainNamesAreUnique(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_TypedModelsAreUnique(mapping, diagnostics, context);
 		return result;
 	}
 
@@ -466,35 +445,11 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 	}
 
 	/**
+	 * Validates the TypeIsConsistent constraint of '<em>Property Assignment</em>'.
 	 * @generated NOT
 	 */
 	public boolean validatePropertyAssignment_TypeIsConsistent(PropertyAssignment propertyAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		OCLExpression value = propertyAssignment.getValue();
-		EStructuralFeature property = propertyAssignment.getTargetProperty();
-		if ((value != null) && (property != null)) {
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter,
-				EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env = getOclEnvironment(context);
-			UMLReflection<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint> umlReflection = env.getUMLReflection();
-			EClassifier propertyType = property.getEType();
-			EClassifier resolvedPropertyType = umlReflection.getOCLType(property);
-			EClassifier resolvedValueType = umlReflection.getOCLType(value);
-			if (!TypeUtil.compatibleTypeMatch(env, resolvedValueType, resolvedPropertyType)
-			 && !TypeUtil.compatibleTypeMatch(env, resolvedValueType, propertyType)) {
-				if (diagnostics != null) {
-					diagnostics.add
-						(createDiagnostic
-							(Diagnostic.ERROR,
-							 DIAGNOSTIC_SOURCE,
-							 0,
-							 "_UI_InconsistentPropertyType_diagnostic",
-							 new Object[] { getObjectLabel(resolvedValueType, context), getObjectLabel(resolvedPropertyType, context) },
-							 new Object[] { propertyAssignment },
-							 context));
-				}
-				return false;
-			}
-		}
-		return true;
+		return PropertyAssignmentOperations.INSTANCE.checkTypeIsConsistent(propertyAssignment, diagnostics, context);
 	}
 
 	/**
@@ -522,8 +477,6 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 
 	/**
 	 * Validates the MappingIsEnforceable constraint of '<em>Realized Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public boolean validateRealizedVariable_MappingIsEnforceable(RealizedVariable realizedVariable, DiagnosticChain diagnostics, Map<Object, Object> context)
@@ -575,35 +528,11 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 	}
 
 	/**
+	 * Validates the TypeIsConsistent constraint of '<em>Variable Assignment</em>'.
 	 * @generated NOT
 	 */
 	public boolean validateVariableAssignment_TypeIsConsistent(VariableAssignment variableAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		OCLExpression value = variableAssignment.getValue();
-		Variable variable = variableAssignment.getTargetVariable();
-		if ((value != null) && (variable != null)) {
-			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter,
-				EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env = getOclEnvironment(context);
-			UMLReflection<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint> umlReflection = env.getUMLReflection();
-			EClassifier variableType = variable.getEType();
-			EClassifier resolvedVariableType = umlReflection.getOCLType(variable);
-			EClassifier resolvedValueType = umlReflection.getOCLType(value);
-			if (!TypeUtil.compatibleTypeMatch(env, resolvedValueType, resolvedVariableType)
-			 && !TypeUtil.compatibleTypeMatch(env, resolvedValueType, variableType)) {
-				if (diagnostics != null) {
-					diagnostics.add
-						(createDiagnostic
-							(Diagnostic.ERROR,
-							 DIAGNOSTIC_SOURCE,
-							 0,
-							 "_UI_InconsistentVariableType_diagnostic",
-							 new Object[] { getObjectLabel(resolvedValueType, context), getObjectLabel(resolvedVariableType, context) },
-							 new Object[] { variableAssignment },
-							 context));
-				}
-				return false;
-			}
-		}
-		return true;
+		return VariableAssignmentOperations.INSTANCE.checkTypeIsConsistent(variableAssignment, diagnostics, context);
 	}
 
 	/**
@@ -622,50 +551,6 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 	@Override
 	public ResourceLocator getResourceLocator() {
 	    return QVTCorePlugin.INSTANCE;
-	}
-	
-	/**
-	 * @generated NOT
-	 */
-	protected List<List<Variable>> findVariableNameConflicts(CorePattern corePattern, EList<? extends Variable> myVariables) {
-		List<List<Variable>> conflicts = Collections.emptyList();
-		if (myVariables.size() > 0) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			EList<Variable> allVariables = corePattern.getAllVariables();
-			for (Variable variable : allVariables) {
-				String key = variable.getName();
-				Object entry = map.get(key);
-				if (entry == null)
-					map.put(key, variable);
-				else {
-					List<Variable> list = null;
-					if (entry instanceof Variable) {
-						list = new ArrayList<Variable>();
-						list.add((Variable) entry);
-						map.put(key, list);
-						if (myVariables.contains(entry)) {
-							if (conflicts.size() <= 0)
-								conflicts = new ArrayList<List<Variable>>();
-							conflicts.add(list);
-						}
-					}
-					else {
-						@SuppressWarnings("unchecked")
-						List<Variable> castList = (List<Variable>) entry;
-						list = castList;
-					}
-					if (myVariables.contains(variable)) {
-						if (conflicts.size() <= 0)
-							conflicts = new ArrayList<List<Variable>>();
-						conflicts.add(list);
-						list.add(0, variable);
-					}
-					else
-						list.add(variable);
-				}
-			}
-		}
-		return conflicts;
 	}
 
 	/**
