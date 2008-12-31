@@ -35,6 +35,22 @@
     <entry accessor="qvtrelation" kind="Model Name" uri="QVT.ecore#QVTRelation"/>
     <entry accessor="qvttemplate" kind="Model Name" uri="QVT.ecore#QVTTemplate"/>
   </resource>
+  <resource name="RelToCoreWithoutErrors.qvtr">
+    <entry accessor="emof" kind="Model Name" uri="QVT.ecore#EMOF"/>
+    <entry accessor="essentialocl" kind="Model Name" uri="QVT.ecore#EssentialOCL"/>
+    <entry accessor="qvtbase" kind="Model Name" uri="QVT.ecore#QVTBase"/>
+    <entry accessor="qvtcore" kind="Model Name" uri="QVT.ecore#QVTCore"/>
+    <entry accessor="qvtrelation" kind="Model Name" uri="QVT.ecore#QVTRelation"/>
+    <entry accessor="qvttemplate" kind="Model Name" uri="QVT.ecore#QVTTemplate"/>
+  </resource>
+  <resource name="RelToCoreWithoutErrors.unparsed.qvtr">
+    <entry accessor="EMOF" kind="Model Name" uri="QVT.ecore#EMOF"/>
+    <entry accessor="EssentialOCL" kind="Model Name" uri="QVT.ecore#EssentialOCL"/>
+    <entry accessor="QVTBase" kind="Model Name" uri="QVT.ecore#QVTBase"/>
+    <entry accessor="QVTCore" kind="Model Name" uri="QVT.ecore#QVTCore"/>
+    <entry accessor="QVTRelation" kind="Model Name" uri="QVT.ecore#QVTRelation"/>
+    <entry accessor="QVTTemplate" kind="Model Name" uri="QVT.ecore#QVTTemplate"/>
+  </resource>
   <resource name="TrimmedRelToCore.qvtr">
     <entry accessor="emof" kind="Model Name" uri="QVT.ecore#EMOF"/>
     <entry accessor="essentialocl" kind="Model Name" uri="QVT.ecore#EssentialOCL"/>
