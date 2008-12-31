@@ -51,7 +51,6 @@ import org.eclipse.ocl.expressions.CollectionKind;
 import org.eclipse.ocl.expressions.InvalidLiteralExp;
 import org.eclipse.ocl.expressions.IterateExp;
 import org.eclipse.ocl.expressions.IteratorExp;
-import org.eclipse.ocl.expressions.LetExp;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.expressions.OperationCallExp;
 import org.eclipse.ocl.parser.AbstractOCLAnalyzer;
@@ -202,7 +201,7 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 	 * Overridden to provided a nested scope for nested variables.
 	 */
 	@Override
-	protected LetExp<EClassifier, EParameter> letExpCS(LetExpCS letExpCS,
+	protected OCLExpression<EClassifier> letExpCS(LetExpCS letExpCS,
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
 		return super.letExpCS(letExpCS, createdNestedEnvironment(letExpCS, env));
 	}
