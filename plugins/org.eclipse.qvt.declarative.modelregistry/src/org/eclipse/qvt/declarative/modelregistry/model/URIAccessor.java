@@ -38,7 +38,8 @@ public class URIAccessor implements Accessor
 		this.uri = uri;
 	}
 
-	@Override public boolean equals(Object object) {
+	@Override
+	public boolean equals(Object object) {
 		if (!(object instanceof URIAccessor))
 			return false;
 		return uri.equals(((URIAccessor)object).getURI());
@@ -47,6 +48,11 @@ public class URIAccessor implements Accessor
 	public String getKind() { return KIND; }
 	public String getName() { return uri.toString(); }
 	public URI getURI() { return uri; }
+
+	@Override
+	public int hashCode() {
+		return uri.hashCode() + 99;
+	}
 
 	public URIAccessor newInstance(String name) throws URISyntaxException {
 		return new URIAccessor(new URI(name));

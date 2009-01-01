@@ -40,7 +40,8 @@ public class Registration<A extends Accessor> implements Comparable<Registration
 		return getAccessorName().compareTo(registration.getAccessorName());
 	}
 
-	@Override public boolean equals(Object obj) {
+	@Override
+	public boolean equals(Object obj) {
 		if (!(obj instanceof Registration))
 			return false;
 		if (!getAccessorName().equals(((Registration<?>)obj).getAccessorName()))
@@ -63,6 +64,11 @@ public class Registration<A extends Accessor> implements Comparable<Registration
 	public String getSerializationName() { return modelSerialization.getName(); }
 	public URI getURI() { return uri; }
 	public String getURIString() { return getURI().toString(); }
+
+	@Override
+	public int hashCode() {
+		return uri.hashCode() + 55;
+	}
 
 	@Override public String toString() {
 		return getAccessorName() + " -> " + getURIString();

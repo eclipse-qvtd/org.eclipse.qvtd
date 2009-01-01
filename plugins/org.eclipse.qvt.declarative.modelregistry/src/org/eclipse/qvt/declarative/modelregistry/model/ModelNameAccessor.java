@@ -28,7 +28,8 @@ public class ModelNameAccessor implements Accessor
 		this.name = name;
 	}
 
-	@Override public boolean equals(Object object) {
+	@Override
+	public boolean equals(Object object) {
 		if (!(object instanceof ModelNameAccessor))
 			return false;
 		return name.equals(((ModelNameAccessor)object).getName());
@@ -36,6 +37,11 @@ public class ModelNameAccessor implements Accessor
 
 	public String getKind() { return KIND; }
 	public String getName() { return name; }
+
+	@Override
+	public int hashCode() {
+		return name.hashCode() + 55;
+	}
 
 	public ModelNameAccessor newInstance(String name) throws Exception {
 		return new ModelNameAccessor(name);
