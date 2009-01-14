@@ -13,6 +13,7 @@ package org.eclipse.qvt.declarative.parser.qvt.environment;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.ocl.ecore.CollectionType;
 import org.eclipse.ocl.ecore.PrimitiveType;
 import org.eclipse.ocl.ecore.TypeType;
 import org.eclipse.ocl.expressions.OCLExpression;
@@ -29,6 +30,8 @@ public class QVTFormattingHelper extends CSTFormattingHelper
 	@Override public String formatQualifiedName(Object object) {
 		if (object instanceof PrimitiveType)			// OCL built-ins do not need a gratuitous
 			return formatName(object);					//  oclstdlib.ecore::oclstdlib prefix
+		if (object instanceof CollectionType)
+			return formatName(object);
 		if (object instanceof TypeType) {				// Type references should show the referred type
 			EClassifier referredType = ((TypeType)object).getReferredType();
 			if (referredType != null)
