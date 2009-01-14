@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.17 2008/12/11 20:34:45 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.18 2009/01/14 20:47:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -515,7 +515,10 @@ public abstract class CommonParseController implements IParseController
     }
 
     public boolean isKeyword(int kind) {
-        String tokenKindNames[] = getParser().orderedTerminalSymbols();
+        AbstractParser parser = getParser();
+        if (parser == null)
+        	return false;
+		String tokenKindNames[] = parser.orderedTerminalSymbols();
     	return kind < tokenKindNames.length && fIsKeyword[kind];
     }
 
