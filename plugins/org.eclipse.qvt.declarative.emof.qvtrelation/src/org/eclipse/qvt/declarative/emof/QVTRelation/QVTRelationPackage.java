@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationPackage.java,v 1.2 2008/09/09 21:00:32 ewillink Exp $
+ * $Id: QVTRelationPackage.java,v 1.3 2009/01/14 19:10:43 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTRelation;
 
@@ -721,6 +721,15 @@ public interface QVTRelationPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATIONAL_TRANSFORMATION__NESTED_PACKAGE = QVTBasePackage.TRANSFORMATION__NESTED_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Nesting Package</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATIONAL_TRANSFORMATION__NESTING_PACKAGE = QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
