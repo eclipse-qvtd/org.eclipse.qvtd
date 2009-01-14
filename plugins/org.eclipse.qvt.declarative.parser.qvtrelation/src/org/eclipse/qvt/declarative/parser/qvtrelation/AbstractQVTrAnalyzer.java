@@ -306,9 +306,9 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 			return;
 		}
 		for (int i = 0; i < invokedCount; i++) {
-//			@SuppressWarnings("null")
+			@SuppressWarnings("null")
 			RelationDomain domain = (RelationDomain) invokedDomains.get(i);
-//			@SuppressWarnings("null")
+			@SuppressWarnings("null")
 			OCLExpressionCS argument = invokingArguments.get(i);
 			if (argument instanceof VariableExpCS)
 				env.createVariableDeclaration((VariableExpCS) argument, domain.getRootVariable().getType(), domain, true);
