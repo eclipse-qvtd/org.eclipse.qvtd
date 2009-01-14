@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationalTransformationOperations.java,v 1.4 2008/12/31 17:43:38 ewillink Exp $
+ * $Id: RelationalTransformationOperations.java,v 1.5 2009/01/14 21:02:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.operations;
 
@@ -54,19 +54,14 @@ public class RelationalTransformationOperations extends AbstractQVTRelationOpera
 	 * Validates the KeysAreUnique constraint of '<em>Relational Transformation</em>'.
 	 */
 	public boolean checkKeysAreUnique(RelationalTransformation relationalTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean allOk = true;
-		for (Key key : relationalTransformation.getOwnedKey()) {
-			EClass identifies = key.getIdentifies();
-			for (Key anotherKey : relationalTransformation.getOwnedKey()) {
-				if ((key != anotherKey) && (identifies == anotherKey.getIdentifies())) {
-					allOk = false;
-					Object[] messageSubstitutions = new Object[] { getObjectLabel(identifies, context) };
-					appendWarning(diagnostics, key, QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique, messageSubstitutions);
-					break;	
-				}
+		UniquenessChecker<EClass, Key> checker = new UniquenessChecker<EClass, Key>()
+		{
+			@Override
+			protected EClass getKey(Key key) {
+				return key.getIdentifies();
 			}
-		}
-		return allOk;
+		};
+		return checker.check(relationalTransformation.getOwnedKey(), QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique, relationalTransformation, diagnostics, context);
 	}
 
 	/**

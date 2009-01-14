@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationOperations.java,v 1.1 2008/12/31 17:43:38 ewillink Exp $
+ * $Id: RelationOperations.java,v 1.2 2009/01/14 21:02:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.operations;
 
@@ -23,10 +23,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.Variable;
@@ -35,10 +37,10 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Pattern;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Predicate;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Rule;
-import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomain;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationImplementation;
 import org.eclipse.qvt.declarative.ecore.operations.EPackageOperations;
 
 public class RelationOperations extends AbstractQVTRelationOperations
@@ -73,17 +75,35 @@ public class RelationOperations extends AbstractQVTRelationOperations
 	}
 
 	/**
-	 * Validates the DomainNumberMatches constraint of '<em>Relation</em>'.
+	 * Validates the DomainTypedModelsMatchModelParameters constraint of '<em>Rule</em>'.
 	 */
-	public boolean checkDomainNumberMatches(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		int domainCount = rule.getDomain().size();
-		Transformation transformation = rule.getTransformation();
-		int modelParameterCount = transformation.getModelParameter().size();
-		if (domainCount == modelParameterCount)
-			return true;
-		Object[] messageSubstitutions = new Object[] { domainCount, modelParameterCount, getObjectLabel(transformation, context) };
-		appendError(diagnostics, rule, QVTRelationMessages._UI_Relation_DomainNumberDoesNotMatch, messageSubstitutions);
-		return false;
+	public boolean checkDomainTypedModelsMatchModelParameters(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		List<Domain> domains = rule.getDomain();
+		List<TypedModel> modelParameters = rule.getTransformation().getModelParameter();
+		int domainCount = domains.size();
+		int modelParameterCount = modelParameters.size();
+		if (domainCount != modelParameterCount) {
+			Object[] messageSubstitutions = new Object[] { domainCount, getObjectLabel(rule, context), modelParameterCount };
+			appendError(diagnostics, rule, QVTRelationMessages._UI_Relation_DomainTypedModelsDoNotMatchModelParameters, messageSubstitutions);
+			return false;
+		}
+		boolean allOk = true;
+		for (int i = 0; i < domainCount; i++)
+		{
+			TypedModel modelParameter = modelParameters.get(i);
+			Domain domain = domains.get(i);
+			TypedModel typedModel = domain.getTypedModel();
+			if (typedModel == null)
+				continue;			// Multiplicity error
+			if (typedModel != modelParameter) {
+				if (!modelParameters.contains(typedModel))
+					continue;		// Domain consistency error
+				Object[] messageSubstitutions = new Object[] { getObjectLabel(domain, context), getObjectLabel(modelParameter, context) };
+				appendError(diagnostics, rule, QVTRelationMessages._UI_Relation_DomainTypedModelIsNotModelParameter, messageSubstitutions);
+				allOk = false;
+			}
+		}
+		return allOk;
 	}
 
 	/**
@@ -98,8 +118,19 @@ public class RelationOperations extends AbstractQVTRelationOperations
 	 * Validates the RelationImplsAreUniqueWarning constraint of '<em>Relation</em>'.
 	 */
     public boolean checkRelationImplsAreUniqueWarning(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		return true;
+		UniquenessChecker<EOperation, RelationImplementation> checker = new UniquenessChecker<EOperation, RelationImplementation>()
+		{
+			@Override
+			protected EOperation getKey(RelationImplementation value) {
+				return value.getImpl();
+			}
+
+			@Override
+			protected int getSeverity() {
+				return Diagnostic.WARNING;
+			}
+		};
+		return checker.check(relation.getOperationalImpl(), QVTRelationMessages._UI_Relation_ImplIsNotUnique, relation, diagnostics, context);
 	}
 
 	protected boolean checkTypesAreDeclaredByRelation(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context, Pattern pattern, String errorMessage) {
@@ -109,7 +140,7 @@ public class RelationOperations extends AbstractQVTRelationOperations
     	for (OCLExpression expression : getPatternExpressions(pattern)) {
 	    	for (VariableExp variableReference : getAllVariableReferences(expression)) {
 	    		Variable variable = (Variable) variableReference.getReferredVariable();
-	    		EClassifier type = getElementType(variable.getEType());
+	    		EClassifier type = getTransitiveElementType(variable.getEType());
 				if (!declaresType(relation, type)) {
 	 				Object[] messageSubstitutions = new Object[] { getObjectLabel(type, context), getObjectLabel(variable, context), getObjectLabel(relation, context) };
 					appendError(diagnostics, variableReference, errorMessage, messageSubstitutions);
@@ -117,7 +148,7 @@ public class RelationOperations extends AbstractQVTRelationOperations
 	    		}
 	    	}
 	    	for (Variable variable : getAllVariables(expression)) {
-	    		EClassifier type = getElementType(variable.getEType());
+	    		EClassifier type = getTransitiveElementType(variable.getEType());
 				if (!declaresType(relation, type)) {
 	 				Object[] messageSubstitutions = new Object[] { getObjectLabel(type, context), getObjectLabel(variable, context), getObjectLabel(relation, context) };
 					appendError(diagnostics, variable, errorMessage, messageSubstitutions);

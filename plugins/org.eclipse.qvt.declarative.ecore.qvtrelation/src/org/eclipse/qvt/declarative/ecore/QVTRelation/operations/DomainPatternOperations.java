@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: DomainPatternOperations.java,v 1.1 2008/12/31 17:43:38 ewillink Exp $
+ * $Id: DomainPatternOperations.java,v 1.2 2009/01/14 21:02:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.operations;
 
@@ -38,10 +38,10 @@ public class DomainPatternOperations extends AbstractQVTRelationOperations
 	 * Validates the EveryVariableIsDefinedByRelation constraint of '<em>Domain Pattern</em>'.	 * @generated NOT
 	 */
 	public boolean checkEveryVariableIsDefinedByRelation(DomainPattern domainPattern, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean allOk = true;
 		Relation relation = getRelation(domainPattern);
 		if (relation == null)
 			return true;
+		boolean allOk = true;
 		for (Variable variable : domainPattern.getBindsTo()) {
 			if (!RelationOperations.INSTANCE.definesVariable(relation, variable)) {
 				allOk = false;
@@ -59,17 +59,17 @@ public class DomainPatternOperations extends AbstractQVTRelationOperations
 		RelationDomain relationDomain = getRelationDomain(domainPattern);
 		if (relationDomain == null)
 			return true;
-		Variable rootVariable = relationDomain.getRootVariable();
-		if (rootVariable == null)
-			return true;					// Multiplicity failure
 		DomainPattern pattern = relationDomain.getPattern();
 		if (pattern == null)
 			return true;					// Multiplicity failure
 		TemplateExp templateExp = pattern.getTemplateExpression();
 		if (templateExp == null)
-			return true;					// Multiplicity failure
+			return true;
 		Variable variable = templateExp.getBindsTo();
 		if (variable == null)
+			return true;					// Multiplicity failure
+		Variable rootVariable = relationDomain.getRootVariable();
+		if (rootVariable == null)
 			return true;					// Multiplicity failure
 		if (rootVariable == variable)
 			return true;					// Relation checks its domains
@@ -85,17 +85,14 @@ public class DomainPatternOperations extends AbstractQVTRelationOperations
 		RelationDomain relationDomain = getRelationDomain(domainPattern);
 		if (relationDomain == null)
 			return true;
-		Variable rootVariable = relationDomain.getRootVariable();
-		if (rootVariable == null)
-			return true;					// Multiplicity failure
 		DomainPattern pattern = relationDomain.getPattern();
 		if (pattern == null)
 			return true;					// Multiplicity failure
 		TemplateExp templateExp = pattern.getTemplateExpression();
 		if (templateExp == null)
-			return true;					// Multiplicity failure
-		Variable variable = templateExp.getBindsTo();
-		if (variable == null)
+			return true;
+		Variable rootVariable = relationDomain.getRootVariable();
+		if (rootVariable == null)
 			return true;					// Multiplicity failure
 		if (rootVariable.getEType() == templateExp.getEType())
 			return true;					// Relation checks its domains

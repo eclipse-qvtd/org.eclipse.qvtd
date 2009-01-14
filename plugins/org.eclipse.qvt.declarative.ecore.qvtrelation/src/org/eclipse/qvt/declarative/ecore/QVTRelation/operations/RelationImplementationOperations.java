@@ -12,29 +12,29 @@
  * 
  * </copyright>
  *
- * $Id: RelationImplementationOperations.java,v 1.1 2008/12/31 17:43:38 ewillink Exp $
+ * $Id: RelationImplementationOperations.java,v 1.2 2009/01/14 21:02:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.operations;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.ocl.ecore.Variable;
+import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
 import org.eclipse.qvt.declarative.ecore.QVTBase.operations.TransformationOperations;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomain;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationImplementation;
 
 public class RelationImplementationOperations extends AbstractQVTRelationOperations
 {
 	public static RelationImplementationOperations INSTANCE = new RelationImplementationOperations();
-
-	/**
-	 * Validates the RootNodeIsBoundToRootVariable constraint of '<em>Relation Implementation</em>'.
-	 */
-	public boolean checkRootNodeIsBoundToRootVariable(RelationImplementation relationImplementation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		return true;
-	}
 
 	/**
 	 * Validates the InDirectionOfIsDefinedByTransformation constraint of '<em>Relation Implementation</em>'.
@@ -52,10 +52,54 @@ public class RelationImplementationOperations extends AbstractQVTRelationOperati
 	}
 
 	/**
-	 * Validates the EveryArgumentTypeMatchesDomainRootVariableType constraint of '<em>Relation Implementation</em>'.
+	 * Validates the EveryParameterTypeMatchesDomainRootVariableType constraint of '<em>Relation Implementation</em>'.
 	 */
-	public boolean checkEveryArgumentTypeMatchesDomainRootVariableType(RelationImplementation relationImplementation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		return true;
+	public boolean checkEveryParameterTypeMatchesDomainRootVariableType(RelationImplementation relationImplementation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		EOperation operation = relationImplementation.getImpl();
+		if (operation == null)
+			return true;					// Multiplicity failure
+		Relation relation = relationImplementation.getRelation();
+		if (relation == null)
+			return true;					// Multiplicity failure
+		List<Domain> domains = relation.getDomain();
+		List<EParameter> parameters = operation.getEParameters();
+		int domainCount = domains.size();
+		int parameterCount = parameters.size();
+		if (domainCount != parameterCount) {
+			Object[] messageSubstitutions = new Object[] { parameterCount, getObjectLabel(operation, context), domainCount };
+			appendError(diagnostics, relationImplementation, QVTRelationMessages._UI_RelationImplementation_ParameterNumberDoesNotMatch, messageSubstitutions);
+			return false;
+		}
+    	boolean allOk = true;
+    	for (int i = 0; i < parameterCount; i++) {
+    		EClassifier parameterType = parameters.get(i).getEType();
+    		if (parameterType == null)
+    			continue;
+    		RelationDomain domain = (RelationDomain) domains.get(i);
+    		Variable rootVariable = domain.getRootVariable();
+    		if (rootVariable == null)
+    			continue;
+			EClassifier domainType = rootVariable.getEType();
+    		if (domainType == null)
+    			continue;
+			TypedModel typedModel = domain.getTypedModel();
+    		if (typedModel == null)
+    			continue;
+    		if (typedModel == relationImplementation.getInDirectionOf()) {
+        		if (!assignableFrom(domainType, parameterType)) {
+         			Object[] messageSubstitutions = new Object[] { getObjectLabel(domainType, context), getObjectLabel(parameterType, context) };
+        			appendError(diagnostics, relationImplementation, QVTRelationMessages._UI_RelationImplementation_OutputParameterTypeDoesNotMatch, messageSubstitutions);
+        			allOk = false;
+        	    }
+    		}
+    		else {
+        		if (!assignableFrom(parameterType, domainType)) {
+         			Object[] messageSubstitutions = new Object[] { getObjectLabel(parameterType, context), getObjectLabel(domainType, context) };
+        			appendError(diagnostics, relationImplementation, QVTRelationMessages._UI_RelationImplementation_InputParameterTypeDoesNotMatch, messageSubstitutions);
+        			allOk = false;
+        	    }
+    		}
+    	}
+    	return allOk;
 	}
 }

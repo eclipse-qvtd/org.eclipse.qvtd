@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationDomainOperations.java,v 1.1 2008/12/31 17:43:38 ewillink Exp $
+ * $Id: RelationDomainOperations.java,v 1.2 2009/01/14 21:02:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.operations;
 
@@ -32,6 +32,7 @@ import org.eclipse.ocl.ecore.VariableExp;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Rule;
 import org.eclipse.qvt.declarative.ecore.QVTBase.operations.DomainOperations;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.DomainPattern;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationCallExp;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomain;
@@ -43,6 +44,19 @@ import org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem;
 public class RelationDomainOperations extends DomainOperations
 {
 	public static RelationDomainOperations INSTANCE = new RelationDomainOperations();
+
+	/**
+	 * Validates the PrimitiveDomainIsUnnamed constraint of '<em>Relation Domain</em>'.
+	 */
+	public boolean checkPrimitiveDomainIsUnnamed(RelationDomain relationDomain, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (relationDomain.getPattern() != null)
+			return true;
+		if (relationDomain.getName() == null)
+			return true;
+		Object[] messageSubstitutions = new Object[] { getObjectLabel(relationDomain, context) };
+		appendError(diagnostics, relationDomain, QVTRelationMessages._UI_RelationDomain_PrimitiveDomainMustBeUnnamed, messageSubstitutions);
+		return false;
+	}
 
 	/**
 	 * Validates the RootVariableIsDefinedByRelation constraint of '<em>Relation Domain</em>'.
@@ -68,7 +82,7 @@ public class RelationDomainOperations extends DomainOperations
 		Variable rootVariable = relationDomain.getRootVariable();
 		if (rootVariable == null)
 			return true;					// Multiplicity failure
-		EClassifier type = getElementType(rootVariable.getEType());
+		EClassifier type = getTransitiveElementType(rootVariable.getEType());
 		if (type == null)
 			return true;					// Multiplicity failure
 		if (declaresType(relationDomain, type))
@@ -90,8 +104,11 @@ public class RelationDomainOperations extends DomainOperations
 		Set<Variable> defaultedVariables = new HashSet<Variable>();
 		Map<Variable,Set<EStructuralFeature>> matchedVariableFeatures = new HashMap<Variable,Set<EStructuralFeature>>();
 		for (Domain domain : relationDomain.getRule().getDomain())
-			if ((domain != relationDomain) && (domain instanceof RelationDomain))
-				sharedVariables.addAll(((RelationDomain) domain).getPattern().getBindsTo());
+			if ((domain != relationDomain) && (domain instanceof RelationDomain)) {
+				DomainPattern pattern = ((RelationDomain) domain).getPattern();
+				if (pattern != null)
+					sharedVariables.addAll(pattern.getBindsTo());
+			}
 		for (TreeIterator<EObject> i = relationDomain.eAllContents(); i.hasNext(); ) {
 			EObject eObject = i.next();
 			if (eObject instanceof RelationCallExp) {

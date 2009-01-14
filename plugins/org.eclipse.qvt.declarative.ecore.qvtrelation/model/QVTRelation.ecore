@@ -34,7 +34,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Relation" eSuperTypes="../../org.eclipse.qvt.declarative.ecore.qvtbase/model/QVTBase.ecore#//Rule">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="AtLeastTwoDomains&#xD;&#xA;DomainNumberMatches&#xD;&#xA;EveryDomainIsARelationDomain&#xD;&#xA;NonTopLevelIsNotInvokedWarning&#xD;&#xA;RelationImplsAreUniqueWarning&#xD;&#xA;VariablesAreUnique&#xD;&#xA;WhenTypesAreDeclaredByRelation&#xD;&#xA;WhenVariablesAreDefinedByRelation&#xD;&#xA;WhereTypesAreDeclaredByRelation&#xD;&#xA;WhereVariablesAreDefinedByRelation&#xD;&#xA;"/>
+      <details key="constraints" value="AtLeastTwoDomains&#xD;&#xA;DomainTypedModelsMatchModelParameters&#xD;&#xA;EveryDomainIsARelationDomain&#xD;&#xA;NonTopLevelIsNotInvokedWarning&#xD;&#xA;RelationImplsAreUniqueWarning&#xD;&#xA;VariablesAreUnique&#xD;&#xA;WhenTypesAreDeclaredByRelation&#xD;&#xA;WhenVariablesAreDefinedByRelation&#xD;&#xA;WhereTypesAreDeclaredByRelation&#xD;&#xA;WhereVariablesAreDefinedByRelation&#xD;&#xA;"/>
     </eAnnotations>
     <eOperations name="getRelationalTransformation" lowerBound="1" eType="#//RelationalTransformation"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTopLevel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
@@ -59,7 +59,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationDomain" eSuperTypes="../../org.eclipse.qvt.declarative.ecore.qvtbase/model/QVTBase.ecore#//Domain">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="WellFormedName&#xD;&#xA;RootVariableIsDefinedByRelation&#xD;&#xA;RootVariableTypeIsDeclaredByDomainTypedModel&#xD;&#xA;EveryEnforceableVariableIsMatchedOrAssigned&#xD;&#xA;"/>
+      <details key="constraints" value="WellFormedName&#xD;&#xA;PrimitiveDomainIsUnnamed&#xD;&#xA;RootVariableIsDefinedByRelation&#xD;&#xA;RootVariableTypeIsDeclaredByDomainTypedModel&#xD;&#xA;EveryEnforceableVariableIsMatchedOrAssigned&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="#//DomainPattern"
         containment="true"/>
@@ -92,7 +92,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationImplementation" eSuperTypes="../../org.eclipse.emf.ecore/model/Ecore.ecore#//EModelElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="RootNodeIsBoundToRootVariable&#xD;&#xA;InDirectionOfIsDefinedByTransformation&#xD;&#xA;EveryArgumentTypeMatchesDomainRootVariableType&#xD;&#xA;"/>
+      <details key="constraints" value="InDirectionOfIsDefinedByTransformation&#xD;&#xA;EveryParameterTypeMatchesDomainRootVariableType&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="relation" eType="#//Relation"
         transient="true" eOpposite="#//Relation/operationalImpl"/>
@@ -102,7 +102,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationCallExp" eSuperTypes="../../org.eclipse.ocl.ecore/model/OCLEcore.ecore#//ecore/OCLExpression">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="PatternExists&#xD;&#xA;RelationExists&#xD;&#xA;InvokedFromWhenOrWhereClause&#xD;&#xA;ReferredRelationDeclaredByTransformation&#xD;&#xA;ReferredRelationArgumentNumberMatches&#xD;&#xA;EveryWhenReferredRelationArgumentTypeMatches&#xD;&#xA;EveryWhereReferredRelationArgumentTypeIsMatchableWarning&#xD;&#xA;"/>
+      <details key="constraints" value="PatternExists&#xD;&#xA;RelationExists&#xD;&#xA;InvokedFromWhenOrWhereClause&#xD;&#xA;ReferredRelationDeclaredByTransformation&#xD;&#xA;ReferredRelationArgumentNumberMatches&#xD;&#xA;EveryWhenReferredRelationArgumentTypeMatches&#xD;&#xA;EveryWhereReferredRelationArgumentTypeIsMatchableWarning&#xD;&#xA;TypeIsBoolean&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="argument" lowerBound="2"
         upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.ecore/model/OCLEcore.ecore#//ecore/OCLExpression"

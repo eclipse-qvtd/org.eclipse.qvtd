@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationDomainAssignmentOperations.java,v 1.1 2008/12/31 17:43:38 ewillink Exp $
+ * $Id: RelationDomainAssignmentOperations.java,v 1.2 2009/01/14 21:02:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.operations;
 
@@ -54,9 +54,6 @@ public class RelationDomainAssignmentOperations extends AbstractQVTRelationOpera
 	 * Validates the VariableTypeMatchesValueType constraint of '<em>Relation Domain Assignment</em>'.
 	 */
 	public boolean checkVariableTypeMatchesValueType(RelationDomainAssignment relationDomainAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		Relation relation = getRelation(relationDomainAssignment);
-		if (relation == null)
-			return true;
 		Variable variable = relationDomainAssignment.getVariable();
 		if (variable == null)
 			return true;					// Multiplicity failure
@@ -69,7 +66,7 @@ public class RelationDomainAssignmentOperations extends AbstractQVTRelationOpera
 		EClassifier valueType = value.getEType();
 		if (valueType == null)
 			return true;					// Multiplicity failure
-		if (assignableToFrom(variableType, valueType))
+		if (assignableFrom(variableType, valueType))
 			return true;
 		Object[] messageSubstitutions = new Object[] { getObjectLabel(variableType, context), getObjectLabel(variable, context), getObjectLabel(valueType, context) };
 		appendError(diagnostics, variable, QVTRelationMessages._UI_RelationDomainAssignment_VariableTypeMatchesValueType, messageSubstitutions);

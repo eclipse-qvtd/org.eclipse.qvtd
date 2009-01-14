@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Relation.java,v 1.3 2008/12/31 17:43:38 ewillink Exp $
+ * $Id: Relation.java,v 1.4 2009/01/14 21:02:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation;
 
@@ -40,7 +40,7 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.Rule;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage#getRelation()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='AtLeastTwoDomains\r\nDomainNumberMatches\r\nEveryDomainIsARelationDomain\r\nNonTopLevelIsNotInvokedWarning\r\nRelationImplsAreUniqueWarning\r\nVariablesAreUnique\r\nWhenTypesAreDeclaredByRelation\r\nWhenVariablesAreDefinedByRelation\r\nWhereTypesAreDeclaredByRelation\r\nWhereVariablesAreDefinedByRelation\r\n'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='AtLeastTwoDomains\r\nDomainTypedModelsMatchModelParameters\r\nEveryDomainIsARelationDomain\r\nNonTopLevelIsNotInvokedWarning\r\nRelationImplsAreUniqueWarning\r\nVariablesAreUnique\r\nWhenTypesAreDeclaredByRelation\r\nWhenVariablesAreDefinedByRelation\r\nWhereTypesAreDeclaredByRelation\r\nWhereVariablesAreDefinedByRelation\r\n'"
  * @generated
  */
 public interface Relation extends Rule {

@@ -12,13 +12,12 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationValidator.java,v 1.5 2008/12/31 17:43:38 ewillink Exp $
+ * $Id: QVTRelationValidator.java,v 1.6 2009/01/14 21:02:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.util;
 
 import java.util.Map;
 
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EPackage;
@@ -344,9 +343,8 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_OverridesIsCompatible(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_OverridesDefinedByTransformation(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_DomainNamesAreUnique(relation, diagnostics, context);
-		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_TypedModelsAreUnique(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelation_DomainTypedModelsMatchModelParameters(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelation_AtLeastTwoDomains(relation, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelation_DomainNumberMatches(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelation_EveryDomainIsARelationDomain(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelation_NonTopLevelIsNotInvokedWarning(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelation_RelationImplsAreUniqueWarning(relation, diagnostics, context);
@@ -375,11 +373,11 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 	}
 
 	/**
-	 * Validates the DomainNumberMatches constraint of '<em>Relation</em>'.
+	 * Validates the DomainTypedModelsMatchModelParameters constraint of '<em>Rule</em>'.
 	 * @generated NOT
 	 */
-	public boolean validateRelation_DomainNumberMatches(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return RelationOperations.INSTANCE.checkDomainNumberMatches(relation, diagnostics, context);
+	public boolean validateRelation_DomainTypedModelsMatchModelParameters(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationOperations.INSTANCE.checkDomainTypedModelsMatchModelParameters(relation, diagnostics, context);
 	}
 
 	/**
@@ -455,6 +453,7 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateDomain_TypedModelExistsWarning(relationDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateDomain_TypedModelDefinedByTransformation(relationDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateDomain_CheckableOrEnforceable(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationDomain_PrimitiveDomainIsUnnamed(relationDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationDomain_RootVariableIsDefinedByRelation(relationDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationDomain_RootVariableTypeIsDeclaredByDomainTypedModel(relationDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationDomain_EveryEnforceableVariableIsMatchedOrAssigned(relationDomain, diagnostics, context);
@@ -463,30 +462,20 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 
 	/**
 	 * Validates the WellFormedName constraint of '<em>Relation Domain</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public boolean validateRelationDomain_WellFormedName(RelationDomain relationDomain, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		String message = null;
-		if (relationDomain.getPattern() != null)
-			return ecoreValidator.validateENamedElement_WellFormedName(relationDomain, diagnostics, context);
-		if (relationDomain.getName() != null)
-			message = "Primitive RelationDomain '" + relationDomain.getName() + "' must be unnamed";
-		if (message == null)
+		if (relationDomain.getPattern() == null)
 			return true;
-		if (diagnostics != null) {
-			diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-					 DIAGNOSTIC_SOURCE,
-					 0,
-					 "_UI_GenericConstraint_diagnostic",
-					 new Object[] { "WellFormedName", getObjectLabel(relationDomain, context) },
-					 new Object[] { relationDomain },
-					 context));
-		}
-		return false;
+		return ecoreValidator.validateENamedElement_WellFormedName(relationDomain, diagnostics, context);
+	}
+
+	/**
+	 * Validates the PrimitiveDomainIsUnnamed constraint of '<em>Relation Domain</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationDomain_PrimitiveDomainIsUnnamed(RelationDomain relationDomain, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationDomainOperations.INSTANCE.checkPrimitiveDomainIsUnnamed(relationDomain, diagnostics, context);
 	}
 
 	/**
@@ -560,18 +549,9 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 		if (result || diagnostics != null) result &= validate_UniqueID(relationImplementation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationImplementation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationImplementation, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelationImplementation_RootNodeIsBoundToRootVariable(relationImplementation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationImplementation_InDirectionOfIsDefinedByTransformation(relationImplementation, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelationImplementation_EveryArgumentTypeMatchesDomainRootVariableType(relationImplementation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationImplementation_EveryParameterTypeMatchesDomainRootVariableType(relationImplementation, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the RootNodeIsBoundToRootVariable constraint of '<em>Relation Implementation</em>'.
-	 * @generated NOT
-	 */
-	public boolean validateRelationImplementation_RootNodeIsBoundToRootVariable(RelationImplementation relationImplementation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return RelationImplementationOperations.INSTANCE.checkRootNodeIsBoundToRootVariable(relationImplementation, diagnostics, context);
 	}
 
 	/**
@@ -583,11 +563,11 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 	}
 
 	/**
-	 * Validates the EveryArgumentTypeMatchesDomainRootVariableType constraint of '<em>Relation Implementation</em>'.
+	 * Validates the EveryParameterTypeMatchesDomainRootVariableType constraint of '<em>Relation Implementation</em>'.
 	 * @generated NOT
 	 */
-	public boolean validateRelationImplementation_EveryArgumentTypeMatchesDomainRootVariableType(RelationImplementation relationImplementation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return RelationImplementationOperations.INSTANCE.checkEveryArgumentTypeMatchesDomainRootVariableType(relationImplementation, diagnostics, context);
+	public boolean validateRelationImplementation_EveryParameterTypeMatchesDomainRootVariableType(RelationImplementation relationImplementation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationImplementationOperations.INSTANCE.checkEveryParameterTypeMatchesDomainRootVariableType(relationImplementation, diagnostics, context);
 	}
 
 	/**
@@ -615,6 +595,7 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 		if (result || diagnostics != null) result &= validateRelationCallExp_ReferredRelationArgumentNumberMatches(relationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationCallExp_EveryWhenReferredRelationArgumentTypeMatches(relationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationCallExp_EveryWhereReferredRelationArgumentTypeIsMatchableWarning(relationCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationCallExp_TypeIsBoolean(relationCallExp, diagnostics, context);
 		return result;
 	}
 
@@ -672,6 +653,14 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 	 */
 	public boolean validateRelationCallExp_EveryWhereReferredRelationArgumentTypeIsMatchableWarning(RelationCallExp relationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return RelationCallExpOperations.INSTANCE.checkEveryWhereReferredRelationArgumentTypeIsMatchableWarning(relationCallExp, diagnostics, context);
+	}
+
+	/**
+	 * Validates the TypeIsBoolean constraint of '<em>Relation Call Exp</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationCallExp_TypeIsBoolean(RelationCallExp relationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return RelationCallExpOperations.INSTANCE.checkTypeIsBoolean(relationCallExp, diagnostics, context);
 	}
 
 	/**

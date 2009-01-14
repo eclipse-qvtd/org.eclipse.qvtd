@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationPackageImpl.java,v 1.6 2008/12/31 17:43:38 ewillink Exp $
+ * $Id: QVTRelationPackageImpl.java,v 1.7 2009/01/14 21:02:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.impl;
 
@@ -708,13 +708,13 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 		  (relationEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "AtLeastTwoDomains\r\nDomainNumberMatches\r\nEveryDomainIsARelationDomain\r\nNonTopLevelIsNotInvokedWarning\r\nRelationImplsAreUniqueWarning\r\nVariablesAreUnique\r\nWhenTypesAreDeclaredByRelation\r\nWhenVariablesAreDefinedByRelation\r\nWhereTypesAreDeclaredByRelation\r\nWhereVariablesAreDefinedByRelation\r\n"
+			 "constraints", "AtLeastTwoDomains\r\nDomainTypedModelsMatchModelParameters\r\nEveryDomainIsARelationDomain\r\nNonTopLevelIsNotInvokedWarning\r\nRelationImplsAreUniqueWarning\r\nVariablesAreUnique\r\nWhenTypesAreDeclaredByRelation\r\nWhenVariablesAreDefinedByRelation\r\nWhereTypesAreDeclaredByRelation\r\nWhereVariablesAreDefinedByRelation\r\n"
 		   });				
 		addAnnotation
 		  (relationDomainEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "WellFormedName\r\nRootVariableIsDefinedByRelation\r\nRootVariableTypeIsDeclaredByDomainTypedModel\r\nEveryEnforceableVariableIsMatchedOrAssigned\r\n"
+			 "constraints", "WellFormedName\r\nPrimitiveDomainIsUnnamed\r\nRootVariableIsDefinedByRelation\r\nRootVariableTypeIsDeclaredByDomainTypedModel\r\nEveryEnforceableVariableIsMatchedOrAssigned\r\n"
 		   });			
 		addAnnotation
 		  (relationDomainAssignmentEClass, 
@@ -726,13 +726,13 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 		  (relationImplementationEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "RootNodeIsBoundToRootVariable\r\nInDirectionOfIsDefinedByTransformation\r\nEveryArgumentTypeMatchesDomainRootVariableType\r\n"
+			 "constraints", "InDirectionOfIsDefinedByTransformation\r\nEveryParameterTypeMatchesDomainRootVariableType\r\n"
 		   });		
 		addAnnotation
 		  (relationCallExpEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "PatternExists\r\nRelationExists\r\nInvokedFromWhenOrWhereClause\r\nReferredRelationDeclaredByTransformation\r\nReferredRelationArgumentNumberMatches\r\nEveryWhenReferredRelationArgumentTypeMatches\r\nEveryWhereReferredRelationArgumentTypeIsMatchableWarning\r\n"
+			 "constraints", "PatternExists\r\nRelationExists\r\nInvokedFromWhenOrWhereClause\r\nReferredRelationDeclaredByTransformation\r\nReferredRelationArgumentNumberMatches\r\nEveryWhenReferredRelationArgumentTypeMatches\r\nEveryWhereReferredRelationArgumentTypeIsMatchableWarning\r\nTypeIsBoolean\r\n"
 		   });		
 		addAnnotation
 		  (relationalTransformationEClass, 

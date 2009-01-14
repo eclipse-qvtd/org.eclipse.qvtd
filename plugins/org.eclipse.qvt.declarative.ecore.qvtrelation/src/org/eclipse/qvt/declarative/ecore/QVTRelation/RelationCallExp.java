@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationCallExp.java,v 1.3 2008/12/31 17:43:38 ewillink Exp $
+ * $Id: RelationCallExp.java,v 1.4 2009/01/14 21:02:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation;
 
@@ -34,7 +34,7 @@ import org.eclipse.ocl.ecore.OCLExpression;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage#getRelationCallExp()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='PatternExists\r\nRelationExists\r\nInvokedFromWhenOrWhereClause\r\nReferredRelationDeclaredByTransformation\r\nReferredRelationArgumentNumberMatches\r\nEveryWhenReferredRelationArgumentTypeMatches\r\nEveryWhereReferredRelationArgumentTypeIsMatchableWarning\r\n'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='PatternExists\r\nRelationExists\r\nInvokedFromWhenOrWhereClause\r\nReferredRelationDeclaredByTransformation\r\nReferredRelationArgumentNumberMatches\r\nEveryWhenReferredRelationArgumentTypeMatches\r\nEveryWhereReferredRelationArgumentTypeIsMatchableWarning\r\nTypeIsBoolean\r\n'"
  * @generated
  */
 public interface RelationCallExp extends OCLExpression {
