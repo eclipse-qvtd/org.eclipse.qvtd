@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonNature.java,v 1.1 2008/08/18 07:46:26 ewillink Exp $
+ * $Id: CommonNature.java,v 1.2 2009/01/14 20:46:39 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -58,8 +58,13 @@ public abstract class CommonNature extends ProjectNatureBase
 		return creationFactory.getBuilderId();
 	}
 
+	public String getLanguageID() {
+		return creationFactory.getLanguageID();
+	}
+
+    @Deprecated  // Use getLanguageID()
 	public String getLanguageName() {
-		return creationFactory.getLanguageName();
+		return getLanguageID();
 	}
 
 	@Override

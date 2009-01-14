@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.10 2008/10/31 20:12:22 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.11 2009/01/14 20:46:39 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -138,7 +138,7 @@ public abstract class CommonBuilder extends BuilderBase
 		IPath projectRelativeInputPath = inputFile.getProjectRelativePath();
 		IPath workspaceRelativeOutputPath = getWorkspaceRelativeOutputFilePath(inputFile);
 		IFile outputFile = getProject().getFile(workspaceRelativeOutputPath.removeFirstSegments(1));
-		getPlugin().writeInfoMsg("Building " + creationFactory.getLanguageName() + " input file: '" + inputFile.getName() + "', output file: '" + outputFile.getName() + "'");
+		getPlugin().writeInfoMsg("Building " + creationFactory.getLanguageID() + " input file: '" + inputFile.getName() + "', output file: '" + outputFile.getName() + "'");
 		ProblemHandler problemHandler = creationFactory.createProblemHandler(inputFile);
 		try {
 			CommonParseController parseController = createParseController();
@@ -236,8 +236,13 @@ public abstract class CommonBuilder extends BuilderBase
 		return creationFactory.getLanguage();
 	}
 
+	public String getLanguageID() {
+		return creationFactory.getLanguageID();
+	}
+
+    @Deprecated  // Use getLanguageID()
 	public String getLanguageName() {
-		return creationFactory.getLanguageName();
+		return getLanguageID();
 	}
 
 	@Override
