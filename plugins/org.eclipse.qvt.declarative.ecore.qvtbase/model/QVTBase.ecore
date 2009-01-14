@@ -44,7 +44,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Rule" abstract="true" eSuperTypes="../../org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="OverridesIsCompatible&#xD;&#xA;OverridesDefinedByTransformation&#xD;&#xA;DomainNamesAreUnique&#xD;&#xA;TypedModelsAreUnique"/>
+      <details key="constraints" value="OverridesIsCompatible&#xD;&#xA;OverridesDefinedByTransformation&#xD;&#xA;DomainNamesAreUnique&#xD;&#xA;DomainTypedModelsMatchModelParameters"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="domain" upperBound="-1"
         eType="#//Domain" containment="true" eOpposite="#//Domain/rule"/>

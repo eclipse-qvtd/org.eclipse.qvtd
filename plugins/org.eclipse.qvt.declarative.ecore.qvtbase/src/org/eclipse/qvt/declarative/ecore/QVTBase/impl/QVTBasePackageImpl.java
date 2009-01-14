@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTBasePackageImpl.java,v 1.5 2009/01/14 19:12:58 ewillink Exp $
+ * $Id: QVTBasePackageImpl.java,v 1.6 2009/01/14 21:00:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.impl;
 
@@ -653,7 +653,7 @@ public class QVTBasePackageImpl extends EPackageImpl implements QVTBasePackage {
 		  (ruleEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "OverridesIsCompatible\r\nOverridesDefinedByTransformation\r\nDomainNamesAreUnique\r\nTypedModelsAreUnique"
+			 "constraints", "OverridesIsCompatible\r\nOverridesDefinedByTransformation\r\nDomainNamesAreUnique\r\nDomainTypedModelsMatchModelParameters"
 		   });			
 		addAnnotation
 		  (transformationEClass, 
