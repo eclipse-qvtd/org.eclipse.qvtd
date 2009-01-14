@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTrParseTests.java,v 1.7 2008/12/31 18:22:14 ewillink Exp $
+ * $Id: QVTrParseTests.java,v 1.8 2009/01/14 21:27:56 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.parser.qvtrelation;
 
@@ -100,48 +100,36 @@ public class QVTrParseTests extends AbstractQVTrTestCase
 				"Ambiguous name 'A' { ScopeA::a::A, ScopeA::b::A }", "lookupClassifier", -1, -1);
 		expectedProblems.handleProblem(ProblemHandler.Severity.ERROR, ProblemHandler.Phase.ANALYZER,
 				"Ambiguous name 'A' { ScopeB::a::A, ScopeB::b::A }", "lookupClassifier", -1, -1);
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+		expectedProblems.expectValidatorError(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
 				new String[] { "ScopeA::a::A"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
-				new String[] { "ScopeA::a::A"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+		expectedProblems.expectValidatorError(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
 				new String[] { "ScopeA::a::a::A"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+		expectedProblems.expectValidatorError(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
 				new String[] { "ScopeA::a::a::A"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
-				new String[] { "ScopeA::a::a::A"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+		expectedProblems.expectValidatorError(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
 				new String[] { "ScopeA::a::b::abZ"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+		expectedProblems.expectValidatorError(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
 				new String[] { "ScopeA::a::b::abZ"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+		expectedProblems.expectValidatorError(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
 				new String[] { "ScopeA::a::b::abZ"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
-				new String[] { "ScopeA::a::b::abZ"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+		expectedProblems.expectValidatorError(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
 				new String[] { "ScopeB::b::a::baZ"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+		expectedProblems.expectValidatorError(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
 				new String[] { "ScopeB::b::a::baZ"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+		expectedProblems.expectValidatorError(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
 				new String[] { "ScopeB::b::a::baZ"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
-				new String[] { "ScopeB::b::a::baZ"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+		expectedProblems.expectValidatorError(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
 				new String[] { "Scoping.qvtr::$unresolved$::$class$"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
-				new String[] { "Scoping.qvtr::$unresolved$::$class$"} );
+//		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+//				new String[] { "Scoping.qvtr::$unresolved$::$class$"} );
 		problemTest("Scoping", expectedProblems);
 	}
 	
 	public void testParse_Keys() throws IOException, CoreException {
 		ExpectedProblemLog expectedProblems = new ExpectedProblemLog();
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+		expectedProblems.expectValidatorError(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
 				new String[] { "qvtrelation::QVTRelation::Key"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
-				new String[] { "qvtrelation::QVTRelation::Key"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
-				new String[] { "emof::EMOF::Class"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+		expectedProblems.expectValidatorError(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
 				new String[] { "emof::EMOF::Class"} );
 		parserTest("Keys", expectedProblems);
 	}
@@ -160,14 +148,14 @@ public class QVTrParseTests extends AbstractQVTrTestCase
 					"EMOF.ecore::EMOF::Parameter::operation",
 					"KeysValidation.reference.eqvtrelation::Keys::Key",
 					"EMOF.ecore::EMOF::Parameter"});
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+		expectedProblems.expectValidatorError(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
 				new String[] { "QVTRelation.ecore::QVTRelation::Key"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
-				new String[] { "QVTRelation.ecore::QVTRelation::Key"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+//		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+//				new String[] { "QVTRelation.ecore::QVTRelation::Key"} );
+		expectedProblems.expectValidatorError(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
 				new String[] { "EMOF.ecore::EMOF::Class"} );
-		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
-				new String[] { "EMOF.ecore::EMOF::Class"} );
+//		expectedProblems.expectValidatorWarning(QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
+//				new String[] { "EMOF.ecore::EMOF::Class"} );
 		validationTest("KeysValidation", expectedProblems);
 	}
 	
