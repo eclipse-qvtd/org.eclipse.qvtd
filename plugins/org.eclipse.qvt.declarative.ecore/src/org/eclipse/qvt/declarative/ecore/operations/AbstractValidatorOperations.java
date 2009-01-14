@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractValidatorOperations.java,v 1.1 2008/12/31 17:38:40 ewillink Exp $
+ * $Id: AbstractValidatorOperations.java,v 1.2 2009/01/14 20:58:50 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.operations;
 
@@ -40,6 +40,45 @@ import org.eclipse.osgi.util.NLS;
 public abstract class AbstractValidatorOperations extends AbstractOperations
 {
 	public static final String ECORE_DIAGNOSTIC_SOURCE = EObjectValidator.DIAGNOSTIC_SOURCE;
+
+	public abstract class UniquenessChecker<K extends EObject,V extends EObject>
+	{
+		/*
+		 * Check that each value has a distinct getKey(), appending an
+		 * error for each uniqueness failure. (If there are N same-keyed
+		 * values, N-1 errors are appended.)
+		 */
+		public boolean check(List<? extends V> values, String errorMessage, EObject contextObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
+			boolean allOk = true;
+			Map<K, V> keyToFirstValue = new HashMap<K, V>();
+			for (V value : values)
+			{
+				K key = getKey(value);
+				V firstValue = keyToFirstValue.get(key);
+				if (firstValue == null)
+					keyToFirstValue.put(key, value);
+				else {
+					allOk = false;
+					Object typedModelLabel = getObjectLabel(key, context);
+					Object objectLabel = getObjectLabel(value, context);
+					Object firstObjectLabel = getObjectLabel(firstValue, context);
+					Object[] messageSubstitutions = new Object[] { typedModelLabel, objectLabel, firstObjectLabel };
+					appendDiagnostic(diagnostics, contextObject, getSeverity(), errorMessage, messageSubstitutions);
+
+				}
+			}
+			return allOk;
+		}
+		
+		/* 
+		 * Implement to provide the 'unique' key for a value.
+		 */
+		protected abstract K getKey(V value);
+
+		protected int getSeverity() {
+			return Diagnostic.ERROR;
+		}
+	}
 
 	protected final EValidatorWithOperations validator;
 	protected final Map<String, Integer> messageToCode = new HashMap<String, Integer>();
@@ -111,19 +150,11 @@ public abstract class AbstractValidatorOperations extends AbstractOperations
 	}
 
 	public boolean definesOppositeProperty(EClass eClass, EReference property) {
-		if (property == null)
-			return false;
-		EClass containingClass = property.getEReferenceType();
-		if (containingClass == null)
-			return false;
-		return containingClass.isSuperTypeOf(eClass);
+		return property != null && isSuperClassOf(property.getEReferenceType(), eClass);
 	}
 
 	public boolean definesProperty(EClass eClass, EStructuralFeature property) {
-		EClass containingClass = property.getEContainingClass();
-		if (containingClass == null)
-			return false;
-		return containingClass.isSuperTypeOf(eClass);
+		return property != null && isSuperClassOf(property.getEContainingClass(), eClass);
 	}
 
 	protected <T extends EObject> T getAncestor(EObject eObject, Class<T> requiredClass) {
@@ -185,6 +216,14 @@ public abstract class AbstractValidatorOperations extends AbstractOperations
 			if (eObject == parentObject)
 				return true;
 		return false;			
+	}
+
+	public boolean isSuperClassOf(EClass targetClass, EClass queryClass) {
+		if (targetClass == null)
+			return false;
+		if (queryClass == null)
+			return false;
+		return targetClass.isSuperTypeOf(queryClass);
 	}
 
 	/**
