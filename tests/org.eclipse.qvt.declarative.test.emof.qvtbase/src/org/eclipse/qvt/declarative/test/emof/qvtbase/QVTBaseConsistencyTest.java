@@ -89,7 +89,6 @@ public class QVTBaseConsistencyTest extends AbstractEssentialOCLConsistencyTest
 		changeOfLower(differences, helper, QVTBasePackage.Literals.RULE__TRANSFORMATION);
 		changeOfOrdered(differences, helper, QVTBasePackage.Literals.PATTERN__BINDS_TO);
 		changeOfOrdered(differences, helper, QVTBasePackage.Literals.PATTERN__PREDICATE);
-		changeOfOrdered(differences, helper, QVTBasePackage.Literals.RULE__DOMAIN);
 		changeOfOrdered(differences, helper, QVTBasePackage.Literals.TRANSFORMATION__OWNED_TAG);
 		changeOfOrdered(differences, helper, QVTBasePackage.Literals.TRANSFORMATION__RULE);
 		changeOfOrdered(differences, helper, QVTBasePackage.Literals.TYPED_MODEL__DEPENDS_ON);
@@ -145,6 +144,7 @@ public class QVTBaseConsistencyTest extends AbstractEssentialOCLConsistencyTest
 		changeOfURI(differences, helper, QVTBasePackage.eINSTANCE);
 		changeOfName(differences, helper, QVTBasePackage.eINSTANCE);
 		changeOfLower(differences, helper, QVTBasePackage.Literals.RULE__TRANSFORMATION);
+		changeOfOrdered(differences, helper, QVTBasePackage.Literals.RULE__DOMAIN);
 		helper.setLogStream(null);
 		EMOFConsistencyTest.expectedEmofDifferences(differences, helper);		
 		EssentialOCLConsistencyTest.expectedEmofDifferences(differences, helper);
