@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplateValidationTest.java,v 1.2 2008/12/31 19:17:46 ewillink Exp $
+ * $Id: QVTTemplateValidationTest.java,v 1.3 2009/01/14 21:27:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.emof.qvttemplate;
 
@@ -244,13 +244,13 @@ public class QVTTemplateValidationTest extends AbstractQVTTemplateValidationTest
 		TestRule rule = createTestRule(transformation.getRule(), "TestRule");
 		TestDomain domain = createTestDomain(rule.getDomain(), "TestDomain", typedModel);
 		TestPattern pattern = createTestPattern(domain.getContents());
-		EAttribute property = TestQVTBasePackage.Literals.TEST_TRANSFORMATION__STRING_BAG;
+		EAttribute property = TestQVTBasePackage.Literals.TEST_TRANSFORMATION__STRING_SET;
 		EClass objectType = property.getEContainingClass();
 		Variable variable = createVariable(transformation.getContents(), "TestVariable", objectType);
 		pattern.getBindsTo().add(variable);
 		ObjectTemplateExp objectTemplateExp = createObjectTemplateExp(variable, objectType);
 		pattern.getContents().add(objectTemplateExp);
-		CollectionType valueType = createCollectionType(transformation.getEClassifiers(), CollectionKind.SET_LITERAL, getStringType());
+		CollectionType valueType = createCollectionType(transformation.getEClassifiers(), CollectionKind.BAG_LITERAL, getStringType());
 		Variable itemVariable = createVariable(transformation.getContents(), "TestItemVariable", valueType);
 		pattern.getBindsTo().add(itemVariable);
 		CollectionTemplateExp collectionTemplateExp = createCollectionTemplateExp(itemVariable, valueType, null);
@@ -272,13 +272,13 @@ public class QVTTemplateValidationTest extends AbstractQVTTemplateValidationTest
 		TestRule rule = createTestRule(transformation.getRule(), "TestRule");
 		TestDomain domain = createTestDomain(rule.getDomain(), "TestDomain", typedModel);
 		TestPattern pattern = createTestPattern(domain.getContents());
-		EAttribute property = TestQVTBasePackage.Literals.TEST_TRANSFORMATION__STRING_BAG;
+		EAttribute property = TestQVTBasePackage.Literals.TEST_TRANSFORMATION__STRING_SEQUENCE;
 		EClass objectType = property.getEContainingClass();
 		Variable variable = createVariable(transformation.getContents(), "TestVariable", objectType);
 		pattern.getBindsTo().add(variable);
 		ObjectTemplateExp objectTemplateExp = createObjectTemplateExp(variable, objectType);
 		pattern.getContents().add(objectTemplateExp);
-		CollectionType valueType = createCollectionType(transformation.getEClassifiers(), CollectionKind.SEQUENCE_LITERAL, getStringType());
+		CollectionType valueType = createCollectionType(transformation.getEClassifiers(), CollectionKind.BAG_LITERAL, getStringType());
 		Variable itemVariable = createVariable(transformation.getContents(), "TestItemVariable", valueType);
 		pattern.getBindsTo().add(itemVariable);
 		CollectionTemplateExp collectionTemplateExp = createCollectionTemplateExp(itemVariable, valueType, null);
