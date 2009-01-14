@@ -40,8 +40,7 @@
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTBase.Rule" name="Rule" abstract="true"
       eSuperTypes="../../org.eclipse.qvt.declarative.emof.emof/model/EMOF.ecore#EMOF.NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Rule.domain"
-        name="domain" ordered="false" upperBound="-1" eType="#QVTBase.Domain" containment="true"
-        eOpposite="#QVTBase.Domain.rule"/>
+        name="domain" upperBound="-1" eType="#QVTBase.Domain" containment="true" eOpposite="#QVTBase.Domain.rule"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Rule.overrides"
         name="overrides" eType="#QVTBase.Rule">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">

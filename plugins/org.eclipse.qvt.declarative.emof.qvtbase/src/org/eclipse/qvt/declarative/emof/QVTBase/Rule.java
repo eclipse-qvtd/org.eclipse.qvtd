@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: Rule.java,v 1.1 2008/07/23 09:57:28 qglineur Exp $
+ * $Id: Rule.java,v 1.2 2009/01/14 19:13:04 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTBase;
 
@@ -52,7 +52,7 @@ public interface Rule extends NamedElement {
 	 * @return the value of the '<em>Domain</em>' containment reference list.
 	 * @see org.eclipse.qvt.declarative.emof.QVTBase.QVTBasePackage#getRule_Domain()
 	 * @see org.eclipse.qvt.declarative.emof.QVTBase.Domain#getRule
-	 * @model opposite="rule" containment="true" ordered="false"
+	 * @model opposite="rule" containment="true"
 	 * @generated
 	 */
 	EList<Domain> getDomain();
