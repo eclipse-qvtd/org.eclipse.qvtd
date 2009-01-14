@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: DomainOperations.java,v 1.2 2008/12/31 17:42:29 ewillink Exp $
+ * $Id: DomainOperations.java,v 1.3 2009/01/14 21:01:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.operations;
 
@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
-import org.eclipse.qvt.declarative.ecore.operations.EPackageOperations;
 
 public class DomainOperations extends AbstractQVTBaseOperations
 {
@@ -36,12 +35,11 @@ public class DomainOperations extends AbstractQVTBaseOperations
 	 * Validates the CheckableOrEnforceable constraint of '<em>Domain</em>'.
 	 */
 	public boolean checkCheckableOrEnforceable(Domain domain, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!domain.isIsCheckable() && !domain.isIsEnforceable()) {
-			Object[] messageSubstitutions = new Object[] { getObjectLabel(domain, context) };
-			appendError(diagnostics, domain, QVTBaseMessages._UI_Domain_IsNotCheckableOrEnforceable, messageSubstitutions);
-			return false;
-		}
-		return true;
+		if (domain.isIsCheckable() || domain.isIsEnforceable())
+			return true;
+		Object[] messageSubstitutions = new Object[] { getObjectLabel(domain, context) };
+		appendError(diagnostics, domain, QVTBaseMessages._UI_Domain_IsNotCheckableOrEnforceable, messageSubstitutions);
+		return false;
 	}
 
 	/**
@@ -76,14 +74,10 @@ public class DomainOperations extends AbstractQVTBaseOperations
 	}
 
 	public Set<EPackage> getDeclaredPackages(Domain domain) {
-		Set<EPackage> declaredPackages = new HashSet<EPackage>();
 		TypedModel typedModel = domain.getTypedModel();
-		if (typedModel != null) {
-			for (EPackage usedPackage : typedModel.getUsedPackage()) {
-				Set<EPackage> allUsedPackages = EPackageOperations.INSTANCE.getAllEPackages(usedPackage);
-				declaredPackages.addAll(allUsedPackages);
-			}
-		}
-		return declaredPackages;
+		if (typedModel != null)
+			return TypedModelOperations.INSTANCE.getDeclaredPackages(typedModel);
+		else
+			return new HashSet<EPackage>();
 	}
 }

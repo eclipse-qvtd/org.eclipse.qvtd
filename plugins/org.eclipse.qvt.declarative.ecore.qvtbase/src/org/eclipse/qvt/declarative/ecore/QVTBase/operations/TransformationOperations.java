@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TransformationOperations.java,v 1.2 2008/12/31 17:42:29 ewillink Exp $
+ * $Id: TransformationOperations.java,v 1.3 2009/01/14 21:01:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.operations;
 
@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -36,6 +37,31 @@ import org.eclipse.qvt.declarative.ecore.operations.EPackageOperations;
 public class TransformationOperations extends AbstractQVTBaseOperations
 {
 	public static TransformationOperations INSTANCE = new TransformationOperations();
+
+	/**
+	 * Validates the EveryModelParameterUsedPackagesIsCompatibleWithExtension constraint of '<em>Transformation</em>'.
+	 */
+	public boolean checkEveryModelParameterUsedPackagesIsCompatibleWithExtension(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (transformation.getExtends() == null)
+			return true;
+		boolean allOk = true;
+		Map<String, TypedModel> names = getNames(transformation.getModelParameter());
+		Map<String, TypedModel> extendedNames = getNames(transformation.getExtends().getModelParameter());
+		for (String name : names.keySet()) {
+			TypedModel typedModel = names.get(name);
+			TypedModel extendedTypedModel = extendedNames.get(name);
+			if (extendedTypedModel != null) {	// If null diagnostic is produced by checkModelParameterNamesAreCompatibleWithExtension
+				Set<EPackage> declaredPackages = new HashSet<EPackage>(typedModel.getUsedPackage());
+				Set<EPackage> extendedDeclaredPackages = new HashSet<EPackage>(extendedTypedModel.getUsedPackage());
+				if (!declaredPackages.equals(extendedDeclaredPackages)) {
+					Object[] messageSubstitutions = new Object[] { getObjectLabel(typedModel, context), getObjectLabel(extendedTypedModel, context) };
+					appendError(diagnostics, transformation, QVTBaseMessages._UI_Transformation_ModelParameterUsedPackagesAreNotCompatibleWithExtension, messageSubstitutions);
+				}
+			}
+			allOk = false;
+		}
+		return allOk;
+	}
 
 	/**
 	 * Validates the ExtendsIsAcyclic constraint of '<em>Transformation</em>'.
@@ -72,36 +98,11 @@ public class TransformationOperations extends AbstractQVTBaseOperations
 			return true;
 		Map<String, TypedModel> names = getNames(transformation.getModelParameter());
 		Map<String, TypedModel> extendedNames = getNames(transformation.getExtends().getModelParameter());
-		if (!names.keySet().equals(extendedNames.keySet())) {
-			Object[] messageSubstitutions = new Object[] { getObjectLabel(transformation, context), getObjectLabel(transformation.getExtends(), context) };
-			appendError(diagnostics, transformation, QVTBaseMessages._UI_Transformation_ModelParameterNameIsNotCompatibleWithExtension, messageSubstitutions);
-		}
-		return false;
-	}
-
-	/**
-	 * Validates the EveryModelParameterUsedPackagesIsCompatibleWithExtension constraint of '<em>Transformation</em>'.
-	 */
-	public boolean checkEveryModelParameterUsedPackagesIsCompatibleWithExtension(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (transformation.getExtends() == null)
+		if (names.keySet().equals(extendedNames.keySet()))
 			return true;
-		boolean allOk = true;
-		Map<String, TypedModel> names = getNames(transformation.getModelParameter());
-		Map<String, TypedModel> extendedNames = getNames(transformation.getExtends().getModelParameter());
-		for (String name : names.keySet()) {
-			TypedModel typedModel = names.get(name);
-			TypedModel extendedTypedModel = extendedNames.get(name);
-			if (extendedTypedModel != null) {	// If null diagnostic is produced by checkModelParameterNamesAreCompatibleWithExtension
-				Set<EPackage> declaredPackages = new HashSet<EPackage>(typedModel.getUsedPackage());
-				Set<EPackage> extendedDeclaredPackages = new HashSet<EPackage>(extendedTypedModel.getUsedPackage());
-				if (!declaredPackages.equals(extendedDeclaredPackages)) {
-					Object[] messageSubstitutions = new Object[] { getObjectLabel(typedModel, context), getObjectLabel(extendedTypedModel, context) };
-					appendError(diagnostics, transformation, QVTBaseMessages._UI_Transformation_ModelParameterUsedPackagesAreNotCompatibleWithExtension, messageSubstitutions);
-				}
-			}
-			allOk = false;
-		}
-		return allOk;
+		Object[] messageSubstitutions = new Object[] { getObjectLabel(transformation, context), getObjectLabel(transformation.getExtends(), context) };
+		appendError(diagnostics, transformation, QVTBaseMessages._UI_Transformation_ModelParameterNameIsNotCompatibleWithExtension, messageSubstitutions);
+		return false;
 	}
 
 	/**
@@ -126,8 +127,9 @@ public class TransformationOperations extends AbstractQVTBaseOperations
 		if (synthesizedTypes == null)
 			return true;
 		boolean allOk = true;
+		EList<EClassifier> classifiers = transformation.getEClassifiers();
 		for (CollectionType synthesizedType : synthesizedTypes) {
-			if (!hasAncestor(synthesizedType, transformation)) {
+			if (!classifiers.contains(synthesizedType)) {
 				Object[] messageSubstitutions = new Object[] { getObjectLabel(synthesizedType, context), getObjectLabel(transformation, context) };
 				appendError(diagnostics, transformation, QVTBaseMessages._UI_Transformation_SynthesizedTypeIsNotOwned, messageSubstitutions);
 				allOk = false;
@@ -160,13 +162,13 @@ public class TransformationOperations extends AbstractQVTBaseOperations
 		return allOk;
 	} */
 
-	public boolean computeAllExtends(Transformation transformation, Set<Transformation> allExtends) {
+	public void computeAllExtends(Transformation transformation, Set<Transformation> allExtends) {
 		if (allExtends.contains(transformation))
-			return false;
+			return;
 		allExtends.add(transformation);
 		if (transformation.getExtends() == null)
-			return true;
-		return computeAllExtends(transformation.getExtends(), allExtends);
+			return;
+		computeAllExtends(transformation.getExtends(), allExtends);
 	}
 
 	public boolean declaresRule(Transformation transformation, Rule rule) {

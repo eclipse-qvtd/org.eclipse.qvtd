@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTBaseMessages.java,v 1.1 2008/12/31 17:41:32 ewillink Exp $
+ * $Id: QVTBaseMessages.java,v 1.2 2009/01/14 21:01:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.operations;
 import org.eclipse.osgi.util.NLS;
@@ -27,11 +27,10 @@ public class QVTBaseMessages extends NLS
 	public static String _UI_Pattern_VariableIsNotAFunctionParameter;
 	public static String _UI_Predicate_ConditionExpressionIsNotBoolean;
 	public static String _UI_Rule_DomainNameIsNotUnique;
-	public static String _UI_Rule_OverridenDomainCountIsNotCompatible;
+	public static String _UI_Rule_DomainTypedModelIsNotUnique;
 	public static String _UI_Rule_OverridenDomainDoesNotExist;
 	public static String _UI_Rule_OverridenDomainPackagesAreNotCompatible;
 	public static String _UI_Rule_OverridesIsNotDefinedByTransformation;
-	public static String _UI_Rule_TypedModelIsNotUnique;
 	public static String _UI_Transformation_ModelParameterUsedPackagesAreNotCompatibleWithExtension;
 	public static String _UI_Transformation_ExtendsContainsACycle;
 	public static String _UI_Transformation_UsedPackagesAreNotCompatibleWithExtends;

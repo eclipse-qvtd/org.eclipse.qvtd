@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TypedModelOperations.java,v 1.1 2008/12/31 17:42:29 ewillink Exp $
+ * $Id: TypedModelOperations.java,v 1.2 2009/01/14 21:01:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.operations;
 
@@ -24,7 +24,6 @@ import java.util.Set;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
-import org.eclipse.qvt.declarative.ecore.operations.EPackageOperations;
 
 public class TypedModelOperations extends AbstractQVTBaseOperations
 {
@@ -55,11 +54,10 @@ public class TypedModelOperations extends AbstractQVTBaseOperations
 	}
 
 	public Set<EPackage> getDeclaredPackages(TypedModel typedModel) {
-		Set<EPackage> declaredPackages = new HashSet<EPackage>();
-		for (EPackage usedPackage : typedModel.getUsedPackage()) {
-			Set<EPackage> allUsedPackages = EPackageOperations.INSTANCE.getAllEPackages(usedPackage);
-			declaredPackages.addAll(allUsedPackages);
-		}
+		Set<EPackage> declaredPackages = new HashSet<EPackage>(typedModel.getUsedPackage());
+		Set<TypedModel> allDependsOn = getAllDependsOn(typedModel);
+		for (TypedModel dependsOn : allDependsOn)
+			declaredPackages.addAll(dependsOn.getUsedPackage());
 		return declaredPackages;
 	}
 }

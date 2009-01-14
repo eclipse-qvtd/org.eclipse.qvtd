@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractEssentialOCLOperations.java,v 1.1 2008/12/31 17:42:29 ewillink Exp $
+ * $Id: AbstractEssentialOCLOperations.java,v 1.2 2009/01/14 21:01:32 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.operations;
 
@@ -43,6 +43,7 @@ import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.ecore.TupleLiteralPart;
 import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.ecore.VariableExp;
+import org.eclipse.ocl.expressions.CollectionKind;
 import org.eclipse.ocl.types.OCLStandardLibrary;
 import org.eclipse.ocl.utilities.UMLReflection;
 import org.eclipse.qvt.declarative.ecore.operations.AbstractValidatorOperations;
@@ -66,6 +67,25 @@ public class AbstractEssentialOCLOperations extends AbstractValidatorOperations
 
 	public static EClassifier getIntegerType() {
 		return integerType;
+	}
+
+	public static CollectionKind getPropertyKind(EStructuralFeature referredProperty) {
+		if (referredProperty == null)
+			return null;
+		if (!referredProperty.isMany())
+			return null;
+		if (referredProperty.isUnique()) {
+			if (referredProperty.isOrdered())
+				return CollectionKind.ORDERED_SET_LITERAL;
+			else
+				return CollectionKind.SET_LITERAL;
+		}
+		else {
+			if (referredProperty.isOrdered())
+				return CollectionKind.SEQUENCE_LITERAL;
+			else
+				return CollectionKind.BAG_LITERAL;
+		}
 	}
 
 	public static EClassifier getPropertyType(EStructuralFeature referredProperty) {
@@ -97,19 +117,23 @@ public class AbstractEssentialOCLOperations extends AbstractValidatorOperations
 		return stringType;
 	}
 
-	public static EClassifier getVoidType() {
-		return voidType;
-	}
-
 	public static EClassifier getUnlimitedNaturalType() {
 		return unlimitedNaturalType;
+	}
+
+	public static EClassifier getVoidType() {
+		return voidType;
 	}
 
 	public AbstractEssentialOCLOperations(EValidatorWithOperations validator) {
 		super(validator);
 	}
 
-	protected boolean assignableToFrom(EClassifier toType, EClassifier fromType) {
+	protected boolean assignableFrom(EClassifier toType, EClassifier fromType) {
+		if (toType == null)
+			return false;
+		if (fromType == null)
+			return false;
 		EClassifier resolvedToType = uml.getOCLType(toType);
 		EClassifier resolvedFromType = uml.getOCLType(fromType);
 		if (resolvedToType == resolvedFromType)
@@ -122,7 +146,7 @@ public class AbstractEssentialOCLOperations extends AbstractValidatorOperations
 				EClassifier fromElementType = fromCollectionType.getElementType(); 
 				if (fromElementType == getVoidType())
 					return true;
-				return assignableToFrom(toElementType, fromElementType);
+				return assignableFrom(toElementType, fromElementType);
 			}
 		}
 		else {
@@ -171,11 +195,19 @@ public class AbstractEssentialOCLOperations extends AbstractValidatorOperations
 		return variables;
 	}
 
-	public EClassifier getElementType(EClassifier type) {
+	public EClassifier getTransitiveElementType(EClassifier type) {
 		if (type instanceof CollectionType)
-			return getElementType(((CollectionType)type).getElementType());
+			return getTransitiveElementType(((CollectionType)type).getElementType());
 		else
 			return type;
+	}
+
+	public EObject getNonExpressionParent(OCLExpression expression) {
+		EObject parent = expression.eContainer();
+		if (parent instanceof OCLExpression)
+			return getNonExpressionParent((OCLExpression) parent);
+		else
+			return parent;
 	}
 
 	public boolean isPredefinedType(EClassifier type) {
@@ -191,28 +223,6 @@ public class AbstractEssentialOCLOperations extends AbstractValidatorOperations
 			return true;
 		else
 			return false;
-	}
-
-	public Collection<VariableExp> zzgetAllVariableReferences(Collection<OCLExpression> expressions) {
-		Set<VariableExp> variableReferences = new HashSet<VariableExp>();
-    	for (OCLExpression expression : expressions) {
-    		for (TreeIterator<EObject> i = expression.eAllContents(); i.hasNext(); ) {
-    			EObject eObject = i.next();
-    			if (eObject instanceof VariableExp) {
-					VariableExp variableExp = (VariableExp) eObject;
-					variableReferences.add(variableExp);
-				}
-    		}
-    	}
-		return variableReferences;
-	}
-
-	public EObject getNonExpressionParent(OCLExpression expression) {
-		EObject parent = expression.eContainer();
-		if (parent instanceof OCLExpression)
-			return getNonExpressionParent((OCLExpression) parent);
-		else
-			return parent;
 	}
 
 	public boolean locallyDefined(VariableExp variableReference) {

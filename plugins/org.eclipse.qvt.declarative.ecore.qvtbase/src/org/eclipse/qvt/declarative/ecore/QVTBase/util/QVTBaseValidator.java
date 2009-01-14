@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTBaseValidator.java,v 1.4 2008/12/31 17:42:29 ewillink Exp $
+ * $Id: QVTBaseValidator.java,v 1.5 2009/01/14 21:01:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.util;
 
@@ -350,7 +350,7 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= validateRule_OverridesIsCompatible(rule, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRule_OverridesDefinedByTransformation(rule, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRule_DomainNamesAreUnique(rule, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRule_TypedModelsAreUnique(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRule_DomainTypedModelsMatchModelParameters(rule, diagnostics, context);
 		return result;
 	}
 
@@ -359,7 +359,7 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 	 * @generated NOT
 	 */
 	public boolean validateRule_OverridesIsCompatible(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return RuleOperations.INSTANCE.checkOverridesIsCompatible(rule, diagnostics, context);
+		return true;	// Overridding domain consistency ensured by domain.typedModel = modelParameters validation
 	}
 
 	/**
@@ -379,11 +379,11 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 	}
 
 	/**
-	 * Validates the TypedModelsAreUnique constraint of '<em>Rule</em>'.
+	 * Validates the DomainTypedModelsMatchModelParameters constraint of '<em>Rule</em>'.
 	 * @generated NOT
 	 */
-	public boolean validateRule_TypedModelsAreUnique(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return RuleOperations.INSTANCE.checkTypedModelsAreUnique(rule, diagnostics, context);
+	public boolean validateRule_DomainTypedModelsMatchModelParameters(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;	// Implementation is derived domain specific
 	}
 
 	/**

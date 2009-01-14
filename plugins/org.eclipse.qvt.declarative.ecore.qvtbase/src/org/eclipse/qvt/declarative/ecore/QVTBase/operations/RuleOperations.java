@@ -12,22 +12,17 @@
  * 
  * </copyright>
  *
- * $Id: RuleOperations.java,v 1.2 2008/12/31 17:42:29 ewillink Exp $
+ * $Id: RuleOperations.java,v 1.3 2009/01/14 21:01:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.operations;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Rule;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
-import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 
 public class RuleOperations extends AbstractQVTBaseOperations
 {
@@ -35,7 +30,7 @@ public class RuleOperations extends AbstractQVTBaseOperations
 
 	/**
 	 * Validates the OverridesIsCompatible constraint of '<em>Rule</em>'.
-	 */
+	 *
 	public boolean checkOverridesIsCompatible(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		Rule overrides = rule.getOverrides();
 		if (overrides == null)
@@ -67,7 +62,7 @@ public class RuleOperations extends AbstractQVTBaseOperations
 			}
 		}
 		return allOk;
-	}
+	} */
 
 	/**
 	 * Validates the OverridesDefinedByTransformation constraint of '<em>Rule</em>'.
@@ -95,24 +90,14 @@ public class RuleOperations extends AbstractQVTBaseOperations
 	/**
 	 * Validates the TypedModelsAreUnique constraint of '<em>Rule</em>'.
 	 */
-	public boolean checkTypedModelsAreUnique(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean allOk = true;
-		Map<TypedModel, Domain> typedModel2Domain = new HashMap<TypedModel, Domain>();
-		for (Domain domain : rule.getDomain())
+	public boolean checkTypedModelsAreUnique(final Rule rule, final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		UniquenessChecker<TypedModel, Domain> checker = new UniquenessChecker<TypedModel, Domain>()
 		{
-			TypedModel typedModel = domain.getTypedModel();
-			Domain firstDomain = typedModel2Domain.get(typedModel);
-			if (firstDomain == null)
-				typedModel2Domain.put(typedModel, domain);
-			else {
-				allOk = false;
-				Object typedModelLabel = getObjectLabel(typedModel, context);
-				Object objectLabel = getObjectLabel(domain, context);
-				Object firstObjectLabel = getObjectLabel(firstDomain, context);
-				Object[] messageSubstitutions = new Object[] { typedModelLabel, objectLabel, firstObjectLabel };
-				appendError(diagnostics, rule, QVTBaseMessages._UI_Rule_TypedModelIsNotUnique, messageSubstitutions);
+			@Override
+			protected TypedModel getKey(Domain value) {
+				return value.getTypedModel();
 			}
-		}
-		return allOk;
-	}
+		};
+		return checker.check(rule.getDomain(), QVTBaseMessages._UI_Rule_DomainTypedModelIsNotUnique, rule, diagnostics, context);
+	}	
 }
