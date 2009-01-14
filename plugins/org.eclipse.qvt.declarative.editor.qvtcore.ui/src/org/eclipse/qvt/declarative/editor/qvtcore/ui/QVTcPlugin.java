@@ -12,13 +12,10 @@
  * 
  * </copyright>
  *
- * $Id: QVTcPlugin.java,v 1.4 2008/08/26 19:05:58 ewillink Exp $
+ * $Id: QVTcPlugin.java,v 1.5 2009/01/14 20:42:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.preferences.DefaultScope;
-import org.eclipse.imp.preferences.PreferencesService;
 import org.eclipse.imp.runtime.PluginBase;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonEditorDefinition;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
@@ -41,23 +38,6 @@ public class QVTcPlugin extends PluginBase implements ICommonPlugin
 			new QVTcPlugin();
 		return sPlugin;
 	}
-
-	public static PreferencesService getPreferencesService() {
-		if (preferencesService == null) {
-			preferencesService = new PreferencesService(ResourcesPlugin.getWorkspace().getRoot().getProject());
-			preferencesService.setLanguageName(kLanguageName);
-			// To trigger the invocation of the preferences initializer:
-			try {
-				new DefaultScope().getNode(kPluginID);
-			} catch (Exception e) {
-				// If this ever happens, it will probably be because the preferences
-				// and their initializer haven't been defined yet.  In that situation
-				// there's not really anything to do--you can't initialize preferences
-				// that don't exist.  So swallow the exception and continue ...
-			}
-		}
-		return preferencesService;
-	}
 	
 	public CommonEditorDefinition editorDefinition = null;
 
@@ -77,7 +57,8 @@ public class QVTcPlugin extends PluginBase implements ICommonPlugin
 		return kPluginID;
 	}
 
-	public String getLanguageName() {
+	@Override
+	public String getLanguageID() {
 		return kLanguageName;
 	}
 }
