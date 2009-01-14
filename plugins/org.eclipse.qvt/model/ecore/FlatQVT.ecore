@@ -793,7 +793,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.ReturnExp.value" name="value" eType="EssentialOCL.OclExpression" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTBase.Rule" name="Rule" abstract="true" eSuperTypes="EMOF.NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Rule.domain" name="domain" ordered="false" upperBound="-1" eType="QVTBase.Domain" containment="true" resolveProxies="false" eOpposite="QVTBase.Domain.rule"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Rule.domain" name="domain" upperBound="-1" eType="QVTBase.Domain" containment="true" resolveProxies="false" eOpposite="QVTBase.Domain.rule"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Rule.overrides" name="overrides" eType="QVTBase.Rule">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="overriden"/>

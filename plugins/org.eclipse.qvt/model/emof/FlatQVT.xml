@@ -1564,8 +1564,8 @@
   </ownedType>
   <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Rule" name="Rule" isAbstract="true"
       superClass="FlatQVT.NamedElement">
-    <ownedAttribute xmi:id="FlatQVT.Rule.domain" name="domain" lower="0" upper="*"
-        type="FlatQVT.Domain" isComposite="true" opposite="FlatQVT.Domain.rule">
+    <ownedAttribute xmi:id="FlatQVT.Rule.domain" name="domain" isOrdered="true" lower="0"
+        upper="*" type="FlatQVT.Domain" isComposite="true" opposite="FlatQVT.Domain.rule">
       <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
         <resolveProxies>false</resolveProxies>
       </xmi:Extension>

@@ -67,8 +67,8 @@
   </ownedType>
   <ownedType xmi:type="emof:Class" xmi:id="QVTBase.Rule" name="Rule" isAbstract="true">
     <superClass href="EMOF.xml#EMOF.NamedElement"/>
-    <ownedAttribute xmi:id="QVTBase.Rule.domain" name="domain" lower="0" upper="*"
-        type="QVTBase.Domain" isComposite="true" opposite="QVTBase.Domain.rule">
+    <ownedAttribute xmi:id="QVTBase.Rule.domain" name="domain" isOrdered="true" lower="0"
+        upper="*" type="QVTBase.Domain" isComposite="true" opposite="QVTBase.Domain.rule">
       <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
         <resolveProxies>false</resolveProxies>
       </xmi:Extension>
