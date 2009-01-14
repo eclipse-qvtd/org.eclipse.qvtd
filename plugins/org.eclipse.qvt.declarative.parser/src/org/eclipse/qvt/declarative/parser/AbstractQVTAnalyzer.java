@@ -201,9 +201,9 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 	 * Overridden to provided a nested scope for nested variables.
 	 */
 	@Override
-	protected OCLExpression<EClassifier> letExpCS(LetExpCS letExpCS,
+	protected OCLExpression<EClassifier> letExp(LetExpCS letExpCS,
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
-		return super.letExpCS(letExpCS, createdNestedEnvironment(letExpCS, env));
+		return super.letExp(letExpCS, createdNestedEnvironment(letExpCS, env));
 	}
 
 	@SuppressWarnings("unchecked") @Override @Deprecated
