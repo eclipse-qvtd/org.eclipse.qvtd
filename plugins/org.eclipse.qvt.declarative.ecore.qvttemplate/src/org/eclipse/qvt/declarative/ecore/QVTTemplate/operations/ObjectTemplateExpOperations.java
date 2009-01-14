@@ -12,11 +12,10 @@
  * 
  * </copyright>
  *
- * $Id: ObjectTemplateExpOperations.java,v 1.1 2008/12/31 17:43:44 ewillink Exp $
+ * $Id: ObjectTemplateExpOperations.java,v 1.2 2009/01/14 21:01:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.operations;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -79,23 +78,14 @@ public class ObjectTemplateExpOperations extends TemplateExpOperations
 	 * Validates the PartsAreUnique constraint of '<em>Object Template Exp</em>'.
 	 */
 	public boolean checkPartsAreUnique(ObjectTemplateExp objectTemplateExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean allOk = true;
-		Map<EStructuralFeature, PropertyTemplateItem> feature2Part = new HashMap<EStructuralFeature, PropertyTemplateItem>();
-		for (PropertyTemplateItem part : objectTemplateExp.getPart()) {
-			EStructuralFeature property = part.getReferredProperty();
-			PropertyTemplateItem firstPart = feature2Part.get(property);
-			if (firstPart == null)
-				feature2Part.put(property, part);
-			else {
-				allOk = false;
-				Object propertyLabel = getObjectLabel(property, context);
-				Object objectLabel = getObjectLabel(part, context);
-				Object firstObjectLabel = getObjectLabel(firstPart, context);
-				Object[] messageSubstitutions = new Object[] { propertyLabel, objectLabel, firstObjectLabel };
-				appendError(diagnostics, objectTemplateExp, QVTTemplateMessages._UI_ObjectTemplateExp_PartIsNotUnique, messageSubstitutions);
+		UniquenessChecker<EStructuralFeature, PropertyTemplateItem> checker = new UniquenessChecker<EStructuralFeature, PropertyTemplateItem>()
+		{
+			@Override
+			protected EStructuralFeature getKey(PropertyTemplateItem value) {
+				return value.getReferredProperty();
 			}
-		}
-		return allOk;
+		};
+		return checker.check(objectTemplateExp.getPart(), QVTTemplateMessages._UI_ObjectTemplateExp_PartIsNotUnique, objectTemplateExp, diagnostics, context);
 	}
 
 	/**

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: PropertyTemplateItemOperations.java,v 1.2 2008/12/31 19:16:31 ewillink Exp $
+ * $Id: PropertyTemplateItemOperations.java,v 1.3 2009/01/14 21:01:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.operations;
 
@@ -28,6 +28,7 @@ import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.OrderedSetType;
 import org.eclipse.ocl.ecore.SequenceType;
 import org.eclipse.ocl.ecore.SetType;
+import org.eclipse.ocl.expressions.CollectionKind;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.CollectionTemplateExp;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.ObjectTemplateExp;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem;
@@ -71,16 +72,16 @@ public class PropertyTemplateItemOperations extends AbstractQVTTemplateOperation
 		EClassifier propertyType = getReferredPropertyType(propertyTemplateItem);
 		if (propertyType == null)
 			return true;		// Multiplicity error
-		EClassifier propertyElementType = getElementType(propertyType);
+		EClassifier propertyElementType = getTransitiveElementType(propertyType);
 		if (propertyElementType == null)
 			return true;		// Multiplicity error
 		OCLExpression value = propertyTemplateItem.getValue();
 		if (value == null)
 			return true;		// Multiplicity error
-		EClassifier valueElementType = getElementType(value.getType());
+		EClassifier valueElementType = getTransitiveElementType(value.getType());
 		if (valueElementType == null)
 			return true;		// Multiplicity error
-		if (assignableToFrom(propertyElementType, valueElementType))
+		if (assignableFrom(propertyElementType, valueElementType))
 			return true;
 		Object[] messageSubstitutions = new Object[] { getObjectLabel(valueElementType, context), getObjectLabel(propertyElementType, context), getObjectLabel(propertyTemplateItem.getReferredProperty(), context) };
 		appendError(diagnostics, propertyTemplateItem, QVTTemplateMessages._UI_PropertyTemplateItem_ValueElementTypeDoesNotMatchReferredPropertyElementType, messageSubstitutions);
@@ -91,16 +92,17 @@ public class PropertyTemplateItemOperations extends AbstractQVTTemplateOperation
 	 * Validates the SetMatchesSet constraint of '<em>Property Template Item</em>'.
 	 */
 	public boolean checkSetMatchesSet(PropertyTemplateItem propertyTemplateItem, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		CollectionKind propertyCollectionKind = getPropertyCollectionKind(propertyTemplateItem);
+		if (propertyCollectionKind != CollectionKind.SET_LITERAL)
+			return true;
 		OCLExpression value = propertyTemplateItem.getValue();
 		if (!(value instanceof CollectionTemplateExp))
 			return true;
 		CollectionType valueCollectionType = ((CollectionTemplateExp)value).getReferredCollectionType();
-		if (!(valueCollectionType instanceof SetType))
+		if (valueCollectionType instanceof SetType)
 			return true;
-		EClassifier propertyType = getReferredPropertyType(propertyTemplateItem);
-		if (propertyType instanceof SetType)
-			return true;
-		Object[] messageSubstitutions = new Object[] { getObjectLabel(valueCollectionType, context), getObjectLabel(propertyType, context), getObjectLabel(propertyTemplateItem.getReferredProperty(), context) };
+		EClassifier referredPropertyType = getReferredPropertyType(propertyTemplateItem);
+		Object[] messageSubstitutions = new Object[] { getObjectLabel(valueCollectionType, context), getObjectLabel(referredPropertyType, context), getObjectLabel(propertyTemplateItem.getReferredProperty(), context) };
 		appendError(diagnostics, propertyTemplateItem, QVTTemplateMessages._UI_PropertyTemplateItem_SetDoesNotMatchSet, messageSubstitutions);
 		return false;
 	}
@@ -109,16 +111,20 @@ public class PropertyTemplateItemOperations extends AbstractQVTTemplateOperation
 	 * Validates the NonBagMatchesNonBag constraint of '<em>Property Template Item</em>'.
 	 */
 	public boolean checkNonBagMatchesNonBag(PropertyTemplateItem propertyTemplateItem, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		CollectionKind propertyCollectionKind = getPropertyCollectionKind(propertyTemplateItem);
+		if ((propertyCollectionKind != CollectionKind.SEQUENCE_LITERAL)
+		 && (propertyCollectionKind != CollectionKind.ORDERED_SET_LITERAL))
+			return true;
 		OCLExpression value = propertyTemplateItem.getValue();
 		if (!(value instanceof CollectionTemplateExp))
 			return true;
 		CollectionType valueCollectionType = ((CollectionTemplateExp)value).getReferredCollectionType();
-		if (!(valueCollectionType instanceof OrderedSetType) && !(valueCollectionType instanceof SequenceType))
+		if ((valueCollectionType instanceof OrderedSetType)
+		 || (valueCollectionType instanceof SequenceType)
+		 || (valueCollectionType instanceof SetType))
 			return true;
-		EClassifier propertyType = getReferredPropertyType(propertyTemplateItem);
-		if ((propertyType instanceof SequenceType) || (propertyType instanceof OrderedSetType) || (propertyType instanceof SetType))
-			return true;
-		Object[] messageSubstitutions = new Object[] { getObjectLabel(valueCollectionType, context), getObjectLabel(propertyType, context), getObjectLabel(propertyTemplateItem.getReferredProperty(), context) };
+		EClassifier referredPropertyType = getReferredPropertyType(propertyTemplateItem);
+		Object[] messageSubstitutions = new Object[] { getObjectLabel(valueCollectionType, context), getObjectLabel(referredPropertyType, context), getObjectLabel(propertyTemplateItem.getReferredProperty(), context) };
 		appendError(diagnostics, propertyTemplateItem, QVTTemplateMessages._UI_PropertyTemplateItem_NonBagDDoesNotMatchNonBag, messageSubstitutions);
 		return false;
 	}
@@ -143,18 +149,25 @@ public class PropertyTemplateItemOperations extends AbstractQVTTemplateOperation
 		return false;
 	} */
 
-	protected boolean getReferredPropertyIsOrdered(PropertyTemplateItem propertyTemplateItem) {
-		EStructuralFeature referredProperty = propertyTemplateItem.getReferredProperty();
-		if (referredProperty == null)
-			return false;
-		return propertyTemplateItem.isIsOpposite() ? false : referredProperty.isOrdered();
-	}
+//	protected boolean getReferredPropertyIsOrdered(PropertyTemplateItem propertyTemplateItem) {
+//		EStructuralFeature referredProperty = propertyTemplateItem.getReferredProperty();
+//		if (referredProperty == null)
+//			return false;
+//		return propertyTemplateItem.isIsOpposite() ? false : referredProperty.isOrdered();
+//	}
 
-	protected boolean getReferredPropertyIsUnique(PropertyTemplateItem propertyTemplateItem) {
-		EStructuralFeature referredProperty = propertyTemplateItem.getReferredProperty();
-		if (referredProperty == null)
-			return false;
-		return propertyTemplateItem.isIsOpposite() ? false : referredProperty.isUnique();
+//	protected boolean getReferredPropertyIsUnique(PropertyTemplateItem propertyTemplateItem) {
+//		EStructuralFeature referredProperty = propertyTemplateItem.getReferredProperty();
+//		if (referredProperty == null)
+//			return false;
+//		return propertyTemplateItem.isIsOpposite() ? false : referredProperty.isUnique();
+//	}
+
+	protected CollectionKind getPropertyCollectionKind(PropertyTemplateItem propertyTemplateItem) {
+		if (propertyTemplateItem.isIsOpposite())
+			return null;
+		else
+			return getPropertyKind(propertyTemplateItem.getReferredProperty());
 	}
 
 	protected EClassifier getReferredPropertyType(PropertyTemplateItem propertyTemplateItem) {
@@ -166,10 +179,10 @@ public class PropertyTemplateItemOperations extends AbstractQVTTemplateOperation
 		return getPropertyType(referredProperty);
 	}
 
-	protected boolean getReferredPropertyIsMany(PropertyTemplateItem propertyTemplateItem) {
-		EStructuralFeature referredProperty = propertyTemplateItem.getReferredProperty();
-		if (referredProperty == null)
-			return false;
-		return propertyTemplateItem.isIsOpposite() ? false : referredProperty.isMany();
-	}
+//	protected boolean getReferredPropertyIsMany(PropertyTemplateItem propertyTemplateItem) {
+//		EStructuralFeature referredProperty = propertyTemplateItem.getReferredProperty();
+//		if (referredProperty == null)
+//			return false;
+//		return propertyTemplateItem.isIsOpposite() ? false : referredProperty.isMany();
+//	}
 }

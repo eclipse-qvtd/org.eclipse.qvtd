@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CollectionTemplateExpOperations.java,v 1.2 2008/12/31 19:16:31 ewillink Exp $
+ * $Id: CollectionTemplateExpOperations.java,v 1.3 2009/01/14 21:01:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.operations;
 
@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.ecore.CollectionType;
 import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.Variable;
-import org.eclipse.ocl.ecore.VariableExp;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
 import org.eclipse.qvt.declarative.ecore.QVTBase.operations.DomainOperations;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.CollectionTemplateExp;
@@ -66,7 +65,7 @@ public class CollectionTemplateExpOperations extends TemplateExpOperations
 		CollectionType collectionType = collectionTemplateExp.getReferredCollectionType();
 		if (collectionType == null)
 			return true;		// Multiplicity error
-		EClassifier transitiveElementType = getElementType(collectionType);
+		EClassifier transitiveElementType = getTransitiveElementType(collectionType);
 		if (transitiveElementType == null)
 			return true;		// Multiplicity error
 		if (DomainOperations.INSTANCE.declaresType(domain, transitiveElementType))
@@ -88,13 +87,10 @@ public class CollectionTemplateExpOperations extends TemplateExpOperations
 			return true;		// Multiplicity error
 		boolean allOk = true;
 		for (OCLExpression member : collectionTemplateExp.getMember()) {
-			if (member instanceof VariableExp) {
-				Variable variable = (Variable) ((VariableExp)member).getReferredVariable();
-				if ((variable != null) && isSpecialVariable(variable))
-					continue;
-			}
+			if (isSpecialVariableReference(member))
+				continue;
 			EClassifier memberType = member.getType();
-			if ((memberType != null) && !assignableToFrom(elementType, memberType)) {
+			if ((memberType != null) && !assignableFrom(elementType, memberType)) {
 				Object[] messageSubstitutions = new Object[] { getObjectLabel(elementType, context), getObjectLabel(memberType, context) };
 				appendError(diagnostics, collectionTemplateExp, QVTTemplateMessages._UI_CollectionTemplateExp_MemberTypeDoesNotMatchElementType, messageSubstitutions);
 				allOk = false;
@@ -118,7 +114,7 @@ public class CollectionTemplateExpOperations extends TemplateExpOperations
 		CollectionType collectionType = collectionTemplateExp.getReferredCollectionType();
 		if (collectionType == null)
 			return true;		// Multiplicity error
-		if (assignableToFrom(collectionType, restType))
+		if (assignableFrom(collectionType, restType))
 			return true;
 		Object[] messageSubstitutions = new Object[] { getObjectLabel(collectionType, context), getObjectLabel(restType, context) };
 		appendError(diagnostics, collectionTemplateExp, QVTTemplateMessages._UI_CollectionTemplateExp_RestTypeDoesNotMatchCollectionType, messageSubstitutions);

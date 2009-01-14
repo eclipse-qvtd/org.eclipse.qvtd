@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TemplateExpOperations.java,v 1.1 2008/12/31 17:43:44 ewillink Exp $
+ * $Id: TemplateExpOperations.java,v 1.2 2009/01/14 21:01:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.operations;
 
@@ -83,7 +83,7 @@ public class TemplateExpOperations extends AbstractQVTTemplateOperations
 		Variable variable = templateExp.getBindsTo();
 		if (variable == null)
 			return true;						// Structural validation generates a more relevant error
-		EClassifier type = getElementType(variable.getEType());
+		EClassifier type = getTransitiveElementType(variable.getEType());
 		if (type == null)
 			return true;						// Structural validation generates a more relevant error
 		if (DomainOperations.INSTANCE.declaresType(domain, type))

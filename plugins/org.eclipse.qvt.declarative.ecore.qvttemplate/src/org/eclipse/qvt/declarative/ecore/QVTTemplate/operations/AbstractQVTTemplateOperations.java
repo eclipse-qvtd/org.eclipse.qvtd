@@ -12,11 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: AbstractQVTTemplateOperations.java,v 1.1 2008/12/31 17:43:44 ewillink Exp $
+ * $Id: AbstractQVTTemplateOperations.java,v 1.2 2009/01/14 21:01:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.operations;
 
+import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.Variable;
+import org.eclipse.ocl.ecore.VariableExp;
 import org.eclipse.qvt.declarative.ecore.QVTBase.operations.AbstractQVTBaseOperations;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.util.QVTTemplateConstants;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.util.QVTTemplateValidator;
@@ -33,6 +35,14 @@ public class AbstractQVTTemplateOperations extends AbstractQVTBaseOperations
 	}
 
 	public boolean isSpecialVariable(Variable variable) {
+		if (variable == null)
+			return false;
 		return QVTTemplateConstants.WILDCARD_VARIABLE_NAME.equals(variable.getName());
+	}
+
+	public boolean isSpecialVariableReference(OCLExpression expression) {
+		if (!(expression instanceof VariableExp))
+			return false;
+		return isSpecialVariable((Variable) ((VariableExp)expression).getReferredVariable());
 	}
 }
