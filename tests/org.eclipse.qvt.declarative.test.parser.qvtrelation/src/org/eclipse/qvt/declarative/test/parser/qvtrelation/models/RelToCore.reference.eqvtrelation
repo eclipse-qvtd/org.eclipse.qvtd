@@ -499,7 +499,7 @@
   <eClassifiers xsi:type="ocl.ecore:SequenceType" xmi:id="ast187" instanceClassName="java.util.List">
     <elementType xsi:type="ecore:EClass" href="QVT.ecore#QVTBase.Predicate"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ocl.ecore:SetType" xmi:id="ast188" instanceClassName="java.util.Set">
+  <eClassifiers xsi:type="ocl.ecore:OrderedSetType" xmi:id="ast188" instanceClassName="java.util.LinkedHashSet">
     <elementType xsi:type="ecore:EClass" href="QVT.ecore#QVTBase.Domain"/>
   </eClassifiers>
   <eClassifiers xsi:type="ocl.ecore:SetType" xmi:id="ast189" instanceClassName="java.util.Set">
@@ -535,7 +535,7 @@
   <eClassifiers xsi:type="ocl.ecore:TypeType" xmi:id="ast199" name="ObjectTemplateExp">
     <referredType xsi:type="ecore:EClass" href="QVT.ecore#QVTTemplate.ObjectTemplateExp"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ocl.ecore:SetType" xmi:id="ast200" instanceClassName="java.util.Set">
+  <eClassifiers xsi:type="ocl.ecore:OrderedSetType" xmi:id="ast200" instanceClassName="java.util.LinkedHashSet">
     <elementType xsi:type="ecore:EClass" href="QVT.ecore#QVTBase.TypedModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ocl.ecore:SetType" xmi:id="ast201" instanceClassName="java.util.Set">
