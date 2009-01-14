@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcParseTests.java,v 1.3 2008/12/31 18:21:18 ewillink Exp $
+ * $Id: QVTcParseTests.java,v 1.4 2009/01/14 21:27:52 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.parser.qvtcore;
 
@@ -89,9 +89,9 @@ public class QVTcParseTests extends AbstractQVTcTestCase
 		expectedProblems.expectValidatorError(QVTBaseValidator.INSTANCE,
 				QVTBaseMessages._UI_Rule_DomainNameIsNotUnique,
 				"rdbms", "badmaps.eqvtcore::umlRdbms::Map0b::rdbms", "badmaps.eqvtcore::umlRdbms::Map0b::rdbms");
-		expectedProblems.expectValidatorError(QVTBaseValidator.INSTANCE,
-				QVTBaseMessages._UI_Rule_TypedModelIsNotUnique,
-				"badmaps.eqvtcore::umlRdbms::rdbms", "badmaps.eqvtcore::umlRdbms::Map0b::rdbms", "badmaps.eqvtcore::umlRdbms::Map0b::rdbms");
+//		expectedProblems.expectValidatorError(QVTBaseValidator.INSTANCE,
+//				QVTBaseMessages._UI_Rule_TypedModelIsNotUnique,
+//				"badmaps.eqvtcore::umlRdbms::rdbms", "badmaps.eqvtcore::umlRdbms::Map0b::rdbms", "badmaps.eqvtcore::umlRdbms::Map0b::rdbms");
 		expectedProblems.handleProblem(ProblemHandler.Severity.WARNING, ProblemHandler.Phase.ANALYZER,
 				"Domain name 'middle' should be distinct from middle domain name 'middle'", "DomainCS", -1, -1);
 		expectedProblems.handleProblem(ProblemHandler.Severity.WARNING, ProblemHandler.Phase.ANALYZER,
