@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationValidationTest.java,v 1.1 2008/12/31 18:19:17 ewillink Exp $
+ * $Id: QVTRelationValidationTest.java,v 1.2 2009/01/14 21:27:49 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.emof.qvtrelation;
 
@@ -30,6 +30,7 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.Rule;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
 import org.eclipse.qvt.declarative.ecore.QVTBase.impl.DomainImpl;
 import org.eclipse.qvt.declarative.ecore.QVTBase.impl.RuleImpl;
+import org.eclipse.qvt.declarative.ecore.QVTBase.operations.QVTBaseMessages;
 import org.eclipse.qvt.declarative.ecore.QVTBase.util.QVTBaseValidator;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.DomainPattern;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Key;
@@ -327,6 +328,40 @@ public class QVTRelationValidationTest extends AbstractQVTRelationValidationTest
 
 	public void testRelation_RelationImplsAreUniqueWarning() {
 	}
+
+	public void testRelation_DomainTypedModelsMatchModelParameters() {
+		RelationalTransformation transformation = createRelationalTransformation(resource, "TestTransformation");
+		TypedModel typedModel1 = createTypedModel(transformation, "TestTypedModel1", EcorePackage.eINSTANCE);
+		TypedModel typedModel2 = createTypedModel(transformation, "TestTypedModel2", EcorePackage.eINSTANCE);
+		TypedModel typedModel3 = createTypedModel(transformation, "TestTypedModel3", EcorePackage.eINSTANCE);
+		Relation relation = createRelation(transformation, "TestRelation");
+		RelationDomain domain1 = createRelationDomain(relation, "TestDomain1", typedModel1, "RootVariable1", getStringType());
+		createDomainPattern(domain1);
+		RelationDomain domain2 = createRelationDomain(relation, "TestDomain2", typedModel2, "RootVariable2", getStringType());
+		createDomainPattern(domain2);
+		//
+		ProblemLog expectedProblems1 = new ProblemLog();
+		expectedProblems1.expectValidatorError(QVTRelationValidator.INSTANCE,
+				QVTRelationMessages._UI_Relation_DomainTypedModelsDoNotMatchModelParameters,
+				"2",
+				getQualifiedNameOf(relation),
+				"3");
+		validationTest(expectedProblems1);
+		//
+		RelationDomain domain3 = createRelationDomain(relation, "TestDomain3", typedModel1, "RootVariable3", getStringType());
+		createDomainPattern(domain3);
+		//
+		ProblemLog expectedProblems2 = new ProblemLog();
+		expectedProblems2.expectValidatorError(QVTRelationValidator.INSTANCE,
+				QVTRelationMessages._UI_Relation_DomainTypedModelIsNotModelParameter,
+				getQualifiedNameOf(domain3),
+				getQualifiedNameOf(typedModel3));
+		validationTest(expectedProblems2);
+		//
+		domain3.setTypedModel(typedModel3);
+		//
+		validationTest(new ProblemLog());
+	}
 	
 	public void testRelation_VariablesAreUnique() {
 		RelationalTransformation transformation = createRelationalTransformation(resource, "TestTransformation");
@@ -464,7 +499,8 @@ public class QVTRelationValidationTest extends AbstractQVTRelationValidationTest
 		ProblemLog expectedProblems = new ProblemLog();
 		expectedProblems.expectValidatorError(QVTRelationValidator.INSTANCE, 
 				QVTRelationMessages._UI_RelationCallExp_ReferredRelationIsNotDeclaredByTransformation,
-				getQualifiedNameOf(relationCallExp));
+				getQualifiedNameOf(anotherRelation),
+				getQualifiedNameOf(transformation));
 		validationTest(expectedProblems);
 	}
 
@@ -517,11 +553,11 @@ public class QVTRelationValidationTest extends AbstractQVTRelationValidationTest
 				getQualifiedNameOf(baseType),
 				getQualifiedNameOf(derivedType),
 				getQualifiedNameOf(domain1));
-		expectedProblems.expectValidatorError(QVTRelationValidator.INSTANCE, 
-				QVTRelationMessages._UI_RelationCallExp_WhenReferredRelationArgumentTypeDoesNotMatch,
-				getQualifiedNameOf(derivedType),
-				getQualifiedNameOf(baseType),
-				getQualifiedNameOf(domain2));
+//		expectedProblems.expectValidatorError(QVTRelationValidator.INSTANCE, 
+//				QVTRelationMessages._UI_RelationCallExp_WhenReferredRelationArgumentTypeDoesNotMatch,
+//				getQualifiedNameOf(derivedType),
+//				getQualifiedNameOf(baseType),
+//				getQualifiedNameOf(domain2));
 		validationTest(expectedProblems);
 	}
 
@@ -556,6 +592,36 @@ public class QVTRelationValidationTest extends AbstractQVTRelationValidationTest
 				getQualifiedNameOf(derivedType),
 				getQualifiedNameOf(domain3));
 		validationTest(expectedProblems);
+	}
+
+	public void testRelationCallExp_TypeIsBoolean() {
+		RelationalTransformation transformation = createRelationalTransformation(resource, "TestTransformation");
+		TypedModel typedModel1 = createTypedModel(transformation, "TestTypedModel1", EcorePackage.eINSTANCE);
+		TypedModel typedModel2 = createTypedModel(transformation, "TestTypedModel2", EcorePackage.eINSTANCE);
+		Relation relation = createRelation(transformation, "TestRelation");
+		RelationDomain domain1 = createRelationDomain(relation, "TestDomain1", typedModel1, "RootVariable1", getStringType());
+		createDomainPattern(domain1);
+		RelationDomain domain2 = createRelationDomain(relation, "TestDomain2", typedModel2, "RootVariable2", getStringType());
+		createDomainPattern(domain2);
+		RelationCallExp relationCallExp = createRelationCallExp(relation, createStringLiteralExp("a"), createStringLiteralExp("b"));
+		Pattern pattern = createPattern(null);
+		relation.setWhen(pattern);
+		Predicate predicate = createPredicate(pattern.getPredicate());
+		predicate.setConditionExpression(relationCallExp);
+		relationCallExp.setType(getStringType());		
+		//
+		ProblemLog expectedProblems = new ProblemLog();
+		expectedProblems.expectValidatorError(QVTRelationValidator.INSTANCE, 
+				QVTRelationMessages._UI_RelationCallExp_TypeIsNotBoolean,
+				getQualifiedNameOf(relationCallExp));
+		expectedProblems.expectValidatorError(QVTBaseValidator.INSTANCE, 
+				QVTBaseMessages._UI_Predicate_ConditionExpressionIsNotBoolean,
+				getQualifiedNameOf(predicate));
+		validationTest(expectedProblems);
+		//
+		relationCallExp.setType(getBooleanType());
+		//
+		validationTest(new ProblemLog());
 	}
 	
 	public void testRelationDomain_RootVariableIsDefinedByRelation() {
@@ -670,20 +736,16 @@ public class QVTRelationValidationTest extends AbstractQVTRelationValidationTest
 		validationTest(expectedProblems);
 	}
 
-	public void testRelationImplementation_RootNodeIsBoundToRootVariable() {
-		// TODO test the constraint
-	}
-
 	public void testRelationImplementation_InDirectionOfIsDefinedByTransformation() {
 		// TODO test the constraint
 		// _UI_RelationImplementation_DirectionIsNotDefinedByTransformation
 	}
 
-	public void testRelationImplementation_EveryArgumentTypeMatchesDomainRootVariableType() {
+	public void testRelationImplementation_EveryParameterTypeMatchesDomainRootVariableType() {
 		// TODO test the constraint
 	}
 	
-	public void testRelationalTransformation_KeysAreDistinctWarning() {
+	public void testRelationalTransformation_KeysAreDistinct() {
 		RelationalTransformation transformation = createRelationalTransformation(resource, "TestTransformation");
 		createTypedModel(transformation, "ecore", EcorePackage.eINSTANCE);
 		Key key1 = createKey(transformation, EcorePackage.Literals.ENAMED_ELEMENT, EcorePackage.Literals.ENAMED_ELEMENT__NAME);
@@ -691,15 +753,12 @@ public class QVTRelationValidationTest extends AbstractQVTRelationValidationTest
 		//
 		validationTest(new ProblemLog());
 		//
-		Key key3 = createKey(transformation, EcorePackage.Literals.ENAMED_ELEMENT, EcorePackage.Literals.ENAMED_ELEMENT__NAME);
+		createKey(transformation, EcorePackage.Literals.ENAMED_ELEMENT, EcorePackage.Literals.ENAMED_ELEMENT__NAME);
 		//
 		ProblemLog expectedProblems = new ProblemLog();
-		expectedProblems.expectValidatorWarning(QVTRelationValidator.INSTANCE, 
+		expectedProblems.expectValidatorError(QVTRelationValidator.INSTANCE, 
 				QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
 				getQualifiedNameOf(key1.getIdentifies()));
-		expectedProblems.expectValidatorWarning(QVTRelationValidator.INSTANCE, 
-				QVTRelationMessages._UI_RelationalTransformation_KeyIsNotUnique,
-				getQualifiedNameOf(key3.getIdentifies()));
 		validationTest(expectedProblems);
 	}
 

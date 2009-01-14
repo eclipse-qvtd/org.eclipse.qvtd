@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractQVTRelationValidationTest.java,v 1.1 2008/12/31 18:19:17 ewillink Exp $
+ * $Id: AbstractQVTRelationValidationTest.java,v 1.2 2009/01/14 21:27:49 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.emof.qvtrelation;
 
@@ -91,13 +91,14 @@ public abstract class AbstractQVTRelationValidationTest extends AbstractQVTTempl
 	protected RelationDomain createRelationDomain(Relation relation, String name, TypedModel typedModel, String rootVariableName, EClassifier rootVariableType) {
 		RelationDomain relationDomain = QVTr_Factory.createRelationDomain();
 		relationDomain.setName(name);
-		if (relation != null)
-			relation.getDomain().add(relationDomain);
 		if (typedModel != null)
 			relationDomain.setTypedModel(typedModel);
-		if ((rootVariableName != null) && (rootVariableType != null)) {
-			Variable variable = createVariable(relation.getVariable(), rootVariableName, rootVariableType);
-			relationDomain.setRootVariable(variable);
+		if (relation != null) {
+			relation.getDomain().add(relationDomain);
+			if ((rootVariableName != null) && (rootVariableType != null)) {
+				Variable variable = createVariable(relation.getVariable(), rootVariableName, rootVariableType);
+				relationDomain.setRootVariable(variable);
+			}
 		}
 		relationDomain.setIsCheckable(true);
 		relationDomain.setIsEnforceable(true);
