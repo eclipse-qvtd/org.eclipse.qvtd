@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTCoreValidator.java,v 1.3 2008/12/31 17:42:54 ewillink Exp $
+ * $Id: QVTCoreValidator.java,v 1.4 2009/01/14 21:37:13 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTCore.util;
 
@@ -386,7 +386,7 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_OverridesIsCompatible(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_OverridesDefinedByTransformation(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_DomainNamesAreUnique(mapping, diagnostics, context);
-		if (result || diagnostics != null) result &= qvtBaseValidator.validateRule_TypedModelsAreUnique(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= validateMapping_DomainTypedModelsMatchModelParameters(mapping, diagnostics, context);
 		return result;
 	}
 
@@ -423,6 +423,17 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 			}
 			return false;
 		}
+		return true;
+	}
+
+	/**
+	 * Validates the DomainTypedModelsMatchModelParameters constraint of '<em>Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMapping_DomainTypedModelsMatchModelParameters(Mapping mapping, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		// TODO override the constraint, if desired
 		return true;
 	}
 

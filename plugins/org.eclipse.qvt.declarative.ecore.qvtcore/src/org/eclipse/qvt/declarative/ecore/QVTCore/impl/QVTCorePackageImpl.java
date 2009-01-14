@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTCorePackageImpl.java,v 1.2 2008/09/28 11:18:16 ewillink Exp $
+ * $Id: QVTCorePackageImpl.java,v 1.3 2009/01/14 21:37:13 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTCore.impl;
 
@@ -736,7 +736,7 @@ public class QVTCorePackageImpl extends EPackageImpl implements QVTCorePackage {
 		  (mappingEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "WellFormedName"
+			 "constraints", "WellFormedName\r\nDomainTypedModelsMatchModelParameters"
 		   });		
 		addAnnotation
 		  (propertyAssignmentEClass, 
