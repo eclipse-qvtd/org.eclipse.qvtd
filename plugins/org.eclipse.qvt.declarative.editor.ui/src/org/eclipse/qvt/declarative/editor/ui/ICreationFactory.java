@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ICreationFactory.java,v 1.6 2008/10/21 20:06:31 ewillink Exp $
+ * $Id: ICreationFactory.java,v 1.7 2009/01/14 20:44:07 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui;
 
@@ -104,6 +104,8 @@ public interface ICreationFactory
 
 	public Language getLanguage();
 
+	public String getLanguageID();
+	@Deprecated // Use getLanguageID()
 	public String getLanguageName();
 	
 	/**

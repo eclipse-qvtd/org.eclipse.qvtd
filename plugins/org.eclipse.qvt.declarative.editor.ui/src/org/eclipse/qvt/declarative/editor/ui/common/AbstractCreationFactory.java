@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractCreationFactory.java,v 1.4 2008/08/26 19:12:30 ewillink Exp $
+ * $Id: AbstractCreationFactory.java,v 1.5 2009/01/14 20:44:07 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.common;
 
@@ -66,12 +66,17 @@ public abstract class AbstractCreationFactory implements ICreationFactory
 
 	public Language getLanguage() {
 		if (language == null)
-			language = LanguageRegistry.findLanguage(getLanguageName());
+			language = LanguageRegistry.findLanguage(getLanguageID());
 		return language;
 	}
 
+	public String getLanguageID() {
+		return getPlugin().getLanguageID();
+	}
+
+	@Deprecated
 	public String getLanguageName() {
-		return getPlugin().getLanguageName();
+		return getLanguageID();
 	}
 	
 	public String getWarningMarkerId() {
