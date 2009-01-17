@@ -704,7 +704,11 @@
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//OCLDocumentCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/OCLModelFile.gif"/>
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/OCLModelFile.gif"
+        format="{0}">
+      <elements xsi:type="ed:JavaLabelElement" class="org.eclipse.qvt.declarative.editor.ui.utils.EditorModelUtils"
+          method="getTokenFileName"/>
+    </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//VariableCS">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Variable.gif"
