@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.15 2008/12/18 07:16:08 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.16 2009/01/17 20:18:18 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -185,6 +185,20 @@ public abstract class CommonLabelProvider implements ILabelProvider
 		}
 		else {
 			Class<?> methodClass = Class.forName(className);
+			for (Class<?> nodeClass = node.getClass(); nodeClass != null; nodeClass = nodeClass.getSuperclass()) {
+				try {
+					Method method = methodClass.getMethod(methodName, nodeClass);
+					return String.valueOf(method.invoke(null, node));
+				} catch (NoSuchMethodException e1) {
+					for (Class<?> nodeInterface : nodeClass.getInterfaces()) {
+						try {
+							Method method = methodClass.getMethod(methodName, nodeInterface);
+							return String.valueOf(method.invoke(null, node));
+						} catch (NoSuchMethodException e2) {
+						}
+					}
+				}
+			}
 			Method method = methodClass.getMethod(methodName, node.getClass());
 			return String.valueOf(method.invoke(null, node));
 		}
