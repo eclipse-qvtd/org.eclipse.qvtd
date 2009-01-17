@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonTextEditor.java,v 1.7 2008/12/03 21:53:38 ewillink Exp $
+ * $Id: CommonTextEditor.java,v 1.8 2009/01/17 20:17:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -61,6 +61,7 @@ import org.eclipse.qvt.declarative.editor.ui.cst.ASTOutlinePage;
 import org.eclipse.qvt.declarative.editor.ui.cst.CSTOutline;
 import org.eclipse.qvt.declarative.editor.ui.cst.CSTOutlinePage;
 import org.eclipse.qvt.declarative.editor.ui.cst.ICSTOutlinePage;
+import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController.ParsedResult;
 import org.eclipse.qvt.declarative.editor.ui.paged.PagedEditingDomainFactory;
 import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
 import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
@@ -147,7 +148,10 @@ public class CommonTextEditor extends UniversalEditor implements ITextEditorWith
 	
 	protected Object getASTNode(ISelection selection) {
 		CommonParseController parseController = getParseController();
-		Resource ast = parseController.getCurrentAst().getAST();
+		ParsedResult currentAst = parseController.getCurrentAst();
+		if (currentAst == null)
+			return null;
+		Resource ast = currentAst.getAST();
 		Object node = getCSTNode((TextSelection) selection);
 		if (node instanceof CSTNode) {
 			for (Object cstNode = node; cstNode instanceof CSTNode; cstNode = ((EObject) cstNode).eContainer()) {
