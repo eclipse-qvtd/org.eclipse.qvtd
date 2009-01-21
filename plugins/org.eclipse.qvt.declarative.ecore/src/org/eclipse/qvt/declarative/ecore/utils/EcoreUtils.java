@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2008 E.D.Willink and others.
+ * Copyright (c) 2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EcoreUtils.java,v 1.5 2008/10/26 17:32:12 ewillink Exp $
+ * $Id: EcoreUtils.java,v 1.6 2009/01/21 13:57:51 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.utils;
 
@@ -24,10 +24,15 @@ import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
@@ -140,6 +145,36 @@ public class EcoreUtils
 	@SuppressWarnings("unchecked")
 	public static <T extends Adapter> T getAdapter(List<Adapter> eAdapters, Class<T> adapterClass) {
 		return (T) EcoreUtil.getAdapter(eAdapters, adapterClass);
+	}
+
+	/**
+	 * Return the specialised value of feature.getEType() resolving any type parameters
+	 * from the specialised type of the sourceObject of the feature.
+	 * 
+	 * @param sourceObject
+	 * @param feature
+	 * @return
+	 */
+	public static EClassifier getEType(EObject sourceObject, EStructuralFeature feature) {
+		EGenericType targetGenericType = feature.getEGenericType();
+		ETypeParameter targetTypeParameter = targetGenericType.getETypeParameter();
+		if ((targetTypeParameter != null) && (sourceObject != null)) {
+			EClass sourceGenericType = feature.getEContainingClass();
+			EObject typeParameterContainer = targetTypeParameter.eContainer();
+			EClass sourceClass = sourceObject.eClass();
+			EList<EGenericType> allSourceGenericSuperTypes = sourceClass.getEAllGenericSuperTypes();
+			for (EGenericType sourceGenericSuperType : allSourceGenericSuperTypes) {
+				if (sourceGenericSuperType.getERawType() == typeParameterContainer) {
+					EList<EGenericType> sourceTypeArguments = sourceGenericSuperType.getETypeArguments();
+					int i = sourceGenericType.getETypeParameters().indexOf(targetTypeParameter);
+					if ((0 <= i) && (i < sourceTypeArguments.size())) {
+						EGenericType sourceTypeArgument = sourceTypeArguments.get(i);
+						return sourceTypeArgument.getERawType();
+					}
+				}
+			}
+		}
+		return targetGenericType.getERawType();
 	}
 
 	public static <T> int getFeatureID(Notification notification, T expectedNotifier, Class<T> featureClass) {
