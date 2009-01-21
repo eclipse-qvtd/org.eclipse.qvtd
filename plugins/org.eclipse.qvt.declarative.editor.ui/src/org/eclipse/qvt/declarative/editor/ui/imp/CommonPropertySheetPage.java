@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonPropertySheetPage.java,v 1.2 2008/11/19 21:55:36 ewillink Exp $
+ * $Id: CommonPropertySheetPage.java,v 1.3 2009/01/21 10:19:35 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -71,6 +71,11 @@ public final class CommonPropertySheetPage extends ExtendedPropertySheetPage
 	@Override
 	public void setSelectionToViewer(List<?> selection) {
 //		textEditor.setSelectionToViewer(selection);
-		textEditor.setFocus();
+		textEditor.setFocus(); // FIXME Select Properties View corrupts editor selection
+		// Need to copy code from e.g. EcoreEditor to CommonTextEditor so that THE (multi-page) editor keeps
+		// track of the suggestion and passes it to each activate view in handleActivate(). THis probably
+		// requires a revisit of all setSelection code and introduction of a
+		// CommonSelectionProvider.
+		
 	}
 }
