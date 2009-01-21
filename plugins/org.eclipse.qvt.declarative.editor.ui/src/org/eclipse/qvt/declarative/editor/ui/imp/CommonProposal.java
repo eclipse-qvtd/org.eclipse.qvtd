@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2008 E.D.Willink and others.
+ * Copyright (c) 2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonProposal.java,v 1.2 2008/10/15 20:00:29 ewillink Exp $
+ * $Id: CommonProposal.java,v 1.3 2009/01/21 13:59:03 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -24,7 +24,7 @@ import org.eclipse.swt.graphics.Point;
 
 public class CommonProposal implements ICommonProposal
 {
-    /**
+	/**
      * The text shown to the user in the popup view
      */
     private final String proposal;
@@ -106,4 +106,9 @@ public class CommonProposal implements ICommonProposal
     public Point getSelection(IDocument document) {
         return new Point(cursorOffset, 0);
     }
+    
+    @Override
+	public String toString() {
+		return proposal;
+	}
 }
