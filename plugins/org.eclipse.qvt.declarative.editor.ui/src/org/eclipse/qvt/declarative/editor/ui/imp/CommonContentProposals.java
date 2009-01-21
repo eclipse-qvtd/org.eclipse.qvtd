@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.9 2008/12/05 22:18:28 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.10 2009/01/21 14:00:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.ocl.cst.PathNameCS;
 import org.eclipse.ocl.cst.SimpleNameCS;
 import org.eclipse.ocl.expressions.StringLiteralExp;
 import org.eclipse.ocl.lpg.AbstractParser;
@@ -73,20 +74,20 @@ public class CommonContentProposals
 	/**
 	 * Accumulate the candidate if it represents a suitable proposal.
 	 */
-	protected void addIdentifierProposalCandidate(List<EStructuralFeature> usages, EObject candidate) {
-		if (checkName(usages, candidate) && checkType(usages, candidate) && !map.containsKey(candidate)) {
+	protected void addIdentifierProposalCandidate(Map<EClassifier, List<EStructuralFeature>> usages, EObject proposal) {
+		if (checkName(usages, proposal) && checkType(usages, proposal) && !map.containsKey(proposal)) {
 			ILabelProvider labelProvider = commonParseController.getLabelProvider();
-			String newText = EcoreUtils.formatName(candidate);
-			String displayText = newText + " - " + EcoreUtils.formatQualifiedName(candidate.eContainer(), "::");
-			Image image = labelProvider.getImage(candidate);
+			String newText = getProposalReplacementText(proposal);
+			String displayText = getProposalDisplayText(labelProvider, proposal, newText);
+			Image image = getProposalDisplayImage(labelProvider, proposal);
 			String oldText = getTokenAtOffsetString();
-			map.put(candidate, new CommonProposal(displayText, tokenAtOffset.getStartOffset(), newText, oldText, offset, image));
+			map.put(proposal, new CommonProposal(displayText, tokenAtOffset.getStartOffset(), newText, oldText, offset, image));
 		}
 	}
 
 	protected void addIdentifierProposals(CSTNode cstNode) {
 		Object astNode = cstNode.getAst();
-		if ((astNode == null) && (cstNode instanceof IdentifierCS)) {
+		if ((astNode == null) && ((cstNode instanceof IdentifierCS) || (cstNode instanceof SimpleNameCS) || (cstNode instanceof PathNameCS))) {
 			astNode = ((CSTNode) cstNode.eContainer()).getAst();
 			if ((astNode != null) && proposalDebug.isActive())
 				proposalDebug.println("Missing astNode deduced for " + astNode.getClass().getSimpleName());
@@ -98,7 +99,7 @@ public class CommonContentProposals
 		if (proposalDebug.isActive())
 			proposalDebug.println("Proposal for '" + prefixAtOffset + "' " + cstNode.getClass().getSimpleName() + " " + astNode.getClass().getSimpleName());
 		if (astNode instanceof EObject) {
-			List<EStructuralFeature> usages = computeUsage((EObject) astNode);
+			Map<EClassifier, List<EStructuralFeature>> usages = computeUsage((EObject) astNode);
 			for (Resource resource : getResources(usages, (EObject) astNode))
 				for (TreeIterator<EObject> i = resource.getAllContents(); i.hasNext(); )
 					addIdentifierProposalCandidate(usages, i.next());
@@ -141,16 +142,34 @@ public class CommonContentProposals
 				String newText = "'" + string + "'";
 				String displayText = string;
 //				ILabelProvider labelProvider = commonParseController.getLabelProvider();
-				Image image = null; // FIXME labelProvider.getImage(string);
+				Image image = null; // FIXME labelProvider.geImage(string);
 				map.put(string, new CommonProposal(displayText, tokenAtOffset.getStartOffset(), newText, getTokenAtOffsetString(), offset, image));
 			}
 		}
 	}
 
 	/**
+	 * Add the usage of the target of feature from source to the map of all usages.
+	 * 
+	 * @param usages
+	 * @param source
+	 * @param feature
+	 */
+	protected void addUsage(Map<EClassifier, List<EStructuralFeature>> usages, EObject source, EStructuralFeature feature) {
+		EClassifier type = EcoreUtils.getEType(source, feature);	// Resolves type parameters
+		List<EStructuralFeature> usageList = usages.get(type);
+		if (usageList == null) {
+			usageList = new ArrayList<EStructuralFeature>();
+			usages.put(type, usageList);
+		}
+		if (!usageList.contains(feature))
+			usageList.add(feature);
+	}
+
+	/**
 	 * Return true if the name of eObject is suitable for the usages with prefixAtOffset.
 	 */
-	protected boolean checkName(List<EStructuralFeature> usages, EObject eObject) {
+	protected boolean checkName(Map<EClassifier, List<EStructuralFeature>> usages, EObject eObject) {
 		String name = getName(eObject);
 		if (name == null)
 			return false;
@@ -160,18 +179,18 @@ public class CommonContentProposals
 	/**
 	 * Return true if the type of eObject is suitable as the target of the usages.
 	 */
-	protected boolean checkType(List<EStructuralFeature> usages, EObject eObject) {
+	protected boolean checkType(Map<EClassifier, List<EStructuralFeature>> usages, EObject eObject) {
 		if (usages.isEmpty())
 			return false;
-		for (EStructuralFeature requiredUsage : usages) {
-			EClassifier requiredType = requiredUsage.getEType();
+		for (Map.Entry<EClassifier, List<EStructuralFeature>> requiredUsage : usages.entrySet()) {
+			EClassifier requiredType = requiredUsage.getKey();
 			Set<EClass> completableClasses = getCompletableTypes(requiredType);
 			if (completableClasses == null)
 				return false;
 			EClass eClass = eObject.eClass();
 			boolean completable = false;
 			for (EClass completableClass : completableClasses) {
-				if ((requiredType == completableClass) || completableClass.isSuperTypeOf(eClass)) {
+				if ((eClass == completableClass) || completableClass.isSuperTypeOf(eClass)) {
 					completable = true;
 					break;
 				}
@@ -253,27 +272,26 @@ public class CommonContentProposals
 	}
 
 	/**
-	 * Return the most EStructuralFeatures for which astNode is or could be the target.
+	 * Return the feature target types for which astNode is or could be the target.
+	 * The return value is a map of which the keys are probably all that is useful.
+	 * The list of features that require that key provides an opportunity to filter
+	 * the usages, noting that the features may well involve generic types, which
+	 * have been resolved for use as a key. 
 	 */
-	protected List<EStructuralFeature> computeUsage(EObject astNode) {
-		List<EStructuralFeature> usages = new ArrayList<EStructuralFeature>();
+	protected Map<EClassifier, List<EStructuralFeature>> computeUsage(EObject astNode) {
+		Map<EClassifier, List<EStructuralFeature>> usages = new HashMap<EClassifier, List<EStructuralFeature>>();
 		Object rootAst = cstRoot.getAst();
 		Resource resource = rootAst instanceof Resource ? (Resource)rootAst : null;
 		if (resource == null)
 			resource = astNode.eResource();
 		Collection<EStructuralFeature.Setting> settings = EcoreUtil.UsageCrossReferencer.find(astNode, resource);
-		for (EStructuralFeature.Setting setting : settings) {
-			EStructuralFeature structuralFeature = setting.getEStructuralFeature();
-			if (!usages.contains(structuralFeature))
-				usages.add(structuralFeature);
-		}
+		for (EStructuralFeature.Setting setting : settings)
+			addUsage(usages, setting.getEObject(), setting.getEStructuralFeature());
 		EStructuralFeature containingFeature = astNode.eContainingFeature();
 		if ((containingFeature == null) && (astNode instanceof EPackage))			// Provide a plausible containment feature
 			containingFeature = EcorePackage.Literals.EPACKAGE__ESUBPACKAGES;		//  for nodes at the root of the resource 
-		if (containingFeature != null) {
-			if (!usages.contains(containingFeature))
-				usages.add(containingFeature);
-		}
+		if (containingFeature != null)
+			addUsage(usages, astNode.eContainer(), containingFeature);
 		return usages;
 	}
 
@@ -301,10 +319,47 @@ public class CommonContentProposals
 	}
 
 	/**
+	 * Return the image to appear in the list of proposals for proposal.
+	 * 
+	 * @param labelProvider
+	 * @param proposal
+	 * @return
+	 */
+	protected Image getProposalDisplayImage(ILabelProvider labelProvider, EObject proposal) {
+		return labelProvider.getImage(proposal);
+	}
+
+	/**
+	 * Return the text to appear in the list of proposals for proposal for which newText is the replacement.
+	 * 
+	 * @param labelProvider
+	 * @param proposal
+	 * @param newText
+	 * @return
+	 */
+	protected String getProposalDisplayText(ILabelProvider labelProvider, EObject proposal, String newText) {
+		EObject container = proposal.eContainer();
+		String containerText = EcoreUtils.formatQualifiedName(container, "::");
+//		String containerText = labelProvider.getText(container);
+		return newText + " - " + containerText;
+	}
+
+	/**
+	 * Return the replacement text for proposal.
+	 * 
+	 * @param labelProvider
+	 * @param proposal
+	 * @return
+	 */
+	protected String getProposalReplacementText(EObject proposal) {
+		return EcoreUtils.formatName(proposal);
+	}
+
+	/**
 	 * Return the resources that may provide definitions to use in place of astNode
 	 * as the target of requiredUsage.
 	 */
-	protected Collection<Resource> getResources(List<EStructuralFeature> usages, EObject astNode) {
+	protected Collection<Resource> getResources(Map<EClassifier, List<EStructuralFeature>> usages, EObject astNode) {
 		return parsedResult.getFileEnvironment().getResourcesVisibleAt(astNode);
 	}
 	
