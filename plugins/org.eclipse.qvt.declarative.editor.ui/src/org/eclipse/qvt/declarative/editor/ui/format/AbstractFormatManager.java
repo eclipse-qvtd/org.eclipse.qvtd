@@ -97,16 +97,16 @@ public abstract class AbstractFormatManager implements IFormatManager
 			s.append("<null-Object>");
 			return;
 		}
-		IFormatHelper<?> methodCall = map.get(object.getClass());
-		if (methodCall == null) {
-			methodCall = getFormatHelper(object.getClass());
-			if (methodCall != null)
-				map.put(object.getClass(), methodCall);
+		IFormatHelper<?> formatHelper = map.get(object.getClass());
+		if (formatHelper == null) {
+			formatHelper = getFormatHelper(object.getClass());
+			if (formatHelper != null)
+				map.put(object.getClass(), formatHelper);
 		}
-		if (methodCall != null) {
+		if (formatHelper != null) {
 			@SuppressWarnings("unchecked")
-			IFormatHelper<T> castMethodCall = (IFormatHelper<T>) methodCall;
-			castMethodCall.format(s, object);
+			IFormatHelper<T> castFormatHelper = (IFormatHelper<T>) formatHelper;
+			castFormatHelper.format(s, object);
 			return;
 		}
 		else
