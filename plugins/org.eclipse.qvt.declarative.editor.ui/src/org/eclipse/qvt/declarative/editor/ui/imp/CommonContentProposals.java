@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.10 2009/01/21 14:00:44 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.11 2009/01/22 09:37:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -73,9 +73,10 @@ public class CommonContentProposals
 
 	/**
 	 * Accumulate the candidate if it represents a suitable proposal.
+	 * @param cstNode 
 	 */
-	protected void addIdentifierProposalCandidate(Map<EClassifier, List<EStructuralFeature>> usages, EObject proposal) {
-		if (checkName(usages, proposal) && checkType(usages, proposal) && !map.containsKey(proposal)) {
+	protected void addIdentifierProposalCandidate(Map<EClassifier, List<EStructuralFeature>> usages, EObject proposal, CSTNode cstNode) {
+		if (checkName(usages, proposal, cstNode) && checkType(usages, proposal, cstNode) && !map.containsKey(proposal)) {
 			ILabelProvider labelProvider = commonParseController.getLabelProvider();
 			String newText = getProposalReplacementText(proposal);
 			String displayText = getProposalDisplayText(labelProvider, proposal, newText);
@@ -102,7 +103,7 @@ public class CommonContentProposals
 			Map<EClassifier, List<EStructuralFeature>> usages = computeUsage((EObject) astNode);
 			for (Resource resource : getResources(usages, (EObject) astNode))
 				for (TreeIterator<EObject> i = resource.getAllContents(); i.hasNext(); )
-					addIdentifierProposalCandidate(usages, i.next());
+					addIdentifierProposalCandidate(usages, i.next(), cstNode);
 		}
 	}
 
@@ -169,7 +170,7 @@ public class CommonContentProposals
 	/**
 	 * Return true if the name of eObject is suitable for the usages with prefixAtOffset.
 	 */
-	protected boolean checkName(Map<EClassifier, List<EStructuralFeature>> usages, EObject eObject) {
+	protected boolean checkName(Map<EClassifier, List<EStructuralFeature>> usages, EObject eObject, CSTNode cstNode) {
 		String name = getName(eObject);
 		if (name == null)
 			return false;
@@ -179,12 +180,12 @@ public class CommonContentProposals
 	/**
 	 * Return true if the type of eObject is suitable as the target of the usages.
 	 */
-	protected boolean checkType(Map<EClassifier, List<EStructuralFeature>> usages, EObject eObject) {
+	protected boolean checkType(Map<EClassifier, List<EStructuralFeature>> usages, EObject eObject, CSTNode cstNode) {
 		if (usages.isEmpty())
 			return false;
 		for (Map.Entry<EClassifier, List<EStructuralFeature>> requiredUsage : usages.entrySet()) {
 			EClassifier requiredType = requiredUsage.getKey();
-			Set<EClass> completableClasses = getCompletableTypes(requiredType);
+			Set<EClass> completableClasses = getCompletableTypes(requiredType, cstNode);
 			if (completableClasses == null)
 				return false;
 			EClass eClass = eObject.eClass();
@@ -295,7 +296,7 @@ public class CommonContentProposals
 		return usages;
 	}
 
-	public Set<EClass> getCompletableTypes(EClassifier requiredType) {
+	public Set<EClass> getCompletableTypes(EClassifier requiredType, CSTNode cstNode) {
 		Set<EClass> completableClasses = new HashSet<EClass>();
 		if (requiredType instanceof EClass)
 			completableClasses.add((EClass)requiredType);
