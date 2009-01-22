@@ -34,8 +34,11 @@ public class QVTcDomainEnvironment extends QVTcAreaEnvironment<CoreDomain>
 	@Override
 	protected Set<QVTcAreaEnvironment<?>> computeAreaEnvironmentPartialClosure() {
 		Set<QVTcAreaEnvironment<?>> areaEnvironmentClosure = new HashSet<QVTcAreaEnvironment<?>>();
-		for (QVTcMappingEnvironment<?> mappingEnvironment : getParentEnvironment().getMappingEnvironmentClosure())
-			areaEnvironmentClosure.add(mappingEnvironment.getDomainEnvironment(modelName));
+		for (QVTcMappingEnvironment<?> mappingEnvironment : getParentEnvironment().getMappingEnvironmentClosure()) {
+			QVTcDomainEnvironment domainEnvironment = mappingEnvironment.getDomainEnvironment(modelName);
+			if (domainEnvironment != null)
+				areaEnvironmentClosure.add(domainEnvironment);
+		}
 		areaEnvironmentClosure.add(this);	// Reduce error messages in case a duplicate domain hides this one
 		return areaEnvironmentClosure;
 	}
