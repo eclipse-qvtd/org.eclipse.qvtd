@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLContentProposals.java,v 1.2 2009/01/21 14:01:19 ewillink Exp $
+ * $Id: OCLContentProposals.java,v 1.3 2009/01/22 09:37:50 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui.imp;
 
@@ -26,10 +26,13 @@ import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ocl.Environment;
+import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.ocl.cst.SimpleNameCS;
+import org.eclipse.ocl.ecore.InvalidLiteralExp;
+import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonContentProposals;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
-import org.eclipse.qvt.declarative.emof.EssentialOCL.OclExpression;
 
 public class OCLContentProposals extends CommonContentProposals
 {
@@ -38,11 +41,16 @@ public class OCLContentProposals extends CommonContentProposals
 	}
 
 	@Override
-	public Set<EClass> getCompletableTypes(EClassifier requiredType) {
-		Set<EClass> completableClasses = super.getCompletableTypes(requiredType);
-		if (requiredType instanceof OclExpression) {
-			completableClasses.add(org.eclipse.ocl.ecore.EcorePackage.Literals.VARIABLE);
-//			completableClasses.add(org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING);
+	public Set<EClass> getCompletableTypes(EClassifier requiredType, CSTNode cstNode) {
+		Set<EClass> completableClasses = super.getCompletableTypes(requiredType, cstNode);
+		if (requiredType instanceof EClass) {
+			EClass requiredClass = (EClass) requiredType;
+			if (ExpressionsPackage.Literals.OCL_EXPRESSION.isSuperTypeOf(requiredClass)) {
+				completableClasses.add(org.eclipse.ocl.ecore.EcorePackage.Literals.VARIABLE);
+				Object astNode = cstNode.getAst();
+				if ((astNode instanceof InvalidLiteralExp) && (cstNode instanceof SimpleNameCS))
+					completableClasses.add(org.eclipse.emf.ecore.EcorePackage.Literals.ENAMED_ELEMENT);
+			}
 		}
 		return completableClasses;
 	}
