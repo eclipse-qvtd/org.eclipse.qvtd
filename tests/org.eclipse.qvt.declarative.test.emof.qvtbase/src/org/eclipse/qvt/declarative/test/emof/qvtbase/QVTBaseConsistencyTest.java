@@ -62,7 +62,7 @@ public class QVTBaseConsistencyTest extends AbstractEssentialOCLConsistencyTest
 		changeOfName(differences, helper, QVTBasePackage.eINSTANCE);
 	}
 
-	public static void expectedEmo2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
+	public static void expectedEmof2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
 		missingURI(differences, helper, org.eclipse.qvt.declarative.emof.QVTBase.QVTBasePackage.eINSTANCE);
 		missingPrefix(differences, helper, org.eclipse.qvt.declarative.emof.QVTBase.QVTBasePackage.eINSTANCE);
 		changeOfName(differences, helper, org.eclipse.qvt.declarative.emof.QVTBase.QVTBasePackage.eINSTANCE);
@@ -132,8 +132,8 @@ public class QVTBaseConsistencyTest extends AbstractEssentialOCLConsistencyTest
 		missingOpposite(differences, helper, QVTBasePackage.Literals.TYPED_MODEL__DEPENDS_ON);
 		helper.setLogStream(null);
 		missingPrefix(differences, helper, QVTBasePackage.eINSTANCE);
-		EssentialOCLConsistencyTest.expectedEmo2OmgEmofDifferences(differences, helper);
-		EMOFConsistencyTest.expectedEmo2OmgEmofDifferences(differences, helper);
+		EssentialOCLConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
+		EMOFConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
 		return differences;
 	}
 
