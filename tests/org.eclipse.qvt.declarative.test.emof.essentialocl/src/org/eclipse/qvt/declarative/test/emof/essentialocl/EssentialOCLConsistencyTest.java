@@ -50,7 +50,7 @@ public class EssentialOCLConsistencyTest extends AbstractEssentialOCLConsistency
 		changeOfSize(differences, helper, EssentialOCLPackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
 	}
 
-	public static void expectedEmo2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
+	public static void expectedEmof2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
 		missingURI(differences, helper, EssentialOCLPackage.eINSTANCE);
 		missingPrefix(differences, helper, EssentialOCLPackage.eINSTANCE);
 		changeOfName(differences, helper, EssentialOCLPackage.eINSTANCE);
@@ -206,7 +206,7 @@ public class EssentialOCLConsistencyTest extends AbstractEssentialOCLConsistency
 		changeOfName(differences, helper, EssentialOCLPackage.Literals.FEATURE_CALL_EXP);
 
 		missingPrefix(differences, helper, EssentialOCLPackage.eINSTANCE);
-		EMOFConsistencyTest.expectedEmo2OmgEmofDifferences(differences, helper);
+		EMOFConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
 		return differences;
 	}
 	
