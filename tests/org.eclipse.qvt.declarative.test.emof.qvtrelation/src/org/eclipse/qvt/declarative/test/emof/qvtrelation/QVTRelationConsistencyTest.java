@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationConsistencyTest.java,v 1.5 2008/12/31 18:18:50 ewillink Exp $
+ * $Id: QVTRelationConsistencyTest.java,v 1.6 2009/01/26 21:48:01 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.emof.qvtrelation;
 
@@ -78,7 +78,7 @@ public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyT
 		changeOfSize(differences, helper, QVTRelationPackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
 	}
 
-	public static void expectedEmo2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
+	public static void expectedEmof2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
 		missingURI(differences, helper, QVTRelationPackage.eINSTANCE);
 		missingPrefix(differences, helper, QVTRelationPackage.eINSTANCE);
 		changeOfName(differences, helper, QVTRelationPackage.eINSTANCE);
@@ -171,10 +171,10 @@ public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyT
 			
 		helper.setLogStream(null);
 		missingPrefix(differences, helper, QVTRelationPackage.eINSTANCE);
-		QVTTemplateConsistencyTest.expectedEmo2OmgEmofDifferences(differences, helper);
-		QVTBaseConsistencyTest.expectedEmo2OmgEmofDifferences(differences, helper);
-		EssentialOCLConsistencyTest.expectedEmo2OmgEmofDifferences(differences, helper);
-		EMOFConsistencyTest.expectedEmo2OmgEmofDifferences(differences, helper);
+		QVTTemplateConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
+		QVTBaseConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
+		EssentialOCLConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
+		EMOFConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
 		return differences;
 	}
 
