@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplateConsistencyTest.java,v 1.3 2008/12/31 18:18:48 ewillink Exp $
+ * $Id: QVTTemplateConsistencyTest.java,v 1.4 2009/01/26 21:48:07 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.emof.qvttemplate;
 
@@ -56,7 +56,7 @@ public class QVTTemplateConsistencyTest extends AbstractEssentialOCLConsistencyT
 		changeOfName(differences, helper, QVTTemplatePackage.eINSTANCE);
 	}
 
-	public static void expectedEmo2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
+	public static void expectedEmof2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
 		missingURI(differences, helper, QVTTemplatePackage.eINSTANCE);
 		missingPrefix(differences, helper, QVTTemplatePackage.eINSTANCE);
 		changeOfName(differences, helper, QVTTemplatePackage.eINSTANCE);
@@ -128,8 +128,8 @@ public class QVTTemplateConsistencyTest extends AbstractEssentialOCLConsistencyT
 
 		helper.setLogStream(null);
 		missingPrefix(differences, helper, QVTTemplatePackage.eINSTANCE);
-		EssentialOCLConsistencyTest.expectedEmo2OmgEmofDifferences(differences, helper);
-		EMOFConsistencyTest.expectedEmo2OmgEmofDifferences(differences, helper);
+		EssentialOCLConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
+		EMOFConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
 		return differences;
 	}
 
