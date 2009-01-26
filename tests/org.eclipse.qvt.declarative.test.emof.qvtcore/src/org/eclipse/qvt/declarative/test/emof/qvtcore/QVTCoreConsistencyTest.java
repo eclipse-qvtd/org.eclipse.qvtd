@@ -160,9 +160,9 @@ public class QVTCoreConsistencyTest extends AbstractEssentialOCLConsistencyTest
 		helper.setLogStream(null);
 		missingOppositeAnnotation(differences, helper, QVTCorePackage.Literals.PROPERTY_ASSIGNMENT__SLOT_EXPRESSION);
 		missingPrefix(differences, helper, QVTCorePackage.eINSTANCE);
-		QVTBaseConsistencyTest.expectedEmo2OmgEmofDifferences(differences, helper);
-		EssentialOCLConsistencyTest.expectedEmo2OmgEmofDifferences(differences, helper);
-		EMOFConsistencyTest.expectedEmo2OmgEmofDifferences(differences, helper);
+		QVTBaseConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
+		EssentialOCLConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
+		EMOFConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
 		return differences;
 	}
 
