@@ -72,8 +72,7 @@ public class EMOFConsistencyTest extends AbstractEMOFConsistencyTest
 		changeOfChangeable(differences, helper, EcorePackage.Literals.EPARAMETER__EOPERATION);
 	}
 
-	// FIXME correct typo in the following name - ripples to all tests!
-	public static void expectedEmo2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
+	public static void expectedEmof2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
 		missingURI(differences, helper, EMOFPackage.eINSTANCE);
 		missingPrefix(differences, helper, EMOFPackage.eINSTANCE);
 		changeOfName(differences, helper, EMOFPackage.eINSTANCE);
