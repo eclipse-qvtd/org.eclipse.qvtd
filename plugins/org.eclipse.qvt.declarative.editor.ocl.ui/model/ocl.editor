@@ -431,15 +431,22 @@
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefCS">
     <behavior xsi:type="ed:FoldingBehavior"/>
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/DefinitionConstraint.gif"
-        format="{0}{1}({2}) : {3}">
+        format="{0}{1}{2}{3}{4}{5}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//InvOrDefCS/simpleNameCS"
           hideIfBlank="true" suffix=": "/>
       <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefCS/defExpressionCS http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefExpressionCS/operationCS"
           end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//OperationCS/simpleNameCS"/>
       <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefCS/defExpressionCS http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefExpressionCS/operationCS http://www.eclipse.org/ocl/1.1.0/OCL/CST#//OperationCS/parameters"
-          end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//VariableCS/typeCS"/>
+          end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//VariableCS/typeCS"
+          hideIfBlank="true" prefix="(" separator=" ," suffix=")"/>
       <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefCS/defExpressionCS http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefExpressionCS/operationCS"
-          end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//OperationCS/typeCS"/>
+          end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//OperationCS/typeCS"
+          hideIfBlank="true" prefix=" : "/>
+      <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefCS/defExpressionCS http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefExpressionCS/variableCS"
+          end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//VariableCS/name"/>
+      <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefCS/defExpressionCS http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefExpressionCS/variableCS"
+          end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//VariableCS/typeCS"
+          hideIfBlank="true" prefix=" : "/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
       <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefCS/defExpressionCS"/>
