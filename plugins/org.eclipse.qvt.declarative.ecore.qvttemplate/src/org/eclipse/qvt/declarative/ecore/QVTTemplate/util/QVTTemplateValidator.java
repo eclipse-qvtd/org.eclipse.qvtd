@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplateValidator.java,v 1.4 2008/12/31 19:16:31 ewillink Exp $
+ * $Id: QVTTemplateValidator.java,v 1.5 2009/01/27 21:17:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.util;
 
@@ -286,8 +286,10 @@ public class QVTTemplateValidator extends EObjectValidator implements EValidator
 		if (result || diagnostics != null) result &= validateTemplateExp_WhereIsBoolean(collectionTemplateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCollectionTemplateExp_ReferredCollectionElementTypeIsDeclaredByDomain(collectionTemplateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCollectionTemplateExp_EveryMemberTypeMatchesElementType(collectionTemplateExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateCollectionTemplateExp_EveryMemberExpressionVariableIsBoundByPattern(collectionTemplateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCollectionTemplateExp_RestTypeMatchesCollectionType(collectionTemplateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCollectionTemplateExp_RestVariableIsBoundByPattern(collectionTemplateExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateCollectionTemplateExp_MemberCountSatifiesLowerBound(collectionTemplateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCollectionTemplateExp_EveryEnforceableItemIsEnforced(collectionTemplateExp, diagnostics, context);
 		return result;
 	}
@@ -309,6 +311,14 @@ public class QVTTemplateValidator extends EObjectValidator implements EValidator
 	}
 
 	/**
+	 * Validates the EveryMemberExpressionVariableIsBoundByPattern constraint of '<em>Collection Template Exp</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateCollectionTemplateExp_EveryMemberExpressionVariableIsBoundByPattern(CollectionTemplateExp collectionTemplateExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return CollectionTemplateExpOperations.INSTANCE.checkEveryMemberExpressionVariableIsBoundByPattern(collectionTemplateExp, diagnostics, context);
+	}
+
+	/**
 	 * Validates the RestTypeMatchesCollectionType constraint of '<em>Collection Template Exp</em>'.
 	 * @generated NOT
 	 */
@@ -317,11 +327,19 @@ public class QVTTemplateValidator extends EObjectValidator implements EValidator
 	}
 
 	/**
+	 * Validates the MemberCountSatifiesLowerBound constraint of '<em>Collection Template Exp</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateCollectionTemplateExp_MemberCountSatifiesLowerBound(CollectionTemplateExp collectionTemplateExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return CollectionTemplateExpOperations.INSTANCE.checkMemberCountSatifiesLowerBound(collectionTemplateExp, diagnostics, context);
+	}
+
+	/**
 	 * Validates the RestVariableIsBoundByPattern constraint of '<em>Collection Template Exp</em>'.
 	 * @generated NOT
 	 */
 	public boolean validateCollectionTemplateExp_RestVariableIsBoundByPattern(CollectionTemplateExp collectionTemplateExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return true; // TODO probably redundant CollectionTemplateExpOperations.INSTANCE.checkRestVariableIsBoundByPattern(collectionTemplateExp, diagnostics, context);
+		return CollectionTemplateExpOperations.INSTANCE.checkRestVariableIsBoundByPattern(collectionTemplateExp, diagnostics, context);
 	}
 
 	/**
@@ -347,9 +365,11 @@ public class QVTTemplateValidator extends EObjectValidator implements EValidator
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(propertyTemplateItem, diagnostics, context);
 		if (result || diagnostics != null) result &= validatePropertyTemplateItem_ReferredPropertyIsDefinedByReferredClass(propertyTemplateItem, diagnostics, context);
 		if (result || diagnostics != null) result &= validatePropertyTemplateItem_ValueElementTypeMatchesReferredPropertyElementType(propertyTemplateItem, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePropertyTemplateItem_EveryExpressionVariableIsBoundByPattern(propertyTemplateItem, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePropertyTemplateItem_ObjectTypeMatchesPropertyType(propertyTemplateItem, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePropertyTemplateItem_CollectionElementTypeMatchesPropertyType(propertyTemplateItem, diagnostics, context);
 		if (result || diagnostics != null) result &= validatePropertyTemplateItem_SetMatchesSet(propertyTemplateItem, diagnostics, context);
 		if (result || diagnostics != null) result &= validatePropertyTemplateItem_NonBagMatchesNonBag(propertyTemplateItem, diagnostics, context);
-		if (result || diagnostics != null) result &= validatePropertyTemplateItem_SimpleVariableIsBoundByPattern(propertyTemplateItem, diagnostics, context);
 		return result;
 	}
 
@@ -367,6 +387,30 @@ public class QVTTemplateValidator extends EObjectValidator implements EValidator
 	 */
 	public boolean validatePropertyTemplateItem_ValueElementTypeMatchesReferredPropertyElementType(PropertyTemplateItem propertyTemplateItem, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return PropertyTemplateItemOperations.INSTANCE.checkValueElementTypeMatchesReferredPropertyElementType(propertyTemplateItem, diagnostics, context);
+	}
+
+	/**
+	 * Validates the EveryExpressionVariableIsBoundByPattern constraint of '<em>Property Template Item</em>'.
+	 * @generated NOT
+	 */
+	public boolean validatePropertyTemplateItem_EveryExpressionVariableIsBoundByPattern(PropertyTemplateItem propertyTemplateItem, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return PropertyTemplateItemOperations.INSTANCE.checkEveryExpressionVariableIsBoundByPattern(propertyTemplateItem, diagnostics, context);
+	}
+
+	/**
+	 * Validates the ObjectTypeMatchesPropertyType constraint of '<em>Property Template Item</em>'.
+	 * @generated NOT
+	 */
+	public boolean validatePropertyTemplateItem_ObjectTypeMatchesPropertyType(PropertyTemplateItem propertyTemplateItem, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return PropertyTemplateItemOperations.INSTANCE.checkObjectTypeMatchesPropertyType(propertyTemplateItem, diagnostics, context);
+	}
+
+	/**
+	 * Validates the CollectionElementTypeMatchesPropertyType constraint of '<em>Property Template Item</em>'.
+	 * @generated NOT
+	 */
+	public boolean validatePropertyTemplateItem_CollectionElementTypeMatchesPropertyType(PropertyTemplateItem propertyTemplateItem, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return PropertyTemplateItemOperations.INSTANCE.checkCollectionElementTypeMatchesPropertyType(propertyTemplateItem, diagnostics, context);
 	}
 
 	/**

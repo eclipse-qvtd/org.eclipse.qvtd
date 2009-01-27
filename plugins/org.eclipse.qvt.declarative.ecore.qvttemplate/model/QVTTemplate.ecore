@@ -26,7 +26,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionTemplateExp" eSuperTypes="#//TemplateExp">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="ReferredCollectionElementTypeIsDeclaredByDomain&#xD;&#xA;EveryMemberTypeMatchesElementType&#xD;&#xA;RestTypeMatchesCollectionType&#xD;&#xA;RestVariableIsBoundByPattern&#xD;&#xA;EveryEnforceableItemIsEnforced&#xD;&#xA;"/>
+      <details key="constraints" value="ReferredCollectionElementTypeIsDeclaredByDomain&#xD;&#xA;EveryMemberTypeMatchesElementType&#xD;&#xA;EveryMemberExpressionVariableIsBoundByPattern&#xD;&#xA;RestTypeMatchesCollectionType&#xD;&#xA;RestVariableIsBoundByPattern&#xD;&#xA;MemberCountSatifiesLowerBound&#xD;&#xA;EveryEnforceableItemIsEnforced&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="member" ordered="false"
         upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.ecore/model/OCLEcore.ecore#//ecore/OCLExpression"
@@ -45,7 +45,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyTemplateItem" eSuperTypes="../../org.eclipse.emf.ecore/model/Ecore.ecore#//EModelElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="ReferredPropertyIsDefinedByReferredClass&#xD;&#xA;ValueElementTypeMatchesReferredPropertyElementType&#xD;&#xA;SetMatchesSet&#xD;&#xA;NonBagMatchesNonBag&#xD;&#xA;SimpleVariableIsBoundByPattern"/>
+      <details key="constraints" value="ReferredPropertyIsDefinedByReferredClass&#xD;&#xA;ValueElementTypeMatchesReferredPropertyElementType&#xD;&#xA;EveryExpressionVariableIsBoundByPattern&#xD;&#xA;ObjectTypeMatchesPropertyType&#xD;&#xA;CollectionElementTypeMatchesPropertyType&#xD;&#xA;SetMatchesSet&#xD;&#xA;NonBagMatchesNonBag"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="objContainer" lowerBound="1"
         eType="#//ObjectTemplateExp" transient="true" eOpposite="#//ObjectTemplateExp/part"/>

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplatePackageImpl.java,v 1.3 2008/12/31 17:43:44 ewillink Exp $
+ * $Id: QVTTemplatePackageImpl.java,v 1.4 2009/01/27 21:17:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.impl;
 
@@ -460,13 +460,13 @@ public class QVTTemplatePackageImpl extends EPackageImpl implements QVTTemplateP
 		  (collectionTemplateExpEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "ReferredCollectionElementTypeIsDeclaredByDomain\r\nEveryMemberTypeMatchesElementType\r\nRestTypeMatchesCollectionType\r\nRestVariableIsBoundByPattern\r\nEveryEnforceableItemIsEnforced\r\n"
+			 "constraints", "ReferredCollectionElementTypeIsDeclaredByDomain\r\nEveryMemberTypeMatchesElementType\r\nEveryMemberExpressionVariableIsBoundByPattern\r\nRestTypeMatchesCollectionType\r\nRestVariableIsBoundByPattern\r\nMemberCountSatifiesLowerBound\r\nEveryEnforceableItemIsEnforced\r\n"
 		   });				
 		addAnnotation
 		  (propertyTemplateItemEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "ReferredPropertyIsDefinedByReferredClass\r\nValueElementTypeMatchesReferredPropertyElementType\r\nSetMatchesSet\r\nNonBagMatchesNonBag\r\nSimpleVariableIsBoundByPattern"
+			 "constraints", "ReferredPropertyIsDefinedByReferredClass\r\nValueElementTypeMatchesReferredPropertyElementType\r\nEveryExpressionVariableIsBoundByPattern\r\nObjectTypeMatchesPropertyType\r\nCollectionElementTypeMatchesPropertyType\r\nSetMatchesSet\r\nNonBagMatchesNonBag"
 		   });		
 	}
 

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CollectionTemplateExp.java,v 1.2 2008/12/31 17:43:44 ewillink Exp $
+ * $Id: CollectionTemplateExp.java,v 1.3 2009/01/27 21:17:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate;
 
@@ -37,7 +37,7 @@ import org.eclipse.ocl.ecore.Variable;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.ecore.QVTTemplate.QVTTemplatePackage#getCollectionTemplateExp()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ReferredCollectionElementTypeIsDeclaredByDomain\r\nEveryMemberTypeMatchesElementType\r\nRestTypeMatchesCollectionType\r\nRestVariableIsBoundByPattern\r\nEveryEnforceableItemIsEnforced\r\n'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ReferredCollectionElementTypeIsDeclaredByDomain\r\nEveryMemberTypeMatchesElementType\r\nEveryMemberExpressionVariableIsBoundByPattern\r\nRestTypeMatchesCollectionType\r\nRestVariableIsBoundByPattern\r\nMemberCountSatifiesLowerBound\r\nEveryEnforceableItemIsEnforced\r\n'"
  * @generated
  */
 public interface CollectionTemplateExp extends TemplateExp {

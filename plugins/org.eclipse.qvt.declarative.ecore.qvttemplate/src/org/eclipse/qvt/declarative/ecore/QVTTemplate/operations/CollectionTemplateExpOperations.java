@@ -12,20 +12,27 @@
  * 
  * </copyright>
  *
- * $Id: CollectionTemplateExpOperations.java,v 1.3 2009/01/14 21:01:48 ewillink Exp $
+ * $Id: CollectionTemplateExpOperations.java,v 1.4 2009/01/27 21:17:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.operations;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.ecore.CollectionType;
 import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.Variable;
+import org.eclipse.ocl.ecore.VariableExp;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
+import org.eclipse.qvt.declarative.ecore.QVTBase.Pattern;
 import org.eclipse.qvt.declarative.ecore.QVTBase.operations.DomainOperations;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.CollectionTemplateExp;
+import org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem;
 
 public class CollectionTemplateExpOperations extends TemplateExpOperations
 {
@@ -56,23 +63,35 @@ public class CollectionTemplateExpOperations extends TemplateExpOperations
 	} */
 
 	/**
-	 * Validates the ReferredCollectionElementTypeIsDeclaredByDomain constraint of '<em>Collection Template Exp</em>'.
+	 * Validates the EveryMemberExpressionVariableIsBoundByPattern constraint of '<em>Collection Template Exp</em>'.
 	 */
-	public boolean checkReferredCollectionElementTypeIsDeclaredByDomain(CollectionTemplateExp collectionTemplateExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		Domain domain = getDomain(collectionTemplateExp);
-		if (domain == null)
-			return true;		// DomainExists error
-		CollectionType collectionType = collectionTemplateExp.getReferredCollectionType();
-		if (collectionType == null)
-			return true;		// Multiplicity error
-		EClassifier transitiveElementType = getTransitiveElementType(collectionType);
-		if (transitiveElementType == null)
-			return true;		// Multiplicity error
-		if (DomainOperations.INSTANCE.declaresType(domain, transitiveElementType))
-			return true;
-		Object[] messageSubstitutions = new Object[] { getObjectLabel(transitiveElementType, context), getObjectLabel(domain, context) };
-		appendError(diagnostics, collectionTemplateExp, QVTTemplateMessages._UI_CollectionTemplateExp_TypeIsNotDeclaredByDomain, messageSubstitutions);
-		return false;
+	public boolean checkEveryMemberExpressionVariableIsBoundByPattern(CollectionTemplateExp collectionTemplateExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		Pattern pattern = getPattern(collectionTemplateExp);
+		if (pattern == null)
+			return true;		// PatternExists error
+		List<Variable> bindsTo = pattern.getBindsTo();
+		boolean allOk = true;
+		for (OCLExpression member : collectionTemplateExp.getMember()) {
+			for (TreeIterator<EObject> i = member.eAllContents(); i.hasNext(); ) {
+				EObject eObject = i.next();
+				if (eObject instanceof VariableExp) {
+					VariableExp variableReference = (VariableExp) eObject;
+					Variable variable = (Variable) variableReference.getReferredVariable();
+					if (variable == null)
+						continue;
+					if (isSpecialVariable(variable))
+						continue;
+					if (locallyDefined(variableReference))
+						continue;
+					if (!bindsTo.contains(variable)) {
+						Object[] messageSubstitutions = new Object[] { getObjectLabel(variable, context), getObjectLabel(pattern, context) };
+						appendError(diagnostics, variableReference, QVTTemplateMessages._UI_CollectionTemplateExp_MemberExpressionVariableIsNotBoundByPattern, messageSubstitutions);
+						allOk = false;
+					}
+				}
+			}
+		}
+		return allOk;
 	}
 
 	/**
@@ -100,6 +119,47 @@ public class CollectionTemplateExpOperations extends TemplateExpOperations
 	}
 
 	/**
+	 * Validates the MemberCountSatifiesLowerBound constraint of '<em>Collection Template Exp</em>'.
+	 */
+	public boolean checkMemberCountSatifiesLowerBound(CollectionTemplateExp collectionTemplateExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		EObject container = collectionTemplateExp.eContainer();
+		if (!(container instanceof PropertyTemplateItem))
+			return true;
+		int memberCount = collectionTemplateExp.getMember().size();
+		if ((memberCount == 0) && (collectionTemplateExp.getRest() == null))
+			return true;
+		EStructuralFeature feature = ((PropertyTemplateItem)container).getReferredProperty();
+		if (feature == null)
+			return true;		// Multiplicity error
+		int lowerBound = feature.getLowerBound();
+		if (memberCount >= lowerBound)
+			return true;
+		Object[] messageSubstitutions = new Object[] { memberCount, lowerBound, getObjectLabel(feature, context) };
+		appendError(diagnostics, collectionTemplateExp, QVTTemplateMessages._UI_CollectionTemplateExp_MemberCountDoesNotSatisfyLowerBound, messageSubstitutions);
+		return false;
+	}
+
+	/**
+	 * Validates the ReferredCollectionElementTypeIsDeclaredByDomain constraint of '<em>Collection Template Exp</em>'.
+	 */
+	public boolean checkReferredCollectionElementTypeIsDeclaredByDomain(CollectionTemplateExp collectionTemplateExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		Domain domain = getDomain(collectionTemplateExp);
+		if (domain == null)
+			return true;		// DomainExists error
+		CollectionType collectionType = collectionTemplateExp.getReferredCollectionType();
+		if (collectionType == null)
+			return true;		// Multiplicity error
+		EClassifier transitiveElementType = getTransitiveElementType(collectionType);
+		if (transitiveElementType == null)
+			return true;		// Multiplicity error
+		if (DomainOperations.INSTANCE.declaresType(domain, transitiveElementType))
+			return true;
+		Object[] messageSubstitutions = new Object[] { getObjectLabel(transitiveElementType, context), getObjectLabel(domain, context) };
+		appendError(diagnostics, collectionTemplateExp, QVTTemplateMessages._UI_CollectionTemplateExp_TypeIsNotDeclaredByDomain, messageSubstitutions);
+		return false;
+	}
+
+	/**
 	 * Validates the RestTypeMatchesCollectionType constraint of '<em>Collection Template Exp</em>'.
 	 */
 	public boolean checkRestTypeMatchesCollectionType(CollectionTemplateExp collectionTemplateExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -123,7 +183,7 @@ public class CollectionTemplateExpOperations extends TemplateExpOperations
 
 	/**
 	 * Validates the RestVariableIsBoundByPattern constraint of '<em>Collection Template Exp</em>'.
-	 *
+	 */
 	public boolean checkRestVariableIsBoundByPattern(CollectionTemplateExp collectionTemplateExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		Variable rest = collectionTemplateExp.getRest();
 		if (rest == null)
@@ -135,8 +195,8 @@ public class CollectionTemplateExpOperations extends TemplateExpOperations
 			return true;		// PatternExists error
 		if (pattern.getBindsTo().contains(rest))
 			return true;
-		Object[] messageSubstitutions = new Object[] { getObjectLabel(rest, context), getObjectLabel(pattern, context) };
-		appendError(diagnostics, rest, QVTTemplateMessages._UI_CollectionTemplateExp_RestVariableIsNotBoundByPattern, messageSubstitutions);
+		Object[] messageSubstitutions = new Object[] { rest.getName(), getObjectLabel(pattern, context) };
+		appendError(diagnostics, collectionTemplateExp, QVTTemplateMessages._UI_CollectionTemplateExp_RestVariableIsNotBoundByPattern, messageSubstitutions);
 		return false;
-	} */
+	}
 }
