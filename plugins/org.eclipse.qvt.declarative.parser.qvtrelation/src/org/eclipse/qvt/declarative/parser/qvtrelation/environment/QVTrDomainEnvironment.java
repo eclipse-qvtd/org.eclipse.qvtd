@@ -20,7 +20,9 @@ import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.VariableExpCS;
 import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.Variable;
+import org.eclipse.ocl.ecore.VariableExp;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
+import org.eclipse.qvt.declarative.ecore.QVTBase.operations.AbstractEssentialOCLOperations;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.DomainPattern;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationFactory;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomain;
@@ -83,36 +85,55 @@ public class QVTrDomainEnvironment extends QVTrEnvironment<QVTrRelationEnvironme
 		installPatternVariables(templateExpression);
 	}
 
-	protected void installPatternVariables(TemplateExp templateExpression) {
-		installPatternVariable(templateExpression.getBindsTo());
-		if (templateExpression instanceof ObjectTemplateExp) {
-			for (PropertyTemplateItem part : ((ObjectTemplateExp)templateExpression).getPart()) {
-				OCLExpression value = part.getValue();
-				if (value instanceof TemplateExp)
-					installPatternVariables((TemplateExp) value);
-//				else if (value instanceof VariableExp)
-//					installPatternVariable((Variable) ((VariableExp) value).getReferredVariable());
-			}
+	protected void installPatternVariables(OCLExpression expression) {
+		if (expression instanceof ObjectTemplateExp) {
+			ObjectTemplateExp objectTemplateExp = (ObjectTemplateExp)expression;
+			installPatternVariable(objectTemplateExp.getBindsTo());
+			for (PropertyTemplateItem part : objectTemplateExp.getPart())
+				installPatternVariables(part.getValue());
 		}
-		else if (templateExpression instanceof CollectionTemplateExp) {
-			CollectionTemplateExp collectionTemplateExpression = (CollectionTemplateExp)templateExpression;
-			for (OCLExpression member : collectionTemplateExpression.getMember()) {
-				if (member instanceof TemplateExp)
-					installPatternVariables((TemplateExp) member);
-//				else if (member instanceof VariableExp)
-//					installPatternVariable((Variable) ((VariableExp) member).getReferredVariable());
+		else if (expression instanceof CollectionTemplateExp) {
+			CollectionTemplateExp collectionTemplateExp = (CollectionTemplateExp)expression;
+			installPatternVariable(collectionTemplateExp.getBindsTo());
+			for (OCLExpression member : collectionTemplateExp.getMember())
+				installPatternVariables( member);
+			installPatternVariable(collectionTemplateExp.getRest());
+		}
+		else if (expression instanceof VariableExp) {
+//			installPatternVariableExp((VariableExp) expression);
+			VariableExp variableExp = (VariableExp) expression;
+			Variable variable = (Variable) variableExp.getReferredVariable();
+			if ((variable != null) && !AbstractEssentialOCLOperations.locallyDefined(variableExp, variable))
+				installPatternVariable(variable);
+		}
+		else {
+			for (EObject eObject : expression.eContents()) {
+				if (eObject instanceof OCLExpression)
+					installPatternVariables((OCLExpression) eObject);
 			}
-//			installPatternVariable(collectionTemplateExpression.getRest());
 		}
 	}
 
 	protected void installPatternVariable(Variable variable) {
-		if ((variable != null) && !isSpecialVariable(variable)) {
-			List<Variable> bindsTo = ast.getPattern().getBindsTo();
-			if (!bindsTo.contains(variable))
-				bindsTo.add(variable);
-		}
+		if (variable == null)
+			return;
+		if (isSpecialVariable(variable))
+			return;
+		List<Variable> bindsTo = ast.getPattern().getBindsTo();
+		if (!bindsTo.contains(variable))
+			bindsTo.add(variable);
 	}
+
+/*	protected void installPatternVariableExp(VariableExp variableExp) {
+		if (variableExp == null)
+			return;
+		Variable variable = (Variable) variableExp.getReferredVariable();
+		if (variable == null)
+			return;
+		if (AbstractEssentialOCLOperations.locallyDefined(variableExp, variable))
+			return;
+		installPatternVariable(variable);
+	} */
 	
 	public EClass lookupImportedClass(String name) {
 		if (typedModel != null) {

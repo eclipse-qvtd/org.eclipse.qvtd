@@ -20,6 +20,7 @@ import java.util.List;
 import lpg.lpgjavaruntime.Monitor;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -389,8 +390,10 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 			}
 		}
 		IdentifierCS tailIdentifier = collectionTemplateCS.getRestIdentifier();
-		if (tailIdentifier != null)
-			collectionTemplateExp.setRest((Variable) tailIdentifier.getAst());
+		if (tailIdentifier != null) {
+			Variable tailVariable = (Variable) tailIdentifier.getAst();
+			collectionTemplateExp.setRest(tailVariable);
+		}
 		collectionTemplateExp.setName(identifierCS(identifier));
 		collectionTemplateExp.setBindsTo(variable);
 		CollectionType referredCollectionType = ClassUtils.asClass(referredClassifier, CollectionType.class);
@@ -555,15 +558,24 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 	}
 
 	protected void definePredicateCS(IQVTrNodeEnvironment env, Pattern pattern, List<OCLExpressionCS> oclExpressionCSlist) {
-		// FIXME bindsTo
+		List<Variable> bindsTo = pattern.getBindsTo();
 		for (OCLExpressionCS oclExpressionCS : oclExpressionCSlist) {
 			Predicate predicate = QVTBaseFactory.eINSTANCE.createPredicate();
 			env.initASTMapping(predicate, oclExpressionCS, null);
 			pattern.getPredicate().add(predicate);			
-			predicate.setConditionExpression(definePredicateOCLExpressionCS(env, oclExpressionCS));
+			OCLExpression conditionExpression = definePredicateOCLExpressionCS(env, oclExpressionCS);
+			predicate.setConditionExpression(conditionExpression);
+			for(TreeIterator<EObject> i = conditionExpression.eAllContents(); i.hasNext(); ) {
+				EObject content = i.next();
+				if (content instanceof VariableExp) {
+					Variable variable = (Variable) ((VariableExp)content).getReferredVariable();
+					if (!isLocallyDefined(variable) && !bindsTo.contains(variable))
+						bindsTo.add(variable);
+				}
+			}
 		}
 	}
-	
+
 	protected OCLExpression definePredicateOCLExpressionCS(IQVTrNodeEnvironment env, OCLExpressionCS oclExpressionCS) {
 		Relation relation = isRelationCallExpCS(env, oclExpressionCS);
 		if (relation == null)
