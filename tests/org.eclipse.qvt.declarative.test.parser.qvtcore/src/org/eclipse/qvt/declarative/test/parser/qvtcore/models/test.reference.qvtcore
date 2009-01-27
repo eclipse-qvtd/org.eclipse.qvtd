@@ -27,7 +27,7 @@
     <rule xmi:type="qvtc:Mapping" xmi:id="ast8" name="ClassToTable">
       <domain xmi:type="qvtc:CoreDomain" xmi:id="ast9" name="uml" isCheckable="true"
           isEnforceable="false" typedModel="ast6">
-        <bottomPattern xmi:id="ast12" bindsTo="ast23">
+        <bottomPattern xmi:id="ast12" bindsTo="ast23 ast11">
           <predicate xmi:id="ast13">
             <conditionExpression xmi:type="essentialocl:OperationCallExp" xmi:id="ast14">
               <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -93,7 +93,7 @@
       </domain>
       <domain xmi:type="qvtc:CoreDomain" xmi:id="ast32" name="rdbms" isCheckable="true"
           isEnforceable="true" typedModel="ast7">
-        <bottomPattern xmi:id="ast35" bindsTo="ast41">
+        <bottomPattern xmi:id="ast35" bindsTo="ast41 ast34">
           <predicate xmi:id="ast36">
             <conditionExpression xmi:type="essentialocl:OperationCallExp" xmi:id="ast37">
               <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -122,7 +122,7 @@
           </variable>
         </guardPattern>
       </domain>
-      <bottomPattern xmi:id="ast54" bindsTo="ast78 ast65">
+      <bottomPattern xmi:id="ast54" bindsTo="ast78 ast65 ast53 ast34 ast11 ast41 ast23">
         <predicate xmi:id="ast55">
           <conditionExpression xmi:type="essentialocl:OperationCallExp" xmi:id="ast56">
             <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -206,7 +206,7 @@
           <type xmi:type="emof:Class" href="TumlRdbms.ecore#//TClassToTable"/>
         </realizedVariable>
       </bottomPattern>
-      <guardPattern xmi:id="ast42" bindsTo="ast53">
+      <guardPattern xmi:id="ast42" bindsTo="ast53 ast34 ast11">
         <predicate xmi:id="ast43">
           <conditionExpression xmi:type="essentialocl:OperationCallExp" xmi:id="ast44">
             <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -248,7 +248,7 @@
         </variable>
       </guardPattern>
       <local xmi:id="ast79">
-        <bottomPattern xmi:id="ast81">
+        <bottomPattern xmi:id="ast81" bindsTo="ast53 ast34 ast11 ast78 ast65 ast41 ast23">
           <assignment xmi:type="qvtc:PropertyAssignment" xmi:id="ast82" isDefault="false">
             <value xmi:type="essentialocl:VariableExp" xmi:id="ast83" name="cn" referredVariable="ast65">
               <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
@@ -260,7 +260,7 @@
             <targetProperty href="rdbmsMM.emof#rdbmsMM.Table.description"/>
           </assignment>
         </bottomPattern>
-        <guardPattern xmi:id="ast80"/>
+        <guardPattern xmi:id="ast80" bindsTo="ast53 ast34 ast11 ast78 ast65 ast41 ast23"/>
       </local>
     </rule>
     <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">

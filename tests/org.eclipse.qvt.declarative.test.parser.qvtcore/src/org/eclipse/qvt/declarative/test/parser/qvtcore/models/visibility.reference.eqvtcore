@@ -19,7 +19,7 @@
           <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast10"/>
+      <bottomPattern xmi:id="ast10" bindsTo="ast8 ast9"/>
     </domain>
     <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast11" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast4">
       <guardPattern xmi:id="ast12" bindsTo="ast13">
@@ -27,10 +27,10 @@
           <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast14"/>
+      <bottomPattern xmi:id="ast14" bindsTo="ast13"/>
     </domain>
-    <guardPattern xmi:id="ast15"/>
-    <bottomPattern xmi:id="ast16"/>
+    <guardPattern xmi:id="ast15" bindsTo="ast8 ast9 ast13"/>
+    <bottomPattern xmi:id="ast16" bindsTo="ast8 ast9 ast13"/>
   </rule>
   <rule xsi:type="eqvtc:Mapping" xmi:id="ast17" name="ClassToTable1">
     <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast18" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast4">
@@ -39,7 +39,7 @@
           <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast21"/>
+      <bottomPattern xmi:id="ast21" bindsTo="ast20"/>
     </domain>
     <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast22" name="uml" isCheckable="true" isEnforceable="true" typedModel="ast3">
       <guardPattern xmi:id="ast23" bindsTo="ast24 ast25">
@@ -50,10 +50,10 @@
           <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast26"/>
+      <bottomPattern xmi:id="ast26" bindsTo="ast24 ast25"/>
     </domain>
-    <guardPattern xmi:id="ast27"/>
-    <bottomPattern xmi:id="ast28"/>
+    <guardPattern xmi:id="ast27" bindsTo="ast24 ast25 ast20"/>
+    <bottomPattern xmi:id="ast28" bindsTo="ast24 ast25 ast20"/>
   </rule>
   <rule xsi:type="eqvtc:Mapping" xmi:id="ast29" name="ClassToTable2">
     <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast30" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast4">
@@ -62,9 +62,9 @@
           <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast33"/>
+      <bottomPattern xmi:id="ast33" bindsTo="ast32"/>
     </domain>
-    <guardPattern xmi:id="ast34"/>
-    <bottomPattern xmi:id="ast35"/>
+    <guardPattern xmi:id="ast34" bindsTo="ast32"/>
+    <bottomPattern xmi:id="ast35" bindsTo="ast32"/>
   </rule>
 </eqvtb:Transformation>

@@ -22,7 +22,7 @@
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast11" bindsTo="ast12 ast13 ast14">
+      <bottomPattern xmi:id="ast11" bindsTo="ast12 ast13 ast14 ast10">
         <variable xmi:id="ast12" name="b">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </variable>
@@ -76,7 +76,7 @@
         </assignment>
       </bottomPattern>
     </domain>
-    <guardPattern xmi:id="ast30"/>
-    <bottomPattern xmi:id="ast31"/>
+    <guardPattern xmi:id="ast30" bindsTo="ast10"/>
+    <bottomPattern xmi:id="ast31" bindsTo="ast10 ast12 ast13 ast14"/>
   </rule>
 </eqvtb:Transformation>

@@ -22,7 +22,7 @@
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast11" bindsTo="ast12 ast13 ast14">
+      <bottomPattern xmi:id="ast11" bindsTo="ast12 ast13 ast14 ast8 ast9 ast10">
         <realizedVariable xmi:id="ast12" name="p1">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
         </realizedVariable>
@@ -38,43 +38,43 @@
       <guardPattern xmi:id="ast16"/>
       <bottomPattern xmi:id="ast17"/>
     </domain>
-    <guardPattern xmi:id="ast18" bindsTo="ast19">
+    <guardPattern xmi:id="ast18" bindsTo="ast19 ast8 ast9 ast10">
       <variable xmi:id="ast19" name="p6">
         <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Association"/>
       </variable>
     </guardPattern>
-    <bottomPattern xmi:id="ast20"/>
+    <bottomPattern xmi:id="ast20" bindsTo="ast8 ast9 ast10 ast12 ast13 ast14 ast19"/>
     <local xmi:id="ast21">
       <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast22" name="uml" isCheckable="true" isEnforceable="true" typedModel="ast3">
-        <guardPattern xmi:id="ast23" bindsTo="ast24">
+        <guardPattern xmi:id="ast23" bindsTo="ast24 ast8 ast9 ast10 ast12 ast13 ast14">
           <variable xmi:id="ast24" name="p2">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
           </variable>
         </guardPattern>
-        <bottomPattern xmi:id="ast25" bindsTo="ast26">
+        <bottomPattern xmi:id="ast25" bindsTo="ast26 ast8 ast9 ast10 ast12 ast13 ast14 ast24">
           <realizedVariable xmi:id="ast26" name="p3">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
           </realizedVariable>
         </bottomPattern>
       </domain>
-      <guardPattern xmi:id="ast27"/>
-      <bottomPattern xmi:id="ast28"/>
+      <guardPattern xmi:id="ast27" bindsTo="ast8 ast9 ast10 ast12 ast13 ast14 ast19 ast24"/>
+      <bottomPattern xmi:id="ast28" bindsTo="ast8 ast9 ast10 ast12 ast13 ast14 ast19 ast24 ast26"/>
     </local>
     <local xmi:id="ast29">
       <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast30" name="uml" isCheckable="true" isEnforceable="true" typedModel="ast3">
-        <guardPattern xmi:id="ast31"/>
-        <bottomPattern xmi:id="ast32" bindsTo="ast33">
+        <guardPattern xmi:id="ast31" bindsTo="ast8 ast9 ast10 ast12 ast13 ast14"/>
+        <bottomPattern xmi:id="ast32" bindsTo="ast33 ast8 ast9 ast10 ast12 ast13 ast14">
           <realizedVariable xmi:id="ast33" name="p4">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
           </realizedVariable>
         </bottomPattern>
       </domain>
-      <guardPattern xmi:id="ast34" bindsTo="ast35">
+      <guardPattern xmi:id="ast34" bindsTo="ast35 ast8 ast9 ast10 ast12 ast13 ast14 ast19">
         <variable xmi:id="ast35" name="p5">
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast36"/>
+      <bottomPattern xmi:id="ast36" bindsTo="ast8 ast9 ast10 ast12 ast13 ast14 ast19 ast33 ast35"/>
     </local>
   </rule>
   <rule xsi:type="eqvtc:Mapping" xmi:id="ast37" name="Map2" specification="ast5">
@@ -84,13 +84,13 @@
           <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Association"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast41" bindsTo="ast12 ast13 ast14"/>
+      <bottomPattern xmi:id="ast41" bindsTo="ast8 ast9 ast10 ast12 ast13 ast14 ast40"/>
     </domain>
-    <guardPattern xmi:id="ast42" bindsTo="ast43 ast19">
+    <guardPattern xmi:id="ast42" bindsTo="ast43 ast8 ast9 ast10 ast19 ast40">
       <variable xmi:id="ast43" name="p5">
         <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TClassToTable"/>
       </variable>
     </guardPattern>
-    <bottomPattern xmi:id="ast44"/>
+    <bottomPattern xmi:id="ast44" bindsTo="ast8 ast9 ast10 ast12 ast13 ast14 ast40 ast19 ast43"/>
   </rule>
 </eqvtb:Transformation>

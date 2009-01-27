@@ -284,6 +284,6 @@
       </bottomPattern>
     </domain>
     <guardPattern xmi:id="ast97"/>
-    <bottomPattern xmi:id="ast98"/>
+    <bottomPattern xmi:id="ast98" bindsTo="ast90 ast91"/>
   </rule>
 </eqvtb:Transformation>

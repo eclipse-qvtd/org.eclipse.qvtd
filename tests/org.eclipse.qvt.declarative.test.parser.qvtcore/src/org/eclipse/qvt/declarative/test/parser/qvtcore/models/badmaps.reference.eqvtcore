@@ -26,7 +26,7 @@
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
           </variable>
         </guardPattern>
-        <bottomPattern xmi:id="ast12" bindsTo="ast18">
+        <bottomPattern xmi:id="ast12" bindsTo="ast18 ast11">
           <predicate xmi:id="ast13">
             <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast14">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -52,7 +52,7 @@
         <guardPattern xmi:id="ast20"/>
         <bottomPattern xmi:id="ast21"/>
       </domain>
-      <guardPattern xmi:id="ast22" bindsTo="ast28">
+      <guardPattern xmi:id="ast22" bindsTo="ast28 ast11">
         <predicate xmi:id="ast23">
           <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast24">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -73,7 +73,7 @@
           <eType xsi:type="ecore:EClass" href="TumlRdbms.ecore#//TPackageToSchema"/>
         </variable>
       </guardPattern>
-      <bottomPattern xmi:id="ast29" bindsTo="ast35">
+      <bottomPattern xmi:id="ast29" bindsTo="ast35 ast11 ast18 ast28">
         <predicate xmi:id="ast30">
           <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast31">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -132,12 +132,12 @@
         <bottomPattern xmi:id="ast54"/>
       </domain>
       <guardPattern xmi:id="ast55"/>
-      <bottomPattern xmi:id="ast56"/>
+      <bottomPattern xmi:id="ast56" bindsTo="ast51"/>
     </rule>
     <rule xsi:type="eqvtc:Mapping" xmi:id="ast57" name="Map1" specification="ast8 ast36" refinement="ast109">
       <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast58" name="uml" isCheckable="true" isEnforceable="false" typedModel="ast6">
         <guardPattern xmi:id="ast59" bindsTo="ast11"/>
-        <bottomPattern xmi:id="ast60" bindsTo="ast18">
+        <bottomPattern xmi:id="ast60" bindsTo="ast11 ast18">
           <predicate xmi:id="ast61">
             <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast62">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -198,7 +198,7 @@
             <eType xsi:type="ecore:EClass" href="rdbmsMM.emof#rdbmsMM.Schema"/>
           </variable>
         </guardPattern>
-        <bottomPattern xmi:id="ast81">
+        <bottomPattern xmi:id="ast81" bindsTo="ast80">
           <predicate xmi:id="ast82">
             <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast83">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -213,7 +213,7 @@
           </predicate>
         </bottomPattern>
       </domain>
-      <guardPattern xmi:id="ast86" bindsTo="ast28">
+      <guardPattern xmi:id="ast86" bindsTo="ast11 ast28 ast80">
         <predicate xmi:id="ast87">
           <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast88">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -231,7 +231,7 @@
           </conditionExpression>
         </predicate>
       </guardPattern>
-      <bottomPattern xmi:id="ast92" bindsTo="ast102 ast35">
+      <bottomPattern xmi:id="ast92" bindsTo="ast102 ast11 ast18 ast35 ast28 ast51 ast80">
         <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast93" isDefault="false">
           <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast94" name="p" referredVariable="ast11">
             <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
@@ -264,8 +264,8 @@
         </realizedVariable>
       </bottomPattern>
       <local xmi:id="ast103">
-        <guardPattern xmi:id="ast104"/>
-        <bottomPattern xmi:id="ast105">
+        <guardPattern xmi:id="ast104" bindsTo="ast11 ast18 ast35 ast28 ast51 ast80 ast102"/>
+        <bottomPattern xmi:id="ast105" bindsTo="ast11 ast18 ast35 ast28 ast51 ast80 ast102">
           <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast106" isDefault="false">
             <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast107" name="cn" referredVariable="ast35">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
@@ -283,8 +283,8 @@
         <guardPattern xmi:id="ast111"/>
         <bottomPattern xmi:id="ast112"/>
       </domain>
-      <guardPattern xmi:id="ast113" bindsTo="ast28"/>
-      <bottomPattern xmi:id="ast114" bindsTo="ast35 ast102">
+      <guardPattern xmi:id="ast113" bindsTo="ast11 ast28 ast80"/>
+      <bottomPattern xmi:id="ast114" bindsTo="ast11 ast18 ast35 ast28 ast51 ast80 ast102">
         <predicate xmi:id="ast115">
           <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast116">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
