@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLNewWizard.java,v 1.1 2008/08/26 19:05:02 ewillink Exp $
+ * $Id: OCLNewWizard.java,v 1.2 2009/01/27 21:53:39 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui;
 
@@ -46,6 +46,11 @@ public class OCLNewWizard extends PagedNewWizard
 		String contents =
 			"--\n" +
 			"-- Elimination of the errors requires a package path to be defined.\n" +
+			"--\n" +
+			"-- First check that your project has the Model Registry Nature by using the\n" +
+			"-- right button menu of your project in Package Explorer or Navigator Views.\n" +
+			"-- If, under QVT Declarative Natures, this offers an Add Model Registry Nature option,\n" +
+			"-- select it; if it offers Remove Model Registry Nature, leave the selection unchanged.\n" +
 			"--\n" +
 			"-- Select the Properties of this model by typing Alt + Enter\n" +
 			"--  (or select Properties from the right button menu in Package Explorer or Navigator Views.)\n" +
