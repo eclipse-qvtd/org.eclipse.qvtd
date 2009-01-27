@@ -46,8 +46,7 @@ public abstract class QVTcPatternEnvironment<AST extends CorePattern> extends QV
 
 	public void computeBindsTo() {
 		List<Variable> bindsTo = ast.getBindsTo();
-		for (QVTcMappingEnvironment<?> mappingEnv : getParentEnvironment().getMappingEnvironment().getMappingEnvironmentClosure()) {
-			QVTcPatternEnvironment<?> env = mappingEnv.getPatternEnvironment(this);
+		for (QVTcPatternEnvironment<?> env : getPatternEnvironmentClosure()) {
 			if ((env != this) && (env != null)) {
 				for (Variable var : env.getASTNode().getBindsTo()) {
 					if (!bindsTo.contains(var))
