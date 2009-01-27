@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonTokenColorer.java,v 1.3 2009/01/27 21:21:15 ewillink Exp $
+ * $Id: CommonTokenColorer.java,v 1.4 2009/01/27 21:55:41 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -77,7 +77,7 @@ public class CommonTokenColorer extends TokenColorerBase implements ITokenColore
 		}
 	}
 
-	@Override
+	// @Override	-- waiting till IMP has method to override
 	public TextAttribute getInterColoring(IParseController controller, Object prevToken, Object nextToken) {
 		IToken preToken = (IToken)prevToken;
 		IToken postToken = (IToken)nextToken;
