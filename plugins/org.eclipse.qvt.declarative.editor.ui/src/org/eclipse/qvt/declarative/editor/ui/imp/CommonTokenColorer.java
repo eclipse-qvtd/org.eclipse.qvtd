@@ -12,11 +12,12 @@
  * 
  * </copyright>
  *
- * $Id: CommonTokenColorer.java,v 1.2 2008/08/10 13:47:37 ewillink Exp $
+ * $Id: CommonTokenColorer.java,v 1.3 2009/01/27 21:21:15 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
 import lpg.lpgjavaruntime.IToken;
+import lpg.lpgjavaruntime.PrsStream;
 
 import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.services.ITokenColorer;
@@ -26,7 +27,7 @@ import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 
-public class CommonTokenColorer extends TokenColorerBase implements ITokenColorer
+public class CommonTokenColorer extends TokenColorerBase implements ITokenColorer, IWorkaroundTokenColorer
 {
 	protected TextAttribute lineCommentAttribute;
 	protected TextAttribute paragraphCommentAttribute;
@@ -40,8 +41,8 @@ public class CommonTokenColorer extends TokenColorerBase implements ITokenColore
 		// TODO:  Define text attributes for the various
 		// token types that will have their text colored
 		Display display = Display.getDefault();
-		lineCommentAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_DARK_RED), null, SWT.ITALIC);
-		paragraphCommentAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_DARK_RED), null, SWT.ITALIC);
+		lineCommentAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_DARK_GREEN), null, SWT.ITALIC);
+		paragraphCommentAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_BLUE), null, SWT.ITALIC);
 		stringAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_DARK_BLUE), null, SWT.BOLD);
 		identifierAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_BLACK), null, SWT.NORMAL);
 		realAttribute = new TextAttribute(display.getSystemColor(SWT.COLOR_DARK_GREEN), null, SWT.BOLD);
@@ -74,5 +75,29 @@ public class CommonTokenColorer extends TokenColorerBase implements ITokenColore
 		default:
 			return super.getColoring(controller, token);
 		}
+	}
+
+	@Override
+	public TextAttribute getInterColoring(IParseController controller, Object prevToken, Object nextToken) {
+		IToken preToken = (IToken)prevToken;
+		IToken postToken = (IToken)nextToken;
+		PrsStream prsStream = preToken != null ? preToken.getPrsStream() : postToken != null ? postToken.getPrsStream() : null;
+		if (prsStream == null)
+			return null;
+		int startOffset = preToken != null ? preToken.getEndOffset()+1 : 0;
+		char[] inputChars = prsStream.getInputChars();
+		int size = inputChars.length;
+		if (startOffset >= size)
+			return null;
+		int endOffset = postToken != null ? postToken.getStartOffset()-1 : size-1;
+		String interChars = new String(inputChars, startOffset, endOffset - startOffset + 1);
+		return getInterColoring(interChars);
+	}
+
+	protected TextAttribute getInterColoring(String interChars) {
+		if (interChars.trim().contains("\n"))
+			return paragraphCommentAttribute;
+		else
+			return lineCommentAttribute;
 	}
 }
