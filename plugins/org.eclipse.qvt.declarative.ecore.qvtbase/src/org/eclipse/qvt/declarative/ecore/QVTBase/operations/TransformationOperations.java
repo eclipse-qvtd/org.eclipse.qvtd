@@ -12,16 +12,16 @@
  * 
  * </copyright>
  *
- * $Id: TransformationOperations.java,v 1.3 2009/01/14 21:01:33 ewillink Exp $
+ * $Id: TransformationOperations.java,v 1.4 2009/01/27 21:17:57 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.operations;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -127,7 +127,7 @@ public class TransformationOperations extends AbstractQVTBaseOperations
 		if (synthesizedTypes == null)
 			return true;
 		boolean allOk = true;
-		EList<EClassifier> classifiers = transformation.getEClassifiers();
+		List<EClassifier> classifiers = transformation.getEClassifiers();
 		for (CollectionType synthesizedType : synthesizedTypes) {
 			if (!classifiers.contains(synthesizedType)) {
 				Object[] messageSubstitutions = new Object[] { getObjectLabel(synthesizedType, context), getObjectLabel(transformation, context) };

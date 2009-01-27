@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTBasePackageImpl.java,v 1.6 2009/01/14 21:00:44 ewillink Exp $
+ * $Id: QVTBasePackageImpl.java,v 1.7 2009/01/27 21:17:57 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.impl;
 
@@ -647,7 +647,7 @@ public class QVTBasePackageImpl extends EPackageImpl implements QVTBasePackage {
 		  (predicateEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "ConditionExpressionIsBoolean\r\n"
+			 "constraints", "ConditionExpressionIsBoolean\r\nExternalVariablesAreBoundByPattern"
 		   });		
 		addAnnotation
 		  (ruleEClass, 
@@ -665,7 +665,7 @@ public class QVTBasePackageImpl extends EPackageImpl implements QVTBasePackage {
 		  (typedModelEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "DependsOnIsAcyclic"
+			 "constraints", "DependsOnIsAcyclic\r\nDependsOnAreModelParameters"
 		   });	
 	}
 

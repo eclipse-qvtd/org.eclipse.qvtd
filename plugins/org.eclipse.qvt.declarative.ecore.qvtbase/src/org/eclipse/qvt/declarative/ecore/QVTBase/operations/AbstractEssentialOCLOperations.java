@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractEssentialOCLOperations.java,v 1.2 2009/01/14 21:01:32 ewillink Exp $
+ * $Id: AbstractEssentialOCLOperations.java,v 1.3 2009/01/27 21:17:57 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.operations;
 
@@ -125,6 +125,39 @@ public class AbstractEssentialOCLOperations extends AbstractValidatorOperations
 		return voidType;
 	}
 
+	public static boolean locallyDefined(EObject element, Variable variable) {
+		if (element instanceof LetExp) {
+			if (((LetExp)element).getVariable() == variable)
+				return true;
+		}
+		else if (element instanceof IterateExp) {
+			if (((IterateExp)element).getResult() == variable)
+				return true;
+			if (((IterateExp)element).getIterator().contains(variable))
+				return true;
+		}
+		else if (element instanceof LoopExp) {
+			if (((LoopExp)element).getIterator().contains(variable))
+				return true;
+		}
+		else if (element instanceof CollectionLiteralPart)
+			;
+		else if (element instanceof TupleLiteralPart)
+			;
+		else if (element instanceof OCLExpression) {
+			if (element.eContents().contains(variable)) {
+				System.out.println("Missing child variable for " + element.getClass().getName());
+				return true;
+			}
+		}
+		else
+			return false;
+		EObject parent = element.eContainer();
+		if (parent == null)
+			return false;
+		return locallyDefined(parent, variable);
+	}
+
 	public AbstractEssentialOCLOperations(EValidatorWithOperations validator) {
 		super(validator);
 	}
@@ -228,38 +261,5 @@ public class AbstractEssentialOCLOperations extends AbstractValidatorOperations
 	public boolean locallyDefined(VariableExp variableReference) {
 		Variable variable = (Variable) variableReference.getReferredVariable();
 		return locallyDefined(variableReference, variable);
-	}
-
-	public boolean locallyDefined(EObject element, Variable variable) {
-		if (element instanceof LetExp) {
-			if (((LetExp)element).getVariable() == variable)
-				return true;
-		}
-		else if (element instanceof IterateExp) {
-			if (((IterateExp)element).getResult() == variable)
-				return true;
-			if (((IterateExp)element).getIterator().contains(variable))
-				return true;
-		}
-		else if (element instanceof LoopExp) {
-			if (((LoopExp)element).getIterator().contains(variable))
-				return true;
-		}
-		else if (element instanceof CollectionLiteralPart)
-			;
-		else if (element instanceof TupleLiteralPart)
-			;
-		else if (element instanceof OCLExpression) {
-			if (element.eContents().contains(variable)) {
-				System.out.println("Missing child variable for " + element.getClass().getName());
-				return true;
-			}
-		}
-		else
-			return false;
-		EObject parent = element.eContainer();
-		if (parent == null)
-			return false;
-		return locallyDefined(parent, variable);
 	}
 }

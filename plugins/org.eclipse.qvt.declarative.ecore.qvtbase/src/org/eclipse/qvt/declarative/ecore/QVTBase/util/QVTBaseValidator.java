@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTBaseValidator.java,v 1.5 2009/01/14 21:01:33 ewillink Exp $
+ * $Id: QVTBaseValidator.java,v 1.6 2009/01/27 21:17:57 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.util;
 
@@ -314,6 +314,7 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(predicate, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(predicate, diagnostics, context);
 		if (result || diagnostics != null) result &= validatePredicate_ConditionExpressionIsBoolean(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePredicate_ExternalVariablesAreBoundByPattern(predicate, diagnostics, context);
 		return result;
 	}
 
@@ -326,12 +327,12 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 	}
 
 	/**
-	 * Validates the VariablesAreBoundByPattern constraint of '<em>Predicate</em>'.
+	 * Validates the ExternalVariablesAreBoundByPattern constraint of '<em>Predicate</em>'.
 	 * @generated NOT
-	 *
-	public boolean validatePredicate_VariablesAreBoundByPattern(Predicate predicate, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return PredicateOperations.INSTANCE.checkVariablesAreBoundByPattern(predicate, diagnostics, context);
-	} */
+	 */
+	public boolean validatePredicate_ExternalVariablesAreBoundByPattern(Predicate predicate, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return PredicateOperations.INSTANCE.checkExternalVariablesAreBoundByPattern(predicate, diagnostics, context);
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -528,6 +529,7 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(typedModel, diagnostics, context);
 		if (result || diagnostics != null) result &= ecoreValidator.validateENamedElement_WellFormedName(typedModel, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTypedModel_DependsOnIsAcyclic(typedModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTypedModel_DependsOnAreModelParameters(typedModel, diagnostics, context);
 		return result;
 	}
 
@@ -537,6 +539,14 @@ public class QVTBaseValidator extends EObjectValidator implements EValidatorWith
 	 */
 	public boolean validateTypedModel_DependsOnIsAcyclic(TypedModel typedModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return TypedModelOperations.INSTANCE.checkDependsOnIsAcyclic(typedModel, diagnostics, context);
+	}
+
+	/**
+	 * Validates the DependsOnAreModelParameters constraint of '<em>Typed Model</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateTypedModel_DependsOnAreModelParameters(TypedModel typedModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return TypedModelOperations.INSTANCE.checkDependsOnAreModelParameters(typedModel, diagnostics, context);
 	}
 
 	/**
