@@ -610,7 +610,7 @@
   </modelParameter>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast222" name="RelationalTransformationToMappingTransformation" isTopLevel="true">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast223" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast245">
-      <pattern xmi:id="ast224" bindsTo="ast245 ast249 ast250">
+      <pattern xmi:id="ast224" bindsTo="ast245 ast247 ast249 ast248 ast250">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast225" name="rt" bindsTo="ast245">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.RelationalTransformation"/>
           <part xmi:id="ast226">
@@ -644,7 +644,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast234" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast246">
-      <pattern xmi:id="ast235" bindsTo="ast246 ast251">
+      <pattern xmi:id="ast235" bindsTo="ast246 ast247 ast251 ast248 ast250">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast236" name="mt" bindsTo="ast246">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTBase.Transformation"/>
           <part xmi:id="ast237">
@@ -700,7 +700,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast252" name="RelationToTraceClass" isTopLevel="true">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast253" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast283">
-      <pattern xmi:id="ast254" bindsTo="ast283 ast287 ast288 ast289 ast290 ast291">
+      <pattern xmi:id="ast254" bindsTo="ast283 ast285 ast287 ast288 ast289 ast290 ast286 ast291">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast255" name="r" bindsTo="ast283">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <part xmi:id="ast256">
@@ -755,7 +755,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast270" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast284">
-      <pattern xmi:id="ast271" bindsTo="ast284 ast292">
+      <pattern xmi:id="ast271" bindsTo="ast284 ast285 ast292 ast286 ast291">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast272" name="rc" bindsTo="ast284">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#EMOF.Class"/>
           <part xmi:id="ast273">
@@ -824,7 +824,7 @@
     <variable xmi:id="ast292" name="a">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EMOF.Property"/>
     </variable>
-    <where xmi:id="ast293">
+    <where xmi:id="ast293" bindsTo="ast289 ast284">
       <predicate xmi:id="ast294">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast295" referredRelation="ast298">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -840,7 +840,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast298" name="SubTemplateToTraceClassProps" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast299" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast321">
-      <pattern xmi:id="ast300" bindsTo="ast321 ast324 ast325 ast326 ast327">
+      <pattern xmi:id="ast300" bindsTo="ast321 ast324 ast325 ast326 ast323 ast327">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast301" name="t" bindsTo="ast321">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTTemplate.ObjectTemplateExp"/>
           <part xmi:id="ast302">
@@ -882,7 +882,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast312" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast322">
-      <pattern xmi:id="ast313" bindsTo="ast322 ast328">
+      <pattern xmi:id="ast313" bindsTo="ast322 ast328 ast323 ast327">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast314" name="rc" bindsTo="ast322">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#EMOF.Class"/>
           <part xmi:id="ast315">
@@ -932,7 +932,7 @@
     <variable xmi:id="ast328" name="a">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EMOF.Property"/>
     </variable>
-    <where xmi:id="ast329">
+    <where xmi:id="ast329" bindsTo="ast325 ast322">
       <predicate xmi:id="ast330">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast331" referredRelation="ast298">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -948,7 +948,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast334" name="TopLevelRelationToMappingForChecking" isTopLevel="true">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast335" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast369">
-      <pattern xmi:id="ast336" bindsTo="ast369">
+      <pattern xmi:id="ast336" bindsTo="ast369 ast378 ast376">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast337" name="r" bindsTo="ast369">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast338">
@@ -1004,7 +1004,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast353" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast370">
-      <pattern xmi:id="ast354" bindsTo="ast370 ast380 ast381 ast382 ast383">
+      <pattern xmi:id="ast354" bindsTo="ast370 ast379 ast376 ast380 ast381 ast382 ast383 ast377">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast355" name="m" bindsTo="ast370">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast356">
@@ -1083,7 +1083,7 @@
     <variable xmi:id="ast383" name="tcv">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.RealizedVariable"/>
     </variable>
-    <when xmi:id="ast384">
+    <when xmi:id="ast384" bindsTo="ast378 ast379">
       <predicate xmi:id="ast385">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast386" referredRelation="ast222">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -1096,7 +1096,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast389">
+    <where xmi:id="ast389" bindsTo="ast371 ast369 ast374 ast375 ast372 ast373 ast383 ast380 ast377 ast381 ast370">
       <predicate xmi:id="ast390">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast391">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -1327,7 +1327,7 @@
     <variable xmi:id="ast478" name="wherep">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTBase.Pattern"/>
     </variable>
-    <where xmi:id="ast479">
+    <where xmi:id="ast479" bindsTo="ast478 ast477">
       <predicate xmi:id="ast480">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast481" referredRelation="ast2066">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -1371,7 +1371,7 @@
       <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
     </variable>
     <variable xmi:id="ast497" name="mgVars" eType="ast181"/>
-    <where xmi:id="ast498">
+    <where xmi:id="ast498" bindsTo="ast494 ast497">
       <predicate xmi:id="ast499">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast500" referredRelation="ast1948">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -1414,7 +1414,7 @@
       <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
     </variable>
     <variable xmi:id="ast517" name="dgVars" eType="ast181"/>
-    <where xmi:id="ast518">
+    <where xmi:id="ast518" bindsTo="ast514 ast517">
       <predicate xmi:id="ast519">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast520" referredRelation="ast1948">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -1457,7 +1457,7 @@
       <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
     </variable>
     <variable xmi:id="ast537" name="dbVars" eType="ast181"/>
-    <where xmi:id="ast538">
+    <where xmi:id="ast538" bindsTo="ast534 ast537">
       <predicate xmi:id="ast539">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast540" referredRelation="ast1948">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -1472,7 +1472,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast544" name="TopLevelRelationToMappingForEnforcement" isTopLevel="true">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast545" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast619">
-      <pattern xmi:id="ast546" bindsTo="ast619 ast648 ast649 ast650 ast651 ast652 ast653 ast654 ast655">
+      <pattern xmi:id="ast546" bindsTo="ast619 ast646 ast637 ast648 ast649 ast638 ast650 ast639 ast651 ast652 ast653 ast654 ast655 ast640">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast547" name="r" bindsTo="ast619">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <part xmi:id="ast548">
@@ -1570,7 +1570,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast577" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast620">
-      <pattern xmi:id="ast578" bindsTo="ast620 ast656 ast657 ast658 ast659 ast660 ast661 ast662 ast663 ast664">
+      <pattern xmi:id="ast578" bindsTo="ast620 ast647 ast637 ast638 ast656 ast657 ast658 ast659 ast644 ast660 ast661 ast639 ast651 ast662 ast663 ast664">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast579" name="m" bindsTo="ast620">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast580">
@@ -1791,7 +1791,7 @@
     <variable xmi:id="ast664" name="mtev">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
     </variable>
-    <when xmi:id="ast665">
+    <when xmi:id="ast665" bindsTo="ast646 ast647">
       <predicate xmi:id="ast666">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast667" referredRelation="ast222">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -1804,7 +1804,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast670">
+    <where xmi:id="ast670" bindsTo="ast621 ast619 ast642 ast643 ast645 ast622 ast640 ast623 ast629 ast653 ast627 ast624 ast625 ast626 ast628 ast630 ast649 ast633 ast634 ast635 ast654 ast636 ast641 ast632 ast659 ast656 ast662 ast655 ast664 ast644 ast657 ast663 ast620">
       <predicate xmi:id="ast671">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast672">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -2328,7 +2328,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast888" name="InvokedRelationToMappingForChecking" isTopLevel="true">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast889" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast937">
-      <pattern xmi:id="ast890" bindsTo="ast937 ast950 ast951 ast952 ast953">
+      <pattern xmi:id="ast890" bindsTo="ast937 ast946 ast943 ast950 ast951 ast952 ast953 ast944">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast891" name="r" bindsTo="ast937">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast892">
@@ -2418,7 +2418,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast917" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast938">
-      <pattern xmi:id="ast918" bindsTo="ast938 ast954 ast955 ast956 ast957">
+      <pattern xmi:id="ast918" bindsTo="ast938 ast947 ast943 ast944 ast954 ast955 ast956 ast957 ast945">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast919" name="m" bindsTo="ast938">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast920">
@@ -2527,7 +2527,7 @@
     <variable xmi:id="ast957" name="tcv">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.RealizedVariable"/>
     </variable>
-    <when xmi:id="ast958">
+    <when xmi:id="ast958" bindsTo="ast946 ast947">
       <predicate xmi:id="ast959">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast960" referredRelation="ast222">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -2540,7 +2540,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast963">
+    <where xmi:id="ast963" bindsTo="ast939 ast937 ast948 ast949 ast940 ast941 ast942 ast953 ast950 ast957 ast954 ast945 ast955 ast938">
       <predicate xmi:id="ast964">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast965">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -2776,7 +2776,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast1055" name="InvokedRelationToMappingForEnforcement" isTopLevel="true">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1056" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast1144">
-      <pattern xmi:id="ast1057" bindsTo="ast1144 ast1174 ast1175 ast1176 ast1177 ast1178 ast1179 ast1180 ast1181 ast1182 ast1183 ast1184 ast1185">
+      <pattern xmi:id="ast1057" bindsTo="ast1144 ast1172 ast1162 ast1174 ast1175 ast1176 ast1177 ast1163 ast1178 ast1179 ast1164 ast1180 ast1165 ast1181 ast1182 ast1183 ast1184 ast1185 ast1166">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1058" name="r" bindsTo="ast1144">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <part xmi:id="ast1059">
@@ -2908,7 +2908,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1098" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast1145">
-      <pattern xmi:id="ast1099" bindsTo="ast1145 ast1186 ast1187 ast1188 ast1189 ast1190 ast1191 ast1192 ast1193 ast1194">
+      <pattern xmi:id="ast1099" bindsTo="ast1145 ast1173 ast1162 ast1163 ast1164 ast1186 ast1187 ast1188 ast1189 ast1170 ast1190 ast1191 ast1165 ast1181 ast1192 ast1193 ast1194">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1100" name="m" bindsTo="ast1145">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast1101">
@@ -3153,7 +3153,7 @@
     <variable xmi:id="ast1194" name="db">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
     </variable>
-    <when xmi:id="ast1195">
+    <when xmi:id="ast1195" bindsTo="ast1172 ast1173">
       <predicate xmi:id="ast1196">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast1197" referredRelation="ast222">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -3166,7 +3166,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast1200">
+    <where xmi:id="ast1200" bindsTo="ast1146 ast1144 ast1168 ast1169 ast1171 ast1147 ast1166 ast1148 ast1154 ast1183 ast1185 ast1152 ast1149 ast1150 ast1151 ast1153 ast1155 ast1179 ast1157 ast1158 ast1159 ast1184 ast1160 ast1167 ast1177 ast1161 ast1174 ast1156 ast1189 ast1170 ast1187 ast1186 ast1193 ast1194 ast1145">
       <predicate xmi:id="ast1201">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1202">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -3727,7 +3727,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast1433" name="RDomainToMDomainForChecking" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1434" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast1486">
-      <pattern xmi:id="ast1435" bindsTo="ast1486 ast1497 ast1498 ast1499 ast1500 ast1501 ast1502">
+      <pattern xmi:id="ast1435" bindsTo="ast1486 ast1497 ast1493 ast1498 ast1494 ast1499 ast1495 ast1500 ast1501 ast1502">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1436" name="r" bindsTo="ast1486">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <part xmi:id="ast1437">
@@ -3798,7 +3798,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1457" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast1487">
-      <pattern xmi:id="ast1458" bindsTo="ast1487 ast1503 ast1504 ast1505 ast1506 ast1507">
+      <pattern xmi:id="ast1458" bindsTo="ast1487 ast1503 ast1504 ast1493 ast1505 ast1494 ast1499 ast1496 ast1506 ast1507">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1459" name="m" bindsTo="ast1487">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast1460">
@@ -3942,7 +3942,7 @@
     <variable xmi:id="ast1507" name="db">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
     </variable>
-    <when xmi:id="ast1508">
+    <when xmi:id="ast1508" bindsTo="ast1495 ast1496">
       <predicate xmi:id="ast1509">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast1510" referredRelation="ast222">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -3955,7 +3955,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast1513">
+    <where xmi:id="ast1513" bindsTo="ast1492 ast1486 ast1488 ast1489 ast1501 ast1490 ast1491 ast1502 ast1506 ast1507 ast1497 ast1503">
       <predicate xmi:id="ast1514">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1515">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -4076,7 +4076,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast1563" name="IROppositeDomainsToMappingForEnforcement" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1564" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast1627">
-      <pattern xmi:id="ast1565" bindsTo="ast1627 ast1643 ast1644 ast1645 ast1646 ast1647 ast1648 ast1649 ast1650 ast1651 ast1652">
+      <pattern xmi:id="ast1565" bindsTo="ast1627 ast1643 ast1644 ast1645 ast1634 ast1646 ast1635 ast1641 ast1639 ast1636 ast1647 ast1648 ast1649 ast1650 ast1651 ast1652">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast1566" name="oppDomainSeq" eType="ast183" bindsTo="ast1627" referredCollectionType="ast183" rest="ast1642">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1567">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -4175,7 +4175,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1596" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast1628">
-      <pattern xmi:id="ast1597" bindsTo="ast1628 ast1653 ast1654 ast1655 ast1656 ast1657 ast1658 ast1659">
+      <pattern xmi:id="ast1597" bindsTo="ast1628 ast1653 ast1634 ast1654 ast1635 ast1641 ast1640 ast1636 ast1655 ast1656 ast1657 ast1658 ast1659">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1598" name="m" bindsTo="ast1628">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast1599">
@@ -4342,7 +4342,7 @@
     <variable xmi:id="ast1659" name="mb">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
     </variable>
-    <when xmi:id="ast1660">
+    <when xmi:id="ast1660" bindsTo="ast1639 ast1640">
       <predicate xmi:id="ast1661">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast1662" referredRelation="ast222">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -4355,7 +4355,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast1665">
+    <where xmi:id="ast1665" bindsTo="ast1638 ast1643 ast1630 ast1648 ast1650 ast1629 ast1631 ast1632 ast1633 ast1649 ast1656 ast1658 ast1659 ast1657">
       <predicate xmi:id="ast1666">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1667">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -4513,7 +4513,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast1732" name="TROppositeDomainsToMappingForEnforcement" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1733" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast1793">
-      <pattern xmi:id="ast1734" bindsTo="ast1793 ast1809 ast1810 ast1811 ast1812 ast1813 ast1814 ast1815 ast1816">
+      <pattern xmi:id="ast1734" bindsTo="ast1793 ast1809 ast1810 ast1811 ast1800 ast1812 ast1801 ast1807 ast1805 ast1802 ast1813 ast1814 ast1815 ast1816">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast1735" name="oppDomainSeq" eType="ast183" bindsTo="ast1793" referredCollectionType="ast183" rest="ast1808">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1736">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -4601,7 +4601,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1762" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast1794">
-      <pattern xmi:id="ast1763" bindsTo="ast1794 ast1817 ast1818 ast1819 ast1820 ast1821 ast1822">
+      <pattern xmi:id="ast1763" bindsTo="ast1794 ast1817 ast1800 ast1818 ast1801 ast1807 ast1806 ast1802 ast1819 ast1820 ast1821 ast1822">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1764" name="m" bindsTo="ast1794">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast1765">
@@ -4764,7 +4764,7 @@
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
     </variable>
     <variable xmi:id="ast1823" name="dgVars" eType="ast181"/>
-    <where xmi:id="ast1824">
+    <where xmi:id="ast1824" bindsTo="ast1804 ast1809 ast1796 ast1814 ast1795 ast1797 ast1798 ast1799 ast1815 ast1805 ast1806 ast1823 ast1821 ast1822 ast1820">
       <predicate xmi:id="ast1825">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1826">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -4953,7 +4953,7 @@
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTBase.Pattern"/>
     </variable>
     <variable xmi:id="ast1905" name="whenVars" eType="ast181"/>
-    <where xmi:id="ast1906">
+    <where xmi:id="ast1906" bindsTo="ast1902 ast1900 ast1903 ast1905 ast1904 ast1901">
       <predicate xmi:id="ast1907">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast1908">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -5062,7 +5062,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast1948" name="RVarSetToMVarSet" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1949" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast1957">
-      <pattern xmi:id="ast1950" bindsTo="ast1957 ast1961">
+      <pattern xmi:id="ast1950" bindsTo="ast1957 ast1961 ast1959">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast1951" name="rvSeq" eType="ast184" bindsTo="ast1957" referredCollectionType="ast184" rest="ast1959">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1952" name="rv" bindsTo="ast1961">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
@@ -5072,7 +5072,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1953" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast1958">
-      <pattern xmi:id="ast1954" bindsTo="ast1958 ast1962">
+      <pattern xmi:id="ast1954" bindsTo="ast1958 ast1962 ast1960">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast1955" name="mvSet" eType="ast181" bindsTo="ast1958" referredCollectionType="ast181" rest="ast1960">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1956" name="mv" bindsTo="ast1962">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
@@ -5091,7 +5091,7 @@
     <variable xmi:id="ast1962" name="mv">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
     </variable>
-    <where xmi:id="ast1963">
+    <where xmi:id="ast1963" bindsTo="ast1961 ast1962 ast1959 ast1960">
       <predicate xmi:id="ast1964">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast1965" referredRelation="ast2028">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -5128,7 +5128,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast1978" name="RVarSetToMBVarSet" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1979" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast1988">
-      <pattern xmi:id="ast1980" bindsTo="ast1988 ast1992">
+      <pattern xmi:id="ast1980" bindsTo="ast1988 ast1992 ast1990">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast1981" name="rvSeq" eType="ast184" bindsTo="ast1988" referredCollectionType="ast184" rest="ast1990">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast1982" name="rv" bindsTo="ast1992">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
@@ -5164,7 +5164,7 @@
     <variable xmi:id="ast1993" name="mv">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
     </variable>
-    <where xmi:id="ast1994">
+    <where xmi:id="ast1994" bindsTo="ast1992 ast1993 ast1990 ast1989">
       <predicate xmi:id="ast1995">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast1996" referredRelation="ast2028">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -5189,7 +5189,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2003" name="RVarSetToDGVarSet" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2004" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast2013">
-      <pattern xmi:id="ast2005" bindsTo="ast2013 ast2017">
+      <pattern xmi:id="ast2005" bindsTo="ast2013 ast2017 ast2015">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2006" name="rvSeq" eType="ast184" bindsTo="ast2013" referredCollectionType="ast184" rest="ast2015">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2007" name="rv" bindsTo="ast2017">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
@@ -5225,7 +5225,7 @@
     <variable xmi:id="ast2018" name="mv">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
     </variable>
-    <where xmi:id="ast2019">
+    <where xmi:id="ast2019" bindsTo="ast2017 ast2018 ast2015 ast2014">
       <predicate xmi:id="ast2020">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast2021" referredRelation="ast2028">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -5250,7 +5250,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2028" name="RVarToMVar" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2029" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast2043">
-      <pattern xmi:id="ast2030" bindsTo="ast2043 ast2046">
+      <pattern xmi:id="ast2030" bindsTo="ast2043 ast2045 ast2046">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2031" name="rv" bindsTo="ast2043">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
           <part xmi:id="ast2032">
@@ -5271,7 +5271,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2036" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2044">
-      <pattern xmi:id="ast2037" bindsTo="ast2044">
+      <pattern xmi:id="ast2037" bindsTo="ast2044 ast2045 ast2046">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2038" name="mv" bindsTo="ast2044">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
           <part xmi:id="ast2039">
@@ -5305,7 +5305,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2047" name="RVarToMRealizedVar" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2048" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast2062">
-      <pattern xmi:id="ast2049" bindsTo="ast2062 ast2065">
+      <pattern xmi:id="ast2049" bindsTo="ast2062 ast2064 ast2065">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2050" name="rv" bindsTo="ast2062">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
           <part xmi:id="ast2051">
@@ -5326,7 +5326,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2055" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2063">
-      <pattern xmi:id="ast2056" bindsTo="ast2063">
+      <pattern xmi:id="ast2056" bindsTo="ast2063 ast2064 ast2065">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2057" name="mv" bindsTo="ast2063">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.RealizedVariable"/>
           <part xmi:id="ast2058">
@@ -5435,7 +5435,7 @@
     <variable xmi:id="ast2090" name="me">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.OclExpression"/>
     </variable>
-    <where xmi:id="ast2091">
+    <where xmi:id="ast2091" bindsTo="ast2088 ast2090">
       <predicate xmi:id="ast2092">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast2093" referredRelation="ast4159">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -5512,7 +5512,7 @@
     </variable>
     <variable xmi:id="ast2118" name="dseq" eType="ast207"/>
     <variable xmi:id="ast2119" name="aseq" eType="ast208"/>
-    <where xmi:id="ast2120">
+    <where xmi:id="ast2120" bindsTo="ast2119 ast2117 ast2118 ast2114">
       <predicate xmi:id="ast2121">
         <conditionExpression xsi:type="ocl.ecore:IteratorExp" xmi:id="ast2122" name="forAll">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -5562,7 +5562,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2138" name="RWhenRelCallArgToMGuardPredicate" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2139" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast2190">
-      <pattern xmi:id="ast2140" bindsTo="ast2190 ast2196 ast2197 ast2198 ast2199 ast2200">
+      <pattern xmi:id="ast2140" bindsTo="ast2190 ast2196 ast2197 ast2198 ast2199 ast2200 ast2193">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2141" name="daSeq" eType="ast183" bindsTo="ast2190" referredCollectionType="ast183" rest="ast2195">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2142" name="r" bindsTo="ast2196">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
@@ -5600,7 +5600,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2151" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2191">
-      <pattern xmi:id="ast2152" bindsTo="ast2191 ast2201 ast2202 ast2203 ast2204 ast2205 ast2206 ast2207 ast2208">
+      <pattern xmi:id="ast2152" bindsTo="ast2191 ast2201 ast2192 ast2202 ast2203 ast2204 ast2205 ast2206 ast2193 ast2207 ast2208 ast2194">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2153" name="mp" bindsTo="ast2191">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.GuardPattern"/>
           <part xmi:id="ast2154">
@@ -5782,7 +5782,7 @@
     <variable xmi:id="ast2208" name="ave">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.VariableExp"/>
     </variable>
-    <when xmi:id="ast2209">
+    <when xmi:id="ast2209" bindsTo="ast2196 ast2192">
       <predicate xmi:id="ast2210">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast2211" referredRelation="ast252">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -5795,7 +5795,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast2214">
+    <where xmi:id="ast2214" bindsTo="ast2198 ast2194">
       <predicate xmi:id="ast2215">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast2216" referredRelation="ast2028">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -5862,7 +5862,7 @@
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
     </variable>
     <variable xmi:id="ast2240" name="dseq" eType="ast207"/>
-    <where xmi:id="ast2241">
+    <where xmi:id="ast2241" bindsTo="ast2238 ast2236 ast2240 ast2234">
       <predicate xmi:id="ast2242">
         <conditionExpression xsi:type="ocl.ecore:IteratorExp" xmi:id="ast2243" name="forAll">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -5912,7 +5912,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2259" name="RInvokerToMGuardPredicate" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2260" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast2311">
-      <pattern xmi:id="ast2261" bindsTo="ast2311 ast2317 ast2318 ast2319 ast2320 ast2321">
+      <pattern xmi:id="ast2261" bindsTo="ast2311 ast2317 ast2318 ast2319 ast2313 ast2320 ast2321">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2262" name="seqForInvoker" eType="ast183" bindsTo="ast2311" referredCollectionType="ast183" rest="ast2316">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2263" name="ir" bindsTo="ast2317">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
@@ -5950,7 +5950,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2272" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2312">
-      <pattern xmi:id="ast2273" bindsTo="ast2312 ast2322 ast2323 ast2324 ast2325 ast2326 ast2327 ast2328 ast2329">
+      <pattern xmi:id="ast2273" bindsTo="ast2312 ast2322 ast2314 ast2323 ast2324 ast2325 ast2326 ast2327 ast2313 ast2328 ast2329 ast2315">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2274" name="mg" bindsTo="ast2312">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.GuardPattern"/>
           <part xmi:id="ast2275">
@@ -6132,7 +6132,7 @@
     <variable xmi:id="ast2329" name="ave">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.VariableExp"/>
     </variable>
-    <when xmi:id="ast2330">
+    <when xmi:id="ast2330" bindsTo="ast2317 ast2314">
       <predicate xmi:id="ast2331">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast2332" referredRelation="ast252">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -6145,7 +6145,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast2335">
+    <where xmi:id="ast2335" bindsTo="ast2321 ast2315">
       <predicate xmi:id="ast2336">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast2337" referredRelation="ast2028">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -6213,7 +6213,7 @@
     <variable xmi:id="ast2359" name="mb">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
     </variable>
-    <where xmi:id="ast2360">
+    <where xmi:id="ast2360" bindsTo="ast2355 ast2356 ast2359">
       <predicate xmi:id="ast2361">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast2362" referredRelation="ast3589">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -6359,7 +6359,7 @@
     <variable xmi:id="ast2419" name="mb">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
     </variable>
-    <where xmi:id="ast2420">
+    <where xmi:id="ast2420" bindsTo="ast2398 ast2407 ast2408 ast2400 ast2416 ast2401 ast2402 ast2404 ast2413 ast2415 ast2405 ast2414 ast2406 ast2412 ast2399 ast2419 ast2418">
       <predicate xmi:id="ast2421">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2422">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -6572,7 +6572,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2511" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2535">
-      <pattern xmi:id="ast2512" bindsTo="ast2535 ast2545 ast2546 ast2547 ast2548">
+      <pattern xmi:id="ast2512" bindsTo="ast2535 ast2545 ast2546 ast2537 ast2547 ast2544 ast2548 ast2538">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2513" name="mb" bindsTo="ast2535">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast2514">
@@ -6685,7 +6685,7 @@
     <variable xmi:id="ast2548" name="ve2">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.VariableExp"/>
     </variable>
-    <where xmi:id="ast2549">
+    <where xmi:id="ast2549" bindsTo="ast2536 ast2541 ast2542 ast2537 ast2544 ast2538">
       <predicate xmi:id="ast2550">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2551">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -6758,7 +6758,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2576" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2608">
-      <pattern xmi:id="ast2577" bindsTo="ast2608 ast2622 ast2623 ast2624 ast2625 ast2626 ast2627 ast2628">
+      <pattern xmi:id="ast2577" bindsTo="ast2608 ast2622 ast2623 ast2624 ast2625 ast2614 ast2626 ast2621 ast2627 ast2628 ast2615">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2578" name="mb" bindsTo="ast2608">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast2579">
@@ -6911,7 +6911,7 @@
     <variable xmi:id="ast2628" name="ave">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.VariableExp"/>
     </variable>
-    <where xmi:id="ast2629">
+    <where xmi:id="ast2629" bindsTo="ast2611 ast2618 ast2619 ast2614 ast2621 ast2615 ast2607 ast2612 ast2613 ast2609 ast2610 ast2608">
       <predicate xmi:id="ast2630">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2631">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -7031,7 +7031,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2680" name="RPredicateSetToMBPredicateSet" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2681" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast2694">
-      <pattern xmi:id="ast2682" bindsTo="ast2694 ast2697 ast2698">
+      <pattern xmi:id="ast2682" bindsTo="ast2694 ast2697 ast2698 ast2696">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2683" name="predSeq" eType="ast187" bindsTo="ast2694" referredCollectionType="ast187" rest="ast2696">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2684" name="rp" bindsTo="ast2697">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTBase.Predicate"/>
@@ -7086,7 +7086,7 @@
     <variable xmi:id="ast2700" name="me">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.OclExpression"/>
     </variable>
-    <where xmi:id="ast2701">
+    <where xmi:id="ast2701" bindsTo="ast2698 ast2700 ast2696 ast2695">
       <predicate xmi:id="ast2702">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast2703" referredRelation="ast4159">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -7256,7 +7256,7 @@
     <variable xmi:id="ast2758" name="mb">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
     </variable>
-    <where xmi:id="ast2759">
+    <where xmi:id="ast2759" bindsTo="ast2747 ast2749 ast2751 ast2754 ast2755 ast2746 ast2758">
       <predicate xmi:id="ast2760">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2761">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -7414,7 +7414,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2815" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2839">
-      <pattern xmi:id="ast2816" bindsTo="ast2839 ast2854 ast2855 ast2856 ast2857">
+      <pattern xmi:id="ast2816" bindsTo="ast2839 ast2854 ast2855 ast2842 ast2856 ast2853 ast2857 ast2841">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2817" name="mb" bindsTo="ast2839">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast2818">
@@ -7542,7 +7542,7 @@
     <variable xmi:id="ast2857" name="ve2">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.VariableExp"/>
     </variable>
-    <where xmi:id="ast2858">
+    <where xmi:id="ast2858" bindsTo="ast2843 ast2845 ast2846 ast2842 ast2853 ast2841">
       <predicate xmi:id="ast2859">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2860">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -7588,7 +7588,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2875" name="RDomainPatternExprToMappingDomainAssignment" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2876" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast2914">
-      <pattern xmi:id="ast2877" bindsTo="ast2914 ast2919 ast2920 ast2921">
+      <pattern xmi:id="ast2877" bindsTo="ast2914 ast2919 ast2920 ast2916 ast2921">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2878" name="seqForAssignment" eType="ast183" bindsTo="ast2914" referredCollectionType="ast183" rest="ast2918">
           <member xsi:type="ocl.ecore:VariableExp" xmi:id="ast2879" referredVariable="ast2918">
             <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
@@ -7647,7 +7647,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2894" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2915">
-      <pattern xmi:id="ast2895" bindsTo="ast2915 ast2922 ast2923 ast2924 ast2925">
+      <pattern xmi:id="ast2895" bindsTo="ast2915 ast2922 ast2923 ast2917 ast2924 ast2916 ast2925">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2896" name="db" bindsTo="ast2915">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast2897">
@@ -7745,7 +7745,7 @@
     <variable xmi:id="ast2925" name="me">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.OclExpression"/>
     </variable>
-    <where xmi:id="ast2926">
+    <where xmi:id="ast2926" bindsTo="ast2919 ast2917 ast2921 ast2925">
       <predicate xmi:id="ast2927">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast2928" referredRelation="ast2028">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -7772,7 +7772,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast2935" name="RDomainPatternExprToMappingDomainVarAssignment" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2936" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast2976">
-      <pattern xmi:id="ast2937" bindsTo="ast2976 ast2983 ast2984 ast2985 ast2986">
+      <pattern xmi:id="ast2937" bindsTo="ast2976 ast2983 ast2984 ast2985 ast2981 ast2986 ast2979">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast2938" name="seqForAssignment" eType="ast183" bindsTo="ast2976" referredCollectionType="ast183" rest="ast2982">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2939">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -7822,7 +7822,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast2952" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast2977">
-      <pattern xmi:id="ast2953" bindsTo="ast2977 ast2987 ast2988 ast2989 ast2990 ast2991">
+      <pattern xmi:id="ast2953" bindsTo="ast2977 ast2987 ast2988 ast2989 ast2990 ast2981 ast2991 ast2980">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast2954" name="db" bindsTo="ast2977">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast2955">
@@ -7943,7 +7943,7 @@
     <variable xmi:id="ast2991" name="me">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.VariableExp"/>
     </variable>
-    <when xmi:id="ast2992">
+    <when xmi:id="ast2992" bindsTo="ast2978 ast2983">
       <predicate xmi:id="ast2993">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast2994">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -7957,7 +7957,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast2998">
+    <where xmi:id="ast2998" bindsTo="ast2984 ast2987 ast2979 ast2980">
       <predicate xmi:id="ast2999">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast3000" referredRelation="ast2047">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -7984,7 +7984,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3007" name="RDomainPatternExprToMappingDomainTemplateVarAssignment" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3008" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast3047">
-      <pattern xmi:id="ast3009" bindsTo="ast3047 ast3054 ast3055 ast3056 ast3057">
+      <pattern xmi:id="ast3009" bindsTo="ast3047 ast3054 ast3055 ast3056 ast3052 ast3057 ast3050">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3010" name="seqForAssignment" eType="ast183" bindsTo="ast3047" referredCollectionType="ast183" rest="ast3053">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3011">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -8030,7 +8030,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3023" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3048">
-      <pattern xmi:id="ast3024" bindsTo="ast3048 ast3058 ast3059 ast3060 ast3061 ast3062">
+      <pattern xmi:id="ast3024" bindsTo="ast3048 ast3058 ast3059 ast3060 ast3061 ast3052 ast3062 ast3051">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3025" name="db" bindsTo="ast3048">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3026">
@@ -8151,7 +8151,7 @@
     <variable xmi:id="ast3062" name="me">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.VariableExp"/>
     </variable>
-    <when xmi:id="ast3063">
+    <when xmi:id="ast3063" bindsTo="ast3049 ast3054">
       <predicate xmi:id="ast3064">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3065">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -8165,7 +8165,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast3069">
+    <where xmi:id="ast3069" bindsTo="ast3055 ast3058 ast3050 ast3051">
       <predicate xmi:id="ast3070">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast3071" referredRelation="ast2047">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -8192,7 +8192,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3078" name="RDomainPatternExprToMappingBottomVarAssignment" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3079" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast3118">
-      <pattern xmi:id="ast3080" bindsTo="ast3118 ast3125 ast3126 ast3127 ast3128">
+      <pattern xmi:id="ast3080" bindsTo="ast3118 ast3125 ast3126 ast3127 ast3123 ast3128 ast3121">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3081" name="seqForAssignment" eType="ast183" bindsTo="ast3118" referredCollectionType="ast183" rest="ast3124">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3082">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -8238,7 +8238,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3094" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3119">
-      <pattern xmi:id="ast3095" bindsTo="ast3119 ast3129 ast3130 ast3131 ast3132 ast3133">
+      <pattern xmi:id="ast3095" bindsTo="ast3119 ast3129 ast3130 ast3131 ast3132 ast3123 ast3133 ast3122">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3096" name="mb" bindsTo="ast3119">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3097">
@@ -8359,7 +8359,7 @@
     <variable xmi:id="ast3133" name="me">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.VariableExp"/>
     </variable>
-    <when xmi:id="ast3134">
+    <when xmi:id="ast3134" bindsTo="ast3120 ast3125">
       <predicate xmi:id="ast3135">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3136">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -8373,7 +8373,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast3140">
+    <where xmi:id="ast3140" bindsTo="ast3126 ast3129 ast3121 ast3122">
       <predicate xmi:id="ast3141">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast3142" referredRelation="ast2047">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -8400,7 +8400,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3149" name="RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3150" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast3219">
-      <pattern xmi:id="ast3151" bindsTo="ast3219 ast3225 ast3226 ast3227 ast3228 ast3229 ast3230 ast3231 ast3232 ast3233 ast3234 ast3235">
+      <pattern xmi:id="ast3151" bindsTo="ast3219 ast3225 ast3226 ast3227 ast3228 ast3229 ast3230 ast3231 ast3221 ast3232 ast3233 ast3234 ast3235">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3152" name="rtdSeq" eType="ast183" bindsTo="ast3219" referredCollectionType="ast183" rest="ast3224">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3153" name="r" bindsTo="ast3225">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
@@ -8526,7 +8526,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3188" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3220">
-      <pattern xmi:id="ast3189" bindsTo="ast3220 ast3236 ast3237 ast3238 ast3239 ast3240 ast3241 ast3242">
+      <pattern xmi:id="ast3189" bindsTo="ast3220 ast3236 ast3237 ast3238 ast3239 ast3240 ast3222 ast3241 ast3221 ast3242">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3190" name="m" bindsTo="ast3220">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast3191">
@@ -8696,7 +8696,7 @@
     <variable xmi:id="ast3242" name="me">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.OclExpression"/>
     </variable>
-    <when xmi:id="ast3243">
+    <when xmi:id="ast3243" bindsTo="ast3226 ast3237">
       <predicate xmi:id="ast3244">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast3245" referredRelation="ast222">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -8709,7 +8709,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast3248">
+    <where xmi:id="ast3248" bindsTo="ast3228 ast3222 ast3232 ast3242 ast3223 ast3225 ast3227 ast3233 ast3236">
       <predicate xmi:id="ast3249">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast3250" referredRelation="ast2028">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -8778,7 +8778,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3273" name="RDomainToMComposedMappingGuard" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3274" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast3352">
-      <pattern xmi:id="ast3275" bindsTo="ast3352 ast3362 ast3363 ast3364 ast3365 ast3366 ast3367 ast3368 ast3369 ast3370 ast3371">
+      <pattern xmi:id="ast3275" bindsTo="ast3352 ast3362 ast3363 ast3364 ast3365 ast3355 ast3366 ast3356 ast3367 ast3368 ast3369 ast3370 ast3371">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3276" name="rtdSeq" eType="ast183" bindsTo="ast3352" referredCollectionType="ast183" rest="ast3361">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3277" name="isVarBoundToSomeOtherTemplate" referredOperation="ast147">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -8872,7 +8872,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3303" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3353">
-      <pattern xmi:id="ast3304" bindsTo="ast3353 ast3372 ast3373 ast3374 ast3375 ast3376 ast3377 ast3378 ast3379 ast3380 ast3381 ast3382">
+      <pattern xmi:id="ast3304" bindsTo="ast3353 ast3372 ast3373 ast3374 ast3375 ast3376 ast3357 ast3377 ast3358 ast3378 ast3379 ast3380 ast3355 ast3381 ast3356 ast3367 ast3360 ast3382">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3305" name="cm" bindsTo="ast3353">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast3306">
@@ -9120,7 +9120,7 @@
     <variable xmi:id="ast3382" name="cmdg">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.GuardPattern"/>
     </variable>
-    <when xmi:id="ast3383">
+    <when xmi:id="ast3383" bindsTo="ast3363 ast3360">
       <predicate xmi:id="ast3384">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast3385" referredRelation="ast222">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -9133,7 +9133,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast3388">
+    <where xmi:id="ast3388" bindsTo="ast3359 ast3362 ast3365 ast3357 ast3371 ast3358">
       <predicate xmi:id="ast3389">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3390">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -9179,7 +9179,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3405" name="RDomainToMDBottomForEnforcementOfNonIdentityPropObject" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3406" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast3504">
-      <pattern xmi:id="ast3407" bindsTo="ast3504 ast3515 ast3516 ast3517 ast3518 ast3519 ast3520 ast3521 ast3522 ast3523 ast3524 ast3525 ast3526 ast3527">
+      <pattern xmi:id="ast3407" bindsTo="ast3504 ast3515 ast3516 ast3517 ast3518 ast3510 ast3519 ast3512 ast3520 ast3521 ast3522 ast3523 ast3524 ast3525 ast3511 ast3526 ast3527">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3408" name="rdtVarsSeq" eType="ast186" bindsTo="ast3504" referredCollectionType="ast186" rest="ast3514">
           <member xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3409" name="rdtSet" eType="ast185" bindsTo="ast3515" referredCollectionType="ast185" rest="ast3514">
             <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3410" name="r" bindsTo="ast3516">
@@ -9314,7 +9314,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3448" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3505">
-      <pattern xmi:id="ast3449" bindsTo="ast3505 ast3528 ast3529 ast3530 ast3531 ast3532 ast3533 ast3534 ast3535 ast3536 ast3537 ast3538">
+      <pattern xmi:id="ast3449" bindsTo="ast3505 ast3528 ast3527 ast3529 ast3530 ast3510 ast3531 ast3512 ast3520 ast3532 ast3533 ast3534 ast3535 ast3513 ast3536 ast3511 ast3537 ast3538">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3450" name="m" bindsTo="ast3505">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.Mapping"/>
           <part xmi:id="ast3451">
@@ -9590,7 +9590,7 @@
     <variable xmi:id="ast3538" name="mb">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
     </variable>
-    <when xmi:id="ast3539">
+    <when xmi:id="ast3539" bindsTo="ast3517 ast3529">
       <predicate xmi:id="ast3540">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast3541" referredRelation="ast222">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -9603,7 +9603,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast3544">
+    <where xmi:id="ast3544" bindsTo="ast3522 ast3513 ast3527 ast3533 ast3504 ast3508 ast3509 ast3506 ast3516 ast3518 ast3526 ast3507 ast3532">
       <predicate xmi:id="ast3545">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast3546" referredRelation="ast2028">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -9712,7 +9712,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3589" name="RDomainPatternToMDBottomPatternComposite" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3590" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast3629">
-      <pattern xmi:id="ast3591" bindsTo="ast3629 ast3637 ast3638 ast3639 ast3640 ast3641 ast3642 ast3643">
+      <pattern xmi:id="ast3591" bindsTo="ast3629 ast3637 ast3638 ast3639 ast3640 ast3641 ast3633 ast3642 ast3643">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3592" name="seqForDomainPtrn" eType="ast183" bindsTo="ast3629" referredCollectionType="ast183" rest="ast3636">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3593" name="r" bindsTo="ast3637">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
@@ -9767,7 +9767,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3607" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3630">
-      <pattern xmi:id="ast3608" bindsTo="ast3630 ast3644 ast3645 ast3646 ast3647">
+      <pattern xmi:id="ast3608" bindsTo="ast3630 ast3644 ast3645 ast3634 ast3646 ast3633 ast3647 ast3635">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3609" name="db" bindsTo="ast3630">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3610">
@@ -9888,7 +9888,7 @@
     <variable xmi:id="ast3647" name="ve2">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.VariableExp"/>
     </variable>
-    <where xmi:id="ast3648">
+    <where xmi:id="ast3648" bindsTo="ast3639 ast3634 ast3643 ast3635 ast3631 ast3637 ast3642 ast3630">
       <predicate xmi:id="ast3649">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast3650" referredRelation="ast2028">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -9945,7 +9945,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3669" name="RDomainPatternToMDBottomPatternSimpleUnSharedVarExpr" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3670" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast3713">
-      <pattern xmi:id="ast3671" bindsTo="ast3713 ast3720 ast3721 ast3722 ast3723 ast3724 ast3725 ast3726">
+      <pattern xmi:id="ast3671" bindsTo="ast3713 ast3720 ast3721 ast3722 ast3723 ast3724 ast3716 ast3725 ast3726">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3672" name="seqForDomainPtrn" eType="ast183" bindsTo="ast3713" referredCollectionType="ast183" rest="ast3719">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3673">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -10012,7 +10012,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3691" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3714">
-      <pattern xmi:id="ast3692" bindsTo="ast3714 ast3727 ast3728 ast3729 ast3730">
+      <pattern xmi:id="ast3692" bindsTo="ast3714 ast3727 ast3728 ast3717 ast3729 ast3716 ast3730 ast3718">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3693" name="db" bindsTo="ast3714">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3694">
@@ -10132,7 +10132,7 @@
     <variable xmi:id="ast3730" name="ve2">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.VariableExp"/>
     </variable>
-    <when xmi:id="ast3731">
+    <when xmi:id="ast3731" bindsTo="ast3715 ast3720">
       <predicate xmi:id="ast3732">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3733">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -10146,7 +10146,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast3737">
+    <where xmi:id="ast3737" bindsTo="ast3722 ast3717 ast3726 ast3718">
       <predicate xmi:id="ast3738">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast3739" referredRelation="ast2028">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -10173,7 +10173,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3746" name="RDomainPatternToMDBottomPatternSimpleSharedVarExpr" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3747" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast3789">
-      <pattern xmi:id="ast3748" bindsTo="ast3789 ast3796 ast3797 ast3798 ast3799 ast3800 ast3801 ast3802">
+      <pattern xmi:id="ast3748" bindsTo="ast3789 ast3796 ast3797 ast3798 ast3799 ast3800 ast3792 ast3801 ast3802">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3749" name="seqForDomainPtrn" eType="ast183" bindsTo="ast3789" referredCollectionType="ast183" rest="ast3795">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3750">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -10236,7 +10236,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3767" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3790">
-      <pattern xmi:id="ast3768" bindsTo="ast3790 ast3803 ast3804 ast3805 ast3806">
+      <pattern xmi:id="ast3768" bindsTo="ast3790 ast3803 ast3804 ast3793 ast3805 ast3792 ast3806 ast3794">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3769" name="mb" bindsTo="ast3790">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3770">
@@ -10356,7 +10356,7 @@
     <variable xmi:id="ast3806" name="ve2">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.VariableExp"/>
     </variable>
-    <when xmi:id="ast3807">
+    <when xmi:id="ast3807" bindsTo="ast3791 ast3796">
       <predicate xmi:id="ast3808">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3809">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -10370,7 +10370,7 @@
         </conditionExpression>
       </predicate>
     </when>
-    <where xmi:id="ast3813">
+    <where xmi:id="ast3813" bindsTo="ast3798 ast3793 ast3802 ast3794">
       <predicate xmi:id="ast3814">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast3815" referredRelation="ast2028">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -10397,7 +10397,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast3822" name="RDomainPatternToMDBottomPatternSimpleNonVarExpr" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3823" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast3867">
-      <pattern xmi:id="ast3824" bindsTo="ast3867 ast3872 ast3873 ast3874 ast3875 ast3876">
+      <pattern xmi:id="ast3824" bindsTo="ast3867 ast3872 ast3873 ast3874 ast3875 ast3869 ast3876">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast3825" name="seqForDomainPtrn" eType="ast183" bindsTo="ast3867" referredCollectionType="ast183" rest="ast3871">
           <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast3826">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -10476,7 +10476,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3847" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3868">
-      <pattern xmi:id="ast3848" bindsTo="ast3868 ast3877 ast3878 ast3879 ast3880">
+      <pattern xmi:id="ast3848" bindsTo="ast3868 ast3877 ast3878 ast3870 ast3879 ast3869 ast3880">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3849" name="db" bindsTo="ast3868">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3850">
@@ -10580,7 +10580,7 @@
     <variable xmi:id="ast3880" name="me">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.OclExpression"/>
     </variable>
-    <where xmi:id="ast3881">
+    <where xmi:id="ast3881" bindsTo="ast3873 ast3870 ast3876 ast3880">
       <predicate xmi:id="ast3882">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast3883" referredRelation="ast2028">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -10645,7 +10645,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3903" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3927">
-      <pattern xmi:id="ast3904" bindsTo="ast3927 ast3936 ast3937 ast3938 ast3939">
+      <pattern xmi:id="ast3904" bindsTo="ast3927 ast3936 ast3937 ast3928 ast3938 ast3934 ast3939 ast3929">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3905" name="mb" bindsTo="ast3927">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3906">
@@ -10759,7 +10759,7 @@
     <variable xmi:id="ast3939" name="ve2">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.VariableExp"/>
     </variable>
-    <where xmi:id="ast3940">
+    <where xmi:id="ast3940" bindsTo="ast3930 ast3928 ast3934 ast3929">
       <predicate xmi:id="ast3941">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast3942" referredRelation="ast4099">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -10815,7 +10815,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast3960" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast3984">
-      <pattern xmi:id="ast3961" bindsTo="ast3984 ast3995 ast3996 ast3997 ast3998">
+      <pattern xmi:id="ast3961" bindsTo="ast3984 ast3995 ast3996 ast3986 ast3997 ast3993 ast3998 ast3987">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast3962" name="mb" bindsTo="ast3984">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast3963">
@@ -10929,7 +10929,7 @@
     <variable xmi:id="ast3998" name="ve2">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.VariableExp"/>
     </variable>
-    <where xmi:id="ast3999">
+    <where xmi:id="ast3999" bindsTo="ast3985 ast3990 ast3991 ast3986 ast3993 ast3987">
       <predicate xmi:id="ast4000">
         <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast4001">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -11021,7 +11021,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast4033" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast4053">
-      <pattern xmi:id="ast4034" bindsTo="ast4053 ast4061 ast4062 ast4063 ast4064">
+      <pattern xmi:id="ast4034" bindsTo="ast4053 ast4061 ast4062 ast4063 ast4059 ast4064 ast4054">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast4035" name="mb" bindsTo="ast4053">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.BottomPattern"/>
           <part xmi:id="ast4036">
@@ -11110,7 +11110,7 @@
     <variable xmi:id="ast4064" name="eod">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.EnforcementOperation"/>
     </variable>
-    <where xmi:id="ast4065">
+    <where xmi:id="ast4065" bindsTo="ast4056 ast4063">
       <predicate xmi:id="ast4066">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast4067" referredRelation="ast4070">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -11197,7 +11197,7 @@
     <variable xmi:id="ast4093" name="mv">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EssentialOCL.Variable"/>
     </variable>
-    <where xmi:id="ast4094">
+    <where xmi:id="ast4094" bindsTo="ast4091 ast4093">
       <predicate xmi:id="ast4095">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast4096" referredRelation="ast2028">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -11213,7 +11213,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast4099" name="RelationToTraceClassVar" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast4100" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast4114">
-      <pattern xmi:id="ast4101" bindsTo="ast4114">
+      <pattern xmi:id="ast4101" bindsTo="ast4114 ast4116">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast4102" name="r" bindsTo="ast4114">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
           <part xmi:id="ast4103">
@@ -11227,7 +11227,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast4105" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast4115">
-      <pattern xmi:id="ast4106" bindsTo="ast4115">
+      <pattern xmi:id="ast4106" bindsTo="ast4115 ast4116 ast4117">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast4107" name="tcv" bindsTo="ast4115">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.RealizedVariable"/>
           <part xmi:id="ast4108">
@@ -11265,7 +11265,7 @@
     <variable xmi:id="ast4117" name="tc">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#EMOF.Class"/>
     </variable>
-    <when xmi:id="ast4118">
+    <when xmi:id="ast4118" bindsTo="ast4114 ast4117">
       <predicate xmi:id="ast4119">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast4120" referredRelation="ast252">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -11281,7 +11281,7 @@
   </rule>
   <rule xsi:type="eqvtr:Relation" xmi:id="ast4123" name="RelationDomainToTraceClassVar" isTopLevel="false">
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast4124" name="relations" isCheckable="true" isEnforceable="false" typedModel="ast220" rootVariable="ast4146">
-      <pattern xmi:id="ast4125" bindsTo="ast4146 ast4152 ast4153">
+      <pattern xmi:id="ast4125" bindsTo="ast4146 ast4152 ast4148 ast4153 ast4149">
         <templateExpression xsi:type="eqvtt:CollectionTemplateExp" xmi:id="ast4126" name="rdSeq" eType="ast183" bindsTo="ast4146" referredCollectionType="ast183" rest="ast4151">
           <member xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast4127" name="r" bindsTo="ast4152">
             <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.Relation"/>
@@ -11307,7 +11307,7 @@
       </pattern>
     </domain>
     <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast4133" name="core" isCheckable="false" isEnforceable="true" typedModel="ast221" rootVariable="ast4147">
-      <pattern xmi:id="ast4134" bindsTo="ast4147">
+      <pattern xmi:id="ast4134" bindsTo="ast4147 ast4148 ast4149 ast4150">
         <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast4135" name="tcv" bindsTo="ast4147">
           <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTCore.RealizedVariable"/>
           <part xmi:id="ast4136">
@@ -11369,7 +11369,7 @@
     <variable xmi:id="ast4153" name="d">
       <eType xsi:type="ecore:EClass" href="QVT.ecore#QVTRelation.RelationDomain"/>
     </variable>
-    <when xmi:id="ast4154">
+    <when xmi:id="ast4154" bindsTo="ast4152 ast4150">
       <predicate xmi:id="ast4155">
         <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast4156" referredRelation="ast252">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>

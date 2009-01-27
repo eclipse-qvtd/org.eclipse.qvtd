@@ -35,7 +35,7 @@
     <variable xmi:id="ast14" name="c">
       <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
     </variable>
-    <when xmi:id="ast15">
+    <when xmi:id="ast15" bindsTo="ast14">
       <predicate xmi:id="ast16">
         <conditionExpression xsi:type="ocl.ecore:IteratorExp" xmi:id="ast17" name="exists">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>

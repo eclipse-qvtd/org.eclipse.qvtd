@@ -32,7 +32,7 @@
         isTopLevel="true">
       <domain xmi:type="qvtr:RelationDomain" xmi:id="ast8" name="seqDgm" isCheckable="true"
           isEnforceable="false" typedModel="ast5" rootVariable="ast18">
-        <pattern xmi:id="ast9" bindsTo="ast18">
+        <pattern xmi:id="ast9" bindsTo="ast18 ast20">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast10" name="i"
               bindsTo="ast18">
             <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Interaction"/>
@@ -49,7 +49,7 @@
       </domain>
       <domain xmi:type="qvtr:RelationDomain" xmi:id="ast13" name="stm" isCheckable="false"
           isEnforceable="true" typedModel="ast6" rootVariable="ast19">
-        <pattern xmi:id="ast14" bindsTo="ast19">
+        <pattern xmi:id="ast14" bindsTo="ast19 ast20">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast15" name="s"
               bindsTo="ast19">
             <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.StateMachine"/>
@@ -77,7 +77,7 @@
     <rule xmi:type="qvtr:Relation" xmi:id="ast21" name="StateToState" isTopLevel="true">
       <domain xmi:type="qvtr:RelationDomain" xmi:id="ast22" name="seqDgm" isCheckable="true"
           isEnforceable="false" typedModel="ast5" rootVariable="ast38">
-        <pattern xmi:id="ast23" bindsTo="ast38 ast41 ast42">
+        <pattern xmi:id="ast23" bindsTo="ast38 ast40 ast41 ast42">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast24" name="st1"
               bindsTo="ast38">
             <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.State"/>
@@ -109,7 +109,7 @@
       </domain>
       <domain xmi:type="qvtr:RelationDomain" xmi:id="ast31" name="stm" isCheckable="false"
           isEnforceable="true" typedModel="ast6" rootVariable="ast39">
-        <pattern xmi:id="ast32" bindsTo="ast39 ast43">
+        <pattern xmi:id="ast32" bindsTo="ast39 ast40 ast43">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast33" name="st2"
               bindsTo="ast39">
             <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.State"/>
@@ -149,7 +149,7 @@
       <variable xmi:id="ast43" name="s">
         <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.StateMachine"/>
       </variable>
-      <when xmi:id="ast44">
+      <when xmi:id="ast44" bindsTo="ast42 ast43">
         <predicate xmi:id="ast45">
           <conditionExpression xmi:type="qvtr:RelationCallExp" xmi:id="ast46" referredRelation="ast7">
             <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -168,7 +168,7 @@
     <rule xmi:type="qvtr:Relation" xmi:id="ast49" name="MessageToTransition" isTopLevel="true">
       <domain xmi:type="qvtr:RelationDomain" xmi:id="ast50" name="seqDgm" isCheckable="true"
           isEnforceable="false" typedModel="ast5" rootVariable="ast86">
-        <pattern xmi:id="ast51" bindsTo="ast86 ast89 ast91 ast92 ast93 ast94 ast95">
+        <pattern xmi:id="ast51" bindsTo="ast86 ast88 ast89 ast91 ast92 ast93 ast94 ast95">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast52" name="m1"
               bindsTo="ast86">
             <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Message"/>
@@ -238,7 +238,7 @@
       </domain>
       <domain xmi:type="qvtr:RelationDomain" xmi:id="ast69" name="stm" isCheckable="false"
           isEnforceable="true" typedModel="ast6" rootVariable="ast87">
-        <pattern xmi:id="ast70" bindsTo="ast87 ast96 ast97 ast98 ast99 ast100">
+        <pattern xmi:id="ast70" bindsTo="ast87 ast88 ast96 ast97 ast98 ast99 ast100">
           <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast71" name="tr"
               bindsTo="ast87">
             <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.Transition"/>
@@ -339,7 +339,7 @@
       <variable xmi:id="ast100" name="s">
         <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.StateMachine"/>
       </variable>
-      <when xmi:id="ast101">
+      <when xmi:id="ast101" bindsTo="ast95 ast100 ast92 ast96 ast94 ast97">
         <predicate xmi:id="ast102">
           <conditionExpression xmi:type="qvtr:RelationCallExp" xmi:id="ast103" referredRelation="ast7">
             <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -477,7 +477,7 @@
       <variable xmi:id="ast141" name="tr2">
         <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.Transition"/>
       </variable>
-      <when xmi:id="ast142">
+      <when xmi:id="ast142" bindsTo="ast137 ast136 ast139 ast141">
         <predicate xmi:id="ast143">
           <conditionExpression xmi:type="qvtr:RelationCallExp" xmi:id="ast144" referredRelation="ast49">
             <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
