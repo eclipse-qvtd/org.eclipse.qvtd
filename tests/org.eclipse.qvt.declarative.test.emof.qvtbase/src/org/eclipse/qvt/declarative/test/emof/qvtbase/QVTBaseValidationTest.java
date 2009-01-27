@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.ocl.ecore.CollectionType;
+import org.eclipse.ocl.ecore.LetExp;
 import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.expressions.CollectionKind;
@@ -30,6 +31,7 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.util.QVTBaseValidator;
 import org.eclipse.qvt.declarative.parser.utils.ProblemLog;
 import org.eclipse.qvt.declarative.test.TestQVTBase.TestDomain;
 import org.eclipse.qvt.declarative.test.TestQVTBase.TestExpression;
+import org.eclipse.qvt.declarative.test.TestQVTBase.TestPattern;
 import org.eclipse.qvt.declarative.test.TestQVTBase.TestRule;
 import org.eclipse.qvt.declarative.test.TestQVTBase.TestTransformation;
 
@@ -154,20 +156,28 @@ public class QVTBaseValidationTest extends AbstractQVTBaseValidationTest
 		validationTest(expectedProblems);
 	}
 
-/*	public void testPredicate_VariablesAreBoundByPattern() {
-		Relation relation = createRelation(transformation, "TestRelation");
-		Variable variable = createVariable(relation.getVariable(), "TestVariable", getBooleanType());
-		Pattern pattern = createPattern(null);
-		relation.setWhen(pattern);
+	public void testPredicate_ExternalVariablesAreBoundByPattern() {
+		TestTransformation transformation = createTestTransformation(resource.getContents(), "TestTransformation");
+		TestPattern pattern = createTestPattern(transformation.getContents());
 		Predicate predicate = createPredicate(pattern.getPredicate());
+		Variable variable = createVariable(pattern.getContents(), "TestVariable", getBooleanType());
 		OCLExpression variableExpression = createVariableExp(variable);
-		predicate.setConditionExpression(variableExpression);
+		LetExp letExpression = createLetExp("LetVariable", getBooleanType(), variableExpression);
+		predicate.setConditionExpression(letExpression);
+		Variable letVariable = (Variable) letExpression.getVariable();
+		pattern.getBindsTo().add(letVariable);
 		//
 		ProblemLog expectedProblems = new ProblemLog();
-		expectedProblems.expectValidatorError(QVTBaseMessages._UI_VariablesAreBoundByPattern,
-				getQualifiedNameOf(variable), getQualifiedNameOf(pattern));
+		expectedProblems.expectValidatorError(QVTBaseValidator.INSTANCE,
+				QVTBaseMessages._UI_Predicate_ExternalVariableIsNotBoundByPattern,
+				getQualifiedNameOf(variable),
+				getQualifiedNameOf(pattern));
+		expectedProblems.expectValidatorError(QVTBaseValidator.INSTANCE,
+				QVTBaseMessages._UI_Predicate_LocalVariableIsBoundByPattern,
+				getQualifiedNameOf(letVariable),
+				getQualifiedNameOf(pattern));
 		validationTest(expectedProblems);
-	} */
+	}
 
 	public void testRule_DomainNamesAreUnique() {
 		Transformation transformation = createTransformation(resource, "TestTransformation");
@@ -389,6 +399,21 @@ public class QVTBaseValidationTest extends AbstractQVTBaseValidationTest
 		expectedProblems.expectValidatorError(QVTBaseValidator.INSTANCE,
 				QVTBaseMessages._UI_TypedModel_DependsOnContainsACycle,
 				getQualifiedNameOf(typedModel));
+		validationTest(expectedProblems);
+	}
+	
+	public void testTypedModel_DependsOnAreModelParameters() {
+		Transformation transformation1 = createTransformation(resource, "TestTransformation1");
+		Transformation transformation2 = createTransformation(resource, "TestTransformation1");
+		TypedModel typedModel1 = createTypedModel(transformation1, "TestTypedModel1", EcorePackage.eINSTANCE);
+		TypedModel typedModel2 = createTypedModel(transformation2, "TestTypedModel2", EcorePackage.eINSTANCE);
+		typedModel1.getDependsOn().add(typedModel2);
+		//
+		ProblemLog expectedProblems = new ProblemLog();
+		expectedProblems.expectValidatorError(QVTBaseValidator.INSTANCE,
+				QVTBaseMessages._UI_TypedModel_DependsOnIsNotAModelParameter,
+				getQualifiedNameOf(typedModel2),
+				getQualifiedNameOf(transformation1));
 		validationTest(expectedProblems);
 	}
 }
