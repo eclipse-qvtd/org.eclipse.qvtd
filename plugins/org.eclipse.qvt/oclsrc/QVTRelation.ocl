@@ -1,3 +1,19 @@
+/*
+-- <copyright>
+-- 
+-- Copyright (c) 2008,2009 E.D.Willink and others.
+-- All rights reserved. This program and the accompanying materials
+-- are made available under the terms of the Eclipse Public License v1.0
+-- which accompanies this distribution, and is available at
+-- http://www.eclipse.org/legal/epl-v10.html
+-- 
+-- Contributors:
+-- E.D.Willink - initial API and implementation
+-- 
+-- </copyright>
+--
+-- $Id: QVTRelation.ocl,v 1.6 2009/01/27 21:26:36 ewillink Exp $
+*/
 -----------------------------------------------------------------------
 -- EMOF
 -----------------------------------------------------------------------
@@ -45,7 +61,7 @@ def: locallyDefined(v : EssentialOCL::Variable) : Boolean =
         and ((oclAsType(EssentialOCL::IterateExp).result = v) 
              or oclAsType(EssentialOCL::IterateExp).iterator->includes(v)))
     or (oclIsKindOf(EssentialOCL::LoopExp)
-        and oclAsType(EssentialOCL::IterateExp).iterator->includes(v))
+        and oclAsType(EssentialOCL::LoopExp).iterator->includes(v))
     then true
     else let parent : EMOF::Element = container() in
         if parent.oclIsKindOf(EssentialOCL::OclExpression)
@@ -74,14 +90,15 @@ def: isPredefinedType() : Boolean =
     or (self = String)
     or (self = UnlimitedNatural)
 def: assignableFrom(t : Type) : Boolean = -- FIXME Set assignments
-    if oclIsKindOf(EssentialOCL::CollectionType) and t.oclIsKindOf(EssentialOCL::CollectionType)
+    if oclIsKindOf(EssentialOCL::CollectionType)
+        and t.oclIsKindOf(EssentialOCL::CollectionType)
     then let et : Type = oclAsType(EssentialOCL::CollectionType).elementType in
         et = OclVoid
         or et.assignableFrom(t.oclAsType(EssentialOCL::CollectionType).elementType)
     else t.getMetaClass().isSuperClassOf(getMetaClass())
     endif   
-def: matches(t : Type) : Boolean =
-    self = t                   -- FIXME   
+def: matchableWith(t : Type) : Boolean =
+    self.assignableFrom(t) or t.assignableFrom(self)   
 
 context Property
 def: collectionKind : EssentialOCL::CollectionKind =
@@ -109,8 +126,10 @@ endpackage
 package EssentialOCL
     
 context Variable
-def: isSpecialVariable() : Boolean =
+def: isSpecialVariable : Boolean =
     name = '_'
+def: isLocalVariable : Boolean =
+    container().locallyDefined(self)
 
 context OclExpression
 --def: allReferencedTypes : Set(EMOF::Type)
@@ -132,11 +151,15 @@ def: allVariables : Set(EssentialOCL::Variable) =
     then childVariables->including(oclAsType(EssentialOCL::Variable))
     else childVariables
     endif
-def: isSpecialVariableReference() : Boolean =
+def: allLocalVariables : Set(EssentialOCL::Variable) =
+    allVariables->select(isLocalVariable)
+def: allExternalVariables : Set(EssentialOCL::Variable) =
+    allVariables->select(not isLocalVariable)
+def: isSpecialVariableReference : Boolean =
     oclIsKindOf(EssentialOCL::VariableExp)
     and let v : EssentialOCL::Variable
         = oclAsType(EssentialOCL::VariableExp).referredVariable in
-    (v <> null) and v.isSpecialVariable()
+    (v <> null) and v.isSpecialVariable
     
 context VariableExp
 inv UnderscoreOnlyUsedAsCollectionTemplateExpMemberOrRest:
@@ -178,6 +201,8 @@ def: equivalentTo(t : TypedModel) : Boolean =
     declaredPackages = t.declaredPackages
 inv DependsOnIsAcyclic :
     allDependsOn->excludes(self)
+inv DependsOnAreModelParameters :
+    transformation.modelParameter->includesAll(dependsOn)
 
 context Transformation
 def: allExtends : Set(Transformation) =
@@ -252,16 +277,18 @@ context Function
 inv IsSideEffectFree :
     children->forAll(e |
         e.oclIsKindOf(EssentialOCL::OclExpression)
-        implies true)--e.getMetaClass()._package = EssentialOCL::package)
---    true -- FIXME no RelationCallExp, no ImperativeOCL
+        implies
+        let packageName : String = e.getMetaClass()._package.name
+        in packageName = 'EssentialOCL'
+        or packageName = 'QVTRelation')
 inv EveryFunctionParameterIsAFunctionParameter :
     ownedParameter->forAll(oclIsKindOf(FunctionParameter))
 
 context Predicate
 inv ConditionExpressionIsBoolean :
     conditionExpression.type.oclIsTypeOf(Boolean)
---inv VariablesAreBoundByPattern :
---    pattern.bindsTo->includesAll(conditionExpression.allReferencedVariables)
+inv ExternalVariablesAreBoundByPattern :
+    pattern.bindsTo->includesAll(conditionExpression.allExternalVariables)
 
 context Pattern
 inv NoVariableIsAFunctionParameter :
@@ -329,19 +356,30 @@ inv PartsAreUnique :
 context CollectionTemplateExp
 --def: elementType : EMOF::Type
 --    = referredCollectionType.elementType
+def: isEmpty : Boolean =
+    member->size() = 0 and rest = null
 inv ReferredCollectionElementTypeIsDeclaredByDomain:
     domain.declaresType(referredCollectionType.transitiveElementType())
 inv EveryMemberTypeMatchesElementType:
     member->forAll(m | 
-        m.isSpecialVariableReference()
+        m.isSpecialVariableReference
         or referredCollectionType.elementType.assignableFrom(m.type))
+inv EveryMemberExpressionVariableIsBoundByPattern:
+    member.allReferencedVariables->forAll(v |
+        not v.isSpecialVariable
+        implies pattern.bindsTo->includes(v))
+inv MemberCountSatifiesLowerBound:
+    container().oclIsKindOf(PropertyTemplateItem)
+    and not isEmpty
+    implies member->size() >= container().oclAsType(PropertyTemplateItem).referredProperty.lower
 inv RestTypeMatchesCollectionType:
     rest <> null
-    implies rest.isSpecialVariable()
+    implies rest.isSpecialVariable
     or referredCollectionType.assignableFrom(rest.type)
---inv RestVariableIsBoundByPattern:
---    rest <> null
---    implies pattern.bindsTo->includes(rest)
+inv RestVariableIsBoundByPattern:
+    rest <> null
+    and not rest.isSpecialVariable
+    implies pattern.bindsTo->includes(rest)
 -- following is too simple; must account for RelationCallExp overlays
 --inv EveryEnforceableMemberIsEnforcedWarning:
 --    domain.isEnforceable
@@ -371,12 +409,22 @@ inv ReferredPropertyIsDefinedByReferredClass:
     then objContainer.referredClass.definesOppositeProperty(referredProperty)
     else objContainer.referredClass.definesProperty(referredProperty)
     endif
-inv ValueElementTypeMatchesReferredPropertyElementType :
-    let propertyElementType : EMOF::Type
-        = referredProperty.type.transitiveElementType() in
-    let valueElementType : EMOF::Type = value.type.transitiveElementType() in    
-    propertyElementType.assignableFrom(valueElementType)
--- FIXME set conversions
+inv EveryExpressionVariableIsBoundByPattern:
+    not value.oclIsKindOf(TemplateExp)
+    implies value.allReferencedVariables->forAll(v |
+        not v.isSpecialVariable
+        implies pattern.bindsTo->includes(v))
+--inv ValueElementTypeMatchesReferredPropertyElementType :
+--    let propertyElementType : EMOF::Type
+--        = referredProperty.type.transitiveElementType() in
+--    let valueElementType : EMOF::Type = value.type.transitiveElementType() in    
+--    propertyElementType.assignableFrom(valueElementType)
+inv ObjectTypeMatchesPropertyType : -- applicable to single and multi-valued properties
+    value.oclIsKindOf(ObjectTemplateExp)
+    implies referredProperty.type.assignableFrom(value.type)
+inv CollectionElementTypeMatchesPropertyType : -- applicable to single and multi-valued properties
+    value.oclIsKindOf(CollectionTemplateExp)
+    implies referredProperty.type.assignableFrom(value.oclAsType(CollectionTemplateExp).referredCollectionType.elementType)
 inv SetMatchesSet :
     propertyCollectionKind = EssentialOCL::CollectionKind::Set
     implies valueCollectionType.oclIsKindOf(EssentialOCL::SetType)
@@ -604,8 +652,7 @@ inv EveryWhereReferredRelationArgumentTypeIsMatchableWarning:
     let referredDomain : RelationDomain = referredRelation.domains->at(index) in
     let referredType : EMOF::Type = referredDomain.rootVariable.type in
     let argumentType : EMOF::Type = a.type in
-    referredType.assignableFrom(argumentType)
-    or argumentType.assignableFrom(referredType))
+    referredType.matchableWith(argumentType))
 inv TypeIsBoolean :
     type.oclIsTypeOf(Boolean)
 
