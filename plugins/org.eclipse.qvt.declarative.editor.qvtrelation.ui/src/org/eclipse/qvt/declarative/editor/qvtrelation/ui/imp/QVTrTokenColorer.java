@@ -12,10 +12,10 @@
  * 
  * </copyright>
  *
- * $Id: QVTrTokenColorer.java,v 1.1 2008/08/10 13:51:13 ewillink Exp $
+ * $Id: QVTrTokenColorer.java,v 1.2 2009/01/27 21:22:11 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp;
 
-import org.eclipse.qvt.declarative.editor.ui.imp.CommonTokenColorer;
+import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLTokenColorer;
 
-public class QVTrTokenColorer extends CommonTokenColorer {}
+public class QVTrTokenColorer extends OCLTokenColorer {}
