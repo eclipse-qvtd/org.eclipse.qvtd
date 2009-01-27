@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplateValidationTest.java,v 1.3 2009/01/14 21:27:54 ewillink Exp $
+ * $Id: QVTTemplateValidationTest.java,v 1.4 2009/01/27 21:24:06 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.emof.qvttemplate;
 
@@ -43,25 +43,8 @@ import org.eclipse.qvt.declarative.test.TestQVTBase.TestTransformation;
 
 public class QVTTemplateValidationTest extends AbstractQVTTemplateValidationTest
 {
-	public void testCollectionTemplateExp_ReferredCollectionElementTypeIsDeclaredByDomain() {
-		TestTransformation transformation = createTestTransformation(resource.getContents(), "TestTransformation");
-		TypedModel typedModel = createTypedModel(transformation, "TestTypedModel", EcorePackage.eINSTANCE);
-		TestRule rule = createTestRule(transformation.getRule(), "TestRule");
-		TestDomain domain = createTestDomain(rule.getDomain(), "TestDomain", typedModel);
-		TestPattern pattern = createTestPattern(domain.getContents());
-		EClass badType = QVTTemplatePackage.Literals.TEMPLATE_EXP;
-		Variable variable = createVariable(transformation.getContents(), "TestVariable", EcorePackage.Literals.EOBJECT);
-		pattern.getBindsTo().add(variable);
-		CollectionType collectionType = createCollectionType(transformation.getEClassifiers(), CollectionKind.SET_LITERAL, QVTTemplatePackage.Literals.TEMPLATE_EXP);
-		CollectionTemplateExp templateExp = createCollectionTemplateExp(variable, collectionType, null);
-		pattern.getContents().add(templateExp);
-		//
-		ProblemLog expectedProblems = new ProblemLog();
-		expectedProblems.expectValidatorError(QVTTemplateValidator.INSTANCE,
-				QVTTemplateMessages._UI_CollectionTemplateExp_TypeIsNotDeclaredByDomain,
-				getQualifiedNameOf(badType),
-				getQualifiedNameOf(domain));
-		validationTest(expectedProblems);
+	public void testCollectionTemplateExp_EveryEnforceableItemIsEnforced() {
+		// TODO implement the constraint
 	}
 
 	public void testCollectionTemplateExp_EveryMemberTypeMatchesElementType() {
@@ -83,6 +66,14 @@ public class QVTTemplateValidationTest extends AbstractQVTTemplateValidationTest
 				getQualifiedNameOf(elementType),
 				getQualifiedNameOf(getStringType()));
 		validationTest(expectedProblems);
+	}
+
+	public void testCollectionTemplateExp_EveryMemberExpressionVariableIsBoundByPattern() {
+		// TODO implement the constraint
+	}
+
+	public void testCollectionTemplateExp_MemberCountSatifiesLowerBound() {
+		// FIXME Test the constraint
 	}
 
 	public void testCollectionTemplateExp_RestTypeMatchesCollectionType() {
@@ -108,7 +99,28 @@ public class QVTTemplateValidationTest extends AbstractQVTTemplateValidationTest
 		validationTest(expectedProblems);
 	}
 
-/*	public void testCollectionTemplateExp_RestVariableIsBoundByPattern() {
+	public void testCollectionTemplateExp_ReferredCollectionElementTypeIsDeclaredByDomain() {
+		TestTransformation transformation = createTestTransformation(resource.getContents(), "TestTransformation");
+		TypedModel typedModel = createTypedModel(transformation, "TestTypedModel", EcorePackage.eINSTANCE);
+		TestRule rule = createTestRule(transformation.getRule(), "TestRule");
+		TestDomain domain = createTestDomain(rule.getDomain(), "TestDomain", typedModel);
+		TestPattern pattern = createTestPattern(domain.getContents());
+		EClass badType = QVTTemplatePackage.Literals.TEMPLATE_EXP;
+		Variable variable = createVariable(transformation.getContents(), "TestVariable", EcorePackage.Literals.EOBJECT);
+		pattern.getBindsTo().add(variable);
+		CollectionType collectionType = createCollectionType(transformation.getEClassifiers(), CollectionKind.SET_LITERAL, QVTTemplatePackage.Literals.TEMPLATE_EXP);
+		CollectionTemplateExp templateExp = createCollectionTemplateExp(variable, collectionType, null);
+		pattern.getContents().add(templateExp);
+		//
+		ProblemLog expectedProblems = new ProblemLog();
+		expectedProblems.expectValidatorError(QVTTemplateValidator.INSTANCE,
+				QVTTemplateMessages._UI_CollectionTemplateExp_TypeIsNotDeclaredByDomain,
+				getQualifiedNameOf(badType),
+				getQualifiedNameOf(domain));
+		validationTest(expectedProblems);
+	}
+
+	public void testCollectionTemplateExp_RestVariableIsBoundByPattern() {
 		TestTransformation transformation = createTestTransformation(resource.getContents(), "TestTransformation");
 		TypedModel typedModel = createTypedModel(transformation, "TestTypedModel", EcorePackage.eINSTANCE);
 		TestRule rule = createTestRule(transformation.getRule(), "TestRule");
@@ -124,17 +136,13 @@ public class QVTTemplateValidationTest extends AbstractQVTTemplateValidationTest
 		ProblemLog expectedProblems = new ProblemLog();
 		expectedProblems.expectValidatorError(QVTTemplateValidator.INSTANCE,
 				QVTTemplateMessages._UI_CollectionTemplateExp_RestVariableIsNotBoundByPattern,
-				getQualifiedNameOf(restVariable),
+				restVariable.getName(),
 				getQualifiedNameOf(pattern));
 		validationTest(expectedProblems);
 		//
 		pattern.getBindsTo().add(restVariable);
 		//
 		validationTest(new ProblemLog());
-	} */
-
-	public void testCollectionTemplateExp_EveryEnforceableItemIsEnforced() {
-		// TODO implement the constraint
 	}
 
 	public void testObjectTemplateExp_PartsAreUnique() {
@@ -189,6 +197,18 @@ public class QVTTemplateValidationTest extends AbstractQVTTemplateValidationTest
 	}
 	
 	public void testObjectTemplateExp_EveryEnforceablePartIsEnforced() {
+		// TODO implement the constraint
+	}
+	
+	public void testPropertyTemplateItem_CollectionElementTypeMatchesPropertyType() {
+		// TODO implement the constraint
+	}
+	
+	public void testPropertyTemplateItem_EveryExpressionVariableIsBoundByPattern() {
+		// TODO implement the constraint
+	}
+	
+	public void testPropertyTemplateItem_ObjectTypeMatchesPropertyType() {
 		// TODO implement the constraint
 	}
 
