@@ -12,10 +12,20 @@
  * 
  * </copyright>
  *
- * $Id: OCLTokenColorer.java,v 1.1 2008/08/14 07:51:10 ewillink Exp $
+ * $Id: OCLTokenColorer.java,v 1.2 2009/01/27 21:21:13 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui.imp;
 
+import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTokenColorer;
 
-public class OCLTokenColorer extends CommonTokenColorer {}
+public class OCLTokenColorer extends CommonTokenColorer
+{
+	@Override
+	protected TextAttribute getInterColoring(String interChars) {
+		if (interChars.trim().startsWith("/*"))
+			return paragraphCommentAttribute;
+		else
+			return lineCommentAttribute;
+	}
+}
