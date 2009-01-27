@@ -46,7 +46,10 @@ import org.eclipse.ocl.cst.TypeCS;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.CollectionType;
 import org.eclipse.ocl.ecore.Constraint;
+import org.eclipse.ocl.ecore.LetExp;
+import org.eclipse.ocl.ecore.LoopExp;
 import org.eclipse.ocl.ecore.SendSignalAction;
+import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.expressions.CollectionKind;
 import org.eclipse.ocl.expressions.InvalidLiteralExp;
 import org.eclipse.ocl.expressions.IterateExp;
@@ -177,6 +180,20 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 
 	protected boolean isCancelled() {
 		return monitor != null ? monitor.isCancelled() : false;
+	}
+	
+	/**
+	 * Return true if variable is defined within an expression tree.
+	 * @param variable
+	 * @return
+	 */
+	protected boolean isLocallyDefined(Variable variable) {
+		EObject container = variable.eContainer();
+		if (container instanceof LetExp)
+			return true;
+		if (container instanceof LoopExp)
+			return true;
+		return false;
 	}
 
 	/**
