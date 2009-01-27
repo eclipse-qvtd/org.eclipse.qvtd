@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationValidationTest.java,v 1.2 2009/01/14 21:27:49 ewillink Exp $
+ * $Id: QVTRelationValidationTest.java,v 1.3 2009/01/27 21:24:09 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.emof.qvtrelation;
 
@@ -66,6 +66,7 @@ public class QVTRelationValidationTest extends AbstractQVTRelationValidationTest
 		OCLExpression varExpression2 = createVariableExp(relationVariable);
 		EClass badType = QVTRelationPackage.Literals.RELATION;
 		LetExp conditionExpression2 = createLetExp("TestLetVar", badType, varExpression2);
+		pattern.getBindsTo().add(relationVariable);
 		Variable letVariable = (Variable) conditionExpression2.getVariable();
 		predicate2.setConditionExpression(conditionExpression2);
 		//
@@ -103,6 +104,7 @@ public class QVTRelationValidationTest extends AbstractQVTRelationValidationTest
 		LetExp conditionExpression2 = createLetExp("TestLetVar", getBooleanType(), varExpression2);
 		Variable letVariable = (Variable) conditionExpression2.getVariable();
 		predicate2.setConditionExpression(conditionExpression2);
+		pattern.getBindsTo().add(anotherRelationVariable);
 		Predicate predicate1 = createPredicate(pattern.getPredicate());
 		OCLExpression conditionExpression1 = createVariableExp(letVariable);
 		predicate1.setConditionExpression(conditionExpression1);
@@ -545,6 +547,8 @@ public class QVTRelationValidationTest extends AbstractQVTRelationValidationTest
 		Variable var2 = createVariable(relation.getVariable(), "Variable2", derivedType);
 		RelationCallExp relationCallExp = createRelationCallExp(relation, createVariableExp(var1), createVariableExp(var2));
 		predicate.setConditionExpression(relationCallExp);
+		pattern.getBindsTo().add(var1);
+		pattern.getBindsTo().add(var2);
 		relation.setWhen(pattern);
 		//
 		ProblemLog expectedProblems = new ProblemLog();
@@ -583,6 +587,9 @@ public class QVTRelationValidationTest extends AbstractQVTRelationValidationTest
 		Variable var3 = createVariable(relation.getVariable(), "Variable3", orthogonalType);
 		RelationCallExp relationCallExp = createRelationCallExp(relation, createVariableExp(var1), createVariableExp(var2), createVariableExp(var3));
 		predicate.setConditionExpression(relationCallExp);
+		pattern.getBindsTo().add(var1);
+		pattern.getBindsTo().add(var2);
+		pattern.getBindsTo().add(var3);
 		relation.setWhere(pattern);
 		//
 		ProblemLog expectedProblems = new ProblemLog();
