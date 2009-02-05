@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLFileEnvironment.java,v 1.4 2008/12/18 07:12:30 ewillink Exp $
+ * $Id: OCLFileEnvironment.java,v 1.5 2009/02/05 09:39:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl.environment;
 
@@ -45,8 +45,8 @@ import org.eclipse.ocl.cst.PackageDeclarationCS;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.EcoreEnvironmentFactory;
+import org.eclipse.ocl.ecore.EcorePackage;
 import org.eclipse.ocl.ecore.SendSignalAction;
-import org.eclipse.qvt.declarative.emof.EssentialOCL.util.EssentialOCLMappingMetaData;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.environment.CSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
@@ -140,8 +140,7 @@ public class OCLFileEnvironment extends CSTFileEnvironment<OCLTopLevelEnvironmen
 
 	@Override
 	protected String getContentTypeIdentifier() {
-		return EssentialOCLMappingMetaData.INSTANCE.getEcoreContentTypeIdentifier();	// FIXME Use an MDT-OCL defined value once available
-//		return EcorePackage.eCONTENT_TYPE;
+		return EcorePackage.eCONTENT_TYPE;
 	}
 
 	@Override public EnvironmentFactory<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> getFactory() {
