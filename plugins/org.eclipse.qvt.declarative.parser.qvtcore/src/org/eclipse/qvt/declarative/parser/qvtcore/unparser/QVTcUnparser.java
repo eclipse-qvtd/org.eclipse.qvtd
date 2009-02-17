@@ -109,7 +109,7 @@ public class QVTcUnparser extends OCLExpressionUnparser
 				else {
 					if (type.eIsProxy())
 						type = variable.getType();
-					if ((type != null) && !(type instanceof VoidType)) {
+					if ((type != null) && !(type instanceof VoidType<?>)) {
 						append(" : ");
 						appendQualifiedName(type);
 					}
