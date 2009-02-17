@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcParseTests.java,v 1.4 2009/01/14 21:27:52 ewillink Exp $
+ * $Id: QVTcParseTests.java,v 1.5 2009/02/17 21:53:28 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.parser.qvtcore;
 
@@ -55,7 +55,7 @@ public class QVTcParseTests extends AbstractQVTcTestCase
 		parserTest("Rule6", expectedProblems);
 	}
 	
-	public void testParseQVTCore_test() throws IOException, CoreException, MappingConfigurationException {
+	public void testParseEqvtCore_test() throws IOException, CoreException, MappingConfigurationException {
 		parserTest("test", null);
 	}
 	
