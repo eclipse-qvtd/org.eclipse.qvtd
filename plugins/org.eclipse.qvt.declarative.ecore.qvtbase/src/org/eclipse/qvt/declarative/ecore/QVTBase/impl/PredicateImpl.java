@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: PredicateImpl.java,v 1.1 2008/07/23 09:39:08 qglineur Exp $
+ * $Id: PredicateImpl.java,v 1.2 2009/02/17 21:44:28 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.impl;
 
@@ -126,7 +126,7 @@ public class PredicateImpl extends EModelElementImpl implements Predicate {
 	 * @generated
 	 */
 	public Pattern getPattern() {
-		if (eContainerFeatureID != QVTBasePackage.PREDICATE__PATTERN) return null;
+		if (eContainerFeatureID() != QVTBasePackage.PREDICATE__PATTERN) return null;
 		return (Pattern)eContainer();
 	}
 
@@ -146,7 +146,7 @@ public class PredicateImpl extends EModelElementImpl implements Predicate {
 	 * @generated
 	 */
 	public void setPattern(Pattern newPattern) {
-		if (newPattern != eInternalContainer() || (eContainerFeatureID != QVTBasePackage.PREDICATE__PATTERN && newPattern != null)) {
+		if (newPattern != eInternalContainer() || (eContainerFeatureID() != QVTBasePackage.PREDICATE__PATTERN && newPattern != null)) {
 			if (EcoreUtil.isAncestor(this, newPattern))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -200,7 +200,7 @@ public class PredicateImpl extends EModelElementImpl implements Predicate {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTBasePackage.PREDICATE__PATTERN:
 				return eInternalContainer().eInverseRemove(this, QVTBasePackage.PATTERN__PREDICATE, Pattern.class, msgs);
 		}

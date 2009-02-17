@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTBaseSwitch.java,v 1.1 2008/07/23 09:39:07 qglineur Exp $
+ * $Id: QVTBaseSwitch.java,v 1.2 2009/02/17 21:44:28 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.util;
 
@@ -133,7 +133,7 @@ public class QVTBaseSwitch<T> {
 				FunctionParameter functionParameter = (FunctionParameter)theEObject;
 				T result = caseFunctionParameter(functionParameter);
 				if (result == null) result = caseEParameter(functionParameter);
-				if (result == null) result = caseVariable_1(functionParameter);
+				if (result == null) result = caseEcore_Variable(functionParameter);
 				if (result == null) result = caseETypedElement(functionParameter);
 				if (result == null) result = caseVariable(functionParameter);
 				if (result == null) result = caseENamedElement(functionParameter);
@@ -471,7 +471,7 @@ public class QVTBaseSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVariable_1(org.eclipse.ocl.ecore.Variable object) {
+	public T caseEcore_Variable(org.eclipse.ocl.ecore.Variable object) {
 		return null;
 	}
 

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTBaseAdapterFactory.java,v 1.1 2008/07/23 09:39:08 qglineur Exp $
+ * $Id: QVTBaseAdapterFactory.java,v 1.2 2009/02/17 21:44:28 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.util;
 
@@ -169,8 +169,8 @@ public class QVTBaseAdapterFactory extends AdapterFactoryImpl {
 				return createVariableAdapter();
 			}
 			@Override
-			public Adapter caseVariable_1(org.eclipse.ocl.ecore.Variable object) {
-				return createVariable_1Adapter();
+			public Adapter caseEcore_Variable(org.eclipse.ocl.ecore.Variable object) {
+				return createEcore_VariableAdapter();
 			}
 			@Override
 			public Adapter caseEClassifier(EClassifier object) {
@@ -466,7 +466,7 @@ public class QVTBaseAdapterFactory extends AdapterFactoryImpl {
 	 * @see org.eclipse.ocl.ecore.Variable
 	 * @generated
 	 */
-	public Adapter createVariable_1Adapter() {
+	public Adapter createEcore_VariableAdapter() {
 		return null;
 	}
 

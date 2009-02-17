@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: DomainImpl.java,v 1.2 2008/09/28 11:18:11 ewillink Exp $
+ * $Id: DomainImpl.java,v 1.3 2009/02/17 21:44:28 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.impl;
 
@@ -234,7 +234,7 @@ public abstract class DomainImpl extends ENamedElementImpl implements Domain {
 	 * @generated
 	 */
 	public Rule getRule() {
-		if (eContainerFeatureID != QVTBasePackage.DOMAIN__RULE) return null;
+		if (eContainerFeatureID() != QVTBasePackage.DOMAIN__RULE) return null;
 		return (Rule)eContainer();
 	}
 
@@ -254,7 +254,7 @@ public abstract class DomainImpl extends ENamedElementImpl implements Domain {
 	 * @generated
 	 */
 	public void setRule(Rule newRule) {
-		if (newRule != eInternalContainer() || (eContainerFeatureID != QVTBasePackage.DOMAIN__RULE && newRule != null)) {
+		if (newRule != eInternalContainer() || (eContainerFeatureID() != QVTBasePackage.DOMAIN__RULE && newRule != null)) {
 			if (EcoreUtil.isAncestor(this, newRule))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -344,7 +344,7 @@ public abstract class DomainImpl extends ENamedElementImpl implements Domain {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTBasePackage.DOMAIN__RULE:
 				return eInternalContainer().eInverseRemove(this, QVTBasePackage.RULE__DOMAIN, Rule.class, msgs);
 		}
@@ -360,9 +360,9 @@ public abstract class DomainImpl extends ENamedElementImpl implements Domain {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTBasePackage.DOMAIN__IS_CHECKABLE:
-				return isIsCheckable() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsCheckable();
 			case QVTBasePackage.DOMAIN__IS_ENFORCEABLE:
-				return isIsEnforceable() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsEnforceable();
 			case QVTBasePackage.DOMAIN__RULE:
 				return getRule();
 			case QVTBasePackage.DOMAIN__TYPED_MODEL:
@@ -381,10 +381,10 @@ public abstract class DomainImpl extends ENamedElementImpl implements Domain {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTBasePackage.DOMAIN__IS_CHECKABLE:
-				setIsCheckable(((Boolean)newValue).booleanValue());
+				setIsCheckable((Boolean)newValue);
 				return;
 			case QVTBasePackage.DOMAIN__IS_ENFORCEABLE:
-				setIsEnforceable(((Boolean)newValue).booleanValue());
+				setIsEnforceable((Boolean)newValue);
 				return;
 			case QVTBasePackage.DOMAIN__RULE:
 				setRule((Rule)newValue);

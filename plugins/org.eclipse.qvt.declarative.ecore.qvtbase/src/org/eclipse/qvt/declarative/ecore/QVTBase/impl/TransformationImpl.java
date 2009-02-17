@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TransformationImpl.java,v 1.1 2008/07/23 09:39:08 qglineur Exp $
+ * $Id: TransformationImpl.java,v 1.2 2009/02/17 21:44:28 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.impl;
 
@@ -325,7 +325,7 @@ public class TransformationImpl extends EClassImpl implements Transformation {
 	 * @generated
 	 */
 	public EPackage getESuperPackage() {
-		if (eContainerFeatureID != QVTBasePackage.TRANSFORMATION__ESUPER_PACKAGE) return null;
+		if (eContainerFeatureID() != QVTBasePackage.TRANSFORMATION__ESUPER_PACKAGE) return null;
 		return (EPackage)eContainer();
 	}
 
@@ -335,7 +335,7 @@ public class TransformationImpl extends EClassImpl implements Transformation {
 	 * @generated
 	 */
 	public EPackage basicGetESuperPackage() {
-		if (eContainerFeatureID != QVTBasePackage.TRANSFORMATION__ESUPER_PACKAGE) return null;
+		if (eContainerFeatureID() != QVTBasePackage.TRANSFORMATION__ESUPER_PACKAGE) return null;
 		return (EPackage)eInternalContainer();
 	}
 
@@ -536,7 +536,7 @@ public class TransformationImpl extends EClassImpl implements Transformation {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTBasePackage.TRANSFORMATION__ESUPER_PACKAGE:
 				return eInternalContainer().eInverseRemove(this, EcorePackage.EPACKAGE__ESUBPACKAGES, EPackage.class, msgs);
 		}

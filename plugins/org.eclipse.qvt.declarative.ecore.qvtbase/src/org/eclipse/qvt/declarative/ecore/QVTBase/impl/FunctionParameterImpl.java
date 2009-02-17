@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: FunctionParameterImpl.java,v 1.2 2008/12/19 14:30:55 ewillink Exp $
+ * $Id: FunctionParameterImpl.java,v 1.3 2009/02/17 21:44:28 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.impl;
 
@@ -406,13 +406,13 @@ public class FunctionParameterImpl extends EParameterImpl implements FunctionPar
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTBasePackage.FUNCTION_PARAMETER__START_POSITION:
-				return new Integer(getStartPosition());
+				return getStartPosition();
 			case QVTBasePackage.FUNCTION_PARAMETER__END_POSITION:
-				return new Integer(getEndPosition());
+				return getEndPosition();
 			case QVTBasePackage.FUNCTION_PARAMETER__TYPE_START_POSITION:
-				return new Integer(getTypeStartPosition());
+				return getTypeStartPosition();
 			case QVTBasePackage.FUNCTION_PARAMETER__TYPE_END_POSITION:
-				return new Integer(getTypeEndPosition());
+				return getTypeEndPosition();
 			case QVTBasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION:
 				return getInitExpression();
 			case QVTBasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER:
@@ -432,16 +432,16 @@ public class FunctionParameterImpl extends EParameterImpl implements FunctionPar
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTBasePackage.FUNCTION_PARAMETER__START_POSITION:
-				setStartPosition(((Integer)newValue).intValue());
+				setStartPosition((Integer)newValue);
 				return;
 			case QVTBasePackage.FUNCTION_PARAMETER__END_POSITION:
-				setEndPosition(((Integer)newValue).intValue());
+				setEndPosition((Integer)newValue);
 				return;
 			case QVTBasePackage.FUNCTION_PARAMETER__TYPE_START_POSITION:
-				setTypeStartPosition(((Integer)newValue).intValue());
+				setTypeStartPosition((Integer)newValue);
 				return;
 			case QVTBasePackage.FUNCTION_PARAMETER__TYPE_END_POSITION:
-				setTypeEndPosition(((Integer)newValue).intValue());
+				setTypeEndPosition((Integer)newValue);
 				return;
 			case QVTBasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION:
 				setInitExpression((OCLExpression<EClassifier>)newValue);
