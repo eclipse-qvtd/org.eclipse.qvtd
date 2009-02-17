@@ -37,13 +37,13 @@ public class QVTrFormattingHelper extends QVTFormattingHelper
 		if ((container instanceof TemplateExp) || (container instanceof PropertyTemplateItem))
 			formatTemplateExpName(container, s);
 		else if (object instanceof ObjectTemplateExp) {
-			s.append(((ObjectTemplateExp)object).getReferredClass().getName());
+			s.append(formatName(((ObjectTemplateExp)object).getReferredClass()));
 		}
 		else if (object instanceof CollectionTemplateExp) {
-			s.append(((CollectionTemplateExp)object).getReferredCollectionType().getName());
+			s.append(formatName(((CollectionTemplateExp)object).getReferredCollectionType()));
 		}
 		if (object instanceof PropertyTemplateItem) {
-			s.append(((PropertyTemplateItem)object).getReferredProperty().getName());
+			s.append(formatName(((PropertyTemplateItem)object).getReferredProperty()));
 		}
 		else if (object instanceof ObjectTemplateExp) {
 			s.append(".");
