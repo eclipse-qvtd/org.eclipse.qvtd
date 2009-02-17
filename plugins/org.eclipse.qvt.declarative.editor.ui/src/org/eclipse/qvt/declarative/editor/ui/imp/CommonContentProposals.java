@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.11 2009/01/22 09:37:33 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.12 2009/02/17 21:48:51 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -137,7 +137,7 @@ public class CommonContentProposals
 	}
 
 	protected void addStringProposalCandidate(EObject candidate) {
-		if (candidate instanceof StringLiteralExp) {
+		if (candidate instanceof StringLiteralExp<?>) {
 			String string = ((StringLiteralExp<?>)candidate).getStringSymbol();
 			if (!map.containsKey(string) && string.startsWith(prefixAtOffset.length() > 0 ? prefixAtOffset.substring(1) : "")) {
 				String newText = "'" + string + "'";

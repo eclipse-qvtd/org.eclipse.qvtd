@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.16 2009/01/17 20:18:18 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.17 2009/02/17 21:48:51 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -215,7 +215,7 @@ public abstract class CommonLabelProvider implements ILabelProvider
 	protected String formatObject(Object node) {
 		if (node == null)
 			return formatNull();
-		else if (node instanceof Enum)
+		else if (node instanceof Enum<?>)
 			return formatEnum((Enum<?>)node);
 		else if (node instanceof Number)
 			return formatNumber((Number) node);

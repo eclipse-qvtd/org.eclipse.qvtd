@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.18 2009/01/14 20:47:31 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.19 2009/02/17 21:48:51 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -368,7 +368,7 @@ public abstract class CommonParseController implements IParseController
 	protected ProblemHandler createProblemHandler(ICSTFileEnvironment environment) {
 		if (handler instanceof ProblemHandler) {
 			((ProblemHandler)handler).setParser(environment.getParser());
-			if (handler instanceof MarkerProblemHandler)
+			if (handler instanceof MarkerProblemHandler<?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?>)
 				((MarkerProblemHandler<?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?>)handler).setProblemLimit(new ProblemLimit(50, 50, 50));
 			return (ProblemHandler) handler;
 		}

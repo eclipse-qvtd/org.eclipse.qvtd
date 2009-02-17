@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonDocumentationProvider.java,v 1.3 2008/10/21 20:03:52 ewillink Exp $
+ * $Id: CommonDocumentationProvider.java,v 1.4 2009/02/17 21:48:51 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -35,7 +35,7 @@ public abstract class CommonDocumentationProvider implements IDocumentationProvi
 	}
 
 	protected String getASTDocumentation(Object node) {
-		if (node instanceof LiteralExp) {
+		if (node instanceof LiteralExp<?>) {
 			return EcoreUtils.formatName(((EObject)node).eClass()) + " : " + node.toString();
 		}
 		else if (node instanceof EObject) {

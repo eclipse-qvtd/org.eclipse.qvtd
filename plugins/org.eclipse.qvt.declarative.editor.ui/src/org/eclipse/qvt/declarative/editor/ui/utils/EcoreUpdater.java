@@ -209,7 +209,7 @@ public class EcoreUpdater
 					;
 				else if (!feature.isMany())
 					installCopy((EObject)oldValue, (EObject)newValue);
-				else if (newValue instanceof List) {
+				else if (newValue instanceof List<?>) {
 					List<?> newList = (List<?>) newValue;
 					List<?> oldList = (List<?>) oldValue;
 					for (int i = 0; i < newList.size(); i++)
@@ -329,7 +329,7 @@ public class EcoreUpdater
 							}
 						}
 					}
-				} else if (newValue instanceof List) {
+				} else if (newValue instanceof List<?>) {
 					Object oldValue = oldObject.eGet(feature, false);
 					List<EObject> oldList = ClassUtils.asClassUnchecked(oldValue);
 					List<EObject> newList = ClassUtils.asClassUnchecked(newValue);
@@ -361,7 +361,7 @@ public class EcoreUpdater
 			int index = oldList.indexOf(oldObject);
 			if (index == i)
 				;
-			else if ((index > i) && (oldList instanceof EList))
+			else if ((index > i) && (oldList instanceof EList<?>))
 				((EList<?>)oldList).move(i, index);
 			else {
 				E oldE = ClassUtils.asClassUnchecked(oldObject);
