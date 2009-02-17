@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTCoreValidator.java,v 1.4 2009/01/14 21:37:13 ewillink Exp $
+ * $Id: QVTCoreValidator.java,v 1.5 2009/02/17 21:41:52 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTCore.util;
 
@@ -430,7 +430,7 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 	 * Validates the DomainTypedModelsMatchModelParameters constraint of '<em>Mapping</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean validateMapping_DomainTypedModelsMatchModelParameters(Mapping mapping, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		// TODO override the constraint, if desired
@@ -598,7 +598,7 @@ public class QVTCoreValidator extends EObjectValidator implements EValidatorWith
 		if (oclEnvironment == null) {
 			if (context != null) {
 				Object env = context.get(Environment.class);
-				if (env instanceof Environment) {
+				if (env instanceof Environment<?,?,?,?,?,?,?,?,?,?,?,?>) {
 					@SuppressWarnings("unchecked")
 					Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter,
 							EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env2 = (Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter,
