@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplateItemProviderAdapterFactory.java,v 1.1 2008/07/23 09:49:26 qglineur Exp $
+ * $Id: QVTTemplateItemProviderAdapterFactory.java,v 1.2 2009/02/17 21:38:43 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.provider;
 
@@ -204,7 +204,7 @@ public class QVTTemplateItemProviderAdapterFactory extends QVTTemplateAdapterFac
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
