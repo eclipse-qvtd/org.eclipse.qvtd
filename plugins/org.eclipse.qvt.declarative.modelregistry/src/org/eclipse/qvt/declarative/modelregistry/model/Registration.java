@@ -42,7 +42,7 @@ public class Registration<A extends Accessor> implements Comparable<Registration
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof Registration))
+		if (!(obj instanceof Registration<?>))
 			return false;
 		if (!getAccessorName().equals(((Registration<?>)obj).getAccessorName()))
 			return false;
