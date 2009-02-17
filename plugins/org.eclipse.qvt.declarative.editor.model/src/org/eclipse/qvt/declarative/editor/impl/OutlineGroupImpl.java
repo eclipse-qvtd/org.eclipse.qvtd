@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OutlineGroupImpl.java,v 1.3 2008/11/30 22:06:03 ewillink Exp $
+ * $Id: OutlineGroupImpl.java,v 1.4 2009/02/17 21:48:07 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -263,7 +263,7 @@ public class OutlineGroupImpl extends AbstractOutlineElementImpl implements Outl
 			case EditorPackage.OUTLINE_GROUP__ELEMENTS:
 				return getElements();
 			case EditorPackage.OUTLINE_GROUP__HIDDEN:
-				return isHidden() ? Boolean.TRUE : Boolean.FALSE;
+				return isHidden();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -288,7 +288,7 @@ public class OutlineGroupImpl extends AbstractOutlineElementImpl implements Outl
 				getElements().addAll((Collection<? extends AbstractOutlineElement>)newValue);
 				return;
 			case EditorPackage.OUTLINE_GROUP__HIDDEN:
-				setHidden(((Boolean)newValue).booleanValue());
+				setHidden((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

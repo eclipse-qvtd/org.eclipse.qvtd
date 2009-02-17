@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackageImpl.java,v 1.10 2008/12/05 22:20:01 ewillink Exp $
+ * $Id: EditorPackageImpl.java,v 1.11 2009/02/17 21:48:07 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -796,7 +796,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		g1.getETypeArguments().add(g2);
 		initEAttribute(getLabelBehavior_ImageProvider(), g1, "imageProvider", null, 0, 1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabelBehavior_Format(), theEcorePackage.getEString(), "format", "", 1, 1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLabelBehavior_Elements(), this.getAbstractLabelElement(), null, "elements", null, 0, -1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLabelBehavior_Elements(), this.getAbstractLabelElement(), null, "elements", null, 0, -1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(outlineBehaviorEClass, OutlineBehavior.class, "OutlineBehavior", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOutlineBehavior_Elements(), this.getAbstractOutlineElement(), null, "elements", null, 0, -1, OutlineBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -808,7 +808,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		initEClass(outlineGroupEClass, OutlineGroup.class, "OutlineGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOutlineGroup_Image(), theEcorePackage.getEString(), "image", null, 0, 1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOutlineGroup_Name(), theEcorePackage.getEString(), "name", "", 1, 1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOutlineGroup_Elements(), this.getAbstractOutlineElement(), null, "elements", null, 0, -1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOutlineGroup_Elements(), this.getAbstractOutlineElement(), null, "elements", null, 0, -1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOutlineGroup_Hidden(), theEcorePackage.getEBoolean(), "hidden", "false", 0, 1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types

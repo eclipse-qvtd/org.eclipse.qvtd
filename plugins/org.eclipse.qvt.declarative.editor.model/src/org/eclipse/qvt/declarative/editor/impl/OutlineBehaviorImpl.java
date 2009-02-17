@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OutlineBehaviorImpl.java,v 1.5 2008/11/29 12:44:33 ewillink Exp $
+ * $Id: OutlineBehaviorImpl.java,v 1.6 2009/02/17 21:48:07 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -169,7 +169,7 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 			case EditorPackage.OUTLINE_BEHAVIOR__ELEMENTS:
 				return getElements();
 			case EditorPackage.OUTLINE_BEHAVIOR__HIDDEN:
-				return isHidden() ? Boolean.TRUE : Boolean.FALSE;
+				return isHidden();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -188,7 +188,7 @@ public class OutlineBehaviorImpl extends BehaviorImpl implements OutlineBehavior
 				getElements().addAll((Collection<? extends AbstractOutlineElement>)newValue);
 				return;
 			case EditorPackage.OUTLINE_BEHAVIOR__HIDDEN:
-				setHidden(((Boolean)newValue).booleanValue());
+				setHidden((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

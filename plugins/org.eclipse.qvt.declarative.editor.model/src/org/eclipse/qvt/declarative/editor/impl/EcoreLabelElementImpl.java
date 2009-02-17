@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EcoreLabelElementImpl.java,v 1.3 2008/12/05 22:20:01 ewillink Exp $
+ * $Id: EcoreLabelElementImpl.java,v 1.4 2009/02/17 21:48:07 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -348,7 +348,7 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 				if (resolve) return getEnd();
 				return basicGetEnd();
 			case EditorPackage.ECORE_LABEL_ELEMENT__HIDE_IF_BLANK:
-				return isHideIfBlank() ? Boolean.TRUE : Boolean.FALSE;
+				return isHideIfBlank();
 			case EditorPackage.ECORE_LABEL_ELEMENT__PREFIX:
 				return getPrefix();
 			case EditorPackage.ECORE_LABEL_ELEMENT__SEPARATOR:
@@ -378,7 +378,7 @@ public class EcoreLabelElementImpl extends AbstractLabelElementImpl implements E
 				setEnd((EStructuralFeature)newValue);
 				return;
 			case EditorPackage.ECORE_LABEL_ELEMENT__HIDE_IF_BLANK:
-				setHideIfBlank(((Boolean)newValue).booleanValue());
+				setHideIfBlank((Boolean)newValue);
 				return;
 			case EditorPackage.ECORE_LABEL_ELEMENT__PREFIX:
 				setPrefix((String)newValue);
