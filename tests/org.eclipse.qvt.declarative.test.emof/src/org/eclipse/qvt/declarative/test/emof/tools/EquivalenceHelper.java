@@ -71,7 +71,7 @@ public abstract class EquivalenceHelper
 		s.append(" rather than ");
 		if (right == null)
 			s.append("undefined");
-		else if ((right instanceof Collection) && ((Collection<?>) right).isEmpty())
+		else if ((right instanceof Collection<?>) && ((Collection<?>) right).isEmpty())
 			s.append("nothing");
 		else
 			MappingUtils.formatObject(s, right);

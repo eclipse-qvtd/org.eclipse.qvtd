@@ -110,7 +110,7 @@ public class EquivalenceMap implements EcoreComparator
 	}
 
 	protected Object basicListGet(EList<?> list, int i) {
-		if (list instanceof BasicEList)
+		if (list instanceof BasicEList<?>)
 			return ((BasicEList<?>) list).basicGet(i);		// Avoid resolving proxies
 		else
 			return list.get(i);
@@ -132,17 +132,17 @@ public class EquivalenceMap implements EcoreComparator
 //			addEcoreDifference(context, eFeature, leftFeature, rightFeature,  "Different classes");
 		else if (leftObject instanceof EFactory)
 			allOk = true;
-		else if (leftObject instanceof EMap) {
+		else if (leftObject instanceof EMap<?,?>) {
 			EMap<String,?> leftMap = MappingUtils.asClassUnchecked(leftObject, (EMap<String,?>) null);
 			EMap<String,?> rightMap = MappingUtils.asClassUnchecked(rightObject, (EMap<String,?>) null);
 			if (compareMapFeature(context, eFeature, leftMap, rightMap))
 				allOk = true;
 		}
-		else if (leftObject instanceof BasicEList) {
+		else if (leftObject instanceof BasicEList<?>) {
 			if (compareBasicListFeature(context, eFeature, (BasicEList<?>)leftObject, (BasicEList<?>)rightObject))
 				allOk = true;
 		}
-		else if (leftObject instanceof EList) {
+		else if (leftObject instanceof EList<?>) {
 			if (compareListFeature(context, eFeature, (EList<?>)leftObject, (EList<?>)rightObject))
 				allOk = true;
 		}
