@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CollectionTemplateExpImpl.java,v 1.1 2008/07/23 09:48:47 qglineur Exp $
+ * $Id: CollectionTemplateExpImpl.java,v 1.2 2009/02/17 21:43:36 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.impl;
 
@@ -311,6 +311,6 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
     public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
 		if (v instanceof QVTTemplateVisitor)
 			return ((QVTTemplateVisitor<T>) v).visitCollectionTemplateExp(this);
-		return super.accept(v);
+		return (T) super.accept(v);
 	}
 } //CollectionTemplateExpImpl
