@@ -48,7 +48,7 @@ public class EAnnotationsReferenceMap extends EReferenceMap
 
 		@Override
 		public void set(IMappingMetaDataRegistry.Install mappingMetaDataRegistry, EObject object, Object values) {
-			if (!(values instanceof List) || (((List<?>)values).size() <= 0))
+			if (!(values instanceof List<?>) || (((List<?>)values).size() <= 0))
 				super.set(mappingMetaDataRegistry, object, values);
 			else { // Suppress setting of stateless non-xmi:Extension to avoid spurious xmi:Extension elements
 				List<EAnnotationAdapter> xmiAnnotations = new BasicInternalEList<EAnnotationAdapter>(EAnnotationAdapter.class);
