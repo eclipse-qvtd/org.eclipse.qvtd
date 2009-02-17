@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationItemProviderAdapterFactory.java,v 1.2 2008/09/09 21:00:45 ewillink Exp $
+ * $Id: QVTRelationItemProviderAdapterFactory.java,v 1.3 2009/02/17 21:38:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.provider;
 
@@ -342,7 +342,7 @@ public class QVTRelationItemProviderAdapterFactory extends QVTRelationAdapterFac
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
