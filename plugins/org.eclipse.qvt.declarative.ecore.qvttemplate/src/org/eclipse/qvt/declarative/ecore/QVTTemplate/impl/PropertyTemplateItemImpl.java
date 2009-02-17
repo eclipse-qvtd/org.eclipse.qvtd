@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: PropertyTemplateItemImpl.java,v 1.2 2008/09/09 20:54:22 ewillink Exp $
+ * $Id: PropertyTemplateItemImpl.java,v 1.3 2009/02/17 21:44:20 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.impl;
 
@@ -120,7 +120,7 @@ public class PropertyTemplateItemImpl extends EModelElementImpl implements Prope
 	 * @generated
 	 */
 	public ObjectTemplateExp getObjContainer() {
-		if (eContainerFeatureID != QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER) return null;
+		if (eContainerFeatureID() != QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER) return null;
 		return (ObjectTemplateExp)eContainer();
 	}
 
@@ -140,7 +140,7 @@ public class PropertyTemplateItemImpl extends EModelElementImpl implements Prope
 	 * @generated
 	 */
 	public void setObjContainer(ObjectTemplateExp newObjContainer) {
-		if (newObjContainer != eInternalContainer() || (eContainerFeatureID != QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER && newObjContainer != null)) {
+		if (newObjContainer != eInternalContainer() || (eContainerFeatureID() != QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER && newObjContainer != null)) {
 			if (EcoreUtil.isAncestor(this, newObjContainer))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -306,7 +306,7 @@ public class PropertyTemplateItemImpl extends EModelElementImpl implements Prope
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER:
 				return eInternalContainer().eInverseRemove(this, QVTTemplatePackage.OBJECT_TEMPLATE_EXP__PART, ObjectTemplateExp.class, msgs);
 		}
@@ -329,7 +329,7 @@ public class PropertyTemplateItemImpl extends EModelElementImpl implements Prope
 			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__VALUE:
 				return getValue();
 			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE:
-				return isIsOpposite() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsOpposite();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -352,7 +352,7 @@ public class PropertyTemplateItemImpl extends EModelElementImpl implements Prope
 				setValue((OCLExpression)newValue);
 				return;
 			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE:
-				setIsOpposite(((Boolean)newValue).booleanValue());
+				setIsOpposite((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

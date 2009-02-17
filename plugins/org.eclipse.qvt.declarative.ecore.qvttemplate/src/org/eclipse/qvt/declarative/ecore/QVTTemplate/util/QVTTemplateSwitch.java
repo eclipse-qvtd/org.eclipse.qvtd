@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplateSwitch.java,v 1.1 2008/07/23 09:48:48 qglineur Exp $
+ * $Id: QVTTemplateSwitch.java,v 1.2 2009/02/17 21:44:20 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.util;
 
@@ -110,8 +110,8 @@ public class QVTTemplateSwitch<T> {
 			case QVTTemplatePackage.TEMPLATE_EXP: {
 				TemplateExp templateExp = (TemplateExp)theEObject;
 				T result = caseTemplateExp(templateExp);
-				if (result == null) result = caseLiteralExp_1(templateExp);
-				if (result == null) result = caseOCLExpression_1(templateExp);
+				if (result == null) result = caseEcore_LiteralExp(templateExp);
+				if (result == null) result = caseEcore_OCLExpression(templateExp);
 				if (result == null) result = caseLiteralExp(templateExp);
 				if (result == null) result = caseETypedElement(templateExp);
 				if (result == null) result = caseOCLExpression(templateExp);
@@ -127,8 +127,8 @@ public class QVTTemplateSwitch<T> {
 				ObjectTemplateExp objectTemplateExp = (ObjectTemplateExp)theEObject;
 				T result = caseObjectTemplateExp(objectTemplateExp);
 				if (result == null) result = caseTemplateExp(objectTemplateExp);
-				if (result == null) result = caseLiteralExp_1(objectTemplateExp);
-				if (result == null) result = caseOCLExpression_1(objectTemplateExp);
+				if (result == null) result = caseEcore_LiteralExp(objectTemplateExp);
+				if (result == null) result = caseEcore_OCLExpression(objectTemplateExp);
 				if (result == null) result = caseLiteralExp(objectTemplateExp);
 				if (result == null) result = caseETypedElement(objectTemplateExp);
 				if (result == null) result = caseOCLExpression(objectTemplateExp);
@@ -144,8 +144,8 @@ public class QVTTemplateSwitch<T> {
 				CollectionTemplateExp collectionTemplateExp = (CollectionTemplateExp)theEObject;
 				T result = caseCollectionTemplateExp(collectionTemplateExp);
 				if (result == null) result = caseTemplateExp(collectionTemplateExp);
-				if (result == null) result = caseLiteralExp_1(collectionTemplateExp);
-				if (result == null) result = caseOCLExpression_1(collectionTemplateExp);
+				if (result == null) result = caseEcore_LiteralExp(collectionTemplateExp);
+				if (result == null) result = caseEcore_OCLExpression(collectionTemplateExp);
 				if (result == null) result = caseLiteralExp(collectionTemplateExp);
 				if (result == null) result = caseETypedElement(collectionTemplateExp);
 				if (result == null) result = caseOCLExpression(collectionTemplateExp);
@@ -344,7 +344,7 @@ public class QVTTemplateSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOCLExpression_1(org.eclipse.ocl.ecore.OCLExpression object) {
+	public T caseEcore_OCLExpression(org.eclipse.ocl.ecore.OCLExpression object) {
 		return null;
 	}
 
@@ -374,7 +374,7 @@ public class QVTTemplateSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLiteralExp_1(org.eclipse.ocl.ecore.LiteralExp object) {
+	public T caseEcore_LiteralExp(org.eclipse.ocl.ecore.LiteralExp object) {
 		return null;
 	}
 

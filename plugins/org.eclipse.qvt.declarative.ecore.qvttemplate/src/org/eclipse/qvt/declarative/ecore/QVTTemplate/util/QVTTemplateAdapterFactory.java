@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplateAdapterFactory.java,v 1.1 2008/07/23 09:48:48 qglineur Exp $
+ * $Id: QVTTemplateAdapterFactory.java,v 1.2 2009/02/17 21:44:20 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.util;
 
@@ -136,16 +136,16 @@ public class QVTTemplateAdapterFactory extends AdapterFactoryImpl {
 				return createOCLExpressionAdapter();
 			}
 			@Override
-			public Adapter caseOCLExpression_1(org.eclipse.ocl.ecore.OCLExpression object) {
-				return createOCLExpression_1Adapter();
+			public Adapter caseEcore_OCLExpression(org.eclipse.ocl.ecore.OCLExpression object) {
+				return createEcore_OCLExpressionAdapter();
 			}
 			@Override
 			public <C> Adapter caseLiteralExp(LiteralExp<C> object) {
 				return createLiteralExpAdapter();
 			}
 			@Override
-			public Adapter caseLiteralExp_1(org.eclipse.ocl.ecore.LiteralExp object) {
-				return createLiteralExp_1Adapter();
+			public Adapter caseEcore_LiteralExp(org.eclipse.ocl.ecore.LiteralExp object) {
+				return createEcore_LiteralExpAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -331,7 +331,7 @@ public class QVTTemplateAdapterFactory extends AdapterFactoryImpl {
 	 * @see org.eclipse.ocl.ecore.OCLExpression
 	 * @generated
 	 */
-	public Adapter createOCLExpression_1Adapter() {
+	public Adapter createEcore_OCLExpressionAdapter() {
 		return null;
 	}
 
@@ -359,7 +359,7 @@ public class QVTTemplateAdapterFactory extends AdapterFactoryImpl {
 	 * @see org.eclipse.ocl.ecore.LiteralExp
 	 * @generated
 	 */
-	public Adapter createLiteralExp_1Adapter() {
+	public Adapter createEcore_LiteralExpAdapter() {
 		return null;
 	}
 
