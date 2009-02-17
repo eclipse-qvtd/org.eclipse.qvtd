@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorItemProviderAdapterFactory.java,v 1.2 2008/08/24 18:56:40 ewillink Exp $
+ * $Id: EditorItemProviderAdapterFactory.java,v 1.3 2009/02/17 21:38:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -365,7 +365,7 @@ public class EditorItemProviderAdapterFactory extends EditorAdapterFactory imple
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
