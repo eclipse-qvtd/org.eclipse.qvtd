@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTCoreSwitch.java,v 1.1 2008/07/23 09:43:24 qglineur Exp $
+ * $Id: QVTCoreSwitch.java,v 1.2 2009/02/17 21:44:24 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTCore.util;
 
@@ -188,7 +188,7 @@ public class QVTCoreSwitch<T> {
 			case QVTCorePackage.REALIZED_VARIABLE: {
 				RealizedVariable realizedVariable = (RealizedVariable)theEObject;
 				T result = caseRealizedVariable(realizedVariable);
-				if (result == null) result = caseVariable_1(realizedVariable);
+				if (result == null) result = caseEcore_Variable(realizedVariable);
 				if (result == null) result = caseETypedElement(realizedVariable);
 				if (result == null) result = caseVariable(realizedVariable);
 				if (result == null) result = caseENamedElement(realizedVariable);
@@ -553,7 +553,7 @@ public class QVTCoreSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVariable_1(org.eclipse.ocl.ecore.Variable object) {
+	public T caseEcore_Variable(org.eclipse.ocl.ecore.Variable object) {
 		return null;
 	}
 

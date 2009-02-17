@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EnforcementOperationImpl.java,v 1.1 2008/07/23 09:43:25 qglineur Exp $
+ * $Id: EnforcementOperationImpl.java,v 1.2 2009/02/17 21:44:24 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTCore.impl;
 
@@ -126,7 +126,7 @@ public class EnforcementOperationImpl extends EModelElementImpl implements Enfor
 	 * @generated
 	 */
 	public BottomPattern getBottomPattern() {
-		if (eContainerFeatureID != QVTCorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN) return null;
+		if (eContainerFeatureID() != QVTCorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN) return null;
 		return (BottomPattern)eContainer();
 	}
 
@@ -146,7 +146,7 @@ public class EnforcementOperationImpl extends EModelElementImpl implements Enfor
 	 * @generated
 	 */
 	public void setBottomPattern(BottomPattern newBottomPattern) {
-		if (newBottomPattern != eInternalContainer() || (eContainerFeatureID != QVTCorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN && newBottomPattern != null)) {
+		if (newBottomPattern != eInternalContainer() || (eContainerFeatureID() != QVTCorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN && newBottomPattern != null)) {
 			if (EcoreUtil.isAncestor(this, newBottomPattern))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -243,7 +243,7 @@ public class EnforcementOperationImpl extends EModelElementImpl implements Enfor
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTCorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN:
 				return eInternalContainer().eInverseRemove(this, QVTCorePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION, BottomPattern.class, msgs);
 		}

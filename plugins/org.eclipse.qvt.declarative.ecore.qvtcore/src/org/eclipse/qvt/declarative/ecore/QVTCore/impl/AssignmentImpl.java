@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AssignmentImpl.java,v 1.2 2008/09/28 11:18:16 ewillink Exp $
+ * $Id: AssignmentImpl.java,v 1.3 2009/02/17 21:44:24 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTCore.impl;
 
@@ -113,7 +113,7 @@ public abstract class AssignmentImpl extends EModelElementImpl implements Assign
 	 * @generated
 	 */
 	public BottomPattern getBottomPattern() {
-		if (eContainerFeatureID != QVTCorePackage.ASSIGNMENT__BOTTOM_PATTERN) return null;
+		if (eContainerFeatureID() != QVTCorePackage.ASSIGNMENT__BOTTOM_PATTERN) return null;
 		return (BottomPattern)eContainer();
 	}
 
@@ -133,7 +133,7 @@ public abstract class AssignmentImpl extends EModelElementImpl implements Assign
 	 * @generated
 	 */
 	public void setBottomPattern(BottomPattern newBottomPattern) {
-		if (newBottomPattern != eInternalContainer() || (eContainerFeatureID != QVTCorePackage.ASSIGNMENT__BOTTOM_PATTERN && newBottomPattern != null)) {
+		if (newBottomPattern != eInternalContainer() || (eContainerFeatureID() != QVTCorePackage.ASSIGNMENT__BOTTOM_PATTERN && newBottomPattern != null)) {
 			if (EcoreUtil.isAncestor(this, newBottomPattern))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -276,7 +276,7 @@ public abstract class AssignmentImpl extends EModelElementImpl implements Assign
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTCorePackage.ASSIGNMENT__BOTTOM_PATTERN:
 				return eInternalContainer().eInverseRemove(this, QVTCorePackage.BOTTOM_PATTERN__ASSIGNMENT, BottomPattern.class, msgs);
 		}
@@ -296,7 +296,7 @@ public abstract class AssignmentImpl extends EModelElementImpl implements Assign
 			case QVTCorePackage.ASSIGNMENT__VALUE:
 				return getValue();
 			case QVTCorePackage.ASSIGNMENT__IS_DEFAULT:
-				return isIsDefault() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsDefault();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -316,7 +316,7 @@ public abstract class AssignmentImpl extends EModelElementImpl implements Assign
 				setValue((OCLExpression)newValue);
 				return;
 			case QVTCorePackage.ASSIGNMENT__IS_DEFAULT:
-				setIsDefault(((Boolean)newValue).booleanValue());
+				setIsDefault((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: BottomPatternImpl.java,v 1.1 2008/07/23 09:43:25 qglineur Exp $
+ * $Id: BottomPatternImpl.java,v 1.2 2009/02/17 21:44:24 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTCore.impl;
 
@@ -115,7 +115,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 */
 	@Override
 	public Area getArea() {
-		if (eContainerFeatureID != QVTCorePackage.BOTTOM_PATTERN__AREA) return null;
+		if (eContainerFeatureID() != QVTCorePackage.BOTTOM_PATTERN__AREA) return null;
 		return (Area)eContainer();
 	}
 
@@ -135,7 +135,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * @generated
 	 */
 	public void setArea(Area newArea) {
-		if (newArea != eInternalContainer() || (eContainerFeatureID != QVTCorePackage.BOTTOM_PATTERN__AREA && newArea != null)) {
+		if (newArea != eInternalContainer() || (eContainerFeatureID() != QVTCorePackage.BOTTOM_PATTERN__AREA && newArea != null)) {
 			if (EcoreUtil.isAncestor(this, newArea))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -234,7 +234,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTCorePackage.BOTTOM_PATTERN__AREA:
 				return eInternalContainer().eInverseRemove(this, QVTCorePackage.AREA__BOTTOM_PATTERN, Area.class, msgs);
 		}
