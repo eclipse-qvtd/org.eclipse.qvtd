@@ -37,7 +37,7 @@ public class QVTFormattingHelper extends CSTFormattingHelper
 			if (referredType != null)
 				return "Type(" + formatQualifiedName(referredType) + ")";
 		}
-		if (object instanceof OCLExpression) {
+		if (object instanceof OCLExpression<?>) {
 			return object.toString();
 		}
 		if (object instanceof EObject) {

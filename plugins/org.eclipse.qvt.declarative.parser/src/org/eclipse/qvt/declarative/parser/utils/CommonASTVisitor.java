@@ -48,7 +48,7 @@ public abstract class CommonASTVisitor<T, N> implements ICommonASTVisitor<T, N>
 			N astNode = (N) object;
 			return visit(astNode);
 		}
-		else if (object instanceof Collection) {
+		else if (object instanceof Collection<?>) {
 			Collection<?> collection = (Collection<?>)object;
 			return enterCollection(collection);
 		} else

@@ -142,7 +142,7 @@ public abstract class CSTRootEnvironment<E extends ICSTNodeEnvironment, CST exte
 				boolean hasErrorNode = false;
 				for (EObject eObject = cstNode; eObject instanceof CSTNode; eObject = eObject.eContainer()) {
 					Object ast = ((CSTNode)eObject).getAst();
-					if ((ast instanceof ErrorNode) || (ast instanceof InvalidLiteralExp)) {
+					if ((ast instanceof ErrorNode) || (ast instanceof InvalidLiteralExp<?>)) {
 						hasErrorNode = true;
 						break;
 					}

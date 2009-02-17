@@ -183,7 +183,7 @@ public abstract class CSTNodeEnvironment<E extends ICSTNodeEnvironment, AST exte
 	}
 
 	public boolean isAdapterForType(Object type) {
-		return (type instanceof Class) && ((Class<?>)type).isAssignableFrom(getClass());
+		return (type instanceof Class<?>) && ((Class<?>)type).isAssignableFrom(getClass());
 	}
 
 	public void notifyChanged(Notification notification) {}

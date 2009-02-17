@@ -570,7 +570,7 @@ public abstract class OCLExpressionUnparser extends UnparserWithReflection<EClas
 			append("_null_message_");
 		else {
 	        doExpressionSwitch(object.getTarget());			
-			append((object.getType() instanceof CollectionType) ? "^^" : "^");
+			append((object.getType() instanceof CollectionType<?,?>) ? "^^" : "^");
 			CallOperationAction calledOperation = object.getCalledOperation();
 			SendSignalAction sentSignal = object.getSentSignal();
 			if (calledOperation != null) {
@@ -599,7 +599,7 @@ public abstract class OCLExpressionUnparser extends UnparserWithReflection<EClas
 		else {		       
 			OCLExpression source = (OCLExpression) object.getSource();
 			Object sourceType = source != null ? source.getType() : null;
-			boolean isCollection = sourceType instanceof CollectionType;
+			boolean isCollection = sourceType instanceof CollectionType<?,?>;
 			EOperation eOperation = object.getReferredOperation();
 			String operationName = eOperation != null ? eOperation.getName() : null;
 			int operationArity = eOperation != null ? eOperation.getEParameters().size() : 0;
@@ -759,7 +759,7 @@ public abstract class OCLExpressionUnparser extends UnparserWithReflection<EClas
 		else {
 			append("?");
 			Object type = object.getType();
-			if ((type != null) && !(type instanceof VoidType)) {
+			if ((type != null) && !(type instanceof VoidType<?>)) {
 				append(" : ");
 				appendName(type);
 			}
@@ -776,7 +776,7 @@ public abstract class OCLExpressionUnparser extends UnparserWithReflection<EClas
 			Object type = variable.getType();
 			if ((type instanceof EObject) && ((EObject)type).eIsProxy())
 				type = variable.getType();
-			if ((type != null) && !(type instanceof VoidType)) {
+			if ((type != null) && !(type instanceof VoidType<?>)) {
 				append(" : ");
 				appendQualifiedName(type);
 			}

@@ -425,7 +425,7 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 	protected OCLExpression<EClassifier> simpleNameCS(SimpleNameCS simpleNameCS,
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
 			OCLExpression<EClassifier> source) {
-		if (source instanceof InvalidLiteralExp)
+		if (source instanceof InvalidLiteralExp<?>)
 			return source;
 //		try {
 			return super.simpleNameCS(simpleNameCS, createdNestedEnvironment(simpleNameCS, env), source);			

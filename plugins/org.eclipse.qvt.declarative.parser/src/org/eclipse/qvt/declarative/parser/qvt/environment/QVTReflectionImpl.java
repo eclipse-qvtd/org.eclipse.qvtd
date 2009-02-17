@@ -17,7 +17,7 @@ public class QVTReflectionImpl extends UMLReflectionImpl
 		if (object == null)
 			return "_null_named_object_";
 		String name;
-		if (object instanceof TypedElement)
+		if (object instanceof TypedElement<?>)
 			name = ((TypedElement<?>)object).getName();
 		else if (object instanceof ENamedElement)
 			name = ((ENamedElement)object).getName(); 
@@ -33,7 +33,7 @@ public class QVTReflectionImpl extends UMLReflectionImpl
 		if (object == null)
 			return "_null_qualified_named_object_";
 		String name;
-		if (object instanceof TypedElement)
+		if (object instanceof TypedElement<?>)
 			name = ((TypedElement<?>)object).getName();
 		else if (object instanceof ENamedElement)
 			name = ((ENamedElement)object).getName(); 
