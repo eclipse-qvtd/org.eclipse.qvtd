@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationalTransformationOperations.java,v 1.5 2009/01/14 21:02:27 ewillink Exp $
+ * $Id: RelationalTransformationOperations.java,v 1.6 2009/02/17 21:41:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.operations;
 
@@ -98,8 +98,8 @@ public class RelationalTransformationOperations extends AbstractQVTRelationOpera
 							Object[] messageSubstitutions = new Object[] { name, otherName };
 							appendWarning(diagnostics, astNodes, QVTRelationMessages._UI_RelationalTransformation_ClassifierNameIsSimilar, messageSubstitutions);
 						}
-						else if ((eClassifier instanceof CollectionType)
-							 && (otherEClassifier instanceof CollectionType)
+						else if ((eClassifier instanceof CollectionType<?,?>)
+							 && (otherEClassifier instanceof CollectionType<?,?>)
 							 && (((CollectionType<?,?>)eClassifier).getElementType() != ((CollectionType<?,?>)otherEClassifier).getElementType())) {
 							Object[] messageSubstitutions = new Object[] { ((CollectionType<?,?>)eClassifier).getKind(),
 											   EcoreUtils.formatQualifiedName(((CollectionType<?,?>)eClassifier).getElementType()),
