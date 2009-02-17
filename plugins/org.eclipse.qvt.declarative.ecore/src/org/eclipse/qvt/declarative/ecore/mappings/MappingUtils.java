@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: MappingUtils.java,v 1.2 2008/08/08 17:00:10 ewillink Exp $
+ * $Id: MappingUtils.java,v 1.3 2009/02/17 21:31:35 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.mappings;
 
@@ -151,9 +151,9 @@ public abstract class MappingUtils
 			return "Integer." + object.toString();
 		else if (object instanceof String)
 			return "String.'" + object + "'";
-		else if (object instanceof Map.Entry)
+		else if (object instanceof Map.Entry<?,?>)
 			return "Map.Entry[" + formatString(((Map.Entry<?,?>)object).getKey()) + "]";
-		else if (object instanceof Collection)
+		else if (object instanceof Collection<?>)
 			return formatLocalClassName(object) + "[" + ((Collection<?>)object).size() + "]";
 		else
 			return "unnamed-" + formatLocalClassName(object);
@@ -171,7 +171,7 @@ public abstract class MappingUtils
 	}
 
 	public static void formatObject(StringBuffer s, Object object) {
-		if (object instanceof Collection) {
+		if (object instanceof Collection<?>) {
 			String prefix = "";
 			for (Object obj : (Collection<?>)object) {
 				s.append(prefix);

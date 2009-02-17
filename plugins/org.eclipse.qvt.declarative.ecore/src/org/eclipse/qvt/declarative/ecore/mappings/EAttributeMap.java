@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EAttributeMap.java,v 1.3 2008/10/18 18:46:43 ewillink Exp $
+ * $Id: EAttributeMap.java,v 1.4 2009/02/17 21:31:35 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.mappings;
 
@@ -60,7 +60,7 @@ public class EAttributeMap extends EStructuralFeatureMap<EAttribute>
 
 	@Override protected List<?> exportValues(EObject adaptingObject, List<?> ecoreValues) {
 		List<Object> adaptingValues;
-		if (ecoreValues instanceof InternalEList) {
+		if (ecoreValues instanceof InternalEList<?>) {
 			EStructuralFeature adaptingFeature = adaptingFeatureElement.getEStructuralFeature();
 			if (adaptingFeature  instanceof EAttribute) {
 				EDataType adaptingDataType = ((EAttribute) adaptingFeature).getEAttributeType();

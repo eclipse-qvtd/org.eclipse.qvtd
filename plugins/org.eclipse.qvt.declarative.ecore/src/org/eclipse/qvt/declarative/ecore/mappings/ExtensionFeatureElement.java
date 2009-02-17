@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ExtensionFeatureElement.java,v 1.2 2008/08/08 17:00:10 ewillink Exp $
+ * $Id: ExtensionFeatureElement.java,v 1.3 2009/02/17 21:31:35 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.mappings;
 
@@ -173,11 +173,11 @@ public abstract class ExtensionFeatureElement<FA extends EStructuralFeature, FE 
 			Object attributeValueOrValues = extensionObject.getAnyAttribute().get(eStructuralFeature, false);
 			if (getEcoreFeature().isMany()) {
 				List<Object> values = new ArrayList<Object>();
-				if (attributeValueOrValues instanceof List)
+				if (attributeValueOrValues instanceof List<?>)
 					values.addAll((List<?>) attributeValueOrValues);
 				else if (attributeValueOrValues != null)
 					values.add(attributeValueOrValues);
-				if (mixedValueOrValues instanceof List) {
+				if (mixedValueOrValues instanceof List<?>) {
 					for (Object mixedValue : (List<?>) mixedValueOrValues) {
 						if ((mixedValue instanceof EObject) && ((EObject)mixedValue).eIsProxy())
 							mixedValue = mappingMetaDataRegistry.getAdapter(EcoreUtil.resolve((EObject)mixedValue, adaptingContainerObject));
@@ -194,7 +194,7 @@ public abstract class ExtensionFeatureElement<FA extends EStructuralFeature, FE 
 			else {
 				Object attributeValue = null;
 				Object elementValue = null;
-				if (attributeValueOrValues instanceof List) {
+				if (attributeValueOrValues instanceof List<?>) {
 					if (!((List<?>)attributeValueOrValues).isEmpty()) {
 						if (((List<?>)attributeValueOrValues).size() > 1)
 							System.out.println("Oversize attribute list for " + this);
@@ -203,7 +203,7 @@ public abstract class ExtensionFeatureElement<FA extends EStructuralFeature, FE 
 				}
 				else if (attributeValueOrValues != null)
 					attributeValue = attributeValueOrValues;
-				if (mixedValueOrValues instanceof List) {
+				if (mixedValueOrValues instanceof List<?>) {
 					if (!((List<?>)mixedValueOrValues).isEmpty()) {
 						if (((List<?>)mixedValueOrValues).size() > 1)
 							System.out.println("Oversize element list for " + this);
@@ -266,10 +266,10 @@ public abstract class ExtensionFeatureElement<FA extends EStructuralFeature, FE 
 
 	protected Object resolveValueMultiplicity(Object valueOrValues) {
 		if (getEcoreFeature().isMany()) {
-			assert (valueOrValues == null) || (valueOrValues instanceof List);
+			assert (valueOrValues == null) || (valueOrValues instanceof List<?>);
 		}
 		else {
-			if (valueOrValues instanceof List) {
+			if (valueOrValues instanceof List<?>) {
 				assert ((List<?>)valueOrValues).size() <= 1;
 				if (((List<?>)valueOrValues).size() > 1)
 					System.out.println("Oversize list for " + this);
@@ -285,7 +285,7 @@ public abstract class ExtensionFeatureElement<FA extends EStructuralFeature, FE 
 	public void set(IMappingMetaDataRegistry.Install mappingMetaDataRegistry, EObject eObject, Object value) {
 		assert !(eObject instanceof AnyType);
 		Object defaultValue = getDefaultValue();
-		Object testValue = (value instanceof List) && ((List<?>)value).isEmpty() ? null : value != null ? value.toString() : null;
+		Object testValue = (value instanceof List<?>) && ((List<?>)value).isEmpty() ? null : value != null ? value.toString() : null;
 		boolean isDefault = (testValue == defaultValue) || ((testValue != null) && (defaultValue != null) && testValue.equals(defaultValue.toString()));
 		if (!isDefault) {
 			AnyType ecoreExtension = mappingMetaDataRegistry.getXMIExtensions(eObject).get(0);

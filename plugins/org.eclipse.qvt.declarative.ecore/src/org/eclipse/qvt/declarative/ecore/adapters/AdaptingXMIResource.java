@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AdaptingXMIResource.java,v 1.2 2008/08/08 17:00:10 ewillink Exp $
+ * $Id: AdaptingXMIResource.java,v 1.3 2009/02/17 21:31:35 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.adapters;
 
@@ -176,7 +176,7 @@ public class AdaptingXMIResource extends XMIResourceImpl implements Adapter
 			@Override
 			public Object getValue(EObject obj, EStructuralFeature f) {
 				Object value = super.getValue(obj, f);
-				if (value instanceof AdaptingInternalEList) {
+				if (value instanceof AdaptingInternalEList<?,?>) {
 					boolean hasXmiExtension = false;
 //					for (Object v : (List<?>)value) {
 					for (Object v : ((AdaptingInternalEList<?,?>)value).basicList()) {
@@ -369,7 +369,7 @@ public class AdaptingXMIResource extends XMIResourceImpl implements Adapter
 	}
 
 	public boolean isAdapterForType(Object type) {
-		return (type instanceof Class) && ((Class<?>)type).isAssignableFrom(getClass());
+		return (type instanceof Class<?>) && ((Class<?>)type).isAssignableFrom(getClass());
 	}
 
 	public void notifyChanged(Notification notification) {}

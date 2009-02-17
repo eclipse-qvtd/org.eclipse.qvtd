@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractFeatureElement.java,v 1.2 2008/08/08 17:00:10 ewillink Exp $
+ * $Id: AbstractFeatureElement.java,v 1.3 2009/02/17 21:31:35 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.mappings;
 
@@ -111,7 +111,7 @@ public abstract class AbstractFeatureElement<F extends EStructuralFeature>
 		//	Contributions to a mixed content are pretty printed on the assumption that indenting is
 		//	performed by XMLString that has a built-in 2 character indent.
 		//
-		if ((featureMap instanceof NotifyingList) && (((NotifyingList<?>) featureMap).getFeatureID() == XMLTypePackage.ANY_TYPE__MIXED)) {
+		if ((featureMap instanceof NotifyingList<?>) && (((NotifyingList<?>) featureMap).getFeatureID() == XMLTypePackage.ANY_TYPE__MIXED)) {
 			StringBuffer s = new StringBuffer();
 			s.append("\n    ");								// Indent for xmi:XMI and for root element
 			for (EObject rootObject = eObject; rootObject.eContainer() != null; rootObject = rootObject.eContainer())

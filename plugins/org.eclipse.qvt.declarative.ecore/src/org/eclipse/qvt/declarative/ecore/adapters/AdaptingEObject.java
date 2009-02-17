@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AdaptingEObject.java,v 1.3 2008/10/18 18:46:43 ewillink Exp $
+ * $Id: AdaptingEObject.java,v 1.4 2009/02/17 21:31:35 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.adapters;
 
@@ -297,7 +297,7 @@ public class AdaptingEObject implements Adapter, Notifier, InternalEObject
 	}
 
 	public boolean isAdapterForType(Object type) {
-		return (type instanceof Class) && ((Class<?>)type).isAssignableFrom(getClass());
+		return (type instanceof Class<?>) && ((Class<?>)type).isAssignableFrom(getClass());
 	}
 
 	public boolean isXmiExtension() {
@@ -313,7 +313,7 @@ public class AdaptingEObject implements Adapter, Notifier, InternalEObject
 			EStructuralFeatureMap<?> featureMap = mappingMetaDataRegistry.getEcoreEStructuralFeatureMap(ecoreEFeature);
 			if (featureMap != null) {
 				AbstractFeatureElement<?> adaptingFeatureElement = featureMap.getAdaptingFeatureElement();
-				if (adaptingFeatureElement instanceof ExtensionFeatureElement)
+				if (adaptingFeatureElement instanceof ExtensionFeatureElement<?,?>)
 					featureMap.importFeature(this, this, target);
 			}
 		}		
@@ -329,7 +329,7 @@ public class AdaptingEObject implements Adapter, Notifier, InternalEObject
 			EStructuralFeatureMap<?> featureMap = mappingMetaDataRegistry.getEcoreEStructuralFeatureMap(ecoreEFeature);
 			if (featureMap != null) {
 				AbstractFeatureElement<?> adaptingFeatureElement = featureMap.getAdaptingFeatureElement();
-				if (adaptingFeatureElement instanceof ExtensionFeatureElement)
+				if (adaptingFeatureElement instanceof ExtensionFeatureElement<?,?>)
 					featureMap.exportFeature(target, this);
 			}
 		}		

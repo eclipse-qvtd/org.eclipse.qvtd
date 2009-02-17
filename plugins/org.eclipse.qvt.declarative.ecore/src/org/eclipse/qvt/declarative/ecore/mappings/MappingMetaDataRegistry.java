@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: MappingMetaDataRegistry.java,v 1.2 2008/08/08 17:00:10 ewillink Exp $
+ * $Id: MappingMetaDataRegistry.java,v 1.3 2009/02/17 21:31:35 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.mappings;
 
@@ -214,7 +214,7 @@ public class MappingMetaDataRegistry extends BasicExtendedMetaData implements IM
 	}
 
 	public <E extends EObject, A extends EObject> EList<A> getAdapters(EList<E> ecoreObjects) {
-		if (ecoreObjects instanceof InternalEList)
+		if (ecoreObjects instanceof InternalEList<?>)
 			return new AdaptingInternalEList<E, A>(this, (InternalEList<E>)ecoreObjects);
 		else
 			return new AdaptingEList<E, A, EList<E>>(this, ecoreObjects);

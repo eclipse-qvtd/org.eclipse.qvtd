@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EStructuralFeatureMap.java,v 1.3 2008/10/18 18:46:43 ewillink Exp $
+ * $Id: EStructuralFeatureMap.java,v 1.4 2009/02/17 21:31:35 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.mappings;
 
@@ -87,7 +87,7 @@ public abstract class EStructuralFeatureMap<FE extends EStructuralFeature>
 	 * @return
 	 */
 	public Object exportValueOrValues(EObject adaptingObject, Object ecoreValue) {
-		if (ecoreValue instanceof List)
+		if (ecoreValue instanceof List<?>)
 			return exportValues(adaptingObject, (List<?>)ecoreValue);
 		else
 			return exportValue(adaptingObject, ecoreValue);		
@@ -157,7 +157,7 @@ public abstract class EStructuralFeatureMap<FE extends EStructuralFeature>
 				return importValue(adaptingResource, adaptingObject, featureMap.get(0));		
 		}
 		else {
-			if (adaptingValue instanceof List)
+			if (adaptingValue instanceof List<?>)
 				return importValues(adaptingResource, adaptingObject, (List<?>)adaptingValue);
 			else
 				return importValue(adaptingResource, adaptingObject, adaptingValue);		
@@ -210,10 +210,10 @@ public abstract class EStructuralFeatureMap<FE extends EStructuralFeature>
 	public void setAdaptingValue(EObject adaptingObject, Object adaptingValue) {
 		if (adaptingObject instanceof AnyType)
 			adaptingFeatureElement.setExtension(mappingMetaDataRegistry, (AnyType) adaptingObject, adaptingValue);
-		else if (adaptingFeatureElement instanceof ExtensionFeatureElement)
+		else if (adaptingFeatureElement instanceof ExtensionFeatureElement<?,?>)
 			adaptingFeatureElement.set(mappingMetaDataRegistry, adaptingObject, adaptingValue);
 		else
-			assert true : "Bad setAdaptingValue";
+			assert false : "Bad setAdaptingValue";
 	}
 
 	public void setEcoreValue(EObject ecoreObject, Object ecoreValue) {
