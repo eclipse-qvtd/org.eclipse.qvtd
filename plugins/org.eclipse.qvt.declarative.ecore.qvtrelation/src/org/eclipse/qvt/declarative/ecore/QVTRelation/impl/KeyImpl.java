@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: KeyImpl.java,v 1.2 2008/09/09 21:00:53 ewillink Exp $
+ * $Id: KeyImpl.java,v 1.3 2009/02/17 21:44:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.impl;
 
@@ -160,7 +160,7 @@ public class KeyImpl extends EModelElementImpl implements Key {
 	 * @generated
 	 */
 	public RelationalTransformation getTransformation() {
-		if (eContainerFeatureID != QVTRelationPackage.KEY__TRANSFORMATION) return null;
+		if (eContainerFeatureID() != QVTRelationPackage.KEY__TRANSFORMATION) return null;
 		return (RelationalTransformation)eContainer();
 	}
 
@@ -180,7 +180,7 @@ public class KeyImpl extends EModelElementImpl implements Key {
 	 * @generated
 	 */
 	public void setTransformation(RelationalTransformation newTransformation) {
-		if (newTransformation != eInternalContainer() || (eContainerFeatureID != QVTRelationPackage.KEY__TRANSFORMATION && newTransformation != null)) {
+		if (newTransformation != eInternalContainer() || (eContainerFeatureID() != QVTRelationPackage.KEY__TRANSFORMATION && newTransformation != null)) {
 			if (EcoreUtil.isAncestor(this, newTransformation))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -244,7 +244,7 @@ public class KeyImpl extends EModelElementImpl implements Key {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTRelationPackage.KEY__TRANSFORMATION:
 				return eInternalContainer().eInverseRemove(this, QVTRelationPackage.RELATIONAL_TRANSFORMATION__OWNED_KEY, RelationalTransformation.class, msgs);
 		}

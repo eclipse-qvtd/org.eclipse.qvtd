@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationSwitch.java,v 1.2 2008/09/09 21:00:53 ewillink Exp $
+ * $Id: QVTRelationSwitch.java,v 1.3 2009/02/17 21:44:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.util;
 
@@ -136,14 +136,14 @@ public class QVTRelationSwitch<T> {
 			case QVTRelationPackage.OPPOSITE_PROPERTY_CALL_EXP: {
 				OppositePropertyCallExp oppositePropertyCallExp = (OppositePropertyCallExp)theEObject;
 				T result = caseOppositePropertyCallExp(oppositePropertyCallExp);
-				if (result == null) result = casePropertyCallExp_1(oppositePropertyCallExp);
-				if (result == null) result = caseNavigationCallExp_1(oppositePropertyCallExp);
+				if (result == null) result = caseEcore_PropertyCallExp(oppositePropertyCallExp);
+				if (result == null) result = caseEcore_NavigationCallExp(oppositePropertyCallExp);
 				if (result == null) result = casePropertyCallExp(oppositePropertyCallExp);
-				if (result == null) result = caseFeatureCallExp_1(oppositePropertyCallExp);
+				if (result == null) result = caseEcore_FeatureCallExp(oppositePropertyCallExp);
 				if (result == null) result = caseNavigationCallExp(oppositePropertyCallExp);
-				if (result == null) result = caseCallExp_1(oppositePropertyCallExp);
+				if (result == null) result = caseEcore_CallExp(oppositePropertyCallExp);
 				if (result == null) result = caseFeatureCallExp(oppositePropertyCallExp);
-				if (result == null) result = caseOCLExpression_1(oppositePropertyCallExp);
+				if (result == null) result = caseEcore_OCLExpression(oppositePropertyCallExp);
 				if (result == null) result = caseCallExp(oppositePropertyCallExp);
 				if (result == null) result = caseETypedElement(oppositePropertyCallExp);
 				if (result == null) result = caseOCLExpression(oppositePropertyCallExp);
@@ -191,7 +191,7 @@ public class QVTRelationSwitch<T> {
 			case QVTRelationPackage.RELATION_CALL_EXP: {
 				RelationCallExp relationCallExp = (RelationCallExp)theEObject;
 				T result = caseRelationCallExp(relationCallExp);
-				if (result == null) result = caseOCLExpression_1(relationCallExp);
+				if (result == null) result = caseEcore_OCLExpression(relationCallExp);
 				if (result == null) result = caseETypedElement(relationCallExp);
 				if (result == null) result = caseOCLExpression(relationCallExp);
 				if (result == null) result = caseENamedElement(relationCallExp);
@@ -514,7 +514,7 @@ public class QVTRelationSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOCLExpression_1(org.eclipse.ocl.ecore.OCLExpression object) {
+	public T caseEcore_OCLExpression(org.eclipse.ocl.ecore.OCLExpression object) {
 		return null;
 	}
 
@@ -559,7 +559,7 @@ public class QVTRelationSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCallExp_1(org.eclipse.ocl.ecore.CallExp object) {
+	public T caseEcore_CallExp(org.eclipse.ocl.ecore.CallExp object) {
 		return null;
 	}
 
@@ -589,7 +589,7 @@ public class QVTRelationSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFeatureCallExp_1(org.eclipse.ocl.ecore.FeatureCallExp object) {
+	public T caseEcore_FeatureCallExp(org.eclipse.ocl.ecore.FeatureCallExp object) {
 		return null;
 	}
 
@@ -619,7 +619,7 @@ public class QVTRelationSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNavigationCallExp_1(org.eclipse.ocl.ecore.NavigationCallExp object) {
+	public T caseEcore_NavigationCallExp(org.eclipse.ocl.ecore.NavigationCallExp object) {
 		return null;
 	}
 
@@ -649,7 +649,7 @@ public class QVTRelationSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePropertyCallExp_1(org.eclipse.ocl.ecore.PropertyCallExp object) {
+	public T caseEcore_PropertyCallExp(org.eclipse.ocl.ecore.PropertyCallExp object) {
 		return null;
 	}
 

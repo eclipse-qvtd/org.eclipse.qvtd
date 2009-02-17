@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationImpl.java,v 1.2 2008/09/28 11:18:20 ewillink Exp $
+ * $Id: RelationImpl.java,v 1.3 2009/02/17 21:44:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.impl;
 
@@ -360,7 +360,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTRelationPackage.RELATION__IS_TOP_LEVEL:
-				return isIsTopLevel() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsTopLevel();
 			case QVTRelationPackage.RELATION__VARIABLE:
 				return getVariable();
 			case QVTRelationPackage.RELATION__OPERATIONAL_IMPL:
@@ -383,7 +383,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTRelationPackage.RELATION__IS_TOP_LEVEL:
-				setIsTopLevel(((Boolean)newValue).booleanValue());
+				setIsTopLevel((Boolean)newValue);
 				return;
 			case QVTRelationPackage.RELATION__VARIABLE:
 				getVariable().clear();

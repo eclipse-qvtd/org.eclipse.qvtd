@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationAdapterFactory.java,v 1.2 2008/09/09 21:00:53 ewillink Exp $
+ * $Id: QVTRelationAdapterFactory.java,v 1.3 2009/02/17 21:44:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.util;
 
@@ -172,8 +172,8 @@ public class QVTRelationAdapterFactory extends AdapterFactoryImpl {
 				return createOCLExpressionAdapter();
 			}
 			@Override
-			public Adapter caseOCLExpression_1(org.eclipse.ocl.ecore.OCLExpression object) {
-				return createOCLExpression_1Adapter();
+			public Adapter caseEcore_OCLExpression(org.eclipse.ocl.ecore.OCLExpression object) {
+				return createEcore_OCLExpressionAdapter();
 			}
 			@Override
 			public Adapter caseCallingASTNode(CallingASTNode object) {
@@ -184,32 +184,32 @@ public class QVTRelationAdapterFactory extends AdapterFactoryImpl {
 				return createCallExpAdapter();
 			}
 			@Override
-			public Adapter caseCallExp_1(org.eclipse.ocl.ecore.CallExp object) {
-				return createCallExp_1Adapter();
+			public Adapter caseEcore_CallExp(org.eclipse.ocl.ecore.CallExp object) {
+				return createEcore_CallExpAdapter();
 			}
 			@Override
 			public <C> Adapter caseFeatureCallExp(FeatureCallExp<C> object) {
 				return createFeatureCallExpAdapter();
 			}
 			@Override
-			public Adapter caseFeatureCallExp_1(org.eclipse.ocl.ecore.FeatureCallExp object) {
-				return createFeatureCallExp_1Adapter();
+			public Adapter caseEcore_FeatureCallExp(org.eclipse.ocl.ecore.FeatureCallExp object) {
+				return createEcore_FeatureCallExpAdapter();
 			}
 			@Override
 			public <C, P> Adapter caseNavigationCallExp(NavigationCallExp<C, P> object) {
 				return createNavigationCallExpAdapter();
 			}
 			@Override
-			public Adapter caseNavigationCallExp_1(org.eclipse.ocl.ecore.NavigationCallExp object) {
-				return createNavigationCallExp_1Adapter();
+			public Adapter caseEcore_NavigationCallExp(org.eclipse.ocl.ecore.NavigationCallExp object) {
+				return createEcore_NavigationCallExpAdapter();
 			}
 			@Override
 			public <C, P> Adapter casePropertyCallExp(PropertyCallExp<C, P> object) {
 				return createPropertyCallExpAdapter();
 			}
 			@Override
-			public Adapter casePropertyCallExp_1(org.eclipse.ocl.ecore.PropertyCallExp object) {
-				return createPropertyCallExp_1Adapter();
+			public Adapter caseEcore_PropertyCallExp(org.eclipse.ocl.ecore.PropertyCallExp object) {
+				return createEcore_PropertyCallExpAdapter();
 			}
 			@Override
 			public Adapter caseRule(Rule object) {
@@ -531,7 +531,7 @@ public class QVTRelationAdapterFactory extends AdapterFactoryImpl {
 	 * @see org.eclipse.ocl.ecore.OCLExpression
 	 * @generated
 	 */
-	public Adapter createOCLExpression_1Adapter() {
+	public Adapter createEcore_OCLExpressionAdapter() {
 		return null;
 	}
 
@@ -573,7 +573,7 @@ public class QVTRelationAdapterFactory extends AdapterFactoryImpl {
 	 * @see org.eclipse.ocl.ecore.CallExp
 	 * @generated
 	 */
-	public Adapter createCallExp_1Adapter() {
+	public Adapter createEcore_CallExpAdapter() {
 		return null;
 	}
 
@@ -601,7 +601,7 @@ public class QVTRelationAdapterFactory extends AdapterFactoryImpl {
 	 * @see org.eclipse.ocl.ecore.FeatureCallExp
 	 * @generated
 	 */
-	public Adapter createFeatureCallExp_1Adapter() {
+	public Adapter createEcore_FeatureCallExpAdapter() {
 		return null;
 	}
 
@@ -629,7 +629,7 @@ public class QVTRelationAdapterFactory extends AdapterFactoryImpl {
 	 * @see org.eclipse.ocl.ecore.NavigationCallExp
 	 * @generated
 	 */
-	public Adapter createNavigationCallExp_1Adapter() {
+	public Adapter createEcore_NavigationCallExpAdapter() {
 		return null;
 	}
 
@@ -657,7 +657,7 @@ public class QVTRelationAdapterFactory extends AdapterFactoryImpl {
 	 * @see org.eclipse.ocl.ecore.PropertyCallExp
 	 * @generated
 	 */
-	public Adapter createPropertyCallExp_1Adapter() {
+	public Adapter createEcore_PropertyCallExpAdapter() {
 		return null;
 	}
 

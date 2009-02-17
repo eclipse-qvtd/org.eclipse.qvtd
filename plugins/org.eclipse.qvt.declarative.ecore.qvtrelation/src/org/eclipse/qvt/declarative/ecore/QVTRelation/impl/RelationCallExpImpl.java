@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationCallExpImpl.java,v 1.1 2008/07/23 09:46:09 qglineur Exp $
+ * $Id: RelationCallExpImpl.java,v 1.2 2009/02/17 21:44:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.impl;
 
@@ -254,6 +254,6 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 			return ((QVTRelationVisitor<T>) v).visitRelationCallExp(this);
 		if (v instanceof ToStringVisitor)
 			return (T) QVTRelationToStringVisitor.getInstance(this).visitRelationCallExp(this);
-		return super.accept(v);
+		return (T) super.accept(v);
 	}
 } //RelationCallExpImpl
