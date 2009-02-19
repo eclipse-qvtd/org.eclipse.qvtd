@@ -12,14 +12,11 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: ATLVMExecutor.java,v 1.9 2009/02/19 14:28:27 qglineur Exp $
+ * $Id: ATLVMExecutor.java,v 1.10 2009/02/19 18:28:52 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm;
 
 import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,8 +27,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.m2m.atl.drivers.emf4atl.ASMEMFModel;
 import org.eclipse.m2m.atl.drivers.emf4atl.EMFModelLoader;
 import org.eclipse.m2m.atl.engine.vm.ASM;
@@ -47,9 +53,8 @@ import org.eclipse.qvt.declarative.execution.ExecuteOperation;
 import org.eclipse.qvt.declarative.execution.ExecutionContext;
 import org.eclipse.qvt.declarative.execution.ExecutionProvider;
 import org.eclipse.qvt.declarative.execution.LabelledModel;
-import org.eclipse.qvt.declarative.execution.QVTRealtionsExecutionException;
+import org.eclipse.qvt.declarative.execution.QVTRelationsExecutionException;
 import org.eclipse.qvt.declarative.execution.ExecutionContext.ExecutionMode;
-
 
 /**
  * A client implementation to provide an execution of QVT Relations by the
@@ -140,7 +145,94 @@ public class ATLVMExecutor implements ExecutionProvider {
 		return false;
 	}
 
-	// FIXME libraries for overriding transformations
+	Map<String, String> getTransformationParameters(ExecutionContext parameters) {
+		Map<String, String> transformationParameters = new HashMap<String, String>();
+		boolean isCheckOnly = parameters.getMode() == ExecutionMode.checkOnly;
+		transformationParameters
+				.put("checkOnly", Boolean.toString(isCheckOnly));
+		return transformationParameters;
+	}
+
+	List<ASMModel> getLinkedModels(ExecutionContext parameters)
+			throws QVTRelationsExecutionException {
+		List<ASMModel> linkedModels = new ArrayList<ASMModel>();
+		EMFModelLoader emfModelLoader = new EMFModelLoader();
+		try {
+			for (LabelledModel namedModel : parameters.getSourceModels()) {
+				ASMModel metamodel = emfModelLoader.loadModel(namedModel
+						.getName()
+						+ "MM", emfModelLoader.getMOF(), URI
+						.createURI(namedModel.getMetamodel().getAccessor()));
+				linkedModels.add(metamodel);
+				linkedModels.add(emfModelLoader.loadModel(namedModel.getName(),
+						metamodel, URI.createURI(namedModel.getAccessor())));
+			}
+			LabelledModel directionNamedModel = parameters.getDirectionModel();
+			ASMModel metamodel = emfModelLoader.loadModel(directionNamedModel
+					.getName()
+					+ "MM", emfModelLoader.getMOF(),
+					URI.createURI(directionNamedModel.getMetamodel()
+							.getAccessor()));
+			linkedModels.add(metamodel);
+			linkedModels.add(emfModelLoader.loadModel(directionNamedModel
+					.getName(), metamodel, URI.createURI(directionNamedModel
+					.getAccessor())));
+		} catch (Exception e) {
+			String message = "Unable to load models into the ATLVM \n"
+					+ e.getMessage();
+			throw new QVTRelationsExecutionException(message);
+		}
+		return linkedModels;
+	}
+
+	private static IFile getExecutableFile(IFile sourceFile, String direction) {
+		IJavaProject javaProject = JavaCore.create(sourceFile.getProject());
+		IClasspathEntry srcContainer = null;
+		IPath currentTransformationPath = sourceFile.getFullPath();
+		try {
+			for (IClasspathEntry classpathEntry : javaProject.getRawClasspath()) {
+				if (classpathEntry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
+					IPath classPathEntryPath = classpathEntry.getPath();
+					if (classPathEntryPath
+							.isPrefixOf(currentTransformationPath)) {
+						srcContainer = classpathEntry;
+					}
+				}
+			}
+			IPath relativeTransformationPath = currentTransformationPath
+					.removeFirstSegments(srcContainer.getPath().segmentCount());
+			IPath binPath = srcContainer.getOutputLocation();
+			IPath relativeExecutablePath = binPath.append(
+					relativeTransformationPath).removeFileExtension()
+					.addFileExtension(direction).addFileExtension("asm");
+			IFile executableFile = ResourcesPlugin.getWorkspace().getRoot()
+					.getFile(relativeExecutablePath);
+			return executableFile;
+		} catch (JavaModelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	ASM getQVTRTransformation(String transformationQualifiedName,
+			ExecutionContext parameters) throws QVTRelationsExecutionException {
+		String direction = parameters.getDirectionModel().getName();
+		IFile transformationFile = ResourcesPlugin.getWorkspace().getRoot()
+				.getFile(new Path(transformationQualifiedName));
+		IFile executableFile = getExecutableFile(transformationFile, direction);
+		ASM qvtrTransformation = null;
+		try {
+			qvtrTransformation = new ASMXMLReader()
+					.read(new BufferedInputStream(executableFile.getContents()));
+		} catch (CoreException e) {
+			String message = "Unable to load ASM code in the ATLVM \n"
+					+ e.getMessage();
+			throw new QVTRelationsExecutionException(message);
+		}
+		return qvtrTransformation;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -150,43 +242,18 @@ public class ATLVMExecutor implements ExecutionProvider {
 	 * org.eclipse.qvt.declarative.execution.ExecutionContext,
 	 * org.eclipse.core.resources.IFolder, org.eclipse.core.resources.IFolder)
 	 */
-	public List<?> execute(File executableFile, ExecutionContext parameters)
-			throws QVTRealtionsExecutionException {
-		Map<String, String> transformationParameters = new HashMap<String, String>();
-		boolean isCheckOnly = parameters.getMode() == ExecutionMode.checkOnly;
-		transformationParameters
-				.put("checkOnly", Boolean.toString(isCheckOnly));
+	public List<?> execute(String transformationQualifiedName,
+			ExecutionContext parameters) throws QVTRelationsExecutionException {
 
-		List<ASMModel> linkedModels = new ArrayList<ASMModel>();
-		EMFModelLoader emfModelLoader = new EMFModelLoader();
-		try {
-			for (LabelledModel namedModel : parameters.getSourceModels()) {
-				ASMModel metamodel = emfModelLoader.loadModel(namedModel.getName()+"MM", emfModelLoader.getMOF(), URI.createURI(namedModel.getMetamodel().getAccessor()));
-				linkedModels.add(metamodel);
-				linkedModels.add(emfModelLoader.loadModel(namedModel.getName(), metamodel, URI.createURI(namedModel.getAccessor())));
-			}
-			LabelledModel directionNamedModel = parameters.getDirectionModel();
-			ASMModel metamodel = emfModelLoader.loadModel(directionNamedModel.getName()+"MM", emfModelLoader.getMOF(), URI.createURI(directionNamedModel.getMetamodel().getAccessor()));
-			linkedModels.add(metamodel);
-			linkedModels.add(emfModelLoader.loadModel(directionNamedModel.getName(), metamodel, URI.createURI(directionNamedModel.getAccessor())));
-		} catch (Exception e) {
-			String message = "Unable to load models into the ATLVM \n"
-					+ e.getMessage();
-			throw new QVTRealtionsExecutionException(message);
-		}
+		Map<String, String> transformationParameters = getTransformationParameters(parameters);
+		List<ASMModel> linkedModels = getLinkedModels(parameters);
+		ASM qvtrTransformation = getQVTRTransformation(
+				transformationQualifiedName, parameters);
+		List<ASM> librairies = Collections.<ASM> emptyList();
 
-		ASM qvtrTransformation;
-		try {
-			qvtrTransformation = new ASMXMLReader()
-					.read(new BufferedInputStream(new FileInputStream(
-							executableFile)));
-		} catch (FileNotFoundException e) {
-			String message = "Unable to load ASM code in the ATLVM \n"
-					+ e.getMessage();
-			throw new QVTRealtionsExecutionException(message);
-		}
-		Object result = execute(qvtrTransformation, linkedModels, Collections
-				.<ASM> emptyList(), transformationParameters, DEFAULT_DEBUGGER);
+		Object result = execute(qvtrTransformation, linkedModels, librairies,
+				transformationParameters, DEFAULT_DEBUGGER);
+
 		for (ASMModel model : linkedModels) {
 			Map<String, Boolean> serializationParameters = new HashMap<String, Boolean>();
 			URI metamodelURI = ((ASMEMFModel) model.getMetamodel()).getExtent()
@@ -200,7 +267,7 @@ public class ATLVMExecutor implements ExecutionProvider {
 				emfModel.getExtent().save(serializationParameters);
 			} catch (IOException e) {
 				String message = "Unable to save the model \n" + e.getMessage();
-				throw new QVTRealtionsExecutionException(message);
+				throw new QVTRelationsExecutionException(message);
 			}
 		}
 		return Collections.singletonList(result);
@@ -208,7 +275,8 @@ public class ATLVMExecutor implements ExecutionProvider {
 
 	protected Object execute(final ASM qvtrTransformation,
 			final List<ASMModel> linkedModels, final List<ASM> libraries,
-			final Map<String, String> parameters, final Debugger debugger) throws QVTRealtionsExecutionException {
+			final Map<String, String> parameters, final Debugger debugger)
+			throws QVTRelationsExecutionException {
 
 		ASMModule asmModule = new ASMModule(qvtrTransformation);
 
@@ -239,8 +307,9 @@ public class ATLVMExecutor implements ExecutionProvider {
 		try {
 			new ASMInterpreter(qvtrTransformation, asmModule, env, parameters);
 		} catch (Exception e) {
-			String message = "Problem interpreting the compiled transformation \n"+e.getMessage();
-			throw new QVTRealtionsExecutionException(message);
+			String message = "Problem interpreting the compiled transformation \n"
+					+ e.getMessage();
+			throw new QVTRelationsExecutionException(message);
 		}
 
 		return linkedModels.get(linkedModels.size() - 1);
