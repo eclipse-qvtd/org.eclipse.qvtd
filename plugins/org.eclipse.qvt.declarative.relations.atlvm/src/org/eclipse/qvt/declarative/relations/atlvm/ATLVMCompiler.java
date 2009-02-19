@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: ATLVMCompiler.java,v 1.18 2008/10/21 08:33:32 qglineur Exp $
+ * $Id: ATLVMCompiler.java,v 1.19 2009/02/19 14:28:27 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm;
 
@@ -38,12 +38,14 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.atl.drivers.emf4atl.ASMEMFModel;
+import org.eclipse.m2m.atl.drivers.emf4atl.EMFModelLoader;
 import org.eclipse.m2m.atl.engine.vm.ASM;
 import org.eclipse.m2m.atl.engine.vm.ASMExecEnv;
 import org.eclipse.m2m.atl.engine.vm.ASMInterpreter;
 import org.eclipse.m2m.atl.engine.vm.ASMXMLReader;
 import org.eclipse.m2m.atl.engine.vm.Debugger;
 import org.eclipse.m2m.atl.engine.vm.SimpleDebugger;
+import org.eclipse.m2m.atl.engine.vm.nativelib.ASMModel;
 import org.eclipse.m2m.atl.engine.vm.nativelib.ASMModule;
 import org.eclipse.qvt.declarative.atlvm.problems.problems.Problem;
 import org.eclipse.qvt.declarative.atlvm.problems.problems.ProblemsPackage;
@@ -53,10 +55,11 @@ import org.eclipse.qvt.declarative.compilation.CompileOperation;
 import org.eclipse.qvt.declarative.compilation.DeclarativeQVTCompilationException;
 import org.eclipse.qvt.declarative.compilation.QVTRelationsCompilationException;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
+import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.relations.atlvm.runner.ATLVMCodeJavaRunnerWriter;
 import org.eclipse.qvt.declarative.relations.atlvm.runner.ATLVMCodeJavaRunnerWriterParameters;
-import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMEMFModelUtils;
+//import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMEMFModelUtils;
 import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMUtils;
 import org.osgi.framework.Bundle;
 
@@ -96,19 +99,38 @@ public class ATLVMCompiler implements CompilationProvider {
 	 * compilation: instances of the Problem class are created inside a model.
 	 * This model can be then interpreted to exhibit problems.
 	 */
-	private static final ASMEMFModel PROBLEM_METAMODEL;
+	private static final ASMModel PROBLEM_METAMODEL;
 
 	private static final Debugger DEFAULT_DEBUGGER;
 
 	private static final Properties DEFAULT_COMPILATION_PARAMETERS;
 
+	private static final ASMModel QVTR_METAMODEL;
+	
 	static {
 		// static initializations
 		COMPILER_ASM = loadQVTRCompiler();
-		PROBLEM_METAMODEL = ASMEMFModelUtils.getASMEMFModelFrom(
-				ProblemsPackage.eINSTANCE, null);
+		
+		EMFModelLoader emfModelLoader = new EMFModelLoader();
+		ASMModel model = null;
+		try {
+			
+			model = emfModelLoader.loadModel(ProblemsPackage.eNAME, emfModelLoader.getMOF(), URI.createURI(ProblemsPackage.eNS_URI));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PROBLEM_METAMODEL = model;
 		DEFAULT_DEBUGGER = createDefaultDebugger();
 		DEFAULT_COMPILATION_PARAMETERS = loadDefaultCompilationProperties();
+		
+		try {
+			model = emfModelLoader.loadModel("QVTR", emfModelLoader.getMOF(), URI.createURI(QVTRelationPackage.eNS_URI));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		QVTR_METAMODEL = model;
 	}
 
 	/**
@@ -117,6 +139,11 @@ public class ATLVMCompiler implements CompilationProvider {
 	 */
 	public ATLVMCompiler() {
 
+	}
+
+	private static ASMModel loadQVTRMetamodel() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**
@@ -200,13 +227,13 @@ public class ATLVMCompiler implements CompilationProvider {
 		return result.toFileString();
 	}
 
-	protected ASMEMFModel createProblemModelFor(Resource abstractSyntaxTree)
+	protected ASMModel createProblemModelFor(Resource abstractSyntaxTree)
 			throws Exception {
 		URI abstractSyntaxTreeURI = abstractSyntaxTree.getURI();
 		String problemFileName = abstractSyntaxTreeURI.trimFileExtension()
 				.appendFileExtension(PROBLEM_MODEL_FILE_EXTENSION).toString();
-		return ASMEMFModel.newASMEMFModel(PROBLEM_MODEL_NAME, problemFileName,
-				PROBLEM_METAMODEL, null);
+		return new EMFModelLoader().newModel(PROBLEM_MODEL_NAME, problemFileName,
+				PROBLEM_METAMODEL);
 
 	}
 
@@ -226,20 +253,20 @@ public class ATLVMCompiler implements CompilationProvider {
 		return effectiveParameters;
 	}
 
-	protected URI[] getSplittedSourceURI(List<File> sourceFolders,
+	protected URI[] getSplittedSourceURI(File binFolder,
 			File sourceFile) {
 		URI sourceFileURI = URI.createFileURI(sourceFile.getAbsolutePath());
 		URI currentFolderURI = URI.createURI("./");
 		URI relativeURI = null;
-		for (File folder : sourceFolders) {
-			URI folderURI = URI.createFileURI(folder.getAbsolutePath())
+		
+			URI folderURI = URI.createFileURI(binFolder.getAbsolutePath())
 					.appendSegment("");
 			relativeURI = sourceFileURI.replacePrefix(folderURI,
 					currentFolderURI);
 			if (relativeURI != null) {
 				return new URI[] { folderURI, relativeURI };
 			}
-		}
+		
 		return new URI[] { null, null };
 	}
 
@@ -252,8 +279,10 @@ public class ATLVMCompiler implements CompilationProvider {
 	 * org.eclipse.core.resources.IFolder)
 	 */
 	public List<File> compile(Object abstractSyntaxTree,
-			Map<String, String> parameters, List<File> sourceFolders,
+			Map<String, String> parameters,
+			List<File> sourceFolders,
 			File binFolder) throws DeclarativeQVTCompilationException {
+		
 		if (!(abstractSyntaxTree instanceof File)) {
 			String message = "Abstract Syntax is not a file: "
 					+ abstractSyntaxTree.toString();
@@ -263,7 +292,7 @@ public class ATLVMCompiler implements CompilationProvider {
 		}
 
 		File abstractSyntaxTreeFile = (File) abstractSyntaxTree;
-		URI[] splittedSourceURI = getSplittedSourceURI(sourceFolders,
+		URI[] splittedSourceURI = getSplittedSourceURI(binFolder,
 				abstractSyntaxTreeFile);
 		URI sourceFolderURI = splittedSourceURI[0];
 		URI relativeAbstractSyntaxTreeURI = splittedSourceURI[1];
@@ -276,13 +305,11 @@ public class ATLVMCompiler implements CompilationProvider {
 					.createFileURI(abstractSyntaxTreeFile.getAbsolutePath());
 
 			ResourceSet resourceSet = new ResourceSetImpl();
-			Resource abstractSyntaxTreeResource = resourceSet
-					.createResource(abstractSyntaxTreeURI);
+			Resource abstractSyntaxTreeResource = resourceSet.getResource(abstractSyntaxTreeURI, true);
 
-			ASMEMFModel qvtrTransformation = null;
+			ASMModel qvtrTransformation = null;
 			try {
-				qvtrTransformation = ASMEMFModelUtils.getASMEMFModelFrom(
-						abstractSyntaxTreeResource, TRANSFORMATION_MODEL_NAME);
+				qvtrTransformation = new EMFModelLoader().loadModel(TRANSFORMATION_MODEL_NAME, QVTR_METAMODEL, abstractSyntaxTreeResource.getURI());
 			} catch (Exception e) {
 				String message = "Unable to load the AST in the ATLVM : " + e.getMessage();
 				QVTRelationsCompilationException exception = new QVTRelationsCompilationException(message, 0,0,0);
@@ -295,7 +322,7 @@ public class ATLVMCompiler implements CompilationProvider {
 			for (String directionDomainName : directions) {
 				ASM directionASM = ASMUtils
 						.createDirectionLibrary(directionDomainName);
-				ASMEMFModel myProblems = null;
+				ASMModel myProblems = null;
 				try {
 					myProblems = createProblemModelFor(abstractSyntaxTreeResource);
 				} catch (Exception e) {
@@ -337,7 +364,7 @@ public class ATLVMCompiler implements CompilationProvider {
 		return null;
 	}
 
-	protected void handleProblems(ASMEMFModel problems)
+	protected void handleProblems(ASMModel problems)
 			throws QVTRelationsCompilationException {
 		Set<?> problemSet = problems.getElementsByType("Problem");
 		for (Object object : problemSet) {
@@ -422,8 +449,8 @@ public class ATLVMCompiler implements CompilationProvider {
 		return false;
 	}
 
-	protected File compile(final ASMEMFModel qvtrTransformation,
-			final ASM directionLibary, final ASMEMFModel myProblems,
+	protected File compile(final ASMModel qvtrTransformation,
+			final ASM directionLibary, final ASMModel myProblems,
 			final Debugger debugger, final Properties compilationParameters)
 			throws QVTRelationsCompilationException {
 

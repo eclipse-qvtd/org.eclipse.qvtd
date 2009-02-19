@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: ATLVMExecutor.java,v 1.8 2008/10/21 08:33:32 qglineur Exp $
+ * $Id: ATLVMExecutor.java,v 1.9 2009/02/19 14:28:27 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm;
 
@@ -33,12 +33,14 @@ import java.util.Properties;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.m2m.atl.drivers.emf4atl.ASMEMFModel;
+import org.eclipse.m2m.atl.drivers.emf4atl.EMFModelLoader;
 import org.eclipse.m2m.atl.engine.vm.ASM;
 import org.eclipse.m2m.atl.engine.vm.ASMExecEnv;
 import org.eclipse.m2m.atl.engine.vm.ASMInterpreter;
 import org.eclipse.m2m.atl.engine.vm.ASMXMLReader;
 import org.eclipse.m2m.atl.engine.vm.Debugger;
 import org.eclipse.m2m.atl.engine.vm.SimpleDebugger;
+import org.eclipse.m2m.atl.engine.vm.nativelib.ASMModel;
 import org.eclipse.m2m.atl.engine.vm.nativelib.ASMModule;
 import org.eclipse.qvt.declarative.common.framework.service.Operation;
 import org.eclipse.qvt.declarative.execution.ExecuteOperation;
@@ -47,7 +49,7 @@ import org.eclipse.qvt.declarative.execution.ExecutionProvider;
 import org.eclipse.qvt.declarative.execution.LabelledModel;
 import org.eclipse.qvt.declarative.execution.QVTRealtionsExecutionException;
 import org.eclipse.qvt.declarative.execution.ExecutionContext.ExecutionMode;
-import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMEMFModelUtils;
+
 
 /**
  * A client implementation to provide an execution of QVT Relations by the
@@ -155,15 +157,18 @@ public class ATLVMExecutor implements ExecutionProvider {
 		transformationParameters
 				.put("checkOnly", Boolean.toString(isCheckOnly));
 
-		List<ASMEMFModel> linkedModels = new ArrayList<ASMEMFModel>();
+		List<ASMModel> linkedModels = new ArrayList<ASMModel>();
+		EMFModelLoader emfModelLoader = new EMFModelLoader();
 		try {
 			for (LabelledModel namedModel : parameters.getSourceModels()) {
-				linkedModels.add(ASMEMFModelUtils.getASMEMFModelFrom(
-						namedModel, false));
+				ASMModel metamodel = emfModelLoader.loadModel(namedModel.getName()+"MM", emfModelLoader.getMOF(), URI.createURI(namedModel.getMetamodel().getAccessor()));
+				linkedModels.add(metamodel);
+				linkedModels.add(emfModelLoader.loadModel(namedModel.getName(), metamodel, URI.createURI(namedModel.getAccessor())));
 			}
 			LabelledModel directionNamedModel = parameters.getDirectionModel();
-			linkedModels.add(ASMEMFModelUtils.getASMEMFModelFrom(
-					directionNamedModel, true));
+			ASMModel metamodel = emfModelLoader.loadModel(directionNamedModel.getName()+"MM", emfModelLoader.getMOF(), URI.createURI(directionNamedModel.getMetamodel().getAccessor()));
+			linkedModels.add(metamodel);
+			linkedModels.add(emfModelLoader.loadModel(directionNamedModel.getName(), metamodel, URI.createURI(directionNamedModel.getAccessor())));
 		} catch (Exception e) {
 			String message = "Unable to load models into the ATLVM \n"
 					+ e.getMessage();
@@ -182,7 +187,7 @@ public class ATLVMExecutor implements ExecutionProvider {
 		}
 		Object result = execute(qvtrTransformation, linkedModels, Collections
 				.<ASM> emptyList(), transformationParameters, DEFAULT_DEBUGGER);
-		for (ASMEMFModel model : linkedModels) {
+		for (ASMModel model : linkedModels) {
 			Map<String, Boolean> serializationParameters = new HashMap<String, Boolean>();
 			URI metamodelURI = ((ASMEMFModel) model.getMetamodel()).getExtent()
 					.getURI();
@@ -191,7 +196,8 @@ public class ATLVMExecutor implements ExecutionProvider {
 						Boolean.TRUE);
 			}
 			try {
-				model.getExtent().save(serializationParameters);
+				ASMEMFModel emfModel = (ASMEMFModel) model;
+				emfModel.getExtent().save(serializationParameters);
 			} catch (IOException e) {
 				String message = "Unable to save the model \n" + e.getMessage();
 				throw new QVTRealtionsExecutionException(message);
@@ -201,7 +207,7 @@ public class ATLVMExecutor implements ExecutionProvider {
 	}
 
 	protected Object execute(final ASM qvtrTransformation,
-			final List<ASMEMFModel> linkedModels, final List<ASM> libraries,
+			final List<ASMModel> linkedModels, final List<ASM> libraries,
 			final Map<String, String> parameters, final Debugger debugger) throws QVTRealtionsExecutionException {
 
 		ASMModule asmModule = new ASMModule(qvtrTransformation);
@@ -213,7 +219,7 @@ public class ATLVMExecutor implements ExecutionProvider {
 		env.addPermission("file.read"); //$NON-NLS-1$
 		env.addPermission("file.write"); //$NON-NLS-1$
 
-		for (ASMEMFModel model : linkedModels) {
+		for (ASMModel model : linkedModels) {
 			env.addModel(model.getMetamodel().getName(), model.getMetamodel());
 			env.addModel(model.getName(), model);
 		}
