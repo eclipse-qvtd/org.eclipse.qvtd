@@ -12,11 +12,10 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: DeclarativeQVTLaunchDelegate.java,v 1.4 2008/10/09 17:21:11 qglineur Exp $
+ * $Id: DeclarativeQVTLaunchDelegate.java,v 1.5 2009/02/19 18:28:54 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.execution.ide;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -57,10 +56,10 @@ public class DeclarativeQVTLaunchDelegate implements
 	public void launch(ILaunchConfiguration configuration, String mode,
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
 
-		File sourceFile = getSourceFile(configuration);
+		String transformationQualifiedName =  configuration.getAttribute(EXECUTABLE_PATH_ATTRIBUTE_NAME, EMPTY_STRING);
 		ExecutionContext parameters = getParameters(configuration);
 		try {
-			ExecutionService.getInstance().execute(sourceFile, parameters);
+			ExecutionService.getInstance().execute(transformationQualifiedName, parameters);
 		} catch (Exception e) {
 			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, e.getMessage()));
 		}
@@ -97,12 +96,4 @@ public class DeclarativeQVTLaunchDelegate implements
 		ExecutionContext context = ExecutionContextFactory.INSTANCE.createExecutionContext(sourceModels, directionModel, ExecutionMode.valueOf(modeValue));
 		return context;
 	}
-
-	private File getSourceFile(ILaunchConfiguration configuration) throws CoreException {
-		String executablePath = configuration.getAttribute(EXECUTABLE_PATH_ATTRIBUTE_NAME, EMPTY_STRING);
-		File result = new File(executablePath);
-		//TODO check file
-		return result;
-	}
-
 }
