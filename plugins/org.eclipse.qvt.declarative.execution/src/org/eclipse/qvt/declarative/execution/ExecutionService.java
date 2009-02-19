@@ -12,11 +12,10 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: ExecutionService.java,v 1.10 2008/10/09 17:21:01 qglineur Exp $
+ * $Id: ExecutionService.java,v 1.11 2009/02/19 18:28:42 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.execution;
 
-import java.io.File;
 import java.util.List;
 
 import org.eclipse.qvt.declarative.common.framework.service.ExecutionStrategy;
@@ -32,7 +31,7 @@ import org.eclipse.qvt.declarative.common.framework.service.Service;
  */
 public class ExecutionService extends Service implements ExecutionProvider {
 
-	protected static final ExecutionService INSTANCE = new ExecutionService();
+	private static ExecutionService INSTANCE = new ExecutionService();
 
 	protected ExecutionService() {
 		super();
@@ -54,9 +53,10 @@ public class ExecutionService extends Service implements ExecutionProvider {
 	 * org.eclipse.qvt.declarative.execution.ExecutionProvider#execute(java.
 	 * io.File, org.eclipse.qvt.declarative.execution.ExecutionContext)
 	 */
-	public List<? extends Object> execute(File sourceFile,
+	public List<? extends Object> execute(String transformationQualifiedName,
 			ExecutionContext parameters) {
-		Operation operation = new ExecuteOperation(sourceFile, parameters);
+		Operation operation = new ExecuteOperation(transformationQualifiedName,
+				parameters);
 		return execute(operation);
 	}
 

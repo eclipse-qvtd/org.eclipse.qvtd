@@ -12,11 +12,10 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: ExecuteOperation.java,v 1.10 2008/10/21 08:32:02 qglineur Exp $
+ * $Id: ExecuteOperation.java,v 1.11 2009/02/19 18:28:47 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.execution;
 
-import java.io.File;
 import java.util.List;
 
 import org.eclipse.qvt.declarative.common.framework.service.Operation;
@@ -31,7 +30,7 @@ import org.eclipse.qvt.declarative.common.framework.service.ProviderDescriptor;
  */
 public class ExecuteOperation implements Operation {
 
-	protected File executableFile;
+	protected String transformationQualifiedName;
 	protected ExecutionContext parameters;
 
 	/**
@@ -42,9 +41,10 @@ public class ExecuteOperation implements Operation {
 	 * @param parameters
 	 *            the execution parameters
 	 */
-	public ExecuteOperation(File executableFile, ExecutionContext parameters) {
+	public ExecuteOperation(String transformationQualifiedName,
+			ExecutionContext parameters) {
 		super();
-		this.executableFile = executableFile;
+		this.transformationQualifiedName = transformationQualifiedName;
 		this.parameters = parameters;
 	}
 
@@ -55,7 +55,8 @@ public class ExecuteOperation implements Operation {
 	 * org.eclipse.qvt.declarative.common.framework.service.Operation#execute
 	 * (org.eclipse.qvt.declarative.common.framework.service.Provider)
 	 */
-	public Object execute(Provider provider) throws DeclarativeQVTExecutionException {
+	public Object execute(Provider provider)
+			throws DeclarativeQVTExecutionException {
 		List<?> result = null;
 		if (provider instanceof ProviderDescriptor) {
 			ProviderDescriptor descriptor = (ProviderDescriptor) provider;
@@ -63,7 +64,8 @@ public class ExecuteOperation implements Operation {
 		}
 		if (provider instanceof ExecutionProvider) {
 			ExecutionProvider executionProvider = (ExecutionProvider) provider;
-			result = executionProvider.execute(executableFile, parameters);
+			result = executionProvider.execute(transformationQualifiedName,
+					parameters);
 		}
 		return result;
 	}
@@ -71,16 +73,16 @@ public class ExecuteOperation implements Operation {
 	/**
 	 * @return The file whose execution is asked by this operation.
 	 */
-	public File getExecutableFile() {
-		return executableFile;
+	public String getExecutableFile() {
+		return transformationQualifiedName;
 	}
 
 	/**
 	 * @param sourceFile
 	 *            The file whose execution is asked by this operation.
 	 */
-	public void setExecutableFile(File sourceFile) {
-		this.executableFile = sourceFile;
+	public void setExecutableFile(String sourceFile) {
+		this.transformationQualifiedName = sourceFile;
 	}
 
 	/**
