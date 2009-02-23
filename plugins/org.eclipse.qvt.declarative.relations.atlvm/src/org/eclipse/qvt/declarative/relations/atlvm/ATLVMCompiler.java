@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: ATLVMCompiler.java,v 1.19 2009/02/19 14:28:27 qglineur Exp $
+ * $Id: ATLVMCompiler.java,v 1.20 2009/02/23 18:14:57 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm;
 
@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.Map;
@@ -57,9 +58,9 @@ import org.eclipse.qvt.declarative.compilation.QVTRelationsCompilationException;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
+import org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.RelationsToTraceClassPackage;
 import org.eclipse.qvt.declarative.relations.atlvm.runner.ATLVMCodeJavaRunnerWriter;
 import org.eclipse.qvt.declarative.relations.atlvm.runner.ATLVMCodeJavaRunnerWriterParameters;
-//import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMEMFModelUtils;
 import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMUtils;
 import org.osgi.framework.Bundle;
 
@@ -73,6 +74,10 @@ import org.osgi.framework.Bundle;
 public class ATLVMCompiler implements CompilationProvider {
 
 	private static final String COMPILER_ASM_LOCATION = "resources/QVTR.asm"; //$NON-NLS-1$
+	
+	private static final String TRACE_CLASS_ASM_LOCATION = "resources/RelationsToTraceClass.asm"; //$NON-NLS-1$
+	
+	private static final ASM RELATION_TO_TRACE_CLASS;
 
 	private static final String DEFAULT_DEBUGGER_PROPERTIES_LOCATION = "debugger.properties.xml"; //$NON-NLS-1$
 
@@ -110,27 +115,11 @@ public class ATLVMCompiler implements CompilationProvider {
 	static {
 		// static initializations
 		COMPILER_ASM = loadQVTRCompiler();
-		
-		EMFModelLoader emfModelLoader = new EMFModelLoader();
-		ASMModel model = null;
-		try {
-			
-			model = emfModelLoader.loadModel(ProblemsPackage.eNAME, emfModelLoader.getMOF(), URI.createURI(ProblemsPackage.eNS_URI));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		PROBLEM_METAMODEL = model;
+		PROBLEM_METAMODEL = loadProblemMetamodel();
 		DEFAULT_DEBUGGER = createDefaultDebugger();
 		DEFAULT_COMPILATION_PARAMETERS = loadDefaultCompilationProperties();
-		
-		try {
-			model = emfModelLoader.loadModel("QVTR", emfModelLoader.getMOF(), URI.createURI(QVTRelationPackage.eNS_URI));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		QVTR_METAMODEL = model;
+		QVTR_METAMODEL = loadQVTRMetamodel();
+		RELATION_TO_TRACE_CLASS = loadRelationToTraceClass();
 	}
 
 	/**
@@ -141,9 +130,43 @@ public class ATLVMCompiler implements CompilationProvider {
 
 	}
 
+	private static ASM loadRelationToTraceClass() {
+		Bundle bundle = Activator.getDefault().getBundle();
+
+		ASM compilerASM = null;
+		URL compilerUrl = FileLocator.find(bundle, new Path(
+				TRACE_CLASS_ASM_LOCATION), Collections.EMPTY_MAP);
+		try {
+			compilerASM = new ASMXMLReader().read(new BufferedInputStream(
+					compilerUrl.openStream()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return compilerASM;
+	}
+
 	private static ASMModel loadQVTRMetamodel() {
-		// TODO Auto-generated method stub
-		return null;
+		ASMModel model = null;
+		try {
+			EMFModelLoader emfModelLoader = new EMFModelLoader();
+			model = emfModelLoader.loadModel("QVTR", emfModelLoader.getMOF(), URI.createURI(QVTRelationPackage.eNS_URI));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	private static ASMModel loadProblemMetamodel() {
+		ASMModel model = null;
+		try {
+			EMFModelLoader emfModelLoader = new EMFModelLoader();
+			model = emfModelLoader.loadModel(ProblemsPackage.eNAME, emfModelLoader.getMOF(), URI.createURI(ProblemsPackage.eNS_URI));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return model;
 	}
 
 	/**
@@ -270,6 +293,38 @@ public class ATLVMCompiler implements CompilationProvider {
 		return new URI[] { null, null };
 	}
 
+	private ASMModel loadModelForTraceClassTransformation (ASMExecEnv env, File relationsTransformation) throws IOException {
+		
+		URI transfoURI = URI.createFileURI(relationsTransformation.getAbsolutePath());
+		EMFModelLoader modelLoader = new EMFModelLoader();
+		
+		ASMModel tracebilityMetamodel = modelLoader.loadModel("Traceability", modelLoader.getMOF(), URI.createURI(RelationsToTraceClassPackage.eINSTANCE.getNsURI()));
+		env.addModel(tracebilityMetamodel);
+		
+		ASMModel traceModel = modelLoader.newModel("traces", "traces.xmi", tracebilityMetamodel);
+		((ASMEMFModel)traceModel).setCheckSameModel(false);
+		env.addModel(traceModel);
+		
+		ASMModel relationsMM = modelLoader.loadModel("relationsMM", modelLoader.getMOF(), URI.createURI(QVTRelationPackage.eINSTANCE.getNsURI()));
+		env.addModel(relationsMM);
+		
+		ASMModel relations = modelLoader.loadModel("relations", relationsMM, transfoURI);
+		env.addModel(relations);
+		
+		ASMModel coreMM	= modelLoader.getMOF();
+		env.addModel("coreMM", modelLoader.getMOF());
+		
+		String traceClassFileName = 'T'+transfoURI.trimFileExtension().lastSegment();
+		URI traceClassURI = transfoURI.trimSegments(1).appendSegment(traceClassFileName).appendFileExtension("ecore");
+		ASMModel core = modelLoader.newModel("core", traceClassURI.toString(), coreMM);
+		((ASMEMFModel)core).setCheckSameModel(false);
+		
+		env.addModel(core);
+		
+		return core;
+		
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -292,6 +347,9 @@ public class ATLVMCompiler implements CompilationProvider {
 		}
 
 		File abstractSyntaxTreeFile = (File) abstractSyntaxTree;
+		
+		executeRelationsToTraceClass(abstractSyntaxTreeFile);
+		
 		URI[] splittedSourceURI = getSplittedSourceURI(binFolder,
 				abstractSyntaxTreeFile);
 		URI sourceFolderURI = splittedSourceURI[0];
@@ -340,7 +398,6 @@ public class ATLVMCompiler implements CompilationProvider {
 					handleProblems(myProblems);
 				}
 			}
-			// createJavaLauncher(abstractSyntaxTreeResource, sourceFolderURI);
 			return result;
 
 		}
@@ -489,6 +546,43 @@ public class ATLVMCompiler implements CompilationProvider {
 		File resultFile = new File(compilationParameters
 				.getProperty(OUT_FILE_PARAMETER_NAME));
 		return resultFile;
+	}
+	
+	protected void executeRelationsToTraceClass(
+			final File relationsTransformation)
+			throws QVTRelationsCompilationException {
+
+		ASMModule asmModule = new ASMModule(RELATION_TO_TRACE_CLASS);
+
+		/*
+		 * Create an execution environment with the handled models
+		 */
+		ASMExecEnv env = new ASMExecEnv(asmModule, DEFAULT_DEBUGGER, true);
+		env.addPermission("file.read"); //$NON-NLS-1$
+		env.addPermission("file.write"); //$NON-NLS-1$
+
+		try {
+		ASMModel result = loadModelForTraceClassTransformation(env, relationsTransformation);
+		
+		env.registerOperations(RELATION_TO_TRACE_CLASS);
+		
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("enforce", "true");
+
+		new ASMInterpreter(RELATION_TO_TRACE_CLASS, asmModule, env, parameters);
+		
+		URI transfoURI = URI.createFileURI(relationsTransformation.getAbsolutePath());
+		String traceClassFileName = 'T'+transfoURI.trimFileExtension().lastSegment();
+		URI traceClassURI = transfoURI.trimSegments(1).appendSegment(traceClassFileName).appendFileExtension("ecore");
+		result.getModelLoader().save(result, traceClassURI.toString());
+		
+		} catch (Exception e) {
+			String message = "Problem creating the Trace Classes \n"
+					+ e.getMessage();
+			throw new QVTRelationsCompilationException(message,0,0,0);
+		}
+		
+		
 	}
 
 }

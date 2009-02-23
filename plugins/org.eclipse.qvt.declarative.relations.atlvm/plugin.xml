@@ -15,5 +15,13 @@
             priority="low">
       </executionProvider>
    </extension>
+   <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.RelationsToTraceClassPackage"
+            genModel="/resources/RelationsToTraceClass.genmodel"
+            uri="http://www.eclipse.org/qvt/1.0/RelationsToTraceClass">
+      </package>
+   </extension>
 
 </plugin>

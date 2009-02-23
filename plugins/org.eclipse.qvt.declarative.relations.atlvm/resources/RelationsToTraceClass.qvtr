@@ -1,0 +1,58 @@
+transformation RelationsToTraceClass(relations:{Relations, Templates, OCL, Ecore}, core:Ecore) {
+
+  key EClass{name};
+
+-- Rule 1: Corresponding to each relation there exists a trace class in core.
+-- The trace class contains a property corresponding to each object node in the
+-- pattern of each domain of the relation.
+--
+  top relation RelationToTraceClass  {
+    rn, vn:String;
+    domain relations r:Relation {
+      name = rn,
+      _domain = rd:RelationDomain {
+        pattern = rdp:DomainPattern {
+          templateExpression = t:ObjectTemplateExp {
+            bindsTo = tv:Variable {
+              name = vn,
+              eType = c:EClass {}
+            }
+          }
+        }
+      }
+    };
+    enforce domain core rc:EClass {
+      name = 'T'+rn,
+      eStructuralFeatures = a:EReference {
+        name = vn,
+        eType = c
+      }
+    };
+    where {
+      SubTemplateToTraceClassProps(t, rc);
+    }
+  }
+
+  relation SubTemplateToTraceClassProps {
+    vn: String;
+    domain relations t:ObjectTemplateExp {
+      part = pt:PropertyTemplateItem {
+        value = tp:ObjectTemplateExp {
+          bindsTo = tv:Variable {
+            name = vn,
+            eType = c:EClass {}
+          }
+        }
+      }
+    };
+    enforce domain core rc:EClass {
+      eStructuralFeatures = a:EReference {
+        name=vn,
+        eType=c
+      }
+    };
+    where {
+      SubTemplateToTraceClassProps(tp, rc);
+    }
+  }
+}

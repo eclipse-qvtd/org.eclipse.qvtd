@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvt.declarative.relations.atlvm/src"
+    modelPluginID="org.eclipse.qvt.declarative.relations.atlvm" modelName="RelationsToTraceClass"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore platform:/plugin/org.eclipse.ocl/model/OCL.genmodel#//ocl platform:/plugin/org.eclipse.ocl.ecore/model/OCLEcore.genmodel#//ocl platform:/plugin/org.eclipse.qvt.declarative.ecore.qvtbase/model/QVTBase.genmodel#//QVTBase platform:/plugin/org.eclipse.qvt.declarative.ecore.qvtrelation/model/QVTRelation.genmodel#//QVTRelation platform:/plugin/org.eclipse.qvt.declarative.ecore.qvttemplate/model/QVTTemplate.genmodel#//QVTTemplate">
+  <foreignModel>RelationsToTraceClass.ecore</foreignModel>
+  <genPackages prefix="RelationsToTraceClass" basePackage="org.eclipse.qvt.declarative.relations.atlvm"
+      resource="XML" disposableProviderFactory="true" ecorePackage="RelationsToTraceClass.ecore#/">
+    <genClasses ecoreClass="RelationsToTraceClass.ecore#//TRelationToTraceClass">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RelationsToTraceClass.ecore#//TRelationToTraceClass/a"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RelationsToTraceClass.ecore#//TRelationToTraceClass/rc"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RelationsToTraceClass.ecore#//TRelationToTraceClass/c"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RelationsToTraceClass.ecore#//TRelationToTraceClass/tv"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RelationsToTraceClass.ecore#//TRelationToTraceClass/t"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RelationsToTraceClass.ecore#//TRelationToTraceClass/rdp"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RelationsToTraceClass.ecore#//TRelationToTraceClass/rd"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RelationsToTraceClass.ecore#//TRelationToTraceClass/r"/>
+    </genClasses>
+    <genClasses ecoreClass="RelationsToTraceClass.ecore#//TSubTemplateToTraceClassProps">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RelationsToTraceClass.ecore#//TSubTemplateToTraceClassProps/c"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RelationsToTraceClass.ecore#//TSubTemplateToTraceClassProps/tv"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RelationsToTraceClass.ecore#//TSubTemplateToTraceClassProps/tp"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RelationsToTraceClass.ecore#//TSubTemplateToTraceClassProps/pt"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RelationsToTraceClass.ecore#//TSubTemplateToTraceClassProps/t"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RelationsToTraceClass.ecore#//TSubTemplateToTraceClassProps/a"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RelationsToTraceClass.ecore#//TSubTemplateToTraceClassProps/rc"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
