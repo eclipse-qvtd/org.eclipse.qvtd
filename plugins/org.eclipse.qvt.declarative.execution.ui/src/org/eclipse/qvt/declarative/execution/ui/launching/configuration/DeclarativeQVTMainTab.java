@@ -12,17 +12,14 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: DeclarativeQVTMainTab.java,v 1.4 2009/02/19 18:28:56 qglineur Exp $
+ * $Id: DeclarativeQVTMainTab.java,v 1.5 2009/02/23 18:15:55 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.execution.ui.launching.configuration;
 
-import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.resources.IContainer;
@@ -37,7 +34,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
-import org.eclipse.emf.common.ui.dialogs.ResourceDialog;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -66,12 +62,18 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
 public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
+
+	protected final LaunchConfigChangeListener launchConfigurationDialogUpdater = new LaunchConfigChangeListener() {
+
+		@Override
+		public void launchConfigChanged() {
+			updateLaunchConfigurationDialog();
+		}
+	};
 
 	public static String TAB_NAME = "Main";
 
@@ -85,7 +87,7 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 
 	private Composite modelsComposite;
 
-	private Map<String, List<Widget>> dynamicModelsWidget = new HashMap<String, List<Widget>>();
+	private List<ModelParameterConfiguration> modelParameterConfigurations = new ArrayList<ModelParameterConfiguration>();
 
 	private IFile currentTransformationFile;
 
@@ -107,118 +109,37 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 		public void widgetSelected(SelectionEvent e) {
 			currentRelationalTransformation = handleSearchButtonSelected();
 			if (currentRelationalTransformation != null) {
-				createAllModelEditors(parent, currentRelationalTransformation);
-			}
-			updateLaunchConfigurationDialog();
-		}
-	}
-
-	private class ModelButtonSelectionListener implements SelectionListener {
-
-		Text relatedText;
-		int style;
-
-		public ModelButtonSelectionListener(Text relatedText, int style) {
-			this.relatedText = relatedText;
-			this.style = style;
-		}
-
-		public void widgetDefaultSelected(SelectionEvent e) {
-		}
-
-		public void widgetSelected(SelectionEvent e) {
-			ResourceDialog rd = new ResourceDialog(getShell(),
-					"Model Selection", style | SWT.SINGLE);
-			rd.open();
-			if (rd.getReturnCode() == Window.OK) {
-				relatedText.setText(rd.getURIText());
-			}
-			updateLaunchConfigurationDialog();
-		}
-	}
-
-	private class TargetButtonSelectionListener implements SelectionListener {
-
-		public TargetButtonSelectionListener() {
-		}
-
-		public void widgetDefaultSelected(SelectionEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		public void widgetSelected(SelectionEvent e) {
-			for (Map.Entry<String, List<Widget>> entry : dynamicModelsWidget
-					.entrySet()) {
-				List<Widget> widgetList = entry.getValue();
-				Widget widget = widgetList.get(3);
-				if (widget instanceof Button) {
-					Button newModelButton = (Button) widget;
-					if (e.getSource() == widgetList.get(0)) {
-						newModelButton.setEnabled(true);
-					} else {
-						newModelButton.setEnabled(false);
-					}
+				modelParameterConfigurations.clear();
+				List<TypedModel> models = currentRelationalTransformation
+						.getModelParameter();
+				int count = 0;
+				int lastModelIndex = models.size() - 1;
+				for (TypedModel typedModel : models) {
+					ModelParameterConfiguration modelParameterConfiguration = new ModelParameterConfiguration(
+							typedModel.getName(), "", count == lastModelIndex);
+					modelParameterConfigurations
+							.add(modelParameterConfiguration);
+					modelParameterConfiguration
+							.addLaunchConfigChangeListener(launchConfigurationDialogUpdater);
+					count++;
 				}
+				ModelParameterConfiguration modelParameterConfiguration = new ModelParameterConfiguration(
+						"traces", "", false);
+				modelParameterConfigurations.add(modelParameterConfiguration);
+				modelParameterConfiguration
+						.addLaunchConfigChangeListener(launchConfigurationDialogUpdater);
+				createAllModelEditors(parent);
 			}
+			updateLaunchConfigurationDialog();
 		}
 	}
-
-	private SelectionListener targetButtonsSelectionListener = new TargetButtonSelectionListener();
 
 	public void createControl(Composite parent) {
-		Composite comp = createMainComposite(parent);
+		Composite comp = SWTHelper.createMainComposite(parent);
 		createProjectEditor(comp);
 		createVerticalSpacer(comp, 1);
 		createTransformationEditor(comp, "Transformation");
 		setControl(comp);
-	}
-
-	private static Composite createComposite(Composite parent, Font font,
-			int columns, int hspan, int fill) {
-		Composite g = new Composite(parent, SWT.NONE);
-		g.setLayout(new GridLayout(columns, false));
-		g.setFont(font);
-		GridData gd = new GridData(fill);
-		gd.horizontalSpan = hspan;
-		g.setLayoutData(gd);
-		return g;
-	}
-
-	private static Group createGroup(Composite parent, String text,
-			int columns, int hspan, int fill) {
-		Group g = new Group(parent, SWT.NONE);
-		g.setLayout(new GridLayout(columns, false));
-		g.setText(text);
-		g.setFont(parent.getFont());
-		GridData gd = new GridData(fill);
-		gd.horizontalSpan = hspan;
-		g.setLayoutData(gd);
-		return g;
-	}
-
-	private static void createLabel(Composite parent, String text,
-			int layoutStyle) {
-		Label tempLabel;
-		tempLabel = new Label(parent, SWT.CENTER);
-		tempLabel.setText(text);
-		tempLabel.setLayoutData(new GridData(layoutStyle));
-	}
-
-	private static Composite createMainComposite(Composite parent) {
-		Composite comp = createComposite(parent, parent.getFont(), 2, 1,
-				GridData.FILL_HORIZONTAL);
-		((GridLayout) comp.getLayout()).verticalSpacing = 0;
-		return comp;
-	}
-
-	private static Text createSingleText(Composite parent, int hspan) {
-		Text t = new Text(parent, SWT.SINGLE | SWT.BORDER);
-		t.setFont(parent.getFont());
-		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalSpan = hspan;
-		t.setLayoutData(gd);
-		return t;
 	}
 
 	private static IWorkspaceRoot getWorkspaceRoot() {
@@ -261,12 +182,12 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 	}
 
 	private void createTransformationEditor(Composite parent, String text) {
-		Group mainGroup = createGroup(parent, text, 2, 1,
+		Group mainGroup = SWTHelper.createGroup(parent, text, 2, 1,
 				GridData.FILL_HORIZONTAL);
-		Composite comp = createComposite(mainGroup, parent.getFont(), 2, 2,
-				GridData.FILL_BOTH);
-		removeCompositeMargin(comp);
-		transformationText = createSingleText(comp, 1);
+		Composite comp = SWTHelper.createComposite(mainGroup, parent.getFont(),
+				2, 2, GridData.FILL_BOTH);
+		SWTHelper.removeCompositeMargin(comp);
+		transformationText = SWTHelper.createSingleText(comp, 1);
 		transformationText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				updateLaunchConfigurationDialog();
@@ -325,70 +246,26 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 		return null;
 	}
 
-	private void createAllModelEditors(Composite parent,
-			RelationalTransformation transformation) {
+	private void initModelComposite(Composite parent) {
 		if (modelsComposite != null) {
 			modelsComposite.dispose();
 		}
-		modelsComposite = createComposite(parent, parent.getFont(), 3, 2,
-				GridData.FILL_BOTH);
+		modelsComposite = SWTHelper.createComposite(parent, parent.getFont(),
+				3, 2, GridData.FILL_BOTH);
 		((GridLayout) modelsComposite.getLayout()).verticalSpacing = 0;
-		createLabel(modelsComposite, "Model", SWT.NONE);
-		createLabel(modelsComposite, "Target", SWT.NONE);
-		createLabel(modelsComposite, "Location", GridData.FILL_HORIZONTAL);
-		dynamicModelsWidget.clear();
+		SWTHelper.createLabel(modelsComposite, "Model", SWT.NONE);
+		SWTHelper.createLabel(modelsComposite, "Target", SWT.NONE);
+		SWTHelper.createLabel(modelsComposite, "Location",
+				GridData.FILL_HORIZONTAL);
+	}
 
-		int count = 0;
-		List<TypedModel> models = transformation.getModelParameter();
-		int lastModelIndex = models.size() - 1;
-		for (TypedModel typedModel : models) {
-			createModelEditor(modelsComposite, typedModel,
-					count == lastModelIndex);
-			count++;
+	private void createAllModelEditors(Composite parent) {
+		initModelComposite(parent);
+
+		for (ModelParameterConfiguration modelParameterConfiguration : modelParameterConfigurations) {
+			modelParameterConfiguration.draw(modelsComposite);
 		}
 		updateLaunchConfigurationDialog();
-	}
-
-	private void removeCompositeMargin(Composite composite) {
-		GridLayout gl = (GridLayout) composite.getLayout();
-		gl.marginWidth = 0;
-		gl.marginHeight = 0;
-	}
-
-	private void createModelEditor(Composite parent, TypedModel typedModel,
-			boolean isTarget) {
-		Label label = new Label(parent, SWT.CENTER);
-		String modelName = typedModel.getName();
-		label.setText(modelName);
-		Button targetButton = new Button(parent, SWT.RADIO);
-		targetButton.setSelection(isTarget);
-		Composite subComposite = createComposite(parent, parent.getFont(), 4,
-				1, GridData.FILL_BOTH);
-		removeCompositeMargin(subComposite);
-		Text text = createSingleText(subComposite, 1);
-		text.addModifyListener(new ModifyListener() {
-
-			public void modifyText(ModifyEvent e) {
-				updateLaunchConfigurationDialog();
-			}
-
-		});
-		Button searchModelButton = createPushButton(subComposite, "Search",
-				null);
-		searchModelButton
-				.addSelectionListener(new ModelButtonSelectionListener(text,
-						SWT.OPEN));
-		Button newModelButton = createPushButton(subComposite, "New...", null);
-		newModelButton.addSelectionListener(new ModelButtonSelectionListener(
-				text, SWT.SAVE));
-		newModelButton.setEnabled(isTarget);
-		targetButton.addSelectionListener(targetButtonsSelectionListener);
-		List<Widget> modelWidgets = new ArrayList<Widget>();
-		modelWidgets.add(targetButton);
-		modelWidgets.add(text);
-		modelWidgets.add(searchModelButton);
-		modelWidgets.add(newModelButton);
-		dynamicModelsWidget.put(modelName, modelWidgets);
 	}
 
 	private void handleProjectButtonSelected() {
@@ -451,107 +328,106 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 
 	private static IFile getFileFromURI(String uriString)
 			throws URISyntaxException {
-		java.net.URI uri = new java.net.URI(uriString);
-		String path = uri.toString();
-		if (uri.getScheme().equals("file")) {
-			path = new File(uri).toString();
+
+		URI executableURI = URI.createURI(uriString);
+		String scheme = executableURI.scheme();
+		IFile result = null;
+		if ("file".equals(scheme)) {
+			result = getWorkspaceRoot().getFileForLocation(new Path(uriString));
+		} else if (scheme == null || executableURI.isPlatformResource()) {
+			result = getWorkspaceRoot().getFile(new Path(uriString));
+		} else {
+			throw new IllegalArgumentException("cannot handle the URI "
+					+ uriString);
 		}
-		IFile iFile = getWorkspaceRoot().getFileForLocation(new Path(path));
-		return iFile;
+		return result;
 	}
 
-	public void initializeFrom(ILaunchConfiguration configuration) {
+	private String getExecutablePath(ILaunchConfiguration configuration) {
+		String executablePath;
 		try {
-			String executablePath = configuration
+			executablePath = configuration
 					.getAttribute(
 							DeclarativeQVTLaunchDelegate.EXECUTABLE_PATH_ATTRIBUTE_NAME,
 							DeclarativeQVTLaunchDelegate.EMPTY_STRING);
-			List<?> modelNameList = configuration
+		} catch (CoreException e) {
+			executablePath = DeclarativeQVTLaunchDelegate.EMPTY_STRING;
+		}
+		return executablePath;
+	}
+
+	private List<?> getModelNameList(ILaunchConfiguration configuration) {
+		List<?> modelNameList;
+		try {
+			modelNameList = configuration
 					.getAttribute(
 							DeclarativeQVTLaunchDelegate.MODEL_NAME_LIST_ATTRIBUTE_NAME,
 							Collections.EMPTY_LIST);
-			List<?> modelPathList = configuration
+		} catch (CoreException e) {
+			modelNameList = Collections.EMPTY_LIST;
+		}
+		return modelNameList;
+	}
+
+	private List<?> getModelPathList(ILaunchConfiguration configuration) {
+		List<?> modelPathList;
+		try {
+			modelPathList = configuration
 					.getAttribute(
 							DeclarativeQVTLaunchDelegate.MODEL_PATH_LIST_ATTRIBUTE_NAME,
 							Collections.EMPTY_LIST);
-			String directionModel = configuration
+		} catch (CoreException e) {
+			modelPathList = Collections.EMPTY_LIST;
+		}
+		return modelPathList;
+	}
+
+	private String getDirectionModel(ILaunchConfiguration configuration) {
+		String directionModel;
+		try {
+			directionModel = configuration
 					.getAttribute(
 							DeclarativeQVTLaunchDelegate.DIRECTION_MODEL_PATH_ATTRIBUTE_NAME,
 							DeclarativeQVTLaunchDelegate.EMPTY_STRING);
-
-			if (executablePath == null
-					|| executablePath == DeclarativeQVTLaunchDelegate.EMPTY_STRING)
-				return;
-
-			IFile sourceFile = getSourceFile(executablePath);
-
-			if (sourceFile == null)
-				return;
-
-			currentProject = sourceFile.getProject();
-			projectText.setText(currentProject.getName());
-			currentTransformationFile = sourceFile;
-			currentRelationalTransformation = getTransformation(getModelResource(currentTransformationFile));
-			transformationText.setText(currentTransformationFile.getName());
-			createAllModelEditors(
-					transformationText.getParent(),
-					getTransformation(getModelResource(currentTransformationFile)));
-
-			for (Object modelNameObject : modelNameList) {
-				int index = modelNameList.indexOf(modelNameObject);
-				String modelname = (String) modelNameObject;
-				List<Widget> widgetList = dynamicModelsWidget.get(modelname);
-				getTargetWiget(widgetList).setSelection(
-						modelname.equals(directionModel));
-				String modelPath = (String) modelPathList.get(index);
-				IFile modelFile = getFileFromURI(modelPath);
-				if (modelFile != null) {
-					String relativePath = URI.createPlatformPluginURI(
-							modelFile.getFullPath().toString(), true)
-							.toString();
-					getModelPathWiget(widgetList).setText(relativePath);
-				}
-			}
 		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			directionModel = DeclarativeQVTLaunchDelegate.EMPTY_STRING;
 		}
 
+		return directionModel;
 	}
 
-	private Button getTargetWiget(List<Widget> widgetList) {
-		Widget widget = widgetList.get(0);
-		if (widget instanceof Button) {
-			return (Button) widget;
-		}
-		return null;
-	}
+	public void initializeFrom(ILaunchConfiguration configuration) {
+		String executablePath = getExecutablePath(configuration);
+		List<?> modelNameList = getModelNameList(configuration);
+		List<?> modelPathList = getModelPathList(configuration);
+		String directionModel = getDirectionModel(configuration);
 
-	private Text getModelPathWiget(List<Widget> widgetList) {
-		Widget widget = widgetList.get(1);
-		if (widget instanceof Text) {
-			return (Text) widget;
-		}
-		return null;
-	}
+		if (executablePath == null
+				|| executablePath == DeclarativeQVTLaunchDelegate.EMPTY_STRING)
+			return;
 
-	private boolean isTargetModel(List<Widget> widgetList) {
-		Button button = getTargetWiget(widgetList);
-		if (button != null) {
-			return button.getSelection();
-		}
-		return false;
-	}
+		IFile sourceFile = getSourceFile(executablePath);
 
-	private String getModelURIString(List<Widget> widgetList) {
-		Text text = getModelPathWiget(widgetList);
-		if (text != null) {
-			return text.getText();
+		if (sourceFile == null)
+			return;
+
+		currentProject = sourceFile.getProject();
+		projectText.setText(currentProject.getName());
+		currentTransformationFile = sourceFile;
+		currentRelationalTransformation = getTransformation(getModelResource(currentTransformationFile));
+		transformationText.setText(currentTransformationFile.getName());
+
+		modelParameterConfigurations.clear();
+		for (Object modelNameObject : modelNameList) {
+			int index = modelNameList.indexOf(modelNameObject);
+			String name = (String) modelNameObject;
+			String uri = (String) modelPathList.get(index);
+			boolean target = directionModel.equals(name);
+			modelParameterConfigurations.add(new ModelParameterConfiguration(
+					name, uri, target));
 		}
-		return null;
+
+		createAllModelEditors(transformationText.getParent());
 	}
 
 	private static IFile getASTFile(IFile sourceFile) {
@@ -619,6 +495,19 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 		return null;
 	}
 
+	public String getMetamodel(String modelName) {
+		if ("traces".equals(modelName)) {
+			return null;
+		}
+		TypedModel typedModel = currentRelationalTransformation
+				.getModelParameter(modelName);
+		EPackage ePackage = typedModel.getUsedPackage().get(0);
+		URI metamodelURI = ePackage.eResource().getURI().isPlatformPlugin() ? URI
+				.createURI(ePackage.getNsURI())
+				: ePackage.eResource().getURI();
+		return metamodelURI.toString();
+	}
+
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		if (currentProject != null && currentTransformationFile != null) {
 
@@ -628,33 +517,18 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 			List<String> metamodelNameList = new ArrayList<String>();
 			List<String> metamodelPathList = new ArrayList<String>();
 
-			for (Map.Entry<String, List<Widget>> entry : dynamicModelsWidget
-					.entrySet()) {
-				List<Widget> widgetList = entry.getValue();
-
-				String modelName = entry.getKey();
+			for (ModelParameterConfiguration modelParameterConfiguration : modelParameterConfigurations) {
+				String modelName = modelParameterConfiguration.getName();
 				modelNameList.add(modelName);
+				modelPathList.add(modelParameterConfiguration.getUri());
+				metamodelNameList.add(modelName + "MM");
+				metamodelPathList.add(getMetamodel(modelName));
 
-				String modelURI = getModelURIString(widgetList);
-				modelPathList.add(modelURI);
-
-				if (isTargetModel(widgetList)) {
+				if (modelParameterConfiguration.isTarget()) {
 					direction = modelName;
 				}
-
-				if (currentRelationalTransformation != null) {
-
-					TypedModel typedModel = currentRelationalTransformation
-							.getModelParameter(modelName);
-					EPackage ePackage = typedModel.getUsedPackage().get(0);
-					URI metamodelURI = ePackage.eResource().getURI()
-							.isPlatformPlugin() ? URI.createURI(ePackage
-							.getNsURI()) : ePackage.eResource().getURI();
-					metamodelNameList.add(modelName + "MM");
-					metamodelPathList.add(metamodelURI.toString());
-
-				}
 			}
+
 			String absoluteExecutablePath = currentTransformationFile
 					.getFullPath().toString();
 
@@ -714,20 +588,28 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 		if (!isProjectValid()) {
 			return false;
 		}
-		String transformationTextValue = transformationText.getText().trim();
-		if (transformationTextValue.length() == 0) {
+		if (getExecutablePath(launchConfig) == DeclarativeQVTLaunchDelegate.EMPTY_STRING) {
 			setErrorMessage("No transformation specified");
 			return false;
 		}
-		for (Map.Entry<String, List<Widget>> modelEditor : dynamicModelsWidget
-				.entrySet()) {
-			List<Widget> wigetList = modelEditor.getValue();
-			if (getModelPathWiget(wigetList).getText().trim().length() == 0) {
-				setErrorMessage("Path to model " + modelEditor.getKey()
-						+ " not specified");
+
+		List<?> modelNameList = getModelNameList(launchConfig);
+		List<?> modelPathList = getModelPathList(launchConfig);
+
+		if (modelNameList == Collections.EMPTY_LIST) {
+			setErrorMessage("No models specified");
+			return false;
+		}
+
+		for (int i = 0; i < modelNameList.size(); i++) {
+			String name = (String) modelNameList.get(i);
+			String path = (String) modelPathList.get(i);
+			if (path.trim().length() == 0) {
+				setErrorMessage("No path specified for model " + name);
 				return false;
 			}
 		}
+
 		setErrorMessage(null);
 		setMessage("Launch Declarative QVT Transformation");
 		return true;
