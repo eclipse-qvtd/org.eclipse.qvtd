@@ -1,31 +1,49 @@
 transformation RelationsToTraceClass(relations:{Relations, Templates, OCL, Ecore}, core:Ecore) {
 
-  key EClass{name};
+  key EPackage{name};
+  key EClass{ePackage, name};
 
--- Rule 1: Corresponding to each relation there exists a trace class in core.
--- The trace class contains a property corresponding to each object node in the
--- pattern of each domain of the relation.
---
-  top relation RelationToTraceClass  {
+  top relation TransformationToPackage {
+    domain relations rt : RelationalTransformation {
+      name = rtn,
+      nsPrefix = rtp,
+      nsURI = rtu
+    };
+    enforce domain core p:EPackage{
+      name = rtn,
+      nsPrefix = rtp,
+      nsURI = rtu
+    };
+    where {
+      RelationToTraceClass(rt,p);
+    }
+  }
+
+  relation RelationToTraceClass  {
     rn, vn:String;
-    domain relations r:Relation {
-      name = rn,
-      _domain = rd:RelationDomain {
-        pattern = rdp:DomainPattern {
-          templateExpression = t:ObjectTemplateExp {
-            bindsTo = tv:Variable {
-              name = vn,
-              eType = c:EClass {}
+    domain relations rt: RelationalTransformation {
+      rule = r:Relation {
+        _transformation = rt,
+        name = rn,
+        _domain = rd:RelationDomain {
+          pattern = rdp:DomainPattern {
+            templateExpression = t:ObjectTemplateExp {
+              bindsTo = tv:Variable {
+                name = vn,
+                eType = c:EClass {}
+              }
             }
           }
         }
       }
     };
-    enforce domain core rc:EClass {
-      name = 'T'+rn,
-      eStructuralFeatures = a:EReference {
-        name = vn,
-        eType = c
+    enforce domain core p:EPackage {
+      eClassifiers = rc:EClass {
+        name = 'T'+rn,
+        eStructuralFeatures = a:EReference {
+          name = vn,
+          eType = c
+        }
       }
     };
     where {

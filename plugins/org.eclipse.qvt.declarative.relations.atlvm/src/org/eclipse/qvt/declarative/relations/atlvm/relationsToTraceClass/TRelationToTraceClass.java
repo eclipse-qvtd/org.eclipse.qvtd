@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TRelationToTraceClass.java,v 1.1 2009/02/23 18:14:57 qglineur Exp $
+ * $Id: TRelationToTraceClass.java,v 1.2 2009/02/24 17:31:28 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.ocl.ecore.Variable;
@@ -16,6 +17,7 @@ import org.eclipse.qvt.declarative.ecore.QVTRelation.DomainPattern;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomain;
 
+import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.ObjectTemplateExp;
 
 /**
@@ -29,11 +31,13 @@ import org.eclipse.qvt.declarative.ecore.QVTTemplate.ObjectTemplateExp;
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getA <em>A</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getRc <em>Rc</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getC <em>C</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getP <em>P</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getTv <em>Tv</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getT <em>T</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getRdp <em>Rdp</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getRd <em>Rd</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getR <em>R</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getRt <em>Rt</em>}</li>
  * </ul>
  * </p>
  *
@@ -119,6 +123,32 @@ public interface TRelationToTraceClass extends EObject {
 	 * @generated
 	 */
 	void setC(EClass value);
+
+	/**
+	 * Returns the value of the '<em><b>P</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>P</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>P</em>' reference.
+	 * @see #setP(EPackage)
+	 * @see org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.RelationsToTraceClassPackage#getTRelationToTraceClass_P()
+	 * @model
+	 * @generated
+	 */
+	EPackage getP();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getP <em>P</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>P</em>' reference.
+	 * @see #getP()
+	 * @generated
+	 */
+	void setP(EPackage value);
 
 	/**
 	 * Returns the value of the '<em><b>Tv</b></em>' reference.
@@ -249,5 +279,31 @@ public interface TRelationToTraceClass extends EObject {
 	 * @generated
 	 */
 	void setR(Relation value);
+
+	/**
+	 * Returns the value of the '<em><b>Rt</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Rt</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Rt</em>' reference.
+	 * @see #setRt(RelationalTransformation)
+	 * @see org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.RelationsToTraceClassPackage#getTRelationToTraceClass_Rt()
+	 * @model
+	 * @generated
+	 */
+	RelationalTransformation getRt();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getRt <em>Rt</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Rt</em>' reference.
+	 * @see #getRt()
+	 * @generated
+	 */
+	void setRt(RelationalTransformation value);
 
 } // TRelationToTraceClass

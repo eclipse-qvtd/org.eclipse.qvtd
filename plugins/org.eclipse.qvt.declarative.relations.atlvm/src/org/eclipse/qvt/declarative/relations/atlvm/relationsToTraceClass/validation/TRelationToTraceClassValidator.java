@@ -2,11 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TRelationToTraceClassValidator.java,v 1.1 2009/02/23 18:14:58 qglineur Exp $
+ * $Id: TRelationToTraceClassValidator.java,v 1.2 2009/02/24 17:31:27 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.validation;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.ocl.ecore.Variable;
@@ -15,6 +16,7 @@ import org.eclipse.qvt.declarative.ecore.QVTRelation.DomainPattern;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomain;
 
+import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.ObjectTemplateExp;
 
 /**
@@ -29,9 +31,13 @@ public interface TRelationToTraceClassValidator {
 	boolean validateA(EReference value);
 	boolean validateRc(EClass value);
 	boolean validateC(EClass value);
+	boolean validateP(EPackage value);
+
 	boolean validateTv(Variable value);
 	boolean validateT(ObjectTemplateExp value);
 	boolean validateRdp(DomainPattern value);
 	boolean validateRd(RelationDomain value);
 	boolean validateR(Relation value);
+
+	boolean validateRt(RelationalTransformation value);
 }

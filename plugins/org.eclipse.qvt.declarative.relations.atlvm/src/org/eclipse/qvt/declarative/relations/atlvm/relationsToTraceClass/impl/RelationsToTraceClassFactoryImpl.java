@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RelationsToTraceClassFactoryImpl.java,v 1.1 2009/02/23 18:14:57 qglineur Exp $
+ * $Id: RelationsToTraceClassFactoryImpl.java,v 1.2 2009/02/24 17:31:29 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl;
 
@@ -60,11 +60,22 @@ public class RelationsToTraceClassFactoryImpl extends EFactoryImpl implements Re
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case RelationsToTraceClassPackage.TTRANSFORMATION_TO_PACKAGE: return createTTransformationToPackage();
 			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS: return createTRelationToTraceClass();
 			case RelationsToTraceClassPackage.TSUB_TEMPLATE_TO_TRACE_CLASS_PROPS: return createTSubTemplateToTraceClassProps();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TTransformationToPackage createTTransformationToPackage() {
+		TTransformationToPackageImpl tTransformationToPackage = new TTransformationToPackageImpl();
+		return tTransformationToPackage;
 	}
 
 	/**

@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: ATLVMExecutor.java,v 1.10 2009/02/19 18:28:52 qglineur Exp $
+ * $Id: ATLVMExecutor.java,v 1.11 2009/02/24 17:31:29 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm;
 
@@ -149,7 +149,7 @@ public class ATLVMExecutor implements ExecutionProvider {
 		Map<String, String> transformationParameters = new HashMap<String, String>();
 		boolean isCheckOnly = parameters.getMode() == ExecutionMode.checkOnly;
 		transformationParameters
-				.put("checkOnly", Boolean.toString(isCheckOnly));
+				.put("enforce", Boolean.toString(!isCheckOnly));
 		return transformationParameters;
 	}
 
@@ -159,24 +159,27 @@ public class ATLVMExecutor implements ExecutionProvider {
 		EMFModelLoader emfModelLoader = new EMFModelLoader();
 		try {
 			for (LabelledModel namedModel : parameters.getSourceModels()) {
-				ASMModel metamodel = emfModelLoader.loadModel(namedModel
-						.getName()
-						+ "MM", emfModelLoader.getMOF(), URI
-						.createURI(namedModel.getMetamodel().getAccessor()));
+				ASMModel metamodel = emfModelLoader.loadModel(namedModel.getMetamodel().getName(), emfModelLoader.getMOF(), URI.createURI(namedModel.getMetamodel().getAccessor()));
 				linkedModels.add(metamodel);
-				linkedModels.add(emfModelLoader.loadModel(namedModel.getName(),
-						metamodel, URI.createURI(namedModel.getAccessor())));
+				
+				URI modelURI = URI.createURI(namedModel.getAccessor());
+				boolean created = createResourceIfMissing(emfModelLoader, modelURI);
+				ASMModel model = emfModelLoader.loadModel(namedModel.getName(),metamodel, modelURI);
+				if (created || "traces".equals(model.getName())) {
+					model.setIsTarget(true);
+				}
+				linkedModels.add(model);
 			}
 			LabelledModel directionNamedModel = parameters.getDirectionModel();
-			ASMModel metamodel = emfModelLoader.loadModel(directionNamedModel
-					.getName()
-					+ "MM", emfModelLoader.getMOF(),
-					URI.createURI(directionNamedModel.getMetamodel()
-							.getAccessor()));
+			ASMModel metamodel = emfModelLoader.loadModel(directionNamedModel.getMetamodel().getName(), emfModelLoader.getMOF(),URI.createURI(directionNamedModel.getMetamodel().getAccessor()));
 			linkedModels.add(metamodel);
-			linkedModels.add(emfModelLoader.loadModel(directionNamedModel
-					.getName(), metamodel, URI.createURI(directionNamedModel
-					.getAccessor())));
+			
+			URI modelURI = URI.createURI(directionNamedModel.getAccessor());
+			boolean created = createResourceIfMissing(emfModelLoader, modelURI);
+			ASMModel model = emfModelLoader.loadModel(directionNamedModel.getName(), metamodel, modelURI);
+			model.setIsTarget(true);
+
+			linkedModels.add(model);
 		} catch (Exception e) {
 			String message = "Unable to load models into the ATLVM \n"
 					+ e.getMessage();
@@ -185,6 +188,17 @@ public class ATLVMExecutor implements ExecutionProvider {
 		return linkedModels;
 	}
 
+	private static boolean createResourceIfMissing (EMFModelLoader emfModelLoader, URI modelURI) {
+		boolean result = false;
+		try {
+			emfModelLoader.getResourceSet().getResource(modelURI, true);
+		} catch (Exception r) {
+			emfModelLoader.getResourceSet().createResource(modelURI);
+			result = true;
+		}
+		return result;
+	}
+	
 	private static IFile getExecutableFile(IFile sourceFile, String direction) {
 		IJavaProject javaProject = JavaCore.create(sourceFile.getProject());
 		IClasspathEntry srcContainer = null;

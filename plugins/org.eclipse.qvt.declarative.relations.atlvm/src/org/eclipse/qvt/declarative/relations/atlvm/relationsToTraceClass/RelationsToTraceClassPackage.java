@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RelationsToTraceClassPackage.java,v 1.1 2009/02/23 18:14:57 qglineur Exp $
+ * $Id: RelationsToTraceClassPackage.java,v 1.2 2009/02/24 17:31:28 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass;
 
@@ -59,6 +59,43 @@ public interface RelationsToTraceClassPackage extends EPackage {
 	RelationsToTraceClassPackage eINSTANCE = org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.RelationsToTraceClassPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TTransformationToPackageImpl <em>TTransformation To Package</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TTransformationToPackageImpl
+	 * @see org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.RelationsToTraceClassPackageImpl#getTTransformationToPackage()
+	 * @generated
+	 */
+	int TTRANSFORMATION_TO_PACKAGE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Rt</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TTRANSFORMATION_TO_PACKAGE__RT = 0;
+
+	/**
+	 * The feature id for the '<em><b>P</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TTRANSFORMATION_TO_PACKAGE__P = 1;
+
+	/**
+	 * The number of structural features of the '<em>TTransformation To Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TTRANSFORMATION_TO_PACKAGE_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TRelationToTraceClassImpl <em>TRelation To Trace Class</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -66,7 +103,7 @@ public interface RelationsToTraceClassPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.RelationsToTraceClassPackageImpl#getTRelationToTraceClass()
 	 * @generated
 	 */
-	int TRELATION_TO_TRACE_CLASS = 0;
+	int TRELATION_TO_TRACE_CLASS = 1;
 
 	/**
 	 * The feature id for the '<em><b>A</b></em>' reference.
@@ -96,13 +133,22 @@ public interface RelationsToTraceClassPackage extends EPackage {
 	int TRELATION_TO_TRACE_CLASS__C = 2;
 
 	/**
+	 * The feature id for the '<em><b>P</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRELATION_TO_TRACE_CLASS__P = 3;
+
+	/**
 	 * The feature id for the '<em><b>Tv</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRELATION_TO_TRACE_CLASS__TV = 3;
+	int TRELATION_TO_TRACE_CLASS__TV = 4;
 
 	/**
 	 * The feature id for the '<em><b>T</b></em>' reference.
@@ -111,7 +157,7 @@ public interface RelationsToTraceClassPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRELATION_TO_TRACE_CLASS__T = 4;
+	int TRELATION_TO_TRACE_CLASS__T = 5;
 
 	/**
 	 * The feature id for the '<em><b>Rdp</b></em>' reference.
@@ -120,7 +166,7 @@ public interface RelationsToTraceClassPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRELATION_TO_TRACE_CLASS__RDP = 5;
+	int TRELATION_TO_TRACE_CLASS__RDP = 6;
 
 	/**
 	 * The feature id for the '<em><b>Rd</b></em>' reference.
@@ -129,7 +175,7 @@ public interface RelationsToTraceClassPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRELATION_TO_TRACE_CLASS__RD = 6;
+	int TRELATION_TO_TRACE_CLASS__RD = 7;
 
 	/**
 	 * The feature id for the '<em><b>R</b></em>' reference.
@@ -138,7 +184,16 @@ public interface RelationsToTraceClassPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRELATION_TO_TRACE_CLASS__R = 7;
+	int TRELATION_TO_TRACE_CLASS__R = 8;
+
+	/**
+	 * The feature id for the '<em><b>Rt</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRELATION_TO_TRACE_CLASS__RT = 9;
 
 	/**
 	 * The number of structural features of the '<em>TRelation To Trace Class</em>' class.
@@ -147,7 +202,7 @@ public interface RelationsToTraceClassPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRELATION_TO_TRACE_CLASS_FEATURE_COUNT = 8;
+	int TRELATION_TO_TRACE_CLASS_FEATURE_COUNT = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TSubTemplateToTraceClassPropsImpl <em>TSub Template To Trace Class Props</em>}' class.
@@ -157,7 +212,7 @@ public interface RelationsToTraceClassPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.RelationsToTraceClassPackageImpl#getTSubTemplateToTraceClassProps()
 	 * @generated
 	 */
-	int TSUB_TEMPLATE_TO_TRACE_CLASS_PROPS = 1;
+	int TSUB_TEMPLATE_TO_TRACE_CLASS_PROPS = 2;
 
 	/**
 	 * The feature id for the '<em><b>C</b></em>' reference.
@@ -233,6 +288,38 @@ public interface RelationsToTraceClassPackage extends EPackage {
 
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TTransformationToPackage <em>TTransformation To Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>TTransformation To Package</em>'.
+	 * @see org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TTransformationToPackage
+	 * @generated
+	 */
+	EClass getTTransformationToPackage();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TTransformationToPackage#getRt <em>Rt</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Rt</em>'.
+	 * @see org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TTransformationToPackage#getRt()
+	 * @see #getTTransformationToPackage()
+	 * @generated
+	 */
+	EReference getTTransformationToPackage_Rt();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TTransformationToPackage#getP <em>P</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>P</em>'.
+	 * @see org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TTransformationToPackage#getP()
+	 * @see #getTTransformationToPackage()
+	 * @generated
+	 */
+	EReference getTTransformationToPackage_P();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass <em>TRelation To Trace Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -274,6 +361,17 @@ public interface RelationsToTraceClassPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTRelationToTraceClass_C();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getP <em>P</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>P</em>'.
+	 * @see org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getP()
+	 * @see #getTRelationToTraceClass()
+	 * @generated
+	 */
+	EReference getTRelationToTraceClass_P();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getTv <em>Tv</em>}'.
@@ -329,6 +427,17 @@ public interface RelationsToTraceClassPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTRelationToTraceClass_R();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getRt <em>Rt</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Rt</em>'.
+	 * @see org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass#getRt()
+	 * @see #getTRelationToTraceClass()
+	 * @generated
+	 */
+	EReference getTRelationToTraceClass_Rt();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TSubTemplateToTraceClassProps <em>TSub Template To Trace Class Props</em>}'.
@@ -440,6 +549,32 @@ public interface RelationsToTraceClassPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TTransformationToPackageImpl <em>TTransformation To Package</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TTransformationToPackageImpl
+		 * @see org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.RelationsToTraceClassPackageImpl#getTTransformationToPackage()
+		 * @generated
+		 */
+		EClass TTRANSFORMATION_TO_PACKAGE = eINSTANCE.getTTransformationToPackage();
+
+		/**
+		 * The meta object literal for the '<em><b>Rt</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TTRANSFORMATION_TO_PACKAGE__RT = eINSTANCE.getTTransformationToPackage_Rt();
+
+		/**
+		 * The meta object literal for the '<em><b>P</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TTRANSFORMATION_TO_PACKAGE__P = eINSTANCE.getTTransformationToPackage_P();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TRelationToTraceClassImpl <em>TRelation To Trace Class</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -472,6 +607,14 @@ public interface RelationsToTraceClassPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRELATION_TO_TRACE_CLASS__C = eINSTANCE.getTRelationToTraceClass_C();
+
+		/**
+		 * The meta object literal for the '<em><b>P</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRELATION_TO_TRACE_CLASS__P = eINSTANCE.getTRelationToTraceClass_P();
 
 		/**
 		 * The meta object literal for the '<em><b>Tv</b></em>' reference feature.
@@ -512,6 +655,14 @@ public interface RelationsToTraceClassPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRELATION_TO_TRACE_CLASS__R = eINSTANCE.getTRelationToTraceClass_R();
+
+		/**
+		 * The meta object literal for the '<em><b>Rt</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRELATION_TO_TRACE_CLASS__RT = eINSTANCE.getTRelationToTraceClass_Rt();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TSubTemplateToTraceClassPropsImpl <em>TSub Template To Trace Class Props</em>}' class.

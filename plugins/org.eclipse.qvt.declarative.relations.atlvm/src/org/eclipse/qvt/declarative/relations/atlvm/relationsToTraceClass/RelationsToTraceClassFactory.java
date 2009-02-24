@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RelationsToTraceClassFactory.java,v 1.1 2009/02/23 18:14:57 qglineur Exp $
+ * $Id: RelationsToTraceClassFactory.java,v 1.2 2009/02/24 17:31:29 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass;
 
@@ -24,6 +24,15 @@ public interface RelationsToTraceClassFactory extends EFactory {
 	 * @generated
 	 */
 	RelationsToTraceClassFactory eINSTANCE = org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.RelationsToTraceClassFactoryImpl.init();
+
+	/**
+	 * Returns a new object of class '<em>TTransformation To Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>TTransformation To Package</em>'.
+	 * @generated
+	 */
+	TTransformationToPackage createTTransformationToPackage();
 
 	/**
 	 * Returns a new object of class '<em>TRelation To Trace Class</em>'.

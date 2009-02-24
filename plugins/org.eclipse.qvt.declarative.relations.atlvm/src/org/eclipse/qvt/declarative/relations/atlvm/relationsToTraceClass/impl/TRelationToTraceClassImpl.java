@@ -2,13 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TRelationToTraceClassImpl.java,v 1.1 2009/02/23 18:14:57 qglineur Exp $
+ * $Id: TRelationToTraceClassImpl.java,v 1.2 2009/02/24 17:31:29 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -21,6 +22,7 @@ import org.eclipse.qvt.declarative.ecore.QVTRelation.DomainPattern;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.Relation;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationDomain;
 
+import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.ObjectTemplateExp;
 
 import org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.RelationsToTraceClassPackage;
@@ -36,11 +38,13 @@ import org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelati
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TRelationToTraceClassImpl#getA <em>A</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TRelationToTraceClassImpl#getRc <em>Rc</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TRelationToTraceClassImpl#getC <em>C</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TRelationToTraceClassImpl#getP <em>P</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TRelationToTraceClassImpl#getTv <em>Tv</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TRelationToTraceClassImpl#getT <em>T</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TRelationToTraceClassImpl#getRdp <em>Rdp</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TRelationToTraceClassImpl#getRd <em>Rd</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TRelationToTraceClassImpl#getR <em>R</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl.TRelationToTraceClassImpl#getRt <em>Rt</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,6 +80,16 @@ public class TRelationToTraceClassImpl extends EObjectImpl implements TRelationT
 	 * @ordered
 	 */
 	protected EClass c;
+
+	/**
+	 * The cached value of the '{@link #getP() <em>P</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getP()
+	 * @generated
+	 * @ordered
+	 */
+	protected EPackage p;
 
 	/**
 	 * The cached value of the '{@link #getTv() <em>Tv</em>}' reference.
@@ -126,6 +140,16 @@ public class TRelationToTraceClassImpl extends EObjectImpl implements TRelationT
 	 * @ordered
 	 */
 	protected Relation r;
+
+	/**
+	 * The cached value of the '{@link #getRt() <em>Rt</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRt()
+	 * @generated
+	 * @ordered
+	 */
+	protected RelationalTransformation rt;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -258,6 +282,44 @@ public class TRelationToTraceClassImpl extends EObjectImpl implements TRelationT
 		c = newC;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__C, oldC, c));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EPackage getP() {
+		if (p != null && p.eIsProxy()) {
+			InternalEObject oldP = (InternalEObject)p;
+			p = (EPackage)eResolveProxy(oldP);
+			if (p != oldP) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__P, oldP, p));
+			}
+		}
+		return p;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EPackage basicGetP() {
+		return p;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setP(EPackage newP) {
+		EPackage oldP = p;
+		p = newP;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__P, oldP, p));
 	}
 
 	/**
@@ -455,6 +517,44 @@ public class TRelationToTraceClassImpl extends EObjectImpl implements TRelationT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public RelationalTransformation getRt() {
+		if (rt != null && rt.eIsProxy()) {
+			InternalEObject oldRt = (InternalEObject)rt;
+			rt = (RelationalTransformation)eResolveProxy(oldRt);
+			if (rt != oldRt) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__RT, oldRt, rt));
+			}
+		}
+		return rt;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RelationalTransformation basicGetRt() {
+		return rt;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRt(RelationalTransformation newRt) {
+		RelationalTransformation oldRt = rt;
+		rt = newRt;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__RT, oldRt, rt));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -467,6 +567,9 @@ public class TRelationToTraceClassImpl extends EObjectImpl implements TRelationT
 			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__C:
 				if (resolve) return getC();
 				return basicGetC();
+			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__P:
+				if (resolve) return getP();
+				return basicGetP();
 			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__TV:
 				if (resolve) return getTv();
 				return basicGetTv();
@@ -482,6 +585,9 @@ public class TRelationToTraceClassImpl extends EObjectImpl implements TRelationT
 			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__R:
 				if (resolve) return getR();
 				return basicGetR();
+			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__RT:
+				if (resolve) return getRt();
+				return basicGetRt();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -503,6 +609,9 @@ public class TRelationToTraceClassImpl extends EObjectImpl implements TRelationT
 			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__C:
 				setC((EClass)newValue);
 				return;
+			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__P:
+				setP((EPackage)newValue);
+				return;
 			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__TV:
 				setTv((Variable)newValue);
 				return;
@@ -517,6 +626,9 @@ public class TRelationToTraceClassImpl extends EObjectImpl implements TRelationT
 				return;
 			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__R:
 				setR((Relation)newValue);
+				return;
+			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__RT:
+				setRt((RelationalTransformation)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -539,6 +651,9 @@ public class TRelationToTraceClassImpl extends EObjectImpl implements TRelationT
 			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__C:
 				setC((EClass)null);
 				return;
+			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__P:
+				setP((EPackage)null);
+				return;
 			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__TV:
 				setTv((Variable)null);
 				return;
@@ -553,6 +668,9 @@ public class TRelationToTraceClassImpl extends EObjectImpl implements TRelationT
 				return;
 			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__R:
 				setR((Relation)null);
+				return;
+			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__RT:
+				setRt((RelationalTransformation)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -572,6 +690,8 @@ public class TRelationToTraceClassImpl extends EObjectImpl implements TRelationT
 				return rc != null;
 			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__C:
 				return c != null;
+			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__P:
+				return p != null;
 			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__TV:
 				return tv != null;
 			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__T:
@@ -582,6 +702,8 @@ public class TRelationToTraceClassImpl extends EObjectImpl implements TRelationT
 				return rd != null;
 			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__R:
 				return r != null;
+			case RelationsToTraceClassPackage.TRELATION_TO_TRACE_CLASS__RT:
+				return rt != null;
 		}
 		return super.eIsSet(featureID);
 	}

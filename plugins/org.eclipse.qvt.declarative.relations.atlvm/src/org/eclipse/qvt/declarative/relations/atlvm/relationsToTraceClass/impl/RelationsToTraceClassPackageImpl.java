@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RelationsToTraceClassPackageImpl.java,v 1.1 2009/02/23 18:14:57 qglineur Exp $
+ * $Id: RelationsToTraceClassPackageImpl.java,v 1.2 2009/02/24 17:31:29 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.impl;
 
@@ -21,6 +21,7 @@ import org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.Relatio
 import org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.RelationsToTraceClassPackage;
 import org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass;
 import org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TSubTemplateToTraceClassProps;
+import org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TTransformationToPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,6 +30,13 @@ import org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TSubTem
  * @generated
  */
 public class RelationsToTraceClassPackageImpl extends EPackageImpl implements RelationsToTraceClassPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tTransformationToPackageEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -119,6 +127,33 @@ public class RelationsToTraceClassPackageImpl extends EPackageImpl implements Re
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTTransformationToPackage() {
+		return tTransformationToPackageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTTransformationToPackage_Rt() {
+		return (EReference)tTransformationToPackageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTTransformationToPackage_P() {
+		return (EReference)tTransformationToPackageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTRelationToTraceClass() {
 		return tRelationToTraceClassEClass;
 	}
@@ -155,7 +190,7 @@ public class RelationsToTraceClassPackageImpl extends EPackageImpl implements Re
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTRelationToTraceClass_Tv() {
+	public EReference getTRelationToTraceClass_P() {
 		return (EReference)tRelationToTraceClassEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -164,7 +199,7 @@ public class RelationsToTraceClassPackageImpl extends EPackageImpl implements Re
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTRelationToTraceClass_T() {
+	public EReference getTRelationToTraceClass_Tv() {
 		return (EReference)tRelationToTraceClassEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -173,7 +208,7 @@ public class RelationsToTraceClassPackageImpl extends EPackageImpl implements Re
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTRelationToTraceClass_Rdp() {
+	public EReference getTRelationToTraceClass_T() {
 		return (EReference)tRelationToTraceClassEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -182,7 +217,7 @@ public class RelationsToTraceClassPackageImpl extends EPackageImpl implements Re
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTRelationToTraceClass_Rd() {
+	public EReference getTRelationToTraceClass_Rdp() {
 		return (EReference)tRelationToTraceClassEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -191,8 +226,26 @@ public class RelationsToTraceClassPackageImpl extends EPackageImpl implements Re
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTRelationToTraceClass_R() {
+	public EReference getTRelationToTraceClass_Rd() {
 		return (EReference)tRelationToTraceClassEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTRelationToTraceClass_R() {
+		return (EReference)tRelationToTraceClassEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTRelationToTraceClass_Rt() {
+		return (EReference)tRelationToTraceClassEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -295,15 +348,21 @@ public class RelationsToTraceClassPackageImpl extends EPackageImpl implements Re
 		isCreated = true;
 
 		// Create classes and their features
+		tTransformationToPackageEClass = createEClass(TTRANSFORMATION_TO_PACKAGE);
+		createEReference(tTransformationToPackageEClass, TTRANSFORMATION_TO_PACKAGE__RT);
+		createEReference(tTransformationToPackageEClass, TTRANSFORMATION_TO_PACKAGE__P);
+
 		tRelationToTraceClassEClass = createEClass(TRELATION_TO_TRACE_CLASS);
 		createEReference(tRelationToTraceClassEClass, TRELATION_TO_TRACE_CLASS__A);
 		createEReference(tRelationToTraceClassEClass, TRELATION_TO_TRACE_CLASS__RC);
 		createEReference(tRelationToTraceClassEClass, TRELATION_TO_TRACE_CLASS__C);
+		createEReference(tRelationToTraceClassEClass, TRELATION_TO_TRACE_CLASS__P);
 		createEReference(tRelationToTraceClassEClass, TRELATION_TO_TRACE_CLASS__TV);
 		createEReference(tRelationToTraceClassEClass, TRELATION_TO_TRACE_CLASS__T);
 		createEReference(tRelationToTraceClassEClass, TRELATION_TO_TRACE_CLASS__RDP);
 		createEReference(tRelationToTraceClassEClass, TRELATION_TO_TRACE_CLASS__RD);
 		createEReference(tRelationToTraceClassEClass, TRELATION_TO_TRACE_CLASS__R);
+		createEReference(tRelationToTraceClassEClass, TRELATION_TO_TRACE_CLASS__RT);
 
 		tSubTemplateToTraceClassPropsEClass = createEClass(TSUB_TEMPLATE_TO_TRACE_CLASS_PROPS);
 		createEReference(tSubTemplateToTraceClassPropsEClass, TSUB_TEMPLATE_TO_TRACE_CLASS_PROPS__C);
@@ -339,10 +398,10 @@ public class RelationsToTraceClassPackageImpl extends EPackageImpl implements Re
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
+		QVTRelationPackage theQVTRelationPackage = (QVTRelationPackage)EPackage.Registry.INSTANCE.getEPackage(QVTRelationPackage.eNS_URI);
 		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 		org.eclipse.ocl.ecore.EcorePackage theEcorePackage_1 = (org.eclipse.ocl.ecore.EcorePackage)EPackage.Registry.INSTANCE.getEPackage(org.eclipse.ocl.ecore.EcorePackage.eNS_URI);
 		QVTTemplatePackage theQVTTemplatePackage = (QVTTemplatePackage)EPackage.Registry.INSTANCE.getEPackage(QVTTemplatePackage.eNS_URI);
-		QVTRelationPackage theQVTRelationPackage = (QVTRelationPackage)EPackage.Registry.INSTANCE.getEPackage(QVTRelationPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -351,15 +410,21 @@ public class RelationsToTraceClassPackageImpl extends EPackageImpl implements Re
 		// Add supertypes to classes
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(tTransformationToPackageEClass, TTransformationToPackage.class, "TTransformationToPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTTransformationToPackage_Rt(), theQVTRelationPackage.getRelationalTransformation(), null, "rt", null, 0, 1, TTransformationToPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTTransformationToPackage_P(), theEcorePackage.getEPackage(), null, "p", null, 0, 1, TTransformationToPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(tRelationToTraceClassEClass, TRelationToTraceClass.class, "TRelationToTraceClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTRelationToTraceClass_A(), theEcorePackage.getEReference(), null, "a", null, 0, 1, TRelationToTraceClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTRelationToTraceClass_Rc(), theEcorePackage.getEClass(), null, "rc", null, 0, 1, TRelationToTraceClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTRelationToTraceClass_C(), theEcorePackage.getEClass(), null, "c", null, 0, 1, TRelationToTraceClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTRelationToTraceClass_P(), theEcorePackage.getEPackage(), null, "p", null, 0, 1, TRelationToTraceClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTRelationToTraceClass_Tv(), theEcorePackage_1.getVariable(), null, "tv", null, 0, 1, TRelationToTraceClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTRelationToTraceClass_T(), theQVTTemplatePackage.getObjectTemplateExp(), null, "t", null, 0, 1, TRelationToTraceClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTRelationToTraceClass_Rdp(), theQVTRelationPackage.getDomainPattern(), null, "rdp", null, 0, 1, TRelationToTraceClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTRelationToTraceClass_Rd(), theQVTRelationPackage.getRelationDomain(), null, "rd", null, 0, 1, TRelationToTraceClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTRelationToTraceClass_R(), theQVTRelationPackage.getRelation(), null, "r", null, 0, 1, TRelationToTraceClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTRelationToTraceClass_Rt(), theQVTRelationPackage.getRelationalTransformation(), null, "rt", null, 0, 1, TRelationToTraceClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tSubTemplateToTraceClassPropsEClass, TSubTemplateToTraceClassProps.class, "TSubTemplateToTraceClassProps", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTSubTemplateToTraceClassProps_C(), theEcorePackage.getEClass(), null, "c", null, 0, 1, TSubTemplateToTraceClassProps.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

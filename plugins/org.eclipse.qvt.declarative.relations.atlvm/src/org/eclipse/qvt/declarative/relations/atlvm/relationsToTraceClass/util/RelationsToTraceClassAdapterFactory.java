@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RelationsToTraceClassAdapterFactory.java,v 1.1 2009/02/23 18:14:58 qglineur Exp $
+ * $Id: RelationsToTraceClassAdapterFactory.java,v 1.2 2009/02/24 17:31:28 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.util;
 
@@ -72,6 +72,10 @@ public class RelationsToTraceClassAdapterFactory extends AdapterFactoryImpl {
 	protected RelationsToTraceClassSwitch<Adapter> modelSwitch =
 		new RelationsToTraceClassSwitch<Adapter>() {
 			@Override
+			public Adapter caseTTransformationToPackage(TTransformationToPackage object) {
+				return createTTransformationToPackageAdapter();
+			}
+			@Override
 			public Adapter caseTRelationToTraceClass(TRelationToTraceClass object) {
 				return createTRelationToTraceClassAdapter();
 			}
@@ -98,6 +102,20 @@ public class RelationsToTraceClassAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TTransformationToPackage <em>TTransformation To Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TTransformationToPackage
+	 * @generated
+	 */
+	public Adapter createTTransformationToPackageAdapter() {
+		return null;
+	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.TRelationToTraceClass <em>TRelation To Trace Class</em>}'.
