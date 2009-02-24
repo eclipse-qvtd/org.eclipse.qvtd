@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: DeclarativeQVTMainTab.java,v 1.5 2009/02/23 18:15:55 qglineur Exp $
+ * $Id: DeclarativeQVTMainTab.java,v 1.6 2009/02/24 16:54:01 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.execution.ui.launching.configuration;
 
@@ -511,6 +511,9 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		if (currentProject != null && currentTransformationFile != null) {
 
+			String absoluteExecutablePath = currentTransformationFile
+					.getFullPath().toString();
+
 			String direction = null;
 			List<String> modelNameList = new ArrayList<String>();
 			List<String> modelPathList = new ArrayList<String>();
@@ -521,16 +524,19 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 				String modelName = modelParameterConfiguration.getName();
 				modelNameList.add(modelName);
 				modelPathList.add(modelParameterConfiguration.getUri());
-				metamodelNameList.add(modelName + "MM");
-				metamodelPathList.add(getMetamodel(modelName));
+				if ("traces".equals(modelName)) {
+					metamodelNameList.add("Traceability");
+					metamodelPathList
+							.add(getTraceabilityMM(absoluteExecutablePath));
+				} else {
+					metamodelNameList.add(modelName + "MM");
+					metamodelPathList.add(getMetamodel(modelName));
+				}
 
 				if (modelParameterConfiguration.isTarget()) {
 					direction = modelName;
 				}
 			}
-
-			String absoluteExecutablePath = currentTransformationFile
-					.getFullPath().toString();
 
 			configuration
 					.setAttribute(
@@ -561,6 +567,38 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 					"enforcement");
 		}
 
+	}
+
+	private String getTraceabilityMM(String absoluteExecutablePath) {
+		IPath path = new Path(absoluteExecutablePath);
+		String projectName = path.segment(0);
+		IProject project = getWorkspaceRoot().getProject(projectName);
+		try {
+			for (IClasspathEntry classpathEntry : JavaCore.create(project)
+					.getRawClasspath()) {
+				if (classpathEntry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
+					IPath sourcePath = classpathEntry.getPath();
+					if (sourcePath.isPrefixOf(path)) {
+						IPath sourceFolderRelativePath = path
+								.makeRelativeTo(sourcePath);
+						String traceabilityMetamodelFileName = "T"
+								+ sourceFolderRelativePath
+										.removeFileExtension().lastSegment()
+								+ ".ecore";
+						IPath result = classpathEntry.getOutputLocation();
+						result = result.append(sourceFolderRelativePath
+								.removeLastSegments(1));
+						result = result.append(traceabilityMetamodelFileName);
+						return URI.createPlatformResourceURI(result.toString(),
+								true).toString();
+					}
+				}
+			}
+		} catch (JavaModelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
