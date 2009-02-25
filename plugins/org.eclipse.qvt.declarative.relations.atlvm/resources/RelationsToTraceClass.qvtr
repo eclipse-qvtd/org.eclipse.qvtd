@@ -2,6 +2,7 @@ transformation RelationsToTraceClass(relations:{Relations, Templates, OCL, Ecore
 
   key EPackage{name};
   key EClass{ePackage, name};
+  key EStructuralFeature{eContainingClass, name};
 
   top relation TransformationToPackage {
     domain relations rt : RelationalTransformation {
@@ -23,7 +24,6 @@ transformation RelationsToTraceClass(relations:{Relations, Templates, OCL, Ecore
     rn, vn:String;
     domain relations rt: RelationalTransformation {
       rule = r:Relation {
-        _transformation = rt,
         name = rn,
         _domain = rd:RelationDomain {
           pattern = rdp:DomainPattern {

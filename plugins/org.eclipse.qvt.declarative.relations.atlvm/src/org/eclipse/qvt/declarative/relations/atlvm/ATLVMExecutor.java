@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: ATLVMExecutor.java,v 1.11 2009/02/24 17:31:29 qglineur Exp $
+ * $Id: ATLVMExecutor.java,v 1.12 2009/02/25 18:23:19 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm;
 
@@ -167,6 +167,7 @@ public class ATLVMExecutor implements ExecutionProvider {
 				ASMModel model = emfModelLoader.loadModel(namedModel.getName(),metamodel, modelURI);
 				if (created || "traces".equals(model.getName())) {
 					model.setIsTarget(true);
+					((ASMEMFModel)model).setCheckSameModel(false);
 				}
 				linkedModels.add(model);
 			}
@@ -175,7 +176,7 @@ public class ATLVMExecutor implements ExecutionProvider {
 			linkedModels.add(metamodel);
 			
 			URI modelURI = URI.createURI(directionNamedModel.getAccessor());
-			boolean created = createResourceIfMissing(emfModelLoader, modelURI);
+			createResourceIfMissing(emfModelLoader, modelURI);
 			ASMModel model = emfModelLoader.loadModel(directionNamedModel.getName(), metamodel, modelURI);
 			model.setIsTarget(true);
 
@@ -272,7 +273,7 @@ public class ATLVMExecutor implements ExecutionProvider {
 			Map<String, Boolean> serializationParameters = new HashMap<String, Boolean>();
 			URI metamodelURI = ((ASMEMFModel) model.getMetamodel()).getExtent()
 					.getURI();
-			if (metamodelURI.isFile()) {
+			if (metamodelURI.isFile() || metamodelURI.isPlatformResource()) {
 				serializationParameters.put(XMLResource.OPTION_SCHEMA_LOCATION,
 						Boolean.TRUE);
 			}
