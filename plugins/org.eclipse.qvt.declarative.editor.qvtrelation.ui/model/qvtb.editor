@@ -2,7 +2,7 @@
 <ed:EditorDefinition xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:ed="http://www.eclipse.org/qvt/1.0/Editor" language="qvtb"
-    extends="../../org.eclipse.qvt.declarative.editor.ocl.ui/model/ocl.editor#/">
+    extends="../../org.eclipse.qvt.declarative.editor.ocl.ui/model/ocl.ecore.editor#/">
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTBase#//Function">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.ecore.qvtbase.edit/icons/full/obj16/Function.gif"
         format="{0}({1}) : {2}">
