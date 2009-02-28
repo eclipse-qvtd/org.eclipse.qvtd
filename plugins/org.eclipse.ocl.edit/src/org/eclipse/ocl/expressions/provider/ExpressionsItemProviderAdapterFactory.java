@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ExpressionsItemProviderAdapterFactory.java,v 1.2 2008/10/25 17:44:48 ewillink Exp $
+ * $Id: ExpressionsItemProviderAdapterFactory.java,v 1.3 2009/02/28 14:41:44 ewillink Exp $
  */
 package org.eclipse.ocl.expressions.provider;
 
@@ -745,7 +745,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class)
+			if (!(type instanceof Class<?>)
 					|| (((Class<?>) type).isInstance(adapter))) {
 				return adapter;
 			}
