@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: TupleTypeItemProvider.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
+ * $Id: TupleTypeItemProvider.java,v 1.3 2009/03/03 09:20:02 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -42,14 +41,9 @@ import org.eclipse.ocl.ecore.TupleType;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TupleTypeItemProvider
-	extends EClassItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class TupleTypeItemProvider extends EClassItemProvider implements
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -83,19 +77,14 @@ public class TupleTypeItemProvider
 	 * @generated
 	 */
 	protected void addSerializablePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_EDataType_serializable_feature"), //$NON-NLS-1$
-				 getString("_UI_EDataType_serializable_description"), //$NON-NLS-1$
-				 EcorePackage.Literals.EDATA_TYPE__SERIALIZABLE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory)
+						.getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_EDataType_serializable_feature"), //$NON-NLS-1$
+				getString("_UI_EDataType_serializable_description"), //$NON-NLS-1$
+				EcorePackage.Literals.EDATA_TYPE__SERIALIZABLE, true, false,
+				false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -106,7 +95,8 @@ public class TupleTypeItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/TupleType")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/TupleType")); //$NON-NLS-1$
 	}
 
 	/**
@@ -117,10 +107,9 @@ public class TupleTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((TupleType)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_TupleType_type") : //$NON-NLS-1$
-			getString("_UI_TupleType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((TupleType) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_TupleType_type") : //$NON-NLS-1$
+				getString("_UI_TupleType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -135,9 +124,10 @@ public class TupleTypeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TupleType.class)) {
-			case org.eclipse.ocl.ecore.EcorePackage.TUPLE_TYPE__SERIALIZABLE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
+		case org.eclipse.ocl.ecore.EcorePackage.TUPLE_TYPE__SERIALIZABLE:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), false, true));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -150,7 +140,8 @@ public class TupleTypeItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

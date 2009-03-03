@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: PropertyCallExpItemProvider.java,v 1.2 2008/08/24 19:27:47 ewillink Exp $
+ * $Id: PropertyCallExpItemProvider.java,v 1.3 2009/03/03 09:20:03 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -38,14 +37,9 @@ import org.eclipse.ocl.expressions.ExpressionsPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class PropertyCallExpItemProvider
-	extends NavigationCallExpItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class PropertyCallExpItemProvider extends NavigationCallExpItemProvider
+		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -79,19 +73,16 @@ public class PropertyCallExpItemProvider
 	 * @generated
 	 */
 	protected void addReferredPropertyPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_PropertyCallExp_referredProperty_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyCallExp_referredProperty_feature", "_UI_PropertyCallExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				 ExpressionsPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY,
-				 true,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_PropertyCallExp_referredProperty_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_PropertyCallExp_referredProperty_feature", "_UI_PropertyCallExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						ExpressionsPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY,
+						true, false, false, null, null, null));
 	}
 
 	/**
@@ -102,7 +93,8 @@ public class PropertyCallExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/PropertyCallExp")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/PropertyCallExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -113,10 +105,9 @@ public class PropertyCallExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((PropertyCallExp)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_PropertyCallExp_type") : //$NON-NLS-1$
-			getString("_UI_PropertyCallExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((PropertyCallExp) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_PropertyCallExp_type") : //$NON-NLS-1$
+				getString("_UI_PropertyCallExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -140,7 +131,8 @@ public class PropertyCallExpItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -151,18 +143,18 @@ public class PropertyCallExpItemProvider
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+	public String getCreateChildText(Object owner, Object feature,
+			Object child, Collection<?> selection) {
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify =
-			childFeature == ExpressionsPackage.Literals.CALL_EXP__SOURCE ||
-			childFeature == ExpressionsPackage.Literals.NAVIGATION_CALL_EXP__QUALIFIER;
+		boolean qualify = childFeature == ExpressionsPackage.Literals.CALL_EXP__SOURCE
+				|| childFeature == ExpressionsPackage.Literals.NAVIGATION_CALL_EXP__QUALIFIER;
 
 		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2", //$NON-NLS-1$
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+			return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+					new Object[] { getTypeText(childObject),
+							getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

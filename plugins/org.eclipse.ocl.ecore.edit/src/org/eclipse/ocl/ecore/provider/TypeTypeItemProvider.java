@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: TypeTypeItemProvider.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
+ * $Id: TypeTypeItemProvider.java,v 1.3 2009/03/03 09:20:02 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -40,14 +39,9 @@ import org.eclipse.ocl.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TypeTypeItemProvider
-	extends EClassifierItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class TypeTypeItemProvider extends EClassifierItemProvider implements
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -81,19 +75,16 @@ public class TypeTypeItemProvider
 	 * @generated
 	 */
 	protected void addReferredTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TypeType_referredType_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypeType_referredType_feature", "_UI_TypeType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				 TypesPackage.Literals.TYPE_TYPE__REFERRED_TYPE,
-				 false,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_TypeType_referredType_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_TypeType_referredType_feature", "_UI_TypeType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						TypesPackage.Literals.TYPE_TYPE__REFERRED_TYPE, false,
+						false, false, null, null, null));
 	}
 
 	/**
@@ -104,7 +95,8 @@ public class TypeTypeItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/TypeType")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/TypeType")); //$NON-NLS-1$
 	}
 
 	/**
@@ -115,10 +107,9 @@ public class TypeTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((TypeType)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_TypeType_type") : //$NON-NLS-1$
-			getString("_UI_TypeType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((TypeType) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_TypeType_type") : //$NON-NLS-1$
+				getString("_UI_TypeType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -142,7 +133,8 @@ public class TypeTypeItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

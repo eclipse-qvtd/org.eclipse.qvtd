@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: UnlimitedNaturalLiteralExpItemProvider.java,v 1.2 2008/08/24 19:27:47 ewillink Exp $
+ * $Id: UnlimitedNaturalLiteralExpItemProvider.java,v 1.3 2009/03/03 09:20:03 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -41,14 +40,10 @@ import org.eclipse.ocl.expressions.ExpressionsPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class UnlimitedNaturalLiteralExpItemProvider
-	extends NumericLiteralExpItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class UnlimitedNaturalLiteralExpItemProvider extends
+		NumericLiteralExpItemProvider implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider,
+		IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -83,19 +78,17 @@ public class UnlimitedNaturalLiteralExpItemProvider
 	 * @generated
 	 */
 	protected void addIntegerSymbolPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_UnlimitedNaturalLiteralExp_integerSymbol_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_UnlimitedNaturalLiteralExp_integerSymbol_feature", "_UI_UnlimitedNaturalLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				 ExpressionsPackage.Literals.UNLIMITED_NATURAL_LITERAL_EXP__INTEGER_SYMBOL,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_UnlimitedNaturalLiteralExp_integerSymbol_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_UnlimitedNaturalLiteralExp_integerSymbol_feature", "_UI_UnlimitedNaturalLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						ExpressionsPackage.Literals.UNLIMITED_NATURAL_LITERAL_EXP__INTEGER_SYMBOL,
+						true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -105,19 +98,17 @@ public class UnlimitedNaturalLiteralExpItemProvider
 	 * @generated
 	 */
 	protected void addUnlimitedPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_UnlimitedNaturalLiteralExp_unlimited_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_UnlimitedNaturalLiteralExp_unlimited_feature", "_UI_UnlimitedNaturalLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				 ExpressionsPackage.Literals.UNLIMITED_NATURAL_LITERAL_EXP__UNLIMITED,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_UnlimitedNaturalLiteralExp_unlimited_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_UnlimitedNaturalLiteralExp_unlimited_feature", "_UI_UnlimitedNaturalLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						ExpressionsPackage.Literals.UNLIMITED_NATURAL_LITERAL_EXP__UNLIMITED,
+						false, false, false,
+						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -128,7 +119,8 @@ public class UnlimitedNaturalLiteralExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/UnlimitedNaturalLiteralExp")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/UnlimitedNaturalLiteralExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -139,10 +131,9 @@ public class UnlimitedNaturalLiteralExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((UnlimitedNaturalLiteralExp)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_UnlimitedNaturalLiteralExp_type") : //$NON-NLS-1$
-			getString("_UI_UnlimitedNaturalLiteralExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((UnlimitedNaturalLiteralExp) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_UnlimitedNaturalLiteralExp_type") : //$NON-NLS-1$
+				getString("_UI_UnlimitedNaturalLiteralExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -157,10 +148,11 @@ public class UnlimitedNaturalLiteralExpItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(UnlimitedNaturalLiteralExp.class)) {
-			case EcorePackage.UNLIMITED_NATURAL_LITERAL_EXP__INTEGER_SYMBOL:
-			case EcorePackage.UNLIMITED_NATURAL_LITERAL_EXP__UNLIMITED:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
+		case EcorePackage.UNLIMITED_NATURAL_LITERAL_EXP__INTEGER_SYMBOL:
+		case EcorePackage.UNLIMITED_NATURAL_LITERAL_EXP__UNLIMITED:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), false, true));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -173,7 +165,8 @@ public class UnlimitedNaturalLiteralExpItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

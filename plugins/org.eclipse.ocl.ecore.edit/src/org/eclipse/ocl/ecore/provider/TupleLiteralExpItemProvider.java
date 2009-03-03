@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: TupleLiteralExpItemProvider.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
+ * $Id: TupleLiteralExpItemProvider.java,v 1.3 2009/03/03 09:20:02 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -42,14 +41,9 @@ import org.eclipse.ocl.expressions.ExpressionsPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TupleLiteralExpItemProvider
-	extends LiteralExpItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class TupleLiteralExpItemProvider extends LiteralExpItemProvider
+		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -84,10 +78,12 @@ public class TupleLiteralExpItemProvider
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(
+			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ExpressionsPackage.Literals.TUPLE_LITERAL_EXP__PART);
+			childrenFeatures
+					.add(ExpressionsPackage.Literals.TUPLE_LITERAL_EXP__PART);
 		}
 		return childrenFeatures;
 	}
@@ -113,7 +109,8 @@ public class TupleLiteralExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/TupleLiteralExp")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/TupleLiteralExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -124,10 +121,9 @@ public class TupleLiteralExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((TupleLiteralExp)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_TupleLiteralExp_type") : //$NON-NLS-1$
-			getString("_UI_TupleLiteralExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((TupleLiteralExp) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_TupleLiteralExp_type") : //$NON-NLS-1$
+				getString("_UI_TupleLiteralExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -142,9 +138,10 @@ public class TupleLiteralExpItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TupleLiteralExp.class)) {
-			case EcorePackage.TUPLE_LITERAL_EXP__PART:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
+		case EcorePackage.TUPLE_LITERAL_EXP__PART:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), true, false));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -157,18 +154,17 @@ public class TupleLiteralExpItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.TUPLE_LITERAL_EXP__PART,
-				 EcoreFactory.eINSTANCE.createTupleLiteralPart()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.TUPLE_LITERAL_EXP__PART,
+				EcoreFactory.eINSTANCE.createTupleLiteralPart()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.TUPLE_LITERAL_EXP__PART,
-				 ExpressionsFactory.eINSTANCE.createTupleLiteralPart()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.TUPLE_LITERAL_EXP__PART,
+				ExpressionsFactory.eINSTANCE.createTupleLiteralPart()));
 	}
 
 }

@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: IntegerLiteralExpItemProvider.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
+ * $Id: IntegerLiteralExpItemProvider.java,v 1.3 2009/03/03 09:20:03 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -41,14 +40,10 @@ import org.eclipse.ocl.expressions.ExpressionsPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class IntegerLiteralExpItemProvider
-	extends NumericLiteralExpItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class IntegerLiteralExpItemProvider extends
+		NumericLiteralExpItemProvider implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider,
+		IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -82,19 +77,17 @@ public class IntegerLiteralExpItemProvider
 	 * @generated
 	 */
 	protected void addIntegerSymbolPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_IntegerLiteralExp_integerSymbol_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_IntegerLiteralExp_integerSymbol_feature", "_UI_IntegerLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				 ExpressionsPackage.Literals.INTEGER_LITERAL_EXP__INTEGER_SYMBOL,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_IntegerLiteralExp_integerSymbol_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_IntegerLiteralExp_integerSymbol_feature", "_UI_IntegerLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						ExpressionsPackage.Literals.INTEGER_LITERAL_EXP__INTEGER_SYMBOL,
+						true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -105,7 +98,8 @@ public class IntegerLiteralExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IntegerLiteralExp")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/IntegerLiteralExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -116,10 +110,9 @@ public class IntegerLiteralExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((IntegerLiteralExp)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_IntegerLiteralExp_type") : //$NON-NLS-1$
-			getString("_UI_IntegerLiteralExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((IntegerLiteralExp) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_IntegerLiteralExp_type") : //$NON-NLS-1$
+				getString("_UI_IntegerLiteralExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -134,9 +127,10 @@ public class IntegerLiteralExpItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(IntegerLiteralExp.class)) {
-			case EcorePackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
+		case EcorePackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), false, true));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -149,7 +143,8 @@ public class IntegerLiteralExpItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

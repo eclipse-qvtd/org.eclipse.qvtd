@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: UnspecifiedValueExpItemProvider.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
+ * $Id: UnspecifiedValueExpItemProvider.java,v 1.3 2009/03/03 09:20:02 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -41,14 +40,9 @@ import org.eclipse.ocl.utilities.UtilitiesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class UnspecifiedValueExpItemProvider
-	extends OCLExpressionItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class UnspecifiedValueExpItemProvider extends OCLExpressionItemProvider
+		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -83,19 +77,17 @@ public class UnspecifiedValueExpItemProvider
 	 * @generated
 	 */
 	protected void addTypeStartPositionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TypedASTNode_typeStartPosition_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypedASTNode_typeStartPosition_feature", "_UI_TypedASTNode_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				 UtilitiesPackage.Literals.TYPED_AST_NODE__TYPE_START_POSITION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_TypedASTNode_typeStartPosition_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_TypedASTNode_typeStartPosition_feature", "_UI_TypedASTNode_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						UtilitiesPackage.Literals.TYPED_AST_NODE__TYPE_START_POSITION,
+						true, false, false,
+						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -105,19 +97,17 @@ public class UnspecifiedValueExpItemProvider
 	 * @generated
 	 */
 	protected void addTypeEndPositionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TypedASTNode_typeEndPosition_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypedASTNode_typeEndPosition_feature", "_UI_TypedASTNode_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				 UtilitiesPackage.Literals.TYPED_AST_NODE__TYPE_END_POSITION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_TypedASTNode_typeEndPosition_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_TypedASTNode_typeEndPosition_feature", "_UI_TypedASTNode_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						UtilitiesPackage.Literals.TYPED_AST_NODE__TYPE_END_POSITION,
+						true, false, false,
+						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -128,7 +118,8 @@ public class UnspecifiedValueExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/UnspecifiedValueExp")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/UnspecifiedValueExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -139,10 +130,9 @@ public class UnspecifiedValueExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((UnspecifiedValueExp)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_UnspecifiedValueExp_type") : //$NON-NLS-1$
-			getString("_UI_UnspecifiedValueExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((UnspecifiedValueExp) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_UnspecifiedValueExp_type") : //$NON-NLS-1$
+				getString("_UI_UnspecifiedValueExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -157,10 +147,11 @@ public class UnspecifiedValueExpItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(UnspecifiedValueExp.class)) {
-			case EcorePackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION:
-			case EcorePackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
+		case EcorePackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION:
+		case EcorePackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), false, true));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -173,7 +164,8 @@ public class UnspecifiedValueExpItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

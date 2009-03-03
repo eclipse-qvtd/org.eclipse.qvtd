@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: OperationCallExpItemProvider.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
+ * $Id: OperationCallExpItemProvider.java,v 1.3 2009/03/03 09:20:02 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -44,14 +43,9 @@ import org.eclipse.ocl.expressions.ExpressionsPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class OperationCallExpItemProvider
-	extends FeatureCallExpItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class OperationCallExpItemProvider extends FeatureCallExpItemProvider
+		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -86,19 +80,16 @@ public class OperationCallExpItemProvider
 	 * @generated
 	 */
 	protected void addReferredOperationPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_OperationCallExp_referredOperation_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_OperationCallExp_referredOperation_feature", "_UI_OperationCallExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				 ExpressionsPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION,
-				 true,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_OperationCallExp_referredOperation_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_OperationCallExp_referredOperation_feature", "_UI_OperationCallExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						ExpressionsPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION,
+						true, false, false, null, null, null));
 	}
 
 	/**
@@ -108,19 +99,17 @@ public class OperationCallExpItemProvider
 	 * @generated
 	 */
 	protected void addOperationCodePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_OperationCallExp_operationCode_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_OperationCallExp_operationCode_feature", "_UI_OperationCallExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				 ExpressionsPackage.Literals.OPERATION_CALL_EXP__OPERATION_CODE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_OperationCallExp_operationCode_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_OperationCallExp_operationCode_feature", "_UI_OperationCallExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						ExpressionsPackage.Literals.OPERATION_CALL_EXP__OPERATION_CODE,
+						true, false, false,
+						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -132,10 +121,12 @@ public class OperationCallExpItemProvider
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(
+			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT);
+			childrenFeatures
+					.add(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT);
 		}
 		return childrenFeatures;
 	}
@@ -161,7 +152,8 @@ public class OperationCallExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/OperationCallExp")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/OperationCallExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -172,10 +164,9 @@ public class OperationCallExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((OperationCallExp)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_OperationCallExp_type") : //$NON-NLS-1$
-			getString("_UI_OperationCallExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((OperationCallExp) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_OperationCallExp_type") : //$NON-NLS-1$
+				getString("_UI_OperationCallExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -190,12 +181,14 @@ public class OperationCallExpItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(OperationCallExp.class)) {
-			case EcorePackage.OPERATION_CALL_EXP__OPERATION_CODE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case EcorePackage.OPERATION_CALL_EXP__ARGUMENT:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
+		case EcorePackage.OPERATION_CALL_EXP__OPERATION_CODE:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), false, true));
+			return;
+		case EcorePackage.OPERATION_CALL_EXP__ARGUMENT:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), true, false));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -208,228 +201,187 @@ public class OperationCallExpItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createAssociationClassCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createAssociationClassCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createBooleanLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createBooleanLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createCollectionLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createCollectionLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createEnumLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createEnumLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createIfExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createIfExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createIntegerLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createIntegerLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createUnlimitedNaturalLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createUnlimitedNaturalLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createInvalidLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createInvalidLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createIterateExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createIterateExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createIteratorExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createIteratorExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createLetExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createLetExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createMessageExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createMessageExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createNullLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createNullLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createOperationCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createOperationCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createPropertyCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createPropertyCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createRealLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createRealLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createStateExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createStateExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createStringLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createStringLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createTupleLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createTupleLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createTypeExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createTypeExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createUnspecifiedValueExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createUnspecifiedValueExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 EcoreFactory.eINSTANCE.createVariableExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				EcoreFactory.eINSTANCE.createVariableExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createAssociationClassCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createAssociationClassCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createBooleanLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createBooleanLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createCollectionLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createCollectionLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createEnumLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createEnumLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createIfExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createIfExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createIntegerLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createIntegerLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createUnlimitedNaturalLiteralExp()));
+		newChildDescriptors
+				.add(createChildParameter(
+						ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+						ExpressionsFactory.eINSTANCE
+								.createUnlimitedNaturalLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createInvalidLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createInvalidLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createIterateExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createIterateExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createIteratorExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createIteratorExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createLetExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createLetExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createMessageExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createMessageExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createNullLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createNullLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createOperationCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createOperationCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createPropertyCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createPropertyCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createRealLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createRealLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createStateExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createStateExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createStringLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createStringLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createTupleLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createTupleLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createTypeExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createTypeExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createUnspecifiedValueExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createUnspecifiedValueExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
-				 ExpressionsFactory.eINSTANCE.createVariableExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT,
+				ExpressionsFactory.eINSTANCE.createVariableExp()));
 	}
 
 	/**
@@ -439,18 +391,18 @@ public class OperationCallExpItemProvider
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+	public String getCreateChildText(Object owner, Object feature,
+			Object child, Collection<?> selection) {
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify =
-			childFeature == ExpressionsPackage.Literals.CALL_EXP__SOURCE ||
-			childFeature == ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT;
+		boolean qualify = childFeature == ExpressionsPackage.Literals.CALL_EXP__SOURCE
+				|| childFeature == ExpressionsPackage.Literals.OPERATION_CALL_EXP__ARGUMENT;
 
 		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2", //$NON-NLS-1$
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+			return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+					new Object[] { getTypeText(childObject),
+							getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

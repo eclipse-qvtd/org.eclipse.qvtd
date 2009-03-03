@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: ExpressionInOCLItemProvider.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
+ * $Id: ExpressionInOCLItemProvider.java,v 1.3 2009/03/03 09:20:02 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -44,14 +43,9 @@ import org.eclipse.ocl.utilities.UtilitiesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ExpressionInOCLItemProvider
-	extends ItemProviderAdapter
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class ExpressionInOCLItemProvider extends ItemProviderAdapter implements
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -86,13 +80,18 @@ public class ExpressionInOCLItemProvider
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(
+			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION);
-			childrenFeatures.add(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE);
-			childrenFeatures.add(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__RESULT_VARIABLE);
-			childrenFeatures.add(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE);
+			childrenFeatures
+					.add(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION);
+			childrenFeatures
+					.add(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE);
+			childrenFeatures
+					.add(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__RESULT_VARIABLE);
+			childrenFeatures
+					.add(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE);
 		}
 		return childrenFeatures;
 	}
@@ -118,7 +117,8 @@ public class ExpressionInOCLItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ExpressionInOCL")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/ExpressionInOCL")); //$NON-NLS-1$
 	}
 
 	/**
@@ -144,12 +144,13 @@ public class ExpressionInOCLItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ExpressionInOCL.class)) {
-			case EcorePackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
-			case EcorePackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
-			case EcorePackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
-			case EcorePackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
+		case EcorePackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
+		case EcorePackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
+		case EcorePackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
+		case EcorePackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), true, false));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -162,258 +163,213 @@ public class ExpressionInOCLItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createAssociationClassCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createAssociationClassCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createBooleanLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createBooleanLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createCollectionLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createCollectionLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createEnumLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createEnumLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createIfExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createIfExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createIntegerLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createIntegerLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createUnlimitedNaturalLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createUnlimitedNaturalLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createInvalidLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createInvalidLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createIterateExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createIterateExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createIteratorExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createIteratorExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createLetExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createLetExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createMessageExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createMessageExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createNullLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createNullLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createOperationCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createOperationCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createPropertyCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createPropertyCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createRealLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createRealLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createStateExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createStateExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createStringLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createStringLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createTupleLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createTupleLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createTypeExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createTypeExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createUnspecifiedValueExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createUnspecifiedValueExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 EcoreFactory.eINSTANCE.createVariableExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				EcoreFactory.eINSTANCE.createVariableExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createAssociationClassCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createAssociationClassCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createBooleanLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createBooleanLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createCollectionLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createCollectionLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createEnumLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createEnumLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createIfExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createIfExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createIntegerLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createIntegerLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createUnlimitedNaturalLiteralExp()));
+		newChildDescriptors
+				.add(createChildParameter(
+						UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+						ExpressionsFactory.eINSTANCE
+								.createUnlimitedNaturalLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createInvalidLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createInvalidLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createIterateExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createIterateExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createIteratorExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createIteratorExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createLetExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createLetExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createMessageExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createMessageExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createNullLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createNullLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createOperationCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createOperationCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createPropertyCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createPropertyCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createRealLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createRealLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createStateExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createStateExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createStringLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createStringLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createTupleLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createTupleLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createTypeExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createTypeExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createUnspecifiedValueExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createUnspecifiedValueExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createVariableExp()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+				ExpressionsFactory.eINSTANCE.createVariableExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE,
-				 EcoreFactory.eINSTANCE.createVariable()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE,
+				EcoreFactory.eINSTANCE.createVariable()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE,
-				 ExpressionsFactory.eINSTANCE.createVariable()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE,
+				ExpressionsFactory.eINSTANCE.createVariable()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__RESULT_VARIABLE,
-				 EcoreFactory.eINSTANCE.createVariable()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__RESULT_VARIABLE,
+				EcoreFactory.eINSTANCE.createVariable()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__RESULT_VARIABLE,
-				 ExpressionsFactory.eINSTANCE.createVariable()));
+		newChildDescriptors.add(createChildParameter(
+				UtilitiesPackage.Literals.EXPRESSION_IN_OCL__RESULT_VARIABLE,
+				ExpressionsFactory.eINSTANCE.createVariable()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE,
-				 EcoreFactory.eINSTANCE.createVariable()));
+		newChildDescriptors
+				.add(createChildParameter(
+						UtilitiesPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE,
+						EcoreFactory.eINSTANCE.createVariable()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(UtilitiesPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE,
-				 ExpressionsFactory.eINSTANCE.createVariable()));
+		newChildDescriptors
+				.add(createChildParameter(
+						UtilitiesPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE,
+						ExpressionsFactory.eINSTANCE.createVariable()));
 	}
 
 	/**
@@ -423,19 +379,19 @@ public class ExpressionInOCLItemProvider
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+	public String getCreateChildText(Object owner, Object feature,
+			Object child, Collection<?> selection) {
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify =
-			childFeature == UtilitiesPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE ||
-			childFeature == UtilitiesPackage.Literals.EXPRESSION_IN_OCL__RESULT_VARIABLE ||
-			childFeature == UtilitiesPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE;
+		boolean qualify = childFeature == UtilitiesPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE
+				|| childFeature == UtilitiesPackage.Literals.EXPRESSION_IN_OCL__RESULT_VARIABLE
+				|| childFeature == UtilitiesPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE;
 
 		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2", //$NON-NLS-1$
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+			return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+					new Object[] { getTypeText(childObject),
+							getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

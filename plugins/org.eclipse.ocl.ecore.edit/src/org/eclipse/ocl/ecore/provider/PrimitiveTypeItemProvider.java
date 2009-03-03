@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: PrimitiveTypeItemProvider.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
+ * $Id: PrimitiveTypeItemProvider.java,v 1.3 2009/03/03 09:20:02 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -38,14 +37,9 @@ import org.eclipse.ocl.ecore.PrimitiveType;
  * <!-- end-user-doc -->
  * @generated
  */
-public class PrimitiveTypeItemProvider
-	extends EDataTypeItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class PrimitiveTypeItemProvider extends EDataTypeItemProvider implements
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -79,7 +73,8 @@ public class PrimitiveTypeItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/PrimitiveType")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/PrimitiveType")); //$NON-NLS-1$
 	}
 
 	/**
@@ -90,10 +85,9 @@ public class PrimitiveTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((PrimitiveType)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_PrimitiveType_type") : //$NON-NLS-1$
-			getString("_UI_PrimitiveType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((PrimitiveType) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_PrimitiveType_type") : //$NON-NLS-1$
+				getString("_UI_PrimitiveType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -117,7 +111,8 @@ public class PrimitiveTypeItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

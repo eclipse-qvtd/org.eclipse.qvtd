@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: InvalidLiteralExpItemProvider.java,v 1.2 2008/08/24 19:27:47 ewillink Exp $
+ * $Id: InvalidLiteralExpItemProvider.java,v 1.3 2009/03/03 09:20:03 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -36,14 +35,9 @@ import org.eclipse.ocl.ecore.InvalidLiteralExp;
  * <!-- end-user-doc -->
  * @generated
  */
-public class InvalidLiteralExpItemProvider
-	extends LiteralExpItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class InvalidLiteralExpItemProvider extends LiteralExpItemProvider
+		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -77,7 +71,8 @@ public class InvalidLiteralExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/InvalidLiteralExp")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/InvalidLiteralExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -88,10 +83,9 @@ public class InvalidLiteralExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((InvalidLiteralExp)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_InvalidLiteralExp_type") : //$NON-NLS-1$
-			getString("_UI_InvalidLiteralExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((InvalidLiteralExp) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_InvalidLiteralExp_type") : //$NON-NLS-1$
+				getString("_UI_InvalidLiteralExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -115,7 +109,8 @@ public class InvalidLiteralExpItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

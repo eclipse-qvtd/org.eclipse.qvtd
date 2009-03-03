@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: InvalidTypeItemProvider.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
+ * $Id: InvalidTypeItemProvider.java,v 1.3 2009/03/03 09:20:02 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -38,14 +37,9 @@ import org.eclipse.ocl.ecore.InvalidType;
  * <!-- end-user-doc -->
  * @generated
  */
-public class InvalidTypeItemProvider
-	extends EClassifierItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class InvalidTypeItemProvider extends EClassifierItemProvider implements
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -79,7 +73,8 @@ public class InvalidTypeItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/InvalidType")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/InvalidType")); //$NON-NLS-1$
 	}
 
 	/**
@@ -90,10 +85,9 @@ public class InvalidTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((InvalidType)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_InvalidType_type") : //$NON-NLS-1$
-			getString("_UI_InvalidType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((InvalidType) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_InvalidType_type") : //$NON-NLS-1$
+				getString("_UI_InvalidType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -117,7 +111,8 @@ public class InvalidTypeItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

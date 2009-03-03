@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLEcoreEditPlugin.java,v 1.2 2008/08/24 19:27:47 ewillink Exp $
+ * $Id: OCLEcoreEditPlugin.java,v 1.3 2009/03/03 09:20:03 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
 
@@ -51,11 +51,8 @@ public final class OCLEcoreEditPlugin extends EMFPlugin {
 	 * @generated
 	 */
 	public OCLEcoreEditPlugin() {
-		super
-		  (new ResourceLocator [] {
-		     EcoreEditPlugin.INSTANCE,
-		     OCLEditPlugin.INSTANCE,
-		   });
+		super(new ResourceLocator[] { EcoreEditPlugin.INSTANCE,
+				OCLEditPlugin.INSTANCE, });
 	}
 
 	/**

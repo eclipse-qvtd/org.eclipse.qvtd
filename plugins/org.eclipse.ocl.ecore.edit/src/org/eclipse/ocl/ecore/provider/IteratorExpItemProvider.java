@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: IteratorExpItemProvider.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
+ * $Id: IteratorExpItemProvider.java,v 1.3 2009/03/03 09:20:02 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -37,14 +36,9 @@ import org.eclipse.ocl.expressions.ExpressionsPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class IteratorExpItemProvider
-	extends LoopExpItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class IteratorExpItemProvider extends LoopExpItemProvider implements
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -78,7 +72,8 @@ public class IteratorExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IteratorExp")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/IteratorExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -89,10 +84,9 @@ public class IteratorExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((IteratorExp)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_IteratorExp_type") : //$NON-NLS-1$
-			getString("_UI_IteratorExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((IteratorExp) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_IteratorExp_type") : //$NON-NLS-1$
+				getString("_UI_IteratorExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -116,7 +110,8 @@ public class IteratorExpItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -127,18 +122,18 @@ public class IteratorExpItemProvider
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+	public String getCreateChildText(Object owner, Object feature,
+			Object child, Collection<?> selection) {
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify =
-			childFeature == ExpressionsPackage.Literals.CALL_EXP__SOURCE ||
-			childFeature == ExpressionsPackage.Literals.LOOP_EXP__BODY;
+		boolean qualify = childFeature == ExpressionsPackage.Literals.CALL_EXP__SOURCE
+				|| childFeature == ExpressionsPackage.Literals.LOOP_EXP__BODY;
 
 		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2", //$NON-NLS-1$
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+			return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+					new Object[] { getTypeText(childObject),
+							getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

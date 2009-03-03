@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: IterateExpItemProvider.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
+ * $Id: IterateExpItemProvider.java,v 1.3 2009/03/03 09:20:03 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -42,14 +41,9 @@ import org.eclipse.ocl.expressions.ExpressionsPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class IterateExpItemProvider
-	extends LoopExpItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class IterateExpItemProvider extends LoopExpItemProvider implements
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -84,10 +78,12 @@ public class IterateExpItemProvider
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(
+			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ExpressionsPackage.Literals.ITERATE_EXP__RESULT);
+			childrenFeatures
+					.add(ExpressionsPackage.Literals.ITERATE_EXP__RESULT);
 		}
 		return childrenFeatures;
 	}
@@ -113,7 +109,8 @@ public class IterateExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IterateExp")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/IterateExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -124,10 +121,9 @@ public class IterateExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((IterateExp)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_IterateExp_type") : //$NON-NLS-1$
-			getString("_UI_IterateExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((IterateExp) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_IterateExp_type") : //$NON-NLS-1$
+				getString("_UI_IterateExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -142,9 +138,10 @@ public class IterateExpItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(IterateExp.class)) {
-			case EcorePackage.ITERATE_EXP__RESULT:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
+		case EcorePackage.ITERATE_EXP__RESULT:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), true, false));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -157,18 +154,17 @@ public class IterateExpItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ITERATE_EXP__RESULT,
-				 EcoreFactory.eINSTANCE.createVariable()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.ITERATE_EXP__RESULT,
+				EcoreFactory.eINSTANCE.createVariable()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ITERATE_EXP__RESULT,
-				 ExpressionsFactory.eINSTANCE.createVariable()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.ITERATE_EXP__RESULT,
+				ExpressionsFactory.eINSTANCE.createVariable()));
 	}
 
 	/**
@@ -178,20 +174,20 @@ public class IterateExpItemProvider
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+	public String getCreateChildText(Object owner, Object feature,
+			Object child, Collection<?> selection) {
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify =
-			childFeature == ExpressionsPackage.Literals.CALL_EXP__SOURCE ||
-			childFeature == ExpressionsPackage.Literals.LOOP_EXP__BODY ||
-			childFeature == ExpressionsPackage.Literals.LOOP_EXP__ITERATOR ||
-			childFeature == ExpressionsPackage.Literals.ITERATE_EXP__RESULT;
+		boolean qualify = childFeature == ExpressionsPackage.Literals.CALL_EXP__SOURCE
+				|| childFeature == ExpressionsPackage.Literals.LOOP_EXP__BODY
+				|| childFeature == ExpressionsPackage.Literals.LOOP_EXP__ITERATOR
+				|| childFeature == ExpressionsPackage.Literals.ITERATE_EXP__RESULT;
 
 		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2", //$NON-NLS-1$
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+			return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+					new Object[] { getTypeText(childObject),
+							getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

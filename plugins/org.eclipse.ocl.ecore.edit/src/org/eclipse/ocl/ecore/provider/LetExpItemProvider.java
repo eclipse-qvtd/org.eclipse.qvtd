@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: LetExpItemProvider.java,v 1.2 2008/08/24 19:27:46 ewillink Exp $
+ * $Id: LetExpItemProvider.java,v 1.3 2009/03/03 09:20:02 ewillink Exp $
  */
 package org.eclipse.ocl.ecore.provider;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -43,14 +42,9 @@ import org.eclipse.ocl.expressions.ExpressionsPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class LetExpItemProvider
-	extends OCLExpressionItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class LetExpItemProvider extends OCLExpressionItemProvider implements
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -84,19 +78,16 @@ public class LetExpItemProvider
 	 * @generated
 	 */
 	protected void addInPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_LetExp_in_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_LetExp_in_feature", "_UI_LetExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				 ExpressionsPackage.Literals.LET_EXP__IN,
-				 true,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_LetExp_in_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_LetExp_in_feature", "_UI_LetExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						ExpressionsPackage.Literals.LET_EXP__IN, true, false,
+						false, null, null, null));
 	}
 
 	/**
@@ -108,7 +99,8 @@ public class LetExpItemProvider
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(
+			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ExpressionsPackage.Literals.LET_EXP__IN);
@@ -138,7 +130,8 @@ public class LetExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/LetExp")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/LetExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -149,10 +142,9 @@ public class LetExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((LetExp)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_LetExp_type") : //$NON-NLS-1$
-			getString("_UI_LetExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((LetExp) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_LetExp_type") : //$NON-NLS-1$
+				getString("_UI_LetExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -167,10 +159,11 @@ public class LetExpItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(LetExp.class)) {
-			case EcorePackage.LET_EXP__IN:
-			case EcorePackage.LET_EXP__VARIABLE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
+		case EcorePackage.LET_EXP__IN:
+		case EcorePackage.LET_EXP__VARIABLE:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), true, false));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -183,238 +176,195 @@ public class LetExpItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createAssociationClassCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createAssociationClassCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createBooleanLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createBooleanLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createCollectionLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createCollectionLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createEnumLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createEnumLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createIfExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createIfExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createIntegerLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createIntegerLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createUnlimitedNaturalLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createUnlimitedNaturalLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createInvalidLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createInvalidLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createIterateExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createIterateExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createIteratorExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createIteratorExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createLetExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createLetExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createMessageExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createMessageExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createNullLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createNullLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createOperationCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createOperationCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createPropertyCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createPropertyCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createRealLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createRealLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createStateExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createStateExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createStringLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createStringLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createTupleLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createTupleLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createTypeExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createTypeExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createUnspecifiedValueExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createUnspecifiedValueExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 EcoreFactory.eINSTANCE.createVariableExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN, EcoreFactory.eINSTANCE
+						.createVariableExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createAssociationClassCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createAssociationClassCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createBooleanLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createBooleanLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createCollectionLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createCollectionLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createEnumLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createEnumLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createIfExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createIfExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createIntegerLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createIntegerLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createUnlimitedNaturalLiteralExp()));
+		newChildDescriptors
+				.add(createChildParameter(
+						ExpressionsPackage.Literals.LET_EXP__IN,
+						ExpressionsFactory.eINSTANCE
+								.createUnlimitedNaturalLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createInvalidLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createInvalidLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createIterateExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createIterateExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createIteratorExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createIteratorExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createLetExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createLetExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createMessageExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createMessageExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createNullLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createNullLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createOperationCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createOperationCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createPropertyCallExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createPropertyCallExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createRealLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createRealLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createStateExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createStateExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createStringLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createStringLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createTupleLiteralExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createTupleLiteralExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createTypeExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createTypeExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createUnspecifiedValueExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createUnspecifiedValueExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__IN,
-				 ExpressionsFactory.eINSTANCE.createVariableExp()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__IN,
+				ExpressionsFactory.eINSTANCE.createVariableExp()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__VARIABLE,
-				 EcoreFactory.eINSTANCE.createVariable()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__VARIABLE,
+				EcoreFactory.eINSTANCE.createVariable()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LET_EXP__VARIABLE,
-				 ExpressionsFactory.eINSTANCE.createVariable()));
+		newChildDescriptors.add(createChildParameter(
+				ExpressionsPackage.Literals.LET_EXP__VARIABLE,
+				ExpressionsFactory.eINSTANCE.createVariable()));
 	}
 
 }
