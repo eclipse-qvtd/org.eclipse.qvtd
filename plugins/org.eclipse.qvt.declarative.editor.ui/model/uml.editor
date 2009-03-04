@@ -9,7 +9,7 @@
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Constraint">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Constraint.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/Constraint.gif"
         imageProvider="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLImageProvider"
         format="{0}{1}::&lt;???>{3}{4} - {5}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement/name"
