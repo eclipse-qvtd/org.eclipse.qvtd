@@ -199,7 +199,7 @@
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTCorecst#//UnrealizedVariableCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Variable.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/Variable.gif"
         format="{0} : {1}">
       <elements xsi:type="ed:EcoreLabelElement" path="http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifiedCS/identifier"
           end="ecore:EAttribute http://www.eclipse.org/qvt/1.0/QVTcst#//IdentifierCS/value"/>
