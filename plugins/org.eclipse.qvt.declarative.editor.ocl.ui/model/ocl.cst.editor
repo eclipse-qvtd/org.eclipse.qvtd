@@ -20,13 +20,13 @@
     <behavior xsi:type="ed:LabelBehavior"/>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//BooleanLiteralExpCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/BooleanLiteralExp.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/BooleanLiteralExp.gif"
         format="{0}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//BooleanLiteralExpCS/booleanSymbol"/>
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CSTNode">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/VoidType.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/VoidType.gif"
         format="{0}"/>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//ClassifierContextDeclCS">
@@ -40,14 +40,14 @@
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CollectionLiteralExpCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/CollectionLiteralExp.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/CollectionLiteralExp.gif"
         format="{0}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CollectionLiteralExpCS/collectionType"/>
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CollectionLiteralPartCS">
     <behavior xsi:type="ed:OutlineBehavior" hidden="true">
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/CollectionItem.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.edit/icons/full/obj16/CollectionItem.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CollectionLiteralPartCS/expressionCS"/>
       </elements>
@@ -55,18 +55,18 @@
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CollectionRangeCS">
     <behavior xsi:type="ed:OutlineBehavior" hidden="true">
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/FirstCollectionItem.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/FirstCollectionItem.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CollectionLiteralPartCS/expressionCS"/>
       </elements>
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/LastCollectionItem.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/LastCollectionItem.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CollectionRangeCS/lastExpressionCS"/>
       </elements>
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CollectionTypeCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/CollectionType.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/CollectionType.gif"
         format="{0}({1})">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CollectionTypeCS/collectionTypeIdentifier"/>
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CollectionTypeCS/typeCS"/>
@@ -74,7 +74,7 @@
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefCS">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/DefinitionConstraint.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/DefinitionConstraint.gif"
         format="{0}{1}{2}{3}{4}{5}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//InvOrDefCS/simpleNameCS"
           hideIfBlank="true" suffix=": "/>
@@ -100,7 +100,7 @@
     <behavior xsi:type="ed:OutlineBehavior" hidden="true">
       <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefExpressionCS/operationCS"/>
       <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefExpressionCS/variableCS"/>
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ExpressionInOCL.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.edit/icons/full/obj16/ExpressionInOCL.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DefExpressionCS/expressionCS"/>
       </elements>
@@ -108,29 +108,37 @@
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//DerValueCS">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/DerivationConstraint.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/DerivationConstraint.gif"
         format=":"/>
     <behavior xsi:type="ed:OutlineBehavior">
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ExpressionInOCL.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.edit/icons/full/obj16/ExpressionInOCL.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//InitOrDerValueCS/expressionCS"/>
       </elements>
       <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//InitOrDerValueCS/initOrDerValueCS"/>
     </behavior>
   </node>
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//EnumLiteralExpCS">
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/EnumlLiteralExp.gif"
+        format="{0}::{1}">
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//EnumLiteralExpCS/pathNameCS"/>
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//EnumLiteralExpCS/simpleNameCS"/>
+    </behavior>
+    <behavior xsi:type="ed:OutlineBehavior"/>
+  </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//FeatureCallExpCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/PropertyCallExp.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/PropertyCallExp.gif"
         format="{0} {1} {2}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CallExpCS/accessor"/>
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CallExpCS/simpleNameCS"/>
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//FeatureCallExpCS/isMarkedPreCS"/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/OperationSource.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/OperationSource.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CallExpCS/source"/>
       </elements>
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/OperationArgument.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/OperationArgument.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//FeatureCallExpCS/arguments"/>
       </elements>
@@ -138,18 +146,18 @@
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//IfExpCS">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/IfExp.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/IfExp.gif"
         format="if"/>
     <behavior xsi:type="ed:OutlineBehavior">
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ConditionQuery.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/ConditionQuery.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//IfExpCS/condition"/>
       </elements>
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ConditionTrue.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/ConditionTrue.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//IfExpCS/thenExpression"/>
       </elements>
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ConditionFalse.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/ConditionFalse.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//IfExpCS/elseExpression"/>
       </elements>
@@ -157,10 +165,10 @@
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//InitValueCS">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/InitialConstraint.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/InitialConstraint.gif"
         format=":"/>
     <behavior xsi:type="ed:OutlineBehavior">
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ExpressionInOCL.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.edit/icons/full/obj16/ExpressionInOCL.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//InitOrDerValueCS/expressionCS"/>
       </elements>
@@ -168,76 +176,78 @@
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//IntegerLiteralExpCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/IntegerLiteralExp.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/IntegerLiteralExp.gif"
         format="{0}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//IntegerLiteralExpCS/integerSymbol"/>
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//InvCS">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/InvariantConstraint.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/InvariantConstraint.gif"
         format="{0}:">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//InvOrDefCS/simpleNameCS"/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ExpressionInOCL.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.edit/icons/full/obj16/ExpressionInOCL.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//InvCS/expressionCS"/>
       </elements>
     </behavior>
   </node>
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//InvalidLiteralExpCS">
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/InvalidLiteralExp.gif"
+        format="invalid"/>
+  </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//IsMarkedPreCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Constraint.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/Constraint.gif"
         format="pre: {0}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//IsMarkedPreCS/pre"/>
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//IterateExpCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/IterateExp.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/IterateExp.gif"
         format="->iterate"/>
     <behavior xsi:type="ed:OutlineBehavior">
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/OperationSource.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/OperationSource.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CallExpCS/source"/>
       </elements>
       <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//LoopExpCS/variable1"/>
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ResultVariable.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/ResultVariable.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//LoopExpCS/variable2"/>
       </elements>
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/OperationArgument.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/OperationArgument.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//LoopExpCS/body"/>
       </elements>
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//IteratorExpCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/IteratorExp.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/IteratorExp.gif"
         format="-> {0}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CallExpCS/simpleNameCS"/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/OperationSource.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/OperationSource.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CallExpCS/source"/>
       </elements>
       <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//LoopExpCS/variable1"/>
       <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//LoopExpCS/variable2"/>
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/OperationArgument.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/OperationArgument.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//LoopExpCS/body"/>
       </elements>
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//LetExpCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/LetExp.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/LetExp.gif"
         format="let"/>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//NullLiteralExpCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/NullLiteralExp.gif"
-        format="null">
-      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//RealLiteralExpCS/realSymbol"/>
-    </behavior>
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/NullLiteralExp.gif"
+        format="null"/>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//OCLDocumentCS">
     <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/OCLModelFile.gif"
@@ -247,7 +257,7 @@
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//OCLExpressionCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ExpressionInOCL.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/ExpressionInOCL.gif"
         format="OclExpression"/>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//OperationCS">
@@ -270,18 +280,18 @@
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//OperationCallExpCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/OperationCallExp.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/OperationCallExp.gif"
         format="{0} {1} {2}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CallExpCS/accessor"/>
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CallExpCS/simpleNameCS"/>
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//FeatureCallExpCS/isMarkedPreCS"/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/OperationSource.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/OperationSource.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//CallExpCS/source"/>
       </elements>
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/OperationArgument.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/OperationArgument.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//FeatureCallExpCS/arguments"/>
       </elements>
@@ -316,7 +326,7 @@
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//PrePostOrBodyDeclCS">
     <behavior xsi:type="ed:FoldingBehavior"/>
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Constraint.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/Constraint.gif"
         imageProvider="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLImageProvider"
         format="{0} :">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//PrePostOrBodyDeclCS/simpleNameCS"/>
@@ -344,25 +354,37 @@
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//RealLiteralExpCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/RealLiteralExp.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/RealLiteralExp.gif"
         format="{0}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//RealLiteralExpCS/realSymbol"/>
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//SimpleNameCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/SimpleName.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.qvt.declarative.editor.ocl.ui/icons/full/obj16/Label.gif"
         format="{0}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//SimpleNameCS/value"/>
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//StringLiteralExpCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/StringLiteralExp.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/StringLiteralExp.gif"
         format="{0}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//StringLiteralExpCS/stringSymbol"/>
     </behavior>
   </node>
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//TupleLiteralExpCS">
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/TupleLiteralExp.gif"/>
+  </node>
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//TupleTypeCS">
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/TupleType.gif"/>
+  </node>
+  <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//UnlimitedNaturalLiteralExpCS">
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/UnlimitedNaturalLiteralExp.gif"
+        format="{0}">
+      <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//UnlimitedNaturalLiteralExpCS/integerSymbol"/>
+    </behavior>
+  </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//VariableCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Variable.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/Variable.gif"
         format="{0} : {1}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EAttribute http://www.eclipse.org/ocl/1.1.0/OCL/CST#//VariableCS/name"/>
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//VariableCS/typeCS"/>
@@ -374,7 +396,7 @@
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/ocl/1.1.0/OCL/CST#//VariableExpCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Variable.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/Variable.gif"
         format="{0}{1}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//VariableExpCS/simpleNameCS"/>
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/ocl/1.1.0/OCL/CST#//VariableExpCS/isMarkedPreCS"/>
