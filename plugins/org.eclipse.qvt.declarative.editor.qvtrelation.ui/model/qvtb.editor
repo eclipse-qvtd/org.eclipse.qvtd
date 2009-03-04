@@ -19,7 +19,7 @@
       <elements xsi:type="ed:OutlineGroup" name="" hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/emf/2002/Ecore#//EOperation/eParameters"/>
       </elements>
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ExpressionInOCL.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.edit/icons/full/obj16/ExpressionInOCL.gif"
           name="" hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTBase#//Function/queryExpression"/>
       </elements>
@@ -50,7 +50,7 @@
           separator=" ,"/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior" hidden="true">
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ConditionQuery.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.edit/icons/full/obj16/ConditionQuery.gif"
           name="" hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTBase#//Predicate/conditionExpression"/>
       </elements>

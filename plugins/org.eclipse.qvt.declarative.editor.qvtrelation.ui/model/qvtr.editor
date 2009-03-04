@@ -32,7 +32,7 @@
           hideIfBlank="true" prefix=" -> "/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Variable.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.edit/icons/full/obj16/Variable.gif"
           name="variables:">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTRelation#//Relation/variable"/>
       </elements>
@@ -133,7 +133,7 @@
           hideIfBlank="true" prefix=" ++ " separator=""/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ConditionQuery.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.edit/icons/full/obj16/ConditionQuery.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTTemplate#//TemplateExp/where"/>
       </elements>
@@ -149,7 +149,7 @@
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/ConditionQuery.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.edit/icons/full/obj16/ConditionQuery.gif"
           hidden="true">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTTemplate#//TemplateExp/where"/>
       </elements>
@@ -282,7 +282,7 @@
           hideIfBlank="true" prefix=" -> "/>
     </behavior>
     <behavior xsi:type="ed:OutlineBehavior">
-      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Variable.gif"
+      <elements xsi:type="ed:OutlineGroup" image="/org.eclipse.ocl.edit/icons/full/obj16/Variable.gif"
           name="variables:">
         <elements xsi:type="ed:OutlineElement" feature="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTRelationcst#//RelationCS/varDeclaration"/>
       </elements>
@@ -324,7 +324,7 @@
     </behavior>
   </node>
   <node xsi:type="ed:EcoreNode" element="ecore:EClass http://www.eclipse.org/qvt/1.0/QVTRelationcst#//VarDeclarationCS">
-    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.ecore.edit/icons/full/obj16/Variable.gif"
+    <behavior xsi:type="ed:LabelBehavior" image="/org.eclipse.ocl.edit/icons/full/obj16/Variable.gif"
         format="{0} : {1}">
       <elements xsi:type="ed:EcoreLabelElement" end="ecore:EReference http://www.eclipse.org/qvt/1.0/QVTRelationcst#//VarDeclarationCS/varDeclarationId"
           separator=","/>
