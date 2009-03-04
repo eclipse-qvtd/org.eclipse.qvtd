@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLTextProvider.java,v 1.1 2008/12/05 22:19:56 ewillink Exp $
+ * $Id: OCLTextProvider.java,v 1.2 2009/03/04 19:36:24 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui.imp;
 
@@ -28,6 +28,8 @@ public class OCLTextProvider implements TextProvider
 		if (object instanceof OperationCallExp) {
 			OperationCallExp operationCallExp = (OperationCallExp) object;
 			OCLExpression<EClassifier> source = operationCallExp.getSource();
+			if (source == null)
+				return "";
 			EClassifier type = source.getType();
 			if (type instanceof CollectionType)
 				return "->";
