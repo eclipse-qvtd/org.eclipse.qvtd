@@ -124,7 +124,6 @@ public class ModelParameterConfiguration implements LaunchConfigChangeNotifier {
 		newModelButton.setEnabled(isTarget()|| isTrace());
 
 		targetButton.addSelectionListener(new SelectionListener(){
-			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (targetButton.getSelection()) {
 					setAsTarget();
@@ -134,26 +133,22 @@ public class ModelParameterConfiguration implements LaunchConfigChangeNotifier {
 				}
 			}
 		
-			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {}
 		});
 	}
 
-	@Override
 	public void addLaunchConfigChangeListener(
 			LaunchConfigChangeListener listener) {
 		launchConfigChangeListeners.add(listener);
 		
 	}
 
-	@Override
 	public void notifyLaunchConfigChangeListener() {
 		for (LaunchConfigChangeListener listener : launchConfigChangeListeners) {
 			listener.launchConfigChanged();
 		}
 	}
 
-	@Override
 	public void removeLaunchConfigChangeListener(
 			LaunchConfigChangeListener listener) {
 		launchConfigChangeListeners.remove(listener);

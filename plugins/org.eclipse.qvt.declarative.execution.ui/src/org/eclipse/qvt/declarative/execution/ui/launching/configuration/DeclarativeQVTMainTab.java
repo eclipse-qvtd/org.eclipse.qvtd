@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: DeclarativeQVTMainTab.java,v 1.6 2009/02/24 16:54:01 qglineur Exp $
+ * $Id: DeclarativeQVTMainTab.java,v 1.7 2009/03/05 14:39:23 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.execution.ui.launching.configuration;
 
@@ -69,7 +69,6 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 
 	protected final LaunchConfigChangeListener launchConfigurationDialogUpdater = new LaunchConfigChangeListener() {
 
-		@Override
 		public void launchConfigChanged() {
 			updateLaunchConfigurationDialog();
 		}
@@ -316,7 +315,7 @@ public class DeclarativeQVTMainTab extends AbstractLaunchConfigurationTab {
 					qvtProjectList.add(project);
 				}
 			} catch (CoreException e) {
-
+				//TODO
 			}
 		}
 		return qvtProjectList.toArray(new IProject[] {});
