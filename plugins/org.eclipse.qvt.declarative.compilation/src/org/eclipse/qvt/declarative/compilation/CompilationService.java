@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: CompilationService.java,v 1.9 2008/10/09 17:21:10 qglineur Exp $
+ * $Id: CompilationService.java,v 1.10 2009/03/05 14:42:17 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.compilation;
 
@@ -49,10 +49,8 @@ public class CompilationService extends Service implements CompilationProvider {
 	}
 
 	public List<File> compile(Object abstractSyntaxTree,
-			Map<String, String> parameters, List<File> sourceFolders,
-			File binFolder) throws Exception {
-		return execute(new CompileOperation(abstractSyntaxTree, parameters,
-				sourceFolders, binFolder));
+			Map<String, String> parameters) throws Exception {
+		return execute(new CompileOperation(abstractSyntaxTree, parameters));
 	}
 
 	@SuppressWarnings("unchecked")

@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: CompilationProvider.java,v 1.9 2008/10/09 17:21:10 qglineur Exp $
+ * $Id: CompilationProvider.java,v 1.10 2009/03/05 14:42:17 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.compilation;
 
@@ -40,18 +40,10 @@ public interface CompilationProvider extends Provider {
 	 *            A representation of the abstract syntax tree.
 	 * @param parameters
 	 *            A map associating a property name to a string value so that
-	 *            the compilation can be parametrized.
-	 * @param sourceFolders
-	 *            The folders considered as the repository of textual
-	 *            transformations (handy for base namespace).
-	 * @param binFolder
-	 *            The folder considered as the repository of executable
-	 *            transformation (where to write the compiled file).
+	 *            the compilation can be parameterized.
 	 * @return The list of file resulting from the compilation.
 	 * @throws Exception
 	 */
 	public List<File> compile(Object abstractSyntaxTree,
-			Map<String, String> parameters, List<File> sourceFolders,
-			File binFolder) throws Exception;
-
+			Map<String, String> parameters) throws Exception;
 }
