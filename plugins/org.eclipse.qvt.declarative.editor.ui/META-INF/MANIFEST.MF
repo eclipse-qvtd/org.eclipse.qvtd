@@ -15,7 +15,6 @@ Require-Bundle: org.eclipse.jface.text;visibility:=reexport,
  org.eclipse.qvt.declarative.editor.model;visibility:=reexport,
  org.eclipse.qvt.declarative.parser;visibility:=reexport,
  org.eclipse.qvt.declarative.parser.ui;visibility:=reexport,
- org.eclipse.imp.smapifier;visibility:=reexport,
  org.eclipse.jdt.core;visibility:=reexport,
  org.eclipse.jdt.ui;visibility:=reexport,
  org.eclipse.qvt.declarative.compilation.ide
