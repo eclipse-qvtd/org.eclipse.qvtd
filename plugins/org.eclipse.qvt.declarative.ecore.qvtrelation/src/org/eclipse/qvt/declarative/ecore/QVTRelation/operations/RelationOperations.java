@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RelationOperations.java,v 1.2 2009/01/14 21:02:27 ewillink Exp $
+ * $Id: RelationOperations.java,v 1.3 2009/03/05 22:04:41 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.operations;
 
@@ -82,7 +82,7 @@ public class RelationOperations extends AbstractQVTRelationOperations
 		List<TypedModel> modelParameters = rule.getTransformation().getModelParameter();
 		int domainCount = domains.size();
 		int modelParameterCount = modelParameters.size();
-		if (domainCount != modelParameterCount) {
+		if (domainCount < modelParameterCount) {
 			Object[] messageSubstitutions = new Object[] { domainCount, getObjectLabel(rule, context), modelParameterCount };
 			appendError(diagnostics, rule, QVTRelationMessages._UI_Relation_DomainTypedModelsDoNotMatchModelParameters, messageSubstitutions);
 			return false;
@@ -90,17 +90,24 @@ public class RelationOperations extends AbstractQVTRelationOperations
 		boolean allOk = true;
 		for (int i = 0; i < domainCount; i++)
 		{
-			TypedModel modelParameter = modelParameters.get(i);
 			Domain domain = domains.get(i);
 			TypedModel typedModel = domain.getTypedModel();
-			if (typedModel == null)
-				continue;			// Multiplicity error
-			if (typedModel != modelParameter) {
-				if (!modelParameters.contains(typedModel))
-					continue;		// Domain consistency error
-				Object[] messageSubstitutions = new Object[] { getObjectLabel(domain, context), getObjectLabel(modelParameter, context) };
-				appendError(diagnostics, rule, QVTRelationMessages._UI_Relation_DomainTypedModelIsNotModelParameter, messageSubstitutions);
+			if (i < modelParameterCount) {
+				TypedModel modelParameter = modelParameters.get(i);
+				if (typedModel == null)
+					continue;			// Multiplicity error
+				if (typedModel != modelParameter) {
+					if (!modelParameters.contains(typedModel))
+						continue;		// Domain consistency error
+					Object[] messageSubstitutions = new Object[] { getObjectLabel(domain, context), getObjectLabel(modelParameter, context) };
+					appendError(diagnostics, rule, QVTRelationMessages._UI_Relation_DomainTypedModelIsNotModelParameter, messageSubstitutions);
+					allOk = false;
+				}
+			} else if (typedModel != null) {
+				Object[] messageSubstitutions = new Object[] { getObjectLabel(domain, context) };
+				appendError(diagnostics, rule, QVTRelationMessages._UI_Relation_DomainWithoutModelParameterMustBePrimitive, messageSubstitutions);
 				allOk = false;
+				
 			}
 		}
 		return allOk;

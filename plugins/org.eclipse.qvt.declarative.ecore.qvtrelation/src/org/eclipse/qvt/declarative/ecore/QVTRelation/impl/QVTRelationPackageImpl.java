@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationPackageImpl.java,v 1.7 2009/01/14 21:02:27 ewillink Exp $
+ * $Id: QVTRelationPackageImpl.java,v 1.8 2009/03/05 22:04:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.impl;
 
@@ -714,7 +714,7 @@ public class QVTRelationPackageImpl extends EPackageImpl implements QVTRelationP
 		  (relationDomainEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "WellFormedName\r\nPrimitiveDomainIsUnnamed\r\nRootVariableIsDefinedByRelation\r\nRootVariableTypeIsDeclaredByDomainTypedModel\r\nEveryEnforceableVariableIsMatchedOrAssigned\r\n"
+			 "constraints", "WellFormedName\r\nTypedModelExistsWarning\r\nPrimitiveDomainIsUnnamed\r\nRootVariableIsDefinedByRelation\r\nRootVariableTypeIsDeclaredByDomainTypedModel\r\nEveryEnforceableVariableIsMatchedOrAssigned\r\n"
 		   });			
 		addAnnotation
 		  (relationDomainAssignmentEClass, 

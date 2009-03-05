@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationMessages.java,v 1.2 2009/01/14 21:02:27 ewillink Exp $
+ * $Id: QVTRelationMessages.java,v 1.3 2009/03/05 22:04:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.operations;
 import org.eclipse.osgi.util.NLS;
@@ -32,6 +32,7 @@ public class QVTRelationMessages extends NLS
 	public static String _UI_Relation_DomainIsNotARelationDomain;
 	public static String _UI_Relation_DomainTypedModelIsNotModelParameter;
 	public static String _UI_Relation_DomainTypedModelsDoNotMatchModelParameters;
+	public static String _UI_Relation_DomainWithoutModelParameterMustBePrimitive;
 	public static String _UI_Relation_ImplIsNotUnique;
 	public static String _UI_Relation_LessThanTwoDomains;
 	public static String _UI_Relation_VariableNameIsNotUnique;

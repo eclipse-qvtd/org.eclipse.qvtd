@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationValidator.java,v 1.6 2009/01/14 21:02:27 ewillink Exp $
+ * $Id: QVTRelationValidator.java,v 1.7 2009/03/05 22:04:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.util;
 
@@ -450,7 +450,7 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationDomain_WellFormedName(relationDomain, diagnostics, context);
-		if (result || diagnostics != null) result &= qvtBaseValidator.validateDomain_TypedModelExistsWarning(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationDomain_TypedModelExistsWarning(relationDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateDomain_TypedModelDefinedByTransformation(relationDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= qvtBaseValidator.validateDomain_CheckableOrEnforceable(relationDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationDomain_PrimitiveDomainIsUnnamed(relationDomain, diagnostics, context);
@@ -468,6 +468,14 @@ public class QVTRelationValidator extends EObjectValidator implements EValidator
 		if (relationDomain.getPattern() == null)
 			return true;
 		return ecoreValidator.validateENamedElement_WellFormedName(relationDomain, diagnostics, context);
+	}
+
+	/**
+	 * Validates the TypedModelExistsWarning constraint of '<em>Relation Domain</em>'.
+	 * @generated NOT
+	 */
+	public boolean validateRelationDomain_TypedModelExistsWarning(RelationDomain relationDomain, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;		// Primitive Domains have null typed model
 	}
 
 	/**
