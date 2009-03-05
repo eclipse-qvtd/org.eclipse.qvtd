@@ -12,14 +12,12 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: ATLVMCompiler.java,v 1.21 2009/03/05 14:42:21 qglineur Exp $
+ * $Id: ATLVMCompiler.java,v 1.22 2009/03/05 18:06:12 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,7 +29,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -57,8 +57,6 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
 import org.eclipse.qvt.declarative.relations.atlvm.relationsToTraceClass.RelationsToTraceClassPackage;
-import org.eclipse.qvt.declarative.relations.atlvm.runner.ATLVMCodeJavaRunnerWriter;
-import org.eclipse.qvt.declarative.relations.atlvm.runner.ATLVMCodeJavaRunnerWriterParameters;
 import org.eclipse.qvt.declarative.relations.atlvm.utils.ASMUtils;
 import org.osgi.framework.Bundle;
 
@@ -78,8 +76,6 @@ public class ATLVMCompiler implements CompilationProvider {
 	private static final ASM RELATION_TO_TRACE_CLASS;
 
 	private static final String DEFAULT_DEBUGGER_PROPERTIES_LOCATION = "debugger.properties.xml"; //$NON-NLS-1$
-
-	private static final String DEFAULT_COMPILATION_PARAMETERS_LOCATION = "resources/compilation.parameters.xml"; //$NON-NLS-1$
 
 	protected static final String EXECUTABLE_SUFFIX = "asm"; //$NON-NLS-1$
 
@@ -106,7 +102,6 @@ public class ATLVMCompiler implements CompilationProvider {
 
 	private static final Debugger DEFAULT_DEBUGGER;
 
-	private static final Properties DEFAULT_COMPILATION_PARAMETERS;
 
 	private static final ASMModel QVTR_METAMODEL;
 
@@ -115,7 +110,6 @@ public class ATLVMCompiler implements CompilationProvider {
 		COMPILER_ASM = loadQVTRCompiler();
 		PROBLEM_METAMODEL = loadProblemMetamodel();
 		DEFAULT_DEBUGGER = createDefaultDebugger();
-		DEFAULT_COMPILATION_PARAMETERS = loadDefaultCompilationProperties();
 		QVTR_METAMODEL = loadQVTRMetamodel();
 		RELATION_TO_TRACE_CLASS = loadRelationToTraceClass();
 	}
@@ -220,35 +214,21 @@ public class ATLVMCompiler implements CompilationProvider {
 		return result;
 	}
 
-	/**
-	 * Load the default compilation properties.
-	 */
-	private static Properties loadDefaultCompilationProperties() {
-		Bundle bundle = Activator.getDefault().getBundle();
-		Properties compilationParameters = new Properties();
-		URL compilationParametersUrl = FileLocator
-				.find(bundle,
-						new Path(DEFAULT_COMPILATION_PARAMETERS_LOCATION),
-						Collections.EMPTY_MAP);
-		try {
-			compilationParameters.loadFromXML(compilationParametersUrl
-					.openStream());
-		} catch (InvalidPropertiesFormatException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return compilationParameters;
-	}
-
 	protected String getDefaultExecutablePath(
 			URI relativeAbstractSyntaxTreeURI, String direction) {
 
-		// URI result = relativeAbstractSyntaxTreeURI.resolve(binFolderURI);
-		URI result = relativeAbstractSyntaxTreeURI.trimFileExtension()
+		URI executableURI = relativeAbstractSyntaxTreeURI.trimFileExtension()
 				.appendFileExtension(direction).appendFileExtension(
 						EXECUTABLE_SUFFIX);
-		return result.toFileString();
+		if (executableURI.isPlatformResource()) {
+			IPath workspacePath = ResourcesPlugin.getWorkspace().getRoot().getLocation();
+			IPath executablePath = workspacePath.append(new Path(executableURI.toPlatformString(true)));
+			return executablePath.toString();
+		}
+		if (executableURI.isFile()) {
+			return executableURI.toFileString();
+		}
+		return null;
 	}
 
 	protected ASMModel createProblemModelFor(Resource abstractSyntaxTree)
@@ -265,7 +245,6 @@ public class ATLVMCompiler implements CompilationProvider {
 			URI relativeAbstractSyntaxTreeURI,
 			final Map<String, String> parameters, String direction) {
 		Properties effectiveParameters = new Properties();
-		effectiveParameters.putAll(DEFAULT_COMPILATION_PARAMETERS);
 		effectiveParameters.putAll(parameters);
 
 		if (!effectiveParameters.containsKey(OUT_FILE_PARAMETER_NAME)) {
@@ -403,17 +382,12 @@ public class ATLVMCompiler implements CompilationProvider {
 
 	protected List<String> getDirections(Resource resource) {
 		List<String> result = new ArrayList<String>();
-		List<EObject> contents = resource.getContents();
-		if (!contents.isEmpty()) {
-			if (contents.get(0) instanceof RelationalTransformation) {
-				RelationalTransformation relationalTransformation = (RelationalTransformation) contents
-						.get(0);
-				for (TypedModel typedModel : relationalTransformation
-						.getModelParameter()) {
-					result.add(typedModel.getName());
-				}
-				return result;
+		RelationalTransformation relationalTransformation = getTransformation(resource);
+		if (relationalTransformation != null) {
+			for (TypedModel typedModel : relationalTransformation.getModelParameter()) {
+				result.add(typedModel.getName());
 			}
+			return result;
 		}
 		return null;
 	}
@@ -434,37 +408,15 @@ public class ATLVMCompiler implements CompilationProvider {
 		}
 	}
 
-	protected void createJavaLauncher(Resource abstractSyntaxTreeResource,
-			URI sourceFolderURI) throws IOException {
-		String javaLoaderSourcePath = abstractSyntaxTreeResource.getURI()
-				.trimSegments(1).appendSegment(
-						getClassName(abstractSyntaxTreeResource))
-				.appendFileExtension("java").toFileString();
-		File javaLoaderSourceFile = new File(javaLoaderSourcePath);
-		javaLoaderSourceFile.createNewFile();
-		BufferedWriter writer = new BufferedWriter(new FileWriter(
-				javaLoaderSourceFile));
-		ATLVMCodeJavaRunnerWriterParameters writerParameters = new ATLVMCodeJavaRunnerWriterParameters(
-				abstractSyntaxTreeResource, sourceFolderURI);
-		ATLVMCodeJavaRunnerWriter javaRunnerWriter = new ATLVMCodeJavaRunnerWriter();
-		String content = javaRunnerWriter.generate(writerParameters);
-		writer.write(content);
-		writer.close();
-	}
-
-	protected RelationalTransformation getTransformation(Resource resource) {
-		EObject eObject = resource.getContents().get(0);
-		if (eObject instanceof RelationalTransformation) {
-			return (RelationalTransformation) eObject;
+	private RelationalTransformation getTransformation(Resource resource) {
+		List<EObject> contents = resource.getContents();
+		if (!contents.isEmpty()) {
+			EObject eObject = resource.getContents().get(0);
+			if (eObject instanceof RelationalTransformation) {
+				return (RelationalTransformation) eObject;
+			}
 		}
 		return null;
-	}
-
-	protected String getClassName(Resource abstractSyntaxTreeResource) {
-		RelationalTransformation transformation = getTransformation(abstractSyntaxTreeResource);
-		String unformatedName = transformation.getName();
-		return unformatedName.substring(0, 1).toUpperCase()
-				+ unformatedName.substring(1);
 	}
 
 	/*
@@ -480,11 +432,7 @@ public class ATLVMCompiler implements CompilationProvider {
 			Object source = compileOperation.getSource();
 			if (source instanceof Resource) {
 				Resource resource = (Resource) source;
-				boolean contentIsValid = false;
-				if (!resource.getContents().isEmpty()) {
-					EObject eObject = resource.getContents().get(0);
-					contentIsValid = eObject instanceof RelationalTransformation;
-				}
+				boolean contentIsValid = getTransformation(resource) != null;
 				return contentIsValid;
 			}
 		}
