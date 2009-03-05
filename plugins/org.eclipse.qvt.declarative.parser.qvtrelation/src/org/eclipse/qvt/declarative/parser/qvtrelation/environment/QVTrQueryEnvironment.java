@@ -76,6 +76,8 @@ public class QVTrQueryEnvironment extends QVTrEnvironment<QVTrTransformationEnvi
 			analyzerError(message, "queryCS", cstNode);
 		}
 		query = match;
+		initASTMapping(query, cst);
+		cst.getPathName().setAst(query);
 		if (((QueryCS)cstNode).getOclExpression() != null) {
 			if (query.getQueryExpression() != null) {
 				String message = "Redefinition of '" + formatName(query) + "' ignored";
