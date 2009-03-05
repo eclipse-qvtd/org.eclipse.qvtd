@@ -61,4 +61,8 @@
     <entry accessor="qvtrelation" kind="Model Name" uri="QVT.ecore#QVTRelation"/>
     <entry accessor="qvttemplate" kind="Model Name" uri="QVT.ecore#QVTTemplate"/>
   </resource>
+  <resource name="UmlToRdbms.qvtr">
+    <entry accessor="rdbmsMM" kind="Model Name" uri="rdbmsMM.emof"/>
+    <entry accessor="umlMM" kind="Model Name" uri="umlMM.emof"/>
+  </resource>
 </mreg:ModelRegistrySettings>

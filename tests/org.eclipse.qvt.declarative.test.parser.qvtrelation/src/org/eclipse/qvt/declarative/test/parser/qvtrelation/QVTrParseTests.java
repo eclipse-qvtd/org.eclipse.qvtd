@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTrParseTests.java,v 1.8 2009/01/14 21:27:56 ewillink Exp $
+ * $Id: QVTrParseTests.java,v 1.9 2009/03/05 22:02:15 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.parser.qvtrelation;
 
@@ -63,6 +63,10 @@ public class QVTrParseTests extends AbstractQVTrTestCase
 	public void testParseQvtrelation_SeqToStm() throws IOException, CoreException, MappingConfigurationException {
 		asEMOF = true;
 		parserTest("SeqToStm", null);
+	}
+	
+	public void testParseEqvtRelation_UmlToRdbms() throws IOException, CoreException, MappingConfigurationException {
+		parserTest("UmlToRdbms", null);
 	}
 	
 	public void testParseEqvtRelation_expressions() throws IOException, CoreException, MappingConfigurationException {
