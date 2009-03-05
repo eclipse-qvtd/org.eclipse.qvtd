@@ -288,11 +288,12 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 			}
 		}
 		for (Domain domain : relationEnv.getASTNode().getDomain()) {
+			boolean isPrimitive = domain.getTypedModel() == null;
 			boolean isCheckonly = domain.isIsCheckable();
 			boolean isEnforced = domain.isIsEnforceable();
-			if (!explicitCheckonly && !isEnforced)
+			if (isPrimitive || (!explicitCheckonly && !isEnforced))
 				domain.setIsCheckable(true);
-			if (!explicitEnforce && !isCheckonly)
+			if (isPrimitive || (!explicitEnforce && !isCheckonly))
 				domain.setIsEnforceable(true);
 		}
 	}
@@ -307,9 +308,9 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 			return;
 		}
 		for (int i = 0; i < invokedCount; i++) {
-			@SuppressWarnings("null")
+//			@SuppressWarnings("null")
 			RelationDomain domain = (RelationDomain) invokedDomains.get(i);
-			@SuppressWarnings("null")
+//			@SuppressWarnings("null")
 			OCLExpressionCS argument = invokingArguments.get(i);
 			if (argument instanceof VariableExpCS)
 				env.createVariableDeclaration((VariableExpCS) argument, domain.getRootVariable().getType(), domain, true);
