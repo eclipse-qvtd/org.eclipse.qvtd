@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.11 2009/01/14 20:46:39 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.12 2009/03/05 14:42:19 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -154,12 +154,8 @@ public abstract class CommonBuilder extends BuilderBase
 				resource.save(null);
 			}
 			//
-			File astFile = getProject().getWorkspace().getRoot().getFile(workspaceRelativeOutputPath).getLocation().toFile();
 			Map<String, String> parameters = new HashMap<String, String>();
-			List<File> srcFolders = getSourceFolders(projectRelativeInputPath);
-			File binFolder = astFile.getParentFile();
-			CompilationService.getInstance().compile(astFile, parameters, srcFolders, binFolder);	// FIXME Resolve dependency
-			//
+			CompilationService.getInstance().compile(resource, parameters);	// FIXME Resolve dependency
 			doRefresh(outputFile.getParent());
 		} catch (Exception e) {
 			getPlugin().logException("Failed to compile '" + inputFile.toString() + "'", e);
