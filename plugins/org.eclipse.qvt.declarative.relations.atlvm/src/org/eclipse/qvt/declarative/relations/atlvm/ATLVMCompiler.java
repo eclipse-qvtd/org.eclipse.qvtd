@@ -12,7 +12,7 @@
  * Contributors:
  *     Quentin Glineur - initial API and implementation
  *
- * $Id: ATLVMCompiler.java,v 1.20 2009/02/23 18:14:57 qglineur Exp $
+ * $Id: ATLVMCompiler.java,v 1.21 2009/03/05 14:42:21 qglineur Exp $
  */
 package org.eclipse.qvt.declarative.relations.atlvm;
 
@@ -36,8 +36,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.atl.drivers.emf4atl.ASMEMFModel;
 import org.eclipse.m2m.atl.drivers.emf4atl.EMFModelLoader;
 import org.eclipse.m2m.atl.engine.vm.ASM;
@@ -74,9 +72,9 @@ import org.osgi.framework.Bundle;
 public class ATLVMCompiler implements CompilationProvider {
 
 	private static final String COMPILER_ASM_LOCATION = "resources/QVTR.asm"; //$NON-NLS-1$
-	
+
 	private static final String TRACE_CLASS_ASM_LOCATION = "resources/RelationsToTraceClass.asm"; //$NON-NLS-1$
-	
+
 	private static final ASM RELATION_TO_TRACE_CLASS;
 
 	private static final String DEFAULT_DEBUGGER_PROPERTIES_LOCATION = "debugger.properties.xml"; //$NON-NLS-1$
@@ -111,7 +109,7 @@ public class ATLVMCompiler implements CompilationProvider {
 	private static final Properties DEFAULT_COMPILATION_PARAMETERS;
 
 	private static final ASMModel QVTR_METAMODEL;
-	
+
 	static {
 		// static initializations
 		COMPILER_ASM = loadQVTRCompiler();
@@ -149,19 +147,22 @@ public class ATLVMCompiler implements CompilationProvider {
 		ASMModel model = null;
 		try {
 			EMFModelLoader emfModelLoader = new EMFModelLoader();
-			model = emfModelLoader.loadModel("QVTR", emfModelLoader.getMOF(), URI.createURI(QVTRelationPackage.eNS_URI));
+			model = emfModelLoader.loadModel("QVTR", emfModelLoader.getMOF(),
+					URI.createURI(QVTRelationPackage.eNS_URI));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return model;
 	}
-	
+
 	private static ASMModel loadProblemMetamodel() {
 		ASMModel model = null;
 		try {
 			EMFModelLoader emfModelLoader = new EMFModelLoader();
-			model = emfModelLoader.loadModel(ProblemsPackage.eNAME, emfModelLoader.getMOF(), URI.createURI(ProblemsPackage.eNS_URI));
+			model = emfModelLoader.loadModel(ProblemsPackage.eNAME,
+					emfModelLoader.getMOF(), URI
+							.createURI(ProblemsPackage.eNS_URI));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -241,12 +242,12 @@ public class ATLVMCompiler implements CompilationProvider {
 	}
 
 	protected String getDefaultExecutablePath(
-			URI relativeAbstractSyntaxTreeURI, String direction,
-			URI binFolderURI) {
+			URI relativeAbstractSyntaxTreeURI, String direction) {
 
-		URI result = relativeAbstractSyntaxTreeURI.resolve(binFolderURI);
-		result = result.trimFileExtension().appendFileExtension(direction)
-				.appendFileExtension(EXECUTABLE_SUFFIX);
+		// URI result = relativeAbstractSyntaxTreeURI.resolve(binFolderURI);
+		URI result = relativeAbstractSyntaxTreeURI.trimFileExtension()
+				.appendFileExtension(direction).appendFileExtension(
+						EXECUTABLE_SUFFIX);
 		return result.toFileString();
 	}
 
@@ -255,76 +256,84 @@ public class ATLVMCompiler implements CompilationProvider {
 		URI abstractSyntaxTreeURI = abstractSyntaxTree.getURI();
 		String problemFileName = abstractSyntaxTreeURI.trimFileExtension()
 				.appendFileExtension(PROBLEM_MODEL_FILE_EXTENSION).toString();
-		return new EMFModelLoader().newModel(PROBLEM_MODEL_NAME, problemFileName,
-				PROBLEM_METAMODEL);
+		return new EMFModelLoader().newModel(PROBLEM_MODEL_NAME,
+				problemFileName, PROBLEM_METAMODEL);
 
 	}
 
 	protected Properties createCompilationsProperties(
 			URI relativeAbstractSyntaxTreeURI,
-			final Map<String, String> parameters, String direction,
-			URI binFolderURI) {
+			final Map<String, String> parameters, String direction) {
 		Properties effectiveParameters = new Properties();
 		effectiveParameters.putAll(DEFAULT_COMPILATION_PARAMETERS);
 		effectiveParameters.putAll(parameters);
 
 		if (!effectiveParameters.containsKey(OUT_FILE_PARAMETER_NAME)) {
 			String executablePath = getDefaultExecutablePath(
-					relativeAbstractSyntaxTreeURI, direction, binFolderURI);
+					relativeAbstractSyntaxTreeURI, direction);
 			effectiveParameters.put(OUT_FILE_PARAMETER_NAME, executablePath);
 		}
 		return effectiveParameters;
 	}
 
-	protected URI[] getSplittedSourceURI(File binFolder,
-			File sourceFile) {
+	protected URI[] getSplittedSourceURI(File binFolder, File sourceFile) {
 		URI sourceFileURI = URI.createFileURI(sourceFile.getAbsolutePath());
 		URI currentFolderURI = URI.createURI("./");
 		URI relativeURI = null;
-		
-			URI folderURI = URI.createFileURI(binFolder.getAbsolutePath())
-					.appendSegment("");
-			relativeURI = sourceFileURI.replacePrefix(folderURI,
-					currentFolderURI);
-			if (relativeURI != null) {
-				return new URI[] { folderURI, relativeURI };
-			}
-		
+
+		URI folderURI = URI.createFileURI(binFolder.getAbsolutePath())
+				.appendSegment("");
+		relativeURI = sourceFileURI.replacePrefix(folderURI, currentFolderURI);
+		if (relativeURI != null) {
+			return new URI[] { folderURI, relativeURI };
+		}
+
 		return new URI[] { null, null };
 	}
 
-	private ASMModel loadModelForTraceClassTransformation (ASMExecEnv env, File relationsTransformation) throws IOException {
-		
-		URI transfoURI = URI.createFileURI(relationsTransformation.getAbsolutePath());
+	private ASMModel loadModelForTraceClassTransformation(ASMExecEnv env,
+			Resource relationsTransformation) throws IOException {
+
+		URI transfoURI = relationsTransformation.getURI();
 		EMFModelLoader modelLoader = new EMFModelLoader();
-		
-		ASMModel tracebilityMetamodel = modelLoader.loadModel("Traceability", modelLoader.getMOF(), URI.createURI(RelationsToTraceClassPackage.eINSTANCE.getNsURI()));
+
+		ASMModel tracebilityMetamodel = modelLoader.loadModel("Traceability",
+				modelLoader.getMOF(), URI
+						.createURI(RelationsToTraceClassPackage.eINSTANCE
+								.getNsURI()));
 		env.addModel(tracebilityMetamodel);
-		
-		ASMModel traceModel = modelLoader.newModel("traces", "traces.xmi", tracebilityMetamodel);
-		((ASMEMFModel)traceModel).setCheckSameModel(false);
+
+		ASMModel traceModel = modelLoader.newModel("traces", "traces.xmi",
+				tracebilityMetamodel);
+		((ASMEMFModel) traceModel).setCheckSameModel(false);
 		env.addModel(traceModel);
-		
-		ASMModel relationsMM = modelLoader.loadModel("relationsMM", modelLoader.getMOF(), URI.createURI(QVTRelationPackage.eINSTANCE.getNsURI()));
+
+		ASMModel relationsMM = modelLoader.loadModel("relationsMM", modelLoader
+				.getMOF(), URI.createURI(QVTRelationPackage.eINSTANCE
+				.getNsURI()));
 		env.addModel(relationsMM);
-		
-		ASMModel relations = modelLoader.loadModel("relations", relationsMM, transfoURI);
+
+		ASMModel relations = modelLoader.loadModel("relations", relationsMM,
+				transfoURI);
 		env.addModel(relations);
-		
-		ASMModel coreMM	= modelLoader.getMOF();
+
+		ASMModel coreMM = modelLoader.getMOF();
 		env.addModel("coreMM", modelLoader.getMOF());
-		
-		String traceClassFileName = 'T'+transfoURI.trimFileExtension().lastSegment();
-		URI traceClassURI = transfoURI.trimSegments(1).appendSegment(traceClassFileName).appendFileExtension("ecore");
-		ASMModel core = modelLoader.newModel("core", traceClassURI.toString(), coreMM);
-		((ASMEMFModel)core).setCheckSameModel(false);
-		
+
+		String traceClassFileName = 'T' + transfoURI.trimFileExtension()
+				.lastSegment();
+		URI traceClassURI = transfoURI.trimSegments(1).appendSegment(
+				traceClassFileName).appendFileExtension("ecore");
+		ASMModel core = modelLoader.newModel("core", traceClassURI.toString(),
+				coreMM);
+		((ASMEMFModel) core).setCheckSameModel(false);
+
 		env.addModel(core);
-		
+
 		return core;
-		
+
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -334,74 +343,62 @@ public class ATLVMCompiler implements CompilationProvider {
 	 * org.eclipse.core.resources.IFolder)
 	 */
 	public List<File> compile(Object abstractSyntaxTree,
-			Map<String, String> parameters,
-			List<File> sourceFolders,
-			File binFolder) throws DeclarativeQVTCompilationException {
-		
-		if (!(abstractSyntaxTree instanceof File)) {
-			String message = "Abstract Syntax is not a file: "
+			Map<String, String> parameters)
+			throws DeclarativeQVTCompilationException {
+
+		if (!(abstractSyntaxTree instanceof Resource)) {
+			String message = "Abstract Syntax is not a Resource: "
 					+ abstractSyntaxTree.toString();
 			DeclarativeQVTCompilationException exception = new QVTRelationsCompilationException(
 					message, 0, 0, 0);
 			throw exception;
 		}
 
-		File abstractSyntaxTreeFile = (File) abstractSyntaxTree;
-		
-		executeRelationsToTraceClass(abstractSyntaxTreeFile);
-		
-		URI[] splittedSourceURI = getSplittedSourceURI(binFolder,
-				abstractSyntaxTreeFile);
-		URI sourceFolderURI = splittedSourceURI[0];
-		URI relativeAbstractSyntaxTreeURI = splittedSourceURI[1];
+		Resource abstractSyntaxTreeResource = (Resource) abstractSyntaxTree;
 
-		if (sourceFolderURI != null && relativeAbstractSyntaxTreeURI != null) {
+		executeRelationsToTraceClass(abstractSyntaxTreeResource);
 
-			URI binFolderURI = URI.createFileURI(binFolder.getAbsolutePath())
-					.appendSegment("");
-			URI abstractSyntaxTreeURI = URI
-					.createFileURI(abstractSyntaxTreeFile.getAbsolutePath());
+		ASMModel qvtrTransformation = null;
+		try {
+			qvtrTransformation = new EMFModelLoader().loadModel(
+					TRANSFORMATION_MODEL_NAME, QVTR_METAMODEL,
+					abstractSyntaxTreeResource.getURI());
+		} catch (Exception e) {
+			String message = "Unable to load the AST in the ATLVM : "
+					+ e.getMessage();
+			QVTRelationsCompilationException exception = new QVTRelationsCompilationException(
+					message, 0, 0, 0);
+			throw exception;
+		}
 
-			ResourceSet resourceSet = new ResourceSetImpl();
-			Resource abstractSyntaxTreeResource = resourceSet.getResource(abstractSyntaxTreeURI, true);
+		List<String> directions = getDirections(abstractSyntaxTreeResource);
 
-			ASMModel qvtrTransformation = null;
+		List<File> result = new ArrayList<File>(directions.size());
+		for (String directionDomainName : directions) {
+			ASM directionASM = ASMUtils
+					.createDirectionLibrary(directionDomainName);
+			ASMModel myProblems = null;
 			try {
-				qvtrTransformation = new EMFModelLoader().loadModel(TRANSFORMATION_MODEL_NAME, QVTR_METAMODEL, abstractSyntaxTreeResource.getURI());
+				myProblems = createProblemModelFor(abstractSyntaxTreeResource);
 			} catch (Exception e) {
-				String message = "Unable to load the AST in the ATLVM : " + e.getMessage();
-				QVTRelationsCompilationException exception = new QVTRelationsCompilationException(message, 0,0,0);
+				String message = "Unable to create a problem model for the ATLVM : "
+						+ e.getMessage();
+				QVTRelationsCompilationException exception = new QVTRelationsCompilationException(
+						message, 0, 0, 0);
 				throw exception;
 			}
-
-			List<String> directions = getDirections(abstractSyntaxTreeResource);
-
-			List<File> result = new ArrayList<File>(directions.size());
-			for (String directionDomainName : directions) {
-				ASM directionASM = ASMUtils
-						.createDirectionLibrary(directionDomainName);
-				ASMModel myProblems = null;
-				try {
-					myProblems = createProblemModelFor(abstractSyntaxTreeResource);
-				} catch (Exception e) {
-					String message = "Unable to create a problem model for the ATLVM : " + e.getMessage();
-					QVTRelationsCompilationException exception = new QVTRelationsCompilationException(message, 0,0,0);
-					throw exception;
-				}
-				Properties effectiveParameters = createCompilationsProperties(
-						relativeAbstractSyntaxTreeURI, parameters,
-						directionDomainName, binFolderURI);
-				if (qvtrTransformation != null && myProblems != null) {
-					File resultFile = compile(qvtrTransformation, directionASM,
-							myProblems, DEFAULT_DEBUGGER, effectiveParameters);
-					result.add(resultFile);
-					handleProblems(myProblems);
-				}
+			Properties effectiveParameters = createCompilationsProperties(
+					abstractSyntaxTreeResource.getURI(), parameters,
+					directionDomainName);
+			if (qvtrTransformation != null && myProblems != null) {
+				File resultFile = compile(qvtrTransformation, directionASM,
+						myProblems, DEFAULT_DEBUGGER, effectiveParameters);
+				result.add(resultFile);
+				handleProblems(myProblems);
 			}
-			return result;
-
 		}
-		return null;
+		return result;
+
 	}
 
 	protected List<String> getDirections(Resource resource) {
@@ -481,26 +478,14 @@ public class ATLVMCompiler implements CompilationProvider {
 		if (operation instanceof CompileOperation) {
 			CompileOperation compileOperation = (CompileOperation) operation;
 			Object source = compileOperation.getSource();
-			if (source instanceof File
-					&& compileOperation.getSourceFolders() != null
-					&& compileOperation.getBinFolder() != null) {
-				File sourceFile = (File) source;
-				boolean canHandleSource = sourceFile.canRead()
-						&& sourceFile.isFile();
-				if (canHandleSource) {
-					URI sourceURI = URI.createFileURI(sourceFile.getPath());
-					ResourceSet resourceSet = new ResourceSetImpl();
-					Resource resource = resourceSet
-							.getResource(sourceURI, true);
-					if (!resource.getContents().isEmpty()) {
-						EObject eObject = resource.getContents().get(0);
-						canHandleSource = eObject instanceof RelationalTransformation;
-					} else { // resource is empty
-						canHandleSource = false;
-					}
-					resource.unload();
+			if (source instanceof Resource) {
+				Resource resource = (Resource) source;
+				boolean contentIsValid = false;
+				if (!resource.getContents().isEmpty()) {
+					EObject eObject = resource.getContents().get(0);
+					contentIsValid = eObject instanceof RelationalTransformation;
 				}
-				return canHandleSource;
+				return contentIsValid;
 			}
 		}
 		return false;
@@ -547,9 +532,9 @@ public class ATLVMCompiler implements CompilationProvider {
 				.getProperty(OUT_FILE_PARAMETER_NAME));
 		return resultFile;
 	}
-	
+
 	protected void executeRelationsToTraceClass(
-			final File relationsTransformation)
+			final Resource relationsTransformation)
 			throws QVTRelationsCompilationException {
 
 		ASMModule asmModule = new ASMModule(RELATION_TO_TRACE_CLASS);
@@ -562,27 +547,31 @@ public class ATLVMCompiler implements CompilationProvider {
 		env.addPermission("file.write"); //$NON-NLS-1$
 
 		try {
-		ASMModel result = loadModelForTraceClassTransformation(env, relationsTransformation);
-		
-		env.registerOperations(RELATION_TO_TRACE_CLASS);
-		
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("enforce", "true");
+			ASMModel result = loadModelForTraceClassTransformation(env,
+					relationsTransformation);
 
-		new ASMInterpreter(RELATION_TO_TRACE_CLASS, asmModule, env, parameters);
-		
-		URI transfoURI = URI.createFileURI(relationsTransformation.getAbsolutePath());
-		String traceClassFileName = 'T'+transfoURI.trimFileExtension().lastSegment();
-		URI traceClassURI = transfoURI.trimSegments(1).appendSegment(traceClassFileName).appendFileExtension("ecore");
-		result.getModelLoader().save(result, traceClassURI.toString());
-		
+			env.registerOperations(RELATION_TO_TRACE_CLASS);
+
+			Map<String, String> parameters = new HashMap<String, String>();
+			parameters.put("enforce", "true");
+
+			new ASMInterpreter(RELATION_TO_TRACE_CLASS, asmModule, env,
+					parameters);
+
+			URI transfoURI = relationsTransformation.getURI();
+			String traceClassFileName = 'T' + transfoURI.trimFileExtension()
+					.lastSegment();
+			URI traceClassURI = transfoURI.trimSegments(1).appendSegment(
+					traceClassFileName).appendFileExtension("ecore");
+			result.getModelLoader().save(result,
+					traceClassURI.toPlatformString(true));
+
 		} catch (Exception e) {
 			String message = "Problem creating the Trace Classes \n"
 					+ e.getMessage();
-			throw new QVTRelationsCompilationException(message,0,0,0);
+			throw new QVTRelationsCompilationException(message, 0, 0, 0);
 		}
-		
-		
+
 	}
 
 }
