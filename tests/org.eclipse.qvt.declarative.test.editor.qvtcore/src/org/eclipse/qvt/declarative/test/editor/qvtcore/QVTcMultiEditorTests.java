@@ -164,9 +164,9 @@ public class QVTcMultiEditorTests extends QVTcEditorTestCase
 		}
 	}
 	
-	public void testEditSaveAndUndo() throws CoreException, ExecutionException, BadLocationException {
-		if (true)			// FIXME Awaiting Bugzilla 237213 guidance
-			return;			// Subsequent test is for Bugzilla 231288
+	// FIXME Awaiting Bugzilla 237213 guidance
+	// Subsequent test is for Bugzilla 231288
+	public void nontestEditSaveAndUndo() throws CoreException, ExecutionException, BadLocationException {
 		final String contents1 = "trans";
 		final String contents2 = " ";
 		final String contents3 = "formation tx0 {}\n";
