@@ -173,8 +173,7 @@ public abstract class CSTNodeEnvironment<E extends ICSTNodeEnvironment, AST exte
 	}
 
 	protected void internalSetAST(AST astNode) {
-		assert (ast == null);
-		assert (astNode != null);
+		assert (ast == null) == (astNode != null);
 		ast = astNode;
 	}
 
@@ -215,7 +214,11 @@ public abstract class CSTNodeEnvironment<E extends ICSTNodeEnvironment, AST exte
 	 * Implementation of the Adapter method that imposes the set once policy of setASTNode.
 	 */
 	public final void setTarget(Notifier newTarget) {
-		if (newTarget != ast) 
+		if (newTarget == null) 					// removing adapter
+			internalSetAST(null);		
+		else if (newTarget == ast) 				// adding adapter
+			;		
+		else 									// something unexpected
 			throw new UnsupportedOperationException(getClass().getName() + ".setTarget");		
 	}
 	

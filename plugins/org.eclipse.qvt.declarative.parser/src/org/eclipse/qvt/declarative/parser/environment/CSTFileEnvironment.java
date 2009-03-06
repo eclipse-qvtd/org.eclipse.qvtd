@@ -13,15 +13,23 @@ package org.eclipse.qvt.declarative.parser.environment;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
 
 import lpg.lpgjavaruntime.Monitor;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.ocl.TypeResolver;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.qvt.declarative.ecore.utils.XMIUtils;
@@ -34,15 +42,14 @@ public abstract class CSTFileEnvironment<R extends ICSTRootEnvironment, E extend
 {
 	protected final EPackage.Registry registryToo;
 	protected final XMIResource ast;
-	protected final AbstractModelResolver resolver;
-
-//	protected CSTFileEnvironment(EPackage.Registry registry) {
-//		super(registry);
-//	}
+	protected final AbstractModelResolver resolver;	
+	private TypeResolver<EClassifier, EOperation, EStructuralFeature> typeResolver;	// FIXME Duplicated to support reset
+		// inherited functionality should allow typeResolver to be in CSTRootEnvironment
 
 	private CSTFileEnvironment(EPackage.Registry registry, AbstractFileHandle file, ResourceSet resourceSet, XMIResource astResource) {
-		super(registry, astResource);
+		super(registry, null);		// Null suppresses inherited createTypeResolver
 		ast = astResource;
+		typeResolver = createTypeResolver(ast);
 		registryToo = registry;
 		if (file != null) {
 			resolver = new AbstractModelResolver(file);	
@@ -59,6 +66,11 @@ public abstract class CSTFileEnvironment<R extends ICSTRootEnvironment, E extend
 	public abstract ICSTFileAnalyzer<R> createAnalyzer(Monitor monitor);
 
 	protected abstract R createRootEnvironment(XMIResource ast, CST cst);
+
+	@Override
+	protected TypeResolver<EClassifier, EOperation, EStructuralFeature> createTypeResolver(Resource resource) {
+		return resource != null ? super.createTypeResolver(resource) : null;
+	}
 
 	public XMIResource getASTResource() {
 		return ast;
@@ -84,6 +96,11 @@ public abstract class CSTFileEnvironment<R extends ICSTRootEnvironment, E extend
 
 	public ResourceSet getResourceSet() {
 		return resolver.getResourceSet();
+	}
+
+	@Override
+	public TypeResolver<EClassifier, EOperation, EStructuralFeature> getTypeResolver() {
+		return typeResolver;
 	}
 
 	public void initializePackageNs(EPackage ePackage) {
@@ -114,6 +131,7 @@ public abstract class CSTFileEnvironment<R extends ICSTRootEnvironment, E extend
 			return null;
 		R rootEnvironment;
 		try {
+			reset();
 			rootEnvironment = createRootEnvironment(ast, cst);
 		} catch (ClassCastException e) {	// Occurs if cst is not a CST
 			return null;
@@ -129,5 +147,17 @@ public abstract class CSTFileEnvironment<R extends ICSTRootEnvironment, E extend
 	protected void postParse(R rootEnvironment) {
 		rootEnvironment.postParse();
 		XMIUtils.assignLinearIds(ast, "ast");
+	}
+
+	public void reset() {
+		ast.unload();
+		typeResolver = createTypeResolver(ast);
+		List<Adapter> eAdapters = ast.eAdapters();
+		if (!eAdapters.isEmpty()) {
+			for (Adapter eAdapter : new ArrayList<Adapter>(eAdapters)) {
+				if (eAdapter instanceof ICSTEnvironment)
+					eAdapters.remove(eAdapter);
+			}
+		}
 	}
 }
