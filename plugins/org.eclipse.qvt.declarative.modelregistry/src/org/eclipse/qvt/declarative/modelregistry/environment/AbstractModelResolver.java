@@ -40,13 +40,13 @@ public class AbstractModelResolver implements ModelResolver
 	public AbstractModelResolver(AbstractFileHandle handle) {
 		this.handle = handle;
 		this.resourceSet = null;
+		getResourceSet();
 	}
 
 	/**
 	 * Create the ResourceSet when one is required but undefined.
 	 * 
-	 * The default implementation returns an EcoreFamilyResourceSetImpl so that the
-	 * namespace of the root XML element is used to determine the appropriate loader.
+	 * The default implementation returns a ResourceSetImpl.
 	 * 
 	 * @return the ResourceSet
 	 */
@@ -64,12 +64,12 @@ public class AbstractModelResolver implements ModelResolver
 	 * When running under Eclipse, this method may return null to limit URI resolution
 	 * to the standard plug-in registrations.
 	 * 
-	 * When running standalone, this method is invoked by the first attempt to geyt a resource set.
+	 * When running standalone, this method is invoked by the first attempt to get a resource set.
 	 * It must define all URIs that are used.
 	 * 
 	 * The default implementation provides the URI of the Model Registry.
 	 * 
-	 * @return pacakges to be registered.
+	 * @return packages to be registered.
 	 */
 	protected EPackage[] getPackagesToRegister() {
 		return new EPackage[] { ModelRegistryPackage.eINSTANCE };
@@ -78,7 +78,7 @@ public class AbstractModelResolver implements ModelResolver
 	public ProjectRegistry getProjectRegistry() {
 		if (projectRegistry == null) {
 			AbstractProjectHandle projectHandle = handle.getProjectHandle();
-			projectRegistry = new ProjectRegistry(projectHandle, getResourceSet());
+			projectRegistry = new ProjectRegistry(projectHandle);
 			projectRegistry.loadModel();
 		}
 		return projectRegistry;

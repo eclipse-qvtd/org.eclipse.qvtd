@@ -55,10 +55,13 @@ public class ProjectRegistry
 	private final ResourceSet resourceSet;
 	private Resource model = null;
 	private Map<String, String> unregisteredKinds = null;
+	// FIXME Add a ResourceChangeListener to reload registry on external change.
 	
-	public ProjectRegistry(AbstractProjectHandle projectHandle, ResourceSet resourceSet) {
+	public ProjectRegistry(AbstractProjectHandle projectHandle) {
 		this.projectHandle = projectHandle;
-		this.resourceSet = resourceSet;
+		resourceSet = new ResourceSetImpl();
+		resourceSet.getPackageRegistry().put(ModelRegistryPackage.eINSTANCE.getNsURI(), ModelRegistryPackage.eINSTANCE);
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
 	}
 
 	public FileHandleRegistry add(AbstractFileHandle fileHandle) {
@@ -173,6 +176,9 @@ public class ProjectRegistry
 		return resolveURI(getURI(fileHandle, accessor));
 	}
 		
+	/**
+	 * Return the ResourceSet that contains the model registry.
+	 */
 	public ResourceSet getResourceSet() { return resourceSet; }
 
 	/**
@@ -230,12 +236,8 @@ public class ProjectRegistry
 		URI registryURI = projectHandle.getRegistryURI();
 		try {
 			try {
-				if (model == null) {									// FIXME Persist ResourceSet between lookups
-					ResourceSet resourceSet = new ResourceSetImpl();	// Private resource set to avoid clutter
-					resourceSet.getPackageRegistry().put(ModelRegistryPackage.eINSTANCE.getNsURI(), ModelRegistryPackage.eINSTANCE);
-					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
+				if (model == null)
 					model = resourceSet.getResource(registryURI, true);
-				}
 				importFromModel(model, registryURI);
 				return true;
 			} catch (WrappedException e) {
