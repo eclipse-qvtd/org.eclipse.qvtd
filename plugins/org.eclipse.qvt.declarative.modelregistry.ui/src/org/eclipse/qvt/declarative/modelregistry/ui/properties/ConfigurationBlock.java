@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.jface.viewers.ISelection;
@@ -161,7 +160,7 @@ public class ConfigurationBlock
 	public ConfigurationBlock(AbstractFileHandle handle) {
 		this.fileHandle = handle;
 		accessorKind = ModelNameAccessor.KIND;
-		projectRegistry = new ProjectRegistry(handle.getProjectHandle(), new ResourceSetImpl());
+		projectRegistry = new ProjectRegistry(handle.getProjectHandle());
 		projectRegistry.loadModel();
 		loadEditModel();
 	}
