@@ -1,7 +1,7 @@
 /**
 * <copyright>
 *
-* Copyright (c) 2005, 2008 IBM Corporation and others.
+* Copyright (c) 2005, 2009 IBM Corporation, Borland Software Corp.,  and others.
 * All rights reserved.   This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -10,11 +10,12 @@
 * Contributors:
 *   IBM - Initial API and implementation
 *   E.D.Willink - Lexer and Parser refactoring to support extensibility and flexible error handling
+*   Borland - Bug 242880
 *   E.D.Willink - Extended API and implementation for QVTc
 *
 * </copyright>
 *
-* $Id: QVTcLexer.java,v 1.8 2008/11/19 21:37:41 ewillink Exp $
+* $Id: QVTcLexer.java,v 1.9 2009/03/06 22:39:26 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;
@@ -626,9 +627,9 @@ public class QVTcLexer extends AbstractLexer implements QVTcParsersym, QVTcLexer
             }
 	 
             //
-            // Rule 327:  Token ::= : =
+            // Rule 310:  Token ::= : =
             //
-            case 327: { 
+            case 310: { 
 				makeToken(TK_COLON_EQUALS);
 	            break;
             }

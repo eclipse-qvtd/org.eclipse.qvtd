@@ -1,7 +1,7 @@
 /**
 * <copyright>
 *
-* Copyright (c) 2005, 2008 IBM Corporation, Zeligsoft Inc., and others.
+* Copyright (c) 2005, 2009 IBM Corporation, Zeligsoft Inc., Borland Software Corp., and others.
 * All rights reserved.   This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,21 @@
 *   IBM - Initial API and implementation
 *   E.D.Willink - Elimination of some shift-reduce conflicts
 *   E.D.Willink - Remove unnecessary warning suppression
-*   E.D.Willink - Bugs 225493, 243976
+*   E.D.Willink - Bugs 225493, 243976, 259818
 *   Zeligsoft - Bug 243976
+*   Borland - Bug 242880
 *   E.D.Willink - Extended API and implementation for QVTc
 *
 * </copyright>
 *
-* $Id: QVTcParsersym.java,v 1.7 2008/11/19 21:37:41 ewillink Exp $
+* $Id: QVTcParsersym.java,v 1.8 2009/03/06 22:39:26 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;
 
 public interface QVTcParsersym {
     public final static int
-      TK_COLON_EQUALS = 94,
+      TK_COLON_EQUALS = 93,
       TK_NUMERIC_OPERATION = 76,
       TK_STRING_LITERAL = 16,
       TK_INTEGER_LITERAL = 77,
@@ -43,32 +44,32 @@ public interface QVTcParsersym {
       TK_RPAREN = 4,
       TK_LBRACE = 87,
       TK_RBRACE = 84,
-      TK_LBRACKET = 104,
+      TK_LBRACKET = 103,
       TK_RBRACKET = 91,
-      TK_ARROW = 95,
+      TK_ARROW = 94,
       TK_BAR = 85,
       TK_COMMA = 34,
       TK_COLON = 92,
       TK_COLONCOLON = 88,
       TK_SEMICOLON = 86,
-      TK_DOT = 96,
+      TK_DOT = 95,
       TK_DOTDOT = 99,
       TK_ATPRE = 89,
-      TK_CARET = 97,
-      TK_CARETCARET = 98,
-      TK_QUESTIONMARK = 105,
+      TK_CARET = 96,
+      TK_CARETCARET = 97,
+      TK_QUESTIONMARK = 104,
       TK_self = 44,
       TK_inv = 29,
       TK_pre = 30,
       TK_post = 31,
-      TK_context = 112,
-      TK_package = 113,
+      TK_context = 110,
+      TK_package = 111,
       TK_endpackage = 32,
       TK_def = 33,
       TK_if = 83,
       TK_then = 100,
       TK_else = 101,
-      TK_endif = 93,
+      TK_endif = 98,
       TK_and = 13,
       TK_or = 14,
       TK_xor = 15,
@@ -82,8 +83,8 @@ public interface QVTcParsersym {
       TK_derive = 51,
       TK_init = 52,
       TK_null = 53,
-      TK_attr = 114,
-      TK_oper = 115,
+      TK_attr = 112,
+      TK_oper = 113,
       TK_Set = 45,
       TK_Bag = 46,
       TK_Sequence = 47,
@@ -121,9 +122,9 @@ public interface QVTcParsersym {
       TK_OclMessage = 43,
       TK_OclInvalid = 81,
       TK_check = 23,
-      TK_creation = 108,
-      TK_default = 107,
-      TK_deletion = 109,
+      TK_creation = 107,
+      TK_default = 106,
+      TK_deletion = 108,
       TK_enforce = 18,
       TK_imports = 24,
       TK_map = 19,
@@ -133,12 +134,10 @@ public interface QVTcParsersym {
       TK_transformation = 26,
       TK_uses = 27,
       TK_where = 28,
-      TK_EOF_TOKEN = 110,
+      TK_EOF_TOKEN = 109,
       TK_IDENTIFIER = 3,
-      TK_INTEGER_RANGE_START = 106,
-      TK_ERROR_TOKEN = 1,
-      TK_ERROR_simpleNameCS = 111,
-      TK_ERROR_Garbage = 103;
+      TK_INTEGER_RANGE_START = 105,
+      TK_ERROR_TOKEN = 1;
 
       public final static String orderedTerminalSymbols[] = {
                  "",
@@ -234,17 +233,16 @@ public interface QVTcParsersym {
                  "in",
                  "RBRACKET",
                  "COLON",
-                 "endif",
                  "COLON_EQUALS",
                  "ARROW",
                  "DOT",
                  "CARET",
                  "CARETCARET",
+                 "endif",
                  "DOTDOT",
                  "then",
                  "else",
                  "implies",
-                 "ERROR_Garbage",
                  "LBRACKET",
                  "QUESTIONMARK",
                  "INTEGER_RANGE_START",
@@ -252,7 +250,6 @@ public interface QVTcParsersym {
                  "creation",
                  "deletion",
                  "EOF_TOKEN",
-                 "ERROR_simpleNameCS",
                  "context",
                  "package",
                  "attr",
