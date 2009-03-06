@@ -1,7 +1,7 @@
 /**
 * <copyright>
 *
-* Copyright (c) 2005, 2008 IBM Corporation, Zeligsoft Inc., and others.
+* Copyright (c) 2005, 2009 IBM Corporation, Zeligsoft Inc., Borland Software Corp., and others.
 * All rights reserved.   This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,13 +11,14 @@
 *   IBM - Initial API and implementation
 *   E.D.Willink - Elimination of some shift-reduce conflicts
 *   E.D.Willink - Remove unnecessary warning suppression
-*   E.D.Willink - Bugs 225493, 243976
+*   E.D.Willink - Bugs 225493, 243976, 259818
 *   Zeligsoft - Bug 243976
+*   Borland - Bug 242880
 *   E.D.Willink - Extended API and implementation for QVTr
 *
 * </copyright>
 *
-* $Id: QVTrParserprs.java,v 1.9 2008/12/30 12:54:05 ewillink Exp $
+* $Id: QVTrParserprs.java,v 1.10 2009/03/06 22:39:37 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;

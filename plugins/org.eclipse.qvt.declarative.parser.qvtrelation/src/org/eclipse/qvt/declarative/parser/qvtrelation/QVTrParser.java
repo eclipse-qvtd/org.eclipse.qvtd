@@ -1,7 +1,7 @@
 /**
 * <copyright>
 *
-* Copyright (c) 2005, 2008 IBM Corporation, Zeligsoft Inc., and others.
+* Copyright (c) 2005, 2009 IBM Corporation, Zeligsoft Inc., Borland Software Corp., and others.
 * All rights reserved.   This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,13 +11,14 @@
 *   IBM - Initial API and implementation
 *   E.D.Willink - Elimination of some shift-reduce conflicts
 *   E.D.Willink - Remove unnecessary warning suppression
-*   E.D.Willink - Bugs 225493, 243976
+*   E.D.Willink - Bugs 225493, 243976, 259818
 *   Zeligsoft - Bug 243976
+*   Borland - Bug 242880
 *   E.D.Willink - Extended API and implementation for QVTr
 *
 * </copyright>
 *
-* $Id: QVTrParser.java,v 1.10 2008/12/30 12:54:05 ewillink Exp $
+* $Id: QVTrParser.java,v 1.11 2009/03/06 22:39:37 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;
@@ -45,6 +46,7 @@ import org.eclipse.ocl.cst.PathNameCS;
 import org.eclipse.ocl.cst.SimpleNameCS;
 import org.eclipse.ocl.cst.SimpleTypeEnum;
 import org.eclipse.ocl.cst.StateExpCS;
+import org.eclipse.ocl.cst.StringLiteralExpCS;
 import org.eclipse.ocl.cst.TypeCS;
 import org.eclipse.ocl.cst.VariableCS;
 import org.eclipse.ocl.util.OCLStandardLibraryUtil;
@@ -1198,8 +1200,10 @@ public class QVTrParser extends AbstractOCLParser implements RuleAction
 			//
 			case 173: {
 				
-				CSTNode result = createStringLiteralExpCS(getTokenText(dtParser.getToken(1)));
-				setOffsets(result, getIToken(dtParser.getToken(1)));
+				IToken literalToken = getIToken(dtParser.getToken(1));
+				StringLiteralExpCS result = createStringLiteralExpCS(literalToken.toString());
+				result.setUnescapedStringSymbol(unescape(literalToken));
+				setOffsets(result, literalToken);
 				dtParser.setSym1(result);
 	  		  break;
 			}
