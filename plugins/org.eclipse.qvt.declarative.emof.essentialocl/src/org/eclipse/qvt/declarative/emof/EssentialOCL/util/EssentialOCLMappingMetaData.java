@@ -175,7 +175,7 @@ public class EssentialOCLMappingMetaData extends EMOFMappingMetaData
 	
 	@Override
 	public String getEcoreContentTypeIdentifier() {
-		return "org.eclipse.ocl.ecore";		// FIXME Use an MDT-OCL defined value once available
+		return org.eclipse.ocl.ecore.EcorePackage.eCONTENT_TYPE;
 	}
 
 	/**
