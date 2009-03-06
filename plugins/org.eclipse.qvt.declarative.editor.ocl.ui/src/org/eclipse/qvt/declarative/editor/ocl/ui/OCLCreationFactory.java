@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2007,2008 E.D.Willink and others.
+ * Copyright (c) 2007,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLCreationFactory.java,v 1.5 2008/10/21 20:07:05 ewillink Exp $
+ * $Id: OCLCreationFactory.java,v 1.6 2009/03/06 17:36:10 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui;
 
@@ -32,6 +32,7 @@ import org.eclipse.qvt.declarative.editor.ui.common.AbstractCreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.util.EssentialOCLMappingMetaData;
+import org.eclipse.qvt.declarative.emof.FullOCL.util.FullOCLMappingMetaData;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.ocl.environment.OCLFileEnvironment;
@@ -42,6 +43,8 @@ public class OCLCreationFactory extends AbstractCreationFactory
 {
 	public static OCLCreationFactory INSTANCE = new OCLCreationFactory();
 	public static final String BUILDER_ID = OCLBuilder.class.getName();
+	public static final String EDITOR_ID = OCLEditor.class.getName();
+	public static final String MULTI_EDITOR_ID = OCLMultiEditor.class.getName();
 	public static final String NATURE_ID = OCLNature.class.getName();
 	public static final String PROBLEM_MARKER_ID = OCLMarkerProblemHandler.class.getPackage().getName() + ".oclProblem";
 
@@ -85,7 +88,7 @@ public class OCLCreationFactory extends AbstractCreationFactory
 	public String[] getEMOFExtensions() { return QVTPreferences.getOCLEMOFExtensions(); }
 	public String[] getEcoreExtensions() { return QVTPreferences.getOCLEcoreExtensions(); }
 	public String getEditorName() { return "OCL"; }
-	public IMappingMetaData getMappingMetaData() { return null; } //FIXME FullOCLFacade.MAPPING_META_DATA; }
+	public IMappingMetaData getMappingMetaData() { return FullOCLMappingMetaData.INSTANCE; }
 	public String getNatureId() { return NATURE_ID; }
 	public ICommonPlugin getPlugin() { return OCLPlugin.getInstance(); }
 	public String getProblemMarkerId() { return PROBLEM_MARKER_ID; }
