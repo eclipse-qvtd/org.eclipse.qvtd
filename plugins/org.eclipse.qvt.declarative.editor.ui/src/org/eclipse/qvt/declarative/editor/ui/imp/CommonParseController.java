@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.19 2009/02/17 21:48:51 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.20 2009/03/06 17:32:30 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -316,6 +316,7 @@ public abstract class CommonParseController implements IParseController
     protected ISourceProject fProject;
     protected IPath fFilePath;
     protected IMessageHandler handler;   
+	private ICSTFileEnvironment fileEnvironment;
     protected ParsedResult fCurrentAst;
     private List<ICommonKeyword> keywords = null;
     private boolean fIsKeyword[];
@@ -528,7 +529,8 @@ public abstract class CommonParseController implements IParseController
 			parserProgress.println(id + " Parse " + fFilePath.toString() + " " + fLanguage + " scanOnly = " + scanOnly + " handler = " + handler.getClass().getName());
 		if (progressMonitor.isCanceled())
 			return fCurrentAst;
-		ICSTFileEnvironment fileEnvironment = createEnvironment(getFileHandle());
+		if (fileEnvironment == null)
+			fileEnvironment = createEnvironment(getFileHandle());
 		fileEnvironment.setProblemHandler(createProblemHandler(fileEnvironment));
 		ParsedResult newResult = null;
 		try {
