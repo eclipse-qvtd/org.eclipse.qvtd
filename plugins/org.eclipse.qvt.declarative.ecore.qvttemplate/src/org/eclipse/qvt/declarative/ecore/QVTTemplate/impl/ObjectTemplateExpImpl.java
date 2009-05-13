@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ObjectTemplateExpImpl.java,v 1.2 2009/02/17 21:43:23 ewillink Exp $
+ * $Id: ObjectTemplateExpImpl.java,v 1.3 2009/05/13 20:43:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.impl;
 
@@ -263,6 +263,6 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
     public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
 		if (v instanceof QVTTemplateVisitor)
 			return ((QVTTemplateVisitor<T>) v).visitObjectTemplateExp(this);
-		return (T) super.accept(v);
+		return super.accept(v);
 	}
 } //ObjectTemplateExpImpl
