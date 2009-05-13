@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2008 E.D.Willink and others.
+ * Copyright (c) 2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonTextEditor.java,v 1.8 2009/01/17 20:17:40 ewillink Exp $
+ * $Id: CommonTextEditor.java,v 1.9 2009/05/13 20:25:49 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -228,7 +228,7 @@ public class CommonTextEditor extends UniversalEditor implements ITextEditorWith
 		CommonParseController parseController = getParseController();
 		int length = selection.getLength();
 		int offset = selection.getOffset();
-		ISourcePositionLocator nodeLocator = parseController.getNodeLocator();
+		ISourcePositionLocator nodeLocator = parseController.getSourcePositionLocator();
 		ASTandCST currentAst = parseController.getCurrentAst();
 		return currentAst != null ? nodeLocator.findNode(currentAst.getCST(), offset, offset+length) : null;
 	}

@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2008 E.D.Willink and others.
+ * Copyright (c) 2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.12 2009/02/17 21:48:51 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.13 2009/05/13 20:25:49 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -222,7 +222,7 @@ public class CommonContentProposals
 		TokenKind tokenKind = commonParseController.getTokenKind(tokenAtOffset.getKind());
 		switch (tokenKind) {
 			case IDENTIFIER: {
-				CommonNodeLocator locator = commonParseController.getCreationFactory().createNodeLocator(parsedResult.getRootEnvironment());
+				CommonSourcePositionLocator locator = commonParseController.getCreationFactory().createSourcePositionLocator(parsedResult.getRootEnvironment());
 				CSTNode node = (CSTNode) locator.findNode(cstRoot, tokenAtOffset.getStartOffset(), tokenAtOffset.getEndOffset());
 				if (node == null) {
 					if (proposalDebug.isActive())
@@ -238,7 +238,7 @@ public class CommonContentProposals
 				break;
 			}
 			case ERROR: {
-				CommonNodeLocator locator = commonParseController.getCreationFactory().createNodeLocator(parsedResult.getRootEnvironment());
+				CommonSourcePositionLocator locator = commonParseController.getCreationFactory().createSourcePositionLocator(parsedResult.getRootEnvironment());
 				CSTNode node = (CSTNode) locator.findNode(cstRoot, tokenAtOffset.getStartOffset(), tokenAtOffset.getEndOffset());
 				addIdentifierProposals(node);
 				addIdentifierKeywordProposals(node);
@@ -248,7 +248,7 @@ public class CommonContentProposals
 				break;
 			}
 			case KEYWORD: {
-				CommonNodeLocator locator = commonParseController.getCreationFactory().createNodeLocator(parsedResult.getRootEnvironment());
+				CommonSourcePositionLocator locator = commonParseController.getCreationFactory().createSourcePositionLocator(parsedResult.getRootEnvironment());
 				CSTNode node = (CSTNode) locator.findNode(cstRoot, tokenAtOffset.getStartOffset(), tokenAtOffset.getEndOffset());
 				if ((node instanceof IHasName) || (node instanceof SimpleNameCS)) {
 					addIdentifierProposals(node);

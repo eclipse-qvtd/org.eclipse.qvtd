@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2008 E.D.Willink and others.
+ * Copyright (c) 2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonHoverHelper.java,v 1.5 2008/11/19 21:53:11 ewillink Exp $
+ * $Id: CommonHoverHelper.java,v 1.6 2009/05/13 20:25:49 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -47,7 +47,7 @@ public abstract class CommonHoverHelper extends HoverHelperBase implements IHove
 		// If there are any annotations associated with the line that contains
 		// the given offset, return those
 		try {
-			@SuppressWarnings("unchecked")
+//			@SuppressWarnings("unchecked")
 			List<Annotation> annotations = AnnotationHoverBase.getSourceAnnotationsForLine(
 					srcViewer, srcViewer.getDocument().getLineOfOffset(offset));
 			if (annotations != null && annotations.size() > 0) {
@@ -80,7 +80,7 @@ public abstract class CommonHoverHelper extends HoverHelperBase implements IHove
 		String msg = null; // the help message for helpNode
 
 		// Get the node at the given offset; no node implies no message
-		ISourcePositionLocator nodeLocator = commonParseController.getNodeLocator();
+		ISourcePositionLocator nodeLocator = commonParseController.getSourcePositionLocator();
 		sourceNode = nodeLocator.findNode(cst, offset);
 		if (sourceNode == null)
 			return null;
