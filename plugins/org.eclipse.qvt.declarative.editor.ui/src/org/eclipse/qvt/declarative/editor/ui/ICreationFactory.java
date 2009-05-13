@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2007,2008 E.D.Willink and others.
+ * Copyright (c) 2007,2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ICreationFactory.java,v 1.7 2009/01/14 20:44:07 ewillink Exp $
+ * $Id: ICreationFactory.java,v 1.8 2009/05/13 20:24:49 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui;
 
@@ -26,8 +26,8 @@ import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
 import org.eclipse.qvt.declarative.editor.ui.builder.CommonNature;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonEditorDefinition;
-import org.eclipse.qvt.declarative.editor.ui.imp.CommonNodeLocator;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
+import org.eclipse.qvt.declarative.editor.ui.imp.CommonSourcePositionLocator;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
@@ -52,7 +52,8 @@ public interface ICreationFactory
 
 	public CommonNature createNature();
 
-	public CommonNodeLocator createNodeLocator(ICSTRootEnvironment environment);
+	@Deprecated // Use createSourcePositionLocator
+	public CommonSourcePositionLocator createNodeLocator(ICSTRootEnvironment environment);
 
 	public CommonParseController createParseController();
 
@@ -60,6 +61,8 @@ public interface ICreationFactory
 	 * Create the problem handler and associated marker creation support.
 	 */
 	public ProblemHandler createProblemHandler(IFile file);
+
+	public CommonSourcePositionLocator createSourcePositionLocator(ICSTRootEnvironment environment);
 
 	public ITextEditorWithUndoContext createTextEditor(IPageManager editorPageManager);
 

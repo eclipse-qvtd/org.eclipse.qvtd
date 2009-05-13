@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2007,2008 E.D.Willink and others.
+ * Copyright (c) 2007,2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractCreationFactory.java,v 1.5 2009/01/14 20:44:07 ewillink Exp $
+ * $Id: AbstractCreationFactory.java,v 1.6 2009/05/13 20:24:49 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.common;
 
@@ -22,7 +22,9 @@ import org.eclipse.imp.language.LanguageRegistry;
 import org.eclipse.qvt.declarative.ecore.utils.XMIUtils;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonEditorDefinition;
+import org.eclipse.qvt.declarative.editor.ui.imp.CommonSourcePositionLocator;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
+import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.ui.preferences.QVTPreferences;
 
 public abstract class AbstractCreationFactory implements ICreationFactory
@@ -31,6 +33,11 @@ public abstract class AbstractCreationFactory implements ICreationFactory
 
 	public void assignXmiIds(XMLResource resource) {
 		XMIUtils.assignIds(resource, XMIUtils.uuidCreator, null);
+	}
+
+	@Deprecated // Use createSourcePositionLocator
+	public CommonSourcePositionLocator createNodeLocator(ICSTRootEnvironment environment) {
+		return createSourcePositionLocator(environment);
 	}
 
 	public CommonTreeModelBuilder createTreeModelBuilder(boolean showAST) {
