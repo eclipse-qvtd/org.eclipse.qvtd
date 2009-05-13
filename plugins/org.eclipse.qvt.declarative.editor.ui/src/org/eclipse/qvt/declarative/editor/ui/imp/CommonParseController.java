@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2008 E.D.Willink and others.
+ * Copyright (c) 2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.20 2009/03/06 17:32:30 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.21 2009/05/13 20:26:23 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -445,10 +445,9 @@ public abstract class CommonParseController implements IParseController
 		return getParser().getLexer();
 	}
 
-	public ISourcePositionLocator getNodeLocator() {
-		if (fCurrentAst == null)
-			return null;
-		return creationFactory.createNodeLocator(fCurrentAst.getRootEnvironment());
+	@Deprecated // Use getSourcePositionLocator()
+	public final ISourcePositionLocator getNodeLocator() {
+		return getSourcePositionLocator();
 	}
 
 	public AbstractParser getParser() {
@@ -465,6 +464,12 @@ public abstract class CommonParseController implements IParseController
     public ISourceProject getProject() {
     	return fProject;
     }
+
+	public ISourcePositionLocator getSourcePositionLocator() {
+		if (fCurrentAst == null)
+			return null;
+		return creationFactory.createSourcePositionLocator(fCurrentAst.getRootEnvironment());
+	}
 
 	public ILanguageSyntaxProperties getSyntaxProperties() {
 		return null;
@@ -523,10 +528,9 @@ public abstract class CommonParseController implements IParseController
     	return kind < tokenKindNames.length && fIsKeyword[kind];
     }
 
-	public ParsedResult parse(String contents, boolean scanOnly, IProgressMonitor progressMonitor) {
-//		FIXME scanOnly appears to be false always
+    public ParsedResult parse(String contents, IProgressMonitor progressMonitor) {
 		if (parserProgress.isActive())
-			parserProgress.println(id + " Parse " + fFilePath.toString() + " " + fLanguage + " scanOnly = " + scanOnly + " handler = " + handler.getClass().getName());
+			parserProgress.println(id + " Parse " + fFilePath.toString() + " " + fLanguage + " handler = " + handler.getClass().getName());
 		if (progressMonitor.isCanceled())
 			return fCurrentAst;
 		if (fileEnvironment == null)
