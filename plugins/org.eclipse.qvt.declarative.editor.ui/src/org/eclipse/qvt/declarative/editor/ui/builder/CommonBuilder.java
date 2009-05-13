@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2008 E.D.Willink and others.
+ * Copyright (c) 2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.12 2009/03/05 14:42:19 qglineur Exp $
+ * $Id: CommonBuilder.java,v 1.13 2009/05/13 20:25:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -146,7 +146,7 @@ public abstract class CommonBuilder extends BuilderBase
 			ISourceProject sourceProject = ModelFactory.open(inputFile.getProject());
 			parseController.initialize(projectRelativeInputPath, sourceProject, (IMessageHandler) problemHandler);
 			String contents = BuilderUtils.getFileContents(inputFile);
-			CommonParseController.ParsedResult parsedResult = parseController.parse(contents, false, monitor);
+			CommonParseController.ParsedResult parsedResult = parseController.parse(contents, monitor);
 			URI uri = URI.createPlatformResourceURI(workspaceRelativeOutputPath.toString(), true);
 			Resource resource = parsedResult.getAST();
 			if (resource != null) {
