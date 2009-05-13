@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2008 E.D.Willink and others.
+ * Copyright (c) 2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,16 +12,16 @@
  * 
  * </copyright>
  *
- * $Id: QVTrNodeLocator.java,v 1.1 2008/08/10 13:51:13 ewillink Exp $
+ * $Id: QVTrSourcePositionLocator.java,v 1.1 2009/05/13 20:24:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp;
 
 import org.eclipse.ocl.lpg.BasicEnvironment;
-import org.eclipse.qvt.declarative.editor.ui.imp.CommonNodeLocator;
+import org.eclipse.qvt.declarative.editor.ui.imp.CommonSourcePositionLocator;
 
-public class QVTrNodeLocator extends CommonNodeLocator
+public class QVTrSourcePositionLocator extends CommonSourcePositionLocator
 {
-	public QVTrNodeLocator(BasicEnvironment environment) {
+	public QVTrSourcePositionLocator(BasicEnvironment environment) {
 		super(environment);
 	}
 }

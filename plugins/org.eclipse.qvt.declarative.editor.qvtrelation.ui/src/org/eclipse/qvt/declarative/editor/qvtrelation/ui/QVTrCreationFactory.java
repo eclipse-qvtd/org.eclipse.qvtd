@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2007,2008 E.D.Willink and others.
+ * Copyright (c) 2007,2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTrCreationFactory.java,v 1.8 2008/10/21 20:07:08 ewillink Exp $
+ * $Id: QVTrCreationFactory.java,v 1.9 2009/05/13 20:24:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtrelation.ui;
 
@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
-import org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrNodeLocator;
+import org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrSourcePositionLocator;
 import org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrParseController;
 import org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.IPageManager;
@@ -57,10 +57,6 @@ public class QVTrCreationFactory extends AbstractCreationFactory
 	public CommonNature createNature() {
 		return new QVTrNature();
 	}
-
-	public QVTrNodeLocator createNodeLocator(ICSTRootEnvironment environment) {
-		return new QVTrNodeLocator(environment);
-	}
 	
 	public QVTrParseController createParseController() {
 		return new QVTrParseController();
@@ -68,6 +64,10 @@ public class QVTrCreationFactory extends AbstractCreationFactory
 
 	public ProblemHandler createProblemHandler(IFile file) {
 		return new QVTrMarkerProblemHandler(file);
+	}
+
+	public QVTrSourcePositionLocator createSourcePositionLocator(ICSTRootEnvironment environment) {
+		return new QVTrSourcePositionLocator(environment);
 	}
 
 	public QVTrTextEditor createTextEditor(IPageManager editorPageManager) {
