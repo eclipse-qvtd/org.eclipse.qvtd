@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLCreationFactory.java,v 1.6 2009/03/06 17:36:10 ewillink Exp $
+ * $Id: OCLCreationFactory.java,v 1.7 2009/05/13 20:24:51 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui;
 
@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
-import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLNodeLocator;
+import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLSourcePositionLocator;
 import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLParseController;
 import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.IPageManager;
@@ -58,10 +58,6 @@ public class OCLCreationFactory extends AbstractCreationFactory
 	public CommonNature createNature() {
 		return new OCLNature();
 	}
-
-	public OCLNodeLocator createNodeLocator(ICSTRootEnvironment environment) {
-		return new OCLNodeLocator(environment);
-	}
 	
 	public OCLParseController createParseController() {
 		return new OCLParseController();
@@ -69,6 +65,10 @@ public class OCLCreationFactory extends AbstractCreationFactory
 
 	public ProblemHandler createProblemHandler(IFile file) {
 		return new OCLMarkerProblemHandler(file);
+	}
+
+	public OCLSourcePositionLocator createSourcePositionLocator(ICSTRootEnvironment environment) {
+		return new OCLSourcePositionLocator(environment);
 	}
 
 	public OCLTextEditor createTextEditor(IPageManager editorPageManager) {

@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2008 E.D.Willink and others.
+ * Copyright (c) 2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,16 +12,16 @@
  * 
  * </copyright>
  *
- * $Id: OCLNodeLocator.java,v 1.1 2008/08/14 07:51:10 ewillink Exp $
+ * $Id: OCLSourcePositionLocator.java,v 1.1 2009/05/13 20:24:51 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui.imp;
 
 import org.eclipse.ocl.lpg.BasicEnvironment;
-import org.eclipse.qvt.declarative.editor.ui.imp.CommonNodeLocator;
+import org.eclipse.qvt.declarative.editor.ui.imp.CommonSourcePositionLocator;
 
-public class OCLNodeLocator extends CommonNodeLocator
+public class OCLSourcePositionLocator extends CommonSourcePositionLocator
 {
-	public OCLNodeLocator(BasicEnvironment environment) {
+	public OCLSourcePositionLocator(BasicEnvironment environment) {
 		super(environment);
 	}
 }
