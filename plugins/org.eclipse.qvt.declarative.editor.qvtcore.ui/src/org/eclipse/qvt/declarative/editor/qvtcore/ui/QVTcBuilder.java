@@ -12,10 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: QVTcBuilder.java,v 1.3 2008/08/18 07:57:40 ewillink Exp $
+ * $Id: QVTcBuilder.java,v 1.4 2009/06/06 15:10:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
+import org.eclipse.imp.runtime.PluginBase;
 import org.eclipse.qvt.declarative.editor.ui.builder.CommonBuilder;
 
 
@@ -23,5 +24,11 @@ public class QVTcBuilder extends CommonBuilder
 {
 	public QVTcBuilder() {
 		super(QVTcCreationFactory.INSTANCE);
+	}
+
+	// FIXME This is only required to workaround IMP bug 279350
+	@Override
+	public PluginBase getPlugin() {
+		return QVTcCreationFactory.INSTANCE.getPlugin();
 	}
 }

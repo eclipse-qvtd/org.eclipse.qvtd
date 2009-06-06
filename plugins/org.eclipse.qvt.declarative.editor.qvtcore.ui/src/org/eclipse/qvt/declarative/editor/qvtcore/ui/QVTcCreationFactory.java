@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcCreationFactory.java,v 1.9 2009/05/13 20:24:52 ewillink Exp $
+ * $Id: QVTcCreationFactory.java,v 1.10 2009/06/06 15:10:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
@@ -23,14 +23,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
-import org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcSourcePositionLocator;
 import org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcParseController;
+import org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcSourcePositionLocator;
 import org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.IPageManager;
 import org.eclipse.qvt.declarative.editor.ui.builder.CommonNature;
 import org.eclipse.qvt.declarative.editor.ui.common.AbstractCreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
-import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.emof.QVTCore.facade.QVTCoreFacade;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
@@ -89,7 +88,7 @@ public class QVTcCreationFactory extends AbstractCreationFactory
 	public String getEditorName() { return "QVT core"; }
 	public IMappingMetaData getMappingMetaData() { return QVTCoreFacade.MAPPING_META_DATA; }	
 	public String getNatureId() { return NATURE_ID; }
-	public ICommonPlugin getPlugin() { return QVTcPlugin.getInstance(); }
+	public QVTcPlugin getPlugin() { return QVTcPlugin.getInstance(); }
 	public String getProblemMarkerId() { return PROBLEM_MARKER_ID; }
 	public String getTextExtension() { return QVTPreferences.getCoreTextExtension(); }
 	public String[] getTextExtensions() { return QVTPreferences.getCoreTextExtensions(); }
