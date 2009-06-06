@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTrCreationFactory.java,v 1.9 2009/05/13 20:24:54 ewillink Exp $
+ * $Id: QVTrCreationFactory.java,v 1.10 2009/06/06 15:10:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtrelation.ui;
 
@@ -23,14 +23,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
-import org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrSourcePositionLocator;
 import org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrParseController;
+import org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrSourcePositionLocator;
 import org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp.QVTrTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.IPageManager;
 import org.eclipse.qvt.declarative.editor.ui.builder.CommonNature;
 import org.eclipse.qvt.declarative.editor.ui.common.AbstractCreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
-import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.emof.QVTRelation.facade.QVTRelationFacade;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
@@ -87,7 +86,7 @@ public class QVTrCreationFactory extends AbstractCreationFactory
 	public String[] getEMOFExtensions() { return QVTPreferences.getRelationEMOFExtensions(); }
 	public String[] getEcoreExtensions() { return QVTPreferences.getRelationEcoreExtensions(); }
 	public String getEditorName() { return "QVT relation"; }
-	public ICommonPlugin getPlugin() { return QVTrPlugin.getInstance(); }
+	public QVTrPlugin getPlugin() { return QVTrPlugin.getInstance(); }
 	public IMappingMetaData getMappingMetaData() { return QVTRelationFacade.MAPPING_META_DATA; }
 	public String getNatureId() { return NATURE_ID; }
 	public String getProblemMarkerId() { return PROBLEM_MARKER_ID; }
