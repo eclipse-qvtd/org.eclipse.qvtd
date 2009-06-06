@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLCreationFactory.java,v 1.7 2009/05/13 20:24:51 ewillink Exp $
+ * $Id: OCLCreationFactory.java,v 1.8 2009/06/06 15:10:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui;
 
@@ -23,14 +23,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
-import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLSourcePositionLocator;
 import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLParseController;
+import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLSourcePositionLocator;
 import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.IPageManager;
 import org.eclipse.qvt.declarative.editor.ui.builder.CommonNature;
 import org.eclipse.qvt.declarative.editor.ui.common.AbstractCreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
-import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.util.EssentialOCLMappingMetaData;
 import org.eclipse.qvt.declarative.emof.FullOCL.util.FullOCLMappingMetaData;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
@@ -90,7 +89,7 @@ public class OCLCreationFactory extends AbstractCreationFactory
 	public String getEditorName() { return "OCL"; }
 	public IMappingMetaData getMappingMetaData() { return FullOCLMappingMetaData.INSTANCE; }
 	public String getNatureId() { return NATURE_ID; }
-	public ICommonPlugin getPlugin() { return OCLPlugin.getInstance(); }
+	public OCLPlugin getPlugin() { return OCLPlugin.getInstance(); }
 	public String getProblemMarkerId() { return PROBLEM_MARKER_ID; }
 	public String getTextExtension() { return QVTPreferences.getOCLTextExtension(); }
 	public String[] getTextExtensions() { return QVTPreferences.getOCLTextExtensions(); }

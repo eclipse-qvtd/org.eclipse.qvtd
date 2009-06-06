@@ -12,15 +12,22 @@
  * 
  * </copyright>
  *
- * $Id: OCLBuilder.java,v 1.1 2008/08/18 07:41:47 ewillink Exp $
+ * $Id: OCLBuilder.java,v 1.2 2009/06/06 15:10:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui;
 
+import org.eclipse.imp.runtime.PluginBase;
 import org.eclipse.qvt.declarative.editor.ui.builder.CommonBuilder;
 
 public class OCLBuilder extends CommonBuilder
 {
 	public OCLBuilder() {
 		super(OCLCreationFactory.INSTANCE);
+	}
+
+// FIXME This is only required to workaround IMP bug 279350
+	@Override
+	public PluginBase getPlugin() {
+		return OCLCreationFactory.INSTANCE.getPlugin();
 	}
 }
