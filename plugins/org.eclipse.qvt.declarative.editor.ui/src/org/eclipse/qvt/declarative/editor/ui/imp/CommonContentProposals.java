@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.13 2009/05/13 20:25:49 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.14 2009/06/06 15:12:06 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -87,12 +87,7 @@ public class CommonContentProposals
 	}
 
 	protected void addIdentifierProposals(CSTNode cstNode) {
-		Object astNode = cstNode.getAst();
-		if ((astNode == null) && ((cstNode instanceof IdentifierCS) || (cstNode instanceof SimpleNameCS) || (cstNode instanceof PathNameCS))) {
-			astNode = ((CSTNode) cstNode.eContainer()).getAst();
-			if ((astNode != null) && proposalDebug.isActive())
-				proposalDebug.println("Missing astNode deduced for " + astNode.getClass().getSimpleName());
-		}
+		Object astNode = getAst(cstNode);
 		if (astNode == null) {
 			map.put(null, new CommonNonProposal("Internal error: no AST node to select completion proposal for " + cstNode.getClass().getSimpleName(), "", offset));
 			return;
@@ -232,8 +227,13 @@ public class CommonContentProposals
 				else {
 					addIdentifierProposals(node);
 					addIdentifierKeywordProposals(node);
-					if (map.isEmpty())
-						map.put(null, new CommonNonProposal("no completion exists for '" + prefixAtOffset + "' " + node.getClass().getSimpleName() + " " + node.getAst().getClass().getSimpleName(), "", offset));
+					if (map.isEmpty()) {
+						Object astNode = getAst(node);
+						if (astNode != null)						// Fix for Bug 277746
+							map.put(null, new CommonNonProposal("no completion exists for '" + prefixAtOffset + "' " + node.getClass().getSimpleName() + " " + astNode.getClass().getSimpleName(), "", offset));
+						else
+							map.put(null, new CommonNonProposal("no completion exists for '" + prefixAtOffset + "' " + node.getClass().getSimpleName(), "", offset));
+					}
 				}
 				break;
 			}
@@ -294,6 +294,18 @@ public class CommonContentProposals
 		if (containingFeature != null)
 			addUsage(usages, astNode.eContainer(), containingFeature);
 		return usages;
+	}
+
+	protected Object getAst(CSTNode cstNode) {
+		if (cstNode == null)
+			return null;
+		Object astNode = cstNode.getAst();
+		if ((astNode == null) && ((cstNode instanceof IdentifierCS) || (cstNode instanceof SimpleNameCS) || (cstNode instanceof PathNameCS))) {
+			astNode = ((CSTNode) cstNode.eContainer()).getAst();
+			if ((astNode != null) && proposalDebug.isActive())
+				proposalDebug.println("Missing astNode deduced for " + astNode.getClass().getSimpleName());
+		}
+		return astNode;
 	}
 
 	public Set<EClass> getCompletableTypes(EClassifier requiredType, CSTNode cstNode) {
