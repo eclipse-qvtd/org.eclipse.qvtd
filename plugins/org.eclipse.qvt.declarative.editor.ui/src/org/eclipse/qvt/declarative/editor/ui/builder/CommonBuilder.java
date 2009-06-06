@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.13 2009/05/13 20:25:21 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.14 2009/06/06 15:10:41 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -38,7 +38,6 @@ import org.eclipse.imp.language.Language;
 import org.eclipse.imp.model.ISourceProject;
 import org.eclipse.imp.model.ModelFactory;
 import org.eclipse.imp.parser.IMessageHandler;
-import org.eclipse.imp.runtime.PluginBase;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -241,10 +240,11 @@ public abstract class CommonBuilder extends BuilderBase
 		return getLanguageID();
 	}
 
-	@Override
-	public PluginBase getPlugin() {
-		return (PluginBase) creationFactory.getPlugin();
-	}
+// FIXME This is commented out to enforce the workaround to IMP bug 279350
+//	@Override
+//	public PluginBase getPlugin() {
+//		return (PluginBase) creationFactory.getPlugin();
+//	}
 
 	protected List<File> getSourceFolders(IPath projectRelativeInputPath) {
 		List<File> srcFolders = new ArrayList<File>();
