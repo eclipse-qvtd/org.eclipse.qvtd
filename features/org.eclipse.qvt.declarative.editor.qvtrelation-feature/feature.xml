@@ -42,12 +42,13 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.qvt.declarative.editor.ocl.ui"/>
-      <import plugin="org.eclipse.qvt.declarative.parser"/>
       <import plugin="org.eclipse.qvt.declarative.ecore.qvtrelation.edit"/>
       <import plugin="org.eclipse.qvt.declarative.ecore.qvttemplate.edit"/>
+      <import plugin="org.eclipse.qvt.declarative.editor.ocl.ui"/>
       <import plugin="org.eclipse.qvt.declarative.emof.qvtrelation"/>
+      <import plugin="org.eclipse.qvt.declarative.parser"/>
       <import plugin="org.eclipse.qvt.declarative.ecore.qvtrelation"/>
+      <import plugin="org.eclipse.qvt.declarative.emof.emof"/>
       <import plugin="org.eclipse.qvt.declarative.parser.ui"/>
    </requires>
 
