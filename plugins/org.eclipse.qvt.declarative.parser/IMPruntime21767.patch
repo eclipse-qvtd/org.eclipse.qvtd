@@ -1,137 +1,10 @@
-### Eclipse Workspace Patch 1.0
-#P org.eclipse.imp.smapi
-Index: META-INF/MANIFEST.MF
-===================================================================
---- META-INF/MANIFEST.MF	(revision 21709)
-+++ META-INF/MANIFEST.MF	(working copy)
-@@ -3,6 +3,7 @@
- Bundle-Name: SMAP support (Incubation)
- Bundle-SymbolicName: org.eclipse.imp.smapi
- Bundle-Version: 0.1.89.1
-+Bundle-Localization: plugin
- Bundle-ActivationPolicy: lazy
- Export-Package: org.eclipse.imp.smapi
- Require-Bundle: org.junit,
-Index: build.properties
-===================================================================
---- build.properties	(revision 21709)
-+++ build.properties	(working copy)
-@@ -1,10 +1,10 @@
- bin.includes = META-INF/,\
-                bin/,\
--			   .
--src.includes = .cvsignore,\
--               .classpath,\
-+               .,\
-+               plugin.properties
-+src.includes = .classpath,\
-                .project,\
-                META-INF/,\
-                build.properties,\
-                src/
--source.. = src/
-\ No newline at end of file
-+source.. = src/
-Index: .classpath
-===================================================================
---- .classpath	(revision 21709)
-+++ .classpath	(working copy)
-@@ -1,7 +1,7 @@
- <?xml version="1.0" encoding="UTF-8"?>
- <classpath>
--	<classpathentry kind="src" path="src"/>
--	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
- 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-+	<classpathentry kind="src" path="src"/>
- 	<classpathentry kind="output" path="bin"/>
- </classpath>
-Index: .settings/org.eclipse.jdt.core.prefs
-===================================================================
---- .settings/org.eclipse.jdt.core.prefs	(revision 21709)
-+++ .settings/org.eclipse.jdt.core.prefs	(working copy)
-@@ -1,4 +1,4 @@
--#Tue Nov 13 14:07:22 EST 2007
-+#Thu Aug 21 16:49:25 BST 2008
- eclipse.preferences.version=1
- org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
- org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.5
-@@ -7,6 +7,65 @@
- org.eclipse.jdt.core.compiler.debug.lineNumber=generate
- org.eclipse.jdt.core.compiler.debug.localVariable=generate
- org.eclipse.jdt.core.compiler.debug.sourceFile=generate
-+org.eclipse.jdt.core.compiler.problem.annotationSuperInterface=warning
- org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
-+org.eclipse.jdt.core.compiler.problem.autoboxing=ignore
-+org.eclipse.jdt.core.compiler.problem.comparingIdentical=warning
-+org.eclipse.jdt.core.compiler.problem.deprecation=warning
-+org.eclipse.jdt.core.compiler.problem.deprecationInDeprecatedCode=disabled
-+org.eclipse.jdt.core.compiler.problem.deprecationWhenOverridingDeprecatedMethod=disabled
-+org.eclipse.jdt.core.compiler.problem.discouragedReference=warning
-+org.eclipse.jdt.core.compiler.problem.emptyStatement=ignore
- org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
-+org.eclipse.jdt.core.compiler.problem.fallthroughCase=ignore
-+org.eclipse.jdt.core.compiler.problem.fatalOptionalError=enabled
-+org.eclipse.jdt.core.compiler.problem.fieldHiding=ignore
-+org.eclipse.jdt.core.compiler.problem.finalParameterBound=warning
-+org.eclipse.jdt.core.compiler.problem.finallyBlockNotCompletingNormally=warning
-+org.eclipse.jdt.core.compiler.problem.forbiddenReference=error
-+org.eclipse.jdt.core.compiler.problem.hiddenCatchBlock=warning
-+org.eclipse.jdt.core.compiler.problem.incompatibleNonInheritedInterfaceMethod=warning
-+org.eclipse.jdt.core.compiler.problem.incompleteEnumSwitch=ignore
-+org.eclipse.jdt.core.compiler.problem.indirectStaticAccess=ignore
-+org.eclipse.jdt.core.compiler.problem.localVariableHiding=ignore
-+org.eclipse.jdt.core.compiler.problem.methodWithConstructorName=warning
-+org.eclipse.jdt.core.compiler.problem.missingDeprecatedAnnotation=warning
-+org.eclipse.jdt.core.compiler.problem.missingOverrideAnnotation=warning
-+org.eclipse.jdt.core.compiler.problem.missingSerialVersion=warning
-+org.eclipse.jdt.core.compiler.problem.noEffectAssignment=warning
-+org.eclipse.jdt.core.compiler.problem.noImplicitStringConversion=warning
-+org.eclipse.jdt.core.compiler.problem.nonExternalizedStringLiteral=ignore
-+org.eclipse.jdt.core.compiler.problem.nullReference=warning
-+org.eclipse.jdt.core.compiler.problem.overridingPackageDefaultMethod=warning
-+org.eclipse.jdt.core.compiler.problem.parameterAssignment=ignore
-+org.eclipse.jdt.core.compiler.problem.possibleAccidentalBooleanAssignment=ignore
-+org.eclipse.jdt.core.compiler.problem.potentialNullReference=ignore
-+org.eclipse.jdt.core.compiler.problem.rawTypeReference=ignore
-+org.eclipse.jdt.core.compiler.problem.redundantNullCheck=ignore
-+org.eclipse.jdt.core.compiler.problem.redundantSuperinterface=ignore
-+org.eclipse.jdt.core.compiler.problem.specialParameterHidingField=disabled
-+org.eclipse.jdt.core.compiler.problem.staticAccessReceiver=warning
-+org.eclipse.jdt.core.compiler.problem.suppressWarnings=enabled
-+org.eclipse.jdt.core.compiler.problem.syntheticAccessEmulation=ignore
-+org.eclipse.jdt.core.compiler.problem.typeParameterHiding=warning
-+org.eclipse.jdt.core.compiler.problem.uncheckedTypeOperation=ignore
-+org.eclipse.jdt.core.compiler.problem.undocumentedEmptyBlock=ignore
-+org.eclipse.jdt.core.compiler.problem.unhandledWarningToken=warning
-+org.eclipse.jdt.core.compiler.problem.unnecessaryElse=ignore
-+org.eclipse.jdt.core.compiler.problem.unnecessaryTypeCheck=ignore
-+org.eclipse.jdt.core.compiler.problem.unqualifiedFieldAccess=ignore
-+org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownException=ignore
-+org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionExemptExceptionAndThrowable=enabled
-+org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionIncludeDocCommentReference=enabled
-+org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionWhenOverriding=disabled
-+org.eclipse.jdt.core.compiler.problem.unusedImport=warning
-+org.eclipse.jdt.core.compiler.problem.unusedLabel=warning
-+org.eclipse.jdt.core.compiler.problem.unusedLocal=warning
-+org.eclipse.jdt.core.compiler.problem.unusedParameter=ignore
-+org.eclipse.jdt.core.compiler.problem.unusedParameterIncludeDocCommentReference=enabled
-+org.eclipse.jdt.core.compiler.problem.unusedParameterWhenImplementingAbstract=disabled
-+org.eclipse.jdt.core.compiler.problem.unusedParameterWhenOverridingConcrete=disabled
-+org.eclipse.jdt.core.compiler.problem.unusedPrivateMember=warning
-+org.eclipse.jdt.core.compiler.problem.unusedWarningToken=warning
-+org.eclipse.jdt.core.compiler.problem.varargsArgumentNeedCast=warning
- org.eclipse.jdt.core.compiler.source=1.5
-Index: plugin.properties
-===================================================================
-#P org.eclipse.imp.runtime
 Index: plugin.properties
 ===================================================================
 Index: plugin.xml
 ===================================================================
---- plugin.xml	(revision 21709)
+--- plugin.xml	(revision 21768)
 +++ plugin.xml	(working copy)
-@@ -64,6 +64,10 @@
+@@ -65,6 +65,10 @@
              markerSeverity="1"
              name="org.eclipse.imp.editor.parseAnnotation"
              super="org.eclipse.ui.workbench.texteditor.error"/>
@@ -144,7 +17,7 @@ Index: plugin.xml
           point="org.eclipse.ui.editors.markerAnnotationSpecification">
 Index: .classpath
 ===================================================================
---- .classpath	(revision 21709)
+--- .classpath	(revision 21768)
 +++ .classpath	(working copy)
 @@ -1,7 +1,7 @@
  <?xml version="1.0" encoding="UTF-8"?>
@@ -158,27 +31,24 @@ Index: .classpath
  </classpath>
 Index: META-INF/MANIFEST.MF
 ===================================================================
---- META-INF/MANIFEST.MF	(revision 21709)
+--- META-INF/MANIFEST.MF	(revision 21768)
 +++ META-INF/MANIFEST.MF	(working copy)
-@@ -5,6 +5,7 @@
- Bundle-Version: 0.1.99.1
+@@ -2,10 +2,11 @@
+ Bundle-ManifestVersion: 2
+ Bundle-Name: IMP Runtime (Incubation)
+ Bundle-SymbolicName: org.eclipse.imp.runtime; singleton:=true
+-Bundle-Version: 0.1.100
++Bundle-Version: 0.1.100.qualifier
  Bundle-Activator: org.eclipse.imp.runtime.RuntimePlugin
+ Bundle-ActivationPolicy: lazy
  Bundle-Vendor: rfuhrer@watson.ibm.com
 +Bundle-Localization: plugin
- Require-Bundle:  com.ibm.icu,
+ Require-Bundle: com.ibm.icu,
   lpg.runtime,
   org.eclipse.compare,
-@@ -32,6 +33,7 @@
-  org.eclipse.ui.views,
-  org.eclipse.ui.workbench.texteditor
- Eclipse-LazyStart: true
-+Bundle-ActivationPolicy: lazy
- Export-Package: org.eclipse.imp.builder,
-  org.eclipse.imp.core,
-  org.eclipse.imp.editor,
 Index: build.properties
 ===================================================================
---- build.properties	(revision 21709)
+--- build.properties	(revision 21768)
 +++ build.properties	(working copy)
 @@ -3,5 +3,6 @@
  bin.includes = META-INF/,\
@@ -190,7 +60,7 @@ Index: build.properties
  src.includes = icons/
 Index: src/org/eclipse/imp/language/LanguageRegistry.java
 ===================================================================
---- src/org/eclipse/imp/language/LanguageRegistry.java	(revision 21709)
+--- src/org/eclipse/imp/language/LanguageRegistry.java	(revision 21768)
 +++ src/org/eclipse/imp/language/LanguageRegistry.java	(working copy)
 @@ -22,6 +22,7 @@
  import java.util.Map;
@@ -235,7 +105,7 @@ Index: src/org/eclipse/imp/language/LanguageRegistry.java
  	        }
 Index: src/org/eclipse/imp/builder/BuilderBase.java
 ===================================================================
---- src/org/eclipse/imp/builder/BuilderBase.java	(revision 21709)
+--- src/org/eclipse/imp/builder/BuilderBase.java	(revision 21768)
 +++ src/org/eclipse/imp/builder/BuilderBase.java	(working copy)
 @@ -116,9 +116,15 @@
  
@@ -269,7 +139,7 @@ Index: src/org/eclipse/imp/builder/BuilderBase.java
          fChangedSources.clear();
 Index: src/org/eclipse/imp/utils/HTMLPrinter.java
 ===================================================================
---- src/org/eclipse/imp/utils/HTMLPrinter.java	(revision 21709)
+--- src/org/eclipse/imp/utils/HTMLPrinter.java	(revision 21768)
 +++ src/org/eclipse/imp/utils/HTMLPrinter.java	(working copy)
 @@ -212,19 +212,19 @@
       * Formats several messages as HTML text.
@@ -317,7 +187,7 @@ Index: src/org/eclipse/imp/utils/HTMLPrinter.java
          addParagraph(buffer, convertToHTMLContent(message));
 Index: src/org/eclipse/imp/editor/AnnotationHoverBase.java
 ===================================================================
---- src/org/eclipse/imp/editor/AnnotationHoverBase.java	(revision 21709)
+--- src/org/eclipse/imp/editor/AnnotationHoverBase.java	(revision 21768)
 +++ src/org/eclipse/imp/editor/AnnotationHoverBase.java	(working copy)
 @@ -159,8 +159,8 @@
       * Formats a message as HTML text.
@@ -363,7 +233,7 @@ Index: src/org/eclipse/imp/editor/AnnotationHoverBase.java
          HTMLPrinter.addParagraph(buffer, HTMLPrinter.convertToHTMLContent("Multiple messages at this line"));
 Index: src/org/eclipse/imp/editor/internal/PresentationController.java
 ===================================================================
---- src/org/eclipse/imp/editor/internal/PresentationController.java	(revision 21709)
+--- src/org/eclipse/imp/editor/internal/PresentationController.java	(revision 21768)
 +++ src/org/eclipse/imp/editor/internal/PresentationController.java	(working copy)
 @@ -13,6 +13,8 @@
  
@@ -490,7 +360,7 @@ Index: src/org/eclipse/imp/editor/internal/PresentationController.java
  }
 Index: src/org/eclipse/imp/editor/ParserScheduler.java
 ===================================================================
---- src/org/eclipse/imp/editor/ParserScheduler.java	(revision 21709)
+--- src/org/eclipse/imp/editor/ParserScheduler.java	(revision 21768)
 +++ src/org/eclipse/imp/editor/ParserScheduler.java	(working copy)
 @@ -71,7 +71,11 @@
  
@@ -507,7 +377,7 @@ Index: src/org/eclipse/imp/editor/ParserScheduler.java
                  RuntimePlugin.getInstance().writeInfoMsg(
 Index: .settings/org.eclipse.jdt.core.prefs
 ===================================================================
---- .settings/org.eclipse.jdt.core.prefs	(revision 21709)
+--- .settings/org.eclipse.jdt.core.prefs	(revision 21768)
 +++ .settings/org.eclipse.jdt.core.prefs	(working copy)
 @@ -1,4 +1,4 @@
 -#Wed Oct 18 15:08:27 EDT 2006
