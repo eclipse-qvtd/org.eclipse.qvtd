@@ -3,20 +3,35 @@
 	<target name="init">
 	</target>
 
-	<patternset id="ocl.excludes"
-		excludes="oclbin/**"/>
-	<patternset id="qvtr.excludes"
-		excludes="qvtrbin/**"/>
+	<patternset id="ocl.excludes" excludes="oclbin/**"/>
+	<patternset id="qvtc.excludes" excludes="qvtcbin/**"/>
+	<patternset id="qvtr.excludes" excludes="qvtrbin/**"/>
 	
 	<target name="zip.examples" depends="init">
 		<!-- This example may have been compiled already in the Master feature -->
-		<zip destfile="zips/royalandloyal.zip" basedir="../../examples/org.eclipse.qvt.declarative.examples.ocl.royalandloyal">
+		<delete>
+			<!-- Cleanup obsolete zips from earlier variant of script -->
+			<fileset dir="zips" includes="*.zip"/>
+		</delete>
+		<mkdir dir="zips/ocl"/>
+		<zip destfile="zips/ocl/empty.zip" basedir="../../examples/org.eclipse.qvt.declarative.examples.ocl.empty">
 			<patternset refid="ocl.excludes"/>
 		</zip>
-		<zip destfile="zips/modelmorf.zip" basedir="../../examples/org.eclipse.qvt.declarative.examples.qvtrelation.modelmorf">
+		<zip destfile="zips/ocl/royalandloyal.zip" basedir="../../examples/org.eclipse.qvt.declarative.examples.ocl.royalandloyal">
+			<patternset refid="ocl.excludes"/>
+		</zip>
+		<mkdir dir="zips/qvtc"/>
+		<zip destfile="zips/qvtc/empty.zip" basedir="../../examples/org.eclipse.qvt.declarative.examples.qvtcore.empty">
+			<patternset refid="qvtc.excludes"/>
+		</zip>
+		<mkdir dir="zips/qvtr"/>
+		<zip destfile="zips/qvtr/empty.zip" basedir="../../examples/org.eclipse.qvt.declarative.examples.qvtrelation.empty">
 			<patternset refid="qvtr.excludes"/>
 		</zip>
-		<zip destfile="zips/reltocore.zip" basedir="../../examples/org.eclipse.qvt.declarative.examples.qvtrelation.reltocore">
+		<zip destfile="zips/qvtr/modelmorf.zip" basedir="../../examples/org.eclipse.qvt.declarative.examples.qvtrelation.modelmorf">
+			<patternset refid="qvtr.excludes"/>
+		</zip>
+		<zip destfile="zips/qvtr/reltocore.zip" basedir="../../examples/org.eclipse.qvt.declarative.examples.qvtrelation.reltocore">
 			<patternset refid="qvtr.excludes"/>
 		</zip>
 		<antcall target="refresh"/>
@@ -24,7 +39,7 @@
 
 	<target name="clean" depends="init" description="Clean the plug-in: org.eclipse.qvt.declarative.examples.">
 		<delete>
-			<fileset dir="zips" includes="*.zip"/>
+			<fileset dir="zips" includes="**/*.zip"/>
 		</delete>
 		<antcall target="refresh"/>
 	</target>
