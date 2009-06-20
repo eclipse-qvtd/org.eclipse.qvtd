@@ -14,7 +14,7 @@
  *
  * </copyright>
  *
- * $Id: plugin.xml,v 1.2 2008/10/27 21:07:32 ewillink Exp $
+ * $Id: plugin.xml,v 1.3 2009/06/20 09:15:43 ewillink Exp $
  */
 -->
 <?eclipse version="3.0"?>
@@ -32,6 +32,36 @@
             name="%Royal_and_Loyal_name"
             icon="$nl$/icons/OCLModelFile.gif">
          <description>%Royal_and_Loyal_description</description>
+      </wizard>
+      <wizard id="org.eclipse.qvt.declarative.examples.ocl.empty"           
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/org.eclipse.qvt.declarative.examples.category"
+            class="org.eclipse.qvt.declarative.examples.ocl.wizards.EmptyExampleWizard"
+            hasPages="false"
+            project="true"
+            name="%EmptyOCL_name"
+            icon="$nl$/icons/OCLModelFile.gif">
+         <description>%EmptyOCL_description</description>
+      </wizard>
+      <wizard id="org.eclipse.qvt.declarative.examples.qvtcore.empty"           
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/org.eclipse.qvt.declarative.examples.category"
+            class="org.eclipse.qvt.declarative.examples.qvtc.wizards.EmptyExampleWizard"
+            hasPages="false"
+            project="true"
+            name="%EmptyQVTc_name"
+            icon="$nl$/icons/QVTcModelFile.gif">
+         <description>%EmptyQVTc_description</description>
+      </wizard>
+      <wizard id="org.eclipse.qvt.declarative.examples.qvtrelation.empty"           
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/org.eclipse.qvt.declarative.examples.category"
+            class="org.eclipse.qvt.declarative.examples.qvtr.wizards.EmptyExampleWizard"
+            hasPages="false"
+            project="true"
+            name="%EmptyQVTr_name"
+            icon="$nl$/icons/QVTrModelFile.gif">
+         <description>%EmptyQVTr_description</description>
       </wizard>
       <wizard id="org.eclipse.qvt.declarative.examples.qvtrelation.modelmorf"           
             canFinishEarly="true"
