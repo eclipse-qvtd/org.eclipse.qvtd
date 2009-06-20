@@ -12,3 +12,8 @@ Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: %providerName
+Export-Package: org.eclipse.qvt.declarative.examples,
+ org.eclipse.qvt.declarative.examples.ocl.wizards,
+ org.eclipse.qvt.declarative.examples.qvtc.wizards,
+ org.eclipse.qvt.declarative.examples.qvtr.wizards,
+ org.eclipse.qvt.declarative.examples.wizards
