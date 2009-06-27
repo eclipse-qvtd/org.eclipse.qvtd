@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.qvt.declarative.modelregistry" id="model_serialization" name="%ExtPoint.model_serialization"/>
       </appinfo>
       <documentation>
-         The model_serialization extension point supports registration of an EMF Resource.Factory implementation for use by models complying with a particular serialization, the most notable of which is XML. Alternate serilisations can be defined for textual model representations.
+         The model_serialization extension point supports registration of an EMF Resource.Factory implementation for use by models complying with a particular serialization, the most notable of which is XML. Alternate serializations can be defined for textual model representations.
       </documentation>
    </annotation>
 
