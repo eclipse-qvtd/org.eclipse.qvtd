@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: UniversalTextEditor.java,v 1.2 2008/09/28 12:14:59 ewillink Exp $
+ * $Id: UniversalTextEditor.java,v 1.3 2009/07/18 15:40:20 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.text;
 
@@ -25,7 +25,6 @@ import org.eclipse.jface.text.IUndoManager;
 import org.eclipse.jface.text.IUndoManagerExtension;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.qvt.declarative.editor.ui.IPageManager;
-import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
 import org.eclipse.text.undo.DocumentUndoManagerRegistry;
 import org.eclipse.text.undo.IDocumentUndoManager;
 
