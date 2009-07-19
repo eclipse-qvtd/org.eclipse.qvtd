@@ -3,6 +3,7 @@ package org.eclipse.qvt.declarative.test.editor.qvtcore;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcCreationFactory;
+import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractProjectHandle;
 import org.eclipse.qvt.declarative.test.editor.EditorTestCase;
 
@@ -26,6 +27,11 @@ public class QVTcEditorTestCase extends EditorTestCase
 		final String testFileName = getName() + " .qvtc";
 		IFile file = createFile(testFileName, contents);
 		return file;
+	}
+
+	@Override
+	protected ICreationFactory getCreationFactory() {
+		return QVTcCreationFactory.INSTANCE;
 	}
 
 	@Override
