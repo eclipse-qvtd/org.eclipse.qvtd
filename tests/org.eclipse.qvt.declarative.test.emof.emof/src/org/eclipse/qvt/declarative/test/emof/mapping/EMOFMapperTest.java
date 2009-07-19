@@ -72,7 +72,10 @@ public class EMOFMapperTest extends AbstractMapperTest
 	public void testEcoreToEMOF_SingleAnnotationReference() throws IOException, MappingConfigurationException { ecoreToAdaptedEMOF("SingleAnnotationReference"); }	
 	public void testEmofLoad_SingleAnnotationReference() throws IOException, MappingConfigurationException { adaptedEMOFLoad("SingleAnnotationReference"); }
 	public void testEcoreToEMOF_DoubleAnnotationReference() throws IOException, MappingConfigurationException { ecoreToAdaptedEMOF("DoubleAnnotationReference"); }	
-	public void testEmofLoad_DoubleAnnotationReference() throws IOException, MappingConfigurationException { adaptedEMOFLoad("DoubleAnnotationReference"); }
+//
+//	Following test incorrectly assumed that an xmi:idref had semantics within an xmi:Extension - bug 279686
+// FIXME reimplement for revised semantics
+//	public void testEmofLoad_DoubleAnnotationReference() throws IOException, MappingConfigurationException { adaptedEMOFLoad("DoubleAnnotationReference"); }
 	public void testEcoreToEMOF_Comment() throws IOException, MappingConfigurationException { ecoreToAdaptedEMOF("Comment"); }
 	public void testEmofLoad_Comment() throws IOException, MappingConfigurationException { adaptedEMOFLoad("Comment"); }
 	public void testEcoreToEMOF_DoubleAnnotation() throws IOException, MappingConfigurationException { ecoreToAdaptedEMOF("DoubleAnnotation"); }
