@@ -34,4 +34,6 @@ public abstract class TestsThatNeedWriting extends ModelRegistryTestCase
 	
 	// TODO basic access kind etc maintenance
 	// TODO pruning of model registry by a clean
+	
+	// TODO Add/remove ModelRegistry nature
 }
