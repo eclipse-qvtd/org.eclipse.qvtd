@@ -3,6 +3,7 @@ package org.eclipse.qvt.declarative.test.all;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.eclipse.qvt.declarative.test.editor.qvtrelation.QVTrBuilderTests;
 import org.eclipse.qvt.declarative.test.editor.qvtrelation.QVTrEditorTests;
 import org.eclipse.qvt.declarative.test.editor.qvtrelation.QVTrResourceTests;
 import org.eclipse.qvt.declarative.test.emof.qvtbase.QVTBaseConsistencyTest;
@@ -18,6 +19,7 @@ import org.eclipse.qvt.declarative.test.parser.qvtrelation.QVTrUnparseTests;
 public class AllQVTRelationTests
 {
 	public static void buildEditingSuite(TestSuite suite) {
+		suite.addTestSuite(QVTrBuilderTests.class);
 		suite.addTestSuite(QVTrEditorTests.class);
 // FIXME		suite.addTestSuite(QVTrMultiEditorTests.class);
 		suite.addTestSuite(QVTrResourceTests.class);
