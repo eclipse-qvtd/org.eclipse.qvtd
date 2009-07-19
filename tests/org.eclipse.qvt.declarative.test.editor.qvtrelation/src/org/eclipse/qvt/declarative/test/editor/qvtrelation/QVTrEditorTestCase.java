@@ -8,6 +8,8 @@ import org.eclipse.qvt.declarative.test.editor.EditorTestCase;
 
 public class QVTrEditorTestCase extends EditorTestCase
 {
+	protected static final String MINIMAL_TEST_FILE_CONTENTS = "transformation tx0(ecore:Ecore) {}\n";
+
 	protected IFile createModelRegistryFile() throws CoreException {
 		final String contents = 
 			"<?xml version='1.0' encoding='ASCII'?>\n" +
@@ -22,10 +24,15 @@ public class QVTrEditorTestCase extends EditorTestCase
 	}
 
 	protected IFile createMinimalTestFile() throws CoreException {
-		final String contents = "transformation tx0(ecore:Ecore) {}\n";
+		final String contents = MINIMAL_TEST_FILE_CONTENTS;
 		final String testFileName = getName() + " .qvtr";
 		IFile file = createFile(testFileName, contents);
 		return file;
+	}
+
+	@Override
+	protected QVTrCreationFactory getCreationFactory() {
+		return QVTrCreationFactory.INSTANCE;
 	}
 
 	@Override
