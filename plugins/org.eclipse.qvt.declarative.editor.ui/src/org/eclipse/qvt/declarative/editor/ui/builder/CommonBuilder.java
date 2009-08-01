@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.14 2009/06/06 15:10:41 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.15 2009/08/01 10:37:59 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -146,7 +146,7 @@ public abstract class CommonBuilder extends BuilderBase
 			parseController.initialize(projectRelativeInputPath, sourceProject, (IMessageHandler) problemHandler);
 			String contents = BuilderUtils.getFileContents(inputFile);
 			CommonParseController.ParsedResult parsedResult = parseController.parse(contents, monitor);
-			URI uri = URI.createPlatformResourceURI(workspaceRelativeOutputPath.toString(), true);
+			URI uri = URI.createURI(outputFile.getLocationURI().toString()); // Use file: as the baseURI for XMIHelper.deresolve
 			Resource resource = parsedResult.getAST();
 			if (resource != null) {
 				resource.setURI(uri);
