@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.15 2009/08/01 10:37:59 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.16 2009/08/01 12:19:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -159,10 +159,10 @@ public abstract class CommonBuilder extends BuilderBase
 		} catch (Exception e) {
 			getPlugin().logException("Failed to compile '" + inputFile.toString() + "'", e);
 		} finally {
+			problemHandler.flush(BasicMonitor.toMonitor(monitor));
 			if (builderListeners != null)
 				for (BuilderListener builderListener : builderListeners)
 					builderListener.endBuild(inputFile);
-			problemHandler.flush(BasicMonitor.toMonitor(monitor));
 		}
 	}
 
