@@ -26,6 +26,8 @@ import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.PathNameCS;
 import org.eclipse.ocl.ecore.EcoreFactory;
 import org.eclipse.ocl.ecore.Variable;
+import org.eclipse.ocl.utilities.TypedElement;
+import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
 import org.eclipse.qvt.declarative.ecore.QVTBase.QVTBaseFactory;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Rule;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
@@ -171,6 +173,17 @@ public class QVTcTransformationEnvironment extends QVTcEnvironment<IQVTcNodeEnvi
 		owner = uml.getOCLType(owner);				// Workaround bugzilla 172782
 		return super.lookupOperation(owner, name, args);
 	} */
+
+	@Override
+	public Variable lookupImplicitSourceForOperation(String name, List<? extends TypedElement<EClassifier>> params) {
+//		Mapping mapping = ast.getMapping(name);
+//		if (relation != null)
+//			return (Variable) getSelfVariable();
+		Function query = ast.getFunction(name);
+		if (query != null)
+			return (Variable) getSelfVariable();
+		return super.lookupImplicitSourceForOperation(name, params);
+	}
 	
 	public List<EPackage> resolvePackages(PathNameCS packageNameCS) {
 		List<String> names = packageNameCS.getSequenceOfNames();
