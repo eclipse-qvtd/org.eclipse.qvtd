@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractQVTcAnalyzer.java,v 1.6 2008/12/11 09:21:32 ewillink Exp $
+ * $Id: AbstractQVTcAnalyzer.java,v 1.7 2009/08/08 15:23:27 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore;
 
@@ -42,6 +42,7 @@ import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.cst.CallExpCS;
 import org.eclipse.ocl.cst.DotOrArrowEnum;
 import org.eclipse.ocl.cst.OCLExpressionCS;
+import org.eclipse.ocl.cst.OperationCallExpCS;
 import org.eclipse.ocl.cst.PathNameCS;
 import org.eclipse.ocl.cst.SimpleNameCS;
 import org.eclipse.ocl.cst.VariableExpCS;
@@ -52,10 +53,12 @@ import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.OperationCallExp;
 import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.ecore.Variable;
+import org.eclipse.ocl.ecore.VariableExp;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
 import org.eclipse.qvt.declarative.ecore.QVTBase.FunctionParameter;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Predicate;
 import org.eclipse.qvt.declarative.ecore.QVTBase.QVTBaseFactory;
+import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
 import org.eclipse.qvt.declarative.ecore.QVTCore.Assignment;
 import org.eclipse.qvt.declarative.ecore.QVTCore.BottomPattern;
@@ -214,7 +217,7 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 			return;
 		}
 		QVTcQueryEnvironment queryEnv = txEnv.createEnvironment(queryCS);
-		EClassifier returnType = resolveClassifier(env, "queryCS", queryCS.getType());
+		EClassifier returnType = resolveClassifier(txEnv, "queryCS", queryCS.getType());
 		for (ParamDeclarationCS inputParamDeclarationCS : queryCS.getInputParamDeclaration())
 			declareInputParamDeclarationCS(queryEnv, inputParamDeclarationCS);
 		@SuppressWarnings("unused") Function function = queryEnv.resolveQuery(returnType);
@@ -241,7 +244,20 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 //			assignmentCS.getIdentifier().setAst(variableAssignment);
 			SimpleNameCS identifierCS = variableExpCS.getSimpleNameCS();
 			String targetVariableName = identifierCS.getValue();
-			Variable targetVariable = (Variable) env.lookupLocal(targetVariableName);
+			Variable targetVariable = null;
+			try {
+				targetVariable = env.tryLookupVariable(targetVariableName);
+			} catch (LookupException e) {
+				ERROR(identifierCS, "AssignmentCS", env.formatLookupException(e));
+				List<?> ambiguousMatches = e.getAmbiguousMatches();
+				if (ambiguousMatches.size() > 0) {
+					// Return an arbitrary selection to avoid unrecognised variable errors (Bug 224322)
+					// Arbitrary selection must be deterministic to avoid JUnit indeterminacy
+					// FIXME Is this why the badmaps test fails intermittently?
+					List<?> sortedMatches = env.getFormatter().sort(ambiguousMatches);
+					targetVariable = (Variable) sortedMatches.get(0);
+				}
+			}
 			if (targetVariable == null) {
 				ERROR(identifierCS, "AssignmentCS", "Undefined variable '" + formatString(targetVariableName) + "'");
 				EClassifier type = assignmentValue.getType();
@@ -504,6 +520,21 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 		EClassifier type = typeCS(unrealizedVariableCS.getType(), env);
 		Variable variable = env.createUnrealizedVariableDefinition(identifierCS.getValue(), type, unrealizedVariableCS);
 		identifierCS.setAst(variable);
+	}
+
+	@Override
+	protected org.eclipse.ocl.expressions.OperationCallExp<EClassifier, EOperation> genOperationCallExp(
+			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
+			OperationCallExpCS operationCallExpCS, String rule, String operName,
+			org.eclipse.ocl.expressions.OCLExpression<EClassifier> source,
+			EClassifier ownerType, List<org.eclipse.ocl.expressions.OCLExpression<EClassifier>> args) {
+		if (source instanceof VariableExp) {	// FIXME Inherited behaviour should support statics
+			Transformation transformation = ((IQVTcNodeEnvironment)env).getTransformation();
+			VariableExp vExp = (VariableExp) source;
+			if ((vExp.getEType() == transformation) && Environment.SELF_VARIABLE_NAME.equals(vExp.getName()))
+				source = null;
+		}
+		return super.genOperationCallExp(env, operationCallExpCS, rule, operName, source, ownerType, args);
 	}
 
 	protected Mapping resolveMapping(QVTcMappingEnvironment<?> env, IdentifierCS identifierCS) throws LookupException {
