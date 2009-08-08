@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ProblemLimit.java,v 1.1 2008/08/26 19:11:06 ewillink Exp $
+ * $Id: ProblemLimit.java,v 1.2 2009/08/08 10:03:23 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -51,6 +51,7 @@ public class ProblemLimit
 	 */
 	public String check(int severity, String message) {
 		if (severity >= IMarker.SEVERITY_ERROR) {
+			errorCount++;
 			if (errorLimit > 0) {
 				if (errorCount > errorLimit)
 					return null;
@@ -58,9 +59,9 @@ public class ProblemLimit
 					return "Too many errors";
 				}
 			}
-			errorCount++;
 		}
 		if (severity >= IMarker.SEVERITY_WARNING) {
+			warningCount++;
 			if (warningLimit > 0) {
 				if (warningCount > warningLimit)
 					return null;
@@ -68,9 +69,9 @@ public class ProblemLimit
 					return "Too many warnings or errors";
 				}
 			}
-			warningCount++;
 		}
 		{
+			infoCount++;
 			if (infoLimit > 0) {
 				if (infoCount > infoLimit)
 					return null;
@@ -78,7 +79,6 @@ public class ProblemLimit
 					return "Too many infos or warnings or errors";
 				}
 			}
-			infoCount++;
 		}
 		return message;
 	}
