@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonTextEditor.java,v 1.9 2009/05/13 20:25:49 ewillink Exp $
+ * $Id: CommonTextEditor.java,v 1.10 2009/08/08 10:06:04 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -404,25 +404,29 @@ public class CommonTextEditor extends UniversalEditor implements ITextEditorWith
 		//	Delete the resource markers which should never have been copied to the annotation model.
 		//		
 		IDocumentProvider documentProvider = getDocumentProvider();
-		IAnnotationModel annotationModel = documentProvider.getAnnotationModel(getEditorInput());
-		try {
-			@SuppressWarnings("unchecked")
-			Iterator<Annotation> annotationIterator = annotationModel.getAnnotationIterator();
-			for (Iterator<Annotation> annIter = annotationIterator; annIter.hasNext(); ) {
-				Annotation ann = annIter.next();
-				if (ann instanceof MarkerAnnotation) {
-					if (QVTEditorPlugin.ANNOTATION_DELETE.isActive()) {
-						IMarker marker = ((MarkerAnnotation)ann).getMarker();
-						String lineNumber = String.valueOf(marker.getAttribute(IMarker.LINE_NUMBER));
-						String charStart = String.valueOf(marker.getAttribute(IMarker.CHAR_START));
-						String charEnd = String.valueOf(marker.getAttribute(IMarker.CHAR_END));
-						String message = String.valueOf(marker.getAttribute(IMarker.MESSAGE));
-						QVTEditorPlugin.ANNOTATION_DELETE.println("Lose '" + lineNumber + ":" + charStart + "-" + charEnd + ": " + message);
+		if (documentProvider != null) {
+			IAnnotationModel annotationModel = documentProvider.getAnnotationModel(getEditorInput());
+			if (annotationModel != null) {
+				try {
+					@SuppressWarnings("unchecked")
+					Iterator<Annotation> annotationIterator = annotationModel.getAnnotationIterator();
+					for (Iterator<Annotation> annIter = annotationIterator; annIter.hasNext(); ) {
+						Annotation ann = annIter.next();
+						if (ann instanceof MarkerAnnotation) {
+							if (QVTEditorPlugin.ANNOTATION_DELETE.isActive()) {
+								IMarker marker = ((MarkerAnnotation)ann).getMarker();
+								String lineNumber = String.valueOf(marker.getAttribute(IMarker.LINE_NUMBER));
+								String charStart = String.valueOf(marker.getAttribute(IMarker.CHAR_START));
+								String charEnd = String.valueOf(marker.getAttribute(IMarker.CHAR_END));
+								String message = String.valueOf(marker.getAttribute(IMarker.MESSAGE));
+								QVTEditorPlugin.ANNOTATION_DELETE.println("Lose '" + lineNumber + ":" + charStart + "-" + charEnd + ": " + message);
+							}
+							annotationModel.removeAnnotation(ann);
+						}
 					}
-					annotationModel.removeAnnotation(ann);
+				} catch (CoreException e) {
 				}
 			}
-		} catch (CoreException e) {
 		}
 		super.refreshMarkerAnnotations(problemMarkerType);
 	}
