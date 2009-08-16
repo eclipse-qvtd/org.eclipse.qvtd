@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.21 2009/05/13 20:26:23 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.22 2009/08/16 10:30:19 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -529,6 +529,14 @@ public abstract class CommonParseController implements IParseController
     }
 
     public ParsedResult parse(String contents, IProgressMonitor progressMonitor) {
+		fCurrentAst = parseInternal(contents, progressMonitor);
+		// FIXME my_monitor
+		cacheKeywordsOnce();
+		return fCurrentAst;
+	}
+
+    // FIXME This is a workaround to Bug 257627
+    public ParsedResult parseInternal(String contents, IProgressMonitor progressMonitor) {
 		if (parserProgress.isActive())
 			parserProgress.println(id + " Parse " + fFilePath.toString() + " " + fLanguage + " handler = " + handler.getClass().getName());
 		if (progressMonitor.isCanceled())
@@ -545,11 +553,7 @@ public abstract class CommonParseController implements IParseController
             ErrorHandler.reportError("Failed to parse language " + getLanguage().getName() + " and input " + getPath() + ":", e);
 		} catch (CoreException e) {
             ErrorHandler.reportError("Failed to parse language " + getLanguage().getName() + " and input " + getPath() + ":", e);
-		} finally {
-			fCurrentAst = newResult;		// Change only when all done.			
 		}
-		// FIXME my_monitor
-		cacheKeywordsOnce();
-		return fCurrentAst;
+		return newResult;
 	}
 }
