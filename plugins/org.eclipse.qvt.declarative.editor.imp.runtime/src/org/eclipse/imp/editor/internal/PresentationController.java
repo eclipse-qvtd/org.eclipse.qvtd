@@ -154,30 +154,22 @@ public class PresentationController implements IModelListener {
             ISourcePositionLocator locator) {
         int prevOffset= -1;
         int prevEnd= -1;
-        Object prevToken= null;
         for(Iterator<Object> iter= parseController.getTokenIterator(damage); iter.hasNext() && !monitor.isCanceled(); ) {
             Object token= iter.next();
             int offset= locator.getStartOffset(token);
             int end= locator.getEndOffset(token);
 
             if (offset <= prevEnd && end >= prevOffset) {
-            	continue;
+                continue;
             }
-            else {
-            	if (offset-1 > prevEnd+1) {
-            		TextAttribute attribute= fColorer.getInterColoring(parseController, prevToken, token);
-	            	if (attribute != null) {
-	            		changeTokenPresentation(parseController, presentation, prevEnd+1, attribute, offset-1);
-	            	}
-	            }
+             else {
 	            TextAttribute attribute= fColorer.getColoring(parseController, token);
 	            if (attribute != null) {
 	            	changeTokenPresentation(parseController, presentation, offset, attribute, end);
 	            }
             }
-	        prevOffset= offset;
+            prevOffset= offset;
             prevEnd= end;
-            prevToken= token;
         }
     }
 

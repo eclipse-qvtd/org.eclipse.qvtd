@@ -1,31 +1,48 @@
 Index: plugin.properties
 ===================================================================
+--- plugin.properties	(revision 0)
++++ plugin.properties	(revision 0)
+@@ -0,0 +1,15 @@
++###############################################################################
++# Copyright (c) 2009 Eclipse Modeling Project and others.
++# All rights reserved. This program and the accompanying materials
++# are made available under the terms of the Eclipse Public License v1.0
++# which accompanies this distribution, and is available at
++# http://www.eclipse.org/legal/epl-v10.html
++#
++# Contributors:
++#     E.D.Willink - initial API and implementation
++#
++# $Id: org.eclipse.imp.runtime.patch,v 1.2 2009/08/16 11:01:04 ewillink Exp $
++###############################################################################
++
++pluginName = QVT Declarative Editor variant of IMP Runtime
++providerName = Eclipse Modeling Project
 Index: META-INF/MANIFEST.MF
 ===================================================================
---- META-INF/MANIFEST.MF	(revision 21790)
+--- META-INF/MANIFEST.MF	(revision 21816)
 +++ META-INF/MANIFEST.MF	(working copy)
-@@ -2,11 +2,10 @@
+@@ -1,12 +1,12 @@
+ Manifest-Version: 1.0
  Bundle-ManifestVersion: 2
- Bundle-Name: IMP Runtime (Incubation)
- Bundle-SymbolicName: org.eclipse.imp.runtime; singleton:=true
+-Bundle-Name: IMP Runtime (Incubation)
+-Bundle-SymbolicName: org.eclipse.imp.runtime; singleton:=true
 -Bundle-Version: 0.1.100
--Bundle-Activator: org.eclipse.imp.runtime.RuntimePlugin
-+Bundle-Version: 0.1.100.qualifier
++Bundle-Name: %pluginName
++Bundle-SymbolicName: org.eclipse.imp.runtime;singleton:=true
++Bundle-Version: 0.0.10100.qualifier
+ Bundle-Activator: org.eclipse.imp.runtime.RuntimePlugin
  Bundle-ActivationPolicy: lazy
 -Eclipse-LazyStart: true
- Bundle-Vendor: rfuhrer@watson.ibm.com
+-Bundle-Vendor: rfuhrer@watson.ibm.com
++Bundle-Vendor: %providerName
 +Bundle-Localization: plugin
  Require-Bundle: com.ibm.icu,
   lpg.runtime,
   org.eclipse.compare,
-@@ -49,3 +48,4 @@
-  org.eclipse.imp.ui.dialogs.validators,
-  org.eclipse.imp.utils
- Bundle-RequiredExecutionEnvironment: J2SE-1.5
-+Bundle-Activator: org.eclipse.imp.runtime.RuntimePlugin
 Index: build.properties
 ===================================================================
---- build.properties	(revision 21790)
+--- build.properties	(revision 21816)
 +++ build.properties	(working copy)
 @@ -3,5 +3,6 @@
  bin.includes = META-INF/,\
@@ -37,7 +54,7 @@ Index: build.properties
  src.includes = icons/
 Index: src/org/eclipse/imp/language/LanguageRegistry.java
 ===================================================================
---- src/org/eclipse/imp/language/LanguageRegistry.java	(revision 21790)
+--- src/org/eclipse/imp/language/LanguageRegistry.java	(revision 21816)
 +++ src/org/eclipse/imp/language/LanguageRegistry.java	(working copy)
 @@ -22,6 +22,7 @@
  import java.util.Map;
@@ -80,27 +97,9 @@ Index: src/org/eclipse/imp/language/LanguageRegistry.java
  	        	if (!gotIt)
  	        		((FileEditorMapping) mapping).addEditor((EditorDescriptor) sUniversalEditor);
  	        }
-Index: src/org/eclipse/imp/services/ITokenColorer.java
-===================================================================
---- src/org/eclipse/imp/services/ITokenColorer.java	(revision 21790)
-+++ src/org/eclipse/imp/services/ITokenColorer.java	(working copy)
-@@ -38,4 +38,13 @@
-      * @return a TextAttribute
-      */
-     public TextAttribute getColoring(IParseController controller, Object token);
-+
-+    /**
-+     * Provide coloring and font to use between a pair of tokens in the model.
-+     * @param model The model that contains the token
-+     * @param prevToken The token preceding the intertoken gap, null at start of file
-+     * @param nextToken The token following the intertoken gap, null at end of file
-+     * @return a TextAttribute
-+     */
-+    public TextAttribute getInterColoring(IParseController controller, Object prevToken, Object nextToken);
- }
 Index: src/org/eclipse/imp/parser/SymbolTable.java
 ===================================================================
---- src/org/eclipse/imp/parser/SymbolTable.java	(revision 21790)
+--- src/org/eclipse/imp/parser/SymbolTable.java	(revision 21816)
 +++ src/org/eclipse/imp/parser/SymbolTable.java	(working copy)
 @@ -11,7 +11,11 @@
   * represent lexical nesting of scopes.
@@ -115,43 +114,9 @@ Index: src/org/eclipse/imp/parser/SymbolTable.java
  
      public SymbolTable() { this(null); }
      public SymbolTable(SymbolTable<T> parent) { this.parent = parent; }
-Index: src/org/eclipse/imp/builder/BuilderBase.java
-===================================================================
---- src/org/eclipse/imp/builder/BuilderBase.java	(revision 21790)
-+++ src/org/eclipse/imp/builder/BuilderBase.java	(working copy)
-@@ -116,9 +116,15 @@
- 
-     private final IResourceDeltaVisitor fDeltaVisitor= new SourceDeltaVisitor();
- 
--    protected IPreferencesService fPrefService= new PreferencesService(null, getPlugin().getLanguageID());
-+    private IPreferencesService fPrefService= null;
-+
-+    protected IPreferencesService getPreferencesService() {
-+    	if (fPrefService == null)
-+    	    fPrefService= new PreferencesService(null, getPlugin().getLanguageID());
-+		return fPrefService;
-+	}
- 
--    protected DependencyInfo fDependencyInfo;
-+	protected DependencyInfo fDependencyInfo;
- 
-     private final Collection<IFile> fChangedSources= new HashSet<IFile>();
- 
-@@ -184,8 +190,9 @@
- 
-     @SuppressWarnings("unchecked")
-     protected IProject[] build(int kind, Map args, IProgressMonitor monitor) {
--        if (fPrefService.getProject() == null) {
--            fPrefService.setProject(getProject());
-+    	IPreferencesService preferencesService = getPreferencesService();
-+        if (preferencesService.getProject() == null) {
-+        	preferencesService.setProject(getProject());
-         }
- 
-         fChangedSources.clear();
 Index: src/org/eclipse/imp/utils/HTMLPrinter.java
 ===================================================================
---- src/org/eclipse/imp/utils/HTMLPrinter.java	(revision 21790)
+--- src/org/eclipse/imp/utils/HTMLPrinter.java	(revision 21816)
 +++ src/org/eclipse/imp/utils/HTMLPrinter.java	(working copy)
 @@ -212,19 +212,19 @@
       * Formats several messages as HTML text.
@@ -197,9 +162,43 @@ Index: src/org/eclipse/imp/utils/HTMLPrinter.java
          StringBuffer buffer= new StringBuffer();
          addPageProlog(buffer);
          addParagraph(buffer, convertToHTMLContent(message));
+Index: src/org/eclipse/imp/builder/BuilderBase.java
+===================================================================
+--- src/org/eclipse/imp/builder/BuilderBase.java	(revision 21816)
++++ src/org/eclipse/imp/builder/BuilderBase.java	(working copy)
+@@ -116,9 +116,15 @@
+ 
+     private final IResourceDeltaVisitor fDeltaVisitor= new SourceDeltaVisitor();
+ 
+-    protected IPreferencesService fPrefService= new PreferencesService(null, getPlugin().getLanguageID());
++    private IPreferencesService fPrefService= null;
++
++    protected IPreferencesService getPreferencesService() {
++    	if (fPrefService == null)
++    	    fPrefService= new PreferencesService(null, getPlugin().getLanguageID());
++		return fPrefService;
++	}
+ 
+-    protected DependencyInfo fDependencyInfo;
++	protected DependencyInfo fDependencyInfo;
+ 
+     private final Collection<IFile> fChangedSources= new HashSet<IFile>();
+ 
+@@ -184,8 +190,9 @@
+ 
+     @SuppressWarnings("unchecked")
+     protected IProject[] build(int kind, Map args, IProgressMonitor monitor) {
+-        if (fPrefService.getProject() == null) {
+-            fPrefService.setProject(getProject());
++    	IPreferencesService preferencesService = getPreferencesService();
++        if (preferencesService.getProject() == null) {
++        	preferencesService.setProject(getProject());
+         }
+ 
+         fChangedSources.clear();
 Index: src/org/eclipse/imp/editor/AnnotationHoverBase.java
 ===================================================================
---- src/org/eclipse/imp/editor/AnnotationHoverBase.java	(revision 21790)
+--- src/org/eclipse/imp/editor/AnnotationHoverBase.java	(revision 21816)
 +++ src/org/eclipse/imp/editor/AnnotationHoverBase.java	(working copy)
 @@ -159,8 +159,8 @@
       * Formats a message as HTML text.
@@ -245,7 +244,7 @@ Index: src/org/eclipse/imp/editor/AnnotationHoverBase.java
          HTMLPrinter.addParagraph(buffer, HTMLPrinter.convertToHTMLContent("Multiple messages at this line"));
 Index: src/org/eclipse/imp/editor/internal/PresentationController.java
 ===================================================================
---- src/org/eclipse/imp/editor/internal/PresentationController.java	(revision 21790)
+--- src/org/eclipse/imp/editor/internal/PresentationController.java	(revision 21816)
 +++ src/org/eclipse/imp/editor/internal/PresentationController.java	(working copy)
 @@ -13,6 +13,8 @@
  
@@ -256,37 +255,19 @@ Index: src/org/eclipse/imp/editor/internal/PresentationController.java
  import java.util.Iterator;
  import java.util.List;
  import java.util.Stack;
-@@ -152,24 +154,35 @@
-             ISourcePositionLocator locator) {
-         int prevOffset= -1;
-         int prevEnd= -1;
-+        Object prevToken= null;
-         for(Iterator<Object> iter= parseController.getTokenIterator(damage); iter.hasNext() && !monitor.isCanceled(); ) {
-             Object token= iter.next();
-             int offset= locator.getStartOffset(token);
-             int end= locator.getEndOffset(token);
- 
+@@ -160,16 +162,19 @@
              if (offset <= prevEnd && end >= prevOffset) {
--                continue;
-+            	continue;
-+            }
-+            else {
-+            	if (offset-1 > prevEnd+1) {
-+            		TextAttribute attribute= fColorer.getInterColoring(parseController, prevToken, token);
-+	            	if (attribute != null) {
-+	            		changeTokenPresentation(parseController, presentation, prevEnd+1, attribute, offset-1);
-+	            	}
-+	            }
+                 continue;
+             }
+-            changeTokenPresentation(parseController, presentation, token, locator);
++             else {
 +	            TextAttribute attribute= fColorer.getColoring(parseController, token);
 +	            if (attribute != null) {
 +	            	changeTokenPresentation(parseController, presentation, offset, attribute, end);
 +	            }
-             }
--            changeTokenPresentation(parseController, presentation, token, locator);
--            prevOffset= offset;
-+	        prevOffset= offset;
++            }
+             prevOffset= offset;
              prevEnd= end;
-+            prevToken= token;
          }
      }
  
@@ -299,7 +280,7 @@ Index: src/org/eclipse/imp/editor/internal/PresentationController.java
                  attribute == null ? null : attribute.getForeground(),
                  attribute == null ? null : attribute.getBackground(),
                  attribute == null ? SWT.NORMAL : attribute.getStyle());
-@@ -182,17 +195,27 @@
+@@ -182,17 +187,27 @@
          }
      }
  
@@ -334,7 +315,7 @@ Index: src/org/eclipse/imp/editor/internal/PresentationController.java
              	}
              	
              	// Attempt to head off exception due to final range extending beyond
-@@ -206,7 +229,7 @@
+@@ -206,7 +221,7 @@
              		Iterator presIt = presentation.getAllStyleRangeIterator();
              		while (presIt.hasNext()) {
              			StyleRange nextRange = (StyleRange) presIt.next();
@@ -343,7 +324,7 @@ Index: src/org/eclipse/imp/editor/internal/PresentationController.java
              				newPresentation.addStyleRange(nextRange);
              		}
              	} else {
-@@ -270,4 +293,78 @@
+@@ -270,4 +285,78 @@
              }
          });
      }
@@ -424,7 +405,7 @@ Index: src/org/eclipse/imp/editor/internal/PresentationController.java
  }
 Index: src/org/eclipse/imp/editor/ParserScheduler.java
 ===================================================================
---- src/org/eclipse/imp/editor/ParserScheduler.java	(revision 21790)
+--- src/org/eclipse/imp/editor/ParserScheduler.java	(revision 21816)
 +++ src/org/eclipse/imp/editor/ParserScheduler.java	(working copy)
 @@ -72,6 +72,10 @@
          IEditorInput editorInput= fEditorPart.getEditorInput();
@@ -439,7 +420,7 @@ Index: src/org/eclipse/imp/editor/ParserScheduler.java
                  RuntimePlugin.getInstance().writeInfoMsg(
 Index: .settings/org.eclipse.jdt.core.prefs
 ===================================================================
---- .settings/org.eclipse.jdt.core.prefs	(revision 21790)
+--- .settings/org.eclipse.jdt.core.prefs	(revision 21816)
 +++ .settings/org.eclipse.jdt.core.prefs	(working copy)
 @@ -1,4 +1,4 @@
 -#Wed Oct 18 15:08:27 EDT 2006

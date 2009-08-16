@@ -38,13 +38,4 @@ public interface ITokenColorer extends ILanguageService {
      * @return a TextAttribute
      */
     public TextAttribute getColoring(IParseController controller, Object token);
-
-    /**
-     * Provide coloring and font to use between a pair of tokens in the model.
-     * @param model The model that contains the token
-     * @param prevToken The token preceding the intertoken gap, null at start of file
-     * @param nextToken The token following the intertoken gap, null at end of file
-     * @return a TextAttribute
-     */
-    public TextAttribute getInterColoring(IParseController controller, Object prevToken, Object nextToken);
 }
