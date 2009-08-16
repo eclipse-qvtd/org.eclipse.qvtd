@@ -18,7 +18,7 @@
 *
 * </copyright>
 *
-* $Id: QVTrParsersym.java,v 1.10 2009/03/06 22:39:37 ewillink Exp $
+* $Id: QVTrParsersym.java,v 1.11 2009/08/16 10:08:48 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;
@@ -141,6 +141,8 @@ public interface QVTrParsersym {
       TK_EOF_TOKEN = 111,
       TK_IDENTIFIER = 3,
       TK_INTEGER_RANGE_START = 112,
+      TK_SINGLE_LINE_COMMENT = 118,
+      TK_MULTI_LINE_COMMENT = 119,
       TK_ERROR_TOKEN = 1;
 
       public final static String orderedTerminalSymbols[] = {
@@ -261,7 +263,9 @@ public interface QVTrParsersym {
                  "context",
                  "package",
                  "attr",
-                 "oper"
+                 "oper",
+                 "SINGLE_LINE_COMMENT",
+                 "MULTI_LINE_COMMENT"
              };
 
     public final static boolean isValidForParser = true;

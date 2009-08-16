@@ -15,7 +15,7 @@
 *
 * </copyright>
 *
-* $Id: QVTrLexer.java,v 1.11 2009/03/06 22:39:37 ewillink Exp $
+* $Id: QVTrLexer.java,v 1.12 2009/08/16 10:08:48 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;
@@ -382,7 +382,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 10:  Token ::= SLC
             //
             case 10: { 
-				skipToken();
+				makeComment(TK_SINGLE_LINE_COMMENT);
 	            break;
             }
 	 
@@ -390,7 +390,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 11:  Token ::= / * Inside Stars /
             //
             case 11: { 
-                skipToken();
+                makeComment(TK_MULTI_LINE_COMMENT);
                 break;
             }
      
