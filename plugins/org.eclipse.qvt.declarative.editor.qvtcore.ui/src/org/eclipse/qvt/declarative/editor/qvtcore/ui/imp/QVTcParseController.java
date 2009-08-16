@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcParseController.java,v 1.4 2008/12/04 07:51:26 ewillink Exp $
+ * $Id: QVTcParseController.java,v 1.5 2009/08/16 10:09:36 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui.imp;
 
@@ -49,6 +49,10 @@ public class QVTcParseController extends CommonParseController
 			return TokenKind.REAL;
         case QVTcLexer.TK_STRING_LITERAL:
              return TokenKind.STRING;
+        case QVTcLexer.TK_SINGLE_LINE_COMMENT:
+            return TokenKind.LINE_COMMENT;
+        case QVTcLexer.TK_MULTI_LINE_COMMENT:
+            return TokenKind.PARAGRAPH_COMMENT;
 		default:
 			if (isKeyword(kind))
 				return TokenKind.KEYWORD;
