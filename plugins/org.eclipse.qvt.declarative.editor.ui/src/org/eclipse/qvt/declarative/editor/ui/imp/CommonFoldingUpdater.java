@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonFoldingUpdater.java,v 1.4 2008/08/24 19:13:36 ewillink Exp $
+ * $Id: CommonFoldingUpdater.java,v 1.5 2009/08/16 10:29:15 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -77,9 +77,9 @@ public abstract class CommonFoldingUpdater extends FolderBase
 			Adjunct adjunct = adjuncts.get(i);
 			IToken previous_token = prsStream.getIToken(adjunct.getTokenIndex());
 			IToken next_token = prsStream.getIToken(prsStream.getNext(previous_token.getTokenIndex()));
-			Adjunct comments[] = (Adjunct[])previous_token.getFollowingAdjuncts();
+			IToken comments[] = previous_token.getFollowingAdjuncts();
 			for (int k = 0; k < comments.length; k++) {
-				Adjunct comment = comments[k];
+				Adjunct comment = (Adjunct) comments[k];
 				if (comment.getEndLine() > comment.getLine()) {
 					IToken gate_token = k + 1 < comments.length ? comments[k + 1]
 							: next_token;
