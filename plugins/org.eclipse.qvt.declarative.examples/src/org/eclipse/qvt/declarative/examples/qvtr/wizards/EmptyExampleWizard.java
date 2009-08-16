@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EmptyExampleWizard.java,v 1.1 2009/06/20 09:15:23 ewillink Exp $
+ * $Id: EmptyExampleWizard.java,v 1.2 2009/08/16 12:41:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.examples.qvtr.wizards;
 
@@ -27,7 +27,7 @@ public class EmptyExampleWizard extends AbstractExampleWizard
 	@Override
 	protected Collection<ProjectDescriptor> getProjectDescriptors() {
 		List<ProjectDescriptor> projects = new ArrayList<ProjectDescriptor>(4);
-		projects.add(new ProjectDescriptor("org.eclipse.qvt.declarative.examples", "zips/qvtr/empty.zip", "Empty QVTr Project"));  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$		
+		projects.add(new ProjectDescriptor("org.eclipse.qvt.declarative.examples", "zips/qvtr/empty.zip", "EmptyQVTrProject"));  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$		
 		return projects;
 	}
 }
