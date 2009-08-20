@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractParseTestCase.java,v 1.6 2008/12/31 18:20:23 ewillink Exp $
+ * $Id: AbstractParseTestCase.java,v 1.7 2009/08/20 20:29:57 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.parser;
 
@@ -46,7 +46,7 @@ import org.eclipse.qvt.declarative.modelregistry.standalone.FileHandle;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ProblemHandlerDiagnosticChain;
-import org.eclipse.qvt.declarative.parser.unparser.AbstractUnparser;
+import org.eclipse.qvt.declarative.parser.unparser.IUnparser;
 import org.eclipse.qvt.declarative.parser.utils.ProblemLog;
 import org.eclipse.qvt.declarative.parser.utils.ProblemLog.Problem;
 import org.eclipse.qvt.declarative.test.emof.AbstractTestCase;
@@ -157,7 +157,7 @@ public abstract class AbstractParseTestCase extends AbstractTestCase
 	
 	protected abstract ICSTFileEnvironment createEnvironment(String fileName, URI astURI) throws IOException, CoreException;
 
-	protected final AbstractUnparser createUnparser(Resource referenceResource) {
+	protected final IUnparser createUnparser(Resource referenceResource) {
 		return getCreationFactory().createUnparser(referenceResource);
 	}
 	
@@ -282,7 +282,7 @@ public abstract class AbstractParseTestCase extends AbstractTestCase
 		URI loadURI = getProjectFileURI(referenceName);
 		Resource referenceResource = resourceSet.getResource(loadURI, true);;
 		//
-		AbstractUnparser unParser = createUnparser(referenceResource);
+		IUnparser unParser = createUnparser(referenceResource);
 		unParser.unparse();
 		String unparsedString = unParser.getString();
 		//
