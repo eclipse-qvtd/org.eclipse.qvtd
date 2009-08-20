@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ICreationFactory.java,v 1.8 2009/05/13 20:24:49 ewillink Exp $
+ * $Id: ICreationFactory.java,v 1.9 2009/08/20 20:19:25 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui;
 
@@ -22,19 +22,19 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.imp.language.Language;
+import org.eclipse.imp.parser.ISourcePositionLocator;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
 import org.eclipse.qvt.declarative.editor.ui.builder.CommonNature;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonEditorDefinition;
-import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
-import org.eclipse.qvt.declarative.editor.ui.imp.CommonSourcePositionLocator;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
+import org.eclipse.qvt.declarative.editor.ui.imp.ICommonParseController;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
-import org.eclipse.qvt.declarative.parser.unparser.AbstractUnparser;
+import org.eclipse.qvt.declarative.parser.unparser.IUnparser;
 
 public interface ICreationFactory
 {
@@ -53,22 +53,22 @@ public interface ICreationFactory
 	public CommonNature createNature();
 
 	@Deprecated // Use createSourcePositionLocator
-	public CommonSourcePositionLocator createNodeLocator(ICSTRootEnvironment environment);
+	public ISourcePositionLocator createNodeLocator(ICSTRootEnvironment environment);
 
-	public CommonParseController createParseController();
+	public ICommonParseController createParseController();
 
 	/**
 	 * Create the problem handler and associated marker creation support.
 	 */
 	public ProblemHandler createProblemHandler(IFile file);
 
-	public CommonSourcePositionLocator createSourcePositionLocator(ICSTRootEnvironment environment);
+	public ISourcePositionLocator createSourcePositionLocator(ICSTRootEnvironment environment);
 
 	public ITextEditorWithUndoContext createTextEditor(IPageManager editorPageManager);
 
 	public CommonTreeModelBuilder createTreeModelBuilder(boolean showAST);
 	
-	public AbstractUnparser createUnparser(Resource resource);	
+	public IUnparser createUnparser(Resource resource);	
 
 	/**
 	 * Return an adapter that enables this to behave as key, or null if no adapter available. 
