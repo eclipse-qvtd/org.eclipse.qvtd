@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.17 2009/08/16 10:30:39 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.18 2009/08/20 20:15:41 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -47,7 +47,8 @@ import org.eclipse.qvt.declarative.compilation.CompilationService;
 import org.eclipse.qvt.declarative.ecore.utils.TracingOption;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
-import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
+import org.eclipse.qvt.declarative.editor.ui.imp.ICommonParseController;
+import org.eclipse.qvt.declarative.editor.ui.imp.ICommonParseResult;
 
 /**
  * A builder may be activated on a file containing language code every time it
@@ -140,12 +141,12 @@ public abstract class CommonBuilder extends BuilderBase
 		getPlugin().writeInfoMsg("Building " + creationFactory.getLanguageID() + " input file: '" + inputFile.getName() + "', output file: '" + outputFile.getName() + "'");
 		ProblemHandler problemHandler = creationFactory.createProblemHandler(inputFile);
 		try {
-			CommonParseController parseController = createParseController();
+			ICommonParseController parseController = createParseController();
 	//		parseController.getAnnotationTypeInfo().addProblemMarkerType(creationFactory.getErrorMarkerId());
 			ISourceProject sourceProject = ModelFactory.open(inputFile.getProject());
 			parseController.initialize(projectRelativeInputPath, sourceProject, (IMessageHandler) problemHandler);
 			String contents = BuilderUtils.getFileContents(inputFile);
-			CommonParseController.ParsedResult parsedResult = parseController.parseInternal(contents, monitor);
+			ICommonParseResult parsedResult = parseController.parseWithoutCaching(contents, monitor);
 			URI uri = URI.createURI(outputFile.getLocationURI().toString()); // Use file: as the baseURI for XMIHelper.deresolve
 			Resource resource = parsedResult.getAST();
 			if (resource != null) {
@@ -178,7 +179,7 @@ public abstract class CommonBuilder extends BuilderBase
         };
 	}
 
-	protected CommonParseController createParseController() {
+	protected ICommonParseController createParseController() {
 		return creationFactory.createParseController();
 	}
 
