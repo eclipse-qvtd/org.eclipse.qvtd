@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLParseController.java,v 1.5 2008/12/04 09:03:35 ewillink Exp $
+ * $Id: OCLParseController.java,v 1.6 2009/08/20 20:22:07 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui.imp;
 
@@ -98,7 +98,6 @@ public class OCLParseController extends CommonParseController
 		return keyword != null ? keyword : super.createKeyword(text);
 	}
 
-	@Override
 	public TokenKind getTokenKind(int kind) {
 		switch (kind) {
 		case OCLBacktrackingLexer.TK_EOF_TOKEN:
@@ -110,7 +109,11 @@ public class OCLParseController extends CommonParseController
 		case OCLBacktrackingLexer.TK_REAL_LITERAL:
 			return TokenKind.REAL;
         case OCLBacktrackingLexer.TK_STRING_LITERAL:
-             return TokenKind.STRING;
+            return TokenKind.STRING;
+        case OCLBacktrackingLexer.TK_SINGLE_LINE_COMMENT:
+            return TokenKind.LINE_COMMENT;
+        case OCLBacktrackingLexer.TK_MULTI_LINE_COMMENT:
+            return TokenKind.PARAGRAPH_COMMENT;
 		default:
 			if (isKeyword(kind))
 				return TokenKind.KEYWORD;
