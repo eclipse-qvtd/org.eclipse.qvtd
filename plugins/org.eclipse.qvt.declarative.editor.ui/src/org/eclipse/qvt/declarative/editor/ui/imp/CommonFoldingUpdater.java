@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2008 E.D.Willink and others.
+ * Copyright (c) 2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonFoldingUpdater.java,v 1.5 2009/08/16 10:29:15 ewillink Exp $
+ * $Id: CommonFoldingUpdater.java,v 1.6 2009/08/20 20:17:34 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -30,7 +30,6 @@ import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.qvt.declarative.editor.FoldingBehavior;
-import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 import org.eclipse.qvt.declarative.parser.utils.CommonASTVisitor;
 
 /**
@@ -124,7 +123,7 @@ public abstract class CommonFoldingUpdater extends FolderBase
 	// defined in FolderBase
 	@Override
 	public void sendVisitorToAST(HashMap<Annotation,Position> newAnnotations, List<Annotation> annotations, Object ast) {
-		CSTNode theCST = ((ASTandCST) ast).getCST();
+		CSTNode theCST = ((ICommonParseResult) ast).getCST();
 		if (theCST != null) {
 			IToken startToken = theCST.getStartToken();
 			if (startToken != null) {
