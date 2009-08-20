@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.14 2009/06/06 15:12:06 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.15 2009/08/20 20:16:37 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.imp.parser.ISourcePositionLocator;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ocl.cst.CSTNode;
@@ -48,7 +49,7 @@ import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 import org.eclipse.qvt.declarative.ecore.utils.TracingOption;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
-import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController.TokenKind;
+import org.eclipse.qvt.declarative.editor.ui.imp.ICommonParseController.TokenKind;
 import org.eclipse.qvt.declarative.parser.environment.IHasName;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.swt.graphics.Image;
@@ -57,16 +58,15 @@ public class CommonContentProposals
 {
 	public static TracingOption proposalDebug = new TracingOption(QVTEditorPlugin.PLUGIN_ID, "proposal/debug");
 
-	protected final CommonParseController commonParseController;
+	protected final ICommonParseResult parseResult;
 	protected final int offset;
 	protected final Map<Object, ICommonProposal> map;
-	protected CommonParseController.ParsedResult parsedResult;
 	protected CSTNode cstRoot;
 	protected IToken tokenAtOffset;
 	protected String prefixAtOffset;
 	
-	public CommonContentProposals(CommonParseController commonParseController, int offset) {
-		this.commonParseController = commonParseController;
+	public CommonContentProposals(ICommonParseResult parseResult, int offset) {
+		this.parseResult = parseResult;
 		this.offset = offset;
 		this.map = new HashMap<Object, ICommonProposal>();
 	}
@@ -77,7 +77,7 @@ public class CommonContentProposals
 	 */
 	protected void addIdentifierProposalCandidate(Map<EClassifier, List<EStructuralFeature>> usages, EObject proposal, CSTNode cstNode) {
 		if (checkName(usages, proposal, cstNode) && checkType(usages, proposal, cstNode) && !map.containsKey(proposal)) {
-			ILabelProvider labelProvider = commonParseController.getLabelProvider();
+			ILabelProvider labelProvider = parseResult.getParseController().getLabelProvider();
 			String newText = getProposalReplacementText(proposal);
 			String displayText = getProposalDisplayText(labelProvider, proposal, newText);
 			Image image = getProposalDisplayImage(labelProvider, proposal);
@@ -103,7 +103,7 @@ public class CommonContentProposals
 	}
 
 	protected void addIdentifierKeywordProposals(CSTNode cstNode) {
-		for (ICommonKeyword keyword : commonParseController.getKeywords()) {
+		for (ICommonKeyword keyword : parseResult.getKeywords()) {
 			if (keyword.isIdentifier(cstNode)) {
 				String keywordText = keyword.getText();
 				if (offset < tokenAtOffset.getStartOffset())
@@ -115,7 +115,7 @@ public class CommonContentProposals
 	}
 
 	protected void addKeywordProposals() {
-		for (ICommonKeyword keyword : commonParseController.getKeywords()) {
+		for (ICommonKeyword keyword : parseResult.getKeywords()) {
 			String keywordText = keyword.getText();
 			if (offset < tokenAtOffset.getStartOffset())
 				map.put(keyword, new CommonProposal(keywordText, offset, keywordText, "", offset, null));
@@ -125,7 +125,7 @@ public class CommonContentProposals
 	}
 
 	protected void addStringProposals() {
-		Collection<Resource> resources = parsedResult.getFileEnvironment().getResourcesVisibleAt(null);
+		Collection<Resource> resources = parseResult.getResourcesVisibleAt(null);
 		for (Resource resource : resources)
 			for (TreeIterator<EObject> i = resource.getAllContents(); i.hasNext(); )
 				addStringProposalCandidate(i.next());
@@ -198,14 +198,7 @@ public class CommonContentProposals
 	}
 
 	public void computeProposals() {
-		parsedResult = commonParseController.getCurrentAst();
-		if (parsedResult == null) {
-			if (proposalDebug.isActive())
-				proposalDebug.println("No Parsed Result");
-			map.put(null, new CommonNonProposal("no info available due to Internal error", "", offset));
-			return;
-		}
-		cstRoot = parsedResult.getCST();
+		cstRoot = parseResult.getCST();
 		if (cstRoot == null) {
 			if (proposalDebug.isActive())
 				proposalDebug.println("No CST");
@@ -214,10 +207,10 @@ public class CommonContentProposals
 		}
 		tokenAtOffset = getToken();
 		prefixAtOffset = getPrefix();
-		TokenKind tokenKind = commonParseController.getTokenKind(tokenAtOffset.getKind());
+		TokenKind tokenKind = parseResult.getTokenKind(tokenAtOffset.getKind());
 		switch (tokenKind) {
 			case IDENTIFIER: {
-				CommonSourcePositionLocator locator = commonParseController.getCreationFactory().createSourcePositionLocator(parsedResult.getRootEnvironment());
+				ISourcePositionLocator locator = parseResult.getSourcePositionLocator();
 				CSTNode node = (CSTNode) locator.findNode(cstRoot, tokenAtOffset.getStartOffset(), tokenAtOffset.getEndOffset());
 				if (node == null) {
 					if (proposalDebug.isActive())
@@ -238,7 +231,7 @@ public class CommonContentProposals
 				break;
 			}
 			case ERROR: {
-				CommonSourcePositionLocator locator = commonParseController.getCreationFactory().createSourcePositionLocator(parsedResult.getRootEnvironment());
+				ISourcePositionLocator locator = parseResult.getSourcePositionLocator();
 				CSTNode node = (CSTNode) locator.findNode(cstRoot, tokenAtOffset.getStartOffset(), tokenAtOffset.getEndOffset());
 				addIdentifierProposals(node);
 				addIdentifierKeywordProposals(node);
@@ -248,7 +241,7 @@ public class CommonContentProposals
 				break;
 			}
 			case KEYWORD: {
-				CommonSourcePositionLocator locator = commonParseController.getCreationFactory().createSourcePositionLocator(parsedResult.getRootEnvironment());
+				ISourcePositionLocator locator = parseResult.getSourcePositionLocator();
 				CSTNode node = (CSTNode) locator.findNode(cstRoot, tokenAtOffset.getStartOffset(), tokenAtOffset.getEndOffset());
 				if ((node instanceof IHasName) || (node instanceof SimpleNameCS)) {
 					addIdentifierProposals(node);
@@ -325,7 +318,7 @@ public class CommonContentProposals
 	}
 
 	protected String getPrefix() {
-		if (commonParseController.isCompleteable(tokenAtOffset.getKind()))
+		if (parseResult.isCompleteable(tokenAtOffset.getKind()))
 			if ((tokenAtOffset.getStartOffset() <= offset) && (offset <= tokenAtOffset.getEndOffset() + 1))
 				return getTokenAtOffsetString().substring(0, offset - tokenAtOffset.getStartOffset());
 		return "";
@@ -373,11 +366,11 @@ public class CommonContentProposals
 	 * as the target of requiredUsage.
 	 */
 	protected Collection<Resource> getResources(Map<EClassifier, List<EStructuralFeature>> usages, EObject astNode) {
-		return parsedResult.getFileEnvironment().getResourcesVisibleAt(astNode);
+		return parseResult.getResourcesVisibleAt(astNode);
 	}
 	
 	protected IToken getToken() {
-		AbstractParser stream = commonParseController.getParser();
+		AbstractParser stream = parseResult.getParser();
 		IToken errorToken = stream.getErrorTokenAtCharacter(offset);
 		if (errorToken != null)
 			return errorToken;
@@ -387,8 +380,8 @@ public class CommonContentProposals
 		int previousIndex = stream.getPrevious(tokenIndex);
 		IToken previousToken = stream.getIToken(previousIndex);
 		int previousIndexKind = previousToken.getKind();
-		boolean isIdentifier = commonParseController.isIdentifier(previousIndexKind);
-		boolean isKeyword = commonParseController.isKeyword(previousIndexKind);
+		boolean isIdentifier = parseResult.isIdentifier(previousIndexKind);
+		boolean isKeyword = parseResult.isKeyword(previousIndexKind);
 		boolean atEnd = offset == previousToken.getEndOffset() + 1;
 		return ((isIdentifier || isKeyword) && atEnd) ? previousToken : token;
 	}
