@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonSourcePositionLocator.java,v 1.1 2009/05/13 20:24:49 ewillink Exp $
+ * $Id: CommonSourcePositionLocator.java,v 1.2 2009/08/20 20:12:09 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -25,7 +25,6 @@ import org.eclipse.imp.parser.ISourcePositionLocator;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.lpg.BasicEnvironment;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
-import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 import org.eclipse.qvt.declarative.parser.utils.CommonASTVisitor;
 
 /**
@@ -92,8 +91,8 @@ public class CommonSourcePositionLocator implements ISourcePositionLocator
 	}
 
 	public Object findNode(Object node, int startOffset, int endOffset) {
-		if (node instanceof ASTandCST)
-			node = ((ASTandCST) node).getCST();
+		if (node instanceof ICommonParseResult)
+			node = ((ICommonParseResult) node).getCST();
 		if (node instanceof CSTNode)
 			return findCSTNode((CSTNode)node, startOffset, endOffset);
 		else if (node instanceof Notifier)
@@ -142,8 +141,8 @@ public class CommonSourcePositionLocator implements ISourcePositionLocator
 	}
 
 	public int getEndOffset(Object node) {
-		if (node instanceof ASTandCST)
-			node = ((ASTandCST) node).getCST();
+		if (node instanceof ICommonParseResult)
+			node = ((ICommonParseResult) node).getCST();
 		if (node instanceof CSTNode) {
 			CSTNode n = (CSTNode) node;
 			return n.getEndOffset();
@@ -167,8 +166,8 @@ public class CommonSourcePositionLocator implements ISourcePositionLocator
 	}
 
 	public int getStartOffset(Object node) {
-		if (node instanceof ASTandCST)
-			node = ((ASTandCST) node).getCST();
+		if (node instanceof ICommonParseResult)
+			node = ((ICommonParseResult) node).getCST();
 		if (node instanceof CSTNode) {
 			CSTNode n = (CSTNode) node;
 			return n.getStartOffset();
