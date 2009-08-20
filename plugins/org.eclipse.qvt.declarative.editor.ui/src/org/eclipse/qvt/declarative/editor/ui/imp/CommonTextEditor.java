@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonTextEditor.java,v 1.10 2009/08/08 10:06:04 ewillink Exp $
+ * $Id: CommonTextEditor.java,v 1.11 2009/08/20 20:21:03 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -61,10 +61,8 @@ import org.eclipse.qvt.declarative.editor.ui.cst.ASTOutlinePage;
 import org.eclipse.qvt.declarative.editor.ui.cst.CSTOutline;
 import org.eclipse.qvt.declarative.editor.ui.cst.CSTOutlinePage;
 import org.eclipse.qvt.declarative.editor.ui.cst.ICSTOutlinePage;
-import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController.ParsedResult;
 import org.eclipse.qvt.declarative.editor.ui.paged.PagedEditingDomainFactory;
 import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
-import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.text.undo.DocumentUndoManagerRegistry;
@@ -146,13 +144,9 @@ public class CommonTextEditor extends UniversalEditor implements ITextEditorWith
 		super.doSave(progressMonitor);
 	}
 	
-	protected Object getASTNode(ISelection selection) {
-		CommonParseController parseController = getParseController();
-		ParsedResult currentAst = parseController.getCurrentAst();
-		if (currentAst == null)
-			return null;
-		Resource ast = currentAst.getAST();
-		Object node = getCSTNode((TextSelection) selection);
+	protected Object getASTNode(ISelection selection, ICommonParseResult parseResult) {
+		Resource ast = parseResult.getAST();
+		Object node = getCSTNode((TextSelection) selection, parseResult);
 		if (node instanceof CSTNode) {
 			for (Object cstNode = node; cstNode instanceof CSTNode; cstNode = ((EObject) cstNode).eContainer()) {
 				node = ((CSTNode)cstNode).getAst();
@@ -163,47 +157,45 @@ public class CommonTextEditor extends UniversalEditor implements ITextEditorWith
 		return node;
 	}
 
-	protected List<Object> getASTNodes(ISelection selection) {
-		CommonParseController parseController = getParseController();
+	protected List<Object> getASTNodes(ISelection selection, ICommonParseResult parseResult) {
 		List<Object> unwrappedSelections = new ArrayList<Object>(((IStructuredSelection)selection).size());
 		for (Iterator<?> i = ((IStructuredSelection)selection).iterator(); i.hasNext(); ) {
-			Object node = parseController.getASTNode(i.next());
+			Object node = parseResult.getASTNode(i.next());
 			if (node != null)
 				unwrappedSelections.add(node);
 		}
 		return unwrappedSelections;
 	}
 
-	public ISelection getASTSelection(ISelection selection) {
+	public ISelection getASTSelection(ISelection selection, ICommonParseResult parseResult) {
 		if (selection instanceof TextSelection) {
-			Object node = getASTNode(selection);
+			Object node = getASTNode(selection, parseResult);
 			selection = node != null ? new StructuredSelection(node) : StructuredSelection.EMPTY;
 		}
 		else if ((selection instanceof IStructuredSelection) && !selection.isEmpty()) {
-			List<Object> unwrappedSelections = getASTNodes(selection);
+			List<Object> unwrappedSelections = getASTNodes(selection, parseResult);
 			selection = new StructuredSelection(unwrappedSelections);		
 		}
 		return selection;
 	}
 
-	protected List<Object> getASTorCSTNodes(ISelection selection) {
-		CommonParseController parseController = getParseController();
+	protected List<Object> getASTorCSTNodes(ISelection selection, ICommonParseResult parseResult) {
 		List<Object> unwrappedSelections = new ArrayList<Object>(((IStructuredSelection)selection).size());
 		for (Iterator<?> i = ((IStructuredSelection)selection).iterator(); i.hasNext(); ) {
-			Object node = parseController.getASTorCSTNode(i.next());
+			Object node = parseResult.getASTorCSTNode(i.next());
 			if (node != null)
 				unwrappedSelections.add(node);
 		}
 		return unwrappedSelections;
 	}
 
-	public ISelection getASTorCSTSelection(ISelection selection) {
+	protected ISelection getASTorCSTSelection(ISelection selection, ICommonParseResult parseResult) {
 		if (selection instanceof TextSelection) {
-			Object node = getASTNode(selection);
+			Object node = getASTNode(selection, parseResult);
 			selection = node != null ? new StructuredSelection(node) : StructuredSelection.EMPTY;
 		}
 		else if ((selection instanceof IStructuredSelection) && !selection.isEmpty()) {
-			List<Object> unwrappedSelections = getASTorCSTNodes(selection);
+			List<Object> unwrappedSelections = getASTorCSTNodes(selection, parseResult);
 			selection = new StructuredSelection(unwrappedSelections);			
 		}
 		return selection;
@@ -224,33 +216,30 @@ public class CommonTextEditor extends UniversalEditor implements ITextEditorWith
 		return annotationList.toArray(new Annotation[annotationList.size()]);
 	}
 
-	protected Object getCSTNode(TextSelection selection) {
-		CommonParseController parseController = getParseController();
+	protected Object getCSTNode(TextSelection selection, ICommonParseResult parseResult) {
 		int length = selection.getLength();
 		int offset = selection.getOffset();
-		ISourcePositionLocator nodeLocator = parseController.getSourcePositionLocator();
-		ASTandCST currentAst = parseController.getCurrentAst();
-		return currentAst != null ? nodeLocator.findNode(currentAst.getCST(), offset, offset+length) : null;
+		ISourcePositionLocator nodeLocator = parseResult.getSourcePositionLocator();
+		return nodeLocator.findNode(parseResult.getCST(), offset, offset+length);
 	}
 
-	protected List<CSTNode> getCSTNodes(ISelection selection) {
-		CommonParseController parseController = getParseController();
+	protected List<CSTNode> getCSTNodes(ISelection selection, ICommonParseResult parseResult) {
 		List<CSTNode> unwrappedSelections = new ArrayList<CSTNode>(((IStructuredSelection)selection).size());
 		for (Iterator<?> i = ((IStructuredSelection)selection).iterator(); i.hasNext(); ) {
-			CSTNode node = parseController.getCSTNode(i.next());
+			CSTNode node = parseResult.getCSTNode(i.next());
 			if (node != null)
 				unwrappedSelections.add(node);
 		}
 		return unwrappedSelections;
 	}
 
-	public ISelection getCSTSelection(ISelection selection) {
+	public ISelection getCSTSelection(ISelection selection, ICommonParseResult parseResult) {
 		if (selection instanceof TextSelection) {
-			Object node = getCSTNode((TextSelection) selection);
+			Object node = getCSTNode((TextSelection) selection, parseResult);
 			selection = node != null ? new StructuredSelection(node) : StructuredSelection.EMPTY;
 		}
 		else if ((selection instanceof IStructuredSelection) && !selection.isEmpty()) {
-			List<CSTNode> unwrappedSelections = getCSTNodes(selection);
+			List<CSTNode> unwrappedSelections = getCSTNodes(selection, parseResult);
 			selection = new StructuredSelection(unwrappedSelections);			
 		}
 		return selection;
@@ -332,8 +321,8 @@ public class CommonTextEditor extends UniversalEditor implements ITextEditorWith
 	}
 
 	@Override
-	public CommonParseController getParseController() {
-		return (CommonParseController) super.getParseController();
+	public ICommonParseController getParseController() {
+		return (ICommonParseController) super.getParseController();
 	}
 
 	public ISelectionChangedListener getSelectionListener() {
@@ -382,14 +371,14 @@ public class CommonTextEditor extends UniversalEditor implements ITextEditorWith
 	}
 
 	public boolean refresh() {
-		CommonParseController parseController = getParseController();
-		ASTandCST initialAst = parseController.getCurrentAst();
+		ICommonParseController parseController = getParseController();
+		ICommonParseResult parseResult = parseController.getCurrentResult();
 		for (int i = 0; i < 50; i++) {
 			try {
-				Thread.sleep(100);
+				Thread.sleep(100);		// FIXME Sleep !!!!!
 			} catch (InterruptedException e) {
 			}
-			if (parseController.getCurrentAst() != initialAst)
+			if (parseController.getCurrentResult() != parseResult)
 				return true;
 		}
 		return false;
