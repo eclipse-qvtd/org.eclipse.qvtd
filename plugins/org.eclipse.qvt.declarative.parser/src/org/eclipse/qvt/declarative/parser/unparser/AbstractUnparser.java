@@ -7,12 +7,14 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
+ *
+ * $Id: AbstractUnparser.java,v 1.2 2009/08/20 19:55:46 ewillink Exp $
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.unparser;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
-public abstract class AbstractUnparser
+public abstract class AbstractUnparser implements IUnparser
 {
 	protected final Resource resource;
 	private final StringBuffer buffer = new StringBuffer();
