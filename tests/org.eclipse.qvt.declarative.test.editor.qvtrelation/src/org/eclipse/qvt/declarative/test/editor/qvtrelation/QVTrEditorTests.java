@@ -27,20 +27,20 @@ public class QVTrEditorTests extends QVTrEditorTestCase
 	
 	private static class BuilderWatcher implements CommonBuilder.BuilderListener
 	{
-		private boolean begun = false;
+//		private boolean begun = false;
 		private boolean ended = false;
 		
 		public void beginBuild(IFile file) {
-			begun = true;		
+//			begun = true;		
 		}
 
 		public void endBuild(IFile file) {
 			ended = true;		
 		}
 
-		public boolean hasBegun() {
-			return begun;
-		}
+//		public boolean hasBegun() {
+//			return begun;
+//		}
 
 		public boolean hasEnded() {
 			return ended;
