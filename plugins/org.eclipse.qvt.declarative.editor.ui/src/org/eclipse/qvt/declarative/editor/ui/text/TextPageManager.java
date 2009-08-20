@@ -1,13 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2007 E.D.Willink and others.
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2007,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
+ * E.D.Willink - initial API and implementation
+ * 
+ * </copyright>
+ *
+ * $Id: TextPageManager.java,v 1.4 2009/08/20 20:15:06 ewillink Exp $
+ */
 package org.eclipse.qvt.declarative.editor.ui.text;
 
 import java.io.IOException;
@@ -33,9 +39,9 @@ import org.eclipse.qvt.declarative.editor.ui.pages.EditorPageManager;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseFileHandle;
 import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseProjectHandle;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
-import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
-import org.eclipse.qvt.declarative.parser.unparser.AbstractUnparser;
+import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
+import org.eclipse.qvt.declarative.parser.unparser.IUnparser;
 import org.eclipse.qvt.declarative.parser.utils.ProblemCounter;
 import org.eclipse.ui.ide.IDE;
 
@@ -74,7 +80,7 @@ public class TextPageManager extends EditorPageManager
 	}
 
 	public void createContents(OutputStream outputStream) throws MappingConfigurationException, IOException {
-		AbstractUnparser unparser = getCreationFactory().createUnparser(resource);
+		IUnparser unparser = getCreationFactory().createUnparser(resource);
 	    unparser.unparse();
 	    outputStream.write(unparser.getBytes());
 	}
