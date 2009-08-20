@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2008 E.D.Willink and others.
+ * Copyright (c) 2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonOutlinePage.java,v 1.4 2008/11/19 21:55:36 ewillink Exp $
+ * $Id: CommonOutlinePage.java,v 1.5 2009/08/20 20:18:55 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.cst;
 
@@ -30,6 +30,7 @@ import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.ui.format.DefaultFormatManager;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditor;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
+import org.eclipse.qvt.declarative.editor.ui.imp.ICommonParseResult;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.IPageSite;
@@ -100,7 +101,8 @@ public abstract class CommonOutlinePage extends IMPOutlinePage implements ICSTOu
 				fireSelectionChanged(selection);
         		if ((selection instanceof IStructuredSelection) && (((IStructuredSelection)selection).size() == 1)) {
         			Object object = ((IStructuredSelection)selection).getFirstElement();
-        			CSTNode cstNode = editor.getParseController().getCSTNode(object);
+        			ICommonParseResult currentResult = editor.getParseController().getCurrentResult();
+					CSTNode cstNode = currentResult != null ? currentResult.getCSTNode(object) : null;
         			if (cstNode != null)
         				editor.selectAndReveal(cstNode.getStartOffset(), cstNode.getEndOffset() - cstNode.getStartOffset() + 1);
         		}	      	
