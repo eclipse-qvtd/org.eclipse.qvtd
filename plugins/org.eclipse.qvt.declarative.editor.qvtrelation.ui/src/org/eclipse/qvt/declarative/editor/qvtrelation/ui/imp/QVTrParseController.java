@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTrParseController.java,v 1.5 2009/08/16 10:09:37 ewillink Exp $
+ * $Id: QVTrParseController.java,v 1.6 2009/08/20 20:22:09 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtrelation.ui.imp;
 
@@ -36,7 +36,6 @@ public class QVTrParseController extends CommonParseController
 		return keyword != null ? keyword : super.createKeyword(text);
 	}
 
-	@Override
 	public TokenKind getTokenKind(int kind) {
 		switch (kind) {
 		case QVTrLexer.TK_EOF_TOKEN:
