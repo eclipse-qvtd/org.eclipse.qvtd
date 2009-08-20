@@ -12,13 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: CommonHoverHelper.java,v 1.6 2009/05/13 20:25:49 ewillink Exp $
+ * $Id: CommonHoverHelper.java,v 1.7 2009/08/20 20:18:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
 import java.util.List;
-
-import lpg.lpgjavaruntime.IToken;
 
 import org.eclipse.imp.editor.AnnotationHoverBase;
 import org.eclipse.imp.language.ServiceFactory;
@@ -66,10 +64,10 @@ public abstract class CommonHoverHelper extends HoverHelperBase implements IHove
 		// on the node whose representation occurs at the given offset
 
 		// Get the current AST; no AST implies no message
-		CommonParseController.ParsedResult parsedResult = commonParseController.getCurrentAst();
-		if (parsedResult == null)
+		ICommonParseResult parseResult = commonParseController.getCurrentResult();
+		if (parseResult == null)
 			return null;
-		CSTNode cst = parsedResult.getCST();
+		CSTNode cst = parseResult.getCST();
 		if (cst == null)
 			return null;
 
@@ -80,7 +78,7 @@ public abstract class CommonHoverHelper extends HoverHelperBase implements IHove
 		String msg = null; // the help message for helpNode
 
 		// Get the node at the given offset; no node implies no message
-		ISourcePositionLocator nodeLocator = commonParseController.getSourcePositionLocator();
+		ISourcePositionLocator nodeLocator = parseResult.getSourcePositionLocator();
 		sourceNode = nodeLocator.findNode(cst, offset);
 		if (sourceNode == null)
 			return null;
@@ -142,7 +140,7 @@ public abstract class CommonHoverHelper extends HoverHelperBase implements IHove
 		// by the help node
 		if (helpNode instanceof CSTNode) {
 			CSTNode def = (CSTNode) helpNode;
-			msg = getSubstring(commonParseController, def.getStartOffset(), def.getEndOffset());
+			msg = parseResult.getTextRange(def.getStartOffset(), def.getEndOffset() - def.getStartOffset() + 1);
 			int maxMsgLen = 80;
 			if (msg == null || msg.length() == 0)
 				return "No help available";
@@ -156,14 +154,4 @@ public abstract class CommonHoverHelper extends HoverHelperBase implements IHove
 	}
 
 	protected abstract ICommonPlugin getPlugin();
-
-	public static String getSubstring(IParseController parseController, int start, int end) {
-		return new String(((CommonParseController) parseController)
-				.getLexer().getInputChars(), start, end - start + 1);
-	}
-
-	public static String getSubstring(IParseController parseController, IToken token) {
-		return getSubstring(parseController, token.getStartOffset(), token.getEndOffset());
-	}
-
 }

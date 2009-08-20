@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2008 E.D.Willink and others.
+ * Copyright (c) 2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonTreeModelBuilder.java,v 1.5 2008/11/29 15:09:37 ewillink Exp $
+ * $Id: CommonTreeModelBuilder.java,v 1.6 2009/08/20 20:18:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -33,7 +33,6 @@ import org.eclipse.qvt.declarative.editor.OutlineElement;
 import org.eclipse.qvt.declarative.editor.OutlineGroup;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
-import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 import org.eclipse.qvt.declarative.parser.utils.CommonASTVisitor;
 
 public class CommonTreeModelBuilder extends TreeModelBuilderBase
@@ -252,8 +251,8 @@ public class CommonTreeModelBuilder extends TreeModelBuilderBase
 
 	@Override
 	public void visitTree(Object root) {
-		if (root instanceof ASTandCST)
-			root = showAST ? ((ASTandCST) root).getAST() : ((ASTandCST) root).getCST();
+		if (root instanceof ICommonParseResult)
+			root = showAST ? ((ICommonParseResult) root).getAST() : ((ICommonParseResult) root).getCST();
 		CommonEditorDefinition editorDefinition = getPlugin().getEditorDefinition();
 		createASTVisitor(editorDefinition).enter(root);
 	}

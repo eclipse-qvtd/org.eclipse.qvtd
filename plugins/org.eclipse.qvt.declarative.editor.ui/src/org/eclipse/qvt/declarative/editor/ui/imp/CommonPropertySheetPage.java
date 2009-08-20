@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2008 E.D.Willink and others.
+ * Copyright (c) 2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonPropertySheetPage.java,v 1.3 2009/01/21 10:19:35 ewillink Exp $
+ * $Id: CommonPropertySheetPage.java,v 1.4 2009/08/20 20:18:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.eclipse.emf.transaction.ui.view.ExtendedPropertySheetPage;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.ui.format.DefaultFormatManager;
 import org.eclipse.ui.IActionBars;
@@ -56,7 +57,8 @@ public final class CommonPropertySheetPage extends ExtendedPropertySheetPage
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 //		System.out.println(getClass().getSimpleName() + ".selectionChanged()");
-		selection = textEditor.getASTorCSTSelection(selection);
+		ICommonParseResult currentResult = textEditor.getParseController().getCurrentResult();
+		selection = currentResult != null ? textEditor.getASTorCSTSelection(selection, currentResult) : StructuredSelection.EMPTY;
         if (QVTEditorPlugin.SELECTION_OUTER.isActive())
 			QVTEditorPlugin.SELECTION_OUTER.println(getClass(), "selectionChanged " + DefaultFormatManager.format(selection));
 		super.selectionChanged(part, selection);
