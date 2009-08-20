@@ -12,17 +12,17 @@
  * 
  * </copyright>
  *
- * $Id: AbstractCreationFactory.java,v 1.6 2009/05/13 20:24:49 ewillink Exp $
+ * $Id: AbstractCreationFactory.java,v 1.7 2009/08/20 20:19:56 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.common;
 
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.imp.language.Language;
 import org.eclipse.imp.language.LanguageRegistry;
+import org.eclipse.imp.parser.ISourcePositionLocator;
 import org.eclipse.qvt.declarative.ecore.utils.XMIUtils;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonEditorDefinition;
-import org.eclipse.qvt.declarative.editor.ui.imp.CommonSourcePositionLocator;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.ui.preferences.QVTPreferences;
@@ -36,7 +36,7 @@ public abstract class AbstractCreationFactory implements ICreationFactory
 	}
 
 	@Deprecated // Use createSourcePositionLocator
-	public CommonSourcePositionLocator createNodeLocator(ICSTRootEnvironment environment) {
+	public ISourcePositionLocator createNodeLocator(ICSTRootEnvironment environment) {
 		return createSourcePositionLocator(environment);
 	}
 
