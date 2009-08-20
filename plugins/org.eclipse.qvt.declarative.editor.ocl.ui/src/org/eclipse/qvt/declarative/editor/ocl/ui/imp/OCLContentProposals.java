@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLContentProposals.java,v 1.3 2009/01/22 09:37:50 ewillink Exp $
+ * $Id: OCLContentProposals.java,v 1.4 2009/08/20 20:22:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui.imp;
 
@@ -32,12 +32,12 @@ import org.eclipse.ocl.ecore.InvalidLiteralExp;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonContentProposals;
-import org.eclipse.qvt.declarative.editor.ui.imp.CommonParseController;
+import org.eclipse.qvt.declarative.editor.ui.imp.ICommonParseResult;
 
 public class OCLContentProposals extends CommonContentProposals
 {
-	public OCLContentProposals(CommonParseController commonParseController, int offset) {
-		super(commonParseController, offset);
+	public OCLContentProposals(ICommonParseResult parseResult, int offset) {
+		super(parseResult, offset);
 	}
 
 	@Override
