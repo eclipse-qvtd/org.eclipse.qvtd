@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2008 E.D.Willink and others.
+ * Copyright (c) 2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.17 2009/02/17 21:48:51 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.18 2009/08/20 20:12:55 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -52,7 +52,6 @@ import org.eclipse.qvt.declarative.editor.OutlineGroup;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.util.ImageProvider;
 import org.eclipse.qvt.declarative.editor.util.TextProvider;
-import org.eclipse.qvt.declarative.parser.utils.ASTandCST;
 import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.Bundle;
 
@@ -251,8 +250,8 @@ public abstract class CommonLabelProvider implements ILabelProvider
 	protected Object getASTorCSTNode(Object element) {
 		if (element instanceof ModelTreeNode)
 			return ((ModelTreeNode) element).getASTNode();
-		else if (element instanceof ASTandCST)
-			return ((ASTandCST) element).getCST();
+		else if (element instanceof ICommonParseResult)
+			return ((ICommonParseResult) element).getCST();
 		else
 			return element;
 	}
