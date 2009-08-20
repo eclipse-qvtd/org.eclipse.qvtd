@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2008 E.D.Willink and others.
+ * Copyright (c) 2008,2009 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposer.java,v 1.2 2008/10/11 15:38:25 ewillink Exp $
+ * $Id: CommonContentProposer.java,v 1.3 2009/08/20 20:16:58 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -25,8 +25,8 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 
 public abstract class CommonContentProposer implements IContentProposer
 {
-	protected CommonContentProposals createProposals(CommonParseController commonParseController, int offset) {
-		return new CommonContentProposals(commonParseController, offset);
+	protected CommonContentProposals createProposals(ICommonParseResult parseResult, int offset) {
+		return new CommonContentProposals(parseResult, offset);
 	}
 
 	/**
@@ -46,8 +46,11 @@ public abstract class CommonContentProposer implements IContentProposer
 	 * 						parse controller at the given position
 	 */
 	public ICompletionProposal[] getContentProposals(IParseController controller, int offset, ITextViewer viewer) {
-		CommonParseController commonParseController = (CommonParseController) controller;
-		CommonContentProposals proposals = createProposals(commonParseController, offset); // a list of proposals.
+		ICommonParseController commonParseController = (ICommonParseController) controller;
+		ICommonParseResult parseResult = commonParseController.getCurrentResult();
+		if (parseResult == null)
+			return new ICompletionProposal[0];
+		CommonContentProposals proposals = createProposals(parseResult, offset); // a list of proposals.
 		proposals.computeProposals();
 		return proposals.sortProposals();
 	}
