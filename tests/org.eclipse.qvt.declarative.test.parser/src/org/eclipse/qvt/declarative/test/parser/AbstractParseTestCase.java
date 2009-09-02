@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractParseTestCase.java,v 1.7 2009/08/20 20:29:57 ewillink Exp $
+ * $Id: AbstractParseTestCase.java,v 1.8 2009/09/02 07:24:50 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.parser;
 
@@ -33,11 +33,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.ocl.internal.l10n.OCLMessages;
 import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.ocl.lpg.AbstractProblemHandler;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.ocl.lpg.StringProblemHandler;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaDataRegistry;
 import org.eclipse.qvt.declarative.ecore.mappings.MappingConfigurationException;
@@ -71,7 +71,7 @@ public abstract class AbstractParseTestCase extends AbstractTestCase
 			AbstractParser parser = getParser();
 			String file = parser.getFileName();
 			int lineNumber = parser.getTokenAtCharacter(startOffset).getLine();
-			String message = OCLMessages.bind(
+			String message = NLS.bind(
 					 "{0}-{1} in {2}; {3}:{4} : {5}", //OCLMessages.ProblemMessage_ERROR_,
 					new Object[] {
 						processingPhase != null ? processingPhase : "?", //$NON-NLS-1$
