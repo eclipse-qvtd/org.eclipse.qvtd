@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLLabelProvider.java,v 1.1 2008/08/14 07:51:10 ewillink Exp $
+ * $Id: OCLLabelProvider.java,v 1.2 2009/10/16 05:06:14 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui.imp;
 
@@ -40,8 +40,7 @@ public class OCLLabelProvider extends CommonLabelProvider
 	@Override
 	protected String formatObject(Object node) {
 		if (node instanceof IsMarkedPreCS) {
-			IsMarkedPreCS isMarkedPreCS = (IsMarkedPreCS)node;
-			return isMarkedPreCS.isPre() ? " @pre" : "";
+			return " @pre";
 		}
 		if (node instanceof BooleanLiteralExpCS) {
 			BooleanLiteralExpCS booleanLiteralExpCS = (BooleanLiteralExpCS)node;
