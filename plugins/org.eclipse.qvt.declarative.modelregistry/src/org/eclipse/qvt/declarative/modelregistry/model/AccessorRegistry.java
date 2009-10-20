@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.modelregistry.environment.AccessorKindRegistry;
 import org.eclipse.qvt.declarative.modelregistry.environment.ModelRegistryEnvironment;
-import org.eclipse.qvt.declarative.modelregistry.util.ClassUtils;
 
 /**
  * An AccessorRegistry forms part of the in memory org.eclipse.qvt.declarative.modelregistry
@@ -39,7 +38,7 @@ public class AccessorRegistry<A extends Accessor> implements Comparable<Accessor
 		this.accessorClass = accessorClass;
 	}
 
-	public void add(Registration<?> registration) {
+/*	public void add(Registration<?> registration) {
 		A validAccessor = ClassUtils.asClass(registration.getAccessor(), accessorClass);
 		if (validAccessor == null)
 			ModelRegistryEnvironment.logError("BUG -- Inconsistent accessor classes : " + registration.getAccessor().getClass() + ", " + accessorClass, null);
@@ -47,7 +46,7 @@ public class AccessorRegistry<A extends Accessor> implements Comparable<Accessor
 			ModelRegistryEnvironment.logError("BUG -- Conflicting accessor : " + registration, null);
 		else
 			registrations.put(validAccessor.getName(), ClassUtils.asClassUnchecked(registration, (Registration<A>)null));	
-	}
+	} */
 
 	public Registration<A> add(String accessorName, URI uri, ModelSerialization modelSerialisation) {
 		AccessorKindRegistry accessorKindRegistry = ModelRegistryEnvironment.getInstance().getAccessorKindRegistry();
