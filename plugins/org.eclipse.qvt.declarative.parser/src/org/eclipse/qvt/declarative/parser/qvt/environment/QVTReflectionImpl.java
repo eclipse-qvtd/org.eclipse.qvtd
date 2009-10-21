@@ -21,6 +21,8 @@ public class QVTReflectionImpl extends UMLReflectionImpl
 			name = ((TypedElement<?>)object).getName();
 		else if (object instanceof ENamedElement)
 			name = ((ENamedElement)object).getName(); 
+		else if (object instanceof String)
+			name = (String)object; 
 		else
 			name = "_unnamed_"; 
 		if ((name == null) || "".equals(name))

@@ -248,7 +248,9 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 			});
 			classifier = matches.isEmpty() ? env.getUnresolvedEnvironment().getUnresolvedEClass(className) : matches.get(0);
 		}
-		if (cstNode != null)
+		if (cstNode instanceof PathNameCS)
+			initPathNameAst((PathNameCS) cstNode, classifier);
+		else if (cstNode != null)
 			cstNode.setAst(classifier);
 		return classifier;
 	}
@@ -344,7 +346,7 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 		} else if (typeCS instanceof PathNameCS) {
 			s.append("Undefined type '");
 			boolean isFirst = true;
-			EList<String> names = ((PathNameCS)typeCS).getSequenceOfNames();
+			EList<String> names = createSequenceOfNames((PathNameCS)typeCS, null);
 			for (String name : names) {
 				if (!isFirst)
 					s.append("::");

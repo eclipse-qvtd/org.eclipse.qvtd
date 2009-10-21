@@ -376,7 +376,7 @@ public abstract class OCLExpressionUnparser extends UnparserWithReflection<EClas
 			pushPrecedence(".");
 			doExpressionSwitch(object.getSource());
 			append(".");
-			append(initialLower(formatName(object.getReferredAssociationClass())));
+			appendName(initialLower(formatName(object.getReferredAssociationClass())));
 			unparseIsMarkedPre(object);
 			List<OCLExpression> qualifiers = ClassUtils.asClassUnchecked(object.getQualifier(), (List<OCLExpression>)null);
 			if (qualifiers.size() > 0) {
@@ -604,7 +604,7 @@ public abstract class OCLExpressionUnparser extends UnparserWithReflection<EClas
 			String operationName = eOperation != null ? eOperation.getName() : null;
 			int operationArity = eOperation != null ? eOperation.getEParameters().size() : 0;
 			boolean doneIt = false;
-			if (!isCollection && !object.isMarkedPre()) {
+			if (!object.isMarkedPre()) {
 				if (operationArity == 0) {
 					String precedenceKey = prefixOperators.get(operationName);
 					if (precedenceKey != null) {
