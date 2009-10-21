@@ -22,6 +22,7 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
 import org.eclipse.qvt.declarative.ecore.QVTBase.FunctionParameter;
 import org.eclipse.qvt.declarative.ecore.QVTBase.QVTBaseFactory;
 import org.eclipse.qvt.declarative.ecore.QVTRelation.RelationalTransformation;
+import org.eclipse.qvt.declarative.parser.AbstractQVTAnalyzer;
 import org.eclipse.qvt.declarative.parser.plugin.QVTParserPlugin;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.QueryCS;
 
@@ -33,7 +34,7 @@ public class QVTrQueryEnvironment extends QVTrEnvironment<QVTrTransformationEnvi
 	
 	public QVTrQueryEnvironment(QVTrTransformationEnvironment env, QueryCS queryCS) {
 		super(env, null, queryCS);
-		List<String> names = queryCS.getPathName().getSequenceOfNames();	// FIXME scoping
+		List<String> names = AbstractQVTAnalyzer.createSequenceOfNames(queryCS.getPathName(), null);	// FIXME scoping
 		if (names.size() != 1)
 			analyzerError("Unqualified name expected for query", "pathNameCS", queryCS.getPathName());
 //		else

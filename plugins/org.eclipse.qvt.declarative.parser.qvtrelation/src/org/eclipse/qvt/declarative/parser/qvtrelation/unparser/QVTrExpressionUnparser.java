@@ -261,7 +261,7 @@ public abstract class QVTrExpressionUnparser extends OCLExpressionUnparser
 		        doExpressionSwitch(source);
 		        append(".");	        	
 	        }
-	        append(getNameForOpposite(object.getReferredProperty()));	        	
+	        appendName(getNameForOpposite(object.getReferredProperty()));	        	
 	        unparseIsMarkedPre(object);
 	        List<OCLExpression> qualifiers = ClassUtils.asClassUnchecked(object.getQualifier(), (List<OCLExpression>)null);
 			if ((qualifiers != null) && (qualifiers.size() > 0)) {

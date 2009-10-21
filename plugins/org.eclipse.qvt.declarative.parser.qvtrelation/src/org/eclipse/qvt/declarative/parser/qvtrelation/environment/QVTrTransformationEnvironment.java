@@ -34,6 +34,7 @@ import org.eclipse.ocl.ecore.EcoreFactory;
 import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.ecore.Variable;
+import org.eclipse.ocl.parser.AbstractOCLAnalyzer;
 import org.eclipse.ocl.utilities.TypedElement;
 import org.eclipse.ocl.utilities.UMLReflection;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
@@ -214,6 +215,8 @@ public class QVTrTransformationEnvironment extends QVTrEnvironment<QVTrTopLevelE
 				initializeFeatures(ePackage);				
 		}
 		List<EReference> references = oppositeFeaturesMap.get(propertyName);
+		if ((references == null) && AbstractOCLAnalyzer.isEscaped(propertyName))
+			references = oppositeFeaturesMap.get(AbstractOCLAnalyzer.unescape(propertyName));
 		if (references == null)
 			return null;
 		EReference oppositeReference = null;

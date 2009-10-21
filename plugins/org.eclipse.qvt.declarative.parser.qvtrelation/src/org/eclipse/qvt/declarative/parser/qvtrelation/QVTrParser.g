@@ -13,7 +13,7 @@
 --
 
 %options escape=$
-%options la=2
+%options la=1
 %options table=java
 %options fp=QVTrParser,prefix=TK_
 %options error-maps
@@ -47,12 +47,6 @@ $KeyWords
 	transformation
 	when
 	where
-	
-	def
-	endpackage
-	inv
-	post
-	pre
 $End
 
 $Terminals
@@ -64,7 +58,6 @@ $Globals
 import org.eclipse.qvt.declarative.parser.qvt.cst.*;
 import org.eclipse.qvt.declarative.parser.qvtrelation.cst.*;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
-import org.eclipse.ocl.cst.CollectionTypeCS;
 import org.eclipse.ocl.parser.$prs_stream_class;
 import org.eclipse.ocl.parser.backtracking.OCLParserErrors;
 
@@ -363,7 +356,7 @@ $Rules
 --               '}'
 --<when> ::= 'when' '{' (<OclExpressionCS> ';')* '}'
 --<where> ::= 'where' '{' (<OclExpressionCS> ';')* '}'
-			relationCS_0_ ::= relation identifierCS
+	relationCS_withName ::= relation identifierCS
 		/.$BeginJava
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(2);
 					RelationCS result = QVTrCSTFactory.eINSTANCE.createRelationCS();
@@ -372,8 +365,8 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
-	relationCS_1_ -> relationCS_0_
-	relationCS_1_ ::= top relationCS_0_
+	relationCS_postName -> relationCS_withName
+	relationCS_postName ::= top relationCS_withName
 		/.$BeginJava
 					RelationCS result = (RelationCS)$getSym(2);
 					result.setTop(true);
@@ -381,8 +374,8 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
-	relationCS_2_ -> relationCS_1_
-	relationCS_2_ ::= relationCS_1_ overrides identifierCS
+	relationCS_postOverrides -> relationCS_postName
+	relationCS_postOverrides ::= relationCS_postName overrides identifierCS
 		/.$BeginJava
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(3);
 					RelationCS result = (RelationCS)$getSym(1);
@@ -391,8 +384,8 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
-	relationCS_3_ -> relationCS_2_ '{'
-	relationCS_3_ ::= relationCS_3_ varDeclarationCS
+	relationCS_postVariable -> relationCS_postOverrides '{'
+	relationCS_postVariable ::= relationCS_postVariable varDeclarationCS
 		/.$BeginJava
 					VarDeclarationCS varDeclarationCS = (VarDeclarationCS)$getSym(2);
 					RelationCS result = (RelationCS)$getSym(1);
@@ -401,11 +394,9 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
-	relationCS_preDomain -> relationCS_3_
-	relationCS_preDomain -> relationCS_postDomain
-	relationCS_postDomain ::= relationCS_preDomain domainCS
+	relationCS_postDomain ::= relationCS_postVariable domainCS
 		/.$NewCase ./
-	relationCS_postDomain ::= relationCS_preDomain primitiveTypeDomainCS
+	relationCS_postDomain ::= relationCS_postDomain domainCS
 		/.$BeginJava
 					AbstractDomainCS domainCS = (AbstractDomainCS)$getSym(2);
 					RelationCS result = (RelationCS)$getSym(1);
@@ -455,11 +446,11 @@ $Rules
 		  $EndJava
 		./	
 	whenCS_1 -> whenCS_0
-	whenCS_1 ::= whenCS_1 oclExpressionCS ';'
+	whenCS_1 ::= whenCS_1 OclExpressionCS ';'
 		/.$BeginJava
 					WhenCS result = (WhenCS)$getSym(1);
-					OCLExpressionCS oclExpressionCS = (OCLExpressionCS)$getSym(2);
-					result.getExpr().add(oclExpressionCS);
+					OCLExpressionCS OclExpressionCS = (OCLExpressionCS)$getSym(2);
+					result.getExpr().add(OclExpressionCS);
 					setOffsets(result, result, getIToken($getToken(3)));
 					$setResult(result);
 		  $EndJava
@@ -486,11 +477,11 @@ $Rules
 		  $EndJava
 		./	
 	whereCS_1 -> whereCS_0
-	whereCS_1 ::= whereCS_1 oclExpressionCS ';'
+	whereCS_1 ::= whereCS_1 OclExpressionCS ';'
 		/.$BeginJava
 					WhereCS result = (WhereCS)$getSym(1);
-					OCLExpressionCS oclExpressionCS = (OCLExpressionCS)$getSym(2);
-					result.getExpr().add(oclExpressionCS);
+					OCLExpressionCS OclExpressionCS = (OCLExpressionCS)$getSym(2);
+					result.getExpr().add(OclExpressionCS);
 					setOffsets(result, result, getIToken($getToken(3)));
 					$setResult(result);
 		  $EndJava
@@ -574,7 +565,7 @@ $Rules
 		  $EndJava
 		./
 	domainCS_postImplementedby -> domainCS_1_
-	domainCS_postImplementedby ::= domainCS_1_ implementedby operationCallExpCS
+	domainCS_postImplementedby ::= domainCS_1_ implementedby OperationCallExpCS
 		/.$BeginJava
 					DomainCS result = (DomainCS)$getSym(1);
 					OperationCallExpCS operationCallExpCS =(OperationCallExpCS)$getSym(3);
@@ -610,7 +601,7 @@ $Rules
 		./
 		
 --<primitiveTypeDomain> ::= 'primitive' 'domain' <identifier> ':' <TypeCS> ';'
-	primitiveTypeDomainCS ::= primitive domain identifierCS ':' typeCS ';'
+	domainCS ::= primitive domain identifierCS ':' typeCS ';'
 		/.$BeginJava
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(3);
 					TypeCS typeCS = (TypeCS)$getSym(5);
@@ -622,29 +613,44 @@ $Rules
 		  $EndJava
 		./
 
-
 --<template> ::= (<objectTemplate> | <collectionTemplate>)
 --   ['{' <OclExpressionCS> '}']
 	templateCS_0_ -> objectTemplateCS
 	templateCS_0_ -> collectionTemplateCS
 	templateCS -> templateCS_0_
-	templateCS ::= templateCS_0_ '{' oclExpressionCS '}'
+	templateCS ::= templateCS_0_ '{' OclExpressionCS '}'
 		/.$BeginJava
 					TemplateCS result = (TemplateCS)$getSym(1);
-					OCLExpressionCS oclExpressionCS = (OCLExpressionCS)$getSym(3);
-					result.setGuardExpression(oclExpressionCS);
+					OCLExpressionCS OclExpressionCS = (OCLExpressionCS)$getSym(3);
+					result.setGuardExpression(OclExpressionCS);
 					setOffsets(result, result, getIToken($getToken(4)));
+					$setResult(result);
+		  $EndJava
+		./
+
+	notCollectionTypeCS -> tupleTypeCS
+	notCollectionTypeCS -> qualifiedPathNameCS
+	notCollectionTypeCS ::= notReservedSimpleNameCS				-- covers primitiveTypeCS
+		/.$BeginJava
+					CSTNode result = (CSTNode)$getSym(1);
+					if (!(result instanceof TypeCS)) {
+						PathNameCS pathNameCS = createPathNameCS((SimpleNameCS)result);
+						setOffsets(pathNameCS, result);
+						result = pathNameCS;
+					}
 					$setResult(result);
 		  $EndJava
 		./
 	
 --<objectTemplate> ::= [<identifier>] ':' <pathNameCS> '{' [<propertyTemplateList>] '}'
 --<propertyTemplateList> ::= <propertyTemplate> (',' <propertyTemplate>)*
-	objectTemplateCS_prePropertyTemplates ::= IDENTIFIER ':' pathNameCS '{'
-		/.$NewCase./
-	objectTemplateCS_prePropertyTemplates ::= relationIdentifier ':' pathNameCS '{'
-		/.$NewCase./
-	objectTemplateCS_prePropertyTemplates ::= self ':' pathNameCS '{'
+--	objectTemplateCS_prePropertyTemplates ::= BooleanLiteralExpCS ':' notCollectionTypeCS '{'
+--		/.$NewCase./
+--	objectTemplateCS_prePropertyTemplates ::= InvalidLiteralExpCS ':' notCollectionTypeCS '{'
+--		/.$NewCase./
+--	objectTemplateCS_prePropertyTemplates ::= NullLiteralExpCS ':' notCollectionTypeCS '{'
+--		/.$NewCase./
+	objectTemplateCS_prePropertyTemplates ::= notLiteralNorReservedSimpleNameCS ':' notCollectionTypeCS '{'
 		/.$BeginJava
 					IdentifierCS identifierCS = createIdentifierCS($getToken(1));
 					TypeCS typeCS = (TypeCS)$getSym(3);
@@ -686,14 +692,14 @@ $Rules
 		./
 
 --<propertyTemplate> ::= <identifier> '=' <OclExpressionCS>
-	propertyTemplateCS ::= propertyIdCS '=' oclExpressionCS
+	propertyTemplateCS ::= propertyIdCS '=' OclExpressionCS
 		/.$BeginJava
 					IdentifiedCS propertyIdCS = (IdentifiedCS)$getSym(1);
 					PropertyTemplateCS result = QVTrCSTFactory.eINSTANCE.createPropertyTemplateCS();
-					OCLExpressionCS oclExpressionCS = (OCLExpressionCS)$getSym(3);
+					OCLExpressionCS OclExpressionCS = (OCLExpressionCS)$getSym(3);
 					result.setPropertyId(propertyIdCS);
-					result.setOclExpression(oclExpressionCS);
-					setOffsets(result, propertyIdCS, oclExpressionCS);
+					result.setOclExpression(OclExpressionCS);
+					setOffsets(result, propertyIdCS, OclExpressionCS);
 					$setResult(result);
 		  $EndJava
 		./
@@ -714,11 +720,13 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./	
-	collectionTemplateCS_1_ ::= IDENTIFIER ':' collectionTypeCS
-		/.$NewCase./
-	collectionTemplateCS_1_ ::= relationIdentifier ':' collectionTypeCS
-		/.$NewCase./
-	collectionTemplateCS_1_ ::= self ':' collectionTypeCS
+--	collectionTemplateCS_1_ ::= BooleanLiteralExpCS ':' collectionTypeCS
+--		/.$NewCase./
+--	collectionTemplateCS_1_ ::= InvalidLiteralExpCS ':' collectionTypeCS
+--		/.$NewCase./
+--	collectionTemplateCS_1_ ::= NullLiteralExpCS ':' collectionTypeCS
+--		/.$NewCase./
+	collectionTemplateCS_1_ ::= notLiteralNorReservedSimpleNameCS ':' collectionTypeCS
 		/.$BeginJava
 					IdentifierCS identifierCS = createIdentifierCS($getToken(1));
 					CollectionTypeCS collectionTypeCS = (CollectionTypeCS)$getSym(3);
@@ -781,13 +789,13 @@ $Rules
 	memberSelectorCS -> templateCS
 	
 --<assignmentExp> ::= <identifier> '=' <OclExpressionCS> ';'
-	defaultValueCS ::= identifierCS '=' oclExpressionCS ';'
+	defaultValueCS ::= identifierCS '=' OclExpressionCS ';'
 		/.$BeginJava
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(1);
-					OCLExpressionCS oclExpressionCS = (OCLExpressionCS)$getSym(3);
+					OCLExpressionCS OclExpressionCS = (OCLExpressionCS)$getSym(3);
 					DefaultValueCS result = QVTrCSTFactory.eINSTANCE.createDefaultValueCS();
 					result.setIdentifier(identifierCS);
-					result.setInitialiser(oclExpressionCS);
+					result.setInitialiser(OclExpressionCS);
 					setOffsets(result, identifierCS, getIToken($getToken(4)));
 					$setResult(result);
 		  $EndJava
@@ -831,7 +839,7 @@ $Rules
 					$setResult(result);
 		  $EndJava
 		./
-	queryCS ::= queryCS_postType '{' oclExpressionCS '}'
+	queryCS ::= queryCS_postType '{' OclExpressionCS '}'
 		/.$BeginJava
 					QueryCS result = (QueryCS)$getSym(1);
 					result.setOclExpression((OCLExpressionCS)$getSym(3));
@@ -865,7 +873,7 @@ $Rules
 --                    | <IfExpCS>
 --                    | '(' <OclExpressionCS> ')'
 --                    | <template>  
-	oclExpressionCS -> templateCS
+	OclExpressionCS -> templateCS
 
 	relationIdentifier -> checkonly
 	relationIdentifier -> default_values
@@ -885,31 +893,8 @@ $Rules
 	relationIdentifier -> when
 	relationIdentifier -> where
 --	relationIdentifier -> '_'	
-	relationIdentifier -> def
-	relationIdentifier -> endpackage
-	relationIdentifier -> inv
-	relationIdentifier -> post
-	relationIdentifier -> pre
 	
-	pathNameCS ::= relationIdentifier
-		/.$BeginJava
-					PathNameCS result = createPathNameCS();
-					result.getSequenceOfNames().add(getTokenText($getToken(1)));
-					setOffsets(result, getIToken($getToken(1)));
-					$setResult(result);
-		  $EndJava
-		./
-
-	simpleNameCS ::= relationIdentifier
-		/.$BeginJava
-					SimpleNameCS result = createSimpleNameCS(
-								SimpleTypeEnum.IDENTIFIER_LITERAL,
-								getTokenText($getToken(1))
-							);
-					setOffsets(result, getIToken($getToken(1)));
-					$setResult(result);
-		  $EndJava
-		./
+	otherKeyword -> relationIdentifier
 	
 	identifierCS ::= IDENTIFIER
 		/.$NewCase ./

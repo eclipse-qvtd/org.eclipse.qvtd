@@ -742,7 +742,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 		for (QueryCS queryCS : transformationCS.getQuery()) {
 			if (isCancelled())
 				return;
-			List<String> pathName = queryCS.getPathName().getSequenceOfNames();
+			List<String> pathName = AbstractQVTAnalyzer.createSequenceOfNames(queryCS.getPathName(), null);
 			if (pathName != null) {
 				int pathSize = pathName.size();
 				if (pathSize > 0) {
@@ -834,7 +834,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 		OCLExpressionCS source = operationCallExpCS.getSource();
 		EList<String> pathName = null;
 		if (source instanceof PathNameCS)
-			pathName = ((PathNameCS) source).getSequenceOfNames();
+			pathName = AbstractQVTAnalyzer.createSequenceOfNames((PathNameCS) source, null);
 		Relation relation = env.getRelation(pathName, name);
 		if ((pathName != null) && (relation == null))			// Null pathName could be a query
 			ERROR(oclExpressionCS, "RelationCallExpCS", "Unable to resolve relation '" + formatPath(pathName, name) + "'");

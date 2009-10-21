@@ -44,8 +44,23 @@ import org.eclipse.qvt.declarative.parser.qvt.environment.QVTReflectionImpl;
 
 public class QVTrUnparser extends QVTrExpressionUnparser
 {
+	protected Set<String> reservedKeywords = new HashSet<String>();
+	
 	public QVTrUnparser(Resource resource) {
 		super(resource, QVTReflectionImpl.INSTANCE);
+		reservedKeywords.add("domain");
+		reservedKeywords.add("key");
+		reservedKeywords.add("when");
+		reservedKeywords.add("where");
+	}
+
+	@Override
+	protected String formatName(Object object) {
+		String formatName = super.formatName(object);
+		if (reservedKeywords.contains(formatName))
+			return "_" + formatName;
+		else
+			return formatName;
 	}
 
 	protected void getPatternVariables(Set<Variable> patternVariables, Relation relation) {
