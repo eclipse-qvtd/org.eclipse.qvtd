@@ -1,7 +1,8 @@
 /**
+* Essential OCL Lexer
 * <copyright>
 *
-* Copyright (c) 2005, 2009 IBM Corporation, Borland Software Corp.,  and others.
+* Copyright (c) 2005, 2009 IBM Corporation and others.
 * All rights reserved.   This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,11 +12,10 @@
 *   IBM - Initial API and implementation
 *   E.D.Willink - Lexer and Parser refactoring to support extensibility and flexible error handling
 *   Borland - Bug 242880
-*   E.D.Willink - Extended API and implementation for QVTc
-*
+*   E.D.Willink - Bug 292112
 * </copyright>
 *
-* $Id: QVTcLexer.java,v 1.10 2009/08/16 10:09:00 ewillink Exp $
+* $Id: QVTcLexer.java,v 1.11 2009/10/21 07:48:38 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;
@@ -349,32 +349,26 @@ public class QVTcLexer extends AbstractLexer implements QVTcParsersym, QVTcLexer
             //
             // Rule 6:  Token ::= IntegerLiteral
             //
-            case 6: { 
-				makeToken(TK_INTEGER_LITERAL);
-	            break;
-            }
+            case 6:
+                break; 
 	 
             //
-            // Rule 7:  Token ::= RealLiteral
+            // Rule 7:  Token ::= IntegerLiteral DotToken
             //
-            case 7: { 
-				makeToken(TK_REAL_LITERAL);
-	            break;
-            }
+            case 7:
+                break; 
 	 
             //
-            // Rule 8:  Token ::= NumericOperation
+            // Rule 8:  Token ::= IntegerLiteral DotDotToken
             //
-            case 8: { 
-				makeToken(TK_NUMERIC_OPERATION);
-	            break;
-            }
+            case 8:
+                break; 
 	 
             //
-            // Rule 9:  Token ::= IntegerRangeStart
+            // Rule 9:  Token ::= RealLiteral
             //
             case 9: { 
-				makeToken(TK_INTEGER_RANGE_START);
+				makeToken(TK_REAL_LITERAL);
 	            break;
             }
 	 
@@ -579,57 +573,45 @@ public class QVTcLexer extends AbstractLexer implements QVTcParsersym, QVTcLexer
             }
 	 
             //
-            // Rule 35:  Token ::= .
+            // Rule 35:  Token ::= DotToken
             //
-            case 35: { 
+            case 35:
+                break; 
+	 
+            //
+            // Rule 36:  DotToken ::= .
+            //
+            case 36: { 
 				makeToken(TK_DOT);
 	            break;
             }
 	 
             //
-            // Rule 36:  Token ::= . .
+            // Rule 37:  Token ::= DotDotToken
             //
-            case 36: { 
+            case 37:
+                break; 
+	 
+            //
+            // Rule 38:  DotDotToken ::= . .
+            //
+            case 38: { 
 				makeToken(TK_DOTDOT);
 	            break;
             }
 	 
             //
-            // Rule 37:  Token ::= @ p r e
-            //
-            case 37: { 
-				makeToken(TK_ATPRE);
-	            break;
-            }
-	 
-            //
-            // Rule 38:  Token ::= ^
-            //
-            case 38: { 
-				makeToken(TK_CARET);
-	            break;
-            }
-	 
-            //
-            // Rule 39:  Token ::= ^ ^
+            // Rule 39:  IntegerLiteral ::= Integer
             //
             case 39: { 
-				makeToken(TK_CARETCARET);
+				makeToken(TK_INTEGER_LITERAL);
 	            break;
             }
 	 
             //
-            // Rule 40:  Token ::= ?
+            // Rule 269:  Token ::= : =
             //
-            case 40: { 
-				makeToken(TK_QUESTIONMARK);
-	            break;
-            }
-	 
-            //
-            // Rule 310:  Token ::= : =
-            //
-            case 310: { 
+            case 269: { 
 				makeToken(TK_COLON_EQUALS);
 	            break;
             }

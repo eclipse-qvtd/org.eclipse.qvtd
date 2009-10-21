@@ -21,7 +21,7 @@
 %options include_directory=".;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/parser"
 
 $Include
-	OCLKWLexer.g
+	EssentialOCLKWLexer.g
 $End
 
 $Define

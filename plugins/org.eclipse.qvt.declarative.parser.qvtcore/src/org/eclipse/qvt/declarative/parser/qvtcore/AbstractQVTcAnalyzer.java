@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractQVTcAnalyzer.java,v 1.7 2009/08/08 15:23:27 ewillink Exp $
+ * $Id: AbstractQVTcAnalyzer.java,v 1.8 2009/10/21 07:48:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore;
 
@@ -196,7 +196,7 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 
 	protected void declareQueryCS(QVTcTopLevelEnvironment env, QueryCS queryCS) {		
 		PathNameCS pathNameCS = queryCS.getPathName();
-		List<String> pathName = pathNameCS.getSequenceOfNames();
+		List<String> pathName = createSequenceOfNames(pathNameCS, null);
 		if (pathName == null)
 			return;
 		int pathSize = pathName.size();
@@ -227,6 +227,8 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 		QVTcTransformationEnvironment env = topLevelEnvironment.createEnvironment(transformationCS);
 		if (env == null)
 			return;
+		PathNameCS transformationPathName = transformationCS.getPathName();
+		initPathNameAst(transformationPathName, env.getTransformation());
 		for (DirectionCS directionCS : transformationCS.getDirections())
 			declareDirectionCS(env, directionCS);
 		for (DirectionCS directionCS : transformationCS.getDirections())
@@ -402,6 +404,8 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 
 	protected Function defineQueryCS(QVTcQueryEnvironment env, QueryCS queryCS) {
 		Function query = env.getQuery();
+		PathNameCS queryPathName = queryCS.getPathName();
+		initPathNameAst(queryPathName, query);
 		OCLExpressionCS oclExpression = queryCS.getOclExpression();
 		if (!(oclExpression.getAst() instanceof ErrorNode))
 			query.setQueryExpression((OCLExpression) oclExpressionCS(oclExpression, env));
@@ -430,18 +434,18 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 				if (transformationNameCS == null)
 					ERROR(mappingCS, "InCS", "Missing 'in'");
 				else {
-					EList<String> transformationName = transformationNameCS.getSequenceOfNames();
 					QVTcTransformationEnvironment txEnv = null;
 					try {
-						txEnv = topLevelEnvironment.getEnvironment(transformationName);
+						txEnv = topLevelEnvironment.getEnvironment(transformationNameCS);
 					} catch (LookupException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					if (txEnv == null) {
+						EList<String> transformationName = createSequenceOfNames(transformationNameCS, null);
 						ERROR(transformationNameCS, "InCS", "Undefined transformation '" + formatPath(transformationName) + "'");
 					} else {
-						transformationNameCS.setAst(txEnv.getASTNode());
+						initPathNameAst(transformationNameCS, txEnv.getASTNode());
 						QVTcMappingEnvironment<?> mapEnv = txEnv.createEnvironment(mappingCS);
 						declareMappingCS(mapEnv, mappingCS);
 					}
@@ -548,8 +552,8 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 	protected List<EPackage> resolvePackages(QVTcTransformationEnvironment env, TypedModel typedModel, PathNameCS packageNameCS) {
 		List<EPackage> ePackages = env.resolvePackages(packageNameCS);
 		if ((ePackages == null) || ePackages.isEmpty())
-			ePackages = Collections.singletonList(env.getUnresolvedEnvironment().getUnresolvedEPackage(packageNameCS.getSequenceOfNames()));
-		packageNameCS.setAst(ePackages.get(0));
+			ePackages = Collections.singletonList(env.getUnresolvedEnvironment().getUnresolvedEPackage(createSequenceOfNames(packageNameCS, null)));
+		initPathNameAst(packageNameCS, ePackages.get(0));
 		return ePackages;
 //		else {
 //			if (ePackages != null)

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TransformationCSImpl.java,v 1.1 2008/07/23 10:06:41 qglineur Exp $
+ * $Id: TransformationCSImpl.java,v 1.2 2009/10/21 07:48:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore.cst.impl;
 
@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.cst.PathNameCS;
 import org.eclipse.ocl.cst.impl.CSTNodeImpl;
+import org.eclipse.qvt.declarative.parser.AbstractQVTAnalyzer;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.DirectionCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.QVTcCSTPackage;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.TransformationCS;
@@ -229,6 +230,6 @@ public class TransformationCSImpl extends CSTNodeImpl implements TransformationC
 	}
 
 	public String getName() {
-		return StringUtils.splice(pathName.getSequenceOfNames(), "::");
+		return StringUtils.splice(AbstractQVTAnalyzer.createSequenceOfNames(pathName, null), "::");
 	}
 } //TransformationCSImpl

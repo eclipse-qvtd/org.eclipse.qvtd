@@ -17,9 +17,11 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.ocl.cst.PathNameCS;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
 import org.eclipse.qvt.declarative.ecore.QVTCore.Mapping;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
+import org.eclipse.qvt.declarative.parser.AbstractQVTAnalyzer;
 import org.eclipse.qvt.declarative.parser.environment.CSTChildEnvironment;
 import org.eclipse.qvt.declarative.parser.qvt.environment.QVTTopLevelEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.TopLevelCS;
@@ -32,15 +34,16 @@ public class QVTcTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTcNodeEnv
 	}
 
 	public QVTcTransformationEnvironment createEnvironment(TransformationCS transformationCS) {
-		List<String> transformationName = transformationCS.getPathName().getSequenceOfNames();
+		PathNameCS transformationPathName = transformationCS.getPathName();
 		QVTcTransformationEnvironment environment;
 		try {
-			environment = getEnvironment(transformationName);
+			environment = getEnvironment(transformationPathName);
 		} catch (LookupException e) {
 			analyzerError("Illegal transformation name " + e.toString(), "transformationCS", transformationCS);
 			return null;
 		}
 		if (environment == null) {
+			List<String> transformationName = AbstractQVTAnalyzer.createSequenceOfNames(transformationPathName, null);
 			environment = new QVTcTransformationEnvironment(this, transformationCS);
 			Transformation transformation = environment.getTransformation();
 			int transformationNameSize = transformationName.size();
@@ -51,7 +54,7 @@ public class QVTcTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTcNodeEnv
 					EPackage ePackage = tryLookupPackage(transformationName.subList(0, 1));
 					if (ePackage == null) {
 						ePackage = EcoreFactory.eINSTANCE.createEPackage();
-						initASTMapping(ePackage, transformationCS.getPathName(), null);
+						initASTMapping(ePackage, transformationPathName, null);
 						ePackage.setName(transformationName.get(0));
 						addPackage(ePackage);
 					}
@@ -60,7 +63,7 @@ public class QVTcTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTcNodeEnv
 						EPackage childPackage = EcoreUtils.getNamedElement(ePackage.getESubpackages(), name);
 						if (childPackage == null) {
 							childPackage = EcoreFactory.eINSTANCE.createEPackage();
-							initASTMapping(childPackage, transformationCS.getPathName(), null);
+							initASTMapping(childPackage, transformationPathName, null);
 							childPackage.setName(name);
 							addSubPackage(ePackage, childPackage);
 						}
@@ -98,10 +101,14 @@ public class QVTcTopLevelEnvironment extends QVTTopLevelEnvironment<IQVTcNodeEnv
 
 	public QVTcTransformationEnvironment getEnvironment(TransformationCS transformationCS) {
 		try {
-			return getEnvironment(transformationCS.getPathName().getSequenceOfNames());
+			return getEnvironment(transformationCS.getPathName());
 		} catch (LookupException e) {
 			return null;		// Error during create
 		}
+	}
+
+	public QVTcTransformationEnvironment getEnvironment(PathNameCS transformationName) throws LookupException {
+		return getEnvironment(AbstractQVTAnalyzer.createSequenceOfNames(transformationName, null));
 	}
 
 	public QVTcTransformationEnvironment getEnvironment(List<String> transformationName) throws LookupException {

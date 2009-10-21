@@ -34,6 +34,7 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
 import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
 import org.eclipse.qvt.declarative.ecore.QVTCore.Mapping;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
+import org.eclipse.qvt.declarative.parser.AbstractQVTAnalyzer;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.DirectionCS;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.MappingCS;
@@ -51,10 +52,11 @@ public class QVTcTransformationEnvironment extends QVTcEnvironment<IQVTcNodeEnvi
 
 	public QVTcTransformationEnvironment(QVTcTopLevelEnvironment env, TransformationCS transformationCS) {
 		super(env, QVTBaseFactory.eINSTANCE.createTransformation(), transformationCS);
-		List<String> names = transformationCS.getPathName().getSequenceOfNames();
+		PathNameCS transformationPathName = transformationCS.getPathName();
+		List<String> names = AbstractQVTAnalyzer.createSequenceOfNames(transformationPathName, null);
 		String name = names.get(names.size()-1);
 		ast.setName(name);
-		transformationCS.getPathName().setAst(ast);
+		transformationPathName.setAst(ast);
 		Variable variable = EcoreFactory.eINSTANCE.createVariable();	
 		rootEnvironment.getASTNodeToCSTNodeMap().put(variable, transformationCS);
 //		env.initASTMapping(variable, transformationCS.getPathName());
@@ -186,7 +188,7 @@ public class QVTcTransformationEnvironment extends QVTcEnvironment<IQVTcNodeEnvi
 	}
 	
 	public List<EPackage> resolvePackages(PathNameCS packageNameCS) {
-		List<String> names = packageNameCS.getSequenceOfNames();
+		List<String> names = AbstractQVTAnalyzer.createSequenceOfNames(packageNameCS, null);
 		String packageName = StringUtils.splice(names, "::");
 		List<EPackage> ePackages = metaModelContents.get(packageName);
 		if (ePackages == null) {

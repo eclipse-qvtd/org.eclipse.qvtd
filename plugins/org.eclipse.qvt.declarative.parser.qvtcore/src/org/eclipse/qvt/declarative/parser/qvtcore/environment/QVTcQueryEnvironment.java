@@ -22,6 +22,7 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.Function;
 import org.eclipse.qvt.declarative.ecore.QVTBase.FunctionParameter;
 import org.eclipse.qvt.declarative.ecore.QVTBase.QVTBaseFactory;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Transformation;
+import org.eclipse.qvt.declarative.parser.AbstractQVTAnalyzer;
 import org.eclipse.qvt.declarative.parser.environment.CSTChildEnvironment;
 import org.eclipse.qvt.declarative.parser.plugin.QVTParserPlugin;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.QueryCS;
@@ -34,7 +35,7 @@ public class QVTcQueryEnvironment extends QVTcEnvironment<IQVTcNodeEnvironment, 
 	
 	public QVTcQueryEnvironment(QVTcTransformationEnvironment env, QueryCS queryCS) {
 		super(env, null, queryCS);
-		List<String> names = queryCS.getPathName().getSequenceOfNames();
+		List<String> names = AbstractQVTAnalyzer.createSequenceOfNames(queryCS.getPathName(), null);
 		name = names.get(names.size()-1);
 	}
 
