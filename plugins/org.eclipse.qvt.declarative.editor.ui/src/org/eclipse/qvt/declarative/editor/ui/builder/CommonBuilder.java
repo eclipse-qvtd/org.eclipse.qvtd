@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonBuilder.java,v 1.18 2009/08/20 20:15:41 ewillink Exp $
+ * $Id: CommonBuilder.java,v 1.19 2009/10/21 20:05:34 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -43,7 +43,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.ocl.lpg.ProblemHandler;
-import org.eclipse.qvt.declarative.compilation.CompilationService;
+//import org.eclipse.qvt.declarative.compilation.CompilationService;
 import org.eclipse.qvt.declarative.ecore.utils.TracingOption;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
@@ -154,8 +154,8 @@ public abstract class CommonBuilder extends BuilderBase
 				resource.save(null);
 			}
 			//
-			Map<String, String> parameters = new HashMap<String, String>();
-			CompilationService.getInstance().compile(resource, parameters);	// FIXME Resolve dependency
+//			Map<String, String> parameters = new HashMap<String, String>();
+//			CompilationService.getInstance().compile(resource, parameters);	// FIXME Resolve dependency
 			doRefresh(outputFile.getParent());
 		} catch (Exception e) {
 			getPlugin().logException("Failed to compile '" + inputFile.toString() + "'", e);
