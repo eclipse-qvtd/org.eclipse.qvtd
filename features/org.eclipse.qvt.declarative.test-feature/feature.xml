@@ -30,29 +30,31 @@ http://www.eclipse.org/legal/epl-v10.html
       <discovery label="%M2MUpdateSiteName" url="http://download.eclipse.org/modeling/m2m/updates/"/>
    </url>
 
-   <plugin
-         id="org.eclipse.qvt.declarative.test.all"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.qvt.declarative.modelregistry"/>
+      <import plugin="org.junit"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.ocl.ecore"/>
+      <import plugin="org.eclipse.qvt.declarative.emof.essentialocl"/>
+      <import plugin="org.eclipse.qvt.declarative.emof.emof"/>
+      <import plugin="org.eclipse.qvt.declarative.emof.qvtbase"/>
+      <import plugin="org.eclipse.qvt.declarative.parser"/>
+      <import plugin="org.eclipse.qvt.declarative.test.parser"/>
+      <import plugin="org.eclipse.qvt.declarative.ecore.qvtcore"/>
+      <import plugin="org.eclipse.qvt.declarative.emof.qvtcore"/>
+      <import plugin="org.eclipse.qvt.declarative.ecore.qvtrelation"/>
+      <import plugin="org.eclipse.qvt.declarative.emof.qvtrelation"/>
+      <import plugin="org.eclipse.qvt.declarative.ecore.qvttemplate"/>
+      <import plugin="org.eclipse.qvt.declarative.emof.qvttemplate"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.ocl"/>
+      <import plugin="org.eclipse.qvt.declarative.ecore.qvtbase"/>
+   </requires>
 
    <plugin
-         id="org.eclipse.qvt.declarative.test.editor"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.qvt.declarative.test.editor.qvtcore"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.qvt.declarative.test.editor.qvtrelation"
+         id="org.eclipse.qvt.declarative.test.modelregistry"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -109,34 +111,6 @@ http://www.eclipse.org/legal/epl-v10.html
 
    <plugin
          id="org.eclipse.qvt.declarative.test.emof.qvttemplate"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.qvt.declarative.test.modelregistry"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.qvt.declarative.test.parser"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.qvt.declarative.test.parser.qvtcore"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.qvt.declarative.test.parser.qvtrelation"
          download-size="0"
          install-size="0"
          version="0.0.0"
