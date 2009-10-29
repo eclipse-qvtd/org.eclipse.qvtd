@@ -10,3 +10,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.qvt.declarative.modelregistry;visibility:=reexport,
  org.junit;visibility:=reexport
 Export-Package: org.eclipse.qvt.declarative.test.modelregistry
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
