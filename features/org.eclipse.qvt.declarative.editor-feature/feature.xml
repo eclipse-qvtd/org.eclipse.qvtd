@@ -38,8 +38,4 @@ http://www.eclipse.org/legal/epl-v10.html
          id="org.eclipse.qvt.declarative.editor.qvtrelation"
          version="0.0.0"/>
 
-   <includes
-         id="org.eclipse.qvt.declarative.examples"
-         version="0.0.0"/>
-
 </feature>
