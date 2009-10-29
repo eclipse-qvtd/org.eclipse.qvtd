@@ -12,3 +12,4 @@ Eclipse-LazyStart: false
 Export-Package: org.eclipse.qvt.declarative.test.emof.emof,
  org.eclipse.qvt.declarative.test.emof.mapping,
  org.eclipse.qvt.declarative.test.emof.mapping.models
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
