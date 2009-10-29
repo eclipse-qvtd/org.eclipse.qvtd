@@ -13,3 +13,4 @@ Require-Bundle: org.eclipse.qvt.declarative.test.emof.essentialocl;visibility:=r
  org.eclipse.qvt.declarative.test.testqvtbase;visibility:=reexport
 Eclipse-LazyStart: false
 Export-Package: org.eclipse.qvt.declarative.test.emof.qvtbase
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
