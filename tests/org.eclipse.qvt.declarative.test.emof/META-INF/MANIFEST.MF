@@ -14,3 +14,4 @@ Require-Bundle: org.eclipse.osgi;visibility:=reexport,
 Eclipse-LazyStart: false
 Export-Package: org.eclipse.qvt.declarative.test.emof,
  org.eclipse.qvt.declarative.test.emof.tools
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
