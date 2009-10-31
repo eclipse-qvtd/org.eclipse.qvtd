@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonLabelProvider.java,v 1.18 2009/08/20 20:12:55 ewillink Exp $
+ * $Id: CommonLabelProvider.java,v 1.19 2009/10/31 17:53:25 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -50,6 +50,7 @@ import org.eclipse.qvt.declarative.editor.JavaLabelElement;
 import org.eclipse.qvt.declarative.editor.LabelBehavior;
 import org.eclipse.qvt.declarative.editor.OutlineGroup;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
+import org.eclipse.qvt.declarative.editor.util.FormatProvider;
 import org.eclipse.qvt.declarative.editor.util.ImageProvider;
 import org.eclipse.qvt.declarative.editor.util.TextProvider;
 import org.eclipse.swt.graphics.Image;
@@ -226,7 +227,17 @@ public abstract class CommonLabelProvider implements ILabelProvider
 		LabelBehavior behavior = commonEditorDefinition.getBehavior(node, LabelBehavior.class);
 		if (behavior == null)
 			return "<" + String.valueOf(node) + ">";
-		String format = behavior.getFormat();
+		String format = null;
+		Class<FormatProvider> formatProviderClass = behavior.getFormatProvider();
+		if (formatProviderClass != null) {
+			try {
+				format = formatProviderClass.newInstance().getFormat(node);
+			} catch (Exception e) {
+			}
+		}
+		if (format == null) {
+			format = behavior.getFormat();
+		}
 		List<AbstractLabelElement> labelElements = behavior.getElements();
 		int iMax = labelElements.size();
 		Object[] strings = new String[iMax];
