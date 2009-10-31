@@ -12,11 +12,12 @@
  * 
  * </copyright>
  *
- * $Id: LabelBehavior.java,v 1.4 2008/11/30 13:57:57 ewillink Exp $
+ * $Id: LabelBehavior.java,v 1.5 2009/10/31 17:46:03 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.qvt.declarative.editor.util.FormatProvider;
 import org.eclipse.qvt.declarative.editor.util.ImageProvider;
 
 /**
@@ -30,6 +31,7 @@ import org.eclipse.qvt.declarative.editor.util.ImageProvider;
  *   <li>{@link org.eclipse.qvt.declarative.editor.LabelBehavior#getImage <em>Image</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.LabelBehavior#getImageProvider <em>Image Provider</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.LabelBehavior#getFormat <em>Format</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.LabelBehavior#getFormatProvider <em>Format Provider</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.LabelBehavior#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
@@ -117,6 +119,32 @@ public interface LabelBehavior extends Behavior {
 	 * @generated
 	 */
 	void setFormat(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Format Provider</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Format Provider</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Format Provider</em>' attribute.
+	 * @see #setFormatProvider(Class)
+	 * @see org.eclipse.qvt.declarative.editor.EditorPackage#getLabelBehavior_FormatProvider()
+	 * @model unique="false"
+	 * @generated
+	 */
+	Class<FormatProvider> getFormatProvider();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvt.declarative.editor.LabelBehavior#getFormatProvider <em>Format Provider</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Format Provider</em>' attribute.
+	 * @see #getFormatProvider()
+	 * @generated
+	 */
+	void setFormatProvider(Class<FormatProvider> value);
 
 	/**
 	 * Returns the value of the '<em><b>Elements</b></em>' containment reference list.

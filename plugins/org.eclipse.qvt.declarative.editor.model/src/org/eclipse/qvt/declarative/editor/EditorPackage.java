@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackage.java,v 1.9 2008/12/05 22:20:00 ewillink Exp $
+ * $Id: EditorPackage.java,v 1.10 2009/10/31 17:46:03 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor;
 
@@ -486,13 +486,22 @@ public interface EditorPackage extends EPackage {
 	int LABEL_BEHAVIOR__FORMAT = BEHAVIOR_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Format Provider</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL_BEHAVIOR__FORMAT_PROVIDER = BEHAVIOR_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LABEL_BEHAVIOR__ELEMENTS = BEHAVIOR_FEATURE_COUNT + 3;
+	int LABEL_BEHAVIOR__ELEMENTS = BEHAVIOR_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Label Behavior</em>' class.
@@ -501,7 +510,7 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LABEL_BEHAVIOR_FEATURE_COUNT = BEHAVIOR_FEATURE_COUNT + 4;
+	int LABEL_BEHAVIOR_FEATURE_COUNT = BEHAVIOR_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.editor.impl.OutlineBehaviorImpl <em>Outline Behavior</em>}' class.
@@ -624,6 +633,16 @@ public interface EditorPackage extends EPackage {
 	int OUTLINE_GROUP_FEATURE_COUNT = ABSTRACT_OUTLINE_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The meta object id for the '<em>Format Provider</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.editor.util.FormatProvider
+	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getFormatProvider()
+	 * @generated
+	 */
+	int FORMAT_PROVIDER = 14;
+
+	/**
 	 * The meta object id for the '<em>Image Provider</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -631,7 +650,7 @@ public interface EditorPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getImageProvider()
 	 * @generated
 	 */
-	int IMAGE_PROVIDER = 14;
+	int IMAGE_PROVIDER = 15;
 
 	/**
 	 * The meta object id for the '<em>Text Provider</em>' data type.
@@ -641,7 +660,7 @@ public interface EditorPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getTextProvider()
 	 * @generated
 	 */
-	int TEXT_PROVIDER = 15;
+	int TEXT_PROVIDER = 16;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.editor.AbstractLabelElement <em>Abstract Label Element</em>}'.
@@ -963,6 +982,17 @@ public interface EditorPackage extends EPackage {
 	EAttribute getLabelBehavior_Format();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.editor.LabelBehavior#getFormatProvider <em>Format Provider</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Format Provider</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.LabelBehavior#getFormatProvider()
+	 * @see #getLabelBehavior()
+	 * @generated
+	 */
+	EAttribute getLabelBehavior_FormatProvider();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvt.declarative.editor.LabelBehavior#getElements <em>Elements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1079,6 +1109,17 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getOutlineGroup_Hidden();
+
+	/**
+	 * Returns the meta object for data type '{@link org.eclipse.qvt.declarative.editor.util.FormatProvider <em>Format Provider</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Format Provider</em>'.
+	 * @see org.eclipse.qvt.declarative.editor.util.FormatProvider
+	 * @model instanceClass="org.eclipse.qvt.declarative.editor.util.FormatProvider"
+	 * @generated
+	 */
+	EDataType getFormatProvider();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.qvt.declarative.editor.util.ImageProvider <em>Image Provider</em>}'.
@@ -1387,6 +1428,14 @@ public interface EditorPackage extends EPackage {
 		EAttribute LABEL_BEHAVIOR__FORMAT = eINSTANCE.getLabelBehavior_Format();
 
 		/**
+		 * The meta object literal for the '<em><b>Format Provider</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LABEL_BEHAVIOR__FORMAT_PROVIDER = eINSTANCE.getLabelBehavior_FormatProvider();
+
+		/**
 		 * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1479,6 +1528,16 @@ public interface EditorPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OUTLINE_GROUP__HIDDEN = eINSTANCE.getOutlineGroup_Hidden();
+
+		/**
+		 * The meta object literal for the '<em>Format Provider</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.editor.util.FormatProvider
+		 * @see org.eclipse.qvt.declarative.editor.impl.EditorPackageImpl#getFormatProvider()
+		 * @generated
+		 */
+		EDataType FORMAT_PROVIDER = eINSTANCE.getFormatProvider();
 
 		/**
 		 * The meta object literal for the '<em>Image Provider</em>' data type.

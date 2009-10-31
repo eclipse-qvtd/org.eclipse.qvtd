@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: LabelBehaviorImpl.java,v 1.4 2008/11/30 13:57:57 ewillink Exp $
+ * $Id: LabelBehaviorImpl.java,v 1.5 2009/10/31 17:46:03 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.qvt.declarative.editor.AbstractLabelElement;
 import org.eclipse.qvt.declarative.editor.EditorPackage;
 import org.eclipse.qvt.declarative.editor.LabelBehavior;
+import org.eclipse.qvt.declarative.editor.util.FormatProvider;
 import org.eclipse.qvt.declarative.editor.util.ImageProvider;
 
 /**
@@ -41,6 +42,7 @@ import org.eclipse.qvt.declarative.editor.util.ImageProvider;
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelBehaviorImpl#getImage <em>Image</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelBehaviorImpl#getImageProvider <em>Image Provider</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelBehaviorImpl#getFormat <em>Format</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelBehaviorImpl#getFormatProvider <em>Format Provider</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.editor.impl.LabelBehaviorImpl#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
@@ -97,6 +99,16 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	 * @ordered
 	 */
 	protected String format = FORMAT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getFormatProvider() <em>Format Provider</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFormatProvider()
+	 * @generated
+	 * @ordered
+	 */
+	protected Class<FormatProvider> formatProvider;
 
 	/**
 	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
@@ -195,6 +207,27 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Class<FormatProvider> getFormatProvider() {
+		return formatProvider;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFormatProvider(Class<FormatProvider> newFormatProvider) {
+		Class<FormatProvider> oldFormatProvider = formatProvider;
+		formatProvider = newFormatProvider;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.LABEL_BEHAVIOR__FORMAT_PROVIDER, oldFormatProvider, formatProvider));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<AbstractLabelElement> getElements() {
 		if (elements == null) {
 			elements = new EObjectContainmentEList<AbstractLabelElement>(AbstractLabelElement.class, this, EditorPackage.LABEL_BEHAVIOR__ELEMENTS);
@@ -230,6 +263,8 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 				return getImageProvider();
 			case EditorPackage.LABEL_BEHAVIOR__FORMAT:
 				return getFormat();
+			case EditorPackage.LABEL_BEHAVIOR__FORMAT_PROVIDER:
+				return getFormatProvider();
 			case EditorPackage.LABEL_BEHAVIOR__ELEMENTS:
 				return getElements();
 		}
@@ -253,6 +288,9 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 				return;
 			case EditorPackage.LABEL_BEHAVIOR__FORMAT:
 				setFormat((String)newValue);
+				return;
+			case EditorPackage.LABEL_BEHAVIOR__FORMAT_PROVIDER:
+				setFormatProvider((Class<FormatProvider>)newValue);
 				return;
 			case EditorPackage.LABEL_BEHAVIOR__ELEMENTS:
 				getElements().clear();
@@ -279,6 +317,9 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 			case EditorPackage.LABEL_BEHAVIOR__FORMAT:
 				setFormat(FORMAT_EDEFAULT);
 				return;
+			case EditorPackage.LABEL_BEHAVIOR__FORMAT_PROVIDER:
+				setFormatProvider((Class<FormatProvider>)null);
+				return;
 			case EditorPackage.LABEL_BEHAVIOR__ELEMENTS:
 				getElements().clear();
 				return;
@@ -300,6 +341,8 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 				return imageProvider != null;
 			case EditorPackage.LABEL_BEHAVIOR__FORMAT:
 				return FORMAT_EDEFAULT == null ? format != null : !FORMAT_EDEFAULT.equals(format);
+			case EditorPackage.LABEL_BEHAVIOR__FORMAT_PROVIDER:
+				return formatProvider != null;
 			case EditorPackage.LABEL_BEHAVIOR__ELEMENTS:
 				return elements != null && !elements.isEmpty();
 		}
@@ -322,6 +365,8 @@ public class LabelBehaviorImpl extends BehaviorImpl implements LabelBehavior {
 		result.append(imageProvider);
 		result.append(", format: ");
 		result.append(format);
+		result.append(", formatProvider: ");
+		result.append(formatProvider);
 		result.append(')');
 		return result.toString();
 	}

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorFactoryImpl.java,v 1.4 2008/12/05 22:20:01 ewillink Exp $
+ * $Id: EditorFactoryImpl.java,v 1.5 2009/10/31 17:46:03 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.qvt.declarative.editor.*;
+import org.eclipse.qvt.declarative.editor.util.FormatProvider;
 import org.eclipse.qvt.declarative.editor.util.ImageProvider;
 import org.eclipse.qvt.declarative.editor.util.TextProvider;
 import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
@@ -103,6 +104,8 @@ public class EditorFactoryImpl extends EFactoryImpl implements EditorFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case EditorPackage.FORMAT_PROVIDER:
+				return createFormatProviderFromString(eDataType, initialValue);
 			case EditorPackage.IMAGE_PROVIDER:
 				return createImageProviderFromString(eDataType, initialValue);
 			case EditorPackage.TEXT_PROVIDER:
@@ -120,6 +123,8 @@ public class EditorFactoryImpl extends EFactoryImpl implements EditorFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case EditorPackage.FORMAT_PROVIDER:
+				return convertFormatProviderToString(eDataType, instanceValue);
 			case EditorPackage.IMAGE_PROVIDER:
 				return convertImageProviderToString(eDataType, instanceValue);
 			case EditorPackage.TEXT_PROVIDER:
@@ -227,6 +232,24 @@ public class EditorFactoryImpl extends EFactoryImpl implements EditorFactory {
 	public OutlineGroup createOutlineGroup() {
 		OutlineGroupImpl outlineGroup = new OutlineGroupImpl();
 		return outlineGroup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FormatProvider createFormatProviderFromString(EDataType eDataType, String initialValue) {
+		return (FormatProvider)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertFormatProviderToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

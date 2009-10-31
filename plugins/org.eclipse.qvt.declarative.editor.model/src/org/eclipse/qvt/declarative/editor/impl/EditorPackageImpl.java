@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorPackageImpl.java,v 1.11 2009/02/17 21:48:07 ewillink Exp $
+ * $Id: EditorPackageImpl.java,v 1.12 2009/10/31 17:46:03 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.impl;
 
@@ -40,6 +40,7 @@ import org.eclipse.qvt.declarative.editor.EcoreLabelElement;
 import org.eclipse.qvt.declarative.editor.OutlineBehavior;
 import org.eclipse.qvt.declarative.editor.OutlineElement;
 import org.eclipse.qvt.declarative.editor.OutlineGroup;
+import org.eclipse.qvt.declarative.editor.util.FormatProvider;
 import org.eclipse.qvt.declarative.editor.util.ImageProvider;
 import org.eclipse.qvt.declarative.editor.util.TextProvider;
 
@@ -153,6 +154,13 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EDataType formatProviderEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType imageProviderEDataType = null;
 
 	/**
@@ -189,20 +197,10 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link EditorPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -214,7 +212,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		if (isInited) return (EditorPackage)EPackage.Registry.INSTANCE.getEPackage(EditorPackage.eNS_URI);
 
 		// Obtain or create and register package
-		EditorPackageImpl theEditorPackage = (EditorPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof EditorPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new EditorPackageImpl());
+		EditorPackageImpl theEditorPackage = (EditorPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EditorPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EditorPackageImpl());
 
 		isInited = true;
 
@@ -230,6 +228,9 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		// Mark meta-data to indicate it can't be changed
 		theEditorPackage.freeze();
 
+  
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(EditorPackage.eNS_URI, theEditorPackage);
 		return theEditorPackage;
 	}
 
@@ -508,8 +509,17 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getLabelBehavior_FormatProvider() {
+		return (EAttribute)labelBehaviorEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getLabelBehavior_Elements() {
-		return (EReference)labelBehaviorEClass.getEStructuralFeatures().get(3);
+		return (EReference)labelBehaviorEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -607,6 +617,15 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getFormatProvider() {
+		return formatProviderEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getImageProvider() {
 		return imageProviderEDataType;
 	}
@@ -688,6 +707,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		createEAttribute(labelBehaviorEClass, LABEL_BEHAVIOR__IMAGE);
 		createEAttribute(labelBehaviorEClass, LABEL_BEHAVIOR__IMAGE_PROVIDER);
 		createEAttribute(labelBehaviorEClass, LABEL_BEHAVIOR__FORMAT);
+		createEAttribute(labelBehaviorEClass, LABEL_BEHAVIOR__FORMAT_PROVIDER);
 		createEReference(labelBehaviorEClass, LABEL_BEHAVIOR__ELEMENTS);
 
 		outlineBehaviorEClass = createEClass(OUTLINE_BEHAVIOR);
@@ -704,6 +724,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		createEAttribute(outlineGroupEClass, OUTLINE_GROUP__HIDDEN);
 
 		// Create data types
+		formatProviderEDataType = createEDataType(FORMAT_PROVIDER);
 		imageProviderEDataType = createEDataType(IMAGE_PROVIDER);
 		textProviderEDataType = createEDataType(TEXT_PROVIDER);
 	}
@@ -796,6 +817,10 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		g1.getETypeArguments().add(g2);
 		initEAttribute(getLabelBehavior_ImageProvider(), g1, "imageProvider", null, 0, 1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabelBehavior_Format(), theEcorePackage.getEString(), "format", "", 1, 1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEJavaClass());
+		g2 = createEGenericType(this.getFormatProvider());
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getLabelBehavior_FormatProvider(), g1, "formatProvider", null, 0, 1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLabelBehavior_Elements(), this.getAbstractLabelElement(), null, "elements", null, 0, -1, LabelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(outlineBehaviorEClass, OutlineBehavior.class, "OutlineBehavior", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -812,6 +837,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		initEAttribute(getOutlineGroup_Hidden(), theEcorePackage.getEBoolean(), "hidden", "false", 0, 1, OutlineGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
+		initEDataType(formatProviderEDataType, FormatProvider.class, "FormatProvider", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(imageProviderEDataType, ImageProvider.class, "ImageProvider", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(textProviderEDataType, TextProvider.class, "TextProvider", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
