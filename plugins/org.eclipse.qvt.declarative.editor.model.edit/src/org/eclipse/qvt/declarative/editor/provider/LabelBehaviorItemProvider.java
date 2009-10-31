@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: LabelBehaviorItemProvider.java,v 1.4 2008/11/28 17:26:35 ewillink Exp $
+ * $Id: LabelBehaviorItemProvider.java,v 1.5 2009/10/31 17:45:57 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.provider;
 
@@ -77,6 +77,7 @@ public class LabelBehaviorItemProvider
 			addImagePropertyDescriptor(object);
 			addImageProviderPropertyDescriptor(object);
 			addFormatPropertyDescriptor(object);
+			addFormatProviderPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -139,6 +140,28 @@ public class LabelBehaviorItemProvider
 				 getString("_UI_LabelBehavior_format_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_LabelBehavior_format_feature", "_UI_LabelBehavior_type"),
 				 EditorPackage.Literals.LABEL_BEHAVIOR__FORMAT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Format Provider feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addFormatProviderPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_LabelBehavior_formatProvider_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LabelBehavior_formatProvider_feature", "_UI_LabelBehavior_type"),
+				 EditorPackage.Literals.LABEL_BEHAVIOR__FORMAT_PROVIDER,
 				 true,
 				 false,
 				 false,
@@ -227,6 +250,7 @@ public class LabelBehaviorItemProvider
 			case EditorPackage.LABEL_BEHAVIOR__IMAGE:
 			case EditorPackage.LABEL_BEHAVIOR__IMAGE_PROVIDER:
 			case EditorPackage.LABEL_BEHAVIOR__FORMAT:
+			case EditorPackage.LABEL_BEHAVIOR__FORMAT_PROVIDER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case EditorPackage.LABEL_BEHAVIOR__ELEMENTS:
