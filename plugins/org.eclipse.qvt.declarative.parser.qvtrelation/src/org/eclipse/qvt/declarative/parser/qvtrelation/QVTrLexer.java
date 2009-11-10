@@ -15,7 +15,7 @@
 *   E.D.Willink - Bug 292112
 * </copyright>
 *
-* $Id: QVTrLexer.java,v 1.13 2009/10/21 07:49:02 ewillink Exp $
+* $Id: QVTrLexer.java,v 1.14 2009/11/10 06:05:43 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;
@@ -315,15 +315,15 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             }
 	 
             //
-            // Rule 2:  Token ::= EscapedSQ
+            // Rule 2:  Token ::= " SLNotDQ "
             //
             case 2: { 
-				makeToken(TK_STRING_LITERAL);
+				makeToken(TK_IDENTIFIER);
 	            break;
             }
 	 
             //
-            // Rule 3:  Token ::= SingleQuote SLNotSQ SingleQuote
+            // Rule 3:  Token ::= SingleQuote SLNotSQOpt SingleQuote
             //
             case 3: { 
 				makeToken(TK_STRING_LITERAL);
@@ -609,9 +609,9 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             }
 	 
             //
-            // Rule 269:  Token ::= + +
+            // Rule 264:  Token ::= + +
             //
-            case 269: { 
+            case 264: { 
 				makeToken(TK_PLUS_PLUS);
 	            break;
             }
