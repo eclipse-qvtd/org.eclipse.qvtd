@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractQVTcAnalyzer.java,v 1.8 2009/10/21 07:48:38 ewillink Exp $
+ * $Id: AbstractQVTcAnalyzer.java,v 1.9 2009/11/10 19:45:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore;
 
@@ -228,7 +228,7 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 		if (env == null)
 			return;
 		PathNameCS transformationPathName = transformationCS.getPathName();
-		initPathNameAst(transformationPathName, env.getTransformation());
+		transformationPathName.setAst(env.getTransformation());
 		for (DirectionCS directionCS : transformationCS.getDirections())
 			declareDirectionCS(env, directionCS);
 		for (DirectionCS directionCS : transformationCS.getDirections())
@@ -405,7 +405,7 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 	protected Function defineQueryCS(QVTcQueryEnvironment env, QueryCS queryCS) {
 		Function query = env.getQuery();
 		PathNameCS queryPathName = queryCS.getPathName();
-		initPathNameAst(queryPathName, query);
+		queryPathName.setAst(query);
 		OCLExpressionCS oclExpression = queryCS.getOclExpression();
 		if (!(oclExpression.getAst() instanceof ErrorNode))
 			query.setQueryExpression((OCLExpression) oclExpressionCS(oclExpression, env));
@@ -445,7 +445,7 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 						EList<String> transformationName = createSequenceOfNames(transformationNameCS, null);
 						ERROR(transformationNameCS, "InCS", "Undefined transformation '" + formatPath(transformationName) + "'");
 					} else {
-						initPathNameAst(transformationNameCS, txEnv.getASTNode());
+						transformationNameCS.setAst(txEnv.getASTNode());
 						QVTcMappingEnvironment<?> mapEnv = txEnv.createEnvironment(mappingCS);
 						declareMappingCS(mapEnv, mappingCS);
 					}
@@ -553,7 +553,7 @@ public abstract class AbstractQVTcAnalyzer extends AbstractQVTAnalyzer<IQVTcNode
 		List<EPackage> ePackages = env.resolvePackages(packageNameCS);
 		if ((ePackages == null) || ePackages.isEmpty())
 			ePackages = Collections.singletonList(env.getUnresolvedEnvironment().getUnresolvedEPackage(createSequenceOfNames(packageNameCS, null)));
-		initPathNameAst(packageNameCS, ePackages.get(0));
+		packageNameCS.setAst(ePackages.get(0));
 		return ePackages;
 //		else {
 //			if (ePackages != null)
