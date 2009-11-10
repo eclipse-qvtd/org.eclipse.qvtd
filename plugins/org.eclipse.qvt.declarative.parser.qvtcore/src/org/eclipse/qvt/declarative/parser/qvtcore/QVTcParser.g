@@ -667,7 +667,7 @@ $Rules
 	coreKeyword -> uses
 	coreKeyword -> where
 
-	otherKeyword -> coreKeyword
+	reservedKeyword -> coreKeyword
 	
 	ERROR_identifierCS ::= ERROR_TOKEN
 		/.$BeginJava
