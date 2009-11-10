@@ -148,7 +148,7 @@ public abstract class CSTRootEnvironment<E extends ICSTNodeEnvironment, CST exte
 					}
 				}
 				if (!hasErrorNode)		
-					System.out.println("No CST to AST mapping for " + EcoreUtils.formatQualifiedName(cstNode));
+					System.out.println("No CST to AST mapping for " + EcoreUtils.formatQualifiedName(cstNode) + " in " + String.valueOf(ast.getURI()));
 			}
 		}
 	}
