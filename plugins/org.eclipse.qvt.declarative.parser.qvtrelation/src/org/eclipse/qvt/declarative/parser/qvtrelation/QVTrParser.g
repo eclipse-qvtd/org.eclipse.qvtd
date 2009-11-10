@@ -629,18 +629,19 @@ $Rules
 		./
 
 	notCollectionTypeCS -> tupleTypeCS
-	notCollectionTypeCS -> qualifiedPathNameCS
-	notCollectionTypeCS ::= notReservedSimpleNameCS				-- covers primitiveTypeCS
-		/.$BeginJava
-					CSTNode result = (CSTNode)$getSym(1);
-					if (!(result instanceof TypeCS)) {
-						PathNameCS pathNameCS = createPathNameCS((SimpleNameCS)result);
-						setOffsets(pathNameCS, result);
-						result = pathNameCS;
-					}
-					$setResult(result);
-		  $EndJava
-		./
+	notCollectionTypeCS -> pathNameCS
+	notCollectionTypeCS -> primitiveTypeCS
+--	notCollectionTypeCS ::= simpleNameCS				-- covers primitiveTypeCS
+--		/.$BeginJava
+--					CSTNode result = (CSTNode)$getSym(1);
+--					if (!(result instanceof TypeCS)) {
+--						PathNameCS pathNameCS = createPathNameCS((SimpleNameCS)result);
+--						setOffsets(pathNameCS, result);
+--						result = pathNameCS;
+--					}
+--					$setResult(result);
+--		  $EndJava
+--		./
 	
 --<objectTemplate> ::= [<identifier>] ':' <pathNameCS> '{' [<propertyTemplateList>] '}'
 --<propertyTemplateList> ::= <propertyTemplate> (',' <propertyTemplate>)*
@@ -650,7 +651,7 @@ $Rules
 --		/.$NewCase./
 --	objectTemplateCS_prePropertyTemplates ::= NullLiteralExpCS ':' notCollectionTypeCS '{'
 --		/.$NewCase./
-	objectTemplateCS_prePropertyTemplates ::= notLiteralNorReservedSimpleNameCS ':' notCollectionTypeCS '{'
+	objectTemplateCS_prePropertyTemplates ::= simpleNameCS ':' notCollectionTypeCS '{'
 		/.$BeginJava
 					IdentifierCS identifierCS = createIdentifierCS($getToken(1));
 					TypeCS typeCS = (TypeCS)$getSym(3);
@@ -726,7 +727,7 @@ $Rules
 --		/.$NewCase./
 --	collectionTemplateCS_1_ ::= NullLiteralExpCS ':' collectionTypeCS
 --		/.$NewCase./
-	collectionTemplateCS_1_ ::= notLiteralNorReservedSimpleNameCS ':' collectionTypeCS
+	collectionTemplateCS_1_ ::= simpleNameCS ':' collectionTypeCS
 		/.$BeginJava
 					IdentifierCS identifierCS = createIdentifierCS($getToken(1));
 					CollectionTypeCS collectionTypeCS = (CollectionTypeCS)$getSym(3);
@@ -873,7 +874,7 @@ $Rules
 --                    | <IfExpCS>
 --                    | '(' <OclExpressionCS> ')'
 --                    | <template>  
-	OclExpressionCS -> templateCS
+	notNameExpressionCS -> templateCS
 
 	relationIdentifier -> checkonly
 	relationIdentifier -> default_values
@@ -894,7 +895,7 @@ $Rules
 	relationIdentifier -> where
 --	relationIdentifier -> '_'	
 	
-	otherKeyword -> relationIdentifier
+	reservedKeyword -> relationIdentifier
 	
 	identifierCS ::= IDENTIFIER
 		/.$NewCase ./
