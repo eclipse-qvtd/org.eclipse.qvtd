@@ -248,10 +248,7 @@ public abstract class AbstractQVTAnalyzer<E extends IQVTNodeEnvironment> extends
 			});
 			classifier = matches.isEmpty() ? env.getUnresolvedEnvironment().getUnresolvedEClass(className) : matches.get(0);
 		}
-		if (cstNode instanceof PathNameCS)
-			initPathNameAst((PathNameCS) cstNode, classifier);
-		else if (cstNode != null)
-			cstNode.setAst(classifier);
+		cstNode.setAst(classifier);
 		return classifier;
 	}
 	
