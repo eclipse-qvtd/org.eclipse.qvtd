@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: VariableImpl.java,v 1.1 2008/07/23 09:56:29 qglineur Exp $
+ * $Id: VariableImpl.java,v 1.2 2009/11/15 08:18:47 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EssentialOCL.impl;
 
@@ -139,7 +139,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 * @generated
 	 */
 	public LetExp getLetExp() {
-		if (eContainerFeatureID != EssentialOCLPackage.VARIABLE__LET_EXP) return null;
+		if (eContainerFeatureID() != EssentialOCLPackage.VARIABLE__LET_EXP) return null;
 		return (LetExp)eContainer();
 	}
 
@@ -159,7 +159,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 * @generated
 	 */
 	public void setLetExp(LetExp newLetExp) {
-		if (newLetExp != eInternalContainer() || (eContainerFeatureID != EssentialOCLPackage.VARIABLE__LET_EXP && newLetExp != null)) {
+		if (newLetExp != eInternalContainer() || (eContainerFeatureID() != EssentialOCLPackage.VARIABLE__LET_EXP && newLetExp != null)) {
 			if (EcoreUtil.isAncestor(this, newLetExp))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -251,7 +251,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case EssentialOCLPackage.VARIABLE__LET_EXP:
 				return eInternalContainer().eInverseRemove(this, EssentialOCLPackage.LET_EXP__VARIABLE, LetExp.class, msgs);
 		}
