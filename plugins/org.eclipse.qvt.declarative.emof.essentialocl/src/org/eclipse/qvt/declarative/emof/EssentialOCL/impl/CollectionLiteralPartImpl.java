@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CollectionLiteralPartImpl.java,v 1.1 2008/07/23 09:56:30 qglineur Exp $
+ * $Id: CollectionLiteralPartImpl.java,v 1.2 2009/11/15 08:17:48 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EssentialOCL.impl;
 
@@ -71,7 +71,7 @@ public abstract class CollectionLiteralPartImpl extends TypedElementImpl impleme
 	 * @generated
 	 */
 	public CollectionLiteralExp getCollectionLiteralExp() {
-		if (eContainerFeatureID != EssentialOCLPackage.COLLECTION_LITERAL_PART__COLLECTION_LITERAL_EXP) return null;
+		if (eContainerFeatureID() != EssentialOCLPackage.COLLECTION_LITERAL_PART__COLLECTION_LITERAL_EXP) return null;
 		return (CollectionLiteralExp)eContainer();
 	}
 
@@ -91,7 +91,7 @@ public abstract class CollectionLiteralPartImpl extends TypedElementImpl impleme
 	 * @generated
 	 */
 	public void setCollectionLiteralExp(CollectionLiteralExp newCollectionLiteralExp) {
-		if (newCollectionLiteralExp != eInternalContainer() || (eContainerFeatureID != EssentialOCLPackage.COLLECTION_LITERAL_PART__COLLECTION_LITERAL_EXP && newCollectionLiteralExp != null)) {
+		if (newCollectionLiteralExp != eInternalContainer() || (eContainerFeatureID() != EssentialOCLPackage.COLLECTION_LITERAL_PART__COLLECTION_LITERAL_EXP && newCollectionLiteralExp != null)) {
 			if (EcoreUtil.isAncestor(this, newCollectionLiteralExp))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -143,7 +143,7 @@ public abstract class CollectionLiteralPartImpl extends TypedElementImpl impleme
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case EssentialOCLPackage.COLLECTION_LITERAL_PART__COLLECTION_LITERAL_EXP:
 				return eInternalContainer().eInverseRemove(this, EssentialOCLPackage.COLLECTION_LITERAL_EXP__PART, CollectionLiteralExp.class, msgs);
 		}
