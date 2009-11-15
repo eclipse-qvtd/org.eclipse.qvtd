@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TupleLiteralPartImpl.java,v 1.1 2008/07/23 09:56:30 qglineur Exp $
+ * $Id: TupleLiteralPartImpl.java,v 1.2 2009/11/15 08:18:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EssentialOCL.impl;
 
@@ -134,7 +134,7 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiter
 	 * @generated
 	 */
 	public TupleLiteralExp getTupleLiteralExp() {
-		if (eContainerFeatureID != EssentialOCLPackage.TUPLE_LITERAL_PART__TUPLE_LITERAL_EXP) return null;
+		if (eContainerFeatureID() != EssentialOCLPackage.TUPLE_LITERAL_PART__TUPLE_LITERAL_EXP) return null;
 		return (TupleLiteralExp)eContainer();
 	}
 
@@ -154,7 +154,7 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiter
 	 * @generated
 	 */
 	public void setTupleLiteralExp(TupleLiteralExp newTupleLiteralExp) {
-		if (newTupleLiteralExp != eInternalContainer() || (eContainerFeatureID != EssentialOCLPackage.TUPLE_LITERAL_PART__TUPLE_LITERAL_EXP && newTupleLiteralExp != null)) {
+		if (newTupleLiteralExp != eInternalContainer() || (eContainerFeatureID() != EssentialOCLPackage.TUPLE_LITERAL_PART__TUPLE_LITERAL_EXP && newTupleLiteralExp != null)) {
 			if (EcoreUtil.isAncestor(this, newTupleLiteralExp))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -251,7 +251,7 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiter
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case EssentialOCLPackage.TUPLE_LITERAL_PART__TUPLE_LITERAL_EXP:
 				return eInternalContainer().eInverseRemove(this, EssentialOCLPackage.TUPLE_LITERAL_EXP__PART, TupleLiteralExp.class, msgs);
 		}
