@@ -28,6 +28,7 @@ public abstract class AbstractEssentialOCLConsistencyTest extends AbstractEMOFCo
 		ExpressionsPackage oclExpr = ExpressionsPackage.eINSTANCE;
 		TypesPackage oclType = TypesPackage.eINSTANCE;
 		UtilitiesPackage oclUtil = UtilitiesPackage.eINSTANCE;
+
 		extraEcoreObjectInconsistency(ecoreInconsistencies, new InconsistencyKey(oclExpr.getCollectionLiteralExp_Part(), ecore.getETypedElement_Ordered()), new InconsistencyValue(Boolean.TRUE, Boolean.FALSE));
 		extraEcoreObjectInconsistency(ecoreInconsistencies, new InconsistencyKey(oclType.getCollectionType_ElementType(), ecore.getETypedElement_LowerBound()), new InconsistencyValue(Integer.valueOf(0), Integer.valueOf(1)));
 		extraEcoreObjectInconsistency(ecoreInconsistencies, new InconsistencyKey(oclUtil.getExpressionInOCL_ContextVariable(), ecore.getETypedElement_LowerBound()), new InconsistencyValue(Integer.valueOf(0), Integer.valueOf(1)));
@@ -38,7 +39,6 @@ public abstract class AbstractEssentialOCLConsistencyTest extends AbstractEMOFCo
 		extraEcoreObjectInconsistency(ecoreInconsistencies, new InconsistencyKey(oclExpr.getLetExp_In(), ecore.getETypedElement_LowerBound()), new InconsistencyValue(Integer.valueOf(0), Integer.valueOf(1)));
 		extraEcoreObjectInconsistency(ecoreInconsistencies, new InconsistencyKey(oclExpr.getLetExp_Variable(), ecore.getETypedElement_LowerBound()), new InconsistencyValue(Integer.valueOf(0), Integer.valueOf(1)));
 		extraEcoreObjectInconsistency(ecoreInconsistencies, new InconsistencyKey(oclExpr.getLoopExp_Body(), ecore.getETypedElement_LowerBound()), new InconsistencyValue(Integer.valueOf(0), Integer.valueOf(1)));
-		extraEcoreObjectInconsistency(ecoreInconsistencies, new InconsistencyKey(oclExpr.getLoopExp_Iterator(), ecore.getETypedElement_Ordered()), new InconsistencyValue(Boolean.TRUE, Boolean.FALSE));
 		extraEcoreObjectInconsistency(ecoreInconsistencies, new InconsistencyKey(oclExpr.getTupleLiteralExp_Part(), ecore.getETypedElement_Ordered()), new InconsistencyValue(Boolean.TRUE, Boolean.FALSE));
 		extraEcoreObjectInconsistency(ecoreInconsistencies, new InconsistencyKey(oclExpr.getTupleLiteralPart_Value(), ecore.getETypedElement_LowerBound()), new InconsistencyValue(Integer.valueOf(0), Integer.valueOf(1)));
 //

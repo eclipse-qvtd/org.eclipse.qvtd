@@ -31,9 +31,10 @@ import org.eclipse.qvt.declarative.test.emof.tools.EquivalenceMap;
 
 public class EssentialOCLConsistencyTest extends AbstractEssentialOCLConsistencyTest
 {
-	public static void expectedEcoreDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
+	public static void expectedEcoreDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper, ResourceSet rightResourceSet) {
 		changeOfURI(differences, helper, org.eclipse.ocl.ecore.EcorePackage.eINSTANCE);
 		changeOfPrefix(differences, helper, org.eclipse.ocl.ecore.EcorePackage.eINSTANCE);
+//		extraObject(differences, helper, org.eclipse.ocl.ecore.EcorePackage.Literals.TYPE_TYPE);
 		changeOfName(differences, helper, org.eclipse.ocl.ecore.EcorePackage.eINSTANCE);
 		changeOfName(differences, helper, org.eclipse.ocl.ecore.EcorePackage.Literals.OCL_EXPRESSION);
 		changeOfSize(differences, helper, org.eclipse.ocl.ecore.EcorePackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
@@ -44,13 +45,13 @@ public class EssentialOCLConsistencyTest extends AbstractEssentialOCLConsistency
 //		changeOfSize(differences, helper, org.eclipse.ocl.ecore.EcorePackage.Literals.VARIABLE, EcorePackage.Literals.ECLASS__ESUPER_TYPES);
 	}
 	
-	public static void expectedEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
+	public static void expectedEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper, ResourceSet rightResourceSet) {
 		changeOfURI(differences, helper, EssentialOCLPackage.eINSTANCE);
 		changeOfName(differences, helper, EssentialOCLPackage.eINSTANCE);
 		changeOfSize(differences, helper, EssentialOCLPackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
 	}
 
-	public static void expectedEmof2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
+	public static void expectedEmof2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper, ResourceSet rightResourceSet) {
 		missingURI(differences, helper, EssentialOCLPackage.eINSTANCE);
 		missingPrefix(differences, helper, EssentialOCLPackage.eINSTANCE);
 		changeOfName(differences, helper, EssentialOCLPackage.eINSTANCE);
@@ -63,19 +64,23 @@ public class EssentialOCLConsistencyTest extends AbstractEssentialOCLConsistency
 		changeOfURI(differences, helper, EssentialOCLPackage.eINSTANCE);
 		changeOfName(differences, helper, EssentialOCLPackage.eINSTANCE);
 		changeOfName(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE);
+		changeOfName(differences, helper, EssentialOCLPackage.Literals.FEATURE_CALL_EXP);
 		changeOfName(differences, helper, EssentialOCLPackage.Literals.VARIABLE__REPRESENTED_PARAMETER);
 
 		changeOfSize(differences, helper, EssentialOCLPackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
-		helper.println("'NavigationCallExp' should be defined");
-		helper.println("'OpaqueExpression' should be undefined");
-		missingClass(differences, helper, EssentialOCLPackage.Literals.TYPE_TYPE);
-		
+		extraObject(differences, helper, getClass(rightPackage, "OpaqueExpression"));
+		missingClass(differences, helper, EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP);
+		missingClass(differences, helper, EssentialOCLPackage.Literals.TEMPLATE_PARAMETER_TYPE);
+		missingObject(differences, helper, EssentialOCLPackage.Literals.TEMPLATE_PARAMETER_TYPE__SPECIFICATION);
+
+		missingListObject(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__GENERATED_TYPE);
+		missingObject(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__GENERATED_TYPE);
+
 		changeOfSize(differences, helper, EssentialOCLPackage.Literals.COLLECTION_KIND, EcorePackage.Literals.EENUM__ELITERALS);
 		missingEnumerationLiteral(differences, helper, EssentialOCLPackage.Literals.COLLECTION_KIND.getEEnumLiteral("Collection"));
 
 		changeOfMappedListObject(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL, EcorePackage.Literals.ECLASS__ESUPER_TYPES, EMOFPackage.Literals.TYPED_ELEMENT, getClass(rightPackage, "OpaqueExpression"));
-
-		helper.println("'eSuperTypes' for 'PropertyCallExp' should be 'NavigationCallExp'");
+		changeOfListObject(differences, helper, EssentialOCLPackage.Literals.PROPERTY_CALL_EXP, EcorePackage.Literals.ECLASS__ESUPER_TYPES, EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP, getClass(rightPackage, "FeaturePropertyCall"));
 		changeOfList(differences, helper, EssentialOCLPackage.Literals.ANY_TYPE, EcorePackage.Literals.ECLASS__ESUPER_TYPES);		
 		changeOfLower(differences, helper, EssentialOCLPackage.Literals.COLLECTION_TYPE__ELEMENT_TYPE);
 		changeOfUpper(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE);
@@ -84,7 +89,6 @@ public class EssentialOCLConsistencyTest extends AbstractEssentialOCLConsistency
 		
 		changeOfOrdered(differences, helper, EssentialOCLPackage.Literals.COLLECTION_LITERAL_EXP__PART);
 		changeOfOrdered(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE);
-		changeOfOrdered(differences, helper, EssentialOCLPackage.Literals.LOOP_EXP__ITERATOR);
 		changeOfOrdered(differences, helper, EssentialOCLPackage.Literals.TUPLE_LITERAL_EXP__PART);
 
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.CALL_EXP__SOURCE);
@@ -93,6 +97,7 @@ public class EssentialOCLConsistencyTest extends AbstractEssentialOCLConsistency
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL);
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION);
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE);
+		missingOppositeAnnotation(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__GENERATED_TYPE);
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE);
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__RESULT_VARIABLE);
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.IF_EXP__CONDITION);
@@ -106,14 +111,9 @@ public class EssentialOCLConsistencyTest extends AbstractEssentialOCLConsistency
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.VARIABLE__INIT_EXPRESSION);
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.VARIABLE_EXP__REFERRED_VARIABLE);
 		helper.setLogStream(null);
-		// Actual problem below is that OMG has spurious OpaqueExpression; matching misaligns diagnostics
-		changeOfAbstract(differences, helper, EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP);
-		changeOfMappedListObject(differences, helper, EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP, EcorePackage.Literals.ECLASS__ESUPER_TYPES, EssentialOCLPackage.Literals.FEATURE_CALL_EXP, getClass(rightPackage, "CallExp"));
-		changeOfName(differences, helper, EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP);
-		changeOfName(differences, helper, EssentialOCLPackage.Literals.FEATURE_CALL_EXP);
-
-		EMOFConsistencyTest.expectedEmofDifferences(differences, helper);		
-		EssentialOCLConsistencyTest.expectedEmofDifferences(differences, helper);
+		ResourceSet rightResourceSet = rightPackage.eResource().getResourceSet();
+		EMOFConsistencyTest.expectedEmofDifferences(differences, helper, rightResourceSet);		
+		EssentialOCLConsistencyTest.expectedEmofDifferences(differences, helper, rightResourceSet);
 		return differences;
 	}
 
@@ -122,15 +122,18 @@ public class EssentialOCLConsistencyTest extends AbstractEssentialOCLConsistency
 		Set<EcoreDifference> differences = new HashSet<EcoreDifference>();
 		missingURI(differences, helper, EssentialOCLPackage.eINSTANCE);
 		changeOfName(differences, helper, EssentialOCLPackage.eINSTANCE);
-
-		
 		changeOfName(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE);
+		changeOfName(differences, helper, EssentialOCLPackage.Literals.FEATURE_CALL_EXP);
 		changeOfName(differences, helper, EssentialOCLPackage.Literals.VARIABLE__REPRESENTED_PARAMETER);
 
 		changeOfSize(differences, helper, EssentialOCLPackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
-		helper.println("'NavigationCallExp' should be defined");
-		helper.println("'OpaqueExpression' should be undefined");
-		missingClass(differences, helper, EssentialOCLPackage.Literals.TYPE_TYPE);
+		extraObject(differences, helper, getClass(rightPackage, "OpaqueExpression"));
+		missingClass(differences, helper, EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP);
+		missingClass(differences, helper, EssentialOCLPackage.Literals.TEMPLATE_PARAMETER_TYPE);
+		missingObject(differences, helper, EssentialOCLPackage.Literals.TEMPLATE_PARAMETER_TYPE__SPECIFICATION);
+
+		missingListObject(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__GENERATED_TYPE);
+		missingObject(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__GENERATED_TYPE);
 		
 		changeOfSize(differences, helper, EssentialOCLPackage.Literals.COLLECTION_KIND, EcorePackage.Literals.EENUM__ELITERALS);
 		missingEnumerationLiteral(differences, helper, EssentialOCLPackage.Literals.COLLECTION_KIND.getEEnumLiteral("Bag"));
@@ -144,7 +147,7 @@ public class EssentialOCLConsistencyTest extends AbstractEssentialOCLConsistency
 		changeOfProxyObject(differences, helper, EssentialOCLPackage.Literals.UNLIMITED_NATURAL_EXP__SYMBOL, EcorePackage.Literals.ETYPED_ELEMENT__ETYPE);
 
 		changeOfMappedListObject(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL, EcorePackage.Literals.ECLASS__ESUPER_TYPES, EMOFPackage.Literals.TYPED_ELEMENT, getClass(rightPackage, "OpaqueExpression"));
-		helper.println("'eSuperTypes' for 'PropertyCallExp' should be 'NavigationCallExp'");
+		changeOfListObject(differences, helper, EssentialOCLPackage.Literals.PROPERTY_CALL_EXP, EcorePackage.Literals.ECLASS__ESUPER_TYPES, EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP, getClass(rightPackage, "FeaturePropertyCall"));
 		changeOfList(differences, helper, EssentialOCLPackage.Literals.ANY_TYPE, EcorePackage.Literals.ECLASS__ESUPER_TYPES);		
 		changeOfUpper(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE);
 		changeOfAbstract(differences, helper, EssentialOCLPackage.Literals.COLLECTION_TYPE);
@@ -186,6 +189,7 @@ public class EssentialOCLConsistencyTest extends AbstractEssentialOCLConsistency
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL);
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION);
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE);
+		missingOppositeAnnotation(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__GENERATED_TYPE);
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE);
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__RESULT_VARIABLE);
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.IF_EXP__CONDITION);
@@ -199,14 +203,10 @@ public class EssentialOCLConsistencyTest extends AbstractEssentialOCLConsistency
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.VARIABLE__INIT_EXPRESSION);
 		missingOpposite(differences, helper, EssentialOCLPackage.Literals.VARIABLE_EXP__REFERRED_VARIABLE);
 		helper.setLogStream(null);
-		// Actual problem below is that OMG has spurious OpaqueExpression; matching misaligns diagnostics
-		changeOfAbstract(differences, helper, EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP);
-		changeOfMappedListObject(differences, helper, EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP, EcorePackage.Literals.ECLASS__ESUPER_TYPES, EssentialOCLPackage.Literals.FEATURE_CALL_EXP, getClass(rightPackage, "CallExp"));
-		changeOfName(differences, helper, EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP);
-		changeOfName(differences, helper, EssentialOCLPackage.Literals.FEATURE_CALL_EXP);
+		ResourceSet rightResourceSet = rightPackage.eResource().getResourceSet();
 
 		missingPrefix(differences, helper, EssentialOCLPackage.eINSTANCE);
-		EMOFConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
+		EMOFConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper, rightResourceSet);
 		return differences;
 	}
 	
@@ -219,26 +219,29 @@ public class EssentialOCLConsistencyTest extends AbstractEssentialOCLConsistency
 		changeOfName(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE);
 		changeOfName(differences, helper, EssentialOCLPackage.Literals.VARIABLE__REPRESENTED_PARAMETER);
 		changeOfSize(differences, helper, EssentialOCLPackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
-		helper.println("'NavigationCallExp' should be defined");
-		helper.println("'OpaqueExpression' should be undefined");
-		missingClass(differences, helper, EssentialOCLPackage.Literals.TYPE_TYPE);
+		extraObject(differences, helper, getClass(rightPackage, "OpaqueExpression"));
+		missingClass(differences, helper, EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP);
+		missingClass(differences, helper, EssentialOCLPackage.Literals.TEMPLATE_PARAMETER_TYPE);
+		missingObject(differences, helper, EssentialOCLPackage.Literals.TEMPLATE_PARAMETER_TYPE__SPECIFICATION);
+		missingListObject(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__GENERATED_TYPE);
+		missingObject(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__GENERATED_TYPE);
+		missingOppositeAnnotation(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__GENERATED_TYPE);
 		changeOfSize(differences, helper, EssentialOCLPackage.Literals.COLLECTION_KIND, EcorePackage.Literals.EENUM__ELITERALS);
 		missingEnumerationLiteral(differences, helper, EssentialOCLPackage.Literals.COLLECTION_KIND.getEEnumLiteral("Collection"));
 		changeOfMappedListObject(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL, EcorePackage.Literals.ECLASS__ESUPER_TYPES, EMOFPackage.Literals.TYPED_ELEMENT, getClass(rightPackage, "OpaqueExpression"));
-		changeOfMappedListObject(differences, helper, EssentialOCLPackage.Literals.PROPERTY_CALL_EXP, EcorePackage.Literals.ECLASS__ESUPER_TYPES, EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP, getClass(rightPackage, "FeaturePropertyCall"));
+		changeOfListObject(differences, helper, EssentialOCLPackage.Literals.PROPERTY_CALL_EXP, EcorePackage.Literals.ECLASS__ESUPER_TYPES, EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP, getClass(rightPackage, "FeaturePropertyCall"));
 		changeOfList(differences, helper, EssentialOCLPackage.Literals.ANY_TYPE, EcorePackage.Literals.ECLASS__ESUPER_TYPES);		
 		changeOfAbstract(differences, helper, EssentialOCLPackage.Literals.COLLECTION_TYPE);
 		changeOfContainment(differences, helper, EssentialOCLPackage.Literals.TUPLE_LITERAL_PART__ATTRIBUTE);
 		changeOfLower(differences, helper, EssentialOCLPackage.Literals.COLLECTION_TYPE__ELEMENT_TYPE);
 		changeOfUpper(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE);
 		changeOfOrdered(differences, helper, EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE);
+		changeOfOrdered(differences, helper, EssentialOCLPackage.Literals.LOOP_EXP__ITERATOR);
 		changeOfOrdered(differences, helper, EssentialOCLPackage.Literals.OPERATION_CALL_EXP__ARGUMENT);
 		helper.setLogStream(null);
-		// Actual problem below is that OMG has spurious OpaqueExpression; matching misaligns diagnostics
-		changeOfName(differences, helper, EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP);
-		changeOfSize(differences, helper, EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP, EcorePackage.Literals.ECLASS__ESUPER_TYPES);
+		ResourceSet rightResourceSet = rightPackage.eResource().getResourceSet();
 		helper.setLogStream(null);
-		EMOFConsistencyTest.expectedEmofDifferences(differences, helper);		
+		EMOFConsistencyTest.expectedEmofDifferences(differences, helper, rightResourceSet);		
 		return differences;
 	}
 
@@ -265,6 +268,8 @@ public class EssentialOCLConsistencyTest extends AbstractEssentialOCLConsistency
 	protected void installEmofOmgMappings(EquivalenceMap comparator, ResourceSet resourceSet) {
 		super.installEmofOmgMappings(comparator, resourceSet);
 		EPackage emofPackage = getPackage(resourceSet, ESSENTIAL_OCL_PACKAGE_NAME.toLowerCase());
+		comparator.putEquivalence(EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP, null);
+		comparator.putEquivalence(null, getClass(emofPackage, "OpaqueExpression"));
 		comparator.putEquivalence(EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE, getFeature(getClass(emofPackage, "ExpressionInOcl"), "context"));
 		comparator.putEquivalence(EssentialOCLPackage.Literals.FEATURE_CALL_EXP, getClass(emofPackage, "FeaturePropertyCall"));
 		comparator.putEquivalence(EssentialOCLPackage.Literals.VARIABLE__REPRESENTED_PARAMETER, getFeature(getClass(emofPackage, "Variable"), "bindParameter"));
@@ -275,6 +280,8 @@ public class EssentialOCLConsistencyTest extends AbstractEssentialOCLConsistency
 	protected void installEmof2EmofMappings(EquivalenceMap comparator, ResourceSet resourceSet) {
 		super.installEmof2EmofMappings(comparator, resourceSet);
 		EPackage emofPackage = getPackage(resourceSet, ESSENTIAL_OCL_PACKAGE_NAME.toLowerCase());
+		comparator.putEquivalence(EssentialOCLPackage.Literals.NAVIGATION_CALL_EXP, null);
+		comparator.putEquivalence(null, getClass(emofPackage, "OpaqueExpression"));
 		comparator.putEquivalence(EssentialOCLPackage.eINSTANCE, emofPackage);
 		comparator.putEquivalence(EssentialOCLPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE, getFeature(getClass(emofPackage, "ExpressionInOcl"), "context"));
 		comparator.putEquivalence(EssentialOCLPackage.Literals.FEATURE_CALL_EXP, getClass(emofPackage, "FeaturePropertyCall"));
