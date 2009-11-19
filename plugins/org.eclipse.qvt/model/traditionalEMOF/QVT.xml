@@ -323,7 +323,7 @@
       <nsPrefix>emof</nsPrefix>
     </xmi:Extension>
   </emof:Package>
-  <emof:Package xmi:id="EssentialOCL" name="EssentialOCL" uri="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml">
+  <emof:Package xmi:id="EssentialOCL" name="EssentialOCL" uri="http://schema.omg.org/spec/QVT/1.1/essentialocl.xml">
     <ownedType xmi:type="emof:Class" xmi:id="EssentialOCL.AnyType" name="AnyType"
         superClass="EMOF.Type"/>
     <ownedType xmi:type="emof:Class" xmi:id="EssentialOCL.BagType" name="BagType"
@@ -455,6 +455,15 @@
           <resolveProxies>false</resolveProxies>
         </xmi:Extension>
       </ownedAttribute>
+      <ownedAttribute xmi:id="EssentialOCL.ExpressionInOcl.generatedType" name="generatedType"
+          lower="0" upper="*" type="EMOF.Type" isComposite="true">
+        <ownedComment body="owningExpression">
+          <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+        </ownedComment>
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <resolveProxies>false</resolveProxies>
+        </xmi:Extension>
+      </ownedAttribute>
       <ownedAttribute xmi:id="EssentialOCL.ExpressionInOcl.parameterVariable" name="parameterVariable"
           lower="0" upper="*" type="EssentialOCL.Variable" isComposite="true">
         <ownedComment body="varOwner">
@@ -555,8 +564,8 @@
           <resolveProxies>false</resolveProxies>
         </xmi:Extension>
       </ownedAttribute>
-      <ownedAttribute xmi:id="EssentialOCL.LoopExp.iterator" name="iterator" lower="0"
-          upper="*" type="EssentialOCL.Variable" isComposite="true">
+      <ownedAttribute xmi:id="EssentialOCL.LoopExp.iterator" name="iterator" isOrdered="true"
+          lower="0" upper="*" type="EssentialOCL.Variable" isComposite="true">
         <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
           <resolveProxies>false</resolveProxies>
         </xmi:Extension>
@@ -615,6 +624,11 @@
       <ownedAttribute xmi:id="EssentialOCL.StringLiteralExp.stringSymbol" name="stringSymbol"
           isOrdered="true" lower="0" type="EMOF.String"/>
     </ownedType>
+    <ownedType xmi:type="emof:Class" xmi:id="EssentialOCL.TemplateParameterType" name="TemplateParameterType"
+        superClass="EMOF.Type">
+      <ownedAttribute xmi:id="EssentialOCL.TemplateParameterType.specification" name="specification"
+          isOrdered="true" lower="0" type="EMOF.String"/>
+    </ownedType>
     <ownedType xmi:type="emof:Class" xmi:id="EssentialOCL.TupleLiteralExp" name="TupleLiteralExp"
         superClass="EssentialOCL.LiteralExp">
       <ownedAttribute xmi:id="EssentialOCL.TupleLiteralExp.part" name="part" lower="0"
@@ -649,8 +663,6 @@
       <ownedAttribute xmi:id="EssentialOCL.TypeExp.referredType" name="referredType"
           isOrdered="true" lower="0" type="EMOF.Type"/>
     </ownedType>
-    <ownedType xmi:type="emof:Class" xmi:id="EssentialOCL.TypeType" name="TypeType"
-        superClass="EMOF.Type"/>
     <ownedType xmi:type="emof:Class" xmi:id="EssentialOCL.UnlimitedNaturalExp" name="UnlimitedNaturalExp"
         superClass="EssentialOCL.NumericLiteralExp">
       <ownedAttribute xmi:id="EssentialOCL.UnlimitedNaturalExp.symbol" name="symbol"
@@ -692,7 +704,7 @@
       <nsPrefix>essentialocl</nsPrefix>
     </xmi:Extension>
   </emof:Package>
-  <emof:Package xmi:id="ImperativeOCL" name="ImperativeOCL" uri="http://schema.omg.org/spec/QVT/1.0/imperativeocl.xml">
+  <emof:Package xmi:id="ImperativeOCL" name="ImperativeOCL" uri="http://schema.omg.org/spec/QVT/1.1/imperativeocl.xml">
     <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.AltExp" name="AltExp" superClass="ImperativeOCL.ImperativeExpression">
       <ownedAttribute xmi:id="ImperativeOCL.AltExp.body" name="body" isOrdered="true"
           type="EssentialOCL.OclExpression" isComposite="true">
@@ -902,6 +914,18 @@
       <ownedAttribute xmi:id="ImperativeOCL.InstantiationExp.instantiatedClass" name="instantiatedClass"
           isOrdered="true" type="EMOF.Class"/>
     </ownedType>
+    <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.ListLiteralExp" name="ListLiteralExp"
+        superClass="EssentialOCL.LiteralExp">
+      <ownedAttribute xmi:id="ImperativeOCL.ListLiteralExp.element" name="element"
+          isOrdered="true" lower="0" upper="*" type="EssentialOCL.OclExpression" isComposite="true">
+        <ownedComment body="elementOwner">
+          <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+        </ownedComment>
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <resolveProxies>false</resolveProxies>
+        </xmi:Extension>
+      </ownedAttribute>
+    </ownedType>
     <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.ListType" name="ListType"
         superClass="EssentialOCL.CollectionType"/>
     <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.LogExp" name="LogExp" superClass="EssentialOCL.OperationCallExp ImperativeOCL.ImperativeExpression">
@@ -1007,11 +1031,6 @@
         </xmi:Extension>
       </ownedAttribute>
     </ownedType>
-    <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.TemplateParameterType"
-        name="TemplateParameterType" superClass="EMOF.Type">
-      <ownedAttribute xmi:id="ImperativeOCL.TemplateParameterType.specification" name="specification"
-          isOrdered="true" lower="0" type="EMOF.String"/>
-    </ownedType>
     <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.TryExp" name="TryExp" superClass="ImperativeOCL.ImperativeExpression">
       <ownedAttribute xmi:id="ImperativeOCL.TryExp.exceptClause" name="exceptClause"
           isOrdered="true" lower="0" upper="*" type="ImperativeOCL.CatchExp" isComposite="true">
@@ -1114,7 +1133,7 @@
       <nsPrefix>imperativeocl</nsPrefix>
     </xmi:Extension>
   </emof:Package>
-  <emof:Package xmi:id="QVTBase" name="QVTBase" uri="http://schema.omg.org/spec/QVT/1.0/qvtbase.xml">
+  <emof:Package xmi:id="QVTBase" name="QVTBase" uri="http://schema.omg.org/spec/QVT/1.1/qvtbase.xml">
     <ownedType xmi:type="emof:Class" xmi:id="QVTBase.Domain" name="Domain" isAbstract="true"
         superClass="EMOF.NamedElement">
       <ownedAttribute xmi:id="QVTBase.Domain.isCheckable" name="isCheckable" isOrdered="true"
@@ -1238,7 +1257,7 @@
       <nsPrefix>qvtbase</nsPrefix>
     </xmi:Extension>
   </emof:Package>
-  <emof:Package xmi:id="QVTCore" name="QVTCore" uri="http://schema.omg.org/spec/QVT/1.0/qvtcore.xml">
+  <emof:Package xmi:id="QVTCore" name="QVTCore" uri="http://schema.omg.org/spec/QVT/1.1/qvtcore.xml">
     <ownedType xmi:type="emof:Class" xmi:id="QVTCore.Area" name="Area" isAbstract="true">
       <ownedAttribute xmi:id="QVTCore.Area.bottomPattern" name="bottomPattern" isOrdered="true"
           type="QVTCore.BottomPattern" isComposite="true" opposite="QVTCore.BottomPattern.area">
@@ -1402,7 +1421,7 @@
       <nsPrefix>qvtcore</nsPrefix>
     </xmi:Extension>
   </emof:Package>
-  <emof:Package xmi:id="QVTTemplate" name="QVTTemplate" uri="http://schema.omg.org/spec/QVT/1.0/qvttemplate.xml">
+  <emof:Package xmi:id="QVTTemplate" name="QVTTemplate" uri="http://schema.omg.org/spec/QVT/1.1/qvttemplate.xml">
     <ownedType xmi:type="emof:Class" xmi:id="QVTTemplate.CollectionTemplateExp" name="CollectionTemplateExp"
         superClass="QVTTemplate.TemplateExp">
       <ownedAttribute xmi:id="QVTTemplate.CollectionTemplateExp.member" name="member"
@@ -1479,7 +1498,7 @@
       <nsPrefix>qvttemplate</nsPrefix>
     </xmi:Extension>
   </emof:Package>
-  <emof:Package xmi:id="QVTRelation" name="QVTRelation" uri="http://schema.omg.org/spec/QVT/1.0/qvtrelation.xml">
+  <emof:Package xmi:id="QVTRelation" name="QVTRelation" uri="http://schema.omg.org/spec/QVT/1.1/qvtrelation.xml">
     <ownedType xmi:type="emof:Class" xmi:id="QVTRelation.DomainPattern" name="DomainPattern"
         superClass="QVTBase.Pattern">
       <ownedAttribute xmi:id="QVTRelation.DomainPattern.templateExpression" name="templateExpression"
@@ -1622,7 +1641,7 @@
       <nsPrefix>qvtrelation</nsPrefix>
     </xmi:Extension>
   </emof:Package>
-  <emof:Package xmi:id="QVTOperational" name="QVTOperational" uri="http://schema.omg.org/spec/QVT/1.0/qvtoperational.xml">
+  <emof:Package xmi:id="QVTOperational" name="QVTOperational" uri="http://schema.omg.org/spec/QVT/1.1/qvtoperational.xml">
     <ownedType xmi:type="emof:Class" xmi:id="QVTOperational.Constructor" name="Constructor"
         superClass="QVTOperational.ImperativeOperation"/>
     <ownedType xmi:type="emof:Class" xmi:id="QVTOperational.ConstructorBody" name="ConstructorBody"

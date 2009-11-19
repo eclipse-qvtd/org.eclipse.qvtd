@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <emof:Package xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="QVTRelation"
-    name="QVTRelation" uri="http://schema.omg.org/spec/QVT/1.0/qvtrelation.xml">
+    name="QVTRelation" uri="http://schema.omg.org/spec/QVT/1.1/qvtrelation.xml">
   <ownedType xmi:type="emof:Class" xmi:id="QVTRelation.DomainPattern" name="DomainPattern">
     <superClass href="QVTBase.xml#QVTBase.Pattern"/>
     <ownedAttribute xmi:id="QVTRelation.DomainPattern.templateExpression" name="templateExpression"

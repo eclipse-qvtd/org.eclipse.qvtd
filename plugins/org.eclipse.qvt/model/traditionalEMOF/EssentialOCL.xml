@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <emof:Package xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="EssentialOCL"
-    name="EssentialOCL" uri="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml">
+    name="EssentialOCL" uri="http://schema.omg.org/spec/QVT/1.1/essentialocl.xml">
   <ownedType xmi:type="emof:Class" xmi:id="EssentialOCL.AnyType" name="AnyType">
     <superClass href="EMOF.xml#EMOF.Type"/>
   </ownedType>
@@ -138,6 +138,16 @@
         <resolveProxies>false</resolveProxies>
       </xmi:Extension>
     </ownedAttribute>
+    <ownedAttribute xmi:id="EssentialOCL.ExpressionInOcl.generatedType" name="generatedType"
+        lower="0" upper="*" isComposite="true">
+      <ownedComment body="owningExpression">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Type"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
     <ownedAttribute xmi:id="EssentialOCL.ExpressionInOcl.parameterVariable" name="parameterVariable"
         lower="0" upper="*" type="EssentialOCL.Variable" isComposite="true">
       <ownedComment body="varOwner">
@@ -241,8 +251,8 @@
         <resolveProxies>false</resolveProxies>
       </xmi:Extension>
     </ownedAttribute>
-    <ownedAttribute xmi:id="EssentialOCL.LoopExp.iterator" name="iterator" lower="0"
-        upper="*" type="EssentialOCL.Variable" isComposite="true">
+    <ownedAttribute xmi:id="EssentialOCL.LoopExp.iterator" name="iterator" isOrdered="true"
+        lower="0" upper="*" type="EssentialOCL.Variable" isComposite="true">
       <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
         <resolveProxies>false</resolveProxies>
       </xmi:Extension>
@@ -308,6 +318,13 @@
       <type xmi:type="emof:PrimitiveType" href="EMOF.xml#EMOF.String"/>
     </ownedAttribute>
   </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="EssentialOCL.TemplateParameterType" name="TemplateParameterType">
+    <superClass href="EMOF.xml#EMOF.Type"/>
+    <ownedAttribute xmi:id="EssentialOCL.TemplateParameterType.specification" name="specification"
+        isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="EMOF.xml#EMOF.String"/>
+    </ownedAttribute>
+  </ownedType>
   <ownedType xmi:type="emof:Class" xmi:id="EssentialOCL.TupleLiteralExp" name="TupleLiteralExp"
       superClass="EssentialOCL.LiteralExp">
     <ownedAttribute xmi:id="EssentialOCL.TupleLiteralExp.part" name="part" lower="0"
@@ -346,9 +363,6 @@
         isOrdered="true" lower="0">
       <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Type"/>
     </ownedAttribute>
-  </ownedType>
-  <ownedType xmi:type="emof:Class" xmi:id="EssentialOCL.TypeType" name="TypeType">
-    <superClass href="EMOF.xml#EMOF.Type"/>
   </ownedType>
   <ownedType xmi:type="emof:Class" xmi:id="EssentialOCL.UnlimitedNaturalExp" name="UnlimitedNaturalExp"
       superClass="EssentialOCL.NumericLiteralExp">

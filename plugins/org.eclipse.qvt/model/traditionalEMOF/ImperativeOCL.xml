@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <emof:Package xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="ImperativeOCL"
-    name="ImperativeOCL" uri="http://schema.omg.org/spec/QVT/1.0/imperativeocl.xml">
+    name="ImperativeOCL" uri="http://schema.omg.org/spec/QVT/1.1/imperativeocl.xml">
   <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.AltExp" name="AltExp" superClass="ImperativeOCL.ImperativeExpression">
     <ownedAttribute xmi:id="ImperativeOCL.AltExp.body" name="body" isOrdered="true"
         isComposite="true">
@@ -238,6 +238,19 @@
       <type xmi:type="emof:Class" href="EMOF.xml#EMOF.Class"/>
     </ownedAttribute>
   </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.ListLiteralExp" name="ListLiteralExp">
+    <superClass href="EssentialOCL.xml#EssentialOCL.LiteralExp"/>
+    <ownedAttribute xmi:id="ImperativeOCL.ListLiteralExp.element" name="element" isOrdered="true"
+        lower="0" upper="*" isComposite="true">
+      <ownedComment body="elementOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <type xmi:type="emof:Class" href="EssentialOCL.xml#EssentialOCL.OclExpression"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
   <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.ListType" name="ListType">
     <superClass href="EssentialOCL.xml#EssentialOCL.CollectionType"/>
   </ownedType>
@@ -351,13 +364,6 @@
       <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
         <resolveProxies>false</resolveProxies>
       </xmi:Extension>
-    </ownedAttribute>
-  </ownedType>
-  <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.TemplateParameterType" name="TemplateParameterType">
-    <superClass href="EMOF.xml#EMOF.Type"/>
-    <ownedAttribute xmi:id="ImperativeOCL.TemplateParameterType.specification" name="specification"
-        isOrdered="true" lower="0">
-      <type xmi:type="emof:PrimitiveType" href="EMOF.xml#EMOF.String"/>
     </ownedAttribute>
   </ownedType>
   <ownedType xmi:type="emof:Class" xmi:id="ImperativeOCL.TryExp" name="TryExp" superClass="ImperativeOCL.ImperativeExpression">
