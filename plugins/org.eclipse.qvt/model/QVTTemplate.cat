@@ -19,7 +19,7 @@
 	(object Attribute
 	    tool       	"Ecore"
 	    name       	"nsURI"
-	    value      	(value Text "http://schema.omg.org/spec/QVT/1.0/qvttemplate.xml"))
+	    value      	(value Text "http://schema.omg.org/spec/QVT/1.1/qvttemplate.xml"))
 	(object Attribute
 	    tool       	"Ecore"
 	    name       	"packageName"
@@ -596,23 +596,6 @@
 		    line_color 	3342489
 		    fill_color 	16777215
 		    quidu      	"40338C630119"
-		    compartment 	(object Compartment
-			Parent_View 	@14
-			location   	(582, 907)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			anchor     	2
-			nlines     	1
-			max_width  	513
-			justify    	1)
 		    width      	534
 		    height     	136
 		    autoResize 	TRUE)
@@ -974,10 +957,10 @@
 			    supplier   	@13
 			    vertices   	(list Points
 				(1203, 952)
-				(1203, 1072))
+				(1203, 1071))
 			    line_style 	3
 			    origin_attachment 	(1203, 952)
-			    terminal_attachment 	(1203, 1072)
+			    terminal_attachment 	(1203, 1071)
 			    label      	(object SegLabel @33
 				Parent_View 	@31
 				location   	(1178, 1062)

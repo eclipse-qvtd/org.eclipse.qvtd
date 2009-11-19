@@ -19,7 +19,7 @@
 	(object Attribute
 	    tool       	"Ecore"
 	    name       	"nsURI"
-	    value      	(value Text "http://schema.omg.org/spec/QVT/1.0/qvtrelation.xml"))
+	    value      	(value Text "http://schema.omg.org/spec/QVT/1.1/qvtrelation.xml"))
 	(object Attribute
 	    tool       	"Ecore"
 	    name       	"packageName"
@@ -1851,23 +1851,6 @@
 		    line_color 	3342489
 		    fill_color 	16777215
 		    quidu      	"4210BC47034A"
-		    compartment 	(object Compartment
-			Parent_View 	@60
-			location   	(825, 686)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			anchor     	2
-			nlines     	1
-			max_width  	381
-			justify    	1)
 		    width      	394
 		    height     	136
 		    autoResize 	TRUE)
@@ -3166,7 +3149,36 @@
 		    line_style 	3
 		    origin_attachment 	(1472, 1103)
 		    terminal_attachment 	(1472, 1323))
-		(object ClassView "Class" "Logical View::EMOF::Class" @124
+		(object ClassView "Class" "Logical View::QVTRelation::OppositePropertyCallExp" @124
+		    ShowCompartmentStereotypes 	TRUE
+		    SuppressOperation 	TRUE
+		    IncludeAttribute 	TRUE
+		    location   	(2243, 636)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@124
+			location   	(2000, 585)
+			nlines     	1
+			max_width  	486
+			justify    	0
+			label      	"OppositePropertyCallExp")
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	16777215
+		    quidu      	"48C6BDFC026F"
+		    width      	504
+		    height     	126
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object ClassView "Class" "Logical View::EMOF::Class" @125
 		    ShowCompartmentStereotypes 	TRUE
 		    SuppressAttribute 	TRUE
 		    SuppressOperation 	TRUE
@@ -3183,7 +3195,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@124
+			Parent_View 	@125
 			location   	(408, 828)
 			fill_color 	13434879
 			nlines     	1
@@ -3198,7 +3210,7 @@
 		    height     	124
 		    annotation 	8
 		    autoResize 	TRUE)
-		(object ClassView "Class" "Logical View::QVTRelation::RelationalTransformation" @125
+		(object ClassView "Class" "Logical View::QVTRelation::RelationalTransformation" @126
 		    ShowCompartmentStereotypes 	TRUE
 		    SuppressOperation 	TRUE
 		    IncludeAttribute 	TRUE
@@ -3214,7 +3226,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@125
+			Parent_View 	@126
 			location   	(50, 324)
 			nlines     	1
 			max_width  	486
@@ -3228,11 +3240,11 @@
 		    height     	126
 		    annotation 	8
 		    autoResize 	TRUE)
-		(object InheritView "" @126
+		(object InheritView "" @127
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"43DF92160375"
-		    client     	@125
+		    client     	@126
 		    supplier   	@4
 		    vertices   	(list Points
 			(241, 312)
@@ -3240,7 +3252,7 @@
 		    line_style 	3
 		    origin_attachment 	(241, 312)
 		    terminal_attachment 	(241, 239))
-		(object InheritTreeView "" @127
+		(object InheritTreeView "" @128
 		    location   	(575, 509)
 		    line_color 	3342489
 		    fill_color 	13434879
@@ -3248,7 +3260,7 @@
 		    vertices   	(list Points
 			(575, 509)
 			(575, 235)))
-		(object InheritView "" @128
+		(object InheritView "" @129
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"42428FF80177"
@@ -3260,36 +3272,7 @@
 		    line_style 	3
 		    origin_attachment 	(719, 985)
 		    terminal_attachment 	(719, 509)
-		    drawSupplier 	@127)
-		(object ClassView "Class" "Logical View::QVTRelation::OppositePropertyCallExp" @129
-		    ShowCompartmentStereotypes 	TRUE
-		    SuppressOperation 	TRUE
-		    IncludeAttribute 	TRUE
-		    location   	(2243, 636)
-		    font       	(object Font
-			size       	10
-			face       	"Arial"
-			bold       	FALSE
-			italics    	FALSE
-			underline  	FALSE
-			strike     	FALSE
-			color      	0
-			default_color 	TRUE)
-		    label      	(object ItemLabel
-			Parent_View 	@129
-			location   	(2000, 585)
-			nlines     	1
-			max_width  	486
-			justify    	0
-			label      	"OppositePropertyCallExp")
-		    icon_style 	"Icon"
-		    line_color 	3342489
-		    fill_color 	16777215
-		    quidu      	"48C6BDFC026F"
-		    width      	504
-		    height     	126
-		    annotation 	8
-		    autoResize 	TRUE)
+		    drawSupplier 	@128)
 		(object ClassView "Class" "Logical View::EMOF::Property" @130
 		    ShowCompartmentStereotypes 	TRUE
 		    SuppressAttribute 	TRUE
@@ -3403,13 +3386,13 @@
 			    line_color 	3342489
 			    quidu      	"4242954E0248"
 			    client     	@132
-			    supplier   	@124
+			    supplier   	@125
 			    vertices   	(list Points
 				(538, 711)
-				(538, 816))
+				(538, 815))
 			    line_style 	3
 			    origin_attachment 	(538, 711)
-			    terminal_attachment 	(538, 816)
+			    terminal_attachment 	(538, 815)
 			    label      	(object SegLabel @135
 				Parent_View 	@133
 				location   	(485, 805)
@@ -3615,7 +3598,7 @@
 			    line_color 	3342489
 			    quidu      	"43C66CC00355"
 			    client     	@139
-			    supplier   	@125
+			    supplier   	@126
 			    vertices   	(list Points
 				(251, 516)
 				(237, 516)
@@ -3656,7 +3639,7 @@
 		    line_style 	3
 		    origin_attachment 	(378, 608)
 		    terminal_attachment 	(378, 509)
-		    drawSupplier 	@127)
+		    drawSupplier 	@128)
 		(object AssociationViewNew "$UNNAMED$10" @147
 		    location   	(116, 792)
 		    font       	(object Font
@@ -3880,7 +3863,7 @@
 			    supplier   	@130
 			    vertices   	(list Points
 				(237, 886)
-				(183, 1038))
+				(182, 1038))
 			    line_style 	0
 			    label      	(object SegLabel @158
 				Parent_View 	@156
@@ -4002,7 +3985,7 @@
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48C6BF37007F"
-		    client     	@129
+		    client     	@124
 		    supplier   	@162
 		    vertices   	(list Points
 			(2243, 572)

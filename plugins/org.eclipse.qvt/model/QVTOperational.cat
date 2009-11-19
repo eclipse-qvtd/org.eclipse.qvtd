@@ -19,7 +19,7 @@
 	(object Attribute
 	    tool       	"Ecore"
 	    name       	"nsURI"
-	    value      	(value Text "http://schema.omg.org/spec/QVT/1.0/qvtoperational.xml"))
+	    value      	(value Text "http://schema.omg.org/spec/QVT/1.1/qvtoperational.xml"))
 	(object Attribute
 	    tool       	"Ecore"
 	    name       	"packageName"
@@ -1361,10 +1361,10 @@
 			    supplier   	@11
 			    vertices   	(list Points
 				(2092, 688)
-				(2092, 799))
+				(2092, 798))
 			    line_style 	3
 			    origin_attachment 	(2092, 688)
-			    terminal_attachment 	(2092, 799)
+			    terminal_attachment 	(2092, 798)
 			    label      	(object SegLabel @17
 				Parent_View 	@15
 				location   	(2154, 778)
@@ -1668,23 +1668,6 @@
 		    line_color 	3342489
 		    fill_color 	16777215
 		    quidu      	"42F72DDE00A7"
-		    compartment 	(object Compartment
-			Parent_View 	@30
-			location   	(896, 846)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			anchor     	2
-			nlines     	1
-			max_width  	459
-			justify    	1)
 		    width      	470
 		    height     	136
 		    autoResize 	TRUE)
@@ -1714,23 +1697,6 @@
 		    line_color 	3342489
 		    fill_color 	16777215
 		    quidu      	"42136DBC03C6"
-		    compartment 	(object Compartment
-			Parent_View 	@31
-			location   	(951, 1062)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			anchor     	2
-			nlines     	1
-			max_width  	321
-			justify    	1)
 		    width      	358
 		    height     	136
 		    autoResize 	TRUE)
@@ -1867,23 +1833,6 @@
 		    line_color 	3342489
 		    fill_color 	16777215
 		    quidu      	"421CB9890385"
-		    compartment 	(object Compartment
-			Parent_View 	@36
-			location   	(414, 783)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			anchor     	2
-			nlines     	3
-			max_width  	375
-			justify    	1)
 		    width      	386
 		    height     	236
 		    autoResize 	TRUE)
@@ -2320,23 +2269,6 @@
 		    line_color 	3342489
 		    fill_color 	16777215
 		    quidu      	"421C95F0017D"
-		    compartment 	(object Compartment
-			Parent_View 	@57
-			location   	(843, 814)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			anchor     	2
-			nlines     	1
-			max_width  	334
-			justify    	1)
 		    width      	346
 		    height     	136
 		    autoResize 	TRUE)
@@ -3496,7 +3428,7 @@
 				label      	"*"
 				pctDist    	0.713235
 				height     	3
-				orientation 	0))))
+				orientation 	1))))
 		(object AssociationViewNew "$UNNAMED$25" @108
 		    location   	(932, 1150)
 		    font       	(object Font
@@ -4127,23 +4059,6 @@
 		    line_color 	3342489
 		    fill_color 	16777215
 		    quidu      	"421C93A10187"
-		    compartment 	(object Compartment
-			Parent_View 	@137
-			location   	(1596, 472)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			anchor     	2
-			nlines     	1
-			max_width  	362
-			justify    	1)
 		    width      	374
 		    height     	136
 		    autoResize 	TRUE)
@@ -4207,23 +4122,6 @@
 		    line_color 	3342489
 		    fill_color 	16777215
 		    quidu      	"421C8F9B0208"
-		    compartment 	(object Compartment
-			Parent_View 	@141
-			location   	(817, 486)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			anchor     	2
-			nlines     	1
-			max_width  	393
-			justify    	1)
 		    width      	416
 		    height     	136
 		    autoResize 	TRUE)
@@ -5100,10 +4998,10 @@
 			    supplier   	@170
 			    vertices   	(list Points
 				(300, 806)
-				(300, 720))
+				(300, 719))
 			    line_style 	3
 			    origin_attachment 	(300, 806)
-			    terminal_attachment 	(300, 720)
+			    terminal_attachment 	(300, 719)
 			    label      	(object SegLabel @187
 				Parent_View 	@185
 				location   	(326, 754)
@@ -5596,10 +5494,10 @@
 			    supplier   	@171
 			    vertices   	(list Points
 				(417, 1212)
-				(417, 1365))
+				(417, 1364))
 			    line_style 	3
 			    origin_attachment 	(417, 1212)
-			    terminal_attachment 	(417, 1365)
+			    terminal_attachment 	(417, 1364)
 			    label      	(object SegLabel @209
 				Parent_View 	@207
 				location   	(374, 1306)
@@ -5873,10 +5771,10 @@
 			    supplier   	@191
 			    vertices   	(list Points
 				(587, 412)
-				(587, 270))
+				(587, 269))
 			    line_style 	3
 			    origin_attachment 	(587, 412)
-			    terminal_attachment 	(587, 270)
+			    terminal_attachment 	(587, 269)
 			    label      	(object SegLabel @222
 				Parent_View 	@220
 				location   	(552, 300)
@@ -6234,7 +6132,7 @@
 				label      	"+ownerProperty"
 				pctDist    	1.707692
 				height     	87
-				orientation 	0)
+				orientation 	1)
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"44460F8C0049"
@@ -6243,11 +6141,11 @@
 			    vertices   	(list Points
 				(42, 784)
 				(12, 784)
-				(12, 491)
-				(81, 491))
+				(12, 490)
+				(81, 490))
 			    line_style 	3
 			    origin_attachment 	(42, 784)
-			    terminal_attachment 	(81, 491)
+			    terminal_attachment 	(81, 490)
 			    label      	(object SegLabel @240
 				Parent_View 	@238
 				location   	(43, 548)
@@ -6376,23 +6274,6 @@
 		    line_color 	3342489
 		    fill_color 	16777215
 		    quidu      	"41C0634D03C1"
-		    compartment 	(object Compartment
-			Parent_View 	@243
-			location   	(52, 672)
-			font       	(object Font
-			    size       	8
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			anchor     	2
-			nlines     	3
-			max_width  	75
-			justify    	1)
 		    width      	284
 		    height     	242
 		    autoResize 	TRUE)
@@ -6518,23 +6399,6 @@
 		    line_color 	3342489
 		    fill_color 	16777215
 		    quidu      	"421C93A10187"
-		    compartment 	(object Compartment
-			Parent_View 	@247
-			location   	(168, 1163)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			anchor     	2
-			nlines     	1
-			max_width  	362
-			justify    	1)
 		    width      	374
 		    height     	136
 		    autoResize 	TRUE)
@@ -6624,23 +6488,6 @@
 		    line_color 	3342489
 		    fill_color 	16777215
 		    quidu      	"42F8886A01F9"
-		    compartment 	(object Compartment
-			Parent_View 	@251
-			location   	(28, 448)
-			font       	(object Font
-			    size       	8
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			anchor     	2
-			nlines     	2
-			max_width  	150
-			justify    	1)
 		    width      	332
 		    height     	200
 		    autoResize 	TRUE)
@@ -7127,10 +6974,10 @@
 			    supplier   	@255
 			    vertices   	(list Points
 				(366, 674)
-				(366, 204))
+				(366, 203))
 			    line_style 	3
 			    origin_attachment 	(366, 674)
-			    terminal_attachment 	(366, 204)
+			    terminal_attachment 	(366, 203)
 			    label      	(object SegLabel @272
 				Parent_View 	@270
 				location   	(415, 240)
@@ -7610,23 +7457,6 @@
 		    line_color 	3342489
 		    fill_color 	16777215
 		    quidu      	"4236FB18033F"
-		    compartment 	(object Compartment
-			Parent_View 	@293
-			location   	(1777, 544)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			anchor     	2
-			nlines     	1
-			max_width  	315
-			justify    	1)
 		    width      	328
 		    height     	136
 		    autoResize 	TRUE)
@@ -7668,23 +7498,6 @@
 		    line_color 	3342489
 		    fill_color 	16777215
 		    quidu      	"405AFDFA00B9"
-		    compartment 	(object Compartment
-			Parent_View 	@295
-			location   	(1379, 994)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			anchor     	2
-			nlines     	1
-			max_width  	663
-			justify    	1)
 		    width      	684
 		    height     	136
 		    autoResize 	TRUE)
@@ -8489,23 +8302,6 @@
 		    line_color 	3342489
 		    fill_color 	16777215
 		    quidu      	"422D9B110186"
-		    compartment 	(object Compartment
-			Parent_View 	@332
-			location   	(1058, 394)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			anchor     	2
-			nlines     	1
-			max_width  	393
-			justify    	1)
 		    width      	406
 		    height     	136
 		    autoResize 	TRUE)
