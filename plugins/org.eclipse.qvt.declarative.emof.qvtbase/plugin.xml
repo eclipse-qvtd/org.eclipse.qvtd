@@ -5,13 +5,13 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.2 2008/08/24 18:33:57 ewillink Exp $
+ $Id: plugin.xml,v 1.3 2009/11/19 10:23:18 ewillink Exp $
 -->
 
 <plugin>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <package uri="http://schema.omg.org/spec/QVT/1.0/qvtbase.xml"
+      <package uri="http://schema.omg.org/spec/QVT/1.1/qvtbase.xml"
             class="org.eclipse.qvt.declarative.emof.QVTBase.QVTBasePackage"
             genModel="model/QVTBase.genmodel"/>
    </extension>
@@ -28,7 +28,7 @@
            name="%_UI_QVTBase_content_type"
            priority="normal">
         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
-           <parameter name="namespace" value="http://schema.omg.org/spec/QVT/1.0/qvtbase.xml"/>
+           <parameter name="namespace" value="http://schema.omg.org/spec/QVT/1.1/qvtbase.xml"/>
            <parameter name="kind" value="xmi"/>
         </describer>
      </content-type>
