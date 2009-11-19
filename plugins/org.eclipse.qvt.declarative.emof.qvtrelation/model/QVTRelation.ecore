@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="QVTRelation"
-    name="QVTRelation" nsURI="http://schema.omg.org/spec/QVT/1.0/qvtrelation.xml"
+    name="QVTRelation" nsURI="http://schema.omg.org/spec/QVT/1.1/qvtrelation.xml"
     nsPrefix="qvtr">
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.DomainPattern" name="DomainPattern"
       eSuperTypes="../../org.eclipse.qvt.declarative.emof.qvtbase/model/QVTBase.ecore#QVTBase.Pattern">
