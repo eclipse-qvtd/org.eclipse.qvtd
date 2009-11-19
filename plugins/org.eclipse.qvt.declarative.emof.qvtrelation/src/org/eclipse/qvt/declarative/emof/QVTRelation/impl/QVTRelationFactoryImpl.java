@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationFactoryImpl.java,v 1.2 2008/09/09 21:00:32 ewillink Exp $
+ * $Id: QVTRelationFactoryImpl.java,v 1.3 2009/11/19 10:34:32 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTRelation.impl;
 
@@ -41,7 +41,7 @@ public class QVTRelationFactoryImpl extends EFactoryImpl implements QVTRelationF
 	 */
 	public static QVTRelationFactory init() {
 		try {
-			QVTRelationFactory theQVTRelationFactory = (QVTRelationFactory)EPackage.Registry.INSTANCE.getEFactory("http://schema.omg.org/spec/QVT/1.0/qvtrelation.xml"); 
+			QVTRelationFactory theQVTRelationFactory = (QVTRelationFactory)EPackage.Registry.INSTANCE.getEFactory("http://schema.omg.org/spec/QVT/1.1/qvtrelation.xml"); 
 			if (theQVTRelationFactory != null) {
 				return theQVTRelationFactory;
 			}
