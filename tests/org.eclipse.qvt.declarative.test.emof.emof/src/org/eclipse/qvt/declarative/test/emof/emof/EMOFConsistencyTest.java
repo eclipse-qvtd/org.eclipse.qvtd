@@ -72,21 +72,21 @@ public class EMOFConsistencyTest extends AbstractEMOFConsistencyTest
 		changeOfChangeable(differences, helper, EcorePackage.Literals.EPARAMETER__EOPERATION);
 	}
 
-	public static void expectedEmof2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
+	public static void expectedEmof2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper, ResourceSet rightResourceSet) {
 		missingURI(differences, helper, EMOFPackage.eINSTANCE);
 		missingPrefix(differences, helper, EMOFPackage.eINSTANCE);
 		changeOfName(differences, helper, EMOFPackage.eINSTANCE);
 		changeOfSize(differences, helper, EMOFPackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
 	}
 
-	public static void expectedEcore2RoseDifferences(EquivalenceHelper helper, Set<EcoreDifference> differences, ResourceSet resourceSet) {
-		EPackage emofPackage = getPackage(resourceSet, "EMOF");
+	public static void expectedEcore2RoseDifferences(EquivalenceHelper helper, Set<EcoreDifference> differences, ResourceSet rightResourceSet) {
+		EPackage emofPackage = getPackage(rightResourceSet, "EMOF");
 		changeOfListObject(differences, helper, EcorePackage.Literals.EMODEL_ELEMENT, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES,
 				EcorePackage.Literals.EMODEL_ELEMENT__EANNOTATIONS, getFeature(getClass(emofPackage, "Element"), "ownedComment"));
 		expectedEcoreDifferences(helper, differences);
 	}
 	
-	public static void expectedEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
+	public static void expectedEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper, ResourceSet rightResourceSet) {
 		changeOfName(differences, helper, EMOFPackage.eINSTANCE);
 		changeOfURI(differences, helper, EMOFPackage.eINSTANCE);
 		changeOfSize(differences, helper, EMOFPackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
@@ -192,6 +192,11 @@ public class EMOFConsistencyTest extends AbstractEMOFConsistencyTest
 		changeOfSize(differences, helper, EMOFPackage.Literals.COMMENT, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES);
 		missingObject(differences, helper, EMOFPackage.Literals.FACTORY__PACKAGE);
 
+		missingObject(differences, helper, EMOFPackage.Literals.BOOLEAN);
+		missingObject(differences, helper, EMOFPackage.Literals.INTEGER);
+		missingObject(differences, helper, EMOFPackage.Literals.STRING);
+		missingObject(differences, helper, EMOFPackage.Literals.UNLIMITED_NATURAL);
+		
 		changeOfSize(differences, helper, EMOFPackage.Literals.ELEMENT, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES);
 		extraObject(differences, helper, getFeature(getClass(rightPackage, "Element"), "tag"));
 		extraFeature(differences, helper, EMOFPackage.Literals.TAG__ELEMENT, EcorePackage.Literals.EREFERENCE__EOPPOSITE, getFeature(getClass(rightPackage, "Element"), "tag"));
