@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml"
-    xmlns:essentialocl="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml" xmlns:qvtb="http://schema.omg.org/spec/QVT/1.0/qvtbase.xml"
-    xmlns:qvtc="http://schema.omg.org/spec/QVT/1.0/qvtcore.xml">
+    xmlns:essentialocl="http://schema.omg.org/spec/QVT/1.1/essentialocl.xml" xmlns:qvtb="http://schema.omg.org/spec/QVT/1.1/qvtbase.xml"
+    xmlns:qvtc="http://schema.omg.org/spec/QVT/1.1/qvtcore.xml">
   <qvtb:Transformation xmi:id="ast1" name="umlRdbms" uri="http://models/test.qvtc/umlRdbms">
     <ownedOperation xmi:type="qvtb:Function" xmi:id="ast2" name="q0" isOrdered="true"
         lower="0">
