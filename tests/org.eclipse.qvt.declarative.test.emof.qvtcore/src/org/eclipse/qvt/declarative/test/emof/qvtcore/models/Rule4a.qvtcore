@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qvtbase:Transformation xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml"
-    xmlns:essentialocl="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml" xmlns:qvtbase="http://schema.omg.org/spec/QVT/1.0/qvtbase.xml"
-    xmlns:qvtcore="http://schema.omg.org/spec/QVT/1.0/qvtcore.xml" xmi:id="ast6"
+    xmlns:essentialocl="http://schema.omg.org/spec/QVT/1.1/essentialocl.xml" xmlns:qvtbase="http://schema.omg.org/spec/QVT/1.1/qvtbase.xml"
+    xmlns:qvtcore="http://schema.omg.org/spec/QVT/1.1/qvtcore.xml" xmi:id="ast6"
     name="umlRdbms">
   <modelParameter xmi:id="ast4" name="middle">
     <usedPackage href="TumlRdbms.ecore#/"/>
