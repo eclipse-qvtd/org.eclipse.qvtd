@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTCorePackage.java,v 1.1 2008/07/23 09:58:27 qglineur Exp $
+ * $Id: QVTCorePackage.java,v 1.2 2009/11/19 10:33:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTCore;
 
@@ -58,7 +58,7 @@ public interface QVTCorePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://schema.omg.org/spec/QVT/1.0/qvtcore.xml";
+	String eNS_URI = "http://schema.omg.org/spec/QVT/1.1/qvtcore.xml";
 
 	/**
 	 * The package namespace name.
