@@ -19,7 +19,7 @@
 	(object Attribute
 	    tool       	"Ecore"
 	    name       	"nsURI"
-	    value      	(value Text "http://schema.omg.org/spec/QVT/1.0/qvtcore.xml"))
+	    value      	(value Text "http://schema.omg.org/spec/QVT/1.1/qvtcore.xml"))
 	(object Attribute
 	    tool       	"Ecore"
 	    name       	"packageName"
@@ -456,39 +456,7 @@
 		    width      	436
 		    height     	242
 		    autoResize 	TRUE)
-		(object ClassView "Class" "Logical View::EssentialOCL::OperationCallExp" @3
-		    ShowCompartmentStereotypes 	TRUE
-		    SuppressAttribute 	TRUE
-		    SuppressOperation 	TRUE
-		    IncludeAttribute 	TRUE
-		    IncludeOperation 	TRUE
-		    location   	(1209, 103)
-		    font       	(object Font
-			size       	10
-			face       	"Arial"
-			bold       	FALSE
-			italics    	FALSE
-			underline  	FALSE
-			strike     	FALSE
-			color      	0
-			default_color 	TRUE)
-		    label      	(object ItemLabel
-			Parent_View 	@3
-			location   	(1029, 53)
-			fill_color 	13434879
-			nlines     	1
-			max_width  	360
-			justify    	0
-			label      	"OperationCallExp")
-		    icon_style 	"Icon"
-		    line_color 	3342489
-		    fill_color 	8454143
-		    quidu      	"40C96BA800C2"
-		    width      	378
-		    height     	124
-		    annotation 	8
-		    autoResize 	TRUE)
-		(object ClassView "Class" "Logical View::EssentialOCL::Variable" @4
+		(object ClassView "Class" "Logical View::EssentialOCL::Variable" @3
 		    ShowCompartmentStereotypes 	TRUE
 		    SuppressAttribute 	TRUE
 		    SuppressOperation 	TRUE
@@ -505,7 +473,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@4
+			Parent_View 	@3
 			location   	(222, 1621)
 			fill_color 	13434879
 			nlines     	1
@@ -520,7 +488,7 @@
 		    height     	124
 		    annotation 	8
 		    autoResize 	TRUE)
-		(object ClassView "Class" "Logical View::QVTCore::VariableAssignment" @5
+		(object ClassView "Class" "Logical View::QVTCore::VariableAssignment" @4
 		    ShowCompartmentStereotypes 	TRUE
 		    SuppressOperation 	TRUE
 		    IncludeAttribute 	TRUE
@@ -536,7 +504,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@5
+			Parent_View 	@4
 			location   	(126, 1371)
 			nlines     	1
 			max_width  	398
@@ -550,7 +518,7 @@
 		    height     	126
 		    annotation 	8
 		    autoResize 	TRUE)
-		(object AssociationViewNew "$UNNAMED$5" @6
+		(object AssociationViewNew "$UNNAMED$5" @5
 		    location   	(369, 1547)
 		    font       	(object Font
 			size       	10
@@ -565,8 +533,8 @@
 		    line_color 	3342489
 		    quidu      	"4656BEA60165"
 		    roleview_list 	(list RoleViews
-			(object RoleView "targetVariable" @7
-			    Parent_View 	@6
+			(object RoleView "targetVariable" @6
+			    Parent_View 	@5
 			    location   	(-423, 63)
 			    font       	(object Font
 				size       	10
@@ -577,8 +545,8 @@
 				strike     	FALSE
 				color      	0
 				default_color 	TRUE)
-			    label      	(object SegLabel @8
-				Parent_View 	@7
+			    label      	(object SegLabel @7
+				Parent_View 	@6
 				location   	(232, 1581)
 				font       	(object Font
 				    size       	8
@@ -601,16 +569,16 @@
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"4656BEA7004E"
-			    client     	@6
-			    supplier   	@4
+			    client     	@5
+			    supplier   	@3
 			    vertices   	(list Points
 				(369, 1547)
 				(369, 1609))
 			    line_style 	3
 			    origin_attachment 	(369, 1547)
 			    terminal_attachment 	(369, 1609)
-			    label      	(object SegLabel @9
-				Parent_View 	@7
+			    label      	(object SegLabel @8
+				Parent_View 	@6
 				location   	(400, 1570)
 				font       	(object Font
 				    size       	8
@@ -630,8 +598,8 @@
 				pctDist    	0.366667
 				height     	31
 				orientation 	0))
-			(object RoleView "assignment" @10
-			    Parent_View 	@6
+			(object RoleView "assignment" @9
+			    Parent_View 	@5
 			    location   	(-423, 63)
 			    font       	(object Font
 				size       	10
@@ -642,8 +610,8 @@
 				strike     	FALSE
 				color      	0
 				default_color 	TRUE)
-			    label      	(object SegLabel @11
-				Parent_View 	@10
+			    label      	(object SegLabel @10
+				Parent_View 	@9
 				location   	(245, 1514)
 				font       	(object Font
 				    size       	8
@@ -666,16 +634,16 @@
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"4656BEA700A8"
-			    client     	@6
-			    supplier   	@5
+			    client     	@5
+			    supplier   	@4
 			    vertices   	(list Points
 				(369, 1547)
 				(369, 1485))
 			    line_style 	3
 			    origin_attachment 	(369, 1547)
 			    terminal_attachment 	(369, 1485)
-			    label      	(object SegLabel @12
-				Parent_View 	@10
+			    label      	(object SegLabel @11
+				Parent_View 	@9
 				location   	(397, 1513)
 				font       	(object Font
 				    size       	10
@@ -695,7 +663,7 @@
 				pctDist    	0.559322
 				height     	28
 				orientation 	1))))
-		(object ClassView "Class" "Logical View::EMOF::Element" @13
+		(object ClassView "Class" "Logical View::EMOF::Element" @12
 		    ShowCompartmentStereotypes 	TRUE
 		    SuppressAttribute 	TRUE
 		    SuppressOperation 	TRUE
@@ -712,7 +680,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@13
+			Parent_View 	@12
 			location   	(1167, 953)
 			fill_color 	13434879
 			nlines     	1
@@ -724,6 +692,38 @@
 		    fill_color 	13434879
 		    quidu      	"40C96ABE02EC"
 		    width      	202
+		    height     	124
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object ClassView "Class" "Logical View::EssentialOCL::OperationCallExp" @13
+		    ShowCompartmentStereotypes 	TRUE
+		    SuppressAttribute 	TRUE
+		    SuppressOperation 	TRUE
+		    IncludeAttribute 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(1209, 103)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@13
+			location   	(1029, 53)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	360
+			justify    	0
+			label      	"OperationCallExp")
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	8454143
+		    quidu      	"40C96BA800C2"
+		    width      	378
 		    height     	124
 		    annotation 	8
 		    autoResize 	TRUE)
@@ -881,7 +881,7 @@
 			    line_color 	3342489
 			    quidu      	"42491B7B0139"
 			    client     	@18
-			    supplier   	@3
+			    supplier   	@13
 			    vertices   	(list Points
 				(1215, 383)
 				(1215, 164))
@@ -979,7 +979,7 @@
 		    line_color 	3342489
 		    quidu      	"46E503820389"
 		    client     	@17
-		    supplier   	@13
+		    supplier   	@12
 		    vertices   	(list Points
 			(1260, 738)
 			(1259, 940))
@@ -1845,7 +1845,7 @@
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"4656BE6703AA"
-		    client     	@5
+		    client     	@4
 		    supplier   	@57
 		    vertices   	(list Points
 			(324, 1359)
@@ -1872,7 +1872,7 @@
 		    line_color 	3342489
 		    quidu      	"46E11D30008D"
 		    client     	@57
-		    supplier   	@13
+		    supplier   	@12
 		    vertices   	(list Points
 			(851, 1005)
 			(1157, 1003))

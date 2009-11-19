@@ -19,7 +19,7 @@
 	(object Attribute
 	    tool       	"Ecore"
 	    name       	"nsURI"
-	    value      	(value Text "http://schema.omg.org/spec/QVT/1.0/qvtbase.xml"))
+	    value      	(value Text "http://schema.omg.org/spec/QVT/1.1/qvtbase.xml"))
 	(object Attribute
 	    tool       	"Ecore"
 	    name       	"packageName"
@@ -475,23 +475,6 @@
 		    line_color 	3342489
 		    fill_color 	16777215
 		    quidu      	"40FF85CC01FB"
-		    compartment 	(object Compartment
-			Parent_View 	@4
-			location   	(915, 697)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	TRUE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			anchor     	2
-			nlines     	2
-			max_width  	443
-			justify    	1)
 		    width      	532
 		    height     	186
 		    autoResize 	TRUE)
@@ -1276,7 +1259,7 @@
 				label      	"+overrides"
 				pctDist    	0.694690
 				height     	6
-				orientation 	0)
+				orientation 	1)
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"42306E9A0258"
