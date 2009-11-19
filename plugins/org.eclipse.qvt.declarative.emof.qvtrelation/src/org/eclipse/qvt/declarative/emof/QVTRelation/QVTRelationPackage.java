@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationPackage.java,v 1.3 2009/01/14 19:10:43 ewillink Exp $
+ * $Id: QVTRelationPackage.java,v 1.4 2009/11/19 10:34:23 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTRelation;
 
@@ -57,7 +57,7 @@ public interface QVTRelationPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://schema.omg.org/spec/QVT/1.0/qvtrelation.xml";
+	String eNS_URI = "http://schema.omg.org/spec/QVT/1.1/qvtrelation.xml";
 
 	/**
 	 * The package namespace name.
