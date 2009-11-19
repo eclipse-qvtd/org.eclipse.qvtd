@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EssentialOCLAdapterFactory.java,v 1.1 2008/07/23 09:56:32 qglineur Exp $
+ * $Id: EssentialOCLAdapterFactory.java,v 1.2 2009/11/19 10:30:08 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EssentialOCL.util;
 
@@ -220,6 +220,10 @@ public class EssentialOCLAdapterFactory extends AdapterFactoryImpl {
 				return createStringLiteralExpAdapter();
 			}
 			@Override
+			public Adapter caseTemplateParameterType(TemplateParameterType object) {
+				return createTemplateParameterTypeAdapter();
+			}
+			@Override
 			public Adapter caseTupleLiteralExp(TupleLiteralExp object) {
 				return createTupleLiteralExpAdapter();
 			}
@@ -234,10 +238,6 @@ public class EssentialOCLAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTypeExp(TypeExp object) {
 				return createTypeExpAdapter();
-			}
-			@Override
-			public Adapter caseTypeType(TypeType object) {
-				return createTypeTypeAdapter();
 			}
 			@Override
 			public Adapter caseUnlimitedNaturalExp(UnlimitedNaturalExp object) {
@@ -766,6 +766,20 @@ public class EssentialOCLAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.TemplateParameterType <em>Template Parameter Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.TemplateParameterType
+	 * @generated
+	 */
+	public Adapter createTemplateParameterTypeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.TupleLiteralExp <em>Tuple Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -818,20 +832,6 @@ public class EssentialOCLAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.TypeType <em>Type Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.TypeType
-	 * @generated
-	 */
-	public Adapter createTypeTypeAdapter() {
 		return null;
 	}
 

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EssentialOCLSwitch.java,v 1.1 2008/07/23 09:56:32 qglineur Exp $
+ * $Id: EssentialOCLSwitch.java,v 1.2 2009/11/19 10:30:08 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EssentialOCL.util;
 
@@ -495,6 +495,16 @@ public class EssentialOCLSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case EssentialOCLPackage.TEMPLATE_PARAMETER_TYPE: {
+				TemplateParameterType templateParameterType = (TemplateParameterType)theEObject;
+				T result = caseTemplateParameterType(templateParameterType);
+				if (result == null) result = caseType(templateParameterType);
+				if (result == null) result = caseNamedElement(templateParameterType);
+				if (result == null) result = caseElement(templateParameterType);
+				if (result == null) result = caseObject(templateParameterType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case EssentialOCLPackage.TUPLE_LITERAL_EXP: {
 				TupleLiteralExp tupleLiteralExp = (TupleLiteralExp)theEObject;
 				T result = caseTupleLiteralExp(tupleLiteralExp);
@@ -537,16 +547,6 @@ public class EssentialOCLSwitch<T> {
 				if (result == null) result = caseNamedElement(typeExp);
 				if (result == null) result = caseElement(typeExp);
 				if (result == null) result = caseObject(typeExp);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case EssentialOCLPackage.TYPE_TYPE: {
-				TypeType typeType = (TypeType)theEObject;
-				T result = caseTypeType(typeType);
-				if (result == null) result = caseType(typeType);
-				if (result == null) result = caseNamedElement(typeType);
-				if (result == null) result = caseElement(typeType);
-				if (result == null) result = caseObject(typeType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1095,6 +1095,21 @@ public class EssentialOCLSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Template Parameter Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Template Parameter Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTemplateParameterType(TemplateParameterType object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Tuple Literal Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1151,21 +1166,6 @@ public class EssentialOCLSwitch<T> {
 	 * @generated
 	 */
 	public T caseTypeExp(TypeExp object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypeType(TypeType object) {
 		return null;
 	}
 

@@ -90,11 +90,11 @@ public class EssentialOCLMappingMetaData extends EMOFMappingMetaData
 					case EssentialOCLPackage.SET_TYPE: return getAdapter(oclFactoryInstance.createSetType());
 //					case EssentialoclPackage.ST: return getAdapter(oclFactoryInstance.createStateExp());
 					case EssentialOCLPackage.STRING_LITERAL_EXP: return getAdapter(oclFactoryInstance.createStringLiteralExp());
+					case EssentialOCLPackage.TEMPLATE_PARAMETER_TYPE: return getAdapter(oclFactoryInstance.createTemplateParameterType());
 					case EssentialOCLPackage.TUPLE_LITERAL_EXP: return getAdapter(oclFactoryInstance.createTupleLiteralExp());
 					case EssentialOCLPackage.TUPLE_LITERAL_PART: return getAdapter(oclFactoryInstance.createTupleLiteralPart());
 					case EssentialOCLPackage.TUPLE_TYPE: return getAdapter(oclFactoryInstance.createTupleType());
 					case EssentialOCLPackage.TYPE_EXP: return getAdapter(oclFactoryInstance.createTypeExp());
-					case EssentialOCLPackage.TYPE_TYPE: return getAdapter(oclFactoryInstance.createTypeType());
 					case EssentialOCLPackage.UNLIMITED_NATURAL_EXP: return getAdapter(oclFactoryInstance.createUnlimitedNaturalLiteralExp());
 //					case EssentialoclPackage.UN: return getAdapter(oclFactoryInstance.createUnspecifiedValueExp());
 					case EssentialOCLPackage.VARIABLE: return getAdapter(oclFactoryInstance.createVariable());
@@ -203,6 +203,7 @@ public class EssentialOCLMappingMetaData extends EMOFMappingMetaData
 		//
 		mappingMetaDataRegistry.install(new EClassMap.Direct(this, org.eclipse.ocl.ecore.EcorePackage.Literals.ELEMENT_TYPE, null));
 		mappingMetaDataRegistry.install(new EClassMap.Direct(this, org.eclipse.ocl.ecore.EcorePackage.Literals.MESSAGE_TYPE, null));
+		mappingMetaDataRegistry.install(new EClassMap.Direct(this, org.eclipse.ocl.ecore.EcorePackage.Literals.TYPE_TYPE, null));
 		mappingMetaDataRegistry.install(new EClassMap.Direct(this, org.eclipse.ocl.ecore.EcorePackage.Literals.CALL_OPERATION_ACTION, null));
 		mappingMetaDataRegistry.install(new EClassMap.Direct(this, org.eclipse.ocl.ecore.EcorePackage.Literals.CONSTRAINT, null));
 		mappingMetaDataRegistry.install(new EClassMap.Direct(this, org.eclipse.ocl.ecore.EcorePackage.Literals.SEND_SIGNAL_ACTION, null));
