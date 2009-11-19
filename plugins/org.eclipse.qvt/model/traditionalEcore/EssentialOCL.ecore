@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="EssentialOCL" name="EssentialOCL" nsURI="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml" nsPrefix="essentialocl">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="EssentialOCL" name="EssentialOCL" nsURI="http://schema.omg.org/spec/QVT/1.1/essentialocl.xml" nsPrefix="essentialocl">
   <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.AnyType" name="AnyType">
     <eSuperTypes href="EMOF.ecore#EMOF.Type"/>
   </eClassifiers>
@@ -72,6 +72,12 @@
         <details key="body" value="selfOwner"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.ExpressionInOcl.generatedType" name="generatedType" ordered="false" upperBound="-1" containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="owningExpression"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EClass" href="EMOF.ecore#EMOF.Type"/>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.ExpressionInOcl.parameterVariable" name="parameterVariable" ordered="false" upperBound="-1" eType="EssentialOCL.Variable" containment="true" resolveProxies="false">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="varOwner"/>
@@ -129,7 +135,7 @@
         <details key="body" value="loopBodyOwner"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.LoopExp.iterator" name="iterator" ordered="false" upperBound="-1" eType="EssentialOCL.Variable" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.LoopExp.iterator" name="iterator" upperBound="-1" eType="EssentialOCL.Variable" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.NavigationCallExp" name="NavigationCallExp" eSuperTypes="EssentialOCL.FeatureCallExp"/>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.NullLiteralExp" name="NullLiteralExp" eSuperTypes="EssentialOCL.LiteralExp"/>
@@ -172,6 +178,12 @@
       <eType xsi:type="ecore:EDataType" href="EMOF.ecore#PrimitiveTypes.String"/>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.TemplateParameterType" name="TemplateParameterType">
+    <eSuperTypes href="EMOF.ecore#EMOF.Type"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EssentialOCL.TemplateParameterType.specification" name="specification">
+      <eType xsi:type="ecore:EDataType" href="EMOF.ecore#PrimitiveTypes.String"/>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.TupleLiteralExp" name="TupleLiteralExp" eSuperTypes="EssentialOCL.LiteralExp">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.TupleLiteralExp.part" name="part" ordered="false" upperBound="-1" eType="EssentialOCL.TupleLiteralPart" containment="true" resolveProxies="false" eOpposite="EssentialOCL.TupleLiteralPart.tupleLiteralExp"/>
   </eClassifiers>
@@ -191,9 +203,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.TypeExp.referredType" name="referredType">
       <eType xsi:type="ecore:EClass" href="EMOF.ecore#EMOF.Type"/>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.TypeType" name="TypeType">
-    <eSuperTypes href="EMOF.ecore#EMOF.Type"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.UnlimitedNaturalExp" name="UnlimitedNaturalExp" eSuperTypes="EssentialOCL.NumericLiteralExp">
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EssentialOCL.UnlimitedNaturalExp.symbol" name="symbol">
