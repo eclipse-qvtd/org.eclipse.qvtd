@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplateFactoryImpl.java,v 1.1 2008/07/23 10:00:30 qglineur Exp $
+ * $Id: QVTTemplateFactoryImpl.java,v 1.2 2009/11/19 10:34:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTTemplate.impl;
 
@@ -41,7 +41,7 @@ public class QVTTemplateFactoryImpl extends EFactoryImpl implements QVTTemplateF
 	 */
 	public static QVTTemplateFactory init() {
 		try {
-			QVTTemplateFactory theQVTTemplateFactory = (QVTTemplateFactory)EPackage.Registry.INSTANCE.getEFactory("http://schema.omg.org/spec/QVT/1.0/qvttemplate.xml"); 
+			QVTTemplateFactory theQVTTemplateFactory = (QVTTemplateFactory)EPackage.Registry.INSTANCE.getEFactory("http://schema.omg.org/spec/QVT/1.1/qvttemplate.xml"); 
 			if (theQVTTemplateFactory != null) {
 				return theQVTTemplateFactory;
 			}

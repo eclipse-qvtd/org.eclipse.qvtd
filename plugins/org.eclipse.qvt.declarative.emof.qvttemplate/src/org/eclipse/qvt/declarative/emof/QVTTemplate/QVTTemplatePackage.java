@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTTemplatePackage.java,v 1.2 2008/09/09 20:54:29 ewillink Exp $
+ * $Id: QVTTemplatePackage.java,v 1.3 2009/11/19 10:34:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTTemplate;
 
@@ -55,7 +55,7 @@ public interface QVTTemplatePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://schema.omg.org/spec/QVT/1.0/qvttemplate.xml";
+	String eNS_URI = "http://schema.omg.org/spec/QVT/1.1/qvttemplate.xml";
 
 	/**
 	 * The package namespace name.

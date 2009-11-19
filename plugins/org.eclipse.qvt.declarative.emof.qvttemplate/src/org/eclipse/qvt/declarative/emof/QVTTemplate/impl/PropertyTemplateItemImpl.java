@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: PropertyTemplateItemImpl.java,v 1.2 2008/09/09 20:54:29 ewillink Exp $
+ * $Id: PropertyTemplateItemImpl.java,v 1.3 2009/11/19 10:34:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTTemplate.impl;
 
@@ -118,7 +118,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * @generated
 	 */
 	public ObjectTemplateExp getObjContainer() {
-		if (eContainerFeatureID != QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER) return null;
+		if (eContainerFeatureID() != QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER) return null;
 		return (ObjectTemplateExp)eContainer();
 	}
 
@@ -138,7 +138,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * @generated
 	 */
 	public void setObjContainer(ObjectTemplateExp newObjContainer) {
-		if (newObjContainer != eInternalContainer() || (eContainerFeatureID != QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER && newObjContainer != null)) {
+		if (newObjContainer != eInternalContainer() || (eContainerFeatureID() != QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER && newObjContainer != null)) {
 			if (EcoreUtil.isAncestor(this, newObjContainer))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -294,7 +294,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTTemplatePackage.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER:
 				return eInternalContainer().eInverseRemove(this, QVTTemplatePackage.OBJECT_TEMPLATE_EXP__PART, ObjectTemplateExp.class, msgs);
 		}
