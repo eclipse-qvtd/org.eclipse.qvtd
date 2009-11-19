@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: FunctionParameterImpl.java,v 1.1 2008/07/23 09:57:28 qglineur Exp $
+ * $Id: FunctionParameterImpl.java,v 1.2 2009/11/19 10:30:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTBase.impl;
 
@@ -243,7 +243,7 @@ public class FunctionParameterImpl extends VariableImpl implements FunctionParam
 	 * @generated
 	 */
 	public Operation getOperation() {
-		if (eContainerFeatureID != QVTBasePackage.FUNCTION_PARAMETER__OPERATION) return null;
+		if (eContainerFeatureID() != QVTBasePackage.FUNCTION_PARAMETER__OPERATION) return null;
 		return (Operation)eContainer();
 	}
 
@@ -263,7 +263,7 @@ public class FunctionParameterImpl extends VariableImpl implements FunctionParam
 	 * @generated
 	 */
 	public void setOperation(Operation newOperation) {
-		if (newOperation != eInternalContainer() || (eContainerFeatureID != QVTBasePackage.FUNCTION_PARAMETER__OPERATION && newOperation != null)) {
+		if (newOperation != eInternalContainer() || (eContainerFeatureID() != QVTBasePackage.FUNCTION_PARAMETER__OPERATION && newOperation != null)) {
 			if (EcoreUtil.isAncestor(this, newOperation))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -315,7 +315,7 @@ public class FunctionParameterImpl extends VariableImpl implements FunctionParam
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTBasePackage.FUNCTION_PARAMETER__OPERATION:
 				return eInternalContainer().eInverseRemove(this, EMOFPackage.OPERATION__OWNED_PARAMETER, Operation.class, msgs);
 		}

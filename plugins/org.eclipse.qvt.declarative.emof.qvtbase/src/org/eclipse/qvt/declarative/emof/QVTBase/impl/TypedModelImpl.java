@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TypedModelImpl.java,v 1.1 2008/07/23 09:57:28 qglineur Exp $
+ * $Id: TypedModelImpl.java,v 1.2 2009/11/19 10:30:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTBase.impl;
 
@@ -110,7 +110,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * @generated
 	 */
 	public Transformation getTransformation() {
-		if (eContainerFeatureID != QVTBasePackage.TYPED_MODEL__TRANSFORMATION) return null;
+		if (eContainerFeatureID() != QVTBasePackage.TYPED_MODEL__TRANSFORMATION) return null;
 		return (Transformation)eContainer();
 	}
 
@@ -130,7 +130,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * @generated
 	 */
 	public void setTransformation(Transformation newTransformation) {
-		if (newTransformation != eInternalContainer() || (eContainerFeatureID != QVTBasePackage.TYPED_MODEL__TRANSFORMATION && newTransformation != null)) {
+		if (newTransformation != eInternalContainer() || (eContainerFeatureID() != QVTBasePackage.TYPED_MODEL__TRANSFORMATION && newTransformation != null)) {
 			if (EcoreUtil.isAncestor(this, newTransformation))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -194,7 +194,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTBasePackage.TYPED_MODEL__TRANSFORMATION:
 				return eInternalContainer().eInverseRemove(this, QVTBasePackage.TRANSFORMATION__MODEL_PARAMETER, Transformation.class, msgs);
 		}

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RuleImpl.java,v 1.1 2008/07/23 09:57:28 qglineur Exp $
+ * $Id: RuleImpl.java,v 1.2 2009/11/19 10:30:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTBase.impl;
 
@@ -150,7 +150,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * @generated
 	 */
 	public Transformation getTransformation() {
-		if (eContainerFeatureID != QVTBasePackage.RULE__TRANSFORMATION) return null;
+		if (eContainerFeatureID() != QVTBasePackage.RULE__TRANSFORMATION) return null;
 		return (Transformation)eContainer();
 	}
 
@@ -170,7 +170,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * @generated
 	 */
 	public void setTransformation(Transformation newTransformation) {
-		if (newTransformation != eInternalContainer() || (eContainerFeatureID != QVTBasePackage.RULE__TRANSFORMATION && newTransformation != null)) {
+		if (newTransformation != eInternalContainer() || (eContainerFeatureID() != QVTBasePackage.RULE__TRANSFORMATION && newTransformation != null)) {
 			if (EcoreUtil.isAncestor(this, newTransformation))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -227,7 +227,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTBasePackage.RULE__TRANSFORMATION:
 				return eInternalContainer().eInverseRemove(this, QVTBasePackage.TRANSFORMATION__RULE, Transformation.class, msgs);
 		}

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TransformationImpl.java,v 1.2 2008/09/21 12:30:16 ewillink Exp $
+ * $Id: TransformationImpl.java,v 1.3 2009/11/19 10:30:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTBase.impl;
 
@@ -182,7 +182,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @generated
 	 */
 	public org.eclipse.qvt.declarative.emof.EMOF.Package getNestingPackage() {
-		if (eContainerFeatureID != QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE) return null;
+		if (eContainerFeatureID() != QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE) return null;
 		return (org.eclipse.qvt.declarative.emof.EMOF.Package)eContainer();
 	}
 
@@ -202,7 +202,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @generated
 	 */
 	public void setNestingPackage(org.eclipse.qvt.declarative.emof.EMOF.Package newNestingPackage) {
-		if (newNestingPackage != eInternalContainer() || (eContainerFeatureID != QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE && newNestingPackage != null)) {
+		if (newNestingPackage != eInternalContainer() || (eContainerFeatureID() != QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE && newNestingPackage != null)) {
 			if (EcoreUtil.isAncestor(this, newNestingPackage))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -380,7 +380,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTBasePackage.TRANSFORMATION__NESTING_PACKAGE:
 				return eInternalContainer().eInverseRemove(this, EMOFPackage.PACKAGE__NESTED_PACKAGE, org.eclipse.qvt.declarative.emof.EMOF.Package.class, msgs);
 		}

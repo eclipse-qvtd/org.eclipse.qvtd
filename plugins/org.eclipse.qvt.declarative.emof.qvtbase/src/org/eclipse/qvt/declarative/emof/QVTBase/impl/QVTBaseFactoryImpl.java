@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTBaseFactoryImpl.java,v 1.1 2008/07/23 09:57:28 qglineur Exp $
+ * $Id: QVTBaseFactoryImpl.java,v 1.2 2009/11/19 10:30:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTBase.impl;
 
@@ -41,7 +41,7 @@ public class QVTBaseFactoryImpl extends EFactoryImpl implements QVTBaseFactory {
 	 */
 	public static QVTBaseFactory init() {
 		try {
-			QVTBaseFactory theQVTBaseFactory = (QVTBaseFactory)EPackage.Registry.INSTANCE.getEFactory("http://schema.omg.org/spec/QVT/1.0/qvtbase.xml"); 
+			QVTBaseFactory theQVTBaseFactory = (QVTBaseFactory)EPackage.Registry.INSTANCE.getEFactory("http://schema.omg.org/spec/QVT/1.1/qvtbase.xml"); 
 			if (theQVTBaseFactory != null) {
 				return theQVTBaseFactory;
 			}

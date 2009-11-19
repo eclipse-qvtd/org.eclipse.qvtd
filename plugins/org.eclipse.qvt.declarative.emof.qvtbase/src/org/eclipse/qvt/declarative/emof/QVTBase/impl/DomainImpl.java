@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: DomainImpl.java,v 1.1 2008/07/23 09:57:28 qglineur Exp $
+ * $Id: DomainImpl.java,v 1.2 2009/11/19 10:30:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTBase.impl;
 
@@ -167,7 +167,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * @generated
 	 */
 	public Rule getRule() {
-		if (eContainerFeatureID != QVTBasePackage.DOMAIN__RULE) return null;
+		if (eContainerFeatureID() != QVTBasePackage.DOMAIN__RULE) return null;
 		return (Rule)eContainer();
 	}
 
@@ -187,7 +187,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * @generated
 	 */
 	public void setRule(Rule newRule) {
-		if (newRule != eInternalContainer() || (eContainerFeatureID != QVTBasePackage.DOMAIN__RULE && newRule != null)) {
+		if (newRule != eInternalContainer() || (eContainerFeatureID() != QVTBasePackage.DOMAIN__RULE && newRule != null)) {
 			if (EcoreUtil.isAncestor(this, newRule))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -277,7 +277,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTBasePackage.DOMAIN__RULE:
 				return eInternalContainer().eInverseRemove(this, QVTBasePackage.RULE__DOMAIN, Rule.class, msgs);
 		}
