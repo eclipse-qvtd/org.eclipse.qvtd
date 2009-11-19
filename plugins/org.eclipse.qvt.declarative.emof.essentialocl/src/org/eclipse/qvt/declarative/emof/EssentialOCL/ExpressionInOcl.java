@@ -12,12 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: ExpressionInOcl.java,v 1.1 2008/07/23 09:56:31 qglineur Exp $
+ * $Id: ExpressionInOcl.java,v 1.2 2009/11/19 10:29:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EssentialOCL;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.qvt.declarative.emof.EMOF.Type;
 import org.eclipse.qvt.declarative.emof.EMOF.TypedElement;
 
 /**
@@ -30,6 +31,7 @@ import org.eclipse.qvt.declarative.emof.EMOF.TypedElement;
  * <ul>
  *   <li>{@link org.eclipse.qvt.declarative.emof.EssentialOCL.ExpressionInOcl#getBodyExpression <em>Body Expression</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.EssentialOCL.ExpressionInOcl#getContextVariable <em>Context Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.emof.EssentialOCL.ExpressionInOcl#getGeneratedType <em>Generated Type</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.EssentialOCL.ExpressionInOcl#getParameterVariable <em>Parameter Variable</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.EssentialOCL.ExpressionInOcl#getResultVariable <em>Result Variable</em>}</li>
  * </ul>
@@ -93,6 +95,23 @@ public interface ExpressionInOcl extends TypedElement {
 	 * @generated
 	 */
 	void setContextVariable(Variable value);
+
+	/**
+	 * Returns the value of the '<em><b>Generated Type</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvt.declarative.emof.EMOF.Type}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Generated Type</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Generated Type</em>' containment reference list.
+	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.EssentialOCLPackage#getExpressionInOcl_GeneratedType()
+	 * @model containment="true" ordered="false"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='owningExpression'"
+	 * @generated
+	 */
+	EList<Type> getGeneratedType();
 
 	/**
 	 * Returns the value of the '<em><b>Parameter Variable</b></em>' containment reference list.

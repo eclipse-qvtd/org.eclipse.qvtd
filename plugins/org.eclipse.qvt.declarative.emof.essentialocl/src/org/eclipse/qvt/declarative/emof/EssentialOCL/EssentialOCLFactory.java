@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EssentialOCLFactory.java,v 1.1 2008/07/23 09:56:32 qglineur Exp $
+ * $Id: EssentialOCLFactory.java,v 1.2 2009/11/19 10:29:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EssentialOCL;
 
@@ -261,6 +261,15 @@ public interface EssentialOCLFactory extends EFactory {
 	StringLiteralExp createStringLiteralExp();
 
 	/**
+	 * Returns a new object of class '<em>Template Parameter Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Template Parameter Type</em>'.
+	 * @generated
+	 */
+	TemplateParameterType createTemplateParameterType();
+
+	/**
 	 * Returns a new object of class '<em>Tuple Literal Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -295,15 +304,6 @@ public interface EssentialOCLFactory extends EFactory {
 	 * @generated
 	 */
 	TypeExp createTypeExp();
-
-	/**
-	 * Returns a new object of class '<em>Type Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Type</em>'.
-	 * @generated
-	 */
-	TypeType createTypeType();
 
 	/**
 	 * Returns a new object of class '<em>Unlimited Natural Exp</em>'.

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EssentialOCLPackage.java,v 1.1 2008/07/23 09:56:31 qglineur Exp $
+ * $Id: EssentialOCLPackage.java,v 1.2 2009/11/19 10:29:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EssentialOCL;
 
@@ -54,7 +54,7 @@ public interface EssentialOCLPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://schema.omg.org/spec/QVT/1.0/essentialocl.xml";
+	String eNS_URI = "http://schema.omg.org/spec/QVT/1.1/essentialocl.xml";
 
 	/**
 	 * The package namespace name.
@@ -851,13 +851,22 @@ public interface EssentialOCLPackage extends EPackage {
 	int EXPRESSION_IN_OCL__CONTEXT_VARIABLE = EMOFPackage.TYPED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Generated Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_IN_OCL__GENERATED_TYPE = EMOFPackage.TYPED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Parameter Variable</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_IN_OCL__PARAMETER_VARIABLE = EMOFPackage.TYPED_ELEMENT_FEATURE_COUNT + 2;
+	int EXPRESSION_IN_OCL__PARAMETER_VARIABLE = EMOFPackage.TYPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Result Variable</b></em>' containment reference.
@@ -866,7 +875,7 @@ public interface EssentialOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_IN_OCL__RESULT_VARIABLE = EMOFPackage.TYPED_ELEMENT_FEATURE_COUNT + 3;
+	int EXPRESSION_IN_OCL__RESULT_VARIABLE = EMOFPackage.TYPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Expression In Ocl</em>' class.
@@ -875,7 +884,7 @@ public interface EssentialOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_IN_OCL_FEATURE_COUNT = EMOFPackage.TYPED_ELEMENT_FEATURE_COUNT + 4;
+	int EXPRESSION_IN_OCL_FEATURE_COUNT = EMOFPackage.TYPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.impl.FeatureCallExpImpl <em>Feature Call Exp</em>}' class.
@@ -2004,6 +2013,61 @@ public interface EssentialOCLPackage extends EPackage {
 	int STRING_LITERAL_EXP_FEATURE_COUNT = PRIMITIVE_LITERAL_EXP_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.impl.TemplateParameterTypeImpl <em>Template Parameter Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.impl.TemplateParameterTypeImpl
+	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.impl.EssentialOCLPackageImpl#getTemplateParameterType()
+	 * @generated
+	 */
+	int TEMPLATE_PARAMETER_TYPE = 33;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER_TYPE__OWNED_COMMENT = EMOFPackage.TYPE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER_TYPE__NAME = EMOFPackage.TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Package</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER_TYPE__PACKAGE = EMOFPackage.TYPE__PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Specification</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER_TYPE__SPECIFICATION = EMOFPackage.TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Template Parameter Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER_TYPE_FEATURE_COUNT = EMOFPackage.TYPE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.impl.TupleLiteralExpImpl <em>Tuple Literal Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2011,7 +2075,7 @@ public interface EssentialOCLPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.impl.EssentialOCLPackageImpl#getTupleLiteralExp()
 	 * @generated
 	 */
-	int TUPLE_LITERAL_EXP = 33;
+	int TUPLE_LITERAL_EXP = 34;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -2066,7 +2130,7 @@ public interface EssentialOCLPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.impl.EssentialOCLPackageImpl#getTupleLiteralPart()
 	 * @generated
 	 */
-	int TUPLE_LITERAL_PART = 34;
+	int TUPLE_LITERAL_PART = 35;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -2139,7 +2203,7 @@ public interface EssentialOCLPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.impl.EssentialOCLPackageImpl#getTupleType()
 	 * @generated
 	 */
-	int TUPLE_TYPE = 35;
+	int TUPLE_TYPE = 36;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -2221,7 +2285,7 @@ public interface EssentialOCLPackage extends EPackage {
 	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.impl.EssentialOCLPackageImpl#getTypeExp()
 	 * @generated
 	 */
-	int TYPE_EXP = 36;
+	int TYPE_EXP = 37;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -2267,52 +2331,6 @@ public interface EssentialOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_EXP_FEATURE_COUNT = OCL_EXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.impl.TypeTypeImpl <em>Type Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.impl.TypeTypeImpl
-	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.impl.EssentialOCLPackageImpl#getTypeType()
-	 * @generated
-	 */
-	int TYPE_TYPE = 37;
-
-	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_TYPE__OWNED_COMMENT = EMOFPackage.TYPE__OWNED_COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_TYPE__NAME = EMOFPackage.TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Package</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_TYPE__PACKAGE = EMOFPackage.TYPE__PACKAGE;
-
-	/**
-	 * The number of structural features of the '<em>Type Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_TYPE_FEATURE_COUNT = EMOFPackage.TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.impl.UnlimitedNaturalExpImpl <em>Unlimited Natural Exp</em>}' class.
@@ -2797,6 +2815,17 @@ public interface EssentialOCLPackage extends EPackage {
 	EReference getExpressionInOcl_ContextVariable();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.ExpressionInOcl#getGeneratedType <em>Generated Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Generated Type</em>'.
+	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.ExpressionInOcl#getGeneratedType()
+	 * @see #getExpressionInOcl()
+	 * @generated
+	 */
+	EReference getExpressionInOcl_GeneratedType();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.ExpressionInOcl#getParameterVariable <em>Parameter Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3193,6 +3222,27 @@ public interface EssentialOCLPackage extends EPackage {
 	EAttribute getStringLiteralExp_StringSymbol();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.TemplateParameterType <em>Template Parameter Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Template Parameter Type</em>'.
+	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.TemplateParameterType
+	 * @generated
+	 */
+	EClass getTemplateParameterType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.TemplateParameterType#getSpecification <em>Specification</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Specification</em>'.
+	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.TemplateParameterType#getSpecification()
+	 * @see #getTemplateParameterType()
+	 * @generated
+	 */
+	EAttribute getTemplateParameterType_Specification();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.TupleLiteralExp <em>Tuple Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3286,16 +3336,6 @@ public interface EssentialOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTypeExp_ReferredType();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.TypeType <em>Type Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Type</em>'.
-	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.TypeType
-	 * @generated
-	 */
-	EClass getTypeType();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.UnlimitedNaturalExp <em>Unlimited Natural Exp</em>}'.
@@ -3629,6 +3669,14 @@ public interface EssentialOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXPRESSION_IN_OCL__CONTEXT_VARIABLE = eINSTANCE.getExpressionInOcl_ContextVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Generated Type</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXPRESSION_IN_OCL__GENERATED_TYPE = eINSTANCE.getExpressionInOcl_GeneratedType();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameter Variable</b></em>' containment reference list feature.
@@ -3979,6 +4027,24 @@ public interface EssentialOCLPackage extends EPackage {
 		EAttribute STRING_LITERAL_EXP__STRING_SYMBOL = eINSTANCE.getStringLiteralExp_StringSymbol();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.impl.TemplateParameterTypeImpl <em>Template Parameter Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.impl.TemplateParameterTypeImpl
+		 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.impl.EssentialOCLPackageImpl#getTemplateParameterType()
+		 * @generated
+		 */
+		EClass TEMPLATE_PARAMETER_TYPE = eINSTANCE.getTemplateParameterType();
+
+		/**
+		 * The meta object literal for the '<em><b>Specification</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TEMPLATE_PARAMETER_TYPE__SPECIFICATION = eINSTANCE.getTemplateParameterType_Specification();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.impl.TupleLiteralExpImpl <em>Tuple Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4057,16 +4123,6 @@ public interface EssentialOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPE_EXP__REFERRED_TYPE = eINSTANCE.getTypeExp_ReferredType();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.impl.TypeTypeImpl <em>Type Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.impl.TypeTypeImpl
-		 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.impl.EssentialOCLPackageImpl#getTypeType()
-		 * @generated
-		 */
-		EClass TYPE_TYPE = eINSTANCE.getTypeType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvt.declarative.emof.EssentialOCL.impl.UnlimitedNaturalExpImpl <em>Unlimited Natural Exp</em>}' class.

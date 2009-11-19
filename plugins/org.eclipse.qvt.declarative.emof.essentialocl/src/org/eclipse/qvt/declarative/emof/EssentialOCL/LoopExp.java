@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: LoopExp.java,v 1.1 2008/07/23 09:56:32 qglineur Exp $
+ * $Id: LoopExp.java,v 1.2 2009/11/19 10:29:31 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EssentialOCL;
 
@@ -74,7 +74,7 @@ public interface LoopExp extends CallExp, OclExpression {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Iterator</em>' containment reference list.
 	 * @see org.eclipse.qvt.declarative.emof.EssentialOCL.EssentialOCLPackage#getLoopExp_Iterator()
-	 * @model containment="true" ordered="false"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<Variable> getIterator();
