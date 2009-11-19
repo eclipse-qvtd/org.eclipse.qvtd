@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationConsistencyTest.java,v 1.6 2009/01/26 21:48:01 ewillink Exp $
+ * $Id: QVTRelationConsistencyTest.java,v 1.7 2009/11/19 10:49:25 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.emof.qvtrelation;
 
@@ -42,7 +42,7 @@ import org.eclipse.qvt.declarative.test.emof.tools.EquivalenceMap;
 
 public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyTest
 {	
-	public static void expectedEcoreDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
+	public static void expectedEcoreDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper, ResourceSet rightResourceSet) {
 		changeOfURI(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.eINSTANCE);
 		changeOfPrefix(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.eINSTANCE);
 		//
@@ -68,7 +68,7 @@ public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyT
 		missingConstraint(differences, helper, org.eclipse.qvt.declarative.ecore.QVTRelation.QVTRelationPackage.Literals.RELATIONAL_TRANSFORMATION);
 	}
 
-	public static void expectedEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
+	public static void expectedEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper, ResourceSet rightResourceSet) {
 		changeOfURI(differences, helper, QVTRelationPackage.eINSTANCE);
 		changeOfPrefix(differences, helper, QVTRelationPackage.eINSTANCE);
 		changeOfName(differences, helper, QVTRelationPackage.eINSTANCE);
@@ -78,7 +78,7 @@ public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyT
 		changeOfSize(differences, helper, QVTRelationPackage.eINSTANCE, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS);
 	}
 
-	public static void expectedEmof2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
+	public static void expectedEmof2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper, ResourceSet rightResourceSet) {
 		missingURI(differences, helper, QVTRelationPackage.eINSTANCE);
 		missingPrefix(differences, helper, QVTRelationPackage.eINSTANCE);
 		changeOfName(differences, helper, QVTRelationPackage.eINSTANCE);
@@ -90,18 +90,20 @@ public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyT
 
 	@Override
 	protected Set<EcoreDifference> getExpectedEcore2EmofDifferences(EquivalenceHelper helper, EPackage rightPackage) {
+		ResourceSet rightResourceSet = rightPackage.eResource().getResourceSet();
 		Set<EcoreDifference> differences = new HashSet<EcoreDifference>();
-		QVTRelationConsistencyTest.expectedEcoreDifferences(differences, helper);		
+		QVTRelationConsistencyTest.expectedEcoreDifferences(differences, helper, rightResourceSet);		
 		helper.setLogStream(null);
-		EssentialOCLConsistencyTest.expectedEcoreDifferences(differences, helper);
-		EMOFConsistencyTest.expectedEcore2RoseDifferences(helper, differences, rightPackage.eResource().getResourceSet());		
+		EssentialOCLConsistencyTest.expectedEcoreDifferences(differences, helper, rightResourceSet);
+		EMOFConsistencyTest.expectedEcore2RoseDifferences(helper, differences, rightResourceSet);		
 		return differences;
 	}
 
 	@Override
 	protected Set<EcoreDifference> getExpectedEmof2OmgEcoreDifferences(EquivalenceHelper helper, EPackage rightPackage) {
+		ResourceSet rightResourceSet = rightPackage.eResource().getResourceSet();
 		Set<EcoreDifference> differences = new HashSet<EcoreDifference>();
-		expectedEmofDifferences(differences, helper);
+		expectedEmofDifferences(differences, helper, rightResourceSet);
 		changeOfLower(differences, helper, QVTRelationPackage.Literals.RELATION_CALL_EXP__ARGUMENT);
 		changeOfLower(differences, helper, QVTRelationPackage.Literals.RELATION_CALL_EXP__REFERRED_RELATION);
 		changeOfContainment(differences, helper, QVTRelationPackage.Literals.RELATION__OPERATIONAL_IMPL);
@@ -127,10 +129,10 @@ public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyT
 		missingOppositeAnnotation(differences, helper, QVTRelationPackage.Literals.KEY__OPPOSITE_PART);
 			
 		helper.setLogStream(null);
-		QVTTemplateConsistencyTest.expectedEmofDifferences(differences, helper);
-		QVTBaseConsistencyTest.expectedEmofDifferences(differences, helper);
-		EMOFConsistencyTest.expectedEmofDifferences(differences, helper);		
-		EssentialOCLConsistencyTest.expectedEmofDifferences(differences, helper);
+		QVTTemplateConsistencyTest.expectedEmofDifferences(differences, helper, rightResourceSet);
+		QVTBaseConsistencyTest.expectedEmofDifferences(differences, helper, rightResourceSet);
+		EMOFConsistencyTest.expectedEmofDifferences(differences, helper, rightResourceSet);		
+		EssentialOCLConsistencyTest.expectedEmofDifferences(differences, helper, rightResourceSet);
 		return differences;
 	}
 
@@ -170,18 +172,20 @@ public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyT
 		missingOppositeAnnotation(differences, helper, QVTRelationPackage.Literals.KEY__OPPOSITE_PART);
 			
 		helper.setLogStream(null);
+		ResourceSet rightResourceSet = rightPackage.eResource().getResourceSet();
 		missingPrefix(differences, helper, QVTRelationPackage.eINSTANCE);
-		QVTTemplateConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
-		QVTBaseConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
-		EssentialOCLConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
-		EMOFConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
+		QVTTemplateConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper, rightResourceSet);
+		QVTBaseConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper, rightResourceSet);
+		EssentialOCLConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper, rightResourceSet);
+		EMOFConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper, rightResourceSet);
 		return differences;
 	}
 
 	@Override
 	protected Set<EcoreDifference> getExpectedEmof2OmgRoseDifferences(EquivalenceHelper helper, EPackage rightPackage) {
+		ResourceSet rightResourceSet = rightPackage.eResource().getResourceSet();
 		Set<EcoreDifference> differences = new HashSet<EcoreDifference>();
-		expectedEmofDifferences(differences, helper);
+		expectedEmofDifferences(differences, helper, rightResourceSet);
 		changeOfLower(differences, helper, QVTRelationPackage.Literals.RELATION_CALL_EXP__ARGUMENT);
 		changeOfLower(differences, helper, QVTRelationPackage.Literals.RELATION_CALL_EXP__REFERRED_RELATION);
 		//
@@ -195,10 +199,10 @@ public class QVTRelationConsistencyTest extends AbstractEssentialOCLConsistencyT
 		missingOppositeAnnotation(differences, helper, QVTRelationPackage.Literals.KEY__OPPOSITE_PART);
 			
 		helper.setLogStream(null);
-		QVTTemplateConsistencyTest.expectedEmofDifferences(differences, helper);
-		QVTBaseConsistencyTest.expectedEmofDifferences(differences, helper);
-		EMOFConsistencyTest.expectedEmofDifferences(differences, helper);		
-		EssentialOCLConsistencyTest.expectedEmofDifferences(differences, helper);
+		QVTTemplateConsistencyTest.expectedEmofDifferences(differences, helper, rightResourceSet);
+		QVTBaseConsistencyTest.expectedEmofDifferences(differences, helper, rightResourceSet);
+		EMOFConsistencyTest.expectedEmofDifferences(differences, helper, rightResourceSet);		
+		EssentialOCLConsistencyTest.expectedEmofDifferences(differences, helper, rightResourceSet);
 		return differences;
 	}
 
