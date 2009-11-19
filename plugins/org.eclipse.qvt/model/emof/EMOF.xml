@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <emof:Package xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="EMOF"
-    name="EMOF" uri="http://schema.omg.org/spec/QVT/1.0/emof.xml">
+    name="EMOF" uri="http://schema.omg.org/spec/QVT/1.1/emof.xml">
   <ownedType xmi:type="emof:Class" xmi:id="EMOF.Class" name="Class" superClass="EMOF.Type">
     <ownedAttribute xmi:id="EMOF.Class.isAbstract" name="isAbstract" isOrdered="true"
         lower="0" default="false">

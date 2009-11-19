@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <emof:Package xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="QVTBase"
-    name="QVTBase" uri="http://schema.omg.org/spec/QVT/1.0/qvtbase.xml">
+    name="QVTBase" uri="http://schema.omg.org/spec/QVT/1.1/qvtbase.xml">
   <ownedType xmi:type="emof:Class" xmi:id="QVTBase.Domain" name="Domain" isAbstract="true">
     <superClass href="EMOF.xml#EMOF.NamedElement"/>
     <ownedAttribute xmi:id="QVTBase.Domain.isCheckable" name="isCheckable" isOrdered="true"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <emof:Package xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="QVTOperational"
-    name="QVTOperational" uri="http://schema.omg.org/spec/QVT/1.0/qvtoperational.xml">
+    name="QVTOperational" uri="http://schema.omg.org/spec/QVT/1.1/qvtoperational.xml">
   <ownedType xmi:type="emof:Class" xmi:id="QVTOperational.Constructor" name="Constructor"
       superClass="QVTOperational.ImperativeOperation"/>
   <ownedType xmi:type="emof:Class" xmi:id="QVTOperational.ConstructorBody" name="ConstructorBody"

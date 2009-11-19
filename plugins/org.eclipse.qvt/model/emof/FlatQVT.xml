@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <emof:Package xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="FlatQVT"
-    name="FlatQVT" uri="http://schema.omg.org/spec/QVT/1.0/flatqvt.xml">
+    name="FlatQVT" uri="http://schema.omg.org/spec/QVT/1.1/flatqvt.xml">
   <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.AltExp" name="AltExp" superClass="FlatQVT.ImperativeExpression">
     <ownedAttribute xmi:id="FlatQVT.AltExp.body" name="body" isOrdered="true" type="FlatQVT.OclExpression"
         isComposite="true">
@@ -561,6 +561,15 @@
         <resolveProxies>false</resolveProxies>
       </xmi:Extension>
     </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ExpressionInOcl.generatedType" name="generatedType"
+        lower="0" upper="*" type="FlatQVT.Type" isComposite="true">
+      <ownedComment body="owningExpression">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
     <ownedAttribute xmi:id="FlatQVT.ExpressionInOcl.parameterVariable" name="parameterVariable"
         lower="0" upper="*" type="FlatQVT.Variable" isComposite="true">
       <ownedComment body="varOwner">
@@ -809,6 +818,18 @@
     </ownedAttribute>
   </ownedType>
   <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Library" name="Library" superClass="FlatQVT.Module"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ListLiteralExp" name="ListLiteralExp"
+      superClass="FlatQVT.LiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.ListLiteralExp.element" name="element" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="elementOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
   <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ListType" name="ListType" superClass="FlatQVT.CollectionType"/>
   <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.LiteralExp" name="LiteralExp" isAbstract="true"
       superClass="FlatQVT.OclExpression"/>
@@ -834,8 +855,8 @@
         <resolveProxies>false</resolveProxies>
       </xmi:Extension>
     </ownedAttribute>
-    <ownedAttribute xmi:id="FlatQVT.LoopExp.iterator" name="iterator" lower="0" upper="*"
-        type="FlatQVT.Variable" isComposite="true">
+    <ownedAttribute xmi:id="FlatQVT.LoopExp.iterator" name="iterator" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.Variable" isComposite="true">
       <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
         <resolveProxies>false</resolveProxies>
       </xmi:Extension>
@@ -1752,7 +1773,6 @@
     <ownedAttribute xmi:id="FlatQVT.TypeExp.referredType" name="referredType" isOrdered="true"
         lower="0" type="FlatQVT.Type"/>
   </ownedType>
-  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TypeType" name="TypeType" superClass="FlatQVT.Type"/>
   <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TypedElement" name="TypedElement"
       isAbstract="true" superClass="FlatQVT.NamedElement">
     <ownedAttribute xmi:id="FlatQVT.TypedElement.type" name="type" isOrdered="true"
