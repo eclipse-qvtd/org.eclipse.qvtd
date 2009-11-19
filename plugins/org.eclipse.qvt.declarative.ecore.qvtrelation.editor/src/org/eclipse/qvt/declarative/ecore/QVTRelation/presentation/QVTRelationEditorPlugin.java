@@ -12,24 +12,17 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationEditorPlugin.java,v 1.1 2008/07/23 09:47:57 qglineur Exp $
+ * $Id: QVTRelationEditorPlugin.java,v 1.2 2009/11/19 10:26:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.presentation;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
-
-import org.eclipse.ocl.ecore.provider.OCLEcoreEditPlugin;
-
-import org.eclipse.ocl.edit.internal.OCLEditPlugin;
-
+import org.eclipse.ocl.ecore.edit.OCLEcoreEditPlugin;
+import org.eclipse.ocl.edit.OCLEditPlugin;
 import org.eclipse.qvt.declarative.ecore.QVTBase.provider.QVTBaseEditPlugin;
-
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.provider.QVTTemplateEditPlugin;
 
 /**
