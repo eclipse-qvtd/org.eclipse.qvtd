@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EssentialOCLFactoryImpl.java,v 1.1 2008/07/23 09:56:29 qglineur Exp $
+ * $Id: EssentialOCLFactoryImpl.java,v 1.2 2009/11/19 10:29:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EssentialOCL.impl;
 
@@ -42,7 +42,7 @@ public class EssentialOCLFactoryImpl extends EFactoryImpl implements EssentialOC
 	 */
 	public static EssentialOCLFactory init() {
 		try {
-			EssentialOCLFactory theEssentialOCLFactory = (EssentialOCLFactory)EPackage.Registry.INSTANCE.getEFactory("http://schema.omg.org/spec/QVT/1.0/essentialocl.xml"); 
+			EssentialOCLFactory theEssentialOCLFactory = (EssentialOCLFactory)EPackage.Registry.INSTANCE.getEFactory("http://schema.omg.org/spec/QVT/1.1/essentialocl.xml"); 
 			if (theEssentialOCLFactory != null) {
 				return theEssentialOCLFactory;
 			}
@@ -96,11 +96,11 @@ public class EssentialOCLFactoryImpl extends EFactoryImpl implements EssentialOC
 			case EssentialOCLPackage.SEQUENCE_TYPE: return createSequenceType();
 			case EssentialOCLPackage.SET_TYPE: return createSetType();
 			case EssentialOCLPackage.STRING_LITERAL_EXP: return createStringLiteralExp();
+			case EssentialOCLPackage.TEMPLATE_PARAMETER_TYPE: return createTemplateParameterType();
 			case EssentialOCLPackage.TUPLE_LITERAL_EXP: return createTupleLiteralExp();
 			case EssentialOCLPackage.TUPLE_LITERAL_PART: return createTupleLiteralPart();
 			case EssentialOCLPackage.TUPLE_TYPE: return createTupleType();
 			case EssentialOCLPackage.TYPE_EXP: return createTypeExp();
-			case EssentialOCLPackage.TYPE_TYPE: return createTypeType();
 			case EssentialOCLPackage.UNLIMITED_NATURAL_EXP: return createUnlimitedNaturalExp();
 			case EssentialOCLPackage.VARIABLE: return createVariable();
 			case EssentialOCLPackage.VARIABLE_EXP: return createVariableExp();
@@ -395,6 +395,16 @@ public class EssentialOCLFactoryImpl extends EFactoryImpl implements EssentialOC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public TemplateParameterType createTemplateParameterType() {
+		TemplateParameterTypeImpl templateParameterType = new TemplateParameterTypeImpl();
+		return templateParameterType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TupleLiteralExp createTupleLiteralExp() {
 		TupleLiteralExpImpl tupleLiteralExp = new TupleLiteralExpImpl();
 		return tupleLiteralExp;
@@ -428,16 +438,6 @@ public class EssentialOCLFactoryImpl extends EFactoryImpl implements EssentialOC
 	public TypeExp createTypeExp() {
 		TypeExpImpl typeExp = new TypeExpImpl();
 		return typeExp;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TypeType createTypeType() {
-		TypeTypeImpl typeType = new TypeTypeImpl();
-		return typeType;
 	}
 
 	/**

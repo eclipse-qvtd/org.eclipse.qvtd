@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ExpressionInOclImpl.java,v 1.1 2008/07/23 09:56:30 qglineur Exp $
+ * $Id: ExpressionInOclImpl.java,v 1.2 2009/11/19 10:29:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EssentialOCL.impl;
 
@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.qvt.declarative.emof.EMOF.Type;
 import org.eclipse.qvt.declarative.emof.EMOF.impl.TypedElementImpl;
 
 import org.eclipse.qvt.declarative.emof.EssentialOCL.EssentialOCLPackage;
@@ -47,6 +48,7 @@ import org.eclipse.qvt.declarative.emof.EssentialOCL.Variable;
  * <ul>
  *   <li>{@link org.eclipse.qvt.declarative.emof.EssentialOCL.impl.ExpressionInOclImpl#getBodyExpression <em>Body Expression</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.EssentialOCL.impl.ExpressionInOclImpl#getContextVariable <em>Context Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvt.declarative.emof.EssentialOCL.impl.ExpressionInOclImpl#getGeneratedType <em>Generated Type</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.EssentialOCL.impl.ExpressionInOclImpl#getParameterVariable <em>Parameter Variable</em>}</li>
  *   <li>{@link org.eclipse.qvt.declarative.emof.EssentialOCL.impl.ExpressionInOclImpl#getResultVariable <em>Result Variable</em>}</li>
  * </ul>
@@ -74,6 +76,16 @@ public class ExpressionInOclImpl extends TypedElementImpl implements ExpressionI
 	 * @ordered
 	 */
 	protected Variable contextVariable;
+
+	/**
+	 * The cached value of the '{@link #getGeneratedType() <em>Generated Type</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneratedType()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Type> generatedType;
 
 	/**
 	 * The cached value of the '{@link #getParameterVariable() <em>Parameter Variable</em>}' containment reference list.
@@ -205,6 +217,18 @@ public class ExpressionInOclImpl extends TypedElementImpl implements ExpressionI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Type> getGeneratedType() {
+		if (generatedType == null) {
+			generatedType = new EObjectContainmentEList<Type>(Type.class, this, EssentialOCLPackage.EXPRESSION_IN_OCL__GENERATED_TYPE);
+		}
+		return generatedType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Variable> getParameterVariable() {
 		if (parameterVariable == null) {
 			parameterVariable = new EObjectContainmentEList<Variable>(Variable.class, this, EssentialOCLPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE);
@@ -267,6 +291,8 @@ public class ExpressionInOclImpl extends TypedElementImpl implements ExpressionI
 				return basicSetBodyExpression(null, msgs);
 			case EssentialOCLPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				return basicSetContextVariable(null, msgs);
+			case EssentialOCLPackage.EXPRESSION_IN_OCL__GENERATED_TYPE:
+				return ((InternalEList<?>)getGeneratedType()).basicRemove(otherEnd, msgs);
 			case EssentialOCLPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
 				return ((InternalEList<?>)getParameterVariable()).basicRemove(otherEnd, msgs);
 			case EssentialOCLPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
@@ -287,6 +313,8 @@ public class ExpressionInOclImpl extends TypedElementImpl implements ExpressionI
 				return getBodyExpression();
 			case EssentialOCLPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				return getContextVariable();
+			case EssentialOCLPackage.EXPRESSION_IN_OCL__GENERATED_TYPE:
+				return getGeneratedType();
 			case EssentialOCLPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
 				return getParameterVariable();
 			case EssentialOCLPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
@@ -309,6 +337,10 @@ public class ExpressionInOclImpl extends TypedElementImpl implements ExpressionI
 				return;
 			case EssentialOCLPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				setContextVariable((Variable)newValue);
+				return;
+			case EssentialOCLPackage.EXPRESSION_IN_OCL__GENERATED_TYPE:
+				getGeneratedType().clear();
+				getGeneratedType().addAll((Collection<? extends Type>)newValue);
 				return;
 			case EssentialOCLPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
 				getParameterVariable().clear();
@@ -335,6 +367,9 @@ public class ExpressionInOclImpl extends TypedElementImpl implements ExpressionI
 			case EssentialOCLPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				setContextVariable((Variable)null);
 				return;
+			case EssentialOCLPackage.EXPRESSION_IN_OCL__GENERATED_TYPE:
+				getGeneratedType().clear();
+				return;
 			case EssentialOCLPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
 				getParameterVariable().clear();
 				return;
@@ -357,6 +392,8 @@ public class ExpressionInOclImpl extends TypedElementImpl implements ExpressionI
 				return bodyExpression != null;
 			case EssentialOCLPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				return contextVariable != null;
+			case EssentialOCLPackage.EXPRESSION_IN_OCL__GENERATED_TYPE:
+				return generatedType != null && !generatedType.isEmpty();
 			case EssentialOCLPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
 				return parameterVariable != null && !parameterVariable.isEmpty();
 			case EssentialOCLPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EssentialOCLPackageImpl.java,v 1.1 2008/07/23 09:56:30 qglineur Exp $
+ * $Id: EssentialOCLPackageImpl.java,v 1.2 2009/11/19 10:29:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.EssentialOCL.impl;
 
@@ -21,11 +21,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.qvt.declarative.emof.EMOF.EMOFPackage;
-
 import org.eclipse.qvt.declarative.emof.EssentialOCL.AnyType;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.BagType;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.BooleanLiteralExp;
@@ -62,11 +59,11 @@ import org.eclipse.qvt.declarative.emof.EssentialOCL.RealLiteralExp;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.SequenceType;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.SetType;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.StringLiteralExp;
+import org.eclipse.qvt.declarative.emof.EssentialOCL.TemplateParameterType;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.TupleLiteralExp;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.TupleLiteralPart;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.TupleType;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.TypeExp;
-import org.eclipse.qvt.declarative.emof.EssentialOCL.TypeType;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.UnlimitedNaturalExp;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.Variable;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.VariableExp;
@@ -315,6 +312,13 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass templateParameterTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass tupleLiteralExpEClass = null;
 
 	/**
@@ -337,13 +341,6 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 	 * @generated
 	 */
 	private EClass typeExpEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typeTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -407,20 +404,10 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link EssentialOCLPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -432,7 +419,7 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 		if (isInited) return (EssentialOCLPackage)EPackage.Registry.INSTANCE.getEPackage(EssentialOCLPackage.eNS_URI);
 
 		// Obtain or create and register package
-		EssentialOCLPackageImpl theEssentialOCLPackage = (EssentialOCLPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof EssentialOCLPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new EssentialOCLPackageImpl());
+		EssentialOCLPackageImpl theEssentialOCLPackage = (EssentialOCLPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EssentialOCLPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EssentialOCLPackageImpl());
 
 		isInited = true;
 
@@ -448,6 +435,9 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 		// Mark meta-data to indicate it can't be changed
 		theEssentialOCLPackage.freeze();
 
+  
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(EssentialOCLPackage.eNS_URI, theEssentialOCLPackage);
 		return theEssentialOCLPackage;
 	}
 
@@ -663,7 +653,7 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getExpressionInOcl_ParameterVariable() {
+	public EReference getExpressionInOcl_GeneratedType() {
 		return (EReference)expressionInOclEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -672,8 +662,17 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getExpressionInOcl_ResultVariable() {
+	public EReference getExpressionInOcl_ParameterVariable() {
 		return (EReference)expressionInOclEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExpressionInOcl_ResultVariable() {
+		return (EReference)expressionInOclEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1005,6 +1004,24 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTemplateParameterType() {
+		return templateParameterTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTemplateParameterType_Specification() {
+		return (EAttribute)templateParameterTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTupleLiteralExp() {
 		return tupleLiteralExpEClass;
 	}
@@ -1079,15 +1096,6 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 	 */
 	public EReference getTypeExp_ReferredType() {
 		return (EReference)typeExpEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTypeType() {
-		return typeTypeEClass;
 	}
 
 	/**
@@ -1241,6 +1249,7 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 		expressionInOclEClass = createEClass(EXPRESSION_IN_OCL);
 		createEReference(expressionInOclEClass, EXPRESSION_IN_OCL__BODY_EXPRESSION);
 		createEReference(expressionInOclEClass, EXPRESSION_IN_OCL__CONTEXT_VARIABLE);
+		createEReference(expressionInOclEClass, EXPRESSION_IN_OCL__GENERATED_TYPE);
 		createEReference(expressionInOclEClass, EXPRESSION_IN_OCL__PARAMETER_VARIABLE);
 		createEReference(expressionInOclEClass, EXPRESSION_IN_OCL__RESULT_VARIABLE);
 
@@ -1302,6 +1311,9 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 		stringLiteralExpEClass = createEClass(STRING_LITERAL_EXP);
 		createEAttribute(stringLiteralExpEClass, STRING_LITERAL_EXP__STRING_SYMBOL);
 
+		templateParameterTypeEClass = createEClass(TEMPLATE_PARAMETER_TYPE);
+		createEAttribute(templateParameterTypeEClass, TEMPLATE_PARAMETER_TYPE__SPECIFICATION);
+
 		tupleLiteralExpEClass = createEClass(TUPLE_LITERAL_EXP);
 		createEReference(tupleLiteralExpEClass, TUPLE_LITERAL_EXP__PART);
 
@@ -1314,8 +1326,6 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 
 		typeExpEClass = createEClass(TYPE_EXP);
 		createEReference(typeExpEClass, TYPE_EXP__REFERRED_TYPE);
-
-		typeTypeEClass = createEClass(TYPE_TYPE);
 
 		unlimitedNaturalExpEClass = createEClass(UNLIMITED_NATURAL_EXP);
 		createEAttribute(unlimitedNaturalExpEClass, UNLIMITED_NATURAL_EXP__SYMBOL);
@@ -1399,12 +1409,12 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 		sequenceTypeEClass.getESuperTypes().add(this.getCollectionType());
 		setTypeEClass.getESuperTypes().add(this.getCollectionType());
 		stringLiteralExpEClass.getESuperTypes().add(this.getPrimitiveLiteralExp());
+		templateParameterTypeEClass.getESuperTypes().add(theEMOFPackage.getType());
 		tupleLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
 		tupleLiteralPartEClass.getESuperTypes().add(theEMOFPackage.getTypedElement());
 		tupleTypeEClass.getESuperTypes().add(theEMOFPackage.getClass_());
 		tupleTypeEClass.getESuperTypes().add(theEMOFPackage.getDataType());
 		typeExpEClass.getESuperTypes().add(this.getOclExpression());
-		typeTypeEClass.getESuperTypes().add(theEMOFPackage.getType());
 		unlimitedNaturalExpEClass.getESuperTypes().add(this.getNumericLiteralExp());
 		variableEClass.getESuperTypes().add(theEMOFPackage.getTypedElement());
 		variableExpEClass.getESuperTypes().add(this.getOclExpression());
@@ -1444,6 +1454,7 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 		initEClass(expressionInOclEClass, ExpressionInOcl.class, "ExpressionInOcl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExpressionInOcl_BodyExpression(), this.getOclExpression(), null, "bodyExpression", null, 1, 1, ExpressionInOcl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExpressionInOcl_ContextVariable(), this.getVariable(), null, "contextVariable", null, 0, 1, ExpressionInOcl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExpressionInOcl_GeneratedType(), theEMOFPackage.getType(), null, "generatedType", null, 0, -1, ExpressionInOcl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getExpressionInOcl_ParameterVariable(), this.getVariable(), null, "parameterVariable", null, 0, -1, ExpressionInOcl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getExpressionInOcl_ResultVariable(), this.getVariable(), null, "resultVariable", null, 0, 1, ExpressionInOcl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1474,7 +1485,7 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 
 		initEClass(loopExpEClass, LoopExp.class, "LoopExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLoopExp_Body(), this.getOclExpression(), null, "body", null, 1, 1, LoopExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLoopExp_Iterator(), this.getVariable(), null, "iterator", null, 0, -1, LoopExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getLoopExp_Iterator(), this.getVariable(), null, "iterator", null, 0, -1, LoopExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(navigationCallExpEClass, NavigationCallExp.class, "NavigationCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1505,6 +1516,9 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 		initEClass(stringLiteralExpEClass, StringLiteralExp.class, "StringLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStringLiteralExp_StringSymbol(), theEMOFPackage.getString(), "stringSymbol", null, 0, 1, StringLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(templateParameterTypeEClass, TemplateParameterType.class, "TemplateParameterType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTemplateParameterType_Specification(), theEMOFPackage.getString(), "specification", null, 0, 1, TemplateParameterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(tupleLiteralExpEClass, TupleLiteralExp.class, "TupleLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTupleLiteralExp_Part(), this.getTupleLiteralPart(), this.getTupleLiteralPart_TupleLiteralExp(), "part", null, 0, -1, TupleLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
@@ -1517,8 +1531,6 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 
 		initEClass(typeExpEClass, TypeExp.class, "TypeExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeExp_ReferredType(), theEMOFPackage.getType(), null, "referredType", null, 0, 1, TypeExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(typeTypeEClass, TypeType.class, "TypeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(unlimitedNaturalExpEClass, UnlimitedNaturalExp.class, "UnlimitedNaturalExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUnlimitedNaturalExp_Symbol(), theEMOFPackage.getUnlimitedNatural(), "symbol", null, 0, 1, UnlimitedNaturalExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1592,6 +1604,12 @@ public class EssentialOCLPackageImpl extends EPackageImpl implements EssentialOC
 		   source, 
 		   new String[] {
 			 "body", "selfOwner"
+		   });		
+		addAnnotation
+		  (getExpressionInOcl_GeneratedType(), 
+		   source, 
+		   new String[] {
+			 "body", "owningExpression"
 		   });		
 		addAnnotation
 		  (getExpressionInOcl_ParameterVariable(), 
