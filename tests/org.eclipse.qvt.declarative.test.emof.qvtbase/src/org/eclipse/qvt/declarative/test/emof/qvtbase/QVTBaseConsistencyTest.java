@@ -32,7 +32,7 @@ import org.eclipse.qvt.declarative.test.emof.tools.EquivalenceMap;
 
 public class QVTBaseConsistencyTest extends AbstractEssentialOCLConsistencyTest
 {		
-	public static void expectedEcoreDifferences(EquivalenceHelper helper, Set<EcoreDifference> differences) {
+	public static void expectedEcoreDifferences(EquivalenceHelper helper, Set<EcoreDifference> differences, ResourceSet rightResourceSet) {
 		changeOfPrefix(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.eINSTANCE);			
 		changeOfURI(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.eINSTANCE);
 		changeOfObject(differences, helper, org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.Literals.TRANSFORMATION__OWNED_TAG, EcorePackage.Literals.ETYPED_ELEMENT__ETYPE);
@@ -56,13 +56,13 @@ public class QVTBaseConsistencyTest extends AbstractEssentialOCLConsistencyTest
 		missingOperation(differences, helper, getOperation(org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage.Literals.TRANSFORMATION, "getModelParameter"));
 	}
 
-	public static void expectedEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
+	public static void expectedEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper, ResourceSet rightResourceSet) {
 		changeOfPrefix(differences, helper, QVTBasePackage.eINSTANCE);			
 		changeOfURI(differences, helper, QVTBasePackage.eINSTANCE);
 		changeOfName(differences, helper, QVTBasePackage.eINSTANCE);
 	}
 
-	public static void expectedEmof2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper) {
+	public static void expectedEmof2OmgEmofDifferences(Set<EcoreDifference> differences, EquivalenceHelper helper, ResourceSet rightResourceSet) {
 		missingURI(differences, helper, org.eclipse.qvt.declarative.emof.QVTBase.QVTBasePackage.eINSTANCE);
 		missingPrefix(differences, helper, org.eclipse.qvt.declarative.emof.QVTBase.QVTBasePackage.eINSTANCE);
 		changeOfName(differences, helper, org.eclipse.qvt.declarative.emof.QVTBase.QVTBasePackage.eINSTANCE);
@@ -70,11 +70,12 @@ public class QVTBaseConsistencyTest extends AbstractEssentialOCLConsistencyTest
 	
 	@Override
 	protected Set<EcoreDifference> getExpectedEcore2EmofDifferences(EquivalenceHelper helper, EPackage rightPackage) {
+		ResourceSet rightResourceSet = rightPackage.eResource().getResourceSet();
 		Set<EcoreDifference> differences = new HashSet<EcoreDifference>();
-		QVTBaseConsistencyTest.expectedEcoreDifferences(helper, differences);
+		QVTBaseConsistencyTest.expectedEcoreDifferences(helper, differences, rightResourceSet);
 		helper.setLogStream(null);
-		EssentialOCLConsistencyTest.expectedEcoreDifferences(differences, helper);
-		EMOFConsistencyTest.expectedEcore2RoseDifferences(helper, differences, rightPackage.eResource().getResourceSet());		
+		EssentialOCLConsistencyTest.expectedEcoreDifferences(differences, helper, rightResourceSet);
+		EMOFConsistencyTest.expectedEcore2RoseDifferences(helper, differences, rightResourceSet);		
 		return differences;
 	}
 
@@ -97,8 +98,9 @@ public class QVTBaseConsistencyTest extends AbstractEssentialOCLConsistencyTest
 		missingOpposite(differences, helper, QVTBasePackage.Literals.TRANSFORMATION__EXTENDS);
 		missingOpposite(differences, helper, QVTBasePackage.Literals.TYPED_MODEL__DEPENDS_ON);
 		helper.setLogStream(null);
-		EMOFConsistencyTest.expectedEmofDifferences(differences, helper);		
-		EssentialOCLConsistencyTest.expectedEmofDifferences(differences, helper);
+		ResourceSet rightResourceSet = rightPackage.eResource().getResourceSet();
+		EMOFConsistencyTest.expectedEmofDifferences(differences, helper, rightResourceSet);		
+		EssentialOCLConsistencyTest.expectedEmofDifferences(differences, helper, rightResourceSet);
 		return differences;
 	}
 
@@ -131,9 +133,10 @@ public class QVTBaseConsistencyTest extends AbstractEssentialOCLConsistencyTest
 		missingOpposite(differences, helper, QVTBasePackage.Literals.TRANSFORMATION__EXTENDS);
 		missingOpposite(differences, helper, QVTBasePackage.Literals.TYPED_MODEL__DEPENDS_ON);
 		helper.setLogStream(null);
+		ResourceSet rightResourceSet = rightPackage.eResource().getResourceSet();
 		missingPrefix(differences, helper, QVTBasePackage.eINSTANCE);
-		EssentialOCLConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
-		EMOFConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper);
+		EssentialOCLConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper, rightResourceSet);
+		EMOFConsistencyTest.expectedEmof2OmgEmofDifferences(differences, helper, rightResourceSet);
 		return differences;
 	}
 
@@ -146,8 +149,9 @@ public class QVTBaseConsistencyTest extends AbstractEssentialOCLConsistencyTest
 		changeOfLower(differences, helper, QVTBasePackage.Literals.RULE__TRANSFORMATION);
 		changeOfOrdered(differences, helper, QVTBasePackage.Literals.RULE__DOMAIN);
 		helper.setLogStream(null);
-		EMOFConsistencyTest.expectedEmofDifferences(differences, helper);		
-		EssentialOCLConsistencyTest.expectedEmofDifferences(differences, helper);
+		ResourceSet rightResourceSet = rightPackage.eResource().getResourceSet();
+		EMOFConsistencyTest.expectedEmofDifferences(differences, helper, rightResourceSet);		
+		EssentialOCLConsistencyTest.expectedEmofDifferences(differences, helper, rightResourceSet);
 		return differences;
 	}
 
