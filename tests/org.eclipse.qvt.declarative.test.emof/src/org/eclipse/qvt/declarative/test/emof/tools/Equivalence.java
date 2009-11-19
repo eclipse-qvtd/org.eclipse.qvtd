@@ -127,6 +127,46 @@ public class Equivalence
 			results.add(resultMap.get(eClass));
 		return results;
 	}
+	
+	/**
+	 * Separate off known left-null/null-right equivalences.
+	 * @return
+	 */
+	public List<Equivalence> partitionByKnown(Map<EObject, EObject> leftToRightMap, Map<EObject, EObject> rightToLeftMap) {
+		List<Equivalence> newEquivalences = new ArrayList<Equivalence>();
+		Equivalence residualEquivalence = null;
+		List<EObject> residualRights = new ArrayList<EObject>(rights);
+		for (EObject left : lefts) {
+			EObject right = leftToRightMap.get(left);
+			if ((right != null) && residualRights.contains(right)) {
+				newEquivalences.add(new Equivalence(helper, eClass, left, right));
+				residualRights.remove(right);
+			}
+			else if ((right == null) && leftToRightMap.containsKey(left)) {
+				newEquivalences.add(new Equivalence(helper, eClass, left, null));
+			}
+			else {
+				if (residualEquivalence == null) {
+					residualEquivalence = new Equivalence(helper, eClass, null, null);
+					newEquivalences.add(residualEquivalence);
+				}
+				residualEquivalence.addLeft(left);
+			}
+		}
+		for (EObject right : residualRights) {
+			if ((rightToLeftMap.get(right) == null) && rightToLeftMap.containsKey(right)) {
+				newEquivalences.add(new Equivalence(helper, eClass, null, right));
+			}
+			else {
+				if (residualEquivalence == null) {
+					residualEquivalence = new Equivalence(helper, eClass, null, null);
+					newEquivalences.add(residualEquivalence);
+				}
+				residualEquivalence.addRight(right);
+			}
+		}
+		return newEquivalences;
+	}
 
 	/**
 	 * Separate off same-named left/right equivalences. Mismatches remain grouped,

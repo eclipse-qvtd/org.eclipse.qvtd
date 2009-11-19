@@ -16,8 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
@@ -48,6 +46,10 @@ public class EquivalenceMap implements EcoreComparator
 	private final List<EcoreDifference> differences = new ArrayList<EcoreDifference>();
 	private boolean resolveProxies = true;
 	
+	public EquivalenceMap(EquivalenceHelper helper) {
+		this.helper = helper;
+	}
+	
 	public EquivalenceMap(Resource leftResource, Resource rightResource) {
 		this(EcoreEquivalenceHelper.INSTANCE, leftResource, rightResource, null);
 	}
@@ -56,12 +58,10 @@ public class EquivalenceMap implements EcoreComparator
 		this.helper = helper;
 //		this.leftResource = leftResource;
 //		this.rightResource = rightResource;
-		EcoreUtil.resolveAll(leftResource);
-		EcoreUtil.resolveAll(rightResource);
-		addContents(leftResource.getContents(), rightResource.getContents(), contentPredicate);
+		load(leftResource, rightResource, contentPredicate);
 	}
 
-	public void addContents(List<EObject> leftContents, List<EObject> rightContents, ContentPredicate contentPredicate) {
+	protected void addContents(List<EObject> leftContents, List<EObject> rightContents, ContentPredicate contentPredicate) {
 		if (contentPredicate != null) {
 			if (leftContents != null) {
 				leftContents = new ArrayList<EObject>(leftContents);	// need supported remove();
@@ -377,11 +377,18 @@ public class EquivalenceMap implements EcoreComparator
 //			return false;
 		return true;
 	}	
+
+	public void load(Resource leftResource, Resource rightResource, ContentPredicate contentPredicate) {
+		EcoreUtil.resolveAll(leftResource);
+		EcoreUtil.resolveAll(rightResource);
+		addContents(leftResource.getContents(), rightResource.getContents(), contentPredicate);
+	}
 	
 	public boolean partition(List<Equivalence> equivalences) {
 		if (equivalences.size() <= 0)
 			return true;
-		List<Equivalence> equivalences1 = partitionByClass(equivalences);
+		List<Equivalence> equivalences0 = partitionByKnown(equivalences);
+		List<Equivalence> equivalences1 = partitionByClass(equivalences0);
 		List<Equivalence> equivalences2 = partitionByName(equivalences1);
 		return partitionByOrder(equivalences2);
 	}
@@ -393,6 +400,16 @@ public class EquivalenceMap implements EcoreComparator
 				newEquivalences.add(equivalence);
 			else
 				newEquivalences.addAll(equivalence.partitionByClass());
+		return newEquivalences;
+	}
+	
+	public List<Equivalence> partitionByKnown(List<Equivalence> equivalences) {
+		List<Equivalence> newEquivalences = new ArrayList<Equivalence>();
+		for (Equivalence equivalence : equivalences)
+			if (equivalence.isPartitioned())
+				newEquivalences.add(equivalence);
+			else
+				newEquivalences.addAll(equivalence.partitionByKnown(leftToRightMap, rightToLeftMap));
 		return newEquivalences;
 	}
 	
@@ -419,10 +436,12 @@ public class EquivalenceMap implements EcoreComparator
 	}
 
 	public void putEquivalence(EObject leftObject, EObject rightObject) {
-		TestCase.assertNotNull(leftObject);
-		TestCase.assertNotNull(rightObject);
-		leftToRightMap.put(leftObject, rightObject);
-		rightToLeftMap.put(rightObject, leftObject);
+//		TestCase.assertNotNull(leftObject);
+//		TestCase.assertNotNull(rightObject);
+		if (leftObject != null)
+			leftToRightMap.put(leftObject, rightObject);
+		if (rightObject != null)
+			rightToLeftMap.put(rightObject, leftObject);
 		helper.putEquivalence(leftObject, rightObject);
 	}
 }
