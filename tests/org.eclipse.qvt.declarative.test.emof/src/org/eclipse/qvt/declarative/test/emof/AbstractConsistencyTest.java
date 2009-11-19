@@ -333,7 +333,7 @@ public abstract class AbstractConsistencyTest extends AbstractTestCase
 		helper.println(helper.formatDifference(obj, ref, leftList, rightList));
 	}
 
-	protected static void changeOfListObject(Set<EcoreDifference> differences, EquivalenceHelper helper, EClass obj,
+	protected static void changeOfListObject(Set<EcoreDifference> differences, EquivalenceHelper helper, EObject obj,
 			EReference ref, EObject left, EObject right) {
 //		changeOfListFeature(differences, helper, obj, ref, left, right, "Different objects");
 		differences.add(new EcoreDifference(helper, obj, ref, left, right, "Different objects"));
@@ -434,8 +434,9 @@ public abstract class AbstractConsistencyTest extends AbstractTestCase
 		//	Compare the built-in model with the generated model 
 		//
 		GeneratedEcoreEquivalenceHelper helper = new GeneratedEcoreEquivalenceHelper(htmlStream, null);
-		EquivalenceMap comparator = new EquivalenceMap(helper, builtInResource, emofResource, null);
+		EquivalenceMap comparator = new EquivalenceMap(helper);
 		installEcoreEclipseMappings(comparator, emofResourceSet);		
+		comparator.load(builtInResource, emofResource, null);
 		//
 		if (loggedPackageName != null)
 			try {
@@ -465,8 +466,9 @@ public abstract class AbstractConsistencyTest extends AbstractTestCase
 		//	Compare the built-in model with the OMG model 
 		//
 		OMGEcoreEquivalenceHelper helper = new OMGEcoreEquivalenceHelper(htmlStream, null);
-		EquivalenceMap comparator = new EquivalenceMap(helper, builtInResource, omgResource, null);		
+		EquivalenceMap comparator = new EquivalenceMap(helper);		
 		installEmofOmgMappings(comparator, omgResource.getResourceSet());		
+		comparator.load(builtInResource, omgResource, null);
 		if (loggedPackageName != null)
 			try {
 				helper.setLogStream(new PrintStream("temp/" + loggedPackageName + "EcoreConsistency.log"));
@@ -516,8 +518,9 @@ public abstract class AbstractConsistencyTest extends AbstractTestCase
 			}
 			
 		};
-		EquivalenceMap comparator = new EquivalenceMap(helper, builtInResource, anotherOmgResource, null);		
+		EquivalenceMap comparator = new EquivalenceMap(helper);		
 		installEmof2EmofMappings(comparator, omgResourceSet);		
+		comparator.load(builtInResource, anotherOmgResource, null);
 		if (loggedPackageName != null)
 			try {
 				helper.setLogStream(new PrintStream("temp/" + loggedPackageName + "EmofConsistency.log"));
@@ -558,8 +561,9 @@ public abstract class AbstractConsistencyTest extends AbstractTestCase
 		//	Compare the built-in model with the OMG model 
 		//
 		OMGEcoreEquivalenceHelper helper = new OMGEcoreEquivalenceHelper(htmlStream, null);
-		EquivalenceMap comparator = new EquivalenceMap(helper, builtInResource, omgResource, null);
+		EquivalenceMap comparator = new EquivalenceMap(helper);
 		installEmofOmgMappings(comparator, omgResource.getResourceSet());
+		comparator.load(builtInResource, omgResource, null);
 		//
 		if (loggedPackageName != null)
 			try {
@@ -592,8 +596,9 @@ public abstract class AbstractConsistencyTest extends AbstractTestCase
 		//	Compare the built-in model with the generated model 
 		//
 		GeneratedEcoreEquivalenceHelper helper = new GeneratedEcoreEquivalenceHelper(htmlStream, null);
-		EquivalenceMap comparator = new EquivalenceMap(helper, builtInResource, generatedResource, null);
+		EquivalenceMap comparator = new EquivalenceMap(helper);
 		installEmofEclipseMappings(comparator, generatedResource.getResourceSet());
+		comparator.load(builtInResource, generatedResource, null);
 		//
 		if (loggedPackageName != null)
 			try {
