@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml"
-    xmlns:essentialocl="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml" xmlns:qvtr="http://schema.omg.org/spec/QVT/1.0/qvtrelation.xml"
-    xmlns:qvtt="http://schema.omg.org/spec/QVT/1.0/qvttemplate.xml">
+    xmlns:essentialocl="http://schema.omg.org/spec/QVT/1.1/essentialocl.xml" xmlns:qvtr="http://schema.omg.org/spec/QVT/1.1/qvtrelation.xml"
+    xmlns:qvtt="http://schema.omg.org/spec/QVT/1.1/qvttemplate.xml">
   <qvtr:RelationalTransformation xmi:id="ast1" name="SeqToStm" uri="http://models/SeqToStm.qvtr/SeqToStm">
     <ownedType xmi:type="essentialocl:SetType" xmi:id="ast2">
       <elementType xmi:type="emof:Class" href="SeqMM.xml#SeqMM.LifeLine"/>
