@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: GuardPatternImpl.java,v 1.1 2008/07/23 09:58:27 qglineur Exp $
+ * $Id: GuardPatternImpl.java,v 1.2 2009/11/19 10:33:46 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTCore.impl;
 
@@ -69,7 +69,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	 * @generated
 	 */
 	public Area getArea() {
-		if (eContainerFeatureID != QVTCorePackage.GUARD_PATTERN__AREA) return null;
+		if (eContainerFeatureID() != QVTCorePackage.GUARD_PATTERN__AREA) return null;
 		return (Area)eContainer();
 	}
 
@@ -89,7 +89,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	 * @generated
 	 */
 	public void setArea(Area newArea) {
-		if (newArea != eInternalContainer() || (eContainerFeatureID != QVTCorePackage.GUARD_PATTERN__AREA && newArea != null)) {
+		if (newArea != eInternalContainer() || (eContainerFeatureID() != QVTCorePackage.GUARD_PATTERN__AREA && newArea != null)) {
 			if (EcoreUtil.isAncestor(this, newArea))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -141,7 +141,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTCorePackage.GUARD_PATTERN__AREA:
 				return eInternalContainer().eInverseRemove(this, QVTCorePackage.AREA__GUARD_PATTERN, Area.class, msgs);
 		}

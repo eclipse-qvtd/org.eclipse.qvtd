@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: MappingImpl.java,v 1.1 2008/07/23 09:58:27 qglineur Exp $
+ * $Id: MappingImpl.java,v 1.2 2009/11/19 10:33:46 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTCore.impl;
 
@@ -221,7 +221,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 */
 	public Mapping getContext() {
-		if (eContainerFeatureID != QVTCorePackage.MAPPING__CONTEXT) return null;
+		if (eContainerFeatureID() != QVTCorePackage.MAPPING__CONTEXT) return null;
 		return (Mapping)eContainer();
 	}
 
@@ -241,7 +241,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 */
 	public void setContext(Mapping newContext) {
-		if (newContext != eInternalContainer() || (eContainerFeatureID != QVTCorePackage.MAPPING__CONTEXT && newContext != null)) {
+		if (newContext != eInternalContainer() || (eContainerFeatureID() != QVTCorePackage.MAPPING__CONTEXT && newContext != null)) {
 			if (EcoreUtil.isAncestor(this, newContext))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -354,7 +354,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTCorePackage.MAPPING__CONTEXT:
 				return eInternalContainer().eInverseRemove(this, QVTCorePackage.MAPPING__LOCAL, Mapping.class, msgs);
 		}

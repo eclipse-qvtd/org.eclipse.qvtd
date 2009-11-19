@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AssignmentImpl.java,v 1.1 2008/07/23 09:58:27 qglineur Exp $
+ * $Id: AssignmentImpl.java,v 1.2 2009/11/19 10:33:46 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.emof.QVTCore.impl;
 
@@ -105,7 +105,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * @generated
 	 */
 	public BottomPattern getBottomPattern() {
-		if (eContainerFeatureID != QVTCorePackage.ASSIGNMENT__BOTTOM_PATTERN) return null;
+		if (eContainerFeatureID() != QVTCorePackage.ASSIGNMENT__BOTTOM_PATTERN) return null;
 		return (BottomPattern)eContainer();
 	}
 
@@ -125,7 +125,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * @generated
 	 */
 	public void setBottomPattern(BottomPattern newBottomPattern) {
-		if (newBottomPattern != eInternalContainer() || (eContainerFeatureID != QVTCorePackage.ASSIGNMENT__BOTTOM_PATTERN && newBottomPattern != null)) {
+		if (newBottomPattern != eInternalContainer() || (eContainerFeatureID() != QVTCorePackage.ASSIGNMENT__BOTTOM_PATTERN && newBottomPattern != null)) {
 			if (EcoreUtil.isAncestor(this, newBottomPattern))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -243,7 +243,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case QVTCorePackage.ASSIGNMENT__BOTTOM_PATTERN:
 				return eInternalContainer().eInverseRemove(this, QVTCorePackage.BOTTOM_PATTERN__ASSIGNMENT, BottomPattern.class, msgs);
 		}
