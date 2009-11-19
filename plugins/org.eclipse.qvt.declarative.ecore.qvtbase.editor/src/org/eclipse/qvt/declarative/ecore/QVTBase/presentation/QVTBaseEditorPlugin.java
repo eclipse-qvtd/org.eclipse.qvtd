@@ -12,21 +12,16 @@
  * 
  * </copyright>
  *
- * $Id: QVTBaseEditorPlugin.java,v 1.1 2008/07/23 09:42:06 qglineur Exp $
+ * $Id: QVTBaseEditorPlugin.java,v 1.2 2009/11/19 10:26:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.presentation;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
-
-import org.eclipse.ocl.ecore.provider.OCLEcoreEditPlugin;
-
-import org.eclipse.ocl.edit.internal.OCLEditPlugin;
+import org.eclipse.ocl.ecore.edit.OCLEcoreEditPlugin;
+import org.eclipse.ocl.edit.OCLEditPlugin;
 
 /**
  * This is the central singleton for the QVTBase editor plugin.
