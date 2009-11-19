@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="FlatQVT" name="FlatQVT" nsURI="http://schema.omg.org/spec/QVT/1.0/flatqvt.xml" nsPrefix="flatqvt">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="FlatQVT" name="FlatQVT" nsURI="http://schema.omg.org/spec/QVT/1.1/flatqvt.xml" nsPrefix="flatqvt">
   <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.AltExp" name="AltExp" eSuperTypes="ImperativeOCL.ImperativeExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.AltExp.body" name="body" lowerBound="1" eType="EssentialOCL.OclExpression" containment="true" resolveProxies="false">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
@@ -270,6 +270,11 @@
         <details key="body" value="selfOwner"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.ExpressionInOcl.generatedType" name="generatedType" ordered="false" upperBound="-1" eType="EMOF.Type" containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="owningExpression"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.ExpressionInOcl.parameterVariable" name="parameterVariable" ordered="false" upperBound="-1" eType="EssentialOCL.Variable" containment="true" resolveProxies="false">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="varOwner"/>
@@ -399,6 +404,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.LetExp.variable" name="variable" lowerBound="1" eType="EssentialOCL.Variable" containment="true" resolveProxies="false" eOpposite="EssentialOCL.Variable.letExp"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.Library" name="Library" eSuperTypes="QVTOperational.Module"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.ListLiteralExp" name="ListLiteralExp" eSuperTypes="EssentialOCL.LiteralExp">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.ListLiteralExp.element" name="element" upperBound="-1" eType="EssentialOCL.OclExpression" containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="elementOwner"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.ListType" name="ListType" eSuperTypes="EssentialOCL.CollectionType"/>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.LiteralExp" name="LiteralExp" abstract="true" eSuperTypes="EssentialOCL.OclExpression"/>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.LogExp" name="LogExp" eSuperTypes="EssentialOCL.OperationCallExp ImperativeOCL.ImperativeExpression">
@@ -414,7 +426,7 @@
         <details key="body" value="loopBodyOwner"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.LoopExp.iterator" name="iterator" ordered="false" upperBound="-1" eType="EssentialOCL.Variable" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.LoopExp.iterator" name="iterator" upperBound="-1" eType="EssentialOCL.Variable" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.Mapping" name="Mapping" eSuperTypes="QVTBase.Rule QVTCore.Area">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.Mapping.context" name="context" eType="QVTCore.Mapping" transient="true" resolveProxies="false" eOpposite="QVTCore.Mapping.local"/>
@@ -837,8 +849,8 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.TemplateParameterType" name="TemplateParameterType" eSuperTypes="EMOF.Type">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="ImperativeOCL.TemplateParameterType.specification" name="specification" eType="PrimitiveTypes.String"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.TemplateParameterType" name="TemplateParameterType" eSuperTypes="EMOF.Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EssentialOCL.TemplateParameterType.specification" name="specification" eType="PrimitiveTypes.String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTBase.Transformation" name="Transformation" eSuperTypes="EMOF.Class EMOF.Package">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.extends" name="extends" eType="QVTBase.Transformation">
@@ -880,7 +892,6 @@
   <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.TypeExp" name="TypeExp" eSuperTypes="EssentialOCL.OclExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EssentialOCL.TypeExp.referredType" name="referredType" eType="EMOF.Type"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="EssentialOCL.TypeType" name="TypeType" eSuperTypes="EMOF.Type"/>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.TypedElement" name="TypedElement" abstract="true" eSuperTypes="EMOF.NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.TypedElement.type" name="type" eType="EMOF.Type"/>
   </eClassifiers>
