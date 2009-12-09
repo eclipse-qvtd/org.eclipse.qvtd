@@ -90,7 +90,7 @@ public class EssentialOCLMappingMetaData extends EMOFMappingMetaData
 					case EssentialOCLPackage.SET_TYPE: return getAdapter(oclFactoryInstance.createSetType());
 //					case EssentialoclPackage.ST: return getAdapter(oclFactoryInstance.createStateExp());
 					case EssentialOCLPackage.STRING_LITERAL_EXP: return getAdapter(oclFactoryInstance.createStringLiteralExp());
-//					case EssentialOCLPackage.TEMPLATE_PARAMETER_TYPE: return getAdapter(oclFactoryInstance.createTemplateParameterType()); // FIXME Waiting for Bug 290654
+					case EssentialOCLPackage.TEMPLATE_PARAMETER_TYPE: return getAdapter(oclFactoryInstance.createTemplateParameterType());
 					case EssentialOCLPackage.TUPLE_LITERAL_EXP: return getAdapter(oclFactoryInstance.createTupleLiteralExp());
 					case EssentialOCLPackage.TUPLE_LITERAL_PART: return getAdapter(oclFactoryInstance.createTupleLiteralPart());
 					case EssentialOCLPackage.TUPLE_TYPE: return getAdapter(oclFactoryInstance.createTupleType());
