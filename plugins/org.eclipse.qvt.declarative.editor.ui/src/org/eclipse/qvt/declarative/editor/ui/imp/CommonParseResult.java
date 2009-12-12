@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseResult.java,v 1.1 2009/08/20 20:14:22 ewillink Exp $
+ * $Id: CommonParseResult.java,v 1.2 2009/12/12 15:34:15 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -111,7 +111,6 @@ public class CommonParseResult implements ICommonParseResult
 			precedingAdjuncts = new IToken[lastTokIdx+1][];
 			nextPrecedingAdjunct = new int[lastTokIdx+1];
 			{
-				stream.setStreamLength();
 				for (int i = 0; i < precedingAdjuncts.length; i++) {
 					precedingAdjuncts[i] = stream.getPrecedingAdjuncts(i);
 				}
@@ -310,7 +309,7 @@ public class CommonParseResult implements ICommonParseResult
         int regionLength= region.getLength();
     	int regionEnd = regionOffset + regionLength - 1;
 		PrsStream stream =  getParser();
-		if (stream != null)
+		if ((stream != null) && (stream.getStreamLength() > 0))
 			return new TokenIterator(stream, regionEnd, regionOffset);
 		else
 			return new NullTokenIterator();
