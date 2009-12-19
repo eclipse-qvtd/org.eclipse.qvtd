@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: RealizedVariableImpl.java,v 1.2 2008/12/19 14:30:53 ewillink Exp $
+ * $Id: RealizedVariableImpl.java,v 1.3 2009/12/19 13:37:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTCore.impl;
 
@@ -62,7 +62,7 @@ public class RealizedVariableImpl extends VariableImpl implements RealizedVariab
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-		if (v instanceof QVTCoreVisitor)
+		if (v instanceof QVTCoreVisitor<?>)
 			return ((QVTCoreVisitor<T>) v).visitRealizedVariable(this);
 		else
 			return ((Visitor<T, EClassifier, ?, ?, ?, EParameter, ?, ?, ?, ?>)v).visitVariable(this);
