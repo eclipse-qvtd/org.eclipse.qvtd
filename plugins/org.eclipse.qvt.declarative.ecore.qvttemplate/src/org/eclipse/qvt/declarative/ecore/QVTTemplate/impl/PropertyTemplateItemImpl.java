@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: PropertyTemplateItemImpl.java,v 1.3 2009/02/17 21:44:20 ewillink Exp $
+ * $Id: PropertyTemplateItemImpl.java,v 1.4 2009/12/19 13:38:25 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.impl;
 
@@ -262,7 +262,7 @@ public class PropertyTemplateItemImpl extends EModelElementImpl implements Prope
 	 */
 	@SuppressWarnings("unchecked")
     public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-		if (v instanceof QVTTemplateVisitor)
+		if (v instanceof QVTTemplateVisitor<?>)
 			return ((QVTTemplateVisitor<T>) v).visitPropertyTemplateItem(this);
 		throw new UnsupportedOperationException();
 	}

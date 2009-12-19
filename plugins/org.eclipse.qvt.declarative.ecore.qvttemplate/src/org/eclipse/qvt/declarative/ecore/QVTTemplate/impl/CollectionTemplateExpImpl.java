@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CollectionTemplateExpImpl.java,v 1.3 2009/05/13 20:43:54 ewillink Exp $
+ * $Id: CollectionTemplateExpImpl.java,v 1.4 2009/12/19 13:38:25 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTTemplate.impl;
 
@@ -309,7 +309,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@SuppressWarnings("unchecked")
 	@Override
     public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-		if (v instanceof QVTTemplateVisitor)
+		if (v instanceof QVTTemplateVisitor<?>)
 			return ((QVTTemplateVisitor<T>) v).visitCollectionTemplateExp(this);
 		return super.accept(v);
 	}
