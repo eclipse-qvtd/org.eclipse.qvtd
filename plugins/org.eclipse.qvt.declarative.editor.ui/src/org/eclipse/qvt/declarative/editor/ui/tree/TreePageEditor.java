@@ -415,7 +415,7 @@ public class TreePageEditor extends EditorPart implements
 	}
 
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Object getAdapter(Class key) {
 		if (key.equals(IPageManager.class))

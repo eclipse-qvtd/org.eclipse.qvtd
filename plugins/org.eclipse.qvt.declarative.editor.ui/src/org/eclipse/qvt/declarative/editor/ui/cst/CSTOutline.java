@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CSTOutline.java,v 1.1 2008/08/24 19:03:19 ewillink Exp $
+ * $Id: CSTOutline.java,v 1.2 2009/12/19 13:42:07 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.cst;
 
@@ -169,7 +169,7 @@ public class CSTOutline extends PageBookView implements ISelectionProvider,
      * Method declared on IAdaptable.
      */
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public Object getAdapter(Class key) {
         if (key == IContributedContentsView.class) {
 			return new IContributedContentsView() {

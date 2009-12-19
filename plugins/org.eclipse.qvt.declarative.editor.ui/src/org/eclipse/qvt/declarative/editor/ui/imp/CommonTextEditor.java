@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonTextEditor.java,v 1.11 2009/08/20 20:21:03 ewillink Exp $
+ * $Id: CommonTextEditor.java,v 1.12 2009/12/19 13:42:07 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -249,7 +249,7 @@ public class CommonTextEditor extends UniversalEditor implements ITextEditorWith
 	    return getEditorSite().getActionBarContributor();
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Object getAdapter(Class key) {
 		if (key.equals(IPropertySheetPage.class)) {
