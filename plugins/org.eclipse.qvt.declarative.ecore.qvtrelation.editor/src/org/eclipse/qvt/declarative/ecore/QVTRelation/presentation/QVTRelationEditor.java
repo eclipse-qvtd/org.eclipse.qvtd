@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTRelationEditor.java,v 1.1 2008/07/23 09:47:57 qglineur Exp $
+ * $Id: QVTRelationEditor.java,v 1.2 2009/12/19 13:37:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTRelation.presentation;
 
@@ -1328,7 +1328,7 @@ public class QVTRelationEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Object getAdapter(Class key) {
 		if (key.equals(IContentOutlinePage.class)) {
