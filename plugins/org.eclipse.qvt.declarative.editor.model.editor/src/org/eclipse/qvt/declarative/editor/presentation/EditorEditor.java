@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EditorEditor.java,v 1.3 2008/10/25 17:00:45 ewillink Exp $
+ * $Id: EditorEditor.java,v 1.4 2009/12/19 13:41:12 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.presentation;
 
@@ -1286,7 +1286,7 @@ public class EditorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Object getAdapter(Class key) {
 		if (key.equals(IContentOutlinePage.class)) {
