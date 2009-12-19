@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTBaseEditor.java,v 1.1 2008/07/23 09:42:06 qglineur Exp $
+ * $Id: QVTBaseEditor.java,v 1.2 2009/12/19 13:33:21 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.QVTBase.presentation;
 
@@ -1322,7 +1322,7 @@ public class QVTBaseEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Object getAdapter(Class key) {
 		if (key.equals(IContentOutlinePage.class)) {
