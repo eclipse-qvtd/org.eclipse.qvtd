@@ -10,7 +10,7 @@
    </description>
 
    <copyright url="http://www.eclipse.org/legal/epl-v10.html">
-      Copyright (c) 2007-2008 E.D.Willink, Obeo and others.
+      Copyright (c) 2007-2009 E.D.Willink, Obeo and others.
 All rights reserved.   This program and the accompanying materials
 are made available under the terms of the Eclipse Public License
 v1.0
@@ -56,8 +56,8 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.emf.workspace.ui"/>
       <import plugin="org.eclipse.jdt.core"/>
       <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.imp.runtime"/>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.ocl"/>
       <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="org.eclipse.qvt.declarative.ecore.qvtbase"/>
       <import plugin="org.eclipse.qvt.declarative.modelregistry"/>
@@ -65,6 +65,8 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.qvt.declarative.ecore.qvtbase.edit"/>
+      <import plugin="org.eclipse.ocl.ecore.edit"/>
+      <import plugin="org.eclipse.ocl.edit"/>
    </requires>
 
    <plugin
