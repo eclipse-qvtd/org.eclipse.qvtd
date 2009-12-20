@@ -57,7 +57,9 @@ public class EMOFConsistencyTest extends AbstractEMOFConsistencyTest
 		changeOfSize(differences, helper, EcorePackage.Literals.ECLASSIFIER, EcorePackage.Literals.ECLASS__EOPERATIONS);
 		changeOfSize(differences, helper, EcorePackage.Literals.ECLASSIFIER, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES);
 		changeOfSize(differences, helper, EcorePackage.Literals.EMODEL_ELEMENT, EcorePackage.Literals.ECLASS__EOPERATIONS);
+		changeOfSize(differences, helper, EcorePackage.Literals.EMODEL_ELEMENT, EcorePackage.Literals.ECLASS__ESUPER_TYPES);
 		changeOfSize(differences, helper, EcorePackage.Literals.EOBJECT, EcorePackage.Literals.ECLASS__EOPERATIONS);
+		changeOfSize(differences, helper, EcorePackage.Literals.EOPERATION, EcorePackage.Literals.ECLASS__EOPERATIONS);
 		changeOfSize(differences, helper, EcorePackage.Literals.EOPERATION, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES);
 		changeOfSize(differences, helper, EcorePackage.Literals.EOPERATION, EcorePackage.Literals.ECLASS__ESUPER_TYPES);
 		changeOfSize(differences, helper, EcorePackage.Literals.EPACKAGE, EcorePackage.Literals.ECLASS__EOPERATIONS);
