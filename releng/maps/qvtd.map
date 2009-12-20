@@ -16,7 +16,7 @@ feature@org.eclipse.qvt.declarative.ecore.qvtcore=HEAD,:pserver:anonymous@dev.ec
 feature@org.eclipse.qvt.declarative.ecore.qvttemplate=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvttemplate-feature
 feature@org.eclipse.qvt.declarative.ecore.qvtrelation=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvtrelation-feature
 feature@org.eclipse.qvt.declarative.modelregistry=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.modelregistry-feature
-feature@org.eclipse.qvt.declarative.ecore.redistribution=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.redistribution-feature
+!*** feature@org.eclipse.qvt.declarative.ecore.redistribution=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.redistribution-feature
 !*** feature@org.eclipse.qvt.declarative.editor.redistribution=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.editor.redistribution-feature
 
 !*** QVT plug-ins ***************************************************************************
@@ -76,5 +76,10 @@ plugin@org.eclipse.qvt.declarative.test.emof.qvtrelation=HEAD,:pserver:anonymous
 plugin@org.eclipse.qvt.declarative.test.emof.qvttemplate=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.qvttemplate
 plugin@org.eclipse.qvt.declarative.test.testqvtbase=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.testqvtbase
 plugin@org.eclipse.qvt.declarative.test.parser=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.parser
+plugin@org.eclipse.qvt.declarative.test.parser.qvtcore=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.parser.qvtcore
+plugin@org.eclipse.qvt.declarative.test.parser.qvtrelation=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.parser.qvtrelation
+!*** plugin@org.eclipse.qvt.declarative.test.editor=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.editor
+!*** plugin@org.eclipse.qvt.declarative.test.editor.qvtcore=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.editor.qvtcore
+!*** plugin@org.eclipse.qvt.declarative.test.editor.qvtrelation=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.editor.qvtrelation
 
 !*** QVT Docs ***************************************************************************
