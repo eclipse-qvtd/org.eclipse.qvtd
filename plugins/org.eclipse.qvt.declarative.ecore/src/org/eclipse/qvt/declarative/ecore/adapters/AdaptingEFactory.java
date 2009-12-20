@@ -12,9 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: AdaptingEFactory.java,v 1.2 2008/08/08 17:00:10 ewillink Exp $
+ * $Id: AdaptingEFactory.java,v 1.3 2009/12/20 08:30:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.adapters;
+
+import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -25,6 +27,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -104,6 +107,10 @@ public abstract class AdaptingEFactory implements EFactory
 
 	public Object eGet(EStructuralFeature feature, boolean resolve) {
 		return adaptedEFactory.eGet(feature, resolve);
+	}
+
+	public Object eInvoke(EOperation operation, EList<?> arguments) throws InvocationTargetException {
+		return adaptedEFactory.eInvoke(operation, arguments);
 	}
 
 	public boolean eIsProxy() {

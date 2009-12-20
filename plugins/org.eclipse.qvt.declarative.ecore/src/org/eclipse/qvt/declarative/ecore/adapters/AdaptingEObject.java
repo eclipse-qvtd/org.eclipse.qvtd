@@ -12,10 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: AdaptingEObject.java,v 1.4 2009/02/17 21:31:35 ewillink Exp $
+ * $Id: AdaptingEObject.java,v 1.5 2009/12/20 08:30:29 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.adapters;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -27,6 +28,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -128,8 +130,14 @@ public class AdaptingEObject implements Adapter, Notifier, InternalEObject
 		return target.eDeliver();
 	}
 
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		return baseFeatureID;
+		return ((InternalEObject)target).eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	public Resource.Internal eDirectResource() {
@@ -177,6 +185,14 @@ public class AdaptingEObject implements Adapter, Notifier, InternalEObject
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, Class<?> baseClass, NotificationChain notifications) {
 		return notifications;
+	}
+
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		return ((InternalEObject)target).eInvoke(operationID, arguments);
+	}
+
+	public Object eInvoke(EOperation operation, EList<?> arguments) throws InvocationTargetException {
+		return ((InternalEObject)target).eInvoke(operation, arguments);
 	}
 
 	public boolean eIsProxy() {
