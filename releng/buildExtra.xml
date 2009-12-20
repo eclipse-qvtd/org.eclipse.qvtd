@@ -1,0 +1,119 @@
+<project default="run" name="Project's .releng buildExtra.xml">
+
+	<target name="init">
+	</target>
+
+	<target name="run">
+		<!-- TODO: write code that's hooked into o.e.d.commonbuilder.releng's build.xml to do extra configs (eg., for inserting 3rd party libs into plugins) 
+		-->
+	</target>
+
+	<target name="getDependencies">
+		<echo message="getDependencies!!!" />
+	</target>
+
+	<target name="preFetch">
+		<echo message="[[[Unzipping LPG]]]" />
+		<unzip dest="${buildDirectory}/LPG" src="${downloadsDir}/${tools.orbit.file}">
+			<patternset>
+				<include name="**/net.sourceforge.lpg.lpgjavaruntime_${LPGRuntimeVersion}*.jar"/>
+				<include name="**/net.sourceforge.lpg.lpgjavaruntime.source_${LPGRuntimeVersion}*.jar"/>
+			</patternset>
+		</unzip>
+	</target>
+
+	<target name="postFetch">
+		<echo message="postFetch!!!" />
+	</target>
+		<target name="preGenerate">
+			<echo message="preGenerate!!!" />
+		</target>
+		<target name="postGenerate">
+			<echo message="postGenerate!!!" />
+		</target>
+		<target name="preAssemble">
+			<echo message="preAssemble!!!" />
+		</target>
+		<target name="postAssemble">
+			<echo message="[[[Add the LPG bundles into Master zip]]]" />
+			<zip destfile="${buildDirectory}/${buildLabel}/${masterZip}" update="true">
+				<zipfileset dir="${buildDirectory}/LPG" 
+							includes="**/net.sourceforge.lpg.lpgjavaruntime*_${LPGRuntimeVersion}.*.jar"
+				/>
+			</zip>
+		</target>
+		<target name="prePackage">
+			<echo message="prePackage!!!" />
+		</target>
+		<target name="postPackage">
+			<echo message="postPackage!!!" />
+		</target>
+		<target name="preProcess">
+			<echo message="preProcess!!!" />
+		</target>
+	<target name="postProcess">
+		<echo message="postProcess!!!" />
+	</target>
+	<target name="postBuild">
+		<echo message="postBuild!!!" />
+	</target>
+
+	<target name="extraPackaging">
+		<!-- Add the LPG bundles into SDK zip -->
+		<zip destfile="${buildDirectory}/${buildLabel}/${SDKZip}" update="true">
+			<zipfileset dir="${buildDirectory}/LPG" 
+						includes="**/net.sourceforge.lpg.lpgjavaruntime*_${LPGRuntimeVersion}.*.jar"
+			/>
+			<zipfileset dir="${buildDirectory}" 
+						includes="epl-v10.html, notice.html" prefix="eclipse"
+			/>
+		</zip>
+
+		<!-- build runtime from SDK -->
+		<zip destfile="${buildDirectory}/${buildLabel}/${zipPrefix}-runtime${incubation}-${buildAlias}.zip" update="true">
+			<zipfileset src="${buildDirectory}/${buildLabel}/${SDKZip}"
+			            dirmode="775"
+			            filemode="664"
+			            excludes="**/${domainNamespace}.*.examples*, **/${domainNamespace}.*.examples*/**, **/${domainNamespace}.*.samples*, **/${domainNamespace}.*.samples*/**, **/${domainNamespace}.*.sdk*, **/${domainNamespace}.*.sdk*/**, **/${domainNamespace}.*.all*, **/${domainNamespace}.*.all*/**, **/${domainNamespace}.*.doc*, **/${domainNamespace}.*.doc*/**, **/${domainNamespace}.*.source*, **/${domainNamespace}.*.source*/**, **/*src.zip"
+			>
+				<include name="**/${domainNamespace}.qvt*/" />
+				<include name="**/${domainNamespace}.qvt*/**" />
+				<include name="**/net.sourceforge.lpg.lpgjavaruntime_${LPGRuntimeVersion}*" />
+				<include name="**/eclipse/epl-v10.html" />
+				<include name="**/eclipse/notice.html" />
+			</zipfileset>
+		</zip>
+
+		<!-- standalone: extract the jars we need into ./lib/, then the readme into ./, then zip the whole thing and clean up -->
+		<property name="allSDKZipUnpackTemp" value="${buildDirectory}/allSDKZipUnpackTemp" />
+		<mkdir dir="${allSDKZipUnpackTemp}/lib" />
+		<copy todir="${allSDKZipUnpackTemp}/lib" preservelastmodified="true">
+			<zipfileset src="${buildDirectory}/${buildLabel}/${SDKZip}">
+				<patternset>
+					<include name="**/plugins/org.eclipse.qvtd_*.jar" />
+					<!--include name="**/plugins/org.eclipse.ocl.uml_*.jar" />
+					<include name="**/plugins/org.eclipse.ocl_*.jar" />
+					<include name="**/plugins/net.sourceforge.lpg.lpgjavaruntime_*.jar" /-->
+				</patternset>
+			</zipfileset>
+			<mapper type="flatten" />
+		</copy>
+		<copy todir="${allSDKZipUnpackTemp}" preservelastmodified="true">
+	        <zipfileset src="${buildDirectory}/${buildLabel}/${SDKZip}">
+	            <patternset>
+	                <include name="**/eclipse/epl-v10.html" />
+	                <include name="**/eclipse/notice.html" />
+	            </patternset>
+	        </zipfileset>
+			<fileset dir="${relengBuilderDir}/builder/extras">
+				<include name="readme_standalone.html" />
+			</fileset>
+			<mapper type="flatten" />
+		</copy>
+		<zip destfile="${buildDirectory}/${buildLabel}/${zipPrefix}-standalone${incubation}-${buildAlias}.zip" update="true">
+			<fileset dir="${allSDKZipUnpackTemp}" />
+		</zip>
+		<delete dir="${allSDKZipUnpackTemp}" />
+		
+	</target>
+</project>
