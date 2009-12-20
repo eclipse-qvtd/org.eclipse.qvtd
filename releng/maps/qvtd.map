@@ -20,8 +20,6 @@ feature@org.eclipse.qvt.declarative.ecore.redistribution=HEAD,:pserver:anonymous
 !*** feature@org.eclipse.qvt.declarative.editor.redistribution=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.editor.redistribution-feature
 
 !*** QVT plug-ins ***************************************************************************
-plugin@org.eclipse.ocl.ecore.edit=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.ocl.ecore.edit
-plugin@org.eclipse.ocl.edit=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.ocl.edit
 plugin@org.eclipse.qvt=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt
 plugin@org.eclipse.qvt.declarative.ecore=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore
 plugin@org.eclipse.qvt.declarative.ecore.qvtbase=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtbase
