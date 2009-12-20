@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AdaptingEObject.java,v 1.5 2009/12/20 08:30:29 ewillink Exp $
+ * $Id: AdaptingEObject.java,v 1.6 2009/12/20 08:41:23 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.adapters;
 
@@ -130,10 +130,8 @@ public class AdaptingEObject implements Adapter, Notifier, InternalEObject
 		return target.eDeliver();
 	}
 
-	@Override
 	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		// TODO Auto-generated method stub
-		return 0;
+		return ((InternalEObject)target).eDerivedOperationID(baseOperationID, baseClass);
 	}
 
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
