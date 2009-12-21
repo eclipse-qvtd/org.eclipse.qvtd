@@ -13,13 +13,13 @@
 	</target>
 
 	<target name="preFetch">
-		<echo message="[[[Unzipping LPG]]]" />
-		<unzip dest="${buildDirectory}/LPG" src="${downloadsDir}/${tools.orbit.file}">
+		<echo message="[[[Not unzipping LPG]]]" />
+		<!--unzip dest="${buildDirectory}/LPG" src="${downloadsDir}/${tools.orbit.file}">
 			<patternset>
 				<include name="**/net.sourceforge.lpg.lpgjavaruntime_${LPGRuntimeVersion}*.jar"/>
 				<include name="**/net.sourceforge.lpg.lpgjavaruntime.source_${LPGRuntimeVersion}*.jar"/>
 			</patternset>
-		</unzip>
+		</unzip-->
 	</target>
 
 	<target name="postFetch">
