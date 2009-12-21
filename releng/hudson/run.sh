@@ -75,10 +75,10 @@ ln -s ${cvsProjectBaseDir}/org.eclipse.releng.basebuilder ${writableBuildRoot}/
 echo ln -s ${cvsProjectBaseDir}/org.eclipse.dash.common.releng ${writableBuildRoot}/
 ln -s ${cvsProjectBaseDir}/org.eclipse.dash.common.releng ${writableBuildRoot}/
 
-#symlink local copy of org.eclipse.gef.releng instead of fetching from CVS (so tweaks for local Hudson are preserved)
-if [[ -d ${cvsProjectBaseDir}/org.eclipse.ocl.releng ]]; then
-	echo ln -s ${cvsProjectBaseDir}/org.eclipse.ocl.releng ${writableBuildRoot}/
-	ln -s ${cvsProjectBaseDir}/org.eclipse.ocl.releng ${writableBuildRoot}/
+#symlink local copy of org.eclipse.qvt.declarative/releng instead of fetching from CVS (so tweaks for local Hudson are preserved)
+if [[ -d ${cvsProjectBaseDir}/org.eclipse.qvt.declarative/releng ]]; then
+	echo ln -s ${cvsProjectBaseDir}/org.eclipse.qvt.declarative/releng ${writableBuildRoot}/
+	ln -s ${cvsProjectBaseDir}/org.eclipse.qvt.declarative/releng ${writableBuildRoot}/
 fi
 
 # symlink 3rdPartyJars (reuse existing content on build.eclipse.org for ant-contrib.jar, etc.)
