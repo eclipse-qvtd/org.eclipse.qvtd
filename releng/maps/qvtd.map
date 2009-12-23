@@ -64,6 +64,7 @@ plugin@org.eclipse.qvt.declarative.examples=HEAD,:pserver:anonymous@dev.eclipse.
 
 !*** QVT tests ******************************************************************************
 feature@org.eclipse.qvt.declarative.test=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.test-feature
+plugin@org.eclipse.qvt.declarative.test.all=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.all
 plugin@org.eclipse.qvt.declarative.test.modelregistry=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.modelregistry
 plugin@org.eclipse.qvt.declarative.test.emof=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof
 plugin@org.eclipse.qvt.declarative.test.emof.all=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.all
@@ -82,3 +83,13 @@ plugin@org.eclipse.qvt.declarative.test.editor.qvtcore=HEAD,:pserver:anonymous@d
 plugin@org.eclipse.qvt.declarative.test.editor.qvtrelation=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.editor.qvtrelation
 
 !*** QVT Docs ***************************************************************************
+
+
+!*** QVTd Examples plugins
+plugin@org.eclipse.qvt.declarative.examples.ocl.empty=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.ocl.empty
+plugin@org.eclipse.qvt.declarative.examples.ocl.royalandloyal=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.ocl.royalandloyal
+plugin@org.eclipse.qvt.declarative.examples.qvtcore.empty=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtcore.empty
+!*** plugin@org.eclipse.qvt.declarative.examples.qvtcore.uml2rdbms=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtcore.uml2rdbms
+plugin@org.eclipse.qvt.declarative.examples.qvtrelation.empty=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtrelation.empty
+plugin@org.eclipse.qvt.declarative.examples.qvtrelation.modelmorf=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtrelation.modelmorf
+plugin@org.eclipse.qvt.declarative.examples.qvtrelation.reltocore=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtrelation.reltocore
