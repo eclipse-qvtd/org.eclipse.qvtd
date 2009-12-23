@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EcoreUtils.java,v 1.7 2009/12/19 13:32:52 ewillink Exp $
+ * $Id: EcoreUtils.java,v 1.8 2009/12/23 14:23:17 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.utils;
 
@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 public class EcoreUtils
 {	
+	@SuppressWarnings("unchecked")
 	public static <E extends EObject> E copy(E newObject) {
 		return (E) EcoreUtil.copy(newObject);
 	}
