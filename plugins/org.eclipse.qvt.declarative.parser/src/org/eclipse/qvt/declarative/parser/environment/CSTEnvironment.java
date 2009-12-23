@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.ecore.EcoreEnvironment;
+import org.eclipse.qvt.declarative.ecore.utils.CSTFormattingHelper;
 import org.eclipse.qvt.declarative.parser.unresolved.UnresolvedPackage;
 
 public abstract class CSTEnvironment<E extends ICSTEnvironment> extends EcoreEnvironment implements ICSTEnvironment

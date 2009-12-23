@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ICSTNodeEnvironment.java,v 1.2 2008/10/24 15:06:37 ewillink Exp $
+ * $Id: ICSTNodeEnvironment.java,v 1.3 2009/12/23 14:53:22 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.environment;
 
@@ -29,6 +29,7 @@ import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.ecore.InvalidLiteralExp;
 import org.eclipse.ocl.ecore.OCLExpression;
+import org.eclipse.qvt.declarative.ecore.utils.CSTFormattingHelper;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
 
 public interface ICSTNodeEnvironment extends ICSTEnvironment

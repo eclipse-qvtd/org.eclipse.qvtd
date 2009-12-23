@@ -37,6 +37,7 @@ import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.ocl.utilities.TypedElement;
 import org.eclipse.ocl.utilities.UMLReflection;
+import org.eclipse.qvt.declarative.ecore.utils.CSTFormattingHelper;
 import org.eclipse.qvt.declarative.modelregistry.environment.AbstractModelResolver;
 import org.eclipse.qvt.declarative.parser.plugin.QVTParserPlugin;
 public abstract class CSTChildEnvironment<E extends ICSTNodeEnvironment, P extends ICSTNodeEnvironment, AST extends Notifier, CST extends CSTNode> extends CSTNodeEnvironment<E, AST, CST>
