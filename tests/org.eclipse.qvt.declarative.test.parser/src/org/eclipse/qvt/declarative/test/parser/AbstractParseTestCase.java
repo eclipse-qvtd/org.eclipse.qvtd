@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractParseTestCase.java,v 1.8 2009/09/02 07:24:50 ewillink Exp $
+ * $Id: AbstractParseTestCase.java,v 1.9 2009/12/23 14:27:42 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.parser;
 
@@ -52,6 +52,7 @@ import org.eclipse.qvt.declarative.parser.utils.ProblemLog.Problem;
 import org.eclipse.qvt.declarative.test.emof.AbstractTestCase;
 import org.eclipse.qvt.declarative.test.emof.tools.EcoreEquivalenceHelper;
 import org.eclipse.qvt.declarative.test.emof.tools.EquivalenceHelper;
+import org.eclipse.qvt.declarative.test.emof.utils.TestFormattingHelper;
 
 public abstract class AbstractParseTestCase extends AbstractTestCase
 {	
