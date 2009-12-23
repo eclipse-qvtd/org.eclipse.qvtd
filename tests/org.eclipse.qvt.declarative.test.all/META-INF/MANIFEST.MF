@@ -13,3 +13,4 @@ Require-Bundle: org.eclipse.qvt.declarative.test.editor.qvtcore,
  org.eclipse.qvt.declarative.test.emof.all;visibility:=reexport
 Eclipse-LazyStart: false
 Export-Package: org.eclipse.qvt.declarative.test.all
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
