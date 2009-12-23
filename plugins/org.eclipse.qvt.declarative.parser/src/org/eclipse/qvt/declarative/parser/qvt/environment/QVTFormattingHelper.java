@@ -17,7 +17,7 @@ import org.eclipse.ocl.ecore.CollectionType;
 import org.eclipse.ocl.ecore.PrimitiveType;
 import org.eclipse.ocl.ecore.TypeType;
 import org.eclipse.ocl.expressions.OCLExpression;
-import org.eclipse.qvt.declarative.parser.environment.CSTFormattingHelper;
+import org.eclipse.qvt.declarative.ecore.utils.CSTFormattingHelper;
 
 public class QVTFormattingHelper extends CSTFormattingHelper
 {
