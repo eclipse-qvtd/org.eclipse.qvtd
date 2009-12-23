@@ -43,14 +43,14 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.TypedModel;
 import org.eclipse.qvt.declarative.parser.environment.ProblemHandlerDiagnosticChain;
 import org.eclipse.qvt.declarative.parser.utils.ProblemLog;
 import org.eclipse.qvt.declarative.parser.utils.ProblemLog.Problem;
-import org.eclipse.qvt.declarative.test.TestQVTBase.TestExpression;
-import org.eclipse.qvt.declarative.test.TestQVTBase.TestQVTBaseFactory;
 import org.eclipse.qvt.declarative.test.TestQVTBase.TestDomain;
+import org.eclipse.qvt.declarative.test.TestQVTBase.TestExpression;
 import org.eclipse.qvt.declarative.test.TestQVTBase.TestPattern;
+import org.eclipse.qvt.declarative.test.TestQVTBase.TestQVTBaseFactory;
 import org.eclipse.qvt.declarative.test.TestQVTBase.TestRule;
 import org.eclipse.qvt.declarative.test.TestQVTBase.TestTransformation;
 import org.eclipse.qvt.declarative.test.emof.essentialocl.AbstractEssentialOCLValidationTest;
-import org.eclipse.qvt.declarative.test.parser.TestFormattingHelper;
+import org.eclipse.qvt.declarative.test.emof.utils.TestFormattingHelper;
 
 public abstract class AbstractQVTBaseValidationTest extends AbstractEssentialOCLValidationTest
 {
