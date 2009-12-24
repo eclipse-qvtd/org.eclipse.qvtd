@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.qvt.declarative.test"
       label="%featureName"
-      version="0.7.0.qualifier"
+      version="0.8.0.qualifier"
       provider-name="%providerName">
 
    <description url="http://www.example.com/description">
@@ -63,6 +63,9 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.ocl"/>
       <import plugin="org.eclipse.qvt.declarative.ecore.qvtbase"/>
+      <import plugin="org.junit"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.qvt.declarative.editor.ui"/>
    </requires>
 
    <plugin
@@ -145,18 +148,6 @@ http://www.eclipse.org/legal/epl-v10.html
 
    <plugin
          id="org.eclipse.qvt.declarative.test.parser"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.qvt.declarative.test.parser.qvtcore"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.qvt.declarative.test.parser.qvtrelation"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
