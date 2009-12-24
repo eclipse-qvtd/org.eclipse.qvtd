@@ -41,6 +41,7 @@ public class TestFileHandles extends ModelRegistryTestCase
 	public void testModelNameAccessor() throws IOException {
 		ModelFileResolver modelResolver = getModelFileResolver("testProject", "phantomFolder");
 		URI uri = modelResolver.getURI("ambiguousAccessor");
+		assertNotNull("Non-null uri expected for model:/name/accessor", uri);
 		assertEquals("Incorrect URI", "model:/name/accessor", uri.toString());
 		return;
 	}
@@ -48,6 +49,7 @@ public class TestFileHandles extends ModelRegistryTestCase
 	public void testURIAccessor() throws IOException, URISyntaxException {
 		ModelFileResolver modelResolver = getModelFileResolver("testProject", "phantomFolder");
 		URI uri = modelResolver.getURI(new java.net.URI("ambiguousAccessor"));
+		assertNotNull("Non-null uri expected for uri:/accessor", uri);
 		assertEquals("Incorrect URI", "uri:/accessor", uri.toString());
 		return;
 	}

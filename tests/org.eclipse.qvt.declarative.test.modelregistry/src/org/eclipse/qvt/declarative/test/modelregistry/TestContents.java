@@ -29,7 +29,7 @@ public class TestContents extends ModelRegistryTestCase
 	public void testProjectRelativeEmofAccessor() throws Exception {
 		ModelFileResolver modelResolver = getModelFileResolver("testProject", "phantomFolder");
 		URI uri = modelResolver.getURI("emofRelativeFileAccessor");
-		assertNotNull("Non-null uri expected", uri);
+		assertNotNull("Non-null uri expected for emofRelativeFileAccessor", uri);
 		Resource resource = modelResolver.getResource(uri, true);
 		assertNotNull("Non-null resource expected", resource);
 		List<EObject> contents = resource.getContents();
