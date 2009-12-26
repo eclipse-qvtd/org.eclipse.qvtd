@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: EcoreUtils.java,v 1.8 2009/12/23 14:23:17 ewillink Exp $
+ * $Id: EcoreUtils.java,v 1.9 2009/12/26 14:27:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.ecore.utils;
 
@@ -38,16 +38,15 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 public class EcoreUtils
 {	
-	@SuppressWarnings("unchecked")
 	public static <E extends EObject> E copy(E newObject) {
 		return (E) EcoreUtil.copy(newObject);
 	}
 
 	/**
 	 * Convert the map return from EcoreUtil.UnresolvedProxyCrossReferencer.find(xx)
-	 * int a textual diagnosis.
+	 * into a textual diagnosis.
 	 * <br>
-	 * Returns null if there are no nresolved URIs.
+	 * Returns null if there are no unresolved URIs.
 	 * <br>
 	 * Returns a String containing a title line containing the contextURI and
 	 * subsequent lines identifying each distinct unresolved URI. 
