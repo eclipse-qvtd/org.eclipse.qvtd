@@ -24,6 +24,7 @@ import junit.framework.TestCase;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -101,7 +102,8 @@ public abstract class ModelRegistryTestCase extends TestCase
 		}	
 		if (projectURL == null)
 			return null;
-		String projectFileName = projectURL.toString().substring(projectURL.getProtocol().length()+2);	// Lose file:/
+		URI uri = URI.createURI(projectURL.toString());
+		String projectFileName = uri.toFileString();
 		File projectFile = new File(projectFileName);
 		return new ProjectHandle(projectFile, null);
 	}
