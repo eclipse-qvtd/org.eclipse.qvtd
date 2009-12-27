@@ -13,8 +13,11 @@ package org.eclipse.qvt.declarative.test.modelregistry;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -49,6 +52,18 @@ public class TestFileHandles extends ModelRegistryTestCase
 	}
 	
 	public void testURIAccessor() throws IOException, URISyntaxException {
+		URL projectURL = ModelRegistryTestCase.class.getResource("testProject");
+		System.out.println("projectURL = " + projectURL);
+		if ((projectURL != null) && Platform.isRunning()) {
+			projectURL = FileLocator.resolve(projectURL);
+			System.out.println("projectURL = " + projectURL);
+		}	
+		String projectFileName = projectURL.toString().substring(projectURL.getProtocol().length()+2);	// Lose file:/
+		System.out.println("projectFileName = " + projectFileName);
+		File projectFile = new File(projectFileName);
+		System.out.println("projectFile = " + projectFile);
+		ProjectHandle projectHandle = new ProjectHandle(projectFile, null);
+		System.out.println("projectHandle = " + projectHandle);
 		ModelFileResolver modelResolver = getModelFileResolver("testProject", "phantomFolder");
 		System.out.println("modelResolver = " + modelResolver);
 		ProjectRegistry projectRegistry = modelResolver.getProjectRegistry();
