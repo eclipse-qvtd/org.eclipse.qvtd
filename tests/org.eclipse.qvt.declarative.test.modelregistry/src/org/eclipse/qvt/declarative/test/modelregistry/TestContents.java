@@ -46,7 +46,11 @@ public class TestContents extends ModelRegistryTestCase
 		assertEquals("Property upper", -1, eStructuralFeature.getUpperBound());
 		return;
 	}
-	
+
+	/*
+	 * This test behaves differently according to whether the EMOF to Ecore mapping
+	 * is installed. It is therefore unsuitable as a model registry test.
+	 * FIXME Move this to somewhere dependent on EMOF and Model Registry
 	public void testProjectRelativeXmlEmofAccessor() throws Exception {
 		ModelFileResolver modelResolver = getModelFileResolver("testProject", "phantomFolder");
 		URI uri = modelResolver.getURI("xmlEmofRelativeFileAccessor");
@@ -66,5 +70,5 @@ public class TestContents extends ModelRegistryTestCase
 		assertEquals("Property lower", 1, eStructuralFeature.getLowerBound());
 		assertEquals("Property upper", -1, eStructuralFeature.getUpperBound());
 		return;
-	}
+	} */
 }
