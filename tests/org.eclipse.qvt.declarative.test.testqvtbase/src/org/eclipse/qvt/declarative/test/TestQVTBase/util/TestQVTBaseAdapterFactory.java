@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TestQVTBaseAdapterFactory.java,v 1.2 2008/12/31 18:14:30 ewillink Exp $
+ * $Id: TestQVTBaseAdapterFactory.java,v 1.3 2009/12/27 09:05:11 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.TestQVTBase.util;
 
@@ -149,8 +149,8 @@ public class TestQVTBaseAdapterFactory extends AdapterFactoryImpl {
 				return createOCLExpressionAdapter();
 			}
 			@Override
-			public Adapter caseOCLExpression_1(org.eclipse.ocl.ecore.OCLExpression object) {
-				return createOCLExpression_1Adapter();
+			public Adapter caseEcore_OCLExpression(org.eclipse.ocl.ecore.OCLExpression object) {
+				return createEcore_OCLExpressionAdapter();
 			}
 			@Override
 			public Adapter casePattern(Pattern object) {
@@ -388,7 +388,7 @@ public class TestQVTBaseAdapterFactory extends AdapterFactoryImpl {
 	 * @see org.eclipse.ocl.ecore.OCLExpression
 	 * @generated
 	 */
-	public Adapter createOCLExpression_1Adapter() {
+	public Adapter createEcore_OCLExpressionAdapter() {
 		return null;
 	}
 

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TestDomain.java,v 1.2 2008/12/31 18:14:29 ewillink Exp $
+ * $Id: TestDomain.java,v 1.3 2009/12/27 09:05:11 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.TestQVTBase;
 
@@ -35,7 +35,7 @@ import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
  * </p>
  *
  * @see org.eclipse.qvt.declarative.test.TestQVTBase.TestQVTBasePackage#getTestDomain()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='DummyConstraint'"
  * @generated
  */
 public interface TestDomain extends Domain {

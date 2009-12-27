@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TestQVTBaseSwitch.java,v 1.2 2008/12/31 18:14:29 ewillink Exp $
+ * $Id: TestQVTBaseSwitch.java,v 1.3 2009/12/27 09:05:11 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.TestQVTBase.util;
 
@@ -123,7 +123,7 @@ public class TestQVTBaseSwitch<T> {
 			case TestQVTBasePackage.TEST_EXPRESSION: {
 				TestExpression testExpression = (TestExpression)theEObject;
 				T result = caseTestExpression(testExpression);
-				if (result == null) result = caseOCLExpression_1(testExpression);
+				if (result == null) result = caseEcore_OCLExpression(testExpression);
 				if (result == null) result = caseETypedElement(testExpression);
 				if (result == null) result = caseOCLExpression(testExpression);
 				if (result == null) result = caseENamedElement(testExpression);
@@ -373,7 +373,7 @@ public class TestQVTBaseSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOCLExpression_1(org.eclipse.ocl.ecore.OCLExpression object) {
+	public T caseEcore_OCLExpression(org.eclipse.ocl.ecore.OCLExpression object) {
 		return null;
 	}
 
