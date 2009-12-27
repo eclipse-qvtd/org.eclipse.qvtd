@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.qvt.declarative.modelregistry.model.ProjectRegistry;
 import org.eclipse.qvt.declarative.modelregistry.standalone.ModelFileResolver;
 import org.eclipse.qvt.declarative.modelregistry.standalone.ProjectHandle;
 
@@ -48,7 +50,20 @@ public class TestFileHandles extends ModelRegistryTestCase
 	
 	public void testURIAccessor() throws IOException, URISyntaxException {
 		ModelFileResolver modelResolver = getModelFileResolver("testProject", "phantomFolder");
-		URI uri = modelResolver.getURI(new java.net.URI("ambiguousAccessor"));
+		System.out.println("modelResolver = " + modelResolver);
+		ProjectRegistry projectRegistry = modelResolver.getProjectRegistry();
+		System.out.println("projectRegistry = " + projectRegistry);
+		ResourceSet resourceSet = projectRegistry.getResourceSet();
+		for (Resource resource : resourceSet.getResources()) {
+			System.out.println("  resource = " + resource);
+			for (EObject eObject : resource.getContents()) {
+				System.out.println("    content = " + eObject);
+			}
+		}
+		java.net.URI uri2 = new java.net.URI("ambiguousAccessor");
+		System.out.println("uri2 = " + uri2);
+		URI uri = modelResolver.getURI(uri2);
+		System.out.println("uri = " + uri);
 		assertNotNull("Non-null uri expected for uri:/accessor", uri);
 		assertEquals("Incorrect URI", "uri:/accessor", uri.toString());
 		return;
