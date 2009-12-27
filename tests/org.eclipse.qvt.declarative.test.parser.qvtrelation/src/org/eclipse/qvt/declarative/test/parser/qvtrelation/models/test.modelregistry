@@ -4,7 +4,7 @@
     <entry accessor="SeqMM" kind="Model Name" uri="SeqMM.xml"/>
     <entry accessor="StmcMM" kind="Model Name" uri="StmcMM.xml"/>
   </resource>
-  <resource name="hstmToStm.qvtr">
+  <resource name="hstmtostm.qvtr">
     <entry accessor="hstmMM_p" kind="Model Name" uri="hstmMM.emof"/>
     <entry accessor="stmMM_p" kind="Model Name" uri="stmMM.emof"/>
   </resource>
