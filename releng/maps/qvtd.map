@@ -13,11 +13,8 @@ feature@org.eclipse.qvt.declarative.editor.qvtbase=HEAD,:pserver:anonymous@dev.e
 feature@org.eclipse.qvt.declarative.editor=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.editor-feature
 feature@org.eclipse.qvt.declarative.ecore.qvtbase=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvtbase-feature
 feature@org.eclipse.qvt.declarative.ecore.qvtcore=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvtcore-feature
-feature@org.eclipse.qvt.declarative.ecore.qvttemplate=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvttemplate-feature
 feature@org.eclipse.qvt.declarative.ecore.qvtrelation=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvtrelation-feature
 feature@org.eclipse.qvt.declarative.modelregistry=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.modelregistry-feature
-!*** feature@org.eclipse.qvt.declarative.ecore.redistribution=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.redistribution-feature
-!*** feature@org.eclipse.qvt.declarative.editor.redistribution=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.editor.redistribution-feature
 
 !*** QVT plug-ins ***************************************************************************
 plugin@org.eclipse.qvt=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt
