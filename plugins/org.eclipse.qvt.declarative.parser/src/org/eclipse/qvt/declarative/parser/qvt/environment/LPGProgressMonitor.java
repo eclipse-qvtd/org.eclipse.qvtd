@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.qvt.environment;
 
-import lpg.lpgjavaruntime.Monitor;
+import lpg.runtime.Monitor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 

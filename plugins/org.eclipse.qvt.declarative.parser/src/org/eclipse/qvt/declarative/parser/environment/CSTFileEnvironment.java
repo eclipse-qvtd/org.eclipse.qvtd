@@ -16,7 +16,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-import lpg.lpgjavaruntime.Monitor;
+import lpg.runtime.Monitor;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;

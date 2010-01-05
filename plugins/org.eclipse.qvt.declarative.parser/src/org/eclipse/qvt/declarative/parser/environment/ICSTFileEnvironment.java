@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ICSTFileEnvironment.java,v 1.1 2008/10/11 15:27:46 ewillink Exp $
+ * $Id: ICSTFileEnvironment.java,v 1.2 2010/01/05 11:41:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.environment;
 
@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.Collection;
 
-import lpg.lpgjavaruntime.Monitor;
+import lpg.runtime.Monitor;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
