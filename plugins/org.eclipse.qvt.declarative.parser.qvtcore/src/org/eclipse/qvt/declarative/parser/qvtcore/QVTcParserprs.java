@@ -14,16 +14,129 @@
 *   E.D.Willink - Remove unnecessary warning suppression
 *   E.D.Willink - Bugs 184048, 225493, 243976, 259818, 282882, 287993, 288040, 292112
 *   Borland - Bug 242880
+*   Adolfo Sanchez-Barbudo Herrera (Open Canarias) - LPG v 2.0.17 adoption (242153)
 *   E.D.Willink - Extended API and implementation for QVTc
 *
 * </copyright>
 *
-* $Id: QVTcParserprs.java,v 1.11 2009/11/10 06:12:07 ewillink Exp $
+* $Id: QVTcParserprs.java,v 1.12 2010/01/05 11:41:45 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;
 
-public class QVTcParserprs implements lpg.lpgjavaruntime.ParseTable, QVTcParsersym {
+public class QVTcParserprs implements lpg.runtime.ParseTable, QVTcParsersym {
+    public final static int ERROR_SYMBOL = 1;
+    public final int getErrorSymbol() { return ERROR_SYMBOL; }
+
+    public final static int SCOPE_UBOUND = 51;
+    public final int getScopeUbound() { return SCOPE_UBOUND; }
+
+    public final static int SCOPE_SIZE = 52;
+    public final int getScopeSize() { return SCOPE_SIZE; }
+
+    public final static int MAX_NAME_LENGTH = 29;
+    public final int getMaxNameLength() { return MAX_NAME_LENGTH; }
+
+    public final static int NUM_STATES = 239;
+    public final int getNumStates() { return NUM_STATES; }
+
+    public final static int NT_OFFSET = 76;
+    public final int getNtOffset() { return NT_OFFSET; }
+
+    public final static int LA_STATE_OFFSET = 4343;
+    public final int getLaStateOffset() { return LA_STATE_OFFSET; }
+
+    public final static int MAX_LA = 1;
+    public final int getMaxLa() { return MAX_LA; }
+
+    public final static int NUM_RULES = 342;
+    public final int getNumRules() { return NUM_RULES; }
+
+    public final static int NUM_NONTERMINALS = 146;
+    public final int getNumNonterminals() { return NUM_NONTERMINALS; }
+
+    public final static int NUM_SYMBOLS = 222;
+    public final int getNumSymbols() { return NUM_SYMBOLS; }
+
+    public final static int SEGMENT_SIZE = 8192;
+    public final int getSegmentSize() { return SEGMENT_SIZE; }
+
+    public final static int START_STATE = 444;
+    public final int getStartState() { return START_STATE; }
+
+    public final static int IDENTIFIER_SYMBOL = 3;
+    public final int getIdentifier_SYMBOL() { return IDENTIFIER_SYMBOL; }
+
+    public final static int EOFT_SYMBOL = 74;
+    public final int getEoftSymbol() { return EOFT_SYMBOL; }
+
+    public final static int EOLT_SYMBOL = 74;
+    public final int getEoltSymbol() { return EOLT_SYMBOL; }
+
+    public final static int ACCEPT_ACTION = 4000;
+    public final int getAcceptAction() { return ACCEPT_ACTION; }
+
+    public final static int ERROR_ACTION = 4001;
+    public final int getErrorAction() { return ERROR_ACTION; }
+
+    public final static boolean BACKTRACK = true;
+    public final boolean getBacktrack() { return BACKTRACK; }
+
+    public final int getStartSymbol() { return lhs(0); }
+    public final boolean isValidForParser() { return QVTcParsersym.isValidForParser; }
+
+
+    public interface IsNullable {
+        public final static byte isNullable[] = {0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,1,0,0,0,1,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,1,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            1,0,0,1,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,1,1,1,1,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,1,
+            1,0
+        };
+    };
+    public final static byte isNullable[] = IsNullable.isNullable;
+    public final boolean isNullable(int index) { return isNullable[index] != 0; }
+
+    public interface ProsthesesIndex {
+        public final static char prosthesesIndex[] = {0,
+            12,94,14,9,10,16,17,11,28,29,
+            30,31,32,37,38,39,40,41,42,43,
+            45,46,47,48,49,50,51,52,53,58,
+            59,60,88,90,85,87,89,82,83,84,
+            79,80,81,76,77,78,73,74,75,70,
+            71,72,67,68,69,64,65,66,23,54,
+            61,62,63,139,140,15,55,56,24,102,
+            20,57,135,138,86,127,129,136,137,6,
+            8,13,21,26,35,36,110,116,120,22,
+            25,33,34,95,99,109,111,112,113,115,
+            121,131,133,134,2,3,4,18,19,44,
+            91,92,96,97,98,100,101,103,104,105,
+            106,107,108,114,117,118,119,122,124,126,
+            128,130,132,141,142,143,144,145,1,5,
+            7,27,93,123,125,146
+        };
+    };
+    public final static char prosthesesIndex[] = ProsthesesIndex.prosthesesIndex;
+    public final int prosthesesIndex(int index) { return prosthesesIndex[index]; }
 
     public interface IsKeyword {
         public final static byte isKeyword[] = {0,
@@ -1324,28 +1437,28 @@ public class QVTcParserprs implements lpg.lpgjavaruntime.ParseTable, QVTcParsers
 
     public interface ScopeRhs {
         public final static char scopeRhs[] = {0,
-            176,0,15,0,135,2,0,77,0,135,
-            26,0,135,66,135,26,0,32,87,77,
-            0,135,67,135,66,135,26,0,33,87,
-            77,0,32,87,33,87,77,0,143,52,
-            77,0,142,2,80,0,187,32,0,41,
-            87,0,34,0,33,87,34,0,32,87,
-            33,87,34,0,13,0,115,0,5,123,
-            0,4,123,0,118,0,3,121,0,2,
-            121,0,121,0,10,118,0,9,118,0,
-            7,118,0,6,118,0,124,0,11,115,
-            0,8,115,0,127,0,35,112,0,130,
-            0,36,109,0,133,0,37,106,0,139,
-            0,39,103,0,17,0,0,143,52,77,
+            176,0,36,0,135,2,0,1,0,135,
+            26,0,135,66,135,26,0,66,135,1,
+            0,135,67,135,66,135,26,0,67,135,
+            1,0,66,135,67,135,1,0,143,52,
+            77,0,142,2,80,0,187,32,0,55,
+            135,0,58,0,67,135,58,0,66,135,
+            67,135,58,0,6,0,115,0,35,112,
+            0,5,112,0,118,0,4,116,0,33,
+            116,0,121,0,44,119,0,43,119,0,
+            42,119,0,41,119,0,124,0,47,122,
+            0,40,122,0,127,0,49,125,0,130,
+            0,50,128,0,133,0,51,131,0,139,
+            0,53,134,0,57,144,0,143,52,77,
             39,102,0,148,2,144,158,38,79,39,
             102,0,148,2,158,38,79,0,148,2,
             144,77,0,148,2,144,77,39,102,0,
             148,2,144,183,39,102,0,143,8,77,
             2,77,37,102,0,143,8,136,2,77,
-            37,102,0,136,2,77,37,102,0,20,
-            97,13,0,135,2,77,37,102,0,135,
+            37,102,0,136,2,77,37,102,0,8,
+            143,6,0,135,2,77,37,102,0,135,
             46,145,45,160,2,77,37,102,0,145,
-            45,160,2,77,37,102,0,19,87,13,
+            45,160,2,77,37,102,0,46,135,6,
             0,135,46,145,2,77,37,102,0,145,
             2,77,37,102,0,135,46,160,8,147,
             2,77,37,102,0,135,46,160,8,77,
@@ -1579,53 +1692,6 @@ public class QVTcParserprs implements lpg.lpgjavaruntime.ParseTable, QVTcParsers
     public final static String name[] = Name.name;
     public final String name(int index) { return name[index]; }
 
-    public final static int
-           ERROR_SYMBOL      = 1,
-           SCOPE_UBOUND      = 51,
-           SCOPE_SIZE        = 52,
-           MAX_NAME_LENGTH   = 29;
-
-    public final int getErrorSymbol() { return ERROR_SYMBOL; }
-    public final int getScopeUbound() { return SCOPE_UBOUND; }
-    public final int getScopeSize() { return SCOPE_SIZE; }
-    public final int getMaxNameLength() { return MAX_NAME_LENGTH; }
-
-    public final static int
-           NUM_STATES        = 239,
-           NT_OFFSET         = 76,
-           LA_STATE_OFFSET   = 4343,
-           MAX_LA            = 1,
-           NUM_RULES         = 342,
-           NUM_NONTERMINALS  = 146,
-           NUM_SYMBOLS       = 222,
-           SEGMENT_SIZE      = 8192,
-           START_STATE       = 444,
-           IDENTIFIER_SYMBOL = 3,
-           EOFT_SYMBOL       = 74,
-           EOLT_SYMBOL       = 74,
-           ACCEPT_ACTION     = 4000,
-           ERROR_ACTION      = 4001;
-
-    public final static boolean BACKTRACK = true;
-
-    public final int getNumStates() { return NUM_STATES; }
-    public final int getNtOffset() { return NT_OFFSET; }
-    public final int getLaStateOffset() { return LA_STATE_OFFSET; }
-    public final int getMaxLa() { return MAX_LA; }
-    public final int getNumRules() { return NUM_RULES; }
-    public final int getNumNonterminals() { return NUM_NONTERMINALS; }
-    public final int getNumSymbols() { return NUM_SYMBOLS; }
-    public final int getSegmentSize() { return SEGMENT_SIZE; }
-    public final int getStartState() { return START_STATE; }
-    public final int getStartSymbol() { return lhs[0]; }
-    public final int getIdentifierSymbol() { return IDENTIFIER_SYMBOL; }
-    public final int getEoftSymbol() { return EOFT_SYMBOL; }
-    public final int getEoltSymbol() { return EOLT_SYMBOL; }
-    public final int getAcceptAction() { return ACCEPT_ACTION; }
-    public final int getErrorAction() { return ERROR_ACTION; }
-    public final boolean isValidForParser() { return isValidForParser; }
-    public final boolean getBacktrack() { return BACKTRACK; }
-
     public final int originalState(int state) {
         return -baseCheck[state];
     }
@@ -1639,10 +1705,16 @@ public class QVTcParserprs implements lpg.lpgjavaruntime.ParseTable, QVTcParsers
         return inSymb[originalState(state)];
     }
 
+    /**
+     * assert(! goto_default);
+     */
     public final int ntAction(int state, int sym) {
         return baseAction[state + sym];
     }
 
+    /**
+     * assert(! shift_default);
+     */
     public final int tAction(int state, int sym) {
         int i = baseAction[state],
             k = i + sym;

@@ -14,11 +14,12 @@
 *   E.D.Willink - Remove unnecessary warning suppression
 *   E.D.Willink - Bugs 184048, 225493, 243976, 259818, 282882, 287993, 288040, 292112
 *   Borland - Bug 242880
+*   Adolfo Sanchez-Barbudo Herrera (Open Canarias) - LPG v 2.0.17 adoption (242153)
 *   E.D.Willink - Extended API and implementation for QVTc
 *
 * </copyright>
 *
-* $Id: QVTcParsersym.java,v 1.11 2009/11/10 06:12:17 ewillink Exp $
+* $Id: QVTcParsersym.java,v 1.12 2010/01/05 11:41:46 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;
@@ -102,7 +103,7 @@ public interface QVTcParsersym {
       TK_MULTI_LINE_COMMENT = 76,
       TK_ERROR_TOKEN = 1;
 
-      public final static String orderedTerminalSymbols[] = {
+    public final static String orderedTerminalSymbols[] = {
                  "",
                  "ERROR_TOKEN",
                  "LPAREN",
@@ -182,5 +183,6 @@ public interface QVTcParsersym {
                  "MULTI_LINE_COMMENT"
              };
 
+    public final static int numTokenKinds = orderedTerminalSymbols.length;
     public final static boolean isValidForParser = true;
 }

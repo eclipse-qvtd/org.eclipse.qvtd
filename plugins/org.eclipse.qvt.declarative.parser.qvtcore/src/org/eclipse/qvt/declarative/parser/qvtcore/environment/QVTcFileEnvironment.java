@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.qvtcore.environment;
 
-import lpg.lpgjavaruntime.Monitor;
+import lpg.runtime.Monitor;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;

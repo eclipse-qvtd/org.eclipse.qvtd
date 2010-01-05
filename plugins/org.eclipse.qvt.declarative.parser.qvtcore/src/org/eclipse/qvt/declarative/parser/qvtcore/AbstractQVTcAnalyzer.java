@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractQVTcAnalyzer.java,v 1.9 2009/11/10 19:45:48 ewillink Exp $
+ * $Id: AbstractQVTcAnalyzer.java,v 1.10 2010/01/05 11:41:46 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore;
 
@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import lpg.lpgjavaruntime.Monitor;
+import lpg.runtime.Monitor;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;

@@ -12,9 +12,12 @@
 *   IBM - Initial API and implementation
 *   E.D.Willink - Lexer and Parser refactoring to support extensibility and flexible error handling
 *   E.D.Willink - Bug 285633, 292112
+*   Adolfo Sanchez-Barbudo Herrera (Open Canarias) - LPG v 2.0.17 adoption (242153)
+*   E.D.Willink - Extended API and implementation for QVTc
+*
 * </copyright>
 *
-* $Id: QVTcKWLexersym.java,v 1.11 2009/11/10 06:04:39 ewillink Exp $
+*
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;
@@ -22,8 +25,10 @@ package org.eclipse.qvt.declarative.parser.qvtcore;
 public interface QVTcKWLexersym {
     public final static int
       Char_DollarSign = 37,
+      Char_Percent = 38,
+      Char__ = 39,
       Char_a = 4,
-      Char_b = 38,
+      Char_b = 40,
       Char_c = 13,
       Char_d = 9,
       Char_e = 1,
@@ -31,7 +36,7 @@ public interface QVTcKWLexersym {
       Char_g = 15,
       Char_h = 16,
       Char_i = 5,
-      Char_j = 39,
+      Char_j = 41,
       Char_k = 23,
       Char_l = 2,
       Char_m = 14,
@@ -51,32 +56,32 @@ public interface QVTcKWLexersym {
       Char_A = 27,
       Char_B = 28,
       Char_C = 29,
-      Char_D = 40,
-      Char_E = 41,
-      Char_F = 42,
-      Char_G = 43,
-      Char_H = 44,
+      Char_D = 42,
+      Char_E = 43,
+      Char_F = 44,
+      Char_G = 45,
+      Char_H = 46,
       Char_I = 21,
-      Char_J = 45,
-      Char_K = 46,
-      Char_L = 47,
-      Char_M = 48,
+      Char_J = 47,
+      Char_K = 48,
+      Char_L = 49,
+      Char_M = 50,
       Char_N = 30,
       Char_O = 31,
-      Char_P = 49,
-      Char_Q = 50,
+      Char_P = 51,
+      Char_Q = 52,
       Char_R = 32,
       Char_S = 22,
       Char_T = 33,
       Char_U = 34,
       Char_V = 35,
-      Char_W = 51,
-      Char_X = 52,
-      Char_Y = 53,
-      Char_Z = 54,
+      Char_W = 53,
+      Char_X = 54,
+      Char_Y = 55,
+      Char_Z = 56,
       Char_EOF = 36;
 
-      public final static String orderedTerminalSymbols[] = {
+    public final static String orderedTerminalSymbols[] = {
                  "",
                  "e",
                  "l",
@@ -115,6 +120,8 @@ public interface QVTcKWLexersym {
                  "V",
                  "EOF",
                  "DollarSign",
+                 "Percent",
+                 "_",
                  "b",
                  "j",
                  "D",
@@ -134,5 +141,6 @@ public interface QVTcKWLexersym {
                  "Z"
              };
 
+    public final static int numTokenKinds = orderedTerminalSymbols.length;
     public final static boolean isValidForParser = true;
 }

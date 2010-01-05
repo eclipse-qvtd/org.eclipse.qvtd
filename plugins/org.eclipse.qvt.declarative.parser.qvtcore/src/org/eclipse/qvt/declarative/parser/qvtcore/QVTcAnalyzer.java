@@ -12,11 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: QVTcAnalyzer.java,v 1.4 2008/10/11 15:27:40 ewillink Exp $
+ * $Id: QVTcAnalyzer.java,v 1.5 2010/01/05 11:41:47 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.qvtcore;
 
-import lpg.lpgjavaruntime.Monitor;
+import lpg.runtime.Monitor;
 
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileAnalyzer;
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcFileEnvironment;

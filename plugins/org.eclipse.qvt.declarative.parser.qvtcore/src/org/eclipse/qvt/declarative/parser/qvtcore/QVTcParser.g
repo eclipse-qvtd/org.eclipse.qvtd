@@ -22,14 +22,14 @@
 %options backtrack
 %options noserialize
 %options package=org.eclipse.qvt.declarative.parser.qvtcore
-%options import_terminals=QVTcLexer.g
+%options import_terminals=QVTcLexer.gi
 %options ast_type=CSTNode
 %options programming_language=java
 %options action=("*.java", "/.", "./")
-%options ParseTable=lpg.lpgjavaruntime.ParseTable
+%options ParseTable=lpg.runtime.ParseTable
 %options include_directory=".;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/parser;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/parser/backtracking"
 
-$KeyWords
+%KeyWords
 	check
 	creation
 	default
@@ -43,13 +43,13 @@ $KeyWords
 	transformation
 	uses
 	where
-$End
+%End
 
-$Terminals
+%Terminals
 	COLON_EQUALS     ::= ':='
-$End
+%End
 
-$Globals
+%Globals
 /.
 import org.eclipse.qvt.declarative.parser.qvt.cst.*;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.*;
@@ -58,21 +58,21 @@ import org.eclipse.ocl.parser.$prs_stream_class;
 import org.eclipse.ocl.parser.backtracking.OCLParserErrors;
 
 ./
-$End
+%End
 
-$Start
+%Start
 	TopLevelCS
-$End
+%End
 
-$Include
-	EssentialOCL.g
-$End
+%Import
+	EssentialOCL.gi
+%End
 
-$Include
-	EssentialOCLErrors.g
-$End
+%Import
+	EssentialOCLErrors.gi
+%End
 
-$Define
+%Define
 	$prs_parser_class /.BacktrackingParser./
 	$prs_parser_exception /.NotBacktrackParseTableException./
 	$prs_parser_throw /.throw new RuntimeException("****Error: Regenerate $prs_type.java with -BACKTRACK option")./
@@ -82,9 +82,9 @@ $Define
     $LPGParsersym_class /.QVTcParserSymbols./
 	$copyright_contributions /.*   E.D.Willink - Extended API and implementation for QVTc
 *./
-$End
+%End
 
-$Headers
+%Headers
 	/.			
 		private int _uniqueNameCount = 0;
 
@@ -99,42 +99,42 @@ $Headers
 			return result;
 		}
 	./
-$End
+%End
 
-$Rules
+%Rules
 	TopLevelCS ::= $empty
-		/.$BeginJava
+		/.$BeginCode
 					TopLevelCS result = QVTcCSTFactory.eINSTANCE.createTopLevelCS();
 					setOffsets(result, getIToken($getToken(1)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	TopLevelCS ::= TopLevelCS MappingCS
-		/.$BeginJava
+		/.$BeginCode
 					TopLevelCS result = (TopLevelCS)$getSym(1);
 					MappingCS mappingCS = (MappingCS)$getSym(2);
 					result.getMappings().add(mappingCS);
 					setOffsets(result, result, mappingCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	TopLevelCS ::= TopLevelCS TransformationCS
-		/.$BeginJava
+		/.$BeginCode
 					TopLevelCS result = (TopLevelCS)$getSym(1);
 					TransformationCS transformationCS = (TransformationCS)$getSym(2);
 					result.getTransformations().add(transformationCS);
 					setOffsets(result, result, transformationCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	TopLevelCS ::= TopLevelCS QueryCS
-		/.$BeginJava
+		/.$BeginCode
 					TopLevelCS result = (TopLevelCS)$getSym(1);
 					QueryCS queryCS = (QueryCS)$getSym(2);
 					result.getQueries().add(queryCS);
 					setOffsets(result, result, queryCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	
 --Transformation ::=
@@ -142,64 +142,64 @@ $Rules
 --( Direction“;” )*
 --“}”
 	TransformationCS_0_ ::= transformation TransformationNameCS '{'
-		/.$BeginJava
+		/.$BeginCode
 					TransformationCS result = QVTcCSTFactory.eINSTANCE.createTransformationCS();
 					result.setPathName((PathNameCS)$getSym(2));
 					setOffsets(result, getIToken($getToken(1)), getIToken($getToken(3)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	TransformationCS_0_ ::= TransformationCS_0_ DirectionCS ';'
-		/.$BeginJava
+		/.$BeginCode
 					TransformationCS result = (TransformationCS)$getSym(1);
 					DirectionCS directionCS = (DirectionCS)$getSym(2);
 					result.getDirections().add(directionCS);
 					setOffsets(result, result, getIToken($getToken(3)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	TransformationCS ::= TransformationCS_0_ '}'
-		/.$BeginJava
+		/.$BeginCode
 					TransformationCS result = (TransformationCS)$getSym(1);
 					setOffsets(result, result, getIToken($getToken(2)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	
 --Direction ::= DirectionName [“imports” PackageName(“,” PackageName)*]
 --					[“uses” DirectionName(“,” DirectionName)*]
 	DirectionCS_0_ ::= DirectionNameCS
-		/.$BeginJava
+		/.$BeginCode
 					IdentifierCS directionNameCS = (IdentifierCS)$getSym(1);
 					DirectionCS result = QVTcCSTFactory.eINSTANCE.createDirectionCS();
 					result.setIdentifier(directionNameCS);
 					setOffsets(result, directionNameCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	DirectionCS_1_ -> DirectionCS_0_ imports
 	DirectionCS_1_ -> DirectionCS_2_ ',' 
 	DirectionCS_2_ ::= DirectionCS_1_ PackageNameCS
-		/.$BeginJava
+		/.$BeginCode
 					DirectionCS result = (DirectionCS)$getSym(1);
 					PathNameCS pathNameCS = (PathNameCS)$getSym(2);
 					result.getImports().add(pathNameCS);
 					setOffsets(result, result, pathNameCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	DirectionCS_3_ -> DirectionCS_0_ 
 	DirectionCS_3_ -> DirectionCS_2_ 
 	DirectionCS_4_ -> DirectionCS_3_ uses 
 	DirectionCS_4_ -> DirectionCS_5_ ',' 
 	DirectionCS_5_ ::= DirectionCS_4_ DirectionNameCS
-		/.$BeginJava
+		/.$BeginCode
 					DirectionCS result = (DirectionCS)$getSym(1);
 					IdentifierCS directionNameCS = (IdentifierCS)$getSym(2);
 					result.getUses().add(directionNameCS);
 					setOffsets(result, result, directionNameCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	DirectionCS -> DirectionCS_3_ 
 	DirectionCS -> DirectionCS_5_ 
@@ -209,64 +209,64 @@ $Rules
 --				“where” “(” MiddleGuardPattern “)” “{” MiddleBottomPattern “}”
 --					( ComposedMapping )* “}”
 	MappingCS_1_ ::= map
-		/.$BeginJava
+		/.$BeginCode
 					MappingCS result = QVTcCSTFactory.eINSTANCE.createMappingCS();
 //					IdentifierCS identifierCS = createUniqueIdentifierCS($getToken(1));
 //					result.setIdentifier(identifierCS);
 					setOffsets(result, getIToken($getToken(1)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	MappingCS_1_ ::= map MappingNameCS
-		/.$BeginJava
+		/.$BeginCode
 					MappingCS result = QVTcCSTFactory.eINSTANCE.createMappingCS();
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(2);
 					result.setIdentifier(identifierCS);
 					setOffsets(result, getIToken($getToken(1)), identifierCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	MappingCS_2_ -> MappingCS_1_
 	MappingCS_2_ ::= MappingCS_1_ in TransformationNameCS
-		/.$BeginJava
+		/.$BeginCode
 					MappingCS result = (MappingCS)$getSym(1);
 					PathNameCS identifierCS = (PathNameCS)$getSym(3);
 					result.setIn(identifierCS);
 					setOffsets(result, result, identifierCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	MappingCS_3_ -> MappingCS_2_
 	MappingCS_3_ ::= MappingCS_2_ refines MappingNameCS
-		/.$BeginJava
+		/.$BeginCode
 					MappingCS result = (MappingCS)$getSym(1);
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(3);
 					result.getRefines().add(identifierCS);
 					setOffsets(result, result, identifierCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	MappingCS_3_ ::= MappingCS_3_ ',' MappingNameCS
-		/.$BeginJava
+		/.$BeginCode
 					MappingCS result = (MappingCS)$getSym(1);
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(3);
 					result.getRefines().add(identifierCS);
 					setOffsets(result, result, identifierCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	MappingCS_4_ -> MappingCS_3_ '{'
 	MappingCS_4_ ::= MappingCS_4_ DomainCS	
-		/.$BeginJava
+		/.$BeginCode
 					MappingCS result = (MappingCS)$getSym(1);
 					DomainCS domainCS = (DomainCS)$getSym(2);
 					result.getDomains().add(domainCS);
 					setOffsets(result, result, domainCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	MappingCS_8 ::= MappingCS_4_ where DomainCS_0_
-		/.$BeginJava
+		/.$BeginCode
 					MappingCS result = (MappingCS)$getSym(1);
 					IdentifierCS directionNameCS = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 					directionNameCS.setValue("");
@@ -277,10 +277,10 @@ $Rules
 					result.setMiddle(domainCS);
 					setOffsets(result, result, domainCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	MappingCS_8 ::= MappingCS_4_ where DirectionNameCS DomainCS_0_
-		/.$BeginJava
+		/.$BeginCode
 					MappingCS result = (MappingCS)$getSym(1);
 					IdentifierCS directionNameCS = (IdentifierCS)$getSym(3);
 					setOffsets(directionNameCS, getIToken($getToken(2)), directionNameCS);
@@ -290,27 +290,27 @@ $Rules
 					result.setMiddle(domainCS);
 					setOffsets(result, result, domainCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	MappingCS_8 ::= MappingCS_8 ComposedMappingCS
-		/.$BeginJava
+		/.$BeginCode
 					MappingCS result = (MappingCS)$getSym(1);
 					MappingCS composedMappingCS = (MappingCS)$getSym(2);
 					result.getComposedMappings().add(composedMappingCS);
 					setOffsets(result, result, composedMappingCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	MappingCS ::= MappingCS_8 '}'
-		/.$BeginJava
+		/.$BeginCode
 					MappingCS result = (MappingCS)$getSym(1);
 					setOffsets(result, result, getIToken($getToken(2)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	
 	DomainCS_0_ ::= '(' DomainGuardPatternCS ')' '{' DomainBottomPatternCS  '}'
-		/.$BeginJava
+		/.$BeginCode
 					GuardPatternCS guardPatternCS = (GuardPatternCS)$getSym(2);
 					BottomPatternCS bottomPatternCS = (BottomPatternCS)$getSym(5);
 					DomainCS result = QVTcCSTFactory.eINSTANCE.createDomainCS();
@@ -318,34 +318,34 @@ $Rules
 					result.setBottomPattern(bottomPatternCS);
 					setOffsets(result, getIToken($getToken(1)), getIToken($getToken(6)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	DomainCS_1_ ::= DirectionNameCS DomainCS_0_
-		/.$BeginJava
+		/.$BeginCode
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(1);
 					DomainCS result = (DomainCS)$getSym(2);
 					result.setIdentifier(identifierCS);
 					setOffsets(result, identifierCS, result);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	DomainCS_2_ -> DomainCS_1_
 	DomainCS_2_ ::= enforce DomainCS_1_
-		/.$BeginJava
+		/.$BeginCode
 					DomainCS result = (DomainCS)$getSym(2);
 					result.setEnforce(true);
 					setOffsets(result, getIToken($getToken(1)), result);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	DomainCS -> DomainCS_2_
 	DomainCS ::= check DomainCS_2_
-		/.$BeginJava
+		/.$BeginCode
 					DomainCS result = (DomainCS)$getSym(2);
 					result.setCheck(true);
 					setOffsets(result, getIToken($getToken(1)), result);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 		
 --ComposedMapping ::= Mapping
@@ -361,165 +361,165 @@ $Rules
 	
 --GuardPattern ::= [Variable(“,”Variable )* “|” ] ( Constraint “;” )*
 	GuardPatternCS_1_ ::= UnrealizedVariableCS
-		/.$BeginJava
+		/.$BeginCode
 					GuardPatternCS result = QVTcCSTFactory.eINSTANCE.createGuardPatternCS();
 					UnrealizedVariableCS unrealizedVariableCS = (UnrealizedVariableCS)$getSym(1);
 					result.getUnrealizedVariables().add(unrealizedVariableCS);
 					setOffsets(result, unrealizedVariableCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	GuardPatternCS_1_ ::= GuardPatternCS_1_ ',' UnrealizedVariableCS
-		/.$BeginJava
+		/.$BeginCode
 					GuardPatternCS result = (GuardPatternCS)$getSym(1);
 					UnrealizedVariableCS unrealizedVariableCS = (UnrealizedVariableCS)$getSym(3);
 					result.getUnrealizedVariables().add(unrealizedVariableCS);
 					setOffsets(result, result, unrealizedVariableCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	GuardPatternCS_2_ -> GuardPatternCS_1_ '|'
 	GuardPatternCS_2_ ::= ConstraintCS ';'
-		/.$BeginJava
+		/.$BeginCode
 					GuardPatternCS result = QVTcCSTFactory.eINSTANCE.createGuardPatternCS();
 					OCLExpressionCS constraintCS = (OCLExpressionCS)$getSym(1);
 					result.getConstraints().add(constraintCS);
 					setOffsets(result, constraintCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	GuardPatternCS_2_ ::= GuardPatternCS_2_ ConstraintCS ';'
-		/.$BeginJava
+		/.$BeginCode
 					GuardPatternCS result = (GuardPatternCS)$getSym(1);
 					OCLExpressionCS constraintCS = (OCLExpressionCS)$getSym(2);
 					result.getConstraints().add(constraintCS);
 					setOffsets(result, result, constraintCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	GuardPatternCS -> GuardPatternCS_1_ 
 	GuardPatternCS -> GuardPatternCS_2_ 
 	GuardPatternCS ::= $empty
-		/.$BeginJava
+		/.$BeginCode
 					GuardPatternCS result = QVTcCSTFactory.eINSTANCE.createGuardPatternCS();
 					setOffsets(result, getIToken($getToken(1)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 		
 --BottomPattern ::= [ (Variable | RealizedVariable) (“,” ( Variable | RealizedVariable)* “|” ] ( Constraint “;” )*
 	BottomPatternCS_1_ ::= UnrealizedVariableCS
-		/.$BeginJava
+		/.$BeginCode
 					BottomPatternCS result = QVTcCSTFactory.eINSTANCE.createBottomPatternCS();
 					UnrealizedVariableCS unrealizedVariableCS = (UnrealizedVariableCS)$getSym(1);
 					result.getUnrealizedVariables().add(unrealizedVariableCS);
 					setOffsets(result, result, unrealizedVariableCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	BottomPatternCS_1_ ::= BottomPatternCS_1_ ',' UnrealizedVariableCS
-		/.$BeginJava
+		/.$BeginCode
 					BottomPatternCS result = (BottomPatternCS)$getSym(1);
 					UnrealizedVariableCS unrealizedVariableCS = (UnrealizedVariableCS)$getSym(3);
 					result.getUnrealizedVariables().add(unrealizedVariableCS);
 					setOffsets(result, result, unrealizedVariableCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	BottomPatternCS_1_ ::= RealizedVariableCS
-		/.$BeginJava
+		/.$BeginCode
 					BottomPatternCS result = QVTcCSTFactory.eINSTANCE.createBottomPatternCS();
 					RealizedVariableCS realizedVariableCS = (RealizedVariableCS)$getSym(1);
 					result.getRealizedVariables().add(realizedVariableCS);
 					setOffsets(result, realizedVariableCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	BottomPatternCS_1_ ::= BottomPatternCS_1_ ',' RealizedVariableCS
-		/.$BeginJava
+		/.$BeginCode
 					BottomPatternCS result = (BottomPatternCS)$getSym(1);
 					RealizedVariableCS realizedVariableCS = (RealizedVariableCS)$getSym(3);
 					result.getRealizedVariables().add(realizedVariableCS);
 					setOffsets(result, realizedVariableCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	BottomPatternCS_2_ -> BottomPatternCS_1_ '|'
 	BottomPatternCS_2_ ::= ConstraintCS ';'
-		/.$BeginJava
+		/.$BeginCode
 					BottomPatternCS result = QVTcCSTFactory.eINSTANCE.createBottomPatternCS();
 					OCLExpressionCS constraintCS = (OCLExpressionCS)$getSym(1);
 					result.getConstraints().add(constraintCS);
 					setOffsets(result, constraintCS, getIToken($getToken(2)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	BottomPatternCS_2_ ::= EnforcementOperationCS
-		/.$BeginJava
+		/.$BeginCode
 					BottomPatternCS result = QVTcCSTFactory.eINSTANCE.createBottomPatternCS();
 					EnforcementOperationCS enforcementOperationCS = (EnforcementOperationCS)$getSym(1);
 					result.getEnforcementOperations().add(enforcementOperationCS);
 					setOffsets(result, enforcementOperationCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	BottomPatternCS_2_ ::= BottomPatternCS_2_ ConstraintCS ';'
-		/.$BeginJava
+		/.$BeginCode
 					BottomPatternCS result = (BottomPatternCS)$getSym(1);
 					OCLExpressionCS constraintCS = (OCLExpressionCS)$getSym(2);
 					result.getConstraints().add(constraintCS);
 					setOffsets(result, result, getIToken($getToken(3)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	BottomPatternCS_2_ ::= BottomPatternCS_2_ EnforcementOperationCS
-		/.$BeginJava
+		/.$BeginCode
 					BottomPatternCS result = (BottomPatternCS)$getSym(1);
 					EnforcementOperationCS enforcementOperationCS = (EnforcementOperationCS)$getSym(2);
 					result.getEnforcementOperations().add(enforcementOperationCS);
 					setOffsets(result, result, enforcementOperationCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	BottomPatternCS -> BottomPatternCS_1_ 
 	BottomPatternCS -> BottomPatternCS_2_ 
 	BottomPatternCS ::= $empty
-		/.$BeginJava
+		/.$BeginCode
 					BottomPatternCS result = QVTcCSTFactory.eINSTANCE.createBottomPatternCS();
 					setOffsets(result, getIToken($getToken(1)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	
 	EnforcementOperationCS_1_ ::= primaryExpCS
-		/.$BeginJava
+		/.$BeginCode
 					OperationCallExpCS operationCallCS = (OperationCallExpCS)$getSym(1);
 					EnforcementOperationCS result = QVTcCSTFactory.eINSTANCE.createEnforcementOperationCS();
 					result.setOperationCall(operationCallCS);
 					setOffsets(result, operationCallCS, operationCallCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	EnforcementOperationCS ::= creation EnforcementOperationCS_1_ ';'
-		/.$BeginJava
+		/.$BeginCode
 					EnforcementOperationCS result = (EnforcementOperationCS)$getSym(2);
 					result.setDeletion(false);
 					setOffsets(result, getIToken($getToken(1)), getIToken($getToken(3)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	EnforcementOperationCS ::= deletion EnforcementOperationCS_1_ ';'
-		/.$BeginJava
+		/.$BeginCode
 					EnforcementOperationCS result = (EnforcementOperationCS)$getSym(2);
 					result.setDeletion(true);
 					setOffsets(result, getIToken($getToken(1)), getIToken($getToken(3)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./	
 	
 --Variable := VariableName “:” TypeDeclaration
 	UnrealizedVariableCS ::= VariableNameCS ':' typeCS
-		/.$BeginJava
+		/.$BeginCode
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(1);
 					TypeCS type = (TypeCS)$getSym(3);
 					UnrealizedVariableCS result = QVTcCSTFactory.eINSTANCE.createUnrealizedVariableCS();
@@ -527,12 +527,12 @@ $Rules
 					result.setType(type);
 					setOffsets(result, identifierCS, type);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 		
 --RealizedVariable := “realized” VariableName “:” TypeDeclaration
 	RealizedVariableCS ::= realize VariableNameCS ':' typeCS
-		/.$BeginJava
+		/.$BeginCode
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(2);
 					TypeCS type = (TypeCS)$getSym(4);
 					RealizedVariableCS result = QVTcCSTFactory.eINSTANCE.createRealizedVariableCS();
@@ -540,7 +540,7 @@ $Rules
 					result.setType(type);
 					setOffsets(result, getIToken($getToken(1)), type);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 		
 --Constraint ::= Predicate | Assignment
@@ -552,7 +552,7 @@ $Rules
 	
 --Assignement ::= [“default”] SlotOwnerOCLExpr“.”PropertyName “:=” ValueOCLExpr
 	AssignmentCS_0_ ::= OclExpressionCS ':=' OclExpressionCS
-		/.$BeginJava
+		/.$BeginCode
 					OCLExpressionCS target = (OCLExpressionCS)$getSym(1);
 					OCLExpressionCS initialiser = (OCLExpressionCS)$getSym(3);
 					AssignmentCS result = QVTcCSTFactory.eINSTANCE.createAssignmentCS();
@@ -560,16 +560,16 @@ $Rules
 					result.setInitialiser(initialiser);
 					setOffsets(result, target, initialiser);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	AssignmentCS -> AssignmentCS_0_
 	AssignmentCS ::= default AssignmentCS_0_
-		/.$BeginJava
+		/.$BeginCode
 					AssignmentCS result = (AssignmentCS)$getSym(2);
 					result.setDefault(true);
 					setOffsets(result, getIToken($getToken(1)), result);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 		
 	DirectionNameCS -> identifierCS
@@ -587,53 +587,53 @@ $Rules
 --      	  ':' <TypeCS>
 --            (';' | '{' <OclExpressionCS> '}')
 	QueryCS_preParamDeclaration ::= query QueryNameCS '('
-		/.$BeginJava
+		/.$BeginCode
 					QueryCS result = QVTcCSTFactory.eINSTANCE.createQueryCS();
 					result.setPathName((PathNameCS)$getSym(2));
 					setOffsets(result, getIToken($getToken(1)), getIToken($getToken(3)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	QueryCS_preParamDeclaration -> QueryCS_postParamDeclaration ','
 	QueryCS_postParamDeclaration ::= QueryCS_preParamDeclaration paramDeclarationCS
-		/.$BeginJava
+		/.$BeginCode
 					ParamDeclarationCS paramDeclarationCS = (ParamDeclarationCS)$getSym(2);
 					QueryCS result = (QueryCS)$getSym(1);
 					result.getInputParamDeclaration().add(paramDeclarationCS);
 					setOffsets(result, result, paramDeclarationCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	QueryCS_postType ::= QueryCS_postParamDeclaration ')' ':' typeCS
-		/.$BeginJava
+		/.$BeginCode
 					TypeCS typeCS = (TypeCS)$getSym(4);
 					QueryCS result = (QueryCS)$getSym(1);
 					result.setType(typeCS);
 					setOffsets(result, result, typeCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	QueryCS ::= QueryCS_postType ';'
-		/.$BeginJava
+		/.$BeginCode
 					QueryCS result = (QueryCS)$getSym(1);
 					setOffsets(result, result, getIToken($getToken(2)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	QueryCS ::= QueryCS_postType '{' OclExpressionCS '}'
-		/.$BeginJava
+		/.$BeginCode
 					QueryCS result = (QueryCS)$getSym(1);
 					result.setOclExpression((OCLExpressionCS)$getSym(3));
 					setOffsets(result, result, getIToken($getToken(4)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	
 --<paramDeclaration> ::= <identifier> ':' <TypeCS>	
 	paramDeclarationCS ::= ERROR_identifierCS ':' typeCS
 		/.$NewCase./
 	paramDeclarationCS ::= identifierCS ':' typeCS
-		/.$BeginJava
+		/.$BeginCode
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(1);
 					TypeCS typeCS = (TypeCS)$getSym(3);
 					ParamDeclarationCS result = QVTcCSTFactory.eINSTANCE.createParamDeclarationCS();
@@ -641,16 +641,16 @@ $Rules
 					result.setType(typeCS);
 					setOffsets(result, identifierCS, typeCS);
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	paramDeclarationCS ::= identifierCS ERROR_Colon
-		/.$BeginJava
+		/.$BeginCode
 					IdentifierCS identifierCS = (IdentifierCS)$getSym(1);
 					ParamDeclarationCS result = QVTcCSTFactory.eINSTANCE.createParamDeclarationCS();
 					result.setIdentifier(identifierCS);
 					setOffsets(result, identifierCS, getIToken($getToken(2)));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 		
 	coreKeyword -> check
@@ -670,33 +670,33 @@ $Rules
 	reservedKeyword -> coreKeyword
 	
 	ERROR_identifierCS ::= ERROR_TOKEN
-		/.$BeginJava
+		/.$BeginCode
 					int token = $getToken(1);
 					reportErrorTokenMessage(token, QVTcParserErrors.MISSING_IDENTIFIER);
 					IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 					result.setValue(getTokenText(token));
 					setOffsets(result, getIToken(token));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	identifierCS ::= IDENTIFIER
-		/.$BeginJava
+		/.$BeginCode
 					int token = $getToken(1);
 					IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 					result.setValue(getTokenText(token));
 					setOffsets(result, getIToken(token));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
 	identifierCS ::= STRING_LITERAL
-		/.$BeginJava
+		/.$BeginCode
 					int token = $getToken(1);
 					IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 					String string = getTokenText(token);
 					result.setValue(string.substring(1, string.length()-1));
 					setOffsets(result, getIToken(token));
 					$setResult(result);
-		  $EndJava
+		  $EndCode
 		./
-$End
+%End
 	
