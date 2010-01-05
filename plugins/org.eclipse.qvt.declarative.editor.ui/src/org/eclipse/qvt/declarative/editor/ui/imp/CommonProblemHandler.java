@@ -12,11 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: CommonProblemHandler.java,v 1.5 2008/11/20 08:10:31 ewillink Exp $
+ * $Id: CommonProblemHandler.java,v 1.6 2010/01/05 11:41:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
-import lpg.lpgjavaruntime.IToken;
+import lpg.runtime.IToken;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.imp.parser.IMessageHandler;

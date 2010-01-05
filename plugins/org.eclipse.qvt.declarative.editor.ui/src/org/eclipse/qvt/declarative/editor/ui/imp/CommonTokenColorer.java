@@ -12,11 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: CommonTokenColorer.java,v 1.5 2009/08/16 10:28:51 ewillink Exp $
+ * $Id: CommonTokenColorer.java,v 1.6 2010/01/05 11:41:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
-import lpg.lpgjavaruntime.IToken;
+import lpg.runtime.IToken;
 
 import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.services.ITokenColorer;

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseResult.java,v 1.2 2009/12/12 15:34:15 ewillink Exp $
+ * $Id: CommonParseResult.java,v 1.3 2010/01/05 11:41:53 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -22,9 +22,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import lpg.lpgjavaruntime.ErrorToken;
-import lpg.lpgjavaruntime.IToken;
-import lpg.lpgjavaruntime.PrsStream;
+import lpg.runtime.ErrorToken;
+import lpg.runtime.IToken;
+import lpg.runtime.PrsStream;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;

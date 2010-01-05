@@ -12,11 +12,11 @@
  * 
  * </copyright>
  *
- * $Id: CommonSourcePositionLocator.java,v 1.2 2009/08/20 20:12:09 ewillink Exp $
+ * $Id: CommonSourcePositionLocator.java,v 1.3 2010/01/05 11:41:55 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
-import lpg.lpgjavaruntime.IToken;
+import lpg.runtime.IToken;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;

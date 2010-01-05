@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.23 2009/08/20 20:21:40 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.24 2010/01/05 11:41:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -33,7 +33,7 @@ import java.io.StringReader;
 import java.util.Iterator;
 import java.util.List;
 
-import lpg.lpgjavaruntime.IToken;
+import lpg.runtime.IToken;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;

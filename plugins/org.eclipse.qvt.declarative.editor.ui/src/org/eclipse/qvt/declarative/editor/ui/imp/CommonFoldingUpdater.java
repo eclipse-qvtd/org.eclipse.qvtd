@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonFoldingUpdater.java,v 1.6 2009/08/20 20:17:34 ewillink Exp $
+ * $Id: CommonFoldingUpdater.java,v 1.7 2010/01/05 11:41:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -20,10 +20,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import lpg.lpgjavaruntime.Adjunct;
-import lpg.lpgjavaruntime.IToken;
-import lpg.lpgjavaruntime.LexStream;
-import lpg.lpgjavaruntime.PrsStream;
+import lpg.runtime.Adjunct;
+import lpg.runtime.ILexStream;
+import lpg.runtime.IPrsStream;
+import lpg.runtime.IToken;
 
 import org.eclipse.imp.services.base.FolderBase;
 import org.eclipse.jface.text.Position;
@@ -62,12 +62,12 @@ public abstract class CommonFoldingUpdater extends FolderBase
 		}
 	};
 
-	protected PrsStream prsStream = null;
+	protected IPrsStream prsStream = null;
 
 	protected abstract ICommonPlugin getPlugin();
 
 	protected void makeAdjunctAnnotations(CSTNode theAST) {
-		LexStream lexStream = prsStream.getLexStream();
+		ILexStream lexStream = prsStream.getILexStream();
 		if (lexStream == null)
 			return;
 		@SuppressWarnings("unchecked")
@@ -106,7 +106,7 @@ public abstract class CommonFoldingUpdater extends FolderBase
 			IToken gate_token = adjuncts.length == 0 ? next_token : adjuncts[0];
 			makeAnnotationWithOffsets(first_token.getStartOffset(), gate_token
 					.getLine() > last_token.getEndLine() ? prsStream
-					.getLexStream().getLineOffset(gate_token.getLine() - 1)
+					.getILexStream().getLineOffset(gate_token.getLine() - 1)
 					: last_token.getEndOffset());
 		}
 	}
@@ -127,7 +127,7 @@ public abstract class CommonFoldingUpdater extends FolderBase
 		if (theCST != null) {
 			IToken startToken = theCST.getStartToken();
 			if (startToken != null) {
-				prsStream = startToken.getPrsStream();
+				prsStream = startToken.getIPrsStream();
 				FoldingCSTVisitor visitor = new FoldingCSTVisitor(getPlugin().getEditorDefinition());
 				visitor.enter(theCST);
 				makeAdjunctAnnotations(theCST);

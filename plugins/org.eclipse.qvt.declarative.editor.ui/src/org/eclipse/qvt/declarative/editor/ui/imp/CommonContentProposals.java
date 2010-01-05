@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.15 2009/08/20 20:16:37 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.16 2010/01/05 11:41:54 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import lpg.lpgjavaruntime.ErrorToken;
-import lpg.lpgjavaruntime.IToken;
+import lpg.runtime.ErrorToken;
+import lpg.runtime.IToken;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;

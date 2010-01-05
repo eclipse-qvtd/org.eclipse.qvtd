@@ -12,13 +12,13 @@
  * 
  * </copyright>
  *
- * $Id: EditorModelUtils.java,v 1.1 2009/01/17 20:18:43 ewillink Exp $
+ * $Id: EditorModelUtils.java,v 1.2 2010/01/05 11:41:55 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.utils;
 
-import lpg.lpgjavaruntime.IToken;
-import lpg.lpgjavaruntime.LexStream;
-import lpg.lpgjavaruntime.PrsStream;
+import lpg.runtime.ILexStream;
+import lpg.runtime.IPrsStream;
+import lpg.runtime.IToken;
 
 import org.eclipse.ocl.cst.CSTNode;
 
@@ -28,10 +28,10 @@ public class EditorModelUtils
 		IToken token = cstNode.getStartToken();
 		if (token == null)
 			return null;
-		PrsStream prsStream = token.getPrsStream();
+		IPrsStream prsStream = token.getIPrsStream();
 		if (prsStream == null)
 			return null;
-		LexStream lexStream = prsStream.getLexStream();
+		ILexStream lexStream = prsStream.getILexStream();
 		if (lexStream == null)
 			return null;
 		return lexStream.getFileName();
