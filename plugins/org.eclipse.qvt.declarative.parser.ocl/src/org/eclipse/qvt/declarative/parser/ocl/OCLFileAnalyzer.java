@@ -12,14 +12,14 @@
  * 
  * </copyright>
  *
- * $Id: OCLFileAnalyzer.java,v 1.7 2008/12/18 07:12:30 ewillink Exp $
+ * $Id: OCLFileAnalyzer.java,v 1.8 2010/01/05 11:41:35 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import lpg.lpgjavaruntime.Monitor;
+import lpg.runtime.Monitor;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;

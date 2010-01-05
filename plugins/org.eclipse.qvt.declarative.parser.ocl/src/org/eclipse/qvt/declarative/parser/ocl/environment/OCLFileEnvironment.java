@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLFileEnvironment.java,v 1.5 2009/02/05 09:39:21 ewillink Exp $
+ * $Id: OCLFileEnvironment.java,v 1.6 2010/01/05 11:41:36 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl.environment;
 
@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import lpg.lpgjavaruntime.IToken;
-import lpg.lpgjavaruntime.Monitor;
+import lpg.runtime.IToken;
+import lpg.runtime.Monitor;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EClass;
