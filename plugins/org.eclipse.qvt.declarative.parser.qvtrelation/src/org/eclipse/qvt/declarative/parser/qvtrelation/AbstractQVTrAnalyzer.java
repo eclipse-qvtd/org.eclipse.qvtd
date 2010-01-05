@@ -17,7 +17,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-import lpg.lpgjavaruntime.Monitor;
+import lpg.runtime.Monitor;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;

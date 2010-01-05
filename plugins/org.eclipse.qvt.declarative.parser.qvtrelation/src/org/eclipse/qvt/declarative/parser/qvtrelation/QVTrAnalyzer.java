@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvt.declarative.parser.qvtrelation;
 
-import lpg.lpgjavaruntime.Monitor;
+import lpg.runtime.Monitor;
 
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileAnalyzer;
 import org.eclipse.qvt.declarative.parser.qvtrelation.environment.QVTrFileEnvironment;

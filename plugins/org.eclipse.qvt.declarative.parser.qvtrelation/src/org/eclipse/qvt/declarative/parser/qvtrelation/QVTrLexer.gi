@@ -22,16 +22,16 @@
 %options single-productions
 %options noserialize
 %options package=org.eclipse.qvt.declarative.parser.qvtrelation
-%options template=../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/LexerTemplateD.g
-%options filter=QVTrKWLexer.g
+%options template=../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/LexerTemplateD.gi
+%options filter=QVTrKWLexer.gi
 %options export_terminals=("QVTrParsersym.java", "TK_")
 %options include_directory=".;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/parser"
 
-$Include
-	EssentialOCLLexer.g
-$End
+%Import
+	EssentialOCLLexer.gi
+%End
 
-$Define
+%Define
 	--
 	-- Definition of macro used in the included file LexerBasicMap.g
 	--
@@ -40,13 +40,13 @@ $Define
     $environment_import /.org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment./
 	$copyright_contributions /.*   E.D.Willink - Extended API and implementation for QVTr
 *./
-$End
+%End
 
-$Export
+%Export
 	PLUS_PLUS
-$End
+%End
 
-$Rules
+%Rules
 
 	Token ::= '+' '+'
 		/.$BeginAction
@@ -55,4 +55,4 @@ $Rules
 		./
 		
 	SLC -> '/' '/'
-$End
+%End

@@ -13,9 +13,12 @@
 *   E.D.Willink - Lexer and Parser refactoring to support extensibility and flexible error handling
 *   Borland - Bug 242880
 *   E.D.Willink - Bug 292112
+*   Adolfo Sanchez-Barbudo Herrera (Open Canarias) - LPG v 2.0.17 adoption (242153)
+*   E.D.Willink - Extended API and implementation for QVTr
+*
 * </copyright>
 *
-* $Id: QVTrLexersym.java,v 1.13 2009/11/10 06:05:43 ewillink Exp $
+* $Id: QVTrLexersym.java,v 1.14 2010/01/05 11:42:03 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;
@@ -126,7 +129,7 @@ public interface QVTrLexersym {
       Char_Equal = 17,
       Char_EOF = 102;
 
-      public final static String orderedTerminalSymbols[] = {
+    public final static String orderedTerminalSymbols[] = {
                  "",
                  "0",
                  "1",
@@ -233,5 +236,6 @@ public interface QVTrLexersym {
                  "CtlCharNotWS"
              };
 
+    public final static int numTokenKinds = orderedTerminalSymbols.length;
     public final static boolean isValidForParser = true;
 }

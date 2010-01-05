@@ -12,14 +12,98 @@
 *   IBM - Initial API and implementation
 *   E.D.Willink - Lexer and Parser refactoring to support extensibility and flexible error handling
 *   E.D.Willink - Bug 285633, 292112
+*   Adolfo Sanchez-Barbudo Herrera (Open Canarias) - LPG v 2.0.17 adoption (242153)
+*   E.D.Willink - Extended API and implementation for QVTr
+*
 * </copyright>
 *
-* $Id: QVTrKWLexerprs.java,v 1.13 2009/11/10 06:04:56 ewillink Exp $
+*
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;
 
-public class QVTrKWLexerprs implements lpg.lpgjavaruntime.ParseTable, QVTrKWLexersym {
+public class QVTrKWLexerprs implements lpg.runtime.ParseTable, QVTrKWLexersym {
+    public final static int ERROR_SYMBOL = 0;
+    public final int getErrorSymbol() { return ERROR_SYMBOL; }
+
+    public final static int SCOPE_UBOUND = 0;
+    public final int getScopeUbound() { return SCOPE_UBOUND; }
+
+    public final static int SCOPE_SIZE = 0;
+    public final int getScopeSize() { return SCOPE_SIZE; }
+
+    public final static int MAX_NAME_LENGTH = 0;
+    public final int getMaxNameLength() { return MAX_NAME_LENGTH; }
+
+    public final static int NUM_STATES = 211;
+    public final int getNumStates() { return NUM_STATES; }
+
+    public final static int NT_OFFSET = 56;
+    public final int getNtOffset() { return NT_OFFSET; }
+
+    public final static int LA_STATE_OFFSET = 309;
+    public final int getLaStateOffset() { return LA_STATE_OFFSET; }
+
+    public final static int MAX_LA = 1;
+    public final int getMaxLa() { return MAX_LA; }
+
+    public final static int NUM_RULES = 47;
+    public final int getNumRules() { return NUM_RULES; }
+
+    public final static int NUM_NONTERMINALS = 2;
+    public final int getNumNonterminals() { return NUM_NONTERMINALS; }
+
+    public final static int NUM_SYMBOLS = 58;
+    public final int getNumSymbols() { return NUM_SYMBOLS; }
+
+    public final static int SEGMENT_SIZE = 8192;
+    public final int getSegmentSize() { return SEGMENT_SIZE; }
+
+    public final static int START_STATE = 48;
+    public final int getStartState() { return START_STATE; }
+
+    public final static int IDENTIFIER_SYMBOL = 0;
+    public final int getIdentifier_SYMBOL() { return IDENTIFIER_SYMBOL; }
+
+    public final static int EOFT_SYMBOL = 37;
+    public final int getEoftSymbol() { return EOFT_SYMBOL; }
+
+    public final static int EOLT_SYMBOL = 57;
+    public final int getEoltSymbol() { return EOLT_SYMBOL; }
+
+    public final static int ACCEPT_ACTION = 261;
+    public final int getAcceptAction() { return ACCEPT_ACTION; }
+
+    public final static int ERROR_ACTION = 262;
+    public final int getErrorAction() { return ERROR_ACTION; }
+
+    public final static boolean BACKTRACK = false;
+    public final boolean getBacktrack() { return BACKTRACK; }
+
+    public final int getStartSymbol() { return lhs(0); }
+    public final boolean isValidForParser() { return QVTrKWLexersym.isValidForParser; }
+
+
+    public interface IsNullable {
+        public final static byte isNullable[] = {0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0
+        };
+    };
+    public final static byte isNullable[] = IsNullable.isNullable;
+    public final boolean isNullable(int index) { return isNullable[index] != 0; }
+
+    public interface ProsthesesIndex {
+        public final static byte prosthesesIndex[] = {0,
+            2,1
+        };
+    };
+    public final static byte prosthesesIndex[] = ProsthesesIndex.prosthesesIndex;
+    public final int prosthesesIndex(int index) { return prosthesesIndex[index]; }
 
     public interface IsKeyword {
         public final static byte isKeyword[] = {0,
@@ -28,7 +112,7 @@ public class QVTrKWLexerprs implements lpg.lpgjavaruntime.ParseTable, QVTrKWLexe
             0,0,0,0,0,0,0,0,0,0,
             0,0,0,0,0,0,0,0,0,0,
             0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0
+            0,0,0,0,0,0
         };
     };
     public final static byte isKeyword[] = IsKeyword.isKeyword;
@@ -55,27 +139,27 @@ public class QVTrKWLexerprs implements lpg.lpgjavaruntime.ParseTable, QVTrKWLexe
             1,1,1,1,1,1,1,1,1,1,
             1,1,1,1,1,1,1,1,1,1,
             1,1,1,1,1,1,1,1,1,50,
-            62,75,78,82,85,95,47,92,98,100,
-            102,103,44,12,53,57,107,112,59,108,
-            64,115,15,31,38,119,121,66,123,125,
-            110,117,126,132,128,130,26,134,136,135,
-            145,141,142,146,65,148,152,153,156,154,
-            163,157,161,74,165,168,77,169,171,173,
-            172,40,176,177,180,179,182,190,186,192,
-            199,191,202,19,204,206,207,196,210,212,
-            211,214,215,217,220,226,228,229,232,233,
-            89,223,237,234,239,242,243,244,246,249,
-            250,252,253,255,254,260,256,264,267,270,
-            274,276,278,279,280,281,286,287,288,72,
-            272,291,292,297,299,302,303,304,290,308,
-            309,313,311,315,316,317,321,318,319,324,
-            328,329,330,338,340,342,343,345,333,346,
-            348,349,354,355,359,357,358,362,366,367,
-            361,372,373,375,377,378,379,382,386,388,
-            383,389,391,395,397,398,399,403,404,405,
-            406,408,412,413,411,416,417,418,426,427,
-            428,429,437,430,434,439,440,442,444,443,
-            446,451,454,455,456,457,459,458,462,466,
+            56,76,96,83,27,98,44,86,91,100,
+            103,104,48,12,51,61,108,109,63,111,
+            49,113,15,38,26,117,120,64,122,124,
+            112,125,114,130,126,133,132,136,135,41,
+            143,138,144,147,69,148,149,151,154,156,
+            157,159,163,68,164,165,73,166,170,172,
+            171,82,175,176,179,178,181,182,185,191,
+            194,195,200,19,202,204,205,208,198,210,
+            211,214,215,217,218,223,226,227,230,231,
+            70,221,235,232,237,240,241,242,244,247,
+            248,250,251,253,252,258,254,262,265,268,
+            272,274,276,277,278,279,284,285,286,88,
+            270,289,290,295,297,300,301,302,288,306,
+            307,311,309,313,314,315,319,316,317,322,
+            326,327,328,336,338,340,341,343,331,344,
+            346,347,352,353,357,355,356,360,364,365,
+            359,370,371,373,375,376,377,380,384,386,
+            381,387,389,393,395,396,397,401,403,404,
+            406,407,411,412,409,415,418,414,424,426,
+            427,428,436,429,434,438,439,440,443,442,
+            447,452,450,454,455,456,458,457,464,465,
             262,262
         };
     };
@@ -88,52 +172,52 @@ public class QVTrKWLexerprs implements lpg.lpgjavaruntime.ParseTable, QVTrKWLexe
         public final static byte termCheck[] = {0,
             0,1,2,3,4,5,6,7,8,9,
             10,0,12,13,0,15,2,3,0,8,
-            20,21,22,23,24,0,26,2,28,29,
-            0,31,32,33,34,5,22,0,8,0,
-            3,23,3,0,5,27,0,1,5,19,
-            13,14,0,35,8,12,0,1,0,7,
-            8,0,6,0,0,0,8,2,5,11,
-            6,0,1,0,0,4,0,0,1,16,
-            15,0,9,7,0,21,13,11,0,5,
-            2,0,11,19,0,1,8,0,37,0,
-            1,0,0,0,3,3,0,0,11,0,
-            19,0,1,7,0,8,0,3,0,1,
-            0,1,0,1,0,0,17,0,4,0,
-            14,0,1,0,0,0,7,2,13,6,
-            0,0,15,9,0,0,2,0,8,2,
-            5,0,0,0,2,0,0,6,5,18,
-            0,6,0,1,0,9,6,0,0,1,
-            0,0,0,2,10,0,0,2,0,0,
-            0,0,15,7,5,0,16,15,7,0,
-            0,0,14,2,4,0,7,12,0,4,
-            2,0,1,0,1,0,0,2,2,0,
-            0,0,2,0,0,1,0,0,5,0,
-            11,10,0,4,8,0,1,0,0,1,
-            3,0,0,0,3,13,0,1,0,7,
-            7,0,0,0,6,0,4,4,0,0,
-            1,0,0,0,0,0,11,3,17,0,
-            5,8,3,0,1,14,0,1,20,0,
-            18,0,3,0,1,0,1,0,0,0,
-            0,3,5,12,5,0,0,0,2,0,
-            0,0,5,13,4,10,0,6,0,3,
-            2,0,0,0,1,16,4,0,0,8,
-            0,4,0,1,0,0,0,0,0,3,
-            0,7,12,0,4,17,9,0,0,0,
-            12,4,0,18,6,3,13,0,1,0,
-            1,0,0,14,0,0,4,0,0,8,
-            6,6,5,0,0,7,0,0,0,3,
-            0,0,9,9,6,0,0,1,8,12,
-            9,0,0,1,0,10,0,0,0,3,
-            9,0,0,2,10,0,1,0,0,2,
-            0,1,4,16,0,1,0,0,0,1,
-            3,5,0,0,0,0,24,0,1,4,
-            0,0,0,9,36,0,0,0,16,8,
-            17,6,10,7,14,0,0,0,0,0,
-            3,2,6,0,9,7,0,1,0,0,
-            7,0,0,0,6,0,4,30,9,6,
-            0,1,11,0,0,0,0,0,0,0,
-            3,0,8,5,11,0,10,2,7,0,
-            25,0,17,0,0,0,0,0,0,0,
+            20,21,22,23,24,0,0,27,3,29,
+            30,5,32,33,34,35,22,0,13,14,
+            0,23,5,0,1,8,28,0,0,9,
+            0,8,5,5,36,0,19,7,8,12,
+            0,1,0,0,16,2,6,0,0,0,
+            8,2,0,11,6,0,9,8,15,7,
+            13,0,0,11,3,0,5,0,1,21,
+            0,4,37,11,19,0,1,0,1,0,
+            1,11,0,0,19,3,3,0,0,1,
+            0,0,0,0,7,3,0,1,8,0,
+            1,0,1,0,0,0,13,4,17,0,
+            1,0,0,2,0,0,2,0,14,7,
+            15,6,0,0,2,8,0,0,0,2,
+            0,5,2,0,6,0,0,1,0,6,
+            5,18,0,0,0,0,1,9,6,0,
+            0,0,2,10,0,0,2,0,0,15,
+            0,0,7,5,0,16,15,7,7,0,
+            0,14,2,0,0,2,12,0,4,0,
+            1,0,1,0,0,2,2,0,11,0,
+            0,4,2,0,0,1,0,0,5,10,
+            0,4,0,1,8,0,0,1,3,0,
+            0,0,3,13,0,1,0,7,7,0,
+            0,0,6,0,4,4,0,0,1,0,
+            0,0,0,0,11,3,17,0,5,8,
+            3,0,1,14,0,1,20,0,18,0,
+            3,0,1,0,1,0,0,0,0,3,
+            5,12,5,0,0,0,2,0,0,0,
+            5,13,4,10,0,6,0,3,2,0,
+            0,0,1,16,4,0,0,8,0,4,
+            0,1,0,0,0,0,0,3,0,7,
+            12,0,4,17,9,0,0,0,12,4,
+            0,18,6,3,13,0,1,0,1,0,
+            0,14,0,0,4,0,0,8,6,6,
+            5,0,0,7,0,0,0,3,0,0,
+            9,9,6,0,0,1,8,12,9,0,
+            0,1,0,10,0,0,0,3,9,0,
+            0,2,10,0,1,0,0,2,0,1,
+            4,16,0,1,0,0,0,1,3,5,
+            0,25,0,0,24,0,0,1,0,4,
+            0,0,9,0,0,0,16,0,8,17,
+            6,10,14,0,7,0,0,0,0,3,
+            2,6,9,0,7,0,1,0,0,0,
+            7,0,0,6,31,4,0,9,6,0,
+            11,0,1,0,0,0,0,0,0,3,
+            11,8,5,0,0,10,2,0,0,0,
+            7,17,26,0,0,0,0,0,0,0,
             0,0,0,0,0,0,0,0,0,0,
             0,0,0,0,0,0,0,0,0,0,
             0,0,0,0,0,0,0,0,0,0,
@@ -148,52 +232,52 @@ public class QVTrKWLexerprs implements lpg.lpgjavaruntime.ParseTable, QVTrKWLexe
         public final static char termAction[] = {0,
             262,72,67,68,74,52,73,71,70,56,
             75,262,57,66,262,54,104,103,262,90,
-            55,53,69,61,65,262,51,121,64,63,
-            262,62,59,58,60,106,102,262,105,262,
-            108,153,308,262,142,155,262,82,89,107,
-            264,109,262,154,81,88,262,94,262,92,
-            91,262,93,262,262,262,98,113,269,97,
-            277,262,192,262,262,193,262,262,77,100,
-            112,262,134,136,262,128,133,137,262,79,
-            169,262,78,76,262,80,168,262,261,262,
-            85,262,262,262,86,87,262,262,84,262,
-            83,262,96,95,262,99,262,101,262,110,
-            262,111,262,114,262,262,300,262,115,262,
-            116,262,118,262,262,262,120,123,117,122,
-            262,262,119,124,262,262,125,262,126,129,
-            127,262,262,262,130,262,262,273,270,278,
-            262,271,262,131,262,268,132,262,262,138,
-            12,262,262,141,135,262,262,143,262,262,
-            262,262,306,144,145,262,139,140,147,262,
-            262,262,146,150,151,262,148,149,262,159,
-            285,262,152,262,156,262,262,157,158,262,
-            262,262,291,262,262,163,262,262,162,262,
-            160,161,262,165,164,262,266,262,262,275,
-            166,262,262,262,265,263,262,309,262,167,
-            170,262,262,262,171,262,172,173,262,262,
-            287,262,262,262,262,262,174,178,303,262,
-            181,179,180,262,182,176,262,183,175,262,
-            177,262,184,262,185,262,276,262,262,262,
-            262,187,186,194,188,262,262,262,190,262,
-            262,262,191,267,195,189,262,196,262,295,
-            197,262,262,262,200,201,199,262,262,198,
-            262,202,262,203,262,262,262,262,262,206,
-            262,205,204,262,207,288,208,262,262,262,
-            209,211,262,282,299,217,210,262,213,262,
-            305,262,262,212,262,262,215,262,262,214,
-            216,218,283,262,262,219,262,262,262,286,
-            262,262,289,220,221,262,262,296,224,222,
-            223,262,262,225,262,297,262,262,262,304,
-            292,262,262,228,272,262,229,262,262,230,
-            262,279,232,226,262,233,262,262,262,302,
-            235,234,262,262,262,262,231,262,239,238,
-            262,262,262,237,227,262,262,262,236,240,
-            293,242,301,243,241,262,262,262,262,262,
-            280,247,281,262,290,245,262,246,262,262,
-            248,262,262,262,249,262,253,244,250,252,
-            262,255,251,262,262,262,262,262,262,262,
-            307,262,257,258,256,262,294,284,259,262,
-            254,262,298
+            55,53,69,61,65,262,262,51,108,64,
+            63,79,62,59,58,60,102,262,264,109,
+            262,153,106,262,82,105,155,262,262,124,
+            262,81,89,269,154,262,107,92,91,88,
+            262,94,262,262,100,113,93,262,262,262,
+            98,169,262,97,277,262,134,168,112,136,
+            133,262,262,137,308,262,142,262,192,128,
+            262,193,261,78,76,262,77,262,80,262,
+            85,84,262,262,83,86,87,262,262,96,
+            262,262,262,262,95,101,262,110,99,262,
+            111,262,114,262,262,262,117,115,300,262,
+            118,262,262,121,262,262,123,262,116,120,
+            119,122,262,262,125,126,262,262,262,129,
+            262,127,130,262,273,262,262,131,262,271,
+            270,278,262,262,262,262,138,268,132,12,
+            262,262,141,135,262,262,143,262,262,306,
+            262,262,144,145,262,139,140,147,148,262,
+            262,146,150,262,262,285,149,262,151,262,
+            152,262,156,262,262,157,158,262,160,262,
+            262,159,291,262,262,163,262,262,162,161,
+            262,165,262,266,164,262,262,275,166,262,
+            262,262,265,263,262,309,262,167,170,262,
+            262,262,171,262,172,173,262,262,287,262,
+            262,262,262,262,174,178,303,262,181,179,
+            180,262,182,176,262,183,175,262,177,262,
+            184,262,185,262,276,262,262,262,262,187,
+            186,194,188,262,262,262,190,262,262,262,
+            191,267,195,189,262,196,262,295,197,262,
+            262,262,200,201,199,262,262,198,262,202,
+            262,203,262,262,262,262,262,206,262,205,
+            204,262,207,288,208,262,262,262,209,211,
+            262,282,299,217,210,262,213,262,305,262,
+            262,212,262,262,215,262,262,214,216,218,
+            283,262,262,219,262,262,262,286,262,262,
+            289,220,221,262,262,296,224,222,223,262,
+            262,225,262,297,262,262,262,304,292,262,
+            262,228,272,262,229,262,262,230,262,279,
+            232,226,262,233,262,262,262,302,235,234,
+            262,227,262,262,231,262,262,239,262,238,
+            262,262,237,262,262,262,236,262,240,293,
+            242,301,241,262,243,262,262,262,262,280,
+            247,281,290,262,245,262,246,262,262,262,
+            248,262,262,249,244,253,262,250,252,262,
+            251,262,255,262,262,262,262,262,262,307,
+            256,257,258,262,262,294,284,262,262,262,
+            259,298,254
         };
     };
     public final static char termAction[] = TermAction.termAction;
@@ -213,56 +297,21 @@ public class QVTrKWLexerprs implements lpg.lpgjavaruntime.ParseTable, QVTrKWLexe
     public final int scopeState(int index) { return 0;}
     public final int inSymb(int index) { return 0;}
     public final String name(int index) { return null; }
-    public final int getErrorSymbol() { return 0; }
-    public final int getScopeUbound() { return 0; }
-    public final int getScopeSize() { return 0; }
-    public final int getMaxNameLength() { return 0; }
-
-    public final static int
-           NUM_STATES        = 211,
-           NT_OFFSET         = 55,
-           LA_STATE_OFFSET   = 309,
-           MAX_LA            = 1,
-           NUM_RULES         = 47,
-           NUM_NONTERMINALS  = 2,
-           NUM_SYMBOLS       = 57,
-           SEGMENT_SIZE      = 8192,
-           START_STATE       = 48,
-           IDENTIFIER_SYMBOL = 0,
-           EOFT_SYMBOL       = 37,
-           EOLT_SYMBOL       = 56,
-           ACCEPT_ACTION     = 261,
-           ERROR_ACTION      = 262;
-
-    public final static boolean BACKTRACK = false;
-
-    public final int getNumStates() { return NUM_STATES; }
-    public final int getNtOffset() { return NT_OFFSET; }
-    public final int getLaStateOffset() { return LA_STATE_OFFSET; }
-    public final int getMaxLa() { return MAX_LA; }
-    public final int getNumRules() { return NUM_RULES; }
-    public final int getNumNonterminals() { return NUM_NONTERMINALS; }
-    public final int getNumSymbols() { return NUM_SYMBOLS; }
-    public final int getSegmentSize() { return SEGMENT_SIZE; }
-    public final int getStartState() { return START_STATE; }
-    public final int getStartSymbol() { return lhs[0]; }
-    public final int getIdentifierSymbol() { return IDENTIFIER_SYMBOL; }
-    public final int getEoftSymbol() { return EOFT_SYMBOL; }
-    public final int getEoltSymbol() { return EOLT_SYMBOL; }
-    public final int getAcceptAction() { return ACCEPT_ACTION; }
-    public final int getErrorAction() { return ERROR_ACTION; }
-    public final boolean isValidForParser() { return isValidForParser; }
-    public final boolean getBacktrack() { return BACKTRACK; }
-
     public final int originalState(int state) { return 0; }
     public final int asi(int state) { return 0; }
     public final int nasi(int state) { return 0; }
     public final int inSymbol(int state) { return 0; }
 
+    /**
+     * assert(! goto_default);
+     */
     public final int ntAction(int state, int sym) {
         return baseAction[state + sym];
     }
 
+    /**
+     * assert(! shift_default);
+     */
     public final int tAction(int state, int sym) {
         int i = baseAction[state],
             k = i + sym;

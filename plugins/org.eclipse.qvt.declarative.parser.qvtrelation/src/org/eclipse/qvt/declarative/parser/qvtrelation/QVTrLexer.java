@@ -13,14 +13,17 @@
 *   E.D.Willink - Lexer and Parser refactoring to support extensibility and flexible error handling
 *   Borland - Bug 242880
 *   E.D.Willink - Bug 292112
+*   Adolfo Sanchez-Barbudo Herrera (Open Canarias) - LPG v 2.0.17 adoption (242153)
+*   E.D.Willink - Extended API and implementation for QVTr
+*
 * </copyright>
 *
-* $Id: QVTrLexer.java,v 1.14 2009/11/10 06:05:43 ewillink Exp $
+* $Id: QVTrLexer.java,v 1.15 2010/01/05 11:42:03 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;
 
-import lpg.lpgjavaruntime.*;
+import lpg.runtime.*;
 import org.eclipse.ocl.lpg.AbstractLexer;
 import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
@@ -53,7 +56,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
     
 	public QVTrLexer(ICSTFileEnvironment environment, char[] chars) {
 		this(environment, chars, "OCL", ECLIPSE_TAB_VALUE);
-		kwLexer = new QVTrKWLexer(getInputChars(), TK_IDENTIFIER);
+		kwLexer = new QVTrKWLexer(getInputChars(), QVTrParsersym.TK_IDENTIFIER);
 	}
 
     public QVTrLexer(ICSTFileEnvironment environment, char[] input_chars, String filename, int tab)  {
@@ -82,7 +85,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
     {
         super.initialize(content, filename);
         if (kwLexer == null)
-             kwLexer = new QVTrKWLexer(getInputChars(), TK_IDENTIFIER);
+             kwLexer = new QVTrKWLexer(getInputChars(), QVTrParsersym.TK_IDENTIFIER);
         else
              kwLexer.setInputChars(getInputChars());
     }
@@ -93,7 +96,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
     @Override
     public void setInputChars(char[] inputChars) {
 		super.setInputChars(inputChars);
-		kwLexer = new QVTrKWLexer(getInputChars(), TK_IDENTIFIER);
+		kwLexer = new QVTrKWLexer(getInputChars(), QVTrParsersym.TK_IDENTIFIER);
 	}
     
     @Override
@@ -109,12 +112,12 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
         lexParser.parseCharacters(monitor);  // Lex the input characters
             
         int i = getStreamIndex();
-        parser.makeToken(i, i, TK_EOF_TOKEN); // and end with the end of file token
+        parser.makeToken(i, i, QVTrParsersym.TK_EOF_TOKEN); // and end with the end of file token
         parser.setStreamLength(parser.getSize());
             
         return;
     }
-    
+        
     final void makeToken(int kind)
     {
         int startOffset = getLeftSpan(),
@@ -127,7 +130,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
     {
         int startOffset = getLeftSpan(),
             endOffset = getRightSpan();
-        super.getPrsStream().makeAdjunct(startOffset, endOffset, kind);
+        super.getIPrsStream().makeAdjunct(startOffset, endOffset, kind);
     }
 
     final void skipToken()
@@ -318,7 +321,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 2:  Token ::= " SLNotDQ "
             //
             case 2: { 
-				makeToken(TK_IDENTIFIER);
+				makeToken(QVTrParsersym.TK_IDENTIFIER);
 	            break;
             }
 	 
@@ -326,7 +329,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 3:  Token ::= SingleQuote SLNotSQOpt SingleQuote
             //
             case 3: { 
-				makeToken(TK_STRING_LITERAL);
+				makeToken(QVTrParsersym.TK_STRING_LITERAL);
 	            break;
             }
 	 
@@ -334,7 +337,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 4:  Token ::= Acute SLNotSQOpt Acute
             //
             case 4: { 
-				makeToken(TK_STRING_LITERAL);
+				makeToken(QVTrParsersym.TK_STRING_LITERAL);
 	            break;
             }
 	 
@@ -342,7 +345,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 5:  Token ::= BackQuote SLNotSQOpt Acute
             //
             case 5: { 
-				makeToken(TK_STRING_LITERAL);
+				makeToken(QVTrParsersym.TK_STRING_LITERAL);
 	            break;
             }
 	 
@@ -368,7 +371,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 9:  Token ::= RealLiteral
             //
             case 9: { 
-				makeToken(TK_REAL_LITERAL);
+				makeToken(QVTrParsersym.TK_REAL_LITERAL);
 	            break;
             }
 	 
@@ -376,7 +379,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 10:  Token ::= SLC
             //
             case 10: { 
-				makeComment(TK_SINGLE_LINE_COMMENT);
+				makeComment(QVTrParsersym.TK_SINGLE_LINE_COMMENT);
 	            break;
             }
 	 
@@ -384,7 +387,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 11:  Token ::= / * Inside Stars /
             //
             case 11: { 
-                makeComment(TK_MULTI_LINE_COMMENT);
+                makeComment(QVTrParsersym.TK_MULTI_LINE_COMMENT);
                 break;
             }
      
@@ -400,7 +403,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 13:  Token ::= +
             //
             case 13: { 
-				makeToken(TK_PLUS);
+				makeToken(QVTrParsersym.TK_PLUS);
 	            break;
             }
 	 
@@ -408,7 +411,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 14:  Token ::= -
             //
             case 14: { 
-				makeToken(TK_MINUS);
+				makeToken(QVTrParsersym.TK_MINUS);
 	            break;
             }
 	 
@@ -416,7 +419,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 15:  Token ::= *
             //
             case 15: { 
-				makeToken(TK_MULTIPLY);
+				makeToken(QVTrParsersym.TK_MULTIPLY);
 	            break;
             }
 	 
@@ -424,7 +427,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 16:  Token ::= /
             //
             case 16: { 
-				makeToken(TK_DIVIDE);
+				makeToken(QVTrParsersym.TK_DIVIDE);
 	            break;
             }
 	 
@@ -432,7 +435,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 17:  Token ::= (
             //
             case 17: { 
-				makeToken(TK_LPAREN);
+				makeToken(QVTrParsersym.TK_LPAREN);
 	            break;
             }
 	 
@@ -440,7 +443,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 18:  Token ::= )
             //
             case 18: { 
-				makeToken(TK_RPAREN);
+				makeToken(QVTrParsersym.TK_RPAREN);
 	            break;
             }
 	 
@@ -448,7 +451,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 19:  Token ::= >
             //
             case 19: { 
-				makeToken(TK_GREATER);
+				makeToken(QVTrParsersym.TK_GREATER);
 	            break;
             }
 	 
@@ -456,7 +459,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 20:  Token ::= <
             //
             case 20: { 
-				makeToken(TK_LESS);
+				makeToken(QVTrParsersym.TK_LESS);
 	            break;
             }
 	 
@@ -464,7 +467,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 21:  Token ::= =
             //
             case 21: { 
-				makeToken(TK_EQUAL);
+				makeToken(QVTrParsersym.TK_EQUAL);
 	            break;
             }
 	 
@@ -472,7 +475,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 22:  Token ::= > =
             //
             case 22: { 
-				makeToken(TK_GREATER_EQUAL);
+				makeToken(QVTrParsersym.TK_GREATER_EQUAL);
 	            break;
             }
 	 
@@ -480,7 +483,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 23:  Token ::= < =
             //
             case 23: { 
-				makeToken(TK_LESS_EQUAL);
+				makeToken(QVTrParsersym.TK_LESS_EQUAL);
 	            break;
             }
 	 
@@ -488,7 +491,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 24:  Token ::= < >
             //
             case 24: { 
-				makeToken(TK_NOT_EQUAL);
+				makeToken(QVTrParsersym.TK_NOT_EQUAL);
 	            break;
             }
 	 
@@ -496,7 +499,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 25:  Token ::= [
             //
             case 25: { 
-				makeToken(TK_LBRACKET);
+				makeToken(QVTrParsersym.TK_LBRACKET);
 	            break;
             }
 	 
@@ -504,7 +507,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 26:  Token ::= ]
             //
             case 26: { 
-				makeToken(TK_RBRACKET);
+				makeToken(QVTrParsersym.TK_RBRACKET);
 	            break;
             }
 	 
@@ -512,7 +515,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 27:  Token ::= {
             //
             case 27: { 
-				makeToken(TK_LBRACE);
+				makeToken(QVTrParsersym.TK_LBRACE);
 	            break;
             }
 	 
@@ -520,7 +523,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 28:  Token ::= }
             //
             case 28: { 
-				makeToken(TK_RBRACE);
+				makeToken(QVTrParsersym.TK_RBRACE);
 	            break;
             }
 	 
@@ -528,7 +531,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 29:  Token ::= - >
             //
             case 29: { 
-				makeToken(TK_ARROW);
+				makeToken(QVTrParsersym.TK_ARROW);
 	            break;
             }
 	 
@@ -536,7 +539,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 30:  Token ::= |
             //
             case 30: { 
-				makeToken(TK_BAR);
+				makeToken(QVTrParsersym.TK_BAR);
 	            break;
             }
 	 
@@ -544,7 +547,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 31:  Token ::= ,
             //
             case 31: { 
-				makeToken(TK_COMMA);
+				makeToken(QVTrParsersym.TK_COMMA);
 	            break;
             }
 	 
@@ -552,7 +555,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 32:  Token ::= :
             //
             case 32: { 
-				makeToken(TK_COLON);
+				makeToken(QVTrParsersym.TK_COLON);
 	            break;
             }
 	 
@@ -560,7 +563,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 33:  Token ::= : :
             //
             case 33: { 
-				makeToken(TK_COLONCOLON);
+				makeToken(QVTrParsersym.TK_COLONCOLON);
 	            break;
             }
 	 
@@ -568,7 +571,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 34:  Token ::= ;
             //
             case 34: { 
-				makeToken(TK_SEMICOLON);
+				makeToken(QVTrParsersym.TK_SEMICOLON);
 	            break;
             }
 	 
@@ -582,7 +585,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 36:  DotToken ::= .
             //
             case 36: { 
-				makeToken(TK_DOT);
+				makeToken(QVTrParsersym.TK_DOT);
 	            break;
             }
 	 
@@ -596,7 +599,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 38:  DotDotToken ::= . .
             //
             case 38: { 
-				makeToken(TK_DOTDOT);
+				makeToken(QVTrParsersym.TK_DOTDOT);
 	            break;
             }
 	 
@@ -604,7 +607,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 39:  IntegerLiteral ::= Integer
             //
             case 39: { 
-				makeToken(TK_INTEGER_LITERAL);
+				makeToken(QVTrParsersym.TK_INTEGER_LITERAL);
 	            break;
             }
 	 
@@ -612,7 +615,7 @@ public class QVTrLexer extends AbstractLexer implements QVTrParsersym, QVTrLexer
             // Rule 264:  Token ::= + +
             //
             case 264: { 
-				makeToken(TK_PLUS_PLUS);
+				makeToken(QVTrParsersym.TK_PLUS_PLUS);
 	            break;
             }
 	

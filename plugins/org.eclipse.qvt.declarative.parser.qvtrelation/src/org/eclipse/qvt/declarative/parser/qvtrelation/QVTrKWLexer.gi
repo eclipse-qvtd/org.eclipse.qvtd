@@ -12,24 +12,24 @@
 -- The QVTr KeyWord Lexer
 --
 
-%Options slr
-%Options fp=QVTrKWLexer,prefix=Char_
+%options slr
+%options fp=QVTrKWLexer,prefix=Char_
 %options noserialize
 %options package=org.eclipse.qvt.declarative.parser.qvtrelation
-%options template=../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/KeywordTemplateD.g
+%options template=../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/KeywordTemplateD.gi
 %options export_terminals=("QVTrParsersym.java", "TK_")
 %options include_directory=".;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/parser"
 
-$Include
-	EssentialOCLKWLexer.g
-$End
+%Import
+	EssentialOCLKWLexer.gi
+%End
 
-$Define
+%Define
 	$copyright_contributions /.*   E.D.Willink - Extended API and implementation for QVTr
 *./
-$End
+%End
 
-$Export
+%Export
 	checkonly
 	default_values
 	domain
@@ -47,22 +47,22 @@ $Export
 	transformation
 	when
 	where
-$End
+%End
 
-$Terminals
+%Terminals
 	_
-$End
+%End
 
-$Headers
+%Headers
     /.
         static
         {
             tokenKind['_'] = Char__;
         };
     ./
-$End
+%End
 
-$Rules
+%Rules
 
 -- The Goal for the parser is a single Keyword
 
@@ -168,4 +168,4 @@ $Rules
 			$setResult($_where);
 		  $EndAction
 		./
-$End
+%End
