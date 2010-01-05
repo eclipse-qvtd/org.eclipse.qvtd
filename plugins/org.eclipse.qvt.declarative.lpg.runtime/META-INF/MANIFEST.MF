@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Runtime
-Bundle-SymbolicName: org.eclipse.qvt.declarative.lpg.runtime;singleton:=true
+Bundle-SymbolicName: lpg.runtime;singleton:=true
 Bundle-Version: 0.8.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: lpg.runtime.java;bundle-version="2.0.17";visibility:=reexport
