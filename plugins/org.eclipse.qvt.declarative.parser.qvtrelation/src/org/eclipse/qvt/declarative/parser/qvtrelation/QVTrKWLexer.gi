@@ -16,7 +16,7 @@
 %options fp=QVTrKWLexer,prefix=Char_
 %options noserialize
 %options package=org.eclipse.qvt.declarative.parser.qvtrelation
-%options template=../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/KeywordTemplateD.gi
+%options template=../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/KeywordTemplateF.gi
 %options export_terminals=("QVTrParsersym.java", "TK_")
 %options include_directory=".;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/parser"
 

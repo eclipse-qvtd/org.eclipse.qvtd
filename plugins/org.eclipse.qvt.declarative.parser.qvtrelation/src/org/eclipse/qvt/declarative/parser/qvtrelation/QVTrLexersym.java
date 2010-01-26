@@ -14,11 +14,12 @@
 *   Borland - Bug 242880
 *   E.D.Willink - Bug 292112
 *   Adolfo Sanchez-Barbudo Herrera (Open Canarias) - LPG v 2.0.17 adoption (242153)
+*   Adolfo Sanchez-Barbudo Herrera (Open Canarias) - Introducing new LPG templates (299396)
 *   E.D.Willink - Extended API and implementation for QVTr
 *
 * </copyright>
 *
-* $Id: QVTrLexersym.java,v 1.14 2010/01/05 11:42:03 ewillink Exp $
+* $Id: QVTrLexersym.java,v 1.15 2010/01/26 22:03:22 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;

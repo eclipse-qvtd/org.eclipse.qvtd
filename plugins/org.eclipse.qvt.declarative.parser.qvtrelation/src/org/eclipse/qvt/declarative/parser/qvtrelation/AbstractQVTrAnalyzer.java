@@ -488,10 +488,9 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 			Reader fileReader = new FileReader(file);
 			QVTrLexer lexer = new QVTrLexer(env.getFileEnvironment());
 			QVTrParser parser = new QVTrParser(lexer);
-			lexer.setFileName(file.toString());
-			lexer.initialize(fileReader); 
-			lexer.lexToTokens(parser);
-			CSTNode cstNode = parser.parseTokensToCST();
+			lexer.reset(fileReader, file.toString());
+			lexer.lexer(parser.getIPrsStream());
+			CSTNode cstNode = parser.parser();
 			if (cstNode == null)
 				return null;
 			List<TransformationCS> importedTransformationCS = ((TopLevelCS) cstNode).getTransformation();

@@ -29,7 +29,7 @@ public class PrintStreamProblemHandler extends AbstractProblemHandler
 
 	@Override public void handleProblem(Severity problemSeverity, Phase processingPhase,
 			String problemMessage, String processingContext, int startOffset, int endOffset) {
-		int lineNumber = getParser().getTokenAtCharacter(startOffset).getLine();
+		int lineNumber = getParser().getIPrsStream().getTokenAtCharacter(startOffset).getLine();
 		stream.println(file.getName() + ":" + lineNumber + ": " + String.valueOf(processingPhase) + "-" + String.valueOf(problemSeverity) + ": " + problemMessage + ": " + getParser().computeInputString(startOffset, endOffset));
 	}
 }
