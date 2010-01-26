@@ -13,6 +13,7 @@
 *   E.D.Willink - Lexer and Parser refactoring to support extensibility and flexible error handling
 *   E.D.Willink - Bug 285633, 292112
 *   Adolfo Sanchez-Barbudo Herrera (Open Canarias) - LPG v 2.0.17 adoption (242153)
+*   Adolfo Sanchez-Barbudo Herrera (Open Canarias) - Introducing new LPG templates (299396) 
 *   E.D.Willink - Extended API and implementation for QVTc
 *
 * </copyright>
@@ -24,7 +25,7 @@ package org.eclipse.qvt.declarative.parser.qvtcore;
 
 
 
-public class QVTcKWLexer extends QVTcKWLexerprs implements QVTcParsersym
+public class QVTcKWLexer extends QVTcKWLexerprs
 {
     private char[] inputChars;
     private final int keywordKind[] = new int[43 + 1];
@@ -120,7 +121,7 @@ public class QVTcKWLexer extends QVTcKWLexerprs implements QVTcParsersym
         tokenKind['Z'] = QVTcKWLexersym.Char_Z;
     };
 
-    final int getKind(int c)
+    final int getKind(char c)
     {
         return (((c & 0xFFFFFF80) == 0) /* 0 <= c < 128? */ ? tokenKind[c] : 0);
     }
@@ -432,7 +433,6 @@ public class QVTcKWLexer extends QVTcKWLexerprs implements QVTcParsersym
 		keywordKind[43] = (QVTcParsersym.TK_where);
 	  
 	
-
         for (int i = 0; i < keywordKind.length; i++)
         {
             if (keywordKind[i] == 0)

@@ -14,12 +14,13 @@
 *   E.D.Willink - Remove unnecessary warning suppression
 *   E.D.Willink - Bugs 184048, 225493, 243976, 259818, 282882, 287993, 288040, 292112
 *   Borland - Bug 242880
-*   Adolfo Sanchez-Barbudo Herrera (Open Canarias) - LPG v 2.0.17 adoption (242153)
-*   E.D.Willink - Extended API and implementation for QVTc
-*
+*   Adolfo Sanchez-Barbudo Herrera (Open Canarias):
+*        - 242153: LPG v 2.0.17 adoption.
+*        - 299396: Introducing new LPG templates
+*        - 300534: Removing the use of deprecated macros.
 * </copyright>
 *
-* $Id: QVTcParsersym.java,v 1.12 2010/01/05 11:41:46 ewillink Exp $
+* $Id: QVTcParsersym.java,v 1.13 2010/01/26 22:03:33 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;

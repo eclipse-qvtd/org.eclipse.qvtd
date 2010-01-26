@@ -22,7 +22,7 @@
 %options single-productions
 %options noserialize
 %options package=org.eclipse.qvt.declarative.parser.qvtcore
-%options template=../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/LexerTemplateD.gi
+%options template=../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/LexerTemplateF.gi
 %options filter=QVTcKWLexer.gi
 %options export_terminals=("QVTcParsersym.java", "TK_")
 %options include_directory=".;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg;../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/parser"

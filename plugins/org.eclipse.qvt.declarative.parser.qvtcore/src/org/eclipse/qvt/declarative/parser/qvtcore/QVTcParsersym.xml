@@ -1,0 +1,186 @@
+/**
+* Essential OCL Lexer
+* <copyright>
+*
+* Copyright (c) 2005, 2009 IBM Corporation and others.
+* All rights reserved.   This program and the accompanying materials
+* are made available under the terms of the Eclipse Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*
+* Contributors:
+*   IBM - Initial API and implementation
+*   E.D.Willink - Lexer and Parser refactoring to support extensibility and flexible error handling
+*   Borland - Bug 242880
+*   E.D.Willink - Bug 292112
+*   Adolfo Sanchez-Barbudo Herrera (Open Canarias) - LPG v 2.0.17 adoption (242153)
+*   E.D.Willink - Extended API and implementation for QVTc
+*
+* </copyright>
+*
+* $Id: QVTcParsersym.xml,v 1.1 2010/01/26 22:03:33 ewillink Exp $
+*/
+
+package org.eclipse.qvt.declarative.parser.qvtcore;
+
+public interface QVTcParsersym {
+    public final static int
+      TK_self = 1,
+      TK_if = 2,
+      TK_then = 3,
+      TK_else = 4,
+      TK_endif = 5,
+      TK_and = 6,
+      TK_or = 7,
+      TK_xor = 8,
+      TK_not = 9,
+      TK_implies = 10,
+      TK_let = 11,
+      TK_in = 12,
+      TK_true = 13,
+      TK_false = 14,
+      TK_null = 15,
+      TK_invalid = 16,
+      TK_Set = 17,
+      TK_Bag = 18,
+      TK_Sequence = 19,
+      TK_Collection = 20,
+      TK_OrderedSet = 21,
+      TK_String = 22,
+      TK_Integer = 23,
+      TK_UnlimitedNatural = 24,
+      TK_Real = 25,
+      TK_Boolean = 26,
+      TK_Tuple = 27,
+      TK_OclAny = 28,
+      TK_OclVoid = 29,
+      TK_OclInvalid = 30,
+      TK_check = 31,
+      TK_creation = 32,
+      TK_default = 33,
+      TK_deletion = 34,
+      TK_enforce = 35,
+      TK_imports = 36,
+      TK_map = 37,
+      TK_query = 38,
+      TK_realize = 39,
+      TK_refines = 40,
+      TK_transformation = 41,
+      TK_uses = 42,
+      TK_where = 43,
+      TK_EOF_TOKEN = 44,
+      TK_IDENTIFIER = 45,
+      TK_INTEGER_LITERAL = 46,
+      TK_REAL_LITERAL = 47,
+      TK_STRING_LITERAL = 48,
+      TK_PLUS = 49,
+      TK_MINUS = 50,
+      TK_MULTIPLY = 51,
+      TK_DIVIDE = 52,
+      TK_GREATER = 53,
+      TK_LESS = 54,
+      TK_EQUAL = 55,
+      TK_GREATER_EQUAL = 56,
+      TK_LESS_EQUAL = 57,
+      TK_NOT_EQUAL = 58,
+      TK_LPAREN = 59,
+      TK_RPAREN = 60,
+      TK_LBRACE = 61,
+      TK_RBRACE = 62,
+      TK_LBRACKET = 63,
+      TK_RBRACKET = 64,
+      TK_ARROW = 65,
+      TK_BAR = 66,
+      TK_COMMA = 67,
+      TK_COLON = 68,
+      TK_COLONCOLON = 69,
+      TK_SEMICOLON = 70,
+      TK_DOT = 71,
+      TK_DOTDOT = 72,
+      TK_SINGLE_LINE_COMMENT = 73,
+      TK_MULTI_LINE_COMMENT = 74,
+      TK_COLON_EQUALS = 75;
+
+    public final static String orderedTerminalSymbols[] = {
+                 "",
+                 "self",
+                 "if",
+                 "then",
+                 "else",
+                 "endif",
+                 "and",
+                 "or",
+                 "xor",
+                 "not",
+                 "implies",
+                 "let",
+                 "in",
+                 "true",
+                 "false",
+                 "null",
+                 "invalid",
+                 "Set",
+                 "Bag",
+                 "Sequence",
+                 "Collection",
+                 "OrderedSet",
+                 "String",
+                 "Integer",
+                 "UnlimitedNatural",
+                 "Real",
+                 "Boolean",
+                 "Tuple",
+                 "OclAny",
+                 "OclVoid",
+                 "OclInvalid",
+                 "check",
+                 "creation",
+                 "default",
+                 "deletion",
+                 "enforce",
+                 "imports",
+                 "map",
+                 "query",
+                 "realize",
+                 "refines",
+                 "transformation",
+                 "uses",
+                 "where",
+                 "EOF_TOKEN",
+                 "IDENTIFIER",
+                 "INTEGER_LITERAL",
+                 "REAL_LITERAL",
+                 "STRING_LITERAL",
+                 "PLUS",
+                 "MINUS",
+                 "MULTIPLY",
+                 "DIVIDE",
+                 "GREATER",
+                 "LESS",
+                 "EQUAL",
+                 "GREATER_EQUAL",
+                 "LESS_EQUAL",
+                 "NOT_EQUAL",
+                 "LPAREN",
+                 "RPAREN",
+                 "LBRACE",
+                 "RBRACE",
+                 "LBRACKET",
+                 "RBRACKET",
+                 "ARROW",
+                 "BAR",
+                 "COMMA",
+                 "COLON",
+                 "COLONCOLON",
+                 "SEMICOLON",
+                 "DOT",
+                 "DOTDOT",
+                 "SINGLE_LINE_COMMENT",
+                 "MULTI_LINE_COMMENT",
+                 "COLON_EQUALS"
+             };
+
+
+    public final static int numTokenKinds = orderedTerminalSymbols.length;
+    public final static boolean isValidForParser = false;
+}
