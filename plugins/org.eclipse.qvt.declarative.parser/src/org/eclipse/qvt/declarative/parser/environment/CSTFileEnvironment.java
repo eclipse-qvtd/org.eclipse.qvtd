@@ -111,20 +111,19 @@ public abstract class CSTFileEnvironment<R extends ICSTRootEnvironment, E extend
 	public ICSTRootEnvironment parse(Reader reader, AbstractFileHandle file, IProgressMonitor monitor) throws IOException, CoreException {
 		Monitor lpgMonitor = new LPGProgressMonitor(monitor);
 		ICSTFileAnalyzer<R> analyzer = createAnalyzer(lpgMonitor);
-		analyzer.setFileName(file.getName());
 		if (reader == null)
 			reader = new InputStreamReader(file.getContents());
 		else if (!file.exists())
 			return null;
-		analyzer.initialize(reader);
+		analyzer.reset(reader, file.getName());
 		AbstractParser parser = getParser();
 		if ((monitor != null) && monitor.isCanceled())
 			return null;
-		parser.getLexer().lexToTokens(parser);
+		parser.getLexer().lexer(parser.getIPrsStream());
 		if ((monitor != null) && monitor.isCanceled())
 			return null;
 		@SuppressWarnings("unchecked")		// Maybe this should be a generic parameter
-		CST cst = (CST) parser.parseTokensToCST(lpgMonitor, -1);
+		CST cst = (CST) parser.parser(lpgMonitor, -1);
 		if (cst == null)
 			return null;
 		if ((monitor != null) && monitor.isCanceled())

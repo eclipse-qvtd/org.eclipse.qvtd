@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ICSTFileAnalyzer.java,v 1.1 2008/10/11 14:43:14 ewillink Exp $
+ * $Id: ICSTFileAnalyzer.java,v 1.2 2010/01/26 22:03:09 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.environment;
 
@@ -31,7 +31,11 @@ public interface ICSTFileAnalyzer<R extends ICSTRootEnvironment>
 
 	public AbstractParser getParser();
 
+	@Deprecated
 	public void initialize(Reader reader) throws IOException;
 
+	public void reset(Reader reader, String fileName) throws IOException;
+
+	@Deprecated
 	public void setFileName(String name);
 }

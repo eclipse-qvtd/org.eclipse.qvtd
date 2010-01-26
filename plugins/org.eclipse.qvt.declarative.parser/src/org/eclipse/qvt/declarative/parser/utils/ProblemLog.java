@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.ocl.lpg.AbstractProblemHandler;
+import org.eclipse.ocl.lpg.DerivedPrsStream;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.qvt.declarative.ecore.operations.EValidatorWithOperations;
@@ -135,16 +136,17 @@ public class ProblemLog extends AbstractProblemHandler
 							s.append(" : ");
 							s.append(problem.endOffset);
 							if (getParser() != null) {
-								int token = getParser().getTokenIndexAtCharacter(problem.startOffset);
+								DerivedPrsStream iPrsStream = getParser().getIPrsStream();
+								int token = iPrsStream.getTokenIndexAtCharacter(problem.startOffset);
 								s.append(" ");
 								try {
-									s.append(getParser().getLine(token));
+									s.append(iPrsStream.getLine(token));
 								} catch (ArrayIndexOutOfBoundsException e) {
 									s.append("???");
 								}
 								s.append(":");
 								try {
-									s.append(getParser().getColumn(token));
+									s.append(iPrsStream.getColumn(token));
 								} catch (ArrayIndexOutOfBoundsException e) {
 									s.append("???");
 								}

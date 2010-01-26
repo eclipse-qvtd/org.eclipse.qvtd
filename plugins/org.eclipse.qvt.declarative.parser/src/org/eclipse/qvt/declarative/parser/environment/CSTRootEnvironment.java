@@ -266,7 +266,7 @@ public abstract class CSTRootEnvironment<E extends ICSTNodeEnvironment, CST exte
 	}
 
 	public int getCSTErrorTokens() {
-		return getParser().getErrorTokens();
+		return getParser().getIPrsStream().getErrorTokens();
 	}
 	
 	public ICSTFileEnvironment getFileEnvironment() {
