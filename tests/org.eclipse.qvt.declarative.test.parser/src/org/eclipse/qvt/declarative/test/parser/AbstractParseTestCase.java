@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractParseTestCase.java,v 1.9 2009/12/23 14:27:42 ewillink Exp $
+ * $Id: AbstractParseTestCase.java,v 1.10 2010/01/26 22:03:11 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.parser;
 
@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Set;
 
 import junit.framework.AssertionFailedError;
+import lpg.runtime.IPrsStream;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -33,7 +34,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.ocl.lpg.AbstractProblemHandler;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.ocl.lpg.StringProblemHandler;
@@ -69,9 +69,9 @@ public abstract class AbstractParseTestCase extends AbstractTestCase
 		@Override
 		public void handleProblem(Severity problemSeverity, Phase processingPhase,
 				String problemMessage, String processingContext, int startOffset, int endOffset) {
-			AbstractParser parser = getParser();
-			String file = parser.getFileName();
-			int lineNumber = parser.getTokenAtCharacter(startOffset).getLine();
+			IPrsStream prsStream = getParser().getIPrsStream();
+			String file = prsStream.getFileName();
+			int lineNumber = prsStream.getTokenAtCharacter(startOffset).getLine();
 			String message = NLS.bind(
 					 "{0}-{1} in {2}; {3}:{4} : {5}", //OCLMessages.ProblemMessage_ERROR_,
 					new Object[] {
