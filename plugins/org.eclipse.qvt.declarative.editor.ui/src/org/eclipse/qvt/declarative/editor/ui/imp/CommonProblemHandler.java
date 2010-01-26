@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonProblemHandler.java,v 1.6 2010/01/05 11:41:54 ewillink Exp $
+ * $Id: CommonProblemHandler.java,v 1.7 2010/01/26 22:03:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -22,6 +22,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.imp.parser.IMessageHandler;
 import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.ocl.lpg.AbstractProblemHandler;
+import org.eclipse.ocl.lpg.DerivedPrsStream;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.ui.builder.MarkerProblemHandler;
 import org.eclipse.qvt.declarative.editor.ui.builder.ProblemLimit;
@@ -43,15 +44,16 @@ public class CommonProblemHandler extends AbstractProblemHandler
 
 	public IToken getNearestTokenAtCharacter(int offset) {		// FIXME Move to AbstractParser
         AbstractParser parser = getParser();
-        int maxIndex = parser.getSize();
+        DerivedPrsStream parseStream = parser.getIPrsStream();
+		int maxIndex = parseStream.getSize();
         if (maxIndex <= 0)
         	return null;
-		int tokenIndex = parser.getTokenIndexAtCharacter(offset);
+		int tokenIndex = parseStream.getTokenIndexAtCharacter(offset);
 		if (tokenIndex >= 0)
-			return parser.getTokenAt(tokenIndex >= maxIndex ? (maxIndex-1) : tokenIndex);
+			return parseStream.getTokenAt(tokenIndex >= maxIndex ? (maxIndex-1) : tokenIndex);
 		tokenIndex = -tokenIndex + 1; 							// offset is between tokens
-		IToken prevToken = parser.getTokenAt(tokenIndex >= maxIndex ? (maxIndex-1) : tokenIndex);
-		IToken nextToken = parser.getTokenAt((tokenIndex+1) >= maxIndex ? (maxIndex-1) : (tokenIndex+1));
+		IToken prevToken = parseStream.getTokenAt(tokenIndex >= maxIndex ? (maxIndex-1) : tokenIndex);
+		IToken nextToken = parseStream.getTokenAt((tokenIndex+1) >= maxIndex ? (maxIndex-1) : (tokenIndex+1));
 		int prevEndOffset = prevToken.getEndOffset();
 		int nextStartOffset = nextToken.getStartOffset();
 		int postEnd = offset - prevEndOffset;

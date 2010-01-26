@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseHelper.java,v 1.1 2009/08/20 20:20:19 ewillink Exp $
+ * $Id: CommonParseHelper.java,v 1.2 2010/01/26 22:03:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -39,7 +39,7 @@ public class CommonParseHelper
         keywords = new ArrayList<ICommonKeyword>();
         int[] keywordKinds= parser.getLexer().getKeywordKinds();
         for(int i= 1; i < keywordKinds.length; i++) {
-            int index= parser.mapKind(keywordKinds[i]);
+            int index= parser.getIPrsStream().mapKind(keywordKinds[i]);
             fIsKeyword[index]= true;
             keywords.add(createKeyword(tokenKindNames[index]));
         }

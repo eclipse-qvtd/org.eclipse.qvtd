@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonContentProposals.java,v 1.16 2010/01/05 11:41:54 ewillink Exp $
+ * $Id: CommonContentProposals.java,v 1.17 2010/01/26 22:03:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -46,6 +46,7 @@ import org.eclipse.ocl.cst.PathNameCS;
 import org.eclipse.ocl.cst.SimpleNameCS;
 import org.eclipse.ocl.expressions.StringLiteralExp;
 import org.eclipse.ocl.lpg.AbstractParser;
+import org.eclipse.ocl.lpg.DerivedPrsStream;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 import org.eclipse.qvt.declarative.ecore.utils.TracingOption;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
@@ -370,7 +371,8 @@ public class CommonContentProposals
 	}
 	
 	protected IToken getToken() {
-		AbstractParser stream = parseResult.getParser();
+		AbstractParser parser = parseResult.getParser();
+		DerivedPrsStream stream = parser.getIPrsStream();
 		IToken errorToken = stream.getErrorTokenAtCharacter(offset);
 		if (errorToken != null)
 			return errorToken;

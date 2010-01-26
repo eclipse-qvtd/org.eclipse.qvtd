@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseResult.java,v 1.3 2010/01/05 11:41:53 ewillink Exp $
+ * $Id: CommonParseResult.java,v 1.4 2010/01/26 22:03:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 
@@ -23,8 +23,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import lpg.runtime.ErrorToken;
+import lpg.runtime.IPrsStream;
 import lpg.runtime.IToken;
-import lpg.runtime.PrsStream;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -59,7 +59,7 @@ public class CommonParseResult implements ICommonParseResult
 
 	static final class TokenIterator implements Iterator<IToken>
 	{
-		final PrsStream stream;
+		final IPrsStream stream;
 		final int firstTokIdx;
 		final int lastTokIdx;
 		int curTokIdx; // skip bogus initial token
@@ -81,7 +81,7 @@ public class CommonParseResult implements ICommonParseResult
 		private boolean finalTokenReturned;
 		private boolean finalAdjunctsReturned;
 
-		private TokenIterator(PrsStream stream, int regionEnd, int regionOffset) {
+		private TokenIterator(IPrsStream stream, int regionEnd, int regionOffset) {
 			this.stream = stream;
 			firstTokIdx = getTokenIndexAtCharacter(regionOffset);
 			curTokIdx = Math.max(1, firstTokIdx);
@@ -269,7 +269,7 @@ public class CommonParseResult implements ICommonParseResult
 	}
 
 	public String getTextRange(int start, int length) {
-		return new String(getLexer().getInputChars(), start, length);
+		return new String(getLexer().getILexStream().getInputChars(), start, length);
 	}
 
 	protected int[] getKeywordKinds() {
@@ -308,7 +308,7 @@ public class CommonParseResult implements ICommonParseResult
         int regionOffset= region.getOffset();
         int regionLength= region.getLength();
     	int regionEnd = regionOffset + regionLength - 1;
-		PrsStream stream =  getParser();
+		IPrsStream stream =  getParser().getIPrsStream();
 		if ((stream != null) && (stream.getStreamLength() > 0))
 			return new TokenIterator(stream, regionEnd, regionOffset);
 		else

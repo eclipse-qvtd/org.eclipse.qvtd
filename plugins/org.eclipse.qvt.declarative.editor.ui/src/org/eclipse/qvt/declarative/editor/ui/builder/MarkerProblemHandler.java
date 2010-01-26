@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: MarkerProblemHandler.java,v 1.4 2008/10/31 20:42:49 ewillink Exp $
+ * $Id: MarkerProblemHandler.java,v 1.5 2010/01/26 22:03:40 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.builder;
 
@@ -172,9 +172,9 @@ public abstract class MarkerProblemHandler<PK, C, O, P, EL, PM, S, COA, SSA, CT,
 			String problemMessage, String processingContext, int startOffset, int endOffset) {
 		int line = -1;
 		if (startOffset >= 0) {
-			int leftToken = Math.abs(getParser().getTokenIndexAtCharacter(startOffset));	// abs to move non-token to predecessor
+			int leftToken = Math.abs(getParser().getIPrsStream().getTokenIndexAtCharacter(startOffset));	// abs to move non-token to predecessor
 			if (leftToken >= 0)
-				line = getParser().getLine(leftToken);
+				line = getParser().getIPrsStream().getLine(leftToken);
 		}
 		Integer severity = severityMap.get(problemSeverity);
 		addMarker(severity != null ? severity.intValue() : IMarker.SEVERITY_ERROR,
