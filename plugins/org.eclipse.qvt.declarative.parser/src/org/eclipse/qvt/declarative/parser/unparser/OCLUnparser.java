@@ -12,7 +12,7 @@ package org.eclipse.qvt.declarative.parser.unparser;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -64,7 +64,7 @@ public class OCLUnparser extends OCLExpressionUnparser
 		if (constraint == null)
 			return;
 		append("\ncontext");
-		for (ENamedElement constrainedElement : constraint.getConstrainedElements()) {
+		for (EModelElement constrainedElement : constraint.getConstrainedElements()) {
 			append(" ");
 			if (constrainedElement instanceof EStructuralFeature) {
 				EStructuralFeature eStructuralFeature = (EStructuralFeature) constrainedElement;
