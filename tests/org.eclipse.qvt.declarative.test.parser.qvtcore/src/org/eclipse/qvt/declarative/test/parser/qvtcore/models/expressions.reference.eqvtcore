@@ -208,24 +208,24 @@
           <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast72">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
             <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast73">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclInvalid"/>
             </source>
             <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast74">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/%3C%3E"/>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclInvalid_Class/%3C%3E"/>
           </conditionExpression>
         </predicate>
         <predicate xmi:id="ast75">
           <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast76">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
             <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast77">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclInvalid"/>
             </source>
             <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast78">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/%3C%3E"/>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclInvalid_Class/%3C%3E"/>
           </conditionExpression>
         </predicate>
         <predicate xmi:id="ast79">
@@ -253,12 +253,12 @@
           <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast87">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
             <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast88">
-              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid"/>
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclInvalid"/>
             </source>
             <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast89">
               <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
             </argument>
-            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Invalid_Class/%3C%3E"/>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclInvalid_Class/%3C%3E"/>
           </conditionExpression>
         </predicate>
         <variable xmi:id="ast90" name="c">
