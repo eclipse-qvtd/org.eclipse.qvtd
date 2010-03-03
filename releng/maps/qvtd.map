@@ -17,7 +17,7 @@ feature@org.eclipse.qvt.declarative.ecore.qvtrelation=v201002060313,:pserver:ano
 feature@org.eclipse.qvt.declarative.modelregistry=v201002060313,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.modelregistry-feature
 
 !*** QVT plug-ins ***************************************************************************
-plugin@lpg.runtime=HEAD,:pserver:anonymous@lpg.cvs.sourceforge.net:/cvsroot/lpg,,lpg.runtime
+plugin@lpg.runtime=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.lpg.runtime
 
 plugin@org.eclipse.qvt=v201002060313,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt
 plugin@org.eclipse.qvt.declarative.ecore=v201002060313,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore
