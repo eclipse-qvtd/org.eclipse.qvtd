@@ -16,9 +16,10 @@ feature@org.eclipse.qvt.declarative.ecore.qvtcore=v201002060313,:pserver:anonymo
 feature@org.eclipse.qvt.declarative.ecore.qvtrelation=v201002060313,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvtrelation-feature
 feature@org.eclipse.qvt.declarative.modelregistry=v201002060313,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.modelregistry-feature
 
-!*** QVT plug-ins ***************************************************************************
-plugin@lpg.runtime=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.lpg.runtime
+!*** IMP plug-ins ***************************************************************************
+plugin@org.eclipse.imp.runtime=SVN,,http://dev.eclipse.org/svnroot/technology/org.eclipse.imp,,trunk/org.eclipse.imp.runtime
 
+!*** QVT plug-ins ***************************************************************************
 plugin@org.eclipse.qvt=v201002060313,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt
 plugin@org.eclipse.qvt.declarative.ecore=v201002060313,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore
 plugin@org.eclipse.qvt.declarative.ecore.qvtbase=v201002060313,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtbase
