@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonOutlinePage.java,v 1.5 2009/08/20 20:18:55 ewillink Exp $
+ * $Id: CommonOutlinePage.java,v 1.6 2010/03/13 19:03:06 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.cst;
 
@@ -45,7 +45,7 @@ public abstract class CommonOutlinePage extends IMPOutlinePage implements ICSTOu
 		super(editor.getParseController(), treeModelBuilder,
 			editor.getLanguageServiceManager().getLabelProvider(),
 			editor.getLanguageServiceManager().getImageProvider(),
-			null);
+			null, null);
 		this.editor = editor;
 		this.treeModelBuilder = treeModelBuilder;
 	}
