@@ -16,7 +16,7 @@ Require-Bundle: org.eclipse.jface.text;visibility:=reexport,
  org.eclipse.qvt.declarative.parser.ui;visibility:=reexport,
  org.eclipse.jdt.core;visibility:=reexport,
  org.eclipse.jdt.ui;visibility:=reexport,
- org.eclipse.imp.runtime;visibility:=reexport
+ org.eclipse.imp.runtime;bundle-version="[0.1.104,0.1.105)";visibility:=reexport
 Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
