@@ -57,7 +57,7 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.emf.workspace.ui"/>
       <import plugin="org.eclipse.jdt.core"/>
       <import plugin="org.eclipse.jdt.ui"/>
-      <import plugin="org.eclipse.imp.runtime" version="0.1.104" match="perfect"/>
+      <import plugin="org.eclipse.imp.runtime" version="0.1.104" match="equivalent"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="org.eclipse.qvt.declarative.ecore.qvtbase"/>
