@@ -23,6 +23,7 @@ http://www.eclipse.org/legal/epl-v10.html
    </license>
 
    <url>
+      <update label="%M2MUpdateSiteName" url="http://download.eclipse.org/modeling/m2m/updates/"/>
       <discovery label="%EMFUpdateSiteName" url="http://download.eclipse.org/modeling/emf/updates/"/>
       <discovery label="%EMFTUpdateSiteName" url="http://download.eclipse.org/modeling/emft/updates/"/>
       <discovery label="%LPGUpdateSiteName" url="http://lpg.sourceforge.net/updates/"/>
