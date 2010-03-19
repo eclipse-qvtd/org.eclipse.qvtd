@@ -22,7 +22,7 @@ feature@org.eclipse.qvt.declarative.modelregistry=v201003181249,:pserver:anonymo
 !*** -- fetches ok but "Invalid manifest header Bundle-Version: "0.1.104.0.1.104.v201003141548" : invalid format" plugin@org.eclipse.imp.runtime=SVN,tags/features/org.eclipse.imp.runtime/0.1.104.v201003141548,svn://dev.eclipse.org/svnroot/technology/org.eclipse.imp,,org.eclipse.imp.runtime
 !*** -- fetch fails plugin@org.eclipse.imp.runtime=v201003141548,tags/features/org.eclipse.imp.runtime/0.1.104,svn://dev.eclipse.org/svnroot/technology/org.eclipse.imp,,org.eclipse.imp.runtime
 !*** -- fetch fails plugin@org.eclipse.imp.runtime=v201003141548,tags/features/org.eclipse.imp.runtime/0.1.104.v201003141548,svn://dev.eclipse.org/svnroot/technology/org.eclipse.imp,,org.eclipse.imp.runtime
-!plugin@org.eclipse.imp.runtime=SVN,,svn://dev.eclipse.org/svnroot/technology/org.eclipse.imp/tags/features/org.eclipse.imp.runtime/0.1.104.v201003141548,,org.eclipse.imp.runtime
+plugin@org.eclipse.imp.runtime=SVN,,svn://dev.eclipse.org/svnroot/technology/org.eclipse.imp/tags/features/org.eclipse.imp.runtime/0.1.104.v201003141548,,org.eclipse.imp.runtime
 
 !*** QVT plug-ins ***************************************************************************
 plugin@org.eclipse.qvt=v201003181249,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt
