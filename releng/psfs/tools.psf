@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+	<provider id="org.eclipse.team.cvs.core.cvsnature">
+		<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.ant,org.eclipse.emf.ant,"/>
+		<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.importer.rose,org.eclipse.emf.importer.rose"/>
+		<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tools/org.eclipse.qvt.declarative.importer.roseuml,org.eclipse.qvt.declarative.importer.roseuml"/>
+	</provider>
+</psf>
