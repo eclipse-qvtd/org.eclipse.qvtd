@@ -487,8 +487,8 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 		try {
 			Reader fileReader = new FileReader(file);
 			QVTrLexer lexer = new QVTrLexer(env.getFileEnvironment());
-			QVTrParser parser = new QVTrParser(lexer);
 			lexer.reset(fileReader, file.toString());
+			QVTrParser parser = new QVTrParser(lexer);
 			lexer.lexer(parser.getIPrsStream());
 			CSTNode cstNode = parser.parser();
 			if (cstNode == null)
