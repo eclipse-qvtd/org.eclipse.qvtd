@@ -1,3 +1,4 @@
+import Library;			-- Bug 313638 test
 
 transformation SeqToStm(seqDgm: SeqMM, stm: StmcMM)
 {
