@@ -39,12 +39,10 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.equinox.app"/>
       <import plugin="org.eclipse.core.runtime.compatibility"/>
       <import plugin="org.apache.ant" version="1.6.5" match="compatible"/>
-      <import plugin="org.junit4" version="4.5.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.qvt.declarative.modelregistry"/>
       <import plugin="org.eclipse.osgi"/>
       <import plugin="org.eclipse.ocl.ecore" version="3.0.0" match="compatible"/>
       <import plugin="org.eclipse.qvt.declarative.emof.essentialocl" version="0.8.0" match="compatible"/>
+      <import plugin="org.junit4" version="4.5.0" match="compatible"/>
       <import plugin="org.eclipse.qvt.declarative.test.emof.qvtcore" version="0.8.0" match="compatible"/>
       <import plugin="org.eclipse.qvt.declarative.test.emof.qvtrelation" version="0.8.0" match="compatible"/>
       <import plugin="org.eclipse.qvt.declarative.test.emof" version="0.8.0" match="compatible"/>
@@ -62,6 +60,7 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.qvt.declarative.ecore.qvttemplate" version="0.8.0" match="compatible"/>
       <import plugin="org.eclipse.qvt.declarative.emof.qvttemplate" version="0.8.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.ocl"/>
       <import plugin="org.eclipse.qvt.declarative.ecore.qvtbase"/>
       <import plugin="org.eclipse.core.resources"/>
@@ -70,6 +69,7 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.qvt.declarative.editor.qvtcore.ui"/>
       <import plugin="org.eclipse.qvt.declarative.parser.qvtrelation"/>
       <import plugin="org.eclipse.qvt.declarative.editor.qvtrelation.ui"/>
+      <import plugin="org.eclipse.ocl.examples.modelregistry"/>
    </requires>
 
    <plugin
@@ -84,12 +84,6 @@ http://www.eclipse.org/legal/epl-v10.html
          install-size="0"
          version="0.0.0"
          fragment="true"/>
-
-   <plugin
-         id="org.eclipse.qvt.declarative.test.modelregistry"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
 
    <plugin
          id="org.eclipse.qvt.declarative.test.emof"
