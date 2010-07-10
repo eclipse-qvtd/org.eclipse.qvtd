@@ -41,7 +41,7 @@
          <action
                label="Add QVT Core Nature"
                class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcToggleNatureAction"
-               menubarPath="org.eclipse.qvt.declarative.naturesMenu/group1"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
                enablesFor="+"
                id="org.eclipse.qvt.declarative.editor.qvtcore.ui.addRemoveNatureAction">
          </action>
@@ -62,7 +62,7 @@
          <action
                label="Remove QVT Core Nature"
                class="org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcToggleNatureAction"
-               menubarPath="org.eclipse.qvt.declarative.naturesMenu/group1"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
                enablesFor="+"
                id="org.eclipse.qvt.declarative.editor.qvtcore.ui.addRemoveNatureAction">
          </action>
