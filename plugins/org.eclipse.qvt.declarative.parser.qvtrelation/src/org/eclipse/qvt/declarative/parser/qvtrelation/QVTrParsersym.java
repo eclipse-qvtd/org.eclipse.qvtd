@@ -20,7 +20,7 @@
 *        - 300534: Removing the use of deprecated macros.
 * </copyright>
 *
-* $Id: QVTrParsersym.java,v 1.16 2010/07/10 06:14:54 ewillink Exp $
+* $Id: QVTrParsersym.java,v 1.17 2010/07/10 09:34:46 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;
@@ -28,13 +28,13 @@ package org.eclipse.qvt.declarative.parser.qvtrelation;
 public interface QVTrParsersym {
     public final static int
       TK_PLUS_PLUS = 75,
-      TK_QUOTED_IDENTIFIER = 8,
+      TK_QUOTED_IDENTIFIER = 2,
       TK_INTEGER_LITERAL = 30,
       TK_REAL_LITERAL = 31,
-      TK_STRING_LITERAL = 18,
+      TK_STRING_LITERAL = 13,
       TK_PLUS = 38,
-      TK_MINUS = 5,
-      TK_MULTIPLY = 6,
+      TK_MINUS = 6,
+      TK_MULTIPLY = 7,
       TK_DIVIDE = 41,
       TK_GREATER = 46,
       TK_LESS = 47,
@@ -42,8 +42,8 @@ public interface QVTrParsersym {
       TK_GREATER_EQUAL = 48,
       TK_LESS_EQUAL = 49,
       TK_NOT_EQUAL = 65,
-      TK_LPAREN = 2,
-      TK_RPAREN = 7,
+      TK_LPAREN = 3,
+      TK_RPAREN = 8,
       TK_LBRACE = 12,
       TK_RBRACE = 10,
       TK_LBRACKET = 69,
@@ -51,7 +51,7 @@ public interface QVTrParsersym {
       TK_ARROW = 44,
       TK_BAR = 66,
       TK_COMMA = 11,
-      TK_COLON = 4,
+      TK_COLON = 5,
       TK_COLONCOLON = 28,
       TK_SEMICOLON = 42,
       TK_DOT = 43,
@@ -72,11 +72,11 @@ public interface QVTrParsersym {
       TK_false = 35,
       TK_null = 36,
       TK_invalid = 37,
-      TK_Set = 13,
-      TK_Bag = 14,
-      TK_Sequence = 15,
-      TK_Collection = 16,
-      TK_OrderedSet = 17,
+      TK_Set = 14,
+      TK_Bag = 15,
+      TK_Sequence = 16,
+      TK_Collection = 17,
+      TK_OrderedSet = 18,
       TK_String = 19,
       TK_Integer = 20,
       TK_UnlimitedNatural = 21,
@@ -104,7 +104,7 @@ public interface QVTrParsersym {
       TK_when = 63,
       TK_where = 64,
       TK_EOF_TOKEN = 72,
-      TK_IDENTIFIER = 3,
+      TK_IDENTIFIER = 4,
       TK_SINGLE_LINE_COMMENT = 80,
       TK_MULTI_LINE_COMMENT = 81,
       TK_ERROR_TOKEN = 1;
@@ -112,23 +112,23 @@ public interface QVTrParsersym {
     public final static String orderedTerminalSymbols[] = {
                  "",
                  "ERROR_TOKEN",
+                 "QUOTED_IDENTIFIER",
                  "LPAREN",
                  "IDENTIFIER",
                  "COLON",
                  "MINUS",
                  "MULTIPLY",
                  "RPAREN",
-                 "QUOTED_IDENTIFIER",
                  "self",
                  "RBRACE",
                  "COMMA",
                  "LBRACE",
+                 "STRING_LITERAL",
                  "Set",
                  "Bag",
                  "Sequence",
                  "Collection",
                  "OrderedSet",
-                 "STRING_LITERAL",
                  "String",
                  "Integer",
                  "UnlimitedNatural",

@@ -88,6 +88,13 @@ import org.eclipse.ocl.parser.backtracking.OCLParserErrors;
 			return result;
 		}
 
+		protected IdentifierCS createIdentifierCS(SimpleNameCS simpleName) {
+			IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
+			result.setValue(simpleName.getValue());
+			setOffsets(result, simpleName);
+			return result;
+		}
+
 		private int _uniqueNameCount = 0;
 
 		protected IdentifierCS createUniqueIdentifierCS(int argumentNumber) {
@@ -895,6 +902,12 @@ import org.eclipse.ocl.parser.backtracking.OCLParserErrors;
 	identifierCS ::= self
 		/.$BeginCode
 					IdentifierCS result = createIdentifierCS(1);
+					setResult(result);
+		  $EndCode
+		./
+	identifierCS ::= QuotedSimpleNameCS
+		/.$BeginCode
+					IdentifierCS result = createIdentifierCS((SimpleNameCS)getRhsSym(1));
 					setResult(result);
 		  $EndCode
 		./
