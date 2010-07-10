@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: AbstractParseTestCase.java,v 1.10 2010/01/26 22:03:11 ewillink Exp $
+ * $Id: AbstractParseTestCase.java,v 1.11 2010/07/10 09:38:12 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.test.parser;
 
@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.ocl.examples.modelregistry.standalone.JavaFileHandle;
 import org.eclipse.ocl.lpg.AbstractProblemHandler;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.ocl.lpg.StringProblemHandler;
@@ -42,7 +43,6 @@ import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaDataRegistry;
 import org.eclipse.qvt.declarative.ecore.mappings.MappingConfigurationException;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
-import org.eclipse.qvt.declarative.modelregistry.standalone.FileHandle;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ProblemHandlerDiagnosticChain;
@@ -287,7 +287,7 @@ public abstract class AbstractParseTestCase extends AbstractTestCase
 		unParser.unparse();
 		String unparsedString = unParser.getString();
 		//
-		FileHandle fileHandle = getFileHandle(fileStem + ".unparsed." + getTextExtension());
+		JavaFileHandle fileHandle = getFileHandle(fileStem + ".unparsed." + getTextExtension());
 		FileWriter fileWriter = new FileWriter(fileHandle.getFile());
 		fileWriter.append(unparsedString);
 		fileWriter.close();
