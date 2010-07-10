@@ -24,13 +24,13 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.ocl.examples.modelregistry.standalone.JavaFileHandle;
+import org.eclipse.ocl.examples.modelregistry.standalone.JavaModelRegistryEnvironment;
+import org.eclipse.ocl.examples.modelregistry.standalone.JavaProjectHandle;
 import org.eclipse.qvt.declarative.ecore.adapters.ResourceSetMappingMetaDataRegistryAdapter;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaDataRegistry;
 import org.eclipse.qvt.declarative.emof.EMOF.util.EMOFMappingMetaData;
-import org.eclipse.qvt.declarative.modelregistry.standalone.FileHandle;
-import org.eclipse.qvt.declarative.modelregistry.standalone.ProjectHandle;
-import org.eclipse.qvt.declarative.modelregistry.standalone.StandaloneModelRegistryEnvironment;
 import org.eclipse.qvt.declarative.test.emof.tools.EcoreDifference;
 import org.eclipse.qvt.declarative.test.emof.tools.EquivalenceHelper;
 import org.eclipse.qvt.declarative.test.emof.tools.EquivalenceMap;
@@ -40,7 +40,7 @@ public abstract class AbstractTestCase extends UtilityTestCase
 	protected ResourceSetImpl resourceSet;
 	protected List<String> expectedErrors = null;
 	
-	public class TestEnvironment extends StandaloneModelRegistryEnvironment
+	public class TestEnvironment extends JavaModelRegistryEnvironment
 	{
 		@Override public void logTheError(String string, Throwable e) {
 			if ((expectedErrors != null) && expectedErrors.contains(string))
@@ -184,9 +184,9 @@ public abstract class AbstractTestCase extends UtilityTestCase
 		return bundleName;
 	} */
 	
-	protected FileHandle getFileHandle(String fileName) throws IOException {
+	protected JavaFileHandle getFileHandle(String fileName) throws IOException {
 		File projectFile = getProjectFile();
-		ProjectHandle projectHandle = new ProjectHandle(projectFile, "test.modelregistry");
+		JavaProjectHandle projectHandle = new JavaProjectHandle(projectFile, "test.modelregistry");
 		return projectHandle.getFileHandle(fileName);
 	}
 	
