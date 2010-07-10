@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: QVTcCreationFactory.java,v 1.10 2009/06/06 15:10:40 ewillink Exp $
+ * $Id: QVTcCreationFactory.java,v 1.11 2010/07/10 09:35:44 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.qvtcore.ui;
 
@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.ocl.examples.modelregistry.environment.FileHandle;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
 import org.eclipse.qvt.declarative.editor.qvtcore.ui.imp.QVTcParseController;
@@ -31,7 +32,6 @@ import org.eclipse.qvt.declarative.editor.ui.builder.CommonNature;
 import org.eclipse.qvt.declarative.editor.ui.common.AbstractCreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.emof.QVTCore.facade.QVTCoreFacade;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.environment.QVTcFileEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.unparser.QVTcUnparser;
@@ -52,7 +52,7 @@ public class QVTcCreationFactory extends AbstractCreationFactory
 		return new QVTcMarkerProblemHandler(file);
 	}
 	
-	public QVTcFileEnvironment createFileEnvironment(AbstractFileHandle fileHandle, ResourceSet resourceSet, URI astURI) {
+	public QVTcFileEnvironment createFileEnvironment(FileHandle fileHandle, ResourceSet resourceSet, URI astURI) {
 		XMIResource astResource = (XMIResource) resourceSet.createResource(astURI, getMappingMetaData().getEcoreContentTypeIdentifier());
 		return new QVTcFileEnvironment(fileHandle, resourceSet, astResource);
 	}
