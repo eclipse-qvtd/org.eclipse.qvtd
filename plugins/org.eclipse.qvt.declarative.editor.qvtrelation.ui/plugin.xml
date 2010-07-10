@@ -27,7 +27,7 @@
             adaptable="true" nameFilter="*"
             objectClass="org.eclipse.core.resources.IProject">
          <action id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.addRemoveNatureAction"
-               label="Add QVT Relations Nature" menubarPath="org.eclipse.qvt.declarative.naturesMenu/group1" enablesFor="+"
+               label="Add QVT Relations Nature" menubarPath="org.eclipse.ui.projectConfigure/additions" enablesFor="+"
                class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrToggleNatureAction"/>
           <visibility>
             <not>
@@ -39,7 +39,7 @@
             adaptable="true" nameFilter="*"
             objectClass="org.eclipse.core.resources.IProject">
          <action id="org.eclipse.qvt.declarative.editor.qvtrelation.ui.addRemoveNatureAction"
-               label="Remove QVT Relations Nature" menubarPath="org.eclipse.qvt.declarative.naturesMenu/group1" enablesFor="+"
+               label="Remove QVT Relations Nature" menubarPath="org.eclipse.ui.projectConfigure/additions" enablesFor="+"
                class="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrToggleNatureAction"/>
           <visibility>
             <objectState name="projectNature" value="org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrNature"/>
