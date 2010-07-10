@@ -36,10 +36,6 @@ http://www.eclipse.org/legal/epl-v10.html
          id="org.eclipse.qvt.declarative.ecore.qvtbase"
          version="0.0.0"/>
 
-   <includes
-         id="org.eclipse.qvt.declarative.modelregistry"
-         version="0.0.0"/>
-
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.ocl"/>
@@ -62,13 +58,23 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="org.eclipse.qvt.declarative.ecore.qvtbase"/>
-      <import plugin="org.eclipse.qvt.declarative.modelregistry"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.qvt.declarative.ecore.qvtbase.edit"/>
-      <import plugin="org.eclipse.ocl.ecore.edit"/>
-      <import plugin="org.eclipse.ocl.edit"/>
+      <import plugin="org.eclipse.ocl.examples.modelregistry"/>
+      <import plugin="com.ibm.icu"/>
+      <import plugin="lpg.runtime.java" version="2.0.17" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.compare"/>
+      <import plugin="org.eclipse.core.filesystem"/>
+      <import plugin="org.eclipse.debug.ui"/>
+      <import plugin="org.eclipse.debug.core"/>
+      <import plugin="org.eclipse.help"/>
+      <import plugin="org.eclipse.ltk.core.refactoring"/>
+      <import plugin="org.eclipse.ltk.ui.refactoring"/>
+      <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.eclipse.ui.navigator"/>
+      <import plugin="org.eclipse.ui.views"/>
    </requires>
 
    <plugin
