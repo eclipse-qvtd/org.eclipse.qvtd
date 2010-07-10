@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLCreationFactory.java,v 1.8 2009/06/06 15:10:40 ewillink Exp $
+ * $Id: OCLCreationFactory.java,v 1.9 2010/07/10 09:35:34 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ocl.ui;
 
@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.ocl.examples.modelregistry.environment.FileHandle;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
 import org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLParseController;
@@ -32,7 +33,6 @@ import org.eclipse.qvt.declarative.editor.ui.common.AbstractCreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.emof.EssentialOCL.util.EssentialOCLMappingMetaData;
 import org.eclipse.qvt.declarative.emof.FullOCL.util.FullOCLMappingMetaData;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.ocl.environment.OCLFileEnvironment;
 import org.eclipse.qvt.declarative.parser.ui.preferences.QVTPreferences;
@@ -49,7 +49,7 @@ public class OCLCreationFactory extends AbstractCreationFactory
 
 	protected OCLCreationFactory() {}
 	
-	public OCLFileEnvironment createFileEnvironment(AbstractFileHandle fileHandle, ResourceSet resourceSet, URI astURI) {
+	public OCLFileEnvironment createFileEnvironment(FileHandle fileHandle, ResourceSet resourceSet, URI astURI) {
 		XMIResource astResource = (XMIResource) resourceSet.createResource(astURI, EssentialOCLMappingMetaData.INSTANCE.getEcoreContentTypeIdentifier());
 		return new OCLFileEnvironment(fileHandle, resourceSet, astResource);
 	}
