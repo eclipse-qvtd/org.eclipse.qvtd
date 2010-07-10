@@ -5,15 +5,9 @@
 	<projects>
 	</projects>
 	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.qvt.declarative.editor.qvtcore.ui.QVTcBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTcNature</nature>
-		<nature>org.eclipse.qvt.declarative.modelregistry.ui.ModelRegistryNature</nature>
 	</natures>
 </projectDescription>
