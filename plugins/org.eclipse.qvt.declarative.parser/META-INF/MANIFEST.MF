@@ -22,6 +22,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl.ecore;visibility:=reexport,
  org.eclipse.qvt.declarative.ecore.qvtbase;visibility:=reexport,
  org.eclipse.qvt.declarative.parser.unresolved;resolution:=optional,
- org.eclipse.qvt.declarative.modelregistry;visibility:=reexport
+ org.eclipse.ocl.examples.modelregistry;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.qvt.declarative.parser.plugin.QVTParserPlugin$Implementation

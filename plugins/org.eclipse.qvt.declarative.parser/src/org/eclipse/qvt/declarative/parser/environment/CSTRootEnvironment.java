@@ -44,13 +44,13 @@ import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.ecore.TupleType;
 import org.eclipse.ocl.ecore.TypeType;
+import org.eclipse.ocl.examples.modelregistry.environment.AbstractModelResolver;
 import org.eclipse.ocl.expressions.CollectionKind;
 import org.eclipse.ocl.expressions.InvalidLiteralExp;
 import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.ocl.utilities.UMLReflection;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
 import org.eclipse.qvt.declarative.ecore.utils.XMIUtils;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractModelResolver;
 import org.eclipse.qvt.declarative.parser.qvt.cst.ErrorNode;
 import org.eclipse.qvt.declarative.parser.utils.OCLUtils;
 

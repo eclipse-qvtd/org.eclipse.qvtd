@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ICSTFileEnvironment.java,v 1.2 2010/01/05 11:41:33 ewillink Exp $
+ * $Id: ICSTFileEnvironment.java,v 1.3 2010/07/10 09:35:38 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.environment;
 
@@ -29,8 +29,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractModelResolver;
+import org.eclipse.ocl.examples.modelregistry.environment.AbstractModelResolver;
+import org.eclipse.ocl.examples.modelregistry.environment.FileHandle;
 
 public interface ICSTFileEnvironment extends ICSTEnvironment
 {
@@ -38,7 +38,7 @@ public interface ICSTFileEnvironment extends ICSTEnvironment
 	
 	public XMIResource getASTResource();
 
-	public AbstractFileHandle getFile();
+	public FileHandle getFile();
 	
 	public EPackage.Registry getRegistry();
 
@@ -67,5 +67,5 @@ public interface ICSTFileEnvironment extends ICSTEnvironment
 	 * @throws IOException
 	 * @throws CoreException
 	 */
-	public ICSTRootEnvironment parse(Reader reader, AbstractFileHandle file, IProgressMonitor monitor) throws IOException, CoreException;
+	public ICSTRootEnvironment parse(Reader reader, FileHandle file, IProgressMonitor monitor) throws IOException, CoreException;
 }

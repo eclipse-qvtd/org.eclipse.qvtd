@@ -17,9 +17,9 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.ocl.examples.modelregistry.environment.FileHandle;
 import org.eclipse.qvt.declarative.ecore.utils.ClassUtils;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.qvt.cst.ErrorNode;
 import org.eclipse.qvt.declarative.parser.qvt.cst.QVTCSTFactory;
 
@@ -33,7 +33,7 @@ public class CSTUtils
 	/**
 	 * Return a plausible suggestion for a package namespace for the ePackage within file.
 	 */
-	public static String computePackageNs(AbstractFileHandle file, EPackage ePackage) {
+	public static String computePackageNs(FileHandle file, EPackage ePackage) {
 		StringBuilder s = new StringBuilder();
 		s.append("http://");
 		s.append(file.getProjectHandle().getName());

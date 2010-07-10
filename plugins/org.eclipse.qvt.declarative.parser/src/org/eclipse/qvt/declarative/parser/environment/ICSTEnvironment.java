@@ -25,8 +25,8 @@ import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.SendSignalAction;
+import org.eclipse.ocl.examples.modelregistry.environment.AbstractModelResolver;
 import org.eclipse.ocl.lpg.BasicEnvironment2;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractModelResolver;
 
 /**
  * ICSTEnvironment provides the enhanced interface for the CSTEnvironment hierarchy

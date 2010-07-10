@@ -31,10 +31,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.ocl.TypeResolver;
 import org.eclipse.ocl.cst.CSTNode;
+import org.eclipse.ocl.examples.modelregistry.environment.AbstractModelResolver;
+import org.eclipse.ocl.examples.modelregistry.environment.FileHandle;
 import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.qvt.declarative.ecore.utils.XMIUtils;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractModelResolver;
 import org.eclipse.qvt.declarative.parser.qvt.environment.LPGProgressMonitor;
 import org.eclipse.qvt.declarative.parser.utils.CSTUtils;
 
@@ -46,7 +46,7 @@ public abstract class CSTFileEnvironment<R extends ICSTRootEnvironment, E extend
 	private TypeResolver<EClassifier, EOperation, EStructuralFeature> typeResolver;	// FIXME Duplicated to support reset
 		// inherited functionality should allow typeResolver to be in CSTRootEnvironment
 
-	private CSTFileEnvironment(EPackage.Registry registry, AbstractFileHandle file, ResourceSet resourceSet, XMIResource astResource) {
+	private CSTFileEnvironment(EPackage.Registry registry, FileHandle file, ResourceSet resourceSet, XMIResource astResource) {
 		super(registry, null);		// Null suppresses inherited createTypeResolver
 		ast = astResource;
 		typeResolver = createTypeResolver(ast);
@@ -59,7 +59,7 @@ public abstract class CSTFileEnvironment<R extends ICSTRootEnvironment, E extend
 			resolver = null;
 	}
 	
-	protected CSTFileEnvironment(AbstractFileHandle file, ResourceSet resourceSet, XMIResource astResource) {
+	protected CSTFileEnvironment(FileHandle file, ResourceSet resourceSet, XMIResource astResource) {
 		this(new EPackageRegistryImpl(), file, resourceSet, astResource);
 	}
 
@@ -78,7 +78,7 @@ public abstract class CSTFileEnvironment<R extends ICSTRootEnvironment, E extend
 
 	protected abstract String getContentTypeIdentifier();
 
-	public AbstractFileHandle getFile() {
+	public FileHandle getFile() {
 		return getResolver().getHandle();
 	}
 
@@ -108,7 +108,7 @@ public abstract class CSTFileEnvironment<R extends ICSTRootEnvironment, E extend
 		ePackage.setNsURI(CSTUtils.computePackageNs(resolver.getHandle(), ePackage));
 	}
 
-	public ICSTRootEnvironment parse(Reader reader, AbstractFileHandle file, IProgressMonitor monitor) throws IOException, CoreException {
+	public ICSTRootEnvironment parse(Reader reader, FileHandle file, IProgressMonitor monitor) throws IOException, CoreException {
 		Monitor lpgMonitor = new LPGProgressMonitor(monitor);
 		ICSTFileAnalyzer<R> analyzer = createAnalyzer(lpgMonitor);
 		if (reader == null)

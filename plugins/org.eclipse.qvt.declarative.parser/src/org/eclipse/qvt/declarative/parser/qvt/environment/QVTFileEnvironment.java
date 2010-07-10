@@ -31,16 +31,16 @@ import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.SendSignalAction;
+import org.eclipse.ocl.examples.modelregistry.environment.FileHandle;
 import org.eclipse.ocl.utilities.TypedElement;
 import org.eclipse.ocl.utilities.UMLReflection;
 import org.eclipse.qvt.declarative.ecore.utils.XMIUtils;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.environment.CSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 
 public abstract class QVTFileEnvironment<R extends ICSTRootEnvironment, E extends IQVTNodeEnvironment, CST extends CSTNode> extends CSTFileEnvironment<R, E, CST> implements IQVTFileEnvironment
 {
-	protected QVTFileEnvironment(AbstractFileHandle file, ResourceSet resourceSet, XMIResource astResource) {
+	protected QVTFileEnvironment(FileHandle file, ResourceSet resourceSet, XMIResource astResource) {
 		super(file, resourceSet, astResource);
 	}
 
