@@ -14,7 +14,6 @@ feature@org.eclipse.qvt.declarative.editor=v201006250603,:pserver:anonymous@dev.
 feature@org.eclipse.qvt.declarative.ecore.qvtbase=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvtbase-feature
 feature@org.eclipse.qvt.declarative.ecore.qvtcore=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvtcore-feature
 feature@org.eclipse.qvt.declarative.ecore.qvtrelation=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvtrelation-feature
-feature@org.eclipse.qvt.declarative.modelregistry=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.modelregistry-feature
 
 !*** IMP plug-ins ***************************************************************************
 !*** plugin@org.eclipse.imp.runtime=SVN,trunk,svn://dev.eclipse.org/svnroot/technology/org.eclipse.imp,,org.eclipse.imp.runtime
@@ -58,10 +57,6 @@ plugin@org.eclipse.qvt.declarative.parser.qvtcore=v201006250603,:pserver:anonymo
 plugin@org.eclipse.qvt.declarative.parser.qvtrelation=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.qvtrelation
 plugin@org.eclipse.qvt.declarative.parser.ui=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.ui
 plugin@org.eclipse.qvt.declarative.parser.unresolved=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.unresolved
-plugin@org.eclipse.qvt.declarative.modelregistry=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.modelregistry
-plugin@org.eclipse.qvt.declarative.modelregistry.edit=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.modelregistry.edit
-plugin@org.eclipse.qvt.declarative.modelregistry.editor=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.modelregistry.editor
-plugin@org.eclipse.qvt.declarative.modelregistry.ui=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.modelregistry.ui
 
 !*** QVT examples ***************************************************************************
 feature@org.eclipse.qvt.declarative.examples=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.examples-feature
@@ -70,7 +65,6 @@ plugin@org.eclipse.qvt.declarative.examples=v201006250603,:pserver:anonymous@dev
 !*** QVT tests ******************************************************************************
 feature@org.eclipse.qvt.declarative.test=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.test-feature
 plugin@org.eclipse.qvt.declarative.test.all=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.all
-plugin@org.eclipse.qvt.declarative.test.modelregistry=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.modelregistry
 plugin@org.eclipse.qvt.declarative.test.emof=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof
 plugin@org.eclipse.qvt.declarative.test.emof.all=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.all
 plugin@org.eclipse.qvt.declarative.test.emof.emof=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.emof
@@ -91,8 +85,6 @@ plugin@org.eclipse.qvt.declarative.test.editor.qvtrelation=v201006250603,:pserve
 
 
 !*** QVTd Examples plugins
-plugin@org.eclipse.qvt.declarative.examples.ocl.empty=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.ocl.empty
-plugin@org.eclipse.qvt.declarative.examples.ocl.royalandloyal=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.ocl.royalandloyal
 plugin@org.eclipse.qvt.declarative.examples.qvtcore.empty=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtcore.empty
 !*** plugin@org.eclipse.qvt.declarative.examples.qvtcore.uml2rdbms=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtcore.uml2rdbms
 plugin@org.eclipse.qvt.declarative.examples.qvtrelation.empty=v201006250603,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtrelation.empty
