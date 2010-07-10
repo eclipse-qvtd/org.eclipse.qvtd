@@ -44,7 +44,7 @@
          <action
                label="Add OCL Nature"
                class="org.eclipse.qvt.declarative.editor.ocl.ui.OCLToggleNatureAction"
-               menubarPath="org.eclipse.qvt.declarative.naturesMenu/group1"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
                enablesFor="+"
                id="org.eclipse.qvt.declarative.editor.ocl.ui.addRemoveNatureAction">
          </action>
@@ -65,7 +65,7 @@
          <action
                label="Remove OCL Nature"
                class="org.eclipse.qvt.declarative.editor.ocl.ui.OCLToggleNatureAction"
-               menubarPath="org.eclipse.qvt.declarative.naturesMenu/group1"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
                enablesFor="+"
                id="org.eclipse.qvt.declarative.editor.ocl.ui.addRemoveNatureAction">
          </action>
