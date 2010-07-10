@@ -3,7 +3,6 @@
 	<target name="init">
 	</target>
 
-	<patternset id="ocl.excludes" excludes="oclbin/**"/>
 	<patternset id="qvtc.excludes" excludes="qvtcbin/**"/>
 	<patternset id="qvtr.excludes" excludes="qvtrbin/**"/>
 	
@@ -19,13 +18,6 @@
 			<!-- Cleanup obsolete zips from earlier variant of script -->
 			<fileset dir="zips" includes="*.zip"/>
 		</delete>
-		<mkdir dir="zips/ocl"/>
-		<zip destfile="zips/ocl/empty.zip" basedir="${examplesDir}org.eclipse.qvt.declarative.examples.ocl.empty">
-			<patternset refid="ocl.excludes"/>
-		</zip>
-		<zip destfile="zips/ocl/royalandloyal.zip" basedir="${examplesDir}org.eclipse.qvt.declarative.examples.ocl.royalandloyal">
-			<patternset refid="ocl.excludes"/>
-		</zip>
 		<mkdir dir="zips/qvtc"/>
 		<zip destfile="zips/qvtc/empty.zip" basedir="${examplesDir}org.eclipse.qvt.declarative.examples.qvtcore.empty">
 			<patternset refid="qvtc.excludes"/>
