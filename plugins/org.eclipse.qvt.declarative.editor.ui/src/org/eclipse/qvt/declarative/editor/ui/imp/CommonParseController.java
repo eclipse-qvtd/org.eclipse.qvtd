@@ -13,7 +13,7 @@
  * 
  * </copyright>
  *
- * $Id: CommonParseController.java,v 1.24 2010/01/05 11:41:54 ewillink Exp $
+ * $Id: CommonParseController.java,v 1.25 2010/07/10 09:35:42 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.imp;
 /*******************************************************************************
@@ -52,6 +52,9 @@ import org.eclipse.imp.services.IAnnotationTypeInfo;
 import org.eclipse.imp.services.ILanguageSyntaxProperties;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.ocl.examples.modelregistry.eclipse.EclipseFileHandle;
+import org.eclipse.ocl.examples.modelregistry.eclipse.EclipseProjectHandle;
+import org.eclipse.ocl.examples.modelregistry.environment.FileHandle;
 import org.eclipse.ocl.lpg.AbstractParser;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.utils.TracingOption;
@@ -59,9 +62,6 @@ import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.ui.builder.MarkerProblemHandler;
 import org.eclipse.qvt.declarative.editor.ui.builder.ProblemLimit;
-import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseFileHandle;
-import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseProjectHandle;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 
 /**
@@ -96,7 +96,7 @@ public abstract class CommonParseController implements ICommonParseController
 		getAnnotationTypeInfo().addProblemMarkerType(creationFactory.getErrorMarkerId());
 	}
 
-	protected ICSTFileEnvironment createEnvironment(AbstractFileHandle fileHandle) {
+	protected ICSTFileEnvironment createEnvironment(FileHandle fileHandle) {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		URI astURI = fileHandle.getURI().appendFileExtension(creationFactory.getXMLExtension());
 		return creationFactory.createFileEnvironment(fileHandle, resourceSet, astURI);
@@ -144,7 +144,7 @@ public abstract class CommonParseController implements ICommonParseController
     	return fCurrentAst;
     }
 
-	protected AbstractFileHandle getFileHandle() {
+	protected FileHandle getFileHandle() {
 		IProject rawProject = fProject.getRawProject();
 		EclipseProjectHandle projectHandle = new EclipseProjectHandle(rawProject);
 		EclipseFileHandle fileHandle = projectHandle.getFileHandle(fFilePath.toString());

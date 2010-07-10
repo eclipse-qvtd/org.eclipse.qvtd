@@ -28,14 +28,14 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.ocl.examples.modelregistry.eclipse.EclipseProjectHandle;
+import org.eclipse.ocl.examples.modelregistry.environment.FileHandle;
 import org.eclipse.qvt.declarative.ecore.mappings.MappingConfigurationException;
 import org.eclipse.qvt.declarative.editor.ui.IMasterPageManager;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.ui.paged.PagedEditor;
 import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
 import org.eclipse.qvt.declarative.editor.ui.text.LazyFileEditorInput;
-import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseProjectHandle;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.texteditor.IDocumentProvider;
@@ -194,7 +194,7 @@ public abstract class EditorPageManager extends AbstractPageManager<ITextEditorW
 	 * 
 	 * @return primary input file handle
 	 */
-	protected AbstractFileHandle getFileHandle() {
+	protected FileHandle getFileHandle() {
 		IProject project = pagedEditor.getProject();
 		EclipseProjectHandle projectHandle = new EclipseProjectHandle(project);
 		return projectHandle.getFileHandle(pagedEditor.getEditorInputFile());

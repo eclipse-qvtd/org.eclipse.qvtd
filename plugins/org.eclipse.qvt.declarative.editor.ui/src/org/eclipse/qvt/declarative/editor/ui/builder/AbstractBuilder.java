@@ -29,6 +29,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.ocl.examples.modelregistry.eclipse.EclipseFileHandle;
+import org.eclipse.ocl.examples.modelregistry.eclipse.EclipseProjectHandle;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.adapters.ResourceSetMappingMetaDataRegistryAdapter;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
@@ -36,10 +38,8 @@ import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaDataRegistry;
 import org.eclipse.qvt.declarative.ecore.mappings.MappingConfigurationException;
 import org.eclipse.qvt.declarative.editor.ui.ICreationFactory;
 import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
-import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseFileHandle;
-import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseProjectHandle;
-import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
+import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.ui.preferences.QVTPreferences;
 
 @Deprecated // Use CommonBuilder

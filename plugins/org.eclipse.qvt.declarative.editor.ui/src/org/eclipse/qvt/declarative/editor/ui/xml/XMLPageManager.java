@@ -19,13 +19,13 @@ import java.util.Map;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.ocl.examples.modelregistry.environment.FileHandle;
 import org.eclipse.ocl.lpg.ProblemHandler.Phase;
 import org.eclipse.ocl.lpg.ProblemHandler.Severity;
 import org.eclipse.qvt.declarative.ecore.mappings.MappingConfigurationException;
 import org.eclipse.qvt.declarative.editor.ui.paged.PagedEditor;
 import org.eclipse.qvt.declarative.editor.ui.pages.EditorPageManager;
 import org.eclipse.qvt.declarative.editor.ui.text.LazyTextPageEditor;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.utils.ProblemCounter;
 
@@ -41,7 +41,7 @@ public abstract class XMLPageManager extends EditorPageManager
 
 	public ProblemCounter cannotDeactivate(Map<XMLResource,XMLResource> updates, IProgressMonitor monitor) {
 		final ResourceSet resourceSet = getResourceSet();
-		AbstractFileHandle fileHandle = getFileHandle();
+		FileHandle fileHandle = getFileHandle();
 		ICSTFileEnvironment environment = getCreationFactory().createFileEnvironment(fileHandle, resourceSet, resource.getURI());
 		ProblemCounter reporter = new ProblemCounter();
 		environment.setProblemHandler(reporter);

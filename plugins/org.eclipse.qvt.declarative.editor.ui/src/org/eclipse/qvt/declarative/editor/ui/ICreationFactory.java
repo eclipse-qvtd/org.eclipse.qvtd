@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: ICreationFactory.java,v 1.9 2009/08/20 20:19:25 ewillink Exp $
+ * $Id: ICreationFactory.java,v 1.10 2010/07/10 09:35:42 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui;
 
@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.imp.language.Language;
 import org.eclipse.imp.parser.ISourcePositionLocator;
+import org.eclipse.ocl.examples.modelregistry.environment.FileHandle;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.qvt.declarative.ecore.mappings.IMappingMetaData;
 import org.eclipse.qvt.declarative.editor.ui.builder.CommonNature;
@@ -31,7 +32,6 @@ import org.eclipse.qvt.declarative.editor.ui.imp.CommonTreeModelBuilder;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonParseController;
 import org.eclipse.qvt.declarative.editor.ui.imp.ICommonPlugin;
 import org.eclipse.qvt.declarative.editor.ui.text.ITextEditorWithUndoContext;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.unparser.IUnparser;
@@ -48,7 +48,7 @@ public interface ICreationFactory
 	/**
 	 * Create the IFileEnvironment for parsing fileHandle within resourceSet to produce ecoreURI.
 	 */
-	public ICSTFileEnvironment createFileEnvironment(AbstractFileHandle fileHandle, ResourceSet resourceSet, URI astURI);
+	public ICSTFileEnvironment createFileEnvironment(FileHandle fileHandle, ResourceSet resourceSet, URI astURI);
 
 	public CommonNature createNature();
 

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: TextPageManager.java,v 1.4 2009/08/20 20:15:06 ewillink Exp $
+ * $Id: TextPageManager.java,v 1.5 2010/07/10 09:35:42 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.editor.ui.text;
 
@@ -28,6 +28,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.ocl.examples.modelregistry.eclipse.EclipseFileHandle;
+import org.eclipse.ocl.examples.modelregistry.eclipse.EclipseProjectHandle;
+import org.eclipse.ocl.examples.modelregistry.environment.FileHandle;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.ocl.lpg.ProblemHandler.Phase;
 import org.eclipse.ocl.lpg.ProblemHandler.Severity;
@@ -36,9 +39,6 @@ import org.eclipse.qvt.declarative.editor.ui.QVTEditorPlugin;
 import org.eclipse.qvt.declarative.editor.ui.builder.MarkerProblemHandler;
 import org.eclipse.qvt.declarative.editor.ui.paged.PagedEditor;
 import org.eclipse.qvt.declarative.editor.ui.pages.EditorPageManager;
-import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseFileHandle;
-import org.eclipse.qvt.declarative.modelregistry.eclipse.EclipseProjectHandle;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ICSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.unparser.IUnparser;
@@ -58,7 +58,7 @@ public class TextPageManager extends EditorPageManager
 	}
 
 	public ProblemCounter cannotDeactivate(Map<XMLResource,XMLResource> updates, IProgressMonitor monitor) {
-		AbstractFileHandle fileHandle = getFileHandle();
+		FileHandle fileHandle = getFileHandle();
 		ICSTFileEnvironment environment = getCreationFactory().createFileEnvironment(fileHandle, getResourceSet(), resource.getURI());
 		ProblemCounter reporter = new ProblemCounter();
 		environment.setProblemHandler(reporter);
