@@ -14,15 +14,15 @@ import lpg.runtime.Monitor;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.ocl.examples.modelregistry.environment.FileHandle;
 import org.eclipse.qvt.declarative.ecore.QVTCore.QVTCorePackage;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
 import org.eclipse.qvt.declarative.parser.qvt.environment.QVTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.qvtcore.QVTcAnalyzer;
 import org.eclipse.qvt.declarative.parser.qvtcore.cst.TopLevelCS;
 
 public class QVTcFileEnvironment extends QVTFileEnvironment<QVTcTopLevelEnvironment, IQVTcNodeEnvironment, TopLevelCS>
 {
-	public QVTcFileEnvironment(AbstractFileHandle file, ResourceSet resourceSet, XMIResource astResource) {
+	public QVTcFileEnvironment(FileHandle file, ResourceSet resourceSet, XMIResource astResource) {
 		super(file, resourceSet, astResource);
 	}
 
