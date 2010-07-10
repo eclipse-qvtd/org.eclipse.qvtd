@@ -11,7 +11,6 @@
 		<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.editor.qvtcore-feature,org.eclipse.qvt.declarative.editor.qvtcore-feature"/>
 		<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.editor.qvtrelation-feature,org.eclipse.qvt.declarative.editor.qvtrelation-feature"/>
 		<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.examples-feature,org.eclipse.qvt.declarative.examples-feature"/>
-		<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.modelregistry-feature,org.eclipse.qvt.declarative.modelregistry-feature"/>
 		<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.test-feature,org.eclipse.qvt.declarative.test-feature"/>
 
 		<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/releng,org.eclipse.qvtd.releng"/>
