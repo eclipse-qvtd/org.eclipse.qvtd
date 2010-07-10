@@ -5,15 +5,7 @@
 	<projects>
 	</projects>
 	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.qvt.declarative.editor.ocl.ui.OCLBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>org.eclipse.qvt.declarative.modelregistry.ui.ModelRegistryNature</nature>
-		<nature>org.eclipse.qvt.declarative.editor.ocl.ui.OCLNature</nature>
 	</natures>
 </projectDescription>
