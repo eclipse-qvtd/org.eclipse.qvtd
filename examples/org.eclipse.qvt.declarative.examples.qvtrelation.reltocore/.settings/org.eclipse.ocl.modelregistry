@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<mreg:ModelRegistrySettings xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:mreg="http://www.eclipse.org/qvt/1.0/ModelRegistry">
+<mreg:ModelRegistrySettings xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:mreg="http://www.eclipse.org/ocl/1.0/ModelRegistry">
   <resource name="qvtrsrc">
     <entry accessor="emof" kind="Model Name" uri="platform:/plugin/org.eclipse.qvt.declarative.emof.emof/model/EMOF.ecore"/>
     <entry accessor="essentialocl" kind="Model Name" uri="platform:/plugin/org.eclipse.qvt.declarative.emof.essentialocl/model/EssentialOCL.ecore"/>
