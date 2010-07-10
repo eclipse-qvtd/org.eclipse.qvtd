@@ -1,0 +1,1 @@
+Moved to org.eclipse.ocl.examples.modelregistry
