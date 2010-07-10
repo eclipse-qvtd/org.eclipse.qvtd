@@ -27,14 +27,6 @@
 		      target below for the other part of this process.-->
 		<ant target="fetchElement" antfile="${eclipse.pdebuild.scripts}/genericTargets.xml">
 			<property name="type" value="plugin"/>
-			<property name="id" value="org.eclipse.qvt.declarative.examples.ocl.empty"/>
-		</ant>
-		<ant target="fetchElement" antfile="${eclipse.pdebuild.scripts}/genericTargets.xml">
-			<property name="type" value="plugin"/>
-			<property name="id" value="org.eclipse.qvt.declarative.examples.ocl.royalandloyal"/>
-		</ant>
-		<ant target="fetchElement" antfile="${eclipse.pdebuild.scripts}/genericTargets.xml">
-			<property name="type" value="plugin"/>
 			<property name="id" value="org.eclipse.qvt.declarative.examples.qvtcore.empty"/>
 		</ant>
 		<ant target="fetchElement" antfile="${eclipse.pdebuild.scripts}/genericTargets.xml">
