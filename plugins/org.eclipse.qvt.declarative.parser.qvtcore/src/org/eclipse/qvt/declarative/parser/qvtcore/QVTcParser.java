@@ -20,7 +20,7 @@
 *        - 300534: Removing the use of deprecated macros.
 * </copyright>
 *
-* $Id: QVTcParser.java,v 1.16 2010/07/10 06:14:45 ewillink Exp $
+* $Id: QVTcParser.java,v 1.17 2010/07/10 09:34:36 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;
@@ -337,6 +337,13 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
 	getIPrsStream().reportErrorTokenMessage(error_token, msg); 
 }
 			
+	protected IdentifierCS createIdentifierCS(SimpleNameCS simpleName) {
+		IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
+		result.setValue(simpleName.getValue());
+		setOffsets(result, simpleName);
+		return result;
+	}
+
 	private int _uniqueNameCount = 0;
 
 	protected String createUniqueIdentifier() {
@@ -2025,7 +2032,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 242:  TopLevelCS ::= $Empty
             //
             case 242: {
-               //#line 98 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 105 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				TopLevelCS result = QVTcCSTFactory.eINSTANCE.createTopLevelCS();
 				setOffsets(result, getRhsIToken(1));
@@ -2037,7 +2044,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 243:  TopLevelCS ::= TopLevelCS MappingCS
             //
             case 243: {
-               //#line 105 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 112 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				TopLevelCS result = (TopLevelCS)getRhsSym(1);
 				MappingCS mappingCS = (MappingCS)getRhsSym(2);
@@ -2051,7 +2058,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 244:  TopLevelCS ::= TopLevelCS TransformationCS
             //
             case 244: {
-               //#line 114 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 121 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				TopLevelCS result = (TopLevelCS)getRhsSym(1);
 				TransformationCS transformationCS = (TransformationCS)getRhsSym(2);
@@ -2065,7 +2072,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 245:  TopLevelCS ::= TopLevelCS QueryCS
             //
             case 245: {
-               //#line 123 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 130 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				TopLevelCS result = (TopLevelCS)getRhsSym(1);
 				QueryCS queryCS = (QueryCS)getRhsSym(2);
@@ -2079,7 +2086,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 246:  TransformationCS_0_ ::= transformation TransformationNameCS {
             //
             case 246: {
-               //#line 137 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 144 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				TransformationCS result = QVTcCSTFactory.eINSTANCE.createTransformationCS();
 				result.setPathName((PathNameCS)getRhsSym(2));
@@ -2092,7 +2099,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 247:  TransformationCS_0_ ::= TransformationCS_0_ DirectionCS ;
             //
             case 247: {
-               //#line 145 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 152 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				TransformationCS result = (TransformationCS)getRhsSym(1);
 				DirectionCS directionCS = (DirectionCS)getRhsSym(2);
@@ -2106,7 +2113,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 248:  TransformationCS ::= TransformationCS_0_ }
             //
             case 248: {
-               //#line 154 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 161 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				TransformationCS result = (TransformationCS)getRhsSym(1);
 				setOffsets(result, result, getRhsIToken(2));
@@ -2118,7 +2125,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 249:  DirectionCS_0_ ::= DirectionNameCS
             //
             case 249: {
-               //#line 164 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 171 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				IdentifierCS directionNameCS = (IdentifierCS)getRhsSym(1);
 				DirectionCS result = QVTcCSTFactory.eINSTANCE.createDirectionCS();
@@ -2132,7 +2139,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 252:  DirectionCS_2_ ::= DirectionCS_1_ PackageNameCS
             //
             case 252: {
-               //#line 175 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 182 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				DirectionCS result = (DirectionCS)getRhsSym(1);
 				PathNameCS pathNameCS = (PathNameCS)getRhsSym(2);
@@ -2146,7 +2153,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 257:  DirectionCS_5_ ::= DirectionCS_4_ DirectionNameCS
             //
             case 257: {
-               //#line 188 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 195 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				DirectionCS result = (DirectionCS)getRhsSym(1);
 				IdentifierCS directionNameCS = (IdentifierCS)getRhsSym(2);
@@ -2160,7 +2167,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 260:  MappingCS_1_ ::= map
             //
             case 260: {
-               //#line 204 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 211 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				MappingCS result = QVTcCSTFactory.eINSTANCE.createMappingCS();
 //					IdentifierCS identifierCS = createUniqueIdentifierCS(getRhsTokenIndex(1));
@@ -2174,7 +2181,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 261:  MappingCS_1_ ::= map MappingNameCS
             //
             case 261: {
-               //#line 213 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 220 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				MappingCS result = QVTcCSTFactory.eINSTANCE.createMappingCS();
 				IdentifierCS identifierCS = (IdentifierCS)getRhsSym(2);
@@ -2188,7 +2195,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 263:  MappingCS_2_ ::= MappingCS_1_ in TransformationNameCS
             //
             case 263: {
-               //#line 223 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 230 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				MappingCS result = (MappingCS)getRhsSym(1);
 				PathNameCS identifierCS = (PathNameCS)getRhsSym(3);
@@ -2202,7 +2209,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 265:  MappingCS_3_ ::= MappingCS_2_ refines MappingNameCS
             //
             case 265: {
-               //#line 233 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 240 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				MappingCS result = (MappingCS)getRhsSym(1);
 				IdentifierCS identifierCS = (IdentifierCS)getRhsSym(3);
@@ -2216,7 +2223,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 266:  MappingCS_3_ ::= MappingCS_3_ , MappingNameCS
             //
             case 266: {
-               //#line 242 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 249 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				MappingCS result = (MappingCS)getRhsSym(1);
 				IdentifierCS identifierCS = (IdentifierCS)getRhsSym(3);
@@ -2230,7 +2237,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 268:  MappingCS_4_ ::= MappingCS_4_ DomainCS
             //
             case 268: {
-               //#line 252 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 259 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				MappingCS result = (MappingCS)getRhsSym(1);
 				DomainCS domainCS = (DomainCS)getRhsSym(2);
@@ -2244,7 +2251,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 269:  MappingCS_8 ::= MappingCS_4_ where DomainCS_0_
             //
             case 269: {
-               //#line 261 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 268 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				MappingCS result = (MappingCS)getRhsSym(1);
 				IdentifierCS directionNameCS = QVTCSTFactory.eINSTANCE.createIdentifierCS();
@@ -2263,7 +2270,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 270:  MappingCS_8 ::= MappingCS_4_ where DirectionNameCS DomainCS_0_
             //
             case 270: {
-               //#line 275 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 282 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				MappingCS result = (MappingCS)getRhsSym(1);
 				IdentifierCS directionNameCS = (IdentifierCS)getRhsSym(3);
@@ -2281,7 +2288,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 271:  MappingCS_8 ::= MappingCS_8 ComposedMappingCS
             //
             case 271: {
-               //#line 288 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 295 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				MappingCS result = (MappingCS)getRhsSym(1);
 				MappingCS composedMappingCS = (MappingCS)getRhsSym(2);
@@ -2295,7 +2302,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 272:  MappingCS ::= MappingCS_8 }
             //
             case 272: {
-               //#line 297 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 304 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				MappingCS result = (MappingCS)getRhsSym(1);
 				setOffsets(result, result, getRhsIToken(2));
@@ -2307,7 +2314,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 273:  DomainCS_0_ ::= ( DomainGuardPatternCS ) { DomainBottomPatternCS }
             //
             case 273: {
-               //#line 305 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 312 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				GuardPatternCS guardPatternCS = (GuardPatternCS)getRhsSym(2);
 				BottomPatternCS bottomPatternCS = (BottomPatternCS)getRhsSym(5);
@@ -2323,7 +2330,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 274:  DomainCS_1_ ::= DirectionNameCS DomainCS_0_
             //
             case 274: {
-               //#line 316 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 323 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				IdentifierCS identifierCS = (IdentifierCS)getRhsSym(1);
 				DomainCS result = (DomainCS)getRhsSym(2);
@@ -2337,7 +2344,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 276:  DomainCS_2_ ::= enforce DomainCS_1_
             //
             case 276: {
-               //#line 326 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 333 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				DomainCS result = (DomainCS)getRhsSym(2);
 				result.setEnforce(true);
@@ -2350,7 +2357,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 278:  DomainCS ::= check DomainCS_2_
             //
             case 278: {
-               //#line 335 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 342 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				DomainCS result = (DomainCS)getRhsSym(2);
 				result.setCheck(true);
@@ -2363,7 +2370,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 284:  GuardPatternCS_1_ ::= UnrealizedVariableCS
             //
             case 284: {
-               //#line 356 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 363 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				GuardPatternCS result = QVTcCSTFactory.eINSTANCE.createGuardPatternCS();
 				UnrealizedVariableCS unrealizedVariableCS = (UnrealizedVariableCS)getRhsSym(1);
@@ -2377,7 +2384,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 285:  GuardPatternCS_1_ ::= GuardPatternCS_1_ , UnrealizedVariableCS
             //
             case 285: {
-               //#line 365 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 372 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				GuardPatternCS result = (GuardPatternCS)getRhsSym(1);
 				UnrealizedVariableCS unrealizedVariableCS = (UnrealizedVariableCS)getRhsSym(3);
@@ -2391,7 +2398,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 287:  GuardPatternCS_2_ ::= ConstraintCS ;
             //
             case 287: {
-               //#line 375 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 382 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				GuardPatternCS result = QVTcCSTFactory.eINSTANCE.createGuardPatternCS();
 				OCLExpressionCS constraintCS = (OCLExpressionCS)getRhsSym(1);
@@ -2405,7 +2412,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 288:  GuardPatternCS_2_ ::= GuardPatternCS_2_ ConstraintCS ;
             //
             case 288: {
-               //#line 384 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 391 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				GuardPatternCS result = (GuardPatternCS)getRhsSym(1);
 				OCLExpressionCS constraintCS = (OCLExpressionCS)getRhsSym(2);
@@ -2419,7 +2426,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 291:  GuardPatternCS ::= $Empty
             //
             case 291: {
-               //#line 395 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 402 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				GuardPatternCS result = QVTcCSTFactory.eINSTANCE.createGuardPatternCS();
 				setOffsets(result, getRhsIToken(1));
@@ -2431,7 +2438,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 292:  BottomPatternCS_1_ ::= UnrealizedVariableCS
             //
             case 292: {
-               //#line 404 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 411 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				BottomPatternCS result = QVTcCSTFactory.eINSTANCE.createBottomPatternCS();
 				UnrealizedVariableCS unrealizedVariableCS = (UnrealizedVariableCS)getRhsSym(1);
@@ -2445,7 +2452,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 293:  BottomPatternCS_1_ ::= BottomPatternCS_1_ , UnrealizedVariableCS
             //
             case 293: {
-               //#line 413 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 420 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				BottomPatternCS result = (BottomPatternCS)getRhsSym(1);
 				UnrealizedVariableCS unrealizedVariableCS = (UnrealizedVariableCS)getRhsSym(3);
@@ -2459,7 +2466,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 294:  BottomPatternCS_1_ ::= RealizedVariableCS
             //
             case 294: {
-               //#line 422 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 429 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				BottomPatternCS result = QVTcCSTFactory.eINSTANCE.createBottomPatternCS();
 				RealizedVariableCS realizedVariableCS = (RealizedVariableCS)getRhsSym(1);
@@ -2473,7 +2480,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 295:  BottomPatternCS_1_ ::= BottomPatternCS_1_ , RealizedVariableCS
             //
             case 295: {
-               //#line 431 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 438 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				BottomPatternCS result = (BottomPatternCS)getRhsSym(1);
 				RealizedVariableCS realizedVariableCS = (RealizedVariableCS)getRhsSym(3);
@@ -2487,7 +2494,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 297:  BottomPatternCS_2_ ::= ConstraintCS ;
             //
             case 297: {
-               //#line 441 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 448 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				BottomPatternCS result = QVTcCSTFactory.eINSTANCE.createBottomPatternCS();
 				OCLExpressionCS constraintCS = (OCLExpressionCS)getRhsSym(1);
@@ -2501,7 +2508,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 298:  BottomPatternCS_2_ ::= EnforcementOperationCS
             //
             case 298: {
-               //#line 450 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 457 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				BottomPatternCS result = QVTcCSTFactory.eINSTANCE.createBottomPatternCS();
 				EnforcementOperationCS enforcementOperationCS = (EnforcementOperationCS)getRhsSym(1);
@@ -2515,7 +2522,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 299:  BottomPatternCS_2_ ::= BottomPatternCS_2_ ConstraintCS ;
             //
             case 299: {
-               //#line 459 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 466 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				BottomPatternCS result = (BottomPatternCS)getRhsSym(1);
 				OCLExpressionCS constraintCS = (OCLExpressionCS)getRhsSym(2);
@@ -2529,7 +2536,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 300:  BottomPatternCS_2_ ::= BottomPatternCS_2_ EnforcementOperationCS
             //
             case 300: {
-               //#line 468 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 475 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				BottomPatternCS result = (BottomPatternCS)getRhsSym(1);
 				EnforcementOperationCS enforcementOperationCS = (EnforcementOperationCS)getRhsSym(2);
@@ -2543,7 +2550,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 303:  BottomPatternCS ::= $Empty
             //
             case 303: {
-               //#line 479 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 486 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				BottomPatternCS result = QVTcCSTFactory.eINSTANCE.createBottomPatternCS();
 				setOffsets(result, getRhsIToken(1));
@@ -2555,7 +2562,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 304:  EnforcementOperationCS_1_ ::= primaryExpCS
             //
             case 304: {
-               //#line 487 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 494 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				OperationCallExpCS operationCallCS = (OperationCallExpCS)getRhsSym(1);
 				EnforcementOperationCS result = QVTcCSTFactory.eINSTANCE.createEnforcementOperationCS();
@@ -2569,7 +2576,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 305:  EnforcementOperationCS ::= creation EnforcementOperationCS_1_ ;
             //
             case 305: {
-               //#line 496 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 503 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				EnforcementOperationCS result = (EnforcementOperationCS)getRhsSym(2);
 				result.setDeletion(false);
@@ -2582,7 +2589,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 306:  EnforcementOperationCS ::= deletion EnforcementOperationCS_1_ ;
             //
             case 306: {
-               //#line 504 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 511 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				EnforcementOperationCS result = (EnforcementOperationCS)getRhsSym(2);
 				result.setDeletion(true);
@@ -2595,7 +2602,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 307:  UnrealizedVariableCS ::= VariableNameCS : typeCS
             //
             case 307: {
-               //#line 514 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 521 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				IdentifierCS identifierCS = (IdentifierCS)getRhsSym(1);
 				TypeCS type = (TypeCS)getRhsSym(3);
@@ -2611,7 +2618,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 308:  RealizedVariableCS ::= realize VariableNameCS : typeCS
             //
             case 308: {
-               //#line 527 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 534 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				IdentifierCS identifierCS = (IdentifierCS)getRhsSym(2);
 				TypeCS type = (TypeCS)getRhsSym(4);
@@ -2627,7 +2634,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 312:  AssignmentCS_0_ ::= OclExpressionCS := OclExpressionCS
             //
             case 312: {
-               //#line 547 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 554 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				OCLExpressionCS target = (OCLExpressionCS)getRhsSym(1);
 				OCLExpressionCS initialiser = (OCLExpressionCS)getRhsSym(3);
@@ -2643,7 +2650,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 314:  AssignmentCS ::= default AssignmentCS_0_
             //
             case 314: {
-               //#line 559 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 566 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				AssignmentCS result = (AssignmentCS)getRhsSym(2);
 				result.setDefault(true);
@@ -2656,7 +2663,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 323:  QueryCS_preParamDeclaration ::= query QueryNameCS (
             //
             case 323: {
-               //#line 582 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 589 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				QueryCS result = QVTcCSTFactory.eINSTANCE.createQueryCS();
 				result.setPathName((PathNameCS)getRhsSym(2));
@@ -2669,7 +2676,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 325:  QueryCS_postParamDeclaration ::= QueryCS_preParamDeclaration paramDeclarationCS
             //
             case 325: {
-               //#line 591 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 598 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				ParamDeclarationCS paramDeclarationCS = (ParamDeclarationCS)getRhsSym(2);
 				QueryCS result = (QueryCS)getRhsSym(1);
@@ -2683,7 +2690,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 326:  QueryCS_postType ::= QueryCS_postParamDeclaration ) : typeCS
             //
             case 326: {
-               //#line 600 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 607 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				TypeCS typeCS = (TypeCS)getRhsSym(4);
 				QueryCS result = (QueryCS)getRhsSym(1);
@@ -2697,7 +2704,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 327:  QueryCS ::= QueryCS_postType ;
             //
             case 327: {
-               //#line 609 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 616 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				QueryCS result = (QueryCS)getRhsSym(1);
 				setOffsets(result, result, getRhsIToken(2));
@@ -2709,7 +2716,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 328:  QueryCS ::= QueryCS_postType { OclExpressionCS }
             //
             case 328: {
-               //#line 616 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 623 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				QueryCS result = (QueryCS)getRhsSym(1);
 				result.setOclExpression((OCLExpressionCS)getRhsSym(3));
@@ -2728,7 +2735,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 330:  paramDeclarationCS ::= identifierCS : typeCS
             //
             case 330: {
-               //#line 628 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 635 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				IdentifierCS identifierCS = (IdentifierCS)getRhsSym(1);
 				TypeCS typeCS = (TypeCS)getRhsSym(3);
@@ -2744,7 +2751,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 331:  paramDeclarationCS ::= identifierCS ERROR_Colon
             //
             case 331: {
-               //#line 639 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 646 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				IdentifierCS identifierCS = (IdentifierCS)getRhsSym(1);
 				ParamDeclarationCS result = QVTcCSTFactory.eINSTANCE.createParamDeclarationCS();
@@ -2758,7 +2765,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 343:  ERROR_identifierCS ::= ERROR_TOKEN
             //
             case 343: {
-               //#line 665 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 672 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				reportErrorTokenMessage(getRhsTokenIndex(1), QVTcParserErrors.MISSING_IDENTIFIER);
 				IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
@@ -2772,7 +2779,7 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 344:  identifierCS ::= IDENTIFIER
             //
             case 344: {
-               //#line 674 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 681 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 				result.setValue(getRhsTokenText(1));
@@ -2785,12 +2792,23 @@ protected final void reportErrorTokenMessage(int error_token, String msg) {
             // Rule 345:  identifierCS ::= STRING_LITERAL
             //
             case 345: {
-               //#line 682 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+               //#line 689 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
 				
 				IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
 				String string = getRhsTokenText(1);
 				result.setValue(string.substring(1, string.length()-1));
 				setOffsets(result, getRhsIToken(1));
+				setResult(result);
+	                  break;
+            }
+	
+            //
+            // Rule 346:  identifierCS ::= QuotedSimpleNameCS
+            //
+            case 346: {
+               //#line 698 "../../../../../../../../org.eclipse.ocl/src/org/eclipse/ocl/lpg/btParserTemplateF.gi"
+				
+				IdentifierCS result = createIdentifierCS((SimpleNameCS)getRhsSym(1));
 				setResult(result);
 	                  break;
             }

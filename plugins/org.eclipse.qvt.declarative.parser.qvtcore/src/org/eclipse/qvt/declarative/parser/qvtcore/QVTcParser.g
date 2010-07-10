@@ -77,6 +77,13 @@ import org.eclipse.ocl.parser.backtracking.OCLParserErrors;
 
 %Headers
 	/.			
+		protected IdentifierCS createIdentifierCS(SimpleNameCS simpleName) {
+			IdentifierCS result = QVTCSTFactory.eINSTANCE.createIdentifierCS();
+			result.setValue(simpleName.getValue());
+			setOffsets(result, simpleName);
+			return result;
+		}
+
 		private int _uniqueNameCount = 0;
 
 		protected String createUniqueIdentifier() {
@@ -683,6 +690,12 @@ import org.eclipse.ocl.parser.backtracking.OCLParserErrors;
 					String string = getRhsTokenText(1);
 					result.setValue(string.substring(1, string.length()-1));
 					setOffsets(result, getRhsIToken(1));
+					setResult(result);
+		  $EndCode
+		./
+	identifierCS ::= QuotedSimpleNameCS
+		/.$BeginCode
+					IdentifierCS result = createIdentifierCS((SimpleNameCS)getRhsSym(1));
 					setResult(result);
 		  $EndCode
 		./

@@ -20,7 +20,7 @@
 *        - 300534: Removing the use of deprecated macros.
 * </copyright>
 *
-* $Id: QVTcParsersym.java,v 1.14 2010/07/10 06:14:45 ewillink Exp $
+* $Id: QVTcParsersym.java,v 1.15 2010/07/10 09:34:36 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtcore;
@@ -28,13 +28,13 @@ package org.eclipse.qvt.declarative.parser.qvtcore;
 public interface QVTcParsersym {
     public final static int
       TK_COLON_EQUALS = 57,
-      TK_QUOTED_IDENTIFIER = 8,
+      TK_QUOTED_IDENTIFIER = 3,
       TK_INTEGER_LITERAL = 24,
       TK_REAL_LITERAL = 25,
-      TK_STRING_LITERAL = 7,
-      TK_PLUS = 34,
-      TK_MINUS = 4,
-      TK_MULTIPLY = 5,
+      TK_STRING_LITERAL = 5,
+      TK_PLUS = 35,
+      TK_MINUS = 6,
+      TK_MULTIPLY = 7,
       TK_DIVIDE = 36,
       TK_GREATER = 42,
       TK_LESS = 43,
@@ -43,7 +43,7 @@ public interface QVTcParsersym {
       TK_LESS_EQUAL = 45,
       TK_NOT_EQUAL = 48,
       TK_LPAREN = 2,
-      TK_RPAREN = 6,
+      TK_RPAREN = 8,
       TK_LBRACE = 49,
       TK_RBRACE = 37,
       TK_LBRACKET = 53,
@@ -51,7 +51,7 @@ public interface QVTcParsersym {
       TK_ARROW = 38,
       TK_BAR = 47,
       TK_COMMA = 9,
-      TK_COLON = 35,
+      TK_COLON = 33,
       TK_COLONCOLON = 39,
       TK_SEMICOLON = 46,
       TK_DOT = 40,
@@ -66,7 +66,7 @@ public interface QVTcParsersym {
       TK_xor = 52,
       TK_not = 28,
       TK_implies = 54,
-      TK_let = 33,
+      TK_let = 34,
       TK_in = 56,
       TK_true = 29,
       TK_false = 30,
@@ -100,7 +100,7 @@ public interface QVTcParsersym {
       TK_uses = 73,
       TK_where = 74,
       TK_EOF_TOKEN = 75,
-      TK_IDENTIFIER = 3,
+      TK_IDENTIFIER = 4,
       TK_SINGLE_LINE_COMMENT = 76,
       TK_MULTI_LINE_COMMENT = 77,
       TK_ERROR_TOKEN = 1;
@@ -109,12 +109,12 @@ public interface QVTcParsersym {
                  "",
                  "ERROR_TOKEN",
                  "LPAREN",
+                 "QUOTED_IDENTIFIER",
                  "IDENTIFIER",
+                 "STRING_LITERAL",
                  "MINUS",
                  "MULTIPLY",
                  "RPAREN",
-                 "STRING_LITERAL",
-                 "QUOTED_IDENTIFIER",
                  "COMMA",
                  "Set",
                  "Bag",
@@ -139,9 +139,9 @@ public interface QVTcParsersym {
                  "false",
                  "null",
                  "invalid",
+                 "COLON",
                  "let",
                  "PLUS",
-                 "COLON",
                  "DIVIDE",
                  "RBRACE",
                  "ARROW",
