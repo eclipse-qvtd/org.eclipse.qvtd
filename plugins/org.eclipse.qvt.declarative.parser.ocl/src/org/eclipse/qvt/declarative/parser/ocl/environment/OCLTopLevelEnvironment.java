@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLTopLevelEnvironment.java,v 1.6 2008/12/18 07:12:30 ewillink Exp $
+ * $Id: OCLTopLevelEnvironment.java,v 1.7 2010/07/10 09:35:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl.environment;
 
@@ -33,10 +33,10 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.cst.OCLDocumentCS;
+import org.eclipse.ocl.examples.modelregistry.environment.AbstractModelResolver;
+import org.eclipse.ocl.examples.modelregistry.model.ModelNameAccessor;
+import org.eclipse.ocl.examples.modelregistry.model.Registration;
 import org.eclipse.ocl.parser.OCLAnalyzer;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractModelResolver;
-import org.eclipse.qvt.declarative.modelregistry.model.ModelNameAccessor;
-import org.eclipse.qvt.declarative.modelregistry.model.Registration;
 import org.eclipse.qvt.declarative.parser.environment.CSTRootEnvironment;
 import org.eclipse.qvt.declarative.parser.plugin.QVTParserPlugin;
 import org.eclipse.qvt.declarative.parser.utils.StringUtils;
@@ -74,7 +74,7 @@ public class OCLTopLevelEnvironment extends CSTRootEnvironment<OCLEnvironment<?,
 		if (packagePath == null) {
 			packagePath = new HashMap<String, List<EPackage>>();
 			AbstractModelResolver resolver = getFileEnvironment().getResolver();
-			for (Registration<ModelNameAccessor> registration : resolver.getRegistrations(ModelNameAccessor.class)) {
+			for (Registration<ModelNameAccessor> registration : resolver.getRegistrations(ModelNameAccessor.NAMESPACE)) {
 				try {
 					Resource resource = resolver.getResource(registration);
 					if (resource != null)

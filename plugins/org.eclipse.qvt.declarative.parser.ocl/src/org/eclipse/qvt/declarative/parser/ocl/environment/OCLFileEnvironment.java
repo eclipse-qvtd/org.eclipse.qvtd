@@ -12,7 +12,7 @@
  * 
  * </copyright>
  *
- * $Id: OCLFileEnvironment.java,v 1.6 2010/01/05 11:41:36 ewillink Exp $
+ * $Id: OCLFileEnvironment.java,v 1.7 2010/07/10 09:35:33 ewillink Exp $
  */
 package org.eclipse.qvt.declarative.parser.ocl.environment;
 
@@ -47,7 +47,7 @@ import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.EcoreEnvironmentFactory;
 import org.eclipse.ocl.ecore.EcorePackage;
 import org.eclipse.ocl.ecore.SendSignalAction;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
+import org.eclipse.ocl.examples.modelregistry.environment.FileHandle;
 import org.eclipse.qvt.declarative.parser.environment.CSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.environment.ICSTFileEnvironment;
 import org.eclipse.qvt.declarative.parser.ocl.OCLFileAnalyzer;
@@ -110,7 +110,7 @@ public class OCLFileEnvironment extends CSTFileEnvironment<OCLTopLevelEnvironmen
 
 	protected EcoreEnvironmentFactory derivedFactory;
 
-	public OCLFileEnvironment(AbstractFileHandle file, ResourceSet resourceSet, XMIResource astResource) {
+	public OCLFileEnvironment(FileHandle file, ResourceSet resourceSet, XMIResource astResource) {
 		super(file, resourceSet, astResource);
 	}
 
