@@ -55,6 +55,8 @@ import org.eclipse.ocl.ecore.OperationCallExp;
 import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.ecore.VariableExp;
+import org.eclipse.ocl.examples.modelregistry.environment.AbstractModelResolver;
+import org.eclipse.ocl.examples.modelregistry.environment.FileHandle;
 import org.eclipse.ocl.expressions.PropertyCallExp;
 import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.qvt.declarative.ecore.QVTBase.Domain;
@@ -77,10 +79,8 @@ import org.eclipse.qvt.declarative.ecore.QVTTemplate.ObjectTemplateExp;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.PropertyTemplateItem;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.QVTTemplateFactory;
 import org.eclipse.qvt.declarative.ecore.QVTTemplate.TemplateExp;
+import org.eclipse.qvt.declarative.ecore.utils.ClassUtils;
 import org.eclipse.qvt.declarative.ecore.utils.EcoreUtils;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractFileHandle;
-import org.eclipse.qvt.declarative.modelregistry.environment.AbstractModelResolver;
-import org.eclipse.qvt.declarative.modelregistry.util.ClassUtils;
 import org.eclipse.qvt.declarative.parser.AbstractQVTAnalyzer;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifiedCS;
 import org.eclipse.qvt.declarative.parser.qvt.cst.IdentifierCS;
@@ -397,7 +397,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 		}
 		collectionTemplateExp.setName(identifierCS(identifier));
 		collectionTemplateExp.setBindsTo(variable);
-		CollectionType referredCollectionType = ClassUtils.asClass(referredClassifier, CollectionType.class);
+		CollectionType referredCollectionType = ClassUtils.asClassOrNull(referredClassifier, CollectionType.class);
 		collectionTemplateExp.setType(referredClassifier);
 		collectionTemplateExp.setReferredCollectionType(referredCollectionType);			
 		return collectionTemplateExp;
@@ -546,7 +546,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 		}
 		if (referredClassifier == null)
 			referredClassifier = getOCLEnvironment().getOCLStandardLibrary().getOclVoid();
-		EClass referredClass = ClassUtils.asClass(referredClassifier, EClass.class);
+		EClass referredClass = ClassUtils.asClassOrNull(referredClassifier, EClass.class);
 		objectTemplate.setType(referredClassifier);
 		objectTemplate.setReferredClass(referredClass);
 		for (PropertyTemplateCS propertyTemplateCS : templateCS.getPropertyTemplate()) {
@@ -778,7 +778,7 @@ public abstract class AbstractQVTrAnalyzer extends AbstractQVTAnalyzer<IQVTrNode
 	}
 	
 	protected String getSourceFolder(IQVTrNodeEnvironment env) {
-		AbstractFileHandle file = env.getResolver().getHandle();
+		FileHandle file = env.getResolver().getHandle();
 		URI uri = file != null ? file.getURI() : null;
 		File currentFile = uri != null ? new File(uri.toFileString()) : null;
 		return currentFile != null ? currentFile.getParent() : null;
