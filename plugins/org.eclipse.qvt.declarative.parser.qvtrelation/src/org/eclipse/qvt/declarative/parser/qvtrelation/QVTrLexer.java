@@ -2,7 +2,7 @@
 * Essential OCL Lexer
 * <copyright>
 *
-* Copyright (c) 2005, 2009 IBM Corporation and others.
+* Copyright (c) 2005, 2010 IBM Corporation and others.
 * All rights reserved.   This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -12,14 +12,14 @@
 *   IBM - Initial API and implementation
 *   E.D.Willink - Lexer and Parser refactoring to support extensibility and flexible error handling
 *   Borland - Bug 242880
-*   E.D.Willink - Bug 292112
+*   E.D.Willink - Bug 292112, 295166
 *   Adolfo Sanchez-Barbudo Herrera (Open Canarias) - LPG v 2.0.17 adoption (242153)
 *   Adolfo Sanchez-Barbudo Herrera (Open Canarias) - Introducing new LPG templates (299396)
 *   E.D.Willink - Extended API and implementation for QVTr
 *
 * </copyright>
 *
-* $Id: QVTrLexer.java,v 1.16 2010/01/26 22:03:22 ewillink Exp $
+* $Id: QVTrLexer.java,v 1.17 2010/07/10 06:14:54 ewillink Exp $
 */
 
 package org.eclipse.qvt.declarative.parser.qvtrelation;
@@ -41,9 +41,11 @@ public class QVTrLexer extends AbstractLexer implements RuleAction
     private QVTrLexerLpgLexStream lexStream;
     
     private static ParseTable prs = new QVTrLexerprs();
+    @Override
     public ParseTable getParseTable() { return prs; }
 
     private LexParser lexParser = new LexParser();
+    @Override
     public LexParser getParser() { return lexParser; }
 
     public int getToken(int i) { return lexParser.getToken(i); }
@@ -53,6 +55,7 @@ public class QVTrLexer extends AbstractLexer implements RuleAction
     public int getLeftSpan() { return lexParser.getToken(1); }
     public int getRightSpan() { return lexParser.getLastToken(); }
 
+    @Override
     public void resetKeywordLexer()
     {
         if (kwLexer == null)
@@ -60,11 +63,13 @@ public class QVTrLexer extends AbstractLexer implements RuleAction
         else this.kwLexer.setInputChars(lexStream.getInputChars());
     }
 
+    @Override
     public void reset(char[] input_chars, String filename)
     {
         reset(input_chars, filename, 1);
     }
     
+    @Override
     public void reset(char[] input_chars, String filename, int tab)
     {
         lexStream = new QVTrLexerLpgLexStream(getOCLEnvironment(), input_chars, filename, tab);
@@ -94,11 +99,14 @@ public class QVTrLexer extends AbstractLexer implements RuleAction
     	return oclEnvironment;
     }
 
+    @Override
     public DerivedLexStream getILexStream() { return lexStream; }
 
     /**
      * @deprecated replaced by {@link #getILexStream()}
      */
+    @Deprecated
+    @Override
     public ILexStream getLexStream() { return lexStream; }
 
     private void initializeLexer(DerivedPrsStream prsStream, int start_offset, int end_offset)
@@ -115,11 +123,13 @@ public class QVTrLexer extends AbstractLexer implements RuleAction
         prsStream.setStreamLength(prsStream.getSize());
     }
 
+    @Override
     public void lexer(DerivedPrsStream prsStream)
     {
         lexer(null, prsStream);
     }
     
+    @Override
     public void lexer(Monitor monitor, DerivedPrsStream prsStream)
     {
         initializeLexer(prsStream, 0, -1);
@@ -127,11 +137,13 @@ public class QVTrLexer extends AbstractLexer implements RuleAction
         addEOF(prsStream, lexStream.getStreamIndex());
     }
 
+    @Override
     public void lexer(DerivedPrsStream prsStream, int start_offset, int end_offset)
     {
         lexer(null, prsStream, start_offset, end_offset);
     }
     
+    @Override
     public void lexer(Monitor monitor, DerivedPrsStream prsStream, int start_offset, int end_offset)
     {
         if (start_offset <= 1)
@@ -147,6 +159,7 @@ public class QVTrLexer extends AbstractLexer implements RuleAction
      * If a parse stream was not passed to this Lexical analyser then we
      * simply report a lexical error. Otherwise, we produce a bad token.
      */
+    @Override
     public void reportLexicalError(int startLoc, int endLoc) {
         IPrsStream prs_stream = lexStream.getIPrsStream();
         if (prs_stream == null)
@@ -178,12 +191,14 @@ public class QVTrLexer extends AbstractLexer implements RuleAction
     boolean printTokens;
     private final static int ECLIPSE_TAB_VALUE = 4;
 
+    @Override
     public int [] getKeywordKinds() { return kwLexer.getKeywordKinds(); }
 
 
     /**
      * @deprecated function replaced by {@link #reset(char [] content, String filename)}
      */
+    @Deprecated
     public void initialize(char [] content, String filename)
     {
         reset(content, filename);
@@ -386,6 +401,7 @@ public class QVTrLexer extends AbstractLexer implements RuleAction
         QVTrLexersym.Char_EOF              // for '\uffff' or 65535 
     };
             
+    @Override
     public final int getKind(int i)  // Classify character at ith location
     {
         char c = (i >= getStreamLength() ? '\uffff' : getCharValue(i));
@@ -398,6 +414,7 @@ public class QVTrLexer extends AbstractLexer implements RuleAction
                             : QVTrLexersym.Char_AfterASCIINotAcute;
     }
 
+    @Override
     public String[] orderedExportedSymbols() { return QVTrParsersym.orderedTerminalSymbols; }
 
     public QVTrLexerLpgLexStream(ICSTFileEnvironment environment, String filename, int tab) throws java.io.IOException
@@ -431,6 +448,7 @@ public QVTrLexer(ICSTFileEnvironment environment, Reader reader, String filename
 /**
  * @since 3.0
  */
+@Override
 public void reset(Reader reader, String filename) throws java.io.IOException {
 	char[] input_chars = getInputChars(reader);
     reset(input_chars, filename, ECLIPSE_TAB_VALUE);
@@ -458,15 +476,15 @@ public void reset(Reader reader, String filename) throws java.io.IOException {
             }
 	
             //
-            // Rule 3:  Token ::= SingleQuote SLNotSQOpt SingleQuote
+            // Rule 3:  Token ::= _ SingleQuote SLNotSQOpt SingleQuote
             //
             case 3: { 
-				makeToken(QVTrParsersym.TK_STRING_LITERAL);
+				makeToken(QVTrParsersym.TK_QUOTED_IDENTIFIER);
 	              break;
             }
 	
             //
-            // Rule 4:  Token ::= Acute SLNotSQOpt Acute
+            // Rule 4:  Token ::= SingleQuote SLNotSQOpt SingleQuote
             //
             case 4: { 
 				makeToken(QVTrParsersym.TK_STRING_LITERAL);
@@ -474,7 +492,7 @@ public void reset(Reader reader, String filename) throws java.io.IOException {
             }
 	
             //
-            // Rule 5:  Token ::= BackQuote SLNotSQOpt Acute
+            // Rule 5:  Token ::= Acute SLNotSQOpt Acute
             //
             case 5: { 
 				makeToken(QVTrParsersym.TK_STRING_LITERAL);
@@ -482,271 +500,279 @@ public void reset(Reader reader, String filename) throws java.io.IOException {
             }
 	
             //
-            // Rule 6:  Token ::= IntegerLiteral
+            // Rule 6:  Token ::= BackQuote SLNotSQOpt Acute
             //
-            case 6:
-                break; 
+            case 6: { 
+				makeToken(QVTrParsersym.TK_STRING_LITERAL);
+	              break;
+            }
 	
             //
-            // Rule 7:  Token ::= IntegerLiteral DotToken
+            // Rule 7:  Token ::= IntegerLiteral
             //
             case 7:
                 break; 
 	
             //
-            // Rule 8:  Token ::= IntegerLiteral DotDotToken
+            // Rule 8:  Token ::= IntegerLiteral DotToken
             //
             case 8:
                 break; 
 	
             //
-            // Rule 9:  Token ::= RealLiteral
+            // Rule 9:  Token ::= IntegerLiteral DotDotToken
             //
-            case 9: { 
+            case 9:
+                break; 
+	
+            //
+            // Rule 10:  Token ::= RealLiteral
+            //
+            case 10: { 
 				makeToken(QVTrParsersym.TK_REAL_LITERAL);
 	              break;
             }
 	
             //
-            // Rule 10:  Token ::= SLC
+            // Rule 11:  Token ::= SLC
             //
-            case 10: { 
+            case 11: { 
 				makeComment(QVTrParsersym.TK_SINGLE_LINE_COMMENT);
 	              break;
             }
 	
             //
-            // Rule 11:  Token ::= / * Inside Stars /
+            // Rule 12:  Token ::= / * Inside Stars /
             //
-            case 11: { 
+            case 12: { 
                 makeComment(QVTrParsersym.TK_MULTI_LINE_COMMENT);
                   break;
             }
     
             //
-            // Rule 12:  Token ::= WS
+            // Rule 13:  Token ::= WS
             //
-            case 12: { 
+            case 13: { 
 				skipToken();
 	              break;
             }
 	
             //
-            // Rule 13:  Token ::= +
+            // Rule 14:  Token ::= +
             //
-            case 13: { 
+            case 14: { 
 				makeToken(QVTrParsersym.TK_PLUS);
 	              break;
             }
 	
             //
-            // Rule 14:  Token ::= -
+            // Rule 15:  Token ::= -
             //
-            case 14: { 
+            case 15: { 
 				makeToken(QVTrParsersym.TK_MINUS);
 	              break;
             }
 	
             //
-            // Rule 15:  Token ::= *
+            // Rule 16:  Token ::= *
             //
-            case 15: { 
+            case 16: { 
 				makeToken(QVTrParsersym.TK_MULTIPLY);
 	              break;
             }
 	
             //
-            // Rule 16:  Token ::= /
+            // Rule 17:  Token ::= /
             //
-            case 16: { 
+            case 17: { 
 				makeToken(QVTrParsersym.TK_DIVIDE);
 	              break;
             }
 	
             //
-            // Rule 17:  Token ::= (
+            // Rule 18:  Token ::= (
             //
-            case 17: { 
+            case 18: { 
 				makeToken(QVTrParsersym.TK_LPAREN);
 	              break;
             }
 	
             //
-            // Rule 18:  Token ::= )
+            // Rule 19:  Token ::= )
             //
-            case 18: { 
+            case 19: { 
 				makeToken(QVTrParsersym.TK_RPAREN);
 	              break;
             }
 	
             //
-            // Rule 19:  Token ::= >
+            // Rule 20:  Token ::= >
             //
-            case 19: { 
+            case 20: { 
 				makeToken(QVTrParsersym.TK_GREATER);
 	              break;
             }
 	
             //
-            // Rule 20:  Token ::= <
+            // Rule 21:  Token ::= <
             //
-            case 20: { 
+            case 21: { 
 				makeToken(QVTrParsersym.TK_LESS);
 	              break;
             }
 	
             //
-            // Rule 21:  Token ::= =
+            // Rule 22:  Token ::= =
             //
-            case 21: { 
+            case 22: { 
 				makeToken(QVTrParsersym.TK_EQUAL);
 	              break;
             }
 	
             //
-            // Rule 22:  Token ::= > =
+            // Rule 23:  Token ::= > =
             //
-            case 22: { 
+            case 23: { 
 				makeToken(QVTrParsersym.TK_GREATER_EQUAL);
 	              break;
             }
 	
             //
-            // Rule 23:  Token ::= < =
+            // Rule 24:  Token ::= < =
             //
-            case 23: { 
+            case 24: { 
 				makeToken(QVTrParsersym.TK_LESS_EQUAL);
 	              break;
             }
 	
             //
-            // Rule 24:  Token ::= < >
+            // Rule 25:  Token ::= < >
             //
-            case 24: { 
+            case 25: { 
 				makeToken(QVTrParsersym.TK_NOT_EQUAL);
 	              break;
             }
 	
             //
-            // Rule 25:  Token ::= [
+            // Rule 26:  Token ::= [
             //
-            case 25: { 
+            case 26: { 
 				makeToken(QVTrParsersym.TK_LBRACKET);
 	              break;
             }
 	
             //
-            // Rule 26:  Token ::= ]
+            // Rule 27:  Token ::= ]
             //
-            case 26: { 
+            case 27: { 
 				makeToken(QVTrParsersym.TK_RBRACKET);
 	              break;
             }
 	
             //
-            // Rule 27:  Token ::= {
+            // Rule 28:  Token ::= {
             //
-            case 27: { 
+            case 28: { 
 				makeToken(QVTrParsersym.TK_LBRACE);
 	              break;
             }
 	
             //
-            // Rule 28:  Token ::= }
+            // Rule 29:  Token ::= }
             //
-            case 28: { 
+            case 29: { 
 				makeToken(QVTrParsersym.TK_RBRACE);
 	              break;
             }
 	
             //
-            // Rule 29:  Token ::= - >
+            // Rule 30:  Token ::= - >
             //
-            case 29: { 
+            case 30: { 
 				makeToken(QVTrParsersym.TK_ARROW);
 	              break;
             }
 	
             //
-            // Rule 30:  Token ::= |
+            // Rule 31:  Token ::= |
             //
-            case 30: { 
+            case 31: { 
 				makeToken(QVTrParsersym.TK_BAR);
 	              break;
             }
 	
             //
-            // Rule 31:  Token ::= ,
+            // Rule 32:  Token ::= ,
             //
-            case 31: { 
+            case 32: { 
 				makeToken(QVTrParsersym.TK_COMMA);
 	              break;
             }
 	
             //
-            // Rule 32:  Token ::= :
+            // Rule 33:  Token ::= :
             //
-            case 32: { 
+            case 33: { 
 				makeToken(QVTrParsersym.TK_COLON);
 	              break;
             }
 	
             //
-            // Rule 33:  Token ::= : :
+            // Rule 34:  Token ::= : :
             //
-            case 33: { 
+            case 34: { 
 				makeToken(QVTrParsersym.TK_COLONCOLON);
 	              break;
             }
 	
             //
-            // Rule 34:  Token ::= ;
+            // Rule 35:  Token ::= ;
             //
-            case 34: { 
+            case 35: { 
 				makeToken(QVTrParsersym.TK_SEMICOLON);
 	              break;
             }
 	
             //
-            // Rule 35:  Token ::= DotToken
+            // Rule 36:  Token ::= DotToken
             //
-            case 35:
+            case 36:
                 break; 
 	
             //
-            // Rule 36:  DotToken ::= .
+            // Rule 37:  DotToken ::= .
             //
-            case 36: { 
+            case 37: { 
 				makeToken(QVTrParsersym.TK_DOT);
 	              break;
             }
 	
             //
-            // Rule 37:  Token ::= DotDotToken
+            // Rule 38:  Token ::= DotDotToken
             //
-            case 37:
+            case 38:
                 break; 
 	
             //
-            // Rule 38:  DotDotToken ::= . .
+            // Rule 39:  DotDotToken ::= . .
             //
-            case 38: { 
+            case 39: { 
 				makeToken(QVTrParsersym.TK_DOTDOT);
 	              break;
             }
 	
             //
-            // Rule 39:  IntegerLiteral ::= Integer
+            // Rule 40:  IntegerLiteral ::= Integer
             //
-            case 39: { 
+            case 40: { 
 				makeToken(QVTrParsersym.TK_INTEGER_LITERAL);
 	              break;
             }
 	
             //
-            // Rule 264:  Token ::= + +
+            // Rule 265:  Token ::= + +
             //
-            case 264: { 
+            case 265: { 
 				makeToken(QVTrParsersym.TK_PLUS_PLUS);
 	              break;
             }
