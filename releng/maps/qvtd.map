@@ -6,14 +6,14 @@ plugin@org.eclipse.test=v20091002,:pserver:anonymous@dev.eclipse.org:/cvsroot/ec
 fragment@org.eclipse.ant.optional.junit=R3_5_1,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
 
 !*** QVT features ***************************************************************************
-feature@org.eclipse.qvt.declarative=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative-feature
-feature@org.eclipse.qvt.declarative.editor.qvtrelation=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.editor.qvtrelation-feature
-feature@org.eclipse.qvt.declarative.editor.qvtcore=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.editor.qvtcore-feature
-feature@org.eclipse.qvt.declarative.editor.qvtbase=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.editor.qvtbase-feature
-feature@org.eclipse.qvt.declarative.editor=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.editor-feature
-feature@org.eclipse.qvt.declarative.ecore.qvtbase=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvtbase-feature
-feature@org.eclipse.qvt.declarative.ecore.qvtcore=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvtcore-feature
-feature@org.eclipse.qvt.declarative.ecore.qvtrelation=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvtrelation-feature
+feature@org.eclipse.qvt.declarative=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative-feature
+feature@org.eclipse.qvt.declarative.editor.qvtrelation=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.editor.qvtrelation-feature
+feature@org.eclipse.qvt.declarative.editor.qvtcore=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.editor.qvtcore-feature
+feature@org.eclipse.qvt.declarative.editor.qvtbase=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.editor.qvtbase-feature
+feature@org.eclipse.qvt.declarative.editor=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.editor-feature
+feature@org.eclipse.qvt.declarative.ecore.qvtbase=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvtbase-feature
+feature@org.eclipse.qvt.declarative.ecore.qvtcore=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvtcore-feature
+feature@org.eclipse.qvt.declarative.ecore.qvtrelation=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.ecore.qvtrelation-feature
 
 !*** IMP plug-ins ***************************************************************************
 !*** plugin@org.eclipse.imp.runtime=SVN,trunk,svn://dev.eclipse.org/svnroot/technology/org.eclipse.imp,,org.eclipse.imp.runtime
@@ -24,69 +24,69 @@ feature@org.eclipse.qvt.declarative.ecore.qvtrelation=v201007100637,:pserver:ano
 plugin@org.eclipse.imp.runtime=SVN,0.1.106.v201004212015,svn://dev.eclipse.org/svnroot/technology/org.eclipse.imp/tags/features/org.eclipse.imp.runtime,,org.eclipse.imp.runtime
 
 !*** QVT plug-ins ***************************************************************************
-plugin@org.eclipse.qvt=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt
-plugin@org.eclipse.qvt.declarative.ecore=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore
-plugin@org.eclipse.qvt.declarative.ecore.qvtbase=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtbase
-plugin@org.eclipse.qvt.declarative.ecore.qvtbase.edit=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtbase.edit
-plugin@org.eclipse.qvt.declarative.ecore.qvtbase.editor=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtbase.editor
-plugin@org.eclipse.qvt.declarative.ecore.qvtcore=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtcore
-plugin@org.eclipse.qvt.declarative.ecore.qvtcore.edit=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtcore.edit
-plugin@org.eclipse.qvt.declarative.ecore.qvtcore.editor=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtcore.editor
-plugin@org.eclipse.qvt.declarative.ecore.qvtrelation=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtrelation
-plugin@org.eclipse.qvt.declarative.ecore.qvtrelation.edit=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtrelation.edit
-plugin@org.eclipse.qvt.declarative.ecore.qvtrelation.editor=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtrelation.editor
-plugin@org.eclipse.qvt.declarative.ecore.qvttemplate=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvttemplate
-plugin@org.eclipse.qvt.declarative.ecore.qvttemplate.edit=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvttemplate.edit
-plugin@org.eclipse.qvt.declarative.ecore.qvttemplate.editor=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvttemplate.editor
-plugin@org.eclipse.qvt.declarative.emof.emof=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.emof.emof
-plugin@org.eclipse.qvt.declarative.emof.qvtbase=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.emof.qvtbase
-plugin@org.eclipse.qvt.declarative.emof.qvtcore=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.emof.qvtcore
-plugin@org.eclipse.qvt.declarative.emof.qvttemplate=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.emof.qvttemplate
-plugin@org.eclipse.qvt.declarative.emof.qvtrelation=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.emof.qvtrelation
-plugin@org.eclipse.qvt.declarative.emof.essentialocl=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.emof.essentialocl
-plugin@org.eclipse.qvt.declarative.editor.model=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.model
-plugin@org.eclipse.qvt.declarative.editor.model.edit=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.model.edit
-plugin@org.eclipse.qvt.declarative.editor.model.editor=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.model.editor
-plugin@org.eclipse.qvt.declarative.editor.ui=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.ui
-plugin@org.eclipse.qvt.declarative.editor.ocl.ui=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.ocl.ui
-plugin@org.eclipse.qvt.declarative.editor.qvtcore.ui=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.qvtcore.ui
-plugin@org.eclipse.qvt.declarative.editor.qvtrelation.ui=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.qvtrelation.ui
-plugin@org.eclipse.qvt.declarative.parser=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser
-plugin@org.eclipse.qvt.declarative.parser.ocl=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.ocl
-plugin@org.eclipse.qvt.declarative.parser.qvtcore=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.qvtcore
-plugin@org.eclipse.qvt.declarative.parser.qvtrelation=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.qvtrelation
-plugin@org.eclipse.qvt.declarative.parser.ui=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.ui
-plugin@org.eclipse.qvt.declarative.parser.unresolved=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.unresolved
+plugin@org.eclipse.qvt=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt
+plugin@org.eclipse.qvt.declarative.ecore=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore
+plugin@org.eclipse.qvt.declarative.ecore.qvtbase=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtbase
+plugin@org.eclipse.qvt.declarative.ecore.qvtbase.edit=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtbase.edit
+plugin@org.eclipse.qvt.declarative.ecore.qvtbase.editor=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtbase.editor
+plugin@org.eclipse.qvt.declarative.ecore.qvtcore=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtcore
+plugin@org.eclipse.qvt.declarative.ecore.qvtcore.edit=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtcore.edit
+plugin@org.eclipse.qvt.declarative.ecore.qvtcore.editor=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtcore.editor
+plugin@org.eclipse.qvt.declarative.ecore.qvtrelation=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtrelation
+plugin@org.eclipse.qvt.declarative.ecore.qvtrelation.edit=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtrelation.edit
+plugin@org.eclipse.qvt.declarative.ecore.qvtrelation.editor=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtrelation.editor
+plugin@org.eclipse.qvt.declarative.ecore.qvttemplate=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvttemplate
+plugin@org.eclipse.qvt.declarative.ecore.qvttemplate.edit=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvttemplate.edit
+plugin@org.eclipse.qvt.declarative.ecore.qvttemplate.editor=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvttemplate.editor
+plugin@org.eclipse.qvt.declarative.emof.emof=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.emof.emof
+plugin@org.eclipse.qvt.declarative.emof.qvtbase=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.emof.qvtbase
+plugin@org.eclipse.qvt.declarative.emof.qvtcore=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.emof.qvtcore
+plugin@org.eclipse.qvt.declarative.emof.qvttemplate=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.emof.qvttemplate
+plugin@org.eclipse.qvt.declarative.emof.qvtrelation=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.emof.qvtrelation
+plugin@org.eclipse.qvt.declarative.emof.essentialocl=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.emof.essentialocl
+plugin@org.eclipse.qvt.declarative.editor.model=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.model
+plugin@org.eclipse.qvt.declarative.editor.model.edit=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.model.edit
+plugin@org.eclipse.qvt.declarative.editor.model.editor=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.model.editor
+plugin@org.eclipse.qvt.declarative.editor.ui=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.ui
+plugin@org.eclipse.qvt.declarative.editor.ocl.ui=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.ocl.ui
+plugin@org.eclipse.qvt.declarative.editor.qvtcore.ui=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.qvtcore.ui
+plugin@org.eclipse.qvt.declarative.editor.qvtrelation.ui=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.qvtrelation.ui
+plugin@org.eclipse.qvt.declarative.parser=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser
+plugin@org.eclipse.qvt.declarative.parser.ocl=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.ocl
+plugin@org.eclipse.qvt.declarative.parser.qvtcore=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.qvtcore
+plugin@org.eclipse.qvt.declarative.parser.qvtrelation=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.qvtrelation
+plugin@org.eclipse.qvt.declarative.parser.ui=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.ui
+plugin@org.eclipse.qvt.declarative.parser.unresolved=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.unresolved
 
 !*** QVT examples ***************************************************************************
-feature@org.eclipse.qvt.declarative.examples=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.examples-feature
-plugin@org.eclipse.qvt.declarative.examples=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.examples
+feature@org.eclipse.qvt.declarative.examples=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.examples-feature
+plugin@org.eclipse.qvt.declarative.examples=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.examples
 
 !*** QVT tests ******************************************************************************
-feature@org.eclipse.qvt.declarative.test=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.test-feature
-plugin@org.eclipse.qvt.declarative.test.all=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.all
-plugin@org.eclipse.qvt.declarative.test.emof=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof
-plugin@org.eclipse.qvt.declarative.test.emof.all=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.all
-plugin@org.eclipse.qvt.declarative.test.emof.emof=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.emof
-plugin@org.eclipse.qvt.declarative.test.emof.essentialocl=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.essentialocl
-plugin@org.eclipse.qvt.declarative.test.emof.qvtbase=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.qvtbase
-plugin@org.eclipse.qvt.declarative.test.emof.qvtcore=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.qvtcore
-plugin@org.eclipse.qvt.declarative.test.emof.qvtrelation=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.qvtrelation
-plugin@org.eclipse.qvt.declarative.test.emof.qvttemplate=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.qvttemplate
-plugin@org.eclipse.qvt.declarative.test.testqvtbase=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.testqvtbase
-plugin@org.eclipse.qvt.declarative.test.parser=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.parser
-plugin@org.eclipse.qvt.declarative.test.parser.qvtcore=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.parser.qvtcore
-plugin@org.eclipse.qvt.declarative.test.parser.qvtrelation=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.parser.qvtrelation
-plugin@org.eclipse.qvt.declarative.test.editor=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.editor
-plugin@org.eclipse.qvt.declarative.test.editor.qvtcore=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.editor.qvtcore
-plugin@org.eclipse.qvt.declarative.test.editor.qvtrelation=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.editor.qvtrelation
+feature@org.eclipse.qvt.declarative.test=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/features/org.eclipse.qvt.declarative.test-feature
+plugin@org.eclipse.qvt.declarative.test.all=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.all
+plugin@org.eclipse.qvt.declarative.test.emof=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof
+plugin@org.eclipse.qvt.declarative.test.emof.all=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.all
+plugin@org.eclipse.qvt.declarative.test.emof.emof=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.emof
+plugin@org.eclipse.qvt.declarative.test.emof.essentialocl=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.essentialocl
+plugin@org.eclipse.qvt.declarative.test.emof.qvtbase=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.qvtbase
+plugin@org.eclipse.qvt.declarative.test.emof.qvtcore=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.qvtcore
+plugin@org.eclipse.qvt.declarative.test.emof.qvtrelation=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.qvtrelation
+plugin@org.eclipse.qvt.declarative.test.emof.qvttemplate=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.emof.qvttemplate
+plugin@org.eclipse.qvt.declarative.test.testqvtbase=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.testqvtbase
+plugin@org.eclipse.qvt.declarative.test.parser=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.parser
+plugin@org.eclipse.qvt.declarative.test.parser.qvtcore=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.parser.qvtcore
+plugin@org.eclipse.qvt.declarative.test.parser.qvtrelation=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.parser.qvtrelation
+plugin@org.eclipse.qvt.declarative.test.editor=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.editor
+plugin@org.eclipse.qvt.declarative.test.editor.qvtcore=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.editor.qvtcore
+plugin@org.eclipse.qvt.declarative.test.editor.qvtrelation=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/tests/org.eclipse.qvt.declarative.test.editor.qvtrelation
 
 !*** QVT Docs ***************************************************************************
 
 
 !*** QVTd Examples plugins
-plugin@org.eclipse.qvt.declarative.examples.qvtcore.empty=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtcore.empty
-!*** plugin@org.eclipse.qvt.declarative.examples.qvtcore.uml2rdbms=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtcore.uml2rdbms
-plugin@org.eclipse.qvt.declarative.examples.qvtrelation.empty=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtrelation.empty
-plugin@org.eclipse.qvt.declarative.examples.qvtrelation.modelmorf=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtrelation.modelmorf
-plugin@org.eclipse.qvt.declarative.examples.qvtrelation.reltocore=v201007100637,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtrelation.reltocore
+plugin@org.eclipse.qvt.declarative.examples.qvtcore.empty=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtcore.empty
+!*** plugin@org.eclipse.qvt.declarative.examples.qvtcore.uml2rdbms=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtcore.uml2rdbms
+plugin@org.eclipse.qvt.declarative.examples.qvtrelation.empty=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtrelation.empty
+plugin@org.eclipse.qvt.declarative.examples.qvtrelation.modelmorf=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtrelation.modelmorf
+plugin@org.eclipse.qvt.declarative.examples.qvtrelation.reltocore=v201007100932,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.qvtrelation.reltocore
