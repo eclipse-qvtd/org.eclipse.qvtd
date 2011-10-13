@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.qvtd.pivot.qvtcore;singleton:=true
+Bundle-Version: 0.9.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.qvtd.pivot.qvtcore,
+ org.eclipse.qvtd.pivot.qvtcore.impl,
+ org.eclipse.qvtd.pivot.qvtcore.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.qvtd.pivot.qvtbase;bundle-version="0.9.0";visibility:=reexport

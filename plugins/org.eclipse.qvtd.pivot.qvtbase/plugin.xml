@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.4 2008/10/30 06:08:27 ewillink Exp $
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package uri="http://www.eclipse.org/qvt/0.9/QVTbase"
+            class="org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage"
+            genModel="model/QVTbase.genmodel"/>
+   </extension>
+
+</plugin>

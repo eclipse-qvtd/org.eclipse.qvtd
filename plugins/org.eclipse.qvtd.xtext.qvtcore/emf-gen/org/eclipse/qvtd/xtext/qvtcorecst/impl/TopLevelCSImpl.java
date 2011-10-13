@@ -1,0 +1,230 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.eclipse.qvtd.xtext.qvtcorecst.impl;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
+
+import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
+import org.eclipse.qvtd.xtext.qvtcorecst.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Top Level CS</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.TopLevelCSImpl#getTransformations <em>Transformations</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.TopLevelCSImpl#getQueries <em>Queries</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.TopLevelCSImpl#getMappings <em>Mappings</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class TopLevelCSImpl extends ModelElementCSImpl implements TopLevelCS {
+	/**
+	 * The cached value of the '{@link #getTransformations() <em>Transformations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTransformations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TransformationCS> transformations;
+
+	/**
+	 * The cached value of the '{@link #getQueries() <em>Queries</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getQueries()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<QueryCS> queries;
+
+	/**
+	 * The cached value of the '{@link #getMappings() <em>Mappings</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMappings()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<MappingCS> mappings;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TopLevelCSImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return QVTcoreCSTPackage.Literals.TOP_LEVEL_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TransformationCS> getTransformations() {
+		if (transformations == null) {
+			transformations = new EObjectContainmentEList<TransformationCS>(TransformationCS.class, this, QVTcoreCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS);
+		}
+		return transformations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<QueryCS> getQueries() {
+		if (queries == null) {
+			queries = new EObjectContainmentEList<QueryCS>(QueryCS.class, this, QVTcoreCSTPackage.TOP_LEVEL_CS__QUERIES);
+		}
+		return queries;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<MappingCS> getMappings() {
+		if (mappings == null) {
+			mappings = new EObjectContainmentEList<MappingCS>(MappingCS.class, this, QVTcoreCSTPackage.TOP_LEVEL_CS__MAPPINGS);
+		}
+		return mappings;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTcoreCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
+				return ((InternalEList<?>)getTransformations()).basicRemove(otherEnd, msgs);
+			case QVTcoreCSTPackage.TOP_LEVEL_CS__QUERIES:
+				return ((InternalEList<?>)getQueries()).basicRemove(otherEnd, msgs);
+			case QVTcoreCSTPackage.TOP_LEVEL_CS__MAPPINGS:
+				return ((InternalEList<?>)getMappings()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case QVTcoreCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
+				return getTransformations();
+			case QVTcoreCSTPackage.TOP_LEVEL_CS__QUERIES:
+				return getQueries();
+			case QVTcoreCSTPackage.TOP_LEVEL_CS__MAPPINGS:
+				return getMappings();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTcoreCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
+				getTransformations().clear();
+				getTransformations().addAll((Collection<? extends TransformationCS>)newValue);
+				return;
+			case QVTcoreCSTPackage.TOP_LEVEL_CS__QUERIES:
+				getQueries().clear();
+				getQueries().addAll((Collection<? extends QueryCS>)newValue);
+				return;
+			case QVTcoreCSTPackage.TOP_LEVEL_CS__MAPPINGS:
+				getMappings().clear();
+				getMappings().addAll((Collection<? extends MappingCS>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTcoreCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
+				getTransformations().clear();
+				return;
+			case QVTcoreCSTPackage.TOP_LEVEL_CS__QUERIES:
+				getQueries().clear();
+				return;
+			case QVTcoreCSTPackage.TOP_LEVEL_CS__MAPPINGS:
+				getMappings().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case QVTcoreCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
+				return transformations != null && !transformations.isEmpty();
+			case QVTcoreCSTPackage.TOP_LEVEL_CS__QUERIES:
+				return queries != null && !queries.isEmpty();
+			case QVTcoreCSTPackage.TOP_LEVEL_CS__MAPPINGS:
+				return mappings != null && !mappings.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+} //TopLevelCSImpl

@@ -1,0 +1,717 @@
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2011 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.eclipse.qvtd.pivot.qvtbase.impl;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.examples.pivot.Annotation;
+import org.eclipse.ocl.examples.pivot.Package;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Precedence;
+import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Transformation</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getNestedPackages <em>Nested Package</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getNestingPackage <em>Nesting Package</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getNsPrefix <em>Ns Prefix</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getNsURI <em>Ns URI</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getOwnedPrecedences <em>Owned Precedence</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getOwnedTypes <em>Owned Type</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getOwnedTag <em>Owned Tag</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getModelParameter <em>Model Parameter</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getRule <em>Rule</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getExtends <em>Extends</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class TransformationImpl extends ClassImpl implements Transformation {
+	/**
+	 * The cached value of the '{@link #getNestedPackages() <em>Nested Package</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNestedPackages()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<org.eclipse.ocl.examples.pivot.Package> nestedPackages;
+
+	/**
+	 * The default value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNsPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NS_PREFIX_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNsPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected String nsPrefix = NS_PREFIX_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNsURI() <em>Ns URI</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNsURI()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NS_URI_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNsURI() <em>Ns URI</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNsURI()
+	 * @generated
+	 * @ordered
+	 */
+	protected String nsURI = NS_URI_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOwnedPrecedences() <em>Owned Precedence</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedPrecedences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Precedence> ownedPrecedences;
+
+	/**
+	 * The cached value of the '{@link #getOwnedTypes() <em>Owned Type</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Type> ownedTypes;
+
+	/**
+	 * The cached value of the '{@link #getOwnedTag() <em>Owned Tag</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedTag()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Annotation> ownedTag;
+
+	/**
+	 * The cached value of the '{@link #getModelParameter() <em>Model Parameter</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getModelParameter()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypedModel> modelParameter;
+
+	/**
+	 * The cached value of the '{@link #getRule() <em>Rule</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRule()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Rule> rule;
+
+	/**
+	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtends()
+	 * @generated
+	 * @ordered
+	 */
+	protected Transformation extends_;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TransformationImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return QVTbasePackage.Literals.TRANSFORMATION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<org.eclipse.ocl.examples.pivot.Package> getNestedPackages() {
+		if (nestedPackages == null) {
+			nestedPackages = new EObjectContainmentWithInverseEList<org.eclipse.ocl.examples.pivot.Package>(org.eclipse.ocl.examples.pivot.Package.class, this, QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE, PivotPackage.PACKAGE__NESTING_PACKAGE);
+		}
+		return nestedPackages;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public org.eclipse.ocl.examples.pivot.Package getNestingPackage() {
+		if (eContainerFeatureID() != QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE) return null;
+		return (org.eclipse.ocl.examples.pivot.Package)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetNestingPackage(org.eclipse.ocl.examples.pivot.Package newNestingPackage, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newNestingPackage, QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNestingPackage(org.eclipse.ocl.examples.pivot.Package newNestingPackage) {
+		if (newNestingPackage != eInternalContainer() || (eContainerFeatureID() != QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE && newNestingPackage != null)) {
+			if (EcoreUtil.isAncestor(this, (EObject)newNestingPackage))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newNestingPackage != null)
+				msgs = ((InternalEObject)newNestingPackage).eInverseAdd(this, PivotPackage.PACKAGE__NESTED_PACKAGE, org.eclipse.ocl.examples.pivot.Package.class, msgs);
+			msgs = basicSetNestingPackage(newNestingPackage, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE, newNestingPackage, newNestingPackage));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getNsPrefix() {
+		return nsPrefix;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNsPrefix(String newNsPrefix) {
+		String oldNsPrefix = nsPrefix;
+		nsPrefix = newNsPrefix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.TRANSFORMATION__NS_PREFIX, oldNsPrefix, nsPrefix));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getNsURI() {
+		return nsURI;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNsURI(String newNsURI) {
+		String oldNsURI = nsURI;
+		nsURI = newNsURI;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.TRANSFORMATION__NS_URI, oldNsURI, nsURI));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Precedence> getOwnedPrecedences() {
+		if (ownedPrecedences == null) {
+			ownedPrecedences = new EObjectContainmentEList<Precedence>(Precedence.class, this, QVTbasePackage.TRANSFORMATION__OWNED_PRECEDENCE);
+		}
+		return ownedPrecedences;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Type> getOwnedTypes() {
+		if (ownedTypes == null) {
+			ownedTypes = new EObjectContainmentWithInverseEList<Type>(Type.class, this, QVTbasePackage.TRANSFORMATION__OWNED_TYPE, PivotPackage.TYPE__PACKAGE);
+		}
+		return ownedTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Annotation> getOwnedTag() {
+		if (ownedTag == null) {
+			ownedTag = new EObjectContainmentEList<Annotation>(Annotation.class, this, QVTbasePackage.TRANSFORMATION__OWNED_TAG);
+		}
+		return ownedTag;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TypedModel> getModelParameter() {
+		if (modelParameter == null) {
+			modelParameter = new EObjectContainmentWithInverseEList<TypedModel>(TypedModel.class, this, QVTbasePackage.TRANSFORMATION__MODEL_PARAMETER, QVTbasePackage.TYPED_MODEL__TRANSFORMATION);
+		}
+		return modelParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Rule> getRule() {
+		if (rule == null) {
+			rule = new EObjectContainmentWithInverseEList<Rule>(Rule.class, this, QVTbasePackage.TRANSFORMATION__RULE, QVTbasePackage.RULE__TRANSFORMATION);
+		}
+		return rule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Transformation getExtends() {
+		if (extends_ != null && extends_.eIsProxy()) {
+			InternalEObject oldExtends = (InternalEObject)extends_;
+			extends_ = (Transformation)eResolveProxy(oldExtends);
+			if (extends_ != oldExtends) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTbasePackage.TRANSFORMATION__EXTENDS, oldExtends, extends_));
+			}
+		}
+		return extends_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Transformation basicGetExtends() {
+		return extends_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExtends(Transformation newExtends) {
+		Transformation oldExtends = extends_;
+		extends_ = newExtends;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.TRANSFORMATION__EXTENDS, oldExtends, extends_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Function getFunction(String name) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypedModel getModelParameter(String name) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getNestedPackages()).basicAdd(otherEnd, msgs);
+			case QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetNestingPackage((org.eclipse.ocl.examples.pivot.Package)otherEnd, msgs);
+			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTypes()).basicAdd(otherEnd, msgs);
+			case QVTbasePackage.TRANSFORMATION__MODEL_PARAMETER:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getModelParameter()).basicAdd(otherEnd, msgs);
+			case QVTbasePackage.TRANSFORMATION__RULE:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRule()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE:
+				return ((InternalEList<?>)getNestedPackages()).basicRemove(otherEnd, msgs);
+			case QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE:
+				return basicSetNestingPackage(null, msgs);
+			case QVTbasePackage.TRANSFORMATION__OWNED_PRECEDENCE:
+				return ((InternalEList<?>)getOwnedPrecedences()).basicRemove(otherEnd, msgs);
+			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
+				return ((InternalEList<?>)getOwnedTypes()).basicRemove(otherEnd, msgs);
+			case QVTbasePackage.TRANSFORMATION__OWNED_TAG:
+				return ((InternalEList<?>)getOwnedTag()).basicRemove(otherEnd, msgs);
+			case QVTbasePackage.TRANSFORMATION__MODEL_PARAMETER:
+				return ((InternalEList<?>)getModelParameter()).basicRemove(otherEnd, msgs);
+			case QVTbasePackage.TRANSFORMATION__RULE:
+				return ((InternalEList<?>)getRule()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE:
+				return eInternalContainer().eInverseRemove(this, PivotPackage.PACKAGE__NESTED_PACKAGE, org.eclipse.ocl.examples.pivot.Package.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE:
+				return getNestedPackages();
+			case QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE:
+				return getNestingPackage();
+			case QVTbasePackage.TRANSFORMATION__NS_PREFIX:
+				return getNsPrefix();
+			case QVTbasePackage.TRANSFORMATION__NS_URI:
+				return getNsURI();
+			case QVTbasePackage.TRANSFORMATION__OWNED_PRECEDENCE:
+				return getOwnedPrecedences();
+			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
+				return getOwnedTypes();
+			case QVTbasePackage.TRANSFORMATION__OWNED_TAG:
+				return getOwnedTag();
+			case QVTbasePackage.TRANSFORMATION__MODEL_PARAMETER:
+				return getModelParameter();
+			case QVTbasePackage.TRANSFORMATION__RULE:
+				return getRule();
+			case QVTbasePackage.TRANSFORMATION__EXTENDS:
+				if (resolve) return getExtends();
+				return basicGetExtends();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE:
+				getNestedPackages().clear();
+				getNestedPackages().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Package>)newValue);
+				return;
+			case QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE:
+				setNestingPackage((org.eclipse.ocl.examples.pivot.Package)newValue);
+				return;
+			case QVTbasePackage.TRANSFORMATION__NS_PREFIX:
+				setNsPrefix((String)newValue);
+				return;
+			case QVTbasePackage.TRANSFORMATION__NS_URI:
+				setNsURI((String)newValue);
+				return;
+			case QVTbasePackage.TRANSFORMATION__OWNED_PRECEDENCE:
+				getOwnedPrecedences().clear();
+				getOwnedPrecedences().addAll((Collection<? extends Precedence>)newValue);
+				return;
+			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
+				getOwnedTypes().clear();
+				getOwnedTypes().addAll((Collection<? extends Type>)newValue);
+				return;
+			case QVTbasePackage.TRANSFORMATION__OWNED_TAG:
+				getOwnedTag().clear();
+				getOwnedTag().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case QVTbasePackage.TRANSFORMATION__MODEL_PARAMETER:
+				getModelParameter().clear();
+				getModelParameter().addAll((Collection<? extends TypedModel>)newValue);
+				return;
+			case QVTbasePackage.TRANSFORMATION__RULE:
+				getRule().clear();
+				getRule().addAll((Collection<? extends Rule>)newValue);
+				return;
+			case QVTbasePackage.TRANSFORMATION__EXTENDS:
+				setExtends((Transformation)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE:
+				getNestedPackages().clear();
+				return;
+			case QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE:
+				setNestingPackage((org.eclipse.ocl.examples.pivot.Package)null);
+				return;
+			case QVTbasePackage.TRANSFORMATION__NS_PREFIX:
+				setNsPrefix(NS_PREFIX_EDEFAULT);
+				return;
+			case QVTbasePackage.TRANSFORMATION__NS_URI:
+				setNsURI(NS_URI_EDEFAULT);
+				return;
+			case QVTbasePackage.TRANSFORMATION__OWNED_PRECEDENCE:
+				getOwnedPrecedences().clear();
+				return;
+			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
+				getOwnedTypes().clear();
+				return;
+			case QVTbasePackage.TRANSFORMATION__OWNED_TAG:
+				getOwnedTag().clear();
+				return;
+			case QVTbasePackage.TRANSFORMATION__MODEL_PARAMETER:
+				getModelParameter().clear();
+				return;
+			case QVTbasePackage.TRANSFORMATION__RULE:
+				getRule().clear();
+				return;
+			case QVTbasePackage.TRANSFORMATION__EXTENDS:
+				setExtends((Transformation)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE:
+				return nestedPackages != null && !nestedPackages.isEmpty();
+			case QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE:
+				return getNestingPackage() != null;
+			case QVTbasePackage.TRANSFORMATION__NS_PREFIX:
+				return NS_PREFIX_EDEFAULT == null ? nsPrefix != null : !NS_PREFIX_EDEFAULT.equals(nsPrefix);
+			case QVTbasePackage.TRANSFORMATION__NS_URI:
+				return NS_URI_EDEFAULT == null ? nsURI != null : !NS_URI_EDEFAULT.equals(nsURI);
+			case QVTbasePackage.TRANSFORMATION__OWNED_PRECEDENCE:
+				return ownedPrecedences != null && !ownedPrecedences.isEmpty();
+			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
+				return ownedTypes != null && !ownedTypes.isEmpty();
+			case QVTbasePackage.TRANSFORMATION__OWNED_TAG:
+				return ownedTag != null && !ownedTag.isEmpty();
+			case QVTbasePackage.TRANSFORMATION__MODEL_PARAMETER:
+				return modelParameter != null && !modelParameter.isEmpty();
+			case QVTbasePackage.TRANSFORMATION__RULE:
+				return rule != null && !rule.isEmpty();
+			case QVTbasePackage.TRANSFORMATION__EXTENDS:
+				return extends_ != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == org.eclipse.ocl.examples.pivot.Package.class) {
+			switch (derivedFeatureID) {
+				case QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE: return PivotPackage.PACKAGE__NESTED_PACKAGE;
+				case QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE: return PivotPackage.PACKAGE__NESTING_PACKAGE;
+				case QVTbasePackage.TRANSFORMATION__NS_PREFIX: return PivotPackage.PACKAGE__NS_PREFIX;
+				case QVTbasePackage.TRANSFORMATION__NS_URI: return PivotPackage.PACKAGE__NS_URI;
+				case QVTbasePackage.TRANSFORMATION__OWNED_PRECEDENCE: return PivotPackage.PACKAGE__OWNED_PRECEDENCE;
+				case QVTbasePackage.TRANSFORMATION__OWNED_TYPE: return PivotPackage.PACKAGE__OWNED_TYPE;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == org.eclipse.ocl.examples.pivot.Package.class) {
+			switch (baseFeatureID) {
+				case PivotPackage.PACKAGE__NESTED_PACKAGE: return QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE;
+				case PivotPackage.PACKAGE__NESTING_PACKAGE: return QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE;
+				case PivotPackage.PACKAGE__NS_PREFIX: return QVTbasePackage.TRANSFORMATION__NS_PREFIX;
+				case PivotPackage.PACKAGE__NS_URI: return QVTbasePackage.TRANSFORMATION__NS_URI;
+				case PivotPackage.PACKAGE__OWNED_PRECEDENCE: return QVTbasePackage.TRANSFORMATION__OWNED_PRECEDENCE;
+				case PivotPackage.PACKAGE__OWNED_TYPE: return QVTbasePackage.TRANSFORMATION__OWNED_TYPE;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (nsPrefix: ");
+		result.append(nsPrefix);
+		result.append(", nsURI: ");
+		result.append(nsURI);
+		result.append(')');
+		return result.toString();
+	}
+
+	public Precedence createOwnedPrecedence() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Package createNestedPackage(EClass eClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Package createNestedPackage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Type createOwnedType(EClass eClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Type createOwnedType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+} //TransformationImpl

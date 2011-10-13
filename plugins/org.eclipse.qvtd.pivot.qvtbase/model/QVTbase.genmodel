@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.pivot.qvtbase/src"
+    modelPluginID="org.eclipse.qvtd.pivot.qvtbase" modelName="QVTbase" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" language="" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot">
+  <foreignModel>QVTbase.ecore</foreignModel>
+  <genPackages prefix="QVTbase" basePackage="org.eclipse.qvtd.pivot" disposableProviderFactory="true"
+      contentTypeIdentifier="org.eclipse.qvtd.qvtbase" ecorePackage="QVTbase.ecore#/">
+    <genClasses image="false" ecoreClass="QVTbase.ecore#//Domain">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTbase.ecore#//Domain/isCheckable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTbase.ecore#//Domain/isEnforceable"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTbase.ecore#//Domain/rule"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#//Domain/typedModel"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTbase.ecore#//Function">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#//Function/queryExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTbase.ecore#//FunctionParameter"/>
+    <genClasses ecoreClass="QVTbase.ecore#//Pattern">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#//Pattern/predicate"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#//Pattern/bindsTo"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTbase.ecore#//Predicate">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#//Predicate/conditionExpression"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTbase.ecore#//Predicate/pattern"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="QVTbase.ecore#//Rule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#//Rule/domain"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#//Rule/overrides"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTbase.ecore#//Rule/transformation"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTbase.ecore#//Transformation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#//Transformation/ownedTag"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#//Transformation/modelParameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#//Transformation/rule"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#//Transformation/extends"/>
+      <genOperations ecoreOperation="QVTbase.ecore#//Transformation/getFunction">
+        <genParameters ecoreParameter="QVTbase.ecore#//Transformation/getFunction/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTbase.ecore#//Transformation/getModelParameter">
+        <genParameters ecoreParameter="QVTbase.ecore#//Transformation/getModelParameter/name"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="QVTbase.ecore#//TypedModel">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTbase.ecore#//TypedModel/transformation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#//TypedModel/usedPackage"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#//TypedModel/dependsOn"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
