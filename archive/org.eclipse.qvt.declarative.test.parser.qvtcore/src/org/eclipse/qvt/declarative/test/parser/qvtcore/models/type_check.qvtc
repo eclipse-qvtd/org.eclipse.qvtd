@@ -1,0 +1,20 @@
+transformation umlRdbms {
+	middle imports tuml2rdbms;
+	uml imports umlMM;
+	rdbms imports rdbmsMM;
+}
+
+map Map in umlRdbms
+{
+	check uml (p:Package) {
+	  b:String,c:Class,cl:Classifier |
+	  b := Class;
+	  p.name := String;
+	  p.name := 12;
+	  p.name := p;
+	  c := cl;
+	  cl:= c;
+	}
+	where middle () {
+	}
+}

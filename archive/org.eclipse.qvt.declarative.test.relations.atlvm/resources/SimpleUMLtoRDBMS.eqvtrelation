@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eqvtr:RelationalTransformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtb="http://www.eclipse.org/qvt/1.0/QVTBase" xmlns:eqvtr="http://www.eclipse.org/qvt/1.0/QVTRelation" xmlns:eqvtt="http://www.eclipse.org/qvt/1.0/QVTTemplate" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore" name="umlToRdbms">
+  <eOperations xsi:type="eqvtb:Function" name="PrimitiveTypeToSqlType">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    <eParameters xsi:type="eqvtb:FunctionParameter" name="primitiveType">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </eParameters>
+    <queryExpression xsi:type="ocl.ecore:IfExp">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      <condition xsi:type="ocl.ecore:OperationCallExp">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+        <source xsi:type="ocl.ecore:VariableExp" name="primitiveType" referredVariable="//PrimitiveTypeToSqlType/primitiveType">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </source>
+        <argument xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="INTEGER">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </argument>
+        <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+      </condition>
+      <thenExpression xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="NUMBER">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </thenExpression>
+      <elseExpression xsi:type="ocl.ecore:IfExp">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <condition xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:VariableExp" name="primitiveType" referredVariable="//PrimitiveTypeToSqlType/primitiveType">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </source>
+          <argument xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="BOOLEAN">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+        </condition>
+        <thenExpression xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="BOOLEAN">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </thenExpression>
+        <elseExpression xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="VARCHAR">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </elseExpression>
+      </elseExpression>
+    </queryExpression>
+  </eOperations>
+  <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Column)" instanceClassName="java.util.LinkedHashSet">
+    <elementType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Column"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Key)" instanceClassName="java.util.LinkedHashSet">
+    <elementType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Key"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Attribute)" instanceClassName="java.util.LinkedHashSet">
+    <elementType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Attribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Class)" instanceClassName="java.util.LinkedHashSet">
+    <elementType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+  </eClassifiers>
+  <modelParameter name="uml">
+    <usedPackage href="SimpleUml.ecore#/"/>
+  </modelParameter>
+  <modelParameter name="rdbms">
+    <usedPackage href="SimpleRdbms.ecore#/"/>
+  </modelParameter>
+  <rule xsi:type="eqvtr:Relation" name="PackageToSchema" isTopLevel="true">
+    <domain xsi:type="eqvtr:RelationDomain" name="uml" isCheckable="true" isEnforceable="false" typedModel="//uml" rootVariable="//PackageToSchema/p">
+      <pattern>
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" name="p" bindsTo="//PackageToSchema/p">
+          <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Package"/>
+          <part>
+            <referredProperty xsi:type="ecore:EAttribute" href="SimpleUml.ecore#//UMLModelElement/name"/>
+            <value xsi:type="ocl.ecore:VariableExp" name="pn" referredVariable="//PackageToSchema/pn">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <referredClass href="SimpleUml.ecore#//Package"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" name="rdbms" isCheckable="false" isEnforceable="true" typedModel="//rdbms" rootVariable="//PackageToSchema/s">
+      <pattern>
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" name="s" bindsTo="//PackageToSchema/s">
+          <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Schema"/>
+          <part>
+            <referredProperty xsi:type="ecore:EAttribute" href="SimpleRdbms.ecore#//RModelElement/name"/>
+            <value xsi:type="ocl.ecore:VariableExp" name="pn" referredVariable="//PackageToSchema/pn">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <referredClass href="SimpleRdbms.ecore#//Schema"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <variable name="p">
+      <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Package"/>
+    </variable>
+    <variable name="s">
+      <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Schema"/>
+    </variable>
+    <variable name="pn">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+  </rule>
+  <rule xsi:type="eqvtr:Relation" name="ClassToTable" isTopLevel="true">
+    <domain xsi:type="eqvtr:RelationDomain" name="uml" isCheckable="true" isEnforceable="false" typedModel="//uml" rootVariable="//ClassToTable/c">
+      <pattern>
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" name="c" bindsTo="//ClassToTable/c">
+          <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+          <part>
+            <referredProperty xsi:type="ecore:EReference" href="SimpleUml.ecore#//PackageElement/namespace"/>
+            <value xsi:type="eqvtt:ObjectTemplateExp" name="p" bindsTo="//ClassToTable/p">
+              <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Package"/>
+              <referredClass href="SimpleUml.ecore#//Package"/>
+            </value>
+          </part>
+          <part>
+            <referredProperty xsi:type="ecore:EAttribute" href="SimpleUml.ecore#//UMLModelElement/kind"/>
+            <value xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="Persistent">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <part>
+            <referredProperty xsi:type="ecore:EAttribute" href="SimpleUml.ecore#//UMLModelElement/name"/>
+            <value xsi:type="ocl.ecore:VariableExp" name="cn" referredVariable="//ClassToTable/cn">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <referredClass href="SimpleUml.ecore#//Class"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" name="rdbms" isCheckable="false" isEnforceable="true" typedModel="//rdbms" rootVariable="//ClassToTable/t">
+      <pattern>
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" name="t" bindsTo="//ClassToTable/t">
+          <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+          <part>
+            <referredProperty xsi:type="ecore:EReference" href="SimpleRdbms.ecore#//Table/schema"/>
+            <value xsi:type="eqvtt:ObjectTemplateExp" name="s" bindsTo="//ClassToTable/s">
+              <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Schema"/>
+              <referredClass href="SimpleRdbms.ecore#//Schema"/>
+            </value>
+          </part>
+          <part>
+            <referredProperty xsi:type="ecore:EAttribute" href="SimpleRdbms.ecore#//RModelElement/name"/>
+            <value xsi:type="ocl.ecore:VariableExp" name="cn" referredVariable="//ClassToTable/cn">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <part>
+            <referredProperty xsi:type="ecore:EReference" href="SimpleRdbms.ecore#//Table/column"/>
+            <value xsi:type="eqvtt:ObjectTemplateExp" name="cl" bindsTo="//ClassToTable/cl">
+              <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Column"/>
+              <part>
+                <referredProperty xsi:type="ecore:EAttribute" href="SimpleRdbms.ecore#//RModelElement/name"/>
+                <value xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  <source xsi:type="ocl.ecore:VariableExp" name="cn" referredVariable="//ClassToTable/cn">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="_tid">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
+                </value>
+              </part>
+              <part>
+                <referredProperty xsi:type="ecore:EAttribute" href="SimpleRdbms.ecore#//Column/type"/>
+                <value xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="NUMBER">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <referredClass href="SimpleRdbms.ecore#//Column"/>
+            </value>
+          </part>
+          <part>
+            <referredProperty xsi:type="ecore:EReference" href="SimpleRdbms.ecore#//Table/_key"/>
+            <value xsi:type="eqvtt:ObjectTemplateExp" name="k" bindsTo="//ClassToTable/k">
+              <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Key"/>
+              <part>
+                <referredProperty xsi:type="ecore:EAttribute" href="SimpleRdbms.ecore#//RModelElement/name"/>
+                <value xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  <source xsi:type="ocl.ecore:VariableExp" name="cn" referredVariable="//ClassToTable/cn">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="_pk">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
+                </value>
+              </part>
+              <part>
+                <referredProperty xsi:type="ecore:EReference" href="SimpleRdbms.ecore#//Key/column"/>
+                <value xsi:type="ocl.ecore:VariableExp" name="cl" referredVariable="//ClassToTable/cl">
+                  <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Column"/>
+                </value>
+              </part>
+              <referredClass href="SimpleRdbms.ecore#//Key"/>
+            </value>
+          </part>
+          <referredClass href="SimpleRdbms.ecore#//Table"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <variable name="c">
+      <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+    </variable>
+    <variable name="t">
+      <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+    </variable>
+    <variable name="cn">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="prefix">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="p">
+      <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Package"/>
+    </variable>
+    <variable name="s">
+      <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Schema"/>
+    </variable>
+    <variable name="cl">
+      <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Column"/>
+    </variable>
+    <variable name="k">
+      <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Key"/>
+    </variable>
+    <when>
+      <predicate>
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" referredRelation="//PackageToSchema">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="p" referredVariable="//ClassToTable/p">
+            <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Package"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="s" referredVariable="//ClassToTable/s">
+            <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Schema"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+    </when>
+    <where>
+      <predicate>
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:VariableExp" name="prefix" referredVariable="//ClassToTable/prefix">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </source>
+          <argument xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+        </conditionExpression>
+      </predicate>
+      <predicate>
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" referredRelation="//AttributeToColumn">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="//ClassToTable/c">
+            <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="t" referredVariable="//ClassToTable/t">
+            <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="prefix" referredVariable="//ClassToTable/prefix">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+    </where>
+  </rule>
+  <rule xsi:type="eqvtr:Relation" name="AttributeToColumn" isTopLevel="false">
+    <domain xsi:type="eqvtr:RelationDomain" name="uml" isCheckable="true" isEnforceable="false" typedModel="//uml" rootVariable="//AttributeToColumn/c">
+      <pattern>
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" name="c" bindsTo="//AttributeToColumn/c">
+          <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+          <referredClass href="SimpleUml.ecore#//Class"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" name="rdbms" isCheckable="false" isEnforceable="true" typedModel="//rdbms" rootVariable="//AttributeToColumn/t">
+      <pattern>
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" name="t" bindsTo="//AttributeToColumn/t">
+          <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+          <referredClass href="SimpleRdbms.ecore#//Table"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" name="prefix" isCheckable="false" isEnforceable="false" rootVariable="//AttributeToColumn/prefix.1"/>
+    <variable name="c">
+      <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+    </variable>
+    <variable name="t">
+      <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+    </variable>
+    <variable name="prefix">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <where>
+      <predicate>
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" referredRelation="//PrimitiveAttributeToColumn">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="//AttributeToColumn/c">
+            <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="t" referredVariable="//AttributeToColumn/t">
+            <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="prefix" referredVariable="//AttributeToColumn/prefix.1">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+      <predicate>
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" referredRelation="//ComplexAttributeToColumn">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="//AttributeToColumn/c">
+            <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="t" referredVariable="//AttributeToColumn/t">
+            <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="prefix" referredVariable="//AttributeToColumn/prefix.1">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+      <predicate>
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" referredRelation="//SuperAttributeToColumn">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="//AttributeToColumn/c">
+            <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="t" referredVariable="//AttributeToColumn/t">
+            <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="prefix" referredVariable="//AttributeToColumn/prefix.1">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+    </where>
+  </rule>
+  <rule xsi:type="eqvtr:Relation" name="PrimitiveAttributeToColumn" isTopLevel="false">
+    <domain xsi:type="eqvtr:RelationDomain" name="uml" isCheckable="true" isEnforceable="false" typedModel="//uml" rootVariable="//PrimitiveAttributeToColumn/c">
+      <pattern>
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" name="c" bindsTo="//PrimitiveAttributeToColumn/c">
+          <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+          <part>
+            <referredProperty xsi:type="ecore:EReference" href="SimpleUml.ecore#//Class/attribute"/>
+            <value xsi:type="eqvtt:ObjectTemplateExp" name="a" bindsTo="//PrimitiveAttributeToColumn/a">
+              <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Attribute"/>
+              <part>
+                <referredProperty xsi:type="ecore:EAttribute" href="SimpleUml.ecore#//UMLModelElement/name"/>
+                <value xsi:type="ocl.ecore:VariableExp" name="an" referredVariable="//PrimitiveAttributeToColumn/an">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <part>
+                <referredProperty xsi:type="ecore:EReference" href="SimpleUml.ecore#//Attribute/type"/>
+                <value xsi:type="eqvtt:ObjectTemplateExp" name="p" bindsTo="//PrimitiveAttributeToColumn/p">
+                  <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//PrimitiveDataType"/>
+                  <part>
+                    <referredProperty xsi:type="ecore:EAttribute" href="SimpleUml.ecore#//UMLModelElement/name"/>
+                    <value xsi:type="ocl.ecore:VariableExp" name="pn" referredVariable="//PrimitiveAttributeToColumn/pn">
+                      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                    </value>
+                  </part>
+                  <referredClass href="SimpleUml.ecore#//PrimitiveDataType"/>
+                </value>
+              </part>
+              <referredClass href="SimpleUml.ecore#//Attribute"/>
+            </value>
+          </part>
+          <referredClass href="SimpleUml.ecore#//Class"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" name="rdbms" isCheckable="false" isEnforceable="true" typedModel="//rdbms" rootVariable="//PrimitiveAttributeToColumn/t">
+      <pattern>
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" name="t" bindsTo="//PrimitiveAttributeToColumn/t">
+          <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+          <part>
+            <referredProperty xsi:type="ecore:EReference" href="SimpleRdbms.ecore#//Table/column"/>
+            <value xsi:type="eqvtt:ObjectTemplateExp" name="cl" bindsTo="//PrimitiveAttributeToColumn/cl">
+              <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Column"/>
+              <part>
+                <referredProperty xsi:type="ecore:EAttribute" href="SimpleRdbms.ecore#//RModelElement/name"/>
+                <value xsi:type="ocl.ecore:VariableExp" name="cn" referredVariable="//PrimitiveAttributeToColumn/cn">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <part>
+                <referredProperty xsi:type="ecore:EAttribute" href="SimpleRdbms.ecore#//Column/type"/>
+                <value xsi:type="ocl.ecore:VariableExp" name="sqltype" referredVariable="//PrimitiveAttributeToColumn/sqltype">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <referredClass href="SimpleRdbms.ecore#//Column"/>
+            </value>
+          </part>
+          <referredClass href="SimpleRdbms.ecore#//Table"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" name="prefix" isCheckable="false" isEnforceable="false" rootVariable="//PrimitiveAttributeToColumn/prefix.1"/>
+    <variable name="c">
+      <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+    </variable>
+    <variable name="t">
+      <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+    </variable>
+    <variable name="prefix">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="an">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="pn">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="cn">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="sqltype">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="a">
+      <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Attribute"/>
+    </variable>
+    <variable name="p">
+      <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//PrimitiveDataType"/>
+    </variable>
+    <variable name="cl">
+      <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Column"/>
+    </variable>
+    <where>
+      <predicate>
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:VariableExp" name="cn" referredVariable="//PrimitiveAttributeToColumn/cn">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </source>
+          <argument xsi:type="ocl.ecore:IfExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <condition xsi:type="ocl.ecore:OperationCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="prefix" referredVariable="//PrimitiveAttributeToColumn/prefix.1">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </source>
+              <argument xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+            </condition>
+            <thenExpression xsi:type="ocl.ecore:VariableExp" name="an" referredVariable="//PrimitiveAttributeToColumn/an">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </thenExpression>
+            <elseExpression xsi:type="ocl.ecore:OperationCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="prefix" referredVariable="//PrimitiveAttributeToColumn/prefix.1">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </source>
+                <argument xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="_">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
+              </source>
+              <argument xsi:type="ocl.ecore:VariableExp" name="an" referredVariable="//PrimitiveAttributeToColumn/an">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
+            </elseExpression>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+        </conditionExpression>
+      </predicate>
+      <predicate>
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:VariableExp" name="sqltype" referredVariable="//PrimitiveAttributeToColumn/sqltype">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </source>
+          <argument xsi:type="ocl.ecore:OperationCallExp" name="PrimitiveTypeToSqlType" referredOperation="//PrimitiveTypeToSqlType">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <argument xsi:type="ocl.ecore:VariableExp" name="pn" referredVariable="//PrimitiveAttributeToColumn/pn">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+        </conditionExpression>
+      </predicate>
+    </where>
+  </rule>
+  <rule xsi:type="eqvtr:Relation" name="ComplexAttributeToColumn" isTopLevel="false">
+    <domain xsi:type="eqvtr:RelationDomain" name="uml" isCheckable="true" isEnforceable="false" typedModel="//uml" rootVariable="//ComplexAttributeToColumn/c">
+      <pattern>
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" name="c" bindsTo="//ComplexAttributeToColumn/c">
+          <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+          <part>
+            <referredProperty xsi:type="ecore:EReference" href="SimpleUml.ecore#//Class/attribute"/>
+            <value xsi:type="eqvtt:ObjectTemplateExp" name="a" bindsTo="//ComplexAttributeToColumn/a">
+              <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Attribute"/>
+              <part>
+                <referredProperty xsi:type="ecore:EAttribute" href="SimpleUml.ecore#//UMLModelElement/name"/>
+                <value xsi:type="ocl.ecore:VariableExp" name="an" referredVariable="//ComplexAttributeToColumn/an">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <part>
+                <referredProperty xsi:type="ecore:EReference" href="SimpleUml.ecore#//Attribute/type"/>
+                <value xsi:type="eqvtt:ObjectTemplateExp" name="tc" bindsTo="//ComplexAttributeToColumn/tc">
+                  <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+                  <referredClass href="SimpleUml.ecore#//Class"/>
+                </value>
+              </part>
+              <referredClass href="SimpleUml.ecore#//Attribute"/>
+            </value>
+          </part>
+          <referredClass href="SimpleUml.ecore#//Class"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" name="rdbms" isCheckable="false" isEnforceable="true" typedModel="//rdbms" rootVariable="//ComplexAttributeToColumn/t">
+      <pattern>
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" name="t" bindsTo="//ComplexAttributeToColumn/t">
+          <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+          <referredClass href="SimpleRdbms.ecore#//Table"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" name="prefix" isCheckable="false" isEnforceable="false" rootVariable="//ComplexAttributeToColumn/prefix.1"/>
+    <variable name="c">
+      <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+    </variable>
+    <variable name="t">
+      <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+    </variable>
+    <variable name="prefix">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="an">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="newPrefix">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="a">
+      <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Attribute"/>
+    </variable>
+    <variable name="tc">
+      <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+    </variable>
+    <where>
+      <predicate>
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:VariableExp" name="newPrefix" referredVariable="//ComplexAttributeToColumn/newPrefix">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </source>
+          <argument xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:OperationCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="prefix" referredVariable="//ComplexAttributeToColumn/prefix.1">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </source>
+              <argument xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="_">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
+            </source>
+            <argument xsi:type="ocl.ecore:VariableExp" name="an" referredVariable="//ComplexAttributeToColumn/an">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+        </conditionExpression>
+      </predicate>
+      <predicate>
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" referredRelation="//AttributeToColumn">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="tc" referredVariable="//ComplexAttributeToColumn/tc">
+            <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="t" referredVariable="//ComplexAttributeToColumn/t">
+            <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="newPrefix" referredVariable="//ComplexAttributeToColumn/newPrefix">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+    </where>
+  </rule>
+  <rule xsi:type="eqvtr:Relation" name="SuperAttributeToColumn" isTopLevel="false">
+    <domain xsi:type="eqvtr:RelationDomain" name="uml" isCheckable="true" isEnforceable="false" typedModel="//uml" rootVariable="//SuperAttributeToColumn/c">
+      <pattern>
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" name="c" bindsTo="//SuperAttributeToColumn/c">
+          <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+          <part>
+            <referredProperty xsi:type="ecore:EReference" href="SimpleUml.ecore#//Class/general"/>
+            <value xsi:type="eqvtt:ObjectTemplateExp" name="sc" bindsTo="//SuperAttributeToColumn/sc">
+              <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+              <referredClass href="SimpleUml.ecore#//Class"/>
+            </value>
+          </part>
+          <referredClass href="SimpleUml.ecore#//Class"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" name="rdbms" isCheckable="false" isEnforceable="true" typedModel="//rdbms" rootVariable="//SuperAttributeToColumn/t">
+      <pattern>
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" name="t" bindsTo="//SuperAttributeToColumn/t">
+          <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+          <referredClass href="SimpleRdbms.ecore#//Table"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" name="prefix" isCheckable="false" isEnforceable="false" rootVariable="//SuperAttributeToColumn/prefix.1"/>
+    <variable name="c">
+      <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+    </variable>
+    <variable name="t">
+      <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+    </variable>
+    <variable name="prefix">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="sc">
+      <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+    </variable>
+    <where>
+      <predicate>
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" referredRelation="//AttributeToColumn">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="sc" referredVariable="//SuperAttributeToColumn/sc">
+            <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="t" referredVariable="//SuperAttributeToColumn/t">
+            <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="prefix" referredVariable="//SuperAttributeToColumn/prefix.1">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+    </where>
+  </rule>
+  <rule xsi:type="eqvtr:Relation" name="AssocToFKey" isTopLevel="true">
+    <domain xsi:type="eqvtr:RelationDomain" name="uml" isCheckable="true" isEnforceable="false" typedModel="//uml" rootVariable="//AssocToFKey/a">
+      <pattern>
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" name="a" bindsTo="//AssocToFKey/a">
+          <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Association"/>
+          <part>
+            <referredProperty xsi:type="ecore:EAttribute" href="SimpleUml.ecore#//UMLModelElement/name"/>
+            <value xsi:type="ocl.ecore:VariableExp" name="an" referredVariable="//AssocToFKey/an">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <part>
+            <referredProperty xsi:type="ecore:EReference" href="SimpleUml.ecore#//Association/source"/>
+            <value xsi:type="eqvtt:ObjectTemplateExp" name="sc" bindsTo="//AssocToFKey/sc">
+              <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+              <part>
+                <referredProperty xsi:type="ecore:EAttribute" href="SimpleUml.ecore#//UMLModelElement/kind"/>
+                <value xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="Persistent">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <part>
+                <referredProperty xsi:type="ecore:EAttribute" href="SimpleUml.ecore#//UMLModelElement/name"/>
+                <value xsi:type="ocl.ecore:VariableExp" name="scn" referredVariable="//AssocToFKey/scn">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <referredClass href="SimpleUml.ecore#//Class"/>
+            </value>
+          </part>
+          <part>
+            <referredProperty xsi:type="ecore:EReference" href="SimpleUml.ecore#//Association/destination"/>
+            <value xsi:type="eqvtt:ObjectTemplateExp" name="dc" bindsTo="//AssocToFKey/dc">
+              <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+              <part>
+                <referredProperty xsi:type="ecore:EAttribute" href="SimpleUml.ecore#//UMLModelElement/kind"/>
+                <value xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="Persistent">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <part>
+                <referredProperty xsi:type="ecore:EAttribute" href="SimpleUml.ecore#//UMLModelElement/name"/>
+                <value xsi:type="ocl.ecore:VariableExp" name="dcn" referredVariable="//AssocToFKey/dcn">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <referredClass href="SimpleUml.ecore#//Class"/>
+            </value>
+          </part>
+          <referredClass href="SimpleUml.ecore#//Association"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" name="rdbms" isCheckable="false" isEnforceable="true" typedModel="//rdbms" rootVariable="//AssocToFKey/fk">
+      <pattern>
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" name="fk" bindsTo="//AssocToFKey/fk">
+          <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//ForeignKey"/>
+          <part>
+            <referredProperty xsi:type="ecore:EAttribute" href="SimpleRdbms.ecore#//RModelElement/name"/>
+            <value xsi:type="ocl.ecore:VariableExp" name="fkn" referredVariable="//AssocToFKey/fkn">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <part>
+            <referredProperty xsi:type="ecore:EReference" href="SimpleRdbms.ecore#//ForeignKey/owner"/>
+            <value xsi:type="ocl.ecore:VariableExp" name="srcTbl" referredVariable="//AssocToFKey/srcTbl">
+              <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+            </value>
+          </part>
+          <part>
+            <referredProperty xsi:type="ecore:EReference" href="SimpleRdbms.ecore#//ForeignKey/column"/>
+            <value xsi:type="eqvtt:ObjectTemplateExp" name="fc" bindsTo="//AssocToFKey/fc">
+              <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Column"/>
+              <part>
+                <referredProperty xsi:type="ecore:EAttribute" href="SimpleRdbms.ecore#//RModelElement/name"/>
+                <value xsi:type="ocl.ecore:VariableExp" name="fcn" referredVariable="//AssocToFKey/fcn">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <part>
+                <referredProperty xsi:type="ecore:EAttribute" href="SimpleRdbms.ecore#//Column/type"/>
+                <value xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="NUMBER">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <part>
+                <referredProperty xsi:type="ecore:EReference" href="SimpleRdbms.ecore#//Column/owner"/>
+                <value xsi:type="ocl.ecore:VariableExp" name="srcTbl" referredVariable="//AssocToFKey/srcTbl">
+                  <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+                </value>
+              </part>
+              <referredClass href="SimpleRdbms.ecore#//Column"/>
+            </value>
+          </part>
+          <part>
+            <referredProperty xsi:type="ecore:EReference" href="SimpleRdbms.ecore#//ForeignKey/refersTo"/>
+            <value xsi:type="ocl.ecore:VariableExp" name="pKey" referredVariable="//AssocToFKey/pKey">
+              <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Key"/>
+            </value>
+          </part>
+          <referredClass href="SimpleRdbms.ecore#//ForeignKey"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <variable name="a">
+      <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Association"/>
+    </variable>
+    <variable name="fk">
+      <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//ForeignKey"/>
+    </variable>
+    <variable name="srcTbl">
+      <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+    </variable>
+    <variable name="destTbl">
+      <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+    </variable>
+    <variable name="pKey">
+      <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Key"/>
+    </variable>
+    <variable name="an">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="scn">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="dcn">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="fkn">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="fcn">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable name="sc">
+      <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+    </variable>
+    <variable name="dc">
+      <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+    </variable>
+    <variable name="fc">
+      <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Column"/>
+    </variable>
+    <when>
+      <predicate>
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" referredRelation="//ClassToTable">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="sc" referredVariable="//AssocToFKey/sc">
+            <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="srcTbl" referredVariable="//AssocToFKey/srcTbl">
+            <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+      <predicate>
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" referredRelation="//ClassToTable">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="dc" referredVariable="//AssocToFKey/dc">
+            <eType xsi:type="ecore:EClass" href="SimpleUml.ecore#//Class"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="destTbl" referredVariable="//AssocToFKey/destTbl">
+            <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+      <predicate>
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:VariableExp" name="pKey" referredVariable="//AssocToFKey/pKey">
+            <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Key"/>
+          </source>
+          <argument xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Key"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp" eType="//OrderedSet(Key)">
+              <source xsi:type="ocl.ecore:VariableExp" name="destTbl" referredVariable="//AssocToFKey/destTbl">
+                <eType xsi:type="ecore:EClass" href="SimpleRdbms.ecore#//Table"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="SimpleRdbms.ecore#//Table/_key"/>
+            </source>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)_Class/first"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+        </conditionExpression>
+      </predicate>
+    </when>
+    <where>
+      <predicate>
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:VariableExp" name="fkn" referredVariable="//AssocToFKey/fkn">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </source>
+          <argument xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:OperationCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  <source xsi:type="ocl.ecore:VariableExp" name="scn" referredVariable="//AssocToFKey/scn">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="_">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
+                </source>
+                <argument xsi:type="ocl.ecore:VariableExp" name="an" referredVariable="//AssocToFKey/an">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
+              </source>
+              <argument xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="_">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
+            </source>
+            <argument xsi:type="ocl.ecore:VariableExp" name="dcn" referredVariable="//AssocToFKey/dcn">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+        </conditionExpression>
+      </predicate>
+      <predicate>
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:VariableExp" name="fcn" referredVariable="//AssocToFKey/fcn">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </source>
+          <argument xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:VariableExp" name="fkn" referredVariable="//AssocToFKey/fkn">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </source>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" name="String" stringSymbol="_tid">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+        </conditionExpression>
+      </predicate>
+    </where>
+  </rule>
+  <ownedKey>
+    <identifies href="SimpleRdbms.ecore#//Table"/>
+    <part xsi:type="ecore:EAttribute" href="SimpleRdbms.ecore#//RModelElement/name"/>
+    <part xsi:type="ecore:EReference" href="SimpleRdbms.ecore#//Table/schema"/>
+  </ownedKey>
+  <ownedKey>
+    <identifies href="SimpleRdbms.ecore#//Column"/>
+    <part xsi:type="ecore:EAttribute" href="SimpleRdbms.ecore#//RModelElement/name"/>
+    <part xsi:type="ecore:EReference" href="SimpleRdbms.ecore#//Column/owner"/>
+  </ownedKey>
+  <ownedKey>
+    <identifies href="SimpleRdbms.ecore#//Key"/>
+    <part xsi:type="ecore:EAttribute" href="SimpleRdbms.ecore#//RModelElement/name"/>
+    <part xsi:type="ecore:EReference" href="SimpleRdbms.ecore#//Key/owner"/>
+  </ownedKey>
+</eqvtr:RelationalTransformation>

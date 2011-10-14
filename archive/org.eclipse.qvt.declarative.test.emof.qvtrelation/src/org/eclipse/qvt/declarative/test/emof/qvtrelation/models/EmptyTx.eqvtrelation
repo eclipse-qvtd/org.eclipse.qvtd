@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtrelation="http://www.eclipse.org/qvt/1.0/QVTRelation" xmlns:eqvtcore="http://www.eclipse.org/qvt/1.0/QVTCore" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
+  <eqvtrelation:RelationalTransformation xmi:id="ast7" name="umlRdbms">
+    <modelParameter xmi:id="ast9" name="middle">
+      <usedPackage href="TumlRdbms.ecore#/"/>
+    </modelParameter>
+    <modelParameter xmi:id="ast2" name="rdbms">
+      <usedPackage href="rdbmsMM.emof#rdbmsMM"/>
+    </modelParameter>
+  </eqvtrelation:RelationalTransformation>
+</xmi:XMI>

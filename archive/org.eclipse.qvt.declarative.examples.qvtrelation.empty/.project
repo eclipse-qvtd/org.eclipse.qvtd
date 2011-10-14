@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>org.eclipse.qvt.declarative.examples.qvtrelation.empty</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.eclipse.qvt.declarative.editor.qvtrelation.ui.QVTrNature</nature>
+	</natures>
+</projectDescription>

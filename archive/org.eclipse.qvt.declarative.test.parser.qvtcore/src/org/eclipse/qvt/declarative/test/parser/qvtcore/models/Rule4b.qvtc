@@ -1,0 +1,53 @@
+transformation umlRdbms {
+	middle imports tuml2rdbms;
+	uml imports umlMM;
+	rdbms imports rdbmsMM;
+}
+
+map ClassToTable_rdbms in umlRdbms
+{
+	check uml (p:Package) {
+		c: Class|
+		c.namespace = p;
+		c.kind = 'Persistent';
+	}
+	check enforce rdbms (s:Schema) {
+		realize t:Table |
+		t.schema := s;
+	}
+	where middle (v1: TPackageToSchema| v1.p = p; v1.s = s;) {
+		realize v2: TClassToTable, cn:String |
+		v2.p := p;
+		v2.s := s;
+		v2.c := c;
+		v2.t := t;
+		cn := c.name;
+		t.name := cn;
+	}
+	map {
+		check enforce rdbms () {
+			realize cl:Column|
+			t.column := cl;
+		}
+		where () {
+			v2.cl := cl;
+			cl.name := cn+'_tid';
+		}
+		map {
+			where () {
+				cl.type := 'NUMBER';
+			}
+		}
+	}
+	map {
+		check enforce rdbms (cl:Column) {
+			realize k:Key|
+			t.key := k;
+			k.column := cl;
+		}
+		where (v2.cl = cl;) {							--** added ;
+			v2.k := k;
+			k.name := cn+'_pk';
+		}
+	}
+}

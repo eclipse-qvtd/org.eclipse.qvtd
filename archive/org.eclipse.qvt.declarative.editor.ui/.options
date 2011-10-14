@@ -1,0 +1,52 @@
+# Debugging options for the org.eclipse.qvt.declarative.editor.ui plug-in
+
+# Turn on general debugging for the org.eclipse.qvt.declarative.editor.ui plug-in
+org.eclipse.qvt.declarative.editor.ui/debug=true
+
+# Generate a diagnostic for editor saving
+org.eclipse.qvt.declarative.editor.ui/editor/save=false
+
+# Generate a diagnostic for resource loading
+org.eclipse.qvt.declarative.editor.ui/resource/load=false
+
+# Generate a diagnostic for each visit
+org.eclipse.qvt.declarative.editor.ui/visitor/trace=false
+
+# Generate a diagnostic for each visit result
+org.eclipse.qvt.declarative.editor.ui/visitor/selection=false
+
+# Generate a diagnostic for each applicable operation history
+org.eclipse.qvt.declarative.editor.ui/operation/show/applicable=false
+
+# Generate a diagnostic for each inapplicable operation history
+org.eclipse.qvt.declarative.editor.ui/operation/show/inapplicable=false
+
+# Generate a diagnostic for each dirty change
+org.eclipse.qvt.declarative.editor.ui/operation/show/dirty=false
+
+# Generate a diagnostic for each hover proposal
+org.eclipse.qvt.declarative.editor.ui/hover/debug=false
+
+# Generate a diagnostic for parser creation and initialisation
+org.eclipse.qvt.declarative.editor.ui/parser/progress=false
+
+# Generate a diagnostic for each completion proposal
+org.eclipse.qvt.declarative.editor.ui/proposal/debug=false
+
+# Generate a dependency dump for each build
+org.eclipse.qvt.declarative.editor.ui/builder/dependencies=false
+
+# Generate a dependency dump for each marker creation/deletion
+org.eclipse.qvt.declarative.editor.ui/marker/create=false
+org.eclipse.qvt.declarative.editor.ui/marker/delete=false
+
+# Generate a dependency dump for each annotation creation/deletion/update
+org.eclipse.qvt.declarative.editor.ui/annotation/create=false
+org.eclipse.qvt.declarative.editor.ui/annotation/delete=false
+org.eclipse.qvt.declarative.editor.ui/annotation/update=false
+
+# Generate a diagnostic for each outer selection change
+org.eclipse.qvt.declarative.editor.ui/selection/outer=false
+
+# Generate a diagnostic for each inner selection change too
+org.eclipse.qvt.declarative.editor.ui/selection/inner=false

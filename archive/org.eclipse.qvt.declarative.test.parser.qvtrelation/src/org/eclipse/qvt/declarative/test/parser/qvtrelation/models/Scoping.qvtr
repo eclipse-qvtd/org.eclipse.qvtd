@@ -1,0 +1,31 @@
+
+transformation Scoping(scopeA: ScopeA, scopeB: ScopeB, scopeC: ScopeC, scopeD: ScopeC)
+{
+     key ScopeA::a::b::abZ{name};
+     key ScopeA::b::abZ{name};
+     key ScopeA::abZ{name};
+     key abZ{name};
+     key ScopeA::a::abZ{name};			-- Unknown type ScopeA::a::abZ
+     
+     key ScopeB::b::a::baZ{name};
+     key ScopeB::a::baZ{name};
+     key ScopeB::baZ{name};
+     key baZ{name};
+     key ScopeB::b::baZ{name};			-- Unknown type ScopeB::b::baZ
+     
+     key ScopeA::a::a::A{name};
+     key ScopeA::a::A{name};			-- ScopeA::a::a::A, ScopeA::b::a::A
+     key ScopeA::A{name};				-- ScopeA::a::A, ScopeA::b::A
+     key a::A{name};					-- ScopeA::a::a::A, ScopeA::b::a::A, ScopeB::a::a::A, ScopeB::b::a::A, ScopeC::c::a::A
+     key A{name};						-- ScopeA::a::A, ScopeA::b::A, ScopeB::a::A, ScopeB::b::A, ScopeC::c::A
+
+     top relation InteractionToStateMachine
+     {
+          sn: String;
+
+          domain scopeA i:A {name = sn};									-- ScopeA::a::A, ScopeA::b::A
+          enforce domain scopeB s:A {name = sn};							-- ScopeB::a::A, ScopeB::b::A
+          domain scopeC j:A {};									-- ScopeA::a::A, ScopeA::b::A
+          domain scopeD k:A {};									-- ScopeA::a::A, ScopeA::b::A
+     }
+}

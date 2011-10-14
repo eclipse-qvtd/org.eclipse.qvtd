@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml"
+    xmlns:essentialocl="http://schema.omg.org/spec/QVT/1.1/essentialocl.xml" xmlns:qvtr="http://schema.omg.org/spec/QVT/1.1/qvtrelation.xml"
+    xmlns:qvtt="http://schema.omg.org/spec/QVT/1.1/qvttemplate.xml">
+  <qvtr:RelationalTransformation xmi:id="ast1" name="SeqToStm" uri="http://models/SeqToStm.qvtr/SeqToStm">
+    <ownedType xmi:type="essentialocl:SetType" xmi:id="ast2">
+      <elementType xmi:type="emof:Class" href="SeqMM.xml#SeqMM.LifeLine"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <instanceClassName>java.util.Set</instanceClassName>
+      </xmi:Extension>
+    </ownedType>
+    <ownedType xmi:type="essentialocl:SetType" xmi:id="ast3">
+      <elementType xmi:type="emof:Class" href="SeqMM.xml#SeqMM.MessageEvent"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <instanceClassName>java.util.Set</instanceClassName>
+      </xmi:Extension>
+    </ownedType>
+    <ownedType xmi:type="essentialocl:SetType" xmi:id="ast4">
+      <elementType xmi:type="emof:Class" href="StmcMM.xml#StmcMM.Transition"/>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <instanceClassName>java.util.Set</instanceClassName>
+      </xmi:Extension>
+    </ownedType>
+    <modelParameter xmi:id="ast5" name="seqDgm">
+      <usedPackage href="SeqMM.xml#SeqMM"/>
+    </modelParameter>
+    <modelParameter xmi:id="ast6" name="stm">
+      <usedPackage href="StmcMM.xml#StmcMM"/>
+    </modelParameter>
+    <rule xmi:type="qvtr:Relation" xmi:id="ast7" name="InteractionToStateMachine"
+        isTopLevel="true">
+      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast8" name="seqDgm" isCheckable="true"
+          isEnforceable="false" typedModel="ast5" rootVariable="ast18">
+        <pattern xmi:id="ast9" bindsTo="ast18 ast20">
+          <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast10" name="i"
+              bindsTo="ast18">
+            <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Interaction"/>
+            <part xmi:id="ast11">
+              <referredProperty href="SeqMM.xml#SeqMM.Interaction.name"/>
+              <value xmi:type="essentialocl:VariableExp" xmi:id="ast12" name="sn"
+                  referredVariable="ast20">
+                <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </value>
+            </part>
+            <referredClass href="SeqMM.xml#SeqMM.Interaction"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast13" name="stm" isCheckable="false"
+          isEnforceable="true" typedModel="ast6" rootVariable="ast19">
+        <pattern xmi:id="ast14" bindsTo="ast19 ast20">
+          <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast15" name="s"
+              bindsTo="ast19">
+            <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.StateMachine"/>
+            <part xmi:id="ast16">
+              <referredProperty href="StmcMM.xml#StmcMM.StateMachine.name"/>
+              <value xmi:type="essentialocl:VariableExp" xmi:id="ast17" name="sn"
+                  referredVariable="ast20">
+                <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </value>
+            </part>
+            <referredClass href="StmcMM.xml#StmcMM.StateMachine"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable xmi:id="ast18" name="i">
+        <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Interaction"/>
+      </variable>
+      <variable xmi:id="ast19" name="s">
+        <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.StateMachine"/>
+      </variable>
+      <variable xmi:id="ast20" name="sn">
+        <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </variable>
+    </rule>
+    <rule xmi:type="qvtr:Relation" xmi:id="ast21" name="StateToState" isTopLevel="true">
+      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast22" name="seqDgm" isCheckable="true"
+          isEnforceable="false" typedModel="ast5" rootVariable="ast38">
+        <pattern xmi:id="ast23" bindsTo="ast38 ast40 ast41 ast42">
+          <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast24" name="st1"
+              bindsTo="ast38">
+            <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.State"/>
+            <part xmi:id="ast25">
+              <referredProperty href="SeqMM.xml#SeqMM.State.name"/>
+              <value xmi:type="essentialocl:VariableExp" xmi:id="ast26" name="sn"
+                  referredVariable="ast40">
+                <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </value>
+            </part>
+            <part xmi:id="ast27">
+              <referredProperty href="SeqMM.xml#SeqMM.State.lifeline"/>
+              <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast28" name="l" bindsTo="ast41">
+                <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.LifeLine"/>
+                <part xmi:id="ast29">
+                  <referredProperty href="SeqMM.xml#SeqMM.LifeLine.interaction"/>
+                  <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast30" name="i"
+                      bindsTo="ast42">
+                    <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Interaction"/>
+                    <referredClass href="SeqMM.xml#SeqMM.Interaction"/>
+                  </value>
+                </part>
+                <referredClass href="SeqMM.xml#SeqMM.LifeLine"/>
+              </value>
+            </part>
+            <referredClass href="SeqMM.xml#SeqMM.State"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast31" name="stm" isCheckable="false"
+          isEnforceable="true" typedModel="ast6" rootVariable="ast39">
+        <pattern xmi:id="ast32" bindsTo="ast39 ast40 ast43">
+          <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast33" name="st2"
+              bindsTo="ast39">
+            <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.State"/>
+            <part xmi:id="ast34">
+              <referredProperty href="StmcMM.xml#StmcMM.State.name"/>
+              <value xmi:type="essentialocl:VariableExp" xmi:id="ast35" name="sn"
+                  referredVariable="ast40">
+                <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </value>
+            </part>
+            <part xmi:id="ast36">
+              <referredProperty href="StmcMM.xml#StmcMM.State.owner"/>
+              <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast37" name="s" bindsTo="ast43">
+                <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.StateMachine"/>
+                <referredClass href="StmcMM.xml#StmcMM.StateMachine"/>
+              </value>
+            </part>
+            <referredClass href="StmcMM.xml#StmcMM.State"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable xmi:id="ast38" name="st1">
+        <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.State"/>
+      </variable>
+      <variable xmi:id="ast39" name="st2">
+        <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.State"/>
+      </variable>
+      <variable xmi:id="ast40" name="sn">
+        <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </variable>
+      <variable xmi:id="ast41" name="l">
+        <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.LifeLine"/>
+      </variable>
+      <variable xmi:id="ast42" name="i">
+        <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Interaction"/>
+      </variable>
+      <variable xmi:id="ast43" name="s">
+        <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.StateMachine"/>
+      </variable>
+      <when xmi:id="ast44" bindsTo="ast42 ast43">
+        <predicate xmi:id="ast45">
+          <conditionExpression xmi:type="qvtr:RelationCallExp" xmi:id="ast46" referredRelation="ast7">
+            <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <argument xmi:type="essentialocl:VariableExp" xmi:id="ast47" name="i"
+                referredVariable="ast42">
+              <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Interaction"/>
+            </argument>
+            <argument xmi:type="essentialocl:VariableExp" xmi:id="ast48" name="s"
+                referredVariable="ast43">
+              <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.StateMachine"/>
+            </argument>
+          </conditionExpression>
+        </predicate>
+      </when>
+    </rule>
+    <rule xmi:type="qvtr:Relation" xmi:id="ast49" name="MessageToTransition" isTopLevel="true">
+      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast50" name="seqDgm" isCheckable="true"
+          isEnforceable="false" typedModel="ast5" rootVariable="ast86">
+        <pattern xmi:id="ast51" bindsTo="ast86 ast88 ast89 ast91 ast92 ast93 ast94 ast95">
+          <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast52" name="m1"
+              bindsTo="ast86">
+            <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Message"/>
+            <part xmi:id="ast53">
+              <referredProperty href="SeqMM.xml#SeqMM.Message.messageId"/>
+              <value xmi:type="essentialocl:VariableExp" xmi:id="ast54" name="mid"
+                  referredVariable="ast88">
+                <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </value>
+            </part>
+            <part xmi:id="ast55">
+              <referredProperty href="SeqMM.xml#SeqMM.Message.event"/>
+              <value xmi:type="qvtt:CollectionTemplateExp" xmi:id="ast56" name="_unique0"
+                  type="ast3" bindsTo="ast89" referredCollectionType="ast3" rest="ast90">
+                <member xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast57" name="send"
+                    bindsTo="ast91">
+                  <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.MessageEvent"/>
+                  <part xmi:id="ast58">
+                    <referredProperty href="SeqMM.xml#SeqMM.MessageEvent.type"/>
+                    <value xmi:type="essentialocl:EnumLiteralExp" xmi:id="ast59">
+                      <type xmi:type="emof:Enumeration" href="SeqMM.xml#SeqMM.MessageEventType"/>
+                      <referredEnumLiteral href="SeqMM.xml#SeqMM.MessageEventType.Send"/>
+                    </value>
+                  </part>
+                  <part xmi:id="ast60">
+                    <referredProperty href="SeqMM.xml#SeqMM.MessageEvent.state"/>
+                    <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast61" name="ist1"
+                        bindsTo="ast92">
+                      <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.State"/>
+                      <referredClass href="SeqMM.xml#SeqMM.State"/>
+                    </value>
+                  </part>
+                  <referredClass href="SeqMM.xml#SeqMM.MessageEvent"/>
+                </member>
+                <member xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast62" name="receive"
+                    bindsTo="ast93">
+                  <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.MessageEvent"/>
+                  <part xmi:id="ast63">
+                    <referredProperty href="SeqMM.xml#SeqMM.MessageEvent.type"/>
+                    <value xmi:type="essentialocl:EnumLiteralExp" xmi:id="ast64">
+                      <type xmi:type="emof:Enumeration" href="SeqMM.xml#SeqMM.MessageEventType"/>
+                      <referredEnumLiteral href="SeqMM.xml#SeqMM.MessageEventType.Receive"/>
+                    </value>
+                  </part>
+                  <part xmi:id="ast65">
+                    <referredProperty href="SeqMM.xml#SeqMM.MessageEvent.state"/>
+                    <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast66" name="ist2"
+                        bindsTo="ast94">
+                      <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.State"/>
+                      <referredClass href="SeqMM.xml#SeqMM.State"/>
+                    </value>
+                  </part>
+                  <referredClass href="SeqMM.xml#SeqMM.MessageEvent"/>
+                </member>
+              </value>
+            </part>
+            <part xmi:id="ast67">
+              <referredProperty href="SeqMM.xml#SeqMM.Message.interaction"/>
+              <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast68" name="i" bindsTo="ast95">
+                <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Interaction"/>
+                <referredClass href="SeqMM.xml#SeqMM.Interaction"/>
+              </value>
+            </part>
+            <referredClass href="SeqMM.xml#SeqMM.Message"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast69" name="stm" isCheckable="false"
+          isEnforceable="true" typedModel="ast6" rootVariable="ast87">
+        <pattern xmi:id="ast70" bindsTo="ast87 ast88 ast96 ast97 ast98 ast99 ast100">
+          <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast71" name="tr"
+              bindsTo="ast87">
+            <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.Transition"/>
+            <part xmi:id="ast72">
+              <referredProperty href="StmcMM.xml#StmcMM.Transition.name"/>
+              <value xmi:type="essentialocl:VariableExp" xmi:id="ast73" name="mid"
+                  referredVariable="ast88">
+                <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </value>
+            </part>
+            <part xmi:id="ast74">
+              <referredProperty href="StmcMM.xml#StmcMM.Transition.fromState"/>
+              <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast75" name="fst" bindsTo="ast96">
+                <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.State"/>
+                <referredClass href="StmcMM.xml#StmcMM.State"/>
+              </value>
+            </part>
+            <part xmi:id="ast76">
+              <referredProperty href="StmcMM.xml#StmcMM.Transition.toState"/>
+              <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast77" name="tst" bindsTo="ast97">
+                <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.State"/>
+                <referredClass href="StmcMM.xml#StmcMM.State"/>
+              </value>
+            </part>
+            <part xmi:id="ast78">
+              <referredProperty href="StmcMM.xml#StmcMM.Transition.action"/>
+              <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast79" name="sm" bindsTo="ast98">
+                <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.SendMsg"/>
+                <part xmi:id="ast80">
+                  <referredProperty href="StmcMM.xml#StmcMM.SendMsg.message"/>
+                  <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast81" name="m2"
+                      bindsTo="ast99">
+                    <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.Message"/>
+                    <part xmi:id="ast82">
+                      <referredProperty href="StmcMM.xml#StmcMM.Message.messageId"/>
+                      <value xmi:type="essentialocl:VariableExp" xmi:id="ast83" name="mid"
+                          referredVariable="ast88">
+                        <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                      </value>
+                    </part>
+                    <referredClass href="StmcMM.xml#StmcMM.Message"/>
+                  </value>
+                </part>
+                <referredClass href="StmcMM.xml#StmcMM.SendMsg"/>
+              </value>
+            </part>
+            <part xmi:id="ast84">
+              <referredProperty href="StmcMM.xml#StmcMM.Transition.owner"/>
+              <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast85" name="s" bindsTo="ast100">
+                <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.StateMachine"/>
+                <referredClass href="StmcMM.xml#StmcMM.StateMachine"/>
+              </value>
+            </part>
+            <referredClass href="StmcMM.xml#StmcMM.Transition"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable xmi:id="ast86" name="m1">
+        <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Message"/>
+      </variable>
+      <variable xmi:id="ast87" name="tr">
+        <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.Transition"/>
+      </variable>
+      <variable xmi:id="ast88" name="mid">
+        <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </variable>
+      <variable xmi:id="ast89" name="_unique0" type="ast3"/>
+      <variable xmi:id="ast90" name="_">
+        <type xmi:type="essentialocl:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+      </variable>
+      <variable xmi:id="ast91" name="send">
+        <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.MessageEvent"/>
+      </variable>
+      <variable xmi:id="ast92" name="ist1">
+        <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.State"/>
+      </variable>
+      <variable xmi:id="ast93" name="receive">
+        <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.MessageEvent"/>
+      </variable>
+      <variable xmi:id="ast94" name="ist2">
+        <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.State"/>
+      </variable>
+      <variable xmi:id="ast95" name="i">
+        <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Interaction"/>
+      </variable>
+      <variable xmi:id="ast96" name="fst">
+        <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.State"/>
+      </variable>
+      <variable xmi:id="ast97" name="tst">
+        <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.State"/>
+      </variable>
+      <variable xmi:id="ast98" name="sm">
+        <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.SendMsg"/>
+      </variable>
+      <variable xmi:id="ast99" name="m2">
+        <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.Message"/>
+      </variable>
+      <variable xmi:id="ast100" name="s">
+        <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.StateMachine"/>
+      </variable>
+      <when xmi:id="ast101" bindsTo="ast95 ast100 ast92 ast96 ast94 ast97">
+        <predicate xmi:id="ast102">
+          <conditionExpression xmi:type="qvtr:RelationCallExp" xmi:id="ast103" referredRelation="ast7">
+            <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <argument xmi:type="essentialocl:VariableExp" xmi:id="ast104" name="i"
+                referredVariable="ast95">
+              <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Interaction"/>
+            </argument>
+            <argument xmi:type="essentialocl:VariableExp" xmi:id="ast105" name="s"
+                referredVariable="ast100">
+              <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.StateMachine"/>
+            </argument>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast106">
+          <conditionExpression xmi:type="qvtr:RelationCallExp" xmi:id="ast107" referredRelation="ast21">
+            <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <argument xmi:type="essentialocl:VariableExp" xmi:id="ast108" name="ist1"
+                referredVariable="ast92">
+              <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.State"/>
+            </argument>
+            <argument xmi:type="essentialocl:VariableExp" xmi:id="ast109" name="fst"
+                referredVariable="ast96">
+              <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.State"/>
+            </argument>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast110">
+          <conditionExpression xmi:type="qvtr:RelationCallExp" xmi:id="ast111" referredRelation="ast21">
+            <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <argument xmi:type="essentialocl:VariableExp" xmi:id="ast112" name="ist2"
+                referredVariable="ast94">
+              <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.State"/>
+            </argument>
+            <argument xmi:type="essentialocl:VariableExp" xmi:id="ast113" name="tst"
+                referredVariable="ast97">
+              <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.State"/>
+            </argument>
+          </conditionExpression>
+        </predicate>
+      </when>
+    </rule>
+    <rule xmi:type="qvtr:Relation" xmi:id="ast114" name="MessageSequenceToTransitionSequence"
+        isTopLevel="true">
+      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast115" name="seqDgm" isCheckable="true"
+          isEnforceable="false" typedModel="ast5" rootVariable="ast135">
+        <pattern xmi:id="ast116" bindsTo="ast135 ast137 ast138 ast139">
+          <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast117" name="ev1"
+              bindsTo="ast135">
+            <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.MessageEvent"/>
+            <part xmi:id="ast118">
+              <referredProperty href="SeqMM.xml#SeqMM.MessageEvent.type"/>
+              <value xmi:type="essentialocl:EnumLiteralExp" xmi:id="ast119">
+                <type xmi:type="emof:Enumeration" href="SeqMM.xml#SeqMM.MessageEventType"/>
+                <referredEnumLiteral href="SeqMM.xml#SeqMM.MessageEventType.Receive"/>
+              </value>
+            </part>
+            <part xmi:id="ast120">
+              <referredProperty href="SeqMM.xml#SeqMM.MessageEvent.message"/>
+              <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast121" name="m1" bindsTo="ast137">
+                <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Message"/>
+                <referredClass href="SeqMM.xml#SeqMM.Message"/>
+              </value>
+            </part>
+            <part xmi:id="ast122">
+              <referredProperty href="SeqMM.xml#SeqMM.MessageEvent.next"/>
+              <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast123" name="ev2"
+                  bindsTo="ast138">
+                <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.MessageEvent"/>
+                <part xmi:id="ast124">
+                  <referredProperty href="SeqMM.xml#SeqMM.MessageEvent.type"/>
+                  <value xmi:type="essentialocl:EnumLiteralExp" xmi:id="ast125">
+                    <type xmi:type="emof:Enumeration" href="SeqMM.xml#SeqMM.MessageEventType"/>
+                    <referredEnumLiteral href="SeqMM.xml#SeqMM.MessageEventType.Send"/>
+                  </value>
+                </part>
+                <part xmi:id="ast126">
+                  <referredProperty href="SeqMM.xml#SeqMM.MessageEvent.message"/>
+                  <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast127" name="m2"
+                      bindsTo="ast139">
+                    <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Message"/>
+                    <referredClass href="SeqMM.xml#SeqMM.Message"/>
+                  </value>
+                </part>
+                <referredClass href="SeqMM.xml#SeqMM.MessageEvent"/>
+              </value>
+            </part>
+            <referredClass href="SeqMM.xml#SeqMM.MessageEvent"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xmi:type="qvtr:RelationDomain" xmi:id="ast128" name="stm" isCheckable="false"
+          isEnforceable="true" typedModel="ast6" rootVariable="ast136">
+        <pattern xmi:id="ast129" bindsTo="ast136 ast140 ast141">
+          <templateExpression xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast130" name="tr1"
+              bindsTo="ast136">
+            <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.Transition"/>
+            <part xmi:id="ast131">
+              <referredProperty href="StmcMM.xml#StmcMM.Transition.toState"/>
+              <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast132" name="tst"
+                  bindsTo="ast140">
+                <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.State"/>
+                <part xmi:id="ast133">
+                  <referredProperty href="StmcMM.xml#StmcMM.State.outTransition"/>
+                  <value xmi:type="qvtt:ObjectTemplateExp" xmi:id="ast134" name="tr2"
+                      bindsTo="ast141">
+                    <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.Transition"/>
+                    <referredClass href="StmcMM.xml#StmcMM.Transition"/>
+                  </value>
+                </part>
+                <referredClass href="StmcMM.xml#StmcMM.State"/>
+              </value>
+            </part>
+            <referredClass href="StmcMM.xml#StmcMM.Transition"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable xmi:id="ast135" name="ev1">
+        <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.MessageEvent"/>
+      </variable>
+      <variable xmi:id="ast136" name="tr1">
+        <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.Transition"/>
+      </variable>
+      <variable xmi:id="ast137" name="m1">
+        <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Message"/>
+      </variable>
+      <variable xmi:id="ast138" name="ev2">
+        <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.MessageEvent"/>
+      </variable>
+      <variable xmi:id="ast139" name="m2">
+        <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Message"/>
+      </variable>
+      <variable xmi:id="ast140" name="tst">
+        <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.State"/>
+      </variable>
+      <variable xmi:id="ast141" name="tr2">
+        <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.Transition"/>
+      </variable>
+      <when xmi:id="ast142" bindsTo="ast137 ast136 ast139 ast141">
+        <predicate xmi:id="ast143">
+          <conditionExpression xmi:type="qvtr:RelationCallExp" xmi:id="ast144" referredRelation="ast49">
+            <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <argument xmi:type="essentialocl:VariableExp" xmi:id="ast145" name="m1"
+                referredVariable="ast137">
+              <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Message"/>
+            </argument>
+            <argument xmi:type="essentialocl:VariableExp" xmi:id="ast146" name="tr1"
+                referredVariable="ast136">
+              <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.Transition"/>
+            </argument>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast147">
+          <conditionExpression xmi:type="qvtr:RelationCallExp" xmi:id="ast148" referredRelation="ast49">
+            <type xmi:type="emof:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <argument xmi:type="essentialocl:VariableExp" xmi:id="ast149" name="m2"
+                referredVariable="ast139">
+              <type xmi:type="emof:Class" href="SeqMM.xml#SeqMM.Message"/>
+            </argument>
+            <argument xmi:type="essentialocl:VariableExp" xmi:id="ast150" name="tr2"
+                referredVariable="ast141">
+              <type xmi:type="emof:Class" href="StmcMM.xml#StmcMM.Transition"/>
+            </argument>
+          </conditionExpression>
+        </predicate>
+      </when>
+    </rule>
+    <ownedKey xmi:id="ast151">
+      <identifies href="StmcMM.xml#StmcMM.StateMachine"/>
+      <part href="StmcMM.xml#StmcMM.StateMachine.name"/>
+    </ownedKey>
+    <ownedKey xmi:id="ast152">
+      <identifies href="StmcMM.xml#StmcMM.State"/>
+      <part href="StmcMM.xml#StmcMM.State.name"/>
+      <part href="StmcMM.xml#StmcMM.State.owner"/>
+    </ownedKey>
+    <ownedKey xmi:id="ast153">
+      <identifies href="StmcMM.xml#StmcMM.Transition"/>
+      <part href="StmcMM.xml#StmcMM.Transition.name"/>
+      <part href="StmcMM.xml#StmcMM.Transition.owner"/>
+      <part href="StmcMM.xml#StmcMM.Transition.fromState"/>
+      <part href="StmcMM.xml#StmcMM.Transition.toState"/>
+    </ownedKey>
+    <ownedKey xmi:id="ast154">
+      <identifies href="StmcMM.xml#StmcMM.SendMsg"/>
+      <part href="StmcMM.xml#StmcMM.SendMsg.message"/>
+    </ownedKey>
+    <ownedKey xmi:id="ast155">
+      <identifies href="StmcMM.xml#StmcMM.Message"/>
+      <part href="StmcMM.xml#StmcMM.Message.messageId"/>
+    </ownedKey>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <nsPrefix>SeqToStm</nsPrefix>
+    </xmi:Extension>
+  </qvtr:RelationalTransformation>
+</xmi:XMI>

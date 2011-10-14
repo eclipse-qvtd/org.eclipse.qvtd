@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.qvt.declarative.test"
+      label="%featureName"
+      version="0.8.0.qualifier"
+      provider-name="%providerName">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      Copyright (c) 2009 Eclipse Modeling Project and others.
+All rights reserved.   This program and the accompanying materials
+are made available under the terms of the Eclipse Public License
+v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <url>
+      <discovery label="%EMFUpdateSiteName" url="http://download.eclipse.org/modeling/emf/updates/"/>
+      <discovery label="%EMFTUpdateSiteName" url="http://download.eclipse.org/modeling/emft/updates/"/>
+      <discovery label="%LPGUpdateSiteName" url="http://lpg.sourceforge.net/updates/"/>
+      <discovery label="%MDTUpdateSiteName" url="http://download.eclipse.org/modeling/mdt/updates/"/>
+      <discovery label="%M2MUpdateSiteName" url="http://download.eclipse.org/modeling/m2m/updates/"/>
+   </url>
+
+   <requires>
+      <import plugin="org.apache.ant"/>
+      <import plugin="org.junit"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.ui.ide.application"/>
+      <import plugin="org.eclipse.equinox.app"/>
+      <import plugin="org.eclipse.core.runtime.compatibility"/>
+      <import plugin="org.apache.ant" version="1.6.5" match="compatible"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.ocl.ecore" version="3.0.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.emof.essentialocl" version="0.8.0" match="compatible"/>
+      <import plugin="org.junit4" version="4.5.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.test.emof.qvtcore" version="0.8.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.test.emof.qvtrelation" version="0.8.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.test.emof" version="0.8.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.emof.emof" version="0.8.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.test.emof.emof" version="0.8.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.test.emof.essentialocl" version="0.8.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.emof.qvtbase" version="0.8.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.parser"/>
+      <import plugin="org.eclipse.qvt.declarative.test.emof.qvtbase" version="0.8.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.ecore.qvtcore" version="0.8.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.emof.qvtcore" version="0.8.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.test.emof.qvttemplate" version="0.8.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.ecore.qvtrelation" version="0.8.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.emof.qvtrelation" version="0.8.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.ecore.qvttemplate" version="0.8.0" match="compatible"/>
+      <import plugin="org.eclipse.qvt.declarative.emof.qvttemplate" version="0.8.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.ocl"/>
+      <import plugin="org.eclipse.qvt.declarative.ecore.qvtbase"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.qvt.declarative.editor.ui"/>
+      <import plugin="org.eclipse.qvt.declarative.parser.qvtcore"/>
+      <import plugin="org.eclipse.qvt.declarative.editor.qvtcore.ui"/>
+      <import plugin="org.eclipse.qvt.declarative.parser.qvtrelation"/>
+      <import plugin="org.eclipse.qvt.declarative.editor.qvtrelation.ui"/>
+      <import plugin="org.eclipse.ocl.examples.modelregistry"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.ant.optional.junit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.emof"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.emof.all"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.emof.emof"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.emof.essentialocl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.emof.qvtbase"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.emof.qvtcore"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.emof.qvtrelation"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.emof.qvttemplate"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.testqvtbase"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.parser"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.parser.qvtcore"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.parser.qvtrelation"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.editor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.editor.qvtcore"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.editor.qvtrelation"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.test.all"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

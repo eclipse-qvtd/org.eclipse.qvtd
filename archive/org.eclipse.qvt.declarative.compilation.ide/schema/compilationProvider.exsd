@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.eclipse.qvt.declarative.compilation.ide" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="org.eclipse.qvt.declarative.compilation.ide" id="compilationProvider" name="Compilation Provider"/>
+      </appinfo>
+      <documentation>
+         This extension point is used to register QVT compilers. A QVT compiler provides an implementation of the  &lt;code&gt;org.eclipse.qvt.declarative.compilation.CompilationProvider.compile&lt;/code&gt; method which, thanks to QVT source file, is able to let the project in a state such that an execution engine can execute the transformation (see &lt;code&gt;org.eclipse.qvt.declarative.execution.ide&lt;/code&gt;).
+This is generally done by adding one or more executable files in a particular place.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="compilationProvider"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="compilationProvider">
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The fully qualified name of a Java class implementing &lt;code&gt;org.eclipse.qvt.declarative.compilation.CompilationProvider&lt;/code&gt;.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.qvt.declarative.compilation.CompilationProvider"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="priority" use="default" value="normal">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="lowest">
+                  </enumeration>
+                  <enumeration value="low">
+                  </enumeration>
+                  <enumeration value="normal">
+                  </enumeration>
+                  <enumeration value="high">
+                  </enumeration>
+                  <enumeration value="highest">
+                  </enumeration>
+               </restriction>
+            </simpleType>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         0.7.0
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         Following is an example of how compiler can be registered:
+&lt;pre&gt;
+	&lt;extension point=&quot;org.eclipse.qvt.declarative.compilation.ide.compilationProvider&quot;&gt;
+			&lt;compilationProvider class=&quot;com.example.MyCompiler&quot;
+					priority=&quot;low&quot;&gt;
+ 			&lt;/compilationProvider&gt;
+	&lt;/extension&gt;
+&lt;/pre&gt;
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiinfo"/>
+      </appinfo>
+      <documentation>
+         The value of the &lt;tt&gt;class&lt;/tt&gt; attribute must be the qualified name of an extension of the &lt;tt&gt;org.eclipse.qvt.declarative.compilation.CompilationProvider&lt;/tt&gt; class, that provides a constructor without any arguments.
+
+The value of the &lt;tt&gt;priority&lt;/tt&gt; attribute must be a string either lowest, low, normal, high, highest describing an ordering on providers.
+      </documentation>
+   </annotation>
+
+
+   <annotation>
+      <appinfo>
+         <meta.section type="copyright"/>
+      </appinfo>
+      <documentation>
+         Copyright (c) 2007, 2008 Obeo.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+      </documentation>
+   </annotation>
+
+</schema>

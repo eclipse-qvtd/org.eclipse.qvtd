@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/mof/2.0/emof.xmi">
+  <emof:Package xmi:id="_0" name="p" uri="http://p">
+    <ownedComment body="This is a simple single element comment"/>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <nsPrefix>p</nsPrefix>
+    </xmi:Extension>
+  </emof:Package>
+</xmi:XMI>

@@ -1,0 +1,7 @@
+# Debugging options for the org.eclipse.gmt.umlx.common plug-in
+
+# Turn on general debugging for the org.eclipse.qvt.declarative plug-in
+org.eclipse.qvt.declarative.ecore/debug=true
+
+# Perform Ecore-EMOF model equivalence checking
+org.eclipse.qvt.declarative.ecore/emof/equivalence=false

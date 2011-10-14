@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<eqvtr:RelationalTransformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtr="http://www.eclipse.org/qvt/1.0/QVTRelation" xmi:id="ast3" name="Keys" nsURI="http://models/Keys.qvtr/Keys" nsPrefix="Keys">
+  <modelParameter xmi:id="ast5" name="mm">
+    <usedPackage href="QVTRelation.ecore#QVTRelation"/>
+    <usedPackage href="EMOF.ecore#EMOF"/>
+  </modelParameter>
+  <ownedKey xmi:id="ast11">
+    <identifies href="QVTRelation.ecore#QVTRelation.Key"/>
+    <part xsi:type="ecore:EReference" href="QVTRelation.ecore#QVTRelation.Key.identifies"/>
+  </ownedKey>
+  <ownedKey xmi:id="ast27">
+    <identifies href="QVTRelation.ecore#QVTRelation.Key"/>
+    <part xsi:type="ecore:EReference" href="QVTRelation.ecore#QVTRelation.Key.identifies"/>
+    <part xsi:type="ecore:EReference" href="QVTRelation.ecore#QVTRelation.Key.part"/>
+  </ownedKey>
+  <ownedKey xmi:id="ast7">
+    <identifies href="EMOF.ecore#EMOF.Class"/>
+    <oppositePart xsi:type="ecore:EReference" href="QVTRelation.ecore#QVTRelation.Key.identifies"/>
+  </ownedKey>
+  <ownedKey xmi:id="ast45">
+    <identifies href="EMOF.ecore#EMOF.Class"/>
+    <part xsi:type="ecore:EAttribute" href="EMOF.ecore#EMOF.NamedElement.name"/>
+    <oppositePart xsi:type="ecore:EReference" href="QVTRelation.ecore#QVTRelation.Key.identifies"/>
+  </ownedKey>
+</eqvtr:RelationalTransformation>

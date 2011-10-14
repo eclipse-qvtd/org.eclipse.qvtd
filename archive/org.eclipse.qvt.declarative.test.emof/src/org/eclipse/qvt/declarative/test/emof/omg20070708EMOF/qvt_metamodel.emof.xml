@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://www.omg.org/XMI" 
+   xmlns:emof="http://www.schema.omg.org/spec/MOF/2.0/emof.xml">
+<emof:Package xmi:id="o0" name="primitivetypes">
+  <ownedType xmi:id="o1" xmi:type="emof:Class" name="String"/>
+  <ownedType xmi:id="o2" xmi:type="emof:Class" name="Integer"/>
+  <ownedType xmi:id="o3" xmi:type="emof:Class" name="Boolean"/>
+  <ownedType xmi:id="o4" xmi:type="emof:Class" name="UnlimitedNatural"/>
+</emof:Package>
+<emof:Package xmi:id="o5" name="emof">
+  <ownedType xmi:id="o6" xmi:type="emof:Class" name="Class" superClass="o38">
+    <ownedAttribute xmi:id="o7" xmi:type="emof:Property" name="isAbstract" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o8" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="ownedAttribute" opposite="o45" type="o44"/>
+    <ownedAttribute xmi:id="o9" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="ownedOperation" opposite="o26" type="o25"/>
+    <ownedAttribute xmi:id="o10" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="superClass" type="o6"/>
+  </ownedType>
+  <ownedType xmi:id="o11" xmi:type="emof:Class" name="DataType" superClass="o38"/>
+  <ownedType xmi:id="o12" xmi:type="emof:Class" isAbstract="true" name="Element" superClass="o24">
+    <ownedAttribute xmi:id="o13" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="ownedComment" type="o61"/>
+    <ownedAttribute xmi:id="o14" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="tag" opposite="o16" type="o15"/>
+  </ownedType>
+  <ownedType xmi:id="o15" xmi:type="emof:Class" name="Tag" superClass="o12">
+    <ownedAttribute xmi:id="o16" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="element" opposite="o14" type="o12"/>
+    <ownedAttribute xmi:id="o17" xmi:type="emof:Property" name="value" type="emof:PrimitiveType o1"/>
+    <ownedAttribute xmi:id="o18" xmi:type="emof:Property" name="name" type="emof:PrimitiveType o1"/>
+  </ownedType>
+  <ownedType xmi:id="o19" xmi:type="emof:Class" name="Enumeration" superClass="o11">
+    <ownedAttribute xmi:id="o20" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="ownedLiteral" opposite="o43" type="o42"/>
+  </ownedType>
+  <ownedType xmi:id="o21" xmi:type="emof:Class" isAbstract="true" name="NamedElement" superClass="o12">
+    <ownedAttribute xmi:id="o22" xmi:type="emof:Property" name="name" type="emof:PrimitiveType o1"/>
+  </ownedType>
+  <ownedType xmi:id="o23" xmi:type="emof:Class" name="Extent" superClass="o24"/>
+  <ownedType xmi:id="o24" xmi:type="emof:Class" name="Object"/>
+  <ownedType xmi:id="o25" xmi:type="emof:Class" name="Operation" superClass="o29 o52">
+    <ownedAttribute xmi:id="o26" xmi:type="emof:Property" name="class" opposite="o9" type="o6"/>
+    <ownedAttribute xmi:id="o27" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="ownedParameter" opposite="o41" type="o40"/>
+    <ownedAttribute xmi:id="o28" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="raisedException" type="o38"/>
+  </ownedType>
+  <ownedType xmi:id="o29" xmi:type="emof:Class" isAbstract="true" name="MultiplicityElement">
+    <ownedAttribute xmi:id="o30" xmi:type="emof:Property" name="isOrdered" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o31" xmi:type="emof:Property" name="isUnique" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o32" xmi:type="emof:Property" name="lower" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    <ownedAttribute xmi:id="o33" xmi:type="emof:Property" name="upper" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o4"/>
+  </ownedType>
+  <ownedType xmi:id="o34" xmi:type="emof:Class" name="Package" superClass="o21">
+    <ownedAttribute xmi:id="o35" xmi:type="emof:Property" name="uri" type="emof:PrimitiveType o1"/>
+    <ownedAttribute xmi:id="o36" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="ownedType" opposite="o39" type="o38"/>
+    <ownedAttribute xmi:id="o37" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="nestedPackage" type="o34"/>
+  </ownedType>
+  <ownedType xmi:id="o38" xmi:type="emof:Class" isAbstract="true" name="Type" superClass="o21">
+    <ownedAttribute xmi:id="o39" xmi:type="emof:Property" name="package" opposite="o36" type="o34"/>
+  </ownedType>
+  <ownedType xmi:id="o40" xmi:type="emof:Class" name="Parameter" superClass="o29 o52">
+    <ownedAttribute xmi:id="o41" xmi:type="emof:Property" name="operation" opposite="o27" type="o25"/>
+  </ownedType>
+  <ownedType xmi:id="o42" xmi:type="emof:Class" name="EnumerationLiteral" superClass="o21">
+    <ownedAttribute xmi:id="o43" xmi:type="emof:Property" name="enumeration" opposite="o20" type="o19"/>
+  </ownedType>
+  <ownedType xmi:id="o44" xmi:type="emof:Class" name="Property" superClass="o29 o52">
+    <ownedAttribute xmi:id="o45" xmi:type="emof:Property" name="class" opposite="o8" type="o6"/>
+    <ownedAttribute xmi:id="o46" xmi:type="emof:Property" name="isReadOnly" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o47" xmi:type="emof:Property" name="isDerived" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o48" xmi:type="emof:Property" name="isComposite" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o49" xmi:type="emof:Property" name="isId" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o50" xmi:type="emof:Property" name="default" type="emof:PrimitiveType o1"/>
+    <ownedAttribute xmi:id="o51" xmi:type="emof:Property" name="opposite" type="o44"/>
+  </ownedType>
+  <ownedType xmi:id="o52" xmi:type="emof:Class" isAbstract="true" name="TypedElement" superClass="o21">
+    <ownedAttribute xmi:id="o53" xmi:type="emof:Property" name="type" type="o38"/>
+  </ownedType>
+  <ownedType xmi:id="o54" xmi:type="emof:Class" name="PrimitiveType" superClass="o11"/>
+  <ownedType xmi:id="o55" xmi:type="emof:Class" name="URIExtent" superClass="o23"/>
+  <ownedType xmi:id="o61" xmi:type="emof:Class" name="Comment" superClass="o12">
+    <ownedAttribute xmi:id="o62" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="annotatedElement" type="o21"/>
+  </ownedType>
+</emof:Package>
+<emof:Package xmi:id="o63" name="essentialocl">
+  <ownedType xmi:id="o64" xmi:type="emof:Class" name="BooleanLiteralExp" superClass="o105">
+    <ownedAttribute xmi:id="o65" xmi:type="emof:Property" name="booleanSymbol" type="emof:PrimitiveType o3"/>
+  </ownedType>
+  <ownedType xmi:id="o66" xmi:type="emof:Class" isAbstract="true" name="CallExp" superClass="o69">
+    <ownedAttribute xmi:id="o67" xmi:type="emof:Property" isComposite="true" name="source" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o68" xmi:type="emof:Enumeration" name="CollectionKind"/>
+  <ownedType xmi:id="o69" xmi:type="emof:Class" isAbstract="true" name="OclExpression" superClass="o52"/>
+  <ownedType xmi:id="o70" xmi:type="emof:Class" name="UnlimitedNaturalExp" superClass="o106">
+    <ownedAttribute xmi:id="o71" xmi:type="emof:Property" name="symbol" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o4"/>
+  </ownedType>
+  <ownedType xmi:id="o72" xmi:type="emof:Class" name="IfExp" superClass="o69">
+    <ownedAttribute xmi:id="o73" xmi:type="emof:Property" isComposite="true" name="condition" type="o69"/>
+    <ownedAttribute xmi:id="o74" xmi:type="emof:Property" isComposite="true" name="thenExpression" type="o69"/>
+    <ownedAttribute xmi:id="o75" xmi:type="emof:Property" isComposite="true" name="elseExpression" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o76" xmi:type="emof:Class" name="LetExp" superClass="o69">
+    <ownedAttribute xmi:id="o77" xmi:type="emof:Property" isComposite="true" name="in" type="o69"/>
+    <ownedAttribute xmi:id="o78" xmi:type="emof:Property" isComposite="true" name="variable" opposite="o80" type="o79"/>
+  </ownedType>
+  <ownedType xmi:id="o79" xmi:type="emof:Class" name="Variable" superClass="o52">
+    <ownedAttribute xmi:id="o80" xmi:type="emof:Property" name="letExp" opposite="o78" type="o76"/>
+    <ownedAttribute xmi:id="o81" xmi:type="emof:Property" isComposite="true" name="initExpression" type="o69"/>
+    <ownedAttribute xmi:id="o82" xmi:type="emof:Property" name="bindParameter" type="o40"/>
+  </ownedType>
+  <ownedType xmi:id="o83" xmi:type="emof:Class" name="PropertyCallExp" superClass="o127">
+    <ownedAttribute xmi:id="o84" xmi:type="emof:Property" name="referredProperty" type="o44"/>
+  </ownedType>
+  <ownedType xmi:id="o85" xmi:type="emof:Class" name="VariableExp" superClass="o69">
+    <ownedAttribute xmi:id="o86" xmi:type="emof:Property" name="referredVariable" type="o79"/>
+  </ownedType>
+  <ownedType xmi:id="o87" xmi:type="emof:Class" name="TypeExp" superClass="o69">
+    <ownedAttribute xmi:id="o88" xmi:type="emof:Property" name="referredType" type="o38"/>
+  </ownedType>
+  <ownedType xmi:id="o89" xmi:type="emof:Class" isAbstract="true" name="LoopExp" superClass="o66 o69">
+    <ownedAttribute xmi:id="o90" xmi:type="emof:Property" isComposite="true" name="body" type="o69"/>
+    <ownedAttribute xmi:id="o91" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="iterator" type="o79"/>
+  </ownedType>
+  <ownedType xmi:id="o92" xmi:type="emof:Class" name="IteratorExp" superClass="o89"/>
+  <ownedType xmi:id="o93" xmi:type="emof:Class" name="StringLiteralExp" superClass="o105">
+    <ownedAttribute xmi:id="o94" xmi:type="emof:Property" name="stringSymbol" type="emof:PrimitiveType o1"/>
+  </ownedType>
+  <ownedType xmi:id="o95" xmi:type="emof:Class" name="IntegerLiteralExp" superClass="o106">
+    <ownedAttribute xmi:id="o96" xmi:type="emof:Property" name="integerSymbol" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+  </ownedType>
+  <ownedType xmi:id="o97" xmi:type="emof:Class" name="OperationCallExp" superClass="o127">
+    <ownedAttribute xmi:id="o98" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="argument" type="o69"/>
+    <ownedAttribute xmi:id="o99" xmi:type="emof:Property" name="referredOperation" type="o25"/>
+  </ownedType>
+  <ownedType xmi:id="o100" xmi:type="emof:Class" name="RealLiteralExp" superClass="o106">
+    <ownedAttribute xmi:id="o101" xmi:type="emof:Property" name="realSymbol" type="emof:Class o1"/>
+  </ownedType>
+  <ownedType xmi:id="o102" xmi:type="emof:Class" isAbstract="true" name="LiteralExp" superClass="o69"/>
+  <ownedType xmi:id="o103" xmi:type="emof:Class" name="IterateExp" superClass="o89">
+    <ownedAttribute xmi:id="o104" xmi:type="emof:Property" isComposite="true" name="result" type="o79"/>
+  </ownedType>
+  <ownedType xmi:id="o105" xmi:type="emof:Class" isAbstract="true" name="PrimitiveLiteralExp" superClass="o102"/>
+  <ownedType xmi:id="o106" xmi:type="emof:Class" isAbstract="true" name="NumericLiteralExp" superClass="o105"/>
+  <ownedType xmi:id="o107" xmi:type="emof:Class" name="CollectionLiteralExp" superClass="o102">
+    <ownedAttribute xmi:id="o108" xmi:type="emof:Property" name="kind" type="o68"/>
+    <ownedAttribute xmi:id="o109" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="part" opposite="o111" type="o110"/>
+  </ownedType>
+  <ownedType xmi:id="o110" xmi:type="emof:Class" isAbstract="true" name="CollectionLiteralPart" superClass="o52">
+    <ownedAttribute xmi:id="o111" xmi:type="emof:Property" name="collectionLiteralExp" opposite="o109" type="o107"/>
+  </ownedType>
+  <ownedType xmi:id="o112" xmi:type="emof:Class" name="CollectionItem" superClass="o110">
+    <ownedAttribute xmi:id="o113" xmi:type="emof:Property" isComposite="true" name="item" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o114" xmi:type="emof:Class" name="CollectionRange" superClass="o110">
+    <ownedAttribute xmi:id="o115" xmi:type="emof:Property" isComposite="true" name="first" type="o69"/>
+    <ownedAttribute xmi:id="o116" xmi:type="emof:Property" isComposite="true" name="last" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o117" xmi:type="emof:Class" name="TupleLiteralExp" superClass="o102">
+    <ownedAttribute xmi:id="o118" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="part" opposite="o129" type="o128"/>
+  </ownedType>
+  <ownedType xmi:id="o119" xmi:type="emof:Class" name="NullLiteralExp" superClass="o102"/>
+  <ownedType xmi:id="o120" xmi:type="emof:Class" name="ExpressionInOcl" superClass="o125">
+    <ownedAttribute xmi:id="o121" xmi:type="emof:Property" isComposite="true" name="bodyExpression" type="o69"/>
+    <ownedAttribute xmi:id="o122" xmi:type="emof:Property" isComposite="true" name="context" type="o79"/>
+    <ownedAttribute xmi:id="o123" xmi:type="emof:Property" isComposite="true" name="resultVariable" type="o79"/>
+    <ownedAttribute xmi:id="o124" xmi:type="emof:Property" isComposite="true" name="parameterVariable" type="o79"/>
+  </ownedType>
+  <ownedType xmi:id="o125" xmi:type="emof:Class" name="OpaqueExpression"/>
+  <ownedType xmi:id="o126" xmi:type="emof:Class" name="InvalidLiteralExp" superClass="o102"/>
+  <ownedType xmi:id="o127" xmi:type="emof:Class" isAbstract="true" name="FeaturePropertyCall" superClass="o66"/>
+  <ownedType xmi:id="o128" xmi:type="emof:Class" name="TupleLiteralPart" superClass="o52">
+    <ownedAttribute xmi:id="o129" xmi:type="emof:Property" name="tupleLiteralExp" opposite="o118" type="o117"/>
+    <ownedAttribute xmi:id="o130" xmi:type="emof:Property" isComposite="true" name="attribute" type="o44"/>
+    <ownedAttribute xmi:id="o131" xmi:type="emof:Property" isComposite="true" name="value" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o132" xmi:type="emof:Class" name="BagType" superClass="o133"/>
+  <ownedType xmi:id="o133" xmi:type="emof:Class" isAbstract="true" name="CollectionType" superClass="o11">
+    <ownedAttribute xmi:id="o134" xmi:type="emof:Property" name="elementType" type="o38"/>
+  </ownedType>
+  <ownedType xmi:id="o135" xmi:type="emof:Class" name="EnumLiteralExp" superClass="o102">
+    <ownedAttribute xmi:id="o136" xmi:type="emof:Property" name="referredEnumLiteral" type="o42"/>
+  </ownedType>
+  <ownedType xmi:id="o137" xmi:type="emof:Class" name="InvalidType" superClass="o38"/>
+  <ownedType xmi:id="o138" xmi:type="emof:Class" name="OrderedSetType" superClass="o133"/>
+  <ownedType xmi:id="o139" xmi:type="emof:Class" name="SequenceType" superClass="o133"/>
+  <ownedType xmi:id="o140" xmi:type="emof:Class" name="SetType" superClass="o133"/>
+  <ownedType xmi:id="o141" xmi:type="emof:Class" name="TupleType" superClass="o6 o11"/>
+  <ownedType xmi:id="o142" xmi:type="emof:Class" name="VoidType" superClass="o38"/>
+  <ownedType xmi:id="o143" xmi:type="emof:Class" name="AnyType" superClass="o6 o38"/>
+</emof:Package>
+<emof:Package xmi:id="o144" name="imperativeocl">
+  <ownedType xmi:id="o145" xmi:type="emof:Class" name="AssignExp" superClass="o208">
+    <ownedAttribute xmi:id="o146" xmi:type="emof:Property" name="isReset" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o147" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="value" type="o69"/>
+    <ownedAttribute xmi:id="o148" xmi:type="emof:Property" isComposite="true" name="left" type="o69"/>
+    <ownedAttribute xmi:id="o149" xmi:type="emof:Property" isComposite="true" name="defaultValue" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o150" xmi:type="emof:Class" name="BlockExp" superClass="o208">
+    <ownedAttribute xmi:id="o151" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="body" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o152" xmi:type="emof:Class" name="SwitchExp" superClass="o66 o208">
+    <ownedAttribute xmi:id="o153" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="alternativePart" type="o164"/>
+    <ownedAttribute xmi:id="o154" xmi:type="emof:Property" isComposite="true" name="elsePart" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o155" xmi:type="emof:Class" name="VariableInitExp" superClass="o208">
+    <ownedAttribute xmi:id="o156" xmi:type="emof:Property" name="withResult" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o157" xmi:type="emof:Property" isComposite="true" name="referredVariable" type="o79"/>
+  </ownedType>
+  <ownedType xmi:id="o158" xmi:type="emof:Class" name="WhileExp" superClass="o208">
+    <ownedAttribute xmi:id="o159" xmi:type="emof:Property" isComposite="true" name="condition" type="o69"/>
+    <ownedAttribute xmi:id="o160" xmi:type="emof:Property" isComposite="true" name="body" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o161" xmi:type="emof:Class" name="ComputeExp" superClass="o208">
+    <ownedAttribute xmi:id="o162" xmi:type="emof:Property" isComposite="true" name="returnedElement" type="o79"/>
+    <ownedAttribute xmi:id="o163" xmi:type="emof:Property" isComposite="true" name="body" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o164" xmi:type="emof:Class" name="AltExp" superClass="o208">
+    <ownedAttribute xmi:id="o165" xmi:type="emof:Property" isComposite="true" name="condition" type="o69"/>
+    <ownedAttribute xmi:id="o166" xmi:type="emof:Property" isComposite="true" name="body" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o167" xmi:type="emof:Class" name="UnlinkExp" superClass="o208">
+    <ownedAttribute xmi:id="o168" xmi:type="emof:Property" isComposite="true" name="target" type="o69"/>
+    <ownedAttribute xmi:id="o169" xmi:type="emof:Property" isComposite="true" name="item" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o170" xmi:type="emof:Class" name="ReturnExp" superClass="o208">
+    <ownedAttribute xmi:id="o171" xmi:type="emof:Property" isComposite="true" name="value" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o172" xmi:type="emof:Class" name="BreakExp" superClass="o208"/>
+  <ownedType xmi:id="o173" xmi:type="emof:Class" name="TryExp" superClass="o208">
+    <ownedAttribute xmi:id="o174" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="tryBody" type="o69"/>
+    <ownedAttribute xmi:id="o175" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="catchClause" type="o219"/>
+  </ownedType>
+  <ownedType xmi:id="o176" xmi:type="emof:Class" name="RaiseExp" superClass="o208">
+    <ownedAttribute xmi:id="o177" xmi:type="emof:Property" isComposite="true" name="argument" type="o69"/>
+    <ownedAttribute xmi:id="o178" xmi:type="emof:Property" name="exception" type="o38"/>
+  </ownedType>
+  <ownedType xmi:id="o179" xmi:type="emof:Class" name="ContinueExp" superClass="o208"/>
+  <ownedType xmi:id="o180" xmi:type="emof:Class" name="ForExp" superClass="o204"/>
+  <ownedType xmi:id="o181" xmi:type="emof:Class" name="Typedef" superClass="o6">
+    <ownedAttribute xmi:id="o182" xmi:type="emof:Property" isComposite="true" name="condition" type="o69"/>
+    <ownedAttribute xmi:id="o183" xmi:type="emof:Property" name="base" type="o38"/>
+  </ownedType>
+  <ownedType xmi:id="o184" xmi:type="emof:Class" name="InstantiationExp" superClass="o208">
+    <ownedAttribute xmi:id="o185" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="argument" type="o69"/>
+    <ownedAttribute xmi:id="o186" xmi:type="emof:Property" name="instantiatedClass" type="o6"/>
+    <ownedAttribute xmi:id="o187" xmi:type="emof:Property" name="extent" type="o79"/>
+  </ownedType>
+  <ownedType xmi:id="o188" xmi:type="emof:Class" name="DictionaryType" superClass="o133">
+    <ownedAttribute xmi:id="o189" xmi:type="emof:Property" name="keyType" type="o38"/>
+  </ownedType>
+  <ownedType xmi:id="o190" xmi:type="emof:Class" name="DictLiteralExp" superClass="o102">
+    <ownedAttribute xmi:id="o191" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="part" type="o192"/>
+  </ownedType>
+  <ownedType xmi:id="o192" xmi:type="emof:Class" name="DictLiteralPart" superClass="o12">
+    <ownedAttribute xmi:id="o193" xmi:type="emof:Property" isComposite="true" name="key" type="o69"/>
+    <ownedAttribute xmi:id="o194" xmi:type="emof:Property" isComposite="true" name="value" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o195" xmi:type="emof:Class" name="TemplateParameterType" superClass="o38">
+    <ownedAttribute xmi:id="o196" xmi:type="emof:Property" name="specification" type="emof:PrimitiveType o1"/>
+  </ownedType>
+  <ownedType xmi:id="o197" xmi:type="emof:Class" name="LogExp" superClass="o97 o208">
+    <ownedAttribute xmi:id="o198" xmi:type="emof:Property" isComposite="true" name="condition" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o199" xmi:type="emof:Class" name="AssertExp" superClass="o208">
+    <ownedAttribute xmi:id="o200" xmi:type="emof:Property" name="severity" type="o203"/>
+    <ownedAttribute xmi:id="o201" xmi:type="emof:Property" isComposite="true" name="log" type="o197"/>
+    <ownedAttribute xmi:id="o202" xmi:type="emof:Property" isComposite="true" name="assertion" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o203" xmi:type="emof:Enumeration" name="SeverityKind"/>
+  <ownedType xmi:id="o204" xmi:type="emof:Class" isAbstract="true" name="ImperativeLoopExp" superClass="o89 o208">
+    <ownedAttribute xmi:id="o205" xmi:type="emof:Property" isComposite="true" name="condition" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o206" xmi:type="emof:Class" name="ImperativeIterateExp" superClass="o204">
+    <ownedAttribute xmi:id="o207" xmi:type="emof:Property" isComposite="true" name="target" type="o79"/>
+  </ownedType>
+  <ownedType xmi:id="o208" xmi:type="emof:Class" isAbstract="true" name="ImperativeExpression" superClass="o69"/>
+  <ownedType xmi:id="o209" xmi:type="emof:Class" name="UnpackExp" superClass="o208">
+    <ownedAttribute xmi:id="o210" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="targetVariable" type="o79"/>
+    <ownedAttribute xmi:id="o211" xmi:type="emof:Property" isComposite="true" name="source" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o212" xmi:type="emof:Class" name="OrderedTupleType" superClass="o6">
+    <ownedAttribute xmi:id="o213" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="elementType" type="o38"/>
+  </ownedType>
+  <ownedType xmi:id="o214" xmi:type="emof:Class" name="OrderedTupleLiteralExp" superClass="o102">
+    <ownedAttribute xmi:id="o215" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="part" type="o216"/>
+  </ownedType>
+  <ownedType xmi:id="o216" xmi:type="emof:Class" name="OrderedTupleLiteralPart" superClass="o12">
+    <ownedAttribute xmi:id="o217" xmi:type="emof:Property" isComposite="true" name="value" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o218" xmi:type="emof:Class" name="ListType" superClass="o133"/>
+  <ownedType xmi:id="o219" xmi:type="emof:Class" name="CatchExp" superClass="o208">
+    <ownedAttribute xmi:id="o220" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="body" type="o69"/>
+    <ownedAttribute xmi:id="o221" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="exception" type="o38"/>
+  </ownedType>
+</emof:Package>
+<emof:Package xmi:id="o222" name="qvtbase">
+  <ownedType xmi:id="o223" xmi:type="emof:Class" name="Domain" superClass="o21">
+    <ownedAttribute xmi:id="o224" xmi:type="emof:Property" name="isCheckable" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o225" xmi:type="emof:Property" name="isEnforceable" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o226" xmi:type="emof:Property" name="typedModel" type="o233"/>
+    <ownedAttribute xmi:id="o227" xmi:type="emof:Property" name="rule" opposite="o239" type="o237"/>
+  </ownedType>
+  <ownedType xmi:id="o228" xmi:type="emof:Class" name="Transformation" superClass="o6 o34">
+    <ownedAttribute xmi:id="o229" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="ownedTag" type="o15"/>
+    <ownedAttribute xmi:id="o230" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="modelParameter" opposite="o234" type="o233"/>
+    <ownedAttribute xmi:id="o231" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="rule" opposite="o238" type="o237"/>
+    <ownedAttribute xmi:id="o232" xmi:type="emof:Property" name="extends" type="o228"/>
+  </ownedType>
+  <ownedType xmi:id="o233" xmi:type="emof:Class" name="TypedModel" superClass="o21">
+    <ownedAttribute xmi:id="o234" xmi:type="emof:Property" name="transformation" opposite="o230" type="o228"/>
+    <ownedAttribute xmi:id="o235" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="usedPackage" type="o34"/>
+    <ownedAttribute xmi:id="o236" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="dependsOn" type="o233"/>
+  </ownedType>
+  <ownedType xmi:id="o237" xmi:type="emof:Class" name="Rule" superClass="o21">
+    <ownedAttribute xmi:id="o238" xmi:type="emof:Property" name="transformation" opposite="o231" type="o228"/>
+    <ownedAttribute xmi:id="o239" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="domain" opposite="o227" type="o223"/>
+    <ownedAttribute xmi:id="o240" xmi:type="emof:Property" name="overrides" type="o237"/>
+  </ownedType>
+  <ownedType xmi:id="o241" xmi:type="emof:Class" name="Pattern" superClass="o12">
+    <ownedAttribute xmi:id="o242" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="predicate" opposite="o245" type="o244"/>
+    <ownedAttribute xmi:id="o243" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="bindsTo" type="o79"/>
+  </ownedType>
+  <ownedType xmi:id="o244" xmi:type="emof:Class" name="Predicate" superClass="o12">
+    <ownedAttribute xmi:id="o245" xmi:type="emof:Property" name="pattern" opposite="o242" type="o241"/>
+    <ownedAttribute xmi:id="o246" xmi:type="emof:Property" isComposite="true" name="conditionExpression" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o247" xmi:type="emof:Class" name="Function" superClass="o25">
+    <ownedAttribute xmi:id="o248" xmi:type="emof:Property" isComposite="true" name="queryExpression" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o249" xmi:type="emof:Class" name="FunctionParameter" superClass="o40 o79"/>
+</emof:Package>
+<emof:Package xmi:id="o250" name="qvttemplate">
+  <ownedType xmi:id="o251" xmi:type="emof:Class" isAbstract="true" name="TemplateExp" superClass="o102">
+    <ownedAttribute xmi:id="o252" xmi:type="emof:Property" isComposite="true" name="where" type="o69"/>
+    <ownedAttribute xmi:id="o253" xmi:type="emof:Property" name="bindsTo" type="o79"/>
+  </ownedType>
+  <ownedType xmi:id="o254" xmi:type="emof:Class" name="ObjectTemplateExp" superClass="o251">
+    <ownedAttribute xmi:id="o255" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="part" opposite="o262" type="o261"/>
+    <ownedAttribute xmi:id="o256" xmi:type="emof:Property" name="referredClass" type="o6"/>
+  </ownedType>
+  <ownedType xmi:id="o257" xmi:type="emof:Class" name="CollectionTemplateExp" superClass="o251">
+    <ownedAttribute xmi:id="o258" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="member" type="o69"/>
+    <ownedAttribute xmi:id="o259" xmi:type="emof:Property" name="referredCollectionType" type="o133"/>
+    <ownedAttribute xmi:id="o260" xmi:type="emof:Property" name="rest" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o261" xmi:type="emof:Class" name="PropertyTemplateItem" superClass="o12">
+    <ownedAttribute xmi:id="o262" xmi:type="emof:Property" name="objContainer" opposite="o255" type="o254"/>
+    <ownedAttribute xmi:id="o263" xmi:type="emof:Property" isComposite="true" name="value" type="o69"/>
+    <ownedAttribute xmi:id="o264" xmi:type="emof:Property" name="referredProperty" type="o44"/>
+  </ownedType>
+</emof:Package>
+<emof:Package xmi:id="o265" name="qvtrelation">
+  <ownedType xmi:id="o266" xmi:type="emof:Class" name="Relation" superClass="o237">
+    <ownedAttribute xmi:id="o267" xmi:type="emof:Property" name="isTopLevel" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o268" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="variable" type="o79"/>
+    <ownedAttribute xmi:id="o269" xmi:type="emof:Property" isComposite="true" name="when" type="o241"/>
+    <ownedAttribute xmi:id="o270" xmi:type="emof:Property" isComposite="true" name="where" type="o241"/>
+    <ownedAttribute xmi:id="o271" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="operationalImpl" opposite="o279" type="o278"/>
+  </ownedType>
+  <ownedType xmi:id="o272" xmi:type="emof:Class" name="RelationDomain" superClass="o223">
+    <ownedAttribute xmi:id="o273" xmi:type="emof:Property" isComposite="true" name="pattern" type="o276"/>
+    <ownedAttribute xmi:id="o274" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="defaultAssignment" type="o291"/>
+    <ownedAttribute xmi:id="o275" xmi:type="emof:Property" name="rootVariable" type="o79"/>
+  </ownedType>
+  <ownedType xmi:id="o276" xmi:type="emof:Class" name="DomainPattern" superClass="o241">
+    <ownedAttribute xmi:id="o277" xmi:type="emof:Property" isComposite="true" name="templateExpression" type="o251"/>
+  </ownedType>
+  <ownedType xmi:id="o278" xmi:type="emof:Class" name="RelationImplementation" superClass="o12">
+    <ownedAttribute xmi:id="o279" xmi:type="emof:Property" name="relation" opposite="o271" type="o266"/>
+    <ownedAttribute xmi:id="o280" xmi:type="emof:Property" name="impl" type="o25"/>
+    <ownedAttribute xmi:id="o281" xmi:type="emof:Property" name="inDirectionOf" type="o233"/>
+  </ownedType>
+  <ownedType xmi:id="o282" xmi:type="emof:Class" name="RelationCallExp" superClass="o69">
+    <ownedAttribute xmi:id="o283" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="argument" type="o69"/>
+    <ownedAttribute xmi:id="o284" xmi:type="emof:Property" name="referredRelation" type="o266"/>
+  </ownedType>
+  <ownedType xmi:id="o285" xmi:type="emof:Class" name="RelationalTransformation" superClass="o228">
+    <ownedAttribute xmi:id="o286" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="ownedKey" opposite="o288" type="o287"/>
+  </ownedType>
+  <ownedType xmi:id="o287" xmi:type="emof:Class" name="Key" superClass="o12">
+    <ownedAttribute xmi:id="o288" xmi:type="emof:Property" name="transformation" opposite="o286" type="o285"/>
+    <ownedAttribute xmi:id="o289" xmi:type="emof:Property" name="identifies" type="o6"/>
+    <ownedAttribute xmi:id="o290" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="part" type="o44"/>
+  </ownedType>
+  <ownedType xmi:id="o291" xmi:type="emof:Class" name="RelationDomainAssignment" superClass="o12">
+    <ownedAttribute xmi:id="o292" xmi:type="emof:Property" isComposite="true" name="valueExp" type="o69"/>
+    <ownedAttribute xmi:id="o293" xmi:type="emof:Property" name="variable" type="o79"/>
+  </ownedType>
+</emof:Package>
+<emof:Package xmi:id="o294" name="qvtoperational">
+  <ownedType xmi:id="o295" xmi:type="emof:Class" name="MappingBody" superClass="o365">
+    <ownedAttribute xmi:id="o296" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="initSection" type="o69"/>
+    <ownedAttribute xmi:id="o297" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="endSection" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o298" xmi:type="emof:Class" name="Helper" superClass="o334">
+    <ownedAttribute xmi:id="o299" xmi:type="emof:Property" name="isQuery" type="emof:PrimitiveType o3"/>
+  </ownedType>
+  <ownedType xmi:id="o300" xmi:type="emof:Class" name="ResolveExp" superClass="o66">
+    <ownedAttribute xmi:id="o301" xmi:type="emof:Property" name="one" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o302" xmi:type="emof:Property" name="isInverse" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o303" xmi:type="emof:Property" name="isDeferred" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o304" xmi:type="emof:Property" isComposite="true" name="target" type="o79"/>
+    <ownedAttribute xmi:id="o305" xmi:type="emof:Property" isComposite="true" name="condition" type="o69"/>
+  </ownedType>
+  <ownedType xmi:id="o306" xmi:type="emof:Class" name="ResolveInExp" superClass="o300">
+    <ownedAttribute xmi:id="o307" xmi:type="emof:Property" name="inMapping" type="o317"/>
+  </ownedType>
+  <ownedType xmi:id="o308" xmi:type="emof:Class" name="OperationalTransformation" superClass="o347">
+    <ownedAttribute xmi:id="o309" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="modelParameter" type="o342"/>
+    <ownedAttribute xmi:id="o310" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="relation" type="o266"/>
+    <ownedAttribute xmi:id="o311" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="intermediateClass" type="o6"/>
+    <ownedAttribute xmi:id="o312" xmi:type="emof:Property" name="refined" type="o285"/>
+    <ownedAttribute xmi:id="o313" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="intermediateProperty" type="o44"/>
+  </ownedType>
+  <ownedType xmi:id="o314" xmi:type="emof:Class" name="MappingParameter" superClass="o361">
+    <ownedAttribute xmi:id="o315" xmi:type="emof:Property" name="refinedDomain" type="o272"/>
+    <ownedAttribute xmi:id="o316" xmi:type="emof:Property" name="extent" type="o342"/>
+  </ownedType>
+  <ownedType xmi:id="o317" xmi:type="emof:Class" name="MappingOperation" superClass="o334 o25 o21">
+    <ownedAttribute xmi:id="o318" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="when" type="o69"/>
+    <ownedAttribute xmi:id="o319" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="where" type="o69"/>
+    <ownedAttribute xmi:id="o320" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="disjunct" type="o317"/>
+    <ownedAttribute xmi:id="o321" xmi:type="emof:Property" name="refinedRelation" type="o266"/>
+    <ownedAttribute xmi:id="o322" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="merged" type="o317"/>
+    <ownedAttribute xmi:id="o323" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="inherited" type="o317"/>
+  </ownedType>
+  <ownedType xmi:id="o324" xmi:type="emof:Class" name="MappingCallExp" superClass="o332">
+    <ownedAttribute xmi:id="o325" xmi:type="emof:Property" name="isStrict" type="emof:PrimitiveType o3"/>
+  </ownedType>
+  <ownedType xmi:id="o326" xmi:type="emof:Class" name="Constructor" superClass="o334"/>
+  <ownedType xmi:id="o327" xmi:type="emof:Class" name="ContextualProperty" superClass="o44">
+    <ownedAttribute xmi:id="o328" xmi:type="emof:Property" isComposite="true" name="initExpression" type="o69"/>
+    <ownedAttribute xmi:id="o329" xmi:type="emof:Property" name="context" type="o6"/>
+    <ownedAttribute xmi:id="o330" xmi:type="emof:Property" name="overridden" type="o44"/>
+  </ownedType>
+  <ownedType xmi:id="o331" xmi:type="emof:Class" name="EntryOperation" superClass="o334"/>
+  <ownedType xmi:id="o332" xmi:type="emof:Class" name="ImperativeCallExp" superClass="o97">
+    <ownedAttribute xmi:id="o333" xmi:type="emof:Property" name="isVirtual" type="emof:PrimitiveType o3"/>
+  </ownedType>
+  <ownedType xmi:id="o334" xmi:type="emof:Class" name="ImperativeOperation" superClass="o25">
+    <ownedAttribute xmi:id="o335" xmi:type="emof:Property" name="isBlackbox" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o336" xmi:type="emof:Property" isComposite="true" name="context" opposite="o362" type="o361"/>
+    <ownedAttribute xmi:id="o337" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="result" opposite="o363" type="o361"/>
+    <ownedAttribute xmi:id="o338" xmi:type="emof:Property" isComposite="true" name="body" opposite="o366" type="o365"/>
+    <ownedAttribute xmi:id="o339" xmi:type="emof:Property" name="overridden" type="o334"/>
+  </ownedType>
+  <ownedType xmi:id="o340" xmi:type="emof:Enumeration" name="DirectionKind"/>
+  <ownedType xmi:id="o341" xmi:type="emof:Class" name="Library" superClass="o347"/>
+  <ownedType xmi:id="o342" xmi:type="emof:Class" name="ModelParameter" superClass="o361"/>
+  <ownedType xmi:id="o343" xmi:type="emof:Class" name="ModelType" superClass="o6 o55">
+    <ownedAttribute xmi:id="o344" xmi:type="emof:Property" name="conformanceKind" type="emof:PrimitiveType o1"/>
+    <ownedAttribute xmi:id="o345" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="additionalCondition" type="o69"/>
+    <ownedAttribute xmi:id="o346" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="metamodel" type="o34"/>
+  </ownedType>
+  <ownedType xmi:id="o347" xmi:type="emof:Class" name="Module" superClass="o6 o34">
+    <ownedAttribute xmi:id="o348" xmi:type="emof:Property" name="isBlackbox" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o349" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="ownedTag" type="o15"/>
+    <ownedAttribute xmi:id="o350" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="moduleImport" opposite="o356" type="o355"/>
+    <ownedAttribute xmi:id="o351" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="ownedVariable" type="o79"/>
+    <ownedAttribute xmi:id="o352" xmi:type="emof:Property" name="entry" type="o25"/>
+    <ownedAttribute xmi:id="o353" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="configProperty" type="o44"/>
+    <ownedAttribute xmi:id="o354" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="usedModelType" type="o343"/>
+  </ownedType>
+  <ownedType xmi:id="o355" xmi:type="emof:Class" name="ModuleImport" superClass="o12">
+    <ownedAttribute xmi:id="o356" xmi:type="emof:Property" name="module" opposite="o350" type="o347"/>
+    <ownedAttribute xmi:id="o357" xmi:type="emof:Property" name="kind" type="o360"/>
+    <ownedAttribute xmi:id="o358" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="binding" type="o343"/>
+    <ownedAttribute xmi:id="o359" xmi:type="emof:Property" name="importedModule" type="o347"/>
+  </ownedType>
+  <ownedType xmi:id="o360" xmi:type="emof:Enumeration" name="ImportKind"/>
+  <ownedType xmi:id="o361" xmi:type="emof:Class" name="VarParameter" superClass="o40 o79">
+    <ownedAttribute xmi:id="o362" xmi:type="emof:Property" name="ctxOwner" opposite="o336" type="o334"/>
+    <ownedAttribute xmi:id="o363" xmi:type="emof:Property" name="resOwner" opposite="o337" type="o334"/>
+    <ownedAttribute xmi:id="o364" xmi:type="emof:Property" name="kind" type="o340"/>
+  </ownedType>
+  <ownedType xmi:id="o365" xmi:type="emof:Class" name="OperationBody" superClass="o12">
+    <ownedAttribute xmi:id="o366" xmi:type="emof:Property" name="operation" opposite="o338" type="o334"/>
+    <ownedAttribute xmi:id="o367" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="content" type="o69"/>
+    <ownedAttribute xmi:id="o368" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="variable" type="o79"/>
+  </ownedType>
+  <ownedType xmi:id="o369" xmi:type="emof:Class" name="ConstructorBody" superClass="o365"/>
+  <ownedType xmi:id="o370" xmi:type="emof:Class" name="ObjectExp" superClass="o184">
+    <ownedAttribute xmi:id="o371" xmi:type="emof:Property" isComposite="true" name="body" type="o369"/>
+    <ownedAttribute xmi:id="o372" xmi:type="emof:Property" name="referredObject" type="o79"/>
+  </ownedType>
+</emof:Package>
+<emof:Package xmi:id="o373" name="qvtcore">
+  <ownedType xmi:id="o374" xmi:type="emof:Class" isAbstract="true" name="Area">
+    <ownedAttribute xmi:id="o375" xmi:type="emof:Property" isComposite="true" name="guardPattern" opposite="o388" type="o387"/>
+    <ownedAttribute xmi:id="o376" xmi:type="emof:Property" isComposite="true" name="bottomPattern" opposite="o383" type="o382"/>
+  </ownedType>
+  <ownedType xmi:id="o377" xmi:type="emof:Class" name="Assignment">
+    <ownedAttribute xmi:id="o378" xmi:type="emof:Property" name="isDefault" type="emof:PrimitiveType o3"/>
+    <ownedAttribute xmi:id="o379" xmi:type="emof:Property" isComposite="true" name="slotExpression" type="o69"/>
+    <ownedAttribute xmi:id="o380" xmi:type="emof:Property" isComposite="true" name="value" type="o69"/>
+    <ownedAttribute xmi:id="o381" xmi:type="emof:Property" name="bottomPattern" opposite="o384" type="o382"/>
+  </ownedType>
+  <ownedType xmi:id="o382" xmi:type="emof:Class" name="BottomPattern" superClass="o395">
+    <ownedAttribute xmi:id="o383" xmi:type="emof:Property" name="area" opposite="o376" type="o374"/>
+    <ownedAttribute xmi:id="o384" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="assignment" opposite="o381" type="o377"/>
+    <ownedAttribute xmi:id="o385" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="realizedVariable" type="o393"/>
+    <ownedAttribute xmi:id="o386" xmi:type="emof:Property" isComposite="true" isOrdered="true" isUnique="true" upper="-1" name="enforcementOperation" opposite="o397" type="o396"/>
+  </ownedType>
+  <ownedType xmi:id="o387" xmi:type="emof:Class" name="GuardPattern" superClass="o395">
+    <ownedAttribute xmi:id="o388" xmi:type="emof:Property" name="area" opposite="o375" type="o374"/>
+  </ownedType>
+  <ownedType xmi:id="o389" xmi:type="emof:Class" name="Mapping" superClass="o237 o374">
+    <ownedAttribute xmi:id="o390" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="specification" type="o389"/>
+    <ownedAttribute xmi:id="o391" xmi:type="emof:Property" isOrdered="true" isUnique="true" upper="-1" name="local" opposite="o392" type="o389"/>
+    <ownedAttribute xmi:id="o392" xmi:type="emof:Property" name="context" opposite="o391" type="o389"/>
+  </ownedType>
+  <ownedType xmi:id="o393" xmi:type="emof:Class" name="RealizedVariable" superClass="o79"/>
+  <ownedType xmi:id="o394" xmi:type="emof:Class" name="CoreDomain" superClass="o223 o374"/>
+  <ownedType xmi:id="o395" xmi:type="emof:Class" name="CorePattern" superClass="o241"/>
+  <ownedType xmi:id="o396" xmi:type="emof:Class" name="EnforcementOperation">
+    <ownedAttribute xmi:id="o397" xmi:type="emof:Property" name="bottomPattern" opposite="o386" type="o382"/>
+    <ownedAttribute xmi:id="o398" xmi:type="emof:Property" name="enforcementMode" type="o400"/>
+    <ownedAttribute xmi:id="o399" xmi:type="emof:Property" name="operationCallExp" type="o97"/>
+  </ownedType>
+  <ownedType xmi:id="o400" xmi:type="emof:Enumeration" name="EnforcementMode"/>
+  <ownedType xmi:id="o401" xmi:type="emof:Class" name="PropertyAssignment" superClass="o377">
+    <ownedAttribute xmi:id="o402" xmi:type="emof:Property" name="targetProperty" type="o44"/>
+  </ownedType>
+  <ownedType xmi:id="o403" xmi:type="emof:Class" name="VariableAssignment" superClass="o377">
+    <ownedAttribute xmi:id="o404" xmi:type="emof:Property" name="targetVariable" type="o79"/>
+  </ownedType>
+</emof:Package>
+</xmi:XMI>

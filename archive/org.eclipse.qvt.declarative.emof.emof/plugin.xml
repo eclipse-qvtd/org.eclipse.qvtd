@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.2 2008/08/24 18:33:52 ewillink Exp $
+-->
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package uri = "http://schema.omg.org/spec/mof/2.0/emof.xmi" 
+       class = "org.eclipse.qvt.declarative.emof.EMOF.EMOFPackage"
+       genModel = "model/EMOF.genmodel" /> 
+    <package uri = "http://schema.omg.org/spec/MOF/2.0/emof.xml" 
+       class = "org.eclipse.qvt.declarative.emof.EMOF.EMOFPackage"
+       genModel = "model/EMOF.genmodel" /> 
+  </extension>
+
+   <!--extension point="org.eclipse.emf.ecore.content_parser">
+      <parser contentTypeIdentifier="org.eclipse.qvt.declarative.emof.emof"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+   </extension-->
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <content-type id="org.eclipse.qvt.declarative.emof.emof"
+            base-type="org.eclipse.emf.emof"
+            file-extensions="emof,xmi,xml"           
+            name="%_UI_EMOF_content_type"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespacePattern" value="http://schema\.omg\.org/spec/(mof/2\.0/emof\.xmi|MOF/2\.0/emof\.xml)"/>
+            <parameter name="kind" value="xmi"/>
+         </describer>
+      </content-type>
+   </extension>
+
+</plugin>

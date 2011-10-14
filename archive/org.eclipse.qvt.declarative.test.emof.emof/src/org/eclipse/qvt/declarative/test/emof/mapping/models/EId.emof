@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emof:Package xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="p"
+    name="p" uri="p">
+  <ownedType xmi:type="emof:Class" xmi:id="p.InterfaceClass" name="InterfaceClass">
+    <ownedAttribute xmi:id="p.InterfaceClass.idAttribute" isOrdered="true" lower="0" name="idAttribute" isID="true">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+    </ownedAttribute>
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <interface>true</interface>
+      <instanceTypeName>xyzzy</instanceTypeName>
+    </xmi:Extension>
+  </ownedType>
+  <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <nsPrefix>p</nsPrefix>
+  </xmi:Extension>
+</emof:Package>

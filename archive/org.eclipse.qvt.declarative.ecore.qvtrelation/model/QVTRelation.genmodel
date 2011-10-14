@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvt.declarative.ecore.qvtrelation/src"
+    modelPluginID="org.eclipse.qvt.declarative.ecore.qvtrelation" modelName="QVTRelation"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore platform:/plugin/org.eclipse.qvt.declarative.ecore.qvtbase/model/QVTBase.genmodel#//QVTBase platform:/plugin/org.eclipse.qvt.declarative.ecore.qvttemplate/model/QVTTemplate.genmodel#//QVTTemplate platform:/plugin/org.eclipse.ocl/model/OCL.genmodel#//ocl platform:/plugin/org.eclipse.ocl.ecore/model/OCLEcore.genmodel#//ocl">
+  <foreignModel>QVTRelation.ecore</foreignModel>
+  <genPackages prefix="QVTRelation" basePackage="org.eclipse.qvt.declarative.ecore"
+      disposableProviderFactory="true" contentTypeIdentifier="org.eclipse.qvt.declarative.ecore.qvtrelation"
+      fileExtensions="eqvtrelation" ecorePackage="QVTRelation.ecore#/">
+    <genClasses ecoreClass="QVTRelation.ecore#//DomainPattern">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//DomainPattern/templateExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTRelation.ecore#//Key">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//Key/identifies"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//Key/part"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTRelation.ecore#//Key/transformation"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTRelation.ecore#//Relation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTRelation.ecore#//Relation/isTopLevel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//Relation/variable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//Relation/operationalImpl"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//Relation/when"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//Relation/where"/>
+      <genOperations ecoreOperation="QVTRelation.ecore#//Relation/getRelationalTransformation"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTRelation.ecore#//RelationDomain">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//RelationDomain/pattern"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//RelationDomain/rootVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//RelationDomain/defaultAssignment"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTRelation.ecore#//RelationDomainAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//RelationDomainAssignment/variable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//RelationDomainAssignment/valueExp"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTRelation.ecore#//RelationImplementation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//RelationImplementation/relation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//RelationImplementation/impl"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//RelationImplementation/inDirectionOf"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTRelation.ecore#//RelationCallExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//RelationCallExp/argument"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//RelationCallExp/referredRelation"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTRelation.ecore#//RelationalTransformation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTRelation.ecore#//RelationalTransformation/ownedKey"/>
+      <genOperations ecoreOperation="QVTRelation.ecore#//RelationalTransformation/getRelation">
+        <genParameters ecoreParameter="QVTRelation.ecore#//RelationalTransformation/getRelation/name"/>
+      </genOperations>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

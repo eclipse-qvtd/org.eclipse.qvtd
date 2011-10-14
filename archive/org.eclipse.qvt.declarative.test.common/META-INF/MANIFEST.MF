@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tests for Declarative QVTCommon Plug-in
+Bundle-SymbolicName: org.eclipse.qvt.declarative.test.common;singleton:=true
+Bundle-Version: 0.7.0
+Bundle-Activator: org.eclipse.qvt.declarative.test.common.Activator
+Bundle-Vendor: %pluginProvider
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.qvt.declarative.common;bundle-version="0.7.0",
+ org.junit4
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

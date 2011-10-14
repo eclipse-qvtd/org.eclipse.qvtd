@@ -1,0 +1,108 @@
+/*******************************************************************************
+ * Copyright (c) 2007,2008 Tata Consultancy Services and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     TCS - initial implementation for ModelMorf
+ *     E.D.Willink - alignment with evolved specification
+ *******************************************************************************/
+
+transformation UmlToRel(uml:umlmm, rdbms:relmm)
+{
+	key umlmm::Class {name};
+	key umlmm::Attribute {name, class};
+	key relmm::Table {name};
+	key relmm::Column {name, table};
+
+	query UmlToSqlDataType(utyp:String):String
+	{
+		if 
+			(utyp = 'Int')
+		then
+			'Number'
+		else 
+			if 
+				(utyp = 'Binary')
+			then 
+				'Raw'
+			else 
+				'Varchar' 
+			endif 
+		endif
+	}
+
+	query SqlToUmlDataType(styp:String):String
+	{
+		if 
+			(styp = 'Number')
+		then 
+			'Int'
+		else 
+			if 
+				(styp = 'Raw')
+			then
+				'Binary'
+			else
+				'String' 
+			endif
+		endif
+	}
+
+	top relation ClassToTable
+	{
+		n : String;
+
+		enforce domain uml 
+		c:Class
+		{
+			name = n
+		};
+
+		enforce domain rdbms 
+		t:Table
+		{
+			name = n
+		};
+	}   
+
+	top relation AttributeToColumn
+	{
+		n:String;
+		utyp:String;
+		rtyp:String;
+
+		enforce domain uml 
+		a:Attribute
+		{
+			name = n,
+			type = utyp,
+			class = c:Class{}
+		}
+		default_values
+		{
+			utyp = SqlToUmlDataType(rtyp);
+		};
+	   
+		enforce domain rdbms 
+		cl:Column
+		{
+			name = n,
+			dataType = rtyp,
+			table = t:Table{}
+		};
+		
+		when 
+		{
+			ClassToTable(c, t);
+		}
+		
+		where 
+		{
+			rtyp = UmlToSqlDataType(utyp);
+		}
+	}
+}
+

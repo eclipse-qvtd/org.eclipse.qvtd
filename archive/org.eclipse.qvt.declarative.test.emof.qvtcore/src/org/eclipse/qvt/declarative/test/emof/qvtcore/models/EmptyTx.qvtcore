@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qvtbase:Transformation xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/mof/2.0/emof.xmi"
+    xmlns:essentialocl="http://schema.omg.org/spec/qvt/0.0/essentialocl.ecore" xmlns:qvtbase="http://schema.omg.org/spec/QVT/1.1/qvtbase.xml"
+    xmlns:qvtcore="http://schema.omg.org/spec/qvt/0.0/qvtcore.ecore" xmi:id="ast9" name="umlRdbms">
+    <modelParameter xmi:id="ast3" name="middle">
+      <usedPackage href="TumlRdbms.ecore#/"/>
+    </modelParameter>
+    <modelParameter xmi:id="ast6" name="uml">
+      <usedPackage href="umlMM.emof#umlMM"/>
+    </modelParameter>
+    <modelParameter xmi:id="ast4" name="rdbms">
+      <usedPackage href="rdbmsMM.emof#rdbmsMM"/>
+    </modelParameter>
+</qvtbase:Transformation>

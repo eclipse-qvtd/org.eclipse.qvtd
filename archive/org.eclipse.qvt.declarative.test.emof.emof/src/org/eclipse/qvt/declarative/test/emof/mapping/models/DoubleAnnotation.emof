@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/mof/2.0/emof.xmi">
+  <emof:Package xmi:id="_0" name="root">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations source="annotation1">
+        <details key="k1a" value="v1a"/>
+        <details key="k1b" value="v1b"/>
+      </eAnnotations>
+      <eAnnotations source="annotation2">
+        <details key="k2" value="v2"/>
+      </eAnnotations>
+    </xmi:Extension>
+  </emof:Package>
+</xmi:XMI>

@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.qvt.declarative.ecore.qvtrelation.edit;singleton:=true
+Bundle-Version: 0.8.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.eclipse.qvt.declarative.ecore.QVTRelation.provider.QVTRelationEditPlugin$Implementation
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.qvt.declarative.ecore.QVTRelation.provider
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.qvt.declarative.ecore.qvtrelation;visibility:=reexport,
+ org.eclipse.qvt.declarative.ecore.qvtbase.edit;visibility:=reexport,
+ org.eclipse.qvt.declarative.ecore.qvttemplate.edit;visibility:=reexport
+Bundle-ActivationPolicy: lazy

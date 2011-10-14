@@ -1,0 +1,63 @@
+transformation umlRdbms {
+	middle imports tuml2rdbms;
+	uml imports umlMM;
+	rdbms imports rdbmsMM;
+}
+
+map Map0a in umlRdbms
+{
+	check uml (p:Package) {
+		c: Class|
+		c.kind = 'Persistent';
+	}
+	check enforce rdbms () {
+	}
+	where middle (v1: TPackageToSchema| v1.p = p; ) {
+		cn:String |
+		c.name = cn;
+	}
+}
+
+map Map0b in umlRdbms
+{
+	check uml () {
+		creation umlRdbms::q0('a');
+		deletion umlRdbms::q0('a');
+	}
+	check enforce rdbms () {
+		t:Table|
+	}
+	where middle () {
+	}
+}
+
+map Map1 in umlRdbms refines Map0a, Map0b
+{
+	check uml () {
+		c.namespace = p;
+	}
+	check enforce rdbms (s:Schema) {
+		t.schema = s;
+	}
+	where middle (v1.s = s;) {
+		realize v2: TClassToTable |
+		v2.p := p;
+		v2.s := s;
+		v2.c := c;
+	}
+	map {
+		where () {
+			t.description := cn;
+		}
+	}
+}
+
+map Map2 in umlRdbms refines Map1
+{
+	where middle () {
+		v2.t := t;
+		t.name = cn;
+	}
+}
+
+query umlRdbms::q0(x:String) : String { null }

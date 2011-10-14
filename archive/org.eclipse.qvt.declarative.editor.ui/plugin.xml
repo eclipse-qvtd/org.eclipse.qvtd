@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="pageDefinition" name="%ExtPoint.pageDefinition" schema="schema/pageDefinition.exsd"/>
+   
+   <extension point="org.eclipse.ui.newWizards">
+      <category id="org.eclipse.qvt.declarative.editor.ui"
+            name="Modeling (QVT) File Creation Wizards"/>
+   </extension>
+   
+   <extension point="org.eclipse.emf.transaction.editingDomains">
+     <editingDomain id="org.eclipse.qvt.declarative.editor.ui.QVTEditingDomain"
+        factory="org.eclipse.qvt.declarative.editor.ui.paged.PagedEditingDomainFactory"/>
+   </extension>
+   
+   <extension point="org.eclipse.qvt.declarative.editor.ui.pageDefinition">
+     <page name="ResourceSet" pageFactory="org.eclipse.qvt.declarative.editor.ui.tree.ResourceSetPageFactory"/>
+     <page name="EMOF" pageFactory="org.eclipse.qvt.declarative.editor.ui.xml.EMOFXMLPageFactory"/>
+     <page name="Ecore" pageFactory="org.eclipse.qvt.declarative.editor.ui.xml.EcoreXMLPageFactory"/>
+   </extension>
+  
+   <extension point="org.eclipse.ui.popupMenus">
+      <!--objectContribution id="org.eclipse.qvt.declarative.createDiagramMenu" 
+         adaptable="true" objectClass="org.eclipse.emf.ecore.xmi.XMLResource">
+         <menu id="org.eclipse.qvt.declarative.createDiagramMenu" path="additions" label="Create Diagram"> 
+            <separator name="diagrams"/> 
+         </menu> 
+      </objectContribution--> 
+      <objectContribution id="openSheetMenu"
+            adaptable="true" objectClass="org.eclipse.emf.ecore.xmi.XMLResource">
+         <menu id="org.eclipse.qvt.declarative.showSheetMenu" path="ui-actions" label="Show Sheet"> 
+            <separator name="sheets"/> 
+         </menu> 
+         <action id="openEMOFSheetAction"
+               label="EMOF" menubarPath="org.eclipse.qvt.declarative.showSheetMenu/sheets" enablesFor="*"
+               class="org.eclipse.qvt.declarative.editor.ui.actions.OpenEMOFSheetAction"/>
+         <action id="openEcoreSheetAction"
+               label="Ecore" menubarPath="org.eclipse.qvt.declarative.showSheetMenu/sheets" enablesFor="*"
+               class="org.eclipse.qvt.declarative.editor.ui.actions.OpenEcoreSheetAction"/>
+         <action id="openTextSheetAction"
+               label="Text" menubarPath="org.eclipse.qvt.declarative.showSheetMenu/sheets" enablesFor="*"
+               class="org.eclipse.qvt.declarative.editor.ui.actions.OpenTextSheetAction"/>
+      </objectContribution>
+  </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <propertyContributor contributorId="org.eclipse.qvt.declarative.editor.ui">
+            <!--labelProvider="org.eclipse.emf.ecoretools.diagram.sheet.EcoreSheetLabelProvider"
+            typeMapper="org.eclipse.emf.ecoretools.diagram.sheet.TabbedPropertiesTypeMapper"-->
+         <propertyCategory category="debug"/>
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+      </propertyContributor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs contributorId="org.eclipse.qvt.declarative.editor.ui">
+         <propertyTab
+               category="domain"
+               id="propery.tab.Model"
+               label="Model"/>
+         <propertyTab
+               afterTab="propery.tab.Model"
+               category="debug"
+               id="propery.tab.Debug"
+               label="Debug"/>
+      </propertyTabs>
+   </extension>   
+   
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections contributorId="org.eclipse.qvt.declarative.editor.ui">
+	     <propertySection id="property.section.ResourcePropertySection"
+	        class="org.eclipse.qvt.declarative.editor.ui.sections.ResourcePropertySection"
+	        tab="propery.tab.Model" enablesFor="1">
+	        <input type="org.eclipse.emf.ecore.resource.Resource"/>
+	     </propertySection>
+	  </propertySections>
+   </extension>   
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category name="Modeling (QVT)"
+            id="org.eclipse.qvt.declarative.editor.ui">
+      </category>
+      <view id="org.eclipse.qvt.declarative.editor.ui.cst"
+            name="CST Outline"
+            icon="icons/cstview.gif"
+            category="org.eclipse.qvt.declarative.editor.ui"
+            class="org.eclipse.qvt.declarative.editor.ui.cst.CSTOutline"/>
+   </extension>
+   
+
+</plugin>

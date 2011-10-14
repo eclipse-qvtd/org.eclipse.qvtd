@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ASCII"?>
+<mreg:ModelRegistrySettings xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:mreg="http://www.eclipse.org/ocl/1.0/ModelRegistry">
+  <resource name="qvtrsrc/AbstractToConcrete">
+    <entry accessor="UMLMM" kind="Model Name" uri="qvtrsrc/AbstractToConcrete/ClassMM_IN.emof"/>
+  </resource>
+  <resource name="qvtrsrc/ClassModelToClassModel">
+    <entry accessor="umlMM" kind="Model Name" uri="qvtrsrc/ClassModelToClassModel/ClassMM.emof"/>
+  </resource>
+  <resource name="qvtrsrc/DNF">
+    <entry accessor="exprMM" kind="Model Name" uri="qvtrsrc/DNF/DNFMM.emof"/>
+  </resource>
+  <resource name="qvtrsrc/DNF_bbox">
+    <entry accessor="exprMM" kind="Model Name" uri="qvtrsrc/DNF_bbox/DNFMM.emof"/>
+  </resource>
+  <resource name="qvtrsrc/HstmToStm">
+    <entry accessor="hstmMM_p" kind="Model Name" uri="qvtrsrc/HstmToStm/hstmMM.emof"/>
+    <entry accessor="stmMM_p" kind="Model Name" uri="qvtrsrc/HstmToStm/stmMM.emof"/>
+  </resource>
+  <resource name="qvtrsrc/Import">
+    <entry accessor="rdbmsMM" kind="Model Name" uri="qvtrsrc/Import/rdbmsMM.emof"/>
+    <entry accessor="umlMM" kind="Model Name" uri="qvtrsrc/Import/umlMM.emof"/>
+  </resource>
+  <resource name="qvtrsrc/MiToSi">
+    <entry accessor="javammsi" kind="Model Name" uri="qvtrsrc/MiToSi/javaMM.emof"/>
+    <entry accessor="umlmmmi" kind="Model Name" uri="qvtrsrc/MiToSi/umlMM.emof"/>
+  </resource>
+  <resource name="qvtrsrc/SeqToStm">
+    <entry accessor="SeqMM" kind="Model Name" uri="qvtrsrc/SeqToStm/SeqMM.emof"/>
+    <entry accessor="StmcMM" kind="Model Name" uri="qvtrsrc/SeqToStm/StmcMM.emof"/>
+  </resource>
+  <resource name="qvtrsrc/SeqToStmc_CT">
+    <entry accessor="SeqMM" kind="Model Name" uri="qvtrsrc/SeqToStmc_CT/SeqMM.emof"/>
+    <entry accessor="StmcMM" kind="Model Name" uri="qvtrsrc/SeqToStmc_CT/StmcMM.emof"/>
+  </resource>
+  <resource name="qvtrsrc/UmlToRdbms">
+    <entry accessor="rdbmsMM" kind="Model Name" uri="qvtrsrc/UmlToRdbms/rdbmsMM.emof"/>
+    <entry accessor="umlMM" kind="Model Name" uri="qvtrsrc/UmlToRdbms/umlMM.emof"/>
+  </resource>
+  <resource name="qvtrsrc/UmlToRel">
+    <entry accessor="relmm" kind="Model Name" uri="qvtrsrc/UmlToRel/RelMM.emof"/>
+    <entry accessor="umlmm" kind="Model Name" uri="qvtrsrc/UmlToRel/UmlMM.emof"/>
+  </resource>
+</mreg:ModelRegistrySettings>

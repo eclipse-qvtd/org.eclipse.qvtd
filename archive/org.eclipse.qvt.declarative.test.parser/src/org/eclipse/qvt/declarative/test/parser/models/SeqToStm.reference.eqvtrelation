@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="ASCII"?>
+<eqvtr:RelationalTransformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtr="http://www.eclipse.org/qvt/1.0/QVTRelation" xmlns:eqvttemplate="http://www.eclipse.org/qvt/1.0/QVTTemplate" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore" xmi:id="ast6" name="SeqToStm">
+  <eClassifiers xsi:type="ocl.ecore:SetType" xmi:id="ast4" instanceClassName="java.util.Set">
+    <elementType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.LifeLine"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ocl.ecore:SetType" xmi:id="ast14" instanceClassName="java.util.Set">
+    <elementType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ocl.ecore:SetType" xmi:id="ast19" instanceClassName="java.util.Set">
+    <elementType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.Transition"/>
+  </eClassifiers>
+  <modelParameter xmi:id="ast31" name="seqDgm">
+    <usedPackage href="SeqMM.xml#SeqMM"/>
+  </modelParameter>
+  <modelParameter xmi:id="ast28" name="stm">
+    <usedPackage href="StmcMM.xml#StmcMM"/>
+  </modelParameter>
+  <rule xsi:type="eqvtr:Relation" xmi:id="ast17" name="InteractionToStateMachine" isTopLevel="true">
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast64" name="seqDgm" isCheckable="false" isEnforceable="false" typedModel="ast31" rootVariable="ast34">
+      <pattern xmi:id="ast26">
+        <templateExpression xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast57" name="i" bindsTo="ast34">
+          <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Interaction"/>
+          <part xmi:id="ast79">
+            <referredProperty xsi:type="ecore:EAttribute" href="SeqMM.xml#SeqMM.Interaction.name"/>
+            <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast71" name="sn" referredVariable="ast32">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <referredClass href="SeqMM.xml#SeqMM.Interaction"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast103" name="stm" isCheckable="false" isEnforceable="true" typedModel="ast28" rootVariable="ast12">
+      <pattern xmi:id="ast105">
+        <templateExpression xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast30" name="s" bindsTo="ast12">
+          <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.StateMachine"/>
+          <part xmi:id="ast81">
+            <referredProperty xsi:type="ecore:EAttribute" href="StmcMM.xml#StmcMM.StateMachine.name"/>
+            <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast164" name="sn" referredVariable="ast32">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <referredClass href="StmcMM.xml#StmcMM.StateMachine"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <variable xmi:id="ast34" name="i">
+      <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Interaction"/>
+    </variable>
+    <variable xmi:id="ast12" name="s">
+      <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.StateMachine"/>
+    </variable>
+    <variable xmi:id="ast32" name="sn">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+  </rule>
+  <rule xsi:type="eqvtr:Relation" xmi:id="ast264" name="StateToState" isTopLevel="true">
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast196" name="seqDgm" isCheckable="false" isEnforceable="false" typedModel="ast31" rootVariable="ast482">
+      <pattern xmi:id="ast99">
+        <templateExpression xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast141" name="st1" bindsTo="ast482">
+          <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.State"/>
+          <part xmi:id="ast275">
+            <referredProperty xsi:type="ecore:EAttribute" href="SeqMM.xml#SeqMM.State.name"/>
+            <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast107" name="sn" referredVariable="ast217">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <part xmi:id="ast192">
+            <referredProperty xsi:type="ecore:EReference" href="SeqMM.xml#SeqMM.State.lifeline"/>
+            <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast208" name="l" bindsTo="ast92">
+              <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.LifeLine"/>
+              <part xmi:id="ast66">
+                <referredProperty xsi:type="ecore:EReference" href="SeqMM.xml#SeqMM.LifeLine.interaction"/>
+                <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast151" name="i" bindsTo="ast10">
+                  <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Interaction"/>
+                  <referredClass href="SeqMM.xml#SeqMM.Interaction"/>
+                </value>
+              </part>
+              <referredClass href="SeqMM.xml#SeqMM.LifeLine"/>
+            </value>
+          </part>
+          <referredClass href="SeqMM.xml#SeqMM.State"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast21" name="stm" isCheckable="false" isEnforceable="true" typedModel="ast28" rootVariable="ast385">
+      <pattern xmi:id="ast49">
+        <templateExpression xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast113" name="st2" bindsTo="ast385">
+          <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.State"/>
+          <part xmi:id="ast15">
+            <referredProperty xsi:type="ecore:EAttribute" href="StmcMM.xml#StmcMM.State.name"/>
+            <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast404" name="sn" referredVariable="ast217">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <part xmi:id="ast225">
+            <referredProperty xsi:type="ecore:EReference" href="StmcMM.xml#StmcMM.State.owner"/>
+            <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast262" name="s" bindsTo="ast179">
+              <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.StateMachine"/>
+              <referredClass href="StmcMM.xml#StmcMM.StateMachine"/>
+            </value>
+          </part>
+          <referredClass href="StmcMM.xml#StmcMM.State"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <variable xmi:id="ast482" name="st1">
+      <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.State"/>
+    </variable>
+    <variable xmi:id="ast385" name="st2">
+      <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.State"/>
+    </variable>
+    <variable xmi:id="ast217" name="sn">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable xmi:id="ast92" name="l">
+      <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.LifeLine"/>
+    </variable>
+    <variable xmi:id="ast10" name="i">
+      <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Interaction"/>
+    </variable>
+    <variable xmi:id="ast179" name="s">
+      <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.StateMachine"/>
+    </variable>
+    <when xmi:id="ast289">
+      <predicate xmi:id="ast463">
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast13" referredRelation="ast17">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast455" name="i" referredVariable="ast10">
+            <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Interaction"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast38" name="s" referredVariable="ast179">
+            <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.StateMachine"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+    </when>
+  </rule>
+  <rule xsi:type="eqvtr:Relation" xmi:id="ast287" name="MessageToTransition" isTopLevel="true">
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast157" name="seqDgm" isCheckable="false" isEnforceable="false" typedModel="ast31" rootVariable="ast356">
+      <pattern xmi:id="ast401">
+        <templateExpression xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast147" name="m1" bindsTo="ast356">
+          <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
+          <part xmi:id="ast655">
+            <referredProperty xsi:type="ecore:EAttribute" href="SeqMM.xml#SeqMM.Message.messageId"/>
+            <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast269" name="mid" referredVariable="ast307">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <part xmi:id="ast621">
+            <referredProperty xsi:type="ecore:EReference" href="SeqMM.xml#SeqMM.Message.event"/>
+            <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast518" name="send" bindsTo="ast1101">
+              <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
+              <part xmi:id="ast112">
+                <referredProperty xsi:type="ecore:EAttribute" href="SeqMM.xml#SeqMM.MessageEvent.type"/>
+                <value xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast666" name="String" stringSymbol="Send">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <part xmi:id="ast770">
+                <referredProperty xsi:type="ecore:EReference" href="SeqMM.xml#SeqMM.MessageEvent.state"/>
+                <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast517" name="ist1" bindsTo="ast211">
+                  <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.State"/>
+                  <referredClass href="SeqMM.xml#SeqMM.State"/>
+                </value>
+              </part>
+              <referredClass href="SeqMM.xml#SeqMM.MessageEvent"/>
+            </value>
+          </part>
+          <part xmi:id="ast860">
+            <referredProperty xsi:type="ecore:EReference" href="SeqMM.xml#SeqMM.Message.event"/>
+            <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast222" name="receive" bindsTo="ast1166">
+              <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
+              <part xmi:id="ast20">
+                <referredProperty xsi:type="ecore:EAttribute" href="SeqMM.xml#SeqMM.MessageEvent.type"/>
+                <value xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast897" name="String" stringSymbol="Receive">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <part xmi:id="ast454">
+                <referredProperty xsi:type="ecore:EReference" href="SeqMM.xml#SeqMM.MessageEvent.state"/>
+                <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast412" name="ist2" bindsTo="ast773">
+                  <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.State"/>
+                  <referredClass href="SeqMM.xml#SeqMM.State"/>
+                </value>
+              </part>
+              <referredClass href="SeqMM.xml#SeqMM.MessageEvent"/>
+            </value>
+          </part>
+          <part xmi:id="ast625">
+            <referredProperty xsi:type="ecore:EReference" href="SeqMM.xml#SeqMM.Message.interaction"/>
+            <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast971" name="i" bindsTo="ast181">
+              <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Interaction"/>
+              <referredClass href="SeqMM.xml#SeqMM.Interaction"/>
+            </value>
+          </part>
+          <referredClass href="SeqMM.xml#SeqMM.Message"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast588" name="stm" isCheckable="false" isEnforceable="true" typedModel="ast28" rootVariable="ast611">
+      <pattern xmi:id="ast639">
+        <templateExpression xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast681" name="tr" bindsTo="ast611">
+          <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.Transition"/>
+          <part xmi:id="ast604">
+            <referredProperty xsi:type="ecore:EAttribute" href="StmcMM.xml#StmcMM.Transition.name"/>
+            <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast195" name="mid" referredVariable="ast307">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <part xmi:id="ast403">
+            <referredProperty xsi:type="ecore:EReference" href="StmcMM.xml#StmcMM.Transition.fromState"/>
+            <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast810" name="fst" bindsTo="ast582">
+              <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.State"/>
+              <referredClass href="StmcMM.xml#StmcMM.State"/>
+            </value>
+          </part>
+          <part xmi:id="ast982">
+            <referredProperty xsi:type="ecore:EReference" href="StmcMM.xml#StmcMM.Transition.toState"/>
+            <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast896" name="tst" bindsTo="ast543">
+              <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.State"/>
+              <referredClass href="StmcMM.xml#StmcMM.State"/>
+            </value>
+          </part>
+          <part xmi:id="ast716">
+            <referredProperty xsi:type="ecore:EReference" href="StmcMM.xml#StmcMM.Transition.action"/>
+            <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast561" name="sm" bindsTo="ast409">
+              <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.SendMsg"/>
+              <part xmi:id="ast474">
+                <referredProperty xsi:type="ecore:EReference" href="StmcMM.xml#StmcMM.SendMsg.message"/>
+                <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast263" name="m2" bindsTo="ast938">
+                  <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.Message"/>
+                  <part xmi:id="ast699">
+                    <referredProperty xsi:type="ecore:EAttribute" href="StmcMM.xml#StmcMM.Message.messageId"/>
+                    <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast127" name="mid" referredVariable="ast307">
+                      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                    </value>
+                  </part>
+                  <referredClass href="StmcMM.xml#StmcMM.Message"/>
+                </value>
+              </part>
+              <referredClass href="StmcMM.xml#StmcMM.SendMsg"/>
+            </value>
+          </part>
+          <part xmi:id="ast374">
+            <referredProperty xsi:type="ecore:EReference" href="StmcMM.xml#StmcMM.Transition.owner"/>
+            <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast949" name="s" bindsTo="ast801">
+              <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.StateMachine"/>
+              <referredClass href="StmcMM.xml#StmcMM.StateMachine"/>
+            </value>
+          </part>
+          <referredClass href="StmcMM.xml#StmcMM.Transition"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <variable xmi:id="ast356" name="m1">
+      <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
+    </variable>
+    <variable xmi:id="ast611" name="tr">
+      <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.Transition"/>
+    </variable>
+    <variable xmi:id="ast307" name="mid">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable xmi:id="ast1101" name="send">
+      <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
+    </variable>
+    <variable xmi:id="ast211" name="ist1">
+      <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.State"/>
+    </variable>
+    <variable xmi:id="ast1166" name="receive">
+      <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
+    </variable>
+    <variable xmi:id="ast773" name="ist2">
+      <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.State"/>
+    </variable>
+    <variable xmi:id="ast181" name="i">
+      <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Interaction"/>
+    </variable>
+    <variable xmi:id="ast582" name="fst">
+      <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.State"/>
+    </variable>
+    <variable xmi:id="ast543" name="tst">
+      <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.State"/>
+    </variable>
+    <variable xmi:id="ast409" name="sm">
+      <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.SendMsg"/>
+    </variable>
+    <variable xmi:id="ast938" name="m2">
+      <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.Message"/>
+    </variable>
+    <variable xmi:id="ast801" name="s">
+      <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.StateMachine"/>
+    </variable>
+    <when xmi:id="ast464">
+      <predicate xmi:id="ast1183">
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast1400" referredRelation="ast17">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast1402" name="i" referredVariable="ast181">
+            <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Interaction"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast1238" name="s" referredVariable="ast801">
+            <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.StateMachine"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+      <predicate xmi:id="ast1215">
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast1448" referredRelation="ast264">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast1219" name="ist1" referredVariable="ast211">
+            <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.State"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast993" name="fst" referredVariable="ast582">
+            <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.State"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+      <predicate xmi:id="ast1187">
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast704" referredRelation="ast264">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast873" name="ist2" referredVariable="ast773">
+            <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.State"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast709" name="tst" referredVariable="ast543">
+            <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.State"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+    </when>
+  </rule>
+  <rule xsi:type="eqvtr:Relation" xmi:id="ast642" name="MessageSequenceToTransitionSequence" isTopLevel="true">
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1176" name="seqDgm" isCheckable="false" isEnforceable="false" typedModel="ast31" rootVariable="ast1839">
+      <pattern xmi:id="ast393">
+        <templateExpression xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast1709" name="ev1" bindsTo="ast1839">
+          <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
+          <part xmi:id="ast599">
+            <referredProperty xsi:type="ecore:EAttribute" href="SeqMM.xml#SeqMM.MessageEvent.type"/>
+            <value xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast1435" name="String" stringSymbol="Receive">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <part xmi:id="ast182">
+            <referredProperty xsi:type="ecore:EReference" href="SeqMM.xml#SeqMM.MessageEvent.message"/>
+            <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast137" name="m1" bindsTo="ast290">
+              <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
+              <referredClass href="SeqMM.xml#SeqMM.Message"/>
+            </value>
+          </part>
+          <part xmi:id="ast1796">
+            <referredProperty xsi:type="ecore:EReference" href="SeqMM.xml#SeqMM.MessageEvent.next"/>
+            <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast1532" name="ev2" bindsTo="ast1888">
+              <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
+              <part xmi:id="ast148">
+                <referredProperty xsi:type="ecore:EAttribute" href="SeqMM.xml#SeqMM.MessageEvent.type"/>
+                <value xsi:type="ocl.ecore:StringLiteralExp" xmi:id="ast1765" name="String" stringSymbol="Send">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <part xmi:id="ast1202">
+                <referredProperty xsi:type="ecore:EReference" href="SeqMM.xml#SeqMM.MessageEvent.message"/>
+                <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast1213" name="m2" bindsTo="ast909">
+                  <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
+                  <referredClass href="SeqMM.xml#SeqMM.Message"/>
+                </value>
+              </part>
+              <referredClass href="SeqMM.xml#SeqMM.MessageEvent"/>
+            </value>
+          </part>
+          <referredClass href="SeqMM.xml#SeqMM.MessageEvent"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast1130" name="stm" isCheckable="false" isEnforceable="true" typedModel="ast28" rootVariable="ast1106">
+      <pattern xmi:id="ast1588">
+        <templateExpression xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast1496" name="tr1" bindsTo="ast1106">
+          <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.Transition"/>
+          <part xmi:id="ast1063">
+            <referredProperty xsi:type="ecore:EReference" href="StmcMM.xml#StmcMM.Transition.toState"/>
+            <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast353" name="tst" bindsTo="ast748">
+              <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.State"/>
+              <part xmi:id="ast1744">
+                <referredProperty xsi:type="ecore:EReference" href="StmcMM.xml#StmcMM.State.outTransition"/>
+                <value xsi:type="eqvttemplate:ObjectTemplateExp" xmi:id="ast1803" name="tr2" bindsTo="ast1075">
+                  <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.Transition"/>
+                  <referredClass href="StmcMM.xml#StmcMM.Transition"/>
+                </value>
+              </part>
+              <referredClass href="StmcMM.xml#StmcMM.State"/>
+            </value>
+          </part>
+          <referredClass href="StmcMM.xml#StmcMM.Transition"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <variable xmi:id="ast1839" name="ev1">
+      <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
+    </variable>
+    <variable xmi:id="ast1106" name="tr1">
+      <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.Transition"/>
+    </variable>
+    <variable xmi:id="ast290" name="m1">
+      <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
+    </variable>
+    <variable xmi:id="ast1888" name="ev2">
+      <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.MessageEvent"/>
+    </variable>
+    <variable xmi:id="ast909" name="m2">
+      <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
+    </variable>
+    <variable xmi:id="ast748" name="tst">
+      <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.State"/>
+    </variable>
+    <variable xmi:id="ast1075" name="tr2">
+      <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.Transition"/>
+    </variable>
+    <when xmi:id="ast1840">
+      <predicate xmi:id="ast41">
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast1648" referredRelation="ast287">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast296" name="m1" referredVariable="ast290">
+            <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast775" name="tr1" referredVariable="ast1106">
+            <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.Transition"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+      <predicate xmi:id="ast357">
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast1479" referredRelation="ast287">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast1940" name="m2" referredVariable="ast909">
+            <eType xsi:type="ecore:EClass" href="SeqMM.xml#SeqMM.Message"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast512" name="tr2" referredVariable="ast1075">
+            <eType xsi:type="ecore:EClass" href="StmcMM.xml#StmcMM.Transition"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+    </when>
+  </rule>
+  <ownedKey xmi:id="ast80">
+    <identifies href="StmcMM.xml#StmcMM.StateMachine"/>
+    <part xsi:type="ecore:EAttribute" href="StmcMM.xml#StmcMM.StateMachine.name"/>
+  </ownedKey>
+  <ownedKey xmi:id="ast2286">
+    <identifies href="StmcMM.xml#StmcMM.State"/>
+    <part xsi:type="ecore:EAttribute" href="StmcMM.xml#StmcMM.State.name"/>
+    <part xsi:type="ecore:EReference" href="StmcMM.xml#StmcMM.State.owner"/>
+  </ownedKey>
+  <ownedKey xmi:id="ast1751">
+    <identifies href="StmcMM.xml#StmcMM.Transition"/>
+    <part xsi:type="ecore:EAttribute" href="StmcMM.xml#StmcMM.Transition.name"/>
+    <part xsi:type="ecore:EReference" href="StmcMM.xml#StmcMM.Transition.owner"/>
+    <part xsi:type="ecore:EReference" href="StmcMM.xml#StmcMM.Transition.fromState"/>
+    <part xsi:type="ecore:EReference" href="StmcMM.xml#StmcMM.Transition.toState"/>
+  </ownedKey>
+  <ownedKey xmi:id="ast742">
+    <identifies href="StmcMM.xml#StmcMM.SendMsg"/>
+    <part xsi:type="ecore:EReference" href="StmcMM.xml#StmcMM.SendMsg.message"/>
+  </ownedKey>
+  <ownedKey xmi:id="ast1549">
+    <identifies href="StmcMM.xml#StmcMM.Message"/>
+    <part xsi:type="ecore:EAttribute" href="StmcMM.xml#StmcMM.Message.messageId"/>
+  </ownedKey>
+</eqvtr:RelationalTransformation>

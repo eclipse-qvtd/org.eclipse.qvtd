@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.1 2008/07/23 09:50:18 qglineur Exp $
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.eclipse.qvt.declarative.ecore.QVTTemplate.presentation.QVTTemplateModelWizardID"
+            name="%_UI_QVTTemplateModelWizard_label"
+            class="org.eclipse.qvt.declarative.ecore.QVTTemplate.presentation.QVTTemplateModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/QVTTemplateModelFile.gif">
+         <description>%_UI_QVTTemplateModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="org.eclipse.qvt.declarative.ecore.QVTTemplate.presentation.QVTTemplateEditorID"
+            name="%_UI_QVTTemplateEditor_label"
+            icon="icons/full/obj16/QVTTemplateModelFile.gif"
+            class="org.eclipse.qvt.declarative.ecore.QVTTemplate.presentation.QVTTemplateEditor"
+            contributorClass="org.eclipse.qvt.declarative.ecore.QVTTemplate.presentation.QVTTemplateActionBarContributor">
+         <contentTypeBinding contentTypeId="org.eclipse.qvt.declarative.ecore.qvttemplate"/>
+      </editor>
+   </extension>
+
+</plugin>

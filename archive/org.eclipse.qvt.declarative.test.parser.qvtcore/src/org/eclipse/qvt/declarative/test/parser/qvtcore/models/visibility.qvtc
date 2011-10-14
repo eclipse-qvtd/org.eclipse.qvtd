@@ -1,0 +1,22 @@
+transformation umlRdbms {
+ middle imports tuml2rdbms;
+ uml imports umlMM;
+ rdbms imports rdbmsMM;
+}
+
+map ClassToTable0 in umlRdbms {
+ check enforce uml (error:Schema, error2:TPackageToSchema) {}
+ check enforce rdbms (error4:Class){}
+ where middle () {}
+}
+
+map ClassToTable1 in umlRdbms {
+ check enforce rdbms (error4:Class){}
+ check enforce uml (error:Schema, error2:TPackageToSchema) {}
+ where middle () {}
+}
+
+map ClassToTable2 in umlRdbms {
+ check enforce rdbms (error4:Class){}
+ where middle () {}
+}

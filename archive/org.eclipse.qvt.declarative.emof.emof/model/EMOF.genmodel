@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvt.declarative.emof.emof/src"
+    editDirectory="/org.eclipse.qvt.declarative.emof.emof.edit/src" editorDirectory="/org.eclipse.qvt.declarative.emof.emof.editor/src"
+    modelPluginID="org.eclipse.qvt.declarative.emof.emof" modelName="EMOF" editPluginClass="org.eclipse.qvt.declarative.emof.EMOF.provider.EMOFEditPlugin"
+    editorPluginClass="org.eclipse.qvt.declarative.emof.EMOF.presentation.EMOFEditorPlugin"
+    testSuiteClass="org.eclipse.qvt.declarative.emof.EMOF.tests.EMOFAllTests" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.qvt.declarative.emof.emof.edit"
+    editorPluginID="org.eclipse.qvt.declarative.emof.emof.editor" testsPluginID="org.eclipse.qvt.declarative.emof.EMOF.tests">
+  <foreignModel>EMOF.ecore</foreignModel>
+  <genPackages prefix="EMOF" basePackage="org.eclipse.qvt.declarative.emof" disposableProviderFactory="true"
+      contentTypeIdentifier="org.eclipse.qvt.declarative.emof.emof" ecorePackage="EMOF.ecore#EMOF">
+    <genDataTypes ecoreDataType="EMOF.ecore#PrimitiveTypes.Boolean"/>
+    <genDataTypes ecoreDataType="EMOF.ecore#PrimitiveTypes.Integer"/>
+    <genDataTypes ecoreDataType="EMOF.ecore#PrimitiveTypes.Real"/>
+    <genDataTypes ecoreDataType="EMOF.ecore#PrimitiveTypes.String"/>
+    <genDataTypes ecoreDataType="EMOF.ecore#PrimitiveTypes.UnlimitedNatural"/>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.Class">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EMOF.ecore#EMOF.Class.isAbstract"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Class.ownedAttribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Class.ownedOperation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Class.superClass"/>
+    </genClasses>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.Comment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Comment.annotatedElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EMOF.ecore#EMOF.Comment.body"/>
+    </genClasses>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.DataType"/>
+    <genClasses image="false" ecoreClass="EMOF.ecore#EMOF.Element">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Element.ownedComment"/>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.Element.container"/>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.Element.equals">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.Element.equals.object"/>
+      </genOperations>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.Element.get">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.Element.get.property"/>
+      </genOperations>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.Element.getMetaClass"/>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.Element.isSet">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.Element.isSet.property"/>
+      </genOperations>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.Element.set">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.Element.set.property"/>
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.Element.set.object"/>
+      </genOperations>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.Element.unset">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.Element.unset.property"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.Enumeration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Enumeration.ownedLiteral"/>
+    </genClasses>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.EnumerationLiteral">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.EnumerationLiteral.enumeration"/>
+    </genClasses>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.Extent">
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.Extent.elements"/>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.Extent.useContainment"/>
+    </genClasses>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.Factory">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Factory.package"/>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.Factory.convertToString">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.Factory.convertToString.dataType"/>
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.Factory.convertToString.object"/>
+      </genOperations>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.Factory.create">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.Factory.create.metaClass"/>
+      </genOperations>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.Factory.createFromString">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.Factory.createFromString.dataType"/>
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.Factory.createFromString.string"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="EMOF.ecore#EMOF.MultiplicityElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EMOF.ecore#EMOF.MultiplicityElement.isOrdered"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EMOF.ecore#EMOF.MultiplicityElement.isUnique"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EMOF.ecore#EMOF.MultiplicityElement.lower"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EMOF.ecore#EMOF.MultiplicityElement.upper"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="EMOF.ecore#EMOF.NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EMOF.ecore#EMOF.NamedElement.name"/>
+    </genClasses>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.Object"/>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.Operation">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Operation.class"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Operation.ownedParameter"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Operation.raisedException"/>
+    </genClasses>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.Package">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Package.nestedPackage"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Package.ownedType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EMOF.ecore#EMOF.Package.uri"/>
+    </genClasses>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.Parameter">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Parameter.operation"/>
+    </genClasses>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.PrimitiveType"/>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.Property">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Property.class"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EMOF.ecore#EMOF.Property.default"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EMOF.ecore#EMOF.Property.isComposite"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EMOF.ecore#EMOF.Property.isDerived"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EMOF.ecore#EMOF.Property.isID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EMOF.ecore#EMOF.Property.isReadOnly"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Property.opposite"/>
+    </genClasses>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.ReflectiveCollection">
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.ReflectiveCollection.add">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.ReflectiveCollection.add.object"/>
+      </genOperations>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.ReflectiveCollection.addAll">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.ReflectiveCollection.addAll.objects"/>
+      </genOperations>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.ReflectiveCollection.clear"/>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.ReflectiveCollection.remove">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.ReflectiveCollection.remove.object"/>
+      </genOperations>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.ReflectiveCollection.size"/>
+    </genClasses>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.ReflectiveSequence">
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.ReflectiveSequence.add">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.ReflectiveSequence.add.index"/>
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.ReflectiveSequence.add.object"/>
+      </genOperations>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.ReflectiveSequence.get">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.ReflectiveSequence.get.index"/>
+      </genOperations>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.ReflectiveSequence.remove">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.ReflectiveSequence.remove.index"/>
+      </genOperations>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.ReflectiveSequence.set">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.ReflectiveSequence.set.index"/>
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.ReflectiveSequence.set.object"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.Tag">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Tag.element"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EMOF.ecore#EMOF.Tag.name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EMOF.ecore#EMOF.Tag.value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="EMOF.ecore#EMOF.Type">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.Type.package"/>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.Type.isInstance">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.Type.isInstance.object"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="EMOF.ecore#EMOF.TypedElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EMOF.ecore#EMOF.TypedElement.type"/>
+    </genClasses>
+    <genClasses ecoreClass="EMOF.ecore#EMOF.URIExtent">
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.URIExtent.contextURI"/>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.URIExtent.element">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.URIExtent.element.uri"/>
+      </genOperations>
+      <genOperations ecoreOperation="EMOF.ecore#EMOF.URIExtent.uri">
+        <genParameters ecoreParameter="EMOF.ecore#EMOF.URIExtent.uri.element"/>
+      </genOperations>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

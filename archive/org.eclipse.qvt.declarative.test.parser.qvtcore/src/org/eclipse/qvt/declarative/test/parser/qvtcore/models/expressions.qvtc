@@ -1,0 +1,25 @@
+transformation umlRdbms {
+        middle imports tuml2rdbms;
+        uml imports umlMM;
+}
+
+map ClassToTable in umlRdbms
+{
+        check uml () {
+                c:Class,a:Attribute | 
+                c.attribute -> exists (a1 : Attribute | a1.name <> null);
+                c.attribute -> forAll (a2 : Attribute | a2.name <> null);
+                c.attribute -> select (a3: Attribute  | a3.name <> null) <> null;
+                c.attribute -> reject (a4: Attribute  | a4.name <> null) <> null;
+                c.attribute -> collect (a1: Attribute | a1.name <> null) <> null;       
+			    c.attribute -> iterate (a6: Attribute; acc:Attribute = null | a6) <> null;
+                a1.name <> null;
+                a4.name <> null;
+                let q:Class = null in q <> null;
+                q <> null;
+                
+				c.attribute := Set{a};													--** added Set{}
+                
+		}
+        where () {}
+}

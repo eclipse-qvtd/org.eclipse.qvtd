@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="ASCII"?>
+<eqvtr:RelationalTransformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtb="http://www.eclipse.org/qvt/1.0/QVTBase" xmlns:eqvtr="http://www.eclipse.org/qvt/1.0/QVTRelation" xmlns:eqvtt="http://www.eclipse.org/qvt/1.0/QVTTemplate" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore" xmi:id="ast1" name="HstmToStm" nsURI="http://models/hstmtostm.qvtr/HstmToStm" nsPrefix="HstmToStm">
+  <eOperations xsi:type="eqvtb:Function" xmi:id="ast2" name="StateContainsState">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+    <eParameters xsi:type="eqvtb:FunctionParameter" xmi:id="ast3" name="cState">
+      <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+    </eParameters>
+    <eParameters xsi:type="eqvtb:FunctionParameter" xmi:id="ast4" name="mState">
+      <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+    </eParameters>
+    <queryExpression xsi:type="ocl.ecore:IfExp" xmi:id="ast5">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+      <condition xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast6">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+        <source xsi:type="ocl.ecore:CollectionLiteralExp" xmi:id="ast7" eType="ast22">
+          <part xsi:type="ocl.ecore:CollectionItem" xmi:id="ast8">
+            <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+            <item xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast9">
+              <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast10" name="mState" referredVariable="ast4">
+                <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="hstmMM.emof#hstmMM_p.State.containedInState"/>
+            </item>
+          </part>
+        </source>
+        <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Set(T)_Class/isEmpty"/>
+      </condition>
+      <thenExpression xsi:type="ocl.ecore:BooleanLiteralExp" xmi:id="ast11" booleanSymbol="false">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+      </thenExpression>
+      <elseExpression xsi:type="ocl.ecore:IfExp" xmi:id="ast12">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+        <condition xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast13">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast14">
+            <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast15" name="mState" referredVariable="ast4">
+              <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="hstmMM.emof#hstmMM_p.State.containedInState"/>
+          </source>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast16" name="cState" referredVariable="ast3">
+            <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+        </condition>
+        <thenExpression xsi:type="ocl.ecore:BooleanLiteralExp" xmi:id="ast17" booleanSymbol="true">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+        </thenExpression>
+        <elseExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast18" name="StateContainsState" referredOperation="ast2">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast19" name="cState" referredVariable="ast3">
+            <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast20">
+            <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast21" name="mState" referredVariable="ast4">
+              <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="hstmMM.emof#hstmMM_p.State.containedInState"/>
+          </argument>
+        </elseExpression>
+      </elseExpression>
+    </queryExpression>
+  </eOperations>
+  <eClassifiers xsi:type="ocl.ecore:SetType" xmi:id="ast22" instanceClassName="java.util.Set">
+    <elementType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ocl.ecore:SetType" xmi:id="ast23" instanceClassName="java.util.Set">
+    <elementType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.Trans"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ocl.ecore:SetType" xmi:id="ast24" instanceClassName="java.util.Set">
+    <elementType xsi:type="ecore:EClass" href="stmMM.emof#stmMM_p.Trans"/>
+  </eClassifiers>
+  <modelParameter xmi:id="ast25" name="hstm">
+    <usedPackage href="hstmMM.emof#hstmMM_p"/>
+  </modelParameter>
+  <modelParameter xmi:id="ast26" name="stm">
+    <usedPackage href="stmMM.emof#stmMM_p"/>
+  </modelParameter>
+  <rule xsi:type="eqvtr:Relation" xmi:id="ast27" name="LStateToState" isTopLevel="true">
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast28" name="hstm" isCheckable="true" isEnforceable="false" typedModel="ast25" rootVariable="ast41">
+      <pattern xmi:id="ast29" bindsTo="ast41 ast43">
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast30" name="s1" bindsTo="ast41">
+          <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+          <where xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast31">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast32" eType="ast22">
+              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast33" name="s1" referredVariable="ast41">
+                <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="hstmMM.emof#hstmMM_p.State.containsState"/>
+            </source>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Set(T)_Class/isEmpty"/>
+          </where>
+          <part xmi:id="ast34">
+            <referredProperty xsi:type="ecore:EAttribute" href="hstmMM.emof#hstmMM_p.State.name"/>
+            <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast35" name="n" referredVariable="ast43">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <referredClass href="hstmMM.emof#hstmMM_p.State"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast36" name="stm" isCheckable="false" isEnforceable="true" typedModel="ast26" rootVariable="ast42">
+      <pattern xmi:id="ast37" bindsTo="ast42 ast43">
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast38" name="s2" bindsTo="ast42">
+          <eType xsi:type="ecore:EClass" href="stmMM.emof#stmMM_p.State"/>
+          <part xmi:id="ast39">
+            <referredProperty xsi:type="ecore:EAttribute" href="stmMM.emof#stmMM_p.State.name"/>
+            <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast40" name="n" referredVariable="ast43">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </value>
+          </part>
+          <referredClass href="stmMM.emof#stmMM_p.State"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <variable xmi:id="ast41" name="s1">
+      <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+    </variable>
+    <variable xmi:id="ast42" name="s2">
+      <eType xsi:type="ecore:EClass" href="stmMM.emof#stmMM_p.State"/>
+    </variable>
+    <variable xmi:id="ast43" name="n">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+  </rule>
+  <rule xsi:type="eqvtr:Relation" xmi:id="ast44" name="CStateToState" isTopLevel="true">
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast45" name="hstm" isCheckable="true" isEnforceable="false" typedModel="ast25" rootVariable="ast63">
+      <pattern xmi:id="ast46" bindsTo="ast63 ast70 ast65 ast68">
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast47" name="fs1" bindsTo="ast63">
+          <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+          <part xmi:id="ast48">
+            <referredProperty xsi:type="ecore:EReference" href="hstmMM.emof#hstmMM_p.State.outTrans"/>
+            <value xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast49" name="t1" bindsTo="ast70">
+              <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.Trans"/>
+              <part xmi:id="ast50">
+                <referredProperty xsi:type="ecore:EAttribute" href="hstmMM.emof#hstmMM_p.Trans.name"/>
+                <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast51" name="tn" referredVariable="ast65">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <part xmi:id="ast52">
+                <referredProperty xsi:type="ecore:EReference" href="hstmMM.emof#hstmMM_p.Trans.toState"/>
+                <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast53" name="ts1" referredVariable="ast68">
+                  <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+                </value>
+              </part>
+              <referredClass href="hstmMM.emof#hstmMM_p.Trans"/>
+            </value>
+          </part>
+          <referredClass href="hstmMM.emof#hstmMM_p.State"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <domain xsi:type="eqvtr:RelationDomain" xmi:id="ast54" name="stm" isCheckable="false" isEnforceable="true" typedModel="ast26" rootVariable="ast64">
+      <pattern xmi:id="ast55" bindsTo="ast64 ast71 ast65 ast69">
+        <templateExpression xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast56" name="fs2" bindsTo="ast64">
+          <eType xsi:type="ecore:EClass" href="stmMM.emof#stmMM_p.State"/>
+          <part xmi:id="ast57">
+            <referredProperty xsi:type="ecore:EReference" href="stmMM.emof#stmMM_p.State.outTrans"/>
+            <value xsi:type="eqvtt:ObjectTemplateExp" xmi:id="ast58" name="t2" bindsTo="ast71">
+              <eType xsi:type="ecore:EClass" href="stmMM.emof#stmMM_p.Trans"/>
+              <part xmi:id="ast59">
+                <referredProperty xsi:type="ecore:EAttribute" href="stmMM.emof#stmMM_p.Trans.name"/>
+                <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast60" name="tn" referredVariable="ast65">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </value>
+              </part>
+              <part xmi:id="ast61">
+                <referredProperty xsi:type="ecore:EReference" href="stmMM.emof#stmMM_p.Trans.toState"/>
+                <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast62" name="ts2" referredVariable="ast69">
+                  <eType xsi:type="ecore:EClass" href="stmMM.emof#stmMM_p.State"/>
+                </value>
+              </part>
+              <referredClass href="stmMM.emof#stmMM_p.Trans"/>
+            </value>
+          </part>
+          <referredClass href="stmMM.emof#stmMM_p.State"/>
+        </templateExpression>
+      </pattern>
+    </domain>
+    <variable xmi:id="ast63" name="fs1">
+      <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+    </variable>
+    <variable xmi:id="ast64" name="fs2">
+      <eType xsi:type="ecore:EClass" href="stmMM.emof#stmMM_p.State"/>
+    </variable>
+    <variable xmi:id="ast65" name="tn">
+      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </variable>
+    <variable xmi:id="ast66" name="ms1">
+      <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+    </variable>
+    <variable xmi:id="ast67" name="ms2">
+      <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+    </variable>
+    <variable xmi:id="ast68" name="ts1">
+      <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+    </variable>
+    <variable xmi:id="ast69" name="ts2">
+      <eType xsi:type="ecore:EClass" href="stmMM.emof#stmMM_p.State"/>
+    </variable>
+    <variable xmi:id="ast70" name="t1">
+      <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.Trans"/>
+    </variable>
+    <variable xmi:id="ast71" name="t2">
+      <eType xsi:type="ecore:EClass" href="stmMM.emof#stmMM_p.Trans"/>
+    </variable>
+    <when xmi:id="ast72" bindsTo="ast66 ast64 ast63 ast67 ast69 ast68">
+      <predicate xmi:id="ast73">
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast74" referredRelation="ast27">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast75" name="ms1" referredVariable="ast66">
+            <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast76" name="fs2" referredVariable="ast64">
+            <eType xsi:type="ecore:EClass" href="stmMM.emof#stmMM_p.State"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+      <predicate xmi:id="ast77">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast78">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast79">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast80" name="ms1" referredVariable="ast66">
+              <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+            </source>
+            <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast81" name="fs1" referredVariable="ast63">
+              <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </source>
+          <argument xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast82" name="StateContainsState" referredOperation="ast2">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast83" name="fs1" referredVariable="ast63">
+              <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+            </argument>
+            <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast84" name="ms1" referredVariable="ast66">
+              <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+            </argument>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/or"/>
+        </conditionExpression>
+      </predicate>
+      <predicate xmi:id="ast85">
+        <conditionExpression xsi:type="eqvtr:RelationCallExp" xmi:id="ast86" referredRelation="ast27">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast87" name="ms2" referredVariable="ast67">
+            <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast88" name="ts2" referredVariable="ast69">
+            <eType xsi:type="ecore:EClass" href="stmMM.emof#stmMM_p.State"/>
+          </argument>
+        </conditionExpression>
+      </predicate>
+      <predicate xmi:id="ast89">
+        <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast90">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast91">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast92" name="ms2" referredVariable="ast67">
+              <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+            </source>
+            <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast93" name="ts1" referredVariable="ast68">
+              <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </source>
+          <argument xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast94" name="StateContainsState" referredOperation="ast2">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast95" name="ts1" referredVariable="ast68">
+              <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+            </argument>
+            <argument xsi:type="ocl.ecore:VariableExp" xmi:id="ast96" name="ms2" referredVariable="ast67">
+              <eType xsi:type="ecore:EClass" href="hstmMM.emof#hstmMM_p.State"/>
+            </argument>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/or"/>
+        </conditionExpression>
+      </predicate>
+    </when>
+  </rule>
+  <ownedKey xmi:id="ast97">
+    <identifies href="hstmMM.emof#hstmMM_p.State"/>
+    <part xsi:type="ecore:EAttribute" href="hstmMM.emof#hstmMM_p.State.name"/>
+  </ownedKey>
+  <ownedKey xmi:id="ast98">
+    <identifies href="hstmMM.emof#hstmMM_p.Trans"/>
+    <part xsi:type="ecore:EAttribute" href="hstmMM.emof#hstmMM_p.Trans.name"/>
+    <part xsi:type="ecore:EReference" href="hstmMM.emof#hstmMM_p.Trans.fromState"/>
+    <part xsi:type="ecore:EReference" href="hstmMM.emof#hstmMM_p.Trans.toState"/>
+  </ownedKey>
+  <ownedKey xmi:id="ast99">
+    <identifies href="stmMM.emof#stmMM_p.State"/>
+    <part xsi:type="ecore:EAttribute" href="stmMM.emof#stmMM_p.State.name"/>
+  </ownedKey>
+  <ownedKey xmi:id="ast100">
+    <identifies href="stmMM.emof#stmMM_p.Trans"/>
+    <part xsi:type="ecore:EAttribute" href="stmMM.emof#stmMM_p.Trans.name"/>
+    <part xsi:type="ecore:EReference" href="stmMM.emof#stmMM_p.Trans.fromState"/>
+    <part xsi:type="ecore:EReference" href="stmMM.emof#stmMM_p.Trans.toState"/>
+  </ownedKey>
+</eqvtr:RelationalTransformation>

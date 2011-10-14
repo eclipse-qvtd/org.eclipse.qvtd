@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emof:Package xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/mof/2.0/emof.xmi" xmi:id="ecore"
+    name="ecore" uri="http://www.eclipse.org/emf/2002/Ecore">
+  <ownedType xmi:type="emof:Class" xmi:id="ecore.EObject" name="EObject">
+    <ownedOperation xmi:id="ecore.EObject.eContents" name="eContents" isOrdered="true" lower="0">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eGenericType xmi:id="ecore.EObject.eContents.@eGenericType" eClassifier="ecore.EEList">
+        <eTypeArguments xmi:id="ecore.EObject.eContents.@eGenericType.@eTypeArguments.0"
+            eClassifier="ecore.EObject"/>
+      </eGenericType>
+    </xmi:Extension>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="ecore.EEList" name="EEList">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <eTypeParameters xmi:id="ecore.EEList.E" name="E"/>
+      <instanceTypeName>org.eclipse.emf.common.util.EList</instanceTypeName>
+      <serializable>false</serializable>
+    </xmi:Extension>
+  </ownedType>
+  <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <nsPrefix>ecore</nsPrefix>
+  </xmi:Extension>
+</emof:Package>

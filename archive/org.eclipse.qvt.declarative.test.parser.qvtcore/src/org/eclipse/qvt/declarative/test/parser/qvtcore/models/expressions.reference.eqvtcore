@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="ASCII"?>
+<eqvtb:Transformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtb="http://www.eclipse.org/qvt/1.0/QVTBase" xmlns:eqvtc="http://www.eclipse.org/qvt/1.0/QVTCore" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore" xmi:id="ast1" name="umlRdbms" nsURI="http://models/expressions.qvtc/umlRdbms" nsPrefix="umlRdbms">
+  <eClassifiers xsi:type="ocl.ecore:SetType" xmi:id="ast2" instanceClassName="java.util.Set">
+    <elementType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ocl.ecore:BagType" xmi:id="ast3" instanceClassName="org.eclipse.ocl.util.Bag">
+    <elementType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+  </eClassifiers>
+  <modelParameter xmi:id="ast4" name="middle">
+    <usedPackage href="TumlRdbms.ecore#/"/>
+  </modelParameter>
+  <modelParameter xmi:id="ast5" name="uml">
+    <usedPackage href="umlMM.emof#umlMM"/>
+  </modelParameter>
+  <rule xsi:type="eqvtc:Mapping" xmi:id="ast6" name="ClassToTable">
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast7" name="uml" isCheckable="true" isEnforceable="false" typedModel="ast5">
+      <guardPattern xmi:id="ast8"/>
+      <bottomPattern xmi:id="ast9" bindsTo="ast90 ast91">
+        <predicate xmi:id="ast10">
+          <conditionExpression xsi:type="ocl.ecore:IteratorExp" xmi:id="ast11" name="exists">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast12" eType="ast2">
+              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast13" name="c" referredVariable="ast90">
+                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="umlMM.emof#umlMM.Class.attribute"/>
+            </source>
+            <body xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast14">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast15">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast16" name="a1" referredVariable="ast18">
+                  <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="umlMM.emof#umlMM.Attribute.name"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast17">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/%3C%3E"/>
+            </body>
+            <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast18" name="a1">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+            </iterator>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast19">
+          <conditionExpression xsi:type="ocl.ecore:IteratorExp" xmi:id="ast20" name="forAll">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast21" eType="ast2">
+              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast22" name="c" referredVariable="ast90">
+                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="umlMM.emof#umlMM.Class.attribute"/>
+            </source>
+            <body xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast23">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast24">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast25" name="a2" referredVariable="ast27">
+                  <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="umlMM.emof#umlMM.Attribute.name"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast26">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/%3C%3E"/>
+            </body>
+            <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast27" name="a2">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+            </iterator>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast28">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast29">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:IteratorExp" xmi:id="ast30" name="select" eType="ast2">
+              <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast31" eType="ast2">
+                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast32" name="c" referredVariable="ast90">
+                  <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="umlMM.emof#umlMM.Class.attribute"/>
+              </source>
+              <body xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast33">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast34">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast35" name="a3" referredVariable="ast37">
+                    <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+                  </source>
+                  <referredProperty xsi:type="ecore:EAttribute" href="umlMM.emof#umlMM.Attribute.name"/>
+                </source>
+                <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast36">
+                  <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/%3C%3E"/>
+              </body>
+              <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast37" name="a3">
+                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+              </iterator>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast38">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Set(T)_Class/%3C%3E"/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast39">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast40">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:IteratorExp" xmi:id="ast41" name="reject" eType="ast2">
+              <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast42" eType="ast2">
+                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast43" name="c" referredVariable="ast90">
+                  <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="umlMM.emof#umlMM.Class.attribute"/>
+              </source>
+              <body xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast44">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast45">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast46" name="a4" referredVariable="ast48">
+                    <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+                  </source>
+                  <referredProperty xsi:type="ecore:EAttribute" href="umlMM.emof#umlMM.Attribute.name"/>
+                </source>
+                <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast47">
+                  <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/%3C%3E"/>
+              </body>
+              <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast48" name="a4">
+                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+              </iterator>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast49">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Set(T)_Class/%3C%3E"/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast50">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast51">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:IteratorExp" xmi:id="ast52" name="collect" eType="ast3">
+              <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast53" eType="ast2">
+                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast54" name="c" referredVariable="ast90">
+                  <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="umlMM.emof#umlMM.Class.attribute"/>
+              </source>
+              <body xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast55">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast56">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast57" name="a1" referredVariable="ast59">
+                    <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+                  </source>
+                  <referredProperty xsi:type="ecore:EAttribute" href="umlMM.emof#umlMM.Attribute.name"/>
+                </source>
+                <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast58">
+                  <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/%3C%3E"/>
+              </body>
+              <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast59" name="a1">
+                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+              </iterator>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast60">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Bag(T)_Class/%3C%3E"/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast61">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast62">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:IterateExp" xmi:id="ast63" name="iterate">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp" xmi:id="ast64" eType="ast2">
+                <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast65" name="c" referredVariable="ast90">
+                  <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="umlMM.emof#umlMM.Class.attribute"/>
+              </source>
+              <body xsi:type="ocl.ecore:VariableExp" xmi:id="ast66" name="a6" referredVariable="ast67">
+                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+              </body>
+              <iterator xsi:type="ocl.ecore:Variable" xmi:id="ast67" name="a6">
+                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+              </iterator>
+              <result xsi:type="ocl.ecore:Variable" xmi:id="ast68" name="acc">
+                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+                <initExpression xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast69">
+                  <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+                </initExpression>
+              </result>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast70">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/%3C%3E"/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast71">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast72">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast73">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclInvalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast74">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclInvalid_Class/%3C%3E"/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast75">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast76">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast77">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclInvalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast78">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclInvalid_Class/%3C%3E"/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast79">
+          <conditionExpression xsi:type="ocl.ecore:LetExp" xmi:id="ast80">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <in xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast81">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:VariableExp" xmi:id="ast82" name="q" referredVariable="ast84">
+                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+              </source>
+              <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast83">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/%3C%3E"/>
+            </in>
+            <variable xsi:type="ocl.ecore:Variable" xmi:id="ast84" name="q">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+              <initExpression xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast85">
+                <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+              </initExpression>
+            </variable>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="ast86">
+          <conditionExpression xsi:type="ocl.ecore:OperationCallExp" xmi:id="ast87">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:InvalidLiteralExp" xmi:id="ast88">
+              <eType xsi:type="ocl.ecore:InvalidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclInvalid"/>
+            </source>
+            <argument xsi:type="ocl.ecore:NullLiteralExp" xmi:id="ast89">
+              <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclInvalid_Class/%3C%3E"/>
+          </conditionExpression>
+        </predicate>
+        <variable xmi:id="ast90" name="c">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+        <variable xmi:id="ast91" name="a">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+        </variable>
+        <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast92" isDefault="false">
+          <value xsi:type="ocl.ecore:CollectionLiteralExp" xmi:id="ast93" eType="ast2">
+            <part xsi:type="ocl.ecore:CollectionItem" xmi:id="ast94">
+              <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+              <item xsi:type="ocl.ecore:VariableExp" xmi:id="ast95" name="a" referredVariable="ast91">
+                <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Attribute"/>
+              </item>
+            </part>
+          </value>
+          <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast96" name="c" referredVariable="ast90">
+            <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+          </slotExpression>
+          <targetProperty xsi:type="ecore:EReference" href="umlMM.emof#umlMM.Class.attribute"/>
+        </assignment>
+      </bottomPattern>
+    </domain>
+    <guardPattern xmi:id="ast97"/>
+    <bottomPattern xmi:id="ast98" bindsTo="ast90 ast91"/>
+  </rule>
+</eqvtb:Transformation>

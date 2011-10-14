@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.3 2009/11/19 10:23:20 ewillink Exp $
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package uri="http://schema.omg.org/spec/QVT/1.1/qvttemplate.xml"
+            class="org.eclipse.qvt.declarative.emof.QVTTemplate.QVTTemplatePackage"
+            genModel="model/QVTTemplate.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.content_parser">
+     <parser contentTypeIdentifier="org.eclipse.qvt.declarative.emof.qvttemplate"
+           class="org.eclipse.qvt.declarative.emof.QVTTemplate.util.QVTTemplateResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+     <content-type id="org.eclipse.qvt.declarative.emof.qvttemplate"
+           base-type="org.eclipse.emf.emof"
+           file-extensions="qvttemplate,xmi,xml"          
+           name="%_UI_QVTTemplate_content_type"
+           priority="normal">
+        <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+           <parameter name="namespace" value="http://schema.omg.org/spec/QVT/1.1/qvttemplate.xml"/>
+           <parameter name="kind" value="xmi"/>
+        </describer>
+     </content-type>
+   </extension>
+
+</plugin>

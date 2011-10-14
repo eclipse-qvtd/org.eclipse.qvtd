@@ -1,0 +1,19 @@
+transformation MyTx(
+	left:SeqMM,
+	right:SeqMM)
+{
+
+	relation MyRelation {
+		c: Message;
+		checkonly domain left r : Message {
+		};
+		enforce domain right m : Message {
+		};
+		when {
+                c.event -> exists (a1 : MessageEvent | a1.type <> null);
+                let q:Message = null in q <> null;
+                q <> null;
+                a1 <> null;
+		}
+	}
+}

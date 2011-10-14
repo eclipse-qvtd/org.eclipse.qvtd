@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ASCII"?>
+<eqvtb:Transformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eqvtb="http://www.eclipse.org/qvt/1.0/QVTBase" xmlns:eqvtc="http://www.eclipse.org/qvt/1.0/QVTCore" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore" xmi:id="ast1" name="umlRdbms" nsURI="http://models/type_check.qvtc/umlRdbms" nsPrefix="umlRdbms">
+  <eClassifiers xsi:type="ocl.ecore:TypeType" xmi:id="ast2" name="Class">
+    <referredType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ocl.ecore:TypeType" xmi:id="ast3" name="String">
+    <referredType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </eClassifiers>
+  <modelParameter xmi:id="ast4" name="middle">
+    <usedPackage href="TumlRdbms.ecore#/"/>
+  </modelParameter>
+  <modelParameter xmi:id="ast5" name="uml">
+    <usedPackage href="umlMM.emof#umlMM"/>
+  </modelParameter>
+  <modelParameter xmi:id="ast6" name="rdbms">
+    <usedPackage href="rdbmsMM.emof#rdbmsMM"/>
+  </modelParameter>
+  <rule xsi:type="eqvtc:Mapping" xmi:id="ast7" name="Map">
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast8" name="uml" isCheckable="true" isEnforceable="false" typedModel="ast5">
+      <guardPattern xmi:id="ast9" bindsTo="ast10">
+        <variable xmi:id="ast10" name="p">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern xmi:id="ast11" bindsTo="ast12 ast13 ast14 ast10">
+        <variable xmi:id="ast12" name="b">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </variable>
+        <variable xmi:id="ast13" name="c">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+        </variable>
+        <variable xmi:id="ast14" name="cl">
+          <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Classifier"/>
+        </variable>
+        <assignment xsi:type="eqvtc:VariableAssignment" xmi:id="ast15" isDefault="false" targetVariable="ast12">
+          <value xsi:type="ocl.ecore:TypeExp" xmi:id="ast16" eType="ast2">
+            <referredType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+          </value>
+        </assignment>
+        <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast17" isDefault="false">
+          <value xsi:type="ocl.ecore:TypeExp" xmi:id="ast18" eType="ast3">
+            <referredType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </value>
+          <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast19" name="p" referredVariable="ast10">
+            <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
+          </slotExpression>
+          <targetProperty xsi:type="ecore:EAttribute" href="umlMM.emof#umlMM.Package.name"/>
+        </assignment>
+        <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast20" isDefault="false">
+          <value xsi:type="ocl.ecore:IntegerLiteralExp" xmi:id="ast21" integerSymbol="12">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+          </value>
+          <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast22" name="p" referredVariable="ast10">
+            <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
+          </slotExpression>
+          <targetProperty xsi:type="ecore:EAttribute" href="umlMM.emof#umlMM.Package.name"/>
+        </assignment>
+        <assignment xsi:type="eqvtc:PropertyAssignment" xmi:id="ast23" isDefault="false">
+          <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast24" name="p" referredVariable="ast10">
+            <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
+          </value>
+          <slotExpression xsi:type="ocl.ecore:VariableExp" xmi:id="ast25" name="p" referredVariable="ast10">
+            <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Package"/>
+          </slotExpression>
+          <targetProperty xsi:type="ecore:EAttribute" href="umlMM.emof#umlMM.Package.name"/>
+        </assignment>
+        <assignment xsi:type="eqvtc:VariableAssignment" xmi:id="ast26" isDefault="false" targetVariable="ast13">
+          <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast27" name="cl" referredVariable="ast14">
+            <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Classifier"/>
+          </value>
+        </assignment>
+        <assignment xsi:type="eqvtc:VariableAssignment" xmi:id="ast28" isDefault="false" targetVariable="ast14">
+          <value xsi:type="ocl.ecore:VariableExp" xmi:id="ast29" name="c" referredVariable="ast13">
+            <eType xsi:type="ecore:EClass" href="umlMM.emof#umlMM.Class"/>
+          </value>
+        </assignment>
+      </bottomPattern>
+    </domain>
+    <guardPattern xmi:id="ast30" bindsTo="ast10"/>
+    <bottomPattern xmi:id="ast31" bindsTo="ast10 ast12 ast13 ast14"/>
+  </rule>
+</eqvtb:Transformation>

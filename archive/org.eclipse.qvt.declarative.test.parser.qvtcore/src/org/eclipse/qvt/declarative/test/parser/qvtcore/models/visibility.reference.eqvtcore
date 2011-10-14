@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ASCII"?>
+<eqvtb:Transformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:eqvtb="http://www.eclipse.org/qvt/1.0/QVTBase" xmlns:eqvtc="http://www.eclipse.org/qvt/1.0/QVTCore" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore" xmi:id="ast1" name="umlRdbms" nsURI="http://models/visibility.qvtc/umlRdbms" nsPrefix="umlRdbms">
+  <modelParameter xmi:id="ast2" name="middle">
+    <usedPackage href="TumlRdbms.ecore#/"/>
+  </modelParameter>
+  <modelParameter xmi:id="ast3" name="uml">
+    <usedPackage href="umlMM.emof#umlMM"/>
+  </modelParameter>
+  <modelParameter xmi:id="ast4" name="rdbms">
+    <usedPackage href="rdbmsMM.emof#rdbmsMM"/>
+  </modelParameter>
+  <rule xsi:type="eqvtc:Mapping" xmi:id="ast5" name="ClassToTable0">
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast6" name="uml" isCheckable="true" isEnforceable="true" typedModel="ast3">
+      <guardPattern xmi:id="ast7" bindsTo="ast8 ast9">
+        <variable xmi:id="ast8" name="error">
+          <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+        </variable>
+        <variable xmi:id="ast9" name="error2">
+          <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern xmi:id="ast10" bindsTo="ast8 ast9"/>
+    </domain>
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast11" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast4">
+      <guardPattern xmi:id="ast12" bindsTo="ast13">
+        <variable xmi:id="ast13" name="error4">
+          <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern xmi:id="ast14" bindsTo="ast13"/>
+    </domain>
+    <guardPattern xmi:id="ast15" bindsTo="ast8 ast9 ast13"/>
+    <bottomPattern xmi:id="ast16" bindsTo="ast8 ast9 ast13"/>
+  </rule>
+  <rule xsi:type="eqvtc:Mapping" xmi:id="ast17" name="ClassToTable1">
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast18" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast4">
+      <guardPattern xmi:id="ast19" bindsTo="ast20">
+        <variable xmi:id="ast20" name="error4">
+          <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern xmi:id="ast21" bindsTo="ast20"/>
+    </domain>
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast22" name="uml" isCheckable="true" isEnforceable="true" typedModel="ast3">
+      <guardPattern xmi:id="ast23" bindsTo="ast24 ast25">
+        <variable xmi:id="ast24" name="error">
+          <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+        </variable>
+        <variable xmi:id="ast25" name="error2">
+          <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern xmi:id="ast26" bindsTo="ast24 ast25"/>
+    </domain>
+    <guardPattern xmi:id="ast27" bindsTo="ast24 ast25 ast20"/>
+    <bottomPattern xmi:id="ast28" bindsTo="ast24 ast25 ast20"/>
+  </rule>
+  <rule xsi:type="eqvtc:Mapping" xmi:id="ast29" name="ClassToTable2">
+    <domain xsi:type="eqvtc:CoreDomain" xmi:id="ast30" name="rdbms" isCheckable="true" isEnforceable="true" typedModel="ast4">
+      <guardPattern xmi:id="ast31" bindsTo="ast32">
+        <variable xmi:id="ast32" name="error4">
+          <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern xmi:id="ast33" bindsTo="ast32"/>
+    </domain>
+    <guardPattern xmi:id="ast34" bindsTo="ast32"/>
+    <bottomPattern xmi:id="ast35" bindsTo="ast32"/>
+  </rule>
+</eqvtb:Transformation>

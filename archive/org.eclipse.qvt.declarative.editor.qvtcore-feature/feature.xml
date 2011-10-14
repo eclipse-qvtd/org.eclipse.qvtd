@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.qvt.declarative.editor.qvtcore"
+      label="%featureName"
+      version="0.8.0.qualifier"
+      provider-name="%providerName">
+
+   <description>
+      %description
+   </description>
+
+   <copyright url="http://www.eclipse.org/legal/epl-v10.html">
+      Copyright (c) 2007-2009 Eclipse Modeling Project and others.
+All rights reserved.   This program and the accompanying materials
+are made available under the terms of the Eclipse Public License
+v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <discovery label="%EMFUpdateSiteName" url="http://download.eclipse.org/modeling/emf/updates/"/>
+      <discovery label="%EMFTUpdateSiteName" url="http://download.eclipse.org/modeling/emft/updates/"/>
+      <discovery label="%MDTUpdateSiteName" url="http://download.eclipse.org/modeling/mdt/updates/"/>
+      <discovery label="%M2MUpdateSiteName" url="http://download.eclipse.org/modeling/m2m/updates/"/>
+   </url>
+
+   <includes
+         id="org.eclipse.qvt.declarative.ecore.qvtcore"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.qvt.declarative.editor.qvtbase"
+         version="0.0.0"/>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.qvt.declarative.ecore.qvtcore.edit"/>
+      <import plugin="org.eclipse.qvt.declarative.editor.ocl.ui"/>
+      <import plugin="org.eclipse.qvt.declarative.emof.qvtcore"/>
+      <import plugin="org.eclipse.qvt.declarative.parser"/>
+      <import plugin="org.eclipse.qvt.declarative.ecore.qvtcore"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.ecore.qvtcore.editor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.editor.qvtcore.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvt.declarative.parser.qvtcore"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="useless_extension" name="useless_extension" schema="schema/useless_extension.exsd"/>
+   <extension
+         point="org.eclipse.qvt.declarative.test.common.useless_extension">
+      <dummy_provider
+            class="org.eclipse.qvt.declarative.test.common.mock.DummyProvider"
+            priority="normal">
+      </dummy_provider>
+   </extension>
+
+</plugin>

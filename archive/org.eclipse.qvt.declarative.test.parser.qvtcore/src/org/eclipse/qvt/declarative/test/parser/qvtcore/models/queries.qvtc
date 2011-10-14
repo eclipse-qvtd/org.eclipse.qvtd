@@ -1,0 +1,19 @@
+query A::tx1::q1(x:String) : String { null }
+
+query B::A::tx2::q2(x:String) : String { null }
+
+transformation A::tx1 {}
+
+transformation B::A::tx2 {}
+
+transformation tx0 {}
+
+query tx0::q0(x:String) : String { null }
+query tx0::q0(x:String) : String { null }
+query B::A::z(x:String) : String { null }
+
+query q9(x:String) : String { null }
+
+query tx9::q9(x:String) : String { null }
+
+query A::tx9::q9(x:String) : String { null }

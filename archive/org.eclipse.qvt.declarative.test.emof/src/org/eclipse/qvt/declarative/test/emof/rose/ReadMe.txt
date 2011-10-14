@@ -1,0 +1,1 @@
+These files are copied from the generated org.eclipse.qvt/model/traditionalEcore folder for verification by the JUnit tests.

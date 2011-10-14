@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+	<provider id="org.eclipse.team.cvs.core.cvsnature">
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.mdt/org.eclipse.ocl/plugins/org.eclipse.ocl,org.eclipse.ocl,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.mdt/org.eclipse.ocl/plugins/org.eclipse.ocl.ecore,org.eclipse.ocl.ecore,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.mdt/org.eclipse.ocl/plugins/org.eclipse.ocl.uml,org.eclipse.ocl.uml,"/>
+
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt,org.eclipse.qvt,"/>
+
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore,org.eclipse.qvt.declarative.ecore,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.ecore.qvtbase,org.eclipse.qvt.declarative.ecore.qvtbase,"/>
+
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.imp.runtime,org.eclipse.imp.runtime,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.model,org.eclipse.qvt.declarative.editor.model,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.model.edit,org.eclipse.qvt.declarative.editor.model.edit,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.model.editor,org.eclipse.qvt.declarative.editor.model.editor,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.ocl.ui,org.eclipse.qvt.declarative.editor.ocl.ui,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.editor.ui,org.eclipse.qvt.declarative.editor.ui,"/>
+
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.emof.emof,org.eclipse.qvt.declarative.emof.emof,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.emof.essentialocl,org.eclipse.qvt.declarative.emof.essentialocl,"/>
+
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.examples,org.eclipse.qvt.declarative.examples,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.ocl.empty,org.eclipse.qvt.declarative.examples.ocl.empty,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/examples/org.eclipse.qvt.declarative.examples.ocl.royalandloyal,org.eclipse.qvt.declarative.examples.ocl.royalandloyal,"/>
+
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.modelregistry,org.eclipse.qvt.declarative.modelregistry,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.modelregistry.edit,org.eclipse.qvt.declarative.modelregistry.edit,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.modelregistry.editor,org.eclipse.qvt.declarative.modelregistry.editor,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.modelregistry.ui,org.eclipse.qvt.declarative.modelregistry.ui,"/>
+
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser,org.eclipse.qvt.declarative.parser,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.ocl,org.eclipse.qvt.declarative.parser.ocl,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.ui,org.eclipse.qvt.declarative.parser.ui,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.qvt.declarative.parser.unresolved,org.eclipse.qvt.declarative.parser.unresolved,"/>
+
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.ocl.ecore.edit,org.eclipse.ocl.ecore.edit,"/>
+		<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2m/org.eclipse.qvt.declarative/plugins/org.eclipse.ocl.edit,org.eclipse.ocl.edit,"/>
+
+		<project reference="1.0,:pserver:lpg.cvs.sourceforge.net:/cvsroot/lpg,lpg.runtime.java,lpg.runtime.java,"/>
+	</provider>
+</psf>

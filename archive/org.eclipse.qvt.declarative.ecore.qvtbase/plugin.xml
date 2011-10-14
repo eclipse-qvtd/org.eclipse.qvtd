@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.4 2008/10/30 06:08:27 ewillink Exp $
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package uri="http://www.eclipse.org/qvt/1.0/QVTBase"
+            class="org.eclipse.qvt.declarative.ecore.QVTBase.QVTBasePackage"
+            genModel="model/QVTBase.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <parser contentTypeIdentifier="org.eclipse.qvt.declarative.ecore.qvtbase"
+            class="org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            base-type="org.eclipse.emf.ecore"
+            file-extensions="eqvtbase"
+            id="org.eclipse.qvt.declarative.ecore.qvtbase"
+            name="%_UI_QVTBase_content_type"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/1.0/QVTBase"/>
+            <parameter name="kind" value="xmi"/>
+         </describer>
+      </content-type>
+   </extension>
+
+</plugin>

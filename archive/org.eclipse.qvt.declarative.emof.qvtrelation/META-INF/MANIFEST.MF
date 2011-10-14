@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.qvt.declarative.emof.qvtrelation;singleton:=true
+Bundle-Version: 0.8.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.qvt.declarative.emof.QVTRelation,
+ org.eclipse.qvt.declarative.emof.QVTRelation.facade,
+ org.eclipse.qvt.declarative.emof.QVTRelation.impl,
+ org.eclipse.qvt.declarative.emof.QVTRelation.util
+Require-Bundle: org.eclipse.qvt.declarative.ecore.qvtrelation,
+ org.eclipse.qvt.declarative.emof.qvtbase;visibility:=reexport,
+ org.eclipse.qvt.declarative.emof.qvttemplate;visibility:=reexport
+Bundle-ActivationPolicy: lazy

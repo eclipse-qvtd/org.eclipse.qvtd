@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ASCII"?>
+<mreg:ModelRegistrySettings xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:mreg="http://www.eclipse.org/gmt/umlx/2007/ModelRegistry">
+  <resource name="expressions.qvtr">
+    <entry accessor="SeqMM" kind="Model Name" uri="SeqMM.xml"/>
+    <entry accessor="StmcMM" kind="Model Name" uri="StmcMM.xml"/>
+  </resource>
+  <resource name="hstmtostm.qvtr">
+    <entry accessor="hstmMM_p" kind="Model Name" uri="hstmMM.emof"/>
+    <entry accessor="stmMM_p" kind="Model Name" uri="stmMM.emof"/>
+  </resource>
+  <resource name="Scoping.qvtr">
+    <entry accessor="ScopeA" kind="Model Name" uri="ScopeA.ecore"/>
+    <entry accessor="ScopeB" kind="Model Name" uri="ScopeB.ecore"/>
+    <entry accessor="ScopeC" kind="Model Name" uri="ScopeC.ecore"/>
+  </resource>
+  <resource name="SeqToStm.qvtr">
+    <entry accessor="SeqMM" kind="Model Name" uri="SeqMM.xml"/>
+    <entry accessor="StmcMM" kind="Model Name" uri="StmcMM.xml"/>
+  </resource>
+  <resource name="SeqToStm.unparsed.qvtr">
+    <entry accessor="SeqMM" kind="Model Name" uri="SeqMM.xml"/>
+    <entry accessor="StmcMM" kind="Model Name" uri="StmcMM.xml"/>
+  </resource>
+  <resource name="Keys.qvtr">
+    <entry accessor="emof" kind="Model Name" uri="EMOF.ecore"/>
+    <entry accessor="qvtrelation" kind="Model Name" uri="QVTRelation.ecore"/>
+  </resource>
+  <resource name="RelToCore.qvtr">
+    <entry accessor="emof" kind="Model Name" uri="QVT.ecore#EMOF"/>
+    <entry accessor="essentialocl" kind="Model Name" uri="QVT.ecore#EssentialOCL"/>
+    <entry accessor="imperativeocl" kind="Model Name" uri="QVT.ecore#ImperativeOCL"/>
+    <entry accessor="qvtbase" kind="Model Name" uri="QVT.ecore#QVTBase"/>
+    <entry accessor="qvtcore" kind="Model Name" uri="QVT.ecore#QVTCore"/>
+    <entry accessor="qvtoperational" kind="Model Name" uri="QVT.ecore#QVTOperational"/>
+    <entry accessor="qvtrelation" kind="Model Name" uri="QVT.ecore#QVTRelation"/>
+    <entry accessor="qvttemplate" kind="Model Name" uri="QVT.ecore#QVTTemplate"/>
+  </resource>
+  <resource name="RelToCoreWithoutErrors.qvtr">
+    <entry accessor="emof" kind="Model Name" uri="QVT.ecore#EMOF"/>
+    <entry accessor="essentialocl" kind="Model Name" uri="QVT.ecore#EssentialOCL"/>
+    <entry accessor="qvtbase" kind="Model Name" uri="QVT.ecore#QVTBase"/>
+    <entry accessor="qvtcore" kind="Model Name" uri="QVT.ecore#QVTCore"/>
+    <entry accessor="qvtrelation" kind="Model Name" uri="QVT.ecore#QVTRelation"/>
+    <entry accessor="qvttemplate" kind="Model Name" uri="QVT.ecore#QVTTemplate"/>
+  </resource>
+  <resource name="RelToCoreWithoutErrors.unparsed.qvtr">
+    <entry accessor="EMOF" kind="Model Name" uri="QVT.ecore#EMOF"/>
+    <entry accessor="EssentialOCL" kind="Model Name" uri="QVT.ecore#EssentialOCL"/>
+    <entry accessor="QVTBase" kind="Model Name" uri="QVT.ecore#QVTBase"/>
+    <entry accessor="QVTCore" kind="Model Name" uri="QVT.ecore#QVTCore"/>
+    <entry accessor="QVTRelation" kind="Model Name" uri="QVT.ecore#QVTRelation"/>
+    <entry accessor="QVTTemplate" kind="Model Name" uri="QVT.ecore#QVTTemplate"/>
+  </resource>
+  <resource name="TrimmedRelToCore.qvtr">
+    <entry accessor="emof" kind="Model Name" uri="QVT.ecore#EMOF"/>
+    <entry accessor="essentialocl" kind="Model Name" uri="QVT.ecore#EssentialOCL"/>
+    <entry accessor="imperativeocl" kind="Model Name" uri="QVT.ecore#ImperativeOCL"/>
+    <entry accessor="qvtbase" kind="Model Name" uri="QVT.ecore#QVTBase"/>
+    <entry accessor="qvtcore" kind="Model Name" uri="QVT.ecore#QVTCore"/>
+    <entry accessor="qvtoperational" kind="Model Name" uri="QVT.ecore#QVTOperational"/>
+    <entry accessor="qvtrelation" kind="Model Name" uri="QVT.ecore#QVTRelation"/>
+    <entry accessor="qvttemplate" kind="Model Name" uri="QVT.ecore#QVTTemplate"/>
+  </resource>
+  <resource name="UmlToRdbms.qvtr">
+    <entry accessor="rdbmsMM" kind="Model Name" uri="rdbmsMM.emof"/>
+    <entry accessor="umlMM" kind="Model Name" uri="umlMM.emof"/>
+  </resource>
+</mreg:ModelRegistrySettings>

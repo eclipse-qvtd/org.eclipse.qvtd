@@ -1,0 +1,37 @@
+transformation umlRdbms {
+ middle imports tuml2rdbms;
+ uml imports umlMM;
+ rdbms imports rdbmsMM;
+}
+
+map Map1 in umlRdbms
+{
+    check enforce uml (p1:Package,p2:Package,p5:Attribute) {
+            realize p1:Package,
+            realize p3:Package,
+            realize p4:Package|              
+    }
+    check enforce rdbms () {}
+    where middle (p6:Association) {}  
+        
+	map {
+	    check enforce uml (p2:Package) {
+	            realize p3:Package|              
+	    }
+		where () {}
+	}
+	map {
+	    check enforce uml () {
+	            realize p4:Package|             
+	    }
+		where (p5:Attribute) {}
+	}
+}
+
+map Map2 in umlRdbms refines Map1
+{
+    check enforce uml (p6:Association) {
+    }
+	where middle (p5:TClassToTable) {
+	}
+}

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         id="org.eclipse.qvt.declarative.editor.ocl.ui.OCLBuilder"
+         name="OCL Project Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true">
+         <run
+               class="org.eclipse.qvt.declarative.editor.ocl.ui.OCLBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         id="org.eclipse.qvt.declarative.editor.ocl.ui.oclProblem"
+         name="OCL Problem"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+   </extension>
+   <extension
+         id="org.eclipse.qvt.declarative.editor.ocl.ui.OCLNature"
+         name="OCL Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.eclipse.qvt.declarative.editor.ocl.ui.OCLNature">
+         </run>
+      </runtime>
+      <builder
+            id="org.eclipse.qvt.declarative.editor.ocl.ui.OCLBuilder">
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IProject"
+            adaptable="true"
+            nameFilter="*"
+            id="org.eclipse.qvt.declarative.editor.ocl.ui.contribution1">
+         <action
+               label="Add OCL Nature"
+               class="org.eclipse.qvt.declarative.editor.ocl.ui.OCLToggleNatureAction"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
+               enablesFor="+"
+               id="org.eclipse.qvt.declarative.editor.ocl.ui.addRemoveNatureAction">
+         </action>
+         <visibility>
+            <not>
+               <objectState
+                     name="projectNature"
+                     value="org.eclipse.qvt.declarative.editor.ocl.ui.OCLNature">
+               </objectState>
+            </not>
+         </visibility>
+      </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IProject"
+            adaptable="true"
+            nameFilter="*"
+            id="org.eclipse.qvt.declarative.editor.ocl.ui.contribution2">
+         <action
+               label="Remove OCL Nature"
+               class="org.eclipse.qvt.declarative.editor.ocl.ui.OCLToggleNatureAction"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
+               enablesFor="+"
+               id="org.eclipse.qvt.declarative.editor.ocl.ui.addRemoveNatureAction">
+         </action>
+         <visibility>
+            <objectState
+                  name="projectNature"
+                  value="org.eclipse.qvt.declarative.editor.ocl.ui.OCLNature">
+            </objectState>
+         </visibility>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.eclipse.qvt.declarative.editor.ocl.ui.OCLEditor"
+            contributorClass="org.eclipse.qvt.declarative.editor.ui.imp.CommonTextEditorActionContributor"
+            default="true"
+            extensions="ocl"
+            icon="icons/OCLModelFile.gif"
+            id="org.eclipse.qvt.declarative.editor.ocl.ui.OCLEditor"
+            name="OCL Editor"/>
+      <editor
+            class="org.eclipse.qvt.declarative.editor.ocl.ui.OCLMultiEditor"
+            contributorClass="org.eclipse.qvt.declarative.editor.ui.actions.PagedActionBarContributor"
+            default="false"
+            extensions="ocl,eocl"
+            icon="icons/OCLModelFile.gif"
+            id="org.eclipse.qvt.declarative.editor.ocl.ui.OCLMultiEditor"
+            name="OCL Multi-View Editor"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            name="OCL Text File"
+            icon="icons/OCLModelFile.gif"
+            category="org.eclipse.qvt.declarative.editor.ui"
+            class="org.eclipse.qvt.declarative.editor.ocl.ui.OCLNewWizard"
+            id="org.eclipse.qvt.declarative.editor.ocl.ui.OCLNewWizard">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.qvt.declarative.editor.ui.pageDefinition">
+      <page
+            pageFactory="org.eclipse.qvt.declarative.editor.ui.text.TextPageFactory"
+            creationFactory="org.eclipse.qvt.declarative.editor.ocl.ui.OCLCreationFactory"
+            name="OCL">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.languageDescription">
+      <language
+            extensions="ocl"
+            description="OCL"
+            language="ocl">
+      </language>
+   </extension>
+   <extension
+         id="org.eclipse.qvt.declarative.editor.ocl.ui.parserWrapper"
+         name="OCL Parser Wrapper"
+         point="org.eclipse.imp.runtime.parser">
+      <parser
+            class="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLParseController"
+            language="ocl">
+      </parser>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.tokenColorer">
+      <tokenColorer
+            class="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLTokenColorer"
+            language="ocl">
+      </tokenColorer>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.foldingUpdater">
+      <foldingUpdater
+            class="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLFoldingUpdater"
+            language="ocl">
+      </foldingUpdater>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.modelTreeBuilder">
+      <treeBuilder
+            class="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLTreeModelBuilder"
+            language="ocl">
+      </treeBuilder>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.labelProvider">
+      <labelProvider
+            class="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLLabelProvider"
+            language="ocl">
+      </labelProvider>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.referenceResolvers">
+      <referenceResolver
+            class="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLReferenceResolver"
+            language="ocl">
+      </referenceResolver>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.documentationProvider">
+      <docProvider
+            class="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLDocumentationProvider"
+            language="ocl">
+      </docProvider>
+   </extension>
+   <extension
+         id="org.eclipse.qvt.declarative.editor.ocl.ui.hoverHelper"
+         name="OCL Hover Helper"
+         point="org.eclipse.imp.runtime.hoverHelper">
+      <hoverHelper
+            class="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLHoverHelper"
+            language="ocl">
+      </hoverHelper>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.contentProposer">
+      <proposer
+            class="org.eclipse.qvt.declarative.editor.ocl.ui.imp.OCLContentProposer"
+            language="ocl">
+      </proposer>
+   </extension>
+   <extension
+         point="org.eclipse.imp.runtime.editorActionContributions">
+      <editorActionContributor
+            class="org.eclipse.qvt.declarative.editor.ui.actions.CommonActionContributor"
+            language="ocl">
+      </editorActionContributor>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package uri="http://www.eclipse.org/qvt/1.0/FullOCL"
+            class="org.eclipse.qvt.declarative.emof.FullOCL.FullOCLPackage"
+            genModel="model/FullOCL.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.content_parser">
+     <parser contentTypeIdentifier="org.eclipse.qvt.declarative.emof.fullocl"
+           class="org.eclipse.qvt.declarative.emof.FullOCL.util.FullOCLResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+    <content-type id="org.eclipse.qvt.declarative.emof.fullocl"
+           base-type="org.eclipse.emf.emof"
+           file-extensions="fullocl,xmi,xml"          
+           name="%_UI_FullOCL_content_type"
+           priority="normal">
+        <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+           <parameter name="namespace" value="http://www.eclipse.org/qvt/1.0/FullOCL"/>
+           <parameter name="kind" value="xmi"/>
+        </describer>
+     </content-type>
+   </extension>
+
+
+</plugin>

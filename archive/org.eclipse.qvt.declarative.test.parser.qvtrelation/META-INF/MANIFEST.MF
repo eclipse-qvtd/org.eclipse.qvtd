@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.qvt.declarative.test.parser.qvtrelation;singleton:=true
+Bundle-Version: 0.8.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: org.eclipse.qvt.declarative.test.parser.qvtrelation,org.eclipse.qvt.declarative.test.parser.qvtrelation.models
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.qvt.declarative.emof.qvtrelation,org.eclipse.qvt.declarative.parser.qvtrelation;visibility:=reexport,org.eclipse.qvt.declarative.test.emof.qvtrelation;visibility:=reexport,org.eclipse.qvt.declarative.test.parser;visibility:=reexport,org.eclipse.qvt.declarative.editor.qvtrelation.ui;visibility:=reexport
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy

@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.qvt.declarative.ecore.qvtbase;singleton:=true
+Bundle-Version: 0.8.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.qvt.declarative.ecore.QVTBase,
+ org.eclipse.qvt.declarative.ecore.QVTBase.impl,
+ org.eclipse.qvt.declarative.ecore.QVTBase.operations,
+ org.eclipse.qvt.declarative.ecore.QVTBase.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ocl.ecore;visibility:=reexport,
+ org.eclipse.qvt.declarative.ecore;visibility:=reexport
+Bundle-ActivationPolicy: lazy

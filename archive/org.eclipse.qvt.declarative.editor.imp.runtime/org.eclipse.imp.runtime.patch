@@ -1,0 +1,499 @@
+Index: plugin.properties
+===================================================================
+--- plugin.properties	(revision 0)
++++ plugin.properties	(revision 0)
+@@ -0,0 +1,15 @@
++###############################################################################
++# Copyright (c) 2009 Eclipse Modeling Project and others.
++# All rights reserved. This program and the accompanying materials
++# are made available under the terms of the Eclipse Public License v1.0
++# which accompanies this distribution, and is available at
++# http://www.eclipse.org/legal/epl-v10.html
++#
++# Contributors:
++#     E.D.Willink - initial API and implementation
++#
++# $Id: org.eclipse.imp.runtime.patch,v 1.2 2009/08/16 11:01:04 ewillink Exp $
++###############################################################################
++
++pluginName = QVT Declarative Editor variant of IMP Runtime
++providerName = Eclipse Modeling Project
+Index: META-INF/MANIFEST.MF
+===================================================================
+--- META-INF/MANIFEST.MF	(revision 21816)
++++ META-INF/MANIFEST.MF	(working copy)
+@@ -1,12 +1,12 @@
+ Manifest-Version: 1.0
+ Bundle-ManifestVersion: 2
+-Bundle-Name: IMP Runtime (Incubation)
+-Bundle-SymbolicName: org.eclipse.imp.runtime; singleton:=true
+-Bundle-Version: 0.1.100
++Bundle-Name: %pluginName
++Bundle-SymbolicName: org.eclipse.imp.runtime;singleton:=true
++Bundle-Version: 0.0.10100.qualifier
+ Bundle-Activator: org.eclipse.imp.runtime.RuntimePlugin
+ Bundle-ActivationPolicy: lazy
+-Eclipse-LazyStart: true
+-Bundle-Vendor: rfuhrer@watson.ibm.com
++Bundle-Vendor: %providerName
++Bundle-Localization: plugin
+ Require-Bundle: com.ibm.icu,
+  lpg.runtime,
+  org.eclipse.compare,
+Index: build.properties
+===================================================================
+--- build.properties	(revision 21816)
++++ build.properties	(working copy)
+@@ -3,5 +3,6 @@
+ bin.includes = META-INF/,\
+                .,\
+                plugin.xml,\
+-               icons/
++               icons/,\
++               plugin.properties
+ src.includes = icons/
+Index: src/org/eclipse/imp/language/LanguageRegistry.java
+===================================================================
+--- src/org/eclipse/imp/language/LanguageRegistry.java	(revision 21816)
++++ src/org/eclipse/imp/language/LanguageRegistry.java	(working copy)
+@@ -22,6 +22,7 @@
+ import java.util.Map;
+ 
+ import org.eclipse.core.runtime.IConfigurationElement;
++import org.eclipse.core.runtime.IExtension;
+ import org.eclipse.core.runtime.IExtensionPoint;
+ import org.eclipse.core.runtime.IPath;
+ import org.eclipse.core.runtime.InvalidRegistryObjectException;
+@@ -39,6 +40,7 @@
+ import org.eclipse.swt.widgets.Display;
+ import org.eclipse.ui.IEditorDescriptor;
+ import org.eclipse.ui.IEditorInput;
++import org.eclipse.ui.IEditorMatchingStrategy;
+ import org.eclipse.ui.IFileEditorMapping;
+ import org.eclipse.ui.PlatformUI;
+ import org.eclipse.ui.internal.registry.EditorDescriptor;
+@@ -404,6 +406,24 @@
+ 	        	    	break;
+ 	        	    }
+ 	        	}
++	        	if (!gotIt) {
++	        		for (IEditorDescriptor editor : mapping.getEditors()) {	// Search for an implicit copy of a derived UniversalEditor
++		        		EditorDescriptor editorDescriptor = (EditorDescriptor) editor;
++						String className = editorDescriptor.getClassName();
++						IConfigurationElement configurationElement = editorDescriptor.getConfigurationElement();
++						IExtension declaringExtension = configurationElement.getDeclaringExtension();
++						String namespaceIdentifier = declaringExtension.getNamespaceIdentifier();
++						Bundle bundle = Platform.getBundle(namespaceIdentifier);
++		        		try {
++							Class<?> editorClass = bundle.loadClass(className);
++			        		if (UniversalEditor.class.isAssignableFrom(editorClass)) {
++			        			gotIt = true;
++			        			break;
++			        		}
++						} catch (ClassNotFoundException e) {
++						}
++		        	}
++	        	}
+ 	        	if (!gotIt)
+ 	        		((FileEditorMapping) mapping).addEditor((EditorDescriptor) sUniversalEditor);
+ 	        }
+Index: src/org/eclipse/imp/parser/SymbolTable.java
+===================================================================
+--- src/org/eclipse/imp/parser/SymbolTable.java	(revision 21816)
++++ src/org/eclipse/imp/parser/SymbolTable.java	(working copy)
+@@ -11,7 +11,11 @@
+  * represent lexical nesting of scopes.
+  */
+ public class SymbolTable<T> extends HashMap<String,T> {
+-    private final SymbolTable<T> parent;
++    /**
++	 * 
++	 */
++	private static final long serialVersionUID = 5447807516246616283L;
++	private final SymbolTable<T> parent;
+ 
+     public SymbolTable() { this(null); }
+     public SymbolTable(SymbolTable<T> parent) { this.parent = parent; }
+Index: src/org/eclipse/imp/utils/HTMLPrinter.java
+===================================================================
+--- src/org/eclipse/imp/utils/HTMLPrinter.java	(revision 21816)
++++ src/org/eclipse/imp/utils/HTMLPrinter.java	(working copy)
+@@ -212,19 +212,19 @@
+      * Formats several messages as HTML text.
+      */
+     public static String formatMultipleMessages(List/*<String>*/ messages) {
+-        if (true) { // until we hook in the HTML-enabled hover viewer
+-            StringBuffer buff= new StringBuffer();
+-            buff.append("Multiple messages:\n");
+-            for(Iterator iter= messages.iterator(); iter.hasNext();) {
+-        	String msg= (String) iter.next();
+-        	buff.append("  ");
+-        	buff.append(msg);
+-        	if (iter.hasNext())
+-        	    buff.append('\n');
+-            }
+-            return buff.toString();
+-        }
+-        StringBuffer buffer= new StringBuffer();
++//        if (true) { // until we hook in the HTML-enabled hover viewer
++//            StringBuffer buff= new StringBuffer();
++//            buff.append("Multiple messages:\n");
++//            for(Iterator iter= messages.iterator(); iter.hasNext();) {
++//        	String msg= (String) iter.next();
++//        	buff.append("  ");
++//        	buff.append(msg);
++//        	if (iter.hasNext())
++//        	    buff.append('\n');
++//            }
++//            return buff.toString();
++//        }
++    	StringBuffer buffer= new StringBuffer();
+         addPageProlog(buffer);
+         addParagraph(buffer, convertToHTMLContent("There are multiple markers on this line."));
+         startBulletList(buffer);
+@@ -240,8 +240,8 @@
+      * Formats a message as HTML text.
+      */
+     public static String formatSingleMessage(String message) {
+-        if (true) // until we hook in the HTML-enabled hover viewer
+-            return message;
++//        if (true) // until we hook in the HTML-enabled hover viewer
++//            return message;
+         StringBuffer buffer= new StringBuffer();
+         addPageProlog(buffer);
+         addParagraph(buffer, convertToHTMLContent(message));
+Index: src/org/eclipse/imp/builder/BuilderBase.java
+===================================================================
+--- src/org/eclipse/imp/builder/BuilderBase.java	(revision 21816)
++++ src/org/eclipse/imp/builder/BuilderBase.java	(working copy)
+@@ -116,9 +116,15 @@
+ 
+     private final IResourceDeltaVisitor fDeltaVisitor= new SourceDeltaVisitor();
+ 
+-    protected IPreferencesService fPrefService= new PreferencesService(null, getPlugin().getLanguageID());
++    private IPreferencesService fPrefService= null;
++
++    protected IPreferencesService getPreferencesService() {
++    	if (fPrefService == null)
++    	    fPrefService= new PreferencesService(null, getPlugin().getLanguageID());
++		return fPrefService;
++	}
+ 
+-    protected DependencyInfo fDependencyInfo;
++	protected DependencyInfo fDependencyInfo;
+ 
+     private final Collection<IFile> fChangedSources= new HashSet<IFile>();
+ 
+@@ -184,8 +190,9 @@
+ 
+     @SuppressWarnings("unchecked")
+     protected IProject[] build(int kind, Map args, IProgressMonitor monitor) {
+-        if (fPrefService.getProject() == null) {
+-            fPrefService.setProject(getProject());
++    	IPreferencesService preferencesService = getPreferencesService();
++        if (preferencesService.getProject() == null) {
++        	preferencesService.setProject(getProject());
+         }
+ 
+         fChangedSources.clear();
+Index: src/org/eclipse/imp/editor/AnnotationHoverBase.java
+===================================================================
+--- src/org/eclipse/imp/editor/AnnotationHoverBase.java	(revision 21816)
++++ src/org/eclipse/imp/editor/AnnotationHoverBase.java	(working copy)
+@@ -159,8 +159,8 @@
+      * Formats a message as HTML text.
+      */
+     public static String formatSingleMessage(String message) {
+-        if (true) // until we hook in the HTML-enabled hover viewer
+-            return message;
++//        if (true) // until we hook in the HTML-enabled hover viewer
++//            return message;
+         StringBuffer buffer= new StringBuffer();
+         HTMLPrinter.addPageProlog(buffer);
+         HTMLPrinter.addParagraph(buffer, HTMLPrinter.convertToHTMLContent(message));
+@@ -173,18 +173,18 @@
+      */
+     public static String formatMultipleMessages(List<String> messages) {
+         // TODO Hook in the HTML-enabled hover viewer
+-        if (true) { // until we hook in the HTML-enabled hover viewer
+-            StringBuilder sb= new StringBuilder();
+-
+-            sb.append("Multiple messages:\n");
+-            int idx= 0;
+-            for(String msg: messages) {
+-                if (idx++ > 0) { sb.append('\n'); }
+-                sb.append("  ");
+-                sb.append(msg);
+-            }
+-            return sb.toString();
+-        }
++//        if (true) { // until we hook in the HTML-enabled hover viewer
++//            StringBuilder sb= new StringBuilder();
++//
++//            sb.append("Multiple messages:\n");
++//            int idx= 0;
++//            for(String msg: messages) {
++//                if (idx++ > 0) { sb.append('\n'); }
++//                sb.append("  ");
++//                sb.append(msg);
++//            }
++//            return sb.toString();
++//        }
+         StringBuffer buffer= new StringBuffer();
+         HTMLPrinter.addPageProlog(buffer);
+         HTMLPrinter.addParagraph(buffer, HTMLPrinter.convertToHTMLContent("Multiple messages at this line"));
+Index: src/org/eclipse/imp/editor/internal/PresentationController.java
+===================================================================
+--- src/org/eclipse/imp/editor/internal/PresentationController.java	(revision 21816)
++++ src/org/eclipse/imp/editor/internal/PresentationController.java	(working copy)
+@@ -13,6 +13,8 @@
+ 
+ import java.io.PrintStream;
+ import java.util.ArrayList;
++import java.util.Collections;
++import java.util.Comparator;
+ import java.util.Iterator;
+ import java.util.List;
+ import java.util.Stack;
+@@ -160,16 +162,19 @@
+             if (offset <= prevEnd && end >= prevOffset) {
+                 continue;
+             }
+-            changeTokenPresentation(parseController, presentation, token, locator);
++             else {
++	            TextAttribute attribute= fColorer.getColoring(parseController, token);
++	            if (attribute != null) {
++	            	changeTokenPresentation(parseController, presentation, offset, attribute, end);
++	            }
++            }
+             prevOffset= offset;
+             prevEnd= end;
+         }
+     }
+ 
+-    private void changeTokenPresentation(IParseController controller, TextPresentation presentation, Object token, ISourcePositionLocator locator) {
+-        TextAttribute attribute= fColorer.getColoring(controller, token);
+-        
+-        StyleRange styleRange= new StyleRange(locator.getStartOffset(token), locator.getEndOffset(token) - locator.getStartOffset(token) + 1,
++    private void changeTokenPresentation(IParseController controller, TextPresentation presentation, int startOffset, TextAttribute attribute, int endOffset) {
++    	StyleRange styleRange= new StyleRange(startOffset, endOffset - startOffset + 1,
+                 attribute == null ? null : attribute.getForeground(),
+                 attribute == null ? null : attribute.getBackground(),
+                 attribute == null ? SWT.NORMAL : attribute.getStyle());
+@@ -182,17 +187,27 @@
+         }
+     }
+ 
+-    private void submitTextPresentation(final TextPresentation presentation) {
+-
++    private void submitTextPresentation(final TextPresentation uncheckedPresentation) {
++    	int charCount = 0;
++    	if (fSourceViewer != null) {		
++    		IDocument document = fSourceViewer.getDocument();
++			if (document != null)			// EDW 27 Sep 2008 May be null after file deleted
++				charCount = document.getLength();
++    	}
++    	final TextPresentation presentation;
++    	if (!checkPresentation(uncheckedPresentation, charCount))
++			presentation = correctPresentation(uncheckedPresentation, charCount);
++    	else
++    		presentation = uncheckedPresentation;
+         Display.getDefault().asyncExec(new Runnable() {
+             public void run() {
+             	
+             	// SMS 16 Sep 2008
+-            	int charCount;
+-            	if (fSourceViewer != null) {
+-            		charCount = fSourceViewer.getDocument().getLength();
+-            	} else {
+-            		charCount = 0;
++            	int charCount = 0;
++            	if (fSourceViewer != null) {		
++            		IDocument document = fSourceViewer.getDocument();
++					if (document != null)			// EDW 27 Sep 2008 May be null after file deleted
++						charCount = document.getLength();
+             	}
+             	
+             	// Attempt to head off exception due to final range extending beyond
+@@ -206,7 +221,7 @@
+             		Iterator presIt = presentation.getAllStyleRangeIterator();
+             		while (presIt.hasNext()) {
+             			StyleRange nextRange = (StyleRange) presIt.next();
+-            			if (nextRange.start + nextRange.length < charCount)
++            			if (nextRange.start + nextRange.length <= charCount)
+             				newPresentation.addStyleRange(nextRange);
+             		}
+             	} else {
+@@ -270,4 +285,78 @@
+             }
+         });
+     }
++
++	private boolean checkPresentation(TextPresentation presentation, int charCount) {		// EDW
++		Iterator presIt = presentation.getAllStyleRangeIterator();
++		int end = -1;
++		while (presIt.hasNext()) {
++			StyleRange nextRange = (StyleRange) presIt.next();
++        	int start = nextRange.start;
++           	int length = nextRange.length;
++            if (start < end) {
++        		System.out.println("Unexpected style start " + start + ":" + length + ":" + (start + length) + "/" + charCount);
++        		return false;
++        	}
++        	if (length < 1) {
++        		System.out.println("Unexpected style length " + start + ":" + length + ":" + (start + length) + "/" + charCount);
++        		return false;
++        	}
++        	end = start + length;      	
++        	if (end > charCount) {
++        		System.out.println("Unexpected style end " + start + ":" + length + ":" + (start + length) + "/" + charCount);
++        		return false;
++        	}
++		}
++		return true;
++	}
++
++	private TextPresentation correctPresentation(TextPresentation presentation, int charCount) {		// EDW
++		List<StyleRange> ranges = new ArrayList<StyleRange>();
++		Iterator presIt = presentation.getAllStyleRangeIterator();
++		for (int styleNumber = 0; presIt.hasNext(); styleNumber++) {
++			StyleRange range = (StyleRange) presIt.next();
++        	int start = range.start;
++        	int length = range.length;
++    		if (length <= 0)
++        		System.out.println("Ignored -ve length style " + styleNumber + ": " + range.start + ":" + range.length + ":" + (range.start + range.length) + "/" + charCount);
++    		else if (start >= charCount)
++        		System.out.println("Ignored past-end style " + styleNumber + ": " + range.start + ":" + range.length + ":" + (range.start + range.length) + "/" + charCount);
++    		else {
++        		int end = start + length;
++        		if (end > charCount) {
++            		System.out.println("Truncated over-end style " + styleNumber + ": " + range.start + ":" + range.length + ":" + (range.start + range.length) + "/" + charCount);
++            		range.length = charCount - start;
++        		}
++        		ranges.add(range);
++        	}
++		}
++		Collections.sort(ranges, new Comparator<StyleRange>()
++		{
++			public int compare(StyleRange o1, StyleRange o2) {
++				return o1.start - o2.start;
++			}
++		});
++		IDocument document = fSourceViewer.getDocument();
++		TextPresentation newPresentation = new TextPresentation();
++		int iMax = ranges.size();
++		for (int i = 0; i < iMax; i++) {
++			StyleRange thisRange = ranges.get(i);
++			if ((i+1) < iMax) {
++				StyleRange nextRange = ranges.get(i+1);
++        		int end = thisRange.start + thisRange.length;
++				if (end > nextRange.start) {
++            		try {
++						System.out.println("Truncated over-lap style " + i + " " +
++								thisRange.start + ":" + thisRange.length + ":" + (thisRange.start + thisRange.length) + ":'" + document.get(thisRange.start, thisRange.length) + "' " +
++								nextRange.start + ":" + nextRange.length + ":" + (nextRange.start + nextRange.length) + ":'" + document.get(nextRange.start, nextRange.length) + "'");
++					} catch (BadLocationException e) {
++						e.printStackTrace();
++					}
++					thisRange.length = nextRange.start - thisRange.start;
++				}
++			}
++			newPresentation.addStyleRange(thisRange);
++		}
++		return newPresentation;
++	}
+ }
+Index: src/org/eclipse/imp/editor/ParserScheduler.java
+===================================================================
+--- src/org/eclipse/imp/editor/ParserScheduler.java	(revision 21816)
++++ src/org/eclipse/imp/editor/ParserScheduler.java	(working copy)
+@@ -72,6 +72,10 @@
+         IEditorInput editorInput= fEditorPart.getEditorInput();
+         try {
+             IDocument document= fDocumentProvider.getDocument(editorInput);
++            if (document == null) {				// EDW 29 Sep 2008
++                /* Editor was deleted */
++                return Status.OK_STATUS;
++            }
+ 
+             if (PreferenceCache.emitMessages /* fPrefService.getBooleanPreference(PreferenceConstants.P_EMIT_MESSAGES) */) {
+                 RuntimePlugin.getInstance().writeInfoMsg(
+Index: .settings/org.eclipse.jdt.core.prefs
+===================================================================
+--- .settings/org.eclipse.jdt.core.prefs	(revision 21816)
++++ .settings/org.eclipse.jdt.core.prefs	(working copy)
+@@ -1,4 +1,4 @@
+-#Wed Oct 18 15:08:27 EDT 2006
++#Sat Jul 18 16:47:53 BST 2009
+ eclipse.preferences.version=1
+ org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
+ org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.5
+@@ -7,6 +7,68 @@
+ org.eclipse.jdt.core.compiler.debug.lineNumber=generate
+ org.eclipse.jdt.core.compiler.debug.localVariable=generate
+ org.eclipse.jdt.core.compiler.debug.sourceFile=generate
++org.eclipse.jdt.core.compiler.problem.annotationSuperInterface=warning
+ org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
++org.eclipse.jdt.core.compiler.problem.autoboxing=ignore
++org.eclipse.jdt.core.compiler.problem.comparingIdentical=warning
++org.eclipse.jdt.core.compiler.problem.deadCode=ignore
++org.eclipse.jdt.core.compiler.problem.deprecation=ignore
++org.eclipse.jdt.core.compiler.problem.deprecationInDeprecatedCode=disabled
++org.eclipse.jdt.core.compiler.problem.deprecationWhenOverridingDeprecatedMethod=disabled
++org.eclipse.jdt.core.compiler.problem.discouragedReference=ignore
++org.eclipse.jdt.core.compiler.problem.emptyStatement=ignore
+ org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
++org.eclipse.jdt.core.compiler.problem.fallthroughCase=ignore
++org.eclipse.jdt.core.compiler.problem.fatalOptionalError=enabled
++org.eclipse.jdt.core.compiler.problem.fieldHiding=ignore
++org.eclipse.jdt.core.compiler.problem.finalParameterBound=warning
++org.eclipse.jdt.core.compiler.problem.finallyBlockNotCompletingNormally=warning
++org.eclipse.jdt.core.compiler.problem.forbiddenReference=error
++org.eclipse.jdt.core.compiler.problem.hiddenCatchBlock=warning
++org.eclipse.jdt.core.compiler.problem.incompatibleNonInheritedInterfaceMethod=warning
++org.eclipse.jdt.core.compiler.problem.incompleteEnumSwitch=ignore
++org.eclipse.jdt.core.compiler.problem.indirectStaticAccess=ignore
++org.eclipse.jdt.core.compiler.problem.localVariableHiding=ignore
++org.eclipse.jdt.core.compiler.problem.methodWithConstructorName=warning
++org.eclipse.jdt.core.compiler.problem.missingDeprecatedAnnotation=ignore
++org.eclipse.jdt.core.compiler.problem.missingHashCodeMethod=warning
++org.eclipse.jdt.core.compiler.problem.missingOverrideAnnotation=ignore
++org.eclipse.jdt.core.compiler.problem.missingSerialVersion=warning
++org.eclipse.jdt.core.compiler.problem.missingSynchronizedOnInheritedMethod=warning
++org.eclipse.jdt.core.compiler.problem.noEffectAssignment=warning
++org.eclipse.jdt.core.compiler.problem.noImplicitStringConversion=warning
++org.eclipse.jdt.core.compiler.problem.nonExternalizedStringLiteral=ignore
++org.eclipse.jdt.core.compiler.problem.nullReference=warning
++org.eclipse.jdt.core.compiler.problem.overridingPackageDefaultMethod=warning
++org.eclipse.jdt.core.compiler.problem.parameterAssignment=ignore
++org.eclipse.jdt.core.compiler.problem.possibleAccidentalBooleanAssignment=ignore
++org.eclipse.jdt.core.compiler.problem.potentialNullReference=ignore
++org.eclipse.jdt.core.compiler.problem.rawTypeReference=ignore
++org.eclipse.jdt.core.compiler.problem.redundantNullCheck=ignore
++org.eclipse.jdt.core.compiler.problem.redundantSuperinterface=ignore
++org.eclipse.jdt.core.compiler.problem.specialParameterHidingField=disabled
++org.eclipse.jdt.core.compiler.problem.staticAccessReceiver=ignore
++org.eclipse.jdt.core.compiler.problem.suppressWarnings=enabled
++org.eclipse.jdt.core.compiler.problem.syntheticAccessEmulation=ignore
++org.eclipse.jdt.core.compiler.problem.typeParameterHiding=warning
++org.eclipse.jdt.core.compiler.problem.uncheckedTypeOperation=ignore
++org.eclipse.jdt.core.compiler.problem.undocumentedEmptyBlock=ignore
++org.eclipse.jdt.core.compiler.problem.unhandledWarningToken=warning
++org.eclipse.jdt.core.compiler.problem.unnecessaryElse=ignore
++org.eclipse.jdt.core.compiler.problem.unnecessaryTypeCheck=ignore
++org.eclipse.jdt.core.compiler.problem.unqualifiedFieldAccess=ignore
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownException=ignore
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionExemptExceptionAndThrowable=enabled
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionIncludeDocCommentReference=enabled
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionWhenOverriding=disabled
++org.eclipse.jdt.core.compiler.problem.unusedImport=ignore
++org.eclipse.jdt.core.compiler.problem.unusedLabel=warning
++org.eclipse.jdt.core.compiler.problem.unusedLocal=ignore
++org.eclipse.jdt.core.compiler.problem.unusedParameter=ignore
++org.eclipse.jdt.core.compiler.problem.unusedParameterIncludeDocCommentReference=enabled
++org.eclipse.jdt.core.compiler.problem.unusedParameterWhenImplementingAbstract=disabled
++org.eclipse.jdt.core.compiler.problem.unusedParameterWhenOverridingConcrete=disabled
++org.eclipse.jdt.core.compiler.problem.unusedPrivateMember=ignore
++org.eclipse.jdt.core.compiler.problem.unusedWarningToken=ignore
++org.eclipse.jdt.core.compiler.problem.varargsArgumentNeedCast=warning
+ org.eclipse.jdt.core.compiler.source=1.5
