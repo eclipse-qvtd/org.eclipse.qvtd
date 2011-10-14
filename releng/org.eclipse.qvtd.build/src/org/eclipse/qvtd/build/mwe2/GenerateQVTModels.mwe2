@@ -1,0 +1,67 @@
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2011 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *
+ * </copyright>
+ *
+ * $Id: GenerateXtextModels.mwe2,v 1.2 2011/01/24 20:54:27 ewillink Exp $
+ * 
+ * Run As->MWE2 Workflow to regenerate the Xtest CST models.
+ */
+module GenerateQVTModels
+
+import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.emf.ecore.resource.impl.*
+
+/**
+ *	Generate the Pivot-based Models.
+ */
+Workflow {
+	bean = ResourceSetImpl : resourceSet {}
+    bean = StandaloneSetup { resourceSet = resourceSet
+    	platformUri = "./META-INF"		// A local folder to minimize workspace searching
+    	scanClassPath = true			// But we do need to search the plugin-space
+    	uriMap = Mapping {
+    		from = "platform:/plugin/org.eclipse.emf.ecore/"
+    		to = "platform:/resource/org.eclipse.emf.ecore/"
+    	}
+    	uriMap = Mapping {
+    		from = "platform:/plugin/org.eclipse.ocl.examples.pivot/"
+    		to = "platform:/resource/org.eclipse.ocl.examples.pivot/"
+    	}
+    	uriMap = Mapping {
+    		from = "platform:/plugin/org.eclipse.qvtd.pivot.qvtbase/"
+    		to = "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/"
+    	}
+    	uriMap = Mapping {
+    		from = "platform:/plugin/org.eclipse.qvtd.pivot.qvttemplate/"
+    		to = "platform:/resource/org.eclipse.qvtd.pivot.qvttemplate/"
+    	}
+    }
+    bean = GenModelSetup { resourceSet = resourceSet }
+    bean = UMLGenModelSetup { resourceSet = resourceSet }
+    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    	genModel = "/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel" 	
+    }
+    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    	genModel = "/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.genmodel"
+    }
+    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    	genModel = "/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel"
+    }
+    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    	genModel = "/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel"
+    }
+  	component = @GenerateQVTVisitors {}
+}
+

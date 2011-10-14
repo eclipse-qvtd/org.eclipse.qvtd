@@ -1,0 +1,16 @@
+[comment encoding = UTF-8 /]
+[module org::eclipse::qvtd::build::acceleo::generateQVTVisitors('http://www.eclipse.org/emf/2002/Ecore')/]
+
+[import org::eclipse::ocl::examples::build::acceleo::generateVisitors/]
+
+[template public generate(pkg : EPackage, javaPackage : String, modelPackage : String, visitorClass : String, visitorBasePackage : String, visitorBaseClass : String, sourceFile : String) ? (pkg.eContainer() = null)]
+[comment @main /]
+[pkg.generateDerivedVisitorInterface(javaPackage, modelPackage, visitorClass, visitorBasePackage, visitorBaseClass, sourceFile)/]
+[pkg.generateDerivedAbstractVisitor(javaPackage, visitorClass, visitorBasePackage, visitorBaseClass, 'org.eclipse.ocl.examples.pivot.util.Visitable', sourceFile)/]
+[pkg.generateAbstractExtendingVisitor(javaPackage, modelPackage, visitorClass, visitorBasePackage + '.AbstractExtending' + visitorBaseClass, sourceFile)/]
+[comment pkg.generateAbstractMonitorVisitor(javaPackage, modelPackage, 'AbstractMoniker' + visitorClass, visitorBasePackage + 'ities.Moniker' + visitorBaseClass, sourceFile)/]
+[pkg.generateAbstractDelegatingVisitor(javaPackage, modelPackage, visitorClass, visitorBasePackage, visitorBaseClass, 'org.eclipse.ocl.examples.pivot.util.Visitable', sourceFile)/]
+[comment pkg.generateAbstractExtendingDelegatingVisitor(javaPackage, modelPackage, visitorClass, visitorBasePackage, visitorBaseClass, 'org.eclipse.ocl.examples.pivot.util.Visitable', sourceFile)/]
+[pkg.generateAbstractNullVisitor(javaPackage, modelPackage, visitorClass, sourceFile)/]
+[comment pkg.generateDecorableVisitorInterface(javaPackage, visitorClass, visitorBasePackage, visitorBaseClass, 'org.eclipse.ocl.examples.pivot.util.PivotVisitor', sourceFile)/]
+[/template]

@@ -25,8 +25,11 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.acceleo.engine,
  org.eclipse.xtext.common.types,
  org.eclipse.uml2.uml.resources,
- org.eclipse.qvtd.xtext.qvtcore;bundle-version="0.9.0"
+ org.eclipse.qvtd.xtext.qvtcore;bundle-version="0.9.0",
+ org.eclipse.ocl.examples.build;bundle-version="3.2.0",
+ org.eclipse.qvtd.pivot.qvtrelation;bundle-version="1.0.0",
+ org.eclipse.ocl.examples.xtext.oclstdlib;bundle-version="3.2.0"
 Import-Package: org.apache.commons.logging,
  org.apache.log4j
 Bundle-Vendor: %providerName
-Export-Package: org.eclipse.ocl.examples.build.acceleo
+Export-Package: org.eclipse.qvtd.build.acceleo

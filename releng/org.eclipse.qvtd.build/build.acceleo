@@ -1,0 +1,26 @@
+<!-- ===================================================================== -->
+<!-- Custom targets.                                                       -->
+<!-- Set customBuildCallbacks = build.acceleo in your build.properties.    -->
+<!-- ===================================================================== -->
+<project name="Build Acceleo Module" default="noDefault">    
+    <!-- ================================================================= -->
+    <!-- Default target                                                    -->
+    <!-- ================================================================= -->
+    <target name="noDefault">
+        <echo message="This file must be called with explicit targets" />
+    </target>
+
+    <!-- ================================================================= -->
+    <!-- This will be called automatically after the compilation of each   -->
+    <!-- Bundle... in dependency order.                                    -->
+    <!-- ================================================================= -->
+    <target name="post.compile.@dot">
+        <acceleoCompiler 
+            sourceFolder="${target.folder}"
+            outputFolder="${target.folder}"
+            dependencies="${target.folder}/../../org.eclipse.xtext.common.types;${target.folder}/../../org.eclipse.uml2.uml.resources;${target.folder}/../../org.eclipse.qvtd.xtext.qvtcore;${target.folder}/../../org.eclipse.ocl.examples.xtext.essentialocl;${target.folder}/../../org.eclipse.ocl.examples.xtext.base;${target.folder}/../../org.eclipse.ocl.examples.pivot;${target.folder}/../../org.eclipse.ocl.examples.library;${target.folder}/../../org.eclipse.ocl.examples.domain;${target.folder}/../../org.eclipse.qvtd.pivot.qvtcore;${target.folder}/../../org.eclipse.qvtd.pivot.qvtbase;${target.folder}/../../org.eclipse.ocl.examples.build;${target.folder}/../../org.eclipse.ocl.examples.codegen;${target.folder}/../../org.eclipse.ocl.examples.xtext.completeocl;${target.folder}/../../org.eclipse.ocl.examples.xtext.markup;${target.folder}/../../org.eclipse.ocl.examples.xtext.oclinecore;${target.folder}/../../org.eclipse.ocl.examples.xtext.oclstdlib;${target.folder}/../../org.eclipse.qvtd.pivot.qvtrelation;${target.folder}/../../org.eclipse.qvtd.pivot.qvttemplate;"
+            binaryResource="false"
+            packagesToRegister="">
+        </acceleoCompiler>
+    </target>    
+</project>
