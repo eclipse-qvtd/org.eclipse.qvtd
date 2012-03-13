@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.EObjectValidator;
 
+import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseValidator;
 
 import org.eclipse.qvtd.pivot.qvtcore.*;
@@ -78,6 +79,14 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	protected PivotValidator pivotValidator;
+
+	/**
+	 * The cached base package validator.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	protected QVTbaseValidator qvTbaseValidator;
 
 	/**
@@ -88,6 +97,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 */
 	public QVTcoreValidator() {
 		super();
+		pivotValidator = PivotValidator.INSTANCE;
 		qvTbaseValidator = QVTbaseValidator.INSTANCE;
 	}
 
@@ -146,7 +156,17 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateArea(Area area, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(area, diagnostics, context);
+		if (!validate_NoCircularContainment(area, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(area, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(area, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(area, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(area, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(area, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(area, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(area, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(area, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateElement_validateNotOwnSelf(area, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -164,6 +184,7 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(assignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(assignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(assignment, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateElement_validateNotOwnSelf(assignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAssignment_MappingIsEnforceable(assignment, diagnostics, context);
 		return result;
 	}
@@ -211,6 +232,7 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(bottomPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(bottomPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(bottomPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateElement_validateNotOwnSelf(bottomPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validatePattern_NoVariableIsAFunctionParameter(bottomPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCorePattern_VariableNamesAreUnique(bottomPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validateBottomPattern_RealizedVariableNamesAreUnique(bottomPattern, diagnostics, context);
@@ -260,6 +282,7 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(coreDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(coreDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(coreDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateElement_validateNotOwnSelf(coreDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateDomain_TypedModelExistsWarning(coreDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateDomain_TypedModelDefinedByTransformation(coreDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateDomain_CheckableOrEnforceable(coreDomain, diagnostics, context);
@@ -281,6 +304,7 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(corePattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(corePattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(corePattern, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateElement_validateNotOwnSelf(corePattern, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validatePattern_NoVariableIsAFunctionParameter(corePattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCorePattern_VariableNamesAreUnique(corePattern, diagnostics, context);
 		return result;
@@ -320,7 +344,17 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateEnforcementOperation(EnforcementOperation enforcementOperation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(enforcementOperation, diagnostics, context);
+		if (!validate_NoCircularContainment(enforcementOperation, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(enforcementOperation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(enforcementOperation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(enforcementOperation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(enforcementOperation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(enforcementOperation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(enforcementOperation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(enforcementOperation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(enforcementOperation, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateElement_validateNotOwnSelf(enforcementOperation, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -338,6 +372,7 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(guardPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(guardPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(guardPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateElement_validateNotOwnSelf(guardPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validatePattern_NoVariableIsAFunctionParameter(guardPattern, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCorePattern_VariableNamesAreUnique(guardPattern, diagnostics, context);
 		return result;
@@ -358,6 +393,7 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateElement_validateNotOwnSelf(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_OverridesIsCompatible(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_OverridesDefinedByTransformation(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_DomainNamesAreUnique(mapping, diagnostics, context);
@@ -438,6 +474,7 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(propertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(propertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(propertyAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateElement_validateNotOwnSelf(propertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAssignment_MappingIsEnforceable(propertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validatePropertyAssignment_TypeIsConsistent(propertyAssignment, diagnostics, context);
 		return result;
@@ -486,6 +523,7 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(realizedVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(realizedVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(realizedVariable, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateElement_validateNotOwnSelf(realizedVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRealizedVariable_MappingIsEnforceable(realizedVariable, diagnostics, context);
 		return result;
 	}
@@ -533,6 +571,7 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(variableAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(variableAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(variableAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateElement_validateNotOwnSelf(variableAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAssignment_MappingIsEnforceable(variableAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validateVariableAssignment_TypeIsConsistent(variableAssignment, diagnostics, context);
 		return result;

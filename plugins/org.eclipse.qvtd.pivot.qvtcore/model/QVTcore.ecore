@@ -4,26 +4,26 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtcore"
     nsURI="http://www.eclipse.org/qvt/0.9/QVTcore" nsPrefix="qvtc">
   <eClassifiers xsi:type="ecore:EClass" name="Area" abstract="true" interface="true"
-      eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//Element">
-    <eOperations name="getAllVariables" ordered="false" upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//Variable"/>
+      eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Element">
+    <eOperations name="getAllVariables" ordered="false" upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="guardPattern" lowerBound="1"
         eType="#//GuardPattern" containment="true" eOpposite="#//GuardPattern/area"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bottomPattern" lowerBound="1"
         eType="#//BottomPattern" containment="true" eOpposite="#//BottomPattern/area"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Assignment" abstract="true" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//Element">
+  <eClassifiers xsi:type="ecore:EClass" name="Assignment" abstract="true" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Element">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="MappingIsEnforceable"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bottomPattern" lowerBound="1"
         eType="#//BottomPattern" transient="true" eOpposite="#//BottomPattern/assignment"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//OclExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OclExpression"
         containment="true">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="valueAssignment"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDefault" eType="ecore:EDataType platform:/plugin/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//Boolean"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDefault" eType="ecore:EDataType platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Boolean"
         unsettable="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BottomPattern" eSuperTypes="#//CorePattern">
@@ -44,18 +44,18 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="VariableNamesAreUnique"/>
     </eAnnotations>
-    <eOperations name="getAllVariables" ordered="false" upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//Variable"/>
+    <eOperations name="getAllVariables" ordered="false" upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable"/>
     <eOperations name="getArea" lowerBound="1" eType="#//Area"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" ordered="false"
-        upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//Variable"
+        upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EnforcementOperation" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//Element">
+  <eClassifiers xsi:type="ecore:EClass" name="EnforcementOperation" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Element">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="enforcementMode" eType="#//EnforcementMode"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bottomPattern" eType="#//BottomPattern"
         transient="true" eOpposite="#//BottomPattern/enforcementOperation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operationCallExp" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//OperationCallExp"
+        eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OperationCallExp"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GuardPattern" eSuperTypes="#//CorePattern">
@@ -81,20 +81,20 @@
       <details key="constraints" value="TypeIsConsistent"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="slotExpression" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//OclExpression"
+        eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OclExpression"
         containment="true">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="slotAssignment"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetProperty" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//Property">
+        eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Property">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="assignment"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RealizedVariable" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//Variable">
+  <eClassifiers xsi:type="ecore:EClass" name="RealizedVariable" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="MappingIsEnforceable"/>
     </eAnnotations>
@@ -104,7 +104,7 @@
       <details key="constraints" value="TypeIsConsistent"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetVariable" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//Variable">
+        eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="assignment"/>
       </eAnnotations>

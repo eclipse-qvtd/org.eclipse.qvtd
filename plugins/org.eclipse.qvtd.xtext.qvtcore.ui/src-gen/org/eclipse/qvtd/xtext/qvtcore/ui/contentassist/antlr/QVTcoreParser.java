@@ -57,6 +57,7 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getCollectionTypeIdentifierAccess().getAlternatives(), "rule__CollectionTypeIdentifier__Alternatives");
 					put(grammarAccess.getCollectionTypeCSAccess().getAlternatives_1(), "rule__CollectionTypeCS__Alternatives_1");
 					put(grammarAccess.getTupleTypeCSAccess().getAlternatives_1(), "rule__TupleTypeCS__Alternatives_1");
+					put(grammarAccess.getConstructorExpCSAccess().getAlternatives_0(), "rule__ConstructorExpCS__Alternatives_0");
 					put(grammarAccess.getPrimitiveLiteralExpCSAccess().getAlternatives(), "rule__PrimitiveLiteralExpCS__Alternatives");
 					put(grammarAccess.getBooleanLiteralExpCSAccess().getAlternatives(), "rule__BooleanLiteralExpCS__Alternatives");
 					put(grammarAccess.getTypeLiteralCSAccess().getAlternatives(), "rule__TypeLiteralCS__Alternatives");
@@ -116,6 +117,12 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getCollectionLiteralExpCSAccess().getGroup_2_1(), "rule__CollectionLiteralExpCS__Group_2_1__0");
 					put(grammarAccess.getCollectionLiteralPartCSAccess().getGroup(), "rule__CollectionLiteralPartCS__Group__0");
 					put(grammarAccess.getCollectionLiteralPartCSAccess().getGroup_1(), "rule__CollectionLiteralPartCS__Group_1__0");
+					put(grammarAccess.getConstructorExpCSAccess().getGroup(), "rule__ConstructorExpCS__Group__0");
+					put(grammarAccess.getConstructorExpCSAccess().getGroup_0_0(), "rule__ConstructorExpCS__Group_0_0__0");
+					put(grammarAccess.getConstructorExpCSAccess().getGroup_0_0_0(), "rule__ConstructorExpCS__Group_0_0_0__0");
+					put(grammarAccess.getConstructorExpCSAccess().getGroup_0_0_0_2(), "rule__ConstructorExpCS__Group_0_0_0_2__0");
+					put(grammarAccess.getConstructorExpCSAccess().getGroup_3(), "rule__ConstructorExpCS__Group_3__0");
+					put(grammarAccess.getConstructorPartCSAccess().getGroup(), "rule__ConstructorPartCS__Group__0");
 					put(grammarAccess.getTupleLiteralExpCSAccess().getGroup(), "rule__TupleLiteralExpCS__Group__0");
 					put(grammarAccess.getTupleLiteralExpCSAccess().getGroup_3(), "rule__TupleLiteralExpCS__Group_3__0");
 					put(grammarAccess.getTupleLiteralPartCSAccess().getGroup(), "rule__TupleLiteralPartCS__Group__0");
@@ -222,6 +229,14 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getCollectionLiteralExpCSAccess().getOwnedPartsAssignment_2_1_1(), "rule__CollectionLiteralExpCS__OwnedPartsAssignment_2_1_1");
 					put(grammarAccess.getCollectionLiteralPartCSAccess().getExpressionCSAssignment_0(), "rule__CollectionLiteralPartCS__ExpressionCSAssignment_0");
 					put(grammarAccess.getCollectionLiteralPartCSAccess().getLastExpressionCSAssignment_1_1(), "rule__CollectionLiteralPartCS__LastExpressionCSAssignment_1_1");
+					put(grammarAccess.getConstructorExpCSAccess().getNamespaceAssignment_0_0_0_0(), "rule__ConstructorExpCS__NamespaceAssignment_0_0_0_0");
+					put(grammarAccess.getConstructorExpCSAccess().getNamespaceAssignment_0_0_0_2_0(), "rule__ConstructorExpCS__NamespaceAssignment_0_0_0_2_0");
+					put(grammarAccess.getConstructorExpCSAccess().getElementAssignment_0_0_1(), "rule__ConstructorExpCS__ElementAssignment_0_0_1");
+					put(grammarAccess.getConstructorExpCSAccess().getElementAssignment_0_1(), "rule__ConstructorExpCS__ElementAssignment_0_1");
+					put(grammarAccess.getConstructorExpCSAccess().getOwnedPartsAssignment_2(), "rule__ConstructorExpCS__OwnedPartsAssignment_2");
+					put(grammarAccess.getConstructorExpCSAccess().getOwnedPartsAssignment_3_1(), "rule__ConstructorExpCS__OwnedPartsAssignment_3_1");
+					put(grammarAccess.getConstructorPartCSAccess().getPropertyAssignment_0(), "rule__ConstructorPartCS__PropertyAssignment_0");
+					put(grammarAccess.getConstructorPartCSAccess().getInitExpressionAssignment_2(), "rule__ConstructorPartCS__InitExpressionAssignment_2");
 					put(grammarAccess.getTupleLiteralExpCSAccess().getOwnedPartsAssignment_2(), "rule__TupleLiteralExpCS__OwnedPartsAssignment_2");
 					put(grammarAccess.getTupleLiteralExpCSAccess().getOwnedPartsAssignment_3_1(), "rule__TupleLiteralExpCS__OwnedPartsAssignment_3_1");
 					put(grammarAccess.getTupleLiteralPartCSAccess().getNameAssignment_0(), "rule__TupleLiteralPartCS__NameAssignment_0");

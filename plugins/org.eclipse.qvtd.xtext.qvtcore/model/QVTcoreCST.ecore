@@ -26,7 +26,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DirectionCS" eSuperTypes="platform:/resource/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//NamedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//Package"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Package"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="uses" upperBound="-1" eType="#//DirectionCS"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainCS" eSuperTypes="#//AreaCS">
@@ -44,7 +44,7 @@
         eType="#//MappingCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="domains" upperBound="-1"
         eType="#//DomainCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="in" eType="ecore:EClass platform:/resource/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="in" eType="ecore:EClass platform:/resource/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Package"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="middle" lowerBound="1"
         eType="#//DomainCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refines" upperBound="-1"
@@ -60,8 +60,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageRefCS" eSuperTypes="platform:/resource/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ModelElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//Namespace"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="ecore:EClass platform:/resource/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//Package"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Namespace"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="ecore:EClass platform:/resource/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Package"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QueryCS" eSuperTypes="platform:/resource/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//TypedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputParamDeclaration"
@@ -82,7 +82,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TransformationCS" eSuperTypes="platform:/resource/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//NamespaceCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.ocl.examples.pivot/model/pivot.ecore#//Namespace"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Namespace"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="directions" upperBound="-1"
         eType="#//DirectionCS" containment="true"/>
   </eClassifiers>
