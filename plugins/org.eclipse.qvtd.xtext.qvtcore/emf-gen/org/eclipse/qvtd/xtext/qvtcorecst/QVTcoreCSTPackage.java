@@ -74,6 +74,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int AREA_CS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AREA_CS__LOGICAL_PARENT = BaseCSTPackage.NAMED_ELEMENT_CS__LOGICAL_PARENT;
+
+	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -154,6 +163,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 */
 	int ASSIGNMENT_CS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT_CS__LOGICAL_PARENT = EssentialOCLCSTPackage.EXP_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -247,6 +265,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int PATTERN_CS = 9;
 
 	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_CS__LOGICAL_PARENT = BaseCSTPackage.MODEL_ELEMENT_CS__LOGICAL_PARENT;
+
+	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -318,6 +345,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 */
 	int BOTTOM_PATTERN_CS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_PATTERN_CS__LOGICAL_PARENT = PATTERN_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -411,6 +447,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int DIRECTION_CS = 3;
 
 	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIRECTION_CS__LOGICAL_PARENT = BaseCSTPackage.NAMED_ELEMENT_CS__LOGICAL_PARENT;
+
+	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -491,6 +536,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 */
 	int DOMAIN_CS = 4;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_CS__LOGICAL_PARENT = AREA_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -593,6 +647,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int ENFORCEMENT_OPERATION_CS = 5;
 
 	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENFORCEMENT_OPERATION_CS__LOGICAL_PARENT = BaseCSTPackage.MODEL_ELEMENT_CS__LOGICAL_PARENT;
+
+	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -666,6 +729,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int GUARD_PATTERN_CS = 6;
 
 	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_PATTERN_CS__LOGICAL_PARENT = PATTERN_CS__LOGICAL_PARENT;
+
+	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -737,6 +809,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 */
 	int MAPPING_CS = 7;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CS__LOGICAL_PARENT = BaseCSTPackage.NAMED_ELEMENT_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -848,6 +929,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int PARAM_DECLARATION_CS = 8;
 
 	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM_DECLARATION_CS__LOGICAL_PARENT = BaseCSTPackage.TYPED_ELEMENT_CS__LOGICAL_PARENT;
+
+	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -893,24 +983,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int PARAM_DECLARATION_CS__NAME = BaseCSTPackage.TYPED_ELEMENT_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Lower</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAM_DECLARATION_CS__LOWER = BaseCSTPackage.TYPED_ELEMENT_CS__LOWER;
-
-	/**
-	 * The feature id for the '<em><b>Multiplicity</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAM_DECLARATION_CS__MULTIPLICITY = BaseCSTPackage.TYPED_ELEMENT_CS__MULTIPLICITY;
-
-	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -918,15 +990,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARAM_DECLARATION_CS__OWNED_TYPE = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Upper</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAM_DECLARATION_CS__UPPER = BaseCSTPackage.TYPED_ELEMENT_CS__UPPER;
 
 	/**
 	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
@@ -956,79 +1019,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int PARAM_DECLARATION_CS_FEATURE_COUNT = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.PackageRefCSImpl <em>Package Ref CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.PackageRefCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getPackageRefCS()
-	 * @generated
-	 */
-	int PACKAGE_REF_CS = 10;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE_REF_CS__PIVOT = BaseCSTPackage.MODEL_ELEMENT_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE_REF_CS__OWNED_ANNOTATION = BaseCSTPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE_REF_CS__ORIGINAL_XMI_ID = BaseCSTPackage.MODEL_ELEMENT_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE_REF_CS__CSI = BaseCSTPackage.MODEL_ELEMENT_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE_REF_CS__NAMESPACE = BaseCSTPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE_REF_CS__ELEMENT = BaseCSTPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Package Ref CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE_REF_CS_FEATURE_COUNT = BaseCSTPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.QueryCSImpl <em>Query CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1036,7 +1026,16 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getQueryCS()
 	 * @generated
 	 */
-	int QUERY_CS = 11;
+	int QUERY_CS = 10;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_CS__LOGICAL_PARENT = BaseCSTPackage.TYPED_ELEMENT_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -1084,24 +1083,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int QUERY_CS__NAME = BaseCSTPackage.TYPED_ELEMENT_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Lower</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int QUERY_CS__LOWER = BaseCSTPackage.TYPED_ELEMENT_CS__LOWER;
-
-	/**
-	 * The feature id for the '<em><b>Multiplicity</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int QUERY_CS__MULTIPLICITY = BaseCSTPackage.TYPED_ELEMENT_CS__MULTIPLICITY;
-
-	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1109,15 +1090,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int QUERY_CS__OWNED_TYPE = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Upper</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int QUERY_CS__UPPER = BaseCSTPackage.TYPED_ELEMENT_CS__UPPER;
 
 	/**
 	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
@@ -1172,7 +1144,16 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getRealizeableVariableCS()
 	 * @generated
 	 */
-	int REALIZEABLE_VARIABLE_CS = 12;
+	int REALIZEABLE_VARIABLE_CS = 11;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REALIZEABLE_VARIABLE_CS__LOGICAL_PARENT = BaseCSTPackage.TYPED_ELEMENT_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -1220,24 +1201,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int REALIZEABLE_VARIABLE_CS__NAME = BaseCSTPackage.TYPED_ELEMENT_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Lower</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZEABLE_VARIABLE_CS__LOWER = BaseCSTPackage.TYPED_ELEMENT_CS__LOWER;
-
-	/**
-	 * The feature id for the '<em><b>Multiplicity</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZEABLE_VARIABLE_CS__MULTIPLICITY = BaseCSTPackage.TYPED_ELEMENT_CS__MULTIPLICITY;
-
-	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1245,15 +1208,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int REALIZEABLE_VARIABLE_CS__OWNED_TYPE = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Upper</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZEABLE_VARIABLE_CS__UPPER = BaseCSTPackage.TYPED_ELEMENT_CS__UPPER;
 
 	/**
 	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
@@ -1290,7 +1244,16 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getRealizedVariableCS()
 	 * @generated
 	 */
-	int REALIZED_VARIABLE_CS = 13;
+	int REALIZED_VARIABLE_CS = 12;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REALIZED_VARIABLE_CS__LOGICAL_PARENT = REALIZEABLE_VARIABLE_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -1338,24 +1301,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int REALIZED_VARIABLE_CS__NAME = REALIZEABLE_VARIABLE_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Lower</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZED_VARIABLE_CS__LOWER = REALIZEABLE_VARIABLE_CS__LOWER;
-
-	/**
-	 * The feature id for the '<em><b>Multiplicity</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZED_VARIABLE_CS__MULTIPLICITY = REALIZEABLE_VARIABLE_CS__MULTIPLICITY;
-
-	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1363,15 +1308,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int REALIZED_VARIABLE_CS__OWNED_TYPE = REALIZEABLE_VARIABLE_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Upper</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZED_VARIABLE_CS__UPPER = REALIZEABLE_VARIABLE_CS__UPPER;
 
 	/**
 	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
@@ -1408,7 +1344,16 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getTopLevelCS()
 	 * @generated
 	 */
-	int TOP_LEVEL_CS = 14;
+	int TOP_LEVEL_CS = 13;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_LEVEL_CS__LOGICAL_PARENT = BaseCSTPackage.MODEL_ELEMENT_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -1490,7 +1435,16 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getTransformationCS()
 	 * @generated
 	 */
-	int TRANSFORMATION_CS = 15;
+	int TRANSFORMATION_CS = 14;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_CS__LOGICAL_PARENT = BaseCSTPackage.NAMESPACE_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -1572,7 +1526,16 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getUnrealizedVariableCS()
 	 * @generated
 	 */
-	int UNREALIZED_VARIABLE_CS = 16;
+	int UNREALIZED_VARIABLE_CS = 15;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREALIZED_VARIABLE_CS__LOGICAL_PARENT = REALIZEABLE_VARIABLE_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -1620,24 +1583,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int UNREALIZED_VARIABLE_CS__NAME = REALIZEABLE_VARIABLE_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Lower</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNREALIZED_VARIABLE_CS__LOWER = REALIZEABLE_VARIABLE_CS__LOWER;
-
-	/**
-	 * The feature id for the '<em><b>Multiplicity</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNREALIZED_VARIABLE_CS__MULTIPLICITY = REALIZEABLE_VARIABLE_CS__MULTIPLICITY;
-
-	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1645,15 +1590,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNREALIZED_VARIABLE_CS__OWNED_TYPE = REALIZEABLE_VARIABLE_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Upper</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNREALIZED_VARIABLE_CS__UPPER = REALIZEABLE_VARIABLE_CS__UPPER;
 
 	/**
 	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
@@ -2002,38 +1938,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPatternCS_UnrealizedVariables();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorecst.PackageRefCS <em>Package Ref CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Package Ref CS</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.PackageRefCS
-	 * @generated
-	 */
-	EClass getPackageRefCS();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtcorecst.PackageRefCS#getNamespace <em>Namespace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Namespace</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.PackageRefCS#getNamespace()
-	 * @see #getPackageRefCS()
-	 * @generated
-	 */
-	EReference getPackageRefCS_Namespace();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtcorecst.PackageRefCS#getElement <em>Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Element</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.PackageRefCS#getElement()
-	 * @see #getPackageRefCS()
-	 * @generated
-	 */
-	EReference getPackageRefCS_Element();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS <em>Query CS</em>}'.
@@ -2453,32 +2357,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PATTERN_CS__UNREALIZED_VARIABLES = eINSTANCE.getPatternCS_UnrealizedVariables();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.PackageRefCSImpl <em>Package Ref CS</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.PackageRefCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getPackageRefCS()
-		 * @generated
-		 */
-		EClass PACKAGE_REF_CS = eINSTANCE.getPackageRefCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Namespace</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PACKAGE_REF_CS__NAMESPACE = eINSTANCE.getPackageRefCS_Namespace();
-
-		/**
-		 * The meta object literal for the '<em><b>Element</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PACKAGE_REF_CS__ELEMENT = eINSTANCE.getPackageRefCS_Element();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.QueryCSImpl <em>Query CS</em>}' class.

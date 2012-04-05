@@ -98,15 +98,6 @@ public interface QVTcoreCSTFactory extends EFactory {
 	ParamDeclarationCS createParamDeclarationCS();
 
 	/**
-	 * Returns a new object of class '<em>Package Ref CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Package Ref CS</em>'.
-	 * @generated
-	 */
-	PackageRefCS createPackageRefCS();
-
-	/**
 	 * Returns a new object of class '<em>Query CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

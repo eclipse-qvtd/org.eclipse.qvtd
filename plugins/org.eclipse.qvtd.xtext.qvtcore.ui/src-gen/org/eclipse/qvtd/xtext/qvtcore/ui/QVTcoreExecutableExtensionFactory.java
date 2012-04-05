@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import org.eclipse.qvtd.xtext.qvtcore.ui.internal.QVTcoreActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class QVTcoreExecutableExtensionFactory extends AbstractGuiceAwareExecuta
 
 	@Override
 	protected Bundle getBundle() {
-		return org.eclipse.qvtd.xtext.qvtcore.ui.internal.QVTcoreActivator.getInstance().getBundle();
+		return QVTcoreActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.qvtd.xtext.qvtcore.ui.internal.QVTcoreActivator.getInstance().getInjector("org.eclipse.qvtd.xtext.qvtcore.QVTcore");
+		return QVTcoreActivator.getInstance().getInjector(QVTcoreActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTCORE_QVTCORE);
 	}
 	
 }

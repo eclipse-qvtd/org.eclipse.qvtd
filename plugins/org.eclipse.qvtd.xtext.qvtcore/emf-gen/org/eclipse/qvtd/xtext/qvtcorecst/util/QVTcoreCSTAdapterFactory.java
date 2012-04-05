@@ -126,10 +126,6 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 				return createPatternCSAdapter();
 			}
 			@Override
-			public Adapter casePackageRefCS(PackageRefCS object) {
-				return createPackageRefCSAdapter();
-			}
-			@Override
 			public Adapter caseQueryCS(QueryCS object) {
 				return createQueryCSAdapter();
 			}
@@ -350,20 +346,6 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPatternCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.PackageRefCS <em>Package Ref CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.PackageRefCS
-	 * @generated
-	 */
-	public Adapter createPackageRefCSAdapter() {
 		return null;
 	}
 

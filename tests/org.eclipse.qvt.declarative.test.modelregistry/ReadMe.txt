@@ -1,1 +1,0 @@
-Moved to org.eclipse.eclipse.ocl.examples.tests

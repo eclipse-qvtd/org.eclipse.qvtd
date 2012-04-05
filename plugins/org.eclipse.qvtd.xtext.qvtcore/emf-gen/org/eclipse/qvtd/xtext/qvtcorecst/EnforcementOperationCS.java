@@ -7,8 +7,7 @@
 package org.eclipse.qvtd.xtext.qvtcorecst;
 
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
-
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigatingExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -63,12 +62,12 @@ public interface EnforcementOperationCS extends ModelElementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Operation Call</em>' containment reference.
-	 * @see #setOperationCall(NavigatingExpCS)
+	 * @see #setOperationCall(InvocationExpCS)
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getEnforcementOperationCS_OperationCall()
 	 * @model containment="true"
 	 * @generated
 	 */
-	NavigatingExpCS getOperationCall();
+	InvocationExpCS getOperationCall();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS#getOperationCall <em>Operation Call</em>}' containment reference.
@@ -78,6 +77,6 @@ public interface EnforcementOperationCS extends ModelElementCS {
 	 * @see #getOperationCall()
 	 * @generated
 	 */
-	void setOperationCall(NavigatingExpCS value);
+	void setOperationCall(InvocationExpCS value);
 
 } // EnforcementOperationCS

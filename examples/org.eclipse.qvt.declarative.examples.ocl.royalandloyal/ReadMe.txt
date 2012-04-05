@@ -1,1 +1,0 @@
-Moved to org.eclipse.ocl.examples.project.royalandloyal

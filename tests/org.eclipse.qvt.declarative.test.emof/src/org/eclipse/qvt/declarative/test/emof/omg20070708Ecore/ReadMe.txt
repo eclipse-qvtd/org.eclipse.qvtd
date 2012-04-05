@@ -1,1 +1,0 @@
-These Ecore files are copied from the OMG QVT 20070708 distribution for verification by the JUnit tests.

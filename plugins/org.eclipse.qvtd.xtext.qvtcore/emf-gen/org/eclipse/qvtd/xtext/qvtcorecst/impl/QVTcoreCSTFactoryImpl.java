@@ -68,7 +68,6 @@ public class QVTcoreCSTFactoryImpl extends EFactoryImpl implements QVTcoreCSTFac
 			case QVTcoreCSTPackage.GUARD_PATTERN_CS: return createGuardPatternCS();
 			case QVTcoreCSTPackage.MAPPING_CS: return createMappingCS();
 			case QVTcoreCSTPackage.PARAM_DECLARATION_CS: return createParamDeclarationCS();
-			case QVTcoreCSTPackage.PACKAGE_REF_CS: return createPackageRefCS();
 			case QVTcoreCSTPackage.QUERY_CS: return createQueryCS();
 			case QVTcoreCSTPackage.REALIZED_VARIABLE_CS: return createRealizedVariableCS();
 			case QVTcoreCSTPackage.TOP_LEVEL_CS: return createTopLevelCS();
@@ -157,16 +156,6 @@ public class QVTcoreCSTFactoryImpl extends EFactoryImpl implements QVTcoreCSTFac
 	public ParamDeclarationCS createParamDeclarationCS() {
 		ParamDeclarationCSImpl paramDeclarationCS = new ParamDeclarationCSImpl();
 		return paramDeclarationCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PackageRefCS createPackageRefCS() {
-		PackageRefCSImpl packageRefCS = new PackageRefCSImpl();
-		return packageRefCS;
 	}
 
 	/**

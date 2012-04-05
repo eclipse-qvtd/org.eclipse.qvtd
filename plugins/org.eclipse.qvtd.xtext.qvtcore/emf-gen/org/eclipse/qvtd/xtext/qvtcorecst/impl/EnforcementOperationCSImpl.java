@@ -8,16 +8,11 @@ package org.eclipse.qvtd.xtext.qvtcorecst.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
-
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigatingExpCS;
-
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
 
@@ -64,7 +59,7 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	 * @generated
 	 * @ordered
 	 */
-	protected NavigatingExpCS operationCall;
+	protected InvocationExpCS operationCall;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -111,7 +106,7 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NavigatingExpCS getOperationCall() {
+	public InvocationExpCS getOperationCall() {
 		return operationCall;
 	}
 
@@ -120,8 +115,8 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOperationCall(NavigatingExpCS newOperationCall, NotificationChain msgs) {
-		NavigatingExpCS oldOperationCall = operationCall;
+	public NotificationChain basicSetOperationCall(InvocationExpCS newOperationCall, NotificationChain msgs) {
+		InvocationExpCS oldOperationCall = operationCall;
 		operationCall = newOperationCall;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL, oldOperationCall, newOperationCall);
@@ -135,7 +130,7 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOperationCall(NavigatingExpCS newOperationCall) {
+	public void setOperationCall(InvocationExpCS newOperationCall) {
 		if (newOperationCall != operationCall) {
 			NotificationChain msgs = null;
 			if (operationCall != null)
@@ -191,7 +186,7 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 				setDeletion((Boolean)newValue);
 				return;
 			case QVTcoreCSTPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL:
-				setOperationCall((NavigatingExpCS)newValue);
+				setOperationCall((InvocationExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -209,7 +204,7 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 				setDeletion(DELETION_EDEFAULT);
 				return;
 			case QVTcoreCSTPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL:
-				setOperationCall((NavigatingExpCS)null);
+				setOperationCall((InvocationExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);

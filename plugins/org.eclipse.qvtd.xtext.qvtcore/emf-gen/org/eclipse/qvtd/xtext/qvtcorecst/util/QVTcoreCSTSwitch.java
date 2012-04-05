@@ -209,17 +209,6 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSTPackage.PACKAGE_REF_CS: {
-				PackageRefCS packageRefCS = (PackageRefCS)theEObject;
-				T result = casePackageRefCS(packageRefCS);
-				if (result == null) result = caseModelElementCS(packageRefCS);
-				if (result == null) result = casePivotableElementCS(packageRefCS);
-				if (result == null) result = caseElementCS(packageRefCS);
-				if (result == null) result = casePivotable(packageRefCS);
-				if (result == null) result = caseVisitableCS(packageRefCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTcoreCSTPackage.QUERY_CS: {
 				QueryCS queryCS = (QueryCS)theEObject;
 				T result = caseQueryCS(queryCS);
@@ -454,21 +443,6 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePatternCS(PatternCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Package Ref CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Package Ref CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePackageRefCS(PackageRefCS object) {
 		return null;
 	}
 
