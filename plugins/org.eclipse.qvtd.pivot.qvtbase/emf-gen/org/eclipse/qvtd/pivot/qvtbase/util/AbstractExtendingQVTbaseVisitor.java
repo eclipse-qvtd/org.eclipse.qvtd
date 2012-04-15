@@ -46,34 +46,34 @@ public abstract class AbstractExtendingQVTbaseVisitor<R, C>
 	}	
 
 	public R visitDomain(org.eclipse.qvtd.pivot.qvtbase.Domain object) {
-		return visit(object);
+		return visitNamedElement(object);
 	}
 
 	public R visitFunction(org.eclipse.qvtd.pivot.qvtbase.Function object) {
-		return visit(object);
+		return visitOperation(object);
 	}
 
 	public R visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.FunctionParameter object) {
-		return visit(object);
+		return visitParameter(object);
 	}
 
 	public R visitPattern(org.eclipse.qvtd.pivot.qvtbase.Pattern object) {
-		return visit(object);
+		return visitElement(object);
 	}
 
 	public R visitPredicate(org.eclipse.qvtd.pivot.qvtbase.Predicate object) {
-		return visit(object);
+		return visitElement(object);
 	}
 
 	public R visitRule(org.eclipse.qvtd.pivot.qvtbase.Rule object) {
-		return visit(object);
+		return visitNamedElement(object);
 	}
 
 	public R visitTransformation(org.eclipse.qvtd.pivot.qvtbase.Transformation object) {
-		return visit(object);
+		return visitClass(object);
 	}
 
 	public R visitTypedModel(org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
-		return visit(object);
+		return visitNamedElement(object);
 	}
 }

@@ -9,9 +9,11 @@ package org.eclipse.qvtd.xtext.qvtcorecst.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.TypedElementCSImpl;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 
 import org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
+import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,4 +44,10 @@ public class ParamDeclarationCSImpl extends TypedElementCSImpl implements ParamD
 		return QVTcoreCSTPackage.Literals.PARAM_DECLARATION_CS;
 	}
 
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R, C> R accept(BaseCSVisitor<R, C> visitor) {
+		return (R) visitor.getAdapter(QVTcoreCSVisitor.class).visitParamDeclarationCS(this);
+	}
 } //ParamDeclarationCSImpl

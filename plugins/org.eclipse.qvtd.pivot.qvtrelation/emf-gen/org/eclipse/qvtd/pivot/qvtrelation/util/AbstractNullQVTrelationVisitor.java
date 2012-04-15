@@ -30,7 +30,7 @@ package	org.eclipse.qvtd.pivot.qvtrelation.util;
  * visitXxx method that returns null.
  */
 public abstract class AbstractNullQVTrelationVisitor<R, C>
-	extends AbstractQVTrelationVisitor<R, C>
+	extends org.eclipse.qvtd.pivot.qvttemplate.util.AbstractNullQVTtemplateVisitor<R, C> implements QVTrelationVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.

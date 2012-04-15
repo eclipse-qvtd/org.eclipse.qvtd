@@ -19,7 +19,7 @@
 module GenerateQVTModels
 
 import org.eclipse.ocl.examples.build.utilities.*
-import org.eclipse.emf.mwe.utils.*
+import org.eclipse.qvtd.build.utilities.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
 
@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.resource.impl.*
 Workflow {
 	bean = ResourceSetImpl : resourceSet {}
     bean = StandaloneSetup { resourceSet = resourceSet
-    	platformUri = "./META-INF"		// A local folder to minimize workspace searching
+    	platformUri = ".."		// A local folder to minimize workspace searching
     	scanClassPath = true			// But we do need to search the plugin-space
     	uriMap = Mapping {
     		from = "platform:/plugin/org.eclipse.emf.ecore/"
@@ -62,6 +62,41 @@ Workflow {
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel"
     }
-  	component = @GenerateQVTVisitors {}
+    component = QVTVisitorCodeGenerator { resourceSet = resourceSet
+    	ecoreFile = "/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore"
+    	javaFolder = "/../plugins/org.eclipse.qvtd.pivot.qvtbase/emf-gen"
+    	javaPackageName = "org.eclipse.qvtd.pivot.qvtbase"
+    	modelPackageName = "org.eclipse.qvtd.pivot.qvtbase"
+    	visitorClassName = "QVTbaseVisitor"
+    	visitorBasePackageName = "org.eclipse.ocl.examples.pivot.util"
+    	visitorBaseClassName = "Visitor"
+    }
+    component = QVTVisitorCodeGenerator { resourceSet = resourceSet
+    	ecoreFile = "/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore"
+    	javaFolder = "/../plugins/org.eclipse.qvtd.pivot.qvtcore/emf-gen"
+    	javaPackageName = "org.eclipse.qvtd.pivot.qvtcore"
+    	modelPackageName = "org.eclipse.qvtd.pivot.qvtcore"
+    	visitorClassName = "QVTcoreVisitor"
+    	visitorBasePackageName = "org.eclipse.qvtd.pivot.qvtbase.util"
+    	visitorBaseClassName = "QVTbaseVisitor"
+    }
+    component = QVTVisitorCodeGenerator { resourceSet = resourceSet
+    	ecoreFile = "/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore"
+    	javaFolder = "/../plugins/org.eclipse.qvtd.pivot.qvttemplate/emf-gen"
+    	javaPackageName = "org.eclipse.qvtd.pivot.qvttemplate"
+    	modelPackageName = "org.eclipse.qvtd.pivot.qvttemplate"
+    	visitorClassName = "QVTtemplateVisitor"
+    	visitorBasePackageName = "org.eclipse.qvtd.pivot.qvtbase.util"
+    	visitorBaseClassName = "QVTbaseVisitor"
+    }
+    component = QVTVisitorCodeGenerator { resourceSet = resourceSet
+    	ecoreFile = "/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore"
+    	javaFolder = "/../plugins/org.eclipse.qvtd.pivot.qvtrelation/emf-gen"
+    	javaPackageName = "org.eclipse.qvtd.pivot.qvtrelation"
+    	modelPackageName = "org.eclipse.qvtd.pivot.qvtrelation"
+    	visitorClassName = "QVTrelationVisitor"
+    	visitorBasePackageName = "org.eclipse.qvtd.pivot.qvttemplate.util"
+    	visitorBaseClassName = "QVTtemplateVisitor"
+    }
 }
 

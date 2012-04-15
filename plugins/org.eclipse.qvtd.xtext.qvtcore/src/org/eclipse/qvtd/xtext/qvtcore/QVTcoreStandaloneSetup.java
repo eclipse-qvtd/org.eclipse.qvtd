@@ -16,14 +16,49 @@
  */
 package org.eclipse.qvtd.xtext.qvtcore;
 
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreSaver;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreToStringVisitor;
+import org.eclipse.qvtd.xtext.qvtcore.cs2pivot.QVTcoreCS2Pivot;
+import org.eclipse.qvtd.xtext.qvtcore.scoping.QVTcoreScoping;
+
+import com.google.inject.Injector;
+
 /**
  * Initialization support for running Xtext languages 
  * without equinox extension registry
  */
-public class QVTcoreStandaloneSetup extends QVTcoreStandaloneSetupGenerated{
-
+public class QVTcoreStandaloneSetup extends QVTcoreStandaloneSetupGenerated
+{
+	private static Injector injector = null;
+	
 	public static void doSetup() {
-		new QVTcoreStandaloneSetup().createInjectorAndDoEMFRegistration();
+		if (injector == null) {
+			injector = new QVTcoreStandaloneSetup().createInjectorAndDoEMFRegistration();
+		}
+	}
+
+	public static void init() {
+		QVTcoreScoping.init();
+//		QVTcoreCS2MonikerVisitor.FACTORY.getClass();
+		QVTcoreCS2Pivot.FACTORY.getClass();
+		QVTcoreSaver.FACTORY.getClass();
+		QVTcoreToStringVisitor.FACTORY.getClass();
+	}
+	
+	/**
+	 * Return the Injector for this plugin.
+	 */
+	public static final Injector getInjector() {
+		if (injector == null) {
+			doSetup();
+		}
+		return injector;
+	}
+
+	@Override
+	public Injector createInjector() {
+		init();
+		return super.createInjector();
 	}
 }
 

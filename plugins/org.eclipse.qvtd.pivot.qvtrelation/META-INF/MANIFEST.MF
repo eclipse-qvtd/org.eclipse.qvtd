@@ -9,7 +9,8 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.qvtd.pivot.qvtrelation,
  org.eclipse.qvtd.pivot.qvtrelation.impl,
- org.eclipse.qvtd.pivot.qvtrelation.util
+ org.eclipse.qvtd.pivot.qvtrelation.util,
+ org.eclipse.qvtd.pivot.qvtrelation.utilities
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.qvtd.pivot.qvtbase;visibility:=reexport,
  org.eclipse.qvtd.pivot.qvttemplate;visibility:=reexport

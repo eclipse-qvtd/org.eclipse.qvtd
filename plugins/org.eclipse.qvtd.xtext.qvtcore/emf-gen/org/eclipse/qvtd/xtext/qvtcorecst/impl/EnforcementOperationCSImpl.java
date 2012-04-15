@@ -12,9 +12,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
+import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -229,17 +231,17 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (deletion: ");
-		result.append(deletion);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R, C> R accept(BaseCSVisitor<R, C> visitor) {
+		return (R) visitor.getAdapter(QVTcoreCSVisitor.class).visitEnforcementOperationCS(this);
+	}
 } //EnforcementOperationCSImpl

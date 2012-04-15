@@ -54,10 +54,10 @@ public abstract class AbstractExtendingQVTtemplateVisitor<R, C>
 	}
 
 	public R visitPropertyTemplateItem(org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
-		return visit(object);
+		return visitElement(object);
 	}
 
 	public R visitTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
-		return visit(object);
+		return visitLiteralExp(object);
 	}
 }

@@ -18,10 +18,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
 import org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -188,4 +190,10 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 		return super.eIsSet(featureID);
 	}
 
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R, C> R accept(BaseCSVisitor<R, C> visitor) {
+		return (R) visitor.getAdapter(QVTcoreCSVisitor.class).visitBottomPatternCS(this);
+	}
 } //BottomPatternCSImpl

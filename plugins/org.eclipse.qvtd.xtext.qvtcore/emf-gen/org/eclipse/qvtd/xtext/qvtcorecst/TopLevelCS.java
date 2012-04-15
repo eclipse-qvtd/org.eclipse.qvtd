@@ -8,6 +8,10 @@ package org.eclipse.qvtd.xtext.qvtcorecst;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.LibraryCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 
 /**
@@ -28,7 +32,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
  * @model
  * @generated
  */
-public interface TopLevelCS extends ModelElementCS {
+public interface TopLevelCS extends RootPackageCS {
 	/**
 	 * Returns the value of the '<em><b>Transformations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS}.

@@ -8,29 +8,29 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="bottomPattern" eType="#//BottomPatternCS"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AssignmentCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="initialiser" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BottomPatternCS" eSuperTypes="#//PatternCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="enforcementOperations"
         upperBound="-1" eType="#//EnforcementOperationCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="realizedVariables" upperBound="-1"
         eType="#//RealizedVariableCS" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConstraintCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialiser" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DirectionCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//NamedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Package"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="uses" upperBound="-1" eType="#//DirectionCS"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#//CoreDomain"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainCS" eSuperTypes="#//AreaCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="check" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="enforce" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="direction" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#//CoreDomain"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnforcementOperationCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ModelElementCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="deletion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -43,7 +43,7 @@
         eType="#//MappingCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="domains" upperBound="-1"
         eType="#//DomainCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="in" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="in" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Transformation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="middle" lowerBound="1"
         eType="#//DomainCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refines" upperBound="-1"
@@ -52,8 +52,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ParamDeclarationCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//TypedElementCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="PatternCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ModelElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS"
-        containment="true"/>
+        eType="#//ConstraintCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="unrealizedVariables" upperBound="-1"
         eType="#//UnrealizedVariableCS" containment="true"/>
   </eClassifiers>
@@ -66,7 +65,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="RealizeableVariableCS" abstract="true"
       eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//TypedElementCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="RealizedVariableCS" eSuperTypes="#//RealizeableVariableCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TopLevelCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ModelElementCS">
+  <eClassifiers xsi:type="ecore:EClass" name="TopLevelCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//RootPackageCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformations" upperBound="-1"
         eType="#//TransformationCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="queries" upperBound="-1"
@@ -74,7 +73,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappings" upperBound="-1"
         eType="#//MappingCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TransformationCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//NamespaceCS">
+  <eClassifiers xsi:type="ecore:EClass" name="TransformationCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//PackageCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Namespace"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="directions" upperBound="-1"

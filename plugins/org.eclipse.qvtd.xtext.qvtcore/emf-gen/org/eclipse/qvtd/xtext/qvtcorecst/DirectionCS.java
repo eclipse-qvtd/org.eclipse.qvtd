@@ -9,6 +9,7 @@ package org.eclipse.qvtd.xtext.qvtcorecst;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,7 +47,7 @@ public interface DirectionCS extends NamedElementCS {
 
 	/**
 	 * Returns the value of the '<em><b>Uses</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS}.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtcore.CoreDomain}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Uses</em>' reference list isn't clear,
@@ -58,6 +59,6 @@ public interface DirectionCS extends NamedElementCS {
 	 * @model
 	 * @generated
 	 */
-	EList<DirectionCS> getUses();
+	EList<CoreDomain> getUses();
 
 } // DirectionCS

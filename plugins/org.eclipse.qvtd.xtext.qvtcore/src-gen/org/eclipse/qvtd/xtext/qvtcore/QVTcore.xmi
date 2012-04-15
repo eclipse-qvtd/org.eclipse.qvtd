@@ -13,6 +13,9 @@
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="pivot">
       <ePackage href="http://www.eclipse.org/ocl/3.1.0/Pivot#/"/>
     </metamodelDeclarations>
+    <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="qvtbase">
+      <ePackage href="http://www.eclipse.org/qvt/0.9/QVTbase#/"/>
+    </metamodelDeclarations>
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="qvtcore">
       <ePackage href="http://www.eclipse.org/qvt/0.9/QVTcore#/"/>
     </metamodelDeclarations>
@@ -20,23 +23,364 @@
       <ePackage href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#/"/>
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="TopLevelCS">
-      <type metamodel="/0/@metamodelDeclarations.5">
+      <type metamodel="/0/@metamodelDeclarations.6">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//TopLevelCS"/>
       </type>
-      <alternatives xsi:type="xtext:Alternatives" cardinality="*">
-        <elements xsi:type="xtext:Assignment" feature="mappings" operator="+=">
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Alternatives" cardinality="*">
+          <elements xsi:type="xtext:Assignment" feature="ownedImport" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="ownedLibrary" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Alternatives" cardinality="*">
+          <elements xsi:type="xtext:Assignment" feature="mappings" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="transformations" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="queries" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="BottomPatternCS">
+      <type metamodel="/0/@metamodelDeclarations.6">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//BottomPatternCS"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.6">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//BottomPatternCS"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:Assignment" feature="unrealizedVariables" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+            </elements>
+            <elements xsi:type="xtext:Assignment" feature="realizedVariables" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Keyword" value=","/>
+            <elements xsi:type="xtext:Alternatives">
+              <elements xsi:type="xtext:Assignment" feature="unrealizedVariables" operator="+=">
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+              </elements>
+              <elements xsi:type="xtext:Assignment" feature="realizedVariables" operator="+=">
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
+              </elements>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="|"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="*" feature="constraints" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
         </elements>
-        <elements xsi:type="xtext:Assignment" feature="transformations" operator="+=">
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ComposedMappingCS">
+      <type metamodel="/0/@metamodelDeclarations.6">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//MappingCS"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ConstraintCS">
+      <type metamodel="/0/@metamodelDeclarations.6">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//ConstraintCS"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="default" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="default"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="target" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.61"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value=":="/>
+          <elements xsi:type="xtext:Assignment" feature="initialiser" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.61"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=";"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="DirectionCS">
+      <type metamodel="/0/@metamodelDeclarations.6">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//DirectionCS"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="imports"/>
+          <elements xsi:type="xtext:Assignment" feature="imports" operator="+=">
+            <terminal xsi:type="xtext:CrossReference">
+              <type metamodel="/0/@metamodelDeclarations.3">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Package"/>
+              </type>
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+            </terminal>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Keyword" value=","/>
+            <elements xsi:type="xtext:Assignment" feature="imports" operator="+=">
+              <terminal xsi:type="xtext:CrossReference">
+                <type metamodel="/0/@metamodelDeclarations.3">
+                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Package"/>
+                </type>
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+              </terminal>
+            </elements>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="uses"/>
+          <elements xsi:type="xtext:Assignment" feature="uses" operator="+=">
+            <terminal xsi:type="xtext:CrossReference">
+              <type metamodel="/0/@metamodelDeclarations.5">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcore#//CoreDomain"/>
+              </type>
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+            </terminal>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Keyword" value=","/>
+            <elements xsi:type="xtext:Assignment" feature="uses" operator="+=">
+              <terminal xsi:type="xtext:CrossReference">
+                <type metamodel="/0/@metamodelDeclarations.5">
+                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcore#//CoreDomain"/>
+                </type>
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+              </terminal>
+            </elements>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="GuardPatternCS">
+      <type metamodel="/0/@metamodelDeclarations.6">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//GuardPatternCS"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.6">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//GuardPatternCS"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Assignment" feature="unrealizedVariables" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Keyword" value=","/>
+            <elements xsi:type="xtext:Assignment" feature="unrealizedVariables" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="|"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="*" feature="constraints" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ImportCS">
+      <type metamodel="/0/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/BaseCST#//ImportCS"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="import"/>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.24"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=":"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="namespace" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/0/@metamodelDeclarations.3">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Namespace"/>
+            </type>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.18"/>
+          </terminal>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Assignment" feature="all" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="::"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="*"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=";"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="LibraryCS">
+      <type metamodel="/0/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/BaseCST#//LibraryCS"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="library"/>
+        <elements xsi:type="xtext:Assignment" feature="package" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/0/@metamodelDeclarations.3">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Package"/>
+            </type>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.18"/>
+          </terminal>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=";"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="MappingCS">
+      <type metamodel="/0/@metamodelDeclarations.6">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//MappingCS"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="map"/>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="in"/>
+          <elements xsi:type="xtext:Assignment" feature="in" operator="=">
+            <terminal xsi:type="xtext:CrossReference">
+              <type metamodel="/0/@metamodelDeclarations.4">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTbase#//Transformation"/>
+              </type>
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+            </terminal>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="refines"/>
+          <elements xsi:type="xtext:Assignment" feature="refines" operator="+=">
+            <terminal xsi:type="xtext:CrossReference">
+              <type metamodel="/0/@metamodelDeclarations.5">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcore#//Mapping"/>
+              </type>
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+            </terminal>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Keyword" value=","/>
+            <elements xsi:type="xtext:Assignment" feature="refines" operator="+=">
+              <terminal xsi:type="xtext:CrossReference">
+                <type metamodel="/0/@metamodelDeclarations.5">
+                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcore#//Mapping"/>
+                </type>
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+              </terminal>
+            </elements>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="{"/>
+        <elements xsi:type="xtext:Assignment" cardinality="*" feature="domains" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="where"/>
+          <elements xsi:type="xtext:Assignment" feature="domains" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="*" feature="composedMappings" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="}"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="NamedDomainCS">
+      <type metamodel="/0/@metamodelDeclarations.6">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//DomainCS"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="check" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="check"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="enforce" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="enforce"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="direction" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/0/@metamodelDeclarations.5">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcore#//CoreDomain"/>
+            </type>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+          </terminal>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="("/>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="guardPattern" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=")"/>
+        <elements xsi:type="xtext:Keyword" value="{"/>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="bottomPattern" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
         </elements>
-        <elements xsi:type="xtext:Assignment" feature="queries" operator="+=">
+        <elements xsi:type="xtext:Keyword" value="}"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ParamDeclarationCS">
+      <type metamodel="/0/@metamodelDeclarations.6">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//ParamDeclarationCS"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=":"/>
+        <elements xsi:type="xtext:Assignment" feature="ownedType" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.60"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="QueryCS">
+      <type metamodel="/0/@metamodelDeclarations.6">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//QueryCS"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="query"/>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="("/>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Assignment" feature="inputParamDeclaration" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Keyword" value=","/>
+            <elements xsi:type="xtext:Assignment" feature="inputParamDeclaration" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
+            </elements>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=")"/>
+        <elements xsi:type="xtext:Keyword" value=":"/>
+        <elements xsi:type="xtext:Assignment" feature="ownedType" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.60"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value=";"/>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="{"/>
+            <elements xsi:type="xtext:Assignment" feature="oclExpression" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.61"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value="}"/>
+          </elements>
         </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TransformationCS">
-      <type metamodel="/0/@metamodelDeclarations.5">
+      <type metamodel="/0/@metamodelDeclarations.6">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//TransformationCS"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -47,7 +391,7 @@
               <type metamodel="/0/@metamodelDeclarations.3">
                 <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Namespace"/>
               </type>
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
             </terminal>
           </elements>
           <elements xsi:type="xtext:Keyword" value="::"/>
@@ -69,228 +413,20 @@
         <elements xsi:type="xtext:Keyword" value="{"/>
         <elements xsi:type="xtext:Group" cardinality="*">
           <elements xsi:type="xtext:Assignment" feature="directions" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
-          </elements>
-          <elements xsi:type="xtext:Keyword" value=";"/>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value="}"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="DirectionCS">
-      <type metamodel="/0/@metamodelDeclarations.5">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//DirectionCS"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="imports"/>
-          <elements xsi:type="xtext:Assignment" feature="imports" operator="+=">
-            <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/0/@metamodelDeclarations.3">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Package"/>
-              </type>
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
-            </terminal>
-          </elements>
-          <elements xsi:type="xtext:Group" cardinality="*">
-            <elements xsi:type="xtext:Keyword" value=","/>
-            <elements xsi:type="xtext:Assignment" feature="imports" operator="+=">
-              <terminal xsi:type="xtext:CrossReference">
-                <type metamodel="/0/@metamodelDeclarations.3">
-                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Package"/>
-                </type>
-                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
-              </terminal>
-            </elements>
-          </elements>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="uses"/>
-          <elements xsi:type="xtext:Assignment" feature="uses" operator="+=">
-            <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/0/@metamodelDeclarations.5">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//DirectionCS"/>
-              </type>
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
-            </terminal>
-          </elements>
-          <elements xsi:type="xtext:Group" cardinality="*">
-            <elements xsi:type="xtext:Keyword" value=","/>
-            <elements xsi:type="xtext:Assignment" feature="uses" operator="+=">
-              <terminal xsi:type="xtext:CrossReference">
-                <type metamodel="/0/@metamodelDeclarations.5">
-                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//DirectionCS"/>
-                </type>
-                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
-              </terminal>
-            </elements>
-          </elements>
-        </elements>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="MappingCS">
-      <type metamodel="/0/@metamodelDeclarations.5">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//MappingCS"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="map"/>
-        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="in"/>
-          <elements xsi:type="xtext:Assignment" feature="in" operator="=">
-            <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/0/@metamodelDeclarations.3">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Package"/>
-              </type>
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
-            </terminal>
-          </elements>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="refines"/>
-          <elements xsi:type="xtext:Assignment" feature="refines" operator="+=">
-            <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/0/@metamodelDeclarations.4">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcore#//Mapping"/>
-              </type>
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
-            </terminal>
-          </elements>
-          <elements xsi:type="xtext:Group" cardinality="*">
-            <elements xsi:type="xtext:Keyword" value=","/>
-            <elements xsi:type="xtext:Assignment" feature="refines" operator="+=">
-              <terminal xsi:type="xtext:CrossReference">
-                <type metamodel="/0/@metamodelDeclarations.4">
-                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcore#//Mapping"/>
-                </type>
-                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
-              </terminal>
-            </elements>
-          </elements>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value="{"/>
-        <elements xsi:type="xtext:Group" cardinality="*">
-          <elements xsi:type="xtext:Keyword" cardinality="?" value="check"/>
-          <elements xsi:type="xtext:Keyword" cardinality="?" value="enforce"/>
-          <elements xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
-          <elements xsi:type="xtext:Assignment" feature="domains" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
           </elements>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value="where"/>
-        <elements xsi:type="xtext:Assignment" feature="domains" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
-        </elements>
-        <elements xsi:type="xtext:Assignment" cardinality="*" feature="composedMappings" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value="}"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="DomainCS">
-      <type metamodel="/0/@metamodelDeclarations.5">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//DomainCS"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="("/>
-        <elements xsi:type="xtext:Assignment" feature="guardPattern" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value=")"/>
-        <elements xsi:type="xtext:Keyword" value="{"/>
-        <elements xsi:type="xtext:Assignment" feature="bottomPattern" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value="}"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="ComposedMappingCS">
-      <type metamodel="/0/@metamodelDeclarations.5">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//MappingCS"/>
-      </type>
-      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="GuardPatternCS">
-      <type metamodel="/0/@metamodelDeclarations.5">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//GuardPatternCS"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Action">
-          <type metamodel="/0/@metamodelDeclarations.5">
-            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//GuardPatternCS"/>
-          </type>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Assignment" feature="unrealizedVariables" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
-          </elements>
-          <elements xsi:type="xtext:Group" cardinality="*">
-            <elements xsi:type="xtext:Keyword" value=","/>
-            <elements xsi:type="xtext:Assignment" feature="unrealizedVariables" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
-            </elements>
-          </elements>
-          <elements xsi:type="xtext:Keyword" value="|"/>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="*">
-          <elements xsi:type="xtext:Assignment" feature="constraints" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
-          </elements>
           <elements xsi:type="xtext:Keyword" value=";"/>
         </elements>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="BottomPatternCS">
-      <type metamodel="/0/@metamodelDeclarations.5">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//BottomPatternCS"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Action">
-          <type metamodel="/0/@metamodelDeclarations.5">
-            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//BottomPatternCS"/>
-          </type>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Alternatives">
-            <elements xsi:type="xtext:Assignment" feature="unrealizedVariables" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
-            </elements>
-            <elements xsi:type="xtext:Assignment" feature="realizedVariables" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
-            </elements>
-          </elements>
-          <elements xsi:type="xtext:Group" cardinality="*">
-            <elements xsi:type="xtext:Keyword" value=","/>
-            <elements xsi:type="xtext:Alternatives">
-              <elements xsi:type="xtext:Assignment" feature="unrealizedVariables" operator="+=">
-                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
-              </elements>
-              <elements xsi:type="xtext:Assignment" feature="realizedVariables" operator="+=">
-                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
-              </elements>
-            </elements>
-          </elements>
-          <elements xsi:type="xtext:Keyword" value="|"/>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="*">
-          <elements xsi:type="xtext:Assignment" feature="constraints" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
-          </elements>
-          <elements xsi:type="xtext:Keyword" value=";"/>
-        </elements>
+        <elements xsi:type="xtext:Keyword" value="}"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="UnrealizedVariableCS">
-      <type metamodel="/0/@metamodelDeclarations.5">
+      <type metamodel="/0/@metamodelDeclarations.6">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//UnrealizedVariableCS"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="name" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value=":"/>
         <elements xsi:type="xtext:Assignment" feature="ownedType" operator="=">
@@ -299,13 +435,13 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="RealizedVariableCS">
-      <type metamodel="/0/@metamodelDeclarations.5">
+      <type metamodel="/0/@metamodelDeclarations.6">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//RealizedVariableCS"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="realize"/>
         <elements xsi:type="xtext:Assignment" feature="name" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value=":"/>
         <elements xsi:type="xtext:Assignment" feature="ownedType" operator="=">
@@ -313,106 +449,26 @@
         </elements>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="ConstraintCS">
-      <type metamodel="/0/@metamodelDeclarations.2">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/EssentialOCLCST#//ExpCS"/>
-      </type>
-      <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="PredicateCS">
-      <type metamodel="/0/@metamodelDeclarations.2">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/EssentialOCLCST#//ExpCS"/>
-      </type>
-      <alternatives xsi:type="xtext:RuleCall" rule="/1/@rules.61"/>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="AssignmentCS">
-      <type metamodel="/0/@metamodelDeclarations.5">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//AssignmentCS"/>
+    <rules xsi:type="xtext:ParserRule" name="UnnamedDomainCS">
+      <type metamodel="/0/@metamodelDeclarations.6">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//DomainCS"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Assignment" cardinality="?" feature="default" operator="?=">
-          <terminal xsi:type="xtext:Keyword" value="default"/>
-        </elements>
-        <elements xsi:type="xtext:Assignment" feature="target" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.61"/>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value=":="/>
-        <elements xsi:type="xtext:Assignment" feature="initialiser" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.61"/>
-        </elements>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="DirectionNameCS">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      </type>
-      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="MappingNameCS">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      </type>
-      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="VariableNameCS">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      </type>
-      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="QueryCS">
-      <type metamodel="/0/@metamodelDeclarations.5">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//QueryCS"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="query"/>
-        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.6">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//DomainCS"/>
+          </type>
         </elements>
         <elements xsi:type="xtext:Keyword" value="("/>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Assignment" feature="inputParamDeclaration" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
-          </elements>
-          <elements xsi:type="xtext:Group" cardinality="*">
-            <elements xsi:type="xtext:Keyword" value=","/>
-            <elements xsi:type="xtext:Assignment" feature="inputParamDeclaration" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
-            </elements>
-          </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="guardPattern" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value=")"/>
-        <elements xsi:type="xtext:Keyword" value=":"/>
-        <elements xsi:type="xtext:Assignment" feature="ownedType" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.60"/>
+        <elements xsi:type="xtext:Keyword" value="{"/>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="bottomPattern" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
         </elements>
-        <elements xsi:type="xtext:Alternatives">
-          <elements xsi:type="xtext:Keyword" value=";"/>
-          <elements xsi:type="xtext:Group">
-            <elements xsi:type="xtext:Keyword" value="{"/>
-            <elements xsi:type="xtext:Assignment" feature="oclExpression" operator="=">
-              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.61"/>
-            </elements>
-            <elements xsi:type="xtext:Keyword" value="}"/>
-          </elements>
-        </elements>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="ParamDeclarationCS">
-      <type metamodel="/0/@metamodelDeclarations.5">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//ParamDeclarationCS"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value=":"/>
-        <elements xsi:type="xtext:Assignment" feature="ownedType" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.60"/>
-        </elements>
+        <elements xsi:type="xtext:Keyword" value="}"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="UnrestrictedName">
@@ -423,14 +479,15 @@
         <elements xsi:type="xtext:RuleCall" rule="/1/@rules.29"/>
         <elements xsi:type="xtext:Keyword" value="check"/>
         <elements xsi:type="xtext:Keyword" value="enforce"/>
+        <elements xsi:type="xtext:Keyword" value="import"/>
         <elements xsi:type="xtext:Keyword" value="imports"/>
+        <elements xsi:type="xtext:Keyword" value="library"/>
         <elements xsi:type="xtext:Keyword" value="map"/>
         <elements xsi:type="xtext:Keyword" value="query"/>
         <elements xsi:type="xtext:Keyword" value="realize"/>
         <elements xsi:type="xtext:Keyword" value="refines"/>
         <elements xsi:type="xtext:Keyword" value="transformation"/>
         <elements xsi:type="xtext:Keyword" value="uses"/>
-        <elements xsi:type="xtext:Keyword" value="where"/>
       </alternatives>
     </rules>
   </xtext:Grammar>
@@ -788,7 +845,7 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
         <elements xsi:type="xtext:RuleCall" rule="/1/@rules.38"/>
         <elements xsi:type="xtext:RuleCall" rule="/1/@rules.36"/>
         <elements xsi:type="xtext:Keyword" value="Tuple"/>
@@ -825,7 +882,7 @@
           <type metamodel="/1/@metamodelDeclarations.1">
             <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//NamedElement"/>
           </type>
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
         </terminal>
       </alternatives>
     </rules>
@@ -966,7 +1023,7 @@
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="name" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value=":"/>
         <elements xsi:type="xtext:Assignment" feature="ownedType" operator="=">
@@ -1023,7 +1080,7 @@
             <type metamodel="/1/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Property"/>
             </type>
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
           </terminal>
         </elements>
         <elements xsi:type="xtext:Keyword" value="="/>
@@ -1070,7 +1127,7 @@
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="name" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
         </elements>
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value=":"/>
@@ -1598,7 +1655,7 @@
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="name" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
         </elements>
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value=":"/>

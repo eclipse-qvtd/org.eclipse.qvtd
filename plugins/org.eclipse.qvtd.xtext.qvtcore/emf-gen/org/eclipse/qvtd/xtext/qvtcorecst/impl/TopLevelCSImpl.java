@@ -18,13 +18,18 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.ocl.examples.xtext.base.baseCST.impl.RootPackageCSImpl;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.LibraryCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 
 import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
 import org.eclipse.qvtd.xtext.qvtcorecst.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +46,7 @@ import org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS;
  *
  * @generated
  */
-public class TopLevelCSImpl extends ModelElementCSImpl implements TopLevelCS {
+public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	/**
 	 * The cached value of the '{@link #getTransformations() <em>Transformations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -227,4 +232,10 @@ public class TopLevelCSImpl extends ModelElementCSImpl implements TopLevelCS {
 		return super.eIsSet(featureID);
 	}
 
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R, C> R accept(BaseCSVisitor<R, C> visitor) {
+		return (R) visitor.getAdapter(QVTcoreCSVisitor.class).visitTopLevelCS(this);
+	}
 } //TopLevelCSImpl

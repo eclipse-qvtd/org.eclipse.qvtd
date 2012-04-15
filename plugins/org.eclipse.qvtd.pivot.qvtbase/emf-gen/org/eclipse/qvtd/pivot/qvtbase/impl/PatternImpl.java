@@ -216,5 +216,4 @@ public class PatternImpl extends ElementImpl implements Pattern {
 	public <R, C> R accept(Visitor<R, C> visitor) {
 		return (R) visitor.getAdapter(QVTbaseVisitor.class).visitPattern(this);
 	}
-
 } //PatternImpl

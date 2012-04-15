@@ -11,6 +11,6 @@
 [comment pkg.generateAbstractMonitorVisitor(javaPackage, modelPackage, 'AbstractMoniker' + visitorClass, visitorBasePackage + 'ities.Moniker' + visitorBaseClass, sourceFile)/]
 [pkg.generateAbstractDelegatingVisitor(javaPackage, modelPackage, visitorClass, visitorBasePackage, visitorBaseClass, 'org.eclipse.ocl.examples.pivot.util.Visitable', sourceFile)/]
 [comment pkg.generateAbstractExtendingDelegatingVisitor(javaPackage, modelPackage, visitorClass, visitorBasePackage, visitorBaseClass, 'org.eclipse.ocl.examples.pivot.util.Visitable', sourceFile)/]
-[pkg.generateAbstractNullVisitor(javaPackage, modelPackage, visitorClass, sourceFile)/]
+[pkg.generateDerivedAbstractNullVisitor(javaPackage, modelPackage, visitorClass, visitorBasePackage, visitorBaseClass, 'org.eclipse.ocl.examples.pivot.util.Visitable', sourceFile)/]
 [comment pkg.generateDecorableVisitorInterface(javaPackage, visitorClass, visitorBasePackage, visitorBaseClass, 'org.eclipse.ocl.examples.pivot.util.PivotVisitor', sourceFile)/]
 [/template]

@@ -50,11 +50,11 @@ public abstract class AbstractExtendingQVTrelationVisitor<R, C>
 	}
 
 	public R visitKey(org.eclipse.qvtd.pivot.qvtrelation.Key object) {
-		return visit(object);
+		return visitElement(object);
 	}
 
 	public R visitOppositePropertyCallExp(org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp object) {
-		return visit(object);
+		return visitPropertyCallExp(object);
 	}
 
 	public R visitRelation(org.eclipse.qvtd.pivot.qvtrelation.Relation object) {
@@ -62,7 +62,7 @@ public abstract class AbstractExtendingQVTrelationVisitor<R, C>
 	}
 
 	public R visitRelationCallExp(org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp object) {
-		return visit(object);
+		return visitOclExpression(object);
 	}
 
 	public R visitRelationDomain(org.eclipse.qvtd.pivot.qvtrelation.RelationDomain object) {
@@ -70,11 +70,11 @@ public abstract class AbstractExtendingQVTrelationVisitor<R, C>
 	}
 
 	public R visitRelationDomainAssignment(org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment object) {
-		return visit(object);
+		return visitElement(object);
 	}
 
 	public R visitRelationImplementation(org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation object) {
-		return visit(object);
+		return visitElement(object);
 	}
 
 	public R visitRelationalTransformation(org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation object) {

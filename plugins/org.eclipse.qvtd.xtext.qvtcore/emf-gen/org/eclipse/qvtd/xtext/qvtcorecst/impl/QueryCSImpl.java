@@ -22,12 +22,14 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.TypedElementCSImpl;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 
 import org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
 import org.eclipse.qvtd.xtext.qvtcorecst.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -224,4 +226,10 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		return super.eIsSet(featureID);
 	}
 
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R, C> R accept(BaseCSVisitor<R, C> visitor) {
+		return (R) visitor.getAdapter(QVTcoreCSVisitor.class).visitQueryCS(this);
+	}
 } //QueryCSImpl

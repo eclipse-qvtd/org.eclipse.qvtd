@@ -10,10 +10,14 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
+import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,6 +28,7 @@ import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.DomainCSImpl#isCheck <em>Check</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.DomainCSImpl#isEnforce <em>Enforce</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.DomainCSImpl#getDirection <em>Direction</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,6 +74,16 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	 * @ordered
 	 */
 	protected boolean enforce = ENFORCE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDirection() <em>Direction</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDirection()
+	 * @generated
+	 * @ordered
+	 */
+	protected CoreDomain direction;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -136,6 +151,44 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CoreDomain getDirection() {
+		if (direction != null && direction.eIsProxy()) {
+			InternalEObject oldDirection = (InternalEObject)direction;
+			direction = (CoreDomain)eResolveProxy(oldDirection);
+			if (direction != oldDirection) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTcoreCSTPackage.DOMAIN_CS__DIRECTION, oldDirection, direction));
+			}
+		}
+		return direction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CoreDomain basicGetDirection() {
+		return direction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDirection(CoreDomain newDirection) {
+		CoreDomain oldDirection = direction;
+		direction = newDirection;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.DOMAIN_CS__DIRECTION, oldDirection, direction));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -143,6 +196,9 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 				return isCheck();
 			case QVTcoreCSTPackage.DOMAIN_CS__ENFORCE:
 				return isEnforce();
+			case QVTcoreCSTPackage.DOMAIN_CS__DIRECTION:
+				if (resolve) return getDirection();
+				return basicGetDirection();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -160,6 +216,9 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 				return;
 			case QVTcoreCSTPackage.DOMAIN_CS__ENFORCE:
 				setEnforce((Boolean)newValue);
+				return;
+			case QVTcoreCSTPackage.DOMAIN_CS__DIRECTION:
+				setDirection((CoreDomain)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -179,6 +238,9 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 			case QVTcoreCSTPackage.DOMAIN_CS__ENFORCE:
 				setEnforce(ENFORCE_EDEFAULT);
 				return;
+			case QVTcoreCSTPackage.DOMAIN_CS__DIRECTION:
+				setDirection((CoreDomain)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -195,6 +257,8 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 				return check != CHECK_EDEFAULT;
 			case QVTcoreCSTPackage.DOMAIN_CS__ENFORCE:
 				return enforce != ENFORCE_EDEFAULT;
+			case QVTcoreCSTPackage.DOMAIN_CS__DIRECTION:
+				return direction != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -202,19 +266,17 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (check: ");
-		result.append(check);
-		result.append(", enforce: ");
-		result.append(enforce);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R, C> R accept(BaseCSVisitor<R, C> visitor) {
+		return (R) visitor.getAdapter(QVTcoreCSVisitor.class).visitDomainCS(this);
+	}
 } //DomainCSImpl

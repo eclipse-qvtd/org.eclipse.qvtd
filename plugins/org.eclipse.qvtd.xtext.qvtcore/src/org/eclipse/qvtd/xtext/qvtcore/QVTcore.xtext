@@ -20,84 +20,57 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "platform:/resource/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore" as base
 import "platform:/resource/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore" as essentialocl
 import "platform:/resource/org.eclipse.ocl.examples.pivot/model/Pivot.ecore" as pivot
+import "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore" as qvtbase
 import "platform:/resource/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore" as qvtcore
 import "platform:/resource/org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCST.ecore"
 
-TopLevelCS: (mappings+=MappingCS | transformations+=TransformationCS | queries+=QueryCS)*;
-
-TransformationCS:
-	'transformation' (namespace+=[pivot::Namespace|UnrestrictedName] '::' (namespace+=[pivot::Namespace|UnreservedName] '::')*)?
-	name=UnreservedName '{' (directions+=DirectionCS ';')* '}';
-	
-DirectionCS: name=UnrestrictedName
-	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
-	('uses' uses+=[DirectionCS|UnrestrictedName] (',' uses+=[DirectionCS|UnrestrictedName])*)?
-;
-	
-MappingCS: 'map' name=UnrestrictedName ('in' in=[pivot::Package|UnrestrictedName])?
-	('refines' refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)?
-	'{' ('check'? 'enforce'? DirectionNameCS domains+=DomainCS )*
-				'where' domains+=DomainCS
-					( composedMappings+=ComposedMappingCS )* '}';
-//	MappingCS_1_ ::= map
-//	MappingCS_1_ ::= map MappingNameCS
-//	MappingCS_2_ -> MappingCS_1_
-//	MappingCS_2_ ::= MappingCS_1_ in TransformationNameCS
-//	MappingCS_3_ -> MappingCS_2_
-//	MappingCS_3_ ::= MappingCS_2_ refines MappingNameCS
-//	MappingCS_3_ ::= MappingCS_3_ ',' MappingNameCS
-//	MappingCS_4_ -> MappingCS_3_ '{'
-//	MappingCS_4_ ::= MappingCS_4_ DomainCS	
-//	MappingCS_8 ::= MappingCS_4_ where DomainCS_0_
-//	MappingCS_8 ::= MappingCS_4_ where DirectionNameCS DomainCS_0_
-//	MappingCS_8 ::= MappingCS_8 ComposedMappingCS
-//	MappingCS ::= MappingCS_8 '}'
-	
-//	DomainCS_0_ ::= '(' DomainGuardPatternCS ')' '{' DomainBottomPatternCS  '}'
-//	DomainCS_1_ ::= DirectionNameCS DomainCS_0_
-//	DomainCS_2_ -> DomainCS_1_
-//	DomainCS_2_ ::= enforce DomainCS_1_
-//	DomainCS -> DomainCS_2_
-//	DomainCS ::= check DomainCS_2_
-	
-DomainCS: '(' guardPattern=GuardPatternCS ')' '{' bottomPattern=BottomPatternCS '}';
-		
-ComposedMappingCS returns MappingCS: MappingCS;
-	
-GuardPatternCS: {GuardPatternCS}
-	(unrealizedVariables+=UnrealizedVariableCS (',' unrealizedVariables+=UnrealizedVariableCS )* '|' )?
-	(constraints+=ConstraintCS ';')*
+TopLevelCS:
+	(ownedImport+=ImportCS | /*ownedInclude+=IncludeCS |*/ ownedLibrary+=LibraryCS)*
+	(mappings+=MappingCS | transformations+=TransformationCS | queries+=QueryCS)*
 ;
 		
 BottomPatternCS: {BottomPatternCS}
 	((unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS)
 		(',' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))* '|')?
-	(constraints+=ConstraintCS ';')*
+	constraints+=ConstraintCS*
+;
+		
+ComposedMappingCS returns MappingCS: MappingCS;
+		
+//Constraint ::= Predicate | Assignment
+//Predicate ::= BooleanOCLExpr
+//Assignement ::= [“default”] SlotOwnerOCLExpr“.”PropertyName “:=” ValueOCLExpr
+ConstraintCS: default?='default'? target=ExpCS (':=' initialiser=ExpCS)? ';';
+	
+DirectionCS: name=UnrestrictedName
+	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
+	('uses' uses+=[qvtcore::CoreDomain|UnrestrictedName] (',' uses+=[qvtcore::CoreDomain|UnrestrictedName])*)?
 ;
 	
 //EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
 	
-//Variable := VariableName “:” TypeDeclaration
-UnrealizedVariableCS: name=VariableNameCS ':' ownedType=TypeExpCS;
-		
-//RealizedVariable := “realized” VariableName “:” TypeDeclaration
-RealizedVariableCS: 'realize' name=VariableNameCS ':' ownedType=TypeExpCS;
-		
-//Constraint ::= Predicate | Assignment
-ConstraintCS returns essentialocl::ExpCS: PredicateCS | AssignmentCS;
+GuardPatternCS: {GuardPatternCS}
+	(unrealizedVariables+=UnrealizedVariableCS (',' unrealizedVariables+=UnrealizedVariableCS )* '|' )?
+	constraints+=ConstraintCS*
+;
+
+ImportCS returns base::ImportCS:
+	'import' (name=Identifier ':')? namespace=[pivot::Namespace|URI] (all?='::' '*')? ';';
+
+//IncludeCS returns IncludeCS:
+//	'include' namespace=[pivot::Namespace|URI] ';';
+
+LibraryCS returns base::LibraryCS:
+	'library' package=[pivot::Package|URI] ';';
 	
-//Predicate ::= BooleanOCLExpr
-PredicateCS returns essentialocl::ExpCS : ExpCS;
+MappingCS: 'map' name=UnrestrictedName ('in' in=[qvtbase::Transformation|UnrestrictedName])?
+	('refines' refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)?
+	'{' domains+=NamedDomainCS* ('where' domains+=UnnamedDomainCS)? composedMappings+=ComposedMappingCS* '}';
 	
-//Assignement ::= [“default”] SlotOwnerOCLExpr“.”PropertyName “:=” ValueOCLExpr
-AssignmentCS returns AssignmentCS: default?='default'? target=ExpCS ':=' initialiser=ExpCS;
-		
-DirectionNameCS: UnrestrictedName;
-MappingNameCS: UnrestrictedName;
-//PackageNameCS: pathNameCS;
-//QueryNameCS: pathNameCS;
-//TransformationNameCS1: pathNameCS;
-VariableNameCS: UnrestrictedName;
+NamedDomainCS returns DomainCS: check?='check'? enforce?='enforce'? direction=[qvtcore::CoreDomain|UnrestrictedName]
+	'(' guardPattern=GuardPatternCS? ')' '{' bottomPattern=BottomPatternCS? '}';
+	
+ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
 		
 QueryCS: 'query' name=UnrestrictedName
 	'(' (inputParamDeclaration+=ParamDeclarationCS (',' inputParamDeclaration+=ParamDeclarationCS)*)? ')'
@@ -106,8 +79,18 @@ QueryCS: 'query' name=UnrestrictedName
 //            '(' [<paramDeclaration> (',' <paramDeclaration>)*] ')'
 //      	  ':' <TypeCS>
 //            (';' | '{' <OclExpressionCS> '}')
+
+TransformationCS:
+	'transformation' (namespace+=[pivot::Namespace|UnrestrictedName] '::' (namespace+=[pivot::Namespace|UnreservedName] '::')*)?
+	name=UnreservedName '{' (directions+=DirectionCS ';')* '}';
 	
-ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
+//Variable := VariableName “:” TypeDeclaration
+UnrealizedVariableCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
+		
+//RealizedVariable := “realized” VariableName “:” TypeDeclaration
+RealizedVariableCS: 'realize' name=UnrestrictedName ':' ownedType=TypeExpCS;
+	
+UnnamedDomainCS returns DomainCS: {DomainCS} '(' guardPattern=GuardPatternCS? ')' '{' bottomPattern=BottomPatternCS? '}';
 		
 UnrestrictedName returns ecore::EString:
 	EssentialOCLUnrestrictedName
@@ -116,12 +99,15 @@ UnrestrictedName returns ecore::EString:
 //|	'default'
 //|	'deletion'
 |	'enforce'
+|	'import'
 |	'imports'
+//|	'include'
+|	'library'
 |	'map'
 |	'query'
 |	'realize'
 |	'refines'
 |	'transformation'
 |	'uses'
-|	'where'
+//|	'where'
 ;

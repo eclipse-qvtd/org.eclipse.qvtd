@@ -18,9 +18,10 @@
  * If it fails with a stack dump, open the Xtext file and do
  * a dummy edit. Generally there is an error in the source file.
  */
-module GenerateEditor
+module GenerateQVTcoreEditor
 
 import org.eclipse.emf.mwe.utils.*
+import org.eclipse.ocl.examples.build.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
@@ -140,6 +141,11 @@ Workflow {
 			
 			// quickfix API 
 			fragment = quickfix.QuickfixProviderFragment {}			
+				
+			// EssentialOCL bindings 
+			fragment = fragments.EssentialOCLFragment {}							
+			// Support Markup in Hover text 
+			fragment = fragments.MarkupHoverFragment {}			
 		}
 	}
 }

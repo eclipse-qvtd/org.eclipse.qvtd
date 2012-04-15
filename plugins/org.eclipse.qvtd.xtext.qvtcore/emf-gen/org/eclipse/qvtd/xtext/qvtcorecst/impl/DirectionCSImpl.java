@@ -9,15 +9,14 @@ package org.eclipse.qvtd.xtext.qvtcorecst.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.NamedElementCSImpl;
-
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
+import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -52,7 +51,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DirectionCS> uses;
+	protected EList<CoreDomain> uses;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -90,9 +89,9 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DirectionCS> getUses() {
+	public EList<CoreDomain> getUses() {
 		if (uses == null) {
-			uses = new EObjectResolvingEList<DirectionCS>(DirectionCS.class, this, QVTcoreCSTPackage.DIRECTION_CS__USES);
+			uses = new EObjectResolvingEList<CoreDomain>(CoreDomain.class, this, QVTcoreCSTPackage.DIRECTION_CS__USES);
 		}
 		return uses;
 	}
@@ -128,7 +127,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 				return;
 			case QVTcoreCSTPackage.DIRECTION_CS__USES:
 				getUses().clear();
-				getUses().addAll((Collection<? extends DirectionCS>)newValue);
+				getUses().addAll((Collection<? extends CoreDomain>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -168,4 +167,9 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 		return super.eIsSet(featureID);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R, C> R accept(BaseCSVisitor<R, C> visitor) {
+		return (R) visitor.getAdapter(QVTcoreCSVisitor.class).visitDirectionCS(this);
+	}
 } //DirectionCSImpl

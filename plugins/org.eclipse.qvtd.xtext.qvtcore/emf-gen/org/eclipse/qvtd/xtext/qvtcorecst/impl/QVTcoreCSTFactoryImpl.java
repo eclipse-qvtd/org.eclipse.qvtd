@@ -60,8 +60,8 @@ public class QVTcoreCSTFactoryImpl extends EFactoryImpl implements QVTcoreCSTFac
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTcoreCSTPackage.ASSIGNMENT_CS: return createAssignmentCS();
 			case QVTcoreCSTPackage.BOTTOM_PATTERN_CS: return createBottomPatternCS();
+			case QVTcoreCSTPackage.CONSTRAINT_CS: return createConstraintCS();
 			case QVTcoreCSTPackage.DIRECTION_CS: return createDirectionCS();
 			case QVTcoreCSTPackage.DOMAIN_CS: return createDomainCS();
 			case QVTcoreCSTPackage.ENFORCEMENT_OPERATION_CS: return createEnforcementOperationCS();
@@ -83,9 +83,9 @@ public class QVTcoreCSTFactoryImpl extends EFactoryImpl implements QVTcoreCSTFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AssignmentCS createAssignmentCS() {
-		AssignmentCSImpl assignmentCS = new AssignmentCSImpl();
-		return assignmentCS;
+	public BottomPatternCS createBottomPatternCS() {
+		BottomPatternCSImpl bottomPatternCS = new BottomPatternCSImpl();
+		return bottomPatternCS;
 	}
 
 	/**
@@ -93,9 +93,9 @@ public class QVTcoreCSTFactoryImpl extends EFactoryImpl implements QVTcoreCSTFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BottomPatternCS createBottomPatternCS() {
-		BottomPatternCSImpl bottomPatternCS = new BottomPatternCSImpl();
-		return bottomPatternCS;
+	public ConstraintCS createConstraintCS() {
+		ConstraintCSImpl constraintCS = new ConstraintCSImpl();
+		return constraintCS;
 	}
 
 	/**

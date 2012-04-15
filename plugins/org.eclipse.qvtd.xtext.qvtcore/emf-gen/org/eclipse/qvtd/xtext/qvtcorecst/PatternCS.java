@@ -7,10 +7,7 @@
 package org.eclipse.qvtd.xtext.qvtcorecst;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
-
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,7 +29,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 public interface PatternCS extends ModelElementCS {
 	/**
 	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS}.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Constraints</em>' containment reference list isn't clear,
@@ -44,7 +41,7 @@ public interface PatternCS extends ModelElementCS {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ExpCS> getConstraints();
+	EList<ConstraintCS> getConstraints();
 
 	/**
 	 * Returns the value of the '<em><b>Unrealized Variables</b></em>' containment reference list.

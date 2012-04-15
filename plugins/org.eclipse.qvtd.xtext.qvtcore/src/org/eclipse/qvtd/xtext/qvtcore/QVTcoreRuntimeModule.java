@@ -16,9 +16,32 @@
  */
 package org.eclipse.qvtd.xtext.qvtcore;
 
+import org.eclipse.qvtd.xtext.qvtcore.scoping.QVTcoreScopeProvider;
+import org.eclipse.qvtd.xtext.qvtcore.utilities.QVTcoreCSResource;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.scoping.IScopeProvider;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
+
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
-public class QVTcoreRuntimeModule extends org.eclipse.qvtd.xtext.qvtcore.AbstractQVTcoreRuntimeModule {
+public class QVTcoreRuntimeModule extends AbstractQVTcoreRuntimeModule
+{
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		binder.bindConstant().annotatedWith(Names.named(org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
+	}
 
+	@Override
+	public Class<? extends IScopeProvider> bindIScopeProvider() {
+		return QVTcoreScopeProvider.class;
+	}
+	
+	@Override
+	public Class<? extends XtextResource> bindXtextResource() {
+		return QVTcoreCSResource.class;
+	}
 }

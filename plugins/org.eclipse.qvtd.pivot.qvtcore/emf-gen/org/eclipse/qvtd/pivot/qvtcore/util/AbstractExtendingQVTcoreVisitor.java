@@ -46,7 +46,7 @@ public abstract class AbstractExtendingQVTcoreVisitor<R, C>
 	}	
 
 	public R visitAssignment(org.eclipse.qvtd.pivot.qvtcore.Assignment object) {
-		return visit(object);
+		return visitElement(object);
 	}
 
 	public R visitBottomPattern(org.eclipse.qvtd.pivot.qvtcore.BottomPattern object) {
@@ -62,7 +62,7 @@ public abstract class AbstractExtendingQVTcoreVisitor<R, C>
 	}
 
 	public R visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation object) {
-		return visit(object);
+		return visitElement(object);
 	}
 
 	public R visitGuardPattern(org.eclipse.qvtd.pivot.qvtcore.GuardPattern object) {
@@ -78,7 +78,7 @@ public abstract class AbstractExtendingQVTcoreVisitor<R, C>
 	}
 
 	public R visitRealizedVariable(org.eclipse.qvtd.pivot.qvtcore.RealizedVariable object) {
-		return visit(object);
+		return visitVariable(object);
 	}
 
 	public R visitVariableAssignment(org.eclipse.qvtd.pivot.qvtcore.VariableAssignment object) {

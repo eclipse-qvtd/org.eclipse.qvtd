@@ -10,6 +10,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
 /**
@@ -74,12 +75,12 @@ public interface MappingCS extends NamedElementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>In</em>' reference.
-	 * @see #setIn(org.eclipse.ocl.examples.pivot.Package)
+	 * @see #setIn(Transformation)
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getMappingCS_In()
 	 * @model
 	 * @generated
 	 */
-	org.eclipse.ocl.examples.pivot.Package getIn();
+	Transformation getIn();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorecst.MappingCS#getIn <em>In</em>}' reference.
@@ -89,7 +90,7 @@ public interface MappingCS extends NamedElementCS {
 	 * @see #getIn()
 	 * @generated
 	 */
-	void setIn(org.eclipse.ocl.examples.pivot.Package value);
+	void setIn(Transformation value);
 
 	/**
 	 * Returns the value of the '<em><b>Middle</b></em>' containment reference.

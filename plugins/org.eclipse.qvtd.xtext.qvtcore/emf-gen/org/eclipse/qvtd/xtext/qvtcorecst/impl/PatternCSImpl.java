@@ -9,22 +9,18 @@ package org.eclipse.qvtd.xtext.qvtcorecst.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
-
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
-
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.PatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
 import org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -49,7 +45,7 @@ public abstract class PatternCSImpl extends ModelElementCSImpl implements Patter
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ExpCS> constraints;
+	protected EList<ConstraintCS> constraints;
 
 	/**
 	 * The cached value of the '{@link #getUnrealizedVariables() <em>Unrealized Variables</em>}' containment reference list.
@@ -85,9 +81,9 @@ public abstract class PatternCSImpl extends ModelElementCSImpl implements Patter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ExpCS> getConstraints() {
+	public EList<ConstraintCS> getConstraints() {
 		if (constraints == null) {
-			constraints = new EObjectContainmentEList<ExpCS>(ExpCS.class, this, QVTcoreCSTPackage.PATTERN_CS__CONSTRAINTS);
+			constraints = new EObjectContainmentEList<ConstraintCS>(ConstraintCS.class, this, QVTcoreCSTPackage.PATTERN_CS__CONSTRAINTS);
 		}
 		return constraints;
 	}
@@ -147,7 +143,7 @@ public abstract class PatternCSImpl extends ModelElementCSImpl implements Patter
 		switch (featureID) {
 			case QVTcoreCSTPackage.PATTERN_CS__CONSTRAINTS:
 				getConstraints().clear();
-				getConstraints().addAll((Collection<? extends ExpCS>)newValue);
+				getConstraints().addAll((Collection<? extends ConstraintCS>)newValue);
 				return;
 			case QVTcoreCSTPackage.PATTERN_CS__UNREALIZED_VARIABLES:
 				getUnrealizedVariables().clear();
@@ -191,4 +187,10 @@ public abstract class PatternCSImpl extends ModelElementCSImpl implements Patter
 		return super.eIsSet(featureID);
 	}
 
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R, C> R accept(BaseCSVisitor<R, C> visitor) {
+		return (R) visitor.getAdapter(QVTcoreCSVisitor.class).visitPatternCS(this);
+	}
 } //PatternCSImpl

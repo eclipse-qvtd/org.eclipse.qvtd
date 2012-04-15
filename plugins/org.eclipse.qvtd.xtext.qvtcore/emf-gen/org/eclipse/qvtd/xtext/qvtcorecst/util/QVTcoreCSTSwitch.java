@@ -18,7 +18,10 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamespaceCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
 
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
@@ -97,18 +100,6 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSTPackage.ASSIGNMENT_CS: {
-				AssignmentCS assignmentCS = (AssignmentCS)theEObject;
-				T result = caseAssignmentCS(assignmentCS);
-				if (result == null) result = caseExpCS(assignmentCS);
-				if (result == null) result = caseModelElementCS(assignmentCS);
-				if (result == null) result = casePivotableElementCS(assignmentCS);
-				if (result == null) result = caseElementCS(assignmentCS);
-				if (result == null) result = casePivotable(assignmentCS);
-				if (result == null) result = caseVisitableCS(assignmentCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTcoreCSTPackage.BOTTOM_PATTERN_CS: {
 				BottomPatternCS bottomPatternCS = (BottomPatternCS)theEObject;
 				T result = caseBottomPatternCS(bottomPatternCS);
@@ -118,6 +109,18 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElementCS(bottomPatternCS);
 				if (result == null) result = casePivotable(bottomPatternCS);
 				if (result == null) result = caseVisitableCS(bottomPatternCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTcoreCSTPackage.CONSTRAINT_CS: {
+				ConstraintCS constraintCS = (ConstraintCS)theEObject;
+				T result = caseConstraintCS(constraintCS);
+				if (result == null) result = caseExpCS(constraintCS);
+				if (result == null) result = caseModelElementCS(constraintCS);
+				if (result == null) result = casePivotableElementCS(constraintCS);
+				if (result == null) result = caseElementCS(constraintCS);
+				if (result == null) result = casePivotable(constraintCS);
+				if (result == null) result = caseVisitableCS(constraintCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -255,7 +258,13 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 			case QVTcoreCSTPackage.TOP_LEVEL_CS: {
 				TopLevelCS topLevelCS = (TopLevelCS)theEObject;
 				T result = caseTopLevelCS(topLevelCS);
+				if (result == null) result = caseRootPackageCS(topLevelCS);
+				if (result == null) result = casePackageCS(topLevelCS);
+				if (result == null) result = caseRootCS(topLevelCS);
+				if (result == null) result = caseNamespaceCS(topLevelCS);
+				if (result == null) result = caseNamedElementCS(topLevelCS);
 				if (result == null) result = caseModelElementCS(topLevelCS);
+				if (result == null) result = caseNameable(topLevelCS);
 				if (result == null) result = casePivotableElementCS(topLevelCS);
 				if (result == null) result = caseElementCS(topLevelCS);
 				if (result == null) result = casePivotable(topLevelCS);
@@ -266,6 +275,7 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 			case QVTcoreCSTPackage.TRANSFORMATION_CS: {
 				TransformationCS transformationCS = (TransformationCS)theEObject;
 				T result = caseTransformationCS(transformationCS);
+				if (result == null) result = casePackageCS(transformationCS);
 				if (result == null) result = caseNamespaceCS(transformationCS);
 				if (result == null) result = caseNamedElementCS(transformationCS);
 				if (result == null) result = caseModelElementCS(transformationCS);
@@ -312,21 +322,6 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Assignment CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Assignment CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAssignmentCS(AssignmentCS object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Bottom Pattern CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -338,6 +333,21 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBottomPatternCS(BottomPatternCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constraint CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constraint CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstraintCS(ConstraintCS object) {
 		return null;
 	}
 
@@ -672,6 +682,36 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Root CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Root CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRootCS(RootCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Root Package CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Root Package CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRootPackageCS(RootPackageCS object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Namespace CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -683,6 +723,21 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNamespaceCS(NamespaceCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Package CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Package CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePackageCS(PackageCS object) {
 		return null;
 	}
 

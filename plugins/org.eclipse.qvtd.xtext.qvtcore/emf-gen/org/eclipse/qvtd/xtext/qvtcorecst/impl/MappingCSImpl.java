@@ -24,12 +24,15 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.NamedElementCSImpl;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
 import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
+import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -77,7 +80,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.ocl.examples.pivot.Package in;
+	protected Transformation in;
 
 	/**
 	 * The cached value of the '{@link #getMiddle() <em>Middle</em>}' containment reference.
@@ -147,10 +150,10 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Package getIn() {
-		if (in != null && ((EObject)in).eIsProxy()) {
+	public Transformation getIn() {
+		if (in != null && in.eIsProxy()) {
 			InternalEObject oldIn = (InternalEObject)in;
-			in = (org.eclipse.ocl.examples.pivot.Package)eResolveProxy(oldIn);
+			in = (Transformation)eResolveProxy(oldIn);
 			if (in != oldIn) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTcoreCSTPackage.MAPPING_CS__IN, oldIn, in));
@@ -164,7 +167,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Package basicGetIn() {
+	public Transformation basicGetIn() {
 		return in;
 	}
 
@@ -173,8 +176,8 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIn(org.eclipse.ocl.examples.pivot.Package newIn) {
-		org.eclipse.ocl.examples.pivot.Package oldIn = in;
+	public void setIn(Transformation newIn) {
+		Transformation oldIn = in;
 		in = newIn;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.MAPPING_CS__IN, oldIn, in));
@@ -294,7 +297,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 				getDomains().addAll((Collection<? extends DomainCS>)newValue);
 				return;
 			case QVTcoreCSTPackage.MAPPING_CS__IN:
-				setIn((org.eclipse.ocl.examples.pivot.Package)newValue);
+				setIn((Transformation)newValue);
 				return;
 			case QVTcoreCSTPackage.MAPPING_CS__MIDDLE:
 				setMiddle((DomainCS)newValue);
@@ -322,7 +325,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 				getDomains().clear();
 				return;
 			case QVTcoreCSTPackage.MAPPING_CS__IN:
-				setIn((org.eclipse.ocl.examples.pivot.Package)null);
+				setIn((Transformation)null);
 				return;
 			case QVTcoreCSTPackage.MAPPING_CS__MIDDLE:
 				setMiddle((DomainCS)null);
@@ -356,4 +359,10 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		return super.eIsSet(featureID);
 	}
 
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R, C> R accept(BaseCSVisitor<R, C> visitor) {
+		return (R) visitor.getAdapter(QVTcoreCSVisitor.class).visitMappingCS(this);
+	}
 } //MappingCSImpl

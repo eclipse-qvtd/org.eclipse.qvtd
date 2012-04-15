@@ -6,6 +6,8 @@
  */
 package org.eclipse.qvtd.xtext.qvtcorecst;
 
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +19,7 @@ package org.eclipse.qvtd.xtext.qvtcorecst;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.DomainCS#isCheck <em>Check</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.DomainCS#isEnforce <em>Enforce</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.DomainCS#getDirection <em>Direction</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,5 +79,31 @@ public interface DomainCS extends AreaCS {
 	 * @generated
 	 */
 	void setEnforce(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Direction</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Direction</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Direction</em>' reference.
+	 * @see #setDirection(CoreDomain)
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getDomainCS_Direction()
+	 * @model
+	 * @generated
+	 */
+	CoreDomain getDirection();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorecst.DomainCS#getDirection <em>Direction</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Direction</em>' reference.
+	 * @see #getDirection()
+	 * @generated
+	 */
+	void setDirection(CoreDomain value);
 
 } // DomainCS

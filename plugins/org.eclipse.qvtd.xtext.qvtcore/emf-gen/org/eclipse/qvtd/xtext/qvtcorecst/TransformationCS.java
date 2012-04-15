@@ -10,6 +10,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.ocl.examples.pivot.Namespace;
 
+import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamespaceCS;
 
 /**
@@ -29,7 +30,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.NamespaceCS;
  * @model
  * @generated
  */
-public interface TransformationCS extends NamespaceCS {
+public interface TransformationCS extends PackageCS {
 	/**
 	 * Returns the value of the '<em><b>Namespace</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Namespace}.

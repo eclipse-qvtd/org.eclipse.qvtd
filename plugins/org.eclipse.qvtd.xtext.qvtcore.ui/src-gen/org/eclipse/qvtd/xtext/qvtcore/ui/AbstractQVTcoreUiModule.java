@@ -99,11 +99,6 @@ public abstract class AbstractQVTcoreUiModule extends DefaultUiModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.IXtextEditorCallback> bindIXtextEditorCallback() {
-		return org.eclipse.xtext.builder.nature.NatureAddingEditorCallback.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
 	public void configureIResourceDescriptionsPersisted(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource.PERSISTED_DESCRIPTIONS)).to(org.eclipse.xtext.builder.builderState.IBuilderState.class);
 	}
@@ -116,6 +111,61 @@ public abstract class AbstractQVTcoreUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider> bindIssueResolutionProvider() {
 		return org.eclipse.qvtd.xtext.qvtcore.ui.quickfix.QVTcoreQuickfixProvider.class;
+	}
+
+	// contributed by org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
+		return org.eclipse.ocl.examples.xtext.essentialocl.ui.syntaxcoloring.BaseAntlrTokenToAttributeIdMapper.class;
+	}
+
+	// contributed by org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
+		return org.eclipse.ocl.examples.xtext.essentialocl.ui.autoedit.BaseAutoEditStrategyProvider.class;
+	}
+
+	// contributed by org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.ocl.examples.xtext.essentialocl.ui.syntaxcoloring.EssentialOCLHighlightingConfiguration.class;
+	}
+
+	// contributed by org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment
+	public Class<? extends org.eclipse.xtext.resource.ILocationInFileProvider> bindILocationInFileProvider() {
+		return org.eclipse.ocl.examples.xtext.base.pivot2cs.BaseLocationInFileProvider.class;
+	}
+
+	// contributed by org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		return org.eclipse.ocl.examples.xtext.essentialocl.ui.syntaxcoloring.EssentialOCLSemanticHighlightingCalculator.class;
+	}
+
+	// contributed by org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper> bindITokenTypeToPartitionTypeMapper() {
+		return org.eclipse.ocl.examples.xtext.essentialocl.ui.model.BaseTerminalsTokenTypeToPartitionMapper.class;
+	}
+
+	// contributed by org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
+		return org.eclipse.ocl.examples.xtext.essentialocl.ui.model.BaseURIEditorOpener.class;
+	}
+
+	// contributed by org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.IXtextEditorCallback> bindIXtextEditorCallback() {
+		return org.eclipse.xtext.ui.editor.validation.ValidatingEditorCallback.class;
+	}
+
+	// contributed by org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.model.XtextDocument> bindXtextDocument() {
+		return org.eclipse.ocl.examples.xtext.essentialocl.ui.model.BaseDocument.class;
+	}
+
+	// contributed by org.eclipse.ocl.examples.build.fragments.MarkupHoverFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider> bindIEObjectHoverProvider() {
+		return org.eclipse.ocl.examples.xtext.markup.ui.hover.MarkupHoverProvider.class;
+	}
+
+	// contributed by org.eclipse.ocl.examples.build.fragments.MarkupHoverFragment
+	public Class<? extends org.eclipse.xtext.documentation.IEObjectDocumentationProvider> bindIEObjectDocumentationProvider() {
+		return org.eclipse.ocl.examples.xtext.essentialocl.ui.model.BaseDocumentationProvider.class;
 	}
 
 
