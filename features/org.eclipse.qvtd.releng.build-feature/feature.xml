@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.qvtd.releng.build"
+      label="QVTd Build Site"
+      version="0.9.0.qualifier"
+      provider-name="Eclipse Modeling Project"
+      license-feature="org.eclipse.qvtd.license"
+      license-feature-version="0.9.0.qualifier">
+
+   <description>
+      Single feature to drive the build for all other Eclipse QVTd features.
+   </description>
+
+   <copyright>
+      [Documentation] Copyright text will be taken from the shared license feature
+   </copyright>
+
+   <includes
+         id="org.eclipse.qvtd.master"
+         version="0.0.0"/>
+
+</feature>

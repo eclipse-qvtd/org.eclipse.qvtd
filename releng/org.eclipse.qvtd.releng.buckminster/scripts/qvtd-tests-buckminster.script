@@ -1,0 +1,32 @@
+setpref complianceLevel=1.5
+
+# We import a target definition which will be our API Base Line
+importtargetdefinition "file://${checkout.location}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/APIBaseLine.target"
+addbaseline -A "Eclipse QVTd API Base Line"
+
+# We set the path of the new target platform
+setpref targetPlatformPath="${checkout.location}/buildroot/target.platform"
+
+import --properties "${checkout.location}/buildroot/build.properties" "org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/releng/qvtd-tests-all.mspec"
+
+build
+
+# QVTd Core Tests
+#junit --launch "org.eclipse.qvtd.ecore.tests/launches/org.eclipse.qvtd.ecore.tests\ \(Standalone\).launch" --flatXML --output "${checkout.location}/MMT-QVTd.test.results/org.eclipse.qvtd.ecore.tests.xml"
+#junit --launch "org.eclipse.qvtd.ecore.tests/launches/org.eclipse.qvtd.ecore.tests\ \(Standalone\ Backtracking\).launch" --flatXML --output "${checkout.location}/MMT-QVTd.test.results/org.eclipse.qvtd.ecore.backtracking.tests.xml"
+#junit --launch "org.eclipse.qvtd.ecore.tests/launches/org.eclipse.qvtd.ecore.tests\ \(Plugin).launch" --flatXML --output "${checkout.location}/MMT-QVTd.test.results/org.eclipse.qvtd.ecore.plugin.tests.xml"
+
+#junit --launch "org.eclipse.qvtd.uml.tests/launches/org.eclipse.qvtd.uml.tests\ \(Standalone\).launch" --flatXML --output "${checkout.location}/MMT-QVTd.test.results/org.eclipse.qvtd.uml.tests.xml"
+#junit --launch "org.eclipse.qvtd.uml.tests/launches/org.eclipse.qvtd.uml.tests\ \(Standalone\ Backtracking\).launch" --flatXML --output "${checkout.location}/MMT-QVTd.test.results/org.eclipse.qvtd.uml.backtracking.tests.xml"
+#junit --launch "org.eclipse.qvtd.uml.tests/launches/org.eclipse.qvtd.uml.tests\ \(Plugin\).launch" --flatXML --output "${checkout.location}/MMT-QVTd.test.results/org.eclipse.qvtd.uml.plugin.tests.xml"
+
+# QVTd Tools Tests
+#junit --launch "org.eclipse.qvtd.examples.tests/.launches/org.eclipse.qvtd.examples.test.AllExamplesTests\ \(standalone\).launch" --flatXML --output "${checkout.location}/MMT-QVTd.test.results/org.eclipse.qvtd.examples.tests.xml"
+#junit --launch "org.eclipse.qvtd.examples.xtext.tests/.settings/org.eclipse.qvtd.examples.xtext.tests\ \(standalone\).launch" --flatXML --output "${checkout.location}/MMT-QVTd.test.results/org.eclipse.qvtd.examples.xtext.tests.xml"
+#junit --launch "org.eclipse.qvtd.examples.xtext.tests/.settings/org.eclipse.qvtd.examples.xtext.tests\ \(plugin\).launch" --flatXML --maxTimeAwaitJunitReport 60 --output "${checkout.location}/MMT-QVTd.test.results/org.eclipse.qvtd.examples.xtext.plugin.tests.xml"
+#junit --launch "org.eclipse.qvtd.examples.eventmanager.tests/EventManagerTests.launch" --flatXML --output "${checkout.location}/MMT-QVTd.test.results/org.eclipse.qvtd.examples.eventmanager.tests.xml"
+#junit --launch "org.eclipse.qvtd.examples.impactanalyzer.tests/ImpactAnalysisTests with TracebackSteps.launch" --flatXML --output "${checkout.location}/MMT-QVTd.test.results/org.eclipse.qvtd.examples.impactanalyzer.tracebacksteps.tests.xml"
+#junit --launch "org.eclipse.qvtd.examples.impactanalyzer.tests/ImpactAnalysisTests with Traceback+UnusedChecks.launch" --flatXML --output "${checkout.location}/MMT-QVTd.test.results/org.eclipse.qvtd.examples.impactanalyzer.tracebacksteps_with_unused.tests.xml"
+#junit --launch "org.eclipse.qvtd.examples.impactanalyzer.tests/ImpactAnalysisTests with NavigationSteps.launch" --flatXML --output "${checkout.location}/MMT-QVTd.test.results/org.eclipse.qvtd.examples.impactanalyzer.navigationsteps.tests.xml"
+
+perform --properties "${checkout.location}/buildroot/build.properties" "-Dbuckminster.reference.repository=${reference.repository}" "org.eclipse.qvtd.releng.tools.build:eclipse.feature#build" 

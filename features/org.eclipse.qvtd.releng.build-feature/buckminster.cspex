@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cs:cspecExtension xmlns:com="http://www.eclipse.org/buckminster/Common-1.0" xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0">
+	<cs:dependencies>
+		<cs:dependency name="org.eclipse.qvtd.releng.buckminster" componentType="buckminster" />
+		<cs:dependency name="org.eclipse.qvtd.examples.tests" componentType="eclipse.feature" />
+		
+		<!-- tests-job needs qvtd core tests to run every OCL JUnit. This also may be useful
+		if we wanted the tools job produce a zip with all automated tests -->
+		<cs:dependency name="org.eclipse.qvtd.tests" componentType="eclipse.feature" />
+		
+		<!-- Indirect Dependencies -->		
+		<cs:dependency name="org.eclipse.rcp" componentType="eclipse.feature" />
+		
+		<!-- We explicitly need to specify this to add the some qvtd Core featre sources into the target platform -->		
+		<cs:dependency name="org.eclipse.qvtd.all.source" componentType="eclipse.feature" />		
+		<cs:dependency name="org.eclipse.qvtd.core.sdk.source" componentType="eclipse.feature" />
+		
+	</cs:dependencies>
+	<cs:actions>
+		<cs:private name="site.tp" actor="ant">
+			<cs:actorProperties>
+				<cs:property key="buildFile" value="packaging.ant" />
+				<cs:property key="targets" value="create.target.platform.metadata" />
+			</cs:actorProperties>
+			<cs:products alias="output" base="${buckminster.output}/site.tp/" />
+		</cs:private>
+		
+		<cs:private name="create.category.xml" actor="ant">
+			<cs:actorProperties>
+				<cs:property key="buildFile" value="packaging.ant" />
+				<cs:property key="targets" value="-create.category.xml" />
+			</cs:actorProperties>
+		</cs:private>
+
+		<cs:private name="tuneup.p2.repository" actor="ant">
+			<cs:actorProperties>
+				<cs:property key="buildFile" value="packaging.ant" />
+				<cs:property key="targets" value="-tuneup.p2.repository" />
+			</cs:actorProperties>
+			<cs:prerequisites>
+			    <cs:attribute name="site.p2" alias="repository" />
+			</cs:prerequisites>
+		</cs:private>
+		
+		<cs:public name="package.mmt-qvtd-Update" actor="ant">
+			<cs:actorProperties>
+				<cs:property key="buildFile" value="packaging.ant" />
+				<cs:property key="targets" value="package.site" />
+			</cs:actorProperties>
+			<cs:properties>
+				<cs:property key="target.platform.ius" value="org.eclipse.qvtd.all.source,org.eclipse.qvtd.all.sdk.source,org.eclipse.qvtd.core.sdk.source" />			
+				<cs:property key="package.name" value="mmt-qvtd-Update" />
+			</cs:properties>
+			<cs:prerequisites>
+				<cs:attribute name="create.category.xml" alias="create.category" />
+				<cs:attribute name="site.p2" alias="repository" />                
+                <cs:attribute name="tuneup.p2.repository" alias="tuneup.repository" />
+			</cs:prerequisites>
+			<cs:products alias="output" base="${buckminster.output}/zips/" />
+		</cs:public>		
+
+		<cs:public name="package.mmt-qvtd-SDK" actor="ant">
+			<cs:actorProperties>
+				<cs:property key="buildFile" value="packaging.ant" />
+				<cs:property key="targets" value="package.ius" />
+			</cs:actorProperties>
+			<cs:properties>
+				<cs:property key="content.ius" value="org.eclipse.qvtd.all.sdk.feature.group" />
+				<cs:property key="target.platform.ius" value="lpg.runtime.java,lpg.runtime.java.source" />
+				<cs:property key="package.name" value="mmt-qvtd-SDK" />
+			</cs:properties>
+			<cs:prerequisites>
+				<cs:attribute name="site.p2" alias="repository" />
+				<cs:attribute name="site.tp" alias="target.platform.repository" />
+			</cs:prerequisites>
+			<cs:products alias="output" base="${buckminster.output}/zips/" />
+		</cs:public>
+		
+		<cs:public name="package.mmt-qvtd-examples" actor="ant">
+			<cs:actorProperties>
+				<cs:property key="buildFile" value="packaging.ant" />
+				<cs:property key="targets" value="package.ius" />
+			</cs:actorProperties>
+			<cs:properties>
+				<cs:property key="content.ius" value="org.eclipse.qvtd.examples.feature.group" />
+				<cs:property key="package.name" value="mmt-qvtd-examples" />
+			</cs:properties>
+			<cs:prerequisites>
+				<cs:attribute name="site.p2" alias="repository" />
+				<cs:attribute name="site.tp" alias="target.platform.repository" />
+			</cs:prerequisites>
+			<cs:products alias="output" base="${buckminster.output}/zips/" />
+		</cs:public>
+
+		<cs:public name="tag" actor="buckminster.tag">
+			<cs:actorProperties>
+				<cs:property key="tag" value="build_${build.id}" />
+				<cs:property key="exclude.0" value="^org\.eclipse\.test$" />
+				<cs:property key="exclude.1" value="^org\.eclipse\.ant\.optional\.junit$" />
+			</cs:actorProperties>
+		</cs:public>
+	</cs:actions>
+
+	<cs:groups>
+		<cs:public name="build">
+			<cs:attribute name="package.mmt-qvtd-Update" />
+			<!--
+			<cs:attribute name="package.mmt-qvtd-SDK" /> 
+			<cs:attribute name="package.mmt-qvtd-examples" /> 
+			-->
+		</cs:public>
+	</cs:groups>
+</cs:cspecExtension>
