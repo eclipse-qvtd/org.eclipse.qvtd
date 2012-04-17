@@ -84,6 +84,7 @@ Workflow {
 //			}
 			fragment = parser.antlr.XtextAntlrGeneratorFragment {
 				options = { backtrack = true classSplitting = true }			
+				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
 			}
 			
 			// check-based API for validation
@@ -127,6 +128,7 @@ Workflow {
 //			}
 			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
 				options = { backtrack = true classSplitting = true}			
+				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
 			}
 
 			fragment = builder.BuilderIntegrationFragment {}

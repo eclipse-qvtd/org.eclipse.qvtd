@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.AbstractPivotSaver;
 import org.eclipse.ocl.examples.pivot.utilities.PivotSaver;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
-import org.eclipse.qvtd.pivot.qvtbase.util.AbstractExtendingQVTbaseVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.util.AbstractNullQVTbaseVisitor;
 
 /**

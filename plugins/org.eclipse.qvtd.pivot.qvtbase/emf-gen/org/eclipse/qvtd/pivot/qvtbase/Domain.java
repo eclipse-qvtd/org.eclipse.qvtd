@@ -17,10 +17,8 @@
 package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.util.Nameable;
-import org.eclipse.ocl.examples.pivot.NamedElement;
 
 /**
  * <!-- begin-user-doc -->

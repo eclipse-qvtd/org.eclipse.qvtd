@@ -1,0 +1,227 @@
+transformation Tx {
+	m imports tuml2rdbms;
+	l imports umlMM;
+	r imports rdbmsMM;
+}
+
+map Ma in Tx
+{
+	check l (
+		vMalg2Mal:Class,
+		vMalg2Mam:Class,
+		nMalg2Mar:Class
+	|
+		vMalg2Mal = null;
+		nMalb2Mag = null;
+		nMamg2Mal = null;
+		nMamb2Mal = null;
+	) {
+		vMalb2Malb:Class,
+		vMalb2Mamb:Class,
+		nMalb2Marb:Class,
+		nMalb2Mag:Class
+	|
+		vMalg2Mal = null;
+		vMalb2Malb = null;
+		nMamg2Mal = null;
+		nMamb2Mal = null;
+	}
+	check enforce r (
+		nMalg2Mar = null;
+		nMalb2Mag = null;
+	) {
+		nMalg2Mar = null;
+		nMalb2Marb = null;
+	}
+	where m (v1: TPackageToSchema,
+		vMamg2Mam:Class,
+		nMamg2Mal:Class
+	|
+		vMalg2Mam = null;
+		nMalb2Mag = null;
+		vMamg2Mam = null;
+		nMamb2Mamg = null;
+	) {
+		vMamb2Mamb:Class,
+		nMamb2Mamg:Class,
+		nMamb2Mal:Class
+	|
+		vMalg2Mam = null;
+		vMalb2Mamb = null;
+		vMamg2Mam = null;
+		vMamb2Mamb = null;
+	}
+}
+
+map Mb in Tx
+{
+	check l (
+		vMblg2M2l:Class,
+		vMblg2M2m:Class,
+		nMblg2M2r:Class
+	|
+		nM2mg2Mb = null;
+		nM2mb2Mb = null;
+		nM2lg2Mb = null;
+		nM2lb2Mb = null;
+	) {
+		vMblb2M2lb:Class,
+		nMblb2M2lg:Class,
+		nMblb2M2r:Class
+	|
+		nM2mg2Mb = null;
+		nM2mb2Mb = null;
+		nM2lg2Mb = null;
+		nM2lb2Mb = null;
+	}
+	check enforce r (
+		nM2mg2Mb = null;
+		nM2mb2Mb = null;
+		nM2lg2Mb = null;
+		nM2lb2Mb = null;
+	) {
+		nM2mg2Mb = null;
+		nM2mb2Mb = null;
+		nM2lg2Mb = null;
+		nM2lb2Mb = null;
+	}
+	where m (
+		vMbmg2M2m:TClassToTable,
+		nMbmg2M2l:TClassToTable
+	) {
+		vMbmb2M2mb:TClassToTable,
+		nMbmb2M2mg:TClassToTable
+	}
+}
+
+map M1 in Tx refines Ma, Mb
+{
+	check l (
+		vM1lg2M1cl:Class,
+		vM1lg2M1cm:Class
+	|
+		nM1clg2M1 = null;
+		nM1clb2M1 = null;
+		nM1cmg2M1 = null;
+		nM1cmb2M1 = null;
+	) {
+		vM1lb2M1cl:Class,
+		vM1lb2M1cm:Class
+	|
+		nM1clg2M1 = null;
+		nM1clb2M1 = null;
+		nM1cmg2M1 = null;
+		nM1cmb2M1 = null;
+	}
+	check enforce r () {}
+	where m (
+		nM1mg2M1cl:Class,
+		vM1mg2M1cm:Class
+	|
+		nM1clg2M1 = null;
+		nM1clb2M1 = null;
+		nM1cmg2M1 = null;
+		nM1cmb2M1 = null;
+	) {
+		nM1mb2M1cl:Class,
+		vM1mb2M1cm:Class
+	|
+		nM1clg2M1 = null;
+		nM1clb2M1 = null;
+		nM1cmg2M1 = null;
+		nM1cmb2M1 = null;
+	}
+	map {
+		check l (
+			nM1clg2M1:Class
+		|			
+			vM1lg2M1cl = null;
+			vM1lb2M1cl = null;
+			nM1mg2M1cl = null;
+			nM1mb2M1cl = null;
+		) {
+			nM1clb2M1:Class
+		|			
+			vM1lg2M1cl = null;
+			vM1lb2M1cl = null;
+			nM1mg2M1cl = null;
+			nM1mb2M1cl = null;
+		}
+		where m (
+			nM1cmg2M1:Class
+		|			
+			vM1lg2M1cm = null;
+			vM1lb2M1cm = null;
+			vM1mg2M1cm = null;
+			vM1mb2M1cm = null;
+		) {
+			nM1cmb2M1:Class
+		|			
+			vM1lg2M1cm = null;
+			vM1lb2M1cm = null;
+			vM1mg2M1cm = null;
+			vM1mb2M1cm = null;
+		}
+	}
+	map {
+		check l (
+			nM1clg2M1 = null;
+			nM1clb2M1 = null;
+			nM1cmg2M1 = null;
+			nM1cmb2M1 = null;
+		) {
+			nM1clg2M1 = null;
+			nM1clb2M1 = null;
+			nM1cmg2M1 = null;
+			nM1cmb2M1 = null;
+		}
+		where m (
+			nM1clg2M1 = null;
+			nM1clb2M1 = null;
+			nM1cmg2M1 = null;
+			nM1cmb2M1 = null;
+		) {
+			nM1clg2M1 = null;
+			nM1clb2M1 = null;
+			nM1cmg2M1 = null;
+			nM1cmb2M1 = null;
+		}
+	}
+}
+
+map M2 in Tx refines M1
+{
+	check l (
+		nM2lg2Mb:Class
+	|
+		vMblg2M2l = null;
+		nMbmg2M2l = null;
+		nMblb2M2lg = null;
+	) {
+		nM2lb2Mb:Class
+	|
+		vMblg2M2l = null;
+		nMbmg2M2l = null;
+		vMblb2M2lb = null;
+	}
+	check r (
+		nMblg2M2r = null;
+		nMblb2M2r = null;
+	) {
+		nMblg2M2r = null;
+		nMblb2M2r = null;
+	}
+	where m (
+		nM2mg2Mb:Class
+	|
+		vMbmg2M2m = null;
+		nMbmb2M2mg = null;
+		vMblg2M2m = null;
+	) {
+		nM2mb2Mb:Class
+	|
+		vMbmg2M2m = null;
+		vMbmb2M2mb = null;
+		vMblg2M2m = null;
+	}
+}

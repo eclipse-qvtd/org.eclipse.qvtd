@@ -63,12 +63,24 @@ Workflow {
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCST.genmodel" 	
     }
+    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    	genModel = "/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCST.genmodel" 	
+    }
     component = XtextVisitorCodeGenerator { resourceSet = resourceSet
     	ecoreFile = "/org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCST.ecore"
     	javaFolder = "/../plugins/org.eclipse.qvtd.xtext.qvtcore/emf-gen"
     	javaPackageName = "org.eclipse.qvtd.xtext.qvtcorecst"
     	modelPackageName = "org.eclipse.qvtd.xtext.qvtcorecst"
     	visitorClassName = "QVTcoreCSVisitor"
+    	visitorBasePackageName = "org.eclipse.ocl.examples.xtext.essentialocl.util"
+    	visitorBaseClassName = "EssentialOCLCSVisitor"
+    }
+    component = XtextVisitorCodeGenerator { resourceSet = resourceSet
+    	ecoreFile = "/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCST.ecore"
+    	javaFolder = "/../plugins/org.eclipse.qvtd.xtext.qvtrelation/emf-gen"
+    	javaPackageName = "org.eclipse.qvtd.xtext.qvtrelationcst"
+    	modelPackageName = "org.eclipse.qvtd.xtext.qvtrelationcst"
+    	visitorClassName = "QVTrelationCSVisitor"
     	visitorBasePackageName = "org.eclipse.ocl.examples.xtext.essentialocl.util"
     	visitorBaseClassName = "EssentialOCLCSVisitor"
     }

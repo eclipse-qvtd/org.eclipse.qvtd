@@ -1,0 +1,123 @@
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2011 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *
+ * </copyright>
+ *
+ * $Id$
+ */
+grammar org.eclipse.qvtd.xtext.qvtrelation.QVTrelation with org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCL
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+import "platform:/resource/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore" as base
+import "platform:/resource/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore" as essentialocl
+import "platform:/resource/org.eclipse.ocl.examples.pivot/model/Pivot.ecore" as pivot
+import "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore" as qvtbase
+import "platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore" as qvtrelation
+import "platform:/resource/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCST.ecore"
+
+TopLevelCS:  ('import' importClause+=UnitCS ';' )* transformation+=TransformationCS*;
+		
+UnitCS: identifier+=[pivot::Element|UnrestrictedName] ('.' identifier+=[pivot::Element|UnrestrictedName])*;
+	
+TransformationCS: 'transformation' name=UnrestrictedName 
+                     '(' modelDecl+=ModelDeclCS (',' modelDecl+=ModelDeclCS)* ')' 
+                     ('extends' extends+=[qvtbase::Transformation|UnrestrictedName] (',' extends+=[qvtbase::Transformation|UnrestrictedName])*)?
+                     '{' keyDecl+=KeyDeclCS* ( relation+=RelationCS | query+=QueryCS )* '}';
+	
+ModelDeclCS: name=UnrestrictedName ':' (metaModelId+=[pivot::Package|UnrestrictedName]
+	| '{' metaModelId+=[pivot::Package|UnrestrictedName] (',' metaModelId+=[pivot::Package|UnrestrictedName])* '}');
+
+KeyDeclCS: 'key' pathName=PathNameCS '{' propertyId+=[pivot::Property|UnrestrictedName] (',' propertyId+=[pivot::Property|UnrestrictedName])* '}' ';';
+
+RelationCS: top?='top'? 'relation' name=UnrestrictedName
+   			 ('overrides' overrides=[qvtrelation::Relation|UnrestrictedName])?
+               '{'
+               varDeclaration+=VarDeclarationCS*
+               (domain+=DomainCS | domain+=PrimitiveTypeDomainCS)+ 
+               when=WhenCS? where=WhereCS?
+               '}';
+WhenCS: {WhenCS} 'when' '{' (expr+=ExpCS ';')* '}';
+WhereCS: {WhereCS} 'where' '{' (expr+=ExpCS ';')* '}';
+
+VarDeclarationCS: varDeclarationId+=[pivot::Property|UnrestrictedName] (',' varDeclarationId+=[pivot::Property|UnrestrictedName])* ':' type=TypedRefCS ';';
+	
+DomainCS: (checkonly?='checkonly' | enforce?='enforce')? 'domain' modelId=[qvtbase::TypedModel|UnrestrictedName] template=TemplateCS
+             ('implementedby' implementedBy=ExpCS)?
+             ('default_values' '{' (defaultValue+=DefaultValueCS)+ '}')?
+             ';';
+             
+PrimitiveTypeDomainCS: 'primitive' 'domain' name=UnrestrictedName ':' type=TypedRefCS ';';
+
+TemplateCS: (ObjectTemplateCS | CollectionTemplateCS) ('{' guardExpression=ExpCS '}')?;
+	
+ObjectTemplateCS: propertyId=[pivot::Property|UnrestrictedName]? ':' type=TypedRefCS
+	'{' (propertyTemplate+=PropertyTemplateCS (',' propertyTemplate+=PropertyTemplateCS)*)? '}';
+
+PropertyTemplateCS: propertyId=[pivot::Property|UnrestrictedName] '=' oclExpression=ExpCS;
+	
+CollectionTemplateCS: propertyId=[pivot::Property|UnrestrictedName]? ':' type=CollectionTypedRefCS
+	'{' (memberIdentifier+=(NameExpCS | TemplateCS | AnyElementCS)
+	    (',' memberIdentifier+=(NameExpCS | TemplateCS | AnyElementCS))*
+        '++' restIdentifier=(NameExpCS | AnyElementCS)?                     
+         )? '}';
+
+NameExpCS returns essentialocl::NameExpCS: pathName=PathNameCS;
+
+AnyElementCS: {AnyElementCS} '_';
+	
+DefaultValueCS: propertyId=[pivot::Property|UnrestrictedName] '=' initialiser=ExpCS ';';
+		
+QueryCS: 'query' pathName=PathNameCS 
+            '(' (inputParamDeclaration+=ParamDeclarationCS (',' inputParamDeclaration+=ParamDeclarationCS)*)? ')'
+      	  ':' type=TypedRefCS
+            (';' | '{' oclExpression=ExpCS '}');
+	
+ParamDeclarationCS: name=UnrestrictedName ':' type=TypedRefCS;	
+		
+//<OclExpressionCS> ::= <PropertyCallExpCS> 
+//                    | <VariableExpCS>
+//                    | <LiteralExpCS>
+//                    | <LetExpCS>
+//                    | <IfExpCS>
+//                    | '(' <OclExpressionCS> ')'
+//                    | <template>  
+//	notNameExpressionCS -> templateCS
+
+CollectionTypedRefCS returns base::TypedTypeRefCS: pathName=PathNameCS;
+
+TypedRefCS returns base::TypedTypeRefCS: pathName=PathNameCS;
+
+//ExpCS returns essentialocl::ExpCS:
+//	InfixedExpCS
+//|	TemplateCS;
+
+UnrestrictedName returns ecore::EString:
+	EssentialOCLUnrestrictedName
+|   'checkonly'
+|   'default_values'
+|   'domain'
+|   'enforce'
+|   'extends'
+|   'implementedby'
+|   'import'
+|   'key'
+|   'overrides'
+|   'primitive'
+|   'query'
+|   'relation'
+|   'replace'
+|   'top'
+|   'transformation'
+|   'when'
+|   'where'
+;
+//--	relationIdentifier -> '_'	

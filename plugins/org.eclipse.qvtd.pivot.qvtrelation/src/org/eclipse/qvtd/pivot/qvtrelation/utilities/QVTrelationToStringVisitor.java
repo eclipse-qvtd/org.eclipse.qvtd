@@ -16,7 +16,6 @@ package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;

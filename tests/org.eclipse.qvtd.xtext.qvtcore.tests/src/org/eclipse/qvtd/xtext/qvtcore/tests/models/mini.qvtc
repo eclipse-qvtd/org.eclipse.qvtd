@@ -1,0 +1,12 @@
+import tuml2rdbms : 'TumlRdbms.ecore';
+import umlMM : 'umlMM.emof';
+
+transformation umlRdbms {
+        middle imports tuml2rdbms;
+        uml imports umlMM;
+}
+
+map ClassToTable in umlRdbms
+{
+    where () {}
+}
