@@ -38,6 +38,7 @@
         upperBound="-1" eType="#//RealizedVariable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CoreDomain" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Domain #//Area"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CoreModel" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Model"/>
   <eClassifiers xsi:type="ecore:EClass" name="CorePattern" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Pattern">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="VariableNamesAreUnique"/>

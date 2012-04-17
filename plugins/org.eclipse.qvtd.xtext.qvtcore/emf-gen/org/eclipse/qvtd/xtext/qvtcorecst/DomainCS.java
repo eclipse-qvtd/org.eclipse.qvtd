@@ -6,6 +6,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtcorecst;
 
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 
 
@@ -89,12 +90,12 @@ public interface DomainCS extends AreaCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Direction</em>' reference.
-	 * @see #setDirection(CoreDomain)
+	 * @see #setDirection(TypedModel)
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getDomainCS_Direction()
 	 * @model
 	 * @generated
 	 */
-	CoreDomain getDirection();
+	TypedModel getDirection();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorecst.DomainCS#getDirection <em>Direction</em>}' reference.
@@ -104,6 +105,6 @@ public interface DomainCS extends AreaCS {
 	 * @see #getDirection()
 	 * @generated
 	 */
-	void setDirection(CoreDomain value);
+	void setDirection(TypedModel value);
 
 } // DomainCS

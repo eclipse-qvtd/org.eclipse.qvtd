@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl;
+import org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -46,7 +46,7 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  *
  * @generated
  */
-public abstract class DomainImpl extends NamedElementImpl implements Domain {
+public abstract class DomainImpl extends ElementImpl implements Domain {
 	/**
 	 * The default value of the '{@link #isIsCheckable() <em>Is Checkable</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -452,5 +452,12 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	@Override
 	public <R, C> R accept(Visitor<R, C> visitor) {
 		return (R) visitor.getAdapter(QVTbaseVisitor.class).visitDomain(this);
+	}
+
+	public String getName() {
+		if ((typedModel != null) && !typedModel.eIsProxy()) {
+			return typedModel.getName();
+		}
+		return "null";
 	}
 } //DomainImpl

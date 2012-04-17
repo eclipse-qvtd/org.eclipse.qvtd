@@ -46,7 +46,7 @@ public abstract class AbstractExtendingQVTbaseVisitor<R, C>
 	}	
 
 	public R visitDomain(org.eclipse.qvtd.pivot.qvtbase.Domain object) {
-		return visitNamedElement(object);
+		return visitElement(object);
 	}
 
 	public R visitFunction(org.eclipse.qvtd.pivot.qvtbase.Function object) {

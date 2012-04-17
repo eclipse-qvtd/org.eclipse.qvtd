@@ -91,9 +91,9 @@
       </type>
       <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="ConstraintCS">
+    <rules xsi:type="xtext:ParserRule" name="AssignmentCS">
       <type metamodel="/0/@metamodelDeclarations.6">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//ConstraintCS"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//AssignmentCS"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="default" operator="?=">
@@ -309,8 +309,8 @@
         </elements>
         <elements xsi:type="xtext:Assignment" feature="direction" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.5">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcore#//CoreDomain"/>
+            <type metamodel="/0/@metamodelDeclarations.4">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTbase#//TypedModel"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
           </terminal>

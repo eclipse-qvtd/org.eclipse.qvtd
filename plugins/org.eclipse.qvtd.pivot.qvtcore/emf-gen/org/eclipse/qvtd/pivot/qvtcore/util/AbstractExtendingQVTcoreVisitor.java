@@ -57,6 +57,10 @@ public abstract class AbstractExtendingQVTcoreVisitor<R, C>
 		return visitDomain(object);
 	}
 
+	public R visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.CoreModel object) {
+		return visitModel(object);
+	}
+
 	public R visitCorePattern(org.eclipse.qvtd.pivot.qvtcore.CorePattern object) {
 		return visitPattern(object);
 	}

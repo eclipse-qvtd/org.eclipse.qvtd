@@ -33,6 +33,7 @@ import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementMode;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
@@ -80,6 +81,13 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	private EClass coreDomainEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass coreModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -332,6 +340,15 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCoreModel() {
+		return coreModelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCorePattern() {
 		return corePatternEClass;
 	}
@@ -552,6 +569,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 		coreDomainEClass = createEClass(CORE_DOMAIN);
 
+		coreModelEClass = createEClass(CORE_MODEL);
+
 		corePatternEClass = createEClass(CORE_PATTERN);
 		createEReference(corePatternEClass, CORE_PATTERN__VARIABLE);
 
@@ -619,6 +638,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		bottomPatternEClass.getESuperTypes().add(this.getCorePattern());
 		coreDomainEClass.getESuperTypes().add(theQVTbasePackage.getDomain());
 		coreDomainEClass.getESuperTypes().add(this.getArea());
+		coreModelEClass.getESuperTypes().add(thePivotPackage.getModel());
 		corePatternEClass.getESuperTypes().add(theQVTbasePackage.getPattern());
 		enforcementOperationEClass.getESuperTypes().add(thePivotPackage.getElement());
 		guardPatternEClass.getESuperTypes().add(this.getCorePattern());
@@ -647,6 +667,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		initEReference(getBottomPattern_RealizedVariable(), this.getRealizedVariable(), null, "realizedVariable", null, 0, -1, BottomPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(coreDomainEClass, CoreDomain.class, "CoreDomain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(coreModelEClass, CoreModel.class, "CoreModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(corePatternEClass, CorePattern.class, "CorePattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCorePattern_Variable(), thePivotPackage.getVariable(), null, "variable", null, 0, -1, CorePattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

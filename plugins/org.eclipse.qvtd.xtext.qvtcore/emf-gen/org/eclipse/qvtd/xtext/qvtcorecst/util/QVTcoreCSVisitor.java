@@ -30,8 +30,8 @@ package	org.eclipse.qvtd.xtext.qvtcorecst.util;
 public interface QVTcoreCSVisitor<R, C> extends org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor<R, C>
 {
 	R visitAreaCS(org.eclipse.qvtd.xtext.qvtcorecst.AreaCS object);
+	R visitAssignmentCS(org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS object);
 	R visitBottomPatternCS(org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS object);
-	R visitConstraintCS(org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS object);
 	R visitDirectionCS(org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS object);
 	R visitDomainCS(org.eclipse.qvtd.xtext.qvtcorecst.DomainCS object);
 	R visitEnforcementOperationCS(org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS object);

@@ -6,23 +6,23 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Constraint CS</b></em>'.
+ * A representation of the model object '<em><b>Assignment CS</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS#isDefault <em>Default</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS#getTarget <em>Target</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS#getInitialiser <em>Initialiser</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS#isDefault <em>Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS#getInitialiser <em>Initialiser</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getConstraintCS()
+ * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getAssignmentCS()
  * @model
  * @generated
  */
-public interface ConstraintCS extends ExpCS {
+public interface AssignmentCS extends ExpCS {
 	/**
 	 * Returns the value of the '<em><b>Default</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -33,14 +33,14 @@ public interface ConstraintCS extends ExpCS {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Default</em>' attribute.
 	 * @see #setDefault(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getConstraintCS_Default()
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getAssignmentCS_Default()
 	 * @model
 	 * @generated
 	 */
 	boolean isDefault();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS#isDefault <em>Default</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS#isDefault <em>Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Default</em>' attribute.
@@ -59,14 +59,14 @@ public interface ConstraintCS extends ExpCS {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target</em>' containment reference.
 	 * @see #setTarget(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getConstraintCS_Target()
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getAssignmentCS_Target()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	ExpCS getTarget();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS#getTarget <em>Target</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS#getTarget <em>Target</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Target</em>' containment reference.
@@ -85,14 +85,14 @@ public interface ConstraintCS extends ExpCS {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Initialiser</em>' containment reference.
 	 * @see #setInitialiser(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getConstraintCS_Initialiser()
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getAssignmentCS_Initialiser()
 	 * @model containment="true"
 	 * @generated
 	 */
 	ExpCS getInitialiser();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS#getInitialiser <em>Initialiser</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS#getInitialiser <em>Initialiser</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Initialiser</em>' containment reference.
@@ -101,4 +101,4 @@ public interface ConstraintCS extends ExpCS {
 	 */
 	void setInitialiser(ExpCS value);
 
-} // ConstraintCS
+} // AssignmentCS

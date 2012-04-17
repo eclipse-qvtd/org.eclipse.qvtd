@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
-import org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.PatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
 import org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS;
@@ -45,7 +45,7 @@ public abstract class PatternCSImpl extends ModelElementCSImpl implements Patter
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ConstraintCS> constraints;
+	protected EList<AssignmentCS> constraints;
 
 	/**
 	 * The cached value of the '{@link #getUnrealizedVariables() <em>Unrealized Variables</em>}' containment reference list.
@@ -81,9 +81,9 @@ public abstract class PatternCSImpl extends ModelElementCSImpl implements Patter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ConstraintCS> getConstraints() {
+	public EList<AssignmentCS> getConstraints() {
 		if (constraints == null) {
-			constraints = new EObjectContainmentEList<ConstraintCS>(ConstraintCS.class, this, QVTcoreCSTPackage.PATTERN_CS__CONSTRAINTS);
+			constraints = new EObjectContainmentEList<AssignmentCS>(AssignmentCS.class, this, QVTcoreCSTPackage.PATTERN_CS__CONSTRAINTS);
 		}
 		return constraints;
 	}
@@ -143,7 +143,7 @@ public abstract class PatternCSImpl extends ModelElementCSImpl implements Patter
 		switch (featureID) {
 			case QVTcoreCSTPackage.PATTERN_CS__CONSTRAINTS:
 				getConstraints().clear();
-				getConstraints().addAll((Collection<? extends ConstraintCS>)newValue);
+				getConstraints().addAll((Collection<? extends AssignmentCS>)newValue);
 				return;
 			case QVTcoreCSTPackage.PATTERN_CS__UNREALIZED_VARIABLES:
 				getUnrealizedVariables().clear();
@@ -186,7 +186,6 @@ public abstract class PatternCSImpl extends ModelElementCSImpl implements Patter
 		}
 		return super.eIsSet(featureID);
 	}
-
 
 	@SuppressWarnings("unchecked")
 	@Override

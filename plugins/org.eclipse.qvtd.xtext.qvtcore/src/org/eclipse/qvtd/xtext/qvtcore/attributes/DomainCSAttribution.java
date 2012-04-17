@@ -17,6 +17,7 @@
 package org.eclipse.qvtd.xtext.qvtcore.attributes;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -25,6 +26,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.scoping.BaseScopeView;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
 
 public class DomainCSAttribution extends AbstractAttribution
 {
@@ -32,11 +34,15 @@ public class DomainCSAttribution extends AbstractAttribution
 
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+		EReference targetReference = scopeView.getTargetReference();
+		if (targetReference == QVTcoreCSTPackage.Literals.DOMAIN_CS__DIRECTION) {
+			return scopeView.getParent();
+		}
 		DomainCS targetElement = (DomainCS)target;
 		CoreDomain pivot = PivotUtil.getPivot(CoreDomain.class, targetElement);
 		if (pivot != null) {
 			Attribution attribution = PivotUtil.getAttribution(pivot);
-			ScopeView innerScopeView = new BaseScopeView(environmentView.getMetaModelManager(), pivot, attribution, null, null, null);
+			ScopeView innerScopeView = new BaseScopeView(environmentView.getMetaModelManager(), pivot, attribution, null, null, targetReference);
 			environmentView.computeLookups(innerScopeView);
 		}
 		return null;

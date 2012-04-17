@@ -26,6 +26,15 @@ public interface QVTcoreCSTFactory extends EFactory {
 	QVTcoreCSTFactory eINSTANCE = org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Assignment CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Assignment CS</em>'.
+	 * @generated
+	 */
+	AssignmentCS createAssignmentCS();
+
+	/**
 	 * Returns a new object of class '<em>Bottom Pattern CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -33,15 +42,6 @@ public interface QVTcoreCSTFactory extends EFactory {
 	 * @generated
 	 */
 	BottomPatternCS createBottomPatternCS();
-
-	/**
-	 * Returns a new object of class '<em>Constraint CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Constraint CS</em>'.
-	 * @generated
-	 */
-	ConstraintCS createConstraintCS();
 
 	/**
 	 * Returns a new object of class '<em>Direction CS</em>'.

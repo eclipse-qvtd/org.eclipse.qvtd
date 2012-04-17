@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.attributes.RootPackageCSAttribution;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS;
 
 public class TopLevelCSAttribution extends RootPackageCSAttribution
@@ -31,12 +32,11 @@ public class TopLevelCSAttribution extends RootPackageCSAttribution
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
 		TopLevelCS targetElement = (TopLevelCS)target;
 		org.eclipse.ocl.examples.pivot.Package pivot = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Package.class, targetElement);
-//		if (pivot != null) {
-//			environmentView.addNamedElements(pivot.getOwnedLiteral());
-//			environmentView.addElements(PivotUtil.getTemplateParameters(pivot));
-//		}
-//		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-//		environmentView.addLibContents(metaModelManager.getOclAnyType(), scopeView);
+		if (pivot != null) {
+			for (ImportCS csImport : targetElement.getOwnedImport()) {
+				environmentView.addElement(csImport.getName(), csImport.getNamespace());
+			}
+		}
 		return super.computeLookup(target, environmentView, scopeView);
 	}
 }

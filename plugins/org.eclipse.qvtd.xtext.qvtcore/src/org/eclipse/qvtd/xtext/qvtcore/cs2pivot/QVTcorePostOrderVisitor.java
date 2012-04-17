@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLPostOrderVisitor;
@@ -37,8 +38,8 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.xtext.qvtcorecst.AreaCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS;
@@ -71,14 +72,14 @@ public class QVTcorePostOrderVisitor
 		BottomPattern pBottomPattern = PivotUtil.getPivot(BottomPattern.class, csElement);
 		List<Assignment> pAssignments = new ArrayList<Assignment>(); 
 		List<Predicate> pPredicates = new ArrayList<Predicate>(); 
-		for (ConstraintCS csConstraint : csElement.getConstraints()) {
+		for (AssignmentCS csConstraint : csElement.getConstraints()) {
 			boolean isDefault = csConstraint.isDefault();
 			ExpCS initialiser = csConstraint.getInitialiser();
 			if (initialiser != null) {
 				Assignment pAssignment = context.refreshModelElement(Assignment.class,
-						QVTcorePackage.Literals.ASSIGNMENT, csConstraint);
+						QVTcorePackage.Literals.VARIABLE_ASSIGNMENT, csConstraint);
 				pAssignment.setIsDefault(isDefault);
-				pAssignments.add(pAssignment);
+				pAssignments.add(pAssignment); // PROPERTY_ASSIGNMENT
 			}
 			else {
 				if (isDefault) {
@@ -121,7 +122,7 @@ public class QVTcorePostOrderVisitor
 	public Continuation<?> visitGuardPatternCS(GuardPatternCS csElement) {
 		GuardPattern pGuardPattern = PivotUtil.getPivot(GuardPattern.class, csElement);
 		List<Predicate> pPredicates = new ArrayList<Predicate>(); 
-		for (ConstraintCS csConstraint : csElement.getConstraints()) {
+		for (AssignmentCS csConstraint : csElement.getConstraints()) {
 			boolean isDefault = csConstraint.isDefault();
 			ExpCS initialiser = csConstraint.getInitialiser();
 			if (initialiser != null) {

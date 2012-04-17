@@ -54,6 +54,15 @@ public interface QVTcoreFactory extends EFactory {
 	CoreDomain createCoreDomain();
 
 	/**
+	 * Returns a new object of class '<em>Core Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Core Model</em>'.
+	 * @generated
+	 */
+	CoreModel createCoreModel();
+
+	/**
 	 * Returns a new object of class '<em>Core Pattern</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

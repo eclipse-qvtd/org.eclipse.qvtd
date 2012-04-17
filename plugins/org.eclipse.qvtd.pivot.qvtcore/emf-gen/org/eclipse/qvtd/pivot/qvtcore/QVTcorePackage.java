@@ -191,7 +191,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getCorePattern()
 	 * @generated
 	 */
-	int CORE_PATTERN = 4;
+	int CORE_PATTERN = 5;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -349,42 +349,6 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_DOMAIN__OWNED_COMMENT = QVTbasePackage.DOMAIN__OWNED_COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_DOMAIN__NAME = QVTbasePackage.DOMAIN__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_DOMAIN__OWNED_RULE = QVTbasePackage.DOMAIN__OWNED_RULE;
-
-	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_DOMAIN__IS_STATIC = QVTbasePackage.DOMAIN__IS_STATIC;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_DOMAIN__OWNED_ANNOTATION = QVTbasePackage.DOMAIN__OWNED_ANNOTATION;
-
-	/**
 	 * The feature id for the '<em><b>Is Checkable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -448,6 +412,151 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_DOMAIN_FEATURE_COUNT = QVTbasePackage.DOMAIN_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.CoreModelImpl <em>Core Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.CoreModelImpl
+	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getCoreModel()
+	 * @generated
+	 */
+	int CORE_MODEL = 4;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__OWNED_COMMENT = PivotPackage.MODEL__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__NAME = PivotPackage.MODEL__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__OWNED_RULE = PivotPackage.MODEL__OWNED_RULE;
+
+	/**
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__IS_STATIC = PivotPackage.MODEL__IS_STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__OWNED_ANNOTATION = PivotPackage.MODEL__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__TEMPLATE_BINDING = PivotPackage.MODEL__TEMPLATE_BINDING;
+
+	/**
+	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__OWNED_TEMPLATE_SIGNATURE = PivotPackage.MODEL__OWNED_TEMPLATE_SIGNATURE;
+
+	/**
+	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__UNSPECIALIZED_ELEMENT = PivotPackage.MODEL__UNSPECIALIZED_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__NESTED_PACKAGE = PivotPackage.MODEL__NESTED_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Nesting Package</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__NESTING_PACKAGE = PivotPackage.MODEL__NESTING_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__NS_PREFIX = PivotPackage.MODEL__NS_PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__NS_URI = PivotPackage.MODEL__NS_URI;
+
+	/**
+	 * The feature id for the '<em><b>Owned Precedence</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__OWNED_PRECEDENCE = PivotPackage.MODEL__OWNED_PRECEDENCE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__OWNED_TYPE = PivotPackage.MODEL__OWNED_TYPE;
+
+	/**
+	 * The number of structural features of the '<em>Core Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL_FEATURE_COUNT = PivotPackage.MODEL_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.EnforcementOperationImpl <em>Enforcement Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -455,7 +564,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getEnforcementOperation()
 	 * @generated
 	 */
-	int ENFORCEMENT_OPERATION = 5;
+	int ENFORCEMENT_OPERATION = 6;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -510,7 +619,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getGuardPattern()
 	 * @generated
 	 */
-	int GUARD_PATTERN = 6;
+	int GUARD_PATTERN = 7;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -574,7 +683,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getMapping()
 	 * @generated
 	 */
-	int MAPPING = 7;
+	int MAPPING = 8;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -719,7 +828,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getPropertyAssignment()
 	 * @generated
 	 */
-	int PROPERTY_ASSIGNMENT = 8;
+	int PROPERTY_ASSIGNMENT = 9;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -792,7 +901,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getRealizedVariable()
 	 * @generated
 	 */
-	int REALIZED_VARIABLE = 9;
+	int REALIZED_VARIABLE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -892,7 +1001,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getVariableAssignment()
 	 * @generated
 	 */
-	int VARIABLE_ASSIGNMENT = 10;
+	int VARIABLE_ASSIGNMENT = 11;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -956,7 +1065,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getEnforcementMode()
 	 * @generated
 	 */
-	int ENFORCEMENT_MODE = 11;
+	int ENFORCEMENT_MODE = 12;
 
 
 	/**
@@ -1097,6 +1206,16 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCoreDomain();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.CoreModel <em>Core Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Core Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.CoreModel
+	 * @generated
+	 */
+	EClass getCoreModel();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.CorePattern <em>Core Pattern</em>}'.
@@ -1443,6 +1562,16 @@ public interface QVTcorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass CORE_DOMAIN = eINSTANCE.getCoreDomain();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.CoreModelImpl <em>Core Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtcore.impl.CoreModelImpl
+		 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getCoreModel()
+		 * @generated
+		 */
+		EClass CORE_MODEL = eINSTANCE.getCoreModel();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.CorePatternImpl <em>Core Pattern</em>}' class.

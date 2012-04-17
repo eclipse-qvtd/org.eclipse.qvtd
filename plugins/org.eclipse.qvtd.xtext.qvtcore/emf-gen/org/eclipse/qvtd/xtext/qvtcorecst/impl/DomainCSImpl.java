@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
@@ -83,7 +84,7 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected CoreDomain direction;
+	protected TypedModel direction;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -151,10 +152,10 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CoreDomain getDirection() {
+	public TypedModel getDirection() {
 		if (direction != null && direction.eIsProxy()) {
 			InternalEObject oldDirection = (InternalEObject)direction;
-			direction = (CoreDomain)eResolveProxy(oldDirection);
+			direction = (TypedModel)eResolveProxy(oldDirection);
 			if (direction != oldDirection) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTcoreCSTPackage.DOMAIN_CS__DIRECTION, oldDirection, direction));
@@ -168,7 +169,7 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CoreDomain basicGetDirection() {
+	public TypedModel basicGetDirection() {
 		return direction;
 	}
 
@@ -177,8 +178,8 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDirection(CoreDomain newDirection) {
-		CoreDomain oldDirection = direction;
+	public void setDirection(TypedModel newDirection) {
+		TypedModel oldDirection = direction;
 		direction = newDirection;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.DOMAIN_CS__DIRECTION, oldDirection, direction));
@@ -218,7 +219,7 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 				setEnforce((Boolean)newValue);
 				return;
 			case QVTcoreCSTPackage.DOMAIN_CS__DIRECTION:
-				setDirection((CoreDomain)newValue);
+				setDirection((TypedModel)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -239,7 +240,7 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 				setEnforce(ENFORCE_EDEFAULT);
 				return;
 			case QVTcoreCSTPackage.DOMAIN_CS__DIRECTION:
-				setDirection((CoreDomain)null);
+				setDirection((TypedModel)null);
 				return;
 		}
 		super.eUnset(featureID);

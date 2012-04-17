@@ -129,6 +129,8 @@ public class QVTcoreValidator extends EObjectValidator {
 				return validateBottomPattern((BottomPattern)value, diagnostics, context);
 			case QVTcorePackage.CORE_DOMAIN:
 				return validateCoreDomain((CoreDomain)value, diagnostics, context);
+			case QVTcorePackage.CORE_MODEL:
+				return validateCoreModel((CoreModel)value, diagnostics, context);
 			case QVTcorePackage.CORE_PATTERN:
 				return validateCorePattern((CorePattern)value, diagnostics, context);
 			case QVTcorePackage.ENFORCEMENT_OPERATION:
@@ -286,6 +288,25 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateDomain_TypedModelExistsWarning(coreDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateDomain_TypedModelDefinedByTransformation(coreDomain, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateDomain_CheckableOrEnforceable(coreDomain, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCoreModel(CoreModel coreModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(coreModel, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(coreModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(coreModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(coreModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(coreModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(coreModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(coreModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(coreModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(coreModel, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateElement_validateNotOwnSelf(coreModel, diagnostics, context);
 		return result;
 	}
 

@@ -32,7 +32,7 @@ TopLevelCS:
 BottomPatternCS: {BottomPatternCS}
 	((unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS)
 		(',' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))* '|')?
-	constraints+=ConstraintCS*
+	constraints+=AssignmentCS*
 ;
 		
 ComposedMappingCS returns MappingCS: MappingCS;
@@ -40,7 +40,7 @@ ComposedMappingCS returns MappingCS: MappingCS;
 //Constraint ::= Predicate | Assignment
 //Predicate ::= BooleanOCLExpr
 //Assignement ::= [“default”] SlotOwnerOCLExpr“.”PropertyName “:=” ValueOCLExpr
-ConstraintCS: default?='default'? target=ExpCS (':=' initialiser=ExpCS)? ';';
+AssignmentCS: default?='default'? target=ExpCS (':=' initialiser=ExpCS)? ';';
 	
 DirectionCS: name=UnrestrictedName
 	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
@@ -51,7 +51,7 @@ DirectionCS: name=UnrestrictedName
 	
 GuardPatternCS: {GuardPatternCS}
 	(unrealizedVariables+=UnrealizedVariableCS (',' unrealizedVariables+=UnrealizedVariableCS )* '|' )?
-	constraints+=ConstraintCS*
+	constraints+=AssignmentCS*
 ;
 
 ImportCS returns base::ImportCS:
@@ -67,7 +67,7 @@ MappingCS: 'map' name=UnrestrictedName ('in' in=[qvtbase::Transformation|Unrestr
 	('refines' refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)?
 	'{' domains+=NamedDomainCS* ('where' domains+=UnnamedDomainCS)? composedMappings+=ComposedMappingCS* '}';
 	
-NamedDomainCS returns DomainCS: check?='check'? enforce?='enforce'? direction=[qvtcore::CoreDomain|UnrestrictedName]
+NamedDomainCS returns DomainCS: check?='check'? enforce?='enforce'? direction=[qvtbase::TypedModel|UnrestrictedName]
 	'(' guardPattern=GuardPatternCS? ')' '{' bottomPattern=BottomPatternCS? '}';
 	
 ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;

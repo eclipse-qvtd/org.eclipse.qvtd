@@ -291,9 +291,9 @@ ruleBottomPatternCS returns [EObject current=null]
 )?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getConstraintsConstraintCSParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getConstraintsAssignmentCSParserRuleCall_2_0()); 
 	    }
-		lv_constraints_7_0=ruleConstraintCS		{
+		lv_constraints_7_0=ruleAssignmentCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getBottomPatternCSRule());
 	        }
@@ -301,7 +301,7 @@ ruleBottomPatternCS returns [EObject current=null]
        			$current, 
        			"constraints",
         		lv_constraints_7_0, 
-        		"ConstraintCS");
+        		"AssignmentCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -346,17 +346,17 @@ ruleComposedMappingCS returns [EObject current=null]
 
 
 
-// Entry rule entryRuleConstraintCS
-entryRuleConstraintCS returns [EObject current=null] 
+// Entry rule entryRuleAssignmentCS
+entryRuleAssignmentCS returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getConstraintCSRule()); }
-	 iv_ruleConstraintCS=ruleConstraintCS 
-	 { $current=$iv_ruleConstraintCS.current; } 
+	{ newCompositeNode(grammarAccess.getAssignmentCSRule()); }
+	 iv_ruleAssignmentCS=ruleAssignmentCS 
+	 { $current=$iv_ruleAssignmentCS.current; } 
 	 EOF 
 ;
 
-// Rule ConstraintCS
-ruleConstraintCS returns [EObject current=null] 
+// Rule AssignmentCS
+ruleAssignmentCS returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
@@ -364,12 +364,12 @@ ruleConstraintCS returns [EObject current=null]
 (
 		lv_default_0_0=	'default' 
     {
-        newLeafNode(lv_default_0_0, grammarAccess.getConstraintCSAccess().getDefaultDefaultKeyword_0_0());
+        newLeafNode(lv_default_0_0, grammarAccess.getAssignmentCSAccess().getDefaultDefaultKeyword_0_0());
     }
  
 	    {
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getConstraintCSRule());
+	            $current = createModelElement(grammarAccess.getAssignmentCSRule());
 	        }
        		setWithLastConsumed($current, "default", true, "default");
 	    }
@@ -378,11 +378,11 @@ ruleConstraintCS returns [EObject current=null]
 )?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getConstraintCSAccess().getTargetExpCSParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getAssignmentCSAccess().getTargetExpCSParserRuleCall_1_0()); 
 	    }
 		lv_target_1_0=ruleExpCS		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getConstraintCSRule());
+	            $current = createModelElementForParent(grammarAccess.getAssignmentCSRule());
 	        }
        		set(
        			$current, 
@@ -395,16 +395,16 @@ ruleConstraintCS returns [EObject current=null]
 )
 )(	otherlv_2=':=' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getConstraintCSAccess().getColonEqualsSignKeyword_2_0());
+    	newLeafNode(otherlv_2, grammarAccess.getAssignmentCSAccess().getColonEqualsSignKeyword_2_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getConstraintCSAccess().getInitialiserExpCSParserRuleCall_2_1_0()); 
+	        newCompositeNode(grammarAccess.getAssignmentCSAccess().getInitialiserExpCSParserRuleCall_2_1_0()); 
 	    }
 		lv_initialiser_3_0=ruleExpCS		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getConstraintCSRule());
+	            $current = createModelElementForParent(grammarAccess.getAssignmentCSRule());
 	        }
        		set(
        			$current, 
@@ -417,7 +417,7 @@ ruleConstraintCS returns [EObject current=null]
 )
 ))?	otherlv_4=';' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getConstraintCSAccess().getSemicolonKeyword_3());
+    	newLeafNode(otherlv_4, grammarAccess.getAssignmentCSAccess().getSemicolonKeyword_3());
     }
 )
 ;
@@ -623,9 +623,9 @@ ruleGuardPatternCS returns [EObject current=null]
 )?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getConstraintsConstraintCSParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getConstraintsAssignmentCSParserRuleCall_2_0()); 
 	    }
-		lv_constraints_5_0=ruleConstraintCS		{
+		lv_constraints_5_0=ruleAssignmentCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getGuardPatternCSRule());
 	        }
@@ -633,7 +633,7 @@ ruleGuardPatternCS returns [EObject current=null]
        			$current, 
        			"constraints",
         		lv_constraints_5_0, 
-        		"ConstraintCS");
+        		"AssignmentCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1010,7 +1010,7 @@ ruleNamedDomainCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getNamedDomainCSAccess().getDirectionCoreDomainCrossReference_2_0()); 
+	        newCompositeNode(grammarAccess.getNamedDomainCSAccess().getDirectionTypedModelCrossReference_2_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();

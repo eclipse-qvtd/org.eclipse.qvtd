@@ -73,6 +73,7 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 		switch (eClass.getClassifierID()) {
 			case QVTcorePackage.BOTTOM_PATTERN: return createBottomPattern();
 			case QVTcorePackage.CORE_DOMAIN: return createCoreDomain();
+			case QVTcorePackage.CORE_MODEL: return createCoreModel();
 			case QVTcorePackage.CORE_PATTERN: return createCorePattern();
 			case QVTcorePackage.ENFORCEMENT_OPERATION: return createEnforcementOperation();
 			case QVTcorePackage.GUARD_PATTERN: return createGuardPattern();
@@ -133,6 +134,16 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	public CoreDomain createCoreDomain() {
 		CoreDomainImpl coreDomain = new CoreDomainImpl();
 		return coreDomain;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CoreModel createCoreModel() {
+		CoreModelImpl coreModel = new CoreModelImpl();
+		return coreModel;
 	}
 
 	/**

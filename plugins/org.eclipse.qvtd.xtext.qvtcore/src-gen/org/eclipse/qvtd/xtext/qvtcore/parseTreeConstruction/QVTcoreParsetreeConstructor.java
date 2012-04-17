@@ -34,7 +34,7 @@ protected class ThisRootNode extends RootToken {
 			case 0: return new TopLevelCS_Group(this, this, 0, inst);
 			case 1: return new BottomPatternCS_Group(this, this, 1, inst);
 			case 2: return new ComposedMappingCS_MappingCSParserRuleCall(this, this, 2, inst);
-			case 3: return new ConstraintCS_Group(this, this, 3, inst);
+			case 3: return new AssignmentCS_Group(this, this, 3, inst);
 			case 4: return new DirectionCS_Group(this, this, 4, inst);
 			case 5: return new GuardPatternCS_Group(this, this, 5, inst);
 			case 6: return new ImportCS_Group(this, this, 6, inst);
@@ -435,13 +435,13 @@ protected class TopLevelCS_QueriesAssignment_1_2 extends AssignmentToken  {
  * 
  * 	(unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))* "|")?
  * 
- * 	constraints+=ConstraintCS*;
+ * 	constraints+=AssignmentCS*;
  *
  **/
 
 // {BottomPatternCS} ((unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS) (","
 // 
-// (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))* "|")? constraints+=ConstraintCS*
+// (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))* "|")? constraints+=AssignmentCS*
 protected class BottomPatternCS_Group extends GroupToken {
 	
 	public BottomPatternCS_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -824,7 +824,7 @@ protected class BottomPatternCS_VerticalLineKeyword_1_2 extends KeywordToken  {
 }
 
 
-// constraints+=ConstraintCS*
+// constraints+=AssignmentCS*
 protected class BottomPatternCS_ConstraintsAssignment_2 extends AssignmentToken  {
 	
 	public BottomPatternCS_ConstraintsAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -839,7 +839,7 @@ protected class BottomPatternCS_ConstraintsAssignment_2 extends AssignmentToken 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintCS_Group(this, this, 0, inst);
+			case 0: return new AssignmentCS_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -850,9 +850,9 @@ protected class BottomPatternCS_ConstraintsAssignment_2 extends AssignmentToken 
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("constraints");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getConstraintCSRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getAssignmentCSRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getBottomPatternCSAccess().getConstraintsConstraintCSParserRuleCall_2_0(); 
+				element = grammarAccess.getBottomPatternCSAccess().getConstraintsAssignmentCSParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -923,42 +923,42 @@ protected class ComposedMappingCS_MappingCSParserRuleCall extends RuleCallToken 
 /************ end Rule ComposedMappingCS ****************/
 
 
-/************ begin Rule ConstraintCS ****************
+/************ begin Rule AssignmentCS ****************
  *
  * //Constraint ::= Predicate | Assignment
  *  //Predicate ::= BooleanOCLExpr
  * 
  * 
  * //Assignement ::= [“default”] SlotOwnerOCLExpr“.”PropertyName “:=” ValueOCLExpr
- *  ConstraintCS:
+ *  AssignmentCS:
  * 
  * 	default?="default"? target=ExpCS (":=" initialiser=ExpCS)? ";";
  *
  **/
 
 // default?="default"? target=ExpCS (":=" initialiser=ExpCS)? ";"
-protected class ConstraintCS_Group extends GroupToken {
+protected class AssignmentCS_Group extends GroupToken {
 	
-	public ConstraintCS_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public AssignmentCS_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getConstraintCSAccess().getGroup();
+		return grammarAccess.getAssignmentCSAccess().getGroup();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintCS_SemicolonKeyword_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new AssignmentCS_SemicolonKeyword_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getConstraintCSRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getAssignmentCSRule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -966,15 +966,15 @@ protected class ConstraintCS_Group extends GroupToken {
 }
 
 // default?="default"?
-protected class ConstraintCS_DefaultAssignment_0 extends AssignmentToken  {
+protected class AssignmentCS_DefaultAssignment_0 extends AssignmentToken  {
 	
-	public ConstraintCS_DefaultAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public AssignmentCS_DefaultAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getConstraintCSAccess().getDefaultAssignment_0();
+		return grammarAccess.getAssignmentCSAccess().getDefaultAssignment_0();
 	}
 
     @Override
@@ -990,7 +990,7 @@ protected class ConstraintCS_DefaultAssignment_0 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("default");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getConstraintCSAccess().getDefaultDefaultKeyword_0_0();
+			element = grammarAccess.getAssignmentCSAccess().getDefaultDefaultKeyword_0_0();
 			return obj;
 		}
 		return null;
@@ -999,15 +999,15 @@ protected class ConstraintCS_DefaultAssignment_0 extends AssignmentToken  {
 }
 
 // target=ExpCS
-protected class ConstraintCS_TargetAssignment_1 extends AssignmentToken  {
+protected class AssignmentCS_TargetAssignment_1 extends AssignmentToken  {
 	
-	public ConstraintCS_TargetAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public AssignmentCS_TargetAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getConstraintCSAccess().getTargetAssignment_1();
+		return grammarAccess.getAssignmentCSAccess().getTargetAssignment_1();
 	}
 
     @Override
@@ -1026,7 +1026,7 @@ protected class ConstraintCS_TargetAssignment_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExpCSRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getConstraintCSAccess().getTargetExpCSParserRuleCall_1_0(); 
+				element = grammarAccess.getAssignmentCSAccess().getTargetExpCSParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1038,28 +1038,28 @@ protected class ConstraintCS_TargetAssignment_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new ConstraintCS_DefaultAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new AssignmentCS_DefaultAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
 		}	
 	}	
 }
 
 // (":=" initialiser=ExpCS)?
-protected class ConstraintCS_Group_2 extends GroupToken {
+protected class AssignmentCS_Group_2 extends GroupToken {
 	
-	public ConstraintCS_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public AssignmentCS_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getConstraintCSAccess().getGroup_2();
+		return grammarAccess.getAssignmentCSAccess().getGroup_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintCS_InitialiserAssignment_2_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new AssignmentCS_InitialiserAssignment_2_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1067,21 +1067,21 @@ protected class ConstraintCS_Group_2 extends GroupToken {
 }
 
 // ":="
-protected class ConstraintCS_ColonEqualsSignKeyword_2_0 extends KeywordToken  {
+protected class AssignmentCS_ColonEqualsSignKeyword_2_0 extends KeywordToken  {
 	
-	public ConstraintCS_ColonEqualsSignKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public AssignmentCS_ColonEqualsSignKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getConstraintCSAccess().getColonEqualsSignKeyword_2_0();
+		return grammarAccess.getAssignmentCSAccess().getColonEqualsSignKeyword_2_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintCS_TargetAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new AssignmentCS_TargetAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1089,15 +1089,15 @@ protected class ConstraintCS_ColonEqualsSignKeyword_2_0 extends KeywordToken  {
 }
 
 // initialiser=ExpCS
-protected class ConstraintCS_InitialiserAssignment_2_1 extends AssignmentToken  {
+protected class AssignmentCS_InitialiserAssignment_2_1 extends AssignmentToken  {
 	
-	public ConstraintCS_InitialiserAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public AssignmentCS_InitialiserAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getConstraintCSAccess().getInitialiserAssignment_2_1();
+		return grammarAccess.getAssignmentCSAccess().getInitialiserAssignment_2_1();
 	}
 
     @Override
@@ -1116,7 +1116,7 @@ protected class ConstraintCS_InitialiserAssignment_2_1 extends AssignmentToken  
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExpCSRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getConstraintCSAccess().getInitialiserExpCSParserRuleCall_2_1_0(); 
+				element = grammarAccess.getAssignmentCSAccess().getInitialiserExpCSParserRuleCall_2_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1128,7 +1128,7 @@ protected class ConstraintCS_InitialiserAssignment_2_1 extends AssignmentToken  
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new ConstraintCS_ColonEqualsSignKeyword_2_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new AssignmentCS_ColonEqualsSignKeyword_2_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1136,22 +1136,22 @@ protected class ConstraintCS_InitialiserAssignment_2_1 extends AssignmentToken  
 
 
 // ";"
-protected class ConstraintCS_SemicolonKeyword_3 extends KeywordToken  {
+protected class AssignmentCS_SemicolonKeyword_3 extends KeywordToken  {
 	
-	public ConstraintCS_SemicolonKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public AssignmentCS_SemicolonKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getConstraintCSAccess().getSemicolonKeyword_3();
+		return grammarAccess.getAssignmentCSAccess().getSemicolonKeyword_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintCS_Group_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new ConstraintCS_TargetAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new AssignmentCS_Group_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new AssignmentCS_TargetAssignment_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -1159,7 +1159,7 @@ protected class ConstraintCS_SemicolonKeyword_3 extends KeywordToken  {
 }
 
 
-/************ end Rule ConstraintCS ****************/
+/************ end Rule AssignmentCS ****************/
 
 
 /************ begin Rule DirectionCS ****************
@@ -1586,13 +1586,13 @@ protected class DirectionCS_UsesAssignment_2_2_1 extends AssignmentToken  {
  * 
  * 	{GuardPatternCS} (unrealizedVariables+=UnrealizedVariableCS ("," unrealizedVariables+=UnrealizedVariableCS)* "|")?
  * 
- * 	constraints+=ConstraintCS*;
+ * 	constraints+=AssignmentCS*;
  *
  **/
 
 // {GuardPatternCS} (unrealizedVariables+=UnrealizedVariableCS ("," unrealizedVariables+=UnrealizedVariableCS)* "|")?
 // 
-// constraints+=ConstraintCS*
+// constraints+=AssignmentCS*
 protected class GuardPatternCS_Group extends GroupToken {
 	
 	public GuardPatternCS_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1833,7 +1833,7 @@ protected class GuardPatternCS_VerticalLineKeyword_1_2 extends KeywordToken  {
 }
 
 
-// constraints+=ConstraintCS*
+// constraints+=AssignmentCS*
 protected class GuardPatternCS_ConstraintsAssignment_2 extends AssignmentToken  {
 	
 	public GuardPatternCS_ConstraintsAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1848,7 +1848,7 @@ protected class GuardPatternCS_ConstraintsAssignment_2 extends AssignmentToken  
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintCS_Group(this, this, 0, inst);
+			case 0: return new AssignmentCS_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1859,9 +1859,9 @@ protected class GuardPatternCS_ConstraintsAssignment_2 extends AssignmentToken  
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("constraints");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getConstraintCSRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getAssignmentCSRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getGuardPatternCSAccess().getConstraintsConstraintCSParserRuleCall_2_0(); 
+				element = grammarAccess.getGuardPatternCSAccess().getConstraintsAssignmentCSParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2883,13 +2883,13 @@ protected class MappingCS_RightCurlyBracketKeyword_8 extends KeywordToken  {
  *
  * NamedDomainCS returns DomainCS:
  * 
- * 	check?="check"? enforce?="enforce"? direction=[qvtcore::CoreDomain|UnrestrictedName] "(" guardPattern=GuardPatternCS?
+ * 	check?="check"? enforce?="enforce"? direction=[qvtbase::TypedModel|UnrestrictedName] "(" guardPattern=GuardPatternCS?
  * 
  * 	")" "{" bottomPattern=BottomPatternCS? "}";
  *
  **/
 
-// check?="check"? enforce?="enforce"? direction=[qvtcore::CoreDomain|UnrestrictedName] "(" guardPattern=GuardPatternCS?
+// check?="check"? enforce?="enforce"? direction=[qvtbase::TypedModel|UnrestrictedName] "(" guardPattern=GuardPatternCS?
 // 
 // ")" "{" bottomPattern=BottomPatternCS? "}"
 protected class NamedDomainCS_Group extends GroupToken {
@@ -2987,7 +2987,7 @@ protected class NamedDomainCS_EnforceAssignment_1 extends AssignmentToken  {
 
 }
 
-// direction=[qvtcore::CoreDomain|UnrestrictedName]
+// direction=[qvtbase::TypedModel|UnrestrictedName]
 protected class NamedDomainCS_DirectionAssignment_2 extends AssignmentToken  {
 	
 	public NamedDomainCS_DirectionAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3014,9 +3014,9 @@ protected class NamedDomainCS_DirectionAssignment_2 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("direction");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getNamedDomainCSAccess().getDirectionCoreDomainCrossReference_2_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getNamedDomainCSAccess().getDirectionTypedModelCrossReference_2_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getNamedDomainCSAccess().getDirectionCoreDomainCrossReference_2_0(); 
+				element = grammarAccess.getNamedDomainCSAccess().getDirectionTypedModelCrossReference_2_0(); 
 				return obj;
 			}
 		}

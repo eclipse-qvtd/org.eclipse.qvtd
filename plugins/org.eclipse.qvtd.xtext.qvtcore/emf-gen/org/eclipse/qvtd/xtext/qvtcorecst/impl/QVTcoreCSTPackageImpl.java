@@ -17,8 +17,8 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLC
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.xtext.qvtcorecst.AreaCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS;
@@ -54,14 +54,14 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass bottomPatternCSEClass = null;
+	private EClass assignmentCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass constraintCSEClass = null;
+	private EClass bottomPatternCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -251,6 +251,42 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAssignmentCS() {
+		return assignmentCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAssignmentCS_Default() {
+		return (EAttribute)assignmentCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAssignmentCS_Target() {
+		return (EReference)assignmentCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAssignmentCS_Initialiser() {
+		return (EReference)assignmentCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBottomPatternCS() {
 		return bottomPatternCSEClass;
 	}
@@ -271,42 +307,6 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 	 */
 	public EReference getBottomPatternCS_RealizedVariables() {
 		return (EReference)bottomPatternCSEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getConstraintCS() {
-		return constraintCSEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getConstraintCS_Default() {
-		return (EAttribute)constraintCSEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getConstraintCS_Target() {
-		return (EReference)constraintCSEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getConstraintCS_Initialiser() {
-		return (EReference)constraintCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -647,14 +647,14 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 		createEReference(areaCSEClass, AREA_CS__GUARD_PATTERN);
 		createEReference(areaCSEClass, AREA_CS__BOTTOM_PATTERN);
 
+		assignmentCSEClass = createEClass(ASSIGNMENT_CS);
+		createEAttribute(assignmentCSEClass, ASSIGNMENT_CS__DEFAULT);
+		createEReference(assignmentCSEClass, ASSIGNMENT_CS__TARGET);
+		createEReference(assignmentCSEClass, ASSIGNMENT_CS__INITIALISER);
+
 		bottomPatternCSEClass = createEClass(BOTTOM_PATTERN_CS);
 		createEReference(bottomPatternCSEClass, BOTTOM_PATTERN_CS__ENFORCEMENT_OPERATIONS);
 		createEReference(bottomPatternCSEClass, BOTTOM_PATTERN_CS__REALIZED_VARIABLES);
-
-		constraintCSEClass = createEClass(CONSTRAINT_CS);
-		createEAttribute(constraintCSEClass, CONSTRAINT_CS__DEFAULT);
-		createEReference(constraintCSEClass, CONSTRAINT_CS__TARGET);
-		createEReference(constraintCSEClass, CONSTRAINT_CS__INITIALISER);
 
 		directionCSEClass = createEClass(DIRECTION_CS);
 		createEReference(directionCSEClass, DIRECTION_CS__IMPORTS);
@@ -740,8 +740,8 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 
 		// Add supertypes to classes
 		areaCSEClass.getESuperTypes().add(theBaseCSTPackage.getNamedElementCS());
+		assignmentCSEClass.getESuperTypes().add(theEssentialOCLCSTPackage.getExpCS());
 		bottomPatternCSEClass.getESuperTypes().add(this.getPatternCS());
-		constraintCSEClass.getESuperTypes().add(theEssentialOCLCSTPackage.getExpCS());
 		directionCSEClass.getESuperTypes().add(theBaseCSTPackage.getNamedElementCS());
 		domainCSEClass.getESuperTypes().add(this.getAreaCS());
 		enforcementOperationCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
@@ -761,14 +761,14 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 		initEReference(getAreaCS_GuardPattern(), this.getGuardPatternCS(), null, "guardPattern", null, 0, 1, AreaCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAreaCS_BottomPattern(), this.getBottomPatternCS(), null, "bottomPattern", null, 0, 1, AreaCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(assignmentCSEClass, AssignmentCS.class, "AssignmentCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAssignmentCS_Default(), ecorePackage.getEBoolean(), "default", null, 0, 1, AssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssignmentCS_Target(), theEssentialOCLCSTPackage.getExpCS(), null, "target", null, 1, 1, AssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssignmentCS_Initialiser(), theEssentialOCLCSTPackage.getExpCS(), null, "initialiser", null, 0, 1, AssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(bottomPatternCSEClass, BottomPatternCS.class, "BottomPatternCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBottomPatternCS_EnforcementOperations(), this.getEnforcementOperationCS(), null, "enforcementOperations", null, 0, -1, BottomPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBottomPatternCS_RealizedVariables(), this.getRealizedVariableCS(), null, "realizedVariables", null, 0, -1, BottomPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(constraintCSEClass, ConstraintCS.class, "ConstraintCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getConstraintCS_Default(), ecorePackage.getEBoolean(), "default", null, 0, 1, ConstraintCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConstraintCS_Target(), theEssentialOCLCSTPackage.getExpCS(), null, "target", null, 1, 1, ConstraintCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConstraintCS_Initialiser(), theEssentialOCLCSTPackage.getExpCS(), null, "initialiser", null, 0, 1, ConstraintCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(directionCSEClass, DirectionCS.class, "DirectionCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDirectionCS_Imports(), thePivotPackage.getPackage(), null, "imports", null, 0, -1, DirectionCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -777,7 +777,7 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 		initEClass(domainCSEClass, DomainCS.class, "DomainCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomainCS_Check(), ecorePackage.getEBoolean(), "check", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomainCS_Enforce(), ecorePackage.getEBoolean(), "enforce", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDomainCS_Direction(), theQVTcorePackage.getCoreDomain(), null, "direction", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainCS_Direction(), theQVTbasePackage.getTypedModel(), null, "direction", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(enforcementOperationCSEClass, EnforcementOperationCS.class, "EnforcementOperationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEnforcementOperationCS_Deletion(), ecorePackage.getEBoolean(), "deletion", null, 0, 1, EnforcementOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -795,7 +795,7 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 		initEClass(paramDeclarationCSEClass, ParamDeclarationCS.class, "ParamDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(patternCSEClass, PatternCS.class, "PatternCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPatternCS_Constraints(), this.getConstraintCS(), null, "constraints", null, 0, -1, PatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPatternCS_Constraints(), this.getAssignmentCS(), null, "constraints", null, 0, -1, PatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPatternCS_UnrealizedVariables(), this.getUnrealizedVariableCS(), null, "unrealizedVariables", null, 0, -1, PatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(queryCSEClass, QueryCS.class, "QueryCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

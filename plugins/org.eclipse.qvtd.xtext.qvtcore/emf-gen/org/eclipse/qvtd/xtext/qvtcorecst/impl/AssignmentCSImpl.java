@@ -15,26 +15,26 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.impl.ExpCSImpl;
 
-import org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
 import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Constraint CS</b></em>'.
+ * An implementation of the model object '<em><b>Assignment CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.ConstraintCSImpl#isDefault <em>Default</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.ConstraintCSImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.ConstraintCSImpl#getInitialiser <em>Initialiser</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.AssignmentCSImpl#isDefault <em>Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.AssignmentCSImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.AssignmentCSImpl#getInitialiser <em>Initialiser</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ConstraintCSImpl extends ExpCSImpl implements ConstraintCS {
+public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 	/**
 	 * The default value of the '{@link #isDefault() <em>Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -80,7 +80,7 @@ public class ConstraintCSImpl extends ExpCSImpl implements ConstraintCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ConstraintCSImpl() {
+	protected AssignmentCSImpl() {
 		super();
 	}
 
@@ -91,7 +91,7 @@ public class ConstraintCSImpl extends ExpCSImpl implements ConstraintCS {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTcoreCSTPackage.Literals.CONSTRAINT_CS;
+		return QVTcoreCSTPackage.Literals.ASSIGNMENT_CS;
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class ConstraintCSImpl extends ExpCSImpl implements ConstraintCS {
 		boolean oldDefault = default_;
 		default_ = newDefault;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.CONSTRAINT_CS__DEFAULT, oldDefault, default_));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.ASSIGNMENT_CS__DEFAULT, oldDefault, default_));
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class ConstraintCSImpl extends ExpCSImpl implements ConstraintCS {
 		ExpCS oldTarget = target;
 		target = newTarget;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.CONSTRAINT_CS__TARGET, oldTarget, newTarget);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.ASSIGNMENT_CS__TARGET, oldTarget, newTarget);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -148,14 +148,14 @@ public class ConstraintCSImpl extends ExpCSImpl implements ConstraintCS {
 		if (newTarget != target) {
 			NotificationChain msgs = null;
 			if (target != null)
-				msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSTPackage.CONSTRAINT_CS__TARGET, null, msgs);
+				msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSTPackage.ASSIGNMENT_CS__TARGET, null, msgs);
 			if (newTarget != null)
-				msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSTPackage.CONSTRAINT_CS__TARGET, null, msgs);
+				msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSTPackage.ASSIGNMENT_CS__TARGET, null, msgs);
 			msgs = basicSetTarget(newTarget, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.CONSTRAINT_CS__TARGET, newTarget, newTarget));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.ASSIGNMENT_CS__TARGET, newTarget, newTarget));
 	}
 
 	/**
@@ -176,7 +176,7 @@ public class ConstraintCSImpl extends ExpCSImpl implements ConstraintCS {
 		ExpCS oldInitialiser = initialiser;
 		initialiser = newInitialiser;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.CONSTRAINT_CS__INITIALISER, oldInitialiser, newInitialiser);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.ASSIGNMENT_CS__INITIALISER, oldInitialiser, newInitialiser);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -191,14 +191,14 @@ public class ConstraintCSImpl extends ExpCSImpl implements ConstraintCS {
 		if (newInitialiser != initialiser) {
 			NotificationChain msgs = null;
 			if (initialiser != null)
-				msgs = ((InternalEObject)initialiser).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSTPackage.CONSTRAINT_CS__INITIALISER, null, msgs);
+				msgs = ((InternalEObject)initialiser).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSTPackage.ASSIGNMENT_CS__INITIALISER, null, msgs);
 			if (newInitialiser != null)
-				msgs = ((InternalEObject)newInitialiser).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSTPackage.CONSTRAINT_CS__INITIALISER, null, msgs);
+				msgs = ((InternalEObject)newInitialiser).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSTPackage.ASSIGNMENT_CS__INITIALISER, null, msgs);
 			msgs = basicSetInitialiser(newInitialiser, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.CONSTRAINT_CS__INITIALISER, newInitialiser, newInitialiser));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.ASSIGNMENT_CS__INITIALISER, newInitialiser, newInitialiser));
 	}
 
 	/**
@@ -209,9 +209,9 @@ public class ConstraintCSImpl extends ExpCSImpl implements ConstraintCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcoreCSTPackage.CONSTRAINT_CS__TARGET:
+			case QVTcoreCSTPackage.ASSIGNMENT_CS__TARGET:
 				return basicSetTarget(null, msgs);
-			case QVTcoreCSTPackage.CONSTRAINT_CS__INITIALISER:
+			case QVTcoreCSTPackage.ASSIGNMENT_CS__INITIALISER:
 				return basicSetInitialiser(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -225,11 +225,11 @@ public class ConstraintCSImpl extends ExpCSImpl implements ConstraintCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreCSTPackage.CONSTRAINT_CS__DEFAULT:
+			case QVTcoreCSTPackage.ASSIGNMENT_CS__DEFAULT:
 				return isDefault();
-			case QVTcoreCSTPackage.CONSTRAINT_CS__TARGET:
+			case QVTcoreCSTPackage.ASSIGNMENT_CS__TARGET:
 				return getTarget();
-			case QVTcoreCSTPackage.CONSTRAINT_CS__INITIALISER:
+			case QVTcoreCSTPackage.ASSIGNMENT_CS__INITIALISER:
 				return getInitialiser();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -243,13 +243,13 @@ public class ConstraintCSImpl extends ExpCSImpl implements ConstraintCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreCSTPackage.CONSTRAINT_CS__DEFAULT:
+			case QVTcoreCSTPackage.ASSIGNMENT_CS__DEFAULT:
 				setDefault((Boolean)newValue);
 				return;
-			case QVTcoreCSTPackage.CONSTRAINT_CS__TARGET:
+			case QVTcoreCSTPackage.ASSIGNMENT_CS__TARGET:
 				setTarget((ExpCS)newValue);
 				return;
-			case QVTcoreCSTPackage.CONSTRAINT_CS__INITIALISER:
+			case QVTcoreCSTPackage.ASSIGNMENT_CS__INITIALISER:
 				setInitialiser((ExpCS)newValue);
 				return;
 		}
@@ -264,13 +264,13 @@ public class ConstraintCSImpl extends ExpCSImpl implements ConstraintCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSTPackage.CONSTRAINT_CS__DEFAULT:
+			case QVTcoreCSTPackage.ASSIGNMENT_CS__DEFAULT:
 				setDefault(DEFAULT_EDEFAULT);
 				return;
-			case QVTcoreCSTPackage.CONSTRAINT_CS__TARGET:
+			case QVTcoreCSTPackage.ASSIGNMENT_CS__TARGET:
 				setTarget((ExpCS)null);
 				return;
-			case QVTcoreCSTPackage.CONSTRAINT_CS__INITIALISER:
+			case QVTcoreCSTPackage.ASSIGNMENT_CS__INITIALISER:
 				setInitialiser((ExpCS)null);
 				return;
 		}
@@ -285,11 +285,11 @@ public class ConstraintCSImpl extends ExpCSImpl implements ConstraintCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSTPackage.CONSTRAINT_CS__DEFAULT:
+			case QVTcoreCSTPackage.ASSIGNMENT_CS__DEFAULT:
 				return default_ != DEFAULT_EDEFAULT;
-			case QVTcoreCSTPackage.CONSTRAINT_CS__TARGET:
+			case QVTcoreCSTPackage.ASSIGNMENT_CS__TARGET:
 				return target != null;
-			case QVTcoreCSTPackage.CONSTRAINT_CS__INITIALISER:
+			case QVTcoreCSTPackage.ASSIGNMENT_CS__INITIALISER:
 				return initialiser != null;
 		}
 		return super.eIsSet(featureID);
@@ -305,10 +305,10 @@ public class ConstraintCSImpl extends ExpCSImpl implements ConstraintCS {
 		return super.toString();
 	}
 
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R, C> R accept(BaseCSVisitor<R, C> visitor) {
-		return (R) visitor.getAdapter(QVTcoreCSVisitor.class).visitConstraintCS(this);
+		return (R) visitor.getAdapter(QVTcoreCSVisitor.class).visitAssignmentCS(this);
 	}
-} //ConstraintCSImpl
+
+} //AssignmentCSImpl

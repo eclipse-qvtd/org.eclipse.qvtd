@@ -18,27 +18,27 @@ package org.eclipse.qvtd.xtext.qvtcore.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
-import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.scoping.BaseScopeView;
-import org.eclipse.qvtd.pivot.qvtbase.Pattern;
-import org.eclipse.qvtd.xtext.qvtcorecst.PatternCS;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS;
 
-public class PatternCSAttribution extends AbstractAttribution
+public class TransformationCSAttribution extends AbstractAttribution
 {
-	public static final PatternCSAttribution INSTANCE = new PatternCSAttribution();
+	public static final TransformationCSAttribution INSTANCE = new TransformationCSAttribution();
 
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
-		PatternCS targetElement = (PatternCS)target;
-		Pattern pivot = PivotUtil.getPivot(Pattern.class, targetElement);
+		TransformationCS targetElement = (TransformationCS)target;
+		Transformation pivot = PivotUtil.getPivot(Transformation.class, targetElement);
 		if (pivot != null) {
-			Attribution attribution = PivotUtil.getAttribution(pivot);
-			ScopeView innerScopeView = new BaseScopeView(environmentView.getMetaModelManager(), pivot, attribution, null, null, null);
-			environmentView.computeLookups(innerScopeView);
+			environmentView.addNamedElements(pivot.getModelParameter());
+			environmentView.addNamedElement(pivot);
 		}
-		return null;
+		if (environmentView.hasFinalResult()) {
+			return null;
+		}
+		return scopeView.getParent();
 	}
 }

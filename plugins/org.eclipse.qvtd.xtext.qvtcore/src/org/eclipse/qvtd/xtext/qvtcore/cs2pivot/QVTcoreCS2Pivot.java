@@ -18,17 +18,12 @@ package org.eclipse.qvtd.xtext.qvtcore.cs2pivot;
 
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLCS2Pivot;
-import org.eclipse.qvtd.xtext.qvtcore.attributes.DomainCSAttribution;
-import org.eclipse.qvtd.xtext.qvtcore.attributes.PatternCSAttribution;
-import org.eclipse.qvtd.xtext.qvtcore.attributes.TopLevelCSAttribution;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 
@@ -39,6 +34,10 @@ public class QVTcoreCS2Pivot extends EssentialOCLCS2Pivot
 		private Factory() {
 			EssentialOCLCS2Pivot.FACTORY.getClass();
 			CS2Pivot.addFactory(this);
+		}
+
+		public QVTcoreContainmentVisitor createContainmentVisitor(CS2PivotConversion converter) {
+			return new QVTcoreContainmentVisitor(converter);
 		}
 
 		public QVTcoreLeft2RightVisitor createLeft2RightVisitor(CS2PivotConversion converter) {

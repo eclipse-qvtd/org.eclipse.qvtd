@@ -539,7 +539,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBottomPatternCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:196:1: ruleBottomPatternCS returns [EObject current=null] : ( () ( ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_unrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' )? ( (lv_constraints_7_0= ruleConstraintCS ) )* ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:196:1: ruleBottomPatternCS returns [EObject current=null] : ( () ( ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_unrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' )? ( (lv_constraints_7_0= ruleAssignmentCS ) )* ) ;
     public final EObject ruleBottomPatternCS() throws RecognitionException {
         EObject current = null;
 
@@ -559,11 +559,11 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:199:28: ( ( () ( ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_unrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' )? ( (lv_constraints_7_0= ruleConstraintCS ) )* ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:200:1: ( () ( ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_unrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' )? ( (lv_constraints_7_0= ruleConstraintCS ) )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:199:28: ( ( () ( ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_unrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' )? ( (lv_constraints_7_0= ruleAssignmentCS ) )* ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:200:1: ( () ( ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_unrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' )? ( (lv_constraints_7_0= ruleAssignmentCS ) )* )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:200:1: ( () ( ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_unrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' )? ( (lv_constraints_7_0= ruleConstraintCS ) )* )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:200:2: () ( ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_unrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' )? ( (lv_constraints_7_0= ruleConstraintCS ) )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:200:1: ( () ( ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_unrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' )? ( (lv_constraints_7_0= ruleAssignmentCS ) )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:200:2: () ( ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_unrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_realizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' )? ( (lv_constraints_7_0= ruleAssignmentCS ) )*
             {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:200:2: ()
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:201:2: 
@@ -866,7 +866,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:291:3: ( (lv_constraints_7_0= ruleConstraintCS ) )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:291:3: ( (lv_constraints_7_0= ruleAssignmentCS ) )*
             loop7:
             do {
                 int alt7=2;
@@ -879,18 +879,18 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:292:1: (lv_constraints_7_0= ruleConstraintCS )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:292:1: (lv_constraints_7_0= ruleAssignmentCS )
             	    {
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:292:1: (lv_constraints_7_0= ruleConstraintCS )
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:293:3: lv_constraints_7_0= ruleConstraintCS
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:292:1: (lv_constraints_7_0= ruleAssignmentCS )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:293:3: lv_constraints_7_0= ruleAssignmentCS
             	    {
             	    if ( state.backtracking==0 ) {
             	       
-            	      	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getConstraintsConstraintCSParserRuleCall_2_0()); 
+            	      	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getConstraintsAssignmentCSParserRuleCall_2_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleConstraintCS_in_ruleBottomPatternCS479);
-            	    lv_constraints_7_0=ruleConstraintCS();
+            	    pushFollow(FollowSets000.FOLLOW_ruleAssignmentCS_in_ruleBottomPatternCS479);
+            	    lv_constraints_7_0=ruleAssignmentCS();
 
             	    state._fsp--;
             	    if (state.failed) return current;
@@ -903,7 +903,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"constraints",
             	              		lv_constraints_7_0, 
-            	              		"ConstraintCS");
+            	              		"AssignmentCS");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -1035,30 +1035,30 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleComposedMappingCS"
 
 
-    // $ANTLR start "entryRuleConstraintCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:350:1: entryRuleConstraintCS returns [EObject current=null] : iv_ruleConstraintCS= ruleConstraintCS EOF ;
-    public final EObject entryRuleConstraintCS() throws RecognitionException {
+    // $ANTLR start "entryRuleAssignmentCS"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:350:1: entryRuleAssignmentCS returns [EObject current=null] : iv_ruleAssignmentCS= ruleAssignmentCS EOF ;
+    public final EObject entryRuleAssignmentCS() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleConstraintCS = null;
+        EObject iv_ruleAssignmentCS = null;
 
 
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:351:2: (iv_ruleConstraintCS= ruleConstraintCS EOF )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:352:2: iv_ruleConstraintCS= ruleConstraintCS EOF
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:351:2: (iv_ruleAssignmentCS= ruleAssignmentCS EOF )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:352:2: iv_ruleAssignmentCS= ruleAssignmentCS EOF
             {
             if ( state.backtracking==0 ) {
-               newCompositeNode(grammarAccess.getConstraintCSRule()); 
+               newCompositeNode(grammarAccess.getAssignmentCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleConstraintCS_in_entryRuleConstraintCS609);
-            iv_ruleConstraintCS=ruleConstraintCS();
+            pushFollow(FollowSets000.FOLLOW_ruleAssignmentCS_in_entryRuleAssignmentCS609);
+            iv_ruleAssignmentCS=ruleAssignmentCS();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_ruleConstraintCS; 
+               current =iv_ruleAssignmentCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleConstraintCS619); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAssignmentCS619); if (state.failed) return current;
 
             }
 
@@ -1072,12 +1072,12 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleConstraintCS"
+    // $ANTLR end "entryRuleAssignmentCS"
 
 
-    // $ANTLR start "ruleConstraintCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:359:1: ruleConstraintCS returns [EObject current=null] : ( ( (lv_default_0_0= 'default' ) )? ( (lv_target_1_0= ruleExpCS ) ) (otherlv_2= ':=' ( (lv_initialiser_3_0= ruleExpCS ) ) )? otherlv_4= ';' ) ;
-    public final EObject ruleConstraintCS() throws RecognitionException {
+    // $ANTLR start "ruleAssignmentCS"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:359:1: ruleAssignmentCS returns [EObject current=null] : ( ( (lv_default_0_0= 'default' ) )? ( (lv_target_1_0= ruleExpCS ) ) (otherlv_2= ':=' ( (lv_initialiser_3_0= ruleExpCS ) ) )? otherlv_4= ';' ) ;
+    public final EObject ruleAssignmentCS() throws RecognitionException {
         EObject current = null;
 
         Token lv_default_0_0=null;
@@ -1111,16 +1111,16 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:364:1: (lv_default_0_0= 'default' )
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:365:3: lv_default_0_0= 'default'
                     {
-                    lv_default_0_0=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleConstraintCS662); if (state.failed) return current;
+                    lv_default_0_0=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAssignmentCS662); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                              newLeafNode(lv_default_0_0, grammarAccess.getConstraintCSAccess().getDefaultDefaultKeyword_0_0());
+                              newLeafNode(lv_default_0_0, grammarAccess.getAssignmentCSAccess().getDefaultDefaultKeyword_0_0());
                           
                     }
                     if ( state.backtracking==0 ) {
 
                       	        if (current==null) {
-                      	            current = createModelElement(grammarAccess.getConstraintCSRule());
+                      	            current = createModelElement(grammarAccess.getAssignmentCSRule());
                       	        }
                              		setWithLastConsumed(current, "default", true, "default");
                       	    
@@ -1142,10 +1142,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             {
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getConstraintCSAccess().getTargetExpCSParserRuleCall_1_0()); 
+              	        newCompositeNode(grammarAccess.getAssignmentCSAccess().getTargetExpCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleConstraintCS697);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleAssignmentCS697);
             lv_target_1_0=ruleExpCS();
 
             state._fsp--;
@@ -1153,7 +1153,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
 
               	        if (current==null) {
-              	            current = createModelElementForParent(grammarAccess.getConstraintCSRule());
+              	            current = createModelElementForParent(grammarAccess.getAssignmentCSRule());
               	        }
                      		set(
                      			current, 
@@ -1180,10 +1180,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:396:4: otherlv_2= ':=' ( (lv_initialiser_3_0= ruleExpCS ) )
                     {
-                    otherlv_2=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleConstraintCS710); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleAssignmentCS710); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                          	newLeafNode(otherlv_2, grammarAccess.getConstraintCSAccess().getColonEqualsSignKeyword_2_0());
+                          	newLeafNode(otherlv_2, grammarAccess.getAssignmentCSAccess().getColonEqualsSignKeyword_2_0());
                           
                     }
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:400:1: ( (lv_initialiser_3_0= ruleExpCS ) )
@@ -1194,10 +1194,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
                        
-                      	        newCompositeNode(grammarAccess.getConstraintCSAccess().getInitialiserExpCSParserRuleCall_2_1_0()); 
+                      	        newCompositeNode(grammarAccess.getAssignmentCSAccess().getInitialiserExpCSParserRuleCall_2_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleConstraintCS731);
+                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleAssignmentCS731);
                     lv_initialiser_3_0=ruleExpCS();
 
                     state._fsp--;
@@ -1205,7 +1205,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     if ( state.backtracking==0 ) {
 
                       	        if (current==null) {
-                      	            current = createModelElementForParent(grammarAccess.getConstraintCSRule());
+                      	            current = createModelElementForParent(grammarAccess.getAssignmentCSRule());
                       	        }
                              		set(
                              			current, 
@@ -1227,10 +1227,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleConstraintCS745); if (state.failed) return current;
+            otherlv_4=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleAssignmentCS745); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_4, grammarAccess.getConstraintCSAccess().getSemicolonKeyword_3());
+                  	newLeafNode(otherlv_4, grammarAccess.getAssignmentCSAccess().getSemicolonKeyword_3());
                   
             }
 
@@ -1252,7 +1252,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleConstraintCS"
+    // $ANTLR end "ruleAssignmentCS"
 
 
     // $ANTLR start "entryRuleDirectionCS"
@@ -1676,7 +1676,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGuardPatternCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:566:1: ruleGuardPatternCS returns [EObject current=null] : ( () ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) (otherlv_2= ',' ( (lv_unrealizedVariables_3_0= ruleUnrealizedVariableCS ) ) )* otherlv_4= '|' )? ( (lv_constraints_5_0= ruleConstraintCS ) )* ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:566:1: ruleGuardPatternCS returns [EObject current=null] : ( () ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) (otherlv_2= ',' ( (lv_unrealizedVariables_3_0= ruleUnrealizedVariableCS ) ) )* otherlv_4= '|' )? ( (lv_constraints_5_0= ruleAssignmentCS ) )* ) ;
     public final EObject ruleGuardPatternCS() throws RecognitionException {
         EObject current = null;
 
@@ -1692,11 +1692,11 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:569:28: ( ( () ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) (otherlv_2= ',' ( (lv_unrealizedVariables_3_0= ruleUnrealizedVariableCS ) ) )* otherlv_4= '|' )? ( (lv_constraints_5_0= ruleConstraintCS ) )* ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:570:1: ( () ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) (otherlv_2= ',' ( (lv_unrealizedVariables_3_0= ruleUnrealizedVariableCS ) ) )* otherlv_4= '|' )? ( (lv_constraints_5_0= ruleConstraintCS ) )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:569:28: ( ( () ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) (otherlv_2= ',' ( (lv_unrealizedVariables_3_0= ruleUnrealizedVariableCS ) ) )* otherlv_4= '|' )? ( (lv_constraints_5_0= ruleAssignmentCS ) )* ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:570:1: ( () ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) (otherlv_2= ',' ( (lv_unrealizedVariables_3_0= ruleUnrealizedVariableCS ) ) )* otherlv_4= '|' )? ( (lv_constraints_5_0= ruleAssignmentCS ) )* )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:570:1: ( () ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) (otherlv_2= ',' ( (lv_unrealizedVariables_3_0= ruleUnrealizedVariableCS ) ) )* otherlv_4= '|' )? ( (lv_constraints_5_0= ruleConstraintCS ) )* )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:570:2: () ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) (otherlv_2= ',' ( (lv_unrealizedVariables_3_0= ruleUnrealizedVariableCS ) ) )* otherlv_4= '|' )? ( (lv_constraints_5_0= ruleConstraintCS ) )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:570:1: ( () ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) (otherlv_2= ',' ( (lv_unrealizedVariables_3_0= ruleUnrealizedVariableCS ) ) )* otherlv_4= '|' )? ( (lv_constraints_5_0= ruleAssignmentCS ) )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:570:2: () ( ( (lv_unrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) (otherlv_2= ',' ( (lv_unrealizedVariables_3_0= ruleUnrealizedVariableCS ) ) )* otherlv_4= '|' )? ( (lv_constraints_5_0= ruleAssignmentCS ) )*
             {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:570:2: ()
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:571:2: 
@@ -1835,7 +1835,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:623:3: ( (lv_constraints_5_0= ruleConstraintCS ) )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:623:3: ( (lv_constraints_5_0= ruleAssignmentCS ) )*
             loop16:
             do {
                 int alt16=2;
@@ -1848,18 +1848,18 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                 switch (alt16) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:624:1: (lv_constraints_5_0= ruleConstraintCS )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:624:1: (lv_constraints_5_0= ruleAssignmentCS )
             	    {
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:624:1: (lv_constraints_5_0= ruleConstraintCS )
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:625:3: lv_constraints_5_0= ruleConstraintCS
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:624:1: (lv_constraints_5_0= ruleAssignmentCS )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:625:3: lv_constraints_5_0= ruleAssignmentCS
             	    {
             	    if ( state.backtracking==0 ) {
             	       
-            	      	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getConstraintsConstraintCSParserRuleCall_2_0()); 
+            	      	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getConstraintsAssignmentCSParserRuleCall_2_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleConstraintCS_in_ruleGuardPatternCS1181);
-            	    lv_constraints_5_0=ruleConstraintCS();
+            	    pushFollow(FollowSets000.FOLLOW_ruleAssignmentCS_in_ruleGuardPatternCS1181);
+            	    lv_constraints_5_0=ruleAssignmentCS();
 
             	    state._fsp--;
             	    if (state.failed) return current;
@@ -1872,7 +1872,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"constraints",
             	              		lv_constraints_5_0, 
-            	              		"ConstraintCS");
+            	              		"AssignmentCS");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -2960,7 +2960,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             }
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getNamedDomainCSAccess().getDirectionCoreDomainCrossReference_2_0()); 
+              	        newCompositeNode(grammarAccess.getNamedDomainCSAccess().getDirectionTypedModelCrossReference_2_0()); 
               	    
             }
             pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleNamedDomainCS2004);
@@ -21305,17 +21305,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_ruleUnrealizedVariableCS_in_ruleBottomPatternCS414 = new BitSet(new long[]{0x0000000000060000L});
         public static final BitSet FOLLOW_ruleRealizedVariableCS_in_ruleBottomPatternCS441 = new BitSet(new long[]{0x0000000000060000L});
         public static final BitSet FOLLOW_18_in_ruleBottomPatternCS456 = new BitSet(new long[]{0xF000DBB8B9C800F2L,0x000000000313C3FFL});
-        public static final BitSet FOLLOW_ruleConstraintCS_in_ruleBottomPatternCS479 = new BitSet(new long[]{0xF000DBB8B9C800F2L,0x000000000313C3FFL});
+        public static final BitSet FOLLOW_ruleAssignmentCS_in_ruleBottomPatternCS479 = new BitSet(new long[]{0xF000DBB8B9C800F2L,0x000000000313C3FFL});
         public static final BitSet FOLLOW_ruleComposedMappingCS_in_entryRuleComposedMappingCS516 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleComposedMappingCS526 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleMappingCS_in_ruleComposedMappingCS575 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleConstraintCS_in_entryRuleConstraintCS609 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleConstraintCS619 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_19_in_ruleConstraintCS662 = new BitSet(new long[]{0xF000DBB8B9C800F0L,0x000000000313C3FFL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleConstraintCS697 = new BitSet(new long[]{0x0000000000300000L});
-        public static final BitSet FOLLOW_20_in_ruleConstraintCS710 = new BitSet(new long[]{0xF000DBB8B9C800F0L,0x000000000313C3FFL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleConstraintCS731 = new BitSet(new long[]{0x0000000000200000L});
-        public static final BitSet FOLLOW_21_in_ruleConstraintCS745 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAssignmentCS_in_entryRuleAssignmentCS609 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAssignmentCS619 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_19_in_ruleAssignmentCS662 = new BitSet(new long[]{0xF000DBB8B9C800F0L,0x000000000313C3FFL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleAssignmentCS697 = new BitSet(new long[]{0x0000000000300000L});
+        public static final BitSet FOLLOW_20_in_ruleAssignmentCS710 = new BitSet(new long[]{0xF000DBB8B9C800F0L,0x000000000313C3FFL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleAssignmentCS731 = new BitSet(new long[]{0x0000000000200000L});
+        public static final BitSet FOLLOW_21_in_ruleAssignmentCS745 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleDirectionCS_in_entryRuleDirectionCS781 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleDirectionCS791 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleDirectionCS837 = new BitSet(new long[]{0x0000000000C00002L});
@@ -21333,7 +21333,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_17_in_ruleGuardPatternCS1123 = new BitSet(new long[]{0x00001B98B1C00030L});
         public static final BitSet FOLLOW_ruleUnrealizedVariableCS_in_ruleGuardPatternCS1144 = new BitSet(new long[]{0x0000000000060000L});
         public static final BitSet FOLLOW_18_in_ruleGuardPatternCS1158 = new BitSet(new long[]{0xF000DBB8B9C800F2L,0x000000000313C3FFL});
-        public static final BitSet FOLLOW_ruleConstraintCS_in_ruleGuardPatternCS1181 = new BitSet(new long[]{0xF000DBB8B9C800F2L,0x000000000313C3FFL});
+        public static final BitSet FOLLOW_ruleAssignmentCS_in_ruleGuardPatternCS1181 = new BitSet(new long[]{0xF000DBB8B9C800F2L,0x000000000313C3FFL});
         public static final BitSet FOLLOW_ruleImportCS_in_entryRuleImportCS1218 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleImportCS1228 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_24_in_ruleImportCS1265 = new BitSet(new long[]{0x00001800000000B0L});

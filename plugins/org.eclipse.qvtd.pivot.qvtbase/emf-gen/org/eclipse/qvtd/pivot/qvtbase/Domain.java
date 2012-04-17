@@ -18,6 +18,8 @@ package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 
 /**
@@ -36,11 +38,11 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getDomain()
- * @model abstract="true"
+ * @model abstract="true" superTypes="org.eclipse.ocl.examples.pivot.Element org.eclipse.ocl.examples.pivot.Nameable"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='TypedModelExistsWarning\r\nTypedModelDefinedByTransformation\r\nCheckableOrEnforceable\r\n\r\n'"
  * @generated
  */
-public interface Domain extends EObject, NamedElement {
+public interface Domain extends EObject, Element, Nameable {
 	/**
 	 * Returns the value of the '<em><b>Is Checkable</b></em>' attribute.
 	 * <!-- begin-user-doc -->

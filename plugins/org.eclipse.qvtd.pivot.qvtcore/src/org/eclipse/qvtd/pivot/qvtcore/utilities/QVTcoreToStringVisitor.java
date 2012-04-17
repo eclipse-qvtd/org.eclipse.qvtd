@@ -20,6 +20,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
@@ -72,6 +73,10 @@ public class QVTcoreToStringVisitor extends QVTbaseToStringVisitor implements QV
 		append("core domain ");
 		appendName(object);
 		return null;
+	}
+
+	public String visitCoreModel(CoreModel object) {
+		return visitModel(object);
 	}
 
 	public String visitCorePattern(CorePattern object) {

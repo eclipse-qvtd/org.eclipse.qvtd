@@ -93,12 +93,12 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 				return createAreaCSAdapter();
 			}
 			@Override
-			public Adapter caseBottomPatternCS(BottomPatternCS object) {
-				return createBottomPatternCSAdapter();
+			public Adapter caseAssignmentCS(AssignmentCS object) {
+				return createAssignmentCSAdapter();
 			}
 			@Override
-			public Adapter caseConstraintCS(ConstraintCS object) {
-				return createConstraintCSAdapter();
+			public Adapter caseBottomPatternCS(BottomPatternCS object) {
+				return createBottomPatternCSAdapter();
 			}
 			@Override
 			public Adapter caseDirectionCS(DirectionCS object) {
@@ -239,6 +239,20 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS <em>Assignment CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS
+	 * @generated
+	 */
+	public Adapter createAssignmentCSAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS <em>Bottom Pattern CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -249,20 +263,6 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBottomPatternCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS <em>Constraint CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS
-	 * @generated
-	 */
-	public Adapter createConstraintCSAdapter() {
 		return null;
 	}
 

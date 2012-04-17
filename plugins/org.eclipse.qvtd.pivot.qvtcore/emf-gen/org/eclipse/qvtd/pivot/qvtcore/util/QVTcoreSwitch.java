@@ -22,7 +22,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Namespace;
+import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
@@ -124,10 +127,23 @@ public class QVTcoreSwitch<T> extends Switch<T> {
 				T result = caseCoreDomain(coreDomain);
 				if (result == null) result = caseDomain(coreDomain);
 				if (result == null) result = caseArea(coreDomain);
-				if (result == null) result = caseNamedElement(coreDomain);
 				if (result == null) result = caseElement(coreDomain);
 				if (result == null) result = caseNameable(coreDomain);
 				if (result == null) result = caseVisitable(coreDomain);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTcorePackage.CORE_MODEL: {
+				CoreModel coreModel = (CoreModel)theEObject;
+				T result = caseCoreModel(coreModel);
+				if (result == null) result = caseModel(coreModel);
+				if (result == null) result = casePackage(coreModel);
+				if (result == null) result = caseNamespace(coreModel);
+				if (result == null) result = caseTemplateableElement(coreModel);
+				if (result == null) result = caseNamedElement(coreModel);
+				if (result == null) result = caseElement(coreModel);
+				if (result == null) result = caseNameable(coreModel);
+				if (result == null) result = caseVisitable(coreModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -262,6 +278,21 @@ public class QVTcoreSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCoreDomain(CoreDomain object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Core Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Core Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCoreModel(CoreModel object) {
 		return null;
 	}
 
@@ -457,6 +488,66 @@ public class QVTcoreSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDomain(Domain object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Namespace</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Namespace</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamespace(Namespace object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Templateable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Templateable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTemplateableElement(TemplateableElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Package</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePackage(org.eclipse.ocl.examples.pivot.Package object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModel(Model object) {
 		return null;
 	}
 

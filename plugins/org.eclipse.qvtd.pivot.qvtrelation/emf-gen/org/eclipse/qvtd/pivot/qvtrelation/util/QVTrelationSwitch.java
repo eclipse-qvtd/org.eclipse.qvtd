@@ -161,7 +161,6 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 				RelationDomain relationDomain = (RelationDomain)theEObject;
 				T result = caseRelationDomain(relationDomain);
 				if (result == null) result = caseDomain(relationDomain);
-				if (result == null) result = caseNamedElement(relationDomain);
 				if (result == null) result = caseElement(relationDomain);
 				if (result == null) result = caseNameable(relationDomain);
 				if (result == null) result = caseVisitable(relationDomain);

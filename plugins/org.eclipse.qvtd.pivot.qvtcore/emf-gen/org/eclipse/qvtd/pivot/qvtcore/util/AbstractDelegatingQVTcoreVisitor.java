@@ -53,6 +53,10 @@ public abstract class AbstractDelegatingQVTcoreVisitor<R, C, D extends QVTcoreVi
 		return delegate.visitCoreDomain(object);
 	}
 
+	public R visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.CoreModel object) {
+		return delegate.visitCoreModel(object);
+	}
+
 	public R visitCorePattern(org.eclipse.qvtd.pivot.qvtcore.CorePattern object) {
 		return delegate.visitCorePattern(object);
 	}

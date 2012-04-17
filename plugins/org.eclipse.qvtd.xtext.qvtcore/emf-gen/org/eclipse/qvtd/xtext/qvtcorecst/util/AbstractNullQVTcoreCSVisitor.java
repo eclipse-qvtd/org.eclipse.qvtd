@@ -45,11 +45,11 @@ public abstract class AbstractNullQVTcoreCSVisitor<R, C>
 		return null;
 	}
 
-	public R visitBottomPatternCS(org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS object) {
+	public R visitAssignmentCS(org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS object) {
 		return null;
 	}
 
-	public R visitConstraintCS(org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS object) {
+	public R visitBottomPatternCS(org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS object) {
 		return null;
 	}
 

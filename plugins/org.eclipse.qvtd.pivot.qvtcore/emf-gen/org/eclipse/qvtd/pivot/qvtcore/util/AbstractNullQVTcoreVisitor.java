@@ -53,6 +53,10 @@ public abstract class AbstractNullQVTcoreVisitor<R, C>
 		return null;
 	}
 
+	public R visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.CoreModel object) {
+		return null;
+	}
+
 	public R visitCorePattern(org.eclipse.qvtd.pivot.qvtcore.CorePattern object) {
 		return null;
 	}

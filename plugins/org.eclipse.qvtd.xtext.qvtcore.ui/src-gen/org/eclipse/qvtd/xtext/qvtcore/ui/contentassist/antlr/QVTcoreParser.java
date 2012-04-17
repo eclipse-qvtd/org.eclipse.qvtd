@@ -72,8 +72,8 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBottomPatternCSAccess().getGroup(), "rule__BottomPatternCS__Group__0");
 					put(grammarAccess.getBottomPatternCSAccess().getGroup_1(), "rule__BottomPatternCS__Group_1__0");
 					put(grammarAccess.getBottomPatternCSAccess().getGroup_1_1(), "rule__BottomPatternCS__Group_1_1__0");
-					put(grammarAccess.getConstraintCSAccess().getGroup(), "rule__ConstraintCS__Group__0");
-					put(grammarAccess.getConstraintCSAccess().getGroup_2(), "rule__ConstraintCS__Group_2__0");
+					put(grammarAccess.getAssignmentCSAccess().getGroup(), "rule__AssignmentCS__Group__0");
+					put(grammarAccess.getAssignmentCSAccess().getGroup_2(), "rule__AssignmentCS__Group_2__0");
 					put(grammarAccess.getDirectionCSAccess().getGroup(), "rule__DirectionCS__Group__0");
 					put(grammarAccess.getDirectionCSAccess().getGroup_1(), "rule__DirectionCS__Group_1__0");
 					put(grammarAccess.getDirectionCSAccess().getGroup_1_2(), "rule__DirectionCS__Group_1_2__0");
@@ -181,9 +181,9 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBottomPatternCSAccess().getUnrealizedVariablesAssignment_1_1_1_0(), "rule__BottomPatternCS__UnrealizedVariablesAssignment_1_1_1_0");
 					put(grammarAccess.getBottomPatternCSAccess().getRealizedVariablesAssignment_1_1_1_1(), "rule__BottomPatternCS__RealizedVariablesAssignment_1_1_1_1");
 					put(grammarAccess.getBottomPatternCSAccess().getConstraintsAssignment_2(), "rule__BottomPatternCS__ConstraintsAssignment_2");
-					put(grammarAccess.getConstraintCSAccess().getDefaultAssignment_0(), "rule__ConstraintCS__DefaultAssignment_0");
-					put(grammarAccess.getConstraintCSAccess().getTargetAssignment_1(), "rule__ConstraintCS__TargetAssignment_1");
-					put(grammarAccess.getConstraintCSAccess().getInitialiserAssignment_2_1(), "rule__ConstraintCS__InitialiserAssignment_2_1");
+					put(grammarAccess.getAssignmentCSAccess().getDefaultAssignment_0(), "rule__AssignmentCS__DefaultAssignment_0");
+					put(grammarAccess.getAssignmentCSAccess().getTargetAssignment_1(), "rule__AssignmentCS__TargetAssignment_1");
+					put(grammarAccess.getAssignmentCSAccess().getInitialiserAssignment_2_1(), "rule__AssignmentCS__InitialiserAssignment_2_1");
 					put(grammarAccess.getDirectionCSAccess().getNameAssignment_0(), "rule__DirectionCS__NameAssignment_0");
 					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_1_1(), "rule__DirectionCS__ImportsAssignment_1_1");
 					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_1_2_1(), "rule__DirectionCS__ImportsAssignment_1_2_1");

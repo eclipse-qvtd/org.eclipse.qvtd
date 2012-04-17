@@ -32,6 +32,7 @@ public interface QVTcoreVisitor<R, C> extends org.eclipse.qvtd.pivot.qvtbase.uti
 	R visitAssignment(org.eclipse.qvtd.pivot.qvtcore.Assignment object);
 	R visitBottomPattern(org.eclipse.qvtd.pivot.qvtcore.BottomPattern object);
 	R visitCoreDomain(org.eclipse.qvtd.pivot.qvtcore.CoreDomain object);
+	R visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.CoreModel object);
 	R visitCorePattern(org.eclipse.qvtd.pivot.qvtcore.CorePattern object);
 	R visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation object);
 	R visitGuardPattern(org.eclipse.qvtd.pivot.qvtcore.GuardPattern object);

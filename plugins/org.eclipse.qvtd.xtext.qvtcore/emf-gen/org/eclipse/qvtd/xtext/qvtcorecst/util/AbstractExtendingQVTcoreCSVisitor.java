@@ -49,12 +49,12 @@ public abstract class AbstractExtendingQVTcoreCSVisitor<R, C>
 		return visitNamedElementCS(object);
 	}
 
-	public R visitBottomPatternCS(org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS object) {
-		return visitPatternCS(object);
+	public R visitAssignmentCS(org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS object) {
+		return visitExpCS(object);
 	}
 
-	public R visitConstraintCS(org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS object) {
-		return visitExpCS(object);
+	public R visitBottomPatternCS(org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS object) {
+		return visitPatternCS(object);
 	}
 
 	public R visitDirectionCS(org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS object) {

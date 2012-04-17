@@ -16,6 +16,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtcore;
 
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreSaver;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreToStringVisitor;
 import org.eclipse.qvtd.xtext.qvtcore.cs2pivot.QVTcoreCS2Pivot;
@@ -38,6 +39,7 @@ public class QVTcoreStandaloneSetup extends QVTcoreStandaloneSetupGenerated
 	}
 
 	public static void init() {
+		QVTcorePivotStandaloneSetup.doSetup();
 		QVTcoreScoping.init();
 //		QVTcoreCS2MonikerVisitor.FACTORY.getClass();
 		QVTcoreCS2Pivot.FACTORY.getClass();

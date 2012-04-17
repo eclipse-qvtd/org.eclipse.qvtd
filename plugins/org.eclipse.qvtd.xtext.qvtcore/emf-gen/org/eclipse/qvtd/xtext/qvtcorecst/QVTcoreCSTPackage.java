@@ -155,6 +155,106 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int AREA_CS_FEATURE_COUNT = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.AssignmentCSImpl <em>Assignment CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.AssignmentCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getAssignmentCS()
+	 * @generated
+	 */
+	int ASSIGNMENT_CS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT_CS__LOGICAL_PARENT = EssentialOCLCSTPackage.EXP_CS__LOGICAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT_CS__PIVOT = EssentialOCLCSTPackage.EXP_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT_CS__OWNED_ANNOTATION = EssentialOCLCSTPackage.EXP_CS__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT_CS__ORIGINAL_XMI_ID = EssentialOCLCSTPackage.EXP_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT_CS__CSI = EssentialOCLCSTPackage.EXP_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT_CS__PARENT = EssentialOCLCSTPackage.EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Default</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT_CS__DEFAULT = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT_CS__TARGET = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Initialiser</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT_CS__INITIALISER = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Assignment CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT_CS_FEATURE_COUNT = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.PatternCSImpl <em>Pattern CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -244,7 +344,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getBottomPatternCS()
 	 * @generated
 	 */
-	int BOTTOM_PATTERN_CS = 1;
+	int BOTTOM_PATTERN_CS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -335,106 +435,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOTTOM_PATTERN_CS_FEATURE_COUNT = PATTERN_CS_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.ConstraintCSImpl <em>Constraint CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.ConstraintCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getConstraintCS()
-	 * @generated
-	 */
-	int CONSTRAINT_CS = 2;
-
-	/**
-	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_CS__LOGICAL_PARENT = EssentialOCLCSTPackage.EXP_CS__LOGICAL_PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_CS__PIVOT = EssentialOCLCSTPackage.EXP_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_CS__OWNED_ANNOTATION = EssentialOCLCSTPackage.EXP_CS__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_CS__ORIGINAL_XMI_ID = EssentialOCLCSTPackage.EXP_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_CS__CSI = EssentialOCLCSTPackage.EXP_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_CS__PARENT = EssentialOCLCSTPackage.EXP_CS__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Default</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_CS__DEFAULT = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_CS__TARGET = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Initialiser</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_CS__INITIALISER = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Constraint CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_CS_FEATURE_COUNT = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.DirectionCSImpl <em>Direction CS</em>}' class.
@@ -1760,6 +1760,49 @@ public interface QVTcoreCSTPackage extends EPackage {
 	EReference getAreaCS_BottomPattern();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS <em>Assignment CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Assignment CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS
+	 * @generated
+	 */
+	EClass getAssignmentCS();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS#isDefault <em>Default</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS#isDefault()
+	 * @see #getAssignmentCS()
+	 * @generated
+	 */
+	EAttribute getAssignmentCS_Default();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Target</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS#getTarget()
+	 * @see #getAssignmentCS()
+	 * @generated
+	 */
+	EReference getAssignmentCS_Target();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS#getInitialiser <em>Initialiser</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Initialiser</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS#getInitialiser()
+	 * @see #getAssignmentCS()
+	 * @generated
+	 */
+	EReference getAssignmentCS_Initialiser();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS <em>Bottom Pattern CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1790,49 +1833,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBottomPatternCS_RealizedVariables();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS <em>Constraint CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Constraint CS</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS
-	 * @generated
-	 */
-	EClass getConstraintCS();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS#isDefault <em>Default</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS#isDefault()
-	 * @see #getConstraintCS()
-	 * @generated
-	 */
-	EAttribute getConstraintCS_Default();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS#getTarget <em>Target</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Target</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS#getTarget()
-	 * @see #getConstraintCS()
-	 * @generated
-	 */
-	EReference getConstraintCS_Target();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS#getInitialiser <em>Initialiser</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Initialiser</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.ConstraintCS#getInitialiser()
-	 * @see #getConstraintCS()
-	 * @generated
-	 */
-	EReference getConstraintCS_Initialiser();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS <em>Direction CS</em>}'.
@@ -2244,6 +2244,40 @@ public interface QVTcoreCSTPackage extends EPackage {
 		EReference AREA_CS__BOTTOM_PATTERN = eINSTANCE.getAreaCS_BottomPattern();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.AssignmentCSImpl <em>Assignment CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.AssignmentCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getAssignmentCS()
+		 * @generated
+		 */
+		EClass ASSIGNMENT_CS = eINSTANCE.getAssignmentCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Default</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASSIGNMENT_CS__DEFAULT = eINSTANCE.getAssignmentCS_Default();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSIGNMENT_CS__TARGET = eINSTANCE.getAssignmentCS_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Initialiser</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSIGNMENT_CS__INITIALISER = eINSTANCE.getAssignmentCS_Initialiser();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.BottomPatternCSImpl <em>Bottom Pattern CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2268,40 +2302,6 @@ public interface QVTcoreCSTPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BOTTOM_PATTERN_CS__REALIZED_VARIABLES = eINSTANCE.getBottomPatternCS_RealizedVariables();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.ConstraintCSImpl <em>Constraint CS</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.ConstraintCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getConstraintCS()
-		 * @generated
-		 */
-		EClass CONSTRAINT_CS = eINSTANCE.getConstraintCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Default</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONSTRAINT_CS__DEFAULT = eINSTANCE.getConstraintCS_Default();
-
-		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONSTRAINT_CS__TARGET = eINSTANCE.getConstraintCS_Target();
-
-		/**
-		 * The meta object literal for the '<em><b>Initialiser</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONSTRAINT_CS__INITIALISER = eINSTANCE.getConstraintCS_Initialiser();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.DirectionCSImpl <em>Direction CS</em>}' class.
