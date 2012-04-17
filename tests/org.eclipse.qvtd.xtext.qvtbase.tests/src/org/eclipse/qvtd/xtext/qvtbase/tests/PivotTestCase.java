@@ -15,7 +15,7 @@
  * $Id$
  */
 
-package org.eclipse.qvtd.xtext.qvtcore.tests;
+package org.eclipse.qvtd.xtext.qvtbase.tests;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

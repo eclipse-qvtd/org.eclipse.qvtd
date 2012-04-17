@@ -14,7 +14,7 @@
  *
  * $Id: DiffToText.java,v 1.4 2011/03/07 15:51:51 ewillink Exp $
  */
-package org.eclipse.qvtd.xtext.qvtcore.tests;
+package org.eclipse.qvtd.xtext.qvtbase.tests;
 
 import java.util.List;
 

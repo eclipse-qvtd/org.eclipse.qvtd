@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.qvtd.xtext.qvtbase.tests
+Bundle-Version: 0.9.0.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.junit4;visibility:=reexport,
+ org.eclipse.emf.compare.diff,
+ org.eclipse.emf.compare.match,
+ org.eclipse.ocl.examples.xtext.essentialocl;visibility:=reexport,
+ org.apache.log4j;visibility:=reexport,
+ org.eclipse.core.runtime
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: org.eclipse.qvtd.xtext.qvtbase.tests

@@ -14,7 +14,7 @@
  *
  * $Id$
  */
-package org.eclipse.qvtd.xtext.qvtcore.tests;
+package org.eclipse.qvtd.xtext.qvtbase.tests;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -80,10 +80,8 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
-import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.CollectionTypeCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InfixExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
@@ -92,11 +90,11 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigationOpe
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NestedExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.PrefixExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.TypeNameExpCS;
-import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
-import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
-import org.eclipse.ocl.examples.xtext.oclinecore.pivot2cs.OCLinEcorePivot2CS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
-import org.eclipse.xtext.resource.XtextResource;
+//import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
+//import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
+//import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
+//import org.eclipse.ocl.examples.xtext.oclinecore.pivot2cs.OCLinEcorePivot2CS;
+//import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 
 public class XtextTestCase extends PivotTestCase
 {	
@@ -394,7 +392,7 @@ public class XtextTestCase extends PivotTestCase
 	
 	protected ResourceSet resourceSet;
 
-	protected XtextResource savePivotAsCS(MetaModelManager metaModelManager, Resource pivotResource, URI outputURI) throws IOException {
+/*	protected XtextResource savePivotAsCS(MetaModelManager metaModelManager, Resource pivotResource, URI outputURI) throws IOException {
 //		ResourceSet csResourceSet = resourceSet; //new ResourceSetImpl();
 //		csResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cs", new EcoreResourceFactoryImpl());
 //		csResourceSet.getPackageRegistry().put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
@@ -428,7 +426,7 @@ public class XtextTestCase extends PivotTestCase
 			fail(e.toString());
 		}
 		return xtextResource;
-	}
+	} */
 	
 	public void createEcoreFile(MetaModelManager metaModelManager, String fileName, String fileContent) throws IOException {
 		String inputName = fileName + ".oclinecore";
@@ -539,9 +537,9 @@ public class XtextTestCase extends PivotTestCase
 	@Override
 	protected void setUp() throws Exception {
     	testCaseAppender.install();
-		CompleteOCLStandaloneSetup.doSetup();
-		OCLinEcoreStandaloneSetup.doSetup();
-		OCLstdlibStandaloneSetup.doSetup();
+//		CompleteOCLStandaloneSetup.doSetup();
+//		OCLinEcoreStandaloneSetup.doSetup();
+//		OCLstdlibStandaloneSetup.doSetup();
 		super.setUp();
 		resourceSet = new ResourceSetImpl();
 		ProjectMap.initializeURIResourceMap(resourceSet);

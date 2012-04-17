@@ -12,12 +12,12 @@
  *
  * </copyright>
  */
-package org.eclipse.qvtd.xtext.qvtcore.tests;
+package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
 import java.io.IOException;
 
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
-import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
+import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationStandaloneSetup;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -27,14 +27,10 @@ public class LoadTests extends LoadTestCase
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		QVTcoreStandaloneSetup.doSetup();
+		QVTrelationStandaloneSetup.doSetup();
 	}
 
-	public void testLoad_expressions_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("expressions", "qvtc");
-	}	
-
-	public void testLoad_mini_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("mini", "qvtc");
+	public void testLoad_Keys_qvtr() throws IOException, InterruptedException {
+		doLoad_Concrete("Keys", "qvtr");
 	}	
 }
