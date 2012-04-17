@@ -2,6 +2,11 @@
 <rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
   <rm:property key="checkout.location" value="${workspace.root}"/>
   <rm:property key="eclipse.download" value="http://download.eclipse.org"/>
+  <rm:property key="git.qvtd.local.repository.location" value="C:\GIT\org.eclipse.qvtd"/>
+  <rm:property key="cvs.modeling.repository.location" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/modeling"/>
+  <rm:property key="cvs.eclipse.repository.location" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse"/>
+  <rm:property key="resolve.target.platform" value="false"/>
+  <rm:property key="build.type" value="I"/>
   <rm:property key="build.type" mutable="false" value="I"/>
   <!--rm:property key="qvtd.core.last.p2.repository.location" value="https://hudson.eclipse.org/hudson/job/buckminster-mdt-ocl-core-3.2-master/lastSuccessfulBuild/artifact/MDT-OCL.p2.repository"/-->
   <rm:locator pattern="^org\.eclipse\.qvtd.*$" searchPathRef="qvtd-source-code"/>
