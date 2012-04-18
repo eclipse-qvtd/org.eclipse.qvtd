@@ -6,12 +6,13 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
-            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-            default="true"
-            extensions="qvtc"
-            id="org.eclipse.qvtd.xtext.qvtcore.QVTcore"
-            name="QVTcore Editor">
+              class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+              contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+              default="true"
+              extensions="qvtc"
+              icon="icons/QVTcModelFile.gif"
+              id="org.eclipse.qvtd.xtext.qvtcore.QVTcore"
+              name="QVTcore Editor">
         </editor>
     </extension>
     <extension
