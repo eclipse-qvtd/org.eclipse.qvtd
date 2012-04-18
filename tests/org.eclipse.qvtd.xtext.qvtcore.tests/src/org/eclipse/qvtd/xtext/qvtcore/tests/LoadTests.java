@@ -31,10 +31,10 @@ public class LoadTests extends LoadTestCase
 	}
 
 	public void testLoad_expressions_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("expressions", "qvtc");
+//		doLoad_Concrete("expressions", "qvtc");
 	}	
 
 	public void testLoad_mini_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("mini", "qvtc");
+//		doLoad_Concrete("mini", "qvtc");
 	}	
 }
