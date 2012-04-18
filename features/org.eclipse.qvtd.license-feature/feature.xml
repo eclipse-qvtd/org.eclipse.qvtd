@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.qvtd.license"
-      label="%featureName"
+      label="QVTd License (Incubation)"
       version="0.9.0.qualifier"
-      provider-name="%providerName">
+      provider-name="Eclipse Modeling Project">
 
    <description>
       License for QVTd (QVT Declarative).
