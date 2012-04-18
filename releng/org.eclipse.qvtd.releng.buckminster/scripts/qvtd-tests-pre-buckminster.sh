@@ -43,7 +43,6 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "# Required Properties for Publishing (added by Hudson job definition)"
 	echo "packages.base=MMT-QVTd.downloads"
 	echo "tests.base=MMT-QVTd.test.results"
-	echo "component.name=tools"
 	echo "version=0.9.0"
 	echo "downloads.area=/home/data/httpd/download.eclipse.org/modeling/mmt/qvtd"
 

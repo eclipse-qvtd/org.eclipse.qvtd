@@ -8,18 +8,17 @@
 	</target>
 
 	<target name="-define.package.qualifier">
-		<property name="incubation.qualifier" value="" />
-		<property name="component.name" value="" />
+		<property name="incubation.qualifier" value="-incubation" />
 
 		<!-- if the build.alias is non-empty then use it in preference -->
-		<condition property="package.qualifier" value="${incubation.qualifier}-${component.name}-${build.alias}">
+		<condition property="package.qualifier" value="${incubation.qualifier}-${build.alias}">
 			<and>
 				<isset property="build.alias" />
 				<length string="${build.alias}" when="greater" length="0" />
 			</and>
 		</condition>
 		<!-- otherwise use the build.id if defined, if not then fall back to an empty string -->
-		<condition property="package.qualifier" value="${incubation.qualifier}-${component.name}-${build.id}" else="${incubation.qualifier}-${component.name}">
+		<condition property="package.qualifier" value="${incubation.qualifier}-${build.id}" else="${incubation.qualifier}">
 			<and>
 				<isset property="build.id" />
 				<length string="${build.id}" when="greater" length="0" />
@@ -28,7 +27,7 @@
 	</target>
 	
 	<target name="-define.category.qualifier">
-		<property name="incubation.qualifier" value="" />
+		<property name="incubation.qualifier" value="-incubation" />
 
 		<!-- if the build.alias is non-empty then use it in preference -->
 		<condition property="category.qualifier" value="${incubation.qualifier}-${build.alias}">
