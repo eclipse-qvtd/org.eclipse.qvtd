@@ -7,6 +7,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.junit4;visibility:=reexport,
  org.eclipse.emf.compare.diff,
  org.eclipse.emf.compare.match,
+ org.eclipse.emf.mapping.ecore2xml;visibility:=reexport,
  org.eclipse.ocl.examples.xtext.essentialocl;visibility:=reexport,
  org.apache.log4j;visibility:=reexport,
  org.eclipse.core.runtime

@@ -14,4 +14,4 @@ build
 junit --launch "org.eclipse.qvtd.xtext.qvtcore.tests/.launches/All\ QVTcore\ Tests.launch" --flatXML --output "${checkout.location}/MMT-QVTd.test.results/org.eclipse.qvtd.xtext.qvtcore.tests.xml"
 junit --launch "org.eclipse.qvtd.xtext.qvtrelation.tests/.launches/All\ QVTrelation\ Tests.launch" --flatXML --output "${checkout.location}/MMT-QVTd.test.results/org.eclipse.qvtd.xtext.qvtrelation.tests.xml"
 
-perform --properties "${checkout.location}/buildroot/build.properties" "-Dbuckminster.reference.repository=${reference.repository}" "org.eclipse.qvtd.releng.tools.build:eclipse.feature#build" 
+perform --properties "${checkout.location}/buildroot/build.properties" "-Dbuckminster.reference.repository=${reference.repository}" "org.eclipse.qvtd.releng.build:eclipse.feature#build" 
