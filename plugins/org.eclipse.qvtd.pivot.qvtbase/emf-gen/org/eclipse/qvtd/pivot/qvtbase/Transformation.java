@@ -38,7 +38,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTransformation()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='WellFormedNsURI\r\nWellFormedNsPrefix\r\nUniqueNsURIs\r\nExtendsIsAcyclic\r\nModelParameterNamesAreCompatibleWithExtension\r\nEveryModelParameterUsedPackagesIsCompatibleWithExtension\r\nModelParameterNamesAreUnique\r\nRuleNamesAreUnique\r\nSynthesizedTypesAreOwned\r\n'"
+ * @model
  * @generated
  */
 public interface Transformation extends EObject, org.eclipse.ocl.examples.pivot.Class, org.eclipse.ocl.examples.pivot.Package {

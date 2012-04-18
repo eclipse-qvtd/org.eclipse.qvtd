@@ -33,7 +33,7 @@ import org.eclipse.ocl.examples.pivot.Property;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getPropertyAssignment()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='TypeIsConsistent'"
+ * @model
  * @generated
  */
 public interface PropertyAssignment extends Assignment {

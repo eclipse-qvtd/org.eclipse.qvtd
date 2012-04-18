@@ -31,7 +31,7 @@ import org.eclipse.ocl.examples.pivot.Variable;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getVariableAssignment()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='TypeIsConsistent'"
+ * @model
  * @generated
  */
 public interface VariableAssignment extends Assignment {

@@ -37,7 +37,6 @@ import org.eclipse.ocl.examples.pivot.util.Nameable;
  *
  * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getDomain()
  * @model abstract="true" superTypes="org.eclipse.ocl.examples.pivot.Element org.eclipse.ocl.examples.pivot.Nameable"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='TypedModelExistsWarning\r\nTypedModelDefinedByTransformation\r\nCheckableOrEnforceable\r\n\r\n'"
  * @generated
  */
 public interface Domain extends EObject, Element, Nameable {

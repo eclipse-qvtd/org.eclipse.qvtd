@@ -37,7 +37,7 @@ import org.eclipse.ocl.examples.pivot.Variable;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getPattern()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NoVariableIsAFunctionParameter'"
+ * @model
  * @generated
  */
 public interface Pattern extends EObject, Element {

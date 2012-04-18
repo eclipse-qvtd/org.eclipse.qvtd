@@ -21,14 +21,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EValidator;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.ocl.examples.pivot.PivotPackage;
-
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
-
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -44,8 +39,6 @@ import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
-
-import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -199,15 +192,6 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 		// Initialize created meta-data
 		theQVTcorePackage.initializePackageContents();
-
-		// Register package validator
-		EValidator.Registry.INSTANCE.put
-			(theQVTcorePackage, 
-			 new EValidator.Descriptor() {
-				 public EValidator getEValidator() {
-					 return QVTcoreValidator.INSTANCE;
-				 }
-			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTcorePackage.freeze();
@@ -711,62 +695,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		createResource(eNS_URI);
 
 		// Create annotations
-		// http://www.eclipse.org/emf/2002/Ecore
-		createEcoreAnnotations();
 		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
 		createEmofAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";		
-		addAnnotation
-		  (assignmentEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "MappingIsEnforceable"
-		   });			
-		addAnnotation
-		  (bottomPatternEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "RealizedVariableNamesAreUnique"
-		   });		
-		addAnnotation
-		  (corePatternEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "VariableNamesAreUnique"
-		   });		
-		addAnnotation
-		  (mappingEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "WellFormedName\r\nDomainTypedModelsMatchModelParameters"
-		   });		
-		addAnnotation
-		  (propertyAssignmentEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "TypeIsConsistent"
-		   });				
-		addAnnotation
-		  (realizedVariableEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "MappingIsEnforceable"
-		   });		
-		addAnnotation
-		  (variableAssignmentEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "TypeIsConsistent"
-		   });	
 	}
 
 	/**
@@ -776,13 +706,13 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";			
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";		
 		addAnnotation
 		  (getAssignment_Value(), 
 		   source, 
 		   new String[] {
 			 "body", "valueAssignment"
-		   });						
+		   });		
 		addAnnotation
 		  (getPropertyAssignment_SlotExpression(), 
 		   source, 
@@ -794,7 +724,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		   source, 
 		   new String[] {
 			 "body", "assignment"
-		   });				
+		   });		
 		addAnnotation
 		  (getVariableAssignment_TargetVariable(), 
 		   source, 

@@ -37,7 +37,7 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='DependsOnIsAcyclic\r\nDependsOnAreModelParameters'"
+ * @model
  * @generated
  */
 public interface TypedModel extends EObject, NamedElement {

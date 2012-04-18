@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.pivot.Variable;
  *
  *
  * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getRealizedVariable()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='MappingIsEnforceable'"
+ * @model
  * @generated
  */
 public interface RealizedVariable extends EObject, Variable {

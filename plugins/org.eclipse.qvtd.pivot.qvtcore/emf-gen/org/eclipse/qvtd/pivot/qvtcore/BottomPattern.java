@@ -34,7 +34,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getBottomPattern()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='RealizedVariableNamesAreUnique'"
+ * @model
  * @generated
  */
 public interface BottomPattern extends CorePattern {

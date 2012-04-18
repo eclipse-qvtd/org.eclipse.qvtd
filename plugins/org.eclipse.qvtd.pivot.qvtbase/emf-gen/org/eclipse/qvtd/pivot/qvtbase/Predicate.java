@@ -35,7 +35,7 @@ import org.eclipse.ocl.examples.pivot.OclExpression;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getPredicate()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ConditionExpressionIsBoolean\r\nExternalVariablesAreBoundByPattern'"
+ * @model
  * @generated
  */
 public interface Predicate extends EObject, Element {

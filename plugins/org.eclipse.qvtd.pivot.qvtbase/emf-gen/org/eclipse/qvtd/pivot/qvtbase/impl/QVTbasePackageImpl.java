@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -35,7 +34,6 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -155,15 +153,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 		// Initialize created meta-data
 		theQVTbasePackage.initializePackageContents();
-
-		// Register package validator
-		EValidator.Registry.INSTANCE.put
-			(theQVTbasePackage, 
-			 new EValidator.Descriptor() {
-				 public EValidator getEValidator() {
-					 return QVTbaseValidator.INSTANCE;
-				 }
-			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTbasePackage.freeze();
@@ -571,62 +560,8 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createResource(eNS_URI);
 
 		// Create annotations
-		// http://www.eclipse.org/emf/2002/Ecore
-		createEcoreAnnotations();
 		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
 		createEmofAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";		
-		addAnnotation
-		  (domainEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "TypedModelExistsWarning\r\nTypedModelDefinedByTransformation\r\nCheckableOrEnforceable\r\n\r\n"
-		   });		
-		addAnnotation
-		  (functionEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "IsSideEffectFree\r\nEveryFunctionParameterIsAFunctionParameter"
-		   });		
-		addAnnotation
-		  (patternEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "NoVariableIsAFunctionParameter"
-		   });		
-		addAnnotation
-		  (predicateEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "ConditionExpressionIsBoolean\r\nExternalVariablesAreBoundByPattern"
-		   });		
-		addAnnotation
-		  (ruleEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "OverridesIsCompatible\r\nOverridesDefinedByTransformation\r\nDomainNamesAreUnique\r\nDomainTypedModelsMatchModelParameters"
-		   });			
-		addAnnotation
-		  (transformationEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "WellFormedNsURI\r\nWellFormedNsPrefix\r\nUniqueNsURIs\r\nExtendsIsAcyclic\r\nModelParameterNamesAreCompatibleWithExtension\r\nEveryModelParameterUsedPackagesIsCompatibleWithExtension\r\nModelParameterNamesAreUnique\r\nRuleNamesAreUnique\r\nSynthesizedTypesAreOwned\r\n"
-		   });			
-		addAnnotation
-		  (typedModelEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "DependsOnIsAcyclic\r\nDependsOnAreModelParameters"
-		   });	
 	}
 
 	/**
@@ -636,19 +571,19 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";							
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";		
 		addAnnotation
 		  (getRule_Overrides(), 
 		   source, 
 		   new String[] {
 			 "body", "overriden"
-		   });			
+		   });		
 		addAnnotation
 		  (getTransformation_Extends(), 
 		   source, 
 		   new String[] {
 			 "body", "extendedBy"
-		   });			
+		   });		
 		addAnnotation
 		  (getTypedModel_DependsOn(), 
 		   source, 

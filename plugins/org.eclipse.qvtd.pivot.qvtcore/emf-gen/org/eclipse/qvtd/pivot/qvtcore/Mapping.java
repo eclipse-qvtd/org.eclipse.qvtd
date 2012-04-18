@@ -36,7 +36,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getMapping()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='WellFormedName\r\nDomainTypedModelsMatchModelParameters'"
+ * @model
  * @generated
  */
 public interface Mapping extends Rule, Area {

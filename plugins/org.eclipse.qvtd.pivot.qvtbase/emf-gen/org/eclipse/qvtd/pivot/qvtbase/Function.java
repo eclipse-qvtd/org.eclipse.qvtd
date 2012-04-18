@@ -34,7 +34,7 @@ import org.eclipse.ocl.examples.pivot.Operation;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getFunction()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='IsSideEffectFree\r\nEveryFunctionParameterIsAFunctionParameter'"
+ * @model
  * @generated
  */
 public interface Function extends EObject, Operation {

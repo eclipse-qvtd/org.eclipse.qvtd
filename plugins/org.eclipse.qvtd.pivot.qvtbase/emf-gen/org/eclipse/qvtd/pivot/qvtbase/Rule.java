@@ -38,7 +38,6 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
  *
  * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getRule()
  * @model abstract="true"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='OverridesIsCompatible\r\nOverridesDefinedByTransformation\r\nDomainNamesAreUnique\r\nDomainTypedModelsMatchModelParameters'"
  * @generated
  */
 public interface Rule extends EObject, NamedElement {

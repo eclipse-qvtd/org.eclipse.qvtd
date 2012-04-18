@@ -35,7 +35,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Pattern;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getCorePattern()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='VariableNamesAreUnique'"
+ * @model
  * @generated
  */
 public interface CorePattern extends Pattern {

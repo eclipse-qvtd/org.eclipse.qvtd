@@ -37,7 +37,6 @@ import org.eclipse.ocl.examples.pivot.OclExpression;
  *
  * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getAssignment()
  * @model abstract="true"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='MappingIsEnforceable'"
  * @generated
  */
 public interface Assignment extends EObject, Element {
