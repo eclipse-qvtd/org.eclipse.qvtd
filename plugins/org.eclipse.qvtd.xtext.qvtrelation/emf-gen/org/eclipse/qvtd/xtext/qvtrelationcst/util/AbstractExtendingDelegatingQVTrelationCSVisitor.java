@@ -31,9 +31,9 @@ import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 /**
  * An AbstractExtendingDelegatingQVTrelationCSVisitor delegates all visits.
  */
-public abstract class AbstractExtendingDelegatingQVTrelationCSVisitor<R, C, D extends EssentialOCLCSVisitor<R, C>>
+public abstract class AbstractExtendingDelegatingQVTrelationCSVisitor<R, C, D extends EssentialOCLCSVisitor<R>>
 	extends AbstractDelegatingEssentialOCLCSVisitor<R, C, D>
-	implements QVTrelationCSVisitor<R, C>
+	implements QVTrelationCSVisitor<R>
 {
     protected AbstractExtendingDelegatingQVTrelationCSVisitor(D delegate, C context) {
         super(delegate, context);

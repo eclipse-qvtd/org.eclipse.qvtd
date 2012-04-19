@@ -28,9 +28,9 @@ package	org.eclipse.qvtd.xtext.qvtrelationcst.util;
 /**
  * An AbstractDelegatingQVTrelationCSVisitor delegates all visits.
  */
-public abstract class AbstractDelegatingQVTrelationCSVisitor<R, C, D extends QVTrelationCSVisitor<R, C>>
+public abstract class AbstractDelegatingQVTrelationCSVisitor<R, C, D extends QVTrelationCSVisitor<R>>
 	extends org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractDelegatingEssentialOCLCSVisitor<R, C, D>
-	implements QVTrelationCSVisitor<R, C>
+	implements QVTrelationCSVisitor<R>
 {
     protected AbstractDelegatingQVTrelationCSVisitor(D delegate, C context) {
         super(delegate, context);

@@ -27,7 +27,7 @@ package	org.eclipse.qvtd.pivot.qvtcore.util;
 
 /**
  */
-public interface QVTcoreVisitor<R, C> extends org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor<R, C>
+public interface QVTcoreVisitor<R> extends org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor<R>
 {
 	R visitAssignment(org.eclipse.qvtd.pivot.qvtcore.Assignment object);
 	R visitBottomPattern(org.eclipse.qvtd.pivot.qvtcore.BottomPattern object);

@@ -29,7 +29,7 @@ package	org.eclipse.qvtd.xtext.qvtcorecst.util;
  */
 public abstract class AbstractQVTcoreCSVisitor<R, C>
  extends org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractEssentialOCLCSVisitor<R, C>
-	implements QVTcoreCSVisitor<R, C>
+	implements QVTcoreCSVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.

@@ -337,7 +337,7 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R, C> R accept(Visitor<R, C> visitor) {
+	public <R> R accept(Visitor<R> visitor) {
 		return (R) visitor.getAdapter(QVTrelationVisitor.class).visitRelationImplementation(this);
 	}
 } //RelationImplementationImpl

@@ -31,7 +31,7 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  * Converts an OCL expression to a string for debugging. This is not intended to
  * be used by client applications as an AST-to-text transformation.
  */
-public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVisitor<String, String>
+public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVisitor<String>
 {
 	private static final class Factory implements ToStringVisitor.Factory
 	{

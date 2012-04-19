@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
-import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS;
@@ -313,7 +312,7 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R, C> R accept(BaseCSVisitor<R, C> visitor) {
+	public <R> R accept(BaseCSVisitor<R> visitor) {
 		return (R) visitor.getAdapter(QVTrelationCSVisitor.class).visitPropertyTemplateCS(this);
 	}
 } //PropertyTemplateCSImpl

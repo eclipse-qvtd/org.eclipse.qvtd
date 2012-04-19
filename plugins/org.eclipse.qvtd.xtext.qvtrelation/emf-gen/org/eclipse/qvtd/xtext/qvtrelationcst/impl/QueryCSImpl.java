@@ -365,7 +365,7 @@ public class QueryCSImpl extends ModelElementCSImpl implements QueryCS {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R, C> R accept(BaseCSVisitor<R, C> visitor) {
+	public <R> R accept(BaseCSVisitor<R> visitor) {
 		return (R) visitor.getAdapter(QVTrelationCSVisitor.class).visitQueryCS(this);
 	}
 

@@ -27,7 +27,7 @@ package	org.eclipse.qvtd.pivot.qvttemplate.util;
 
 /**
  */
-public interface QVTtemplateVisitor<R, C> extends org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor<R, C>
+public interface QVTtemplateVisitor<R> extends org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor<R>
 {
 	R visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object);
 	R visitObjectTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object);

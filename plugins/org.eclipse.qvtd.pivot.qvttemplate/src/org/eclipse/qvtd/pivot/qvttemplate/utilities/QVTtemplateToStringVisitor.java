@@ -28,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor;
  * Converts an OCL expression to a string for debugging. This is not intended to
  * be used by client applications as an AST-to-text transformation.
  */
-public class QVTtemplateToStringVisitor extends QVTbaseToStringVisitor implements QVTtemplateVisitor<String, String>
+public class QVTtemplateToStringVisitor extends QVTbaseToStringVisitor implements QVTtemplateVisitor<String>
 {
 	private static final class Factory implements ToStringVisitor.Factory
 	{

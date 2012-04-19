@@ -18,7 +18,6 @@ package org.eclipse.qvtd.xtext.qvtcore.cs2pivot;
 
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLPreOrderVisitor;
 import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS;
@@ -32,17 +31,11 @@ import org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.util.AbstractExtendingDelegatingQVTcoreCSVisitor;
 
-public class QVTcorePreOrderVisitor
-	extends AbstractExtendingDelegatingQVTcoreCSVisitor<Continuation<?>, CS2PivotConversion, EssentialOCLPreOrderVisitor>
+public class QVTcorePreOrderVisitor extends AbstractQVTcorePreOrderVisitor
 {	
-
-//	protected final MetaModelManager metaModelManager;
-
 	public QVTcorePreOrderVisitor(CS2PivotConversion context) {
-		super(new EssentialOCLPreOrderVisitor(context), context);
-//		metaModelManager = context.getMetaModelManager();
+		super(context);
 	}
 
 	@Override

@@ -182,7 +182,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R, C> R accept(Visitor<R, C> visitor) {
+	public <R> R accept(Visitor<R> visitor) {
 		return (R) visitor.getAdapter(QVTrelationVisitor.class).visitRelationalTransformation(this);
 	}
 } //RelationalTransformationImpl

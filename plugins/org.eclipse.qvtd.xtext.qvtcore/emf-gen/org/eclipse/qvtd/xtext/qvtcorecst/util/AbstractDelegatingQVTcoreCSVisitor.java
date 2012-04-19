@@ -28,9 +28,9 @@ package	org.eclipse.qvtd.xtext.qvtcorecst.util;
 /**
  * An AbstractDelegatingQVTcoreCSVisitor delegates all visits.
  */
-public abstract class AbstractDelegatingQVTcoreCSVisitor<R, C, D extends QVTcoreCSVisitor<R, C>>
+public abstract class AbstractDelegatingQVTcoreCSVisitor<R, C, D extends QVTcoreCSVisitor<R>>
 	extends org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractDelegatingEssentialOCLCSVisitor<R, C, D>
-	implements QVTcoreCSVisitor<R, C>
+	implements QVTcoreCSVisitor<R>
 {
     protected AbstractDelegatingQVTcoreCSVisitor(D delegate, C context) {
         super(delegate, context);

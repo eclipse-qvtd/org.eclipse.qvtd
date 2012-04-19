@@ -27,8 +27,7 @@ package	org.eclipse.qvtd.xtext.qvtcorecst.util;
 
 /**
  */
-public interface DecorableQVTcoreCSVisitor<R, C> extends QVTcoreCSVisitor<R, C>, org.eclipse.ocl.examples.xtext.essentialocl.util.DecorableEssentialOCLCSVisitor<R, C>
+public interface DecorableQVTcoreCSVisitor<R> extends QVTcoreCSVisitor<R>, org.eclipse.ocl.examples.xtext.essentialocl.util.DecorableEssentialOCLCSVisitor<R>
 {
-//	DecorableQVTcoreCSVisitor<R, C> createNestedVisitor();
-	void setUndecoratedVisitor(org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor<R, C> visitor);
+	void setUndecoratedVisitor(org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor<R> visitor);
 }

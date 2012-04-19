@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.LibraryCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLContainmentVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -61,9 +60,8 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.UnitCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.WhenCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.WhereCS;
-import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
 
-public class QVTrelationContainmentVisitor extends EssentialOCLContainmentVisitor implements QVTrelationCSVisitor<Continuation<?>, CS2PivotConversion>
+public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmentVisitor
 {
 	public QVTrelationContainmentVisitor(CS2PivotConversion context) {
 		super(context);

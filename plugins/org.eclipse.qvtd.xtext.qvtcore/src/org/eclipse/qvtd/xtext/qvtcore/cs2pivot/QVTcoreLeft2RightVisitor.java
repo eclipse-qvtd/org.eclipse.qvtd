@@ -16,15 +16,11 @@
  */
 package org.eclipse.qvtd.xtext.qvtcore.cs2pivot;
 
-import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLLeft2RightVisitor;
-import org.eclipse.qvtd.xtext.qvtcorecst.util.AbstractExtendingDelegatingQVTcoreCSVisitor;
 
-public class QVTcoreLeft2RightVisitor
-	extends AbstractExtendingDelegatingQVTcoreCSVisitor<Element, CS2PivotConversion, EssentialOCLLeft2RightVisitor>
+public class QVTcoreLeft2RightVisitor extends AbstractQVTcoreLeft2RightVisitor
 {
 	public QVTcoreLeft2RightVisitor(CS2PivotConversion context) {
-		super(new EssentialOCLLeft2RightVisitor(context), context);
+		super(context);
 	}
 }

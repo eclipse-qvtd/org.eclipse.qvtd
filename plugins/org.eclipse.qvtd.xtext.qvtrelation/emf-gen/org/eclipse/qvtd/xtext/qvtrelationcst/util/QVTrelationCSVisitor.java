@@ -27,7 +27,7 @@ package	org.eclipse.qvtd.xtext.qvtrelationcst.util;
 
 /**
  */
-public interface QVTrelationCSVisitor<R, C> extends org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor<R, C>
+public interface QVTrelationCSVisitor<R> extends org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor<R>
 {
 	R visitAbstractDomainCS(org.eclipse.qvtd.xtext.qvtrelationcst.AbstractDomainCS object);
 	R visitAnyElementCS(org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS object);

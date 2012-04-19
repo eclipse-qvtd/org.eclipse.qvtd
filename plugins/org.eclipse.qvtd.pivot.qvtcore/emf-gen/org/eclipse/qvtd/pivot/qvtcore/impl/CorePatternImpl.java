@@ -191,7 +191,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R, C> R accept(Visitor<R, C> visitor) {
+	public <R> R accept(Visitor<R> visitor) {
 		return (R) visitor.getAdapter(QVTcoreVisitor.class).visitCorePattern(this);
 	}
 } //CorePatternImpl

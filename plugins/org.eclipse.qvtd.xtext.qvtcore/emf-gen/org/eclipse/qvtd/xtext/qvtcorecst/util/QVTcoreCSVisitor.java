@@ -27,7 +27,7 @@ package	org.eclipse.qvtd.xtext.qvtcorecst.util;
 
 /**
  */
-public interface QVTcoreCSVisitor<R, C> extends org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor<R, C>
+public interface QVTcoreCSVisitor<R> extends org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor<R>
 {
 	R visitAreaCS(org.eclipse.qvtd.xtext.qvtcorecst.AreaCS object);
 	R visitAssignmentCS(org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS object);

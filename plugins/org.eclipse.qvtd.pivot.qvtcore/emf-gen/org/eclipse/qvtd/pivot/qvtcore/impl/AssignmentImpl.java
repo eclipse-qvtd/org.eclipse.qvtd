@@ -370,7 +370,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R, C> R accept(Visitor<R, C> visitor) {
+	public <R> R accept(Visitor<R> visitor) {
 		return (R) visitor.getAdapter(QVTcoreVisitor.class).visitAssignment(this);
 	}
 } //AssignmentImpl

@@ -17,14 +17,10 @@
 package org.eclipse.qvtd.xtext.qvtrelation.cs2pivot;
 
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLPreOrderVisitor;
-import org.eclipse.qvtd.xtext.qvtrelationcst.util.AbstractExtendingDelegatingQVTrelationCSVisitor;
 
-public class QVTrelationPreOrderVisitor
-	extends AbstractExtendingDelegatingQVTrelationCSVisitor<Continuation<?>, CS2PivotConversion, EssentialOCLPreOrderVisitor>
+public class QVTrelationPreOrderVisitor extends AbstractQVTrelationPreOrderVisitor
 {	
 	public QVTrelationPreOrderVisitor(CS2PivotConversion context) {
-		super(new EssentialOCLPreOrderVisitor(context), context);
+		super(context);
 	}
 }

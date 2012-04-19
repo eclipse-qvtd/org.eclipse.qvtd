@@ -29,7 +29,7 @@ package	org.eclipse.qvtd.pivot.qvtrelation.util;
  */
 public abstract class AbstractQVTrelationVisitor<R, C>
  extends org.eclipse.qvtd.pivot.qvttemplate.util.AbstractQVTtemplateVisitor<R, C>
-	implements QVTrelationVisitor<R, C>
+	implements QVTrelationVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.

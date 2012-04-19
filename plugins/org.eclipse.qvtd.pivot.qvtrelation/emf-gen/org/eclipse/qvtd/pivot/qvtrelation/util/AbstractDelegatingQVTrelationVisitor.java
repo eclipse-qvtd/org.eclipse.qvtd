@@ -28,9 +28,9 @@ package	org.eclipse.qvtd.pivot.qvtrelation.util;
 /**
  * An AbstractDelegatingQVTrelationVisitor delegates all visits.
  */
-public abstract class AbstractDelegatingQVTrelationVisitor<R, C, D extends QVTrelationVisitor<R, C>>
+public abstract class AbstractDelegatingQVTrelationVisitor<R, C, D extends QVTrelationVisitor<R>>
 	extends org.eclipse.qvtd.pivot.qvttemplate.util.AbstractDelegatingQVTtemplateVisitor<R, C, D>
-	implements QVTrelationVisitor<R, C>
+	implements QVTrelationVisitor<R>
 {
     protected AbstractDelegatingQVTrelationVisitor(D delegate, C context) {
         super(delegate, context);

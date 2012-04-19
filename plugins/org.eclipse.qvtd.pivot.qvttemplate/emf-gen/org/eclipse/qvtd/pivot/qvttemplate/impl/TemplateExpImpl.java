@@ -250,7 +250,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R, C> R accept(Visitor<R, C> visitor) {
+	public <R> R accept(Visitor<R> visitor) {
 		return (R) visitor.getAdapter(QVTtemplateVisitor.class).visitTemplateExp(this);
 	}
 } //TemplateExpImpl

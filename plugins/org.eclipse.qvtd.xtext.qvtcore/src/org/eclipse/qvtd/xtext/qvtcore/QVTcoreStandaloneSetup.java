@@ -19,7 +19,6 @@ package org.eclipse.qvtd.xtext.qvtcore;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreSaver;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreToStringVisitor;
-import org.eclipse.qvtd.xtext.qvtcore.cs2pivot.QVTcoreCS2Pivot;
 import org.eclipse.qvtd.xtext.qvtcore.scoping.QVTcoreScoping;
 
 import com.google.inject.Injector;

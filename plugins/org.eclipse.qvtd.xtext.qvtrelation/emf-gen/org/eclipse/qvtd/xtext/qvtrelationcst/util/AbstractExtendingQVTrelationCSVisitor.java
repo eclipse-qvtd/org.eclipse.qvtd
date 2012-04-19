@@ -34,7 +34,7 @@ package	org.eclipse.qvtd.xtext.qvtrelationcst.util;
  */
 public abstract class AbstractExtendingQVTrelationCSVisitor<R, C>
 	extends org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractExtendingEssentialOCLCSVisitor<R, C>
-	implements QVTrelationCSVisitor<R, C>
+	implements QVTrelationCSVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.

@@ -29,7 +29,7 @@ package	org.eclipse.qvtd.pivot.qvttemplate.util;
  */
 public abstract class AbstractQVTtemplateVisitor<R, C>
  extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractQVTbaseVisitor<R, C>
-	implements QVTtemplateVisitor<R, C>
+	implements QVTtemplateVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.

@@ -25,8 +25,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.RootPackageCSImpl;
-import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
-import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS;
@@ -201,7 +199,7 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R, C> R accept(BaseCSVisitor<R, C> visitor) {
+	public <R> R accept(BaseCSVisitor<R> visitor) {
 		return (R) visitor.getAdapter(QVTrelationCSVisitor.class).visitTopLevelCS(this);
 	}
 } //TopLevelCSImpl

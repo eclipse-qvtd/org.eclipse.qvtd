@@ -260,7 +260,7 @@ public abstract class AreaCSImpl extends NamedElementCSImpl implements AreaCS {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R, C> R accept(BaseCSVisitor<R, C> visitor) {
+	public <R> R accept(BaseCSVisitor<R> visitor) {
 		return (R) visitor.getAdapter(QVTcoreCSVisitor.class).visitAreaCS(this);
 	}
 } //AreaCSImpl

@@ -30,7 +30,7 @@ package	org.eclipse.qvtd.xtext.qvtcorecst.util;
  * visitXxx method that returns null.
  */
 public abstract class AbstractNullQVTcoreCSVisitor<R, C>
-	extends org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractNullEssentialOCLCSVisitor<R, C> implements QVTcoreCSVisitor<R, C>
+	extends org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractNullEssentialOCLCSVisitor<R, C> implements QVTcoreCSVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.

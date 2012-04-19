@@ -27,7 +27,7 @@ package	org.eclipse.qvtd.pivot.qvtrelation.util;
 
 /**
  */
-public interface QVTrelationVisitor<R, C> extends org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor<R, C>
+public interface QVTrelationVisitor<R> extends org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor<R>
 {
 	R visitDomainPattern(org.eclipse.qvtd.pivot.qvtrelation.DomainPattern object);
 	R visitKey(org.eclipse.qvtd.pivot.qvtrelation.Key object);

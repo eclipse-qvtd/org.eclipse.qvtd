@@ -17,7 +17,6 @@
 package org.eclipse.qvtd.xtext.qvtrelationcst;
 
 import org.eclipse.ocl.examples.pivot.util.Nameable;
-
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 
 /**

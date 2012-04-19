@@ -28,9 +28,9 @@ package	org.eclipse.qvtd.pivot.qvttemplate.util;
 /**
  * An AbstractDelegatingQVTtemplateVisitor delegates all visits.
  */
-public abstract class AbstractDelegatingQVTtemplateVisitor<R, C, D extends QVTtemplateVisitor<R, C>>
+public abstract class AbstractDelegatingQVTtemplateVisitor<R, C, D extends QVTtemplateVisitor<R>>
 	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractDelegatingQVTbaseVisitor<R, C, D>
-	implements QVTtemplateVisitor<R, C>
+	implements QVTtemplateVisitor<R>
 {
     protected AbstractDelegatingQVTtemplateVisitor(D delegate, C context) {
         super(delegate, context);

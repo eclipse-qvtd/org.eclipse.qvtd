@@ -329,7 +329,7 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R, C> R accept(Visitor<R, C> visitor) {
+	public <R> R accept(Visitor<R> visitor) {
 		return (R) visitor.getAdapter(QVTcoreVisitor.class).visitCoreDomain(this);
 	}
 } //CoreDomainImpl

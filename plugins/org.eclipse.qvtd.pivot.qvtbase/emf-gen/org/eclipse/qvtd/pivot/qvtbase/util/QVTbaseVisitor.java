@@ -27,7 +27,7 @@ package	org.eclipse.qvtd.pivot.qvtbase.util;
 
 /**
  */
-public interface QVTbaseVisitor<R, C> extends org.eclipse.ocl.examples.pivot.util.Visitor<R, C>
+public interface QVTbaseVisitor<R> extends org.eclipse.ocl.examples.pivot.util.Visitor<R>
 {
 	R visitDomain(org.eclipse.qvtd.pivot.qvtbase.Domain object);
 	R visitFunction(org.eclipse.qvtd.pivot.qvtbase.Function object);

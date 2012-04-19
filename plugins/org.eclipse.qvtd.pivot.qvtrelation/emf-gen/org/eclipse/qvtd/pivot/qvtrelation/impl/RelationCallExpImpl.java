@@ -232,7 +232,7 @@ public class RelationCallExpImpl extends OclExpressionImpl implements RelationCa
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R, C> R accept(Visitor<R, C> visitor) {
+	public <R> R accept(Visitor<R> visitor) {
 		return (R) visitor.getAdapter(QVTrelationVisitor.class).visitRelationCallExp(this);
 	}
 } //RelationCallExpImpl

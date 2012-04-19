@@ -17,9 +17,7 @@
 package org.eclipse.qvtd.xtext.qvtrelationcst;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
-
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 
 /**

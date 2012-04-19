@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.xtext.base.cs2pivot.BasicContinuation;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.SingleContinuation;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLContainmentVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -42,8 +41,6 @@ import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
-import org.eclipse.qvtd.xtext.qvtcorecst.AreaCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
@@ -51,16 +48,13 @@ import org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.PatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.RealizeableVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
 
-public class QVTcoreContainmentVisitor extends EssentialOCLContainmentVisitor implements QVTcoreCSVisitor<Continuation<?>, CS2PivotConversion>
+public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 {
 	protected static class DirectionContentContinuation extends SingleContinuation<DirectionCS>
 	{
@@ -93,14 +87,6 @@ public class QVTcoreContainmentVisitor extends EssentialOCLContainmentVisitor im
 	public QVTcoreContainmentVisitor(CS2PivotConversion context) {
 		super(context);
 	}	
-
-	public Continuation<?> visitAreaCS(AreaCS csElement) {
-		return visitNamedElementCS(csElement);
-	}
-
-	public Continuation<?> visitAssignmentCS(AssignmentCS csElement) {
-		return visitExpCS(csElement);
-	}
 
 	public Continuation<?> visitBottomPatternCS(BottomPatternCS csElement) {
 		context.refreshModelElement(BottomPattern.class, QVTcorePackage.Literals.BOTTOM_PATTERN, csElement);
@@ -152,17 +138,9 @@ public class QVTcoreContainmentVisitor extends EssentialOCLContainmentVisitor im
 		return null;
 	}
 
-	public Continuation<?> visitPatternCS(PatternCS csElement) {
-		return visitModelElementCS(csElement);
-	}
-
 	public Continuation<?> visitQueryCS(QueryCS csElement) {
 		refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
 		return null;
-	}
-
-	public Continuation<?> visitRealizeableVariableCS(RealizeableVariableCS csElement) {
-		return visitTypedElementCS(csElement);
 	}
 
 	public Continuation<?> visitRealizedVariableCS(RealizedVariableCS csElement) {

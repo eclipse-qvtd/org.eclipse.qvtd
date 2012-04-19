@@ -16,26 +16,11 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelation.cs2pivot;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLPostOrderVisitor;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
-import org.eclipse.qvtd.pivot.qvtbase.Function;
-import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
-import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
-import org.eclipse.qvtd.xtext.qvtrelationcst.util.AbstractExtendingDelegatingQVTrelationCSVisitor;
 
-public class QVTrelationPostOrderVisitor
-	extends AbstractExtendingDelegatingQVTrelationCSVisitor<Continuation<?>, CS2PivotConversion, EssentialOCLPostOrderVisitor>
+public class QVTrelationPostOrderVisitor extends AbstractQVTrelationPostOrderVisitor
 {
 	public QVTrelationPostOrderVisitor(CS2PivotConversion context) {
-		super(new EssentialOCLPostOrderVisitor(context), context);
+		super(context);
 	}
 }

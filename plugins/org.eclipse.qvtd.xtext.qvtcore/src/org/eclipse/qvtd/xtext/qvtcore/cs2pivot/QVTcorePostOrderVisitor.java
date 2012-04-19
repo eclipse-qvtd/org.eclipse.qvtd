@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLPostOrderVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -53,13 +52,11 @@ import org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.util.AbstractExtendingDelegatingQVTcoreCSVisitor;
 
-public class QVTcorePostOrderVisitor
-	extends AbstractExtendingDelegatingQVTcoreCSVisitor<Continuation<?>, CS2PivotConversion, EssentialOCLPostOrderVisitor>
+public class QVTcorePostOrderVisitor extends AbstractQVTcorePostOrderVisitor
 {
 	public QVTcorePostOrderVisitor(CS2PivotConversion context) {
-		super(new EssentialOCLPostOrderVisitor(context), context);
+		super(context);
 	}
 
 	@Override

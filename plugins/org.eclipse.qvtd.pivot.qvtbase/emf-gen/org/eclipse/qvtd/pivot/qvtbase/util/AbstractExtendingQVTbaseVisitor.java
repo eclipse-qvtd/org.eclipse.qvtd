@@ -34,7 +34,7 @@ package	org.eclipse.qvtd.pivot.qvtbase.util;
  */
 public abstract class AbstractExtendingQVTbaseVisitor<R, C>
 	extends org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor<R, C>
-	implements QVTbaseVisitor<R, C>
+	implements QVTbaseVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.

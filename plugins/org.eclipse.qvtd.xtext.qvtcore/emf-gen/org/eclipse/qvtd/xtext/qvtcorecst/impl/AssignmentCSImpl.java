@@ -307,7 +307,7 @@ public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R, C> R accept(BaseCSVisitor<R, C> visitor) {
+	public <R> R accept(BaseCSVisitor<R> visitor) {
 		return (R) visitor.getAdapter(QVTcoreCSVisitor.class).visitAssignmentCS(this);
 	}
 
