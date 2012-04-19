@@ -87,6 +87,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelationModel" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Model"/>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.RelationImplementation"
       name="RelationImplementation" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationImplementation.impl"

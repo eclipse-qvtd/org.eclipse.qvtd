@@ -18,6 +18,7 @@ package org.eclipse.qvtd.xtext.qvtrelationcst;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
@@ -38,7 +39,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
  * @model
  * @generated
  */
-public interface WhereCS extends ElementCS {
+public interface WhereCS extends ModelElementCS {
 	/**
 	 * Returns the value of the '<em><b>Expr</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS}.

@@ -18,23 +18,18 @@ package org.eclipse.qvtd.xtext.qvtcore.cs2pivot;
 
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLCS2Pivot;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
-import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 
 public class QVTcoreCS2Pivot extends EssentialOCLCS2Pivot
 {	
 	private static final class Factory implements CS2Pivot.Factory
 	{
-		private Factory() {
-			EssentialOCLCS2Pivot.FACTORY.getClass();
-			CS2Pivot.addFactory(this);
-		}
+		private Factory() {}
 
 		public QVTcoreContainmentVisitor createContainmentVisitor(CS2PivotConversion converter) {
 			return new QVTcoreContainmentVisitor(converter);
@@ -51,20 +46,12 @@ public class QVTcoreCS2Pivot extends EssentialOCLCS2Pivot
 		public QVTcorePreOrderVisitor createPreOrderVisitor(CS2PivotConversion converter) {
 			return new QVTcorePreOrderVisitor(converter);
 		}
-
-		public EPackage getEPackage() {
-			return QVTcoreCSTPackage.eINSTANCE;
-		}
 	}
 
-	public static CS2Pivot.Factory FACTORY = new Factory();
+	private static CS2Pivot.Factory FACTORY = new Factory();
 		
 	public QVTcoreCS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, MetaModelManager metaModelManager) {
 		super(cs2pivotResourceMap, metaModelManager);
-	}
-
-	@Override
-	public synchronized void update(IDiagnosticConsumer diagnosticsConsumer) {
-		super.update(diagnosticsConsumer);
+		addFactory(QVTcoreCSTPackage.eINSTANCE, FACTORY);
 	}
 }

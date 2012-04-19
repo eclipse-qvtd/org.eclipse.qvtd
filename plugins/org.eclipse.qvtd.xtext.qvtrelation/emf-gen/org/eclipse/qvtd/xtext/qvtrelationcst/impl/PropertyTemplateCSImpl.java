@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
@@ -45,7 +46,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  *
  * @generated
  */
-public class PropertyTemplateCSImpl extends ElementCSImpl implements PropertyTemplateCS {
+public class PropertyTemplateCSImpl extends ModelElementCSImpl implements PropertyTemplateCS {
 	/**
 	 * The cached value of the '{@link #getPropertyId() <em>Property Id</em>}' reference.
 	 * <!-- begin-user-doc -->

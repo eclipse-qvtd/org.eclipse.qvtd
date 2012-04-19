@@ -1,3 +1,5 @@
+import qvtrelation : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTRelation.ecore';
+import emof : 'platform:/resource/org.eclipse.qvt/model/ecore/EMOF.ecore';
 
 transformation Keys(mm:{qvtrelation, emof})
 {

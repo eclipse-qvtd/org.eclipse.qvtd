@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.ocl.examples.pivot.Property;
 
+import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 
@@ -41,7 +42,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
  * @model
  * @generated
  */
-public interface KeyDeclCS extends ElementCS {
+public interface KeyDeclCS extends ModelElementCS {
 	/**
 	 * Returns the value of the '<em><b>Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

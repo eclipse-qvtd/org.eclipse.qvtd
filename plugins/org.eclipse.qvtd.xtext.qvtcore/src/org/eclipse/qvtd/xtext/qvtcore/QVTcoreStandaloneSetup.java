@@ -42,7 +42,7 @@ public class QVTcoreStandaloneSetup extends QVTcoreStandaloneSetupGenerated
 		QVTcorePivotStandaloneSetup.doSetup();
 		QVTcoreScoping.init();
 //		QVTcoreCS2MonikerVisitor.FACTORY.getClass();
-		QVTcoreCS2Pivot.FACTORY.getClass();
+//		QVTcoreCS2Pivot.FACTORY.getClass();
 		QVTcoreSaver.FACTORY.getClass();
 		QVTcoreToStringVisitor.FACTORY.getClass();
 	}

@@ -73,6 +73,10 @@ public abstract class AbstractDelegatingQVTrelationVisitor<R, C, D extends QVTre
 		return delegate.visitRelationImplementation(object);
 	}
 
+	public R visitRelationModel(org.eclipse.qvtd.pivot.qvtrelation.RelationModel object) {
+		return delegate.visitRelationModel(object);
+	}
+
 	public R visitRelationalTransformation(org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation object) {
 		return delegate.visitRelationalTransformation(object);
 	}

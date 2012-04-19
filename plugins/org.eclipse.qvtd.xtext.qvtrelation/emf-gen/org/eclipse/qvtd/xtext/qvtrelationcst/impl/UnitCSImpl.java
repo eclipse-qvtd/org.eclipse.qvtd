@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
@@ -41,7 +42,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  *
  * @generated
  */
-public class UnitCSImpl extends ElementCSImpl implements UnitCS {
+public class UnitCSImpl extends ModelElementCSImpl implements UnitCS {
 	/**
 	 * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' reference list.
 	 * <!-- begin-user-doc -->

@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
@@ -131,6 +132,10 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 				return createRelationDomainAssignmentAdapter();
 			}
 			@Override
+			public Adapter caseRelationModel(RelationModel object) {
+				return createRelationModelAdapter();
+			}
+			@Override
 			public Adapter caseRelationImplementation(RelationImplementation object) {
 				return createRelationImplementationAdapter();
 			}
@@ -191,8 +196,20 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 				return createDomainAdapter();
 			}
 			@Override
+			public Adapter caseNamespace(Namespace object) {
+				return createNamespaceAdapter();
+			}
+			@Override
 			public Adapter caseTemplateableElement(TemplateableElement object) {
 				return createTemplateableElementAdapter();
+			}
+			@Override
+			public Adapter casePackage(org.eclipse.ocl.examples.pivot.Package object) {
+				return createPackageAdapter();
+			}
+			@Override
+			public Adapter caseModel(Model object) {
+				return createModelAdapter();
 			}
 			@Override
 			public Adapter caseParameterableElement(ParameterableElement object) {
@@ -203,16 +220,8 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 				return createTypeAdapter();
 			}
 			@Override
-			public Adapter caseNamespace(Namespace object) {
-				return createNamespaceAdapter();
-			}
-			@Override
 			public Adapter caseClass(org.eclipse.ocl.examples.pivot.Class object) {
 				return createClassAdapter();
-			}
-			@Override
-			public Adapter casePackage(org.eclipse.ocl.examples.pivot.Package object) {
-				return createPackageAdapter();
 			}
 			@Override
 			public Adapter caseTransformation(Transformation object) {
@@ -333,6 +342,20 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRelationDomainAssignmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationModel <em>Relation Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationModel
+	 * @generated
+	 */
+	public Adapter createRelationModelAdapter() {
 		return null;
 	}
 
@@ -627,6 +650,20 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPackageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Model <em>Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.Model
+	 * @generated
+	 */
+	public Adapter createModelAdapter() {
 		return null;
 	}
 

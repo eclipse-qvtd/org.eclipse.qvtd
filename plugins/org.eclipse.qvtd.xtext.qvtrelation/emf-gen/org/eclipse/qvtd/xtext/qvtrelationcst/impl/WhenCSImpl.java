@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
@@ -44,7 +45,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  *
  * @generated
  */
-public class WhenCSImpl extends ElementCSImpl implements WhenCS {
+public class WhenCSImpl extends ModelElementCSImpl implements WhenCS {
 	/**
 	 * The cached value of the '{@link #getExpr() <em>Expr</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

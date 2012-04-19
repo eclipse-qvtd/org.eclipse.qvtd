@@ -1028,27 +1028,27 @@ public class QVTrelationCSTPackageImpl extends EPackageImpl implements QVTrelati
 		abstractDomainCSEClass.getESuperTypes().add(thePivotPackage.getNameable());
 		anyElementCSEClass.getESuperTypes().add(theEssentialOCLCSTPackage.getExpCS());
 		collectionTemplateCSEClass.getESuperTypes().add(this.getTemplateCS());
-		defaultValueCSEClass.getESuperTypes().add(theBaseCSTPackage.getElementCS());
+		defaultValueCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
 		domainCSEClass.getESuperTypes().add(this.getAbstractDomainCS());
-		keyDeclCSEClass.getESuperTypes().add(theBaseCSTPackage.getElementCS());
+		keyDeclCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
 		modelDeclCSEClass.getESuperTypes().add(theBaseCSTPackage.getNamedElementCS());
 		objectTemplateCSEClass.getESuperTypes().add(this.getTemplateCS());
 		paramDeclarationCSEClass.getESuperTypes().add(theBaseCSTPackage.getNamedElementCS());
 		primitiveTypeDomainCSEClass.getESuperTypes().add(this.getTemplateVariableCS());
 		primitiveTypeDomainCSEClass.getESuperTypes().add(this.getAbstractDomainCS());
-		propertyTemplateCSEClass.getESuperTypes().add(theBaseCSTPackage.getElementCS());
+		propertyTemplateCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
 		queryCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
 		queryCSEClass.getESuperTypes().add(thePivotPackage.getNameable());
 		relationCSEClass.getESuperTypes().add(theBaseCSTPackage.getNamedElementCS());
 		templateCSEClass.getESuperTypes().add(this.getTemplateVariableCS());
 		templateCSEClass.getESuperTypes().add(theEssentialOCLCSTPackage.getExpCS());
 		templateVariableCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
-		topLevelCSEClass.getESuperTypes().add(theBaseCSTPackage.getElementCS());
-		transformationCSEClass.getESuperTypes().add(theBaseCSTPackage.getNamedElementCS());
-		unitCSEClass.getESuperTypes().add(theBaseCSTPackage.getElementCS());
-		varDeclarationCSEClass.getESuperTypes().add(theBaseCSTPackage.getElementCS());
-		whenCSEClass.getESuperTypes().add(theBaseCSTPackage.getElementCS());
-		whereCSEClass.getESuperTypes().add(theBaseCSTPackage.getElementCS());
+		topLevelCSEClass.getESuperTypes().add(theBaseCSTPackage.getRootPackageCS());
+		transformationCSEClass.getESuperTypes().add(theBaseCSTPackage.getPackageCS());
+		unitCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
+		varDeclarationCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
+		whenCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
+		whereCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(abstractDomainCSEClass, AbstractDomainCS.class, "AbstractDomainCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

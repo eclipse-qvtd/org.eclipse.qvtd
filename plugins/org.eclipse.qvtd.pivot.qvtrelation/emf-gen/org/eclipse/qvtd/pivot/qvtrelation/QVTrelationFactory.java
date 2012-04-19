@@ -99,6 +99,15 @@ public interface QVTrelationFactory extends EFactory {
 	RelationDomainAssignment createRelationDomainAssignment();
 
 	/**
+	 * Returns a new object of class '<em>Relation Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Relation Model</em>'.
+	 * @generated
+	 */
+	RelationModel createRelationModel();
+
+	/**
 	 * Returns a new object of class '<em>Relation Implementation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -73,6 +73,10 @@ public abstract class AbstractNullQVTrelationVisitor<R, C>
 		return null;
 	}
 
+	public R visitRelationModel(org.eclipse.qvtd.pivot.qvtrelation.RelationModel object) {
+		return null;
+	}
+
 	public R visitRelationalTransformation(org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation object) {
 		return null;
 	}

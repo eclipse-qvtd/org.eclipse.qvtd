@@ -18,6 +18,7 @@ package org.eclipse.qvtd.xtext.qvtrelationcst;
 
 import org.eclipse.ocl.examples.pivot.Property;
 
+import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
@@ -40,7 +41,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
  * @model
  * @generated
  */
-public interface PropertyTemplateCS extends ElementCS {
+public interface PropertyTemplateCS extends ModelElementCS {
 	/**
 	 * Returns the value of the '<em><b>Property Id</b></em>' reference.
 	 * <!-- begin-user-doc -->

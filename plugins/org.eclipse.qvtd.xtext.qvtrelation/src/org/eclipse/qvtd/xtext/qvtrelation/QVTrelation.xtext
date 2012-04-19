@@ -24,19 +24,48 @@ import "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore" a
 import "platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore" as qvtrelation
 import "platform:/resource/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCST.ecore"
 
-TopLevelCS:  ('import' importClause+=UnitCS ';' )* transformation+=TransformationCS*;
+TopLevelCS:
+	(ownedImport+=UnitCS | /*ownedInclude+=IncludeCS |*/ ownedLibrary+=LibraryCS)*
+	transformation+=TransformationCS*	
+;
 		
-UnitCS: identifier+=[pivot::Element|UnrestrictedName] ('.' identifier+=[pivot::Element|UnrestrictedName])*;
+//UnitCS: identifier+=[pivot::Element|UnrestrictedName] ('.' identifier+=[pivot::Element|UnrestrictedName])*;
 	
-TransformationCS: 'transformation' name=UnrestrictedName 
-                     '(' modelDecl+=ModelDeclCS (',' modelDecl+=ModelDeclCS)* ')' 
-                     ('extends' extends+=[qvtbase::Transformation|UnrestrictedName] (',' extends+=[qvtbase::Transformation|UnrestrictedName])*)?
-                     '{' keyDecl+=KeyDeclCS* ( relation+=RelationCS | query+=QueryCS )* '}';
+CollectionTemplateCS: propertyId=[pivot::Property|UnrestrictedName]? ':' type=CollectionTypedRefCS
+	'{' (memberIdentifier+=(NameExpCS | TemplateCS | AnyElementCS)
+	    (',' memberIdentifier+=(NameExpCS | TemplateCS | AnyElementCS))*
+        '++' restIdentifier=(NameExpCS | AnyElementCS)?                     
+         )? '}';
 	
-ModelDeclCS: name=UnrestrictedName ':' (metaModelId+=[pivot::Package|UnrestrictedName]
-	| '{' metaModelId+=[pivot::Package|UnrestrictedName] (',' metaModelId+=[pivot::Package|UnrestrictedName])* '}');
+DefaultValueCS: propertyId=[pivot::Property|UnrestrictedName] '=' initialiser=ExpCS ';';
+
+DomainCS: (checkonly?='checkonly' | enforce?='enforce')? 'domain' modelId=[qvtbase::TypedModel|UnrestrictedName] template=TemplateCS
+             ('implementedby' implementedBy=ExpCS)?
+             ('default_values' '{' (defaultValue+=DefaultValueCS)+ '}')?
+             ';';
 
 KeyDeclCS: 'key' pathName=PathNameCS '{' propertyId+=[pivot::Property|UnrestrictedName] (',' propertyId+=[pivot::Property|UnrestrictedName])* '}' ';';
+
+LibraryCS returns base::LibraryCS:
+	'library' package=[pivot::Package|URI] ';';
+	
+ModelDeclCS: name=UnrestrictedName ':' (metaModelId+=[pivot::Package|UnrestrictedName]
+	| '{' metaModelId+=[pivot::Package|UnrestrictedName] (',' metaModelId+=[pivot::Package|UnrestrictedName])* '}')
+;
+	
+ObjectTemplateCS: propertyId=[pivot::Property|UnrestrictedName]? ':' type=TypedRefCS
+	'{' (propertyTemplate+=PropertyTemplateCS (',' propertyTemplate+=PropertyTemplateCS)*)? '}';
+	
+ParamDeclarationCS: name=UnrestrictedName ':' type=TypedRefCS;	
+
+PrimitiveTypeDomainCS: 'primitive' 'domain' name=UnrestrictedName ':' type=TypedRefCS ';';
+
+PropertyTemplateCS: propertyId=[pivot::Property|UnrestrictedName] '=' oclExpression=ExpCS;
+		
+QueryCS: 'query' pathName=PathNameCS 
+            '(' (inputParamDeclaration+=ParamDeclarationCS (',' inputParamDeclaration+=ParamDeclarationCS)*)? ')'
+      	  ':' type=TypedRefCS
+            (';' | '{' oclExpression=ExpCS '}');
 
 RelationCS: top?='top'? 'relation' name=UnrestrictedName
    			 ('overrides' overrides=[qvtrelation::Relation|UnrestrictedName])?
@@ -44,44 +73,29 @@ RelationCS: top?='top'? 'relation' name=UnrestrictedName
                varDeclaration+=VarDeclarationCS*
                (domain+=DomainCS | domain+=PrimitiveTypeDomainCS)+ 
                when=WhenCS? where=WhereCS?
-               '}';
-WhenCS: {WhenCS} 'when' '{' (expr+=ExpCS ';')* '}';
-WhereCS: {WhereCS} 'where' '{' (expr+=ExpCS ';')* '}';
-
-VarDeclarationCS: varDeclarationId+=[pivot::Property|UnrestrictedName] (',' varDeclarationId+=[pivot::Property|UnrestrictedName])* ':' type=TypedRefCS ';';
-	
-DomainCS: (checkonly?='checkonly' | enforce?='enforce')? 'domain' modelId=[qvtbase::TypedModel|UnrestrictedName] template=TemplateCS
-             ('implementedby' implementedBy=ExpCS)?
-             ('default_values' '{' (defaultValue+=DefaultValueCS)+ '}')?
-             ';';
-             
-PrimitiveTypeDomainCS: 'primitive' 'domain' name=UnrestrictedName ':' type=TypedRefCS ';';
+               '}'
+;
 
 TemplateCS: (ObjectTemplateCS | CollectionTemplateCS) ('{' guardExpression=ExpCS '}')?;
 	
-ObjectTemplateCS: propertyId=[pivot::Property|UnrestrictedName]? ':' type=TypedRefCS
-	'{' (propertyTemplate+=PropertyTemplateCS (',' propertyTemplate+=PropertyTemplateCS)*)? '}';
+TransformationCS: 'transformation' name=UnrestrictedName 
+                     '(' modelDecl+=ModelDeclCS (',' modelDecl+=ModelDeclCS)* ')' 
+                     ('extends' extends+=[qvtbase::Transformation|UnrestrictedName] (',' extends+=[qvtbase::Transformation|UnrestrictedName])*)?
+                     '{' keyDecl+=KeyDeclCS* ( relation+=RelationCS | query+=QueryCS )* '}'
+;
 
-PropertyTemplateCS: propertyId=[pivot::Property|UnrestrictedName] '=' oclExpression=ExpCS;
-	
-CollectionTemplateCS: propertyId=[pivot::Property|UnrestrictedName]? ':' type=CollectionTypedRefCS
-	'{' (memberIdentifier+=(NameExpCS | TemplateCS | AnyElementCS)
-	    (',' memberIdentifier+=(NameExpCS | TemplateCS | AnyElementCS))*
-        '++' restIdentifier=(NameExpCS | AnyElementCS)?                     
-         )? '}';
+UnitCS returns base::ImportCS:
+	'import' (name=UnrestrictedName ':')? namespace=[pivot::Namespace|URI] ';';
+
+VarDeclarationCS: varDeclarationId+=[pivot::Property|UnrestrictedName] (',' varDeclarationId+=[pivot::Property|UnrestrictedName])* ':' type=TypedRefCS ';';
+
+WhenCS: {WhenCS} 'when' '{' (expr+=ExpCS ';')* '}';
+
+WhereCS: {WhereCS} 'where' '{' (expr+=ExpCS ';')* '}';
 
 NameExpCS returns essentialocl::NameExpCS: pathName=PathNameCS;
 
 AnyElementCS: {AnyElementCS} '_';
-	
-DefaultValueCS: propertyId=[pivot::Property|UnrestrictedName] '=' initialiser=ExpCS ';';
-		
-QueryCS: 'query' pathName=PathNameCS 
-            '(' (inputParamDeclaration+=ParamDeclarationCS (',' inputParamDeclaration+=ParamDeclarationCS)*)? ')'
-      	  ':' type=TypedRefCS
-            (';' | '{' oclExpression=ExpCS '}');
-	
-ParamDeclarationCS: name=UnrestrictedName ':' type=TypedRefCS;	
 		
 //<OclExpressionCS> ::= <PropertyCallExpCS> 
 //                    | <VariableExpCS>
@@ -109,6 +123,7 @@ UnrestrictedName returns ecore::EString:
 |   'extends'
 |   'implementedby'
 |   'import'
+|   'library'
 |   'key'
 |   'overrides'
 |   'primitive'

@@ -57,7 +57,7 @@ public abstract class AbstractExtendingDelegatingQVTrelationCSVisitor<R, C, D ex
 	}
 
 	public R visitDefaultValueCS(org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS object) {
-		return delegate.visitElementCS(object);
+		return delegate.visitModelElementCS(object);
 	}
 
 	public R visitDomainCS(org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS object) {
@@ -65,7 +65,7 @@ public abstract class AbstractExtendingDelegatingQVTrelationCSVisitor<R, C, D ex
 	}
 
 	public R visitKeyDeclCS(org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS object) {
-		return delegate.visitElementCS(object);
+		return delegate.visitModelElementCS(object);
 	}
 
 	public R visitModelDeclCS(org.eclipse.qvtd.xtext.qvtrelationcst.ModelDeclCS object) {
@@ -85,7 +85,7 @@ public abstract class AbstractExtendingDelegatingQVTrelationCSVisitor<R, C, D ex
 	}
 
 	public R visitPropertyTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS object) {
-		return delegate.visitElementCS(object);
+		return delegate.visitModelElementCS(object);
 	}
 
 	public R visitQueryCS(org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS object) {
@@ -105,26 +105,26 @@ public abstract class AbstractExtendingDelegatingQVTrelationCSVisitor<R, C, D ex
 	}
 
 	public R visitTopLevelCS(org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS object) {
-		return delegate.visitElementCS(object);
+		return delegate.visitRootPackageCS(object);
 	}
 
 	public R visitTransformationCS(org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS object) {
-		return delegate.visitNamedElementCS(object);
+		return delegate.visitPackageCS(object);
 	}
 
 	public R visitUnitCS(org.eclipse.qvtd.xtext.qvtrelationcst.UnitCS object) {
-		return delegate.visitElementCS(object);
+		return delegate.visitModelElementCS(object);
 	}
 
 	public R visitVarDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS object) {
-		return delegate.visitElementCS(object);
+		return delegate.visitModelElementCS(object);
 	}
 
 	public R visitWhenCS(org.eclipse.qvtd.xtext.qvtrelationcst.WhenCS object) {
-		return delegate.visitElementCS(object);
+		return delegate.visitModelElementCS(object);
 	}
 
 	public R visitWhereCS(org.eclipse.qvtd.xtext.qvtrelationcst.WhereCS object) {
-		return delegate.visitElementCS(object);
+		return delegate.visitModelElementCS(object);
 	}
 }

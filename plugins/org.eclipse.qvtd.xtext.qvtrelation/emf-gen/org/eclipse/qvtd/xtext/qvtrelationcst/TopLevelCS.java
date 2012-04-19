@@ -18,6 +18,8 @@ package org.eclipse.qvtd.xtext.qvtrelationcst;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 
 /**
@@ -37,7 +39,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
  * @model
  * @generated
  */
-public interface TopLevelCS extends ElementCS {
+public interface TopLevelCS extends RootPackageCS {
 	/**
 	 * Returns the value of the '<em><b>Import Clause</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcst.UnitCS}.

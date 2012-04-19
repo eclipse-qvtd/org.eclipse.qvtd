@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.ocl.examples.pivot.Element;
 
+import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 
 /**
@@ -38,7 +39,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
  * @model
  * @generated
  */
-public interface UnitCS extends ElementCS {
+public interface UnitCS extends ModelElementCS {
 	/**
 	 * Returns the value of the '<em><b>Identifier</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Element}.

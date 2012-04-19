@@ -684,6 +684,151 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_DOMAIN_ASSIGNMENT_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationModelImpl <em>Relation Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.RelationModelImpl
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.QVTrelationPackageImpl#getRelationModel()
+	 * @generated
+	 */
+	int RELATION_MODEL = 7;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__OWNED_COMMENT = PivotPackage.MODEL__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__NAME = PivotPackage.MODEL__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__OWNED_RULE = PivotPackage.MODEL__OWNED_RULE;
+
+	/**
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__IS_STATIC = PivotPackage.MODEL__IS_STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__OWNED_ANNOTATION = PivotPackage.MODEL__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__TEMPLATE_BINDING = PivotPackage.MODEL__TEMPLATE_BINDING;
+
+	/**
+	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__OWNED_TEMPLATE_SIGNATURE = PivotPackage.MODEL__OWNED_TEMPLATE_SIGNATURE;
+
+	/**
+	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__UNSPECIALIZED_ELEMENT = PivotPackage.MODEL__UNSPECIALIZED_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__NESTED_PACKAGE = PivotPackage.MODEL__NESTED_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Nesting Package</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__NESTING_PACKAGE = PivotPackage.MODEL__NESTING_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__NS_PREFIX = PivotPackage.MODEL__NS_PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__NS_URI = PivotPackage.MODEL__NS_URI;
+
+	/**
+	 * The feature id for the '<em><b>Owned Precedence</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__OWNED_PRECEDENCE = PivotPackage.MODEL__OWNED_PRECEDENCE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__OWNED_TYPE = PivotPackage.MODEL__OWNED_TYPE;
+
+	/**
+	 * The number of structural features of the '<em>Relation Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL_FEATURE_COUNT = PivotPackage.MODEL_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImplementationImpl <em>Relation Implementation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -691,7 +836,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.QVTrelationPackageImpl#getRelationImplementation()
 	 * @generated
 	 */
-	int RELATION_IMPLEMENTATION = 7;
+	int RELATION_IMPLEMENTATION = 8;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -746,7 +891,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.QVTrelationPackageImpl#getRelationalTransformation()
 	 * @generated
 	 */
-	int RELATIONAL_TRANSFORMATION = 8;
+	int RELATIONAL_TRANSFORMATION = 9;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -1268,6 +1413,16 @@ public interface QVTrelationPackage extends EPackage {
 	EReference getRelationDomainAssignment_Variable();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationModel <em>Relation Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Relation Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationModel
+	 * @generated
+	 */
+	EClass getRelationModel();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation <em>Relation Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1558,6 +1713,16 @@ public interface QVTrelationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RELATION_DOMAIN_ASSIGNMENT__VARIABLE = eINSTANCE.getRelationDomainAssignment_Variable();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationModelImpl <em>Relation Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.RelationModelImpl
+		 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.QVTrelationPackageImpl#getRelationModel()
+		 * @generated
+		 */
+		EClass RELATION_MODEL = eINSTANCE.getRelationModel();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImplementationImpl <em>Relation Implementation</em>}' class.

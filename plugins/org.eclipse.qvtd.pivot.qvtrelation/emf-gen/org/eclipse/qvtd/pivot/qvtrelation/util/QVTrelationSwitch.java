@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
@@ -175,6 +176,20 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTrelationPackage.RELATION_MODEL: {
+				RelationModel relationModel = (RelationModel)theEObject;
+				T result = caseRelationModel(relationModel);
+				if (result == null) result = caseModel(relationModel);
+				if (result == null) result = casePackage(relationModel);
+				if (result == null) result = caseNamespace(relationModel);
+				if (result == null) result = caseTemplateableElement(relationModel);
+				if (result == null) result = caseNamedElement(relationModel);
+				if (result == null) result = caseElement(relationModel);
+				if (result == null) result = caseNameable(relationModel);
+				if (result == null) result = caseVisitable(relationModel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTrelationPackage.RELATION_IMPLEMENTATION: {
 				RelationImplementation relationImplementation = (RelationImplementation)theEObject;
 				T result = caseRelationImplementation(relationImplementation);
@@ -306,6 +321,21 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRelationDomainAssignment(RelationDomainAssignment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Relation Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Relation Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRelationModel(RelationModel object) {
 		return null;
 	}
 
@@ -621,6 +651,21 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePackage(org.eclipse.ocl.examples.pivot.Package object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModel(Model object) {
 		return null;
 	}
 

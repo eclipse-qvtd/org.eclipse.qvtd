@@ -25,6 +25,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateToStringVisitor;
@@ -91,6 +92,11 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 	}
 
 	public String visitRelationImplementation(RelationImplementation object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String visitRelationModel(RelationModel object) {
 		// TODO Auto-generated method stub
 		return null;
 	}

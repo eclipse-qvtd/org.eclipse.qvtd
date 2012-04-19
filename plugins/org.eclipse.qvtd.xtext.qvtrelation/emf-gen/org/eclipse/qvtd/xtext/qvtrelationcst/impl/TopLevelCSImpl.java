@@ -24,6 +24,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.examples.xtext.base.baseCST.impl.RootPackageCSImpl;
+import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
@@ -46,7 +48,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  *
  * @generated
  */
-public class TopLevelCSImpl extends ElementCSImpl implements TopLevelCS {
+public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	/**
 	 * The cached value of the '{@link #getImportClause() <em>Import Clause</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

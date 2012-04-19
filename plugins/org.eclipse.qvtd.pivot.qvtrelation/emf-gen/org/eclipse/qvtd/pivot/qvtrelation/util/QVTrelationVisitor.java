@@ -37,5 +37,6 @@ public interface QVTrelationVisitor<R, C> extends org.eclipse.qvtd.pivot.qvttemp
 	R visitRelationDomain(org.eclipse.qvtd.pivot.qvtrelation.RelationDomain object);
 	R visitRelationDomainAssignment(org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment object);
 	R visitRelationImplementation(org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation object);
+	R visitRelationModel(org.eclipse.qvtd.pivot.qvtrelation.RelationModel object);
 	R visitRelationalTransformation(org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation object);
 }

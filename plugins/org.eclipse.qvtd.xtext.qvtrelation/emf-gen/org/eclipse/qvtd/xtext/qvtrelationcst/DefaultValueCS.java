@@ -18,6 +18,7 @@ package org.eclipse.qvtd.xtext.qvtrelationcst;
 
 import org.eclipse.ocl.examples.pivot.Property;
 
+import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
@@ -39,7 +40,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
  * @model
  * @generated
  */
-public interface DefaultValueCS extends ElementCS {
+public interface DefaultValueCS extends ModelElementCS {
 	/**
 	 * Returns the value of the '<em><b>Initialiser</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

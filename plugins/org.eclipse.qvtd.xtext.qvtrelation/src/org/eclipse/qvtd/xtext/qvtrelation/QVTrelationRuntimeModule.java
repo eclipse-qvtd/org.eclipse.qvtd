@@ -3,9 +3,32 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelation;
 
+import org.eclipse.qvtd.xtext.qvtrelation.scoping.QVTrelationScopeProvider;
+import org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationCSResource;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.scoping.IScopeProvider;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
+
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
-public class QVTrelationRuntimeModule extends org.eclipse.qvtd.xtext.qvtrelation.AbstractQVTrelationRuntimeModule {
+public class QVTrelationRuntimeModule extends org.eclipse.qvtd.xtext.qvtrelation.AbstractQVTrelationRuntimeModule
+{
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		binder.bindConstant().annotatedWith(Names.named(org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
+	}
 
+	@Override
+	public Class<? extends IScopeProvider> bindIScopeProvider() {
+		return QVTrelationScopeProvider.class;
+	}
+	
+	@Override
+	public Class<? extends XtextResource> bindXtextResource() {
+		return QVTrelationCSResource.class;
+	}
 }

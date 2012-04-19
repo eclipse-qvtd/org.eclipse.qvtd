@@ -77,6 +77,7 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 			case QVTrelationPackage.RELATION_CALL_EXP: return createRelationCallExp();
 			case QVTrelationPackage.RELATION_DOMAIN: return createRelationDomain();
 			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT: return createRelationDomainAssignment();
+			case QVTrelationPackage.RELATION_MODEL: return createRelationModel();
 			case QVTrelationPackage.RELATION_IMPLEMENTATION: return createRelationImplementation();
 			case QVTrelationPackage.RELATIONAL_TRANSFORMATION: return createRelationalTransformation();
 			default:
@@ -152,6 +153,16 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 	public RelationDomainAssignment createRelationDomainAssignment() {
 		RelationDomainAssignmentImpl relationDomainAssignment = new RelationDomainAssignmentImpl();
 		return relationDomainAssignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RelationModel createRelationModel() {
+		RelationModelImpl relationModel = new RelationModelImpl();
+		return relationModel;
 	}
 
 	/**

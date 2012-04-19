@@ -8,12 +8,14 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.qvtd.xtext.qvtrelation,
+ org.eclipse.qvtd.xtext.qvtrelation.cs2pivot,
  org.eclipse.qvtd.xtext.qvtrelation.formatting,
  org.eclipse.qvtd.xtext.qvtrelation.parseTreeConstruction,
  org.eclipse.qvtd.xtext.qvtrelation.parser.antlr,
  org.eclipse.qvtd.xtext.qvtrelation.parser.antlr.internal,
  org.eclipse.qvtd.xtext.qvtrelation.scoping,
  org.eclipse.qvtd.xtext.qvtrelation.services,
+ org.eclipse.qvtd.xtext.qvtrelation.utilities,
  org.eclipse.qvtd.xtext.qvtrelation.validation,
  org.eclipse.qvtd.xtext.qvtrelationcst,
  org.eclipse.qvtd.xtext.qvtrelationcst.impl,
@@ -28,3 +30,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.qvtd.pivot.qvttemplate;visibility:=reexport,
  org.eclipse.qvtd.pivot.qvtrelation;visibility:=reexport
 Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationPlugin$Implementation

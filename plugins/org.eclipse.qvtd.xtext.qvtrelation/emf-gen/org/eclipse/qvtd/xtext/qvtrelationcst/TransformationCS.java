@@ -18,6 +18,7 @@ package org.eclipse.qvtd.xtext.qvtrelationcst;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -42,7 +43,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  * @model
  * @generated
  */
-public interface TransformationCS extends NamedElementCS {
+public interface TransformationCS extends PackageCS {
 	/**
 	 * Returns the value of the '<em><b>Model Decl</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcst.ModelDeclCS}.

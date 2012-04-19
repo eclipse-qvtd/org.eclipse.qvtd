@@ -77,6 +77,10 @@ public abstract class AbstractExtendingQVTrelationVisitor<R, C>
 		return visitElement(object);
 	}
 
+	public R visitRelationModel(org.eclipse.qvtd.pivot.qvtrelation.RelationModel object) {
+		return visitModel(object);
+	}
+
 	public R visitRelationalTransformation(org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation object) {
 		return visitTransformation(object);
 	}

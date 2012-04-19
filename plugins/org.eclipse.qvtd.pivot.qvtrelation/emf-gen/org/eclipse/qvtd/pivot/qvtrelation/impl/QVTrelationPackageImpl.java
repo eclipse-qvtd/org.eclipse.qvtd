@@ -37,6 +37,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
@@ -96,6 +97,13 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	private EClass relationDomainAssignmentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass relationModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -397,6 +405,15 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getRelationModel() {
+		return relationModelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRelationImplementation() {
 		return relationImplementationEClass;
 	}
@@ -505,6 +522,8 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		createEReference(relationDomainAssignmentEClass, RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP);
 		createEReference(relationDomainAssignmentEClass, RELATION_DOMAIN_ASSIGNMENT__VARIABLE);
 
+		relationModelEClass = createEClass(RELATION_MODEL);
+
 		relationImplementationEClass = createEClass(RELATION_IMPLEMENTATION);
 		createEReference(relationImplementationEClass, RELATION_IMPLEMENTATION__IMPL);
 		createEReference(relationImplementationEClass, RELATION_IMPLEMENTATION__IN_DIRECTION_OF);
@@ -554,6 +573,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		relationCallExpEClass.getESuperTypes().add(thePivotPackage.getOclExpression());
 		relationDomainEClass.getESuperTypes().add(theQVTbasePackage.getDomain());
 		relationDomainAssignmentEClass.getESuperTypes().add(thePivotPackage.getElement());
+		relationModelEClass.getESuperTypes().add(thePivotPackage.getModel());
 		relationImplementationEClass.getESuperTypes().add(thePivotPackage.getElement());
 		relationalTransformationEClass.getESuperTypes().add(theQVTbasePackage.getTransformation());
 
@@ -588,6 +608,8 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		initEClass(relationDomainAssignmentEClass, RelationDomainAssignment.class, "RelationDomainAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationDomainAssignment_ValueExp(), thePivotPackage.getOclExpression(), null, "valueExp", null, 1, 1, RelationDomainAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationDomainAssignment_Variable(), thePivotPackage.getVariable(), null, "variable", null, 1, 1, RelationDomainAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(relationModelEClass, RelationModel.class, "RelationModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(relationImplementationEClass, RelationImplementation.class, "RelationImplementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationImplementation_Impl(), thePivotPackage.getOperation(), null, "impl", null, 1, 1, RelationImplementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
