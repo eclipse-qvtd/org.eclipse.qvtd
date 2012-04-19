@@ -573,7 +573,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		relationCallExpEClass.getESuperTypes().add(thePivotPackage.getOclExpression());
 		relationDomainEClass.getESuperTypes().add(theQVTbasePackage.getDomain());
 		relationDomainAssignmentEClass.getESuperTypes().add(thePivotPackage.getElement());
-		relationModelEClass.getESuperTypes().add(thePivotPackage.getModel());
+		relationModelEClass.getESuperTypes().add(theQVTbasePackage.getBaseModel());
 		relationImplementationEClass.getESuperTypes().add(thePivotPackage.getElement());
 		relationalTransformationEClass.getESuperTypes().add(theQVTbasePackage.getTransformation());
 

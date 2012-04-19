@@ -16,6 +16,7 @@ package org.eclipse.qvtd.pivot.qvtbase.utilities;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -25,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
 
 /**
@@ -52,6 +54,11 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 	public static ToStringVisitor.Factory FACTORY = new Factory();
 
 	protected QVTbaseToStringVisitor() {}
+
+	public String visitBaseModel(BaseModel object) {
+		append("base model ");
+		return null;
+	}
 
 	public String visitDomain(Domain object) {
 		append("domain ");
@@ -97,6 +104,12 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 
 	public String visitTypedModel(TypedModel object) {
 		append("typed model ");
+		appendName(object);
+		return null;
+	}
+
+	public String visitUnit(Unit object) {
+		append("unit ");
 		appendName(object);
 		return null;
 	}

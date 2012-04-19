@@ -16,18 +16,23 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelation.cs2pivot;
 
+import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.LibraryCS;
+import org.eclipse.ocl.examples.xtext.base.cs2pivot.BasicContinuation;
+import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
+import org.eclipse.ocl.examples.xtext.base.cs2pivot.SingleContinuation;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
@@ -63,6 +68,36 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.WhereCS;
 
 public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmentVisitor
 {
+	protected static class KeyDeclContentContinuation extends SingleContinuation<KeyDeclCS>
+	{
+		private KeyDeclContentContinuation(CS2PivotConversion context, KeyDeclCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			Key pKey = PivotUtil.getPivot(Key.class, csElement);
+			pKey.setIdentifies(csElement.getClassId());
+			PivotUtil.refreshList(pKey.getPart(), csElement.getPropertyId());
+//			PivotUtil.refreshList(pKey.getOppositePart(), csElement.getPropertyId());
+			return null;
+		}
+	}
+
+	protected static class ModelDeclContentContinuation extends SingleContinuation<ModelDeclCS>
+	{
+		private ModelDeclContentContinuation(CS2PivotConversion context, ModelDeclCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			TypedModel pTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
+			PivotUtil.refreshList(pTypedModel.getUsedPackage(), csElement.getMetaModelId());
+			return null;
+		}
+	}
+
 	public QVTrelationContainmentVisitor(CS2PivotConversion context) {
 		super(context);
 	}
@@ -94,13 +129,15 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 
 	@Override
 	public Continuation<?> visitImportCS(ImportCS csElement) {
-		csElement.getNamespace();					// Resolve the proxy to perform the import.
+		Unit pivotElement = refreshNamedElement(Unit.class, QVTbasePackage.Literals.UNIT, csElement);
+		pivotElement.setUsedPackage((org.eclipse.ocl.examples.pivot.Package) csElement.getNamespace());
 		return null;
 	}
 
 	public Continuation<?> visitKeyDeclCS(KeyDeclCS csElement) {
+		CS2Pivot.setElementType(csElement.getPathName(), PivotPackage.Literals.CLASS, csElement, null);
 		Key pivotElement = context.refreshModelElement(Key.class, QVTrelationPackage.Literals.KEY, csElement);
-		return null;
+		return new KeyDeclContentContinuation(context, csElement);
 	}
 
 	@Override
@@ -111,7 +148,7 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 
 	public Continuation<?> visitModelDeclCS(ModelDeclCS csElement) {
 		TypedModel pivotElement = refreshNamedElement(TypedModel.class, QVTbasePackage.Literals.TYPED_MODEL, csElement);
-		return null;
+		return new ModelDeclContentContinuation(context, csElement);
 	}
 
 	public Continuation<?> visitObjectTemplateCS(ObjectTemplateCS csElement) {
@@ -135,6 +172,7 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 	}
 
 	public Continuation<?> visitQueryCS(QueryCS csElement) {
+		CS2Pivot.setElementType(csElement.getPathName(), PivotPackage.Literals.CLASS, csElement, null);
 		Function pivotElement = context.refreshModelElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
 		context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameter(), csElement.getInputParamDeclaration());
 		return null;
@@ -161,6 +199,7 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 //		importPackages(csElement);
 		RelationModel pivotElement = refreshPackage(RelationModel.class, QVTrelationPackage.Literals.RELATION_MODEL, csElement);
 		context.refreshPivotList(Transformation.class, pivotElement.getNestedPackage(), csElement.getTransformation());
+		context.refreshPivotList(Unit.class, pivotElement.getUnit(), csElement.getOwnedImport());
 /*		List<TransformationCS> csTransformations = csElement.getTransformation();
 		List<Transformation> txList = new ArrayList<Transformation>(csTransformations.size());
 		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();

@@ -4,6 +4,7 @@ package org.eclipse.qvtd.pivot.qvtcore.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.qvtd.pivot.qvtbase.impl.BaseModelImpl;
 import org.eclipse.ocl.examples.pivot.internal.impl.ModelImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
@@ -20,7 +21,7 @@ import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
  *
  * @generated
  */
-public class CoreModelImpl extends ModelImpl implements CoreModel {
+public class CoreModelImpl extends BaseModelImpl implements CoreModel {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

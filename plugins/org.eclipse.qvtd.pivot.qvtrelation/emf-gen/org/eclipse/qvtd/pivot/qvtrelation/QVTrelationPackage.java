@@ -700,7 +700,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__OWNED_COMMENT = PivotPackage.MODEL__OWNED_COMMENT;
+	int RELATION_MODEL__OWNED_COMMENT = QVTbasePackage.BASE_MODEL__OWNED_COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -709,7 +709,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__NAME = PivotPackage.MODEL__NAME;
+	int RELATION_MODEL__NAME = QVTbasePackage.BASE_MODEL__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
@@ -718,7 +718,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__OWNED_RULE = PivotPackage.MODEL__OWNED_RULE;
+	int RELATION_MODEL__OWNED_RULE = QVTbasePackage.BASE_MODEL__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
@@ -727,7 +727,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__IS_STATIC = PivotPackage.MODEL__IS_STATIC;
+	int RELATION_MODEL__IS_STATIC = QVTbasePackage.BASE_MODEL__IS_STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -736,7 +736,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__OWNED_ANNOTATION = PivotPackage.MODEL__OWNED_ANNOTATION;
+	int RELATION_MODEL__OWNED_ANNOTATION = QVTbasePackage.BASE_MODEL__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
@@ -745,7 +745,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__TEMPLATE_BINDING = PivotPackage.MODEL__TEMPLATE_BINDING;
+	int RELATION_MODEL__TEMPLATE_BINDING = QVTbasePackage.BASE_MODEL__TEMPLATE_BINDING;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -754,7 +754,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__OWNED_TEMPLATE_SIGNATURE = PivotPackage.MODEL__OWNED_TEMPLATE_SIGNATURE;
+	int RELATION_MODEL__OWNED_TEMPLATE_SIGNATURE = QVTbasePackage.BASE_MODEL__OWNED_TEMPLATE_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -763,7 +763,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__UNSPECIALIZED_ELEMENT = PivotPackage.MODEL__UNSPECIALIZED_ELEMENT;
+	int RELATION_MODEL__UNSPECIALIZED_ELEMENT = QVTbasePackage.BASE_MODEL__UNSPECIALIZED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
@@ -772,7 +772,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__NESTED_PACKAGE = PivotPackage.MODEL__NESTED_PACKAGE;
+	int RELATION_MODEL__NESTED_PACKAGE = QVTbasePackage.BASE_MODEL__NESTED_PACKAGE;
 
 	/**
 	 * The feature id for the '<em><b>Nesting Package</b></em>' container reference.
@@ -781,7 +781,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__NESTING_PACKAGE = PivotPackage.MODEL__NESTING_PACKAGE;
+	int RELATION_MODEL__NESTING_PACKAGE = QVTbasePackage.BASE_MODEL__NESTING_PACKAGE;
 
 	/**
 	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
@@ -790,7 +790,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__NS_PREFIX = PivotPackage.MODEL__NS_PREFIX;
+	int RELATION_MODEL__NS_PREFIX = QVTbasePackage.BASE_MODEL__NS_PREFIX;
 
 	/**
 	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
@@ -799,7 +799,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__NS_URI = PivotPackage.MODEL__NS_URI;
+	int RELATION_MODEL__NS_URI = QVTbasePackage.BASE_MODEL__NS_URI;
 
 	/**
 	 * The feature id for the '<em><b>Owned Precedence</b></em>' containment reference list.
@@ -808,7 +808,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__OWNED_PRECEDENCE = PivotPackage.MODEL__OWNED_PRECEDENCE;
+	int RELATION_MODEL__OWNED_PRECEDENCE = QVTbasePackage.BASE_MODEL__OWNED_PRECEDENCE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
@@ -817,7 +817,16 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__OWNED_TYPE = PivotPackage.MODEL__OWNED_TYPE;
+	int RELATION_MODEL__OWNED_TYPE = QVTbasePackage.BASE_MODEL__OWNED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Unit</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__UNIT = QVTbasePackage.BASE_MODEL__UNIT;
 
 	/**
 	 * The number of structural features of the '<em>Relation Model</em>' class.
@@ -826,7 +835,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL_FEATURE_COUNT = PivotPackage.MODEL_FEATURE_COUNT + 0;
+	int RELATION_MODEL_FEATURE_COUNT = QVTbasePackage.BASE_MODEL_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImplementationImpl <em>Relation Implementation</em>}' class.

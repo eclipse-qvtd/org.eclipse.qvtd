@@ -18,12 +18,15 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
+import org.eclipse.ocl.examples.pivot.scoping.EmptyAttribution;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
+import org.eclipse.qvtd.pivot.qvtrelation.attributes.KeyAttribution;
 
 public class QVTrelationPivotScoping
 {	
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
-//		registry.put(QVTrelationPackage.Literals.BOTTOM_PATTERN, BottomPatternAttribution.INSTANCE);
+		registry.put(QVTrelationPackage.Literals.KEY, KeyAttribution.INSTANCE);
 //		registry.put(QVTrelationPackage.Literals.CORE_DOMAIN, CoreDomainAttribution.INSTANCE);
 //		registry.put(QVTrelationPackage.Literals.CORE_MODEL, CoreModelAttribution.INSTANCE);
 //		registry.put(QVTrelationPackage.Literals.GUARD_PATTERN, GuardPatternAttribution.INSTANCE);

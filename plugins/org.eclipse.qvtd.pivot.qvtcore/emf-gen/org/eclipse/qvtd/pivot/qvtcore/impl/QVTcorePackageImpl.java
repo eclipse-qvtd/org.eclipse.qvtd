@@ -622,7 +622,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		bottomPatternEClass.getESuperTypes().add(this.getCorePattern());
 		coreDomainEClass.getESuperTypes().add(theQVTbasePackage.getDomain());
 		coreDomainEClass.getESuperTypes().add(this.getArea());
-		coreModelEClass.getESuperTypes().add(thePivotPackage.getModel());
+		coreModelEClass.getESuperTypes().add(theQVTbasePackage.getBaseModel());
 		corePatternEClass.getESuperTypes().add(theQVTbasePackage.getPattern());
 		enforcementOperationEClass.getESuperTypes().add(thePivotPackage.getElement());
 		guardPatternEClass.getESuperTypes().add(this.getCorePattern());

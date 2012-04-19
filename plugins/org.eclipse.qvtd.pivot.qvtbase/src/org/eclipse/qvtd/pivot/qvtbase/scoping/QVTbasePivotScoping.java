@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.attributes.DomainAttribution;
 import org.eclipse.qvtd.pivot.qvtbase.attributes.TransformationAttribution;
+import org.eclipse.qvtd.pivot.qvtbase.attributes.TypedModelAttribution;
 
 public class QVTbasePivotScoping
 {	
@@ -28,5 +29,6 @@ public class QVTbasePivotScoping
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
 		registry.put(QVTbasePackage.Literals.DOMAIN, DomainAttribution.INSTANCE);
 		registry.put(QVTbasePackage.Literals.TRANSFORMATION, TransformationAttribution.INSTANCE);
+		registry.put(QVTbasePackage.Literals.TYPED_MODEL, TypedModelAttribution.INSTANCE);
 	}
 }

@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.qvtd.pivot.qvtbase.*;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
@@ -74,15 +75,27 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTbasePackage.BASE_MODEL: return createBaseModel();
 			case QVTbasePackage.FUNCTION: return createFunction();
 			case QVTbasePackage.FUNCTION_PARAMETER: return createFunctionParameter();
 			case QVTbasePackage.PATTERN: return createPattern();
 			case QVTbasePackage.PREDICATE: return createPredicate();
 			case QVTbasePackage.TRANSFORMATION: return createTransformation();
 			case QVTbasePackage.TYPED_MODEL: return createTypedModel();
+			case QVTbasePackage.UNIT: return createUnit();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BaseModel createBaseModel() {
+		BaseModelImpl baseModel = new BaseModelImpl();
+		return baseModel;
 	}
 
 	/**
@@ -143,6 +156,16 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	public TypedModel createTypedModel() {
 		TypedModelImpl typedModel = new TypedModelImpl();
 		return typedModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Unit createUnit() {
+		UnitImpl unit = new UnitImpl();
+		return unit;
 	}
 
 	/**

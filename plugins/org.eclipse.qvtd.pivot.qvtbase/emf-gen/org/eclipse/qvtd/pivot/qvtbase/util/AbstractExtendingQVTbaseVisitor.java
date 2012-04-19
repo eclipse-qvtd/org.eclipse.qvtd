@@ -45,6 +45,10 @@ public abstract class AbstractExtendingQVTbaseVisitor<R, C>
 	    super(context);
 	}	
 
+	public R visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
+		return visitModel(object);
+	}
+
 	public R visitDomain(org.eclipse.qvtd.pivot.qvtbase.Domain object) {
 		return visitElement(object);
 	}
@@ -74,6 +78,10 @@ public abstract class AbstractExtendingQVTbaseVisitor<R, C>
 	}
 
 	public R visitTypedModel(org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
+		return visitNamedElement(object);
+	}
+
+	public R visitUnit(org.eclipse.qvtd.pivot.qvtbase.Unit object) {
 		return visitNamedElement(object);
 	}
 }

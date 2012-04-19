@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -34,6 +35,7 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.Unit;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,6 +44,13 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * @generated
  */
 public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass baseModelEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -97,6 +106,13 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	private EClass typedModelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unitEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -161,6 +177,24 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTbasePackage.eNS_URI, theQVTbasePackage);
 		return theQVTbasePackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBaseModel() {
+		return baseModelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBaseModel_Unit() {
+		return (EReference)baseModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -411,6 +445,24 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUnit() {
+		return unitEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUnit_UsedPackage() {
+		return (EReference)unitEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public QVTbaseFactory getQVTbaseFactory() {
 		return (QVTbaseFactory)getEFactoryInstance();
 	}
@@ -434,6 +486,9 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		isCreated = true;
 
 		// Create classes and their features
+		baseModelEClass = createEClass(BASE_MODEL);
+		createEReference(baseModelEClass, BASE_MODEL__UNIT);
+
 		domainEClass = createEClass(DOMAIN);
 		createEAttribute(domainEClass, DOMAIN__IS_CHECKABLE);
 		createEAttribute(domainEClass, DOMAIN__IS_ENFORCEABLE);
@@ -468,6 +523,9 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEReference(typedModelEClass, TYPED_MODEL__TRANSFORMATION);
 		createEReference(typedModelEClass, TYPED_MODEL__USED_PACKAGE);
 		createEReference(typedModelEClass, TYPED_MODEL__DEPENDS_ON);
+
+		unitEClass = createEClass(UNIT);
+		createEReference(unitEClass, UNIT__USED_PACKAGE);
 	}
 
 	/**
@@ -502,6 +560,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		baseModelEClass.getESuperTypes().add(thePivotPackage.getModel());
 		domainEClass.getESuperTypes().add(thePivotPackage.getElement());
 		domainEClass.getESuperTypes().add(thePivotPackage.getNameable());
 		functionEClass.getESuperTypes().add(thePivotPackage.getOperation());
@@ -513,8 +572,12 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		transformationEClass.getESuperTypes().add(thePivotPackage.getClass_());
 		transformationEClass.getESuperTypes().add(thePivotPackage.getPackage());
 		typedModelEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
+		unitEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(baseModelEClass, BaseModel.class, "BaseModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBaseModel_Unit(), this.getUnit(), null, "unit", null, 0, -1, BaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(domainEClass, Domain.class, "Domain", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomain_IsCheckable(), ecorePackage.getEBoolean(), "isCheckable", null, 0, 1, Domain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomain_IsEnforceable(), ecorePackage.getEBoolean(), "isEnforceable", null, 0, 1, Domain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -555,6 +618,9 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		initEReference(getTypedModel_Transformation(), this.getTransformation(), this.getTransformation_ModelParameter(), "transformation", null, 1, 1, TypedModel.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypedModel_UsedPackage(), thePivotPackage.getPackage(), null, "usedPackage", null, 1, -1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTypedModel_DependsOn(), this.getTypedModel(), null, "dependsOn", null, 0, -1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(unitEClass, Unit.class, "Unit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUnit_UsedPackage(), thePivotPackage.getPackage(), null, "usedPackage", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

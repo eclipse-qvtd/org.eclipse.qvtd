@@ -36,6 +36,15 @@ public interface QVTbaseFactory extends EFactory {
 	QVTbaseFactory eINSTANCE = org.eclipse.qvtd.pivot.qvtbase.impl.QVTbaseFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Base Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Base Model</em>'.
+	 * @generated
+	 */
+	BaseModel createBaseModel();
+
+	/**
 	 * Returns a new object of class '<em>Function</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,6 +97,15 @@ public interface QVTbaseFactory extends EFactory {
 	 * @generated
 	 */
 	TypedModel createTypedModel();
+
+	/**
+	 * Returns a new object of class '<em>Unit</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unit</em>'.
+	 * @generated
+	 */
+	Unit createUnit();
 
 	/**
 	 * Returns the package supported by this factory.

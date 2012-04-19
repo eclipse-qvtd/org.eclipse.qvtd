@@ -41,6 +41,10 @@ public abstract class AbstractDelegatingQVTbaseVisitor<R, C, D extends QVTbaseVi
 		return delegate.visiting(visitable);
 	}
 
+	public R visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
+		return delegate.visitBaseModel(object);
+	}
+
 	public R visitDomain(org.eclipse.qvtd.pivot.qvtbase.Domain object) {
 		return delegate.visitDomain(object);
 	}
@@ -71,5 +75,9 @@ public abstract class AbstractDelegatingQVTbaseVisitor<R, C, D extends QVTbaseVi
 
 	public R visitTypedModel(org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
 		return delegate.visitTypedModel(object);
+	}
+
+	public R visitUnit(org.eclipse.qvtd.pivot.qvtbase.Unit object) {
+		return delegate.visitUnit(object);
 	}
 }

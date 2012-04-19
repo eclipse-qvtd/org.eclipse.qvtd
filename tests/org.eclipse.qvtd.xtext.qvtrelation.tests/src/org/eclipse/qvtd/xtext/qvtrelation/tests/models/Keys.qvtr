@@ -1,11 +1,11 @@
-import qvtrelation : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTRelation.ecore';
-import emof : 'platform:/resource/org.eclipse.qvt/model/ecore/EMOF.ecore';
+import qvtrelation : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTRelation.ecore#/';
+import emof : 'platform:/resource/org.eclipse.qvt/model/ecore/EMOF.ecore#/';
 
 transformation Keys(mm:{qvtrelation, emof})
 {
      key Key{identifies};
      key Key{identifies, part};
-     key Class{key};
-     key Class{key, name};
+--     key Class{key};
+--     key Class{key, name};
 --     key Class{};
 }

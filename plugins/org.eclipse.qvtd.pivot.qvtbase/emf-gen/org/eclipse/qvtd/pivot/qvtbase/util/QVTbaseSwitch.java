@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.util.Switch;
 
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Feature;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -98,6 +99,20 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case QVTbasePackage.BASE_MODEL: {
+				BaseModel baseModel = (BaseModel)theEObject;
+				T result = caseBaseModel(baseModel);
+				if (result == null) result = caseModel(baseModel);
+				if (result == null) result = casePackage(baseModel);
+				if (result == null) result = caseNamespace(baseModel);
+				if (result == null) result = caseTemplateableElement(baseModel);
+				if (result == null) result = caseNamedElement(baseModel);
+				if (result == null) result = caseElement(baseModel);
+				if (result == null) result = caseNameable(baseModel);
+				if (result == null) result = caseVisitable(baseModel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTbasePackage.DOMAIN: {
 				Domain domain = (Domain)theEObject;
 				T result = caseDomain(domain);
@@ -193,8 +208,33 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTbasePackage.UNIT: {
+				Unit unit = (Unit)theEObject;
+				T result = caseUnit(unit);
+				if (result == null) result = caseNamedElement(unit);
+				if (result == null) result = caseElement(unit);
+				if (result == null) result = caseNameable(unit);
+				if (result == null) result = caseVisitable(unit);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Base Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Base Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBaseModel(BaseModel object) {
+		return null;
 	}
 
 	/**
@@ -314,6 +354,21 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedModel(TypedModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unit</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unit</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnit(Unit object) {
 		return null;
 	}
 
@@ -584,6 +639,21 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePackage(org.eclipse.ocl.examples.pivot.Package object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModel(Model object) {
 		return null;
 	}
 

@@ -8,6 +8,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.qvtd.xtext.qvtrelation,
+ org.eclipse.qvtd.xtext.qvtrelation.attributes,
  org.eclipse.qvtd.xtext.qvtrelation.cs2pivot,
  org.eclipse.qvtd.xtext.qvtrelation.formatting,
  org.eclipse.qvtd.xtext.qvtrelation.parseTreeConstruction,
@@ -28,6 +29,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl.examples.pivot;visibility:=reexport,
  org.eclipse.qvtd.pivot.qvtbase;visibility:=reexport,
  org.eclipse.qvtd.pivot.qvttemplate;visibility:=reexport,
- org.eclipse.qvtd.pivot.qvtrelation;visibility:=reexport
+ org.eclipse.qvtd.pivot.qvtrelation;visibility:=reexport,
+ org.eclipse.qvt
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationPlugin$Implementation
+Import-Package: org.apache.log4j

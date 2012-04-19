@@ -2,6 +2,7 @@
  */
 package org.eclipse.qvtd.pivot.qvtcore;
 
+import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.ocl.examples.pivot.Model;
@@ -16,5 +17,5 @@ import org.eclipse.ocl.examples.pivot.Model;
  * @model
  * @generated
  */
-public interface CoreModel extends EObject, Model {
+public interface CoreModel extends BaseModel {
 } // CoreModel

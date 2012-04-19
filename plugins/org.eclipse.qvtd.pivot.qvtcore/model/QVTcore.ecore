@@ -32,7 +32,7 @@
         upperBound="-1" eType="#//RealizedVariable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CoreDomain" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Domain #//Area"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CoreModel" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Model"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CoreModel" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//BaseModel"/>
   <eClassifiers xsi:type="ecore:EClass" name="CorePattern" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Pattern">
     <eOperations name="getAllVariables" ordered="false" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable"/>
     <eOperations name="getArea" lowerBound="1" eType="#//Area"/>
