@@ -9,6 +9,7 @@
   <rm:property key="build.type" value="I"/>
   <rm:property key="build.type" mutable="false" value="I"/>
   <!--rm:property key="qvtd.core.last.p2.repository.location" value="https://hudson.eclipse.org/hudson/job/buckminster-mdt-ocl-core-3.2-master/lastSuccessfulBuild/artifact/MDT-OCL.p2.repository"/-->
+  <rm:locator pattern="^org\.eclipse\.qvt$" searchPathRef="qvtd-source-code"/>
   <rm:locator pattern="^org\.eclipse\.qvtd.*$" searchPathRef="qvtd-source-code"/>
   <rm:locator pattern="^org\.eclipse\.acceleo.*" searchPathRef="acceleo"/>
   <rm:locator pattern="^org\.eclipse\.emf\.compare.*" searchPathRef="emfcompare"/>

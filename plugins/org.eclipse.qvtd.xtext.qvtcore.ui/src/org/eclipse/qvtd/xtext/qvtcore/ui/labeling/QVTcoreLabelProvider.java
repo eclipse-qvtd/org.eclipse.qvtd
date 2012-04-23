@@ -4,7 +4,18 @@
 package org.eclipse.qvtd.xtext.qvtcore.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling.EssentialOCLLabelProvider;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcore.Assignment;
+import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 
 import com.google.inject.Inject;
 
@@ -13,11 +24,59 @@ import com.google.inject.Inject;
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class QVTcoreLabelProvider extends DefaultEObjectLabelProvider {
+public class QVTcoreLabelProvider extends EssentialOCLLabelProvider {
 
 	@Inject
 	public QVTcoreLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
+	}
+
+	protected String image(Assignment ele) {
+		return "Assignment.gif";
+	}
+
+	protected String image(BottomPattern ele) {
+		return "BottomPattern.gif";
+	}
+
+	protected String image(CoreDomain ele) {
+		return "CoreDomain.gif";
+	}
+
+	protected String image(CorePattern ele) {
+		return "CorePattern.gif";
+	}
+
+//	protected String image(Direction ele) {
+//		return "Direction.gif";
+//	}
+
+	protected String image(EnforcementOperation ele) {
+		return "EnforcementOperation.gif";
+	}
+
+	protected String image(GuardPattern ele) {
+		return "GuardPattern.gif";
+	}
+
+	protected String image(Mapping ele) {
+		return "Mapping.gif";
+	}
+
+	protected String image(PropertyAssignment ele) {
+		return "PropertyAssignment.gif";
+	}
+
+	protected String image(RealizedVariable ele) {
+		return "RealizedVariable.gif";
+	}
+
+	protected String text(Transformation ele) {
+		return ele.getName();
+	}
+
+	protected String image(VariableAssignment ele) {
+		return "VariableAssignment.gif";
 	}
 
 /*

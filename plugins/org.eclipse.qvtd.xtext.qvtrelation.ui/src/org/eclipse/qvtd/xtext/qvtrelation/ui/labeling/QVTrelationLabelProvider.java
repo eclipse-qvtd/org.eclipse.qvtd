@@ -15,6 +15,9 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 
 import com.google.inject.Inject;
 
@@ -30,6 +33,10 @@ public class QVTrelationLabelProvider extends EssentialOCLLabelProvider {
 		super(delegate);
 	}
 
+	protected String image(CollectionTemplateExp ele) {
+		return "CollectionTemplateExp.gif";
+	}
+
 	protected String image(DomainPattern ele) {
 		return "DomainPattern.gif";
 	}
@@ -38,12 +45,20 @@ public class QVTrelationLabelProvider extends EssentialOCLLabelProvider {
 		return "Key.gif";
 	}
 
+	protected String image(ObjectTemplateExp ele) {
+		return "ObjectTemplateExp.gif";
+	}
+
 	protected String image(OppositePropertyCallExp ele) {
 		return "OppositePropertyCallExp.gif";
 	}
 
 	protected String image(Predicate ele) {
 		return "When.gif";							// FIXME
+	}
+
+	protected String image(PropertyTemplateItem ele) {
+		return "PropertyTemplateItem.gif";
 	}
 
 	protected String image(Relation ele) {
