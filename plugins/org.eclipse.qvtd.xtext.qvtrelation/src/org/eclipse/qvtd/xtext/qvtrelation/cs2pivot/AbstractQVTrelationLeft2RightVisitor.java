@@ -18,6 +18,7 @@ package org.eclipse.qvtd.xtext.qvtrelation.cs2pivot;
 
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLLeft2RightVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
 
@@ -34,10 +35,6 @@ public class AbstractQVTrelationLeft2RightVisitor extends EssentialOCLLeft2Right
 		return visitModelElementCS(object);
 	}
 
-	public Element visitAnyElementCS(org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS object) {
-		return visitExpCS(object);
-	}
-
 	public Element visitCollectionTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS object) {
 		return visitTemplateCS(object);
 	}
@@ -52,6 +49,10 @@ public class AbstractQVTrelationLeft2RightVisitor extends EssentialOCLLeft2Right
 
 	public Element visitDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS object) {
 		return visitModelElementCS(object);
+	}
+
+	public Element visitElementTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS object) {
+		return visitTemplateVariableCS(object);
 	}
 
 	public Element visitKeyDeclCS(org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS object) {

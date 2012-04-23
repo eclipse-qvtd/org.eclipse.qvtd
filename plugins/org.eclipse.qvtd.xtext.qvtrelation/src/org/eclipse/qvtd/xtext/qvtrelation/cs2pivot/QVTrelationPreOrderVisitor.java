@@ -16,6 +16,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelation.cs2pivot;
 
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -24,13 +25,37 @@ import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.PivotDependency;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.SingleContinuation;
+import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
+import org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS;
 
 public class QVTrelationPreOrderVisitor extends AbstractQVTrelationPreOrderVisitor
 {	
+	public static class CollectionTemplateCompletion extends SingleContinuation<CollectionTemplateCS>
+	{
+		public CollectionTemplateCompletion(CS2PivotConversion context, CollectionTemplateCS csElement) {
+			super(context, null, null, csElement, new PivotDependency(csElement.getType()));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			CollectionTemplateExp pivotElement = PivotUtil.getPivot(CollectionTemplateExp.class, csElement);
+			if (pivotElement != null) {
+				CollectionType type = PivotUtil.getPivot(CollectionType.class, csElement.getType());
+				pivotElement.setReferredCollectionType(type);
+				pivotElement.setType(type);
+				Variable variable = pivotElement.getBindsTo();
+				if (variable != null) {
+					variable.setType(type);
+				}
+			}
+			return null;
+		}
+	}
+
 	public static class ObjectTemplateCompletion extends SingleContinuation<ObjectTemplateCS>
 	{
 		public ObjectTemplateCompletion(CS2PivotConversion context, ObjectTemplateCS csElement) {
@@ -81,6 +106,10 @@ public class QVTrelationPreOrderVisitor extends AbstractQVTrelationPreOrderVisit
 
 	public QVTrelationPreOrderVisitor(CS2PivotConversion context) {
 		super(context);
+	}
+
+	public Continuation<?> visitCollectionTemplateCS(CollectionTemplateCS csElement) {
+		return new CollectionTemplateCompletion(context, csElement);
 	}
 
 	public Continuation<?> visitObjectTemplateCS(ObjectTemplateCS csElement) {

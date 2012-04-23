@@ -16,14 +16,8 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelationcst.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.TypedElementCSImpl;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.impl.NamedElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;

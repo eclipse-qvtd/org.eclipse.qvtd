@@ -45,10 +45,6 @@ public abstract class AbstractNullQVTrelationCSVisitor<R, C>
 		return null;
 	}
 
-	public R visitAnyElementCS(org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS object) {
-		return null;
-	}
-
 	public R visitCollectionTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS object) {
 		return null;
 	}
@@ -62,6 +58,10 @@ public abstract class AbstractNullQVTrelationCSVisitor<R, C>
 	}
 
 	public R visitDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS object) {
+		return null;
+	}
+
+	public R visitElementTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS object) {
 		return null;
 	}
 

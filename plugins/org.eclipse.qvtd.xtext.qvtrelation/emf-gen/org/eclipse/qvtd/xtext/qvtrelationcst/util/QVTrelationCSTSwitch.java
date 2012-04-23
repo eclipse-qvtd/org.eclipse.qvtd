@@ -34,11 +34,11 @@ import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.*;
 import org.eclipse.qvtd.xtext.qvtrelationcst.AbstractDomainCS;
-import org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ModelDeclCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS;
@@ -56,6 +56,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.UnitCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -126,18 +127,6 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSTPackage.ANY_ELEMENT_CS: {
-				AnyElementCS anyElementCS = (AnyElementCS)theEObject;
-				T result = caseAnyElementCS(anyElementCS);
-				if (result == null) result = caseExpCS(anyElementCS);
-				if (result == null) result = caseModelElementCS(anyElementCS);
-				if (result == null) result = casePivotableElementCS(anyElementCS);
-				if (result == null) result = caseElementCS(anyElementCS);
-				if (result == null) result = casePivotable(anyElementCS);
-				if (result == null) result = caseVisitableCS(anyElementCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS: {
 				CollectionTemplateCS collectionTemplateCS = (CollectionTemplateCS)theEObject;
 				T result = caseCollectionTemplateCS(collectionTemplateCS);
@@ -186,6 +175,20 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElementCS(domainPatternCS);
 				if (result == null) result = casePivotable(domainPatternCS);
 				if (result == null) result = caseVisitableCS(domainPatternCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTrelationCSTPackage.ELEMENT_TEMPLATE_CS: {
+				ElementTemplateCS elementTemplateCS = (ElementTemplateCS)theEObject;
+				T result = caseElementTemplateCS(elementTemplateCS);
+				if (result == null) result = caseTemplateVariableCS(elementTemplateCS);
+				if (result == null) result = caseNamedElementCS(elementTemplateCS);
+				if (result == null) result = caseModelElementCS(elementTemplateCS);
+				if (result == null) result = caseNameable(elementTemplateCS);
+				if (result == null) result = casePivotableElementCS(elementTemplateCS);
+				if (result == null) result = caseElementCS(elementTemplateCS);
+				if (result == null) result = casePivotable(elementTemplateCS);
+				if (result == null) result = caseVisitableCS(elementTemplateCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -433,21 +436,6 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Any Element CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Any Element CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAnyElementCS(AnyElementCS object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Collection Template CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -504,6 +492,21 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDomainPatternCS(DomainPatternCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Element Template CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Element Template CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseElementTemplateCS(ElementTemplateCS object) {
 		return null;
 	}
 

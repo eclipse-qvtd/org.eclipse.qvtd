@@ -22,6 +22,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.attributes.KeyAttribution;
 import org.eclipse.qvtd.pivot.qvtrelation.attributes.RelationAttribution;
 import org.eclipse.qvtd.pivot.qvtrelation.attributes.RelationDomainAttribution;
+import org.eclipse.qvtd.pivot.qvtrelation.attributes.RelationModelAttribution;
 
 public class QVTrelationPivotScoping
 {	
@@ -30,5 +31,6 @@ public class QVTrelationPivotScoping
 		registry.put(QVTrelationPackage.Literals.KEY, KeyAttribution.INSTANCE);
 		registry.put(QVTrelationPackage.Literals.RELATION, RelationAttribution.INSTANCE);
 		registry.put(QVTrelationPackage.Literals.RELATION_DOMAIN, RelationDomainAttribution.INSTANCE);
+		registry.put(QVTrelationPackage.Literals.RELATION_MODEL, RelationModelAttribution.INSTANCE);
 	}
 }

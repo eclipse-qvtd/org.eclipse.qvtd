@@ -35,11 +35,11 @@ import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.*;
 import org.eclipse.qvtd.xtext.qvtrelationcst.AbstractDomainCS;
-import org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ModelDeclCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS;
@@ -57,6 +57,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.UnitCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -119,10 +120,6 @@ public class QVTrelationCSTAdapterFactory extends AdapterFactoryImpl {
 				return createAbstractDomainCSAdapter();
 			}
 			@Override
-			public Adapter caseAnyElementCS(AnyElementCS object) {
-				return createAnyElementCSAdapter();
-			}
-			@Override
 			public Adapter caseCollectionTemplateCS(CollectionTemplateCS object) {
 				return createCollectionTemplateCSAdapter();
 			}
@@ -137,6 +134,10 @@ public class QVTrelationCSTAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseDomainPatternCS(DomainPatternCS object) {
 				return createDomainPatternCSAdapter();
+			}
+			@Override
+			public Adapter caseElementTemplateCS(ElementTemplateCS object) {
+				return createElementTemplateCSAdapter();
 			}
 			@Override
 			public Adapter caseKeyDeclCS(KeyDeclCS object) {
@@ -231,12 +232,12 @@ public class QVTrelationCSTAdapterFactory extends AdapterFactoryImpl {
 				return createNameableAdapter();
 			}
 			@Override
-			public Adapter caseExpCS(ExpCS object) {
-				return createExpCSAdapter();
-			}
-			@Override
 			public Adapter caseNamedElementCS(NamedElementCS object) {
 				return createNamedElementCSAdapter();
+			}
+			@Override
+			public Adapter caseExpCS(ExpCS object) {
+				return createExpCSAdapter();
 			}
 			@Override
 			public Adapter caseTypedElementCS(TypedElementCS object) {
@@ -293,20 +294,6 @@ public class QVTrelationCSTAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS <em>Any Element CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS
-	 * @generated
-	 */
-	public Adapter createAnyElementCSAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS <em>Collection Template CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -359,6 +346,20 @@ public class QVTrelationCSTAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDomainPatternCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS <em>Element Template CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS
+	 * @generated
+	 */
+	public Adapter createElementTemplateCSAdapter() {
 		return null;
 	}
 

@@ -45,10 +45,6 @@ public abstract class AbstractDelegatingQVTrelationCSVisitor<R, C, D extends QVT
 		return delegate.visitAbstractDomainCS(object);
 	}
 
-	public R visitAnyElementCS(org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS object) {
-		return delegate.visitAnyElementCS(object);
-	}
-
 	public R visitCollectionTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS object) {
 		return delegate.visitCollectionTemplateCS(object);
 	}
@@ -63,6 +59,10 @@ public abstract class AbstractDelegatingQVTrelationCSVisitor<R, C, D extends QVT
 
 	public R visitDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS object) {
 		return delegate.visitDomainPatternCS(object);
+	}
+
+	public R visitElementTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS object) {
+		return delegate.visitElementTemplateCS(object);
 	}
 
 	public R visitKeyDeclCS(org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS object) {

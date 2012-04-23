@@ -28,11 +28,11 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLC
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcst.AbstractDomainCS;
-import org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ModelDeclCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS;
@@ -72,13 +72,6 @@ public class QVTrelationCSTPackageImpl extends EPackageImpl implements QVTrelati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass anyElementCSEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass collectionTemplateCSEClass = null;
 
 	/**
@@ -101,6 +94,13 @@ public class QVTrelationCSTPackageImpl extends EPackageImpl implements QVTrelati
 	 * @generated
 	 */
 	private EClass domainPatternCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass elementTemplateCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -300,15 +300,6 @@ public class QVTrelationCSTPackageImpl extends EPackageImpl implements QVTrelati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAnyElementCS() {
-		return anyElementCSEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getCollectionTemplateCS() {
 		return collectionTemplateCSEClass;
 	}
@@ -327,8 +318,8 @@ public class QVTrelationCSTPackageImpl extends EPackageImpl implements QVTrelati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCollectionTemplateCS_RestIdentifier() {
-		return (EReference)collectionTemplateCSEClass.getEStructuralFeatures().get(1);
+	public EAttribute getCollectionTemplateCS_RestIdentifier() {
+		return (EAttribute)collectionTemplateCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -446,6 +437,15 @@ public class QVTrelationCSTPackageImpl extends EPackageImpl implements QVTrelati
 	 */
 	public EReference getDomainPatternCS_Template() {
 		return (EReference)domainPatternCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getElementTemplateCS() {
+		return elementTemplateCSEClass;
 	}
 
 	/**
@@ -910,11 +910,9 @@ public class QVTrelationCSTPackageImpl extends EPackageImpl implements QVTrelati
 		// Create classes and their features
 		abstractDomainCSEClass = createEClass(ABSTRACT_DOMAIN_CS);
 
-		anyElementCSEClass = createEClass(ANY_ELEMENT_CS);
-
 		collectionTemplateCSEClass = createEClass(COLLECTION_TEMPLATE_CS);
 		createEReference(collectionTemplateCSEClass, COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS);
-		createEReference(collectionTemplateCSEClass, COLLECTION_TEMPLATE_CS__REST_IDENTIFIER);
+		createEAttribute(collectionTemplateCSEClass, COLLECTION_TEMPLATE_CS__REST_IDENTIFIER);
 
 		defaultValueCSEClass = createEClass(DEFAULT_VALUE_CS);
 		createEReference(defaultValueCSEClass, DEFAULT_VALUE_CS__INITIALISER);
@@ -931,6 +929,8 @@ public class QVTrelationCSTPackageImpl extends EPackageImpl implements QVTrelati
 
 		domainPatternCSEClass = createEClass(DOMAIN_PATTERN_CS);
 		createEReference(domainPatternCSEClass, DOMAIN_PATTERN_CS__TEMPLATE);
+
+		elementTemplateCSEClass = createEClass(ELEMENT_TEMPLATE_CS);
 
 		keyDeclCSEClass = createEClass(KEY_DECL_CS);
 		createEReference(keyDeclCSEClass, KEY_DECL_CS__PATH_NAME);
@@ -1024,6 +1024,7 @@ public class QVTrelationCSTPackageImpl extends EPackageImpl implements QVTrelati
 		// Obtain other dependent packages
 		BaseCSTPackage theBaseCSTPackage = (BaseCSTPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSTPackage.eNS_URI);
 		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
+		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 		EssentialOCLCSTPackage theEssentialOCLCSTPackage = (EssentialOCLCSTPackage)EPackage.Registry.INSTANCE.getEPackage(EssentialOCLCSTPackage.eNS_URI);
 		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
 		QVTrelationPackage theQVTrelationPackage = (QVTrelationPackage)EPackage.Registry.INSTANCE.getEPackage(QVTrelationPackage.eNS_URI);
@@ -1035,11 +1036,11 @@ public class QVTrelationCSTPackageImpl extends EPackageImpl implements QVTrelati
 		// Add supertypes to classes
 		abstractDomainCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
 		abstractDomainCSEClass.getESuperTypes().add(thePivotPackage.getNameable());
-		anyElementCSEClass.getESuperTypes().add(theEssentialOCLCSTPackage.getExpCS());
 		collectionTemplateCSEClass.getESuperTypes().add(this.getTemplateCS());
 		defaultValueCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
 		domainCSEClass.getESuperTypes().add(this.getAbstractDomainCS());
 		domainPatternCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
+		elementTemplateCSEClass.getESuperTypes().add(this.getTemplateVariableCS());
 		keyDeclCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
 		modelDeclCSEClass.getESuperTypes().add(theBaseCSTPackage.getNamedElementCS());
 		objectTemplateCSEClass.getESuperTypes().add(this.getTemplateCS());
@@ -1063,11 +1064,9 @@ public class QVTrelationCSTPackageImpl extends EPackageImpl implements QVTrelati
 		// Initialize classes and features; add operations and parameters
 		initEClass(abstractDomainCSEClass, AbstractDomainCS.class, "AbstractDomainCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(anyElementCSEClass, AnyElementCS.class, "AnyElementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(collectionTemplateCSEClass, CollectionTemplateCS.class, "CollectionTemplateCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCollectionTemplateCS_MemberIdentifiers(), theEssentialOCLCSTPackage.getExpCS(), null, "memberIdentifiers", null, 1, -1, CollectionTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionTemplateCS_RestIdentifier(), theEssentialOCLCSTPackage.getExpCS(), null, "restIdentifier", null, 1, 1, CollectionTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionTemplateCS_MemberIdentifiers(), this.getTemplateVariableCS(), null, "memberIdentifiers", null, 1, -1, CollectionTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionTemplateCS_RestIdentifier(), theEcorePackage.getEString(), "restIdentifier", null, 0, 1, CollectionTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(defaultValueCSEClass, DefaultValueCS.class, "DefaultValueCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDefaultValueCS_Initialiser(), theEssentialOCLCSTPackage.getExpCS(), null, "initialiser", null, 1, 1, DefaultValueCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1084,6 +1083,8 @@ public class QVTrelationCSTPackageImpl extends EPackageImpl implements QVTrelati
 
 		initEClass(domainPatternCSEClass, DomainPatternCS.class, "DomainPatternCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDomainPatternCS_Template(), this.getTemplateCS(), null, "template", null, 0, 1, DomainPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(elementTemplateCSEClass, ElementTemplateCS.class, "ElementTemplateCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(keyDeclCSEClass, KeyDeclCS.class, "KeyDeclCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKeyDeclCS_PathName(), theBaseCSTPackage.getPathNameCS(), null, "pathName", null, 0, 1, KeyDeclCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

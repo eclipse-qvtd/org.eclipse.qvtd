@@ -34,10 +34,6 @@ public class AbstractQVTrelationContainmentVisitor extends EssentialOCLContainme
 		return visitModelElementCS(object);
 	}
 
-	public Continuation<?> visitAnyElementCS(org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS object) {
-		return visitExpCS(object);
-	}
-
 	public Continuation<?> visitCollectionTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS object) {
 		return visitTemplateCS(object);
 	}
@@ -52,6 +48,10 @@ public class AbstractQVTrelationContainmentVisitor extends EssentialOCLContainme
 
 	public Continuation<?> visitDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS object) {
 		return visitModelElementCS(object);
+	}
+
+	public Continuation<?> visitElementTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS object) {
+		return visitTemplateVariableCS(object);
 	}
 
 	public Continuation<?> visitKeyDeclCS(org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS object) {

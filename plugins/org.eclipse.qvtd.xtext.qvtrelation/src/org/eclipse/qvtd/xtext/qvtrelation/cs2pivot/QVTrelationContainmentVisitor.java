@@ -30,6 +30,8 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.examples.pivot.VariableDeclaration;
+import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -64,11 +66,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 import org.eclipse.qvtd.xtext.qvtrelationcst.AbstractDomainCS;
-import org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ModelDeclCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS;
@@ -164,14 +166,28 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 				}
 			}
 		}
+		else if (templateExp instanceof CollectionTemplateExp) {
+			CollectionTemplateExp collectionTemplateExp = (CollectionTemplateExp)templateExp;
+			for (OclExpression member : collectionTemplateExp.getMember()) {
+//				OclExpression value = part.getValue();
+				if (member instanceof TemplateExp) {
+					gatherVariables(pivotVariables, (TemplateExp)member);
+				}
+				else if (member instanceof VariableExp) {
+					Variable variableDeclaration = (Variable) ((VariableExp)member).getReferredVariable();
+					if (variableDeclaration != null) {
+						pivotVariables.add(variableDeclaration);
+					}
+				}
+			}
+			Variable rest = collectionTemplateExp.getRest();
+			if (rest != null) {
+				pivotVariables.add(rest);
+			}
+		}
 	}
 
 	public Continuation<?> visitAbstractDomainCS(AbstractDomainCS csElement) {
-		return null;
-	}
-
-	public Continuation<?> visitAnyElementCS(AnyElementCS csElement) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -183,6 +199,13 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 			pivotElement.setBindsTo(variable);
 		}
 		context.refreshName(variable, csElement.getName());
+		variable = pivotElement.getRest();
+		if (variable == null) {
+			variable = PivotFactory.eINSTANCE.createVariable();
+			pivotElement.setRest(variable);
+		}
+		context.refreshName(variable, csElement.getRestIdentifier());
+		context.refreshPivotList(OclExpression.class, pivotElement.getMember(), csElement.getMemberIdentifiers());
 		return null;
 	}
 
@@ -200,6 +223,18 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 	public Continuation<?> visitDomainPatternCS(DomainPatternCS csElement) {
 		DomainPattern pivotElement = context.refreshModelElement(DomainPattern.class, QVTrelationPackage.Literals.DOMAIN_PATTERN, csElement);
 		pivotElement.setTemplateExpression(PivotUtil.getPivot(TemplateExp.class, csElement.getTemplate()));
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitElementTemplateCS(ElementTemplateCS csElement) {
+		VariableExp pivotElement = context.refreshModelElement(VariableExp.class, PivotPackage.Literals.VARIABLE_EXP, csElement);
+		VariableDeclaration variable = pivotElement.getReferredVariable();
+		if (variable == null) {
+			variable = PivotFactory.eINSTANCE.createVariable();
+			pivotElement.setReferredVariable(variable);
+		}
+		context.refreshName(variable, csElement.getName());
 		return null;
 	}
 

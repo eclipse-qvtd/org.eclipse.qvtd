@@ -16,10 +16,8 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelationcst;
 
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 
 /**

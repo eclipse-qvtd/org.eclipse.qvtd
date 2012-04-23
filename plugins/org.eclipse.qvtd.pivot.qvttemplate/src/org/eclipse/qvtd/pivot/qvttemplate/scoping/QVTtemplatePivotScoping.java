@@ -19,14 +19,14 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
+import org.eclipse.qvtd.pivot.qvttemplate.attributes.CollectionTemplateExpAttribution;
 import org.eclipse.qvtd.pivot.qvttemplate.attributes.ObjectTemplateExpAttribution;
-import org.eclipse.qvtd.pivot.qvttemplate.attributes.TemplateExpAttribution;
 
 public class QVTtemplatePivotScoping
 {	
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
+		registry.put(QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP, CollectionTemplateExpAttribution.INSTANCE);
 		registry.put(QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP, ObjectTemplateExpAttribution.INSTANCE);
-		registry.put(QVTtemplatePackage.Literals.TEMPLATE_EXP, TemplateExpAttribution.INSTANCE);
 	}
 }

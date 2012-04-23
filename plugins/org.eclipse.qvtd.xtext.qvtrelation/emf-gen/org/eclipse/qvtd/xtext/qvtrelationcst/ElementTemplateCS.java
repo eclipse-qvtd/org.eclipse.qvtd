@@ -16,17 +16,16 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelationcst;
 
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Any Element CS</b></em>'.
+ * A representation of the model object '<em><b>Element Template CS</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getAnyElementCS()
+ * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getElementTemplateCS()
  * @model
  * @generated
  */
-public interface AnyElementCS extends ExpCS {
-} // AnyElementCS
+public interface ElementTemplateCS extends TemplateVariableCS {
+} // ElementTemplateCS

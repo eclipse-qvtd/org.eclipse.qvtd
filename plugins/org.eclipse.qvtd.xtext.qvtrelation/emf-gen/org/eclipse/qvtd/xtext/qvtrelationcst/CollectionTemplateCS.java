@@ -17,7 +17,6 @@
 package org.eclipse.qvtd.xtext.qvtrelationcst;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +38,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 public interface CollectionTemplateCS extends TemplateCS {
 	/**
 	 * Returns the value of the '<em><b>Member Identifiers</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS}.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcst.TemplateVariableCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Member Identifiers</em>' containment reference list isn't clear,
@@ -51,32 +50,32 @@ public interface CollectionTemplateCS extends TemplateCS {
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<ExpCS> getMemberIdentifiers();
+	EList<TemplateVariableCS> getMemberIdentifiers();
 
 	/**
-	 * Returns the value of the '<em><b>Rest Identifier</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Rest Identifier</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Rest Identifier</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Rest Identifier</em>' containment reference.
-	 * @see #setRestIdentifier(ExpCS)
+	 * @return the value of the '<em>Rest Identifier</em>' attribute.
+	 * @see #setRestIdentifier(String)
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getCollectionTemplateCS_RestIdentifier()
-	 * @model containment="true" required="true"
+	 * @model
 	 * @generated
 	 */
-	ExpCS getRestIdentifier();
+	String getRestIdentifier();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS#getRestIdentifier <em>Rest Identifier</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS#getRestIdentifier <em>Rest Identifier</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Rest Identifier</em>' containment reference.
+	 * @param value the new value of the '<em>Rest Identifier</em>' attribute.
 	 * @see #getRestIdentifier()
 	 * @generated
 	 */
-	void setRestIdentifier(ExpCS value);
+	void setRestIdentifier(String value);
 
 } // CollectionTemplateCS

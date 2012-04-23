@@ -3,14 +3,10 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtrelationcst" nsURI="http://www.eclipse.org/qvt/0.9/QVTrelationCST"
     nsPrefix="qvtrcs">
   <eClassifiers xsi:type="ecore:EClass" name="AbstractDomainCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ModelElementCS ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Nameable"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AnyElementCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionTemplateCS" eSuperTypes="#//TemplateCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="memberIdentifiers" lowerBound="1"
-        upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="restIdentifier" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS"
-        containment="true"/>
+        upperBound="-1" eType="#//TemplateVariableCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="restIdentifier" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DefaultValueCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ModelElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="initialiser" lowerBound="1"
@@ -35,6 +31,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="template" eType="#//TemplateCS"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementTemplateCS" eSuperTypes="#//TemplateVariableCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="KeyDeclCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ModelElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="pathName" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//PathNameCS"
         containment="true"/>

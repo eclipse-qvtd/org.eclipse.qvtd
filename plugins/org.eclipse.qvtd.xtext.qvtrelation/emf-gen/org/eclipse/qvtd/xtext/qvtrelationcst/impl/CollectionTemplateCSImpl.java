@@ -27,9 +27,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
+import org.eclipse.qvtd.xtext.qvtrelationcst.TemplateVariableCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
 
 /**
@@ -55,17 +55,27 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ExpCS> memberIdentifiers;
+	protected EList<TemplateVariableCS> memberIdentifiers;
 
 	/**
-	 * The cached value of the '{@link #getRestIdentifier() <em>Rest Identifier</em>}' containment reference.
+	 * The default value of the '{@link #getRestIdentifier() <em>Rest Identifier</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getRestIdentifier()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS restIdentifier;
+	protected static final String REST_IDENTIFIER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getRestIdentifier() <em>Rest Identifier</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRestIdentifier()
+	 * @generated
+	 * @ordered
+	 */
+	protected String restIdentifier = REST_IDENTIFIER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -91,9 +101,9 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ExpCS> getMemberIdentifiers() {
+	public EList<TemplateVariableCS> getMemberIdentifiers() {
 		if (memberIdentifiers == null) {
-			memberIdentifiers = new EObjectContainmentEList<ExpCS>(ExpCS.class, this, QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS);
+			memberIdentifiers = new EObjectContainmentEList<TemplateVariableCS>(TemplateVariableCS.class, this, QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS);
 		}
 		return memberIdentifiers;
 	}
@@ -103,7 +113,7 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpCS getRestIdentifier() {
+	public String getRestIdentifier() {
 		return restIdentifier;
 	}
 
@@ -112,33 +122,11 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRestIdentifier(ExpCS newRestIdentifier, NotificationChain msgs) {
-		ExpCS oldRestIdentifier = restIdentifier;
+	public void setRestIdentifier(String newRestIdentifier) {
+		String oldRestIdentifier = restIdentifier;
 		restIdentifier = newRestIdentifier;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER, oldRestIdentifier, newRestIdentifier);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setRestIdentifier(ExpCS newRestIdentifier) {
-		if (newRestIdentifier != restIdentifier) {
-			NotificationChain msgs = null;
-			if (restIdentifier != null)
-				msgs = ((InternalEObject)restIdentifier).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER, null, msgs);
-			if (newRestIdentifier != null)
-				msgs = ((InternalEObject)newRestIdentifier).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER, null, msgs);
-			msgs = basicSetRestIdentifier(newRestIdentifier, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER, newRestIdentifier, newRestIdentifier));
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER, oldRestIdentifier, restIdentifier));
 	}
 
 	/**
@@ -151,8 +139,6 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 		switch (featureID) {
 			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS:
 				return ((InternalEList<?>)getMemberIdentifiers()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
-				return basicSetRestIdentifier(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -184,10 +170,10 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 		switch (featureID) {
 			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS:
 				getMemberIdentifiers().clear();
-				getMemberIdentifiers().addAll((Collection<? extends ExpCS>)newValue);
+				getMemberIdentifiers().addAll((Collection<? extends TemplateVariableCS>)newValue);
 				return;
 			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
-				setRestIdentifier((ExpCS)newValue);
+				setRestIdentifier((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -205,7 +191,7 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 				getMemberIdentifiers().clear();
 				return;
 			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
-				setRestIdentifier((ExpCS)null);
+				setRestIdentifier(REST_IDENTIFIER_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -222,9 +208,25 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS:
 				return memberIdentifiers != null && !memberIdentifiers.isEmpty();
 			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
-				return restIdentifier != null;
+				return REST_IDENTIFIER_EDEFAULT == null ? restIdentifier != null : !REST_IDENTIFIER_EDEFAULT.equals(restIdentifier);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (restIdentifier: ");
+		result.append(restIdentifier);
+		result.append(')');
+		return result.toString();
 	}
 
 	@SuppressWarnings("unchecked")

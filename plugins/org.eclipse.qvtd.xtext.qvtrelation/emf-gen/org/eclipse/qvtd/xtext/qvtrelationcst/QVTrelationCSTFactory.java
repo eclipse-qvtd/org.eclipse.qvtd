@@ -36,15 +36,6 @@ public interface QVTrelationCSTFactory extends EFactory {
 	QVTrelationCSTFactory eINSTANCE = org.eclipse.qvtd.xtext.qvtrelationcst.impl.QVTrelationCSTFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Any Element CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Any Element CS</em>'.
-	 * @generated
-	 */
-	AnyElementCS createAnyElementCS();
-
-	/**
 	 * Returns a new object of class '<em>Collection Template CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,6 +70,15 @@ public interface QVTrelationCSTFactory extends EFactory {
 	 * @generated
 	 */
 	DomainPatternCS createDomainPatternCS();
+
+	/**
+	 * Returns a new object of class '<em>Element Template CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Element Template CS</em>'.
+	 * @generated
+	 */
+	ElementTemplateCS createElementTemplateCS();
 
 	/**
 	 * Returns a new object of class '<em>Key Decl CS</em>'.

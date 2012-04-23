@@ -47,8 +47,7 @@ public class KeyAttribution extends AbstractAttribution
 		}
 		org.eclipse.ocl.examples.pivot.Class identifies = targetElement.getIdentifies();
 		if (identifies != null) {
-			MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-			environmentView.addNamedElements(metaModelManager.getLocalProperties(identifies, Boolean.FALSE));
+			environmentView.addAllProperties(identifies, Boolean.FALSE);
 		}
 		return scopeView.getParent();
 	}

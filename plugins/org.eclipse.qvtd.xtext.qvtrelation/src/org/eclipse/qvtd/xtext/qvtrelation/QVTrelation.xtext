@@ -31,10 +31,10 @@ TopLevelCS:
 		
 //UnitCS: identifier+=[pivot::Element|UnrestrictedName] ('.' identifier+=[pivot::Element|UnrestrictedName])*;
 	
-CollectionTemplateCS: name=UnrestrictedName? ':' type=CollectionTypedRefCS
-	'{' (memberIdentifiers+=(NameExpCS | TemplateCS | AnyElementCS)
-	    (',' memberIdentifiers+=(NameExpCS | TemplateCS | AnyElementCS))*
-        '++' restIdentifier=(NameExpCS | AnyElementCS)?                     
+CollectionTemplateCS: name=UnrestrictedName? ':' type=CollectionTypeCS
+	'{' (memberIdentifiers+=(TemplateCS | ElementTemplateCS)
+	    (',' memberIdentifiers+=(TemplateCS | ElementTemplateCS))*
+        '++' (restIdentifier=UnrestrictedName | '_')                     
          )? '}';
 
 DefaultValueCS: propertyId=[pivot::Property|UnrestrictedName] '=' initialiser=ExpCS ';';
@@ -45,6 +45,8 @@ DomainCS: (checkonly?='checkonly' | enforce?='enforce')? 'domain' modelId=[qvtba
              ';';
 
 DomainPatternCS: template=TemplateCS;
+
+ElementTemplateCS: name=UnrestrictedName | {ElementTemplateCS} '_';
 
 KeyDeclCS: 'key' pathName=PathNameCS '{' propertyIds+=[pivot::Property|UnrestrictedName] (',' propertyIds+=[pivot::Property|UnrestrictedName])* '}' ';';
 
@@ -80,7 +82,7 @@ RelationCS: top?='top'? 'relation' name=UnrestrictedName
                '}'
 ;
 
-TemplateCS: (ObjectTemplateCS | CollectionTemplateCS) ('{' guardExpression=ExpCS '}')?;
+TemplateCS: (CollectionTemplateCS | ObjectTemplateCS) ('{' guardExpression=ExpCS '}')?;
 	
 TransformationCS: 'transformation' name=UnrestrictedName 
                      '(' modelDecls+=ModelDeclCS (',' modelDecls+=ModelDeclCS)* ')' 
@@ -100,8 +102,6 @@ WhenCS returns PatternCS: {PatternCS} 'when' '{' predicates+=PredicateCS* '}';
 WhereCS returns PatternCS: {PatternCS} 'where' '{' predicates+=PredicateCS* '}';
 
 NameExpCS returns essentialocl::NameExpCS: pathName=PathNameCS;
-
-AnyElementCS: {AnyElementCS} '_';
 		
 //<OclExpressionCS> ::= <PropertyCallExpCS> 
 //                    | <VariableExpCS>
@@ -114,12 +114,12 @@ AnyElementCS: {AnyElementCS} '_';
 
 ExpCSOrTemplateCS returns essentialocl::ExpCS: ExpCS | TemplateCS;
 
-CollectionTypedRefCS returns base::TypedTypeRefCS: pathName=PathNameCS;
-
 TypedTypeRefCS returns base::TypedTypeRefCS: pathName=PathNameCS;
 
 TypedRefCS returns base::TypedRefCS:
-	PrimitiveTypeCS | TypedTypeRefCS
+	PrimitiveTypeCS
+|	CollectionTypeCS
+|	TypedTypeRefCS
 ;
 
 //ExpCS returns essentialocl::ExpCS:

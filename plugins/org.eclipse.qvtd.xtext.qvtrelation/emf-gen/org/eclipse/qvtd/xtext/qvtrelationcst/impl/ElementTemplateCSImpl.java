@@ -17,28 +17,28 @@
 package org.eclipse.qvtd.xtext.qvtrelationcst.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.impl.ExpCSImpl;
-import org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Any Element CS</b></em>'.
+ * An implementation of the model object '<em><b>Element Template CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class AnyElementCSImpl extends ExpCSImpl implements AnyElementCS {
+public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements ElementTemplateCS {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AnyElementCSImpl() {
+	protected ElementTemplateCSImpl() {
 		super();
 	}
 
@@ -49,12 +49,12 @@ public class AnyElementCSImpl extends ExpCSImpl implements AnyElementCS {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTrelationCSTPackage.Literals.ANY_ELEMENT_CS;
+		return QVTrelationCSTPackage.Literals.ELEMENT_TEMPLATE_CS;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTrelationCSVisitor.class).visitAnyElementCS(this);
+		return (R) visitor.getAdapter(QVTrelationCSVisitor.class).visitElementTemplateCS(this);
 	}
-} //AnyElementCSImpl
+} //ElementTemplateCSImpl

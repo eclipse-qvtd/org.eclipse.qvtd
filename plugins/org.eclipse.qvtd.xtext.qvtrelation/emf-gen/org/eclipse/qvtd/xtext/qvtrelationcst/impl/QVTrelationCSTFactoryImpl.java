@@ -22,11 +22,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.qvtd.xtext.qvtrelationcst.*;
-import org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ModelDeclCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS;
@@ -43,6 +43,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.UnitCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -88,11 +89,11 @@ public class QVTrelationCSTFactoryImpl extends EFactoryImpl implements QVTrelati
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTrelationCSTPackage.ANY_ELEMENT_CS: return createAnyElementCS();
 			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS: return createCollectionTemplateCS();
 			case QVTrelationCSTPackage.DEFAULT_VALUE_CS: return createDefaultValueCS();
 			case QVTrelationCSTPackage.DOMAIN_CS: return createDomainCS();
 			case QVTrelationCSTPackage.DOMAIN_PATTERN_CS: return createDomainPatternCS();
+			case QVTrelationCSTPackage.ELEMENT_TEMPLATE_CS: return createElementTemplateCS();
 			case QVTrelationCSTPackage.KEY_DECL_CS: return createKeyDeclCS();
 			case QVTrelationCSTPackage.MODEL_DECL_CS: return createModelDeclCS();
 			case QVTrelationCSTPackage.OBJECT_TEMPLATE_CS: return createObjectTemplateCS();
@@ -111,16 +112,6 @@ public class QVTrelationCSTFactoryImpl extends EFactoryImpl implements QVTrelati
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AnyElementCS createAnyElementCS() {
-		AnyElementCSImpl anyElementCS = new AnyElementCSImpl();
-		return anyElementCS;
 	}
 
 	/**
@@ -161,6 +152,16 @@ public class QVTrelationCSTFactoryImpl extends EFactoryImpl implements QVTrelati
 	public DomainPatternCS createDomainPatternCS() {
 		DomainPatternCSImpl domainPatternCS = new DomainPatternCSImpl();
 		return domainPatternCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ElementTemplateCS createElementTemplateCS() {
+		ElementTemplateCSImpl elementTemplateCS = new ElementTemplateCSImpl();
+		return elementTemplateCS;
 	}
 
 	/**

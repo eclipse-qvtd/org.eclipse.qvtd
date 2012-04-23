@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -134,79 +133,6 @@ public interface QVTrelationCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_DOMAIN_CS_FEATURE_COUNT = BaseCSTPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.AnyElementCSImpl <em>Any Element CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.impl.AnyElementCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.impl.QVTrelationCSTPackageImpl#getAnyElementCS()
-	 * @generated
-	 */
-	int ANY_ELEMENT_CS = 1;
-
-	/**
-	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANY_ELEMENT_CS__LOGICAL_PARENT = EssentialOCLCSTPackage.EXP_CS__LOGICAL_PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANY_ELEMENT_CS__PIVOT = EssentialOCLCSTPackage.EXP_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANY_ELEMENT_CS__OWNED_ANNOTATION = EssentialOCLCSTPackage.EXP_CS__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANY_ELEMENT_CS__ORIGINAL_XMI_ID = EssentialOCLCSTPackage.EXP_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANY_ELEMENT_CS__CSI = EssentialOCLCSTPackage.EXP_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANY_ELEMENT_CS__PARENT = EssentialOCLCSTPackage.EXP_CS__PARENT;
-
-	/**
-	 * The number of structural features of the '<em>Any Element CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANY_ELEMENT_CS_FEATURE_COUNT = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.TemplateVariableCSImpl <em>Template Variable CS</em>}' class.
@@ -398,7 +324,7 @@ public interface QVTrelationCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.impl.QVTrelationCSTPackageImpl#getCollectionTemplateCS()
 	 * @generated
 	 */
-	int COLLECTION_TEMPLATE_CS = 2;
+	int COLLECTION_TEMPLATE_CS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -491,7 +417,7 @@ public interface QVTrelationCSTPackage extends EPackage {
 	int COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS = TEMPLATE_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Rest Identifier</b></em>' containment reference.
+	 * The feature id for the '<em><b>Rest Identifier</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -516,7 +442,7 @@ public interface QVTrelationCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.impl.QVTrelationCSTPackageImpl#getDefaultValueCS()
 	 * @generated
 	 */
-	int DEFAULT_VALUE_CS = 3;
+	int DEFAULT_VALUE_CS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -598,7 +524,7 @@ public interface QVTrelationCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.impl.QVTrelationCSTPackageImpl#getDomainCS()
 	 * @generated
 	 */
-	int DOMAIN_CS = 4;
+	int DOMAIN_CS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -725,7 +651,7 @@ public interface QVTrelationCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.impl.QVTrelationCSTPackageImpl#getDomainPatternCS()
 	 * @generated
 	 */
-	int DOMAIN_PATTERN_CS = 5;
+	int DOMAIN_PATTERN_CS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -789,6 +715,88 @@ public interface QVTrelationCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_PATTERN_CS_FEATURE_COUNT = BaseCSTPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.ElementTemplateCSImpl <em>Element Template CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.impl.ElementTemplateCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.impl.QVTrelationCSTPackageImpl#getElementTemplateCS()
+	 * @generated
+	 */
+	int ELEMENT_TEMPLATE_CS = 5;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_TEMPLATE_CS__LOGICAL_PARENT = TEMPLATE_VARIABLE_CS__LOGICAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_TEMPLATE_CS__PIVOT = TEMPLATE_VARIABLE_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_TEMPLATE_CS__OWNED_ANNOTATION = TEMPLATE_VARIABLE_CS__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_TEMPLATE_CS__ORIGINAL_XMI_ID = TEMPLATE_VARIABLE_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_TEMPLATE_CS__CSI = TEMPLATE_VARIABLE_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_TEMPLATE_CS__NAME = TEMPLATE_VARIABLE_CS__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_TEMPLATE_CS__TYPE = TEMPLATE_VARIABLE_CS__TYPE;
+
+	/**
+	 * The number of structural features of the '<em>Element Template CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_TEMPLATE_CS_FEATURE_COUNT = TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.KeyDeclCSImpl <em>Key Decl CS</em>}' class.
@@ -2283,16 +2291,6 @@ public interface QVTrelationCSTPackage extends EPackage {
 	EClass getAbstractDomainCS();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS <em>Any Element CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Any Element CS</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS
-	 * @generated
-	 */
-	EClass getAnyElementCS();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS <em>Collection Template CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2314,15 +2312,15 @@ public interface QVTrelationCSTPackage extends EPackage {
 	EReference getCollectionTemplateCS_MemberIdentifiers();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS#getRestIdentifier <em>Rest Identifier</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS#getRestIdentifier <em>Rest Identifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Rest Identifier</em>'.
+	 * @return the meta object for the attribute '<em>Rest Identifier</em>'.
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS#getRestIdentifier()
 	 * @see #getCollectionTemplateCS()
 	 * @generated
 	 */
-	EReference getCollectionTemplateCS_RestIdentifier();
+	EAttribute getCollectionTemplateCS_RestIdentifier();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS <em>Default Value CS</em>}'.
@@ -2463,6 +2461,16 @@ public interface QVTrelationCSTPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDomainPatternCS_Template();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS <em>Element Template CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Element Template CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS
+	 * @generated
+	 */
+	EClass getElementTemplateCS();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS <em>Key Decl CS</em>}'.
@@ -3008,16 +3016,6 @@ public interface QVTrelationCSTPackage extends EPackage {
 		EClass ABSTRACT_DOMAIN_CS = eINSTANCE.getAbstractDomainCS();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.AnyElementCSImpl <em>Any Element CS</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.xtext.qvtrelationcst.impl.AnyElementCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtrelationcst.impl.QVTrelationCSTPackageImpl#getAnyElementCS()
-		 * @generated
-		 */
-		EClass ANY_ELEMENT_CS = eINSTANCE.getAnyElementCS();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.CollectionTemplateCSImpl <em>Collection Template CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3036,12 +3034,12 @@ public interface QVTrelationCSTPackage extends EPackage {
 		EReference COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS = eINSTANCE.getCollectionTemplateCS_MemberIdentifiers();
 
 		/**
-		 * The meta object literal for the '<em><b>Rest Identifier</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Rest Identifier</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COLLECTION_TEMPLATE_CS__REST_IDENTIFIER = eINSTANCE.getCollectionTemplateCS_RestIdentifier();
+		EAttribute COLLECTION_TEMPLATE_CS__REST_IDENTIFIER = eINSTANCE.getCollectionTemplateCS_RestIdentifier();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.DefaultValueCSImpl <em>Default Value CS</em>}' class.
@@ -3152,6 +3150,16 @@ public interface QVTrelationCSTPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DOMAIN_PATTERN_CS__TEMPLATE = eINSTANCE.getDomainPatternCS_Template();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.ElementTemplateCSImpl <em>Element Template CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtrelationcst.impl.ElementTemplateCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtrelationcst.impl.QVTrelationCSTPackageImpl#getElementTemplateCS()
+		 * @generated
+		 */
+		EClass ELEMENT_TEMPLATE_CS = eINSTANCE.getElementTemplateCS();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.KeyDeclCSImpl <em>Key Decl CS</em>}' class.
