@@ -18,39 +18,38 @@ package org.eclipse.qvtd.xtext.qvtrelationcst;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Where CS</b></em>'.
+ * A representation of the model object '<em><b>Pattern CS</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.WhereCS#getExpr <em>Expr</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS#getPredicates <em>Predicates</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getWhereCS()
+ * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getPatternCS()
  * @model
  * @generated
  */
-public interface WhereCS extends ModelElementCS {
+public interface PatternCS extends ModelElementCS {
 	/**
-	 * Returns the value of the '<em><b>Expr</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS}.
+	 * Returns the value of the '<em><b>Predicates</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Expr</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Predicates</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expr</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getWhereCS_Expr()
+	 * @return the value of the '<em>Predicates</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getPatternCS_Predicates()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<ExpCS> getExpr();
+	EList<PredicateCS> getPredicates();
 
-} // WhereCS
+} // PatternCS

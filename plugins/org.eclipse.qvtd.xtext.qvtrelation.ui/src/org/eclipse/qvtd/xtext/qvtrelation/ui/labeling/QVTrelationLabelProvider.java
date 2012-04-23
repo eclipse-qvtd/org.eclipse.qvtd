@@ -4,8 +4,18 @@
 package org.eclipse.qvtd.xtext.qvtrelation.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider; 
- 
+import org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling.EssentialOCLLabelProvider;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
+import org.eclipse.qvtd.pivot.qvtrelation.Key;
+import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
+import org.eclipse.qvtd.pivot.qvtrelation.Relation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+
 import com.google.inject.Inject;
 
 /**
@@ -13,11 +23,55 @@ import com.google.inject.Inject;
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class QVTrelationLabelProvider extends DefaultEObjectLabelProvider {
+public class QVTrelationLabelProvider extends EssentialOCLLabelProvider {
 
 	@Inject
 	public QVTrelationLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
+	}
+
+	protected String image(DomainPattern ele) {
+		return "DomainPattern.gif";
+	}
+
+	protected String image(Key ele) {
+		return "Key.gif";
+	}
+
+	protected String image(OppositePropertyCallExp ele) {
+		return "OppositePropertyCallExp.gif";
+	}
+
+	protected String image(Predicate ele) {
+		return "When.gif";							// FIXME
+	}
+
+	protected String image(Relation ele) {
+		return "Relation.gif";
+	}
+
+	protected String image(RelationCallExp ele) {
+		return "RelationCallExp.gif";
+	}
+
+	protected String image(RelationDomain ele) {
+		return "RelationDomain.gif";
+	}
+
+	protected String image(RelationDomainAssignment ele) {
+		return "RelationDomainAssignment.gif";
+	}
+
+	protected String image(RelationImplementation ele) {
+		return "RelationImplementation.gif";
+	}
+
+	protected String image(RelationalTransformation ele) {
+		return "RelationalTransformation.gif";
+	}
+
+	protected String text(RelationalTransformation ele) {
+		return ele.getName();
 	}
 
 /*

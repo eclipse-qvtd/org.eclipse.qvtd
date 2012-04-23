@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS#getPathName <em>Path Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS#getPropertyId <em>Property Id</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS#getPropertyIds <em>Property Ids</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS#getClassId <em>Class Id</em>}</li>
  * </ul>
  * </p>
@@ -67,20 +67,20 @@ public interface KeyDeclCS extends ModelElementCS {
 	void setPathName(PathNameCS value);
 
 	/**
-	 * Returns the value of the '<em><b>Property Id</b></em>' reference list.
+	 * Returns the value of the '<em><b>Property Ids</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Property}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Property Id</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Property Ids</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Property Id</em>' reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getKeyDeclCS_PropertyId()
+	 * @return the value of the '<em>Property Ids</em>' reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getKeyDeclCS_PropertyIds()
 	 * @model
 	 * @generated
 	 */
-	EList<Property> getPropertyId();
+	EList<Property> getPropertyIds();
 
 	/**
 	 * Returns the value of the '<em><b>Class Id</b></em>' reference.

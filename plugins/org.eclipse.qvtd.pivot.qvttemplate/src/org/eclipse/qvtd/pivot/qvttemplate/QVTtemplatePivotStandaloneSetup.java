@@ -21,7 +21,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePivotStandaloneSetup;
-import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
+import org.eclipse.qvtd.pivot.qvttemplate.scoping.QVTtemplatePivotScoping;
+import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateSaver;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -41,7 +42,8 @@ public class QVTtemplatePivotStandaloneSetup //implements ISetup
 
 	public static void init() {
 		QVTbasePivotStandaloneSetup.doSetup();
-//		QVTtemplatePivotScoping.init();
+		QVTtemplateSaver.FACTORY.getClass();
+		QVTtemplatePivotScoping.init();
 	}
 	
 	/**

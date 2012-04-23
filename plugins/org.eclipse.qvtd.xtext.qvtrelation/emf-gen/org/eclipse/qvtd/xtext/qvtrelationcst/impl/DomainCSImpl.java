@@ -31,8 +31,8 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
-import org.eclipse.qvtd.xtext.qvtrelationcst.TemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
 
 /**
@@ -46,8 +46,8 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.DomainCSImpl#isEnforce <em>Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.DomainCSImpl#getModelId <em>Model Id</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.DomainCSImpl#isReplace <em>Replace</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.DomainCSImpl#getTemplate <em>Template</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.DomainCSImpl#getDefaultValue <em>Default Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.DomainCSImpl#getPattern <em>Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.DomainCSImpl#getDefaultValues <em>Default Values</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.DomainCSImpl#getImplementedBy <em>Implemented By</em>}</li>
  * </ul>
  * </p>
@@ -126,24 +126,24 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	protected boolean replace = REPLACE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTemplate() <em>Template</em>}' containment reference.
+	 * The cached value of the '{@link #getPattern() <em>Pattern</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTemplate()
+	 * @see #getPattern()
 	 * @generated
 	 * @ordered
 	 */
-	protected TemplateCS template;
+	protected DomainPatternCS pattern;
 
 	/**
-	 * The cached value of the '{@link #getDefaultValue() <em>Default Value</em>}' containment reference list.
+	 * The cached value of the '{@link #getDefaultValues() <em>Default Values</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDefaultValue()
+	 * @see #getDefaultValues()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DefaultValueCS> defaultValue;
+	protected EList<DefaultValueCS> defaultValues;
 
 	/**
 	 * The cached value of the '{@link #getImplementedBy() <em>Implemented By</em>}' containment reference.
@@ -280,8 +280,8 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TemplateCS getTemplate() {
-		return template;
+	public DomainPatternCS getPattern() {
+		return pattern;
 	}
 
 	/**
@@ -289,11 +289,11 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTemplate(TemplateCS newTemplate, NotificationChain msgs) {
-		TemplateCS oldTemplate = template;
-		template = newTemplate;
+	public NotificationChain basicSetPattern(DomainPatternCS newPattern, NotificationChain msgs) {
+		DomainPatternCS oldPattern = pattern;
+		pattern = newPattern;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.DOMAIN_CS__TEMPLATE, oldTemplate, newTemplate);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.DOMAIN_CS__PATTERN, oldPattern, newPattern);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -304,18 +304,18 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTemplate(TemplateCS newTemplate) {
-		if (newTemplate != template) {
+	public void setPattern(DomainPatternCS newPattern) {
+		if (newPattern != pattern) {
 			NotificationChain msgs = null;
-			if (template != null)
-				msgs = ((InternalEObject)template).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.DOMAIN_CS__TEMPLATE, null, msgs);
-			if (newTemplate != null)
-				msgs = ((InternalEObject)newTemplate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.DOMAIN_CS__TEMPLATE, null, msgs);
-			msgs = basicSetTemplate(newTemplate, msgs);
+			if (pattern != null)
+				msgs = ((InternalEObject)pattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.DOMAIN_CS__PATTERN, null, msgs);
+			if (newPattern != null)
+				msgs = ((InternalEObject)newPattern).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.DOMAIN_CS__PATTERN, null, msgs);
+			msgs = basicSetPattern(newPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.DOMAIN_CS__TEMPLATE, newTemplate, newTemplate));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.DOMAIN_CS__PATTERN, newPattern, newPattern));
 	}
 
 	/**
@@ -323,11 +323,11 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DefaultValueCS> getDefaultValue() {
-		if (defaultValue == null) {
-			defaultValue = new EObjectContainmentEList<DefaultValueCS>(DefaultValueCS.class, this, QVTrelationCSTPackage.DOMAIN_CS__DEFAULT_VALUE);
+	public EList<DefaultValueCS> getDefaultValues() {
+		if (defaultValues == null) {
+			defaultValues = new EObjectContainmentEList<DefaultValueCS>(DefaultValueCS.class, this, QVTrelationCSTPackage.DOMAIN_CS__DEFAULT_VALUES);
 		}
-		return defaultValue;
+		return defaultValues;
 	}
 
 	/**
@@ -381,10 +381,10 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.DOMAIN_CS__TEMPLATE:
-				return basicSetTemplate(null, msgs);
-			case QVTrelationCSTPackage.DOMAIN_CS__DEFAULT_VALUE:
-				return ((InternalEList<?>)getDefaultValue()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSTPackage.DOMAIN_CS__PATTERN:
+				return basicSetPattern(null, msgs);
+			case QVTrelationCSTPackage.DOMAIN_CS__DEFAULT_VALUES:
+				return ((InternalEList<?>)getDefaultValues()).basicRemove(otherEnd, msgs);
 			case QVTrelationCSTPackage.DOMAIN_CS__IMPLEMENTED_BY:
 				return basicSetImplementedBy(null, msgs);
 		}
@@ -408,10 +408,10 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 				return basicGetModelId();
 			case QVTrelationCSTPackage.DOMAIN_CS__REPLACE:
 				return isReplace();
-			case QVTrelationCSTPackage.DOMAIN_CS__TEMPLATE:
-				return getTemplate();
-			case QVTrelationCSTPackage.DOMAIN_CS__DEFAULT_VALUE:
-				return getDefaultValue();
+			case QVTrelationCSTPackage.DOMAIN_CS__PATTERN:
+				return getPattern();
+			case QVTrelationCSTPackage.DOMAIN_CS__DEFAULT_VALUES:
+				return getDefaultValues();
 			case QVTrelationCSTPackage.DOMAIN_CS__IMPLEMENTED_BY:
 				return getImplementedBy();
 		}
@@ -439,12 +439,12 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 			case QVTrelationCSTPackage.DOMAIN_CS__REPLACE:
 				setReplace((Boolean)newValue);
 				return;
-			case QVTrelationCSTPackage.DOMAIN_CS__TEMPLATE:
-				setTemplate((TemplateCS)newValue);
+			case QVTrelationCSTPackage.DOMAIN_CS__PATTERN:
+				setPattern((DomainPatternCS)newValue);
 				return;
-			case QVTrelationCSTPackage.DOMAIN_CS__DEFAULT_VALUE:
-				getDefaultValue().clear();
-				getDefaultValue().addAll((Collection<? extends DefaultValueCS>)newValue);
+			case QVTrelationCSTPackage.DOMAIN_CS__DEFAULT_VALUES:
+				getDefaultValues().clear();
+				getDefaultValues().addAll((Collection<? extends DefaultValueCS>)newValue);
 				return;
 			case QVTrelationCSTPackage.DOMAIN_CS__IMPLEMENTED_BY:
 				setImplementedBy((ExpCS)newValue);
@@ -473,11 +473,11 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 			case QVTrelationCSTPackage.DOMAIN_CS__REPLACE:
 				setReplace(REPLACE_EDEFAULT);
 				return;
-			case QVTrelationCSTPackage.DOMAIN_CS__TEMPLATE:
-				setTemplate((TemplateCS)null);
+			case QVTrelationCSTPackage.DOMAIN_CS__PATTERN:
+				setPattern((DomainPatternCS)null);
 				return;
-			case QVTrelationCSTPackage.DOMAIN_CS__DEFAULT_VALUE:
-				getDefaultValue().clear();
+			case QVTrelationCSTPackage.DOMAIN_CS__DEFAULT_VALUES:
+				getDefaultValues().clear();
 				return;
 			case QVTrelationCSTPackage.DOMAIN_CS__IMPLEMENTED_BY:
 				setImplementedBy((ExpCS)null);
@@ -502,10 +502,10 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 				return modelId != null;
 			case QVTrelationCSTPackage.DOMAIN_CS__REPLACE:
 				return replace != REPLACE_EDEFAULT;
-			case QVTrelationCSTPackage.DOMAIN_CS__TEMPLATE:
-				return template != null;
-			case QVTrelationCSTPackage.DOMAIN_CS__DEFAULT_VALUE:
-				return defaultValue != null && !defaultValue.isEmpty();
+			case QVTrelationCSTPackage.DOMAIN_CS__PATTERN:
+				return pattern != null;
+			case QVTrelationCSTPackage.DOMAIN_CS__DEFAULT_VALUES:
+				return defaultValues != null && !defaultValues.isEmpty();
 			case QVTrelationCSTPackage.DOMAIN_CS__IMPLEMENTED_BY:
 				return implementedBy != null;
 		}

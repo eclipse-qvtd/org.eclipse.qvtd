@@ -4,8 +4,6 @@
 /empty.reference.qvtrelation
 /expressions.qvtr
 /expressions.reference.eqvtrelation
-/hstmMM.emof
-/hstmtostm.qvtr
 /hstmtostm.reference.eqvtrelation
 /Keys.reference.eqvtrelation
 /KeysValidation.reference.eqvtrelation
@@ -26,7 +24,6 @@
 /SeqToStm.reference.eqvtrelation
 /SeqToStm.reference.qvtrelation
 /StmcMM.xml
-/stmMM.emof
 /test.modelregistry
 /umlMM.emof
 /UmlToRdbms.qvtr

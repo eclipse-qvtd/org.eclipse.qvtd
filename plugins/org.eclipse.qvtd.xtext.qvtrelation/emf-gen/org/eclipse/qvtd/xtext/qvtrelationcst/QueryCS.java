@@ -17,10 +17,9 @@
 package org.eclipse.qvtd.xtext.qvtrelationcst;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.pivot.util.Nameable;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 
 /**
@@ -31,59 +30,31 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getPathName <em>Path Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getInputParamDeclaration <em>Input Param Declaration</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getInputParamDeclarations <em>Input Param Declarations</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getOclExpression <em>Ocl Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getQueryCS()
- * @model superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS org.eclipse.ocl.examples.pivot.Nameable"
+ * @model
  * @generated
  */
-public interface QueryCS extends ModelElementCS, Nameable {
+public interface QueryCS extends TypedElementCS {
 	/**
-	 * Returns the value of the '<em><b>Path Name</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Path Name</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Path Name</em>' containment reference.
-	 * @see #setPathName(PathNameCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getQueryCS_PathName()
-	 * @model containment="true"
-	 * @generated
-	 */
-	PathNameCS getPathName();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getPathName <em>Path Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Path Name</em>' containment reference.
-	 * @see #getPathName()
-	 * @generated
-	 */
-	void setPathName(PathNameCS value);
-
-	/**
-	 * Returns the value of the '<em><b>Input Param Declaration</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Input Param Declarations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcst.ParamDeclarationCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Input Param Declaration</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Input Param Declarations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Input Param Declaration</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getQueryCS_InputParamDeclaration()
+	 * @return the value of the '<em>Input Param Declarations</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getQueryCS_InputParamDeclarations()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ParamDeclarationCS> getInputParamDeclaration();
+	EList<ParamDeclarationCS> getInputParamDeclarations();
 
 	/**
 	 * Returns the value of the '<em><b>Ocl Expression</b></em>' containment reference.
@@ -110,31 +81,5 @@ public interface QueryCS extends ModelElementCS, Nameable {
 	 * @generated
 	 */
 	void setOclExpression(ExpCS value);
-
-	/**
-	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' containment reference.
-	 * @see #setType(TypedTypeRefCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getQueryCS_Type()
-	 * @model containment="true"
-	 * @generated
-	 */
-	TypedTypeRefCS getType();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getType <em>Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' containment reference.
-	 * @see #getType()
-	 * @generated
-	 */
-	void setType(TypedTypeRefCS value);
 
 } // QueryCS

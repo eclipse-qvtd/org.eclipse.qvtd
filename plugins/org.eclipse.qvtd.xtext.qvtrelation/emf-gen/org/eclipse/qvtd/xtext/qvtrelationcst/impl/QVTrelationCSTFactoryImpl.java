@@ -21,14 +21,18 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.qvtd.xtext.qvtrelationcst.*;
 import org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ModelDeclCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.PrimitiveTypeDomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTFactory;
@@ -39,8 +43,6 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.UnitCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtrelationcst.WhenCS;
-import org.eclipse.qvtd.xtext.qvtrelationcst.WhereCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -90,10 +92,13 @@ public class QVTrelationCSTFactoryImpl extends EFactoryImpl implements QVTrelati
 			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS: return createCollectionTemplateCS();
 			case QVTrelationCSTPackage.DEFAULT_VALUE_CS: return createDefaultValueCS();
 			case QVTrelationCSTPackage.DOMAIN_CS: return createDomainCS();
+			case QVTrelationCSTPackage.DOMAIN_PATTERN_CS: return createDomainPatternCS();
 			case QVTrelationCSTPackage.KEY_DECL_CS: return createKeyDeclCS();
 			case QVTrelationCSTPackage.MODEL_DECL_CS: return createModelDeclCS();
 			case QVTrelationCSTPackage.OBJECT_TEMPLATE_CS: return createObjectTemplateCS();
 			case QVTrelationCSTPackage.PARAM_DECLARATION_CS: return createParamDeclarationCS();
+			case QVTrelationCSTPackage.PATTERN_CS: return createPatternCS();
+			case QVTrelationCSTPackage.PREDICATE_CS: return createPredicateCS();
 			case QVTrelationCSTPackage.PRIMITIVE_TYPE_DOMAIN_CS: return createPrimitiveTypeDomainCS();
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS: return createPropertyTemplateCS();
 			case QVTrelationCSTPackage.QUERY_CS: return createQueryCS();
@@ -102,8 +107,7 @@ public class QVTrelationCSTFactoryImpl extends EFactoryImpl implements QVTrelati
 			case QVTrelationCSTPackage.TRANSFORMATION_CS: return createTransformationCS();
 			case QVTrelationCSTPackage.UNIT_CS: return createUnitCS();
 			case QVTrelationCSTPackage.VAR_DECLARATION_CS: return createVarDeclarationCS();
-			case QVTrelationCSTPackage.WHEN_CS: return createWhenCS();
-			case QVTrelationCSTPackage.WHERE_CS: return createWhereCS();
+			case QVTrelationCSTPackage.VAR_DECLARATION_ID_CS: return createVarDeclarationIdCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -154,6 +158,16 @@ public class QVTrelationCSTFactoryImpl extends EFactoryImpl implements QVTrelati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public DomainPatternCS createDomainPatternCS() {
+		DomainPatternCSImpl domainPatternCS = new DomainPatternCSImpl();
+		return domainPatternCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public KeyDeclCS createKeyDeclCS() {
 		KeyDeclCSImpl keyDeclCS = new KeyDeclCSImpl();
 		return keyDeclCS;
@@ -187,6 +201,26 @@ public class QVTrelationCSTFactoryImpl extends EFactoryImpl implements QVTrelati
 	public ParamDeclarationCS createParamDeclarationCS() {
 		ParamDeclarationCSImpl paramDeclarationCS = new ParamDeclarationCSImpl();
 		return paramDeclarationCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PatternCS createPatternCS() {
+		PatternCSImpl patternCS = new PatternCSImpl();
+		return patternCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PredicateCS createPredicateCS() {
+		PredicateCSImpl predicateCS = new PredicateCSImpl();
+		return predicateCS;
 	}
 
 	/**
@@ -274,19 +308,9 @@ public class QVTrelationCSTFactoryImpl extends EFactoryImpl implements QVTrelati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WhenCS createWhenCS() {
-		WhenCSImpl whenCS = new WhenCSImpl();
-		return whenCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public WhereCS createWhereCS() {
-		WhereCSImpl whereCS = new WhereCSImpl();
-		return whereCS;
+	public VarDeclarationIdCS createVarDeclarationIdCS() {
+		VarDeclarationIdCSImpl varDeclarationIdCS = new VarDeclarationIdCSImpl();
+		return varDeclarationIdCS;
 	}
 
 	/**

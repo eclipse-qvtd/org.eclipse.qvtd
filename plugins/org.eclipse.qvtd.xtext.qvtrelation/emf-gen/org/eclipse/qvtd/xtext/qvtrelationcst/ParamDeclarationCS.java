@@ -16,6 +16,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelationcst;
 
+import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 
@@ -24,42 +25,11 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
  * A representation of the model object '<em><b>Param Declaration CS</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.ParamDeclarationCS#getType <em>Type</em>}</li>
- * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getParamDeclarationCS()
  * @model
  * @generated
  */
-public interface ParamDeclarationCS extends NamedElementCS {
-	/**
-	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' containment reference.
-	 * @see #setType(TypedRefCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getParamDeclarationCS_Type()
-	 * @model containment="true"
-	 * @generated
-	 */
-	TypedRefCS getType();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.ParamDeclarationCS#getType <em>Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' containment reference.
-	 * @see #getType()
-	 * @generated
-	 */
-	void setType(TypedRefCS value);
+public interface ParamDeclarationCS extends TypedElementCS {
 
 } // ParamDeclarationCS

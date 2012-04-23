@@ -32,8 +32,8 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS#isEnforce <em>Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS#getModelId <em>Model Id</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS#isReplace <em>Replace</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS#getTemplate <em>Template</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS#getDefaultValue <em>Default Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS#getPattern <em>Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS#getDefaultValues <em>Default Values</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS#getImplementedBy <em>Implemented By</em>}</li>
  * </ul>
  * </p>
@@ -148,46 +148,46 @@ public interface DomainCS extends AbstractDomainCS {
 	void setReplace(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Template</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Pattern</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Template</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Pattern</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Template</em>' containment reference.
-	 * @see #setTemplate(TemplateCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getDomainCS_Template()
+	 * @return the value of the '<em>Pattern</em>' containment reference.
+	 * @see #setPattern(DomainPatternCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getDomainCS_Pattern()
 	 * @model containment="true"
 	 * @generated
 	 */
-	TemplateCS getTemplate();
+	DomainPatternCS getPattern();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS#getTemplate <em>Template</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS#getPattern <em>Pattern</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Template</em>' containment reference.
-	 * @see #getTemplate()
+	 * @param value the new value of the '<em>Pattern</em>' containment reference.
+	 * @see #getPattern()
 	 * @generated
 	 */
-	void setTemplate(TemplateCS value);
+	void setPattern(DomainPatternCS value);
 
 	/**
-	 * Returns the value of the '<em><b>Default Value</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Default Values</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Default Value</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Default Values</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default Value</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getDomainCS_DefaultValue()
+	 * @return the value of the '<em>Default Values</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getDomainCS_DefaultValues()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<DefaultValueCS> getDefaultValue();
+	EList<DefaultValueCS> getDefaultValues();
 
 	/**
 	 * Returns the value of the '<em><b>Implemented By</b></em>' containment reference.

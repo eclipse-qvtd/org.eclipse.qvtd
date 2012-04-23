@@ -33,4 +33,8 @@ public class LoadTests extends LoadTestCase
 	public void testLoad_Keys_qvtr() throws IOException, InterruptedException {
 		doLoad_Concrete("Keys", "qvtr");
 	}	
+
+	public void testLoad_hstmtostm_qvtr() throws IOException, InterruptedException {
+		doLoad_Concrete("hstmtostm", "qvtr");
+	}	
 }

@@ -22,10 +22,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
@@ -37,6 +39,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.PropertyTemplateCSImpl#getObjectTemplate <em>Object Template</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.PropertyTemplateCSImpl#getPropertyId <em>Property Id</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.PropertyTemplateCSImpl#getOclExpression <em>Ocl Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.PropertyTemplateCSImpl#isOpposite <em>Opposite</em>}</li>
@@ -103,6 +106,47 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	@Override
 	protected EClass eStaticClass() {
 		return QVTrelationCSTPackage.Literals.PROPERTY_TEMPLATE_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ObjectTemplateCS getObjectTemplate() {
+		if (eContainerFeatureID() != QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE) return null;
+		return (ObjectTemplateCS)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetObjectTemplate(ObjectTemplateCS newObjectTemplate, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newObjectTemplate, QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setObjectTemplate(ObjectTemplateCS newObjectTemplate) {
+		if (newObjectTemplate != eInternalContainer() || (eContainerFeatureID() != QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE && newObjectTemplate != null)) {
+			if (EcoreUtil.isAncestor(this, newObjectTemplate))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newObjectTemplate != null)
+				msgs = ((InternalEObject)newObjectTemplate).eInverseAdd(this, QVTrelationCSTPackage.OBJECT_TEMPLATE_CS__PROPERTY_TEMPLATES, ObjectTemplateCS.class, msgs);
+			msgs = basicSetObjectTemplate(newObjectTemplate, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE, newObjectTemplate, newObjectTemplate));
 	}
 
 	/**
@@ -213,8 +257,26 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetObjectTemplate((ObjectTemplateCS)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
+				return basicSetObjectTemplate(null, msgs);
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OCL_EXPRESSION:
 				return basicSetOclExpression(null, msgs);
 		}
@@ -227,8 +289,24 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
+				return eInternalContainer().eInverseRemove(this, QVTrelationCSTPackage.OBJECT_TEMPLATE_CS__PROPERTY_TEMPLATES, ObjectTemplateCS.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
+				return getObjectTemplate();
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				if (resolve) return getPropertyId();
 				return basicGetPropertyId();
@@ -248,6 +326,9 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
+				setObjectTemplate((ObjectTemplateCS)newValue);
+				return;
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				setPropertyId((Property)newValue);
 				return;
@@ -269,6 +350,9 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
+				setObjectTemplate((ObjectTemplateCS)null);
+				return;
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				setPropertyId((Property)null);
 				return;
@@ -290,6 +374,8 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
+				return getObjectTemplate() != null;
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				return propertyId != null;
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OCL_EXPRESSION:

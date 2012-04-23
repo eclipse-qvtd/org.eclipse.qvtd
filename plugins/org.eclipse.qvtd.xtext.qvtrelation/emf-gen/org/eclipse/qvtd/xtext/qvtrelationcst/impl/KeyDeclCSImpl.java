@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -42,7 +41,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.KeyDeclCSImpl#getPathName <em>Path Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.KeyDeclCSImpl#getPropertyId <em>Property Id</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.KeyDeclCSImpl#getPropertyIds <em>Property Ids</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.KeyDeclCSImpl#getClassId <em>Class Id</em>}</li>
  * </ul>
  * </p>
@@ -61,14 +60,14 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	protected PathNameCS pathName;
 
 	/**
-	 * The cached value of the '{@link #getPropertyId() <em>Property Id</em>}' reference list.
+	 * The cached value of the '{@link #getPropertyIds() <em>Property Ids</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPropertyId()
+	 * @see #getPropertyIds()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Property> propertyId;
+	protected EList<Property> propertyIds;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -137,11 +136,11 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Property> getPropertyId() {
-		if (propertyId == null) {
-			propertyId = new EObjectResolvingEList<Property>(Property.class, this, QVTrelationCSTPackage.KEY_DECL_CS__PROPERTY_ID);
+	public EList<Property> getPropertyIds() {
+		if (propertyIds == null) {
+			propertyIds = new EObjectResolvingEList<Property>(Property.class, this, QVTrelationCSTPackage.KEY_DECL_CS__PROPERTY_IDS);
 		}
-		return propertyId;
+		return propertyIds;
 	}
 
 	/**
@@ -168,8 +167,8 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 		switch (featureID) {
 			case QVTrelationCSTPackage.KEY_DECL_CS__PATH_NAME:
 				return getPathName();
-			case QVTrelationCSTPackage.KEY_DECL_CS__PROPERTY_ID:
-				return getPropertyId();
+			case QVTrelationCSTPackage.KEY_DECL_CS__PROPERTY_IDS:
+				return getPropertyIds();
 			case QVTrelationCSTPackage.KEY_DECL_CS__CLASS_ID:
 				return getClassId();
 		}
@@ -188,9 +187,9 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 			case QVTrelationCSTPackage.KEY_DECL_CS__PATH_NAME:
 				setPathName((PathNameCS)newValue);
 				return;
-			case QVTrelationCSTPackage.KEY_DECL_CS__PROPERTY_ID:
-				getPropertyId().clear();
-				getPropertyId().addAll((Collection<? extends Property>)newValue);
+			case QVTrelationCSTPackage.KEY_DECL_CS__PROPERTY_IDS:
+				getPropertyIds().clear();
+				getPropertyIds().addAll((Collection<? extends Property>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -207,8 +206,8 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 			case QVTrelationCSTPackage.KEY_DECL_CS__PATH_NAME:
 				setPathName((PathNameCS)null);
 				return;
-			case QVTrelationCSTPackage.KEY_DECL_CS__PROPERTY_ID:
-				getPropertyId().clear();
+			case QVTrelationCSTPackage.KEY_DECL_CS__PROPERTY_IDS:
+				getPropertyIds().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -224,8 +223,8 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 		switch (featureID) {
 			case QVTrelationCSTPackage.KEY_DECL_CS__PATH_NAME:
 				return pathName != null;
-			case QVTrelationCSTPackage.KEY_DECL_CS__PROPERTY_ID:
-				return propertyId != null && !propertyId.isEmpty();
+			case QVTrelationCSTPackage.KEY_DECL_CS__PROPERTY_IDS:
+				return propertyIds != null && !propertyIds.isEmpty();
 			case QVTrelationCSTPackage.KEY_DECL_CS__CLASS_ID:
 				return getClassId() != null;
 		}

@@ -61,6 +61,10 @@ public abstract class AbstractNullQVTrelationCSVisitor<R, C>
 		return null;
 	}
 
+	public R visitDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS object) {
+		return null;
+	}
+
 	public R visitKeyDeclCS(org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS object) {
 		return null;
 	}
@@ -74,6 +78,14 @@ public abstract class AbstractNullQVTrelationCSVisitor<R, C>
 	}
 
 	public R visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcst.ParamDeclarationCS object) {
+		return null;
+	}
+
+	public R visitPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS object) {
+		return null;
+	}
+
+	public R visitPredicateCS(org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS object) {
 		return null;
 	}
 
@@ -117,11 +129,7 @@ public abstract class AbstractNullQVTrelationCSVisitor<R, C>
 		return null;
 	}
 
-	public R visitWhenCS(org.eclipse.qvtd.xtext.qvtrelationcst.WhenCS object) {
-		return null;
-	}
-
-	public R visitWhereCS(org.eclipse.qvtd.xtext.qvtrelationcst.WhereCS object) {
+	public R visitVarDeclarationIdCS(org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS object) {
 		return null;
 	}
 }

@@ -50,6 +50,10 @@ public class AbstractQVTrelationLeft2RightVisitor extends EssentialOCLLeft2Right
 		return visitAbstractDomainCS(object);
 	}
 
+	public Element visitDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS object) {
+		return visitModelElementCS(object);
+	}
+
 	public Element visitKeyDeclCS(org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS object) {
 		return visitModelElementCS(object);
 	}
@@ -63,7 +67,15 @@ public class AbstractQVTrelationLeft2RightVisitor extends EssentialOCLLeft2Right
 	}
 
 	public Element visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcst.ParamDeclarationCS object) {
-		return visitNamedElementCS(object);
+		return visitTypedElementCS(object);
+	}
+
+	public Element visitPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS object) {
+		return visitModelElementCS(object);
+	}
+
+	public Element visitPredicateCS(org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS object) {
+		return visitModelElementCS(object);
 	}
 
 	public Element visitPrimitiveTypeDomainCS(org.eclipse.qvtd.xtext.qvtrelationcst.PrimitiveTypeDomainCS object) {
@@ -75,7 +87,7 @@ public class AbstractQVTrelationLeft2RightVisitor extends EssentialOCLLeft2Right
 	}
 
 	public Element visitQueryCS(org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS object) {
-		return visitModelElementCS(object);
+		return visitTypedElementCS(object);
 	}
 
 	public Element visitRelationCS(org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS object) {
@@ -87,7 +99,7 @@ public class AbstractQVTrelationLeft2RightVisitor extends EssentialOCLLeft2Right
 	}
 
 	public Element visitTemplateVariableCS(org.eclipse.qvtd.xtext.qvtrelationcst.TemplateVariableCS object) {
-		return visitModelElementCS(object);
+		return visitNamedElementCS(object);
 	}
 
 	public Element visitTopLevelCS(org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS object) {
@@ -106,11 +118,7 @@ public class AbstractQVTrelationLeft2RightVisitor extends EssentialOCLLeft2Right
 		return visitModelElementCS(object);
 	}
 
-	public Element visitWhenCS(org.eclipse.qvtd.xtext.qvtrelationcst.WhenCS object) {
-		return visitModelElementCS(object);
-	}
-
-	public Element visitWhereCS(org.eclipse.qvtd.xtext.qvtrelationcst.WhereCS object) {
-		return visitModelElementCS(object);
+	public Element visitVarDeclarationIdCS(org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS object) {
+		return visitNamedElementCS(object);
 	}
 }

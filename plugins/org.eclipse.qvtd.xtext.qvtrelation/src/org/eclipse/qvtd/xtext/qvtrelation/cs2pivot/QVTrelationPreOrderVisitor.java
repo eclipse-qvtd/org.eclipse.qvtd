@@ -16,11 +16,79 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelation.cs2pivot;
 
+import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.cs2pivot.BasicContinuation;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
+import org.eclipse.ocl.examples.xtext.base.cs2pivot.PivotDependency;
+import org.eclipse.ocl.examples.xtext.base.cs2pivot.SingleContinuation;
+import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
+import org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS;
 
 public class QVTrelationPreOrderVisitor extends AbstractQVTrelationPreOrderVisitor
 {	
+	public static class ObjectTemplateCompletion extends SingleContinuation<ObjectTemplateCS>
+	{
+		public ObjectTemplateCompletion(CS2PivotConversion context, ObjectTemplateCS csElement) {
+			super(context, null, null, csElement, new PivotDependency(csElement.getType()));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			ObjectTemplateExp pivotElement = PivotUtil.getPivot(ObjectTemplateExp.class, csElement);
+			if (pivotElement != null) {
+				org.eclipse.ocl.examples.pivot.Class type = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Class.class, csElement.getType());
+				pivotElement.setReferredClass(type);
+				pivotElement.setType(type);
+				Variable variable = pivotElement.getBindsTo();
+				if (variable != null) {
+					variable.setType(type);
+				}
+			}
+			return null;
+		}
+	}
+
+	public static class PropertyTemplateCompletion extends SingleContinuation<PropertyTemplateCS>
+	{
+		public PropertyTemplateCompletion(CS2PivotConversion context, PropertyTemplateCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public boolean canExecute() {
+			if (!super.canExecute()) {
+				return false;
+			}
+			ObjectTemplateExp pivotElement = PivotUtil.getPivot(ObjectTemplateExp.class, csElement.getObjectTemplate());
+			Type type = pivotElement.getType();
+			return type != null;
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			PropertyTemplateItem pivotElement = PivotUtil.getPivot(PropertyTemplateItem.class, csElement);
+			if (pivotElement != null) {
+				pivotElement.setReferredProperty(csElement.getPropertyId());
+			}
+			return null;
+		}
+	}
+
 	public QVTrelationPreOrderVisitor(CS2PivotConversion context) {
 		super(context);
+	}
+
+	public Continuation<?> visitObjectTemplateCS(ObjectTemplateCS csElement) {
+		return new ObjectTemplateCompletion(context, csElement);
+	}
+
+	@Override
+	public Continuation<?> visitPropertyTemplateCS(PropertyTemplateCS csElement) {
+		return new PropertyTemplateCompletion(context, csElement);
 	}
 }

@@ -18,26 +18,44 @@ package org.eclipse.qvtd.xtext.qvtrelationcst.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
-
 import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
-
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamespaceCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
-
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
-
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
-
 import org.eclipse.qvtd.xtext.qvtrelationcst.*;
+import org.eclipse.qvtd.xtext.qvtrelationcst.AbstractDomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.ModelDeclCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.PrimitiveTypeDomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
+import org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.TemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.TemplateVariableCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.UnitCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -126,7 +144,9 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTemplateCS(collectionTemplateCS);
 				if (result == null) result = caseTemplateVariableCS(collectionTemplateCS);
 				if (result == null) result = caseExpCS(collectionTemplateCS);
+				if (result == null) result = caseNamedElementCS(collectionTemplateCS);
 				if (result == null) result = caseModelElementCS(collectionTemplateCS);
+				if (result == null) result = caseNameable(collectionTemplateCS);
 				if (result == null) result = casePivotableElementCS(collectionTemplateCS);
 				if (result == null) result = caseElementCS(collectionTemplateCS);
 				if (result == null) result = casePivotable(collectionTemplateCS);
@@ -155,6 +175,17 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElementCS(domainCS);
 				if (result == null) result = casePivotable(domainCS);
 				if (result == null) result = caseVisitableCS(domainCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTrelationCSTPackage.DOMAIN_PATTERN_CS: {
+				DomainPatternCS domainPatternCS = (DomainPatternCS)theEObject;
+				T result = caseDomainPatternCS(domainPatternCS);
+				if (result == null) result = caseModelElementCS(domainPatternCS);
+				if (result == null) result = casePivotableElementCS(domainPatternCS);
+				if (result == null) result = caseElementCS(domainPatternCS);
+				if (result == null) result = casePivotable(domainPatternCS);
+				if (result == null) result = caseVisitableCS(domainPatternCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -188,7 +219,9 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTemplateCS(objectTemplateCS);
 				if (result == null) result = caseTemplateVariableCS(objectTemplateCS);
 				if (result == null) result = caseExpCS(objectTemplateCS);
+				if (result == null) result = caseNamedElementCS(objectTemplateCS);
 				if (result == null) result = caseModelElementCS(objectTemplateCS);
+				if (result == null) result = caseNameable(objectTemplateCS);
 				if (result == null) result = casePivotableElementCS(objectTemplateCS);
 				if (result == null) result = caseElementCS(objectTemplateCS);
 				if (result == null) result = casePivotable(objectTemplateCS);
@@ -199,6 +232,7 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 			case QVTrelationCSTPackage.PARAM_DECLARATION_CS: {
 				ParamDeclarationCS paramDeclarationCS = (ParamDeclarationCS)theEObject;
 				T result = caseParamDeclarationCS(paramDeclarationCS);
+				if (result == null) result = caseTypedElementCS(paramDeclarationCS);
 				if (result == null) result = caseNamedElementCS(paramDeclarationCS);
 				if (result == null) result = caseModelElementCS(paramDeclarationCS);
 				if (result == null) result = caseNameable(paramDeclarationCS);
@@ -209,11 +243,34 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTrelationCSTPackage.PATTERN_CS: {
+				PatternCS patternCS = (PatternCS)theEObject;
+				T result = casePatternCS(patternCS);
+				if (result == null) result = caseModelElementCS(patternCS);
+				if (result == null) result = casePivotableElementCS(patternCS);
+				if (result == null) result = caseElementCS(patternCS);
+				if (result == null) result = casePivotable(patternCS);
+				if (result == null) result = caseVisitableCS(patternCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTrelationCSTPackage.PREDICATE_CS: {
+				PredicateCS predicateCS = (PredicateCS)theEObject;
+				T result = casePredicateCS(predicateCS);
+				if (result == null) result = caseModelElementCS(predicateCS);
+				if (result == null) result = casePivotableElementCS(predicateCS);
+				if (result == null) result = caseElementCS(predicateCS);
+				if (result == null) result = casePivotable(predicateCS);
+				if (result == null) result = caseVisitableCS(predicateCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTrelationCSTPackage.PRIMITIVE_TYPE_DOMAIN_CS: {
 				PrimitiveTypeDomainCS primitiveTypeDomainCS = (PrimitiveTypeDomainCS)theEObject;
 				T result = casePrimitiveTypeDomainCS(primitiveTypeDomainCS);
 				if (result == null) result = caseTemplateVariableCS(primitiveTypeDomainCS);
 				if (result == null) result = caseAbstractDomainCS(primitiveTypeDomainCS);
+				if (result == null) result = caseNamedElementCS(primitiveTypeDomainCS);
 				if (result == null) result = caseModelElementCS(primitiveTypeDomainCS);
 				if (result == null) result = caseNameable(primitiveTypeDomainCS);
 				if (result == null) result = casePivotableElementCS(primitiveTypeDomainCS);
@@ -237,6 +294,8 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 			case QVTrelationCSTPackage.QUERY_CS: {
 				QueryCS queryCS = (QueryCS)theEObject;
 				T result = caseQueryCS(queryCS);
+				if (result == null) result = caseTypedElementCS(queryCS);
+				if (result == null) result = caseNamedElementCS(queryCS);
 				if (result == null) result = caseModelElementCS(queryCS);
 				if (result == null) result = caseNameable(queryCS);
 				if (result == null) result = casePivotableElementCS(queryCS);
@@ -264,7 +323,9 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 				T result = caseTemplateCS(templateCS);
 				if (result == null) result = caseTemplateVariableCS(templateCS);
 				if (result == null) result = caseExpCS(templateCS);
+				if (result == null) result = caseNamedElementCS(templateCS);
 				if (result == null) result = caseModelElementCS(templateCS);
+				if (result == null) result = caseNameable(templateCS);
 				if (result == null) result = casePivotableElementCS(templateCS);
 				if (result == null) result = caseElementCS(templateCS);
 				if (result == null) result = casePivotable(templateCS);
@@ -275,7 +336,9 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 			case QVTrelationCSTPackage.TEMPLATE_VARIABLE_CS: {
 				TemplateVariableCS templateVariableCS = (TemplateVariableCS)theEObject;
 				T result = caseTemplateVariableCS(templateVariableCS);
+				if (result == null) result = caseNamedElementCS(templateVariableCS);
 				if (result == null) result = caseModelElementCS(templateVariableCS);
+				if (result == null) result = caseNameable(templateVariableCS);
 				if (result == null) result = casePivotableElementCS(templateVariableCS);
 				if (result == null) result = caseElementCS(templateVariableCS);
 				if (result == null) result = casePivotable(templateVariableCS);
@@ -337,25 +400,16 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSTPackage.WHEN_CS: {
-				WhenCS whenCS = (WhenCS)theEObject;
-				T result = caseWhenCS(whenCS);
-				if (result == null) result = caseModelElementCS(whenCS);
-				if (result == null) result = casePivotableElementCS(whenCS);
-				if (result == null) result = caseElementCS(whenCS);
-				if (result == null) result = casePivotable(whenCS);
-				if (result == null) result = caseVisitableCS(whenCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTrelationCSTPackage.WHERE_CS: {
-				WhereCS whereCS = (WhereCS)theEObject;
-				T result = caseWhereCS(whereCS);
-				if (result == null) result = caseModelElementCS(whereCS);
-				if (result == null) result = casePivotableElementCS(whereCS);
-				if (result == null) result = caseElementCS(whereCS);
-				if (result == null) result = casePivotable(whereCS);
-				if (result == null) result = caseVisitableCS(whereCS);
+			case QVTrelationCSTPackage.VAR_DECLARATION_ID_CS: {
+				VarDeclarationIdCS varDeclarationIdCS = (VarDeclarationIdCS)theEObject;
+				T result = caseVarDeclarationIdCS(varDeclarationIdCS);
+				if (result == null) result = caseNamedElementCS(varDeclarationIdCS);
+				if (result == null) result = caseModelElementCS(varDeclarationIdCS);
+				if (result == null) result = caseNameable(varDeclarationIdCS);
+				if (result == null) result = casePivotableElementCS(varDeclarationIdCS);
+				if (result == null) result = caseElementCS(varDeclarationIdCS);
+				if (result == null) result = casePivotable(varDeclarationIdCS);
+				if (result == null) result = caseVisitableCS(varDeclarationIdCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -439,6 +493,21 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Domain Pattern CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Domain Pattern CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDomainPatternCS(DomainPatternCS object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Key Decl CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -495,6 +564,36 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseParamDeclarationCS(ParamDeclarationCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Pattern CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Pattern CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePatternCS(PatternCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Predicate CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Predicate CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePredicateCS(PredicateCS object) {
 		return null;
 	}
 
@@ -649,32 +748,17 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>When CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Var Declaration Id CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>When CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Var Declaration Id CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseWhenCS(WhenCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Where CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Where CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseWhereCS(WhereCS object) {
+	public T caseVarDeclarationIdCS(VarDeclarationIdCS object) {
 		return null;
 	}
 
@@ -795,6 +879,21 @@ public class QVTrelationCSTSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNamedElementCS(NamedElementCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Typed Element CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Typed Element CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypedElementCS(TypedElementCS object) {
 		return null;
 	}
 

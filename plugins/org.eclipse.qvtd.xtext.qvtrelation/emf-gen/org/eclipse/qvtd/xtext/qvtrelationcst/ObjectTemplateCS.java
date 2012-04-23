@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS#getPropertyTemplate <em>Property Template</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS#getPropertyTemplates <em>Property Templates</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,19 +36,21 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ObjectTemplateCS extends TemplateCS {
 	/**
-	 * Returns the value of the '<em><b>Property Template</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Property Templates</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS#getObjectTemplate <em>Object Template</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Property Template</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Property Templates</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Property Template</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getObjectTemplateCS_PropertyTemplate()
-	 * @model containment="true"
+	 * @return the value of the '<em>Property Templates</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getObjectTemplateCS_PropertyTemplates()
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS#getObjectTemplate
+	 * @model opposite="objectTemplate" containment="true"
 	 * @generated
 	 */
-	EList<PropertyTemplateCS> getPropertyTemplate();
+	EList<PropertyTemplateCS> getPropertyTemplates();
 
 } // ObjectTemplateCS

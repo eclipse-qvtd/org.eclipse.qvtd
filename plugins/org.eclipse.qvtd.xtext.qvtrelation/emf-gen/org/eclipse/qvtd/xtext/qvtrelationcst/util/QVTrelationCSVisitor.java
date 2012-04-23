@@ -34,10 +34,13 @@ public interface QVTrelationCSVisitor<R> extends org.eclipse.ocl.examples.xtext.
 	R visitCollectionTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS object);
 	R visitDefaultValueCS(org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS object);
 	R visitDomainCS(org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS object);
+	R visitDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS object);
 	R visitKeyDeclCS(org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS object);
 	R visitModelDeclCS(org.eclipse.qvtd.xtext.qvtrelationcst.ModelDeclCS object);
 	R visitObjectTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS object);
 	R visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcst.ParamDeclarationCS object);
+	R visitPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS object);
+	R visitPredicateCS(org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS object);
 	R visitPrimitiveTypeDomainCS(org.eclipse.qvtd.xtext.qvtrelationcst.PrimitiveTypeDomainCS object);
 	R visitPropertyTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS object);
 	R visitQueryCS(org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS object);
@@ -48,6 +51,5 @@ public interface QVTrelationCSVisitor<R> extends org.eclipse.ocl.examples.xtext.
 	R visitTransformationCS(org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS object);
 	R visitUnitCS(org.eclipse.qvtd.xtext.qvtrelationcst.UnitCS object);
 	R visitVarDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS object);
-	R visitWhenCS(org.eclipse.qvtd.xtext.qvtrelationcst.WhenCS object);
-	R visitWhereCS(org.eclipse.qvtd.xtext.qvtrelationcst.WhereCS object);
+	R visitVarDeclarationIdCS(org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS object);
 }

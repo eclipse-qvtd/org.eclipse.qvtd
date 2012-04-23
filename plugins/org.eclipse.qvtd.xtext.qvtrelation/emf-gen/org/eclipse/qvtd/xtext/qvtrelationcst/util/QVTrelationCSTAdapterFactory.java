@@ -18,28 +18,45 @@ package org.eclipse.qvtd.xtext.qvtrelationcst.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
-
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamespaceCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
-
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
-
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
-
 import org.eclipse.qvtd.xtext.qvtrelationcst.*;
+import org.eclipse.qvtd.xtext.qvtrelationcst.AbstractDomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.AnyElementCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.ModelDeclCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.PrimitiveTypeDomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
+import org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.TemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.TemplateVariableCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.UnitCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -118,6 +135,10 @@ public class QVTrelationCSTAdapterFactory extends AdapterFactoryImpl {
 				return createDomainCSAdapter();
 			}
 			@Override
+			public Adapter caseDomainPatternCS(DomainPatternCS object) {
+				return createDomainPatternCSAdapter();
+			}
+			@Override
 			public Adapter caseKeyDeclCS(KeyDeclCS object) {
 				return createKeyDeclCSAdapter();
 			}
@@ -132,6 +153,14 @@ public class QVTrelationCSTAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseParamDeclarationCS(ParamDeclarationCS object) {
 				return createParamDeclarationCSAdapter();
+			}
+			@Override
+			public Adapter casePatternCS(PatternCS object) {
+				return createPatternCSAdapter();
+			}
+			@Override
+			public Adapter casePredicateCS(PredicateCS object) {
+				return createPredicateCSAdapter();
 			}
 			@Override
 			public Adapter casePrimitiveTypeDomainCS(PrimitiveTypeDomainCS object) {
@@ -174,12 +203,8 @@ public class QVTrelationCSTAdapterFactory extends AdapterFactoryImpl {
 				return createVarDeclarationCSAdapter();
 			}
 			@Override
-			public Adapter caseWhenCS(WhenCS object) {
-				return createWhenCSAdapter();
-			}
-			@Override
-			public Adapter caseWhereCS(WhereCS object) {
-				return createWhereCSAdapter();
+			public Adapter caseVarDeclarationIdCS(VarDeclarationIdCS object) {
+				return createVarDeclarationIdCSAdapter();
 			}
 			@Override
 			public Adapter caseVisitableCS(VisitableCS object) {
@@ -212,6 +237,10 @@ public class QVTrelationCSTAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNamedElementCS(NamedElementCS object) {
 				return createNamedElementCSAdapter();
+			}
+			@Override
+			public Adapter caseTypedElementCS(TypedElementCS object) {
+				return createTypedElementCSAdapter();
 			}
 			@Override
 			public Adapter caseNamespaceCS(NamespaceCS object) {
@@ -320,6 +349,20 @@ public class QVTrelationCSTAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS <em>Domain Pattern CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS
+	 * @generated
+	 */
+	public Adapter createDomainPatternCSAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS <em>Key Decl CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -372,6 +415,34 @@ public class QVTrelationCSTAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParamDeclarationCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS <em>Pattern CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS
+	 * @generated
+	 */
+	public Adapter createPatternCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS <em>Predicate CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS
+	 * @generated
+	 */
+	public Adapter createPredicateCSAdapter() {
 		return null;
 	}
 
@@ -516,30 +587,16 @@ public class QVTrelationCSTAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.WhenCS <em>When CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS <em>Var Declaration Id CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.WhenCS
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS
 	 * @generated
 	 */
-	public Adapter createWhenCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.WhereCS <em>Where CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.WhereCS
-	 * @generated
-	 */
-	public Adapter createWhereCSAdapter() {
+	public Adapter createVarDeclarationIdCSAdapter() {
 		return null;
 	}
 
@@ -652,6 +709,20 @@ public class QVTrelationCSTAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedElementCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS <em>Typed Element CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS
+	 * @generated
+	 */
+	public Adapter createTypedElementCSAdapter() {
 		return null;
 	}
 

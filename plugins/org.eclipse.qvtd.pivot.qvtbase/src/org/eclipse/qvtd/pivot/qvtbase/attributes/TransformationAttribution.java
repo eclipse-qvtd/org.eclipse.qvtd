@@ -30,6 +30,8 @@ public class TransformationAttribution extends PackageAttribution
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
 		Transformation transformation = (Transformation)target;
 		environmentView.addNamedElements(transformation.getModelParameter());
+		environmentView.addNamedElements(transformation.getOwnedOperation());
+		environmentView.addNamedElements(transformation.getRule());
 		return super.computeLookup(target, environmentView, scopeView);
 	}
 }

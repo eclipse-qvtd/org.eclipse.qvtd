@@ -50,6 +50,10 @@ public class AbstractQVTrelationContainmentVisitor extends EssentialOCLContainme
 		return visitAbstractDomainCS(object);
 	}
 
+	public Continuation<?> visitDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS object) {
+		return visitModelElementCS(object);
+	}
+
 	public Continuation<?> visitKeyDeclCS(org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS object) {
 		return visitModelElementCS(object);
 	}
@@ -63,7 +67,15 @@ public class AbstractQVTrelationContainmentVisitor extends EssentialOCLContainme
 	}
 
 	public Continuation<?> visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcst.ParamDeclarationCS object) {
-		return visitNamedElementCS(object);
+		return visitTypedElementCS(object);
+	}
+
+	public Continuation<?> visitPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS object) {
+		return visitModelElementCS(object);
+	}
+
+	public Continuation<?> visitPredicateCS(org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS object) {
+		return visitModelElementCS(object);
 	}
 
 	public Continuation<?> visitPrimitiveTypeDomainCS(org.eclipse.qvtd.xtext.qvtrelationcst.PrimitiveTypeDomainCS object) {
@@ -75,7 +87,7 @@ public class AbstractQVTrelationContainmentVisitor extends EssentialOCLContainme
 	}
 
 	public Continuation<?> visitQueryCS(org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS object) {
-		return visitModelElementCS(object);
+		return visitTypedElementCS(object);
 	}
 
 	public Continuation<?> visitRelationCS(org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS object) {
@@ -87,7 +99,7 @@ public class AbstractQVTrelationContainmentVisitor extends EssentialOCLContainme
 	}
 
 	public Continuation<?> visitTemplateVariableCS(org.eclipse.qvtd.xtext.qvtrelationcst.TemplateVariableCS object) {
-		return visitModelElementCS(object);
+		return visitNamedElementCS(object);
 	}
 
 	public Continuation<?> visitTopLevelCS(org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS object) {
@@ -106,11 +118,7 @@ public class AbstractQVTrelationContainmentVisitor extends EssentialOCLContainme
 		return visitModelElementCS(object);
 	}
 
-	public Continuation<?> visitWhenCS(org.eclipse.qvtd.xtext.qvtrelationcst.WhenCS object) {
-		return visitModelElementCS(object);
-	}
-
-	public Continuation<?> visitWhereCS(org.eclipse.qvtd.xtext.qvtrelationcst.WhereCS object) {
-		return visitModelElementCS(object);
+	public Continuation<?> visitVarDeclarationIdCS(org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS object) {
+		return visitNamedElementCS(object);
 	}
 }

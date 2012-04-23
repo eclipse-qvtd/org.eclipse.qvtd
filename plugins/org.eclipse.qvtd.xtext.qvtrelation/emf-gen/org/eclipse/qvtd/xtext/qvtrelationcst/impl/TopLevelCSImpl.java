@@ -39,8 +39,8 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.TopLevelCSImpl#getImportClause <em>Import Clause</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.TopLevelCSImpl#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.TopLevelCSImpl#getImportClauses <em>Import Clauses</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.TopLevelCSImpl#getTransformations <em>Transformations</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,24 +48,24 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  */
 public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	/**
-	 * The cached value of the '{@link #getImportClause() <em>Import Clause</em>}' containment reference list.
+	 * The cached value of the '{@link #getImportClauses() <em>Import Clauses</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getImportClause()
+	 * @see #getImportClauses()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<UnitCS> importClause;
+	protected EList<UnitCS> importClauses;
 
 	/**
-	 * The cached value of the '{@link #getTransformation() <em>Transformation</em>}' containment reference list.
+	 * The cached value of the '{@link #getTransformations() <em>Transformations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTransformation()
+	 * @see #getTransformations()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TransformationCS> transformation;
+	protected EList<TransformationCS> transformations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -91,11 +91,11 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<UnitCS> getImportClause() {
-		if (importClause == null) {
-			importClause = new EObjectContainmentEList<UnitCS>(UnitCS.class, this, QVTrelationCSTPackage.TOP_LEVEL_CS__IMPORT_CLAUSE);
+	public EList<UnitCS> getImportClauses() {
+		if (importClauses == null) {
+			importClauses = new EObjectContainmentEList<UnitCS>(UnitCS.class, this, QVTrelationCSTPackage.TOP_LEVEL_CS__IMPORT_CLAUSES);
 		}
-		return importClause;
+		return importClauses;
 	}
 
 	/**
@@ -103,11 +103,11 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TransformationCS> getTransformation() {
-		if (transformation == null) {
-			transformation = new EObjectContainmentEList<TransformationCS>(TransformationCS.class, this, QVTrelationCSTPackage.TOP_LEVEL_CS__TRANSFORMATION);
+	public EList<TransformationCS> getTransformations() {
+		if (transformations == null) {
+			transformations = new EObjectContainmentEList<TransformationCS>(TransformationCS.class, this, QVTrelationCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS);
 		}
-		return transformation;
+		return transformations;
 	}
 
 	/**
@@ -118,10 +118,10 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.TOP_LEVEL_CS__IMPORT_CLAUSE:
-				return ((InternalEList<?>)getImportClause()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSTPackage.TOP_LEVEL_CS__TRANSFORMATION:
-				return ((InternalEList<?>)getTransformation()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSTPackage.TOP_LEVEL_CS__IMPORT_CLAUSES:
+				return ((InternalEList<?>)getImportClauses()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
+				return ((InternalEList<?>)getTransformations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -134,10 +134,10 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.TOP_LEVEL_CS__IMPORT_CLAUSE:
-				return getImportClause();
-			case QVTrelationCSTPackage.TOP_LEVEL_CS__TRANSFORMATION:
-				return getTransformation();
+			case QVTrelationCSTPackage.TOP_LEVEL_CS__IMPORT_CLAUSES:
+				return getImportClauses();
+			case QVTrelationCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
+				return getTransformations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -151,13 +151,13 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.TOP_LEVEL_CS__IMPORT_CLAUSE:
-				getImportClause().clear();
-				getImportClause().addAll((Collection<? extends UnitCS>)newValue);
+			case QVTrelationCSTPackage.TOP_LEVEL_CS__IMPORT_CLAUSES:
+				getImportClauses().clear();
+				getImportClauses().addAll((Collection<? extends UnitCS>)newValue);
 				return;
-			case QVTrelationCSTPackage.TOP_LEVEL_CS__TRANSFORMATION:
-				getTransformation().clear();
-				getTransformation().addAll((Collection<? extends TransformationCS>)newValue);
+			case QVTrelationCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
+				getTransformations().clear();
+				getTransformations().addAll((Collection<? extends TransformationCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -171,11 +171,11 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.TOP_LEVEL_CS__IMPORT_CLAUSE:
-				getImportClause().clear();
+			case QVTrelationCSTPackage.TOP_LEVEL_CS__IMPORT_CLAUSES:
+				getImportClauses().clear();
 				return;
-			case QVTrelationCSTPackage.TOP_LEVEL_CS__TRANSFORMATION:
-				getTransformation().clear();
+			case QVTrelationCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
+				getTransformations().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -189,10 +189,10 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.TOP_LEVEL_CS__IMPORT_CLAUSE:
-				return importClause != null && !importClause.isEmpty();
-			case QVTrelationCSTPackage.TOP_LEVEL_CS__TRANSFORMATION:
-				return transformation != null && !transformation.isEmpty();
+			case QVTrelationCSTPackage.TOP_LEVEL_CS__IMPORT_CLAUSES:
+				return importClauses != null && !importClauses.isEmpty();
+			case QVTrelationCSTPackage.TOP_LEVEL_CS__TRANSFORMATIONS:
+				return transformations != null && !transformations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

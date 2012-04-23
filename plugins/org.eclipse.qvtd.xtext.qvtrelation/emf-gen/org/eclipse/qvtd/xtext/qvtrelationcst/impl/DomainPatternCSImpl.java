@@ -16,51 +16,48 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelationcst.impl;
 
-import java.util.Collection;
-
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
-import org.eclipse.qvtd.xtext.qvtrelationcst.WhenCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.TemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>When CS</b></em>'.
+ * An implementation of the model object '<em><b>Domain Pattern CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.WhenCSImpl#getExpr <em>Expr</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.DomainPatternCSImpl#getTemplate <em>Template</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class WhenCSImpl extends ModelElementCSImpl implements WhenCS {
+public class DomainPatternCSImpl extends ModelElementCSImpl implements DomainPatternCS {
 	/**
-	 * The cached value of the '{@link #getExpr() <em>Expr</em>}' containment reference list.
+	 * The cached value of the '{@link #getTemplate() <em>Template</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpr()
+	 * @see #getTemplate()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ExpCS> expr;
+	protected TemplateCS template;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected WhenCSImpl() {
+	protected DomainPatternCSImpl() {
 		super();
 	}
 
@@ -71,7 +68,7 @@ public class WhenCSImpl extends ModelElementCSImpl implements WhenCS {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTrelationCSTPackage.Literals.WHEN_CS;
+		return QVTrelationCSTPackage.Literals.DOMAIN_PATTERN_CS;
 	}
 
 	/**
@@ -79,11 +76,42 @@ public class WhenCSImpl extends ModelElementCSImpl implements WhenCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ExpCS> getExpr() {
-		if (expr == null) {
-			expr = new EObjectContainmentEList<ExpCS>(ExpCS.class, this, QVTrelationCSTPackage.WHEN_CS__EXPR);
+	public TemplateCS getTemplate() {
+		return template;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTemplate(TemplateCS newTemplate, NotificationChain msgs) {
+		TemplateCS oldTemplate = template;
+		template = newTemplate;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.DOMAIN_PATTERN_CS__TEMPLATE, oldTemplate, newTemplate);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return expr;
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTemplate(TemplateCS newTemplate) {
+		if (newTemplate != template) {
+			NotificationChain msgs = null;
+			if (template != null)
+				msgs = ((InternalEObject)template).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.DOMAIN_PATTERN_CS__TEMPLATE, null, msgs);
+			if (newTemplate != null)
+				msgs = ((InternalEObject)newTemplate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.DOMAIN_PATTERN_CS__TEMPLATE, null, msgs);
+			msgs = basicSetTemplate(newTemplate, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.DOMAIN_PATTERN_CS__TEMPLATE, newTemplate, newTemplate));
 	}
 
 	/**
@@ -94,8 +122,8 @@ public class WhenCSImpl extends ModelElementCSImpl implements WhenCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.WHEN_CS__EXPR:
-				return ((InternalEList<?>)getExpr()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSTPackage.DOMAIN_PATTERN_CS__TEMPLATE:
+				return basicSetTemplate(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -108,8 +136,8 @@ public class WhenCSImpl extends ModelElementCSImpl implements WhenCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.WHEN_CS__EXPR:
-				return getExpr();
+			case QVTrelationCSTPackage.DOMAIN_PATTERN_CS__TEMPLATE:
+				return getTemplate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -119,13 +147,11 @@ public class WhenCSImpl extends ModelElementCSImpl implements WhenCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.WHEN_CS__EXPR:
-				getExpr().clear();
-				getExpr().addAll((Collection<? extends ExpCS>)newValue);
+			case QVTrelationCSTPackage.DOMAIN_PATTERN_CS__TEMPLATE:
+				setTemplate((TemplateCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -139,8 +165,8 @@ public class WhenCSImpl extends ModelElementCSImpl implements WhenCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.WHEN_CS__EXPR:
-				getExpr().clear();
+			case QVTrelationCSTPackage.DOMAIN_PATTERN_CS__TEMPLATE:
+				setTemplate((TemplateCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -154,8 +180,8 @@ public class WhenCSImpl extends ModelElementCSImpl implements WhenCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.WHEN_CS__EXPR:
-				return expr != null && !expr.isEmpty();
+			case QVTrelationCSTPackage.DOMAIN_PATTERN_CS__TEMPLATE:
+				return template != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -163,6 +189,6 @@ public class WhenCSImpl extends ModelElementCSImpl implements WhenCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTrelationCSVisitor.class).visitWhenCS(this);
+		return (R) visitor.getAdapter(QVTrelationCSVisitor.class).visitDomainPatternCS(this);
 	}
-} //WhenCSImpl
+} //DomainPatternCSImpl

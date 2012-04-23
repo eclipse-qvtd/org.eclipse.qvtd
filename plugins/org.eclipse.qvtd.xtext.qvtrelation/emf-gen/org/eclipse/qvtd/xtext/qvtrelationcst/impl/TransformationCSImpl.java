@@ -43,10 +43,10 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.TransformationCSImpl#getModelDecl <em>Model Decl</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.TransformationCSImpl#getModelDecls <em>Model Decls</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.TransformationCSImpl#getExtends <em>Extends</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.TransformationCSImpl#getKeyDecl <em>Key Decl</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.TransformationCSImpl#getQuery <em>Query</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.TransformationCSImpl#getKeyDecls <em>Key Decls</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.TransformationCSImpl#getQueries <em>Queries</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.TransformationCSImpl#getRelation <em>Relation</em>}</li>
  * </ul>
  * </p>
@@ -55,14 +55,14 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  */
 public class TransformationCSImpl extends PackageCSImpl implements TransformationCS {
 	/**
-	 * The cached value of the '{@link #getModelDecl() <em>Model Decl</em>}' containment reference list.
+	 * The cached value of the '{@link #getModelDecls() <em>Model Decls</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getModelDecl()
+	 * @see #getModelDecls()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ModelDeclCS> modelDecl;
+	protected EList<ModelDeclCS> modelDecls;
 
 	/**
 	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' reference list.
@@ -75,24 +75,24 @@ public class TransformationCSImpl extends PackageCSImpl implements Transformatio
 	protected EList<Transformation> extends_;
 
 	/**
-	 * The cached value of the '{@link #getKeyDecl() <em>Key Decl</em>}' containment reference list.
+	 * The cached value of the '{@link #getKeyDecls() <em>Key Decls</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getKeyDecl()
+	 * @see #getKeyDecls()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<KeyDeclCS> keyDecl;
+	protected EList<KeyDeclCS> keyDecls;
 
 	/**
-	 * The cached value of the '{@link #getQuery() <em>Query</em>}' containment reference list.
+	 * The cached value of the '{@link #getQueries() <em>Queries</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getQuery()
+	 * @see #getQueries()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<QueryCS> query;
+	protected EList<QueryCS> queries;
 
 	/**
 	 * The cached value of the '{@link #getRelation() <em>Relation</em>}' containment reference list.
@@ -128,11 +128,11 @@ public class TransformationCSImpl extends PackageCSImpl implements Transformatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ModelDeclCS> getModelDecl() {
-		if (modelDecl == null) {
-			modelDecl = new EObjectContainmentEList<ModelDeclCS>(ModelDeclCS.class, this, QVTrelationCSTPackage.TRANSFORMATION_CS__MODEL_DECL);
+	public EList<ModelDeclCS> getModelDecls() {
+		if (modelDecls == null) {
+			modelDecls = new EObjectContainmentEList<ModelDeclCS>(ModelDeclCS.class, this, QVTrelationCSTPackage.TRANSFORMATION_CS__MODEL_DECLS);
 		}
-		return modelDecl;
+		return modelDecls;
 	}
 
 	/**
@@ -152,11 +152,11 @@ public class TransformationCSImpl extends PackageCSImpl implements Transformatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<KeyDeclCS> getKeyDecl() {
-		if (keyDecl == null) {
-			keyDecl = new EObjectContainmentEList<KeyDeclCS>(KeyDeclCS.class, this, QVTrelationCSTPackage.TRANSFORMATION_CS__KEY_DECL);
+	public EList<KeyDeclCS> getKeyDecls() {
+		if (keyDecls == null) {
+			keyDecls = new EObjectContainmentEList<KeyDeclCS>(KeyDeclCS.class, this, QVTrelationCSTPackage.TRANSFORMATION_CS__KEY_DECLS);
 		}
-		return keyDecl;
+		return keyDecls;
 	}
 
 	/**
@@ -164,11 +164,11 @@ public class TransformationCSImpl extends PackageCSImpl implements Transformatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<QueryCS> getQuery() {
-		if (query == null) {
-			query = new EObjectContainmentEList<QueryCS>(QueryCS.class, this, QVTrelationCSTPackage.TRANSFORMATION_CS__QUERY);
+	public EList<QueryCS> getQueries() {
+		if (queries == null) {
+			queries = new EObjectContainmentEList<QueryCS>(QueryCS.class, this, QVTrelationCSTPackage.TRANSFORMATION_CS__QUERIES);
 		}
-		return query;
+		return queries;
 	}
 
 	/**
@@ -191,12 +191,12 @@ public class TransformationCSImpl extends PackageCSImpl implements Transformatio
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.TRANSFORMATION_CS__MODEL_DECL:
-				return ((InternalEList<?>)getModelDecl()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSTPackage.TRANSFORMATION_CS__KEY_DECL:
-				return ((InternalEList<?>)getKeyDecl()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSTPackage.TRANSFORMATION_CS__QUERY:
-				return ((InternalEList<?>)getQuery()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSTPackage.TRANSFORMATION_CS__MODEL_DECLS:
+				return ((InternalEList<?>)getModelDecls()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSTPackage.TRANSFORMATION_CS__KEY_DECLS:
+				return ((InternalEList<?>)getKeyDecls()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSTPackage.TRANSFORMATION_CS__QUERIES:
+				return ((InternalEList<?>)getQueries()).basicRemove(otherEnd, msgs);
 			case QVTrelationCSTPackage.TRANSFORMATION_CS__RELATION:
 				return ((InternalEList<?>)getRelation()).basicRemove(otherEnd, msgs);
 		}
@@ -211,14 +211,14 @@ public class TransformationCSImpl extends PackageCSImpl implements Transformatio
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.TRANSFORMATION_CS__MODEL_DECL:
-				return getModelDecl();
+			case QVTrelationCSTPackage.TRANSFORMATION_CS__MODEL_DECLS:
+				return getModelDecls();
 			case QVTrelationCSTPackage.TRANSFORMATION_CS__EXTENDS:
 				return getExtends();
-			case QVTrelationCSTPackage.TRANSFORMATION_CS__KEY_DECL:
-				return getKeyDecl();
-			case QVTrelationCSTPackage.TRANSFORMATION_CS__QUERY:
-				return getQuery();
+			case QVTrelationCSTPackage.TRANSFORMATION_CS__KEY_DECLS:
+				return getKeyDecls();
+			case QVTrelationCSTPackage.TRANSFORMATION_CS__QUERIES:
+				return getQueries();
 			case QVTrelationCSTPackage.TRANSFORMATION_CS__RELATION:
 				return getRelation();
 		}
@@ -234,21 +234,21 @@ public class TransformationCSImpl extends PackageCSImpl implements Transformatio
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.TRANSFORMATION_CS__MODEL_DECL:
-				getModelDecl().clear();
-				getModelDecl().addAll((Collection<? extends ModelDeclCS>)newValue);
+			case QVTrelationCSTPackage.TRANSFORMATION_CS__MODEL_DECLS:
+				getModelDecls().clear();
+				getModelDecls().addAll((Collection<? extends ModelDeclCS>)newValue);
 				return;
 			case QVTrelationCSTPackage.TRANSFORMATION_CS__EXTENDS:
 				getExtends().clear();
 				getExtends().addAll((Collection<? extends Transformation>)newValue);
 				return;
-			case QVTrelationCSTPackage.TRANSFORMATION_CS__KEY_DECL:
-				getKeyDecl().clear();
-				getKeyDecl().addAll((Collection<? extends KeyDeclCS>)newValue);
+			case QVTrelationCSTPackage.TRANSFORMATION_CS__KEY_DECLS:
+				getKeyDecls().clear();
+				getKeyDecls().addAll((Collection<? extends KeyDeclCS>)newValue);
 				return;
-			case QVTrelationCSTPackage.TRANSFORMATION_CS__QUERY:
-				getQuery().clear();
-				getQuery().addAll((Collection<? extends QueryCS>)newValue);
+			case QVTrelationCSTPackage.TRANSFORMATION_CS__QUERIES:
+				getQueries().clear();
+				getQueries().addAll((Collection<? extends QueryCS>)newValue);
 				return;
 			case QVTrelationCSTPackage.TRANSFORMATION_CS__RELATION:
 				getRelation().clear();
@@ -266,17 +266,17 @@ public class TransformationCSImpl extends PackageCSImpl implements Transformatio
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.TRANSFORMATION_CS__MODEL_DECL:
-				getModelDecl().clear();
+			case QVTrelationCSTPackage.TRANSFORMATION_CS__MODEL_DECLS:
+				getModelDecls().clear();
 				return;
 			case QVTrelationCSTPackage.TRANSFORMATION_CS__EXTENDS:
 				getExtends().clear();
 				return;
-			case QVTrelationCSTPackage.TRANSFORMATION_CS__KEY_DECL:
-				getKeyDecl().clear();
+			case QVTrelationCSTPackage.TRANSFORMATION_CS__KEY_DECLS:
+				getKeyDecls().clear();
 				return;
-			case QVTrelationCSTPackage.TRANSFORMATION_CS__QUERY:
-				getQuery().clear();
+			case QVTrelationCSTPackage.TRANSFORMATION_CS__QUERIES:
+				getQueries().clear();
 				return;
 			case QVTrelationCSTPackage.TRANSFORMATION_CS__RELATION:
 				getRelation().clear();
@@ -293,14 +293,14 @@ public class TransformationCSImpl extends PackageCSImpl implements Transformatio
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.TRANSFORMATION_CS__MODEL_DECL:
-				return modelDecl != null && !modelDecl.isEmpty();
+			case QVTrelationCSTPackage.TRANSFORMATION_CS__MODEL_DECLS:
+				return modelDecls != null && !modelDecls.isEmpty();
 			case QVTrelationCSTPackage.TRANSFORMATION_CS__EXTENDS:
 				return extends_ != null && !extends_.isEmpty();
-			case QVTrelationCSTPackage.TRANSFORMATION_CS__KEY_DECL:
-				return keyDecl != null && !keyDecl.isEmpty();
-			case QVTrelationCSTPackage.TRANSFORMATION_CS__QUERY:
-				return query != null && !query.isEmpty();
+			case QVTrelationCSTPackage.TRANSFORMATION_CS__KEY_DECLS:
+				return keyDecls != null && !keyDecls.isEmpty();
+			case QVTrelationCSTPackage.TRANSFORMATION_CS__QUERIES:
+				return queries != null && !queries.isEmpty();
 			case QVTrelationCSTPackage.TRANSFORMATION_CS__RELATION:
 				return relation != null && !relation.isEmpty();
 		}

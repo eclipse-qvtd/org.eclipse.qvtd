@@ -34,7 +34,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.ModelDeclCSImpl#getMetaModelId <em>Meta Model Id</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.ModelDeclCSImpl#getMetaModelIds <em>Meta Model Ids</em>}</li>
  * </ul>
  * </p>
  *
@@ -42,15 +42,14 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  */
 public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	/**
-	 * The cached value of the '{@link #getMetaModelId() <em>Meta Model Id</em>}' reference list.
+	 * The cached value of the '{@link #getMetaModelIds() <em>Meta Model Ids</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMetaModelId()
+	 * @see #getMetaModelIds()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<org.eclipse.ocl.examples.pivot.Package> metaModelId;
-
+	protected EList<org.eclipse.ocl.examples.pivot.Package> metaModelIds;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,11 +74,11 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.eclipse.ocl.examples.pivot.Package> getMetaModelId() {
-		if (metaModelId == null) {
-			metaModelId = new EObjectResolvingEList<org.eclipse.ocl.examples.pivot.Package>(org.eclipse.ocl.examples.pivot.Package.class, this, QVTrelationCSTPackage.MODEL_DECL_CS__META_MODEL_ID);
+	public EList<org.eclipse.ocl.examples.pivot.Package> getMetaModelIds() {
+		if (metaModelIds == null) {
+			metaModelIds = new EObjectResolvingEList<org.eclipse.ocl.examples.pivot.Package>(org.eclipse.ocl.examples.pivot.Package.class, this, QVTrelationCSTPackage.MODEL_DECL_CS__META_MODEL_IDS);
 		}
-		return metaModelId;
+		return metaModelIds;
 	}
 
 	/**
@@ -90,8 +89,8 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.MODEL_DECL_CS__META_MODEL_ID:
-				return getMetaModelId();
+			case QVTrelationCSTPackage.MODEL_DECL_CS__META_MODEL_IDS:
+				return getMetaModelIds();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -105,9 +104,9 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.MODEL_DECL_CS__META_MODEL_ID:
-				getMetaModelId().clear();
-				getMetaModelId().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Package>)newValue);
+			case QVTrelationCSTPackage.MODEL_DECL_CS__META_MODEL_IDS:
+				getMetaModelIds().clear();
+				getMetaModelIds().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Package>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -121,8 +120,8 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.MODEL_DECL_CS__META_MODEL_ID:
-				getMetaModelId().clear();
+			case QVTrelationCSTPackage.MODEL_DECL_CS__META_MODEL_IDS:
+				getMetaModelIds().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -136,8 +135,8 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.MODEL_DECL_CS__META_MODEL_ID:
-				return metaModelId != null && !metaModelId.isEmpty();
+			case QVTrelationCSTPackage.MODEL_DECL_CS__META_MODEL_IDS:
+				return metaModelIds != null && !metaModelIds.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

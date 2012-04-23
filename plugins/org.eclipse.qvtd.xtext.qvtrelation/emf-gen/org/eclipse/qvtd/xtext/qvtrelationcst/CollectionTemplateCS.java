@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS#getMemberIdentifier <em>Member Identifier</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS#getMemberIdentifiers <em>Member Identifiers</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS#getRestIdentifier <em>Rest Identifier</em>}</li>
  * </ul>
  * </p>
@@ -38,20 +38,20 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
  */
 public interface CollectionTemplateCS extends TemplateCS {
 	/**
-	 * Returns the value of the '<em><b>Member Identifier</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Member Identifiers</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Member Identifier</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Member Identifiers</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Member Identifier</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getCollectionTemplateCS_MemberIdentifier()
+	 * @return the value of the '<em>Member Identifiers</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getCollectionTemplateCS_MemberIdentifiers()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<ExpCS> getMemberIdentifier();
+	EList<ExpCS> getMemberIdentifiers();
 
 	/**
 	 * Returns the value of the '<em><b>Rest Identifier</b></em>' containment reference.

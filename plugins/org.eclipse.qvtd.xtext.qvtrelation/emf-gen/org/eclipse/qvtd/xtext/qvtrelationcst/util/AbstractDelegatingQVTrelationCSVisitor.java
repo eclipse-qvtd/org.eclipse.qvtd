@@ -61,6 +61,10 @@ public abstract class AbstractDelegatingQVTrelationCSVisitor<R, C, D extends QVT
 		return delegate.visitDomainCS(object);
 	}
 
+	public R visitDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS object) {
+		return delegate.visitDomainPatternCS(object);
+	}
+
 	public R visitKeyDeclCS(org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS object) {
 		return delegate.visitKeyDeclCS(object);
 	}
@@ -75,6 +79,14 @@ public abstract class AbstractDelegatingQVTrelationCSVisitor<R, C, D extends QVT
 
 	public R visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcst.ParamDeclarationCS object) {
 		return delegate.visitParamDeclarationCS(object);
+	}
+
+	public R visitPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS object) {
+		return delegate.visitPatternCS(object);
+	}
+
+	public R visitPredicateCS(org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS object) {
+		return delegate.visitPredicateCS(object);
 	}
 
 	public R visitPrimitiveTypeDomainCS(org.eclipse.qvtd.xtext.qvtrelationcst.PrimitiveTypeDomainCS object) {
@@ -117,11 +129,7 @@ public abstract class AbstractDelegatingQVTrelationCSVisitor<R, C, D extends QVT
 		return delegate.visitVarDeclarationCS(object);
 	}
 
-	public R visitWhenCS(org.eclipse.qvtd.xtext.qvtrelationcst.WhenCS object) {
-		return delegate.visitWhenCS(object);
-	}
-
-	public R visitWhereCS(org.eclipse.qvtd.xtext.qvtrelationcst.WhereCS object) {
-		return delegate.visitWhereCS(object);
+	public R visitVarDeclarationIdCS(org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS object) {
+		return delegate.visitVarDeclarationIdCS(object);
 	}
 }

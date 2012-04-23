@@ -23,12 +23,13 @@ import org.eclipse.ocl.examples.pivot.utilities.AbstractPivotSaver;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseSaver;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.util.AbstractNullQVTrelationVisitor;
+import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateSaver;
 
 /**
  * PivotSaver ensures that all references to specialized types are terminated
  * by local copies of the specialization.
  */
-public class QVTrelationSaver extends QVTbaseSaver
+public class QVTrelationSaver extends QVTtemplateSaver
 {
 	private static final class Factory implements AbstractPivotSaver.Factory
 	{

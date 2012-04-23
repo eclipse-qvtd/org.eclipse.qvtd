@@ -30,8 +30,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS#isTop <em>Top</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS#getOverrides <em>Overrides</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS#getVarDeclaration <em>Var Declaration</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS#getDomain <em>Domain</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS#getVarDeclarations <em>Var Declarations</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS#getDomains <em>Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS#getWhen <em>When</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS#getWhere <em>Where</em>}</li>
  * </ul>
@@ -95,36 +95,36 @@ public interface RelationCS extends NamedElementCS {
 	void setOverrides(Relation value);
 
 	/**
-	 * Returns the value of the '<em><b>Var Declaration</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Var Declarations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Var Declaration</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Var Declarations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Var Declaration</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getRelationCS_VarDeclaration()
+	 * @return the value of the '<em>Var Declarations</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getRelationCS_VarDeclarations()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<VarDeclarationCS> getVarDeclaration();
+	EList<VarDeclarationCS> getVarDeclarations();
 
 	/**
-	 * Returns the value of the '<em><b>Domain</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Domains</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcst.AbstractDomainCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Domain</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Domains</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Domain</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getRelationCS_Domain()
+	 * @return the value of the '<em>Domains</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getRelationCS_Domains()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<AbstractDomainCS> getDomain();
+	EList<AbstractDomainCS> getDomains();
 
 	/**
 	 * Returns the value of the '<em><b>When</b></em>' containment reference.
@@ -135,12 +135,12 @@ public interface RelationCS extends NamedElementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>When</em>' containment reference.
-	 * @see #setWhen(WhenCS)
+	 * @see #setWhen(PatternCS)
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getRelationCS_When()
 	 * @model containment="true"
 	 * @generated
 	 */
-	WhenCS getWhen();
+	PatternCS getWhen();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS#getWhen <em>When</em>}' containment reference.
@@ -150,7 +150,7 @@ public interface RelationCS extends NamedElementCS {
 	 * @see #getWhen()
 	 * @generated
 	 */
-	void setWhen(WhenCS value);
+	void setWhen(PatternCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Where</b></em>' containment reference.
@@ -161,12 +161,12 @@ public interface RelationCS extends NamedElementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Where</em>' containment reference.
-	 * @see #setWhere(WhereCS)
+	 * @see #setWhere(PatternCS)
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getRelationCS_Where()
 	 * @model containment="true"
 	 * @generated
 	 */
-	WhereCS getWhere();
+	PatternCS getWhere();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS#getWhere <em>Where</em>}' containment reference.
@@ -176,6 +176,6 @@ public interface RelationCS extends NamedElementCS {
 	 * @see #getWhere()
 	 * @generated
 	 */
-	void setWhere(WhereCS value);
+	void setWhere(PatternCS value);
 
 } // RelationCS

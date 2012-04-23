@@ -16,10 +16,11 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelationcst;
 
+import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +30,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS#getVarDeclarationId <em>Var Declaration Id</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS#getVarDeclarationIds <em>Var Declaration Ids</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS#getType <em>Type</em>}</li>
  * </ul>
  * </p>
@@ -39,21 +40,22 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
  * @generated
  */
 public interface VarDeclarationCS extends ModelElementCS {
+
 	/**
-	 * Returns the value of the '<em><b>Var Declaration Id</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Property}.
+	 * Returns the value of the '<em><b>Var Declaration Ids</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Var Declaration Id</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Var Declaration Ids</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Var Declaration Id</em>' reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getVarDeclarationCS_VarDeclarationId()
-	 * @model
+	 * @return the value of the '<em>Var Declaration Ids</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getVarDeclarationCS_VarDeclarationIds()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Property> getVarDeclarationId();
+	EList<VarDeclarationIdCS> getVarDeclarationIds();
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
@@ -64,12 +66,12 @@ public interface VarDeclarationCS extends ModelElementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' containment reference.
-	 * @see #setType(TypedTypeRefCS)
+	 * @see #setType(TypedRefCS)
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getVarDeclarationCS_Type()
 	 * @model containment="true"
 	 * @generated
 	 */
-	TypedTypeRefCS getType();
+	TypedRefCS getType();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS#getType <em>Type</em>}' containment reference.
@@ -79,6 +81,6 @@ public interface VarDeclarationCS extends ModelElementCS {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(TypedTypeRefCS value);
+	void setType(TypedRefCS value);
 
 } // VarDeclarationCS

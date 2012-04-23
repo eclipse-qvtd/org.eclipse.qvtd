@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS#getObjectTemplate <em>Object Template</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS#getPropertyId <em>Property Id</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS#getOclExpression <em>Ocl Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS#isOpposite <em>Opposite</em>}</li>
@@ -39,6 +40,34 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
  * @generated
  */
 public interface PropertyTemplateCS extends ModelElementCS {
+	/**
+	 * Returns the value of the '<em><b>Object Template</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS#getPropertyTemplates <em>Property Templates</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Object Template</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Object Template</em>' container reference.
+	 * @see #setObjectTemplate(ObjectTemplateCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getPropertyTemplateCS_ObjectTemplate()
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS#getPropertyTemplates
+	 * @model opposite="propertyTemplates" resolveProxies="false" transient="false"
+	 * @generated
+	 */
+	ObjectTemplateCS getObjectTemplate();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS#getObjectTemplate <em>Object Template</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Object Template</em>' container reference.
+	 * @see #getObjectTemplate()
+	 * @generated
+	 */
+	void setObjectTemplate(ObjectTemplateCS value);
+
 	/**
 	 * Returns the value of the '<em><b>Property Id</b></em>' reference.
 	 * <!-- begin-user-doc -->

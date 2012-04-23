@@ -26,41 +26,40 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
-import org.eclipse.qvtd.xtext.qvtrelationcst.WhereCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Where CS</b></em>'.
+ * An implementation of the model object '<em><b>Pattern CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.WhereCSImpl#getExpr <em>Expr</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.PatternCSImpl#getPredicates <em>Predicates</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class WhereCSImpl extends ModelElementCSImpl implements WhereCS {
+public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	/**
-	 * The cached value of the '{@link #getExpr() <em>Expr</em>}' containment reference list.
+	 * The cached value of the '{@link #getPredicates() <em>Predicates</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpr()
+	 * @see #getPredicates()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ExpCS> expr;
-
+	protected EList<PredicateCS> predicates;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected WhereCSImpl() {
+	protected PatternCSImpl() {
 		super();
 	}
 
@@ -71,7 +70,7 @@ public class WhereCSImpl extends ModelElementCSImpl implements WhereCS {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTrelationCSTPackage.Literals.WHERE_CS;
+		return QVTrelationCSTPackage.Literals.PATTERN_CS;
 	}
 
 	/**
@@ -79,11 +78,11 @@ public class WhereCSImpl extends ModelElementCSImpl implements WhereCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ExpCS> getExpr() {
-		if (expr == null) {
-			expr = new EObjectContainmentEList<ExpCS>(ExpCS.class, this, QVTrelationCSTPackage.WHERE_CS__EXPR);
+	public EList<PredicateCS> getPredicates() {
+		if (predicates == null) {
+			predicates = new EObjectContainmentEList<PredicateCS>(PredicateCS.class, this, QVTrelationCSTPackage.PATTERN_CS__PREDICATES);
 		}
-		return expr;
+		return predicates;
 	}
 
 	/**
@@ -94,8 +93,8 @@ public class WhereCSImpl extends ModelElementCSImpl implements WhereCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.WHERE_CS__EXPR:
-				return ((InternalEList<?>)getExpr()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSTPackage.PATTERN_CS__PREDICATES:
+				return ((InternalEList<?>)getPredicates()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -108,8 +107,8 @@ public class WhereCSImpl extends ModelElementCSImpl implements WhereCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.WHERE_CS__EXPR:
-				return getExpr();
+			case QVTrelationCSTPackage.PATTERN_CS__PREDICATES:
+				return getPredicates();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -123,9 +122,9 @@ public class WhereCSImpl extends ModelElementCSImpl implements WhereCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.WHERE_CS__EXPR:
-				getExpr().clear();
-				getExpr().addAll((Collection<? extends ExpCS>)newValue);
+			case QVTrelationCSTPackage.PATTERN_CS__PREDICATES:
+				getPredicates().clear();
+				getPredicates().addAll((Collection<? extends PredicateCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -139,8 +138,8 @@ public class WhereCSImpl extends ModelElementCSImpl implements WhereCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.WHERE_CS__EXPR:
-				getExpr().clear();
+			case QVTrelationCSTPackage.PATTERN_CS__PREDICATES:
+				getPredicates().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -154,8 +153,8 @@ public class WhereCSImpl extends ModelElementCSImpl implements WhereCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.WHERE_CS__EXPR:
-				return expr != null && !expr.isEmpty();
+			case QVTrelationCSTPackage.PATTERN_CS__PREDICATES:
+				return predicates != null && !predicates.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -163,6 +162,6 @@ public class WhereCSImpl extends ModelElementCSImpl implements WhereCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTrelationCSVisitor.class).visitWhereCS(this);
+		return (R) visitor.getAdapter(QVTrelationCSVisitor.class).visitPatternCS(this);
 	}
-} //WhereCSImpl
+} //PatternCSImpl

@@ -72,6 +72,15 @@ public interface QVTrelationCSTFactory extends EFactory {
 	DomainCS createDomainCS();
 
 	/**
+	 * Returns a new object of class '<em>Domain Pattern CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Domain Pattern CS</em>'.
+	 * @generated
+	 */
+	DomainPatternCS createDomainPatternCS();
+
+	/**
 	 * Returns a new object of class '<em>Key Decl CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -106,6 +115,24 @@ public interface QVTrelationCSTFactory extends EFactory {
 	 * @generated
 	 */
 	ParamDeclarationCS createParamDeclarationCS();
+
+	/**
+	 * Returns a new object of class '<em>Pattern CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Pattern CS</em>'.
+	 * @generated
+	 */
+	PatternCS createPatternCS();
+
+	/**
+	 * Returns a new object of class '<em>Predicate CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Predicate CS</em>'.
+	 * @generated
+	 */
+	PredicateCS createPredicateCS();
 
 	/**
 	 * Returns a new object of class '<em>Primitive Type Domain CS</em>'.
@@ -180,22 +207,13 @@ public interface QVTrelationCSTFactory extends EFactory {
 	VarDeclarationCS createVarDeclarationCS();
 
 	/**
-	 * Returns a new object of class '<em>When CS</em>'.
+	 * Returns a new object of class '<em>Var Declaration Id CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>When CS</em>'.
+	 * @return a new object of class '<em>Var Declaration Id CS</em>'.
 	 * @generated
 	 */
-	WhenCS createWhenCS();
-
-	/**
-	 * Returns a new object of class '<em>Where CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Where CS</em>'.
-	 * @generated
-	 */
-	WhereCS createWhereCS();
+	VarDeclarationIdCS createVarDeclarationIdCS();
 
 	/**
 	 * Returns the package supported by this factory.

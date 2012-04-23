@@ -19,12 +19,10 @@ package org.eclipse.qvtd.xtext.qvtrelationcst.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
+import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.impl.NamedElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcst.TemplateVariableCS;
@@ -38,13 +36,12 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.TemplateVariableCSImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.TemplateVariableCSImpl#getPropertyId <em>Property Id</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class TemplateVariableCSImpl extends ModelElementCSImpl implements TemplateVariableCS {
+public abstract class TemplateVariableCSImpl extends NamedElementCSImpl implements TemplateVariableCS {
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -53,17 +50,7 @@ public abstract class TemplateVariableCSImpl extends ModelElementCSImpl implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected TypedTypeRefCS type;
-
-	/**
-	 * The cached value of the '{@link #getPropertyId() <em>Property Id</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPropertyId()
-	 * @generated
-	 * @ordered
-	 */
-	protected Property propertyId;
+	protected TypedRefCS type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -89,7 +76,7 @@ public abstract class TemplateVariableCSImpl extends ModelElementCSImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypedTypeRefCS getType() {
+	public TypedRefCS getType() {
 		return type;
 	}
 
@@ -98,8 +85,8 @@ public abstract class TemplateVariableCSImpl extends ModelElementCSImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetType(TypedTypeRefCS newType, NotificationChain msgs) {
-		TypedTypeRefCS oldType = type;
+	public NotificationChain basicSetType(TypedRefCS newType, NotificationChain msgs) {
+		TypedRefCS oldType = type;
 		type = newType;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.TEMPLATE_VARIABLE_CS__TYPE, oldType, newType);
@@ -113,7 +100,7 @@ public abstract class TemplateVariableCSImpl extends ModelElementCSImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(TypedTypeRefCS newType) {
+	public void setType(TypedRefCS newType) {
 		if (newType != type) {
 			NotificationChain msgs = null;
 			if (type != null)
@@ -125,44 +112,6 @@ public abstract class TemplateVariableCSImpl extends ModelElementCSImpl implemen
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.TEMPLATE_VARIABLE_CS__TYPE, newType, newType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Property getPropertyId() {
-		if (propertyId != null && ((EObject)propertyId).eIsProxy()) {
-			InternalEObject oldPropertyId = (InternalEObject)propertyId;
-			propertyId = (Property)eResolveProxy(oldPropertyId);
-			if (propertyId != oldPropertyId) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationCSTPackage.TEMPLATE_VARIABLE_CS__PROPERTY_ID, oldPropertyId, propertyId));
-			}
-		}
-		return propertyId;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Property basicGetPropertyId() {
-		return propertyId;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setPropertyId(Property newPropertyId) {
-		Property oldPropertyId = propertyId;
-		propertyId = newPropertyId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.TEMPLATE_VARIABLE_CS__PROPERTY_ID, oldPropertyId, propertyId));
 	}
 
 	/**
@@ -189,9 +138,6 @@ public abstract class TemplateVariableCSImpl extends ModelElementCSImpl implemen
 		switch (featureID) {
 			case QVTrelationCSTPackage.TEMPLATE_VARIABLE_CS__TYPE:
 				return getType();
-			case QVTrelationCSTPackage.TEMPLATE_VARIABLE_CS__PROPERTY_ID:
-				if (resolve) return getPropertyId();
-				return basicGetPropertyId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -205,10 +151,7 @@ public abstract class TemplateVariableCSImpl extends ModelElementCSImpl implemen
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTrelationCSTPackage.TEMPLATE_VARIABLE_CS__TYPE:
-				setType((TypedTypeRefCS)newValue);
-				return;
-			case QVTrelationCSTPackage.TEMPLATE_VARIABLE_CS__PROPERTY_ID:
-				setPropertyId((Property)newValue);
+				setType((TypedRefCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -223,10 +166,7 @@ public abstract class TemplateVariableCSImpl extends ModelElementCSImpl implemen
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTrelationCSTPackage.TEMPLATE_VARIABLE_CS__TYPE:
-				setType((TypedTypeRefCS)null);
-				return;
-			case QVTrelationCSTPackage.TEMPLATE_VARIABLE_CS__PROPERTY_ID:
-				setPropertyId((Property)null);
+				setType((TypedRefCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -242,8 +182,6 @@ public abstract class TemplateVariableCSImpl extends ModelElementCSImpl implemen
 		switch (featureID) {
 			case QVTrelationCSTPackage.TEMPLATE_VARIABLE_CS__TYPE:
 				return type != null;
-			case QVTrelationCSTPackage.TEMPLATE_VARIABLE_CS__PROPERTY_ID:
-				return propertyId != null;
 		}
 		return super.eIsSet(featureID);
 	}

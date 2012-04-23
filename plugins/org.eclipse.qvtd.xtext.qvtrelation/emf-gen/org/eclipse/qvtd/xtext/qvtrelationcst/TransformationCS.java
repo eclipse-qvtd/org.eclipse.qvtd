@@ -28,10 +28,10 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS#getModelDecl <em>Model Decl</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS#getModelDecls <em>Model Decls</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS#getExtends <em>Extends</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS#getKeyDecl <em>Key Decl</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS#getQuery <em>Query</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS#getKeyDecls <em>Key Decls</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS#getQueries <em>Queries</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS#getRelation <em>Relation</em>}</li>
  * </ul>
  * </p>
@@ -42,20 +42,20 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  */
 public interface TransformationCS extends PackageCS {
 	/**
-	 * Returns the value of the '<em><b>Model Decl</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Model Decls</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcst.ModelDeclCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Model Decl</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Model Decls</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Model Decl</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getTransformationCS_ModelDecl()
+	 * @return the value of the '<em>Model Decls</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getTransformationCS_ModelDecls()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ModelDeclCS> getModelDecl();
+	EList<ModelDeclCS> getModelDecls();
 
 	/**
 	 * Returns the value of the '<em><b>Extends</b></em>' reference list.
@@ -74,36 +74,36 @@ public interface TransformationCS extends PackageCS {
 	EList<Transformation> getExtends();
 
 	/**
-	 * Returns the value of the '<em><b>Key Decl</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Key Decls</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Key Decl</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Key Decls</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Key Decl</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getTransformationCS_KeyDecl()
+	 * @return the value of the '<em>Key Decls</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getTransformationCS_KeyDecls()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<KeyDeclCS> getKeyDecl();
+	EList<KeyDeclCS> getKeyDecls();
 
 	/**
-	 * Returns the value of the '<em><b>Query</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Queries</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Query</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Queries</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Query</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getTransformationCS_Query()
+	 * @return the value of the '<em>Queries</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getTransformationCS_Queries()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<QueryCS> getQuery();
+	EList<QueryCS> getQueries();
 
 	/**
 	 * Returns the value of the '<em><b>Relation</b></em>' containment reference list.

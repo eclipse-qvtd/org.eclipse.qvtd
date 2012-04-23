@@ -30,11 +30,10 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.impl.NamedElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.xtext.qvtrelationcst.AbstractDomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtrelationcst.WhenCS;
-import org.eclipse.qvtd.xtext.qvtrelationcst.WhereCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
 
 /**
@@ -46,8 +45,8 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.RelationCSImpl#isTop <em>Top</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.RelationCSImpl#getOverrides <em>Overrides</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.RelationCSImpl#getVarDeclaration <em>Var Declaration</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.RelationCSImpl#getDomain <em>Domain</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.RelationCSImpl#getVarDeclarations <em>Var Declarations</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.RelationCSImpl#getDomains <em>Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.RelationCSImpl#getWhen <em>When</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.RelationCSImpl#getWhere <em>Where</em>}</li>
  * </ul>
@@ -87,24 +86,24 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	protected Relation overrides;
 
 	/**
-	 * The cached value of the '{@link #getVarDeclaration() <em>Var Declaration</em>}' containment reference list.
+	 * The cached value of the '{@link #getVarDeclarations() <em>Var Declarations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVarDeclaration()
+	 * @see #getVarDeclarations()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<VarDeclarationCS> varDeclaration;
+	protected EList<VarDeclarationCS> varDeclarations;
 
 	/**
-	 * The cached value of the '{@link #getDomain() <em>Domain</em>}' containment reference list.
+	 * The cached value of the '{@link #getDomains() <em>Domains</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDomain()
+	 * @see #getDomains()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractDomainCS> domain;
+	protected EList<AbstractDomainCS> domains;
 
 	/**
 	 * The cached value of the '{@link #getWhen() <em>When</em>}' containment reference.
@@ -114,7 +113,7 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected WhenCS when;
+	protected PatternCS when;
 
 	/**
 	 * The cached value of the '{@link #getWhere() <em>Where</em>}' containment reference.
@@ -124,7 +123,7 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected WhereCS where;
+	protected PatternCS where;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -209,11 +208,11 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<VarDeclarationCS> getVarDeclaration() {
-		if (varDeclaration == null) {
-			varDeclaration = new EObjectContainmentEList<VarDeclarationCS>(VarDeclarationCS.class, this, QVTrelationCSTPackage.RELATION_CS__VAR_DECLARATION);
+	public EList<VarDeclarationCS> getVarDeclarations() {
+		if (varDeclarations == null) {
+			varDeclarations = new EObjectContainmentEList<VarDeclarationCS>(VarDeclarationCS.class, this, QVTrelationCSTPackage.RELATION_CS__VAR_DECLARATIONS);
 		}
-		return varDeclaration;
+		return varDeclarations;
 	}
 
 	/**
@@ -221,11 +220,11 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AbstractDomainCS> getDomain() {
-		if (domain == null) {
-			domain = new EObjectContainmentEList<AbstractDomainCS>(AbstractDomainCS.class, this, QVTrelationCSTPackage.RELATION_CS__DOMAIN);
+	public EList<AbstractDomainCS> getDomains() {
+		if (domains == null) {
+			domains = new EObjectContainmentEList<AbstractDomainCS>(AbstractDomainCS.class, this, QVTrelationCSTPackage.RELATION_CS__DOMAINS);
 		}
-		return domain;
+		return domains;
 	}
 
 	/**
@@ -233,7 +232,7 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WhenCS getWhen() {
+	public PatternCS getWhen() {
 		return when;
 	}
 
@@ -242,8 +241,8 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetWhen(WhenCS newWhen, NotificationChain msgs) {
-		WhenCS oldWhen = when;
+	public NotificationChain basicSetWhen(PatternCS newWhen, NotificationChain msgs) {
+		PatternCS oldWhen = when;
 		when = newWhen;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.RELATION_CS__WHEN, oldWhen, newWhen);
@@ -257,7 +256,7 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setWhen(WhenCS newWhen) {
+	public void setWhen(PatternCS newWhen) {
 		if (newWhen != when) {
 			NotificationChain msgs = null;
 			if (when != null)
@@ -276,7 +275,7 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WhereCS getWhere() {
+	public PatternCS getWhere() {
 		return where;
 	}
 
@@ -285,8 +284,8 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetWhere(WhereCS newWhere, NotificationChain msgs) {
-		WhereCS oldWhere = where;
+	public NotificationChain basicSetWhere(PatternCS newWhere, NotificationChain msgs) {
+		PatternCS oldWhere = where;
 		where = newWhere;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.RELATION_CS__WHERE, oldWhere, newWhere);
@@ -300,7 +299,7 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setWhere(WhereCS newWhere) {
+	public void setWhere(PatternCS newWhere) {
 		if (newWhere != where) {
 			NotificationChain msgs = null;
 			if (where != null)
@@ -322,10 +321,10 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSTPackage.RELATION_CS__VAR_DECLARATION:
-				return ((InternalEList<?>)getVarDeclaration()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSTPackage.RELATION_CS__DOMAIN:
-				return ((InternalEList<?>)getDomain()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSTPackage.RELATION_CS__VAR_DECLARATIONS:
+				return ((InternalEList<?>)getVarDeclarations()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSTPackage.RELATION_CS__DOMAINS:
+				return ((InternalEList<?>)getDomains()).basicRemove(otherEnd, msgs);
 			case QVTrelationCSTPackage.RELATION_CS__WHEN:
 				return basicSetWhen(null, msgs);
 			case QVTrelationCSTPackage.RELATION_CS__WHERE:
@@ -347,10 +346,10 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 			case QVTrelationCSTPackage.RELATION_CS__OVERRIDES:
 				if (resolve) return getOverrides();
 				return basicGetOverrides();
-			case QVTrelationCSTPackage.RELATION_CS__VAR_DECLARATION:
-				return getVarDeclaration();
-			case QVTrelationCSTPackage.RELATION_CS__DOMAIN:
-				return getDomain();
+			case QVTrelationCSTPackage.RELATION_CS__VAR_DECLARATIONS:
+				return getVarDeclarations();
+			case QVTrelationCSTPackage.RELATION_CS__DOMAINS:
+				return getDomains();
 			case QVTrelationCSTPackage.RELATION_CS__WHEN:
 				return getWhen();
 			case QVTrelationCSTPackage.RELATION_CS__WHERE:
@@ -374,19 +373,19 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 			case QVTrelationCSTPackage.RELATION_CS__OVERRIDES:
 				setOverrides((Relation)newValue);
 				return;
-			case QVTrelationCSTPackage.RELATION_CS__VAR_DECLARATION:
-				getVarDeclaration().clear();
-				getVarDeclaration().addAll((Collection<? extends VarDeclarationCS>)newValue);
+			case QVTrelationCSTPackage.RELATION_CS__VAR_DECLARATIONS:
+				getVarDeclarations().clear();
+				getVarDeclarations().addAll((Collection<? extends VarDeclarationCS>)newValue);
 				return;
-			case QVTrelationCSTPackage.RELATION_CS__DOMAIN:
-				getDomain().clear();
-				getDomain().addAll((Collection<? extends AbstractDomainCS>)newValue);
+			case QVTrelationCSTPackage.RELATION_CS__DOMAINS:
+				getDomains().clear();
+				getDomains().addAll((Collection<? extends AbstractDomainCS>)newValue);
 				return;
 			case QVTrelationCSTPackage.RELATION_CS__WHEN:
-				setWhen((WhenCS)newValue);
+				setWhen((PatternCS)newValue);
 				return;
 			case QVTrelationCSTPackage.RELATION_CS__WHERE:
-				setWhere((WhereCS)newValue);
+				setWhere((PatternCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -406,17 +405,17 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 			case QVTrelationCSTPackage.RELATION_CS__OVERRIDES:
 				setOverrides((Relation)null);
 				return;
-			case QVTrelationCSTPackage.RELATION_CS__VAR_DECLARATION:
-				getVarDeclaration().clear();
+			case QVTrelationCSTPackage.RELATION_CS__VAR_DECLARATIONS:
+				getVarDeclarations().clear();
 				return;
-			case QVTrelationCSTPackage.RELATION_CS__DOMAIN:
-				getDomain().clear();
+			case QVTrelationCSTPackage.RELATION_CS__DOMAINS:
+				getDomains().clear();
 				return;
 			case QVTrelationCSTPackage.RELATION_CS__WHEN:
-				setWhen((WhenCS)null);
+				setWhen((PatternCS)null);
 				return;
 			case QVTrelationCSTPackage.RELATION_CS__WHERE:
-				setWhere((WhereCS)null);
+				setWhere((PatternCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -434,10 +433,10 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 				return top != TOP_EDEFAULT;
 			case QVTrelationCSTPackage.RELATION_CS__OVERRIDES:
 				return overrides != null;
-			case QVTrelationCSTPackage.RELATION_CS__VAR_DECLARATION:
-				return varDeclaration != null && !varDeclaration.isEmpty();
-			case QVTrelationCSTPackage.RELATION_CS__DOMAIN:
-				return domain != null && !domain.isEmpty();
+			case QVTrelationCSTPackage.RELATION_CS__VAR_DECLARATIONS:
+				return varDeclarations != null && !varDeclarations.isEmpty();
+			case QVTrelationCSTPackage.RELATION_CS__DOMAINS:
+				return domains != null && !domains.isEmpty();
 			case QVTrelationCSTPackage.RELATION_CS__WHEN:
 				return when != null;
 			case QVTrelationCSTPackage.RELATION_CS__WHERE:

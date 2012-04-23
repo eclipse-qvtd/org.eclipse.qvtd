@@ -27,8 +27,8 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS#getImportClause <em>Import Clause</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS#getImportClauses <em>Import Clauses</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS#getTransformations <em>Transformations</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,35 +38,35 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
  */
 public interface TopLevelCS extends RootPackageCS {
 	/**
-	 * Returns the value of the '<em><b>Import Clause</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Import Clauses</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcst.UnitCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Import Clause</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Import Clauses</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Import Clause</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getTopLevelCS_ImportClause()
+	 * @return the value of the '<em>Import Clauses</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getTopLevelCS_ImportClauses()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<UnitCS> getImportClause();
+	EList<UnitCS> getImportClauses();
 
 	/**
-	 * Returns the value of the '<em><b>Transformation</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Transformations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Transformation</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Transformations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Transformation</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getTopLevelCS_Transformation()
+	 * @return the value of the '<em>Transformations</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getTopLevelCS_Transformations()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<TransformationCS> getTransformation();
+	EList<TransformationCS> getTransformations();
 
 } // TopLevelCS
