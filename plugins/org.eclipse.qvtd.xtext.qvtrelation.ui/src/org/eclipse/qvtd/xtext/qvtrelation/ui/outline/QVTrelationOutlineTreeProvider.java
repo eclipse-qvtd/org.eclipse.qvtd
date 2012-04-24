@@ -5,7 +5,6 @@ package org.eclipse.qvtd.xtext.qvtrelation.ui.outline;
 
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
-import org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS;

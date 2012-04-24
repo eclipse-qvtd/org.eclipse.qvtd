@@ -17,6 +17,7 @@
 package org.eclipse.qvtd.xtext.qvtrelationcst;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.ocl.examples.pivot.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -53,29 +54,29 @@ public interface CollectionTemplateCS extends TemplateCS {
 	EList<TemplateVariableCS> getMemberIdentifiers();
 
 	/**
-	 * Returns the value of the '<em><b>Rest Identifier</b></em>' attribute.
+	 * Returns the value of the '<em><b>Rest Identifier</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Rest Identifier</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Rest Identifier</em>' attribute.
-	 * @see #setRestIdentifier(String)
+	 * @return the value of the '<em>Rest Identifier</em>' reference.
+	 * @see #setRestIdentifier(Variable)
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getCollectionTemplateCS_RestIdentifier()
 	 * @model
 	 * @generated
 	 */
-	String getRestIdentifier();
+	Variable getRestIdentifier();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS#getRestIdentifier <em>Rest Identifier</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS#getRestIdentifier <em>Rest Identifier</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Rest Identifier</em>' attribute.
+	 * @param value the new value of the '<em>Rest Identifier</em>' reference.
 	 * @see #getRestIdentifier()
 	 * @generated
 	 */
-	void setRestIdentifier(String value);
+	void setRestIdentifier(Variable value);
 
 } // CollectionTemplateCS

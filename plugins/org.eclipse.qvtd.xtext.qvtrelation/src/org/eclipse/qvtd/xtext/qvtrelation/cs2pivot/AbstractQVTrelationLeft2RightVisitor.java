@@ -18,7 +18,6 @@ package org.eclipse.qvtd.xtext.qvtrelation.cs2pivot;
 
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLLeft2RightVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
 

@@ -58,6 +58,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
@@ -149,6 +150,20 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 		}
 	}
 
+	protected static class RelationDomainAssignmentContentContinuation extends SingleContinuation<DefaultValueCS>
+	{
+		private RelationDomainAssignmentContentContinuation(CS2PivotConversion context, DefaultValueCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			RelationDomainAssignment pDomain = PivotUtil.getPivot(RelationDomainAssignment.class, csElement);
+			pDomain.setVariable(csElement.getPropertyId());
+			return null;
+		}
+	}
+
 	public QVTrelationContainmentVisitor(CS2PivotConversion context) {
 		super(context);
 	}
@@ -181,7 +196,7 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 				}
 			}
 			Variable rest = collectionTemplateExp.getRest();
-			if (rest != null) {
+			if ((rest != null)  && rest.isImplicit()) {
 				pivotVariables.add(rest);
 			}
 		}
@@ -199,24 +214,34 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 			pivotElement.setBindsTo(variable);
 		}
 		context.refreshName(variable, csElement.getName());
-		variable = pivotElement.getRest();
-		if (variable == null) {
-			variable = PivotFactory.eINSTANCE.createVariable();
-			pivotElement.setRest(variable);
+		if (csElement.getRestIdentifier() == null) {
+			variable = pivotElement.getRest();
+			if (variable == null) {
+				variable = PivotFactory.eINSTANCE.createVariable();
+				pivotElement.setRest(variable);
+			}
+			variable.setImplicit(true);
 		}
-		context.refreshName(variable, csElement.getRestIdentifier());
+//		variable = pivotElement.getRest();
+//		if (variable == null) {
+//			variable = PivotFactory.eINSTANCE.createVariable();
+//			pivotElement.setRest(variable);
+//		}
+//		context.refreshName(variable, csElement.getRestIdentifier());
 		context.refreshPivotList(OclExpression.class, pivotElement.getMember(), csElement.getMemberIdentifiers());
 		return null;
 	}
 
 	public Continuation<?> visitDefaultValueCS(DefaultValueCS csElement) {
-		// TODO Auto-generated method stub
-		return null;
+		@SuppressWarnings("unused")
+		RelationDomainAssignment pivotElement = context.refreshModelElement(RelationDomainAssignment.class, QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT, csElement);
+		return new RelationDomainAssignmentContentContinuation(context, csElement);
 	}
 
 	public Continuation<?> visitDomainCS(DomainCS csElement) {
 		RelationDomain pivotElement = context.refreshModelElement(RelationDomain.class, QVTrelationPackage.Literals.RELATION_DOMAIN, csElement);
 		pivotElement.setPattern(PivotUtil.getPivot(DomainPattern.class, csElement.getPattern()));
+		context.refreshPivotList(RelationDomainAssignment.class, pivotElement.getDefaultAssignment(), csElement.getDefaultValues());
 		return new DomainContentContinuation(context, csElement);
 	}
 

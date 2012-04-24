@@ -17,7 +17,6 @@
 package org.eclipse.qvtd.xtext.qvtrelation.cs2pivot;
 
 import org.eclipse.ocl.examples.pivot.OclExpression;
-import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -29,11 +28,10 @@ import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuations;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.SingleContinuation;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
-import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
-import org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS;
@@ -84,6 +82,21 @@ public class QVTrelationPostOrderVisitor extends AbstractQVTrelationPostOrderVis
 			Function pivotElement = PivotUtil.getPivot(Function.class, csElement);
 			OclExpression oclExpression = context.visitLeft2Right(OclExpression.class, csElement.getOclExpression());		
 			pivotElement.setQueryExpression(oclExpression);
+			return null;
+		}
+	}
+
+	protected static class RelationDomainAssignmentContentContinuation extends SingleContinuation<DefaultValueCS>
+	{
+		private RelationDomainAssignmentContentContinuation(CS2PivotConversion context, DefaultValueCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			RelationDomainAssignment pDomain = PivotUtil.getPivot(RelationDomainAssignment.class, csElement);
+			OclExpression oclExpression = context.visitLeft2Right(OclExpression.class, csElement.getInitialiser());		
+			pDomain.setValueExp(oclExpression);
 			return null;
 		}
 	}

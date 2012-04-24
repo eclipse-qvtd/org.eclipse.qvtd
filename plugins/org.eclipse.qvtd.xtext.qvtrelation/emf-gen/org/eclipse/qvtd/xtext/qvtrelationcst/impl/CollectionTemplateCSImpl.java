@@ -22,10 +22,12 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
@@ -58,24 +60,14 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	protected EList<TemplateVariableCS> memberIdentifiers;
 
 	/**
-	 * The default value of the '{@link #getRestIdentifier() <em>Rest Identifier</em>}' attribute.
+	 * The cached value of the '{@link #getRestIdentifier() <em>Rest Identifier</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getRestIdentifier()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String REST_IDENTIFIER_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getRestIdentifier() <em>Rest Identifier</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRestIdentifier()
-	 * @generated
-	 * @ordered
-	 */
-	protected String restIdentifier = REST_IDENTIFIER_EDEFAULT;
+	protected Variable restIdentifier;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,7 +105,15 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getRestIdentifier() {
+	public Variable getRestIdentifier() {
+		if (restIdentifier != null && ((EObject)restIdentifier).eIsProxy()) {
+			InternalEObject oldRestIdentifier = (InternalEObject)restIdentifier;
+			restIdentifier = (Variable)eResolveProxy(oldRestIdentifier);
+			if (restIdentifier != oldRestIdentifier) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER, oldRestIdentifier, restIdentifier));
+			}
+		}
 		return restIdentifier;
 	}
 
@@ -122,8 +122,17 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRestIdentifier(String newRestIdentifier) {
-		String oldRestIdentifier = restIdentifier;
+	public Variable basicGetRestIdentifier() {
+		return restIdentifier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRestIdentifier(Variable newRestIdentifier) {
+		Variable oldRestIdentifier = restIdentifier;
 		restIdentifier = newRestIdentifier;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER, oldRestIdentifier, restIdentifier));
@@ -154,7 +163,8 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS:
 				return getMemberIdentifiers();
 			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
-				return getRestIdentifier();
+				if (resolve) return getRestIdentifier();
+				return basicGetRestIdentifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -173,7 +183,7 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 				getMemberIdentifiers().addAll((Collection<? extends TemplateVariableCS>)newValue);
 				return;
 			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
-				setRestIdentifier((String)newValue);
+				setRestIdentifier((Variable)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -191,7 +201,7 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 				getMemberIdentifiers().clear();
 				return;
 			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
-				setRestIdentifier(REST_IDENTIFIER_EDEFAULT);
+				setRestIdentifier((Variable)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -208,25 +218,9 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS:
 				return memberIdentifiers != null && !memberIdentifiers.isEmpty();
 			case QVTrelationCSTPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
-				return REST_IDENTIFIER_EDEFAULT == null ? restIdentifier != null : !REST_IDENTIFIER_EDEFAULT.equals(restIdentifier);
+				return restIdentifier != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (restIdentifier: ");
-		result.append(restIdentifier);
-		result.append(')');
-		return result.toString();
 	}
 
 	@SuppressWarnings("unchecked")

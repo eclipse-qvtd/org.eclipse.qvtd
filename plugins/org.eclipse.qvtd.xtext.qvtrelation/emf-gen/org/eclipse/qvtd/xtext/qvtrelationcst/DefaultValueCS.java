@@ -16,6 +16,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelationcst;
 
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
@@ -73,12 +74,12 @@ public interface DefaultValueCS extends ModelElementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Property Id</em>' reference.
-	 * @see #setPropertyId(Property)
+	 * @see #setPropertyId(Variable)
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getDefaultValueCS_PropertyId()
 	 * @model required="true"
 	 * @generated
 	 */
-	Property getPropertyId();
+	Variable getPropertyId();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS#getPropertyId <em>Property Id</em>}' reference.
@@ -88,6 +89,6 @@ public interface DefaultValueCS extends ModelElementCS {
 	 * @see #getPropertyId()
 	 * @generated
 	 */
-	void setPropertyId(Property value);
+	void setPropertyId(Variable value);
 
 } // DefaultValueCS

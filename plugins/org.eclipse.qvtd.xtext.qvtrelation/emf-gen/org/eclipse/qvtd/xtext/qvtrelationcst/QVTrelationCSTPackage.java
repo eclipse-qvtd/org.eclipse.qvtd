@@ -417,7 +417,7 @@ public interface QVTrelationCSTPackage extends EPackage {
 	int COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS = TEMPLATE_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Rest Identifier</b></em>' attribute.
+	 * The feature id for the '<em><b>Rest Identifier</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2312,15 +2312,15 @@ public interface QVTrelationCSTPackage extends EPackage {
 	EReference getCollectionTemplateCS_MemberIdentifiers();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS#getRestIdentifier <em>Rest Identifier</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS#getRestIdentifier <em>Rest Identifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Rest Identifier</em>'.
+	 * @return the meta object for the reference '<em>Rest Identifier</em>'.
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS#getRestIdentifier()
 	 * @see #getCollectionTemplateCS()
 	 * @generated
 	 */
-	EAttribute getCollectionTemplateCS_RestIdentifier();
+	EReference getCollectionTemplateCS_RestIdentifier();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS <em>Default Value CS</em>}'.
@@ -3034,12 +3034,12 @@ public interface QVTrelationCSTPackage extends EPackage {
 		EReference COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS = eINSTANCE.getCollectionTemplateCS_MemberIdentifiers();
 
 		/**
-		 * The meta object literal for the '<em><b>Rest Identifier</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Rest Identifier</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLLECTION_TEMPLATE_CS__REST_IDENTIFIER = eINSTANCE.getCollectionTemplateCS_RestIdentifier();
+		EReference COLLECTION_TEMPLATE_CS__REST_IDENTIFIER = eINSTANCE.getCollectionTemplateCS_RestIdentifier();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.DefaultValueCSImpl <em>Default Value CS</em>}' class.

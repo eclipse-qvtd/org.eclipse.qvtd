@@ -324,13 +324,17 @@ protected class TopLevelCS_TransformationsAssignment_1 extends AssignmentToken  
  * 
  * 	name=UnrestrictedName? ":" type=CollectionTypeCS "{" (memberIdentifiers+=(TemplateCS | ElementTemplateCS) (","
  * 
- * 	memberIdentifiers+=(TemplateCS | ElementTemplateCS))* "++" (restIdentifier=UnrestrictedName | "_"))? "}";
+ * 	memberIdentifiers+=(TemplateCS | ElementTemplateCS))* "++" (restIdentifier=[pivot::Variable|UnrestrictedName] |
+ * 
+ * 	"_"))? "}";
  *
  **/
 
 // name=UnrestrictedName? ":" type=CollectionTypeCS "{" (memberIdentifiers+=(TemplateCS | ElementTemplateCS) (","
 // 
-// memberIdentifiers+=(TemplateCS | ElementTemplateCS))* "++" (restIdentifier=UnrestrictedName | "_"))? "}"
+// memberIdentifiers+=(TemplateCS | ElementTemplateCS))* "++" (restIdentifier=[pivot::Variable|UnrestrictedName] | "_"))?
+// 
+// "}"
 protected class CollectionTemplateCS_Group extends GroupToken {
 	
 	public CollectionTemplateCS_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -484,7 +488,7 @@ protected class CollectionTemplateCS_LeftCurlyBracketKeyword_3 extends KeywordTo
 
 // (memberIdentifiers+=(TemplateCS | ElementTemplateCS) ("," memberIdentifiers+=(TemplateCS | ElementTemplateCS))* "++"
 // 
-// (restIdentifier=UnrestrictedName | "_"))?
+// (restIdentifier=[pivot::Variable|UnrestrictedName] | "_"))?
 protected class CollectionTemplateCS_Group_4 extends GroupToken {
 	
 	public CollectionTemplateCS_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -687,7 +691,7 @@ protected class CollectionTemplateCS_PlusSignPlusSignKeyword_4_2 extends Keyword
 
 }
 
-// restIdentifier=UnrestrictedName | "_"
+// restIdentifier=[pivot::Variable|UnrestrictedName] | "_"
 protected class CollectionTemplateCS_Alternatives_4_3 extends AlternativesToken {
 
 	public CollectionTemplateCS_Alternatives_4_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -710,7 +714,7 @@ protected class CollectionTemplateCS_Alternatives_4_3 extends AlternativesToken 
 
 }
 
-// restIdentifier=UnrestrictedName
+// restIdentifier=[pivot::Variable|UnrestrictedName]
 protected class CollectionTemplateCS_RestIdentifierAssignment_4_3_0 extends AssignmentToken  {
 	
 	public CollectionTemplateCS_RestIdentifierAssignment_4_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -734,10 +738,13 @@ protected class CollectionTemplateCS_RestIdentifierAssignment_4_3_0 extends Assi
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("restIdentifier",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("restIdentifier");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getCollectionTemplateCSAccess().getRestIdentifierUnrestrictedNameParserRuleCall_4_3_0_0(), value, null)) {
-			type = AssignmentType.DATATYPE_RULE_CALL;
-			element = grammarAccess.getCollectionTemplateCSAccess().getRestIdentifierUnrestrictedNameParserRuleCall_4_3_0_0();
-			return obj;
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getCollectionTemplateCSAccess().getRestIdentifierVariableCrossReference_4_3_0_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getCollectionTemplateCSAccess().getRestIdentifierVariableCrossReference_4_3_0_0(); 
+				return obj;
+			}
 		}
 		return null;
 	}
@@ -799,11 +806,11 @@ protected class CollectionTemplateCS_RightCurlyBracketKeyword_5 extends KeywordT
  *
  * DefaultValueCS:
  * 
- * 	propertyId=[pivot::Property|UnrestrictedName] "=" initialiser=ExpCS ";";
+ * 	propertyId=[pivot::Variable|UnrestrictedName] "=" initialiser=ExpCS ";";
  *
  **/
 
-// propertyId=[pivot::Property|UnrestrictedName] "=" initialiser=ExpCS ";"
+// propertyId=[pivot::Variable|UnrestrictedName] "=" initialiser=ExpCS ";"
 protected class DefaultValueCS_Group extends GroupToken {
 	
 	public DefaultValueCS_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -832,7 +839,7 @@ protected class DefaultValueCS_Group extends GroupToken {
 
 }
 
-// propertyId=[pivot::Property|UnrestrictedName]
+// propertyId=[pivot::Variable|UnrestrictedName]
 protected class DefaultValueCS_PropertyIdAssignment_0 extends AssignmentToken  {
 	
 	public DefaultValueCS_PropertyIdAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -857,9 +864,9 @@ protected class DefaultValueCS_PropertyIdAssignment_0 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("propertyId");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getDefaultValueCSAccess().getPropertyIdPropertyCrossReference_0_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getDefaultValueCSAccess().getPropertyIdVariableCrossReference_0_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getDefaultValueCSAccess().getPropertyIdPropertyCrossReference_0_0(); 
+				element = grammarAccess.getDefaultValueCSAccess().getPropertyIdVariableCrossReference_0_0(); 
 				return obj;
 			}
 		}

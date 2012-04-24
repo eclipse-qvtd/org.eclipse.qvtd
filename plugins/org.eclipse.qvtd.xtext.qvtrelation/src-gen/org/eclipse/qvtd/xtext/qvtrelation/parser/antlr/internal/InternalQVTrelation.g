@@ -286,17 +286,17 @@ ruleCollectionTemplateCS returns [EObject current=null]
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getRestIdentifierUnrestrictedNameParserRuleCall_4_3_0_0()); 
-	    }
-		lv_restIdentifier_8_0=ruleUnrestrictedName		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getCollectionTemplateCSRule());
+		  /* */ 
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getCollectionTemplateCSRule());
 	        }
-       		set(
-       			$current, 
-       			"restIdentifier",
-        		lv_restIdentifier_8_0, 
-        		"UnrestrictedName");
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getRestIdentifierVariableCrossReference_4_3_0_0()); 
+	    }
+		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -342,7 +342,7 @@ ruleDefaultValueCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getDefaultValueCSAccess().getPropertyIdPropertyCrossReference_0_0()); 
+	        newCompositeNode(grammarAccess.getDefaultValueCSAccess().getPropertyIdVariableCrossReference_0_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();

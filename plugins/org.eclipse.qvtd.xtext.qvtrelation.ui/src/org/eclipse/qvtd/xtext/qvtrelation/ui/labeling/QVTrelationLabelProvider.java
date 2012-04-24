@@ -3,17 +3,10 @@
 */
 package org.eclipse.qvtd.xtext.qvtrelation.ui.labeling;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling.EssentialOCLLabelProvider;
-import org.eclipse.qvtd.pivot.qvtbase.Function;
-import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
-import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
@@ -27,6 +20,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
+import org.eclipse.qvtd.xtext.qvtbase.ui.labeling.QVTbaseLabelProvider;
 
 import com.google.inject.Inject;
 
@@ -35,7 +29,7 @@ import com.google.inject.Inject;
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class QVTrelationLabelProvider extends EssentialOCLLabelProvider {
+public class QVTrelationLabelProvider extends QVTbaseLabelProvider {
 
 	@Inject
 	public QVTrelationLabelProvider(AdapterFactoryLabelProvider delegate) {
@@ -50,14 +44,6 @@ public class QVTrelationLabelProvider extends EssentialOCLLabelProvider {
 		return "DomainPattern.gif";
 	}
 
-	protected String image(Function ele) {
-		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/Function.gif";
-	}
-
-	protected String image(FunctionParameter ele) {
-		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/FunctionParameter.gif";
-	}
-
 	protected String image(Key ele) {
 		return "Key.gif";
 	}
@@ -68,14 +54,6 @@ public class QVTrelationLabelProvider extends EssentialOCLLabelProvider {
 
 	protected String image(OppositePropertyCallExp ele) {
 		return "OppositePropertyCallExp.gif";
-	}
-
-	protected String image(Pattern ele) {
-		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/Pattern.gif";
-	}
-
-	protected String image(Predicate ele) {
-		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/Predicate.gif";
 	}
 
 	protected String image(PropertyTemplateItem ele) {
@@ -106,10 +84,6 @@ public class QVTrelationLabelProvider extends EssentialOCLLabelProvider {
 		return "RelationalTransformation.gif";
 	}
 
-	protected String image(TypedModel ele) {
-		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/TypedModel.gif";
-	}
-
 	protected String text(Key ele) {
 		StringBuilder s = new StringBuilder();
 		appendName(s, ele.getIdentifies());
@@ -137,45 +111,7 @@ public class QVTrelationLabelProvider extends EssentialOCLLabelProvider {
 		}
 	}
 
-	protected String text(Relation ele) {
-		return ele.getName();
-	}
-
 	protected String text(RelationCallExp ele) {
 		return ele.getName();
 	}
-
-	protected String text(RelationDomain ele) {
-		return ele.getName();
-	}
-
-	protected String text(RelationalTransformation ele) {
-		return ele.getName();
-	}
-
-	protected String text(TypedModel ele) {
-		StringBuilder s = new StringBuilder();
-		appendName(s, ele);
-		s.append("{");
-		String prefix = "";
-		for (NamedElement usedPackage : ele.getUsedPackage()) {
-			s.append(prefix);
-			appendName(s, usedPackage);
-			prefix = ",";
-		}
-		s.append("}");
-		return s.toString();
-	}
-
-/*
-	//Labels and icons can be computed like this:
-	
-	String text(MyModel ele) {
-	  return "my "+ele.getName();
-	}
-	 
-    String image(MyModel ele) {
-      return "MyModel.gif";
-    }
-*/
 }

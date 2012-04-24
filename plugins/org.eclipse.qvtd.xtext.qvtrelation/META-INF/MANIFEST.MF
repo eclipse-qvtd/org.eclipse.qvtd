@@ -29,8 +29,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl.examples.pivot;visibility:=reexport,
  org.eclipse.qvtd.pivot.qvtbase;visibility:=reexport,
  org.eclipse.qvtd.pivot.qvttemplate;visibility:=reexport,
- org.eclipse.qvtd.pivot.qvtrelation;visibility:=reexport,
- org.eclipse.qvt
+ org.eclipse.qvtd.pivot.qvtrelation;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationPlugin$Implementation
 Import-Package: org.apache.log4j

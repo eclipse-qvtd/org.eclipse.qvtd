@@ -441,7 +441,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCollectionTemplateCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:158:1: ruleCollectionTemplateCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleUnrestrictedName ) )? otherlv_1= ':' ( (lv_type_2_0= ruleCollectionTypeCS ) ) otherlv_3= '{' ( ( ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) ) ) (otherlv_5= ',' ( ( (lv_memberIdentifiers_6_1= ruleTemplateCS | lv_memberIdentifiers_6_2= ruleElementTemplateCS ) ) ) )* otherlv_7= '++' ( ( (lv_restIdentifier_8_0= ruleUnrestrictedName ) ) | otherlv_9= '_' ) )? otherlv_10= '}' ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:158:1: ruleCollectionTemplateCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleUnrestrictedName ) )? otherlv_1= ':' ( (lv_type_2_0= ruleCollectionTypeCS ) ) otherlv_3= '{' ( ( ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) ) ) (otherlv_5= ',' ( ( (lv_memberIdentifiers_6_1= ruleTemplateCS | lv_memberIdentifiers_6_2= ruleElementTemplateCS ) ) ) )* otherlv_7= '++' ( ( ( ruleUnrestrictedName ) ) | otherlv_9= '_' ) )? otherlv_10= '}' ) ;
     public final EObject ruleCollectionTemplateCS() throws RecognitionException {
         EObject current = null;
 
@@ -463,17 +463,15 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
         EObject lv_memberIdentifiers_6_2 = null;
 
-        AntlrDatatypeRuleToken lv_restIdentifier_8_0 = null;
-
 
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:161:28: ( ( ( (lv_name_0_0= ruleUnrestrictedName ) )? otherlv_1= ':' ( (lv_type_2_0= ruleCollectionTypeCS ) ) otherlv_3= '{' ( ( ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) ) ) (otherlv_5= ',' ( ( (lv_memberIdentifiers_6_1= ruleTemplateCS | lv_memberIdentifiers_6_2= ruleElementTemplateCS ) ) ) )* otherlv_7= '++' ( ( (lv_restIdentifier_8_0= ruleUnrestrictedName ) ) | otherlv_9= '_' ) )? otherlv_10= '}' ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:162:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) )? otherlv_1= ':' ( (lv_type_2_0= ruleCollectionTypeCS ) ) otherlv_3= '{' ( ( ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) ) ) (otherlv_5= ',' ( ( (lv_memberIdentifiers_6_1= ruleTemplateCS | lv_memberIdentifiers_6_2= ruleElementTemplateCS ) ) ) )* otherlv_7= '++' ( ( (lv_restIdentifier_8_0= ruleUnrestrictedName ) ) | otherlv_9= '_' ) )? otherlv_10= '}' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:161:28: ( ( ( (lv_name_0_0= ruleUnrestrictedName ) )? otherlv_1= ':' ( (lv_type_2_0= ruleCollectionTypeCS ) ) otherlv_3= '{' ( ( ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) ) ) (otherlv_5= ',' ( ( (lv_memberIdentifiers_6_1= ruleTemplateCS | lv_memberIdentifiers_6_2= ruleElementTemplateCS ) ) ) )* otherlv_7= '++' ( ( ( ruleUnrestrictedName ) ) | otherlv_9= '_' ) )? otherlv_10= '}' ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:162:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) )? otherlv_1= ':' ( (lv_type_2_0= ruleCollectionTypeCS ) ) otherlv_3= '{' ( ( ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) ) ) (otherlv_5= ',' ( ( (lv_memberIdentifiers_6_1= ruleTemplateCS | lv_memberIdentifiers_6_2= ruleElementTemplateCS ) ) ) )* otherlv_7= '++' ( ( ( ruleUnrestrictedName ) ) | otherlv_9= '_' ) )? otherlv_10= '}' )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:162:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) )? otherlv_1= ':' ( (lv_type_2_0= ruleCollectionTypeCS ) ) otherlv_3= '{' ( ( ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) ) ) (otherlv_5= ',' ( ( (lv_memberIdentifiers_6_1= ruleTemplateCS | lv_memberIdentifiers_6_2= ruleElementTemplateCS ) ) ) )* otherlv_7= '++' ( ( (lv_restIdentifier_8_0= ruleUnrestrictedName ) ) | otherlv_9= '_' ) )? otherlv_10= '}' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:162:2: ( (lv_name_0_0= ruleUnrestrictedName ) )? otherlv_1= ':' ( (lv_type_2_0= ruleCollectionTypeCS ) ) otherlv_3= '{' ( ( ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) ) ) (otherlv_5= ',' ( ( (lv_memberIdentifiers_6_1= ruleTemplateCS | lv_memberIdentifiers_6_2= ruleElementTemplateCS ) ) ) )* otherlv_7= '++' ( ( (lv_restIdentifier_8_0= ruleUnrestrictedName ) ) | otherlv_9= '_' ) )? otherlv_10= '}'
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:162:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) )? otherlv_1= ':' ( (lv_type_2_0= ruleCollectionTypeCS ) ) otherlv_3= '{' ( ( ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) ) ) (otherlv_5= ',' ( ( (lv_memberIdentifiers_6_1= ruleTemplateCS | lv_memberIdentifiers_6_2= ruleElementTemplateCS ) ) ) )* otherlv_7= '++' ( ( ( ruleUnrestrictedName ) ) | otherlv_9= '_' ) )? otherlv_10= '}' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:162:2: ( (lv_name_0_0= ruleUnrestrictedName ) )? otherlv_1= ':' ( (lv_type_2_0= ruleCollectionTypeCS ) ) otherlv_3= '{' ( ( ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) ) ) (otherlv_5= ',' ( ( (lv_memberIdentifiers_6_1= ruleTemplateCS | lv_memberIdentifiers_6_2= ruleElementTemplateCS ) ) ) )* otherlv_7= '++' ( ( ( ruleUnrestrictedName ) ) | otherlv_9= '_' ) )? otherlv_10= '}'
             {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:162:2: ( (lv_name_0_0= ruleUnrestrictedName ) )?
             int alt3=2;
@@ -568,7 +566,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_3, grammarAccess.getCollectionTemplateCSAccess().getLeftCurlyBracketKeyword_3());
                   
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:206:1: ( ( ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) ) ) (otherlv_5= ',' ( ( (lv_memberIdentifiers_6_1= ruleTemplateCS | lv_memberIdentifiers_6_2= ruleElementTemplateCS ) ) ) )* otherlv_7= '++' ( ( (lv_restIdentifier_8_0= ruleUnrestrictedName ) ) | otherlv_9= '_' ) )?
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:206:1: ( ( ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) ) ) (otherlv_5= ',' ( ( (lv_memberIdentifiers_6_1= ruleTemplateCS | lv_memberIdentifiers_6_2= ruleElementTemplateCS ) ) ) )* otherlv_7= '++' ( ( ( ruleUnrestrictedName ) ) | otherlv_9= '_' ) )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -577,7 +575,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             }
             switch (alt8) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:206:2: ( ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) ) ) (otherlv_5= ',' ( ( (lv_memberIdentifiers_6_1= ruleTemplateCS | lv_memberIdentifiers_6_2= ruleElementTemplateCS ) ) ) )* otherlv_7= '++' ( ( (lv_restIdentifier_8_0= ruleUnrestrictedName ) ) | otherlv_9= '_' )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:206:2: ( ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) ) ) (otherlv_5= ',' ( ( (lv_memberIdentifiers_6_1= ruleTemplateCS | lv_memberIdentifiers_6_2= ruleElementTemplateCS ) ) ) )* otherlv_7= '++' ( ( ( ruleUnrestrictedName ) ) | otherlv_9= '_' )
                     {
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:206:2: ( ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) ) )
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:207:1: ( (lv_memberIdentifiers_4_1= ruleTemplateCS | lv_memberIdentifiers_4_2= ruleElementTemplateCS ) )
@@ -769,7 +767,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                           	newLeafNode(otherlv_7, grammarAccess.getCollectionTemplateCSAccess().getPlusSignPlusSignKeyword_4_2());
                           
                     }
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:286:1: ( ( (lv_restIdentifier_8_0= ruleUnrestrictedName ) ) | otherlv_9= '_' )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:286:1: ( ( ( ruleUnrestrictedName ) ) | otherlv_9= '_' )
                     int alt7=2;
                     int LA7_0 = input.LA(1);
 
@@ -788,34 +786,38 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt7) {
                         case 1 :
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:286:2: ( (lv_restIdentifier_8_0= ruleUnrestrictedName ) )
+                            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:286:2: ( ( ruleUnrestrictedName ) )
                             {
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:286:2: ( (lv_restIdentifier_8_0= ruleUnrestrictedName ) )
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:287:1: (lv_restIdentifier_8_0= ruleUnrestrictedName )
+                            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:286:2: ( ( ruleUnrestrictedName ) )
+                            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:287:1: ( ruleUnrestrictedName )
                             {
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:287:1: (lv_restIdentifier_8_0= ruleUnrestrictedName )
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:288:3: lv_restIdentifier_8_0= ruleUnrestrictedName
+                            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:287:1: ( ruleUnrestrictedName )
+                            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:288:3: ruleUnrestrictedName
                             {
                             if ( state.backtracking==0 ) {
                                
-                              	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getRestIdentifierUnrestrictedNameParserRuleCall_4_3_0_0()); 
+                              		  /* */ 
+                              		
+                            }
+                            if ( state.backtracking==0 ) {
+
+                              			if (current==null) {
+                              	            current = createModelElement(grammarAccess.getCollectionTemplateCSRule());
+                              	        }
+                                      
+                            }
+                            if ( state.backtracking==0 ) {
+                               
+                              	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getRestIdentifierVariableCrossReference_4_3_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleCollectionTemplateCS467);
-                            lv_restIdentifier_8_0=ruleUnrestrictedName();
+                            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleCollectionTemplateCS473);
+                            ruleUnrestrictedName();
 
                             state._fsp--;
                             if (state.failed) return current;
                             if ( state.backtracking==0 ) {
-
-                              	        if (current==null) {
-                              	            current = createModelElementForParent(grammarAccess.getCollectionTemplateCSRule());
-                              	        }
-                                     		set(
-                                     			current, 
-                                     			"restIdentifier",
-                                      		lv_restIdentifier_8_0, 
-                                      		"UnrestrictedName");
+                               
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -831,7 +833,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         case 2 :
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:305:7: otherlv_9= '_'
                             {
-                            otherlv_9=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleCollectionTemplateCS485); if (state.failed) return current;
+                            otherlv_9=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleCollectionTemplateCS491); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_9, grammarAccess.getCollectionTemplateCSAccess().get_Keyword_4_3_1());
@@ -849,7 +851,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_10=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleCollectionTemplateCS500); if (state.failed) return current;
+            otherlv_10=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleCollectionTemplateCS506); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_10, grammarAccess.getCollectionTemplateCSAccess().getRightCurlyBracketKeyword_5());
@@ -892,7 +894,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDefaultValueCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleDefaultValueCS_in_entryRuleDefaultValueCS536);
+            pushFollow(FollowSets000.FOLLOW_ruleDefaultValueCS_in_entryRuleDefaultValueCS542);
             iv_ruleDefaultValueCS=ruleDefaultValueCS();
 
             state._fsp--;
@@ -900,7 +902,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleDefaultValueCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDefaultValueCS546); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDefaultValueCS552); if (state.failed) return current;
 
             }
 
@@ -956,10 +958,10 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             }
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getDefaultValueCSAccess().getPropertyIdPropertyCrossReference_0_0()); 
+              	        newCompositeNode(grammarAccess.getDefaultValueCSAccess().getPropertyIdVariableCrossReference_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleDefaultValueCS598);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleDefaultValueCS604);
             ruleUnrestrictedName();
 
             state._fsp--;
@@ -975,7 +977,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleDefaultValueCS610); if (state.failed) return current;
+            otherlv_1=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleDefaultValueCS616); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getDefaultValueCSAccess().getEqualsSignKeyword_1());
@@ -992,7 +994,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getDefaultValueCSAccess().getInitialiserExpCSParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleDefaultValueCS631);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleDefaultValueCS637);
             lv_initialiser_2_0=ruleExpCS();
 
             state._fsp--;
@@ -1016,7 +1018,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleDefaultValueCS643); if (state.failed) return current;
+            otherlv_3=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleDefaultValueCS649); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_3, grammarAccess.getDefaultValueCSAccess().getSemicolonKeyword_3());
@@ -1059,7 +1061,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDomainCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleDomainCS_in_entryRuleDomainCS679);
+            pushFollow(FollowSets000.FOLLOW_ruleDomainCS_in_entryRuleDomainCS685);
             iv_ruleDomainCS=ruleDomainCS();
 
             state._fsp--;
@@ -1067,7 +1069,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleDomainCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDomainCS689); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDomainCS695); if (state.failed) return current;
 
             }
 
@@ -1133,7 +1135,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:400:1: (lv_checkonly_0_0= 'checkonly' )
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:401:3: lv_checkonly_0_0= 'checkonly'
                     {
-                    lv_checkonly_0_0=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleDomainCS733); if (state.failed) return current;
+                    lv_checkonly_0_0=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleDomainCS739); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_checkonly_0_0, grammarAccess.getDomainCSAccess().getCheckonlyCheckonlyKeyword_0_0_0());
@@ -1165,7 +1167,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:416:1: (lv_enforce_1_0= 'enforce' )
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:417:3: lv_enforce_1_0= 'enforce'
                     {
-                    lv_enforce_1_0=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleDomainCS770); if (state.failed) return current;
+                    lv_enforce_1_0=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleDomainCS776); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_enforce_1_0, grammarAccess.getDomainCSAccess().getEnforceEnforceKeyword_0_1_0());
@@ -1191,7 +1193,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleDomainCS797); if (state.failed) return current;
+            otherlv_2=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleDomainCS803); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getDomainCSAccess().getDomainKeyword_1());
@@ -1220,7 +1222,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getDomainCSAccess().getModelIdTypedModelCrossReference_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleDomainCS824);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleDomainCS830);
             ruleUnrestrictedName();
 
             state._fsp--;
@@ -1247,7 +1249,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getDomainCSAccess().getPatternDomainPatternCSParserRuleCall_3_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleDomainPatternCS_in_ruleDomainCS845);
+            pushFollow(FollowSets000.FOLLOW_ruleDomainPatternCS_in_ruleDomainCS851);
             lv_pattern_4_0=ruleDomainPatternCS();
 
             state._fsp--;
@@ -1282,7 +1284,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:470:4: otherlv_5= 'implementedby' ( (lv_implementedBy_6_0= ruleExpCS ) )
                     {
-                    otherlv_5=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleDomainCS858); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleDomainCS864); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_5, grammarAccess.getDomainCSAccess().getImplementedbyKeyword_4_0());
@@ -1299,7 +1301,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getDomainCSAccess().getImplementedByExpCSParserRuleCall_4_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleDomainCS879);
+                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleDomainCS885);
                     lv_implementedBy_6_0=ruleExpCS();
 
                     state._fsp--;
@@ -1340,13 +1342,13 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:492:6: otherlv_7= 'default_values' otherlv_8= '{' ( (lv_defaultValues_9_0= ruleDefaultValueCS ) )+ otherlv_10= '}'
                     {
-                    otherlv_7=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleDomainCS894); if (state.failed) return current;
+                    otherlv_7=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleDomainCS900); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_7, grammarAccess.getDomainCSAccess().getDefault_valuesKeyword_5_0());
                           
                     }
-                    otherlv_8=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleDomainCS906); if (state.failed) return current;
+                    otherlv_8=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleDomainCS912); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_8, grammarAccess.getDomainCSAccess().getLeftCurlyBracketKeyword_5_1());
@@ -1376,7 +1378,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getDomainCSAccess().getDefaultValuesDefaultValueCSParserRuleCall_5_2_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleDefaultValueCS_in_ruleDomainCS927);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleDefaultValueCS_in_ruleDomainCS933);
                     	    lv_defaultValues_9_0=ruleDefaultValueCS();
 
                     	    state._fsp--;
@@ -1411,7 +1413,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         cnt11++;
                     } while (true);
 
-                    otherlv_10=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleDomainCS940); if (state.failed) return current;
+                    otherlv_10=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleDomainCS946); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_10, grammarAccess.getDomainCSAccess().getRightCurlyBracketKeyword_5_3());
@@ -1423,7 +1425,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_11=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleDomainCS954); if (state.failed) return current;
+            otherlv_11=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleDomainCS960); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_11, grammarAccess.getDomainCSAccess().getSemicolonKeyword_6());
@@ -1466,7 +1468,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDomainPatternCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleDomainPatternCS_in_entryRuleDomainPatternCS990);
+            pushFollow(FollowSets000.FOLLOW_ruleDomainPatternCS_in_entryRuleDomainPatternCS996);
             iv_ruleDomainPatternCS=ruleDomainPatternCS();
 
             state._fsp--;
@@ -1474,7 +1476,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleDomainPatternCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDomainPatternCS1000); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDomainPatternCS1006); if (state.failed) return current;
 
             }
 
@@ -1516,7 +1518,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getDomainPatternCSAccess().getTemplateTemplateCSParserRuleCall_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTemplateCS_in_ruleDomainPatternCS1045);
+            pushFollow(FollowSets000.FOLLOW_ruleTemplateCS_in_ruleDomainPatternCS1051);
             lv_template_0_0=ruleTemplateCS();
 
             state._fsp--;
@@ -1574,7 +1576,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getElementTemplateCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleElementTemplateCS_in_entryRuleElementTemplateCS1080);
+            pushFollow(FollowSets000.FOLLOW_ruleElementTemplateCS_in_entryRuleElementTemplateCS1086);
             iv_ruleElementTemplateCS=ruleElementTemplateCS();
 
             state._fsp--;
@@ -1582,7 +1584,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleElementTemplateCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleElementTemplateCS1090); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleElementTemplateCS1096); if (state.failed) return current;
 
             }
 
@@ -1646,7 +1648,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getElementTemplateCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleElementTemplateCS1136);
+                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleElementTemplateCS1142);
                     lv_name_0_0=ruleUnrestrictedName();
 
                     state._fsp--;
@@ -1697,7 +1699,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleElementTemplateCS1167); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleElementTemplateCS1173); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getElementTemplateCSAccess().get_Keyword_1_1());
@@ -1746,7 +1748,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getKeyDeclCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleKeyDeclCS_in_entryRuleKeyDeclCS1204);
+            pushFollow(FollowSets000.FOLLOW_ruleKeyDeclCS_in_entryRuleKeyDeclCS1210);
             iv_ruleKeyDeclCS=ruleKeyDeclCS();
 
             state._fsp--;
@@ -1754,7 +1756,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleKeyDeclCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKeyDeclCS1214); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKeyDeclCS1220); if (state.failed) return current;
 
             }
 
@@ -1793,7 +1795,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:639:1: (otherlv_0= 'key' ( (lv_pathName_1_0= rulePathNameCS ) ) otherlv_2= '{' ( ( ruleUnrestrictedName ) ) (otherlv_4= ',' ( ( ruleUnrestrictedName ) ) )* otherlv_6= '}' otherlv_7= ';' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:639:3: otherlv_0= 'key' ( (lv_pathName_1_0= rulePathNameCS ) ) otherlv_2= '{' ( ( ruleUnrestrictedName ) ) (otherlv_4= ',' ( ( ruleUnrestrictedName ) ) )* otherlv_6= '}' otherlv_7= ';'
             {
-            otherlv_0=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleKeyDeclCS1251); if (state.failed) return current;
+            otherlv_0=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleKeyDeclCS1257); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getKeyDeclCSAccess().getKeyKeyword_0());
@@ -1810,7 +1812,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getKeyDeclCSAccess().getPathNamePathNameCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_ruleKeyDeclCS1272);
+            pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_ruleKeyDeclCS1278);
             lv_pathName_1_0=rulePathNameCS();
 
             state._fsp--;
@@ -1834,7 +1836,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleKeyDeclCS1284); if (state.failed) return current;
+            otherlv_2=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleKeyDeclCS1290); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getKeyDeclCSAccess().getLeftCurlyBracketKeyword_2());
@@ -1863,7 +1865,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getKeyDeclCSAccess().getPropertyIdsPropertyCrossReference_3_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleKeyDeclCS1311);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleKeyDeclCS1317);
             ruleUnrestrictedName();
 
             state._fsp--;
@@ -1894,7 +1896,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:683:4: otherlv_4= ',' ( ( ruleUnrestrictedName ) )
             	    {
-            	    otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleKeyDeclCS1324); if (state.failed) return current;
+            	    otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleKeyDeclCS1330); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_4, grammarAccess.getKeyDeclCSAccess().getCommaKeyword_4_0());
@@ -1923,7 +1925,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getKeyDeclCSAccess().getPropertyIdsPropertyCrossReference_4_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleKeyDeclCS1351);
+            	    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleKeyDeclCS1357);
             	    ruleUnrestrictedName();
 
             	    state._fsp--;
@@ -1948,13 +1950,13 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_6=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleKeyDeclCS1365); if (state.failed) return current;
+            otherlv_6=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleKeyDeclCS1371); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_6, grammarAccess.getKeyDeclCSAccess().getRightCurlyBracketKeyword_5());
                   
             }
-            otherlv_7=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleKeyDeclCS1377); if (state.failed) return current;
+            otherlv_7=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleKeyDeclCS1383); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_7, grammarAccess.getKeyDeclCSAccess().getSemicolonKeyword_6());
@@ -1997,7 +1999,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getLibraryCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleLibraryCS_in_entryRuleLibraryCS1413);
+            pushFollow(FollowSets000.FOLLOW_ruleLibraryCS_in_entryRuleLibraryCS1419);
             iv_ruleLibraryCS=ruleLibraryCS();
 
             state._fsp--;
@@ -2005,7 +2007,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleLibraryCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLibraryCS1423); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLibraryCS1429); if (state.failed) return current;
 
             }
 
@@ -2039,7 +2041,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:734:1: (otherlv_0= 'library' ( ( ruleURI ) ) otherlv_2= ';' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:734:3: otherlv_0= 'library' ( ( ruleURI ) ) otherlv_2= ';'
             {
-            otherlv_0=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleLibraryCS1460); if (state.failed) return current;
+            otherlv_0=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleLibraryCS1466); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getLibraryCSAccess().getLibraryKeyword_0());
@@ -2068,7 +2070,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getLibraryCSAccess().getPackagePackageCrossReference_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleURI_in_ruleLibraryCS1487);
+            pushFollow(FollowSets000.FOLLOW_ruleURI_in_ruleLibraryCS1493);
             ruleURI();
 
             state._fsp--;
@@ -2084,7 +2086,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleLibraryCS1499); if (state.failed) return current;
+            otherlv_2=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleLibraryCS1505); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getLibraryCSAccess().getSemicolonKeyword_2());
@@ -2127,7 +2129,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getModelDeclCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleModelDeclCS_in_entryRuleModelDeclCS1535);
+            pushFollow(FollowSets000.FOLLOW_ruleModelDeclCS_in_entryRuleModelDeclCS1541);
             iv_ruleModelDeclCS=ruleModelDeclCS();
 
             state._fsp--;
@@ -2135,7 +2137,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleModelDeclCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModelDeclCS1545); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModelDeclCS1551); if (state.failed) return current;
 
             }
 
@@ -2184,7 +2186,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1591);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1597);
             lv_name_0_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -2208,7 +2210,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleModelDeclCS1603); if (state.failed) return current;
+            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleModelDeclCS1609); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getModelDeclCSAccess().getColonKeyword_1());
@@ -2258,7 +2260,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getMetaModelIdsPackageCrossReference_2_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1631);
+                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1637);
                     ruleUnrestrictedName();
 
                     state._fsp--;
@@ -2283,7 +2285,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:822:6: (otherlv_3= '{' ( ( ruleUnrestrictedName ) ) (otherlv_5= ',' ( ( ruleUnrestrictedName ) ) )* otherlv_7= '}' )
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:822:8: otherlv_3= '{' ( ( ruleUnrestrictedName ) ) (otherlv_5= ',' ( ( ruleUnrestrictedName ) ) )* otherlv_7= '}'
                     {
-                    otherlv_3=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleModelDeclCS1650); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleModelDeclCS1656); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_3, grammarAccess.getModelDeclCSAccess().getLeftCurlyBracketKeyword_2_1_0());
@@ -2312,7 +2314,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getMetaModelIdsPackageCrossReference_2_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1677);
+                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1683);
                     ruleUnrestrictedName();
 
                     state._fsp--;
@@ -2343,7 +2345,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:844:4: otherlv_5= ',' ( ( ruleUnrestrictedName ) )
                     	    {
-                    	    otherlv_5=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleModelDeclCS1690); if (state.failed) return current;
+                    	    otherlv_5=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleModelDeclCS1696); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_5, grammarAccess.getModelDeclCSAccess().getCommaKeyword_2_1_2_0());
@@ -2372,7 +2374,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getMetaModelIdsPackageCrossReference_2_1_2_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1717);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1723);
                     	    ruleUnrestrictedName();
 
                     	    state._fsp--;
@@ -2397,7 +2399,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_7=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleModelDeclCS1731); if (state.failed) return current;
+                    otherlv_7=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleModelDeclCS1737); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_7, grammarAccess.getModelDeclCSAccess().getRightCurlyBracketKeyword_2_1_3());
@@ -2449,7 +2451,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getObjectTemplateCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleObjectTemplateCS_in_entryRuleObjectTemplateCS1769);
+            pushFollow(FollowSets000.FOLLOW_ruleObjectTemplateCS_in_entryRuleObjectTemplateCS1775);
             iv_ruleObjectTemplateCS=ruleObjectTemplateCS();
 
             state._fsp--;
@@ -2457,7 +2459,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleObjectTemplateCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleObjectTemplateCS1779); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleObjectTemplateCS1785); if (state.failed) return current;
 
             }
 
@@ -2520,7 +2522,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getObjectTemplateCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleObjectTemplateCS1825);
+                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleObjectTemplateCS1831);
                     lv_name_0_0=ruleUnrestrictedName();
 
                     state._fsp--;
@@ -2547,7 +2549,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleObjectTemplateCS1838); if (state.failed) return current;
+            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleObjectTemplateCS1844); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getObjectTemplateCSAccess().getColonKeyword_1());
@@ -2564,7 +2566,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getObjectTemplateCSAccess().getTypeTypedRefCSParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleObjectTemplateCS1859);
+            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleObjectTemplateCS1865);
             lv_type_2_0=ruleTypedRefCS();
 
             state._fsp--;
@@ -2588,7 +2590,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleObjectTemplateCS1871); if (state.failed) return current;
+            otherlv_3=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleObjectTemplateCS1877); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_3, grammarAccess.getObjectTemplateCSAccess().getLeftCurlyBracketKeyword_3());
@@ -2616,7 +2618,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getObjectTemplateCSAccess().getPropertyTemplatesPropertyTemplateCSParserRuleCall_4_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePropertyTemplateCS_in_ruleObjectTemplateCS1893);
+                    pushFollow(FollowSets000.FOLLOW_rulePropertyTemplateCS_in_ruleObjectTemplateCS1899);
                     lv_propertyTemplates_4_0=rulePropertyTemplateCS();
 
                     state._fsp--;
@@ -2655,7 +2657,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:953:4: otherlv_5= ',' ( (lv_propertyTemplates_6_0= rulePropertyTemplateCS ) )
                     	    {
-                    	    otherlv_5=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleObjectTemplateCS1906); if (state.failed) return current;
+                    	    otherlv_5=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleObjectTemplateCS1912); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_5, grammarAccess.getObjectTemplateCSAccess().getCommaKeyword_4_1_0());
@@ -2672,7 +2674,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getObjectTemplateCSAccess().getPropertyTemplatesPropertyTemplateCSParserRuleCall_4_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_rulePropertyTemplateCS_in_ruleObjectTemplateCS1927);
+                    	    pushFollow(FollowSets000.FOLLOW_rulePropertyTemplateCS_in_ruleObjectTemplateCS1933);
                     	    lv_propertyTemplates_6_0=rulePropertyTemplateCS();
 
                     	    state._fsp--;
@@ -2711,7 +2713,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleObjectTemplateCS1943); if (state.failed) return current;
+            otherlv_7=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleObjectTemplateCS1949); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_7, grammarAccess.getObjectTemplateCSAccess().getRightCurlyBracketKeyword_5());
@@ -2754,7 +2756,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getParamDeclarationCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleParamDeclarationCS_in_entryRuleParamDeclarationCS1979);
+            pushFollow(FollowSets000.FOLLOW_ruleParamDeclarationCS_in_entryRuleParamDeclarationCS1985);
             iv_ruleParamDeclarationCS=ruleParamDeclarationCS();
 
             state._fsp--;
@@ -2762,7 +2764,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleParamDeclarationCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParamDeclarationCS1989); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParamDeclarationCS1995); if (state.failed) return current;
 
             }
 
@@ -2810,7 +2812,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getParamDeclarationCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleParamDeclarationCS2035);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleParamDeclarationCS2041);
             lv_name_0_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -2834,7 +2836,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleParamDeclarationCS2047); if (state.failed) return current;
+            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleParamDeclarationCS2053); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getParamDeclarationCSAccess().getColonKeyword_1());
@@ -2851,7 +2853,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleParamDeclarationCS2068);
+            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleParamDeclarationCS2074);
             lv_ownedType_2_0=ruleTypedRefCS();
 
             state._fsp--;
@@ -2912,7 +2914,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPredicateCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePredicateCS_in_entryRulePredicateCS2104);
+            pushFollow(FollowSets000.FOLLOW_rulePredicateCS_in_entryRulePredicateCS2110);
             iv_rulePredicateCS=rulePredicateCS();
 
             state._fsp--;
@@ -2920,7 +2922,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_rulePredicateCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePredicateCS2114); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePredicateCS2120); if (state.failed) return current;
 
             }
 
@@ -2966,7 +2968,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getPredicateCSAccess().getExprExpCSParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_rulePredicateCS2160);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_rulePredicateCS2166);
             lv_expr_0_0=ruleExpCS();
 
             state._fsp--;
@@ -2990,7 +2992,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,24,FollowSets000.FOLLOW_24_in_rulePredicateCS2172); if (state.failed) return current;
+            otherlv_1=(Token)match(input,24,FollowSets000.FOLLOW_24_in_rulePredicateCS2178); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getPredicateCSAccess().getSemicolonKeyword_1());
@@ -3033,7 +3035,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPrimitiveTypeDomainCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeDomainCS_in_entryRulePrimitiveTypeDomainCS2208);
+            pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeDomainCS_in_entryRulePrimitiveTypeDomainCS2214);
             iv_rulePrimitiveTypeDomainCS=rulePrimitiveTypeDomainCS();
 
             state._fsp--;
@@ -3041,7 +3043,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_rulePrimitiveTypeDomainCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrimitiveTypeDomainCS2218); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrimitiveTypeDomainCS2224); if (state.failed) return current;
 
             }
 
@@ -3081,13 +3083,13 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1104:1: (otherlv_0= 'primitive' otherlv_1= 'domain' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= ':' ( (lv_type_4_0= ruleTypedRefCS ) ) otherlv_5= ';' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1104:3: otherlv_0= 'primitive' otherlv_1= 'domain' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= ':' ( (lv_type_4_0= ruleTypedRefCS ) ) otherlv_5= ';'
             {
-            otherlv_0=(Token)match(input,32,FollowSets000.FOLLOW_32_in_rulePrimitiveTypeDomainCS2255); if (state.failed) return current;
+            otherlv_0=(Token)match(input,32,FollowSets000.FOLLOW_32_in_rulePrimitiveTypeDomainCS2261); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getPrimitiveTypeDomainCSAccess().getPrimitiveKeyword_0());
                   
             }
-            otherlv_1=(Token)match(input,27,FollowSets000.FOLLOW_27_in_rulePrimitiveTypeDomainCS2267); if (state.failed) return current;
+            otherlv_1=(Token)match(input,27,FollowSets000.FOLLOW_27_in_rulePrimitiveTypeDomainCS2273); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getPrimitiveTypeDomainCSAccess().getDomainKeyword_1());
@@ -3104,7 +3106,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getPrimitiveTypeDomainCSAccess().getNameUnrestrictedNameParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_rulePrimitiveTypeDomainCS2288);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_rulePrimitiveTypeDomainCS2294);
             lv_name_2_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -3128,7 +3130,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,17,FollowSets000.FOLLOW_17_in_rulePrimitiveTypeDomainCS2300); if (state.failed) return current;
+            otherlv_3=(Token)match(input,17,FollowSets000.FOLLOW_17_in_rulePrimitiveTypeDomainCS2306); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_3, grammarAccess.getPrimitiveTypeDomainCSAccess().getColonKeyword_3());
@@ -3145,7 +3147,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getPrimitiveTypeDomainCSAccess().getTypeTypedRefCSParserRuleCall_4_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_rulePrimitiveTypeDomainCS2321);
+            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_rulePrimitiveTypeDomainCS2327);
             lv_type_4_0=ruleTypedRefCS();
 
             state._fsp--;
@@ -3169,7 +3171,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,24,FollowSets000.FOLLOW_24_in_rulePrimitiveTypeDomainCS2333); if (state.failed) return current;
+            otherlv_5=(Token)match(input,24,FollowSets000.FOLLOW_24_in_rulePrimitiveTypeDomainCS2339); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_5, grammarAccess.getPrimitiveTypeDomainCSAccess().getSemicolonKeyword_5());
@@ -3212,7 +3214,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPropertyTemplateCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePropertyTemplateCS_in_entryRulePropertyTemplateCS2369);
+            pushFollow(FollowSets000.FOLLOW_rulePropertyTemplateCS_in_entryRulePropertyTemplateCS2375);
             iv_rulePropertyTemplateCS=rulePropertyTemplateCS();
 
             state._fsp--;
@@ -3220,7 +3222,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_rulePropertyTemplateCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePropertyTemplateCS2379); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePropertyTemplateCS2385); if (state.failed) return current;
 
             }
 
@@ -3278,7 +3280,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getPropertyTemplateCSAccess().getPropertyIdPropertyCrossReference_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_rulePropertyTemplateCS2431);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_rulePropertyTemplateCS2437);
             ruleUnrestrictedName();
 
             state._fsp--;
@@ -3294,7 +3296,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,23,FollowSets000.FOLLOW_23_in_rulePropertyTemplateCS2443); if (state.failed) return current;
+            otherlv_1=(Token)match(input,23,FollowSets000.FOLLOW_23_in_rulePropertyTemplateCS2449); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getPropertyTemplateCSAccess().getEqualsSignKeyword_1());
@@ -3311,7 +3313,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getPropertyTemplateCSAccess().getOclExpressionExpCSOrTemplateCSParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCSOrTemplateCS_in_rulePropertyTemplateCS2464);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCSOrTemplateCS_in_rulePropertyTemplateCS2470);
             lv_oclExpression_2_0=ruleExpCSOrTemplateCS();
 
             state._fsp--;
@@ -3372,7 +3374,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQueryCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleQueryCS_in_entryRuleQueryCS2500);
+            pushFollow(FollowSets000.FOLLOW_ruleQueryCS_in_entryRuleQueryCS2506);
             iv_ruleQueryCS=ruleQueryCS();
 
             state._fsp--;
@@ -3380,7 +3382,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleQueryCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleQueryCS2510); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleQueryCS2516); if (state.failed) return current;
 
             }
 
@@ -3430,7 +3432,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1238:1: (otherlv_0= 'query' ( (lv_name_1_0= ruleUnrestrictedName ) ) otherlv_2= '(' ( ( (lv_inputParamDeclarations_3_0= ruleParamDeclarationCS ) ) (otherlv_4= ',' ( (lv_inputParamDeclarations_5_0= ruleParamDeclarationCS ) ) )* )? otherlv_6= ')' otherlv_7= ':' ( (lv_ownedType_8_0= ruleTypedRefCS ) ) (otherlv_9= ';' | (otherlv_10= '{' ( (lv_oclExpression_11_0= ruleExpCS ) ) otherlv_12= '}' ) ) )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1238:3: otherlv_0= 'query' ( (lv_name_1_0= ruleUnrestrictedName ) ) otherlv_2= '(' ( ( (lv_inputParamDeclarations_3_0= ruleParamDeclarationCS ) ) (otherlv_4= ',' ( (lv_inputParamDeclarations_5_0= ruleParamDeclarationCS ) ) )* )? otherlv_6= ')' otherlv_7= ':' ( (lv_ownedType_8_0= ruleTypedRefCS ) ) (otherlv_9= ';' | (otherlv_10= '{' ( (lv_oclExpression_11_0= ruleExpCS ) ) otherlv_12= '}' ) )
             {
-            otherlv_0=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleQueryCS2547); if (state.failed) return current;
+            otherlv_0=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleQueryCS2553); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getQueryCSAccess().getQueryKeyword_0());
@@ -3447,7 +3449,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getQueryCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleQueryCS2568);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleQueryCS2574);
             lv_name_1_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -3471,7 +3473,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleQueryCS2580); if (state.failed) return current;
+            otherlv_2=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleQueryCS2586); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getQueryCSAccess().getLeftParenthesisKeyword_2());
@@ -3499,7 +3501,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getQueryCSAccess().getInputParamDeclarationsParamDeclarationCSParserRuleCall_3_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleParamDeclarationCS_in_ruleQueryCS2602);
+                    pushFollow(FollowSets000.FOLLOW_ruleParamDeclarationCS_in_ruleQueryCS2608);
                     lv_inputParamDeclarations_3_0=ruleParamDeclarationCS();
 
                     state._fsp--;
@@ -3538,7 +3540,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1282:4: otherlv_4= ',' ( (lv_inputParamDeclarations_5_0= ruleParamDeclarationCS ) )
                     	    {
-                    	    otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleQueryCS2615); if (state.failed) return current;
+                    	    otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleQueryCS2621); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_4, grammarAccess.getQueryCSAccess().getCommaKeyword_3_1_0());
@@ -3555,7 +3557,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getQueryCSAccess().getInputParamDeclarationsParamDeclarationCSParserRuleCall_3_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleParamDeclarationCS_in_ruleQueryCS2636);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleParamDeclarationCS_in_ruleQueryCS2642);
                     	    lv_inputParamDeclarations_5_0=ruleParamDeclarationCS();
 
                     	    state._fsp--;
@@ -3594,13 +3596,13 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_6=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleQueryCS2652); if (state.failed) return current;
+            otherlv_6=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleQueryCS2658); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_6, grammarAccess.getQueryCSAccess().getRightParenthesisKeyword_4());
                   
             }
-            otherlv_7=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleQueryCS2664); if (state.failed) return current;
+            otherlv_7=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleQueryCS2670); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_7, grammarAccess.getQueryCSAccess().getColonKeyword_5());
@@ -3617,7 +3619,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getQueryCSAccess().getOwnedTypeTypedRefCSParserRuleCall_6_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleQueryCS2685);
+            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleQueryCS2691);
             lv_ownedType_8_0=ruleTypedRefCS();
 
             state._fsp--;
@@ -3662,7 +3664,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1330:4: otherlv_9= ';'
                     {
-                    otherlv_9=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleQueryCS2698); if (state.failed) return current;
+                    otherlv_9=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleQueryCS2704); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_9, grammarAccess.getQueryCSAccess().getSemicolonKeyword_7_0());
@@ -3677,7 +3679,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1335:6: (otherlv_10= '{' ( (lv_oclExpression_11_0= ruleExpCS ) ) otherlv_12= '}' )
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1335:8: otherlv_10= '{' ( (lv_oclExpression_11_0= ruleExpCS ) ) otherlv_12= '}'
                     {
-                    otherlv_10=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleQueryCS2717); if (state.failed) return current;
+                    otherlv_10=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleQueryCS2723); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_10, grammarAccess.getQueryCSAccess().getLeftCurlyBracketKeyword_7_1_0());
@@ -3694,7 +3696,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getQueryCSAccess().getOclExpressionExpCSParserRuleCall_7_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleQueryCS2738);
+                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleQueryCS2744);
                     lv_oclExpression_11_0=ruleExpCS();
 
                     state._fsp--;
@@ -3718,7 +3720,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_12=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleQueryCS2750); if (state.failed) return current;
+                    otherlv_12=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleQueryCS2756); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_12, grammarAccess.getQueryCSAccess().getRightCurlyBracketKeyword_7_1_2());
@@ -3770,7 +3772,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getRelationCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleRelationCS_in_entryRuleRelationCS2788);
+            pushFollow(FollowSets000.FOLLOW_ruleRelationCS_in_entryRuleRelationCS2794);
             iv_ruleRelationCS=ruleRelationCS();
 
             state._fsp--;
@@ -3778,7 +3780,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleRelationCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRelationCS2798); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRelationCS2804); if (state.failed) return current;
 
             }
 
@@ -3841,7 +3843,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1383:1: (lv_top_0_0= 'top' )
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1384:3: lv_top_0_0= 'top'
                     {
-                    lv_top_0_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleRelationCS2841); if (state.failed) return current;
+                    lv_top_0_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleRelationCS2847); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_top_0_0, grammarAccess.getRelationCSAccess().getTopTopKeyword_0_0());
@@ -3864,7 +3866,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleRelationCS2867); if (state.failed) return current;
+            otherlv_1=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleRelationCS2873); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getRelationCSAccess().getRelationKeyword_1());
@@ -3881,7 +3883,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getRelationCSAccess().getNameUnrestrictedNameParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleRelationCS2888);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleRelationCS2894);
             lv_name_2_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -3916,7 +3918,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1419:4: otherlv_3= 'overrides' ( ( ruleUnrestrictedName ) )
                     {
-                    otherlv_3=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleRelationCS2901); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleRelationCS2907); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_3, grammarAccess.getRelationCSAccess().getOverridesKeyword_3_0());
@@ -3945,7 +3947,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getRelationCSAccess().getOverridesRelationCrossReference_3_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleRelationCS2928);
+                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleRelationCS2934);
                     ruleUnrestrictedName();
 
                     state._fsp--;
@@ -3967,7 +3969,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleRelationCS2942); if (state.failed) return current;
+            otherlv_5=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleRelationCS2948); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_5, grammarAccess.getRelationCSAccess().getLeftCurlyBracketKeyword_4());
@@ -4059,7 +4061,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getRelationCSAccess().getVarDeclarationsVarDeclarationCSParserRuleCall_5_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleVarDeclarationCS_in_ruleRelationCS2963);
+            	    pushFollow(FollowSets000.FOLLOW_ruleVarDeclarationCS_in_ruleRelationCS2969);
             	    lv_varDeclarations_6_0=ruleVarDeclarationCS();
 
             	    state._fsp--;
@@ -4119,7 +4121,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getRelationCSAccess().getDomainsDomainCSParserRuleCall_6_0_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleDomainCS_in_ruleRelationCS2986);
+            	    pushFollow(FollowSets000.FOLLOW_ruleDomainCS_in_ruleRelationCS2992);
             	    lv_domains_7_0=ruleDomainCS();
 
             	    state._fsp--;
@@ -4160,7 +4162,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getRelationCSAccess().getDomainsPrimitiveTypeDomainCSParserRuleCall_6_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeDomainCS_in_ruleRelationCS3013);
+            	    pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeDomainCS_in_ruleRelationCS3019);
             	    lv_domains_8_0=rulePrimitiveTypeDomainCS();
 
             	    state._fsp--;
@@ -4217,7 +4219,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getRelationCSAccess().getWhenWhenCSParserRuleCall_7_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleWhenCS_in_ruleRelationCS3036);
+                    pushFollow(FollowSets000.FOLLOW_ruleWhenCS_in_ruleRelationCS3042);
                     lv_when_9_0=ruleWhenCS();
 
                     state._fsp--;
@@ -4263,7 +4265,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getRelationCSAccess().getWhereWhereCSParserRuleCall_8_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleWhereCS_in_ruleRelationCS3058);
+                    pushFollow(FollowSets000.FOLLOW_ruleWhereCS_in_ruleRelationCS3064);
                     lv_where_10_0=ruleWhereCS();
 
                     state._fsp--;
@@ -4290,7 +4292,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_11=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleRelationCS3071); if (state.failed) return current;
+            otherlv_11=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleRelationCS3077); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_11, grammarAccess.getRelationCSAccess().getRightCurlyBracketKeyword_9());
@@ -4333,7 +4335,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTemplateCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTemplateCS_in_entryRuleTemplateCS3107);
+            pushFollow(FollowSets000.FOLLOW_ruleTemplateCS_in_entryRuleTemplateCS3113);
             iv_ruleTemplateCS=ruleTemplateCS();
 
             state._fsp--;
@@ -4341,7 +4343,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTemplateCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTemplateCS3117); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTemplateCS3123); if (state.failed) return current;
 
             }
 
@@ -4398,7 +4400,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getTemplateCSAccess().getCollectionTemplateCSParserRuleCall_0_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleCollectionTemplateCS_in_ruleTemplateCS3168);
+                    pushFollow(FollowSets000.FOLLOW_ruleCollectionTemplateCS_in_ruleTemplateCS3174);
                     this_CollectionTemplateCS_0=ruleCollectionTemplateCS();
 
                     state._fsp--;
@@ -4425,7 +4427,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getTemplateCSAccess().getObjectTemplateCSParserRuleCall_0_1()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleObjectTemplateCS_in_ruleTemplateCS3198);
+                    pushFollow(FollowSets000.FOLLOW_ruleObjectTemplateCS_in_ruleTemplateCS3204);
                     this_ObjectTemplateCS_1=ruleObjectTemplateCS();
 
                     state._fsp--;
@@ -4453,7 +4455,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1586:4: otherlv_2= '{' ( (lv_guardExpression_3_0= ruleExpCS ) ) otherlv_4= '}'
                     {
-                    otherlv_2=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleTemplateCS3211); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleTemplateCS3217); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getTemplateCSAccess().getLeftCurlyBracketKeyword_1_0());
@@ -4470,7 +4472,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getTemplateCSAccess().getGuardExpressionExpCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleTemplateCS3232);
+                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleTemplateCS3238);
                     lv_guardExpression_3_0=ruleExpCS();
 
                     state._fsp--;
@@ -4494,7 +4496,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleTemplateCS3244); if (state.failed) return current;
+                    otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleTemplateCS3250); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_4, grammarAccess.getTemplateCSAccess().getRightCurlyBracketKeyword_1_2());
@@ -4543,7 +4545,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTransformationCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTransformationCS_in_entryRuleTransformationCS3282);
+            pushFollow(FollowSets000.FOLLOW_ruleTransformationCS_in_entryRuleTransformationCS3288);
             iv_ruleTransformationCS=ruleTransformationCS();
 
             state._fsp--;
@@ -4551,7 +4553,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTransformationCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTransformationCS3292); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTransformationCS3298); if (state.failed) return current;
 
             }
 
@@ -4603,7 +4605,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1633:1: (otherlv_0= 'transformation' ( (lv_name_1_0= ruleUnrestrictedName ) ) otherlv_2= '(' ( (lv_modelDecls_3_0= ruleModelDeclCS ) ) (otherlv_4= ',' ( (lv_modelDecls_5_0= ruleModelDeclCS ) ) )* otherlv_6= ')' (otherlv_7= 'extends' ( ( ruleUnrestrictedName ) ) (otherlv_9= ',' ( ( ruleUnrestrictedName ) ) )* )? otherlv_11= '{' ( (lv_keyDecls_12_0= ruleKeyDeclCS ) )* ( ( (lv_relation_13_0= ruleRelationCS ) ) | ( (lv_queries_14_0= ruleQueryCS ) ) )* otherlv_15= '}' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1633:3: otherlv_0= 'transformation' ( (lv_name_1_0= ruleUnrestrictedName ) ) otherlv_2= '(' ( (lv_modelDecls_3_0= ruleModelDeclCS ) ) (otherlv_4= ',' ( (lv_modelDecls_5_0= ruleModelDeclCS ) ) )* otherlv_6= ')' (otherlv_7= 'extends' ( ( ruleUnrestrictedName ) ) (otherlv_9= ',' ( ( ruleUnrestrictedName ) ) )* )? otherlv_11= '{' ( (lv_keyDecls_12_0= ruleKeyDeclCS ) )* ( ( (lv_relation_13_0= ruleRelationCS ) ) | ( (lv_queries_14_0= ruleQueryCS ) ) )* otherlv_15= '}'
             {
-            otherlv_0=(Token)match(input,39,FollowSets000.FOLLOW_39_in_ruleTransformationCS3329); if (state.failed) return current;
+            otherlv_0=(Token)match(input,39,FollowSets000.FOLLOW_39_in_ruleTransformationCS3335); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getTransformationCSAccess().getTransformationKeyword_0());
@@ -4620,7 +4622,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTransformationCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleTransformationCS3350);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleTransformationCS3356);
             lv_name_1_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -4644,7 +4646,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleTransformationCS3362); if (state.failed) return current;
+            otherlv_2=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleTransformationCS3368); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getTransformationCSAccess().getLeftParenthesisKeyword_2());
@@ -4661,7 +4663,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTransformationCSAccess().getModelDeclsModelDeclCSParserRuleCall_3_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleModelDeclCS_in_ruleTransformationCS3383);
+            pushFollow(FollowSets000.FOLLOW_ruleModelDeclCS_in_ruleTransformationCS3389);
             lv_modelDecls_3_0=ruleModelDeclCS();
 
             state._fsp--;
@@ -4700,7 +4702,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1677:4: otherlv_4= ',' ( (lv_modelDecls_5_0= ruleModelDeclCS ) )
             	    {
-            	    otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleTransformationCS3396); if (state.failed) return current;
+            	    otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleTransformationCS3402); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_4, grammarAccess.getTransformationCSAccess().getCommaKeyword_4_0());
@@ -4717,7 +4719,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getTransformationCSAccess().getModelDeclsModelDeclCSParserRuleCall_4_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleModelDeclCS_in_ruleTransformationCS3417);
+            	    pushFollow(FollowSets000.FOLLOW_ruleModelDeclCS_in_ruleTransformationCS3423);
             	    lv_modelDecls_5_0=ruleModelDeclCS();
 
             	    state._fsp--;
@@ -4750,7 +4752,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_6=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleTransformationCS3431); if (state.failed) return current;
+            otherlv_6=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleTransformationCS3437); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_6, grammarAccess.getTransformationCSAccess().getRightParenthesisKeyword_5());
@@ -4767,7 +4769,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1703:3: otherlv_7= 'extends' ( ( ruleUnrestrictedName ) ) (otherlv_9= ',' ( ( ruleUnrestrictedName ) ) )*
                     {
-                    otherlv_7=(Token)match(input,40,FollowSets000.FOLLOW_40_in_ruleTransformationCS3444); if (state.failed) return current;
+                    otherlv_7=(Token)match(input,40,FollowSets000.FOLLOW_40_in_ruleTransformationCS3450); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_7, grammarAccess.getTransformationCSAccess().getExtendsKeyword_6_0());
@@ -4796,7 +4798,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getTransformationCSAccess().getExtendsTransformationCrossReference_6_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleTransformationCS3471);
+                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleTransformationCS3477);
                     ruleUnrestrictedName();
 
                     state._fsp--;
@@ -4827,7 +4829,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1725:4: otherlv_9= ',' ( ( ruleUnrestrictedName ) )
                     	    {
-                    	    otherlv_9=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleTransformationCS3484); if (state.failed) return current;
+                    	    otherlv_9=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleTransformationCS3490); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_9, grammarAccess.getTransformationCSAccess().getCommaKeyword_6_2_0());
@@ -4856,7 +4858,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getTransformationCSAccess().getExtendsTransformationCrossReference_6_2_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleTransformationCS3511);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleTransformationCS3517);
                     	    ruleUnrestrictedName();
 
                     	    state._fsp--;
@@ -4887,7 +4889,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_11=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleTransformationCS3527); if (state.failed) return current;
+            otherlv_11=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleTransformationCS3533); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_11, grammarAccess.getTransformationCSAccess().getLeftCurlyBracketKeyword_7());
@@ -4916,7 +4918,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getTransformationCSAccess().getKeyDeclsKeyDeclCSParserRuleCall_8_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleKeyDeclCS_in_ruleTransformationCS3548);
+            	    pushFollow(FollowSets000.FOLLOW_ruleKeyDeclCS_in_ruleTransformationCS3554);
             	    lv_keyDecls_12_0=ruleKeyDeclCS();
 
             	    state._fsp--;
@@ -4975,7 +4977,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getTransformationCSAccess().getRelationRelationCSParserRuleCall_9_0_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleRelationCS_in_ruleTransformationCS3571);
+            	    pushFollow(FollowSets000.FOLLOW_ruleRelationCS_in_ruleTransformationCS3577);
             	    lv_relation_13_0=ruleRelationCS();
 
             	    state._fsp--;
@@ -5016,7 +5018,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getTransformationCSAccess().getQueriesQueryCSParserRuleCall_9_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleQueryCS_in_ruleTransformationCS3598);
+            	    pushFollow(FollowSets000.FOLLOW_ruleQueryCS_in_ruleTransformationCS3604);
             	    lv_queries_14_0=ruleQueryCS();
 
             	    state._fsp--;
@@ -5049,7 +5051,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_15=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleTransformationCS3612); if (state.failed) return current;
+            otherlv_15=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleTransformationCS3618); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_15, grammarAccess.getTransformationCSAccess().getRightCurlyBracketKeyword_10());
@@ -5092,7 +5094,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getUnitCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnitCS_in_entryRuleUnitCS3648);
+            pushFollow(FollowSets000.FOLLOW_ruleUnitCS_in_entryRuleUnitCS3654);
             iv_ruleUnitCS=ruleUnitCS();
 
             state._fsp--;
@@ -5100,7 +5102,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleUnitCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnitCS3658); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnitCS3664); if (state.failed) return current;
 
             }
 
@@ -5137,7 +5139,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1831:1: (otherlv_0= 'import' ( ( (lv_name_1_0= ruleUnrestrictedName ) ) otherlv_2= ':' )? ( ( ruleURI ) ) otherlv_4= ';' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1831:3: otherlv_0= 'import' ( ( (lv_name_1_0= ruleUnrestrictedName ) ) otherlv_2= ':' )? ( ( ruleURI ) ) otherlv_4= ';'
             {
-            otherlv_0=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleUnitCS3695); if (state.failed) return current;
+            otherlv_0=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleUnitCS3701); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getUnitCSAccess().getImportKeyword_0());
@@ -5165,7 +5167,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getUnitCSAccess().getNameUnrestrictedNameParserRuleCall_1_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleUnitCS3717);
+                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleUnitCS3723);
                     lv_name_1_0=ruleUnrestrictedName();
 
                     state._fsp--;
@@ -5189,7 +5191,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleUnitCS3729); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleUnitCS3735); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getUnitCSAccess().getColonKeyword_1_1());
@@ -5224,7 +5226,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getUnitCSAccess().getNamespaceNamespaceCrossReference_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleURI_in_ruleUnitCS3758);
+            pushFollow(FollowSets000.FOLLOW_ruleURI_in_ruleUnitCS3764);
             ruleURI();
 
             state._fsp--;
@@ -5240,7 +5242,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleUnitCS3770); if (state.failed) return current;
+            otherlv_4=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleUnitCS3776); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getUnitCSAccess().getSemicolonKeyword_3());
@@ -5283,7 +5285,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getVarDeclarationCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleVarDeclarationCS_in_entryRuleVarDeclarationCS3806);
+            pushFollow(FollowSets000.FOLLOW_ruleVarDeclarationCS_in_entryRuleVarDeclarationCS3812);
             iv_ruleVarDeclarationCS=ruleVarDeclarationCS();
 
             state._fsp--;
@@ -5291,7 +5293,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleVarDeclarationCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleVarDeclarationCS3816); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleVarDeclarationCS3822); if (state.failed) return current;
 
             }
 
@@ -5343,7 +5345,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getVarDeclarationCSAccess().getVarDeclarationIdsVarDeclarationIdCSParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleVarDeclarationIdCS_in_ruleVarDeclarationCS3862);
+            pushFollow(FollowSets000.FOLLOW_ruleVarDeclarationIdCS_in_ruleVarDeclarationCS3868);
             lv_varDeclarationIds_0_0=ruleVarDeclarationIdCS();
 
             state._fsp--;
@@ -5382,7 +5384,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:1918:4: otherlv_1= ',' ( (lv_varDeclarationIds_2_0= ruleVarDeclarationIdCS ) )
             	    {
-            	    otherlv_1=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleVarDeclarationCS3875); if (state.failed) return current;
+            	    otherlv_1=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleVarDeclarationCS3881); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_1, grammarAccess.getVarDeclarationCSAccess().getCommaKeyword_1_0());
@@ -5399,7 +5401,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getVarDeclarationCSAccess().getVarDeclarationIdsVarDeclarationIdCSParserRuleCall_1_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleVarDeclarationIdCS_in_ruleVarDeclarationCS3896);
+            	    pushFollow(FollowSets000.FOLLOW_ruleVarDeclarationIdCS_in_ruleVarDeclarationCS3902);
             	    lv_varDeclarationIds_2_0=ruleVarDeclarationIdCS();
 
             	    state._fsp--;
@@ -5432,7 +5434,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_3=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleVarDeclarationCS3910); if (state.failed) return current;
+            otherlv_3=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleVarDeclarationCS3916); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_3, grammarAccess.getVarDeclarationCSAccess().getColonKeyword_2());
@@ -5449,7 +5451,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getVarDeclarationCSAccess().getTypeTypedRefCSParserRuleCall_3_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleVarDeclarationCS3931);
+            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleVarDeclarationCS3937);
             lv_type_4_0=ruleTypedRefCS();
 
             state._fsp--;
@@ -5473,7 +5475,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleVarDeclarationCS3943); if (state.failed) return current;
+            otherlv_5=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleVarDeclarationCS3949); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_5, grammarAccess.getVarDeclarationCSAccess().getSemicolonKeyword_4());
@@ -5516,7 +5518,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getVarDeclarationIdCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleVarDeclarationIdCS_in_entryRuleVarDeclarationIdCS3979);
+            pushFollow(FollowSets000.FOLLOW_ruleVarDeclarationIdCS_in_entryRuleVarDeclarationIdCS3985);
             iv_ruleVarDeclarationIdCS=ruleVarDeclarationIdCS();
 
             state._fsp--;
@@ -5524,7 +5526,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleVarDeclarationIdCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleVarDeclarationIdCS3989); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleVarDeclarationIdCS3995); if (state.failed) return current;
 
             }
 
@@ -5566,7 +5568,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getVarDeclarationIdCSAccess().getNameUnrestrictedNameParserRuleCall_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleVarDeclarationIdCS4034);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleVarDeclarationIdCS4040);
             lv_name_0_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -5624,7 +5626,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getWhenCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleWhenCS_in_entryRuleWhenCS4069);
+            pushFollow(FollowSets000.FOLLOW_ruleWhenCS_in_entryRuleWhenCS4075);
             iv_ruleWhenCS=ruleWhenCS();
 
             state._fsp--;
@@ -5632,7 +5634,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleWhenCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWhenCS4079); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWhenCS4085); if (state.failed) return current;
 
             }
 
@@ -5687,13 +5689,13 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,42,FollowSets000.FOLLOW_42_in_ruleWhenCS4128); if (state.failed) return current;
+            otherlv_1=(Token)match(input,42,FollowSets000.FOLLOW_42_in_ruleWhenCS4134); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getWhenCSAccess().getWhenKeyword_1());
                   
             }
-            otherlv_2=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleWhenCS4140); if (state.failed) return current;
+            otherlv_2=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleWhenCS4146); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getWhenCSAccess().getLeftCurlyBracketKeyword_2());
@@ -5722,7 +5724,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getWhenCSAccess().getPredicatesPredicateCSParserRuleCall_3_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_rulePredicateCS_in_ruleWhenCS4161);
+            	    pushFollow(FollowSets000.FOLLOW_rulePredicateCS_in_ruleWhenCS4167);
             	    lv_predicates_3_0=rulePredicateCS();
 
             	    state._fsp--;
@@ -5752,7 +5754,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleWhenCS4174); if (state.failed) return current;
+            otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleWhenCS4180); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getWhenCSAccess().getRightCurlyBracketKeyword_4());
@@ -5795,7 +5797,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getWhereCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleWhereCS_in_entryRuleWhereCS4210);
+            pushFollow(FollowSets000.FOLLOW_ruleWhereCS_in_entryRuleWhereCS4216);
             iv_ruleWhereCS=ruleWhereCS();
 
             state._fsp--;
@@ -5803,7 +5805,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleWhereCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWhereCS4220); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWhereCS4226); if (state.failed) return current;
 
             }
 
@@ -5858,13 +5860,13 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,43,FollowSets000.FOLLOW_43_in_ruleWhereCS4269); if (state.failed) return current;
+            otherlv_1=(Token)match(input,43,FollowSets000.FOLLOW_43_in_ruleWhereCS4275); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getWhereCSAccess().getWhereKeyword_1());
                   
             }
-            otherlv_2=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleWhereCS4281); if (state.failed) return current;
+            otherlv_2=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleWhereCS4287); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getWhereCSAccess().getLeftCurlyBracketKeyword_2());
@@ -5893,7 +5895,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getWhereCSAccess().getPredicatesPredicateCSParserRuleCall_3_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_rulePredicateCS_in_ruleWhereCS4302);
+            	    pushFollow(FollowSets000.FOLLOW_rulePredicateCS_in_ruleWhereCS4308);
             	    lv_predicates_3_0=rulePredicateCS();
 
             	    state._fsp--;
@@ -5923,7 +5925,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleWhereCS4315); if (state.failed) return current;
+            otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleWhereCS4321); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getWhereCSAccess().getRightCurlyBracketKeyword_4());
@@ -5966,7 +5968,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getExpCSOrTemplateCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCSOrTemplateCS_in_entryRuleExpCSOrTemplateCS4353);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCSOrTemplateCS_in_entryRuleExpCSOrTemplateCS4359);
             iv_ruleExpCSOrTemplateCS=ruleExpCSOrTemplateCS();
 
             state._fsp--;
@@ -5974,7 +5976,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleExpCSOrTemplateCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpCSOrTemplateCS4363); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpCSOrTemplateCS4369); if (state.failed) return current;
 
             }
 
@@ -6024,7 +6026,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getExpCSOrTemplateCSAccess().getExpCSParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleExpCSOrTemplateCS4413);
+                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleExpCSOrTemplateCS4419);
                     this_ExpCS_0=ruleExpCS();
 
                     state._fsp--;
@@ -6051,7 +6053,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getExpCSOrTemplateCSAccess().getTemplateCSParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTemplateCS_in_ruleExpCSOrTemplateCS4443);
+                    pushFollow(FollowSets000.FOLLOW_ruleTemplateCS_in_ruleExpCSOrTemplateCS4449);
                     this_TemplateCS_1=ruleTemplateCS();
 
                     state._fsp--;
@@ -6102,7 +6104,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTypedTypeRefCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedTypeRefCS_in_entryRuleTypedTypeRefCS4478);
+            pushFollow(FollowSets000.FOLLOW_ruleTypedTypeRefCS_in_entryRuleTypedTypeRefCS4484);
             iv_ruleTypedTypeRefCS=ruleTypedTypeRefCS();
 
             state._fsp--;
@@ -6110,7 +6112,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTypedTypeRefCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypedTypeRefCS4488); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypedTypeRefCS4494); if (state.failed) return current;
 
             }
 
@@ -6152,7 +6154,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTypedTypeRefCSAccess().getPathNamePathNameCSParserRuleCall_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_ruleTypedTypeRefCS4533);
+            pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_ruleTypedTypeRefCS4539);
             lv_pathName_0_0=rulePathNameCS();
 
             state._fsp--;
@@ -6210,7 +6212,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTypedRefCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_entryRuleTypedRefCS4568);
+            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_entryRuleTypedRefCS4574);
             iv_ruleTypedRefCS=ruleTypedRefCS();
 
             state._fsp--;
@@ -6218,7 +6220,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTypedRefCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypedRefCS4578); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypedRefCS4584); if (state.failed) return current;
 
             }
 
@@ -6325,7 +6327,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getTypedRefCSAccess().getPrimitiveTypeCSParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeCS_in_ruleTypedRefCS4628);
+                    pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeCS_in_ruleTypedRefCS4634);
                     this_PrimitiveTypeCS_0=rulePrimitiveTypeCS();
 
                     state._fsp--;
@@ -6352,7 +6354,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getTypedRefCSAccess().getCollectionTypeCSParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleCollectionTypeCS_in_ruleTypedRefCS4658);
+                    pushFollow(FollowSets000.FOLLOW_ruleCollectionTypeCS_in_ruleTypedRefCS4664);
                     this_CollectionTypeCS_1=ruleCollectionTypeCS();
 
                     state._fsp--;
@@ -6379,7 +6381,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getTypedRefCSAccess().getTypedTypeRefCSParserRuleCall_2()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypedTypeRefCS_in_ruleTypedRefCS4688);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypedTypeRefCS_in_ruleTypedRefCS4694);
                     this_TypedTypeRefCS_2=ruleTypedTypeRefCS();
 
                     state._fsp--;
@@ -6430,7 +6432,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getUnrestrictedNameRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_entryRuleUnrestrictedName4724);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_entryRuleUnrestrictedName4730);
             iv_ruleUnrestrictedName=ruleUnrestrictedName();
 
             state._fsp--;
@@ -6438,7 +6440,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleUnrestrictedName.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnrestrictedName4735); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnrestrictedName4741); if (state.failed) return current;
 
             }
 
@@ -6588,7 +6590,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getUnrestrictedNameAccess().getEssentialOCLUnrestrictedNameParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLUnrestrictedName_in_ruleUnrestrictedName4782);
+                    pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLUnrestrictedName_in_ruleUnrestrictedName4788);
                     this_EssentialOCLUnrestrictedName_0=ruleEssentialOCLUnrestrictedName();
 
                     state._fsp--;
@@ -6609,7 +6611,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2305:2: kw= 'checkonly'
                     {
-                    kw=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleUnrestrictedName4806); if (state.failed) return current;
+                    kw=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleUnrestrictedName4812); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6622,7 +6624,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 3 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2312:2: kw= 'default_values'
                     {
-                    kw=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleUnrestrictedName4825); if (state.failed) return current;
+                    kw=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleUnrestrictedName4831); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6635,7 +6637,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 4 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2319:2: kw= 'domain'
                     {
-                    kw=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleUnrestrictedName4844); if (state.failed) return current;
+                    kw=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleUnrestrictedName4850); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6648,7 +6650,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 5 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2326:2: kw= 'enforce'
                     {
-                    kw=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleUnrestrictedName4863); if (state.failed) return current;
+                    kw=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleUnrestrictedName4869); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6661,7 +6663,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 6 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2333:2: kw= 'extends'
                     {
-                    kw=(Token)match(input,40,FollowSets000.FOLLOW_40_in_ruleUnrestrictedName4882); if (state.failed) return current;
+                    kw=(Token)match(input,40,FollowSets000.FOLLOW_40_in_ruleUnrestrictedName4888); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6674,7 +6676,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 7 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2340:2: kw= 'implementedby'
                     {
-                    kw=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleUnrestrictedName4901); if (state.failed) return current;
+                    kw=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleUnrestrictedName4907); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6687,7 +6689,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 8 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2347:2: kw= 'import'
                     {
-                    kw=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleUnrestrictedName4920); if (state.failed) return current;
+                    kw=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleUnrestrictedName4926); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6700,7 +6702,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 9 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2354:2: kw= 'library'
                     {
-                    kw=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleUnrestrictedName4939); if (state.failed) return current;
+                    kw=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleUnrestrictedName4945); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6713,7 +6715,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 10 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2361:2: kw= 'key'
                     {
-                    kw=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleUnrestrictedName4958); if (state.failed) return current;
+                    kw=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleUnrestrictedName4964); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6726,7 +6728,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 11 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2368:2: kw= 'overrides'
                     {
-                    kw=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleUnrestrictedName4977); if (state.failed) return current;
+                    kw=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleUnrestrictedName4983); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6739,7 +6741,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 12 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2375:2: kw= 'primitive'
                     {
-                    kw=(Token)match(input,32,FollowSets000.FOLLOW_32_in_ruleUnrestrictedName4996); if (state.failed) return current;
+                    kw=(Token)match(input,32,FollowSets000.FOLLOW_32_in_ruleUnrestrictedName5002); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6752,7 +6754,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 13 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2382:2: kw= 'query'
                     {
-                    kw=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleUnrestrictedName5015); if (state.failed) return current;
+                    kw=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleUnrestrictedName5021); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6765,7 +6767,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 14 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2389:2: kw= 'relation'
                     {
-                    kw=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleUnrestrictedName5034); if (state.failed) return current;
+                    kw=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleUnrestrictedName5040); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6778,7 +6780,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 15 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2396:2: kw= 'replace'
                     {
-                    kw=(Token)match(input,44,FollowSets000.FOLLOW_44_in_ruleUnrestrictedName5053); if (state.failed) return current;
+                    kw=(Token)match(input,44,FollowSets000.FOLLOW_44_in_ruleUnrestrictedName5059); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6791,7 +6793,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 16 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2403:2: kw= 'top'
                     {
-                    kw=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleUnrestrictedName5072); if (state.failed) return current;
+                    kw=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleUnrestrictedName5078); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6804,7 +6806,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 17 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2410:2: kw= 'transformation'
                     {
-                    kw=(Token)match(input,39,FollowSets000.FOLLOW_39_in_ruleUnrestrictedName5091); if (state.failed) return current;
+                    kw=(Token)match(input,39,FollowSets000.FOLLOW_39_in_ruleUnrestrictedName5097); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6817,7 +6819,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 18 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2417:2: kw= 'when'
                     {
-                    kw=(Token)match(input,42,FollowSets000.FOLLOW_42_in_ruleUnrestrictedName5110); if (state.failed) return current;
+                    kw=(Token)match(input,42,FollowSets000.FOLLOW_42_in_ruleUnrestrictedName5116); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6830,7 +6832,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 19 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2424:2: kw= 'where'
                     {
-                    kw=(Token)match(input,43,FollowSets000.FOLLOW_43_in_ruleUnrestrictedName5129); if (state.failed) return current;
+                    kw=(Token)match(input,43,FollowSets000.FOLLOW_43_in_ruleUnrestrictedName5135); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6877,7 +6879,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIDRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleID_in_entryRuleID5172);
+            pushFollow(FollowSets000.FOLLOW_ruleID_in_entryRuleID5178);
             iv_ruleID=ruleID();
 
             state._fsp--;
@@ -6885,7 +6887,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleID.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleID5183); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleID5189); if (state.failed) return current;
 
             }
 
@@ -6937,7 +6939,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2452:6: this_SIMPLE_ID_0= RULE_SIMPLE_ID
                     {
-                    this_SIMPLE_ID_0=(Token)match(input,RULE_SIMPLE_ID,FollowSets000.FOLLOW_RULE_SIMPLE_ID_in_ruleID5223); if (state.failed) return current;
+                    this_SIMPLE_ID_0=(Token)match(input,RULE_SIMPLE_ID,FollowSets000.FOLLOW_RULE_SIMPLE_ID_in_ruleID5229); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       		current.merge(this_SIMPLE_ID_0);
@@ -6954,7 +6956,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2460:10: this_ESCAPED_ID_1= RULE_ESCAPED_ID
                     {
-                    this_ESCAPED_ID_1=(Token)match(input,RULE_ESCAPED_ID,FollowSets000.FOLLOW_RULE_ESCAPED_ID_in_ruleID5249); if (state.failed) return current;
+                    this_ESCAPED_ID_1=(Token)match(input,RULE_ESCAPED_ID,FollowSets000.FOLLOW_RULE_ESCAPED_ID_in_ruleID5255); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       		current.merge(this_ESCAPED_ID_1);
@@ -7005,7 +7007,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getLOWERRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleLOWER_in_entryRuleLOWER5295);
+            pushFollow(FollowSets000.FOLLOW_ruleLOWER_in_entryRuleLOWER5301);
             iv_ruleLOWER=ruleLOWER();
 
             state._fsp--;
@@ -7013,7 +7015,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleLOWER.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLOWER5306); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLOWER5312); if (state.failed) return current;
 
             }
 
@@ -7043,7 +7045,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2487:28: (this_INT_0= RULE_INT )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2488:5: this_INT_0= RULE_INT
             {
-            this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleLOWER5345); if (state.failed) return current;
+            this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleLOWER5351); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               		current.merge(this_INT_0);
@@ -7088,7 +7090,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getUPPERRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUPPER_in_entryRuleUPPER5390);
+            pushFollow(FollowSets000.FOLLOW_ruleUPPER_in_entryRuleUPPER5396);
             iv_ruleUPPER=ruleUPPER();
 
             state._fsp--;
@@ -7096,7 +7098,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleUPPER.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUPPER5401); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUPPER5407); if (state.failed) return current;
 
             }
 
@@ -7148,7 +7150,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2516:6: this_INT_0= RULE_INT
                     {
-                    this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleUPPER5441); if (state.failed) return current;
+                    this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleUPPER5447); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       		current.merge(this_INT_0);
@@ -7165,7 +7167,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2525:2: kw= '*'
                     {
-                    kw=(Token)match(input,45,FollowSets000.FOLLOW_45_in_ruleUPPER5465); if (state.failed) return current;
+                    kw=(Token)match(input,45,FollowSets000.FOLLOW_45_in_ruleUPPER5471); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -7212,7 +7214,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNUMBER_LITERALRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNUMBER_LITERAL_in_entryRuleNUMBER_LITERAL5506);
+            pushFollow(FollowSets000.FOLLOW_ruleNUMBER_LITERAL_in_entryRuleNUMBER_LITERAL5512);
             iv_ruleNUMBER_LITERAL=ruleNUMBER_LITERAL();
 
             state._fsp--;
@@ -7220,7 +7222,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNUMBER_LITERAL.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNUMBER_LITERAL5517); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNUMBER_LITERAL5523); if (state.failed) return current;
 
             }
 
@@ -7256,7 +7258,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2551:1: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ( (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT )? )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2551:6: this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ( (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT )?
             {
-            this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL5557); if (state.failed) return current;
+            this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL5563); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               		current.merge(this_INT_0);
@@ -7286,14 +7288,14 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2559:2: kw= '.' this_INT_2= RULE_INT
                     {
-                    kw=(Token)match(input,46,FollowSets000.FOLLOW_46_in_ruleNUMBER_LITERAL5576); if (state.failed) return current;
+                    kw=(Token)match(input,46,FollowSets000.FOLLOW_46_in_ruleNUMBER_LITERAL5582); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
                               newLeafNode(kw, grammarAccess.getNUMBER_LITERALAccess().getFullStopKeyword_1_0()); 
                           
                     }
-                    this_INT_2=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL5591); if (state.failed) return current;
+                    this_INT_2=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL5597); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       		current.merge(this_INT_2);
@@ -7342,7 +7344,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2572:2: kw= 'e'
                             {
-                            kw=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleNUMBER_LITERAL5613); if (state.failed) return current;
+                            kw=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleNUMBER_LITERAL5619); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       current.merge(kw);
@@ -7355,7 +7357,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         case 2 :
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2579:2: kw= 'E'
                             {
-                            kw=(Token)match(input,48,FollowSets000.FOLLOW_48_in_ruleNUMBER_LITERAL5632); if (state.failed) return current;
+                            kw=(Token)match(input,48,FollowSets000.FOLLOW_48_in_ruleNUMBER_LITERAL5638); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       current.merge(kw);
@@ -7382,7 +7384,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2585:2: kw= '+'
                             {
-                            kw=(Token)match(input,49,FollowSets000.FOLLOW_49_in_ruleNUMBER_LITERAL5647); if (state.failed) return current;
+                            kw=(Token)match(input,49,FollowSets000.FOLLOW_49_in_ruleNUMBER_LITERAL5653); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       current.merge(kw);
@@ -7395,7 +7397,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         case 2 :
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2592:2: kw= '-'
                             {
-                            kw=(Token)match(input,50,FollowSets000.FOLLOW_50_in_ruleNUMBER_LITERAL5666); if (state.failed) return current;
+                            kw=(Token)match(input,50,FollowSets000.FOLLOW_50_in_ruleNUMBER_LITERAL5672); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       current.merge(kw);
@@ -7408,7 +7410,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    this_INT_7=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL5683); if (state.failed) return current;
+                    this_INT_7=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL5689); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       		current.merge(this_INT_7);
@@ -7462,7 +7464,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getURIRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleURI_in_entryRuleURI5731);
+            pushFollow(FollowSets000.FOLLOW_ruleURI_in_entryRuleURI5737);
             iv_ruleURI=ruleURI();
 
             state._fsp--;
@@ -7470,7 +7472,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleURI.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleURI5742); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleURI5748); if (state.failed) return current;
 
             }
 
@@ -7500,7 +7502,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2624:28: (this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2625:5: this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING
             {
-            this_SINGLE_QUOTED_STRING_0=(Token)match(input,RULE_SINGLE_QUOTED_STRING,FollowSets000.FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleURI5781); if (state.failed) return current;
+            this_SINGLE_QUOTED_STRING_0=(Token)match(input,RULE_SINGLE_QUOTED_STRING,FollowSets000.FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleURI5787); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               		current.merge(this_SINGLE_QUOTED_STRING_0);
@@ -7545,7 +7547,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getEssentialOCLUnrestrictedIdentifierRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLUnrestrictedIdentifier_in_entryRuleEssentialOCLUnrestrictedIdentifier5828);
+            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLUnrestrictedIdentifier_in_entryRuleEssentialOCLUnrestrictedIdentifier5834);
             iv_ruleEssentialOCLUnrestrictedIdentifier=ruleEssentialOCLUnrestrictedIdentifier();
 
             state._fsp--;
@@ -7553,7 +7555,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleEssentialOCLUnrestrictedIdentifier.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEssentialOCLUnrestrictedIdentifier5839); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEssentialOCLUnrestrictedIdentifier5845); if (state.failed) return current;
 
             }
 
@@ -7604,7 +7606,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2656:2: kw= 'e'
                     {
-                    kw=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleEssentialOCLUnrestrictedIdentifier5877); if (state.failed) return current;
+                    kw=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleEssentialOCLUnrestrictedIdentifier5883); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -7617,7 +7619,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2663:2: kw= 'E'
                     {
-                    kw=(Token)match(input,48,FollowSets000.FOLLOW_48_in_ruleEssentialOCLUnrestrictedIdentifier5896); if (state.failed) return current;
+                    kw=(Token)match(input,48,FollowSets000.FOLLOW_48_in_ruleEssentialOCLUnrestrictedIdentifier5902); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -7664,7 +7666,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getEssentialOCLPrefixOperatorRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLPrefixOperator_in_entryRuleEssentialOCLPrefixOperator5937);
+            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLPrefixOperator_in_entryRuleEssentialOCLPrefixOperator5943);
             iv_ruleEssentialOCLPrefixOperator=ruleEssentialOCLPrefixOperator();
 
             state._fsp--;
@@ -7672,7 +7674,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleEssentialOCLPrefixOperator.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEssentialOCLPrefixOperator5948); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEssentialOCLPrefixOperator5954); if (state.failed) return current;
 
             }
 
@@ -7723,7 +7725,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2690:2: kw= '-'
                     {
-                    kw=(Token)match(input,50,FollowSets000.FOLLOW_50_in_ruleEssentialOCLPrefixOperator5986); if (state.failed) return current;
+                    kw=(Token)match(input,50,FollowSets000.FOLLOW_50_in_ruleEssentialOCLPrefixOperator5992); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -7736,7 +7738,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2697:2: kw= 'not'
                     {
-                    kw=(Token)match(input,51,FollowSets000.FOLLOW_51_in_ruleEssentialOCLPrefixOperator6005); if (state.failed) return current;
+                    kw=(Token)match(input,51,FollowSets000.FOLLOW_51_in_ruleEssentialOCLPrefixOperator6011); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -7783,7 +7785,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getEssentialOCLInfixOperatorRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLInfixOperator_in_entryRuleEssentialOCLInfixOperator6046);
+            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLInfixOperator_in_entryRuleEssentialOCLInfixOperator6052);
             iv_ruleEssentialOCLInfixOperator=ruleEssentialOCLInfixOperator();
 
             state._fsp--;
@@ -7791,7 +7793,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleEssentialOCLInfixOperator.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEssentialOCLInfixOperator6057); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEssentialOCLInfixOperator6063); if (state.failed) return current;
 
             }
 
@@ -7906,7 +7908,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2724:2: kw= '*'
                     {
-                    kw=(Token)match(input,45,FollowSets000.FOLLOW_45_in_ruleEssentialOCLInfixOperator6095); if (state.failed) return current;
+                    kw=(Token)match(input,45,FollowSets000.FOLLOW_45_in_ruleEssentialOCLInfixOperator6101); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -7919,7 +7921,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2731:2: kw= '/'
                     {
-                    kw=(Token)match(input,52,FollowSets000.FOLLOW_52_in_ruleEssentialOCLInfixOperator6114); if (state.failed) return current;
+                    kw=(Token)match(input,52,FollowSets000.FOLLOW_52_in_ruleEssentialOCLInfixOperator6120); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -7932,7 +7934,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 3 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2738:2: kw= '+'
                     {
-                    kw=(Token)match(input,49,FollowSets000.FOLLOW_49_in_ruleEssentialOCLInfixOperator6133); if (state.failed) return current;
+                    kw=(Token)match(input,49,FollowSets000.FOLLOW_49_in_ruleEssentialOCLInfixOperator6139); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -7945,7 +7947,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 4 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2745:2: kw= '-'
                     {
-                    kw=(Token)match(input,50,FollowSets000.FOLLOW_50_in_ruleEssentialOCLInfixOperator6152); if (state.failed) return current;
+                    kw=(Token)match(input,50,FollowSets000.FOLLOW_50_in_ruleEssentialOCLInfixOperator6158); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -7958,7 +7960,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 5 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2752:2: kw= '>'
                     {
-                    kw=(Token)match(input,53,FollowSets000.FOLLOW_53_in_ruleEssentialOCLInfixOperator6171); if (state.failed) return current;
+                    kw=(Token)match(input,53,FollowSets000.FOLLOW_53_in_ruleEssentialOCLInfixOperator6177); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -7971,7 +7973,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 6 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2759:2: kw= '<'
                     {
-                    kw=(Token)match(input,54,FollowSets000.FOLLOW_54_in_ruleEssentialOCLInfixOperator6190); if (state.failed) return current;
+                    kw=(Token)match(input,54,FollowSets000.FOLLOW_54_in_ruleEssentialOCLInfixOperator6196); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -7984,7 +7986,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 7 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2766:2: kw= '>='
                     {
-                    kw=(Token)match(input,55,FollowSets000.FOLLOW_55_in_ruleEssentialOCLInfixOperator6209); if (state.failed) return current;
+                    kw=(Token)match(input,55,FollowSets000.FOLLOW_55_in_ruleEssentialOCLInfixOperator6215); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -7997,7 +7999,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 8 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2773:2: kw= '<='
                     {
-                    kw=(Token)match(input,56,FollowSets000.FOLLOW_56_in_ruleEssentialOCLInfixOperator6228); if (state.failed) return current;
+                    kw=(Token)match(input,56,FollowSets000.FOLLOW_56_in_ruleEssentialOCLInfixOperator6234); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -8010,7 +8012,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 9 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2780:2: kw= '='
                     {
-                    kw=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleEssentialOCLInfixOperator6247); if (state.failed) return current;
+                    kw=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleEssentialOCLInfixOperator6253); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -8023,7 +8025,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 10 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2787:2: kw= '<>'
                     {
-                    kw=(Token)match(input,57,FollowSets000.FOLLOW_57_in_ruleEssentialOCLInfixOperator6266); if (state.failed) return current;
+                    kw=(Token)match(input,57,FollowSets000.FOLLOW_57_in_ruleEssentialOCLInfixOperator6272); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -8036,7 +8038,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 11 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2794:2: kw= 'and'
                     {
-                    kw=(Token)match(input,58,FollowSets000.FOLLOW_58_in_ruleEssentialOCLInfixOperator6285); if (state.failed) return current;
+                    kw=(Token)match(input,58,FollowSets000.FOLLOW_58_in_ruleEssentialOCLInfixOperator6291); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -8049,7 +8051,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 12 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2801:2: kw= 'or'
                     {
-                    kw=(Token)match(input,59,FollowSets000.FOLLOW_59_in_ruleEssentialOCLInfixOperator6304); if (state.failed) return current;
+                    kw=(Token)match(input,59,FollowSets000.FOLLOW_59_in_ruleEssentialOCLInfixOperator6310); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -8062,7 +8064,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 13 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2808:2: kw= 'xor'
                     {
-                    kw=(Token)match(input,60,FollowSets000.FOLLOW_60_in_ruleEssentialOCLInfixOperator6323); if (state.failed) return current;
+                    kw=(Token)match(input,60,FollowSets000.FOLLOW_60_in_ruleEssentialOCLInfixOperator6329); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -8075,7 +8077,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 14 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2815:2: kw= 'implies'
                     {
-                    kw=(Token)match(input,61,FollowSets000.FOLLOW_61_in_ruleEssentialOCLInfixOperator6342); if (state.failed) return current;
+                    kw=(Token)match(input,61,FollowSets000.FOLLOW_61_in_ruleEssentialOCLInfixOperator6348); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -8122,7 +8124,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getEssentialOCLNavigationOperatorRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLNavigationOperator_in_entryRuleEssentialOCLNavigationOperator6383);
+            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLNavigationOperator_in_entryRuleEssentialOCLNavigationOperator6389);
             iv_ruleEssentialOCLNavigationOperator=ruleEssentialOCLNavigationOperator();
 
             state._fsp--;
@@ -8130,7 +8132,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleEssentialOCLNavigationOperator.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEssentialOCLNavigationOperator6394); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEssentialOCLNavigationOperator6400); if (state.failed) return current;
 
             }
 
@@ -8181,7 +8183,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2842:2: kw= '.'
                     {
-                    kw=(Token)match(input,46,FollowSets000.FOLLOW_46_in_ruleEssentialOCLNavigationOperator6432); if (state.failed) return current;
+                    kw=(Token)match(input,46,FollowSets000.FOLLOW_46_in_ruleEssentialOCLNavigationOperator6438); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -8194,7 +8196,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2849:2: kw= '->'
                     {
-                    kw=(Token)match(input,62,FollowSets000.FOLLOW_62_in_ruleEssentialOCLNavigationOperator6451); if (state.failed) return current;
+                    kw=(Token)match(input,62,FollowSets000.FOLLOW_62_in_ruleEssentialOCLNavigationOperator6457); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -8241,7 +8243,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIdentifierRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_entryRuleIdentifier6492);
+            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_entryRuleIdentifier6498);
             iv_ruleIdentifier=ruleIdentifier();
 
             state._fsp--;
@@ -8249,7 +8251,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleIdentifier.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleIdentifier6503); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleIdentifier6509); if (state.failed) return current;
 
             }
 
@@ -8308,7 +8310,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getIdentifierAccess().getIDParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleID_in_ruleIdentifier6550);
+                    pushFollow(FollowSets000.FOLLOW_ruleID_in_ruleIdentifier6556);
                     this_ID_0=ruleID();
 
                     state._fsp--;
@@ -8334,7 +8336,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getIdentifierAccess().getEssentialOCLUnrestrictedIdentifierParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLUnrestrictedIdentifier_in_ruleIdentifier6583);
+                    pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLUnrestrictedIdentifier_in_ruleIdentifier6589);
                     this_EssentialOCLUnrestrictedIdentifier_1=ruleEssentialOCLUnrestrictedIdentifier();
 
                     state._fsp--;
@@ -8389,7 +8391,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getStringLiteralRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral6629);
+            pushFollow(FollowSets000.FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral6635);
             iv_ruleStringLiteral=ruleStringLiteral();
 
             state._fsp--;
@@ -8397,7 +8399,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleStringLiteral.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStringLiteral6640); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStringLiteral6646); if (state.failed) return current;
 
             }
 
@@ -8427,7 +8429,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2918:28: (this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2919:5: this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING
             {
-            this_SINGLE_QUOTED_STRING_0=(Token)match(input,RULE_SINGLE_QUOTED_STRING,FollowSets000.FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleStringLiteral6679); if (state.failed) return current;
+            this_SINGLE_QUOTED_STRING_0=(Token)match(input,RULE_SINGLE_QUOTED_STRING,FollowSets000.FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleStringLiteral6685); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               		current.merge(this_SINGLE_QUOTED_STRING_0);
@@ -8472,7 +8474,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPrefixOperatorRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePrefixOperator_in_entryRulePrefixOperator6724);
+            pushFollow(FollowSets000.FOLLOW_rulePrefixOperator_in_entryRulePrefixOperator6730);
             iv_rulePrefixOperator=rulePrefixOperator();
 
             state._fsp--;
@@ -8480,7 +8482,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_rulePrefixOperator.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrefixOperator6735); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrefixOperator6741); if (state.failed) return current;
 
             }
 
@@ -8516,7 +8518,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       newCompositeNode(grammarAccess.getPrefixOperatorAccess().getEssentialOCLPrefixOperatorParserRuleCall()); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLPrefixOperator_in_rulePrefixOperator6781);
+            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLPrefixOperator_in_rulePrefixOperator6787);
             this_EssentialOCLPrefixOperator_0=ruleEssentialOCLPrefixOperator();
 
             state._fsp--;
@@ -8565,7 +8567,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getInfixOperatorRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleInfixOperator_in_entryRuleInfixOperator6826);
+            pushFollow(FollowSets000.FOLLOW_ruleInfixOperator_in_entryRuleInfixOperator6832);
             iv_ruleInfixOperator=ruleInfixOperator();
 
             state._fsp--;
@@ -8573,7 +8575,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleInfixOperator.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleInfixOperator6837); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleInfixOperator6843); if (state.failed) return current;
 
             }
 
@@ -8609,7 +8611,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       newCompositeNode(grammarAccess.getInfixOperatorAccess().getEssentialOCLInfixOperatorParserRuleCall()); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLInfixOperator_in_ruleInfixOperator6883);
+            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLInfixOperator_in_ruleInfixOperator6889);
             this_EssentialOCLInfixOperator_0=ruleEssentialOCLInfixOperator();
 
             state._fsp--;
@@ -8658,7 +8660,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNavigationOperatorRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigationOperator_in_entryRuleNavigationOperator6928);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigationOperator_in_entryRuleNavigationOperator6934);
             iv_ruleNavigationOperator=ruleNavigationOperator();
 
             state._fsp--;
@@ -8666,7 +8668,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNavigationOperator.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigationOperator6939); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigationOperator6945); if (state.failed) return current;
 
             }
 
@@ -8702,7 +8704,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       newCompositeNode(grammarAccess.getNavigationOperatorAccess().getEssentialOCLNavigationOperatorParserRuleCall()); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLNavigationOperator_in_ruleNavigationOperator6985);
+            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLNavigationOperator_in_ruleNavigationOperator6991);
             this_EssentialOCLNavigationOperator_0=ruleEssentialOCLNavigationOperator();
 
             state._fsp--;
@@ -8751,7 +8753,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getEssentialOCLUnrestrictedNameRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLUnrestrictedName_in_entryRuleEssentialOCLUnrestrictedName7030);
+            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLUnrestrictedName_in_entryRuleEssentialOCLUnrestrictedName7036);
             iv_ruleEssentialOCLUnrestrictedName=ruleEssentialOCLUnrestrictedName();
 
             state._fsp--;
@@ -8759,7 +8761,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleEssentialOCLUnrestrictedName.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEssentialOCLUnrestrictedName7041); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEssentialOCLUnrestrictedName7047); if (state.failed) return current;
 
             }
 
@@ -8795,7 +8797,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       newCompositeNode(grammarAccess.getEssentialOCLUnrestrictedNameAccess().getIdentifierParserRuleCall()); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_ruleEssentialOCLUnrestrictedName7087);
+            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_ruleEssentialOCLUnrestrictedName7093);
             this_Identifier_0=ruleIdentifier();
 
             state._fsp--;
@@ -8844,7 +8846,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getEssentialOCLUnreservedNameRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLUnreservedName_in_entryRuleEssentialOCLUnreservedName7132);
+            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLUnreservedName_in_entryRuleEssentialOCLUnreservedName7138);
             iv_ruleEssentialOCLUnreservedName=ruleEssentialOCLUnreservedName();
 
             state._fsp--;
@@ -8852,7 +8854,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleEssentialOCLUnreservedName.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEssentialOCLUnreservedName7143); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEssentialOCLUnreservedName7149); if (state.failed) return current;
 
             }
 
@@ -8960,7 +8962,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getEssentialOCLUnreservedNameAccess().getUnrestrictedNameParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleEssentialOCLUnreservedName7190);
+                    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleEssentialOCLUnreservedName7196);
                     this_UnrestrictedName_0=ruleUnrestrictedName();
 
                     state._fsp--;
@@ -8986,7 +8988,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getEssentialOCLUnreservedNameAccess().getCollectionTypeIdentifierParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleCollectionTypeIdentifier_in_ruleEssentialOCLUnreservedName7223);
+                    pushFollow(FollowSets000.FOLLOW_ruleCollectionTypeIdentifier_in_ruleEssentialOCLUnreservedName7229);
                     this_CollectionTypeIdentifier_1=ruleCollectionTypeIdentifier();
 
                     state._fsp--;
@@ -9012,7 +9014,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getEssentialOCLUnreservedNameAccess().getPrimitiveTypeIdentifierParserRuleCall_2()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeIdentifier_in_ruleEssentialOCLUnreservedName7256);
+                    pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeIdentifier_in_ruleEssentialOCLUnreservedName7262);
                     this_PrimitiveTypeIdentifier_2=rulePrimitiveTypeIdentifier();
 
                     state._fsp--;
@@ -9033,7 +9035,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 4 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3112:2: kw= 'Tuple'
                     {
-                    kw=(Token)match(input,63,FollowSets000.FOLLOW_63_in_ruleEssentialOCLUnreservedName7280); if (state.failed) return current;
+                    kw=(Token)match(input,63,FollowSets000.FOLLOW_63_in_ruleEssentialOCLUnreservedName7286); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -9080,7 +9082,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getUnreservedNameRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnreservedName_in_entryRuleUnreservedName7321);
+            pushFollow(FollowSets000.FOLLOW_ruleUnreservedName_in_entryRuleUnreservedName7327);
             iv_ruleUnreservedName=ruleUnreservedName();
 
             state._fsp--;
@@ -9088,7 +9090,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleUnreservedName.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnreservedName7332); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnreservedName7338); if (state.failed) return current;
 
             }
 
@@ -9124,7 +9126,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       newCompositeNode(grammarAccess.getUnreservedNameAccess().getEssentialOCLUnreservedNameParserRuleCall()); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLUnreservedName_in_ruleUnreservedName7378);
+            pushFollow(FollowSets000.FOLLOW_ruleEssentialOCLUnreservedName_in_ruleUnreservedName7384);
             this_EssentialOCLUnreservedName_0=ruleEssentialOCLUnreservedName();
 
             state._fsp--;
@@ -9173,7 +9175,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPathNameCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_entryRulePathNameCS7422);
+            pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_entryRulePathNameCS7428);
             iv_rulePathNameCS=rulePathNameCS();
 
             state._fsp--;
@@ -9181,7 +9183,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_rulePathNameCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePathNameCS7432); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePathNameCS7438); if (state.failed) return current;
 
             }
 
@@ -9229,7 +9231,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getPathNameCSAccess().getPathFirstPathElementCSParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleFirstPathElementCS_in_rulePathNameCS7478);
+            pushFollow(FollowSets000.FOLLOW_ruleFirstPathElementCS_in_rulePathNameCS7484);
             lv_path_0_0=ruleFirstPathElementCS();
 
             state._fsp--;
@@ -9268,7 +9270,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3188:4: otherlv_1= '::' ( (lv_path_2_0= ruleNextPathElementCS ) )
             	    {
-            	    otherlv_1=(Token)match(input,64,FollowSets000.FOLLOW_64_in_rulePathNameCS7491); if (state.failed) return current;
+            	    otherlv_1=(Token)match(input,64,FollowSets000.FOLLOW_64_in_rulePathNameCS7497); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_1, grammarAccess.getPathNameCSAccess().getColonColonKeyword_1_0());
@@ -9285,7 +9287,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getPathNameCSAccess().getPathNextPathElementCSParserRuleCall_1_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleNextPathElementCS_in_rulePathNameCS7512);
+            	    pushFollow(FollowSets000.FOLLOW_ruleNextPathElementCS_in_rulePathNameCS7518);
             	    lv_path_2_0=ruleNextPathElementCS();
 
             	    state._fsp--;
@@ -9355,7 +9357,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getFirstPathElementCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleFirstPathElementCS_in_entryRuleFirstPathElementCS7550);
+            pushFollow(FollowSets000.FOLLOW_ruleFirstPathElementCS_in_entryRuleFirstPathElementCS7556);
             iv_ruleFirstPathElementCS=ruleFirstPathElementCS();
 
             state._fsp--;
@@ -9363,7 +9365,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleFirstPathElementCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFirstPathElementCS7560); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFirstPathElementCS7566); if (state.failed) return current;
 
             }
 
@@ -9414,7 +9416,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getFirstPathElementCSAccess().getElementNamedElementCrossReference_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleFirstPathElementCS7611);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleFirstPathElementCS7617);
             ruleUnrestrictedName();
 
             state._fsp--;
@@ -9464,7 +9466,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNextPathElementCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNextPathElementCS_in_entryRuleNextPathElementCS7646);
+            pushFollow(FollowSets000.FOLLOW_ruleNextPathElementCS_in_entryRuleNextPathElementCS7652);
             iv_ruleNextPathElementCS=ruleNextPathElementCS();
 
             state._fsp--;
@@ -9472,7 +9474,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNextPathElementCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNextPathElementCS7656); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNextPathElementCS7662); if (state.failed) return current;
 
             }
 
@@ -9523,7 +9525,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getNextPathElementCSAccess().getElementNamedElementCrossReference_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnreservedName_in_ruleNextPathElementCS7707);
+            pushFollow(FollowSets000.FOLLOW_ruleUnreservedName_in_ruleNextPathElementCS7713);
             ruleUnreservedName();
 
             state._fsp--;
@@ -9573,7 +9575,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPrimitiveTypeIdentifierRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeIdentifier_in_entryRulePrimitiveTypeIdentifier7743);
+            pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeIdentifier_in_entryRulePrimitiveTypeIdentifier7749);
             iv_rulePrimitiveTypeIdentifier=rulePrimitiveTypeIdentifier();
 
             state._fsp--;
@@ -9581,7 +9583,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_rulePrimitiveTypeIdentifier.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrimitiveTypeIdentifier7754); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrimitiveTypeIdentifier7760); if (state.failed) return current;
 
             }
 
@@ -9666,7 +9668,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3310:2: kw= 'Boolean'
                     {
-                    kw=(Token)match(input,65,FollowSets000.FOLLOW_65_in_rulePrimitiveTypeIdentifier7792); if (state.failed) return current;
+                    kw=(Token)match(input,65,FollowSets000.FOLLOW_65_in_rulePrimitiveTypeIdentifier7798); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -9679,7 +9681,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3317:2: kw= 'Integer'
                     {
-                    kw=(Token)match(input,66,FollowSets000.FOLLOW_66_in_rulePrimitiveTypeIdentifier7811); if (state.failed) return current;
+                    kw=(Token)match(input,66,FollowSets000.FOLLOW_66_in_rulePrimitiveTypeIdentifier7817); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -9692,7 +9694,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 3 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3324:2: kw= 'Real'
                     {
-                    kw=(Token)match(input,67,FollowSets000.FOLLOW_67_in_rulePrimitiveTypeIdentifier7830); if (state.failed) return current;
+                    kw=(Token)match(input,67,FollowSets000.FOLLOW_67_in_rulePrimitiveTypeIdentifier7836); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -9705,7 +9707,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 4 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3331:2: kw= 'String'
                     {
-                    kw=(Token)match(input,68,FollowSets000.FOLLOW_68_in_rulePrimitiveTypeIdentifier7849); if (state.failed) return current;
+                    kw=(Token)match(input,68,FollowSets000.FOLLOW_68_in_rulePrimitiveTypeIdentifier7855); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -9718,7 +9720,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 5 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3338:2: kw= 'UnlimitedNatural'
                     {
-                    kw=(Token)match(input,69,FollowSets000.FOLLOW_69_in_rulePrimitiveTypeIdentifier7868); if (state.failed) return current;
+                    kw=(Token)match(input,69,FollowSets000.FOLLOW_69_in_rulePrimitiveTypeIdentifier7874); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -9731,7 +9733,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 6 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3345:2: kw= 'OclAny'
                     {
-                    kw=(Token)match(input,70,FollowSets000.FOLLOW_70_in_rulePrimitiveTypeIdentifier7887); if (state.failed) return current;
+                    kw=(Token)match(input,70,FollowSets000.FOLLOW_70_in_rulePrimitiveTypeIdentifier7893); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -9744,7 +9746,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 7 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3352:2: kw= 'OclInvalid'
                     {
-                    kw=(Token)match(input,71,FollowSets000.FOLLOW_71_in_rulePrimitiveTypeIdentifier7906); if (state.failed) return current;
+                    kw=(Token)match(input,71,FollowSets000.FOLLOW_71_in_rulePrimitiveTypeIdentifier7912); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -9757,7 +9759,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 8 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3359:2: kw= 'OclVoid'
                     {
-                    kw=(Token)match(input,72,FollowSets000.FOLLOW_72_in_rulePrimitiveTypeIdentifier7925); if (state.failed) return current;
+                    kw=(Token)match(input,72,FollowSets000.FOLLOW_72_in_rulePrimitiveTypeIdentifier7931); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -9804,7 +9806,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPrimitiveTypeCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeCS_in_entryRulePrimitiveTypeCS7965);
+            pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeCS_in_entryRulePrimitiveTypeCS7971);
             iv_rulePrimitiveTypeCS=rulePrimitiveTypeCS();
 
             state._fsp--;
@@ -9812,7 +9814,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_rulePrimitiveTypeCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrimitiveTypeCS7975); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrimitiveTypeCS7981); if (state.failed) return current;
 
             }
 
@@ -9854,7 +9856,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getPrimitiveTypeCSAccess().getNamePrimitiveTypeIdentifierParserRuleCall_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeIdentifier_in_rulePrimitiveTypeCS8020);
+            pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeIdentifier_in_rulePrimitiveTypeCS8026);
             lv_name_0_0=rulePrimitiveTypeIdentifier();
 
             state._fsp--;
@@ -9912,7 +9914,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getCollectionTypeIdentifierRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleCollectionTypeIdentifier_in_entryRuleCollectionTypeIdentifier8056);
+            pushFollow(FollowSets000.FOLLOW_ruleCollectionTypeIdentifier_in_entryRuleCollectionTypeIdentifier8062);
             iv_ruleCollectionTypeIdentifier=ruleCollectionTypeIdentifier();
 
             state._fsp--;
@@ -9920,7 +9922,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleCollectionTypeIdentifier.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCollectionTypeIdentifier8067); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCollectionTypeIdentifier8073); if (state.failed) return current;
 
             }
 
@@ -9990,7 +9992,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3425:2: kw= 'Set'
                     {
-                    kw=(Token)match(input,73,FollowSets000.FOLLOW_73_in_ruleCollectionTypeIdentifier8105); if (state.failed) return current;
+                    kw=(Token)match(input,73,FollowSets000.FOLLOW_73_in_ruleCollectionTypeIdentifier8111); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -10003,7 +10005,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3432:2: kw= 'Bag'
                     {
-                    kw=(Token)match(input,74,FollowSets000.FOLLOW_74_in_ruleCollectionTypeIdentifier8124); if (state.failed) return current;
+                    kw=(Token)match(input,74,FollowSets000.FOLLOW_74_in_ruleCollectionTypeIdentifier8130); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -10016,7 +10018,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 3 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3439:2: kw= 'Sequence'
                     {
-                    kw=(Token)match(input,75,FollowSets000.FOLLOW_75_in_ruleCollectionTypeIdentifier8143); if (state.failed) return current;
+                    kw=(Token)match(input,75,FollowSets000.FOLLOW_75_in_ruleCollectionTypeIdentifier8149); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -10029,7 +10031,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 4 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3446:2: kw= 'Collection'
                     {
-                    kw=(Token)match(input,76,FollowSets000.FOLLOW_76_in_ruleCollectionTypeIdentifier8162); if (state.failed) return current;
+                    kw=(Token)match(input,76,FollowSets000.FOLLOW_76_in_ruleCollectionTypeIdentifier8168); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -10042,7 +10044,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 5 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3453:2: kw= 'OrderedSet'
                     {
-                    kw=(Token)match(input,77,FollowSets000.FOLLOW_77_in_ruleCollectionTypeIdentifier8181); if (state.failed) return current;
+                    kw=(Token)match(input,77,FollowSets000.FOLLOW_77_in_ruleCollectionTypeIdentifier8187); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -10089,7 +10091,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getCollectionTypeCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleCollectionTypeCS_in_entryRuleCollectionTypeCS8221);
+            pushFollow(FollowSets000.FOLLOW_ruleCollectionTypeCS_in_entryRuleCollectionTypeCS8227);
             iv_ruleCollectionTypeCS=ruleCollectionTypeCS();
 
             state._fsp--;
@@ -10097,7 +10099,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleCollectionTypeCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCollectionTypeCS8231); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCollectionTypeCS8237); if (state.failed) return current;
 
             }
 
@@ -10146,7 +10148,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getCollectionTypeCSAccess().getNameCollectionTypeIdentifierParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleCollectionTypeIdentifier_in_ruleCollectionTypeCS8277);
+            pushFollow(FollowSets000.FOLLOW_ruleCollectionTypeIdentifier_in_ruleCollectionTypeCS8283);
             lv_name_0_0=ruleCollectionTypeIdentifier();
 
             state._fsp--;
@@ -10181,7 +10183,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3497:4: otherlv_1= '(' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) otherlv_3= ')'
                     {
-                    otherlv_1=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleCollectionTypeCS8290); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleCollectionTypeCS8296); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getCollectionTypeCSAccess().getLeftParenthesisKeyword_1_0());
@@ -10198,7 +10200,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getCollectionTypeCSAccess().getOwnedTypeTypeExpCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleCollectionTypeCS8311);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleCollectionTypeCS8317);
                     lv_ownedType_2_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -10222,7 +10224,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_3=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleCollectionTypeCS8323); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleCollectionTypeCS8329); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_3, grammarAccess.getCollectionTypeCSAccess().getRightParenthesisKeyword_1_2());
@@ -10271,7 +10273,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getMultiplicityBoundsCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleMultiplicityBoundsCS_in_entryRuleMultiplicityBoundsCS8361);
+            pushFollow(FollowSets000.FOLLOW_ruleMultiplicityBoundsCS_in_entryRuleMultiplicityBoundsCS8367);
             iv_ruleMultiplicityBoundsCS=ruleMultiplicityBoundsCS();
 
             state._fsp--;
@@ -10279,7 +10281,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleMultiplicityBoundsCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiplicityBoundsCS8371); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiplicityBoundsCS8377); if (state.failed) return current;
 
             }
 
@@ -10327,7 +10329,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getMultiplicityBoundsCSAccess().getLowerBoundLOWERParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleLOWER_in_ruleMultiplicityBoundsCS8417);
+            pushFollow(FollowSets000.FOLLOW_ruleLOWER_in_ruleMultiplicityBoundsCS8423);
             lv_lowerBound_0_0=ruleLOWER();
 
             state._fsp--;
@@ -10362,7 +10364,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3562:4: otherlv_1= '..' ( (lv_upperBound_2_0= ruleUPPER ) )
                     {
-                    otherlv_1=(Token)match(input,78,FollowSets000.FOLLOW_78_in_ruleMultiplicityBoundsCS8430); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,78,FollowSets000.FOLLOW_78_in_ruleMultiplicityBoundsCS8436); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getMultiplicityBoundsCSAccess().getFullStopFullStopKeyword_1_0());
@@ -10379,7 +10381,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getMultiplicityBoundsCSAccess().getUpperBoundUPPERParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleUPPER_in_ruleMultiplicityBoundsCS8451);
+                    pushFollow(FollowSets000.FOLLOW_ruleUPPER_in_ruleMultiplicityBoundsCS8457);
                     lv_upperBound_2_0=ruleUPPER();
 
                     state._fsp--;
@@ -10446,7 +10448,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getMultiplicityCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleMultiplicityCS_in_entryRuleMultiplicityCS8489);
+            pushFollow(FollowSets000.FOLLOW_ruleMultiplicityCS_in_entryRuleMultiplicityCS8495);
             iv_ruleMultiplicityCS=ruleMultiplicityCS();
 
             state._fsp--;
@@ -10454,7 +10456,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleMultiplicityCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiplicityCS8499); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiplicityCS8505); if (state.failed) return current;
 
             }
 
@@ -10492,7 +10494,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3605:1: (otherlv_0= '[' (this_MultiplicityBoundsCS_1= ruleMultiplicityBoundsCS | this_MultiplicityStringCS_2= ruleMultiplicityStringCS ) otherlv_3= ']' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3605:3: otherlv_0= '[' (this_MultiplicityBoundsCS_1= ruleMultiplicityBoundsCS | this_MultiplicityStringCS_2= ruleMultiplicityStringCS ) otherlv_3= ']'
             {
-            otherlv_0=(Token)match(input,79,FollowSets000.FOLLOW_79_in_ruleMultiplicityCS8536); if (state.failed) return current;
+            otherlv_0=(Token)match(input,79,FollowSets000.FOLLOW_79_in_ruleMultiplicityCS8542); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getMultiplicityCSAccess().getLeftSquareBracketKeyword_0());
@@ -10529,7 +10531,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getMultiplicityCSAccess().getMultiplicityBoundsCSParserRuleCall_1_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleMultiplicityBoundsCS_in_ruleMultiplicityCS8562);
+                    pushFollow(FollowSets000.FOLLOW_ruleMultiplicityBoundsCS_in_ruleMultiplicityCS8568);
                     this_MultiplicityBoundsCS_1=ruleMultiplicityBoundsCS();
 
                     state._fsp--;
@@ -10556,7 +10558,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getMultiplicityCSAccess().getMultiplicityStringCSParserRuleCall_1_1()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleMultiplicityStringCS_in_ruleMultiplicityCS8592);
+                    pushFollow(FollowSets000.FOLLOW_ruleMultiplicityStringCS_in_ruleMultiplicityCS8598);
                     this_MultiplicityStringCS_2=ruleMultiplicityStringCS();
 
                     state._fsp--;
@@ -10573,7 +10575,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,80,FollowSets000.FOLLOW_80_in_ruleMultiplicityCS8604); if (state.failed) return current;
+            otherlv_3=(Token)match(input,80,FollowSets000.FOLLOW_80_in_ruleMultiplicityCS8610); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_3, grammarAccess.getMultiplicityCSAccess().getRightSquareBracketKeyword_2());
@@ -10616,7 +10618,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getMultiplicityStringCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleMultiplicityStringCS_in_entryRuleMultiplicityStringCS8640);
+            pushFollow(FollowSets000.FOLLOW_ruleMultiplicityStringCS_in_entryRuleMultiplicityStringCS8646);
             iv_ruleMultiplicityStringCS=ruleMultiplicityStringCS();
 
             state._fsp--;
@@ -10624,7 +10626,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleMultiplicityStringCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiplicityStringCS8650); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiplicityStringCS8656); if (state.failed) return current;
 
             }
 
@@ -10692,7 +10694,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3662:3: lv_stringBounds_0_1= '*'
                     {
-                    lv_stringBounds_0_1=(Token)match(input,45,FollowSets000.FOLLOW_45_in_ruleMultiplicityStringCS8694); if (state.failed) return current;
+                    lv_stringBounds_0_1=(Token)match(input,45,FollowSets000.FOLLOW_45_in_ruleMultiplicityStringCS8700); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_stringBounds_0_1, grammarAccess.getMultiplicityStringCSAccess().getStringBoundsAsteriskKeyword_0_0());
@@ -10712,7 +10714,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3674:8: lv_stringBounds_0_2= '+'
                     {
-                    lv_stringBounds_0_2=(Token)match(input,49,FollowSets000.FOLLOW_49_in_ruleMultiplicityStringCS8723); if (state.failed) return current;
+                    lv_stringBounds_0_2=(Token)match(input,49,FollowSets000.FOLLOW_49_in_ruleMultiplicityStringCS8729); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_stringBounds_0_2, grammarAccess.getMultiplicityStringCSAccess().getStringBoundsPlusSignKeyword_0_1());
@@ -10732,7 +10734,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 3 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3686:8: lv_stringBounds_0_3= '?'
                     {
-                    lv_stringBounds_0_3=(Token)match(input,81,FollowSets000.FOLLOW_81_in_ruleMultiplicityStringCS8752); if (state.failed) return current;
+                    lv_stringBounds_0_3=(Token)match(input,81,FollowSets000.FOLLOW_81_in_ruleMultiplicityStringCS8758); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_stringBounds_0_3, grammarAccess.getMultiplicityStringCSAccess().getStringBoundsQuestionMarkKeyword_0_2());
@@ -10792,7 +10794,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTupleTypeCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTupleTypeCS_in_entryRuleTupleTypeCS8803);
+            pushFollow(FollowSets000.FOLLOW_ruleTupleTypeCS_in_entryRuleTupleTypeCS8809);
             iv_ruleTupleTypeCS=ruleTupleTypeCS();
 
             state._fsp--;
@@ -10800,7 +10802,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTupleTypeCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTupleTypeCS8813); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTupleTypeCS8819); if (state.failed) return current;
 
             }
 
@@ -10846,7 +10848,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3723:1: (lv_name_0_0= 'Tuple' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3724:3: lv_name_0_0= 'Tuple'
             {
-            lv_name_0_0=(Token)match(input,63,FollowSets000.FOLLOW_63_in_ruleTupleTypeCS8856); if (state.failed) return current;
+            lv_name_0_0=(Token)match(input,63,FollowSets000.FOLLOW_63_in_ruleTupleTypeCS8862); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       newLeafNode(lv_name_0_0, grammarAccess.getTupleTypeCSAccess().getNameTupleKeyword_0_0());
@@ -10877,7 +10879,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3737:4: otherlv_1= '(' ( ( (lv_ownedParts_2_0= ruleTuplePartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleTuplePartCS ) ) )* )? otherlv_5= ')'
                     {
-                    otherlv_1=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleTupleTypeCS8882); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleTupleTypeCS8888); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getTupleTypeCSAccess().getLeftParenthesisKeyword_1_0());
@@ -10905,7 +10907,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getTupleTypeCSAccess().getOwnedPartsTuplePartCSParserRuleCall_1_1_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleTuplePartCS_in_ruleTupleTypeCS8904);
+                            pushFollow(FollowSets000.FOLLOW_ruleTuplePartCS_in_ruleTupleTypeCS8910);
                             lv_ownedParts_2_0=ruleTuplePartCS();
 
                             state._fsp--;
@@ -10944,7 +10946,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                             	case 1 :
                             	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3759:4: otherlv_3= ',' ( (lv_ownedParts_4_0= ruleTuplePartCS ) )
                             	    {
-                            	    otherlv_3=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleTupleTypeCS8917); if (state.failed) return current;
+                            	    otherlv_3=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleTupleTypeCS8923); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
 
                             	          	newLeafNode(otherlv_3, grammarAccess.getTupleTypeCSAccess().getCommaKeyword_1_1_1_0());
@@ -10961,7 +10963,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                             	      	        newCompositeNode(grammarAccess.getTupleTypeCSAccess().getOwnedPartsTuplePartCSParserRuleCall_1_1_1_1_0()); 
                             	      	    
                             	    }
-                            	    pushFollow(FollowSets000.FOLLOW_ruleTuplePartCS_in_ruleTupleTypeCS8938);
+                            	    pushFollow(FollowSets000.FOLLOW_ruleTuplePartCS_in_ruleTupleTypeCS8944);
                             	    lv_ownedParts_4_0=ruleTuplePartCS();
 
                             	    state._fsp--;
@@ -11000,7 +11002,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_5=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleTupleTypeCS8954); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleTupleTypeCS8960); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_5, grammarAccess.getTupleTypeCSAccess().getRightParenthesisKeyword_1_2());
@@ -11049,7 +11051,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTuplePartCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTuplePartCS_in_entryRuleTuplePartCS8992);
+            pushFollow(FollowSets000.FOLLOW_ruleTuplePartCS_in_entryRuleTuplePartCS8998);
             iv_ruleTuplePartCS=ruleTuplePartCS();
 
             state._fsp--;
@@ -11057,7 +11059,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTuplePartCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTuplePartCS9002); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTuplePartCS9008); if (state.failed) return current;
 
             }
 
@@ -11105,7 +11107,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTuplePartCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleTuplePartCS9048);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleTuplePartCS9054);
             lv_name_0_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -11129,7 +11131,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleTuplePartCS9060); if (state.failed) return current;
+            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleTuplePartCS9066); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getTuplePartCSAccess().getColonKeyword_1());
@@ -11146,7 +11148,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTuplePartCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleTuplePartCS9081);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleTuplePartCS9087);
             lv_ownedType_2_0=ruleTypeExpCS();
 
             state._fsp--;
@@ -11207,7 +11209,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getCollectionLiteralExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleCollectionLiteralExpCS_in_entryRuleCollectionLiteralExpCS9117);
+            pushFollow(FollowSets000.FOLLOW_ruleCollectionLiteralExpCS_in_entryRuleCollectionLiteralExpCS9123);
             iv_ruleCollectionLiteralExpCS=ruleCollectionLiteralExpCS();
 
             state._fsp--;
@@ -11215,7 +11217,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleCollectionLiteralExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCollectionLiteralExpCS9127); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCollectionLiteralExpCS9133); if (state.failed) return current;
 
             }
 
@@ -11267,7 +11269,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getCollectionLiteralExpCSAccess().getOwnedTypeCollectionTypeCSParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleCollectionTypeCS_in_ruleCollectionLiteralExpCS9173);
+            pushFollow(FollowSets000.FOLLOW_ruleCollectionTypeCS_in_ruleCollectionLiteralExpCS9179);
             lv_ownedType_0_0=ruleCollectionTypeCS();
 
             state._fsp--;
@@ -11291,7 +11293,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleCollectionLiteralExpCS9185); if (state.failed) return current;
+            otherlv_1=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleCollectionLiteralExpCS9191); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getCollectionLiteralExpCSAccess().getLeftCurlyBracketKeyword_1());
@@ -11319,7 +11321,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getCollectionLiteralExpCSAccess().getOwnedPartsCollectionLiteralPartCSParserRuleCall_2_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleCollectionLiteralPartCS_in_ruleCollectionLiteralExpCS9207);
+                    pushFollow(FollowSets000.FOLLOW_ruleCollectionLiteralPartCS_in_ruleCollectionLiteralExpCS9213);
                     lv_ownedParts_2_0=ruleCollectionLiteralPartCS();
 
                     state._fsp--;
@@ -11358,7 +11360,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3907:4: otherlv_3= ',' ( (lv_ownedParts_4_0= ruleCollectionLiteralPartCS ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleCollectionLiteralExpCS9220); if (state.failed) return current;
+                    	    otherlv_3=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleCollectionLiteralExpCS9226); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_3, grammarAccess.getCollectionLiteralExpCSAccess().getCommaKeyword_2_1_0());
@@ -11375,7 +11377,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getCollectionLiteralExpCSAccess().getOwnedPartsCollectionLiteralPartCSParserRuleCall_2_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleCollectionLiteralPartCS_in_ruleCollectionLiteralExpCS9241);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleCollectionLiteralPartCS_in_ruleCollectionLiteralExpCS9247);
                     	    lv_ownedParts_4_0=ruleCollectionLiteralPartCS();
 
                     	    state._fsp--;
@@ -11414,7 +11416,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleCollectionLiteralExpCS9257); if (state.failed) return current;
+            otherlv_5=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleCollectionLiteralExpCS9263); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_5, grammarAccess.getCollectionLiteralExpCSAccess().getRightCurlyBracketKeyword_3());
@@ -11457,7 +11459,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getCollectionLiteralPartCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleCollectionLiteralPartCS_in_entryRuleCollectionLiteralPartCS9293);
+            pushFollow(FollowSets000.FOLLOW_ruleCollectionLiteralPartCS_in_entryRuleCollectionLiteralPartCS9299);
             iv_ruleCollectionLiteralPartCS=ruleCollectionLiteralPartCS();
 
             state._fsp--;
@@ -11465,7 +11467,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleCollectionLiteralPartCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCollectionLiteralPartCS9303); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCollectionLiteralPartCS9309); if (state.failed) return current;
 
             }
 
@@ -11513,7 +11515,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getCollectionLiteralPartCSAccess().getExpressionCSExpCSParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleCollectionLiteralPartCS9349);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleCollectionLiteralPartCS9355);
             lv_expressionCS_0_0=ruleExpCS();
 
             state._fsp--;
@@ -11548,7 +11550,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:3972:4: otherlv_1= '..' ( (lv_lastExpressionCS_2_0= ruleExpCS ) )
                     {
-                    otherlv_1=(Token)match(input,78,FollowSets000.FOLLOW_78_in_ruleCollectionLiteralPartCS9362); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,78,FollowSets000.FOLLOW_78_in_ruleCollectionLiteralPartCS9368); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getCollectionLiteralPartCSAccess().getFullStopFullStopKeyword_1_0());
@@ -11565,7 +11567,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getCollectionLiteralPartCSAccess().getLastExpressionCSExpCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleCollectionLiteralPartCS9383);
+                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleCollectionLiteralPartCS9389);
                     lv_lastExpressionCS_2_0=ruleExpCS();
 
                     state._fsp--;
@@ -11632,7 +11634,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getConstructorPartCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_entryRuleConstructorPartCS9421);
+            pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_entryRuleConstructorPartCS9427);
             iv_ruleConstructorPartCS=ruleConstructorPartCS();
 
             state._fsp--;
@@ -11640,7 +11642,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleConstructorPartCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleConstructorPartCS9431); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleConstructorPartCS9437); if (state.failed) return current;
 
             }
 
@@ -11698,7 +11700,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getConstructorPartCSAccess().getPropertyPropertyCrossReference_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleConstructorPartCS9483);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleConstructorPartCS9489);
             ruleUnrestrictedName();
 
             state._fsp--;
@@ -11714,7 +11716,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleConstructorPartCS9495); if (state.failed) return current;
+            otherlv_1=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleConstructorPartCS9501); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getConstructorPartCSAccess().getEqualsSignKeyword_1());
@@ -11731,7 +11733,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getConstructorPartCSAccess().getInitExpressionExpCSParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleConstructorPartCS9516);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleConstructorPartCS9522);
             lv_initExpression_2_0=ruleExpCS();
 
             state._fsp--;
@@ -11792,7 +11794,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPrimitiveLiteralExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePrimitiveLiteralExpCS_in_entryRulePrimitiveLiteralExpCS9552);
+            pushFollow(FollowSets000.FOLLOW_rulePrimitiveLiteralExpCS_in_entryRulePrimitiveLiteralExpCS9558);
             iv_rulePrimitiveLiteralExpCS=rulePrimitiveLiteralExpCS();
 
             state._fsp--;
@@ -11800,7 +11802,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_rulePrimitiveLiteralExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrimitiveLiteralExpCS9562); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrimitiveLiteralExpCS9568); if (state.failed) return current;
 
             }
 
@@ -11897,7 +11899,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrimitiveLiteralExpCSAccess().getNumberLiteralExpCSParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleNumberLiteralExpCS_in_rulePrimitiveLiteralExpCS9612);
+                    pushFollow(FollowSets000.FOLLOW_ruleNumberLiteralExpCS_in_rulePrimitiveLiteralExpCS9618);
                     this_NumberLiteralExpCS_0=ruleNumberLiteralExpCS();
 
                     state._fsp--;
@@ -11924,7 +11926,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrimitiveLiteralExpCSAccess().getStringLiteralExpCSParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleStringLiteralExpCS_in_rulePrimitiveLiteralExpCS9642);
+                    pushFollow(FollowSets000.FOLLOW_ruleStringLiteralExpCS_in_rulePrimitiveLiteralExpCS9648);
                     this_StringLiteralExpCS_1=ruleStringLiteralExpCS();
 
                     state._fsp--;
@@ -11951,7 +11953,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrimitiveLiteralExpCSAccess().getBooleanLiteralExpCSParserRuleCall_2()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleBooleanLiteralExpCS_in_rulePrimitiveLiteralExpCS9672);
+                    pushFollow(FollowSets000.FOLLOW_ruleBooleanLiteralExpCS_in_rulePrimitiveLiteralExpCS9678);
                     this_BooleanLiteralExpCS_2=ruleBooleanLiteralExpCS();
 
                     state._fsp--;
@@ -11978,7 +11980,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrimitiveLiteralExpCSAccess().getUnlimitedNaturalLiteralExpCSParserRuleCall_3()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleUnlimitedNaturalLiteralExpCS_in_rulePrimitiveLiteralExpCS9702);
+                    pushFollow(FollowSets000.FOLLOW_ruleUnlimitedNaturalLiteralExpCS_in_rulePrimitiveLiteralExpCS9708);
                     this_UnlimitedNaturalLiteralExpCS_3=ruleUnlimitedNaturalLiteralExpCS();
 
                     state._fsp--;
@@ -12005,7 +12007,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrimitiveLiteralExpCSAccess().getInvalidLiteralExpCSParserRuleCall_4()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleInvalidLiteralExpCS_in_rulePrimitiveLiteralExpCS9732);
+                    pushFollow(FollowSets000.FOLLOW_ruleInvalidLiteralExpCS_in_rulePrimitiveLiteralExpCS9738);
                     this_InvalidLiteralExpCS_4=ruleInvalidLiteralExpCS();
 
                     state._fsp--;
@@ -12032,7 +12034,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrimitiveLiteralExpCSAccess().getNullLiteralExpCSParserRuleCall_5()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleNullLiteralExpCS_in_rulePrimitiveLiteralExpCS9762);
+                    pushFollow(FollowSets000.FOLLOW_ruleNullLiteralExpCS_in_rulePrimitiveLiteralExpCS9768);
                     this_NullLiteralExpCS_5=ruleNullLiteralExpCS();
 
                     state._fsp--;
@@ -12083,7 +12085,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTupleLiteralExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTupleLiteralExpCS_in_entryRuleTupleLiteralExpCS9797);
+            pushFollow(FollowSets000.FOLLOW_ruleTupleLiteralExpCS_in_entryRuleTupleLiteralExpCS9803);
             iv_ruleTupleLiteralExpCS=ruleTupleLiteralExpCS();
 
             state._fsp--;
@@ -12091,7 +12093,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTupleLiteralExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTupleLiteralExpCS9807); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTupleLiteralExpCS9813); if (state.failed) return current;
 
             }
 
@@ -12131,13 +12133,13 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:4174:1: (otherlv_0= 'Tuple' otherlv_1= '{' ( (lv_ownedParts_2_0= ruleTupleLiteralPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleTupleLiteralPartCS ) ) )* otherlv_5= '}' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:4174:3: otherlv_0= 'Tuple' otherlv_1= '{' ( (lv_ownedParts_2_0= ruleTupleLiteralPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleTupleLiteralPartCS ) ) )* otherlv_5= '}'
             {
-            otherlv_0=(Token)match(input,63,FollowSets000.FOLLOW_63_in_ruleTupleLiteralExpCS9844); if (state.failed) return current;
+            otherlv_0=(Token)match(input,63,FollowSets000.FOLLOW_63_in_ruleTupleLiteralExpCS9850); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getTupleLiteralExpCSAccess().getTupleKeyword_0());
                   
             }
-            otherlv_1=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleTupleLiteralExpCS9856); if (state.failed) return current;
+            otherlv_1=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleTupleLiteralExpCS9862); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getTupleLiteralExpCSAccess().getLeftCurlyBracketKeyword_1());
@@ -12154,7 +12156,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTupleLiteralExpCSAccess().getOwnedPartsTupleLiteralPartCSParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTupleLiteralPartCS_in_ruleTupleLiteralExpCS9877);
+            pushFollow(FollowSets000.FOLLOW_ruleTupleLiteralPartCS_in_ruleTupleLiteralExpCS9883);
             lv_ownedParts_2_0=ruleTupleLiteralPartCS();
 
             state._fsp--;
@@ -12193,7 +12195,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:4200:4: otherlv_3= ',' ( (lv_ownedParts_4_0= ruleTupleLiteralPartCS ) )
             	    {
-            	    otherlv_3=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleTupleLiteralExpCS9890); if (state.failed) return current;
+            	    otherlv_3=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleTupleLiteralExpCS9896); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_3, grammarAccess.getTupleLiteralExpCSAccess().getCommaKeyword_3_0());
@@ -12210,7 +12212,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getTupleLiteralExpCSAccess().getOwnedPartsTupleLiteralPartCSParserRuleCall_3_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleTupleLiteralPartCS_in_ruleTupleLiteralExpCS9911);
+            	    pushFollow(FollowSets000.FOLLOW_ruleTupleLiteralPartCS_in_ruleTupleLiteralExpCS9917);
             	    lv_ownedParts_4_0=ruleTupleLiteralPartCS();
 
             	    state._fsp--;
@@ -12243,7 +12245,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_5=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleTupleLiteralExpCS9925); if (state.failed) return current;
+            otherlv_5=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleTupleLiteralExpCS9931); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_5, grammarAccess.getTupleLiteralExpCSAccess().getRightCurlyBracketKeyword_4());
@@ -12286,7 +12288,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTupleLiteralPartCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTupleLiteralPartCS_in_entryRuleTupleLiteralPartCS9961);
+            pushFollow(FollowSets000.FOLLOW_ruleTupleLiteralPartCS_in_entryRuleTupleLiteralPartCS9967);
             iv_ruleTupleLiteralPartCS=ruleTupleLiteralPartCS();
 
             state._fsp--;
@@ -12294,7 +12296,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTupleLiteralPartCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTupleLiteralPartCS9971); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTupleLiteralPartCS9977); if (state.failed) return current;
 
             }
 
@@ -12345,7 +12347,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTupleLiteralPartCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleTupleLiteralPartCS10017);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleTupleLiteralPartCS10023);
             lv_name_0_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -12380,7 +12382,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:4265:4: otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) )
                     {
-                    otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleTupleLiteralPartCS10030); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleTupleLiteralPartCS10036); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getTupleLiteralPartCSAccess().getColonKeyword_1_0());
@@ -12397,7 +12399,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getTupleLiteralPartCSAccess().getOwnedTypeTypeExpCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleTupleLiteralPartCS10051);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleTupleLiteralPartCS10057);
                     lv_ownedType_2_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -12427,7 +12429,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleTupleLiteralPartCS10065); if (state.failed) return current;
+            otherlv_3=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleTupleLiteralPartCS10071); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_3, grammarAccess.getTupleLiteralPartCSAccess().getEqualsSignKeyword_2());
@@ -12444,7 +12446,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTupleLiteralPartCSAccess().getInitExpressionExpCSParserRuleCall_3_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleTupleLiteralPartCS10086);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleTupleLiteralPartCS10092);
             lv_initExpression_4_0=ruleExpCS();
 
             state._fsp--;
@@ -12505,7 +12507,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNumberLiteralExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNumberLiteralExpCS_in_entryRuleNumberLiteralExpCS10122);
+            pushFollow(FollowSets000.FOLLOW_ruleNumberLiteralExpCS_in_entryRuleNumberLiteralExpCS10128);
             iv_ruleNumberLiteralExpCS=ruleNumberLiteralExpCS();
 
             state._fsp--;
@@ -12513,7 +12515,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNumberLiteralExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNumberLiteralExpCS10132); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNumberLiteralExpCS10138); if (state.failed) return current;
 
             }
 
@@ -12555,7 +12557,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getNumberLiteralExpCSAccess().getNameNUMBER_LITERALParserRuleCall_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNUMBER_LITERAL_in_ruleNumberLiteralExpCS10177);
+            pushFollow(FollowSets000.FOLLOW_ruleNUMBER_LITERAL_in_ruleNumberLiteralExpCS10183);
             lv_name_0_0=ruleNUMBER_LITERAL();
 
             state._fsp--;
@@ -12613,7 +12615,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getStringLiteralExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleStringLiteralExpCS_in_entryRuleStringLiteralExpCS10212);
+            pushFollow(FollowSets000.FOLLOW_ruleStringLiteralExpCS_in_entryRuleStringLiteralExpCS10218);
             iv_ruleStringLiteralExpCS=ruleStringLiteralExpCS();
 
             state._fsp--;
@@ -12621,7 +12623,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleStringLiteralExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStringLiteralExpCS10222); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStringLiteralExpCS10228); if (state.failed) return current;
 
             }
 
@@ -12676,7 +12678,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getStringLiteralExpCSAccess().getNameStringLiteralParserRuleCall_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleStringLiteral_in_ruleStringLiteralExpCS10267);
+            	    pushFollow(FollowSets000.FOLLOW_ruleStringLiteral_in_ruleStringLiteralExpCS10273);
             	    lv_name_0_0=ruleStringLiteral();
 
             	    state._fsp--;
@@ -12745,7 +12747,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getBooleanLiteralExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleBooleanLiteralExpCS_in_entryRuleBooleanLiteralExpCS10303);
+            pushFollow(FollowSets000.FOLLOW_ruleBooleanLiteralExpCS_in_entryRuleBooleanLiteralExpCS10309);
             iv_ruleBooleanLiteralExpCS=ruleBooleanLiteralExpCS();
 
             state._fsp--;
@@ -12753,7 +12755,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleBooleanLiteralExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanLiteralExpCS10313); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanLiteralExpCS10319); if (state.failed) return current;
 
             }
 
@@ -12811,7 +12813,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:4409:1: (lv_name_0_0= 'true' )
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:4410:3: lv_name_0_0= 'true'
                     {
-                    lv_name_0_0=(Token)match(input,82,FollowSets000.FOLLOW_82_in_ruleBooleanLiteralExpCS10356); if (state.failed) return current;
+                    lv_name_0_0=(Token)match(input,82,FollowSets000.FOLLOW_82_in_ruleBooleanLiteralExpCS10362); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_name_0_0, grammarAccess.getBooleanLiteralExpCSAccess().getNameTrueKeyword_0_0());
@@ -12843,7 +12845,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:4425:1: (lv_name_1_0= 'false' )
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:4426:3: lv_name_1_0= 'false'
                     {
-                    lv_name_1_0=(Token)match(input,83,FollowSets000.FOLLOW_83_in_ruleBooleanLiteralExpCS10393); if (state.failed) return current;
+                    lv_name_1_0=(Token)match(input,83,FollowSets000.FOLLOW_83_in_ruleBooleanLiteralExpCS10399); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_name_1_0, grammarAccess.getBooleanLiteralExpCSAccess().getNameFalseKeyword_1_0());
@@ -12903,7 +12905,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getUnlimitedNaturalLiteralExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnlimitedNaturalLiteralExpCS_in_entryRuleUnlimitedNaturalLiteralExpCS10442);
+            pushFollow(FollowSets000.FOLLOW_ruleUnlimitedNaturalLiteralExpCS_in_entryRuleUnlimitedNaturalLiteralExpCS10448);
             iv_ruleUnlimitedNaturalLiteralExpCS=ruleUnlimitedNaturalLiteralExpCS();
 
             state._fsp--;
@@ -12911,7 +12913,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleUnlimitedNaturalLiteralExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnlimitedNaturalLiteralExpCS10452); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnlimitedNaturalLiteralExpCS10458); if (state.failed) return current;
 
             }
 
@@ -12962,7 +12964,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,45,FollowSets000.FOLLOW_45_in_ruleUnlimitedNaturalLiteralExpCS10501); if (state.failed) return current;
+            otherlv_1=(Token)match(input,45,FollowSets000.FOLLOW_45_in_ruleUnlimitedNaturalLiteralExpCS10507); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getUnlimitedNaturalLiteralExpCSAccess().getAsteriskKeyword_1());
@@ -13005,7 +13007,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getInvalidLiteralExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleInvalidLiteralExpCS_in_entryRuleInvalidLiteralExpCS10537);
+            pushFollow(FollowSets000.FOLLOW_ruleInvalidLiteralExpCS_in_entryRuleInvalidLiteralExpCS10543);
             iv_ruleInvalidLiteralExpCS=ruleInvalidLiteralExpCS();
 
             state._fsp--;
@@ -13013,7 +13015,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleInvalidLiteralExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleInvalidLiteralExpCS10547); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleInvalidLiteralExpCS10553); if (state.failed) return current;
 
             }
 
@@ -13064,7 +13066,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,84,FollowSets000.FOLLOW_84_in_ruleInvalidLiteralExpCS10596); if (state.failed) return current;
+            otherlv_1=(Token)match(input,84,FollowSets000.FOLLOW_84_in_ruleInvalidLiteralExpCS10602); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getInvalidLiteralExpCSAccess().getInvalidKeyword_1());
@@ -13107,7 +13109,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNullLiteralExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNullLiteralExpCS_in_entryRuleNullLiteralExpCS10632);
+            pushFollow(FollowSets000.FOLLOW_ruleNullLiteralExpCS_in_entryRuleNullLiteralExpCS10638);
             iv_ruleNullLiteralExpCS=ruleNullLiteralExpCS();
 
             state._fsp--;
@@ -13115,7 +13117,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNullLiteralExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNullLiteralExpCS10642); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNullLiteralExpCS10648); if (state.failed) return current;
 
             }
 
@@ -13166,7 +13168,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,85,FollowSets000.FOLLOW_85_in_ruleNullLiteralExpCS10691); if (state.failed) return current;
+            otherlv_1=(Token)match(input,85,FollowSets000.FOLLOW_85_in_ruleNullLiteralExpCS10697); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getNullLiteralExpCSAccess().getNullKeyword_1());
@@ -13209,7 +13211,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTypeLiteralCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeLiteralCS_in_entryRuleTypeLiteralCS10727);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeLiteralCS_in_entryRuleTypeLiteralCS10733);
             iv_ruleTypeLiteralCS=ruleTypeLiteralCS();
 
             state._fsp--;
@@ -13217,7 +13219,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTypeLiteralCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeLiteralCS10737); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeLiteralCS10743); if (state.failed) return current;
 
             }
 
@@ -13303,7 +13305,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getTypeLiteralCSAccess().getPrimitiveTypeCSParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeCS_in_ruleTypeLiteralCS10787);
+                    pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeCS_in_ruleTypeLiteralCS10793);
                     this_PrimitiveTypeCS_0=rulePrimitiveTypeCS();
 
                     state._fsp--;
@@ -13330,7 +13332,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getTypeLiteralCSAccess().getCollectionTypeCSParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleCollectionTypeCS_in_ruleTypeLiteralCS10817);
+                    pushFollow(FollowSets000.FOLLOW_ruleCollectionTypeCS_in_ruleTypeLiteralCS10823);
                     this_CollectionTypeCS_1=ruleCollectionTypeCS();
 
                     state._fsp--;
@@ -13357,7 +13359,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getTypeLiteralCSAccess().getTupleTypeCSParserRuleCall_2()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTupleTypeCS_in_ruleTypeLiteralCS10847);
+                    pushFollow(FollowSets000.FOLLOW_ruleTupleTypeCS_in_ruleTypeLiteralCS10853);
                     this_TupleTypeCS_2=ruleTupleTypeCS();
 
                     state._fsp--;
@@ -13408,7 +13410,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTypeLiteralExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeLiteralExpCS_in_entryRuleTypeLiteralExpCS10882);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeLiteralExpCS_in_entryRuleTypeLiteralExpCS10888);
             iv_ruleTypeLiteralExpCS=ruleTypeLiteralExpCS();
 
             state._fsp--;
@@ -13416,7 +13418,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTypeLiteralExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeLiteralExpCS10892); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeLiteralExpCS10898); if (state.failed) return current;
 
             }
 
@@ -13458,7 +13460,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTypeLiteralExpCSAccess().getOwnedTypeTypeLiteralCSParserRuleCall_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeLiteralCS_in_ruleTypeLiteralExpCS10937);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeLiteralCS_in_ruleTypeLiteralExpCS10943);
             lv_ownedType_0_0=ruleTypeLiteralCS();
 
             state._fsp--;
@@ -13516,7 +13518,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTypeNameExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeNameExpCS_in_entryRuleTypeNameExpCS10972);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeNameExpCS_in_entryRuleTypeNameExpCS10978);
             iv_ruleTypeNameExpCS=ruleTypeNameExpCS();
 
             state._fsp--;
@@ -13524,7 +13526,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTypeNameExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeNameExpCS10982); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeNameExpCS10988); if (state.failed) return current;
 
             }
 
@@ -13566,7 +13568,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTypeNameExpCSAccess().getPathNamePathNameCSParserRuleCall_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_ruleTypeNameExpCS11027);
+            pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_ruleTypeNameExpCS11033);
             lv_pathName_0_0=rulePathNameCS();
 
             state._fsp--;
@@ -13624,7 +13626,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTypeExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_entryRuleTypeExpCS11062);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_entryRuleTypeExpCS11068);
             iv_ruleTypeExpCS=ruleTypeExpCS();
 
             state._fsp--;
@@ -13632,7 +13634,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTypeExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeExpCS11072); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeExpCS11078); if (state.failed) return current;
 
             }
 
@@ -13701,7 +13703,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getTypeExpCSAccess().getTypeNameExpCSParserRuleCall_0_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeNameExpCS_in_ruleTypeExpCS11123);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeNameExpCS_in_ruleTypeExpCS11129);
                     this_TypeNameExpCS_0=ruleTypeNameExpCS();
 
                     state._fsp--;
@@ -13728,7 +13730,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getTypeExpCSAccess().getTypeLiteralCSParserRuleCall_0_1()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeLiteralCS_in_ruleTypeExpCS11153);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeLiteralCS_in_ruleTypeExpCS11159);
                     this_TypeLiteralCS_1=ruleTypeLiteralCS();
 
                     state._fsp--;
@@ -13764,7 +13766,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getTypeExpCSAccess().getMultiplicityMultiplicityCSParserRuleCall_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleMultiplicityCS_in_ruleTypeExpCS11174);
+                    pushFollow(FollowSets000.FOLLOW_ruleMultiplicityCS_in_ruleTypeExpCS11180);
                     lv_multiplicity_2_0=ruleMultiplicityCS();
 
                     state._fsp--;
@@ -13828,7 +13830,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_entryRuleExpCS11211);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_entryRuleExpCS11217);
             iv_ruleExpCS=ruleExpCS();
 
             state._fsp--;
@@ -13836,7 +13838,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpCS11221); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpCS11227); if (state.failed) return current;
 
             }
 
@@ -13926,7 +13928,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getExpCSAccess().getOwnedExpressionPrefixedExpCSParserRuleCall_0_1_0_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_rulePrefixedExpCS_in_ruleExpCS11281);
+                    	    pushFollow(FollowSets000.FOLLOW_rulePrefixedExpCS_in_ruleExpCS11287);
                     	    lv_ownedExpression_1_0=rulePrefixedExpCS();
 
                     	    state._fsp--;
@@ -13961,7 +13963,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getExpCSAccess().getOwnedOperatorBinaryOperatorCSParserRuleCall_0_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleBinaryOperatorCS_in_ruleExpCS11302);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleBinaryOperatorCS_in_ruleExpCS11308);
                     	    lv_ownedOperator_2_0=ruleBinaryOperatorCS();
 
                     	    state._fsp--;
@@ -14010,7 +14012,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getExpCSAccess().getOwnedExpressionPrefixedExpOrLetExpCSParserRuleCall_0_2_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePrefixedExpOrLetExpCS_in_ruleExpCS11325);
+                    pushFollow(FollowSets000.FOLLOW_rulePrefixedExpOrLetExpCS_in_ruleExpCS11331);
                     lv_ownedExpression_3_0=rulePrefixedExpOrLetExpCS();
 
                     state._fsp--;
@@ -14088,7 +14090,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getExpCSAccess().getOwnedOperatorUnaryOperatorCSParserRuleCall_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleUnaryOperatorCS_in_ruleExpCS11366);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleUnaryOperatorCS_in_ruleExpCS11372);
                     	    lv_ownedOperator_5_0=ruleUnaryOperatorCS();
 
                     	    state._fsp--;
@@ -14134,7 +14136,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getExpCSAccess().getOwnedExpressionPrimaryExpOrLetExpCSParserRuleCall_1_2_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePrimaryExpOrLetExpCS_in_ruleExpCS11388);
+                    pushFollow(FollowSets000.FOLLOW_rulePrimaryExpOrLetExpCS_in_ruleExpCS11394);
                     lv_ownedExpression_6_0=rulePrimaryExpOrLetExpCS();
 
                     state._fsp--;
@@ -14177,7 +14179,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getExpCSAccess().getPrimaryExpOrLetExpCSParserRuleCall_2()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePrimaryExpOrLetExpCS_in_ruleExpCS11420);
+                    pushFollow(FollowSets000.FOLLOW_rulePrimaryExpOrLetExpCS_in_ruleExpCS11426);
                     this_PrimaryExpOrLetExpCS_7=rulePrimaryExpOrLetExpCS();
 
                     state._fsp--;
@@ -14228,7 +14230,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getBinaryOperatorCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleBinaryOperatorCS_in_entryRuleBinaryOperatorCS11455);
+            pushFollow(FollowSets000.FOLLOW_ruleBinaryOperatorCS_in_entryRuleBinaryOperatorCS11461);
             iv_ruleBinaryOperatorCS=ruleBinaryOperatorCS();
 
             state._fsp--;
@@ -14236,7 +14238,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleBinaryOperatorCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBinaryOperatorCS11465); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBinaryOperatorCS11471); if (state.failed) return current;
 
             }
 
@@ -14300,7 +14302,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getBinaryOperatorCSAccess().getInfixOperatorCSParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleInfixOperatorCS_in_ruleBinaryOperatorCS11515);
+                    pushFollow(FollowSets000.FOLLOW_ruleInfixOperatorCS_in_ruleBinaryOperatorCS11521);
                     this_InfixOperatorCS_0=ruleInfixOperatorCS();
 
                     state._fsp--;
@@ -14327,7 +14329,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getBinaryOperatorCSAccess().getNavigationOperatorCSParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleNavigationOperatorCS_in_ruleBinaryOperatorCS11545);
+                    pushFollow(FollowSets000.FOLLOW_ruleNavigationOperatorCS_in_ruleBinaryOperatorCS11551);
                     this_NavigationOperatorCS_1=ruleNavigationOperatorCS();
 
                     state._fsp--;
@@ -14378,7 +14380,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getInfixOperatorCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleInfixOperatorCS_in_entryRuleInfixOperatorCS11580);
+            pushFollow(FollowSets000.FOLLOW_ruleInfixOperatorCS_in_entryRuleInfixOperatorCS11586);
             iv_ruleInfixOperatorCS=ruleInfixOperatorCS();
 
             state._fsp--;
@@ -14386,7 +14388,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleInfixOperatorCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleInfixOperatorCS11590); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleInfixOperatorCS11596); if (state.failed) return current;
 
             }
 
@@ -14428,7 +14430,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getInfixOperatorCSAccess().getNameInfixOperatorParserRuleCall_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleInfixOperator_in_ruleInfixOperatorCS11635);
+            pushFollow(FollowSets000.FOLLOW_ruleInfixOperator_in_ruleInfixOperatorCS11641);
             lv_name_0_0=ruleInfixOperator();
 
             state._fsp--;
@@ -14486,7 +14488,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNavigationOperatorCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigationOperatorCS_in_entryRuleNavigationOperatorCS11670);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigationOperatorCS_in_entryRuleNavigationOperatorCS11676);
             iv_ruleNavigationOperatorCS=ruleNavigationOperatorCS();
 
             state._fsp--;
@@ -14494,7 +14496,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNavigationOperatorCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigationOperatorCS11680); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigationOperatorCS11686); if (state.failed) return current;
 
             }
 
@@ -14536,7 +14538,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getNavigationOperatorCSAccess().getNameNavigationOperatorParserRuleCall_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigationOperator_in_ruleNavigationOperatorCS11725);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigationOperator_in_ruleNavigationOperatorCS11731);
             lv_name_0_0=ruleNavigationOperator();
 
             state._fsp--;
@@ -14594,7 +14596,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPrefixedExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePrefixedExpCS_in_entryRulePrefixedExpCS11760);
+            pushFollow(FollowSets000.FOLLOW_rulePrefixedExpCS_in_entryRulePrefixedExpCS11766);
             iv_rulePrefixedExpCS=rulePrefixedExpCS();
 
             state._fsp--;
@@ -14602,7 +14604,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_rulePrefixedExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrefixedExpCS11770); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrefixedExpCS11776); if (state.failed) return current;
 
             }
 
@@ -14668,7 +14670,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrefixedExpCSAccess().getPrimaryExpCSParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePrimaryExpCS_in_rulePrefixedExpCS11820);
+                    pushFollow(FollowSets000.FOLLOW_rulePrimaryExpCS_in_rulePrefixedExpCS11826);
                     this_PrimaryExpCS_0=rulePrimaryExpCS();
 
                     state._fsp--;
@@ -14730,7 +14732,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getPrefixedExpCSAccess().getOwnedOperatorUnaryOperatorCSParserRuleCall_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleUnaryOperatorCS_in_rulePrefixedExpCS11859);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleUnaryOperatorCS_in_rulePrefixedExpCS11865);
                     	    lv_ownedOperator_2_0=ruleUnaryOperatorCS();
 
                     	    state._fsp--;
@@ -14776,7 +14778,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getPrefixedExpCSAccess().getOwnedExpressionPrimaryExpCSParserRuleCall_1_2_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePrimaryExpCS_in_rulePrefixedExpCS11881);
+                    pushFollow(FollowSets000.FOLLOW_rulePrimaryExpCS_in_rulePrefixedExpCS11887);
                     lv_ownedExpression_3_0=rulePrimaryExpCS();
 
                     state._fsp--;
@@ -14843,7 +14845,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPrefixedExpOrLetExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePrefixedExpOrLetExpCS_in_entryRulePrefixedExpOrLetExpCS11918);
+            pushFollow(FollowSets000.FOLLOW_rulePrefixedExpOrLetExpCS_in_entryRulePrefixedExpOrLetExpCS11924);
             iv_rulePrefixedExpOrLetExpCS=rulePrefixedExpOrLetExpCS();
 
             state._fsp--;
@@ -14851,7 +14853,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_rulePrefixedExpOrLetExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrefixedExpOrLetExpCS11928); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrefixedExpOrLetExpCS11934); if (state.failed) return current;
 
             }
 
@@ -14917,7 +14919,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrefixedExpOrLetExpCSAccess().getPrimaryExpOrLetExpCSParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePrimaryExpOrLetExpCS_in_rulePrefixedExpOrLetExpCS11978);
+                    pushFollow(FollowSets000.FOLLOW_rulePrimaryExpOrLetExpCS_in_rulePrefixedExpOrLetExpCS11984);
                     this_PrimaryExpOrLetExpCS_0=rulePrimaryExpOrLetExpCS();
 
                     state._fsp--;
@@ -14979,7 +14981,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getPrefixedExpOrLetExpCSAccess().getOwnedOperatorUnaryOperatorCSParserRuleCall_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleUnaryOperatorCS_in_rulePrefixedExpOrLetExpCS12017);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleUnaryOperatorCS_in_rulePrefixedExpOrLetExpCS12023);
                     	    lv_ownedOperator_2_0=ruleUnaryOperatorCS();
 
                     	    state._fsp--;
@@ -15025,7 +15027,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getPrefixedExpOrLetExpCSAccess().getOwnedExpressionPrimaryExpOrLetExpCSParserRuleCall_1_2_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePrimaryExpOrLetExpCS_in_rulePrefixedExpOrLetExpCS12039);
+                    pushFollow(FollowSets000.FOLLOW_rulePrimaryExpOrLetExpCS_in_rulePrefixedExpOrLetExpCS12045);
                     lv_ownedExpression_3_0=rulePrimaryExpOrLetExpCS();
 
                     state._fsp--;
@@ -15092,7 +15094,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getUnaryOperatorCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnaryOperatorCS_in_entryRuleUnaryOperatorCS12076);
+            pushFollow(FollowSets000.FOLLOW_ruleUnaryOperatorCS_in_entryRuleUnaryOperatorCS12082);
             iv_ruleUnaryOperatorCS=ruleUnaryOperatorCS();
 
             state._fsp--;
@@ -15100,7 +15102,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleUnaryOperatorCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnaryOperatorCS12086); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnaryOperatorCS12092); if (state.failed) return current;
 
             }
 
@@ -15142,7 +15144,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getUnaryOperatorCSAccess().getNamePrefixOperatorParserRuleCall_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_rulePrefixOperator_in_ruleUnaryOperatorCS12131);
+            pushFollow(FollowSets000.FOLLOW_rulePrefixOperator_in_ruleUnaryOperatorCS12137);
             lv_name_0_0=rulePrefixOperator();
 
             state._fsp--;
@@ -15200,7 +15202,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPrimaryExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePrimaryExpCS_in_entryRulePrimaryExpCS12166);
+            pushFollow(FollowSets000.FOLLOW_rulePrimaryExpCS_in_entryRulePrimaryExpCS12172);
             iv_rulePrimaryExpCS=rulePrimaryExpCS();
 
             state._fsp--;
@@ -15208,7 +15210,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_rulePrimaryExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrimaryExpCS12176); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrimaryExpCS12182); if (state.failed) return current;
 
             }
 
@@ -15339,7 +15341,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getPathNamePathNameCSParserRuleCall_0_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12235);
+                    pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12241);
                     lv_pathName_1_0=rulePathNameCS();
 
                     state._fsp--;
@@ -15363,7 +15365,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_2=(Token)match(input,79,FollowSets000.FOLLOW_79_in_rulePrimaryExpCS12247); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,79,FollowSets000.FOLLOW_79_in_rulePrimaryExpCS12253); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getPrimaryExpCSAccess().getLeftSquareBracketKeyword_0_2());
@@ -15380,7 +15382,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getFirstIndexesExpCSParserRuleCall_0_3_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_rulePrimaryExpCS12268);
+                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_rulePrimaryExpCS12274);
                     lv_firstIndexes_3_0=ruleExpCS();
 
                     state._fsp--;
@@ -15419,7 +15421,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5276:4: otherlv_4= ',' ( (lv_firstIndexes_5_0= ruleExpCS ) )
                     	    {
-                    	    otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_19_in_rulePrimaryExpCS12281); if (state.failed) return current;
+                    	    otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_19_in_rulePrimaryExpCS12287); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_4, grammarAccess.getPrimaryExpCSAccess().getCommaKeyword_0_4_0());
@@ -15436,7 +15438,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getFirstIndexesExpCSParserRuleCall_0_4_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_rulePrimaryExpCS12302);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_rulePrimaryExpCS12308);
                     	    lv_firstIndexes_5_0=ruleExpCS();
 
                     	    state._fsp--;
@@ -15469,7 +15471,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_6=(Token)match(input,80,FollowSets000.FOLLOW_80_in_rulePrimaryExpCS12316); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,80,FollowSets000.FOLLOW_80_in_rulePrimaryExpCS12322); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_6, grammarAccess.getPrimaryExpCSAccess().getRightSquareBracketKeyword_0_5());
@@ -15486,7 +15488,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5302:3: otherlv_7= '[' ( (lv_secondIndexes_8_0= ruleExpCS ) ) (otherlv_9= ',' ( (lv_secondIndexes_10_0= ruleExpCS ) ) )* otherlv_11= ']'
                             {
-                            otherlv_7=(Token)match(input,79,FollowSets000.FOLLOW_79_in_rulePrimaryExpCS12329); if (state.failed) return current;
+                            otherlv_7=(Token)match(input,79,FollowSets000.FOLLOW_79_in_rulePrimaryExpCS12335); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_7, grammarAccess.getPrimaryExpCSAccess().getLeftSquareBracketKeyword_0_6_0());
@@ -15503,7 +15505,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getSecondIndexesExpCSParserRuleCall_0_6_1_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_rulePrimaryExpCS12350);
+                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_rulePrimaryExpCS12356);
                             lv_secondIndexes_8_0=ruleExpCS();
 
                             state._fsp--;
@@ -15542,7 +15544,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                             	case 1 :
                             	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5324:4: otherlv_9= ',' ( (lv_secondIndexes_10_0= ruleExpCS ) )
                             	    {
-                            	    otherlv_9=(Token)match(input,19,FollowSets000.FOLLOW_19_in_rulePrimaryExpCS12363); if (state.failed) return current;
+                            	    otherlv_9=(Token)match(input,19,FollowSets000.FOLLOW_19_in_rulePrimaryExpCS12369); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
 
                             	          	newLeafNode(otherlv_9, grammarAccess.getPrimaryExpCSAccess().getCommaKeyword_0_6_2_0());
@@ -15559,7 +15561,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                             	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getSecondIndexesExpCSParserRuleCall_0_6_2_1_0()); 
                             	      	    
                             	    }
-                            	    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_rulePrimaryExpCS12384);
+                            	    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_rulePrimaryExpCS12390);
                             	    lv_secondIndexes_10_0=ruleExpCS();
 
                             	    state._fsp--;
@@ -15592,7 +15594,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                                 }
                             } while (true);
 
-                            otherlv_11=(Token)match(input,80,FollowSets000.FOLLOW_80_in_rulePrimaryExpCS12398); if (state.failed) return current;
+                            otherlv_11=(Token)match(input,80,FollowSets000.FOLLOW_80_in_rulePrimaryExpCS12404); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_11, grammarAccess.getPrimaryExpCSAccess().getRightSquareBracketKeyword_0_6_3());
@@ -15621,7 +15623,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5351:1: (lv_atPre_12_0= '@' )
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5352:3: lv_atPre_12_0= '@'
                             {
-                            lv_atPre_12_0=(Token)match(input,86,FollowSets000.FOLLOW_86_in_rulePrimaryExpCS12419); if (state.failed) return current;
+                            lv_atPre_12_0=(Token)match(input,86,FollowSets000.FOLLOW_86_in_rulePrimaryExpCS12425); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       newLeafNode(lv_atPre_12_0, grammarAccess.getPrimaryExpCSAccess().getAtPreCommercialAtKeyword_0_7_0_0());
@@ -15641,7 +15643,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            otherlv_13=(Token)match(input,87,FollowSets000.FOLLOW_87_in_rulePrimaryExpCS12444); if (state.failed) return current;
+                            otherlv_13=(Token)match(input,87,FollowSets000.FOLLOW_87_in_rulePrimaryExpCS12450); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_13, grammarAccess.getPrimaryExpCSAccess().getPreKeyword_0_7_1());
@@ -15694,7 +15696,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getPathNamePathNameCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12487);
+                    pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12493);
                     lv_pathName_15_0=rulePathNameCS();
 
                     state._fsp--;
@@ -15718,7 +15720,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_16=(Token)match(input,18,FollowSets000.FOLLOW_18_in_rulePrimaryExpCS12499); if (state.failed) return current;
+                    otherlv_16=(Token)match(input,18,FollowSets000.FOLLOW_18_in_rulePrimaryExpCS12505); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_16, grammarAccess.getPrimaryExpCSAccess().getLeftCurlyBracketKeyword_1_2());
@@ -15735,7 +15737,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_1_3_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_rulePrimaryExpCS12520);
+                    pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_rulePrimaryExpCS12526);
                     lv_ownedParts_17_0=ruleConstructorPartCS();
 
                     state._fsp--;
@@ -15774,7 +15776,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5419:4: otherlv_18= ',' ( (lv_ownedParts_19_0= ruleConstructorPartCS ) )
                     	    {
-                    	    otherlv_18=(Token)match(input,19,FollowSets000.FOLLOW_19_in_rulePrimaryExpCS12533); if (state.failed) return current;
+                    	    otherlv_18=(Token)match(input,19,FollowSets000.FOLLOW_19_in_rulePrimaryExpCS12539); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_18, grammarAccess.getPrimaryExpCSAccess().getCommaKeyword_1_4_0());
@@ -15791,7 +15793,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_1_4_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_rulePrimaryExpCS12554);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_rulePrimaryExpCS12560);
                     	    lv_ownedParts_19_0=ruleConstructorPartCS();
 
                     	    state._fsp--;
@@ -15824,7 +15826,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_20=(Token)match(input,22,FollowSets000.FOLLOW_22_in_rulePrimaryExpCS12568); if (state.failed) return current;
+                    otherlv_20=(Token)match(input,22,FollowSets000.FOLLOW_22_in_rulePrimaryExpCS12574); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_20, grammarAccess.getPrimaryExpCSAccess().getRightCurlyBracketKeyword_1_5());
@@ -15871,7 +15873,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getPathNamePathNameCSParserRuleCall_2_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12609);
+                    pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12615);
                     lv_pathName_22_0=rulePathNameCS();
 
                     state._fsp--;
@@ -15912,7 +15914,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5474:1: (lv_atPre_23_0= '@' )
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5475:3: lv_atPre_23_0= '@'
                             {
-                            lv_atPre_23_0=(Token)match(input,86,FollowSets000.FOLLOW_86_in_rulePrimaryExpCS12628); if (state.failed) return current;
+                            lv_atPre_23_0=(Token)match(input,86,FollowSets000.FOLLOW_86_in_rulePrimaryExpCS12634); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       newLeafNode(lv_atPre_23_0, grammarAccess.getPrimaryExpCSAccess().getAtPreCommercialAtKeyword_2_2_0_0());
@@ -15932,7 +15934,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            otherlv_24=(Token)match(input,87,FollowSets000.FOLLOW_87_in_rulePrimaryExpCS12653); if (state.failed) return current;
+                            otherlv_24=(Token)match(input,87,FollowSets000.FOLLOW_87_in_rulePrimaryExpCS12659); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_24, grammarAccess.getPrimaryExpCSAccess().getPreKeyword_2_2_1());
@@ -15944,7 +15946,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_25=(Token)match(input,34,FollowSets000.FOLLOW_34_in_rulePrimaryExpCS12667); if (state.failed) return current;
+                    otherlv_25=(Token)match(input,34,FollowSets000.FOLLOW_34_in_rulePrimaryExpCS12673); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_25, grammarAccess.getPrimaryExpCSAccess().getLeftParenthesisKeyword_2_3());
@@ -15972,7 +15974,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingArgCSParserRuleCall_2_4_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgCS_in_rulePrimaryExpCS12689);
+                            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgCS_in_rulePrimaryExpCS12695);
                             lv_argument_26_0=ruleNavigatingArgCS();
 
                             state._fsp--;
@@ -16019,7 +16021,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                             	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingCommaArgCSParserRuleCall_2_4_1_0()); 
                             	      	    
                             	    }
-                            	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS12710);
+                            	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS12716);
                             	    lv_argument_27_0=ruleNavigatingCommaArgCS();
 
                             	    state._fsp--;
@@ -16071,7 +16073,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                                       	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingSemiArgCSParserRuleCall_2_4_2_0_0()); 
                                       	    
                                     }
-                                    pushFollow(FollowSets000.FOLLOW_ruleNavigatingSemiArgCS_in_rulePrimaryExpCS12733);
+                                    pushFollow(FollowSets000.FOLLOW_ruleNavigatingSemiArgCS_in_rulePrimaryExpCS12739);
                                     lv_argument_28_0=ruleNavigatingSemiArgCS();
 
                                     state._fsp--;
@@ -16118,7 +16120,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                                     	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingCommaArgCSParserRuleCall_2_4_2_1_0()); 
                                     	      	    
                                     	    }
-                                    	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS12754);
+                                    	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS12760);
                                     	    lv_argument_29_0=ruleNavigatingCommaArgCS();
 
                                     	    state._fsp--;
@@ -16176,7 +16178,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                                       	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingBarArgCSParserRuleCall_2_4_3_0_0()); 
                                       	    
                                     }
-                                    pushFollow(FollowSets000.FOLLOW_ruleNavigatingBarArgCS_in_rulePrimaryExpCS12779);
+                                    pushFollow(FollowSets000.FOLLOW_ruleNavigatingBarArgCS_in_rulePrimaryExpCS12785);
                                     lv_argument_30_0=ruleNavigatingBarArgCS();
 
                                     state._fsp--;
@@ -16223,7 +16225,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                                     	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingCommaArgCSParserRuleCall_2_4_3_1_0()); 
                                     	      	    
                                     	    }
-                                    	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS12800);
+                                    	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS12806);
                                     	    lv_argument_31_0=ruleNavigatingCommaArgCS();
 
                                     	    state._fsp--;
@@ -16265,7 +16267,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_32=(Token)match(input,35,FollowSets000.FOLLOW_35_in_rulePrimaryExpCS12817); if (state.failed) return current;
+                    otherlv_32=(Token)match(input,35,FollowSets000.FOLLOW_35_in_rulePrimaryExpCS12823); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_32, grammarAccess.getPrimaryExpCSAccess().getRightParenthesisKeyword_2_5());
@@ -16312,7 +16314,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getPathNamePathNameCSParserRuleCall_3_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12858);
+                    pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12864);
                     lv_pathName_34_0=rulePathNameCS();
 
                     state._fsp--;
@@ -16353,7 +16355,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5637:1: (lv_atPre_35_0= '@' )
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5638:3: lv_atPre_35_0= '@'
                             {
-                            lv_atPre_35_0=(Token)match(input,86,FollowSets000.FOLLOW_86_in_rulePrimaryExpCS12877); if (state.failed) return current;
+                            lv_atPre_35_0=(Token)match(input,86,FollowSets000.FOLLOW_86_in_rulePrimaryExpCS12883); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       newLeafNode(lv_atPre_35_0, grammarAccess.getPrimaryExpCSAccess().getAtPreCommercialAtKeyword_3_2_0_0());
@@ -16373,7 +16375,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            otherlv_36=(Token)match(input,87,FollowSets000.FOLLOW_87_in_rulePrimaryExpCS12902); if (state.failed) return current;
+                            otherlv_36=(Token)match(input,87,FollowSets000.FOLLOW_87_in_rulePrimaryExpCS12908); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_36, grammarAccess.getPrimaryExpCSAccess().getPreKeyword_3_2_1());
@@ -16404,7 +16406,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getSelfExpCSParserRuleCall_4()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleSelfExpCS_in_rulePrimaryExpCS12936);
+                    pushFollow(FollowSets000.FOLLOW_ruleSelfExpCS_in_rulePrimaryExpCS12942);
                     this_SelfExpCS_37=ruleSelfExpCS();
 
                     state._fsp--;
@@ -16431,7 +16433,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getPrimitiveLiteralExpCSParserRuleCall_5()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePrimitiveLiteralExpCS_in_rulePrimaryExpCS12966);
+                    pushFollow(FollowSets000.FOLLOW_rulePrimitiveLiteralExpCS_in_rulePrimaryExpCS12972);
                     this_PrimitiveLiteralExpCS_38=rulePrimitiveLiteralExpCS();
 
                     state._fsp--;
@@ -16458,7 +16460,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getTupleLiteralExpCSParserRuleCall_6()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTupleLiteralExpCS_in_rulePrimaryExpCS12996);
+                    pushFollow(FollowSets000.FOLLOW_ruleTupleLiteralExpCS_in_rulePrimaryExpCS13002);
                     this_TupleLiteralExpCS_39=ruleTupleLiteralExpCS();
 
                     state._fsp--;
@@ -16485,7 +16487,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getCollectionLiteralExpCSParserRuleCall_7()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleCollectionLiteralExpCS_in_rulePrimaryExpCS13026);
+                    pushFollow(FollowSets000.FOLLOW_ruleCollectionLiteralExpCS_in_rulePrimaryExpCS13032);
                     this_CollectionLiteralExpCS_40=ruleCollectionLiteralExpCS();
 
                     state._fsp--;
@@ -16512,7 +16514,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getTypeLiteralExpCSParserRuleCall_8()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeLiteralExpCS_in_rulePrimaryExpCS13056);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeLiteralExpCS_in_rulePrimaryExpCS13062);
                     this_TypeLiteralExpCS_41=ruleTypeLiteralExpCS();
 
                     state._fsp--;
@@ -16539,7 +16541,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getIfExpCSParserRuleCall_9()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleIfExpCS_in_rulePrimaryExpCS13086);
+                    pushFollow(FollowSets000.FOLLOW_ruleIfExpCS_in_rulePrimaryExpCS13092);
                     this_IfExpCS_42=ruleIfExpCS();
 
                     state._fsp--;
@@ -16566,7 +16568,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getNestedExpCSParserRuleCall_10()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleNestedExpCS_in_rulePrimaryExpCS13116);
+                    pushFollow(FollowSets000.FOLLOW_ruleNestedExpCS_in_rulePrimaryExpCS13122);
                     this_NestedExpCS_43=ruleNestedExpCS();
 
                     state._fsp--;
@@ -16617,7 +16619,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPrimaryExpOrLetExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePrimaryExpOrLetExpCS_in_entryRulePrimaryExpOrLetExpCS13151);
+            pushFollow(FollowSets000.FOLLOW_rulePrimaryExpOrLetExpCS_in_entryRulePrimaryExpOrLetExpCS13157);
             iv_rulePrimaryExpOrLetExpCS=rulePrimaryExpOrLetExpCS();
 
             state._fsp--;
@@ -16625,7 +16627,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_rulePrimaryExpOrLetExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrimaryExpOrLetExpCS13161); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrimaryExpOrLetExpCS13167); if (state.failed) return current;
 
             }
 
@@ -16689,7 +16691,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrimaryExpOrLetExpCSAccess().getPrimaryExpCSParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePrimaryExpCS_in_rulePrimaryExpOrLetExpCS13211);
+                    pushFollow(FollowSets000.FOLLOW_rulePrimaryExpCS_in_rulePrimaryExpOrLetExpCS13217);
                     this_PrimaryExpCS_0=rulePrimaryExpCS();
 
                     state._fsp--;
@@ -16716,7 +16718,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getPrimaryExpOrLetExpCSAccess().getLetExpCSParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleLetExpCS_in_rulePrimaryExpOrLetExpCS13241);
+                    pushFollow(FollowSets000.FOLLOW_ruleLetExpCS_in_rulePrimaryExpOrLetExpCS13247);
                     this_LetExpCS_1=ruleLetExpCS();
 
                     state._fsp--;
@@ -16767,7 +16769,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNavigatingArgCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgCS_in_entryRuleNavigatingArgCS13276);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgCS_in_entryRuleNavigatingArgCS13282);
             iv_ruleNavigatingArgCS=ruleNavigatingArgCS();
 
             state._fsp--;
@@ -16775,7 +16777,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNavigatingArgCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingArgCS13286); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingArgCS13292); if (state.failed) return current;
 
             }
 
@@ -16826,7 +16828,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getNavigatingArgCSAccess().getNameNavigatingArgExpCSParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingArgCS13332);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingArgCS13338);
             lv_name_0_0=ruleNavigatingArgExpCS();
 
             state._fsp--;
@@ -16861,7 +16863,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5831:4: otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) (otherlv_3= '=' ( (lv_init_4_0= ruleExpCS ) ) )?
                     {
-                    otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleNavigatingArgCS13345); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleNavigatingArgCS13351); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getNavigatingArgCSAccess().getColonKeyword_1_0());
@@ -16878,7 +16880,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getNavigatingArgCSAccess().getOwnedTypeTypeExpCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingArgCS13366);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingArgCS13372);
                     lv_ownedType_2_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -16913,7 +16915,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5853:4: otherlv_3= '=' ( (lv_init_4_0= ruleExpCS ) )
                             {
-                            otherlv_3=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleNavigatingArgCS13379); if (state.failed) return current;
+                            otherlv_3=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleNavigatingArgCS13385); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_3, grammarAccess.getNavigatingArgCSAccess().getEqualsSignKeyword_1_2_0());
@@ -16930,7 +16932,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getNavigatingArgCSAccess().getInitExpCSParserRuleCall_1_2_1_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingArgCS13400);
+                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingArgCS13406);
                             lv_init_4_0=ruleExpCS();
 
                             state._fsp--;
@@ -17003,7 +17005,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNavigatingBarArgCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingBarArgCS_in_entryRuleNavigatingBarArgCS13440);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingBarArgCS_in_entryRuleNavigatingBarArgCS13446);
             iv_ruleNavigatingBarArgCS=ruleNavigatingBarArgCS();
 
             state._fsp--;
@@ -17011,7 +17013,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNavigatingBarArgCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingBarArgCS13450); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingBarArgCS13456); if (state.failed) return current;
 
             }
 
@@ -17058,7 +17060,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5897:1: (lv_prefix_0_0= '|' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5898:3: lv_prefix_0_0= '|'
             {
-            lv_prefix_0_0=(Token)match(input,88,FollowSets000.FOLLOW_88_in_ruleNavigatingBarArgCS13493); if (state.failed) return current;
+            lv_prefix_0_0=(Token)match(input,88,FollowSets000.FOLLOW_88_in_ruleNavigatingBarArgCS13499); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       newLeafNode(lv_prefix_0_0, grammarAccess.getNavigatingBarArgCSAccess().getPrefixVerticalLineKeyword_0_0());
@@ -17089,7 +17091,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getNavigatingBarArgCSAccess().getNameNavigatingArgExpCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingBarArgCS13527);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingBarArgCS13533);
             lv_name_1_0=ruleNavigatingArgExpCS();
 
             state._fsp--;
@@ -17124,7 +17126,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5929:4: otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) ) )?
                     {
-                    otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleNavigatingBarArgCS13540); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleNavigatingBarArgCS13546); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getNavigatingBarArgCSAccess().getColonKeyword_2_0());
@@ -17141,7 +17143,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getNavigatingBarArgCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingBarArgCS13561);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingBarArgCS13567);
                     lv_ownedType_3_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -17176,7 +17178,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5951:4: otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) )
                             {
-                            otherlv_4=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleNavigatingBarArgCS13574); if (state.failed) return current;
+                            otherlv_4=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleNavigatingBarArgCS13580); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_4, grammarAccess.getNavigatingBarArgCSAccess().getEqualsSignKeyword_2_2_0());
@@ -17193,7 +17195,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getNavigatingBarArgCSAccess().getInitExpCSParserRuleCall_2_2_1_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingBarArgCS13595);
+                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingBarArgCS13601);
                             lv_init_5_0=ruleExpCS();
 
                             state._fsp--;
@@ -17266,7 +17268,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNavigatingCommaArgCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_entryRuleNavigatingCommaArgCS13635);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_entryRuleNavigatingCommaArgCS13641);
             iv_ruleNavigatingCommaArgCS=ruleNavigatingCommaArgCS();
 
             state._fsp--;
@@ -17274,7 +17276,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNavigatingCommaArgCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingCommaArgCS13645); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingCommaArgCS13651); if (state.failed) return current;
 
             }
 
@@ -17321,7 +17323,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5995:1: (lv_prefix_0_0= ',' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5996:3: lv_prefix_0_0= ','
             {
-            lv_prefix_0_0=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleNavigatingCommaArgCS13688); if (state.failed) return current;
+            lv_prefix_0_0=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleNavigatingCommaArgCS13694); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       newLeafNode(lv_prefix_0_0, grammarAccess.getNavigatingCommaArgCSAccess().getPrefixCommaKeyword_0_0());
@@ -17352,7 +17354,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getNavigatingCommaArgCSAccess().getNameNavigatingArgExpCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingCommaArgCS13722);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingCommaArgCS13728);
             lv_name_1_0=ruleNavigatingArgExpCS();
 
             state._fsp--;
@@ -17387,7 +17389,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:6027:4: otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) ) )?
                     {
-                    otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleNavigatingCommaArgCS13735); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleNavigatingCommaArgCS13741); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getNavigatingCommaArgCSAccess().getColonKeyword_2_0());
@@ -17404,7 +17406,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getNavigatingCommaArgCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingCommaArgCS13756);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingCommaArgCS13762);
                     lv_ownedType_3_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -17439,7 +17441,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:6049:4: otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) )
                             {
-                            otherlv_4=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleNavigatingCommaArgCS13769); if (state.failed) return current;
+                            otherlv_4=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleNavigatingCommaArgCS13775); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_4, grammarAccess.getNavigatingCommaArgCSAccess().getEqualsSignKeyword_2_2_0());
@@ -17456,7 +17458,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getNavigatingCommaArgCSAccess().getInitExpCSParserRuleCall_2_2_1_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingCommaArgCS13790);
+                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingCommaArgCS13796);
                             lv_init_5_0=ruleExpCS();
 
                             state._fsp--;
@@ -17529,7 +17531,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNavigatingSemiArgCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingSemiArgCS_in_entryRuleNavigatingSemiArgCS13830);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingSemiArgCS_in_entryRuleNavigatingSemiArgCS13836);
             iv_ruleNavigatingSemiArgCS=ruleNavigatingSemiArgCS();
 
             state._fsp--;
@@ -17537,7 +17539,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNavigatingSemiArgCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingSemiArgCS13840); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingSemiArgCS13846); if (state.failed) return current;
 
             }
 
@@ -17584,7 +17586,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:6093:1: (lv_prefix_0_0= ';' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:6094:3: lv_prefix_0_0= ';'
             {
-            lv_prefix_0_0=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleNavigatingSemiArgCS13883); if (state.failed) return current;
+            lv_prefix_0_0=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleNavigatingSemiArgCS13889); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       newLeafNode(lv_prefix_0_0, grammarAccess.getNavigatingSemiArgCSAccess().getPrefixSemicolonKeyword_0_0());
@@ -17615,7 +17617,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getNavigatingSemiArgCSAccess().getNameNavigatingArgExpCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingSemiArgCS13917);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingSemiArgCS13923);
             lv_name_1_0=ruleNavigatingArgExpCS();
 
             state._fsp--;
@@ -17650,7 +17652,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:6125:4: otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) ) )?
                     {
-                    otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleNavigatingSemiArgCS13930); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleNavigatingSemiArgCS13936); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getNavigatingSemiArgCSAccess().getColonKeyword_2_0());
@@ -17667,7 +17669,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getNavigatingSemiArgCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingSemiArgCS13951);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingSemiArgCS13957);
                     lv_ownedType_3_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -17702,7 +17704,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:6147:4: otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) )
                             {
-                            otherlv_4=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleNavigatingSemiArgCS13964); if (state.failed) return current;
+                            otherlv_4=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleNavigatingSemiArgCS13970); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_4, grammarAccess.getNavigatingSemiArgCSAccess().getEqualsSignKeyword_2_2_0());
@@ -17719,7 +17721,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getNavigatingSemiArgCSAccess().getInitExpCSParserRuleCall_2_2_1_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingSemiArgCS13985);
+                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingSemiArgCS13991);
                             lv_init_5_0=ruleExpCS();
 
                             state._fsp--;
@@ -17792,7 +17794,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNavigatingArgExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_entryRuleNavigatingArgExpCS14025);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_entryRuleNavigatingArgExpCS14031);
             iv_ruleNavigatingArgExpCS=ruleNavigatingArgExpCS();
 
             state._fsp--;
@@ -17800,7 +17802,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNavigatingArgExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingArgExpCS14035); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingArgExpCS14041); if (state.failed) return current;
 
             }
 
@@ -17841,7 +17843,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       newCompositeNode(grammarAccess.getNavigatingArgExpCSAccess().getExpCSParserRuleCall()); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingArgExpCS14084);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingArgExpCS14090);
             this_ExpCS_0=ruleExpCS();
 
             state._fsp--;
@@ -17886,7 +17888,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIfExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIfExpCS_in_entryRuleIfExpCS14118);
+            pushFollow(FollowSets000.FOLLOW_ruleIfExpCS_in_entryRuleIfExpCS14124);
             iv_ruleIfExpCS=ruleIfExpCS();
 
             state._fsp--;
@@ -17894,7 +17896,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleIfExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleIfExpCS14128); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleIfExpCS14134); if (state.failed) return current;
 
             }
 
@@ -17936,7 +17938,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:6223:1: (otherlv_0= 'if' ( (lv_condition_1_0= ruleExpCS ) ) otherlv_2= 'then' ( (lv_thenExpression_3_0= ruleExpCS ) ) otherlv_4= 'else' ( (lv_elseExpression_5_0= ruleExpCS ) ) otherlv_6= 'endif' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:6223:3: otherlv_0= 'if' ( (lv_condition_1_0= ruleExpCS ) ) otherlv_2= 'then' ( (lv_thenExpression_3_0= ruleExpCS ) ) otherlv_4= 'else' ( (lv_elseExpression_5_0= ruleExpCS ) ) otherlv_6= 'endif'
             {
-            otherlv_0=(Token)match(input,89,FollowSets000.FOLLOW_89_in_ruleIfExpCS14165); if (state.failed) return current;
+            otherlv_0=(Token)match(input,89,FollowSets000.FOLLOW_89_in_ruleIfExpCS14171); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getIfExpCSAccess().getIfKeyword_0());
@@ -17953,7 +17955,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getIfExpCSAccess().getConditionExpCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleIfExpCS14186);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleIfExpCS14192);
             lv_condition_1_0=ruleExpCS();
 
             state._fsp--;
@@ -17977,7 +17979,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,90,FollowSets000.FOLLOW_90_in_ruleIfExpCS14198); if (state.failed) return current;
+            otherlv_2=(Token)match(input,90,FollowSets000.FOLLOW_90_in_ruleIfExpCS14204); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getIfExpCSAccess().getThenKeyword_2());
@@ -17994,7 +17996,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getIfExpCSAccess().getThenExpressionExpCSParserRuleCall_3_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleIfExpCS14219);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleIfExpCS14225);
             lv_thenExpression_3_0=ruleExpCS();
 
             state._fsp--;
@@ -18018,7 +18020,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,91,FollowSets000.FOLLOW_91_in_ruleIfExpCS14231); if (state.failed) return current;
+            otherlv_4=(Token)match(input,91,FollowSets000.FOLLOW_91_in_ruleIfExpCS14237); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getIfExpCSAccess().getElseKeyword_4());
@@ -18035,7 +18037,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getIfExpCSAccess().getElseExpressionExpCSParserRuleCall_5_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleIfExpCS14252);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleIfExpCS14258);
             lv_elseExpression_5_0=ruleExpCS();
 
             state._fsp--;
@@ -18059,7 +18061,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_6=(Token)match(input,92,FollowSets000.FOLLOW_92_in_ruleIfExpCS14264); if (state.failed) return current;
+            otherlv_6=(Token)match(input,92,FollowSets000.FOLLOW_92_in_ruleIfExpCS14270); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_6, grammarAccess.getIfExpCSAccess().getEndifKeyword_6());
@@ -18102,7 +18104,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getLetExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleLetExpCS_in_entryRuleLetExpCS14300);
+            pushFollow(FollowSets000.FOLLOW_ruleLetExpCS_in_entryRuleLetExpCS14306);
             iv_ruleLetExpCS=ruleLetExpCS();
 
             state._fsp--;
@@ -18110,7 +18112,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleLetExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLetExpCS14310); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLetExpCS14316); if (state.failed) return current;
 
             }
 
@@ -18151,7 +18153,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:6314:1: (otherlv_0= 'let' ( (lv_variable_1_0= ruleLetVariableCS ) ) (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariableCS ) ) )* otherlv_4= 'in' ( (lv_in_5_0= ruleExpCS ) ) )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:6314:3: otherlv_0= 'let' ( (lv_variable_1_0= ruleLetVariableCS ) ) (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariableCS ) ) )* otherlv_4= 'in' ( (lv_in_5_0= ruleExpCS ) )
             {
-            otherlv_0=(Token)match(input,93,FollowSets000.FOLLOW_93_in_ruleLetExpCS14347); if (state.failed) return current;
+            otherlv_0=(Token)match(input,93,FollowSets000.FOLLOW_93_in_ruleLetExpCS14353); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getLetExpCSAccess().getLetKeyword_0());
@@ -18168,7 +18170,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getLetExpCSAccess().getVariableLetVariableCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleLetVariableCS_in_ruleLetExpCS14368);
+            pushFollow(FollowSets000.FOLLOW_ruleLetVariableCS_in_ruleLetExpCS14374);
             lv_variable_1_0=ruleLetVariableCS();
 
             state._fsp--;
@@ -18207,7 +18209,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:6336:4: otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariableCS ) )
             	    {
-            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleLetExpCS14381); if (state.failed) return current;
+            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleLetExpCS14387); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_2, grammarAccess.getLetExpCSAccess().getCommaKeyword_2_0());
@@ -18224,7 +18226,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getLetExpCSAccess().getVariableLetVariableCSParserRuleCall_2_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleLetVariableCS_in_ruleLetExpCS14402);
+            	    pushFollow(FollowSets000.FOLLOW_ruleLetVariableCS_in_ruleLetExpCS14408);
             	    lv_variable_3_0=ruleLetVariableCS();
 
             	    state._fsp--;
@@ -18257,7 +18259,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,94,FollowSets000.FOLLOW_94_in_ruleLetExpCS14416); if (state.failed) return current;
+            otherlv_4=(Token)match(input,94,FollowSets000.FOLLOW_94_in_ruleLetExpCS14422); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getLetExpCSAccess().getInKeyword_3());
@@ -18274,7 +18276,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getLetExpCSAccess().getInExpCSParserRuleCall_4_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleLetExpCS14437);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleLetExpCS14443);
             lv_in_5_0=ruleExpCS();
 
             state._fsp--;
@@ -18335,7 +18337,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getLetVariableCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleLetVariableCS_in_entryRuleLetVariableCS14473);
+            pushFollow(FollowSets000.FOLLOW_ruleLetVariableCS_in_entryRuleLetVariableCS14479);
             iv_ruleLetVariableCS=ruleLetVariableCS();
 
             state._fsp--;
@@ -18343,7 +18345,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleLetVariableCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLetVariableCS14483); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLetVariableCS14489); if (state.failed) return current;
 
             }
 
@@ -18394,7 +18396,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getLetVariableCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleLetVariableCS14529);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleLetVariableCS14535);
             lv_name_0_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -18429,7 +18431,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:6419:4: otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) )
                     {
-                    otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleLetVariableCS14542); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleLetVariableCS14548); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getLetVariableCSAccess().getColonKeyword_1_0());
@@ -18446,7 +18448,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getLetVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleLetVariableCS14563);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleLetVariableCS14569);
                     lv_ownedType_2_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -18476,7 +18478,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleLetVariableCS14577); if (state.failed) return current;
+            otherlv_3=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleLetVariableCS14583); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_3, grammarAccess.getLetVariableCSAccess().getEqualsSignKeyword_2());
@@ -18493,7 +18495,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getLetVariableCSAccess().getInitExpressionExpCSParserRuleCall_3_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleLetVariableCS14598);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleLetVariableCS14604);
             lv_initExpression_4_0=ruleExpCS();
 
             state._fsp--;
@@ -18554,7 +18556,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNestedExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNestedExpCS_in_entryRuleNestedExpCS14634);
+            pushFollow(FollowSets000.FOLLOW_ruleNestedExpCS_in_entryRuleNestedExpCS14640);
             iv_ruleNestedExpCS=ruleNestedExpCS();
 
             state._fsp--;
@@ -18562,7 +18564,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNestedExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNestedExpCS14644); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNestedExpCS14650); if (state.failed) return current;
 
             }
 
@@ -18598,7 +18600,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:6484:1: (otherlv_0= '(' ( (lv_source_1_0= ruleExpCS ) ) otherlv_2= ')' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:6484:3: otherlv_0= '(' ( (lv_source_1_0= ruleExpCS ) ) otherlv_2= ')'
             {
-            otherlv_0=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleNestedExpCS14681); if (state.failed) return current;
+            otherlv_0=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleNestedExpCS14687); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getNestedExpCSAccess().getLeftParenthesisKeyword_0());
@@ -18615,7 +18617,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getNestedExpCSAccess().getSourceExpCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNestedExpCS14702);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNestedExpCS14708);
             lv_source_1_0=ruleExpCS();
 
             state._fsp--;
@@ -18639,7 +18641,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleNestedExpCS14714); if (state.failed) return current;
+            otherlv_2=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleNestedExpCS14720); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getNestedExpCSAccess().getRightParenthesisKeyword_2());
@@ -18682,7 +18684,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getSelfExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleSelfExpCS_in_entryRuleSelfExpCS14750);
+            pushFollow(FollowSets000.FOLLOW_ruleSelfExpCS_in_entryRuleSelfExpCS14756);
             iv_ruleSelfExpCS=ruleSelfExpCS();
 
             state._fsp--;
@@ -18690,7 +18692,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleSelfExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSelfExpCS14760); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSelfExpCS14766); if (state.failed) return current;
 
             }
 
@@ -18741,7 +18743,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,95,FollowSets000.FOLLOW_95_in_ruleSelfExpCS14809); if (state.failed) return current;
+            otherlv_1=(Token)match(input,95,FollowSets000.FOLLOW_95_in_ruleSelfExpCS14815); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getSelfExpCSAccess().getSelfKeyword_1());
@@ -18781,7 +18783,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_ruleCollectionTemplateCS_in_synpred32_InternalQVTrelation3168);
+        pushFollow(FollowSets000.FOLLOW_ruleCollectionTemplateCS_in_synpred32_InternalQVTrelation3174);
         this_CollectionTemplateCS_0=ruleCollectionTemplateCS();
 
         state._fsp--;
@@ -18799,8 +18801,8 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
         // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2559:2: (kw= '.' this_INT_2= RULE_INT )
         // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:2559:2: kw= '.' this_INT_2= RULE_INT
         {
-        kw=(Token)match(input,46,FollowSets000.FOLLOW_46_in_synpred67_InternalQVTrelation5576); if (state.failed) return ;
-        this_INT_2=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_synpred67_InternalQVTrelation5591); if (state.failed) return ;
+        kw=(Token)match(input,46,FollowSets000.FOLLOW_46_in_synpred67_InternalQVTrelation5582); if (state.failed) return ;
+        this_INT_2=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_synpred67_InternalQVTrelation5597); if (state.failed) return ;
 
         }
     }
@@ -18827,7 +18829,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
           	        newCompositeNode(grammarAccess.getExpCSAccess().getOwnedExpressionPrefixedExpCSParserRuleCall_0_1_0_0()); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_rulePrefixedExpCS_in_synpred128_InternalQVTrelation11281);
+        pushFollow(FollowSets000.FOLLOW_rulePrefixedExpCS_in_synpred128_InternalQVTrelation11287);
         lv_ownedExpression_1_0=rulePrefixedExpCS();
 
         state._fsp--;
@@ -18849,7 +18851,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
           	        newCompositeNode(grammarAccess.getExpCSAccess().getOwnedOperatorBinaryOperatorCSParserRuleCall_0_1_1_0()); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleBinaryOperatorCS_in_synpred128_InternalQVTrelation11302);
+        pushFollow(FollowSets000.FOLLOW_ruleBinaryOperatorCS_in_synpred128_InternalQVTrelation11308);
         lv_ownedOperator_2_0=ruleBinaryOperatorCS();
 
         state._fsp--;
@@ -18912,7 +18914,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
         	      	        newCompositeNode(grammarAccess.getExpCSAccess().getOwnedExpressionPrefixedExpCSParserRuleCall_0_1_0_0()); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_rulePrefixedExpCS_in_synpred129_InternalQVTrelation11281);
+        	    pushFollow(FollowSets000.FOLLOW_rulePrefixedExpCS_in_synpred129_InternalQVTrelation11287);
         	    lv_ownedExpression_1_0=rulePrefixedExpCS();
 
         	    state._fsp--;
@@ -18934,7 +18936,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
         	      	        newCompositeNode(grammarAccess.getExpCSAccess().getOwnedOperatorBinaryOperatorCSParserRuleCall_0_1_1_0()); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_ruleBinaryOperatorCS_in_synpred129_InternalQVTrelation11302);
+        	    pushFollow(FollowSets000.FOLLOW_ruleBinaryOperatorCS_in_synpred129_InternalQVTrelation11308);
         	    lv_ownedOperator_2_0=ruleBinaryOperatorCS();
 
         	    state._fsp--;
@@ -18970,7 +18972,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
           	        newCompositeNode(grammarAccess.getExpCSAccess().getOwnedExpressionPrefixedExpOrLetExpCSParserRuleCall_0_2_0()); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_rulePrefixedExpOrLetExpCS_in_synpred129_InternalQVTrelation11325);
+        pushFollow(FollowSets000.FOLLOW_rulePrefixedExpOrLetExpCS_in_synpred129_InternalQVTrelation11331);
         lv_ownedExpression_3_0=rulePrefixedExpOrLetExpCS();
 
         state._fsp--;
@@ -19037,7 +19039,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
         	      	        newCompositeNode(grammarAccess.getExpCSAccess().getOwnedOperatorUnaryOperatorCSParserRuleCall_1_1_0()); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_ruleUnaryOperatorCS_in_synpred131_InternalQVTrelation11366);
+        	    pushFollow(FollowSets000.FOLLOW_ruleUnaryOperatorCS_in_synpred131_InternalQVTrelation11372);
         	    lv_ownedOperator_5_0=ruleUnaryOperatorCS();
 
         	    state._fsp--;
@@ -19070,7 +19072,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
           	        newCompositeNode(grammarAccess.getExpCSAccess().getOwnedExpressionPrimaryExpOrLetExpCSParserRuleCall_1_2_0()); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_rulePrimaryExpOrLetExpCS_in_synpred131_InternalQVTrelation11388);
+        pushFollow(FollowSets000.FOLLOW_rulePrimaryExpOrLetExpCS_in_synpred131_InternalQVTrelation11394);
         lv_ownedExpression_6_0=rulePrimaryExpOrLetExpCS();
 
         state._fsp--;
@@ -19138,7 +19140,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
           	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getPathNamePathNameCSParserRuleCall_0_1_0()); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_synpred141_InternalQVTrelation12235);
+        pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_synpred141_InternalQVTrelation12241);
         lv_pathName_1_0=rulePathNameCS();
 
         state._fsp--;
@@ -19149,7 +19151,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
         }
 
-        otherlv_2=(Token)match(input,79,FollowSets000.FOLLOW_79_in_synpred141_InternalQVTrelation12247); if (state.failed) return ;
+        otherlv_2=(Token)match(input,79,FollowSets000.FOLLOW_79_in_synpred141_InternalQVTrelation12253); if (state.failed) return ;
         // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5258:1: ( (lv_firstIndexes_3_0= ruleExpCS ) )
         // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5259:1: (lv_firstIndexes_3_0= ruleExpCS )
         {
@@ -19161,7 +19163,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
           	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getFirstIndexesExpCSParserRuleCall_0_3_0()); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12268);
+        pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12274);
         lv_firstIndexes_3_0=ruleExpCS();
 
         state._fsp--;
@@ -19187,7 +19189,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
         	case 1 :
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5276:4: otherlv_4= ',' ( (lv_firstIndexes_5_0= ruleExpCS ) )
         	    {
-        	    otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred141_InternalQVTrelation12281); if (state.failed) return ;
+        	    otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred141_InternalQVTrelation12287); if (state.failed) return ;
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5280:1: ( (lv_firstIndexes_5_0= ruleExpCS ) )
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5281:1: (lv_firstIndexes_5_0= ruleExpCS )
         	    {
@@ -19199,7 +19201,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
         	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getFirstIndexesExpCSParserRuleCall_0_4_1_0()); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12302);
+        	    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12308);
         	    lv_firstIndexes_5_0=ruleExpCS();
 
         	    state._fsp--;
@@ -19219,7 +19221,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             }
         } while (true);
 
-        otherlv_6=(Token)match(input,80,FollowSets000.FOLLOW_80_in_synpred141_InternalQVTrelation12316); if (state.failed) return ;
+        otherlv_6=(Token)match(input,80,FollowSets000.FOLLOW_80_in_synpred141_InternalQVTrelation12322); if (state.failed) return ;
         // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5302:1: (otherlv_7= '[' ( (lv_secondIndexes_8_0= ruleExpCS ) ) (otherlv_9= ',' ( (lv_secondIndexes_10_0= ruleExpCS ) ) )* otherlv_11= ']' )?
         int alt129=2;
         int LA129_0 = input.LA(1);
@@ -19231,7 +19233,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             case 1 :
                 // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5302:3: otherlv_7= '[' ( (lv_secondIndexes_8_0= ruleExpCS ) ) (otherlv_9= ',' ( (lv_secondIndexes_10_0= ruleExpCS ) ) )* otherlv_11= ']'
                 {
-                otherlv_7=(Token)match(input,79,FollowSets000.FOLLOW_79_in_synpred141_InternalQVTrelation12329); if (state.failed) return ;
+                otherlv_7=(Token)match(input,79,FollowSets000.FOLLOW_79_in_synpred141_InternalQVTrelation12335); if (state.failed) return ;
                 // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5306:1: ( (lv_secondIndexes_8_0= ruleExpCS ) )
                 // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5307:1: (lv_secondIndexes_8_0= ruleExpCS )
                 {
@@ -19243,7 +19245,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                   	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getSecondIndexesExpCSParserRuleCall_0_6_1_0()); 
                   	    
                 }
-                pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12350);
+                pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12356);
                 lv_secondIndexes_8_0=ruleExpCS();
 
                 state._fsp--;
@@ -19269,7 +19271,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 	case 1 :
                 	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5324:4: otherlv_9= ',' ( (lv_secondIndexes_10_0= ruleExpCS ) )
                 	    {
-                	    otherlv_9=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred141_InternalQVTrelation12363); if (state.failed) return ;
+                	    otherlv_9=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred141_InternalQVTrelation12369); if (state.failed) return ;
                 	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5328:1: ( (lv_secondIndexes_10_0= ruleExpCS ) )
                 	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5329:1: (lv_secondIndexes_10_0= ruleExpCS )
                 	    {
@@ -19281,7 +19283,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getSecondIndexesExpCSParserRuleCall_0_6_2_1_0()); 
                 	      	    
                 	    }
-                	    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12384);
+                	    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12390);
                 	    lv_secondIndexes_10_0=ruleExpCS();
 
                 	    state._fsp--;
@@ -19301,7 +19303,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     }
                 } while (true);
 
-                otherlv_11=(Token)match(input,80,FollowSets000.FOLLOW_80_in_synpred141_InternalQVTrelation12398); if (state.failed) return ;
+                otherlv_11=(Token)match(input,80,FollowSets000.FOLLOW_80_in_synpred141_InternalQVTrelation12404); if (state.failed) return ;
 
                 }
                 break;
@@ -19325,14 +19327,14 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5351:1: (lv_atPre_12_0= '@' )
                 // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5352:3: lv_atPre_12_0= '@'
                 {
-                lv_atPre_12_0=(Token)match(input,86,FollowSets000.FOLLOW_86_in_synpred141_InternalQVTrelation12419); if (state.failed) return ;
+                lv_atPre_12_0=(Token)match(input,86,FollowSets000.FOLLOW_86_in_synpred141_InternalQVTrelation12425); if (state.failed) return ;
 
                 }
 
 
                 }
 
-                otherlv_13=(Token)match(input,87,FollowSets000.FOLLOW_87_in_synpred141_InternalQVTrelation12444); if (state.failed) return ;
+                otherlv_13=(Token)match(input,87,FollowSets000.FOLLOW_87_in_synpred141_InternalQVTrelation12450); if (state.failed) return ;
 
                 }
                 break;
@@ -19387,7 +19389,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
           	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getPathNamePathNameCSParserRuleCall_1_1_0()); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_synpred143_InternalQVTrelation12487);
+        pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_synpred143_InternalQVTrelation12493);
         lv_pathName_15_0=rulePathNameCS();
 
         state._fsp--;
@@ -19398,7 +19400,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
         }
 
-        otherlv_16=(Token)match(input,18,FollowSets000.FOLLOW_18_in_synpred143_InternalQVTrelation12499); if (state.failed) return ;
+        otherlv_16=(Token)match(input,18,FollowSets000.FOLLOW_18_in_synpred143_InternalQVTrelation12505); if (state.failed) return ;
         // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5401:1: ( (lv_ownedParts_17_0= ruleConstructorPartCS ) )
         // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5402:1: (lv_ownedParts_17_0= ruleConstructorPartCS )
         {
@@ -19410,7 +19412,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
           	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_1_3_0()); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_synpred143_InternalQVTrelation12520);
+        pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_synpred143_InternalQVTrelation12526);
         lv_ownedParts_17_0=ruleConstructorPartCS();
 
         state._fsp--;
@@ -19436,7 +19438,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
         	case 1 :
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5419:4: otherlv_18= ',' ( (lv_ownedParts_19_0= ruleConstructorPartCS ) )
         	    {
-        	    otherlv_18=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred143_InternalQVTrelation12533); if (state.failed) return ;
+        	    otherlv_18=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred143_InternalQVTrelation12539); if (state.failed) return ;
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5423:1: ( (lv_ownedParts_19_0= ruleConstructorPartCS ) )
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5424:1: (lv_ownedParts_19_0= ruleConstructorPartCS )
         	    {
@@ -19448,7 +19450,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
         	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_1_4_1_0()); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_synpred143_InternalQVTrelation12554);
+        	    pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_synpred143_InternalQVTrelation12560);
         	    lv_ownedParts_19_0=ruleConstructorPartCS();
 
         	    state._fsp--;
@@ -19468,7 +19470,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             }
         } while (true);
 
-        otherlv_20=(Token)match(input,22,FollowSets000.FOLLOW_22_in_synpred143_InternalQVTrelation12568); if (state.failed) return ;
+        otherlv_20=(Token)match(input,22,FollowSets000.FOLLOW_22_in_synpred143_InternalQVTrelation12574); if (state.failed) return ;
 
         }
 
@@ -19526,7 +19528,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
           	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getPathNamePathNameCSParserRuleCall_2_1_0()); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_synpred151_InternalQVTrelation12609);
+        pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_synpred151_InternalQVTrelation12615);
         lv_pathName_22_0=rulePathNameCS();
 
         state._fsp--;
@@ -19554,21 +19556,21 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5474:1: (lv_atPre_23_0= '@' )
                 // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5475:3: lv_atPre_23_0= '@'
                 {
-                lv_atPre_23_0=(Token)match(input,86,FollowSets000.FOLLOW_86_in_synpred151_InternalQVTrelation12628); if (state.failed) return ;
+                lv_atPre_23_0=(Token)match(input,86,FollowSets000.FOLLOW_86_in_synpred151_InternalQVTrelation12634); if (state.failed) return ;
 
                 }
 
 
                 }
 
-                otherlv_24=(Token)match(input,87,FollowSets000.FOLLOW_87_in_synpred151_InternalQVTrelation12653); if (state.failed) return ;
+                otherlv_24=(Token)match(input,87,FollowSets000.FOLLOW_87_in_synpred151_InternalQVTrelation12659); if (state.failed) return ;
 
                 }
                 break;
 
         }
 
-        otherlv_25=(Token)match(input,34,FollowSets000.FOLLOW_34_in_synpred151_InternalQVTrelation12667); if (state.failed) return ;
+        otherlv_25=(Token)match(input,34,FollowSets000.FOLLOW_34_in_synpred151_InternalQVTrelation12673); if (state.failed) return ;
         // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5496:1: ( ( (lv_argument_26_0= ruleNavigatingArgCS ) ) ( (lv_argument_27_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_28_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_29_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_30_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_31_0= ruleNavigatingCommaArgCS ) )* )? )?
         int alt145=2;
         int LA145_0 = input.LA(1);
@@ -19591,7 +19593,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                   	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingArgCSParserRuleCall_2_4_0_0()); 
                   	    
                 }
-                pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgCS_in_synpred151_InternalQVTrelation12689);
+                pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgCS_in_synpred151_InternalQVTrelation12695);
                 lv_argument_26_0=ruleNavigatingArgCS();
 
                 state._fsp--;
@@ -19625,7 +19627,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingCommaArgCSParserRuleCall_2_4_1_0()); 
                 	      	    
                 	    }
-                	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_synpred151_InternalQVTrelation12710);
+                	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_synpred151_InternalQVTrelation12716);
                 	    lv_argument_27_0=ruleNavigatingCommaArgCS();
 
                 	    state._fsp--;
@@ -19664,7 +19666,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                           	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingSemiArgCSParserRuleCall_2_4_2_0_0()); 
                           	    
                         }
-                        pushFollow(FollowSets000.FOLLOW_ruleNavigatingSemiArgCS_in_synpred151_InternalQVTrelation12733);
+                        pushFollow(FollowSets000.FOLLOW_ruleNavigatingSemiArgCS_in_synpred151_InternalQVTrelation12739);
                         lv_argument_28_0=ruleNavigatingSemiArgCS();
 
                         state._fsp--;
@@ -19698,7 +19700,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingCommaArgCSParserRuleCall_2_4_2_1_0()); 
                         	      	    
                         	    }
-                        	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_synpred151_InternalQVTrelation12754);
+                        	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_synpred151_InternalQVTrelation12760);
                         	    lv_argument_29_0=ruleNavigatingCommaArgCS();
 
                         	    state._fsp--;
@@ -19743,7 +19745,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                           	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingBarArgCSParserRuleCall_2_4_3_0_0()); 
                           	    
                         }
-                        pushFollow(FollowSets000.FOLLOW_ruleNavigatingBarArgCS_in_synpred151_InternalQVTrelation12779);
+                        pushFollow(FollowSets000.FOLLOW_ruleNavigatingBarArgCS_in_synpred151_InternalQVTrelation12785);
                         lv_argument_30_0=ruleNavigatingBarArgCS();
 
                         state._fsp--;
@@ -19777,7 +19779,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                         	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingCommaArgCSParserRuleCall_2_4_3_1_0()); 
                         	      	    
                         	    }
-                        	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_synpred151_InternalQVTrelation12800);
+                        	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_synpred151_InternalQVTrelation12806);
                         	    lv_argument_31_0=ruleNavigatingCommaArgCS();
 
                         	    state._fsp--;
@@ -19806,7 +19808,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
         }
 
-        otherlv_32=(Token)match(input,35,FollowSets000.FOLLOW_35_in_synpred151_InternalQVTrelation12817); if (state.failed) return ;
+        otherlv_32=(Token)match(input,35,FollowSets000.FOLLOW_35_in_synpred151_InternalQVTrelation12823); if (state.failed) return ;
 
         }
 
@@ -19850,7 +19852,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
           	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getPathNamePathNameCSParserRuleCall_3_1_0()); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_synpred153_InternalQVTrelation12858);
+        pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_synpred153_InternalQVTrelation12864);
         lv_pathName_34_0=rulePathNameCS();
 
         state._fsp--;
@@ -19878,14 +19880,14 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5637:1: (lv_atPre_35_0= '@' )
                 // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelation.g:5638:3: lv_atPre_35_0= '@'
                 {
-                lv_atPre_35_0=(Token)match(input,86,FollowSets000.FOLLOW_86_in_synpred153_InternalQVTrelation12877); if (state.failed) return ;
+                lv_atPre_35_0=(Token)match(input,86,FollowSets000.FOLLOW_86_in_synpred153_InternalQVTrelation12883); if (state.failed) return ;
 
                 }
 
 
                 }
 
-                otherlv_36=(Token)match(input,87,FollowSets000.FOLLOW_87_in_synpred153_InternalQVTrelation12902); if (state.failed) return ;
+                otherlv_36=(Token)match(input,87,FollowSets000.FOLLOW_87_in_synpred153_InternalQVTrelation12908); if (state.failed) return ;
 
                 }
                 break;
@@ -19913,7 +19915,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_ruleTupleLiteralExpCS_in_synpred156_InternalQVTrelation12996);
+        pushFollow(FollowSets000.FOLLOW_ruleTupleLiteralExpCS_in_synpred156_InternalQVTrelation13002);
         this_TupleLiteralExpCS_39=ruleTupleLiteralExpCS();
 
         state._fsp--;
@@ -19936,7 +19938,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_ruleCollectionLiteralExpCS_in_synpred157_InternalQVTrelation13026);
+        pushFollow(FollowSets000.FOLLOW_ruleCollectionLiteralExpCS_in_synpred157_InternalQVTrelation13032);
         this_CollectionLiteralExpCS_40=ruleCollectionLiteralExpCS();
 
         state._fsp--;
@@ -19959,7 +19961,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_ruleTypeLiteralExpCS_in_synpred158_InternalQVTrelation13056);
+        pushFollow(FollowSets000.FOLLOW_ruleTypeLiteralExpCS_in_synpred158_InternalQVTrelation13062);
         this_TypeLiteralExpCS_41=ruleTypeLiteralExpCS();
 
         state._fsp--;
@@ -23993,621 +23995,621 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_ruleTemplateCS_in_ruleCollectionTemplateCS409 = new BitSet(new long[]{0x0000000000180000L});
         public static final BitSet FOLLOW_ruleElementTemplateCS_in_ruleCollectionTemplateCS428 = new BitSet(new long[]{0x0000000000180000L});
         public static final BitSet FOLLOW_20_in_ruleCollectionTemplateCS445 = new BitSet(new long[]{0x00019FF3FE200030L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleCollectionTemplateCS467 = new BitSet(new long[]{0x0000000000400000L});
-        public static final BitSet FOLLOW_21_in_ruleCollectionTemplateCS485 = new BitSet(new long[]{0x0000000000400000L});
-        public static final BitSet FOLLOW_22_in_ruleCollectionTemplateCS500 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDefaultValueCS_in_entryRuleDefaultValueCS536 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleDefaultValueCS546 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleDefaultValueCS598 = new BitSet(new long[]{0x0000000000800000L});
-        public static final BitSet FOLLOW_23_in_ruleDefaultValueCS610 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleDefaultValueCS631 = new BitSet(new long[]{0x0000000001000000L});
-        public static final BitSet FOLLOW_24_in_ruleDefaultValueCS643 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDomainCS_in_entryRuleDomainCS679 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleDomainCS689 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_25_in_ruleDomainCS733 = new BitSet(new long[]{0x0000000008000000L});
-        public static final BitSet FOLLOW_26_in_ruleDomainCS770 = new BitSet(new long[]{0x0000000008000000L});
-        public static final BitSet FOLLOW_27_in_ruleDomainCS797 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleDomainCS824 = new BitSet(new long[]{0x00019FF3FE020030L});
-        public static final BitSet FOLLOW_ruleDomainPatternCS_in_ruleDomainCS845 = new BitSet(new long[]{0x0000000031000000L});
-        public static final BitSet FOLLOW_28_in_ruleDomainCS858 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleDomainCS879 = new BitSet(new long[]{0x0000000021000000L});
-        public static final BitSet FOLLOW_29_in_ruleDomainCS894 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleDomainCS906 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleDefaultValueCS_in_ruleDomainCS927 = new BitSet(new long[]{0x00019FF3FE400030L});
-        public static final BitSet FOLLOW_22_in_ruleDomainCS940 = new BitSet(new long[]{0x0000000001000000L});
-        public static final BitSet FOLLOW_24_in_ruleDomainCS954 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDomainPatternCS_in_entryRuleDomainPatternCS990 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleDomainPatternCS1000 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTemplateCS_in_ruleDomainPatternCS1045 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleElementTemplateCS_in_entryRuleElementTemplateCS1080 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleElementTemplateCS1090 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleElementTemplateCS1136 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_21_in_ruleElementTemplateCS1167 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleKeyDeclCS_in_entryRuleKeyDeclCS1204 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleKeyDeclCS1214 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_30_in_ruleKeyDeclCS1251 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_ruleKeyDeclCS1272 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleKeyDeclCS1284 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleKeyDeclCS1311 = new BitSet(new long[]{0x0000000000480000L});
-        public static final BitSet FOLLOW_19_in_ruleKeyDeclCS1324 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleKeyDeclCS1351 = new BitSet(new long[]{0x0000000000480000L});
-        public static final BitSet FOLLOW_22_in_ruleKeyDeclCS1365 = new BitSet(new long[]{0x0000000001000000L});
-        public static final BitSet FOLLOW_24_in_ruleKeyDeclCS1377 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLibraryCS_in_entryRuleLibraryCS1413 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleLibraryCS1423 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_31_in_ruleLibraryCS1460 = new BitSet(new long[]{0x0000000000000080L});
-        public static final BitSet FOLLOW_ruleURI_in_ruleLibraryCS1487 = new BitSet(new long[]{0x0000000001000000L});
-        public static final BitSet FOLLOW_24_in_ruleLibraryCS1499 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleModelDeclCS_in_entryRuleModelDeclCS1535 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModelDeclCS1545 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1591 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_17_in_ruleModelDeclCS1603 = new BitSet(new long[]{0x00019FF3FE040030L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1631 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_18_in_ruleModelDeclCS1650 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1677 = new BitSet(new long[]{0x0000000000480000L});
-        public static final BitSet FOLLOW_19_in_ruleModelDeclCS1690 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1717 = new BitSet(new long[]{0x0000000000480000L});
-        public static final BitSet FOLLOW_22_in_ruleModelDeclCS1731 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleObjectTemplateCS_in_entryRuleObjectTemplateCS1769 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleObjectTemplateCS1779 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleObjectTemplateCS1825 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_17_in_ruleObjectTemplateCS1838 = new BitSet(new long[]{0x00019FF3FE000030L,0x0000000000003FFEL});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleObjectTemplateCS1859 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleObjectTemplateCS1871 = new BitSet(new long[]{0x00019FF3FE400030L});
-        public static final BitSet FOLLOW_rulePropertyTemplateCS_in_ruleObjectTemplateCS1893 = new BitSet(new long[]{0x0000000000480000L});
-        public static final BitSet FOLLOW_19_in_ruleObjectTemplateCS1906 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_rulePropertyTemplateCS_in_ruleObjectTemplateCS1927 = new BitSet(new long[]{0x0000000000480000L});
-        public static final BitSet FOLLOW_22_in_ruleObjectTemplateCS1943 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleParamDeclarationCS_in_entryRuleParamDeclarationCS1979 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleParamDeclarationCS1989 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleParamDeclarationCS2035 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_17_in_ruleParamDeclarationCS2047 = new BitSet(new long[]{0x00019FF3FE000030L,0x0000000000003FFEL});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleParamDeclarationCS2068 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePredicateCS_in_entryRulePredicateCS2104 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePredicateCS2114 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCS_in_rulePredicateCS2160 = new BitSet(new long[]{0x0000000001000000L});
-        public static final BitSet FOLLOW_24_in_rulePredicateCS2172 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimitiveTypeDomainCS_in_entryRulePrimitiveTypeDomainCS2208 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePrimitiveTypeDomainCS2218 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_32_in_rulePrimitiveTypeDomainCS2255 = new BitSet(new long[]{0x0000000008000000L});
-        public static final BitSet FOLLOW_27_in_rulePrimitiveTypeDomainCS2267 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_rulePrimitiveTypeDomainCS2288 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_17_in_rulePrimitiveTypeDomainCS2300 = new BitSet(new long[]{0x00019FF3FE000030L,0x0000000000003FFEL});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_rulePrimitiveTypeDomainCS2321 = new BitSet(new long[]{0x0000000001000000L});
-        public static final BitSet FOLLOW_24_in_rulePrimitiveTypeDomainCS2333 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePropertyTemplateCS_in_entryRulePropertyTemplateCS2369 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePropertyTemplateCS2379 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_rulePropertyTemplateCS2431 = new BitSet(new long[]{0x0000000000800000L});
-        public static final BitSet FOLLOW_23_in_rulePropertyTemplateCS2443 = new BitSet(new long[]{0x800DBFF7FE0200F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCSOrTemplateCS_in_rulePropertyTemplateCS2464 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleQueryCS_in_entryRuleQueryCS2500 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleQueryCS2510 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_33_in_ruleQueryCS2547 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleQueryCS2568 = new BitSet(new long[]{0x0000000400000000L});
-        public static final BitSet FOLLOW_34_in_ruleQueryCS2580 = new BitSet(new long[]{0x00019FFBFE000030L});
-        public static final BitSet FOLLOW_ruleParamDeclarationCS_in_ruleQueryCS2602 = new BitSet(new long[]{0x0000000800080000L});
-        public static final BitSet FOLLOW_19_in_ruleQueryCS2615 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleParamDeclarationCS_in_ruleQueryCS2636 = new BitSet(new long[]{0x0000000800080000L});
-        public static final BitSet FOLLOW_35_in_ruleQueryCS2652 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_17_in_ruleQueryCS2664 = new BitSet(new long[]{0x00019FF3FE000030L,0x0000000000003FFEL});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleQueryCS2685 = new BitSet(new long[]{0x0000000001040000L});
-        public static final BitSet FOLLOW_24_in_ruleQueryCS2698 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_18_in_ruleQueryCS2717 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleQueryCS2738 = new BitSet(new long[]{0x0000000000400000L});
-        public static final BitSet FOLLOW_22_in_ruleQueryCS2750 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleRelationCS_in_entryRuleRelationCS2788 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleRelationCS2798 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_36_in_ruleRelationCS2841 = new BitSet(new long[]{0x0000002000000000L});
-        public static final BitSet FOLLOW_37_in_ruleRelationCS2867 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleRelationCS2888 = new BitSet(new long[]{0x0000004000040000L});
-        public static final BitSet FOLLOW_38_in_ruleRelationCS2901 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleRelationCS2928 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleRelationCS2942 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleVarDeclarationCS_in_ruleRelationCS2963 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleDomainCS_in_ruleRelationCS2986 = new BitSet(new long[]{0x00019FF3FE400030L});
-        public static final BitSet FOLLOW_rulePrimitiveTypeDomainCS_in_ruleRelationCS3013 = new BitSet(new long[]{0x00019FF3FE400030L});
-        public static final BitSet FOLLOW_ruleWhenCS_in_ruleRelationCS3036 = new BitSet(new long[]{0x0000080000400000L});
-        public static final BitSet FOLLOW_ruleWhereCS_in_ruleRelationCS3058 = new BitSet(new long[]{0x0000000000400000L});
-        public static final BitSet FOLLOW_22_in_ruleRelationCS3071 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTemplateCS_in_entryRuleTemplateCS3107 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTemplateCS3117 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCollectionTemplateCS_in_ruleTemplateCS3168 = new BitSet(new long[]{0x0000000000040002L});
-        public static final BitSet FOLLOW_ruleObjectTemplateCS_in_ruleTemplateCS3198 = new BitSet(new long[]{0x0000000000040002L});
-        public static final BitSet FOLLOW_18_in_ruleTemplateCS3211 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleTemplateCS3232 = new BitSet(new long[]{0x0000000000400000L});
-        public static final BitSet FOLLOW_22_in_ruleTemplateCS3244 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTransformationCS_in_entryRuleTransformationCS3282 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTransformationCS3292 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_39_in_ruleTransformationCS3329 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleTransformationCS3350 = new BitSet(new long[]{0x0000000400000000L});
-        public static final BitSet FOLLOW_34_in_ruleTransformationCS3362 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleModelDeclCS_in_ruleTransformationCS3383 = new BitSet(new long[]{0x0000000800080000L});
-        public static final BitSet FOLLOW_19_in_ruleTransformationCS3396 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleModelDeclCS_in_ruleTransformationCS3417 = new BitSet(new long[]{0x0000000800080000L});
-        public static final BitSet FOLLOW_35_in_ruleTransformationCS3431 = new BitSet(new long[]{0x0000010000040000L});
-        public static final BitSet FOLLOW_40_in_ruleTransformationCS3444 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleTransformationCS3471 = new BitSet(new long[]{0x00000000000C0000L});
-        public static final BitSet FOLLOW_19_in_ruleTransformationCS3484 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleTransformationCS3511 = new BitSet(new long[]{0x00000000000C0000L});
-        public static final BitSet FOLLOW_18_in_ruleTransformationCS3527 = new BitSet(new long[]{0x0000003240400000L});
-        public static final BitSet FOLLOW_ruleKeyDeclCS_in_ruleTransformationCS3548 = new BitSet(new long[]{0x0000003240400000L});
-        public static final BitSet FOLLOW_ruleRelationCS_in_ruleTransformationCS3571 = new BitSet(new long[]{0x0000003200400000L});
-        public static final BitSet FOLLOW_ruleQueryCS_in_ruleTransformationCS3598 = new BitSet(new long[]{0x0000003200400000L});
-        public static final BitSet FOLLOW_22_in_ruleTransformationCS3612 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnitCS_in_entryRuleUnitCS3648 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleUnitCS3658 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_41_in_ruleUnitCS3695 = new BitSet(new long[]{0x00019FF3FE0000B0L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleUnitCS3717 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_17_in_ruleUnitCS3729 = new BitSet(new long[]{0x0000000000000080L});
-        public static final BitSet FOLLOW_ruleURI_in_ruleUnitCS3758 = new BitSet(new long[]{0x0000000001000000L});
-        public static final BitSet FOLLOW_24_in_ruleUnitCS3770 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleVarDeclarationCS_in_entryRuleVarDeclarationCS3806 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleVarDeclarationCS3816 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleVarDeclarationIdCS_in_ruleVarDeclarationCS3862 = new BitSet(new long[]{0x00000000000A0000L});
-        public static final BitSet FOLLOW_19_in_ruleVarDeclarationCS3875 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleVarDeclarationIdCS_in_ruleVarDeclarationCS3896 = new BitSet(new long[]{0x00000000000A0000L});
-        public static final BitSet FOLLOW_17_in_ruleVarDeclarationCS3910 = new BitSet(new long[]{0x00019FF3FE000030L,0x0000000000003FFEL});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleVarDeclarationCS3931 = new BitSet(new long[]{0x0000000001000000L});
-        public static final BitSet FOLLOW_24_in_ruleVarDeclarationCS3943 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleVarDeclarationIdCS_in_entryRuleVarDeclarationIdCS3979 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleVarDeclarationIdCS3989 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleVarDeclarationIdCS4034 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleWhenCS_in_entryRuleWhenCS4069 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleWhenCS4079 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_42_in_ruleWhenCS4128 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleWhenCS4140 = new BitSet(new long[]{0x800DBFF7FE4000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_rulePredicateCS_in_ruleWhenCS4161 = new BitSet(new long[]{0x800DBFF7FE4000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_22_in_ruleWhenCS4174 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleWhereCS_in_entryRuleWhereCS4210 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleWhereCS4220 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_43_in_ruleWhereCS4269 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleWhereCS4281 = new BitSet(new long[]{0x800DBFF7FE4000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_rulePredicateCS_in_ruleWhereCS4302 = new BitSet(new long[]{0x800DBFF7FE4000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_22_in_ruleWhereCS4315 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCSOrTemplateCS_in_entryRuleExpCSOrTemplateCS4353 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleExpCSOrTemplateCS4363 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleExpCSOrTemplateCS4413 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTemplateCS_in_ruleExpCSOrTemplateCS4443 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypedTypeRefCS_in_entryRuleTypedTypeRefCS4478 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTypedTypeRefCS4488 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_ruleTypedTypeRefCS4533 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_entryRuleTypedRefCS4568 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTypedRefCS4578 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimitiveTypeCS_in_ruleTypedRefCS4628 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCollectionTypeCS_in_ruleTypedRefCS4658 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypedTypeRefCS_in_ruleTypedRefCS4688 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_entryRuleUnrestrictedName4724 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleUnrestrictedName4735 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEssentialOCLUnrestrictedName_in_ruleUnrestrictedName4782 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_25_in_ruleUnrestrictedName4806 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_29_in_ruleUnrestrictedName4825 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_27_in_ruleUnrestrictedName4844 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_26_in_ruleUnrestrictedName4863 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_40_in_ruleUnrestrictedName4882 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_28_in_ruleUnrestrictedName4901 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_41_in_ruleUnrestrictedName4920 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_31_in_ruleUnrestrictedName4939 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_30_in_ruleUnrestrictedName4958 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_38_in_ruleUnrestrictedName4977 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_32_in_ruleUnrestrictedName4996 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_33_in_ruleUnrestrictedName5015 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_37_in_ruleUnrestrictedName5034 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_44_in_ruleUnrestrictedName5053 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_36_in_ruleUnrestrictedName5072 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_39_in_ruleUnrestrictedName5091 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_42_in_ruleUnrestrictedName5110 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_43_in_ruleUnrestrictedName5129 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleID_in_entryRuleID5172 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleID5183 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_SIMPLE_ID_in_ruleID5223 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ESCAPED_ID_in_ruleID5249 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLOWER_in_entryRuleLOWER5295 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleLOWER5306 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleLOWER5345 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUPPER_in_entryRuleUPPER5390 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleUPPER5401 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleUPPER5441 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_45_in_ruleUPPER5465 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNUMBER_LITERAL_in_entryRuleNUMBER_LITERAL5506 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNUMBER_LITERAL5517 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL5557 = new BitSet(new long[]{0x0001C00000000002L});
-        public static final BitSet FOLLOW_46_in_ruleNUMBER_LITERAL5576 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL5591 = new BitSet(new long[]{0x0001800000000002L});
-        public static final BitSet FOLLOW_47_in_ruleNUMBER_LITERAL5613 = new BitSet(new long[]{0x0006000000000040L});
-        public static final BitSet FOLLOW_48_in_ruleNUMBER_LITERAL5632 = new BitSet(new long[]{0x0006000000000040L});
-        public static final BitSet FOLLOW_49_in_ruleNUMBER_LITERAL5647 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_50_in_ruleNUMBER_LITERAL5666 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL5683 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleURI_in_entryRuleURI5731 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleURI5742 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleURI5781 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEssentialOCLUnrestrictedIdentifier_in_entryRuleEssentialOCLUnrestrictedIdentifier5828 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEssentialOCLUnrestrictedIdentifier5839 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_47_in_ruleEssentialOCLUnrestrictedIdentifier5877 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_48_in_ruleEssentialOCLUnrestrictedIdentifier5896 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEssentialOCLPrefixOperator_in_entryRuleEssentialOCLPrefixOperator5937 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEssentialOCLPrefixOperator5948 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_50_in_ruleEssentialOCLPrefixOperator5986 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_51_in_ruleEssentialOCLPrefixOperator6005 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEssentialOCLInfixOperator_in_entryRuleEssentialOCLInfixOperator6046 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEssentialOCLInfixOperator6057 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_45_in_ruleEssentialOCLInfixOperator6095 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_52_in_ruleEssentialOCLInfixOperator6114 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_49_in_ruleEssentialOCLInfixOperator6133 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_50_in_ruleEssentialOCLInfixOperator6152 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_53_in_ruleEssentialOCLInfixOperator6171 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_54_in_ruleEssentialOCLInfixOperator6190 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_55_in_ruleEssentialOCLInfixOperator6209 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_56_in_ruleEssentialOCLInfixOperator6228 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_23_in_ruleEssentialOCLInfixOperator6247 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_57_in_ruleEssentialOCLInfixOperator6266 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_58_in_ruleEssentialOCLInfixOperator6285 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_59_in_ruleEssentialOCLInfixOperator6304 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_60_in_ruleEssentialOCLInfixOperator6323 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_61_in_ruleEssentialOCLInfixOperator6342 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEssentialOCLNavigationOperator_in_entryRuleEssentialOCLNavigationOperator6383 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEssentialOCLNavigationOperator6394 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_46_in_ruleEssentialOCLNavigationOperator6432 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_62_in_ruleEssentialOCLNavigationOperator6451 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIdentifier_in_entryRuleIdentifier6492 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleIdentifier6503 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleID_in_ruleIdentifier6550 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEssentialOCLUnrestrictedIdentifier_in_ruleIdentifier6583 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral6629 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleStringLiteral6640 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleStringLiteral6679 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrefixOperator_in_entryRulePrefixOperator6724 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePrefixOperator6735 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEssentialOCLPrefixOperator_in_rulePrefixOperator6781 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleInfixOperator_in_entryRuleInfixOperator6826 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleInfixOperator6837 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEssentialOCLInfixOperator_in_ruleInfixOperator6883 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigationOperator_in_entryRuleNavigationOperator6928 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNavigationOperator6939 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEssentialOCLNavigationOperator_in_ruleNavigationOperator6985 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEssentialOCLUnrestrictedName_in_entryRuleEssentialOCLUnrestrictedName7030 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEssentialOCLUnrestrictedName7041 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIdentifier_in_ruleEssentialOCLUnrestrictedName7087 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEssentialOCLUnreservedName_in_entryRuleEssentialOCLUnreservedName7132 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEssentialOCLUnreservedName7143 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleEssentialOCLUnreservedName7190 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCollectionTypeIdentifier_in_ruleEssentialOCLUnreservedName7223 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimitiveTypeIdentifier_in_ruleEssentialOCLUnreservedName7256 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_63_in_ruleEssentialOCLUnreservedName7280 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnreservedName_in_entryRuleUnreservedName7321 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleUnreservedName7332 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEssentialOCLUnreservedName_in_ruleUnreservedName7378 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_entryRulePathNameCS7422 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePathNameCS7432 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFirstPathElementCS_in_rulePathNameCS7478 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000001L});
-        public static final BitSet FOLLOW_64_in_rulePathNameCS7491 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
-        public static final BitSet FOLLOW_ruleNextPathElementCS_in_rulePathNameCS7512 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000001L});
-        public static final BitSet FOLLOW_ruleFirstPathElementCS_in_entryRuleFirstPathElementCS7550 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleFirstPathElementCS7560 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleFirstPathElementCS7611 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNextPathElementCS_in_entryRuleNextPathElementCS7646 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNextPathElementCS7656 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnreservedName_in_ruleNextPathElementCS7707 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimitiveTypeIdentifier_in_entryRulePrimitiveTypeIdentifier7743 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePrimitiveTypeIdentifier7754 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_65_in_rulePrimitiveTypeIdentifier7792 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_66_in_rulePrimitiveTypeIdentifier7811 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_67_in_rulePrimitiveTypeIdentifier7830 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_68_in_rulePrimitiveTypeIdentifier7849 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_69_in_rulePrimitiveTypeIdentifier7868 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_70_in_rulePrimitiveTypeIdentifier7887 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_71_in_rulePrimitiveTypeIdentifier7906 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_72_in_rulePrimitiveTypeIdentifier7925 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimitiveTypeCS_in_entryRulePrimitiveTypeCS7965 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePrimitiveTypeCS7975 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimitiveTypeIdentifier_in_rulePrimitiveTypeCS8020 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCollectionTypeIdentifier_in_entryRuleCollectionTypeIdentifier8056 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleCollectionTypeIdentifier8067 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_73_in_ruleCollectionTypeIdentifier8105 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_74_in_ruleCollectionTypeIdentifier8124 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_75_in_ruleCollectionTypeIdentifier8143 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_76_in_ruleCollectionTypeIdentifier8162 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_77_in_ruleCollectionTypeIdentifier8181 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCollectionTypeCS_in_entryRuleCollectionTypeCS8221 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleCollectionTypeCS8231 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCollectionTypeIdentifier_in_ruleCollectionTypeCS8277 = new BitSet(new long[]{0x0000000400000002L});
-        public static final BitSet FOLLOW_34_in_ruleCollectionTypeCS8290 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
-        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleCollectionTypeCS8311 = new BitSet(new long[]{0x0000000800000000L});
-        public static final BitSet FOLLOW_35_in_ruleCollectionTypeCS8323 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiplicityBoundsCS_in_entryRuleMultiplicityBoundsCS8361 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleMultiplicityBoundsCS8371 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLOWER_in_ruleMultiplicityBoundsCS8417 = new BitSet(new long[]{0x0000000000000002L,0x0000000000004000L});
-        public static final BitSet FOLLOW_78_in_ruleMultiplicityBoundsCS8430 = new BitSet(new long[]{0x0000200000000040L});
-        public static final BitSet FOLLOW_ruleUPPER_in_ruleMultiplicityBoundsCS8451 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiplicityCS_in_entryRuleMultiplicityCS8489 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleMultiplicityCS8499 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_79_in_ruleMultiplicityCS8536 = new BitSet(new long[]{0x0002200000000040L,0x0000000000020000L});
-        public static final BitSet FOLLOW_ruleMultiplicityBoundsCS_in_ruleMultiplicityCS8562 = new BitSet(new long[]{0x0000000000000000L,0x0000000000010000L});
-        public static final BitSet FOLLOW_ruleMultiplicityStringCS_in_ruleMultiplicityCS8592 = new BitSet(new long[]{0x0000000000000000L,0x0000000000010000L});
-        public static final BitSet FOLLOW_80_in_ruleMultiplicityCS8604 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiplicityStringCS_in_entryRuleMultiplicityStringCS8640 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleMultiplicityStringCS8650 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_45_in_ruleMultiplicityStringCS8694 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_49_in_ruleMultiplicityStringCS8723 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_81_in_ruleMultiplicityStringCS8752 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTupleTypeCS_in_entryRuleTupleTypeCS8803 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTupleTypeCS8813 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_63_in_ruleTupleTypeCS8856 = new BitSet(new long[]{0x0000000400000002L});
-        public static final BitSet FOLLOW_34_in_ruleTupleTypeCS8882 = new BitSet(new long[]{0x00019FFBFE000030L});
-        public static final BitSet FOLLOW_ruleTuplePartCS_in_ruleTupleTypeCS8904 = new BitSet(new long[]{0x0000000800080000L});
-        public static final BitSet FOLLOW_19_in_ruleTupleTypeCS8917 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleTuplePartCS_in_ruleTupleTypeCS8938 = new BitSet(new long[]{0x0000000800080000L});
-        public static final BitSet FOLLOW_35_in_ruleTupleTypeCS8954 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTuplePartCS_in_entryRuleTuplePartCS8992 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTuplePartCS9002 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleTuplePartCS9048 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_17_in_ruleTuplePartCS9060 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
-        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleTuplePartCS9081 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCollectionLiteralExpCS_in_entryRuleCollectionLiteralExpCS9117 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleCollectionLiteralExpCS9127 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCollectionTypeCS_in_ruleCollectionLiteralExpCS9173 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleCollectionLiteralExpCS9185 = new BitSet(new long[]{0x800DBFF7FE4000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleCollectionLiteralPartCS_in_ruleCollectionLiteralExpCS9207 = new BitSet(new long[]{0x0000000000480000L});
-        public static final BitSet FOLLOW_19_in_ruleCollectionLiteralExpCS9220 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleCollectionLiteralPartCS_in_ruleCollectionLiteralExpCS9241 = new BitSet(new long[]{0x0000000000480000L});
-        public static final BitSet FOLLOW_22_in_ruleCollectionLiteralExpCS9257 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCollectionLiteralPartCS_in_entryRuleCollectionLiteralPartCS9293 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleCollectionLiteralPartCS9303 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleCollectionLiteralPartCS9349 = new BitSet(new long[]{0x0000000000000002L,0x0000000000004000L});
-        public static final BitSet FOLLOW_78_in_ruleCollectionLiteralPartCS9362 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleCollectionLiteralPartCS9383 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleConstructorPartCS_in_entryRuleConstructorPartCS9421 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleConstructorPartCS9431 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleConstructorPartCS9483 = new BitSet(new long[]{0x0000000000800000L});
-        public static final BitSet FOLLOW_23_in_ruleConstructorPartCS9495 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleConstructorPartCS9516 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimitiveLiteralExpCS_in_entryRulePrimitiveLiteralExpCS9552 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePrimitiveLiteralExpCS9562 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNumberLiteralExpCS_in_rulePrimitiveLiteralExpCS9612 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleStringLiteralExpCS_in_rulePrimitiveLiteralExpCS9642 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBooleanLiteralExpCS_in_rulePrimitiveLiteralExpCS9672 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnlimitedNaturalLiteralExpCS_in_rulePrimitiveLiteralExpCS9702 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleInvalidLiteralExpCS_in_rulePrimitiveLiteralExpCS9732 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNullLiteralExpCS_in_rulePrimitiveLiteralExpCS9762 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTupleLiteralExpCS_in_entryRuleTupleLiteralExpCS9797 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTupleLiteralExpCS9807 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_63_in_ruleTupleLiteralExpCS9844 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleTupleLiteralExpCS9856 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleTupleLiteralPartCS_in_ruleTupleLiteralExpCS9877 = new BitSet(new long[]{0x0000000000480000L});
-        public static final BitSet FOLLOW_19_in_ruleTupleLiteralExpCS9890 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleTupleLiteralPartCS_in_ruleTupleLiteralExpCS9911 = new BitSet(new long[]{0x0000000000480000L});
-        public static final BitSet FOLLOW_22_in_ruleTupleLiteralExpCS9925 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTupleLiteralPartCS_in_entryRuleTupleLiteralPartCS9961 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTupleLiteralPartCS9971 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleTupleLiteralPartCS10017 = new BitSet(new long[]{0x0000000000820000L});
-        public static final BitSet FOLLOW_17_in_ruleTupleLiteralPartCS10030 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
-        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleTupleLiteralPartCS10051 = new BitSet(new long[]{0x0000000000800000L});
-        public static final BitSet FOLLOW_23_in_ruleTupleLiteralPartCS10065 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleTupleLiteralPartCS10086 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNumberLiteralExpCS_in_entryRuleNumberLiteralExpCS10122 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNumberLiteralExpCS10132 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNUMBER_LITERAL_in_ruleNumberLiteralExpCS10177 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleStringLiteralExpCS_in_entryRuleStringLiteralExpCS10212 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleStringLiteralExpCS10222 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleStringLiteral_in_ruleStringLiteralExpCS10267 = new BitSet(new long[]{0x0000000000000082L});
-        public static final BitSet FOLLOW_ruleBooleanLiteralExpCS_in_entryRuleBooleanLiteralExpCS10303 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleBooleanLiteralExpCS10313 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_82_in_ruleBooleanLiteralExpCS10356 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_83_in_ruleBooleanLiteralExpCS10393 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnlimitedNaturalLiteralExpCS_in_entryRuleUnlimitedNaturalLiteralExpCS10442 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleUnlimitedNaturalLiteralExpCS10452 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_45_in_ruleUnlimitedNaturalLiteralExpCS10501 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleInvalidLiteralExpCS_in_entryRuleInvalidLiteralExpCS10537 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleInvalidLiteralExpCS10547 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_84_in_ruleInvalidLiteralExpCS10596 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNullLiteralExpCS_in_entryRuleNullLiteralExpCS10632 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNullLiteralExpCS10642 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_85_in_ruleNullLiteralExpCS10691 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeLiteralCS_in_entryRuleTypeLiteralCS10727 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTypeLiteralCS10737 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimitiveTypeCS_in_ruleTypeLiteralCS10787 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCollectionTypeCS_in_ruleTypeLiteralCS10817 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTupleTypeCS_in_ruleTypeLiteralCS10847 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeLiteralExpCS_in_entryRuleTypeLiteralExpCS10882 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTypeLiteralExpCS10892 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeLiteralCS_in_ruleTypeLiteralExpCS10937 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeNameExpCS_in_entryRuleTypeNameExpCS10972 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTypeNameExpCS10982 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_ruleTypeNameExpCS11027 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeExpCS_in_entryRuleTypeExpCS11062 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTypeExpCS11072 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeNameExpCS_in_ruleTypeExpCS11123 = new BitSet(new long[]{0x0000000000000002L,0x0000000000008000L});
-        public static final BitSet FOLLOW_ruleTypeLiteralCS_in_ruleTypeExpCS11153 = new BitSet(new long[]{0x0000000000000002L,0x0000000000008000L});
-        public static final BitSet FOLLOW_ruleMultiplicityCS_in_ruleTypeExpCS11174 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCS_in_entryRuleExpCS11211 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleExpCS11221 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrefixedExpCS_in_ruleExpCS11281 = new BitSet(new long[]{0x7FF6600000800000L});
-        public static final BitSet FOLLOW_ruleBinaryOperatorCS_in_ruleExpCS11302 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_rulePrefixedExpOrLetExpCS_in_ruleExpCS11325 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnaryOperatorCS_in_ruleExpCS11366 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_rulePrimaryExpOrLetExpCS_in_ruleExpCS11388 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimaryExpOrLetExpCS_in_ruleExpCS11420 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBinaryOperatorCS_in_entryRuleBinaryOperatorCS11455 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleBinaryOperatorCS11465 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleInfixOperatorCS_in_ruleBinaryOperatorCS11515 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigationOperatorCS_in_ruleBinaryOperatorCS11545 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleInfixOperatorCS_in_entryRuleInfixOperatorCS11580 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleInfixOperatorCS11590 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleInfixOperator_in_ruleInfixOperatorCS11635 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigationOperatorCS_in_entryRuleNavigationOperatorCS11670 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNavigationOperatorCS11680 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigationOperator_in_ruleNavigationOperatorCS11725 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrefixedExpCS_in_entryRulePrefixedExpCS11760 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePrefixedExpCS11770 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimaryExpCS_in_rulePrefixedExpCS11820 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnaryOperatorCS_in_rulePrefixedExpCS11859 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000823C3FFEL});
-        public static final BitSet FOLLOW_rulePrimaryExpCS_in_rulePrefixedExpCS11881 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrefixedExpOrLetExpCS_in_entryRulePrefixedExpOrLetExpCS11918 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePrefixedExpOrLetExpCS11928 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimaryExpOrLetExpCS_in_rulePrefixedExpOrLetExpCS11978 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnaryOperatorCS_in_rulePrefixedExpOrLetExpCS12017 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_rulePrimaryExpOrLetExpCS_in_rulePrefixedExpOrLetExpCS12039 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnaryOperatorCS_in_entryRuleUnaryOperatorCS12076 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleUnaryOperatorCS12086 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrefixOperator_in_ruleUnaryOperatorCS12131 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimaryExpCS_in_entryRulePrimaryExpCS12166 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePrimaryExpCS12176 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12235 = new BitSet(new long[]{0x0000000000000000L,0x0000000000008000L});
-        public static final BitSet FOLLOW_79_in_rulePrimaryExpCS12247 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_rulePrimaryExpCS12268 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
-        public static final BitSet FOLLOW_19_in_rulePrimaryExpCS12281 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_rulePrimaryExpCS12302 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
-        public static final BitSet FOLLOW_80_in_rulePrimaryExpCS12316 = new BitSet(new long[]{0x0000000000000002L,0x0000000000408000L});
-        public static final BitSet FOLLOW_79_in_rulePrimaryExpCS12329 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_rulePrimaryExpCS12350 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
-        public static final BitSet FOLLOW_19_in_rulePrimaryExpCS12363 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_rulePrimaryExpCS12384 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
-        public static final BitSet FOLLOW_80_in_rulePrimaryExpCS12398 = new BitSet(new long[]{0x0000000000000002L,0x0000000000400000L});
-        public static final BitSet FOLLOW_86_in_rulePrimaryExpCS12419 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
-        public static final BitSet FOLLOW_87_in_rulePrimaryExpCS12444 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12487 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_rulePrimaryExpCS12499 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleConstructorPartCS_in_rulePrimaryExpCS12520 = new BitSet(new long[]{0x0000000000480000L});
-        public static final BitSet FOLLOW_19_in_rulePrimaryExpCS12533 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleConstructorPartCS_in_rulePrimaryExpCS12554 = new BitSet(new long[]{0x0000000000480000L});
-        public static final BitSet FOLLOW_22_in_rulePrimaryExpCS12568 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12609 = new BitSet(new long[]{0x0000000400000000L,0x0000000000400000L});
-        public static final BitSet FOLLOW_86_in_rulePrimaryExpCS12628 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
-        public static final BitSet FOLLOW_87_in_rulePrimaryExpCS12653 = new BitSet(new long[]{0x0000000400000000L});
-        public static final BitSet FOLLOW_34_in_rulePrimaryExpCS12667 = new BitSet(new long[]{0x800DBFFFFE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleNavigatingArgCS_in_rulePrimaryExpCS12689 = new BitSet(new long[]{0x0000000801080000L,0x0000000001000000L});
-        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS12710 = new BitSet(new long[]{0x0000000801080000L,0x0000000001000000L});
-        public static final BitSet FOLLOW_ruleNavigatingSemiArgCS_in_rulePrimaryExpCS12733 = new BitSet(new long[]{0x0000000800080000L,0x0000000001000000L});
-        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS12754 = new BitSet(new long[]{0x0000000800080000L,0x0000000001000000L});
-        public static final BitSet FOLLOW_ruleNavigatingBarArgCS_in_rulePrimaryExpCS12779 = new BitSet(new long[]{0x0000000800080000L});
-        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS12800 = new BitSet(new long[]{0x0000000800080000L});
-        public static final BitSet FOLLOW_35_in_rulePrimaryExpCS12817 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12858 = new BitSet(new long[]{0x0000000000000002L,0x0000000000400000L});
-        public static final BitSet FOLLOW_86_in_rulePrimaryExpCS12877 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
-        public static final BitSet FOLLOW_87_in_rulePrimaryExpCS12902 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSelfExpCS_in_rulePrimaryExpCS12936 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimitiveLiteralExpCS_in_rulePrimaryExpCS12966 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTupleLiteralExpCS_in_rulePrimaryExpCS12996 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCollectionLiteralExpCS_in_rulePrimaryExpCS13026 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeLiteralExpCS_in_rulePrimaryExpCS13056 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIfExpCS_in_rulePrimaryExpCS13086 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNestedExpCS_in_rulePrimaryExpCS13116 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimaryExpOrLetExpCS_in_entryRulePrimaryExpOrLetExpCS13151 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePrimaryExpOrLetExpCS13161 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimaryExpCS_in_rulePrimaryExpOrLetExpCS13211 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLetExpCS_in_rulePrimaryExpOrLetExpCS13241 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigatingArgCS_in_entryRuleNavigatingArgCS13276 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingArgCS13286 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingArgCS13332 = new BitSet(new long[]{0x0000000000020002L});
-        public static final BitSet FOLLOW_17_in_ruleNavigatingArgCS13345 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
-        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingArgCS13366 = new BitSet(new long[]{0x0000000000800002L});
-        public static final BitSet FOLLOW_23_in_ruleNavigatingArgCS13379 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingArgCS13400 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigatingBarArgCS_in_entryRuleNavigatingBarArgCS13440 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingBarArgCS13450 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_88_in_ruleNavigatingBarArgCS13493 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingBarArgCS13527 = new BitSet(new long[]{0x0000000000020002L});
-        public static final BitSet FOLLOW_17_in_ruleNavigatingBarArgCS13540 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
-        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingBarArgCS13561 = new BitSet(new long[]{0x0000000000800002L});
-        public static final BitSet FOLLOW_23_in_ruleNavigatingBarArgCS13574 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingBarArgCS13595 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_entryRuleNavigatingCommaArgCS13635 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingCommaArgCS13645 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_19_in_ruleNavigatingCommaArgCS13688 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingCommaArgCS13722 = new BitSet(new long[]{0x0000000000020002L});
-        public static final BitSet FOLLOW_17_in_ruleNavigatingCommaArgCS13735 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
-        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingCommaArgCS13756 = new BitSet(new long[]{0x0000000000800002L});
-        public static final BitSet FOLLOW_23_in_ruleNavigatingCommaArgCS13769 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingCommaArgCS13790 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigatingSemiArgCS_in_entryRuleNavigatingSemiArgCS13830 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingSemiArgCS13840 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_24_in_ruleNavigatingSemiArgCS13883 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingSemiArgCS13917 = new BitSet(new long[]{0x0000000000020002L});
-        public static final BitSet FOLLOW_17_in_ruleNavigatingSemiArgCS13930 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
-        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingSemiArgCS13951 = new BitSet(new long[]{0x0000000000800002L});
-        public static final BitSet FOLLOW_23_in_ruleNavigatingSemiArgCS13964 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingSemiArgCS13985 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_entryRuleNavigatingArgExpCS14025 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingArgExpCS14035 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingArgExpCS14084 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIfExpCS_in_entryRuleIfExpCS14118 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleIfExpCS14128 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_89_in_ruleIfExpCS14165 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleIfExpCS14186 = new BitSet(new long[]{0x0000000000000000L,0x0000000004000000L});
-        public static final BitSet FOLLOW_90_in_ruleIfExpCS14198 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleIfExpCS14219 = new BitSet(new long[]{0x0000000000000000L,0x0000000008000000L});
-        public static final BitSet FOLLOW_91_in_ruleIfExpCS14231 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleIfExpCS14252 = new BitSet(new long[]{0x0000000000000000L,0x0000000010000000L});
-        public static final BitSet FOLLOW_92_in_ruleIfExpCS14264 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLetExpCS_in_entryRuleLetExpCS14300 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleLetExpCS14310 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_93_in_ruleLetExpCS14347 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleLetVariableCS_in_ruleLetExpCS14368 = new BitSet(new long[]{0x0000000000080000L,0x0000000040000000L});
-        public static final BitSet FOLLOW_19_in_ruleLetExpCS14381 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleLetVariableCS_in_ruleLetExpCS14402 = new BitSet(new long[]{0x0000000000080000L,0x0000000040000000L});
-        public static final BitSet FOLLOW_94_in_ruleLetExpCS14416 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleLetExpCS14437 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLetVariableCS_in_entryRuleLetVariableCS14473 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleLetVariableCS14483 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleLetVariableCS14529 = new BitSet(new long[]{0x0000000000820000L});
-        public static final BitSet FOLLOW_17_in_ruleLetVariableCS14542 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
-        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleLetVariableCS14563 = new BitSet(new long[]{0x0000000000800000L});
-        public static final BitSet FOLLOW_23_in_ruleLetVariableCS14577 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleLetVariableCS14598 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNestedExpCS_in_entryRuleNestedExpCS14634 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNestedExpCS14644 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_34_in_ruleNestedExpCS14681 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleNestedExpCS14702 = new BitSet(new long[]{0x0000000800000000L});
-        public static final BitSet FOLLOW_35_in_ruleNestedExpCS14714 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSelfExpCS_in_entryRuleSelfExpCS14750 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSelfExpCS14760 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_95_in_ruleSelfExpCS14809 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCollectionTemplateCS_in_synpred32_InternalQVTrelation3168 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_46_in_synpred67_InternalQVTrelation5576 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_INT_in_synpred67_InternalQVTrelation5591 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrefixedExpCS_in_synpred128_InternalQVTrelation11281 = new BitSet(new long[]{0x7FF6600000800000L});
-        public static final BitSet FOLLOW_ruleBinaryOperatorCS_in_synpred128_InternalQVTrelation11302 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrefixedExpCS_in_synpred129_InternalQVTrelation11281 = new BitSet(new long[]{0x7FF6600000800000L});
-        public static final BitSet FOLLOW_ruleBinaryOperatorCS_in_synpred129_InternalQVTrelation11302 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_rulePrefixedExpOrLetExpCS_in_synpred129_InternalQVTrelation11325 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnaryOperatorCS_in_synpred131_InternalQVTrelation11366 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_rulePrimaryExpOrLetExpCS_in_synpred131_InternalQVTrelation11388 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_synpred141_InternalQVTrelation12235 = new BitSet(new long[]{0x0000000000000000L,0x0000000000008000L});
-        public static final BitSet FOLLOW_79_in_synpred141_InternalQVTrelation12247 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12268 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
-        public static final BitSet FOLLOW_19_in_synpred141_InternalQVTrelation12281 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12302 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
-        public static final BitSet FOLLOW_80_in_synpred141_InternalQVTrelation12316 = new BitSet(new long[]{0x0000000000000002L,0x0000000000408000L});
-        public static final BitSet FOLLOW_79_in_synpred141_InternalQVTrelation12329 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12350 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
-        public static final BitSet FOLLOW_19_in_synpred141_InternalQVTrelation12363 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12384 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
-        public static final BitSet FOLLOW_80_in_synpred141_InternalQVTrelation12398 = new BitSet(new long[]{0x0000000000000002L,0x0000000000400000L});
-        public static final BitSet FOLLOW_86_in_synpred141_InternalQVTrelation12419 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
-        public static final BitSet FOLLOW_87_in_synpred141_InternalQVTrelation12444 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_synpred143_InternalQVTrelation12487 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_synpred143_InternalQVTrelation12499 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleConstructorPartCS_in_synpred143_InternalQVTrelation12520 = new BitSet(new long[]{0x0000000000480000L});
-        public static final BitSet FOLLOW_19_in_synpred143_InternalQVTrelation12533 = new BitSet(new long[]{0x00019FF3FE000030L});
-        public static final BitSet FOLLOW_ruleConstructorPartCS_in_synpred143_InternalQVTrelation12554 = new BitSet(new long[]{0x0000000000480000L});
-        public static final BitSet FOLLOW_22_in_synpred143_InternalQVTrelation12568 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_synpred151_InternalQVTrelation12609 = new BitSet(new long[]{0x0000000400000000L,0x0000000000400000L});
-        public static final BitSet FOLLOW_86_in_synpred151_InternalQVTrelation12628 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
-        public static final BitSet FOLLOW_87_in_synpred151_InternalQVTrelation12653 = new BitSet(new long[]{0x0000000400000000L});
-        public static final BitSet FOLLOW_34_in_synpred151_InternalQVTrelation12667 = new BitSet(new long[]{0x800DBFFFFE0000F0L,0x00000000A23C3FFEL});
-        public static final BitSet FOLLOW_ruleNavigatingArgCS_in_synpred151_InternalQVTrelation12689 = new BitSet(new long[]{0x0000000801080000L,0x0000000001000000L});
-        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_synpred151_InternalQVTrelation12710 = new BitSet(new long[]{0x0000000801080000L,0x0000000001000000L});
-        public static final BitSet FOLLOW_ruleNavigatingSemiArgCS_in_synpred151_InternalQVTrelation12733 = new BitSet(new long[]{0x0000000800080000L,0x0000000001000000L});
-        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_synpred151_InternalQVTrelation12754 = new BitSet(new long[]{0x0000000800080000L,0x0000000001000000L});
-        public static final BitSet FOLLOW_ruleNavigatingBarArgCS_in_synpred151_InternalQVTrelation12779 = new BitSet(new long[]{0x0000000800080000L});
-        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_synpred151_InternalQVTrelation12800 = new BitSet(new long[]{0x0000000800080000L});
-        public static final BitSet FOLLOW_35_in_synpred151_InternalQVTrelation12817 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_synpred153_InternalQVTrelation12858 = new BitSet(new long[]{0x0000000000000002L,0x0000000000400000L});
-        public static final BitSet FOLLOW_86_in_synpred153_InternalQVTrelation12877 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
-        public static final BitSet FOLLOW_87_in_synpred153_InternalQVTrelation12902 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTupleLiteralExpCS_in_synpred156_InternalQVTrelation12996 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCollectionLiteralExpCS_in_synpred157_InternalQVTrelation13026 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeLiteralExpCS_in_synpred158_InternalQVTrelation13056 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleCollectionTemplateCS473 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_21_in_ruleCollectionTemplateCS491 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_22_in_ruleCollectionTemplateCS506 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDefaultValueCS_in_entryRuleDefaultValueCS542 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleDefaultValueCS552 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleDefaultValueCS604 = new BitSet(new long[]{0x0000000000800000L});
+        public static final BitSet FOLLOW_23_in_ruleDefaultValueCS616 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleDefaultValueCS637 = new BitSet(new long[]{0x0000000001000000L});
+        public static final BitSet FOLLOW_24_in_ruleDefaultValueCS649 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDomainCS_in_entryRuleDomainCS685 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleDomainCS695 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_25_in_ruleDomainCS739 = new BitSet(new long[]{0x0000000008000000L});
+        public static final BitSet FOLLOW_26_in_ruleDomainCS776 = new BitSet(new long[]{0x0000000008000000L});
+        public static final BitSet FOLLOW_27_in_ruleDomainCS803 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleDomainCS830 = new BitSet(new long[]{0x00019FF3FE020030L});
+        public static final BitSet FOLLOW_ruleDomainPatternCS_in_ruleDomainCS851 = new BitSet(new long[]{0x0000000031000000L});
+        public static final BitSet FOLLOW_28_in_ruleDomainCS864 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleDomainCS885 = new BitSet(new long[]{0x0000000021000000L});
+        public static final BitSet FOLLOW_29_in_ruleDomainCS900 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_18_in_ruleDomainCS912 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleDefaultValueCS_in_ruleDomainCS933 = new BitSet(new long[]{0x00019FF3FE400030L});
+        public static final BitSet FOLLOW_22_in_ruleDomainCS946 = new BitSet(new long[]{0x0000000001000000L});
+        public static final BitSet FOLLOW_24_in_ruleDomainCS960 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDomainPatternCS_in_entryRuleDomainPatternCS996 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleDomainPatternCS1006 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTemplateCS_in_ruleDomainPatternCS1051 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleElementTemplateCS_in_entryRuleElementTemplateCS1086 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleElementTemplateCS1096 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleElementTemplateCS1142 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_21_in_ruleElementTemplateCS1173 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKeyDeclCS_in_entryRuleKeyDeclCS1210 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleKeyDeclCS1220 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_30_in_ruleKeyDeclCS1257 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_ruleKeyDeclCS1278 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_18_in_ruleKeyDeclCS1290 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleKeyDeclCS1317 = new BitSet(new long[]{0x0000000000480000L});
+        public static final BitSet FOLLOW_19_in_ruleKeyDeclCS1330 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleKeyDeclCS1357 = new BitSet(new long[]{0x0000000000480000L});
+        public static final BitSet FOLLOW_22_in_ruleKeyDeclCS1371 = new BitSet(new long[]{0x0000000001000000L});
+        public static final BitSet FOLLOW_24_in_ruleKeyDeclCS1383 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLibraryCS_in_entryRuleLibraryCS1419 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleLibraryCS1429 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_31_in_ruleLibraryCS1466 = new BitSet(new long[]{0x0000000000000080L});
+        public static final BitSet FOLLOW_ruleURI_in_ruleLibraryCS1493 = new BitSet(new long[]{0x0000000001000000L});
+        public static final BitSet FOLLOW_24_in_ruleLibraryCS1505 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleModelDeclCS_in_entryRuleModelDeclCS1541 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModelDeclCS1551 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1597 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_17_in_ruleModelDeclCS1609 = new BitSet(new long[]{0x00019FF3FE040030L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1637 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_18_in_ruleModelDeclCS1656 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1683 = new BitSet(new long[]{0x0000000000480000L});
+        public static final BitSet FOLLOW_19_in_ruleModelDeclCS1696 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1723 = new BitSet(new long[]{0x0000000000480000L});
+        public static final BitSet FOLLOW_22_in_ruleModelDeclCS1737 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleObjectTemplateCS_in_entryRuleObjectTemplateCS1775 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleObjectTemplateCS1785 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleObjectTemplateCS1831 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_17_in_ruleObjectTemplateCS1844 = new BitSet(new long[]{0x00019FF3FE000030L,0x0000000000003FFEL});
+        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleObjectTemplateCS1865 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_18_in_ruleObjectTemplateCS1877 = new BitSet(new long[]{0x00019FF3FE400030L});
+        public static final BitSet FOLLOW_rulePropertyTemplateCS_in_ruleObjectTemplateCS1899 = new BitSet(new long[]{0x0000000000480000L});
+        public static final BitSet FOLLOW_19_in_ruleObjectTemplateCS1912 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_rulePropertyTemplateCS_in_ruleObjectTemplateCS1933 = new BitSet(new long[]{0x0000000000480000L});
+        public static final BitSet FOLLOW_22_in_ruleObjectTemplateCS1949 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParamDeclarationCS_in_entryRuleParamDeclarationCS1985 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleParamDeclarationCS1995 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleParamDeclarationCS2041 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_17_in_ruleParamDeclarationCS2053 = new BitSet(new long[]{0x00019FF3FE000030L,0x0000000000003FFEL});
+        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleParamDeclarationCS2074 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePredicateCS_in_entryRulePredicateCS2110 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePredicateCS2120 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCS_in_rulePredicateCS2166 = new BitSet(new long[]{0x0000000001000000L});
+        public static final BitSet FOLLOW_24_in_rulePredicateCS2178 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimitiveTypeDomainCS_in_entryRulePrimitiveTypeDomainCS2214 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePrimitiveTypeDomainCS2224 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_32_in_rulePrimitiveTypeDomainCS2261 = new BitSet(new long[]{0x0000000008000000L});
+        public static final BitSet FOLLOW_27_in_rulePrimitiveTypeDomainCS2273 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_rulePrimitiveTypeDomainCS2294 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_17_in_rulePrimitiveTypeDomainCS2306 = new BitSet(new long[]{0x00019FF3FE000030L,0x0000000000003FFEL});
+        public static final BitSet FOLLOW_ruleTypedRefCS_in_rulePrimitiveTypeDomainCS2327 = new BitSet(new long[]{0x0000000001000000L});
+        public static final BitSet FOLLOW_24_in_rulePrimitiveTypeDomainCS2339 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePropertyTemplateCS_in_entryRulePropertyTemplateCS2375 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePropertyTemplateCS2385 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_rulePropertyTemplateCS2437 = new BitSet(new long[]{0x0000000000800000L});
+        public static final BitSet FOLLOW_23_in_rulePropertyTemplateCS2449 = new BitSet(new long[]{0x800DBFF7FE0200F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCSOrTemplateCS_in_rulePropertyTemplateCS2470 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleQueryCS_in_entryRuleQueryCS2506 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleQueryCS2516 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_ruleQueryCS2553 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleQueryCS2574 = new BitSet(new long[]{0x0000000400000000L});
+        public static final BitSet FOLLOW_34_in_ruleQueryCS2586 = new BitSet(new long[]{0x00019FFBFE000030L});
+        public static final BitSet FOLLOW_ruleParamDeclarationCS_in_ruleQueryCS2608 = new BitSet(new long[]{0x0000000800080000L});
+        public static final BitSet FOLLOW_19_in_ruleQueryCS2621 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleParamDeclarationCS_in_ruleQueryCS2642 = new BitSet(new long[]{0x0000000800080000L});
+        public static final BitSet FOLLOW_35_in_ruleQueryCS2658 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_17_in_ruleQueryCS2670 = new BitSet(new long[]{0x00019FF3FE000030L,0x0000000000003FFEL});
+        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleQueryCS2691 = new BitSet(new long[]{0x0000000001040000L});
+        public static final BitSet FOLLOW_24_in_ruleQueryCS2704 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_18_in_ruleQueryCS2723 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleQueryCS2744 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_22_in_ruleQueryCS2756 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRelationCS_in_entryRuleRelationCS2794 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleRelationCS2804 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_36_in_ruleRelationCS2847 = new BitSet(new long[]{0x0000002000000000L});
+        public static final BitSet FOLLOW_37_in_ruleRelationCS2873 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleRelationCS2894 = new BitSet(new long[]{0x0000004000040000L});
+        public static final BitSet FOLLOW_38_in_ruleRelationCS2907 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleRelationCS2934 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_18_in_ruleRelationCS2948 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleVarDeclarationCS_in_ruleRelationCS2969 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleDomainCS_in_ruleRelationCS2992 = new BitSet(new long[]{0x00019FF3FE400030L});
+        public static final BitSet FOLLOW_rulePrimitiveTypeDomainCS_in_ruleRelationCS3019 = new BitSet(new long[]{0x00019FF3FE400030L});
+        public static final BitSet FOLLOW_ruleWhenCS_in_ruleRelationCS3042 = new BitSet(new long[]{0x0000080000400000L});
+        public static final BitSet FOLLOW_ruleWhereCS_in_ruleRelationCS3064 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_22_in_ruleRelationCS3077 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTemplateCS_in_entryRuleTemplateCS3113 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTemplateCS3123 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCollectionTemplateCS_in_ruleTemplateCS3174 = new BitSet(new long[]{0x0000000000040002L});
+        public static final BitSet FOLLOW_ruleObjectTemplateCS_in_ruleTemplateCS3204 = new BitSet(new long[]{0x0000000000040002L});
+        public static final BitSet FOLLOW_18_in_ruleTemplateCS3217 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleTemplateCS3238 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_22_in_ruleTemplateCS3250 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTransformationCS_in_entryRuleTransformationCS3288 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTransformationCS3298 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_39_in_ruleTransformationCS3335 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleTransformationCS3356 = new BitSet(new long[]{0x0000000400000000L});
+        public static final BitSet FOLLOW_34_in_ruleTransformationCS3368 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleModelDeclCS_in_ruleTransformationCS3389 = new BitSet(new long[]{0x0000000800080000L});
+        public static final BitSet FOLLOW_19_in_ruleTransformationCS3402 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleModelDeclCS_in_ruleTransformationCS3423 = new BitSet(new long[]{0x0000000800080000L});
+        public static final BitSet FOLLOW_35_in_ruleTransformationCS3437 = new BitSet(new long[]{0x0000010000040000L});
+        public static final BitSet FOLLOW_40_in_ruleTransformationCS3450 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleTransformationCS3477 = new BitSet(new long[]{0x00000000000C0000L});
+        public static final BitSet FOLLOW_19_in_ruleTransformationCS3490 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleTransformationCS3517 = new BitSet(new long[]{0x00000000000C0000L});
+        public static final BitSet FOLLOW_18_in_ruleTransformationCS3533 = new BitSet(new long[]{0x0000003240400000L});
+        public static final BitSet FOLLOW_ruleKeyDeclCS_in_ruleTransformationCS3554 = new BitSet(new long[]{0x0000003240400000L});
+        public static final BitSet FOLLOW_ruleRelationCS_in_ruleTransformationCS3577 = new BitSet(new long[]{0x0000003200400000L});
+        public static final BitSet FOLLOW_ruleQueryCS_in_ruleTransformationCS3604 = new BitSet(new long[]{0x0000003200400000L});
+        public static final BitSet FOLLOW_22_in_ruleTransformationCS3618 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnitCS_in_entryRuleUnitCS3654 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleUnitCS3664 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_41_in_ruleUnitCS3701 = new BitSet(new long[]{0x00019FF3FE0000B0L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleUnitCS3723 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_17_in_ruleUnitCS3735 = new BitSet(new long[]{0x0000000000000080L});
+        public static final BitSet FOLLOW_ruleURI_in_ruleUnitCS3764 = new BitSet(new long[]{0x0000000001000000L});
+        public static final BitSet FOLLOW_24_in_ruleUnitCS3776 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleVarDeclarationCS_in_entryRuleVarDeclarationCS3812 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleVarDeclarationCS3822 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleVarDeclarationIdCS_in_ruleVarDeclarationCS3868 = new BitSet(new long[]{0x00000000000A0000L});
+        public static final BitSet FOLLOW_19_in_ruleVarDeclarationCS3881 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleVarDeclarationIdCS_in_ruleVarDeclarationCS3902 = new BitSet(new long[]{0x00000000000A0000L});
+        public static final BitSet FOLLOW_17_in_ruleVarDeclarationCS3916 = new BitSet(new long[]{0x00019FF3FE000030L,0x0000000000003FFEL});
+        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleVarDeclarationCS3937 = new BitSet(new long[]{0x0000000001000000L});
+        public static final BitSet FOLLOW_24_in_ruleVarDeclarationCS3949 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleVarDeclarationIdCS_in_entryRuleVarDeclarationIdCS3985 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleVarDeclarationIdCS3995 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleVarDeclarationIdCS4040 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleWhenCS_in_entryRuleWhenCS4075 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleWhenCS4085 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_42_in_ruleWhenCS4134 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_18_in_ruleWhenCS4146 = new BitSet(new long[]{0x800DBFF7FE4000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_rulePredicateCS_in_ruleWhenCS4167 = new BitSet(new long[]{0x800DBFF7FE4000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_22_in_ruleWhenCS4180 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleWhereCS_in_entryRuleWhereCS4216 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleWhereCS4226 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_43_in_ruleWhereCS4275 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_18_in_ruleWhereCS4287 = new BitSet(new long[]{0x800DBFF7FE4000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_rulePredicateCS_in_ruleWhereCS4308 = new BitSet(new long[]{0x800DBFF7FE4000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_22_in_ruleWhereCS4321 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCSOrTemplateCS_in_entryRuleExpCSOrTemplateCS4359 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleExpCSOrTemplateCS4369 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleExpCSOrTemplateCS4419 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTemplateCS_in_ruleExpCSOrTemplateCS4449 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedTypeRefCS_in_entryRuleTypedTypeRefCS4484 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTypedTypeRefCS4494 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_ruleTypedTypeRefCS4539 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedRefCS_in_entryRuleTypedRefCS4574 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTypedRefCS4584 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimitiveTypeCS_in_ruleTypedRefCS4634 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCollectionTypeCS_in_ruleTypedRefCS4664 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedTypeRefCS_in_ruleTypedRefCS4694 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_entryRuleUnrestrictedName4730 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleUnrestrictedName4741 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEssentialOCLUnrestrictedName_in_ruleUnrestrictedName4788 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_25_in_ruleUnrestrictedName4812 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_29_in_ruleUnrestrictedName4831 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_27_in_ruleUnrestrictedName4850 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_26_in_ruleUnrestrictedName4869 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_40_in_ruleUnrestrictedName4888 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_28_in_ruleUnrestrictedName4907 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_41_in_ruleUnrestrictedName4926 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_31_in_ruleUnrestrictedName4945 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_30_in_ruleUnrestrictedName4964 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_38_in_ruleUnrestrictedName4983 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_32_in_ruleUnrestrictedName5002 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_ruleUnrestrictedName5021 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_37_in_ruleUnrestrictedName5040 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_44_in_ruleUnrestrictedName5059 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_36_in_ruleUnrestrictedName5078 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_39_in_ruleUnrestrictedName5097 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_42_in_ruleUnrestrictedName5116 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_43_in_ruleUnrestrictedName5135 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleID_in_entryRuleID5178 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleID5189 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_SIMPLE_ID_in_ruleID5229 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ESCAPED_ID_in_ruleID5255 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLOWER_in_entryRuleLOWER5301 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleLOWER5312 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleLOWER5351 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUPPER_in_entryRuleUPPER5396 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleUPPER5407 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleUPPER5447 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_45_in_ruleUPPER5471 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNUMBER_LITERAL_in_entryRuleNUMBER_LITERAL5512 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNUMBER_LITERAL5523 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL5563 = new BitSet(new long[]{0x0001C00000000002L});
+        public static final BitSet FOLLOW_46_in_ruleNUMBER_LITERAL5582 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL5597 = new BitSet(new long[]{0x0001800000000002L});
+        public static final BitSet FOLLOW_47_in_ruleNUMBER_LITERAL5619 = new BitSet(new long[]{0x0006000000000040L});
+        public static final BitSet FOLLOW_48_in_ruleNUMBER_LITERAL5638 = new BitSet(new long[]{0x0006000000000040L});
+        public static final BitSet FOLLOW_49_in_ruleNUMBER_LITERAL5653 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_50_in_ruleNUMBER_LITERAL5672 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL5689 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleURI_in_entryRuleURI5737 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleURI5748 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleURI5787 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEssentialOCLUnrestrictedIdentifier_in_entryRuleEssentialOCLUnrestrictedIdentifier5834 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEssentialOCLUnrestrictedIdentifier5845 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_47_in_ruleEssentialOCLUnrestrictedIdentifier5883 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_48_in_ruleEssentialOCLUnrestrictedIdentifier5902 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEssentialOCLPrefixOperator_in_entryRuleEssentialOCLPrefixOperator5943 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEssentialOCLPrefixOperator5954 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_50_in_ruleEssentialOCLPrefixOperator5992 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_51_in_ruleEssentialOCLPrefixOperator6011 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEssentialOCLInfixOperator_in_entryRuleEssentialOCLInfixOperator6052 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEssentialOCLInfixOperator6063 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_45_in_ruleEssentialOCLInfixOperator6101 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_52_in_ruleEssentialOCLInfixOperator6120 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_49_in_ruleEssentialOCLInfixOperator6139 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_50_in_ruleEssentialOCLInfixOperator6158 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_53_in_ruleEssentialOCLInfixOperator6177 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_54_in_ruleEssentialOCLInfixOperator6196 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_55_in_ruleEssentialOCLInfixOperator6215 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_56_in_ruleEssentialOCLInfixOperator6234 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_23_in_ruleEssentialOCLInfixOperator6253 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_57_in_ruleEssentialOCLInfixOperator6272 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_58_in_ruleEssentialOCLInfixOperator6291 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_59_in_ruleEssentialOCLInfixOperator6310 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_60_in_ruleEssentialOCLInfixOperator6329 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_61_in_ruleEssentialOCLInfixOperator6348 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEssentialOCLNavigationOperator_in_entryRuleEssentialOCLNavigationOperator6389 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEssentialOCLNavigationOperator6400 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_46_in_ruleEssentialOCLNavigationOperator6438 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_62_in_ruleEssentialOCLNavigationOperator6457 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleIdentifier_in_entryRuleIdentifier6498 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleIdentifier6509 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleID_in_ruleIdentifier6556 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEssentialOCLUnrestrictedIdentifier_in_ruleIdentifier6589 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral6635 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleStringLiteral6646 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleStringLiteral6685 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrefixOperator_in_entryRulePrefixOperator6730 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePrefixOperator6741 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEssentialOCLPrefixOperator_in_rulePrefixOperator6787 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleInfixOperator_in_entryRuleInfixOperator6832 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleInfixOperator6843 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEssentialOCLInfixOperator_in_ruleInfixOperator6889 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigationOperator_in_entryRuleNavigationOperator6934 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNavigationOperator6945 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEssentialOCLNavigationOperator_in_ruleNavigationOperator6991 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEssentialOCLUnrestrictedName_in_entryRuleEssentialOCLUnrestrictedName7036 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEssentialOCLUnrestrictedName7047 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleIdentifier_in_ruleEssentialOCLUnrestrictedName7093 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEssentialOCLUnreservedName_in_entryRuleEssentialOCLUnreservedName7138 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEssentialOCLUnreservedName7149 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleEssentialOCLUnreservedName7196 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCollectionTypeIdentifier_in_ruleEssentialOCLUnreservedName7229 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimitiveTypeIdentifier_in_ruleEssentialOCLUnreservedName7262 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_63_in_ruleEssentialOCLUnreservedName7286 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnreservedName_in_entryRuleUnreservedName7327 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleUnreservedName7338 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEssentialOCLUnreservedName_in_ruleUnreservedName7384 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_entryRulePathNameCS7428 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePathNameCS7438 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFirstPathElementCS_in_rulePathNameCS7484 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000001L});
+        public static final BitSet FOLLOW_64_in_rulePathNameCS7497 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
+        public static final BitSet FOLLOW_ruleNextPathElementCS_in_rulePathNameCS7518 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000001L});
+        public static final BitSet FOLLOW_ruleFirstPathElementCS_in_entryRuleFirstPathElementCS7556 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleFirstPathElementCS7566 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleFirstPathElementCS7617 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNextPathElementCS_in_entryRuleNextPathElementCS7652 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNextPathElementCS7662 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnreservedName_in_ruleNextPathElementCS7713 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimitiveTypeIdentifier_in_entryRulePrimitiveTypeIdentifier7749 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePrimitiveTypeIdentifier7760 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_65_in_rulePrimitiveTypeIdentifier7798 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_66_in_rulePrimitiveTypeIdentifier7817 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_67_in_rulePrimitiveTypeIdentifier7836 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_68_in_rulePrimitiveTypeIdentifier7855 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_69_in_rulePrimitiveTypeIdentifier7874 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_70_in_rulePrimitiveTypeIdentifier7893 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_71_in_rulePrimitiveTypeIdentifier7912 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_72_in_rulePrimitiveTypeIdentifier7931 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimitiveTypeCS_in_entryRulePrimitiveTypeCS7971 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePrimitiveTypeCS7981 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimitiveTypeIdentifier_in_rulePrimitiveTypeCS8026 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCollectionTypeIdentifier_in_entryRuleCollectionTypeIdentifier8062 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleCollectionTypeIdentifier8073 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_73_in_ruleCollectionTypeIdentifier8111 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_74_in_ruleCollectionTypeIdentifier8130 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_75_in_ruleCollectionTypeIdentifier8149 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_76_in_ruleCollectionTypeIdentifier8168 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_77_in_ruleCollectionTypeIdentifier8187 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCollectionTypeCS_in_entryRuleCollectionTypeCS8227 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleCollectionTypeCS8237 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCollectionTypeIdentifier_in_ruleCollectionTypeCS8283 = new BitSet(new long[]{0x0000000400000002L});
+        public static final BitSet FOLLOW_34_in_ruleCollectionTypeCS8296 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
+        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleCollectionTypeCS8317 = new BitSet(new long[]{0x0000000800000000L});
+        public static final BitSet FOLLOW_35_in_ruleCollectionTypeCS8329 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMultiplicityBoundsCS_in_entryRuleMultiplicityBoundsCS8367 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleMultiplicityBoundsCS8377 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLOWER_in_ruleMultiplicityBoundsCS8423 = new BitSet(new long[]{0x0000000000000002L,0x0000000000004000L});
+        public static final BitSet FOLLOW_78_in_ruleMultiplicityBoundsCS8436 = new BitSet(new long[]{0x0000200000000040L});
+        public static final BitSet FOLLOW_ruleUPPER_in_ruleMultiplicityBoundsCS8457 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMultiplicityCS_in_entryRuleMultiplicityCS8495 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleMultiplicityCS8505 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_79_in_ruleMultiplicityCS8542 = new BitSet(new long[]{0x0002200000000040L,0x0000000000020000L});
+        public static final BitSet FOLLOW_ruleMultiplicityBoundsCS_in_ruleMultiplicityCS8568 = new BitSet(new long[]{0x0000000000000000L,0x0000000000010000L});
+        public static final BitSet FOLLOW_ruleMultiplicityStringCS_in_ruleMultiplicityCS8598 = new BitSet(new long[]{0x0000000000000000L,0x0000000000010000L});
+        public static final BitSet FOLLOW_80_in_ruleMultiplicityCS8610 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMultiplicityStringCS_in_entryRuleMultiplicityStringCS8646 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleMultiplicityStringCS8656 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_45_in_ruleMultiplicityStringCS8700 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_49_in_ruleMultiplicityStringCS8729 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_81_in_ruleMultiplicityStringCS8758 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTupleTypeCS_in_entryRuleTupleTypeCS8809 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTupleTypeCS8819 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_63_in_ruleTupleTypeCS8862 = new BitSet(new long[]{0x0000000400000002L});
+        public static final BitSet FOLLOW_34_in_ruleTupleTypeCS8888 = new BitSet(new long[]{0x00019FFBFE000030L});
+        public static final BitSet FOLLOW_ruleTuplePartCS_in_ruleTupleTypeCS8910 = new BitSet(new long[]{0x0000000800080000L});
+        public static final BitSet FOLLOW_19_in_ruleTupleTypeCS8923 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleTuplePartCS_in_ruleTupleTypeCS8944 = new BitSet(new long[]{0x0000000800080000L});
+        public static final BitSet FOLLOW_35_in_ruleTupleTypeCS8960 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTuplePartCS_in_entryRuleTuplePartCS8998 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTuplePartCS9008 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleTuplePartCS9054 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_17_in_ruleTuplePartCS9066 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
+        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleTuplePartCS9087 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCollectionLiteralExpCS_in_entryRuleCollectionLiteralExpCS9123 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleCollectionLiteralExpCS9133 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCollectionTypeCS_in_ruleCollectionLiteralExpCS9179 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_18_in_ruleCollectionLiteralExpCS9191 = new BitSet(new long[]{0x800DBFF7FE4000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleCollectionLiteralPartCS_in_ruleCollectionLiteralExpCS9213 = new BitSet(new long[]{0x0000000000480000L});
+        public static final BitSet FOLLOW_19_in_ruleCollectionLiteralExpCS9226 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleCollectionLiteralPartCS_in_ruleCollectionLiteralExpCS9247 = new BitSet(new long[]{0x0000000000480000L});
+        public static final BitSet FOLLOW_22_in_ruleCollectionLiteralExpCS9263 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCollectionLiteralPartCS_in_entryRuleCollectionLiteralPartCS9299 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleCollectionLiteralPartCS9309 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleCollectionLiteralPartCS9355 = new BitSet(new long[]{0x0000000000000002L,0x0000000000004000L});
+        public static final BitSet FOLLOW_78_in_ruleCollectionLiteralPartCS9368 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleCollectionLiteralPartCS9389 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleConstructorPartCS_in_entryRuleConstructorPartCS9427 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleConstructorPartCS9437 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleConstructorPartCS9489 = new BitSet(new long[]{0x0000000000800000L});
+        public static final BitSet FOLLOW_23_in_ruleConstructorPartCS9501 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleConstructorPartCS9522 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimitiveLiteralExpCS_in_entryRulePrimitiveLiteralExpCS9558 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePrimitiveLiteralExpCS9568 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNumberLiteralExpCS_in_rulePrimitiveLiteralExpCS9618 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleStringLiteralExpCS_in_rulePrimitiveLiteralExpCS9648 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBooleanLiteralExpCS_in_rulePrimitiveLiteralExpCS9678 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnlimitedNaturalLiteralExpCS_in_rulePrimitiveLiteralExpCS9708 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleInvalidLiteralExpCS_in_rulePrimitiveLiteralExpCS9738 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNullLiteralExpCS_in_rulePrimitiveLiteralExpCS9768 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTupleLiteralExpCS_in_entryRuleTupleLiteralExpCS9803 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTupleLiteralExpCS9813 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_63_in_ruleTupleLiteralExpCS9850 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_18_in_ruleTupleLiteralExpCS9862 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleTupleLiteralPartCS_in_ruleTupleLiteralExpCS9883 = new BitSet(new long[]{0x0000000000480000L});
+        public static final BitSet FOLLOW_19_in_ruleTupleLiteralExpCS9896 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleTupleLiteralPartCS_in_ruleTupleLiteralExpCS9917 = new BitSet(new long[]{0x0000000000480000L});
+        public static final BitSet FOLLOW_22_in_ruleTupleLiteralExpCS9931 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTupleLiteralPartCS_in_entryRuleTupleLiteralPartCS9967 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTupleLiteralPartCS9977 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleTupleLiteralPartCS10023 = new BitSet(new long[]{0x0000000000820000L});
+        public static final BitSet FOLLOW_17_in_ruleTupleLiteralPartCS10036 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
+        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleTupleLiteralPartCS10057 = new BitSet(new long[]{0x0000000000800000L});
+        public static final BitSet FOLLOW_23_in_ruleTupleLiteralPartCS10071 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleTupleLiteralPartCS10092 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNumberLiteralExpCS_in_entryRuleNumberLiteralExpCS10128 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNumberLiteralExpCS10138 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNUMBER_LITERAL_in_ruleNumberLiteralExpCS10183 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleStringLiteralExpCS_in_entryRuleStringLiteralExpCS10218 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleStringLiteralExpCS10228 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleStringLiteral_in_ruleStringLiteralExpCS10273 = new BitSet(new long[]{0x0000000000000082L});
+        public static final BitSet FOLLOW_ruleBooleanLiteralExpCS_in_entryRuleBooleanLiteralExpCS10309 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleBooleanLiteralExpCS10319 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_82_in_ruleBooleanLiteralExpCS10362 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_83_in_ruleBooleanLiteralExpCS10399 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnlimitedNaturalLiteralExpCS_in_entryRuleUnlimitedNaturalLiteralExpCS10448 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleUnlimitedNaturalLiteralExpCS10458 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_45_in_ruleUnlimitedNaturalLiteralExpCS10507 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleInvalidLiteralExpCS_in_entryRuleInvalidLiteralExpCS10543 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleInvalidLiteralExpCS10553 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_84_in_ruleInvalidLiteralExpCS10602 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNullLiteralExpCS_in_entryRuleNullLiteralExpCS10638 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNullLiteralExpCS10648 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_85_in_ruleNullLiteralExpCS10697 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeLiteralCS_in_entryRuleTypeLiteralCS10733 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTypeLiteralCS10743 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimitiveTypeCS_in_ruleTypeLiteralCS10793 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCollectionTypeCS_in_ruleTypeLiteralCS10823 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTupleTypeCS_in_ruleTypeLiteralCS10853 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeLiteralExpCS_in_entryRuleTypeLiteralExpCS10888 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTypeLiteralExpCS10898 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeLiteralCS_in_ruleTypeLiteralExpCS10943 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeNameExpCS_in_entryRuleTypeNameExpCS10978 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTypeNameExpCS10988 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_ruleTypeNameExpCS11033 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeExpCS_in_entryRuleTypeExpCS11068 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTypeExpCS11078 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeNameExpCS_in_ruleTypeExpCS11129 = new BitSet(new long[]{0x0000000000000002L,0x0000000000008000L});
+        public static final BitSet FOLLOW_ruleTypeLiteralCS_in_ruleTypeExpCS11159 = new BitSet(new long[]{0x0000000000000002L,0x0000000000008000L});
+        public static final BitSet FOLLOW_ruleMultiplicityCS_in_ruleTypeExpCS11180 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCS_in_entryRuleExpCS11217 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleExpCS11227 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrefixedExpCS_in_ruleExpCS11287 = new BitSet(new long[]{0x7FF6600000800000L});
+        public static final BitSet FOLLOW_ruleBinaryOperatorCS_in_ruleExpCS11308 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_rulePrefixedExpOrLetExpCS_in_ruleExpCS11331 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnaryOperatorCS_in_ruleExpCS11372 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_rulePrimaryExpOrLetExpCS_in_ruleExpCS11394 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimaryExpOrLetExpCS_in_ruleExpCS11426 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBinaryOperatorCS_in_entryRuleBinaryOperatorCS11461 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleBinaryOperatorCS11471 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleInfixOperatorCS_in_ruleBinaryOperatorCS11521 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigationOperatorCS_in_ruleBinaryOperatorCS11551 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleInfixOperatorCS_in_entryRuleInfixOperatorCS11586 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleInfixOperatorCS11596 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleInfixOperator_in_ruleInfixOperatorCS11641 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigationOperatorCS_in_entryRuleNavigationOperatorCS11676 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNavigationOperatorCS11686 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigationOperator_in_ruleNavigationOperatorCS11731 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrefixedExpCS_in_entryRulePrefixedExpCS11766 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePrefixedExpCS11776 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimaryExpCS_in_rulePrefixedExpCS11826 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnaryOperatorCS_in_rulePrefixedExpCS11865 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000823C3FFEL});
+        public static final BitSet FOLLOW_rulePrimaryExpCS_in_rulePrefixedExpCS11887 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrefixedExpOrLetExpCS_in_entryRulePrefixedExpOrLetExpCS11924 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePrefixedExpOrLetExpCS11934 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimaryExpOrLetExpCS_in_rulePrefixedExpOrLetExpCS11984 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnaryOperatorCS_in_rulePrefixedExpOrLetExpCS12023 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_rulePrimaryExpOrLetExpCS_in_rulePrefixedExpOrLetExpCS12045 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnaryOperatorCS_in_entryRuleUnaryOperatorCS12082 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleUnaryOperatorCS12092 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrefixOperator_in_ruleUnaryOperatorCS12137 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimaryExpCS_in_entryRulePrimaryExpCS12172 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePrimaryExpCS12182 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12241 = new BitSet(new long[]{0x0000000000000000L,0x0000000000008000L});
+        public static final BitSet FOLLOW_79_in_rulePrimaryExpCS12253 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_rulePrimaryExpCS12274 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
+        public static final BitSet FOLLOW_19_in_rulePrimaryExpCS12287 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_rulePrimaryExpCS12308 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
+        public static final BitSet FOLLOW_80_in_rulePrimaryExpCS12322 = new BitSet(new long[]{0x0000000000000002L,0x0000000000408000L});
+        public static final BitSet FOLLOW_79_in_rulePrimaryExpCS12335 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_rulePrimaryExpCS12356 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
+        public static final BitSet FOLLOW_19_in_rulePrimaryExpCS12369 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_rulePrimaryExpCS12390 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
+        public static final BitSet FOLLOW_80_in_rulePrimaryExpCS12404 = new BitSet(new long[]{0x0000000000000002L,0x0000000000400000L});
+        public static final BitSet FOLLOW_86_in_rulePrimaryExpCS12425 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
+        public static final BitSet FOLLOW_87_in_rulePrimaryExpCS12450 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12493 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_18_in_rulePrimaryExpCS12505 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleConstructorPartCS_in_rulePrimaryExpCS12526 = new BitSet(new long[]{0x0000000000480000L});
+        public static final BitSet FOLLOW_19_in_rulePrimaryExpCS12539 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleConstructorPartCS_in_rulePrimaryExpCS12560 = new BitSet(new long[]{0x0000000000480000L});
+        public static final BitSet FOLLOW_22_in_rulePrimaryExpCS12574 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12615 = new BitSet(new long[]{0x0000000400000000L,0x0000000000400000L});
+        public static final BitSet FOLLOW_86_in_rulePrimaryExpCS12634 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
+        public static final BitSet FOLLOW_87_in_rulePrimaryExpCS12659 = new BitSet(new long[]{0x0000000400000000L});
+        public static final BitSet FOLLOW_34_in_rulePrimaryExpCS12673 = new BitSet(new long[]{0x800DBFFFFE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleNavigatingArgCS_in_rulePrimaryExpCS12695 = new BitSet(new long[]{0x0000000801080000L,0x0000000001000000L});
+        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS12716 = new BitSet(new long[]{0x0000000801080000L,0x0000000001000000L});
+        public static final BitSet FOLLOW_ruleNavigatingSemiArgCS_in_rulePrimaryExpCS12739 = new BitSet(new long[]{0x0000000800080000L,0x0000000001000000L});
+        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS12760 = new BitSet(new long[]{0x0000000800080000L,0x0000000001000000L});
+        public static final BitSet FOLLOW_ruleNavigatingBarArgCS_in_rulePrimaryExpCS12785 = new BitSet(new long[]{0x0000000800080000L});
+        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS12806 = new BitSet(new long[]{0x0000000800080000L});
+        public static final BitSet FOLLOW_35_in_rulePrimaryExpCS12823 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_rulePrimaryExpCS12864 = new BitSet(new long[]{0x0000000000000002L,0x0000000000400000L});
+        public static final BitSet FOLLOW_86_in_rulePrimaryExpCS12883 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
+        public static final BitSet FOLLOW_87_in_rulePrimaryExpCS12908 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSelfExpCS_in_rulePrimaryExpCS12942 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimitiveLiteralExpCS_in_rulePrimaryExpCS12972 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTupleLiteralExpCS_in_rulePrimaryExpCS13002 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCollectionLiteralExpCS_in_rulePrimaryExpCS13032 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeLiteralExpCS_in_rulePrimaryExpCS13062 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleIfExpCS_in_rulePrimaryExpCS13092 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNestedExpCS_in_rulePrimaryExpCS13122 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimaryExpOrLetExpCS_in_entryRulePrimaryExpOrLetExpCS13157 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePrimaryExpOrLetExpCS13167 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimaryExpCS_in_rulePrimaryExpOrLetExpCS13217 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLetExpCS_in_rulePrimaryExpOrLetExpCS13247 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigatingArgCS_in_entryRuleNavigatingArgCS13282 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingArgCS13292 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingArgCS13338 = new BitSet(new long[]{0x0000000000020002L});
+        public static final BitSet FOLLOW_17_in_ruleNavigatingArgCS13351 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
+        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingArgCS13372 = new BitSet(new long[]{0x0000000000800002L});
+        public static final BitSet FOLLOW_23_in_ruleNavigatingArgCS13385 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingArgCS13406 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigatingBarArgCS_in_entryRuleNavigatingBarArgCS13446 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingBarArgCS13456 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_88_in_ruleNavigatingBarArgCS13499 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingBarArgCS13533 = new BitSet(new long[]{0x0000000000020002L});
+        public static final BitSet FOLLOW_17_in_ruleNavigatingBarArgCS13546 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
+        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingBarArgCS13567 = new BitSet(new long[]{0x0000000000800002L});
+        public static final BitSet FOLLOW_23_in_ruleNavigatingBarArgCS13580 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingBarArgCS13601 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_entryRuleNavigatingCommaArgCS13641 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingCommaArgCS13651 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_19_in_ruleNavigatingCommaArgCS13694 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingCommaArgCS13728 = new BitSet(new long[]{0x0000000000020002L});
+        public static final BitSet FOLLOW_17_in_ruleNavigatingCommaArgCS13741 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
+        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingCommaArgCS13762 = new BitSet(new long[]{0x0000000000800002L});
+        public static final BitSet FOLLOW_23_in_ruleNavigatingCommaArgCS13775 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingCommaArgCS13796 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigatingSemiArgCS_in_entryRuleNavigatingSemiArgCS13836 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingSemiArgCS13846 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_24_in_ruleNavigatingSemiArgCS13889 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingSemiArgCS13923 = new BitSet(new long[]{0x0000000000020002L});
+        public static final BitSet FOLLOW_17_in_ruleNavigatingSemiArgCS13936 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
+        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingSemiArgCS13957 = new BitSet(new long[]{0x0000000000800002L});
+        public static final BitSet FOLLOW_23_in_ruleNavigatingSemiArgCS13970 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingSemiArgCS13991 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_entryRuleNavigatingArgExpCS14031 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingArgExpCS14041 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingArgExpCS14090 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleIfExpCS_in_entryRuleIfExpCS14124 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleIfExpCS14134 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_89_in_ruleIfExpCS14171 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleIfExpCS14192 = new BitSet(new long[]{0x0000000000000000L,0x0000000004000000L});
+        public static final BitSet FOLLOW_90_in_ruleIfExpCS14204 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleIfExpCS14225 = new BitSet(new long[]{0x0000000000000000L,0x0000000008000000L});
+        public static final BitSet FOLLOW_91_in_ruleIfExpCS14237 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleIfExpCS14258 = new BitSet(new long[]{0x0000000000000000L,0x0000000010000000L});
+        public static final BitSet FOLLOW_92_in_ruleIfExpCS14270 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLetExpCS_in_entryRuleLetExpCS14306 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleLetExpCS14316 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_93_in_ruleLetExpCS14353 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleLetVariableCS_in_ruleLetExpCS14374 = new BitSet(new long[]{0x0000000000080000L,0x0000000040000000L});
+        public static final BitSet FOLLOW_19_in_ruleLetExpCS14387 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleLetVariableCS_in_ruleLetExpCS14408 = new BitSet(new long[]{0x0000000000080000L,0x0000000040000000L});
+        public static final BitSet FOLLOW_94_in_ruleLetExpCS14422 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleLetExpCS14443 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLetVariableCS_in_entryRuleLetVariableCS14479 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleLetVariableCS14489 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleLetVariableCS14535 = new BitSet(new long[]{0x0000000000820000L});
+        public static final BitSet FOLLOW_17_in_ruleLetVariableCS14548 = new BitSet(new long[]{0x80019FF3FE000030L,0x0000000000003FFEL});
+        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleLetVariableCS14569 = new BitSet(new long[]{0x0000000000800000L});
+        public static final BitSet FOLLOW_23_in_ruleLetVariableCS14583 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleLetVariableCS14604 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNestedExpCS_in_entryRuleNestedExpCS14640 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNestedExpCS14650 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_34_in_ruleNestedExpCS14687 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleNestedExpCS14708 = new BitSet(new long[]{0x0000000800000000L});
+        public static final BitSet FOLLOW_35_in_ruleNestedExpCS14720 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSelfExpCS_in_entryRuleSelfExpCS14756 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSelfExpCS14766 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_95_in_ruleSelfExpCS14815 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCollectionTemplateCS_in_synpred32_InternalQVTrelation3174 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_46_in_synpred67_InternalQVTrelation5582 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_INT_in_synpred67_InternalQVTrelation5597 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrefixedExpCS_in_synpred128_InternalQVTrelation11287 = new BitSet(new long[]{0x7FF6600000800000L});
+        public static final BitSet FOLLOW_ruleBinaryOperatorCS_in_synpred128_InternalQVTrelation11308 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrefixedExpCS_in_synpred129_InternalQVTrelation11287 = new BitSet(new long[]{0x7FF6600000800000L});
+        public static final BitSet FOLLOW_ruleBinaryOperatorCS_in_synpred129_InternalQVTrelation11308 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_rulePrefixedExpOrLetExpCS_in_synpred129_InternalQVTrelation11331 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnaryOperatorCS_in_synpred131_InternalQVTrelation11372 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_rulePrimaryExpOrLetExpCS_in_synpred131_InternalQVTrelation11394 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_synpred141_InternalQVTrelation12241 = new BitSet(new long[]{0x0000000000000000L,0x0000000000008000L});
+        public static final BitSet FOLLOW_79_in_synpred141_InternalQVTrelation12253 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12274 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
+        public static final BitSet FOLLOW_19_in_synpred141_InternalQVTrelation12287 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12308 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
+        public static final BitSet FOLLOW_80_in_synpred141_InternalQVTrelation12322 = new BitSet(new long[]{0x0000000000000002L,0x0000000000408000L});
+        public static final BitSet FOLLOW_79_in_synpred141_InternalQVTrelation12335 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12356 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
+        public static final BitSet FOLLOW_19_in_synpred141_InternalQVTrelation12369 = new BitSet(new long[]{0x800DBFF7FE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleExpCS_in_synpred141_InternalQVTrelation12390 = new BitSet(new long[]{0x0000000000080000L,0x0000000000010000L});
+        public static final BitSet FOLLOW_80_in_synpred141_InternalQVTrelation12404 = new BitSet(new long[]{0x0000000000000002L,0x0000000000400000L});
+        public static final BitSet FOLLOW_86_in_synpred141_InternalQVTrelation12425 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
+        public static final BitSet FOLLOW_87_in_synpred141_InternalQVTrelation12450 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_synpred143_InternalQVTrelation12493 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_18_in_synpred143_InternalQVTrelation12505 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleConstructorPartCS_in_synpred143_InternalQVTrelation12526 = new BitSet(new long[]{0x0000000000480000L});
+        public static final BitSet FOLLOW_19_in_synpred143_InternalQVTrelation12539 = new BitSet(new long[]{0x00019FF3FE000030L});
+        public static final BitSet FOLLOW_ruleConstructorPartCS_in_synpred143_InternalQVTrelation12560 = new BitSet(new long[]{0x0000000000480000L});
+        public static final BitSet FOLLOW_22_in_synpred143_InternalQVTrelation12574 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_synpred151_InternalQVTrelation12615 = new BitSet(new long[]{0x0000000400000000L,0x0000000000400000L});
+        public static final BitSet FOLLOW_86_in_synpred151_InternalQVTrelation12634 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
+        public static final BitSet FOLLOW_87_in_synpred151_InternalQVTrelation12659 = new BitSet(new long[]{0x0000000400000000L});
+        public static final BitSet FOLLOW_34_in_synpred151_InternalQVTrelation12673 = new BitSet(new long[]{0x800DBFFFFE0000F0L,0x00000000A23C3FFEL});
+        public static final BitSet FOLLOW_ruleNavigatingArgCS_in_synpred151_InternalQVTrelation12695 = new BitSet(new long[]{0x0000000801080000L,0x0000000001000000L});
+        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_synpred151_InternalQVTrelation12716 = new BitSet(new long[]{0x0000000801080000L,0x0000000001000000L});
+        public static final BitSet FOLLOW_ruleNavigatingSemiArgCS_in_synpred151_InternalQVTrelation12739 = new BitSet(new long[]{0x0000000800080000L,0x0000000001000000L});
+        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_synpred151_InternalQVTrelation12760 = new BitSet(new long[]{0x0000000800080000L,0x0000000001000000L});
+        public static final BitSet FOLLOW_ruleNavigatingBarArgCS_in_synpred151_InternalQVTrelation12785 = new BitSet(new long[]{0x0000000800080000L});
+        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_synpred151_InternalQVTrelation12806 = new BitSet(new long[]{0x0000000800080000L});
+        public static final BitSet FOLLOW_35_in_synpred151_InternalQVTrelation12823 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_synpred153_InternalQVTrelation12864 = new BitSet(new long[]{0x0000000000000002L,0x0000000000400000L});
+        public static final BitSet FOLLOW_86_in_synpred153_InternalQVTrelation12883 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
+        public static final BitSet FOLLOW_87_in_synpred153_InternalQVTrelation12908 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTupleLiteralExpCS_in_synpred156_InternalQVTrelation13002 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCollectionLiteralExpCS_in_synpred157_InternalQVTrelation13032 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeLiteralExpCS_in_synpred158_InternalQVTrelation13062 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

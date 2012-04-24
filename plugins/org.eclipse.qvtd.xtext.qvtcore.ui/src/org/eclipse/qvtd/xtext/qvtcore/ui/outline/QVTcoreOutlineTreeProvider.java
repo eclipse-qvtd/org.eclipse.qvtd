@@ -9,6 +9,9 @@ import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
  * customization of the default outline structure
  * 
  */
-public class QVTcoreOutlineTreeProvider extends DefaultOutlineTreeProvider {
-	
+public class QVTcoreOutlineTreeProvider extends DefaultOutlineTreeProvider
+{
+//	protected void _createNode(IOutlineNode parentNode, PredicateCS csPredicate) {
+//		createNode(parentNode, csPredicate.getExpr());
+//	}
 }

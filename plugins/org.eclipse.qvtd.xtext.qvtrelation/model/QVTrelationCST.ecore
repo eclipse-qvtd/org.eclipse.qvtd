@@ -6,14 +6,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="CollectionTemplateCS" eSuperTypes="#//TemplateCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="memberIdentifiers" lowerBound="1"
         upperBound="-1" eType="#//TemplateVariableCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="restIdentifier" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="restIdentifier" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DefaultValueCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ModelElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="initialiser" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyId" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Property"/>
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainCS" eSuperTypes="#//AbstractDomainCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="checkonly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

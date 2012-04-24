@@ -34,10 +34,10 @@ TopLevelCS:
 CollectionTemplateCS: name=UnrestrictedName? ':' type=CollectionTypeCS
 	'{' (memberIdentifiers+=(TemplateCS | ElementTemplateCS)
 	    (',' memberIdentifiers+=(TemplateCS | ElementTemplateCS))*
-        '++' (restIdentifier=UnrestrictedName | '_')                     
+        '++' (restIdentifier=[pivot::Variable|UnrestrictedName] | '_')                     
          )? '}';
 
-DefaultValueCS: propertyId=[pivot::Property|UnrestrictedName] '=' initialiser=ExpCS ';';
+DefaultValueCS: propertyId=[pivot::Variable|UnrestrictedName] '=' initialiser=ExpCS ';';
 
 DomainCS: (checkonly?='checkonly' | enforce?='enforce')? 'domain' modelId=[qvtbase::TypedModel|UnrestrictedName] pattern=DomainPatternCS
              ('implementedby' implementedBy=ExpCS)?

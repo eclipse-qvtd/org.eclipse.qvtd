@@ -4,11 +4,6 @@
 package org.eclipse.qvtd.xtext.qvtcore.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling.EssentialOCLLabelProvider;
-import org.eclipse.qvtd.pivot.qvtbase.Function;
-import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
@@ -19,6 +14,7 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
+import org.eclipse.qvtd.xtext.qvtbase.ui.labeling.QVTbaseLabelProvider;
 
 import com.google.inject.Inject;
 
@@ -27,7 +23,7 @@ import com.google.inject.Inject;
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class QVTcoreLabelProvider extends EssentialOCLLabelProvider {
+public class QVTcoreLabelProvider extends QVTbaseLabelProvider {
 
 	@Inject
 	public QVTcoreLabelProvider(AdapterFactoryLabelProvider delegate) {
@@ -58,14 +54,6 @@ public class QVTcoreLabelProvider extends EssentialOCLLabelProvider {
 		return "EnforcementOperation.gif";
 	}
 
-	protected String image(Function ele) {
-		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/Function.gif";
-	}
-
-	protected String image(FunctionParameter ele) {
-		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/FunctionParameter.gif";
-	}
-
 	protected String image(GuardPattern ele) {
 		return "GuardPattern.gif";
 	}
@@ -82,31 +70,15 @@ public class QVTcoreLabelProvider extends EssentialOCLLabelProvider {
 		return "RealizedVariable.gif";
 	}
 
-	protected String image(Transformation ele) {
-		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/Transformation.gif";
-	}
-
-	protected String text(Transformation ele) {
-		return ele.getName();
-	}
-
-	protected String image(TypedModel ele) {
-		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/TypedModel.gif";
-	}
-
 	protected String image(VariableAssignment ele) {
 		return "VariableAssignment.gif";
 	}
 
-/*
-	//Labels and icons can be computed like this:
-	
-	String text(MyModel ele) {
-	  return "my "+ele.getName();
+	protected String text(BottomPattern ele) {
+		return "bottom";
 	}
-	 
-    String image(MyModel ele) {
-      return "MyModel.gif";
-    }
-*/
+
+	protected String text(GuardPattern ele) {
+		return "guard";
+	}
 }

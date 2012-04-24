@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -63,7 +64,7 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	 * @generated
 	 * @ordered
 	 */
-	protected Property propertyId;
+	protected Variable propertyId;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,10 +133,10 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Property getPropertyId() {
+	public Variable getPropertyId() {
 		if (propertyId != null && ((EObject)propertyId).eIsProxy()) {
 			InternalEObject oldPropertyId = (InternalEObject)propertyId;
-			propertyId = (Property)eResolveProxy(oldPropertyId);
+			propertyId = (Variable)eResolveProxy(oldPropertyId);
 			if (propertyId != oldPropertyId) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationCSTPackage.DEFAULT_VALUE_CS__PROPERTY_ID, oldPropertyId, propertyId));
@@ -149,7 +150,7 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Property basicGetPropertyId() {
+	public Variable basicGetPropertyId() {
 		return propertyId;
 	}
 
@@ -158,8 +159,8 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPropertyId(Property newPropertyId) {
-		Property oldPropertyId = propertyId;
+	public void setPropertyId(Variable newPropertyId) {
+		Variable oldPropertyId = propertyId;
 		propertyId = newPropertyId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.DEFAULT_VALUE_CS__PROPERTY_ID, oldPropertyId, propertyId));
@@ -208,7 +209,7 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 				setInitialiser((ExpCS)newValue);
 				return;
 			case QVTrelationCSTPackage.DEFAULT_VALUE_CS__PROPERTY_ID:
-				setPropertyId((Property)newValue);
+				setPropertyId((Variable)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -226,7 +227,7 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 				setInitialiser((ExpCS)null);
 				return;
 			case QVTrelationCSTPackage.DEFAULT_VALUE_CS__PROPERTY_ID:
-				setPropertyId((Property)null);
+				setPropertyId((Variable)null);
 				return;
 		}
 		super.eUnset(featureID);
