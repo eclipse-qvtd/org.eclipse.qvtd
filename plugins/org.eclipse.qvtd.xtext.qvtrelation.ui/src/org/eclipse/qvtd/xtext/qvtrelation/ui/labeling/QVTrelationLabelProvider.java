@@ -3,12 +3,21 @@
 */
 package org.eclipse.qvtd.xtext.qvtrelation.ui.labeling;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling.EssentialOCLLabelProvider;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
+import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -41,6 +50,14 @@ public class QVTrelationLabelProvider extends EssentialOCLLabelProvider {
 		return "DomainPattern.gif";
 	}
 
+	protected String image(Function ele) {
+		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/Function.gif";
+	}
+
+	protected String image(FunctionParameter ele) {
+		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/FunctionParameter.gif";
+	}
+
 	protected String image(Key ele) {
 		return "Key.gif";
 	}
@@ -53,8 +70,12 @@ public class QVTrelationLabelProvider extends EssentialOCLLabelProvider {
 		return "OppositePropertyCallExp.gif";
 	}
 
+	protected String image(Pattern ele) {
+		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/Pattern.gif";
+	}
+
 	protected String image(Predicate ele) {
-		return "When.gif";							// FIXME
+		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/Predicate.gif";
 	}
 
 	protected String image(PropertyTemplateItem ele) {
@@ -85,8 +106,65 @@ public class QVTrelationLabelProvider extends EssentialOCLLabelProvider {
 		return "RelationalTransformation.gif";
 	}
 
+	protected String image(TypedModel ele) {
+		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/TypedModel.gif";
+	}
+
+	protected String text(Key ele) {
+		StringBuilder s = new StringBuilder();
+		appendName(s, ele.getIdentifies());
+		s.append("{");
+		String prefix = "";
+		for (NamedElement usedPackage : ele.getPart()) {
+			s.append(prefix);
+			appendName(s, usedPackage);
+			prefix = ",";
+		}
+		s.append("}");
+		return s.toString();
+	}
+
+	protected String text(Pattern ele) {
+		EStructuralFeature eContainingFeature = ele.eContainingFeature();
+		if (eContainingFeature == QVTrelationPackage.Literals.RELATION__WHEN) {
+			return "when";
+		}
+		else if (eContainingFeature == QVTrelationPackage.Literals.RELATION__WHERE) {
+			return "where";
+		}
+		else {
+			return "<pattern>";
+		}
+	}
+
+	protected String text(Relation ele) {
+		return ele.getName();
+	}
+
+	protected String text(RelationCallExp ele) {
+		return ele.getName();
+	}
+
+	protected String text(RelationDomain ele) {
+		return ele.getName();
+	}
+
 	protected String text(RelationalTransformation ele) {
 		return ele.getName();
+	}
+
+	protected String text(TypedModel ele) {
+		StringBuilder s = new StringBuilder();
+		appendName(s, ele);
+		s.append("{");
+		String prefix = "";
+		for (NamedElement usedPackage : ele.getUsedPackage()) {
+			s.append(prefix);
+			appendName(s, usedPackage);
+			prefix = ",";
+		}
+		s.append("}");
+		return s.toString();
 	}
 
 /*

@@ -5,7 +5,10 @@ package org.eclipse.qvtd.xtext.qvtcore.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling.EssentialOCLLabelProvider;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
@@ -55,6 +58,14 @@ public class QVTcoreLabelProvider extends EssentialOCLLabelProvider {
 		return "EnforcementOperation.gif";
 	}
 
+	protected String image(Function ele) {
+		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/Function.gif";
+	}
+
+	protected String image(FunctionParameter ele) {
+		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/FunctionParameter.gif";
+	}
+
 	protected String image(GuardPattern ele) {
 		return "GuardPattern.gif";
 	}
@@ -71,8 +82,16 @@ public class QVTcoreLabelProvider extends EssentialOCLLabelProvider {
 		return "RealizedVariable.gif";
 	}
 
+	protected String image(Transformation ele) {
+		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/Transformation.gif";
+	}
+
 	protected String text(Transformation ele) {
 		return ele.getName();
+	}
+
+	protected String image(TypedModel ele) {
+		return "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/TypedModel.gif";
 	}
 
 	protected String image(VariableAssignment ele) {

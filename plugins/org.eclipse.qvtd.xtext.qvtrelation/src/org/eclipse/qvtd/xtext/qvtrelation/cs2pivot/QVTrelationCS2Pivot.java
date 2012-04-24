@@ -27,19 +27,19 @@ public class QVTrelationCS2Pivot extends EssentialOCLCS2Pivot
 		super(cs2pivotResourceMap, metaModelManager);
 	}
 
-	public QVTrelationContainmentVisitor createContainmentVisitor(CS2PivotConversion converter) {
+	protected QVTrelationContainmentVisitor createContainmentVisitor(CS2PivotConversion converter) {
 		return new QVTrelationContainmentVisitor(converter);
 	}
 
-	public QVTrelationLeft2RightVisitor createLeft2RightVisitor(CS2PivotConversion converter) {
+	protected QVTrelationLeft2RightVisitor createLeft2RightVisitor(CS2PivotConversion converter) {
 		return new QVTrelationLeft2RightVisitor(converter);
 	}
 
-	public QVTrelationPostOrderVisitor createPostOrderVisitor(CS2PivotConversion converter) {
+	protected QVTrelationPostOrderVisitor createPostOrderVisitor(CS2PivotConversion converter) {
 		return new QVTrelationPostOrderVisitor(converter);
 	}
 
-	public QVTrelationPreOrderVisitor createPreOrderVisitor(CS2PivotConversion converter) {
+	protected QVTrelationPreOrderVisitor createPreOrderVisitor(CS2PivotConversion converter) {
 		return new QVTrelationPreOrderVisitor(converter);
 	}
 }

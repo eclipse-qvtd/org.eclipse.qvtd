@@ -2,6 +2,7 @@
 package org.eclipse.qvtd.xtext.qvtrelation;
 
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationPrettyPrintVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationSaver;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
 import org.eclipse.qvtd.xtext.qvtrelation.scoping.QVTrelationScoping;
@@ -26,9 +27,6 @@ public class QVTrelationStandaloneSetup extends QVTrelationStandaloneSetupGenera
 		QVTrelationPivotStandaloneSetup.doSetup();
 		QVTrelationScoping.init();
 //		QVTrelationCS2MonikerVisitor.FACTORY.getClass();
-//		QVTrelationCS2Pivot.FACTORY.getClass();
-		QVTrelationSaver.FACTORY.getClass();
-		QVTrelationToStringVisitor.FACTORY.getClass();
 	}
 	
 	/**
