@@ -3,6 +3,7 @@
 */
 package org.eclipse.qvtd.xtext.qvtrelation.ui.outline;
 
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS;
@@ -23,7 +24,10 @@ public class QVTrelationOutlineTreeProvider extends DefaultOutlineTreeProvider
 	}
 
 	protected void _createNode(IOutlineNode parentNode, PathNameCS csPath) {
-		createNode(parentNode, csPath.getElement());
+		Element element = csPath.getElement();
+		if ((element != null) && !element.eIsProxy()) {
+			createNode(parentNode, element);
+		}
 	}
 
 	protected void _createNode(IOutlineNode parentNode, PredicateCS csPredicate) {
