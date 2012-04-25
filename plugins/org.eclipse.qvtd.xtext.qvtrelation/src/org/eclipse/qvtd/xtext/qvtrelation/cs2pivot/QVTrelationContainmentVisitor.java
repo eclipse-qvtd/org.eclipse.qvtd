@@ -89,6 +89,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.UnitCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.impl.CollectionTemplateCSImpl;
 
 public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmentVisitor
 {
@@ -214,7 +215,7 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 			pivotElement.setBindsTo(variable);
 		}
 		context.refreshName(variable, csElement.getName());
-		if (csElement.getRestIdentifier() == null) {
+		if (((CollectionTemplateCSImpl)csElement).basicGetRestIdentifier() == null) {
 			variable = pivotElement.getRest();
 			if (variable == null) {
 				variable = PivotFactory.eINSTANCE.createVariable();
