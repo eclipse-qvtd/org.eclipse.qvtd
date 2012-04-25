@@ -938,6 +938,7 @@ relation TROppositeDomainsToMappingForEnforcement
          isCheckable = c,
          isEnforceable = false,
          guardPattern = dg:GuardPattern {
+            bindsTo = dgVars:Set(Variable) {},
             area = cd
          },
          bottomPattern = db:BottomPattern {
