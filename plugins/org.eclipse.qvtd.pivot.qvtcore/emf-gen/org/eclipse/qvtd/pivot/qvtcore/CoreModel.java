@@ -3,9 +3,6 @@
 package org.eclipse.qvtd.pivot.qvtcore;
 
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.examples.pivot.Model;
 
 /**
  * <!-- begin-user-doc -->

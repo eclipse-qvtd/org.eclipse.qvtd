@@ -17,11 +17,8 @@ package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 import java.util.List;
 
 import org.eclipse.ocl.examples.pivot.OclExpression;
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.util.AbstractVisitor;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;

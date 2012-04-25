@@ -3,11 +3,8 @@
 package org.eclipse.qvtd.pivot.qvtcore.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.qvtd.pivot.qvtbase.impl.BaseModelImpl;
-import org.eclipse.ocl.examples.pivot.internal.impl.ModelImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
-
+import org.eclipse.qvtd.pivot.qvtbase.impl.BaseModelImpl;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;

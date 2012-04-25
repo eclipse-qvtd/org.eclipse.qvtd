@@ -17,8 +17,6 @@
 package org.eclipse.qvtd.pivot.qvtbase.attributes;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.attributes.PackageAttribution;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;

@@ -2,9 +2,6 @@
 package org.eclipse.qvtd.xtext.qvtrelation;
 
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPivotStandaloneSetup;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationPrettyPrintVisitor;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationSaver;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
 import org.eclipse.qvtd.xtext.qvtrelation.scoping.QVTrelationScoping;
 
 import com.google.inject.Injector;
