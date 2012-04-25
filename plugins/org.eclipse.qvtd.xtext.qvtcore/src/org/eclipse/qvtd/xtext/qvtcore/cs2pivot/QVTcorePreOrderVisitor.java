@@ -16,8 +16,14 @@
  */
 package org.eclipse.qvtd.xtext.qvtcore.cs2pivot;
 
+import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.cs2pivot.BasicContinuation;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
+import org.eclipse.ocl.examples.xtext.base.cs2pivot.PivotDependency;
+import org.eclipse.ocl.examples.xtext.base.cs2pivot.SingleContinuation;
 import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS;
@@ -27,13 +33,29 @@ import org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.RealizeableVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS;
 
 public class QVTcorePreOrderVisitor extends AbstractQVTcorePreOrderVisitor
 {	
+	public static class RealizeableVariableCompletion extends SingleContinuation<RealizeableVariableCS>
+	{
+		public RealizeableVariableCompletion(CS2PivotConversion context, RealizeableVariableCS csElement) {
+			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			Variable pivotElement = PivotUtil.getPivot(Variable.class, csElement);
+			if (pivotElement != null) {
+				Type type = PivotUtil.getPivot(Type.class, csElement.getOwnedType());
+				pivotElement.setType(type);
+			}
+			return null;
+		}
+	}
+
 	public QVTcorePreOrderVisitor(CS2PivotConversion context) {
 		super(context);
 	}
@@ -83,9 +105,8 @@ public class QVTcorePreOrderVisitor extends AbstractQVTcorePreOrderVisitor
 		return null;
 	}
 
-	@Override
-	public Continuation<?> visitRealizedVariableCS(RealizedVariableCS csElement) {
-		return null;
+	public Continuation<?> visitRealizeableVariableCS(RealizeableVariableCS csElement) {
+		return new RealizeableVariableCompletion(context, csElement);
 	}
 
 	@Override
@@ -95,11 +116,6 @@ public class QVTcorePreOrderVisitor extends AbstractQVTcorePreOrderVisitor
 
 	@Override
 	public Continuation<?> visitTransformationCS(TransformationCS csElement) {
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitUnrealizedVariableCS(UnrealizedVariableCS csElement) {
 		return null;
 	}
 }

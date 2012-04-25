@@ -41,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
+import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
@@ -87,6 +88,11 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 	public QVTcoreContainmentVisitor(CS2PivotConversion context) {
 		super(context);
 	}	
+
+	@Override
+	public Continuation<?> visitAssignmentCS(AssignmentCS csElement) {
+		return null;
+	}
 
 	public Continuation<?> visitBottomPatternCS(BottomPatternCS csElement) {
 		context.refreshModelElement(BottomPattern.class, QVTcorePackage.Literals.BOTTOM_PATTERN, csElement);
@@ -139,7 +145,8 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 	}
 
 	public Continuation<?> visitQueryCS(QueryCS csElement) {
-		refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
+		Function pivotElement = refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
+		context.refreshPivotList(FunctionParameter.class, pivotElement.getOwnedParameter(), csElement.getInputParamDeclaration());
 		return null;
 	}
 

@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 
 public class BottomPatternAttribution extends AbstractAttribution
 {
@@ -28,9 +29,11 @@ public class BottomPatternAttribution extends AbstractAttribution
 
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
-		BottomPattern targetElement = (BottomPattern)target;
-		environmentView.addNamedElements(targetElement.getRealizedVariable());
-		environmentView.addNamedElements(targetElement.getVariable());
+		BottomPattern bottomPattern = (BottomPattern)target;
+		environmentView.addNamedElements(bottomPattern.getRealizedVariable());
+		environmentView.addNamedElements(bottomPattern.getVariable());
+		GuardPattern guardPattern = bottomPattern.getArea().getGuardPattern();
+		environmentView.addNamedElements(guardPattern.getVariable());
 		return scopeView.getParent();
 	}
 }
