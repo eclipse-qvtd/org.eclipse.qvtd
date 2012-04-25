@@ -38,7 +38,7 @@ public class LoadTests extends LoadTestCase
 		doLoad_Concrete("hstmtostm", "qvtr");
 	}	
 
-	public void testLoad_RelToCoreWithoutErrors_qvtr() throws IOException, InterruptedException {
-		doLoad_Concrete("RelToCoreWithoutErrors", "qvtr");
-	}	
+//	public void testLoad_RelToCoreWithoutErrors_qvtr() throws IOException, InterruptedException {
+//		doLoad_Concrete("RelToCoreWithoutErrors", "qvtr");
+//	}	
 }
