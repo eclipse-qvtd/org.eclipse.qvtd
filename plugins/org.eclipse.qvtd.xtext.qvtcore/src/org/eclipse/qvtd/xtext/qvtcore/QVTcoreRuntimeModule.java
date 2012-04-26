@@ -16,8 +16,12 @@
  */
 package org.eclipse.qvtd.xtext.qvtcore;
 
+import org.antlr.runtime.TokenSource;
+import org.eclipse.ocl.examples.xtext.essentialocl.services.RetokenizingTokenSource;
+import org.eclipse.qvtd.xtext.qvtcore.parser.antlr.QVTcoreParser;
 import org.eclipse.qvtd.xtext.qvtcore.scoping.QVTcoreScopeProvider;
 import org.eclipse.qvtd.xtext.qvtcore.utilities.QVTcoreCSResource;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
@@ -33,6 +37,19 @@ public class QVTcoreRuntimeModule extends AbstractQVTcoreRuntimeModule
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bindConstant().annotatedWith(Names.named(org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
+	}
+	
+	@Override
+	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
+		return RetokenizingQVTcoreParser.class;
+	}
+
+	public static class RetokenizingQVTcoreParser extends QVTcoreParser
+	{
+		@Override
+		protected XtextTokenStream createTokenStream(TokenSource tokenSource) {
+			return super.createTokenStream(new RetokenizingTokenSource(tokenSource, getTokenDefProvider().getTokenDefMap()));
+		}
 	}
 
 	@Override

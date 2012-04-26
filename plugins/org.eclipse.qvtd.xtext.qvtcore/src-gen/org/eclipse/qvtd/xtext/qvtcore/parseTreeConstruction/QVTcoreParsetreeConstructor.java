@@ -4931,7 +4931,6 @@ protected class Model_OwnedExpressionAssignment extends AssignmentToken  {
 
 
 
-
 /************ begin Rule PathNameCS ****************
  *
  * PathNameCS returns base::PathNameCS:
