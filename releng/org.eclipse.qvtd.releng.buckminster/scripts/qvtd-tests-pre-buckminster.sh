@@ -11,7 +11,7 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 
 	echo
 	echo "# Define the Build Type (added by Hudson job definition)"
-	echo "build.type=N"
+	echo "build.type=${BUILD_TYPE}"
 
 	echo
 	echo "# Define the Build ID (added by Hudson job definition)"
@@ -22,8 +22,16 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "buckminster.build.timestamp=${BUILD_ID}"
 
 	echo
+	echo "# Define the Build Alias (added by Hudson job definition)"
+	echo "build.alias=${BUILD_ALIAS}"
+
+	echo
 	echo "# Define Hudson Build ID (added by Hudson job definition)"
 	echo "hudson.build.id=${BUILD_ID}"
+
+	echo
+	echo "# Define if Huson Build should create javadoc (added by Hudson job definition)"
+	echo "# manage.javadoc=${MANAGE_JAVADOC}"
 
 	echo
 	echo "# Override default locations (added by Hudson job definition)"
@@ -33,8 +41,9 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "git.qvtd.local.repository.location=${WORKSPACE}/org.eclipse.qvtd.git"
 
 	echo
-	echo "# Sign the jars (added by Hudson job definition)"    
-	echo "site.signing=false"
+	echo "# Sign the jars (added by Hudson job definition)"
+    echo "signing.type=eclipse.local"
+	echo "site.signing=${SITE_SIGNING}"
 
 	echo
 	echo "# Eclipse local download area (added by Hudson job definition"
@@ -43,6 +52,7 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "# Required Properties for Publishing (added by Hudson job definition)"
 	echo "packages.base=MMT-QVTd.downloads"
 	echo "tests.base=MMT-QVTd.test.results"
+	echo "javadoc.base=MMT-QVTd.javadoc"
 	echo "version=0.9.0"
 	echo "downloads.area=/home/data/httpd/download.eclipse.org/modeling/mmt/qvtd"
 
