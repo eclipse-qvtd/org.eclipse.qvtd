@@ -63,6 +63,7 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPrefixedExpCSAccess().getAlternatives(), "rule__PrefixedExpCS__Alternatives");
 					put(grammarAccess.getPrefixedExpOrLetExpCSAccess().getAlternatives(), "rule__PrefixedExpOrLetExpCS__Alternatives");
 					put(grammarAccess.getPrimaryExpCSAccess().getAlternatives(), "rule__PrimaryExpCS__Alternatives");
+					put(grammarAccess.getPrimaryExpCSAccess().getAlternatives_1_3(), "rule__PrimaryExpCS__Alternatives_1_3");
 					put(grammarAccess.getPrimaryExpOrLetExpCSAccess().getAlternatives(), "rule__PrimaryExpOrLetExpCS__Alternatives");
 					put(grammarAccess.getTopLevelCSAccess().getGroup(), "rule__TopLevelCS__Group__0");
 					put(grammarAccess.getBottomPatternCSAccess().getGroup(), "rule__BottomPatternCS__Group__0");
@@ -137,7 +138,8 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPrimaryExpCSAccess().getGroup_0_6_2(), "rule__PrimaryExpCS__Group_0_6_2__0");
 					put(grammarAccess.getPrimaryExpCSAccess().getGroup_0_7(), "rule__PrimaryExpCS__Group_0_7__0");
 					put(grammarAccess.getPrimaryExpCSAccess().getGroup_1(), "rule__PrimaryExpCS__Group_1__0");
-					put(grammarAccess.getPrimaryExpCSAccess().getGroup_1_4(), "rule__PrimaryExpCS__Group_1_4__0");
+					put(grammarAccess.getPrimaryExpCSAccess().getGroup_1_3_0(), "rule__PrimaryExpCS__Group_1_3_0__0");
+					put(grammarAccess.getPrimaryExpCSAccess().getGroup_1_3_0_1(), "rule__PrimaryExpCS__Group_1_3_0_1__0");
 					put(grammarAccess.getPrimaryExpCSAccess().getGroup_2(), "rule__PrimaryExpCS__Group_2__0");
 					put(grammarAccess.getPrimaryExpCSAccess().getGroup_2_2(), "rule__PrimaryExpCS__Group_2_2__0");
 					put(grammarAccess.getPrimaryExpCSAccess().getGroup_2_4(), "rule__PrimaryExpCS__Group_2_4__0");
@@ -272,8 +274,9 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPrimaryExpCSAccess().getSecondIndexesAssignment_0_6_2_1(), "rule__PrimaryExpCS__SecondIndexesAssignment_0_6_2_1");
 					put(grammarAccess.getPrimaryExpCSAccess().getAtPreAssignment_0_7_0(), "rule__PrimaryExpCS__AtPreAssignment_0_7_0");
 					put(grammarAccess.getPrimaryExpCSAccess().getPathNameAssignment_1_1(), "rule__PrimaryExpCS__PathNameAssignment_1_1");
-					put(grammarAccess.getPrimaryExpCSAccess().getOwnedPartsAssignment_1_3(), "rule__PrimaryExpCS__OwnedPartsAssignment_1_3");
-					put(grammarAccess.getPrimaryExpCSAccess().getOwnedPartsAssignment_1_4_1(), "rule__PrimaryExpCS__OwnedPartsAssignment_1_4_1");
+					put(grammarAccess.getPrimaryExpCSAccess().getOwnedPartsAssignment_1_3_0_0(), "rule__PrimaryExpCS__OwnedPartsAssignment_1_3_0_0");
+					put(grammarAccess.getPrimaryExpCSAccess().getOwnedPartsAssignment_1_3_0_1_1(), "rule__PrimaryExpCS__OwnedPartsAssignment_1_3_0_1_1");
+					put(grammarAccess.getPrimaryExpCSAccess().getValueAssignment_1_3_1(), "rule__PrimaryExpCS__ValueAssignment_1_3_1");
 					put(grammarAccess.getPrimaryExpCSAccess().getPathNameAssignment_2_1(), "rule__PrimaryExpCS__PathNameAssignment_2_1");
 					put(grammarAccess.getPrimaryExpCSAccess().getAtPreAssignment_2_2_0(), "rule__PrimaryExpCS__AtPreAssignment_2_2_0");
 					put(grammarAccess.getPrimaryExpCSAccess().getArgumentAssignment_2_4_0(), "rule__PrimaryExpCS__ArgumentAssignment_2_4_0");

@@ -2149,15 +2149,15 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	//	("," secondIndexes+=ExpCS)* "]")? (atPre?="@" "pre")? | {ConstructorExpCS} pathName=PathNameCS "{"
 	//
-	//	ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* "}" | {InvocationExpCS} pathName=PathNameCS
+	//	(ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* | value=StringLiteral) "}" | {InvocationExpCS}
 	//
-	//	(atPre?="@" "pre")? "(" (argument+=NavigatingArgCS argument+=NavigatingCommaArgCS* (argument+=NavigatingSemiArgCS
+	//	pathName=PathNameCS (atPre?="@" "pre")? "(" (argument+=NavigatingArgCS argument+=NavigatingCommaArgCS*
 	//
-	//	argument+=NavigatingCommaArgCS*)? (argument+=NavigatingBarArgCS argument+=NavigatingCommaArgCS*)?)? ")" | {NameExpCS}
+	//	(argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)? (argument+=NavigatingBarArgCS
 	//
-	//	pathName=PathNameCS (atPre?="@" "pre")? | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS |
+	//	argument+=NavigatingCommaArgCS*)?)? ")" | {NameExpCS} pathName=PathNameCS (atPre?="@" "pre")? | SelfExpCS |
 	//
-	//	CollectionLiteralExpCS | TypeLiteralExpCS | IfExpCS | NestedExpCS;
+	//	PrimitiveLiteralExpCS | TupleLiteralExpCS | CollectionLiteralExpCS | TypeLiteralExpCS | IfExpCS | NestedExpCS;
 	public EssentialOCLGrammarAccess.PrimaryExpCSElements getPrimaryExpCSAccess() {
 		return gaEssentialOCL.getPrimaryExpCSAccess();
 	}
