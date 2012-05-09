@@ -24,7 +24,6 @@
 			<entry key="build.id" value="${build.id}" />
 			<entry key="hudson.build.id" value="${hudson.build.id}" />
 			<entry key="must.publish.javadoc" value="${manage.javadoc}" />
-			<entry key="component.name" value="${component.name}" />
 		</propertyfile>
 
 		<!-- diagnostics
@@ -229,19 +228,19 @@
 		<buckminster.substitute value="${version}" pattern="^(\d+\.\d+)\.\d+.*$" replacement="$$1" property="base.version" />
 
 		<!-- setup composite.repository.base appropriate to the build type -->
-		<condition property="composite.repository.base" value="nightly/${version}/${saved.component.name}">
+		<condition property="composite.repository.base" value="nightly/${version}">
 			<matches pattern="^N" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="maintenance/${version}/${saved.component.name}">
+		<condition property="composite.repository.base" value="maintenance/${version}">
 			<matches pattern="^M" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="interim/${version}/${saved.component.name}">
+		<condition property="composite.repository.base" value="interim/${version}">
 			<matches pattern="^I" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="milestones/${version}/${saved.component.name}/${saved.build.id}">
+		<condition property="composite.repository.base" value="milestones/${version}/${saved.build.id}">
 			<matches pattern="^S" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="releases/${version}/${saved.component.name}/${base.version}">
+		<condition property="composite.repository.base" value="releases/${version}/${base.version}">
 			<matches pattern="^R" string="${saved.build.id}" />
 		</condition>
 
