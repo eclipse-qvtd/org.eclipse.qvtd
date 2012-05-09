@@ -1,0 +1,2 @@
+#mmt-qvtd publishing
+30 3 * * * ant -f /shared/jobs/buckminster-mmt-qvtd-branch-tests/lastSuccessful/archive/publishroot/publisher.ant -Dbuild.archives=/shared/jobs/buckminster-mmt-qvtd-branch-tests/lastSuccessful/archive &> logs/mmt-qvtd-publishing-branch-tests.log 
