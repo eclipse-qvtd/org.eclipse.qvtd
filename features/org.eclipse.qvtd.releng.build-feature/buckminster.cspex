@@ -8,13 +8,10 @@
 		if we wanted the tools job produce a zip with all automated tests -->
 		<cs:dependency name="org.eclipse.qvtd.tests" componentType="eclipse.feature" />
 		
-		<!-- Indirect Dependencies -->		
+		<!-- indirect dependencies -->		
 		<cs:dependency name="org.eclipse.rcp" componentType="eclipse.feature" />
-		
-		<!-- We explicitly need to specify this to add the some qvtd Core featre sources into the target platform >		
-		<cs:dependency name="org.eclipse.qvtd.all.source" componentType="eclipse.feature" />		
-		<cs:dependency name="org.eclipse.qvtd.core.sdk.source" componentType="eclipse.feature" /-->
-		
+		<cs:dependency name="org.eclipse.pde.core" componentType="osgi.bundle"/>
+		<cs:dependency name="org.eclipse.team.core" componentType="osgi.bundle" />
 	</cs:dependencies>
 	<cs:actions>
 		<cs:private name="site.tp" actor="ant">
@@ -49,7 +46,7 @@
 			</cs:actorProperties>
 			<cs:properties>
 				<cs:property key="target.platform.ius" value="org.eclipse.qvtd.all.source,org.eclipse.qvtd.all.sdk.source,org.eclipse.qvtd.core.sdk.source" />			
-				<cs:property key="package.name" value="mmt-qvtd-Update" />
+				<cs:property key="package.name" value="mmt-qvtd-${incubation.qualifier}-Update" />
 			</cs:properties>
 			<cs:prerequisites>
 				<cs:attribute name="create.category.xml" alias="create.category" />
@@ -67,7 +64,7 @@
 			<cs:properties>
 				<cs:property key="content.ius" value="org.eclipse.qvtd.all.sdk.feature.group" />
 				<cs:property key="target.platform.ius" value="lpg.runtime.java,lpg.runtime.java.source" />
-				<cs:property key="package.name" value="mmt-qvtd-SDK" />
+				<cs:property key="package.name" value="mmt-qvtd-${incubation.qualifier}-SDK" />
 			</cs:properties>
 			<cs:prerequisites>
 				<cs:attribute name="site.p2" alias="repository" />
@@ -83,7 +80,7 @@
 			</cs:actorProperties>
 			<cs:properties>
 				<cs:property key="content.ius" value="org.eclipse.qvtd.examples.feature.group" />
-				<cs:property key="package.name" value="mmt-qvtd-examples" />
+				<cs:property key="package.name" value="mmt-qvtd-${incubation.qualifier}-examples" />
 			</cs:properties>
 			<cs:prerequisites>
 				<cs:attribute name="site.p2" alias="repository" />
