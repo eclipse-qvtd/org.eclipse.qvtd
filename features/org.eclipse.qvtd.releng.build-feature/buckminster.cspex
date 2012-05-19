@@ -101,8 +101,8 @@
 	<cs:groups>
 		<cs:public name="build">
 			<cs:attribute name="package.mmt-qvtd-Update" />
-			<cs:attribute name="package.mmt-qvtd-SDK" /> 
-			<cs:attribute name="package.mmt-qvtd-examples" /> 
+			<!--cs:attribute name="package.mmt-qvtd-SDK" /> 
+			<cs:attribute name="package.mmt-qvtd-examples" /--> 
 		</cs:public>
 	</cs:groups>
 </cs:cspecExtension>
