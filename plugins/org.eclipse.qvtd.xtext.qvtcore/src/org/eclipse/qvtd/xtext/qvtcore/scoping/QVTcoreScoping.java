@@ -18,7 +18,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
-import org.eclipse.qvtd.xtext.qvtcore.attributes.DomainCSAttribution;
 import org.eclipse.qvtd.xtext.qvtcore.attributes.MappingCSAttribution;
 import org.eclipse.qvtd.xtext.qvtcore.attributes.PivotCSAttribution;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
