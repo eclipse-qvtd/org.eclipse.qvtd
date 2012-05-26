@@ -1138,13 +1138,13 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int QUERY_CS__INPUT_PARAM_DECLARATION = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Ocl Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__OCL_EXPRESSION = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int QUERY_CS__EXPRESSION = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Query CS</em>' class.
@@ -2090,15 +2090,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	EReference getQueryCS_InputParamDeclaration();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getOclExpression <em>Ocl Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Ocl Expression</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getOclExpression()
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getExpression()
 	 * @see #getQueryCS()
 	 * @generated
 	 */
-	EReference getQueryCS_OclExpression();
+	EReference getQueryCS_Expression();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorecst.RealizeableVariableCS <em>Realizeable Variable CS</em>}'.
@@ -2514,12 +2514,12 @@ public interface QVTcoreCSTPackage extends EPackage {
 		EReference QUERY_CS__INPUT_PARAM_DECLARATION = eINSTANCE.getQueryCS_InputParamDeclaration();
 
 		/**
-		 * The meta object literal for the '<em><b>Ocl Expression</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference QUERY_CS__OCL_EXPRESSION = eINSTANCE.getQueryCS_OclExpression();
+		EReference QUERY_CS__EXPRESSION = eINSTANCE.getQueryCS_Expression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.RealizeableVariableCSImpl <em>Realizeable Variable CS</em>}' class.

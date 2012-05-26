@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 
 import org.eclipse.ocl.examples.pivot.util.Nameable;
@@ -127,8 +127,8 @@ public class QVTtemplateAdapterFactory extends AdapterFactoryImpl {
 				return createTypedElementAdapter();
 			}
 			@Override
-			public Adapter caseOclExpression(OclExpression object) {
-				return createOclExpressionAdapter();
+			public Adapter caseOCLExpression(OCLExpression object) {
+				return createOCLExpressionAdapter();
 			}
 			@Override
 			public Adapter caseLiteralExp(LiteralExp object) {
@@ -281,16 +281,16 @@ public class QVTtemplateAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.OclExpression <em>Ocl Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.OCLExpression <em>OCL Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.OclExpression
+	 * @see org.eclipse.ocl.examples.pivot.OCLExpression
 	 * @generated
 	 */
-	public Adapter createOclExpressionAdapter() {
+	public Adapter createOCLExpressionAdapter() {
 		return null;
 	}
 

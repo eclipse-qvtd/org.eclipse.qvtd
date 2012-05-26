@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.internal.impl.LiteralExpImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -63,7 +63,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression where;
+	protected OCLExpression where;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -127,7 +127,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getWhere() {
+	public OCLExpression getWhere() {
 		return where;
 	}
 
@@ -136,8 +136,8 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetWhere(OclExpression newWhere, NotificationChain msgs) {
-		OclExpression oldWhere = where;
+	public NotificationChain basicSetWhere(OCLExpression newWhere, NotificationChain msgs) {
+		OCLExpression oldWhere = where;
 		where = newWhere;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTtemplatePackage.TEMPLATE_EXP__WHERE, oldWhere, newWhere);
@@ -151,7 +151,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setWhere(OclExpression newWhere) {
+	public void setWhere(OCLExpression newWhere) {
 		if (newWhere != where) {
 			NotificationChain msgs = null;
 			if (where != null)
@@ -208,7 +208,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 				setBindsTo((Variable)newValue);
 				return;
 			case QVTtemplatePackage.TEMPLATE_EXP__WHERE:
-				setWhere((OclExpression)newValue);
+				setWhere((OCLExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -226,7 +226,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 				setBindsTo((Variable)null);
 				return;
 			case QVTtemplatePackage.TEMPLATE_EXP__WHERE:
-				setWhere((OclExpression)null);
+				setWhere((OCLExpression)null);
 				return;
 		}
 		super.eUnset(featureID);

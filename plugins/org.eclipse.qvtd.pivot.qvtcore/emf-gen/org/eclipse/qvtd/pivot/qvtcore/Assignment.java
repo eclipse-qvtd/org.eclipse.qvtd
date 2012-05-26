@@ -19,7 +19,7 @@ package org.eclipse.qvtd.pivot.qvtcore;
 import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -77,13 +77,13 @@ public interface Assignment extends EObject, Element {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(OclExpression)
+	 * @see #setValue(OCLExpression)
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getAssignment_Value()
 	 * @model containment="true" required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='valueAssignment'"
 	 * @generated
 	 */
-	OclExpression getValue();
+	OCLExpression getValue();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtcore.Assignment#getValue <em>Value</em>}' containment reference.
@@ -93,7 +93,7 @@ public interface Assignment extends EObject, Element {
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(OclExpression value);
+	void setValue(OCLExpression value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Default</b></em>' attribute.

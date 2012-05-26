@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
@@ -53,7 +53,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression conditionExpression;
+	protected OCLExpression conditionExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -79,7 +79,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getConditionExpression() {
+	public OCLExpression getConditionExpression() {
 		return conditionExpression;
 	}
 
@@ -88,8 +88,8 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetConditionExpression(OclExpression newConditionExpression, NotificationChain msgs) {
-		OclExpression oldConditionExpression = conditionExpression;
+	public NotificationChain basicSetConditionExpression(OCLExpression newConditionExpression, NotificationChain msgs) {
+		OCLExpression oldConditionExpression = conditionExpression;
 		conditionExpression = newConditionExpression;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTbasePackage.PREDICATE__CONDITION_EXPRESSION, oldConditionExpression, newConditionExpression);
@@ -103,7 +103,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setConditionExpression(OclExpression newConditionExpression) {
+	public void setConditionExpression(OCLExpression newConditionExpression) {
 		if (newConditionExpression != conditionExpression) {
 			NotificationChain msgs = null;
 			if (conditionExpression != null)
@@ -229,7 +229,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTbasePackage.PREDICATE__CONDITION_EXPRESSION:
-				setConditionExpression((OclExpression)newValue);
+				setConditionExpression((OCLExpression)newValue);
 				return;
 			case QVTbasePackage.PREDICATE__PATTERN:
 				setPattern((Pattern)newValue);
@@ -247,7 +247,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTbasePackage.PREDICATE__CONDITION_EXPRESSION:
-				setConditionExpression((OclExpression)null);
+				setConditionExpression((OCLExpression)null);
 				return;
 			case QVTbasePackage.PREDICATE__PATTERN:
 				setPattern((Pattern)null);

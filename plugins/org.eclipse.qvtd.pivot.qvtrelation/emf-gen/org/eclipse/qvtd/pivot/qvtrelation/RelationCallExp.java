@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,10 +39,10 @@ import org.eclipse.ocl.examples.pivot.OclExpression;
  * @model
  * @generated
  */
-public interface RelationCallExp extends EObject, OclExpression {
+public interface RelationCallExp extends EObject, OCLExpression {
 	/**
 	 * Returns the value of the '<em><b>Argument</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Argument</em>' containment reference list isn't clear,
@@ -54,7 +54,7 @@ public interface RelationCallExp extends EObject, OclExpression {
 	 * @model containment="true" lower="2"
 	 * @generated
 	 */
-	EList<OclExpression> getArgument();
+	EList<OCLExpression> getArgument();
 
 	/**
 	 * Returns the value of the '<em><b>Referred Relation</b></em>' reference.

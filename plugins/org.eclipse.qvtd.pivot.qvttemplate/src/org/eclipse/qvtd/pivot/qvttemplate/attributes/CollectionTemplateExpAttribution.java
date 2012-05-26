@@ -17,7 +17,7 @@
 package org.eclipse.qvtd.pivot.qvttemplate.attributes;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -31,7 +31,7 @@ public class CollectionTemplateExpAttribution extends TemplateExpAttribution
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
 		CollectionTemplateExp targetElement = (CollectionTemplateExp)target;
-		for (OclExpression member : targetElement.getMember()) {
+		for (OCLExpression member : targetElement.getMember()) {
 			if (member instanceof VariableExp) {
 				Variable variable = (Variable) ((VariableExp)member).getReferredVariable();
 				if ((variable != null) && (variable.getName() != null)) {

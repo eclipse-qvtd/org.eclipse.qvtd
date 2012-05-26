@@ -42,7 +42,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.QueryCSImpl#getInputParamDeclarations <em>Input Param Declarations</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.QueryCSImpl#getOclExpression <em>Ocl Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.QueryCSImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,14 +60,14 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	protected EList<ParamDeclarationCS> inputParamDeclarations;
 
 	/**
-	 * The cached value of the '{@link #getOclExpression() <em>Ocl Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOclExpression()
+	 * @see #getExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS oclExpression;
+	protected ExpCS expression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -105,8 +105,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpCS getOclExpression() {
-		return oclExpression;
+	public ExpCS getExpression() {
+		return expression;
 	}
 
 	/**
@@ -114,11 +114,11 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOclExpression(ExpCS newOclExpression, NotificationChain msgs) {
-		ExpCS oldOclExpression = oclExpression;
-		oclExpression = newOclExpression;
+	public NotificationChain basicSetExpression(ExpCS newExpression, NotificationChain msgs) {
+		ExpCS oldExpression = expression;
+		expression = newExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.QUERY_CS__OCL_EXPRESSION, oldOclExpression, newOclExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.QUERY_CS__EXPRESSION, oldExpression, newExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -129,18 +129,18 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOclExpression(ExpCS newOclExpression) {
-		if (newOclExpression != oclExpression) {
+	public void setExpression(ExpCS newExpression) {
+		if (newExpression != expression) {
 			NotificationChain msgs = null;
-			if (oclExpression != null)
-				msgs = ((InternalEObject)oclExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.QUERY_CS__OCL_EXPRESSION, null, msgs);
-			if (newOclExpression != null)
-				msgs = ((InternalEObject)newOclExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.QUERY_CS__OCL_EXPRESSION, null, msgs);
-			msgs = basicSetOclExpression(newOclExpression, msgs);
+			if (expression != null)
+				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.QUERY_CS__EXPRESSION, null, msgs);
+			if (newExpression != null)
+				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.QUERY_CS__EXPRESSION, null, msgs);
+			msgs = basicSetExpression(newExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.QUERY_CS__OCL_EXPRESSION, newOclExpression, newOclExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.QUERY_CS__EXPRESSION, newExpression, newExpression));
 	}
 
 	/**
@@ -153,8 +153,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		switch (featureID) {
 			case QVTrelationCSTPackage.QUERY_CS__INPUT_PARAM_DECLARATIONS:
 				return ((InternalEList<?>)getInputParamDeclarations()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSTPackage.QUERY_CS__OCL_EXPRESSION:
-				return basicSetOclExpression(null, msgs);
+			case QVTrelationCSTPackage.QUERY_CS__EXPRESSION:
+				return basicSetExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -169,8 +169,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		switch (featureID) {
 			case QVTrelationCSTPackage.QUERY_CS__INPUT_PARAM_DECLARATIONS:
 				return getInputParamDeclarations();
-			case QVTrelationCSTPackage.QUERY_CS__OCL_EXPRESSION:
-				return getOclExpression();
+			case QVTrelationCSTPackage.QUERY_CS__EXPRESSION:
+				return getExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -188,8 +188,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 				getInputParamDeclarations().clear();
 				getInputParamDeclarations().addAll((Collection<? extends ParamDeclarationCS>)newValue);
 				return;
-			case QVTrelationCSTPackage.QUERY_CS__OCL_EXPRESSION:
-				setOclExpression((ExpCS)newValue);
+			case QVTrelationCSTPackage.QUERY_CS__EXPRESSION:
+				setExpression((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -206,8 +206,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 			case QVTrelationCSTPackage.QUERY_CS__INPUT_PARAM_DECLARATIONS:
 				getInputParamDeclarations().clear();
 				return;
-			case QVTrelationCSTPackage.QUERY_CS__OCL_EXPRESSION:
-				setOclExpression((ExpCS)null);
+			case QVTrelationCSTPackage.QUERY_CS__EXPRESSION:
+				setExpression((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -223,8 +223,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		switch (featureID) {
 			case QVTrelationCSTPackage.QUERY_CS__INPUT_PARAM_DECLARATIONS:
 				return inputParamDeclarations != null && !inputParamDeclarations.isEmpty();
-			case QVTrelationCSTPackage.QUERY_CS__OCL_EXPRESSION:
-				return oclExpression != null;
+			case QVTrelationCSTPackage.QUERY_CS__EXPRESSION:
+				return expression != null;
 		}
 		return super.eIsSet(featureID);
 	}

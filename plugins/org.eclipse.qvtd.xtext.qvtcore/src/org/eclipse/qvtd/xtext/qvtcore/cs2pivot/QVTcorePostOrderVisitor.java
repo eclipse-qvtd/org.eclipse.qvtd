@@ -19,7 +19,7 @@ package org.eclipse.qvtd.xtext.qvtcore.cs2pivot;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
@@ -98,7 +98,7 @@ public class QVTcorePostOrderVisitor extends AbstractQVTcorePostOrderVisitor
 			ExpCS csTarget = csConstraint.getTarget();
 			ExpCS csInitialiser = csConstraint.getInitialiser();
 			boolean isDefault = csConstraint.isDefault();
-			OclExpression target = context.visitLeft2Right(OclExpression.class, csTarget);
+			OCLExpression target = context.visitLeft2Right(OCLExpression.class, csTarget);
 			if (csInitialiser != null) {
 				Assignment assignment = null;
 				if (target instanceof PropertyCallExp) {
@@ -120,7 +120,7 @@ public class QVTcorePostOrderVisitor extends AbstractQVTcorePostOrderVisitor
 					// FIXME warning
 				}
 				if (assignment != null) {
-					OclExpression initialiser = context.visitLeft2Right(OclExpression.class, csInitialiser);
+					OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
 					assignment.setIsDefault(isDefault);
 					assignment.setValue(initialiser);
 					pAssignments.add(assignment);

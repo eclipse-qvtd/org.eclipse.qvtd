@@ -29,7 +29,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getInputParamDeclarations <em>Input Param Declarations</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getOclExpression <em>Ocl Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,29 +55,29 @@ public interface QueryCS extends TypedElementCS {
 	EList<ParamDeclarationCS> getInputParamDeclarations();
 
 	/**
-	 * Returns the value of the '<em><b>Ocl Expression</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Ocl Expression</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Ocl Expression</em>' containment reference.
-	 * @see #setOclExpression(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getQueryCS_OclExpression()
+	 * @return the value of the '<em>Expression</em>' containment reference.
+	 * @see #setExpression(ExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getQueryCS_Expression()
 	 * @model containment="true"
 	 * @generated
 	 */
-	ExpCS getOclExpression();
+	ExpCS getExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getOclExpression <em>Ocl Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getExpression <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Ocl Expression</em>' containment reference.
-	 * @see #getOclExpression()
+	 * @param value the new value of the '<em>Expression</em>' containment reference.
+	 * @see #getExpression()
 	 * @generated
 	 */
-	void setOclExpression(ExpCS value);
+	void setExpression(ExpCS value);
 
 } // QueryCS

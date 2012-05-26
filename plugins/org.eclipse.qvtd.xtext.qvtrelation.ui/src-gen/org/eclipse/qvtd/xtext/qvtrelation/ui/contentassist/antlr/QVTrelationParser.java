@@ -214,12 +214,12 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPrimitiveTypeDomainCSAccess().getNameAssignment_2(), "rule__PrimitiveTypeDomainCS__NameAssignment_2");
 					put(grammarAccess.getPrimitiveTypeDomainCSAccess().getTypeAssignment_4(), "rule__PrimitiveTypeDomainCS__TypeAssignment_4");
 					put(grammarAccess.getPropertyTemplateCSAccess().getPropertyIdAssignment_0(), "rule__PropertyTemplateCS__PropertyIdAssignment_0");
-					put(grammarAccess.getPropertyTemplateCSAccess().getOclExpressionAssignment_2(), "rule__PropertyTemplateCS__OclExpressionAssignment_2");
+					put(grammarAccess.getPropertyTemplateCSAccess().getExpressionAssignment_2(), "rule__PropertyTemplateCS__ExpressionAssignment_2");
 					put(grammarAccess.getQueryCSAccess().getNameAssignment_1(), "rule__QueryCS__NameAssignment_1");
 					put(grammarAccess.getQueryCSAccess().getInputParamDeclarationsAssignment_3_0(), "rule__QueryCS__InputParamDeclarationsAssignment_3_0");
 					put(grammarAccess.getQueryCSAccess().getInputParamDeclarationsAssignment_3_1_1(), "rule__QueryCS__InputParamDeclarationsAssignment_3_1_1");
 					put(grammarAccess.getQueryCSAccess().getOwnedTypeAssignment_6(), "rule__QueryCS__OwnedTypeAssignment_6");
-					put(grammarAccess.getQueryCSAccess().getOclExpressionAssignment_7_1_1(), "rule__QueryCS__OclExpressionAssignment_7_1_1");
+					put(grammarAccess.getQueryCSAccess().getExpressionAssignment_7_1_1(), "rule__QueryCS__ExpressionAssignment_7_1_1");
 					put(grammarAccess.getRelationCSAccess().getTopAssignment_0(), "rule__RelationCS__TopAssignment_0");
 					put(grammarAccess.getRelationCSAccess().getNameAssignment_2(), "rule__RelationCS__NameAssignment_2");
 					put(grammarAccess.getRelationCSAccess().getOverridesAssignment_3_1(), "rule__RelationCS__OverridesAssignment_3_1");

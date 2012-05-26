@@ -209,7 +209,7 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getQueryCSAccess().getInputParamDeclarationAssignment_3_0(), "rule__QueryCS__InputParamDeclarationAssignment_3_0");
 					put(grammarAccess.getQueryCSAccess().getInputParamDeclarationAssignment_3_1_1(), "rule__QueryCS__InputParamDeclarationAssignment_3_1_1");
 					put(grammarAccess.getQueryCSAccess().getOwnedTypeAssignment_6(), "rule__QueryCS__OwnedTypeAssignment_6");
-					put(grammarAccess.getQueryCSAccess().getOclExpressionAssignment_7_1_1(), "rule__QueryCS__OclExpressionAssignment_7_1_1");
+					put(grammarAccess.getQueryCSAccess().getExpressionAssignment_7_1_1(), "rule__QueryCS__ExpressionAssignment_7_1_1");
 					put(grammarAccess.getTransformationCSAccess().getNamespaceAssignment_1_0(), "rule__TransformationCS__NamespaceAssignment_1_0");
 					put(grammarAccess.getTransformationCSAccess().getNamespaceAssignment_1_2_0(), "rule__TransformationCS__NamespaceAssignment_1_2_0");
 					put(grammarAccess.getTransformationCSAccess().getNameAssignment_2(), "rule__TransformationCS__NameAssignment_2");

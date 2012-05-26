@@ -16,7 +16,7 @@ package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 
 import java.util.List;
 
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.util.AbstractVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -72,12 +72,12 @@ public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor
 	}
 
 	public Object visitRelationCallExp(RelationCallExp object) {
-		List<OclExpression> arguments = object.getArgument();
+		List<OCLExpression> arguments = object.getArgument();
 		Relation referredRelation = object.getReferredRelation();
 		context.appendName(referredRelation);
 		context.push("(", "");
 		String prefix = null; //$NON-NLS-1$
-		for (OclExpression argument : arguments) {
+		for (OCLExpression argument : arguments) {
 			if (prefix != null) {
 				context.next(null, prefix, " ");
 			}

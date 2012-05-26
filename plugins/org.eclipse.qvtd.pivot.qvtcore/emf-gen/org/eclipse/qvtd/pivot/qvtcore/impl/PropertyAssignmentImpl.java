@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
@@ -56,7 +56,7 @@ public class PropertyAssignmentImpl extends AssignmentImpl implements PropertyAs
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression slotExpression;
+	protected OCLExpression slotExpression;
 
 	/**
 	 * The cached value of the '{@link #getTargetProperty() <em>Target Property</em>}' reference.
@@ -92,7 +92,7 @@ public class PropertyAssignmentImpl extends AssignmentImpl implements PropertyAs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getSlotExpression() {
+	public OCLExpression getSlotExpression() {
 		return slotExpression;
 	}
 
@@ -101,8 +101,8 @@ public class PropertyAssignmentImpl extends AssignmentImpl implements PropertyAs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetSlotExpression(OclExpression newSlotExpression, NotificationChain msgs) {
-		OclExpression oldSlotExpression = slotExpression;
+	public NotificationChain basicSetSlotExpression(OCLExpression newSlotExpression, NotificationChain msgs) {
+		OCLExpression oldSlotExpression = slotExpression;
 		slotExpression = newSlotExpression;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcorePackage.PROPERTY_ASSIGNMENT__SLOT_EXPRESSION, oldSlotExpression, newSlotExpression);
@@ -116,7 +116,7 @@ public class PropertyAssignmentImpl extends AssignmentImpl implements PropertyAs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSlotExpression(OclExpression newSlotExpression) {
+	public void setSlotExpression(OCLExpression newSlotExpression) {
 		if (newSlotExpression != slotExpression) {
 			NotificationChain msgs = null;
 			if (slotExpression != null)
@@ -208,7 +208,7 @@ public class PropertyAssignmentImpl extends AssignmentImpl implements PropertyAs
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTcorePackage.PROPERTY_ASSIGNMENT__SLOT_EXPRESSION:
-				setSlotExpression((OclExpression)newValue);
+				setSlotExpression((OCLExpression)newValue);
 				return;
 			case QVTcorePackage.PROPERTY_ASSIGNMENT__TARGET_PROPERTY:
 				setTargetProperty((Property)newValue);
@@ -226,7 +226,7 @@ public class PropertyAssignmentImpl extends AssignmentImpl implements PropertyAs
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTcorePackage.PROPERTY_ASSIGNMENT__SLOT_EXPRESSION:
-				setSlotExpression((OclExpression)null);
+				setSlotExpression((OCLExpression)null);
 				return;
 			case QVTcorePackage.PROPERTY_ASSIGNMENT__TARGET_PROPERTY:
 				setTargetProperty((Property)null);

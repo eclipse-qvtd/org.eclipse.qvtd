@@ -19,7 +19,7 @@ package org.eclipse.qvtd.pivot.qvtbase;
 import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,12 +48,12 @@ public interface Predicate extends EObject, Element {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Condition Expression</em>' containment reference.
-	 * @see #setConditionExpression(OclExpression)
+	 * @see #setConditionExpression(OCLExpression)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getPredicate_ConditionExpression()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	OclExpression getConditionExpression();
+	OCLExpression getConditionExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.Predicate#getConditionExpression <em>Condition Expression</em>}' containment reference.
@@ -63,7 +63,7 @@ public interface Predicate extends EObject, Element {
 	 * @see #getConditionExpression()
 	 * @generated
 	 */
-	void setConditionExpression(OclExpression value);
+	void setConditionExpression(OCLExpression value);
 
 	/**
 	 * Returns the value of the '<em><b>Pattern</b></em>' container reference.

@@ -41,7 +41,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.PropertyTemplateCSImpl#getObjectTemplate <em>Object Template</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.PropertyTemplateCSImpl#getPropertyId <em>Property Id</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.PropertyTemplateCSImpl#getOclExpression <em>Ocl Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.PropertyTemplateCSImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.PropertyTemplateCSImpl#isOpposite <em>Opposite</em>}</li>
  * </ul>
  * </p>
@@ -60,14 +60,14 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	protected Property propertyId;
 
 	/**
-	 * The cached value of the '{@link #getOclExpression() <em>Ocl Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOclExpression()
+	 * @see #getExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS oclExpression;
+	protected ExpCS expression;
 
 	/**
 	 * The default value of the '{@link #isOpposite() <em>Opposite</em>}' attribute.
@@ -192,8 +192,8 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpCS getOclExpression() {
-		return oclExpression;
+	public ExpCS getExpression() {
+		return expression;
 	}
 
 	/**
@@ -201,11 +201,11 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOclExpression(ExpCS newOclExpression, NotificationChain msgs) {
-		ExpCS oldOclExpression = oclExpression;
-		oclExpression = newOclExpression;
+	public NotificationChain basicSetExpression(ExpCS newExpression, NotificationChain msgs) {
+		ExpCS oldExpression = expression;
+		expression = newExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OCL_EXPRESSION, oldOclExpression, newOclExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__EXPRESSION, oldExpression, newExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -216,18 +216,18 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOclExpression(ExpCS newOclExpression) {
-		if (newOclExpression != oclExpression) {
+	public void setExpression(ExpCS newExpression) {
+		if (newExpression != expression) {
 			NotificationChain msgs = null;
-			if (oclExpression != null)
-				msgs = ((InternalEObject)oclExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OCL_EXPRESSION, null, msgs);
-			if (newOclExpression != null)
-				msgs = ((InternalEObject)newOclExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OCL_EXPRESSION, null, msgs);
-			msgs = basicSetOclExpression(newOclExpression, msgs);
+			if (expression != null)
+				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__EXPRESSION, null, msgs);
+			if (newExpression != null)
+				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__EXPRESSION, null, msgs);
+			msgs = basicSetExpression(newExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OCL_EXPRESSION, newOclExpression, newOclExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__EXPRESSION, newExpression, newExpression));
 	}
 
 	/**
@@ -277,8 +277,8 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 		switch (featureID) {
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
 				return basicSetObjectTemplate(null, msgs);
-			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OCL_EXPRESSION:
-				return basicSetOclExpression(null, msgs);
+			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__EXPRESSION:
+				return basicSetExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -310,8 +310,8 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				if (resolve) return getPropertyId();
 				return basicGetPropertyId();
-			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OCL_EXPRESSION:
-				return getOclExpression();
+			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__EXPRESSION:
+				return getExpression();
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OPPOSITE:
 				return isOpposite();
 		}
@@ -332,8 +332,8 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				setPropertyId((Property)newValue);
 				return;
-			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OCL_EXPRESSION:
-				setOclExpression((ExpCS)newValue);
+			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__EXPRESSION:
+				setExpression((ExpCS)newValue);
 				return;
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OPPOSITE:
 				setOpposite((Boolean)newValue);
@@ -356,8 +356,8 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				setPropertyId((Property)null);
 				return;
-			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OCL_EXPRESSION:
-				setOclExpression((ExpCS)null);
+			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__EXPRESSION:
+				setExpression((ExpCS)null);
 				return;
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OPPOSITE:
 				setOpposite(OPPOSITE_EDEFAULT);
@@ -378,8 +378,8 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 				return getObjectTemplate() != null;
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				return propertyId != null;
-			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OCL_EXPRESSION:
-				return oclExpression != null;
+			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__EXPRESSION:
+				return expression != null;
 			case QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OPPOSITE:
 				return opposite != OPPOSITE_EDEFAULT;
 		}

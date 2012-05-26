@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
 
 import org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl;
@@ -58,7 +58,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression valueExp;
+	protected OCLExpression valueExp;
 
 	/**
 	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
@@ -94,7 +94,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getValueExp() {
+	public OCLExpression getValueExp() {
 		return valueExp;
 	}
 
@@ -103,8 +103,8 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValueExp(OclExpression newValueExp, NotificationChain msgs) {
-		OclExpression oldValueExp = valueExp;
+	public NotificationChain basicSetValueExp(OCLExpression newValueExp, NotificationChain msgs) {
+		OCLExpression oldValueExp = valueExp;
 		valueExp = newValueExp;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP, oldValueExp, newValueExp);
@@ -118,7 +118,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValueExp(OclExpression newValueExp) {
+	public void setValueExp(OCLExpression newValueExp) {
 		if (newValueExp != valueExp) {
 			NotificationChain msgs = null;
 			if (valueExp != null)
@@ -210,7 +210,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP:
-				setValueExp((OclExpression)newValue);
+				setValueExp((OCLExpression)newValue);
 				return;
 			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VARIABLE:
 				setVariable((Variable)newValue);
@@ -228,7 +228,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP:
-				setValueExp((OclExpression)null);
+				setValueExp((OCLExpression)null);
 				return;
 			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VARIABLE:
 				setVariable((Variable)null);

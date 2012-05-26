@@ -776,20 +776,20 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_7_0 = (Keyword)cAlternatives_7.eContents().get(0);
 		private final Group cGroup_7_1 = (Group)cAlternatives_7.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_7_1_0 = (Keyword)cGroup_7_1.eContents().get(0);
-		private final Assignment cOclExpressionAssignment_7_1_1 = (Assignment)cGroup_7_1.eContents().get(1);
-		private final RuleCall cOclExpressionExpCSParserRuleCall_7_1_1_0 = (RuleCall)cOclExpressionAssignment_7_1_1.eContents().get(0);
+		private final Assignment cExpressionAssignment_7_1_1 = (Assignment)cGroup_7_1.eContents().get(1);
+		private final RuleCall cExpressionExpCSParserRuleCall_7_1_1_0 = (RuleCall)cExpressionAssignment_7_1_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_7_1_2 = (Keyword)cGroup_7_1.eContents().get(2);
 		
 		//QueryCS:
 		//
 		//	"query" name=UnrestrictedName "(" (inputParamDeclaration+=ParamDeclarationCS (","
 		//
-		//	inputParamDeclaration+=ParamDeclarationCS)*)? ")" ":" ownedType=TypeExpCS (";" | "{" oclExpression=ExpCS "}");
+		//	inputParamDeclaration+=ParamDeclarationCS)*)? ")" ":" ownedType=TypeExpCS (";" | "{" expression=ExpCS "}");
 		public ParserRule getRule() { return rule; }
 
 		//"query" name=UnrestrictedName "(" (inputParamDeclaration+=ParamDeclarationCS (","
 		//
-		//inputParamDeclaration+=ParamDeclarationCS)*)? ")" ":" ownedType=TypeExpCS (";" | "{" oclExpression=ExpCS "}")
+		//inputParamDeclaration+=ParamDeclarationCS)*)? ")" ":" ownedType=TypeExpCS (";" | "{" expression=ExpCS "}")
 		public Group getGroup() { return cGroup; }
 
 		//"query"
@@ -837,23 +837,23 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//TypeExpCS
 		public RuleCall getOwnedTypeTypeExpCSParserRuleCall_6_0() { return cOwnedTypeTypeExpCSParserRuleCall_6_0; }
 
-		//";" | "{" oclExpression=ExpCS "}"
+		//";" | "{" expression=ExpCS "}"
 		public Alternatives getAlternatives_7() { return cAlternatives_7; }
 
 		//";"
 		public Keyword getSemicolonKeyword_7_0() { return cSemicolonKeyword_7_0; }
 
-		//"{" oclExpression=ExpCS "}"
+		//"{" expression=ExpCS "}"
 		public Group getGroup_7_1() { return cGroup_7_1; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_7_1_0() { return cLeftCurlyBracketKeyword_7_1_0; }
 
-		//oclExpression=ExpCS
-		public Assignment getOclExpressionAssignment_7_1_1() { return cOclExpressionAssignment_7_1_1; }
+		//expression=ExpCS
+		public Assignment getExpressionAssignment_7_1_1() { return cExpressionAssignment_7_1_1; }
 
 		//ExpCS
-		public RuleCall getOclExpressionExpCSParserRuleCall_7_1_1_0() { return cOclExpressionExpCSParserRuleCall_7_1_1_0; }
+		public RuleCall getExpressionExpCSParserRuleCall_7_1_1_0() { return cExpressionExpCSParserRuleCall_7_1_1_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_7_1_2() { return cRightCurlyBracketKeyword_7_1_2; }
@@ -887,7 +887,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//
 		//
 		////      	  ':' <TypeCS>
-		// //            (';' | '{' <OclExpressionCS> '}')
+		// //            (';' | '{' <OCLExpressionCS> '}')
 		// TransformationCS:
 		//
 		//	"transformation" (namespace+=[pivot::Namespace|UnrestrictedName] "::" (namespace+=[pivot::Namespace|UnreservedName]
@@ -1361,7 +1361,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	//	"query" name=UnrestrictedName "(" (inputParamDeclaration+=ParamDeclarationCS (","
 	//
-	//	inputParamDeclaration+=ParamDeclarationCS)*)? ")" ":" ownedType=TypeExpCS (";" | "{" oclExpression=ExpCS "}");
+	//	inputParamDeclaration+=ParamDeclarationCS)*)? ")" ":" ownedType=TypeExpCS (";" | "{" expression=ExpCS "}");
 	public QueryCSElements getQueryCSAccess() {
 		return (pQueryCS != null) ? pQueryCS : (pQueryCS = new QueryCSElements());
 	}
@@ -1375,7 +1375,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	//
 	////      	  ':' <TypeCS>
-	// //            (';' | '{' <OclExpressionCS> '}')
+	// //            (';' | '{' <OCLExpressionCS> '}')
 	// TransformationCS:
 	//
 	//	"transformation" (namespace+=[pivot::Namespace|UnrestrictedName] "::" (namespace+=[pivot::Namespace|UnreservedName]

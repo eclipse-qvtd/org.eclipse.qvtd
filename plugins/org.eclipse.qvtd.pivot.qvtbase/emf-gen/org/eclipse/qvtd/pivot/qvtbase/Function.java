@@ -18,7 +18,7 @@ package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 
 /**
@@ -47,12 +47,12 @@ public interface Function extends EObject, Operation {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Query Expression</em>' containment reference.
-	 * @see #setQueryExpression(OclExpression)
+	 * @see #setQueryExpression(OCLExpression)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getFunction_QueryExpression()
 	 * @model containment="true"
 	 * @generated
 	 */
-	OclExpression getQueryExpression();
+	OCLExpression getQueryExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.Function#getQueryExpression <em>Query Expression</em>}' containment reference.
@@ -62,6 +62,6 @@ public interface Function extends EObject, Operation {
 	 * @see #getQueryExpression()
 	 * @generated
 	 */
-	void setQueryExpression(OclExpression value);
+	void setQueryExpression(OCLExpression value);
 
 } // Function

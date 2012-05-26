@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
@@ -54,7 +54,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression value;
+	protected OCLExpression value;
 
 	/**
 	 * The default value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
@@ -150,7 +150,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getValue() {
+	public OCLExpression getValue() {
 		return value;
 	}
 
@@ -159,8 +159,8 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(OclExpression newValue, NotificationChain msgs) {
-		OclExpression oldValue = value;
+	public NotificationChain basicSetValue(OCLExpression newValue, NotificationChain msgs) {
+		OCLExpression oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcorePackage.ASSIGNMENT__VALUE, oldValue, newValue);
@@ -174,7 +174,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(OclExpression newValue) {
+	public void setValue(OCLExpression newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
@@ -310,7 +310,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 				setBottomPattern((BottomPattern)newValue);
 				return;
 			case QVTcorePackage.ASSIGNMENT__VALUE:
-				setValue((OclExpression)newValue);
+				setValue((OCLExpression)newValue);
 				return;
 			case QVTcorePackage.ASSIGNMENT__IS_DEFAULT:
 				setIsDefault((Boolean)newValue);
@@ -331,7 +331,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 				setBottomPattern((BottomPattern)null);
 				return;
 			case QVTcorePackage.ASSIGNMENT__VALUE:
-				setValue((OclExpression)null);
+				setValue((OCLExpression)null);
 				return;
 			case QVTcorePackage.ASSIGNMENT__IS_DEFAULT:
 				unsetIsDefault();

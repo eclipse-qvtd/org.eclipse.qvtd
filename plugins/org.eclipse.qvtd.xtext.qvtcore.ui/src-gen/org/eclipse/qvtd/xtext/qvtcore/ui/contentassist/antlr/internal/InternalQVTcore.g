@@ -6214,9 +6214,9 @@ rule__QueryCS__Group_7_1__1__Impl
     }
 :
 (
-{ before(grammarAccess.getQueryCSAccess().getOclExpressionAssignment_7_1_1()); }
-(rule__QueryCS__OclExpressionAssignment_7_1_1)
-{ after(grammarAccess.getQueryCSAccess().getOclExpressionAssignment_7_1_1()); }
+{ before(grammarAccess.getQueryCSAccess().getExpressionAssignment_7_1_1()); }
+(rule__QueryCS__ExpressionAssignment_7_1_1)
+{ after(grammarAccess.getQueryCSAccess().getExpressionAssignment_7_1_1()); }
 )
 
 ;
@@ -13582,14 +13582,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__QueryCS__OclExpressionAssignment_7_1_1
+rule__QueryCS__ExpressionAssignment_7_1_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getQueryCSAccess().getOclExpressionExpCSParserRuleCall_7_1_1_0()); }
-	ruleExpCS{ after(grammarAccess.getQueryCSAccess().getOclExpressionExpCSParserRuleCall_7_1_1_0()); }
+{ before(grammarAccess.getQueryCSAccess().getExpressionExpCSParserRuleCall_7_1_1_0()); }
+	ruleExpCS{ after(grammarAccess.getQueryCSAccess().getExpressionExpCSParserRuleCall_7_1_1_0()); }
 )
 
 ;

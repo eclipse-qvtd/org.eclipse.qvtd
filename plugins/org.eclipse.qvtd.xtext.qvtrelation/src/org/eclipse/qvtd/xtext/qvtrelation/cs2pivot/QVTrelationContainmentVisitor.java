@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -176,7 +176,7 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 		}
 		if (templateExp instanceof ObjectTemplateExp) {
 			for (PropertyTemplateItem part : ((ObjectTemplateExp)templateExp).getPart()) {
-				OclExpression value = part.getValue();
+				OCLExpression value = part.getValue();
 				if (value instanceof TemplateExp) {
 					gatherVariables(pivotVariables, (TemplateExp)value);
 				}
@@ -184,8 +184,8 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 		}
 		else if (templateExp instanceof CollectionTemplateExp) {
 			CollectionTemplateExp collectionTemplateExp = (CollectionTemplateExp)templateExp;
-			for (OclExpression member : collectionTemplateExp.getMember()) {
-//				OclExpression value = part.getValue();
+			for (OCLExpression member : collectionTemplateExp.getMember()) {
+//				OCLExpression value = part.getValue();
 				if (member instanceof TemplateExp) {
 					gatherVariables(pivotVariables, (TemplateExp)member);
 				}
@@ -229,7 +229,7 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 //			pivotElement.setRest(variable);
 //		}
 //		context.refreshName(variable, csElement.getRestIdentifier());
-		context.refreshPivotList(OclExpression.class, pivotElement.getMember(), csElement.getMemberIdentifiers());
+		context.refreshPivotList(OCLExpression.class, pivotElement.getMember(), csElement.getMemberIdentifiers());
 		return null;
 	}
 
@@ -334,7 +334,7 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 
 	public Continuation<?> visitPropertyTemplateCS(PropertyTemplateCS csElement) {
 		PropertyTemplateItem pivotElement = context.refreshModelElement(PropertyTemplateItem.class, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM, csElement);
-		ExpCS csExp = csElement.getOclExpression();
+		ExpCS csExp = csElement.getExpression();
 		if (csExp instanceof TemplateCS) {
 			pivotElement.setValue(PivotUtil.getPivot(TemplateExp.class, csExp));
 		}

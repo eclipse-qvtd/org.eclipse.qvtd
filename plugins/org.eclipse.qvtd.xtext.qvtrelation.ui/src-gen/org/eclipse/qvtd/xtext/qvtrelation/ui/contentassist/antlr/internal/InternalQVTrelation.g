@@ -6278,9 +6278,9 @@ rule__PropertyTemplateCS__Group__2__Impl
     }
 :
 (
-{ before(grammarAccess.getPropertyTemplateCSAccess().getOclExpressionAssignment_2()); }
-(rule__PropertyTemplateCS__OclExpressionAssignment_2)
-{ after(grammarAccess.getPropertyTemplateCSAccess().getOclExpressionAssignment_2()); }
+{ before(grammarAccess.getPropertyTemplateCSAccess().getExpressionAssignment_2()); }
+(rule__PropertyTemplateCS__ExpressionAssignment_2)
+{ after(grammarAccess.getPropertyTemplateCSAccess().getExpressionAssignment_2()); }
 )
 
 ;
@@ -6723,9 +6723,9 @@ rule__QueryCS__Group_7_1__1__Impl
     }
 :
 (
-{ before(grammarAccess.getQueryCSAccess().getOclExpressionAssignment_7_1_1()); }
-(rule__QueryCS__OclExpressionAssignment_7_1_1)
-{ after(grammarAccess.getQueryCSAccess().getOclExpressionAssignment_7_1_1()); }
+{ before(grammarAccess.getQueryCSAccess().getExpressionAssignment_7_1_1()); }
+(rule__QueryCS__ExpressionAssignment_7_1_1)
+{ after(grammarAccess.getQueryCSAccess().getExpressionAssignment_7_1_1()); }
 )
 
 ;
@@ -14961,14 +14961,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__PropertyTemplateCS__OclExpressionAssignment_2
+rule__PropertyTemplateCS__ExpressionAssignment_2
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getPropertyTemplateCSAccess().getOclExpressionExpCSOrTemplateCSParserRuleCall_2_0()); }
-	ruleExpCSOrTemplateCS{ after(grammarAccess.getPropertyTemplateCSAccess().getOclExpressionExpCSOrTemplateCSParserRuleCall_2_0()); }
+{ before(grammarAccess.getPropertyTemplateCSAccess().getExpressionExpCSOrTemplateCSParserRuleCall_2_0()); }
+	ruleExpCSOrTemplateCS{ after(grammarAccess.getPropertyTemplateCSAccess().getExpressionExpCSOrTemplateCSParserRuleCall_2_0()); }
 )
 
 ;
@@ -15036,14 +15036,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__QueryCS__OclExpressionAssignment_7_1_1
+rule__QueryCS__ExpressionAssignment_7_1_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getQueryCSAccess().getOclExpressionExpCSParserRuleCall_7_1_1_0()); }
-	ruleExpCS{ after(grammarAccess.getQueryCSAccess().getOclExpressionExpCSParserRuleCall_7_1_1_0()); }
+{ before(grammarAccess.getQueryCSAccess().getExpressionExpCSParserRuleCall_7_1_1_0()); }
+	ruleExpCS{ after(grammarAccess.getQueryCSAccess().getExpressionExpCSParserRuleCall_7_1_1_0()); }
 )
 
 ;

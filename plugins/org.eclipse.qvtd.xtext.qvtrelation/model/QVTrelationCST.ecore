@@ -62,7 +62,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="objectTemplate" eType="#//ObjectTemplateCS"
         resolveProxies="false" eOpposite="#//ObjectTemplateCS/propertyTemplates"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyId" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Property"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="opposite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
@@ -70,7 +70,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="QueryCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//TypedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputParamDeclarations"
         upperBound="-1" eType="#//ParamDeclarationCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//NamedElementCS">

@@ -49,7 +49,7 @@ import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.QueryCSImpl#getInputParamDeclaration <em>Input Param Declaration</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.QueryCSImpl#getOclExpression <em>Ocl Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.QueryCSImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,14 +67,14 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	protected EList<ParamDeclarationCS> inputParamDeclaration;
 
 	/**
-	 * The cached value of the '{@link #getOclExpression() <em>Ocl Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOclExpression()
+	 * @see #getExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS oclExpression;
+	protected ExpCS expression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -112,8 +112,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpCS getOclExpression() {
-		return oclExpression;
+	public ExpCS getExpression() {
+		return expression;
 	}
 
 	/**
@@ -121,11 +121,11 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOclExpression(ExpCS newOclExpression, NotificationChain msgs) {
-		ExpCS oldOclExpression = oclExpression;
-		oclExpression = newOclExpression;
+	public NotificationChain basicSetExpression(ExpCS newExpression, NotificationChain msgs) {
+		ExpCS oldExpression = expression;
+		expression = newExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.QUERY_CS__OCL_EXPRESSION, oldOclExpression, newOclExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.QUERY_CS__EXPRESSION, oldExpression, newExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -136,18 +136,18 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOclExpression(ExpCS newOclExpression) {
-		if (newOclExpression != oclExpression) {
+	public void setExpression(ExpCS newExpression) {
+		if (newExpression != expression) {
 			NotificationChain msgs = null;
-			if (oclExpression != null)
-				msgs = ((InternalEObject)oclExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSTPackage.QUERY_CS__OCL_EXPRESSION, null, msgs);
-			if (newOclExpression != null)
-				msgs = ((InternalEObject)newOclExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSTPackage.QUERY_CS__OCL_EXPRESSION, null, msgs);
-			msgs = basicSetOclExpression(newOclExpression, msgs);
+			if (expression != null)
+				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSTPackage.QUERY_CS__EXPRESSION, null, msgs);
+			if (newExpression != null)
+				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSTPackage.QUERY_CS__EXPRESSION, null, msgs);
+			msgs = basicSetExpression(newExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.QUERY_CS__OCL_EXPRESSION, newOclExpression, newOclExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.QUERY_CS__EXPRESSION, newExpression, newExpression));
 	}
 
 	/**
@@ -160,8 +160,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		switch (featureID) {
 			case QVTcoreCSTPackage.QUERY_CS__INPUT_PARAM_DECLARATION:
 				return ((InternalEList<?>)getInputParamDeclaration()).basicRemove(otherEnd, msgs);
-			case QVTcoreCSTPackage.QUERY_CS__OCL_EXPRESSION:
-				return basicSetOclExpression(null, msgs);
+			case QVTcoreCSTPackage.QUERY_CS__EXPRESSION:
+				return basicSetExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -176,8 +176,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		switch (featureID) {
 			case QVTcoreCSTPackage.QUERY_CS__INPUT_PARAM_DECLARATION:
 				return getInputParamDeclaration();
-			case QVTcoreCSTPackage.QUERY_CS__OCL_EXPRESSION:
-				return getOclExpression();
+			case QVTcoreCSTPackage.QUERY_CS__EXPRESSION:
+				return getExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -195,8 +195,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 				getInputParamDeclaration().clear();
 				getInputParamDeclaration().addAll((Collection<? extends ParamDeclarationCS>)newValue);
 				return;
-			case QVTcoreCSTPackage.QUERY_CS__OCL_EXPRESSION:
-				setOclExpression((ExpCS)newValue);
+			case QVTcoreCSTPackage.QUERY_CS__EXPRESSION:
+				setExpression((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -213,8 +213,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 			case QVTcoreCSTPackage.QUERY_CS__INPUT_PARAM_DECLARATION:
 				getInputParamDeclaration().clear();
 				return;
-			case QVTcoreCSTPackage.QUERY_CS__OCL_EXPRESSION:
-				setOclExpression((ExpCS)null);
+			case QVTcoreCSTPackage.QUERY_CS__EXPRESSION:
+				setExpression((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -230,8 +230,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		switch (featureID) {
 			case QVTcoreCSTPackage.QUERY_CS__INPUT_PARAM_DECLARATION:
 				return inputParamDeclaration != null && !inputParamDeclaration.isEmpty();
-			case QVTcoreCSTPackage.QUERY_CS__OCL_EXPRESSION:
-				return oclExpression != null;
+			case QVTcoreCSTPackage.QUERY_CS__EXPRESSION:
+				return expression != null;
 		}
 		return super.eIsSet(featureID);
 	}

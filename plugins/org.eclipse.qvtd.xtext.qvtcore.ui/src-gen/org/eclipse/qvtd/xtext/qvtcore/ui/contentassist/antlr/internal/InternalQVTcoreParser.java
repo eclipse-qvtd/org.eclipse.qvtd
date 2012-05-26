@@ -18774,26 +18774,26 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QueryCS__Group_7_1__1__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:6211:1: rule__QueryCS__Group_7_1__1__Impl : ( ( rule__QueryCS__OclExpressionAssignment_7_1_1 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:6211:1: rule__QueryCS__Group_7_1__1__Impl : ( ( rule__QueryCS__ExpressionAssignment_7_1_1 ) ) ;
     public final void rule__QueryCS__Group_7_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:6215:1: ( ( ( rule__QueryCS__OclExpressionAssignment_7_1_1 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:6216:1: ( ( rule__QueryCS__OclExpressionAssignment_7_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:6215:1: ( ( ( rule__QueryCS__ExpressionAssignment_7_1_1 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:6216:1: ( ( rule__QueryCS__ExpressionAssignment_7_1_1 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:6216:1: ( ( rule__QueryCS__OclExpressionAssignment_7_1_1 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:6217:1: ( rule__QueryCS__OclExpressionAssignment_7_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:6216:1: ( ( rule__QueryCS__ExpressionAssignment_7_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:6217:1: ( rule__QueryCS__ExpressionAssignment_7_1_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQueryCSAccess().getOclExpressionAssignment_7_1_1()); 
+               before(grammarAccess.getQueryCSAccess().getExpressionAssignment_7_1_1()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:6218:1: ( rule__QueryCS__OclExpressionAssignment_7_1_1 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:6218:2: rule__QueryCS__OclExpressionAssignment_7_1_1
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:6218:1: ( rule__QueryCS__ExpressionAssignment_7_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:6218:2: rule__QueryCS__ExpressionAssignment_7_1_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__QueryCS__OclExpressionAssignment_7_1_1_in_rule__QueryCS__Group_7_1__1__Impl12969);
-            rule__QueryCS__OclExpressionAssignment_7_1_1();
+            pushFollow(FollowSets000.FOLLOW_rule__QueryCS__ExpressionAssignment_7_1_1_in_rule__QueryCS__Group_7_1__1__Impl12969);
+            rule__QueryCS__ExpressionAssignment_7_1_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -18801,7 +18801,7 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQueryCSAccess().getOclExpressionAssignment_7_1_1()); 
+               after(grammarAccess.getQueryCSAccess().getExpressionAssignment_7_1_1()); 
             }
 
             }
@@ -39103,9 +39103,9 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__QueryCS__OwnedTypeAssignment_6"
 
 
-    // $ANTLR start "rule__QueryCS__OclExpressionAssignment_7_1_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13585:1: rule__QueryCS__OclExpressionAssignment_7_1_1 : ( ruleExpCS ) ;
-    public final void rule__QueryCS__OclExpressionAssignment_7_1_1() throws RecognitionException {
+    // $ANTLR start "rule__QueryCS__ExpressionAssignment_7_1_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13585:1: rule__QueryCS__ExpressionAssignment_7_1_1 : ( ruleExpCS ) ;
+    public final void rule__QueryCS__ExpressionAssignment_7_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -39117,15 +39117,15 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13591:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQueryCSAccess().getOclExpressionExpCSParserRuleCall_7_1_1_0()); 
+               before(grammarAccess.getQueryCSAccess().getExpressionExpCSParserRuleCall_7_1_1_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleExpCS_in_rule__QueryCS__OclExpressionAssignment_7_1_127539);
+            pushFollow(FollowSets001.FOLLOW_ruleExpCS_in_rule__QueryCS__ExpressionAssignment_7_1_127539);
             ruleExpCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQueryCSAccess().getOclExpressionExpCSParserRuleCall_7_1_1_0()); 
+               after(grammarAccess.getQueryCSAccess().getExpressionExpCSParserRuleCall_7_1_1_0()); 
             }
 
             }
@@ -39145,7 +39145,7 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__QueryCS__OclExpressionAssignment_7_1_1"
+    // $ANTLR end "rule__QueryCS__ExpressionAssignment_7_1_1"
 
 
     // $ANTLR start "rule__TransformationCS__NamespaceAssignment_1_0"
@@ -47097,7 +47097,7 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_64_in_rule__QueryCS__Group_7_1__0__Impl12908 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__QueryCS__Group_7_1__1__Impl_in_rule__QueryCS__Group_7_1__112939 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
         public static final BitSet FOLLOW_rule__QueryCS__Group_7_1__2_in_rule__QueryCS__Group_7_1__112942 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__QueryCS__OclExpressionAssignment_7_1_1_in_rule__QueryCS__Group_7_1__1__Impl12969 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__QueryCS__ExpressionAssignment_7_1_1_in_rule__QueryCS__Group_7_1__1__Impl12969 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__QueryCS__Group_7_1__2__Impl_in_rule__QueryCS__Group_7_1__212999 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_65_in_rule__QueryCS__Group_7_1__2__Impl13027 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TransformationCS__Group__0__Impl_in_rule__TransformationCS__Group__013064 = new BitSet(new long[]{0x07FFE0000FFE00C0L});
@@ -47692,7 +47692,7 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_ruleParamDeclarationCS_in_rule__QueryCS__InputParamDeclarationAssignment_3_027446 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleParamDeclarationCS_in_rule__QueryCS__InputParamDeclarationAssignment_3_1_127477 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTypeExpCS_in_rule__QueryCS__OwnedTypeAssignment_627508 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCS_in_rule__QueryCS__OclExpressionAssignment_7_1_127539 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCS_in_rule__QueryCS__ExpressionAssignment_7_1_127539 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__TransformationCS__NamespaceAssignment_1_027574 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnreservedName_in_rule__TransformationCS__NamespaceAssignment_1_2_027613 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnreservedName_in_rule__TransformationCS__NameAssignment_227648 = new BitSet(new long[]{0x0000000000000002L});

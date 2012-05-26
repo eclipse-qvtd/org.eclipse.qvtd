@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
@@ -59,7 +59,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<OclExpression> member;
+	protected EList<OCLExpression> member;
 
 	/**
 	 * The cached value of the '{@link #getReferredCollectionType() <em>Referred Collection Type</em>}' reference.
@@ -105,9 +105,9 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<OclExpression> getMember() {
+	public EList<OCLExpression> getMember() {
 		if (member == null) {
-			member = new EObjectContainmentEList<OclExpression>(OclExpression.class, this, QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__MEMBER);
+			member = new EObjectContainmentEList<OCLExpression>(OCLExpression.class, this, QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__MEMBER);
 		}
 		return member;
 	}
@@ -233,7 +233,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 		switch (featureID) {
 			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__MEMBER:
 				getMember().clear();
-				getMember().addAll((Collection<? extends OclExpression>)newValue);
+				getMember().addAll((Collection<? extends OCLExpression>)newValue);
 				return;
 			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__REFERRED_COLLECTION_TYPE:
 				setReferredCollectionType((CollectionType)newValue);

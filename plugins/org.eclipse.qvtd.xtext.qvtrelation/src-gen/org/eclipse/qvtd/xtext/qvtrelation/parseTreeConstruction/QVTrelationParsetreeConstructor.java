@@ -3255,11 +3255,11 @@ protected class PrimitiveTypeDomainCS_SemicolonKeyword_5 extends KeywordToken  {
  *
  * PropertyTemplateCS:
  * 
- * 	propertyId=[pivot::Property|UnrestrictedName] "=" oclExpression=ExpCSOrTemplateCS;
+ * 	propertyId=[pivot::Property|UnrestrictedName] "=" expression=ExpCSOrTemplateCS;
  *
  **/
 
-// propertyId=[pivot::Property|UnrestrictedName] "=" oclExpression=ExpCSOrTemplateCS
+// propertyId=[pivot::Property|UnrestrictedName] "=" expression=ExpCSOrTemplateCS
 protected class PropertyTemplateCS_Group extends GroupToken {
 	
 	public PropertyTemplateCS_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3274,7 +3274,7 @@ protected class PropertyTemplateCS_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PropertyTemplateCS_OclExpressionAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new PropertyTemplateCS_ExpressionAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3346,16 +3346,16 @@ protected class PropertyTemplateCS_EqualsSignKeyword_1 extends KeywordToken  {
 
 }
 
-// oclExpression=ExpCSOrTemplateCS
-protected class PropertyTemplateCS_OclExpressionAssignment_2 extends AssignmentToken  {
+// expression=ExpCSOrTemplateCS
+protected class PropertyTemplateCS_ExpressionAssignment_2 extends AssignmentToken  {
 	
-	public PropertyTemplateCS_OclExpressionAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public PropertyTemplateCS_ExpressionAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getPropertyTemplateCSAccess().getOclExpressionAssignment_2();
+		return grammarAccess.getPropertyTemplateCSAccess().getExpressionAssignment_2();
 	}
 
     @Override
@@ -3368,13 +3368,13 @@ protected class PropertyTemplateCS_OclExpressionAssignment_2 extends AssignmentT
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("oclExpression",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("oclExpression");
+		if((value = eObjectConsumer.getConsumable("expression",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expression");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExpCSOrTemplateCSRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getPropertyTemplateCSAccess().getOclExpressionExpCSOrTemplateCSParserRuleCall_2_0(); 
+				element = grammarAccess.getPropertyTemplateCSAccess().getExpressionExpCSOrTemplateCSParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3402,13 +3402,13 @@ protected class PropertyTemplateCS_OclExpressionAssignment_2 extends AssignmentT
  * 
  * 	"query" name=UnrestrictedName "(" (inputParamDeclarations+=ParamDeclarationCS (","
  * 
- * 	inputParamDeclarations+=ParamDeclarationCS)*)? ")" ":" ownedType=TypedRefCS (";" | "{" oclExpression=ExpCS "}");
+ * 	inputParamDeclarations+=ParamDeclarationCS)*)? ")" ":" ownedType=TypedRefCS (";" | "{" expression=ExpCS "}");
  *
  **/
 
 // "query" name=UnrestrictedName "(" (inputParamDeclarations+=ParamDeclarationCS (","
 // 
-// inputParamDeclarations+=ParamDeclarationCS)*)? ")" ":" ownedType=TypedRefCS (";" | "{" oclExpression=ExpCS "}")
+// inputParamDeclarations+=ParamDeclarationCS)*)? ")" ":" ownedType=TypedRefCS (";" | "{" expression=ExpCS "}")
 protected class QueryCS_Group extends GroupToken {
 	
 	public QueryCS_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3767,7 +3767,7 @@ protected class QueryCS_OwnedTypeAssignment_6 extends AssignmentToken  {
 	}	
 }
 
-// ";" | "{" oclExpression=ExpCS "}"
+// ";" | "{" expression=ExpCS "}"
 protected class QueryCS_Alternatives_7 extends AlternativesToken {
 
 	public QueryCS_Alternatives_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3812,7 +3812,7 @@ protected class QueryCS_SemicolonKeyword_7_0 extends KeywordToken  {
 
 }
 
-// "{" oclExpression=ExpCS "}"
+// "{" expression=ExpCS "}"
 protected class QueryCS_Group_7_1 extends GroupToken {
 	
 	public QueryCS_Group_7_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3856,16 +3856,16 @@ protected class QueryCS_LeftCurlyBracketKeyword_7_1_0 extends KeywordToken  {
 
 }
 
-// oclExpression=ExpCS
-protected class QueryCS_OclExpressionAssignment_7_1_1 extends AssignmentToken  {
+// expression=ExpCS
+protected class QueryCS_ExpressionAssignment_7_1_1 extends AssignmentToken  {
 	
-	public QueryCS_OclExpressionAssignment_7_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public QueryCS_ExpressionAssignment_7_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getQueryCSAccess().getOclExpressionAssignment_7_1_1();
+		return grammarAccess.getQueryCSAccess().getExpressionAssignment_7_1_1();
 	}
 
     @Override
@@ -3878,13 +3878,13 @@ protected class QueryCS_OclExpressionAssignment_7_1_1 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("oclExpression",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("oclExpression");
+		if((value = eObjectConsumer.getConsumable("expression",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expression");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExpCSRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getQueryCSAccess().getOclExpressionExpCSParserRuleCall_7_1_1_0(); 
+				element = grammarAccess.getQueryCSAccess().getExpressionExpCSParserRuleCall_7_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3917,7 +3917,7 @@ protected class QueryCS_RightCurlyBracketKeyword_7_1_2 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new QueryCS_OclExpressionAssignment_7_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new QueryCS_ExpressionAssignment_7_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -6316,7 +6316,7 @@ protected class NameExpCS_PathNameAssignment extends AssignmentToken  {
 
 /************ begin Rule ExpCSOrTemplateCS ****************
  *
- * //<OclExpressionCS> ::= <PropertyCallExpCS> 
+ * //<OCLExpressionCS> ::= <PropertyCallExpCS> 
  *  //                    | <VariableExpCS>
  * 
  * 
@@ -6325,7 +6325,7 @@ protected class NameExpCS_PathNameAssignment extends AssignmentToken  {
  *  //                    | <IfExpCS>
  * 
  * 
- * //                    | '(' <OclExpressionCS> ')'
+ * //                    | '(' <OCLExpressionCS> ')'
  *  //                    | <template>  
  * 
  * 

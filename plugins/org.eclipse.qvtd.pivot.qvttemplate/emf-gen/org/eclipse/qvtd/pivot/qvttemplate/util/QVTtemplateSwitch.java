@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 
 import org.eclipse.ocl.examples.pivot.util.Nameable;
@@ -94,7 +94,7 @@ public class QVTtemplateSwitch<T> extends Switch<T> {
 				T result = caseCollectionTemplateExp(collectionTemplateExp);
 				if (result == null) result = caseTemplateExp(collectionTemplateExp);
 				if (result == null) result = caseLiteralExp(collectionTemplateExp);
-				if (result == null) result = caseOclExpression(collectionTemplateExp);
+				if (result == null) result = caseOCLExpression(collectionTemplateExp);
 				if (result == null) result = caseTypedElement(collectionTemplateExp);
 				if (result == null) result = caseNamedElement(collectionTemplateExp);
 				if (result == null) result = caseElement(collectionTemplateExp);
@@ -108,7 +108,7 @@ public class QVTtemplateSwitch<T> extends Switch<T> {
 				T result = caseObjectTemplateExp(objectTemplateExp);
 				if (result == null) result = caseTemplateExp(objectTemplateExp);
 				if (result == null) result = caseLiteralExp(objectTemplateExp);
-				if (result == null) result = caseOclExpression(objectTemplateExp);
+				if (result == null) result = caseOCLExpression(objectTemplateExp);
 				if (result == null) result = caseTypedElement(objectTemplateExp);
 				if (result == null) result = caseNamedElement(objectTemplateExp);
 				if (result == null) result = caseElement(objectTemplateExp);
@@ -129,7 +129,7 @@ public class QVTtemplateSwitch<T> extends Switch<T> {
 				TemplateExp templateExp = (TemplateExp)theEObject;
 				T result = caseTemplateExp(templateExp);
 				if (result == null) result = caseLiteralExp(templateExp);
-				if (result == null) result = caseOclExpression(templateExp);
+				if (result == null) result = caseOCLExpression(templateExp);
 				if (result == null) result = caseTypedElement(templateExp);
 				if (result == null) result = caseNamedElement(templateExp);
 				if (result == null) result = caseElement(templateExp);
@@ -278,17 +278,17 @@ public class QVTtemplateSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ocl Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>OCL Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ocl Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>OCL Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOclExpression(OclExpression object) {
+	public T caseOCLExpression(OCLExpression object) {
 		return null;
 	}
 

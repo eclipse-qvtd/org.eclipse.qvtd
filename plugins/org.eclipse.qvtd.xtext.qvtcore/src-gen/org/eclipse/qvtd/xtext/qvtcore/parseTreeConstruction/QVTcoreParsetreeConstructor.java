@@ -3359,13 +3359,13 @@ protected class ParamDeclarationCS_OwnedTypeAssignment_2 extends AssignmentToken
  * 
  * 	"query" name=UnrestrictedName "(" (inputParamDeclaration+=ParamDeclarationCS (","
  * 
- * 	inputParamDeclaration+=ParamDeclarationCS)*)? ")" ":" ownedType=TypeExpCS (";" | "{" oclExpression=ExpCS "}");
+ * 	inputParamDeclaration+=ParamDeclarationCS)*)? ")" ":" ownedType=TypeExpCS (";" | "{" expression=ExpCS "}");
  *
  **/
 
 // "query" name=UnrestrictedName "(" (inputParamDeclaration+=ParamDeclarationCS (","
 // 
-// inputParamDeclaration+=ParamDeclarationCS)*)? ")" ":" ownedType=TypeExpCS (";" | "{" oclExpression=ExpCS "}")
+// inputParamDeclaration+=ParamDeclarationCS)*)? ")" ":" ownedType=TypeExpCS (";" | "{" expression=ExpCS "}")
 protected class QueryCS_Group extends GroupToken {
 	
 	public QueryCS_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3724,7 +3724,7 @@ protected class QueryCS_OwnedTypeAssignment_6 extends AssignmentToken  {
 	}	
 }
 
-// ";" | "{" oclExpression=ExpCS "}"
+// ";" | "{" expression=ExpCS "}"
 protected class QueryCS_Alternatives_7 extends AlternativesToken {
 
 	public QueryCS_Alternatives_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3769,7 +3769,7 @@ protected class QueryCS_SemicolonKeyword_7_0 extends KeywordToken  {
 
 }
 
-// "{" oclExpression=ExpCS "}"
+// "{" expression=ExpCS "}"
 protected class QueryCS_Group_7_1 extends GroupToken {
 	
 	public QueryCS_Group_7_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3813,16 +3813,16 @@ protected class QueryCS_LeftCurlyBracketKeyword_7_1_0 extends KeywordToken  {
 
 }
 
-// oclExpression=ExpCS
-protected class QueryCS_OclExpressionAssignment_7_1_1 extends AssignmentToken  {
+// expression=ExpCS
+protected class QueryCS_ExpressionAssignment_7_1_1 extends AssignmentToken  {
 	
-	public QueryCS_OclExpressionAssignment_7_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public QueryCS_ExpressionAssignment_7_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getQueryCSAccess().getOclExpressionAssignment_7_1_1();
+		return grammarAccess.getQueryCSAccess().getExpressionAssignment_7_1_1();
 	}
 
     @Override
@@ -3835,13 +3835,13 @@ protected class QueryCS_OclExpressionAssignment_7_1_1 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("oclExpression",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("oclExpression");
+		if((value = eObjectConsumer.getConsumable("expression",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expression");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExpCSRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getQueryCSAccess().getOclExpressionExpCSParserRuleCall_7_1_1_0(); 
+				element = grammarAccess.getQueryCSAccess().getExpressionExpCSParserRuleCall_7_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3874,7 +3874,7 @@ protected class QueryCS_RightCurlyBracketKeyword_7_1_2 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new QueryCS_OclExpressionAssignment_7_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new QueryCS_ExpressionAssignment_7_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3894,7 +3894,7 @@ protected class QueryCS_RightCurlyBracketKeyword_7_1_2 extends KeywordToken  {
  * 
  * 
  * //      	  ':' <TypeCS>
- *  //            (';' | '{' <OclExpressionCS> '}')
+ *  //            (';' | '{' <OCLExpressionCS> '}')
  *  TransformationCS:
  * 
  * 	"transformation" (namespace+=[pivot::Namespace|UnrestrictedName] "::" (namespace+=[pivot::Namespace|UnreservedName]

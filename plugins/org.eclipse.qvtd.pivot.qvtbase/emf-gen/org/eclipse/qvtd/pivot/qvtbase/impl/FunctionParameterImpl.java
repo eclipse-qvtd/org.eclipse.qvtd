@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -56,7 +56,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression initExpression;
+	protected OCLExpression initExpression;
 
 	/**
 	 * The cached value of the '{@link #getRepresentedParameter() <em>Represented Parameter</em>}' reference.
@@ -112,7 +112,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getInitExpression() {
+	public OCLExpression getInitExpression() {
 		return initExpression;
 	}
 
@@ -121,8 +121,8 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetInitExpression(OclExpression newInitExpression, NotificationChain msgs) {
-		OclExpression oldInitExpression = initExpression;
+	public NotificationChain basicSetInitExpression(OCLExpression newInitExpression, NotificationChain msgs) {
+		OCLExpression oldInitExpression = initExpression;
 		initExpression = newInitExpression;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION, oldInitExpression, newInitExpression);
@@ -136,7 +136,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInitExpression(OclExpression newInitExpression) {
+	public void setInitExpression(OCLExpression newInitExpression) {
 		if (newInitExpression != initExpression) {
 			NotificationChain msgs = null;
 			if (initExpression != null)
@@ -251,7 +251,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION:
-				setInitExpression((OclExpression)newValue);
+				setInitExpression((OCLExpression)newValue);
 				return;
 			case QVTbasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER:
 				setRepresentedParameter((Parameter)newValue);
@@ -272,7 +272,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION:
-				setInitExpression((OclExpression)null);
+				setInitExpression((OCLExpression)null);
 				return;
 			case QVTbasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER:
 				setRepresentedParameter((Parameter)null);
@@ -348,7 +348,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 		return super.toString();
 	}
 
-	public OclExpression createInitExpression(EClass eClass) {
+	public OCLExpression createInitExpression(EClass eClass) {
 		// TODO Auto-generated method stub
 		return null;
 	}

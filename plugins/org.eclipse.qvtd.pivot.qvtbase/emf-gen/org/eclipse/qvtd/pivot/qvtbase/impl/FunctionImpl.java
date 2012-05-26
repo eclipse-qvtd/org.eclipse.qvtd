@@ -21,7 +21,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -50,7 +50,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression queryExpression;
+	protected OCLExpression queryExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -76,7 +76,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getQueryExpression() {
+	public OCLExpression getQueryExpression() {
 		return queryExpression;
 	}
 
@@ -85,8 +85,8 @@ public class FunctionImpl extends OperationImpl implements Function {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetQueryExpression(OclExpression newQueryExpression, NotificationChain msgs) {
-		OclExpression oldQueryExpression = queryExpression;
+	public NotificationChain basicSetQueryExpression(OCLExpression newQueryExpression, NotificationChain msgs) {
+		OCLExpression oldQueryExpression = queryExpression;
 		queryExpression = newQueryExpression;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTbasePackage.FUNCTION__QUERY_EXPRESSION, oldQueryExpression, newQueryExpression);
@@ -100,7 +100,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setQueryExpression(OclExpression newQueryExpression) {
+	public void setQueryExpression(OCLExpression newQueryExpression) {
 		if (newQueryExpression != queryExpression) {
 			NotificationChain msgs = null;
 			if (queryExpression != null)
@@ -151,7 +151,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTbasePackage.FUNCTION__QUERY_EXPRESSION:
-				setQueryExpression((OclExpression)newValue);
+				setQueryExpression((OCLExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -166,7 +166,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTbasePackage.FUNCTION__QUERY_EXPRESSION:
-				setQueryExpression((OclExpression)null);
+				setQueryExpression((OCLExpression)null);
 				return;
 		}
 		super.eUnset(featureID);

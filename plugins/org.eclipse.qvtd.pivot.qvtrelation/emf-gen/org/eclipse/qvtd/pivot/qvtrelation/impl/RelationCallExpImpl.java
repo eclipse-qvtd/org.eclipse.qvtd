@@ -31,9 +31,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 
-import org.eclipse.ocl.examples.pivot.internal.impl.OclExpressionImpl;
+import org.eclipse.ocl.examples.pivot.internal.impl.OCLExpressionImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
@@ -55,7 +55,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  *
  * @generated
  */
-public class RelationCallExpImpl extends OclExpressionImpl implements RelationCallExp {
+public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCallExp {
 	/**
 	 * The cached value of the '{@link #getArgument() <em>Argument</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -64,7 +64,7 @@ public class RelationCallExpImpl extends OclExpressionImpl implements RelationCa
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<OclExpression> argument;
+	protected EList<OCLExpression> argument;
 
 	/**
 	 * The cached value of the '{@link #getReferredRelation() <em>Referred Relation</em>}' reference.
@@ -100,9 +100,9 @@ public class RelationCallExpImpl extends OclExpressionImpl implements RelationCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<OclExpression> getArgument() {
+	public EList<OCLExpression> getArgument() {
 		if (argument == null) {
-			argument = new EObjectContainmentEList<OclExpression>(OclExpression.class, this, QVTrelationPackage.RELATION_CALL_EXP__ARGUMENT);
+			argument = new EObjectContainmentEList<OCLExpression>(OCLExpression.class, this, QVTrelationPackage.RELATION_CALL_EXP__ARGUMENT);
 		}
 		return argument;
 	}
@@ -187,7 +187,7 @@ public class RelationCallExpImpl extends OclExpressionImpl implements RelationCa
 		switch (featureID) {
 			case QVTrelationPackage.RELATION_CALL_EXP__ARGUMENT:
 				getArgument().clear();
-				getArgument().addAll((Collection<? extends OclExpression>)newValue);
+				getArgument().addAll((Collection<? extends OCLExpression>)newValue);
 				return;
 			case QVTrelationPackage.RELATION_CALL_EXP__REFERRED_RELATION:
 				setReferredRelation((Relation)newValue);

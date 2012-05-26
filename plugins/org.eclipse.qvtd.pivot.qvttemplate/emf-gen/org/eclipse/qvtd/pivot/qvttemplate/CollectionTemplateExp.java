@@ -19,7 +19,7 @@ package org.eclipse.qvtd.pivot.qvttemplate;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
 
 /**
@@ -43,7 +43,7 @@ import org.eclipse.ocl.examples.pivot.Variable;
 public interface CollectionTemplateExp extends TemplateExp {
 	/**
 	 * Returns the value of the '<em><b>Member</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Member</em>' containment reference list isn't clear,
@@ -56,7 +56,7 @@ public interface CollectionTemplateExp extends TemplateExp {
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='listContainer'"
 	 * @generated
 	 */
-	EList<OclExpression> getMember();
+	EList<OCLExpression> getMember();
 
 	/**
 	 * Returns the value of the '<em><b>Referred Collection Type</b></em>' reference.

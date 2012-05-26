@@ -19,7 +19,7 @@ package org.eclipse.qvtd.pivot.qvttemplate;
 import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.ocl.examples.pivot.LiteralExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
 
 /**
@@ -75,13 +75,13 @@ public interface TemplateExp extends EObject, LiteralExp {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Where</em>' containment reference.
-	 * @see #setWhere(OclExpression)
+	 * @see #setWhere(OCLExpression)
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getTemplateExp_Where()
 	 * @model containment="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='owner'"
 	 * @generated
 	 */
-	OclExpression getWhere();
+	OCLExpression getWhere();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvttemplate.TemplateExp#getWhere <em>Where</em>}' containment reference.
@@ -91,6 +91,6 @@ public interface TemplateExp extends EObject, LiteralExp {
 	 * @see #getWhere()
 	 * @generated
 	 */
-	void setWhere(OclExpression value);
+	void setWhere(OCLExpression value);
 
 } // TemplateExp

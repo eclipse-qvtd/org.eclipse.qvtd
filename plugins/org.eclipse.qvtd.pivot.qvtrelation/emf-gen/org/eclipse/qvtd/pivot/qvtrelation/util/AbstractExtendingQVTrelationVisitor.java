@@ -62,7 +62,7 @@ public abstract class AbstractExtendingQVTrelationVisitor<R, C>
 	}
 
 	public R visitRelationCallExp(org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp object) {
-		return visitOclExpression(object);
+		return visitOCLExpression(object);
 	}
 
 	public R visitRelationDomain(org.eclipse.qvtd.pivot.qvtrelation.RelationDomain object) {

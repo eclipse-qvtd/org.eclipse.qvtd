@@ -1482,13 +1482,13 @@ public interface QVTrelationCSTPackage extends EPackage {
 	int PROPERTY_TEMPLATE_CS__PROPERTY_ID = BaseCSTPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Ocl Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_CS__OCL_EXPRESSION = BaseCSTPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
+	int PROPERTY_TEMPLATE_CS__EXPRESSION = BaseCSTPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Opposite</b></em>' attribute.
@@ -1609,13 +1609,13 @@ public interface QVTrelationCSTPackage extends EPackage {
 	int QUERY_CS__INPUT_PARAM_DECLARATIONS = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Ocl Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__OCL_EXPRESSION = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int QUERY_CS__EXPRESSION = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Query CS</em>' class.
@@ -2652,15 +2652,15 @@ public interface QVTrelationCSTPackage extends EPackage {
 	EReference getPropertyTemplateCS_PropertyId();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS#getOclExpression <em>Ocl Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Ocl Expression</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS#getOclExpression()
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS#getExpression()
 	 * @see #getPropertyTemplateCS()
 	 * @generated
 	 */
-	EReference getPropertyTemplateCS_OclExpression();
+	EReference getPropertyTemplateCS_Expression();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS#isOpposite <em>Opposite</em>}'.
@@ -2695,15 +2695,15 @@ public interface QVTrelationCSTPackage extends EPackage {
 	EReference getQueryCS_InputParamDeclarations();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getOclExpression <em>Ocl Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Ocl Expression</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getOclExpression()
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS#getExpression()
 	 * @see #getQueryCS()
 	 * @generated
 	 */
-	EReference getQueryCS_OclExpression();
+	EReference getQueryCS_Expression();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS <em>Relation CS</em>}'.
@@ -3314,12 +3314,12 @@ public interface QVTrelationCSTPackage extends EPackage {
 		EReference PROPERTY_TEMPLATE_CS__PROPERTY_ID = eINSTANCE.getPropertyTemplateCS_PropertyId();
 
 		/**
-		 * The meta object literal for the '<em><b>Ocl Expression</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_TEMPLATE_CS__OCL_EXPRESSION = eINSTANCE.getPropertyTemplateCS_OclExpression();
+		EReference PROPERTY_TEMPLATE_CS__EXPRESSION = eINSTANCE.getPropertyTemplateCS_Expression();
 
 		/**
 		 * The meta object literal for the '<em><b>Opposite</b></em>' attribute feature.
@@ -3348,12 +3348,12 @@ public interface QVTrelationCSTPackage extends EPackage {
 		EReference QUERY_CS__INPUT_PARAM_DECLARATIONS = eINSTANCE.getQueryCS_InputParamDeclarations();
 
 		/**
-		 * The meta object literal for the '<em><b>Ocl Expression</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference QUERY_CS__OCL_EXPRESSION = eINSTANCE.getQueryCS_OclExpression();
+		EReference QUERY_CS__EXPRESSION = eINSTANCE.getQueryCS_Expression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcst.impl.RelationCSImpl <em>Relation CS</em>}' class.

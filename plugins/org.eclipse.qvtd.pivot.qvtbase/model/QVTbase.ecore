@@ -15,7 +15,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" eType="#//TypedModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Operation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="queryExpression" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OclExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="queryExpression" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OCLExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionParameter" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Parameter ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable"/>
@@ -27,7 +27,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Predicate" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditionExpression" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OclExpression"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OCLExpression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" lowerBound="1"
         eType="#//Pattern" transient="true" eOpposite="#//Pattern/predicate"/>

@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
@@ -127,7 +127,7 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 				if (result == null) result = caseNavigationCallExp(oppositePropertyCallExp);
 				if (result == null) result = caseFeatureCallExp(oppositePropertyCallExp);
 				if (result == null) result = caseCallExp(oppositePropertyCallExp);
-				if (result == null) result = caseOclExpression(oppositePropertyCallExp);
+				if (result == null) result = caseOCLExpression(oppositePropertyCallExp);
 				if (result == null) result = caseTypedElement(oppositePropertyCallExp);
 				if (result == null) result = caseNamedElement(oppositePropertyCallExp);
 				if (result == null) result = caseElement(oppositePropertyCallExp);
@@ -150,7 +150,7 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 			case QVTrelationPackage.RELATION_CALL_EXP: {
 				RelationCallExp relationCallExp = (RelationCallExp)theEObject;
 				T result = caseRelationCallExp(relationCallExp);
-				if (result == null) result = caseOclExpression(relationCallExp);
+				if (result == null) result = caseOCLExpression(relationCallExp);
 				if (result == null) result = caseTypedElement(relationCallExp);
 				if (result == null) result = caseNamedElement(relationCallExp);
 				if (result == null) result = caseElement(relationCallExp);
@@ -462,17 +462,17 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ocl Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>OCL Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ocl Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>OCL Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOclExpression(OclExpression object) {
+	public T caseOCLExpression(OCLExpression object) {
 		return null;
 	}
 

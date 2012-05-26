@@ -16,7 +16,7 @@
  */
 package org.eclipse.qvtd.pivot.qvtcore;
 
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Property;
 
 /**
@@ -46,13 +46,13 @@ public interface PropertyAssignment extends Assignment {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Slot Expression</em>' containment reference.
-	 * @see #setSlotExpression(OclExpression)
+	 * @see #setSlotExpression(OCLExpression)
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getPropertyAssignment_SlotExpression()
 	 * @model containment="true" required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='slotAssignment'"
 	 * @generated
 	 */
-	OclExpression getSlotExpression();
+	OCLExpression getSlotExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#getSlotExpression <em>Slot Expression</em>}' containment reference.
@@ -62,7 +62,7 @@ public interface PropertyAssignment extends Assignment {
 	 * @see #getSlotExpression()
 	 * @generated
 	 */
-	void setSlotExpression(OclExpression value);
+	void setSlotExpression(OCLExpression value);
 
 	/**
 	 * Returns the value of the '<em><b>Target Property</b></em>' reference.

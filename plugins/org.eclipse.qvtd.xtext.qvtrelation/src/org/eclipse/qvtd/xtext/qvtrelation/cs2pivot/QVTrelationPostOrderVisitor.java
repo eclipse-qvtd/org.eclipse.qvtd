@@ -16,7 +16,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelation.cs2pivot;
 
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -50,7 +50,7 @@ public class QVTrelationPostOrderVisitor extends AbstractQVTrelationPostOrderVis
 		@Override
 		public BasicContinuation<?> execute() {
 			Predicate pivotElement = PivotUtil.getPivot(Predicate.class, csElement);
-			OclExpression conditionExpression = context.visitLeft2Right(OclExpression.class, csElement.getExpr());		
+			OCLExpression conditionExpression = context.visitLeft2Right(OCLExpression.class, csElement.getExpr());		
 			pivotElement.setConditionExpression(conditionExpression);
 			return null;
 		}
@@ -65,7 +65,7 @@ public class QVTrelationPostOrderVisitor extends AbstractQVTrelationPostOrderVis
 		@Override
 		public BasicContinuation<?> execute() {
 			PropertyTemplateItem pivotElement = PivotUtil.getPivot(PropertyTemplateItem.class, csElement);
-			OclExpression oclExpression = context.visitLeft2Right(OclExpression.class, csElement.getOclExpression());		
+			OCLExpression oclExpression = context.visitLeft2Right(OCLExpression.class, csElement.getExpression());		
 			pivotElement.setValue(oclExpression);
 			return null;
 		}
@@ -80,7 +80,7 @@ public class QVTrelationPostOrderVisitor extends AbstractQVTrelationPostOrderVis
 		@Override
 		public BasicContinuation<?> execute() {
 			Function pivotElement = PivotUtil.getPivot(Function.class, csElement);
-			OclExpression oclExpression = context.visitLeft2Right(OclExpression.class, csElement.getOclExpression());		
+			OCLExpression oclExpression = context.visitLeft2Right(OCLExpression.class, csElement.getExpression());		
 			pivotElement.setQueryExpression(oclExpression);
 			return null;
 		}
@@ -95,7 +95,7 @@ public class QVTrelationPostOrderVisitor extends AbstractQVTrelationPostOrderVis
 		@Override
 		public BasicContinuation<?> execute() {
 			RelationDomainAssignment pDomain = PivotUtil.getPivot(RelationDomainAssignment.class, csElement);
-			OclExpression oclExpression = context.visitLeft2Right(OclExpression.class, csElement.getInitialiser());		
+			OCLExpression oclExpression = context.visitLeft2Right(OCLExpression.class, csElement.getInitialiser());		
 			pDomain.setValueExp(oclExpression);
 			return null;
 		}
@@ -110,7 +110,7 @@ public class QVTrelationPostOrderVisitor extends AbstractQVTrelationPostOrderVis
 		@Override
 		public BasicContinuation<?> execute() {
 			TemplateExp pivotElement = PivotUtil.getPivot(TemplateExp.class, csElement);
-			OclExpression oclExpression = context.visitLeft2Right(OclExpression.class, csElement.getGuardExpression());		
+			OCLExpression oclExpression = context.visitLeft2Right(OCLExpression.class, csElement.getGuardExpression());		
 			pivotElement.setWhere(oclExpression);
 			return null;
 		}

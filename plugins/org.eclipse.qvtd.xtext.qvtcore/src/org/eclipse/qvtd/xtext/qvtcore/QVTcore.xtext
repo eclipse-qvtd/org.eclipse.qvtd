@@ -74,11 +74,11 @@ ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
 		
 QueryCS: 'query' name=UnrestrictedName
 	'(' (inputParamDeclaration+=ParamDeclarationCS (',' inputParamDeclaration+=ParamDeclarationCS)*)? ')'
-		':' ownedType=TypeExpCS (';' | '{' oclExpression=ExpCS '}');
+		':' ownedType=TypeExpCS (';' | '{' expression=ExpCS '}');
 //<query> ::= 'query' <PathNameCS> 
 //            '(' [<paramDeclaration> (',' <paramDeclaration>)*] ')'
 //      	  ':' <TypeCS>
-//            (';' | '{' <OclExpressionCS> '}')
+//            (';' | '{' <OCLExpressionCS> '}')
 
 TransformationCS:
 	'transformation' (namespace+=[pivot::Namespace|UnrestrictedName] '::' (namespace+=[pivot::Namespace|UnreservedName] '::')*)?

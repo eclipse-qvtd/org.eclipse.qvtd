@@ -1199,16 +1199,16 @@ rulePropertyTemplateCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPropertyTemplateCSAccess().getOclExpressionExpCSOrTemplateCSParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getPropertyTemplateCSAccess().getExpressionExpCSOrTemplateCSParserRuleCall_2_0()); 
 	    }
-		lv_oclExpression_2_0=ruleExpCSOrTemplateCS		{
+		lv_expression_2_0=ruleExpCSOrTemplateCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPropertyTemplateCSRule());
 	        }
        		set(
        			$current, 
-       			"oclExpression",
-        		lv_oclExpression_2_0, 
+       			"expression",
+        		lv_expression_2_0, 
         		"ExpCSOrTemplateCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1339,16 +1339,16 @@ ruleQueryCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getQueryCSAccess().getOclExpressionExpCSParserRuleCall_7_1_1_0()); 
+	        newCompositeNode(grammarAccess.getQueryCSAccess().getExpressionExpCSParserRuleCall_7_1_1_0()); 
 	    }
-		lv_oclExpression_11_0=ruleExpCS		{
+		lv_expression_11_0=ruleExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getQueryCSRule());
 	        }
        		set(
        			$current, 
-       			"oclExpression",
-        		lv_oclExpression_11_0, 
+       			"expression",
+        		lv_expression_11_0, 
         		"ExpCS");
 	        afterParserOrEnumRuleCall();
 	    }

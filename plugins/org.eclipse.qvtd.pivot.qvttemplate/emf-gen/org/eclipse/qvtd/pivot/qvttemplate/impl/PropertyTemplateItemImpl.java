@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -67,7 +67,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression value;
+	protected OCLExpression value;
 
 	/**
 	 * The default value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
@@ -192,7 +192,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getValue() {
+	public OCLExpression getValue() {
 		return value;
 	}
 
@@ -201,8 +201,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(OclExpression newValue, NotificationChain msgs) {
-		OclExpression oldValue = value;
+	public NotificationChain basicSetValue(OCLExpression newValue, NotificationChain msgs) {
+		OCLExpression oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM__VALUE, oldValue, newValue);
@@ -216,7 +216,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(OclExpression newValue) {
+	public void setValue(OCLExpression newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
@@ -333,7 +333,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 				setReferredProperty((Property)newValue);
 				return;
 			case QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM__VALUE:
-				setValue((OclExpression)newValue);
+				setValue((OCLExpression)newValue);
 				return;
 			case QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE:
 				setIsOpposite((Boolean)newValue);
@@ -357,7 +357,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 				setReferredProperty((Property)null);
 				return;
 			case QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM__VALUE:
-				setValue((OclExpression)null);
+				setValue((OCLExpression)null);
 				return;
 			case QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE:
 				setIsOpposite(IS_OPPOSITE_EDEFAULT);

@@ -18,7 +18,7 @@ package org.eclipse.qvtd.xtext.qvtrelation.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.CallExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -37,7 +37,7 @@ public class RelationCallExpCSAttribution extends InvocationExpCSAttribution
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
 		InvocationExpCS targetElement = (InvocationExpCS)target;
-		OclExpression pivot = PivotUtil.getPivot(OclExpression.class, targetElement);
+		OCLExpression pivot = PivotUtil.getPivot(OCLExpression.class, targetElement);
 		if ((pivot instanceof CallExp) || (pivot == null)) {
 			return super.computeLookup(target, environmentView, scopeView);
 		}

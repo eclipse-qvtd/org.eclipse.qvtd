@@ -18,7 +18,7 @@ import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
@@ -48,7 +48,7 @@ public class QVTrelationLeft2RightVisitor extends AbstractQVTrelationLeft2RightV
 	}
 
 	@Override
-	protected CallExp resolveNavigationFeature(NamedExpCS csElement, OclExpression source, Feature feature, CallExp callExp) {
+	protected CallExp resolveNavigationFeature(NamedExpCS csElement, OCLExpression source, Feature feature, CallExp callExp) {
 		if (source == null) {
 			return callExp;
 		}
@@ -56,12 +56,12 @@ public class QVTrelationLeft2RightVisitor extends AbstractQVTrelationLeft2RightV
 	}
 
 	@Override
-	protected OclExpression resolveUnknownOperation(NamedExpCS csNamedExp) {
+	protected OCLExpression resolveUnknownOperation(NamedExpCS csNamedExp) {
 		NamedElement namedElement = csNamedExp.getNamedElement();
 		if (namedElement instanceof Relation) {
 			Relation relation = (Relation)namedElement;
 //			Operation baseOperation = metaModelManager.resolveBaseOperation(operation);
-//			OclExpression source = resolveNavigationSource(csNavigatingExp, operation);
+//			OCLExpression source = resolveNavigationSource(csNavigatingExp, operation);
 //			CallExp outerExpression;
 //			CallExp innerExpression;
 			RelationCallExp relationCallExp = context.refreshModelElement(RelationCallExp.class, QVTrelationPackage.Literals.RELATION_CALL_EXP, csNamedExp);

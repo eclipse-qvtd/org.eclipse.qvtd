@@ -66,12 +66,12 @@ PredicateCS: expr=ExpCS ';';
 
 PrimitiveTypeDomainCS: 'primitive' 'domain' name=UnrestrictedName ':' type=TypedRefCS ';';
 
-PropertyTemplateCS: propertyId=[pivot::Property|UnrestrictedName] '=' oclExpression=ExpCSOrTemplateCS;
+PropertyTemplateCS: propertyId=[pivot::Property|UnrestrictedName] '=' expression=ExpCSOrTemplateCS;
 		
 QueryCS: 'query' name=UnrestrictedName 
             '(' (inputParamDeclarations+=ParamDeclarationCS (',' inputParamDeclarations+=ParamDeclarationCS)*)? ')'
       	  ':' ownedType=TypedRefCS
-            (';' | '{' oclExpression=ExpCS '}');
+            (';' | '{' expression=ExpCS '}');
 
 RelationCS: top?='top'? 'relation' name=UnrestrictedName
    			 ('overrides' overrides=[qvtrelation::Relation|UnrestrictedName])?
@@ -103,12 +103,12 @@ WhereCS returns PatternCS: {PatternCS} 'where' '{' predicates+=PredicateCS* '}';
 
 NameExpCS returns essentialocl::NameExpCS: pathName=PathNameCS;
 		
-//<OclExpressionCS> ::= <PropertyCallExpCS> 
+//<OCLExpressionCS> ::= <PropertyCallExpCS> 
 //                    | <VariableExpCS>
 //                    | <LiteralExpCS>
 //                    | <LetExpCS>
 //                    | <IfExpCS>
-//                    | '(' <OclExpressionCS> ')'
+//                    | '(' <OCLExpressionCS> ')'
 //                    | <template>  
 //	notNameExpressionCS -> templateCS
 

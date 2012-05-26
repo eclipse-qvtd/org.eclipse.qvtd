@@ -19,7 +19,7 @@ package org.eclipse.qvtd.pivot.qvtrelation;
 import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
 
 /**
@@ -49,13 +49,13 @@ public interface RelationDomainAssignment extends EObject, Element {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value Exp</em>' containment reference.
-	 * @see #setValueExp(OclExpression)
+	 * @see #setValueExp(OCLExpression)
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationDomainAssignment_ValueExp()
 	 * @model containment="true" required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='domainAssignment'"
 	 * @generated
 	 */
-	OclExpression getValueExp();
+	OCLExpression getValueExp();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment#getValueExp <em>Value Exp</em>}' containment reference.
@@ -65,7 +65,7 @@ public interface RelationDomainAssignment extends EObject, Element {
 	 * @see #getValueExp()
 	 * @generated
 	 */
-	void setValueExp(OclExpression value);
+	void setValueExp(OCLExpression value);
 
 	/**
 	 * Returns the value of the '<em><b>Variable</b></em>' reference.
