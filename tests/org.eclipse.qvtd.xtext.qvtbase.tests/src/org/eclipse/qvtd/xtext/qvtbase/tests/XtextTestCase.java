@@ -57,7 +57,7 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -267,10 +267,10 @@ public class XtextTestCase extends PivotTestCase
 		if (!isValidPivot(pivotElement)) {
 			return false;
 		}
-		if (pivotElement instanceof ExpressionInOcl) {
+		if (pivotElement instanceof ExpressionInOCL) {
 			return false;
 		}
-		if ((pivotElement instanceof Variable) && (pivotElement.eContainer() instanceof ExpressionInOcl)) {
+		if ((pivotElement instanceof Variable) && (pivotElement.eContainer() instanceof ExpressionInOCL)) {
 			return false;
 		}
 		if ((pivotElement instanceof Variable) && (pivotElement.eContainer() instanceof LoopExp)
