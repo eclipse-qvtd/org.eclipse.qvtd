@@ -3,41 +3,28 @@
       id="org.eclipse.qvtd.examples"
       label="%featureName"
       version="0.9.0.qualifier"
-      provider-name="%providerName">
+      provider-name="%providerName"
+      license-feature="org.eclipse.qvtd.license"
+      license-feature-version="0.9.0.qualifier">
 
-   <description>
+   <description url="http://www.eclipse.org/qvtd">
       %description
    </description>
 
-   <copyright url="http://www.eclipse.org/legal/epl-v10.html">
-      Copyright (c) 2007-2009 Eclipse Modeling Project and others.
-All rights reserved.   This program and the accompanying materials
-are made available under the terms of the Eclipse Public License
-v1.0
-which accompanies this distribution, and is available at
-http://www.eclipse.org/legal/epl-v10.html
+   <copyright>
+      [Documentation] Copyright text will be taken from the shared license feature
    </copyright>
 
    <license url="%licenseURL">
       %license
    </license>
 
-   <url>
-      <discovery label="%EMFUpdateSiteName" url="http://download.eclipse.org/modeling/emf/updates/"/>
-      <discovery label="%EMFTUpdateSiteName" url="http://download.eclipse.org/modeling/emft/updates/"/>
-      <discovery label="%MDTUpdateSiteName" url="http://download.eclipse.org/modeling/mdt/updates/"/>
-      <discovery label="%M2MUpdateSiteName" url="http://download.eclipse.org/modeling/m2m/updates/"/>
-   </url>
-
-   <requires>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.ui.ide"/>
-   </requires>
+   <includes
+         id="org.eclipse.qvtd.examples.source"
+         version="0.0.0"/>
 
    <plugin
-         id="org.eclipse.qvt.declarative.examples"
+         id="org.eclipse.qvtd.examples"
          download-size="0"
          install-size="0"
          version="0.0.0"
