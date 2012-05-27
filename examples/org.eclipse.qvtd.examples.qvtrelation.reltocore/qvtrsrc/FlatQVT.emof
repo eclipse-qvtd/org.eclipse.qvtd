@@ -1,0 +1,1936 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emof:Package xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="FlatQVT"
+    name="FlatQVT" uri="http://schema.omg.org/spec/QVT/1.0/flatqvt.xml">
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.AltExp" name="AltExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.AltExp.body" name="body" isOrdered="true" type="FlatQVT.OclExpression"
+        isComposite="true">
+      <ownedComment body="altBodyOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.AltExp.condition" name="condition" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="altCondOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.AnyType" name="AnyType" superClass="FlatQVT.Type"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Area" name="Area" isAbstract="true">
+    <ownedAttribute xmi:id="FlatQVT.Area.bottomPattern" name="bottomPattern" isOrdered="true"
+        type="FlatQVT.BottomPattern" isComposite="true" opposite="FlatQVT.BottomPattern.area">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Area.guardPattern" name="guardPattern" isOrdered="true"
+        type="FlatQVT.GuardPattern" isComposite="true" opposite="FlatQVT.GuardPattern.area">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.AssertExp" name="AssertExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.AssertExp.assertion" name="assertion" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="assertOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.AssertExp.log" name="log" isOrdered="true" lower="0"
+        type="FlatQVT.LogExp" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.AssertExp.severity" name="severity" isOrdered="true"
+        lower="0" type="FlatQVT.SeverityKind" default="error"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.AssignExp" name="AssignExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.AssignExp.defaultValue" name="defaultValue" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="defaultOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.AssignExp.isReset" name="isReset" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean"/>
+    <ownedAttribute xmi:id="FlatQVT.AssignExp.left" name="left" isOrdered="true" type="FlatQVT.OclExpression"
+        isComposite="true">
+      <ownedComment body="leftOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.AssignExp.value" name="value" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="valueOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Assignment" name="Assignment" isAbstract="true"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.Assignment.bottomPattern" name="bottomPattern"
+        isOrdered="true" type="FlatQVT.BottomPattern" opposite="FlatQVT.BottomPattern.assignment">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Assignment.isDefault" name="isDefault" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean"/>
+    <ownedAttribute xmi:id="FlatQVT.Assignment.value" name="value" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="valueAssignment">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.BagType" name="BagType" superClass="FlatQVT.CollectionType"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.BlockExp" name="BlockExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.BlockExp.body" name="body" isOrdered="true" lower="0"
+        upper="*" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="blockOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="FlatQVT.Boolean" name="Boolean">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Boolean</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.BooleanLiteralExp" name="BooleanLiteralExp"
+      superClass="FlatQVT.PrimitiveLiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.BooleanLiteralExp.booleanSymbol" name="booleanSymbol"
+        isOrdered="true" lower="0" type="FlatQVT.Boolean"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.BottomPattern" name="BottomPattern"
+      superClass="FlatQVT.CorePattern">
+    <ownedAttribute xmi:id="FlatQVT.BottomPattern.area" name="area" isOrdered="true"
+        type="FlatQVT.Area" opposite="FlatQVT.Area.bottomPattern">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.BottomPattern.assignment" name="assignment" lower="0"
+        upper="*" type="FlatQVT.Assignment" isComposite="true" opposite="FlatQVT.Assignment.bottomPattern">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.BottomPattern.enforcementOperation" name="enforcementOperation"
+        lower="0" upper="*" type="FlatQVT.EnforcementOperation" isComposite="true"
+        opposite="FlatQVT.EnforcementOperation.bottomPattern">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.BottomPattern.realizedVariable" name="realizedVariable"
+        lower="0" upper="*" type="FlatQVT.RealizedVariable" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.BreakExp" name="BreakExp" superClass="FlatQVT.ImperativeExpression"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CallExp" name="CallExp" isAbstract="true"
+      superClass="FlatQVT.OclExpression">
+    <ownedAttribute xmi:id="FlatQVT.CallExp.source" name="source" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="appliedElement">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CatchExp" name="CatchExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.CatchExp.body" name="body" isOrdered="true" lower="0"
+        upper="*" type="FlatQVT.OclExpression" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.CatchExp.exception" name="exception" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.Type">
+      <ownedComment body="tryExpression">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Class" name="Class" superClass="FlatQVT.Type">
+    <ownedAttribute xmi:id="FlatQVT.Class.isAbstract" name="isAbstract" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean" default="false"/>
+    <ownedAttribute xmi:id="FlatQVT.Class.ownedAttribute" name="ownedAttribute" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.Property" isComposite="true" opposite="FlatQVT.Property.class">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Class.ownedOperation" name="ownedOperation" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.Operation" isComposite="true" opposite="FlatQVT.Operation.class">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Class.superClass" name="superClass" lower="0"
+        upper="*" type="FlatQVT.Class"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CollectionItem" name="CollectionItem"
+      superClass="FlatQVT.CollectionLiteralPart">
+    <ownedAttribute xmi:id="FlatQVT.CollectionItem.item" name="item" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Enumeration" xmi:id="FlatQVT.CollectionKind" name="CollectionKind">
+    <ownedLiteral xmi:id="FlatQVT.CollectionKind.Set" name="Set"/>
+    <ownedLiteral xmi:id="FlatQVT.CollectionKind.OrderedSet" name="OrderedSet">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <value>1</value>
+      </xmi:Extension>
+    </ownedLiteral>
+    <ownedLiteral xmi:id="FlatQVT.CollectionKind.Bag" name="Bag">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <value>2</value>
+      </xmi:Extension>
+    </ownedLiteral>
+    <ownedLiteral xmi:id="FlatQVT.CollectionKind.Sequence" name="Sequence">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <value>3</value>
+      </xmi:Extension>
+    </ownedLiteral>
+    <ownedLiteral xmi:id="FlatQVT.CollectionKind.Collection" name="Collection">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <value>4</value>
+      </xmi:Extension>
+    </ownedLiteral>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CollectionLiteralExp" name="CollectionLiteralExp"
+      superClass="FlatQVT.LiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.CollectionLiteralExp.kind" name="kind" isOrdered="true"
+        lower="0" type="FlatQVT.CollectionKind"/>
+    <ownedAttribute xmi:id="FlatQVT.CollectionLiteralExp.part" name="part" lower="0"
+        upper="*" type="FlatQVT.CollectionLiteralPart" isComposite="true" opposite="FlatQVT.CollectionLiteralPart.collectionLiteralExp">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CollectionLiteralPart" name="CollectionLiteralPart"
+      isAbstract="true" superClass="FlatQVT.TypedElement">
+    <ownedAttribute xmi:id="FlatQVT.CollectionLiteralPart.collectionLiteralExp" name="collectionLiteralExp"
+        isOrdered="true" type="FlatQVT.CollectionLiteralExp" opposite="FlatQVT.CollectionLiteralExp.part">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CollectionRange" name="CollectionRange"
+      superClass="FlatQVT.CollectionLiteralPart">
+    <ownedAttribute xmi:id="FlatQVT.CollectionRange.first" name="first" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="firstOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.CollectionRange.last" name="last" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="lastOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CollectionTemplateExp" name="CollectionTemplateExp"
+      superClass="FlatQVT.TemplateExp">
+    <ownedAttribute xmi:id="FlatQVT.CollectionTemplateExp.member" name="member" lower="0"
+        upper="*" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="listContainer">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.CollectionTemplateExp.referredCollectionType"
+        name="referredCollectionType" isOrdered="true" type="FlatQVT.CollectionType"/>
+    <ownedAttribute xmi:id="FlatQVT.CollectionTemplateExp.rest" name="rest" isOrdered="true"
+        lower="0" type="FlatQVT.Variable">
+      <ownedComment body="matchingExp">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CollectionType" name="CollectionType"
+      superClass="FlatQVT.DataType">
+    <ownedAttribute xmi:id="FlatQVT.CollectionType.elementType" name="elementType"
+        isOrdered="true" type="FlatQVT.Type"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Comment" name="Comment" superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.Comment.annotatedElement" name="annotatedElement"
+        lower="0" upper="*" type="FlatQVT.NamedElement"/>
+    <ownedAttribute xmi:id="FlatQVT.Comment.body" name="body" isOrdered="true" lower="0"
+        type="FlatQVT.String"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ComputeExp" name="ComputeExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.ComputeExp.body" name="body" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="computeOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ComputeExp.returnedElement" name="returnedElement"
+        isOrdered="true" type="FlatQVT.Variable" isComposite="true">
+      <ownedComment body="computeOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Constructor" name="Constructor"
+      superClass="FlatQVT.ImperativeOperation"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ConstructorBody" name="ConstructorBody"
+      superClass="FlatQVT.OperationBody"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ContextualProperty" name="ContextualProperty"
+      superClass="FlatQVT.Property">
+    <ownedAttribute xmi:id="FlatQVT.ContextualProperty.context" name="context" isOrdered="true"
+        type="FlatQVT.Class"/>
+    <ownedAttribute xmi:id="FlatQVT.ContextualProperty.initExpression" name="initExpression"
+        isOrdered="true" lower="0" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="ownerProperty">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ContextualProperty.overridden" name="overridden"
+        isOrdered="true" lower="0" type="FlatQVT.Property">
+      <ownedComment body="overriding">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ContinueExp" name="ContinueExp"
+      superClass="FlatQVT.ImperativeExpression"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CoreDomain" name="CoreDomain" superClass="FlatQVT.Domain FlatQVT.Area"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CorePattern" name="CorePattern"
+      superClass="FlatQVT.Pattern">
+    <ownedAttribute xmi:id="FlatQVT.CorePattern.variable" name="variable" lower="0"
+        upper="*" type="FlatQVT.Variable" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.DataType" name="DataType" superClass="FlatQVT.Type"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.DictLiteralExp" name="DictLiteralExp"
+      superClass="FlatQVT.LiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.DictLiteralExp.part" name="part" lower="0" upper="*"
+        type="FlatQVT.DictLiteralPart" isComposite="true">
+      <ownedComment body="partOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.DictLiteralPart" name="DictLiteralPart"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.DictLiteralPart.key" name="key" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="keyOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.DictLiteralPart.value" name="value" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="valOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.DictionaryType" name="DictionaryType"
+      superClass="FlatQVT.CollectionType">
+    <ownedAttribute xmi:id="FlatQVT.DictionaryType.keyType" name="keyType" isOrdered="true"
+        lower="0" type="FlatQVT.Type">
+      <ownedComment body="keyDict">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Enumeration" xmi:id="FlatQVT.DirectionKind" name="DirectionKind">
+    <ownedLiteral xmi:id="FlatQVT.DirectionKind.in" name="in"/>
+    <ownedLiteral xmi:id="FlatQVT.DirectionKind.inout" name="inout">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <value>1</value>
+      </xmi:Extension>
+    </ownedLiteral>
+    <ownedLiteral xmi:id="FlatQVT.DirectionKind.out" name="out">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <value>2</value>
+      </xmi:Extension>
+    </ownedLiteral>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Domain" name="Domain" isAbstract="true"
+      superClass="FlatQVT.NamedElement">
+    <ownedAttribute xmi:id="FlatQVT.Domain.isCheckable" name="isCheckable" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean"/>
+    <ownedAttribute xmi:id="FlatQVT.Domain.isEnforceable" name="isEnforceable" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean"/>
+    <ownedAttribute xmi:id="FlatQVT.Domain.rule" name="rule" isOrdered="true" type="FlatQVT.Rule"
+        opposite="FlatQVT.Rule.domain">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Domain.typedModel" name="typedModel" isOrdered="true"
+        lower="0" type="FlatQVT.TypedModel"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.DomainPattern" name="DomainPattern"
+      superClass="FlatQVT.Pattern">
+    <ownedAttribute xmi:id="FlatQVT.DomainPattern.templateExpression" name="templateExpression"
+        isOrdered="true" lower="0" type="FlatQVT.TemplateExp" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Element" name="Element" isAbstract="true"
+      superClass="FlatQVT.Object">
+    <ownedOperation xmi:id="FlatQVT.Element.container" name="container" isOrdered="true"
+        lower="0" type="FlatQVT.Element"/>
+    <ownedOperation xmi:id="FlatQVT.Element.equals" name="equals" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean">
+      <ownedParameter xmi:id="FlatQVT.Element.equals.object" name="object" isOrdered="true"
+          lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.Element.get" name="get" isOrdered="true" lower="0"
+        type="FlatQVT.Object">
+      <ownedParameter xmi:id="FlatQVT.Element.get.property" name="property" isOrdered="true"
+          lower="0" type="FlatQVT.Property"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.Element.getMetaClass" name="getMetaClass" isOrdered="true"
+        lower="0" type="FlatQVT.Class"/>
+    <ownedOperation xmi:id="FlatQVT.Element.isSet" name="isSet" isOrdered="true" lower="0"
+        type="FlatQVT.Boolean">
+      <ownedParameter xmi:id="FlatQVT.Element.isSet.property" name="property" isOrdered="true"
+          lower="0" type="FlatQVT.Property"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.Element.set" name="set" isOrdered="true" lower="0">
+      <ownedParameter xmi:id="FlatQVT.Element.set.property" name="property" isOrdered="true"
+          lower="0" type="FlatQVT.Property"/>
+      <ownedParameter xmi:id="FlatQVT.Element.set.object" name="object" isOrdered="true"
+          lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.Element.unset" name="unset" isOrdered="true" lower="0">
+      <ownedParameter xmi:id="FlatQVT.Element.unset.property" name="property" isOrdered="true"
+          lower="0" type="FlatQVT.Property"/>
+    </ownedOperation>
+    <ownedAttribute xmi:id="FlatQVT.Element.ownedComment" name="ownedComment" lower="0"
+        upper="*" type="FlatQVT.Comment" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Enumeration" xmi:id="FlatQVT.EnforcementMode" name="EnforcementMode">
+    <ownedLiteral xmi:id="FlatQVT.EnforcementMode.Creation" name="Creation"/>
+    <ownedLiteral xmi:id="FlatQVT.EnforcementMode.Deletion" name="Deletion">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <value>1</value>
+      </xmi:Extension>
+    </ownedLiteral>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.EnforcementOperation" name="EnforcementOperation"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.EnforcementOperation.bottomPattern" name="bottomPattern"
+        isOrdered="true" lower="0" type="FlatQVT.BottomPattern" opposite="FlatQVT.BottomPattern.enforcementOperation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.EnforcementOperation.enforcementMode" name="enforcementMode"
+        isOrdered="true" lower="0" type="FlatQVT.EnforcementMode"/>
+    <ownedAttribute xmi:id="FlatQVT.EnforcementOperation.operationCallExp" name="operationCallExp"
+        isOrdered="true" type="FlatQVT.OperationCallExp" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.EntryOperation" name="EntryOperation"
+      superClass="FlatQVT.ImperativeOperation"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.EnumLiteralExp" name="EnumLiteralExp"
+      superClass="FlatQVT.LiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.EnumLiteralExp.referredEnumLiteral" name="referredEnumLiteral"
+        isOrdered="true" lower="0" type="FlatQVT.EnumerationLiteral">
+      <ownedComment body="literalExp">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Enumeration" name="Enumeration"
+      superClass="FlatQVT.DataType">
+    <ownedAttribute xmi:id="FlatQVT.Enumeration.ownedLiteral" name="ownedLiteral"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.EnumerationLiteral" isComposite="true"
+        opposite="FlatQVT.EnumerationLiteral.enumeration">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.EnumerationLiteral" name="EnumerationLiteral"
+      superClass="FlatQVT.NamedElement">
+    <ownedAttribute xmi:id="FlatQVT.EnumerationLiteral.enumeration" name="enumeration"
+        isOrdered="true" lower="0" type="FlatQVT.Enumeration" opposite="FlatQVT.Enumeration.ownedLiteral">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ExpressionInOcl" name="ExpressionInOcl"
+      superClass="FlatQVT.TypedElement">
+    <ownedAttribute xmi:id="FlatQVT.ExpressionInOcl.bodyExpression" name="bodyExpression"
+        isOrdered="true" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="topExpression">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ExpressionInOcl.contextVariable" name="contextVariable"
+        isOrdered="true" lower="0" type="FlatQVT.Variable" isComposite="true">
+      <ownedComment body="selfOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ExpressionInOcl.parameterVariable" name="parameterVariable"
+        lower="0" upper="*" type="FlatQVT.Variable" isComposite="true">
+      <ownedComment body="varOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ExpressionInOcl.resultVariable" name="resultVariable"
+        isOrdered="true" lower="0" type="FlatQVT.Variable" isComposite="true">
+      <ownedComment body="resultOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Extent" name="Extent" superClass="FlatQVT.Object">
+    <ownedOperation xmi:id="FlatQVT.Extent.elements" name="elements" isOrdered="true"
+        lower="0" type="FlatQVT.ReflectiveSequence"/>
+    <ownedOperation xmi:id="FlatQVT.Extent.useContainment" name="useContainment" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Factory" name="Factory" superClass="FlatQVT.Element">
+    <ownedOperation xmi:id="FlatQVT.Factory.convertToString" name="convertToString"
+        isOrdered="true" lower="0" type="FlatQVT.String">
+      <ownedParameter xmi:id="FlatQVT.Factory.convertToString.dataType" name="dataType"
+          isOrdered="true" lower="0" type="FlatQVT.DataType"/>
+      <ownedParameter xmi:id="FlatQVT.Factory.convertToString.object" name="object"
+          isOrdered="true" lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.Factory.create" name="create" isOrdered="true"
+        lower="0" type="FlatQVT.Element">
+      <ownedParameter xmi:id="FlatQVT.Factory.create.metaClass" name="metaClass" isOrdered="true"
+          lower="0" type="FlatQVT.Class"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.Factory.createFromString" name="createFromString"
+        isOrdered="true" lower="0" type="FlatQVT.Object">
+      <ownedParameter xmi:id="FlatQVT.Factory.createFromString.dataType" name="dataType"
+          isOrdered="true" lower="0" type="FlatQVT.DataType"/>
+      <ownedParameter xmi:id="FlatQVT.Factory.createFromString.string" name="string"
+          isOrdered="true" lower="0" type="FlatQVT.String"/>
+    </ownedOperation>
+    <ownedAttribute xmi:id="FlatQVT.Factory.package" name="package" isOrdered="true"
+        type="FlatQVT.Package"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.FeatureCallExp" name="FeatureCallExp"
+      isAbstract="true" superClass="FlatQVT.CallExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ForExp" name="ForExp" superClass="FlatQVT.ImperativeLoopExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Function" name="Function" superClass="FlatQVT.Operation">
+    <ownedAttribute xmi:id="FlatQVT.Function.queryExpression" name="queryExpression"
+        isOrdered="true" lower="0" type="FlatQVT.OclExpression" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.FunctionParameter" name="FunctionParameter"
+      superClass="FlatQVT.Variable FlatQVT.Parameter"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.GuardPattern" name="GuardPattern"
+      superClass="FlatQVT.CorePattern">
+    <ownedAttribute xmi:id="FlatQVT.GuardPattern.area" name="area" isOrdered="true"
+        type="FlatQVT.Area" opposite="FlatQVT.Area.guardPattern">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Helper" name="Helper" superClass="FlatQVT.ImperativeOperation">
+    <ownedAttribute xmi:id="FlatQVT.Helper.isQuery" name="isQuery" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.IfExp" name="IfExp" superClass="FlatQVT.OclExpression">
+    <ownedAttribute xmi:id="FlatQVT.IfExp.condition" name="condition" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="ifOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.IfExp.elseExpression" name="elseExpression" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="elseOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.IfExp.thenExpression" name="thenExpression" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="thenOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ImperativeCallExp" name="ImperativeCallExp"
+      superClass="FlatQVT.OperationCallExp FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.ImperativeCallExp.isVirtual" name="isVirtual"
+        isOrdered="true" lower="0" type="FlatQVT.Boolean" default="true"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ImperativeExpression" name="ImperativeExpression"
+      isAbstract="true" superClass="FlatQVT.OclExpression"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ImperativeIterateExp" name="ImperativeIterateExp"
+      superClass="FlatQVT.ImperativeLoopExp">
+    <ownedAttribute xmi:id="FlatQVT.ImperativeIterateExp.target" name="target" isOrdered="true"
+        lower="0" type="FlatQVT.Variable" isComposite="true">
+      <ownedComment body="tgtOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ImperativeLoopExp" name="ImperativeLoopExp"
+      isAbstract="true" superClass="FlatQVT.LoopExp FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.ImperativeLoopExp.condition" name="condition"
+        isOrdered="true" lower="0" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="loopCondOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ImperativeOperation" name="ImperativeOperation"
+      superClass="FlatQVT.Operation">
+    <ownedAttribute xmi:id="FlatQVT.ImperativeOperation.body" name="body" isOrdered="true"
+        lower="0" type="FlatQVT.OperationBody" isComposite="true" opposite="FlatQVT.OperationBody.operation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ImperativeOperation.context" name="context" isOrdered="true"
+        lower="0" type="FlatQVT.VarParameter" isComposite="true" opposite="FlatQVT.VarParameter.ctxOwner">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ImperativeOperation.isBlackbox" name="isBlackbox"
+        isOrdered="true" lower="0" type="FlatQVT.Boolean"/>
+    <ownedAttribute xmi:id="FlatQVT.ImperativeOperation.overridden" name="overridden"
+        isOrdered="true" lower="0" type="FlatQVT.ImperativeOperation">
+      <ownedComment body="overriding">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ImperativeOperation.result" name="result" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.VarParameter" isComposite="true" opposite="FlatQVT.VarParameter.resOwner">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Enumeration" xmi:id="FlatQVT.ImportKind" name="ImportKind">
+    <ownedLiteral xmi:id="FlatQVT.ImportKind.extension" name="extension"/>
+    <ownedLiteral xmi:id="FlatQVT.ImportKind.access" name="access">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <value>1</value>
+      </xmi:Extension>
+    </ownedLiteral>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.InstantiationExp" name="InstantiationExp"
+      superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.InstantiationExp.argument" name="argument" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="argOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.InstantiationExp.extent" name="extent" isOrdered="true"
+        lower="0" type="FlatQVT.Variable"/>
+    <ownedAttribute xmi:id="FlatQVT.InstantiationExp.instantiatedClass" name="instantiatedClass"
+        isOrdered="true" type="FlatQVT.Class"/>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="FlatQVT.Integer" name="Integer">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Integer</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.IntegerLiteralExp" name="IntegerLiteralExp"
+      superClass="FlatQVT.NumericLiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.IntegerLiteralExp.integerSymbol" name="integerSymbol"
+        isOrdered="true" lower="0" type="FlatQVT.Integer"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.InvalidLiteralExp" name="InvalidLiteralExp"
+      superClass="FlatQVT.LiteralExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.InvalidType" name="InvalidType"
+      superClass="FlatQVT.Type"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.IterateExp" name="IterateExp" superClass="FlatQVT.LoopExp">
+    <ownedAttribute xmi:id="FlatQVT.IterateExp.result" name="result" isOrdered="true"
+        lower="0" type="FlatQVT.Variable" isComposite="true">
+      <ownedComment body="baseExp">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.IteratorExp" name="IteratorExp"
+      superClass="FlatQVT.LoopExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Key" name="Key" superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.Key.identifies" name="identifies" isOrdered="true"
+        type="FlatQVT.Class"/>
+    <ownedAttribute xmi:id="FlatQVT.Key.oppositePart" name="oppositePart" lower="0"
+        upper="*" type="FlatQVT.Property">
+      <ownedComment body="oppositeKey">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Key.part" name="part" lower="0" upper="*" type="FlatQVT.Property"/>
+    <ownedAttribute xmi:id="FlatQVT.Key.transformation" name="transformation" isOrdered="true"
+        lower="0" type="FlatQVT.RelationalTransformation" opposite="FlatQVT.RelationalTransformation.ownedKey">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.LetExp" name="LetExp" superClass="FlatQVT.OclExpression">
+    <ownedAttribute xmi:id="FlatQVT.LetExp.in" name="in" isOrdered="true" type="FlatQVT.OclExpression"
+        isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.LetExp.variable" name="variable" isOrdered="true"
+        type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.letExp">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Library" name="Library" superClass="FlatQVT.Module"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ListType" name="ListType" superClass="FlatQVT.CollectionType"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.LiteralExp" name="LiteralExp" isAbstract="true"
+      superClass="FlatQVT.OclExpression"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.LogExp" name="LogExp" superClass="FlatQVT.OperationCallExp FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.LogExp.condition" name="condition" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="logOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.LoopExp" name="LoopExp" isAbstract="true"
+      superClass="FlatQVT.CallExp FlatQVT.OclExpression">
+    <ownedAttribute xmi:id="FlatQVT.LoopExp.body" name="body" isOrdered="true" type="FlatQVT.OclExpression"
+        isComposite="true">
+      <ownedComment body="loopBodyOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.LoopExp.iterator" name="iterator" lower="0" upper="*"
+        type="FlatQVT.Variable" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Mapping" name="Mapping" superClass="FlatQVT.Rule FlatQVT.Area">
+    <ownedAttribute xmi:id="FlatQVT.Mapping.context" name="context" isOrdered="true"
+        lower="0" type="FlatQVT.Mapping" opposite="FlatQVT.Mapping.local">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Mapping.local" name="local" lower="0" upper="*"
+        type="FlatQVT.Mapping" isComposite="true" opposite="FlatQVT.Mapping.context">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Mapping.refinement" name="refinement" lower="0"
+        upper="*" type="FlatQVT.Mapping" opposite="FlatQVT.Mapping.specification"/>
+    <ownedAttribute xmi:id="FlatQVT.Mapping.specification" name="specification" lower="0"
+        upper="*" type="FlatQVT.Mapping" opposite="FlatQVT.Mapping.refinement"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.MappingBody" name="MappingBody"
+      superClass="FlatQVT.OperationBody">
+    <ownedAttribute xmi:id="FlatQVT.MappingBody.endSection" name="endSection" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="endOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.MappingBody.initSection" name="initSection" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="initOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.MappingCallExp" name="MappingCallExp"
+      superClass="FlatQVT.ImperativeCallExp">
+    <ownedAttribute xmi:id="FlatQVT.MappingCallExp.isStrict" name="isStrict" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.MappingOperation" name="MappingOperation"
+      superClass="FlatQVT.ImperativeOperation">
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.disjunct" name="disjunct" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.MappingOperation">
+      <ownedComment body="disjuncter">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.inherited" name="inherited" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.MappingOperation">
+      <ownedComment body="inheriting">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.merged" name="merged" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.MappingOperation">
+      <ownedComment body="merging">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.refinedRelation" name="refinedRelation"
+        isOrdered="true" lower="0" type="FlatQVT.Relation">
+      <ownedComment body="refiningOperation">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.when" name="when" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="whenOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.where" name="where" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="whereOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.MappingParameter" name="MappingParameter"
+      superClass="FlatQVT.VarParameter">
+    <ownedAttribute xmi:id="FlatQVT.MappingParameter.extent" name="extent" isOrdered="true"
+        lower="0" type="FlatQVT.ModelParameter"/>
+    <ownedAttribute xmi:id="FlatQVT.MappingParameter.referredDomain" name="referredDomain"
+        isOrdered="true" lower="0" type="FlatQVT.RelationDomain">
+      <ownedComment body="referringParameter">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ModelParameter" name="ModelParameter"
+      superClass="FlatQVT.VarParameter"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ModelType" name="ModelType" superClass="FlatQVT.Class">
+    <ownedAttribute xmi:id="FlatQVT.ModelType.additionalCondition" name="additionalCondition"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="condOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ModelType.conformanceKind" name="conformanceKind"
+        isOrdered="true" lower="0" type="FlatQVT.String" default="effective"/>
+    <ownedAttribute xmi:id="FlatQVT.ModelType.metamodel" name="metamodel" isOrdered="true"
+        upper="*" type="FlatQVT.Package"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Module" name="Module" superClass="FlatQVT.Class FlatQVT.Package">
+    <ownedAttribute xmi:id="FlatQVT.Module.configProperty" name="configProperty" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.Property"/>
+    <ownedAttribute xmi:id="FlatQVT.Module.entry" name="entry" isOrdered="true" lower="0"
+        type="FlatQVT.EntryOperation">
+      <ownedComment body="entryContext">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Module.isBlackbox" name="isBlackbox" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean"/>
+    <ownedAttribute xmi:id="FlatQVT.Module.moduleImport" name="moduleImport" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.ModuleImport" isComposite="true" opposite="FlatQVT.ModuleImport.module">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Module.ownedTag" name="ownedTag" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.Tag" isComposite="true">
+      <ownedComment body="owner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Module.ownedVariable" name="ownedVariable" lower="0"
+        upper="*" type="FlatQVT.Variable" isComposite="true">
+      <ownedComment body="variableOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Module.usedModelType" name="usedModelType" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.ModelType"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ModuleImport" name="ModuleImport"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.ModuleImport.binding" name="binding" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.ModelType"/>
+    <ownedAttribute xmi:id="FlatQVT.ModuleImport.importedModule" name="importedModule"
+        isOrdered="true" type="FlatQVT.Module">
+      <ownedComment body="importingElement">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ModuleImport.kind" name="kind" isOrdered="true"
+        lower="0" type="FlatQVT.ImportKind"/>
+    <ownedAttribute xmi:id="FlatQVT.ModuleImport.module" name="module" isOrdered="true"
+        lower="0" type="FlatQVT.Module" opposite="FlatQVT.Module.moduleImport">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.MultiplicityElement" name="MultiplicityElement"
+      isAbstract="true">
+    <ownedAttribute xmi:id="FlatQVT.MultiplicityElement.isOrdered" name="isOrdered"
+        isOrdered="true" lower="0" type="FlatQVT.Boolean" default="false"/>
+    <ownedAttribute xmi:id="FlatQVT.MultiplicityElement.isUnique" name="isUnique"
+        isOrdered="true" lower="0" type="FlatQVT.Boolean" default="true"/>
+    <ownedAttribute xmi:id="FlatQVT.MultiplicityElement.lower" name="lower" isOrdered="true"
+        lower="0" type="FlatQVT.Integer" default="1"/>
+    <ownedAttribute xmi:id="FlatQVT.MultiplicityElement.upper" name="upper" isOrdered="true"
+        lower="0" type="FlatQVT.UnlimitedNatural" default="1"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.NamedElement" name="NamedElement"
+      isAbstract="true" superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.NamedElement.name" name="name" isOrdered="true"
+        lower="0" type="FlatQVT.String"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.NavigationCallExp" name="NavigationCallExp"
+      superClass="FlatQVT.FeatureCallExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.NullLiteralExp" name="NullLiteralExp"
+      superClass="FlatQVT.LiteralExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.NumericLiteralExp" name="NumericLiteralExp"
+      isAbstract="true" superClass="FlatQVT.PrimitiveLiteralExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Object" name="Object"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ObjectExp" name="ObjectExp" superClass="FlatQVT.InstantiationExp">
+    <ownedAttribute xmi:id="FlatQVT.ObjectExp.body" name="body" isOrdered="true" type="FlatQVT.ConstructorBody"
+        isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ObjectExp.referredObject" name="referredObject"
+        isOrdered="true" type="FlatQVT.Variable">
+      <ownedComment body="objectExpression">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ObjectTemplateExp" name="ObjectTemplateExp"
+      superClass="FlatQVT.TemplateExp">
+    <ownedAttribute xmi:id="FlatQVT.ObjectTemplateExp.part" name="part" lower="0"
+        upper="*" type="FlatQVT.PropertyTemplateItem" isComposite="true" opposite="FlatQVT.PropertyTemplateItem.objContainer">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ObjectTemplateExp.referredClass" name="referredClass"
+        isOrdered="true" type="FlatQVT.Class"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.OclExpression" name="OclExpression"
+      isAbstract="true" superClass="FlatQVT.TypedElement"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Operation" name="Operation" superClass="FlatQVT.TypedElement FlatQVT.MultiplicityElement">
+    <ownedAttribute xmi:id="FlatQVT.Operation.class" name="class" isOrdered="true"
+        lower="0" type="FlatQVT.Class" opposite="FlatQVT.Class.ownedOperation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Operation.ownedParameter" name="ownedParameter"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.Parameter" isComposite="true"
+        opposite="FlatQVT.Parameter.operation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Operation.raisedException" name="raisedException"
+        lower="0" upper="*" type="FlatQVT.Type"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.OperationBody" name="OperationBody"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.OperationBody.content" name="content" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="contentOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.OperationBody.operation" name="operation" isOrdered="true"
+        lower="0" type="FlatQVT.ImperativeOperation" opposite="FlatQVT.ImperativeOperation.body">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.OperationBody.variable" name="variable" lower="0"
+        upper="*" type="FlatQVT.Variable" isComposite="true">
+      <ownedComment body="opBody">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.OperationCallExp" name="OperationCallExp"
+      superClass="FlatQVT.FeatureCallExp">
+    <ownedAttribute xmi:id="FlatQVT.OperationCallExp.argument" name="argument" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="parentCall">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.OperationCallExp.referredOperation" name="referredOperation"
+        isOrdered="true" lower="0" type="FlatQVT.Operation">
+      <ownedComment body="referringExp">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.OperationalTransformation" name="OperationalTransformation"
+      superClass="FlatQVT.Module">
+    <ownedAttribute xmi:id="FlatQVT.OperationalTransformation.intermediateClass" name="intermediateClass"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.Class">
+      <ownedComment body="transfClient">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.OperationalTransformation.intermediateProperty"
+        name="intermediateProperty" isOrdered="true" lower="0" upper="*" type="FlatQVT.Property">
+      <ownedComment body="tranfClient">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.OperationalTransformation.modelParameter" name="modelParameter"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.ModelParameter" isComposite="true">
+      <ownedComment body="module">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.OperationalTransformation.refined" name="refined"
+        isOrdered="true" lower="0" type="FlatQVT.RelationalTransformation">
+      <ownedComment body="refinement">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.OperationalTransformation.relation" name="relation"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.Relation" isComposite="true">
+      <ownedComment body="owner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.OppositePropertyCallExp" name="OppositePropertyCallExp"
+      superClass="FlatQVT.PropertyCallExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.OrderedSetType" name="OrderedSetType"
+      superClass="FlatQVT.CollectionType"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.OrderedTupleLiteralExp" name="OrderedTupleLiteralExp"
+      superClass="FlatQVT.LiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.OrderedTupleLiteralExp.part" name="part" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OrderedTupleLiteralPart" isComposite="true">
+      <ownedComment body="partOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.OrderedTupleLiteralPart" name="OrderedTupleLiteralPart"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.OrderedTupleLiteralPart.value" name="value" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="tupValOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.OrderedTupleType" name="OrderedTupleType"
+      superClass="FlatQVT.Class">
+    <ownedAttribute xmi:id="FlatQVT.OrderedTupleType.elementType" name="elementType"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.Type">
+      <ownedComment body="eltTuple">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Package" name="Package" superClass="FlatQVT.NamedElement">
+    <ownedAttribute xmi:id="FlatQVT.Package.nestedPackage" name="nestedPackage" lower="0"
+        upper="*" type="FlatQVT.Package" isComposite="true" opposite="FlatQVT.Package.nestingPackage">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Package.nestingPackage" name="nestingPackage"
+        isOrdered="true" lower="0" type="FlatQVT.Package" opposite="FlatQVT.Package.nestedPackage">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Package.ownedType" name="ownedType" lower="0"
+        upper="*" type="FlatQVT.Type" isComposite="true" opposite="FlatQVT.Type.package">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Package.uri" name="uri" isOrdered="true" lower="0"
+        type="FlatQVT.String"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Parameter" name="Parameter" superClass="FlatQVT.TypedElement FlatQVT.MultiplicityElement">
+    <ownedAttribute xmi:id="FlatQVT.Parameter.operation" name="operation" isOrdered="true"
+        lower="0" type="FlatQVT.Operation" opposite="FlatQVT.Operation.ownedParameter">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Pattern" name="Pattern" superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.Pattern.bindsTo" name="bindsTo" lower="0" upper="*"
+        type="FlatQVT.Variable"/>
+    <ownedAttribute xmi:id="FlatQVT.Pattern.predicate" name="predicate" lower="0"
+        upper="*" type="FlatQVT.Predicate" isComposite="true" opposite="FlatQVT.Predicate.pattern">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Predicate" name="Predicate" superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.Predicate.conditionExpression" name="conditionExpression"
+        isOrdered="true" type="FlatQVT.OclExpression" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Predicate.pattern" name="pattern" isOrdered="true"
+        type="FlatQVT.Pattern" opposite="FlatQVT.Pattern.predicate">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.PrimitiveLiteralExp" name="PrimitiveLiteralExp"
+      isAbstract="true" superClass="FlatQVT.LiteralExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.PrimitiveType" name="PrimitiveType"
+      superClass="FlatQVT.DataType"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Property" name="Property" superClass="FlatQVT.TypedElement FlatQVT.MultiplicityElement">
+    <ownedAttribute xmi:id="FlatQVT.Property.class" name="class" isOrdered="true"
+        lower="0" type="FlatQVT.Class" opposite="FlatQVT.Class.ownedAttribute">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Property.default" name="default" isOrdered="true"
+        lower="0" type="FlatQVT.String"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.isComposite" name="isComposite" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean" default="false"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.isDerived" name="isDerived" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean" default="false"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.isID" name="isID" isOrdered="true" lower="0"
+        type="FlatQVT.Boolean"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.isReadOnly" name="isReadOnly" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean" default="false"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.opposite" name="opposite" isOrdered="true"
+        lower="0" type="FlatQVT.Property"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.PropertyAssignment" name="PropertyAssignment"
+      superClass="FlatQVT.Assignment">
+    <ownedAttribute xmi:id="FlatQVT.PropertyAssignment.slotExpression" name="slotExpression"
+        isOrdered="true" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="slotAssignment">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.PropertyAssignment.targetProperty" name="targetProperty"
+        isOrdered="true" type="FlatQVT.Property">
+      <ownedComment body="assignment">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.PropertyCallExp" name="PropertyCallExp"
+      superClass="FlatQVT.NavigationCallExp">
+    <ownedAttribute xmi:id="FlatQVT.PropertyCallExp.referredProperty" name="referredProperty"
+        isOrdered="true" lower="0" type="FlatQVT.Property">
+      <ownedComment body="referringExp">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.PropertyTemplateItem" name="PropertyTemplateItem"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.PropertyTemplateItem.isOpposite" name="isOpposite"
+        isOrdered="true" lower="0" type="FlatQVT.Boolean" default="false"/>
+    <ownedAttribute xmi:id="FlatQVT.PropertyTemplateItem.objContainer" name="objContainer"
+        isOrdered="true" type="FlatQVT.ObjectTemplateExp" opposite="FlatQVT.ObjectTemplateExp.part">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.PropertyTemplateItem.referredProperty" name="referredProperty"
+        isOrdered="true" type="FlatQVT.Property">
+      <ownedComment body="propertyItem">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.PropertyTemplateItem.value" name="value" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="propertyItem">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RaiseExp" name="RaiseExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.RaiseExp.argument" name="argument" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.RaiseExp.exception" name="exception" isOrdered="true"
+        type="FlatQVT.Type">
+      <ownedComment body="raiseExpression">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="FlatQVT.Real" name="Real">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Float</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RealLiteralExp" name="RealLiteralExp"
+      superClass="FlatQVT.NumericLiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.RealLiteralExp.realSymbol" name="realSymbol" isOrdered="true"
+        lower="0" type="FlatQVT.Real"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RealizedVariable" name="RealizedVariable"
+      superClass="FlatQVT.Variable"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ReflectiveCollection" name="ReflectiveCollection"
+      superClass="FlatQVT.Object">
+    <ownedOperation xmi:id="FlatQVT.ReflectiveCollection.add" name="add" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean">
+      <ownedParameter xmi:id="FlatQVT.ReflectiveCollection.add.object" name="object"
+          isOrdered="true" lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.ReflectiveCollection.addAll" name="addAll" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean">
+      <ownedParameter xmi:id="FlatQVT.ReflectiveCollection.addAll.objects" name="objects"
+          isOrdered="true" lower="0" type="FlatQVT.ReflectiveSequence"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.ReflectiveCollection.clear" name="clear" isOrdered="true"
+        lower="0"/>
+    <ownedOperation xmi:id="FlatQVT.ReflectiveCollection.remove" name="remove" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean">
+      <ownedParameter xmi:id="FlatQVT.ReflectiveCollection.remove.object" name="object"
+          isOrdered="true" lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.ReflectiveCollection.size" name="size" isOrdered="true"
+        lower="0" type="FlatQVT.Integer"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ReflectiveSequence" name="ReflectiveSequence"
+      superClass="FlatQVT.ReflectiveCollection">
+    <ownedOperation xmi:id="FlatQVT.ReflectiveSequence.add" name="add" isOrdered="true"
+        lower="0">
+      <ownedParameter xmi:id="FlatQVT.ReflectiveSequence.add.index" name="index" isOrdered="true"
+          lower="0" type="FlatQVT.Integer"/>
+      <ownedParameter xmi:id="FlatQVT.ReflectiveSequence.add.object" name="object"
+          isOrdered="true" lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.ReflectiveSequence.get" name="get" isOrdered="true"
+        lower="0" type="FlatQVT.Object">
+      <ownedParameter xmi:id="FlatQVT.ReflectiveSequence.get.index" name="index" isOrdered="true"
+          lower="0" type="FlatQVT.Integer"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.ReflectiveSequence.remove" name="remove" isOrdered="true"
+        lower="0" type="FlatQVT.Object">
+      <ownedParameter xmi:id="FlatQVT.ReflectiveSequence.remove.index" name="index"
+          isOrdered="true" lower="0" type="FlatQVT.Integer"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.ReflectiveSequence.set" name="set" isOrdered="true"
+        lower="0" type="FlatQVT.Object">
+      <ownedParameter xmi:id="FlatQVT.ReflectiveSequence.set.index" name="index" isOrdered="true"
+          lower="0" type="FlatQVT.Integer"/>
+      <ownedParameter xmi:id="FlatQVT.ReflectiveSequence.set.object" name="object"
+          isOrdered="true" lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Relation" name="Relation" superClass="FlatQVT.Rule">
+    <ownedAttribute xmi:id="FlatQVT.Relation.isTopLevel" name="isTopLevel" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean"/>
+    <ownedAttribute xmi:id="FlatQVT.Relation.operationalImpl" name="operationalImpl"
+        lower="0" upper="*" type="FlatQVT.RelationImplementation" isComposite="true"
+        opposite="FlatQVT.RelationImplementation.relation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Relation.variable" name="variable" lower="0" upper="*"
+        type="FlatQVT.Variable" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Relation.when" name="when" isOrdered="true" lower="0"
+        type="FlatQVT.Pattern" isComposite="true">
+      <ownedComment body="whenOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Relation.where" name="where" isOrdered="true"
+        lower="0" type="FlatQVT.Pattern" isComposite="true">
+      <ownedComment body="whereOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RelationCallExp" name="RelationCallExp"
+      superClass="FlatQVT.OclExpression">
+    <ownedAttribute xmi:id="FlatQVT.RelationCallExp.argument" name="argument" isOrdered="true"
+        lower="2" upper="*" type="FlatQVT.OclExpression" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.RelationCallExp.referredRelation" name="referredRelation"
+        isOrdered="true" type="FlatQVT.Relation"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RelationDomain" name="RelationDomain"
+      superClass="FlatQVT.Domain">
+    <ownedAttribute xmi:id="FlatQVT.RelationDomain.defaultAssignment" name="defaultAssignment"
+        lower="0" upper="*" type="FlatQVT.RelationDomainAssignment" isComposite="true">
+      <ownedComment body="owner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.RelationDomain.pattern" name="pattern" isOrdered="true"
+        lower="0" type="FlatQVT.DomainPattern" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.RelationDomain.rootVariable" name="rootVariable"
+        isOrdered="true" type="FlatQVT.Variable"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RelationDomainAssignment" name="RelationDomainAssignment"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.RelationDomainAssignment.valueExp" name="valueExp"
+        isOrdered="true" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="domainAssignment">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.RelationDomainAssignment.variable" name="variable"
+        isOrdered="true" type="FlatQVT.Variable">
+      <ownedComment body="domainAssignment">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RelationImplementation" name="RelationImplementation"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.RelationImplementation.impl" name="impl" isOrdered="true"
+        type="FlatQVT.Operation"/>
+    <ownedAttribute xmi:id="FlatQVT.RelationImplementation.inDirectionOf" name="inDirectionOf"
+        isOrdered="true" type="FlatQVT.TypedModel"/>
+    <ownedAttribute xmi:id="FlatQVT.RelationImplementation.relation" name="relation"
+        isOrdered="true" lower="0" type="FlatQVT.Relation" opposite="FlatQVT.Relation.operationalImpl">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RelationalTransformation" name="RelationalTransformation"
+      superClass="FlatQVT.Transformation">
+    <ownedAttribute xmi:id="FlatQVT.RelationalTransformation.ownedKey" name="ownedKey"
+        lower="0" upper="*" type="FlatQVT.Key" isComposite="true" opposite="FlatQVT.Key.transformation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ResolveExp" name="ResolveExp" superClass="FlatQVT.CallExp FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.ResolveExp.condition" name="condition" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ResolveExp.isDeferred" name="isDeferred" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean"/>
+    <ownedAttribute xmi:id="FlatQVT.ResolveExp.isInverse" name="isInverse" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean"/>
+    <ownedAttribute xmi:id="FlatQVT.ResolveExp.one" name="one" isOrdered="true" lower="0"
+        type="FlatQVT.Boolean"/>
+    <ownedAttribute xmi:id="FlatQVT.ResolveExp.target" name="target" isOrdered="true"
+        lower="0" type="FlatQVT.Variable" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ResolveInExp" name="ResolveInExp"
+      superClass="FlatQVT.ResolveExp">
+    <ownedAttribute xmi:id="FlatQVT.ResolveInExp.inMapping" name="inMapping" isOrdered="true"
+        lower="0" type="FlatQVT.MappingOperation">
+      <ownedComment body="resolveExpression">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ReturnExp" name="ReturnExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.ReturnExp.value" name="value" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Rule" name="Rule" isAbstract="true"
+      superClass="FlatQVT.NamedElement">
+    <ownedAttribute xmi:id="FlatQVT.Rule.domain" name="domain" isOrdered="true" lower="0"
+        upper="*" type="FlatQVT.Domain" isComposite="true" opposite="FlatQVT.Domain.rule">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Rule.overrides" name="overrides" isOrdered="true"
+        lower="0" type="FlatQVT.Rule">
+      <ownedComment body="overriden">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Rule.transformation" name="transformation" isOrdered="true"
+        lower="0" type="FlatQVT.Transformation" opposite="FlatQVT.Transformation.rule">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.SequenceType" name="SequenceType"
+      superClass="FlatQVT.CollectionType"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.SetType" name="SetType" superClass="FlatQVT.CollectionType"/>
+  <ownedType xmi:type="emof:Enumeration" xmi:id="FlatQVT.SeverityKind" name="SeverityKind">
+    <ownedLiteral xmi:id="FlatQVT.SeverityKind.error" name="error"/>
+    <ownedLiteral xmi:id="FlatQVT.SeverityKind.warning" name="warning">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <value>1</value>
+      </xmi:Extension>
+    </ownedLiteral>
+    <ownedLiteral xmi:id="FlatQVT.SeverityKind.fatal" name="fatal">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <value>2</value>
+      </xmi:Extension>
+    </ownedLiteral>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="FlatQVT.String" name="String">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.String</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.StringLiteralExp" name="StringLiteralExp"
+      superClass="FlatQVT.PrimitiveLiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.StringLiteralExp.stringSymbol" name="stringSymbol"
+        isOrdered="true" lower="0" type="FlatQVT.String"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.SwitchExp" name="SwitchExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.SwitchExp.alternativePart" name="alternativePart"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.AltExp" isComposite="true">
+      <ownedComment body="altOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.SwitchExp.elsePart" name="elsePart" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="elsePartOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Tag" name="Tag" superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.Tag.element" name="element" lower="0" upper="*"
+        type="FlatQVT.Element"/>
+    <ownedAttribute xmi:id="FlatQVT.Tag.name" name="name" isOrdered="true" lower="0"
+        type="FlatQVT.String"/>
+    <ownedAttribute xmi:id="FlatQVT.Tag.value" name="value" isOrdered="true" lower="0"
+        type="FlatQVT.String"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TemplateExp" name="TemplateExp"
+      isAbstract="true" superClass="FlatQVT.LiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.TemplateExp.bindsTo" name="bindsTo" isOrdered="true"
+        lower="0" type="FlatQVT.Variable"/>
+    <ownedAttribute xmi:id="FlatQVT.TemplateExp.where" name="where" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="owner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TemplateParameterType" name="TemplateParameterType"
+      superClass="FlatQVT.Type">
+    <ownedAttribute xmi:id="FlatQVT.TemplateParameterType.specification" name="specification"
+        isOrdered="true" lower="0" type="FlatQVT.String"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Transformation" name="Transformation"
+      superClass="FlatQVT.Class FlatQVT.Package">
+    <ownedAttribute xmi:id="FlatQVT.Transformation.extends" name="extends" isOrdered="true"
+        lower="0" type="FlatQVT.Transformation">
+      <ownedComment body="extendedBy">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Transformation.modelParameter" name="modelParameter"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.TypedModel" isComposite="true"
+        opposite="FlatQVT.TypedModel.transformation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Transformation.ownedTag" name="ownedTag" lower="0"
+        upper="*" type="FlatQVT.Tag" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Transformation.rule" name="rule" lower="0" upper="*"
+        type="FlatQVT.Rule" isComposite="true" opposite="FlatQVT.Rule.transformation">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TryExp" name="TryExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.TryExp.exceptClause" name="exceptClause" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.CatchExp" isComposite="true">
+      <ownedComment body="exceptOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.TryExp.tryBody" name="tryBody" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="tryBodyOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TupleLiteralExp" name="TupleLiteralExp"
+      superClass="FlatQVT.LiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.TupleLiteralExp.part" name="part" lower="0" upper="*"
+        type="FlatQVT.TupleLiteralPart" isComposite="true" opposite="FlatQVT.TupleLiteralPart.tupleLiteralExp">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TupleLiteralPart" name="TupleLiteralPart"
+      superClass="FlatQVT.TypedElement">
+    <ownedAttribute xmi:id="FlatQVT.TupleLiteralPart.attribute" name="attribute" isOrdered="true"
+        lower="0" type="FlatQVT.Property"/>
+    <ownedAttribute xmi:id="FlatQVT.TupleLiteralPart.tupleLiteralExp" name="tupleLiteralExp"
+        isOrdered="true" lower="0" type="FlatQVT.TupleLiteralExp" opposite="FlatQVT.TupleLiteralExp.part">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.TupleLiteralPart.value" name="value" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TupleType" name="TupleType" superClass="FlatQVT.Class FlatQVT.DataType"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Type" name="Type" isAbstract="true"
+      superClass="FlatQVT.NamedElement">
+    <ownedOperation xmi:id="FlatQVT.Type.isInstance" name="isInstance" isOrdered="true"
+        lower="0" type="FlatQVT.Boolean">
+      <ownedParameter xmi:id="FlatQVT.Type.isInstance.object" name="object" isOrdered="true"
+          lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+    <ownedAttribute xmi:id="FlatQVT.Type.package" name="package" isOrdered="true"
+        lower="0" type="FlatQVT.Package" opposite="FlatQVT.Package.ownedType">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TypeExp" name="TypeExp" superClass="FlatQVT.OclExpression">
+    <ownedAttribute xmi:id="FlatQVT.TypeExp.referredType" name="referredType" isOrdered="true"
+        lower="0" type="FlatQVT.Type"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TypeType" name="TypeType" superClass="FlatQVT.Type"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TypedElement" name="TypedElement"
+      isAbstract="true" superClass="FlatQVT.NamedElement">
+    <ownedAttribute xmi:id="FlatQVT.TypedElement.type" name="type" isOrdered="true"
+        lower="0" type="FlatQVT.Type"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TypedModel" name="TypedModel" superClass="FlatQVT.NamedElement">
+    <ownedAttribute xmi:id="FlatQVT.TypedModel.dependsOn" name="dependsOn" lower="0"
+        upper="*" type="FlatQVT.TypedModel">
+      <ownedComment body="dependent">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.TypedModel.transformation" name="transformation"
+        isOrdered="true" type="FlatQVT.Transformation" opposite="FlatQVT.Transformation.modelParameter">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.TypedModel.usedPackage" name="usedPackage" upper="*"
+        type="FlatQVT.Package"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Typedef" name="Typedef" superClass="FlatQVT.Class">
+    <ownedAttribute xmi:id="FlatQVT.Typedef.base" name="base" isOrdered="true" type="FlatQVT.Type"/>
+    <ownedAttribute xmi:id="FlatQVT.Typedef.condition" name="condition" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.URIExtent" name="URIExtent" superClass="FlatQVT.Extent">
+    <ownedOperation xmi:id="FlatQVT.URIExtent.contextURI" name="contextURI" isOrdered="true"
+        lower="0" type="FlatQVT.String"/>
+    <ownedOperation xmi:id="FlatQVT.URIExtent.element" name="element" isOrdered="true"
+        lower="0" type="FlatQVT.Element">
+      <ownedParameter xmi:id="FlatQVT.URIExtent.element.uri" name="uri" isOrdered="true"
+          lower="0" type="FlatQVT.String"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.URIExtent.uri" name="uri" isOrdered="true" lower="0"
+        type="FlatQVT.String">
+      <ownedParameter xmi:id="FlatQVT.URIExtent.uri.element" name="element" isOrdered="true"
+          lower="0" type="FlatQVT.Element"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="FlatQVT.UnlimitedNatural" name="UnlimitedNatural">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <instanceClassName>java.lang.Integer</instanceClassName>
+    </xmi:Extension>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.UnlimitedNaturalExp" name="UnlimitedNaturalExp"
+      superClass="FlatQVT.NumericLiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.UnlimitedNaturalExp.symbol" name="symbol" isOrdered="true"
+        lower="0" type="FlatQVT.UnlimitedNatural"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.UnlinkExp" name="UnlinkExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.UnlinkExp.item" name="item" isOrdered="true" type="FlatQVT.OclExpression"
+        isComposite="true">
+      <ownedComment body="itemUnlink">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.UnlinkExp.target" name="target" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="tgtUnlink">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.UnpackExp" name="UnpackExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.UnpackExp.source" name="source" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.UnpackExp.targetVariable" name="targetVariable"
+        isOrdered="true" upper="*" type="FlatQVT.Variable"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.VarParameter" name="VarParameter"
+      superClass="FlatQVT.Variable FlatQVT.Parameter">
+    <ownedAttribute xmi:id="FlatQVT.VarParameter.ctxOwner" name="ctxOwner" isOrdered="true"
+        lower="0" type="FlatQVT.ImperativeOperation" opposite="FlatQVT.ImperativeOperation.context">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.VarParameter.kind" name="kind" isOrdered="true"
+        lower="0" type="FlatQVT.DirectionKind"/>
+    <ownedAttribute xmi:id="FlatQVT.VarParameter.resOwner" name="resOwner" isOrdered="true"
+        lower="0" type="FlatQVT.ImperativeOperation" opposite="FlatQVT.ImperativeOperation.result">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Variable" name="Variable" superClass="FlatQVT.TypedElement">
+    <ownedAttribute xmi:id="FlatQVT.Variable.initExpression" name="initExpression"
+        isOrdered="true" lower="0" type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="initializedElement">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Variable.letExp" name="letExp" isOrdered="true"
+        lower="0" type="FlatQVT.LetExp" opposite="FlatQVT.LetExp.variable">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <transient>true</transient>
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Variable.representedParameter" name="representedParameter"
+        isOrdered="true" lower="0" type="FlatQVT.Parameter"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.VariableAssignment" name="VariableAssignment"
+      superClass="FlatQVT.Assignment">
+    <ownedAttribute xmi:id="FlatQVT.VariableAssignment.targetVariable" name="targetVariable"
+        isOrdered="true" type="FlatQVT.Variable">
+      <ownedComment body="assignment">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.VariableExp" name="VariableExp"
+      superClass="FlatQVT.OclExpression">
+    <ownedAttribute xmi:id="FlatQVT.VariableExp.referredVariable" name="referredVariable"
+        isOrdered="true" lower="0" type="FlatQVT.Variable">
+      <ownedComment body="referringExp">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.VariableInitExp" name="VariableInitExp"
+      superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.VariableInitExp.referredVariable" name="referredVariable"
+        isOrdered="true" type="FlatQVT.Variable" isComposite="true">
+      <ownedComment body="declaration">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.VariableInitExp.withResult" name="withResult"
+        isOrdered="true" lower="0" type="FlatQVT.Boolean" default="false"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.VoidType" name="VoidType" superClass="FlatQVT.Type"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.WhileExp" name="WhileExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.WhileExp.body" name="body" isOrdered="true" type="FlatQVT.OclExpression"
+        isComposite="true">
+      <ownedComment body="whileOwner">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.WhileExp.condition" name="condition" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true">
+      <ownedComment body="whileExpression">
+        <ownedComment body="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"/>
+      </ownedComment>
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <resolveProxies>false</resolveProxies>
+      </xmi:Extension>
+    </ownedAttribute>
+  </ownedType>
+  <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <nsPrefix>flatqvt</nsPrefix>
+  </xmi:Extension>
+</emof:Package>

@@ -1,0 +1,24 @@
+/*******************************************************************************
+ * Copyright (c) 2007,2008 Tata Consultancy Services and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     TCS - initial implementation for ModelMorf
+ *     E.D.Willink - alignment with evolved specification
+ *******************************************************************************/
+
+transformation UmlToRdbms_2(uml:umlMM, rdbms:rdbmsMM)
+{
+	relation PackageToSchema
+	{
+		n : String;
+		
+		enforce domain uml c2:Package { name = n };
+		
+		enforce domain rdbms t2:Schema { name = n };
+	}
+}
+

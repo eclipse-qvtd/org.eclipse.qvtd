@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) 2007,2008 Tata Consultancy Services and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     TCS - initial implementation for ModelMorf
+ *     E.D.Willink - alignment with evolved specification
+-->
+<emof:Package xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="umlMM"
+    name="umlMM" uri="umlMM">
+  <ownedType xmi:type="emof:Class" xmi:id="umlMM.Dummy" name="Dummy">
+    <ownedAttribute xmi:id="umlMM.Dummy.hasPackage" name="hasPackage" upper="*" type="umlMM.Package"
+        isComposite="true"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="umlMM.Package" name="Package">
+    <ownedAttribute xmi:id="umlMM.Package.name" name="name" isID="true">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="umlMM.Package.hasClass" name="hasClass" upper="*" type="umlMM.Class"
+        isComposite="true" opposite="umlMM.Class.hasPackage"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="umlMM.Class" name="Class">
+    <ownedAttribute xmi:id="umlMM.Class.name" name="name" isID="true">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="umlMM.Class.hasPackage" name="hasPackage" lower="1" type="umlMM.Package"
+        opposite="umlMM.Package.hasClass"/>
+  </ownedType>
+</emof:Package>

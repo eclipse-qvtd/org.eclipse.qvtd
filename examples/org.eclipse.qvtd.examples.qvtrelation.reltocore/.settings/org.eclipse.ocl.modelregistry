@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<mreg:ModelRegistrySettings xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:mreg="http://www.eclipse.org/ocl/1.0/ModelRegistry">
+  <resource name="qvtrsrc">
+    <entry accessor="emof" kind="Model Name" uri="platform:/plugin/org.eclipse.qvtd.emof.emof/model/EMOF.ecore"/>
+    <entry accessor="essentialocl" kind="Model Name" uri="platform:/plugin/org.eclipse.qvtd.emof.essentialocl/model/EssentialOCL.ecore"/>
+    <entry accessor="qvtbase" kind="Model Name" uri="platform:/plugin/org.eclipse.qvtd.emof.qvtbase/model/QVTBase.ecore"/>
+    <entry accessor="qvtcore" kind="Model Name" uri="platform:/plugin/org.eclipse.qvtd.emof.qvtcore/model/QVTCore.ecore"/>
+    <entry accessor="qvtrelation" kind="Model Name" uri="platform:/plugin/org.eclipse.qvtd.emof.qvtrelation/model/QVTRelation.ecore"/>
+    <entry accessor="qvttemplate" kind="Model Name" uri="platform:/plugin/org.eclipse.qvtd.emof.qvttemplate/model/QVTTemplate.ecore"/>
+  </resource>
+  <resource name="qvtrsrc/FlatRelToCore.qvtr">
+    <entry accessor="QVTMM" kind="Model Name" uri="qvtrsrc/FlatQVT.emof"/>
+  </resource>
+</mreg:ModelRegistrySettings>

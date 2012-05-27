@@ -1,0 +1,150 @@
+/*******************************************************************************
+ * Copyright (c) 2007,2008 Tata Consultancy Services and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     TCS - initial implementation for ModelMorf
+ *     E.D.Willink - alignment with evolved specification
+ *******************************************************************************/
+transformation SeqToStmc(seqDgm:SeqMM, stmc:StmcMM)
+{
+	top relation LifeLineToStateMachine
+	{
+		cn:String;
+
+		domain seqDgm 
+		l:LifeLine
+		{
+			object = o:Object
+			{
+				class = c1:Class
+				{
+					name = cn
+				}
+			}
+		};
+
+		checkonly domain stmc 
+		s:StateMachine
+		{
+			owner = c2:Class
+			{
+				name = cn
+			}
+		};
+
+		where
+		{
+			LLEventSeqToSMStatePath(l, s);
+		}
+	}
+
+	relation LLEventSeqToSMStatePath
+	{
+		en:String;
+		restEvSeq:Sequence(SeqMM::MessageEvent);
+
+		domain seqDgm 
+		ll:LifeLine
+		{
+			event = es:Sequence(MessageEvent)
+			{
+				e1:MessageEvent{name = en} ++ restEvSeq
+			}
+		};
+
+		checkonly domain stmc 
+		sm:StateMachine
+		{
+			state = s1:State
+			{
+				outTransition = tr:Transition
+				{
+					event = e:Event
+					{
+						name = en
+					},
+					toState = s2:State{}
+				}
+			}
+		};
+
+		where
+		{
+			EventSeqToStatePath(restEvSeq, s2);
+		}
+	}
+
+	relation EventSeqToStatePath
+	{
+		domain seqDgm 
+		es:Sequence(MessageEvent)
+		{
+		};
+
+		checkonly domain stmc 
+		fs:State{};
+
+		where
+		{
+			EventSeqToStatePathImm(es, fs)
+			or
+			EventSeqToStatePathTrans(es, fs);
+		}
+	}
+
+	relation EventSeqToStatePathImm
+	{
+		en:String;
+		restEvSeq:Sequence(SeqMM::MessageEvent);
+
+		domain seqDgm 
+		es:Sequence(MessageEvent)
+		{
+			e1:MessageEvent{name = en} ++ restEvSeq
+		};
+	
+		checkonly domain stmc 
+		fs:State
+		{
+			outTransition = tr:Transition
+			{
+				event = e2:Event
+				{
+					name = en
+				},
+				toState = ts:State{}
+			}
+		};
+
+		where 
+		{
+			EventSeqToStatePath(restEvSeq, ts);
+		}
+	}
+		
+	relation EventSeqToStatePathTrans
+	{
+		domain seqDgm 
+		es:Sequence(MessageEvent)
+		{
+		};
+
+		checkonly domain stmc 
+		fs:State
+		{
+			outTransition = tr:Transition
+			{
+				toState=ts:State{}
+			}
+		};
+
+		where 
+		{
+			EventSeqToStatePath(es, ts);
+		}
+	}
+}

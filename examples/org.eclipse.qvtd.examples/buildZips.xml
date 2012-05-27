@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="org.eclipse.qvtd.examples" default="zip.examples" basedir=".">
+	<target name="init">
+	</target>
+
+	<patternset id="qvtc.excludes" excludes="qvtcbin/**"/>
+	<patternset id="qvtr.excludes" excludes="qvtrbin/**"/>
+	
+	<target name="zip.examples" depends="init">
+		<!-- ../../examples is the prefcerred project layout
+		     ../ is the result of an Import Project Set File -->
+		<condition property="examplesDir" value="../../examples/" else="../">
+		    <available file="../../examples" type="dir"/>
+		</condition>
+		<echoproperties/>
+		<!-- This example may have been compiled already in the Master feature -->
+		<delete>
+			<!-- Cleanup obsolete zips from earlier variant of script -->
+			<fileset dir="zips" includes="*.zip"/>
+		</delete>
+		<mkdir dir="zips/qvtc"/>
+		<zip destfile="zips/qvtc/empty.zip" basedir="${examplesDir}org.eclipse.qvtd.examples.qvtcore.empty">
+			<patternset refid="qvtc.excludes"/>
+		</zip>
+		<mkdir dir="zips/qvtr"/>
+		<zip destfile="zips/qvtr/empty.zip" basedir="${examplesDir}org.eclipse.qvtd.examples.qvtrelation.empty">
+			<patternset refid="qvtr.excludes"/>
+		</zip>
+		<zip destfile="zips/qvtr/modelmorf.zip" basedir="${examplesDir}org.eclipse.qvtd.examples.qvtrelation.modelmorf">
+			<patternset refid="qvtr.excludes"/>
+		</zip>
+		<zip destfile="zips/qvtr/reltocore.zip" basedir="${examplesDir}org.eclipse.qvtd.examples.qvtrelation.reltocore">
+			<patternset refid="qvtr.excludes"/>
+		</zip>
+		<antcall target="refresh"/>
+	</target>
+
+	<target name="clean" depends="init" description="Clean the plug-in: org.eclipse.qvtd.examples.">
+		<delete>
+			<fileset dir="zips" includes="**/*.zip"/>
+		</delete>
+		<antcall target="refresh"/>
+	</target>
+
+	<target name="refresh" depends="init" if="eclipse.running" description="Refresh this folder.">
+		<eclipse.refreshLocal resource="/org.eclipse.qvtd.examples" depth="infinite"/>
+	</target>
+</project>

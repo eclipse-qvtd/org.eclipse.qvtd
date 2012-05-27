@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<introContent>
+  	<extensionContent id="qvtd-examples-introExtension" style="css/sample.css" name="Sample Extension" path="overview/@">
+		<group style-id="content-group" id="qvtd-examples-introLink-group">
+       		<link label="QVT Declarative Examples" url="http://www.eclipse.org" id="qvtde-examples-introLink" style-id="content-link">
+          		<text>Example QVT Declarative projects may be loaded by File->New->Projects... Examples.QVT...</text>
+       		</link>
+       	</group>
+  	</extensionContent>
+</introContent>
