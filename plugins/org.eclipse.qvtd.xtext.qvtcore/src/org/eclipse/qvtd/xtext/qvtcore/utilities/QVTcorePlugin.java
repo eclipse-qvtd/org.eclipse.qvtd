@@ -101,7 +101,7 @@ public final class QVTcorePlugin extends EMFPlugin {
 
 		@Override
 		public void start(BundleContext context) throws Exception {
-			QVTcoreStandaloneSetup.doSetup();
+			QVTcoreStandaloneSetup.init();
 			super.start(context);
 		}
 	}

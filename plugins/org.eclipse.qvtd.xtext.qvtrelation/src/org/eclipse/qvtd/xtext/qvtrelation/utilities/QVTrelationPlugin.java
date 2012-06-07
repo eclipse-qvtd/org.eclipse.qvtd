@@ -101,7 +101,7 @@ public final class QVTrelationPlugin extends EMFPlugin {
 
 		@Override
 		public void start(BundleContext context) throws Exception {
-			QVTrelationStandaloneSetup.doSetup();
+			QVTrelationStandaloneSetup.init();
 			super.start(context);
 		}
 	}
