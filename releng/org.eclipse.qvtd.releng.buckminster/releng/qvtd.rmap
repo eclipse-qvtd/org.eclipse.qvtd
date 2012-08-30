@@ -9,7 +9,7 @@
   <rm:property key="build.type" value="I"/>
   <rm:property key="build.type" mutable="false" value="I"/>
   <!--rm:property key="qvtd.core.last.p2.repository.location" value="https://hudson.eclipse.org/hudson/job/buckminster-mdt-ocl-core-3.2-master/lastSuccessfulBuild/artifact/MDT-OCL.p2.repository"/-->
-  <rm:property key="ocl.tools.last.p2.repository.location" value="https://hudson.eclipse.org/hudson/job/buckminster-mdt-ocl-tools-3.2-master/lastSuccessfulBuild/artifact/MDT-OCL.p2.repository/"/>
+  <rm:property key="ocl.tools.last.p2.repository.location" value="https://hudson.eclipse.org/hudson/job/buckminster-mdt-ocl-tools-kepler-master/lastSuccessfulBuild/artifact/MDT-OCL.p2.repository/"/>
   <rm:locator pattern="^org\.eclipse\.qvt$" searchPathRef="qvtd-source-code"/>
   <rm:locator pattern="^org\.eclipse\.qvtd.*$" searchPathRef="qvtd-source-code"/>
   <!--rm:locator pattern="^org\.eclipse\.acceleo.*" searchPathRef="acceleo"/-->
@@ -106,24 +106,24 @@
         <bc:propertyRef key="ocl.tools.last.p2.repository.location"/>
       </rm:uri>
     </rm:provider>
-    <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(resolve.target.platform=true)(build.type=I))" readerType="p2" source="false" mutable="false">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(build.type=I)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/modeling/mdt/ocl/updates/nightly">
+      <rm:uri format="{0}/modeling/mdt/ocl/updates/interim/4.1.0">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(build.type=S)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/modeling/mdt/ocl/updates/milestones">
+      <rm:uri format="{0}/modeling/mdt/ocl/updates/milestones/4.1.0">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=M)(build.type=R)))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/modeling/mdt/ocl/updates/releases">
+      <rm:uri format="{0}/modeling/mdt/ocl/updates/releases/4.1.0">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
