@@ -25,6 +25,9 @@
  */
 package	org.eclipse.qvtd.pivot.qvttemplate.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * An AbstractExtendingQVTtemplateVisitor provides a default implementation for each
  * visitXxx method that delegates to the visitYyy method of the first
@@ -41,23 +44,23 @@ public abstract class AbstractExtendingQVTtemplateVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractExtendingQVTtemplateVisitor(C context) {
+	protected AbstractExtendingQVTtemplateVisitor(@NonNull C context) {
 	    super(context);
 	}	
 
-	public R visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
+	public @Nullable R visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
 		return visitTemplateExp(object);
 	}
 
-	public R visitObjectTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
+	public @Nullable R visitObjectTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
 		return visitTemplateExp(object);
 	}
 
-	public R visitPropertyTemplateItem(org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
+	public @Nullable R visitPropertyTemplateItem(@NonNull org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
 		return visitElement(object);
 	}
 
-	public R visitTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
+	public @Nullable R visitTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
 		return visitLiteralExp(object);
 	}
 }

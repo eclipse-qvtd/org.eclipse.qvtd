@@ -25,24 +25,27 @@
  */
 package	org.eclipse.qvtd.xtext.qvtcorecst.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  */
 public interface QVTcoreCSVisitor<R> extends org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor<R>
 {
-	R visitAreaCS(org.eclipse.qvtd.xtext.qvtcorecst.AreaCS object);
-	R visitAssignmentCS(org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS object);
-	R visitBottomPatternCS(org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS object);
-	R visitDirectionCS(org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS object);
-	R visitDomainCS(org.eclipse.qvtd.xtext.qvtcorecst.DomainCS object);
-	R visitEnforcementOperationCS(org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS object);
-	R visitGuardPatternCS(org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS object);
-	R visitMappingCS(org.eclipse.qvtd.xtext.qvtcorecst.MappingCS object);
-	R visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS object);
-	R visitPatternCS(org.eclipse.qvtd.xtext.qvtcorecst.PatternCS object);
-	R visitQueryCS(org.eclipse.qvtd.xtext.qvtcorecst.QueryCS object);
-	R visitRealizeableVariableCS(org.eclipse.qvtd.xtext.qvtcorecst.RealizeableVariableCS object);
-	R visitRealizedVariableCS(org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS object);
-	R visitTopLevelCS(org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS object);
-	R visitTransformationCS(org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS object);
-	R visitUnrealizedVariableCS(org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS object);
+	@Nullable R visitAreaCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.AreaCS object);
+	@Nullable R visitAssignmentCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS object);
+	@Nullable R visitBottomPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS object);
+	@Nullable R visitDirectionCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS object);
+	@Nullable R visitDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.DomainCS object);
+	@Nullable R visitEnforcementOperationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS object);
+	@Nullable R visitGuardPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS object);
+	@Nullable R visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCS object);
+	@Nullable R visitParamDeclarationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS object);
+	@Nullable R visitPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.PatternCS object);
+	@Nullable R visitQueryCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.QueryCS object);
+	@Nullable R visitRealizeableVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.RealizeableVariableCS object);
+	@Nullable R visitRealizedVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS object);
+	@Nullable R visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS object);
+	@Nullable R visitTransformationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS object);
+	@Nullable R visitUnrealizedVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS object);
 }

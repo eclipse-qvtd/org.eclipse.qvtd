@@ -25,6 +25,8 @@
  */
 package	org.eclipse.qvtd.xtext.qvtcorecst.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  */
 public abstract class AbstractQVTcoreCSVisitor<R, C>
@@ -36,7 +38,7 @@ public abstract class AbstractQVTcoreCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractQVTcoreCSVisitor(C context) {
+	protected AbstractQVTcoreCSVisitor(@NonNull C context) {
 	    super(context);
 	}
 }

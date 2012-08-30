@@ -16,6 +16,7 @@ package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
 import java.io.IOException;
 
+import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationStandaloneSetup;
 
@@ -26,6 +27,7 @@ public class LoadTests extends LoadTestCase
 {	
 	@Override
 	protected void setUp() throws Exception {
+		EssentialOCLLinkingService.DEBUG_RETRY = true;
 		super.setUp();
 		QVTrelationStandaloneSetup.doSetup();
 	}
@@ -38,7 +40,7 @@ public class LoadTests extends LoadTestCase
 		doLoad_Concrete("hstmtostm", "qvtr");
 	}	
 
-	public void testLoad_RelToCoreWithoutErrors_qvtr() throws IOException, InterruptedException {
-		doLoad_Concrete("RelToCoreWithoutErrors", "qvtr");
-	}	
+//	public void testLoad_RelToCoreWithoutErrors_qvtr() throws IOException, InterruptedException {
+//		doLoad_Concrete("RelToCoreWithoutErrors", "qvtr");
+//	}	
 }

@@ -25,6 +25,8 @@
  */
 package	org.eclipse.qvtd.xtext.qvtrelationcst.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  */
 public abstract class AbstractQVTrelationCSVisitor<R, C>
@@ -36,7 +38,7 @@ public abstract class AbstractQVTrelationCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractQVTrelationCSVisitor(C context) {
+	protected AbstractQVTrelationCSVisitor(@NonNull C context) {
 	    super(context);
 	}
 }

@@ -18,35 +18,39 @@ package org.eclipse.qvtd.pivot.qvtrelation.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
-import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
-
 import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
-
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-
-import org.eclipse.qvtd.pivot.qvtrelation.*;
+import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
+import org.eclipse.qvtd.pivot.qvtrelation.Key;
+import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
+import org.eclipse.qvtd.pivot.qvtrelation.Relation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
 /**
  * <!-- begin-user-doc -->
@@ -201,20 +205,16 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 				return createNamespaceAdapter();
 			}
 			@Override
-			public Adapter caseTemplateableElement(TemplateableElement object) {
-				return createTemplateableElementAdapter();
-			}
-			@Override
-			public Adapter casePackage(org.eclipse.ocl.examples.pivot.Package object) {
-				return createPackageAdapter();
-			}
-			@Override
-			public Adapter caseModel(Model object) {
-				return createModelAdapter();
+			public Adapter caseRoot(Root object) {
+				return createRootAdapter();
 			}
 			@Override
 			public Adapter caseBaseModel(BaseModel object) {
 				return createBaseModelAdapter();
+			}
+			@Override
+			public Adapter caseTemplateableElement(TemplateableElement object) {
+				return createTemplateableElementAdapter();
 			}
 			@Override
 			public Adapter caseParameterableElement(ParameterableElement object) {
@@ -227,6 +227,10 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseClass(org.eclipse.ocl.examples.pivot.Class object) {
 				return createClassAdapter();
+			}
+			@Override
+			public Adapter casePackage(org.eclipse.ocl.examples.pivot.Package object) {
+				return createPackageAdapter();
 			}
 			@Override
 			public Adapter caseTransformation(Transformation object) {
@@ -631,6 +635,20 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Root <em>Root</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.Root
+	 * @generated
+	 */
+	public Adapter createRootAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Class <em>Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -655,20 +673,6 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPackageAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Model <em>Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.Model
-	 * @generated
-	 */
-	public Adapter createModelAdapter() {
 		return null;
 	}
 

@@ -1,5 +1,5 @@
-import tuml2rdbms : 'TumlRdbms.ecore';
-import umlMM : 'umlMM.emof';
+import tuml2rdbms : 'TumlRdbms.ecore'::tuml2rdbms;
+import umlMM : 'umlMM.emof'::umlMM;
 
 transformation umlRdbms {
         middle imports tuml2rdbms;

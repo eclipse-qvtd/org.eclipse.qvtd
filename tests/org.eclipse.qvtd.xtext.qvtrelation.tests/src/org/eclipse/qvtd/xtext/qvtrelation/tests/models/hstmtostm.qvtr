@@ -10,8 +10,8 @@
  *     E.D.Willink - alignment with evolved specification
  *******************************************************************************/
 
-import hstm : 'hstmMM.emof#/';
-import stm : 'stmMM.emof#/';
+import hstm : 'hstmMM.emof'::hstmMM_p;
+import stm : 'stmMM.emof'::stmMM_p;
 
 transformation HstmToStm(hstm:hstmMM_p, stm:stmMM_p)
 {

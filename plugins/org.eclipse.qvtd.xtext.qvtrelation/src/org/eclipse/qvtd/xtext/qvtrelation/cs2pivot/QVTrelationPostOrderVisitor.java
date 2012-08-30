@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuations;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.SingleContinuation;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
@@ -110,7 +111,8 @@ public class QVTrelationPostOrderVisitor extends AbstractQVTrelationPostOrderVis
 		@Override
 		public BasicContinuation<?> execute() {
 			TemplateExp pivotElement = PivotUtil.getPivot(TemplateExp.class, csElement);
-			OCLExpression oclExpression = context.visitLeft2Right(OCLExpression.class, csElement.getGuardExpression());		
+			ExpCS guardExpression = csElement.getGuardExpression();
+			OCLExpression oclExpression = guardExpression != null ? context.visitLeft2Right(OCLExpression.class, guardExpression) : null;		
 			pivotElement.setWhere(oclExpression);
 			return null;
 		}

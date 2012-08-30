@@ -1172,6 +1172,15 @@ public interface QVTrelationCSTPackage extends EPackage {
 	int PARAM_DECLARATION_CS__QUALIFIER = BaseCSTPackage.TYPED_ELEMENT_CS__QUALIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM_DECLARATION_CS__OPTIONAL = BaseCSTPackage.TYPED_ELEMENT_CS__OPTIONAL;
+
+	/**
 	 * The number of structural features of the '<em>Param Declaration CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1598,6 +1607,15 @@ public interface QVTrelationCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int QUERY_CS__QUALIFIER = BaseCSTPackage.TYPED_ELEMENT_CS__QUALIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_CS__OPTIONAL = BaseCSTPackage.TYPED_ELEMENT_CS__OPTIONAL;
 
 	/**
 	 * The feature id for the '<em><b>Input Param Declarations</b></em>' containment reference list.

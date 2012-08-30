@@ -17,7 +17,6 @@
 package org.eclipse.qvtd.pivot.qvtbase.attributes;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -33,10 +32,9 @@ public class DomainAttribution extends AbstractAttribution
 		Domain domain = (Domain)target;
 		TypedModel typedModel = domain.getTypedModel();
 		if (typedModel != null) {
-			MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 			for (org.eclipse.ocl.examples.pivot.Package targetPackage : typedModel.getUsedPackage()) {
-				environmentView.addNamedElements(metaModelManager.getLocalPackages(targetPackage));
-				environmentView.addNamedElements(metaModelManager.getLocalClasses(targetPackage));
+				environmentView.addAllPackages(targetPackage);
+				environmentView.addAllTypes(targetPackage);
 			}
 		}
 		return scopeView.getParent();

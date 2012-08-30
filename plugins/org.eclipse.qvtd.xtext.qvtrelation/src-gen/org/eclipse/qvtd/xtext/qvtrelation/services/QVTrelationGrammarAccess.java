@@ -496,30 +496,30 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
 		private final Assignment cMetaModelIdsAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
-		private final CrossReference cMetaModelIdsPackageCrossReference_2_0_0 = (CrossReference)cMetaModelIdsAssignment_2_0.eContents().get(0);
-		private final RuleCall cMetaModelIdsPackageUnrestrictedNameParserRuleCall_2_0_0_1 = (RuleCall)cMetaModelIdsPackageCrossReference_2_0_0.eContents().get(1);
+		private final CrossReference cMetaModelIdsNamespaceCrossReference_2_0_0 = (CrossReference)cMetaModelIdsAssignment_2_0.eContents().get(0);
+		private final RuleCall cMetaModelIdsNamespaceUnrestrictedNameParserRuleCall_2_0_0_1 = (RuleCall)cMetaModelIdsNamespaceCrossReference_2_0_0.eContents().get(1);
 		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cMetaModelIdsAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final CrossReference cMetaModelIdsPackageCrossReference_2_1_1_0 = (CrossReference)cMetaModelIdsAssignment_2_1_1.eContents().get(0);
-		private final RuleCall cMetaModelIdsPackageUnrestrictedNameParserRuleCall_2_1_1_0_1 = (RuleCall)cMetaModelIdsPackageCrossReference_2_1_1_0.eContents().get(1);
+		private final CrossReference cMetaModelIdsNamespaceCrossReference_2_1_1_0 = (CrossReference)cMetaModelIdsAssignment_2_1_1.eContents().get(0);
+		private final RuleCall cMetaModelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_1_0_1 = (RuleCall)cMetaModelIdsNamespaceCrossReference_2_1_1_0.eContents().get(1);
 		private final Group cGroup_2_1_2 = (Group)cGroup_2_1.eContents().get(2);
 		private final Keyword cCommaKeyword_2_1_2_0 = (Keyword)cGroup_2_1_2.eContents().get(0);
 		private final Assignment cMetaModelIdsAssignment_2_1_2_1 = (Assignment)cGroup_2_1_2.eContents().get(1);
-		private final CrossReference cMetaModelIdsPackageCrossReference_2_1_2_1_0 = (CrossReference)cMetaModelIdsAssignment_2_1_2_1.eContents().get(0);
-		private final RuleCall cMetaModelIdsPackageUnrestrictedNameParserRuleCall_2_1_2_1_0_1 = (RuleCall)cMetaModelIdsPackageCrossReference_2_1_2_1_0.eContents().get(1);
+		private final CrossReference cMetaModelIdsNamespaceCrossReference_2_1_2_1_0 = (CrossReference)cMetaModelIdsAssignment_2_1_2_1.eContents().get(0);
+		private final RuleCall cMetaModelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_2_1_0_1 = (RuleCall)cMetaModelIdsNamespaceCrossReference_2_1_2_1_0.eContents().get(1);
 		private final Keyword cRightCurlyBracketKeyword_2_1_3 = (Keyword)cGroup_2_1.eContents().get(3);
 		
 		//ModelDeclCS:
 		//
-		//	name=UnrestrictedName ":" (metaModelIds+=[pivot::Package|UnrestrictedName] | "{"
+		//	name=UnrestrictedName ":" (metaModelIds+=[pivot::Namespace|UnrestrictedName] | "{"
 		//
-		//	metaModelIds+=[pivot::Package|UnrestrictedName] ("," metaModelIds+=[pivot::Package|UnrestrictedName])* "}");
+		//	metaModelIds+=[pivot::Namespace|UnrestrictedName] ("," metaModelIds+=[pivot::Namespace|UnrestrictedName])* "}");
 		public ParserRule getRule() { return rule; }
 
-		//name=UnrestrictedName ":" (metaModelIds+=[pivot::Package|UnrestrictedName] | "{"
+		//name=UnrestrictedName ":" (metaModelIds+=[pivot::Namespace|UnrestrictedName] | "{"
 		//
-		//metaModelIds+=[pivot::Package|UnrestrictedName] ("," metaModelIds+=[pivot::Package|UnrestrictedName])* "}")
+		//metaModelIds+=[pivot::Namespace|UnrestrictedName] ("," metaModelIds+=[pivot::Namespace|UnrestrictedName])* "}")
 		public Group getGroup() { return cGroup; }
 
 		//name=UnrestrictedName
@@ -531,49 +531,49 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//":"
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
-		//metaModelIds+=[pivot::Package|UnrestrictedName] | "{" metaModelIds+=[pivot::Package|UnrestrictedName] (","
+		//metaModelIds+=[pivot::Namespace|UnrestrictedName] | "{" metaModelIds+=[pivot::Namespace|UnrestrictedName] (","
 		//
-		//metaModelIds+=[pivot::Package|UnrestrictedName])* "}"
+		//metaModelIds+=[pivot::Namespace|UnrestrictedName])* "}"
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
-		//metaModelIds+=[pivot::Package|UnrestrictedName]
+		//metaModelIds+=[pivot::Namespace|UnrestrictedName]
 		public Assignment getMetaModelIdsAssignment_2_0() { return cMetaModelIdsAssignment_2_0; }
 
-		//[pivot::Package|UnrestrictedName]
-		public CrossReference getMetaModelIdsPackageCrossReference_2_0_0() { return cMetaModelIdsPackageCrossReference_2_0_0; }
+		//[pivot::Namespace|UnrestrictedName]
+		public CrossReference getMetaModelIdsNamespaceCrossReference_2_0_0() { return cMetaModelIdsNamespaceCrossReference_2_0_0; }
 
 		//UnrestrictedName
-		public RuleCall getMetaModelIdsPackageUnrestrictedNameParserRuleCall_2_0_0_1() { return cMetaModelIdsPackageUnrestrictedNameParserRuleCall_2_0_0_1; }
+		public RuleCall getMetaModelIdsNamespaceUnrestrictedNameParserRuleCall_2_0_0_1() { return cMetaModelIdsNamespaceUnrestrictedNameParserRuleCall_2_0_0_1; }
 
-		//"{" metaModelIds+=[pivot::Package|UnrestrictedName] ("," metaModelIds+=[pivot::Package|UnrestrictedName])* "}"
+		//"{" metaModelIds+=[pivot::Namespace|UnrestrictedName] ("," metaModelIds+=[pivot::Namespace|UnrestrictedName])* "}"
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2_1_0() { return cLeftCurlyBracketKeyword_2_1_0; }
 
-		//metaModelIds+=[pivot::Package|UnrestrictedName]
+		//metaModelIds+=[pivot::Namespace|UnrestrictedName]
 		public Assignment getMetaModelIdsAssignment_2_1_1() { return cMetaModelIdsAssignment_2_1_1; }
 
-		//[pivot::Package|UnrestrictedName]
-		public CrossReference getMetaModelIdsPackageCrossReference_2_1_1_0() { return cMetaModelIdsPackageCrossReference_2_1_1_0; }
+		//[pivot::Namespace|UnrestrictedName]
+		public CrossReference getMetaModelIdsNamespaceCrossReference_2_1_1_0() { return cMetaModelIdsNamespaceCrossReference_2_1_1_0; }
 
 		//UnrestrictedName
-		public RuleCall getMetaModelIdsPackageUnrestrictedNameParserRuleCall_2_1_1_0_1() { return cMetaModelIdsPackageUnrestrictedNameParserRuleCall_2_1_1_0_1; }
+		public RuleCall getMetaModelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_1_0_1() { return cMetaModelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_1_0_1; }
 
-		//("," metaModelIds+=[pivot::Package|UnrestrictedName])*
+		//("," metaModelIds+=[pivot::Namespace|UnrestrictedName])*
 		public Group getGroup_2_1_2() { return cGroup_2_1_2; }
 
 		//","
 		public Keyword getCommaKeyword_2_1_2_0() { return cCommaKeyword_2_1_2_0; }
 
-		//metaModelIds+=[pivot::Package|UnrestrictedName]
+		//metaModelIds+=[pivot::Namespace|UnrestrictedName]
 		public Assignment getMetaModelIdsAssignment_2_1_2_1() { return cMetaModelIdsAssignment_2_1_2_1; }
 
-		//[pivot::Package|UnrestrictedName]
-		public CrossReference getMetaModelIdsPackageCrossReference_2_1_2_1_0() { return cMetaModelIdsPackageCrossReference_2_1_2_1_0; }
+		//[pivot::Namespace|UnrestrictedName]
+		public CrossReference getMetaModelIdsNamespaceCrossReference_2_1_2_1_0() { return cMetaModelIdsNamespaceCrossReference_2_1_2_1_0; }
 
 		//UnrestrictedName
-		public RuleCall getMetaModelIdsPackageUnrestrictedNameParserRuleCall_2_1_2_1_0_1() { return cMetaModelIdsPackageUnrestrictedNameParserRuleCall_2_1_2_1_0_1; }
+		public RuleCall getMetaModelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_2_1_0_1() { return cMetaModelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_2_1_0_1; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_2_1_3() { return cRightCurlyBracketKeyword_2_1_3; }
@@ -1206,17 +1206,20 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
 		private final RuleCall cNameUnrestrictedNameParserRuleCall_1_0_0 = (RuleCall)cNameAssignment_1_0.eContents().get(0);
 		private final Keyword cColonKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
-		private final Assignment cNamespaceAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cNamespaceNamespaceCrossReference_2_0 = (CrossReference)cNamespaceAssignment_2.eContents().get(0);
-		private final RuleCall cNamespaceNamespaceURIParserRuleCall_2_0_1 = (RuleCall)cNamespaceNamespaceCrossReference_2_0.eContents().get(1);
-		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cPathNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cPathNameURIPathNameCSParserRuleCall_2_0 = (RuleCall)cPathNameAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cColonColonKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cAllAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final Keyword cAllAsteriskKeyword_3_1_0 = (Keyword)cAllAssignment_3_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//UnitCS returns base::ImportCS:
 		//
-		//	"import" (name=UnrestrictedName ":")? namespace=[pivot::Namespace|URI] ";";
+		//	"import" (name=UnrestrictedName ":")? pathName=URIPathNameCS ("::" all?="*")? ";";
 		public ParserRule getRule() { return rule; }
 
-		//"import" (name=UnrestrictedName ":")? namespace=[pivot::Namespace|URI] ";"
+		//"import" (name=UnrestrictedName ":")? pathName=URIPathNameCS ("::" all?="*")? ";"
 		public Group getGroup() { return cGroup; }
 
 		//"import"
@@ -1234,17 +1237,26 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//":"
 		public Keyword getColonKeyword_1_1() { return cColonKeyword_1_1; }
 
-		//namespace=[pivot::Namespace|URI]
-		public Assignment getNamespaceAssignment_2() { return cNamespaceAssignment_2; }
+		//pathName=URIPathNameCS
+		public Assignment getPathNameAssignment_2() { return cPathNameAssignment_2; }
 
-		//[pivot::Namespace|URI]
-		public CrossReference getNamespaceNamespaceCrossReference_2_0() { return cNamespaceNamespaceCrossReference_2_0; }
+		//URIPathNameCS
+		public RuleCall getPathNameURIPathNameCSParserRuleCall_2_0() { return cPathNameURIPathNameCSParserRuleCall_2_0; }
 
-		//URI
-		public RuleCall getNamespaceNamespaceURIParserRuleCall_2_0_1() { return cNamespaceNamespaceURIParserRuleCall_2_0_1; }
+		//("::" all?="*")?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"::"
+		public Keyword getColonColonKeyword_3_0() { return cColonColonKeyword_3_0; }
+
+		//all?="*"
+		public Assignment getAllAssignment_3_1() { return cAllAssignment_3_1; }
+
+		//"*"
+		public Keyword getAllAsteriskKeyword_3_1_0() { return cAllAsteriskKeyword_3_1_0; }
 
 		//";"
-		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
+		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
 	public class VarDeclarationCSElements extends AbstractParserRuleElementFinder {
@@ -1759,9 +1771,9 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 	//ModelDeclCS:
 	//
-	//	name=UnrestrictedName ":" (metaModelIds+=[pivot::Package|UnrestrictedName] | "{"
+	//	name=UnrestrictedName ":" (metaModelIds+=[pivot::Namespace|UnrestrictedName] | "{"
 	//
-	//	metaModelIds+=[pivot::Package|UnrestrictedName] ("," metaModelIds+=[pivot::Package|UnrestrictedName])* "}");
+	//	metaModelIds+=[pivot::Namespace|UnrestrictedName] ("," metaModelIds+=[pivot::Namespace|UnrestrictedName])* "}");
 	public ModelDeclCSElements getModelDeclCSAccess() {
 		return (pModelDeclCS != null) ? pModelDeclCS : (pModelDeclCS = new ModelDeclCSElements());
 	}
@@ -1883,7 +1895,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 	//UnitCS returns base::ImportCS:
 	//
-	//	"import" (name=UnrestrictedName ":")? namespace=[pivot::Namespace|URI] ";";
+	//	"import" (name=UnrestrictedName ":")? pathName=URIPathNameCS ("::" all?="*")? ";";
 	public UnitCSElements getUnitCSAccess() {
 		return (pUnitCS != null) ? pUnitCS : (pUnitCS = new UnitCSElements());
 	}
@@ -2350,6 +2362,28 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		return getNextPathElementCSAccess().getRule();
 	}
 
+	//URIPathNameCS returns base::PathNameCS:
+	//
+	//	path+=URIFirstPathElementCS ("::" path+=NextPathElementCS)*;
+	public EssentialOCLGrammarAccess.URIPathNameCSElements getURIPathNameCSAccess() {
+		return gaEssentialOCL.getURIPathNameCSAccess();
+	}
+	
+	public ParserRule getURIPathNameCSRule() {
+		return getURIPathNameCSAccess().getRule();
+	}
+
+	//URIFirstPathElementCS returns base::PathElementCS:
+	//
+	//	element=[pivot::NamedElement|UnrestrictedName] | {base::PathElementWithURICS} element=[pivot::Namespace|URI];
+	public EssentialOCLGrammarAccess.URIFirstPathElementCSElements getURIFirstPathElementCSAccess() {
+		return gaEssentialOCL.getURIFirstPathElementCSAccess();
+	}
+	
+	public ParserRule getURIFirstPathElementCSRule() {
+		return getURIFirstPathElementCSAccess().getRule();
+	}
+
 	////---------------------------------------------------------------------
 	// //  Types
 	//
@@ -2390,7 +2424,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 	//CollectionTypeCS:
 	//
-	//	name=CollectionTypeIdentifier ("(" ownedType=TypeExpCS ")")?;
+	//	name=CollectionTypeIdentifier ("(" ownedType=TypeExpCS ")" multiplicity=MultiplicityCS?)?;
 	public EssentialOCLGrammarAccess.CollectionTypeCSElements getCollectionTypeCSAccess() {
 		return gaEssentialOCL.getCollectionTypeCSAccess();
 	}
@@ -2628,7 +2662,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 	//TypeExpCS returns base::TypedRefCS:
 	//
-	//	(TypeNameExpCS | TypeLiteralCS) multiplicity=MultiplicityCS?;
+	//	TypeNameExpCS | TypeLiteralCS;
 	public EssentialOCLGrammarAccess.TypeExpCSElements getTypeExpCSAccess() {
 		return gaEssentialOCL.getTypeExpCSAccess();
 	}

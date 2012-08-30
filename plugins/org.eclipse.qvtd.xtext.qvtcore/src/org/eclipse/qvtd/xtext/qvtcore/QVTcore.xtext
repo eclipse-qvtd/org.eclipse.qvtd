@@ -55,7 +55,7 @@ GuardPatternCS: {GuardPatternCS}
 ;
 
 ImportCS returns base::ImportCS:
-	'import' (name=Identifier ':')? namespace=[pivot::Namespace|URI] (all?='::' '*')? ';';
+	'import' (name=Identifier ':')? pathName=URIPathNameCS (all?='::' '*')? ';';
 
 //IncludeCS returns IncludeCS:
 //	'include' namespace=[pivot::Namespace|URI] ';';

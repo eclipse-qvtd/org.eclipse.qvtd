@@ -25,6 +25,9 @@
  */
 package	org.eclipse.qvtd.pivot.qvtbase.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * An AbstractExtendingQVTbaseVisitor provides a default implementation for each
  * visitXxx method that delegates to the visitYyy method of the first
@@ -41,47 +44,47 @@ public abstract class AbstractExtendingQVTbaseVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractExtendingQVTbaseVisitor(C context) {
+	protected AbstractExtendingQVTbaseVisitor(@NonNull C context) {
 	    super(context);
 	}	
 
-	public R visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
-		return visitModel(object);
+	public @Nullable R visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
+		return visitRoot(object);
 	}
 
-	public R visitDomain(org.eclipse.qvtd.pivot.qvtbase.Domain object) {
+	public @Nullable R visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object) {
 		return visitElement(object);
 	}
 
-	public R visitFunction(org.eclipse.qvtd.pivot.qvtbase.Function object) {
+	public @Nullable R visitFunction(@NonNull org.eclipse.qvtd.pivot.qvtbase.Function object) {
 		return visitOperation(object);
 	}
 
-	public R visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.FunctionParameter object) {
+	public @Nullable R visitFunctionParameter(@NonNull org.eclipse.qvtd.pivot.qvtbase.FunctionParameter object) {
 		return visitParameter(object);
 	}
 
-	public R visitPattern(org.eclipse.qvtd.pivot.qvtbase.Pattern object) {
+	public @Nullable R visitPattern(@NonNull org.eclipse.qvtd.pivot.qvtbase.Pattern object) {
 		return visitElement(object);
 	}
 
-	public R visitPredicate(org.eclipse.qvtd.pivot.qvtbase.Predicate object) {
+	public @Nullable R visitPredicate(@NonNull org.eclipse.qvtd.pivot.qvtbase.Predicate object) {
 		return visitElement(object);
 	}
 
-	public R visitRule(org.eclipse.qvtd.pivot.qvtbase.Rule object) {
+	public @Nullable R visitRule(@NonNull org.eclipse.qvtd.pivot.qvtbase.Rule object) {
 		return visitNamedElement(object);
 	}
 
-	public R visitTransformation(org.eclipse.qvtd.pivot.qvtbase.Transformation object) {
+	public @Nullable R visitTransformation(@NonNull org.eclipse.qvtd.pivot.qvtbase.Transformation object) {
 		return visitClass(object);
 	}
 
-	public R visitTypedModel(org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
+	public @Nullable R visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
 		return visitNamedElement(object);
 	}
 
-	public R visitUnit(org.eclipse.qvtd.pivot.qvtbase.Unit object) {
+	public @Nullable R visitUnit(@NonNull org.eclipse.qvtd.pivot.qvtbase.Unit object) {
 		return visitNamedElement(object);
 	}
 }

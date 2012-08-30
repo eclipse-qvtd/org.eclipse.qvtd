@@ -25,19 +25,22 @@
  */
 package	org.eclipse.qvtd.pivot.qvtcore.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  */
 public interface QVTcoreVisitor<R> extends org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor<R>
 {
-	R visitAssignment(org.eclipse.qvtd.pivot.qvtcore.Assignment object);
-	R visitBottomPattern(org.eclipse.qvtd.pivot.qvtcore.BottomPattern object);
-	R visitCoreDomain(org.eclipse.qvtd.pivot.qvtcore.CoreDomain object);
-	R visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.CoreModel object);
-	R visitCorePattern(org.eclipse.qvtd.pivot.qvtcore.CorePattern object);
-	R visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation object);
-	R visitGuardPattern(org.eclipse.qvtd.pivot.qvtcore.GuardPattern object);
-	R visitMapping(org.eclipse.qvtd.pivot.qvtcore.Mapping object);
-	R visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment object);
-	R visitRealizedVariable(org.eclipse.qvtd.pivot.qvtcore.RealizedVariable object);
-	R visitVariableAssignment(org.eclipse.qvtd.pivot.qvtcore.VariableAssignment object);
+	@Nullable R visitAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcore.Assignment object);
+	@Nullable R visitBottomPattern(@NonNull org.eclipse.qvtd.pivot.qvtcore.BottomPattern object);
+	@Nullable R visitCoreDomain(@NonNull org.eclipse.qvtd.pivot.qvtcore.CoreDomain object);
+	@Nullable R visitCoreModel(@NonNull org.eclipse.qvtd.pivot.qvtcore.CoreModel object);
+	@Nullable R visitCorePattern(@NonNull org.eclipse.qvtd.pivot.qvtcore.CorePattern object);
+	@Nullable R visitEnforcementOperation(@NonNull org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation object);
+	@Nullable R visitGuardPattern(@NonNull org.eclipse.qvtd.pivot.qvtcore.GuardPattern object);
+	@Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtcore.Mapping object);
+	@Nullable R visitPropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment object);
+	@Nullable R visitRealizedVariable(@NonNull org.eclipse.qvtd.pivot.qvtcore.RealizedVariable object);
+	@Nullable R visitVariableAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcore.VariableAssignment object);
 }

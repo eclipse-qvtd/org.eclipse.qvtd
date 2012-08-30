@@ -91,6 +91,15 @@ public interface QVTtemplatePackage extends EPackage {
 	int TEMPLATE_EXP__OWNED_COMMENT = PivotPackage.LITERAL_EXP__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_EXP__EXTENSION = PivotPackage.LITERAL_EXP__EXTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -180,6 +189,15 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLECTION_TEMPLATE_EXP__OWNED_COMMENT = TEMPLATE_EXP__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP__EXTENSION = TEMPLATE_EXP__EXTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -300,6 +318,15 @@ public interface QVTtemplatePackage extends EPackage {
 	int OBJECT_TEMPLATE_EXP__OWNED_COMMENT = TEMPLATE_EXP__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP__EXTENSION = TEMPLATE_EXP__EXTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -407,6 +434,15 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_TEMPLATE_ITEM__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_ITEM__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Obj Container</b></em>' container reference.

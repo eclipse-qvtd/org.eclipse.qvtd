@@ -76,7 +76,7 @@ public class QVTcoreToStringVisitor extends QVTbaseToStringVisitor implements QV
 	}
 
 	public String visitCoreModel(CoreModel object) {
-		return visitModel(object);
+		return visitRoot(object);
 	}
 
 	public String visitCorePattern(CorePattern object) {

@@ -157,7 +157,7 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 
 	public Continuation<?> visitTopLevelCS(TopLevelCS csElement) {
 		importPackages(csElement);
-		refreshPackage(CoreModel.class, QVTcorePackage.Literals.CORE_MODEL, csElement);
+		refreshRoot(CoreModel.class, QVTcorePackage.Literals.CORE_MODEL, csElement);
 		List<TransformationCS> csTransformations = csElement.getTransformations();
 		List<Transformation> txList = new ArrayList<Transformation>(csTransformations.size());
 		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();
@@ -166,7 +166,7 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 			tx2mappings.put(pTransformation, new ArrayList<Mapping>());
 			txList.add(pTransformation);
 		}
-		org.eclipse.ocl.examples.pivot.Package pPackage = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Package.class, csElement);
+		CoreModel pPackage = PivotUtil.getPivot(CoreModel.class, csElement);
 		PivotUtil.refreshList(pPackage.getNestedPackage(), txList);
 		//
 		for (MappingCS csMapping : csElement.getMappings()) {

@@ -17,6 +17,7 @@
 package org.eclipse.qvtd.xtext.qvtrelationcst;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 
 /**
@@ -38,7 +39,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 public interface ModelDeclCS extends NamedElementCS {
 	/**
 	 * Returns the value of the '<em><b>Meta Model Ids</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Package}.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Namespace}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Meta Model Ids</em>' reference list isn't clear,
@@ -50,6 +51,6 @@ public interface ModelDeclCS extends NamedElementCS {
 	 * @model
 	 * @generated
 	 */
-	EList<org.eclipse.ocl.examples.pivot.Package> getMetaModelIds();
+	EList<Namespace> getMetaModelIds();
 
 } // ModelDeclCS

@@ -51,7 +51,7 @@ public class QVTbasePrettyPrintVisitor extends EssentialOCLPrettyPrintVisitor im
 	}
 
 	public Object visitBaseModel(BaseModel object) {
-		return super.visitModel(object);
+		return super.visitRoot(object);
 	}
 
 	public Object visitDomain(Domain object) {

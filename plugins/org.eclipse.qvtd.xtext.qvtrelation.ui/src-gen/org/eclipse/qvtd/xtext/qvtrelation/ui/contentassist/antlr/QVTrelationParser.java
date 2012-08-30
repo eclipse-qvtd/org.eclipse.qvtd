@@ -58,6 +58,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEssentialOCLInfixOperatorAccess().getAlternatives(), "rule__EssentialOCLInfixOperator__Alternatives");
 					put(grammarAccess.getEssentialOCLNavigationOperatorAccess().getAlternatives(), "rule__EssentialOCLNavigationOperator__Alternatives");
 					put(grammarAccess.getEssentialOCLUnreservedNameAccess().getAlternatives(), "rule__EssentialOCLUnreservedName__Alternatives");
+					put(grammarAccess.getURIFirstPathElementCSAccess().getAlternatives(), "rule__URIFirstPathElementCS__Alternatives");
 					put(grammarAccess.getPrimitiveTypeIdentifierAccess().getAlternatives(), "rule__PrimitiveTypeIdentifier__Alternatives");
 					put(grammarAccess.getCollectionTypeIdentifierAccess().getAlternatives(), "rule__CollectionTypeIdentifier__Alternatives");
 					put(grammarAccess.getMultiplicityCSAccess().getAlternatives_1(), "rule__MultiplicityCS__Alternatives_1");
@@ -65,7 +66,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPrimitiveLiteralExpCSAccess().getAlternatives(), "rule__PrimitiveLiteralExpCS__Alternatives");
 					put(grammarAccess.getBooleanLiteralExpCSAccess().getAlternatives(), "rule__BooleanLiteralExpCS__Alternatives");
 					put(grammarAccess.getTypeLiteralCSAccess().getAlternatives(), "rule__TypeLiteralCS__Alternatives");
-					put(grammarAccess.getTypeExpCSAccess().getAlternatives_0(), "rule__TypeExpCS__Alternatives_0");
+					put(grammarAccess.getTypeExpCSAccess().getAlternatives(), "rule__TypeExpCS__Alternatives");
 					put(grammarAccess.getExpCSAccess().getAlternatives(), "rule__ExpCS__Alternatives");
 					put(grammarAccess.getBinaryOperatorCSAccess().getAlternatives(), "rule__BinaryOperatorCS__Alternatives");
 					put(grammarAccess.getPrefixedExpCSAccess().getAlternatives(), "rule__PrefixedExpCS__Alternatives");
@@ -109,12 +110,16 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTransformationCSAccess().getGroup_6_2(), "rule__TransformationCS__Group_6_2__0");
 					put(grammarAccess.getUnitCSAccess().getGroup(), "rule__UnitCS__Group__0");
 					put(grammarAccess.getUnitCSAccess().getGroup_1(), "rule__UnitCS__Group_1__0");
+					put(grammarAccess.getUnitCSAccess().getGroup_3(), "rule__UnitCS__Group_3__0");
 					put(grammarAccess.getVarDeclarationCSAccess().getGroup(), "rule__VarDeclarationCS__Group__0");
 					put(grammarAccess.getVarDeclarationCSAccess().getGroup_1(), "rule__VarDeclarationCS__Group_1__0");
 					put(grammarAccess.getWhenCSAccess().getGroup(), "rule__WhenCS__Group__0");
 					put(grammarAccess.getWhereCSAccess().getGroup(), "rule__WhereCS__Group__0");
 					put(grammarAccess.getPathNameCSAccess().getGroup(), "rule__PathNameCS__Group__0");
 					put(grammarAccess.getPathNameCSAccess().getGroup_1(), "rule__PathNameCS__Group_1__0");
+					put(grammarAccess.getURIPathNameCSAccess().getGroup(), "rule__URIPathNameCS__Group__0");
+					put(grammarAccess.getURIPathNameCSAccess().getGroup_1(), "rule__URIPathNameCS__Group_1__0");
+					put(grammarAccess.getURIFirstPathElementCSAccess().getGroup_1(), "rule__URIFirstPathElementCS__Group_1__0");
 					put(grammarAccess.getCollectionTypeCSAccess().getGroup(), "rule__CollectionTypeCS__Group__0");
 					put(grammarAccess.getCollectionTypeCSAccess().getGroup_1(), "rule__CollectionTypeCS__Group_1__0");
 					put(grammarAccess.getMultiplicityBoundsCSAccess().getGroup(), "rule__MultiplicityBoundsCS__Group__0");
@@ -138,7 +143,6 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getUnlimitedNaturalLiteralExpCSAccess().getGroup(), "rule__UnlimitedNaturalLiteralExpCS__Group__0");
 					put(grammarAccess.getInvalidLiteralExpCSAccess().getGroup(), "rule__InvalidLiteralExpCS__Group__0");
 					put(grammarAccess.getNullLiteralExpCSAccess().getGroup(), "rule__NullLiteralExpCS__Group__0");
-					put(grammarAccess.getTypeExpCSAccess().getGroup(), "rule__TypeExpCS__Group__0");
 					put(grammarAccess.getExpCSAccess().getGroup_0(), "rule__ExpCS__Group_0__0");
 					put(grammarAccess.getExpCSAccess().getGroup_0_1(), "rule__ExpCS__Group_0_1__0");
 					put(grammarAccess.getExpCSAccess().getGroup_1(), "rule__ExpCS__Group_1__0");
@@ -238,7 +242,8 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTransformationCSAccess().getRelationAssignment_9_0(), "rule__TransformationCS__RelationAssignment_9_0");
 					put(grammarAccess.getTransformationCSAccess().getQueriesAssignment_9_1(), "rule__TransformationCS__QueriesAssignment_9_1");
 					put(grammarAccess.getUnitCSAccess().getNameAssignment_1_0(), "rule__UnitCS__NameAssignment_1_0");
-					put(grammarAccess.getUnitCSAccess().getNamespaceAssignment_2(), "rule__UnitCS__NamespaceAssignment_2");
+					put(grammarAccess.getUnitCSAccess().getPathNameAssignment_2(), "rule__UnitCS__PathNameAssignment_2");
+					put(grammarAccess.getUnitCSAccess().getAllAssignment_3_1(), "rule__UnitCS__AllAssignment_3_1");
 					put(grammarAccess.getVarDeclarationCSAccess().getVarDeclarationIdsAssignment_0(), "rule__VarDeclarationCS__VarDeclarationIdsAssignment_0");
 					put(grammarAccess.getVarDeclarationCSAccess().getVarDeclarationIdsAssignment_1_1(), "rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_1");
 					put(grammarAccess.getVarDeclarationCSAccess().getTypeAssignment_3(), "rule__VarDeclarationCS__TypeAssignment_3");
@@ -252,9 +257,14 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPathNameCSAccess().getPathAssignment_1_1(), "rule__PathNameCS__PathAssignment_1_1");
 					put(grammarAccess.getFirstPathElementCSAccess().getElementAssignment(), "rule__FirstPathElementCS__ElementAssignment");
 					put(grammarAccess.getNextPathElementCSAccess().getElementAssignment(), "rule__NextPathElementCS__ElementAssignment");
+					put(grammarAccess.getURIPathNameCSAccess().getPathAssignment_0(), "rule__URIPathNameCS__PathAssignment_0");
+					put(grammarAccess.getURIPathNameCSAccess().getPathAssignment_1_1(), "rule__URIPathNameCS__PathAssignment_1_1");
+					put(grammarAccess.getURIFirstPathElementCSAccess().getElementAssignment_0(), "rule__URIFirstPathElementCS__ElementAssignment_0");
+					put(grammarAccess.getURIFirstPathElementCSAccess().getElementAssignment_1_1(), "rule__URIFirstPathElementCS__ElementAssignment_1_1");
 					put(grammarAccess.getPrimitiveTypeCSAccess().getNameAssignment(), "rule__PrimitiveTypeCS__NameAssignment");
 					put(grammarAccess.getCollectionTypeCSAccess().getNameAssignment_0(), "rule__CollectionTypeCS__NameAssignment_0");
 					put(grammarAccess.getCollectionTypeCSAccess().getOwnedTypeAssignment_1_1(), "rule__CollectionTypeCS__OwnedTypeAssignment_1_1");
+					put(grammarAccess.getCollectionTypeCSAccess().getMultiplicityAssignment_1_3(), "rule__CollectionTypeCS__MultiplicityAssignment_1_3");
 					put(grammarAccess.getMultiplicityBoundsCSAccess().getLowerBoundAssignment_0(), "rule__MultiplicityBoundsCS__LowerBoundAssignment_0");
 					put(grammarAccess.getMultiplicityBoundsCSAccess().getUpperBoundAssignment_1_1(), "rule__MultiplicityBoundsCS__UpperBoundAssignment_1_1");
 					put(grammarAccess.getMultiplicityStringCSAccess().getStringBoundsAssignment(), "rule__MultiplicityStringCS__StringBoundsAssignment");
@@ -281,7 +291,6 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBooleanLiteralExpCSAccess().getNameAssignment_1(), "rule__BooleanLiteralExpCS__NameAssignment_1");
 					put(grammarAccess.getTypeLiteralExpCSAccess().getOwnedTypeAssignment(), "rule__TypeLiteralExpCS__OwnedTypeAssignment");
 					put(grammarAccess.getTypeNameExpCSAccess().getPathNameAssignment(), "rule__TypeNameExpCS__PathNameAssignment");
-					put(grammarAccess.getTypeExpCSAccess().getMultiplicityAssignment_1(), "rule__TypeExpCS__MultiplicityAssignment_1");
 					put(grammarAccess.getExpCSAccess().getOwnedExpressionAssignment_0_1_0(), "rule__ExpCS__OwnedExpressionAssignment_0_1_0");
 					put(grammarAccess.getExpCSAccess().getOwnedOperatorAssignment_0_1_1(), "rule__ExpCS__OwnedOperatorAssignment_0_1_1");
 					put(grammarAccess.getExpCSAccess().getOwnedExpressionAssignment_0_2(), "rule__ExpCS__OwnedExpressionAssignment_0_2");

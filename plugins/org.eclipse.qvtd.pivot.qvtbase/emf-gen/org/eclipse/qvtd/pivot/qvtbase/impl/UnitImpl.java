@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
@@ -39,7 +40,7 @@ public class UnitImpl extends NamedElementImpl implements Unit {
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.ocl.examples.pivot.Package usedPackage;
+	protected Namespace usedPackage;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -65,10 +66,10 @@ public class UnitImpl extends NamedElementImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Package getUsedPackage() {
+	public Namespace getUsedPackage() {
 		if (usedPackage != null && ((EObject)usedPackage).eIsProxy()) {
 			InternalEObject oldUsedPackage = (InternalEObject)usedPackage;
-			usedPackage = (org.eclipse.ocl.examples.pivot.Package)eResolveProxy(oldUsedPackage);
+			usedPackage = (Namespace)eResolveProxy(oldUsedPackage);
 			if (usedPackage != oldUsedPackage) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTbasePackage.UNIT__USED_PACKAGE, oldUsedPackage, usedPackage));
@@ -82,7 +83,7 @@ public class UnitImpl extends NamedElementImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Package basicGetUsedPackage() {
+	public Namespace basicGetUsedPackage() {
 		return usedPackage;
 	}
 
@@ -91,8 +92,8 @@ public class UnitImpl extends NamedElementImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setUsedPackage(org.eclipse.ocl.examples.pivot.Package newUsedPackage) {
-		org.eclipse.ocl.examples.pivot.Package oldUsedPackage = usedPackage;
+	public void setUsedPackage(Namespace newUsedPackage) {
+		Namespace oldUsedPackage = usedPackage;
 		usedPackage = newUsedPackage;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.UNIT__USED_PACKAGE, oldUsedPackage, usedPackage));
@@ -122,7 +123,7 @@ public class UnitImpl extends NamedElementImpl implements Unit {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTbasePackage.UNIT__USED_PACKAGE:
-				setUsedPackage((org.eclipse.ocl.examples.pivot.Package)newValue);
+				setUsedPackage((Namespace)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -137,7 +138,7 @@ public class UnitImpl extends NamedElementImpl implements Unit {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTbasePackage.UNIT__USED_PACKAGE:
-				setUsedPackage((org.eclipse.ocl.examples.pivot.Package)null);
+				setUsedPackage((Namespace)null);
 				return;
 		}
 		super.eUnset(featureID);

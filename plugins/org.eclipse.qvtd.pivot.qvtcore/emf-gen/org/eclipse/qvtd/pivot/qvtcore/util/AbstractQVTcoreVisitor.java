@@ -25,6 +25,8 @@
  */
 package	org.eclipse.qvtd.pivot.qvtcore.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  */
 public abstract class AbstractQVTcoreVisitor<R, C>
@@ -36,7 +38,7 @@ public abstract class AbstractQVTcoreVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractQVTcoreVisitor(C context) {
+	protected AbstractQVTcoreVisitor(@NonNull C context) {
 	    super(context);
 	}
 }

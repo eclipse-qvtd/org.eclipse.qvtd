@@ -1,9 +1,9 @@
-import emof : 'platform:/resource/org.eclipse.qvt/model/ecore/EMOF.ecore#/';
-import essentialocl : 'platform:/resource/org.eclipse.qvt/model/ecore/EssentialOCL.ecore#/';
-import qvtbase : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTBase.ecore#/';
-import qvttemplate : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTTemplate.ecore#/';
-import qvtrelation : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTRelation.ecore#/';
-import qvtcore : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTCore.ecore#/';
+import emof : 'platform:/resource/org.eclipse.qvt/model/ecore/EMOF.ecore'::EMOF;
+import essentialocl : 'platform:/resource/org.eclipse.qvt/model/ecore/EssentialOCL.ecore'::EssentialOCL;
+import qvtbase : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTBase.ecore'::QVTBase;
+import qvttemplate : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTTemplate.ecore'::QVTTemplate;
+import qvtrelation : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTRelation.ecore'::QVTRelation;
+import qvtcore : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTCore.ecore'::QVTCore;
 
 transformation relToCore(relations:{qvtrelation,qvttemplate,qvtbase,essentialocl,emof}, core:{qvtcore,qvtbase,essentialocl,emof})
 {

@@ -53,8 +53,8 @@ KeyDeclCS: 'key' pathName=PathNameCS '{' propertyIds+=[pivot::Property|Unrestric
 LibraryCS returns base::LibraryCS:
 	'library' package=[pivot::Package|URI] ';';
 	
-ModelDeclCS: name=UnrestrictedName ':' (metaModelIds+=[pivot::Package|UnrestrictedName]
-	| '{' metaModelIds+=[pivot::Package|UnrestrictedName] (',' metaModelIds+=[pivot::Package|UnrestrictedName])* '}')
+ModelDeclCS: name=UnrestrictedName ':' (metaModelIds+=[pivot::Namespace|UnrestrictedName]
+	| '{' metaModelIds+=[pivot::Namespace|UnrestrictedName] (',' metaModelIds+=[pivot::Namespace|UnrestrictedName])* '}')
 ;
 	
 ObjectTemplateCS: name=UnrestrictedName? ':' type=TypedRefCS
@@ -91,7 +91,7 @@ TransformationCS: 'transformation' name=UnrestrictedName
 ;
 
 UnitCS returns base::ImportCS:
-	'import' (name=UnrestrictedName ':')? namespace=[pivot::Namespace|URI] ';';
+	'import' (name=UnrestrictedName ':')? pathName=URIPathNameCS ('::' all?='*')? ';';
 
 VarDeclarationCS: varDeclarationIds+=VarDeclarationIdCS (',' varDeclarationIds+=VarDeclarationIdCS)* ':' type=TypedRefCS ';';
 

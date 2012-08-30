@@ -25,31 +25,34 @@
  */
 package	org.eclipse.qvtd.xtext.qvtrelationcst.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  */
 public interface QVTrelationCSVisitor<R> extends org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor<R>
 {
-	R visitAbstractDomainCS(org.eclipse.qvtd.xtext.qvtrelationcst.AbstractDomainCS object);
-	R visitCollectionTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS object);
-	R visitDefaultValueCS(org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS object);
-	R visitDomainCS(org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS object);
-	R visitDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS object);
-	R visitElementTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS object);
-	R visitKeyDeclCS(org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS object);
-	R visitModelDeclCS(org.eclipse.qvtd.xtext.qvtrelationcst.ModelDeclCS object);
-	R visitObjectTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS object);
-	R visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcst.ParamDeclarationCS object);
-	R visitPatternCS(org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS object);
-	R visitPredicateCS(org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS object);
-	R visitPrimitiveTypeDomainCS(org.eclipse.qvtd.xtext.qvtrelationcst.PrimitiveTypeDomainCS object);
-	R visitPropertyTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS object);
-	R visitQueryCS(org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS object);
-	R visitRelationCS(org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS object);
-	R visitTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcst.TemplateCS object);
-	R visitTemplateVariableCS(org.eclipse.qvtd.xtext.qvtrelationcst.TemplateVariableCS object);
-	R visitTopLevelCS(org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS object);
-	R visitTransformationCS(org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS object);
-	R visitUnitCS(org.eclipse.qvtd.xtext.qvtrelationcst.UnitCS object);
-	R visitVarDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS object);
-	R visitVarDeclarationIdCS(org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS object);
+	@Nullable R visitAbstractDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.AbstractDomainCS object);
+	@Nullable R visitCollectionTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS object);
+	@Nullable R visitDefaultValueCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS object);
+	@Nullable R visitDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.DomainCS object);
+	@Nullable R visitDomainPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.DomainPatternCS object);
+	@Nullable R visitElementTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.ElementTemplateCS object);
+	@Nullable R visitKeyDeclCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.KeyDeclCS object);
+	@Nullable R visitModelDeclCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.ModelDeclCS object);
+	@Nullable R visitObjectTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS object);
+	@Nullable R visitParamDeclarationCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.ParamDeclarationCS object);
+	@Nullable R visitPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.PatternCS object);
+	@Nullable R visitPredicateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS object);
+	@Nullable R visitPrimitiveTypeDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.PrimitiveTypeDomainCS object);
+	@Nullable R visitPropertyTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS object);
+	@Nullable R visitQueryCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS object);
+	@Nullable R visitRelationCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.RelationCS object);
+	@Nullable R visitTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.TemplateCS object);
+	@Nullable R visitTemplateVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.TemplateVariableCS object);
+	@Nullable R visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS object);
+	@Nullable R visitTransformationCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS object);
+	@Nullable R visitUnitCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.UnitCS object);
+	@Nullable R visitVarDeclarationCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS object);
+	@Nullable R visitVarDeclarationIdCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS object);
 }

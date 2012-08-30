@@ -16,9 +16,13 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelation.attributes;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -28,6 +32,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.InvocationExpCSAttribution;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.OperationFilter;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 
 public class RelationCallExpCSAttribution extends InvocationExpCSAttribution
@@ -51,7 +56,7 @@ public class RelationCallExpCSAttribution extends InvocationExpCSAttribution
 		return new OperationFilter(metaModelManager, type, targetElement)
 		{
 			@Override
-			public boolean matches(EnvironmentView environmentView, Type forType, EObject eObject) {
+			public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
 				if (eObject instanceof Relation) {
 					if (iterators > 0) {
 						return false;
@@ -62,10 +67,28 @@ public class RelationCallExpCSAttribution extends InvocationExpCSAttribution
 					return true;
 				}
 				else {
-					return super.matches(environmentView, forType, eObject);
+					return super.matches(environmentView, eObject);
 				}
 			}
 			
 		};
+	}
+
+	@Override
+	protected boolean isRequiredType(EnvironmentView environmentView) {
+		EClassifier requiredType = environmentView.getRequiredType();
+		if (!(requiredType instanceof EClass)) {
+			return false;
+		}
+		if (PivotPackage.Literals.NAMED_ELEMENT.isSuperTypeOf((EClass)requiredType)) {
+			return true;
+		}
+//		if (PivotPackage.Literals.OPERATION.isSuperTypeOf((EClass)requiredType)) {
+//			return true;
+//		}
+//		if (QVTbasePackage.Literals.RULE.isSuperTypeOf((EClass)requiredType)) {
+//			return true;
+//		}
+		return false;
 	}
 }

@@ -25,18 +25,21 @@
  */
 package	org.eclipse.qvtd.pivot.qvtrelation.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  */
 public interface QVTrelationVisitor<R> extends org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor<R>
 {
-	R visitDomainPattern(org.eclipse.qvtd.pivot.qvtrelation.DomainPattern object);
-	R visitKey(org.eclipse.qvtd.pivot.qvtrelation.Key object);
-	R visitOppositePropertyCallExp(org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp object);
-	R visitRelation(org.eclipse.qvtd.pivot.qvtrelation.Relation object);
-	R visitRelationCallExp(org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp object);
-	R visitRelationDomain(org.eclipse.qvtd.pivot.qvtrelation.RelationDomain object);
-	R visitRelationDomainAssignment(org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment object);
-	R visitRelationImplementation(org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation object);
-	R visitRelationModel(org.eclipse.qvtd.pivot.qvtrelation.RelationModel object);
-	R visitRelationalTransformation(org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation object);
+	@Nullable R visitDomainPattern(@NonNull org.eclipse.qvtd.pivot.qvtrelation.DomainPattern object);
+	@Nullable R visitKey(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Key object);
+	@Nullable R visitOppositePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp object);
+	@Nullable R visitRelation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Relation object);
+	@Nullable R visitRelationCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp object);
+	@Nullable R visitRelationDomain(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomain object);
+	@Nullable R visitRelationDomainAssignment(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment object);
+	@Nullable R visitRelationImplementation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation object);
+	@Nullable R visitRelationModel(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationModel object);
+	@Nullable R visitRelationalTransformation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation object);
 }

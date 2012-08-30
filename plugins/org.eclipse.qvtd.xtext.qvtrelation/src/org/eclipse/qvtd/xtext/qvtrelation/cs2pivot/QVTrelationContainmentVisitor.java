@@ -20,15 +20,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
-import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
@@ -97,12 +99,12 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 	{
 		public static OperationOrRuleFilter INSTANCE = new OperationOrRuleFilter();
 		
-		public int compareMatches(EObject match1, Map<TemplateParameter, ParameterableElement> bindings1,
-				EObject match2, Map<TemplateParameter, ParameterableElement> bindings2) {
+		public int compareMatches(DomainElement match1, Map<TemplateParameter, ParameterableElement> bindings1,
+				DomainElement match2, Map<TemplateParameter, ParameterableElement> bindings2) {
 			return 0;
 		}
 
-		public boolean matches(EnvironmentView environmentView,Type forType, EObject eObject) {
+		public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
 			return (eObject instanceof Operation) || (eObject instanceof Rule);
 		}
 	}
@@ -146,7 +148,16 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 		@Override
 		public BasicContinuation<?> execute() {
 			TypedModel pTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
-			PivotUtil.refreshList(pTypedModel.getUsedPackage(), csElement.getMetaModelIds());
+			List<org.eclipse.ocl.examples.pivot.Package> newUsedPackage = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
+			for (Namespace metaModelId : csElement.getMetaModelIds()) {
+				if (metaModelId instanceof Root) {
+					newUsedPackage.addAll(((Root)metaModelId).getNestedPackage());
+				}
+				else if (metaModelId instanceof org.eclipse.ocl.examples.pivot.Package) {
+					newUsedPackage.add((org.eclipse.ocl.examples.pivot.Package)metaModelId);
+				}
+			}
+			PivotUtil.refreshList(pTypedModel.getUsedPackage(), newUsedPackage);
 			return null;
 		}
 	}
@@ -266,8 +277,11 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 
 	@Override
 	public Continuation<?> visitImportCS(ImportCS csElement) {
+		CS2Pivot.setElementType(csElement.getPathName(), PivotPackage.Literals.PACKAGE, csElement, null);
+		super.visitImportCS(csElement);
 		Unit pivotElement = refreshNamedElement(Unit.class, QVTbasePackage.Literals.UNIT, csElement);
-		pivotElement.setUsedPackage((org.eclipse.ocl.examples.pivot.Package) csElement.getNamespace());
+		Namespace namespace = csElement.getNamespace();
+		pivotElement.setUsedPackage(namespace);
 		return null;
 	}
 
@@ -382,7 +396,7 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 
 	public Continuation<?> visitTopLevelCS(TopLevelCS csElement) {
 //		importPackages(csElement);
-		RelationModel pivotElement = refreshPackage(RelationModel.class, QVTrelationPackage.Literals.RELATION_MODEL, csElement);
+		RelationModel pivotElement = refreshRoot(RelationModel.class, QVTrelationPackage.Literals.RELATION_MODEL, csElement);
 		context.refreshPivotList(Transformation.class, pivotElement.getNestedPackage(), csElement.getTransformations());
 		context.refreshPivotList(Unit.class, pivotElement.getUnit(), csElement.getOwnedImport());
 /*		List<TransformationCS> csTransformations = csElement.getTransformation();

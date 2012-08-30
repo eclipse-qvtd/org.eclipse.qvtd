@@ -19,18 +19,13 @@ package org.eclipse.qvtd.pivot.qvtbase.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.eclipse.ocl.examples.pivot.internal.impl.ModelImpl;
+import org.eclipse.ocl.examples.pivot.internal.impl.RootImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
-
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Unit;
@@ -49,7 +44,7 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  *
  * @generated
  */
-public class BaseModelImpl extends ModelImpl implements BaseModel {
+public class BaseModelImpl extends RootImpl implements BaseModel {
 	/**
 	 * The cached value of the '{@link #getUnit() <em>Unit</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

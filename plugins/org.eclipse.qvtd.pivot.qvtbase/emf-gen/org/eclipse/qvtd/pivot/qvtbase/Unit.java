@@ -19,6 +19,7 @@ package org.eclipse.qvtd.pivot.qvtbase;
 import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Namespace;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,12 +47,12 @@ public interface Unit extends EObject, NamedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Used Package</em>' reference.
-	 * @see #setUsedPackage(org.eclipse.ocl.examples.pivot.Package)
+	 * @see #setUsedPackage(Namespace)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getUnit_UsedPackage()
 	 * @model ordered="false"
 	 * @generated
 	 */
-	org.eclipse.ocl.examples.pivot.Package getUsedPackage();
+	Namespace getUsedPackage();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.Unit#getUsedPackage <em>Used Package</em>}' reference.
@@ -61,6 +62,6 @@ public interface Unit extends EObject, NamedElement {
 	 * @see #getUsedPackage()
 	 * @generated
 	 */
-	void setUsedPackage(org.eclipse.ocl.examples.pivot.Package value);
+	void setUsedPackage(Namespace value);
 
 } // Unit

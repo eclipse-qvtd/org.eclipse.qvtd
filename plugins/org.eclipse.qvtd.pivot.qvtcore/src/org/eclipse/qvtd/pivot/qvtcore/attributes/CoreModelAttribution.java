@@ -17,11 +17,11 @@
 package org.eclipse.qvtd.pivot.qvtcore.attributes;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.attributes.ModelAttribution;
+import org.eclipse.ocl.examples.pivot.attributes.RootAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 
-public class CoreModelAttribution extends ModelAttribution
+public class CoreModelAttribution extends RootAttribution
 {
 	public static final CoreModelAttribution INSTANCE = new CoreModelAttribution();
 

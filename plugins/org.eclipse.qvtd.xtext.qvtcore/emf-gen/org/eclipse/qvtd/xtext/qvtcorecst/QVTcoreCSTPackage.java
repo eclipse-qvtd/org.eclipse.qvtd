@@ -1029,6 +1029,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int PARAM_DECLARATION_CS__QUALIFIER = BaseCSTPackage.TYPED_ELEMENT_CS__QUALIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM_DECLARATION_CS__OPTIONAL = BaseCSTPackage.TYPED_ELEMENT_CS__OPTIONAL;
+
+	/**
 	 * The number of structural features of the '<em>Param Declaration CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1127,6 +1136,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int QUERY_CS__QUALIFIER = BaseCSTPackage.TYPED_ELEMENT_CS__QUALIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_CS__OPTIONAL = BaseCSTPackage.TYPED_ELEMENT_CS__OPTIONAL;
 
 	/**
 	 * The feature id for the '<em><b>Input Param Declaration</b></em>' containment reference list.
@@ -1247,6 +1265,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int REALIZEABLE_VARIABLE_CS__QUALIFIER = BaseCSTPackage.TYPED_ELEMENT_CS__QUALIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REALIZEABLE_VARIABLE_CS__OPTIONAL = BaseCSTPackage.TYPED_ELEMENT_CS__OPTIONAL;
+
+	/**
 	 * The number of structural features of the '<em>Realizeable Variable CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1345,6 +1372,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int REALIZED_VARIABLE_CS__QUALIFIER = REALIZEABLE_VARIABLE_CS__QUALIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REALIZED_VARIABLE_CS__OPTIONAL = REALIZEABLE_VARIABLE_CS__OPTIONAL;
 
 	/**
 	 * The number of structural features of the '<em>Realized Variable CS</em>' class.
@@ -1726,6 +1762,15 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNREALIZED_VARIABLE_CS__QUALIFIER = REALIZEABLE_VARIABLE_CS__QUALIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREALIZED_VARIABLE_CS__OPTIONAL = REALIZEABLE_VARIABLE_CS__OPTIONAL;
 
 	/**
 	 * The number of structural features of the '<em>Unrealized Variable CS</em>' class.

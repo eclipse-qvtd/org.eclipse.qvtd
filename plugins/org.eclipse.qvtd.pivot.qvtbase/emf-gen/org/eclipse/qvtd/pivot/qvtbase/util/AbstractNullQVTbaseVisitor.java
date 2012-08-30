@@ -25,6 +25,9 @@
  */
 package	org.eclipse.qvtd.pivot.qvtbase.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * An AbstractNullQVTbaseVisitor provides a default implementation for each
  * visitXxx method that returns null.
@@ -37,47 +40,47 @@ public abstract class AbstractNullQVTbaseVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractNullQVTbaseVisitor(C context) {
+	protected AbstractNullQVTbaseVisitor(@NonNull C context) {
 	    super(context);
 	}	
 
-	public R visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
+	public @Nullable R visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
 		return null;
 	}
 
-	public R visitDomain(org.eclipse.qvtd.pivot.qvtbase.Domain object) {
+	public @Nullable R visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object) {
 		return null;
 	}
 
-	public R visitFunction(org.eclipse.qvtd.pivot.qvtbase.Function object) {
+	public @Nullable R visitFunction(@NonNull org.eclipse.qvtd.pivot.qvtbase.Function object) {
 		return null;
 	}
 
-	public R visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.FunctionParameter object) {
+	public @Nullable R visitFunctionParameter(@NonNull org.eclipse.qvtd.pivot.qvtbase.FunctionParameter object) {
 		return null;
 	}
 
-	public R visitPattern(org.eclipse.qvtd.pivot.qvtbase.Pattern object) {
+	public @Nullable R visitPattern(@NonNull org.eclipse.qvtd.pivot.qvtbase.Pattern object) {
 		return null;
 	}
 
-	public R visitPredicate(org.eclipse.qvtd.pivot.qvtbase.Predicate object) {
+	public @Nullable R visitPredicate(@NonNull org.eclipse.qvtd.pivot.qvtbase.Predicate object) {
 		return null;
 	}
 
-	public R visitRule(org.eclipse.qvtd.pivot.qvtbase.Rule object) {
+	public @Nullable R visitRule(@NonNull org.eclipse.qvtd.pivot.qvtbase.Rule object) {
 		return null;
 	}
 
-	public R visitTransformation(org.eclipse.qvtd.pivot.qvtbase.Transformation object) {
+	public @Nullable R visitTransformation(@NonNull org.eclipse.qvtd.pivot.qvtbase.Transformation object) {
 		return null;
 	}
 
-	public R visitTypedModel(org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
+	public @Nullable R visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
 		return null;
 	}
 
-	public R visitUnit(org.eclipse.qvtd.pivot.qvtbase.Unit object) {
+	public @Nullable R visitUnit(@NonNull org.eclipse.qvtd.pivot.qvtbase.Unit object) {
 		return null;
 	}
 }

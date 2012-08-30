@@ -38,7 +38,6 @@ import org.apache.log4j.spi.LoggingEvent;
 import org.apache.log4j.spi.ThrowableInformation;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.compare.diff.metamodel.DiffModel;
 import org.eclipse.emf.compare.diff.metamodel.util.DiffSwitch;
@@ -64,6 +63,7 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -139,27 +139,6 @@ public class XtextTestCase extends PivotTestCase
 		ResourceSet reloadResourceSet = new ResourceSetImpl();
 		reloadResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pivot", new EcoreResourceFactoryImpl());
 		Resource reloadedPivotResource = reloadResourceSet.getResource(pivotURI, true);
-		MetaModelManager metaModelManager = new MetaModelManager();
-		for (TreeIterator<EObject> tit = reloadedPivotResource.getAllContents(); tit.hasNext(); ) {
-			EObject eObject = tit.next();
-			if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
-				org.eclipse.ocl.examples.pivot.Package pkg = (org.eclipse.ocl.examples.pivot.Package) eObject;
-				metaModelManager.addPackage(pkg);
-			}
-			else {
-				tit.prune();
-			}
-		}
-		for (TreeIterator<EObject> tit = reloadedPivotResource.getAllContents(); tit.hasNext(); ) {
-			EObject eObject = tit.next();
-			if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
-				org.eclipse.ocl.examples.pivot.Package pkg = (org.eclipse.ocl.examples.pivot.Package) eObject;
-				metaModelManager.addPackage(pkg);
-			}
-			else {
-				tit.prune();
-			}
-		}
 		assertNoValidationErrors("Pivot reload validation problems", reloadedPivotResource);
 		unloadResourceSet(reloadResourceSet);
 	}
@@ -462,7 +441,7 @@ public class XtextTestCase extends PivotTestCase
 
 	protected Resource getPivotFromEcore(MetaModelManager metaModelManager, Resource ecoreResource) {
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
-		org.eclipse.ocl.examples.pivot.Package pivotRoot = ecore2Pivot.getPivotRoot();
+		Root pivotRoot = ecore2Pivot.getPivotRoot();
 		Resource pivotResource = pivotRoot.eResource();
 		assertNoResourceErrors("Normalisation failed", pivotResource);
 		assertNoValidationErrors("Normalisation invalid", pivotResource);

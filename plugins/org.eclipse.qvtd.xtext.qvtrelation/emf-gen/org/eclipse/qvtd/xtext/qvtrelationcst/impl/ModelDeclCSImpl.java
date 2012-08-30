@@ -21,6 +21,7 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.NamedElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ModelDeclCS;
@@ -49,7 +50,7 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<org.eclipse.ocl.examples.pivot.Package> metaModelIds;
+	protected EList<Namespace> metaModelIds;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -74,9 +75,9 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.eclipse.ocl.examples.pivot.Package> getMetaModelIds() {
+	public EList<Namespace> getMetaModelIds() {
 		if (metaModelIds == null) {
-			metaModelIds = new EObjectResolvingEList<org.eclipse.ocl.examples.pivot.Package>(org.eclipse.ocl.examples.pivot.Package.class, this, QVTrelationCSTPackage.MODEL_DECL_CS__META_MODEL_IDS);
+			metaModelIds = new EObjectResolvingEList<Namespace>(Namespace.class, this, QVTrelationCSTPackage.MODEL_DECL_CS__META_MODEL_IDS);
 		}
 		return metaModelIds;
 	}
@@ -106,7 +107,7 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 		switch (featureID) {
 			case QVTrelationCSTPackage.MODEL_DECL_CS__META_MODEL_IDS:
 				getMetaModelIds().clear();
-				getMetaModelIds().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Package>)newValue);
+				getMetaModelIds().addAll((Collection<? extends Namespace>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

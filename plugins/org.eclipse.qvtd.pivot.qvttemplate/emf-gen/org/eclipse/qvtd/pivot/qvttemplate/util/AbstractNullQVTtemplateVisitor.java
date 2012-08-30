@@ -25,6 +25,9 @@
  */
 package	org.eclipse.qvtd.pivot.qvttemplate.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * An AbstractNullQVTtemplateVisitor provides a default implementation for each
  * visitXxx method that returns null.
@@ -37,23 +40,23 @@ public abstract class AbstractNullQVTtemplateVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractNullQVTtemplateVisitor(C context) {
+	protected AbstractNullQVTtemplateVisitor(@NonNull C context) {
 	    super(context);
 	}	
 
-	public R visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
+	public @Nullable R visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
 		return null;
 	}
 
-	public R visitObjectTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
+	public @Nullable R visitObjectTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
 		return null;
 	}
 
-	public R visitPropertyTemplateItem(org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
+	public @Nullable R visitPropertyTemplateItem(@NonNull org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
 		return null;
 	}
 
-	public R visitTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
+	public @Nullable R visitTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
 		return null;
 	}
 }

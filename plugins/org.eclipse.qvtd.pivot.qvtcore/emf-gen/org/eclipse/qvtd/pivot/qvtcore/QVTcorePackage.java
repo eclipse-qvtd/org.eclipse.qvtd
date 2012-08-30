@@ -102,6 +102,15 @@ public interface QVTcorePackage extends EPackage {
 	int AREA__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AREA__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Guard Pattern</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -146,6 +155,15 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSIGNMENT__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Bottom Pattern</b></em>' container reference.
@@ -203,6 +221,15 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_PATTERN__OWNED_COMMENT = QVTbasePackage.PATTERN__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_PATTERN__EXTENSION = QVTbasePackage.PATTERN__EXTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -256,6 +283,15 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int BOTTOM_PATTERN__OWNED_COMMENT = CORE_PATTERN__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_PATTERN__EXTENSION = CORE_PATTERN__EXTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference list.
@@ -349,6 +385,15 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_DOMAIN__OWNED_COMMENT = QVTbasePackage.DOMAIN__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_DOMAIN__EXTENSION = QVTbasePackage.DOMAIN__EXTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Is Checkable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -431,6 +476,15 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_MODEL__OWNED_COMMENT = QVTbasePackage.BASE_MODEL__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__EXTENSION = QVTbasePackage.BASE_MODEL__EXTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -467,33 +521,6 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_MODEL__OWNED_ANNOTATION = QVTbasePackage.BASE_MODEL__OWNED_ANNOTATION;
 
 	/**
-	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_MODEL__TEMPLATE_BINDING = QVTbasePackage.BASE_MODEL__TEMPLATE_BINDING;
-
-	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_MODEL__OWNED_TEMPLATE_SIGNATURE = QVTbasePackage.BASE_MODEL__OWNED_TEMPLATE_SIGNATURE;
-
-	/**
-	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_MODEL__UNSPECIALIZED_ELEMENT = QVTbasePackage.BASE_MODEL__UNSPECIALIZED_ELEMENT;
-
-	/**
 	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -503,49 +530,13 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_MODEL__NESTED_PACKAGE = QVTbasePackage.BASE_MODEL__NESTED_PACKAGE;
 
 	/**
-	 * The feature id for the '<em><b>Nesting Package</b></em>' container reference.
+	 * The feature id for the '<em><b>External URI</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_MODEL__NESTING_PACKAGE = QVTbasePackage.BASE_MODEL__NESTING_PACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_MODEL__NS_PREFIX = QVTbasePackage.BASE_MODEL__NS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_MODEL__NS_URI = QVTbasePackage.BASE_MODEL__NS_URI;
-
-	/**
-	 * The feature id for the '<em><b>Owned Precedence</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_MODEL__OWNED_PRECEDENCE = QVTbasePackage.BASE_MODEL__OWNED_PRECEDENCE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_MODEL__OWNED_TYPE = QVTbasePackage.BASE_MODEL__OWNED_TYPE;
+	int CORE_MODEL__EXTERNAL_URI = QVTbasePackage.BASE_MODEL__EXTERNAL_URI;
 
 	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference list.
@@ -583,6 +574,15 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ENFORCEMENT_OPERATION__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENFORCEMENT_OPERATION__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Enforcement Mode</b></em>' attribute.
@@ -638,6 +638,15 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int GUARD_PATTERN__OWNED_COMMENT = CORE_PATTERN__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_PATTERN__EXTENSION = CORE_PATTERN__EXTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference list.
@@ -702,6 +711,15 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING__OWNED_COMMENT = QVTbasePackage.RULE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING__EXTENSION = QVTbasePackage.RULE__EXTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -849,6 +867,15 @@ public interface QVTcorePackage extends EPackage {
 	int PROPERTY_ASSIGNMENT__OWNED_COMMENT = ASSIGNMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ASSIGNMENT__EXTENSION = ASSIGNMENT__EXTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Bottom Pattern</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -920,6 +947,15 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int REALIZED_VARIABLE__OWNED_COMMENT = PivotPackage.VARIABLE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REALIZED_VARIABLE__EXTENSION = PivotPackage.VARIABLE__EXTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1020,6 +1056,15 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_ASSIGNMENT__OWNED_COMMENT = ASSIGNMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_ASSIGNMENT__EXTENSION = ASSIGNMENT__EXTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Bottom Pattern</b></em>' container reference.

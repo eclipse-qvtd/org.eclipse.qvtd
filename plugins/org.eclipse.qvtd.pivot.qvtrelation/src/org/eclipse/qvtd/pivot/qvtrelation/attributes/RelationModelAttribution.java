@@ -17,13 +17,13 @@
 package org.eclipse.qvtd.pivot.qvtrelation.attributes;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.attributes.ModelAttribution;
+import org.eclipse.ocl.examples.pivot.attributes.RootAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 
-public class RelationModelAttribution extends ModelAttribution
+public class RelationModelAttribution extends RootAttribution
 {
 	public static final RelationModelAttribution INSTANCE = new RelationModelAttribution();
 

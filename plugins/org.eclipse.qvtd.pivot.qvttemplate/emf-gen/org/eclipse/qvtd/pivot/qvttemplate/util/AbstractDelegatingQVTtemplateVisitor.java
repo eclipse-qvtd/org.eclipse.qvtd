@@ -25,6 +25,9 @@
  */
 package	org.eclipse.qvtd.pivot.qvttemplate.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * An AbstractDelegatingQVTtemplateVisitor delegates all visits.
  */
@@ -32,28 +35,28 @@ public abstract class AbstractDelegatingQVTtemplateVisitor<R, C, D extends QVTte
 	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractDelegatingQVTbaseVisitor<R, C, D>
 	implements QVTtemplateVisitor<R>
 {
-    protected AbstractDelegatingQVTtemplateVisitor(D delegate, C context) {
+    protected AbstractDelegatingQVTtemplateVisitor(@NonNull D delegate, @NonNull C context) {
         super(delegate, context);
     }
 
 	@Override
-	public R visiting(org.eclipse.ocl.examples.pivot.util.Visitable visitable) {
+	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.pivot.util.Visitable visitable) {
 		return delegate.visiting(visitable);
 	}
 
-	public R visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
+	public @Nullable R visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
 		return delegate.visitCollectionTemplateExp(object);
 	}
 
-	public R visitObjectTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
+	public @Nullable R visitObjectTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
 		return delegate.visitObjectTemplateExp(object);
 	}
 
-	public R visitPropertyTemplateItem(org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
+	public @Nullable R visitPropertyTemplateItem(@NonNull org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
 		return delegate.visitPropertyTemplateItem(object);
 	}
 
-	public R visitTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
+	public @Nullable R visitTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
 		return delegate.visitTemplateExp(object);
 	}
 }

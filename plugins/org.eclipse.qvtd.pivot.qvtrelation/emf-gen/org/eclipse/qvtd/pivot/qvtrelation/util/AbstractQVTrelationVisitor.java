@@ -25,6 +25,8 @@
  */
 package	org.eclipse.qvtd.pivot.qvtrelation.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  */
 public abstract class AbstractQVTrelationVisitor<R, C>
@@ -36,7 +38,7 @@ public abstract class AbstractQVTrelationVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractQVTrelationVisitor(C context) {
+	protected AbstractQVTrelationVisitor(@NonNull C context) {
 	    super(context);
 	}
 }
