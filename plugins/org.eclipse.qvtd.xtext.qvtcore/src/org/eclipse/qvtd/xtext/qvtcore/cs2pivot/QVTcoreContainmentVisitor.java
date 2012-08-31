@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -60,8 +59,6 @@ import org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS;
 
 public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 {
-	public static final @NonNull String MIDDLE_DIRECTION = "middle";
-
 	protected static class DirectionContentContinuation extends SingleContinuation<DirectionCS>
 	{
 		private DirectionContentContinuation(CS2PivotConversion context, DirectionCS csElement) {
@@ -88,7 +85,9 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 			TypedModel direction = csElement.getDirection();
 			if (direction == null) {
 				Transformation transformation = QVTbaseUtil.getContainingTransformation(pDomain);
-				direction = transformation.getModelParameter(MIDDLE_DIRECTION);
+				if (transformation != null) {
+					direction = transformation.getModelParameter(null);
+				}
 			}
 			pDomain.setTypedModel(direction);
 			return null;

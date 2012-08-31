@@ -4,8 +4,8 @@ import SimpleRDBMS : 'SimpleRdbms.ecore'::rdbmsMM;
 
 transformation umlRdbms {
 	uml imports SimpleUML;
-	middle imports SimpleUMLtoRDBMS;
 	rdbms imports SimpleRDBMS;
+	imports SimpleUMLtoRDBMS;
 }
 
 -- utility functions for flattening

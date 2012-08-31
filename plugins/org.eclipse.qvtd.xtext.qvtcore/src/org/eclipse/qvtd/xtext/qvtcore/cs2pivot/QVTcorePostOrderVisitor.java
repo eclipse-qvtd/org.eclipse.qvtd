@@ -36,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
@@ -190,6 +191,8 @@ public class QVTcorePostOrderVisitor extends AbstractQVTcorePostOrderVisitor
 
 	@Override
 	public Continuation<?> visitMappingCS(MappingCS csElement) {
+		Mapping pMapping = PivotUtil.getPivot(Mapping.class, csElement);
+		PivotUtil.refreshList(pMapping.getRefinement(), csElement.getRefines());
 		return null;
 	}
 

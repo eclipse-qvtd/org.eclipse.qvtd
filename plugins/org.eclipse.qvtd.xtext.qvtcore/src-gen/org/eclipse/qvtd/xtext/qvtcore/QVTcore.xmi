@@ -116,7 +116,12 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//DirectionCS"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.6">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//DirectionCS"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
         </elements>
         <elements xsi:type="xtext:Group" cardinality="?">
@@ -238,6 +243,11 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//MappingCS"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.6">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/qvt/0.9/QVTcoreCST#//MappingCS"/>
+          </type>
+        </elements>
         <elements xsi:type="xtext:Keyword" value="map"/>
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
@@ -281,7 +291,7 @@
         </elements>
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value="where"/>
-          <elements xsi:type="xtext:Assignment" feature="domains" operator="+=">
+          <elements xsi:type="xtext:Assignment" feature="middle" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
           </elements>
         </elements>

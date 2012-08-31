@@ -20,7 +20,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcore.Area;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
 public class GuardPatternAttribution extends AbstractAttribution
 {
@@ -28,8 +35,64 @@ public class GuardPatternAttribution extends AbstractAttribution
 
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
-		GuardPattern targetElement = (GuardPattern)target;
-		environmentView.addNamedElements(targetElement.getVariable());
+		Area area = ((GuardPattern)target).getArea();
+		if (area instanceof Mapping) {
+			Mapping mapping = (Mapping)area;;
+			Transformation transformation = QVTbaseUtil.getContainingTransformation(mapping);
+			TypedModel middleModel = transformation.getModelParameter(null);
+			if (middleModel != null) {
+				for (org.eclipse.ocl.examples.pivot.Package pPackage : middleModel.getUsedPackage()) {
+					environmentView.addNamedElement(pPackage);
+					environmentView.addNamedElements(pPackage.getOwnedType());
+				}
+			}
+			for (; mapping != null; mapping = mapping.getContext()) {
+				addMiddleGuardVariables(environmentView, mapping);
+			}
+		}
+		else {
+			CoreDomain domain = (CoreDomain)area;
+			TypedModel typedModel = domain.getTypedModel();
+			for (Mapping mapping = (Mapping) domain.getRule(); mapping != null; mapping = mapping.getContext()) {
+				addSideGuardVariables(environmentView, mapping, typedModel);
+			}
+		}
 		return scopeView.getParent();
+	}
+
+	protected void addMiddleGuardVariables(EnvironmentView environmentView, Mapping mapping) {
+		GuardPattern guardPattern = mapping.getGuardPattern();
+		if (guardPattern != null) {
+			environmentView.addNamedElements(guardPattern.getVariable());
+		}
+		for (Domain domain : mapping.getDomain()) {
+			if (domain instanceof Area) {
+				guardPattern = ((Area)domain).getGuardPattern();
+				if (guardPattern != null) {
+					environmentView.addNamedElements(guardPattern.getVariable());
+				}
+			}
+		}
+		for (Mapping refinedMapping : mapping.getRefinement()) {
+			addMiddleGuardVariables(environmentView, refinedMapping);
+		}
+	}
+
+	protected void addSideGuardVariables(EnvironmentView environmentView, Mapping mapping, TypedModel typedModel) {
+		for (Domain aDomain : mapping.getDomain()) {
+			if (aDomain instanceof CoreDomain) {
+				CoreDomain domain = (CoreDomain)aDomain;
+				if (domain.getTypedModel() == typedModel) {
+					GuardPattern guardPattern = domain.getGuardPattern();
+					if (guardPattern != null) {
+						environmentView.addNamedElements(guardPattern.getVariable());
+					}
+					break;
+				}
+			}
+		}
+		for (Mapping refinedMapping : mapping.getRefinement()) {
+			addSideGuardVariables(environmentView, refinedMapping, typedModel);
+		}
 	}
 }

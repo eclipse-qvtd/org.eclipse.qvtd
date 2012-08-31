@@ -17,14 +17,10 @@
 package org.eclipse.qvtd.xtext.qvtcore.attributes;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.xtext.base.attributes.RootPackageCSAttribution;
-import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
 
 public class TopLevelCSAttribution extends RootPackageCSAttribution
 {

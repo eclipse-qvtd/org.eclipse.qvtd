@@ -42,7 +42,7 @@ ComposedMappingCS returns MappingCS: MappingCS;
 //Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
 AssignmentCS: default?='default'? target=ExpCS (':=' initialiser=ExpCS)? ';';
 	
-DirectionCS: name=UnrestrictedName
+DirectionCS: {DirectionCS} name=UnrestrictedName?
 	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
 	('uses' uses+=[qvtcore::CoreDomain|UnrestrictedName] (',' uses+=[qvtcore::CoreDomain|UnrestrictedName])*)?
 ;
@@ -63,9 +63,9 @@ ImportCS returns base::ImportCS:
 LibraryCS returns base::LibraryCS:
 	'library' package=[pivot::Package|URI] ';';
 	
-MappingCS: 'map' name=UnrestrictedName? ('in' in=[qvtbase::Transformation|UnrestrictedName])?
+MappingCS: {MappingCS} 'map' name=UnrestrictedName? ('in' in=[qvtbase::Transformation|UnrestrictedName])?
 	('refines' refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)?
-	'{' domains+=NamedDomainCS* ('where' domains+=UnnamedDomainCS)? composedMappings+=ComposedMappingCS* '}';
+	'{' domains+=NamedDomainCS* ('where' middle=UnnamedDomainCS)? composedMappings+=ComposedMappingCS* '}';
 	
 NamedDomainCS returns DomainCS: check?='check'? enforce?='enforce'? direction=[qvtbase::TypedModel|UnrestrictedName]
 	'(' guardPattern=GuardPatternCS? ')' '{' bottomPattern=BottomPatternCS? '}';
