@@ -1147,13 +1147,22 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int QUERY_CS__OPTIONAL = BaseCSTPackage.TYPED_ELEMENT_CS__OPTIONAL;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_CS__NAMESPACE = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Input Param Declaration</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__INPUT_PARAM_DECLARATION = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int QUERY_CS__INPUT_PARAM_DECLARATION = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1162,7 +1171,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__EXPRESSION = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int QUERY_CS__EXPRESSION = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Query CS</em>' class.
@@ -1171,7 +1180,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS_FEATURE_COUNT = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int QUERY_CS_FEATURE_COUNT = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.RealizeableVariableCSImpl <em>Realizeable Variable CS</em>}' class.
@@ -2124,6 +2133,17 @@ public interface QVTcoreCSTPackage extends EPackage {
 	EClass getQueryCS();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getNamespace <em>Namespace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Namespace</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getNamespace()
+	 * @see #getQueryCS()
+	 * @generated
+	 */
+	EReference getQueryCS_Namespace();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getInputParamDeclaration <em>Input Param Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2549,6 +2569,14 @@ public interface QVTcoreCSTPackage extends EPackage {
 		 * @generated
 		 */
 		EClass QUERY_CS = eINSTANCE.getQueryCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Namespace</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference QUERY_CS__NAMESPACE = eINSTANCE.getQueryCS_Namespace();
 
 		/**
 		 * The meta object literal for the '<em><b>Input Param Declaration</b></em>' containment reference list feature.

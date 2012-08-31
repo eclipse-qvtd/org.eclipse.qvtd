@@ -23,7 +23,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtils;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
@@ -35,7 +35,7 @@ public class KeyAttribution extends AbstractAttribution
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
 		Key targetElement = (Key)target;
 		RelationalTransformation transformation = targetElement.getTransformation();
-		Set<org.eclipse.ocl.examples.pivot.Package> allPackages = QVTbaseUtils.getAllUsedPackages(transformation);
+		Set<org.eclipse.ocl.examples.pivot.Package> allPackages = QVTbaseUtil.getAllUsedPackages(transformation);
 		for (org.eclipse.ocl.examples.pivot.Package usedPackage : allPackages) {
 			environmentView.addNamedElement(usedPackage);
 		}

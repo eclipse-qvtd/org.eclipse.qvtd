@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -33,6 +35,7 @@ import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
@@ -57,6 +60,8 @@ import org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS;
 
 public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 {
+	public static final @NonNull String MIDDLE_DIRECTION = "middle";
+
 	protected static class DirectionContentContinuation extends SingleContinuation<DirectionCS>
 	{
 		private DirectionContentContinuation(CS2PivotConversion context, DirectionCS csElement) {
@@ -80,7 +85,12 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 		@Override
 		public BasicContinuation<?> execute() {
 			CoreDomain pDomain = PivotUtil.getPivot(CoreDomain.class, csElement);
-			pDomain.setTypedModel(csElement.getDirection());
+			TypedModel direction = csElement.getDirection();
+			if (direction == null) {
+				Transformation transformation = QVTbaseUtil.getContainingTransformation(pDomain);
+				direction = transformation.getModelParameter(MIDDLE_DIRECTION);
+			}
+			pDomain.setTypedModel(direction);
 			return null;
 		}
 	}
@@ -124,6 +134,16 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 	}
 
 	public Continuation<?> visitMappingCS(MappingCS csElement) {
+		if (csElement.eContainer() instanceof TopLevelCS) {
+			if (csElement.getName() == null) {
+				context.addDiagnostic(csElement, "top level mapping must be named");
+			}			
+		}
+		else {
+			if (csElement.getName() != null) {
+				context.addDiagnostic(csElement, "composed mapping must be unnamed");
+			}			
+		}
 		Mapping pivotElement = refreshNamedElement(Mapping.class, QVTcorePackage.Literals.MAPPING, csElement);
 		DomainCS csMiddle = csElement.getMiddle();
 		if (csMiddle != null) {
@@ -157,7 +177,7 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 
 	public Continuation<?> visitTopLevelCS(TopLevelCS csElement) {
 		importPackages(csElement);
-		refreshRoot(CoreModel.class, QVTcorePackage.Literals.CORE_MODEL, csElement);
+		CoreModel pivotElement = refreshRoot(CoreModel.class, QVTcorePackage.Literals.CORE_MODEL, csElement);
 		List<TransformationCS> csTransformations = csElement.getTransformations();
 		List<Transformation> txList = new ArrayList<Transformation>(csTransformations.size());
 		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();
@@ -168,6 +188,12 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 		}
 		CoreModel pPackage = PivotUtil.getPivot(CoreModel.class, csElement);
 		PivotUtil.refreshList(pPackage.getNestedPackage(), txList);
+		//
+		Resource eResource = csElement.eResource();
+		if ((eResource != null) && (pivotElement != null)) {
+			context.installRootElement(eResource, pivotElement);		// Ensure containment viable for imported library type references
+//			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
+		}
 		//
 		for (MappingCS csMapping : csElement.getMappings()) {
 			Transformation inTransformation = csMapping.getIn();

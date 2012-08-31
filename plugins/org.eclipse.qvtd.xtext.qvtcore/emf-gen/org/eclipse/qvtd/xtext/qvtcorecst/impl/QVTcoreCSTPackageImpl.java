@@ -522,7 +522,7 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getQueryCS_InputParamDeclaration() {
+	public EReference getQueryCS_Namespace() {
 		return (EReference)queryCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -531,8 +531,17 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getQueryCS_Expression() {
+	public EReference getQueryCS_InputParamDeclaration() {
 		return (EReference)queryCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getQueryCS_Expression() {
+		return (EReference)queryCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -695,6 +704,7 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 		createEReference(patternCSEClass, PATTERN_CS__UNREALIZED_VARIABLES);
 
 		queryCSEClass = createEClass(QUERY_CS);
+		createEReference(queryCSEClass, QUERY_CS__NAMESPACE);
 		createEReference(queryCSEClass, QUERY_CS__INPUT_PARAM_DECLARATION);
 		createEReference(queryCSEClass, QUERY_CS__EXPRESSION);
 
@@ -809,6 +819,7 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 		initEReference(getPatternCS_UnrealizedVariables(), this.getUnrealizedVariableCS(), null, "unrealizedVariables", null, 0, -1, PatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(queryCSEClass, QueryCS.class, "QueryCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getQueryCS_Namespace(), thePivotPackage.getNamespace(), null, "namespace", null, 0, -1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQueryCS_InputParamDeclaration(), this.getParamDeclarationCS(), null, "inputParamDeclaration", null, 0, -1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQueryCS_Expression(), theEssentialOCLCSTPackage.getExpCS(), null, "expression", null, 0, 1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

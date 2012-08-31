@@ -23,7 +23,7 @@ import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.Unit;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtils;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 
 public class TypedModelAttribution extends AbstractAttribution
 {
@@ -32,7 +32,7 @@ public class TypedModelAttribution extends AbstractAttribution
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
 		TypedModel typedModel = (TypedModel)target;
-		BaseModel model = QVTbaseUtils.getModel(typedModel);
+		BaseModel model = QVTbaseUtil.getContainingModel(typedModel);
 		if (model != null) {
 			for (Unit unit : model.getUnit()) {
 				environmentView.addElement(unit.getName(), unit.getUsedPackage());

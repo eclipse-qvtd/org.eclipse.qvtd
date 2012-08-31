@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.PivotCSAttribution;
 import org.eclipse.qvtd.xtext.qvtcore.attributes.MappingCSAttribution;
+import org.eclipse.qvtd.xtext.qvtcore.attributes.TopLevelCSAttribution;
+import org.eclipse.qvtd.xtext.qvtcore.attributes.TransformationCSAttribution;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
 
 public class QVTcoreScoping
@@ -29,7 +31,7 @@ public class QVTcoreScoping
 		registry.put(QVTcoreCSTPackage.Literals.DOMAIN_CS, PivotCSAttribution.INSTANCE);
 		registry.put(QVTcoreCSTPackage.Literals.MAPPING_CS, MappingCSAttribution.INSTANCE);	// Has no eContainer to lookup eContainer.
 		registry.put(QVTcoreCSTPackage.Literals.PATTERN_CS, PivotCSAttribution.INSTANCE);
-		registry.put(QVTcoreCSTPackage.Literals.TOP_LEVEL_CS, PivotCSAttribution.INSTANCE);
-		registry.put(QVTcoreCSTPackage.Literals.TRANSFORMATION_CS, PivotCSAttribution.INSTANCE);
+		registry.put(QVTcoreCSTPackage.Literals.TOP_LEVEL_CS, TopLevelCSAttribution.INSTANCE);
+		registry.put(QVTcoreCSTPackage.Literals.TRANSFORMATION_CS, TransformationCSAttribution.INSTANCE);
 	}
 }

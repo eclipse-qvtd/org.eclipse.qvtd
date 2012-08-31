@@ -57,6 +57,8 @@
         eType="#//UnrealizedVariableCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QueryCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//TypedElementCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Namespace"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputParamDeclaration"
         upperBound="-1" eType="#//ParamDeclarationCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS"

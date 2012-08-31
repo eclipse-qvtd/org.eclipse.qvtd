@@ -39,7 +39,7 @@ ComposedMappingCS returns MappingCS: MappingCS;
 		
 //Constraint ::= Predicate | Assignment
 //Predicate ::= BooleanOCLExpr
-//Assignement ::= [“default”] SlotOwnerOCLExpr“.”PropertyName “:=” ValueOCLExpr
+//Assignement ::= [ï¿½defaultï¿½] SlotOwnerOCLExprï¿½.ï¿½PropertyName ï¿½:=ï¿½ ValueOCLExpr
 AssignmentCS: default?='default'? target=ExpCS (':=' initialiser=ExpCS)? ';';
 	
 DirectionCS: name=UnrestrictedName
@@ -63,7 +63,7 @@ ImportCS returns base::ImportCS:
 LibraryCS returns base::LibraryCS:
 	'library' package=[pivot::Package|URI] ';';
 	
-MappingCS: 'map' name=UnrestrictedName ('in' in=[qvtbase::Transformation|UnrestrictedName])?
+MappingCS: 'map' name=UnrestrictedName? ('in' in=[qvtbase::Transformation|UnrestrictedName])?
 	('refines' refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)?
 	'{' domains+=NamedDomainCS* ('where' domains+=UnnamedDomainCS)? composedMappings+=ComposedMappingCS* '}';
 	
@@ -72,8 +72,8 @@ NamedDomainCS returns DomainCS: check?='check'? enforce?='enforce'? direction=[q
 	
 ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
 		
-QueryCS: 'query' name=UnrestrictedName
-	'(' (inputParamDeclaration+=ParamDeclarationCS (',' inputParamDeclaration+=ParamDeclarationCS)*)? ')'
+QueryCS: 'query' (namespace+=[pivot::Namespace|UnrestrictedName] '::' (namespace+=[pivot::Namespace|UnreservedName] '::')*)?
+	 name=UnrestrictedName '(' (inputParamDeclaration+=ParamDeclarationCS (',' inputParamDeclaration+=ParamDeclarationCS)*)? ')'
 		':' ownedType=TypeExpCS (';' | '{' expression=ExpCS '}');
 //<query> ::= 'query' <PathNameCS> 
 //            '(' [<paramDeclaration> (',' <paramDeclaration>)*] ')'
@@ -84,10 +84,10 @@ TransformationCS:
 	'transformation' (namespace+=[pivot::Namespace|UnrestrictedName] '::' (namespace+=[pivot::Namespace|UnreservedName] '::')*)?
 	name=UnreservedName '{' (directions+=DirectionCS ';')* '}';
 	
-//Variable := VariableName “:” TypeDeclaration
+//Variable := VariableName ï¿½:ï¿½ TypeDeclaration
 UnrealizedVariableCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
 		
-//RealizedVariable := “realized” VariableName “:” TypeDeclaration
+//RealizedVariable := ï¿½realizedï¿½ VariableName ï¿½:ï¿½ TypeDeclaration
 RealizedVariableCS: 'realize' name=UnrestrictedName ':' ownedType=TypeExpCS;
 	
 UnnamedDomainCS returns DomainCS: {DomainCS} '(' guardPattern=GuardPatternCS? ')' '{' bottomPattern=BottomPatternCS? '}';

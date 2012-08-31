@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -405,17 +406,6 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypedModel getModelParameter(String name) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -711,6 +701,10 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	@Override
 	public <R> R accept(Visitor<R> visitor) {
 		return (R) visitor.getAdapter(QVTbaseVisitor.class).visitTransformation(this);
+	}
+
+	public TypedModel getModelParameter(String name) {
+		return PivotUtil.getNamedElement(getModelParameter(), name);
 	}
 
 	@Override

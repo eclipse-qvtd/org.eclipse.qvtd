@@ -18,6 +18,7 @@ package org.eclipse.qvtd.xtext.qvtcorecst;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
 
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
@@ -30,6 +31,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getInputParamDeclaration <em>Input Param Declaration</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getExpression <em>Expression</em>}</li>
  * </ul>
@@ -40,6 +42,22 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
  * @generated
  */
 public interface QueryCS extends TypedElementCS {
+	/**
+	 * Returns the value of the '<em><b>Namespace</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Namespace}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Namespace</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Namespace</em>' reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getQueryCS_Namespace()
+	 * @model
+	 * @generated
+	 */
+	EList<Namespace> getNamespace();
+
 	/**
 	 * Returns the value of the '<em><b>Input Param Declaration</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS}.

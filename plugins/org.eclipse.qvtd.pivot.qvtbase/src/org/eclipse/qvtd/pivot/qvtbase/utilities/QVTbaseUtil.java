@@ -24,7 +24,7 @@ import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
-public class QVTbaseUtils
+public class QVTbaseUtil
 {
 	public static Set<org.eclipse.ocl.examples.pivot.Package> getAllUsedPackages(Transformation transformation) {
 		Set<org.eclipse.ocl.examples.pivot.Package> allPackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
@@ -34,10 +34,19 @@ public class QVTbaseUtils
 		return allPackages;
 	}
 
-	public static BaseModel getModel(EObject eObject) {
+	public static BaseModel getContainingModel(EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof BaseModel) {
 				return (BaseModel) eObject;
+			}
+		}
+		return null;
+	}
+
+	public static Transformation getContainingTransformation(EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof Transformation) {
+				return (Transformation) eObject;
 			}
 		}
 		return null;
