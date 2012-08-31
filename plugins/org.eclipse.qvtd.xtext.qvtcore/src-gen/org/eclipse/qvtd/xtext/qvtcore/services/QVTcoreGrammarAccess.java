@@ -762,16 +762,8 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QueryCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cQueryKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Assignment cNamespaceAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final CrossReference cNamespaceNamespaceCrossReference_1_0_0 = (CrossReference)cNamespaceAssignment_1_0.eContents().get(0);
-		private final RuleCall cNamespaceNamespaceUnrestrictedNameParserRuleCall_1_0_0_1 = (RuleCall)cNamespaceNamespaceCrossReference_1_0_0.eContents().get(1);
-		private final Keyword cColonColonKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
-		private final Group cGroup_1_2 = (Group)cGroup_1.eContents().get(2);
-		private final Assignment cNamespaceAssignment_1_2_0 = (Assignment)cGroup_1_2.eContents().get(0);
-		private final CrossReference cNamespaceNamespaceCrossReference_1_2_0_0 = (CrossReference)cNamespaceAssignment_1_2_0.eContents().get(0);
-		private final RuleCall cNamespaceNamespaceUnreservedNameParserRuleCall_1_2_0_0_1 = (RuleCall)cNamespaceNamespaceCrossReference_1_2_0_0.eContents().get(1);
-		private final Keyword cColonColonKeyword_1_2_1 = (Keyword)cGroup_1_2.eContents().get(1);
+		private final Assignment cPathNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cPathNameScopeNameCSParserRuleCall_1_0 = (RuleCall)cPathNameAssignment_1.eContents().get(0);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameUnrestrictedNameParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
@@ -796,16 +788,12 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//QueryCS:
 		//
-		//	"query" (namespace+=[pivot::Namespace|UnrestrictedName] "::" (namespace+=[pivot::Namespace|UnreservedName] "::")*)?
-		//
-		//	name=UnrestrictedName "(" (inputParamDeclaration+=ParamDeclarationCS (","
+		//	"query" pathName=ScopeNameCS name=UnrestrictedName "(" (inputParamDeclaration+=ParamDeclarationCS (","
 		//
 		//	inputParamDeclaration+=ParamDeclarationCS)*)? ")" ":" ownedType=TypeExpCS (";" | "{" expression=ExpCS "}");
 		public ParserRule getRule() { return rule; }
 
-		//"query" (namespace+=[pivot::Namespace|UnrestrictedName] "::" (namespace+=[pivot::Namespace|UnreservedName] "::")*)?
-		//
-		//name=UnrestrictedName "(" (inputParamDeclaration+=ParamDeclarationCS (","
+		//"query" pathName=ScopeNameCS name=UnrestrictedName "(" (inputParamDeclaration+=ParamDeclarationCS (","
 		//
 		//inputParamDeclaration+=ParamDeclarationCS)*)? ")" ":" ownedType=TypeExpCS (";" | "{" expression=ExpCS "}")
 		public Group getGroup() { return cGroup; }
@@ -813,35 +801,11 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//"query"
 		public Keyword getQueryKeyword_0() { return cQueryKeyword_0; }
 
-		//(namespace+=[pivot::Namespace|UnrestrictedName] "::" (namespace+=[pivot::Namespace|UnreservedName] "::")*)?
-		public Group getGroup_1() { return cGroup_1; }
+		//pathName=ScopeNameCS
+		public Assignment getPathNameAssignment_1() { return cPathNameAssignment_1; }
 
-		//namespace+=[pivot::Namespace|UnrestrictedName]
-		public Assignment getNamespaceAssignment_1_0() { return cNamespaceAssignment_1_0; }
-
-		//[pivot::Namespace|UnrestrictedName]
-		public CrossReference getNamespaceNamespaceCrossReference_1_0_0() { return cNamespaceNamespaceCrossReference_1_0_0; }
-
-		//UnrestrictedName
-		public RuleCall getNamespaceNamespaceUnrestrictedNameParserRuleCall_1_0_0_1() { return cNamespaceNamespaceUnrestrictedNameParserRuleCall_1_0_0_1; }
-
-		//"::"
-		public Keyword getColonColonKeyword_1_1() { return cColonColonKeyword_1_1; }
-
-		//(namespace+=[pivot::Namespace|UnreservedName] "::")*
-		public Group getGroup_1_2() { return cGroup_1_2; }
-
-		//namespace+=[pivot::Namespace|UnreservedName]
-		public Assignment getNamespaceAssignment_1_2_0() { return cNamespaceAssignment_1_2_0; }
-
-		//[pivot::Namespace|UnreservedName]
-		public CrossReference getNamespaceNamespaceCrossReference_1_2_0_0() { return cNamespaceNamespaceCrossReference_1_2_0_0; }
-
-		//UnreservedName
-		public RuleCall getNamespaceNamespaceUnreservedNameParserRuleCall_1_2_0_0_1() { return cNamespaceNamespaceUnreservedNameParserRuleCall_1_2_0_0_1; }
-
-		//"::"
-		public Keyword getColonColonKeyword_1_2_1() { return cColonColonKeyword_1_2_1; }
+		//ScopeNameCS
+		public RuleCall getPathNameScopeNameCSParserRuleCall_1_0() { return cPathNameScopeNameCSParserRuleCall_1_0; }
 
 		//name=UnrestrictedName
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
@@ -907,20 +871,59 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_8_1_2() { return cRightCurlyBracketKeyword_8_1_2; }
 	}
 
+	public class ScopeNameCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ScopeNameCS");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cPathAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cPathFirstPathElementCSParserRuleCall_0_0 = (RuleCall)cPathAssignment_0.eContents().get(0);
+		private final Keyword cColonColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cPathAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cPathNextPathElementCSParserRuleCall_2_0_0 = (RuleCall)cPathAssignment_2_0.eContents().get(0);
+		private final Keyword cColonColonKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		
+		////<query> ::= 'query' <PathNameCS> 
+		// //            '(' [<paramDeclaration> (',' <paramDeclaration>)*] ')'
+		//
+		//
+		////      	  ':' <TypeCS>
+		// //            (';' | '{' <OCLExpressionCS> '}')
+		// ScopeNameCS returns base::PathNameCS:
+		//
+		//	path+=FirstPathElementCS "::" (path+=NextPathElementCS "::")*;
+		public ParserRule getRule() { return rule; }
+
+		//path+=FirstPathElementCS "::" (path+=NextPathElementCS "::")*
+		public Group getGroup() { return cGroup; }
+
+		//path+=FirstPathElementCS
+		public Assignment getPathAssignment_0() { return cPathAssignment_0; }
+
+		//FirstPathElementCS
+		public RuleCall getPathFirstPathElementCSParserRuleCall_0_0() { return cPathFirstPathElementCSParserRuleCall_0_0; }
+
+		//"::"
+		public Keyword getColonColonKeyword_1() { return cColonColonKeyword_1; }
+
+		//(path+=NextPathElementCS "::")*
+		public Group getGroup_2() { return cGroup_2; }
+
+		//path+=NextPathElementCS
+		public Assignment getPathAssignment_2_0() { return cPathAssignment_2_0; }
+
+		//NextPathElementCS
+		public RuleCall getPathNextPathElementCSParserRuleCall_2_0_0() { return cPathNextPathElementCSParserRuleCall_2_0_0; }
+
+		//"::"
+		public Keyword getColonColonKeyword_2_1() { return cColonColonKeyword_2_1; }
+	}
+
 	public class TransformationCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransformationCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTransformationKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Assignment cNamespaceAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final CrossReference cNamespaceNamespaceCrossReference_1_0_0 = (CrossReference)cNamespaceAssignment_1_0.eContents().get(0);
-		private final RuleCall cNamespaceNamespaceUnrestrictedNameParserRuleCall_1_0_0_1 = (RuleCall)cNamespaceNamespaceCrossReference_1_0_0.eContents().get(1);
-		private final Keyword cColonColonKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
-		private final Group cGroup_1_2 = (Group)cGroup_1.eContents().get(2);
-		private final Assignment cNamespaceAssignment_1_2_0 = (Assignment)cGroup_1_2.eContents().get(0);
-		private final CrossReference cNamespaceNamespaceCrossReference_1_2_0_0 = (CrossReference)cNamespaceAssignment_1_2_0.eContents().get(0);
-		private final RuleCall cNamespaceNamespaceUnreservedNameParserRuleCall_1_2_0_0_1 = (RuleCall)cNamespaceNamespaceCrossReference_1_2_0_0.eContents().get(1);
-		private final Keyword cColonColonKeyword_1_2_1 = (Keyword)cGroup_1_2.eContents().get(1);
+		private final Assignment cPathNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cPathNameScopeNameCSParserRuleCall_1_0 = (RuleCall)cPathNameAssignment_1.eContents().get(0);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameUnreservedNameParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
@@ -930,56 +933,22 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		////<query> ::= 'query' <PathNameCS> 
-		// //            '(' [<paramDeclaration> (',' <paramDeclaration>)*] ')'
+		//TransformationCS:
 		//
-		//
-		////      	  ':' <TypeCS>
-		// //            (';' | '{' <OCLExpressionCS> '}')
-		// TransformationCS:
-		//
-		//	"transformation" (namespace+=[pivot::Namespace|UnrestrictedName] "::" (namespace+=[pivot::Namespace|UnreservedName]
-		//
-		//	"::")*)? name=UnreservedName "{" (directions+=DirectionCS ";")* "}";
+		//	"transformation" pathName=ScopeNameCS? name=UnreservedName "{" (directions+=DirectionCS ";")* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"transformation" (namespace+=[pivot::Namespace|UnrestrictedName] "::" (namespace+=[pivot::Namespace|UnreservedName]
-		//
-		//"::")*)? name=UnreservedName "{" (directions+=DirectionCS ";")* "}"
+		//"transformation" pathName=ScopeNameCS? name=UnreservedName "{" (directions+=DirectionCS ";")* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"transformation"
 		public Keyword getTransformationKeyword_0() { return cTransformationKeyword_0; }
 
-		//(namespace+=[pivot::Namespace|UnrestrictedName] "::" (namespace+=[pivot::Namespace|UnreservedName] "::")*)?
-		public Group getGroup_1() { return cGroup_1; }
+		//pathName=ScopeNameCS?
+		public Assignment getPathNameAssignment_1() { return cPathNameAssignment_1; }
 
-		//namespace+=[pivot::Namespace|UnrestrictedName]
-		public Assignment getNamespaceAssignment_1_0() { return cNamespaceAssignment_1_0; }
-
-		//[pivot::Namespace|UnrestrictedName]
-		public CrossReference getNamespaceNamespaceCrossReference_1_0_0() { return cNamespaceNamespaceCrossReference_1_0_0; }
-
-		//UnrestrictedName
-		public RuleCall getNamespaceNamespaceUnrestrictedNameParserRuleCall_1_0_0_1() { return cNamespaceNamespaceUnrestrictedNameParserRuleCall_1_0_0_1; }
-
-		//"::"
-		public Keyword getColonColonKeyword_1_1() { return cColonColonKeyword_1_1; }
-
-		//(namespace+=[pivot::Namespace|UnreservedName] "::")*
-		public Group getGroup_1_2() { return cGroup_1_2; }
-
-		//namespace+=[pivot::Namespace|UnreservedName]
-		public Assignment getNamespaceAssignment_1_2_0() { return cNamespaceAssignment_1_2_0; }
-
-		//[pivot::Namespace|UnreservedName]
-		public CrossReference getNamespaceNamespaceCrossReference_1_2_0_0() { return cNamespaceNamespaceCrossReference_1_2_0_0; }
-
-		//UnreservedName
-		public RuleCall getNamespaceNamespaceUnreservedNameParserRuleCall_1_2_0_0_1() { return cNamespaceNamespaceUnreservedNameParserRuleCall_1_2_0_0_1; }
-
-		//"::"
-		public Keyword getColonColonKeyword_1_2_1() { return cColonColonKeyword_1_2_1; }
+		//ScopeNameCS
+		public RuleCall getPathNameScopeNameCSParserRuleCall_1_0() { return cPathNameScopeNameCSParserRuleCall_1_0; }
 
 		//name=UnreservedName
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
@@ -1214,6 +1183,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	private NamedDomainCSElements pNamedDomainCS;
 	private ParamDeclarationCSElements pParamDeclarationCS;
 	private QueryCSElements pQueryCS;
+	private ScopeNameCSElements pScopeNameCS;
 	private TransformationCSElements pTransformationCS;
 	private UnrealizedVariableCSElements pUnrealizedVariableCS;
 	private RealizedVariableCSElements pRealizedVariableCS;
@@ -1407,9 +1377,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 	//QueryCS:
 	//
-	//	"query" (namespace+=[pivot::Namespace|UnrestrictedName] "::" (namespace+=[pivot::Namespace|UnreservedName] "::")*)?
-	//
-	//	name=UnrestrictedName "(" (inputParamDeclaration+=ParamDeclarationCS (","
+	//	"query" pathName=ScopeNameCS name=UnrestrictedName "(" (inputParamDeclaration+=ParamDeclarationCS (","
 	//
 	//	inputParamDeclaration+=ParamDeclarationCS)*)? ")" ":" ownedType=TypeExpCS (";" | "{" expression=ExpCS "}");
 	public QueryCSElements getQueryCSAccess() {
@@ -1426,11 +1394,20 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	////      	  ':' <TypeCS>
 	// //            (';' | '{' <OCLExpressionCS> '}')
-	// TransformationCS:
+	// ScopeNameCS returns base::PathNameCS:
 	//
-	//	"transformation" (namespace+=[pivot::Namespace|UnrestrictedName] "::" (namespace+=[pivot::Namespace|UnreservedName]
+	//	path+=FirstPathElementCS "::" (path+=NextPathElementCS "::")*;
+	public ScopeNameCSElements getScopeNameCSAccess() {
+		return (pScopeNameCS != null) ? pScopeNameCS : (pScopeNameCS = new ScopeNameCSElements());
+	}
+	
+	public ParserRule getScopeNameCSRule() {
+		return getScopeNameCSAccess().getRule();
+	}
+
+	//TransformationCS:
 	//
-	//	"::")*)? name=UnreservedName "{" (directions+=DirectionCS ";")* "}";
+	//	"transformation" pathName=ScopeNameCS? name=UnreservedName "{" (directions+=DirectionCS ";")* "}";
 	public TransformationCSElements getTransformationCSAccess() {
 		return (pTransformationCS != null) ? pTransformationCS : (pTransformationCS = new TransformationCSElements());
 	}

@@ -17,11 +17,10 @@
 package org.eclipse.qvtd.xtext.qvtcorecst;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.ocl.examples.pivot.Namespace;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
-
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +30,8 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getPathName <em>Path Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getInputParamDeclaration <em>Input Param Declaration</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getExpression <em>Expression</em>}</li>
  * </ul>
@@ -43,20 +43,45 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
  */
 public interface QueryCS extends TypedElementCS {
 	/**
-	 * Returns the value of the '<em><b>Namespace</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Namespace}.
+	 * Returns the value of the '<em><b>Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Namespace</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Path Name</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Namespace</em>' reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getQueryCS_Namespace()
-	 * @model
+	 * @return the value of the '<em>Path Name</em>' containment reference.
+	 * @see #setPathName(PathNameCS)
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getQueryCS_PathName()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Namespace> getNamespace();
+	PathNameCS getPathName();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS#getPathName <em>Path Name</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Path Name</em>' containment reference.
+	 * @see #getPathName()
+	 * @generated
+	 */
+	void setPathName(PathNameCS value);
+
+	/**
+	 * Returns the value of the '<em><b>Transformation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Transformation</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Transformation</em>' reference.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage#getQueryCS_Transformation()
+	 * @model resolveProxies="false" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	Transformation getTransformation();
 
 	/**
 	 * Returns the value of the '<em><b>Input Param Declaration</b></em>' containment reference list.

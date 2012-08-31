@@ -165,6 +165,7 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 
 	public Continuation<?> visitQueryCS(QueryCS csElement) {
 		Function pivotElement = refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
+		pivotElement.setIsStatic(true);
 		context.refreshPivotList(FunctionParameter.class, pivotElement.getOwnedParameter(), csElement.getInputParamDeclaration());
 		return null;
 	}
@@ -204,8 +205,26 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 				}
 			}
 		}
+		Map<Transformation, List<Function>> tx2qMap = new HashMap<Transformation, List<Function>>();
+		for (QueryCS csQuery : csElement.getQueries()) {
+			Transformation transformation = csQuery.getTransformation();
+			Function query = PivotUtil.getPivot(Function.class,  csQuery);
+			List<Function> queries = tx2qMap.get(transformation);
+			if (queries == null) {
+				queries = new ArrayList<Function>();
+				tx2qMap.put(transformation, queries);
+			}
+			queries.add(query);
+		}
 		for (Transformation pTransformation : tx2mappings.keySet()) {
 			PivotUtil.refreshList(pTransformation.getRule(), tx2mappings.get(pTransformation));
+			List<Function> newElements = tx2qMap.get(pTransformation);
+			if (newElements != null) {
+				PivotUtil.refreshList(pTransformation.getOwnedOperation(), newElements);
+			}
+			else {
+				pTransformation.getOwnedOperation().clear();
+			}
 		}
 //		context.refreshPivotList(Type.class, pivotElement.getOwnedType(), csElement.getOwnedType());
 //		context.refreshPivotList(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage());

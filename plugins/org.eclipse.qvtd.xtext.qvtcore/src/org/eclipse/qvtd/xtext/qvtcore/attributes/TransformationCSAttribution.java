@@ -34,11 +34,8 @@ public class TransformationCSAttribution extends PivotCSAttribution
 		TransformationCS targetElement = (TransformationCS)target;
 		EReference targetReference = scopeView.getTargetReference();
 		if (targetReference == QVTcoreCSTPackage.Literals.DIRECTION_CS__IMPORTS) {
-//			targetElement.get
-//			environmentView.computeLookups(targetElement.getIn(), null, null, targetReference);
 			return scopeView.getParent();
 		}
-//		return scopeView.getParent();
 		return super.computeLookup(target, environmentView, scopeView);
 	}
 }

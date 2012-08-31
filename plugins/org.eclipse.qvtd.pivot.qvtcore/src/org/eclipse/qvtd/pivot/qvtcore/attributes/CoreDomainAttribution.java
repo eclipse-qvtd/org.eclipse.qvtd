@@ -40,7 +40,9 @@ public class CoreDomainAttribution extends AbstractAttribution
 		}
 		for (EObject eContainer = targetElement.eContainer(); eContainer != null; eContainer = eContainer.eContainer()) {
 			if (eContainer instanceof Transformation) {
-				environmentView.addNamedElements(((Transformation) eContainer).getModelParameter());
+				Transformation transformation = (Transformation) eContainer;
+				environmentView.addNamedElements(transformation.getModelParameter());
+				environmentView.addNamedElements(transformation.getOwnedOperation());
 				break;
 			}
 		}

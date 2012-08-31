@@ -24,6 +24,8 @@ import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.PivotDependency;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.SingleContinuation;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS;
@@ -39,6 +41,40 @@ import org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS;
 
 public class QVTcorePreOrderVisitor extends AbstractQVTcorePreOrderVisitor
 {	
+	public static class ParamDeclarationCompletion extends SingleContinuation<ParamDeclarationCS>
+	{
+		public ParamDeclarationCompletion(CS2PivotConversion context, ParamDeclarationCS csElement) {
+			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			FunctionParameter pivotElement = PivotUtil.getPivot(FunctionParameter.class, csElement);
+			if (pivotElement != null) {
+				Type type = PivotUtil.getPivot(Type.class, csElement.getOwnedType());
+				pivotElement.setType(type);
+			}
+			return null;
+		}
+	}
+
+	public static class QueryCompletion extends SingleContinuation<QueryCS>
+	{
+		public QueryCompletion(CS2PivotConversion context, QueryCS csElement) {
+			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			Function pivotElement = PivotUtil.getPivot(Function.class, csElement);
+			if (pivotElement != null) {
+				Type type = PivotUtil.getPivot(Type.class, csElement.getOwnedType());
+				pivotElement.setType(type);
+			}
+			return null;
+		}
+	}
+
 	public static class RealizeableVariableCompletion extends SingleContinuation<RealizeableVariableCS>
 	{
 		public RealizeableVariableCompletion(CS2PivotConversion context, RealizeableVariableCS csElement) {
@@ -97,12 +133,12 @@ public class QVTcorePreOrderVisitor extends AbstractQVTcorePreOrderVisitor
 
 	@Override
 	public Continuation<?> visitParamDeclarationCS(ParamDeclarationCS csElement) {
-		return null;
+		return new ParamDeclarationCompletion(context, csElement);
 	}
 
 	@Override
 	public Continuation<?> visitQueryCS(QueryCS csElement) {
-		return null;
+		return new QueryCompletion(context, csElement);
 	}
 
 	public Continuation<?> visitRealizeableVariableCS(RealizeableVariableCS csElement) {

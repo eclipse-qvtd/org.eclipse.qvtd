@@ -72,17 +72,19 @@ NamedDomainCS returns DomainCS: check?='check'? enforce?='enforce'? direction=[q
 	
 ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
 		
-QueryCS: 'query' (namespace+=[pivot::Namespace|UnrestrictedName] '::' (namespace+=[pivot::Namespace|UnreservedName] '::')*)?
-	 name=UnrestrictedName '(' (inputParamDeclaration+=ParamDeclarationCS (',' inputParamDeclaration+=ParamDeclarationCS)*)? ')'
+QueryCS: 'query' pathName=ScopeNameCS name=UnrestrictedName
+		'(' (inputParamDeclaration+=ParamDeclarationCS (',' inputParamDeclaration+=ParamDeclarationCS)*)? ')'
 		':' ownedType=TypeExpCS (';' | '{' expression=ExpCS '}');
 //<query> ::= 'query' <PathNameCS> 
 //            '(' [<paramDeclaration> (',' <paramDeclaration>)*] ')'
 //      	  ':' <TypeCS>
 //            (';' | '{' <OCLExpressionCS> '}')
 
+ScopeNameCS returns base::PathNameCS:
+	path+=FirstPathElementCS '::' (path+=NextPathElementCS '::')*;
+
 TransformationCS:
-	'transformation' (namespace+=[pivot::Namespace|UnrestrictedName] '::' (namespace+=[pivot::Namespace|UnreservedName] '::')*)?
-	name=UnreservedName '{' (directions+=DirectionCS ';')* '}';
+	'transformation' pathName=ScopeNameCS? name=UnreservedName '{' (directions+=DirectionCS ';')* '}';
 	
 //Variable := VariableName �:� TypeDeclaration
 UnrealizedVariableCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
