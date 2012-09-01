@@ -24,6 +24,7 @@
   <rm:locator pattern="^org\.eclipse\.draw2d$" searchPathRef="gef"/>
   <rm:locator pattern="^org\.eclipse\.emf.*" searchPathRef="emf"/>
   <rm:locator pattern="^org\.eclipse\.uml2.*" searchPathRef="uml"/>
+  <rm:locator pattern="^org\.eclipse\.jdt\.annotation.*" searchPathRef="jdtannot"/>
   <rm:locator pattern="^org\.eclipse\.test$" searchPathRef="eclipse-tests-source-code"/>
   <rm:locator pattern="^org\.eclipse\.ant\.optional\.junit$" searchPathRef="eclipse-tests-source-code"/>
   <rm:locator searchPathRef="eclipse-platform" failOnError="false"/>
@@ -309,6 +310,29 @@
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="jdtannot">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=N)))" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="http://www.eclipse.org/jdt/core/beta-null-annotations-for-fields">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+    <!--rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(build.type=S)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="http://www.eclipse.org/jdt/core/beta-null-annotations-for-fields">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=M)(build.type=R)))" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="http://www.eclipse.org/jdt/core/beta-null-annotations-for-fields">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider-->
   </rm:searchPath>
   <rm:searchPath name="eclipse-platform">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=N)))" readerType="p2" source="false" mutable="false">
