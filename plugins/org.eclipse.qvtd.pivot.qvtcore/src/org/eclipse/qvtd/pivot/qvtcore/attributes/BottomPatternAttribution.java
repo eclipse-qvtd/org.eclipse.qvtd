@@ -20,14 +20,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
 public class BottomPatternAttribution extends AbstractAttribution
@@ -47,68 +45,14 @@ public class BottomPatternAttribution extends AbstractAttribution
 					environmentView.addNamedElements(pPackage.getOwnedType());
 				}
 			}
-			for (; mapping != null; mapping = mapping.getContext()) {
-				addMiddleBottomVariables(environmentView, mapping);
-			}
+			QVTcoreEnvironmentUtil.addMiddleBottomVariables(environmentView, mapping);
 		}
 		else {
 			CoreDomain domain = (CoreDomain)area;
 			TypedModel typedModel = domain.getTypedModel();
-			for (Mapping mapping = (Mapping) domain.getRule(); mapping != null; mapping = mapping.getContext()) {
-				addSideBottomVariables(environmentView, mapping, typedModel);
-			}
+			Mapping mapping = (Mapping) domain.getRule();
+			QVTcoreEnvironmentUtil.addSideBottomVariables(environmentView, mapping, typedModel);
 		}
 		return scopeView.getParent();
-	}
-
-	protected void addMiddleBottomVariables(EnvironmentView environmentView, Mapping mapping) {
-		BottomPattern bottomPattern = mapping.getBottomPattern();
-		if (bottomPattern != null) {
-			environmentView.addNamedElements(bottomPattern.getRealizedVariable());
-			environmentView.addNamedElements(bottomPattern.getVariable());
-		}
-		GuardPattern guardPattern = mapping.getGuardPattern();
-		if (guardPattern != null) {
-			environmentView.addNamedElements(guardPattern.getVariable());
-		}
-		for (Domain domain : mapping.getDomain()) {
-			if (domain instanceof Area) {
-				bottomPattern = ((Area)domain).getBottomPattern();
-				if (bottomPattern != null) {
-					environmentView.addNamedElements(bottomPattern.getRealizedVariable());
-					environmentView.addNamedElements(bottomPattern.getVariable());
-				}
-				guardPattern = ((Area)domain).getGuardPattern();
-				if (guardPattern != null) {
-					environmentView.addNamedElements(guardPattern.getVariable());
-				}
-			}
-		}
-		for (Mapping refinedMapping : mapping.getRefinement()) {
-			addMiddleBottomVariables(environmentView, refinedMapping);
-		}
-	}
-
-	protected void addSideBottomVariables(EnvironmentView environmentView, Mapping mapping, TypedModel typedModel) {
-		for (Domain aDomain : mapping.getDomain()) {
-			if (aDomain instanceof CoreDomain) {
-				CoreDomain domain = (CoreDomain)aDomain;
-				if (domain.getTypedModel() == typedModel) {
-					BottomPattern bottomPattern = domain.getBottomPattern();
-					if (bottomPattern != null) {
-						environmentView.addNamedElements(bottomPattern.getRealizedVariable());
-						environmentView.addNamedElements(bottomPattern.getVariable());
-					}
-					GuardPattern guardPattern = domain.getGuardPattern();
-					if (guardPattern != null) {
-						environmentView.addNamedElements(guardPattern.getVariable());
-					}
-					break;
-				}
-			}
-		}
-		for (Mapping refinedMapping : mapping.getRefinement()) {
-			addSideBottomVariables(environmentView, refinedMapping, typedModel);
-		}
 	}
 }

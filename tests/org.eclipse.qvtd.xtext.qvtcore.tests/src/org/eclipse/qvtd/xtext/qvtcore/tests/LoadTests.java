@@ -43,4 +43,8 @@ public class LoadTests extends LoadTestCase
 	public void testLoad_uml2rdbms_qvtc() throws IOException, InterruptedException {
 		doLoad_Concrete("uml2rdbms", "qvtc");
 	}	
+
+	public void testLoad_uml2rdbms_qvtu_qvtc() throws IOException, InterruptedException {
+		doLoad_Concrete("uml2rdbms.qvtu", "qvtc");
+	}	
 }

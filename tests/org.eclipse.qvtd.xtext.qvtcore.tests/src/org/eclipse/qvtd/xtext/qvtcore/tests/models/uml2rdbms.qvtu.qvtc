@@ -1,0 +1,257 @@
+import SimpleUML : 'SimpleUml.ecore'::umlMM;
+import SimpleUMLtoRDBMS : 'SimpleUMLtoRDBMS.ecore'::uml2rdbms;
+import SimpleRDBMS : 'SimpleRdbms.ecore'::rdbmsMM;
+
+transformation umlRdbms {
+	uml imports SimpleUML;
+	rdbms imports SimpleRDBMS;
+	imports SimpleUMLtoRDBMS;
+}
+
+query umlRdbms::asClass(cls : SimpleUML::Classifier) : Set(SimpleUML::Class) {
+	if cls.oclIsTypeOf(SimpleUML::Class) then cls.oclAsType(SimpleUML::Class) else null endif
+}
+
+query umlRdbms::getAllSupers(cls : SimpleUML::Class) : Set(SimpleUML::Class) {
+--	cls.general->collect(gen|if gen.oclIsKindOf(SimpleUML::Class)
+--			then getAllSupers(gen.oclAsType(SimpleUML::Class)) else null endif)->
+--		including(cls)->asSet()
+		Set{cls}->union(cls.general->closure(gen | asClass(gen)))
+}
+
+map packageToSchema in umlRdbms {
+	check uml (pkg : Package |) {}
+	enforce rdbms () {
+		realize sch : Schema |
+	}
+	where () {
+	--	realize pkg2sch : PackageToSchema
+	--|
+	--	pkg2sch.umlPackage = pkg;
+	--	pkg2sch.schema = sch;
+		--
+		--pkg2sch.name := pkg.name;
+		sch.name := pkg.name;
+	}
+
+	map { -- classToTable
+		check uml (cls : Class | cls.namespace = pkg; cls.kind = 'persistent';) {
+			superClasses : Set(Class),
+			allAttributes : Set(Attribute)
+		|
+--			allAttributes := getAllAttributes(cls);
+			superClasses := getAllSupers(cls);
+			allAttributes := superClasses.attribute->asSet();
+		}
+		enforce rdbms () {
+			realize tab : Table,
+			realize pKey : Key,
+			realize pCol : Column
+		|
+			--tab.kind <> 'meta';
+			tab.schema := sch;
+			pKey.owner := tab;
+			pKey.kind := 'primary';
+			pKey.name := tab.name+'_pk';
+			pCol.owner := tab;
+			pCol.key := Set{pKey};
+			pCol.type := 'NUMBER';
+			pCol.name := tab.name+'_tid';
+		}
+		where () {
+			realize cls2tab : ClassToTable
+		|
+--			cls2tab.owner := pkg2sch;
+			cls2tab.umlClass := cls;
+			cls2tab.table := tab;
+			--
+--			cls2tab.name := cls.name;
+--			cls2tab.primaryKey := pKey;
+--			cls2tab.column := pCol;
+			tab.name := cls.name;
+		}
+
+		map { -- attributes
+			check uml (att : Attribute
+			| 	allAttributes->includes(att);
+			) {}
+			where () {}
+	
+			map { -- primitiveAttribute
+				check uml (type : PrimitiveDataType | att.type = type;) {}
+				enforce rdbms () {}
+				where () {
+					realize prim2name : PrimitiveToName
+				|
+					prim2name.primitive = type;
+		--			prim2name.owner := pkg2sch;
+				}
+
+				map { -- integerToNumber
+					check uml (type.name = 'Integer';) {}
+					where () {
+						prim2name.typeName := 'NUMBER';
+						--
+						prim2name.name := type.name + '2' + 'NUMBER';
+					}
+				}
+			
+				map { -- booleanToBoolean
+					check uml (type.name = 'Boolean';) {}
+					where () {
+						prim2name.typeName := 'BOOLEAN';
+						--
+						prim2name.name := type.name + '2' + 'BOOLEAN';
+					}
+				}
+			
+				map { -- stringToVarchar
+					check uml (type.name = 'String';) {}
+					where () {
+						prim2name.typeName := 'VARCHAR';
+						--
+						prim2name.name := type.name + '2' + 'VARCHAR';
+					}
+				}
+
+				map { -- classAttributes
+					enforce rdbms () {}
+					where () { --fao:FromAttributeOwner | fao = cls2Tab;) {
+						realize att2col : AttributeToColumn
+					|
+--						att2col.attribute := att;
+--						att2col.owner := fao;
+						att2col.kind := att.kind;
+						att2col.name := att.name;
+						att2col.type := prim2name;
+--						att2col.leafs := Set{att2col};
+					}
+				}
+		
+				map { -- complexAttributeAttributes {
+					check uml (ca : Attribute | ca.type = cls;) {}
+					enforce rdbms () {}
+					where (fao : NonLeafAttribute | fao.attribute=ca;) {
+						realize att2col:AttributeToColumn
+					|
+--						att2col.attribute := att;
+--						att2col.owner := fao;
+						att2col.kind := att.kind;
+						att2col.type := prim2name;
+						att2col.name := fao.name+'_'+att.name;
+--						att2col.leafs := Set{att2col};
+					}
+				}
+			}
+	
+			map { -- complexAttribute
+				check uml (type : Class | att.type = type;) {}
+				where () {}
+	
+				map { -- classAttributes
+					enforce rdbms () {}
+					where () { -- fao : FromAttributeOwner | fao = cls2Tab;) {
+						realize att2col : NonLeafAttribute
+					|
+						att2col.attribute := att;
+--						att2col.owner := fao;
+						att2col.kind := att.kind;
+						att2col.name := att.name;
+--						att2col.leafs := fao.fromAttributes.leafs->asSet();
+					}
+				}
+				
+				map { -- complexAttributeAttributes
+					check uml (ca:Attribute | ca.type = cls;) {}
+					enforce rdbms () {}
+					where (fao : NonLeafAttribute | fao.attribute=ca;) {
+						realize att2col : AttributeToColumn
+					|
+--						att2col.attribute := att;
+						att2col.owner := fao;
+						att2col.kind := att.kind;
+						att2col.name := fao.name+'_'+att.name;
+--						att2col.leafs := fao.fromAttributes.leafs->asSet();
+					}
+				}
+			}
+		}
+		
+		map { -- attributeColumns
+			enforce rdbms () {
+				realize col : Column
+			|
+				col.owner := tab;
+				col.key = Set{};
+				col.foreignKey = Set{};
+			}
+			where (att2col : AttributeToColumn |) {
+--				att2col.column := col;
+--				cls2tab.fromAttributes.leafs->includes(att2col);
+--				att2col.owner := cls2tab;
+				--
+				col.name := att2col.name;
+				col.kind := att2col.kind;
+			}
+			map {
+				where (prim2name : PrimitiveToName | prim2name = att2col.type;) {
+					col.type := prim2name.typeName;
+				}
+			}
+		}
+	}
+	
+	map { -- associationToForeignKey
+		check uml (srcCls : Class, dstCls : Class, ass : Association
+		|
+			ass.namespace = pkg;
+			ass.source = srcCls;
+			ass.destination = dstCls;
+			srcCls.namespace = pkg;
+			srcCls.kind <> 'meta';
+			--getAllForwards(srcCls)->includes(ass);
+			getAllSupers(dstCls)->includes(ass.destination);) {}
+		enforce rdbms (srcTab : Table, dstTab : Table, key : Key
+		|
+			srcTab.schema = sch;
+			key.owner = dstTab;
+			key.kind = 'primary';
+		) {
+			realize fKey : ForeignKey,
+			realize fCol : Column
+		|
+			fKey.owner := srcTab;
+			fKey.refersTo := key;
+			fCol.owner := srcTab;
+			fCol.foreignKey := Set{fKey};
+		}
+		where (srcCls2tab:ClassToTable, dstCls2tab:ClassToTable
+		|
+			srcCls2tab.table = srcTab;
+			srcCls2tab.umlClass = srcCls;
+			dstCls2tab.table = dstTab;
+			dstCls2tab.umlClass = dstCls;
+		) {
+			name : String
+--			realize ass2fKey : AssociationToForeignKey
+		|
+--			ass2fKey.owner := srcCls2tab;
+--			ass2fKey.referenced := dstCls2tab;
+--			ass2fKey.association := ass;
+--			ass2fKey.foreignKey := fKey;
+--			ass2fKey.column := fCol;
+			--
+			name := if ass.destination=dstCls and ass.source=srcCls then ass.name
+			else if ass.destination<>dstCls and ass.source=srcCls then dstCls.name+'_'+ass.name
+			else if ass.destination=dstCls and ass.source<>srcCls then ass.name+'_'+srcCls.name
+			else dstCls.name+'_'+ass.name+'_'+srcCls.name endif endif endif;
+--			ass2fKey.name := name;
+			ass.name := if ass.destination=dstCls and ass.source=srcCls then name
+			else ass.name endif;
+			fKey.name := ass.name;
+			fCol.name := ass.name+'_tid';
+			--
+			fCol.type := key.column->first().type;
+		}
+	}
+}

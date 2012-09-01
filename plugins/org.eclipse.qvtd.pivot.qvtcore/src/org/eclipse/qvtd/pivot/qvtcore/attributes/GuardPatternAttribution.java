@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -46,53 +45,14 @@ public class GuardPatternAttribution extends AbstractAttribution
 					environmentView.addNamedElements(pPackage.getOwnedType());
 				}
 			}
-			for (; mapping != null; mapping = mapping.getContext()) {
-				addMiddleGuardVariables(environmentView, mapping);
-			}
+			QVTcoreEnvironmentUtil.addMiddleGuardVariables(environmentView, mapping);
 		}
 		else {
 			CoreDomain domain = (CoreDomain)area;
 			TypedModel typedModel = domain.getTypedModel();
-			for (Mapping mapping = (Mapping) domain.getRule(); mapping != null; mapping = mapping.getContext()) {
-				addSideGuardVariables(environmentView, mapping, typedModel);
-			}
+			Mapping mapping = (Mapping) domain.getRule();
+			QVTcoreEnvironmentUtil.addSideGuardVariables(environmentView, mapping, typedModel);
 		}
 		return scopeView.getParent();
-	}
-
-	protected void addMiddleGuardVariables(EnvironmentView environmentView, Mapping mapping) {
-		GuardPattern guardPattern = mapping.getGuardPattern();
-		if (guardPattern != null) {
-			environmentView.addNamedElements(guardPattern.getVariable());
-		}
-		for (Domain domain : mapping.getDomain()) {
-			if (domain instanceof Area) {
-				guardPattern = ((Area)domain).getGuardPattern();
-				if (guardPattern != null) {
-					environmentView.addNamedElements(guardPattern.getVariable());
-				}
-			}
-		}
-		for (Mapping refinedMapping : mapping.getRefinement()) {
-			addMiddleGuardVariables(environmentView, refinedMapping);
-		}
-	}
-
-	protected void addSideGuardVariables(EnvironmentView environmentView, Mapping mapping, TypedModel typedModel) {
-		for (Domain aDomain : mapping.getDomain()) {
-			if (aDomain instanceof CoreDomain) {
-				CoreDomain domain = (CoreDomain)aDomain;
-				if (domain.getTypedModel() == typedModel) {
-					GuardPattern guardPattern = domain.getGuardPattern();
-					if (guardPattern != null) {
-						environmentView.addNamedElements(guardPattern.getVariable());
-					}
-					break;
-				}
-			}
-		}
-		for (Mapping refinedMapping : mapping.getRefinement()) {
-			addSideGuardVariables(environmentView, refinedMapping, typedModel);
-		}
 	}
 }
