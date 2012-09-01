@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.qvtd.doc"
+      label="%featureName"
+      version="0.10.0.qualifier"
+      provider-name="%providerName"
+      license-feature="org.eclipse.ocl.license"
+      license-feature-version="1.0.0.qualifier">
+
+   <description url="http://www.eclipse.org/modeling/mmt/qvtd">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright>
+      [Documentation] Copyright text will be taken from the shared license feature
+   </copyright>
+
+   <url>
+      <update label="%updateSiteName" url="http://www.eclipse.org/modeling/updates"/>
+      <discovery label="%updateSiteName" url="http://www.eclipse.org/modeling/updates"/>
+   </url>
+
+   <plugin
+         id="org.eclipse.qvtd.doc"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
