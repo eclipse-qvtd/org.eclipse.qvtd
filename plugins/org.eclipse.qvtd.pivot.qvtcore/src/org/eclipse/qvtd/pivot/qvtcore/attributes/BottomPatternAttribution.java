@@ -38,9 +38,8 @@ public class BottomPatternAttribution extends AbstractAttribution
 		if (area instanceof Mapping) {
 			Mapping mapping = (Mapping)area;;
 			Transformation transformation = QVTbaseUtil.getContainingTransformation(mapping);
-			TypedModel middleModel = transformation.getModelParameter(null);
-			if (middleModel != null) {
-				for (org.eclipse.ocl.examples.pivot.Package pPackage : middleModel.getUsedPackage()) {
+			for (TypedModel typedModel : transformation.getModelParameter()) {
+				for (org.eclipse.ocl.examples.pivot.Package pPackage : typedModel.getUsedPackage()) {
 					environmentView.addNamedElement(pPackage);
 					environmentView.addNamedElements(pPackage.getOwnedType());
 				}

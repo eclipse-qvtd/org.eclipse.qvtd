@@ -17,7 +17,6 @@ package org.eclipse.qvtd.pivot.qvtcore.attributes;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
@@ -32,8 +31,11 @@ public class QVTcoreEnvironmentUtil
 	}
 
 	public static void addMiddleGuardVariables(EnvironmentView environmentView, Mapping mapping) {
-		for (; mapping != null; mapping = mapping.getContext()) {
+		if (mapping != null) {
 			addMiddleVariables(environmentView, mapping, false);
+			for (mapping = mapping.getContext(); mapping != null; mapping = mapping.getContext()) {
+				addMiddleVariables(environmentView, mapping, true);
+			}
 		}
 	}
 	
@@ -49,16 +51,17 @@ public class QVTcoreEnvironmentUtil
 		if (guardPattern != null) {
 			environmentView.addNamedElements(guardPattern.getVariable());
 		}
-		for (Domain domain : mapping.getDomain()) {
-			if (domain instanceof Area) {
+		for (Domain aDomain : mapping.getDomain()) {
+			if (aDomain instanceof CoreDomain) {
+				CoreDomain domain = (CoreDomain)aDomain;
 				if (bottomToo) {
-					BottomPattern bottomPattern = ((Area)domain).getBottomPattern();
+					BottomPattern bottomPattern = domain.getBottomPattern();
 					if (bottomPattern != null) {
 						environmentView.addNamedElements(bottomPattern.getRealizedVariable());
 						environmentView.addNamedElements(bottomPattern.getVariable());
 					}
 				}
-				guardPattern = ((Area)domain).getGuardPattern();
+				guardPattern = domain.getGuardPattern();
 				if (guardPattern != null) {
 					environmentView.addNamedElements(guardPattern.getVariable());
 				}
