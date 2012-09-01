@@ -42,11 +42,11 @@ public class LoadTestCase extends XtextTestCase
 		String inputName = stem + "." + extension;
 		String cstName = inputName + ".xmi";
 		String pivotName = inputName + ".pivot";
-		String savedName = stem + ".saved." + extension;
+//		String savedName = stem + ".saved." + extension;
 		URI inputURI = getProjectFileURI(inputName);
 		URI cstURI = getProjectFileURI(cstName);
 		URI pivotURI = getProjectFileURI(pivotName);
-		URI savedURI = getProjectFileURI(savedName);
+//		URI savedURI = getProjectFileURI(savedName);
 //		MetaModelManager metaModelManager = new MetaModelManager();
 //		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
 		CS2PivotResourceAdapter adapter = null;

@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.xtext.base.attributes.PivotCSAttribution;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
-import org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS;
 
 public class TransformationCSAttribution extends PivotCSAttribution
 {
@@ -31,7 +30,6 @@ public class TransformationCSAttribution extends PivotCSAttribution
 
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
-		TransformationCS targetElement = (TransformationCS)target;
 		EReference targetReference = scopeView.getTargetReference();
 		if (targetReference == QVTcoreCSTPackage.Literals.DIRECTION_CS__IMPORTS) {
 			return scopeView.getParent();
