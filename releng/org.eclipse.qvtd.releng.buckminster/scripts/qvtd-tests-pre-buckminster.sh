@@ -53,7 +53,7 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "packages.base=MMT-QVTd.downloads"
 	echo "tests.base=MMT-QVTd.test.results"
 	echo "javadoc.base=MMT-QVTd.javadoc"
-	echo "version=0.9.0"
+	echo "version=0.10.0"
 	echo "downloads.area=/home/data/httpd/download.eclipse.org/mmt/qvtd"
 
 
