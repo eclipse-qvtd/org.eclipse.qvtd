@@ -194,12 +194,12 @@ map packageToSchema in umlRdbms {
 				map {
 					check uml () {}
 					enforce rdbms () {}
-					where (srcCls2tab:ClassToTable | srcCls.opposite(ClassToTable::umlClass)->includes(srcCls2tab);)
+					where (srcCls2tab:ClassToTable | srcCls.ClassToTable->includes(srcCls2tab);)
 					{ srcTab : Table | srcTab = srcCls2tab.table; }
 					map {
 						check uml () {}
 						enforce rdbms () {}
-						where (dstCls2tab:ClassToTable | dstCls.opposite(ClassToTable::umlClass)->includes(dstCls2tab);)
+						where (dstCls2tab:ClassToTable | dstCls.ClassToTable->includes(dstCls2tab);)
 						{ dstTab : Table | dstTab = dstCls2tab.table; }
 						map {
 							check uml () {}
