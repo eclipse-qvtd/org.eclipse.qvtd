@@ -17,13 +17,11 @@
 package org.eclipse.qvtd.xtext.qvtcore.attributes;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.xtext.base.attributes.PivotCSAttribution;
-import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 
 public class MappingCSAttribution extends PivotCSAttribution
 {
@@ -31,14 +29,8 @@ public class MappingCSAttribution extends PivotCSAttribution
 
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
-		MappingCS targetElement = (MappingCS)target;
-		EReference targetReference = scopeView.getTargetReference();
-		if (targetReference == QVTcoreCSTPackage.Literals.DOMAIN_CS__DIRECTION) {
-			environmentView.computeLookups(targetElement.getIn(), null, null, targetReference);
-			return null;
-		}
-		else if (targetReference == QVTcoreCSTPackage.Literals.MAPPING_CS__IN) {
-			return scopeView.getParent();
+		if (environmentView.accepts(QVTbasePackage.Literals.TRANSFORMATION)) {
+			return scopeView.getRoot();
 		}
 		return super.computeLookup(target, environmentView, scopeView);
 	}

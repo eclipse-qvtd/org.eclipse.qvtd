@@ -42,7 +42,7 @@ public class QVTcoreEnvironmentUtil
 	private static void addMiddleVariables(EnvironmentView environmentView, Mapping mapping, boolean bottomToo) {
 		if (bottomToo) {
 			BottomPattern bottomPattern = mapping.getBottomPattern();
-			if (bottomToo) {
+			if (bottomPattern != null) {
 				environmentView.addNamedElements(bottomPattern.getRealizedVariable());
 				environmentView.addNamedElements(bottomPattern.getVariable());
 			}

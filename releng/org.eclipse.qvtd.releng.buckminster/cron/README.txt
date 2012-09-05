@@ -1,5 +1,7 @@
 The crontab.txt file contains the commands that must be daily executed (via cron) to promote our last successful build.
 
+(Alternatively a single promotion can be done by just pasting the ant command to the build.eclipse.org console.)
+
 This is a release engineer task. To configure that:
 1. Connect to build.eclipse.org via an ssh connection.
 2. Create a "logs" folder in your home directory (if you haven't done it, yet).

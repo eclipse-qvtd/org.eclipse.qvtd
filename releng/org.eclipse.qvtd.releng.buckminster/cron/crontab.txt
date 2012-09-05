@@ -1,5 +1,2 @@
-#
-#
-#
 #mmt-qvtd publishing
-30 3 * * * ant -f /shared/jobs/buckminster-mmt-qvtd-0.9/lastSuccessful/archive/publishroot/publisher.ant -Dbuild.archives=/shared/jobs/buckminster-mmt-qvtd-0.9/lastSuccessful/archive &> logs/mmt-qvtd-publishing-0.9.log 
+30 3 * * * ant -f /shared/jobs/buckminster-mmt-qvtd-kepler/lastSuccessful/archive/publishroot/publisher.ant -Dbuild.archives=/shared/jobs/buckminster-mmt-qvtd-kepler/lastSuccessful/archive &> logs/mmt-qvtd-publishing-kepler.log 

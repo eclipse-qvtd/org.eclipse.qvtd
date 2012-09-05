@@ -25,7 +25,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.BasicContinuation;
+import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.SingleContinuation;
@@ -164,6 +166,10 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 	}
 
 	public Continuation<?> visitQueryCS(QueryCS csElement) {
+		PathNameCS pathName = csElement.getPathName();
+		if (pathName != null) {
+			CS2Pivot.setElementType(pathName, PivotPackage.Literals.NAMESPACE, csElement, null);
+		}
 		Function pivotElement = refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
 		pivotElement.setIsStatic(true);
 		context.refreshPivotList(FunctionParameter.class, pivotElement.getOwnedParameter(), csElement.getInputParamDeclaration());
@@ -232,6 +238,10 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 	}
 
 	public Continuation<?> visitTransformationCS(TransformationCS csElement) {
+		PathNameCS pathName = csElement.getPathName();
+		if (pathName != null) {
+			CS2Pivot.setElementType(pathName, PivotPackage.Literals.NAMESPACE, csElement, null);
+		}
 		Transformation pivotElement = refreshPackage(Transformation.class, QVTbasePackage.Literals.TRANSFORMATION, csElement);
 //		context.refreshPivotList(Mapping.class, pivotElement.getRule(), csElement.getMapping());
 		context.refreshPivotList(TypedModel.class, pivotElement.getModelParameter(), csElement.getDirections());
