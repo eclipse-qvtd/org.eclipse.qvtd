@@ -30,6 +30,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -710,5 +713,22 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	@Override
 	public Package getPackage() {
 		return this;
+	}
+
+	private PackageId packageId = null;
+	
+	public @NonNull PackageId getPackageId() {
+		PackageId packageId2 = packageId;
+		if (packageId2 == null) {
+			synchronized (this) {
+				packageId2 = packageId;
+				if (packageId2 == null) {
+					synchronized (this) {
+						packageId = packageId2 = IdManager.INSTANCE.getPackageId(this);
+					}
+				}
+			}
+		}
+		return packageId2;
 	}
 } //TransformationImpl
