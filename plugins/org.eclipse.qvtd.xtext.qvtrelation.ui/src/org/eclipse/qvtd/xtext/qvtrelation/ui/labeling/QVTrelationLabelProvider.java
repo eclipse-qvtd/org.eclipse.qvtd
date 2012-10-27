@@ -5,6 +5,7 @@ package org.eclipse.qvtd.xtext.qvtrelation.ui.labeling;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -32,7 +33,7 @@ import com.google.inject.Inject;
 public class QVTrelationLabelProvider extends QVTbaseLabelProvider {
 
 	@Inject
-	public QVTrelationLabelProvider(AdapterFactoryLabelProvider delegate) {
+	public QVTrelationLabelProvider(@NonNull AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 

@@ -4,6 +4,7 @@
 package org.eclipse.qvtd.xtext.qvtcore.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
@@ -26,7 +27,7 @@ import com.google.inject.Inject;
 public class QVTcoreLabelProvider extends QVTbaseLabelProvider {
 
 	@Inject
-	public QVTcoreLabelProvider(AdapterFactoryLabelProvider delegate) {
+	public QVTcoreLabelProvider(@NonNull AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 

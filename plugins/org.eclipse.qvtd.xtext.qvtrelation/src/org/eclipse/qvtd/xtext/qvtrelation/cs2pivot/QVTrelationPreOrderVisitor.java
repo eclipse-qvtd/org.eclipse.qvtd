@@ -16,6 +16,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelation.cs2pivot;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -36,7 +37,7 @@ public class QVTrelationPreOrderVisitor extends AbstractQVTrelationPreOrderVisit
 {	
 	public static class CollectionTemplateCompletion extends SingleContinuation<CollectionTemplateCS>
 	{
-		public CollectionTemplateCompletion(CS2PivotConversion context, CollectionTemplateCS csElement) {
+		public CollectionTemplateCompletion(@NonNull CS2PivotConversion context, @NonNull CollectionTemplateCS csElement) {
 			super(context, null, null, csElement, new PivotDependency(csElement.getType()));
 		}
 
@@ -58,7 +59,7 @@ public class QVTrelationPreOrderVisitor extends AbstractQVTrelationPreOrderVisit
 
 	public static class ObjectTemplateCompletion extends SingleContinuation<ObjectTemplateCS>
 	{
-		public ObjectTemplateCompletion(CS2PivotConversion context, ObjectTemplateCS csElement) {
+		public ObjectTemplateCompletion(@NonNull CS2PivotConversion context, @NonNull ObjectTemplateCS csElement) {
 			super(context, null, null, csElement, new PivotDependency(csElement.getType()));
 		}
 
@@ -80,7 +81,7 @@ public class QVTrelationPreOrderVisitor extends AbstractQVTrelationPreOrderVisit
 
 	public static class PropertyTemplateCompletion extends SingleContinuation<PropertyTemplateCS>
 	{
-		public PropertyTemplateCompletion(CS2PivotConversion context, PropertyTemplateCS csElement) {
+		public PropertyTemplateCompletion(@NonNull CS2PivotConversion context, @NonNull PropertyTemplateCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -90,6 +91,9 @@ public class QVTrelationPreOrderVisitor extends AbstractQVTrelationPreOrderVisit
 				return false;
 			}
 			ObjectTemplateExp pivotElement = PivotUtil.getPivot(ObjectTemplateExp.class, csElement.getObjectTemplate());
+			if (pivotElement == null) {
+				return false;
+			}
 			Type type = pivotElement.getType();
 			return type != null;
 		}
@@ -104,20 +108,22 @@ public class QVTrelationPreOrderVisitor extends AbstractQVTrelationPreOrderVisit
 		}
 	}
 
-	public QVTrelationPreOrderVisitor(CS2PivotConversion context) {
+	public QVTrelationPreOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
-	public Continuation<?> visitCollectionTemplateCS(CollectionTemplateCS csElement) {
+	@Override
+	public Continuation<?> visitCollectionTemplateCS(@NonNull CollectionTemplateCS csElement) {
 		return new CollectionTemplateCompletion(context, csElement);
 	}
 
-	public Continuation<?> visitObjectTemplateCS(ObjectTemplateCS csElement) {
+	@Override
+	public Continuation<?> visitObjectTemplateCS(@NonNull ObjectTemplateCS csElement) {
 		return new ObjectTemplateCompletion(context, csElement);
 	}
 
 	@Override
-	public Continuation<?> visitPropertyTemplateCS(PropertyTemplateCS csElement) {
+	public Continuation<?> visitPropertyTemplateCS(@NonNull PropertyTemplateCS csElement) {
 		return new PropertyTemplateCompletion(context, csElement);
 	}
 }

@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
@@ -231,10 +232,9 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 		return super.eIsSet(featureID);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTrelationCSVisitor.class).visitKeyDeclCS(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return ((QVTrelationCSVisitor<R>)visitor).visitKeyDeclCS(this);
 	}
 
 	/**

@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -522,10 +523,9 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 		return super.toString();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTrelationCSVisitor.class).visitDomainCS(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return ((QVTrelationCSVisitor<R>)visitor).visitDomainCS(this);
 	}
 
 	public String getName() {

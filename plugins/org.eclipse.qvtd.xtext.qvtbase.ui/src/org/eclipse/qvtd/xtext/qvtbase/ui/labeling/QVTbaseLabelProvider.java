@@ -1,6 +1,7 @@
 package org.eclipse.qvtd.xtext.qvtbase.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling.EssentialOCLLabelProvider;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -23,7 +24,7 @@ public class QVTbaseLabelProvider extends EssentialOCLLabelProvider
 {
 
 	@Inject
-	public QVTbaseLabelProvider(AdapterFactoryLabelProvider delegate) {
+	public QVTbaseLabelProvider(@NonNull AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 

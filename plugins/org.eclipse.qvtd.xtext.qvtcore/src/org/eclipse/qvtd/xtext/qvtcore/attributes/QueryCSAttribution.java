@@ -31,7 +31,7 @@ public class QueryCSAttribution extends PivotCSAttribution
 	public static final @NonNull QueryCSAttribution INSTANCE = new QueryCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		QueryCS targetElement = (QueryCS)target;
 		Function pivot = PivotUtil.getPivot(Function.class, targetElement);
 		if (pivot != null) {

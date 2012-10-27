@@ -16,6 +16,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtcore.cs2pivot;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLContainmentVisitor;
@@ -26,71 +27,71 @@ public class AbstractQVTcoreContainmentVisitor extends EssentialOCLContainmentVi
 	//
 	//	This file is maintained by copying from AbstractExtendingQVTcoreCSVisitor and changing R to Continuation<?>.
 	//
-	public AbstractQVTcoreContainmentVisitor(CS2PivotConversion context) {
+	public AbstractQVTcoreContainmentVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}	
 
-	public Continuation<?> visitAreaCS(org.eclipse.qvtd.xtext.qvtcorecst.AreaCS object) {
+	public Continuation<?> visitAreaCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.AreaCS object) {
 		return visitNamedElementCS(object);
 	}
 
-	public Continuation<?> visitAssignmentCS(org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS object) {
+	public Continuation<?> visitAssignmentCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS object) {
 		return visitExpCS(object);
 	}
 
-	public Continuation<?> visitBottomPatternCS(org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS object) {
+	public Continuation<?> visitBottomPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS object) {
 		return visitPatternCS(object);
 	}
 
-	public Continuation<?> visitDirectionCS(org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS object) {
+	public Continuation<?> visitDirectionCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS object) {
 		return visitNamedElementCS(object);
 	}
 
-	public Continuation<?> visitDomainCS(org.eclipse.qvtd.xtext.qvtcorecst.DomainCS object) {
+	public Continuation<?> visitDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.DomainCS object) {
 		return visitAreaCS(object);
 	}
 
-	public Continuation<?> visitEnforcementOperationCS(org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS object) {
+	public Continuation<?> visitEnforcementOperationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS object) {
 		return visitModelElementCS(object);
 	}
 
-	public Continuation<?> visitGuardPatternCS(org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS object) {
+	public Continuation<?> visitGuardPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS object) {
 		return visitPatternCS(object);
 	}
 
-	public Continuation<?> visitMappingCS(org.eclipse.qvtd.xtext.qvtcorecst.MappingCS object) {
+	public Continuation<?> visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCS object) {
 		return visitNamedElementCS(object);
 	}
 
-	public Continuation<?> visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS object) {
+	public Continuation<?> visitParamDeclarationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS object) {
 		return visitTypedElementCS(object);
 	}
 
-	public Continuation<?> visitPatternCS(org.eclipse.qvtd.xtext.qvtcorecst.PatternCS object) {
+	public Continuation<?> visitPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.PatternCS object) {
 		return visitModelElementCS(object);
 	}
 
-	public Continuation<?> visitQueryCS(org.eclipse.qvtd.xtext.qvtcorecst.QueryCS object) {
+	public Continuation<?> visitQueryCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.QueryCS object) {
 		return visitTypedElementCS(object);
 	}
 
-	public Continuation<?> visitRealizeableVariableCS(org.eclipse.qvtd.xtext.qvtcorecst.RealizeableVariableCS object) {
+	public Continuation<?> visitRealizeableVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.RealizeableVariableCS object) {
 		return visitTypedElementCS(object);
 	}
 
-	public Continuation<?> visitRealizedVariableCS(org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS object) {
+	public Continuation<?> visitRealizedVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS object) {
 		return visitRealizeableVariableCS(object);
 	}
 
-	public Continuation<?> visitTopLevelCS(org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS object) {
+	public Continuation<?> visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS object) {
 		return visitRootPackageCS(object);
 	}
 
-	public Continuation<?> visitTransformationCS(org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS object) {
+	public Continuation<?> visitTransformationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS object) {
 		return visitPackageCS(object);
 	}
 
-	public Continuation<?> visitUnrealizedVariableCS(org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS object) {
+	public Continuation<?> visitUnrealizedVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS object) {
 		return visitRealizeableVariableCS(object);
 	}
 }

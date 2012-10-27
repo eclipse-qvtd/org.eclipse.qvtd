@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
@@ -197,9 +198,8 @@ public abstract class PatternCSImpl extends ModelElementCSImpl implements Patter
 		return super.eIsSet(featureID);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTcoreCSVisitor.class).visitPatternCS(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return ((QVTcoreCSVisitor<R>)visitor).visitPatternCS(this);
 	}
 } //PatternCSImpl

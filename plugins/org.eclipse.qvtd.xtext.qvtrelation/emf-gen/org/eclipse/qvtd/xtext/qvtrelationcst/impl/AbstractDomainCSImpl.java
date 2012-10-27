@@ -17,6 +17,7 @@
 package org.eclipse.qvtd.xtext.qvtrelationcst.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcst.AbstractDomainCS;
@@ -52,9 +53,8 @@ public abstract class AbstractDomainCSImpl extends ModelElementCSImpl implements
 		return QVTrelationCSTPackage.Literals.ABSTRACT_DOMAIN_CS;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTrelationCSVisitor.class).visitAbstractDomainCS(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return ((QVTrelationCSVisitor<R>)visitor).visitAbstractDomainCS(this);
 	}
 } //AbstractDomainCSImpl

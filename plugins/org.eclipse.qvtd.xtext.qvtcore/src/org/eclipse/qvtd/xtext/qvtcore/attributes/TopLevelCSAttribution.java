@@ -27,7 +27,7 @@ public class TopLevelCSAttribution extends RootPackageCSAttribution
 	public static final @NonNull TopLevelCSAttribution INSTANCE = new TopLevelCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 //		MappingCS targetElement = (MappingCS)target;
 //		EReference targetReference = scopeView.getTargetReference();
 //		if (targetReference == QVTcoreCSTPackage.Literals.DOMAIN_CS__DIRECTION) {

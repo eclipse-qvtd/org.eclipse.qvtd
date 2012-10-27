@@ -16,6 +16,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtcore.cs2pivot;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -43,7 +44,7 @@ public class QVTcorePreOrderVisitor extends AbstractQVTcorePreOrderVisitor
 {	
 	public static class ParamDeclarationCompletion extends SingleContinuation<ParamDeclarationCS>
 	{
-		public ParamDeclarationCompletion(CS2PivotConversion context, ParamDeclarationCS csElement) {
+		public ParamDeclarationCompletion(@NonNull CS2PivotConversion context, @NonNull ParamDeclarationCS csElement) {
 			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
 		}
 
@@ -60,7 +61,7 @@ public class QVTcorePreOrderVisitor extends AbstractQVTcorePreOrderVisitor
 
 	public static class QueryCompletion extends SingleContinuation<QueryCS>
 	{
-		public QueryCompletion(CS2PivotConversion context, QueryCS csElement) {
+		public QueryCompletion(@NonNull CS2PivotConversion context, @NonNull QueryCS csElement) {
 			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
 		}
 
@@ -77,7 +78,7 @@ public class QVTcorePreOrderVisitor extends AbstractQVTcorePreOrderVisitor
 
 	public static class RealizeableVariableCompletion extends SingleContinuation<RealizeableVariableCS>
 	{
-		public RealizeableVariableCompletion(CS2PivotConversion context, RealizeableVariableCS csElement) {
+		public RealizeableVariableCompletion(@NonNull CS2PivotConversion context, @NonNull RealizeableVariableCS csElement) {
 			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
 		}
 
@@ -92,66 +93,67 @@ public class QVTcorePreOrderVisitor extends AbstractQVTcorePreOrderVisitor
 		}
 	}
 
-	public QVTcorePreOrderVisitor(CS2PivotConversion context) {
+	public QVTcorePreOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
 	@Override
-	public Continuation<?> visitAssignmentCS(AssignmentCS csElement) {
+	public Continuation<?> visitAssignmentCS(@NonNull AssignmentCS csElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitBottomPatternCS(BottomPatternCS csElement) {
+	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitDirectionCS(DirectionCS csElement) {
+	public Continuation<?> visitDirectionCS(@NonNull DirectionCS csElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitDomainCS(DomainCS csElement) {
+	public Continuation<?> visitDomainCS(@NonNull DomainCS csElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitEnforcementOperationCS(EnforcementOperationCS csElement) {
+	public Continuation<?> visitEnforcementOperationCS(@NonNull EnforcementOperationCS csElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitGuardPatternCS(GuardPatternCS csElement) {
+	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitMappingCS(MappingCS csElement) {
+	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitParamDeclarationCS(ParamDeclarationCS csElement) {
+	public Continuation<?> visitParamDeclarationCS(@NonNull ParamDeclarationCS csElement) {
 		return new ParamDeclarationCompletion(context, csElement);
 	}
 
 	@Override
-	public Continuation<?> visitQueryCS(QueryCS csElement) {
+	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
 		return new QueryCompletion(context, csElement);
 	}
 
-	public Continuation<?> visitRealizeableVariableCS(RealizeableVariableCS csElement) {
+	@Override
+	public Continuation<?> visitRealizeableVariableCS(@NonNull RealizeableVariableCS csElement) {
 		return new RealizeableVariableCompletion(context, csElement);
 	}
 
 	@Override
-	public Continuation<?> visitTopLevelCS(TopLevelCS csElement) {
+	public Continuation<?> visitTopLevelCS(@NonNull TopLevelCS csElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitTransformationCS(TransformationCS csElement) {
+	public Continuation<?> visitTransformationCS(@NonNull TransformationCS csElement) {
 		return null;
 	}
 }

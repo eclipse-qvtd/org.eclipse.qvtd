@@ -17,29 +17,34 @@ package org.eclipse.qvtd.xtext.qvtrelation.cs2pivot;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLCS2Pivot;
 
 public class QVTrelationCS2Pivot extends EssentialOCLCS2Pivot
 {	
-	public QVTrelationCS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, MetaModelManager metaModelManager) {
+	public QVTrelationCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
 		super(cs2pivotResourceMap, metaModelManager);
 	}
 
-	protected QVTrelationContainmentVisitor createContainmentVisitor(CS2PivotConversion converter) {
+	@Override
+	protected @NonNull QVTrelationContainmentVisitor createContainmentVisitor(@NonNull CS2PivotConversion converter) {
 		return new QVTrelationContainmentVisitor(converter);
 	}
 
-	protected QVTrelationLeft2RightVisitor createLeft2RightVisitor(CS2PivotConversion converter) {
+	@Override
+	protected @NonNull QVTrelationLeft2RightVisitor createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
 		return new QVTrelationLeft2RightVisitor(converter);
 	}
 
-	protected QVTrelationPostOrderVisitor createPostOrderVisitor(CS2PivotConversion converter) {
+	@Override
+	protected @NonNull QVTrelationPostOrderVisitor createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
 		return new QVTrelationPostOrderVisitor(converter);
 	}
 
-	protected QVTrelationPreOrderVisitor createPreOrderVisitor(CS2PivotConversion converter) {
+	@Override
+	protected @NonNull QVTrelationPreOrderVisitor createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
 		return new QVTrelationPreOrderVisitor(converter);
 	}
 }

@@ -27,7 +27,7 @@ public class DirectionCSAttribution extends PivotCSAttribution
 	public static final @NonNull DirectionCSAttribution INSTANCE = new DirectionCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		return scopeView.getRoot();
 	}
 }

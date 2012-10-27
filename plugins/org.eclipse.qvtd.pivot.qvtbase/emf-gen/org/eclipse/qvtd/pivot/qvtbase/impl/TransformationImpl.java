@@ -70,6 +70,7 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  *
  * @generated
  */
+@SuppressWarnings("cast")
 public class TransformationImpl extends ClassImpl implements Transformation {
 	/**
 	 * The cached value of the '{@link #getNestedPackage() <em>Nested Package</em>}' containment reference list.

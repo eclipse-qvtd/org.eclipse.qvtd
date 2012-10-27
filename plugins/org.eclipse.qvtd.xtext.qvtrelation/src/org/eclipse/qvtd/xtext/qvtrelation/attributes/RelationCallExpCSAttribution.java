@@ -19,6 +19,8 @@ package org.eclipse.qvtd.xtext.qvtrelation.attributes;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -39,7 +41,7 @@ public class RelationCallExpCSAttribution extends InvocationExpCSAttribution
 	public static final RelationCallExpCSAttribution INSTANCE = new RelationCallExpCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		InvocationExpCS targetElement = (InvocationExpCS)target;
 		OCLExpression pivot = PivotUtil.getPivot(OCLExpression.class, targetElement);
 		if ((pivot instanceof CallExp) || (pivot == null)) {
@@ -51,11 +53,11 @@ public class RelationCallExpCSAttribution extends InvocationExpCSAttribution
 	}
 
 	@Override
-	public ScopeFilter createInvocationFilter(MetaModelManager metaModelManager, InvocationExpCS targetElement, Type type) {
+	public @NonNull ScopeFilter createInvocationFilter(@NonNull MetaModelManager metaModelManager, @NonNull InvocationExpCS targetElement, @Nullable Type type) {
 		return new OperationFilter(metaModelManager, type, targetElement)
 		{
 			@Override
-			public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
+			public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
 				if (eObject instanceof Relation) {
 					if (iterators > 0) {
 						return false;
@@ -74,7 +76,7 @@ public class RelationCallExpCSAttribution extends InvocationExpCSAttribution
 	}
 
 	@Override
-	protected boolean isRequiredType(EnvironmentView environmentView) {
+	protected boolean isRequiredType(@NonNull EnvironmentView environmentView) {
 		EClassifier requiredType = environmentView.getRequiredType();
 		if (!(requiredType instanceof EClass)) {
 			return false;

@@ -28,7 +28,7 @@ public class MappingCSAttribution extends PivotCSAttribution
 	public static final @NonNull MappingCSAttribution INSTANCE = new MappingCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		if (environmentView.accepts(QVTbasePackage.Literals.TRANSFORMATION)) {
 			return scopeView.getRoot();
 		}

@@ -19,6 +19,7 @@ package org.eclipse.qvtd.xtext.qvtcore.cs2pivot;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -63,33 +64,37 @@ public class QVTcorePostOrderVisitor extends AbstractQVTcorePostOrderVisitor
 {
 	public class BottomPatternCompletion extends SingleContinuation<BottomPatternCS>
 	{
-		public BottomPatternCompletion(CS2PivotConversion context, BottomPatternCS csElement) {
+		public BottomPatternCompletion(@NonNull CS2PivotConversion context, @NonNull BottomPatternCS csElement) {
 			super(context, null, null, csElement);
 		}
 
 		@Override
 		public BasicContinuation<?> execute() {
 			BottomPattern pBottomPattern = PivotUtil.getPivot(BottomPattern.class, csElement);
-			refreshConstraints(pBottomPattern.getAssignment(), pBottomPattern.getPredicate(), csElement);
+			if (pBottomPattern != null) {
+				refreshConstraints(pBottomPattern.getAssignment(), pBottomPattern.getPredicate(), csElement);
+			}
 			return null;
 		}
 	}
 
 	public class GuardPatternCompletion extends SingleContinuation<GuardPatternCS>
 	{
-		public GuardPatternCompletion(CS2PivotConversion context, GuardPatternCS csElement) {
+		public GuardPatternCompletion(@NonNull CS2PivotConversion context, @NonNull GuardPatternCS csElement) {
 			super(context, null, null, csElement);
 		}
 
 		@Override
 		public BasicContinuation<?> execute() {
 			GuardPattern pGuardPattern = PivotUtil.getPivot(GuardPattern.class, csElement);
-			refreshConstraints(null, pGuardPattern.getPredicate(), csElement);
+			if (pGuardPattern != null) {
+				refreshConstraints(null, pGuardPattern.getPredicate(), csElement);
+			}
 			return null;
 		}
 	}
 
-	public QVTcorePostOrderVisitor(CS2PivotConversion context) {
+	public QVTcorePostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
@@ -100,23 +105,27 @@ public class QVTcorePostOrderVisitor extends AbstractQVTcorePostOrderVisitor
 			ExpCS csTarget = csConstraint.getTarget();
 			ExpCS csInitialiser = csConstraint.getInitialiser();
 			boolean isDefault = csConstraint.isDefault();
-			OCLExpression target = context.visitLeft2Right(OCLExpression.class, csTarget);
+			OCLExpression target = csTarget != null ? context.visitLeft2Right(OCLExpression.class, csTarget) : null;
 			if (csInitialiser != null) {
 				Assignment assignment = null;
 				if (target instanceof PropertyCallExp) {
 					PropertyCallExp propertyCallExp = (PropertyCallExp)target;
 					PropertyAssignment propertyAssignment = context.refreshModelElement(PropertyAssignment.class,
 							QVTcorePackage.Literals.PROPERTY_ASSIGNMENT, csConstraint);
-					propertyAssignment.setSlotExpression(propertyCallExp.getSource());
-					propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
-					assignment = propertyAssignment;
+					if (propertyAssignment != null) {
+						propertyAssignment.setSlotExpression(propertyCallExp.getSource());
+						propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
+						assignment = propertyAssignment;
+					}
 				}
 				else if (target instanceof VariableExp) {
 					VariableExp variableExp = (VariableExp)target;
 					VariableAssignment variableAssignment = context.refreshModelElement(VariableAssignment.class,
 							QVTcorePackage.Literals.VARIABLE_ASSIGNMENT, csConstraint);
-					variableAssignment.setTargetVariable((Variable) variableExp.getReferredVariable());
-					assignment = variableAssignment;
+					if (variableAssignment != null) {
+						variableAssignment.setTargetVariable((Variable) variableExp.getReferredVariable());
+						assignment = variableAssignment;
+					}
 				}
 				else {
 					// FIXME warning
@@ -134,8 +143,10 @@ public class QVTcorePostOrderVisitor extends AbstractQVTcorePostOrderVisitor
 				}
 				Predicate predicate = context.refreshModelElement(Predicate.class,
 						QVTbasePackage.Literals.PREDICATE, csConstraint);
-				predicate.setConditionExpression(target);
-				pPredicates.add(predicate);
+				if (predicate != null) {
+					predicate.setConditionExpression(target);
+					pPredicates.add(predicate);
+				}
 			}
 		}
 		if (assignments != null) {
@@ -145,98 +156,109 @@ public class QVTcorePostOrderVisitor extends AbstractQVTcorePostOrderVisitor
 	}
 
 	@Override
-	public Continuation<?> visitAreaCS(AreaCS csElement) {
+	public Continuation<?> visitAreaCS(@NonNull AreaCS csElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitAssignmentCS(AssignmentCS csElement) {
+	public Continuation<?> visitAssignmentCS(@NonNull AssignmentCS csElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitBottomPatternCS(BottomPatternCS csElement) {
+	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
 		BottomPattern pBottomPattern = PivotUtil.getPivot(BottomPattern.class, csElement);
-		context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getRealizedVariables());
-		context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getUnrealizedVariables());
-		context.refreshPivotList(EnforcementOperation.class, pBottomPattern.getEnforcementOperation(), csElement.getEnforcementOperations());
+		if (pBottomPattern != null) {
+			context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getRealizedVariables());
+			context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getUnrealizedVariables());
+			context.refreshPivotList(EnforcementOperation.class, pBottomPattern.getEnforcementOperation(), csElement.getEnforcementOperations());
+		}
 		return new BottomPatternCompletion(context, csElement);
 	}
 
 	@Override
-	public Continuation<?> visitConstraintCS(ConstraintCS object) {
+	public Continuation<?> visitConstraintCS(@NonNull ConstraintCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitDirectionCS(DirectionCS object) {
+	public Continuation<?> visitDirectionCS(@NonNull DirectionCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitDomainCS(DomainCS csElement) {
+	public Continuation<?> visitDomainCS(@NonNull DomainCS csElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitEnforcementOperationCS(EnforcementOperationCS object) {
+	public Continuation<?> visitEnforcementOperationCS(@NonNull EnforcementOperationCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitGuardPatternCS(GuardPatternCS csElement) {
+	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
 		GuardPattern pGuardPattern = PivotUtil.getPivot(GuardPattern.class, csElement);
-		context.refreshPivotList(Variable.class, pGuardPattern.getVariable(), csElement.getUnrealizedVariables());
+		if (pGuardPattern != null) {
+			context.refreshPivotList(Variable.class, pGuardPattern.getVariable(), csElement.getUnrealizedVariables());
+		}
 		return new GuardPatternCompletion(context, csElement);
 	}
 
 	@Override
-	public Continuation<?> visitMappingCS(MappingCS csElement) {
+	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
 		Mapping pMapping = PivotUtil.getPivot(Mapping.class, csElement);
-		PivotUtil.refreshList(pMapping.getRefinement(), csElement.getRefines());
+		if (pMapping != null) {
+			PivotUtil.refreshList(pMapping.getRefinement(), csElement.getRefines());
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitParamDeclarationCS(ParamDeclarationCS object) {
+	public Continuation<?> visitParamDeclarationCS(@NonNull ParamDeclarationCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitPatternCS(PatternCS object) {
+	public Continuation<?> visitPatternCS(@NonNull PatternCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitQueryCS(QueryCS csElement) {
+	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
 		Function pFunction = PivotUtil.getPivot(Function.class, csElement);
-		OCLExpression target = context.visitLeft2Right(OCLExpression.class, csElement.getExpression());
-		pFunction.setQueryExpression(target);
+		if (pFunction != null) {
+			ExpCS expression = csElement.getExpression();
+			if (expression != null) {
+				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
+				pFunction.setQueryExpression(target);
+			}
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitRealizeableVariableCS(RealizeableVariableCS object) {
+	public Continuation<?> visitRealizeableVariableCS(@NonNull RealizeableVariableCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitRealizedVariableCS(RealizedVariableCS object) {
+	public Continuation<?> visitRealizedVariableCS(@NonNull RealizedVariableCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitTopLevelCS(TopLevelCS object) {
+	public Continuation<?> visitTopLevelCS(@NonNull TopLevelCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitTransformationCS(TransformationCS object) {
+	public Continuation<?> visitTransformationCS(@NonNull TransformationCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitUnrealizedVariableCS(UnrealizedVariableCS object) {
+	public Continuation<?> visitUnrealizedVariableCS(@NonNull UnrealizedVariableCS object) {
 		return null;
 	}
 }
