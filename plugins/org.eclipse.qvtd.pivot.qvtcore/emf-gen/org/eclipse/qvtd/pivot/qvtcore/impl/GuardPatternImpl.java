@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
@@ -70,6 +71,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Area getArea() {
 		if (eContainerFeatureID() != QVTcorePackage.GUARD_PATTERN__AREA) return null;
 		return (Area)eContainer();
@@ -208,9 +210,8 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 		return super.eIsSet(featureID);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTcoreVisitor.class).visitGuardPattern(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTcoreVisitor<R>)visitor).visitGuardPattern(this);
 	}
 } //GuardPatternImpl

@@ -14,6 +14,7 @@
  */
 package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.util.AbstractVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbasePrettyPrintVisitor;
@@ -40,68 +41,68 @@ public class QVTcorePrettyPrintVisitor extends QVTbasePrettyPrintVisitor impleme
 			PrettyPrinter.addFactory(QVTcorePackage.eINSTANCE, this);
 		}
 
-		public AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(PrettyPrinter printer) {
+		public @NonNull AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(@NonNull PrettyPrinter printer) {
 			return new QVTcorePrettyPrintVisitor(printer);
 		}
 	}
 
-	public static PrettyPrinter.Factory FACTORY = new Factory();
+	public static @NonNull PrettyPrinter.Factory FACTORY = new Factory();
 
-	public QVTcorePrettyPrintVisitor(PrettyPrinter context) {
+	public QVTcorePrettyPrintVisitor(@NonNull PrettyPrinter context) {
 		super(context);
 	}
 
-	public Object visitAssignment(Assignment object) {
+	public Object visitAssignment(@NonNull Assignment object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitBottomPattern(BottomPattern object) {
+	public Object visitBottomPattern(@NonNull BottomPattern object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitCoreDomain(CoreDomain object) {
+	public Object visitCoreDomain(@NonNull CoreDomain object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitCoreModel(CoreModel object) {
+	public Object visitCoreModel(@NonNull CoreModel object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitCorePattern(CorePattern object) {
+	public Object visitCorePattern(@NonNull CorePattern object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitEnforcementOperation(EnforcementOperation object) {
+	public Object visitEnforcementOperation(@NonNull EnforcementOperation object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitGuardPattern(GuardPattern object) {
+	public Object visitGuardPattern(@NonNull GuardPattern object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitMapping(Mapping object) {
+	public Object visitMapping(@NonNull Mapping object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitPropertyAssignment(PropertyAssignment object) {
+	public Object visitPropertyAssignment(@NonNull PropertyAssignment object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitRealizedVariable(RealizedVariable object) {
+	public Object visitRealizedVariable(@NonNull RealizedVariable object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitVariableAssignment(VariableAssignment object) {
+	public Object visitVariableAssignment(@NonNull VariableAssignment object) {
 		// TODO Auto-generated method stub
 		return null;
 	}

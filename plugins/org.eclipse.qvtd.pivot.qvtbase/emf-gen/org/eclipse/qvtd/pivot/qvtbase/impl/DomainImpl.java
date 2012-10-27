@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -448,12 +449,12 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 		return super.toString();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTbaseVisitor.class).visitDomain(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTbaseVisitor<R>)visitor).visitDomain(this);
 	}
 
+	@Override
 	public String getName() {
 		if ((typedModel != null) && !typedModel.eIsProxy()) {
 			return typedModel.getName();

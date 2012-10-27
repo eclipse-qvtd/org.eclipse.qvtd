@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
@@ -44,78 +45,79 @@ public class QVTcoreToStringVisitor extends QVTbaseToStringVisitor implements QV
 			ToStringVisitor.addFactory(this);
 		}
 
-		public ToStringVisitor createToStringVisitor() {
+		public @NonNull ToStringVisitor createToStringVisitor() {
 			return new QVTcoreToStringVisitor();
 		}
 
-		public EPackage getEPackage() {
+		@SuppressWarnings("null")
+		public @NonNull EPackage getEPackage() {
 			return QVTcorePackage.eINSTANCE;
 		}
 	}
 
-	public static ToStringVisitor.Factory FACTORY = new Factory();
+	public static @NonNull ToStringVisitor.Factory FACTORY = new Factory();
 
 	protected QVTcoreToStringVisitor() {}
 
-	public String visitAssignment(Assignment object) {
+	public String visitAssignment(@NonNull Assignment object) {
 		append("Assignment ");
 //		appendName(object);
 		return null;
 	}
 
-	public String visitBottomPattern(BottomPattern object) {
+	public String visitBottomPattern(@NonNull BottomPattern object) {
 		append("BottomPattern ");
 //		appendName(object);
 		return null;
 	}
 
-	public String visitCoreDomain(CoreDomain object) {
+	public String visitCoreDomain(@NonNull CoreDomain object) {
 		append("core domain ");
 		appendName(object);
 		return null;
 	}
 
-	public String visitCoreModel(CoreModel object) {
+	public String visitCoreModel(@NonNull CoreModel object) {
 		return visitRoot(object);
 	}
 
-	public String visitCorePattern(CorePattern object) {
+	public String visitCorePattern(@NonNull CorePattern object) {
 		append("CorePattern ");
 //		appendName(object);
 		return null;
 	}
 
-	public String visitEnforcementOperation(EnforcementOperation object) {
+	public String visitEnforcementOperation(@NonNull EnforcementOperation object) {
 		append("EnforcementOperation ");
 //		appendName(object);
 		return null;
 	}
 
-	public String visitGuardPattern(GuardPattern object) {
+	public String visitGuardPattern(@NonNull GuardPattern object) {
 		append("GuardPattern ");
 //		appendName(object);
 		return null;
 	}
 
-	public String visitMapping(Mapping object) {
+	public String visitMapping(@NonNull Mapping object) {
 		append("mapping ");
 		appendName(object);
 		return null;
 	}
 
-	public String visitPropertyAssignment(PropertyAssignment object) {
+	public String visitPropertyAssignment(@NonNull PropertyAssignment object) {
 		append("PropertyAssignment ");
 //		appendName(object);
 		return null;
 	}
 
-	public String visitRealizedVariable(RealizedVariable object) {
+	public String visitRealizedVariable(@NonNull RealizedVariable object) {
 		append("RealizedVariable ");
 		appendName(object);
 		return null;
 	}
 
-	public String visitVariableAssignment(VariableAssignment object) {
+	public String visitVariableAssignment(@NonNull VariableAssignment object) {
 		append("VariableAssignment ");
 //		appendName(object);
 		return null;

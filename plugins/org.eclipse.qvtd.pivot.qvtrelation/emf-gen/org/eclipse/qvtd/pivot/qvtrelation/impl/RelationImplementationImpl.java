@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.pivot.Operation;
 
@@ -335,9 +336,8 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 		return super.eIsSet(featureID);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTrelationVisitor.class).visitRelationImplementation(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTrelationVisitor<R>)visitor).visitRelationImplementation(this);
 	}
 } //RelationImplementationImpl

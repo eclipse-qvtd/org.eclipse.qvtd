@@ -3,6 +3,7 @@
 package org.eclipse.qvtd.pivot.qvtcore.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.impl.BaseModelImpl;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
@@ -38,9 +39,8 @@ public class CoreModelImpl extends BaseModelImpl implements CoreModel {
 		return QVTcorePackage.Literals.CORE_MODEL;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTcoreVisitor.class).visitCoreModel(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTcoreVisitor<R>)visitor).visitCoreModel(this);
 	}
 } //CoreModelImpl

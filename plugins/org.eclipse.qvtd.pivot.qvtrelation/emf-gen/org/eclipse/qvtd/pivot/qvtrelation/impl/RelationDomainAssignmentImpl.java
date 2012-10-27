@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -253,9 +254,8 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 		return super.eIsSet(featureID);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTrelationVisitor.class).visitRelationDomainAssignment(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTrelationVisitor<R>)visitor).visitRelationDomainAssignment(this);
 	}
 } //RelationDomainAssignmentImpl

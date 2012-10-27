@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.pivot.qvttemplate.utilities;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
@@ -37,35 +38,36 @@ public class QVTtemplateToStringVisitor extends QVTbaseToStringVisitor implement
 			ToStringVisitor.addFactory(this);
 		}
 
-		public ToStringVisitor createToStringVisitor() {
+		public @NonNull ToStringVisitor createToStringVisitor() {
 			return new QVTtemplateToStringVisitor();
 		}
 
-		public EPackage getEPackage() {
+		@SuppressWarnings("null")
+		public @NonNull EPackage getEPackage() {
 			return QVTtemplatePackage.eINSTANCE;
 		}
 	}
 
-	public static ToStringVisitor.Factory FACTORY = new Factory();
+	public static @NonNull ToStringVisitor.Factory FACTORY = new Factory();
 
 	protected QVTtemplateToStringVisitor() {}
 
-	public String visitCollectionTemplateExp(CollectionTemplateExp object) {
+	public String visitCollectionTemplateExp(@NonNull CollectionTemplateExp object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String visitObjectTemplateExp(ObjectTemplateExp object) {
+	public String visitObjectTemplateExp(@NonNull ObjectTemplateExp object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String visitPropertyTemplateItem(PropertyTemplateItem object) {
+	public String visitPropertyTemplateItem(@NonNull PropertyTemplateItem object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String visitTemplateExp(TemplateExp object) {
+	public String visitTemplateExp(@NonNull TemplateExp object) {
 		// TODO Auto-generated method stub
 		return null;
 	}

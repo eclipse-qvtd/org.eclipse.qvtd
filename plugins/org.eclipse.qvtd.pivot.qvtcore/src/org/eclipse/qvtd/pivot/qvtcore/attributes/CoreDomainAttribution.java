@@ -17,6 +17,7 @@
 package org.eclipse.qvtd.pivot.qvtcore.attributes;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -29,7 +30,7 @@ public class CoreDomainAttribution extends AbstractAttribution
 	public static final CoreDomainAttribution INSTANCE = new CoreDomainAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		CoreDomain targetElement = (CoreDomain)target;
 		TypedModel typedModel = targetElement.getTypedModel();
 		if (typedModel != null) {

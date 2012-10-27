@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -327,9 +328,8 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTcoreVisitor.class).visitCoreDomain(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTcoreVisitor<R>)visitor).visitCoreDomain(this);
 	}
 } //CoreDomainImpl

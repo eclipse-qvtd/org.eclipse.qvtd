@@ -17,6 +17,7 @@
 package org.eclipse.qvtd.pivot.qvtrelation.attributes;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -28,7 +29,7 @@ public class RelationDomainAttribution extends AbstractAttribution
 	public static final RelationDomainAttribution INSTANCE = new RelationDomainAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		RelationDomain targetElement = (RelationDomain)target;
 		TypedModel typedModel = targetElement.getTypedModel();
 		if (typedModel != null) {

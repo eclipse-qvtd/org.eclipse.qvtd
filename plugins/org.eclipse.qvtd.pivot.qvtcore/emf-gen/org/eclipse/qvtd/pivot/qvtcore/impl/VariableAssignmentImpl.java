@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -171,9 +172,8 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 		return super.eIsSet(featureID);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTcoreVisitor.class).visitVariableAssignment(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTcoreVisitor<R>)visitor).visitVariableAssignment(this);
 	}
 } //VariableAssignmentImpl

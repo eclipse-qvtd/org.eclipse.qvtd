@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl;
@@ -180,9 +181,8 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 		return super.eIsSet(featureID);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTrelationVisitor.class).visitRelationalTransformation(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTrelationVisitor<R>)visitor).visitRelationalTransformation(this);
 	}
 } //RelationalTransformationImpl

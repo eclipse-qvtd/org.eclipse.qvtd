@@ -19,6 +19,7 @@ package org.eclipse.qvtd.pivot.qvtrelation.attributes;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -32,7 +33,7 @@ public class KeyAttribution extends AbstractAttribution
 	public static final KeyAttribution INSTANCE = new KeyAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		Key targetElement = (Key)target;
 		RelationalTransformation transformation = targetElement.getTransformation();
 		Set<org.eclipse.ocl.examples.pivot.Package> allPackages = QVTbaseUtil.getAllUsedPackages(transformation);
@@ -42,6 +43,7 @@ public class KeyAttribution extends AbstractAttribution
 		if (!environmentView.hasFinalResult()) {
 			MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 			for (org.eclipse.ocl.examples.pivot.Package usedPackage : allPackages) {
+				assert usedPackage != null;
 				environmentView.addNamedElements(metaModelManager.getLocalClasses(usedPackage));
 			}
 		}

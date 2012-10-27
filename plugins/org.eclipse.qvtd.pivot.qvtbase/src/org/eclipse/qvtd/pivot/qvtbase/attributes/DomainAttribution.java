@@ -17,6 +17,7 @@
 package org.eclipse.qvtd.pivot.qvtbase.attributes;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -28,11 +29,12 @@ public class DomainAttribution extends AbstractAttribution
 	public static final DomainAttribution INSTANCE = new DomainAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		Domain domain = (Domain)target;
 		TypedModel typedModel = domain.getTypedModel();
 		if (typedModel != null) {
 			for (org.eclipse.ocl.examples.pivot.Package targetPackage : typedModel.getUsedPackage()) {
+				assert targetPackage != null;
 				environmentView.addAllPackages(targetPackage);
 				environmentView.addAllTypes(targetPackage);
 			}

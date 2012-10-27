@@ -18,6 +18,7 @@ package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.AbstractPivotSaver;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseSaver;
@@ -38,20 +39,21 @@ public class QVTrelationSaver extends QVTtemplateSaver
 			addFactory(this);
 		}
 
-		public LocateVisitor createLocateVisitor(AbstractPivotSaver saver) {
+		public @NonNull LocateVisitor createLocateVisitor(@NonNull AbstractPivotSaver saver) {
 			return new LocateVisitor(saver);
 		}
 
-		public ResolveVisitor createResolveVisitor(AbstractPivotSaver saver) {
+		public @NonNull ResolveVisitor createResolveVisitor(@NonNull AbstractPivotSaver saver) {
 			return new ResolveVisitor(saver);
 		}
 
-		public EPackage getEPackage() {
+		@SuppressWarnings("null")
+		public @NonNull EPackage getEPackage() {
 			return QVTrelationPackage.eINSTANCE;
 		}
 	}
 
-	public static AbstractPivotSaver.Factory FACTORY = new Factory();
+	public static @NonNull AbstractPivotSaver.Factory FACTORY = new Factory();
 	
 	/**
 	 * LocateVisitor locates references to shared specializations, so that 
@@ -59,10 +61,10 @@ public class QVTrelationSaver extends QVTtemplateSaver
 	 */
 	public static class LocateVisitor extends AbstractNullQVTrelationVisitor<Object, AbstractPivotSaver> implements AbstractPivotSaver.LocateVisitor
 	{
-		protected LocateVisitor(AbstractPivotSaver context) {
+		protected LocateVisitor(@NonNull AbstractPivotSaver context) {
 			super(context);
 		}
-		public Object visiting(Visitable visitable) {
+		public Object visiting(@NonNull Visitable visitable) {
 			throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for PivotSaver Locate pass");
 		}
 	}
@@ -73,10 +75,10 @@ public class QVTrelationSaver extends QVTtemplateSaver
 	 */
 	public static class ResolveVisitor extends AbstractNullQVTrelationVisitor<Object, AbstractPivotSaver> implements AbstractPivotSaver.ResolveVisitor
 	{
-		protected ResolveVisitor(AbstractPivotSaver saver) {
+		protected ResolveVisitor(@NonNull AbstractPivotSaver saver) {
 			super(saver);
 		}
-		public Object visiting(Visitable visitable) {
+		public Object visiting(@NonNull Visitable visitable) {
 			throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for PivotSaver Resolve pass");
 		}
 	}

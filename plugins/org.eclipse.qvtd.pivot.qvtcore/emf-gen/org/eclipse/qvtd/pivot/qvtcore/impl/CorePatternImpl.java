@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -189,9 +190,8 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 		return super.eIsSet(featureID);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTcoreVisitor.class).visitCorePattern(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTcoreVisitor<R>)visitor).visitCorePattern(this);
 	}
 } //CorePatternImpl

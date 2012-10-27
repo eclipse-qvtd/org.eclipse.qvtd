@@ -17,6 +17,7 @@
 package org.eclipse.qvtd.pivot.qvttemplate.attributes;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -27,7 +28,7 @@ public class TemplateExpAttribution extends AbstractAttribution
 	public static final TemplateExpAttribution INSTANCE = new TemplateExpAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		TemplateExp targetElement = (TemplateExp)target;
 		environmentView.addNamedElement(targetElement.getBindsTo());
 		return scopeView.getParent();

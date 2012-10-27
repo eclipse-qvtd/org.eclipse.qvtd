@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.internal.impl.LiteralExpImpl;
@@ -248,9 +249,8 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 		return super.eIsSet(featureID);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTtemplateVisitor.class).visitTemplateExp(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTtemplateVisitor<R>)visitor).visitTemplateExp(this);
 	}
 } //TemplateExpImpl

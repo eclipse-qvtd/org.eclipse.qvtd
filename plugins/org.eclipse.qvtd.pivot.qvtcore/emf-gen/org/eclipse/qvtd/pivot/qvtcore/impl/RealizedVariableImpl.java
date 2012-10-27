@@ -17,6 +17,7 @@
 package org.eclipse.qvtd.pivot.qvtcore.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.pivot.internal.impl.VariableImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -54,9 +55,8 @@ public class RealizedVariableImpl extends VariableImpl implements RealizedVariab
 		return QVTcorePackage.Literals.REALIZED_VARIABLE;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTcoreVisitor.class).visitRealizedVariable(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTcoreVisitor<R>)visitor).visitRealizedVariable(this);
 	}
 } //RealizedVariableImpl

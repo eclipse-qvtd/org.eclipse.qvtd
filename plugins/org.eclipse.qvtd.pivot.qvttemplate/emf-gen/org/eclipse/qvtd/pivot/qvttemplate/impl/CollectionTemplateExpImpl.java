@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -284,9 +285,8 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 		return super.eIsSet(featureID);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTtemplateVisitor.class).visitCollectionTemplateExp(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTtemplateVisitor<R>)visitor).visitCollectionTemplateExp(this);
 	}
 } //CollectionTemplateExpImpl

@@ -16,6 +16,7 @@ package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.util.AbstractVisitor;
@@ -42,36 +43,39 @@ public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor
 			PrettyPrinter.addFactory(QVTrelationPackage.eINSTANCE, this);
 		}
 
-		public AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(PrettyPrinter printer) {
+		public @NonNull AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(@NonNull PrettyPrinter printer) {
 			return new QVTrelationPrettyPrintVisitor(printer);
 		}
 	}
 
-	public static PrettyPrinter.Factory FACTORY = new Factory();
+	public static @NonNull PrettyPrinter.Factory FACTORY = new Factory();
 
-	public QVTrelationPrettyPrintVisitor(PrettyPrinter context) {
+	public QVTrelationPrettyPrintVisitor(@NonNull PrettyPrinter context) {
 		super(context);
 	}
 
-	public Object visitDomainPattern(DomainPattern object) {
+	public Object visitDomainPattern(@NonNull DomainPattern object) {
 		return super.visitPattern(object);
 	}
 
-	public Object visitKey(Key object) {
-		context.appendQualifiedType(object.getIdentifies());
+	public Object visitKey(@NonNull Key object) {
+		org.eclipse.ocl.examples.pivot.Class identifies = object.getIdentifies();
+		if (identifies != null) {
+			context.appendQualifiedType(identifies);
+		}
 		return null;
 	}
 
-	public Object visitOppositePropertyCallExp(OppositePropertyCallExp object) {
+	public Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitRelation(Relation object) {
+	public Object visitRelation(@NonNull Relation object) {
 		return super.visitRule(object);
 	}
 
-	public Object visitRelationCallExp(RelationCallExp object) {
+	public Object visitRelationCallExp(@NonNull RelationCallExp object) {
 		List<OCLExpression> arguments = object.getArgument();
 		Relation referredRelation = object.getReferredRelation();
 		context.appendName(referredRelation);
@@ -89,25 +93,25 @@ public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor
 		return null;
 	}
 
-	public Object visitRelationDomain(RelationDomain object) {
+	public Object visitRelationDomain(@NonNull RelationDomain object) {
 		return super.visitDomain(object);
 	}
 
-	public Object visitRelationDomainAssignment(RelationDomainAssignment object) {
+	public Object visitRelationDomainAssignment(@NonNull RelationDomainAssignment object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitRelationImplementation(RelationImplementation object) {
+	public Object visitRelationImplementation(@NonNull RelationImplementation object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitRelationModel(RelationModel object) {
+	public Object visitRelationModel(@NonNull RelationModel object) {
 		return super.visitBaseModel(object);
 	}
 
-	public Object visitRelationalTransformation(RelationalTransformation object) {
+	public Object visitRelationalTransformation(@NonNull RelationalTransformation object) {
 		return super.visitTransformation(object);
 	}
 }

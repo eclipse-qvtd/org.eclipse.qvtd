@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -353,9 +354,8 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTbaseVisitor.class).visitFunctionParameter(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTbaseVisitor<R>)visitor).visitFunctionParameter(this);
 	}
 } //FunctionParameterImpl

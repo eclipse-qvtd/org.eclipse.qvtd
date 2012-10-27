@@ -14,6 +14,7 @@
  */
 package org.eclipse.qvtd.pivot.qvttemplate.utilities;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.util.AbstractVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbasePrettyPrintVisitor;
@@ -33,33 +34,33 @@ public class QVTtemplatePrettyPrintVisitor extends QVTbasePrettyPrintVisitor imp
 			PrettyPrinter.addFactory(QVTtemplatePackage.eINSTANCE, this);
 		}
 
-		public AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(PrettyPrinter printer) {
+		public @NonNull AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(@NonNull PrettyPrinter printer) {
 			return new QVTtemplatePrettyPrintVisitor(printer);
 		}
 	}
 
-	public static PrettyPrinter.Factory FACTORY = new Factory();
+	public static @NonNull PrettyPrinter.Factory FACTORY = new Factory();
 
-	public QVTtemplatePrettyPrintVisitor(PrettyPrinter context) {
+	public QVTtemplatePrettyPrintVisitor(@NonNull PrettyPrinter context) {
 		super(context);
 	}
 
-	public Object visitCollectionTemplateExp(CollectionTemplateExp object) {
+	public Object visitCollectionTemplateExp(@NonNull CollectionTemplateExp object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitObjectTemplateExp(ObjectTemplateExp object) {
+	public Object visitObjectTemplateExp(@NonNull ObjectTemplateExp object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitPropertyTemplateItem(PropertyTemplateItem object) {
+	public Object visitPropertyTemplateItem(@NonNull PropertyTemplateItem object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitTemplateExp(TemplateExp object) {
+	public Object visitTemplateExp(@NonNull TemplateExp object) {
 		// TODO Auto-generated method stub
 		return null;
 	}

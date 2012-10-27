@@ -21,6 +21,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -186,9 +187,8 @@ public class FunctionImpl extends OperationImpl implements Function {
 		return super.eIsSet(featureID);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTbaseVisitor.class).visitFunction(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTbaseVisitor<R>)visitor).visitFunction(this);
 	}
 } //FunctionImpl

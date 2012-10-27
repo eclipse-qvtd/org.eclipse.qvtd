@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
@@ -113,6 +114,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Area getArea() {
 		if (eContainerFeatureID() != QVTcorePackage.BOTTOM_PATTERN__AREA) return null;
 		return (Area)eContainer();
@@ -332,9 +334,8 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 		return super.eIsSet(featureID);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTcoreVisitor.class).visitBottomPattern(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTcoreVisitor<R>)visitor).visitBottomPattern(this);
 	}
 } //BottomPatternImpl

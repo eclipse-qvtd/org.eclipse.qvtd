@@ -17,6 +17,7 @@
 package org.eclipse.qvtd.pivot.qvtbase.attributes;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.attributes.PackageAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -27,7 +28,7 @@ public class TransformationAttribution extends PackageAttribution
 	public static final TransformationAttribution INSTANCE = new TransformationAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		Transformation transformation = (Transformation)target;
 		environmentView.addNamedElements(transformation.getModelParameter());
 		environmentView.addNamedElements(transformation.getOwnedOperation());

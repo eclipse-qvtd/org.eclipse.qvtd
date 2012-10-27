@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtbase.utilities;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -42,73 +43,74 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 			ToStringVisitor.addFactory(this);
 		}
 
-		public ToStringVisitor createToStringVisitor() {
+		public @NonNull ToStringVisitor createToStringVisitor() {
 			return new QVTbaseToStringVisitor();
 		}
 
-		public EPackage getEPackage() {
+		@SuppressWarnings("null")
+		public @NonNull EPackage getEPackage() {
 			return QVTbasePackage.eINSTANCE;
 		}
 	}
 
-	public static ToStringVisitor.Factory FACTORY = new Factory();
+	public static @NonNull ToStringVisitor.Factory FACTORY = new Factory();
 
 	protected QVTbaseToStringVisitor() {}
 
-	public String visitBaseModel(BaseModel object) {
+	public String visitBaseModel(@NonNull BaseModel object) {
 		append("base model ");
 		return null;
 	}
 
-	public String visitDomain(Domain object) {
+	public String visitDomain(@NonNull Domain object) {
 		append("domain ");
 		appendName(object);
 		return null;
 	}
 
-	public String visitFunction(Function object) {
+	public String visitFunction(@NonNull Function object) {
 		append("function ");
 		appendName(object);
 		return null;
 	}
 
-	public String visitFunctionParameter(FunctionParameter object) {
+	public String visitFunctionParameter(@NonNull FunctionParameter object) {
 		append("function parameter ");
 		appendName(object);
 		return null;
 	}
 
-	public String visitPattern(Pattern object) {
+	public String visitPattern(@NonNull Pattern object) {
 		append("pattern ");
 //		appendName(object);
 		return null;
 	}
 
-	public String visitPredicate(Predicate object) {
+	public String visitPredicate(@NonNull Predicate object) {
 		append("predicate ");
 //		appendName(object);
 		return null;
 	}
 
-	public String visitRule(Rule object) {
+	public String visitRule(@NonNull Rule object) {
 		append("rule ");
 		appendName(object);
 		return null;
 	}
 
-	public String visitTransformation(Transformation object) {
+	public String visitTransformation(@NonNull Transformation object) {
 		append("transformation ");
 		appendName(object);
 		return null;
 	}
 
-	public String visitTypedModel(TypedModel object) {
+	public String visitTypedModel(@NonNull TypedModel object) {
 		append("typed model ");
 		appendName(object);
 		return null;
 	}
 
-	public String visitUnit(Unit object) {
+	public String visitUnit(@NonNull Unit object) {
 		append("unit ");
 		appendName(object);
 		return null;

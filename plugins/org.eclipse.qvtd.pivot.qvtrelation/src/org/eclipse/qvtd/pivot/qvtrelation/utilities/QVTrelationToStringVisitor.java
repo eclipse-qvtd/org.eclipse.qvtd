@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
@@ -43,65 +44,66 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 			ToStringVisitor.addFactory(this);
 		}
 
-		public ToStringVisitor createToStringVisitor() {
+		public @NonNull ToStringVisitor createToStringVisitor() {
 			return new QVTrelationToStringVisitor();
 		}
 
-		public EPackage getEPackage() {
+		@SuppressWarnings("null")
+		public @NonNull EPackage getEPackage() {
 			return QVTrelationPackage.eINSTANCE;
 		}
 	}
 
-	public static ToStringVisitor.Factory FACTORY = new Factory();
+	public static @NonNull ToStringVisitor.Factory FACTORY = new Factory();
 
 	protected QVTrelationToStringVisitor() {}
 
-	public String visitDomainPattern(DomainPattern object) {
+	public String visitDomainPattern(@NonNull DomainPattern object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String visitKey(Key object) {
+	public String visitKey(@NonNull Key object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String visitOppositePropertyCallExp(OppositePropertyCallExp object) {
+	public String visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String visitRelation(Relation object) {
+	public String visitRelation(@NonNull Relation object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String visitRelationCallExp(RelationCallExp object) {
+	public String visitRelationCallExp(@NonNull RelationCallExp object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String visitRelationDomain(RelationDomain object) {
+	public String visitRelationDomain(@NonNull RelationDomain object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String visitRelationDomainAssignment(RelationDomainAssignment object) {
+	public String visitRelationDomainAssignment(@NonNull RelationDomainAssignment object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String visitRelationImplementation(RelationImplementation object) {
+	public String visitRelationImplementation(@NonNull RelationImplementation object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String visitRelationModel(RelationModel object) {
+	public String visitRelationModel(@NonNull RelationModel object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String visitRelationalTransformation(RelationalTransformation object) {
+	public String visitRelationalTransformation(@NonNull RelationalTransformation object) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -14,6 +14,7 @@
  */
 package org.eclipse.qvtd.pivot.qvtbase.utilities;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.prettyprint.EssentialOCLPrettyPrintVisitor;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.util.AbstractVisitor;
@@ -39,59 +40,59 @@ public class QVTbasePrettyPrintVisitor extends EssentialOCLPrettyPrintVisitor im
 			PrettyPrinter.addFactory(QVTbasePackage.eINSTANCE, this);
 		}
 
-		public AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(PrettyPrinter printer) {
+		public @NonNull AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(@NonNull PrettyPrinter printer) {
 			return new QVTbasePrettyPrintVisitor(printer);
 		}
 	}
 
-	public static PrettyPrinter.Factory FACTORY = new Factory();
+	public static @NonNull PrettyPrinter.Factory FACTORY = new Factory();
 
-	public QVTbasePrettyPrintVisitor(PrettyPrinter context) {
+	public QVTbasePrettyPrintVisitor(@NonNull PrettyPrinter context) {
 		super(context);
 	}
 
-	public Object visitBaseModel(BaseModel object) {
+	public Object visitBaseModel(@NonNull BaseModel object) {
 		return super.visitRoot(object);
 	}
 
-	public Object visitDomain(Domain object) {
+	public Object visitDomain(@NonNull Domain object) {
 		context.appendName(object.getTypedModel());
 		return null;
 	}
 
-	public Object visitFunction(Function object) {
+	public Object visitFunction(@NonNull Function object) {
 		return super.visitOperation(object);
 	}
 
-	public Object visitFunctionParameter(FunctionParameter object) {
+	public Object visitFunctionParameter(@NonNull FunctionParameter object) {
 		return super.visitParameter(object);
 	}
 
-	public Object visitPattern(Pattern object) {
+	public Object visitPattern(@NonNull Pattern object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitPredicate(Predicate object) {
+	public Object visitPredicate(@NonNull Predicate object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object visitRule(Rule object) {
+	public Object visitRule(@NonNull Rule object) {
 		context.appendName(object);
 		return null;
 	}
 
-	public Object visitTransformation(Transformation object) {
+	public Object visitTransformation(@NonNull Transformation object) {
 		return super.visitPackage(object);
 	}
 
-	public Object visitTypedModel(TypedModel object) {
+	public Object visitTypedModel(@NonNull TypedModel object) {
 		context.appendName(object);
 		return null;
 	}
 
-	public Object visitUnit(Unit object) {
+	public Object visitUnit(@NonNull Unit object) {
 		context.appendName(object);
 		return null;
 	}

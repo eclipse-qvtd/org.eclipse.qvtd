@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.pivot.Property;
 
@@ -347,9 +348,8 @@ public class KeyImpl extends ElementImpl implements Key {
 		return super.eIsSet(featureID);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTrelationVisitor.class).visitKey(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTrelationVisitor<R>)visitor).visitKey(this);
 	}
 } //KeyImpl

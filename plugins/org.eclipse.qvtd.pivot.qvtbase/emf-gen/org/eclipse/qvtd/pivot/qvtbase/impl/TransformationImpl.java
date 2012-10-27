@@ -700,10 +700,9 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
-		return (R) visitor.getAdapter(QVTbaseVisitor.class).visitTransformation(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return ((QVTbaseVisitor<R>)visitor).visitTransformation(this);
 	}
 
 	public TypedModel getModelParameter(String name) {
