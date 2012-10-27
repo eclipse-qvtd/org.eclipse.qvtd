@@ -134,6 +134,7 @@ public class QVTcoreSwitch<T> extends Switch<T> {
 				T result = caseCoreDomain(coreDomain);
 				if (result == null) result = caseDomain(coreDomain);
 				if (result == null) result = caseArea(coreDomain);
+				if (result == null) result = caseNamedElement(coreDomain);
 				if (result == null) result = caseElement(coreDomain);
 				if (result == null) result = caseNameable(coreDomain);
 				if (result == null) result = caseVisitable(coreDomain);

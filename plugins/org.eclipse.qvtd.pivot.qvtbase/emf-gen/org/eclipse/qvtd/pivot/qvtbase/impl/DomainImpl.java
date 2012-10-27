@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl;
+import org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -46,7 +46,7 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  *
  * @generated
  */
-public abstract class DomainImpl extends ElementImpl implements Domain {
+public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	/**
 	 * The default value of the '{@link #isIsCheckable() <em>Is Checkable</em>}' attribute.
 	 * <!-- begin-user-doc -->

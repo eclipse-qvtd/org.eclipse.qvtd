@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
+import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -130,6 +131,7 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 				T result = caseOppositePropertyCallExp(oppositePropertyCallExp);
 				if (result == null) result = casePropertyCallExp(oppositePropertyCallExp);
 				if (result == null) result = caseNavigationCallExp(oppositePropertyCallExp);
+				if (result == null) result = caseReferringElement(oppositePropertyCallExp);
 				if (result == null) result = caseFeatureCallExp(oppositePropertyCallExp);
 				if (result == null) result = caseCallExp(oppositePropertyCallExp);
 				if (result == null) result = caseOCLExpression(oppositePropertyCallExp);
@@ -168,6 +170,7 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 				RelationDomain relationDomain = (RelationDomain)theEObject;
 				T result = caseRelationDomain(relationDomain);
 				if (result == null) result = caseDomain(relationDomain);
+				if (result == null) result = caseNamedElement(relationDomain);
 				if (result == null) result = caseElement(relationDomain);
 				if (result == null) result = caseNameable(relationDomain);
 				if (result == null) result = caseVisitable(relationDomain);
@@ -521,6 +524,21 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNavigationCallExp(NavigationCallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Referring Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Referring Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReferringElement(ReferringElement object) {
 		return null;
 	}
 

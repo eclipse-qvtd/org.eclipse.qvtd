@@ -168,12 +168,12 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 				return createNameableAdapter();
 			}
 			@Override
-			public Adapter caseDomain(Domain object) {
-				return createDomainAdapter();
-			}
-			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseDomain(Domain object) {
+				return createDomainAdapter();
 			}
 			@Override
 			public Adapter caseNamespace(Namespace object) {

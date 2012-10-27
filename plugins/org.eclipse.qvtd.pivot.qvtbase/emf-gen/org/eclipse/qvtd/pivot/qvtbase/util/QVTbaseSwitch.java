@@ -119,6 +119,7 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 			case QVTbasePackage.DOMAIN: {
 				Domain domain = (Domain)theEObject;
 				T result = caseDomain(domain);
+				if (result == null) result = caseNamedElement(domain);
 				if (result == null) result = caseElement(domain);
 				if (result == null) result = caseNameable(domain);
 				if (result == null) result = caseVisitable(domain);
