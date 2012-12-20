@@ -52,15 +52,10 @@ public class RelationCallExpCSAttribution extends InvocationExpCSAttribution
 		}
 	}
 	
-//	@Override
-	@Deprecated // going obsolete
-	public @NonNull ScopeFilter createInvocationFilter(@NonNull MetaModelManager metaModelManager, @NonNull InvocationExpCS targetElement, @Nullable Type type) {
-		return createInvocationFilter(targetElement, type);
-	}
-	
-//	@Override
-	public @NonNull ScopeFilter createInvocationFilter(@NonNull InvocationExpCS targetElement, @Nullable Type type) {
-		return new OperationFilter(type, targetElement)
+	@Override
+//	@Deprecated // going obsolete
+	protected @NonNull ScopeFilter createInvocationFilter(@NonNull MetaModelManager metaModelManager, @NonNull InvocationExpCS targetElement, @Nullable Type type) {
+		return new OperationFilter(metaModelManager, type, targetElement)
 		{
 			@Override
 			public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
