@@ -51,10 +51,16 @@ public class RelationCallExpCSAttribution extends InvocationExpCSAttribution
 			return scopeView.getParent();
 		}
 	}
-
-	@Override
+	
+//	@Override
+	@Deprecated // going obsolete
 	public @NonNull ScopeFilter createInvocationFilter(@NonNull MetaModelManager metaModelManager, @NonNull InvocationExpCS targetElement, @Nullable Type type) {
-		return new OperationFilter(metaModelManager, type, targetElement)
+		return createInvocationFilter(targetElement, type);
+	}
+	
+//	@Override
+	public @NonNull ScopeFilter createInvocationFilter(@NonNull InvocationExpCS targetElement, @Nullable Type type) {
+		return new OperationFilter(type, targetElement)
 		{
 			@Override
 			public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
