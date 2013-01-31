@@ -148,7 +148,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 */
 	public Transformation getTransformation() {
 		if (eContainerFeatureID() != QVTbasePackage.RULE__TRANSFORMATION) return null;
-		return (Transformation)eContainer();
+		return (Transformation)eInternalContainer();
 	}
 
 	/**

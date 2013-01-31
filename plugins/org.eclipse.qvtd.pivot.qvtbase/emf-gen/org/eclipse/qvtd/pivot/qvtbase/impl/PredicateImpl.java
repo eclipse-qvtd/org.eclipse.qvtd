@@ -125,7 +125,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	 */
 	public Pattern getPattern() {
 		if (eContainerFeatureID() != QVTbasePackage.PREDICATE__PATTERN) return null;
-		return (Pattern)eContainer();
+		return (Pattern)eInternalContainer();
 	}
 
 	/**

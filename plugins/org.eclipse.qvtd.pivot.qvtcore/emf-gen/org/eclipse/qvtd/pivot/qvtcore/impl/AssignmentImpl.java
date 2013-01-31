@@ -112,7 +112,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 */
 	public BottomPattern getBottomPattern() {
 		if (eContainerFeatureID() != QVTcorePackage.ASSIGNMENT__BOTTOM_PATTERN) return null;
-		return (BottomPattern)eContainer();
+		return (BottomPattern)eInternalContainer();
 	}
 
 	/**

@@ -284,6 +284,15 @@ public interface QVTrelationPackage extends EPackage {
 	int OPPOSITE_PROPERTY_CALL_EXP__TYPE = PivotPackage.PROPERTY_CALL_EXP__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__IS_REQUIRED = PivotPackage.PROPERTY_CALL_EXP__IS_REQUIRED;
+
+	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -563,6 +572,15 @@ public interface QVTrelationPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_CALL_EXP__TYPE = PivotPackage.OCL_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_CALL_EXP__IS_REQUIRED = PivotPackage.OCL_EXPRESSION__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Argument</b></em>' containment reference list.
@@ -1108,6 +1126,15 @@ public interface QVTrelationPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATIONAL_TRANSFORMATION__IS_ABSTRACT = QVTbasePackage.TRANSFORMATION__IS_ABSTRACT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATIONAL_TRANSFORMATION__OWNED_BEHAVIOR = QVTbasePackage.TRANSFORMATION__OWNED_BEHAVIOR;
 
 	/**
 	 * The feature id for the '<em><b>Is Interface</b></em>' attribute.

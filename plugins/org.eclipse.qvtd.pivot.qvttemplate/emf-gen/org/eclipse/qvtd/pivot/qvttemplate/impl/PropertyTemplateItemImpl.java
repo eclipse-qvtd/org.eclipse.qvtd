@@ -116,7 +116,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 */
 	public ObjectTemplateExp getObjContainer() {
 		if (eContainerFeatureID() != QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER) return null;
-		return (ObjectTemplateExp)eContainer();
+		return (ObjectTemplateExp)eInternalContainer();
 	}
 
 	/**

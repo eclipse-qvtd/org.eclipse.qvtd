@@ -178,7 +178,7 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	 */
 	public Relation getRelation() {
 		if (eContainerFeatureID() != QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION) return null;
-		return (Relation)eContainer();
+		return (Relation)eInternalContainer();
 	}
 
 	/**

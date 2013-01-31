@@ -1039,6 +1039,15 @@ public interface QVTcorePackage extends EPackage {
 	int REALIZED_VARIABLE__TYPE = PivotPackage.VARIABLE__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REALIZED_VARIABLE__IS_REQUIRED = PivotPackage.VARIABLE__IS_REQUIRED;
+
+	/**
 	 * The feature id for the '<em><b>Init Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

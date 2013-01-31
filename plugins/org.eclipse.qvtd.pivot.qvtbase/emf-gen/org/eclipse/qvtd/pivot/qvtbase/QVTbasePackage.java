@@ -460,6 +460,24 @@ public interface QVTbasePackage extends EPackage {
 	int FUNCTION__OWNING_TYPE = PivotPackage.OPERATION__OWNING_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Invalidating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION__IS_INVALIDATING = PivotPackage.OPERATION__IS_INVALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Is Validating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION__IS_VALIDATING = PivotPackage.OPERATION__IS_VALIDATING;
+
+	/**
 	 * The feature id for the '<em><b>Precedence</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1003,6 +1021,15 @@ public interface QVTbasePackage extends EPackage {
 	 * @ordered
 	 */
 	int TRANSFORMATION__IS_ABSTRACT = PivotPackage.CLASS__IS_ABSTRACT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION__OWNED_BEHAVIOR = PivotPackage.CLASS__OWNED_BEHAVIOR;
 
 	/**
 	 * The feature id for the '<em><b>Is Interface</b></em>' attribute.

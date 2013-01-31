@@ -18,21 +18,19 @@ package org.eclipse.qvtd.pivot.qvttemplate.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.TypedElement;
-
-import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
-
-import org.eclipse.qvtd.pivot.qvttemplate.*;
+import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
+import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
+import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 /**
  * <!-- begin-user-doc -->
@@ -115,7 +113,7 @@ public class QVTtemplateAdapterFactory extends AdapterFactoryImpl {
 				return createElementAdapter();
 			}
 			@Override
-			public Adapter caseNameable(Nameable object) {
+			public Adapter caseNameable(org.eclipse.ocl.examples.domain.elements.Nameable object) {
 				return createNameableAdapter();
 			}
 			@Override
@@ -239,13 +237,13 @@ public class QVTtemplateAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.util.Nameable <em>Nameable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.elements.Nameable <em>Nameable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.util.Nameable
+	 * @see org.eclipse.ocl.examples.domain.elements.Nameable
 	 * @generated
 	 */
 	public Adapter createNameableAdapter() {

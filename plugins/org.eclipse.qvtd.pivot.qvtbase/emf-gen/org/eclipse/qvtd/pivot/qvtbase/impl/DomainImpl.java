@@ -234,7 +234,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 */
 	public Rule getRule() {
 		if (eContainerFeatureID() != QVTbasePackage.DOMAIN__RULE) return null;
-		return (Rule)eContainer();
+		return (Rule)eInternalContainer();
 	}
 
 	/**

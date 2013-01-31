@@ -16,7 +16,7 @@
  * 
  * Run As->MWE2 Workflow to regenerate the Xtest CST models.
  */
-module GenerateQVTModels
+module GenerateQVTdModels
 
 import org.eclipse.ocl.examples.build.utilities.*
 import org.eclipse.qvtd.build.utilities.*

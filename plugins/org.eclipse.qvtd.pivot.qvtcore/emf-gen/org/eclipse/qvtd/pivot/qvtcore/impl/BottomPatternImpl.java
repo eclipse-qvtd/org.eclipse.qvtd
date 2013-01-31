@@ -117,7 +117,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public Area getArea() {
 		if (eContainerFeatureID() != QVTcorePackage.BOTTOM_PATTERN__AREA) return null;
-		return (Area)eContainer();
+		return (Area)eInternalContainer();
 	}
 
 	/**

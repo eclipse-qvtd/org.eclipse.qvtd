@@ -166,7 +166,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	 */
 	public RelationalTransformation getTransformation() {
 		if (eContainerFeatureID() != QVTrelationPackage.KEY__TRANSFORMATION) return null;
-		return (RelationalTransformation)eContainer();
+		return (RelationalTransformation)eInternalContainer();
 	}
 
 	/**

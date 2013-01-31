@@ -18,12 +18,8 @@ package org.eclipse.qvtd.xtext.qvtcorecst.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
-
-import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
-
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
@@ -33,12 +29,25 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
-
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
-
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
-
-import org.eclipse.qvtd.xtext.qvtcorecst.*;
+import org.eclipse.qvtd.xtext.qvtcorecst.AreaCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.PatternCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
+import org.eclipse.qvtd.xtext.qvtcorecst.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.RealizeableVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -642,7 +651,7 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNameable(Nameable object) {
+	public T caseNameable(org.eclipse.ocl.examples.domain.elements.Nameable object) {
 		return null;
 	}
 

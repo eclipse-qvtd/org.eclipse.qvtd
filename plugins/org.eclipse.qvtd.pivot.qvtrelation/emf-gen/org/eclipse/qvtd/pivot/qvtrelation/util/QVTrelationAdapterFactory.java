@@ -34,7 +34,6 @@ import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
-import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -162,7 +161,7 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 				return createPatternAdapter();
 			}
 			@Override
-			public Adapter caseNameable(Nameable object) {
+			public Adapter caseNameable(org.eclipse.ocl.examples.domain.elements.Nameable object) {
 				return createNameableAdapter();
 			}
 			@Override
@@ -444,13 +443,13 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.util.Nameable <em>Nameable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.elements.Nameable <em>Nameable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.util.Nameable
+	 * @see org.eclipse.ocl.examples.domain.elements.Nameable
 	 * @generated
 	 */
 	public Adapter createNameableAdapter() {

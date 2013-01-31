@@ -131,7 +131,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 */
 	public BottomPattern getBottomPattern() {
 		if (eContainerFeatureID() != QVTcorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN) return null;
-		return (BottomPattern)eContainer();
+		return (BottomPattern)eInternalContainer();
 	}
 
 	/**

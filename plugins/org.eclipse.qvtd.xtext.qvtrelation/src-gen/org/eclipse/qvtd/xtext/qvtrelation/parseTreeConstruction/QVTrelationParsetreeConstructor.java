@@ -84,28 +84,29 @@ protected class ThisRootNode extends RootToken {
 			case 50: return new InvalidLiteralExpCS_Group(this, this, 50, inst);
 			case 51: return new NullLiteralExpCS_Group(this, this, 51, inst);
 			case 52: return new TypeLiteralCS_Alternatives(this, this, 52, inst);
-			case 53: return new TypeLiteralExpCS_OwnedTypeAssignment(this, this, 53, inst);
-			case 54: return new TypeNameExpCS_PathNameAssignment(this, this, 54, inst);
-			case 55: return new TypeExpCS_Alternatives(this, this, 55, inst);
-			case 56: return new ExpCS_Alternatives(this, this, 56, inst);
-			case 57: return new BinaryOperatorCS_Alternatives(this, this, 57, inst);
-			case 58: return new InfixOperatorCS_NameAssignment(this, this, 58, inst);
-			case 59: return new NavigationOperatorCS_NameAssignment(this, this, 59, inst);
-			case 60: return new PrefixedExpCS_Alternatives(this, this, 60, inst);
-			case 61: return new PrefixedExpOrLetExpCS_Alternatives(this, this, 61, inst);
-			case 62: return new UnaryOperatorCS_NameAssignment(this, this, 62, inst);
-			case 63: return new PrimaryExpCS_Alternatives(this, this, 63, inst);
-			case 64: return new PrimaryExpOrLetExpCS_Alternatives(this, this, 64, inst);
-			case 65: return new NavigatingArgCS_Group(this, this, 65, inst);
-			case 66: return new NavigatingBarArgCS_Group(this, this, 66, inst);
-			case 67: return new NavigatingCommaArgCS_Group(this, this, 67, inst);
-			case 68: return new NavigatingSemiArgCS_Group(this, this, 68, inst);
-			case 69: return new NavigatingArgExpCS_ExpCSParserRuleCall(this, this, 69, inst);
-			case 70: return new IfExpCS_Group(this, this, 70, inst);
-			case 71: return new LetExpCS_Group(this, this, 71, inst);
-			case 72: return new LetVariableCS_Group(this, this, 72, inst);
-			case 73: return new NestedExpCS_Group(this, this, 73, inst);
-			case 74: return new SelfExpCS_Group(this, this, 74, inst);
+			case 53: return new TypeLiteralWithMultiplicityCS_Group(this, this, 53, inst);
+			case 54: return new TypeLiteralExpCS_OwnedTypeAssignment(this, this, 54, inst);
+			case 55: return new TypeNameExpCS_PathNameAssignment(this, this, 55, inst);
+			case 56: return new TypeExpCS_Group(this, this, 56, inst);
+			case 57: return new ExpCS_Alternatives(this, this, 57, inst);
+			case 58: return new BinaryOperatorCS_Alternatives(this, this, 58, inst);
+			case 59: return new InfixOperatorCS_NameAssignment(this, this, 59, inst);
+			case 60: return new NavigationOperatorCS_NameAssignment(this, this, 60, inst);
+			case 61: return new PrefixedExpCS_Alternatives(this, this, 61, inst);
+			case 62: return new PrefixedExpOrLetExpCS_Alternatives(this, this, 62, inst);
+			case 63: return new UnaryOperatorCS_NameAssignment(this, this, 63, inst);
+			case 64: return new PrimaryExpCS_Alternatives(this, this, 64, inst);
+			case 65: return new PrimaryExpOrLetExpCS_Alternatives(this, this, 65, inst);
+			case 66: return new NavigatingArgCS_Group(this, this, 66, inst);
+			case 67: return new NavigatingBarArgCS_Group(this, this, 67, inst);
+			case 68: return new NavigatingCommaArgCS_Group(this, this, 68, inst);
+			case 69: return new NavigatingSemiArgCS_Group(this, this, 69, inst);
+			case 70: return new NavigatingArgExpCS_ExpCSParserRuleCall(this, this, 70, inst);
+			case 71: return new IfExpCS_Group(this, this, 71, inst);
+			case 72: return new LetExpCS_Group(this, this, 72, inst);
+			case 73: return new LetVariableCS_Group(this, this, 73, inst);
+			case 74: return new NestedExpCS_Group(this, this, 74, inst);
+			case 75: return new SelfExpCS_Group(this, this, 75, inst);
 			default: return null;
 		}	
 	}	
@@ -7542,11 +7543,11 @@ protected class PrimitiveTypeCS_NameAssignment extends AssignmentToken  {
  *
  * CollectionTypeCS:
  * 
- * 	name=CollectionTypeIdentifier ("(" ownedType=TypeExpCS ")" multiplicity=MultiplicityCS?)?;
+ * 	name=CollectionTypeIdentifier ("(" ownedType=TypeExpCS ")")?;
  *
  **/
 
-// name=CollectionTypeIdentifier ("(" ownedType=TypeExpCS ")" multiplicity=MultiplicityCS?)?
+// name=CollectionTypeIdentifier ("(" ownedType=TypeExpCS ")")?
 protected class CollectionTypeCS_Group extends GroupToken {
 	
 	public CollectionTypeCS_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7609,7 +7610,7 @@ protected class CollectionTypeCS_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// ("(" ownedType=TypeExpCS ")" multiplicity=MultiplicityCS?)?
+// ("(" ownedType=TypeExpCS ")")?
 protected class CollectionTypeCS_Group_1 extends GroupToken {
 	
 	public CollectionTypeCS_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7624,8 +7625,7 @@ protected class CollectionTypeCS_Group_1 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new CollectionTypeCS_MultiplicityAssignment_1_3(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new CollectionTypeCS_RightParenthesisKeyword_1_2(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new CollectionTypeCS_RightParenthesisKeyword_1_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -7669,14 +7669,14 @@ protected class CollectionTypeCS_OwnedTypeAssignment_1_1 extends AssignmentToken
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TypeExpCS_Alternatives(this, this, 0, inst);
+			case 0: return new TypeExpCS_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("ownedType",true)) == null) return null;
+		if((value = eObjectConsumer.getConsumable("ownedType",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ownedType");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
@@ -7720,52 +7720,6 @@ protected class CollectionTypeCS_RightParenthesisKeyword_1_2 extends KeywordToke
 		}	
 	}
 
-}
-
-// multiplicity=MultiplicityCS?
-protected class CollectionTypeCS_MultiplicityAssignment_1_3 extends AssignmentToken  {
-	
-	public CollectionTypeCS_MultiplicityAssignment_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getCollectionTypeCSAccess().getMultiplicityAssignment_1_3();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new MultiplicityCS_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("multiplicity",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("multiplicity");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getMultiplicityCSRule().getType().getClassifier())) {
-				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getCollectionTypeCSAccess().getMultiplicityMultiplicityCSParserRuleCall_1_3_0(); 
-				consumed = obj;
-				return param;
-			}
-		}
-		return null;
-	}
-
-    @Override
-	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
-		if(value == inst.getEObject() && !inst.isConsumed()) return null;
-		switch(index) {
-			case 0: return new CollectionTypeCS_RightParenthesisKeyword_1_2(lastRuleCallOrigin, next, actIndex, consumed);
-			default: return null;
-		}	
-	}	
 }
 
 
@@ -8577,7 +8531,7 @@ protected class TuplePartCS_OwnedTypeAssignment_2 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TypeExpCS_Alternatives(this, this, 0, inst);
+			case 0: return new TypeExpCS_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -9878,7 +9832,7 @@ protected class TupleLiteralPartCS_OwnedTypeAssignment_1_1 extends AssignmentTok
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TypeExpCS_Alternatives(this, this, 0, inst);
+			case 0: return new TypeExpCS_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -10602,15 +10556,139 @@ protected class TypeLiteralCS_TupleTypeCSParserRuleCall_2 extends RuleCallToken 
 /************ end Rule TypeLiteralCS ****************/
 
 
+/************ begin Rule TypeLiteralWithMultiplicityCS ****************
+ *
+ * TypeLiteralWithMultiplicityCS returns base::TypedRefCS:
+ * 
+ * 	TypeLiteralCS multiplicity=MultiplicityCS?;
+ *
+ **/
+
+// TypeLiteralCS multiplicity=MultiplicityCS?
+protected class TypeLiteralWithMultiplicityCS_Group extends GroupToken {
+	
+	public TypeLiteralWithMultiplicityCS_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTypeLiteralWithMultiplicityCSAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TypeLiteralWithMultiplicityCS_MultiplicityAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TypeLiteralWithMultiplicityCS_TypeLiteralCSParserRuleCall_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getCollectionTypeCSRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getPrimitiveTypeCSRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getTupleTypeCSRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// TypeLiteralCS
+protected class TypeLiteralWithMultiplicityCS_TypeLiteralCSParserRuleCall_0 extends RuleCallToken {
+	
+	public TypeLiteralWithMultiplicityCS_TypeLiteralCSParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTypeLiteralWithMultiplicityCSAccess().getTypeLiteralCSParserRuleCall_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TypeLiteralCS_Alternatives(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(checkForRecursion(TypeLiteralCS_Alternatives.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// multiplicity=MultiplicityCS?
+protected class TypeLiteralWithMultiplicityCS_MultiplicityAssignment_1 extends AssignmentToken  {
+	
+	public TypeLiteralWithMultiplicityCS_MultiplicityAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTypeLiteralWithMultiplicityCSAccess().getMultiplicityAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new MultiplicityCS_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("multiplicity",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("multiplicity");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getMultiplicityCSRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getTypeLiteralWithMultiplicityCSAccess().getMultiplicityMultiplicityCSParserRuleCall_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new TypeLiteralWithMultiplicityCS_TypeLiteralCSParserRuleCall_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+/************ end Rule TypeLiteralWithMultiplicityCS ****************/
+
+
 /************ begin Rule TypeLiteralExpCS ****************
  *
  * TypeLiteralExpCS:
  * 
- * 	ownedType=TypeLiteralCS;
+ * 	ownedType=TypeLiteralWithMultiplicityCS;
  *
  **/
 
-// ownedType=TypeLiteralCS
+// ownedType=TypeLiteralWithMultiplicityCS
 protected class TypeLiteralExpCS_OwnedTypeAssignment extends AssignmentToken  {
 	
 	public TypeLiteralExpCS_OwnedTypeAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10625,7 +10703,7 @@ protected class TypeLiteralExpCS_OwnedTypeAssignment extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TypeLiteralCS_Alternatives(this, this, 0, inst);
+			case 0: return new TypeLiteralWithMultiplicityCS_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -10638,9 +10716,9 @@ protected class TypeLiteralExpCS_OwnedTypeAssignment extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ownedType");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getTypeLiteralCSRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getTypeLiteralWithMultiplicityCSRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getTypeLiteralExpCSAccess().getOwnedTypeTypeLiteralCSParserRuleCall_0(); 
+				element = grammarAccess.getTypeLiteralExpCSAccess().getOwnedTypeTypeLiteralWithMultiplicityCSParserRuleCall_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -10722,27 +10800,27 @@ protected class TypeNameExpCS_PathNameAssignment extends AssignmentToken  {
  *
  * TypeExpCS returns base::TypedRefCS:
  * 
- * 	TypeNameExpCS | TypeLiteralCS;
+ * 	(TypeNameExpCS | TypeLiteralCS) multiplicity=MultiplicityCS?;
  *
  **/
 
-// TypeNameExpCS | TypeLiteralCS
-protected class TypeExpCS_Alternatives extends AlternativesToken {
-
-	public TypeExpCS_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// (TypeNameExpCS | TypeLiteralCS) multiplicity=MultiplicityCS?
+protected class TypeExpCS_Group extends GroupToken {
+	
+	public TypeExpCS_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.getTypeExpCSAccess().getAlternatives();
+	public Group getGrammarElement() {
+		return grammarAccess.getTypeExpCSAccess().getGroup();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TypeExpCS_TypeNameExpCSParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new TypeExpCS_TypeLiteralCSParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new TypeExpCS_MultiplicityAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TypeExpCS_Alternatives_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -10759,16 +10837,39 @@ protected class TypeExpCS_Alternatives extends AlternativesToken {
 
 }
 
-// TypeNameExpCS
-protected class TypeExpCS_TypeNameExpCSParserRuleCall_0 extends RuleCallToken {
+// TypeNameExpCS | TypeLiteralCS
+protected class TypeExpCS_Alternatives_0 extends AlternativesToken {
+
+	public TypeExpCS_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public TypeExpCS_TypeNameExpCSParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getTypeExpCSAccess().getAlternatives_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TypeExpCS_TypeNameExpCSParserRuleCall_0_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TypeExpCS_TypeLiteralCSParserRuleCall_0_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// TypeNameExpCS
+protected class TypeExpCS_TypeNameExpCSParserRuleCall_0_0 extends RuleCallToken {
+	
+	public TypeExpCS_TypeNameExpCSParserRuleCall_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getTypeExpCSAccess().getTypeNameExpCSParserRuleCall_0();
+		return grammarAccess.getTypeExpCSAccess().getTypeNameExpCSParserRuleCall_0_0();
 	}
 
     @Override
@@ -10796,15 +10897,15 @@ protected class TypeExpCS_TypeNameExpCSParserRuleCall_0 extends RuleCallToken {
 }
 
 // TypeLiteralCS
-protected class TypeExpCS_TypeLiteralCSParserRuleCall_1 extends RuleCallToken {
+protected class TypeExpCS_TypeLiteralCSParserRuleCall_0_1 extends RuleCallToken {
 	
-	public TypeExpCS_TypeLiteralCSParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TypeExpCS_TypeLiteralCSParserRuleCall_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getTypeExpCSAccess().getTypeLiteralCSParserRuleCall_1();
+		return grammarAccess.getTypeExpCSAccess().getTypeLiteralCSParserRuleCall_0_1();
 	}
 
     @Override
@@ -10829,6 +10930,53 @@ protected class TypeExpCS_TypeLiteralCSParserRuleCall_1 extends RuleCallToken {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
 			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+
+// multiplicity=MultiplicityCS?
+protected class TypeExpCS_MultiplicityAssignment_1 extends AssignmentToken  {
+	
+	public TypeExpCS_MultiplicityAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTypeExpCSAccess().getMultiplicityAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new MultiplicityCS_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("multiplicity",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("multiplicity");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getMultiplicityCSRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getTypeExpCSAccess().getMultiplicityMultiplicityCSParserRuleCall_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new TypeExpCS_Alternatives_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
 		}	
 	}	
 }
@@ -14461,7 +14609,7 @@ protected class NavigatingArgCS_OwnedTypeAssignment_1_1 extends AssignmentToken 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TypeExpCS_Alternatives(this, this, 0, inst);
+			case 0: return new TypeExpCS_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -14766,7 +14914,7 @@ protected class NavigatingBarArgCS_OwnedTypeAssignment_2_1 extends AssignmentTok
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TypeExpCS_Alternatives(this, this, 0, inst);
+			case 0: return new TypeExpCS_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -15071,7 +15219,7 @@ protected class NavigatingCommaArgCS_OwnedTypeAssignment_2_1 extends AssignmentT
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TypeExpCS_Alternatives(this, this, 0, inst);
+			case 0: return new TypeExpCS_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -15376,7 +15524,7 @@ protected class NavigatingSemiArgCS_OwnedTypeAssignment_2_1 extends AssignmentTo
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TypeExpCS_Alternatives(this, this, 0, inst);
+			case 0: return new TypeExpCS_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -16234,7 +16382,7 @@ protected class LetVariableCS_OwnedTypeAssignment_1_1 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TypeExpCS_Alternatives(this, this, 0, inst);
+			case 0: return new TypeExpCS_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}

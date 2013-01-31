@@ -18,6 +18,7 @@ package org.eclipse.qvtd.pivot.qvtbase.impl;
 
 import java.util.Collection;
 
+import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -208,7 +209,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.eclipse.ocl.examples.pivot.Package> getNestedPackage() {
+	public List<org.eclipse.ocl.examples.pivot.Package> getNestedPackage() {
 		if (nestedPackage == null) {
 			nestedPackage = new EObjectContainmentWithInverseEList<org.eclipse.ocl.examples.pivot.Package>(org.eclipse.ocl.examples.pivot.Package.class, this, QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE, PivotPackage.PACKAGE__NESTING_PACKAGE);
 		}
@@ -222,7 +223,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 */
 	public org.eclipse.ocl.examples.pivot.Package getNestingPackage() {
 		if (eContainerFeatureID() != QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE) return null;
-		return (org.eclipse.ocl.examples.pivot.Package)eContainer();
+		return (org.eclipse.ocl.examples.pivot.Package)eInternalContainer();
 	}
 
 	/**
@@ -303,7 +304,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.eclipse.ocl.examples.pivot.Package> getImportedPackage() {
+	public List<org.eclipse.ocl.examples.pivot.Package> getImportedPackage() {
 		if (importedPackage == null) {
 			importedPackage = new EObjectResolvingEList<org.eclipse.ocl.examples.pivot.Package>(org.eclipse.ocl.examples.pivot.Package.class, this, QVTbasePackage.TRANSFORMATION__IMPORTED_PACKAGE);
 		}
@@ -315,7 +316,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Type> getOwnedType() {
+	public List<Type> getOwnedType() {
 		if (ownedType == null) {
 			ownedType = new EObjectContainmentWithInverseEList<Type>(Type.class, this, QVTbasePackage.TRANSFORMATION__OWNED_TYPE, PivotPackage.TYPE__PACKAGE);
 		}

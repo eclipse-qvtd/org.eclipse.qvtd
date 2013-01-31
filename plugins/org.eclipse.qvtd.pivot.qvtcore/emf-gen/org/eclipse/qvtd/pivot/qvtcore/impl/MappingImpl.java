@@ -251,7 +251,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 */
 	public Mapping getContext() {
 		if (eContainerFeatureID() != QVTcorePackage.MAPPING__CONTEXT) return null;
-		return (Mapping)eContainer();
+		return (Mapping)eInternalContainer();
 	}
 
 	/**

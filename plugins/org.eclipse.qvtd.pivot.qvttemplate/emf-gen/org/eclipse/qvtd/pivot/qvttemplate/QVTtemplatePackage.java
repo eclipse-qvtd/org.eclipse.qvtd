@@ -145,6 +145,15 @@ public interface QVTtemplatePackage extends EPackage {
 	int TEMPLATE_EXP__TYPE = PivotPackage.LITERAL_EXP__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_EXP__IS_REQUIRED = PivotPackage.LITERAL_EXP__IS_REQUIRED;
+
+	/**
 	 * The feature id for the '<em><b>Binds To</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -243,6 +252,15 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLECTION_TEMPLATE_EXP__TYPE = TEMPLATE_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP__IS_REQUIRED = TEMPLATE_EXP__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Binds To</b></em>' reference.
@@ -370,6 +388,15 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int OBJECT_TEMPLATE_EXP__TYPE = TEMPLATE_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP__IS_REQUIRED = TEMPLATE_EXP__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Binds To</b></em>' reference.

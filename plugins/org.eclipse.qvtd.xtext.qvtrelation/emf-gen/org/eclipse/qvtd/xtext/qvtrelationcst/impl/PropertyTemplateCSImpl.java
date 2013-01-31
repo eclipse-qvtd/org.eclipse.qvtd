@@ -116,7 +116,7 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 */
 	public ObjectTemplateCS getObjectTemplate() {
 		if (eContainerFeatureID() != QVTrelationCSTPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE) return null;
-		return (ObjectTemplateCS)eContainer();
+		return (ObjectTemplateCS)eInternalContainer();
 	}
 
 	/**

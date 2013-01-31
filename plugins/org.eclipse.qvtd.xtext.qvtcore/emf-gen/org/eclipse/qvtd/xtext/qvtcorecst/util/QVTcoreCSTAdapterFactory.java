@@ -18,14 +18,9 @@ package org.eclipse.qvtd.xtext.qvtcorecst.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
-
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
@@ -35,12 +30,25 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
-
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
-
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
-
-import org.eclipse.qvtd.xtext.qvtcorecst.*;
+import org.eclipse.qvtd.xtext.qvtcorecst.AreaCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.PatternCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
+import org.eclipse.qvtd.xtext.qvtcorecst.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.RealizeableVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -183,7 +191,7 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 				return createModelElementCSAdapter();
 			}
 			@Override
-			public Adapter caseNameable(Nameable object) {
+			public Adapter caseNameable(org.eclipse.ocl.examples.domain.elements.Nameable object) {
 				return createNameableAdapter();
 			}
 			@Override
@@ -529,13 +537,13 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.util.Nameable <em>Nameable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.elements.Nameable <em>Nameable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.util.Nameable
+	 * @see org.eclipse.ocl.examples.domain.elements.Nameable
 	 * @generated
 	 */
 	public Adapter createNameableAdapter() {

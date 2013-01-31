@@ -96,7 +96,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 */
 	public Transformation getTransformation() {
 		if (eContainerFeatureID() != QVTbasePackage.TYPED_MODEL__TRANSFORMATION) return null;
-		return (Transformation)eContainer();
+		return (Transformation)eInternalContainer();
 	}
 
 	/**

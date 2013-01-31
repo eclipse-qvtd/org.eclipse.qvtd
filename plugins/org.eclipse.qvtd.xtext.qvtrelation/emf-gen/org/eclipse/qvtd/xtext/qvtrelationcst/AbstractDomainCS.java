@@ -16,7 +16,6 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelationcst;
 
-import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 
 /**
@@ -29,5 +28,5 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
  * @model abstract="true" superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS org.eclipse.ocl.examples.pivot.Nameable"
  * @generated
  */
-public interface AbstractDomainCS extends ModelElementCS, Nameable {
+public interface AbstractDomainCS extends ModelElementCS, org.eclipse.ocl.examples.domain.elements.Nameable {
 } // AbstractDomainCS

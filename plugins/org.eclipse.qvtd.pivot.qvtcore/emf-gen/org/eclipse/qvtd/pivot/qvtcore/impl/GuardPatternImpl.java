@@ -74,7 +74,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	@Override
 	public Area getArea() {
 		if (eContainerFeatureID() != QVTcorePackage.GUARD_PATTERN__AREA) return null;
-		return (Area)eContainer();
+		return (Area)eInternalContainer();
 	}
 
 	/**
