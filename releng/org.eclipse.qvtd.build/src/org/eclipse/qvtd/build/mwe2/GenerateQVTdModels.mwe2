@@ -62,7 +62,7 @@ Workflow {
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel"
     }
-    component = QVTVisitorCodeGenerator { resourceSet = resourceSet
+    component = DerivedPivotVisitorCodeGenerator { resourceSet = resourceSet
     	ecoreFile = "/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore"
     	javaFolder = "/../plugins/org.eclipse.qvtd.pivot.qvtbase/emf-gen"
     	javaPackageName = "org.eclipse.qvtd.pivot.qvtbase"
@@ -71,7 +71,7 @@ Workflow {
     	visitorBasePackageName = "org.eclipse.ocl.examples.pivot.util"
     	visitorBaseClassName = "Visitor"
     }
-    component = QVTVisitorCodeGenerator { resourceSet = resourceSet
+    component = DerivedPivotVisitorCodeGenerator { resourceSet = resourceSet
     	ecoreFile = "/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore"
     	javaFolder = "/../plugins/org.eclipse.qvtd.pivot.qvtcore/emf-gen"
     	javaPackageName = "org.eclipse.qvtd.pivot.qvtcore"
@@ -80,7 +80,7 @@ Workflow {
     	visitorBasePackageName = "org.eclipse.qvtd.pivot.qvtbase.util"
     	visitorBaseClassName = "QVTbaseVisitor"
     }
-    component = QVTVisitorCodeGenerator { resourceSet = resourceSet
+    component = DerivedPivotVisitorCodeGenerator { resourceSet = resourceSet
     	ecoreFile = "/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore"
     	javaFolder = "/../plugins/org.eclipse.qvtd.pivot.qvttemplate/emf-gen"
     	javaPackageName = "org.eclipse.qvtd.pivot.qvttemplate"
@@ -89,7 +89,7 @@ Workflow {
     	visitorBasePackageName = "org.eclipse.qvtd.pivot.qvtbase.util"
     	visitorBaseClassName = "QVTbaseVisitor"
     }
-    component = QVTVisitorCodeGenerator { resourceSet = resourceSet
+    component = DerivedPivotVisitorCodeGenerator { resourceSet = resourceSet
     	ecoreFile = "/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore"
     	javaFolder = "/../plugins/org.eclipse.qvtd.pivot.qvtrelation/emf-gen"
     	javaPackageName = "org.eclipse.qvtd.pivot.qvtrelation"
