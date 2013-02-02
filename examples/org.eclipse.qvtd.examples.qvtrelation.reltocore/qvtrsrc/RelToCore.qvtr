@@ -10,10 +10,17 @@
 --	   E.D.Willink - contributions to drafts of the above
 --	   E.D.Willink - adaptation to comply with QVT specification
 --------------------------------------------------------------------------------
+import emof : 'platform:/resource/org.eclipse.qvt/model/ecore/EMOF.ecore'::EMOF;
+import essentialocl : 'platform:/resource/org.eclipse.qvt/model/ecore/EssentialOCL.ecore'::EssentialOCL;
+import qvtbase : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTBase.ecore'::QVTBase;
+import qvttemplate : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTTemplate.ecore'::QVTTemplate;
+import qvtrelation : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTRelation.ecore'::QVTRelation;
+import qvtcore : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTCore.ecore'::QVTCore;
+
 transformation relToCore(relations:{qvtrelation,qvttemplate,qvtbase,essentialocl,emof}, core:{qvtcore,qvtbase,essentialocl,emof})
 {
 
-key qvtcore::Mapping{name, _'transformation'};
+key qvtcore::Mapping{name, transformation};
 key qvtcore::GuardPattern{area};
 key qvtcore::BottomPattern{area};
 key essentialocl::Variable{name, type};
@@ -21,7 +28,7 @@ key emof::Type{name};
 key emof::Class{name};
 key emof::Property{name, class};
 key qvtcore::CoreDomain{name, rule};
-key qvtbase::TypedModel{name, usedPackage, _'transformation'};
+key qvtbase::TypedModel{name, usedPackage, transformation};
 key emof::Package{name};
 key qvtbase::Transformation{name};
 key emof::Operation{name};
@@ -29,7 +36,7 @@ key qvtbase::Predicate{pattern, conditionExpression};
 
 query getSharedDomainVars(r:qvtrelation::Relation):Set(essentialocl::Variable)
 {
-   r._'domain'->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
+   r.domain->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
       if (vars->isEmpty())
       then
          vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo)
@@ -44,7 +51,7 @@ query getWhenVars(r:qvtrelation::Relation):Set(essentialocl::Variable)
    let
       vs:Set(essentialocl::Variable) = Set{}
    in
-   r._'domain'->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
+   r.domain->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
       if (vars->isEmpty())
       then
          vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo)
@@ -159,7 +166,7 @@ top relation RelationToTraceClass
 
    domain relations r:Relation {
       name = rn,
-      _'domain' = rd:RelationDomain {
+      domain = rd:RelationDomain {
          pattern = rdp:DomainPattern {
             templateExpression = t:ObjectTemplateExp {
                bindsTo = tv:Variable {
@@ -267,14 +274,14 @@ top relation TopLevelRelationToMappingForChecking
    mt: qvtbase::Transformation;
 
    domain relations r:Relation {
-      _'transformation' = rt,
+      transformation = rt,
       isTopLevel = true,
       name = rn
    } {
-      not r._'domain'->exists(d| d.isEnforceable = true)
+      not r.domain->exists(d| d.isEnforceable = true)
    };
    enforce domain core m:Mapping {
-      _'transformation' = mt,
+      transformation = mt,
       name = rn,
       guardPattern = mg:GuardPattern {
          area = m
@@ -289,10 +296,10 @@ top relation TopLevelRelationToMappingForChecking
       RelationalTransformationToMappingTransformation(rt, mt);
    }
    where {
-      allDomainVars = r._'domain'->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
+      allDomainVars = r.domain->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
                       acc->including(md.oclAsType(qvtrelation::RelationDomain))).pattern.bindsTo->asSet();
-      whenVars = r._'when'.bindsTo;
-      whereVars = r._'where'.bindsTo;
+      whenVars = r.when.bindsTo;
+      whereVars = r.where.bindsTo;
 
       sharedDomainVars = getSharedDomainVars(r);
       unsharedWhereVars =
@@ -316,7 +323,7 @@ top relation TopLevelRelationToMappingForChecking
 relation RWherePatternToMPattern
 {
    domain relations r:Relation{
-      _'where' = wherep:Pattern { }
+      where = wherep:Pattern { }
    };
    enforce domain core mp:Pattern {};
    where {
@@ -414,17 +421,17 @@ top relation TopLevelRelationToMappingForEnforcement
    mt: qvtbase::Transformation;
     
    domain relations r:Relation {
-      _'transformation' = rt,
+      transformation = rt,
       isTopLevel = true,
       name = rn,
-      _'domain' = rds:Set(RelationDomain) {
+      domain = rds:Set(RelationDomain) {
          rd:RelationDomain {
             isEnforceable = true,
             name = dn,
             typedModel = dir:TypedModel {
                 name = tmn, 
                 usedPackage = up:Package{},
-                _'transformation' = rt
+                transformation = rt
             },
             pattern = dp:DomainPattern {
                bindsTo = domainVars:Set(Variable) {},
@@ -436,7 +443,7 @@ top relation TopLevelRelationToMappingForEnforcement
       }
    };
    enforce domain core m:Mapping {
-      _'transformation' = mt,
+      transformation = mt,
       name = rn+'_'+dn,
       guardPattern = mg:GuardPattern {
          area = m
@@ -446,13 +453,13 @@ top relation TopLevelRelationToMappingForEnforcement
             tcv:RealizedVariable {} ++ mbVars
          }
       },
-      _'domain' = md:CoreDomain {
+      domain = md:CoreDomain {
          name = dn,
          isEnforceable = true,
          typedModel = mdir:TypedModel {
             name = tmn, 
             usedPackage = up,
-            _'transformation' = mt
+            transformation = mt
          },
          guardPattern = dg:GuardPattern {
             area = md
@@ -466,15 +473,15 @@ top relation TopLevelRelationToMappingForEnforcement
       RelationalTransformationToMappingTransformation(rt, mt);
    }
    where {
-      allDomainVars = r._'domain'->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
+      allDomainVars = r.domain->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
                       acc->including(md.oclAsType(qvtrelation::RelationDomain))).pattern.bindsTo->asSet();
-      whenVars = r._'when'.bindsTo;
-      whereVars = r._'where'.bindsTo;
+      whenVars = r.when.bindsTo;
+      whereVars = r.where.bindsTo;
 
       -- Exclude where clause relation calls.
       -- The predicate corresponding to a where clause relation call is included not in this
       -- mapping but in the one corresponding to the invoked relation (refer to rule 2.6.1)
-      rpSet = r._'where'.predicate->reject(p |
+      rpSet = r.where.predicate->reject(p |
                                  p.conditionExpression.oclIsTypeOf(qvtrelation::RelationCallExp));
 
       oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
@@ -541,21 +548,21 @@ top relation InvokedRelationToMappingForChecking
    whereVars: Set(essentialocl::Variable);
     
    domain relations r:Relation {
-      _'transformation' = rt,
+      transformation = rt,
       isTopLevel = false,
       name = rn,
-      relationCallExp = ri:RelationCallExp {
-         predicate = p:Predicate {
+      RelationCallExp = ri:RelationCallExp {
+         Predicate = p:Predicate {
             pattern = pt:Pattern {
                whereOwner = ir:Relation {name = irn}
             }
          }
       }
    } {
-      not r._'domain'->exists(d| d.isEnforceable = true)
+      not r.domain->exists(d| d.isEnforceable = true)
    };
    enforce domain core m:Mapping {
-      _'transformation' = mt,
+      transformation = mt,
       name = rn+'_'+irn,
       guardPattern = mg:GuardPattern {
          area = m
@@ -570,10 +577,10 @@ top relation InvokedRelationToMappingForChecking
       RelationalTransformationToMappingTransformation(rt, mt);
    }
    where {
-      allDomainVars = r._'domain'->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
+      allDomainVars = r.domain->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
                       acc->including(md.oclAsType(qvtrelation::RelationDomain))).pattern.bindsTo->asSet();
-      whenVars = r._'when'.bindsTo;
-      whereVars = r._'where'.bindsTo;
+      whenVars = r.when.bindsTo;
+      whereVars = r.where.bindsTo;
       sharedDomainVars = getSharedDomainVars(r);
       unsharedWhereVars =
          (whereVars - whenVars - allDomainVars)->union(sharedDomainVars);
@@ -632,24 +639,24 @@ top relation InvokedRelationToMappingForEnforcement
    mt: qvtbase::Transformation;
     
    domain relations r:Relation {
-      _'transformation' = rt,
+      transformation = rt,
       isTopLevel = false,
       name = rn,
-      relationCallExp = ri:RelationCallExp {
-         predicate = p:Predicate {
+      RelationCallExp = ri:RelationCallExp {
+         Predicate = p:Predicate {
             pattern = pt:Pattern {
                whereOwner = ir:Relation {name = irn}
             }
          }
       },
-      _'domain' = rds:Set(RelationDomain) {
+      domain = rds:Set(RelationDomain) {
          rd:RelationDomain {
             isEnforceable = true,
             name = dn,
             typedModel = dir:TypedModel {
                name = tmn, 
                usedPackage = up:Package{},
-               _'transformation' = rt
+               transformation = rt
             },
             pattern = dp:DomainPattern {
                bindsTo = domainVars:Set(Variable) {},
@@ -661,7 +668,7 @@ top relation InvokedRelationToMappingForEnforcement
       }
    };
    enforce domain core m:Mapping {
-      _'transformation' = mt,
+      transformation = mt,
       name = rn+'_'+irn+'_'+dn,
       guardPattern = mg:GuardPattern {
          area = m
@@ -671,13 +678,13 @@ top relation InvokedRelationToMappingForEnforcement
             tcv:RealizedVariable {} ++ mbVars
          }
       },
-      _'domain' = md:CoreDomain {
+      domain = md:CoreDomain {
          name = dn,
          isEnforceable = true,
          typedModel = mdir:TypedModel {
             name = tmn, 
             usedPackage = up,
-            _'transformation' = mt
+            transformation = mt
          },
          guardPattern = dg:GuardPattern {
             bindsTo = dgVars:Set(Variable) {}
@@ -691,15 +698,15 @@ top relation InvokedRelationToMappingForEnforcement
       RelationalTransformationToMappingTransformation(rt, mt);
    }
    where {
-      allDomainVars = r._'domain'->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
+      allDomainVars = r.domain->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
                       acc->including(md.oclAsType(qvtrelation::RelationDomain))).pattern.bindsTo->asSet();
-      whenVars = r._'when'.bindsTo;
-      whereVars = r._'where'.bindsTo;
+      whenVars = r.when.bindsTo;
+      whereVars = r.where.bindsTo;
 
       -- Exclude where clause relation calls.
       -- The predicate corresponding to a where clause relation call is included not in this
       -- mapping but in the one corresponding to the invoked relation (refer to rule 2.6.1)
-      rpSet = r._'where'.predicate->reject(p |
+      rpSet = r.where.predicate->reject(p |
                                  p.conditionExpression.oclIsTypeOf(qvtrelation::RelationCallExp));
 
       oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
@@ -753,13 +760,13 @@ relation RDomainToMDomainForChecking
    mt: qvtbase::Transformation;
 
    domain relations r:Relation {
-      _'domain' = rd:RelationDomain {
+      domain = rd:RelationDomain {
          name = dn,
          isCheckable = true,
          typedModel = dir:TypedModel {
             name = tmn, 
             usedPackage = up:Package{},
-            _'transformation' = rt
+            transformation = rt
          },
          pattern = dp:DomainPattern {
             bindsTo = domainVars:Set(Variable){},
@@ -771,13 +778,13 @@ relation RDomainToMDomainForChecking
       bottomPattern = mb:BottomPattern {
          area = m
       },
-      _'domain' = md:CoreDomain {
+      domain = md:CoreDomain {
          name = dn,
          isCheckable = true,
          typedModel = mdir:TypedModel {
             name = tmn, 
             usedPackage = up,
-            _'transformation' = mt
+            transformation = mt
          },
          guardPattern = dg:GuardPattern {
             area = md
@@ -791,7 +798,7 @@ relation RDomainToMDomainForChecking
       RelationalTransformationToMappingTransformation(rt, mt);
    }
    where {
-      whenVars = r._'when'.bindsTo;
+      whenVars = r.when.bindsTo;
       sharedDomainVars = getSharedDomainVars(r);
       domainVarsSharedWithWhen = domainVars->intersection(whenVars);
       domainBottomUnSharedVars = domainVars - whenVars - sharedDomainVars;
@@ -827,13 +834,13 @@ relation IROppositeDomainsToMappingForEnforcement
 
    domain relations oppDomainSeq:Sequence(Element) {
       r:Relation {
-         _'domain' = rds:Set(RelationDomain) {
+         domain = rds:Set(RelationDomain) {
             ord:RelationDomain {      -- opposite domain
                name = dn,
                typedModel = dir:TypedModel {
                   name = tmn, 
                   usedPackage = up,
-                  _'transformation' = rt
+                  transformation = rt
                },
                isCheckable = c,
                pattern = dp:DomainPattern {
@@ -852,12 +859,12 @@ relation IROppositeDomainsToMappingForEnforcement
       ord <> rd
    };
    enforce domain core m:Mapping {
-      _'domain' = cd:CoreDomain {
+      domain = cd:CoreDomain {
          name = dn,
          typedModel = mdir:TypedModel {
             name = tmn, 
             usedPackage = up,
-            _'transformation' = mt
+            transformation = mt
          },
          isCheckable = c,
          isEnforceable = false,
@@ -876,7 +883,7 @@ relation IROppositeDomainsToMappingForEnforcement
       RelationalTransformationToMappingTransformation(rt, mt);
    }
    where {
-      whenVars = r._'when'.bindsTo;
+      whenVars = r.when.bindsTo;
       domainTopVars = domainVars->intersection(whenVars)->including(tev);
       sharedDomainVars = getSharedDomainVars(r);
       domainBottomUnSharedVars = (domainVars - whenVars - sharedDomainVars)->excluding(tev);
@@ -911,13 +918,13 @@ relation TROppositeDomainsToMappingForEnforcement
 
    domain relations oppDomainSeq:Sequence(Element) {
       r:Relation {
-         _'domain' = rds:Set(RelationDomain) {
+         domain = rds:Set(RelationDomain) {
             ord:RelationDomain {
                name = dn,
                typedModel = dir:TypedModel {
                    name = tmn, 
                    usedPackage = up,
-                   _'transformation' = rt
+                   transformation = rt
                },
                isCheckable = c,
                pattern = dp:DomainPattern {
@@ -933,16 +940,17 @@ relation TROppositeDomainsToMappingForEnforcement
       ord <> rd
    };
    enforce domain core m:Mapping {
-      _'domain' = cd:CoreDomain {
+      domain = cd:CoreDomain {
          name = dn,
          typedModel = mdir:TypedModel {
             name = tmn, 
             usedPackage = up,
-            _'transformation' = mt
+            transformation = mt
          },
          isCheckable = c,
          isEnforceable = false,
          guardPattern = dg:GuardPattern {
+            bindsTo = dgVars:Set(Variable) {},
             area = cd
          },
          bottomPattern = db:BottomPattern {
@@ -954,7 +962,7 @@ relation TROppositeDomainsToMappingForEnforcement
       }
    };
    where {
-      whenVars = r._'when'.bindsTo;
+      whenVars = r.when.bindsTo;
       domainTopVars = domainVars->intersection(whenVars);
       sharedDomainVars = getSharedDomainVars(r);
       domainBottomUnSharedVars = domainVars - whenVars - sharedDomainVars;
@@ -976,13 +984,13 @@ relation RWhenPatternToMGuardPattern
    unsharedWhenVars: Set(essentialocl::Variable);
 
    domain relations r:Relation{
-      _'when' = whenp:Pattern {
+      when = whenp:Pattern {
          bindsTo = whenVars:Set(Variable) {}
       }
    };
    enforce domain core mg:GuardPattern {};
    where {
-      allDomainVars = r._'domain'->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
+      allDomainVars = r.domain->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
          acc->including(md.oclAsType(qvtrelation::RelationDomain))).pattern.bindsTo->asSet();
       unsharedWhenVars = whenVars - allDomainVars;
 
@@ -1086,7 +1094,7 @@ relation RWhenRelCallToMGuard
       predicate = pd:Predicate {
          conditionExpression = e:RelationCallExp {
             referredRelation = r:Relation {
-               _'domain' = dseq:Sequence(RelationDomain) {}
+               domain = dseq:Sequence(RelationDomain) {}
             },
             argument = aseq:Sequence(VariableExp) {}
          }
@@ -1151,7 +1159,7 @@ relation RInvokerToMGuard
          argument = aseq:Sequence(VariableExp) {}
       },
       r:Relation {   -- invoked relation
-         _'domain' = dseq:Sequence(RelationDomain) {}
+         domain = dseq:Sequence(RelationDomain) {}
       }
       ++ _
    };
@@ -1379,7 +1387,7 @@ relation RDomainToMDBottomForEnforcementOfIdentityProp
             value = e:OclExpression {}
          }
       } {
-         c._'key'.part->includes(pp)
+         c.Key.part->includes(pp)
       }
       ++ _
    };
@@ -1417,7 +1425,7 @@ relation RDomainToMDBottomForEnforcementOfIdentityPropObject
             value = e:ObjectTemplateExp {bindsTo = tv:Variable{}}
          }
       } {
-         c._'key'.part->includes(pp)
+         c.Key.part->includes(pp)
       }
       ++ _
    };
@@ -1565,7 +1573,7 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
 
    domain relations rtdSeq:Sequence(Element) {
       r:Relation{
-         _'transformation' = rt:RelationalTransformation{}
+         transformation = rt:RelationalTransformation{}
       },
       te:ObjectTemplateExp {
          bindsTo = v:Variable {type = c:Class {}},
@@ -1574,7 +1582,7 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
             value = e:OclExpression {}
          }
       } {
-         (not c._'key'.part->includes(pp)) and (not e.oclIsKindOf(TemplateExp))
+         (not c.Key.part->includes(pp)) and (not e.oclIsKindOf(TemplateExp))
       },
       rd:RelationDomain {
          pattern = rdp:DomainPattern {
@@ -1586,7 +1594,7 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
    enforce domain core m:Mapping {
       local = cm:Mapping {
          name = m.name+'_forNonIdentityProp',
-         _'transformation' = mt:Transformation{},
+         transformation = mt:Transformation{},
          bottomPattern = bp:BottomPattern {
             assignment = a:PropertyAssignment {
                slotExpression = ve:VariableExp{referredVariable = mv},
@@ -1618,7 +1626,7 @@ relation RDomainToMComposedMappingGuard
 
    domain relations rtdSeq:Sequence(Element) {
       r:Relation{
-         _'transformation' = rt:RelationalTransformation{}
+         transformation = rt:RelationalTransformation{}
       },
       te:ObjectTemplateExp {},
       rd:RelationDomain {
@@ -1626,7 +1634,7 @@ relation RDomainToMComposedMappingGuard
          typedModel = dir:TypedModel {
              name = tmn, 
              usedPackage = up:Package{},
-             _'transformation' = rt
+             transformation = rt
          },
          pattern = rdp:DomainPattern {
             templateExpression = rdt:ObjectTemplateExp {}
@@ -1653,12 +1661,12 @@ relation RDomainToMComposedMappingGuard
             }
          }
       },
-      _'domain' = cd:CoreDomain {
+      domain = cd:CoreDomain {
          name = dn,
          typedModel = mdir:TypedModel {
             name = tmn, 
             usedPackage = up,
-            _'transformation' = mt
+            transformation = mt
          },
          guardPattern = cmdg:GuardPattern {
             bindsTo = mv
@@ -1687,14 +1695,14 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropObject
    domain relations rdtVarsSeq:Sequence(Set(Element)) {
       rdtSet:Set(Element) {
          r:Relation{
-            _'transformation' = rt:RelationalTransformation{}
+            transformation = rt:RelationalTransformation{}
          },
          rd:RelationDomain {
             name = dn,
             typedModel = dir:TypedModel {
                 name = tmn, 
                 usedPackage = up:Package{},
-                _'transformation' = rt
+                transformation = rt
             }
          },
          te:ObjectTemplateExp {
@@ -1704,7 +1712,7 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropObject
                value = pte:ObjectTemplateExp {bindsTo = pv:Variable {}}
             }
          } {
-            not c._'key'.part->includes(pp)
+            not c.Key.part->includes(pp)
          }
          ++ _
       }
@@ -1713,14 +1721,14 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropObject
    enforce domain core m:Mapping {
       local = cm:Mapping {
          name = m.name+'_for_'+pv.name,
-         _'transformation' = mt:Transformation{},
-         _'domain' = cd:CoreDomain {
+         transformation = mt:Transformation{},
+         domain = cd:CoreDomain {
             name = dn,
             isEnforceable = true,
             typedModel = mdir:TypedModel {
                name = tmn, 
                usedPackage = up,
-               _'transformation' = mt
+               transformation = mt
             },
             bottomPattern = cmdb:BottomPattern {
                realizedVariable = mpv:RealizedVariable {},
@@ -1892,7 +1900,7 @@ relation RDomainVarsToTraceClassProps
    domain relations rd:RelationDomain {
       rule = r:Relation{},
       pattern = dp:DomainPattern {
-         bindsTo = domainVars:Set(Variable) {dv:Variable {templateExp = te: TemplateExp{}}++_}
+         bindsTo = domainVars:Set(Variable) {dv:Variable {TemplateExp = te: TemplateExp{}}++_}
       }
    };
    enforce domain core mb:BottomPattern {
@@ -1918,7 +1926,7 @@ relation ROppositeDomainVarsToTraceClassProps
          r:Relation {},
          rd:RelationDomain {} ++ _
       },
-      domainVars:Set(Variable) {dv:Variable{templateExp = te:TemplateExp{}} ++ _}
+      domainVars:Set(Variable) {dv:Variable{TemplateExp = te:TemplateExp{}} ++ _}
       ++ _
    };
    enforce domain core mb:BottomPattern {
@@ -1976,7 +1984,7 @@ relation RRelImplToMBottomEnforcementOperation
 relation RRelDomainsToMOpCallArg
 {
    domain relations r:Relation {
-      _'domain' = rd:RelationDomain {
+      domain = rd:RelationDomain {
          pattern = p:DomainPattern{bindsTo = rv:Variable{}}
       }
    };
@@ -2029,7 +2037,7 @@ relation RelationDomainToTraceClassVar
 relation RExpToMExp
 {
    domain relations re:OclExpression{};
-   enforce domain core me:OclExpression{} implementedby CopyOclExpession(re, me);
+   enforce domain core me:OclExpression{} /*implementedby CopyOclExpession(re, me)*/;
 }
 
 }

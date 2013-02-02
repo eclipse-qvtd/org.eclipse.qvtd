@@ -9,6 +9,9 @@
  *     TCS - initial implementation for ModelMorf
  *     E.D.Willink - alignment with evolved specification
  *******************************************************************************/
+import hstmMM_p : 'hstmMM.emof'::hstmMM_p; 
+import stmMM_p : 'stmMM.emof'::stmMM_p; 
+
 transformation HstmToStm(hstm:hstmMM_p, stm:stmMM_p)
 {
 	key hstmMM_p::State {name};
@@ -30,7 +33,7 @@ transformation HstmToStm(hstm:hstmMM_p, stm:stmMM_p)
 		endif
 	}
 
-	top relation LStateToState   		// map each Class to Table
+	top relation LStateToState   		-- map each Class to Table
 	{
 		n : String;
 
@@ -45,7 +48,7 @@ transformation HstmToStm(hstm:hstmMM_p, stm:stmMM_p)
 		};
 	}   
 
-	top relation CStateToState   		// map each Class to Table
+	top relation CStateToState   		-- map each Class to Table
 	{
 		tn : String;
 		ms1: hstmMM_p::State;

@@ -9,6 +9,9 @@
  *     TCS - initial implementation for ModelMorf
  *     E.D.Willink - alignment with evolved specification
  *******************************************************************************/
+import SeqMM : 'SeqMM.emof'::SeqMM_CT; 
+import StmcMM : 'StmcMM.emof'::StmcMM; 
+
 transformation SeqToStmc(seqDgm:SeqMM, stmc:StmcMM)
 {
 	top relation LifeLineToStateMachine

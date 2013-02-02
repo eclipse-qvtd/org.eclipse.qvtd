@@ -9,6 +9,8 @@
  *     TCS - initial implementation for ModelMorf
  *     E.D.Willink - alignment with evolved specification
  *******************************************************************************/
+import UMLMM : 'ClassMM_IN.emof'::ClassMM; 
+ 
 transformation AbstractToConcrete(uml1:UMLMM, uml2:UMLMM)
 {
 	key UMLMM::Type {name};

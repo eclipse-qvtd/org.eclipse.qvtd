@@ -9,6 +9,8 @@
  *     TCS - initial implementation for ModelMorf
  *     E.D.Willink - alignment with evolved specification
  *******************************************************************************/
+import umlMM : 'umlMM.emof'::umlMM; 
+import rdbmsMM : 'rdbmsMM.emof'::rdbmsMM; 
 
 transformation UmlToRdbms_2(uml:umlMM, rdbms:rdbmsMM)
 {
