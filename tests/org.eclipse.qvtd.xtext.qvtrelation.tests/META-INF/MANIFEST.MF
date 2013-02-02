@@ -8,4 +8,6 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.qvtd.xtext.qvtbase.tests,
  org.eclipse.qvtd.xtext.qvtrelation,
- org.eclipse.qvt;bundle-version="0.8.0"
+ org.eclipse.qvt,
+ org.eclipse.qvtd.examples.qvtrelation.modelmorf,
+ org.eclipse.qvtd.examples.qvtrelation.reltocore

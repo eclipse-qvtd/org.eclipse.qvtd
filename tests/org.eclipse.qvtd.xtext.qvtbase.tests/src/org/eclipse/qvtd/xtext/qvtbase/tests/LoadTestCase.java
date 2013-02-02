@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
@@ -40,43 +41,47 @@ public class LoadTestCase extends XtextTestCase
 
 	public Resource doLoad_Concrete(String stem, String extension) throws IOException {
 		String inputName = stem + "." + extension;
+		URI inputURI = getProjectFileURI(inputName);
+		return doLoad_Concrete(inputURI);
+	}
+
+	protected Resource doLoad_Concrete(@NonNull URI inputURI) throws IOException {
+		String inputName = inputURI.lastSegment();
 		String cstName = inputName + ".xmi";
 		String pivotName = inputName + ".pivot";
-//		String savedName = stem + ".saved." + extension;
-		URI inputURI = getProjectFileURI(inputName);
 		URI cstURI = getProjectFileURI(cstName);
 		URI pivotURI = getProjectFileURI(pivotName);
-//		URI savedURI = getProjectFileURI(savedName);
-//		MetaModelManager metaModelManager = new MetaModelManager();
-//		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
-		CS2PivotResourceAdapter adapter = null;
-		try {
-			BaseCSResource xtextResource = (BaseCSResource) resourceSet.getResource(inputURI, true);
-			assertNoResourceErrors("Load failed", xtextResource);
-			adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
-			Resource pivotResource = adapter.getPivotResource(xtextResource);
-//			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
-	//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
-	//FIXME		assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
-	//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
-//			xtextResource.setURI(savedURI);
-//			xtextResource.save(null);
-//			xtextResource.setURI(inputURI);
-//			assertNoResourceErrors("Save failed", xtextResource);
-			saveAsXMI(xtextResource, cstURI);
-			pivotResource.setURI(pivotURI);
-//			assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
-			Map<String, Object> options = new HashMap<String, Object>();
-			options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-		    pivotResource.save(options);
-			return pivotResource;
-		}
-		finally {
-			if (adapter != null) {
-				adapter.dispose();
-				adapter.getMetaModelManager().dispose();
-			}
-		}
+		//		URI savedURI = getProjectFileURI(savedName);
+		//		MetaModelManager metaModelManager = new MetaModelManager();
+		//		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
+				CS2PivotResourceAdapter adapter = null;
+				try {
+					BaseCSResource xtextResource = (BaseCSResource) resourceSet.getResource(inputURI, true);
+					assertNoResourceErrors("Load failed", xtextResource);
+					adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
+					Resource pivotResource = adapter.getPivotResource(xtextResource);
+		//			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
+			//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
+					assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
+			//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
+		//			xtextResource.setURI(savedURI);
+		//			xtextResource.save(null);
+		//			xtextResource.setURI(inputURI);
+		//			assertNoResourceErrors("Save failed", xtextResource);
+					saveAsXMI(xtextResource, cstURI);
+					pivotResource.setURI(pivotURI);
+					assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
+					Map<String, Object> options = new HashMap<String, Object>();
+					options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+				    pivotResource.save(options);
+					return pivotResource;
+				}
+				finally {
+					if (adapter != null) {
+						adapter.dispose();
+						adapter.getMetaModelManager().dispose();
+					}
+				}
 	}
 
 	protected void saveAsXMI(Resource resource, URI xmiURI) throws IOException {

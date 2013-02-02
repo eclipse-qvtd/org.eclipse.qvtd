@@ -4,7 +4,7 @@
 	</target>
 
 	<patternset id="qvtc.excludes" excludes="qvtcbin/**"/>
-	<patternset id="qvtr.excludes" excludes="qvtrbin/**"/>
+	<patternset id="qvtr.excludes" excludes="bin/** qvtrbin/** src/** .settings/** META-INF/**"/>
 	
 	<target name="zip.examples" depends="init">
 		<!-- ../../examples is the prefcerred project layout
