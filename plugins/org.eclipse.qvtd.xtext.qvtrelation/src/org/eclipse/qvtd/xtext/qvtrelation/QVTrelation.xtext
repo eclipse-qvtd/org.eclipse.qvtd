@@ -39,7 +39,7 @@ CollectionTemplateCS: name=UnrestrictedName? ':' type=CollectionTypeCS
 
 DefaultValueCS: propertyId=[pivot::Variable|UnrestrictedName] '=' initialiser=ExpCS ';';
 
-DomainCS: (checkonly?='checkonly' | enforce?='enforce')? 'domain' modelId=[qvtbase::TypedModel|UnrestrictedName] pattern=DomainPatternCS
+DomainCS: (checkonly?='checkonly' | enforce?='enforce' | 'replace')? 'domain' modelId=[qvtbase::TypedModel|UnrestrictedName] pattern=DomainPatternCS
              ('implementedby' implementedBy=ExpCS)?
              ('default_values' '{' (defaultValues+=DefaultValueCS)+ '}')?
              ';';

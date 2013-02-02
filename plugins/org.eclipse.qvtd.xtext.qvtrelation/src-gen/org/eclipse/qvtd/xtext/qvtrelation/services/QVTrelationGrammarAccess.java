@@ -230,6 +230,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCheckonlyCheckonlyKeyword_0_0_0 = (Keyword)cCheckonlyAssignment_0_0.eContents().get(0);
 		private final Assignment cEnforceAssignment_0_1 = (Assignment)cAlternatives_0.eContents().get(1);
 		private final Keyword cEnforceEnforceKeyword_0_1_0 = (Keyword)cEnforceAssignment_0_1.eContents().get(0);
+		private final Keyword cReplaceKeyword_0_2 = (Keyword)cAlternatives_0.eContents().get(2);
 		private final Keyword cDomainKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cModelIdAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final CrossReference cModelIdTypedModelCrossReference_2_0 = (CrossReference)cModelIdAssignment_2.eContents().get(0);
@@ -250,21 +251,21 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//DomainCS:
 		//
-		//	(checkonly?="checkonly" | enforce?="enforce")? "domain" modelId=[qvtbase::TypedModel|UnrestrictedName]
+		//	(checkonly?="checkonly" | enforce?="enforce" | "replace")? "domain" modelId=[qvtbase::TypedModel|UnrestrictedName]
 		//
 		//	pattern=DomainPatternCS ("implementedby" implementedBy=ExpCS)? ("default_values" "{" defaultValues+=DefaultValueCS+
 		//
 		//	"}")? ";";
 		public ParserRule getRule() { return rule; }
 
-		//(checkonly?="checkonly" | enforce?="enforce")? "domain" modelId=[qvtbase::TypedModel|UnrestrictedName]
+		//(checkonly?="checkonly" | enforce?="enforce" | "replace")? "domain" modelId=[qvtbase::TypedModel|UnrestrictedName]
 		//
 		//pattern=DomainPatternCS ("implementedby" implementedBy=ExpCS)? ("default_values" "{" defaultValues+=DefaultValueCS+
 		//
 		//"}")? ";"
 		public Group getGroup() { return cGroup; }
 
-		//(checkonly?="checkonly" | enforce?="enforce")?
+		//(checkonly?="checkonly" | enforce?="enforce" | "replace")?
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//checkonly?="checkonly"
@@ -278,6 +279,9 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"enforce"
 		public Keyword getEnforceEnforceKeyword_0_1_0() { return cEnforceEnforceKeyword_0_1_0; }
+
+		//"replace"
+		public Keyword getReplaceKeyword_0_2() { return cReplaceKeyword_0_2; }
 
 		//"domain"
 		public Keyword getDomainKeyword_1() { return cDomainKeyword_1; }
@@ -1711,7 +1715,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 	//DomainCS:
 	//
-	//	(checkonly?="checkonly" | enforce?="enforce")? "domain" modelId=[qvtbase::TypedModel|UnrestrictedName]
+	//	(checkonly?="checkonly" | enforce?="enforce" | "replace")? "domain" modelId=[qvtbase::TypedModel|UnrestrictedName]
 	//
 	//	pattern=DomainPatternCS ("implementedby" implementedBy=ExpCS)? ("default_values" "{" defaultValues+=DefaultValueCS+
 	//

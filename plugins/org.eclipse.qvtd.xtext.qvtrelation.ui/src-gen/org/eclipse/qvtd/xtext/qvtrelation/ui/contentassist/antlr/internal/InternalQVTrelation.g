@@ -2782,6 +2782,14 @@ rule__DomainCS__Alternatives_0
 { after(grammarAccess.getDomainCSAccess().getEnforceAssignment_0_1()); }
 )
 
+    |(
+{ before(grammarAccess.getDomainCSAccess().getReplaceKeyword_0_2()); }
+
+	'replace' 
+
+{ after(grammarAccess.getDomainCSAccess().getReplaceKeyword_0_2()); }
+)
+
 ;
 finally {
 	restoreStackSize(stackSize);

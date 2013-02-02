@@ -976,7 +976,7 @@ protected class DefaultValueCS_SemicolonKeyword_3 extends KeywordToken  {
  *
  * DomainCS:
  * 
- * 	(checkonly?="checkonly" | enforce?="enforce")? "domain" modelId=[qvtbase::TypedModel|UnrestrictedName]
+ * 	(checkonly?="checkonly" | enforce?="enforce" | "replace")? "domain" modelId=[qvtbase::TypedModel|UnrestrictedName]
  * 
  * 	pattern=DomainPatternCS ("implementedby" implementedBy=ExpCS)? ("default_values" "{" defaultValues+=DefaultValueCS+
  * 
@@ -984,7 +984,7 @@ protected class DefaultValueCS_SemicolonKeyword_3 extends KeywordToken  {
  *
  **/
 
-// (checkonly?="checkonly" | enforce?="enforce")? "domain" modelId=[qvtbase::TypedModel|UnrestrictedName]
+// (checkonly?="checkonly" | enforce?="enforce" | "replace")? "domain" modelId=[qvtbase::TypedModel|UnrestrictedName]
 // 
 // pattern=DomainPatternCS ("implementedby" implementedBy=ExpCS)? ("default_values" "{" defaultValues+=DefaultValueCS+
 // 
@@ -1017,7 +1017,7 @@ protected class DomainCS_Group extends GroupToken {
 
 }
 
-// (checkonly?="checkonly" | enforce?="enforce")?
+// (checkonly?="checkonly" | enforce?="enforce" | "replace")?
 protected class DomainCS_Alternatives_0 extends AlternativesToken {
 
 	public DomainCS_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
