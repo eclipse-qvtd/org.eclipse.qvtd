@@ -67,6 +67,7 @@ public class QVTrelationLeft2RightVisitor extends AbstractQVTrelationLeft2RightV
 			RelationCallExp relationCallExp = context.refreshModelElement(RelationCallExp.class, QVTrelationPackage.Literals.RELATION_CALL_EXP, csInvocationExp);
 			if (relationCallExp != null) {
 				relationCallExp.setReferredRelation(relation);
+				context.setType(relationCallExp, metaModelManager.getBooleanType(), true);
 				resolveRelationArguments(csInvocationExp, null, relation, relationCallExp);
 				context.installPivotUsage(csInvocationExp, relationCallExp);		
 				return relationCallExp;
