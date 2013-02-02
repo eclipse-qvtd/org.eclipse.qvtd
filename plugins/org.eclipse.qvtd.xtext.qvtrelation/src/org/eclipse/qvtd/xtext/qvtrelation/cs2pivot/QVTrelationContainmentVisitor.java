@@ -107,12 +107,6 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 				@NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
 			return 0;
 		}
-		
-		@Deprecated		// Going obsolete
-		public int compareMatches(@NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
-				@NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
-			return 0;
-		}
 
 		public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
 			return (eObject instanceof Operation) || (eObject instanceof Rule);
@@ -279,6 +273,15 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 		if (pivotElement != null) {
 			pivotElement.setPattern(PivotUtil.getPivot(DomainPattern.class, csElement.getPattern()));
 			context.refreshPivotList(RelationDomainAssignment.class, pivotElement.getDefaultAssignment(), csElement.getDefaultValues());
+			Variable rootVariable = null;
+			DomainPattern rootPattern = pivotElement.getPattern();
+			if (rootPattern != null) {
+				TemplateExp rootTemplate = rootPattern.getTemplateExpression();
+				if (rootTemplate != null) {
+					rootVariable = rootTemplate.getBindsTo();
+				}
+			}
+			pivotElement.setRootVariable(rootVariable);
 		}
 		return new DomainContentContinuation(context, csElement);
 	}
@@ -388,8 +391,23 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 
 	@Override
 	public Continuation<?> visitPrimitiveTypeDomainCS(@NonNull PrimitiveTypeDomainCS csElement) {
-		@SuppressWarnings("unused")
 		RelationDomain pivotElement = context.refreshModelElement(RelationDomain.class, QVTrelationPackage.Literals.RELATION_DOMAIN, csElement);
+		if (pivotElement != null) {
+			DomainPattern pattern = context.refreshModelElement(DomainPattern.class, QVTrelationPackage.Literals.DOMAIN_PATTERN, null);
+			if (pattern != null) {
+				pivotElement.setPattern(pattern);
+				TemplateExp template = context.refreshModelElement(TemplateExp.class, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP, null);
+				if (template != null) {
+					pattern.setTemplateExpression(template);
+					Variable rootVariable = context.refreshModelElement(Variable.class, PivotPackage.Literals.VARIABLE, null);
+					if (rootVariable != null) {
+						context.refreshName(rootVariable, csElement.getName());
+						template.setBindsTo(rootVariable);
+					}
+					pivotElement.setRootVariable(rootVariable);
+				}
+			}
+		}
 		return null;
 	}
 
@@ -426,11 +444,18 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 				}
 			}
 			for (Domain domain : pivotElement.getDomain()) {
-				DomainPattern pattern = ((RelationDomain)domain).getPattern();
+				RelationDomain relationDomain = (RelationDomain)domain;
+				DomainPattern pattern = relationDomain.getPattern();
 				if (pattern != null) {
 					TemplateExp templateExpression = pattern.getTemplateExpression();
 					if (templateExpression != null) {
 						gatherVariables(pivotVariables, templateExpression);
+					}
+				}
+				else {
+					Variable variable = relationDomain.getRootVariable();
+					if (variable != null) {
+						pivotVariables.add(variable);
 					}
 				}
 			}

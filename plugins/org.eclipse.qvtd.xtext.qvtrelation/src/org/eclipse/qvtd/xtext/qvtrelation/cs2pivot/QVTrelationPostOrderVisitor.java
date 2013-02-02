@@ -30,11 +30,15 @@ import org.eclipse.ocl.examples.xtext.base.cs2pivot.SingleContinuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
+import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 import org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.PrimitiveTypeDomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QueryCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.TemplateCS;
@@ -138,8 +142,39 @@ public class QVTrelationPostOrderVisitor extends AbstractQVTrelationPostOrderVis
 	}
 
 	@Override
+	public Continuation<?> visitDefaultValueCS(@NonNull DefaultValueCS csElement) {
+		RelationDomainAssignment pivotElement = PivotUtil.getPivot(RelationDomainAssignment.class, csElement);
+		if (pivotElement != null) {
+			ExpCS initialiser = csElement.getInitialiser();
+			OCLExpression oclExpression = initialiser != null ? context.visitLeft2Right(OCLExpression.class, initialiser) : null;
+			pivotElement.setValueExp(oclExpression);
+		}
+		return null;
+	}
+
+	@Override
 	public Continuation<?> visitPredicateCS(@NonNull PredicateCS csElement) {
 		return new PredicateExpressionCompletion(context, csElement);
+	}
+
+	@Override
+	public Continuation<?> visitPrimitiveTypeDomainCS(@NonNull PrimitiveTypeDomainCS csElement) {
+		RelationDomain pivotElement = PivotUtil.getPivot(RelationDomain.class, csElement);
+		if (pivotElement != null) {
+			Type type = PivotUtil.getPivot(Type.class, csElement.getType());
+			Variable rootVariable = pivotElement.getRootVariable();
+			if (rootVariable != null) {
+				context.setType(rootVariable, type, true);
+			}
+			DomainPattern pattern = pivotElement.getPattern();
+			if (pattern != null) {
+				TemplateExp template = pattern.getTemplateExpression();
+				if (template instanceof ObjectTemplateExp) {
+					((ObjectTemplateExp)template).setReferredClass((org.eclipse.ocl.examples.pivot.Class)type);
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -166,7 +201,7 @@ public class QVTrelationPostOrderVisitor extends AbstractQVTrelationPostOrderVis
 		for (VarDeclarationIdCS csVarDeclarationId : csElement.getVarDeclarationIds()) {
 			Variable pivotVariable = PivotUtil.getPivot(Variable.class, csVarDeclarationId);
 			if (pivotVariable != null) {
-				context.setType(pivotVariable, pivotType);
+				context.setType(pivotVariable, pivotType, false);
 			}
 		}
 		return null;

@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -53,9 +52,8 @@ public class RelationCallExpCSAttribution extends InvocationExpCSAttribution
 	}
 	
 	@Override
-//	@Deprecated // going obsolete
-	protected @NonNull ScopeFilter createInvocationFilter(@NonNull MetaModelManager metaModelManager, @NonNull InvocationExpCS targetElement, @Nullable Type type) {
-		return new OperationFilter(metaModelManager, type, targetElement)
+	protected @NonNull ScopeFilter createInvocationFilter(@NonNull InvocationExpCS targetElement, @Nullable Type type) {
+		return new OperationFilter(type, targetElement)
 		{
 			@Override
 			public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {

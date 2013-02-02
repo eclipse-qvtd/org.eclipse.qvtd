@@ -14,8 +14,12 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelation.cs2pivot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -23,17 +27,23 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
+import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigatingArgCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigationRole;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS;
 
 public class QVTrelationLeft2RightVisitor extends AbstractQVTrelationLeft2RightVisitor
@@ -57,6 +67,7 @@ public class QVTrelationLeft2RightVisitor extends AbstractQVTrelationLeft2RightV
 			RelationCallExp relationCallExp = context.refreshModelElement(RelationCallExp.class, QVTrelationPackage.Literals.RELATION_CALL_EXP, csInvocationExp);
 			if (relationCallExp != null) {
 				relationCallExp.setReferredRelation(relation);
+				resolveRelationArguments(csInvocationExp, null, relation, relationCallExp);
 				context.installPivotUsage(csInvocationExp, relationCallExp);		
 				return relationCallExp;
 			}
@@ -81,10 +92,48 @@ public class QVTrelationLeft2RightVisitor extends AbstractQVTrelationLeft2RightV
 		}
 		return super.resolveOperationReference(namedElement, csInvocationExp);
 	}
+	
+	protected void resolveRelationArguments(@NonNull InvocationExpCS csInvocationExp,
+			@Nullable OCLExpression source, @NonNull Relation relation, @NonNull RelationCallExp relationCallExp) {
+		List<OCLExpression> pivotArguments = new ArrayList<OCLExpression>();
+		List<NavigatingArgCS> csArguments = csInvocationExp.getArgument();
+		List<Domain> ownedDomains = relation.getDomain();
+		int domainsCount = ownedDomains.size();
+		int csArgumentCount = csArguments.size();
+		if (csArgumentCount > 0) {
+			if (csArguments.get(0).getRole() != NavigationRole.EXPRESSION) {
+				context.addDiagnostic(csInvocationExp, "Relation calls can only specify expressions");			
+			}
+			for (int argIndex = 0; argIndex < csArgumentCount; argIndex++) {
+				NavigatingArgCS csArgument = csArguments.get(argIndex);
+				if (csArgument.getInit() != null) {
+					context.addDiagnostic(csArgument, "Unexpected initializer for expression");
+				}
+				if (csArgument.getOwnedType() != null) {
+					context.addDiagnostic(csArgument, "Unexpected type for expression");
+				}
+				OCLExpression arg = PivotUtil.getPivot(OCLExpression.class, csArgument);
+				if (arg != null) {
+					pivotArguments.add(arg);
+				}
+			}
+		}
+		if ((csArgumentCount != domainsCount) && (relation != getBadOperation())) {
+			String boundMessage = DomainUtil.bind(OCLMessages.MismatchedArgumentCount_ERROR_, csArgumentCount, domainsCount);
+			context.addDiagnostic(csInvocationExp, boundMessage);			
+		}
+		context.refreshList(relationCallExp.getArgument(), pivotArguments);
+	}
 
 	@Override
 	public Element visitCollectionTemplateCS(@NonNull CollectionTemplateCS csElement) {
 		return PivotUtil.getPivot(CollectionTemplateExp.class, csElement);
+	}
+
+	@Override
+	public Element visitDefaultValueCS(@NonNull DefaultValueCS csElement) {
+		RelationDomainAssignment pivotElement = PivotUtil.getPivot(RelationDomainAssignment.class, csElement);
+		return pivotElement;
 	}
 
 	@Override
