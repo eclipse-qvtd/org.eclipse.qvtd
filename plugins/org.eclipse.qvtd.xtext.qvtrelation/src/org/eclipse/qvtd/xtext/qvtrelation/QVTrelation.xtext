@@ -128,6 +128,7 @@ TypedRefCS returns base::TypedRefCS:
 
 UnrestrictedName returns ecore::EString:
 	EssentialOCLUnrestrictedName
+//|   '_'
 |   'checkonly'
 |   'default_values'
 |   'domain'

@@ -4,8 +4,8 @@
 	</target>
 
 	<patternset id="qvtc.excludes" excludes="qvtcbin/**"/>
-	<patternset id="qvtr.excludes" excludes="bin/** qvtrbin/** src/** .settings/** META-INF/**"/>
-	
+	<patternset id="qvtr.excludes" excludes="bin/** qvtrbin/** src/** .settings/** META-INF/** .classpath build.properties about.html"/>
+
 	<target name="zip.examples" depends="init">
 		<!-- ../../examples is the prefcerred project layout
 		     ../ is the result of an Import Project Set File -->

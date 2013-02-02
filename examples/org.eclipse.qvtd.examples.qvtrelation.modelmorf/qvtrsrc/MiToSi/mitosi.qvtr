@@ -9,8 +9,8 @@
  *     TCS - initial implementation for ModelMorf
  *     E.D.Willink - alignment with evolved specification
  *******************************************************************************/
-import umlmmmi : 'umlmmmi.emof'::umlmmmi; 
-import javammsi : 'javammsi.emof'::javammsi; 
+import umlmmmi : 'umlMM.emof'::umlmmmi; 
+import javammsi : 'javaMM.emof'::javammsi; 
 
 transformation MiToSi(uml:umlmmmi, java:javammsi)
 {
@@ -89,6 +89,7 @@ transformation MiToSi(uml:umlmmmi, java:javammsi)
 		csup: umlmmmi::Class;
 		isup: javammsi::Interface;
 		someI: javammsi::Interface;
+		z : javammsi::Interface;
 
 		domain uml 
 		c:Class
@@ -107,7 +108,7 @@ transformation MiToSi(uml:umlmmmi, java:javammsi)
 		when 
 		{
 			(RClassToInterface(csup, isup) or ClassToInterface(csup, isup));
-			not ClassToClass(c, _);
+			not ClassToClass(c, z);
 		}
 	}   
 
@@ -135,4 +136,3 @@ transformation MiToSi(uml:umlmmmi, java:javammsi)
 		}
 	}   
 }
-

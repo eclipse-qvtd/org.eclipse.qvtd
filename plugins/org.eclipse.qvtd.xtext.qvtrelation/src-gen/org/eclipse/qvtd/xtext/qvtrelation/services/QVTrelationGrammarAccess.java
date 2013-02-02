@@ -1527,18 +1527,20 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//
 		//UnrestrictedName returns ecore::EString:
 		//
-		//	EssentialOCLUnrestrictedName | "checkonly" | "default_values" | "domain" | "enforce" | "extends" | "implementedby" |
+		//	EssentialOCLUnrestrictedName //|   '_'
+		// | "checkonly" | "default_values" | "domain" | "enforce" | "extends" |
 		//
-		//	"import" | "library" | "key" | "overrides" | "primitive" | "query" | "relation" | "replace" | "top" |
+		//	"implementedby" | "import" | "library" | "key" | "overrides" | "primitive" | "query" | "relation" | "replace" | "top"
 		//
-		//	"transformation" | "when" | "where";
+		//	| "transformation" | "when" | "where";
 		public ParserRule getRule() { return rule; }
 
-		//EssentialOCLUnrestrictedName | "checkonly" | "default_values" | "domain" | "enforce" | "extends" | "implementedby" |
+		//EssentialOCLUnrestrictedName //|   '_'
+		// | "checkonly" | "default_values" | "domain" | "enforce" | "extends" |
 		//
-		//"import" | "library" | "key" | "overrides" | "primitive" | "query" | "relation" | "replace" | "top" | "transformation"
+		//"implementedby" | "import" | "library" | "key" | "overrides" | "primitive" | "query" | "relation" | "replace" | "top"
 		//
-		//| "when" | "where"
+		//| "transformation" | "when" | "where"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//EssentialOCLUnrestrictedName
@@ -2013,11 +2015,12 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	//UnrestrictedName returns ecore::EString:
 	//
-	//	EssentialOCLUnrestrictedName | "checkonly" | "default_values" | "domain" | "enforce" | "extends" | "implementedby" |
+	//	EssentialOCLUnrestrictedName //|   '_'
+	// | "checkonly" | "default_values" | "domain" | "enforce" | "extends" |
 	//
-	//	"import" | "library" | "key" | "overrides" | "primitive" | "query" | "relation" | "replace" | "top" |
+	//	"implementedby" | "import" | "library" | "key" | "overrides" | "primitive" | "query" | "relation" | "replace" | "top"
 	//
-	//	"transformation" | "when" | "where";
+	//	| "transformation" | "when" | "where";
 	public UnrestrictedNameElements getUnrestrictedNameAccess() {
 		return (pUnrestrictedName != null) ? pUnrestrictedName : (pUnrestrictedName = new UnrestrictedNameElements());
 	}
