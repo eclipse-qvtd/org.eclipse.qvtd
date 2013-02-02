@@ -74,8 +74,7 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 	}
 
 	public String visitRelation(@NonNull Relation object) {
-		// TODO Auto-generated method stub
-		return null;
+		return "Relation " + object.getName();
 	}
 
 	public String visitRelationCallExp(@NonNull RelationCallExp object) {
@@ -84,8 +83,7 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 	}
 
 	public String visitRelationDomain(@NonNull RelationDomain object) {
-		// TODO Auto-generated method stub
-		return null;
+		return "RelationDomain " + object.getName();
 	}
 
 	public String visitRelationDomainAssignment(@NonNull RelationDomainAssignment object) {
@@ -99,12 +97,10 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 	}
 
 	public String visitRelationModel(@NonNull RelationModel object) {
-		// TODO Auto-generated method stub
-		return null;
+		return "RelationModel " + object.getName();
 	}
 
 	public String visitRelationalTransformation(@NonNull RelationalTransformation object) {
-		// TODO Auto-generated method stub
-		return null;
+		return "RelationalTransformation " + object.getName();
 	}
 }

@@ -7,7 +7,6 @@ import qvtcore : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTCore.ecore':
 
 transformation relToCore(relations:{qvtrelation,qvttemplate,qvtbase,essentialocl,emof}, core:{qvtcore,qvtbase,essentialocl,emof})
 {
-
 key qvtcore::Mapping{name, transformation};
 key qvtcore::GuardPattern{area};
 key qvtcore::BottomPattern{area};
@@ -698,7 +697,7 @@ top relation InvokedRelationToMappingForEnforcement
                                  p.conditionExpression.oclIsTypeOf(qvtrelation::RelationCallExp));
 
       oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
-         vars->union(d.Pattern.bindsTo));
+         vars->union(d.pattern.bindsTo));
       sharedDomainVars = getSharedDomainVars(r);
       domainBottomUnSharedVars =
          (domainVars - whenVars - sharedDomainVars)->excluding(tev);

@@ -15,15 +15,18 @@
 package org.eclipse.qvtd.xtext.qvtrelation.cs2pivot;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NamedExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -48,30 +51,35 @@ public class QVTrelationLeft2RightVisitor extends AbstractQVTrelationLeft2RightV
 	}
 
 	@Override
-	protected OCLExpression resolveUnknownOperation(@NonNull NamedExpCS csNamedExp) {
-		NamedElement namedElement = csNamedExp.getNamedElement();
+	protected @Nullable OCLExpression resolveOperationReference(@NonNull NamedElement namedElement, @NonNull InvocationExpCS csInvocationExp) {
 		if (namedElement instanceof Relation) {
 			Relation relation = (Relation)namedElement;
-//			Operation baseOperation = metaModelManager.resolveBaseOperation(operation);
-//			OCLExpression source = resolveNavigationSource(csNavigatingExp, operation);
-//			CallExp outerExpression;
-//			CallExp innerExpression;
-			RelationCallExp relationCallExp = context.refreshModelElement(RelationCallExp.class, QVTrelationPackage.Literals.RELATION_CALL_EXP, csNamedExp);
+			RelationCallExp relationCallExp = context.refreshModelElement(RelationCallExp.class, QVTrelationPackage.Literals.RELATION_CALL_EXP, csInvocationExp);
 			if (relationCallExp != null) {
 				relationCallExp.setReferredRelation(relation);
-				context.installPivotUsage(csNamedExp, relationCallExp);		
-//				innerExpression = operationCallExp;
-//				outerExpression = resolveNavigationFeature(csNavigatingExp, source, baseOperation, innerExpression);
-//				resolveOperationArguments(csNavigatingExp, source, operation, operationCallExp);
-//				resolveOperationReturnType(innerExpression);
-//				if (outerExpression != innerExpression) {
-//					resolveOperationReturnType(outerExpression);
-//				}
-//				return checkImplementation(csNavigatingExp, operation, innerExpression, outerExpression);
+				context.installPivotUsage(csInvocationExp, relationCallExp);		
 				return relationCallExp;
 			}
+			else {
+				return null;
+			}
 		}
-		return super.resolveUnknownOperation(csNamedExp);
+		else if (namedElement instanceof Function) {
+			Function function = (Function)namedElement;
+//			Operation baseOperation = metaModelManager.resolveBaseOperation(function);
+			OCLExpression source = resolveNavigationSource(csInvocationExp, function);
+			if (source == null) {
+				OperationCallExp operationCallExp = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csInvocationExp);
+				if (operationCallExp != null) {
+					context.setReferredOperation(operationCallExp, function);
+					context.setType(operationCallExp, function.getType(), function.isRequired());
+					context.installPivotUsage(csInvocationExp, operationCallExp);
+					resolveOperationArguments(csInvocationExp, null, function, operationCallExp);
+					return operationCallExp;
+				}
+			}
+		}
+		return super.resolveOperationReference(namedElement, csInvocationExp);
 	}
 
 	@Override

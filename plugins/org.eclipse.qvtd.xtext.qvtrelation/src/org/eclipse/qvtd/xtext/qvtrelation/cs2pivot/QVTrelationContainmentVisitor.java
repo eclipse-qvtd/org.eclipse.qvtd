@@ -246,7 +246,7 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 				variable = DomainUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 				pivotElement.setBindsTo(variable);
 			}
-			context.refreshName(variable, DomainUtil.nonNullState(csElement.getName()));
+			context.refreshName(variable, csElement.getName());
 			if (((CollectionTemplateCSImpl)csElement).basicGetRestIdentifier() == null) {
 				variable = pivotElement.getRest();
 				if (variable == null) {
@@ -301,7 +301,7 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 				variable = DomainUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 				pivotElement.setReferredVariable(variable);
 			}
-			context.refreshName(variable, DomainUtil.nonNullState(csElement.getName()));
+			context.refreshName(variable, csElement.getName());
 		}
 		return null;
 	}
@@ -357,7 +357,7 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 				variable = DomainUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 				pivotElement.setBindsTo(variable);
 			}
-			context.refreshName(variable, DomainUtil.nonNullState(csElement.getName()));
+			context.refreshName(variable, csElement.getName());
 			context.refreshPivotList(PropertyTemplateItem.class, pivotElement.getPart(), csElement.getPropertyTemplates());
 		}
 		return null;
