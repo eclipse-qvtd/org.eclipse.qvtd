@@ -13,11 +13,4 @@
             genModel="model/QVTrelationCST.genmodel"/>
    </extension>
 
-   <extension point="org.eclipse.emf.ecore.extension_parser">
-      <!-- @generated QVTrelationCST -->
-      <parser
-            type="qvtr"
-            class="org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSTResourceFactoryImpl"/>
-   </extension>
-
 </plugin>

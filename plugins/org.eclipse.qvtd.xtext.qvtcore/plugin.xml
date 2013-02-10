@@ -17,11 +17,4 @@
             genModel="model/QVTcoreCST.genmodel"/>
    </extension>
 
-   <extension point="org.eclipse.emf.ecore.extension_parser">
-      <!-- @generated QVTcoreCST -->
-      <parser
-            type="qvtc"
-            class="org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSTResourceFactoryImpl"/>
-   </extension>
-
 </plugin>
