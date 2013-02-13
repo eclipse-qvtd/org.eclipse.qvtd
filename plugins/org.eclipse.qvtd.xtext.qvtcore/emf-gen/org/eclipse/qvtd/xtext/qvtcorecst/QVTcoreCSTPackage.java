@@ -272,7 +272,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getPatternCS()
 	 * @generated
 	 */
-	int PATTERN_CS = 9;
+	int PATTERN_CS = 12;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -447,6 +447,79 @@ public interface QVTcoreCSTPackage extends EPackage {
 	int BOTTOM_PATTERN_CS_FEATURE_COUNT = PATTERN_CS_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.ComposedMappingCSImpl <em>Composed Mapping CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.ComposedMappingCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getComposedMappingCS()
+	 * @generated
+	 */
+	int COMPOSED_MAPPING_CS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_MAPPING_CS__LOGICAL_PARENT = BaseCSTPackage.NAMED_ELEMENT_CS__LOGICAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_MAPPING_CS__PIVOT = BaseCSTPackage.NAMED_ELEMENT_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_MAPPING_CS__OWNED_ANNOTATION = BaseCSTPackage.NAMED_ELEMENT_CS__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_MAPPING_CS__ORIGINAL_XMI_ID = BaseCSTPackage.NAMED_ELEMENT_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_MAPPING_CS__CSI = BaseCSTPackage.NAMED_ELEMENT_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_MAPPING_CS__NAME = BaseCSTPackage.NAMED_ELEMENT_CS__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Composed Mapping CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_MAPPING_CS_FEATURE_COUNT = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.DirectionCSImpl <em>Direction CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -454,7 +527,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getDirectionCS()
 	 * @generated
 	 */
-	int DIRECTION_CS = 3;
+	int DIRECTION_CS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -545,7 +618,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getDomainCS()
 	 * @generated
 	 */
-	int DOMAIN_CS = 4;
+	int DOMAIN_CS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -663,7 +736,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getEnforcementOperationCS()
 	 * @generated
 	 */
-	int ENFORCEMENT_OPERATION_CS = 5;
+	int ENFORCEMENT_OPERATION_CS = 6;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -745,7 +818,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getGuardPatternCS()
 	 * @generated
 	 */
-	int GUARD_PATTERN_CS = 6;
+	int GUARD_PATTERN_CS = 7;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -827,7 +900,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getMappingCS()
 	 * @generated
 	 */
-	int MAPPING_CS = 7;
+	int MAPPING_CS = 8;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -836,7 +909,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__LOGICAL_PARENT = BaseCSTPackage.NAMED_ELEMENT_CS__LOGICAL_PARENT;
+	int MAPPING_CS__LOGICAL_PARENT = COMPOSED_MAPPING_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -845,7 +918,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__PIVOT = BaseCSTPackage.NAMED_ELEMENT_CS__PIVOT;
+	int MAPPING_CS__PIVOT = COMPOSED_MAPPING_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -854,7 +927,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_ANNOTATION = BaseCSTPackage.NAMED_ELEMENT_CS__OWNED_ANNOTATION;
+	int MAPPING_CS__OWNED_ANNOTATION = COMPOSED_MAPPING_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -863,7 +936,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__ORIGINAL_XMI_ID = BaseCSTPackage.NAMED_ELEMENT_CS__ORIGINAL_XMI_ID;
+	int MAPPING_CS__ORIGINAL_XMI_ID = COMPOSED_MAPPING_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -872,7 +945,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__CSI = BaseCSTPackage.NAMED_ELEMENT_CS__CSI;
+	int MAPPING_CS__CSI = COMPOSED_MAPPING_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -881,7 +954,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__NAME = BaseCSTPackage.NAMED_ELEMENT_CS__NAME;
+	int MAPPING_CS__NAME = COMPOSED_MAPPING_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Composed Mappings</b></em>' containment reference list.
@@ -890,7 +963,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__COMPOSED_MAPPINGS = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int MAPPING_CS__COMPOSED_MAPPINGS = COMPOSED_MAPPING_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Domains</b></em>' containment reference list.
@@ -899,7 +972,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__DOMAINS = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int MAPPING_CS__DOMAINS = COMPOSED_MAPPING_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>In</b></em>' reference.
@@ -908,7 +981,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__IN = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int MAPPING_CS__IN = COMPOSED_MAPPING_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Middle</b></em>' containment reference.
@@ -917,7 +990,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__MIDDLE = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int MAPPING_CS__MIDDLE = COMPOSED_MAPPING_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Refines</b></em>' reference list.
@@ -926,7 +999,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__REFINES = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
+	int MAPPING_CS__REFINES = COMPOSED_MAPPING_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Mapping CS</em>' class.
@@ -935,7 +1008,198 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS_FEATURE_COUNT = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 5;
+	int MAPPING_CS_FEATURE_COUNT = COMPOSED_MAPPING_CS_FEATURE_COUNT + 5;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.MappingCallBindingCSImpl <em>Mapping Call Binding CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.MappingCallBindingCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getMappingCallBindingCS()
+	 * @generated
+	 */
+	int MAPPING_CALL_BINDING_CS = 9;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING_CS__LOGICAL_PARENT = EssentialOCLCSTPackage.EXP_CS__LOGICAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING_CS__PIVOT = EssentialOCLCSTPackage.EXP_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING_CS__OWNED_ANNOTATION = EssentialOCLCSTPackage.EXP_CS__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING_CS__ORIGINAL_XMI_ID = EssentialOCLCSTPackage.EXP_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING_CS__CSI = EssentialOCLCSTPackage.EXP_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING_CS__PARENT = EssentialOCLCSTPackage.EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Mapping Call</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING_CS__MAPPING_CALL = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Referred Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING_CS__VALUE = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Mapping Call Binding CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING_CS_FEATURE_COUNT = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.MappingCallCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getMappingCallCS()
+	 * @generated
+	 */
+	int MAPPING_CALL_CS = 10;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_CS__LOGICAL_PARENT = COMPOSED_MAPPING_CS__LOGICAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_CS__PIVOT = COMPOSED_MAPPING_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_CS__OWNED_ANNOTATION = COMPOSED_MAPPING_CS__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_CS__ORIGINAL_XMI_ID = COMPOSED_MAPPING_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_CS__CSI = COMPOSED_MAPPING_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_CS__NAME = COMPOSED_MAPPING_CS__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Referred Mapping</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_CS__REFERRED_MAPPING = COMPOSED_MAPPING_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_CS__BINDINGS = COMPOSED_MAPPING_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Mapping Call CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_CS_FEATURE_COUNT = COMPOSED_MAPPING_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.ParamDeclarationCSImpl <em>Param Declaration CS</em>}' class.
@@ -945,7 +1209,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getParamDeclarationCS()
 	 * @generated
 	 */
-	int PARAM_DECLARATION_CS = 8;
+	int PARAM_DECLARATION_CS = 11;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1054,7 +1318,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getQueryCS()
 	 * @generated
 	 */
-	int QUERY_CS = 10;
+	int QUERY_CS = 13;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1199,7 +1463,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getRealizeableVariableCS()
 	 * @generated
 	 */
-	int REALIZEABLE_VARIABLE_CS = 11;
+	int REALIZEABLE_VARIABLE_CS = 14;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1308,7 +1572,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getRealizedVariableCS()
 	 * @generated
 	 */
-	int REALIZED_VARIABLE_CS = 12;
+	int REALIZED_VARIABLE_CS = 15;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1417,7 +1681,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getTopLevelCS()
 	 * @generated
 	 */
-	int TOP_LEVEL_CS = 13;
+	int TOP_LEVEL_CS = 16;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1571,7 +1835,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getTransformationCS()
 	 * @generated
 	 */
-	int TRANSFORMATION_CS = 14;
+	int TRANSFORMATION_CS = 17;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1707,7 +1971,7 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getUnrealizedVariableCS()
 	 * @generated
 	 */
-	int UNREALIZED_VARIABLE_CS = 15;
+	int UNREALIZED_VARIABLE_CS = 18;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1917,6 +2181,16 @@ public interface QVTcoreCSTPackage extends EPackage {
 	EReference getBottomPatternCS_RealizedVariables();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS <em>Composed Mapping CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Composed Mapping CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS
+	 * @generated
+	 */
+	EClass getComposedMappingCS();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS <em>Direction CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2097,6 +2371,81 @@ public interface QVTcoreCSTPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMappingCS_Refines();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS <em>Mapping Call Binding CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Mapping Call Binding CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS
+	 * @generated
+	 */
+	EClass getMappingCallBindingCS();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS#getMappingCall <em>Mapping Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Mapping Call</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS#getMappingCall()
+	 * @see #getMappingCallBindingCS()
+	 * @generated
+	 */
+	EReference getMappingCallBindingCS_MappingCall();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS#getReferredVariable <em>Referred Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Variable</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS#getReferredVariable()
+	 * @see #getMappingCallBindingCS()
+	 * @generated
+	 */
+	EReference getMappingCallBindingCS_ReferredVariable();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS#getValue()
+	 * @see #getMappingCallBindingCS()
+	 * @generated
+	 */
+	EReference getMappingCallBindingCS_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS <em>Mapping Call CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Mapping Call CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS
+	 * @generated
+	 */
+	EClass getMappingCallCS();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS#getReferredMapping <em>Referred Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Mapping</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS#getReferredMapping()
+	 * @see #getMappingCallCS()
+	 * @generated
+	 */
+	EReference getMappingCallCS_ReferredMapping();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS#getBindings <em>Bindings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Bindings</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS#getBindings()
+	 * @see #getMappingCallCS()
+	 * @generated
+	 */
+	EReference getMappingCallCS_Bindings();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS <em>Param Declaration CS</em>}'.
@@ -2419,6 +2768,16 @@ public interface QVTcoreCSTPackage extends EPackage {
 		EReference BOTTOM_PATTERN_CS__REALIZED_VARIABLES = eINSTANCE.getBottomPatternCS_RealizedVariables();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.ComposedMappingCSImpl <em>Composed Mapping CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.ComposedMappingCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getComposedMappingCS()
+		 * @generated
+		 */
+		EClass COMPOSED_MAPPING_CS = eINSTANCE.getComposedMappingCS();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.DirectionCSImpl <em>Direction CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2563,6 +2922,66 @@ public interface QVTcoreCSTPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_CS__REFINES = eINSTANCE.getMappingCS_Refines();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.MappingCallBindingCSImpl <em>Mapping Call Binding CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.MappingCallBindingCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getMappingCallBindingCS()
+		 * @generated
+		 */
+		EClass MAPPING_CALL_BINDING_CS = eINSTANCE.getMappingCallBindingCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Mapping Call</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_CALL_BINDING_CS__MAPPING_CALL = eINSTANCE.getMappingCallBindingCS_MappingCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Variable</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE = eINSTANCE.getMappingCallBindingCS_ReferredVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_CALL_BINDING_CS__VALUE = eINSTANCE.getMappingCallBindingCS_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.MappingCallCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTPackageImpl#getMappingCallCS()
+		 * @generated
+		 */
+		EClass MAPPING_CALL_CS = eINSTANCE.getMappingCallCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Mapping</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_CALL_CS__REFERRED_MAPPING = eINSTANCE.getMappingCallCS_ReferredMapping();
+
+		/**
+		 * The meta object literal for the '<em><b>Bindings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_CALL_CS__BINDINGS = eINSTANCE.getMappingCallCS_Bindings();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.ParamDeclarationCSImpl <em>Param Declaration CS</em>}' class.

@@ -56,6 +56,10 @@ public abstract class AbstractNullQVTcoreCSVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitComposedMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS object) {
+		return null;
+	}
+
 	public @Nullable R visitDirectionCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS object) {
 		return null;
 	}
@@ -73,6 +77,14 @@ public abstract class AbstractNullQVTcoreCSVisitor<R, C>
 	}
 
 	public @Nullable R visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCS object) {
+		return null;
+	}
+
+	public @Nullable R visitMappingCallBindingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS object) {
+		return null;
+	}
+
+	public @Nullable R visitMappingCallCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS object) {
 		return null;
 	}
 

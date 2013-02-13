@@ -19,6 +19,7 @@ package org.eclipse.qvtd.xtext.qvtcorecst.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
@@ -34,11 +35,14 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.AreaCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.PatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
@@ -143,6 +147,19 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTcoreCSTPackage.COMPOSED_MAPPING_CS: {
+				ComposedMappingCS composedMappingCS = (ComposedMappingCS)theEObject;
+				T result = caseComposedMappingCS(composedMappingCS);
+				if (result == null) result = caseNamedElementCS(composedMappingCS);
+				if (result == null) result = caseModelElementCS(composedMappingCS);
+				if (result == null) result = caseNameable(composedMappingCS);
+				if (result == null) result = casePivotableElementCS(composedMappingCS);
+				if (result == null) result = caseElementCS(composedMappingCS);
+				if (result == null) result = casePivotable(composedMappingCS);
+				if (result == null) result = caseVisitableCS(composedMappingCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTcoreCSTPackage.DIRECTION_CS: {
 				DirectionCS directionCS = (DirectionCS)theEObject;
 				T result = caseDirectionCS(directionCS);
@@ -196,6 +213,7 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 			case QVTcoreCSTPackage.MAPPING_CS: {
 				MappingCS mappingCS = (MappingCS)theEObject;
 				T result = caseMappingCS(mappingCS);
+				if (result == null) result = caseComposedMappingCS(mappingCS);
 				if (result == null) result = caseNamedElementCS(mappingCS);
 				if (result == null) result = caseModelElementCS(mappingCS);
 				if (result == null) result = caseNameable(mappingCS);
@@ -203,6 +221,32 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElementCS(mappingCS);
 				if (result == null) result = casePivotable(mappingCS);
 				if (result == null) result = caseVisitableCS(mappingCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTcoreCSTPackage.MAPPING_CALL_BINDING_CS: {
+				MappingCallBindingCS mappingCallBindingCS = (MappingCallBindingCS)theEObject;
+				T result = caseMappingCallBindingCS(mappingCallBindingCS);
+				if (result == null) result = caseExpCS(mappingCallBindingCS);
+				if (result == null) result = caseModelElementCS(mappingCallBindingCS);
+				if (result == null) result = casePivotableElementCS(mappingCallBindingCS);
+				if (result == null) result = caseElementCS(mappingCallBindingCS);
+				if (result == null) result = casePivotable(mappingCallBindingCS);
+				if (result == null) result = caseVisitableCS(mappingCallBindingCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTcoreCSTPackage.MAPPING_CALL_CS: {
+				MappingCallCS mappingCallCS = (MappingCallCS)theEObject;
+				T result = caseMappingCallCS(mappingCallCS);
+				if (result == null) result = caseComposedMappingCS(mappingCallCS);
+				if (result == null) result = caseNamedElementCS(mappingCallCS);
+				if (result == null) result = caseModelElementCS(mappingCallCS);
+				if (result == null) result = caseNameable(mappingCallCS);
+				if (result == null) result = casePivotableElementCS(mappingCallCS);
+				if (result == null) result = caseElementCS(mappingCallCS);
+				if (result == null) result = casePivotable(mappingCallCS);
+				if (result == null) result = caseVisitableCS(mappingCallCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -371,6 +415,21 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Composed Mapping CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Composed Mapping CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseComposedMappingCS(ComposedMappingCS object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Direction CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -442,6 +501,36 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMappingCS(MappingCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mapping Call Binding CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mapping Call Binding CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMappingCallBindingCS(MappingCallBindingCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mapping Call CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mapping Call CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMappingCallCS(MappingCallCS object) {
 		return null;
 	}
 
@@ -651,7 +740,7 @@ public class QVTcoreCSTSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNameable(org.eclipse.ocl.examples.domain.elements.Nameable object) {
+	public T caseNameable(Nameable object) {
 		return null;
 	}
 

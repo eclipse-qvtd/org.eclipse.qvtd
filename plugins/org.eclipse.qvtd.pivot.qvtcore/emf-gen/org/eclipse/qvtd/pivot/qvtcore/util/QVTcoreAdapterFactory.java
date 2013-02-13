@@ -20,9 +20,12 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -32,6 +35,7 @@ import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtcore.*;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -139,6 +143,18 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 				return createMappingAdapter();
 			}
 			@Override
+			public Adapter caseMappingCall(MappingCall object) {
+				return createMappingCallAdapter();
+			}
+			@Override
+			public Adapter caseMappingCallBinding(MappingCallBinding object) {
+				return createMappingCallBindingAdapter();
+			}
+			@Override
+			public Adapter caseNestedMapping(NestedMapping object) {
+				return createNestedMappingAdapter();
+			}
+			@Override
 			public Adapter casePropertyAssignment(PropertyAssignment object) {
 				return createPropertyAssignmentAdapter();
 			}
@@ -163,7 +179,7 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 				return createPatternAdapter();
 			}
 			@Override
-			public Adapter caseNameable(org.eclipse.ocl.examples.domain.elements.Nameable object) {
+			public Adapter caseNameable(Nameable object) {
 				return createNameableAdapter();
 			}
 			@Override
@@ -193,6 +209,14 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTypedElement(TypedElement object) {
 				return createTypedElementAdapter();
+			}
+			@Override
+			public Adapter caseOCLExpression(OCLExpression object) {
+				return createOCLExpressionAdapter();
+			}
+			@Override
+			public Adapter caseReferringElement(ReferringElement object) {
+				return createReferringElementAdapter();
 			}
 			@Override
 			public Adapter caseVariableDeclaration(VariableDeclaration object) {
@@ -345,6 +369,48 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcore.MappingCall <em>Mapping Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.MappingCall
+	 * @generated
+	 */
+	public Adapter createMappingCallAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding <em>Mapping Call Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding
+	 * @generated
+	 */
+	public Adapter createMappingCallBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcore.NestedMapping <em>Nested Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.NestedMapping
+	 * @generated
+	 */
+	public Adapter createNestedMappingAdapter() {
 		return null;
 	}
 
@@ -541,6 +607,34 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.OCLExpression <em>OCL Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.OCLExpression
+	 * @generated
+	 */
+	public Adapter createOCLExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.ReferringElement <em>Referring Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.ReferringElement
+	 * @generated
+	 */
+	public Adapter createReferringElementAdapter() {
 		return null;
 	}
 

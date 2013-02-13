@@ -14,6 +14,8 @@
  */
 package org.eclipse.qvtd.pivot.qvtcore.attributes;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -24,13 +26,13 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
 public class QVTcoreEnvironmentUtil
 {
-	public static void addMiddleBottomVariables(EnvironmentView environmentView, Mapping mapping) {
+	public static void addMiddleBottomVariables(@NonNull EnvironmentView environmentView, @Nullable Mapping mapping) {
 		for (; mapping != null; mapping = mapping.getContext()) {
 			addMiddleVariables(environmentView, mapping, true);
 		}
 	}
 
-	public static void addMiddleGuardVariables(EnvironmentView environmentView, Mapping mapping) {
+	public static void addMiddleGuardVariables(@NonNull EnvironmentView environmentView, @Nullable Mapping mapping) {
 		if (mapping != null) {
 			addMiddleVariables(environmentView, mapping, false);
 			for (mapping = mapping.getContext(); mapping != null; mapping = mapping.getContext()) {
@@ -39,7 +41,7 @@ public class QVTcoreEnvironmentUtil
 		}
 	}
 	
-	private static void addMiddleVariables(EnvironmentView environmentView, Mapping mapping, boolean bottomToo) {
+	private static void addMiddleVariables(@NonNull EnvironmentView environmentView, @NonNull Mapping mapping, boolean bottomToo) {
 		if (bottomToo) {
 			BottomPattern bottomPattern = mapping.getBottomPattern();
 			if (bottomPattern != null) {
@@ -67,18 +69,18 @@ public class QVTcoreEnvironmentUtil
 				}
 			}
 		}
-		for (Mapping refinedMapping : mapping.getRefinement()) {
+		for (@SuppressWarnings("null")@NonNull Mapping refinedMapping : mapping.getRefinement()) {
 			addMiddleVariables(environmentView, refinedMapping, bottomToo);
 		}
 	}
 
-	public static void addSideBottomVariables(EnvironmentView environmentView, Mapping mapping, TypedModel typedModel) {
+	public static void addSideBottomVariables(@NonNull EnvironmentView environmentView, @Nullable Mapping mapping, @Nullable TypedModel typedModel) {
 		for (; mapping != null; mapping = mapping.getContext()) {
 			QVTcoreEnvironmentUtil.addSideVariables(environmentView, mapping, typedModel, true);
 		}
 	}
 
-	public static void addSideGuardVariables(EnvironmentView environmentView, Mapping mapping, TypedModel typedModel) {
+	public static void addSideGuardVariables(@NonNull EnvironmentView environmentView, @Nullable Mapping mapping, @Nullable TypedModel typedModel) {
 		if (mapping != null) {
 			addSideVariables(environmentView, mapping, typedModel, false);
 			for (mapping = mapping.getContext(); mapping != null; mapping = mapping.getContext()) {
@@ -87,11 +89,11 @@ public class QVTcoreEnvironmentUtil
 		}
 	}
 
-	private static void addSideVariables(EnvironmentView environmentView, Mapping mapping, TypedModel typedModel, boolean bottomToo) {
+	private static void addSideVariables(@NonNull EnvironmentView environmentView, @NonNull Mapping mapping, @Nullable TypedModel typedModel, boolean bottomToo) {
 		for (Domain aDomain : mapping.getDomain()) {
 			if (aDomain instanceof CoreDomain) {
 				CoreDomain domain = (CoreDomain)aDomain;
-				if (domain.getTypedModel() == typedModel) {
+				if ((typedModel == null) || (domain.getTypedModel() == typedModel)) {
 					if (bottomToo) {
 						BottomPattern bottomPattern = domain.getBottomPattern();
 						if (bottomPattern != null) {
@@ -107,7 +109,7 @@ public class QVTcoreEnvironmentUtil
 				}
 			}
 		}
-		for (Mapping refinedMapping : mapping.getRefinement()) {
+		for (@SuppressWarnings("null")@NonNull Mapping refinedMapping : mapping.getRefinement()) {
 			addSideVariables(environmentView, refinedMapping, typedModel, bottomToo);
 		}
 	}

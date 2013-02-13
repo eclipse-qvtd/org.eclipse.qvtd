@@ -78,6 +78,8 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 			case QVTcorePackage.ENFORCEMENT_OPERATION: return createEnforcementOperation();
 			case QVTcorePackage.GUARD_PATTERN: return createGuardPattern();
 			case QVTcorePackage.MAPPING: return createMapping();
+			case QVTcorePackage.MAPPING_CALL: return createMappingCall();
+			case QVTcorePackage.MAPPING_CALL_BINDING: return createMappingCallBinding();
 			case QVTcorePackage.PROPERTY_ASSIGNMENT: return createPropertyAssignment();
 			case QVTcorePackage.REALIZED_VARIABLE: return createRealizedVariable();
 			case QVTcorePackage.VARIABLE_ASSIGNMENT: return createVariableAssignment();
@@ -184,6 +186,26 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	public Mapping createMapping() {
 		MappingImpl mapping = new MappingImpl();
 		return mapping;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MappingCall createMappingCall() {
+		MappingCallImpl mappingCall = new MappingCallImpl();
+		return mappingCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MappingCallBinding createMappingCallBinding() {
+		MappingCallBindingImpl mappingCallBinding = new MappingCallBindingImpl();
+		return mappingCallBinding;
 	}
 
 	/**

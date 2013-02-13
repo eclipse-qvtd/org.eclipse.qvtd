@@ -36,15 +36,17 @@ public class KeyAttribution extends AbstractAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		Key targetElement = (Key)target;
 		RelationalTransformation transformation = targetElement.getTransformation();
-		Set<org.eclipse.ocl.examples.pivot.Package> allPackages = QVTbaseUtil.getAllUsedPackages(transformation);
-		for (org.eclipse.ocl.examples.pivot.Package usedPackage : allPackages) {
-			environmentView.addNamedElement(usedPackage);
-		}
-		if (!environmentView.hasFinalResult()) {
-			MetaModelManager metaModelManager = environmentView.getMetaModelManager();
+		if (transformation != null) {
+			Set<org.eclipse.ocl.examples.pivot.Package> allPackages = QVTbaseUtil.getAllUsedPackages(transformation);
 			for (org.eclipse.ocl.examples.pivot.Package usedPackage : allPackages) {
-				assert usedPackage != null;
-				environmentView.addNamedElements(metaModelManager.getLocalClasses(usedPackage));
+				environmentView.addNamedElement(usedPackage);
+			}
+			if (!environmentView.hasFinalResult()) {
+				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
+				for (org.eclipse.ocl.examples.pivot.Package usedPackage : allPackages) {
+					assert usedPackage != null;
+					environmentView.addNamedElements(metaModelManager.getLocalClasses(usedPackage));
+				}
 			}
 		}
 		org.eclipse.ocl.examples.pivot.Class identifies = targetElement.getIdentifies();

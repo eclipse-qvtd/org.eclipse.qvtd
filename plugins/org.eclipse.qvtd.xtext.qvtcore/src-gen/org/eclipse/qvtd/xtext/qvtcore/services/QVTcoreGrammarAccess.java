@@ -174,15 +174,23 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class ComposedMappingCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ComposedMappingCS");
-		private final RuleCall cMappingCSParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cMappingCSParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cMappingCallCSParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//ComposedMappingCS returns MappingCS:
+		//ComposedMappingCS:
 		//
-		//	MappingCS;
+		//	MappingCS | MappingCallCS;
 		public ParserRule getRule() { return rule; }
 
+		//MappingCS | MappingCallCS
+		public Alternatives getAlternatives() { return cAlternatives; }
+
 		//MappingCS
-		public RuleCall getMappingCSParserRuleCall() { return cMappingCSParserRuleCall; }
+		public RuleCall getMappingCSParserRuleCall_0() { return cMappingCSParserRuleCall_0; }
+
+		//MappingCallCS
+		public RuleCall getMappingCallCSParserRuleCall_1() { return cMappingCallCSParserRuleCall_1; }
 	}
 
 	public class AssignmentCSElements extends AbstractParserRuleElementFinder {
@@ -645,6 +653,96 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
+	}
+
+	public class MappingCallCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MappingCallCS");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cMappingCallCSAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cMapKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cReferredMappingAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cReferredMappingMappingCrossReference_2_0 = (CrossReference)cReferredMappingAssignment_2.eContents().get(0);
+		private final RuleCall cReferredMappingMappingUnrestrictedNameParserRuleCall_2_0_1 = (RuleCall)cReferredMappingMappingCrossReference_2_0.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cBindingsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cBindingsMappingCallBindingCSParserRuleCall_4_0 = (RuleCall)cBindingsAssignment_4.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		
+		//MappingCallCS:
+		//
+		//	{MappingCallCS} "map" referredMapping=[qvtcore::Mapping|UnrestrictedName] "{" bindings+=MappingCallBindingCS* "}";
+		public ParserRule getRule() { return rule; }
+
+		//{MappingCallCS} "map" referredMapping=[qvtcore::Mapping|UnrestrictedName] "{" bindings+=MappingCallBindingCS* "}"
+		public Group getGroup() { return cGroup; }
+
+		//{MappingCallCS}
+		public Action getMappingCallCSAction_0() { return cMappingCallCSAction_0; }
+
+		//"map"
+		public Keyword getMapKeyword_1() { return cMapKeyword_1; }
+
+		//referredMapping=[qvtcore::Mapping|UnrestrictedName]
+		public Assignment getReferredMappingAssignment_2() { return cReferredMappingAssignment_2; }
+
+		//[qvtcore::Mapping|UnrestrictedName]
+		public CrossReference getReferredMappingMappingCrossReference_2_0() { return cReferredMappingMappingCrossReference_2_0; }
+
+		//UnrestrictedName
+		public RuleCall getReferredMappingMappingUnrestrictedNameParserRuleCall_2_0_1() { return cReferredMappingMappingUnrestrictedNameParserRuleCall_2_0_1; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+
+		//bindings+=MappingCallBindingCS*
+		public Assignment getBindingsAssignment_4() { return cBindingsAssignment_4; }
+
+		//MappingCallBindingCS
+		public RuleCall getBindingsMappingCallBindingCSParserRuleCall_4_0() { return cBindingsMappingCallBindingCSParserRuleCall_4_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+	}
+
+	public class MappingCallBindingCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MappingCallBindingCS");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cReferredVariableAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cReferredVariableVariableCrossReference_0_0 = (CrossReference)cReferredVariableAssignment_0.eContents().get(0);
+		private final RuleCall cReferredVariableVariableUnrestrictedNameParserRuleCall_0_0_1 = (RuleCall)cReferredVariableVariableCrossReference_0_0.eContents().get(1);
+		private final Keyword cColonEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cValueExpCSParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//MappingCallBindingCS:
+		//
+		//	referredVariable=[pivot::Variable|UnrestrictedName] ":=" value=ExpCS ";";
+		public ParserRule getRule() { return rule; }
+
+		//referredVariable=[pivot::Variable|UnrestrictedName] ":=" value=ExpCS ";"
+		public Group getGroup() { return cGroup; }
+
+		//referredVariable=[pivot::Variable|UnrestrictedName]
+		public Assignment getReferredVariableAssignment_0() { return cReferredVariableAssignment_0; }
+
+		//[pivot::Variable|UnrestrictedName]
+		public CrossReference getReferredVariableVariableCrossReference_0_0() { return cReferredVariableVariableCrossReference_0_0; }
+
+		//UnrestrictedName
+		public RuleCall getReferredVariableVariableUnrestrictedNameParserRuleCall_0_0_1() { return cReferredVariableVariableUnrestrictedNameParserRuleCall_0_0_1; }
+
+		//":="
+		public Keyword getColonEqualsSignKeyword_1() { return cColonEqualsSignKeyword_1; }
+
+		//value=ExpCS
+		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
+
+		//ExpCS
+		public RuleCall getValueExpCSParserRuleCall_2_0() { return cValueExpCSParserRuleCall_2_0; }
+
+		//";"
+		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
 	public class NamedDomainCSElements extends AbstractParserRuleElementFinder {
@@ -1179,6 +1277,8 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	private ImportCSElements pImportCS;
 	private LibraryCSElements pLibraryCS;
 	private MappingCSElements pMappingCS;
+	private MappingCallCSElements pMappingCallCS;
+	private MappingCallBindingCSElements pMappingCallBindingCS;
 	private NamedDomainCSElements pNamedDomainCS;
 	private ParamDeclarationCSElements pParamDeclarationCS;
 	private QueryCSElements pQueryCS;
@@ -1255,9 +1355,9 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		return getBottomPatternCSAccess().getRule();
 	}
 
-	//ComposedMappingCS returns MappingCS:
+	//ComposedMappingCS:
 	//
-	//	MappingCS;
+	//	MappingCS | MappingCallCS;
 	public ComposedMappingCSElements getComposedMappingCSAccess() {
 		return (pComposedMappingCS != null) ? pComposedMappingCS : (pComposedMappingCS = new ComposedMappingCSElements());
 	}
@@ -1348,6 +1448,28 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getMappingCSRule() {
 		return getMappingCSAccess().getRule();
+	}
+
+	//MappingCallCS:
+	//
+	//	{MappingCallCS} "map" referredMapping=[qvtcore::Mapping|UnrestrictedName] "{" bindings+=MappingCallBindingCS* "}";
+	public MappingCallCSElements getMappingCallCSAccess() {
+		return (pMappingCallCS != null) ? pMappingCallCS : (pMappingCallCS = new MappingCallCSElements());
+	}
+	
+	public ParserRule getMappingCallCSRule() {
+		return getMappingCallCSAccess().getRule();
+	}
+
+	//MappingCallBindingCS:
+	//
+	//	referredVariable=[pivot::Variable|UnrestrictedName] ":=" value=ExpCS ";";
+	public MappingCallBindingCSElements getMappingCallBindingCSAccess() {
+		return (pMappingCallBindingCS != null) ? pMappingCallBindingCS : (pMappingCallBindingCS = new MappingCallBindingCSElements());
+	}
+	
+	public ParserRule getMappingCallBindingCSRule() {
+		return getMappingCallBindingCSAccess().getRule();
 	}
 
 	//NamedDomainCS returns DomainCS:

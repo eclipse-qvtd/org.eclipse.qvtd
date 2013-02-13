@@ -26,6 +26,8 @@ import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.MappingCall;
+import org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
@@ -101,6 +103,18 @@ public class QVTcoreToStringVisitor extends QVTbaseToStringVisitor implements QV
 
 	public String visitMapping(@NonNull Mapping object) {
 		append("mapping ");
+		appendName(object);
+		return null;
+	}
+
+	public String visitMappingCall(@NonNull MappingCall object) {
+		append("mappingCall ");
+		appendName(object);
+		return null;
+	}
+
+	public String visitMappingCallBinding(@NonNull MappingCallBinding object) {
+		append("mappingCallBinding ");
 		appendName(object);
 		return null;
 	}

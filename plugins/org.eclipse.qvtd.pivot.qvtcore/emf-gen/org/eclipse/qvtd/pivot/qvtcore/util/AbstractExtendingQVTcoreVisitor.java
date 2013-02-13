@@ -80,6 +80,14 @@ public abstract class AbstractExtendingQVTcoreVisitor<R, C>
 		return visitRule(object);
 	}
 
+	public @Nullable R visitMappingCall(@NonNull org.eclipse.qvtd.pivot.qvtcore.MappingCall object) {
+		return visitOCLExpression(object);
+	}
+
+	public @Nullable R visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding object) {
+		return visitTypedElement(object);
+	}
+
 	public @Nullable R visitPropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment object) {
 		return visitAssignment(object);
 	}

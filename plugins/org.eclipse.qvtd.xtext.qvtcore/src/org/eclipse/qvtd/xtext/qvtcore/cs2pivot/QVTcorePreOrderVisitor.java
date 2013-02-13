@@ -27,6 +27,9 @@ import org.eclipse.ocl.examples.xtext.base.cs2pivot.PivotDependency;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.SingleContinuation;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.MappingCall;
+import org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding;
 import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS;
@@ -34,6 +37,8 @@ import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.RealizeableVariableCS;
@@ -129,6 +134,28 @@ public class QVTcorePreOrderVisitor extends AbstractQVTcorePreOrderVisitor
 
 	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
+		Mapping pMapping = PivotUtil.getPivot(Mapping.class, csElement);
+		if (pMapping != null) {
+			PivotUtil.refreshList(pMapping.getRefinement(), csElement.getRefines());
+		}
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitMappingCallBindingCS(@NonNull MappingCallBindingCS csElement) {
+		MappingCallBinding pivotElement = PivotUtil.getPivot(MappingCallBinding.class, csElement);
+		if (pivotElement != null) {
+			pivotElement.setBoundVariable(csElement.getReferredVariable());
+		}
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitMappingCallCS(@NonNull MappingCallCS csElement) {
+		MappingCall pivotElement = PivotUtil.getPivot(MappingCall.class, csElement);
+		if (pivotElement != null) {
+			pivotElement.setReferredMapping(csElement.getReferredMapping());
+		}
 		return null;
 	}
 

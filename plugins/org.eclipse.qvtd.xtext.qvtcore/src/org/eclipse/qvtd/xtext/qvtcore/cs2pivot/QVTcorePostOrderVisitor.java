@@ -26,22 +26,18 @@ import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
-import org.eclipse.ocl.examples.xtext.base.cs2pivot.BasicContinuation;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
-import org.eclipse.ocl.examples.xtext.base.cs2pivot.SingleContinuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
-import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtcorecst.AreaCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
@@ -51,6 +47,7 @@ import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.PatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QueryCS;
@@ -62,37 +59,6 @@ import org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS;
 
 public class QVTcorePostOrderVisitor extends AbstractQVTcorePostOrderVisitor
 {
-	public class BottomPatternCompletion extends SingleContinuation<BottomPatternCS>
-	{
-		public BottomPatternCompletion(@NonNull CS2PivotConversion context, @NonNull BottomPatternCS csElement) {
-			super(context, null, null, csElement);
-		}
-
-		@Override
-		public BasicContinuation<?> execute() {
-			BottomPattern pBottomPattern = PivotUtil.getPivot(BottomPattern.class, csElement);
-			if (pBottomPattern != null) {
-				refreshConstraints(pBottomPattern.getAssignment(), pBottomPattern.getPredicate(), csElement);
-			}
-			return null;
-		}
-	}
-
-	public class GuardPatternCompletion extends SingleContinuation<GuardPatternCS>
-	{
-		public GuardPatternCompletion(@NonNull CS2PivotConversion context, @NonNull GuardPatternCS csElement) {
-			super(context, null, null, csElement);
-		}
-
-		@Override
-		public BasicContinuation<?> execute() {
-			GuardPattern pGuardPattern = PivotUtil.getPivot(GuardPattern.class, csElement);
-			if (pGuardPattern != null) {
-				refreshConstraints(null, pGuardPattern.getPredicate(), csElement);
-			}
-			return null;
-		}
-	}
 
 	public QVTcorePostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
@@ -169,11 +135,9 @@ public class QVTcorePostOrderVisitor extends AbstractQVTcorePostOrderVisitor
 	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
 		BottomPattern pBottomPattern = PivotUtil.getPivot(BottomPattern.class, csElement);
 		if (pBottomPattern != null) {
-			context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getRealizedVariables());
-			context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getUnrealizedVariables());
-			context.refreshPivotList(EnforcementOperation.class, pBottomPattern.getEnforcementOperation(), csElement.getEnforcementOperations());
+			refreshConstraints(pBottomPattern.getAssignment(), pBottomPattern.getPredicate(), csElement);
 		}
-		return new BottomPatternCompletion(context, csElement);
+		return null;
 	}
 
 	@Override
@@ -200,16 +164,25 @@ public class QVTcorePostOrderVisitor extends AbstractQVTcorePostOrderVisitor
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
 		GuardPattern pGuardPattern = PivotUtil.getPivot(GuardPattern.class, csElement);
 		if (pGuardPattern != null) {
-			context.refreshPivotList(Variable.class, pGuardPattern.getVariable(), csElement.getUnrealizedVariables());
+			refreshConstraints(null, pGuardPattern.getPredicate(), csElement);
 		}
-		return new GuardPatternCompletion(context, csElement);
+		return null;
 	}
 
 	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
-		Mapping pMapping = PivotUtil.getPivot(Mapping.class, csElement);
-		if (pMapping != null) {
-			PivotUtil.refreshList(pMapping.getRefinement(), csElement.getRefines());
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitMappingCallBindingCS(@NonNull MappingCallBindingCS csElement) {
+		MappingCallBinding pBinding = PivotUtil.getPivot(MappingCallBinding.class, csElement);
+		if (pBinding != null) {
+			ExpCS expression = csElement.getValue();
+			if (expression != null) {
+				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
+				pBinding.setValue(target);
+			}
 		}
 		return null;
 	}

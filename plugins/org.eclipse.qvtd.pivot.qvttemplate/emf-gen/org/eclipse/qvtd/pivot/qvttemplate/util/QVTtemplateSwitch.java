@@ -19,6 +19,7 @@ package org.eclipse.qvtd.pivot.qvttemplate.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -242,7 +243,7 @@ public class QVTtemplateSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNameable(org.eclipse.ocl.examples.domain.elements.Nameable object) {
+	public T caseNameable(Nameable object) {
 		return null;
 	}
 

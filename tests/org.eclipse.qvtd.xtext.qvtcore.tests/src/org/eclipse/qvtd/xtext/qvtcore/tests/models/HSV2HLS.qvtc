@@ -1,0 +1,45 @@
+import 'HSV2HLS.ecore';			-- import the HSV2HLS package
+
+transformation ColorChange {	-- declare the ColorChange transformation
+	hsv imports HSVTree;		-- hsv TypedModel uses HSVTree package
+	hls imports HLSTree;		-- hls TypedModel uses HLSTree package
+	imports HSV2HLS;			-- middle TypedModel uses HSV2HLS package
+}
+								-- utility queries for color conversions
+query ColorChange::hls2rgb(color : HLSTree::HLS) : HSV2HLS::RGB;
+query ColorChange::hsv2rgb(color : HSVTree::HSV) : HSV2HLS::RGB;
+query ColorChange::rgb2hls(color : HSV2HLS::RGB) : HLSTree::HLS;
+query ColorChange::rgb2hsv(color : HSV2HLS::RGB) : HSVTree::HSV;
+
+map Node2Node in ColorChange {		-- abstract mapping of a Node
+	enforce hsv() { realize hsvNode : HSVNode | } -- hsv node exists
+	enforce hls() { realize hlsNode : HLSNode | } -- hls node exists
+	where() {
+		realize middleNode : HSVNode2HLSNode | 	-- middle node exists
+		middleNode.hsv := hsvNode;				-- middle to hsv trace
+		middleNode.hls := hlsNode;				-- middle to hls trace
+		middleNode.rgb := hsv2rgb(hsvNode.hsv);	-- hsv to middle color
+		middleNode.rgb := hls2rgb(hlsNode.hls);	-- hls to middle color
+		hsvNode.hsv := rgb2hsv(middleNode.rgb);	-- middle to hsv color
+		hlsNode.hls := rgb2hls(middleNode.rgb);	-- middle to hls color
+	}
+}
+
+map Root2Root in ColorChange refines Node2Node { -- refined for a root
+	enforce hsv() {					-- hsv can be an output
+		hsvNode.parent := null; }	-- parent must be null
+	enforce hls() {					-- hls can be an output
+		hlsNode.parent := null; }	-- parent must be null
+	where() {						-- middle is always the middle
+		middleNode.parent := null;	-- parent must be null
+	}
+}
+
+map Child2Child in ColorChange refines Node2Node { -- refined for a child
+	enforce hsv(hsvParent : HSVNode | ) {	-- additional parent variable
+		hsvNode.parent := hsvParent; }		-- node's parent is parent
+	enforce hls(hlsParent : HLSNode | ) {	-- additional parent variable
+		hlsNode.parent := hlsParent; }		-- node's parent is parent
+	where(middleParent : HSVNode2HLSNode | ) { -- additional parent var
+		middleNode.parent := middleParent; } -- node's parent is parent
+}

@@ -35,7 +35,7 @@ BottomPatternCS: {BottomPatternCS}
 	constraints+=AssignmentCS*
 ;
 		
-ComposedMappingCS returns MappingCS: MappingCS;
+ComposedMappingCS returns ComposedMappingCS: MappingCS | MappingCallCS;
 		
 //Constraint ::= Predicate | Assignment
 //Predicate ::= BooleanOCLExpr
@@ -66,6 +66,11 @@ LibraryCS returns base::LibraryCS:
 MappingCS: {MappingCS} 'map' name=UnrestrictedName? ('in' in=[qvtbase::Transformation|UnrestrictedName])?
 	('refines' refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)?
 	'{' domains+=NamedDomainCS* ('where' middle=UnnamedDomainCS)? composedMappings+=ComposedMappingCS* '}';
+	
+MappingCallCS: {MappingCallCS} 'map' referredMapping=[qvtcore::Mapping|UnrestrictedName]
+	'{' bindings+=MappingCallBindingCS* '}';
+
+MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] ':=' value=ExpCS ';';
 	
 NamedDomainCS returns DomainCS: check?='check'? enforce?='enforce'? direction=[qvtbase::TypedModel|UnrestrictedName]
 	'(' guardPattern=GuardPatternCS? ')' '{' bottomPattern=BottomPatternCS? '}';

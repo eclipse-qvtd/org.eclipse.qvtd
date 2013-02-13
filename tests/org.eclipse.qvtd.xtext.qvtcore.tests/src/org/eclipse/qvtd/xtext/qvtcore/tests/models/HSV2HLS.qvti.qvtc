@@ -1,0 +1,65 @@
+import 'HSV2HLS.ecore';
+
+transformation ColorChanger {
+	hsv imports HSVTree;
+	hls imports HLSTree;
+	imports HSV2HLS;
+}
+query ColorChanger::hls2rgb(color : HLSTree::HLS) : HSV2HLS::RGB;
+query ColorChanger::hsv2rgb(color : HSVTree::HSV) : HSV2HLS::RGB;
+query ColorChanger::rgb2hls(color : HSV2HLS::RGB) : HLSTree::HLS;
+query ColorChanger::rgb2hsv(color : HSV2HLS::RGB) : HSVTree::HSV;
+
+map HSV2MiddleRoot in ColorChanger {
+	hsv() { hsvRoot : HSVNode | hsvRoot.parent = null;}
+	where() {
+		realize middleRoot : HSVNode2HLSNode |
+		middleRoot.hsv := hsvRoot;
+		middleRoot.rgb := hsv2rgb(hsvRoot.hsv);
+	}
+	map HSV2MiddleRecursion {
+		hsvNode := hsvRoot.children;
+		middleParent := middleRoot;
+	}
+	map Middle2HLSRoot {
+		middleNode := middleRoot;
+	}
+}
+
+map HSV2MiddleRecursion in ColorChanger {
+	hsv(hsvNode : HSVNode | ) {}
+	where(middleParent : HSVNode2HLSNode | ) {
+		realize middleNode : HSVNode2HLSNode |
+		middleNode.parent := middleParent;
+		middleNode.hsv := hsvNode;
+		middleNode.rgb := hsv2rgb(hsvNode.hsv);
+	}
+	map HSV2MiddleRecursion {
+		hsvNode := hsvNode.children;
+		middleParent := middleNode;
+	}
+}
+
+map Middle2HLSRoot in ColorChanger {
+	enforce hls() { realize hlsNode : HLSNode | }
+	where(middleNode : HSVNode2HLSNode |) {
+		middleNode.hls := hlsNode;
+		hlsNode.parent := null;
+		hlsNode.hls := rgb2hls(middleNode.rgb);
+	}
+	map Middle2HLSRecursion {
+		middleNode := middleNode.children;
+	}
+}
+
+map Middle2HLSRecursion in ColorChanger {
+	enforce hls() { realize hlsNode : HLSNode | }
+	where(middleNode : HSVNode2HLSNode |) {
+		middleNode.hls := hlsNode;
+		hlsNode.parent := middleNode.parent.hls;
+		hlsNode.hls := rgb2hls(middleNode.rgb);
+	}
+	map Middle2HLSRecursion {
+		middleNode := middleNode.children;
+	}
+}

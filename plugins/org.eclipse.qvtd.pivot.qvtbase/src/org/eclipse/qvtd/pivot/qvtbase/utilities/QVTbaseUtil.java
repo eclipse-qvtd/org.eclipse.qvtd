@@ -20,13 +20,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 public class QVTbaseUtil
 {
-	public static Set<org.eclipse.ocl.examples.pivot.Package> getAllUsedPackages(Transformation transformation) {
+	public static @NonNull Set<org.eclipse.ocl.examples.pivot.Package> getAllUsedPackages(@NonNull Transformation transformation) {
 		Set<org.eclipse.ocl.examples.pivot.Package> allPackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
 		for (TypedModel typedModel : transformation.getModelParameter()) {
 			allPackages.addAll(typedModel.getUsedPackage());
@@ -34,7 +37,16 @@ public class QVTbaseUtil
 		return allPackages;
 	}
 
-	public static BaseModel getContainingModel(EObject eObject) {
+	public static @Nullable Domain getContainingDomain(@Nullable EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof Domain) {
+				return (Domain) eObject;
+			}
+		}
+		return null;
+	}
+
+	public static @Nullable BaseModel getContainingModel(@Nullable EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof BaseModel) {
 				return (BaseModel) eObject;
@@ -43,7 +55,7 @@ public class QVTbaseUtil
 		return null;
 	}
 
-	public static Transformation getContainingTransformation(EObject eObject) {
+	public static @Nullable Transformation getContainingTransformation(@Nullable EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Transformation) {
 				return (Transformation) eObject;

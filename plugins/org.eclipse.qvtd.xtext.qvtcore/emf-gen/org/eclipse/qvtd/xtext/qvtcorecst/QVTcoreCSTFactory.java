@@ -99,6 +99,24 @@ public interface QVTcoreCSTFactory extends EFactory {
 	MappingCS createMappingCS();
 
 	/**
+	 * Returns a new object of class '<em>Mapping Call Binding CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mapping Call Binding CS</em>'.
+	 * @generated
+	 */
+	MappingCallBindingCS createMappingCallBindingCS();
+
+	/**
+	 * Returns a new object of class '<em>Mapping Call CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mapping Call CS</em>'.
+	 * @generated
+	 */
+	MappingCallCS createMappingCallCS();
+
+	/**
 	 * Returns a new object of class '<em>Param Declaration CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

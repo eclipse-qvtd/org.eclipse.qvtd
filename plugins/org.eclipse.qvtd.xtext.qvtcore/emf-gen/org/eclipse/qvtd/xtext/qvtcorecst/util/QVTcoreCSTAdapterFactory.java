@@ -20,6 +20,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
@@ -35,11 +36,14 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.AreaCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.PatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
@@ -119,6 +123,10 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 				return createBottomPatternCSAdapter();
 			}
 			@Override
+			public Adapter caseComposedMappingCS(ComposedMappingCS object) {
+				return createComposedMappingCSAdapter();
+			}
+			@Override
 			public Adapter caseDirectionCS(DirectionCS object) {
 				return createDirectionCSAdapter();
 			}
@@ -137,6 +145,14 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseMappingCS(MappingCS object) {
 				return createMappingCSAdapter();
+			}
+			@Override
+			public Adapter caseMappingCallBindingCS(MappingCallBindingCS object) {
+				return createMappingCallBindingCSAdapter();
+			}
+			@Override
+			public Adapter caseMappingCallCS(MappingCallCS object) {
+				return createMappingCallCSAdapter();
 			}
 			@Override
 			public Adapter caseParamDeclarationCS(ParamDeclarationCS object) {
@@ -191,7 +207,7 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 				return createModelElementCSAdapter();
 			}
 			@Override
-			public Adapter caseNameable(org.eclipse.ocl.examples.domain.elements.Nameable object) {
+			public Adapter caseNameable(Nameable object) {
 				return createNameableAdapter();
 			}
 			@Override
@@ -285,6 +301,20 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS <em>Composed Mapping CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS
+	 * @generated
+	 */
+	public Adapter createComposedMappingCSAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS <em>Direction CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -351,6 +381,34 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS <em>Mapping Call Binding CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS
+	 * @generated
+	 */
+	public Adapter createMappingCallBindingCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS <em>Mapping Call CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS
+	 * @generated
+	 */
+	public Adapter createMappingCallCSAdapter() {
 		return null;
 	}
 

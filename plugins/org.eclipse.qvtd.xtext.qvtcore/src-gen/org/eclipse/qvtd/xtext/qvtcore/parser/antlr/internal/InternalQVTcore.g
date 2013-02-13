@@ -327,12 +327,12 @@ ruleComposedMappingCS returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-
+(
 	{ 
 	  /* */ 
 	}
     { 
-        newCompositeNode(grammarAccess.getComposedMappingCSAccess().getMappingCSParserRuleCall()); 
+        newCompositeNode(grammarAccess.getComposedMappingCSAccess().getMappingCSParserRuleCall_0()); 
     }
     this_MappingCS_0=ruleMappingCS
     { 
@@ -340,6 +340,19 @@ ruleComposedMappingCS returns [EObject current=null]
         afterParserOrEnumRuleCall();
     }
 
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        newCompositeNode(grammarAccess.getComposedMappingCSAccess().getMappingCallCSParserRuleCall_1()); 
+    }
+    this_MappingCallCS_1=ruleMappingCallCS
+    { 
+        $current = $this_MappingCallCS_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
 ;
 
 
@@ -965,6 +978,149 @@ ruleMappingCS returns [EObject current=null]
 )*	otherlv_14='}' 
     {
     	newLeafNode(otherlv_14, grammarAccess.getMappingCSAccess().getRightCurlyBracketKeyword_9());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleMappingCallCS
+entryRuleMappingCallCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getMappingCallCSRule()); }
+	 iv_ruleMappingCallCS=ruleMappingCallCS 
+	 { $current=$iv_ruleMappingCallCS.current; } 
+	 EOF 
+;
+
+// Rule MappingCallCS
+ruleMappingCallCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+	{ 
+	  /* */ 
+	}
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getMappingCallCSAccess().getMappingCallCSAction_0(),
+            $current);
+    }
+)	otherlv_1='map' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getMappingCallCSAccess().getMapKeyword_1());
+    }
+(
+(
+		{ 
+		  /* */ 
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getMappingCallCSRule());
+	        }
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getMappingCallCSAccess().getReferredMappingMappingCrossReference_2_0()); 
+	    }
+		ruleUnrestrictedName		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_3='{' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getMappingCallCSAccess().getLeftCurlyBracketKeyword_3());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getMappingCallCSAccess().getBindingsMappingCallBindingCSParserRuleCall_4_0()); 
+	    }
+		lv_bindings_4_0=ruleMappingCallBindingCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMappingCallCSRule());
+	        }
+       		add(
+       			$current, 
+       			"bindings",
+        		lv_bindings_4_0, 
+        		"MappingCallBindingCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)*	otherlv_5='}' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getMappingCallCSAccess().getRightCurlyBracketKeyword_5());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleMappingCallBindingCS
+entryRuleMappingCallBindingCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getMappingCallBindingCSRule()); }
+	 iv_ruleMappingCallBindingCS=ruleMappingCallBindingCS 
+	 { $current=$iv_ruleMappingCallBindingCS.current; } 
+	 EOF 
+;
+
+// Rule MappingCallBindingCS
+ruleMappingCallBindingCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
+		{ 
+		  /* */ 
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getMappingCallBindingCSRule());
+	        }
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getMappingCallBindingCSAccess().getReferredVariableVariableCrossReference_0_0()); 
+	    }
+		ruleUnrestrictedName		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_1=':=' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getMappingCallBindingCSAccess().getColonEqualsSignKeyword_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getMappingCallBindingCSAccess().getValueExpCSParserRuleCall_2_0()); 
+	    }
+		lv_value_2_0=ruleExpCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMappingCallBindingCSRule());
+	        }
+       		set(
+       			$current, 
+       			"value",
+        		lv_value_2_0, 
+        		"ExpCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_3=';' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getMappingCallBindingCSAccess().getSemicolonKeyword_3());
     }
 )
 ;

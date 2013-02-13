@@ -51,4 +51,12 @@ public class LoadTests extends LoadTestCase
 	public void testLoad_uml2rdbms_qvtu_qvtc() throws IOException, InterruptedException {
 		doLoad_Concrete("uml2rdbms.qvtu", "qvtc");
 	}	
+
+	public void testLoad_HSV2HLS_qvtc() throws IOException, InterruptedException {
+		doLoad_Concrete("HSV2HLS", "qvtc");
+	}	
+
+	public void testLoad_HSV2HLS_qvti_qvtc() throws IOException, InterruptedException {
+		doLoad_Concrete("HSV2HLS.qvti", "qvtc");
+	}	
 }

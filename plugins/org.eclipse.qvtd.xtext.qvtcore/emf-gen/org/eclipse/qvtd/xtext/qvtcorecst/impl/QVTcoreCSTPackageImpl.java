@@ -29,11 +29,14 @@ import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.xtext.qvtcorecst.AreaCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.PatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTFactory;
@@ -78,6 +81,13 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass composedMappingCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass directionCSEClass = null;
 
 	/**
@@ -107,6 +117,20 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 	 * @generated
 	 */
 	private EClass mappingCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mappingCallBindingCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mappingCallCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -324,6 +348,15 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getComposedMappingCS() {
+		return composedMappingCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDirectionCS() {
 		return directionCSEClass;
 	}
@@ -470,6 +503,69 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 	 */
 	public EReference getMappingCS_Refines() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMappingCallBindingCS() {
+		return mappingCallBindingCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMappingCallBindingCS_MappingCall() {
+		return (EReference)mappingCallBindingCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMappingCallBindingCS_ReferredVariable() {
+		return (EReference)mappingCallBindingCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMappingCallBindingCS_Value() {
+		return (EReference)mappingCallBindingCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMappingCallCS() {
+		return mappingCallCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMappingCallCS_ReferredMapping() {
+		return (EReference)mappingCallCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMappingCallCS_Bindings() {
+		return (EReference)mappingCallCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -693,6 +789,8 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 		createEReference(bottomPatternCSEClass, BOTTOM_PATTERN_CS__ENFORCEMENT_OPERATIONS);
 		createEReference(bottomPatternCSEClass, BOTTOM_PATTERN_CS__REALIZED_VARIABLES);
 
+		composedMappingCSEClass = createEClass(COMPOSED_MAPPING_CS);
+
 		directionCSEClass = createEClass(DIRECTION_CS);
 		createEReference(directionCSEClass, DIRECTION_CS__IMPORTS);
 		createEReference(directionCSEClass, DIRECTION_CS__USES);
@@ -714,6 +812,15 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 		createEReference(mappingCSEClass, MAPPING_CS__IN);
 		createEReference(mappingCSEClass, MAPPING_CS__MIDDLE);
 		createEReference(mappingCSEClass, MAPPING_CS__REFINES);
+
+		mappingCallBindingCSEClass = createEClass(MAPPING_CALL_BINDING_CS);
+		createEReference(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__MAPPING_CALL);
+		createEReference(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE);
+		createEReference(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__VALUE);
+
+		mappingCallCSEClass = createEClass(MAPPING_CALL_CS);
+		createEReference(mappingCallCSEClass, MAPPING_CALL_CS__REFERRED_MAPPING);
+		createEReference(mappingCallCSEClass, MAPPING_CALL_CS__BINDINGS);
 
 		paramDeclarationCSEClass = createEClass(PARAM_DECLARATION_CS);
 
@@ -782,11 +889,14 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 		areaCSEClass.getESuperTypes().add(theBaseCSTPackage.getNamedElementCS());
 		assignmentCSEClass.getESuperTypes().add(theEssentialOCLCSTPackage.getExpCS());
 		bottomPatternCSEClass.getESuperTypes().add(this.getPatternCS());
+		composedMappingCSEClass.getESuperTypes().add(theBaseCSTPackage.getNamedElementCS());
 		directionCSEClass.getESuperTypes().add(theBaseCSTPackage.getNamedElementCS());
 		domainCSEClass.getESuperTypes().add(this.getAreaCS());
 		enforcementOperationCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
 		guardPatternCSEClass.getESuperTypes().add(this.getPatternCS());
-		mappingCSEClass.getESuperTypes().add(theBaseCSTPackage.getNamedElementCS());
+		mappingCSEClass.getESuperTypes().add(this.getComposedMappingCS());
+		mappingCallBindingCSEClass.getESuperTypes().add(theEssentialOCLCSTPackage.getExpCS());
+		mappingCallCSEClass.getESuperTypes().add(this.getComposedMappingCS());
 		paramDeclarationCSEClass.getESuperTypes().add(theBaseCSTPackage.getTypedElementCS());
 		patternCSEClass.getESuperTypes().add(theBaseCSTPackage.getModelElementCS());
 		queryCSEClass.getESuperTypes().add(theBaseCSTPackage.getTypedElementCS());
@@ -810,6 +920,8 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 		initEReference(getBottomPatternCS_EnforcementOperations(), this.getEnforcementOperationCS(), null, "enforcementOperations", null, 0, -1, BottomPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBottomPatternCS_RealizedVariables(), this.getRealizedVariableCS(), null, "realizedVariables", null, 0, -1, BottomPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(composedMappingCSEClass, ComposedMappingCS.class, "ComposedMappingCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(directionCSEClass, DirectionCS.class, "DirectionCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDirectionCS_Imports(), thePivotPackage.getPackage(), null, "imports", null, 0, -1, DirectionCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDirectionCS_Uses(), theQVTcorePackage.getCoreDomain(), null, "uses", null, 0, -1, DirectionCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -826,11 +938,20 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 		initEClass(guardPatternCSEClass, GuardPatternCS.class, "GuardPatternCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(mappingCSEClass, MappingCS.class, "MappingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMappingCS_ComposedMappings(), this.getMappingCS(), null, "composedMappings", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCS_ComposedMappings(), this.getComposedMappingCS(), null, "composedMappings", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_Domains(), this.getDomainCS(), null, "domains", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_In(), theQVTbasePackage.getTransformation(), null, "in", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_Middle(), this.getDomainCS(), null, "middle", null, 1, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_Refines(), theQVTcorePackage.getMapping(), null, "refines", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mappingCallBindingCSEClass, MappingCallBindingCS.class, "MappingCallBindingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMappingCallBindingCS_MappingCall(), this.getMappingCallCS(), this.getMappingCallCS_Bindings(), "mappingCall", null, 0, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCallBindingCS_ReferredVariable(), thePivotPackage.getVariable(), null, "referredVariable", null, 1, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCallBindingCS_Value(), theEssentialOCLCSTPackage.getExpCS(), null, "value", null, 1, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mappingCallCSEClass, MappingCallCS.class, "MappingCallCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMappingCallCS_ReferredMapping(), theQVTcorePackage.getMapping(), null, "referredMapping", null, 1, 1, MappingCallCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCallCS_Bindings(), this.getMappingCallBindingCS(), this.getMappingCallBindingCS_MappingCall(), "bindings", null, 0, -1, MappingCallCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(paramDeclarationCSEClass, ParamDeclarationCS.class, "ParamDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

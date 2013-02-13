@@ -28,10 +28,10 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.xtext.base.baseCST.impl.NamedElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
@@ -54,7 +54,7 @@ import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
  *
  * @generated
  */
-public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
+public class MappingCSImpl extends ComposedMappingCSImpl implements MappingCS {
 	/**
 	 * The cached value of the '{@link #getComposedMappings() <em>Composed Mappings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -63,7 +63,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MappingCS> composedMappings;
+	protected EList<ComposedMappingCS> composedMappings;
 
 	/**
 	 * The cached value of the '{@link #getDomains() <em>Domains</em>}' containment reference list.
@@ -129,9 +129,9 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<MappingCS> getComposedMappings() {
+	public EList<ComposedMappingCS> getComposedMappings() {
 		if (composedMappings == null) {
-			composedMappings = new EObjectContainmentEList<MappingCS>(MappingCS.class, this, QVTcoreCSTPackage.MAPPING_CS__COMPOSED_MAPPINGS);
+			composedMappings = new EObjectContainmentEList<ComposedMappingCS>(ComposedMappingCS.class, this, QVTcoreCSTPackage.MAPPING_CS__COMPOSED_MAPPINGS);
 		}
 		return composedMappings;
 	}
@@ -293,7 +293,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		switch (featureID) {
 			case QVTcoreCSTPackage.MAPPING_CS__COMPOSED_MAPPINGS:
 				getComposedMappings().clear();
-				getComposedMappings().addAll((Collection<? extends MappingCS>)newValue);
+				getComposedMappings().addAll((Collection<? extends ComposedMappingCS>)newValue);
 				return;
 			case QVTcoreCSTPackage.MAPPING_CS__DOMAINS:
 				getDomains().clear();

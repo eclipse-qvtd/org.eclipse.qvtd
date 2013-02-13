@@ -839,13 +839,22 @@ public interface QVTcorePackage extends EPackage {
 	int MAPPING__BOTTOM_PATTERN = QVTbasePackage.RULE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING__CONTEXT = QVTbasePackage.RULE_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Specification</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING__SPECIFICATION = QVTbasePackage.RULE_FEATURE_COUNT + 2;
+	int MAPPING__SPECIFICATION = QVTbasePackage.RULE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Local</b></em>' containment reference list.
@@ -854,16 +863,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING__LOCAL = QVTbasePackage.RULE_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Context</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING__CONTEXT = QVTbasePackage.RULE_FEATURE_COUNT + 4;
+	int MAPPING__LOCAL = QVTbasePackage.RULE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Refinement</b></em>' reference list.
@@ -875,13 +875,304 @@ public interface QVTcorePackage extends EPackage {
 	int MAPPING__REFINEMENT = QVTbasePackage.RULE_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Nested Call</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING__NESTED_CALL = QVTbasePackage.RULE_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_FEATURE_COUNT = QVTbasePackage.RULE_FEATURE_COUNT + 6;
+	int MAPPING_FEATURE_COUNT = QVTbasePackage.RULE_FEATURE_COUNT + 7;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingCallImpl <em>Mapping Call</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.MappingCallImpl
+	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getMappingCall()
+	 * @generated
+	 */
+	int MAPPING_CALL = 9;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__OWNED_COMMENT = PivotPackage.OCL_EXPRESSION__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__EXTENSION = PivotPackage.OCL_EXPRESSION__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__NAME = PivotPackage.OCL_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__OWNED_RULE = PivotPackage.OCL_EXPRESSION__OWNED_RULE;
+
+	/**
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__IS_STATIC = PivotPackage.OCL_EXPRESSION__IS_STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__OWNED_ANNOTATION = PivotPackage.OCL_EXPRESSION__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__TYPE = PivotPackage.OCL_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__IS_REQUIRED = PivotPackage.OCL_EXPRESSION__IS_REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__CONTEXT = PivotPackage.OCL_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Referred Mapping</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__REFERRED_MAPPING = PivotPackage.OCL_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__BINDING = PivotPackage.OCL_EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Mapping Call</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_FEATURE_COUNT = PivotPackage.OCL_EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingCallBindingImpl <em>Mapping Call Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.MappingCallBindingImpl
+	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getMappingCallBinding()
+	 * @generated
+	 */
+	int MAPPING_CALL_BINDING = 10;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING__OWNED_COMMENT = PivotPackage.TYPED_ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING__EXTENSION = PivotPackage.TYPED_ELEMENT__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING__NAME = PivotPackage.TYPED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING__OWNED_RULE = PivotPackage.TYPED_ELEMENT__OWNED_RULE;
+
+	/**
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING__IS_STATIC = PivotPackage.TYPED_ELEMENT__IS_STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING__OWNED_ANNOTATION = PivotPackage.TYPED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING__TYPE = PivotPackage.TYPED_ELEMENT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING__IS_REQUIRED = PivotPackage.TYPED_ELEMENT__IS_REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Mapping Call</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING__MAPPING_CALL = PivotPackage.TYPED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Bound Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING__BOUND_VARIABLE = PivotPackage.TYPED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING__VALUE = PivotPackage.TYPED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Mapping Call Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING_FEATURE_COUNT = PivotPackage.TYPED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.NestedMapping <em>Nested Mapping</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtcore.NestedMapping
+	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getNestedMapping()
+	 * @generated
+	 */
+	int NESTED_MAPPING = 11;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NESTED_MAPPING__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NESTED_MAPPING__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NESTED_MAPPING__CONTEXT = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Nested Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NESTED_MAPPING_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.PropertyAssignmentImpl <em>Property Assignment</em>}' class.
@@ -891,7 +1182,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getPropertyAssignment()
 	 * @generated
 	 */
-	int PROPERTY_ASSIGNMENT = 9;
+	int PROPERTY_ASSIGNMENT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -973,7 +1264,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getRealizedVariable()
 	 * @generated
 	 */
-	int REALIZED_VARIABLE = 10;
+	int REALIZED_VARIABLE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -1091,7 +1382,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getVariableAssignment()
 	 * @generated
 	 */
-	int VARIABLE_ASSIGNMENT = 11;
+	int VARIABLE_ASSIGNMENT = 14;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -1164,7 +1455,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getEnforcementMode()
 	 * @generated
 	 */
-	int ENFORCEMENT_MODE = 12;
+	int ENFORCEMENT_MODE = 15;
 
 
 	/**
@@ -1434,17 +1725,6 @@ public interface QVTcorePackage extends EPackage {
 	EReference getMapping_Local();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtcore.Mapping#getContext <em>Context</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Context</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtcore.Mapping#getContext()
-	 * @see #getMapping()
-	 * @generated
-	 */
-	EReference getMapping_Context();
-
-	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtcore.Mapping#getRefinement <em>Refinement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1454,6 +1734,113 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMapping_Refinement();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtcore.Mapping#getNestedCall <em>Nested Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Nested Call</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.Mapping#getNestedCall()
+	 * @see #getMapping()
+	 * @generated
+	 */
+	EReference getMapping_NestedCall();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.MappingCall <em>Mapping Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Mapping Call</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.MappingCall
+	 * @generated
+	 */
+	EClass getMappingCall();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtcore.MappingCall#getReferredMapping <em>Referred Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Mapping</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.MappingCall#getReferredMapping()
+	 * @see #getMappingCall()
+	 * @generated
+	 */
+	EReference getMappingCall_ReferredMapping();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtcore.MappingCall#getBinding <em>Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Binding</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.MappingCall#getBinding()
+	 * @see #getMappingCall()
+	 * @generated
+	 */
+	EReference getMappingCall_Binding();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding <em>Mapping Call Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Mapping Call Binding</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding
+	 * @generated
+	 */
+	EClass getMappingCallBinding();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding#getMappingCall <em>Mapping Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Mapping Call</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding#getMappingCall()
+	 * @see #getMappingCallBinding()
+	 * @generated
+	 */
+	EReference getMappingCallBinding_MappingCall();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding#getBoundVariable <em>Bound Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Bound Variable</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding#getBoundVariable()
+	 * @see #getMappingCallBinding()
+	 * @generated
+	 */
+	EReference getMappingCallBinding_BoundVariable();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding#getValue()
+	 * @see #getMappingCallBinding()
+	 * @generated
+	 */
+	EReference getMappingCallBinding_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.NestedMapping <em>Nested Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Nested Mapping</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.NestedMapping
+	 * @generated
+	 */
+	EClass getNestedMapping();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtcore.NestedMapping#getContext <em>Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Context</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.NestedMapping#getContext()
+	 * @see #getNestedMapping()
+	 * @generated
+	 */
+	EReference getNestedMapping_Context();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment <em>Property Assignment</em>}'.
@@ -1769,20 +2156,98 @@ public interface QVTcorePackage extends EPackage {
 		EReference MAPPING__LOCAL = eINSTANCE.getMapping_Local();
 
 		/**
-		 * The meta object literal for the '<em><b>Context</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MAPPING__CONTEXT = eINSTANCE.getMapping_Context();
-
-		/**
 		 * The meta object literal for the '<em><b>Refinement</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference MAPPING__REFINEMENT = eINSTANCE.getMapping_Refinement();
+
+		/**
+		 * The meta object literal for the '<em><b>Nested Call</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING__NESTED_CALL = eINSTANCE.getMapping_NestedCall();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingCallImpl <em>Mapping Call</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtcore.impl.MappingCallImpl
+		 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getMappingCall()
+		 * @generated
+		 */
+		EClass MAPPING_CALL = eINSTANCE.getMappingCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Mapping</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_CALL__REFERRED_MAPPING = eINSTANCE.getMappingCall_ReferredMapping();
+
+		/**
+		 * The meta object literal for the '<em><b>Binding</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_CALL__BINDING = eINSTANCE.getMappingCall_Binding();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingCallBindingImpl <em>Mapping Call Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtcore.impl.MappingCallBindingImpl
+		 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getMappingCallBinding()
+		 * @generated
+		 */
+		EClass MAPPING_CALL_BINDING = eINSTANCE.getMappingCallBinding();
+
+		/**
+		 * The meta object literal for the '<em><b>Mapping Call</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_CALL_BINDING__MAPPING_CALL = eINSTANCE.getMappingCallBinding_MappingCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Bound Variable</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_CALL_BINDING__BOUND_VARIABLE = eINSTANCE.getMappingCallBinding_BoundVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_CALL_BINDING__VALUE = eINSTANCE.getMappingCallBinding_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.NestedMapping <em>Nested Mapping</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtcore.NestedMapping
+		 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getNestedMapping()
+		 * @generated
+		 */
+		EClass NESTED_MAPPING = eINSTANCE.getNestedMapping();
+
+		/**
+		 * The meta object literal for the '<em><b>Context</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NESTED_MAPPING__CONTEXT = eINSTANCE.getNestedMapping_Context();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.PropertyAssignmentImpl <em>Property Assignment</em>}' class.

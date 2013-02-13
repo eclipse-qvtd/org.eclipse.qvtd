@@ -76,6 +76,14 @@ public abstract class AbstractNullQVTcoreVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitMappingCall(@NonNull org.eclipse.qvtd.pivot.qvtcore.MappingCall object) {
+		return null;
+	}
+
+	public @Nullable R visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding object) {
+		return null;
+	}
+
 	public @Nullable R visitPropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment object) {
 		return null;
 	}

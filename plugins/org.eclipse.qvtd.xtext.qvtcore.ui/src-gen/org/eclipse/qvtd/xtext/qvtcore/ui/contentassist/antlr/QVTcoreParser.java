@@ -41,6 +41,7 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTopLevelCSAccess().getAlternatives_1(), "rule__TopLevelCS__Alternatives_1");
 					put(grammarAccess.getBottomPatternCSAccess().getAlternatives_1_0(), "rule__BottomPatternCS__Alternatives_1_0");
 					put(grammarAccess.getBottomPatternCSAccess().getAlternatives_1_1_1(), "rule__BottomPatternCS__Alternatives_1_1_1");
+					put(grammarAccess.getComposedMappingCSAccess().getAlternatives(), "rule__ComposedMappingCS__Alternatives");
 					put(grammarAccess.getQueryCSAccess().getAlternatives_8(), "rule__QueryCS__Alternatives_8");
 					put(grammarAccess.getUnrestrictedNameAccess().getAlternatives(), "rule__UnrestrictedName__Alternatives");
 					put(grammarAccess.getIDAccess().getAlternatives(), "rule__ID__Alternatives");
@@ -89,6 +90,8 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMappingCSAccess().getGroup_4(), "rule__MappingCS__Group_4__0");
 					put(grammarAccess.getMappingCSAccess().getGroup_4_2(), "rule__MappingCS__Group_4_2__0");
 					put(grammarAccess.getMappingCSAccess().getGroup_7(), "rule__MappingCS__Group_7__0");
+					put(grammarAccess.getMappingCallCSAccess().getGroup(), "rule__MappingCallCS__Group__0");
+					put(grammarAccess.getMappingCallBindingCSAccess().getGroup(), "rule__MappingCallBindingCS__Group__0");
 					put(grammarAccess.getNamedDomainCSAccess().getGroup(), "rule__NamedDomainCS__Group__0");
 					put(grammarAccess.getParamDeclarationCSAccess().getGroup(), "rule__ParamDeclarationCS__Group__0");
 					put(grammarAccess.getQueryCSAccess().getGroup(), "rule__QueryCS__Group__0");
@@ -203,6 +206,10 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMappingCSAccess().getDomainsAssignment_6(), "rule__MappingCS__DomainsAssignment_6");
 					put(grammarAccess.getMappingCSAccess().getMiddleAssignment_7_1(), "rule__MappingCS__MiddleAssignment_7_1");
 					put(grammarAccess.getMappingCSAccess().getComposedMappingsAssignment_8(), "rule__MappingCS__ComposedMappingsAssignment_8");
+					put(grammarAccess.getMappingCallCSAccess().getReferredMappingAssignment_2(), "rule__MappingCallCS__ReferredMappingAssignment_2");
+					put(grammarAccess.getMappingCallCSAccess().getBindingsAssignment_4(), "rule__MappingCallCS__BindingsAssignment_4");
+					put(grammarAccess.getMappingCallBindingCSAccess().getReferredVariableAssignment_0(), "rule__MappingCallBindingCS__ReferredVariableAssignment_0");
+					put(grammarAccess.getMappingCallBindingCSAccess().getValueAssignment_2(), "rule__MappingCallBindingCS__ValueAssignment_2");
 					put(grammarAccess.getNamedDomainCSAccess().getCheckAssignment_0(), "rule__NamedDomainCS__CheckAssignment_0");
 					put(grammarAccess.getNamedDomainCSAccess().getEnforceAssignment_1(), "rule__NamedDomainCS__EnforceAssignment_1");
 					put(grammarAccess.getNamedDomainCSAccess().getDirectionAssignment_2(), "rule__NamedDomainCS__DirectionAssignment_2");

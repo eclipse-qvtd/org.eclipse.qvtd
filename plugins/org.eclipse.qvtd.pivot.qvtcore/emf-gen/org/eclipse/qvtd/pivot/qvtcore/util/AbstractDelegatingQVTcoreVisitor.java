@@ -76,6 +76,14 @@ public abstract class AbstractDelegatingQVTcoreVisitor<R, C, D extends QVTcoreVi
 		return delegate.visitMapping(object);
 	}
 
+	public @Nullable R visitMappingCall(@NonNull org.eclipse.qvtd.pivot.qvtcore.MappingCall object) {
+		return delegate.visitMappingCall(object);
+	}
+
+	public @Nullable R visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding object) {
+		return delegate.visitMappingCallBinding(object);
+	}
+
 	public @Nullable R visitPropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment object) {
 		return delegate.visitPropertyAssignment(object);
 	}

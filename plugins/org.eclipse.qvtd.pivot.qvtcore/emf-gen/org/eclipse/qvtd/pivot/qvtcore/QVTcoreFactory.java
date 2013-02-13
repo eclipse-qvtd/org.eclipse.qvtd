@@ -99,6 +99,24 @@ public interface QVTcoreFactory extends EFactory {
 	Mapping createMapping();
 
 	/**
+	 * Returns a new object of class '<em>Mapping Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mapping Call</em>'.
+	 * @generated
+	 */
+	MappingCall createMappingCall();
+
+	/**
+	 * Returns a new object of class '<em>Mapping Call Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mapping Call Binding</em>'.
+	 * @generated
+	 */
+	MappingCallBinding createMappingCallBinding();
+
+	/**
 	 * Returns a new object of class '<em>Property Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

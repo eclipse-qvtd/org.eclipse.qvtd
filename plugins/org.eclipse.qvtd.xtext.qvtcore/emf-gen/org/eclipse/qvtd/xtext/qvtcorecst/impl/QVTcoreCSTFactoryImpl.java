@@ -77,6 +77,8 @@ public class QVTcoreCSTFactoryImpl extends EFactoryImpl implements QVTcoreCSTFac
 			case QVTcoreCSTPackage.ENFORCEMENT_OPERATION_CS: return createEnforcementOperationCS();
 			case QVTcoreCSTPackage.GUARD_PATTERN_CS: return createGuardPatternCS();
 			case QVTcoreCSTPackage.MAPPING_CS: return createMappingCS();
+			case QVTcoreCSTPackage.MAPPING_CALL_BINDING_CS: return createMappingCallBindingCS();
+			case QVTcoreCSTPackage.MAPPING_CALL_CS: return createMappingCallCS();
 			case QVTcoreCSTPackage.PARAM_DECLARATION_CS: return createParamDeclarationCS();
 			case QVTcoreCSTPackage.QUERY_CS: return createQueryCS();
 			case QVTcoreCSTPackage.REALIZED_VARIABLE_CS: return createRealizedVariableCS();
@@ -156,6 +158,26 @@ public class QVTcoreCSTFactoryImpl extends EFactoryImpl implements QVTcoreCSTFac
 	public MappingCS createMappingCS() {
 		MappingCSImpl mappingCS = new MappingCSImpl();
 		return mappingCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MappingCallBindingCS createMappingCallBindingCS() {
+		MappingCallBindingCSImpl mappingCallBindingCS = new MappingCallBindingCSImpl();
+		return mappingCallBindingCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MappingCallCS createMappingCallCS() {
+		MappingCallCSImpl mappingCallCS = new MappingCallCSImpl();
+		return mappingCallCS;
 	}
 
 	/**

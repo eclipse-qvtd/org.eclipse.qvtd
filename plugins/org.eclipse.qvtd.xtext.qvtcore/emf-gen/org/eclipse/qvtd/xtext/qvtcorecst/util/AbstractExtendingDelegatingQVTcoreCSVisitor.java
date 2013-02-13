@@ -58,6 +58,10 @@ public abstract class AbstractExtendingDelegatingQVTcoreCSVisitor<R, C, D extend
 		return visitPatternCS(object);
 	}
 
+	public @Nullable R visitComposedMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS object) {
+		return delegate.visitNamedElementCS(object);
+	}
+
 	public @Nullable R visitDirectionCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS object) {
 		return delegate.visitNamedElementCS(object);
 	}
@@ -75,7 +79,15 @@ public abstract class AbstractExtendingDelegatingQVTcoreCSVisitor<R, C, D extend
 	}
 
 	public @Nullable R visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCS object) {
-		return delegate.visitNamedElementCS(object);
+		return visitComposedMappingCS(object);
+	}
+
+	public @Nullable R visitMappingCallBindingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS object) {
+		return delegate.visitExpCS(object);
+	}
+
+	public @Nullable R visitMappingCallCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS object) {
+		return visitComposedMappingCS(object);
 	}
 
 	public @Nullable R visitParamDeclarationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS object) {

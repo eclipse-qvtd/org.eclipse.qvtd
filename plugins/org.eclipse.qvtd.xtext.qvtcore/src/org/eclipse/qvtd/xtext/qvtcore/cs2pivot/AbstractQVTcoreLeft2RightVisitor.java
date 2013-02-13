@@ -43,6 +43,10 @@ public class AbstractQVTcoreLeft2RightVisitor extends EssentialOCLLeft2RightVisi
 		return visitPatternCS(object);
 	}
 
+	public Element visitComposedMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS object) {
+		return visitNamedElementCS(object);
+	}
+
 	public Element visitDirectionCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS object) {
 		return visitNamedElementCS(object);
 	}
@@ -60,7 +64,15 @@ public class AbstractQVTcoreLeft2RightVisitor extends EssentialOCLLeft2RightVisi
 	}
 
 	public Element visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCS object) {
-		return visitNamedElementCS(object);
+		return visitComposedMappingCS(object);
+	}
+
+	public Element visitMappingCallBindingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS object) {
+		return visitExpCS(object);
+	}
+
+	public Element visitMappingCallCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS object) {
+		return visitComposedMappingCS(object);
 	}
 
 	public Element visitParamDeclarationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS object) {

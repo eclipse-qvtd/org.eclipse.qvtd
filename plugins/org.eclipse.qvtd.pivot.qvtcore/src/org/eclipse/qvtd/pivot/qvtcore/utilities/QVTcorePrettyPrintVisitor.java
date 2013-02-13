@@ -26,6 +26,8 @@ import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.MappingCall;
+import org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
@@ -88,6 +90,16 @@ public class QVTcorePrettyPrintVisitor extends QVTbasePrettyPrintVisitor impleme
 	}
 
 	public Object visitMapping(@NonNull Mapping object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visitMappingCall(@NonNull MappingCall object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visitMappingCallBinding(@NonNull MappingCallBinding object) {
 		// TODO Auto-generated method stub
 		return null;
 	}

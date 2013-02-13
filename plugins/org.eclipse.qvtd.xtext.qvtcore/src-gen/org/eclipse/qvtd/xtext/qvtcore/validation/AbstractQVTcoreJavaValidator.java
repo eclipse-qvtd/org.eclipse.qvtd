@@ -7,11 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.ocl.examples.xtext.essentialocl.validation.EssentialOCLJavaValidator;
 import org.eclipse.xtext.validation.ComposedChecks;
 
 @ComposedChecks(validators= {org.eclipse.xtext.validation.ImportUriValidator.class})
-public class AbstractQVTcoreJavaValidator extends EssentialOCLJavaValidator {
+public class AbstractQVTcoreJavaValidator extends org.eclipse.ocl.examples.xtext.essentialocl.validation.EssentialOCLJavaValidator {
 
 	@Override
 	protected List<EPackage> getEPackages() {

@@ -474,7 +474,7 @@ public class XtextTestCase extends PivotTestCase
 		resourceSet = new ResourceSetImpl();
 		ProjectMap.initializeURIResourceMap(resourceSet);
 		Map<URI, URI> uriMap = resourceSet.getURIConverter().getURIMap();
-		uriMap.putAll(EcorePlugin.computePlatformURIMap());
+		uriMap.putAll(EcorePlugin.computePlatformURIMap(false));
 //		for (Map.Entry<URI,URI> entry : uriMap.entrySet()) {
 //			System.out.println(entry.getKey() + " => " + entry.getValue());
 //		}

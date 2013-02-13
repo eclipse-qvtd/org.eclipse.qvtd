@@ -43,6 +43,10 @@ public class AbstractQVTcorePreOrderVisitor extends EssentialOCLPreOrderVisitor 
 		return visitPatternCS(object);
 	}
 
+	public Continuation<?> visitComposedMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS object) {
+		return visitNamedElementCS(object);
+	}
+
 	public Continuation<?> visitDirectionCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS object) {
 		return visitNamedElementCS(object);
 	}
@@ -60,7 +64,15 @@ public class AbstractQVTcorePreOrderVisitor extends EssentialOCLPreOrderVisitor 
 	}
 
 	public Continuation<?> visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCS object) {
-		return visitNamedElementCS(object);
+		return visitComposedMappingCS(object);
+	}
+
+	public Continuation<?> visitMappingCallBindingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS object) {
+		return visitExpCS(object);
+	}
+
+	public Continuation<?> visitMappingCallCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS object) {
+		return visitComposedMappingCS(object);
 	}
 
 	public Continuation<?> visitParamDeclarationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS object) {

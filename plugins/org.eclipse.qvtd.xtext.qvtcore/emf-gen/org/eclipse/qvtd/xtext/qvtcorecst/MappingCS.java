@@ -17,9 +17,6 @@
 package org.eclipse.qvtd.xtext.qvtcorecst;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
-
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
@@ -43,10 +40,10 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
  * @model
  * @generated
  */
-public interface MappingCS extends NamedElementCS {
+public interface MappingCS extends ComposedMappingCS {
 	/**
 	 * Returns the value of the '<em><b>Composed Mappings</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorecst.MappingCS}.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Composed Mappings</em>' containment reference list isn't clear,
@@ -58,7 +55,7 @@ public interface MappingCS extends NamedElementCS {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<MappingCS> getComposedMappings();
+	EList<ComposedMappingCS> getComposedMappings();
 
 	/**
 	 * Returns the value of the '<em><b>Domains</b></em>' containment reference list.

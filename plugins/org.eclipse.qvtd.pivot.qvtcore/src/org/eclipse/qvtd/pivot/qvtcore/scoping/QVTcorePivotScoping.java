@@ -23,6 +23,7 @@ import org.eclipse.qvtd.pivot.qvtcore.attributes.BottomPatternAttribution;
 import org.eclipse.qvtd.pivot.qvtcore.attributes.CoreDomainAttribution;
 import org.eclipse.qvtd.pivot.qvtcore.attributes.CoreModelAttribution;
 import org.eclipse.qvtd.pivot.qvtcore.attributes.GuardPatternAttribution;
+import org.eclipse.qvtd.pivot.qvtcore.attributes.MappingCallBindingAttribution;
 
 public class QVTcorePivotScoping
 {	
@@ -32,5 +33,6 @@ public class QVTcorePivotScoping
 		registry.put(QVTcorePackage.Literals.CORE_DOMAIN, CoreDomainAttribution.INSTANCE);
 		registry.put(QVTcorePackage.Literals.CORE_MODEL, CoreModelAttribution.INSTANCE);
 		registry.put(QVTcorePackage.Literals.GUARD_PATTERN, GuardPatternAttribution.INSTANCE);
+		registry.put(QVTcorePackage.Literals.MAPPING_CALL_BINDING, MappingCallBindingAttribution.INSTANCE);
 	}
 }

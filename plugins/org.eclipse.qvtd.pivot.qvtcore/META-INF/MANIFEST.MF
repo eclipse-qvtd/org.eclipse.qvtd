@@ -8,7 +8,9 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.qvtd.pivot.qvtcore,
+ org.eclipse.qvtd.pivot.qvtcore.attributes,
  org.eclipse.qvtd.pivot.qvtcore.impl,
+ org.eclipse.qvtd.pivot.qvtcore.scoping,
  org.eclipse.qvtd.pivot.qvtcore.util,
  org.eclipse.qvtd.pivot.qvtcore.utilities
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",

@@ -19,9 +19,12 @@ package org.eclipse.qvtd.pivot.qvtcore.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -31,6 +34,7 @@ import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtcore.*;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -185,10 +189,45 @@ public class QVTcoreSwitch<T> extends Switch<T> {
 				T result = caseMapping(mapping);
 				if (result == null) result = caseRule(mapping);
 				if (result == null) result = caseArea(mapping);
+				if (result == null) result = caseNestedMapping(mapping);
 				if (result == null) result = caseNamedElement(mapping);
 				if (result == null) result = caseElement(mapping);
 				if (result == null) result = caseNameable(mapping);
 				if (result == null) result = caseVisitable(mapping);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTcorePackage.MAPPING_CALL: {
+				MappingCall mappingCall = (MappingCall)theEObject;
+				T result = caseMappingCall(mappingCall);
+				if (result == null) result = caseOCLExpression(mappingCall);
+				if (result == null) result = caseNestedMapping(mappingCall);
+				if (result == null) result = caseReferringElement(mappingCall);
+				if (result == null) result = caseTypedElement(mappingCall);
+				if (result == null) result = caseNamedElement(mappingCall);
+				if (result == null) result = caseElement(mappingCall);
+				if (result == null) result = caseNameable(mappingCall);
+				if (result == null) result = caseVisitable(mappingCall);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTcorePackage.MAPPING_CALL_BINDING: {
+				MappingCallBinding mappingCallBinding = (MappingCallBinding)theEObject;
+				T result = caseMappingCallBinding(mappingCallBinding);
+				if (result == null) result = caseTypedElement(mappingCallBinding);
+				if (result == null) result = caseReferringElement(mappingCallBinding);
+				if (result == null) result = caseNamedElement(mappingCallBinding);
+				if (result == null) result = caseElement(mappingCallBinding);
+				if (result == null) result = caseNameable(mappingCallBinding);
+				if (result == null) result = caseVisitable(mappingCallBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTcorePackage.NESTED_MAPPING: {
+				NestedMapping nestedMapping = (NestedMapping)theEObject;
+				T result = caseNestedMapping(nestedMapping);
+				if (result == null) result = caseElement(nestedMapping);
+				if (result == null) result = caseVisitable(nestedMapping);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -363,6 +402,51 @@ public class QVTcoreSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mapping Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mapping Call</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMappingCall(MappingCall object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mapping Call Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mapping Call Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMappingCallBinding(MappingCallBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Nested Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Nested Mapping</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNestedMapping(NestedMapping object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Property Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -463,7 +547,7 @@ public class QVTcoreSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNameable(org.eclipse.ocl.examples.domain.elements.Nameable object) {
+	public T caseNameable(Nameable object) {
 		return null;
 	}
 
@@ -569,6 +653,36 @@ public class QVTcoreSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedElement(TypedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>OCL Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>OCL Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOCLExpression(OCLExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Referring Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Referring Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReferringElement(ReferringElement object) {
 		return null;
 	}
 

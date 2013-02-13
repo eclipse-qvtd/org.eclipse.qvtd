@@ -44,6 +44,9 @@ import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.MappingCall;
+import org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtcore.NestedMapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
@@ -53,6 +56,8 @@ import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS;
@@ -112,7 +117,12 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 
 	@Override
 	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
-		context.refreshModelElement(BottomPattern.class, QVTcorePackage.Literals.BOTTOM_PATTERN, csElement);
+		BottomPattern pBottomPattern = context.refreshModelElement(BottomPattern.class, QVTcorePackage.Literals.BOTTOM_PATTERN, csElement);
+		if (pBottomPattern != null) {
+			context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getRealizedVariables());
+			context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getUnrealizedVariables());
+			context.refreshPivotList(EnforcementOperation.class, pBottomPattern.getEnforcementOperation(), csElement.getEnforcementOperations());
+		}
 		return null;
 	}
 
@@ -142,7 +152,10 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 
 	@Override
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
-		context.refreshModelElement(GuardPattern.class, QVTcorePackage.Literals.GUARD_PATTERN, csElement);
+		GuardPattern pGuardPattern = context.refreshModelElement(GuardPattern.class, QVTcorePackage.Literals.GUARD_PATTERN, csElement);
+		if (pGuardPattern != null) {
+			context.refreshPivotList(Variable.class, pGuardPattern.getVariable(), csElement.getUnrealizedVariables());
+		}
 		return null;
 	}
 
@@ -170,8 +183,23 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 				pivotElement.setGuardPattern(null);
 			}
 			context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getDomains());
-			context.refreshPivotList(Mapping.class, pivotElement.getLocal(), csElement.getComposedMappings());
+			context.refreshPivotList(NestedMapping.class, pivotElement.getLocal(), csElement.getComposedMappings());
 		}
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitMappingCallCS(@NonNull MappingCallCS csElement) {
+		MappingCall pivotElement = context.refreshModelElement(MappingCall.class, QVTcorePackage.Literals.MAPPING_CALL, csElement);
+		if (pivotElement != null) {
+			context.refreshPivotList(MappingCallBinding.class, pivotElement.getBinding(), csElement.getBindings());
+		}
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitMappingCallBindingCS(@NonNull MappingCallBindingCS csElement) {
+		context.refreshModelElement(MappingCallBinding.class, QVTcorePackage.Literals.MAPPING_CALL_BINDING, csElement);
 		return null;
 	}
 

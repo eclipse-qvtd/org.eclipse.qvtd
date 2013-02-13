@@ -34,6 +34,9 @@ import org.eclipse.qvtd.pivot.qvtcore.EnforcementMode;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.MappingCall;
+import org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtcore.NestedMapping;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
@@ -109,6 +112,27 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	private EClass mappingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mappingCallEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mappingCallBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass nestedMappingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -432,7 +456,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMapping_Context() {
+	public EReference getMapping_Refinement() {
 		return (EReference)mappingEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -441,8 +465,89 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMapping_Refinement() {
+	public EReference getMapping_NestedCall() {
 		return (EReference)mappingEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMappingCall() {
+		return mappingCallEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMappingCall_ReferredMapping() {
+		return (EReference)mappingCallEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMappingCall_Binding() {
+		return (EReference)mappingCallEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMappingCallBinding() {
+		return mappingCallBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMappingCallBinding_MappingCall() {
+		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMappingCallBinding_BoundVariable() {
+		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMappingCallBinding_Value() {
+		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNestedMapping() {
+		return nestedMappingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getNestedMapping_Context() {
+		return (EReference)nestedMappingEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -569,8 +674,20 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		mappingEClass = createEClass(MAPPING);
 		createEReference(mappingEClass, MAPPING__SPECIFICATION);
 		createEReference(mappingEClass, MAPPING__LOCAL);
-		createEReference(mappingEClass, MAPPING__CONTEXT);
 		createEReference(mappingEClass, MAPPING__REFINEMENT);
+		createEReference(mappingEClass, MAPPING__NESTED_CALL);
+
+		mappingCallEClass = createEClass(MAPPING_CALL);
+		createEReference(mappingCallEClass, MAPPING_CALL__REFERRED_MAPPING);
+		createEReference(mappingCallEClass, MAPPING_CALL__BINDING);
+
+		mappingCallBindingEClass = createEClass(MAPPING_CALL_BINDING);
+		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__MAPPING_CALL);
+		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__BOUND_VARIABLE);
+		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__VALUE);
+
+		nestedMappingEClass = createEClass(NESTED_MAPPING);
+		createEReference(nestedMappingEClass, NESTED_MAPPING__CONTEXT);
 
 		propertyAssignmentEClass = createEClass(PROPERTY_ASSIGNMENT);
 		createEReference(propertyAssignmentEClass, PROPERTY_ASSIGNMENT__SLOT_EXPRESSION);
@@ -628,6 +745,13 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		guardPatternEClass.getESuperTypes().add(this.getCorePattern());
 		mappingEClass.getESuperTypes().add(theQVTbasePackage.getRule());
 		mappingEClass.getESuperTypes().add(this.getArea());
+		mappingEClass.getESuperTypes().add(this.getNestedMapping());
+		mappingCallEClass.getESuperTypes().add(thePivotPackage.getOCLExpression());
+		mappingCallEClass.getESuperTypes().add(this.getNestedMapping());
+		mappingCallEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
+		mappingCallBindingEClass.getESuperTypes().add(thePivotPackage.getTypedElement());
+		mappingCallBindingEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
+		nestedMappingEClass.getESuperTypes().add(thePivotPackage.getElement());
 		propertyAssignmentEClass.getESuperTypes().add(this.getAssignment());
 		realizedVariableEClass.getESuperTypes().add(thePivotPackage.getVariable());
 		variableAssignmentEClass.getESuperTypes().add(this.getAssignment());
@@ -671,11 +795,23 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 		initEClass(mappingEClass, Mapping.class, "Mapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMapping_Specification(), this.getMapping(), this.getMapping_Refinement(), "specification", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getMapping_Local(), this.getMapping(), this.getMapping_Context(), "local", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getMapping_Context(), this.getMapping(), this.getMapping_Local(), "context", null, 0, 1, Mapping.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMapping_Local(), this.getNestedMapping(), this.getNestedMapping_Context(), "local", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMapping_Refinement(), this.getMapping(), this.getMapping_Specification(), "refinement", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getMapping_NestedCall(), this.getMappingCall(), null, "nestedCall", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(mappingEClass, this.getMapping(), "getAllMappings", 0, -1, IS_UNIQUE, !IS_ORDERED);
+
+		initEClass(mappingCallEClass, MappingCall.class, "MappingCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMappingCall_ReferredMapping(), this.getMapping(), null, "referredMapping", null, 1, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCall_Binding(), this.getMappingCallBinding(), this.getMappingCallBinding_MappingCall(), "binding", null, 0, -1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(mappingCallBindingEClass, MappingCallBinding.class, "MappingCallBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMappingCallBinding_MappingCall(), this.getMappingCall(), this.getMappingCall_Binding(), "mappingCall", null, 0, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCallBinding_BoundVariable(), thePivotPackage.getVariable(), null, "boundVariable", null, 1, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCallBinding_Value(), thePivotPackage.getOCLExpression(), null, "value", null, 1, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(nestedMappingEClass, NestedMapping.class, "NestedMapping", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getNestedMapping_Context(), this.getMapping(), this.getMapping_Local(), "context", null, 0, 1, NestedMapping.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(propertyAssignmentEClass, PropertyAssignment.class, "PropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyAssignment_SlotExpression(), thePivotPackage.getOCLExpression(), null, "slotExpression", null, 1, 1, PropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -709,6 +845,12 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";		
 		addAnnotation
 		  (getAssignment_Value(), 
+		   source, 
+		   new String[] {
+			 "body", "valueAssignment"
+		   });		
+		addAnnotation
+		  (getMappingCallBinding_Value(), 
 		   source, 
 		   new String[] {
 			 "body", "valueAssignment"

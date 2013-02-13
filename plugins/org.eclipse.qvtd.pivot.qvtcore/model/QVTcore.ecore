@@ -52,16 +52,39 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="area" lowerBound="1" eType="#//Area"
         transient="true" eOpposite="#//Area/guardPattern"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Mapping" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Rule #//Area">
+  <eClassifiers xsi:type="ecore:EClass" name="Mapping" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Rule #//Area #//NestedMapping">
     <eOperations name="getAllMappings" ordered="false" upperBound="-1" eType="#//Mapping"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="specification" ordered="false"
         upperBound="-1" eType="#//Mapping" eOpposite="#//Mapping/refinement"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="local" ordered="false"
-        upperBound="-1" eType="#//Mapping" containment="true" eOpposite="#//Mapping/context"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="#//Mapping"
-        transient="true" resolveProxies="false" eOpposite="#//Mapping/local"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="local" upperBound="-1"
+        eType="#//NestedMapping" containment="true" eOpposite="#//NestedMapping/context"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refinement" ordered="false"
         upperBound="-1" eType="#//Mapping" eOpposite="#//Mapping/specification"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nestedCall" upperBound="-1"
+        eType="#//MappingCall" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingCall" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OCLExpression #//NestedMapping ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//ReferringElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredMapping" lowerBound="1"
+        eType="#//Mapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="binding" ordered="false"
+        upperBound="-1" eType="#//MappingCallBinding" containment="true" eOpposite="#//MappingCallBinding/mappingCall"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingCallBinding" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//TypedElement ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//ReferringElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingCall" eType="#//MappingCall"
+        eOpposite="#//MappingCall/binding"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundVariable" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OCLExpression"
+        containment="true">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="valueAssignment"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NestedMapping" abstract="true" interface="true"
+      eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="#//Mapping"
+        transient="true" resolveProxies="false" eOpposite="#//Mapping/local"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyAssignment" eSuperTypes="#//Assignment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="slotExpression" lowerBound="1"
