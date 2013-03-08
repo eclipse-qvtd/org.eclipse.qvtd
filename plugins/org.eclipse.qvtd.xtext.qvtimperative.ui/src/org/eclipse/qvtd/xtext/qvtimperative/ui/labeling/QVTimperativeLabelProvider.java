@@ -3,7 +3,6 @@
 */
 package org.eclipse.qvtd.xtext.qvtimperative.ui.labeling;
 
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -33,7 +32,7 @@ public class QVTimperativeLabelProvider extends QVTcoreBaseLabelProvider {
 	}
 
 	protected String text(MappingCall ele) {
-		return DomainUtil.getSafeName(ele.getReferredMapping());
+		return getSafeName(ele.getReferredMapping());
 	}
 
 	protected String image(MappingCallBinding ele) {
@@ -41,7 +40,7 @@ public class QVTimperativeLabelProvider extends QVTcoreBaseLabelProvider {
 	}
 
 	protected String text(MappingCallBinding ele) {
-		return DomainUtil.getSafeName(ele.getBoundVariable());
+		return getSafeName(ele.getBoundVariable());
 	}
 
 	protected String image(TopLevelCS ele) {

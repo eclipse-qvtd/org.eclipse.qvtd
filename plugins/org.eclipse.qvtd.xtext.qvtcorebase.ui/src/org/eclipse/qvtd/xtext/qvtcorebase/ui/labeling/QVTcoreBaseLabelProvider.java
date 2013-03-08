@@ -3,7 +3,6 @@
 */
 package org.eclipse.qvtd.xtext.qvtcorebase.ui.labeling;
 
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -88,7 +87,7 @@ public class QVTcoreBaseLabelProvider extends QVTbaseLabelProvider
 	}
 
 	protected String text(DomainCS ele) {
-		return DomainUtil.getSafeName(ele);
+		return getSafeName(ele);
 	}
 
 	protected String text(GuardPattern ele) {
@@ -106,7 +105,7 @@ public class QVTcoreBaseLabelProvider extends QVTbaseLabelProvider
 		Property targetProperty = ele.getTargetProperty();
 		s.append(".");
 		if (targetProperty != null) {
-			s.append(DomainUtil.getSafeName(targetProperty));
+			s.append(getSafeName(targetProperty));
 		}
 		s.append(" : ");
 		if (targetProperty != null) {
