@@ -32,10 +32,6 @@
          id="org.eclipse.qvtd.doc"
          version="0.0.0"/>
 
-   <!--includes
-         id="org.eclipse.qvtd.doc.source"
-         version="0.0.0"/-->
-
    <plugin
          id="org.eclipse.qvtd.pivot.qvtbase"
          download-size="0"
@@ -100,6 +96,48 @@
 
    <plugin
          id="org.eclipse.qvt"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvtd.pivot.qvtcorebase"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvtd.pivot.qvtimperative"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvtd.xtext.qvtcorebase"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvtd.xtext.qvtcorebase.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvtd.xtext.qvtimperative"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvtd.xtext.qvtimperative.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
