@@ -17,7 +17,7 @@ import com.google.inject.Injector;
 public class QVTcoreStandaloneSetupGenerated implements ISetup {
 
 	public Injector createInjectorAndDoEMFRegistration() {
-		org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup.doSetup();
+		org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBaseStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);

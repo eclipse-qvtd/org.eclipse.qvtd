@@ -5,7 +5,6 @@ package org.eclipse.qvtd.xtext.qvtrelation.ui.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.ocl.examples.xtext.essentialocl.ui.contentassist.EssentialOCLProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 
@@ -15,7 +14,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
  * with a more concrete subtype. 
  */
 @SuppressWarnings("all")
-public class AbstractQVTrelationProposalProvider extends EssentialOCLProposalProvider {
+public class AbstractQVTrelationProposalProvider extends org.eclipse.ocl.examples.xtext.essentialocl.ui.contentassist.EssentialOCLProposalProvider {
 		
 	public void completeTopLevelCS_OwnedImport(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);

@@ -19,12 +19,20 @@ package org.eclipse.qvtd.pivot.qvtrelation.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.eclipse.qvtd.pivot.qvtrelation.*;
+import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
+import org.eclipse.qvtd.pivot.qvtrelation.Key;
+import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
+import org.eclipse.qvtd.pivot.qvtrelation.Relation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +49,7 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 	 */
 	public static QVTrelationFactory init() {
 		try {
-			QVTrelationFactory theQVTrelationFactory = (QVTrelationFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/qvt/0.9/QVTrelation"); 
+			QVTrelationFactory theQVTrelationFactory = (QVTrelationFactory)EPackage.Registry.INSTANCE.getEFactory(QVTrelationPackage.eNS_URI);
 			if (theQVTrelationFactory != null) {
 				return theQVTrelationFactory;
 			}

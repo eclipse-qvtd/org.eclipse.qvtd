@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/qvt/0.9/QVTimperativeCST"
+            class="org.eclipse.qvtd.xtext.qvtimperativecst.QVTimperativeCSTPackage"
+            genModel="model/QVTimperativeCST.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated QVTimperativeCST -->
+      <parser
+            type="qvti"
+            class="org.eclipse.qvtd.xtext.qvtimperativecst.util.QVTimperativeCSTResourceFactoryImpl"/>
+   </extension>
+
+null
+null</plugin>

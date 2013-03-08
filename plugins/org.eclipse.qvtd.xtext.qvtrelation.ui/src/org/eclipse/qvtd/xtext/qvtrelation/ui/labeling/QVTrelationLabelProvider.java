@@ -22,6 +22,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.xtext.qvtbase.ui.labeling.QVTbaseLabelProvider;
+import org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS;
 
 import com.google.inject.Inject;
 
@@ -83,6 +84,10 @@ public class QVTrelationLabelProvider extends QVTbaseLabelProvider {
 
 	protected String image(RelationalTransformation ele) {
 		return "RelationalTransformation.gif";
+	}
+
+	protected String image(TopLevelCS ele) {
+		return "QVTrModelFile.gif";
 	}
 
 	protected String text(Key ele) {

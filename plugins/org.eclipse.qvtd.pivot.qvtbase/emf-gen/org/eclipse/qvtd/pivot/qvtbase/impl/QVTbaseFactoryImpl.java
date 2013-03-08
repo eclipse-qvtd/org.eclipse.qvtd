@@ -47,7 +47,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 */
 	public static QVTbaseFactory init() {
 		try {
-			QVTbaseFactory theQVTbaseFactory = (QVTbaseFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/qvt/0.9/QVTbase"); 
+			QVTbaseFactory theQVTbaseFactory = (QVTbaseFactory)EPackage.Registry.INSTANCE.getEFactory(QVTbasePackage.eNS_URI);
 			if (theQVTbaseFactory != null) {
 				return theQVTbaseFactory;
 			}

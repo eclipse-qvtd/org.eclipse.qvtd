@@ -27,11 +27,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.RootPackageCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.qvtd.xtext.qvtcorebasecst.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecst.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
-import org.eclipse.qvtd.xtext.qvtcorecst.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
 
 /**

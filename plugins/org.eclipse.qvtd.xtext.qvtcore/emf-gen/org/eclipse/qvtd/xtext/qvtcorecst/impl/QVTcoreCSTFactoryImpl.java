@@ -19,12 +19,12 @@ package org.eclipse.qvtd.xtext.qvtcorecst.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.eclipse.qvtd.xtext.qvtcorecst.*;
+import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
+import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTFactory;
+import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
+import org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +41,7 @@ public class QVTcoreCSTFactoryImpl extends EFactoryImpl implements QVTcoreCSTFac
 	 */
 	public static QVTcoreCSTFactory init() {
 		try {
-			QVTcoreCSTFactory theQVTcoreCSTFactory = (QVTcoreCSTFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/qvt/0.9/QVTcoreCST"); 
+			QVTcoreCSTFactory theQVTcoreCSTFactory = (QVTcoreCSTFactory)EPackage.Registry.INSTANCE.getEFactory(QVTcoreCSTPackage.eNS_URI);
 			if (theQVTcoreCSTFactory != null) {
 				return theQVTcoreCSTFactory;
 			}
@@ -70,84 +70,11 @@ public class QVTcoreCSTFactoryImpl extends EFactoryImpl implements QVTcoreCSTFac
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTcoreCSTPackage.ASSIGNMENT_CS: return createAssignmentCS();
-			case QVTcoreCSTPackage.BOTTOM_PATTERN_CS: return createBottomPatternCS();
-			case QVTcoreCSTPackage.DIRECTION_CS: return createDirectionCS();
-			case QVTcoreCSTPackage.DOMAIN_CS: return createDomainCS();
-			case QVTcoreCSTPackage.ENFORCEMENT_OPERATION_CS: return createEnforcementOperationCS();
-			case QVTcoreCSTPackage.GUARD_PATTERN_CS: return createGuardPatternCS();
 			case QVTcoreCSTPackage.MAPPING_CS: return createMappingCS();
-			case QVTcoreCSTPackage.MAPPING_CALL_BINDING_CS: return createMappingCallBindingCS();
-			case QVTcoreCSTPackage.MAPPING_CALL_CS: return createMappingCallCS();
-			case QVTcoreCSTPackage.PARAM_DECLARATION_CS: return createParamDeclarationCS();
-			case QVTcoreCSTPackage.QUERY_CS: return createQueryCS();
-			case QVTcoreCSTPackage.REALIZED_VARIABLE_CS: return createRealizedVariableCS();
 			case QVTcoreCSTPackage.TOP_LEVEL_CS: return createTopLevelCS();
-			case QVTcoreCSTPackage.TRANSFORMATION_CS: return createTransformationCS();
-			case QVTcoreCSTPackage.UNREALIZED_VARIABLE_CS: return createUnrealizedVariableCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AssignmentCS createAssignmentCS() {
-		AssignmentCSImpl assignmentCS = new AssignmentCSImpl();
-		return assignmentCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BottomPatternCS createBottomPatternCS() {
-		BottomPatternCSImpl bottomPatternCS = new BottomPatternCSImpl();
-		return bottomPatternCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DirectionCS createDirectionCS() {
-		DirectionCSImpl directionCS = new DirectionCSImpl();
-		return directionCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DomainCS createDomainCS() {
-		DomainCSImpl domainCS = new DomainCSImpl();
-		return domainCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EnforcementOperationCS createEnforcementOperationCS() {
-		EnforcementOperationCSImpl enforcementOperationCS = new EnforcementOperationCSImpl();
-		return enforcementOperationCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public GuardPatternCS createGuardPatternCS() {
-		GuardPatternCSImpl guardPatternCS = new GuardPatternCSImpl();
-		return guardPatternCS;
 	}
 
 	/**
@@ -165,79 +92,9 @@ public class QVTcoreCSTFactoryImpl extends EFactoryImpl implements QVTcoreCSTFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MappingCallBindingCS createMappingCallBindingCS() {
-		MappingCallBindingCSImpl mappingCallBindingCS = new MappingCallBindingCSImpl();
-		return mappingCallBindingCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public MappingCallCS createMappingCallCS() {
-		MappingCallCSImpl mappingCallCS = new MappingCallCSImpl();
-		return mappingCallCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ParamDeclarationCS createParamDeclarationCS() {
-		ParamDeclarationCSImpl paramDeclarationCS = new ParamDeclarationCSImpl();
-		return paramDeclarationCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public QueryCS createQueryCS() {
-		QueryCSImpl queryCS = new QueryCSImpl();
-		return queryCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public RealizedVariableCS createRealizedVariableCS() {
-		RealizedVariableCSImpl realizedVariableCS = new RealizedVariableCSImpl();
-		return realizedVariableCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public TopLevelCS createTopLevelCS() {
 		TopLevelCSImpl topLevelCS = new TopLevelCSImpl();
 		return topLevelCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TransformationCS createTransformationCS() {
-		TransformationCSImpl transformationCS = new TransformationCSImpl();
-		return transformationCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public UnrealizedVariableCS createUnrealizedVariableCS() {
-		UnrealizedVariableCSImpl unrealizedVariableCS = new UnrealizedVariableCSImpl();
-		return unrealizedVariableCS;
 	}
 
 	/**

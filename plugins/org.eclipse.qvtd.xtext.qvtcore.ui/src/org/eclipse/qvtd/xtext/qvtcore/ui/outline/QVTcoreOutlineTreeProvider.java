@@ -3,13 +3,13 @@
 */
 package org.eclipse.qvtd.xtext.qvtcore.ui.outline;
 
-import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
+import org.eclipse.qvtd.xtext.qvtcorebase.ui.outline.QVTcoreBaseOutlineTreeProvider;
 
 /**
  * customization of the default outline structure
  * 
  */
-public class QVTcoreOutlineTreeProvider extends DefaultOutlineTreeProvider
+public class QVTcoreOutlineTreeProvider extends QVTcoreBaseOutlineTreeProvider
 {
 //	protected void _createNode(IOutlineNode parentNode, PredicateCS csPredicate) {
 //		createNode(parentNode, csPredicate.getExpr());

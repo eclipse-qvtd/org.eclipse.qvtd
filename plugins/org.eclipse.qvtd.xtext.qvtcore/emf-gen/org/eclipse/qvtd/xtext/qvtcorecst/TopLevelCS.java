@@ -18,6 +18,8 @@ package org.eclipse.qvtd.xtext.qvtcorecst;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecst.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecst.TransformationCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +42,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
 public interface TopLevelCS extends RootPackageCS {
 	/**
 	 * Returns the value of the '<em><b>Transformations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS}.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorebasecst.TransformationCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Transformations</em>' containment reference list isn't clear,
@@ -56,7 +58,7 @@ public interface TopLevelCS extends RootPackageCS {
 
 	/**
 	 * Returns the value of the '<em><b>Queries</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS}.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorebasecst.QueryCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Queries</em>' containment reference list isn't clear,

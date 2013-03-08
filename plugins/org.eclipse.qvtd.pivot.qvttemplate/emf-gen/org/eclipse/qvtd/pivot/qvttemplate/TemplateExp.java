@@ -17,7 +17,6 @@
 package org.eclipse.qvtd.pivot.qvttemplate;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;

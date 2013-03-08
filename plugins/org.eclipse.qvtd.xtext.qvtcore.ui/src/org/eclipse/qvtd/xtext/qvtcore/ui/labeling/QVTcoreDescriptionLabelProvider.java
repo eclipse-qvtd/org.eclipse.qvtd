@@ -3,14 +3,14 @@
 */
 package org.eclipse.qvtd.xtext.qvtcore.ui.labeling;
 
-import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
+import org.eclipse.qvtd.xtext.qvtcorebase.ui.labeling.QVTcoreBaseDescriptionLabelProvider;
 
 /**
  * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class QVTcoreDescriptionLabelProvider extends DefaultDescriptionLabelProvider {
+public class QVTcoreDescriptionLabelProvider extends QVTcoreBaseDescriptionLabelProvider {
 
 /*
 	//Labels and icons can be computed like this:

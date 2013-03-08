@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.3 2008/10/30 06:08:28 ewillink Exp $
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/qvt/0.9/QVTimperative"
+            class="org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
+            genModel="model/QVTimperative.genmodel"/>
+   </extension>
+
+null
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated QVTimperative -->
+      <parser
+            contentTypeIdentifier="org.eclipse.qvtd.qvtimperative"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <!-- @generated QVTimperative -->
+      <content-type
+            base-type="org.eclipse.emf.ecore.xmi"
+            file-extensions="qvtimperative"
+            id="org.eclipse.qvtd.qvtimperative"
+            name="%_UI_QVTimperative_content_type"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/0.9/QVTimperatve"/>
+            <parameter name="kind" value="xmi"/>
+         </describer>
+      </content-type>
+   </extension>
+
+</plugin>

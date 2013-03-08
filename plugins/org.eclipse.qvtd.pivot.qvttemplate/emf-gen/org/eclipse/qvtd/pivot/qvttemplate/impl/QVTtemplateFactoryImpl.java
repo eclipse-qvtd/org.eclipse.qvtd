@@ -19,12 +19,13 @@ package org.eclipse.qvtd.pivot.qvttemplate.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.eclipse.qvtd.pivot.qvttemplate.*;
+import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
+import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateFactory;
+import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +42,7 @@ public class QVTtemplateFactoryImpl extends EFactoryImpl implements QVTtemplateF
 	 */
 	public static QVTtemplateFactory init() {
 		try {
-			QVTtemplateFactory theQVTtemplateFactory = (QVTtemplateFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/qvt/0.9/QVTtemplate"); 
+			QVTtemplateFactory theQVTtemplateFactory = (QVTtemplateFactory)EPackage.Registry.INSTANCE.getEFactory(QVTtemplatePackage.eNS_URI);
 			if (theQVTtemplateFactory != null) {
 				return theQVTtemplateFactory;
 			}

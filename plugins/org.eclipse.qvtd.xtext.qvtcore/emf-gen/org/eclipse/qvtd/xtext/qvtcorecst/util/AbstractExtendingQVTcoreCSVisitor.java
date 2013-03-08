@@ -36,7 +36,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractExtendingQVTcoreCSVisitor<R, C>
-	extends org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractExtendingEssentialOCLCSVisitor<R, C>
+	extends org.eclipse.qvtd.xtext.qvtcorebasecst.util.AbstractExtendingQVTcoreBaseCSVisitor<R, C>
 	implements QVTcoreCSVisitor<R>
 {
 	/**
@@ -48,79 +48,11 @@ public abstract class AbstractExtendingQVTcoreCSVisitor<R, C>
 	    super(context);
 	}	
 
-	public @Nullable R visitAreaCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.AreaCS object) {
-		return visitNamedElementCS(object);
-	}
-
-	public @Nullable R visitAssignmentCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS object) {
-		return visitExpCS(object);
-	}
-
-	public @Nullable R visitBottomPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS object) {
-		return visitPatternCS(object);
-	}
-
-	public @Nullable R visitComposedMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS object) {
-		return visitNamedElementCS(object);
-	}
-
-	public @Nullable R visitDirectionCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS object) {
-		return visitNamedElementCS(object);
-	}
-
-	public @Nullable R visitDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.DomainCS object) {
-		return visitAreaCS(object);
-	}
-
-	public @Nullable R visitEnforcementOperationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS object) {
-		return visitModelElementCS(object);
-	}
-
-	public @Nullable R visitGuardPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS object) {
-		return visitPatternCS(object);
-	}
-
 	public @Nullable R visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCS object) {
-		return visitComposedMappingCS(object);
-	}
-
-	public @Nullable R visitMappingCallBindingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS object) {
-		return visitExpCS(object);
-	}
-
-	public @Nullable R visitMappingCallCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS object) {
-		return visitComposedMappingCS(object);
-	}
-
-	public @Nullable R visitParamDeclarationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS object) {
-		return visitTypedElementCS(object);
-	}
-
-	public @Nullable R visitPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.PatternCS object) {
-		return visitModelElementCS(object);
-	}
-
-	public @Nullable R visitQueryCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.QueryCS object) {
-		return visitTypedElementCS(object);
-	}
-
-	public @Nullable R visitRealizeableVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.RealizeableVariableCS object) {
-		return visitTypedElementCS(object);
-	}
-
-	public @Nullable R visitRealizedVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS object) {
-		return visitRealizeableVariableCS(object);
+		return visitAbstractMappingCS(object);
 	}
 
 	public @Nullable R visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS object) {
 		return visitRootPackageCS(object);
-	}
-
-	public @Nullable R visitTransformationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS object) {
-		return visitPackageCS(object);
-	}
-
-	public @Nullable R visitUnrealizedVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS object) {
-		return visitRealizeableVariableCS(object);
 	}
 }

@@ -1,0 +1,39 @@
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2011 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *
+ * </copyright>
+ *
+ * $Id$
+ */
+grammar org.eclipse.qvtd.xtext.qvtimperative.QVTimperative with org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+import "platform:/resource/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore" as base
+import "platform:/resource/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore" as essentialocl
+import "platform:/resource/org.eclipse.ocl.examples.pivot/model/Pivot.ecore" as pivot
+import "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore" as qvtbase
+import "platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore" as qvtcorebase
+import "platform:/resource/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore" as qvtimperative
+import "platform:/resource/org.eclipse.qvtd.xtext.qvtimperative/model/QVTimperativeCST.ecore"
+
+TopLevelCS:
+	(ownedImport+=ImportCS | /*ownedInclude+=IncludeCS |*/ ownedLibrary+=LibraryCS)*
+	(mappings+=MappingCS | transformations+=TransformationCS | queries+=QueryCS)*
+;
+	
+MappingCS: {MappingCS} 'map' name=UnrestrictedName ('in' in=[qvtbase::Transformation|UnrestrictedName])?
+	'{' domains+=NamedDomainCS* ('where' middle=UnnamedDomainCS)? mappingCalls+=MappingCallCS* '}';
+	
+MappingCallCS: {MappingCallCS} 'map' referredMapping=[qvtimperative::Mapping|UnrestrictedName]
+	'{' bindings+=MappingCallBindingCS* '}';
+
+MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] ':=' value=ExpCS ';';

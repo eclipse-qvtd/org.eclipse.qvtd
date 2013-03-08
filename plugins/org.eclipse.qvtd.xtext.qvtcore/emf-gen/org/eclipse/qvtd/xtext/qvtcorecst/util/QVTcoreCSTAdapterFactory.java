@@ -30,29 +30,11 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.AreaCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecst.AbstractMappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.PatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
-import org.eclipse.qvtd.xtext.qvtcorecst.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.RealizeableVariableCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -111,80 +93,12 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 	protected QVTcoreCSTSwitch<Adapter> modelSwitch =
 		new QVTcoreCSTSwitch<Adapter>() {
 			@Override
-			public Adapter caseAreaCS(AreaCS object) {
-				return createAreaCSAdapter();
-			}
-			@Override
-			public Adapter caseAssignmentCS(AssignmentCS object) {
-				return createAssignmentCSAdapter();
-			}
-			@Override
-			public Adapter caseBottomPatternCS(BottomPatternCS object) {
-				return createBottomPatternCSAdapter();
-			}
-			@Override
-			public Adapter caseComposedMappingCS(ComposedMappingCS object) {
-				return createComposedMappingCSAdapter();
-			}
-			@Override
-			public Adapter caseDirectionCS(DirectionCS object) {
-				return createDirectionCSAdapter();
-			}
-			@Override
-			public Adapter caseDomainCS(DomainCS object) {
-				return createDomainCSAdapter();
-			}
-			@Override
-			public Adapter caseEnforcementOperationCS(EnforcementOperationCS object) {
-				return createEnforcementOperationCSAdapter();
-			}
-			@Override
-			public Adapter caseGuardPatternCS(GuardPatternCS object) {
-				return createGuardPatternCSAdapter();
-			}
-			@Override
 			public Adapter caseMappingCS(MappingCS object) {
 				return createMappingCSAdapter();
 			}
 			@Override
-			public Adapter caseMappingCallBindingCS(MappingCallBindingCS object) {
-				return createMappingCallBindingCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingCallCS(MappingCallCS object) {
-				return createMappingCallCSAdapter();
-			}
-			@Override
-			public Adapter caseParamDeclarationCS(ParamDeclarationCS object) {
-				return createParamDeclarationCSAdapter();
-			}
-			@Override
-			public Adapter casePatternCS(PatternCS object) {
-				return createPatternCSAdapter();
-			}
-			@Override
-			public Adapter caseQueryCS(QueryCS object) {
-				return createQueryCSAdapter();
-			}
-			@Override
-			public Adapter caseRealizeableVariableCS(RealizeableVariableCS object) {
-				return createRealizeableVariableCSAdapter();
-			}
-			@Override
-			public Adapter caseRealizedVariableCS(RealizedVariableCS object) {
-				return createRealizedVariableCSAdapter();
-			}
-			@Override
 			public Adapter caseTopLevelCS(TopLevelCS object) {
 				return createTopLevelCSAdapter();
-			}
-			@Override
-			public Adapter caseTransformationCS(TransformationCS object) {
-				return createTransformationCSAdapter();
-			}
-			@Override
-			public Adapter caseUnrealizedVariableCS(UnrealizedVariableCS object) {
-				return createUnrealizedVariableCSAdapter();
 			}
 			@Override
 			public Adapter caseVisitableCS(VisitableCS object) {
@@ -215,12 +129,8 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementCSAdapter();
 			}
 			@Override
-			public Adapter caseExpCS(ExpCS object) {
-				return createExpCSAdapter();
-			}
-			@Override
-			public Adapter caseTypedElementCS(TypedElementCS object) {
-				return createTypedElementCSAdapter();
+			public Adapter caseAbstractMappingCS(AbstractMappingCS object) {
+				return createAbstractMappingCSAdapter();
 			}
 			@Override
 			public Adapter caseNamespaceCS(NamespaceCS object) {
@@ -259,118 +169,6 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.AreaCS <em>Area CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.AreaCS
-	 * @generated
-	 */
-	public Adapter createAreaCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS <em>Assignment CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.AssignmentCS
-	 * @generated
-	 */
-	public Adapter createAssignmentCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS <em>Bottom Pattern CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.BottomPatternCS
-	 * @generated
-	 */
-	public Adapter createBottomPatternCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS <em>Composed Mapping CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS
-	 * @generated
-	 */
-	public Adapter createComposedMappingCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS <em>Direction CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.DirectionCS
-	 * @generated
-	 */
-	public Adapter createDirectionCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.DomainCS <em>Domain CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.DomainCS
-	 * @generated
-	 */
-	public Adapter createDomainCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS <em>Enforcement Operation CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.EnforcementOperationCS
-	 * @generated
-	 */
-	public Adapter createEnforcementOperationCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS <em>Guard Pattern CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.GuardPatternCS
-	 * @generated
-	 */
-	public Adapter createGuardPatternCSAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.MappingCS <em>Mapping CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -385,104 +183,6 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS <em>Mapping Call Binding CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.MappingCallBindingCS
-	 * @generated
-	 */
-	public Adapter createMappingCallBindingCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS <em>Mapping Call CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.MappingCallCS
-	 * @generated
-	 */
-	public Adapter createMappingCallCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS <em>Param Declaration CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.ParamDeclarationCS
-	 * @generated
-	 */
-	public Adapter createParamDeclarationCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.PatternCS <em>Pattern CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.PatternCS
-	 * @generated
-	 */
-	public Adapter createPatternCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.QueryCS <em>Query CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.QueryCS
-	 * @generated
-	 */
-	public Adapter createQueryCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.RealizeableVariableCS <em>Realizeable Variable CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.RealizeableVariableCS
-	 * @generated
-	 */
-	public Adapter createRealizeableVariableCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS <em>Realized Variable CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.RealizedVariableCS
-	 * @generated
-	 */
-	public Adapter createRealizedVariableCSAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS <em>Top Level CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -493,34 +193,6 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTopLevelCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS <em>Transformation CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.TransformationCS
-	 * @generated
-	 */
-	public Adapter createTransformationCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS <em>Unrealized Variable CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecst.UnrealizedVariableCS
-	 * @generated
-	 */
-	public Adapter createUnrealizedVariableCSAdapter() {
 		return null;
 	}
 
@@ -623,30 +295,16 @@ public class QVTcoreCSTAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS <em>Exp CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorebasecst.AbstractMappingCS <em>Abstract Mapping CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.AbstractMappingCS
 	 * @generated
 	 */
-	public Adapter createExpCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS <em>Typed Element CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS
-	 * @generated
-	 */
-	public Adapter createTypedElementCSAdapter() {
+	public Adapter createAbstractMappingCSAdapter() {
 		return null;
 	}
 

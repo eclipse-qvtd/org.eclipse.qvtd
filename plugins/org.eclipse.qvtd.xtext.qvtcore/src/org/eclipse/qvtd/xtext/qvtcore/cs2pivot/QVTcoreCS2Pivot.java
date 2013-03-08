@@ -22,9 +22,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLCS2Pivot;
+import org.eclipse.qvtd.xtext.qvtcorebase.cs2pivot.QVTcoreBaseCS2Pivot;
 
-public class QVTcoreCS2Pivot extends EssentialOCLCS2Pivot
+public class QVTcoreCS2Pivot extends QVTcoreBaseCS2Pivot
 {	
 	public QVTcoreCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
 		super(cs2pivotResourceMap, metaModelManager);

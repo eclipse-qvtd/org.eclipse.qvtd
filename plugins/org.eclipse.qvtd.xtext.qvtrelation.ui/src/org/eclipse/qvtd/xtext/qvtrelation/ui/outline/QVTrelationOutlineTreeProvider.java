@@ -6,17 +6,17 @@ package org.eclipse.qvtd.xtext.qvtrelation.ui.outline;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
+import org.eclipse.qvtd.xtext.qvtbase.ui.outline.QVTbaseOutlineTreeProvider;
 import org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
-import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 
 /**
  * customization of the default outline structure
  * 
  */
-public class QVTrelationOutlineTreeProvider extends DefaultOutlineTreeProvider
+public class QVTrelationOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 {
 
 	protected void _createNode(IOutlineNode parentNode, DomainPattern pattern) {

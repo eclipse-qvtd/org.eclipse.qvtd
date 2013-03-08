@@ -18,21 +18,17 @@ package org.eclipse.qvtd.xtext.qvtcorecst.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.xtext.qvtcorecst.ComposedMappingCS;
-import org.eclipse.qvtd.xtext.qvtcorecst.DomainCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecst.impl.AbstractMappingCSImpl;
 import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage;
 import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
@@ -45,16 +41,13 @@ import org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSVisitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.MappingCSImpl#getComposedMappings <em>Composed Mappings</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.MappingCSImpl#getDomains <em>Domains</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.MappingCSImpl#getIn <em>In</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.MappingCSImpl#getMiddle <em>Middle</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecst.impl.MappingCSImpl#getRefines <em>Refines</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class MappingCSImpl extends ComposedMappingCSImpl implements MappingCS {
+public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	/**
 	 * The cached value of the '{@link #getComposedMappings() <em>Composed Mappings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -63,37 +56,7 @@ public class MappingCSImpl extends ComposedMappingCSImpl implements MappingCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ComposedMappingCS> composedMappings;
-
-	/**
-	 * The cached value of the '{@link #getDomains() <em>Domains</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDomains()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DomainCS> domains;
-
-	/**
-	 * The cached value of the '{@link #getIn() <em>In</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIn()
-	 * @generated
-	 * @ordered
-	 */
-	protected Transformation in;
-
-	/**
-	 * The cached value of the '{@link #getMiddle() <em>Middle</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMiddle()
-	 * @generated
-	 * @ordered
-	 */
-	protected DomainCS middle;
+	protected EList<MappingCS> composedMappings;
 
 	/**
 	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' reference list.
@@ -129,104 +92,11 @@ public class MappingCSImpl extends ComposedMappingCSImpl implements MappingCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ComposedMappingCS> getComposedMappings() {
+	public EList<MappingCS> getComposedMappings() {
 		if (composedMappings == null) {
-			composedMappings = new EObjectContainmentEList<ComposedMappingCS>(ComposedMappingCS.class, this, QVTcoreCSTPackage.MAPPING_CS__COMPOSED_MAPPINGS);
+			composedMappings = new EObjectContainmentEList<MappingCS>(MappingCS.class, this, QVTcoreCSTPackage.MAPPING_CS__COMPOSED_MAPPINGS);
 		}
 		return composedMappings;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<DomainCS> getDomains() {
-		if (domains == null) {
-			domains = new EObjectContainmentEList<DomainCS>(DomainCS.class, this, QVTcoreCSTPackage.MAPPING_CS__DOMAINS);
-		}
-		return domains;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Transformation getIn() {
-		if (in != null && in.eIsProxy()) {
-			InternalEObject oldIn = (InternalEObject)in;
-			in = (Transformation)eResolveProxy(oldIn);
-			if (in != oldIn) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTcoreCSTPackage.MAPPING_CS__IN, oldIn, in));
-			}
-		}
-		return in;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Transformation basicGetIn() {
-		return in;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIn(Transformation newIn) {
-		Transformation oldIn = in;
-		in = newIn;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.MAPPING_CS__IN, oldIn, in));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DomainCS getMiddle() {
-		return middle;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetMiddle(DomainCS newMiddle, NotificationChain msgs) {
-		DomainCS oldMiddle = middle;
-		middle = newMiddle;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.MAPPING_CS__MIDDLE, oldMiddle, newMiddle);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setMiddle(DomainCS newMiddle) {
-		if (newMiddle != middle) {
-			NotificationChain msgs = null;
-			if (middle != null)
-				msgs = ((InternalEObject)middle).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSTPackage.MAPPING_CS__MIDDLE, null, msgs);
-			if (newMiddle != null)
-				msgs = ((InternalEObject)newMiddle).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSTPackage.MAPPING_CS__MIDDLE, null, msgs);
-			msgs = basicSetMiddle(newMiddle, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSTPackage.MAPPING_CS__MIDDLE, newMiddle, newMiddle));
 	}
 
 	/**
@@ -251,10 +121,6 @@ public class MappingCSImpl extends ComposedMappingCSImpl implements MappingCS {
 		switch (featureID) {
 			case QVTcoreCSTPackage.MAPPING_CS__COMPOSED_MAPPINGS:
 				return ((InternalEList<?>)getComposedMappings()).basicRemove(otherEnd, msgs);
-			case QVTcoreCSTPackage.MAPPING_CS__DOMAINS:
-				return ((InternalEList<?>)getDomains()).basicRemove(otherEnd, msgs);
-			case QVTcoreCSTPackage.MAPPING_CS__MIDDLE:
-				return basicSetMiddle(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -269,13 +135,6 @@ public class MappingCSImpl extends ComposedMappingCSImpl implements MappingCS {
 		switch (featureID) {
 			case QVTcoreCSTPackage.MAPPING_CS__COMPOSED_MAPPINGS:
 				return getComposedMappings();
-			case QVTcoreCSTPackage.MAPPING_CS__DOMAINS:
-				return getDomains();
-			case QVTcoreCSTPackage.MAPPING_CS__IN:
-				if (resolve) return getIn();
-				return basicGetIn();
-			case QVTcoreCSTPackage.MAPPING_CS__MIDDLE:
-				return getMiddle();
 			case QVTcoreCSTPackage.MAPPING_CS__REFINES:
 				return getRefines();
 		}
@@ -293,17 +152,7 @@ public class MappingCSImpl extends ComposedMappingCSImpl implements MappingCS {
 		switch (featureID) {
 			case QVTcoreCSTPackage.MAPPING_CS__COMPOSED_MAPPINGS:
 				getComposedMappings().clear();
-				getComposedMappings().addAll((Collection<? extends ComposedMappingCS>)newValue);
-				return;
-			case QVTcoreCSTPackage.MAPPING_CS__DOMAINS:
-				getDomains().clear();
-				getDomains().addAll((Collection<? extends DomainCS>)newValue);
-				return;
-			case QVTcoreCSTPackage.MAPPING_CS__IN:
-				setIn((Transformation)newValue);
-				return;
-			case QVTcoreCSTPackage.MAPPING_CS__MIDDLE:
-				setMiddle((DomainCS)newValue);
+				getComposedMappings().addAll((Collection<? extends MappingCS>)newValue);
 				return;
 			case QVTcoreCSTPackage.MAPPING_CS__REFINES:
 				getRefines().clear();
@@ -324,15 +173,6 @@ public class MappingCSImpl extends ComposedMappingCSImpl implements MappingCS {
 			case QVTcoreCSTPackage.MAPPING_CS__COMPOSED_MAPPINGS:
 				getComposedMappings().clear();
 				return;
-			case QVTcoreCSTPackage.MAPPING_CS__DOMAINS:
-				getDomains().clear();
-				return;
-			case QVTcoreCSTPackage.MAPPING_CS__IN:
-				setIn((Transformation)null);
-				return;
-			case QVTcoreCSTPackage.MAPPING_CS__MIDDLE:
-				setMiddle((DomainCS)null);
-				return;
 			case QVTcoreCSTPackage.MAPPING_CS__REFINES:
 				getRefines().clear();
 				return;
@@ -350,12 +190,6 @@ public class MappingCSImpl extends ComposedMappingCSImpl implements MappingCS {
 		switch (featureID) {
 			case QVTcoreCSTPackage.MAPPING_CS__COMPOSED_MAPPINGS:
 				return composedMappings != null && !composedMappings.isEmpty();
-			case QVTcoreCSTPackage.MAPPING_CS__DOMAINS:
-				return domains != null && !domains.isEmpty();
-			case QVTcoreCSTPackage.MAPPING_CS__IN:
-				return in != null;
-			case QVTcoreCSTPackage.MAPPING_CS__MIDDLE:
-				return middle != null;
 			case QVTcoreCSTPackage.MAPPING_CS__REFINES:
 				return refines != null && !refines.isEmpty();
 		}

@@ -30,7 +30,7 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  */
 public abstract class AbstractQVTcoreVisitor<R, C>
- extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractQVTbaseVisitor<R, C>
+ extends org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractQVTcoreBaseVisitor<R, C>
 	implements QVTcoreVisitor<R>
 {
 	/**

@@ -1,0 +1,104 @@
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2011 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *
+ * </copyright>
+ *
+ * $Id$
+ */
+grammar org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase with org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCL
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+import "platform:/resource/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore" as base
+import "platform:/resource/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore" as essentialocl
+import "platform:/resource/org.eclipse.ocl.examples.pivot/model/Pivot.ecore" as pivot
+import "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore" as qvtbase
+import "platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore" as qvtcorebase
+import "platform:/resource/org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCST.ecore"
+		
+BottomPatternCS: {BottomPatternCS}
+	((unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS)
+		(',' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))* '|')?
+	constraints+=AssignmentCS*
+;
+		
+//Constraint ::= Predicate | Assignment
+//Predicate ::= BooleanOCLExpr
+//Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
+AssignmentCS: default?='default'? target=ExpCS (':=' initialiser=ExpCS)? ';';
+	
+DirectionCS: {DirectionCS} name=UnrestrictedName?
+	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
+	('uses' uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (',' uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*)?
+;
+	
+//EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
+	
+GuardPatternCS: {GuardPatternCS}
+	(unrealizedVariables+=UnrealizedVariableCS (',' unrealizedVariables+=UnrealizedVariableCS )* '|' )?
+	constraints+=AssignmentCS*
+;
+
+ImportCS returns base::ImportCS:
+	'import' (name=Identifier ':')? pathName=URIPathNameCS (all?='::' '*')? ';';
+
+//IncludeCS returns IncludeCS:
+//	'include' namespace=[pivot::Namespace|URI] ';';
+
+LibraryCS returns base::LibraryCS:
+	'library' package=[pivot::Package|URI] ';';
+	
+NamedDomainCS returns DomainCS: check?='check'? enforce?='enforce'? direction=[qvtbase::TypedModel|UnrestrictedName]
+	'(' guardPattern=GuardPatternCS? ')' '{' bottomPattern=BottomPatternCS? '}';
+	
+ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
+		
+QueryCS: 'query' pathName=ScopeNameCS name=UnrestrictedName
+		'(' (inputParamDeclaration+=ParamDeclarationCS (',' inputParamDeclaration+=ParamDeclarationCS)*)? ')'
+		':' ownedType=TypeExpCS (';' | '{' expression=ExpCS '}');
+//<query> ::= 'query' <PathNameCS> 
+//            '(' [<paramDeclaration> (',' <paramDeclaration>)*] ')'
+//      	  ':' <TypeCS>
+//            (';' | '{' <OCLExpressionCS> '}')
+
+ScopeNameCS returns base::PathNameCS:
+	path+=FirstPathElementCS '::' (path+=NextPathElementCS '::')*;
+
+TransformationCS:
+	'transformation' pathName=ScopeNameCS? name=UnreservedName '{' (directions+=DirectionCS ';')* '}';
+	
+//Variable := VariableName �:� TypeDeclaration
+UnrealizedVariableCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
+		
+//RealizedVariable := �realized� VariableName �:� TypeDeclaration
+RealizedVariableCS: 'realize' name=UnrestrictedName ':' ownedType=TypeExpCS;
+	
+UnnamedDomainCS returns DomainCS: {DomainCS} '(' guardPattern=GuardPatternCS? ')' '{' bottomPattern=BottomPatternCS? '}';
+		
+UnrestrictedName returns ecore::EString:
+	EssentialOCLUnrestrictedName
+|	'check'
+//|	'creation'
+//|	'default'
+//|	'deletion'
+|	'enforce'
+|	'import'
+|	'imports'
+//|	'include'
+|	'library'
+|	'map'
+|	'query'
+|	'realize'
+|	'refines'
+|	'transformation'
+|	'uses'
+//|	'where'
+;

@@ -20,34 +20,25 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
-
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
-
-import org.eclipse.qvtd.pivot.qvtcore.Area;
-import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.pivot.qvtcore.MappingCall;
-import org.eclipse.qvtd.pivot.qvtcore.NestedMapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
+import org.eclipse.qvtd.pivot.qvtcorebase.Area;
+import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,10 +50,9 @@ import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl#getGuardPattern <em>Guard Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl#getBottomPattern <em>Bottom Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl#getContext <em>Context</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl#getSpecification <em>Specification</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl#getLocal <em>Local</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl#getRefinement <em>Refinement</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl#getNestedCall <em>Nested Call</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl#getSpecification <em>Specification</em>}</li>
  * </ul>
  * </p>
  *
@@ -90,16 +80,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	protected BottomPattern bottomPattern;
 
 	/**
-	 * The cached value of the '{@link #getSpecification() <em>Specification</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSpecification()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Mapping> specification;
-
-	/**
 	 * The cached value of the '{@link #getLocal() <em>Local</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -107,7 +87,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<NestedMapping> local;
+	protected EList<Mapping> local;
 
 	/**
 	 * The cached value of the '{@link #getRefinement() <em>Refinement</em>}' reference list.
@@ -120,14 +100,14 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	protected EList<Mapping> refinement;
 
 	/**
-	 * The cached value of the '{@link #getNestedCall() <em>Nested Call</em>}' containment reference list.
+	 * The cached value of the '{@link #getSpecification() <em>Specification</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNestedCall()
+	 * @see #getSpecification()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MappingCall> nestedCall;
+	protected EList<Mapping> specification;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -181,9 +161,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		if (newGuardPattern != guardPattern) {
 			NotificationChain msgs = null;
 			if (guardPattern != null)
-				msgs = ((InternalEObject)guardPattern).eInverseRemove(this, QVTcorePackage.GUARD_PATTERN__AREA, GuardPattern.class, msgs);
+				msgs = ((InternalEObject)guardPattern).eInverseRemove(this, QVTcoreBasePackage.GUARD_PATTERN__AREA, GuardPattern.class, msgs);
 			if (newGuardPattern != null)
-				msgs = ((InternalEObject)newGuardPattern).eInverseAdd(this, QVTcorePackage.GUARD_PATTERN__AREA, GuardPattern.class, msgs);
+				msgs = ((InternalEObject)newGuardPattern).eInverseAdd(this, QVTcoreBasePackage.GUARD_PATTERN__AREA, GuardPattern.class, msgs);
 			msgs = basicSetGuardPattern(newGuardPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -224,9 +204,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		if (newBottomPattern != bottomPattern) {
 			NotificationChain msgs = null;
 			if (bottomPattern != null)
-				msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, QVTcorePackage.BOTTOM_PATTERN__AREA, BottomPattern.class, msgs);
+				msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, QVTcoreBasePackage.BOTTOM_PATTERN__AREA, BottomPattern.class, msgs);
 			if (newBottomPattern != null)
-				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, QVTcorePackage.BOTTOM_PATTERN__AREA, BottomPattern.class, msgs);
+				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, QVTcoreBasePackage.BOTTOM_PATTERN__AREA, BottomPattern.class, msgs);
 			msgs = basicSetBottomPattern(newBottomPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -251,9 +231,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<NestedMapping> getLocal() {
+	public EList<Mapping> getLocal() {
 		if (local == null) {
-			local = new EObjectContainmentWithInverseEList<NestedMapping>(NestedMapping.class, this, QVTcorePackage.MAPPING__LOCAL, QVTcorePackage.NESTED_MAPPING__CONTEXT);
+			local = new EObjectContainmentWithInverseEList<Mapping>(Mapping.class, this, QVTcorePackage.MAPPING__LOCAL, QVTcorePackage.MAPPING__CONTEXT);
 		}
 		return local;
 	}
@@ -316,18 +296,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<MappingCall> getNestedCall() {
-		if (nestedCall == null) {
-			nestedCall = new EObjectContainmentEList<MappingCall>(MappingCall.class, this, QVTcorePackage.MAPPING__NESTED_CALL);
-		}
-		return nestedCall;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Mapping> getAllMappings() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -366,12 +334,12 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetContext((Mapping)otherEnd, msgs);
-			case QVTcorePackage.MAPPING__SPECIFICATION:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSpecification()).basicAdd(otherEnd, msgs);
 			case QVTcorePackage.MAPPING__LOCAL:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLocal()).basicAdd(otherEnd, msgs);
 			case QVTcorePackage.MAPPING__REFINEMENT:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRefinement()).basicAdd(otherEnd, msgs);
+			case QVTcorePackage.MAPPING__SPECIFICATION:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSpecification()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -390,14 +358,12 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return basicSetBottomPattern(null, msgs);
 			case QVTcorePackage.MAPPING__CONTEXT:
 				return basicSetContext(null, msgs);
-			case QVTcorePackage.MAPPING__SPECIFICATION:
-				return ((InternalEList<?>)getSpecification()).basicRemove(otherEnd, msgs);
 			case QVTcorePackage.MAPPING__LOCAL:
 				return ((InternalEList<?>)getLocal()).basicRemove(otherEnd, msgs);
 			case QVTcorePackage.MAPPING__REFINEMENT:
 				return ((InternalEList<?>)getRefinement()).basicRemove(otherEnd, msgs);
-			case QVTcorePackage.MAPPING__NESTED_CALL:
-				return ((InternalEList<?>)getNestedCall()).basicRemove(otherEnd, msgs);
+			case QVTcorePackage.MAPPING__SPECIFICATION:
+				return ((InternalEList<?>)getSpecification()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -430,14 +396,12 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return getBottomPattern();
 			case QVTcorePackage.MAPPING__CONTEXT:
 				return getContext();
-			case QVTcorePackage.MAPPING__SPECIFICATION:
-				return getSpecification();
 			case QVTcorePackage.MAPPING__LOCAL:
 				return getLocal();
 			case QVTcorePackage.MAPPING__REFINEMENT:
 				return getRefinement();
-			case QVTcorePackage.MAPPING__NESTED_CALL:
-				return getNestedCall();
+			case QVTcorePackage.MAPPING__SPECIFICATION:
+				return getSpecification();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -460,21 +424,17 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			case QVTcorePackage.MAPPING__CONTEXT:
 				setContext((Mapping)newValue);
 				return;
-			case QVTcorePackage.MAPPING__SPECIFICATION:
-				getSpecification().clear();
-				getSpecification().addAll((Collection<? extends Mapping>)newValue);
-				return;
 			case QVTcorePackage.MAPPING__LOCAL:
 				getLocal().clear();
-				getLocal().addAll((Collection<? extends NestedMapping>)newValue);
+				getLocal().addAll((Collection<? extends Mapping>)newValue);
 				return;
 			case QVTcorePackage.MAPPING__REFINEMENT:
 				getRefinement().clear();
 				getRefinement().addAll((Collection<? extends Mapping>)newValue);
 				return;
-			case QVTcorePackage.MAPPING__NESTED_CALL:
-				getNestedCall().clear();
-				getNestedCall().addAll((Collection<? extends MappingCall>)newValue);
+			case QVTcorePackage.MAPPING__SPECIFICATION:
+				getSpecification().clear();
+				getSpecification().addAll((Collection<? extends Mapping>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -497,17 +457,14 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			case QVTcorePackage.MAPPING__CONTEXT:
 				setContext((Mapping)null);
 				return;
-			case QVTcorePackage.MAPPING__SPECIFICATION:
-				getSpecification().clear();
-				return;
 			case QVTcorePackage.MAPPING__LOCAL:
 				getLocal().clear();
 				return;
 			case QVTcorePackage.MAPPING__REFINEMENT:
 				getRefinement().clear();
 				return;
-			case QVTcorePackage.MAPPING__NESTED_CALL:
-				getNestedCall().clear();
+			case QVTcorePackage.MAPPING__SPECIFICATION:
+				getSpecification().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -527,14 +484,12 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return bottomPattern != null;
 			case QVTcorePackage.MAPPING__CONTEXT:
 				return getContext() != null;
-			case QVTcorePackage.MAPPING__SPECIFICATION:
-				return specification != null && !specification.isEmpty();
 			case QVTcorePackage.MAPPING__LOCAL:
 				return local != null && !local.isEmpty();
 			case QVTcorePackage.MAPPING__REFINEMENT:
 				return refinement != null && !refinement.isEmpty();
-			case QVTcorePackage.MAPPING__NESTED_CALL:
-				return nestedCall != null && !nestedCall.isEmpty();
+			case QVTcorePackage.MAPPING__SPECIFICATION:
+				return specification != null && !specification.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -548,14 +503,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == Area.class) {
 			switch (derivedFeatureID) {
-				case QVTcorePackage.MAPPING__GUARD_PATTERN: return QVTcorePackage.AREA__GUARD_PATTERN;
-				case QVTcorePackage.MAPPING__BOTTOM_PATTERN: return QVTcorePackage.AREA__BOTTOM_PATTERN;
-				default: return -1;
-			}
-		}
-		if (baseClass == NestedMapping.class) {
-			switch (derivedFeatureID) {
-				case QVTcorePackage.MAPPING__CONTEXT: return QVTcorePackage.NESTED_MAPPING__CONTEXT;
+				case QVTcorePackage.MAPPING__GUARD_PATTERN: return QVTcoreBasePackage.AREA__GUARD_PATTERN;
+				case QVTcorePackage.MAPPING__BOTTOM_PATTERN: return QVTcoreBasePackage.AREA__BOTTOM_PATTERN;
 				default: return -1;
 			}
 		}
@@ -571,14 +520,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == Area.class) {
 			switch (baseFeatureID) {
-				case QVTcorePackage.AREA__GUARD_PATTERN: return QVTcorePackage.MAPPING__GUARD_PATTERN;
-				case QVTcorePackage.AREA__BOTTOM_PATTERN: return QVTcorePackage.MAPPING__BOTTOM_PATTERN;
-				default: return -1;
-			}
-		}
-		if (baseClass == NestedMapping.class) {
-			switch (baseFeatureID) {
-				case QVTcorePackage.NESTED_MAPPING__CONTEXT: return QVTcorePackage.MAPPING__CONTEXT;
+				case QVTcoreBasePackage.AREA__GUARD_PATTERN: return QVTcorePackage.MAPPING__GUARD_PATTERN;
+				case QVTcoreBasePackage.AREA__BOTTOM_PATTERN: return QVTcorePackage.MAPPING__BOTTOM_PATTERN;
 				default: return -1;
 			}
 		}

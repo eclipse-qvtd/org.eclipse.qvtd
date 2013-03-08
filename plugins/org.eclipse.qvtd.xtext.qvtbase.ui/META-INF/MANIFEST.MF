@@ -8,4 +8,5 @@ Bundle-Localization: plugin
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.ocl.examples.xtext.oclstdlib.ui;bundle-version="[3.3.0,4.0.0)";visibility:=reexport,
  org.eclipse.qvtd.pivot.qvtbase;visibility:=reexport
-Export-Package: org.eclipse.qvtd.xtext.qvtbase.ui.labeling
+Export-Package: org.eclipse.qvtd.xtext.qvtbase.ui.labeling,
+ org.eclipse.qvtd.xtext.qvtbase.ui.outline

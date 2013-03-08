@@ -18,21 +18,11 @@ package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 
-public class QVTcoreUtil extends QVTbaseUtil
+public class QVTcoreUtil extends QVTcoreBaseUtil
 {
-	public static @Nullable Area getContainingArea(@Nullable EObject eObject) {
-		for ( ; eObject != null; eObject = eObject.eContainer()) {
-			if (eObject instanceof Area) {
-				return (Area) eObject;
-			}
-		}
-		return null;
-	}
-	
 	public static @Nullable Mapping getContainingMapping(@Nullable EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Mapping) {

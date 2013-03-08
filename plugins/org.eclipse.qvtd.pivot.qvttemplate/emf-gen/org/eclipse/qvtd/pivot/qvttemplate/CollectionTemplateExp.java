@@ -17,7 +17,6 @@
 package org.eclipse.qvtd.pivot.qvttemplate;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;

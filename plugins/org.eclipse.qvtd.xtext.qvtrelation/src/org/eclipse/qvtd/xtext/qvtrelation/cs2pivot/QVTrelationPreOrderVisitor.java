@@ -16,6 +16,8 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelation.cs2pivot;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -26,12 +28,14 @@ import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.PivotDependency;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.SingleContinuation;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.xtext.qvtrelationcst.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ObjectTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.PropertyTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcst.TransformationCS;
 
 public class QVTrelationPreOrderVisitor extends AbstractQVTrelationPreOrderVisitor
 {	
@@ -125,5 +129,19 @@ public class QVTrelationPreOrderVisitor extends AbstractQVTrelationPreOrderVisit
 	@Override
 	public Continuation<?> visitPropertyTemplateCS(@NonNull PropertyTemplateCS csElement) {
 		return new PropertyTemplateCompletion(context, csElement);
+	}
+
+	@Override
+	public Continuation<?> visitTransformationCS(@NonNull TransformationCS csElement) {
+		Transformation pivotElement = PivotUtil.getPivot(Transformation.class, csElement);
+		if (pivotElement != null) {
+			List<Type> superClasses = pivotElement.getSuperClass();
+//			context.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());
+			if (superClasses.isEmpty()) {
+				org.eclipse.ocl.examples.pivot.Class oclElementType = context.getMetaModelManager().getOclElementType();
+				pivotElement.getSuperClass().add(oclElementType);
+			}
+		}
+		return null;
 	}
 }

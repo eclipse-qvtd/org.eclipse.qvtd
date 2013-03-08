@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.pivot.qvtimperative/emf-gen"
+    modelPluginID="org.eclipse.qvtd.pivot.qvtimperative" modelName="QVTimperative"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot platform:/plugin/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel#//qvtcorebase">
+  <foreignModel>QVTimperative.ecore</foreignModel>
+  <genPackages prefix="QVTimperative" basePackage="org.eclipse.qvtd.pivot" disposableProviderFactory="true"
+      contentTypeIdentifier="org.eclipse.qvtd.qvtimperative" fileExtensions="qvtimperative"
+      ecorePackage="QVTimperative.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="QVTimperative.ecore#//EnforcementMode">
+      <genEnumLiterals ecoreEnumLiteral="QVTimperative.ecore#//EnforcementMode/Creation"/>
+      <genEnumLiterals ecoreEnumLiteral="QVTimperative.ecore#//EnforcementMode/Deletion"/>
+    </genEnums>
+    <genClasses ecoreClass="QVTimperative.ecore#//Mapping">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/mappingCall"/>
+      <genOperations ecoreOperation="QVTimperative.ecore#//Mapping/getAllMappings"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//MappingCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingCall/referredMapping"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingCall/binding"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingCall/context"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//MappingCallBinding">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingCallBinding/mappingCall"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingCallBinding/boundVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingCallBinding/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

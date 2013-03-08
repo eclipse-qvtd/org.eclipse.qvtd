@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtimperative" nsURI="http://www.eclipse.org/qvt/0.9/QVTimperatve"
+    nsPrefix="qvti">
+  <eClassifiers xsi:type="ecore:EClass" name="ImperativeModel" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//BaseModel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Mapping" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#//AbstractMapping">
+    <eOperations name="getAllMappings" ordered="false" upperBound="-1" eType="#//Mapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingCall" upperBound="-1"
+        eType="#//MappingCall" containment="true" eOpposite="#//MappingCall/context"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingCall" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OCLExpression platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//ReferringElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredMapping" lowerBound="1"
+        eType="#//Mapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="binding" ordered="false"
+        upperBound="-1" eType="#//MappingCallBinding" containment="true" eOpposite="#//MappingCallBinding/mappingCall"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="context" lowerBound="1"
+        eType="#//Mapping" eOpposite="#//Mapping/mappingCall"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingCallBinding" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Element platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//ReferringElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingCall" eType="#//MappingCall"
+        eOpposite="#//MappingCall/binding"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundVariable" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OCLExpression"
+        containment="true">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="valueAssignment"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

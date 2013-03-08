@@ -36,60 +36,6 @@ public interface QVTcoreCSTFactory extends EFactory {
 	QVTcoreCSTFactory eINSTANCE = org.eclipse.qvtd.xtext.qvtcorecst.impl.QVTcoreCSTFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Assignment CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Assignment CS</em>'.
-	 * @generated
-	 */
-	AssignmentCS createAssignmentCS();
-
-	/**
-	 * Returns a new object of class '<em>Bottom Pattern CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Bottom Pattern CS</em>'.
-	 * @generated
-	 */
-	BottomPatternCS createBottomPatternCS();
-
-	/**
-	 * Returns a new object of class '<em>Direction CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Direction CS</em>'.
-	 * @generated
-	 */
-	DirectionCS createDirectionCS();
-
-	/**
-	 * Returns a new object of class '<em>Domain CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Domain CS</em>'.
-	 * @generated
-	 */
-	DomainCS createDomainCS();
-
-	/**
-	 * Returns a new object of class '<em>Enforcement Operation CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enforcement Operation CS</em>'.
-	 * @generated
-	 */
-	EnforcementOperationCS createEnforcementOperationCS();
-
-	/**
-	 * Returns a new object of class '<em>Guard Pattern CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Guard Pattern CS</em>'.
-	 * @generated
-	 */
-	GuardPatternCS createGuardPatternCS();
-
-	/**
 	 * Returns a new object of class '<em>Mapping CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -99,51 +45,6 @@ public interface QVTcoreCSTFactory extends EFactory {
 	MappingCS createMappingCS();
 
 	/**
-	 * Returns a new object of class '<em>Mapping Call Binding CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping Call Binding CS</em>'.
-	 * @generated
-	 */
-	MappingCallBindingCS createMappingCallBindingCS();
-
-	/**
-	 * Returns a new object of class '<em>Mapping Call CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping Call CS</em>'.
-	 * @generated
-	 */
-	MappingCallCS createMappingCallCS();
-
-	/**
-	 * Returns a new object of class '<em>Param Declaration CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Param Declaration CS</em>'.
-	 * @generated
-	 */
-	ParamDeclarationCS createParamDeclarationCS();
-
-	/**
-	 * Returns a new object of class '<em>Query CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Query CS</em>'.
-	 * @generated
-	 */
-	QueryCS createQueryCS();
-
-	/**
-	 * Returns a new object of class '<em>Realized Variable CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Realized Variable CS</em>'.
-	 * @generated
-	 */
-	RealizedVariableCS createRealizedVariableCS();
-
-	/**
 	 * Returns a new object of class '<em>Top Level CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -151,24 +52,6 @@ public interface QVTcoreCSTFactory extends EFactory {
 	 * @generated
 	 */
 	TopLevelCS createTopLevelCS();
-
-	/**
-	 * Returns a new object of class '<em>Transformation CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Transformation CS</em>'.
-	 * @generated
-	 */
-	TransformationCS createTransformationCS();
-
-	/**
-	 * Returns a new object of class '<em>Unrealized Variable CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Unrealized Variable CS</em>'.
-	 * @generated
-	 */
-	UnrealizedVariableCS createUnrealizedVariableCS();
 
 	/**
 	 * Returns the package supported by this factory.

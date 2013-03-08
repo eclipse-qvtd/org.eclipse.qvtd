@@ -17,7 +17,6 @@
 package org.eclipse.qvtd.pivot.qvtrelation;
 
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
-
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 /**

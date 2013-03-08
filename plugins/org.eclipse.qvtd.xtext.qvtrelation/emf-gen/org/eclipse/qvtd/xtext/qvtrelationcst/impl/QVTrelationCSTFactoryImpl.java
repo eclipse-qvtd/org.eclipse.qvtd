@@ -59,7 +59,7 @@ public class QVTrelationCSTFactoryImpl extends EFactoryImpl implements QVTrelati
 	 */
 	public static QVTrelationCSTFactory init() {
 		try {
-			QVTrelationCSTFactory theQVTrelationCSTFactory = (QVTrelationCSTFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/qvt/0.9/QVTrelationCST"); 
+			QVTrelationCSTFactory theQVTrelationCSTFactory = (QVTrelationCSTFactory)EPackage.Registry.INSTANCE.getEFactory(QVTrelationCSTPackage.eNS_URI);
 			if (theQVTrelationCSTFactory != null) {
 				return theQVTrelationCSTFactory;
 			}

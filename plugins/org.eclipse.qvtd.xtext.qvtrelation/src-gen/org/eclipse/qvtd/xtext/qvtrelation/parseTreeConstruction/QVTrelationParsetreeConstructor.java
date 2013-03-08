@@ -6,14 +6,13 @@ package org.eclipse.qvtd.xtext.qvtrelation.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class QVTrelationParsetreeConstructor extends AbstractParseTreeConstructor {
+public class QVTrelationParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private QVTrelationGrammarAccess grammarAccess;

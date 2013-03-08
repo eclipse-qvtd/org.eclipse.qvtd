@@ -40,6 +40,14 @@ Workflow {
     		from = "platform:/plugin/org.eclipse.ocl.examples.pivot/"
     		to = "platform:/resource/org.eclipse.ocl.examples.pivot/"
     	}
+     	uriMap = Mapping {
+    		from = "platform:/plugin/org.eclipse.ocl.examples.xtext.base/"
+    		to = "platform:/resource/org.eclipse.ocl.examples.xtext.base/"
+    	}
+     	uriMap = Mapping {
+    		from = "platform:/plugin/org.eclipse.ocl.examples.xtext.essentialocl/"
+    		to = "platform:/resource/org.eclipse.ocl.examples.xtext.essentialocl/"
+    	}
 	}
 	
 	component = DirectoryCleaner {

@@ -54,6 +54,14 @@ Workflow {
     		to = "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/"
     	}
     	uriMap = Mapping {
+    		from = "platform:/plugin/org.eclipse.qvtd.pivot.qvtcorebase/"
+    		to = "platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/"
+    	}
+    	uriMap = Mapping {
+    		from = "platform:/plugin/org.eclipse.qvtd.xtext.qvtcorebase/"
+    		to = "platform:/resource/org.eclipse.qvtd.xtext.qvtcorebase/"
+    	}
+    	uriMap = Mapping {
     		from = "platform:/plugin/org.eclipse.xtext.common.types/"
     		to = "platform:/resource/org.eclipse.xtext.common.types/"
     	}
@@ -61,10 +69,25 @@ Workflow {
     bean = GenModelSetup { resourceSet = resourceSet }
     bean = UMLGenModelSetup { resourceSet = resourceSet }
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    	genModel = "/org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCST.genmodel" 	
+    }
+    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCST.genmodel" 	
     }
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    	genModel = "/org.eclipse.qvtd.xtext.qvtimperative/model/QVTimperativeCST.genmodel" 	
+    }
+    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCST.genmodel" 	
+    }
+    component = XtextVisitorCodeGenerator { resourceSet = resourceSet
+    	ecoreFile = "/org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCST.ecore"
+    	javaFolder = "/../plugins/org.eclipse.qvtd.xtext.qvtcorebase/emf-gen"
+    	javaPackageName = "org.eclipse.qvtd.xtext.qvtcorebasecst"
+    	modelPackageName = "org.eclipse.qvtd.xtext.qvtcorebasecst"
+    	visitorClassName = "QVTcoreBaseCSVisitor"
+    	visitorBasePackageName = "org.eclipse.ocl.examples.xtext.essentialocl.util"
+    	visitorBaseClassName = "EssentialOCLCSVisitor"
     }
     component = XtextVisitorCodeGenerator { resourceSet = resourceSet
     	ecoreFile = "/org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCST.ecore"
@@ -72,8 +95,17 @@ Workflow {
     	javaPackageName = "org.eclipse.qvtd.xtext.qvtcorecst"
     	modelPackageName = "org.eclipse.qvtd.xtext.qvtcorecst"
     	visitorClassName = "QVTcoreCSVisitor"
-    	visitorBasePackageName = "org.eclipse.ocl.examples.xtext.essentialocl.util"
-    	visitorBaseClassName = "EssentialOCLCSVisitor"
+    	visitorBasePackageName = "org.eclipse.qvtd.xtext.qvtcorebasecst.util"
+    	visitorBaseClassName = "QVTcoreBaseCSVisitor"
+    }
+    component = XtextVisitorCodeGenerator { resourceSet = resourceSet
+    	ecoreFile = "/org.eclipse.qvtd.xtext.qvtimperative/model/QVTimperativeCST.ecore"
+    	javaFolder = "/../plugins/org.eclipse.qvtd.xtext.qvtimperative/emf-gen"
+    	javaPackageName = "org.eclipse.qvtd.xtext.qvtimperativecst"
+    	modelPackageName = "org.eclipse.qvtd.xtext.qvtimperativecst"
+    	visitorClassName = "QVTimperativeCSVisitor"
+    	visitorBasePackageName = "org.eclipse.qvtd.xtext.qvtcorebasecst.util"
+    	visitorBaseClassName = "QVTcoreBaseCSVisitor"
     }
     component = XtextVisitorCodeGenerator { resourceSet = resourceSet
     	ecoreFile = "/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCST.ecore"

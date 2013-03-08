@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtimperativecst" nsURI="http://www.eclipse.org/qvt/0.9/QVTimperativeCST"
+    nsPrefix="qvtics">
+  <eClassifiers xsi:type="ecore:EClass" name="MappingCS" eSuperTypes="../../org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCST.ecore#//AbstractMappingCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingCalls" upperBound="-1"
+        eType="#//MappingCallCS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingCallBindingCS" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingCall" eType="#//MappingCallCS"
+        eOpposite="#//MappingCallCS/bindings"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredVariable" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingCallCS" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ModelElementCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredMapping" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#//Mapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" ordered="false"
+        upperBound="-1" eType="#//MappingCallBindingCS" containment="true" eOpposite="#//MappingCallBindingCS/mappingCall"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TopLevelCS" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//RootPackageCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transformations" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCST.ecore#//TransformationCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="queries" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCST.ecore#//QueryCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappings" upperBound="-1"
+        eType="#//MappingCS" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

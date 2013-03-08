@@ -18,10 +18,8 @@ package org.eclipse.qvtd.pivot.qvtrelation.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-
 import org.eclipse.ocl.examples.pivot.internal.impl.PropertyCallExpImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
-
 import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.xtext.qvtcorebase/emf-gen" modelPluginID="org.eclipse.qvtd.xtext.qvtcorebase"
+    modelName="QVTcoreBaseCST" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false" usedGenPackages="platform:/plugin/org.eclipse.ocl.examples.xtext.base/model/BaseCST.genmodel#//baseCST platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore platform:/plugin/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.genmodel#//essentialOCLCST platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel#//qvtcorebase">
+  <foreignModel>QVTcoreBaseCST.ecore</foreignModel>
+  <genPackages prefix="QVTcoreBaseCST" basePackage="org.eclipse.qvtd.xtext" resource="XML"
+      disposableProviderFactory="true" fileExtensions="qvtcb" ecorePackage="QVTcoreBaseCST.ecore#/">
+    <genClasses image="false" ecoreClass="QVTcoreBaseCST.ecore#//AreaCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//AreaCS/guardPattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//AreaCS/bottomPattern"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreBaseCST.ecore#//AssignmentCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcoreBaseCST.ecore#//AssignmentCS/default"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//AssignmentCS/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//AssignmentCS/initialiser"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreBaseCST.ecore#//BottomPatternCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//BottomPatternCS/enforcementOperations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//BottomPatternCS/realizedVariables"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreBaseCST.ecore#//DirectionCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//DirectionCS/imports"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//DirectionCS/uses"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreBaseCST.ecore#//DomainCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcoreBaseCST.ecore#//DomainCS/check"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcoreBaseCST.ecore#//DomainCS/enforce"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//DomainCS/direction"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreBaseCST.ecore#//EnforcementOperationCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcoreBaseCST.ecore#//EnforcementOperationCS/deletion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//EnforcementOperationCS/operationCall"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreBaseCST.ecore#//GuardPatternCS"/>
+    <genClasses image="false" ecoreClass="QVTcoreBaseCST.ecore#//AbstractMappingCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//AbstractMappingCS/domains"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//AbstractMappingCS/in"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//AbstractMappingCS/middle"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreBaseCST.ecore#//ParamDeclarationCS"/>
+    <genClasses image="false" ecoreClass="QVTcoreBaseCST.ecore#//PatternCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//PatternCS/constraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//PatternCS/unrealizedVariables"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreBaseCST.ecore#//QueryCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//QueryCS/pathName"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//QueryCS/transformation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//QueryCS/inputParamDeclaration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//QueryCS/expression"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="QVTcoreBaseCST.ecore#//RealizeableVariableCS"/>
+    <genClasses ecoreClass="QVTcoreBaseCST.ecore#//RealizedVariableCS"/>
+    <genClasses ecoreClass="QVTcoreBaseCST.ecore#//TopLevelCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//TopLevelCS/transformations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//TopLevelCS/queries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//TopLevelCS/mappings"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreBaseCST.ecore#//TransformationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//TransformationCS/pathName"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//TransformationCS/package"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBaseCST.ecore#//TransformationCS/directions"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreBaseCST.ecore#//UnrealizedVariableCS"/>
+  </genPackages>
+</genmodel:GenModel>

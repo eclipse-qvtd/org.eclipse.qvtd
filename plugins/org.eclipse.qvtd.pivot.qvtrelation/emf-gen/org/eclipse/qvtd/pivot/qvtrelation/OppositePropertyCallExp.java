@@ -17,7 +17,6 @@
 package org.eclipse.qvtd.pivot.qvtrelation;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 
 /**

@@ -17,10 +17,8 @@
 package org.eclipse.qvtd.pivot.qvtrelation;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
-
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**

@@ -17,7 +17,6 @@
 package org.eclipse.qvtd.pivot.qvtrelation;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 /**

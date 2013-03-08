@@ -76,8 +76,8 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 			
 			// generates Java API for the generated EPackages 
-//			fragment = ecore.ErelationGeneratorFragment {
-//				referencedGenModels = "platform:/resource/org.eclipse.emf.erelation/model/Erelation.genmodel"  
+//			fragment = ecore.EcoreGeneratorFragment {
+//				referencedGenModels = "platform:/resource/org.eclipse.emf.erelation/model/Ecore.genmodel"  
 //				referencedGenModels = "platform:/resource/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.genmodel"
 //			}
 			

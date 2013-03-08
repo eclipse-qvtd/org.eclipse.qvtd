@@ -1,9 +1,9 @@
 
 package org.eclipse.qvtd.xtext.qvtcore.ui.quickfix;
 
-import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
+import org.eclipse.qvtd.xtext.qvtcorebase.ui.quickfix.QVTcoreBaseQuickfixProvider;
 
-public class QVTcoreQuickfixProvider extends DefaultQuickfixProvider {
+public class QVTcoreQuickfixProvider extends QVTcoreBaseQuickfixProvider {
 
 //	@Fix(MyJavaValidator.INVALID_NAME)
 //	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {

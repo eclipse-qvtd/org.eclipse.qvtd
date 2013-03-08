@@ -5,17 +5,9 @@ package org.eclipse.qvtd.xtext.qvtcore.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.pivot.qvtcore.Assignment;
-import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
-import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
-import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
-import org.eclipse.qvtd.xtext.qvtbase.ui.labeling.QVTbaseLabelProvider;
+import org.eclipse.qvtd.xtext.qvtcorebase.ui.labeling.QVTcoreBaseLabelProvider;
+import org.eclipse.qvtd.xtext.qvtcorecst.TopLevelCS;
 
 import com.google.inject.Inject;
 
@@ -24,62 +16,18 @@ import com.google.inject.Inject;
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class QVTcoreLabelProvider extends QVTbaseLabelProvider {
+public class QVTcoreLabelProvider extends QVTcoreBaseLabelProvider {
 
 	@Inject
 	public QVTcoreLabelProvider(@NonNull AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 
-	protected String image(Assignment ele) {
-		return "Assignment.gif";
-	}
-
-	protected String image(BottomPattern ele) {
-		return "BottomPattern.gif";
-	}
-
-	protected String image(CoreDomain ele) {
-		return "CoreDomain.gif";
-	}
-
-	protected String image(CorePattern ele) {
-		return "CorePattern.gif";
-	}
-
-//	protected String image(Direction ele) {
-//		return "Direction.gif";
-//	}
-
-	protected String image(EnforcementOperation ele) {
-		return "EnforcementOperation.gif";
-	}
-
-	protected String image(GuardPattern ele) {
-		return "GuardPattern.gif";
-	}
-
 	protected String image(Mapping ele) {
-		return "Mapping.gif";
+		return QVTCOREBASE_UI_ICONS + "Mapping.gif";
 	}
 
-	protected String image(PropertyAssignment ele) {
-		return "PropertyAssignment.gif";
-	}
-
-	protected String image(RealizedVariable ele) {
-		return "RealizedVariable.gif";
-	}
-
-	protected String image(VariableAssignment ele) {
-		return "VariableAssignment.gif";
-	}
-
-	protected String text(BottomPattern ele) {
-		return "bottom";
-	}
-
-	protected String text(GuardPattern ele) {
-		return "guard";
+	protected String image(TopLevelCS ele) {
+		return "QVTcModelFile.gif";
 	}
 }

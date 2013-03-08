@@ -17,33 +17,22 @@ package org.eclipse.qvtd.pivot.qvtcore.utilities;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
-import org.eclipse.qvtd.pivot.qvtcore.Assignment;
-import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
-import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
-import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
-import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.pivot.qvtcore.MappingCall;
-import org.eclipse.qvtd.pivot.qvtcore.MappingCallBinding;
-import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
-import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseToStringVisitor;
 
 /**
  * Converts an OCL expression to a string for debugging. This is not intended to
  * be used by client applications as an AST-to-text transformation.
  */
-public class QVTcoreToStringVisitor extends QVTbaseToStringVisitor implements QVTcoreVisitor<String>
+public class QVTcoreToStringVisitor extends QVTcoreBaseToStringVisitor implements QVTcoreVisitor<String>
 {
 	private static final class Factory implements ToStringVisitor.Factory
 	{
 		private Factory() {
-			QVTbaseToStringVisitor.FACTORY.getClass();
+			QVTcoreBaseToStringVisitor.FACTORY.getClass();
 			ToStringVisitor.addFactory(this);
 		}
 
@@ -61,79 +50,13 @@ public class QVTcoreToStringVisitor extends QVTbaseToStringVisitor implements QV
 
 	protected QVTcoreToStringVisitor() {}
 
-	public String visitAssignment(@NonNull Assignment object) {
-		append("Assignment ");
-//		appendName(object);
-		return null;
-	}
-
-	public String visitBottomPattern(@NonNull BottomPattern object) {
-		append("BottomPattern ");
-//		appendName(object);
-		return null;
-	}
-
-	public String visitCoreDomain(@NonNull CoreDomain object) {
-		append("core domain ");
-		appendName(object);
-		return null;
-	}
-
 	public String visitCoreModel(@NonNull CoreModel object) {
 		return visitRoot(object);
-	}
-
-	public String visitCorePattern(@NonNull CorePattern object) {
-		append("CorePattern ");
-//		appendName(object);
-		return null;
-	}
-
-	public String visitEnforcementOperation(@NonNull EnforcementOperation object) {
-		append("EnforcementOperation ");
-//		appendName(object);
-		return null;
-	}
-
-	public String visitGuardPattern(@NonNull GuardPattern object) {
-		append("GuardPattern ");
-//		appendName(object);
-		return null;
 	}
 
 	public String visitMapping(@NonNull Mapping object) {
 		append("mapping ");
 		appendName(object);
-		return null;
-	}
-
-	public String visitMappingCall(@NonNull MappingCall object) {
-		append("mappingCall ");
-		appendName(object);
-		return null;
-	}
-
-	public String visitMappingCallBinding(@NonNull MappingCallBinding object) {
-		append("mappingCallBinding ");
-		appendName(object);
-		return null;
-	}
-
-	public String visitPropertyAssignment(@NonNull PropertyAssignment object) {
-		append("PropertyAssignment ");
-//		appendName(object);
-		return null;
-	}
-
-	public String visitRealizedVariable(@NonNull RealizedVariable object) {
-		append("RealizedVariable ");
-		appendName(object);
-		return null;
-	}
-
-	public String visitVariableAssignment(@NonNull VariableAssignment object) {
-		append("VariableAssignment ");
-//		appendName(object);
 		return null;
 	}
 }

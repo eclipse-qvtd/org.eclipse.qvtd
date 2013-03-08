@@ -24,8 +24,10 @@ import org.eclipse.qvtd.build.utilities.*
  * Generate all auto-generated files for the MDT/OCL Examples Editors
  */
 Workflow {
-  component = @GenerateQVTdModels {}
+  component = @GenerateQVTdPivotModels {}
   component = @GenerateQVTdXtextModels {}
+  component = @GenerateQVTcoreBaseEditor {}
   component = @GenerateQVTcoreEditor {}
+  component = @GenerateQVTimperativeEditor {}
   component = @GenerateQVTrelationEditor {}
 }

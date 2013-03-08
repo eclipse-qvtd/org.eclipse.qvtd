@@ -7,7 +7,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Export-Package: org.eclipse.qvtd.xtext.qvtcore.ui.contentassist.antlr
-Require-Bundle: org.eclipse.qvtd.xtext.qvtbase.ui;visibility:=reexport,
+Require-Bundle: org.eclipse.qvtd.xtext.qvtcorebase.ui;visibility:=reexport,
  org.eclipse.qvtd.xtext.qvtcore;visibility:=reexport
 Import-Package: org.apache.log4j
 Bundle-Activator: org.eclipse.qvtd.xtext.qvtcore.ui.internal.QVTcoreActivator

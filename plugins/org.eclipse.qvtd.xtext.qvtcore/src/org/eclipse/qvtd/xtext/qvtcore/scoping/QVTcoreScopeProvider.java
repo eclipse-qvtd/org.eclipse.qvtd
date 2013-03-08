@@ -16,7 +16,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtcore.scoping;
 
-import org.eclipse.ocl.examples.xtext.essentialocl.scoping.EssentialOCLScopeProvider;
+import org.eclipse.qvtd.xtext.qvtcorebase.scoping.QVTcoreBaseScopeProvider;
 
 /**
  * This class contains custom scoping description.
@@ -25,6 +25,6 @@ import org.eclipse.ocl.examples.xtext.essentialocl.scoping.EssentialOCLScopeProv
  * on how and when to use it 
  *
  */
-public class QVTcoreScopeProvider extends EssentialOCLScopeProvider {
+public class QVTcoreScopeProvider extends QVTcoreBaseScopeProvider {
 
 }

@@ -30,7 +30,7 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  */
 public abstract class AbstractQVTcoreCSVisitor<R, C>
- extends org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractEssentialOCLCSVisitor<R, C>
+ extends org.eclipse.qvtd.xtext.qvtcorebasecst.util.AbstractQVTcoreBaseCSVisitor<R, C>
 	implements QVTcoreCSVisitor<R>
 {
 	/**
