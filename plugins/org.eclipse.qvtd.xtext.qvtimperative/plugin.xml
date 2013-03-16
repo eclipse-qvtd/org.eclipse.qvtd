@@ -18,9 +18,12 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
-      <!-- @generated QVTimperativeCST -->
-      <parser
+      <!-- @generated QVTimperativeCST NOT-->
+      <!--parser
             type="qvti"
+            class="org.eclipse.qvtd.xtext.qvtimperativecst.util.QVTimperativeCSTResourceFactoryImpl"/-->
+      <parser
+            type="qvtics"
             class="org.eclipse.qvtd.xtext.qvtimperativecst.util.QVTimperativeCSTResourceFactoryImpl"/>
    </extension>
 
