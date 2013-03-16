@@ -731,7 +731,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				packageId2 = packageId;
 				if (packageId2 == null) {
 					synchronized (this) {
-						packageId = packageId2 = IdManager.INSTANCE.getPackageId(this);
+						packageId = packageId2 = IdManager.getPackageId(this);
 					}
 				}
 			}

@@ -4,7 +4,6 @@
 package org.eclipse.qvtd.xtext.qvtimperative.ui.labeling;
 
 import org.eclipse.qvtd.xtext.qvtcorebase.ui.labeling.QVTcoreBaseDescriptionLabelProvider;
-import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
 
 /**
  * Provides labels for a IEObjectDescriptions and IResourceDescriptions.

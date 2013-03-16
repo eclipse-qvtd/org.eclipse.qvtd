@@ -2,8 +2,7 @@ package org.eclipse.qvtd.xtext.qvtbase.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.Nameable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling.EssentialOCLLabelProvider;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -25,17 +24,6 @@ import com.google.inject.Inject;
 public class QVTbaseLabelProvider extends EssentialOCLLabelProvider
 {
 	public static final String QVTBASE_UI_ICONS = "/org.eclipse.qvtd.xtext.qvtbase.ui/icons/";
-
-	public static @NonNull String getSafeName(@Nullable Nameable ele) {
-		if (ele == null) {
-			return "";
-		}
-		String name = ele.getName();
-		if (name == null) {
-			return "";
-		}
-		return name;
-	}
 
 	@Inject
 	public QVTbaseLabelProvider(@NonNull AdapterFactoryLabelProvider delegate) {
@@ -75,15 +63,15 @@ public class QVTbaseLabelProvider extends EssentialOCLLabelProvider
 	}
 
 	protected String text(Domain ele) {
-		return getSafeName(ele);
+		return DomainUtil.getSafeName(ele);
 	}
 
 	protected String text(Rule ele) {
-		return getSafeName(ele);
+		return DomainUtil.getSafeName(ele);
 	}
 
 	protected String text(Transformation ele) {
-		return getSafeName(ele);
+		return DomainUtil.getSafeName(ele);
 	}
 
 	protected String text(TypedModel ele) {
