@@ -18,5 +18,7 @@ logon to build.eclipse.org
 cd downloads/mmt/qvtd/updates/milestones/0.10.0
 ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.repository=S201210020848
 
+Check that Install New Software from http://download.eclipse.org/mmt/qvtd/updates/milestones/0.10.0 shows the new build.
+
 [Not yet on Simultaneous Release -- The Kepler aggregator is configured by GIT\org.eclipse.simrel.build\mmt-qvtd.b3aggrcon to use the milestones repo
 so no further action is needed there.]
