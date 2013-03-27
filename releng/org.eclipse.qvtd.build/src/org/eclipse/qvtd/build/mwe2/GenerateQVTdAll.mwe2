@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010 E.D.Willink and others.
+ * Copyright (c) 2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,17 +11,13 @@
  *     E.D.Willink - initial API and implementation
  *
  * </copyright>
- *
- * $Id: GenerateAll.mwe2,v 1.2 2011/01/24 20:54:27 ewillink Exp $
  * 
- * Run As->MWE2 Workflow to regenerate all example editors and models.
+ * Run As->MWE2 Workflow to regenerate all editors and models.
  */
-module GenerateAll
-
-import org.eclipse.qvtd.build.utilities.*
+module GenerateQVTdAll
 
 /**
- * Generate all auto-generated files for the MDT/OCL Examples Editors
+ * Generate all auto-generated files for the QVTd Editors
  */
 Workflow {
   component = @GenerateQVTdPivotModels {}
