@@ -18,6 +18,7 @@ package org.eclipse.qvtd.xtext.qvtcore.formatting;
 
 import org.eclipse.qvtd.xtext.qvtcore.services.QVTcoreGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtcore.services.QVTcoreGrammarAccess.MappingCSElements;
+import org.eclipse.qvtd.xtext.qvtcore.services.QVTcoreGrammarAccess.TopLevelCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.formatting.QVTcoreBaseFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 
@@ -54,16 +55,10 @@ public class QVTcoreFormatter extends QVTcoreBaseFormatter
 	    configureTupleTypeCS(c, f.getTupleTypeCSAccess());
 	    configureURIPathNameCS(c, f.getURIPathNameCSAccess());
 
-	    c.setLinewrap(2).before(f.getML_COMMENTRule());
-	    c.setLinewrap(1).after(f.getML_COMMENTRule());
-
-	    c.setLinewrap(2).between(f.getImportCSRule(), f.getTransformationCSRule());
-	    c.setLinewrap(2).between(f.getImportCSRule(), f.getQueryCSRule());
-	    c.setLinewrap(2).between(f.getMappingCSRule(), f.getMappingCSRule());
-	    c.setLinewrap(2).between(f.getQueryCSRule(), f.getQueryCSRule());
-	    c.setLinewrap(2).between(f.getQueryCSRule(), f.getTransformationCSRule());
-	    c.setLinewrap(2).between(f.getTransformationCSRule(), f.getTransformationCSRule());
-	    c.setLinewrap(2).between(f.getTransformationCSRule(), f.getQueryCSRule());
+		c.setLinewrap(0, 1, 2).before(f.getSL_COMMENTRule());
+		c.setLinewrap(0, 1, 1).after(f.getSL_COMMENTRule());
+		c.setLinewrap(0, 1, 2).before(f.getML_COMMENTRule());
+		c.setLinewrap(0, 1, 1).after(f.getML_COMMENTRule());
 
 	    configureAssignmentCS(c, f.getAssignmentCSAccess());
 	    configureBottomPatternCS(c, f.getBottomPatternCSAccess());
@@ -76,10 +71,16 @@ public class QVTcoreFormatter extends QVTcoreBaseFormatter
 	    	MappingCSElements a = f.getMappingCSAccess();
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_5(), a.getRightCurlyBracketKeyword_9());
 			setBraces(c, a.getLeftCurlyBracketKeyword_5(), a.getRightCurlyBracketKeyword_9());
-			c.setLinewrap().before(a.getWhereKeyword_7_0());
+			c.setLinewrap(2).between(a.getDomainsAssignment_6(), a.getDomainsAssignment_6());
+			c.setLinewrap(2).between(a.getDomainsAssignment_6(), a.getGroup_7());
+			c.setLinewrap(1,2,2).before(a.getGroup_7());
+			c.setLinewrap(2).between(a.getGroup_7(), a.getComposedMappingsAssignment_8());
+			c.setLinewrap(1,2,2).before(a.getComposedMappingsAssignment_8());
+			c.setLinewrap(2).between(a.getComposedMappingsAssignment_8(), a.getComposedMappingsAssignment_8());
 	    }
-	    {	// comments
-	    	c.setNoLinewrap().before(f.getSL_COMMENTRule());
+	    {
+	    	TopLevelCSElements a = f.getTopLevelCSAccess();
+			c.setLinewrap(2).before(a.getAlternatives_1());
 	    }
 	}
 

@@ -21,6 +21,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallBindingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.TopLevelCSElements;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 
 /**
@@ -57,19 +58,9 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 	    configureURIPathNameCS(c, f.getURIPathNameCSAccess());
 
 		c.setLinewrap(0, 1, 2).before(f.getSL_COMMENTRule());
+		c.setLinewrap(0, 1, 1).after(f.getSL_COMMENTRule());
 		c.setLinewrap(0, 1, 2).before(f.getML_COMMENTRule());
 		c.setLinewrap(0, 1, 1).after(f.getML_COMMENTRule());
-//    	c.setNoLinewrap().before(f.getSL_COMMENTRule());
-//	    c.setLinewrap(2).before(f.getML_COMMENTRule());
-//	    c.setLinewrap(1).after(f.getML_COMMENTRule());
-
-	    c.setLinewrap(2).between(f.getImportCSRule(), f.getTransformationCSRule());
-	    c.setLinewrap(2).between(f.getImportCSRule(), f.getQueryCSRule());
-	    c.setLinewrap(2).between(f.getMappingCSRule(), f.getMappingCSRule());
-	    c.setLinewrap(2).between(f.getQueryCSRule(), f.getQueryCSRule());
-	    c.setLinewrap(2).between(f.getQueryCSRule(), f.getTransformationCSRule());
-	    c.setLinewrap(2).between(f.getTransformationCSRule(), f.getTransformationCSRule());
-	    c.setLinewrap(2).between(f.getTransformationCSRule(), f.getQueryCSRule());
 
 	    configureAssignmentCS(c, f.getAssignmentCSAccess());
 	    configureBottomPatternCS(c, f.getBottomPatternCSAccess());
@@ -83,7 +74,8 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 	    	MappingCSElements a = f.getMappingCSAccess();
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_8());
 			setBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_8());
-			c.setLinewrap().before(a.getWhereKeyword_6_0());
+			c.setLinewrap(2).between(a.getDomainsAssignment_5(), a.getDomainsAssignment_5());
+			c.setLinewrap(2).before(a.getWhereKeyword_6_0());
 	    }
 	    {
 	    	MappingCallCSElements a = f.getMappingCallCSAccess();
@@ -92,6 +84,10 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 	    {
 	    	MappingCallBindingCSElements a = f.getMappingCallBindingCSAccess();
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
+	    }
+	    {
+	    	TopLevelCSElements a = f.getTopLevelCSAccess();
+			c.setLinewrap(2).before(a.getAlternatives_1());
 	    }
 	}
 

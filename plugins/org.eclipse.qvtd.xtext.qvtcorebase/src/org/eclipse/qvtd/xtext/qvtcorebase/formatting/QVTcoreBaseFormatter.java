@@ -44,12 +44,16 @@ public class QVTcoreBaseFormatter extends AbstractEssentialOCLFormatter {
 		c.setLinewrap().before(a.getRightCurlyBracketKeyword_0_5());	
 		c.setLinewrap().after(a.getRightCurlyBracketKeyword_0_5());	
 		c.setIndentation(a.getVerticalLineKeyword_0_3(), a.getRightCurlyBracketKeyword_0_5());
+		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_0_0(), a.getVerticalLineKeyword_0_3());
+		c.setNoSpace().between(a.getVerticalLineKeyword_0_3(), a.getRightCurlyBracketKeyword_0_5());
+		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_0_0(), a.getRightCurlyBracketKeyword_0_5());
 		//
 		c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_1_1());	
 		c.setLinewrap().after(a.getLeftCurlyBracketKeyword_1_1());	
 		c.setLinewrap().before(a.getRightCurlyBracketKeyword_1_3());	
 		c.setLinewrap().after(a.getRightCurlyBracketKeyword_1_3());	
 		c.setIndentation(a.getLeftCurlyBracketKeyword_1_1(), a.getRightCurlyBracketKeyword_1_3());
+		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_1_1(), a.getRightCurlyBracketKeyword_1_3());
 	}
 
 	protected void configureDirectionCS(FormattingConfig c, DirectionCSElements a) {
@@ -68,12 +72,16 @@ public class QVTcoreBaseFormatter extends AbstractEssentialOCLFormatter {
 		c.setLinewrap().before(a.getRightParenthesisKeyword_0_5());	
 		c.setLinewrap().after(a.getRightParenthesisKeyword_0_5());	
 		c.setIndentation(a.getVerticalLineKeyword_0_3(), a.getRightParenthesisKeyword_0_5());
+		c.setNoSpace().between(a.getLeftParenthesisKeyword_0_0(), a.getVerticalLineKeyword_0_3());
+		c.setNoSpace().between(a.getVerticalLineKeyword_0_3(), a.getRightParenthesisKeyword_0_5());
+		c.setNoSpace().between(a.getLeftParenthesisKeyword_0_0(), a.getRightParenthesisKeyword_0_5());
 		//
 		c.setNoLinewrap().before(a.getLeftParenthesisKeyword_1_1());	
 		c.setLinewrap().after(a.getLeftParenthesisKeyword_1_1());	
 		c.setLinewrap().before(a.getRightParenthesisKeyword_1_3());	
 		c.setLinewrap().after(a.getRightParenthesisKeyword_1_3());	
 		c.setIndentation(a.getLeftParenthesisKeyword_1_1(), a.getRightParenthesisKeyword_1_3());
+		c.setNoSpace().between(a.getLeftParenthesisKeyword_1_1(), a.getRightParenthesisKeyword_1_3());
 	}
 
 	protected void configureImportCS(FormattingConfig c, ImportCSElements a) {
