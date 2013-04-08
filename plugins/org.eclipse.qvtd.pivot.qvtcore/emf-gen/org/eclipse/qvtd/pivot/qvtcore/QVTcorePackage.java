@@ -161,6 +161,15 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_MODEL__EXTERNAL_URI = QVTbasePackage.BASE_MODEL__EXTERNAL_URI;
 
 	/**
+	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__IMPORTS = QVTbasePackage.BASE_MODEL__IMPORTS;
+
+	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

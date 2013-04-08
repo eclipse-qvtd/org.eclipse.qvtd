@@ -161,6 +161,15 @@ public interface QVTbasePackage extends EPackage {
 	int BASE_MODEL__EXTERNAL_URI = PivotPackage.ROOT__EXTERNAL_URI;
 
 	/**
+	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_MODEL__IMPORTS = PivotPackage.ROOT__IMPORTS;
+
+	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

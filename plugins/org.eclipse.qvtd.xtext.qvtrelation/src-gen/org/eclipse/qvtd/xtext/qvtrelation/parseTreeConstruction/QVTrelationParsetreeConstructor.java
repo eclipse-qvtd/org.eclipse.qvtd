@@ -58,52 +58,55 @@ protected class ThisRootNode extends RootToken {
 			case 25: return new TypedTypeRefCS_PathNameAssignment(this, this, 25, inst);
 			case 26: return new TypedRefCS_Alternatives(this, this, 26, inst);
 			case 27: return new Model_OwnedExpressionAssignment(this, this, 27, inst);
-			case 28: return new PathNameCS_Group(this, this, 28, inst);
-			case 29: return new FirstPathElementCS_ElementAssignment(this, this, 29, inst);
-			case 30: return new NextPathElementCS_ElementAssignment(this, this, 30, inst);
-			case 31: return new URIPathNameCS_Group(this, this, 31, inst);
-			case 32: return new URIFirstPathElementCS_Alternatives(this, this, 32, inst);
-			case 33: return new PrimitiveTypeCS_NameAssignment(this, this, 33, inst);
-			case 34: return new CollectionTypeCS_Group(this, this, 34, inst);
-			case 35: return new MultiplicityBoundsCS_Group(this, this, 35, inst);
-			case 36: return new MultiplicityCS_Group(this, this, 36, inst);
-			case 37: return new MultiplicityStringCS_StringBoundsAssignment(this, this, 37, inst);
-			case 38: return new TupleTypeCS_Group(this, this, 38, inst);
-			case 39: return new TuplePartCS_Group(this, this, 39, inst);
-			case 40: return new CollectionLiteralExpCS_Group(this, this, 40, inst);
-			case 41: return new CollectionLiteralPartCS_Group(this, this, 41, inst);
-			case 42: return new ConstructorPartCS_Group(this, this, 42, inst);
-			case 43: return new PrimitiveLiteralExpCS_Alternatives(this, this, 43, inst);
-			case 44: return new TupleLiteralExpCS_Group(this, this, 44, inst);
-			case 45: return new TupleLiteralPartCS_Group(this, this, 45, inst);
-			case 46: return new NumberLiteralExpCS_NameAssignment(this, this, 46, inst);
-			case 47: return new StringLiteralExpCS_NameAssignment(this, this, 47, inst);
-			case 48: return new BooleanLiteralExpCS_Alternatives(this, this, 48, inst);
-			case 49: return new UnlimitedNaturalLiteralExpCS_Group(this, this, 49, inst);
-			case 50: return new InvalidLiteralExpCS_Group(this, this, 50, inst);
-			case 51: return new NullLiteralExpCS_Group(this, this, 51, inst);
-			case 52: return new TypeLiteralCS_Alternatives(this, this, 52, inst);
-			case 53: return new TypeLiteralWithMultiplicityCS_Group(this, this, 53, inst);
-			case 54: return new TypeLiteralExpCS_OwnedTypeAssignment(this, this, 54, inst);
-			case 55: return new TypeNameExpCS_PathNameAssignment(this, this, 55, inst);
-			case 56: return new TypeExpCS_Group(this, this, 56, inst);
-			case 57: return new ExpCS_Alternatives(this, this, 57, inst);
-			case 58: return new BinaryOperatorCS_Alternatives(this, this, 58, inst);
-			case 59: return new InfixOperatorCS_NameAssignment(this, this, 59, inst);
-			case 60: return new NavigationOperatorCS_NameAssignment(this, this, 60, inst);
-			case 61: return new PrefixedExpCS_Alternatives(this, this, 61, inst);
-			case 62: return new UnaryOperatorCS_NameAssignment(this, this, 62, inst);
-			case 63: return new PrimaryExpCS_Alternatives(this, this, 63, inst);
-			case 64: return new NavigatingArgCS_Group(this, this, 64, inst);
-			case 65: return new NavigatingBarArgCS_Group(this, this, 65, inst);
-			case 66: return new NavigatingCommaArgCS_Group(this, this, 66, inst);
-			case 67: return new NavigatingSemiArgCS_Group(this, this, 67, inst);
-			case 68: return new NavigatingArgExpCS_ExpCSParserRuleCall(this, this, 68, inst);
-			case 69: return new IfExpCS_Group(this, this, 69, inst);
-			case 70: return new LetExpCS_Group(this, this, 70, inst);
-			case 71: return new LetVariableCS_Group(this, this, 71, inst);
-			case 72: return new NestedExpCS_Group(this, this, 72, inst);
-			case 73: return new SelfExpCS_Group(this, this, 73, inst);
+			case 28: return new EssentialOCLUnaryOperatorCS_NameAssignment(this, this, 28, inst);
+			case 29: return new EssentialOCLInfixOperatorCS_NameAssignment(this, this, 29, inst);
+			case 30: return new EssentialOCLNavigationOperatorCS_NameAssignment(this, this, 30, inst);
+			case 31: return new BinaryOperatorCS_Alternatives(this, this, 31, inst);
+			case 32: return new InfixOperatorCS_EssentialOCLInfixOperatorCSParserRuleCall(this, this, 32, inst);
+			case 33: return new NavigationOperatorCS_EssentialOCLNavigationOperatorCSParserRuleCall(this, this, 33, inst);
+			case 34: return new UnaryOperatorCS_EssentialOCLUnaryOperatorCSParserRuleCall(this, this, 34, inst);
+			case 35: return new PathNameCS_Group(this, this, 35, inst);
+			case 36: return new FirstPathElementCS_ElementAssignment(this, this, 36, inst);
+			case 37: return new NextPathElementCS_ElementAssignment(this, this, 37, inst);
+			case 38: return new URIPathNameCS_Group(this, this, 38, inst);
+			case 39: return new URIFirstPathElementCS_Alternatives(this, this, 39, inst);
+			case 40: return new PrimitiveTypeCS_NameAssignment(this, this, 40, inst);
+			case 41: return new CollectionTypeCS_Group(this, this, 41, inst);
+			case 42: return new MultiplicityBoundsCS_Group(this, this, 42, inst);
+			case 43: return new MultiplicityCS_Group(this, this, 43, inst);
+			case 44: return new MultiplicityStringCS_StringBoundsAssignment(this, this, 44, inst);
+			case 45: return new TupleTypeCS_Group(this, this, 45, inst);
+			case 46: return new TuplePartCS_Group(this, this, 46, inst);
+			case 47: return new CollectionLiteralExpCS_Group(this, this, 47, inst);
+			case 48: return new CollectionLiteralPartCS_Group(this, this, 48, inst);
+			case 49: return new ConstructorPartCS_Group(this, this, 49, inst);
+			case 50: return new PrimitiveLiteralExpCS_Alternatives(this, this, 50, inst);
+			case 51: return new TupleLiteralExpCS_Group(this, this, 51, inst);
+			case 52: return new TupleLiteralPartCS_Group(this, this, 52, inst);
+			case 53: return new NumberLiteralExpCS_NameAssignment(this, this, 53, inst);
+			case 54: return new StringLiteralExpCS_NameAssignment(this, this, 54, inst);
+			case 55: return new BooleanLiteralExpCS_Alternatives(this, this, 55, inst);
+			case 56: return new UnlimitedNaturalLiteralExpCS_Group(this, this, 56, inst);
+			case 57: return new InvalidLiteralExpCS_Group(this, this, 57, inst);
+			case 58: return new NullLiteralExpCS_Group(this, this, 58, inst);
+			case 59: return new TypeLiteralCS_Alternatives(this, this, 59, inst);
+			case 60: return new TypeLiteralWithMultiplicityCS_Group(this, this, 60, inst);
+			case 61: return new TypeLiteralExpCS_OwnedTypeAssignment(this, this, 61, inst);
+			case 62: return new TypeNameExpCS_PathNameAssignment(this, this, 62, inst);
+			case 63: return new TypeExpCS_Group(this, this, 63, inst);
+			case 64: return new ExpCS_Alternatives(this, this, 64, inst);
+			case 65: return new PrefixedExpCS_Alternatives(this, this, 65, inst);
+			case 66: return new PrimaryExpCS_Alternatives(this, this, 66, inst);
+			case 67: return new NavigatingArgCS_Group(this, this, 67, inst);
+			case 68: return new NavigatingBarArgCS_Group(this, this, 68, inst);
+			case 69: return new NavigatingCommaArgCS_Group(this, this, 69, inst);
+			case 70: return new NavigatingSemiArgCS_Group(this, this, 70, inst);
+			case 71: return new NavigatingArgExpCS_ExpCSParserRuleCall(this, this, 71, inst);
+			case 72: return new IfExpCS_Group(this, this, 72, inst);
+			case 73: return new LetExpCS_Group(this, this, 73, inst);
+			case 74: return new LetVariableCS_Group(this, this, 74, inst);
+			case 75: return new NestedExpCS_Group(this, this, 75, inst);
+			case 76: return new SelfExpCS_Group(this, this, 76, inst);
 			default: return null;
 		}	
 	}	
@@ -6847,12 +6850,478 @@ protected class Model_OwnedExpressionAssignment extends AssignmentToken  {
 
 
 
+/************ begin Rule EssentialOCLUnaryOperatorCS ****************
+ *
+ * EssentialOCLUnaryOperatorCS returns UnaryOperatorCS:
+ * 
+ * 	name=("-" | "not");
+ *
+ **/
+
+// name=("-" | "not")
+protected class EssentialOCLUnaryOperatorCS_NameAssignment extends AssignmentToken  {
+	
+	public EssentialOCLUnaryOperatorCS_NameAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEssentialOCLUnaryOperatorCSAccess().getNameAssignment();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEssentialOCLUnaryOperatorCSRule().getType().getClassifier())
+			return null;
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLUnaryOperatorCSAccess().getNameHyphenMinusKeyword_0_0(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLUnaryOperatorCSAccess().getNameHyphenMinusKeyword_0_0();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLUnaryOperatorCSAccess().getNameNotKeyword_0_1(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLUnaryOperatorCSAccess().getNameNotKeyword_0_1();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+/************ end Rule EssentialOCLUnaryOperatorCS ****************/
+
+
+/************ begin Rule EssentialOCLInfixOperatorCS ****************
+ *
+ * EssentialOCLInfixOperatorCS returns BinaryOperatorCS:
+ * 
+ * 	name=("*" | "/" | "+" | "-" | ">" | "<" | ">=" | "<=" | "=" | "<>" | "and" | "or" | "xor" | "implies");
+ *
+ **/
+
+// name=("*" | "/" | "+" | "-" | ">" | "<" | ">=" | "<=" | "=" | "<>" | "and" | "or" | "xor" | "implies")
+protected class EssentialOCLInfixOperatorCS_NameAssignment extends AssignmentToken  {
+	
+	public EssentialOCLInfixOperatorCS_NameAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameAssignment();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEssentialOCLInfixOperatorCSRule().getType().getClassifier())
+			return null;
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameAsteriskKeyword_0_0(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameAsteriskKeyword_0_0();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameSolidusKeyword_0_1(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameSolidusKeyword_0_1();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNamePlusSignKeyword_0_2(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNamePlusSignKeyword_0_2();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameHyphenMinusKeyword_0_3(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameHyphenMinusKeyword_0_3();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameGreaterThanSignKeyword_0_4(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameGreaterThanSignKeyword_0_4();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameLessThanSignKeyword_0_5(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameLessThanSignKeyword_0_5();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameGreaterThanSignEqualsSignKeyword_0_6(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameGreaterThanSignEqualsSignKeyword_0_6();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameLessThanSignEqualsSignKeyword_0_7(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameLessThanSignEqualsSignKeyword_0_7();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameEqualsSignKeyword_0_8(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameEqualsSignKeyword_0_8();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameLessThanSignGreaterThanSignKeyword_0_9(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameLessThanSignGreaterThanSignKeyword_0_9();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameAndKeyword_0_10(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameAndKeyword_0_10();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameOrKeyword_0_11(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameOrKeyword_0_11();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameXorKeyword_0_12(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameXorKeyword_0_12();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameImpliesKeyword_0_13(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameImpliesKeyword_0_13();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+/************ end Rule EssentialOCLInfixOperatorCS ****************/
+
+
+/************ begin Rule EssentialOCLNavigationOperatorCS ****************
+ *
+ * EssentialOCLNavigationOperatorCS returns NavigationOperatorCS:
+ * 
+ * 	name=("." | "->");
+ *
+ **/
+
+// name=("." | "->")
+protected class EssentialOCLNavigationOperatorCS_NameAssignment extends AssignmentToken  {
+	
+	public EssentialOCLNavigationOperatorCS_NameAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEssentialOCLNavigationOperatorCSAccess().getNameAssignment();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEssentialOCLNavigationOperatorCSRule().getType().getClassifier())
+			return null;
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLNavigationOperatorCSAccess().getNameFullStopKeyword_0_0(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLNavigationOperatorCSAccess().getNameFullStopKeyword_0_0();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getEssentialOCLNavigationOperatorCSAccess().getNameHyphenMinusGreaterThanSignKeyword_0_1(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getEssentialOCLNavigationOperatorCSAccess().getNameHyphenMinusGreaterThanSignKeyword_0_1();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+/************ end Rule EssentialOCLNavigationOperatorCS ****************/
 
 
 
 
+/************ begin Rule BinaryOperatorCS ****************
+ *
+ * BinaryOperatorCS:
+ * 
+ * 	InfixOperatorCS | NavigationOperatorCS;
+ *
+ **/
+
+// InfixOperatorCS | NavigationOperatorCS
+protected class BinaryOperatorCS_Alternatives extends AlternativesToken {
+
+	public BinaryOperatorCS_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getBinaryOperatorCSAccess().getAlternatives();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new BinaryOperatorCS_InfixOperatorCSParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new BinaryOperatorCS_NavigationOperatorCSParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEssentialOCLInfixOperatorCSRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getEssentialOCLNavigationOperatorCSRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// InfixOperatorCS
+protected class BinaryOperatorCS_InfixOperatorCSParserRuleCall_0 extends RuleCallToken {
+	
+	public BinaryOperatorCS_InfixOperatorCSParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getBinaryOperatorCSAccess().getInfixOperatorCSParserRuleCall_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new InfixOperatorCS_EssentialOCLInfixOperatorCSParserRuleCall(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEssentialOCLInfixOperatorCSRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(InfixOperatorCS_EssentialOCLInfixOperatorCSParserRuleCall.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// NavigationOperatorCS
+protected class BinaryOperatorCS_NavigationOperatorCSParserRuleCall_1 extends RuleCallToken {
+	
+	public BinaryOperatorCS_NavigationOperatorCSParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getBinaryOperatorCSAccess().getNavigationOperatorCSParserRuleCall_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NavigationOperatorCS_EssentialOCLNavigationOperatorCSParserRuleCall(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEssentialOCLNavigationOperatorCSRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(NavigationOperatorCS_EssentialOCLNavigationOperatorCSParserRuleCall.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
 
 
+/************ end Rule BinaryOperatorCS ****************/
+
+
+/************ begin Rule InfixOperatorCS ****************
+ *
+ * // Intended to be overrideable
+ *  InfixOperatorCS returns BinaryOperatorCS:
+ * 
+ * 	EssentialOCLInfixOperatorCS;
+ *
+ **/
+
+// EssentialOCLInfixOperatorCS
+protected class InfixOperatorCS_EssentialOCLInfixOperatorCSParserRuleCall extends RuleCallToken {
+	
+	public InfixOperatorCS_EssentialOCLInfixOperatorCSParserRuleCall(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getInfixOperatorCSAccess().getEssentialOCLInfixOperatorCSParserRuleCall();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EssentialOCLInfixOperatorCS_NameAssignment(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEssentialOCLInfixOperatorCSRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(EssentialOCLInfixOperatorCS_NameAssignment.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+/************ end Rule InfixOperatorCS ****************/
+
+
+/************ begin Rule NavigationOperatorCS ****************
+ *
+ * // Intended to be overrideable
+ *  NavigationOperatorCS:
+ * 
+ * 	EssentialOCLNavigationOperatorCS;
+ *
+ **/
+
+// EssentialOCLNavigationOperatorCS
+protected class NavigationOperatorCS_EssentialOCLNavigationOperatorCSParserRuleCall extends RuleCallToken {
+	
+	public NavigationOperatorCS_EssentialOCLNavigationOperatorCSParserRuleCall(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getNavigationOperatorCSAccess().getEssentialOCLNavigationOperatorCSParserRuleCall();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EssentialOCLNavigationOperatorCS_NameAssignment(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEssentialOCLNavigationOperatorCSRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(EssentialOCLNavigationOperatorCS_NameAssignment.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+/************ end Rule NavigationOperatorCS ****************/
+
+
+/************ begin Rule UnaryOperatorCS ****************
+ *
+ * // Intended to be overrideable
+ *  UnaryOperatorCS:
+ * 
+ * 	EssentialOCLUnaryOperatorCS;
+ *
+ **/
+
+// EssentialOCLUnaryOperatorCS
+protected class UnaryOperatorCS_EssentialOCLUnaryOperatorCSParserRuleCall extends RuleCallToken {
+	
+	public UnaryOperatorCS_EssentialOCLUnaryOperatorCSParserRuleCall(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getUnaryOperatorCSAccess().getEssentialOCLUnaryOperatorCSParserRuleCall();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EssentialOCLUnaryOperatorCS_NameAssignment(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEssentialOCLUnaryOperatorCSRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(EssentialOCLUnaryOperatorCS_NameAssignment.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+/************ end Rule UnaryOperatorCS ****************/
 
 
 
@@ -11729,7 +12198,7 @@ protected class ExpCS_OwnedOperatorAssignment_1_1 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnaryOperatorCS_NameAssignment(this, this, 0, inst);
+			case 0: return new UnaryOperatorCS_EssentialOCLUnaryOperatorCSParserRuleCall(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -11846,213 +12315,6 @@ protected class ExpCS_LetExpCSParserRuleCall_2 extends RuleCallToken {
 
 
 /************ end Rule ExpCS ****************/
-
-
-/************ begin Rule BinaryOperatorCS ****************
- *
- * BinaryOperatorCS:
- * 
- * 	InfixOperatorCS | NavigationOperatorCS;
- *
- **/
-
-// InfixOperatorCS | NavigationOperatorCS
-protected class BinaryOperatorCS_Alternatives extends AlternativesToken {
-
-	public BinaryOperatorCS_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.getBinaryOperatorCSAccess().getAlternatives();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new BinaryOperatorCS_InfixOperatorCSParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new BinaryOperatorCS_NavigationOperatorCSParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
-			default: return null;
-		}	
-	}
-
-    @Override
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getInfixOperatorCSRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getNavigationOperatorCSRule().getType().getClassifier())
-			return null;
-		return eObjectConsumer;
-	}
-
-}
-
-// InfixOperatorCS
-protected class BinaryOperatorCS_InfixOperatorCSParserRuleCall_0 extends RuleCallToken {
-	
-	public BinaryOperatorCS_InfixOperatorCSParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getBinaryOperatorCSAccess().getInfixOperatorCSParserRuleCall_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new InfixOperatorCS_NameAssignment(this, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getInfixOperatorCSRule().getType().getClassifier())
-			return null;
-		if(checkForRecursion(InfixOperatorCS_NameAssignment.class, eObjectConsumer)) return null;
-		return eObjectConsumer;
-	}
-	
-    @Override
-	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
-		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
-		}	
-	}	
-}
-
-// NavigationOperatorCS
-protected class BinaryOperatorCS_NavigationOperatorCSParserRuleCall_1 extends RuleCallToken {
-	
-	public BinaryOperatorCS_NavigationOperatorCSParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getBinaryOperatorCSAccess().getNavigationOperatorCSParserRuleCall_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new NavigationOperatorCS_NameAssignment(this, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getNavigationOperatorCSRule().getType().getClassifier())
-			return null;
-		if(checkForRecursion(NavigationOperatorCS_NameAssignment.class, eObjectConsumer)) return null;
-		return eObjectConsumer;
-	}
-	
-    @Override
-	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
-		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
-		}	
-	}	
-}
-
-
-/************ end Rule BinaryOperatorCS ****************/
-
-
-/************ begin Rule InfixOperatorCS ****************
- *
- * InfixOperatorCS returns BinaryOperatorCS:
- * 
- * 	name=InfixOperator;
- *
- **/
-
-// name=InfixOperator
-protected class InfixOperatorCS_NameAssignment extends AssignmentToken  {
-	
-	public InfixOperatorCS_NameAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getInfixOperatorCSAccess().getNameAssignment();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
-		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getInfixOperatorCSRule().getType().getClassifier())
-			return null;
-		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getInfixOperatorCSAccess().getNameInfixOperatorParserRuleCall_0(), value, null)) {
-			type = AssignmentType.DATATYPE_RULE_CALL;
-			element = grammarAccess.getInfixOperatorCSAccess().getNameInfixOperatorParserRuleCall_0();
-			return obj;
-		}
-		return null;
-	}
-
-}
-
-/************ end Rule InfixOperatorCS ****************/
-
-
-/************ begin Rule NavigationOperatorCS ****************
- *
- * NavigationOperatorCS:
- * 
- * 	name=NavigationOperator;
- *
- **/
-
-// name=NavigationOperator
-protected class NavigationOperatorCS_NameAssignment extends AssignmentToken  {
-	
-	public NavigationOperatorCS_NameAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getNavigationOperatorCSAccess().getNameAssignment();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
-		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getNavigationOperatorCSRule().getType().getClassifier())
-			return null;
-		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getNavigationOperatorCSAccess().getNameNavigationOperatorParserRuleCall_0(), value, null)) {
-			type = AssignmentType.DATATYPE_RULE_CALL;
-			element = grammarAccess.getNavigationOperatorCSAccess().getNameNavigationOperatorParserRuleCall_0();
-			return obj;
-		}
-		return null;
-	}
-
-}
-
-/************ end Rule NavigationOperatorCS ****************/
 
 
 /************ begin Rule PrefixedExpCS ****************
@@ -12179,7 +12441,7 @@ protected class PrefixedExpCS_OwnedOperatorAssignment_0_1 extends AssignmentToke
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnaryOperatorCS_NameAssignment(this, this, 0, inst);
+			case 0: return new UnaryOperatorCS_EssentialOCLUnaryOperatorCSParserRuleCall(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -12311,52 +12573,6 @@ protected class PrefixedExpCS_PrimaryExpCSParserRuleCall_1 extends RuleCallToken
 
 
 /************ end Rule PrefixedExpCS ****************/
-
-
-/************ begin Rule UnaryOperatorCS ****************
- *
- * UnaryOperatorCS:
- * 
- * 	name=PrefixOperator;
- *
- **/
-
-// name=PrefixOperator
-protected class UnaryOperatorCS_NameAssignment extends AssignmentToken  {
-	
-	public UnaryOperatorCS_NameAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getUnaryOperatorCSAccess().getNameAssignment();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
-		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getUnaryOperatorCSRule().getType().getClassifier())
-			return null;
-		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getUnaryOperatorCSAccess().getNamePrefixOperatorParserRuleCall_0(), value, null)) {
-			type = AssignmentType.DATATYPE_RULE_CALL;
-			element = grammarAccess.getUnaryOperatorCSAccess().getNamePrefixOperatorParserRuleCall_0();
-			return obj;
-		}
-		return null;
-	}
-
-}
-
-/************ end Rule UnaryOperatorCS ****************/
 
 
 /************ begin Rule PrimaryExpCS ****************
