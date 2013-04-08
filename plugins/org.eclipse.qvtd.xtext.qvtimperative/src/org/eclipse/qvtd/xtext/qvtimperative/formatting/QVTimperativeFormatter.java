@@ -16,7 +16,11 @@
  */
 package org.eclipse.qvtd.xtext.qvtimperative.formatting;
 
-import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
+import org.eclipse.qvtd.xtext.qvtcorebase.formatting.QVTcoreBaseFormatter;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallBindingCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallCSElements;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 
 /**
@@ -27,14 +31,72 @@ import org.eclipse.xtext.formatting.impl.FormattingConfig;
  * 
  * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
  */
-public class QVTimperativeFormatter extends AbstractDeclarativeFormatter {
-	
+public class QVTimperativeFormatter extends QVTcoreBaseFormatter
+{
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
-// It's usually a good idea to activate the following three statements.
-// They will add and preserve newlines around comments
-//		c.setLinewrap(0, 1, 2).before(getGrammarAccess().getSL_COMMENTRule());
-//		c.setLinewrap(0, 1, 2).before(getGrammarAccess().getML_COMMENTRule());
-//		c.setLinewrap(0, 1, 1).after(getGrammarAccess().getML_COMMENTRule());
+	    c.setAutoLinewrap(120);
+
+	    QVTimperativeGrammarAccess f = getGrammarAccess();
+	    
+		configureCollectionLiteralExpCS(c, f.getCollectionLiteralExpCSAccess());
+		configureCollectionTypeCS(c, f.getCollectionTypeCSAccess());
+	    configureEssentialOCLNavigationOperatorCS(c, f.getEssentialOCLNavigationOperatorCSAccess());
+		configureIfExpCS(c, f.getIfExpCSAccess());
+		configureLetExpCS(c, f.getLetExpCSAccess());
+		configureMultiplicityBoundsCS(c, f.getMultiplicityBoundsCSAccess());
+		configureMultiplicityCS(c, f.getMultiplicityCSAccess());
+		configureMultiplicityStringCS(c, f.getMultiplicityStringCSAccess());
+	    configureNavigatingCommaArgCS(c, f.getNavigatingCommaArgCSAccess());
+	    configureNavigatingSemiArgCS(c, f.getNavigatingSemiArgCSAccess());
+	    configureNestedExpCS(c, f.getNestedExpCSAccess());
+	    configurePathNameCS(c, f.getPathNameCSAccess());
+	    configurePrimaryExpCS(c, f.getPrimaryExpCSAccess());
+	    configureTupleLiteralExpCS(c, f.getTupleLiteralExpCSAccess());
+	    configureTupleTypeCS(c, f.getTupleTypeCSAccess());
+	    configureURIPathNameCS(c, f.getURIPathNameCSAccess());
+
+		c.setLinewrap(0, 1, 2).before(f.getSL_COMMENTRule());
+		c.setLinewrap(0, 1, 2).before(f.getML_COMMENTRule());
+		c.setLinewrap(0, 1, 1).after(f.getML_COMMENTRule());
+//    	c.setNoLinewrap().before(f.getSL_COMMENTRule());
+//	    c.setLinewrap(2).before(f.getML_COMMENTRule());
+//	    c.setLinewrap(1).after(f.getML_COMMENTRule());
+
+	    c.setLinewrap(2).between(f.getImportCSRule(), f.getTransformationCSRule());
+	    c.setLinewrap(2).between(f.getImportCSRule(), f.getQueryCSRule());
+	    c.setLinewrap(2).between(f.getMappingCSRule(), f.getMappingCSRule());
+	    c.setLinewrap(2).between(f.getQueryCSRule(), f.getQueryCSRule());
+	    c.setLinewrap(2).between(f.getQueryCSRule(), f.getTransformationCSRule());
+	    c.setLinewrap(2).between(f.getTransformationCSRule(), f.getTransformationCSRule());
+	    c.setLinewrap(2).between(f.getTransformationCSRule(), f.getQueryCSRule());
+
+	    configureAssignmentCS(c, f.getAssignmentCSAccess());
+	    configureBottomPatternCS(c, f.getBottomPatternCSAccess());
+	    configureDirectionCS(c, f.getDirectionCSAccess());
+	    configureGuardPatternCS(c, f.getGuardPatternCSAccess());
+	    configureImportCS(c, f.getImportCSAccess());
+	    configureQueryCS(c, f.getQueryCSAccess());
+	    configureTransformationCS(c, f.getTransformationCSAccess());
+
+	    {
+	    	MappingCSElements a = f.getMappingCSAccess();
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_8());
+			setBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_8());
+			c.setLinewrap().before(a.getWhereKeyword_6_0());
+	    }
+	    {
+	    	MappingCallCSElements a = f.getMappingCallCSAccess();
+			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
+	    }
+	    {
+	    	MappingCallBindingCSElements a = f.getMappingCallBindingCSAccess();
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
+	    }
+	}
+
+	@Override
+	public QVTimperativeGrammarAccess getGrammarAccess() {
+		return (QVTimperativeGrammarAccess) super.getGrammarAccess();
 	}
 }

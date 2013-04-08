@@ -365,11 +365,11 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	//BottomPatternCS:
 	//
-	//	{BottomPatternCS} ((unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS) (","
+	//	"{" (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS) (","
 	//
-	//	(unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))* "|")?
+	//	(unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))* "|" constraints+=AssignmentCS*
 	//
-	//	constraints+=AssignmentCS*;
+	//	"}" | {BottomPatternCS} "{" constraints+=AssignmentCS* "}";
 	public QVTcoreBaseGrammarAccess.BottomPatternCSElements getBottomPatternCSAccess() {
 		return gaQVTcoreBase.getBottomPatternCSAccess();
 	}
@@ -412,9 +412,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	////EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
 	// GuardPatternCS:
 	//
-	//	{GuardPatternCS} (unrealizedVariables+=UnrealizedVariableCS ("," unrealizedVariables+=UnrealizedVariableCS)* "|")?
+	//	"(" unrealizedVariables+=UnrealizedVariableCS ("," unrealizedVariables+=UnrealizedVariableCS)* "|"
 	//
-	//	constraints+=AssignmentCS*;
+	//	constraints+=AssignmentCS* ")" | {GuardPatternCS} "(" constraints+=AssignmentCS* ")";
 	public QVTcoreBaseGrammarAccess.GuardPatternCSElements getGuardPatternCSAccess() {
 		return gaQVTcoreBase.getGuardPatternCSAccess();
 	}
@@ -449,9 +449,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	//NamedDomainCS returns DomainCS:
 	//
-	//	check?="check"? enforce?="enforce"? direction=[qvtbase::TypedModel|UnrestrictedName] "(" guardPattern=GuardPatternCS?
+	//	check?="check"? enforce?="enforce"? direction=[qvtbase::TypedModel|UnrestrictedName] guardPattern=GuardPatternCS
 	//
-	//	")" "{" bottomPattern=BottomPatternCS? "}";
+	//	bottomPattern=BottomPatternCS;
 	public QVTcoreBaseGrammarAccess.NamedDomainCSElements getNamedDomainCSAccess() {
 		return gaQVTcoreBase.getNamedDomainCSAccess();
 	}
@@ -538,7 +538,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	//UnnamedDomainCS returns DomainCS:
 	//
-	//	{DomainCS} "(" guardPattern=GuardPatternCS? ")" "{" bottomPattern=BottomPatternCS? "}";
+	//	{DomainCS} guardPattern=GuardPatternCS bottomPattern=BottomPatternCS;
 	public QVTcoreBaseGrammarAccess.UnnamedDomainCSElements getUnnamedDomainCSAccess() {
 		return gaQVTcoreBase.getUnnamedDomainCSAccess();
 	}

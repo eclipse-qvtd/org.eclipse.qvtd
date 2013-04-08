@@ -24,10 +24,13 @@ import "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore" a
 import "platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore" as qvtcorebase
 import "platform:/resource/org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCST.ecore"
 		
-BottomPatternCS: {BottomPatternCS}
-	((unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS)
-		(',' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))* '|')?
-	constraints+=AssignmentCS*
+BottomPatternCS:
+	( '{' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS)
+		(',' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))* '|'
+		constraints+=AssignmentCS* '}'
+	)
+	| ( {BottomPatternCS} '{' constraints+=AssignmentCS* '}'
+	)
 ;
 		
 //Constraint ::= Predicate | Assignment
@@ -42,9 +45,12 @@ DirectionCS: {DirectionCS} name=UnrestrictedName?
 	
 //EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
 	
-GuardPatternCS: {GuardPatternCS}
-	(unrealizedVariables+=UnrealizedVariableCS (',' unrealizedVariables+=UnrealizedVariableCS )* '|' )?
-	constraints+=AssignmentCS*
+GuardPatternCS:
+	( '(' unrealizedVariables+=UnrealizedVariableCS (',' unrealizedVariables+=UnrealizedVariableCS)* '|'
+		constraints+=AssignmentCS* ')'
+	)
+	| ( {GuardPatternCS} '(' constraints+=AssignmentCS* ')'
+	)
 ;
 
 ImportCS returns base::ImportCS:
@@ -57,7 +63,7 @@ LibraryCS returns base::LibraryCS:
 	'library' package=[pivot::Package|URI] ';';
 	
 NamedDomainCS returns DomainCS: check?='check'? enforce?='enforce'? direction=[qvtbase::TypedModel|UnrestrictedName]
-	'(' guardPattern=GuardPatternCS? ')' '{' bottomPattern=BottomPatternCS? '}';
+	guardPattern=GuardPatternCS bottomPattern=BottomPatternCS;
 	
 ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
 		
@@ -81,7 +87,7 @@ UnrealizedVariableCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
 //RealizedVariable := �realized� VariableName �:� TypeDeclaration
 RealizedVariableCS: 'realize' name=UnrestrictedName ':' ownedType=TypeExpCS;
 	
-UnnamedDomainCS returns DomainCS: {DomainCS} '(' guardPattern=GuardPatternCS? ')' '{' bottomPattern=BottomPatternCS? '}';
+UnnamedDomainCS returns DomainCS: {DomainCS} guardPattern=GuardPatternCS bottomPattern=BottomPatternCS;
 		
 UnrestrictedName returns ecore::EString:
 	EssentialOCLUnrestrictedName
