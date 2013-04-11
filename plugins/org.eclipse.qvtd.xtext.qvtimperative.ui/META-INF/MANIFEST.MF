@@ -7,7 +7,13 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Export-Package: org.eclipse.qvtd.xtext.qvtimperative.ui,
- org.eclipse.qvtd.xtext.qvtimperative.ui.contentassist.antlr
+ org.eclipse.qvtd.xtext.qvtimperative.ui.contentassist,
+ org.eclipse.qvtd.xtext.qvtimperative.ui.contentassist.antlr,
+ org.eclipse.qvtd.xtext.qvtimperative.ui.contentassist.antlr.internal,
+ org.eclipse.qvtd.xtext.qvtimperative.ui.internal,
+ org.eclipse.qvtd.xtext.qvtimperative.ui.labeling,
+ org.eclipse.qvtd.xtext.qvtimperative.ui.outline,
+ org.eclipse.qvtd.xtext.qvtimperative.ui.quickfix
 Require-Bundle: org.eclipse.qvtd.xtext.qvtimperative;visibility:=reexport,
  org.eclipse.qvtd.xtext.qvtcorebase.ui;visibility:=reexport
 Import-Package: org.apache.log4j

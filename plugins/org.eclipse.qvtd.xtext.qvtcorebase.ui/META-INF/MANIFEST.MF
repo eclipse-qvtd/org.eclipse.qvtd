@@ -10,6 +10,7 @@ Export-Package: org.eclipse.qvtd.xtext.qvtcorebase.ui,
  org.eclipse.qvtd.xtext.qvtcorebase.ui.contentassist,
  org.eclipse.qvtd.xtext.qvtcorebase.ui.contentassist.antlr,
  org.eclipse.qvtd.xtext.qvtcorebase.ui.contentassist.antlr.internal,
+ org.eclipse.qvtd.xtext.qvtcorebase.ui.internal,
  org.eclipse.qvtd.xtext.qvtcorebase.ui.labeling,
  org.eclipse.qvtd.xtext.qvtcorebase.ui.outline,
  org.eclipse.qvtd.xtext.qvtcorebase.ui.quickfix

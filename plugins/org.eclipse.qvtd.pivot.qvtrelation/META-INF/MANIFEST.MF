@@ -8,6 +8,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.qvtd.pivot.qvtrelation,
+ org.eclipse.qvtd.pivot.qvtrelation.attributes,
  org.eclipse.qvtd.pivot.qvtrelation.impl,
  org.eclipse.qvtd.pivot.qvtrelation.scoping,
  org.eclipse.qvtd.pivot.qvtrelation.util,

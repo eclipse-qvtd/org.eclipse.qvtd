@@ -11,3 +11,4 @@ Require-Bundle: org.eclipse.qvtd.xtext.qvtbase.tests,
  org.eclipse.qvt,
  org.eclipse.qvtd.examples.qvtrelation.modelmorf,
  org.eclipse.qvtd.examples.qvtrelation.reltocore
+Export-Package: org.eclipse.qvtd.xtext.qvtrelation.tests

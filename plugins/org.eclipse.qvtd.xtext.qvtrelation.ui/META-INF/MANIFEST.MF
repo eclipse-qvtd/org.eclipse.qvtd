@@ -6,8 +6,14 @@ Bundle-Version: 0.10.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
-Export-Package: org.eclipse.qvtd.xtext.qvtrelation.ui.contentassist,
- org.eclipse.qvtd.xtext.qvtrelation.ui.contentassist.antlr
+Export-Package: org.eclipse.qvtd.xtext.qvtrelation.ui,
+ org.eclipse.qvtd.xtext.qvtrelation.ui.contentassist,
+ org.eclipse.qvtd.xtext.qvtrelation.ui.contentassist.antlr,
+ org.eclipse.qvtd.xtext.qvtrelation.ui.contentassist.antlr.internal,
+ org.eclipse.qvtd.xtext.qvtrelation.ui.internal,
+ org.eclipse.qvtd.xtext.qvtrelation.ui.labeling,
+ org.eclipse.qvtd.xtext.qvtrelation.ui.outline,
+ org.eclipse.qvtd.xtext.qvtrelation.ui.quickfix
 Require-Bundle: org.eclipse.qvtd.xtext.qvtbase.ui;visibility:=reexport,
  org.eclipse.qvtd.xtext.qvtrelation;visibility:=reexport
 Import-Package: org.apache.log4j
