@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
@@ -141,6 +142,7 @@ public class QVTcoreBaseSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDomain(coreDomain);
 				if (result == null) result = caseArea(coreDomain);
 				if (result == null) result = caseNamedElement(coreDomain);
+				if (result == null) result = caseReferringElement(coreDomain);
 				if (result == null) result = caseElement(coreDomain);
 				if (result == null) result = caseNameable(coreDomain);
 				if (result == null) result = caseVisitable(coreDomain);
@@ -416,6 +418,21 @@ public class QVTcoreBaseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePattern(Pattern object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Referring Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Referring Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReferringElement(ReferringElement object) {
 		return null;
 	}
 

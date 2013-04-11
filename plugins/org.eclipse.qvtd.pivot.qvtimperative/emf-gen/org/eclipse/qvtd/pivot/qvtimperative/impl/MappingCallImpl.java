@@ -186,17 +186,6 @@ public class MappingCallImpl extends OCLExpressionImpl implements MappingCall {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Element getReferredElement() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -325,5 +314,9 @@ public class MappingCallImpl extends OCLExpressionImpl implements MappingCall {
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return ((QVTimperativeVisitor<R>)visitor).visitMappingCall(this);
+	}
+
+	public Element getReferredElement() {
+		return getReferredMapping();
 	}
 } //MappingCallImpl

@@ -5,7 +5,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="unit" upperBound="-1" eType="#//Unit"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Domain" abstract="true" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Domain" abstract="true" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//NamedElement platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//ReferringElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCheckable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         unsettable="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforceable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"

@@ -17,7 +17,6 @@ package org.eclipse.qvtd.pivot.qvtimperative;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.Variable;
 
 /**
@@ -38,7 +37,7 @@ import org.eclipse.ocl.examples.pivot.Variable;
  * @model
  * @generated
  */
-public interface MappingCallBinding extends EObject, Element, ReferringElement {
+public interface MappingCallBinding extends EObject, Element {
 	/**
 	 * Returns the value of the '<em><b>Mapping Call</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getBinding <em>Binding</em>}'.

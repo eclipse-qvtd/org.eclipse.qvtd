@@ -136,7 +136,6 @@ public class QVTimperativeSwitch<T> extends Switch<T> {
 				MappingCallBinding mappingCallBinding = (MappingCallBinding)theEObject;
 				T result = caseMappingCallBinding(mappingCallBinding);
 				if (result == null) result = caseElement(mappingCallBinding);
-				if (result == null) result = caseReferringElement(mappingCallBinding);
 				if (result == null) result = caseVisitable(mappingCallBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

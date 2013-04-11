@@ -16,7 +16,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="context" lowerBound="1"
         eType="#//Mapping" eOpposite="#//Mapping/mappingCall"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MappingCallBinding" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Element platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//ReferringElement">
+  <eClassifiers xsi:type="ecore:EClass" name="MappingCallBinding" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappingCall" eType="#//MappingCall"
         eOpposite="#//MappingCall/binding"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundVariable" lowerBound="1"

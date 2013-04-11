@@ -308,7 +308,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		mappingCallEClass.getESuperTypes().add(thePivotPackage.getOCLExpression());
 		mappingCallEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
 		mappingCallBindingEClass.getESuperTypes().add(thePivotPackage.getElement());
-		mappingCallBindingEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(imperativeModelEClass, ImperativeModel.class, "ImperativeModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

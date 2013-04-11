@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl;
@@ -214,17 +213,6 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Element getReferredElement() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -343,6 +331,11 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 				return value != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 	@Override
