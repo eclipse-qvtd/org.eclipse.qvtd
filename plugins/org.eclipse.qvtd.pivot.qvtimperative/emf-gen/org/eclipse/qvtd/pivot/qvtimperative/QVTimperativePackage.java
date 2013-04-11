@@ -14,6 +14,7 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -32,8 +33,12 @@ import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * The Package for an Imperative QVT transformation.
+ * <!-- end-model-doc -->
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory
  * @model kind="package"
+ *        annotation="http://www.eclipse.org/OCL/Import qvtb='/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/' qvtcb='/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/'"
  * @generated
  */
 public interface QVTimperativePackage extends EPackage {
@@ -487,13 +492,22 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL_BINDING__VALUE = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Is Loop</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING__IS_LOOP = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Mapping Call Binding</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_BINDING_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+	int MAPPING_CALL_BINDING_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel <em>Imperative Model</em>}'.
@@ -613,6 +627,17 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getMappingCallBinding_Value();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#isIsLoop <em>Is Loop</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Loop</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#isIsLoop()
+	 * @see #getMappingCallBinding()
+	 * @generated
+	 */
+	EAttribute getMappingCallBinding_IsLoop();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -729,6 +754,14 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_CALL_BINDING__VALUE = eINSTANCE.getMappingCallBinding_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Loop</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAPPING_CALL_BINDING__IS_LOOP = eINSTANCE.getMappingCallBinding_IsLoop();
 
 	}
 

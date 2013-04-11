@@ -14,6 +14,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtimperativecst;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -270,13 +271,22 @@ public interface QVTimperativeCSTPackage extends EPackage {
 	int MAPPING_CALL_BINDING_CS__VALUE = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Is Loop</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING_CS__IS_LOOP = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Mapping Call Binding CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_BINDING_CS_FEATURE_COUNT = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 3;
+	int MAPPING_CALL_BINDING_CS_FEATURE_COUNT = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecst.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.
@@ -579,6 +589,17 @@ public interface QVTimperativeCSTPackage extends EPackage {
 	EReference getMappingCallBindingCS_Value();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecst.MappingCallBindingCS#isIsLoop <em>Is Loop</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Loop</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecst.MappingCallBindingCS#isIsLoop()
+	 * @see #getMappingCallBindingCS()
+	 * @generated
+	 */
+	EAttribute getMappingCallBindingCS_IsLoop();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecst.MappingCallCS <em>Mapping Call CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -726,6 +747,14 @@ public interface QVTimperativeCSTPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_CALL_BINDING_CS__VALUE = eINSTANCE.getMappingCallBindingCS_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Loop</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAPPING_CALL_BINDING_CS__IS_LOOP = eINSTANCE.getMappingCallBindingCS_IsLoop();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecst.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.

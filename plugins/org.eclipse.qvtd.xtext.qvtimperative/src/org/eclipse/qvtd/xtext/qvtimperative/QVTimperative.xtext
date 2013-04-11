@@ -36,4 +36,4 @@ MappingCS: {MappingCS} 'map' name=UnrestrictedName ('in' in=[qvtbase::Transforma
 MappingCallCS: {MappingCallCS} 'map' referredMapping=[qvtimperative::Mapping|UnrestrictedName]
 	'{' bindings+=MappingCallBindingCS* '}';
 
-MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] ':=' value=ExpCS ';';
+MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] (':='|isLoop?='<=') value=ExpCS ';';

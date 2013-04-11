@@ -131,7 +131,12 @@
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.14"/>
           </terminal>
         </elements>
-        <elements xsi:type="xtext:Keyword" value=":="/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value=":="/>
+          <elements xsi:type="xtext:Assignment" feature="isLoop" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="&lt;="/>
+          </elements>
+        </elements>
         <elements xsi:type="xtext:Assignment" feature="value" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.63"/>
         </elements>

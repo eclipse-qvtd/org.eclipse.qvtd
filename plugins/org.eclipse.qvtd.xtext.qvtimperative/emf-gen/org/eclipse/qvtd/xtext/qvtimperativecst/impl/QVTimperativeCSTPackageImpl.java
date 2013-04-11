@@ -14,6 +14,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtimperativecst.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -189,6 +190,15 @@ public class QVTimperativeCSTPackageImpl extends EPackageImpl implements QVTimpe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMappingCallBindingCS_IsLoop() {
+		return (EAttribute)mappingCallBindingCSEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMappingCallCS() {
 		return mappingCallCSEClass;
 	}
@@ -282,6 +292,7 @@ public class QVTimperativeCSTPackageImpl extends EPackageImpl implements QVTimpe
 		createEReference(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__MAPPING_CALL);
 		createEReference(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE);
 		createEReference(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__VALUE);
+		createEAttribute(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__IS_LOOP);
 
 		mappingCallCSEClass = createEClass(MAPPING_CALL_CS);
 		createEReference(mappingCallCSEClass, MAPPING_CALL_CS__REFERRED_MAPPING);
@@ -341,6 +352,7 @@ public class QVTimperativeCSTPackageImpl extends EPackageImpl implements QVTimpe
 		initEReference(getMappingCallBindingCS_MappingCall(), this.getMappingCallCS(), this.getMappingCallCS_Bindings(), "mappingCall", null, 0, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCallBindingCS_ReferredVariable(), thePivotPackage.getVariable(), null, "referredVariable", null, 1, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCallBindingCS_Value(), theEssentialOCLCSTPackage.getExpCS(), null, "value", null, 1, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMappingCallBindingCS_IsLoop(), thePivotPackage.getBoolean(), "isLoop", "false", 0, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingCallCSEClass, MappingCallCS.class, "MappingCallCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingCallCS_ReferredMapping(), theQVTimperativePackage.getMapping(), null, "referredMapping", null, 1, 1, MappingCallCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

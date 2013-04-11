@@ -433,31 +433,47 @@ ruleMappingCallBindingCS returns [EObject current=null]
 	    }
 
 )
-)	otherlv_1=':=' 
+)(	otherlv_1=':=' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getMappingCallBindingCSAccess().getColonEqualsSignKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getMappingCallBindingCSAccess().getColonEqualsSignKeyword_1_0());
     }
+
+    |(
 (
+		lv_isLoop_2_0=	'<=' 
+    {
+        newLeafNode(lv_isLoop_2_0, grammarAccess.getMappingCallBindingCSAccess().getIsLoopLessThanSignEqualsSignKeyword_1_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getMappingCallBindingCSRule());
+	        }
+       		setWithLastConsumed($current, "isLoop", true, "<=");
+	    }
+
+)
+))(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getMappingCallBindingCSAccess().getValueExpCSParserRuleCall_2_0()); 
 	    }
-		lv_value_2_0=ruleExpCS		{
+		lv_value_3_0=ruleExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingCallBindingCSRule());
 	        }
        		set(
        			$current, 
        			"value",
-        		lv_value_2_0, 
+        		lv_value_3_0, 
         		"ExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_3=';' 
+)	otherlv_4=';' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getMappingCallBindingCSAccess().getSemicolonKeyword_3());
+    	newLeafNode(otherlv_4, grammarAccess.getMappingCallBindingCSAccess().getSemicolonKeyword_3());
     }
 )
 ;

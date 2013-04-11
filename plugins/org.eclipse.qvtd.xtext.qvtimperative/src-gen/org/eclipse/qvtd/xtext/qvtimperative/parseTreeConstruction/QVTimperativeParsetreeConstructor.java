@@ -1101,11 +1101,11 @@ protected class MappingCallCS_RightCurlyBracketKeyword_5 extends KeywordToken  {
  *
  * MappingCallBindingCS:
  * 
- * 	referredVariable=[pivot::Variable|UnrestrictedName] ":=" value=ExpCS ";";
+ * 	referredVariable=[pivot::Variable|UnrestrictedName] (":=" | isLoop?="<=") value=ExpCS ";";
  *
  **/
 
-// referredVariable=[pivot::Variable|UnrestrictedName] ":=" value=ExpCS ";"
+// referredVariable=[pivot::Variable|UnrestrictedName] (":=" | isLoop?="<=") value=ExpCS ";"
 protected class MappingCallBindingCS_Group extends GroupToken {
 	
 	public MappingCallBindingCS_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1170,16 +1170,39 @@ protected class MappingCallBindingCS_ReferredVariableAssignment_0 extends Assign
 
 }
 
-// ":="
-protected class MappingCallBindingCS_ColonEqualsSignKeyword_1 extends KeywordToken  {
+// ":=" | isLoop?="<="
+protected class MappingCallBindingCS_Alternatives_1 extends AlternativesToken {
+
+	public MappingCallBindingCS_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public MappingCallBindingCS_ColonEqualsSignKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getMappingCallBindingCSAccess().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new MappingCallBindingCS_ColonEqualsSignKeyword_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new MappingCallBindingCS_IsLoopAssignment_1_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ":="
+protected class MappingCallBindingCS_ColonEqualsSignKeyword_1_0 extends KeywordToken  {
+	
+	public MappingCallBindingCS_ColonEqualsSignKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getMappingCallBindingCSAccess().getColonEqualsSignKeyword_1();
+		return grammarAccess.getMappingCallBindingCSAccess().getColonEqualsSignKeyword_1_0();
 	}
 
     @Override
@@ -1191,6 +1214,41 @@ protected class MappingCallBindingCS_ColonEqualsSignKeyword_1 extends KeywordTok
 	}
 
 }
+
+// isLoop?="<="
+protected class MappingCallBindingCS_IsLoopAssignment_1_1 extends AssignmentToken  {
+	
+	public MappingCallBindingCS_IsLoopAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getMappingCallBindingCSAccess().getIsLoopAssignment_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new MappingCallBindingCS_ReferredVariableAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("isLoop",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("isLoop");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getMappingCallBindingCSAccess().getIsLoopLessThanSignEqualsSignKeyword_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
 
 // value=ExpCS
 protected class MappingCallBindingCS_ValueAssignment_2 extends AssignmentToken  {
@@ -1232,7 +1290,7 @@ protected class MappingCallBindingCS_ValueAssignment_2 extends AssignmentToken  
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new MappingCallBindingCS_ColonEqualsSignKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new MappingCallBindingCS_Alternatives_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	

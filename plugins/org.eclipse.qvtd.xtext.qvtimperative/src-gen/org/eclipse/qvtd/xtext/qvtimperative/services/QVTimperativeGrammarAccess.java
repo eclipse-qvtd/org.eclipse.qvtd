@@ -234,17 +234,20 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cReferredVariableAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cReferredVariableVariableCrossReference_0_0 = (CrossReference)cReferredVariableAssignment_0.eContents().get(0);
 		private final RuleCall cReferredVariableVariableUnrestrictedNameParserRuleCall_0_0_1 = (RuleCall)cReferredVariableVariableCrossReference_0_0.eContents().get(1);
-		private final Keyword cColonEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Keyword cColonEqualsSignKeyword_1_0 = (Keyword)cAlternatives_1.eContents().get(0);
+		private final Assignment cIsLoopAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final Keyword cIsLoopLessThanSignEqualsSignKeyword_1_1_0 = (Keyword)cIsLoopAssignment_1_1.eContents().get(0);
 		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cValueExpCSParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//MappingCallBindingCS:
 		//
-		//	referredVariable=[pivot::Variable|UnrestrictedName] ":=" value=ExpCS ";";
+		//	referredVariable=[pivot::Variable|UnrestrictedName] (":=" | isLoop?="<=") value=ExpCS ";";
 		public ParserRule getRule() { return rule; }
 
-		//referredVariable=[pivot::Variable|UnrestrictedName] ":=" value=ExpCS ";"
+		//referredVariable=[pivot::Variable|UnrestrictedName] (":=" | isLoop?="<=") value=ExpCS ";"
 		public Group getGroup() { return cGroup; }
 
 		//referredVariable=[pivot::Variable|UnrestrictedName]
@@ -256,8 +259,17 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName
 		public RuleCall getReferredVariableVariableUnrestrictedNameParserRuleCall_0_0_1() { return cReferredVariableVariableUnrestrictedNameParserRuleCall_0_0_1; }
 
+		//":=" | isLoop?="<="
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
 		//":="
-		public Keyword getColonEqualsSignKeyword_1() { return cColonEqualsSignKeyword_1; }
+		public Keyword getColonEqualsSignKeyword_1_0() { return cColonEqualsSignKeyword_1_0; }
+
+		//isLoop?="<="
+		public Assignment getIsLoopAssignment_1_1() { return cIsLoopAssignment_1_1; }
+
+		//"<="
+		public Keyword getIsLoopLessThanSignEqualsSignKeyword_1_1_0() { return cIsLoopLessThanSignEqualsSignKeyword_1_1_0; }
 
 		//value=ExpCS
 		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
@@ -354,7 +366,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	//MappingCallBindingCS:
 	//
-	//	referredVariable=[pivot::Variable|UnrestrictedName] ":=" value=ExpCS ";";
+	//	referredVariable=[pivot::Variable|UnrestrictedName] (":=" | isLoop?="<=") value=ExpCS ";";
 	public MappingCallBindingCSElements getMappingCallBindingCSAccess() {
 		return (pMappingCallBindingCS != null) ? pMappingCallBindingCS : (pMappingCallBindingCS = new MappingCallBindingCSElements());
 	}

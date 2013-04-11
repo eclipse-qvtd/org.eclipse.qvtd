@@ -22,6 +22,12 @@ import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
  * A representation of the model object '<em><b>Mapping</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * An Imperative Mapping extends the abstract declarative mapping to support
+ * explicit nested invocation of mappings with bindings for the invoked mapping's
+ * bound variables.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

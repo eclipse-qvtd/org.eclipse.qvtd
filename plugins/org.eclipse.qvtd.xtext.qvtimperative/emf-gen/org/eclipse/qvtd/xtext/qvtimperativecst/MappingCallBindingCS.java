@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecst.MappingCallBindingCS#getMappingCall <em>Mapping Call</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecst.MappingCallBindingCS#getReferredVariable <em>Referred Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecst.MappingCallBindingCS#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecst.MappingCallBindingCS#isIsLoop <em>Is Loop</em>}</li>
  * </ul>
  * </p>
  *
@@ -117,5 +118,32 @@ public interface MappingCallBindingCS extends ExpCS {
 	 * @generated
 	 */
 	void setValue(ExpCS value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Loop</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Loop</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Loop</em>' attribute.
+	 * @see #setIsLoop(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecst.QVTimperativeCSTPackage#getMappingCallBindingCS_IsLoop()
+	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean"
+	 * @generated
+	 */
+	boolean isIsLoop();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecst.MappingCallBindingCS#isIsLoop <em>Is Loop</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Loop</em>' attribute.
+	 * @see #isIsLoop()
+	 * @generated
+	 */
+	void setIsLoop(boolean value);
 
 } // MappingCallBindingCS

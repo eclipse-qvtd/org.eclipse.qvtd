@@ -86,7 +86,10 @@ public class QVTimperativeContainmentVisitor extends AbstractQVTimperativeContai
 
 	@Override
 	public Continuation<?> visitMappingCallBindingCS(@NonNull MappingCallBindingCS csElement) {
-		context.refreshModelElement(MappingCallBinding.class, QVTimperativePackage.Literals.MAPPING_CALL_BINDING, csElement);
+		MappingCallBinding pivotElement = context.refreshModelElement(MappingCallBinding.class, QVTimperativePackage.Literals.MAPPING_CALL_BINDING, csElement);
+		if (pivotElement != null) {
+			pivotElement.setIsLoop(csElement.isIsLoop());
+		}
 		return null;
 	}
 
@@ -147,5 +150,11 @@ public class QVTimperativeContainmentVisitor extends AbstractQVTimperativeContai
 //		context.refreshPivotList(Type.class, pivotElement.getOwnedType(), csElement.getOwnedType());
 //		context.refreshPivotList(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage());
 		return null;
+	}
+
+	@Override
+	public Continuation<?> visitTransformationCS( @NonNull TransformationCS csElement) {
+		// TODO Auto-generated method stub
+		return super.visitTransformationCS(csElement);
 	}
 }

@@ -14,6 +14,7 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -231,6 +232,15 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMappingCallBinding_IsLoop() {
+		return (EAttribute)mappingCallBindingEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public QVTimperativeFactory getQVTimperativeFactory() {
 		return (QVTimperativeFactory)getEFactoryInstance();
 	}
@@ -268,6 +278,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__MAPPING_CALL);
 		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__BOUND_VARIABLE);
 		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__VALUE);
+		createEAttribute(mappingCallBindingEClass, MAPPING_CALL_BINDING__IS_LOOP);
 	}
 
 	/**
@@ -326,29 +337,31 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEReference(getMappingCallBinding_MappingCall(), this.getMappingCall(), this.getMappingCall_Binding(), "mappingCall", null, 0, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCallBinding_BoundVariable(), thePivotPackage.getVariable(), null, "boundVariable", null, 1, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCallBinding_Value(), thePivotPackage.getOCLExpression(), null, "value", null, 1, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMappingCallBinding_IsLoop(), ecorePackage.getEBoolean(), "isLoop", "false", 1, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
 
 		// Create annotations
-		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
-		createEmofAnnotations();
+		// http://www.eclipse.org/OCL/Import
+		createImportAnnotations();
 	}
 
 	/**
-	 * Initializes the annotations for <b>http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName</b>.
+	 * Initializes the annotations for <b>http://www.eclipse.org/OCL/Import</b>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";		
+	protected void createImportAnnotations() {
+		String source = "http://www.eclipse.org/OCL/Import";			
 		addAnnotation
-		  (getMappingCallBinding_Value(), 
+		  (this, 
 		   source, 
 		   new String[] {
-			 "body", "valueAssignment"
-		   });
+			 "qvtb", "/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/",
+			 "qvtcb", "/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/"
+		   });											
 	}
 
 } //QVTimperativePackageImpl

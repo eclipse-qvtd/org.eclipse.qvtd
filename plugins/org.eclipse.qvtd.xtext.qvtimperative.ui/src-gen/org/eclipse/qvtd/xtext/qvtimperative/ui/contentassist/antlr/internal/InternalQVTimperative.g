@@ -2359,6 +2359,30 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__MappingCallBindingCS__Alternatives_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMappingCallBindingCSAccess().getColonEqualsSignKeyword_1_0()); }
+
+	':=' 
+
+{ after(grammarAccess.getMappingCallBindingCSAccess().getColonEqualsSignKeyword_1_0()); }
+)
+
+    |(
+{ before(grammarAccess.getMappingCallBindingCSAccess().getIsLoopAssignment_1_1()); }
+(rule__MappingCallBindingCS__IsLoopAssignment_1_1)
+{ after(grammarAccess.getMappingCallBindingCSAccess().getIsLoopAssignment_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__BottomPatternCS__Alternatives
     @init {
 		int stackSize = keepStackSize();
@@ -4069,11 +4093,9 @@ rule__MappingCallBindingCS__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getMappingCallBindingCSAccess().getColonEqualsSignKeyword_1()); }
-
-	':=' 
-
-{ after(grammarAccess.getMappingCallBindingCSAccess().getColonEqualsSignKeyword_1()); }
+{ before(grammarAccess.getMappingCallBindingCSAccess().getAlternatives_1()); }
+(rule__MappingCallBindingCS__Alternatives_1)
+{ after(grammarAccess.getMappingCallBindingCSAccess().getAlternatives_1()); }
 )
 
 ;
@@ -13576,6 +13598,29 @@ rule__MappingCallBindingCS__ReferredVariableAssignment_0
 	ruleUnrestrictedName{ after(grammarAccess.getMappingCallBindingCSAccess().getReferredVariableVariableUnrestrictedNameParserRuleCall_0_0_1()); }
 )
 { after(grammarAccess.getMappingCallBindingCSAccess().getReferredVariableVariableCrossReference_0_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MappingCallBindingCS__IsLoopAssignment_1_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMappingCallBindingCSAccess().getIsLoopLessThanSignEqualsSignKeyword_1_1_0()); }
+(
+{ before(grammarAccess.getMappingCallBindingCSAccess().getIsLoopLessThanSignEqualsSignKeyword_1_1_0()); }
+
+	'<=' 
+
+{ after(grammarAccess.getMappingCallBindingCSAccess().getIsLoopLessThanSignEqualsSignKeyword_1_1_0()); }
+)
+
+{ after(grammarAccess.getMappingCallBindingCSAccess().getIsLoopLessThanSignEqualsSignKeyword_1_1_0()); }
 )
 
 ;

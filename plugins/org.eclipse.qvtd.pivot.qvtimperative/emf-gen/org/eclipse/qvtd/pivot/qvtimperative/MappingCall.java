@@ -24,6 +24,13 @@ import org.eclipse.ocl.examples.pivot.ReferringElement;
  * A representation of the model object '<em><b>Mapping Call</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A MappingCall specifies the invocation of a referredMapping with a set of bindings
+ * of the bound variables of the referredMapping to values provided in the invocation.
+ * Where Collections of values are provided for isLoop bindings, a distinct invocation
+ * is performed for each distinct permutation of Collection elements.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -46,6 +53,9 @@ public interface MappingCall extends EObject, OCLExpression, ReferringElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The Mapping invoked by the MappingCall.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Referred Mapping</em>' reference.
 	 * @see #setReferredMapping(Mapping)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_ReferredMapping()
@@ -74,6 +84,9 @@ public interface MappingCall extends EObject, OCLExpression, ReferringElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The Set of value to bound variable bindings.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Binding</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_Binding()
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getMappingCall
@@ -91,6 +104,9 @@ public interface MappingCall extends EObject, OCLExpression, ReferringElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The Mapping that provides the invocation context for this MappingCall.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Context</em>' container reference.
 	 * @see #setContext(Mapping)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_Context()

@@ -21,6 +21,10 @@ import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
  * A representation of the model object '<em><b>Imperative Model</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The Model of an Imperative QVT transformation.
+ * <!-- end-model-doc -->
+ *
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getImperativeModel()
  * @model
