@@ -61,4 +61,8 @@ public class LoadTests extends LoadTestCase
 	public void testLoad_HSV2HLS_qvti() throws IOException, InterruptedException {
 		doLoad_Concrete("HSV2HLS", "qvti");
 	}	
+
+//	public void testLoad_ClassToRDBMSSchedule_qvti() throws IOException, InterruptedException {
+//		doLoad_Concrete("ClassToRDBMSSchedule", "qvti");
+//	}	
 }

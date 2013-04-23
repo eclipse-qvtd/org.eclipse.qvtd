@@ -387,24 +387,13 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (isLoop: ");
-		result.append(isLoop);
-		result.append(')');
-		return result.toString();
-	}
-
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return ((QVTimperativeCSVisitor<R>)visitor).visitMappingCallBindingCS(this);
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 } //MappingCallBindingCSImpl

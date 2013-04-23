@@ -38,17 +38,16 @@ public class MappingCallBindingAttribution extends EmptyAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		MappingCallBinding mappingCallBinding = (MappingCallBinding)target;
 		MappingCall mappingCall = mappingCallBinding.getMappingCall();
-		if (mappingCall != null) {
+		if (mappingCall != null) {		// FIXME Distingish referred.context mapping
 			Mapping referredMapping = mappingCall.getReferredMapping();
 			if (referredMapping != null) {
-				Mapping mapping = mappingCall.getContext();
 				Variable boundVariable = mappingCallBinding.getBoundVariable();
 				Area area = QVTimperativeUtil.getContainingArea(boundVariable);
 				if (area instanceof Mapping) {
-					QVTimperativeEnvironmentUtil.addMiddleBottomVariables(environmentView, mapping);
+					QVTimperativeEnvironmentUtil.addMiddleBottomVariables(environmentView, referredMapping);
 				} else if (area instanceof Domain) {
 					TypedModel typedModel = ((Domain) area).getTypedModel();
-					QVTimperativeEnvironmentUtil.addSideBottomVariables(environmentView, mapping, typedModel);
+					QVTimperativeEnvironmentUtil.addSideBottomVariables(environmentView, referredMapping, typedModel);
 				}
 			}
 		}
