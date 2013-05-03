@@ -1,11 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.xtext.qvtrelation/emf-gen"
-    modelPluginID="org.eclipse.qvtd.xtext.qvtrelation" modelName="QVTrelationCST" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false" usedGenPackages="platform:/plugin/org.eclipse.ocl.examples.xtext.base/model/BaseCST.genmodel#//baseCST platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore platform:/plugin/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.genmodel#//essentialOCLCST platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel#//qvttemplate ../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel#//qvtrelation">
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="&lt;copyright>&#xD;&#xA;&#xD;&#xA;Copyright (c) 2013 E.D.Willink and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;  E.D.Willink - Initial API and implementation&#xD;&#xA;&#xD;&#xA;&lt;/copyright>"
+    modelDirectory="/org.eclipse.qvtd.xtext.qvtrelation/emf-gen" modelPluginID="org.eclipse.qvtd.xtext.qvtrelation"
+    modelName="QVTrelationCST" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false" usedGenPackages="platform:/plugin/org.eclipse.ocl.examples.xtext.base/model/BaseCST.genmodel#//baseCST platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore platform:/plugin/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.genmodel#//essentialOCLCST platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel#//qvttemplate ../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel#//qvtrelation">
   <foreignModel>QVTrelationCST.ecore</foreignModel>
   <genPackages prefix="QVTrelationCST" basePackage="org.eclipse.qvtd.xtext" resource="XML"
       disposableProviderFactory="true" fileExtensions="qvtr" ecorePackage="QVTrelationCST.ecore#/">
+    <genClasses image="false" ecoreClass="QVTrelationCST.ecore#//AbstractDomainCS"/>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//CollectionTemplateCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//CollectionTemplateCS/memberIdentifiers"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//CollectionTemplateCS/restIdentifier"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//DefaultValueCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//DefaultValueCS/initialiser"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//DefaultValueCS/propertyId"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//DomainCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTrelationCST.ecore#//DomainCS/checkonly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTrelationCST.ecore#//DomainCS/enforce"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//DomainCS/modelId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTrelationCST.ecore#//DomainCS/replace"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//DomainCS/pattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//DomainCS/defaultValues"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//DomainCS/implementedBy"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//DomainPatternCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//DomainPatternCS/template"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//ElementTemplateCS"/>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//KeyDeclCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//KeyDeclCS/pathName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//KeyDeclCS/propertyIds"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//KeyDeclCS/classId"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//ModelDeclCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//ModelDeclCS/metaModelIds"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//ObjectTemplateCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//ObjectTemplateCS/propertyTemplates"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//ParamDeclarationCS"/>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//PatternCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//PatternCS/predicates"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//PredicateCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//PredicateCS/expr"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//PrimitiveTypeDomainCS"/>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//PropertyTemplateCS">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//PropertyTemplateCS/objectTemplate"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//PropertyTemplateCS/propertyId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//PropertyTemplateCS/expression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTrelationCST.ecore#//PropertyTemplateCS/opposite"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//QueryCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//QueryCS/inputParamDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//QueryCS/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//RelationCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTrelationCST.ecore#//RelationCS/top"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//RelationCS/overrides"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//RelationCS/varDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//RelationCS/domains"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//RelationCS/when"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//RelationCS/where"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="QVTrelationCST.ecore#//TemplateCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//TemplateCS/guardExpression"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="QVTrelationCST.ecore#//TemplateVariableCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//TemplateVariableCS/type"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//TopLevelCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//TopLevelCS/importClauses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//TopLevelCS/transformations"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//TransformationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//TransformationCS/modelDecls"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//TransformationCS/extends"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//TransformationCS/keyDecls"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//TransformationCS/queries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//TransformationCS/relation"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//UnitCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//UnitCS/identifier"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//VarDeclarationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//VarDeclarationCS/varDeclarationIds"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCST.ecore#//VarDeclarationCS/type"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCST.ecore#//VarDeclarationIdCS"/>
   </genPackages>
 </genmodel:GenModel>

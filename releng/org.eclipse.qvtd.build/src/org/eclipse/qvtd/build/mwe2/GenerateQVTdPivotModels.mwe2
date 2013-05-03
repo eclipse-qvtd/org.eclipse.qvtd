@@ -81,7 +81,7 @@ Workflow {
     bean = UMLGenModelSetup { resourceSet = resourceSet }
     
      // Weaving the Visitor Pattern on 
-	component = DerivedVisitorPatternWeaver {
+/* 	component = DerivedVisitorPatternWeaver {
     	resourceSet = resourceSet
     	in = "platform:/resource/${qvtbase.path}/model/${QVTbase}.ecore" 
     	rootVisitorInterfaceName = "${Visitor}"
@@ -92,7 +92,7 @@ Workflow {
     	derivedVisitorInterfaceQualifiedName = "${qvtbase.path}.${QVTbase}${Visitor}"
 //    	visitableInterfaceName = "${Visitable}"
 //    	visitableInterfaceQualifiedName = "${pivot.path}.${util.suffix}.${Visitable}"
-    } 
+    } */
     
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/${qvtbase.path}/model/${QVTbase}.genmodel" 	
@@ -113,10 +113,11 @@ Workflow {
     	genModel = "/${qvtrelation.path}/model/${QVTrelation}.genmodel"
     }
     component = DerivedModelVisitorCodeGenerator { resourceSet = resourceSet
-    	genModelFile = "/${qvtbase.path}/model/${QVTbase}.genmodel"
-    	javaFolder = "${plugins.prefix}/${qvtbase.path}/${emf.gen.suffix}"
+    	projectName = "${qvtbase.path}"
+    	genModelFile = "model/${QVTbase}.genmodel"
+    	javaFolder = "${emf.gen.suffix}"
     	modelPackageName = "${qvtbase.path}"
-    	visitorPackageName = "${qvtbase.path}"    	
+    	visitorPackageName = "${qvtbase.path}.${util.suffix}"    	
     	visitorClassName = "${QVTbase}${Visitor}"
     	superVisitorPackageName = "${pivot.path}.${util.suffix}"
     	superVisitorClassName = "${Visitor}"
@@ -124,10 +125,11 @@ Workflow {
     	visitableClassName = "${Visitable}"
     }
     component = DerivedModelVisitorCodeGenerator { resourceSet = resourceSet
-    	genModelFile = "/${qvtcorebase.path}/model/${QVTcoreBase}.genmodel"
-    	javaFolder = "${plugins.prefix}/${qvtcorebase.path}/${emf.gen.suffix}"
+    	projectName = "${qvtcorebase.path}"
+    	genModelFile = "model/${QVTcoreBase}.genmodel"
+    	javaFolder = "${emf.gen.suffix}"
     	modelPackageName = "${qvtcorebase.path}"
-    	visitorPackageName = "${qvtcorebase.path}"
+    	visitorPackageName = "${qvtcorebase.path}.${util.suffix}"
     	visitorClassName = "${QVTcoreBase}${Visitor}"
     	superVisitorPackageName = "${qvtbase.path}.${util.suffix}"
     	superVisitorClassName = "${QVTbase}${Visitor}"
@@ -135,10 +137,11 @@ Workflow {
     	visitableClassName = "${Visitable}"
     }
     component = DerivedModelVisitorCodeGenerator { resourceSet = resourceSet
-    	genModelFile = "/${qvtcore.path}/model/${QVTcore}.genmodel"
-    	javaFolder = "${plugins.prefix}/${qvtcore.path}/${emf.gen.suffix}"
-    	visitorPackageName = "${qvtcore.path}"
+    	projectName = "${qvtcore.path}"
+    	genModelFile = "model/${QVTcore}.genmodel"
+    	javaFolder = "${emf.gen.suffix}"
     	modelPackageName = "${qvtcore.path}"
+    	visitorPackageName = "${qvtcore.path}.${util.suffix}"
     	visitorClassName = "${QVTcore}${Visitor}"
     	superVisitorPackageName = "${qvtcorebase.path}.${util.suffix}"
     	superVisitorClassName = "${QVTcoreBase}${Visitor}"
@@ -146,10 +149,11 @@ Workflow {
     	visitableClassName = "${Visitable}"
     }
      component = DerivedModelVisitorCodeGenerator { resourceSet = resourceSet
-    	genModelFile = "/${qvtimperative.path}/model/${QVTimperative}.genmodel"
-    	javaFolder = "${plugins.prefix}/${qvtimperative.path}/${emf.gen.suffix}"
+    	projectName = "${qvtimperative.path}"
+    	genModelFile = "model/${QVTimperative}.genmodel"
+    	javaFolder = "${emf.gen.suffix}"
     	modelPackageName = "${qvtimperative.path}"
-    	visitorPackageName = "${qvtimperative.path}"
+    	visitorPackageName = "${qvtimperative.path}.${util.suffix}"
     	visitorClassName = "${QVTimperative}${Visitor}"
     	superVisitorPackageName = "${qvtcorebase.path}.${util.suffix}"
     	superVisitorClassName = "${QVTcoreBase}${Visitor}"
@@ -170,10 +174,11 @@ Workflow {
     	derivedVisitorInterfaceQualifiedName = "${qvtimperative.path}.${util.suffix}.QVTOperationalVisitor"
     } */
     component = DerivedModelVisitorCodeGenerator { resourceSet = resourceSet
-    	genModelFile = "/${qvttemplate.path}/model/${QVTtemplate}.genmodel"
-    	javaFolder = "${plugins.prefix}/${qvttemplate.path}/${emf.gen.suffix}"
+    	projectName = "${qvttemplate.path}"
+    	genModelFile = "model/${QVTtemplate}.genmodel"
+    	javaFolder = "${emf.gen.suffix}"
     	modelPackageName = "${qvttemplate.path}"
-    	visitorPackageName = "${qvttemplate.path}"
+    	visitorPackageName = "${qvttemplate.path}.${util.suffix}"
     	visitorClassName = "${QVTtemplate}${Visitor}"
     	superVisitorPackageName = "${qvtbase.path}.${util.suffix}"
     	superVisitorClassName = "${QVTbase}${Visitor}"
@@ -181,10 +186,11 @@ Workflow {
     	visitableClassName = "${Visitable}"
     }
     component = DerivedModelVisitorCodeGenerator { resourceSet = resourceSet
-    	genModelFile = "/${qvtrelation.path}/model/${QVTrelation}.genmodel"
-    	javaFolder = "${plugins.prefix}/${qvtrelation.path}/${emf.gen.suffix}"
+    	projectName = "${qvtrelation.path}"
+    	genModelFile = "model/${QVTrelation}.genmodel"
+    	javaFolder = "${emf.gen.suffix}"
     	modelPackageName = "${qvtrelation.path}"
-    	visitorPackageName = "${qvtrelation.path}"
+    	visitorPackageName = "${qvtrelation.path}.${util.suffix}"
     	visitorClassName = "${QVTrelation}${Visitor}"
     	superVisitorPackageName = "${qvttemplate.path}.${util.suffix}"
     	superVisitorClassName = "${QVTtemplate}${Visitor}"

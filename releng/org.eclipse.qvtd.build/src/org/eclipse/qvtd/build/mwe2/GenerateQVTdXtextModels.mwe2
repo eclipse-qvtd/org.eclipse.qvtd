@@ -81,8 +81,9 @@ Workflow {
     	genModel = "/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCST.genmodel" 	
     }
     component = XtextVisitorCodeGenerator { resourceSet = resourceSet
-    	genModelFile = "/org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCST.genmodel"
-    	javaFolder = "/../plugins/org.eclipse.qvtd.xtext.qvtcorebase/emf-gen"
+    	projectName = "org.eclipse.qvtd.xtext.qvtcorebase"
+    	genModelFile = "model/QVTcoreBaseCST.genmodel"
+    	javaFolder = "emf-gen"
     	modelPackageName = "org.eclipse.qvtd.xtext.qvtcorebasecst"
     	visitorPackageName = "org.eclipse.qvtd.xtext.qvtcorebasecst.util"
     	visitorClassName = "QVTcoreBaseCSVisitor"
@@ -92,10 +93,11 @@ Workflow {
     	visitableClassName= "VisitableCS"
     }
     component = XtextVisitorCodeGenerator { resourceSet = resourceSet
-    	genModelFile = "/org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCST.genmodel"
-    	javaFolder = "/../plugins/org.eclipse.qvtd.xtext.qvtcore/emf-gen"
+    	projectName = "org.eclipse.qvtd.xtext.qvtcore"
+    	genModelFile = "model/QVTcoreCST.genmodel"
+    	javaFolder = "emf-gen"
     	modelPackageName = "org.eclipse.qvtd.xtext.qvtcorecst"
-    	visitorPackageName = "org.eclipse.qvtd.xtext.qvtcorecst"
+    	visitorPackageName = "org.eclipse.qvtd.xtext.qvtcorecst.util"
     	visitorClassName = "QVTcoreCSVisitor"
     	superVisitorPackageName = "org.eclipse.qvtd.xtext.qvtcorebasecst.util"
     	superVisitorClassName = "QVTcoreBaseCSVisitor"
@@ -103,8 +105,9 @@ Workflow {
     	visitableClassName= "VisitableCS"
     }
     component = XtextVisitorCodeGenerator { resourceSet = resourceSet
-    	genModelFile = "/org.eclipse.qvtd.xtext.qvtimperative/model/QVTimperativeCST.genmodel"
-    	javaFolder = "/../plugins/org.eclipse.qvtd.xtext.qvtimperative/emf-gen"
+    	projectName = "org.eclipse.qvtd.xtext.qvtimperative"
+    	genModelFile = "model/QVTimperativeCST.genmodel"
+    	javaFolder = "emf-gen"
     	modelPackageName = "org.eclipse.qvtd.xtext.qvtimperativecst"
     	visitorPackageName = "org.eclipse.qvtd.xtext.qvtimperativecst.util"
     	visitorClassName = "QVTimperativeCSVisitor"
@@ -114,8 +117,9 @@ Workflow {
     	visitableClassName= "VisitableCS"
     }
     component = XtextVisitorCodeGenerator { resourceSet = resourceSet
-    	genModelFile = "/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCST.genmodel"
-    	javaFolder = "/../plugins/org.eclipse.qvtd.xtext.qvtrelation/emf-gen"
+    	projectName = "org.eclipse.qvtd.xtext.qvtrelation"
+    	genModelFile = "model/QVTrelationCST.genmodel"
+    	javaFolder = "emf-gen"
     	modelPackageName = "org.eclipse.qvtd.xtext.qvtrelationcst"
     	visitorPackageName = "org.eclipse.qvtd.xtext.qvtrelationcst.util"
     	visitorClassName = "QVTrelationCSVisitor"
