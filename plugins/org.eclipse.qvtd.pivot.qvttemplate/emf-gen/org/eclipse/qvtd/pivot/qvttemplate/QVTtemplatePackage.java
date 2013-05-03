@@ -108,15 +108,6 @@ public interface QVTtemplatePackage extends EPackage {
 	int TEMPLATE_EXP__NAME = PivotPackage.LITERAL_EXP__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE_EXP__OWNED_RULE = PivotPackage.LITERAL_EXP__OWNED_RULE;
-
-	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -215,15 +206,6 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLECTION_TEMPLATE_EXP__NAME = TEMPLATE_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLECTION_TEMPLATE_EXP__OWNED_RULE = TEMPLATE_EXP__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
@@ -351,15 +333,6 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int OBJECT_TEMPLATE_EXP__NAME = TEMPLATE_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_TEMPLATE_EXP__OWNED_RULE = TEMPLATE_EXP__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.

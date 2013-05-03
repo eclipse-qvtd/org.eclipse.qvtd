@@ -1154,15 +1154,6 @@ public interface QVTrelationCSTPackage extends EPackage {
 	int PARAM_DECLARATION_CS__OWNED_TYPE = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAM_DECLARATION_CS__OWNED_CONSTRAINT = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_CONSTRAINT;
-
-	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1589,15 +1580,6 @@ public interface QVTrelationCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int QUERY_CS__OWNED_TYPE = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int QUERY_CS__OWNED_CONSTRAINT = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_CONSTRAINT;
 
 	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.

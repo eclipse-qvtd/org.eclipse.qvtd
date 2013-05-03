@@ -120,15 +120,6 @@ public interface QVTimperativePackage extends EPackage {
 	int IMPERATIVE_MODEL__NAME = QVTbasePackage.BASE_MODEL__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_MODEL__OWNED_RULE = QVTbasePackage.BASE_MODEL__OWNED_RULE;
-
-	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -145,6 +136,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_MODEL__OWNED_ANNOTATION = QVTbasePackage.BASE_MODEL__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_MODEL__OWNED_RULE = QVTbasePackage.BASE_MODEL__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
@@ -227,15 +227,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING__NAME = QVTcoreBasePackage.ABSTRACT_MAPPING__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING__OWNED_RULE = QVTcoreBasePackage.ABSTRACT_MAPPING__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
@@ -354,15 +345,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_CALL__NAME = PivotPackage.OCL_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL__OWNED_RULE = PivotPackage.OCL_EXPRESSION__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.

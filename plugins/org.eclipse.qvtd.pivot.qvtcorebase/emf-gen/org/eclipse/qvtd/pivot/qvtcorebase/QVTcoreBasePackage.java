@@ -118,15 +118,6 @@ public interface QVTcoreBasePackage extends EPackage {
 	int ABSTRACT_MAPPING__NAME = QVTbasePackage.RULE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_MAPPING__OWNED_RULE = QVTbasePackage.RULE__OWNED_RULE;
-
-	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -519,15 +510,6 @@ public interface QVTcoreBasePackage extends EPackage {
 	int CORE_DOMAIN__NAME = QVTbasePackage.DOMAIN__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_DOMAIN__OWNED_RULE = QVTbasePackage.DOMAIN__OWNED_RULE;
-
-	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -863,15 +845,6 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @ordered
 	 */
 	int REALIZED_VARIABLE__NAME = PivotPackage.VARIABLE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZED_VARIABLE__OWNED_RULE = PivotPackage.VARIABLE__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.

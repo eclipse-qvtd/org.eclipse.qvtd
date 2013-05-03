@@ -246,15 +246,6 @@ public interface QVTrelationPackage extends EPackage {
 	int OPPOSITE_PROPERTY_CALL_EXP__NAME = PivotPackage.PROPERTY_CALL_EXP__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP__OWNED_RULE = PivotPackage.PROPERTY_CALL_EXP__OWNED_RULE;
-
-	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -389,15 +380,6 @@ public interface QVTrelationPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION__NAME = QVTbasePackage.RULE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION__OWNED_RULE = QVTbasePackage.RULE__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
@@ -536,15 +518,6 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_CALL_EXP__NAME = PivotPackage.OCL_EXPRESSION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_CALL_EXP__OWNED_RULE = PivotPackage.OCL_EXPRESSION__OWNED_RULE;
-
-	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -643,15 +616,6 @@ public interface QVTrelationPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_DOMAIN__NAME = QVTbasePackage.DOMAIN__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_DOMAIN__OWNED_RULE = QVTbasePackage.DOMAIN__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
@@ -836,15 +800,6 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_MODEL__NAME = QVTbasePackage.BASE_MODEL__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_MODEL__OWNED_RULE = QVTbasePackage.BASE_MODEL__OWNED_RULE;
-
-	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -861,6 +816,15 @@ public interface QVTrelationPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_MODEL__OWNED_ANNOTATION = QVTbasePackage.BASE_MODEL__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_MODEL__OWNED_RULE = QVTbasePackage.BASE_MODEL__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
@@ -1009,15 +973,6 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATIONAL_TRANSFORMATION__NAME = QVTbasePackage.TRANSFORMATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATIONAL_TRANSFORMATION__OWNED_RULE = QVTbasePackage.TRANSFORMATION__OWNED_RULE;
-
-	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1117,6 +1072,15 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATIONAL_TRANSFORMATION__SUPER_CLASS = QVTbasePackage.TRANSFORMATION__SUPER_CLASS;
 
 	/**
+	 * The feature id for the '<em><b>Owned Invariant</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATIONAL_TRANSFORMATION__OWNED_INVARIANT = QVTbasePackage.TRANSFORMATION__OWNED_INVARIANT;
+
+	/**
 	 * The feature id for the '<em><b>Instance Class Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1124,6 +1088,15 @@ public interface QVTrelationPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATIONAL_TRANSFORMATION__INSTANCE_CLASS_NAME = QVTbasePackage.TRANSFORMATION__INSTANCE_CLASS_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATIONAL_TRANSFORMATION__OWNED_RULE = QVTbasePackage.TRANSFORMATION__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
