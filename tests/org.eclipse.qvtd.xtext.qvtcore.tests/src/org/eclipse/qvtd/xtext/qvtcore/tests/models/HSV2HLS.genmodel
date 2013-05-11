@@ -10,6 +10,7 @@
     <genDataTypes ecoreDataType="HSV2HLS.ecore#//RGB"/>
     <genClasses ecoreClass="HSV2HLS.ecore#//HSVNode2HLSNode">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference HSV2HLS.ecore#//HSVNode2HLSNode/parent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HSV2HLS.ecore#//HSVNode2HLSNode/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HSV2HLS.ecore#//HSVNode2HLSNode/children"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference HSV2HLS.ecore#//HSVNode2HLSNode/hsv"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference HSV2HLS.ecore#//HSVNode2HLSNode/hls"/>
@@ -21,6 +22,7 @@
     <genDataTypes ecoreDataType="HSVTree.ecore#//HSV"/>
     <genClasses ecoreClass="HSVTree.ecore#//HSVNode">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference HSVTree.ecore#//HSVNode/parent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HSVTree.ecore#//HSVNode/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HSVTree.ecore#//HSVNode/children"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HSVTree.ecore#//HSVNode/hsv"/>
     </genClasses>
@@ -30,6 +32,7 @@
     <genDataTypes ecoreDataType="HLSTree.ecore#//HLS"/>
     <genClasses ecoreClass="HLSTree.ecore#//HLSNode">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference HLSTree.ecore#//HLSNode/parent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HLSTree.ecore#//HLSNode/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HLSTree.ecore#//HLSNode/children"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HLSTree.ecore#//HLSNode/hls"/>
     </genClasses>

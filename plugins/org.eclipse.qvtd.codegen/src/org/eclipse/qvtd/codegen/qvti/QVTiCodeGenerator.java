@@ -29,6 +29,9 @@ package org.eclipse.qvtd.codegen.qvti;
  */
 
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Map;
 import java.util.Set;
 
@@ -41,6 +44,7 @@ import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
@@ -52,18 +56,15 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 {
 	protected final @NonNull QVTiAnalyzer cgAnalyzer;
 	protected final @NonNull Transformation transformation;
-	protected final @NonNull QVTiCG2JavaVisitor generator;
+	private /*@LazyNonNull*/ QVTiCG2JavaVisitor generator;
 //	protected final @NonNull CGPackage cgPackage;
+	private /*@LazyNonNull*/ String javaSourceCode = null; 
 
-	public QVTiCodeGenerator(@NonNull MetaModelManager metaModelManager, @NonNull Transformation transformation, @NonNull String packageName, boolean useNullAnnotations) {
+	public QVTiCodeGenerator(@NonNull MetaModelManager metaModelManager, @NonNull Transformation transformation) {
 		super(metaModelManager);
 		QVTiCG2StringVisitor.FACTORY.getClass();
-		getOptions().setUseNullAnnotations(useNullAnnotations);
 		cgAnalyzer = new QVTiAnalyzer(this);
 		this.transformation = transformation;
-//		this.genPackage = genPackage;
-		this.generator = new QVTiCG2JavaVisitor(this, transformation, packageName, transformation.getName());
-		/*this.cgPackage =*/ generator.generate();
 	}
 
 	@Override
@@ -101,12 +102,25 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return new QVTiGlobalContext(this);
 	}
 
+	@Override
+	protected @NonNull QVTiCodeGenOptions createOptions() {
+		return new QVTiCodeGenOptions();
+	}
+
 	public @NonNull String generateClassFile() {
-	//		QVTiCG2JavaClassVisitor generator = QVTiCG2JavaClassVisitor.generate(this, transformation, packageName, className);
+		String javaSourceCode2 = javaSourceCode;
+		if (javaSourceCode2 == null) {
+			if (generator == null) {
+				String packagePrefix = getOptions().getPackagePrefix();
+				generator = new QVTiCG2JavaVisitor(this, transformation, packagePrefix, transformation.getName());
+				generator.generate();
+			}
 			Set<String> allImports = generator.getAllImports();
 			Map<String, String> long2ShortImportNames = ImportUtils.getLong2ShortImportNames(allImports);
-			return ImportUtils.resolveImports(generator.toString(), long2ShortImportNames);
+			javaSourceCode = javaSourceCode2 = ImportUtils.resolveImports(generator.toString(), long2ShortImportNames);
 		}
+		return javaSourceCode2;
+	}
 
 	@Override
 	public @NonNull QVTiAnalyzer getAnalyzer() {
@@ -116,5 +130,30 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	@Override
 	public @NonNull QVTiGlobalContext getGlobalContext() {
 		return (QVTiGlobalContext) super.getGlobalContext();
+	}
+
+	@Override
+	public @NonNull QVTiCodeGenOptions getOptions() {
+		return (QVTiCodeGenOptions)super.getOptions();
+	}
+
+	public @NonNull String getQualifiedName() {
+		String className = DomainUtil.nonNullState(transformation.getName());
+		String packagePrefix = getOptions().getPackagePrefix();
+		if (packagePrefix != null) {
+			return packagePrefix + "." + className;
+		}
+		else {
+			return className;
+		}
+	}
+
+	public void saveSourceFile(@NonNull String savePath) throws IOException {
+		String javaCodeSource = generateClassFile();
+		String qualifiedName = getQualifiedName();
+		String fileName = savePath + qualifiedName.replace('.', '/') + ".java";
+		Writer writer = new FileWriter(fileName);
+		writer.append(javaCodeSource);
+		writer.close();
 	}
 }

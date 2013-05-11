@@ -5,6 +5,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="HLSNode">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//HLSNode"
         eOpposite="#//HLSNode/children"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" ordered="false"
         upperBound="-1" eType="#//HLSNode" containment="true" eOpposite="#//HLSNode/parent"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="hls" lowerBound="1" eType="#//HLS"

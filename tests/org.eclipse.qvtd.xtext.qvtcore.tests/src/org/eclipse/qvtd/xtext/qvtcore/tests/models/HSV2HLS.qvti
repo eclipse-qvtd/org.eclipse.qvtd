@@ -15,6 +15,7 @@ map HSV2MiddleRoot in ColorChanger {
 	where() {
 		realize middleRoot : HSVNode2HLSNode |
 		middleRoot.hsv := hsvRoot;
+		middleRoot.name := hsvRoot.name;
 		middleRoot.rgb := hsv2rgb(hsvRoot.hsv);
 	}
 	map HSV2MiddleRecursion {
@@ -32,6 +33,7 @@ map HSV2MiddleRecursion in ColorChanger {
 		realize middleNode : HSVNode2HLSNode |
 		middleNode.parent := middleParent;
 		middleNode.hsv := hsvNode;
+		middleNode.name := hsvNode.name;
 		middleNode.rgb := hsv2rgb(hsvNode.hsv);
 	}
 	map HSV2MiddleRecursion {
@@ -45,6 +47,7 @@ map Middle2HLSRoot in ColorChanger {
 	where(middleNode : HSVNode2HLSNode |) {
 		middleNode.hls := hlsNode;
 		hlsNode.parent := null;
+		hlsNode.name := middleNode.name;
 		hlsNode.hls := rgb2hls(middleNode.rgb);
 	}
 	map Middle2HLSRecursion {
@@ -57,6 +60,7 @@ map Middle2HLSRecursion in ColorChanger {
 	where(middleNode : HSVNode2HLSNode |) {
 		middleNode.hls := hlsNode;
 		hlsNode.parent := middleNode.parent.hls;
+		hlsNode.name := middleNode.name;
 		hlsNode.hls := rgb2hls(middleNode.rgb);
 	}
 	map Middle2HLSRecursion {
