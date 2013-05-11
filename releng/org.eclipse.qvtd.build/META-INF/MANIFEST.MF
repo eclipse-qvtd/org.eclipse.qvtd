@@ -28,7 +28,8 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.ocl.examples.xtext.oclstdlib,
  org.eclipse.qvtd.xtext.qvtcore;visibility:=reexport,
  org.eclipse.qvtd.xtext.qvtimperative;visibility:=reexport,
- org.eclipse.qvtd.xtext.qvtrelation;visibility:=reexport
+ org.eclipse.qvtd.xtext.qvtrelation;visibility:=reexport,
+ org.eclipse.qvtd.codegen;bundle-version="0.10.0"
 Import-Package: org.apache.commons.logging,
  org.apache.log4j
 Bundle-Vendor: %providerName

@@ -11,14 +11,14 @@ query ColorChanger::rgb2hls(color : HSV2HLS::RGB) : HLSTree::HLS;
 query ColorChanger::rgb2hsv(color : HSV2HLS::RGB) : HSVTree::HSV;
 
 map HSV2MiddleRoot in ColorChanger {
-	hsv() { hsvRoot : HSVNode | hsvRoot.parent = null;}
+	hsv(hsvRoot : HSVNode | hsvRoot.parent = null;) {}
 	where() {
 		realize middleRoot : HSVNode2HLSNode |
 		middleRoot.hsv := hsvRoot;
 		middleRoot.rgb := hsv2rgb(hsvRoot.hsv);
 	}
 	map HSV2MiddleRecursion {
-		hsvNode := hsvRoot.children;
+		hsvNode <= hsvRoot.children;
 		middleParent := middleRoot;
 	}
 	map Middle2HLSRoot {
@@ -35,7 +35,7 @@ map HSV2MiddleRecursion in ColorChanger {
 		middleNode.rgb := hsv2rgb(hsvNode.hsv);
 	}
 	map HSV2MiddleRecursion {
-		hsvNode := hsvNode.children;
+		hsvNode <= hsvNode.children;
 		middleParent := middleNode;
 	}
 }
@@ -48,7 +48,7 @@ map Middle2HLSRoot in ColorChanger {
 		hlsNode.hls := rgb2hls(middleNode.rgb);
 	}
 	map Middle2HLSRecursion {
-		middleNode := middleNode.children;
+		middleNode <= middleNode.children;
 	}
 }
 
@@ -60,6 +60,6 @@ map Middle2HLSRecursion in ColorChanger {
 		hlsNode.hls := rgb2hls(middleNode.rgb);
 	}
 	map Middle2HLSRecursion {
-		middleNode := middleNode.children;
+		middleNode <= middleNode.children;
 	}
 }

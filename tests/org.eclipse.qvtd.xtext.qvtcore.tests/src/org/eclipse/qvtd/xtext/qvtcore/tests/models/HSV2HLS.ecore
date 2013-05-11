@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="HSV2HLS" nsURI="platform:/resource/ICMT2013/ColoredTree2Tree.ecore"
     nsPrefix="pfx">
-  <eClassifiers xsi:type="ecore:EDataType" name="RGB" serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="RGB" instanceClassName="test.middle.RGB"/>
   <eClassifiers xsi:type="ecore:EClass" name="HSVNode2HLSNode">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//HSVNode2HLSNode"
         eOpposite="#//HSVNode2HLSNode/children"/>

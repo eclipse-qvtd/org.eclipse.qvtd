@@ -1,0 +1,66 @@
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2010 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *
+ * </copyright>
+ *
+ * $Id: GenerateXtextModels.mwe2,v 1.2 2011/01/24 20:54:27 ewillink Exp $
+ * 
+ * Run As->MWE2 Workflow to regenerate the Xtest CST models.
+ */
+module GenerateQVTdXtextModels
+
+import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.emf.ecore.resource.impl.*
+
+/**
+ *	Generate the Concrete Syntax Models used by the Xtext editors.
+ */
+Workflow {
+	bean = ResourceSetImpl : resourceSet {}
+    bean = StandaloneSetup { resourceSet = resourceSet
+    	platformUri = ".."
+//    	platformUri = "./META-INF"		// A local folder to minimize workspace searching
+    	scanClassPath = true			// But we do need to search the plugin-space
+    	registerGeneratedEPackage = "org.eclipse.xtext.common.types.TypesPackage"
+    	uriMap = Mapping {
+    		from = "platform:/plugin/org.eclipse.emf.ecore/"
+    		to = "platform:/resource/org.eclipse.emf.ecore/"
+    	}
+    	uriMap = Mapping {
+    		from = "platform:/plugin/org.eclipse.ocl.examples.pivot/"
+    		to = "platform:/resource/org.eclipse.ocl.examples.pivot/"
+    	}
+    	uriMap = Mapping {
+    		from = "platform:/plugin/org.eclipse.ocl.examples.xtext.base/"
+    		to = "platform:/resource/org.eclipse.ocl.examples.xtext.base/"
+    	}
+    }
+    bean = GenModelSetup { resourceSet = resourceSet }
+    bean = UMLGenModelSetup { resourceSet = resourceSet }
+    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    	genModel = "/org.eclipse.qvtd.codegen/model/qvticgmodel.genmodel" 	
+    }
+    component = DerivedCGModelVisitorCodeGenerator { resourceSet = resourceSet
+    	projectName = "org.eclipse.qvtd.codegen"
+    	genModelFile = "model/qvticgmodel.genmodel"
+    	javaFolder = "emf-gen"
+    	modelPackageName = "org.eclipse.qvtd.codegen.qvticgmodel"
+    	visitorPackageName = "org.eclipse.qvtd.codegen.qvticgmodel.util"
+    	visitorClassName = "QVTiCGModelVisitor"
+    	superVisitorPackageName = "org.eclipse.ocl.examples.codegen.cgmodel.util"
+    	superVisitorClassName = "CGModelVisitor"
+    	visitablePackageName = "org.eclipse.ocl.examples.codegen.cgmodel"
+    	visitableClassName= "CGElement"
+    }
+}

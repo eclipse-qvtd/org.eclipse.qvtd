@@ -77,10 +77,10 @@ public class LoadTestCase extends XtextTestCase
 					return pivotResource;
 				}
 				finally {
-					if (adapter != null) {
-						adapter.dispose();
-						adapter.getMetaModelManager().dispose();
-					}
+//					if (adapter != null) {
+//						adapter.dispose();
+//						adapter.getMetaModelManager().dispose();
+//					}
 				}
 	}
 
