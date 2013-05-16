@@ -14,5 +14,5 @@ Export-Package: org.eclipse.qvtd.pivot.qvtbase,
  org.eclipse.qvtd.pivot.qvtbase.util,
  org.eclipse.qvtd.pivot.qvtbase.utilities
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
- com.google.inject;bundle-version="[3.0.0,4.0.0)";visibility:=reexport,
  org.eclipse.ocl.examples.pivot;bundle-version="[3.3.0,4.0.0)";visibility:=reexport
+Import-Package: com.google.inject
