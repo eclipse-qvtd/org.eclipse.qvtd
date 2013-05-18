@@ -39,7 +39,7 @@ import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaDependencyVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
-import org.eclipse.ocl.examples.codegen.java.JavaTypeDescriptor;
+import org.eclipse.ocl.examples.codegen.java.types.TypeDescriptor;
 import org.eclipse.ocl.examples.domain.evaluation.AbstractTransformation;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -189,7 +189,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		js.append("public boolean run() {\n");
 		js.pushIndentation(null);
 		for (@NonNull CGGuardVariable cgGuardVariable : cgGuardVariables) {
-			JavaTypeDescriptor typeDescriptor = context.getJavaTypeDescriptor(cgGuardVariable);
+			TypeDescriptor typeDescriptor = context.getJavaTypeDescriptor(cgGuardVariable);
 			EClassifier eClassifier = DomainUtil.nonNullState(typeDescriptor.getEClassifier());
 			String qualifiedPackageInterfaceName = genModelHelper.getQualifiedPackageInterfaceName(eClassifier.getEPackage());
 			String classifierLiteralName = genModelHelper.getLiteralName(eClassifier);
@@ -310,8 +310,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		//		js.append(" ");
 		//		js.appendIsCaught(!cgOperation.isInvalid(), cgOperation.isInvalid());
 				js.append(" ");
-				CGTypeId cgTypeId = cgFunction.getTypeId();
-				JavaTypeDescriptor javaTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId, false);
+//				CGTypeId cgTypeId = cgFunction.getTypeId();
+				TypeDescriptor javaTypeDescriptor = context.getJavaTypeDescriptor(cgFunction.getTypeId().getElementId(), false);
 				js.appendClassReference(javaTypeDescriptor);
 				js.append(" ");
 				js.append(cgFunction.getName());
@@ -385,8 +385,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 			CGValuedElement cgArgument = cgArguments.get(i);
 			CGValuedElement argument = getExpression(cgArgument);
 			Parameter pParameter = pParameters.get(i);
-			CGTypeId cgParameterTypeId = analyzer.getTypeId(pParameter.getTypeId());
-			JavaTypeDescriptor parameterTypeDescriptor = context.getJavaTypeDescriptor(cgParameterTypeId, false);
+//			CGTypeId cgParameterTypeId = analyzer.getTypeId(pParameter.getTypeId());
+			TypeDescriptor parameterTypeDescriptor = context.getJavaTypeDescriptor(pParameter.getTypeId(), false);
 			js.appendReferenceTo(parameterTypeDescriptor, argument);
 		}
 		js.append(");\n");

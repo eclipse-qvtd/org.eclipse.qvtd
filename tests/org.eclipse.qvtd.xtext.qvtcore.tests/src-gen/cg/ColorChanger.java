@@ -137,11 +137,11 @@ public class ColorChanger extends AbstractTransformation
         middleRoot.setHsv(hsvRoot);
         final @Nullable /*@Thrown*/ String name = hsvRoot.getName();
         middleRoot.setName(name);
-        final @Nullable /*@Thrown*/ HSV hsv = hsvRoot.getHsv();
+        final @NonNull /*@Thrown*/ HSV hsv = hsvRoot.getHsv();
         final @NonNull /*@Thrown*/ RGB hsv2rgb = hsv2rgb(hsv);
         middleRoot.setRgb(hsv2rgb);
         // mapping calls
-        final @Nullable /*@Thrown*/ List<? extends HSVNode> children = hsvRoot.getChildren();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<HSVNode> children = hsvRoot.getChildren();
         for (HSVNode hsvNode_0 : children) {
             HSV2MiddleRecursion(hsvNode_0, middleRoot);
         }
@@ -185,11 +185,11 @@ public class ColorChanger extends AbstractTransformation
         middleNode.setHsv(hsvNode);
         final @Nullable /*@Thrown*/ String name_0 = hsvNode.getName();
         middleNode.setName(name_0);
-        final @Nullable /*@Thrown*/ HSV hsv_0 = hsvNode.getHsv();
+        final @NonNull /*@Thrown*/ HSV hsv_0 = hsvNode.getHsv();
         final @NonNull /*@Thrown*/ RGB hsv2rgb_0 = hsv2rgb(hsv_0);
         middleNode.setRgb(hsv2rgb_0);
         // mapping calls
-        final @Nullable /*@Thrown*/ List<? extends HSVNode> children_0 = hsvNode.getChildren();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<HSVNode> children_0 = hsvNode.getChildren();
         for (HSVNode hsvNode_1 : children_0) {
             HSV2MiddleRecursion(hsvNode_1, middleNode);
         }
@@ -230,11 +230,11 @@ public class ColorChanger extends AbstractTransformation
         hlsNode.setParent(null);
         final @Nullable /*@Thrown*/ String name_1 = middleNode.getName();
         hlsNode.setName(name_1);
-        final @Nullable /*@Thrown*/ RGB rgb = middleNode.getRgb();
+        final @NonNull /*@Thrown*/ RGB rgb = middleNode.getRgb();
         final @NonNull /*@Thrown*/ HLS rgb2hls = rgb2hls(rgb);
         hlsNode.setHls(rgb2hls);
         // mapping calls
-        final @Nullable /*@Thrown*/ List<? extends HSVNode2HLSNode> children_1 = middleNode.getChildren();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<HSVNode2HLSNode> children_1 = middleNode.getChildren();
         for (HSVNode2HLSNode middleNode_2 : children_1) {
             Middle2HLSRecursion(middleNode_2);
         }
@@ -276,15 +276,15 @@ public class ColorChanger extends AbstractTransformation
         if (parent_0 == null) {
             throw new InvalidValueException("Null source");
         }
-        final @Nullable /*@Thrown*/ HLSNode hls = parent_0.getHls();
+        final @NonNull /*@Thrown*/ HLSNode hls = parent_0.getHls();
         hlsNode.setParent(hls);
         final @Nullable /*@Thrown*/ String name_2 = middleNode_0.getName();
         hlsNode.setName(name_2);
-        final @Nullable /*@Thrown*/ RGB rgb_0 = middleNode_0.getRgb();
+        final @NonNull /*@Thrown*/ RGB rgb_0 = middleNode_0.getRgb();
         final @NonNull /*@Thrown*/ HLS rgb2hls_0 = rgb2hls(rgb_0);
         hlsNode.setHls(rgb2hls_0);
         // mapping calls
-        final @Nullable /*@Thrown*/ List<? extends HSVNode2HLSNode> children_2 = middleNode_0.getChildren();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<HSVNode2HLSNode> children_2 = middleNode_0.getChildren();
         for (HSVNode2HLSNode middleNode_3 : children_2) {
             Middle2HLSRecursion(middleNode_3);
         }

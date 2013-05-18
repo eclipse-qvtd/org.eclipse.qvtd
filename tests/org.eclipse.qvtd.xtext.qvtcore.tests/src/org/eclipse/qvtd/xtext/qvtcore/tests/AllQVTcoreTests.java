@@ -38,6 +38,7 @@ public class AllQVTcoreTests extends TestCase
 	public static Test suite() {
 		TestSuite result = new TestSuite("QVTc Editor Support");			
 		result.addTestSuite(LoadTests.class);
+		result.addTestSuite(CodeGenTests.class);
 //		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
 //			result.addTestSuite(EditorTests.class);
 //		}
