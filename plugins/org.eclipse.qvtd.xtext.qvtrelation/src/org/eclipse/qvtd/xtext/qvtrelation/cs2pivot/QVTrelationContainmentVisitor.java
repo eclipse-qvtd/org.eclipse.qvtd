@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
@@ -510,6 +511,13 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 		}
 //		context.refreshPivotList(Type.class, pivotElement.getOwnedType(), csElement.getOwnedType());
 //		context.refreshPivotList(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage()); */
+		Resource pivotResource = pivotElement.eResource();
+		if (pivotResource == null) {
+			Resource csResource = csElement.eResource();
+			if (csResource != null) {
+				context.installRootElement(csResource, pivotElement);
+			}
+		}
 		return null;
 	}
 
