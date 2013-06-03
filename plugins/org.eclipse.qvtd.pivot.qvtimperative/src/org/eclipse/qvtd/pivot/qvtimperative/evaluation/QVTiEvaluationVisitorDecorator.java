@@ -1,0 +1,401 @@
+/*******************************************************************************
+ * Copyright (c) 2012, 2013 The University of York, Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Horacio Hoyos - initial API and implementation
+ ******************************************************************************/
+package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainExpression;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.evaluation.DomainLogger;
+import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.pivot.Environment;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
+import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitorDecorator;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.util.Visitable;
+import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
+import org.eclipse.qvtd.pivot.qvtbase.Pattern;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.Unit;
+import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+
+/**
+ * QVTcoreEvaluationVisitorImpl is the class for ...
+ */
+public abstract class QVTiEvaluationVisitorDecorator extends EvaluationVisitorDecorator
+        implements QVTiEvaluationVisitor {
+	
+	
+	public QVTiEvaluationVisitorDecorator(@NonNull QVTiEvaluationVisitor decorated) {
+		super(decorated);
+	}
+	
+	/**
+     * Delegates to my decorated visitor.
+     */
+	@Override
+	public @NonNull QVTiEvaluationVisitor createNestedEvaluator() {
+        return (QVTiEvaluationVisitor) delegate.createNestedEvaluator();
+	}
+  
+    /**
+     * Obtains my delegate's environment.
+     */
+    @Override
+	public Environment getEnvironment() {
+        return delegate.getEnvironment();
+    }
+
+    /**
+     * Obtains my delegate's evaluation environment.
+     */
+    @Override
+	public @NonNull EvaluationEnvironment getEvaluationEnvironment() {
+        return delegate.getEvaluationEnvironment();
+    }
+
+    /**
+     * Obtains my delegate's extent map.
+     */
+    @Override
+	public @NonNull DomainModelManager getModelManager() {
+        return delegate.getModelManager();
+    }
+
+    /**
+     * Delegates to my decorated visitor.
+     */
+	public void setUndecoratedVisitor(@NonNull QVTiEvaluationVisitor evaluationVisitor) {
+        delegate.setUndecoratedVisitor(evaluationVisitor);
+	}
+	
+	/**
+     * Delegates to my decorated visitor.
+     */
+	@Nullable public Object evaluate(@NonNull DomainExpression body) {
+		
+		return delegate.evaluate(body);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	@Nullable public Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
+		
+		return delegate.evaluate(expressionInOCL);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	@NonNull public EvaluationVisitor getEvaluator() {
+		
+		return delegate.getEvaluator();
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	@NonNull public MetaModelManager getMetaModelManager() {
+		
+		return delegate.getMetaModelManager();
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	@NonNull public DomainStandardLibrary getStandardLibrary() {
+		
+		return delegate.getStandardLibrary();
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	@NonNull public IdResolver getIdResolver() {
+
+		return delegate.getIdResolver();
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	@Nullable public DomainLogger getLogger() {
+		
+		return delegate.getLogger();
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	@NonNull public DomainType getStaticTypeOf(@Nullable Object value) {
+		
+		return delegate.getStaticTypeOf(value);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	@NonNull public DomainType getStaticTypeOf(@Nullable Object value,
+			@NonNull Object... values) {
+		
+		return delegate.getStaticTypeOf(value, values);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	@NonNull public DomainType getStaticTypeOf(@Nullable Object value,
+			@NonNull Iterable<?> values) {
+		
+		return delegate.getStaticTypeOf(value, values);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	public boolean isCanceled() {
+		
+		return delegate.isCanceled();
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	public void setCanceled(boolean isCanceled) {
+		
+		delegate.setCanceled(isCanceled);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	public void setLogger(@Nullable DomainLogger loger) {
+		
+		delegate.setLogger(loger);
+	}
+	
+	@Override
+	public Object safeVisit(@Nullable Visitable v) {
+		if (v == null) {
+			throw new InvalidValueException("null expression");
+		}
+		try {
+			Object result = v.accept(delegate);
+			assert ValuesUtil.isBoxed(result);	// Make sure Integer/Real are boxed, invalid is an exception, null is null
+			return result;
+		} catch (InvalidValueException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e, "Evaluation Failure");
+		}
+	}
+	
+	/**
+     * Delegates to my decorated visitor.
+     */
+    public @Nullable Object visitAssignment(@NonNull Assignment assignment) {
+		return ((QVTiEvaluationVisitor)delegate).visitAssignment(assignment);
+    }
+	
+    /**
+     * Delegates to my decorated visitor.
+     */
+	public @Nullable Object visitBaseModel(@NonNull BaseModel baseModel) {
+		return ((QVTiEvaluationVisitor)delegate).visitBaseModel(baseModel);
+	}
+	
+	/**
+     * Delegates to my decorated visitor.
+     */
+    public @Nullable Object visitBottomPattern(@NonNull BottomPattern bottomPattern) {
+    	return ((QVTiEvaluationVisitor)delegate).visitBottomPattern(bottomPattern);
+    }
+    
+    /**
+     * Delegates to my decorated visitor.
+     */
+    public @Nullable Object visitCoreDomain(@NonNull CoreDomain coreDomain) {
+    	return ((QVTiEvaluationVisitor)delegate).visitCoreDomain(coreDomain);
+    }
+
+    /**
+     * Delegates to my decorated visitor.
+     */
+	public @Nullable Object visitDomain(@NonNull Domain domain) {
+		return ((QVTiEvaluationVisitor)delegate).visitDomain(domain);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+    public @Nullable Object visitCorePattern(@NonNull CorePattern corePattern) {
+    	return ((QVTiEvaluationVisitor)delegate).visitCorePattern(corePattern);
+    }
+
+    /**
+     * Delegates to my decorated visitor.
+     */
+    public @Nullable Object visitEnforcementOperation(@NonNull EnforcementOperation enforcementOperation) {
+    	return ((QVTiEvaluationVisitor)delegate).visitEnforcementOperation(enforcementOperation);
+    }
+
+    /**
+     * Delegates to my decorated visitor.
+     */
+	public @Nullable Object visitFunction(@NonNull Function function) {
+		return ((QVTiEvaluationVisitor)delegate).visitFunction(function);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	public @Nullable Object visitFunctionParameter(@NonNull FunctionParameter functionParameter) {
+		return ((QVTiEvaluationVisitor)delegate).visitFunctionParameter(functionParameter);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+    public @Nullable Object visitGuardPattern(@NonNull GuardPattern guardPattern) {
+    	return ((QVTiEvaluationVisitor)delegate).visitGuardPattern(guardPattern);
+    }
+    
+    /**
+     * Delegates to my decorated visitor.
+     */
+	public @Nullable Object visitPattern(@NonNull Pattern pattern) {
+		return ((QVTiEvaluationVisitor)delegate).visitPattern(pattern);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	public @Nullable Object visitPredicate(@NonNull Predicate predicate) {
+		return ((QVTiEvaluationVisitor)delegate).visitPredicate(predicate);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+    public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
+    	return ((QVTiEvaluationVisitor)delegate).visitPropertyAssignment(propertyAssignment);
+    }
+
+    /**
+     * Delegates to my decorated visitor.
+     */
+    public @Nullable Object visitRealizedVariable(@NonNull RealizedVariable realizedVariable) {
+    	return ((QVTiEvaluationVisitor)delegate).visitRealizedVariable(realizedVariable);
+    }
+
+    /**
+     * Delegates to my decorated visitor.
+     */
+	public @Nullable Object visitRule(@NonNull Rule rule) {
+		return ((QVTiEvaluationVisitor)delegate).visitRule(rule);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	public @Nullable Object visitTransformation(@NonNull Transformation transformation) {
+		return ((QVTiEvaluationVisitor)delegate).visitTransformation(transformation);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	public @Nullable Object visitTypedModel(@NonNull TypedModel typedModel) {
+		return ((QVTiEvaluationVisitor)delegate).visitTypedModel(typedModel);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	public @Nullable Object visitUnit(@NonNull Unit unit) {
+		return ((QVTiEvaluationVisitor)delegate).visitUnit(unit);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+    public @Nullable Object visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
+    	return ((QVTiEvaluationVisitor)delegate).visitVariableAssignment(variableAssignment);
+    }
+
+    /**
+     * Delegates to my decorated visitor.
+     */
+    public @Nullable Object visitImperativeModel(@NonNull ImperativeModel imperativeModel) {
+    	return ((QVTiEvaluationVisitor)delegate).visitImperativeModel(imperativeModel);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+    public @Nullable Object visitMapping(@NonNull Mapping mapping) {
+    	return ((QVTiEvaluationVisitor)delegate).visitMapping(mapping);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+    public @Nullable Object visitMappingCall(@NonNull MappingCall mappingCall) {
+    	return ((QVTiEvaluationVisitor)delegate).visitMappingCall(mappingCall);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+    public @Nullable Object visitMappingCallBinding(@NonNull MappingCallBinding mappingCallBinding) {
+    	return ((QVTiEvaluationVisitor)delegate).visitMappingCallBinding(mappingCallBinding);
+	}
+
+    /**
+     * Delegates to my decorated visitor.
+     */
+    @Override
+	public @Nullable Object visiting(@NonNull Visitable visitable) {
+    	return delegate.visiting(visitable);
+	}
+    
+    public abstract @NonNull QVTiEvaluationVisitor createNestedLMVisitor();
+    
+    public abstract @NonNull QVTiEvaluationVisitor createNestedMMVisitor();
+    
+    public abstract @NonNull QVTiEvaluationVisitor createNestedMRVisitor();
+
+}
