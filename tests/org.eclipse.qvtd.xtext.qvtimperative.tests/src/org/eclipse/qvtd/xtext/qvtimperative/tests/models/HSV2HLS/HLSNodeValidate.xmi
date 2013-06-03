@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pfx:HLSNode
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pfx="http://http://www.eclipse.org/qvt/examples/0.1/HLSTree"
+    xsi:schemaLocation="http://http://www.eclipse.org/qvt/examples/0.1/HLSTree HLSTree.ecore"
+    name="n1">
+  <children
+      name="n1.1">
+    <children
+        name="n1.1.1"/>
+  </children>
+  <children
+      name="n1.2">
+    <children
+        name="n1.2.1"/>
+    <children
+        name="n1.2.2"/>
+  </children>
+  <children
+      name="n1.3">
+    <children
+        name="n1.3.1">
+      <children
+          name="n1.3.1.1"/>
+    </children>
+  </children>
+</pfx:HLSNode>

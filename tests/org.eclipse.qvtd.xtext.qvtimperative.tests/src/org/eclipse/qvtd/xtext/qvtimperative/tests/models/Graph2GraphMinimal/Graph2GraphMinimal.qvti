@@ -1,0 +1,30 @@
+import SimpleGraph : 'SimpleGraph.ecore'::simplegraph;
+import SimpleGraph2Graph : 'SimpleGraph2Graph.ecore'::simplegraph2graph;
+
+transformation CopyGraphMinimal {
+	upperGraph imports SimpleGraph;
+	lowerGraph imports SimpleGraph;
+	imports SimpleGraph2Graph;
+}
+
+map upper2lowerLM in CopyGraphMinimal {
+	check upperGraph(g1:Graph |) { }
+    where () {
+        realize g2g:Graph2Graph |
+        g2g.graph1 := g1;
+        g2g.name := g1.name;
+    }
+    map upper2lowerMR {
+    	g2gout := g2g;
+    }
+}
+
+map upper2lowerMR in CopyGraphMinimal {
+    enforce lowerGraph() {
+        realize g2:Graph |
+    }
+    where (g2gout:Graph2Graph | ) {		-- M to R for G
+		g2gout.graph2 := g2;
+        g2.name := g2gout.name;
+    }
+}

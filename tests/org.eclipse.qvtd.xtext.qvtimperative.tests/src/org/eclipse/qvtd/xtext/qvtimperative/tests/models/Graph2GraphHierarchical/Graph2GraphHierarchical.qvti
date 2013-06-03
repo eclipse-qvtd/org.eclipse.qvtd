@@ -1,0 +1,58 @@
+import SimpleGraph : '../Graph2GraphMinimal/SimpleGraph.ecore'::simplegraph;
+import SimpleGraph2Graph : '../Graph2GraphMinimal/SimpleGraph2Graph.ecore'::simplegraph2graph;
+
+transformation CopyGraph {
+	upperGraph imports SimpleGraph;
+	lowerGraph imports SimpleGraph;
+	imports SimpleGraph2Graph;
+}
+
+map Graph2Middle in CopyGraph {	        					-- L to M for G
+    check upperGraph(g1:Graph |) { }
+    where () {
+        realize middleG2G:Graph2Graph |
+        middleG2G.graph1 := g1;
+        middleG2G.name := g1.name.toLowerCase();
+    }
+    map Node2Middle {
+    	n1 <= g1.element->select(e | e.oclIsTypeOf(simplegraph::Node));
+    	middleParent := middleG2G;
+    }
+    map Middle2Graph {
+    	g2Gmiddle := middleG2G;
+    }
+}
+
+map Node2Middle in CopyGraph {    							-- L to M for N
+    check upperGraph(n1:Node |) { }
+    where (middleParent:Graph2Graph |) {
+        realize n2n:Node2Node |
+        n2n.owner := middleParent;
+        n2n.node1 := n1;
+        n2n.label := n1.label.toLowerCase();
+    }
+}
+	
+map Middle2Graph in CopyGraph {								-- M to R for G
+	enforce lowerGraph() {
+        realize g2:Graph |
+    }
+    where (g2Gmiddle:Graph2Graph |) {
+    	g2Gmiddle.graph2 := g2;
+        g2.name := g2Gmiddle.name;
+    }
+    map Middle2Node {
+    	n2n <= g2Gmiddle.element2Element->select(e2e | e2e.oclIsTypeOf(simplegraph2graph::Node2Node));
+    }
+}
+
+map Middle2Node in CopyGraph {						        -- M to R for N
+	enforce lowerGraph () {
+        realize n2:Node |
+    }
+    where (n2n:Node2Node |) {
+    	n2n.node2 := n2;
+		n2.graph := n2n.owner.graph2;
+        n2.label := n2n.label;
+    }
+}

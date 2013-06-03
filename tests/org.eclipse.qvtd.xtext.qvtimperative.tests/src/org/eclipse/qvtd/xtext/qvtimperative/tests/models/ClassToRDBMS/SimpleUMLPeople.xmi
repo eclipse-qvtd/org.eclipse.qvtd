@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simpleuml:Package
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:simpleuml="http://http://www.eclipse.org/qvt/examples/0.1/simpleUML"
+    xsi:schemaLocation="http://http://www.eclipse.org/qvt/examples/0.1/simpleUML SimpleUML.ecore"
+    kind=""
+    name="People">
+  <elements
+      xsi:type="simpleuml:Class"
+      kind="persistent"
+      name="Person"
+      forward="//@elements.4"
+      generalOpposite="//@elements.1 //@elements.2">
+    <attributes
+        name="Name"
+        type="//@elements.5"/>
+    <attributes
+        name="Guardian"
+        type="//@elements.5"/>
+  </elements>
+  <elements
+      xsi:type="simpleuml:Class"
+      kind="persistent"
+      name="Student"
+      general="//@elements.0">
+    <attributes
+        name="StudentNumber"
+        type="//@elements.6"/>
+  </elements>
+  <elements
+      xsi:type="simpleuml:Class"
+      kind="persistent"
+      name="Professor"
+      general="//@elements.0">
+    <attributes
+        name="employed"
+        type="//@elements.7"/>
+  </elements>
+  <elements
+      xsi:type="simpleuml:Class"
+      kind="persistent"
+      name="Address"
+      reverse="//@elements.4"/>
+  <elements
+      xsi:type="simpleuml:Association"
+      name="livesAt"
+      source="//@elements.0"
+      destination="//@elements.3"/>
+  <elements
+      xsi:type="simpleuml:PrimitiveDataType"
+      name="String"
+      typeOpposite="//@elements.0/@attributes.0 //@elements.0/@attributes.1"/>
+  <elements
+      xsi:type="simpleuml:PrimitiveDataType"
+      name="Integer"
+      typeOpposite="//@elements.1/@attributes.0"/>
+  <elements
+      xsi:type="simpleuml:PrimitiveDataType"
+      name="Boolean"
+      typeOpposite="//@elements.2/@attributes.0"/>
+</simpleuml:Package>

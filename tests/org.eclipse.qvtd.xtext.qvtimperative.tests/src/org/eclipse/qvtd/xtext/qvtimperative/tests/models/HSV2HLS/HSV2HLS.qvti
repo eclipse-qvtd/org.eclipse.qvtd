@@ -1,0 +1,82 @@
+-- modeltype HSVTree: '../../model/HSVTree.ecore'; -- modeltype instead of import to match QVTo
+import 'HSVTree.ecore'::HSVTree; -- modeltype instead of import to match QVTo
+import 'HLSTree.ecore'::HLSTree;  -- No name because we defined the package
+import HSV2HLS : 'HSV2HLS.ecore'::HSV2HLS; -- A name is useful to define an alias for the same metamodel
+
+-- library '../../myOclHelper.ocl'; -- Import a complete OCL with helpers
+
+transformation hsv2hls {
+	hsv imports HSVTree;  -- Should specify the correct package
+	hls imports HLSTree;  --
+	-- hls imports "strict" HLSTree;  -- 
+	-- hls imports HLSTree{strict};   -- The model has to strictly conform to the HLSTree mm, without strict the model can have classes that match the name but not completely conform to the mm  
+	imports HSV2HLS;
+}
+
+query hsv2hls::hls2rgb(color : HLSTree::HLS) : HSV2HLS::RGB;
+query hsv2hls::hsv2rgb(color : HSVTree::HSV) : HSV2HLS::RGB;
+query hsv2hls::rgb2hls(color : HSV2HLS::RGB) : HLSTree::HLS;
+query hsv2hls::rgb2hsv(color : HSV2HLS::RGB) : HSVTree::HSV;
+
+
+map HSV2MiddleRoot in hsv2hls {	-- Mapping root nodes L to M
+	hsv(hsvRoot : HSVNode | hsvRoot.parent = null;) { } 
+	where() {
+		realize middleRoot : HSVNode2HLSNode |
+		middleRoot.hsv := hsvRoot;
+		middleRoot.name := hsvRoot.name;
+		--middleRoot.rgb := hsv2rgb(hsvRoot.hsv);
+	}
+	map HSV2MiddleRecursion {		-- recursive call to visit children
+		hsvNode <= hsvRoot.children;
+		middleParent := middleRoot;
+	}
+	map Middle2HLSRoot {		-- invoke middle to output mapping
+		middleNode := middleRoot;
+	}
+}
+
+map HSV2MiddleRecursion in hsv2hls { -- Mapping child nodes L to M
+	hsv(hsvNode : HSVNode | ) {}
+	where(middleParent : HSVNode2HLSNode | ) {
+		realize middleNode : HSVNode2HLSNode |
+		middleNode.parent := middleParent;
+		middleNode.hsv := hsvNode;
+		middleNode.name := hsvNode.name;
+		--middleNode.rgb := hsv2rgb(hsvNode.hsv);
+	}
+	map HSV2MiddleRecursion {		-- recursive call to visit children
+		hsvNode <= hsvNode.children;
+		middleParent := middleNode;
+	}
+}
+
+map Middle2HLSRoot in hsv2hls { -- Mapping root nodes M to R
+	enforce hls() {
+		realize hlsNode : HLSNode |
+	}
+	where(middleNode : HSVNode2HLSNode |) {
+		hlsNode.parent := null;
+		middleNode.hls := hlsNode;
+		hlsNode.name := middleNode.name;
+		--hlsNode.hls := rgb2hls(middleNode.rgb);
+	}
+	map Middle2HLSRecursion {		-- recursive call to visit children
+		middleNode <= middleNode.children;
+	}
+}
+
+map Middle2HLSRecursion in hsv2hls { -- Mapping child nodes M to R
+	enforce hls() {
+		realize hlsNode : HLSNode |
+	}
+	where(middleNode : HSVNode2HLSNode |) {
+		hlsNode.parent := middleNode.parent.hls;
+		middleNode.hls := hlsNode;
+		hlsNode.name := middleNode.name;
+		--hlsNode.hls := rgb2hls(middleNode.rgb);
+	}
+	map Middle2HLSRecursion {		-- recursive call to visit children
+		middleNode <= middleNode.children;
+	}
+}

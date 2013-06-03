@@ -19,7 +19,6 @@ import java.io.IOException;
 import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
-import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -31,7 +30,6 @@ public class LoadTests extends LoadTestCase
 		EssentialOCLLinkingService.DEBUG_RETRY = true;
 		super.setUp();
 		QVTcoreStandaloneSetup.doSetup();
-		QVTimperativeStandaloneSetup.doSetup();
 	}
 
 	public void testLoad_expressions_qvtc() throws IOException, InterruptedException {
@@ -57,12 +55,4 @@ public class LoadTests extends LoadTestCase
 	public void testLoad_HSV2HLS_qvtc() throws IOException, InterruptedException {
 		doLoad_Concrete("HSV2HLS", "qvtc");
 	}	
-
-	public void testLoad_HSV2HLS_qvti() throws IOException, InterruptedException {
-		doLoad_Concrete("HSV2HLS", "qvti");
-	}	
-
-//	public void testLoad_ClassToRDBMSSchedule_qvti() throws IOException, InterruptedException {
-//		doLoad_Concrete("ClassToRDBMSSchedule", "qvti");
-//	}	
 }

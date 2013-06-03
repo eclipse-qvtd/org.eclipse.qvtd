@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simplegraph:Graph
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:simplegraph="http://http://www.eclipse.org/qvt/examples/0.1/SimpleGraph"
+    xsi:schemaLocation="http://http://www.eclipse.org/qvt/examples/0.1/SimpleGraph SimpleGraph.ecore"
+    name="graphone">
+  <element xsi:type="simplegraph:Node"
+      label="york"/>
+  <element xsi:type="simplegraph:Node"
+      label="stansted"/>
+  <element xsi:type="simplegraph:Node"
+      label="munich"/>
+  <element xsi:type="simplegraph:Node"
+      label="innsbruck"/>
+  <element xsi:type="simplegraph:Node"
+      label="stuttgart"/>
+</simplegraph:Graph>
