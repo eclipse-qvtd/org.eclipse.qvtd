@@ -27,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
+import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -75,9 +76,23 @@ public class QVTiInterpreterTests extends LoadTestCase
 	        	TypedModel typedModel = entry.getKey();
 	        	Resource expectedModel = entry.getValue();
 	        	Resource actualModel = modelManager.getModel(typedModel);
-	            org.eclipse.ocl.examples.xtext.tests.XtextTestCase.assertSameModel(expectedModel, actualModel);
+	            assertSameModel(expectedModel, actualModel);
 	        }
 	    }
+	}
+	
+//	public static interface Normalizer {
+//		void denormalize();
+//	}
+	
+	public static void assertSameModel(Resource expectedResource, Resource actualResource) throws IOException, InterruptedException {
+//		Set<Normalizer> normalizations = normalize(expectedResource);
+		String expected = EmfFormatter.listToStr(expectedResource.getContents());
+		String actual = EmfFormatter.listToStr(actualResource.getContents());
+		assertEquals(expected, actual);
+//		for (Normalizer normalizer : normalizations) {
+//			normalizer.denormalize();
+//		}
 	}
 	
 	@Before
