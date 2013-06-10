@@ -1478,6 +1478,159 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_FUNCTION__REQUIRED = CGModelPackage.CG_OPERATION__REQUIRED;
 
 	/**
+	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__BOXED = CGModelPackage.CG_OPERATION__BOXED;
+
+	/**
+	 * The feature id for the '<em><b>Caught</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__CAUGHT = CGModelPackage.CG_OPERATION__CAUGHT;
+
+	/**
+	 * The feature id for the '<em><b>Constant</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__CONSTANT = CGModelPackage.CG_OPERATION__CONSTANT;
+
+	/**
+	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__DEPENDS_ON = CGModelPackage.CG_OPERATION__DEPENDS_ON;
+
+	/**
+	 * The feature id for the '<em><b>False</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__FALSE = CGModelPackage.CG_OPERATION__FALSE;
+
+	/**
+	 * The feature id for the '<em><b>Global</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__GLOBAL = CGModelPackage.CG_OPERATION__GLOBAL;
+
+	/**
+	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__INLINEABLE = CGModelPackage.CG_OPERATION__INLINEABLE;
+
+	/**
+	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__INVALID = CGModelPackage.CG_OPERATION__INVALID;
+
+	/**
+	 * The feature id for the '<em><b>Null</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__NULL = CGModelPackage.CG_OPERATION__NULL;
+
+	/**
+	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__NON_INVALID = CGModelPackage.CG_OPERATION__NON_INVALID;
+
+	/**
+	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__NON_NULL = CGModelPackage.CG_OPERATION__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__REFERRED_VALUED_ELEMENT = CGModelPackage.CG_OPERATION__REFERRED_VALUED_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Settable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__SETTABLE = CGModelPackage.CG_OPERATION__SETTABLE;
+
+	/**
+	 * The feature id for the '<em><b>True</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__TRUE = CGModelPackage.CG_OPERATION__TRUE;
+
+	/**
+	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__UNBOXED = CGModelPackage.CG_OPERATION__UNBOXED;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__VALUE = CGModelPackage.CG_OPERATION__VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__VALUE_NAME = CGModelPackage.CG_OPERATION__VALUE_NAME;
+
+	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1530,6 +1683,24 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_FUNCTION_FEATURE_COUNT = CGModelPackage.CG_OPERATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Set Non Invalid</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION___SET_NON_INVALID = CGModelPackage.CG_OPERATION___SET_NON_INVALID;
+
+	/**
+	 * The operation id for the '<em>Set Non Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION___SET_NON_NULL = CGModelPackage.CG_OPERATION___SET_NON_NULL;
 
 	/**
 	 * The number of operations of the '<em>CG Function</em>' class.

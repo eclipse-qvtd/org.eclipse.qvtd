@@ -37,9 +37,9 @@ public abstract class AbstractExtendingDelegatingQVTcoreBaseCSVisitor<R, C, D ex
 	extends AbstractDelegatingEssentialOCLCSVisitor<R, C, D>
 	implements QVTcoreBaseCSVisitor<R>
 {
-    protected AbstractExtendingDelegatingQVTcoreBaseCSVisitor(@NonNull D delegate, @NonNull C context) {
-        super(delegate, context);
-    }
+	protected AbstractExtendingDelegatingQVTcoreBaseCSVisitor(@NonNull D delegate, @NonNull C context) {
+		super(delegate, context);
+	}
 
 	@Override
 	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.xtext.base.util.VisitableCS visitable) {

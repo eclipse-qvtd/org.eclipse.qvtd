@@ -122,7 +122,6 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return javaSourceCode2;
 	}
 
-	@Override
 	public @NonNull QVTiAnalyzer getAnalyzer() {
 		return cgAnalyzer;
 	}

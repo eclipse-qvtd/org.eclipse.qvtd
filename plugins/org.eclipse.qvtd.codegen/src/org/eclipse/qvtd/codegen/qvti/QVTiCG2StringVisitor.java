@@ -43,12 +43,10 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 			CG2StringVisitor.addFactory(this);
 		}
 
-		@Override
 		public @NonNull CG2StringVisitor createToStringVisitor() {
 			return new QVTiCG2StringVisitor();
 		}
 
-		@Override
 		public @NonNull EPackage getEPackage() {
 			QVTiCGModelPackage eInstance = QVTiCGModelPackage.eINSTANCE;
 			assert eInstance != null;
@@ -60,45 +58,32 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 
 	protected QVTiCG2StringVisitor() {}
 
-	@Override
 	@Nullable
 	public String visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 
-	@Override
-	@Nullable
-	public String visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable object) {
+	public @Nullable String visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable object) {
 		return visitCGRealizedVariable(object);
 	}
 
-	@Override
-	@Nullable
-	public String visitCGFunction(@NonNull CGFunction object) {
+	public @Nullable String visitCGFunction(@NonNull CGFunction object) {
 		return visitCGOperation(object);
 	}
 
-	@Override
-	@Nullable
-	public String visitCGFunctionCallExp(@NonNull CGFunctionCallExp object) {
+	public @Nullable String visitCGFunctionCallExp(@NonNull CGFunctionCallExp object) {
 		return visitCGOperationCallExp(object);
 	}
 
-	@Override
-	@Nullable
-	public String visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
+	public @Nullable String visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
 		return visitCGParameter(object);
 	}
 
-	@Override
-	@Nullable
-	public String visitCGGuardVariable(@NonNull CGGuardVariable object) {
+	public @Nullable String visitCGGuardVariable(@NonNull CGGuardVariable object) {
 		return visitCGParameter(object);
 	}
 
-	@Override
-	@Nullable
-	public String visitCGMapping(@NonNull CGMapping cgMapping) {
+	public @Nullable String visitCGMapping(@NonNull CGMapping cgMapping) {
 		appendQualifiedName(cgMapping.getTransformation(), ".", cgMapping);
 		append("(");
 		boolean isFirst = true;
@@ -113,45 +98,31 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 		return null;
 	}
 
-	@Override
-	@Nullable
-	public String visitCGMappingCall(@NonNull CGMappingCall object) {
+	public @Nullable String visitCGMappingCall(@NonNull CGMappingCall object) {
 		return visitCGValuedElement(object);
 	}
 
-	@Override
-	@Nullable
-	public String visitCGMappingCallBinding(@NonNull CGMappingCallBinding object) {
+	public @Nullable String visitCGMappingCallBinding(@NonNull CGMappingCallBinding object) {
 		return visitCGValuedElement(object);
 	}
 
-	@Override
-	@Nullable
-	public String visitCGPredicate(@NonNull CGPredicate object) {
+	public @Nullable String visitCGPredicate(@NonNull CGPredicate object) {
 		return visitCGValuedElement(object);
 	}
 
-	@Override
-	@Nullable
-	public String visitCGPropertyAssignment(@NonNull CGPropertyAssignment object) {
+	public @Nullable String visitCGPropertyAssignment(@NonNull CGPropertyAssignment object) {
 		return visitCGValuedElement(object);
 	}
 
-	@Override
-	@Nullable
-	public String visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
+	public @Nullable String visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
 		return visitCGVariable(object);
 	}
 
-	@Override
-	@Nullable
-	public String visitCGTransformation(@NonNull CGTransformation object) {
+	public @Nullable String visitCGTransformation(@NonNull CGTransformation object) {
 		return visitCGClass(object);
 	}
 
-	@Override
-	@Nullable
-	public String visitCGTypedModel(@NonNull CGTypedModel object) {
+	public @Nullable String visitCGTypedModel(@NonNull CGTypedModel object) {
 		return visitCGNamedElement(object);
 	}
 }

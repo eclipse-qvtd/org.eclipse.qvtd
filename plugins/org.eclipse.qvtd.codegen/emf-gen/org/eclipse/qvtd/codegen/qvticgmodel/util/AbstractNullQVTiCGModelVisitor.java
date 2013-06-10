@@ -41,7 +41,7 @@ public abstract class AbstractNullQVTiCGModelVisitor<R, C>
 	 * @param context my initial result value
 	 */
 	protected AbstractNullQVTiCGModelVisitor(@NonNull C context) {
-	    super(context);
+		super(context);
 	}	
 
 	public @Nullable R visitCGEcorePropertyAssignment(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment object) {

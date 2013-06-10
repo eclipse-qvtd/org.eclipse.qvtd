@@ -27,10 +27,12 @@ package	org.eclipse.qvtd.xtext.qvtrelationcst.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-/**
+/*
+ * An AbstractQVTrelationCSVisitor provides a default implementation of the visitor framework
+ * but n implementations of the visitXXX methods..
  */
 public abstract class AbstractQVTrelationCSVisitor<R, C>
- extends org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractEssentialOCLCSVisitor<R, C>
+	extends org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractEssentialOCLCSVisitor<R, C>
 	implements QVTrelationCSVisitor<R>
 {
 	/**
@@ -39,6 +41,6 @@ public abstract class AbstractQVTrelationCSVisitor<R, C>
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTrelationCSVisitor(@NonNull C context) {
-	    super(context);
+		super(context);
 	}
 }

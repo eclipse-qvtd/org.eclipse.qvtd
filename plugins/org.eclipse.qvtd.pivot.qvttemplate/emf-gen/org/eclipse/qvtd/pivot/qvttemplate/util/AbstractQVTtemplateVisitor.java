@@ -27,10 +27,12 @@ package	org.eclipse.qvtd.pivot.qvttemplate.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-/**
+/*
+ * An AbstractQVTtemplateVisitor provides a default implementation of the visitor framework
+ * but n implementations of the visitXXX methods..
  */
 public abstract class AbstractQVTtemplateVisitor<R, C>
- extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractQVTbaseVisitor<R, C>
+	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractQVTbaseVisitor<R, C>
 	implements QVTtemplateVisitor<R>
 {
 	/**
@@ -39,6 +41,6 @@ public abstract class AbstractQVTtemplateVisitor<R, C>
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTtemplateVisitor(@NonNull C context) {
-	    super(context);
+		super(context);
 	}
 }

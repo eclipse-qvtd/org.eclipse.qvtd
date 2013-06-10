@@ -41,7 +41,7 @@ public abstract class AbstractNullQVTcoreBaseVisitor<R, C>
 	 * @param context my initial result value
 	 */
 	protected AbstractNullQVTcoreBaseVisitor(@NonNull C context) {
-	    super(context);
+		super(context);
 	}	
 
 	public @Nullable R visitAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.Assignment object) {

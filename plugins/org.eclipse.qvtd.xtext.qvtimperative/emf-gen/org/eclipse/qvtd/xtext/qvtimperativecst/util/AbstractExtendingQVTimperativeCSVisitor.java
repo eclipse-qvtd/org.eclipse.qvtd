@@ -45,7 +45,7 @@ public abstract class AbstractExtendingQVTimperativeCSVisitor<R, C>
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingQVTimperativeCSVisitor(@NonNull C context) {
-	    super(context);
+		super(context);
 	}	
 
 	public @Nullable R visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecst.MappingCS object) {

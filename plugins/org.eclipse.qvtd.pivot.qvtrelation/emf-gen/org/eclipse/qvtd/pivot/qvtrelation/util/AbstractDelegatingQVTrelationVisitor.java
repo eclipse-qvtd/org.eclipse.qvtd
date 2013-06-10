@@ -35,9 +35,9 @@ public abstract class AbstractDelegatingQVTrelationVisitor<R, C, D extends QVTre
 	extends org.eclipse.qvtd.pivot.qvttemplate.util.AbstractDelegatingQVTtemplateVisitor<R, C, D>
 	implements QVTrelationVisitor<R>
 {
-    protected AbstractDelegatingQVTrelationVisitor(@NonNull D delegate, @NonNull C context) {
-        super(delegate, context);
-    }
+	protected AbstractDelegatingQVTrelationVisitor(@NonNull D delegate, @NonNull C context) {
+		super(delegate, context);
+	}
 
 	@Override
 	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.pivot.util.Visitable visitable) {

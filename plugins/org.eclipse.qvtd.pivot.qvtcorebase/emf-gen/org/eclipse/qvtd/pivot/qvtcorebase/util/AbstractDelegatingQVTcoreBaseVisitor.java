@@ -35,9 +35,9 @@ public abstract class AbstractDelegatingQVTcoreBaseVisitor<R, C, D extends QVTco
 	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractDelegatingQVTbaseVisitor<R, C, D>
 	implements QVTcoreBaseVisitor<R>
 {
-    protected AbstractDelegatingQVTcoreBaseVisitor(@NonNull D delegate, @NonNull C context) {
-        super(delegate, context);
-    }
+	protected AbstractDelegatingQVTcoreBaseVisitor(@NonNull D delegate, @NonNull C context) {
+		super(delegate, context);
+	}
 
 	@Override
 	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.pivot.util.Visitable visitable) {

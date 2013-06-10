@@ -41,7 +41,7 @@ public abstract class AbstractNullQVTrelationCSVisitor<R, C>
 	 * @param context my initial result value
 	 */
 	protected AbstractNullQVTrelationCSVisitor(@NonNull C context) {
-	    super(context);
+		super(context);
 	}	
 
 	public @Nullable R visitAbstractDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcst.AbstractDomainCS object) {

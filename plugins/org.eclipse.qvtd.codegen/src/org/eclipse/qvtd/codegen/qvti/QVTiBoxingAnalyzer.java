@@ -40,24 +40,20 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 		super(analyzer);
 	}
 
-	@Override
 	public Object visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 
-	@Override
 	public Object visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable object) {
 		return visitCGRealizedVariable(object);
 	}
 
-	@Override
 	public Object visitCGFunction(@NonNull CGFunction cgFunction) {
 		visitCGOperation(cgFunction);
 		rewriteAsUnboxed(cgFunction.getBody());
 		return null;
 	}
 
-	@Override
 	public Object visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
 		visitCGOperationCallExp(cgFunctionCallExp);
 		for (CGValuedElement cgArgument : cgFunctionCallExp.getArguments()) {
@@ -66,52 +62,42 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 		return null;
 	}
 
-	@Override
 	public Object visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
 		return visitCGParameter(object);
 	}
 
-	@Override
 	public Object visitCGGuardVariable(@NonNull CGGuardVariable object) {
 		return visitCGParameter(object);
 	}
 
-	@Override
 	public Object visitCGMapping(@NonNull CGMapping cgMapping) {
 		return visitCGTypedElement(cgMapping);
 	}
 
-	@Override
 	public Object visitCGMappingCall(@NonNull CGMappingCall cgMappingCall) {
 		return visitCGValuedElement(cgMappingCall);
 	}
 
-	@Override
 	public Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
 		return visitCGValuedElement(cgMappingCallBinding);
 	}
 
-	@Override
 	public Object visitCGPredicate(@NonNull CGPredicate cgPredicate) {
 		return visitCGValuedElement(cgPredicate);
 	}
 
-	@Override
 	public Object visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
 		return visitCGValuedElement(cgPropertyAssignment);
 	}
 
-	@Override
 	public Object visitCGRealizedVariable(@NonNull CGRealizedVariable cgRealizedVariable) {
 		return visitCGVariable(cgRealizedVariable);
 	}
 
-	@Override
 	public Object visitCGTransformation(@NonNull CGTransformation cgTransformation) {
 		return visitCGClass(cgTransformation);
 	}
 
-	@Override
 	public Object visitCGTypedModel(@NonNull CGTypedModel object) {
 		return visitCGNamedElement(object);
 	}

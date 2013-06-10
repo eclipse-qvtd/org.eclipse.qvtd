@@ -125,7 +125,6 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		}
 		Collections.sort(pRealizedVariables, new Comparator<NamedElement>()
 			{
-				@Override
 				public int compare(NamedElement o1, NamedElement o2) {
 					return o1.getName().compareTo(o2.getName());
 				}		
@@ -165,7 +164,6 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		}
 		Collections.sort(pGuardVariables, new Comparator<NamedElement>()
 			{
-				@Override
 				public int compare(NamedElement o1, NamedElement o2) {
 					return o1.getName().compareTo(o2.getName());
 				}		
@@ -177,7 +175,6 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		}
 		Collections.sort(cgGuardVariables, new Comparator<CGGuardVariable>()
 		{
-			@Override
 			public int compare(CGGuardVariable o1, CGGuardVariable o2) {
 				String n1 = o1.getName();
 				String n2 = o2.getName();
@@ -252,42 +249,34 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		return DomainUtil.nonNullState(analyzer.getTypedModel(pTypedModel));
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitAssignment(@NonNull Assignment object) {
 		return visiting(object);
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitBaseModel(@NonNull BaseModel object) {
 		return visiting(object);
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitBottomPattern(@NonNull BottomPattern object) {
 		return visiting(object);
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitCoreDomain(@NonNull CoreDomain object) {
 		return visiting(object);
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitCorePattern(@NonNull CorePattern object) {
 		return visiting(object);
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitDomain(@NonNull Domain object) {
 		return visiting(object);
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitEnforcementOperation(@NonNull EnforcementOperation object) {
 		return visiting(object);
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitFunction(@NonNull Function pFunction) {
 		CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
 		setPivot(cgFunction, pFunction);
@@ -313,22 +302,18 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		return cgFunction;
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitFunctionParameter(@NonNull FunctionParameter pFunctionParameter) {
 		return getFunctionParameter(pFunctionParameter);
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitGuardPattern(@NonNull GuardPattern object) {
 		return visiting(object);
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitImperativeModel(@NonNull ImperativeModel object) {
 		return visiting(object);
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitMapping(@NonNull Mapping pMapping) {
 		CGMapping cgMapping = QVTiCGModelFactory.eINSTANCE.createCGMapping();
 		setPivot(cgMapping, pMapping);
@@ -339,7 +324,6 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		return cgMapping;
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitMappingCall(@NonNull MappingCall pMappingCall) {
 		CGMappingCall cgMappingCall = QVTiCGModelFactory.eINSTANCE.createCGMappingCall();
 		setPivot(cgMappingCall, pMappingCall);
@@ -350,7 +334,6 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		}
 		Collections.sort(cgMappingCallBindings, new Comparator<CGMappingCallBinding>()
 		{
-			@Override
 			public int compare(CGMappingCallBinding o1, CGMappingCallBinding o2) {
 				String n1 = o1.getName();
 				String n2 = o2.getName();
@@ -361,7 +344,6 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		return cgMappingCall;
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitMappingCallBinding(@NonNull MappingCallBinding pMappingCallBinding) {
 		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
 //		setPivot(cgMappingCallBinding, pMappingCallBinding);
@@ -394,12 +376,10 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		}
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitPattern(@NonNull Pattern object) {
 		return visiting(object);
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitPredicate(@NonNull Predicate pPredicate) {
 		CGPredicate cgPredicate = QVTiCGModelFactory.eINSTANCE.createCGPredicate();
 //		setPivot(cgPredicate, pPredicate);
@@ -410,7 +390,6 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		return cgPredicate;
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitPropertyAssignment(@NonNull PropertyAssignment pPropertyAssignment) {
 		Property pivotProperty = DomainUtil.nonNullModel(pPropertyAssignment.getTargetProperty());
 		LibraryProperty libraryProperty = metaModelManager.getImplementation(pivotProperty);
@@ -440,22 +419,18 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		return cgPropertyAssignment;
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitRealizedVariable(@NonNull RealizedVariable object) {
 		return visiting(object);
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitRule(@NonNull Rule object) {
 		return visiting(object);
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitVariableAssignment(@NonNull VariableAssignment object) {
 		return visiting(object);
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitTransformation(@NonNull Transformation element) {
 		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
 		setPivot(cgTransformation, element);
@@ -476,7 +451,6 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		return cgTransformation;
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitTypedModel(@NonNull TypedModel pTypedModel) {
 		CGTypedModel cgTypedModel = QVTiCGModelFactory.eINSTANCE.createCGTypedModel();
 		setPivot(cgTypedModel, pTypedModel);
@@ -484,7 +458,6 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		return cgTypedModel;
 	}
 
-	@Override
 	public @Nullable CGNamedElement visitUnit(@NonNull Unit object) {
 		return visiting(object);
 	}

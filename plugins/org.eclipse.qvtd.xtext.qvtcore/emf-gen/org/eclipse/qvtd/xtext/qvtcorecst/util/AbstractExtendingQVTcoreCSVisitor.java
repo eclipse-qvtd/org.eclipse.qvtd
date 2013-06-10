@@ -45,7 +45,7 @@ public abstract class AbstractExtendingQVTcoreCSVisitor<R, C>
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingQVTcoreCSVisitor(@NonNull C context) {
-	    super(context);
+		super(context);
 	}	
 
 	public @Nullable R visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecst.MappingCS object) {

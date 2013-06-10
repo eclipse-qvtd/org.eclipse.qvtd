@@ -45,7 +45,7 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingQVTimperativeVisitor(@NonNull C context) {
-	    super(context);
+		super(context);
 	}	
 
 	public @Nullable R visitImperativeModel(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel object) {

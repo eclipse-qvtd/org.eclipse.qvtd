@@ -35,9 +35,9 @@ public abstract class AbstractDelegatingQVTtemplateVisitor<R, C, D extends QVTte
 	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractDelegatingQVTbaseVisitor<R, C, D>
 	implements QVTtemplateVisitor<R>
 {
-    protected AbstractDelegatingQVTtemplateVisitor(@NonNull D delegate, @NonNull C context) {
-        super(delegate, context);
-    }
+	protected AbstractDelegatingQVTtemplateVisitor(@NonNull D delegate, @NonNull C context) {
+		super(delegate, context);
+	}
 
 	@Override
 	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.pivot.util.Visitable visitable) {

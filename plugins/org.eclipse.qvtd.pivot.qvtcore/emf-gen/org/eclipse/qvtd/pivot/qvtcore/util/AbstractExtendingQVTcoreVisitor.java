@@ -45,7 +45,7 @@ public abstract class AbstractExtendingQVTcoreVisitor<R, C>
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingQVTcoreVisitor(@NonNull C context) {
-	    super(context);
+		super(context);
 	}	
 
 	public @Nullable R visitCoreModel(@NonNull org.eclipse.qvtd.pivot.qvtcore.CoreModel object) {

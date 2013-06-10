@@ -41,6 +41,8 @@ import org.eclipse.ocl.examples.codegen.java.JavaDependencyVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.examples.domain.evaluation.AbstractTransformation;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -245,17 +247,15 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		return (QVTiGlobalContext) globalContext;
 	}
 
-	protected @NonNull QVTiLocalContext getLocalContext() {
+	protected @Nullable QVTiLocalContext getLocalContext() {
 		return (QVTiLocalContext) localContext;
 	}
 
-	@Override
-	@Nullable
-	public Object visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment cgPropertyAssignment) {
+	public @Nullable Object visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment cgPropertyAssignment) {
 //		Property pivotProperty = cgPropertyCallExp.getReferredProperty();
 //		CGTypeId cgTypeId = analyzer.getTypeId(pivotProperty.getOwningType().getTypeId());
 //		JavaTypeDescriptor requiredTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId, false);
-		EStructuralFeature eStructuralFeature = cgPropertyAssignment.getEStructuralFeature();
+		EStructuralFeature eStructuralFeature = DomainUtil.nonNullModel(cgPropertyAssignment.getEStructuralFeature());
 		CGValuedElement cgSlot = getExpression(cgPropertyAssignment.getSlotValue());
 		String setAccessor = genModelHelper.getSetAccessor(eStructuralFeature);
 		CGValuedElement cgInit = getExpression(cgPropertyAssignment.getInitValue());
@@ -275,12 +275,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		return null;
 	}
 
-	@Override
-	@Nullable
-	public Object visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable cgRealizedVariable) {
+	public @Nullable Object visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable cgRealizedVariable) {
 		EClassifier eClassifier = cgRealizedVariable.getEClassifier();
 		EPackage ePackage = eClassifier.getEPackage();
-		String javaClass = genModelHelper.getQualifiedFactoryInterfaceName(ePackage);
+		String javaClass = ePackage != null ? genModelHelper.getQualifiedFactoryInterfaceName(ePackage) : null;
 		//
 		js.appendDeclaration(cgRealizedVariable);
 		js.append(" = ");
@@ -294,9 +292,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		return null;
 	}
 
-	@Override
-	@Nullable
-	public Object visitCGFunction(@NonNull CGFunction cgFunction) {
+	public @Nullable Object visitCGFunction(@NonNull CGFunction cgFunction) {
 		JavaLocalContext localContext2 = globalContext.getLocalContext(cgFunction);
 		if (localContext2 != null) {
 			localContext = localContext2;
@@ -309,9 +305,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		//		js.append(" ");
 		//		js.appendIsCaught(!cgOperation.isInvalid(), cgOperation.isInvalid());
 				js.append(" ");
-//				CGTypeId cgTypeId = cgFunction.getTypeId();
-				TypeDescriptor javaTypeDescriptor = context.getTypeDescriptor(cgFunction.getTypeId().getElementId(), false);
-				js.appendClassReference(javaTypeDescriptor);
+				ElementId elementId = cgFunction.getTypeId().getElementId();
+				if (elementId != null) {
+					TypeDescriptor javaTypeDescriptor = context.getTypeDescriptor(elementId, false);
+					js.appendClassReference(javaTypeDescriptor);
+				}
 				js.append(" ");
 				js.append(cgFunction.getName());
 				js.append("(");
@@ -360,9 +358,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		return null;
 	}
 
-	@Override
-	@Nullable
-	public Object visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
+	public @Nullable Object visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
 		Operation pOperation = cgFunctionCallExp.getReferredOperation();
 		List<CGValuedElement> cgArguments = cgFunctionCallExp.getArguments();
 		List<Parameter> pParameters = pOperation.getOwnedParameter();
@@ -392,19 +388,14 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		return null;
 	}
 
-	@Override
-	@Nullable
-	public Object visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
+	public @Nullable Object visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
 		return visitCGParameter(object);
 	}
 
-	@Override
-	@Nullable
-	public Object visitCGGuardVariable(@NonNull CGGuardVariable object) {
+	public @Nullable Object visitCGGuardVariable(@NonNull CGGuardVariable object) {
 		return visitCGParameter(object);
 	}
 
-	@Override
 	public @Nullable Object visitCGMapping(@NonNull CGMapping cgMapping) {
 		JavaLocalContext localContext2 = globalContext.getLocalContext(cgMapping);
 		if (localContext2 != null) {
@@ -461,19 +452,24 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		return null;
 	}
 
-	@Override
 	public @Nullable Object visitCGMappingCall(@NonNull CGMappingCall cgMappingCall) {
 		MappingCall pMappingCall = (MappingCall) cgMappingCall.getPivot();
 		Mapping pReferredMapping = pMappingCall.getReferredMapping();
+		if (pReferredMapping == null) {
+			return null;
+		}
 		CGMapping cgReferredMapping = analyzer.getMapping(pReferredMapping);
 		if (cgReferredMapping == null) {
 			return null;
 		}
 		List<CGMappingCallBinding> cgMappingCallBindings = cgMappingCall.getMappingCallBindings();
-		for (CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
-			js.appendLocalStatements(cgMappingCallBinding.getValueOrValues());
+		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+			CGValuedElement valueOrValues = cgMappingCallBinding.getValueOrValues();
+			if (valueOrValues != null) {
+				js.appendLocalStatements(valueOrValues);
+			}
 		}
-		for (CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
 			if (cgMappingCallBinding.isLoop()) {
 				js.append("for (");
 				js.appendClassReference(cgMappingCallBinding);
@@ -500,7 +496,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 			isFirst = false;
 		}
 		js.append(");\n");
-		for (CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
 			if (cgMappingCallBinding.isLoop()) {
 				js.popIndentation();
 				js.append("}\n");
@@ -509,15 +505,15 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		return null;
 	}
 
-	@Override
 	public @Nullable Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding object) {
 		return null;
 	}
 
-	@Override
 	public @Nullable Object visitCGPredicate(@NonNull CGPredicate cgPredicate) {
 		CGValuedElement cgConditionExpression = cgPredicate.getConditionExpression();
-		js.appendLocalStatements(cgConditionExpression);
+		if (cgConditionExpression != null) {
+			js.appendLocalStatements(cgConditionExpression);
+		}
 		js.append("if (");
 		js.appendValueName(cgConditionExpression);
 		js.append(" != ");
@@ -530,29 +526,33 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		return null;
 	}
 
-	@Override
 	public @Nullable Object visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
-		CGExecutorProperty cgExecutorProperty = localContext.getExecutorProperty(cgPropertyAssignment.getReferredProperty());
-		js.appendLocalStatements(cgPropertyAssignment.getInitValue());
-		js.appendValueName(cgExecutorProperty);
-		js.append(".initValue(");
-		js.appendValueName(cgPropertyAssignment.getInitValue());
-		js.append(");\n");
+		Property pReferredProperty = DomainUtil.nonNullModel(cgPropertyAssignment.getReferredProperty());
+		CGExecutorProperty cgExecutorProperty = localContext.getExecutorProperty(pReferredProperty);
+		CGValuedElement initValue = cgPropertyAssignment.getInitValue();
+		if (initValue != null) {
+			js.appendLocalStatements(initValue);
+			js.appendValueName(cgExecutorProperty);
+			js.append(".initValue(");
+			js.appendValueName(initValue);
+			js.append(");\n");
+		}
 		return null;
 	}
 
-	@Override
 	public @Nullable Object visitCGRealizedVariable(@NonNull CGRealizedVariable cgRealizedVariable) {
-		js.appendDeclaration(cgRealizedVariable);
-		js.append(" = ");
-		js.appendReferenceTo(localContext.getExecutorType(cgRealizedVariable.getPivotTypeId()));
-		js.append(".createInstance();\n");
+		TypeId typeId = cgRealizedVariable.getPivotTypeId();
+		if (typeId != null) {
+			js.appendDeclaration(cgRealizedVariable);
+			js.append(" = ");
+			js.appendReferenceTo(localContext.getExecutorType(typeId));
+			js.append(".createInstance();\n");
+		}
 		//
 		doAddRealization(cgRealizedVariable);
 		return null;
 	}
 
-	@Override
 	public @Nullable Object visitCGTransformation(@NonNull CGTransformation cgTransformation) {		
 		String className = cgTransformation.getName();
 		js.append("/**\n");
@@ -590,9 +590,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		return null;
 	}
 
-	@Override
-	@Nullable
-	public Object visitCGTypedModel(@NonNull CGTypedModel object) {
+	public @Nullable Object visitCGTypedModel(@NonNull CGTypedModel object) {
 		return null;
 	}
 }

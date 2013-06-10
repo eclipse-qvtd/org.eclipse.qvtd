@@ -27,10 +27,12 @@ package	org.eclipse.qvtd.codegen.qvticgmodel.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-/**
+/*
+ * An AbstractQVTiCGModelVisitor provides a default implementation of the visitor framework
+ * but n implementations of the visitXXX methods..
  */
 public abstract class AbstractQVTiCGModelVisitor<R, C>
- extends org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractCGModelVisitor<R, C>
+	extends org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractCGModelVisitor<R, C>
 	implements QVTiCGModelVisitor<R>
 {
 	/**
@@ -39,6 +41,6 @@ public abstract class AbstractQVTiCGModelVisitor<R, C>
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTiCGModelVisitor(@NonNull C context) {
-	    super(context);
+		super(context);
 	}
 }

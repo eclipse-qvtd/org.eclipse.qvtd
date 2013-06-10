@@ -41,7 +41,7 @@ public abstract class AbstractNullQVTtemplateVisitor<R, C>
 	 * @param context my initial result value
 	 */
 	protected AbstractNullQVTtemplateVisitor(@NonNull C context) {
-	    super(context);
+		super(context);
 	}	
 
 	public @Nullable R visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {

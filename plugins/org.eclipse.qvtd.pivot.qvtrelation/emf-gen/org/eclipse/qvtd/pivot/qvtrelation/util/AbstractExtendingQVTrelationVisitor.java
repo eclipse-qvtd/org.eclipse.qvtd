@@ -45,7 +45,7 @@ public abstract class AbstractExtendingQVTrelationVisitor<R, C>
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingQVTrelationVisitor(@NonNull C context) {
-	    super(context);
+		super(context);
 	}	
 
 	public @Nullable R visitDomainPattern(@NonNull org.eclipse.qvtd.pivot.qvtrelation.DomainPattern object) {
