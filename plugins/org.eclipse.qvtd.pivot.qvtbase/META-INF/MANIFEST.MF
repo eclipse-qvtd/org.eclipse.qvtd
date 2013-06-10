@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.pivot.qvtbase;singleton:=true
-Bundle-Version: 0.10.0.qualifier
+Bundle-Version: 0.11.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -14,5 +14,5 @@ Export-Package: org.eclipse.qvtd.pivot.qvtbase,
  org.eclipse.qvtd.pivot.qvtbase.util,
  org.eclipse.qvtd.pivot.qvtbase.utilities
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
- org.eclipse.ocl.examples.pivot;bundle-version="[3.3.0,4.0.0)";visibility:=reexport
+ org.eclipse.ocl.examples.pivot;visibility:=reexport
 Import-Package: com.google.inject

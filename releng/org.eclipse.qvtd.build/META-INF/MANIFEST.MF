@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.build;singleton:=true
-Bundle-Version: 0.10.0.qualifier
+Bundle-Version: 0.11.0.qualifier
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext,
@@ -29,7 +29,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.qvtd.xtext.qvtcore;visibility:=reexport,
  org.eclipse.qvtd.xtext.qvtimperative;visibility:=reexport,
  org.eclipse.qvtd.xtext.qvtrelation;visibility:=reexport,
- org.eclipse.qvtd.codegen;bundle-version="0.10.0"
+ org.eclipse.qvtd.codegen
 Import-Package: org.apache.commons.logging,
  org.apache.log4j
 Bundle-Vendor: %providerName
