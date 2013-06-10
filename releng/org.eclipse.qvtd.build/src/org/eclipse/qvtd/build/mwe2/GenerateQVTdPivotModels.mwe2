@@ -19,13 +19,12 @@
 module GenerateQVTdPivotModels
 
 import org.eclipse.ocl.examples.build.utilities.*
-import org.eclipse.ocl.examples.build.extenders.utilities.*
+import org.eclipse.ocl.examples.build.xtend.*
 import org.eclipse.qvtd.build.utilities.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
 
 var emf.gen.suffix = "emf-gen"
-var plugins.prefix = "/../plugins"
 var util.suffix = "util"
 
 var pivot.path = "org.eclipse.ocl.examples.pivot"
@@ -112,7 +111,7 @@ Workflow {
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/${qvtrelation.path}/model/${QVTrelation}.genmodel"
     }
-    component = DerivedModelVisitorCodeGenerator { resourceSet = resourceSet
+    component = GeneratePivotVisitors { resourceSet = resourceSet
     	projectName = "${qvtbase.path}"
     	genModelFile = "model/${QVTbase}.genmodel"
     	javaFolder = "${emf.gen.suffix}"
@@ -124,7 +123,7 @@ Workflow {
     	visitablePackageName = "${pivot.path}.${util.suffix}"
     	visitableClassName = "${Visitable}"
     }
-    component = DerivedModelVisitorCodeGenerator { resourceSet = resourceSet
+    component = GeneratePivotVisitors { resourceSet = resourceSet
     	projectName = "${qvtcorebase.path}"
     	genModelFile = "model/${QVTcoreBase}.genmodel"
     	javaFolder = "${emf.gen.suffix}"
@@ -136,7 +135,7 @@ Workflow {
     	visitablePackageName = "${pivot.path}.${util.suffix}"
     	visitableClassName = "${Visitable}"
     }
-    component = DerivedModelVisitorCodeGenerator { resourceSet = resourceSet
+    component = GeneratePivotVisitors { resourceSet = resourceSet
     	projectName = "${qvtcore.path}"
     	genModelFile = "model/${QVTcore}.genmodel"
     	javaFolder = "${emf.gen.suffix}"
@@ -148,7 +147,7 @@ Workflow {
     	visitablePackageName = "${pivot.path}.${util.suffix}"
     	visitableClassName = "${Visitable}"
     }
-     component = DerivedModelVisitorCodeGenerator { resourceSet = resourceSet
+     component = GeneratePivotVisitors { resourceSet = resourceSet
     	projectName = "${qvtimperative.path}"
     	genModelFile = "model/${QVTimperative}.genmodel"
     	javaFolder = "${emf.gen.suffix}"
@@ -173,7 +172,7 @@ Workflow {
     	derivedVisitorInterfaceName = "${QVTimperative}${Visitor}"
     	derivedVisitorInterfaceQualifiedName = "${qvtimperative.path}.${util.suffix}.QVTOperationalVisitor"
     } */
-    component = DerivedModelVisitorCodeGenerator { resourceSet = resourceSet
+    component = GeneratePivotVisitors { resourceSet = resourceSet
     	projectName = "${qvttemplate.path}"
     	genModelFile = "model/${QVTtemplate}.genmodel"
     	javaFolder = "${emf.gen.suffix}"
@@ -185,7 +184,7 @@ Workflow {
     	visitablePackageName = "${pivot.path}.${util.suffix}"
     	visitableClassName = "${Visitable}"
     }
-    component = DerivedModelVisitorCodeGenerator { resourceSet = resourceSet
+    component = GeneratePivotVisitors { resourceSet = resourceSet
     	projectName = "${qvtrelation.path}"
     	genModelFile = "model/${QVTrelation}.genmodel"
     	javaFolder = "${emf.gen.suffix}"

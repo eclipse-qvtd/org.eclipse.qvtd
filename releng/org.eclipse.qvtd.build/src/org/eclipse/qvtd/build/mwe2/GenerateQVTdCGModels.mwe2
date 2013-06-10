@@ -19,6 +19,7 @@
 module GenerateQVTdXtextModels
 
 import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.ocl.examples.build.xtend.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
@@ -51,7 +52,7 @@ Workflow {
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.codegen/model/qvticgmodel.genmodel" 	
     }
-    component = DerivedCGModelVisitorCodeGenerator { resourceSet = resourceSet
+    component = GenerateCGVisitors { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.codegen"
     	genModelFile = "model/qvticgmodel.genmodel"
     	javaFolder = "emf-gen"
