@@ -146,7 +146,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         testEvaluator.dispose();
     }
 
-/*    @Test
+    @Test
     public void testClassToRDBMS() throws Exception {
     	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "ClassToRDBMS", "ClassToRDBMSSchedule.qvti");
     	testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
@@ -154,5 +154,5 @@ public class QVTiInterpreterTests extends LoadTestCase
         //testEvaluator.loadReference("rdbms", "SimpleRDBMSPeopleValidate.xmi");
         testEvaluator.test();
         testEvaluator.dispose();
-    } */
+    }
 }

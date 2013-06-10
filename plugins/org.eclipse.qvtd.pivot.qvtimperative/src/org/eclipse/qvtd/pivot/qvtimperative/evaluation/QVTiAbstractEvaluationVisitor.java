@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -51,6 +52,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
  * QVTimperativeAbstractEvaluationVisitor is the class for ...
@@ -156,6 +158,20 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
         }
         return true;
     }
+
+    protected boolean isMiddle(@Nullable Type areaType, @NonNull Element txElement) {
+    	if (areaType != null) {
+    		org.eclipse.ocl.examples.pivot.Package areaPackage = areaType.getPackage();
+    		Transformation transformation = QVTimperativeUtil.getContainingTransformation(txElement);
+    		if (transformation != null) {
+    			TypedModel middleModel = transformation.getModelParameter(null);
+    			if (middleModel.getUsedPackage().contains(areaPackage)) {
+    				return true;
+    			}
+    		}
+    	}
+		return false;
+	}
     
     protected boolean isMtoMMapping(@NonNull Mapping mapping) {
         if (mapping.getDomain().size() == 0) {
@@ -333,6 +349,10 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
                         // Unbox to asign to ecore type
                         value = metaModelManager.getIdResolver().unboxedValueOf(value);
                         Property p = propertyAssignment.getTargetProperty();
+                        Property pOpposite = p.getOpposite();
+						if ((pOpposite != null) && pOpposite.isImplicit() && isMiddle(p.getOwningType(), propertyAssignment)) {
+                			getModelManager().setMiddleOpposite(p, slotBinding, value);
+                        }
                         p.initValue(slotBinding, value);
                     } else {
                         throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
@@ -353,7 +373,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
         return true;
     }
 
-    /*
+	/*
      * (non-Javadoc)
      * 
      * @see
@@ -373,11 +393,11 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
         }
         ((QVTiModelManager)modelManager).addModelElement(tm, element);
         // Add the realize variable binding to the environment
-        try {
-            evaluationEnvironment.add(realizedVariable, element);
-        } catch (IllegalArgumentException ex) {
+//        try {
+//            evaluationEnvironment.add(realizedVariable, element);
+//        } catch (IllegalArgumentException ex) {
             evaluationEnvironment.replace(realizedVariable, element);
-        }
+//        }
         return element;
     }
 

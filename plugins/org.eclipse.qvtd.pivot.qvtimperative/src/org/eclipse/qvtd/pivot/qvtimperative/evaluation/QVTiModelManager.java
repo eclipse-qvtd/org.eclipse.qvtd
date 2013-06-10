@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -55,6 +56,12 @@ public class QVTiModelManager implements DomainModelManager
 	private Map<TypedModel, Resource> modelResourceMap = new HashMap<TypedModel, Resource>();
 	
 	private Map<TypedModel, EList<EObject>> modelElementsMap = new HashMap<TypedModel, EList<EObject>>();
+
+	/**
+	 * Cache of the unnavigable opposites of the navigable middle to outer properties. The outer
+	 * index provides the middle2outerProperty cache of outerObject to middleObject.
+	 */
+	private Map<Property, Map<Object, Object>> middleOpposites = new HashMap<Property, Map<Object, Object>>();
 	
 	/**
 	 * Instantiates a new QVTc Domain Manager. Responsible for creating new
@@ -265,6 +272,29 @@ public class QVTiModelManager implements DomainModelManager
 		}
 	    return (objectType != null) && objectType.conformsTo(metaModelManager, requiredType);
 	}
+	
+	/**
+	 * Retrieve the unnavigable opposite of the middle2outerProperty of outerObject.
+	 */
+	public Object getMiddleOpposite(@NonNull Property middle2outerProperty, @NonNull Object outerObject) {
+		Map<Object, Object> outside2middle = middleOpposites.get(middle2outerProperty);
+		if (outside2middle == null) {
+			return null;
+		}
+		else {
+			return outside2middle.get(outerObject);
+		}
+	}
 
-
+	/**
+	 * Register middleObject as the unnavigable opposite of the middle2outerProperty of outerObject.
+	 */
+	public void setMiddleOpposite(@NonNull Property middle2outerProperty, @NonNull Object middleObject, Object outerObject) {
+		Map<Object, Object> outer2middle = middleOpposites.get(middle2outerProperty);
+		if (outer2middle == null) {
+			outer2middle = new HashMap<Object, Object>();
+			middleOpposites.put(middle2outerProperty, outer2middle);
+		}
+		outer2middle.put(outerObject, middleObject);
+	}
 }
