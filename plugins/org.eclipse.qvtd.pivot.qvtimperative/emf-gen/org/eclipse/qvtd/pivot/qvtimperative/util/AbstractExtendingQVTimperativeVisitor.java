@@ -63,4 +63,12 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	public @Nullable R visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding object) {
 		return visitElement(object);
 	}
+
+	public @Nullable R visitMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment object) {
+		return visitPropertyAssignment(object);
+	}
+
+	public @Nullable R visitMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp object) {
+		return visitPropertyCallExp(object);
+	}
 }

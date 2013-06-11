@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.qvtd.pivot.qvtimperative.*;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -74,6 +75,8 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case QVTimperativePackage.MAPPING: return createMapping();
 			case QVTimperativePackage.MAPPING_CALL: return createMappingCall();
 			case QVTimperativePackage.MAPPING_CALL_BINDING: return createMappingCallBinding();
+			case QVTimperativePackage.MIDDLE_PROPERTY_ASSIGNMENT: return createMiddlePropertyAssignment();
+			case QVTimperativePackage.MIDDLE_PROPERTY_CALL_EXP: return createMiddlePropertyCallExp();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -117,6 +120,26 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public MappingCallBinding createMappingCallBinding() {
 		MappingCallBindingImpl mappingCallBinding = new MappingCallBindingImpl();
 		return mappingCallBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MiddlePropertyAssignment createMiddlePropertyAssignment() {
+		MiddlePropertyAssignmentImpl middlePropertyAssignment = new MiddlePropertyAssignmentImpl();
+		return middlePropertyAssignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MiddlePropertyCallExp createMiddlePropertyCallExp() {
+		MiddlePropertyCallExpImpl middlePropertyCallExp = new MiddlePropertyCallExpImpl();
+		return middlePropertyCallExp;
 	}
 
 	/**

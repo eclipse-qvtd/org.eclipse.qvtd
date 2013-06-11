@@ -83,6 +83,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimperativeVisitor<CGNamedElement>
@@ -353,6 +355,14 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		cgMappingCallBinding.setTypeId(analyzer.getTypeId(pMappingCallBinding.getBoundVariable().getTypeId()));
 //		cgMappingCallBinding.setValueName(localnamepMappingCallBinding.getBoundVariable().getName());
 		return cgMappingCallBinding;
+	}
+
+	public @Nullable CGNamedElement visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment pPropertyAssignment) {
+		return visitPropertyAssignment(pPropertyAssignment);
+	}
+
+	public @Nullable CGNamedElement visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp pPropertyCallExp) {
+		return visitPropertyCallExp(pPropertyCallExp);
 	}
 
 	@Override

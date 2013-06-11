@@ -28,6 +28,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 
 public class QVTiTracingEvaluationVisitor extends QVTiEvaluationVisitorDecorator
 {
@@ -53,7 +55,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiEvaluationVisitorDecorator
 	public @NonNull QVTiEvaluationVisitor createNestedLMVisitor() {
 		System.out.println("(Creating nested LM Visitor)");
 		QVTiTracingEvaluationVisitor decorator = new QVTiTracingEvaluationVisitor(
-				((QVTiEvaluationVisitor)delegate).createNestedLMVisitor());
+				delegate.createNestedLMVisitor());
 		return decorator;
 	}
 
@@ -61,7 +63,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiEvaluationVisitorDecorator
 	public @NonNull QVTiEvaluationVisitor createNestedMMVisitor() {
 		System.out.println("(Creating nested MM Visitor)");
 		QVTiTracingEvaluationVisitor decorator = new QVTiTracingEvaluationVisitor(
-				((QVTiEvaluationVisitor)delegate).createNestedMMVisitor());
+				delegate.createNestedMMVisitor());
 		return decorator;
 	}
 
@@ -69,7 +71,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiEvaluationVisitorDecorator
 	public @NonNull QVTiEvaluationVisitor createNestedMRVisitor() {
 		System.out.println("(Creating nested MR Visitor)");
 		QVTiTracingEvaluationVisitor decorator = new QVTiTracingEvaluationVisitor(
-				((QVTiEvaluationVisitor)delegate).createNestedMRVisitor());
+				delegate.createNestedMRVisitor());
 		return decorator;
 	}
 	
@@ -95,7 +97,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiEvaluationVisitorDecorator
 			System.out.println(getIndent() + "Visiting Mapping BottomPattern");
 		}
 		indentLevel++;
-		Object result = ((QVTiEvaluationVisitor)delegate).visitBottomPattern(bottomPattern);
+		Object result = delegate.visitBottomPattern(bottomPattern);
 		for (Variable v : bottomPattern.getVariable()) {
 			System.out.println(getIndent() + "Variable " + v.getName() + ": " + delegate.getEvaluationEnvironment().getValueOf(v));
 		}
@@ -113,7 +115,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiEvaluationVisitorDecorator
     public @Nullable Object visitCoreDomain(@NonNull CoreDomain coreDomain) {
 		System.out.println(getIndent() + "CoreDomain " + coreDomain.getName());
 		indentLevel++;
-		Object result = ((QVTiEvaluationVisitor)delegate).visitCoreDomain(coreDomain);
+		Object result = delegate.visitCoreDomain(coreDomain);
 		indentLevel--;
     	return result;
     }
@@ -127,7 +129,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiEvaluationVisitorDecorator
 			System.out.println(getIndent() + "Visiting Mapping GuardPattern");
 		}
 		indentLevel++;
-		Object result = ((QVTiEvaluationVisitor)delegate).visitGuardPattern(guardPattern);
+		Object result = delegate.visitGuardPattern(guardPattern);
 		// Variables are assigned after visit
 		for (Variable v : guardPattern.getVariable()) {
 			System.out.println(getIndent() + "Variable " + v.getName() + ": " + delegate.getEvaluationEnvironment().getValueOf(v));
@@ -143,7 +145,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiEvaluationVisitorDecorator
 	
 	@Override
     public @Nullable Object visitImperativeModel(@NonNull ImperativeModel imperativeModel) {
-		return ((QVTiEvaluationVisitor)delegate).visitImperativeModel(imperativeModel);
+		return delegate.visitImperativeModel(imperativeModel);
 	}
 	
 	@Override
@@ -155,7 +157,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiEvaluationVisitorDecorator
 	public @Nullable Object visitMapping(@NonNull Mapping mapping) {
 		System.out.println(getIndent() + "Mapping " + mapping.getName());
 		indentLevel++;
-		Object result = ((QVTiEvaluationVisitor)delegate).visitMapping(mapping);
+		Object result = delegate.visitMapping(mapping);
 		indentLevel--;
 		return result;
 	}
@@ -169,18 +171,31 @@ public class QVTiTracingEvaluationVisitor extends QVTiEvaluationVisitorDecorator
 			Variable boundVariable = binding.getBoundVariable();
 			System.out.println(getIndent() + boundVariable.getName() + ": " +  safePrint(binding.getValue()));
     	}
-		Object result = ((QVTiEvaluationVisitor)delegate).visitMappingCall(mappingCall);
+		Object result = delegate.visitMappingCall(mappingCall);
 		indentLevel--;
 		return result;
 	}
 
+
+	public Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment propertyAssignment) {
+		System.out.println(getIndent() + "visitMiddlePropertyAssignment " + propertyAssignment.getSlotExpression()
+			+ ": " + propertyAssignment.getTargetProperty().getName());
+	indentLevel++;
+	Object result = delegate.visitPropertyAssignment(propertyAssignment);
+	indentLevel--;
+	return result;
+	}
+
+	public Object visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp callExp) {
+        return delegate.visitMiddlePropertyCallExp(callExp);
+	}
 	
 	@Override
 	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
 		System.out.println(getIndent() + "visitAssignment " + propertyAssignment.getSlotExpression()
 				+ ": " + propertyAssignment.getTargetProperty().getName());
 		indentLevel++;
-		Object result = ((QVTiEvaluationVisitor)delegate).visitPropertyAssignment(propertyAssignment);
+		Object result = delegate.visitPropertyAssignment(propertyAssignment);
 		indentLevel--;
 		return result;
     }
@@ -190,7 +205,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiEvaluationVisitorDecorator
 		System.out.println("\n");
 		System.out.println("---- Transformation " + transformation.getName() + " ----");
 		indentLevel++;
-		Object result = ((QVTiEvaluationVisitor)delegate).visitTransformation(transformation);
+		Object result = delegate.visitTransformation(transformation);
 		indentLevel--;
 		System.out.println("---- Transformation End ----");
 		return result;
@@ -200,7 +215,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiEvaluationVisitorDecorator
 	public @Nullable Object visitPredicate(@NonNull Predicate predicate) {		
 		OCLExpression exp = predicate.getConditionExpression();
 		System.out.println(getIndent() + "Predicate " + safePrint(exp));
-		return ((QVTiEvaluationVisitor)delegate).visitPredicate(predicate);
+		return delegate.visitPredicate(predicate);
 		
 	}
 	
@@ -210,7 +225,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiEvaluationVisitorDecorator
 		System.out.println(getIndent() + "visitVariableAssignment " + v
 				+ ": " + ((EvaluationVisitorImpl)delegate).safeVisit(variableAssignment.getValue()));
 		indentLevel++;
-		Object result = ((QVTiEvaluationVisitor)delegate).visitVariableAssignment(variableAssignment);
+		Object result = delegate.visitVariableAssignment(variableAssignment);
 		indentLevel--;
 		return result;
 	}

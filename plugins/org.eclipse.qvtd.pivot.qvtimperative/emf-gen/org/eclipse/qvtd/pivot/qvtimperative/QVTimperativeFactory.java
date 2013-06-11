@@ -70,6 +70,24 @@ public interface QVTimperativeFactory extends EFactory {
 	MappingCallBinding createMappingCallBinding();
 
 	/**
+	 * Returns a new object of class '<em>Middle Property Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Middle Property Assignment</em>'.
+	 * @generated
+	 */
+	MiddlePropertyAssignment createMiddlePropertyAssignment();
+
+	/**
+	 * Returns a new object of class '<em>Middle Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Middle Property Call Exp</em>'.
+	 * @generated
+	 */
+	MiddlePropertyCallExp createMiddlePropertyCallExp();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

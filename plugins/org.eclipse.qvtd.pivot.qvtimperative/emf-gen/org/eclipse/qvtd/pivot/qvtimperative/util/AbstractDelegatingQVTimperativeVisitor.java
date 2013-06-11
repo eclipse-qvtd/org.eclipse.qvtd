@@ -59,4 +59,12 @@ public abstract class AbstractDelegatingQVTimperativeVisitor<R, C, D extends QVT
 	public @Nullable R visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding object) {
 		return delegate.visitMappingCallBinding(object);
 	}
+
+	public @Nullable R visitMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment object) {
+		return delegate.visitMiddlePropertyAssignment(object);
+	}
+
+	public @Nullable R visitMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp object) {
+		return delegate.visitMiddlePropertyCallExp(object);
+	}
 }

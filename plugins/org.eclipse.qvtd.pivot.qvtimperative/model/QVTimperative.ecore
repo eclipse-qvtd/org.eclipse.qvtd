@@ -74,4 +74,24 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MiddlePropertyAssignment" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#//PropertyAssignment">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A MiddlePropertyAssignment identifies a property assignment to the middle model.&#xA;It adds an additional feature to facilitate efficient access to a cache of&#xA;non-navigable outer-to-middle opposites."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cacheIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Identification of the cache of unnavigable opposites to be maintained&#xA;by this property assignment. May be null if no cache is required."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MiddlePropertyCallExp" eSuperTypes="platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//PropertyCallExp">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A MiddlePropertyCallExp identifies a property call from the middle model.&#xA;It adds an additional feature to facilitate efficient access to a cache of&#xA;non-navigable outer-to-middle opposites."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cacheIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Identification of the cache of unnavigable opposites to be exploited&#xA;by this property call. Should not be null during execution."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
 </ecore:EPackage>

@@ -32,6 +32,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
@@ -134,6 +136,14 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 		safeVisit(bMappingCallBinding.getValue());
 		context.append(";\n");
 		return null;
+	}
+
+	public Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment object) {
+		return visitPropertyAssignment(object);
+	}
+
+	public Object visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp object) {
+		return visitPropertyCallExp(object);
 	}
 
 	@Override

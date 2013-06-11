@@ -35,6 +35,8 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 
 /**
  * QVTimperativeEvaluationVisitor is the class for ...
@@ -99,6 +101,14 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
     public @Nullable Object visitMapping(@NonNull Mapping object) {
 		return visiting(object);
     }
+
+	public @Nullable Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment pPropertyAssignment) {
+		return visitPropertyAssignment(pPropertyAssignment);
+	}
+
+	public @Nullable Object visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp pPropertyCallExp) {
+		return visitPropertyCallExp(pPropertyCallExp);
+	}
 
     @Override
     public @Nullable Object visitPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pkge) {

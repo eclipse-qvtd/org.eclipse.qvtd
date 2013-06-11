@@ -16,12 +16,15 @@ package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
@@ -52,26 +55,34 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 
 	protected QVTimperativeToStringVisitor() {}
 
-	public String visitImperativeModel(@NonNull ImperativeModel object) {
+	public @Nullable String visitImperativeModel(@NonNull ImperativeModel object) {
 		return visitRoot(object);
 	}
 
-	public String visitMapping(@NonNull Mapping object) {
+	public @Nullable String visitMapping(@NonNull Mapping object) {
 		append("mapping ");
 		appendName(object);
 		return null;
 	}
 
-	public String visitMappingCall(@NonNull MappingCall object) {
+	public @Nullable String visitMappingCall(@NonNull MappingCall object) {
 		append("mappingCall ");
 		appendName(object.getReferredMapping());
 		return null;
 	}
 
-	public String visitMappingCallBinding(@NonNull MappingCallBinding object) {
+	public @Nullable String visitMappingCallBinding(@NonNull MappingCallBinding object) {
 		appendName(object.getBoundVariable());
 		append(" := ");
 		appendName(object.getValue());
 		return null;
+	}
+
+	public @Nullable String visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment object) {
+		return visitPropertyAssignment(object);
+	}
+
+	public @Nullable String visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp object) {
+		return visitPropertyCallExp(object);
 	}
 }
