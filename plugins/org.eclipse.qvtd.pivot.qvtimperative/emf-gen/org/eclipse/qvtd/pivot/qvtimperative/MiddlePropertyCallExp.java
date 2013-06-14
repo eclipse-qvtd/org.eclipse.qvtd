@@ -52,12 +52,12 @@ public interface MiddlePropertyCallExp extends EObject, PropertyCallExp {
 	 * by this property call. Should not be null during execution.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Cache Index</em>' attribute.
-	 * @see #setCacheIndex(BigInteger)
+	 * @see #setCacheIndex(Integer)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMiddlePropertyCallExp_CacheIndex()
 	 * @model
 	 * @generated
 	 */
-	BigInteger getCacheIndex();
+	Integer getCacheIndex();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp#getCacheIndex <em>Cache Index</em>}' attribute.
@@ -67,6 +67,6 @@ public interface MiddlePropertyCallExp extends EObject, PropertyCallExp {
 	 * @see #getCacheIndex()
 	 * @generated
 	 */
-	void setCacheIndex(BigInteger value);
+	void setCacheIndex(Integer value);
 
 } // MiddlePropertyCallExp

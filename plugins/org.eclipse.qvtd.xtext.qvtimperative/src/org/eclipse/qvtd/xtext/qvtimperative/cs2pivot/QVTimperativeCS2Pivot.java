@@ -18,15 +18,43 @@ package org.eclipse.qvtd.xtext.qvtimperative.cs2pivot;
 
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtcorebase.cs2pivot.QVTcoreBaseCS2Pivot;
+import org.eclipse.qvtd.xtext.qvtimperativecst.MappingCS;
 
 public class QVTimperativeCS2Pivot extends QVTcoreBaseCS2Pivot
 {	
-	public QVTimperativeCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
+    public static boolean isMiddle(@Nullable Type areaType, @NonNull ElementCS csElement) {
+    	if (areaType != null) {
+    		org.eclipse.ocl.examples.pivot.Package areaPackage = areaType.getPackage();
+    		for (EObject eObject = csElement; eObject != null; eObject = eObject.eContainer()) {
+    			if (eObject instanceof MappingCS) {
+    	    		Element mapping = ((MappingCS)eObject).getPivot();
+					Transformation transformation = QVTimperativeUtil.getContainingTransformation(mapping);
+    	    		if (transformation != null) {
+    	    			TypedModel middleModel = transformation.getModelParameter(null);
+    	    			if (middleModel.getUsedPackage().contains(areaPackage)) {
+    	    				return true;
+    	    			}
+    	    		}
+    			}
+    		}
+    	}
+		return false;
+	}
+
+    public QVTimperativeCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
 		super(cs2pivotResourceMap, metaModelManager);
 	}
 

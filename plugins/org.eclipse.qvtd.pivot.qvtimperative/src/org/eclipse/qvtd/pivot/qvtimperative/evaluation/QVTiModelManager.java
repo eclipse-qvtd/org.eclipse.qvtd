@@ -34,7 +34,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
-import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -57,19 +56,27 @@ public class QVTiModelManager implements DomainModelManager
 	
 	private Map<TypedModel, EList<EObject>> modelElementsMap = new HashMap<TypedModel, EList<EObject>>();
 
+	private @NonNull Set<Type> allInstancesTypes;
+
 	/**
 	 * Cache of the unnavigable opposites of the navigable middle to outer properties. The outer
 	 * index provides the middle2outerProperty cache of outerObject to middleObject.
 	 */
-	private Map<Property, Map<Object, Object>> middleOpposites = new HashMap<Property, Map<Object, Object>>();
+	private Map<?, ?> middleOpposites[];
 	
 	/**
 	 * Instantiates a new QVTc Domain Manager. Responsible for creating new
 	 * instances of the middle model and the middle model EFactory.
 	 *
 	 */
-	public QVTiModelManager(@NonNull MetaModelManager metaModelManager) {
-	    this.metaModelManager = metaModelManager;
+	public QVTiModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
+	    this.metaModelManager = transformationAnalysis.getMetaModelManager();
+	    this.allInstancesTypes = transformationAnalysis.getAllInstancesTypes();
+	    int cacheIndexes = transformationAnalysis.getCacheIndexes();
+		this.middleOpposites = new Map<?, ?>[cacheIndexes];
+		for (int i = 0; i < cacheIndexes; i++) {
+			this.middleOpposites[i] = new HashMap<Object, Object>();
+		}
 	}
 	
 	
@@ -85,7 +92,6 @@ public class QVTiModelManager implements DomainModelManager
 	public void addModel(@NonNull TypedModel typedModel, @NonNull Resource model) {
 	    modelResourceMap.put(typedModel, model);
 	}
-	
 	
 	/**
 	 * Gets the model (resource) for a given TypedModel.
@@ -274,10 +280,10 @@ public class QVTiModelManager implements DomainModelManager
 	}
 	
 	/**
-	 * Retrieve the unnavigable opposite of the middle2outerProperty of outerObject.
+	 * Retrieve the unnavigable opposite of the cacheIndex of outerObject.
 	 */
-	public Object getMiddleOpposite(@NonNull Property middle2outerProperty, @NonNull Object outerObject) {
-		Map<Object, Object> outside2middle = middleOpposites.get(middle2outerProperty);
+	public Object getMiddleOpposite(@NonNull Integer cacheIndex, @NonNull Object outerObject) {
+		Map<?, ?> outside2middle = middleOpposites[cacheIndex];
 		if (outside2middle == null) {
 			return null;
 		}
@@ -287,14 +293,10 @@ public class QVTiModelManager implements DomainModelManager
 	}
 
 	/**
-	 * Register middleObject as the unnavigable opposite of the middle2outerProperty of outerObject.
+	 * Register middleObject as the unnavigable opposite of the cacheIndex of outerObject.
 	 */
-	public void setMiddleOpposite(@NonNull Property middle2outerProperty, @NonNull Object middleObject, Object outerObject) {
-		Map<Object, Object> outer2middle = middleOpposites.get(middle2outerProperty);
-		if (outer2middle == null) {
-			outer2middle = new HashMap<Object, Object>();
-			middleOpposites.put(middle2outerProperty, outer2middle);
-		}
-		outer2middle.put(outerObject, middleObject);
+	@SuppressWarnings("unchecked")
+	public void setMiddleOpposite(@NonNull Integer cacheIndex, @NonNull Object middleObject, Object outerObject) {
+		((Map<Object, Object>)middleOpposites[cacheIndex]).put(outerObject, middleObject);
 	}
 }

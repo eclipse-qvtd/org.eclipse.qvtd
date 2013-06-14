@@ -17,7 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
+import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitorImpl;
 import org.eclipse.ocl.examples.pivot.manager.PivotIdResolver;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
@@ -52,7 +53,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 
 /**
  * QVTimperativeAbstractEvaluationVisitor is the class for ...
@@ -158,20 +160,6 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
         }
         return true;
     }
-
-    protected boolean isMiddle(@Nullable Type areaType, @NonNull Element txElement) {
-    	if (areaType != null) {
-    		org.eclipse.ocl.examples.pivot.Package areaPackage = areaType.getPackage();
-    		Transformation transformation = QVTimperativeUtil.getContainingTransformation(txElement);
-    		if (transformation != null) {
-    			TypedModel middleModel = transformation.getModelParameter(null);
-    			if (middleModel.getUsedPackage().contains(areaPackage)) {
-    				return true;
-    			}
-    		}
-    	}
-		return false;
-	}
     
     protected boolean isMtoMMapping(@NonNull Mapping mapping) {
         if (mapping.getDomain().size() == 0) {
@@ -316,6 +304,55 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	public @Nullable Object visitMappingCallBinding(@NonNull MappingCallBinding object) {
 		return visiting(object);	// MappingCallBinding is serviced by the parent MappingCall
     }
+    
+    public @Nullable Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment propertyAssignment) {
+        
+        OCLExpression slotExp = propertyAssignment.getSlotExpression(); 
+        Area area = ((BottomPattern)propertyAssignment.eContainer()).getArea();
+        if (area instanceof Mapping) {
+        	// TODO Check this approach
+        	//if (!(exp instanceof VariableExp)) {
+        	//    return modelManager.illFormedModelClass(VariableExp.class, exp, "visitPropertyAssignment");
+        	//}
+        	//VariableExp variableExp = (VariableExp)exp;
+            if (slotExp instanceof VariableExp ) {      // What other type of expressions are there?
+                Variable slotVar = (Variable) ((VariableExp)slotExp).getReferredVariable();
+                if(slotVar != null) {
+                    Object slotBinding = evaluationEnvironment.getValueOf(slotVar);
+                    if(slotBinding != null) {
+                        Object value = safeVisit(propertyAssignment.getValue());
+                        // Unbox to asign to ecore type
+                        value = metaModelManager.getIdResolver().unboxedValueOf(value);
+                        Property p = propertyAssignment.getTargetProperty();
+						getModelManager().setMiddleOpposite(propertyAssignment.getCacheIndex(), slotBinding, value);
+                    } else {
+                        throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
+                                + " specification. The assigment refers to a variable not defined in the" +
+                                " current environment");
+                    } 
+                } else {
+                    throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
+                            + " specification. The referred variable of the slot expression (" + slotExp.getType().getName() 
+                            + ") was not found.");
+                }
+            } else {
+                throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
+                        + " specification. The slot expression type (" + slotExp.getType().getName() 
+                        + ") is not supported yet.");
+            }
+        }
+        return true;
+    }
+
+	public @Nullable Object visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp pPropertyCallExp) {
+		OCLExpression source = pPropertyCallExp.getSource();
+		EvaluationVisitor evaluationVisitor = getUndecoratedVisitor();
+		Object sourceValue = source != null ? evaluationVisitor.evaluate(source) : null;
+		if (sourceValue != null) {
+			return getModelManager().getMiddleOpposite(pPropertyCallExp.getCacheIndex(), sourceValue);
+		}
+		throw new InvalidValueException("Failed to evaluate '" + pPropertyCallExp.getReferredProperty() + "'", sourceValue, pPropertyCallExp);
+	}
 
 	public @Nullable Object visitPattern(@NonNull Pattern object) {
 		return visiting(object);
@@ -349,10 +386,6 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
                         // Unbox to asign to ecore type
                         value = metaModelManager.getIdResolver().unboxedValueOf(value);
                         Property p = propertyAssignment.getTargetProperty();
-                        Property pOpposite = p.getOpposite();
-						if ((pOpposite != null) && pOpposite.isImplicit() && isMiddle(p.getOwningType(), propertyAssignment)) {
-                			getModelManager().setMiddleOpposite(p, slotBinding, value);
-                        }
                         p.initValue(slotBinding, value);
                     } else {
                         throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()

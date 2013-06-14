@@ -50,12 +50,12 @@ public interface MiddlePropertyAssignment extends PropertyAssignment {
 	 * by this property assignment. May be null if no cache is required.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Cache Index</em>' attribute.
-	 * @see #setCacheIndex(BigInteger)
+	 * @see #setCacheIndex(Integer)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMiddlePropertyAssignment_CacheIndex()
 	 * @model
 	 * @generated
 	 */
-	BigInteger getCacheIndex();
+	Integer getCacheIndex();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment#getCacheIndex <em>Cache Index</em>}' attribute.
@@ -65,6 +65,6 @@ public interface MiddlePropertyAssignment extends PropertyAssignment {
 	 * @see #getCacheIndex()
 	 * @generated
 	 */
-	void setCacheIndex(BigInteger value);
+	void setCacheIndex(Integer value);
 
 } // MiddlePropertyAssignment

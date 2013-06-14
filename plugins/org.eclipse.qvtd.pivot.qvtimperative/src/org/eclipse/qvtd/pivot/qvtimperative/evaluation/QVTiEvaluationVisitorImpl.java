@@ -20,13 +20,9 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.manager.PivotIdResolver;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -35,8 +31,6 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 
 /**
  * QVTimperativeEvaluationVisitor is the class for ...
@@ -102,37 +96,10 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
 		return visiting(object);
     }
 
-	public @Nullable Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment pPropertyAssignment) {
-		return visitPropertyAssignment(pPropertyAssignment);
-	}
-
-	public @Nullable Object visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp pPropertyCallExp) {
-		return visitPropertyCallExp(pPropertyCallExp);
-	}
-
     @Override
     public @Nullable Object visitPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pkge) {
         return true;
     }
-
-	@Override
-	public Object visitPropertyCallExp(@NonNull PropertyCallExp propertyCallExp) {
-		Property referredProperty = propertyCallExp.getReferredProperty();
-		if (referredProperty.isImplicit()) {
-			Property middle2outerProperty = referredProperty.getOpposite();
-			if (isMiddle(middle2outerProperty.getOwningType(), propertyCallExp)) {
-				OCLExpression outerSource = propertyCallExp.getSource();
-				if (outerSource != null) {
-					EvaluationVisitor evaluationVisitor = getUndecoratedVisitor();
-					Object outerObject = evaluationVisitor.evaluate(outerSource);
-					if (outerObject != null) {
-						return getModelManager().getMiddleOpposite(middle2outerProperty, outerObject);
-					}
-				}
-			}
-		}
-		return super.visitPropertyCallExp(propertyCallExp);
-	}
 
 	@Override
     public @Nullable Object visitTransformation(@NonNull Transformation transformation) {

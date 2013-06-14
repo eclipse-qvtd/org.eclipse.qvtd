@@ -48,7 +48,7 @@ public class MiddlePropertyCallExpImpl extends PropertyCallExpImpl implements Mi
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigInteger CACHE_INDEX_EDEFAULT = null;
+	protected static final Integer CACHE_INDEX_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getCacheIndex() <em>Cache Index</em>}' attribute.
@@ -58,7 +58,7 @@ public class MiddlePropertyCallExpImpl extends PropertyCallExpImpl implements Mi
 	 * @generated
 	 * @ordered
 	 */
-	protected BigInteger cacheIndex = CACHE_INDEX_EDEFAULT;
+	protected Integer cacheIndex = CACHE_INDEX_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -84,7 +84,7 @@ public class MiddlePropertyCallExpImpl extends PropertyCallExpImpl implements Mi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BigInteger getCacheIndex() {
+	public Integer getCacheIndex() {
 		return cacheIndex;
 	}
 
@@ -93,8 +93,8 @@ public class MiddlePropertyCallExpImpl extends PropertyCallExpImpl implements Mi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCacheIndex(BigInteger newCacheIndex) {
-		BigInteger oldCacheIndex = cacheIndex;
+	public void setCacheIndex(Integer newCacheIndex) {
+		Integer oldCacheIndex = cacheIndex;
 		cacheIndex = newCacheIndex;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MIDDLE_PROPERTY_CALL_EXP__CACHE_INDEX, oldCacheIndex, cacheIndex));
@@ -123,7 +123,7 @@ public class MiddlePropertyCallExpImpl extends PropertyCallExpImpl implements Mi
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTimperativePackage.MIDDLE_PROPERTY_CALL_EXP__CACHE_INDEX:
-				setCacheIndex((BigInteger)newValue);
+				setCacheIndex((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -71,23 +72,10 @@ public class QVTcoreBasePostOrderVisitor extends AbstractQVTcoreBasePostOrderVis
 			if (csInitialiser != null) {
 				Assignment assignment = null;
 				if (target instanceof PropertyCallExp) {
-					PropertyCallExp propertyCallExp = (PropertyCallExp)target;
-					PropertyAssignment propertyAssignment = context.refreshModelElement(PropertyAssignment.class,
-						QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csConstraint);
-					if (propertyAssignment != null) {
-						propertyAssignment.setSlotExpression(propertyCallExp.getSource());
-						propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
-						assignment = propertyAssignment;
-					}
+					assignment = refreshPropertyAssignment((PropertyCallExp)target, csConstraint);
 				}
 				else if (target instanceof VariableExp) {
-					VariableExp variableExp = (VariableExp)target;
-					VariableAssignment variableAssignment = context.refreshModelElement(VariableAssignment.class,
-						QVTcoreBasePackage.Literals.VARIABLE_ASSIGNMENT, csConstraint);
-					if (variableAssignment != null) {
-						variableAssignment.setTargetVariable((Variable) variableExp.getReferredVariable());
-						assignment = variableAssignment;
-					}
+					assignment = refreshVariableAssignment((VariableExp)target, csConstraint);
 				}
 				else {
 					// FIXME warning
@@ -115,6 +103,27 @@ public class QVTcoreBasePostOrderVisitor extends AbstractQVTcoreBasePostOrderVis
 			PivotUtil.refreshList(assignments, pAssignments);
 		}
 		PivotUtil.refreshList(predicates, pPredicates);
+	}
+
+	protected @Nullable Assignment refreshPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull AssignmentCS csConstraint) {
+		PropertyAssignment propertyAssignment = context.refreshModelElement(PropertyAssignment.class,
+			QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csConstraint);
+		if (propertyAssignment == null) {
+			return null;
+		}
+		propertyAssignment.setSlotExpression(propertyCallExp.getSource());
+		propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
+		return propertyAssignment;
+	}
+
+	protected @Nullable Assignment refreshVariableAssignment(@NonNull VariableExp variableExp, @NonNull AssignmentCS csConstraint) {
+		VariableAssignment variableAssignment = context.refreshModelElement(VariableAssignment.class,
+			QVTcoreBasePackage.Literals.VARIABLE_ASSIGNMENT, csConstraint);
+		if (variableAssignment == null) {
+			return null;
+		}
+		variableAssignment.setTargetVariable((Variable) variableExp.getReferredVariable());
+		return variableAssignment;
 	}
 
 	@Override

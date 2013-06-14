@@ -30,7 +30,9 @@ public class QVTiPivotEvaluator
     	this.transformation = transformation;
     	this.envFactory = new PivotEnvironmentFactory(null, metaModelManager);
     	this.env = envFactory.createEnvironment();
-    	this.modelManager = new QVTiModelManager(metaModelManager);
+    	QVTiTransformationAnalysis transformationAnalysis = new QVTiTransformationAnalysis(metaModelManager);
+    	transformationAnalysis.analyzeTransformation(transformation);
+    	this.modelManager = new QVTiModelManager(transformationAnalysis);
     }
 
 	/**
