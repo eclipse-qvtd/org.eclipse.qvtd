@@ -181,7 +181,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiEvaluationVisitorDecorator
 		System.out.println(getIndent() + "visitMiddlePropertyAssignment " + propertyAssignment.getSlotExpression()
 			+ ": " + propertyAssignment.getTargetProperty().getName());
 	indentLevel++;
-	Object result = delegate.visitPropertyAssignment(propertyAssignment);
+	Object result = delegate.visitMiddlePropertyAssignment(propertyAssignment);
 	indentLevel--;
 	return result;
 	}

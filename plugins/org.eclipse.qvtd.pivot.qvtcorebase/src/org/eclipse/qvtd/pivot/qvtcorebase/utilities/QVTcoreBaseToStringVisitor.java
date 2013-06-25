@@ -93,21 +93,25 @@ public class QVTcoreBaseToStringVisitor extends QVTbaseToStringVisitor implement
 		return null;
 	}
 
-	public String visitPropertyAssignment(@NonNull PropertyAssignment object) {
-		append("PropertyAssignment ");
-//		appendName(object);
+	public String visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
+		safeVisit(propertyAssignment.getSlotExpression());
+		append(".");
+		appendName(propertyAssignment.getTargetProperty());
+		append(" := ");
+		safeVisit(propertyAssignment.getValue());
 		return null;
 	}
 
-	public String visitRealizedVariable(@NonNull RealizedVariable object) {
-		append("RealizedVariable ");
-		appendName(object);
+	public String visitRealizedVariable(@NonNull RealizedVariable variable) {
+		append("realized ");
+		visitVariable(variable);
 		return null;
 	}
 
-	public String visitVariableAssignment(@NonNull VariableAssignment object) {
-		append("VariableAssignment ");
-//		appendName(object);
+	public String visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
+		appendName(variableAssignment.getTargetVariable());
+		append(" := ");
+		safeVisit(variableAssignment.getValue());
 		return null;
 	}
 }

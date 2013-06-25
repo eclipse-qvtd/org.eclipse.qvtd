@@ -1,5 +1,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
+import java.io.IOException;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -45,12 +47,16 @@ public class QVTiPivotEvaluator
 	/**
 	 * Creates the modelURI and binds it to the named TypedModel.
 	 */
+	@Deprecated 
 	public void createModel(@NonNull String name, @NonNull URI modelURI) {
+        createModel(name, modelURI, null);
+    }
+	public void createModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
         TypedModel typedModel = DomainUtil.getNamedElement(transformation.getModelParameter(), name);
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
-        Resource resource = metaModelManager.getExternalResourceSet().createResource(modelURI);
+        Resource resource = metaModelManager.getExternalResourceSet().createResource(modelURI, contentType);
         if (resource != null) {
         	modelManager.addModel(typedModel, resource);
         }
@@ -116,6 +122,28 @@ public class QVTiPivotEvaluator
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
         Resource resource = metaModelManager.getExternalResourceSet().getResource(modelURI, true);
+        if (resource != null) {
+        	modelManager.addModel(typedModel, resource);
+        }
+    }
+	public void loadModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
+        TypedModel typedModel = DomainUtil.getNamedElement(transformation.getModelParameter(), name);
+        if (typedModel == null) {
+        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
+        }
+        Resource resource;
+        if (contentType == null) {
+        	resource = metaModelManager.getExternalResourceSet().getResource(modelURI, true);
+        }
+        else {
+        	resource = metaModelManager.getExternalResourceSet().createResource(modelURI, contentType);
+        	try {
+				resource.load(null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
         if (resource != null) {
         	modelManager.addModel(typedModel, resource);
         }

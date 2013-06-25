@@ -52,22 +52,25 @@ public class QVTiModelManager implements DomainModelManager
 	protected final @NonNull MetaModelManager metaModelManager;
 	// TODO how to manage aliases?
 	/** Map a typed model to its resource (model). */
-	private Map<TypedModel, Resource> modelResourceMap = new HashMap<TypedModel, Resource>();
+	private @NonNull Map<TypedModel, Resource> modelResourceMap = new HashMap<TypedModel, Resource>();
 	
-	private Map<TypedModel, EList<EObject>> modelElementsMap = new HashMap<TypedModel, EList<EObject>>();
+	private @NonNull Map<TypedModel, EList<EObject>> modelElementsMap = new HashMap<TypedModel, EList<EObject>>();
 
+	/**
+	 * The types upon which execution of the transformation may invoke allInstances().
+	 */
 	private @NonNull Set<Type> allInstancesTypes;
 
 	/**
-	 * Cache of the unnavigable opposites of the navigable middle to outer properties. The outer
-	 * index provides the middle2outerProperty cache of outerObject to middleObject.
+	 * Array of caches for the unnavigable opposite of each used navigable middle to outer property. 
+	 * The array index is allocated by the QVTiTransformationAanaysis; it identifies the middle2outerProperty
+	 * of interest. Each cache is from outerObject to middleObject.
 	 */
-	private Map<?, ?> middleOpposites[];
+	private @NonNull Map<?, ?> middleOpposites[];
 	
 	/**
 	 * Instantiates a new QVTc Domain Manager. Responsible for creating new
 	 * instances of the middle model and the middle model EFactory.
-	 *
 	 */
 	public QVTiModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 	    this.metaModelManager = transformationAnalysis.getMetaModelManager();
@@ -78,8 +81,7 @@ public class QVTiModelManager implements DomainModelManager
 			this.middleOpposites[i] = new HashMap<Object, Object>();
 		}
 	}
-	
-	
+
 	/**
 	 * Adds the model to the list of models managed by this domain manager. The
 	 * domain manager supports only one root resource per typed model, this means that
@@ -92,7 +94,44 @@ public class QVTiModelManager implements DomainModelManager
 	public void addModel(@NonNull TypedModel typedModel, @NonNull Resource model) {
 	    modelResourceMap.put(typedModel, model);
 	}
-	
+
+	/**
+	 * Adds the model element to the resource of the given TypeModel
+	 *
+	 * @param tm the TypeModel
+	 * @param element the element
+	 */
+	public void addModelElement(@Nullable TypedModel model, @NonNull Object element) {
+	    
+	    EList<EObject> elements = null;
+	    if (modelElementsMap.containsKey(model)) {
+	        elements = modelElementsMap.get(model);
+	    } else {
+	        elements = new BasicEList<EObject>();
+	        if (model != MIDDLE_MODEL) {
+	            elements.addAll(modelResourceMap.get(model).getContents());
+	        }
+	    }
+	    elements.add((EObject) element);
+	    modelElementsMap.put(model, elements);
+	}
+
+	/**
+	 * Dispose.
+	 */
+	public void dispose() {
+		modelElementsMap.clear();
+		modelResourceMap.clear();
+		allInstancesTypes.clear();
+		for (Map<?, ?> middleOpposite : middleOpposites) {
+			middleOpposite.clear();
+		}
+	}
+
+	public @NonNull Set<EObject> get(@NonNull DomainType type) {
+		throw new UnsupportedOperationException();
+	}
+
 	/**
 	 * Gets the model (resource) for a given TypedModel.
 	 *
@@ -102,8 +141,7 @@ public class QVTiModelManager implements DomainModelManager
 	public Resource getModel(@NonNull TypedModel typedModel) {
 		return modelResourceMap.get(typedModel);
 	}
-	
-	
+
 	/**
 	 * Gets the resources for all the models.
 	 *
@@ -113,7 +151,6 @@ public class QVTiModelManager implements DomainModelManager
 		return modelResourceMap.values();
 	}
 
-	
 	/**
 	 * Gets the middle model.
 	 *
@@ -122,31 +159,8 @@ public class QVTiModelManager implements DomainModelManager
 	public Resource getMiddleModel() {
 		return modelResourceMap.get(MIDDLE_MODEL);
 	}
-	
-	
+
 	/**
-     * Adds the model element to the resource of the given TypeModel
-     *
-     * @param tm the TypeModel
-     * @param element the element
-     */
-    public void addModelElement(@Nullable TypedModel model, @NonNull Object element) {
-        
-        EList<EObject> elements = null;
-        if (modelElementsMap.containsKey(model)) {
-            elements = modelElementsMap.get(model);
-        } else {
-            elements = new BasicEList<EObject>();
-            if (model != MIDDLE_MODEL) {
-                elements.addAll(modelResourceMap.get(model).getContents());
-            }
-        }
-        elements.add((EObject) element);
-        modelElementsMap.put(model, elements);
-    }
-    
-    
-    /**
      * Gets the all the instances of the specified Type in the given TypeModel
      *
      * @param tm the TypeModel (can be null if it is the middle model)
@@ -190,6 +204,43 @@ public class QVTiModelManager implements DomainModelManager
         return elements;
     }
 
+	/**
+	 * Retrieve the unnavigable opposite of the cacheIndex of outerObject.
+	 */
+	public Object getMiddleOpposite(@NonNull Integer cacheIndex, @NonNull Object outerObject) {
+		return middleOpposites[cacheIndex].get(outerObject);
+	}
+
+	/**
+		 * Implemented by subclasses to determine whether the specified element
+		 * is an instance of the specified class, according to the metamodel
+		 * semantics implemented by the environment that created this extent map.
+		 *
+		 * @param type the type
+		 * @param element a potential run-time (M0) instance of that class
+		 * @return <code>true</code> if this element is an instance of the given
+		 * class; <code>false</code> otherwise
+		 */
+		protected boolean isInstance(@NonNull DomainType requiredType, @NonNull EObject eObject) {
+			EClass eClass = eObject.eClass();
+			EPackage ePackage = eClass.getEPackage();
+			Type objectType = null;
+			if (ePackage == PivotPackage.eINSTANCE) {
+				String name = DomainUtil.nonNullEMF(eClass.getName());
+				objectType = metaModelManager.getPivotType(name);
+			}
+			else {
+				try {
+					objectType = metaModelManager.getPivotOf(Type.class,  eClass);
+				} catch (ParserException e) {
+	// FIXME				if (!generatedErrorMessage) {
+	//					generatedErrorMessage = true;
+	//					logger.error("Failed to load an '" + eClass.getName() + "'", e);
+	//				}
+				}
+			}
+		    return (objectType != null) && objectType.conformsTo(metaModelManager, requiredType);
+		}
 
 	/**
 	 * Saves all the models managed by the domain manager.
@@ -217,7 +268,7 @@ public class QVTiModelManager implements DomainModelManager
             }    
         }
     }
-    
+
     public void saveMiddleModel(@NonNull URI uri) {
         Resource r = metaModelManager.getExternalResourceSet().createResource(uri);
         for (EObject e : modelElementsMap.get(MIDDLE_MODEL)) {
@@ -233,64 +284,6 @@ public class QVTiModelManager implements DomainModelManager
               e.printStackTrace();
            }
     }
-    
-    
-	/**
-	 * Dispose.
-	 */
-	public void dispose() {
-		// TODO Auto-generated method stub
-		modelResourceMap = null;
-		
-	}
-
-	public @NonNull Set<EObject> get(@NonNull DomainType type) {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * Implemented by subclasses to determine whether the specified element
-	 * is an instance of the specified class, according to the metamodel
-	 * semantics implemented by the environment that created this extent map.
-	 *
-	 * @param type the type
-	 * @param element a potential run-time (M0) instance of that class
-	 * @return <code>true</code> if this element is an instance of the given
-	 * class; <code>false</code> otherwise
-	 */
-	protected boolean isInstance(@NonNull DomainType requiredType, @NonNull EObject eObject) {
-		EClass eClass = eObject.eClass();
-		EPackage ePackage = eClass.getEPackage();
-		Type objectType = null;
-		if (ePackage == PivotPackage.eINSTANCE) {
-			String name = DomainUtil.nonNullEMF(eClass.getName());
-			objectType = metaModelManager.getPivotType(name);
-		}
-		else {
-			try {
-				objectType = metaModelManager.getPivotOf(Type.class,  eClass);
-			} catch (ParserException e) {
-// FIXME				if (!generatedErrorMessage) {
-//					generatedErrorMessage = true;
-//					logger.error("Failed to load an '" + eClass.getName() + "'", e);
-//				}
-			}
-		}
-	    return (objectType != null) && objectType.conformsTo(metaModelManager, requiredType);
-	}
-	
-	/**
-	 * Retrieve the unnavigable opposite of the cacheIndex of outerObject.
-	 */
-	public Object getMiddleOpposite(@NonNull Integer cacheIndex, @NonNull Object outerObject) {
-		Map<?, ?> outside2middle = middleOpposites[cacheIndex];
-		if (outside2middle == null) {
-			return null;
-		}
-		else {
-			return outside2middle.get(outerObject);
-		}
-	}
 
 	/**
 	 * Register middleObject as the unnavigable opposite of the cacheIndex of outerObject.

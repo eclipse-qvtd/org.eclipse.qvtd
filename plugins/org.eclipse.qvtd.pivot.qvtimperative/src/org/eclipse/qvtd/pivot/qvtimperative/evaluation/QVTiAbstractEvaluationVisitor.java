@@ -322,9 +322,13 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
                     if(slotBinding != null) {
                         Object value = safeVisit(propertyAssignment.getValue());
                         // Unbox to asign to ecore type
-                        value = metaModelManager.getIdResolver().unboxedValueOf(value);
+                        Object unboxedValue = metaModelManager.getIdResolver().unboxedValueOf(value);
                         Property p = propertyAssignment.getTargetProperty();
-						getModelManager().setMiddleOpposite(propertyAssignment.getCacheIndex(), slotBinding, value);
+                        p.initValue(slotBinding, unboxedValue);
+						Integer cacheIndex = propertyAssignment.getCacheIndex();
+						if (cacheIndex != null) {
+							getModelManager().setMiddleOpposite(cacheIndex, slotBinding, unboxedValue);
+						}
                     } else {
                         throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
                                 + " specification. The assigment refers to a variable not defined in the" +
@@ -349,7 +353,9 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 		EvaluationVisitor evaluationVisitor = getUndecoratedVisitor();
 		Object sourceValue = source != null ? evaluationVisitor.evaluate(source) : null;
 		if (sourceValue != null) {
-			return getModelManager().getMiddleOpposite(pPropertyCallExp.getCacheIndex(), sourceValue);
+			Integer cacheIndex = DomainUtil.nonNullState(pPropertyCallExp.getCacheIndex());
+			Object middleOpposite = getModelManager().getMiddleOpposite(cacheIndex, sourceValue);
+			return DomainUtil.nonNullState(middleOpposite);
 		}
 		throw new InvalidValueException("Failed to evaluate '" + pPropertyCallExp.getReferredProperty() + "'", sourceValue, pPropertyCallExp);
 	}

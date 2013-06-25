@@ -20,7 +20,10 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -58,6 +61,14 @@ public class QVTiTransformationAnalysis
 	}
 
 	public void analyzeTransformation(@NonNull Transformation transformation) {
+		//
+		//	First pass
+		//  - identify all allInstances() source types
+		//  - identify all MiddlePropertyAssignments
+		//  - identify all MiddlePropertyCallExp and allocate a cacheIndex
+		//
+		Type oclElementType = metaModelManager.getOclElementType();
+		OperationId allInstancesOperationId = oclElementType.getTypeId().getOperationId(0, "allInstances", IdManager.getParametersId());
 		List<MiddlePropertyAssignment> middlePropertyAssignments = new ArrayList<MiddlePropertyAssignment>();
 		for (TreeIterator<EObject> tit = transformation.eAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
@@ -77,20 +88,29 @@ public class QVTiTransformationAnalysis
 			}
 			else if (eObject instanceof OperationCallExp) {
 				OperationCallExp operationCallExp = (OperationCallExp)eObject;
-				OCLExpression source = operationCallExp.getSource();
-				if (source != null) {
-					Type sourceType = source.getType();
-					if (sourceType != null) {
-						allInstancesTypes.add(sourceType);
+				Operation referredOperation = operationCallExp.getReferredOperation();
+				if ((referredOperation != null) && (referredOperation.getOperationId() == allInstancesOperationId)) {
+					OCLExpression source = operationCallExp.getSource();
+					if (source != null) {
+						Type sourceType = source.getType();
+						if (sourceType != null) {
+							allInstancesTypes.add(sourceType);
+						}
 					}
 				}
 			}
 		}
+		//
+		//	Second pass
+		//  - install cacheIndex allocated to MiddlePropertyCallExp in each MiddlePropertyAssignment
+		//
 		for (MiddlePropertyAssignment middlePropertyAssignment : middlePropertyAssignments) {
 			Property navigableProperty = middlePropertyAssignment.getTargetProperty();
 			if (navigableProperty != null) {
-				int cacheIndex = getCacheIndex(navigableProperty);
-				middlePropertyAssignment.setCacheIndex(cacheIndex);
+				Integer cacheIndex = property2cacheIndex.get(navigableProperty);
+				if (cacheIndex != null) { 		// No need to set cacheIndex if it is never accessed by a MiddlePropertyCallExp
+					middlePropertyAssignment.setCacheIndex(cacheIndex);
+				}
 			}
 		}
 	}
