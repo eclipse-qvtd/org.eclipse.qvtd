@@ -460,6 +460,31 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 					}
 				}
 			}
+			boolean explicitCheckonly = false;
+			boolean explicitEnforce = false;
+			for (AbstractDomainCS abstractDomainCS : csElement.getDomains()) {
+				if (abstractDomainCS instanceof DomainCS) {
+					DomainCS domainCS = (DomainCS) abstractDomainCS;
+					if (domainCS.isCheckonly())
+						explicitCheckonly = true;
+					if (domainCS.isEnforce())
+						explicitEnforce = true;
+				}
+			}
+			for (AbstractDomainCS abstractDomainCS : csElement.getDomains()) {
+				Domain domain = PivotUtil.getPivot(Domain.class, abstractDomainCS);
+				if (domain != null) {
+					boolean isCheckable = true;
+					boolean isEnforceable = true;
+					if (abstractDomainCS instanceof DomainCS) {
+						DomainCS domainCS = (DomainCS) abstractDomainCS;
+						isCheckable = !explicitCheckonly || domainCS.isCheckonly();
+						isEnforceable = !explicitEnforce || domainCS.isEnforce();
+					}
+					domain.setIsCheckable(isCheckable);
+					domain.setIsEnforceable(isEnforceable);
+				}
+			}
 			PivotUtil.refreshList(pivotElement.getVariable(), pivotVariables);
 			pivotElement.setWhen(PivotUtil.getPivot(Pattern.class, csElement.getWhen()));
 			pivotElement.setWhere(PivotUtil.getPivot(Pattern.class, csElement.getWhere()));
