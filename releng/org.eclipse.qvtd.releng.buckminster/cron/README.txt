@@ -10,7 +10,7 @@ This is a release engineer task. To configure that:
 A new milestone build may be explitly promoted by:
 
 logon to build.eclipse.org
-ant -f /shared/jobs/buckminster-mmt-qvtd-kepler/lastSuccessful/archive/publishroot/publisher.ant -Dbuild.archives=/shared/jobs/buckminster-mmt-qvtd-kepler/lastSuccessful/archive &> logs/mmt-qvtd-publishing-kepler.log 
+ant -f /shared/jobs/qvtd-luna/lastSuccessful/archive/publishroot/publisher.ant -Dbuild.archives=/shared/jobs/qvtd-luna/lastSuccessful/archive &> logs/qvtd-publishing-luna.log 
 
 A new milestone build can be added to the composite repository by:
 
