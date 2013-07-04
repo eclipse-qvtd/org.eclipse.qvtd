@@ -17,9 +17,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -34,37 +32,74 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import test.simplerdbms.SimplerdbmsPackage;
-import test.simpleuml.SimpleumlPackage;
-import test.simpleuml.util.SimpleumlResourceFactoryImpl;
-import test.umltordbms.UmltordbmsPackage;
-
 /**
  * Test001 is a set if simple tests on the QVTi API.
- * @author hhoyos
+ * @author Horacio Hoyos
  *
  */
 public class QVTiInterpreterTests extends LoadTestCase
 {
+	
+	/**
+	 * The Class MyQvtiEvaluator provides helper methods for loading and creating models used in the test
+	 */
 	private final class MyQvtiEvaluator extends QVTiXtextEvaluator
 	{
+		
+		/** The typed model validation resource map. */
 		protected final @NonNull Map<TypedModel, Resource> typedModelValidationResourceMap = new HashMap<TypedModel, Resource>();
+		
+		/** The file name prefix. */
 		private final @NonNull String fileNamePrefix;
 
+		/**
+		 * Instantiates a new my Qvti evaluator.
+		 *
+		 * @param metaModelManager the meta model manager
+		 * @param fileNamePrefix the file name prefix
+		 * @param transformationFileName the transformation file name
+		 * @throws IOException Signals that an I/O exception has occurred.
+		 */
 		public MyQvtiEvaluator(@NonNull MetaModelManager metaModelManager, @NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
 			super(metaModelManager, getProjectFileURI(fileNamePrefix + "/"  + transformationFileName));
 			this.fileNamePrefix = fileNamePrefix + "/";
 	    	setEvaluationTracingEnabled(true);
 		}
 
-		public void createModel(@NonNull String name, @NonNull String modelFileName, String contentType) {
-			createModel(name, getProjectFileURI(fileNamePrefix + modelFileName), contentType);
+		/**
+		 * Associates a typed model, identified by typedModelName, with a new resource with
+		 * name modelFileName, in the current project.
+		 *
+		 * @param typedModelName the name of the typed model
+		 * @param modelFileName the model file name
+		 * 
+		 * @see #loadModel(String, String)
+		 */
+		public void createModel(@NonNull String typedModelName, @NonNull String modelFileName) {
+			createModel(typedModelName, getProjectFileURI(fileNamePrefix + modelFileName));
 		}
 
-		public void loadModel(@NonNull String name, @NonNull String modelFileName, String contentType) {
-			loadModel(name, getProjectFileURI(fileNamePrefix + modelFileName), contentType);
+		/**
+		 * Associates a typed model, identified by typedModelName, with an existing resource
+		 * with name modelFileName, in the current project.
+		 *
+		 * @param name the name
+		 * @param modelFileName the model file name
+		 * 
+		 * @see #createModel(String, String)
+		 */
+		public void loadModel(@NonNull String name, @NonNull String modelFileName) {
+			loadModel(name, getProjectFileURI(fileNamePrefix + modelFileName));
 		}
 
+		/**
+		 * Loads a reference model, identified by modelFileName, as a resource. The reference
+		 * model is used to validate if the generated model is correct, i.e. the output
+		 * and reference model must be equal.
+		 *
+		 * @param name the name
+		 * @param modelFileName the model file name
+		 */
 		public void loadReference(@NonNull String name, @NonNull String modelFileName) {
 	        TypedModel typedModel = DomainUtil.getNamedElement(transformation.getModelParameter(), name);
 	        if (typedModel == null) {
@@ -75,52 +110,15 @@ public class QVTiInterpreterTests extends LoadTestCase
 	        typedModelValidationResourceMap.put(typedModel, resource);
 		}
 
+		/**
+		 * Test.
+		 *
+		 * @throws Exception the exception
+		 */
 		public void test() throws Exception {
 	    	boolean result = execute();
 	        assertTrue(getClass().getSimpleName() + " should not return null.", result);
 	        saveModels(getProjectFileURI(fileNamePrefix + "middle.xmi"));
-	        for (Entry<TypedModel, Resource> entry : typedModelValidationResourceMap.entrySet()) { // Validate against reference models
-	        	TypedModel typedModel = entry.getKey();
-	        	Resource expectedModel = entry.getValue();
-	        	Resource actualModel = modelManager.getModel(typedModel);
-	            assertSameModel(expectedModel, actualModel);
-	        }
-	    }
-	}
-	private final class MyQvtiEvaluator2 extends QVTiXtextEvaluator
-	{
-		protected final @NonNull Map<TypedModel, Resource> typedModelValidationResourceMap = new HashMap<TypedModel, Resource>();
-		private final @NonNull String fileNamePrefix;
-
-		public MyQvtiEvaluator2(@NonNull MetaModelManager metaModelManager, @NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
-			super(metaModelManager, URI.createPlatformResourceURI(fileNamePrefix + "/" + transformationFileName, true));
-			this.fileNamePrefix = fileNamePrefix + "/";
-	    	setEvaluationTracingEnabled(true);
-		}
-
-		public void createModel(@NonNull String name, @NonNull String modelFileName, String contentType) {
-			createModel(name, URI.createPlatformResourceURI(fileNamePrefix + modelFileName, true), contentType);
-		}
-
-		public void loadModel(@NonNull String name, @NonNull String modelFileName, String contentType) {
-			loadModel(name, URI.createPlatformResourceURI(fileNamePrefix + modelFileName, true), contentType);
-		}
-
-		@SuppressWarnings("unused")
-		public void loadReference(@NonNull String name, @NonNull String modelFileName) {
-	        TypedModel typedModel = DomainUtil.getNamedElement(transformation.getModelParameter(), name);
-	        if (typedModel == null) {
-	        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
-	        }
-			URI modelURI = getProjectFileURI(fileNamePrefix + modelFileName);
-	        Resource resource = metaModelManager.getExternalResourceSet().getResource(modelURI, true);
-	        typedModelValidationResourceMap.put(typedModel, resource);
-		}
-
-		public void test() throws Exception {
-	    	boolean result = execute();
-	        assertTrue(getClass().getSimpleName() + " should not return null.", result);
-	        saveModels(URI.createPlatformResourceURI(fileNamePrefix + "middle.xmi", true));
 	        for (Entry<TypedModel, Resource> entry : typedModelValidationResourceMap.entrySet()) { // Validate against reference models
 	        	TypedModel typedModel = entry.getKey();
 	        	Resource expectedModel = entry.getValue();
@@ -134,7 +132,15 @@ public class QVTiInterpreterTests extends LoadTestCase
 //		void denormalize();
 //	}
 	
-	public static void assertSameModel(Resource expectedResource, Resource actualResource) throws IOException, InterruptedException {
+	/**
+ * Assert same model.
+ *
+ * @param expectedResource the expected resource
+ * @param actualResource the actual resource
+ * @throws IOException Signals that an I/O exception has occurred.
+ * @throws InterruptedException the interrupted exception
+ */
+public static void assertSameModel(Resource expectedResource, Resource actualResource) throws IOException, InterruptedException {
 //		Set<Normalizer> normalizations = normalize(expectedResource);
 		String expected = EmfFormatter.listToStr(expectedResource.getContents());
 		String actual = EmfFormatter.listToStr(actualResource.getContents());
@@ -144,6 +150,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 //		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase#setUp()
+	 */
 	@Before
     public void setUp() throws Exception {
 	    
@@ -154,6 +163,9 @@ public class QVTiInterpreterTests extends LoadTestCase
         MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
     }
  
+    /* (non-Javadoc)
+     * @see org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase#tearDown()
+     */
     @After
     public void tearDown() throws Exception {
 		super.tearDown();
@@ -162,11 +174,16 @@ public class QVTiInterpreterTests extends LoadTestCase
     /*
      * Minimal 1 object to 1 object QVTi transformation
      */
+    /**
+     * Test graph2 graph minimal.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGraph2GraphMinimal() throws Exception {
     	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
-        testEvaluator.loadModel("upperGraph", "SimpleGraph.xmi", null);
-        testEvaluator.createModel("lowerGraph", "Graph2GraphMinimal.xmi", null);
+        testEvaluator.loadModel("upperGraph", "SimpleGraph.xmi");
+        testEvaluator.createModel("lowerGraph", "Graph2GraphMinimal.xmi");
         testEvaluator.loadReference("lowerGraph", "Graph2GraphMinimalValidate.xmi");
         testEvaluator.test();
         testEvaluator.dispose();
@@ -175,48 +192,48 @@ public class QVTiInterpreterTests extends LoadTestCase
     /*
      * Hierarchical N object to N object QVTi transformation working.
      */
+    /**
+     * Test graph2 graph hierarchical.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGraph2GraphHierarchical() throws Exception {
     	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "Graph2GraphHierarchical", "Graph2GraphHierarchical.qvti");
-    	testEvaluator.loadModel("upperGraph", "../Graph2GraphMinimal/SimpleGraph.xmi", null);
-        testEvaluator.createModel("lowerGraph", "Graph2GraphHierarchical.xmi", null);
+    	testEvaluator.loadModel("upperGraph", "../Graph2GraphMinimal/SimpleGraph.xmi");
+        testEvaluator.createModel("lowerGraph", "Graph2GraphHierarchical.xmi");
         testEvaluator.loadReference("lowerGraph", "Graph2GraphHierarchicalValidate.xmi");
         testEvaluator.test();
         testEvaluator.dispose();
     }
 
+    /**
+     * Test hs v2 hls.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testHSV2HLS() throws Exception {
-//    	EPackage.Registry packageRegistry = metaModelManager.getExternalResourceSet().getPackageRegistry();
-//		packageRegistry.put(HLSTreePackage.eNS_URI, HLSTreePackage.eINSTANCE);
-//    	packageRegistry.put(HSVTreePackage.eNS_URI, HSVTreePackage.eINSTANCE);
-//    	packageRegistry.put(HSV2HLSPackage.eNS_URI, HSV2HLSPackage.eINSTANCE);
     	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "HSV2HLS", "HSV2HLS.qvti");
-    	testEvaluator.loadModel("hsv", "HSVNode.xmi", null);
-        testEvaluator.createModel("hls", "HLSNode.xmi", null);
+    	testEvaluator.loadModel("hsv", "HSVNode.xmi");
+        testEvaluator.createModel("hls", "HLSNode.xmi");
         testEvaluator.loadReference("hls", "HLSNodeValidate.xmi");
         testEvaluator.test();
         testEvaluator.dispose();
     }
 
-/*    @Test
+    /**
+     * Test class to rdbms.
+     *
+     * @throws Exception the exception
+     */
+    @Test
     public void testClassToRDBMS() throws Exception {
-    	String prefix = "org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS";
-    	ResourceSet externalResourceSet = metaModelManager.getExternalResourceSet();
-		EPackage.Registry packageRegistry = externalResourceSet.getPackageRegistry();
-		packageRegistry.put(SimpleumlPackage.eNS_URI, SimpleumlPackage.eINSTANCE);
-    	packageRegistry.put(SimplerdbmsPackage.eNS_URI, SimplerdbmsPackage.eINSTANCE);
-    	packageRegistry.put(UmltordbmsPackage.eNS_URI, UmltordbmsPackage.eINSTANCE);
-    	// FIXME this is a workaround for BUG 411614
-    	packageRegistry.put(URI.createPlatformResourceURI(prefix + "/SimpleUML.ecore", true).toString(), SimpleumlPackage.eINSTANCE);
-    	packageRegistry.put(URI.createPlatformResourceURI(prefix + "/SimpleRDBMS.ecore", true).toString(), SimplerdbmsPackage.eINSTANCE);
-    	packageRegistry.put(URI.createPlatformResourceURI(prefix + "/UMLtoRDBMS.ecore", true).toString(), UmltordbmsPackage.eINSTANCE);
-    	externalResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new SimpleumlResourceFactoryImpl());
-    	MyQvtiEvaluator2 testEvaluator = new MyQvtiEvaluator2(metaModelManager, prefix, "ClassToRDBMSSchedule.qvti");
-    	testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi", null);
-        testEvaluator.createModel("rdbms", "SimpleRDBMSPeople.xmi", null);
+    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "ClassToRDBMS", "ClassToRDBMSSchedule.qvti");
+    	testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
+        testEvaluator.createModel("rdbms", "SimpleRDBMSPeople.xmi");
         //testEvaluator.loadReference("rdbms", "SimpleRDBMSPeopleValidate.xmi");
         testEvaluator.test();
         testEvaluator.dispose();
-    } */
+    }
 }
