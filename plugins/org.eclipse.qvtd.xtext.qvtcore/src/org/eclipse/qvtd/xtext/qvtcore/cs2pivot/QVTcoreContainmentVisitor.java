@@ -34,6 +34,7 @@ import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.TransformationCS;
@@ -66,8 +67,25 @@ public class QVTcoreContainmentVisitor extends AbstractQVTcoreContainmentVisitor
 				pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csMiddle.getGuardPattern()));
 			}
 			else {
-				pivotElement.setBottomPattern(null);
-				pivotElement.setGuardPattern(null);
+				BottomPattern bottomPattern = pivotElement.getBottomPattern();
+				if (bottomPattern == null) {
+					bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+					bottomPattern.getAssignment().clear();
+					bottomPattern.getBindsTo().clear();
+					bottomPattern.getEnforcementOperation().clear();
+					bottomPattern.getPredicate().clear();
+					bottomPattern.getRealizedVariable().clear();
+					bottomPattern.getVariable().clear();
+					pivotElement.setBottomPattern(bottomPattern);
+				}
+				GuardPattern guardPattern = pivotElement.getGuardPattern();
+				if (guardPattern == null) {
+					guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+					guardPattern.getBindsTo().clear();
+					guardPattern.getPredicate().clear();
+					guardPattern.getVariable().clear();
+					pivotElement.setGuardPattern(guardPattern);
+				}
 			}
 			context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getDomains());
 			context.refreshPivotList(Mapping.class, pivotElement.getLocal(), csElement.getComposedMappings());
