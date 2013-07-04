@@ -24,6 +24,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -144,32 +145,36 @@ public class QVTiLMEvaluationVisitor extends QVTiEvaluationVisitorImpl
             result = domain.accept(getUndecoratedVisitor());
         }
         if (result == Boolean.TRUE) {
-        	result = mapping.getGuardPattern().accept(getUndecoratedVisitor());
-            if (result == Boolean.TRUE) {
-            	result = mapping.getBottomPattern().accept(getUndecoratedVisitor());
-            	if (result == Boolean.TRUE) {
-            		for (MappingCall mappingCall : mapping.getMappingCall()) {
-	            		Mapping calledMapping = DomainUtil.nonNullModel(mappingCall.getReferredMapping());
-	            		QVTiEvaluationVisitor nv = null;
-	            		if (isLtoMMapping(calledMapping)) {
-	            			nv =  ((QVTiEvaluationVisitor) getUndecoratedVisitor()).createNestedLMVisitor();
-	            		}
-	                	else if (isMtoRMapping(calledMapping)) {
-	                		nv = ((QVTiEvaluationVisitor)getUndecoratedVisitor()).createNestedMRVisitor();
-	                	}
-	                	else if (isMtoMMapping(calledMapping)) {
-	                		nv = ((QVTiEvaluationVisitor)getUndecoratedVisitor()).createNestedMMVisitor();
-	                	} else {
-	                		// FIXME Error
-	                	}
-	            		// The Undecorated visitor createNestedXXVisitor should return the undecorated, so no need
-	            		// to call the getUndecoratedVisitor.
-	                	if (nv != null) {
-	                		mappingCall.accept(nv);
-	                	}
-	            	}
-            	}
-            }
+        	GuardPattern gp = mapping.getGuardPattern();
+        	if (gp != null) {
+        		result = gp.accept(getUndecoratedVisitor());
+        		if (result == Boolean.TRUE) {
+                	result = mapping.getBottomPattern().accept(getUndecoratedVisitor());
+                	if (result == Boolean.TRUE) {
+                		for (MappingCall mappingCall : mapping.getMappingCall()) {
+    	            		Mapping calledMapping = DomainUtil.nonNullModel(mappingCall.getReferredMapping());
+    	            		QVTiEvaluationVisitor nv = null;
+    	            		if (isLtoMMapping(calledMapping)) {
+    	            			nv =  ((QVTiEvaluationVisitor) getUndecoratedVisitor()).createNestedLMVisitor();
+    	            		}
+    	                	else if (isMtoRMapping(calledMapping)) {
+    	                		nv = ((QVTiEvaluationVisitor)getUndecoratedVisitor()).createNestedMRVisitor();
+    	                	}
+    	                	else if (isMtoMMapping(calledMapping)) {
+    	                		nv = ((QVTiEvaluationVisitor)getUndecoratedVisitor()).createNestedMMVisitor();
+    	                	} else {
+    	                		// FIXME Error
+    	                	}
+    	            		// The Undecorated visitor createNestedXXVisitor should return the undecorated, so no need
+    	            		// to call the getUndecoratedVisitor.
+    	                	if (nv != null) {
+    	                		mappingCall.accept(nv);
+    	                	}
+    	            	}
+                	}
+                }
+        	}
+            
         }
         return null;
     }

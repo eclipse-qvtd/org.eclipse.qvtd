@@ -1,6 +1,6 @@
-import SimpleUML: '../../model/SimpleUML.ecore'::simpleuml;
-import SimpleRDBMS: '../../model/SimpleRDBMS.ecore'::simplerdbms;
-import UMLtoRDBMS: '../../model/UMLtoRDBMS.ecore'::umltordbms;
+import SimpleUML: 'SimpleUML.ecore'::simpleuml;
+import SimpleRDBMS: 'SimpleRDBMS.ecore'::simplerdbms;
+import UMLtoRDBMS: 'UMLtoRDBMS.ecore'::umltordbms;
 
 
 transformation umlRdbms {
@@ -294,8 +294,7 @@ map classToTableMR_2_2 in umlRdbms {
 map associationToForeignKeyLM in umlRdbms {
     uml (p:Package, sc:Class, dc:Class, a:Association |
         a.namespace = p;
-        sc := a.source;
-        sc.namespace = p;
+        -- sc.namespace = p;
         -- getAllForwards(sc)->includes(a);
         -- getAllSupers(dc)->includes(a.destination);
         ) {

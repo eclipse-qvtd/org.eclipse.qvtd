@@ -45,6 +45,7 @@
       reverse="//@elements.4"/>
   <elements
       xsi:type="simpleuml:Association"
+      kind=""
       name="livesAt"
       source="//@elements.0"
       destination="//@elements.3"/>

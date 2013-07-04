@@ -261,7 +261,11 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 				Type varType = boundVariable.getType();
 				if ((varType != null) && valueType.conformsTo(metaModelManager, varType)) {
 					//nv.getEvaluationEnvironment().add(boundVariable, valueOrValues);
-					evaluationEnvironment.add(boundVariable, valueOrValues);
+					try {
+						evaluationEnvironment.add(boundVariable, valueOrValues);
+					} catch (IllegalArgumentException ex) {
+						evaluationEnvironment.replace(boundVariable, valueOrValues);
+					}
 				}
 				else {
 					return null;		

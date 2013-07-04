@@ -22,6 +22,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -150,18 +151,22 @@ public class QVTiMREvaluationVisitor extends QVTiEvaluationVisitorImpl
     	if (mapping.getDomain().size() > 1) {
         	MtoRMappingError(mapping, "Max supported number of domains is 1.");
         }
-    	Object result = mapping.getGuardPattern().accept(getUndecoratedVisitor());
-        if (result == Boolean.TRUE) {
-        	for (Domain domain : mapping.getDomain()) {
-                result = domain.accept(getUndecoratedVisitor());
-            }
-        	if (result == Boolean.TRUE) {
-        		mapping.getBottomPattern().accept(getUndecoratedVisitor());
-            	for (MappingCall mappingCall : mapping.getMappingCall()) {
-                	mappingCall.accept(getUndecoratedVisitor());
+    	GuardPattern gp = mapping.getGuardPattern();
+    	Object result = null;
+    	if (gp != null) {
+    		result = gp.accept(getUndecoratedVisitor());
+    		if (result == Boolean.TRUE) {
+            	for (Domain domain : mapping.getDomain()) {
+                    result = domain.accept(getUndecoratedVisitor());
                 }
-        	}
-        }
+            	if (result == Boolean.TRUE) {
+            		mapping.getBottomPattern().accept(getUndecoratedVisitor());
+                	for (MappingCall mappingCall : mapping.getMappingCall()) {
+                    	mappingCall.accept(getUndecoratedVisitor());
+                    }
+            	}
+            }
+    	}
         return null;
     }
     
