@@ -17,13 +17,13 @@
 grammar org.eclipse.qvtd.xtext.qvtcore.QVTcore with org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
-import "platform:/resource/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore" as base
-import "platform:/resource/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore" as essentialocl
-import "platform:/resource/org.eclipse.ocl.examples.pivot/model/Pivot.ecore" as pivot
-import "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore" as qvtbase
-import "platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore" as qvtcorebase
-import "platform:/resource/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore" as qvtcore
-import "platform:/resource/org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCST.ecore"
+import "http://www.eclipse.org/ocl/3.1.0/BaseCST" as base
+import "http://www.eclipse.org/ocl/3.1.0/EssentialOCLCST" as essentialocl
+import "http://www.eclipse.org/ocl/3.1.0/Pivot" as pivot
+import "http://www.eclipse.org/qvt/0.9/QVTbase" as qvtbase
+import "http://www.eclipse.org/qvt/0.9/QVTcoreBase" as qvtcorebase
+import "http://www.eclipse.org/qvt/0.9/QVTcore" as qvtcore
+import "http://www.eclipse.org/qvt/0.9/QVTcoreCST"
 
 TopLevelCS:
 	(ownedImport+=ImportCS | /*ownedInclude+=IncludeCS |*/ ownedLibrary+=LibraryCS)*

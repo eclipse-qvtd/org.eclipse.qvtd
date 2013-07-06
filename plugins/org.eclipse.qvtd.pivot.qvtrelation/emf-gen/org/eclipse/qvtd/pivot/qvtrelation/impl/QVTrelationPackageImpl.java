@@ -629,7 +629,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";		
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
 		  (getKey_OppositePart(), 
 		   source, 
@@ -665,7 +665,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		   source, 
 		   new String[] {
 			 "body", "domainAssignment"
-		   });
+		   });	
 	}
 
 } //QVTrelationPackageImpl

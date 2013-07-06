@@ -31,41 +31,7 @@ Workflow {
 	bean = ResourceSetImpl : resourceSet {}
     bean = StandaloneSetup { resourceSet = resourceSet
     	platformUri = ".."
-//    	platformUri = "./META-INF"		// A local folder to minimize workspace searching
-    	scanClassPath = true			// But we do need to search the plugin-space
-    	registerGeneratedEPackage = "org.eclipse.xtext.common.types.TypesPackage"
-    	uriMap = Mapping {
-    		from = "platform:/plugin/org.eclipse.emf.ecore/"
-    		to = "platform:/resource/org.eclipse.emf.ecore/"
-    	}
-    	uriMap = Mapping {
-    		from = "platform:/plugin/org.eclipse.ocl.examples.pivot/"
-    		to = "platform:/resource/org.eclipse.ocl.examples.pivot/"
-    	}
-    	uriMap = Mapping {
-    		from = "platform:/plugin/org.eclipse.ocl.examples.xtext.base/"
-    		to = "platform:/resource/org.eclipse.ocl.examples.xtext.base/"
-    	}
-    	uriMap = Mapping {
-    		from = "platform:/plugin/org.eclipse.ocl.examples.xtext.essentialocl/"
-    		to = "platform:/resource/org.eclipse.ocl.examples.xtext.essentialocl/"
-    	}
-    	uriMap = Mapping {
-    		from = "platform:/plugin/org.eclipse.qvtd.pivot.qvtbase/"
-    		to = "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/"
-    	}
-    	uriMap = Mapping {
-    		from = "platform:/plugin/org.eclipse.qvtd.pivot.qvtcorebase/"
-    		to = "platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/"
-    	}
-    	uriMap = Mapping {
-    		from = "platform:/plugin/org.eclipse.qvtd.xtext.qvtcorebase/"
-    		to = "platform:/resource/org.eclipse.qvtd.xtext.qvtcorebase/"
-    	}
-    	uriMap = Mapping {
-    		from = "platform:/plugin/org.eclipse.xtext.common.types/"
-    		to = "platform:/resource/org.eclipse.xtext.common.types/"
-    	}
+    	scanClassPath = true
     }
     bean = GenModelSetup { resourceSet = resourceSet }
     bean = UMLGenModelSetup { resourceSet = resourceSet }

@@ -49,32 +49,8 @@ var Visitor = "Visitor"
 Workflow {
 	bean = ResourceSetImpl : resourceSet {}
     bean = StandaloneSetup { resourceSet = resourceSet
-    	platformUri = ".."		// A local folder to minimize workspace searching
-    	scanClassPath = true			// But we do need to search the plugin-space
-    	uriMap = Mapping {
-    		from = "platform:/plugin/org.eclipse.emf.ecore/"
-    		to = "platform:/resource/org.eclipse.emf.ecore/"
-    	}
-    	uriMap = Mapping {
-    		from = "platform:/plugin/org.eclipse.ocl.examples.build/"
-    		to = "platform:/resource/org.eclipse.ocl.examples.build/"
-    	}
-    	uriMap = Mapping {
-    		from = "platform:/plugin/${pivot.path}/"
-    		to = "platform:/resource/${pivot.path}/"
-    	}
-    	uriMap = Mapping {
-    		from = "platform:/plugin/${qvtbase.path}/"
-    		to = "platform:/resource/${qvtbase.path}/"
-    	}
-    	uriMap = Mapping {
-    		from = "platform:/plugin/${qvtcorebase.path}/"
-    		to = "platform:/resource/${qvtcorebase.path}/"
-    	}
-    	uriMap = Mapping {
-    		from = "platform:/plugin/${qvttemplate.path}/"
-    		to = "platform:/resource/${qvttemplate.path}/"
-    	}
+    	platformUri = ".."
+    	scanClassPath = true
     }
     bean = GenModelSetup { resourceSet = resourceSet }
     bean = UMLGenModelSetup { resourceSet = resourceSet }

@@ -637,7 +637,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";		
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
 		  (getRule_Overrides(), 
 		   source, 
@@ -655,7 +655,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		   source, 
 		   new String[] {
 			 "body", "dependent"
-		   });
+		   });	
 	}
 
 } //QVTbasePackageImpl

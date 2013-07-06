@@ -5,31 +5,14 @@ Bundle-SymbolicName: org.eclipse.qvtd.build;singleton:=true
 Bundle-Version: 0.11.0.qualifier
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtext,
- org.eclipse.emf.mwe2.runtime,
- org.eclipse.emf.ecore.xmi,
- org.eclipse.emf.mwe.core,
- org.eclipse.emf.mwe2.launch,
- org.eclipse.emf.mwe.utils,
- org.eclipse.uml2.uml,
- org.eclipse.emf.mapping.ecore2xml,
- org.eclipse.emf.importer,
- org.eclipse.uml2.codegen.ecore,
- org.eclipse.uml2.uml.ecore.importer,
+Require-Bundle: org.eclipse.core.resources,
  org.eclipse.core.runtime,
  org.eclipse.xtext.generator,
- org.eclipse.jdt.core,
- org.eclipse.core.resources,
- org.eclipse.text,
- org.eclipse.acceleo.engine,
- org.eclipse.xtext.common.types,
- org.eclipse.uml2.uml.resources,
  org.eclipse.ocl.examples.build,
- org.eclipse.ocl.examples.xtext.oclstdlib,
+ org.eclipse.qvtd.codegen,
  org.eclipse.qvtd.xtext.qvtcore;visibility:=reexport,
  org.eclipse.qvtd.xtext.qvtimperative;visibility:=reexport,
- org.eclipse.qvtd.xtext.qvtrelation;visibility:=reexport,
- org.eclipse.qvtd.codegen
+ org.eclipse.qvtd.xtext.qvtrelation;visibility:=reexport
 Import-Package: org.apache.commons.logging,
  org.apache.log4j
 Bundle-Vendor: %providerName

@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.codegen.qvticgmodel;
 
 import java.util.List;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 
 /**
