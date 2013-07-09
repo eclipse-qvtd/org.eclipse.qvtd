@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.EnforcementOperationCS;
@@ -197,8 +198,14 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return ((QVTcoreBaseCSVisitor<R>)visitor).visitBottomPatternCS(this);
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((QVTcoreBaseCSVisitor<?>)visitor).visitBottomPatternCS(this);
 	}
 } //BottomPatternCSImpl
