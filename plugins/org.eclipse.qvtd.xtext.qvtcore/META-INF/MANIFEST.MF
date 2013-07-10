@@ -10,7 +10,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: org.apache.log4j
 Export-Package: org.eclipse.qvtd.xtext.qvtcore,
  org.eclipse.qvtd.xtext.qvtcore.attributes,
- org.eclipse.qvtd.xtext.qvtcore.cs2pivot,
+ org.eclipse.qvtd.xtext.qvtcore.cs2as,
  org.eclipse.qvtd.xtext.qvtcore.formatting,
  org.eclipse.qvtd.xtext.qvtcore.parseTreeConstruction,
  org.eclipse.qvtd.xtext.qvtcore.parser.antlr,
