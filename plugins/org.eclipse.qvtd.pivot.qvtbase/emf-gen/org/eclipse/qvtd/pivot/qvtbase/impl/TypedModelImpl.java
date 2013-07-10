@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -279,8 +280,14 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return ((QVTbaseVisitor<R>)visitor).visitTypedModel(this);
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTbaseVisitor<?>)visitor).visitTypedModel(this);
 	}
 } //TypedModelImpl

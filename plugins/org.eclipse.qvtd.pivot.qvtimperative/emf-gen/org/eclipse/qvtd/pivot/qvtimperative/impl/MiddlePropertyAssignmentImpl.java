@@ -18,6 +18,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.impl.PropertyAssignmentImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
@@ -104,6 +105,16 @@ public class MiddlePropertyAssignmentImpl extends PropertyAssignmentImpl impleme
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTimperativePackage.MIDDLE_PROPERTY_ASSIGNMENT__CACHE_INDEX:
@@ -156,13 +167,14 @@ public class MiddlePropertyAssignmentImpl extends PropertyAssignmentImpl impleme
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return ((QVTimperativeVisitor<R>)visitor).visitMiddlePropertyAssignment(this);
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTimperativeVisitor<?>)visitor).visitMiddlePropertyAssignment(this);
 	}
 } //MiddlePropertyAssignmentImpl

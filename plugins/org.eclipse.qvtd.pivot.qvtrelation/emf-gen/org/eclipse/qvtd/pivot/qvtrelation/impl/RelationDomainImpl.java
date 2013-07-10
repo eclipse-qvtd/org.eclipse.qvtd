@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl;
@@ -292,8 +293,14 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return ((QVTrelationVisitor<R>)visitor).visitRelationDomain(this);
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTrelationVisitor<?>)visitor).visitRelationDomain(this);
 	}
 } //RelationDomainImpl

@@ -18,6 +18,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.internal.impl.PropertyCallExpImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
@@ -104,6 +105,16 @@ public class MiddlePropertyCallExpImpl extends PropertyCallExpImpl implements Mi
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTimperativePackage.MIDDLE_PROPERTY_CALL_EXP__CACHE_INDEX:
@@ -156,13 +167,14 @@ public class MiddlePropertyCallExpImpl extends PropertyCallExpImpl implements Mi
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return ((QVTimperativeVisitor<R>)visitor).visitMiddlePropertyCallExp(this);
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTimperativeVisitor<?>)visitor).visitMiddlePropertyCallExp(this);
 	}
 } //MiddlePropertyCallExpImpl

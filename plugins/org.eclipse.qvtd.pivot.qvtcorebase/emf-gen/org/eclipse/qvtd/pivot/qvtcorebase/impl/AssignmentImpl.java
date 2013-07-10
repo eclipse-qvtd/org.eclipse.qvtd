@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -241,6 +242,16 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTcoreBasePackage.ASSIGNMENT__BOTTOM_PATTERN:
@@ -362,15 +373,11 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public String toString() {
-		return super.toString();
-	}
-
-	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return ((QVTcoreBaseVisitor<R>)visitor).visitAssignment(this);
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTcoreBaseVisitor<?>)visitor).visitAssignment(this);
 	}
 } //AssignmentImpl

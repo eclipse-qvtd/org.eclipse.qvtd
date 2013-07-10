@@ -16,6 +16,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.impl.BaseModelImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -51,8 +52,14 @@ public class ImperativeModelImpl extends BaseModelImpl implements ImperativeMode
 		return QVTimperativePackage.Literals.IMPERATIVE_MODEL;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return ((QVTimperativeVisitor<R>)visitor).visitImperativeModel(this);
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTimperativeVisitor<?>)visitor).visitImperativeModel(this);
 	}
 } //ImperativeModelImpl

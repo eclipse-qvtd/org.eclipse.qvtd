@@ -17,9 +17,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -33,11 +31,6 @@ import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import test.simplerdbms.SimplerdbmsPackage;
-import test.simpleuml.SimpleumlPackage;
-import test.simpleuml.util.SimpleumlResourceFactoryImpl;
-import test.umltordbms.UmltordbmsPackage;
 
 /**
  * Test001 is a set if simple tests on the QVTi API.

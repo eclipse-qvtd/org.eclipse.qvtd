@@ -6,6 +6,14 @@
     complianceLevel="6.0" copyrightFields="false" usedGenPackages="../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot"
     interfaceNamePattern="">
   <foreignModel>QVTtemplate.ecore</foreignModel>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
+    <details key="Use Null Annotations" value="true"/>
+  </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/ToString"/>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+    <details key="Root Visitor Class" value="org.eclipse.ocl.examples.pivot.util.Visitor"/>
+    <details key="Derived Visitor Class" value="org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor"/>
+  </genAnnotations>
   <genPackages prefix="QVTtemplate" basePackage="org.eclipse.qvtd.pivot" disposableProviderFactory="true"
       ecorePackage="QVTtemplate.ecore#QVTTemplate">
     <genClasses ecoreClass="QVTtemplate.ecore#QVTTemplate.CollectionTemplateExp">

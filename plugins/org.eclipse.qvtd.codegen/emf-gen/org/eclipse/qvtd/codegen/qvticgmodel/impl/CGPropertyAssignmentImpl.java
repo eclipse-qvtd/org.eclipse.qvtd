@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -392,22 +393,27 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGPropertyAssignment(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (referredProperty: ");
-		result.append(referredProperty);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
-
-	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return ((QVTiCGModelVisitor<R>)visitor).visitCGPropertyAssignment(this);
-	}
-
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
 		return initValue != null ? initValue : this;

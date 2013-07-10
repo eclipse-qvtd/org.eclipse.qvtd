@@ -5,6 +5,14 @@
     modelName="QVTimperative" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
     copyrightFields="false" usedGenPackages="../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel#//qvtcorebase">
   <foreignModel>QVTimperative.ecore</foreignModel>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
+    <details key="Use Null Annotations" value="true"/>
+  </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/ToString"/>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+    <details key="Root Visitor Class" value="org.eclipse.ocl.examples.pivot.util.Visitor"/>
+    <details key="Derived Visitor Class" value="org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor"/>
+  </genAnnotations>
   <genPackages prefix="QVTimperative" basePackage="org.eclipse.qvtd.pivot" disposableProviderFactory="true"
       contentTypeIdentifier="org.eclipse.qvtd.qvtimperative" fileExtensions="qvtimperative"
       ecorePackage="QVTimperative.ecore#/">

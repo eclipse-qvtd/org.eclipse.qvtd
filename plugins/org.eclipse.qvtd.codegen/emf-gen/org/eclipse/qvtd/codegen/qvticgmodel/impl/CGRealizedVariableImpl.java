@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -248,11 +249,22 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return ((QVTiCGModelVisitor<R>)visitor).visitCGRealizedVariable(this);
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGRealizedVariable(this);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
  		return this;

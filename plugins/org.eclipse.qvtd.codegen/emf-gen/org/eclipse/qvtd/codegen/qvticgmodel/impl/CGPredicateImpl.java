@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -271,11 +272,22 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return ((QVTiCGModelVisitor<R>)visitor).visitCGPredicate(this);
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGPredicate(this);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
  		return this;

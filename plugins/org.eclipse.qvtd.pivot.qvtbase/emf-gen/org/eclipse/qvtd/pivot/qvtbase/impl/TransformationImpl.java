@@ -672,58 +672,114 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTbaseVisitor<?>)visitor).visitTransformation(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
+	 */
+	public Precedence createOwnedPrecedence() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Package createNestedPackage(EClass eClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Package createNestedPackage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Type createOwnedType(EClass eClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Type createOwnedType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public TypedModel getModelParameter(String name) {
+		return DomainUtil.getNamedElement(getModelParameter(), name);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	@Override
 	public String toString() {
 		return super.toString();
 	}
 
-	public Precedence createOwnedPrecedence() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Package createNestedPackage(EClass eClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Package createNestedPackage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Type createOwnedType(EClass eClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Type createOwnedType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return ((QVTbaseVisitor<R>)visitor).visitTransformation(this);
-	}
-
-	public TypedModel getModelParameter(String name) {
-		return DomainUtil.getNamedElement(getModelParameter(), name);
-	}
-
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	@Override
 	public Package getPackage() {
 		return this;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	private PackageId packageId = null;
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public @Nullable EPackage getEPackage() {
 		return (EPackage) getETarget();
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public @NonNull PackageId getPackageId() {
 		PackageId packageId2 = packageId;
 		if (packageId2 == null) {

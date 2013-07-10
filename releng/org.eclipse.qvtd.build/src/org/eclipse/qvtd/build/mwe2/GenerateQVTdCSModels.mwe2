@@ -11,12 +11,10 @@
  *     E.D.Willink - initial API and implementation
  *
  * </copyright>
- *
- * $Id: GenerateXtextModels.mwe2,v 1.2 2011/01/24 20:54:27 ewillink Exp $
  * 
  * Run As->MWE2 Workflow to regenerate the Xtest CST models.
  */
-module GenerateQVTdXtextModels
+module GenerateQVTdCSModels
 
 import org.eclipse.ocl.examples.build.utilities.*
 import org.eclipse.ocl.examples.build.xtend.*
@@ -34,7 +32,7 @@ Workflow {
     }
     bean = GenModelSetup { resourceSet = resourceSet }
     bean = UMLGenModelSetup { resourceSet = resourceSet }
-    component = @SubGenerateXtextModel { resourceSet = resourceSet
+    component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.xtext.qvtcorebase"
     	modelName = "QVTcoreBaseCST"
     	projectPrefix = "QVTcoreBase"
@@ -43,7 +41,7 @@ Workflow {
     	modelPackageName = "org.eclipse.qvtd.xtext.qvtcorebasecst"
     	visitorPackageName = "org.eclipse.qvtd.xtext.qvtcorebasecst.util"
     }
-    component = @SubGenerateXtextModel { resourceSet = resourceSet
+    component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.xtext.qvtimperative"
     	modelName = "QVTimperativeCST"
     	projectPrefix = "QVTimperative"
@@ -53,7 +51,7 @@ Workflow {
     	visitorPackageName = "org.eclipse.qvtd.xtext.qvtimperativecst.util"
     	superVisitorPackageName = "org.eclipse.qvtd.xtext.qvtcorebasecst.util"
     }
-    component = @SubGenerateXtextModel { resourceSet = resourceSet
+    component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.xtext.qvtcore"
     	modelName = "QVTcoreCST"
     	projectPrefix = "QVTcore"
@@ -63,7 +61,7 @@ Workflow {
     	visitorPackageName = "org.eclipse.qvtd.xtext.qvtcorecst.util"
     	superVisitorPackageName = "org.eclipse.qvtd.xtext.qvtcorebasecst.util"
     }
-    component = @SubGenerateXtextModel { resourceSet = resourceSet
+    component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.xtext.qvtrelation"
     	modelName = "QVTrelationCST"
     	projectPrefix = "QVTrelation"

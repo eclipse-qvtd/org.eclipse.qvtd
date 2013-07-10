@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
@@ -146,9 +147,14 @@ public class CGEcorePropertyAssignmentImpl extends CGPropertyAssignmentImpl impl
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return ((QVTiCGModelVisitor<R>)visitor).visitCGEcorePropertyAssignment(this);
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGEcorePropertyAssignment(this);
 	}
-
 } //CGEcorePropertyAssignmentImpl
