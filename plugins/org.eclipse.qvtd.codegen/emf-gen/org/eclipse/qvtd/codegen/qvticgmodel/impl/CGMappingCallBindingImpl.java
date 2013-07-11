@@ -261,7 +261,7 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {

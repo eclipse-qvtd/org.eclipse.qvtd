@@ -263,7 +263,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {

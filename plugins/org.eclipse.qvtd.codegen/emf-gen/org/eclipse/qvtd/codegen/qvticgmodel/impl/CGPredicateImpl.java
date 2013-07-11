@@ -286,7 +286,7 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {

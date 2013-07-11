@@ -41,7 +41,7 @@ Workflow {
     	superProjectName = "org.eclipse.ocl.examples.pivot"
     	superProjectPrefix = ""
     	modelPackageName = "org.eclipse.qvtd.pivot.qvtbase"
-    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtbase.util"
+//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtbase.util"
     }
     component = @SubGenerateASModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtcorebase"
@@ -50,7 +50,7 @@ Workflow {
     	superProjectName = "org.eclipse.qvtd.pivot.qvtbase"
     	superProjectPrefix = "QVTbase"
     	modelPackageName = "org.eclipse.qvtd.pivot.qvtcorebase"
-    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtcorebase.util"
+//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtcorebase.util"
     }
     component = @SubGenerateASModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtcore"
@@ -59,7 +59,7 @@ Workflow {
     	superProjectName = "org.eclipse.qvtd.pivot.qvtcorebase"
     	superProjectPrefix = "QVTcoreBase"
     	modelPackageName = "org.eclipse.qvtd.pivot.qvtcore"
-    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtcore.util"
+//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtcore.util"
     }
     component = @SubGenerateASModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtimperative"
@@ -68,7 +68,7 @@ Workflow {
     	superProjectName = "org.eclipse.qvtd.pivot.qvtcorebase"
     	superProjectPrefix = "QVTcoreBase"
     	modelPackageName = "org.eclipse.qvtd.pivot.qvtimperative"
-    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtimperative.util"
+//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtimperative.util"
     }
     component = @SubGenerateASModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvttemplate"
@@ -77,7 +77,7 @@ Workflow {
     	superProjectName = "org.eclipse.qvtd.pivot.qvtbase"
     	superProjectPrefix = "QVTbase"
     	modelPackageName = "org.eclipse.qvtd.pivot.qvttemplate"
-    	visitorPackageName = "org.eclipse.qvtd.pivot.qvttemplate.util"
+//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvttemplate.util"
     }
     component = @SubGenerateASModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtrelation"
@@ -86,6 +86,6 @@ Workflow {
     	superProjectName = "org.eclipse.qvtd.pivot.qvttemplate"
     	superProjectPrefix = "QVTtemplate"
     	modelPackageName = "org.eclipse.qvtd.pivot.qvtrelation"
-    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtrelation.util"
+//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtrelation.util"
     }
 }

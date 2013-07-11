@@ -412,7 +412,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {

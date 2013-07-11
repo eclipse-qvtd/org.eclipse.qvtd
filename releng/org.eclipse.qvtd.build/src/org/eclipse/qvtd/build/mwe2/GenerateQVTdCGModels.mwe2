@@ -41,6 +41,9 @@ Workflow {
     }
     component = GenerateCGVisitors { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.codegen"
+    	projectPrefix = "QVTiCGModel"
+    	superProjectName = "org.eclipse.ocl.examples.codegen"
+    	superProjectPrefix = "CGModel"
     	genModelFile = "model/qvticgmodel.genmodel"
     	javaFolder = "emf-gen"
     	modelPackageName = "org.eclipse.qvtd.codegen.qvticgmodel"

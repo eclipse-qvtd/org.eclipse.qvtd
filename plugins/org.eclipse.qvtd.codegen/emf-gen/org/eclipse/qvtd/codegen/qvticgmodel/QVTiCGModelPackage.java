@@ -343,33 +343,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_ASSIGNMENT___SET_NON_INVALID = CGModelPackage.CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_ASSIGNMENT___SET_NON_NULL = CGModelPackage.CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Property Assignment</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_ASSIGNMENT_OPERATION_COUNT = CGModelPackage.CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcorePropertyAssignmentImpl <em>CG Ecore Property Assignment</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -639,33 +612,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_PROPERTY_ASSIGNMENT_FEATURE_COUNT = CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_ASSIGNMENT___SET_NON_INVALID = CG_PROPERTY_ASSIGNMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_ASSIGNMENT___SET_NON_NULL = CG_PROPERTY_ASSIGNMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Ecore Property Assignment</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_ASSIGNMENT_OPERATION_COUNT = CG_PROPERTY_ASSIGNMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl <em>CG Mapping</em>}' class.
@@ -1097,34 +1043,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_REALIZED_VARIABLE_FEATURE_COUNT = CGModelPackage.CG_VARIABLE_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REALIZED_VARIABLE___SET_NON_INVALID = CGModelPackage.CG_VARIABLE___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REALIZED_VARIABLE___SET_NON_NULL = CGModelPackage.CG_VARIABLE___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Realized Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REALIZED_VARIABLE_OPERATION_COUNT = CGModelPackage.CG_VARIABLE_OPERATION_COUNT + 0;
-
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcoreRealizedVariableImpl <em>CG Ecore Realized Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1385,33 +1303,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_REALIZED_VARIABLE_FEATURE_COUNT = CG_REALIZED_VARIABLE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_REALIZED_VARIABLE___SET_NON_INVALID = CG_REALIZED_VARIABLE___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_REALIZED_VARIABLE___SET_NON_NULL = CG_REALIZED_VARIABLE___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Ecore Realized Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_REALIZED_VARIABLE_OPERATION_COUNT = CG_REALIZED_VARIABLE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGFunctionImpl <em>CG Function</em>}' class.
@@ -1683,33 +1574,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_FUNCTION_FEATURE_COUNT = CGModelPackage.CG_OPERATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FUNCTION___SET_NON_INVALID = CGModelPackage.CG_OPERATION___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FUNCTION___SET_NON_NULL = CGModelPackage.CG_OPERATION___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Function</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FUNCTION_OPERATION_COUNT = CGModelPackage.CG_OPERATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGFunctionCallExpImpl <em>CG Function Call Exp</em>}' class.
@@ -1992,33 +1856,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_FUNCTION_CALL_EXP_FEATURE_COUNT = CGModelPackage.CG_OPERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FUNCTION_CALL_EXP___SET_NON_INVALID = CGModelPackage.CG_OPERATION_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FUNCTION_CALL_EXP___SET_NON_NULL = CGModelPackage.CG_OPERATION_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Function Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FUNCTION_CALL_EXP_OPERATION_COUNT = CGModelPackage.CG_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGFunctionParameterImpl <em>CG Function Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2270,33 +2107,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_FUNCTION_PARAMETER_FEATURE_COUNT = CGModelPackage.CG_PARAMETER_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FUNCTION_PARAMETER___SET_NON_INVALID = CGModelPackage.CG_PARAMETER___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FUNCTION_PARAMETER___SET_NON_NULL = CGModelPackage.CG_PARAMETER___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Function Parameter</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FUNCTION_PARAMETER_OPERATION_COUNT = CGModelPackage.CG_PARAMETER_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGGuardVariableImpl <em>CG Guard Variable</em>}' class.
@@ -2561,33 +2371,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_GUARD_VARIABLE_FEATURE_COUNT = CGModelPackage.CG_PARAMETER_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_VARIABLE___SET_NON_INVALID = CGModelPackage.CG_PARAMETER___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_VARIABLE___SET_NON_NULL = CGModelPackage.CG_PARAMETER___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Guard Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_VARIABLE_OPERATION_COUNT = CGModelPackage.CG_PARAMETER_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2703,15 +2486,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_MAPPING_FEATURE_COUNT = CGModelPackage.CG_TYPED_ELEMENT_FEATURE_COUNT + 6;
-
-	/**
-	 * The number of operations of the '<em>CG Mapping</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_OPERATION_COUNT = CGModelPackage.CG_TYPED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -2948,33 +2722,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING_CALL_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_CALL___SET_NON_INVALID = CGModelPackage.CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_CALL___SET_NON_NULL = CGModelPackage.CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Mapping Call</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_CALL_OPERATION_COUNT = CGModelPackage.CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3207,33 +2954,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_MAPPING_CALL_BINDING_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_CALL_BINDING___SET_NON_INVALID = CGModelPackage.CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_CALL_BINDING___SET_NON_NULL = CGModelPackage.CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Mapping Call Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_CALL_BINDING_OPERATION_COUNT = CGModelPackage.CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -3470,33 +3190,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_PREDICATE_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PREDICATE___SET_NON_INVALID = CGModelPackage.CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PREDICATE___SET_NON_NULL = CGModelPackage.CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Predicate</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PREDICATE_OPERATION_COUNT = CGModelPackage.CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3587,16 +3280,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_TRANSFORMATION_FEATURE_COUNT = CGModelPackage.CG_CLASS_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of operations of the '<em>CG Transformation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TRANSFORMATION_OPERATION_COUNT = CGModelPackage.CG_CLASS_OPERATION_COUNT + 0;
-
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGTypedModelImpl <em>CG Typed Model</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3659,15 +3342,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TYPED_MODEL_FEATURE_COUNT = CGModelPackage.CG_NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of operations of the '<em>CG Typed Model</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPED_MODEL_OPERATION_COUNT = CGModelPackage.CG_NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment <em>CG Property Assignment</em>}'.
