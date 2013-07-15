@@ -22,7 +22,7 @@ import "http://www.eclipse.org/ocl/3.1.0/EssentialOCLCST" as essentialocl
 import "http://www.eclipse.org/ocl/3.1.0/Pivot" as pivot
 import "http://www.eclipse.org/qvt/0.9/QVTbase" as qvtbase
 import "http://www.eclipse.org/qvt/0.9/QVTcoreBase" as qvtcorebase
-import "http://www.eclipse.org/qvt/0.9/QVTimperatve" as qvtimperative
+import "http://www.eclipse.org/qvt/0.9/QVTimperative" as qvtimperative
 import "http://www.eclipse.org/qvt/0.9/QVTimperativeCST"
 
 TopLevelCS:

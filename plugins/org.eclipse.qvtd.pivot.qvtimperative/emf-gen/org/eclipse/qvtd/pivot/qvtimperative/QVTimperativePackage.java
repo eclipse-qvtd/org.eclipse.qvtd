@@ -56,7 +56,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvt/0.9/QVTimperatve";
+	String eNS_URI = "http://www.eclipse.org/qvt/0.9/QVTimperative";
 
 	/**
 	 * The package namespace name.
