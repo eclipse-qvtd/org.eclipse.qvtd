@@ -37,26 +37,29 @@ import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateToStringVisitor;
  */
 public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor implements QVTrelationVisitor<String>
 {
-	private static final class Factory implements ToStringVisitor.Factory
+	protected static class QVTrelationToStringFactory extends QVTtemplateToStringFactory
 	{
-		private Factory() {
-			QVTtemplateToStringVisitor.FACTORY.getClass();
-			ToStringVisitor.addFactory(this);
+		protected QVTrelationToStringFactory() {
+//			FACTORY.getClass();
 		}
 
-		public @NonNull ToStringVisitor createToStringVisitor() {
-			return new QVTrelationToStringVisitor();
+		@Override
+		public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
+			return new QVTrelationToStringVisitor(s, getClass());
 		}
 
+		@Override
 		@SuppressWarnings("null")
 		public @NonNull EPackage getEPackage() {
 			return QVTrelationPackage.eINSTANCE;
 		}
 	}
 
-	public static @NonNull ToStringVisitor.Factory FACTORY = new Factory();
+	public static @NonNull ToStringVisitor.Factory FACTORY = new QVTrelationToStringFactory();
 
-	protected QVTrelationToStringVisitor() {}
+	protected QVTrelationToStringVisitor(@NonNull StringBuilder s, /*@NonNull*/ Class<? extends ToStringVisitor.Factory> factoryClass) {
+		super(s, factoryClass);
+	}
 
 	public String visitDomainPattern(@NonNull DomainPattern object) {
 		// TODO Auto-generated method stub

@@ -36,26 +36,29 @@ import org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor;
  */
 public class QVTcoreBaseToStringVisitor extends QVTbaseToStringVisitor implements QVTcoreBaseVisitor<String>
 {
-	private static final class Factory implements ToStringVisitor.Factory
+	protected static class QVTcoreBaseToStringFactory extends QVTbaseToStringFactory
 	{
-		private Factory() {
-			QVTbaseToStringVisitor.FACTORY.getClass();
-			ToStringVisitor.addFactory(this);
+		protected QVTcoreBaseToStringFactory() {
+//			FACTORY.getClass();
 		}
 
-		public @NonNull ToStringVisitor createToStringVisitor() {
-			return new QVTcoreBaseToStringVisitor();
+		@Override
+		public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
+			return new QVTcoreBaseToStringVisitor(s, getClass());
 		}
 
+		@Override
 		@SuppressWarnings("null")
 		public @NonNull EPackage getEPackage() {
 			return QVTcoreBasePackage.eINSTANCE;
 		}
 	}
 
-	public static @NonNull ToStringVisitor.Factory FACTORY = new Factory();
+	public static @NonNull ToStringVisitor.Factory FACTORY = new QVTcoreBaseToStringFactory();
 
-	protected QVTcoreBaseToStringVisitor() {}
+	protected QVTcoreBaseToStringVisitor(@NonNull StringBuilder s, /*@NonNull*/ Class<? extends ToStringVisitor.Factory> factoryClass) {
+		super(s, factoryClass);
+	}
 
 	public String visitAssignment(@NonNull Assignment object) {
 		append("Assignment ");
