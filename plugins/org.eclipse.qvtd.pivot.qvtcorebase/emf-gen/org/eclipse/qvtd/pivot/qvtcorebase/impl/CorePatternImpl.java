@@ -82,7 +82,8 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Variable> getVariable() {
+	@SuppressWarnings("null")
+	public @NonNull EList<Variable> getVariable() {
 		if (variable == null) {
 			variable = new EObjectContainmentEList<Variable>(Variable.class, this, QVTcoreBasePackage.CORE_PATTERN__VARIABLE);
 		}
@@ -94,7 +95,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Variable> getAllVariables() {
+	public @NonNull EList<Variable> getAllVariables() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();

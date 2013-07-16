@@ -17,6 +17,7 @@
 package org.eclipse.qvtd.pivot.qvtcorebase;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -82,7 +83,7 @@ public interface BottomPattern extends CorePattern {
 	 * @model opposite="bottomPattern" containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<Assignment> getAssignment();
+	@NonNull EList<Assignment> getAssignment();
 
 	/**
 	 * Returns the value of the '<em><b>Enforcement Operation</b></em>' containment reference list.
@@ -100,7 +101,7 @@ public interface BottomPattern extends CorePattern {
 	 * @model opposite="bottomPattern" containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<EnforcementOperation> getEnforcementOperation();
+	@NonNull EList<EnforcementOperation> getEnforcementOperation();
 
 	/**
 	 * Returns the value of the '<em><b>Realized Variable</b></em>' containment reference list.
@@ -116,6 +117,6 @@ public interface BottomPattern extends CorePattern {
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<RealizedVariable> getRealizedVariable();
+	@NonNull EList<RealizedVariable> getRealizedVariable();
 
 } // BottomPattern

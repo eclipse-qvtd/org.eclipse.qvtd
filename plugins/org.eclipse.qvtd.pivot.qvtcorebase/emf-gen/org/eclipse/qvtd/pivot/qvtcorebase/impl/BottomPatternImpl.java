@@ -152,7 +152,8 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Assignment> getAssignment() {
+	@SuppressWarnings("null")
+	public @NonNull EList<Assignment> getAssignment() {
 		if (assignment == null) {
 			assignment = new EObjectContainmentWithInverseEList<Assignment>(Assignment.class, this, QVTcoreBasePackage.BOTTOM_PATTERN__ASSIGNMENT, QVTcoreBasePackage.ASSIGNMENT__BOTTOM_PATTERN);
 		}
@@ -164,7 +165,8 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EnforcementOperation> getEnforcementOperation() {
+	@SuppressWarnings("null")
+	public @NonNull EList<EnforcementOperation> getEnforcementOperation() {
 		if (enforcementOperation == null) {
 			enforcementOperation = new EObjectContainmentWithInverseEList<EnforcementOperation>(EnforcementOperation.class, this, QVTcoreBasePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION, QVTcoreBasePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN);
 		}
@@ -176,7 +178,8 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<RealizedVariable> getRealizedVariable() {
+	@SuppressWarnings("null")
+	public @NonNull EList<RealizedVariable> getRealizedVariable() {
 		if (realizedVariable == null) {
 			realizedVariable = new EObjectContainmentEList<RealizedVariable>(RealizedVariable.class, this, QVTcoreBasePackage.BOTTOM_PATTERN__REALIZED_VARIABLE);
 		}

@@ -57,53 +57,8 @@ import org.eclipse.qvtd.xtext.qvtcorebasecst.util.AbstractQVTcoreBasePostOrderVi
 
 public class QVTcoreBasePostOrderVisitor extends AbstractQVTcoreBasePostOrderVisitor
 {
-
 	public QVTcoreBasePostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
-	}
-
-	protected void refreshConstraints(List<Assignment> assignments, List<Predicate> predicates, PatternCS csElement) {
-		List<Assignment> pAssignments = new ArrayList<Assignment>(); 
-		List<Predicate> pPredicates = new ArrayList<Predicate>(); 
-		for (AssignmentCS csConstraint : csElement.getConstraints()) {
-			ExpCS csTarget = csConstraint.getTarget();
-			ExpCS csInitialiser = csConstraint.getInitialiser();
-			boolean isDefault = csConstraint.isDefault();
-			OCLExpression target = csTarget != null ? context.visitLeft2Right(OCLExpression.class, csTarget) : null;
-			if (csInitialiser != null) {
-				Assignment assignment = null;
-				if (target instanceof PropertyCallExp) {
-					assignment = refreshPropertyAssignment((PropertyCallExp)target, csConstraint);
-				}
-				else if (target instanceof VariableExp) {
-					assignment = refreshVariableAssignment((VariableExp)target, csConstraint);
-				}
-				else {
-					// FIXME warning
-				}
-				if (assignment != null) {
-					OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
-					assignment.setIsDefault(isDefault);
-					assignment.setValue(initialiser);
-					pAssignments.add(assignment);
-				}
-			}
-			else {
-				if (isDefault) {
-					// FIXME warning
-				}
-				Predicate predicate = context.refreshModelElement(Predicate.class,
-						QVTbasePackage.Literals.PREDICATE, csConstraint);
-				if (predicate != null) {
-					predicate.setConditionExpression(target);
-					pPredicates.add(predicate);
-				}
-			}
-		}
-		if (assignments != null) {
-			PivotUtil.refreshList(assignments, pAssignments);
-		}
-		PivotUtil.refreshList(predicates, pPredicates);
 	}
 
 	protected @Nullable Assignment refreshPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull AssignmentCS csConstraint) {
@@ -141,7 +96,44 @@ public class QVTcoreBasePostOrderVisitor extends AbstractQVTcoreBasePostOrderVis
 	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
 		BottomPattern pBottomPattern = PivotUtil.getPivot(BottomPattern.class, csElement);
 		if (pBottomPattern != null) {
-			refreshConstraints(pBottomPattern.getAssignment(), pBottomPattern.getPredicate(), csElement);
+			List<Assignment> pAssignments = new ArrayList<Assignment>(); 
+			List<Predicate> pPredicates = new ArrayList<Predicate>(); 
+			for (AssignmentCS csConstraint : csElement.getConstraints()) {
+				ExpCS csTarget = csConstraint.getTarget();
+				ExpCS csInitialiser = csConstraint.getInitialiser();
+				boolean isDefault = csConstraint.isDefault();
+				OCLExpression target = csTarget != null ? context.visitLeft2Right(OCLExpression.class, csTarget) : null;
+				if (csInitialiser != null) {
+					Assignment assignment = null;
+					if (target instanceof PropertyCallExp) {
+						assignment = refreshPropertyAssignment((PropertyCallExp)target, csConstraint);
+					}
+					else if (target instanceof VariableExp) {
+						assignment = refreshVariableAssignment((VariableExp)target, csConstraint);
+					}
+					else if (target != null) {
+						context.addDiagnostic(csElement, "unrecognised Constraint target " + target.eClass().getName());
+					}
+					if (assignment != null) {
+						OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
+						assignment.setIsDefault(isDefault);
+						assignment.setValue(initialiser);
+						pAssignments.add(assignment);
+					}
+				}
+				else {
+					if (isDefault) {
+						context.addDiagnostic(csElement, "misplaced default ignored");
+					}
+					Predicate predicate = context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csConstraint);
+					if (predicate != null) {
+						predicate.setConditionExpression(target);
+						pPredicates.add(predicate);
+					}
+				}
+			}
+			PivotUtil.refreshList(pBottomPattern.getAssignment(), pAssignments);
+			PivotUtil.refreshList(pBottomPattern.getPredicate(), pPredicates);
 		}
 		return null;
 	}
@@ -170,7 +162,33 @@ public class QVTcoreBasePostOrderVisitor extends AbstractQVTcoreBasePostOrderVis
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
 		GuardPattern pGuardPattern = PivotUtil.getPivot(GuardPattern.class, csElement);
 		if (pGuardPattern != null) {
-			refreshConstraints(null, pGuardPattern.getPredicate(), csElement);
+			List<Predicate> pPredicates = new ArrayList<Predicate>(); 
+			for (AssignmentCS csConstraint : csElement.getConstraints()) {
+				ExpCS csTarget = csConstraint.getTarget();
+				ExpCS csInitialiser = csConstraint.getInitialiser();
+				OCLExpression target = csTarget != null ? context.visitLeft2Right(OCLExpression.class, csTarget) : null;
+				if (csInitialiser != null) {
+					if (target instanceof VariableExp) {
+						Variable variable = (Variable) ((VariableExp)target).getReferredVariable();
+						OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
+						variable.setInitExpression(initialiser);
+					}
+					else if (target != null) {
+						context.addDiagnostic(csElement, "unrecognised Guard Constraint target " + target.eClass().getName());
+					}
+				}
+				else {
+					Predicate predicate = context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csConstraint);
+					if (predicate != null) {
+						predicate.setConditionExpression(target);
+						pPredicates.add(predicate);
+					}
+				}
+				if (csConstraint.isDefault()) {
+					context.addDiagnostic(csElement, "misplaced default ignored");
+				}
+			}
+			PivotUtil.refreshList(pGuardPattern.getPredicate(), pPredicates);
 		}
 		return null;
 	}

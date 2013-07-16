@@ -94,7 +94,8 @@ public class PatternImpl extends ElementImpl implements Pattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Predicate> getPredicate() {
+	@SuppressWarnings("null")
+	public @NonNull EList<Predicate> getPredicate() {
 		if (predicate == null) {
 			predicate = new EObjectContainmentWithInverseEList<Predicate>(Predicate.class, this, QVTbasePackage.PATTERN__PREDICATE, QVTbasePackage.PREDICATE__PATTERN);
 		}
@@ -106,7 +107,8 @@ public class PatternImpl extends ElementImpl implements Pattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Variable> getBindsTo() {
+	@SuppressWarnings("null")
+	public @NonNull EList<Variable> getBindsTo() {
 		if (bindsTo == null) {
 			bindsTo = new EObjectResolvingEList<Variable>(Variable.class, this, QVTbasePackage.PATTERN__BINDS_TO);
 		}

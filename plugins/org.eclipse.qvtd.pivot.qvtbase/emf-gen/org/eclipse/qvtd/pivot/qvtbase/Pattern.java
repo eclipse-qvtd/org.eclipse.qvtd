@@ -18,6 +18,7 @@ package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Variable;
 
@@ -55,7 +56,7 @@ public interface Pattern extends EObject, Element {
 	 * @model opposite="pattern" containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<Predicate> getPredicate();
+	@NonNull EList<Predicate> getPredicate();
 
 	/**
 	 * Returns the value of the '<em><b>Binds To</b></em>' reference list.
@@ -71,6 +72,6 @@ public interface Pattern extends EObject, Element {
 	 * @model ordered="false"
 	 * @generated
 	 */
-	EList<Variable> getBindsTo();
+	@NonNull EList<Variable> getBindsTo();
 
 } // Pattern
