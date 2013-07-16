@@ -72,15 +72,11 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 	}
 
 	public String visitFunction(@NonNull Function object) {
-		append("function ");
-		appendName(object);
-		return null;
+		return visitOperation(object);
 	}
 
 	public String visitFunctionParameter(@NonNull FunctionParameter object) {
-		append("function parameter ");
-		appendName(object);
-		return null;
+		return visitParameter(object);
 	}
 
 	public String visitPattern(@NonNull Pattern object) {
@@ -90,8 +86,7 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 	}
 
 	public String visitPredicate(@NonNull Predicate object) {
-		append("predicate ");
-//		appendName(object);
+		safeVisit(object.getConditionExpression());
 		return null;
 	}
 

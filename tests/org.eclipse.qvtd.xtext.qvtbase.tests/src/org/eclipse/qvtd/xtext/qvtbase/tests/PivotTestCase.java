@@ -42,15 +42,20 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
+import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.uml2.uml.profile.l2.L2Package;
 import org.eclipse.uml2.uml.resource.UML302UMLResource;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
@@ -119,6 +124,23 @@ public class PivotTestCase extends TestCase
 		s.append(children.size() + " validation errors");
 		for (Diagnostic child : children){
 			s.append("\n\t");
+			if (child.getData().size() > 0) {
+				Object data = child.getData().get(0);
+				if (data instanceof Element) {
+					ModelElementCS csElement = ElementUtil.getCsElement((Element)data);
+					if (csElement != null) {
+						ICompositeNode node = NodeModelUtils.getNode(csElement);
+						if (node != null) {
+							Resource eResource = csElement.eResource();
+							if (eResource != null) {
+								s.append(eResource.getURI().lastSegment() + ":");
+							}
+							int startLine = node.getStartLine();
+							s.append(startLine + ": ");
+						}
+					}
+				}
+			}
 			s.append(child.getMessage());
 		}
 		fail(s.toString());
