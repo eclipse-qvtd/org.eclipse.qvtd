@@ -18,6 +18,7 @@ package org.eclipse.qvtd.xtext.qvtrelationcst.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.TypedElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcst.ParamDeclarationCS;
@@ -53,8 +54,14 @@ public class ParamDeclarationCSImpl extends TypedElementCSImpl implements ParamD
 		return QVTrelationCSTPackage.Literals.PARAM_DECLARATION_CS;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return ((QVTrelationCSVisitor<R>)visitor).visitParamDeclarationCS(this);
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((QVTrelationCSVisitor<?>)visitor).visitParamDeclarationCS(this);
 	}
 } //ParamDeclarationCSImpl

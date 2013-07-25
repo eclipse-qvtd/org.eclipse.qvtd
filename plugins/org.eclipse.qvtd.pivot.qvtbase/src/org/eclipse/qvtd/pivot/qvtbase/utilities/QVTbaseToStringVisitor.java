@@ -36,26 +36,29 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  */
 public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVisitor<String>
 {
-	private static final class Factory implements ToStringVisitor.Factory
+	protected static class QVTbaseToStringFactory extends Pivot2StringFactory
 	{
-		private Factory() {
-			ToStringVisitor.FACTORY.getClass();
-			ToStringVisitor.addFactory(this);
+		protected QVTbaseToStringFactory() {
+//			FACTORY.getClass();
 		}
 
-		public @NonNull ToStringVisitor createToStringVisitor() {
-			return new QVTbaseToStringVisitor();
+		@Override
+		public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
+			return new QVTbaseToStringVisitor(s, getClass());
 		}
 
+		@Override
 		@SuppressWarnings("null")
 		public @NonNull EPackage getEPackage() {
 			return QVTbasePackage.eINSTANCE;
 		}
 	}
 
-	public static @NonNull ToStringVisitor.Factory FACTORY = new Factory();
+	public static @NonNull ToStringVisitor.Factory FACTORY = new QVTbaseToStringFactory();
 
-	protected QVTbaseToStringVisitor() {}
+	protected QVTbaseToStringVisitor(@NonNull StringBuilder s, /*@NonNull*/ Class<? extends ToStringVisitor.Factory> factoryClass) {
+		super(s, factoryClass);
+	}
 
 	public String visitBaseModel(@NonNull BaseModel object) {
 		append("base model ");
@@ -69,15 +72,11 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 	}
 
 	public String visitFunction(@NonNull Function object) {
-		append("function ");
-		appendName(object);
-		return null;
+		return visitOperation(object);
 	}
 
 	public String visitFunctionParameter(@NonNull FunctionParameter object) {
-		append("function parameter ");
-		appendName(object);
-		return null;
+		return visitParameter(object);
 	}
 
 	public String visitPattern(@NonNull Pattern object) {
@@ -87,8 +86,7 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 	}
 
 	public String visitPredicate(@NonNull Predicate object) {
-		append("predicate ");
-//		appendName(object);
+		safeVisit(object.getConditionExpression());
 		return null;
 	}
 

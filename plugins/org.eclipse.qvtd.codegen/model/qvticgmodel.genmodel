@@ -7,21 +7,45 @@
     suppressEMFTypes="true" testsDirectory="/org.eclipse.qvtd.codegen.tests/emf-gen"
     booleanFlagsReservedBits="8" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
     copyrightFields="false" usedGenPackages="../../org.eclipse.ocl.examples.codegen/model/cgmodel.genmodel#//cgmodel"
-    operationReflection="true" importOrganizing="true">
+    importOrganizing="true">
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
+    <details key="Use Null Annotations" value="true"/>
+  </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/ToString"/>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+    <details key="Root Visitor Class" value="org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor"/>
+    <details key="Derived Visitor Class" value="org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor"/>
+  </genAnnotations>
   <foreignModel>qvticgmodel.ecore</foreignModel>
   <genPackages prefix="QVTiCGModel" basePackage="org.eclipse.qvtd.codegen" disposableProviderFactory="true"
       ecorePackage="qvticgmodel.ecore#/">
-    <genClasses ecoreClass="qvticgmodel.ecore#//CGPropertyAssignment">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPropertyAssignment/initValue"/>
+    <genClasses ecoreClass="qvticgmodel.ecore#//CGEcorePropertyAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGEcorePropertyAssignment/eStructuralFeature"/>
+    </genClasses>
+    <genClasses ecoreClass="qvticgmodel.ecore#//CGEcoreRealizedVariable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGEcoreRealizedVariable/eClassifier"/>
+    </genClasses>
+    <genClasses ecoreClass="qvticgmodel.ecore#//CGFunction"/>
+    <genClasses ecoreClass="qvticgmodel.ecore#//CGFunctionCallExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGFunctionCallExp/function"/>
+    </genClasses>
+    <genClasses ecoreClass="qvticgmodel.ecore#//CGFunctionParameter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGFunctionParameter/function"/>
+    </genClasses>
+    <genClasses ecoreClass="qvticgmodel.ecore#//CGGuardVariable">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGGuardVariable/mapping"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGGuardVariable/typedModel"/>
     </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMapping">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMapping/transformation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMapping/guardVariables"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMapping/predicates"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMapping/realizedVariables"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMapping/assignments"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMapping/mappingCalls"/>
     </genClasses>
-    <genClasses ecoreClass="qvticgmodel.ecore#//CGTransformation"/>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMappingCall">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingCall/mapping"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingCall/mappingCallBindings"/>
     </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMappingCallBinding">
@@ -29,8 +53,26 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qvticgmodel.ecore#//CGMappingCallBinding/loop"/>
     </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGPredicate">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPredicate/mapping"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPredicate/conditionExpression"/>
     </genClasses>
-    <genClasses ecoreClass="qvticgmodel.ecore#//CGRealizedVariable"/>
+    <genClasses ecoreClass="qvticgmodel.ecore#//CGPropertyAssignment">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPropertyAssignment/mapping"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPropertyAssignment/slotValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qvticgmodel.ecore#//CGPropertyAssignment/referredProperty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPropertyAssignment/initValue"/>
+    </genClasses>
+    <genClasses ecoreClass="qvticgmodel.ecore#//CGRealizedVariable">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGRealizedVariable/mapping"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGRealizedVariable/typedModel"/>
+    </genClasses>
+    <genClasses ecoreClass="qvticgmodel.ecore#//CGTransformation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGTransformation/mappings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGTransformation/typedModels"/>
+    </genClasses>
+    <genClasses ecoreClass="qvticgmodel.ecore#//CGTypedModel">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGTypedModel/transformation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qvticgmodel.ecore#//CGTypedModel/modelIndex"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

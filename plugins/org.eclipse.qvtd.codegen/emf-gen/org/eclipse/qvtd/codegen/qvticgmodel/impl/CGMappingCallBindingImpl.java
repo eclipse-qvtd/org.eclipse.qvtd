@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -160,6 +161,16 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE_OR_VALUES:
@@ -236,18 +247,24 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return ((QVTiCGModelVisitor<R>)visitor).visitCGMappingCallBinding(this);
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMappingCallBinding(this);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
 		return valueOrValues != null ? valueOrValues : this;
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 } //CGMappingCallBindingImpl

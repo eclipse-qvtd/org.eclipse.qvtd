@@ -15,9 +15,13 @@
 package org.eclipse.qvtd.pivot.qvtrelation.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.impl.BaseModelImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
+import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,6 +50,17 @@ public class RelationModelImpl extends BaseModelImpl implements RelationModel {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTrelationPackage.Literals.RELATION_MODEL;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTrelationVisitor<?>)visitor).visitRelationModel(this);
 	}
 
 } //RelationModelImpl

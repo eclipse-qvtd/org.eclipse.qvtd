@@ -422,14 +422,14 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createImportAnnotations() {
-		String source = "http://www.eclipse.org/OCL/Import";			
+		String source = "http://www.eclipse.org/OCL/Import";	
 		addAnnotation
 		  (this, 
 		   source, 
 		   new String[] {
 			 "qvtb", "/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/",
 			 "qvtcb", "/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/"
-		   });															
+		   });	
 	}
 
 } //QVTimperativePackageImpl

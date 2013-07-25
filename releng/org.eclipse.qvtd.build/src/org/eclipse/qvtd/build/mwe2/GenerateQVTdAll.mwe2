@@ -20,8 +20,9 @@ module GenerateQVTdAll
  * Generate all auto-generated files for the QVTd Editors
  */
 Workflow {
-  component = @GenerateQVTdPivotModels {}
-  component = @GenerateQVTdXtextModels {}
+  component = @GenerateQVTdASModels {}
+  component = @GenerateQVTdCSModels {}
+  component = @GenerateQVTdCGModels {}
   component = @GenerateQVTcoreBaseEditor {}
   component = @GenerateQVTcoreEditor {}
   component = @GenerateQVTimperativeEditor {}

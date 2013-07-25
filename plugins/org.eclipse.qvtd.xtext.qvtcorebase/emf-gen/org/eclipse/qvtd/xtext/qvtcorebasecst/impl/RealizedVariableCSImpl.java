@@ -18,6 +18,7 @@ package org.eclipse.qvtd.xtext.qvtcorebasecst.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.QVTcoreBaseCSTPackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.RealizedVariableCS;
@@ -52,8 +53,14 @@ public class RealizedVariableCSImpl extends RealizeableVariableCSImpl implements
 		return QVTcoreBaseCSTPackage.Literals.REALIZED_VARIABLE_CS;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return ((QVTcoreBaseCSVisitor<R>)visitor).visitRealizedVariableCS(this);
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((QVTcoreBaseCSVisitor<?>)visitor).visitRealizedVariableCS(this);
 	}
 } //RealizedVariableCSImpl

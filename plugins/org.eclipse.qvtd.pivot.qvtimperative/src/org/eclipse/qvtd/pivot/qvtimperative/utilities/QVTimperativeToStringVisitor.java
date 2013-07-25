@@ -34,26 +34,29 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  */
 public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor implements QVTimperativeVisitor<String>
 {
-	private static final class Factory implements ToStringVisitor.Factory
+	protected static class QVTimperativeToStringFactory extends QVTcoreBaseToStringFactory
 	{
-		private Factory() {
-			QVTcoreBaseToStringVisitor.FACTORY.getClass();
-			ToStringVisitor.addFactory(this);
+		protected QVTimperativeToStringFactory() {
+//			FACTORY.getClass();
 		}
 
-		public @NonNull ToStringVisitor createToStringVisitor() {
-			return new QVTimperativeToStringVisitor();
+		@Override
+		public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
+			return new QVTimperativeToStringVisitor(s, getClass());
 		}
 
+		@Override
 		@SuppressWarnings("null")
 		public @NonNull EPackage getEPackage() {
 			return QVTimperativePackage.eINSTANCE;
 		}
 	}
 
-	public static @NonNull ToStringVisitor.Factory FACTORY = new Factory();
+	public static @NonNull ToStringVisitor.Factory FACTORY = new QVTimperativeToStringFactory();
 
-	protected QVTimperativeToStringVisitor() {}
+	protected QVTimperativeToStringVisitor(@NonNull StringBuilder s, /*@NonNull*/ Class<? extends ToStringVisitor.Factory> factoryClass) {
+		super(s, factoryClass);
+	}
 
 	public @Nullable String visitImperativeModel(@NonNull ImperativeModel object) {
 		return visitRoot(object);

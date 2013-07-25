@@ -17,6 +17,7 @@
 package org.eclipse.qvtd.pivot.qvtcorebase;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 
@@ -51,7 +52,7 @@ public interface CorePattern extends Pattern {
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<Variable> getVariable();
+	@NonNull EList<Variable> getVariable();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -59,7 +60,7 @@ public interface CorePattern extends Pattern {
 	 * @model kind="operation" ordered="false"
 	 * @generated
 	 */
-	EList<Variable> getAllVariables();
+	@NonNull EList<Variable> getAllVariables();
 
 	/**
 	 * <!-- begin-user-doc -->

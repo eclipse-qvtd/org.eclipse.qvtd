@@ -18,6 +18,7 @@ package org.eclipse.qvtd.pivot.qvtrelation.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.internal.impl.PropertyCallExpImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
@@ -53,8 +54,14 @@ public class OppositePropertyCallExpImpl extends PropertyCallExpImpl implements 
 		return QVTrelationPackage.Literals.OPPOSITE_PROPERTY_CALL_EXP;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return ((QVTrelationVisitor<R>)visitor).visitOppositePropertyCallExp(this);
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTrelationVisitor<?>)visitor).visitOppositePropertyCallExp(this);
 	}
 } //OppositePropertyCallExpImpl

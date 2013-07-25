@@ -14,8 +14,6 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
-import java.math.BigInteger;
-
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 
 /**

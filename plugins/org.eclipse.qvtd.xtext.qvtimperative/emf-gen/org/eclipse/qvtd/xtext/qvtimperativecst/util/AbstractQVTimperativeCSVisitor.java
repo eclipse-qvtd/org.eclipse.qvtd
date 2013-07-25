@@ -13,15 +13,9 @@
  * </copyright>
  *
  * This code is auto-generated
- * from: model/QVTimperativeCST.genmodel
- * by: org.eclipse.ocl.examples.build.acceleo.GenerateVisitor
- * defined by: org.eclipse.ocl.examples.build.acceleo.generateVisitors.mtl
- * invoked by: org.eclipse.ocl.examples.build.utilities.*
- * from: org.eclipse.ocl.examples.build.*.mwe2
+ * from: org.eclipse.qvtd.xtext.qvtimperative/model/QVTimperativeCST.genmodel
  *
  * Do not edit it.
- *
- * $Id$
  */
 package	org.eclipse.qvtd.xtext.qvtimperativecst.util;
 

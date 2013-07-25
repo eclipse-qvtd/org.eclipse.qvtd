@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
@@ -379,9 +380,15 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return ((QVTimperativeVisitor<R>)visitor).visitMapping(this);
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTimperativeVisitor<?>)visitor).visitMapping(this);
 	}
 
 	/**
@@ -393,7 +400,13 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		return null;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	private static EList<AbstractMapping> NO_MAPPINGS = new BasicEList<AbstractMapping>();
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -31,26 +31,29 @@ import org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor;
  */
 public class QVTtemplateToStringVisitor extends QVTbaseToStringVisitor implements QVTtemplateVisitor<String>
 {
-	private static final class Factory implements ToStringVisitor.Factory
+	protected static class QVTtemplateToStringFactory extends QVTbaseToStringFactory
 	{
-		private Factory() {
-			QVTbaseToStringVisitor.FACTORY.getClass();
-			ToStringVisitor.addFactory(this);
+		protected QVTtemplateToStringFactory() {
+//			FACTORY.getClass();
 		}
 
-		public @NonNull ToStringVisitor createToStringVisitor() {
-			return new QVTtemplateToStringVisitor();
+		@Override
+		public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
+			return new QVTtemplateToStringVisitor(s, getClass());
 		}
 
+		@Override
 		@SuppressWarnings("null")
 		public @NonNull EPackage getEPackage() {
 			return QVTtemplatePackage.eINSTANCE;
 		}
 	}
 
-	public static @NonNull ToStringVisitor.Factory FACTORY = new Factory();
+	public static @NonNull ToStringVisitor.Factory FACTORY = new QVTtemplateToStringFactory();
 
-	protected QVTtemplateToStringVisitor() {}
+	protected QVTtemplateToStringVisitor(@NonNull StringBuilder s, /*@NonNull*/ Class<? extends ToStringVisitor.Factory> factoryClass) {
+		super(s, factoryClass);
+	}
 
 	public String visitCollectionTemplateExp(@NonNull CollectionTemplateExp object) {
 		// TODO Auto-generated method stub

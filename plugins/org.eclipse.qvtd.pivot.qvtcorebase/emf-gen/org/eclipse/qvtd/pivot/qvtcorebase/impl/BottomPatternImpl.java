@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
@@ -151,7 +152,8 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Assignment> getAssignment() {
+	@SuppressWarnings("null")
+	public @NonNull EList<Assignment> getAssignment() {
 		if (assignment == null) {
 			assignment = new EObjectContainmentWithInverseEList<Assignment>(Assignment.class, this, QVTcoreBasePackage.BOTTOM_PATTERN__ASSIGNMENT, QVTcoreBasePackage.ASSIGNMENT__BOTTOM_PATTERN);
 		}
@@ -163,7 +165,8 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EnforcementOperation> getEnforcementOperation() {
+	@SuppressWarnings("null")
+	public @NonNull EList<EnforcementOperation> getEnforcementOperation() {
 		if (enforcementOperation == null) {
 			enforcementOperation = new EObjectContainmentWithInverseEList<EnforcementOperation>(EnforcementOperation.class, this, QVTcoreBasePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION, QVTcoreBasePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN);
 		}
@@ -175,7 +178,8 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<RealizedVariable> getRealizedVariable() {
+	@SuppressWarnings("null")
+	public @NonNull EList<RealizedVariable> getRealizedVariable() {
 		if (realizedVariable == null) {
 			realizedVariable = new EObjectContainmentEList<RealizedVariable>(RealizedVariable.class, this, QVTcoreBasePackage.BOTTOM_PATTERN__REALIZED_VARIABLE);
 		}
@@ -329,8 +333,14 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return ((QVTcoreBaseVisitor<R>)visitor).visitBottomPattern(this);
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTcoreBaseVisitor<?>)visitor).visitBottomPattern(this);
 	}
 } //BottomPatternImpl

@@ -18,6 +18,7 @@ package org.eclipse.qvtd.xtext.qvtcorebasecst.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.QVTcoreBaseCSTPackage;
@@ -52,8 +53,14 @@ public class GuardPatternCSImpl extends PatternCSImpl implements GuardPatternCS 
 		return QVTcoreBaseCSTPackage.Literals.GUARD_PATTERN_CS;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return ((QVTcoreBaseCSVisitor<R>)visitor).visitGuardPatternCS(this);
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((QVTcoreBaseCSVisitor<?>)visitor).visitGuardPatternCS(this);
 	}
 } //GuardPatternCSImpl

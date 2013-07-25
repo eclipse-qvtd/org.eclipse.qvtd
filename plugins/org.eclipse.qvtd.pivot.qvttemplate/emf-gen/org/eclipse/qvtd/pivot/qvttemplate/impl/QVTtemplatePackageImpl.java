@@ -382,7 +382,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";		
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
 		  (getCollectionTemplateExp_Member(), 
 		   source, 
@@ -412,7 +412,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		   source, 
 		   new String[] {
 			 "body", "owner"
-		   });
+		   });	
 	}
 
 } //QVTtemplatePackageImpl

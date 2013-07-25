@@ -146,7 +146,7 @@ public abstract class AbstractQVTrelationRuntimeModule extends DefaultRuntimeMod
 
 	// contributed by org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment
 	public Class<? extends org.eclipse.xtext.resource.IFragmentProvider> bindIFragmentProvider() {
-		return org.eclipse.ocl.examples.xtext.base.cs2pivot.BaseFragmentProvider.class;
+		return org.eclipse.ocl.examples.xtext.base.cs2as.BaseFragmentProvider.class;
 	}
 
 	// contributed by org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment

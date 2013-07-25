@@ -1,0 +1,91 @@
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2011 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *
+ * </copyright>
+ * 
+ * Run As->MWE2 Workflow to regenerate the AST models.
+ */
+module GenerateQVTdASModels
+
+import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.ocl.examples.build.xtend.*
+import org.eclipse.qvtd.build.utilities.*
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.emf.ecore.resource.impl.*
+
+/**
+ *	Generate the Pivot-based Models.
+ */
+Workflow {
+	bean = ResourceSetImpl : resourceSet {}
+    bean = StandaloneSetup { resourceSet = resourceSet
+    	platformUri = ".."
+    	scanClassPath = true
+    }
+    bean = GenModelSetup { resourceSet = resourceSet }
+    bean = UMLGenModelSetup { resourceSet = resourceSet }
+    
+    component = @SubGenerateASModel { resourceSet = resourceSet
+    	projectName = "org.eclipse.qvtd.pivot.qvtbase"
+    	modelName = "QVTbase"
+    	projectPrefix = "QVTbase"
+    	superProjectName = "org.eclipse.ocl.examples.pivot"
+    	superProjectPrefix = ""
+    	modelPackageName = "org.eclipse.qvtd.pivot.qvtbase"
+//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtbase.util"
+    }
+    component = @SubGenerateASModel { resourceSet = resourceSet
+    	projectName = "org.eclipse.qvtd.pivot.qvtcorebase"
+    	modelName = "QVTcoreBase"
+    	projectPrefix = "QVTcoreBase"
+    	superProjectName = "org.eclipse.qvtd.pivot.qvtbase"
+    	superProjectPrefix = "QVTbase"
+    	modelPackageName = "org.eclipse.qvtd.pivot.qvtcorebase"
+//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtcorebase.util"
+    }
+    component = @SubGenerateASModel { resourceSet = resourceSet
+    	projectName = "org.eclipse.qvtd.pivot.qvtcore"
+    	modelName = "QVTcore"
+    	projectPrefix = "QVTcore"
+    	superProjectName = "org.eclipse.qvtd.pivot.qvtcorebase"
+    	superProjectPrefix = "QVTcoreBase"
+    	modelPackageName = "org.eclipse.qvtd.pivot.qvtcore"
+//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtcore.util"
+    }
+    component = @SubGenerateASModel { resourceSet = resourceSet
+    	projectName = "org.eclipse.qvtd.pivot.qvtimperative"
+    	modelName = "QVTimperative"
+    	projectPrefix = "QVTimperative"
+    	superProjectName = "org.eclipse.qvtd.pivot.qvtcorebase"
+    	superProjectPrefix = "QVTcoreBase"
+    	modelPackageName = "org.eclipse.qvtd.pivot.qvtimperative"
+//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtimperative.util"
+    }
+    component = @SubGenerateASModel { resourceSet = resourceSet
+    	projectName = "org.eclipse.qvtd.pivot.qvttemplate"
+    	modelName = "QVTtemplate"
+    	projectPrefix = "QVTtemplate"
+    	superProjectName = "org.eclipse.qvtd.pivot.qvtbase"
+    	superProjectPrefix = "QVTbase"
+    	modelPackageName = "org.eclipse.qvtd.pivot.qvttemplate"
+//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvttemplate.util"
+    }
+    component = @SubGenerateASModel { resourceSet = resourceSet
+    	projectName = "org.eclipse.qvtd.pivot.qvtrelation"
+    	modelName = "QVTrelation"
+    	projectPrefix = "QVTrelation"
+    	superProjectName = "org.eclipse.qvtd.pivot.qvttemplate"
+    	superProjectPrefix = "QVTtemplate"
+    	modelPackageName = "org.eclipse.qvtd.pivot.qvtrelation"
+//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtrelation.util"
+    }
+}

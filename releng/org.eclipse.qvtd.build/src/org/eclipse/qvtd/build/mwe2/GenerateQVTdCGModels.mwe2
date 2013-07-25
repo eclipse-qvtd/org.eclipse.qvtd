@@ -16,7 +16,7 @@
  * 
  * Run As->MWE2 Workflow to regenerate the Xtest CST models.
  */
-module GenerateQVTdXtextModels
+module GenerateQVTdCGModels
 
 import org.eclipse.ocl.examples.build.utilities.*
 import org.eclipse.ocl.examples.build.xtend.*
@@ -31,21 +31,8 @@ Workflow {
 	bean = ResourceSetImpl : resourceSet {}
     bean = StandaloneSetup { resourceSet = resourceSet
     	platformUri = ".."
-//    	platformUri = "./META-INF"		// A local folder to minimize workspace searching
-    	scanClassPath = true			// But we do need to search the plugin-space
+    	scanClassPath = true
     	registerGeneratedEPackage = "org.eclipse.xtext.common.types.TypesPackage"
-    	uriMap = Mapping {
-    		from = "platform:/plugin/org.eclipse.emf.ecore/"
-    		to = "platform:/resource/org.eclipse.emf.ecore/"
-    	}
-    	uriMap = Mapping {
-    		from = "platform:/plugin/org.eclipse.ocl.examples.pivot/"
-    		to = "platform:/resource/org.eclipse.ocl.examples.pivot/"
-    	}
-    	uriMap = Mapping {
-    		from = "platform:/plugin/org.eclipse.ocl.examples.xtext.base/"
-    		to = "platform:/resource/org.eclipse.ocl.examples.xtext.base/"
-    	}
     }
     bean = GenModelSetup { resourceSet = resourceSet }
     bean = UMLGenModelSetup { resourceSet = resourceSet }
@@ -54,6 +41,9 @@ Workflow {
     }
     component = GenerateCGVisitors { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.codegen"
+    	projectPrefix = "QVTiCGModel"
+    	superProjectName = "org.eclipse.ocl.examples.codegen"
+    	superProjectPrefix = "CGModel"
     	genModelFile = "model/qvticgmodel.genmodel"
     	javaFolder = "emf-gen"
     	modelPackageName = "org.eclipse.qvtd.codegen.qvticgmodel"

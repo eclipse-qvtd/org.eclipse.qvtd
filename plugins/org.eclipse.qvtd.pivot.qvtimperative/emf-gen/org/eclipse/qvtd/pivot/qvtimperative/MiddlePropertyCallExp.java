@@ -14,10 +14,7 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
-import java.math.BigInteger;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 
 /**

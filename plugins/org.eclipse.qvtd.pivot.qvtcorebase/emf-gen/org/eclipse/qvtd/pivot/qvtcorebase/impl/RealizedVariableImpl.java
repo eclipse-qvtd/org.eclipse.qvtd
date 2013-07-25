@@ -18,6 +18,7 @@ package org.eclipse.qvtd.pivot.qvtcorebase.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.internal.impl.VariableImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
@@ -53,8 +54,14 @@ public class RealizedVariableImpl extends VariableImpl implements RealizedVariab
 		return QVTcoreBasePackage.Literals.REALIZED_VARIABLE;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return ((QVTcoreBaseVisitor<R>)visitor).visitRealizedVariable(this);
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTcoreBaseVisitor<?>)visitor).visitRealizedVariable(this);
 	}
 } //RealizedVariableImpl

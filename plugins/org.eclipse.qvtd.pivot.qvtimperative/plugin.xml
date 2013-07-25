@@ -15,6 +15,11 @@
             uri="http://www.eclipse.org/qvt/0.9/QVTimperative"
             class="org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
             genModel="model/QVTimperative.genmodel"/>
+      <!-- preserve historical typo -->
+      <package
+            uri="http://www.eclipse.org/qvt/0.9/QVTimperatve"
+            class="org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
+            genModel="model/QVTimperative.genmodel"/>
    </extension>
 
 null
@@ -34,7 +39,7 @@ null
             name="%_UI_QVTimperative_content_type"
             priority="normal">
          <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
-            <parameter name="namespace" value="http://www.eclipse.org/qvt/0.9/QVTimperatve"/>
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/0.9/QVTimperative"/>
             <parameter name="kind" value="xmi"/>
          </describer>
       </content-type>
