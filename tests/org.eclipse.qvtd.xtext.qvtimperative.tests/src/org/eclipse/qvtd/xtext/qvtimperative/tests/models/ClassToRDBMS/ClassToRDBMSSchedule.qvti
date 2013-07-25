@@ -294,9 +294,8 @@ map associationToForeignKeyLM in umlRdbms {
         }
     where (p2s:PackageToSchema, sc2t:ClassToTable, dc2t:ClassToTable |
             p2s.umlPackage = p;
-             ) {
-        sc2t := sc.ClassToTable;
-        dc2t := dc.ClassToTable;
+            sc2t := sc.ClassToTable;
+            dc2t := dc.ClassToTable;
 	         ) {
         realize a2f:AssociationToForeignKey |
         sc2t.owner = p2s;
@@ -375,13 +374,13 @@ map classPrimitiveAttributesLM in umlRdbms {
             t := a.type;
         ) {
         }
-    where (ctt:ClassToTable, p2n:PrimitiveToName |
-    		ctt.umlClass = c;
+    where (fao:ClassToTable, p2n:PrimitiveToName |
+    		fao.umlClass = c;
         p2n := t.PrimitiveToName;
     		) {
         realize atc:AttributeToColumn |
         atc.attribute := a;
-        atc.owner := ctt;
+        atc.owner := fao;
         atc.type := p2n;
         atc.kind := a.kind;
         atc.name := a.name;
@@ -411,7 +410,6 @@ map complexAttributePrimitiveAttributesLM in umlRdbms {
     uml (c:Class, ca:Attribute, t:PrimitiveDataType, a:Attribute |
         a.owner = c;
         --getAllAttributes(c)->includes(a);
-<<<<<<< HEAD
         ) {
             t := a.type;
             ca := c.typeOpposite;

@@ -76,7 +76,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		 * @see #loadModel(String, String)
 		 */
 		public void createModel(@NonNull String typedModelName, @NonNull String modelFileName) {
-			createModel(typedModelName, getProjectFileURI(fileNamePrefix + modelFileName));
+			createModel(typedModelName, getProjectFileURI(fileNamePrefix + modelFileName), null);
 		}
 
 		/**
