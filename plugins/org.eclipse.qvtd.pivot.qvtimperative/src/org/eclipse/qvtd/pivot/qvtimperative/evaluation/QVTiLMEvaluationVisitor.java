@@ -73,11 +73,9 @@ public class QVTiLMEvaluationVisitor extends QVTiEvaluationVisitorImpl
         	if (bottomPattern.getPredicate().size() != 0) {
         		LtoMMappingError(bottomPattern, "BottomPattern of L CoreDomain defined 1 or more predicates.");
         	}*/
-        	// First the assignments because predicates must be evaluated after bindings!
         	for (Assignment assigment : bottomPattern.getAssignment()) {
                 assigment.accept(getUndecoratedVisitor());
             }
-        	
         	for (Predicate predicate : bottomPattern.getPredicate()) {
         		result = predicate.accept(getUndecoratedVisitor());
         		if (result != Boolean.TRUE) {

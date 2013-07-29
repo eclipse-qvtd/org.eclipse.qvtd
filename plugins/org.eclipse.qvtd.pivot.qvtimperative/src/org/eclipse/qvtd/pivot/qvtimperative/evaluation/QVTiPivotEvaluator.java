@@ -71,7 +71,7 @@ public class QVTiPivotEvaluator
         QVTiEvaluationVisitor visitor = new QVTiLMEvaluationVisitor(env, evalEnv, modelManager);
         if (isEvaluationTracingEnabled()) {
             // decorate the evaluation visitor with tracing support
-        	visitor = new QVTiTracingEvaluationVisitor(visitor);
+        	visitor = new QVTiTracingEvaluationVisitorLM(visitor);
         }
         return (Boolean) transformation.accept(visitor);
 	}

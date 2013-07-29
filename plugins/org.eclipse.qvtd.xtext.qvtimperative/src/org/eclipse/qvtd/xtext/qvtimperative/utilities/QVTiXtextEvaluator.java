@@ -9,6 +9,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
+import org.eclipse.ocl.examples.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
@@ -21,6 +22,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
  */
 public class QVTiXtextEvaluator extends QVTiPivotEvaluator
 {
+	
+	public static PivotResource pivotResource;
+	
     public static @NonNull Transformation loadTransformation(@NonNull MetaModelManager metaModelManager, @NonNull URI transformationURI) throws IOException {
 		
 		// Load the transformation resource
@@ -30,7 +34,7 @@ public class QVTiXtextEvaluator extends QVTiPivotEvaluator
     		CS2PivotResourceAdapter adapter = null;
     		try {
     			adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
-    			PivotResource pivotResource = (PivotResource)adapter.getPivotResource(xtextResource);
+    			pivotResource = (PivotResource)adapter.getPivotResource(xtextResource);
     			for (EObject eContent : pivotResource.getContents()) {
     				if (eContent instanceof ImperativeModel) {
     	    			for (EObject eObject : ((ImperativeModel)eContent).getNestedPackage()) {
@@ -40,20 +44,23 @@ public class QVTiXtextEvaluator extends QVTiPivotEvaluator
     	    			}
     				}
     			}
-    		}
-    		finally {
+    		} finally {
     			if (adapter != null) {
     				adapter.dispose();
     			}
     		}
         } else {
-            	// TODO Can I get the parsing errors?
-//           return null;
+        	// TODO Can I get the parsing errors?
+        	//return null;
         }
         throw new IOException("There was an error loading the QVTi file. ");
 	}
     
+    
     public QVTiXtextEvaluator(@NonNull MetaModelManager metaModelManager, @NonNull URI transformationURI) throws IOException {
     	super(metaModelManager, loadTransformation(metaModelManager, transformationURI));
     }
+    
+    
+	
 }

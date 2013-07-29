@@ -56,7 +56,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 
-// TODO: Auto-generated Javadoc
 /**
  * QVTimperativeAbstractEvaluationVisitor is the base abstract class for QVTi
  * evaluation visitors.
@@ -291,8 +290,10 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      */
     public @Nullable Object visitGuardPattern(@NonNull GuardPattern guardPattern) {
     	
-    	// The bindings are already defined, test the constraints
         Object result = true;
+        for (Assignment assigment : ((Area)guardPattern.get) {
+            assigment.accept(getUndecoratedVisitor());
+        }
         for (Predicate predicate : guardPattern.getPredicate()) {
             // If the predicate is not true, the binding is not valid
             result = predicate.accept(getUndecoratedVisitor());
