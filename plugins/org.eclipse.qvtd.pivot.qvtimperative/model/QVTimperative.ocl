@@ -17,9 +17,15 @@ def: allGuardPatterns : Set(qvtcorebase::GuardPattern) = allAreas.guardPattern->
 def: isToMiddle : Boolean = not domain->exists(isEnforceable) 
 def: isFromMiddle : Boolean = domain->forAll(isEnforceable) 
 def: guardVariables : Set(ocl::Variable) = allGuardPatterns.variable->asSet()
+/* Mapping guard variables that are assigned  */
 def: boundGuardVariables : Set(ocl::Variable) = guardVariables->select(initExpression <> null)
 def: unboundGuardVariables : Set(ocl::Variable) = guardVariables->select(initExpression = null)
+-- def: noInheritance : Boolean = self.refinement->isEmpty()
+-- def: noParents : Boolean = self.specification->isEmpty()
+/* Mappings are either L to M or M to R, but not both */
 inv ViaMiddle: isToMiddle xor isFromMiddle
+/* No mapping refinement */
+-- inv NoRefinement: noInheritance and noParents
 
 context MappingCall
 def: referredNames : Set(String) = referredMapping.unboundGuardVariables.name->asSet()
