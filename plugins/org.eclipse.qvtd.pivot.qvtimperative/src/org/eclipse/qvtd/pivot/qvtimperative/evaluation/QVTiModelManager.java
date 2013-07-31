@@ -159,6 +159,11 @@ public class QVTiModelManager implements DomainModelManager
 	public Resource getMiddleModel() {
 		return modelResourceMap.get(MIDDLE_MODEL);
 	}
+	
+	public EList<EObject> getMiddleModelElements() {
+		
+		return modelElementsMap.get(MIDDLE_MODEL);
+	}
 
 	/**
      * Gets the all the instances of the specified Type in the given TypeModel

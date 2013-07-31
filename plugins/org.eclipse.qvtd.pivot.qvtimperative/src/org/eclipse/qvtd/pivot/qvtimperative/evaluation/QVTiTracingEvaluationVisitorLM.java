@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -78,17 +79,31 @@ public class QVTiTracingEvaluationVisitorLM extends QVTiAbstractTracingEvaluatio
     public @Nullable Object visitBottomPattern(@NonNull BottomPattern bottomPattern) {
 		
 		if (bottomPattern.getArea() instanceof CoreDomain) {
-			System.out.println(getIndent() + "Visiting CoreDomain BottomPattern");
+			logger.info(getIndent() + "Visiting CoreDomain BottomPattern");
 		}
 		if (bottomPattern.getArea() instanceof Mapping) {
-			System.out.println(getIndent() + "Visiting Mapping BottomPattern");
+			logger.info(getIndent() + "Visiting Mapping BottomPattern");
 		}
 		indentLevel++;
 		Object result = delegate.visitBottomPattern(bottomPattern);
 		for (Variable v : bottomPattern.getRealizedVariable()) {
-			System.out.println(getIndent() + "RealizedVariable " + v.getName() + ": " + prettyPrint((EObject) delegate.getEvaluationEnvironment().getValueOf(v)));
+			logger.info(getIndent() + "RealizedVariable " + v.getName() + ": " + prettyPrint((EObject) delegate.getEvaluationEnvironment().getValueOf(v)));
 		}
 		indentLevel--;
+		if (bottomPattern.getArea() instanceof Mapping) {
+			// After visiting the mapping bottom pattern, the middle model must have changed.
+			if(verboseLevel == VERBOSE_LEVEL_HIGH) {
+				// Print the middle model after each mapping
+				logger.info("==============================");
+				logger.info("Middle Model");
+				for (EObject eo : ((QVTiModelManager)delegate.getModelManager()).getMiddleModelElements()) {
+					logger.info(prettyPrint(eo));
+				}
+				logger.info("==============================");
+			}
+		}
+		
+		
 		return result;
 	}
 }

@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -288,12 +289,25 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      * org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor#visitGuardPattern(
      * org.eclipse.qvtd.pivot.qvtcore.GuardPattern)
      */
-    public @Nullable Object visitGuardPattern(@NonNull GuardPattern guardPattern) {
+	public @Nullable Object visitGuardPattern(@NonNull GuardPattern guardPattern) {
     	
         Object result = true;
-        for (Assignment assigment : ((Area)guardPattern.get) {
-            assigment.accept(getUndecoratedVisitor());
-        }
+        for (Variable v : guardPattern.getVariable()) {
+        	// If the variable is value is null, it has not been initialised, check
+        	// if it has an initialiser, if not, is an error
+			if (evaluationEnvironment.getValueOf(v) == null) {
+				if (v.getInitExpression() != null) {
+					Object value = ((QVTiEvaluationVisitorDecorator)getUndecoratedVisitor()).safeVisit(v.getInitExpression());
+					try {
+						evaluationEnvironment.add(v, value);
+					} catch (IllegalArgumentException ex) {
+						evaluationEnvironment.replace(v, value);
+					}
+				} else {
+					// TODO Error!
+				}
+			}
+		}
         for (Predicate predicate : guardPattern.getPredicate()) {
             // If the predicate is not true, the binding is not valid
             result = predicate.accept(getUndecoratedVisitor());
@@ -461,7 +475,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
         
         OCLExpression slotExp = propertyAssignment.getSlotExpression(); 
         Area area = ((BottomPattern)propertyAssignment.eContainer()).getArea();
-        if (area instanceof Mapping) {
+        //if (area instanceof Mapping) {
         	// TODO Check this approach
         	//if (!(exp instanceof VariableExp)) {
         	//    return modelManager.illFormedModelClass(VariableExp.class, exp, "visitPropertyAssignment");
@@ -492,7 +506,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
                         + " specification. The slot expression type (" + slotExp.getType().getName() 
                         + ") is not supported yet.");
             }
-        }
+        //}
         return true;
     }
 

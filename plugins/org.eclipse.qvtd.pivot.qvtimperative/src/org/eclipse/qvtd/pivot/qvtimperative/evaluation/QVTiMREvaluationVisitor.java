@@ -68,10 +68,6 @@ public class QVTiMREvaluationVisitor extends QVTiEvaluationVisitorImpl
             for (Assignment assigment : bottomPattern.getAssignment()) {
                 assigment.accept(getUndecoratedVisitor());
             }
-            /*// There should be no assignments
-            for (Assignment assigment : bottomPattern.getAssignment()) {
-                assigment.accept(getUndecoratedVisitor());
-            }*/
             /*// There should be no predicates
             for (Assignment assigment : bottomPattern.getAssignment()) {
                 assigment.accept(getUndecoratedVisitor());
