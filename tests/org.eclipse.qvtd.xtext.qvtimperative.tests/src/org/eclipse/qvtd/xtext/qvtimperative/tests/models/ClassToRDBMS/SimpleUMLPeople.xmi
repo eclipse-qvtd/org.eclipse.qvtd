@@ -10,55 +10,49 @@
   <elements
       xsi:type="simpleuml:Class"
       kind="persistent"
-      name="Person"
-      forward="//@elements.4"
-      generalOpposite="//@elements.1 //@elements.2">
-    <attributes
-        name="Name"
-        type="//@elements.5"/>
+      name="Student">
     <attributes
         name="Guardian"
-        type="//@elements.5"/>
-  </elements>
-  <elements
-      xsi:type="simpleuml:Class"
-      kind="persistent"
-      name="Student"
-      general="//@elements.0">
+        type="//@elements.4"/>
+    <attributes
+        name="Name"
+        type="//@elements.4"/>
     <attributes
         name="StudentNumber"
-        type="//@elements.6"/>
+        type="//@elements.5"/>
   </elements>
   <elements
       xsi:type="simpleuml:Class"
       kind="persistent"
       name="Professor"
-      general="//@elements.0">
+      forward="//@elements.3">
     <attributes
         name="employed"
-        type="//@elements.7"/>
+        type="//@elements.6"/>
+    <attributes
+        name="Name"/>
   </elements>
   <elements
       xsi:type="simpleuml:Class"
       kind="persistent"
       name="Address"
-      reverse="//@elements.4"/>
+      reverse="//@elements.3"/>
   <elements
       xsi:type="simpleuml:Association"
       kind=""
-      name="livesAt"
-      source="//@elements.0"
-      destination="//@elements.3"/>
+      name="proffesorLivesAt"
+      source="//@elements.1"
+      destination="//@elements.2"/>
   <elements
       xsi:type="simpleuml:PrimitiveDataType"
       name="String"
-      typeOpposite="//@elements.0/@attributes.0 //@elements.0/@attributes.1"/>
+      typeOpposite="//@elements.0/@attributes.1 //@elements.0/@attributes.0"/>
   <elements
       xsi:type="simpleuml:PrimitiveDataType"
       name="Integer"
-      typeOpposite="//@elements.1/@attributes.0"/>
+      typeOpposite="//@elements.0/@attributes.2"/>
   <elements
       xsi:type="simpleuml:PrimitiveDataType"
       name="Boolean"
-      typeOpposite="//@elements.2/@attributes.0"/>
+      typeOpposite="//@elements.1/@attributes.0"/>
 </simpleuml:Package>
