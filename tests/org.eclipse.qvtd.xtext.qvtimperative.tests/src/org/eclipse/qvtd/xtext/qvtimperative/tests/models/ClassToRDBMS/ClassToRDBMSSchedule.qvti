@@ -178,7 +178,6 @@ map classToTableLM in umlRdbms {
         c := c;
         a <= c.attributes;
         fao := c2t;
-        p2n <= p2s.primitivesToNames;
     }
     map classComplexAttributesLM {
         c := c;
