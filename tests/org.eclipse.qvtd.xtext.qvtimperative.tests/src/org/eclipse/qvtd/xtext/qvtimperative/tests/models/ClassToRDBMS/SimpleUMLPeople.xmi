@@ -12,13 +12,13 @@
       kind="persistent"
       name="Student">
     <attributes
-        name="Guardian"
+        name="guardian"
         type="//@elements.4"/>
     <attributes
-        name="Name"
+        name="name"
         type="//@elements.4"/>
     <attributes
-        name="StudentNumber"
+        name="studentNumber"
         type="//@elements.5"/>
   </elements>
   <elements
@@ -30,7 +30,8 @@
         name="employed"
         type="//@elements.6"/>
     <attributes
-        name="Name"/>
+        name="name"
+        type="//@elements.4"/>
   </elements>
   <elements
       xsi:type="simpleuml:Class"
@@ -46,7 +47,7 @@
   <elements
       xsi:type="simpleuml:PrimitiveDataType"
       name="String"
-      typeOpposite="//@elements.0/@attributes.1 //@elements.0/@attributes.0"/>
+      typeOpposite="//@elements.0/@attributes.1 //@elements.0/@attributes.0 //@elements.1/@attributes.1"/>
   <elements
       xsi:type="simpleuml:PrimitiveDataType"
       name="Integer"
