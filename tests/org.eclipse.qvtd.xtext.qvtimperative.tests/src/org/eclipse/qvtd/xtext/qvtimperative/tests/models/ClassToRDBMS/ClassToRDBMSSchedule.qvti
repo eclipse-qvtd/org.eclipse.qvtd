@@ -227,7 +227,7 @@ map classToTableMR in umlRdbms {
     map attributeColumnsMR {
         c2t := c2t;
         a2c <= c2t.fromAttributes.leafs;
-        p2n <= p2s.primitivesToNames;
+        --p2n <= p2s.primitivesToNames;
         t := t;
     }
 }
@@ -456,6 +456,7 @@ map attributeColumnsMR in umlRdbms {
         c2t.fromAttributes.leafs->includes(a2c);
         a2c.owner = c2t;
         c2t.table = t;
+        p2n := a2c.type;
         ct := p2n.typeName;) {
         }
     map attributeColumnsMR_1 {
