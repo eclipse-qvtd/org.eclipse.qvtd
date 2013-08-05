@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -194,13 +195,19 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	@Override
 	public @Nullable Object visitAssignment(@NonNull Assignment assignment) {
 		
-		// TODO make the printer safe!
-		Object value = safeVisit(assignment.getValue());
-        // Unbox to asign to ecore type
-        value = delegate.getMetaModelManager().getIdResolver().unboxedValueOf(value);
-        indentLevel++;
-        logger.info(getIndent() + "VisitAssignment " + prettyPrint(assignment.getETarget())
-        		+ " := " + prettyPrint(value));
+		
+		try {
+			Object value = safeVisit(assignment.getValue());
+			// Unbox to asign to ecore type
+	        value = delegate.getMetaModelManager().getIdResolver().unboxedValueOf(value);
+	        indentLevel++;
+	        logger.info(getIndent() + "VisitAssignment " + prettyPrint(assignment.getETarget())
+	        		+ " := " + prettyPrint(value));
+		} catch (InvalidValueException ex) {
+			indentLevel++;
+	        logger.info(getIndent() + "VisitAssignment " + prettyPrint(assignment.getETarget())
+	        		+ " := Invalid expression" );
+		}
 		return delegate.visitAssignment(assignment);
     }
 	
@@ -245,8 +252,10 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 			}
 		}
 		Object result = delegate.visitGuardPattern(guardPattern);
-		for (Variable v : nullVars) {
-			logger.info(getIndent() + "Variable " + v.getName() + ": " + prettyPrint((EObject) delegate.getEvaluationEnvironment().getValueOf(v)));
+		if (result == Boolean.TRUE) {
+			for (Variable v : nullVars) {
+				logger.info(getIndent() + "Variable " + v.getName() + ": " + prettyPrint((EObject) delegate.getEvaluationEnvironment().getValueOf(v)));
+			}
 		}
 		if (guardPattern.getPredicate().size() == 0) {
 			logger.info(getIndent() + "GuardPattern has no predicates.");
@@ -307,14 +316,18 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	 */
 	public Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment propertyAssignment) {
 		
-		// TODO make the printer safe!
-		Object value = safeVisit(propertyAssignment.getValue());
-        // Unbox to asign to ecore type
-        value = delegate.getMetaModelManager().getIdResolver().unboxedValueOf(value);
-        indentLevel++;
-        logger.info(getIndent() + "VisitMiddlePropertyAssignment " + propertyAssignment.getSlotExpression()
-        		+ "." + propertyAssignment.getTargetProperty().getName() + " = " + prettyPrint(value));
 		indentLevel++;
+		try {
+			Object value = safeVisit(propertyAssignment.getValue());
+			// Unbox to asign to ecore type
+	        value = delegate.getMetaModelManager().getIdResolver().unboxedValueOf(value);
+	        logger.info(getIndent() + "VisitMiddlePropertyAssignment " + propertyAssignment.getSlotExpression()
+	        		+ "." + propertyAssignment.getTargetProperty().getName() + " = " + prettyPrint(value));
+		} catch (InvalidValueException ex) {
+	        logger.info(getIndent() + "VisitMiddlePropertyAssignment " + propertyAssignment.getSlotExpression()
+	        		+ "." + propertyAssignment.getTargetProperty().getName() + " = InvalidValue" );
+		}
+		indentLevel--;
 		Object result = delegate.visitMiddlePropertyAssignment(propertyAssignment);
 		indentLevel--;
 		return result;
@@ -333,13 +346,17 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	@Override
 	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
 		
-		// TODO make the printer safe!
-		Object value = safeVisit(propertyAssignment.getValue());
-        // Unbox to asign to ecore type
-        value = delegate.getMetaModelManager().getIdResolver().unboxedValueOf(value);
-        //indentLevel++;
-        logger.info(getIndent() + "VisitPropertyAssignment " + propertyAssignment.getSlotExpression()
+		try {
+			Object value = safeVisit(propertyAssignment.getValue());
+	        // Unbox to asign to ecore type
+	        value = delegate.getMetaModelManager().getIdResolver().unboxedValueOf(value);
+	        logger.info(getIndent() + "VisitPropertyAssignment " + propertyAssignment.getSlotExpression()
         		+ "." + propertyAssignment.getTargetProperty().getName() + " = " + prettyPrint(value));
+		} catch (InvalidValueException ex) {
+			logger.info(getIndent() + "VisitPropertyAssignment " + propertyAssignment.getSlotExpression()
+        		+ "." + propertyAssignment.getTargetProperty().getName() + " = InvalidValueException" );
+		}
+        //indentLevel++;
 		Object result = delegate.visitPropertyAssignment(propertyAssignment);
 		//indentLevel--;
 		return result;
@@ -350,7 +367,6 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	 */
 	@Override
 	public @Nullable Object visitTransformation(@NonNull Transformation transformation) {
-		logger.info("\n");
 		logger.info("---- Transformation " + transformation.getName() + " ----");
 		indentLevel++;
 		Object result = delegate.visitTransformation(transformation);

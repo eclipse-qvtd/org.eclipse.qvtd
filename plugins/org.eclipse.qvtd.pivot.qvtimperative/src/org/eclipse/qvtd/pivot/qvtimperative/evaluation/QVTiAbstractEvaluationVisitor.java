@@ -292,18 +292,27 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	public @Nullable Object visitGuardPattern(@NonNull GuardPattern guardPattern) {
     	
         Object result = true;
+        PivotIdResolver idResolver = metaModelManager.getIdResolver();
         for (Variable v : guardPattern.getVariable()) {
         	// If the variable is value is null, it has not been initialised, check
         	// if it has an initialiser, if not, is an error
-			if (evaluationEnvironment.getValueOf(v) == null) {
-				if (v.getInitExpression() != null) {
+        	if (evaluationEnvironment.getValueOf(v) == null) {
+        		if (v.getInitExpression() != null) {
 					Object value = ((QVTiEvaluationVisitorDecorator)getUndecoratedVisitor()).safeVisit(v.getInitExpression());
-					try {
-						evaluationEnvironment.add(v, value);
-					} catch (IllegalArgumentException ex) {
-						evaluationEnvironment.replace(v, value);
+					Type guardType = v.getType();
+					DomainType valueType = idResolver.getDynamicTypeOf(value);
+					if ((guardType != null) && valueType.conformsTo(metaModelManager, guardType)) {
+						try {
+							evaluationEnvironment.add(v, value);
+						} catch (IllegalArgumentException ex) {
+							evaluationEnvironment.replace(v, value);
+						}
+					} else {
+						// 
+						return false;
 					}
-				} else {
+        		}
+        		else {
 					// TODO Error!
 				}
 			}
@@ -332,7 +341,14 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 		List<Iterable<?>> loopedValues = null;
 		for (MappingCallBinding binding : mappingCall.getBinding()) {
 			Variable boundVariable = DomainUtil.nonNullModel(binding.getBoundVariable());
-			Object valueOrValues = ((QVTiEvaluationVisitorDecorator)getUndecoratedVisitor()).safeVisit(binding.getValue());
+			Object valueOrValues = null;
+			try {
+				valueOrValues = ((QVTiEvaluationVisitorDecorator)getUndecoratedVisitor()).safeVisit(binding.getValue());
+			} catch (InvalidValueException ex) {
+				// There was an OCLVoid value being navigated or any other/similar OCL error
+				// evaluating the binding value
+				return null;
+			}
 			if (!binding.isIsLoop()) {
 				DomainType valueType = metaModelManager.getIdResolver().getDynamicTypeOf(valueOrValues);
 				Type varType = boundVariable.getType();
@@ -486,8 +502,8 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
                 if(slotVar != null) {
                     Object slotBinding = evaluationEnvironment.getValueOf(slotVar);
                     if(slotBinding != null) {
-                        Object value = safeVisit(propertyAssignment.getValue());
-                        // Unbox to asign to ecore type
+                    	Object value = safeVisit(propertyAssignment.getValue());
+                    	// Unbox to asign to ecore type
                         value = metaModelManager.getIdResolver().unboxedValueOf(value);
                         Property p = propertyAssignment.getTargetProperty();
                         p.initValue(slotBinding, value);

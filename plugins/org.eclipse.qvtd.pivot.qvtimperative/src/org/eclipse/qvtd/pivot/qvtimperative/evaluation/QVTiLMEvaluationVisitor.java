@@ -16,6 +16,7 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -171,8 +172,21 @@ public class QVTiLMEvaluationVisitor extends QVTiEvaluationVisitorImpl
     	            	}
                 	}
                 }
+        		// After the mapping has been visited, set all "initialized variables"
+        		// values to null
+        		for (Variable v : gp.getVariable()) {
+        			if (v.getInitExpression() != null) {
+        				evaluationEnvironment.replace(v, null);
+        			}
+        		}
+        		for (Domain domain : mapping.getDomain()) {
+        			for (Variable v : ((CoreDomain)domain).getGuardPattern().getVariable()) {
+            			if (v.getInitExpression() != null) {
+            				evaluationEnvironment.replace(v, null);
+            			}
+            		}
+                }
         	}
-            
         }
         return null;
     }

@@ -97,13 +97,11 @@ public class QVTiTracingEvaluationVisitorLM extends QVTiAbstractTracingEvaluatio
 				logger.info("==============================");
 				logger.info("Middle Model");
 				for (EObject eo : ((QVTiModelManager)delegate.getModelManager()).getMiddleModelElements()) {
-					logger.info(prettyPrint(eo));
+					logger.info(prettyPrintUnident(eo));
 				}
 				logger.info("==============================");
 			}
 		}
-		
-		
 		return result;
 	}
 }

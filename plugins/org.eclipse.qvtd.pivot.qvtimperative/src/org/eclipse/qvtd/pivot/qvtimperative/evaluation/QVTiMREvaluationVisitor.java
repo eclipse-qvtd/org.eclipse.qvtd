@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
@@ -68,10 +69,6 @@ public class QVTiMREvaluationVisitor extends QVTiEvaluationVisitorImpl
             for (Assignment assigment : bottomPattern.getAssignment()) {
                 assigment.accept(getUndecoratedVisitor());
             }
-            /*// There should be no predicates
-            for (Assignment assigment : bottomPattern.getAssignment()) {
-                assigment.accept(getUndecoratedVisitor());
-            }*/
             /* // Probably enforcement operations must be called too
             for (EnforcementOperation enforceOp : bottomPattern
                     .getEnforcementOperation()) {
@@ -79,32 +76,6 @@ public class QVTiMREvaluationVisitor extends QVTiEvaluationVisitorImpl
             }*/
         }
         else if (area instanceof Mapping) {
-            /*assert bottomPattern.getRealizedVariable().size() == 0 : "Unsupported " + bottomPattern.eClass().getName() + " defines 1 or more realized variables.";
-            for (Variable var : bottomPattern.getVariable()) {
-                // Values of variables exist in the middle model
-                Set<Object> bindingValues = ((QVTcDomainManager) modelManager).getElementsByType(
-                        QVTcDomainManager.MIDDLE_MODEL, var.getType());
-                patternValidBindings.put(var, bindingValues);
-            }
-            // For each binding visit the predicates to leave only the valid bindings
-            Iterator<Entry<Variable, Set<Object>>> it = patternValidBindings.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry<Variable, Set<Object>> pairs = (Map.Entry<Variable, Set<Object>>)it.next();
-                Iterator<Object> bindingIt = pairs.getValue().iterator();
-                while (bindingIt.hasNext()) {
-                    Variable var = pairs.getKey();
-                    if (var != null) {
-                        evaluationEnvironment.replace(var, bindingIt.next());
-                        for (Predicate predicate : bottomPattern.getPredicate()) {
-                            // If the predicate is not true, the binding is not valid
-                            Boolean result = (Boolean) predicate.accept(getUndecoratedVisitor());
-                            if (result != null && !result) {
-                                it.remove();
-                            }
-                        }
-                    }
-                }
-            }*/
             for (Assignment assigment : bottomPattern.getAssignment()) {
                 assigment.accept(getUndecoratedVisitor());
             }
@@ -113,7 +84,6 @@ public class QVTiMREvaluationVisitor extends QVTiEvaluationVisitorImpl
                 enforceOp.accept(getUndecoratedVisitor());
             }
         }
-        //return patternValidBindings;
         return null;
     }
     
@@ -161,6 +131,20 @@ public class QVTiMREvaluationVisitor extends QVTiEvaluationVisitorImpl
                     	mappingCall.accept(getUndecoratedVisitor());
                     }
             	}
+            }
+    		// After the mapping has been visited, set all "initialized variables"
+    		// values to null
+    		for (Variable v : gp.getVariable()) {
+    			if (v.getInitExpression() != null) {
+    				evaluationEnvironment.replace(v, null);
+    			}
+    		}
+    		for (Domain domain : mapping.getDomain()) {
+    			for (Variable v : ((CoreDomain)domain).getBottomPattern().getVariable()) {
+        			if (v.getInitExpression() != null) {
+        				evaluationEnvironment.replace(v, null);
+        			}
+        		}
             }
     	}
         return null;

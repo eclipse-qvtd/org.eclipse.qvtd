@@ -246,6 +246,16 @@ public class QVTiModelManager implements DomainModelManager
 			}
 		    return (objectType != null) && objectType.conformsTo(metaModelManager, requiredType);
 		}
+	
+	public List<EObject> getTypeModelEObjectList(TypedModel model) {
+		
+		if (modelElementsMap.containsKey(model)) {
+			return  modelElementsMap.get(model);
+		} else {
+			return new ArrayList<EObject>();
+		}
+		
+	}
 
 	/**
 	 * Saves all the models managed by the domain manager.

@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
@@ -92,6 +93,19 @@ public class QVTiTracingEvaluationVisitorMR extends QVTiAbstractTracingEvaluatio
 			}
 		}
 		indentLevel--;
+		if (bottomPattern.getArea() instanceof Mapping) {
+			// After visiting the mapping bottom pattern, the middle model must have changed.
+			if(verboseLevel == VERBOSE_LEVEL_HIGH) {
+				// Print the output model after each mapping
+				logger.info("==============================");
+				logger.info("Output Model");
+				TypedModel tm = ((Mapping)bottomPattern.getArea()).getDomain().get(0).getTypedModel();
+				for (EObject eo : ((QVTiModelManager)delegate.getModelManager()).getTypeModelEObjectList(tm)) {
+					logger.info(prettyPrintUnident(eo));
+				}
+				logger.info("==============================");
+			}
+		}
 		return result;
 	}
 }
