@@ -41,6 +41,22 @@ map packageToSchemaLM in umlRdbms {
         c <= p.elements;
         p2s := p2s;
     }
+    /*
+    map complexAttributePrimitiveAttributesLM {
+        -- c := c;
+        -- a <= ;
+        -- ca <= c.typeOpposite;
+        ca <= c.attributes;
+        c <= c.attributes.type;
+    }
+    map complexAttributeComplexAttributesLM {
+        -- c := c;
+        -- a <= c.attributes;
+        -- ca <= c.typeOpposite;
+        ca <= c.attributes;
+        c <= c.attributes.type;
+    }
+    */
     -- Associations
     map associationToForeignKeyLM {
         p := p;
@@ -184,7 +200,10 @@ map classToTableLM in umlRdbms {
         a <= c.attributes;
         fao := c2t;
     }
-    map complexAttributePrimitiveAttributesLM {
+    -- This two need to be delayed until all classes
+    -- have been transformed.. how to know this for the
+    -- program to program transforamtion ?
+    /* map complexAttributePrimitiveAttributesLM {
         -- c := c;
         -- a <= ;
         -- ca <= c.typeOpposite;
@@ -198,6 +217,7 @@ map classToTableLM in umlRdbms {
         ca <= c.attributes;
         c <= c.attributes.type;
     }
+    */
 }
 
 map classToTableMR in umlRdbms {
@@ -435,7 +455,6 @@ map complexAttributePrimitiveAttributesLM_2 in umlRdbms {
         }
     where (p2n_2:PrimitiveToName, fa_2:AttributeToColumn |
             p2n_2 := t_2.PrimitiveToName;) {
-                
         fa_2.attribute := a_2;
         fa_2.type := p2n_2;
         fa_2.kind := a_2.kind;

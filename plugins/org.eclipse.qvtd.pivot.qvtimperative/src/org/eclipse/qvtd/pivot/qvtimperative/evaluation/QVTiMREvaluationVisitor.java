@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
@@ -128,11 +129,22 @@ public class QVTiMREvaluationVisitor extends QVTiEvaluationVisitorImpl
             	if (result == Boolean.TRUE) {
             		mapping.getBottomPattern().accept(getUndecoratedVisitor());
                 	for (MappingCall mappingCall : mapping.getMappingCall()) {
-                    	mappingCall.accept(getUndecoratedVisitor());
+                		Mapping calledMapping = DomainUtil.nonNullModel(mappingCall.getReferredMapping());
+	            		QVTiEvaluationVisitor nv = null;
+                		if (isMtoRMapping(calledMapping)) {
+	                		nv = ((QVTiEvaluationVisitor)getUndecoratedVisitor()).createNestedMRVisitor();
+	                	} else {
+	                		// FIXME error
+	                	}
+                		if (nv != null) {
+	                		mappingCall.accept(nv);
+	                	} else {
+	                		// FIXME error
+	                	}
                     }
             	}
             }
-    		// After the mapping has been visited, set all "initialized variables"
+    		// After the mapping has been visited, set all "initialised variables"
     		// values to null
     		for (Variable v : gp.getVariable()) {
     			if (v.getInitExpression() != null) {

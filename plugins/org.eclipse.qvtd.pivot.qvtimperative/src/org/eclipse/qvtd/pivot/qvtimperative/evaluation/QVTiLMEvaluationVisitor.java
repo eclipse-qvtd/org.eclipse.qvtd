@@ -158,6 +158,8 @@ public class QVTiLMEvaluationVisitor extends QVTiEvaluationVisitorImpl
     	            		// to call the getUndecoratedVisitor.
     	                	if (nv != null) {
     	                		mappingCall.accept(nv);
+    	                	} else {
+    	                		// FIXME error
     	                	}
     	            	}
                 	}
