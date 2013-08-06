@@ -29,7 +29,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
  * 
  * @author Horacio Hoyos
  */
-public class QVTiTracingEvaluationVisitorMR extends QVTiAbstractTracingEvaluationVisitor
+public class QVTiMRTracingEvaluationVisitor extends QVTiAbstractTracingEvaluationVisitor
 {
 	
 	/** The indent level. */
@@ -40,7 +40,7 @@ public class QVTiTracingEvaluationVisitorMR extends QVTiAbstractTracingEvaluatio
 	 *
 	 * @param decorated the decorated
 	 */
-	public QVTiTracingEvaluationVisitorMR(@NonNull QVTiEvaluationVisitor decorated) {
+	public QVTiMRTracingEvaluationVisitor(@NonNull QVTiEvaluationVisitor decorated) {
 		
 		this(decorated, 0);
 	}
@@ -51,7 +51,7 @@ public class QVTiTracingEvaluationVisitorMR extends QVTiAbstractTracingEvaluatio
 	 * @param decorated the decorated
 	 * @param indentLevel the indent level
 	 */
-	protected QVTiTracingEvaluationVisitorMR(@NonNull QVTiEvaluationVisitor decorated, int indentLevel) {
+	protected QVTiMRTracingEvaluationVisitor(@NonNull QVTiEvaluationVisitor decorated, int indentLevel) {
 		
 		super(decorated);
 		this.indentLevel = indentLevel;
@@ -63,7 +63,7 @@ public class QVTiTracingEvaluationVisitorMR extends QVTiAbstractTracingEvaluatio
 	@Override
 	public @NonNull QVTiEvaluationVisitor createNestedEvaluator() {
 		
-		return new QVTiTracingEvaluationVisitorMR(super.createNestedEvaluator(), indentLevel);
+		return new QVTiMRTracingEvaluationVisitor(super.createNestedEvaluator(), indentLevel);
 	}
 
 	

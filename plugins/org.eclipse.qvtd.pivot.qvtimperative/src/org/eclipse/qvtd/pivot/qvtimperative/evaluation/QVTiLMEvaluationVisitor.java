@@ -67,16 +67,6 @@ public class QVTiLMEvaluationVisitor extends QVTiEvaluationVisitorImpl
     	Object result = true;
         Area area = bottomPattern.getArea();
         if (area instanceof CoreDomain) {
-            /*// The bottom pattern of an L CoreDomain should not have any variables or constraints
-        	if (bottomPattern.getVariable().size() != 0) {
-        		LtoMMappingError(bottomPattern, "BottomPattern of L CoreDomain defined 1 or more variables.");
-        	}
-        	if (bottomPattern.getPredicate().size() != 0) {
-        		LtoMMappingError(bottomPattern, "BottomPattern of L CoreDomain defined 1 or more predicates.");
-        	}*/
-        	for (Assignment assigment : bottomPattern.getAssignment()) {
-                assigment.accept(getUndecoratedVisitor());
-            }
         	for (Predicate predicate : bottomPattern.getPredicate()) {
         		result = predicate.accept(getUndecoratedVisitor());
         		if (result != Boolean.TRUE) {
@@ -143,8 +133,8 @@ public class QVTiLMEvaluationVisitor extends QVTiEvaluationVisitorImpl
         for (Domain domain : mapping.getDomain()) {
             result = domain.accept(getUndecoratedVisitor());
         }
+        GuardPattern gp = mapping.getGuardPattern();
         if (result == Boolean.TRUE) {
-        	GuardPattern gp = mapping.getGuardPattern();
         	if (gp != null) {
         		result = gp.accept(getUndecoratedVisitor());
         		if (result == Boolean.TRUE) {
@@ -172,21 +162,26 @@ public class QVTiLMEvaluationVisitor extends QVTiEvaluationVisitorImpl
     	            	}
                 	}
                 }
-        		// After the mapping has been visited, set all "initialized variables"
-        		// values to null
-        		for (Variable v : gp.getVariable()) {
-        			if (v.getInitExpression() != null) {
-        				evaluationEnvironment.replace(v, null);
-        			}
-        		}
-        		for (Domain domain : mapping.getDomain()) {
-        			for (Variable v : ((CoreDomain)domain).getGuardPattern().getVariable()) {
-            			if (v.getInitExpression() != null) {
-            				evaluationEnvironment.replace(v, null);
-            			}
-            		}
-                }
         	}
+        }
+        // After the mapping has been visited, set all "initialised variables"
+		// values to null
+        if (gp != null) {
+			for (Variable v : gp.getVariable()) {
+				if (v.getInitExpression() != null) {
+					evaluationEnvironment.replace(v, null);
+				}
+			}
+        }
+		for (Domain domain : mapping.getDomain()) {
+			gp = ((CoreDomain)domain).getGuardPattern();
+			if (gp != null) {
+				for (Variable v : gp.getVariable()) {
+	    			if (v.getInitExpression() != null) {
+	    				evaluationEnvironment.replace(v, null);
+	    			}
+	    		}
+			}
         }
         return null;
     }

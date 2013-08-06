@@ -134,7 +134,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	public @NonNull QVTiEvaluationVisitor createNestedLMVisitor() {
 		
 		logger.info("(Creating nested LM Visitor)");
-		QVTiTracingEvaluationVisitorLM decorator = new QVTiTracingEvaluationVisitorLM(
+		QVTiLMTracingEvaluationVisitor decorator = new QVTiLMTracingEvaluationVisitor(
 				delegate.createNestedLMVisitor());
 		return decorator;
 	}
@@ -146,7 +146,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	public @NonNull QVTiEvaluationVisitor createNestedMMVisitor() {
 		
 		logger.info("(Creating nested MM Visitor)");
-		QVTiTracingEvaluationVisitorMM decorator = new QVTiTracingEvaluationVisitorMM(
+		QVTiMMTracingEvaluationVisitor decorator = new QVTiMMTracingEvaluationVisitor(
 				delegate.createNestedMMVisitor());
 		return decorator;
 	}
@@ -158,7 +158,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	public @NonNull QVTiEvaluationVisitor createNestedMRVisitor() {
 		
 		logger.info("(Creating nested MR Visitor)");
-		QVTiTracingEvaluationVisitorMR decorator = new QVTiTracingEvaluationVisitorMR(
+		QVTiMRTracingEvaluationVisitor decorator = new QVTiMRTracingEvaluationVisitor(
 				delegate.createNestedMRVisitor());
 		return decorator;
 	}
@@ -195,20 +195,20 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	@Override
 	public @Nullable Object visitAssignment(@NonNull Assignment assignment) {
 		
-		
+		indentLevel++;
 		try {
 			Object value = safeVisit(assignment.getValue());
 			// Unbox to asign to ecore type
 	        value = delegate.getMetaModelManager().getIdResolver().unboxedValueOf(value);
-	        indentLevel++;
 	        logger.info(getIndent() + "VisitAssignment " + prettyPrint(assignment.getETarget())
 	        		+ " := " + prettyPrint(value));
 		} catch (InvalidValueException ex) {
-			indentLevel++;
-	        logger.info(getIndent() + "VisitAssignment " + prettyPrint(assignment.getETarget())
+			logger.info(getIndent() + "VisitAssignment " + prettyPrint(assignment.getETarget())
 	        		+ " := Invalid expression" );
 		}
-		return delegate.visitAssignment(assignment);
+		Object result = delegate.visitAssignment(assignment);
+		indentLevel--;
+		return result;
     }
 	
 	/* (non-Javadoc)
@@ -327,7 +327,6 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	        logger.info(getIndent() + "VisitMiddlePropertyAssignment " + propertyAssignment.getSlotExpression()
 	        		+ "." + propertyAssignment.getTargetProperty().getName() + " = InvalidValue" );
 		}
-		indentLevel--;
 		Object result = delegate.visitMiddlePropertyAssignment(propertyAssignment);
 		indentLevel--;
 		return result;

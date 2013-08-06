@@ -308,7 +308,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 							evaluationEnvironment.replace(v, value);
 						}
 					} else {
-						// 
+						// The initialisation fails, the guard is not met
 						return false;
 					}
         		}

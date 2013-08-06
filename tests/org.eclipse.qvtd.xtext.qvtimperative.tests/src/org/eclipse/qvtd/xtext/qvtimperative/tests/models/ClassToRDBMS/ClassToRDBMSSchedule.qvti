@@ -185,14 +185,18 @@ map classToTableLM in umlRdbms {
         fao := c2t;
     }
     map complexAttributePrimitiveAttributesLM {
-        c := c;
-        a <= c.attributes;
-        ca <= c.typeOpposite;
+        -- c := c;
+        -- a <= ;
+        -- ca <= c.typeOpposite;
+        ca <= c.attributes;
+        c <= c.attributes.type;
     }
     map complexAttributeComplexAttributesLM {
-        c := c;
-        a <= c.attributes;
-        ca <= c.typeOpposite;
+        -- c := c;
+        -- a <= c.attributes;
+        -- ca <= c.typeOpposite;
+        ca <= c.attributes;
+        c <= c.attributes.type;
     }
 }
 
@@ -387,12 +391,11 @@ map classPrimitiveAttributesLM in umlRdbms {
     }
 }
 
-
 map classComplexAttributesLM in umlRdbms {
     uml (c:Class, t:Class, a:Attribute |
         a.owner = c;
         --getAllAttributes(c)->includes(a);
-            t := a.type;
+        t := a.type;
         ) { 
         }
     where (fao:ClassToTable | fao.umlClass=c;) {
@@ -406,43 +409,73 @@ map classComplexAttributesLM in umlRdbms {
 }
 
 map complexAttributePrimitiveAttributesLM in umlRdbms {
-    uml (c:Class, ca:Attribute, t:PrimitiveDataType, a:Attribute |
-        a.owner = c;
+    uml (c:Class, ca:Attribute |
+        ca.type = c;
+        -- getAllAttributes(c)->includes(a);
+        ) {
+        }
+    where (fao:NonLeafAttribute |
+            fao := ca.FromAttribute;) {
+        -- realize fa:AttributeToColumn |
+        -- fa.owner := fao;    
+        -- fa.leafs := Set(AttributeToColumn) {fa};
+    }
+    map complexAttributePrimitiveAttributesLM_2 {
+        c_2 := c;
+        ca_2 := ca;
+        a_2 <= c.attributes;
+    }
+}
+
+map complexAttributePrimitiveAttributesLM_2 in umlRdbms {
+    uml (c_2:Class, ca_2:Attribute, t_2:PrimitiveDataType, a_2:Attribute |
+        t_2 := a_2.type;
         --getAllAttributes(c)->includes(a);
         ) {
-            t := a.type;
-            ca := c.typeOpposite;
         }
-    where (fao:NonLeafAttribute, p2n:PrimitiveToName |
-            fao := ca.FromAttribute;
-            p2n := t.PrimitiveToName;) {
-        realize fa:AttributeToColumn |
-        fa.attribute := a;
-        fa.owner := fao;    
-        fa.type := p2n;
-        fa.kind := a.kind;
-        fa.name := ca.name + '_' + a.name;
-        fa.leafs := Set(AttributeToColumn) {fa};
+    where (p2n_2:PrimitiveToName, fa_2:AttributeToColumn |
+            p2n_2 := t_2.PrimitiveToName;) {
+                
+        fa_2.attribute := a_2;
+        fa_2.type := p2n_2;
+        fa_2.kind := a_2.kind;
+        fa_2.name := ca_2.name + '_' + a_2.name;
     }
 }
 
 map complexAttributeComplexAttributesLM in umlRdbms {
-    uml (c:Class, ca:Attribute, t:Class, a:Attribute |
-        a.owner = c;
+    uml (c:Class, ca:Attribute |
+        ca.type = c;
         --getAllAttributes(c)->includes(a);
-            t := a.type;
         ) {
-            -- ca := c.typeOpposite; Multiple!
         }
     where (fao:NonLeafAttribute |
             fao := ca.FromAttribute;) {
         realize fa:NonLeafAttribute |
-        fa.attribute := a;
         fa.owner := fao;    
-        fa.kind := a.kind;
-        fa.name := ca.name + '_' + a.name;
-        fa.attribute := t;
         fa.leafs := fao.fromAttributes.leafs; 
+    }
+    map complexAttributeComplexAttributesLM_2 {
+        ca_2 := ca;
+        a_2 <= c.attributes;
+        c_2 := c;
+        fa_2 := fa;
+    }
+}
+
+map complexAttributeComplexAttributesLM_2 in umlRdbms {
+    uml (c_2:Class, ca_2:Attribute, t_2:Class, a_2:Attribute |
+        a_2.owner = c_2;
+        --getAllAttributes(c)->includes(a);
+        t_2 := a_2.type;
+        ) {
+        }
+    where (fa_2:NonLeafAttribute |
+            ) {
+        fa_2.attribute := a_2;
+        fa_2.kind := a_2.kind;
+        fa_2.name := ca_2.name + '_' + a_2.name;
+        fa_2.attribute := t_2;
     }
 }
 

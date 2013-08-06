@@ -17,13 +17,13 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
  * 
  * @author Horacio Hoyos
  */
-public class QVTiTracingEvaluationVisitorMM extends QVTiAbstractTracingEvaluationVisitor
+public class QVTiMMTracingEvaluationVisitor extends QVTiAbstractTracingEvaluationVisitor
 {
 	
 	/** The indent level. */
 	private int indentLevel = 0;	
 
-	public QVTiTracingEvaluationVisitorMM(QVTiEvaluationVisitor decorated) {
+	public QVTiMMTracingEvaluationVisitor(QVTiEvaluationVisitor decorated) {
 		super(decorated);
 		// TODO Auto-generated constructor stub
 	}
