@@ -426,15 +426,27 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
                 if(slotVar != null) {
                     Object slotBinding = evaluationEnvironment.getValueOf(slotVar);
                     if(slotBinding != null) {
-                        Object value = safeVisit(propertyAssignment.getValue());
-                        // Unbox to asign to ecore type
-                        Object unboxedValue = metaModelManager.getIdResolver().unboxedValueOf(value);
-                        Property p = propertyAssignment.getTargetProperty();
-                        p.initValue(slotBinding, unboxedValue);
-						Integer cacheIndex = propertyAssignment.getCacheIndex();
-						if (cacheIndex != null) {
-							getModelManager().setMiddleOpposite(cacheIndex, slotBinding, unboxedValue);
-						}
+                    	//  TODO define if keep the try catch for safety
+                    	Object value = null;
+                    	try {
+                    		value = safeVisit(propertyAssignment.getValue());
+            			} catch (InvalidValueException ex) {
+            				// There was an OCLVoid value being navigated or any other/similar OCL error
+            				// evaluating the binding value
+            				// TODO, is this an error?
+            				System.out.println("visitMiddlePropertyAssignment InvalidValueException");
+            			} finally {
+            				if (value != null) {
+            					// Unbox to assign to ecore type
+                        		Object unboxedValue = metaModelManager.getIdResolver().unboxedValueOf(value);
+                        		Property p = propertyAssignment.getTargetProperty();
+                                p.initValue(slotBinding, unboxedValue);
+        						Integer cacheIndex = propertyAssignment.getCacheIndex();
+        						if (cacheIndex != null) {
+        							getModelManager().setMiddleOpposite(cacheIndex, slotBinding, unboxedValue);
+        						}
+            				}
+            			}
                     } else {
                         throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
                                 + " specification. The assigment refers to a variable not defined in the" +
@@ -511,6 +523,24 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
                         value = metaModelManager.getIdResolver().unboxedValueOf(value);
                         Property p = propertyAssignment.getTargetProperty();
                         p.initValue(slotBinding, value);
+                        /* TODO define if keep the try catch for safety
+                        Object value = null;
+                    	try {
+                    		value = safeVisit(propertyAssignment.getValue());
+            			} catch (InvalidValueException ex) {
+            				// There was an OCLVoid value being navigated or any other/similar OCL error
+            				// evaluating the binding value
+            				// TODO, is this an error?
+            				System.out.println("visitMiddlePropertyAssignment InvalidValueException");
+            			} finally {
+            				if (value != null) {
+            					// Unbox to assign to ecore type
+                        		Object unboxedValue = metaModelManager.getIdResolver().unboxedValueOf(value);
+                        		Property p = propertyAssignment.getTargetProperty();
+                                p.initValue(slotBinding, unboxedValue);
+            				}
+            			}
+            			*/
                     } else {
                         throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
                                 + " specification. The assigment refers to a variable not defined in the" +

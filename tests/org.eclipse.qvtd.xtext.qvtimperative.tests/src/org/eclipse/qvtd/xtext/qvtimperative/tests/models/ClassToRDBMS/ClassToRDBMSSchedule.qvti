@@ -41,22 +41,6 @@ map packageToSchemaLM in umlRdbms {
         c <= p.elements;
         p2s := p2s;
     }
-    /*
-    map complexAttributePrimitiveAttributesLM {
-        -- c := c;
-        -- a <= ;
-        -- ca <= c.typeOpposite;
-        ca <= c.attributes;
-        c <= c.attributes.type;
-    }
-    map complexAttributeComplexAttributesLM {
-        -- c := c;
-        -- a <= c.attributes;
-        -- ca <= c.typeOpposite;
-        ca <= c.attributes;
-        c <= c.attributes.type;
-    }
-    */
     -- Associations
     map associationToForeignKeyLM {
         p := p;
@@ -240,7 +224,8 @@ map classToTableMR in umlRdbms {
     -- A Class has attributes
     map attributeColumnsMR {
         c2t := c2t;
-        a2c <= c2t.fromAttributes;
+        a2c <= c2t.fromAttributes->union(c2t.fromAttributes
+            ->selectByKind(umltordbms::NonLeafAttribute).fromAttributes);
         t := t;
     }
 }
@@ -465,6 +450,7 @@ map complexAttributeComplexAttributesLM in umlRdbms {
         ca_1 := ca;
         a_1 <= c.attributes;
         c_1 := c;
+        fao_1 := fao;
     }
 }
 
@@ -494,8 +480,8 @@ map attributeColumnsMR in umlRdbms {
         c.owner := t;
     }
     where (c2t:ClassToTable, a2c:AttributeToColumn, p2n:PrimitiveToName |
-        c2t.fromAttributes.leafs->includes(a2c);
-        a2c.owner = c2t;
+        -- c2t.fromAttributes.leafs->includes(a2c); -- need to go deeper in the recursion
+        -- a2c.owner = c2t;   NOT ALL a2c are owned by c2t (complex attributes) 
         c2t.table = t;
         p2n := a2c.type;
         ct := p2n.typeName;) {
