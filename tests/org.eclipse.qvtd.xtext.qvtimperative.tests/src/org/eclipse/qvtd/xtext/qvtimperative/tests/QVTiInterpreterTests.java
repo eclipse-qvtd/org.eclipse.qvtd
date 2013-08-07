@@ -182,7 +182,6 @@ public static void assertSameModel(Resource expectedResource, Resource actualRes
      *
      * @throws Exception the exception
      */
-    /*
     @Test
     public void testGraph2GraphMinimal() throws Exception {
     	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
@@ -192,7 +191,6 @@ public static void assertSameModel(Resource expectedResource, Resource actualRes
         testEvaluator.test();
         testEvaluator.dispose();
     }
-    */
 
     /*
      * Hierarchical N object to N object QVTi transformation working.
@@ -202,7 +200,6 @@ public static void assertSameModel(Resource expectedResource, Resource actualRes
      *
      * @throws Exception the exception
      */
-    /*
     @Test
     public void testGraph2GraphHierarchical() throws Exception {
     	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "Graph2GraphHierarchical", "Graph2GraphHierarchical.qvti");
@@ -212,14 +209,12 @@ public static void assertSameModel(Resource expectedResource, Resource actualRes
         testEvaluator.test();
         testEvaluator.dispose();
     }
-    */
 
     /**
      * Test hsv 2 hls.
      *
      * @throws Exception the exception
      */
-    /*
     @Test
     public void testHSV2HLS() throws Exception {
     	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "HSV2HLS", "HSV2HLS.qvti");
@@ -229,7 +224,6 @@ public static void assertSameModel(Resource expectedResource, Resource actualRes
         testEvaluator.test();
         testEvaluator.dispose();
     }
-    */
     
     /**
      * Test class to rdbms.
