@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -18,6 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
@@ -365,12 +367,25 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 				}
 			}
 			else if (valueOrValues instanceof Iterable<?>) {
+				// DEBUG
+				if (boundVariable.getName().equals("a2c")) {
+					System.out.println("visitMappingCall " + calledMapping.getName() + " " + boundVariable.getName());
+					Iterator<Object> it = ((BagValue)valueOrValues).iterator();
+					while (it.hasNext()) {
+						EObject eo = (EObject) it.next();
+						System.out.println("Owner: " + eo.eContainer().eGet(eo.eContainer().eClass().getEStructuralFeature("name")));
+						System.out.println("Attribute: " + eo.eGet(eo.eClass().getEStructuralFeature("name")));
+					}
+				}
+				// DEBUG
 				if (loopedVariables == null) {
 					loopedVariables = new ArrayList<Variable>();
 				}
 				if (loopedValues == null) {
 					loopedValues = new ArrayList<Iterable<?>>();
 				}
+				
+				
 				loopedVariables.add(boundVariable);
 				loopedValues.add((Iterable<?>)valueOrValues);
 				//nv.getEvaluationEnvironment().add(boundVariable, null);
