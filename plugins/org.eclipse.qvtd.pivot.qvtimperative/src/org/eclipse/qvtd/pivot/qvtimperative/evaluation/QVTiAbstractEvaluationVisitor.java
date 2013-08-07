@@ -367,17 +367,6 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 				}
 			}
 			else if (valueOrValues instanceof Iterable<?>) {
-				// DEBUG
-				if (boundVariable.getName().equals("a2c")) {
-					System.out.println("visitMappingCall " + calledMapping.getName() + " " + boundVariable.getName());
-					Iterator<Object> it = ((BagValue)valueOrValues).iterator();
-					while (it.hasNext()) {
-						EObject eo = (EObject) it.next();
-						System.out.println("Owner: " + eo.eContainer().eGet(eo.eContainer().eClass().getEStructuralFeature("name")));
-						System.out.println("Attribute: " + eo.eGet(eo.eClass().getEStructuralFeature("name")));
-					}
-				}
-				// DEBUG
 				if (loopedVariables == null) {
 					loopedVariables = new ArrayList<Variable>();
 				}
@@ -518,7 +507,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
                     Object slotBinding = evaluationEnvironment.getValueOf(slotVar);
                     if(slotBinding != null) {
                     	Object value = safeVisit(propertyAssignment.getValue());
-                    	// Unbox to asign to ecore type
+                    	// Unbox to assign to ecore type
                         value = metaModelManager.getIdResolver().unboxedValueOf(value);
                         Property p = propertyAssignment.getTargetProperty();
                         p.initValue(slotBinding, value);

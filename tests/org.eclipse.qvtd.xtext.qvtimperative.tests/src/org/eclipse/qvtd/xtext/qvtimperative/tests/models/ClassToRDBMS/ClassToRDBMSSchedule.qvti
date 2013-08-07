@@ -200,24 +200,14 @@ map classToTableLM in umlRdbms {
         a <= c.attributes;
         fao := c2t;
     }
-    -- This two need to be delayed until all classes
-    -- have been transformed.. how to know this for the
-    -- program to program transforamtion ?
-    /* map complexAttributePrimitiveAttributesLM {
-        -- c := c;
-        -- a <= ;
-        -- ca <= c.typeOpposite;
+    map complexAttributePrimitiveAttributesLM {
         ca <= c.attributes;
         c <= c.attributes.type;
     }
     map complexAttributeComplexAttributesLM {
-        -- c := c;
-        -- a <= c.attributes;
-        -- ca <= c.typeOpposite;
         ca <= c.attributes;
         c <= c.attributes.type;
     }
-    */
 }
 
 map classToTableMR in umlRdbms {
@@ -250,8 +240,7 @@ map classToTableMR in umlRdbms {
     -- A Class has attributes
     map attributeColumnsMR {
         c2t := c2t;
-        a2c <= c2t.fromAttributes.leafs;
-        --p2n <= p2s.primitivesToNames;
+        a2c <= c2t.fromAttributes;
         t := t;
     }
 }
@@ -436,29 +425,30 @@ map complexAttributePrimitiveAttributesLM in umlRdbms {
         }
     where (fao:NonLeafAttribute |
             fao := ca.FromAttribute;) {
-        -- realize fa:AttributeToColumn |
-        -- fa.owner := fao;    
-        -- fa.leafs := Set(AttributeToColumn) {fa};
     }
-    map complexAttributePrimitiveAttributesLM_2 {
-        c_2 := c;
-        ca_2 := ca;
-        a_2 <= c.attributes;
+    map complexAttributePrimitiveAttributesLM_1 {
+        c_1 := c;
+        ca_1 := ca;
+        fao_1 := fao;
+        a_1 <= c.attributes;
     }
 }
 
-map complexAttributePrimitiveAttributesLM_2 in umlRdbms {
-    uml (c_2:Class, ca_2:Attribute, t_2:PrimitiveDataType, a_2:Attribute |
-        t_2 := a_2.type;
+map complexAttributePrimitiveAttributesLM_1 in umlRdbms {
+    uml (c_1:Class, t_1:PrimitiveDataType, a_1:Attribute, ca_1:Attribute |
+        t_1 := a_1.type;
         --getAllAttributes(c)->includes(a);
         ) {
         }
-    where (p2n_2:PrimitiveToName, fa_2:AttributeToColumn |
-            p2n_2 := t_2.PrimitiveToName;) {
-        fa_2.attribute := a_2;
-        fa_2.type := p2n_2;
-        fa_2.kind := a_2.kind;
-        fa_2.name := ca_2.name + '_' + a_2.name;
+    where (fao_1:NonLeafAttribute, p2n_1:PrimitiveToName |
+            p2n_1 := t_1.PrimitiveToName;) {
+        realize fa:AttributeToColumn |
+        fa.owner := fao_1;    
+        fa.leafs := Set(AttributeToColumn) {fa};
+        fa.attribute := a_1;
+        fa.type := p2n_1;
+        fa.kind := a_1.kind;
+        fa.name := ca_1.name + '_' + a_1.name;
     }
 }
 
@@ -470,31 +460,30 @@ map complexAttributeComplexAttributesLM in umlRdbms {
         }
     where (fao:NonLeafAttribute |
             fao := ca.FromAttribute;) {
-        realize fa:NonLeafAttribute |
-        fa.owner := fao;    
-        fa.leafs := fao.fromAttributes.leafs; 
     }
-    map complexAttributeComplexAttributesLM_2 {
-        ca_2 := ca;
-        a_2 <= c.attributes;
-        c_2 := c;
-        fa_2 := fa;
+    map complexAttributeComplexAttributesLM_1 {
+        ca_1 := ca;
+        a_1 <= c.attributes;
+        c_1 := c;
     }
 }
 
-map complexAttributeComplexAttributesLM_2 in umlRdbms {
-    uml (c_2:Class, ca_2:Attribute, t_2:Class, a_2:Attribute |
-        a_2.owner = c_2;
+map complexAttributeComplexAttributesLM_1 in umlRdbms {
+    uml (c_1:Class, ca_1:Attribute, t_1:Class, a_1:Attribute |
+        a_1.owner = c_1;
         --getAllAttributes(c)->includes(a);
-        t_2 := a_2.type;
+        t_1 := a_1.type;
         ) {
         }
-    where (fa_2:NonLeafAttribute |
+    where (fao_1:NonLeafAttribute |
             ) {
-        fa_2.attribute := a_2;
-        fa_2.kind := a_2.kind;
-        fa_2.name := ca_2.name + '_' + a_2.name;
-        fa_2.attribute := t_2;
+        realize fa:NonLeafAttribute |
+        fa.owner := fao_1;    
+        fa.leafs := fao_1.fromAttributes.leafs; 
+        fa.attribute := a_1;
+        fa.kind := a_1.kind;
+        fa.name := ca_1.name + '_' + a_1.name;
+        fa.attribute := t_1;
     }
 }
 
