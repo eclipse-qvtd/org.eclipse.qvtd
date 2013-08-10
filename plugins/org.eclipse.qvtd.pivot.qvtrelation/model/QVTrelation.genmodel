@@ -6,6 +6,7 @@
     copyrightFields="false" usedGenPackages="../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel#//qvttemplate">
   <foreignModel>QVTrelation.ecore</foreignModel>
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
+    <details key="Use Delegates" value="false"/>
     <details key="Use Null Annotations" value="true"/>
   </genAnnotations>
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel/ToString"/>
