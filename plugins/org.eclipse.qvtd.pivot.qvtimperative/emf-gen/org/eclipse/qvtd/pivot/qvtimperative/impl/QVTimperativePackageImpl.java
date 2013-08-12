@@ -31,6 +31,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 
 /**
  * <!-- begin-user-doc -->
@@ -80,6 +81,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	private EClass middlePropertyCallExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass variablePredicateEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -294,6 +302,24 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getVariablePredicate() {
+		return variablePredicateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVariablePredicate_TargetVariable() {
+		return (EReference)variablePredicateEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public QVTimperativeFactory getQVTimperativeFactory() {
 		return (QVTimperativeFactory)getEFactoryInstance();
 	}
@@ -338,6 +364,9 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		middlePropertyCallExpEClass = createEClass(MIDDLE_PROPERTY_CALL_EXP);
 		createEAttribute(middlePropertyCallExpEClass, MIDDLE_PROPERTY_CALL_EXP__CACHE_INDEX);
+
+		variablePredicateEClass = createEClass(VARIABLE_PREDICATE);
+		createEReference(variablePredicateEClass, VARIABLE_PREDICATE__TARGET_VARIABLE);
 	}
 
 	/**
@@ -381,6 +410,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		mappingCallBindingEClass.getESuperTypes().add(thePivotPackage.getElement());
 		middlePropertyAssignmentEClass.getESuperTypes().add(theQVTcoreBasePackage.getPropertyAssignment());
 		middlePropertyCallExpEClass.getESuperTypes().add(thePivotPackage.getPropertyCallExp());
+		variablePredicateEClass.getESuperTypes().add(theQVTbasePackage.getPredicate());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(imperativeModelEClass, ImperativeModel.class, "ImperativeModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -407,12 +437,17 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(middlePropertyCallExpEClass, MiddlePropertyCallExp.class, "MiddlePropertyCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMiddlePropertyCallExp_CacheIndex(), theEcorePackage.getEIntegerObject(), "cacheIndex", null, 0, 1, MiddlePropertyCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(variablePredicateEClass, VariablePredicate.class, "VariablePredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVariablePredicate_TargetVariable(), thePivotPackage.getVariable(), null, "targetVariable", null, 1, 1, VariablePredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Create resource
 		createResource(eNS_URI);
 
 		// Create annotations
 		// http://www.eclipse.org/OCL/Import
 		createImportAnnotations();
+		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
+		createEmofAnnotations();
 	}
 
 	/**
@@ -429,6 +464,22 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		   new String[] {
 			 "qvtb", "/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/",
 			 "qvtcb", "/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/"
+		   });	
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEmofAnnotations() {
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		addAnnotation
+		  (getVariablePredicate_TargetVariable(), 
+		   source, 
+		   new String[] {
+			 "body", "assignment"
 		   });	
 	}
 

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  */
-package org.eclipse.qvtd.codegen.qvti;
+package org.eclipse.qvtd.codegen.qvti.analyzer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +20,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;

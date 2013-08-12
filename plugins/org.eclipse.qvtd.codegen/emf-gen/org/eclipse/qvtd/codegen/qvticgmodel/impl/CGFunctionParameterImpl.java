@@ -149,8 +149,7 @@ public class CGFunctionParameterImpl extends CGParameterImpl implements CGFuncti
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -159,13 +158,31 @@ public class CGFunctionParameterImpl extends CGParameterImpl implements CGFuncti
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGFunctionParameter(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean isBoxed() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isGlobal() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean isUnboxed() {
 		return true;
 	}
+
 } //CGFunctionParameterImpl

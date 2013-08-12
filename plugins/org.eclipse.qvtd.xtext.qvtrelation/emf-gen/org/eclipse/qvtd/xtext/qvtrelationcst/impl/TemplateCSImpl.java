@@ -21,15 +21,11 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.OperatorCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcst.TemplateCS;
-import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -261,16 +257,5 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitTemplateCS(this);
 	}
 } //TemplateCSImpl

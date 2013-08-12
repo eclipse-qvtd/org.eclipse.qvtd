@@ -58,11 +58,11 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getImportedPackage <em>Imported Package</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getNestedPackage <em>Nested Package</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getNestingPackage <em>Nesting Package</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getNsURI <em>Ns URI</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getImportedPackage <em>Imported Package</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getOwnedType <em>Owned Type</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getOwnedTag <em>Owned Tag</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getModelParameter <em>Model Parameter</em>}</li>
@@ -75,6 +75,16 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  */
 @SuppressWarnings("cast")
 public class TransformationImpl extends ClassImpl implements Transformation {
+	/**
+	 * The cached value of the '{@link #getImportedPackage() <em>Imported Package</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImportedPackage()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<org.eclipse.ocl.examples.pivot.Package> importedPackage;
+
 	/**
 	 * The cached value of the '{@link #getNestedPackage() <em>Nested Package</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -124,16 +134,6 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @ordered
 	 */
 	protected String nsURI = NS_URI_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getImportedPackage() <em>Imported Package</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImportedPackage()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<org.eclipse.ocl.examples.pivot.Package> importedPackage;
 
 	/**
 	 * The cached value of the '{@link #getOwnedType() <em>Owned Type</em>}' containment reference list.
@@ -479,6 +479,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTbasePackage.TRANSFORMATION__IMPORTED_PACKAGE:
+				return getImportedPackage();
 			case QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE:
 				return getNestedPackage();
 			case QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE:
@@ -487,8 +489,6 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return getNsPrefix();
 			case QVTbasePackage.TRANSFORMATION__NS_URI:
 				return getNsURI();
-			case QVTbasePackage.TRANSFORMATION__IMPORTED_PACKAGE:
-				return getImportedPackage();
 			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
 				return getOwnedType();
 			case QVTbasePackage.TRANSFORMATION__OWNED_TAG:
@@ -513,6 +513,10 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTbasePackage.TRANSFORMATION__IMPORTED_PACKAGE:
+				getImportedPackage().clear();
+				getImportedPackage().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Package>)newValue);
+				return;
 			case QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE:
 				getNestedPackage().clear();
 				getNestedPackage().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Package>)newValue);
@@ -525,10 +529,6 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return;
 			case QVTbasePackage.TRANSFORMATION__NS_URI:
 				setNsURI((String)newValue);
-				return;
-			case QVTbasePackage.TRANSFORMATION__IMPORTED_PACKAGE:
-				getImportedPackage().clear();
-				getImportedPackage().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Package>)newValue);
 				return;
 			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
 				getOwnedType().clear();
@@ -561,6 +561,9 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTbasePackage.TRANSFORMATION__IMPORTED_PACKAGE:
+				getImportedPackage().clear();
+				return;
 			case QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE:
 				getNestedPackage().clear();
 				return;
@@ -572,9 +575,6 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return;
 			case QVTbasePackage.TRANSFORMATION__NS_URI:
 				setNsURI(NS_URI_EDEFAULT);
-				return;
-			case QVTbasePackage.TRANSFORMATION__IMPORTED_PACKAGE:
-				getImportedPackage().clear();
 				return;
 			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
 				getOwnedType().clear();
@@ -603,6 +603,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTbasePackage.TRANSFORMATION__IMPORTED_PACKAGE:
+				return importedPackage != null && !importedPackage.isEmpty();
 			case QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE:
 				return nestedPackage != null && !nestedPackage.isEmpty();
 			case QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE:
@@ -611,8 +613,6 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return NS_PREFIX_EDEFAULT == null ? nsPrefix != null : !NS_PREFIX_EDEFAULT.equals(nsPrefix);
 			case QVTbasePackage.TRANSFORMATION__NS_URI:
 				return NS_URI_EDEFAULT == null ? nsURI != null : !NS_URI_EDEFAULT.equals(nsURI);
-			case QVTbasePackage.TRANSFORMATION__IMPORTED_PACKAGE:
-				return importedPackage != null && !importedPackage.isEmpty();
 			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
 				return ownedType != null && !ownedType.isEmpty();
 			case QVTbasePackage.TRANSFORMATION__OWNED_TAG:
@@ -636,11 +636,11 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == org.eclipse.ocl.examples.pivot.Package.class) {
 			switch (derivedFeatureID) {
+				case QVTbasePackage.TRANSFORMATION__IMPORTED_PACKAGE: return PivotPackage.PACKAGE__IMPORTED_PACKAGE;
 				case QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE: return PivotPackage.PACKAGE__NESTED_PACKAGE;
 				case QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE: return PivotPackage.PACKAGE__NESTING_PACKAGE;
 				case QVTbasePackage.TRANSFORMATION__NS_PREFIX: return PivotPackage.PACKAGE__NS_PREFIX;
 				case QVTbasePackage.TRANSFORMATION__NS_URI: return PivotPackage.PACKAGE__NS_URI;
-				case QVTbasePackage.TRANSFORMATION__IMPORTED_PACKAGE: return PivotPackage.PACKAGE__IMPORTED_PACKAGE;
 				case QVTbasePackage.TRANSFORMATION__OWNED_TYPE: return PivotPackage.PACKAGE__OWNED_TYPE;
 				default: return -1;
 			}
@@ -657,11 +657,11 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == org.eclipse.ocl.examples.pivot.Package.class) {
 			switch (baseFeatureID) {
+				case PivotPackage.PACKAGE__IMPORTED_PACKAGE: return QVTbasePackage.TRANSFORMATION__IMPORTED_PACKAGE;
 				case PivotPackage.PACKAGE__NESTED_PACKAGE: return QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE;
 				case PivotPackage.PACKAGE__NESTING_PACKAGE: return QVTbasePackage.TRANSFORMATION__NESTING_PACKAGE;
 				case PivotPackage.PACKAGE__NS_PREFIX: return QVTbasePackage.TRANSFORMATION__NS_PREFIX;
 				case PivotPackage.PACKAGE__NS_URI: return QVTbasePackage.TRANSFORMATION__NS_URI;
-				case PivotPackage.PACKAGE__IMPORTED_PACKAGE: return QVTbasePackage.TRANSFORMATION__IMPORTED_PACKAGE;
 				case PivotPackage.PACKAGE__OWNED_TYPE: return QVTbasePackage.TRANSFORMATION__OWNED_TYPE;
 				default: return -1;
 			}

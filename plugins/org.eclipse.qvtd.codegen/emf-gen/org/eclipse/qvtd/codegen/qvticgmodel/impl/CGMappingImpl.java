@@ -16,6 +16,7 @@ package org.eclipse.qvtd.codegen.qvticgmodel.impl;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -28,14 +29,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTypedElementImpl;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
+import org.eclipse.ocl.examples.codegen.cse.OuterStackPlace;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
@@ -47,67 +48,34 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getBody <em>Body</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getFreeVariables <em>Free Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getTransformation <em>Transformation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getGuardVariables <em>Guard Variables</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getPredicates <em>Predicates</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getRealizedVariables <em>Realized Variables</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getAssignments <em>Assignments</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getMappingCalls <em>Mapping Calls</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CGMappingImpl extends CGTypedElementImpl implements CGMapping {
+public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	/**
-	 * The cached value of the '{@link #getGuardVariables() <em>Guard Variables</em>}' containment reference list.
+	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGuardVariables()
+	 * @see #getBody()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CGGuardVariable> guardVariables;
+	protected CGValuedElement body;
 
 	/**
-	 * The cached value of the '{@link #getPredicates() <em>Predicates</em>}' containment reference list.
+	 * The cached value of the '{@link #getFreeVariables() <em>Free Variables</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPredicates()
+	 * @see #getFreeVariables()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CGPredicate> predicates;
-
-	/**
-	 * The cached value of the '{@link #getRealizedVariables() <em>Realized Variables</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRealizedVariables()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<CGRealizedVariable> realizedVariables;
-
-	/**
-	 * The cached value of the '{@link #getAssignments() <em>Assignments</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAssignments()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<CGPropertyAssignment> assignments;
-
-	/**
-	 * The cached value of the '{@link #getMappingCalls() <em>Mapping Calls</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMappingCalls()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<CGMappingCall> mappingCalls;
+	protected EList<CGGuardVariable> freeVariables;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -126,6 +94,61 @@ public class CGMappingImpl extends CGTypedElementImpl implements CGMapping {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTiCGModelPackage.Literals.CG_MAPPING;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGValuedElement getBody() {
+		return body;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetBody(CGValuedElement newBody, NotificationChain msgs) {
+		CGValuedElement oldBody = body;
+		body = newBody;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING__BODY, oldBody, newBody);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBody(CGValuedElement newBody) {
+		if (newBody != body) {
+			NotificationChain msgs = null;
+			if (body != null)
+				msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING__BODY, null, msgs);
+			if (newBody != null)
+				msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING__BODY, null, msgs);
+			msgs = basicSetBody(newBody, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING__BODY, newBody, newBody));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<CGGuardVariable> getFreeVariables() {
+		if (freeVariables == null) {
+			freeVariables = new EObjectContainmentWithInverseEList<CGGuardVariable>(CGGuardVariable.class, this, QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES, QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING);
+		}
+		return freeVariables;
 	}
 
 	/**
@@ -174,86 +197,18 @@ public class CGMappingImpl extends CGTypedElementImpl implements CGMapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<CGGuardVariable> getGuardVariables() {
-		if (guardVariables == null) {
-			guardVariables = new EObjectContainmentWithInverseEList<CGGuardVariable>(CGGuardVariable.class, this, QVTiCGModelPackage.CG_MAPPING__GUARD_VARIABLES, QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING);
-		}
-		return guardVariables;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public List<CGPredicate> getPredicates() {
-		if (predicates == null) {
-			predicates = new EObjectContainmentWithInverseEList<CGPredicate>(CGPredicate.class, this, QVTiCGModelPackage.CG_MAPPING__PREDICATES, QVTiCGModelPackage.CG_PREDICATE__MAPPING);
-		}
-		return predicates;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public List<CGMappingCall> getMappingCalls() {
-		if (mappingCalls == null) {
-			mappingCalls = new EObjectContainmentWithInverseEList<CGMappingCall>(CGMappingCall.class, this, QVTiCGModelPackage.CG_MAPPING__MAPPING_CALLS, QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING);
-		}
-		return mappingCalls;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getFreeVariables()).basicAdd(otherEnd, msgs);
 			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetTransformation((CGTransformation)otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__GUARD_VARIABLES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGuardVariables()).basicAdd(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__PREDICATES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPredicates()).basicAdd(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__REALIZED_VARIABLES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRealizedVariables()).basicAdd(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__ASSIGNMENTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAssignments()).basicAdd(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__MAPPING_CALLS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMappingCalls()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public List<CGRealizedVariable> getRealizedVariables() {
-		if (realizedVariables == null) {
-			realizedVariables = new EObjectContainmentWithInverseEList<CGRealizedVariable>(CGRealizedVariable.class, this, QVTiCGModelPackage.CG_MAPPING__REALIZED_VARIABLES, QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING);
-		}
-		return realizedVariables;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public List<CGPropertyAssignment> getAssignments() {
-		if (assignments == null) {
-			assignments = new EObjectContainmentWithInverseEList<CGPropertyAssignment>(CGPropertyAssignment.class, this, QVTiCGModelPackage.CG_MAPPING__ASSIGNMENTS, QVTiCGModelPackage.CG_PROPERTY_ASSIGNMENT__MAPPING);
-		}
-		return assignments;
 	}
 
 	/**
@@ -264,18 +219,12 @@ public class CGMappingImpl extends CGTypedElementImpl implements CGMapping {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTiCGModelPackage.CG_MAPPING__BODY:
+				return basicSetBody(null, msgs);
+			case QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES:
+				return ((InternalEList<?>)getFreeVariables()).basicRemove(otherEnd, msgs);
 			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
 				return basicSetTransformation(null, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__GUARD_VARIABLES:
-				return ((InternalEList<?>)getGuardVariables()).basicRemove(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__PREDICATES:
-				return ((InternalEList<?>)getPredicates()).basicRemove(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__REALIZED_VARIABLES:
-				return ((InternalEList<?>)getRealizedVariables()).basicRemove(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__ASSIGNMENTS:
-				return ((InternalEList<?>)getAssignments()).basicRemove(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__MAPPING_CALLS:
-				return ((InternalEList<?>)getMappingCalls()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -302,18 +251,12 @@ public class CGMappingImpl extends CGTypedElementImpl implements CGMapping {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTiCGModelPackage.CG_MAPPING__BODY:
+				return getBody();
+			case QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES:
+				return getFreeVariables();
 			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
 				return getTransformation();
-			case QVTiCGModelPackage.CG_MAPPING__GUARD_VARIABLES:
-				return getGuardVariables();
-			case QVTiCGModelPackage.CG_MAPPING__PREDICATES:
-				return getPredicates();
-			case QVTiCGModelPackage.CG_MAPPING__REALIZED_VARIABLES:
-				return getRealizedVariables();
-			case QVTiCGModelPackage.CG_MAPPING__ASSIGNMENTS:
-				return getAssignments();
-			case QVTiCGModelPackage.CG_MAPPING__MAPPING_CALLS:
-				return getMappingCalls();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -327,28 +270,15 @@ public class CGMappingImpl extends CGTypedElementImpl implements CGMapping {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTiCGModelPackage.CG_MAPPING__BODY:
+				setBody((CGValuedElement)newValue);
+				return;
+			case QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES:
+				getFreeVariables().clear();
+				getFreeVariables().addAll((Collection<? extends CGGuardVariable>)newValue);
+				return;
 			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
 				setTransformation((CGTransformation)newValue);
-				return;
-			case QVTiCGModelPackage.CG_MAPPING__GUARD_VARIABLES:
-				getGuardVariables().clear();
-				getGuardVariables().addAll((Collection<? extends CGGuardVariable>)newValue);
-				return;
-			case QVTiCGModelPackage.CG_MAPPING__PREDICATES:
-				getPredicates().clear();
-				getPredicates().addAll((Collection<? extends CGPredicate>)newValue);
-				return;
-			case QVTiCGModelPackage.CG_MAPPING__REALIZED_VARIABLES:
-				getRealizedVariables().clear();
-				getRealizedVariables().addAll((Collection<? extends CGRealizedVariable>)newValue);
-				return;
-			case QVTiCGModelPackage.CG_MAPPING__ASSIGNMENTS:
-				getAssignments().clear();
-				getAssignments().addAll((Collection<? extends CGPropertyAssignment>)newValue);
-				return;
-			case QVTiCGModelPackage.CG_MAPPING__MAPPING_CALLS:
-				getMappingCalls().clear();
-				getMappingCalls().addAll((Collection<? extends CGMappingCall>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -362,23 +292,14 @@ public class CGMappingImpl extends CGTypedElementImpl implements CGMapping {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTiCGModelPackage.CG_MAPPING__BODY:
+				setBody((CGValuedElement)null);
+				return;
+			case QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES:
+				getFreeVariables().clear();
+				return;
 			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
 				setTransformation((CGTransformation)null);
-				return;
-			case QVTiCGModelPackage.CG_MAPPING__GUARD_VARIABLES:
-				getGuardVariables().clear();
-				return;
-			case QVTiCGModelPackage.CG_MAPPING__PREDICATES:
-				getPredicates().clear();
-				return;
-			case QVTiCGModelPackage.CG_MAPPING__REALIZED_VARIABLES:
-				getRealizedVariables().clear();
-				return;
-			case QVTiCGModelPackage.CG_MAPPING__ASSIGNMENTS:
-				getAssignments().clear();
-				return;
-			case QVTiCGModelPackage.CG_MAPPING__MAPPING_CALLS:
-				getMappingCalls().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -392,25 +313,18 @@ public class CGMappingImpl extends CGTypedElementImpl implements CGMapping {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTiCGModelPackage.CG_MAPPING__BODY:
+				return body != null;
+			case QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES:
+				return freeVariables != null && !freeVariables.isEmpty();
 			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
 				return getTransformation() != null;
-			case QVTiCGModelPackage.CG_MAPPING__GUARD_VARIABLES:
-				return guardVariables != null && !guardVariables.isEmpty();
-			case QVTiCGModelPackage.CG_MAPPING__PREDICATES:
-				return predicates != null && !predicates.isEmpty();
-			case QVTiCGModelPackage.CG_MAPPING__REALIZED_VARIABLES:
-				return realizedVariables != null && !realizedVariables.isEmpty();
-			case QVTiCGModelPackage.CG_MAPPING__ASSIGNMENTS:
-				return assignments != null && !assignments.isEmpty();
-			case QVTiCGModelPackage.CG_MAPPING__MAPPING_CALLS:
-				return mappingCalls != null && !mappingCalls.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -418,4 +332,14 @@ public class CGMappingImpl extends CGTypedElementImpl implements CGMapping {
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMapping(this);
 	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
+		return OuterStackPlace.createOuterStackPlace(element2place, this);
+	}
+
 } //CGMappingImpl

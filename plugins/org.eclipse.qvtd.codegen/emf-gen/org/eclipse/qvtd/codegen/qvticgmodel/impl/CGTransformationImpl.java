@@ -57,6 +57,7 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	 * @ordered
 	 */
 	protected EList<CGMapping> mappings;
+
 	/**
 	 * The cached value of the '{@link #getTypedModels() <em>Typed Models</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -66,6 +67,7 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	 * @ordered
 	 */
 	protected EList<CGTypedModel> typedModels;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -214,8 +216,7 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -223,4 +224,5 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGTransformation(this);
 	}
+
 } //CGTransformationImpl

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  */
-package org.eclipse.qvtd.codegen.qvti;
+package org.eclipse.qvtd.codegen.qvti.java;
 /**
  * <copyright>
  * 
@@ -30,11 +30,7 @@ package org.eclipse.qvtd.codegen.qvti;
 
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 
 /**
@@ -58,7 +54,7 @@ public class QVTiLocalContext extends JavaLocalContext
 	/*
 	 * If the self parameter has a known type other than Object, we add a CGCastParamter that casts the passed parameter self_0:Object to a better self.
 	 * Otherwise we just rename the passed parameter to be self. The self parameter is of course maintained in the outer name context.
-	 */
+	 *
 	@Override
 	public @NonNull CGParameter getCastParameter(@NonNull CGParameter cgParameter) {
 		if (cgParameter instanceof CGCastParameter) {
@@ -80,20 +76,20 @@ public class QVTiLocalContext extends JavaLocalContext
 			}
 		}
 		return super.getCastParameter(cgParameter);
-	}
+	} */
 
-	@Override
-	public @NonNull CGValuedElement getEvaluatorParameter() {
-		return getGlobalContext().getEvaluatorParameter();
-	}
+//	@Override
+//	public @NonNull CGValuedElement getEvaluatorParameter() {
+//		return getGlobalContext().getEvaluatorParameter();
+//	}
 
 	@Override
 	public @NonNull QVTiGlobalContext getGlobalContext() {
 		return (QVTiGlobalContext) globalContext;
 	}
 	
-	@Override
-	public @NonNull CGValuedElement getIdResolverVariable() {
-		return getGlobalContext().getIdResolverVariable();
-	}
+//	@Override
+//	public @NonNull CGValuedElement getIdResolverVariable() {
+//		return getGlobalContext().getIdResolverVariable();
+//	}
 }

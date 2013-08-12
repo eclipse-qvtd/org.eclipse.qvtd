@@ -12,7 +12,7 @@
  * 
  * </copyright>
  */
-package org.eclipse.qvtd.codegen.qvti;
+package org.eclipse.qvtd.codegen.qvti.analyzer;
 
 import java.util.Set;
 
@@ -26,6 +26,9 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
@@ -34,6 +37,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 
 public class QVTiFieldingAnalyzer extends FieldingAnalyzer
@@ -69,7 +73,7 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 		}
 
 		public @Nullable Set<CGVariable> visitCGMapping(@NonNull CGMapping object) {
-			return visitCGTypedElement(object);
+			return visitCGNamedElement(object);
 		}
 
 		public @Nullable Set<CGVariable> visitCGMappingCall(@NonNull CGMappingCall object) {
@@ -78,6 +82,18 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 
 		public @Nullable Set<CGVariable> visitCGMappingCallBinding(@NonNull CGMappingCallBinding object) {
 			return visitCGValuedElement(object);
+		}
+
+		public @Nullable Set<CGVariable> visitCGMappingExp(@NonNull CGMappingExp object) {
+			return visitCGValuedElement(object);
+		}
+
+		public @Nullable Set<CGVariable> visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
+			return visitCGPropertyAssignment(object);
+		}
+
+		public @Nullable Set<CGVariable> visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
+			return visitCGPropertyCallExp(object);
 		}
 
 		public @Nullable Set<CGVariable> visitCGPredicate(@NonNull CGPredicate object) {
@@ -98,6 +114,10 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 
 		public @Nullable Set<CGVariable> visitCGTypedModel(@NonNull CGTypedModel object) {
 			return visitCGNamedElement(object);
+		}
+
+		public @Nullable Set<CGVariable> visitCGVariablePredicate(@NonNull CGVariablePredicate object) {
+			return visitCGPredicate(object);
 		}
 	}
 	
@@ -131,8 +151,8 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 			return visitCGParameter(object);
 		}
 
-		public Boolean visitCGMapping(@NonNull CGMapping object) {
-			return visitCGTypedElement(object);
+		public Boolean visitCGMapping(@NonNull CGMapping cgMapping) {
+			return true;
 		}
 
 		public Boolean visitCGMappingCall(@NonNull CGMappingCall object) {
@@ -143,9 +163,20 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 			return visitCGValuedElement(object);
 		}
 
-		public Boolean visitCGPredicate(@NonNull CGPredicate cgPredicate) {
-			rewriteAsCaught(cgPredicate.getConditionExpression());
-			return true;
+		public Boolean visitCGMappingExp(@NonNull CGMappingExp object) {
+			return visitCGValuedElement(object);
+		}
+
+		public Boolean visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
+			return visitCGPropertyAssignment(object);
+		}
+
+		public Boolean visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
+			return visitCGPropertyCallExp(object);
+		}
+
+		public Boolean visitCGPredicate(@NonNull CGPredicate object) {
+			return visitCGValuedElement(object);
 		}
 
 		public Boolean visitCGPropertyAssignment(@NonNull CGPropertyAssignment object) {
@@ -162,6 +193,10 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 
 		public Boolean visitCGTypedModel(@NonNull CGTypedModel object) {
 			return visitCGNamedElement(object);
+		}
+
+		public Boolean visitCGVariablePredicate(@NonNull CGVariablePredicate object) {
+			return visitCGPredicate(object);
 		}
 	}
 	

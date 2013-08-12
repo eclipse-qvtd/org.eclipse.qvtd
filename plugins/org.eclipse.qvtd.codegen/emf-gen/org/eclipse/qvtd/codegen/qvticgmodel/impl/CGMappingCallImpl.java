@@ -30,9 +30,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 
@@ -43,7 +43,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallImpl#getMapping <em>Mapping</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallImpl#getMappingExp <em>Mapping Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallImpl#getMappingCallBindings <em>Mapping Call Bindings</em>}</li>
  * </ul>
  * </p>
@@ -85,9 +85,9 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGMapping getMapping() {
-		if (eContainerFeatureID() != QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING) return null;
-		return (CGMapping)eInternalContainer();
+	public CGMappingExp getMappingExp() {
+		if (eContainerFeatureID() != QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_EXP) return null;
+		return (CGMappingExp)eInternalContainer();
 	}
 
 	/**
@@ -95,8 +95,8 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetMapping(CGMapping newMapping, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newMapping, QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING, msgs);
+	public NotificationChain basicSetMappingExp(CGMappingExp newMappingExp, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newMappingExp, QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_EXP, msgs);
 		return msgs;
 	}
 
@@ -105,20 +105,20 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMapping(CGMapping newMapping) {
-		if (newMapping != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING && newMapping != null)) {
-			if (EcoreUtil.isAncestor(this, newMapping))
+	public void setMappingExp(CGMappingExp newMappingExp) {
+		if (newMappingExp != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_EXP && newMappingExp != null)) {
+			if (EcoreUtil.isAncestor(this, newMappingExp))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newMapping != null)
-				msgs = ((InternalEObject)newMapping).eInverseAdd(this, QVTiCGModelPackage.CG_MAPPING__MAPPING_CALLS, CGMapping.class, msgs);
-			msgs = basicSetMapping(newMapping, msgs);
+			if (newMappingExp != null)
+				msgs = ((InternalEObject)newMappingExp).eInverseAdd(this, QVTiCGModelPackage.CG_MAPPING_EXP__MAPPING_CALLS, CGMappingExp.class, msgs);
+			msgs = basicSetMappingExp(newMappingExp, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING, newMapping, newMapping));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_EXP, newMappingExp, newMappingExp));
 	}
 
 	/**
@@ -141,10 +141,10 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING:
+			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_EXP:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetMapping((CGMapping)otherEnd, msgs);
+				return basicSetMappingExp((CGMappingExp)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -157,8 +157,8 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING:
-				return basicSetMapping(null, msgs);
+			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_EXP:
+				return basicSetMappingExp(null, msgs);
 			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_CALL_BINDINGS:
 				return ((InternalEList<?>)getMappingCallBindings()).basicRemove(otherEnd, msgs);
 		}
@@ -173,8 +173,8 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING:
-				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_MAPPING__MAPPING_CALLS, CGMapping.class, msgs);
+			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_EXP:
+				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_MAPPING_EXP__MAPPING_CALLS, CGMappingExp.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -187,8 +187,8 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING:
-				return getMapping();
+			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_EXP:
+				return getMappingExp();
 			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_CALL_BINDINGS:
 				return getMappingCallBindings();
 		}
@@ -204,8 +204,8 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING:
-				setMapping((CGMapping)newValue);
+			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_EXP:
+				setMappingExp((CGMappingExp)newValue);
 				return;
 			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_CALL_BINDINGS:
 				getMappingCallBindings().clear();
@@ -223,8 +223,8 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING:
-				setMapping((CGMapping)null);
+			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_EXP:
+				setMappingExp((CGMappingExp)null);
 				return;
 			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_CALL_BINDINGS:
 				getMappingCallBindings().clear();
@@ -241,8 +241,8 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING:
-				return getMapping() != null;
+			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_EXP:
+				return getMappingExp() != null;
 			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_CALL_BINDINGS:
 				return mappingCallBindings != null && !mappingCallBindings.isEmpty();
 		}
@@ -250,8 +250,7 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -259,4 +258,5 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMappingCall(this);
 	}
+
 } //CGMappingCallImpl

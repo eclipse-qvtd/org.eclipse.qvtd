@@ -26,15 +26,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.NamedElementCSImpl;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.AbstractMappingCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.QVTcoreBaseCSTPackage;
-import org.eclipse.qvtd.xtext.qvtcorebasecst.util.QVTcoreBaseCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -289,16 +285,5 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 				return middle != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTcoreBaseCSVisitor<?>)visitor).visitAbstractMappingCS(this);
 	}
 } //MappingCSImpl

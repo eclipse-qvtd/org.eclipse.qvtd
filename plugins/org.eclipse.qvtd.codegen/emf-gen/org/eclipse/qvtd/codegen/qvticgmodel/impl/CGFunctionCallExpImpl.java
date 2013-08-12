@@ -149,8 +149,7 @@ public class CGFunctionCallExpImpl extends CGOperationCallExpImpl implements CGF
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -159,13 +158,22 @@ public class CGFunctionCallExpImpl extends CGOperationCallExpImpl implements CGF
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGFunctionCallExp(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean isBoxed() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean isUnboxed() {
 		return true;
 	}
+
 } //CGFunctionCallExpImpl

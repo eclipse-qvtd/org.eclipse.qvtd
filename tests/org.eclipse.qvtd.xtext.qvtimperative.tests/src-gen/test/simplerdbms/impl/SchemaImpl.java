@@ -3,17 +3,12 @@
 package test.simplerdbms.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import test.simplerdbms.Schema;
 import test.simplerdbms.SimplerdbmsPackage;
 import test.simplerdbms.Table;
@@ -33,7 +28,7 @@ import test.simplerdbms.Table;
  */
 public class SchemaImpl extends RModelElementImpl implements Schema {
 	/**
-	 * The cached value of the '{@link #getTables() <em>Tables</em>}' reference list.
+	 * The cached value of the '{@link #getTables() <em>Tables</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTables()
@@ -68,7 +63,7 @@ public class SchemaImpl extends RModelElementImpl implements Schema {
 	 */
 	public EList<Table> getTables() {
 		if (tables == null) {
-			tables = new EObjectWithInverseResolvingEList<Table>(Table.class, this, SimplerdbmsPackage.SCHEMA__TABLES, SimplerdbmsPackage.TABLE__SCHEMA);
+			tables = new EObjectContainmentWithInverseEList<Table>(Table.class, this, SimplerdbmsPackage.SCHEMA__TABLES, SimplerdbmsPackage.TABLE__SCHEMA);
 		}
 		return tables;
 	}

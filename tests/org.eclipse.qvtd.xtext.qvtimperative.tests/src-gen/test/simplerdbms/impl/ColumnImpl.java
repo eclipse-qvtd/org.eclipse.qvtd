@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import test.simplerdbms.Column;
@@ -40,16 +41,6 @@ import test.simplerdbms.Table;
  * @generated
  */
 public class ColumnImpl extends RModelElementImpl implements Column {
-	/**
-	 * The cached value of the '{@link #getOwner() <em>Owner</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwner()
-	 * @generated
-	 * @ordered
-	 */
-	protected Table owner;
-
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -115,15 +106,8 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	 * @generated
 	 */
 	public Table getOwner() {
-		if (owner != null && owner.eIsProxy()) {
-			InternalEObject oldOwner = (InternalEObject)owner;
-			owner = (Table)eResolveProxy(oldOwner);
-			if (owner != oldOwner) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SimplerdbmsPackage.COLUMN__OWNER, oldOwner, owner));
-			}
-		}
-		return owner;
+		if (eContainerFeatureID() != SimplerdbmsPackage.COLUMN__OWNER) return null;
+		return (Table)eInternalContainer();
 	}
 
 	/**
@@ -131,8 +115,9 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Table basicGetOwner() {
-		return owner;
+	public NotificationChain basicSetOwner(Table newOwner, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwner, SimplerdbmsPackage.COLUMN__OWNER, msgs);
+		return msgs;
 	}
 
 	/**
@@ -141,10 +126,19 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	 * @generated
 	 */
 	public void setOwner(Table newOwner) {
-		Table oldOwner = owner;
-		owner = newOwner;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimplerdbmsPackage.COLUMN__OWNER, oldOwner, owner));
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != SimplerdbmsPackage.COLUMN__OWNER && newOwner != null)) {
+			if (EcoreUtil.isAncestor(this, newOwner))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwner != null)
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, SimplerdbmsPackage.TABLE__COLUMN, Table.class, msgs);
+			msgs = basicSetOwner(newOwner, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SimplerdbmsPackage.COLUMN__OWNER, newOwner, newOwner));
 	}
 
 	/**
@@ -201,6 +195,10 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case SimplerdbmsPackage.COLUMN__OWNER:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwner((Table)otherEnd, msgs);
 			case SimplerdbmsPackage.COLUMN__FOREIGN_KEYS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getForeignKeys()).basicAdd(otherEnd, msgs);
 			case SimplerdbmsPackage.COLUMN__KEY:
@@ -217,6 +215,8 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case SimplerdbmsPackage.COLUMN__OWNER:
+				return basicSetOwner(null, msgs);
 			case SimplerdbmsPackage.COLUMN__FOREIGN_KEYS:
 				return ((InternalEList<?>)getForeignKeys()).basicRemove(otherEnd, msgs);
 			case SimplerdbmsPackage.COLUMN__KEY:
@@ -231,11 +231,24 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case SimplerdbmsPackage.COLUMN__OWNER:
+				return eInternalContainer().eInverseRemove(this, SimplerdbmsPackage.TABLE__COLUMN, Table.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SimplerdbmsPackage.COLUMN__OWNER:
-				if (resolve) return getOwner();
-				return basicGetOwner();
+				return getOwner();
 			case SimplerdbmsPackage.COLUMN__TYPE:
 				return getType();
 			case SimplerdbmsPackage.COLUMN__FOREIGN_KEYS:
@@ -306,7 +319,7 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SimplerdbmsPackage.COLUMN__OWNER:
-				return owner != null;
+				return getOwner() != null;
 			case SimplerdbmsPackage.COLUMN__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case SimplerdbmsPackage.COLUMN__FOREIGN_KEYS:

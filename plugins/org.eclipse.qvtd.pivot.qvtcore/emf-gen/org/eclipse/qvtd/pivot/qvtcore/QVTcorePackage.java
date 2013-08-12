@@ -89,15 +89,6 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_MODEL = 0;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_MODEL__OWNED_COMMENT = QVTbasePackage.BASE_MODEL__OWNED_COMMENT;
-
-	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -107,13 +98,13 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_MODEL__EXTENSION = QVTbasePackage.BASE_MODEL__EXTENSION;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_MODEL__NAME = QVTbasePackage.BASE_MODEL__NAME;
+	int CORE_MODEL__OWNED_COMMENT = QVTbasePackage.BASE_MODEL__OWNED_COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
@@ -123,6 +114,15 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int CORE_MODEL__IS_STATIC = QVTbasePackage.BASE_MODEL__IS_STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__NAME = QVTbasePackage.BASE_MODEL__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -143,15 +143,6 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_MODEL__OWNED_RULE = QVTbasePackage.BASE_MODEL__OWNED_RULE;
 
 	/**
-	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_MODEL__NESTED_PACKAGE = QVTbasePackage.BASE_MODEL__NESTED_PACKAGE;
-
-	/**
 	 * The feature id for the '<em><b>External URI</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -168,6 +159,15 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int CORE_MODEL__IMPORTS = QVTbasePackage.BASE_MODEL__IMPORTS;
+
+	/**
+	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__NESTED_PACKAGE = QVTbasePackage.BASE_MODEL__NESTED_PACKAGE;
 
 	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference list.
@@ -198,15 +198,6 @@ public interface QVTcorePackage extends EPackage {
 	int MAPPING = 1;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING__OWNED_COMMENT = QVTcoreBasePackage.ABSTRACT_MAPPING__OWNED_COMMENT;
-
-	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -216,13 +207,13 @@ public interface QVTcorePackage extends EPackage {
 	int MAPPING__EXTENSION = QVTcoreBasePackage.ABSTRACT_MAPPING__EXTENSION;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING__NAME = QVTcoreBasePackage.ABSTRACT_MAPPING__NAME;
+	int MAPPING__OWNED_COMMENT = QVTcoreBasePackage.ABSTRACT_MAPPING__OWNED_COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
@@ -232,6 +223,15 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING__IS_STATIC = QVTcoreBasePackage.ABSTRACT_MAPPING__IS_STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING__NAME = QVTcoreBasePackage.ABSTRACT_MAPPING__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -268,6 +268,15 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING__TRANSFORMATION = QVTcoreBasePackage.ABSTRACT_MAPPING__TRANSFORMATION;
+
+	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING__OVERRIDDEN = QVTcoreBasePackage.ABSTRACT_MAPPING__OVERRIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Guard Pattern</b></em>' containment reference.

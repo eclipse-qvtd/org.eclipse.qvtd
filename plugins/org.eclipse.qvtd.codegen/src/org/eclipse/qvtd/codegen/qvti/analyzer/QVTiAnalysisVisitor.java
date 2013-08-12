@@ -12,7 +12,7 @@
  * 
  * </copyright>
  */
-package org.eclipse.qvtd.codegen.qvti;
+package org.eclipse.qvtd.codegen.qvti.analyzer;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
@@ -28,11 +28,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 
@@ -72,7 +76,7 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 	}
 
 	public Object visitCGMapping(@NonNull CGMapping object) {
-		return visitCGTypedElement(object);
+		return visitCGNamedElement(object);
 	}
 
 	public Object visitCGMappingCall(@NonNull CGMappingCall object) {
@@ -87,6 +91,18 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 			cgMappingCallBinding.setValueName(localContext.getNameManagerContext().getSymbolName(cgMappingCallBinding, cgMappingCallBinding.getName()));
 		}
 		return null;
+	}
+
+	public Object visitCGMappingExp(@NonNull CGMappingExp object) {
+		return visitCGValuedElement(object);
+	}
+
+	public Object visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
+		return visitCGPropertyAssignment(object);
+	}
+
+	public Object visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
+		return visitCGPropertyCallExp(object);
 	}
 
 	public Object visitCGPredicate(@NonNull CGPredicate object) {
@@ -113,5 +129,9 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 
 	public Object visitCGTypedModel(@NonNull CGTypedModel object) {
 		return visitCGNamedElement(object);
+	}
+
+	public Object visitCGVariablePredicate(@NonNull CGVariablePredicate object) {
+		return visitCGPredicate(object);
 	}
 }

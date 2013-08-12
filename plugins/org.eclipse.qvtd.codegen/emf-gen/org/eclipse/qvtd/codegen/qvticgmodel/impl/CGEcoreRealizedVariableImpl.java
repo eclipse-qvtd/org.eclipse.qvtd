@@ -148,8 +148,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -157,4 +156,5 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGEcoreRealizedVariable(this);
 	}
+
 } //CGEcoreRealizedVariableImpl

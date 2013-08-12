@@ -12,6 +12,10 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.qvtd.pivot.qvtimperative;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.qvtd.codegen.qvti,
+ org.eclipse.qvtd.codegen.qvti.analyzer,
+ org.eclipse.qvtd.codegen.qvti.cse,
+ org.eclipse.qvtd.codegen.qvti.java,
  org.eclipse.qvtd.codegen.qvticgmodel,
  org.eclipse.qvtd.codegen.qvticgmodel.impl,
- org.eclipse.qvtd.codegen.qvticgmodel.util
+ org.eclipse.qvtd.codegen.qvticgmodel.util,
+ org.eclipse.qvtd.codegen.utilities

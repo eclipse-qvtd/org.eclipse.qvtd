@@ -11,15 +11,12 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
@@ -58,6 +55,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
+import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 
 /**
  * QVTimperativeAbstractEvaluationVisitor is the base abstract class for QVTi
@@ -68,6 +66,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImpl
         implements QVTiEvaluationVisitor {
 
+//	private static final Logger logger = Logger.getLogger(QVTiAbstractEvaluationVisitor.class);
         
     /**
      * Instantiates a new QVT imperative abstract visitor.
@@ -292,41 +291,22 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      * org.eclipse.qvtd.pivot.qvtcore.GuardPattern)
      */
 	public @Nullable Object visitGuardPattern(@NonNull GuardPattern guardPattern) {
-    	
-        Object result = true;
-        PivotIdResolver idResolver = metaModelManager.getIdResolver();
-        for (Variable v : guardPattern.getVariable()) {
-        	// If the variable is value is null, it has not been initialised, check
-        	// if it has an initialiser, if not, is an error
-        	if (evaluationEnvironment.getValueOf(v) == null) {
-        		if (v.getInitExpression() != null) {
-					Object value = ((QVTiEvaluationVisitorDecorator)getUndecoratedVisitor()).safeVisit(v.getInitExpression());
-					Type guardType = v.getType();
-					DomainType valueType = idResolver.getDynamicTypeOf(value);
-					if ((guardType != null) && valueType.conformsTo(metaModelManager, guardType)) {
-						try {
-							evaluationEnvironment.add(v, value);
-						} catch (IllegalArgumentException ex) {
-							evaluationEnvironment.replace(v, value);
-						}
-					} else {
-						// The initialisation fails, the guard is not met
-						return false;
-					}
-        		}
-        		else {
-					// TODO Error!
-				}
-			}
-		}
         for (Predicate predicate : guardPattern.getPredicate()) {
             // If the predicate is not true, the binding is not valid
-            result = predicate.accept(getUndecoratedVisitor());
+            Object result = predicate.accept(getUndecoratedVisitor());
             if (result != Boolean.TRUE) {
-            	break;
+            	return false;
             }
         }
-        return result;
+        // NB guard 1 variable may be initialized by guard 2 VariablePredicate
+/*        for (Variable v : guardPattern.getVariable()) {
+        	// Check for binding initialization
+        	if (evaluationEnvironment.getValueOf(v) == null) {
+        		logger.warn("Missing binding for " + v + " in " + QVTimperativeUtil.getContainingMapping(guardPattern));
+            	return false;
+			}
+		} */
+        return true;
     }
 
 	/* (non-Javadoc)
@@ -628,6 +608,21 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 		}
 		return null;
     }
-    
-    
+
+	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {     
+        PivotIdResolver idResolver = metaModelManager.getIdResolver();
+        // Each predicate has a conditionExpression that is an OCLExpression
+        OCLExpression exp = variablePredicate.getConditionExpression();
+		Object value = ((QVTiEvaluationVisitorDecorator)getUndecoratedVisitor()).safeVisit(exp);
+        Variable variable = variablePredicate.getTargetVariable();
+		Type guardType = variable.getType();
+		DomainType valueType = idResolver.getDynamicTypeOf(value);
+		if ((guardType != null) && valueType.conformsTo(metaModelManager, guardType)) {
+			evaluationEnvironment.replace(variable, value);
+		} else {
+			// The initialisation fails, the guard is not met
+			return false;
+		}
+        return true;
+	}
 }

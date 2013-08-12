@@ -62,6 +62,7 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 * @ordered
 	 */
 	protected static final boolean LOOP_EDEFAULT = false;
+
 	/**
 	 * The cached value of the '{@link #isLoop() <em>Loop</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -248,8 +249,7 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -259,12 +259,39 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * {@inheritDoc}
+	 * @generated
 	 */
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
 		return valueOrValues != null ? valueOrValues : this;
 	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isBoxed() {
+		return (valueOrValues != null) && valueOrValues.isBoxed();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isGlobal() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUnboxed() {
+		return (valueOrValues != null) && valueOrValues.isUnboxed();
+	}
+
 } //CGMappingCallBindingImpl

@@ -350,7 +350,7 @@ public interface UmltordbmsPackage extends EPackage {
 	int FROM_ATTRIBUTE_OWNER = 4;
 
 	/**
-	 * The feature id for the '<em><b>From Attributes</b></em>' containment reference.
+	 * The feature id for the '<em><b>From Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -387,7 +387,7 @@ public interface UmltordbmsPackage extends EPackage {
 	int CLASS_TO_TABLE = 2;
 
 	/**
-	 * The feature id for the '<em><b>From Attributes</b></em>' containment reference.
+	 * The feature id for the '<em><b>From Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -487,7 +487,7 @@ public interface UmltordbmsPackage extends EPackage {
 	int NON_LEAF_ATTRIBUTE = 5;
 
 	/**
-	 * The feature id for the '<em><b>From Attributes</b></em>' containment reference.
+	 * The feature id for the '<em><b>From Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -934,10 +934,10 @@ public interface UmltordbmsPackage extends EPackage {
 	EClass getFromAttributeOwner();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link test.umltordbms.FromAttributeOwner#getFromAttributes <em>From Attributes</em>}'.
+	 * Returns the meta object for the containment reference list '{@link test.umltordbms.FromAttributeOwner#getFromAttributes <em>From Attributes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>From Attributes</em>'.
+	 * @return the meta object for the containment reference list '<em>From Attributes</em>'.
 	 * @see test.umltordbms.FromAttributeOwner#getFromAttributes()
 	 * @see #getFromAttributeOwner()
 	 * @generated
@@ -1304,7 +1304,7 @@ public interface UmltordbmsPackage extends EPackage {
 		EClass FROM_ATTRIBUTE_OWNER = eINSTANCE.getFromAttributeOwner();
 
 		/**
-		 * The meta object literal for the '<em><b>From Attributes</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>From Attributes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

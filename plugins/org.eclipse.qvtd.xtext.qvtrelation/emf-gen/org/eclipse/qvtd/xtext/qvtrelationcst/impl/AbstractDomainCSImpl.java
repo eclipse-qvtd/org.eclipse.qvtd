@@ -17,13 +17,9 @@
 package org.eclipse.qvtd.xtext.qvtrelationcst.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcst.AbstractDomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
-import org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -52,16 +48,5 @@ public abstract class AbstractDomainCSImpl extends ModelElementCSImpl implements
 	@Override
 	protected EClass eStaticClass() {
 		return QVTrelationCSTPackage.Literals.ABSTRACT_DOMAIN_CS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitAbstractDomainCS(this);
 	}
 } //AbstractDomainCSImpl

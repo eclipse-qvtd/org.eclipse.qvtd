@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.util.AbstractVisitor;
@@ -35,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisitor implements QVTimperativeVisitor<Object>
@@ -172,6 +174,11 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 	public Object visitVariable(@NonNull Variable pVariable) {
 		super.visitVariable(pVariable);
 		context.append(";\n");
+		return null;
+	}
+
+	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate object) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

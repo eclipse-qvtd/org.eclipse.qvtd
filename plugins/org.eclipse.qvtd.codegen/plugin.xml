@@ -26,4 +26,33 @@
             genModel="model/qvticgmodel.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated qvticgmodel -->
+      <parser
+            contentTypeIdentifier="org.eclipse.qvtd.codegen.qvticgmodel"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated qvticgmodel NOT -->
+      <parser
+            contentTypeIdentifier="org.eclipse.qvtd.codegen.qvticgmodel"
+            class="org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <!-- @generated qvticgmodel NOT -->
+      <content-type
+            base-type="org.eclipse.emf.ecore.xmi"
+            file-extensions="qvticgmodel"
+            id="org.eclipse.qvtd.codegen.qvticgmodel"
+            name="%_UI_QVTiCGModel_content_type"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespace" value="http://www.eclipse.org/qvti/1.0.0/CG"/>
+            <parameter name="kind" value="xmi"/>
+         </describer>
+      </content-type>
+   </extension>
+
 </plugin>

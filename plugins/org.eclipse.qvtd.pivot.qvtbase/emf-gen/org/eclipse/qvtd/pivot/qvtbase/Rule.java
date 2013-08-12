@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getDomain <em>Domain</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getOverrides <em>Overrides</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getOverridden <em>Overridden</em>}</li>
  * </ul>
  * </p>
  *
@@ -59,6 +60,7 @@ public interface Rule extends EObject, NamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Overrides</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getOverridden <em>Overridden</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Overrides</em>' reference isn't clear,
@@ -68,7 +70,9 @@ public interface Rule extends EObject, NamedElement {
 	 * @return the value of the '<em>Overrides</em>' reference.
 	 * @see #setOverrides(Rule)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getRule_Overrides()
-	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='overriden'"
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#getOverridden
+	 * @model opposite="overridden"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='overriden'"
 	 * @generated
 	 */
 	Rule getOverrides();
@@ -110,5 +114,24 @@ public interface Rule extends EObject, NamedElement {
 	 * @generated
 	 */
 	void setTransformation(Transformation value);
+
+	/**
+	 * Returns the value of the '<em><b>Overridden</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtbase.Rule}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getOverrides <em>Overrides</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Overridden</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Overridden</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getRule_Overridden()
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#getOverrides
+	 * @model opposite="overrides" ordered="false"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='overriden'"
+	 * @generated
+	 */
+	EList<Rule> getOverridden();
 
 } // Rule

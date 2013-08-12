@@ -20,7 +20,7 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenOptions;
 public class QVTiCodeGenOptions extends CodeGenOptions
 {
 	/**
-	 * Optional packaging orefix (may have internal, no trailing dots)
+	 * Optional packaging prefix (may have internal dots, no trailing dots)
 	 */
 	private String packagePrefix = null;
 	

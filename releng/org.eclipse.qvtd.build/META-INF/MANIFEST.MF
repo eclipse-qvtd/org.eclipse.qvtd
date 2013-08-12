@@ -17,4 +17,5 @@ Require-Bundle: org.eclipse.core.resources,
 Import-Package: org.apache.commons.logging,
  org.apache.log4j
 Bundle-Vendor: %providerName
-Export-Package: org.eclipse.qvtd.build.acceleo
+Export-Package: org.eclipse.qvtd.build.modelspecs,
+ org.eclipse.qvtd.build.utilities

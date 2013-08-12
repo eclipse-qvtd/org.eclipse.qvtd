@@ -214,8 +214,9 @@ map classToTableMR in umlRdbms {
     }
     map associationToForeignKeyMR {
         p2s := p2s;
-        sc2t := c2t;
-        dc2t <= c2t.associationsToForeignKeys.referenced;
+        dt := null;
+--        sc2t := c2t;
+--        dc2t <= c2t.associationsToForeignKeys.referenced;
         a2f <= c2t.associationsToForeignKeys;
         s := s;
         st := t;
@@ -245,7 +246,7 @@ map classToTableMR_2 in umlRdbms {
         pk.owner := t_2;
         pk.kind := 'primary';
         pc.owner := t_2;
-        pc.key := Set(Key){pk};
+        pc.key := OrderedSet(Key){pk};
         pc.type := 'NUMBER';
     }
     where (c2t_2:ClassToTable |) {
@@ -350,7 +351,7 @@ map associationToForeignKeyMR in umlRdbms {
 map associationToForeignKeyMR_1 in umlRdbms {
     enforce rdbms (fk:ForeignKey, fc:Column, dt:Table, rk:Key |) {
         fk.refersTo := rk;
-        fc.foreignKeys := Set(ForeignKey){fk};
+        fc.foreignKeys := OrderedSet(ForeignKey){fk};
         fc.type := rk.column->first().type;
     }
     where () { }
@@ -398,7 +399,7 @@ map classComplexAttributesLM in umlRdbms {
         fa.owner := fao;
         fa.kind := a.kind;
         fa.name := a.name;
-        fa.leafs := fao.fromAttributes.leafs;
+        fa.leafs := fao.fromAttributes.leafs->asSet();
     }
 }
 
@@ -465,11 +466,11 @@ map complexAttributeComplexAttributesLM_1 in umlRdbms {
             ) {
         realize fa:NonLeafAttribute |
         fa.owner := fao_1;    
-        fa.leafs := fao_1.fromAttributes.leafs; 
+        fa.leafs := fao_1.fromAttributes.leafs->asSet(); 
         fa.attribute := a_1;
         fa.kind := a_1.kind;
         fa.name := ca_1.name + '_' + a_1.name;
-        fa.attribute := t_1;
+--        fa.attribute := t_1;
     }
 }
 

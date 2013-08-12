@@ -53,8 +53,7 @@ public class CGFunctionImpl extends CGOperationImpl implements CGFunction {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -62,4 +61,5 @@ public class CGFunctionImpl extends CGOperationImpl implements CGFunction {
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGFunction(this);
 	}
+
 } //CGFunctionImpl

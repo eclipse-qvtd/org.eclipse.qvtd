@@ -61,4 +61,8 @@ public abstract class AbstractNullQVTimperativeVisitor<R, C>
 	public @Nullable R visitMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp object) {
 		return null;
 	}
+
+	public @Nullable R visitVariablePredicate(@NonNull org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate object) {
+		return null;
+	}
 }

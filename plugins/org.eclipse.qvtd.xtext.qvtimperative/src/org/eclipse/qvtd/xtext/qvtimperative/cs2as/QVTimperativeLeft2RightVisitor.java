@@ -55,20 +55,13 @@ public class QVTimperativeLeft2RightVisitor extends AbstractQVTimperativeLeft2Ri
 				Map<TemplateParameter, ParameterableElement> templateBindings = new HashMap<TemplateParameter, ParameterableElement>();
 				Type sourceType = source.getType();
 				if (sourceType != null) {
-					if (property.isStatic() && (sourceType instanceof Metaclass)) {
-						sourceType = ((Metaclass)sourceType).getInstanceType();
+					if (property.isStatic() && (sourceType instanceof Metaclass<?>)) {
+						sourceType = ((Metaclass<?>)sourceType).getInstanceType();
 					}
 					templateBindings.put(null, sourceType);		// Use the null key to pass OclSelf without creating an object
 				}
 				PivotUtil.getAllTemplateParameterSubstitutions(templateBindings, sourceType);
-				Type returnType = null;
-				Type behavioralType = PivotUtil.getType(property);
-				if (behavioralType != null) {
-					returnType = metaModelManager.getSpecializedType(behavioralType, templateBindings);
-					if (property.isStatic() && (behavioralType.getOwningTemplateParameter() != null)) {
-						returnType = metaModelManager.getMetaclass(returnType);
-					}
-				}
+				Type returnType = getPropertyReturnType(csNameExp, property, templateBindings);
 				context.setType(innerExpression, returnType, property.isRequired());
 				outerExpression = resolveNavigationFeature(csNameExp, source, property, innerExpression);
 				if (outerExpression != innerExpression) {
@@ -77,6 +70,25 @@ public class QVTimperativeLeft2RightVisitor extends AbstractQVTimperativeLeft2Ri
 			}
 		}
 		return outerExpression;
+	}
+
+	protected Type getPropertyReturnType(@NonNull NameExpCS csNameExp, @NonNull Property property,
+			@NonNull Map<TemplateParameter, ParameterableElement> templateBindings) {
+		Property oppositeProperty = property.getOpposite();
+		if (property.isImplicit() && (oppositeProperty != null) && QVTimperativeCS2Pivot.isMiddle(oppositeProperty.getOwningType(), csNameExp)) {
+			return oppositeProperty.getOwningType();
+		}
+		else {
+			Type returnType = null;
+			Type behavioralType = PivotUtil.getType(property);
+			if (behavioralType != null) {
+				returnType = metaModelManager.getSpecializedType(behavioralType, templateBindings);
+				if (property.isStatic() && (behavioralType.getOwningTemplateParameter() != null)) {
+					returnType = metaModelManager.getMetaclass(returnType);
+				}
+			}
+			return returnType;
+		}
 	}
 
 	protected PropertyCallExp refreshPropertyCallExp(@NonNull NameExpCS csNameExp, @NonNull Property property) {

@@ -12,7 +12,7 @@
  * 
  * </copyright>
  */
-package org.eclipse.qvtd.codegen.qvti;
+package org.eclipse.qvtd.codegen.qvti.java;
 /**
  * <copyright>
  * 
@@ -29,13 +29,18 @@ package org.eclipse.qvtd.codegen.qvti;
  */
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaGlobalContext;
+import org.eclipse.ocl.examples.pivot.Property;
 
 /**
  * A JUnitGlobalContext maintains the Java-specific global context for generation of code.
@@ -44,11 +49,22 @@ public class QVTiGlobalContext extends JavaGlobalContext
 {
 	private /*@LazyNonNull*/ CGValuedElement evaluatorParameter = null;
 	private /*@LazyNonNull*/ CGValuedElement idResolver = null;
+	private /*@LazyNonNull*/ Map<Property, String> toMiddleProperties = null;
 
 	public QVTiGlobalContext(@NonNull JavaCodeGenerator codeGenerator) {
 		super(codeGenerator);
 		nameManager.reserveName(JavaConstants.EVALUATOR_NAME, null);
 		nameManager.reserveName("modelObjects", null);
+	}
+
+	public void addToMiddleProperty(@NonNull Property pivotProperty) {
+		assert !pivotProperty.isImplicit();
+		if (toMiddleProperties == null) {
+			toMiddleProperties = new HashMap<Property, String>();
+		}
+		if (!toMiddleProperties.containsKey(pivotProperty)) {
+			toMiddleProperties.put(pivotProperty, nameManager.getGlobalSymbolName(null, "OPPOSITE_OF_" + pivotProperty.getOwningType().getName() + "_" + pivotProperty.getName()));
+		}
 	}
 
 	@Override
@@ -76,5 +92,9 @@ public class QVTiGlobalContext extends JavaGlobalContext
 			idResolver2.setTypeId(analyzer.getTypeId(JavaConstants.ID_RESOLVER_TYPE_ID));
 		}
 		return idResolver2;
+	}
+	
+	public @Nullable Map<Property, String> getToMiddleProperties() {
+		return toMiddleProperties;
 	}
 }

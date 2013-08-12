@@ -16,8 +16,12 @@
  */
 package org.eclipse.qvtd.pivot.qvtbase.impl;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -29,6 +33,7 @@ import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.internal.impl.ParameterImpl;
+import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -41,35 +46,15 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl#isImplicit <em>Implicit</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl#getInitExpression <em>Init Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl#getRepresentedParameter <em>Represented Parameter</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl#isImplicit <em>Implicit</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class FunctionParameterImpl extends ParameterImpl implements FunctionParameter {
-	/**
-	 * The cached value of the '{@link #getInitExpression() <em>Init Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInitExpression()
-	 * @generated
-	 * @ordered
-	 */
-	protected OCLExpression initExpression;
-
-	/**
-	 * The cached value of the '{@link #getRepresentedParameter() <em>Represented Parameter</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRepresentedParameter()
-	 * @generated
-	 * @ordered
-	 */
-	protected Parameter representedParameter;
-
 	/**
 	 * The default value of the '{@link #isImplicit() <em>Implicit</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -89,6 +74,26 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * @ordered
 	 */
 	protected boolean implicit = IMPLICIT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getInitExpression() <em>Init Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInitExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected OCLExpression initExpression;
+
+	/**
+	 * The cached value of the '{@link #getRepresentedParameter() <em>Represented Parameter</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRepresentedParameter()
+	 * @generated
+	 * @ordered
+	 */
+	protected Parameter representedParameter;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -222,6 +227,38 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	}
 
 	/**
+	 * The cached validation expression for the '{@link #validateCompatibleInitialiserType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Initialiser Type</em>}' invariant operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #validateCompatibleInitialiserType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VALIDATE_COMPATIBLE_INITIALISER_TYPE_DIAGNOSTIC_CHAIN_MAP__EEXPRESSION = "initExpression <> null implies initExpression.type.conformsTo(type)\n" + //$NON-NLS-1$
+		"\n" + //$NON-NLS-1$
+		"";
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCompatibleInitialiserType(DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return
+			PivotValidator.validate
+				(QVTbasePackage.Literals.FUNCTION_PARAMETER,
+				 this,
+				 diagnostics,
+				 context,
+				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+				 PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP,
+				 VALIDATE_COMPATIBLE_INITIALISER_TYPE_DIAGNOSTIC_CHAIN_MAP__EEXPRESSION,
+				 Diagnostic.ERROR,
+				 PivotValidator.DIAGNOSTIC_SOURCE,
+				 PivotValidator.VARIABLE__COMPATIBLE_INITIALISER_TYPE);
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -243,13 +280,13 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT:
+				return isImplicit();
 			case QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION:
 				return getInitExpression();
 			case QVTbasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER:
 				if (resolve) return getRepresentedParameter();
 				return basicGetRepresentedParameter();
-			case QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT:
-				return isImplicit();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -262,14 +299,14 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT:
+				setImplicit((Boolean)newValue);
+				return;
 			case QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION:
 				setInitExpression((OCLExpression)newValue);
 				return;
 			case QVTbasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER:
 				setRepresentedParameter((Parameter)newValue);
-				return;
-			case QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT:
-				setImplicit((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -283,14 +320,14 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT:
+				setImplicit(IMPLICIT_EDEFAULT);
+				return;
 			case QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION:
 				setInitExpression((OCLExpression)null);
 				return;
 			case QVTbasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER:
 				setRepresentedParameter((Parameter)null);
-				return;
-			case QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT:
-				setImplicit(IMPLICIT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -304,12 +341,12 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT:
+				return implicit != IMPLICIT_EDEFAULT;
 			case QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION:
 				return initExpression != null;
 			case QVTbasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER:
 				return representedParameter != null;
-			case QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT:
-				return implicit != IMPLICIT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -323,9 +360,9 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == Variable.class) {
 			switch (derivedFeatureID) {
+				case QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT: return PivotPackage.VARIABLE__IMPLICIT;
 				case QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION: return PivotPackage.VARIABLE__INIT_EXPRESSION;
 				case QVTbasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER: return PivotPackage.VARIABLE__REPRESENTED_PARAMETER;
-				case QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT: return PivotPackage.VARIABLE__IMPLICIT;
 				default: return -1;
 			}
 		}
@@ -341,9 +378,9 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == Variable.class) {
 			switch (baseFeatureID) {
+				case PivotPackage.VARIABLE__IMPLICIT: return QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT;
 				case PivotPackage.VARIABLE__INIT_EXPRESSION: return QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION;
 				case PivotPackage.VARIABLE__REPRESENTED_PARAMETER: return QVTbasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER;
-				case PivotPackage.VARIABLE__IMPLICIT: return QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT;
 				default: return -1;
 			}
 		}

@@ -14,6 +14,7 @@
  */
 package org.eclipse.qvtd.codegen.qvticgmodel;
 
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.pivot.Property;
 
@@ -25,10 +26,11 @@ import org.eclipse.ocl.examples.pivot.Property;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getMapping <em>Mapping</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getMappingExp <em>Mapping Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getSlotValue <em>Slot Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getInitValue <em>Init Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getExecutorProperty <em>Executor Property</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,32 +40,32 @@ import org.eclipse.ocl.examples.pivot.Property;
  */
 public interface CGPropertyAssignment extends CGValuedElement {
 	/**
-	 * Returns the value of the '<em><b>Mapping</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getAssignments <em>Assignments</em>}'.
+	 * Returns the value of the '<em><b>Mapping Exp</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getAssignments <em>Assignments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mapping</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Mapping Exp</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping</em>' container reference.
-	 * @see #setMapping(CGMapping)
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPropertyAssignment_Mapping()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getAssignments
+	 * @return the value of the '<em>Mapping Exp</em>' container reference.
+	 * @see #setMappingExp(CGMappingExp)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPropertyAssignment_MappingExp()
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getAssignments
 	 * @model opposite="assignments" resolveProxies="false" required="true" transient="false"
 	 * @generated
 	 */
-	CGMapping getMapping();
+	CGMappingExp getMappingExp();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getMapping <em>Mapping</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getMappingExp <em>Mapping Exp</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mapping</em>' container reference.
-	 * @see #getMapping()
+	 * @param value the new value of the '<em>Mapping Exp</em>' container reference.
+	 * @see #getMappingExp()
 	 * @generated
 	 */
-	void setMapping(CGMapping value);
+	void setMappingExp(CGMappingExp value);
 
 	/**
 	 * Returns the value of the '<em><b>Slot Value</b></em>' containment reference.
@@ -142,5 +144,31 @@ public interface CGPropertyAssignment extends CGValuedElement {
 	 * @generated
 	 */
 	void setInitValue(CGValuedElement value);
+
+	/**
+	 * Returns the value of the '<em><b>Executor Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Executor Property</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Executor Property</em>' reference.
+	 * @see #setExecutorProperty(CGExecutorProperty)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPropertyAssignment_ExecutorProperty()
+	 * @model resolveProxies="false" required="true"
+	 * @generated
+	 */
+	CGExecutorProperty getExecutorProperty();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getExecutorProperty <em>Executor Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Executor Property</em>' reference.
+	 * @see #getExecutorProperty()
+	 * @generated
+	 */
+	void setExecutorProperty(CGExecutorProperty value);
 
 } // CGAssignment

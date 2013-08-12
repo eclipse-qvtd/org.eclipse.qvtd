@@ -14,6 +14,7 @@
  */
 package org.eclipse.qvtd.codegen.qvticgmodel;
 
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 
 /**
@@ -24,7 +25,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getMapping <em>Mapping</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getExecutorType <em>Executor Type</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getMappingExp <em>Mapping Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getTypedModel <em>Typed Model</em>}</li>
  * </ul>
  * </p>
@@ -34,34 +36,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
  * @generated
  */
 public interface CGRealizedVariable extends CGVariable {
-
-	/**
-	 * Returns the value of the '<em><b>Mapping</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getRealizedVariables <em>Realized Variables</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Mapping</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping</em>' container reference.
-	 * @see #setMapping(CGMapping)
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGRealizedVariable_Mapping()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getRealizedVariables
-	 * @model opposite="realizedVariables" resolveProxies="false" required="true" transient="false"
-	 * @generated
-	 */
-	CGMapping getMapping();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getMapping <em>Mapping</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mapping</em>' container reference.
-	 * @see #getMapping()
-	 * @generated
-	 */
-	void setMapping(CGMapping value);
 
 	/**
 	 * Returns the value of the '<em><b>Typed Model</b></em>' reference.
@@ -88,4 +62,57 @@ public interface CGRealizedVariable extends CGVariable {
 	 * @generated
 	 */
 	void setTypedModel(CGTypedModel value);
+
+	/**
+	 * Returns the value of the '<em><b>Executor Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The shared type.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Executor Type</em>' reference.
+	 * @see #setExecutorType(CGExecutorType)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGRealizedVariable_ExecutorType()
+	 * @model resolveProxies="false" required="true"
+	 * @generated
+	 */
+	CGExecutorType getExecutorType();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getExecutorType <em>Executor Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Executor Type</em>' reference.
+	 * @see #getExecutorType()
+	 * @generated
+	 */
+	void setExecutorType(CGExecutorType value);
+
+	/**
+	 * Returns the value of the '<em><b>Mapping Exp</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getRealizedVariables <em>Realized Variables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Mapping Exp</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Mapping Exp</em>' container reference.
+	 * @see #setMappingExp(CGMappingExp)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGRealizedVariable_MappingExp()
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getRealizedVariables
+	 * @model opposite="realizedVariables" resolveProxies="false" required="true" transient="false"
+	 * @generated
+	 */
+	CGMappingExp getMappingExp();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getMappingExp <em>Mapping Exp</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Mapping Exp</em>' container reference.
+	 * @see #getMappingExp()
+	 * @generated
+	 */
+	void setMappingExp(CGMappingExp value);
 } // CGRealizedVariable

@@ -268,8 +268,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -277,4 +276,5 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGTypedModel(this);
 	}
+
 } //CGTypedModelImpl

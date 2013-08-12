@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Schema extends RModelElement {
 	/**
-	 * Returns the value of the '<em><b>Tables</b></em>' reference list.
+	 * Returns the value of the '<em><b>Tables</b></em>' containment reference list.
 	 * The list contents are of type {@link test.simplerdbms.Table}.
 	 * It is bidirectional and its opposite is '{@link test.simplerdbms.Table#getSchema <em>Schema</em>}'.
 	 * <!-- begin-user-doc -->
@@ -31,10 +31,10 @@ public interface Schema extends RModelElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tables</em>' reference list.
+	 * @return the value of the '<em>Tables</em>' containment reference list.
 	 * @see test.simplerdbms.SimplerdbmsPackage#getSchema_Tables()
 	 * @see test.simplerdbms.Table#getSchema
-	 * @model opposite="schema"
+	 * @model opposite="schema" containment="true"
 	 * @generated
 	 */
 	EList<Table> getTables();

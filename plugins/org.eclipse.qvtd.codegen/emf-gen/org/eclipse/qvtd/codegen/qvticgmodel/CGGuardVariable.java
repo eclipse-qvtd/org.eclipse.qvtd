@@ -36,7 +36,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 public interface CGGuardVariable extends CGParameter {
 	/**
 	 * Returns the value of the '<em><b>Mapping</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getGuardVariables <em>Guard Variables</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getFreeVariables <em>Free Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Mapping</em>' container reference isn't clear,
@@ -46,8 +46,8 @@ public interface CGGuardVariable extends CGParameter {
 	 * @return the value of the '<em>Mapping</em>' container reference.
 	 * @see #setMapping(CGMapping)
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGGuardVariable_Mapping()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getGuardVariables
-	 * @model opposite="guardVariables" resolveProxies="false" required="true" transient="false"
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getFreeVariables
+	 * @model opposite="freeVariables" resolveProxies="false" required="true" transient="false"
 	 * @generated
 	 */
 	CGMapping getMapping();

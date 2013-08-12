@@ -93,15 +93,6 @@ public interface QVTimperativePackage extends EPackage {
 	int IMPERATIVE_MODEL = 0;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_MODEL__OWNED_COMMENT = QVTbasePackage.BASE_MODEL__OWNED_COMMENT;
-
-	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -111,13 +102,13 @@ public interface QVTimperativePackage extends EPackage {
 	int IMPERATIVE_MODEL__EXTENSION = QVTbasePackage.BASE_MODEL__EXTENSION;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_MODEL__NAME = QVTbasePackage.BASE_MODEL__NAME;
+	int IMPERATIVE_MODEL__OWNED_COMMENT = QVTbasePackage.BASE_MODEL__OWNED_COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
@@ -127,6 +118,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_MODEL__IS_STATIC = QVTbasePackage.BASE_MODEL__IS_STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_MODEL__NAME = QVTbasePackage.BASE_MODEL__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -147,15 +147,6 @@ public interface QVTimperativePackage extends EPackage {
 	int IMPERATIVE_MODEL__OWNED_RULE = QVTbasePackage.BASE_MODEL__OWNED_RULE;
 
 	/**
-	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_MODEL__NESTED_PACKAGE = QVTbasePackage.BASE_MODEL__NESTED_PACKAGE;
-
-	/**
 	 * The feature id for the '<em><b>External URI</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -172,6 +163,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_MODEL__IMPORTS = QVTbasePackage.BASE_MODEL__IMPORTS;
+
+	/**
+	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_MODEL__NESTED_PACKAGE = QVTbasePackage.BASE_MODEL__NESTED_PACKAGE;
 
 	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference list.
@@ -202,15 +202,6 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING = 1;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING__OWNED_COMMENT = QVTcoreBasePackage.ABSTRACT_MAPPING__OWNED_COMMENT;
-
-	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -220,13 +211,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING__EXTENSION = QVTcoreBasePackage.ABSTRACT_MAPPING__EXTENSION;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING__NAME = QVTcoreBasePackage.ABSTRACT_MAPPING__NAME;
+	int MAPPING__OWNED_COMMENT = QVTcoreBasePackage.ABSTRACT_MAPPING__OWNED_COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
@@ -236,6 +227,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING__IS_STATIC = QVTcoreBasePackage.ABSTRACT_MAPPING__IS_STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING__NAME = QVTcoreBasePackage.ABSTRACT_MAPPING__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -272,6 +272,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING__TRANSFORMATION = QVTcoreBasePackage.ABSTRACT_MAPPING__TRANSFORMATION;
+
+	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING__OVERRIDDEN = QVTcoreBasePackage.ABSTRACT_MAPPING__OVERRIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Guard Pattern</b></em>' containment reference.
@@ -320,15 +329,6 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL = 2;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL__OWNED_COMMENT = PivotPackage.OCL_EXPRESSION__OWNED_COMMENT;
-
-	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -338,13 +338,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL__EXTENSION = PivotPackage.OCL_EXPRESSION__EXTENSION;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL__NAME = PivotPackage.OCL_EXPRESSION__NAME;
+	int MAPPING_CALL__OWNED_COMMENT = PivotPackage.OCL_EXPRESSION__OWNED_COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
@@ -356,6 +356,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL__IS_STATIC = PivotPackage.OCL_EXPRESSION__IS_STATIC;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__NAME = PivotPackage.OCL_EXPRESSION__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -365,15 +374,6 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL__OWNED_ANNOTATION = PivotPackage.OCL_EXPRESSION__OWNED_ANNOTATION;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL__TYPE = PivotPackage.OCL_EXPRESSION__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -381,6 +381,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_CALL__IS_REQUIRED = PivotPackage.OCL_EXPRESSION__IS_REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__TYPE = PivotPackage.OCL_EXPRESSION__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Referred Mapping</b></em>' reference.
@@ -429,15 +438,6 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL_BINDING = 3;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL_BINDING__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
-
-	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -445,6 +445,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_CALL_BINDING__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Mapping Call</b></em>' container reference.
@@ -502,15 +511,6 @@ public interface QVTimperativePackage extends EPackage {
 	int MIDDLE_PROPERTY_ASSIGNMENT = 4;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MIDDLE_PROPERTY_ASSIGNMENT__OWNED_COMMENT = QVTcoreBasePackage.PROPERTY_ASSIGNMENT__OWNED_COMMENT;
-
-	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -518,6 +518,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MIDDLE_PROPERTY_ASSIGNMENT__EXTENSION = QVTcoreBasePackage.PROPERTY_ASSIGNMENT__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIDDLE_PROPERTY_ASSIGNMENT__OWNED_COMMENT = QVTcoreBasePackage.PROPERTY_ASSIGNMENT__OWNED_COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Bottom Pattern</b></em>' container reference.
@@ -593,15 +602,6 @@ public interface QVTimperativePackage extends EPackage {
 	int MIDDLE_PROPERTY_CALL_EXP = 5;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MIDDLE_PROPERTY_CALL_EXP__OWNED_COMMENT = PivotPackage.PROPERTY_CALL_EXP__OWNED_COMMENT;
-
-	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -611,13 +611,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MIDDLE_PROPERTY_CALL_EXP__EXTENSION = PivotPackage.PROPERTY_CALL_EXP__EXTENSION;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP__NAME = PivotPackage.PROPERTY_CALL_EXP__NAME;
+	int MIDDLE_PROPERTY_CALL_EXP__OWNED_COMMENT = PivotPackage.PROPERTY_CALL_EXP__OWNED_COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
@@ -629,6 +629,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MIDDLE_PROPERTY_CALL_EXP__IS_STATIC = PivotPackage.PROPERTY_CALL_EXP__IS_STATIC;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIDDLE_PROPERTY_CALL_EXP__NAME = PivotPackage.PROPERTY_CALL_EXP__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -636,15 +645,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MIDDLE_PROPERTY_CALL_EXP__OWNED_ANNOTATION = PivotPackage.PROPERTY_CALL_EXP__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MIDDLE_PROPERTY_CALL_EXP__TYPE = PivotPackage.PROPERTY_CALL_EXP__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -656,13 +656,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MIDDLE_PROPERTY_CALL_EXP__IS_REQUIRED = PivotPackage.PROPERTY_CALL_EXP__IS_REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP__SOURCE = PivotPackage.PROPERTY_CALL_EXP__SOURCE;
+	int MIDDLE_PROPERTY_CALL_EXP__TYPE = PivotPackage.PROPERTY_CALL_EXP__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
@@ -674,6 +674,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MIDDLE_PROPERTY_CALL_EXP__IMPLICIT = PivotPackage.PROPERTY_CALL_EXP__IMPLICIT;
 
 	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIDDLE_PROPERTY_CALL_EXP__SOURCE = PivotPackage.PROPERTY_CALL_EXP__SOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Is Pre</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -683,15 +692,6 @@ public interface QVTimperativePackage extends EPackage {
 	int MIDDLE_PROPERTY_CALL_EXP__IS_PRE = PivotPackage.PROPERTY_CALL_EXP__IS_PRE;
 
 	/**
-	 * The feature id for the '<em><b>Qualifier</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MIDDLE_PROPERTY_CALL_EXP__QUALIFIER = PivotPackage.PROPERTY_CALL_EXP__QUALIFIER;
-
-	/**
 	 * The feature id for the '<em><b>Navigation Source</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -699,6 +699,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MIDDLE_PROPERTY_CALL_EXP__NAVIGATION_SOURCE = PivotPackage.PROPERTY_CALL_EXP__NAVIGATION_SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Qualifier</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIDDLE_PROPERTY_CALL_EXP__QUALIFIER = PivotPackage.PROPERTY_CALL_EXP__QUALIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
@@ -726,6 +735,70 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MIDDLE_PROPERTY_CALL_EXP_FEATURE_COUNT = PivotPackage.PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.VariablePredicateImpl <em>Variable Predicate</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.VariablePredicateImpl
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getVariablePredicate()
+	 * @generated
+	 */
+	int VARIABLE_PREDICATE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_PREDICATE__EXTENSION = QVTbasePackage.PREDICATE__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_PREDICATE__OWNED_COMMENT = QVTbasePackage.PREDICATE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Condition Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_PREDICATE__CONDITION_EXPRESSION = QVTbasePackage.PREDICATE__CONDITION_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Pattern</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_PREDICATE__PATTERN = QVTbasePackage.PREDICATE__PATTERN;
+
+	/**
+	 * The feature id for the '<em><b>Target Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_PREDICATE__TARGET_VARIABLE = QVTbasePackage.PREDICATE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Variable Predicate</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_PREDICATE_FEATURE_COUNT = QVTbasePackage.PREDICATE_FEATURE_COUNT + 1;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel <em>Imperative Model</em>}'.
@@ -898,6 +971,27 @@ public interface QVTimperativePackage extends EPackage {
 	EAttribute getMiddlePropertyCallExp_CacheIndex();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate <em>Variable Predicate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Variable Predicate</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate
+	 * @generated
+	 */
+	EClass getVariablePredicate();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate#getTargetVariable <em>Target Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target Variable</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate#getTargetVariable()
+	 * @see #getVariablePredicate()
+	 * @generated
+	 */
+	EReference getVariablePredicate_TargetVariable();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1058,6 +1152,24 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MIDDLE_PROPERTY_CALL_EXP__CACHE_INDEX = eINSTANCE.getMiddlePropertyCallExp_CacheIndex();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.VariablePredicateImpl <em>Variable Predicate</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.VariablePredicateImpl
+		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getVariablePredicate()
+		 * @generated
+		 */
+		EClass VARIABLE_PREDICATE = eINSTANCE.getVariablePredicate();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Variable</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_PREDICATE__TARGET_VARIABLE = eINSTANCE.getVariablePredicate_TargetVariable();
 
 	}
 

@@ -3,22 +3,17 @@
 package test.simplerdbms.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import test.simplerdbms.Column;
+import test.simplerdbms.ForeignKey;
 import test.simplerdbms.Key;
 import test.simplerdbms.Schema;
 import test.simplerdbms.SimplerdbmsPackage;
@@ -34,6 +29,8 @@ import test.simplerdbms.Table;
  *   <li>{@link test.simplerdbms.impl.TableImpl#getColumn <em>Column</em>}</li>
  *   <li>{@link test.simplerdbms.impl.TableImpl#getSchema <em>Schema</em>}</li>
  *   <li>{@link test.simplerdbms.impl.TableImpl#getTheKey <em>The Key</em>}</li>
+ *   <li>{@link test.simplerdbms.impl.TableImpl#getKey <em>Key</em>}</li>
+ *   <li>{@link test.simplerdbms.impl.TableImpl#getForeignKey <em>Foreign Key</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,7 +38,7 @@ import test.simplerdbms.Table;
  */
 public class TableImpl extends RModelElementImpl implements Table {
 	/**
-	 * The cached value of the '{@link #getColumn() <em>Column</em>}' reference list.
+	 * The cached value of the '{@link #getColumn() <em>Column</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getColumn()
@@ -51,24 +48,34 @@ public class TableImpl extends RModelElementImpl implements Table {
 	protected EList<Column> column;
 
 	/**
-	 * The cached value of the '{@link #getSchema() <em>Schema</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSchema()
-	 * @generated
-	 * @ordered
-	 */
-	protected Schema schema;
-
-	/**
-	 * The cached value of the '{@link #getTheKey() <em>The Key</em>}' reference list.
+	 * The cached value of the '{@link #getTheKey() <em>The Key</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTheKey()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Key> theKey;
+	protected Key theKey;
+
+	/**
+	 * The cached value of the '{@link #getKey() <em>Key</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Key> key;
+
+	/**
+	 * The cached value of the '{@link #getForeignKey() <em>Foreign Key</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getForeignKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ForeignKey> foreignKey;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -96,7 +103,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 */
 	public EList<Column> getColumn() {
 		if (column == null) {
-			column = new EObjectResolvingEList<Column>(Column.class, this, SimplerdbmsPackage.TABLE__COLUMN);
+			column = new EObjectContainmentWithInverseEList<Column>(Column.class, this, SimplerdbmsPackage.TABLE__COLUMN, SimplerdbmsPackage.COLUMN__OWNER);
 		}
 		return column;
 	}
@@ -107,24 +114,8 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * @generated
 	 */
 	public Schema getSchema() {
-		if (schema != null && schema.eIsProxy()) {
-			InternalEObject oldSchema = (InternalEObject)schema;
-			schema = (Schema)eResolveProxy(oldSchema);
-			if (schema != oldSchema) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SimplerdbmsPackage.TABLE__SCHEMA, oldSchema, schema));
-			}
-		}
-		return schema;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Schema basicGetSchema() {
-		return schema;
+		if (eContainerFeatureID() != SimplerdbmsPackage.TABLE__SCHEMA) return null;
+		return (Schema)eInternalContainer();
 	}
 
 	/**
@@ -133,12 +124,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * @generated
 	 */
 	public NotificationChain basicSetSchema(Schema newSchema, NotificationChain msgs) {
-		Schema oldSchema = schema;
-		schema = newSchema;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SimplerdbmsPackage.TABLE__SCHEMA, oldSchema, newSchema);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
+		msgs = eBasicSetContainer((InternalEObject)newSchema, SimplerdbmsPackage.TABLE__SCHEMA, msgs);
 		return msgs;
 	}
 
@@ -148,10 +134,12 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * @generated
 	 */
 	public void setSchema(Schema newSchema) {
-		if (newSchema != schema) {
+		if (newSchema != eInternalContainer() || (eContainerFeatureID() != SimplerdbmsPackage.TABLE__SCHEMA && newSchema != null)) {
+			if (EcoreUtil.isAncestor(this, newSchema))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (schema != null)
-				msgs = ((InternalEObject)schema).eInverseRemove(this, SimplerdbmsPackage.SCHEMA__TABLES, Schema.class, msgs);
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
 			if (newSchema != null)
 				msgs = ((InternalEObject)newSchema).eInverseAdd(this, SimplerdbmsPackage.SCHEMA__TABLES, Schema.class, msgs);
 			msgs = basicSetSchema(newSchema, msgs);
@@ -166,11 +154,61 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Key> getTheKey() {
-		if (theKey == null) {
-			theKey = new EObjectWithInverseResolvingEList<Key>(Key.class, this, SimplerdbmsPackage.TABLE__THE_KEY, SimplerdbmsPackage.KEY__OWNER);
+	public Key getTheKey() {
+		if (theKey != null && theKey.eIsProxy()) {
+			InternalEObject oldTheKey = (InternalEObject)theKey;
+			theKey = (Key)eResolveProxy(oldTheKey);
+			if (theKey != oldTheKey) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SimplerdbmsPackage.TABLE__THE_KEY, oldTheKey, theKey));
+			}
 		}
 		return theKey;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Key basicGetTheKey() {
+		return theKey;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTheKey(Key newTheKey) {
+		Key oldTheKey = theKey;
+		theKey = newTheKey;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SimplerdbmsPackage.TABLE__THE_KEY, oldTheKey, theKey));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Key> getKey() {
+		if (key == null) {
+			key = new EObjectContainmentWithInverseEList<Key>(Key.class, this, SimplerdbmsPackage.TABLE__KEY, SimplerdbmsPackage.KEY__OWNER);
+		}
+		return key;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ForeignKey> getForeignKey() {
+		if (foreignKey == null) {
+			foreignKey = new EObjectContainmentWithInverseEList<ForeignKey>(ForeignKey.class, this, SimplerdbmsPackage.TABLE__FOREIGN_KEY, SimplerdbmsPackage.FOREIGN_KEY__OWNER);
+		}
+		return foreignKey;
 	}
 
 	/**
@@ -182,12 +220,16 @@ public class TableImpl extends RModelElementImpl implements Table {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case SimplerdbmsPackage.TABLE__COLUMN:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getColumn()).basicAdd(otherEnd, msgs);
 			case SimplerdbmsPackage.TABLE__SCHEMA:
-				if (schema != null)
-					msgs = ((InternalEObject)schema).eInverseRemove(this, SimplerdbmsPackage.SCHEMA__TABLES, Schema.class, msgs);
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetSchema((Schema)otherEnd, msgs);
-			case SimplerdbmsPackage.TABLE__THE_KEY:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTheKey()).basicAdd(otherEnd, msgs);
+			case SimplerdbmsPackage.TABLE__KEY:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getKey()).basicAdd(otherEnd, msgs);
+			case SimplerdbmsPackage.TABLE__FOREIGN_KEY:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getForeignKey()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -200,12 +242,30 @@ public class TableImpl extends RModelElementImpl implements Table {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case SimplerdbmsPackage.TABLE__COLUMN:
+				return ((InternalEList<?>)getColumn()).basicRemove(otherEnd, msgs);
 			case SimplerdbmsPackage.TABLE__SCHEMA:
 				return basicSetSchema(null, msgs);
-			case SimplerdbmsPackage.TABLE__THE_KEY:
-				return ((InternalEList<?>)getTheKey()).basicRemove(otherEnd, msgs);
+			case SimplerdbmsPackage.TABLE__KEY:
+				return ((InternalEList<?>)getKey()).basicRemove(otherEnd, msgs);
+			case SimplerdbmsPackage.TABLE__FOREIGN_KEY:
+				return ((InternalEList<?>)getForeignKey()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case SimplerdbmsPackage.TABLE__SCHEMA:
+				return eInternalContainer().eInverseRemove(this, SimplerdbmsPackage.SCHEMA__TABLES, Schema.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -219,10 +279,14 @@ public class TableImpl extends RModelElementImpl implements Table {
 			case SimplerdbmsPackage.TABLE__COLUMN:
 				return getColumn();
 			case SimplerdbmsPackage.TABLE__SCHEMA:
-				if (resolve) return getSchema();
-				return basicGetSchema();
+				return getSchema();
 			case SimplerdbmsPackage.TABLE__THE_KEY:
-				return getTheKey();
+				if (resolve) return getTheKey();
+				return basicGetTheKey();
+			case SimplerdbmsPackage.TABLE__KEY:
+				return getKey();
+			case SimplerdbmsPackage.TABLE__FOREIGN_KEY:
+				return getForeignKey();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -244,8 +308,15 @@ public class TableImpl extends RModelElementImpl implements Table {
 				setSchema((Schema)newValue);
 				return;
 			case SimplerdbmsPackage.TABLE__THE_KEY:
-				getTheKey().clear();
-				getTheKey().addAll((Collection<? extends Key>)newValue);
+				setTheKey((Key)newValue);
+				return;
+			case SimplerdbmsPackage.TABLE__KEY:
+				getKey().clear();
+				getKey().addAll((Collection<? extends Key>)newValue);
+				return;
+			case SimplerdbmsPackage.TABLE__FOREIGN_KEY:
+				getForeignKey().clear();
+				getForeignKey().addAll((Collection<? extends ForeignKey>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -266,7 +337,13 @@ public class TableImpl extends RModelElementImpl implements Table {
 				setSchema((Schema)null);
 				return;
 			case SimplerdbmsPackage.TABLE__THE_KEY:
-				getTheKey().clear();
+				setTheKey((Key)null);
+				return;
+			case SimplerdbmsPackage.TABLE__KEY:
+				getKey().clear();
+				return;
+			case SimplerdbmsPackage.TABLE__FOREIGN_KEY:
+				getForeignKey().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -283,9 +360,13 @@ public class TableImpl extends RModelElementImpl implements Table {
 			case SimplerdbmsPackage.TABLE__COLUMN:
 				return column != null && !column.isEmpty();
 			case SimplerdbmsPackage.TABLE__SCHEMA:
-				return schema != null;
+				return getSchema() != null;
 			case SimplerdbmsPackage.TABLE__THE_KEY:
-				return theKey != null && !theKey.isEmpty();
+				return theKey != null;
+			case SimplerdbmsPackage.TABLE__KEY:
+				return key != null && !key.isEmpty();
+			case SimplerdbmsPackage.TABLE__FOREIGN_KEY:
+				return foreignKey != null && !foreignKey.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

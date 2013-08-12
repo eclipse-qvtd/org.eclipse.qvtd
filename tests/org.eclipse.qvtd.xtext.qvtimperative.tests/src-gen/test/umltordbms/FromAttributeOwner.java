@@ -2,6 +2,7 @@
  */
 package test.umltordbms;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -22,7 +23,8 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface FromAttributeOwner extends EObject {
 	/**
-	 * Returns the value of the '<em><b>From Attributes</b></em>' containment reference.
+	 * Returns the value of the '<em><b>From Attributes</b></em>' containment reference list.
+	 * The list contents are of type {@link test.umltordbms.FromAttribute}.
 	 * It is bidirectional and its opposite is '{@link test.umltordbms.FromAttribute#getOwner <em>Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -30,23 +32,12 @@ public interface FromAttributeOwner extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>From Attributes</em>' containment reference.
-	 * @see #setFromAttributes(FromAttribute)
+	 * @return the value of the '<em>From Attributes</em>' containment reference list.
 	 * @see test.umltordbms.UmltordbmsPackage#getFromAttributeOwner_FromAttributes()
 	 * @see test.umltordbms.FromAttribute#getOwner
 	 * @model opposite="owner" containment="true" ordered="false"
 	 * @generated
 	 */
-	FromAttribute getFromAttributes();
-
-	/**
-	 * Sets the value of the '{@link test.umltordbms.FromAttributeOwner#getFromAttributes <em>From Attributes</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>From Attributes</em>' containment reference.
-	 * @see #getFromAttributes()
-	 * @generated
-	 */
-	void setFromAttributes(FromAttribute value);
+	EList<FromAttribute> getFromAttributes();
 
 } // FromAttributeOwner

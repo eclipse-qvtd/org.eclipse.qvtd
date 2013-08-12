@@ -26,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
@@ -77,7 +78,7 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 	public @Nullable String visitMappingCallBinding(@NonNull MappingCallBinding object) {
 		appendName(object.getBoundVariable());
 		append(" := ");
-		appendName(object.getValue());
+		safeVisit(object.getValue());
 		return null;
 	}
 
@@ -87,5 +88,12 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 
 	public @Nullable String visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp object) {
 		return visitPropertyCallExp(object);
+	}
+
+	public @Nullable String visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {
+		appendName(variablePredicate.getTargetVariable());
+		append(" := ");
+		safeVisit(variablePredicate.getConditionExpression());
+		return null;
 	}
 }

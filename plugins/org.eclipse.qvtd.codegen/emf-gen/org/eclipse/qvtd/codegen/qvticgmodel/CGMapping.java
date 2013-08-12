@@ -16,7 +16,8 @@ package org.eclipse.qvtd.codegen.qvticgmodel;
 
 import java.util.List;
 
-import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,12 +27,9 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getBody <em>Body</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getFreeVariables <em>Free Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getTransformation <em>Transformation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getGuardVariables <em>Guard Variables</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getPredicates <em>Predicates</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getRealizedVariables <em>Realized Variables</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getAssignments <em>Assignments</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getMappingCalls <em>Mapping Calls</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,7 +37,50 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
  * @model
  * @generated
  */
-public interface CGMapping extends CGTypedElement {
+public interface CGMapping extends CGNamedElement {
+
+	/**
+	 * Returns the value of the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Body</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Body</em>' containment reference.
+	 * @see #setBody(CGValuedElement)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_Body()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	CGValuedElement getBody();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getBody <em>Body</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Body</em>' containment reference.
+	 * @see #getBody()
+	 * @generated
+	 */
+	void setBody(CGValuedElement value);
+
+	/**
+	 * Returns the value of the '<em><b>Free Variables</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable#getMapping <em>Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The parameters of this operation, with 'self' as the first parameter.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Free Variables</em>' containment reference list.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_FreeVariables()
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable#getMapping
+	 * @model opposite="mapping" containment="true" ordered="false"
+	 * @generated
+	 */
+	List<CGGuardVariable> getFreeVariables();
 
 	/**
 	 * Returns the value of the '<em><b>Transformation</b></em>' container reference.
@@ -68,93 +109,4 @@ public interface CGMapping extends CGTypedElement {
 	 * @generated
 	 */
 	void setTransformation(CGTransformation value);
-
-	/**
-	 * Returns the value of the '<em><b>Guard Variables</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable#getMapping <em>Mapping</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The parameters of this operation, with 'self' as the first parameter.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Guard Variables</em>' containment reference list.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_GuardVariables()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable#getMapping
-	 * @model opposite="mapping" containment="true" ordered="false"
-	 * @generated
-	 */
-	List<CGGuardVariable> getGuardVariables();
-
-	/**
-	 * Returns the value of the '<em><b>Predicates</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMapping <em>Mapping</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Predicates</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Predicates</em>' containment reference list.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_Predicates()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMapping
-	 * @model opposite="mapping" containment="true"
-	 * @generated
-	 */
-	List<CGPredicate> getPredicates();
-
-	/**
-	 * Returns the value of the '<em><b>Mapping Calls</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getMapping <em>Mapping</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Mapping Calls</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping Calls</em>' containment reference list.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_MappingCalls()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getMapping
-	 * @model opposite="mapping" containment="true"
-	 * @generated
-	 */
-	List<CGMappingCall> getMappingCalls();
-
-	/**
-	 * Returns the value of the '<em><b>Realized Variables</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getMapping <em>Mapping</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Realized Variables</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Realized Variables</em>' containment reference list.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_RealizedVariables()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getMapping
-	 * @model opposite="mapping" containment="true"
-	 * @generated
-	 */
-	List<CGRealizedVariable> getRealizedVariables();
-
-	/**
-	 * Returns the value of the '<em><b>Assignments</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getMapping <em>Mapping</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Assignments</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Assignments</em>' containment reference list.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_Assignments()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getMapping
-	 * @model opposite="mapping" containment="true"
-	 * @generated
-	 */
-	List<CGPropertyAssignment> getAssignments();
 } // CGMapping

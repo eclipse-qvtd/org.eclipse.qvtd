@@ -88,6 +88,15 @@ public interface QVTimperativeFactory extends EFactory {
 	MiddlePropertyCallExp createMiddlePropertyCallExp();
 
 	/**
+	 * Returns a new object of class '<em>Variable Predicate</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Variable Predicate</em>'.
+	 * @generated
+	 */
+	VariablePredicate createVariablePredicate();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

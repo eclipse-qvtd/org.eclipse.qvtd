@@ -32,11 +32,13 @@ import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.*;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -126,6 +128,10 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 				return createMiddlePropertyCallExpAdapter();
 			}
 			@Override
+			public Adapter caseVariablePredicate(VariablePredicate object) {
+				return createVariablePredicateAdapter();
+			}
+			@Override
 			public Adapter caseVisitable(Visitable object) {
 				return createVisitableAdapter();
 			}
@@ -200,6 +206,10 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePropertyCallExp(PropertyCallExp object) {
 				return createPropertyCallExpAdapter();
+			}
+			@Override
+			public Adapter casePredicate(Predicate object) {
+				return createPredicateAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -330,6 +340,20 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMiddlePropertyCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate <em>Variable Predicate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate
+	 * @generated
+	 */
+	public Adapter createVariablePredicateAdapter() {
 		return null;
 	}
 
@@ -568,6 +592,20 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPropertyCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtbase.Predicate <em>Predicate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Predicate
+	 * @generated
+	 */
+	public Adapter createPredicateAdapter() {
 		return null;
 	}
 

@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.qvtd.pivot.qvtimperative.*;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -78,6 +79,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case QVTimperativePackage.MAPPING_CALL_BINDING: return createMappingCallBinding();
 			case QVTimperativePackage.MIDDLE_PROPERTY_ASSIGNMENT: return createMiddlePropertyAssignment();
 			case QVTimperativePackage.MIDDLE_PROPERTY_CALL_EXP: return createMiddlePropertyCallExp();
+			case QVTimperativePackage.VARIABLE_PREDICATE: return createVariablePredicate();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -141,6 +143,16 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public MiddlePropertyCallExp createMiddlePropertyCallExp() {
 		MiddlePropertyCallExpImpl middlePropertyCallExp = new MiddlePropertyCallExpImpl();
 		return middlePropertyCallExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VariablePredicate createVariablePredicate() {
+		VariablePredicateImpl variablePredicate = new VariablePredicateImpl();
+		return variablePredicate;
 	}
 
 	/**

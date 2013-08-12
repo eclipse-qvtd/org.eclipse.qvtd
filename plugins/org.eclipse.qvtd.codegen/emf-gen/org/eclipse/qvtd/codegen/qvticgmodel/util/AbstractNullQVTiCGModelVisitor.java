@@ -74,6 +74,18 @@ public abstract class AbstractNullQVTiCGModelVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitCGMappingExp(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp object) {
+		return null;
+	}
+
+	public @Nullable R visitCGMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment object) {
+		return null;
+	}
+
+	public @Nullable R visitCGMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp object) {
+		return null;
+	}
+
 	public @Nullable R visitCGPredicate(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate object) {
 		return null;
 	}
@@ -91,6 +103,10 @@ public abstract class AbstractNullQVTiCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGTypedModel(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel object) {
+		return null;
+	}
+
+	public @Nullable R visitCGVariablePredicate(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate object) {
 		return null;
 	}
 }

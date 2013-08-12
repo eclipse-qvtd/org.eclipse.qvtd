@@ -29,11 +29,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 
@@ -91,28 +95,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass cgPropertyAssignmentEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass cgMappingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass cgTransformationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass cgTypedModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -133,6 +116,27 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass cgMappingExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgMiddlePropertyAssignmentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgMiddlePropertyCallExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass cgPredicateEClass = null;
 
 	/**
@@ -140,7 +144,35 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass cgPropertyAssignmentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass cgRealizedVariableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgTransformationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgTypedModelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgVariablePredicateEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -319,6 +351,204 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCGMapping() {
+		return cgMappingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGMapping_Body() {
+		return (EReference)cgMappingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGMapping_FreeVariables() {
+		return (EReference)cgMappingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGMapping_Transformation() {
+		return (EReference)cgMappingEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCGMappingCall() {
+		return cgMappingCallEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGMappingCall_MappingExp() {
+		return (EReference)cgMappingCallEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGMappingCall_MappingCallBindings() {
+		return (EReference)cgMappingCallEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCGMappingCallBinding() {
+		return cgMappingCallBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGMappingCallBinding_ValueOrValues() {
+		return (EReference)cgMappingCallBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCGMappingCallBinding_Loop() {
+		return (EAttribute)cgMappingCallBindingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCGMappingExp() {
+		return cgMappingExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGMappingExp_Assignments() {
+		return (EReference)cgMappingExpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGMappingExp_Mapping() {
+		return (EReference)cgMappingExpEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGMappingExp_MappingCalls() {
+		return (EReference)cgMappingExpEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGMappingExp_Predicates() {
+		return (EReference)cgMappingExpEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGMappingExp_RealizedVariables() {
+		return (EReference)cgMappingExpEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCGMiddlePropertyAssignment() {
+		return cgMiddlePropertyAssignmentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCGMiddlePropertyCallExp() {
+		return cgMiddlePropertyCallExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCGPredicate() {
+		return cgPredicateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGPredicate_ConditionExpression() {
+		return (EReference)cgPredicateEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGPredicate_MappingExp() {
+		return (EReference)cgPredicateEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGPredicate_ThenExpression() {
+		return (EReference)cgPredicateEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCGPropertyAssignment() {
 		return cgPropertyAssignmentEClass;
 	}
@@ -328,7 +558,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCGPropertyAssignment_Mapping() {
+	public EReference getCGPropertyAssignment_MappingExp() {
 		return (EReference)cgPropertyAssignmentEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -364,8 +594,8 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getCGMapping() {
-		return cgMappingEClass;
+	public EReference getCGPropertyAssignment_ExecutorProperty() {
+		return (EReference)cgPropertyAssignmentEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -373,8 +603,8 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCGMapping_Transformation() {
-		return (EReference)cgMappingEClass.getEStructuralFeatures().get(0);
+	public EClass getCGRealizedVariable() {
+		return cgRealizedVariableEClass;
 	}
 
 	/**
@@ -382,8 +612,8 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCGMapping_GuardVariables() {
-		return (EReference)cgMappingEClass.getEStructuralFeatures().get(1);
+	public EReference getCGRealizedVariable_TypedModel() {
+		return (EReference)cgRealizedVariableEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -391,8 +621,8 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCGMapping_Predicates() {
-		return (EReference)cgMappingEClass.getEStructuralFeatures().get(2);
+	public EReference getCGRealizedVariable_ExecutorType() {
+		return (EReference)cgRealizedVariableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -400,26 +630,8 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCGMapping_MappingCalls() {
-		return (EReference)cgMappingEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCGMapping_RealizedVariables() {
-		return (EReference)cgMappingEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCGMapping_Assignments() {
-		return (EReference)cgMappingEClass.getEStructuralFeatures().get(4);
+	public EReference getCGRealizedVariable_MappingExp() {
+		return (EReference)cgRealizedVariableEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -481,8 +693,8 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getCGMappingCall() {
-		return cgMappingCallEClass;
+	public EClass getCGVariablePredicate() {
+		return cgVariablePredicateEClass;
 	}
 
 	/**
@@ -490,98 +702,8 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCGMappingCall_Mapping() {
-		return (EReference)cgMappingCallEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCGMappingCall_MappingCallBindings() {
-		return (EReference)cgMappingCallEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getCGMappingCallBinding() {
-		return cgMappingCallBindingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCGMappingCallBinding_ValueOrValues() {
-		return (EReference)cgMappingCallBindingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCGMappingCallBinding_Loop() {
-		return (EAttribute)cgMappingCallBindingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getCGPredicate() {
-		return cgPredicateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCGPredicate_Mapping() {
-		return (EReference)cgPredicateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCGPredicate_ConditionExpression() {
-		return (EReference)cgPredicateEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getCGRealizedVariable() {
-		return cgRealizedVariableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCGRealizedVariable_Mapping() {
-		return (EReference)cgRealizedVariableEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCGRealizedVariable_TypedModel() {
-		return (EReference)cgRealizedVariableEClass.getEStructuralFeatures().get(1);
+	public EReference getCGVariablePredicate_PredicateVariable() {
+		return (EReference)cgVariablePredicateEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -631,33 +753,44 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		createEReference(cgGuardVariableEClass, CG_GUARD_VARIABLE__TYPED_MODEL);
 
 		cgMappingEClass = createEClass(CG_MAPPING);
+		createEReference(cgMappingEClass, CG_MAPPING__BODY);
+		createEReference(cgMappingEClass, CG_MAPPING__FREE_VARIABLES);
 		createEReference(cgMappingEClass, CG_MAPPING__TRANSFORMATION);
-		createEReference(cgMappingEClass, CG_MAPPING__GUARD_VARIABLES);
-		createEReference(cgMappingEClass, CG_MAPPING__PREDICATES);
-		createEReference(cgMappingEClass, CG_MAPPING__REALIZED_VARIABLES);
-		createEReference(cgMappingEClass, CG_MAPPING__ASSIGNMENTS);
-		createEReference(cgMappingEClass, CG_MAPPING__MAPPING_CALLS);
 
 		cgMappingCallEClass = createEClass(CG_MAPPING_CALL);
-		createEReference(cgMappingCallEClass, CG_MAPPING_CALL__MAPPING);
+		createEReference(cgMappingCallEClass, CG_MAPPING_CALL__MAPPING_EXP);
 		createEReference(cgMappingCallEClass, CG_MAPPING_CALL__MAPPING_CALL_BINDINGS);
 
 		cgMappingCallBindingEClass = createEClass(CG_MAPPING_CALL_BINDING);
 		createEReference(cgMappingCallBindingEClass, CG_MAPPING_CALL_BINDING__VALUE_OR_VALUES);
 		createEAttribute(cgMappingCallBindingEClass, CG_MAPPING_CALL_BINDING__LOOP);
 
+		cgMappingExpEClass = createEClass(CG_MAPPING_EXP);
+		createEReference(cgMappingExpEClass, CG_MAPPING_EXP__ASSIGNMENTS);
+		createEReference(cgMappingExpEClass, CG_MAPPING_EXP__MAPPING);
+		createEReference(cgMappingExpEClass, CG_MAPPING_EXP__MAPPING_CALLS);
+		createEReference(cgMappingExpEClass, CG_MAPPING_EXP__PREDICATES);
+		createEReference(cgMappingExpEClass, CG_MAPPING_EXP__REALIZED_VARIABLES);
+
+		cgMiddlePropertyAssignmentEClass = createEClass(CG_MIDDLE_PROPERTY_ASSIGNMENT);
+
+		cgMiddlePropertyCallExpEClass = createEClass(CG_MIDDLE_PROPERTY_CALL_EXP);
+
 		cgPredicateEClass = createEClass(CG_PREDICATE);
-		createEReference(cgPredicateEClass, CG_PREDICATE__MAPPING);
 		createEReference(cgPredicateEClass, CG_PREDICATE__CONDITION_EXPRESSION);
+		createEReference(cgPredicateEClass, CG_PREDICATE__MAPPING_EXP);
+		createEReference(cgPredicateEClass, CG_PREDICATE__THEN_EXPRESSION);
 
 		cgPropertyAssignmentEClass = createEClass(CG_PROPERTY_ASSIGNMENT);
-		createEReference(cgPropertyAssignmentEClass, CG_PROPERTY_ASSIGNMENT__MAPPING);
+		createEReference(cgPropertyAssignmentEClass, CG_PROPERTY_ASSIGNMENT__MAPPING_EXP);
 		createEReference(cgPropertyAssignmentEClass, CG_PROPERTY_ASSIGNMENT__SLOT_VALUE);
 		createEAttribute(cgPropertyAssignmentEClass, CG_PROPERTY_ASSIGNMENT__REFERRED_PROPERTY);
 		createEReference(cgPropertyAssignmentEClass, CG_PROPERTY_ASSIGNMENT__INIT_VALUE);
+		createEReference(cgPropertyAssignmentEClass, CG_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY);
 
 		cgRealizedVariableEClass = createEClass(CG_REALIZED_VARIABLE);
-		createEReference(cgRealizedVariableEClass, CG_REALIZED_VARIABLE__MAPPING);
+		createEReference(cgRealizedVariableEClass, CG_REALIZED_VARIABLE__EXECUTOR_TYPE);
+		createEReference(cgRealizedVariableEClass, CG_REALIZED_VARIABLE__MAPPING_EXP);
 		createEReference(cgRealizedVariableEClass, CG_REALIZED_VARIABLE__TYPED_MODEL);
 
 		cgTransformationEClass = createEClass(CG_TRANSFORMATION);
@@ -667,6 +800,9 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		cgTypedModelEClass = createEClass(CG_TYPED_MODEL);
 		createEReference(cgTypedModelEClass, CG_TYPED_MODEL__TRANSFORMATION);
 		createEAttribute(cgTypedModelEClass, CG_TYPED_MODEL__MODEL_INDEX);
+
+		cgVariablePredicateEClass = createEClass(CG_VARIABLE_PREDICATE);
+		createEReference(cgVariablePredicateEClass, CG_VARIABLE_PREDICATE__PREDICATE_VARIABLE);
 	}
 
 	/**
@@ -706,14 +842,18 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		cgFunctionCallExpEClass.getESuperTypes().add(theCGModelPackage.getCGOperationCallExp());
 		cgFunctionParameterEClass.getESuperTypes().add(theCGModelPackage.getCGParameter());
 		cgGuardVariableEClass.getESuperTypes().add(theCGModelPackage.getCGParameter());
-		cgMappingEClass.getESuperTypes().add(theCGModelPackage.getCGTypedElement());
+		cgMappingEClass.getESuperTypes().add(theCGModelPackage.getCGNamedElement());
 		cgMappingCallEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgMappingCallBindingEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
+		cgMappingExpEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
+		cgMiddlePropertyAssignmentEClass.getESuperTypes().add(this.getCGEcorePropertyAssignment());
+		cgMiddlePropertyCallExpEClass.getESuperTypes().add(theCGModelPackage.getCGPropertyCallExp());
 		cgPredicateEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgPropertyAssignmentEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgRealizedVariableEClass.getESuperTypes().add(theCGModelPackage.getCGVariable());
 		cgTransformationEClass.getESuperTypes().add(theCGModelPackage.getCGClass());
 		cgTypedModelEClass.getESuperTypes().add(theCGModelPackage.getCGNamedElement());
+		cgVariablePredicateEClass.getESuperTypes().add(this.getCGPredicate());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(cgEcorePropertyAssignmentEClass, CGEcorePropertyAssignment.class, "CGEcorePropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -731,37 +871,48 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		initEReference(getCGFunctionParameter_Function(), this.getCGFunction(), null, "function", null, 1, 1, CGFunctionParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgGuardVariableEClass, CGGuardVariable.class, "CGGuardVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCGGuardVariable_Mapping(), this.getCGMapping(), this.getCGMapping_GuardVariables(), "mapping", null, 1, 1, CGGuardVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGGuardVariable_Mapping(), this.getCGMapping(), this.getCGMapping_FreeVariables(), "mapping", null, 1, 1, CGGuardVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGGuardVariable_TypedModel(), this.getCGTypedModel(), null, "typedModel", null, 1, 1, CGGuardVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgMappingEClass, CGMapping.class, "CGMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCGMapping_Body(), theCGModelPackage.getCGValuedElement(), null, "body", null, 1, 1, CGMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGMapping_FreeVariables(), this.getCGGuardVariable(), this.getCGGuardVariable_Mapping(), "freeVariables", null, 0, -1, CGMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getCGMapping_Transformation(), this.getCGTransformation(), this.getCGTransformation_Mappings(), "transformation", null, 1, 1, CGMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCGMapping_GuardVariables(), this.getCGGuardVariable(), this.getCGGuardVariable_Mapping(), "guardVariables", null, 0, -1, CGMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getCGMapping_Predicates(), this.getCGPredicate(), this.getCGPredicate_Mapping(), "predicates", null, 0, -1, CGMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCGMapping_RealizedVariables(), this.getCGRealizedVariable(), this.getCGRealizedVariable_Mapping(), "realizedVariables", null, 0, -1, CGMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCGMapping_Assignments(), this.getCGPropertyAssignment(), this.getCGPropertyAssignment_Mapping(), "assignments", null, 0, -1, CGMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCGMapping_MappingCalls(), this.getCGMappingCall(), this.getCGMappingCall_Mapping(), "mappingCalls", null, 0, -1, CGMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgMappingCallEClass, CGMappingCall.class, "CGMappingCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCGMappingCall_Mapping(), this.getCGMapping(), this.getCGMapping_MappingCalls(), "mapping", null, 1, 1, CGMappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGMappingCall_MappingExp(), this.getCGMappingExp(), this.getCGMappingExp_MappingCalls(), "mappingExp", null, 1, 1, CGMappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGMappingCall_MappingCallBindings(), this.getCGMappingCallBinding(), null, "mappingCallBindings", null, 0, -1, CGMappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgMappingCallBindingEClass, CGMappingCallBinding.class, "CGMappingCallBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGMappingCallBinding_ValueOrValues(), theCGModelPackage.getCGValuedElement(), null, "valueOrValues", null, 1, 1, CGMappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCGMappingCallBinding_Loop(), ecorePackage.getEBoolean(), "loop", "false", 1, 1, CGMappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(cgMappingExpEClass, CGMappingExp.class, "CGMappingExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCGMappingExp_Assignments(), this.getCGPropertyAssignment(), this.getCGPropertyAssignment_MappingExp(), "assignments", null, 0, -1, CGMappingExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGMappingExp_Mapping(), this.getCGMapping(), null, "mapping", null, 1, 1, CGMappingExp.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getCGMappingExp_MappingCalls(), this.getCGMappingCall(), this.getCGMappingCall_MappingExp(), "mappingCalls", null, 0, -1, CGMappingExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGMappingExp_Predicates(), this.getCGPredicate(), this.getCGPredicate_MappingExp(), "predicates", null, 0, -1, CGMappingExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGMappingExp_RealizedVariables(), this.getCGRealizedVariable(), this.getCGRealizedVariable_MappingExp(), "realizedVariables", null, 0, -1, CGMappingExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cgMiddlePropertyAssignmentEClass, CGMiddlePropertyAssignment.class, "CGMiddlePropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(cgMiddlePropertyCallExpEClass, CGMiddlePropertyCallExp.class, "CGMiddlePropertyCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(cgPredicateEClass, CGPredicate.class, "CGPredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCGPredicate_Mapping(), this.getCGMapping(), this.getCGMapping_Predicates(), "mapping", null, 1, 1, CGPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGPredicate_ConditionExpression(), theCGModelPackage.getCGValuedElement(), null, "conditionExpression", null, 1, 1, CGPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGPredicate_MappingExp(), this.getCGMappingExp(), this.getCGMappingExp_Predicates(), "mappingExp", null, 1, 1, CGPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGPredicate_ThenExpression(), theCGModelPackage.getCGValuedElement(), null, "thenExpression", null, 0, 1, CGPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgPropertyAssignmentEClass, CGPropertyAssignment.class, "CGPropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCGPropertyAssignment_Mapping(), this.getCGMapping(), this.getCGMapping_Assignments(), "mapping", null, 1, 1, CGPropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGPropertyAssignment_MappingExp(), this.getCGMappingExp(), this.getCGMappingExp_Assignments(), "mappingExp", null, 1, 1, CGPropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGPropertyAssignment_SlotValue(), theCGModelPackage.getCGValuedElement(), null, "slotValue", null, 1, 1, CGPropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCGPropertyAssignment_ReferredProperty(), theCGModelPackage.getProperty(), "referredProperty", null, 1, 1, CGPropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGPropertyAssignment_InitValue(), theCGModelPackage.getCGValuedElement(), null, "initValue", null, 1, 1, CGPropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGPropertyAssignment_ExecutorProperty(), theCGModelPackage.getCGExecutorProperty(), null, "executorProperty", null, 1, 1, CGPropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgRealizedVariableEClass, CGRealizedVariable.class, "CGRealizedVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCGRealizedVariable_Mapping(), this.getCGMapping(), this.getCGMapping_RealizedVariables(), "mapping", null, 1, 1, CGRealizedVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGRealizedVariable_ExecutorType(), theCGModelPackage.getCGExecutorType(), null, "executorType", null, 1, 1, CGRealizedVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGRealizedVariable_MappingExp(), this.getCGMappingExp(), this.getCGMappingExp_RealizedVariables(), "mappingExp", null, 1, 1, CGRealizedVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGRealizedVariable_TypedModel(), this.getCGTypedModel(), null, "typedModel", null, 1, 1, CGRealizedVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgTransformationEClass, CGTransformation.class, "CGTransformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -771,6 +922,9 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		initEClass(cgTypedModelEClass, CGTypedModel.class, "CGTypedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGTypedModel_Transformation(), this.getCGTransformation(), this.getCGTransformation_TypedModels(), "transformation", null, 1, 1, CGTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCGTypedModel_ModelIndex(), ecorePackage.getEInt(), "modelIndex", null, 0, 1, CGTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cgVariablePredicateEClass, CGVariablePredicate.class, "CGVariablePredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCGVariablePredicate_PredicateVariable(), theCGModelPackage.getCGVariable(), null, "predicateVariable", null, 1, 1, CGVariablePredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -796,4 +950,4 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		   });	
 	}
 
-} //QVTiCGmodelPackageImpl
+} //QVTiCGModelPackageImpl

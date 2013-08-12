@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;

@@ -23,28 +23,28 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Key extends RModelElement {
 	/**
-	 * Returns the value of the '<em><b>Owner</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link test.simplerdbms.Table#getTheKey <em>The Key</em>}'.
+	 * Returns the value of the '<em><b>Owner</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link test.simplerdbms.Table#getKey <em>Key</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owner</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owner</em>' reference.
+	 * @return the value of the '<em>Owner</em>' container reference.
 	 * @see #setOwner(Table)
 	 * @see test.simplerdbms.SimplerdbmsPackage#getKey_Owner()
-	 * @see test.simplerdbms.Table#getTheKey
-	 * @model opposite="theKey" required="true"
+	 * @see test.simplerdbms.Table#getKey
+	 * @model opposite="key" required="true" transient="false"
 	 * @generated
 	 */
 	Table getOwner();
 
 	/**
-	 * Sets the value of the '{@link test.simplerdbms.Key#getOwner <em>Owner</em>}' reference.
+	 * Sets the value of the '{@link test.simplerdbms.Key#getOwner <em>Owner</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owner</em>' reference.
+	 * @param value the new value of the '<em>Owner</em>' container reference.
 	 * @see #getOwner()
 	 * @generated
 	 */

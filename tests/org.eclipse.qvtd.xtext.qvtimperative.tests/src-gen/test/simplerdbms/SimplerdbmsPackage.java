@@ -131,7 +131,7 @@ public interface SimplerdbmsPackage extends EPackage {
 	int COLUMN__KIND = RMODEL_ELEMENT__KIND;
 
 	/**
-	 * The feature id for the '<em><b>Owner</b></em>' reference.
+	 * The feature id for the '<em><b>Owner</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -231,7 +231,7 @@ public interface SimplerdbmsPackage extends EPackage {
 	int FOREIGN_KEY__COLUMN = RMODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Owner</b></em>' reference.
+	 * The feature id for the '<em><b>Owner</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -240,22 +240,13 @@ public interface SimplerdbmsPackage extends EPackage {
 	int FOREIGN_KEY__OWNER = RMODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Schema</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FOREIGN_KEY__SCHEMA = RMODEL_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
 	 * The number of structural features of the '<em>Foreign Key</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FOREIGN_KEY_FEATURE_COUNT = RMODEL_ELEMENT_FEATURE_COUNT + 4;
+	int FOREIGN_KEY_FEATURE_COUNT = RMODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Foreign Key</em>' class.
@@ -295,7 +286,7 @@ public interface SimplerdbmsPackage extends EPackage {
 	int KEY__KIND = RMODEL_ELEMENT__KIND;
 
 	/**
-	 * The feature id for the '<em><b>Owner</b></em>' reference.
+	 * The feature id for the '<em><b>Owner</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -359,7 +350,7 @@ public interface SimplerdbmsPackage extends EPackage {
 	int SCHEMA__KIND = RMODEL_ELEMENT__KIND;
 
 	/**
-	 * The feature id for the '<em><b>Tables</b></em>' reference list.
+	 * The feature id for the '<em><b>Tables</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -414,7 +405,7 @@ public interface SimplerdbmsPackage extends EPackage {
 	int TABLE__KIND = RMODEL_ELEMENT__KIND;
 
 	/**
-	 * The feature id for the '<em><b>Column</b></em>' reference list.
+	 * The feature id for the '<em><b>Column</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -423,7 +414,7 @@ public interface SimplerdbmsPackage extends EPackage {
 	int TABLE__COLUMN = RMODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Schema</b></em>' reference.
+	 * The feature id for the '<em><b>Schema</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -432,7 +423,7 @@ public interface SimplerdbmsPackage extends EPackage {
 	int TABLE__SCHEMA = RMODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>The Key</b></em>' reference list.
+	 * The feature id for the '<em><b>The Key</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -441,13 +432,31 @@ public interface SimplerdbmsPackage extends EPackage {
 	int TABLE__THE_KEY = RMODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Key</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE__KEY = RMODEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Foreign Key</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE__FOREIGN_KEY = RMODEL_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Table</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TABLE_FEATURE_COUNT = RMODEL_ELEMENT_FEATURE_COUNT + 3;
+	int TABLE_FEATURE_COUNT = RMODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>Table</em>' class.
@@ -470,10 +479,10 @@ public interface SimplerdbmsPackage extends EPackage {
 	EClass getColumn();
 
 	/**
-	 * Returns the meta object for the reference '{@link test.simplerdbms.Column#getOwner <em>Owner</em>}'.
+	 * Returns the meta object for the container reference '{@link test.simplerdbms.Column#getOwner <em>Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Owner</em>'.
+	 * @return the meta object for the container reference '<em>Owner</em>'.
 	 * @see test.simplerdbms.Column#getOwner()
 	 * @see #getColumn()
 	 * @generated
@@ -546,26 +555,15 @@ public interface SimplerdbmsPackage extends EPackage {
 	EReference getForeignKey_Column();
 
 	/**
-	 * Returns the meta object for the reference '{@link test.simplerdbms.ForeignKey#getOwner <em>Owner</em>}'.
+	 * Returns the meta object for the container reference '{@link test.simplerdbms.ForeignKey#getOwner <em>Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Owner</em>'.
+	 * @return the meta object for the container reference '<em>Owner</em>'.
 	 * @see test.simplerdbms.ForeignKey#getOwner()
 	 * @see #getForeignKey()
 	 * @generated
 	 */
 	EReference getForeignKey_Owner();
-
-	/**
-	 * Returns the meta object for the reference '{@link test.simplerdbms.ForeignKey#getSchema <em>Schema</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Schema</em>'.
-	 * @see test.simplerdbms.ForeignKey#getSchema()
-	 * @see #getForeignKey()
-	 * @generated
-	 */
-	EReference getForeignKey_Schema();
 
 	/**
 	 * Returns the meta object for class '{@link test.simplerdbms.Key <em>Key</em>}'.
@@ -578,10 +576,10 @@ public interface SimplerdbmsPackage extends EPackage {
 	EClass getKey();
 
 	/**
-	 * Returns the meta object for the reference '{@link test.simplerdbms.Key#getOwner <em>Owner</em>}'.
+	 * Returns the meta object for the container reference '{@link test.simplerdbms.Key#getOwner <em>Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Owner</em>'.
+	 * @return the meta object for the container reference '<em>Owner</em>'.
 	 * @see test.simplerdbms.Key#getOwner()
 	 * @see #getKey()
 	 * @generated
@@ -642,10 +640,10 @@ public interface SimplerdbmsPackage extends EPackage {
 	EClass getSchema();
 
 	/**
-	 * Returns the meta object for the reference list '{@link test.simplerdbms.Schema#getTables <em>Tables</em>}'.
+	 * Returns the meta object for the containment reference list '{@link test.simplerdbms.Schema#getTables <em>Tables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Tables</em>'.
+	 * @return the meta object for the containment reference list '<em>Tables</em>'.
 	 * @see test.simplerdbms.Schema#getTables()
 	 * @see #getSchema()
 	 * @generated
@@ -663,10 +661,10 @@ public interface SimplerdbmsPackage extends EPackage {
 	EClass getTable();
 
 	/**
-	 * Returns the meta object for the reference list '{@link test.simplerdbms.Table#getColumn <em>Column</em>}'.
+	 * Returns the meta object for the containment reference list '{@link test.simplerdbms.Table#getColumn <em>Column</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Column</em>'.
+	 * @return the meta object for the containment reference list '<em>Column</em>'.
 	 * @see test.simplerdbms.Table#getColumn()
 	 * @see #getTable()
 	 * @generated
@@ -674,10 +672,10 @@ public interface SimplerdbmsPackage extends EPackage {
 	EReference getTable_Column();
 
 	/**
-	 * Returns the meta object for the reference '{@link test.simplerdbms.Table#getSchema <em>Schema</em>}'.
+	 * Returns the meta object for the container reference '{@link test.simplerdbms.Table#getSchema <em>Schema</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Schema</em>'.
+	 * @return the meta object for the container reference '<em>Schema</em>'.
 	 * @see test.simplerdbms.Table#getSchema()
 	 * @see #getTable()
 	 * @generated
@@ -685,15 +683,37 @@ public interface SimplerdbmsPackage extends EPackage {
 	EReference getTable_Schema();
 
 	/**
-	 * Returns the meta object for the reference list '{@link test.simplerdbms.Table#getTheKey <em>The Key</em>}'.
+	 * Returns the meta object for the reference '{@link test.simplerdbms.Table#getTheKey <em>The Key</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>The Key</em>'.
+	 * @return the meta object for the reference '<em>The Key</em>'.
 	 * @see test.simplerdbms.Table#getTheKey()
 	 * @see #getTable()
 	 * @generated
 	 */
 	EReference getTable_TheKey();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link test.simplerdbms.Table#getKey <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Key</em>'.
+	 * @see test.simplerdbms.Table#getKey()
+	 * @see #getTable()
+	 * @generated
+	 */
+	EReference getTable_Key();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link test.simplerdbms.Table#getForeignKey <em>Foreign Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Foreign Key</em>'.
+	 * @see test.simplerdbms.Table#getForeignKey()
+	 * @see #getTable()
+	 * @generated
+	 */
+	EReference getTable_ForeignKey();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -729,7 +749,7 @@ public interface SimplerdbmsPackage extends EPackage {
 		EClass COLUMN = eINSTANCE.getColumn();
 
 		/**
-		 * The meta object literal for the '<em><b>Owner</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Owner</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -787,20 +807,12 @@ public interface SimplerdbmsPackage extends EPackage {
 		EReference FOREIGN_KEY__COLUMN = eINSTANCE.getForeignKey_Column();
 
 		/**
-		 * The meta object literal for the '<em><b>Owner</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Owner</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference FOREIGN_KEY__OWNER = eINSTANCE.getForeignKey_Owner();
-
-		/**
-		 * The meta object literal for the '<em><b>Schema</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FOREIGN_KEY__SCHEMA = eINSTANCE.getForeignKey_Schema();
 
 		/**
 		 * The meta object literal for the '{@link test.simplerdbms.impl.KeyImpl <em>Key</em>}' class.
@@ -813,7 +825,7 @@ public interface SimplerdbmsPackage extends EPackage {
 		EClass KEY = eINSTANCE.getKey();
 
 		/**
-		 * The meta object literal for the '<em><b>Owner</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Owner</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -865,7 +877,7 @@ public interface SimplerdbmsPackage extends EPackage {
 		EClass SCHEMA = eINSTANCE.getSchema();
 
 		/**
-		 * The meta object literal for the '<em><b>Tables</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Tables</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -883,7 +895,7 @@ public interface SimplerdbmsPackage extends EPackage {
 		EClass TABLE = eINSTANCE.getTable();
 
 		/**
-		 * The meta object literal for the '<em><b>Column</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Column</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -891,7 +903,7 @@ public interface SimplerdbmsPackage extends EPackage {
 		EReference TABLE__COLUMN = eINSTANCE.getTable_Column();
 
 		/**
-		 * The meta object literal for the '<em><b>Schema</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Schema</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -899,12 +911,28 @@ public interface SimplerdbmsPackage extends EPackage {
 		EReference TABLE__SCHEMA = eINSTANCE.getTable_Schema();
 
 		/**
-		 * The meta object literal for the '<em><b>The Key</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>The Key</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference TABLE__THE_KEY = eINSTANCE.getTable_TheKey();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TABLE__KEY = eINSTANCE.getTable_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Foreign Key</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TABLE__FOREIGN_KEY = eINSTANCE.getTable_ForeignKey();
 
 	}
 

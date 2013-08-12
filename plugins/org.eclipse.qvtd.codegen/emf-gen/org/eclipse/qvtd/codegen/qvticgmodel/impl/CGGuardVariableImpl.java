@@ -107,7 +107,7 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newMapping != null)
-				msgs = ((InternalEObject)newMapping).eInverseAdd(this, QVTiCGModelPackage.CG_MAPPING__GUARD_VARIABLES, CGMapping.class, msgs);
+				msgs = ((InternalEObject)newMapping).eInverseAdd(this, QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES, CGMapping.class, msgs);
 			msgs = basicSetMapping(newMapping, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -175,7 +175,7 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING:
-				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_MAPPING__GUARD_VARIABLES, CGMapping.class, msgs);
+				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES, CGMapping.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -249,8 +249,7 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -259,23 +258,49 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGGuardVariable(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean isBoxed() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isGlobal() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean isNonNull() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean isNull() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean isUnboxed() {
 		return true;
 	}
+
 } //CGGuardVariableImpl

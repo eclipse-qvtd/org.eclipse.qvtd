@@ -12,7 +12,7 @@
  * 
  * </copyright>
  */
-package org.eclipse.qvtd.codegen.qvti;
+package org.eclipse.qvtd.codegen.qvti.analyzer;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
@@ -26,11 +26,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 
 public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVisitor<Object>
@@ -40,8 +44,10 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 		super(analyzer);
 	}
 
-	public Object visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
-		return visitCGPropertyAssignment(object);
+	public Object visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment cgEcorePropertyAssignment) {
+		rewriteAsUnboxed(cgEcorePropertyAssignment.getSlotValue());
+		rewriteAsUnboxed(cgEcorePropertyAssignment.getInitValue());
+		return visitCGPropertyAssignment(cgEcorePropertyAssignment);
 	}
 
 	public Object visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable object) {
@@ -71,7 +77,7 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	}
 
 	public Object visitCGMapping(@NonNull CGMapping cgMapping) {
-		return visitCGTypedElement(cgMapping);
+		return visitCGNamedElement(cgMapping);
 	}
 
 	public Object visitCGMappingCall(@NonNull CGMappingCall cgMappingCall) {
@@ -80,6 +86,20 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 
 	public Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
 		return visitCGValuedElement(cgMappingCallBinding);
+	}
+
+	public Object visitCGMappingExp(@NonNull CGMappingExp object) {
+		return visitCGValuedElement(object);
+	}
+
+	public Object visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment cgMiddlePropertyAssignment) {
+		rewriteAsUnboxed(cgMiddlePropertyAssignment.getSlotValue());
+		rewriteAsUnboxed(cgMiddlePropertyAssignment.getInitValue());
+		return visitCGPropertyAssignment(cgMiddlePropertyAssignment);
+	}
+
+	public Object visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
+		return visitCGPropertyCallExp(object);
 	}
 
 	public Object visitCGPredicate(@NonNull CGPredicate cgPredicate) {
@@ -100,5 +120,9 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 
 	public Object visitCGTypedModel(@NonNull CGTypedModel object) {
 		return visitCGNamedElement(object);
+	}
+
+	public Object visitCGVariablePredicate(@NonNull CGVariablePredicate object) {
+		return visitCGPredicate(object);
 	}
 }

@@ -25,10 +25,12 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
+import org.eclipse.qvtd.codegen.qvticgmodel.*;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -138,6 +140,18 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGMappingCallBindingAdapter();
 			}
 			@Override
+			public Adapter caseCGMappingExp(CGMappingExp object) {
+				return createCGMappingExpAdapter();
+			}
+			@Override
+			public Adapter caseCGMiddlePropertyAssignment(CGMiddlePropertyAssignment object) {
+				return createCGMiddlePropertyAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseCGMiddlePropertyCallExp(CGMiddlePropertyCallExp object) {
+				return createCGMiddlePropertyCallExpAdapter();
+			}
+			@Override
 			public Adapter caseCGPredicate(CGPredicate object) {
 				return createCGPredicateAdapter();
 			}
@@ -156,6 +170,10 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCGTypedModel(CGTypedModel object) {
 				return createCGTypedModelAdapter();
+			}
+			@Override
+			public Adapter caseCGVariablePredicate(CGVariablePredicate object) {
+				return createCGVariablePredicateAdapter();
 			}
 			@Override
 			public Adapter caseCGElement(CGElement object) {
@@ -196,6 +214,10 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCGParameter(CGParameter object) {
 				return createCGParameterAdapter();
+			}
+			@Override
+			public Adapter caseCGPropertyCallExp(CGPropertyCallExp object) {
+				return createCGPropertyCallExpAdapter();
 			}
 			@Override
 			public Adapter caseCGClass(CGClass object) {
@@ -362,6 +384,20 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate <em>CG Variable Predicate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate
+	 * @generated
+	 */
+	public Adapter createCGVariablePredicateAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall <em>CG Mapping Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -386,6 +422,48 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGMappingCallBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp <em>CG Mapping Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp
+	 * @generated
+	 */
+	public Adapter createCGMappingExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment <em>CG Middle Property Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment
+	 * @generated
+	 */
+	public Adapter createCGMiddlePropertyAssignmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp <em>CG Middle Property Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp
+	 * @generated
+	 */
+	public Adapter createCGMiddlePropertyCallExpAdapter() {
 		return null;
 	}
 
@@ -540,6 +618,20 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGParameterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp <em>CG Property Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp
+	 * @generated
+	 */
+	public Adapter createCGPropertyCallExpAdapter() {
 		return null;
 	}
 

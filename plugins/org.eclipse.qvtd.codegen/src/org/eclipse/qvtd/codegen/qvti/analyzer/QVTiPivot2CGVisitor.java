@@ -12,23 +12,29 @@
  * 
  * </copyright>
  */
-package org.eclipse.qvtd.codegen.qvti;
+package org.eclipse.qvtd.codegen.qvti.analyzer;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.Pivot2CGVisitor;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
+import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -43,6 +49,7 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -52,11 +59,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -85,6 +96,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
+import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimperativeVisitor<CGNamedElement>
@@ -98,14 +110,14 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		this.globalContext = globalContext;
 	}
 
-	protected void createMappingCalls(@NonNull Mapping pMapping, @NonNull CGMapping cgMapping) {
+	protected void createMappingCalls(@NonNull Mapping pMapping, @NonNull CGMappingExp cgMappingExp) {
 		for (MappingCall pMappingCall : pMapping.getMappingCall()) {
 			CGMappingCall cgMappingCall = doVisit(CGMappingCall.class, pMappingCall);
-			cgMapping.getMappingCalls().add(cgMappingCall);
+			cgMappingExp.getMappingCalls().add(cgMappingCall);
 		}
 	}
 
-	protected void doBottoms(@NonNull Mapping pMapping, @NonNull CGMapping cgMapping) {
+	protected void doBottoms(@NonNull Mapping pMapping, @NonNull CGMappingExp cgMappingExp) {
 		List<BottomPattern> pBottomPatterns = new ArrayList<BottomPattern>();
 		{
 			BottomPattern pBottomPattern = pMapping.getBottomPattern();
@@ -131,12 +143,12 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 					return o1.getName().compareTo(o2.getName());
 				}		
 			});
-		List<CGRealizedVariable> cgRealizedVariables = cgMapping.getRealizedVariables();
+		List<CGRealizedVariable> cgRealizedVariables = cgMappingExp.getRealizedVariables();
 		for (@SuppressWarnings("null")@NonNull RealizedVariable pRealizedVariable : pRealizedVariables) {
 			CGRealizedVariable cgVariable = getRealizedVariable(pRealizedVariable);
 			cgRealizedVariables.add(cgVariable);
 		}
-		List<CGPropertyAssignment> cgAssignments = cgMapping.getAssignments();
+		List<CGPropertyAssignment> cgAssignments = cgMappingExp.getAssignments();
 		for (@SuppressWarnings("null")@NonNull BottomPattern pBottomPattern : pBottomPatterns) {
 			for (@SuppressWarnings("null")@NonNull Assignment pAssignment : pBottomPattern.getAssignment()) {
 				cgAssignments.add(doVisit(CGPropertyAssignment.class, pAssignment));
@@ -144,7 +156,7 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		}
 	}
 
-	protected void doGuards(@NonNull Mapping pMapping, @NonNull CGMapping cgMapping) {
+	protected void doGuards(@NonNull Mapping pMapping, @NonNull CGMapping cgMapping, @NonNull CGMappingExp cgMappingExp) {
 		List<GuardPattern> guardPatterns = new ArrayList<GuardPattern>();
 		{
 			GuardPattern pGuardPattern = pMapping.getGuardPattern();
@@ -160,9 +172,22 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 				}
 			}
 		}
+		Set<Variable> predicatedVariables = new HashSet<Variable>();
+		for (@SuppressWarnings("null")@NonNull GuardPattern pGuardPattern : guardPatterns) {
+			for (Predicate predicate : pGuardPattern.getPredicate()) {
+				if (predicate instanceof VariablePredicate) {
+					predicatedVariables.add(((VariablePredicate)predicate).getTargetVariable());
+				}
+			};
+		}
 		List<Variable> pGuardVariables = new ArrayList<Variable>();
 		for (@SuppressWarnings("null")@NonNull GuardPattern pGuardPattern : guardPatterns) {
-			pGuardVariables.addAll(pGuardPattern.getVariable());
+			pGuardPattern.getPredicate();
+			for (Variable pGuardVariable : pGuardPattern.getVariable()) {
+				if (!predicatedVariables.contains(pGuardVariable)) {
+					pGuardVariables.add(pGuardVariable);
+				}
+			}
 		}
 		Collections.sort(pGuardVariables, new Comparator<NamedElement>()
 			{
@@ -170,12 +195,26 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 					return o1.getName().compareTo(o2.getName());
 				}		
 			});
-		List<CGGuardVariable> cgGuardVariables = new ArrayList<CGGuardVariable>();
+		List<CGGuardVariable> cgFreeVariables = new ArrayList<CGGuardVariable>();
+		List<CGFinalVariable> cgBoundVariables = new ArrayList<CGFinalVariable>();
 		for (@SuppressWarnings("null")@NonNull Variable pGuardVariable : pGuardVariables) {
-			CGGuardVariable cgParameter = getGuardVariable(pGuardVariable);
-			cgGuardVariables.add(cgParameter);
+			OCLExpression initExpression = pGuardVariable.getInitExpression();
+			if (initExpression == null) {
+				CGGuardVariable cgUnboundVariable = getGuardVariable(pGuardVariable);
+				cgFreeVariables.add(cgUnboundVariable);
+			}
+			else {
+				CGFinalVariable cgBoundVariable = (CGFinalVariable) getVariable(pGuardVariable);
+				CGValuedElement cgInit = doVisit(CGValuedElement.class, initExpression);
+				cgBoundVariable.setInit(cgInit);
+				JavaLocalContext localContext = globalContext.getLocalContext(cgMapping);
+				if (localContext != null) {
+// FIXME					localContext.addLocalVariable(cgBoundVariable);
+				}
+				cgBoundVariables.add(cgBoundVariable);
+			}
 		}
-		Collections.sort(cgGuardVariables, new Comparator<CGGuardVariable>()
+		Collections.sort(cgFreeVariables, new Comparator<CGGuardVariable>()
 		{
 			public int compare(CGGuardVariable o1, CGGuardVariable o2) {
 				String n1 = o1.getName();
@@ -183,8 +222,17 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 				return n1.compareTo(n2);
 			}
 		});
-		cgMapping.getGuardVariables().addAll(cgGuardVariables);
-		List<CGPredicate> cgGuardExpressions = cgMapping.getPredicates();
+		Collections.sort(cgBoundVariables, new Comparator<CGFinalVariable>()
+		{
+			public int compare(CGFinalVariable o1, CGFinalVariable o2) {
+				String n1 = o1.getName();
+				String n2 = o2.getName();
+				return n1.compareTo(n2);
+			}
+		});
+		cgMapping.getFreeVariables().addAll(cgFreeVariables);
+//		cgMappingExp.getBoundVariables().addAll(cgBoundVariables);
+		List<CGPredicate> cgGuardExpressions = cgMappingExp.getPredicates();
 		for (@SuppressWarnings("null")@NonNull GuardPattern pGuardPattern : guardPatterns) {
 			for (@SuppressWarnings("null")@NonNull Predicate pPredicate : pGuardPattern.getPredicate()) {
 				cgGuardExpressions.add(doVisit(CGPredicate.class, pPredicate));
@@ -206,14 +254,12 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 
 	public @NonNull CGGuardVariable getGuardVariable(@NonNull Variable pParameter) {
 		CGGuardVariable cgGuardVariable = (CGGuardVariable) getVariablesStack().getParameter(pParameter);
-		if (cgGuardVariable == null) {
 			cgGuardVariable = QVTiCGModelFactory.eINSTANCE.createCGGuardVariable();
 			context.setNames(cgGuardVariable, pParameter);
 			setPivot(cgGuardVariable, pParameter);
 			cgGuardVariable.setTypeId(context.getTypeId(pParameter.getTypeId()));
 			cgGuardVariable.setTypedModel(getTypedModel(pParameter));
 			addParameter(pParameter, cgGuardVariable);
-		}
 		return cgGuardVariable;
 	}
 
@@ -320,9 +366,14 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		CGMapping cgMapping = QVTiCGModelFactory.eINSTANCE.createCGMapping();
 		setPivot(cgMapping, pMapping);
 		analyzer.addMapping(pMapping, cgMapping);
-		doGuards(pMapping, cgMapping);
-		doBottoms(pMapping, cgMapping);
-		createMappingCalls(pMapping, cgMapping);
+		CGMappingExp cgMappingExp = QVTiCGModelFactory.eINSTANCE.createCGMappingExp();
+		setPivot(cgMappingExp, pMapping);
+		TypeId pivotTypeId = TypeId.BOOLEAN; //pMapping.getTypeId();
+		cgMappingExp.setTypeId(context.getTypeId(pivotTypeId));
+		cgMapping.setBody(cgMappingExp);
+		doGuards(pMapping, cgMapping, cgMappingExp);
+		doBottoms(pMapping, cgMappingExp);
+		createMappingCalls(pMapping, cgMappingExp);
 		return cgMapping;
 	}
 
@@ -358,11 +409,42 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 	}
 
 	public @Nullable CGNamedElement visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment pPropertyAssignment) {
-		return visitPropertyAssignment(pPropertyAssignment);
+//		Property pivotProperty = DomainUtil.nonNullModel(pPropertyAssignment.getTargetProperty());
+		CGMiddlePropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyAssignment();
+//		setPivot(cgPropertyAssignment, pPredicate);
+		cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, pPropertyAssignment.getSlotExpression()));
+		Property pivotProperty = pPropertyAssignment.getTargetProperty();
+		cgPropertyAssignment.setReferredProperty(pivotProperty);
+//		cgPredicate.setName(pPredicate.getName());
+		cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
+//		cgMappingCallBinding.setValueName(localnamepMappingCallBinding.getBoundVariable().getName());
+		cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, pPropertyAssignment.getValue()));
+		EStructuralFeature eStructuralFeature = (EStructuralFeature) pivotProperty.getETarget();
+		if (eStructuralFeature != null) {
+			try {
+				genModelHelper.getGetAccessor(eStructuralFeature);
+				cgPropertyAssignment.setEStructuralFeature(eStructuralFeature);
+			} catch (GenModelException e) {
+			}
+		}
+		return cgPropertyAssignment;
 	}
 
 	public @Nullable CGNamedElement visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp pPropertyCallExp) {
-		return visitPropertyCallExp(pPropertyCallExp);
+		Property pivotProperty = DomainUtil.nonNullModel(pPropertyCallExp.getReferredProperty());
+		globalContext.addToMiddleProperty(DomainUtil.nonNullModel(pivotProperty.getOpposite()));
+//		LibraryProperty libraryProperty = metaModelManager.getImplementation(pivotProperty);
+		CGMiddlePropertyCallExp cgPropertyCallExp = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyCallExp();					
+//		CGExecutorProperty cgExecutorProperty = context.getExecutorProperty(pivotProperty);
+//		cgExecutorPropertyCallExp.setExecutorProperty(cgExecutorProperty);
+//		cgPropertyCallExp = cgExecutorPropertyCallExp;
+//		cgPropertyCallExp.getDependsOn().add(cgExecutorProperty);
+		cgPropertyCallExp.setReferredProperty(pivotProperty.getOpposite());
+		setPivot(cgPropertyCallExp, pPropertyCallExp);
+		cgPropertyCallExp.setRequired(pivotProperty.isRequired());
+		CGValuedElement cgSource = doVisit(CGValuedElement.class, pPropertyCallExp.getSource());
+		cgPropertyCallExp.setSource(cgSource);
+		return cgPropertyCallExp;
 	}
 
 	@Override
@@ -426,10 +508,17 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
 //		cgMappingCallBinding.setValueName(localnamepMappingCallBinding.getBoundVariable().getName());
 		cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, pPropertyAssignment.getValue()));
+
+		CGExecutorProperty cgExecutorProperty = context.createExecutorProperty(pPropertyAssignment.getTargetProperty());
+		cgPropertyAssignment.setExecutorProperty(cgExecutorProperty);
+		
+		
 		return cgPropertyAssignment;
 	}
 
 	public @Nullable CGNamedElement visitRealizedVariable(@NonNull RealizedVariable object) {
+//		CGExecutorType cgExecutorType = context.createExecutorType(pTypeExp.getReferredType());
+//		cgTypeExp.setExecutorType(cgExecutorType);
 		return visiting(object);
 	}
 
@@ -470,5 +559,28 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 
 	public @Nullable CGNamedElement visitUnit(@NonNull Unit object) {
 		return visiting(object);
+	}
+
+	public @Nullable CGNamedElement visitVariablePredicate(@NonNull VariablePredicate pPredicate) {
+		CGVariablePredicate cgPredicate = QVTiCGModelFactory.eINSTANCE.createCGVariablePredicate();
+//		setPivot(cgPredicate, pPredicate);
+		cgPredicate.setPivot(pPredicate);
+//		TypeId pivotTypeId = pPredicate.getTypeId();
+//		cgPredicate.setTypeId(context.getTypeId(pivotTypeId));
+		Variable targetVariable = pPredicate.getTargetVariable();
+		cgPredicate.setName(targetVariable.getName());
+		cgPredicate.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
+//		cgMappingCallBinding.setValueName(localnamepMappingCallBinding.getBoundVariable().getName());
+		cgPredicate.setConditionExpression(doVisit(CGValuedElement.class, pPredicate.getConditionExpression()));
+//		analyzer.ge
+		CGVariable cgVariable = createCGVariable(targetVariable);
+//		cgGuardVariable = QVTiCGModelFactory.eINSTANCE.createCGGuardVariable();
+//		context.setNames(cgGuardVariable, pParameter);
+//		setPivot(cgGuardVariable, pParameter);
+//		cgGuardVariable.setTypeId(context.getTypeId(pParameter.getTypeId()));
+//		cgGuardVariable.setTypedModel(getTypedModel(pParameter));
+//		addParameter(pParameter, cgGuardVariable);
+		cgPredicate.setPredicateVariable(cgVariable);
+		return cgPredicate;
 	}
 }

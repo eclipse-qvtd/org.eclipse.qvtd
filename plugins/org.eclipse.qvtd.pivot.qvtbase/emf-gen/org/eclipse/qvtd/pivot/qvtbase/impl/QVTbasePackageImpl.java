@@ -364,6 +364,15 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getRule_Overridden() {
+		return (EReference)ruleEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTransformation() {
 		return transformationEClass;
 	}
@@ -512,6 +521,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEReference(ruleEClass, RULE__DOMAIN);
 		createEReference(ruleEClass, RULE__OVERRIDES);
 		createEReference(ruleEClass, RULE__TRANSFORMATION);
+		createEReference(ruleEClass, RULE__OVERRIDDEN);
 
 		transformationEClass = createEClass(TRANSFORMATION);
 		createEReference(transformationEClass, TRANSFORMATION__OWNED_TAG);
@@ -599,8 +609,9 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 		initEClass(ruleEClass, Rule.class, "Rule", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRule_Domain(), this.getDomain(), this.getDomain_Rule(), "domain", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRule_Overrides(), this.getRule(), null, "overrides", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRule_Overrides(), this.getRule(), this.getRule_Overridden(), "overrides", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRule_Transformation(), this.getTransformation(), this.getTransformation_Rule(), "transformation", null, 0, 1, Rule.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRule_Overridden(), this.getRule(), this.getRule_Overrides(), "overridden", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(transformationEClass, Transformation.class, "Transformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransformation_OwnedTag(), thePivotPackage.getAnnotation(), null, "ownedTag", null, 0, -1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -640,6 +651,12 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
 		  (getRule_Overrides(), 
+		   source, 
+		   new String[] {
+			 "body", "overriden"
+		   });		
+		addAnnotation
+		  (getRule_Overridden(), 
 		   source, 
 		   new String[] {
 			 "body", "overriden"

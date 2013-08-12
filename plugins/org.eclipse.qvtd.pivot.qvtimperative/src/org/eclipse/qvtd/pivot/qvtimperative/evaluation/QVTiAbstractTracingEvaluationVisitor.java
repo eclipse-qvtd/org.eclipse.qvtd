@@ -41,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
+import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 
 /**
  * The Class QVTiTracingEvaluationVisitor is a decorator visitor that prints
@@ -401,6 +402,16 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		return result;
 	}
 	
+
+	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {
+		Variable v = variablePredicate.getTargetVariable();
+		logger.info(getIndent() + "VisitVariablePredicate " + v
+				+ ": " + ((EvaluationVisitorImpl)delegate).safeVisit(variablePredicate.getConditionExpression()));
+		indentLevel++;
+		Object result = delegate.visitVariablePredicate(variablePredicate);
+		indentLevel--;
+		return result;
+	}
 	
 	/**
 	 * Pretty print Objects. EObjects are printed at 1 level depth (i.e. no 

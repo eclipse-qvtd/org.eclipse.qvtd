@@ -3,24 +3,18 @@
 package test.simplerdbms.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import test.simplerdbms.Column;
 import test.simplerdbms.ForeignKey;
 import test.simplerdbms.Key;
-import test.simplerdbms.Schema;
 import test.simplerdbms.SimplerdbmsPackage;
 import test.simplerdbms.Table;
 
@@ -34,7 +28,6 @@ import test.simplerdbms.Table;
  *   <li>{@link test.simplerdbms.impl.ForeignKeyImpl#getRefersTo <em>Refers To</em>}</li>
  *   <li>{@link test.simplerdbms.impl.ForeignKeyImpl#getColumn <em>Column</em>}</li>
  *   <li>{@link test.simplerdbms.impl.ForeignKeyImpl#getOwner <em>Owner</em>}</li>
- *   <li>{@link test.simplerdbms.impl.ForeignKeyImpl#getSchema <em>Schema</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,26 +53,6 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	 * @ordered
 	 */
 	protected EList<Column> column;
-
-	/**
-	 * The cached value of the '{@link #getOwner() <em>Owner</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwner()
-	 * @generated
-	 * @ordered
-	 */
-	protected Table owner;
-
-	/**
-	 * The cached value of the '{@link #getSchema() <em>Schema</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSchema()
-	 * @generated
-	 * @ordered
-	 */
-	protected Schema schema;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -156,15 +129,8 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	 * @generated
 	 */
 	public Table getOwner() {
-		if (owner != null && owner.eIsProxy()) {
-			InternalEObject oldOwner = (InternalEObject)owner;
-			owner = (Table)eResolveProxy(oldOwner);
-			if (owner != oldOwner) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SimplerdbmsPackage.FOREIGN_KEY__OWNER, oldOwner, owner));
-			}
-		}
-		return owner;
+		if (eContainerFeatureID() != SimplerdbmsPackage.FOREIGN_KEY__OWNER) return null;
+		return (Table)eInternalContainer();
 	}
 
 	/**
@@ -172,8 +138,9 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Table basicGetOwner() {
-		return owner;
+	public NotificationChain basicSetOwner(Table newOwner, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwner, SimplerdbmsPackage.FOREIGN_KEY__OWNER, msgs);
+		return msgs;
 	}
 
 	/**
@@ -182,48 +149,19 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	 * @generated
 	 */
 	public void setOwner(Table newOwner) {
-		Table oldOwner = owner;
-		owner = newOwner;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimplerdbmsPackage.FOREIGN_KEY__OWNER, oldOwner, owner));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Schema getSchema() {
-		if (schema != null && schema.eIsProxy()) {
-			InternalEObject oldSchema = (InternalEObject)schema;
-			schema = (Schema)eResolveProxy(oldSchema);
-			if (schema != oldSchema) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SimplerdbmsPackage.FOREIGN_KEY__SCHEMA, oldSchema, schema));
-			}
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != SimplerdbmsPackage.FOREIGN_KEY__OWNER && newOwner != null)) {
+			if (EcoreUtil.isAncestor(this, newOwner))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwner != null)
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, SimplerdbmsPackage.TABLE__FOREIGN_KEY, Table.class, msgs);
+			msgs = basicSetOwner(newOwner, msgs);
+			if (msgs != null) msgs.dispatch();
 		}
-		return schema;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Schema basicGetSchema() {
-		return schema;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSchema(Schema newSchema) {
-		Schema oldSchema = schema;
-		schema = newSchema;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimplerdbmsPackage.FOREIGN_KEY__SCHEMA, oldSchema, schema));
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SimplerdbmsPackage.FOREIGN_KEY__OWNER, newOwner, newOwner));
 	}
 
 	/**
@@ -237,6 +175,10 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 		switch (featureID) {
 			case SimplerdbmsPackage.FOREIGN_KEY__COLUMN:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getColumn()).basicAdd(otherEnd, msgs);
+			case SimplerdbmsPackage.FOREIGN_KEY__OWNER:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwner((Table)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -251,8 +193,24 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 		switch (featureID) {
 			case SimplerdbmsPackage.FOREIGN_KEY__COLUMN:
 				return ((InternalEList<?>)getColumn()).basicRemove(otherEnd, msgs);
+			case SimplerdbmsPackage.FOREIGN_KEY__OWNER:
+				return basicSetOwner(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case SimplerdbmsPackage.FOREIGN_KEY__OWNER:
+				return eInternalContainer().eInverseRemove(this, SimplerdbmsPackage.TABLE__FOREIGN_KEY, Table.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -269,11 +227,7 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 			case SimplerdbmsPackage.FOREIGN_KEY__COLUMN:
 				return getColumn();
 			case SimplerdbmsPackage.FOREIGN_KEY__OWNER:
-				if (resolve) return getOwner();
-				return basicGetOwner();
-			case SimplerdbmsPackage.FOREIGN_KEY__SCHEMA:
-				if (resolve) return getSchema();
-				return basicGetSchema();
+				return getOwner();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -297,9 +251,6 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 			case SimplerdbmsPackage.FOREIGN_KEY__OWNER:
 				setOwner((Table)newValue);
 				return;
-			case SimplerdbmsPackage.FOREIGN_KEY__SCHEMA:
-				setSchema((Schema)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -321,9 +272,6 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 			case SimplerdbmsPackage.FOREIGN_KEY__OWNER:
 				setOwner((Table)null);
 				return;
-			case SimplerdbmsPackage.FOREIGN_KEY__SCHEMA:
-				setSchema((Schema)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -341,9 +289,7 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 			case SimplerdbmsPackage.FOREIGN_KEY__COLUMN:
 				return column != null && !column.isEmpty();
 			case SimplerdbmsPackage.FOREIGN_KEY__OWNER:
-				return owner != null;
-			case SimplerdbmsPackage.FOREIGN_KEY__SCHEMA:
-				return schema != null;
+				return getOwner() != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -22,15 +22,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.internal.impl.LiteralExpImpl;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
-import org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -248,16 +244,5 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 				return where != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTtemplateVisitor<?>)visitor).visitTemplateExp(this);
 	}
 } //TemplateExpImpl

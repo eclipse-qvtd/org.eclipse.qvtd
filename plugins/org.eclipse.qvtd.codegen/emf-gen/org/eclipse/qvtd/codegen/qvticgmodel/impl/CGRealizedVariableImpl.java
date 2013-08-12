@@ -22,10 +22,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
@@ -38,7 +39,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariableImpl#getMapping <em>Mapping</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariableImpl#getExecutorType <em>Executor Type</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariableImpl#getMappingExp <em>Mapping Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariableImpl#getTypedModel <em>Typed Model</em>}</li>
  * </ul>
  * </p>
@@ -46,6 +48,16 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * @generated
  */
 public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealizedVariable {
+	/**
+	 * The cached value of the '{@link #getExecutorType() <em>Executor Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExecutorType()
+	 * @generated
+	 * @ordered
+	 */
+	protected CGExecutorType executorType;
+
 	/**
 	 * The cached value of the '{@link #getTypedModel() <em>Typed Model</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -80,47 +92,6 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGMapping getMapping() {
-		if (eContainerFeatureID() != QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING) return null;
-		return (CGMapping)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetMapping(CGMapping newMapping, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newMapping, QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setMapping(CGMapping newMapping) {
-		if (newMapping != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING && newMapping != null)) {
-			if (EcoreUtil.isAncestor(this, newMapping))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newMapping != null)
-				msgs = ((InternalEObject)newMapping).eInverseAdd(this, QVTiCGModelPackage.CG_MAPPING__REALIZED_VARIABLES, CGMapping.class, msgs);
-			msgs = basicSetMapping(newMapping, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING, newMapping, newMapping));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public CGTypedModel getTypedModel() {
 		return typedModel;
 	}
@@ -142,13 +113,75 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CGExecutorType getExecutorType() {
+		return executorType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExecutorType(CGExecutorType newExecutorType) {
+		CGExecutorType oldExecutorType = executorType;
+		executorType = newExecutorType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_REALIZED_VARIABLE__EXECUTOR_TYPE, oldExecutorType, executorType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGMappingExp getMappingExp() {
+		if (eContainerFeatureID() != QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING_EXP) return null;
+		return (CGMappingExp)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetMappingExp(CGMappingExp newMappingExp, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newMappingExp, QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING_EXP, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMappingExp(CGMappingExp newMappingExp) {
+		if (newMappingExp != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING_EXP && newMappingExp != null)) {
+			if (EcoreUtil.isAncestor(this, newMappingExp))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newMappingExp != null)
+				msgs = ((InternalEObject)newMappingExp).eInverseAdd(this, QVTiCGModelPackage.CG_MAPPING_EXP__REALIZED_VARIABLES, CGMappingExp.class, msgs);
+			msgs = basicSetMappingExp(newMappingExp, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING_EXP, newMappingExp, newMappingExp));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING:
+			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING_EXP:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetMapping((CGMapping)otherEnd, msgs);
+				return basicSetMappingExp((CGMappingExp)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -161,8 +194,8 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING:
-				return basicSetMapping(null, msgs);
+			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING_EXP:
+				return basicSetMappingExp(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -175,8 +208,8 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING:
-				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_MAPPING__REALIZED_VARIABLES, CGMapping.class, msgs);
+			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING_EXP:
+				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_MAPPING_EXP__REALIZED_VARIABLES, CGMappingExp.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -189,8 +222,10 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING:
-				return getMapping();
+			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__EXECUTOR_TYPE:
+				return getExecutorType();
+			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING_EXP:
+				return getMappingExp();
 			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__TYPED_MODEL:
 				return getTypedModel();
 		}
@@ -205,8 +240,11 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING:
-				setMapping((CGMapping)newValue);
+			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__EXECUTOR_TYPE:
+				setExecutorType((CGExecutorType)newValue);
+				return;
+			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING_EXP:
+				setMappingExp((CGMappingExp)newValue);
 				return;
 			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__TYPED_MODEL:
 				setTypedModel((CGTypedModel)newValue);
@@ -223,8 +261,11 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING:
-				setMapping((CGMapping)null);
+			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__EXECUTOR_TYPE:
+				setExecutorType((CGExecutorType)null);
+				return;
+			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING_EXP:
+				setMappingExp((CGMappingExp)null);
 				return;
 			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__TYPED_MODEL:
 				setTypedModel((CGTypedModel)null);
@@ -241,8 +282,10 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING:
-				return getMapping() != null;
+			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__EXECUTOR_TYPE:
+				return executorType != null;
+			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING_EXP:
+				return getMappingExp() != null;
 			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__TYPED_MODEL:
 				return typedModel != null;
 		}
@@ -250,8 +293,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -261,22 +303,39 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * {@inheritDoc}
+	 * @generated
 	 */
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
- 		return this;
+		return this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean isBoxed() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isGlobal() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean isUnboxed() {
 		return true;
 	}
+
 } //CGRealizedVariableImpl

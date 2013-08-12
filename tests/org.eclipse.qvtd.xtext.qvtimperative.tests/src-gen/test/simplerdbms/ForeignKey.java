@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link test.simplerdbms.ForeignKey#getRefersTo <em>Refers To</em>}</li>
  *   <li>{@link test.simplerdbms.ForeignKey#getColumn <em>Column</em>}</li>
  *   <li>{@link test.simplerdbms.ForeignKey#getOwner <em>Owner</em>}</li>
- *   <li>{@link test.simplerdbms.ForeignKey#getSchema <em>Schema</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,55 +68,31 @@ public interface ForeignKey extends RModelElement {
 	EList<Column> getColumn();
 
 	/**
-	 * Returns the value of the '<em><b>Owner</b></em>' reference.
+	 * Returns the value of the '<em><b>Owner</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link test.simplerdbms.Table#getForeignKey <em>Foreign Key</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owner</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owner</em>' reference.
+	 * @return the value of the '<em>Owner</em>' container reference.
 	 * @see #setOwner(Table)
 	 * @see test.simplerdbms.SimplerdbmsPackage#getForeignKey_Owner()
-	 * @model required="true"
+	 * @see test.simplerdbms.Table#getForeignKey
+	 * @model opposite="foreignKey" required="true" transient="false"
 	 * @generated
 	 */
 	Table getOwner();
 
 	/**
-	 * Sets the value of the '{@link test.simplerdbms.ForeignKey#getOwner <em>Owner</em>}' reference.
+	 * Sets the value of the '{@link test.simplerdbms.ForeignKey#getOwner <em>Owner</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owner</em>' reference.
+	 * @param value the new value of the '<em>Owner</em>' container reference.
 	 * @see #getOwner()
 	 * @generated
 	 */
 	void setOwner(Table value);
-
-	/**
-	 * Returns the value of the '<em><b>Schema</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Schema</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Schema</em>' reference.
-	 * @see #setSchema(Schema)
-	 * @see test.simplerdbms.SimplerdbmsPackage#getForeignKey_Schema()
-	 * @model required="true"
-	 * @generated
-	 */
-	Schema getSchema();
-
-	/**
-	 * Sets the value of the '{@link test.simplerdbms.ForeignKey#getSchema <em>Schema</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Schema</em>' reference.
-	 * @see #getSchema()
-	 * @generated
-	 */
-	void setSchema(Schema value);
 
 } // ForeignKey

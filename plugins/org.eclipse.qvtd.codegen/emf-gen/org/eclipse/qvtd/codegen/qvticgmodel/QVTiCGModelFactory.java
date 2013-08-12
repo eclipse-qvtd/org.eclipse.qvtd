@@ -32,6 +32,7 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@NonNull QVTiCGModelFactory eINSTANCE = org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelFactoryImpl.init();
 
 	/**
@@ -125,6 +126,15 @@ public interface QVTiCGModelFactory extends EFactory {
 	@NonNull CGTypedModel createCGTypedModel();
 
 	/**
+	 * Returns a new object of class '<em>CG Variable Predicate</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Variable Predicate</em>'.
+	 * @generated
+	 */
+	CGVariablePredicate createCGVariablePredicate();
+
+	/**
 	 * Returns a new object of class '<em>CG Mapping Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -141,6 +151,33 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGMappingCallBinding createCGMappingCallBinding();
+
+	/**
+	 * Returns a new object of class '<em>CG Mapping Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Mapping Exp</em>'.
+	 * @generated
+	 */
+	@NonNull CGMappingExp createCGMappingExp();
+
+	/**
+	 * Returns a new object of class '<em>CG Middle Property Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Middle Property Assignment</em>'.
+	 * @generated
+	 */
+	@NonNull CGMiddlePropertyAssignment createCGMiddlePropertyAssignment();
+
+	/**
+	 * Returns a new object of class '<em>CG Middle Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Middle Property Call Exp</em>'.
+	 * @generated
+	 */
+	@NonNull CGMiddlePropertyCallExp createCGMiddlePropertyCallExp();
 
 	/**
 	 * Returns a new object of class '<em>CG Predicate</em>'.

@@ -25,17 +25,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,6 +44,7 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getDomain <em>Domain</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getOverrides <em>Overrides</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getOverridden <em>Overridden</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,6 +70,16 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * @ordered
 	 */
 	protected Rule overrides;
+
+	/**
+	 * The cached value of the '{@link #getOverridden() <em>Overridden</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Rule> overridden;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -135,11 +143,33 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOverrides(Rule newOverrides) {
+	public NotificationChain basicSetOverrides(Rule newOverrides, NotificationChain msgs) {
 		Rule oldOverrides = overrides;
 		overrides = newOverrides;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.RULE__OVERRIDES, oldOverrides, overrides));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTbasePackage.RULE__OVERRIDES, oldOverrides, newOverrides);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOverrides(Rule newOverrides) {
+		if (newOverrides != overrides) {
+			NotificationChain msgs = null;
+			if (overrides != null)
+				msgs = ((InternalEObject)overrides).eInverseRemove(this, QVTbasePackage.RULE__OVERRIDDEN, Rule.class, msgs);
+			if (newOverrides != null)
+				msgs = ((InternalEObject)newOverrides).eInverseAdd(this, QVTbasePackage.RULE__OVERRIDDEN, Rule.class, msgs);
+			msgs = basicSetOverrides(newOverrides, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.RULE__OVERRIDES, newOverrides, newOverrides));
 	}
 
 	/**
@@ -188,16 +218,34 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Rule> getOverridden() {
+		if (overridden == null) {
+			overridden = new EObjectWithInverseResolvingEList<Rule>(Rule.class, this, QVTbasePackage.RULE__OVERRIDDEN, QVTbasePackage.RULE__OVERRIDES);
+		}
+		return overridden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTbasePackage.RULE__DOMAIN:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getDomain()).basicAdd(otherEnd, msgs);
+			case QVTbasePackage.RULE__OVERRIDES:
+				if (overrides != null)
+					msgs = ((InternalEObject)overrides).eInverseRemove(this, QVTbasePackage.RULE__OVERRIDDEN, Rule.class, msgs);
+				return basicSetOverrides((Rule)otherEnd, msgs);
 			case QVTbasePackage.RULE__TRANSFORMATION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetTransformation((Transformation)otherEnd, msgs);
+			case QVTbasePackage.RULE__OVERRIDDEN:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOverridden()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -212,8 +260,12 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		switch (featureID) {
 			case QVTbasePackage.RULE__DOMAIN:
 				return ((InternalEList<?>)getDomain()).basicRemove(otherEnd, msgs);
+			case QVTbasePackage.RULE__OVERRIDES:
+				return basicSetOverrides(null, msgs);
 			case QVTbasePackage.RULE__TRANSFORMATION:
 				return basicSetTransformation(null, msgs);
+			case QVTbasePackage.RULE__OVERRIDDEN:
+				return ((InternalEList<?>)getOverridden()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -247,6 +299,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				return basicGetOverrides();
 			case QVTbasePackage.RULE__TRANSFORMATION:
 				return getTransformation();
+			case QVTbasePackage.RULE__OVERRIDDEN:
+				return getOverridden();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -270,6 +324,10 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			case QVTbasePackage.RULE__TRANSFORMATION:
 				setTransformation((Transformation)newValue);
 				return;
+			case QVTbasePackage.RULE__OVERRIDDEN:
+				getOverridden().clear();
+				getOverridden().addAll((Collection<? extends Rule>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -291,6 +349,9 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			case QVTbasePackage.RULE__TRANSFORMATION:
 				setTransformation((Transformation)null);
 				return;
+			case QVTbasePackage.RULE__OVERRIDDEN:
+				getOverridden().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -309,18 +370,9 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				return overrides != null;
 			case QVTbasePackage.RULE__TRANSFORMATION:
 				return getTransformation() != null;
+			case QVTbasePackage.RULE__OVERRIDDEN:
+				return overridden != null && !overridden.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTbaseVisitor<?>)visitor).visitRule(this);
 	}
 } //RuleImpl

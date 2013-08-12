@@ -12,7 +12,7 @@
  * 
  * </copyright>
  */
-package org.eclipse.qvtd.codegen.qvti;
+package org.eclipse.qvtd.codegen.qvti.java;
 /**
  * <copyright>
  * 
@@ -40,12 +40,20 @@ import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
+import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
-import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalysisVisitor;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiBoxingAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiCG2StringVisitor;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiDependencyVisitor;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiReferencesVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 /**
@@ -83,13 +91,8 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	@Override
-	public DependencyVisitor createDependencyVisitor() {
-		return new QVTiDependencyVisitor(cgAnalyzer, getGlobalContext());
-	}
-
-	@Override
-	public DependencyVisitor createDependencyVisitor(@NonNull JavaLocalContext localContext) {
-		return new QVTiDependencyVisitor((QVTiLocalContext) localContext);
+	public @NonNull DependencyVisitor createDependencyVisitor() {
+		return new QVTiDependencyVisitor(cgAnalyzer, getGlobalContext(), getGlobalPlace());
 	}
 
 	@Override
@@ -105,6 +108,11 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	@Override
 	protected @NonNull QVTiCodeGenOptions createOptions() {
 		return new QVTiCodeGenOptions();
+	}
+
+	@Override
+	public @NonNull ReferencesVisitor createReferencesVisitor() {
+		return QVTiReferencesVisitor.INSTANCE;
 	}
 
 	public @NonNull String generateClassFile() {

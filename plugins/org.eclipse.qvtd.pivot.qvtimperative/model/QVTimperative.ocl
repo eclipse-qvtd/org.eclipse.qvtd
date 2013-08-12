@@ -5,7 +5,7 @@ import 'http://www.eclipse.org/qvt/0.9/QVTbase'
 
 package ocl
 context Element
-def: joinNames(names : Set(String)) : String = '{' + names->sortedBy(n | n)->iterate(n; s : String = '' | if s = '' then n else s + ' ' + n endif) + '}'
+def: joinNames(names : Set(String)) : String = '{' + names->sortedBy(n | n)->iterate(n; s : String = '' | if s = '' then n else s + ';' + n endif) + '}'
 
 endpackage
 
@@ -17,9 +17,10 @@ def: allGuardPatterns : Set(qvtcorebase::GuardPattern) = allAreas.guardPattern->
 def: isToMiddle : Boolean = not domain->exists(isEnforceable) 
 def: isFromMiddle : Boolean = domain->forAll(isEnforceable) 
 def: guardVariables : Set(ocl::Variable) = allGuardPatterns.variable->asSet()
+def: boundGuardVariables : Set(ocl::Variable) = allGuardPatterns.predicate->selectByKind(VariablePredicate).targetVariable->asSet()
 /* Mapping guard variables that are assigned  */
-def: boundGuardVariables : Set(ocl::Variable) = guardVariables->select(initExpression <> null)
-def: unboundGuardVariables : Set(ocl::Variable) = guardVariables->select(initExpression = null)
+--def: boundGuardVariables : Set(ocl::Variable) = guardVariables->select(initExpression <> null)
+def: unboundGuardVariables : Set(ocl::Variable) = guardVariables - boundGuardVariables
 -- def: noInheritance : Boolean = self.refinement->isEmpty()
 -- def: noParents : Boolean = self.specification->isEmpty()
 /* Mappings are either L to M or M to R, but not both */
@@ -35,7 +36,7 @@ inv UniqueCallBindings: binding->isUnique(boundVariable)
 
 context MappingCallBinding
 inv CompatibleScalarBinding: if not isLoop then value.type.conformsTo(boundVariable.type) or boundVariable.type.conformsTo(value.type) else true endif
---inv CompatibleLoopBinding: isLoop implies value.type.oclIsKindOf(Collection) and let eleType : ocl::Type = value.type.oclAsType(Collection).elementType in eleType.conformsTo(boundVariable.type) or boundVariable.type.conformsTo(eleType)
+inv CompatibleLoopBinding: isLoop implies value.type.oclIsKindOf(ocl::CollectionType) --and let eleType : ocl::Type = value.type.oclAsType(ocl::CollectionType).elementType in true --eleType.conformsTo(boundVariable.type) or boundVariable.type.conformsTo(eleType)
 
 context MiddlePropertyAssignment
 inv IsMiddleProperty: true --TODO
@@ -52,9 +53,17 @@ def: mapping : qvtimperative::Mapping = if oclIsKindOf(qvtimperative::Mapping) t
 def: isSource : Boolean = mapping.isToMiddle and oclIsKindOf(CoreDomain)
 def: isTarget : Boolean = mapping.isFromMiddle and oclIsKindOf(CoreDomain)
 
+--context BottomPattern
+--inv UniquePropertyAssignments: assignment->select(PropertyAssignment)->isUnique(a : PropertyAssignment | a.targetProperty)	-- FIXME redundant "a : PropertyAssignment | a."
+
 context CoreDomain
 def: mapping : qvtimperative::Mapping = rule.oclAsType(qvtimperative::Mapping)
 inv NoCheckable: not isCheckable
+
+context PropertyAssignment
+inv IsNotReadOnly: not targetProperty.isReadOnly
+inv PropertyOfSlot(slotExpression.type.name + ' must conform to ' + targetProperty.owningType.name): slotExpression.type.conformsTo(targetProperty.owningType)
+inv CompatibleType(value.type.name + ' must conform to ' + targetProperty.type.name): value.type.conformsTo(targetProperty.type)
 
 context RealizedVariable
 def: isBottom : Boolean = oclContainer().oclIsKindOf(BottomPattern)
@@ -71,5 +80,6 @@ inv IsEnforced('RealizedVariable ' + name + ' must be in an enforceable Area'): 
 
 context VariableAssignment
 inv NoVariableAssignmentsInSourceDomain: bottomPattern.area.isTarget
+inv CompatibleType: value.type.conformsTo(targetVariable.type)
 
 endpackage

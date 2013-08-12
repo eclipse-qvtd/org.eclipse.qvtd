@@ -29,11 +29,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 
@@ -50,7 +54,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static @NonNull QVTiCGModelFactory init() {
+	public static QVTiCGModelFactory init() {
 		try {
 			QVTiCGModelFactory theQVTiCGModelFactory = (QVTiCGModelFactory)EPackage.Registry.INSTANCE.getEFactory(QVTiCGModelPackage.eNS_URI);
 			if (theQVTiCGModelFactory != null) {
@@ -90,11 +94,15 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 			case QVTiCGModelPackage.CG_MAPPING: return createCGMapping();
 			case QVTiCGModelPackage.CG_MAPPING_CALL: return createCGMappingCall();
 			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING: return createCGMappingCallBinding();
+			case QVTiCGModelPackage.CG_MAPPING_EXP: return createCGMappingExp();
+			case QVTiCGModelPackage.CG_MIDDLE_PROPERTY_ASSIGNMENT: return createCGMiddlePropertyAssignment();
+			case QVTiCGModelPackage.CG_MIDDLE_PROPERTY_CALL_EXP: return createCGMiddlePropertyCallExp();
 			case QVTiCGModelPackage.CG_PREDICATE: return createCGPredicate();
 			case QVTiCGModelPackage.CG_PROPERTY_ASSIGNMENT: return createCGPropertyAssignment();
 			case QVTiCGModelPackage.CG_REALIZED_VARIABLE: return createCGRealizedVariable();
 			case QVTiCGModelPackage.CG_TRANSFORMATION: return createCGTransformation();
 			case QVTiCGModelPackage.CG_TYPED_MODEL: return createCGTypedModel();
+			case QVTiCGModelPackage.CG_VARIABLE_PREDICATE: return createCGVariablePredicate();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -165,39 +173,9 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public @NonNull CGPropertyAssignment createCGPropertyAssignment() {
-		CGPropertyAssignmentImpl cgPropertyAssignment = new CGPropertyAssignmentImpl();
-		return cgPropertyAssignment;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public @NonNull CGMapping createCGMapping() {
 		CGMappingImpl cgMapping = new CGMappingImpl();
 		return cgMapping;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public @NonNull CGTransformation createCGTransformation() {
-		CGTransformationImpl cgTransformation = new CGTransformationImpl();
-		return cgTransformation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public @NonNull CGTypedModel createCGTypedModel() {
-		CGTypedModelImpl cgTypedModel = new CGTypedModelImpl();
-		return cgTypedModel;
 	}
 
 	/**
@@ -225,6 +203,36 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public @NonNull CGMappingExp createCGMappingExp() {
+		CGMappingExpImpl cgMappingExp = new CGMappingExpImpl();
+		return cgMappingExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public @NonNull CGMiddlePropertyAssignment createCGMiddlePropertyAssignment() {
+		CGMiddlePropertyAssignmentImpl cgMiddlePropertyAssignment = new CGMiddlePropertyAssignmentImpl();
+		return cgMiddlePropertyAssignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public @NonNull CGMiddlePropertyCallExp createCGMiddlePropertyCallExp() {
+		CGMiddlePropertyCallExpImpl cgMiddlePropertyCallExp = new CGMiddlePropertyCallExpImpl();
+		return cgMiddlePropertyCallExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public @NonNull CGPredicate createCGPredicate() {
 		CGPredicateImpl cgPredicate = new CGPredicateImpl();
 		return cgPredicate;
@@ -235,9 +243,49 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public @NonNull CGPropertyAssignment createCGPropertyAssignment() {
+		CGPropertyAssignmentImpl cgPropertyAssignment = new CGPropertyAssignmentImpl();
+		return cgPropertyAssignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public @NonNull CGRealizedVariable createCGRealizedVariable() {
 		CGRealizedVariableImpl cgRealizedVariable = new CGRealizedVariableImpl();
 		return cgRealizedVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public @NonNull CGTransformation createCGTransformation() {
+		CGTransformationImpl cgTransformation = new CGTransformationImpl();
+		return cgTransformation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public @NonNull CGTypedModel createCGTypedModel() {
+		CGTypedModelImpl cgTypedModel = new CGTypedModelImpl();
+		return cgTypedModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGVariablePredicate createCGVariablePredicate() {
+		CGVariablePredicateImpl cgVariablePredicate = new CGVariablePredicateImpl();
+		return cgVariablePredicate;
 	}
 
 	/**
@@ -257,8 +305,8 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * @generated
 	 */
 	@Deprecated
-	public static @NonNull QVTiCGModelPackage getPackage() {
+	public static QVTiCGModelPackage getPackage() {
 		return QVTiCGModelPackage.eINSTANCE;
 	}
 
-} //QVTiCGmodelFactoryImpl
+} //QVTiCGModelFactoryImpl

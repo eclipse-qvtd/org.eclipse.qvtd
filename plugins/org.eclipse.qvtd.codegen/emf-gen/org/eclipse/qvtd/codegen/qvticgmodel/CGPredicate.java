@@ -24,8 +24,9 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMapping <em>Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getConditionExpression <em>Condition Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMappingExp <em>Mapping Exp</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getThenExpression <em>Then Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -34,34 +35,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * @generated
  */
 public interface CGPredicate extends CGValuedElement {
-	/**
-	 * Returns the value of the '<em><b>Mapping</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getPredicates <em>Predicates</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Mapping</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping</em>' container reference.
-	 * @see #setMapping(CGMapping)
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPredicate_Mapping()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getPredicates
-	 * @model opposite="predicates" resolveProxies="false" required="true" transient="false"
-	 * @generated
-	 */
-	CGMapping getMapping();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMapping <em>Mapping</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mapping</em>' container reference.
-	 * @see #getMapping()
-	 * @generated
-	 */
-	void setMapping(CGMapping value);
-
 	/**
 	 * Returns the value of the '<em><b>Condition Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -87,5 +60,59 @@ public interface CGPredicate extends CGValuedElement {
 	 * @generated
 	 */
 	void setConditionExpression(CGValuedElement value);
+
+	/**
+	 * Returns the value of the '<em><b>Mapping Exp</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getPredicates <em>Predicates</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Mapping Exp</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Mapping Exp</em>' container reference.
+	 * @see #setMappingExp(CGMappingExp)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPredicate_MappingExp()
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getPredicates
+	 * @model opposite="predicates" resolveProxies="false" required="true" transient="false"
+	 * @generated
+	 */
+	CGMappingExp getMappingExp();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMappingExp <em>Mapping Exp</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Mapping Exp</em>' container reference.
+	 * @see #getMappingExp()
+	 * @generated
+	 */
+	void setMappingExp(CGMappingExp value);
+
+	/**
+	 * Returns the value of the '<em><b>Then Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Then Expression</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Then Expression</em>' containment reference.
+	 * @see #setThenExpression(CGValuedElement)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPredicate_ThenExpression()
+	 * @model containment="true"
+	 * @generated
+	 */
+	CGValuedElement getThenExpression();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getThenExpression <em>Then Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Then Expression</em>' containment reference.
+	 * @see #getThenExpression()
+	 * @generated
+	 */
+	void setThenExpression(CGValuedElement value);
 
 } // CGPredicate

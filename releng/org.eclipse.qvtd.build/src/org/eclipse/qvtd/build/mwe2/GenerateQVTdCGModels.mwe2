@@ -18,6 +18,7 @@
  */
 module GenerateQVTdCGModels
 
+import org.eclipse.qvtd.build.utilities.*
 import org.eclipse.ocl.examples.build.utilities.*
 import org.eclipse.ocl.examples.build.xtend.*
 import org.eclipse.emf.mwe.utils.*
@@ -36,6 +37,7 @@ Workflow {
     }
     bean = GenModelSetup { resourceSet = resourceSet }
     bean = UMLGenModelSetup { resourceSet = resourceSet }
+    bean = QVTdGenModelSetup {}
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.codegen/model/qvticgmodel.genmodel" 	
     }

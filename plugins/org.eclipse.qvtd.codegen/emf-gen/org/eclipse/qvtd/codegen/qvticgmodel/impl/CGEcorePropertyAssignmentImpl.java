@@ -148,8 +148,7 @@ public class CGEcorePropertyAssignmentImpl extends CGPropertyAssignmentImpl impl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -157,4 +156,5 @@ public class CGEcorePropertyAssignmentImpl extends CGPropertyAssignmentImpl impl
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGEcorePropertyAssignment(this);
 	}
+
 } //CGEcorePropertyAssignmentImpl
