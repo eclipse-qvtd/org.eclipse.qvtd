@@ -34,7 +34,6 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
@@ -65,11 +64,6 @@ public class QVTiGlobalContext extends JavaGlobalContext
 		if (!toMiddleProperties.containsKey(pivotProperty)) {
 			toMiddleProperties.put(pivotProperty, nameManager.getGlobalSymbolName(null, "OPPOSITE_OF_" + pivotProperty.getOwningType().getName() + "_" + pivotProperty.getName()));
 		}
-	}
-
-	@Override
-	public @NonNull QVTiLocalContext createNestedContext(@NonNull CGElement cgScope) {
-		return new QVTiLocalContext(this, cgScope);
 	}
 
 	public @NonNull CGValuedElement getEvaluatorParameter() {

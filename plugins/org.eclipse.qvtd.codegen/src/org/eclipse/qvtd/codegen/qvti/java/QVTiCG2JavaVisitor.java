@@ -271,10 +271,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		return (QVTiGlobalContext) globalContext;
 	}
 
-	protected @Nullable QVTiLocalContext getLocalContext() {
-		return (QVTiLocalContext) localContext;
-	}
-
 	public @Nullable Object visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment cgPropertyAssignment) {
 //		Property pivotProperty = cgPropertyCallExp.getReferredProperty();
 //		CGTypeId cgTypeId = analyzer.getTypeId(pivotProperty.getOwningType().getTypeId());
@@ -550,12 +546,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 					pivotTypeId = ((CollectionTypeId)pivotTypeId).getElementTypeId();
 				}
 				TypeDescriptor argumentTypeDescriptor = context.getTypeDescriptor(cgMappingCallBinding);
-				TypeDescriptor iteratorTypeDescriptor = context.getTypeDescriptor(DomainUtil.nonNullState(pivotTypeId), true);
-//				if (!argumentTypeDescriptor.isAssignableFrom(iteratorTypeDescriptor)) {
-					js.append("(");
-					js.appendClassReference(argumentTypeDescriptor);
-					js.append(")");
-//				}
+				js.append("(");
+				js.appendClassReference(argumentTypeDescriptor);
+				js.append(")");
 				js.appendValueName(cgMappingCallBinding);
 			}
 			else {
@@ -670,7 +663,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 	}
 
 	public @Nullable Object visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
-		Property pReferredProperty = DomainUtil.nonNullModel(cgPropertyAssignment.getReferredProperty());
 		CGExecutorProperty cgExecutorProperty = cgPropertyAssignment.getExecutorProperty();
 		CGValuedElement slotValue = cgPropertyAssignment.getSlotValue();
 		CGValuedElement initValue = cgPropertyAssignment.getInitValue();
@@ -748,28 +740,32 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 	}
 
 	public @Nullable Object visitCGVariablePredicate(@NonNull CGVariablePredicate cgVariablePredicate) {
-		CGValuedElement cgConditionExpression = cgVariablePredicate.getConditionExpression();
-		CGVariable cgPredicateVariable = cgVariablePredicate.getPredicateVariable();
+		CGValuedElement cgConditionExpression = DomainUtil.nonNullState(cgVariablePredicate.getConditionExpression());
+		CGVariable cgPredicateVariable = DomainUtil.nonNullState(cgVariablePredicate.getPredicateVariable());
 		TypeDescriptor sourceTypeDescriptor = context.getTypeDescriptor(cgConditionExpression);
 		TypeDescriptor targetTypeDescriptor = context.getTypeDescriptor(cgPredicateVariable);
-		js.append("/* Start of CGVariablePredicate */\n");
-		if (cgConditionExpression != null) {
-			js.appendLocalStatements(cgConditionExpression);
+		js.appendLocalStatements(cgConditionExpression);
+		if (targetTypeDescriptor.isAssignableFrom(sourceTypeDescriptor)) {
+			js.appendDeclaration(cgPredicateVariable);
+			js.append(" = ");
+			js.appendReferenceTo(cgConditionExpression);
+			js.append(";\n");
 		}
-		js.append("if (!(");
-		js.appendValueName(cgConditionExpression);
-		js.append(" instanceof ");
-		js.appendClassReference(targetTypeDescriptor);
-		js.append(")) {\n");
-		js.pushIndentation(null);
-		js.append("return false;\n");
-		js.popIndentation();
-		js.append("}\n");
-		js.appendDeclaration(cgPredicateVariable);
-		js.append(" = ");
-		js.appendReferenceTo(targetTypeDescriptor, cgConditionExpression);
-		js.append(";\n");
-		js.append("/* End of CGVariablePredicate */\n");
+		else {
+			js.append("if (!(");
+			js.appendValueName(cgConditionExpression);
+			js.append(" instanceof ");
+			js.appendClassReference(targetTypeDescriptor);
+			js.append(")) {\n");
+			js.pushIndentation(null);
+			js.append("return false;\n");
+			js.popIndentation();
+			js.append("}\n");
+			js.appendDeclaration(cgPredicateVariable);
+			js.append(" = ");
+			js.appendReferenceTo(targetTypeDescriptor, cgConditionExpression);
+			js.append(";\n");
+		}
 		cgVariablePredicate.getThenExpression().accept(this);
 		return null;
 	}
