@@ -34,20 +34,18 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaGlobalContext;
+import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.examples.pivot.Property;
 
 /**
- * A JUnitGlobalContext maintains the Java-specific global context for generation of code.
+ * A QVTiGlobalContext maintains the Java-specific global context for generation of QVTi code.
  */
 public class QVTiGlobalContext extends JavaGlobalContext
 {
-	private /*@LazyNonNull*/ CGValuedElement evaluatorParameter = null;
-	private /*@LazyNonNull*/ CGValuedElement idResolver = null;
 	private /*@LazyNonNull*/ Map<Property, String> toMiddleProperties = null;
 
 	public QVTiGlobalContext(@NonNull JavaCodeGenerator codeGenerator) {
@@ -65,29 +63,12 @@ public class QVTiGlobalContext extends JavaGlobalContext
 			toMiddleProperties.put(pivotProperty, nameManager.getGlobalSymbolName(null, "OPPOSITE_OF_" + pivotProperty.getOwningType().getName() + "_" + pivotProperty.getName()));
 		}
 	}
+	
+	@Override
+	protected @NonNull JavaLocalContext createNestedContext(@NonNull CGElement cgScope) {
+		return new QVTiLocalContext(this, cgScope);
+	}
 
-	public @NonNull CGValuedElement getEvaluatorParameter() {
-		CGValuedElement evaluatorParameter2 = evaluatorParameter;
-		if (evaluatorParameter2 == null) {
-			evaluatorParameter = evaluatorParameter2 = CGModelFactory.eINSTANCE.createCGParameter();
-			evaluatorParameter2.setName(JavaConstants.EVALUATOR_NAME);
-			evaluatorParameter2.setValueName(JavaConstants.EVALUATOR_NAME);
-			evaluatorParameter2.setTypeId(analyzer.getTypeId(JavaConstants.EVALUATOR_TYPE_ID));
-		}
-		return evaluatorParameter2;
-	}
-	
-	public @NonNull CGValuedElement getIdResolverVariable() {
-		CGValuedElement idResolver2 = idResolver;
-		if (idResolver2 == null) {
-			idResolver = idResolver2 = CGModelFactory.eINSTANCE.createCGParameter();
-			idResolver2.setName(JavaConstants.ID_RESOLVER_NAME);
-			idResolver2.setValueName(JavaConstants.ID_RESOLVER_NAME);
-			idResolver2.setTypeId(analyzer.getTypeId(JavaConstants.ID_RESOLVER_TYPE_ID));
-		}
-		return idResolver2;
-	}
-	
 	public @Nullable Map<Property, String> getToMiddleProperties() {
 		return toMiddleProperties;
 	}

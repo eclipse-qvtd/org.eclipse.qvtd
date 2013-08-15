@@ -483,11 +483,11 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 	}
 
 	public @Nullable CGNamedElement visitPropertyAssignment(@NonNull PropertyAssignment pPropertyAssignment) {
-		Property pivotProperty = DomainUtil.nonNullModel(pPropertyAssignment.getTargetProperty());
-		LibraryProperty libraryProperty = metaModelManager.getImplementation(pivotProperty);
+		Property asTargetProperty = DomainUtil.nonNullModel(pPropertyAssignment.getTargetProperty());
+		LibraryProperty libraryProperty = metaModelManager.getImplementation(asTargetProperty);
 		CGPropertyAssignment cgPropertyAssignment = null;
 		if (isEcoreProperty(libraryProperty)) {
-			EStructuralFeature eStructuralFeature = (EStructuralFeature) pivotProperty.getETarget();
+			EStructuralFeature eStructuralFeature = (EStructuralFeature) asTargetProperty.getETarget();
 			if (eStructuralFeature != null) {
 				try {
 					genModelHelper.getGetAccessor(eStructuralFeature);
@@ -503,13 +503,13 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		}
 //		setPivot(cgPropertyAssignment, pPredicate);
 		cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, pPropertyAssignment.getSlotExpression()));
-		cgPropertyAssignment.setReferredProperty(pPropertyAssignment.getTargetProperty());
+		cgPropertyAssignment.setReferredProperty(asTargetProperty);
 //		cgPredicate.setName(pPredicate.getName());
 		cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
 //		cgMappingCallBinding.setValueName(localnamepMappingCallBinding.getBoundVariable().getName());
 		cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, pPropertyAssignment.getValue()));
 
-		CGExecutorProperty cgExecutorProperty = context.createExecutorProperty(pPropertyAssignment.getTargetProperty());
+		CGExecutorProperty cgExecutorProperty = context.createExecutorProperty(asTargetProperty);
 		cgPropertyAssignment.setExecutorProperty(cgExecutorProperty);
 		
 		
@@ -571,9 +571,13 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		cgPredicate.setName(targetVariable.getName());
 		cgPredicate.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
 //		cgMappingCallBinding.setValueName(localnamepMappingCallBinding.getBoundVariable().getName());
-		cgPredicate.setConditionExpression(doVisit(CGValuedElement.class, pPredicate.getConditionExpression()));
+		OCLExpression conditionExpression = pPredicate.getConditionExpression();
+		cgPredicate.setConditionExpression(doVisit(CGValuedElement.class, conditionExpression));
 //		analyzer.ge
 		CGVariable cgVariable = createCGVariable(targetVariable);
+		if (conditionExpression.isRequired()) {
+			cgVariable.setNonNull();
+		}
 //		cgGuardVariable = QVTiCGModelFactory.eINSTANCE.createCGGuardVariable();
 //		context.setNames(cgGuardVariable, pParameter);
 //		setPivot(cgGuardVariable, pParameter);

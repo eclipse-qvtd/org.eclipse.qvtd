@@ -14,7 +14,6 @@
  */
 package org.eclipse.qvtd.codegen.qvti.java;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +38,7 @@ import org.eclipse.ocl.examples.codegen.cse.CommonSubexpressionEliminator;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
+import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.examples.domain.evaluation.AbstractTransformation;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -146,7 +146,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 	}
 
 	protected void doConstructor(@NonNull CGTransformation cgTransformation) {
-		String evaluatorName = ((QVTiGlobalContext)globalContext).getEvaluatorParameter().getName();
+//		String evaluatorName = ((QVTiGlobalContext)globalContext).getEvaluatorParameter().getName();
+		String evaluatorName = JavaConstants.EVALUATOR_NAME;
 		String className = cgTransformation.getName();
 		//
 		js.append("public " + className + "(final ");
@@ -287,15 +288,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		//
 		if (eStructuralFeature.isMany()) {
 			String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
-			TypeId elementTypeId = ((CollectionTypeId)cgPropertyAssignment.getReferredProperty().getTypeId()).getElementTypeId();
-			TypeDescriptor typeDescriptor = context.getTypeDescriptor(elementTypeId, false);
 			//
 			js.appendValueName(cgSlot);
 			js.append(".");
 			js.append(getAccessor);
-			js.append("().addAll((");
-			js.appendClassReference(Collection.class, true, typeDescriptor);
-			js.append(")");
+			js.append("().addAll(");
 			js.appendValueName(cgInit);
 			js.append(");\n");
 		}
