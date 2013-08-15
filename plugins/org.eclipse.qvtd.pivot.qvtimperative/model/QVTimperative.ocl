@@ -1,6 +1,6 @@
-import 'http://www.eclipse.org/qvt/0.9/QVTimperative'
-import 'http://www.eclipse.org/qvt/0.9/QVTcoreBase'
-import 'http://www.eclipse.org/qvt/0.9/QVTbase'
+import 'platform:/resource/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore'
+import 'platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore'
+import 'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'
 --import 'http://www.eclipse.org/ocl/3.1.0/Pivot'
 
 package ocl
