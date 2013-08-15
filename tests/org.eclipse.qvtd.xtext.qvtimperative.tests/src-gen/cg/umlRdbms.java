@@ -134,9 +134,9 @@ public class umlRdbms extends AbstractTransformation
     
     /* Outer-to-Middle Property navigation caches */
     protected final @NonNull Map<Class,ClassToTable> OPPOSITE_OF_ClassToTable_umlClass = new HashMap<Class,ClassToTable>();
+    protected final @NonNull Map<Table,ClassToTable> OPPOSITE_OF_ClassToTable_table = new HashMap<Table,ClassToTable>();
     protected final @NonNull Map<Attribute,FromAttribute> OPPOSITE_OF_FromAttribute_attribute = new HashMap<Attribute,FromAttribute>();
     protected final @NonNull Map<PrimitiveDataType,PrimitiveToName> OPPOSITE_OF_PrimitiveToName_primitive = new HashMap<PrimitiveDataType,PrimitiveToName>();
-    protected final @NonNull Map<Table,ClassToTable> OPPOSITE_OF_ClassToTable_table = new HashMap<Table,ClassToTable>();
     
     public umlRdbms(final @NonNull DomainEvaluator evaluator) {
         super(evaluator, new String[] {"uml", "rdbms", ""});
@@ -459,8 +459,8 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean booleanToBooleanLM(final @NonNull /*@NonInvalid*/ Package p_1, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_3, final @NonNull /*@NonInvalid*/ PrimitiveDataType prim_0) {
-        final @Nullable /*@Thrown*/ Package namespace = prim_0.getNamespace();
-        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(namespace, p_1);
+        final @NonNull /*@Thrown*/ Package umlPackage = p2s_3.getUmlPackage();
+        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(umlPackage, p_1);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
@@ -469,8 +469,8 @@ public class umlRdbms extends AbstractTransformation
         if (eq_0 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @NonNull /*@Thrown*/ Package umlPackage = p2s_3.getUmlPackage();
-        final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(umlPackage, p_1);
+        final @Nullable /*@Thrown*/ Package namespace = prim_0.getNamespace();
+        final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(namespace, p_1);
         if (eq_1 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
@@ -545,8 +545,8 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean stringToVarcharLM(final @NonNull /*@NonInvalid*/ Package p_2, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_5, final @NonNull /*@NonInvalid*/ PrimitiveDataType prim_1) {
-        final @Nullable /*@Thrown*/ Package namespace = prim_1.getNamespace();
-        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(namespace, p_2);
+        final @NonNull /*@Thrown*/ Package umlPackage = p2s_5.getUmlPackage();
+        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(umlPackage, p_2);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
@@ -555,8 +555,8 @@ public class umlRdbms extends AbstractTransformation
         if (eq_0 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @NonNull /*@Thrown*/ Package umlPackage = p2s_5.getUmlPackage();
-        final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(umlPackage, p_2);
+        final @Nullable /*@Thrown*/ Package namespace = prim_1.getNamespace();
+        final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(namespace, p_2);
         if (eq_1 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
@@ -649,13 +649,13 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean classToTableLM(final @NonNull /*@NonInvalid*/ Class c, final @NonNull /*@NonInvalid*/ Package p_3, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_7) {
-        final @Nullable /*@Thrown*/ Package namespace = c.getNamespace();
-        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(namespace, p_3);
+        final @Nullable /*@Thrown*/ String kind = c.getKind();
+        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(kind, STR_persistent);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ String kind = c.getKind();
-        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(kind, STR_persistent);
+        final @Nullable /*@Thrown*/ Package namespace = c.getNamespace();
+        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(namespace, p_3);
         if (eq_0 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
@@ -1023,13 +1023,13 @@ public class umlRdbms extends AbstractTransformation
     protected boolean associationToForeignKeyLM(final @NonNull /*@NonInvalid*/ Association a, final @NonNull /*@NonInvalid*/ Package p_4, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_9) {
         final @NonNull /*@Thrown*/ Class destination = a.getDestination();
         final @NonNull /*@Thrown*/ Class dc = destination;
-        final @NonNull /*@Thrown*/ Package umlPackage = p2s_9.getUmlPackage();
-        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(umlPackage, p_4);
+        final @Nullable /*@Thrown*/ Package namespace = a.getNamespace();
+        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(namespace, p_4);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ Package namespace = a.getNamespace();
-        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(namespace, p_4);
+        final @NonNull /*@Thrown*/ Package umlPackage = p2s_9.getUmlPackage();
+        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(umlPackage, p_4);
         if (eq_0 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
@@ -1302,13 +1302,13 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean classPrimitiveAttributesLM(final @NonNull /*@NonInvalid*/ Attribute a_0, final @NonNull /*@NonInvalid*/ Class c_0, final @NonNull /*@NonInvalid*/ ClassToTable fao) {
-        final @Nullable /*@Thrown*/ Class umlClass = fao.getUmlClass();
-        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(umlClass, c_0);
+        final @NonNull /*@Thrown*/ Class owner = a_0.getOwner();
+        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(owner, c_0);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @NonNull /*@Thrown*/ Class owner = a_0.getOwner();
-        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(owner, c_0);
+        final @Nullable /*@Thrown*/ Class umlClass = fao.getUmlClass();
+        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(umlClass, c_0);
         if (eq_0 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
