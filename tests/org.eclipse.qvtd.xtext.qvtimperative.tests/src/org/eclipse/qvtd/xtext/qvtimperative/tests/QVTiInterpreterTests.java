@@ -123,7 +123,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	        assertTrue(getClass().getSimpleName() + " should not return null.", result);
 	        saveModels(getProjectFileURI(fileNamePrefix + "middle.xmi"));
 	        for (Entry<TypedModel, Resource> entry : typedModelValidationResourceMap.entrySet()) { // Validate against reference models
-	        	TypedModel typedModel = entry.getKey();
+	        	TypedModel typedModel = DomainUtil.nonNullState(entry.getKey());
 	        	Resource expectedModel = entry.getValue();
 	        	Resource actualModel = modelManager.getModel(typedModel);
 	            assertSameModel(expectedModel, actualModel);
@@ -163,7 +163,7 @@ public static void assertSameModel(Resource expectedResource, Resource actualRes
 		super.setUp();
 		QVTimperativeStandaloneSetup.doSetup();
 		metaModelManager = new MetaModelManager();
-        MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
+        MetaModelManagerResourceSetAdapter.getAdapter(DomainUtil.nonNullState(resourceSet), metaModelManager);
     }
  
     /* (non-Javadoc)
@@ -184,7 +184,7 @@ public static void assertSameModel(Resource expectedResource, Resource actualRes
      */
     @Test
     public void testGraph2GraphMinimal() throws Exception {
-    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
+    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(DomainUtil.nonNullState(metaModelManager), "Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
         testEvaluator.loadModel("upperGraph", "SimpleGraph.xmi");
         testEvaluator.createModel("lowerGraph", "Graph2GraphMinimal.xmi");
         testEvaluator.loadReference("lowerGraph", "Graph2GraphMinimalValidate.xmi");
@@ -202,7 +202,7 @@ public static void assertSameModel(Resource expectedResource, Resource actualRes
      */
     @Test
     public void testGraph2GraphHierarchical() throws Exception {
-    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "Graph2GraphHierarchical", "Graph2GraphHierarchical.qvti");
+    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(DomainUtil.nonNullState(metaModelManager), "Graph2GraphHierarchical", "Graph2GraphHierarchical.qvti");
     	testEvaluator.loadModel("upperGraph", "../Graph2GraphMinimal/SimpleGraph.xmi");
         testEvaluator.createModel("lowerGraph", "Graph2GraphHierarchical.xmi");
         testEvaluator.loadReference("lowerGraph", "Graph2GraphHierarchicalValidate.xmi");
@@ -217,7 +217,7 @@ public static void assertSameModel(Resource expectedResource, Resource actualRes
      */
     @Test
     public void testHSV2HLS() throws Exception {
-    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "HSV2HLS", "HSV2HLS.qvti");
+    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(DomainUtil.nonNullState(metaModelManager), "HSV2HLS", "HSV2HLS.qvti");
     	testEvaluator.loadModel("hsv", "HSVNode.xmi");
         testEvaluator.createModel("hls", "HLSNode.xmi");
         testEvaluator.loadReference("hls", "HLSNodeValidate.xmi");
@@ -233,11 +233,11 @@ public static void assertSameModel(Resource expectedResource, Resource actualRes
     @Test
     public void testClassToRDBMS() throws Exception {
         CompleteOCLStandaloneSetup.doSetup();
-        URI oclURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true);
+        URI oclURI = DomainUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
         //  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metaModelManager);
-        CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(QVTcoreBasePackage.eINSTANCE, oclURI, metaModelManager);
+        CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(DomainUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, metaModelManager);
         
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "ClassToRDBMS", "ClassToRDBMSSchedule.qvti");
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(DomainUtil.nonNullState(metaModelManager), "ClassToRDBMS", "ClassToRDBMSSchedule.qvti");
         //assertNoValidationErrors("Pivot validation errors", testEvaluator.pivotResource.getContents().get(0));
         testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
         testEvaluator.createModel("rdbms", "SimpleRDBMSPeople.xmi");

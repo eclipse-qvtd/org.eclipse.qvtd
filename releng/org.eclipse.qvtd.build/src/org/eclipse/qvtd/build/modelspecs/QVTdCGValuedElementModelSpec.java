@@ -44,7 +44,7 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 	public static void register() {
 //		new CGValuedElementModelSpec(CGVariable.class, "init",							null     , Ref.DELEG, null     , Nul.VAR  , Inv.VAR  , null     , null     , null     , null    , null     , null     , null     , null     , null     );
 		new QVTdCGValuedElementModelSpec(CGGuardVariable.class, null,					Box.FALSE, null     , null     , Nul.FALSE, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
-		new QVTdCGValuedElementModelSpec(CGRealizedVariable.class, null,				Box.FALSE, Ref.THIS , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
+		new QVTdCGValuedElementModelSpec(CGRealizedVariable.class, null,				Box.FALSE, Ref.THIS , null     , Nul.UNDEC, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
 
 		new QVTdCGValuedElementModelSpec(CGFunctionCallExp.class, null,					Box.FALSE, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
 		new QVTdCGValuedElementModelSpec(CGFunctionParameter.class, null,				Box.FALSE, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );

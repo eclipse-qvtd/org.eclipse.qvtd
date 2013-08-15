@@ -86,7 +86,7 @@ public class QVTiLMTracingEvaluationVisitor extends QVTiAbstractTracingEvaluatio
 		indentLevel++;
 		Object result = delegate.visitBottomPattern(bottomPattern);
 		for (Variable v : bottomPattern.getRealizedVariable()) {
-			logger.info(getIndent() + "RealizedVariable " + v.getName() + ": " + prettyPrint((EObject) delegate.getEvaluationEnvironment().getValueOf(v)));
+			logger.info(getIndent() + "RealizedVariable " + v.getName() + ": " + prettyPrint(delegate.getEvaluationEnvironment().getValueOf(v)));
 		}
 		indentLevel--;
 		if (bottomPattern.getArea() instanceof Mapping) {

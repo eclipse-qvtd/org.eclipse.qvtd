@@ -46,6 +46,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -406,7 +407,7 @@ public class XtextTestCase extends PivotTestCase
 		return new File(projectURL.getFile());
 	}
 	
-	protected URI getProjectFileURI(String referenceName) {
+	protected @NonNull URI getProjectFileURI(String referenceName) {
 		File projectFile = getProjectFile();
 		return URI.createFileURI(projectFile.toString() + "/" + referenceName);
 	}

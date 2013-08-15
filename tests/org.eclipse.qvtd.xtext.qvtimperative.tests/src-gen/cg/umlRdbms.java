@@ -9,6 +9,7 @@
 
 package cg;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -25,6 +26,7 @@ import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
@@ -133,8 +135,8 @@ public class umlRdbms extends AbstractTransformation
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_PrimitiveToName = TypeId.SET.getSpecializedId(CLSSid_PrimitiveToName);
     
     /* Outer-to-Middle Property navigation caches */
-    protected final @NonNull Map<Class,ClassToTable> OPPOSITE_OF_ClassToTable_umlClass = new HashMap<Class,ClassToTable>();
     protected final @NonNull Map<Table,ClassToTable> OPPOSITE_OF_ClassToTable_table = new HashMap<Table,ClassToTable>();
+    protected final @NonNull Map<Class,ClassToTable> OPPOSITE_OF_ClassToTable_umlClass = new HashMap<Class,ClassToTable>();
     protected final @NonNull Map<Attribute,FromAttribute> OPPOSITE_OF_FromAttribute_attribute = new HashMap<Attribute,FromAttribute>();
     protected final @NonNull Map<PrimitiveDataType,PrimitiveToName> OPPOSITE_OF_PrimitiveToName_primitive = new HashMap<PrimitiveDataType,PrimitiveToName>();
     
@@ -145,21 +147,23 @@ public class umlRdbms extends AbstractTransformation
     public boolean run() {
         List<? extends Package> LIST_p = getObjectsByType(Package.class, 0/*uml*/, SimpleumlPackage.Literals.PACKAGE);
         for (Package p : LIST_p) {
-            packageToSchemaLM(p);
+            if (p != null) {
+                packageToSchemaLM(p);
+            }
         }
         return true;
     }
     
     protected @NonNull List<Class> getAllSupers(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator_0, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable /*@NonInvalid*/ Class cls) {
-        return null;
+        return Collections.EMPTY_LIST;
     }
     
     protected @NonNull List<Attribute> getAllAttributes(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator_0, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable /*@NonInvalid*/ Class cls_0) {
-        return null;
+        return Collections.EMPTY_LIST;
     }
     
     protected @NonNull List<Association> getAllForwards(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator_0, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable /*@NonInvalid*/ Class cls_1) {
-        return null;
+        return Collections.EMPTY_LIST;
     }
     
     /**
@@ -210,38 +214,48 @@ public class umlRdbms extends AbstractTransformation
      */
     protected boolean packageToSchemaLM(final @NonNull /*@NonInvalid*/ Package p) {
         try {
-            final @NonNull /*@Thrown*/ List<PackageElement> elements_0 = p.getElements();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<PackageElement> elements_0 = p.getElements();
             // creations
-            final @Nullable /*@Thrown*/ PackageToSchema p2s = UmltordbmsFactory.eINSTANCE.createPackageToSchema();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ PackageToSchema p2s = UmltordbmsFactory.eINSTANCE.createPackageToSchema();
             modelObjects[2/*null*/].add(p2s);
             // assignments
             p2s.setUmlPackage(p);
-            final @Nullable /*@Thrown*/ String name = p.getName();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = p.getName();
             p2s.setName(name);
             // mapping calls
             for (Object prim_2 : elements_0) {
-                if (prim_2 instanceof PrimitiveDataType) {
-                    integerToNumberLM(p, p2s, (PrimitiveDataType)prim_2);
+                if (prim_2 != null) {
+                    if (prim_2 instanceof PrimitiveDataType) {
+                        integerToNumberLM(p, p2s, (PrimitiveDataType)prim_2);
+                    }
                 }
             }
             for (Object prim_3 : elements_0) {
-                if (prim_3 instanceof PrimitiveDataType) {
-                    booleanToBooleanLM(p, p2s, (PrimitiveDataType)prim_3);
+                if (prim_3 != null) {
+                    if (prim_3 instanceof PrimitiveDataType) {
+                        booleanToBooleanLM(p, p2s, (PrimitiveDataType)prim_3);
+                    }
                 }
             }
             for (Object prim_4 : elements_0) {
-                if (prim_4 instanceof PrimitiveDataType) {
-                    stringToVarcharLM(p, p2s, (PrimitiveDataType)prim_4);
+                if (prim_4 != null) {
+                    if (prim_4 instanceof PrimitiveDataType) {
+                        stringToVarcharLM(p, p2s, (PrimitiveDataType)prim_4);
+                    }
                 }
             }
             for (Object c_4 : elements_0) {
-                if (c_4 instanceof Class) {
-                    classToTableLM((Class)c_4, p, p2s);
+                if (c_4 != null) {
+                    if (c_4 instanceof Class) {
+                        classToTableLM((Class)c_4, p, p2s);
+                    }
                 }
             }
             for (Object a_2 : elements_0) {
-                if (a_2 instanceof Association) {
-                    associationToForeignKeyLM((Association)a_2, p, p2s);
+                if (a_2 != null) {
+                    if (a_2 instanceof Association) {
+                        associationToForeignKeyLM((Association)a_2, p, p2s);
+                    }
                 }
             }
             packageToSchemaMR(p2s);
@@ -292,26 +306,34 @@ public class umlRdbms extends AbstractTransformation
      */
     protected boolean packageToSchemaMR(final @NonNull /*@NonInvalid*/ PackageToSchema p2s) {
         try {
-            final @NonNull /*@Thrown*/ List<PrimitiveToName> primitivesToNames_0 = p2s.getPrimitivesToNames();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<PrimitiveToName> primitivesToNames_0 = p2s.getPrimitivesToNames();
             // creations
-            final @Nullable /*@Thrown*/ Schema s = SimplerdbmsFactory.eINSTANCE.createSchema();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ Schema s = SimplerdbmsFactory.eINSTANCE.createSchema();
             modelObjects[1/*rdbms*/].add(s);
             // assignments
             p2s.setSchema(s);
             // mapping calls
             packageToSchemaMR_1(p2s, s);
             for (Object p2n_3 : primitivesToNames_0) {
-                integerToNumberMR((PrimitiveToName)p2n_3, p2s);
+                if (p2n_3 != null) {
+                    integerToNumberMR((PrimitiveToName)p2n_3, p2s);
+                }
             }
             for (Object p2n_4 : primitivesToNames_0) {
-                booleanToBooleanMR((PrimitiveToName)p2n_4, p2s);
+                if (p2n_4 != null) {
+                    booleanToBooleanMR((PrimitiveToName)p2n_4, p2s);
+                }
             }
             for (Object p2n_5 : primitivesToNames_0) {
-                stringToVarcharMR((PrimitiveToName)p2n_5, p2s);
+                if (p2n_5 != null) {
+                    stringToVarcharMR((PrimitiveToName)p2n_5, p2s);
+                }
             }
-            final @NonNull /*@Thrown*/ List<ClassToTable> classesToTables = p2s.getClassesToTables();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<ClassToTable> classesToTables = p2s.getClassesToTables();
             for (Object c2t_3 : classesToTables) {
-                classToTableMR((ClassToTable)c2t_3, p2s, s);
+                if (c2t_3 != null) {
+                    classToTableMR((ClassToTable)c2t_3, p2s, s);
+                }
             }
             return true;
         }
@@ -341,7 +363,7 @@ public class umlRdbms extends AbstractTransformation
         try {
             // creations
             // assignments
-            final @Nullable /*@Thrown*/ String name = p2s_1.getName();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = p2s_1.getName();
             s_1.setName(name);
             // mapping calls
             return true;
@@ -373,23 +395,23 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean integerToNumberLM(final @NonNull /*@NonInvalid*/ Package p_0, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_0, final @NonNull /*@NonInvalid*/ PrimitiveDataType prim) {
-        final @NonNull /*@Thrown*/ Package umlPackage = p2s_0.getUmlPackage();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Package umlPackage = p2s_0.getUmlPackage();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(umlPackage, p_0);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ String name = prim.getName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = prim.getName();
         final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(name, STR_Integer);
         if (eq_0 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ Package namespace = prim.getNamespace();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Package namespace = prim.getNamespace();
         final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(namespace, p_0);
         if (eq_1 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
         // creations
-        final @Nullable /*@Thrown*/ PrimitiveToName p2n = UmltordbmsFactory.eINSTANCE.createPrimitiveToName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ PrimitiveToName p2n = UmltordbmsFactory.eINSTANCE.createPrimitiveToName();
         modelObjects[2/*null*/].add(p2n);
         // assignments
         p2n.setOwner(p2s_0);
@@ -419,12 +441,12 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean integerToNumberMR(final @NonNull /*@NonInvalid*/ PrimitiveToName p2n, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_2) {
-        final @Nullable /*@Thrown*/ PackageToSchema owner = p2n.getOwner();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ PackageToSchema owner = p2n.getOwner();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(owner, p2s_2);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ String name = p2n.getName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = p2n.getName();
         final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(STR_Integer, STR_2);
         final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_NUMBER);
         final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(name, sum_0);
@@ -459,23 +481,23 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean booleanToBooleanLM(final @NonNull /*@NonInvalid*/ Package p_1, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_3, final @NonNull /*@NonInvalid*/ PrimitiveDataType prim_0) {
-        final @NonNull /*@Thrown*/ Package umlPackage = p2s_3.getUmlPackage();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Package umlPackage = p2s_3.getUmlPackage();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(umlPackage, p_1);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ String name = prim_0.getName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = prim_0.getName();
         final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(name, STR_Boolean);
         if (eq_0 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ Package namespace = prim_0.getNamespace();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Package namespace = prim_0.getNamespace();
         final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(namespace, p_1);
         if (eq_1 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
         // creations
-        final @Nullable /*@Thrown*/ PrimitiveToName p2n = UmltordbmsFactory.eINSTANCE.createPrimitiveToName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ PrimitiveToName p2n = UmltordbmsFactory.eINSTANCE.createPrimitiveToName();
         modelObjects[2/*null*/].add(p2n);
         // assignments
         p2n.setOwner(p2s_3);
@@ -505,12 +527,12 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean booleanToBooleanMR(final @NonNull /*@NonInvalid*/ PrimitiveToName p2n_0, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_4) {
-        final @Nullable /*@Thrown*/ PackageToSchema owner = p2n_0.getOwner();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ PackageToSchema owner = p2n_0.getOwner();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(owner, p2s_4);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ String name = p2n_0.getName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = p2n_0.getName();
         final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(STR_Boolean, STR_2);
         final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_BOOLEAN);
         final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(name, sum_0);
@@ -545,23 +567,23 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean stringToVarcharLM(final @NonNull /*@NonInvalid*/ Package p_2, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_5, final @NonNull /*@NonInvalid*/ PrimitiveDataType prim_1) {
-        final @NonNull /*@Thrown*/ Package umlPackage = p2s_5.getUmlPackage();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Package umlPackage = p2s_5.getUmlPackage();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(umlPackage, p_2);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ String name = prim_1.getName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = prim_1.getName();
         final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(name, STR_String);
         if (eq_0 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ Package namespace = prim_1.getNamespace();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Package namespace = prim_1.getNamespace();
         final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(namespace, p_2);
         if (eq_1 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
         // creations
-        final @Nullable /*@Thrown*/ PrimitiveToName p2n = UmltordbmsFactory.eINSTANCE.createPrimitiveToName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ PrimitiveToName p2n = UmltordbmsFactory.eINSTANCE.createPrimitiveToName();
         modelObjects[2/*null*/].add(p2n);
         // assignments
         p2n.setOwner(p2s_5);
@@ -591,12 +613,12 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean stringToVarcharMR(final @NonNull /*@NonInvalid*/ PrimitiveToName p2n_1, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_6) {
-        final @Nullable /*@Thrown*/ PackageToSchema owner = p2n_1.getOwner();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ PackageToSchema owner = p2n_1.getOwner();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(owner, p2s_6);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ String name = p2n_1.getName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = p2n_1.getName();
         final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(STR_String, STR_2);
         final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_VARCHAR);
         final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(name, sum_0);
@@ -649,23 +671,23 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean classToTableLM(final @NonNull /*@NonInvalid*/ Class c, final @NonNull /*@NonInvalid*/ Package p_3, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_7) {
-        final @Nullable /*@Thrown*/ String kind = c.getKind();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String kind = c.getKind();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(kind, STR_persistent);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ Package namespace = c.getNamespace();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Package namespace = c.getNamespace();
         final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(namespace, p_3);
         if (eq_0 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @NonNull /*@Thrown*/ Package umlPackage = p2s_7.getUmlPackage();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Package umlPackage = p2s_7.getUmlPackage();
         final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(umlPackage, p_3);
         if (eq_1 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-        final @NonNull /*@Thrown*/ List<Attribute> attributes_0 = c.getAttributes();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Attribute> attributes_0 = c.getAttributes();
         final @NonNull /*@Thrown*/ OrderedSetValue BOXED_attributes_3 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Attribute, attributes_0);
         @NonNull /*@NonInvalid*/ SequenceValue.Accumulator accumulator = ValuesUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Classifier);
         @Nullable Iterator<?> ITERATOR__1_0 = BOXED_attributes_3.iterator();
@@ -682,37 +704,49 @@ public class umlRdbms extends AbstractTransformation
             if (_1_0 == null) {
                 throw new InvalidValueException("Null source");
             }
-            final @NonNull /*@Thrown*/ Classifier type_0 = _1_0.getType();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ Classifier type_0 = _1_0.getType();
             //
             accumulator.add(type_0);
         }
         // creations
-        final @Nullable /*@Thrown*/ ClassToTable c2t = UmltordbmsFactory.eINSTANCE.createClassToTable();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ ClassToTable c2t = UmltordbmsFactory.eINSTANCE.createClassToTable();
         modelObjects[2/*null*/].add(c2t);
         // assignments
         c2t.setOwner(p2s_7);
         c2t.setUmlClass(c);
         OPPOSITE_OF_ClassToTable_umlClass.put(c, c2t);
-        final @Nullable /*@Thrown*/ String name = c.getName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = c.getName();
         c2t.setName(name);
         // mapping calls
         for (Object a_2 : attributes_0) {
-            classPrimitiveAttributesLM((Attribute)a_2, c, c2t);
+            if (a_2 != null) {
+                classPrimitiveAttributesLM((Attribute)a_2, c, c2t);
+            }
         }
         for (Object a_3 : attributes_0) {
-            classComplexAttributesLM((Attribute)a_3, c, c2t);
+            if (a_3 != null) {
+                classComplexAttributesLM((Attribute)a_3, c, c2t);
+            }
         }
         for (Object c_6 : collect_0) {
-            if (c_6 instanceof Class) {
-                for (Object ca_2 : attributes_0) {
-                    complexAttributePrimitiveAttributesLM((Class)c_6, (Attribute)ca_2);
+            if (c_6 != null) {
+                if (c_6 instanceof Class) {
+                    for (Object ca_2 : attributes_0) {
+                        if (ca_2 != null) {
+                            complexAttributePrimitiveAttributesLM((Class)c_6, (Attribute)ca_2);
+                        }
+                    }
                 }
             }
         }
         for (Object c_7 : collect_0) {
-            if (c_7 instanceof Class) {
-                for (Object ca_3 : attributes_0) {
-                    complexAttributeComplexAttributesLM((Class)c_7, (Attribute)ca_3);
+            if (c_7 != null) {
+                if (c_7 instanceof Class) {
+                    for (Object ca_3 : attributes_0) {
+                        if (ca_3 != null) {
+                            complexAttributeComplexAttributesLM((Class)c_7, (Attribute)ca_3);
+                        }
+                    }
                 }
             }
         }
@@ -747,7 +781,7 @@ public class umlRdbms extends AbstractTransformation
      * }
      *   map associationToForeignKeyMR {
      * p2s := p2s;
-     * dt := null;
+     * dt := t;
      * a2f <= c2t.associationsToForeignKeys;
      * s := s;
      * st := t;
@@ -763,17 +797,17 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean classToTableMR(final @NonNull /*@NonInvalid*/ ClassToTable c2t, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_8, final @NonNull /*@NonInvalid*/ Schema s) {
-        final @Nullable /*@Thrown*/ PackageToSchema owner = c2t.getOwner();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ PackageToSchema owner = c2t.getOwner();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(owner, p2s_8);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final @NonNull /*@NonInvalid*/ DomainType TYP_umltordbms_c_c_NonLeafAttribute_0 = idResolver.getType(CLSSid_NonLeafAttribute, null);
-        final @NonNull /*@Thrown*/ List<FromAttribute> fromAttributes = c2t.getFromAttributes();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<FromAttribute> fromAttributes = c2t.getFromAttributes();
         final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
         // creations
-        final @Nullable /*@Thrown*/ Table t = SimplerdbmsFactory.eINSTANCE.createTable();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Table t = SimplerdbmsFactory.eINSTANCE.createTable();
         modelObjects[1/*rdbms*/].add(t);
         // assignments
         t.setKind(STR_base);
@@ -781,10 +815,12 @@ public class umlRdbms extends AbstractTransformation
         // mapping calls
         classToTableMR_1(c2t, t);
         classToTableMR_2(c2t, t);
-        final @NonNull /*@Thrown*/ List<AssociationToForeignKey> associationsToForeignKeys = c2t.getAssociationsToForeignKeys();
-        final @Nullable /*@Thrown*/ Key primaryKey = c2t.getPrimaryKey();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<AssociationToForeignKey> associationsToForeignKeys = c2t.getAssociationsToForeignKeys();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Key primaryKey = c2t.getPrimaryKey();
         for (Object a2f_0 : associationsToForeignKeys) {
-            associationToForeignKeyMR((AssociationToForeignKey)a2f_0, null, p2s_8, primaryKey, s, t);
+            if (a2f_0 != null) {
+                associationToForeignKeyMR((AssociationToForeignKey)a2f_0, t, p2s_8, primaryKey, s, t);
+            }
         }
         final @NonNull /*@Thrown*/ SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_fromAttributes, TYP_umltordbms_c_c_NonLeafAttribute_0);
         @NonNull /*@NonInvalid*/ BagValue.Accumulator accumulator = ValuesUtil.createBagAccumulatorValue(BAG_CLSSid_FromAttribute);
@@ -802,7 +838,7 @@ public class umlRdbms extends AbstractTransformation
             if (_1 == null) {
                 throw new InvalidValueException("Null source");
             }
-            final @NonNull /*@Thrown*/ List<FromAttribute> fromAttributes_1 = _1.getFromAttributes();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<FromAttribute> fromAttributes_1 = _1.getFromAttributes();
             final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes_1 = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes_1);
             //
             for (Object value : BOXED_fromAttributes_1.flatten().getElements()) {
@@ -811,8 +847,10 @@ public class umlRdbms extends AbstractTransformation
         }
         final @NonNull /*@Thrown*/ BagValue union = (BagValue)CollectionUnionOperation.INSTANCE.evaluate(BOXED_fromAttributes, collect);
         for (Object a2c_0 : union) {
-            if (a2c_0 instanceof AttributeToColumn) {
-                attributeColumnsMR((AttributeToColumn)a2c_0, c2t, t);
+            if (a2c_0 != null) {
+                if (a2c_0 instanceof AttributeToColumn) {
+                    attributeColumnsMR((AttributeToColumn)a2c_0, c2t, t);
+                }
             }
         }
         return true;
@@ -842,7 +880,7 @@ public class umlRdbms extends AbstractTransformation
             // assignments
             c2t_1.setTable(t_1);
             OPPOSITE_OF_ClassToTable_table.put(t_1, c2t_1);
-            final @Nullable /*@Thrown*/ String name = c2t_1.getName();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = c2t_1.getName();
             t_1.setName(name);
             // mapping calls
             return true;
@@ -891,9 +929,9 @@ public class umlRdbms extends AbstractTransformation
         try {
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             // creations
-            final @Nullable /*@Thrown*/ Column pc = SimplerdbmsFactory.eINSTANCE.createColumn();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ Column pc = SimplerdbmsFactory.eINSTANCE.createColumn();
             modelObjects[1/*rdbms*/].add(pc);
-            final @Nullable /*@Thrown*/ Key pk = SimplerdbmsFactory.eINSTANCE.createKey();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ Key pk = SimplerdbmsFactory.eINSTANCE.createKey();
             modelObjects[1/*rdbms*/].add(pk);
             // assignments
             pk.setOwner(t_2);
@@ -967,7 +1005,7 @@ public class umlRdbms extends AbstractTransformation
      */
     protected boolean classToTableMR_2_2(final @NonNull /*@NonInvalid*/ Column pc_2_2, final @NonNull /*@NonInvalid*/ Key pk_2_2, final @NonNull /*@NonInvalid*/ Table t_2_2) {
         try {
-            final @Nullable /*@Thrown*/ String name_0 = t_2_2.getName();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name_0 = t_2_2.getName();
             // creations
             // assignments
             final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR__tid);
@@ -1021,34 +1059,34 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean associationToForeignKeyLM(final @NonNull /*@NonInvalid*/ Association a, final @NonNull /*@NonInvalid*/ Package p_4, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_9) {
-        final @NonNull /*@Thrown*/ Class destination = a.getDestination();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Class destination = a.getDestination();
         final @NonNull /*@Thrown*/ Class dc = destination;
-        final @Nullable /*@Thrown*/ Package namespace = a.getNamespace();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Package namespace = a.getNamespace();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(namespace, p_4);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @NonNull /*@Thrown*/ Package umlPackage = p2s_9.getUmlPackage();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Package umlPackage = p2s_9.getUmlPackage();
         final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(umlPackage, p_4);
         if (eq_0 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @NonNull /*@Thrown*/ Class source = a.getSource();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Class source = a.getSource();
         final @NonNull /*@Thrown*/ Class sc = source;
-        final @Nullable /*@Thrown*/ ClassToTable ClassToTable = OPPOSITE_OF_ClassToTable_umlClass.get(dc);
+        final @Nullable /*@Thrown*/ ClassToTable ClassToTable = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(dc));
         final @NonNull /*@Thrown*/ ClassToTable dc2t = ClassToTable;
-        final @Nullable /*@Thrown*/ Package namespace_0 = sc.getNamespace();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Package namespace_0 = sc.getNamespace();
         final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(namespace_0, p_4);
         if (eq_1 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = OPPOSITE_OF_ClassToTable_umlClass.get(sc);
+        final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(sc));
         final @NonNull /*@Thrown*/ ClassToTable sc2t = ClassToTable_0;
-        final @Nullable /*@Thrown*/ String name = a.getName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = a.getName();
         final @NonNull /*@Thrown*/ Boolean eq_2 = OclAnyEqualOperation.INSTANCE.evaluate(destination, dc);
         final @NonNull /*@Thrown*/ Boolean eq_3 = OclAnyEqualOperation.INSTANCE.evaluate(source, sc);
         // creations
-        final @Nullable /*@Thrown*/ AssociationToForeignKey a2f = UmltordbmsFactory.eINSTANCE.createAssociationToForeignKey();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ AssociationToForeignKey a2f = UmltordbmsFactory.eINSTANCE.createAssociationToForeignKey();
         modelObjects[2/*null*/].add(a2f);
         // assignments
         a2f.setOwner(sc2t);
@@ -1058,7 +1096,7 @@ public class umlRdbms extends AbstractTransformation
         if (and == null) {
             throw new InvalidValueException("Null source");
         }
-        @Nullable /*@Thrown*/ String symbol_2;
+        @NonNull /*@Thrown*/ String symbol_2;
         if (and) {
             symbol_2 = name;
         }
@@ -1070,13 +1108,13 @@ public class umlRdbms extends AbstractTransformation
             }
             @NonNull /*@Thrown*/ String symbol_1;
             if (and_0) {
-                final @Nullable /*@Thrown*/ String name_0 = dc.getName();
+                final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name_0 = dc.getName();
                 final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR__);
                 final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name);
                 symbol_1 = sum_0;
             }
             else {
-                final @Nullable /*@Thrown*/ String name_6 = sc.getName();
+                final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name_6 = sc.getName();
                 final @NonNull /*@Thrown*/ Boolean ne_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(source, sc);
                 final @Nullable /*@Thrown*/ Boolean and_1 = BooleanAndOperation.INSTANCE.evaluate(eq_2, ne_0);
                 if (and_1 == null) {
@@ -1089,7 +1127,7 @@ public class umlRdbms extends AbstractTransformation
                     symbol_0 = sum_2;
                 }
                 else {
-                    final @Nullable /*@Thrown*/ String name_4 = dc.getName();
+                    final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name_4 = dc.getName();
                     final @NonNull /*@Thrown*/ String sum_3 = StringConcatOperation.INSTANCE.evaluate(name_4, STR__);
                     final @NonNull /*@Thrown*/ String sum_4 = StringConcatOperation.INSTANCE.evaluate(sum_3, name);
                     final @NonNull /*@Thrown*/ String sum_5 = StringConcatOperation.INSTANCE.evaluate(sum_4, STR__);
@@ -1145,35 +1183,35 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean associationToForeignKeyMR(final @NonNull /*@NonInvalid*/ AssociationToForeignKey a2f, final @NonNull /*@NonInvalid*/ Table dt, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_10, final @NonNull /*@NonInvalid*/ Key rk, final @NonNull /*@NonInvalid*/ Schema s_0, final @NonNull /*@NonInvalid*/ Table st) {
-        final @Nullable /*@Thrown*/ ClassToTable ClassToTable = OPPOSITE_OF_ClassToTable_table.get(dt);
+        final @Nullable /*@Thrown*/ ClassToTable ClassToTable = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(dt));
         final @NonNull /*@Thrown*/ ClassToTable dc2t = ClassToTable;
-        final @NonNull /*@Thrown*/ Schema schema = p2s_10.getSchema();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Schema schema = p2s_10.getSchema();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(schema, s_0);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @NonNull /*@Thrown*/ Schema schema_0 = st.getSchema();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Schema schema_0 = st.getSchema();
         final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(schema_0, s_0);
         if (eq_0 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = OPPOSITE_OF_ClassToTable_table.get(st);
+        final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(st));
         final @NonNull /*@Thrown*/ ClassToTable sc2t = ClassToTable_0;
-        final @Nullable /*@Thrown*/ ClassToTable owner = a2f.getOwner();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ ClassToTable owner = a2f.getOwner();
         final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(owner, sc2t);
         if (eq_1 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ ClassToTable referenced = a2f.getReferenced();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ ClassToTable referenced = a2f.getReferenced();
         final @NonNull /*@Thrown*/ Boolean eq_2 = OclAnyEqualOperation.INSTANCE.evaluate(referenced, dc2t);
         if (eq_2 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ String name = a2f.getName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = a2f.getName();
         // creations
-        final @Nullable /*@Thrown*/ Column fc = SimplerdbmsFactory.eINSTANCE.createColumn();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Column fc = SimplerdbmsFactory.eINSTANCE.createColumn();
         modelObjects[1/*rdbms*/].add(fc);
-        final @Nullable /*@Thrown*/ ForeignKey fk = SimplerdbmsFactory.eINSTANCE.createForeignKey();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ ForeignKey fk = SimplerdbmsFactory.eINSTANCE.createForeignKey();
         modelObjects[1/*rdbms*/].add(fk);
         // assignments
         fk.setName(name);
@@ -1182,10 +1220,7 @@ public class umlRdbms extends AbstractTransformation
         fk.setOwner(st);
         fc.setOwner(st);
         // mapping calls
-        if (referenced == null) {
-            throw new InvalidValueException("Null source");
-        }
-        final @Nullable /*@Thrown*/ Table table = referenced.getTable();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Table table = referenced.getTable();
         associationToForeignKeyMR_1(table, fc, fk, rk);
         associationToForeignKeyMR_2(a2f, fc, fk);
         return true;
@@ -1224,13 +1259,13 @@ public class umlRdbms extends AbstractTransformation
             final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet = ValuesUtil.createOrderedSetOfEach(ORD_CLSSid_ForeignKey, fk);
             final List<ForeignKey> UNBOXED_OrderedSet = OrderedSet.asEcoreObjects(idResolver, ForeignKey.class);
             fc.getForeignKeys().addAll(UNBOXED_OrderedSet);
-            final @NonNull /*@Thrown*/ List<Column> column = rk_0.getColumn();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Column> column = rk_0.getColumn();
             final @NonNull /*@Thrown*/ OrderedSetValue BOXED_column = idResolver.createOrderedSetOfAll(ORD_CLSSid_Column, column);
             final @Nullable /*@Thrown*/ Column first = (Column)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_column);
             if (first == null) {
                 throw new InvalidValueException("Null source");
             }
-            final @Nullable /*@Thrown*/ String type = first.getType();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String type = first.getType();
             fc.setType(type);
             // mapping calls
             return true;
@@ -1302,35 +1337,35 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean classPrimitiveAttributesLM(final @NonNull /*@NonInvalid*/ Attribute a_0, final @NonNull /*@NonInvalid*/ Class c_0, final @NonNull /*@NonInvalid*/ ClassToTable fao) {
-        final @NonNull /*@Thrown*/ Class owner = a_0.getOwner();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Class owner = a_0.getOwner();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(owner, c_0);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ Class umlClass = fao.getUmlClass();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Class umlClass = fao.getUmlClass();
         final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(umlClass, c_0);
         if (eq_0 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @NonNull /*@Thrown*/ Classifier type = a_0.getType();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Classifier type = a_0.getType();
         if (!(type instanceof PrimitiveDataType)) {
             return false;
         }
         final @NonNull /*@Thrown*/ PrimitiveDataType t_0 = (PrimitiveDataType)type;
-        final @NonNull /*@Thrown*/ PrimitiveToName PrimitiveToName = OPPOSITE_OF_PrimitiveToName_primitive.get(t_0);
+        final @NonNull /*@Thrown*/ PrimitiveToName PrimitiveToName = DomainUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(t_0));
         final @NonNull /*@Thrown*/ PrimitiveToName p2n_3 = PrimitiveToName;
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         // creations
-        final @Nullable /*@Thrown*/ AttributeToColumn atc = UmltordbmsFactory.eINSTANCE.createAttributeToColumn();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ AttributeToColumn atc = UmltordbmsFactory.eINSTANCE.createAttributeToColumn();
         modelObjects[2/*null*/].add(atc);
         // assignments
         atc.setAttribute(a_0);
         OPPOSITE_OF_FromAttribute_attribute.put(a_0, atc);
         atc.setOwner(fao);
         atc.setType(p2n_3);
-        final @Nullable /*@Thrown*/ String kind = a_0.getKind();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String kind = a_0.getKind();
         atc.setKind(kind);
-        final @Nullable /*@Thrown*/ String name = a_0.getName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = a_0.getName();
         atc.setName(name);
         final @NonNull /*@Thrown*/ SetValue Set = ValuesUtil.createSetOfEach(SET_CLSSid_AttributeToColumn, atc);
         final List<AttributeToColumn> UNBOXED_Set = Set.asEcoreObjects(idResolver, AttributeToColumn.class);
@@ -1365,34 +1400,34 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean classComplexAttributesLM(final @NonNull /*@NonInvalid*/ Attribute a_1, final @NonNull /*@NonInvalid*/ Class c_1, final @NonNull /*@NonInvalid*/ ClassToTable fao_0) {
-        final @NonNull /*@Thrown*/ Class owner = a_1.getOwner();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Class owner = a_1.getOwner();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(owner, c_1);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ Class umlClass = fao_0.getUmlClass();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Class umlClass = fao_0.getUmlClass();
         final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(umlClass, c_1);
         if (eq_0 != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @NonNull /*@Thrown*/ Classifier type = a_1.getType();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Classifier type = a_1.getType();
         if (!(type instanceof Class)) {
             return false;
         }
         final @NonNull /*@Thrown*/ Class t_0 = (Class)type;
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         // creations
-        final @Nullable /*@Thrown*/ NonLeafAttribute fa = UmltordbmsFactory.eINSTANCE.createNonLeafAttribute();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ NonLeafAttribute fa = UmltordbmsFactory.eINSTANCE.createNonLeafAttribute();
         modelObjects[2/*null*/].add(fa);
         // assignments
         fa.setAttribute(a_1);
         OPPOSITE_OF_FromAttribute_attribute.put(a_1, fa);
         fa.setOwner(fao_0);
-        final @Nullable /*@Thrown*/ String kind = a_1.getKind();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String kind = a_1.getKind();
         fa.setKind(kind);
-        final @Nullable /*@Thrown*/ String name = a_1.getName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = a_1.getName();
         fa.setName(name);
-        final @NonNull /*@Thrown*/ List<FromAttribute> fromAttributes = fao_0.getFromAttributes();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<FromAttribute> fromAttributes = fao_0.getFromAttributes();
         final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
         @NonNull /*@NonInvalid*/ BagValue.Accumulator accumulator = ValuesUtil.createBagAccumulatorValue(BAG_CLSSid_AttributeToColumn);
         @Nullable Iterator<?> ITERATOR__1 = BOXED_fromAttributes.iterator();
@@ -1409,7 +1444,7 @@ public class umlRdbms extends AbstractTransformation
             if (_1 == null) {
                 throw new InvalidValueException("Null source");
             }
-            final @NonNull /*@Thrown*/ List<AttributeToColumn> leafs = _1.getLeafs();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<AttributeToColumn> leafs = _1.getLeafs();
             final @NonNull /*@Thrown*/ SetValue BOXED_leafs = idResolver.createSetOfAll(SET_CLSSid_AttributeToColumn, leafs);
             //
             for (Object value : BOXED_leafs.flatten().getElements()) {
@@ -1447,12 +1482,12 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean complexAttributePrimitiveAttributesLM(final @NonNull /*@NonInvalid*/ Class c_2, final @NonNull /*@NonInvalid*/ Attribute ca) {
-        final @Nullable /*@Thrown*/ FromAttribute FromAttribute = OPPOSITE_OF_FromAttribute_attribute.get(ca);
+        final @Nullable /*@Thrown*/ FromAttribute FromAttribute = DomainUtil.nonNullState (OPPOSITE_OF_FromAttribute_attribute.get(ca));
         if (!(FromAttribute instanceof NonLeafAttribute)) {
             return false;
         }
         final @NonNull /*@Thrown*/ NonLeafAttribute fao_2 = (NonLeafAttribute)FromAttribute;
-        final @NonNull /*@Thrown*/ Classifier type = ca.getType();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Classifier type = ca.getType();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, c_2);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
@@ -1460,9 +1495,11 @@ public class umlRdbms extends AbstractTransformation
         // creations
         // assignments
         // mapping calls
-        final @NonNull /*@Thrown*/ List<Attribute> attributes = c_2.getAttributes();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Attribute> attributes = c_2.getAttributes();
         for (Object a_1_2 : attributes) {
-            complexAttributePrimitiveAttributesLM_1((Attribute)a_1_2, c_2, ca, fao_2);
+            if (a_1_2 != null) {
+                complexAttributePrimitiveAttributesLM_1((Attribute)a_1_2, c_2, ca, fao_2);
+            }
         }
         return true;
     }
@@ -1497,16 +1534,16 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean complexAttributePrimitiveAttributesLM_1(final @NonNull /*@NonInvalid*/ Attribute a_1_0, final @NonNull /*@NonInvalid*/ Class c_1_0, final @NonNull /*@NonInvalid*/ Attribute ca_1, final @NonNull /*@NonInvalid*/ NonLeafAttribute fao_1) {
-        final @NonNull /*@Thrown*/ Classifier type = a_1_0.getType();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Classifier type = a_1_0.getType();
         if (!(type instanceof PrimitiveDataType)) {
             return false;
         }
         final @NonNull /*@Thrown*/ PrimitiveDataType t_1_0 = (PrimitiveDataType)type;
-        final @NonNull /*@Thrown*/ PrimitiveToName PrimitiveToName = OPPOSITE_OF_PrimitiveToName_primitive.get(t_1_0);
+        final @NonNull /*@Thrown*/ PrimitiveToName PrimitiveToName = DomainUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(t_1_0));
         final @NonNull /*@Thrown*/ PrimitiveToName p2n_1_0 = PrimitiveToName;
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         // creations
-        final @Nullable /*@Thrown*/ AttributeToColumn fa = UmltordbmsFactory.eINSTANCE.createAttributeToColumn();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ AttributeToColumn fa = UmltordbmsFactory.eINSTANCE.createAttributeToColumn();
         modelObjects[2/*null*/].add(fa);
         // assignments
         fa.setOwner(fao_1);
@@ -1516,11 +1553,11 @@ public class umlRdbms extends AbstractTransformation
         fa.setAttribute(a_1_0);
         OPPOSITE_OF_FromAttribute_attribute.put(a_1_0, fa);
         fa.setType(p2n_1_0);
-        final @Nullable /*@Thrown*/ String kind = a_1_0.getKind();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String kind = a_1_0.getKind();
         fa.setKind(kind);
-        final @Nullable /*@Thrown*/ String name = ca_1.getName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = ca_1.getName();
         final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR__);
-        final @Nullable /*@Thrown*/ String name_0 = a_1_0.getName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name_0 = a_1_0.getName();
         final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
         fa.setName(sum_0);
         // mapping calls
@@ -1551,12 +1588,12 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean complexAttributeComplexAttributesLM(final @NonNull /*@NonInvalid*/ Class c_3, final @NonNull /*@NonInvalid*/ Attribute ca_0) {
-        final @Nullable /*@Thrown*/ FromAttribute FromAttribute = OPPOSITE_OF_FromAttribute_attribute.get(ca_0);
+        final @Nullable /*@Thrown*/ FromAttribute FromAttribute = DomainUtil.nonNullState (OPPOSITE_OF_FromAttribute_attribute.get(ca_0));
         if (!(FromAttribute instanceof NonLeafAttribute)) {
             return false;
         }
         final @NonNull /*@Thrown*/ NonLeafAttribute fao_2 = (NonLeafAttribute)FromAttribute;
-        final @NonNull /*@Thrown*/ Classifier type = ca_0.getType();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Classifier type = ca_0.getType();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, c_3);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
@@ -1564,9 +1601,11 @@ public class umlRdbms extends AbstractTransformation
         // creations
         // assignments
         // mapping calls
-        final @NonNull /*@Thrown*/ List<Attribute> attributes = c_3.getAttributes();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Attribute> attributes = c_3.getAttributes();
         for (Object a_1_2 : attributes) {
-            complexAttributeComplexAttributesLM_1((Attribute)a_1_2, c_3, ca_0, fao_2);
+            if (a_1_2 != null) {
+                complexAttributeComplexAttributesLM_1((Attribute)a_1_2, c_3, ca_0, fao_2);
+            }
         }
         return true;
     }
@@ -1598,23 +1637,23 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean complexAttributeComplexAttributesLM_1(final @NonNull /*@NonInvalid*/ Attribute a_1_1, final @NonNull /*@NonInvalid*/ Class c_1_1, final @NonNull /*@NonInvalid*/ Attribute ca_1_0, final @NonNull /*@NonInvalid*/ NonLeafAttribute fao_1_0) {
-        final @NonNull /*@Thrown*/ Class owner = a_1_1.getOwner();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Class owner = a_1_1.getOwner();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(owner, c_1_1);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @NonNull /*@Thrown*/ Classifier type = a_1_1.getType();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Classifier type = a_1_1.getType();
         if (!(type instanceof Class)) {
             return false;
         }
         final @NonNull /*@Thrown*/ Class t_1_0 = (Class)type;
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         // creations
-        final @Nullable /*@Thrown*/ NonLeafAttribute fa = UmltordbmsFactory.eINSTANCE.createNonLeafAttribute();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ NonLeafAttribute fa = UmltordbmsFactory.eINSTANCE.createNonLeafAttribute();
         modelObjects[2/*null*/].add(fa);
         // assignments
         fa.setOwner(fao_1_0);
-        final @NonNull /*@Thrown*/ List<FromAttribute> fromAttributes = fao_1_0.getFromAttributes();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<FromAttribute> fromAttributes = fao_1_0.getFromAttributes();
         final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
         @NonNull /*@NonInvalid*/ BagValue.Accumulator accumulator = ValuesUtil.createBagAccumulatorValue(BAG_CLSSid_AttributeToColumn);
         @Nullable Iterator<?> ITERATOR__1 = BOXED_fromAttributes.iterator();
@@ -1631,7 +1670,7 @@ public class umlRdbms extends AbstractTransformation
             if (_1 == null) {
                 throw new InvalidValueException("Null source");
             }
-            final @NonNull /*@Thrown*/ List<AttributeToColumn> leafs = _1.getLeafs();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<AttributeToColumn> leafs = _1.getLeafs();
             final @NonNull /*@Thrown*/ SetValue BOXED_leafs = idResolver.createSetOfAll(SET_CLSSid_AttributeToColumn, leafs);
             //
             for (Object value : BOXED_leafs.flatten().getElements()) {
@@ -1643,11 +1682,11 @@ public class umlRdbms extends AbstractTransformation
         fa.getLeafs().addAll(UNBOXED_asSet);
         fa.setAttribute(a_1_1);
         OPPOSITE_OF_FromAttribute_attribute.put(a_1_1, fa);
-        final @Nullable /*@Thrown*/ String kind = a_1_1.getKind();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String kind = a_1_1.getKind();
         fa.setKind(kind);
-        final @Nullable /*@Thrown*/ String name = ca_1_0.getName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = ca_1_0.getName();
         final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR__);
-        final @Nullable /*@Thrown*/ String name_0 = a_1_1.getName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name_0 = a_1_1.getName();
         final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
         fa.setName(sum_0);
         // mapping calls
@@ -1690,20 +1729,20 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean attributeColumnsMR(final @NonNull /*@NonInvalid*/ AttributeToColumn a2c, final @NonNull /*@NonInvalid*/ ClassToTable c2t_0, final @NonNull /*@NonInvalid*/ Table t) {
-        final @Nullable /*@Thrown*/ Table table = c2t_0.getTable();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Table table = c2t_0.getTable();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(table, t);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
         }
-        final @Nullable /*@Thrown*/ PrimitiveToName type = a2c.getType();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ PrimitiveToName type = a2c.getType();
         final @Nullable /*@Thrown*/ PrimitiveToName p2n_3 = type;
         if (p2n_3 == null) {
             throw new InvalidValueException("Null source");
         }
-        final @NonNull /*@Thrown*/ String typeName = p2n_3.getTypeName();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String typeName = p2n_3.getTypeName();
         final @NonNull /*@Thrown*/ String ct = typeName;
         // creations
-        final @Nullable /*@Thrown*/ Column c = SimplerdbmsFactory.eINSTANCE.createColumn();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Column c = SimplerdbmsFactory.eINSTANCE.createColumn();
         modelObjects[1/*rdbms*/].add(c);
         // assignments
         c.setOwner(t);
@@ -1768,7 +1807,7 @@ public class umlRdbms extends AbstractTransformation
      * }
      */
     protected boolean attributeColumnsMR_2(final @NonNull /*@NonInvalid*/ AttributeToColumn a2c_2, final @NonNull /*@NonInvalid*/ Column c_2_0, final @NonNull /*@NonInvalid*/ String ct_2, final @NonNull /*@NonInvalid*/ PrimitiveToName p2n_2) {
-        final @Nullable /*@Thrown*/ PrimitiveToName type = a2c_2.getType();
+        final @SuppressWarnings("null")@NonNull /*@Thrown*/ PrimitiveToName type = a2c_2.getType();
         final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, p2n_2);
         if (eq != ValuesUtil.TRUE_VALUE) {
             return false;
@@ -1833,9 +1872,9 @@ public class umlRdbms extends AbstractTransformation
         try {
             // creations
             // assignments
-            final @Nullable /*@Thrown*/ String name = a2c_3.getName();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = a2c_3.getName();
             c_3_0.setName(name);
-            final @Nullable /*@Thrown*/ String kind = a2c_3.getKind();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String kind = a2c_3.getKind();
             c_3_0.setKind(kind);
             // mapping calls
             return true;

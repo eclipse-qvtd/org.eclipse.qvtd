@@ -86,7 +86,7 @@ public class QVTiMRTracingEvaluationVisitor extends QVTiAbstractTracingEvaluatio
 				logger.info(getIndent() + "RealizedVariables for CoreDomain " + d.getName());
 				indentLevel++;
 				for (Variable v : ((Area)d).getBottomPattern().getRealizedVariable()) {
-					logger.info(getIndent() + "RealizedVariable " + v.getName() + ": " + prettyPrint((EObject) delegate.getEvaluationEnvironment().getValueOf(v)));
+					logger.info(getIndent() + "RealizedVariable " + v.getName() + ": " + prettyPrint(delegate.getEvaluationEnvironment().getValueOf(v)));
 				}
 				indentLevel--;
 			}

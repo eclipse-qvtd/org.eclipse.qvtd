@@ -124,7 +124,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	 * @param verboseLevel the new verbose level
 	 */
 	public void setVerboseLevel(int verboseLevel) {
-		this.verboseLevel = verboseLevel;
+		QVTiAbstractTracingEvaluationVisitor.verboseLevel = verboseLevel;
 	}
 	
 
@@ -239,7 +239,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		indentLevel++;
 		// Some variables are assigned after visit
 		List<Variable> nullVars = new ArrayList<Variable>();
-		for (Variable v : guardPattern.getVariable()) {
+		for (@SuppressWarnings("null")@NonNull Variable v : guardPattern.getVariable()) {
 			if (delegate.getEvaluationEnvironment().getValueOf(v) == null) {
 				nullVars.add(v);
 				OCLExpression initExp = v.getInitExpression();
@@ -249,13 +249,13 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 					indentLevel--;
 				}
 			} else {
-				logger.info(getIndent() + "Variable " + v.getName() + ": " + prettyPrint((EObject) delegate.getEvaluationEnvironment().getValueOf(v)));
+				logger.info(getIndent() + "Variable " + v.getName() + ": " + prettyPrint(delegate.getEvaluationEnvironment().getValueOf(v)));
 			}
 		}
 		Object result = delegate.visitGuardPattern(guardPattern);
 		if (result == Boolean.TRUE) {
 			for (Variable v : nullVars) {
-				logger.info(getIndent() + "Variable " + v.getName() + ": " + prettyPrint((EObject) delegate.getEvaluationEnvironment().getValueOf(v)));
+				logger.info(getIndent() + "Variable " + v.getName() + ": " + prettyPrint(delegate.getEvaluationEnvironment().getValueOf(v)));
 			}
 		}
 		if (guardPattern.getPredicate().size() == 0) {

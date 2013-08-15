@@ -14,6 +14,8 @@
  */
 package org.eclipse.qvtd.codegen.qvti.java;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -175,8 +177,14 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		Map<Property, String> toMiddleProperties = getGlobalContext().getToMiddleProperties();
 		if (toMiddleProperties != null) {
 			js.append("\n/* Outer-to-Middle Property navigation caches */\n");
+			Map<String, Property> key2property = new HashMap<String, Property>();
 			for (Map.Entry<Property, String> entry : toMiddleProperties.entrySet()) {
-				Property property = entry.getKey();
+				key2property.put(entry.getValue(), entry.getKey());
+			}
+			List<String> sortedKeys = new ArrayList<String>(key2property.keySet());
+			Collections.sort(sortedKeys);
+			for (String key : sortedKeys) {
+				Property property = key2property.get(key);
 				TypeDescriptor outerTypeDescriptor = context.getTypeDescriptor(property.getOwningType().getTypeId(), true);
 				TypeDescriptor middleTypeDescriptor = context.getTypeDescriptor(property.getType().getTypeId(), true);
 				js.append("protected final ");
@@ -184,13 +192,13 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 				js.append(" ");
 				js.appendClassReference(Map.class, false, middleTypeDescriptor, outerTypeDescriptor);
 				js.append(" ");
-				js.append(entry.getValue());
+				js.append(key);
 				js.append(" = new ");
 				js.appendClassReference(HashMap.class, false, middleTypeDescriptor, outerTypeDescriptor);
 				js.append("();\n");
 			}
 		}
-        }
+    }
 
 	@SuppressWarnings("null")
 	protected void doRun(@NonNull CGTransformation cgTransformation) {
@@ -232,6 +240,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 			js.append(listNames.get(cgFreeVariable));
 			js.append(") {\n");
 			js.pushIndentation(null);
+			js.append("if (");
+			js.appendValueName(cgFreeVariable);
+			js.append(" != null) {\n");
+			js.pushIndentation(null);
 		}
 		js.append(cgRootMapping.getName());
 		js.append("(");
@@ -245,6 +257,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		}
 		js.append(");\n");
 		for (@SuppressWarnings("unused") CGGuardVariable cgFreeVariable : cgFreeVariables) {
+			js.popIndentation();
+			js.append("}\n");
 			js.popIndentation();
 			js.append("}\n");
 		}
@@ -379,8 +393,19 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 						js.appendValueName(body);
 						js.append(";\n");
 					}
+					else if (cgFunction.getASTypeId() == TypeId.STRING) {			// FIXME Fudge for body-less functions
+						js.append("return \"\";\n");
+					}
+					else if (cgFunction.getASTypeId() == TypeId.REAL) {			// FIXME Fudge for body-less functions
+						js.append("return 0;\n");
+					}
+					else if (cgFunction.getASTypeId() == TypeId.INTEGER) {			// FIXME Fudge for body-less functions
+						js.append("return 0;\n");
+					}
 					else {			// FIXME Fudge for body-less functions
-						js.append("return null;\n");
+						js.append("return ");
+						js.appendClassReference(Collections.class);
+						js.append(".EMPTY_LIST;\n");
 					}
 				js.popIndentation();
 				js.append("}\n");
@@ -520,13 +545,17 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 				js.appendValueName(valueOrValues);
 				js.append(") {\n");
 				js.pushIndentation(null);
-				if (!argumentTypeDescriptor.isAssignableFrom(iteratorTypeDescriptor)) {
 					js.append("if (");
 					js.appendValueName(cgMappingCallBinding);
-					js.append(" instanceof ");
-					js.appendClassReference(argumentTypeDescriptor);
-				js.append(") {\n");
-				js.pushIndentation(null);
+					js.append(" != null) {\n");
+					js.pushIndentation(null);
+					if (!argumentTypeDescriptor.isAssignableFrom(iteratorTypeDescriptor)) {
+						js.append("if (");
+						js.appendValueName(cgMappingCallBinding);
+						js.append(" instanceof ");
+						js.appendClassReference(argumentTypeDescriptor);
+					js.append(") {\n");
+					js.pushIndentation(null);
 			}
 		}
 		}
@@ -567,6 +596,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 					js.popIndentation();
 					js.append("}\n");
 				}
+				js.popIndentation();
+				js.append("}\n");
 				js.popIndentation();
 				js.append("}\n");
 			}
@@ -631,10 +662,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		if (toMiddleProperties != null) {
 			String cacheName = toMiddleProperties.get(pivotProperty);
 			if (cacheName != null) {
+				js.appendClassReference(DomainUtil.class);
+				js.append(".nonNullState (");
 				js.append(cacheName);
 				js.append(".get(");
 				js.appendValueName(source);
-				js.append(")");
+				js.append("))");
 			}
 			js.append(";\n");
 		}

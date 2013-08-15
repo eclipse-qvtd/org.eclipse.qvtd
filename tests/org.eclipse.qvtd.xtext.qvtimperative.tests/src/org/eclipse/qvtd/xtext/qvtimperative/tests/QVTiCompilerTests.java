@@ -33,6 +33,7 @@ import org.eclipse.ocl.examples.domain.evaluation.AbstractTransformation;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorManager;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -72,8 +73,7 @@ public class QVTiCompilerTests extends LoadTestCase
 
 		@NonNull
 		public DomainEvaluator createNestedEvaluator() {
-			// TODO Auto-generated method stub
-			return null;
+			throw new UnsupportedOperationException();
 		}
 
 		@NonNull
@@ -83,8 +83,7 @@ public class QVTiCompilerTests extends LoadTestCase
 
 		@NonNull
 		public DomainModelManager getModelManager() {
-			// TODO Auto-generated method stub
-			return null;
+			throw new UnsupportedOperationException();
 		}
 	}
 
@@ -103,6 +102,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI pivotURI = getProjectFileURI(pivotName);
 		CS2PivotResourceAdapter adapter = null;
 		BaseCSResource xtextResource = (BaseCSResource) resourceSet.getResource(inputURI, true);
+		assert xtextResource != null;
 		assertNoResourceErrors("Load failed", xtextResource);
 		adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
 		Resource pivotResource = adapter.getPivotResource(xtextResource);
@@ -114,17 +114,17 @@ public class QVTiCompilerTests extends LoadTestCase
 		pivotResource.setURI(pivotURI);
 	    
 	    CompleteOCLStandaloneSetup.doSetup();
-	    URI oclURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true);
+	    URI oclURI = DomainUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
 //		CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metaModelManager);
-		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(QVTcoreBasePackage.eINSTANCE, oclURI, metaModelManager);
+		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(DomainUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, metaModelManager);
 //		CompleteOCLEObjectValidator completeOCLEObjectValidator3 = new CompleteOCLEObjectValidator(QVTbasePackage.eINSTANCE, oclURI, metaModelManager);
 //		completeOCLEObjectValidator1.initialize();
 		completeOCLEObjectValidator2.initialize();
 //		completeOCLEObjectValidator3.initialize();
-		PivotEObjectValidator.install(pivotResource.getResourceSet(), metaModelManager);
-		PivotEObjectValidator.install(QVTbasePackage.eINSTANCE);
-		PivotEObjectValidator.install(QVTcoreBasePackage.eINSTANCE);
-		PivotEObjectValidator.install(QVTimperativePackage.eINSTANCE);
+		PivotEObjectValidator.install(DomainUtil.nonNullState(pivotResource.getResourceSet()), DomainUtil.nonNullState(metaModelManager));
+		PivotEObjectValidator.install(DomainUtil.nonNullState(QVTbasePackage.eINSTANCE));
+		PivotEObjectValidator.install(DomainUtil.nonNullState(QVTcoreBasePackage.eINSTANCE));
+		PivotEObjectValidator.install(DomainUtil.nonNullState(QVTimperativePackage.eINSTANCE));
 	    
 		assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
 		Map<String, Object> options = new HashMap<String, Object>();
@@ -145,10 +145,10 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends AbstractTransformation> txClass = generateCode(transformURI, genModelURI, "src-gen/");
 		
 		Constructor<? extends AbstractTransformation> txConstructor = txClass.getConstructor(DomainEvaluator.class);
-		DomainEvaluator evaluator = new TxEvaluator(metaModelManager);
+		DomainEvaluator evaluator = new TxEvaluator(DomainUtil.nonNullState(metaModelManager));
 		AbstractTransformation tx = txConstructor.newInstance(evaluator);
 		Resource inputResource = resourceSet.getResource(inputModelURI, true);
-		tx.addRootObjects("hsv", inputResource.getContents());
+		tx.addRootObjects("hsv", DomainUtil.nonNullState(inputResource.getContents()));
 		tx.run();
 		Resource outputResource = resourceSet.createResource(outputModelURI);
 		outputResource.getContents().addAll(tx.getRootObjects("hls"));
@@ -166,10 +166,10 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends AbstractTransformation> txClass = generateCode(transformURI, genModelURI, "src-gen/");
 		
 		Constructor<? extends AbstractTransformation> txConstructor = txClass.getConstructor(DomainEvaluator.class);
-		DomainEvaluator evaluator = new TxEvaluator(metaModelManager);
+		DomainEvaluator evaluator = new TxEvaluator(DomainUtil.nonNullState(metaModelManager));
 		AbstractTransformation tx = txConstructor.newInstance(evaluator);
 		Resource inputResource = resourceSet.getResource(inputModelURI, true);
-		tx.addRootObjects("uml", inputResource.getContents());
+		tx.addRootObjects("uml", DomainUtil.nonNullState(inputResource.getContents()));
 		tx.run();
 		Resource outputResource = resourceSet.createResource(outputModelURI);
 		outputResource.getContents().addAll(tx.getRootObjects("rdbms"));
@@ -186,18 +186,20 @@ public class QVTiCompilerTests extends LoadTestCase
 				metaModelManager.addGenModel((GenModel)eObject);
 			}
 		}
-		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
+		MetaModelManagerResourceSetAdapter.getAdapter(DomainUtil.nonNullState(resourceSet), metaModelManager);
 		Resource resource = doLoad_Concrete(transformURI);
 		for (EObject eObject : resource.getContents()) {
 			if (eObject instanceof ImperativeModel) {
 				for (org.eclipse.ocl.examples.pivot.Package pPackage : ((ImperativeModel)eObject).getNestedPackage()) {
 					if (pPackage instanceof Transformation) {
-						QVTiCodeGenerator cg = new QVTiCodeGenerator(metaModelManager, (Transformation)pPackage);
+						QVTiCodeGenerator cg = new QVTiCodeGenerator(DomainUtil.nonNullState(metaModelManager), (Transformation)pPackage);
 						QVTiCodeGenOptions options = cg.getOptions();
 						options.setUseNullAnnotations(true);
 						options.setPackagePrefix("cg");
 						cg.generateClassFile();
-						cg.saveSourceFile(savePath);
+						if (savePath != null) {
+							cg.saveSourceFile(savePath);
+						}
 						Class<? extends AbstractTransformation> txClass = compileTransformation(cg);
 						return txClass;
 					}

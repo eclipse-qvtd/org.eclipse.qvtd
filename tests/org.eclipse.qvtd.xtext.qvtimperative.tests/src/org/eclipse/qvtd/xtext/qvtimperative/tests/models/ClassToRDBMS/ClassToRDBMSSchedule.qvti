@@ -214,7 +214,7 @@ map classToTableMR in umlRdbms {
     }
     map associationToForeignKeyMR {
         p2s := p2s;
-        dt := null;
+        dt := t;
 --        sc2t := c2t;
 --        dc2t <= c2t.associationsToForeignKeys.referenced;
         a2f <= c2t.associationsToForeignKeys;
