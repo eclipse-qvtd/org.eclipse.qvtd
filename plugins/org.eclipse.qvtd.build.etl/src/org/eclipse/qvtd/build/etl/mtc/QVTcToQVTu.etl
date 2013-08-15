@@ -1,0 +1,80 @@
+pre {
+  "QVTc to QVTu".println();
+  // The user must define a direction and a mode
+  var inputDomain : new String = "upperGraph";
+  //var outputDomain : new String = "rdbms";
+  var isUpdate = new Boolean = false;
+  var isCreate = new Boolean = true;
+  
+  if (isUpdate == isCreate) {
+    // ERROR
+  }
+}
+
+rule CoreModels 
+    transform cm : QVTc!CoreModel
+    to um : QVTu!CoreModel {
+    
+        um.name = cm.name;
+        um.nestedPackage ::= cm.nestedPackage;
+    }
+
+rule Transformation
+    transform ct : QVTc!Transformation
+    to ut : QVTu!Transformation {
+        
+        ut.name = ct.name;
+        ut.`extends` ::= ct.`extends`;
+        ut.modelParameter ::= ct.modelParameter;
+        ut.`rule` ::= ct.`rule`; 
+    }
+    
+rule TypedModel
+    transform ctp : QVTc!TypedModel    
+    to utp : QVTu!TypedModel {
+    
+        utp.name = ctp.name;
+        utp.dependsOn ::= ctp.dependsOn;
+        utp.usedPackage =  ctp.usedPackage;
+    }
+
+rule Mapping
+    transform cm : QVTc!Mapping
+    to um : QVTu!Mapping {
+    	
+    	um.name = cm.name;
+        um.overrides ::= cm.overrides;
+        um.domain ::= cm.domain;    
+        um.local ::= cm.local;
+    }
+
+
+rule InputDomain 
+    transform cd : QVTc!CoreDomain
+    to ud : QVTu!CoreDomain {
+    
+	    guard : cd.name == inputDomain
+	    
+	    ud.isCheckable = false;
+	    ud.isEnforceable = false;
+	    ud.name = cd.name;
+	    ud.typedModel ::= cd.TypedModel;
+    }
+    
+rule OutputDomain 
+    transform cd : QVTc!CoreDomain
+    to ud : QVTu!CoreDomain {
+    
+        guard : cd.name <> inputDomain
+        
+	    // If the write mode is create, remove all check keywords from output domains. If the write mode is update, keep them
+	    if (isCreate) {
+	        ud.isCheckable = false;
+	    } else {
+	        // Is update?
+	        ud.isCheckable = cd.isCheckable;
+	    }
+	    ud.name = cd.name;
+        ud.typedModel ::= cd.TypedModel;
+    }
+        
