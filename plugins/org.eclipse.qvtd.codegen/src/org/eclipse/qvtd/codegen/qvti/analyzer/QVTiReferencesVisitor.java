@@ -52,7 +52,7 @@ public class QVTiReferencesVisitor extends ReferencesVisitor implements QVTiCGMo
 	}
 
 	public @Nullable List<Object> visitCGMappingCall(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall cgMappingCall) {
-		return append(visitCGValuedElement(cgMappingCall), ((MappingCall)cgMappingCall.getPivot()).getReferredMapping());
+		return append(visitCGValuedElement(cgMappingCall), ((MappingCall)cgMappingCall.getAst()).getReferredMapping());
 	}
 
 	public @Nullable List<Object> visitCGMappingCallBinding(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding object) {

@@ -24,29 +24,29 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 
 /**
- * CGTypedElementModelSpec supports generation of the CGTypedElement.getPivotTypeId() method hierarchy.
+ * QVTdCGTypedElementModelSpec supports generation of the CGTypedElement.getASTypeId() method hierarchy.
  */
 public class QVTdCGTypedElementModelSpec extends CGTypedElementModelSpec
 {
 	/**
-	 * The algorithm options for getPivotTypeId()
+	 * The algorithm options for getASTypeId()
 	 */
-	public static final @NonNull Pti PTI_BOOL = new Pti() { public @NonNull String generate() {
+	public static final @NonNull Ati ATI_BOOL = new Ati() { public @NonNull String generate() {
 		return "return " + classRef(TypeId.class) + ".BOOLEAN;";
 	}};
 
 	public static void register() {
-		new QVTdCGTypedElementModelSpec(CGMapping.class, PTI_BOOL);
-		new QVTdCGTypedElementModelSpec(CGMappingExp.class, PTI_BOOL);
-		new QVTdCGTypedElementModelSpec(CGPredicate.class, PTI_BOOL);
+		new QVTdCGTypedElementModelSpec(CGMapping.class, ATI_BOOL);
+		new QVTdCGTypedElementModelSpec(CGMappingExp.class, ATI_BOOL);
+		new QVTdCGTypedElementModelSpec(CGPredicate.class, ATI_BOOL);
 	}
 	
-	protected QVTdCGTypedElementModelSpec(@NonNull Class<?> cgClass, @Nullable Pti pti) {
-		super(cgClass, pti);
+	protected QVTdCGTypedElementModelSpec(@NonNull Class<?> cgClass, @Nullable Ati ati) {
+		super(cgClass, ati);
 	}
 	
 	@Override
 	public void generate(@NonNull StringBuilder s, @NonNull GenModel genModel, boolean isImplementation) {
-		getPivotTypeId.generate(s, this, genModel, isImplementation);
+		getASTypeId.generate(s, this, genModel, isImplementation);
 	}
 }

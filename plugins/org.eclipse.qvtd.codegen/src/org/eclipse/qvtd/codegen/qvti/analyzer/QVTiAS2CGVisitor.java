@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.Pivot2CGVisitor;
+import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
@@ -99,12 +99,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
-public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimperativeVisitor<CGNamedElement>
+public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisitor<CGNamedElement>
 {
 	protected final @NonNull QVTiAnalyzer analyzer;
 	protected final @NonNull QVTiGlobalContext globalContext;
 	
-	public QVTiPivot2CGVisitor(@NonNull QVTiAnalyzer analyzer, @NonNull QVTiGlobalContext globalContext) {
+	public QVTiAS2CGVisitor(@NonNull QVTiAnalyzer analyzer, @NonNull QVTiGlobalContext globalContext) {
 		super(analyzer);
 		this.analyzer = analyzer;
 		this.globalContext = globalContext;
@@ -245,7 +245,7 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		if (cgFunctionParameter == null) {
 			cgFunctionParameter = QVTiCGModelFactory.eINSTANCE.createCGFunctionParameter();
 			context.setNames(cgFunctionParameter, aParameter);
-			setPivot(cgFunctionParameter, aParameter);
+			setAst(cgFunctionParameter, aParameter);
 			cgFunctionParameter.setTypeId(context.getTypeId(aParameter.getTypeId()));
 			addParameter(aParameter, cgFunctionParameter);
 		}
@@ -256,7 +256,7 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		CGGuardVariable cgGuardVariable = (CGGuardVariable) getVariablesStack().getParameter(pParameter);
 			cgGuardVariable = QVTiCGModelFactory.eINSTANCE.createCGGuardVariable();
 			context.setNames(cgGuardVariable, pParameter);
-			setPivot(cgGuardVariable, pParameter);
+			setAst(cgGuardVariable, pParameter);
 			cgGuardVariable.setTypeId(context.getTypeId(pParameter.getTypeId()));
 			cgGuardVariable.setTypedModel(getTypedModel(pParameter));
 			addParameter(pParameter, cgGuardVariable);
@@ -277,7 +277,7 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 			if (cgVariable == null) {
 				cgVariable = QVTiCGModelFactory.eINSTANCE.createCGRealizedVariable();
 			}
-			setPivot(cgVariable, pRealizedVariable);
+			setAst(cgVariable, pRealizedVariable);
 			cgVariable.setTypedModel(getTypedModel(pRealizedVariable));
 			variablesStack.putVariable(pRealizedVariable, cgVariable);
 		}
@@ -327,7 +327,7 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 
 	public @Nullable CGNamedElement visitFunction(@NonNull Function pFunction) {
 		CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
-		setPivot(cgFunction, pFunction);
+		setAst(cgFunction, pFunction);
 		cgFunction.setRequired(pFunction.isRequired());
 		for (Parameter pParameter : pFunction.getOwnedParameter()) {
 			cgFunction.getParameters().add(doVisit(CGParameter.class, pParameter));
@@ -364,10 +364,10 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 
 	public @Nullable CGNamedElement visitMapping(@NonNull Mapping pMapping) {
 		CGMapping cgMapping = QVTiCGModelFactory.eINSTANCE.createCGMapping();
-		setPivot(cgMapping, pMapping);
+		setAst(cgMapping, pMapping);
 		analyzer.addMapping(pMapping, cgMapping);
 		CGMappingExp cgMappingExp = QVTiCGModelFactory.eINSTANCE.createCGMappingExp();
-		setPivot(cgMappingExp, pMapping);
+		setAst(cgMappingExp, pMapping);
 		TypeId pivotTypeId = TypeId.BOOLEAN; //pMapping.getTypeId();
 		cgMappingExp.setTypeId(context.getTypeId(pivotTypeId));
 		cgMapping.setBody(cgMappingExp);
@@ -379,7 +379,7 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 
 	public @Nullable CGNamedElement visitMappingCall(@NonNull MappingCall pMappingCall) {
 		CGMappingCall cgMappingCall = QVTiCGModelFactory.eINSTANCE.createCGMappingCall();
-		setPivot(cgMappingCall, pMappingCall);
+		setAst(cgMappingCall, pMappingCall);
 		List<CGMappingCallBinding> cgMappingCallBindings = new ArrayList<CGMappingCallBinding>();
 		for (MappingCallBinding pMappingCallBinding : pMappingCall.getBinding()) {
 			CGMappingCallBinding cgMappingCallBinding = doVisit(CGMappingCallBinding.class, pMappingCallBinding);
@@ -409,17 +409,17 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 	}
 
 	public @Nullable CGNamedElement visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment pPropertyAssignment) {
-//		Property pivotProperty = DomainUtil.nonNullModel(pPropertyAssignment.getTargetProperty());
+//		Property asProperty = DomainUtil.nonNullModel(pPropertyAssignment.getTargetProperty());
 		CGMiddlePropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyAssignment();
 //		setPivot(cgPropertyAssignment, pPredicate);
 		cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, pPropertyAssignment.getSlotExpression()));
-		Property pivotProperty = pPropertyAssignment.getTargetProperty();
-		cgPropertyAssignment.setReferredProperty(pivotProperty);
+		Property asProperty = pPropertyAssignment.getTargetProperty();
+		cgPropertyAssignment.setReferredProperty(asProperty);
 //		cgPredicate.setName(pPredicate.getName());
 		cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
 //		cgMappingCallBinding.setValueName(localnamepMappingCallBinding.getBoundVariable().getName());
 		cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, pPropertyAssignment.getValue()));
-		EStructuralFeature eStructuralFeature = (EStructuralFeature) pivotProperty.getETarget();
+		EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getETarget();
 		if (eStructuralFeature != null) {
 			try {
 				genModelHelper.getGetAccessor(eStructuralFeature);
@@ -431,17 +431,17 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 	}
 
 	public @Nullable CGNamedElement visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp pPropertyCallExp) {
-		Property pivotProperty = DomainUtil.nonNullModel(pPropertyCallExp.getReferredProperty());
-		globalContext.addToMiddleProperty(DomainUtil.nonNullModel(pivotProperty.getOpposite()));
-//		LibraryProperty libraryProperty = metaModelManager.getImplementation(pivotProperty);
+		Property asProperty = DomainUtil.nonNullModel(pPropertyCallExp.getReferredProperty());
+		globalContext.addToMiddleProperty(DomainUtil.nonNullModel(asProperty.getOpposite()));
+//		LibraryProperty libraryProperty = metaModelManager.getImplementation(asProperty);
 		CGMiddlePropertyCallExp cgPropertyCallExp = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyCallExp();					
-//		CGExecutorProperty cgExecutorProperty = context.getExecutorProperty(pivotProperty);
+//		CGExecutorProperty cgExecutorProperty = context.getExecutorProperty(asProperty);
 //		cgExecutorPropertyCallExp.setExecutorProperty(cgExecutorProperty);
 //		cgPropertyCallExp = cgExecutorPropertyCallExp;
 //		cgPropertyCallExp.getDependsOn().add(cgExecutorProperty);
-		cgPropertyCallExp.setReferredProperty(pivotProperty.getOpposite());
-		setPivot(cgPropertyCallExp, pPropertyCallExp);
-		cgPropertyCallExp.setRequired(pivotProperty.isRequired());
+		cgPropertyCallExp.setReferredProperty(asProperty.getOpposite());
+		setAst(cgPropertyCallExp, pPropertyCallExp);
+		cgPropertyCallExp.setRequired(asProperty.isRequired());
 		CGValuedElement cgSource = doVisit(CGValuedElement.class, pPropertyCallExp.getSource());
 		cgPropertyCallExp.setSource(cgSource);
 		return cgPropertyCallExp;
@@ -454,7 +454,7 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 		if (pOperation instanceof Function) {
 			CGFunctionCallExp cgFunctionCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
 			cgFunctionCallExp.setReferredOperation(pOperation);
-			setPivot(cgFunctionCallExp, element);
+			setAst(cgFunctionCallExp, element);
 			cgFunctionCallExp.setRequired(pOperation.isRequired());
 			for (OCLExpression pArgument : element.getArgument()) {
 				CGValuedElement cgArgument = doVisit(CGValuedElement.class, pArgument);
@@ -532,19 +532,19 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 
 	public @Nullable CGNamedElement visitTransformation(@NonNull Transformation element) {
 		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
-		setPivot(cgTransformation, element);
+		setAst(cgTransformation, element);
 		List<CGTypedModel> cgTypedModels = cgTransformation.getTypedModels();
 		for (TypedModel pTypedModel : element.getModelParameter()) {
 			CGTypedModel cgTypedModel = doVisit(CGTypedModel.class, pTypedModel);
 			cgTypedModel.setModelIndex(cgTypedModels.size());
 			cgTypedModels.add(cgTypedModel);
 		}
-		for (Rule pivotRule : element.getRule()) {
-			CGMapping cgMapping = doVisit(CGMapping.class, pivotRule);
+		for (Rule asRule : element.getRule()) {
+			CGMapping cgMapping = doVisit(CGMapping.class, asRule);
 			cgTransformation.getMappings().add(cgMapping);
 		}
-		for (Operation pivotOperation : element.getOwnedOperation()) {
-			CGOperation cgOperation = doVisit(CGOperation.class, pivotOperation);
+		for (Operation asOperation : element.getOwnedOperation()) {
+			CGOperation cgOperation = doVisit(CGOperation.class, asOperation);
 			cgTransformation.getOperations().add(cgOperation);
 		}
 		return cgTransformation;
@@ -552,7 +552,7 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 
 	public @Nullable CGNamedElement visitTypedModel(@NonNull TypedModel pTypedModel) {
 		CGTypedModel cgTypedModel = QVTiCGModelFactory.eINSTANCE.createCGTypedModel();
-		setPivot(cgTypedModel, pTypedModel);
+		setAst(cgTypedModel, pTypedModel);
 		analyzer.addTypedModel(pTypedModel, cgTypedModel);
 		return cgTypedModel;
 	}
@@ -564,7 +564,7 @@ public final class QVTiPivot2CGVisitor extends Pivot2CGVisitor implements QVTimp
 	public @Nullable CGNamedElement visitVariablePredicate(@NonNull VariablePredicate pPredicate) {
 		CGVariablePredicate cgPredicate = QVTiCGModelFactory.eINSTANCE.createCGVariablePredicate();
 //		setPivot(cgPredicate, pPredicate);
-		cgPredicate.setPivot(pPredicate);
+		cgPredicate.setAst(pPredicate);
 //		TypeId pivotTypeId = pPredicate.getTypeId();
 //		cgPredicate.setTypeId(context.getTypeId(pivotTypeId));
 		Variable targetVariable = pPredicate.getTargetVariable();

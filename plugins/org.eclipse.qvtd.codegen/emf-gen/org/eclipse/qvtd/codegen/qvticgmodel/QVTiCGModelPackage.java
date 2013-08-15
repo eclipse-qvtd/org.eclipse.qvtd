@@ -99,6 +99,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_PROPERTY_ASSIGNMENT = 13;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_ASSIGNMENT__AST = CGModelPackage.CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -106,15 +115,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PROPERTY_ASSIGNMENT__NAME = CGModelPackage.CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_ASSIGNMENT__PIVOT = CGModelPackage.CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -217,6 +217,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_ECORE_PROPERTY_ASSIGNMENT = 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_PROPERTY_ASSIGNMENT__AST = CG_PROPERTY_ASSIGNMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -224,15 +233,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_PROPERTY_ASSIGNMENT__NAME = CG_PROPERTY_ASSIGNMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_ASSIGNMENT__PIVOT = CG_PROPERTY_ASSIGNMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -520,6 +520,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_REALIZED_VARIABLE = 14;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_REALIZED_VARIABLE__AST = CGModelPackage.CG_VARIABLE__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -527,15 +536,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_REALIZED_VARIABLE__NAME = CGModelPackage.CG_VARIABLE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REALIZED_VARIABLE__PIVOT = CGModelPackage.CG_VARIABLE__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -629,6 +629,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_ECORE_REALIZED_VARIABLE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_REALIZED_VARIABLE__AST = CG_REALIZED_VARIABLE__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -636,15 +645,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_REALIZED_VARIABLE__NAME = CG_REALIZED_VARIABLE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_REALIZED_VARIABLE__PIVOT = CG_REALIZED_VARIABLE__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -747,6 +747,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_FUNCTION = 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION__AST = CGModelPackage.CG_OPERATION__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -754,15 +763,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_FUNCTION__NAME = CGModelPackage.CG_OPERATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FUNCTION__PIVOT = CGModelPackage.CG_OPERATION__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -865,6 +865,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_FUNCTION_CALL_EXP = 3;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION_CALL_EXP__AST = CGModelPackage.CG_OPERATION_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -872,15 +881,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_FUNCTION_CALL_EXP__NAME = CGModelPackage.CG_OPERATION_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FUNCTION_CALL_EXP__PIVOT = CGModelPackage.CG_OPERATION_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -992,6 +992,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_FUNCTION_PARAMETER = 4;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FUNCTION_PARAMETER__AST = CGModelPackage.CG_PARAMETER__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -999,15 +1008,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_FUNCTION_PARAMETER__NAME = CGModelPackage.CG_PARAMETER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FUNCTION_PARAMETER__PIVOT = CGModelPackage.CG_PARAMETER__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1092,6 +1092,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_GUARD_VARIABLE = 5;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_GUARD_VARIABLE__AST = CGModelPackage.CG_PARAMETER__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1099,15 +1108,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_GUARD_VARIABLE__NAME = CGModelPackage.CG_PARAMETER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_VARIABLE__PIVOT = CGModelPackage.CG_PARAMETER__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1191,6 +1191,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_GUARD_VARIABLE_FEATURE_COUNT = CGModelPackage.CG_PARAMETER_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING__AST = CGModelPackage.CG_NAMED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1198,15 +1207,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_MAPPING__NAME = CGModelPackage.CG_NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING__PIVOT = CGModelPackage.CG_NAMED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -1245,6 +1245,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING_FEATURE_COUNT = CGModelPackage.CG_NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_CALL__AST = CGModelPackage.CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1252,15 +1261,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_MAPPING_CALL__NAME = CGModelPackage.CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_CALL__PIVOT = CGModelPackage.CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1326,6 +1326,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING_CALL_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_CALL_BINDING__AST = CGModelPackage.CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1333,15 +1342,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_MAPPING_CALL_BINDING__NAME = CGModelPackage.CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_CALL_BINDING__PIVOT = CGModelPackage.CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1417,6 +1417,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING_EXP = 9;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_EXP__AST = CGModelPackage.CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1424,15 +1433,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_MAPPING_EXP__NAME = CGModelPackage.CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_EXP__PIVOT = CGModelPackage.CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1535,6 +1535,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MIDDLE_PROPERTY_ASSIGNMENT = 10;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MIDDLE_PROPERTY_ASSIGNMENT__AST = CG_ECORE_PROPERTY_ASSIGNMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1542,15 +1551,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_MIDDLE_PROPERTY_ASSIGNMENT__NAME = CG_ECORE_PROPERTY_ASSIGNMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MIDDLE_PROPERTY_ASSIGNMENT__PIVOT = CG_ECORE_PROPERTY_ASSIGNMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1662,6 +1662,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MIDDLE_PROPERTY_CALL_EXP = 11;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MIDDLE_PROPERTY_CALL_EXP__AST = CGModelPackage.CG_PROPERTY_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1669,15 +1678,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_MIDDLE_PROPERTY_CALL_EXP__NAME = CGModelPackage.CG_PROPERTY_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP__PIVOT = CGModelPackage.CG_PROPERTY_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1761,6 +1761,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MIDDLE_PROPERTY_CALL_EXP_FEATURE_COUNT = CGModelPackage.CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PREDICATE__AST = CGModelPackage.CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1768,15 +1777,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PREDICATE__NAME = CGModelPackage.CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PREDICATE__PIVOT = CGModelPackage.CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1851,6 +1851,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_PREDICATE_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TRANSFORMATION__AST = CGModelPackage.CG_CLASS__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1858,15 +1867,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TRANSFORMATION__NAME = CGModelPackage.CG_CLASS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TRANSFORMATION__PIVOT = CGModelPackage.CG_CLASS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Containing Package</b></em>' container reference.
@@ -1942,6 +1942,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_TYPED_MODEL = 16;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TYPED_MODEL__AST = CGModelPackage.CG_NAMED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1949,15 +1958,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TYPED_MODEL__NAME = CGModelPackage.CG_NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPED_MODEL__PIVOT = CGModelPackage.CG_NAMED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Transformation</b></em>' container reference.
@@ -1997,6 +1997,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_VARIABLE_PREDICATE = 17;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_VARIABLE_PREDICATE__AST = CG_PREDICATE__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2004,15 +2013,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_VARIABLE_PREDICATE__NAME = CG_PREDICATE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_PREDICATE__PIVOT = CG_PREDICATE__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.

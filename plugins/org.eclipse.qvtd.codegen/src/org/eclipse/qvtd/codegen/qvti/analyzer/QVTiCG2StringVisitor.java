@@ -106,7 +106,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 	}
 
 	public @Nullable String visitCGMappingCall(@NonNull CGMappingCall cgMappingCall) {
-		appendName(((MappingCall)cgMappingCall.getPivot()).getReferredMapping());
+		appendName(((MappingCall)cgMappingCall.getAst()).getReferredMapping());
 		append("(");
 		for (CGValuedElement argument : cgMappingCall.getMappingCallBindings()) {
 			safeVisit(argument);

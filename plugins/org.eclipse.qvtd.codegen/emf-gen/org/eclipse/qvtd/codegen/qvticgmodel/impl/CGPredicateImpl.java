@@ -359,7 +359,7 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 * @generated
 	 */
 	@Override
-	public @Nullable TypeId getPivotTypeId() {
+	public @Nullable TypeId getASTypeId() {
 		return TypeId.BOOLEAN;
 	}
 

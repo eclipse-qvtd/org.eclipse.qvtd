@@ -59,7 +59,7 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 	}
 
 	public Object visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
-		Function pFunction = (Function) ((OperationCallExp)cgFunctionCallExp.getPivot()).getReferredOperation();
+		Function pFunction = (Function) ((OperationCallExp)cgFunctionCallExp.getAst()).getReferredOperation();
 		if (pFunction != null) {
 			CGFunction cgFunction = ((QVTiAnalyzer)context).getFunction(pFunction);
 			cgFunctionCallExp.setFunction(cgFunction);

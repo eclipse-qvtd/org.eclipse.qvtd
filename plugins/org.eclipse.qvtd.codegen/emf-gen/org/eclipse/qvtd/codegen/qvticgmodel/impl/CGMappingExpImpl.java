@@ -343,7 +343,7 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * @generated
 	 */
 	@Override
-	public @Nullable TypeId getPivotTypeId() {
+	public @Nullable TypeId getASTypeId() {
 		return TypeId.BOOLEAN;
 	}
 

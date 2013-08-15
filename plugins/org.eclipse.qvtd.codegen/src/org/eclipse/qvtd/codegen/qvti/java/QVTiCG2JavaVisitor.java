@@ -51,7 +51,7 @@ import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
-import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiPivot2CGVisitor;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -100,7 +100,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		this.transformation = transformation;
 		this.cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
 		cgPackage.setName(packageName);
-		QVTiPivot2CGVisitor pivot2CGVisitor = new QVTiPivot2CGVisitor(analyzer, getGlobalContext());
+		QVTiAS2CGVisitor pivot2CGVisitor = new QVTiAS2CGVisitor(analyzer, getGlobalContext());
 		this.cgTransformation = (CGTransformation) DomainUtil.nonNullState(transformation.accept(pivot2CGVisitor));
 		cgPackage.getClasses().add(cgTransformation);
 		Resource resource = new QVTiCGModelResourceImpl(URI.createURI("cg.xmi"));
@@ -118,7 +118,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 	}
 
 	protected void doAddRealization(@NonNull CGRealizedVariable cgRealizedVariable) {
-		RealizedVariable pRealizedVariable = (RealizedVariable)cgRealizedVariable.getPivot();
+		RealizedVariable pRealizedVariable = (RealizedVariable)cgRealizedVariable.getAst();
 		Area pArea = QVTcoreBaseUtil.getContainingArea(pRealizedVariable);
 		if (pArea != null) {
 			BottomPattern pBottomPattern = pArea.getBottomPattern();
@@ -442,7 +442,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 				CGValuedElement cgBody = cgMapping.getBody();
 				List<CGGuardVariable> cgFreeVariables = cgMapping.getFreeVariables();
 				//
-				js.appendCommentWithOCL(null, cgMapping.getPivot());
+				js.appendCommentWithOCL(null, cgMapping.getAst());
 				js.append("protected boolean " + cgMapping.getName() + "(");
 				boolean isFirst = true;
 				for (@SuppressWarnings("null")@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
@@ -486,7 +486,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 	}
 
 	public @Nullable Object visitCGMappingCall(@NonNull CGMappingCall cgMappingCall) {
-		MappingCall pMappingCall = (MappingCall) cgMappingCall.getPivot();
+		MappingCall pMappingCall = (MappingCall) cgMappingCall.getAst();
 		Mapping pReferredMapping = pMappingCall.getReferredMapping();
 		if (pReferredMapping == null) {
 			return null;
@@ -505,7 +505,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
 			if (cgMappingCallBinding.isLoop()) {
 				CGValuedElement valueOrValues = cgMappingCallBinding.getValueOrValues();
-				TypeId pivotTypeId = valueOrValues.getPivotTypeId();
+				TypeId pivotTypeId = valueOrValues.getASTypeId();
 				if (pivotTypeId instanceof CollectionTypeId) {
 					pivotTypeId = ((CollectionTypeId)pivotTypeId).getElementTypeId();
 				}
@@ -538,7 +538,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 			}
 			if (cgMappingCallBinding.isLoop()) {
 				CGValuedElement valueOrValues = cgMappingCallBinding.getValueOrValues();
-				TypeId pivotTypeId = valueOrValues.getPivotTypeId();
+				TypeId pivotTypeId = valueOrValues.getASTypeId();
 				if (pivotTypeId instanceof CollectionTypeId) {
 					pivotTypeId = ((CollectionTypeId)pivotTypeId).getElementTypeId();
 				}
@@ -557,7 +557,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
 			if (cgMappingCallBinding.isLoop()) {
 				CGValuedElement valueOrValues = cgMappingCallBinding.getValueOrValues();
-				TypeId pivotTypeId = valueOrValues.getPivotTypeId();
+				TypeId pivotTypeId = valueOrValues.getASTypeId();
 				if (pivotTypeId instanceof CollectionTypeId) {
 					pivotTypeId = ((CollectionTypeId)pivotTypeId).getElementTypeId();
 				}
@@ -677,7 +677,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 	}
 
 	public @Nullable Object visitCGRealizedVariable(@NonNull CGRealizedVariable cgRealizedVariable) {
-		TypeId typeId = cgRealizedVariable.getPivotTypeId();
+		TypeId typeId = cgRealizedVariable.getASTypeId();
 		if (typeId != null) {
 			js.appendDeclaration(cgRealizedVariable);
 			js.append(" = ");
