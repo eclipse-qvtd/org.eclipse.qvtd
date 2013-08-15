@@ -10,13 +10,15 @@
     <rule xsi:type="qvtc:Mapping" name="graph2graph">
       <domain xsi:type="qvtcb:CoreDomain" name="upperGraph" isCheckable="false" isEnforceable="false"
           typedModel="#//@nestedPackage.0/@modelParameter.0"/>
-      <domain xsi:type="qvtcb:CoreDomain" name="lowerGraph" isCheckable="true" typedModel="#//@nestedPackage.0/@modelParameter.1"/>
+      <domain xsi:type="qvtcb:CoreDomain" name="lowerGraph" isCheckable="true" isEnforceable="true"
+          typedModel="#//@nestedPackage.0/@modelParameter.1"/>
       <local name=""/>
     </rule>
     <rule xsi:type="qvtc:Mapping" name="node2node">
       <domain xsi:type="qvtcb:CoreDomain" name="upperGraph" isCheckable="false" isEnforceable="false"
           typedModel="#//@nestedPackage.0/@modelParameter.0"/>
-      <domain xsi:type="qvtcb:CoreDomain" name="lowerGraph" isCheckable="false" typedModel="#//@nestedPackage.0/@modelParameter.1"/>
+      <domain xsi:type="qvtcb:CoreDomain" name="lowerGraph" isCheckable="true" isEnforceable="true"
+          typedModel="#//@nestedPackage.0/@modelParameter.1"/>
     </rule>
   </nestedPackage>
 </qvtc:CoreModel>

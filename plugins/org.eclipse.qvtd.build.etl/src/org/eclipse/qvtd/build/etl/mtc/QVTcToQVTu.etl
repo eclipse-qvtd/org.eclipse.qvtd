@@ -59,6 +59,8 @@ rule InputDomain
 	    ud.isEnforceable = false;
 	    ud.name = cd.name;
 	    ud.typedModel ::= cd.TypedModel;
+	    ud.guardPattern ::= ud.guardPattern;
+	    ud.bottomPattern ::= cd.bottomPattern;
     }
     
 rule OutputDomain 
@@ -74,7 +76,30 @@ rule OutputDomain
 	        // Is update?
 	        ud.isCheckable = cd.isCheckable;
 	    }
+	    ud.isEnforceable = cd.isEnforceable;
 	    ud.name = cd.name;
         ud.typedModel ::= cd.TypedModel;
+        ud.guardPattern ::= ud.guardPattern;
+	    ud.bottomPattern ::= cd.bottomPattern;
     }
-        
+
+rule GuardPattern
+	transform cgp : QVTc!GuardPattern
+	to ugp : QVTu!GuardPattern {
+		
+		ugp.variable ::= cgp.variable;
+		ugp.predicate ::= cgp.predicate;
+	}
+
+rule BottomPattern 
+	transform cbp : QVTc!BottomPattern
+	to ubp : QVTu!BottomPattern {
+		
+		ubp.variable ::= cbp.variable;
+		ubp.assigment ::= cbp.assignment;
+		ubp.enforcementOperation ::= cbp.enforcementOperation;
+		ubp.realizedVariable ::= cbp.realizedVariable;
+		ubp.predicate ::= cgp.predicate;
+	}
+	
+	
