@@ -20,25 +20,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
-import org.eclipse.ocl.examples.codegen.cse.CommonSubexpressionEliminator;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
-import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
@@ -53,7 +47,6 @@ import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
-import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -73,8 +66,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
-import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceImpl;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -85,29 +76,20 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 
 /**
- * A CG2JavaClassVisitor supports generation of an OCL expression as the LibraryOperation INSTANCE of a Java Class.
+ * A QVTiCG2JavaVisitor supports generation of Java code from an optimized QVTi CG transformation tree.
  */
 public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVisitor<Object>
 {
 	protected final @NonNull QVTiAnalyzer analyzer;
-	protected final @NonNull Transformation transformation;
 	protected final @NonNull CGPackage cgPackage;
-	protected final @NonNull CGTransformation cgTransformation;
-	private List<CGValuedElement> sortedGlobals = null;
+	protected final @Nullable List<CGValuedElement> sortedGlobals;
 	
-	public QVTiCG2JavaVisitor(@NonNull QVTiCodeGenerator codeGenerator,
-			@NonNull Transformation transformation, String packageName, String className) {
+	public QVTiCG2JavaVisitor(@NonNull QVTiCodeGenerator codeGenerator, @NonNull CGPackage cgPackage,
+			@Nullable List<CGValuedElement> sortedGlobals) {
 		super(codeGenerator);
 		this.analyzer = codeGenerator.getAnalyzer();
-		this.transformation = transformation;
-		this.cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
-		cgPackage.setName(packageName);
-		QVTiAS2CGVisitor pivot2CGVisitor = new QVTiAS2CGVisitor(analyzer, getGlobalContext());
-		this.cgTransformation = (CGTransformation) DomainUtil.nonNullState(transformation.accept(pivot2CGVisitor));
-		cgPackage.getClasses().add(cgTransformation);
-		Resource resource = new QVTiCGModelResourceImpl(URI.createURI("cg.xmi"));
-		resource.getContents().add(cgPackage);
-		analyzer.analyze(cgPackage);
+		this.cgPackage = cgPackage;
+		this.sortedGlobals = sortedGlobals;
 	}
 
 	protected void appendModelIndex(@Nullable CGTypedModel cgTypedModel) {
@@ -265,21 +247,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		js.append("return true;\n");
 		js.popIndentation();		
 		js.append("}\n");
-	}
-
-	protected CGPackage generate() {
-		CG2JavaPreVisitor cg2PreVisitor = context.createCG2JavaPreVisitor();
-		cgPackage.accept(cg2PreVisitor);
-		CommonSubexpressionEliminator cseEliminator = context.createCommonSubexpressionEliminator();
-		cseEliminator.optimize(cgPackage);
-		DependencyVisitor dependencyVisitor = context.createDependencyVisitor();
-		for (CGValuedElement cgGlobal : globalContext.getGlobals()) {
-			assert cgGlobal.isGlobal();
-		}
-		dependencyVisitor.visitAll(globalContext.getGlobals());
-		sortedGlobals = context.getGlobalPlace().getSortedGlobals(dependencyVisitor);
-		safeVisit(cgPackage);
-		return cgPackage;
 	}
 
 	protected @NonNull QVTiGlobalContext getGlobalContext() {

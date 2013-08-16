@@ -13,6 +13,7 @@
  * </copyright>
  */
 package org.eclipse.qvtd.codegen.qvti.java;
+
 /**
  * <copyright>
  * 
@@ -28,10 +29,10 @@ package org.eclipse.qvtd.codegen.qvti.java;
  * </copyright>
  */
 
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -41,12 +42,16 @@ import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalysisVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiBoxingAnalyzer;
@@ -54,19 +59,18 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiCG2StringVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiDependencyVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiReferencesVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 /**
- * OCL2JavaClass supports generation of the content of a JavaClassFile with a ststic INSTANCE to provide the polymorphic implementation
- * of an ExpressionInOCL.
+ * QVTiCodeGenerator supports generation of the content of a JavaClassFile to
+ * execute a QVTi transformation.
  */
 public class QVTiCodeGenerator extends JavaCodeGenerator
 {
 	protected final @NonNull QVTiAnalyzer cgAnalyzer;
 	protected final @NonNull Transformation transformation;
-	private /*@LazyNonNull*/ QVTiCG2JavaVisitor generator;
-//	protected final @NonNull CGPackage cgPackage;
-	private /*@LazyNonNull*/ String javaSourceCode = null; 
+	private/* @LazyNonNull */String javaSourceCode = null;
 
 	public QVTiCodeGenerator(@NonNull MetaModelManager metaModelManager, @NonNull Transformation transformation) {
 		super(metaModelManager);
@@ -90,9 +94,22 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return new QVTiCG2JavaPreVisitor(getGlobalContext());
 	}
 
+	protected @NonNull CGPackage createCGPackage() {
+		String packagePrefix = getOptions().getPackagePrefix();
+		CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
+		cgPackage.setName(packagePrefix);
+		QVTiAS2CGVisitor pivot2CGVisitor = new QVTiAS2CGVisitor(cgAnalyzer,
+			getGlobalContext());
+		CGTransformation cgTransformation = (CGTransformation) DomainUtil
+			.nonNullState(transformation.accept(pivot2CGVisitor));
+		cgPackage.getClasses().add(cgTransformation);
+		return cgPackage;
+	}
+
 	@Override
 	public @NonNull DependencyVisitor createDependencyVisitor() {
-		return new QVTiDependencyVisitor(cgAnalyzer, getGlobalContext(), getGlobalPlace());
+		return new QVTiDependencyVisitor(cgAnalyzer, getGlobalContext(),
+			getGlobalPlace());
 	}
 
 	@Override
@@ -118,11 +135,11 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	public @NonNull String generateClassFile() {
 		String javaSourceCode2 = javaSourceCode;
 		if (javaSourceCode2 == null) {
-			if (generator == null) {
-				String packagePrefix = getOptions().getPackagePrefix();
-				generator = new QVTiCG2JavaVisitor(this, transformation, packagePrefix, transformation.getName());
-				generator.generate();
-			}
+			CGPackage cgPackage = createCGPackage();
+			optimize(cgPackage);
+			List<CGValuedElement> sortedGlobals = prepareGlobals();
+			QVTiCG2JavaVisitor generator = new QVTiCG2JavaVisitor(this, cgPackage, sortedGlobals);
+			generator.safeVisit(cgPackage);
 			Set<String> allImports = generator.getAllImports();
 			Map<String, String> long2ShortImportNames = ImportUtils.getLong2ShortImportNames(allImports);
 			javaSourceCode = javaSourceCode2 = ImportUtils.resolveImports(generator.toString(), long2ShortImportNames);
@@ -141,7 +158,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull QVTiCodeGenOptions getOptions() {
-		return (QVTiCodeGenOptions)super.getOptions();
+		return (QVTiCodeGenOptions) super.getOptions();
 	}
 
 	public @NonNull String getQualifiedName() {
@@ -149,8 +166,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		String packagePrefix = getOptions().getPackagePrefix();
 		if (packagePrefix != null) {
 			return packagePrefix + "." + className;
-		}
-		else {
+		} else {
 			return className;
 		}
 	}
