@@ -157,7 +157,7 @@ public class QVTiCompilerTests extends LoadTestCase
 
 	public void testCG_ClassToRDBMS_qvti() throws Exception {
 		URI transformURI = getProjectFileURI("ClassToRDBMS/ClassToRDBMSSchedule.qvti");
-		URI genModelURI = getProjectFileURI("ClassToRDBMS/UMLToRDBMS.genmodel");
+		URI genModelURI = getProjectFileURI("ClassToRDBMS/UMLtoRDBMS.genmodel");
 		URI inputModelURI = getProjectFileURI("ClassToRDBMS/SimpleUMLPeople.xmi");
 		URI outputModelURI = getProjectFileURI("ClassToRDBMS/SimpleRDBMSPeople.xmi");
 		EPackage.Registry.INSTANCE.put(SimpleumlPackage.eNS_URI, SimpleumlPackage.eINSTANCE);
