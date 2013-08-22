@@ -30,6 +30,10 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "hudson.build.id=${BUILD_ID}"
 
 	echo
+	echo "# Put Eclipse-SourceReferences declarations in the MANIFEST.MFs (added by Hudson job definition)"
+	echo "generateSourceReferences=true"
+
+	echo
 	echo "# Define if Huson Build should create javadoc (added by Hudson job definition)"
 	echo "# manage.javadoc=${MANAGE_JAVADOC}"
 
