@@ -35,7 +35,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMiddlePropertyAssignment()
- * @model
  * @generated
  */
 public interface MiddlePropertyAssignment extends PropertyAssignment {
@@ -50,7 +49,6 @@ public interface MiddlePropertyAssignment extends PropertyAssignment {
 	 * @return the value of the '<em>Cache Index</em>' attribute.
 	 * @see #setCacheIndex(Integer)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMiddlePropertyAssignment_CacheIndex()
-	 * @model
 	 * @generated
 	 */
 	Integer getCacheIndex();

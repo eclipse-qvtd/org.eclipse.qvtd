@@ -254,8 +254,8 @@ public class PivotTestCase extends TestCase
 	}
 
 	public static Resource savePivotFromCS(MetaModelManager metaModelManager, BaseCSResource xtextResource, URI pivotURI) throws IOException {
-		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, metaModelManager);
-		Resource pivotResource = adapter.getPivotResource(xtextResource);
+		CS2PivotResourceAdapter adapter = xtextResource.getCS2ASAdapter(metaModelManager);
+		Resource pivotResource = adapter.getASResource(xtextResource);
 		assertNoUnresolvedProxies("Unresolved proxies", pivotResource);
 		if (pivotURI != null) {
 			pivotResource.setURI(pivotURI);

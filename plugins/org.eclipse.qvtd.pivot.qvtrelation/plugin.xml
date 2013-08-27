@@ -10,11 +10,44 @@
 
 <plugin>
 
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes extension="qvtras" type="text" />
+  </extension>
+
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.eclipse.org/qvt/0.9/QVTrelation"
             class="org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage"
             genModel="model/QVTrelation.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser type="qvtras"
+            class="org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASResourceFactory"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated QVTrelation NOT-->
+      <!--parser
+            contentTypeIdentifier="org.eclipse.qvtd.qvtrelation"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/-->
+      <parser
+            contentTypeIdentifier="org.eclipse.qvtd.qvtrelation"
+            class="org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASResourceFactory"/>
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            base-type="org.eclipse.ocl.examples.oclas"
+            file-extensions="qvtras"
+            id="org.eclipse.qvtd.qvtrelation"
+            name="%_UI_QVTrelation_content_type"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/0.9/QVTrelation"/>
+            <parameter name="kind" value="xmi"/>
+         </describer>
+      </content-type>
    </extension>
 
 </plugin>

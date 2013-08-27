@@ -369,8 +369,8 @@ public class XtextTestCase extends PivotTestCase
 			ResourceSet resourceSet2 = metaModelManager.getExternalResourceSet();
 			BaseCSResource xtextResource = (BaseCSResource) resourceSet2.getResource(inputURI, true);
 			assertNoResourceErrors("Load failed", xtextResource);
-			adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
-			Resource pivotResource = adapter.getPivotResource(xtextResource);
+			adapter = xtextResource.getCS2ASAdapter(null);
+			Resource pivotResource = adapter.getASResource(xtextResource);
 			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 			assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
 			Resource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, null);

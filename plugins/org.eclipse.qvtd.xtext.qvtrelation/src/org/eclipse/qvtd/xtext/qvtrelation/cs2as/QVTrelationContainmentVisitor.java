@@ -537,8 +537,8 @@ public class QVTrelationContainmentVisitor extends AbstractQVTrelationContainmen
 		}
 //		context.refreshPivotList(Type.class, pivotElement.getOwnedType(), csElement.getOwnedType());
 //		context.refreshPivotList(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage()); */
-		Resource pivotResource = pivotElement.eResource();
-		if (pivotResource == null) {
+		Resource asResource = pivotElement.eResource();
+		if (asResource == null) {
 			Resource csResource = csElement.eResource();
 			if (csResource != null) {
 				context.installRootElement(csResource, pivotElement);

@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
@@ -37,8 +38,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
  * The Package for an Imperative QVT transformation.
  * <!-- end-model-doc -->
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory
- * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import qvtb='/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/' qvtcb='/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/'"
  * @generated
  */
 public interface QVTimperativePackage extends EPackage {
@@ -48,7 +47,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "qvtimperative";
+	@NonNull String eNAME = "qvtimperative";
 
 	/**
 	 * The package namespace URI.
@@ -56,7 +55,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvt/0.9/QVTimperative";
+	@NonNull String eNS_URI = "http://www.eclipse.org/qvt/0.9/QVTimperative";
 
 	/**
 	 * The package namespace name.
@@ -64,7 +63,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "qvti";
+	@NonNull String eNS_PREFIX = "qvti";
 
 	/**
 	 * The package content type ID.
@@ -72,7 +71,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eCONTENT_TYPE = "org.eclipse.qvtd.qvtimperative";
+	@NonNull String eCONTENT_TYPE = "org.eclipse.qvtd.qvtimperative";
 
 	/**
 	 * The singleton instance of the package.

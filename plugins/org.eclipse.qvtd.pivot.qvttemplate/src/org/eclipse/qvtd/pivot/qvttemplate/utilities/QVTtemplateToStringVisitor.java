@@ -14,14 +14,11 @@
  */
 package org.eclipse.qvtd.pivot.qvttemplate.utilities;
 
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
-import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor;
 
@@ -31,28 +28,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor;
  */
 public class QVTtemplateToStringVisitor extends QVTbaseToStringVisitor implements QVTtemplateVisitor<String>
 {
-	protected static class QVTtemplateToStringFactory extends QVTbaseToStringFactory
-	{
-		protected QVTtemplateToStringFactory() {
-//			FACTORY.getClass();
-		}
-
-		@Override
-		public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
-			return new QVTtemplateToStringVisitor(s, getClass());
-		}
-
-		@Override
-		@SuppressWarnings("null")
-		public @NonNull EPackage getEPackage() {
-			return QVTtemplatePackage.eINSTANCE;
-		}
-	}
-
-	public static @NonNull ToStringVisitor.Factory FACTORY = new QVTtemplateToStringFactory();
-
-	protected QVTtemplateToStringVisitor(@NonNull StringBuilder s, /*@NonNull*/ Class<? extends ToStringVisitor.Factory> factoryClass) {
-		super(s, factoryClass);
+	public QVTtemplateToStringVisitor(@NonNull StringBuilder s) {
+		super(s);
 	}
 
 	public String visitCollectionTemplateExp(@NonNull CollectionTemplateExp object) {

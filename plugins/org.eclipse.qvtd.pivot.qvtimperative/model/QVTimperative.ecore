@@ -101,7 +101,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetVariable" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
-        <details key="body" value="assignment"/>
+        <details key="body" value="predicate"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

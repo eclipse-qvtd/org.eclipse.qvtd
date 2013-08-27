@@ -14,13 +14,10 @@
  */
 package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
-import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -37,28 +34,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateToStringVisitor;
  */
 public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor implements QVTrelationVisitor<String>
 {
-	protected static class QVTrelationToStringFactory extends QVTtemplateToStringFactory
-	{
-		protected QVTrelationToStringFactory() {
-//			FACTORY.getClass();
-		}
-
-		@Override
-		public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
-			return new QVTrelationToStringVisitor(s, getClass());
-		}
-
-		@Override
-		@SuppressWarnings("null")
-		public @NonNull EPackage getEPackage() {
-			return QVTrelationPackage.eINSTANCE;
-		}
-	}
-
-	public static @NonNull ToStringVisitor.Factory FACTORY = new QVTrelationToStringFactory();
-
-	protected QVTrelationToStringVisitor(@NonNull StringBuilder s, /*@NonNull*/ Class<? extends ToStringVisitor.Factory> factoryClass) {
-		super(s, factoryClass);
+	public QVTrelationToStringVisitor(@NonNull StringBuilder s) {
+		super(s);
 	}
 
 	public String visitDomainPattern(@NonNull DomainPattern object) {

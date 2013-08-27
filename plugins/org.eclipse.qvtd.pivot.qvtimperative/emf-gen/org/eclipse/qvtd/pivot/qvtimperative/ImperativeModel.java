@@ -27,7 +27,6 @@ import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
  *
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getImperativeModel()
- * @model
  * @generated
  */
 public interface ImperativeModel extends BaseModel {

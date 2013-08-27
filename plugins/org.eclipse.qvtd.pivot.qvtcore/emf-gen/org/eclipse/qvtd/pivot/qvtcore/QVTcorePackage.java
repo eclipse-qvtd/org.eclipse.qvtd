@@ -19,6 +19,7 @@ package org.eclipse.qvtd.pivot.qvtcore;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 
@@ -44,7 +45,7 @@ public interface QVTcorePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "qvtcore";
+	@NonNull String eNAME = "qvtcore";
 
 	/**
 	 * The package namespace URI.
@@ -52,7 +53,7 @@ public interface QVTcorePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvt/0.9/QVTcore";
+	@NonNull String eNS_URI = "http://www.eclipse.org/qvt/0.9/QVTcore";
 
 	/**
 	 * The package namespace name.
@@ -60,7 +61,7 @@ public interface QVTcorePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "qvtc";
+	@NonNull String eNS_PREFIX = "qvtc";
 
 	/**
 	 * The package content type ID.
@@ -68,7 +69,7 @@ public interface QVTcorePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eCONTENT_TYPE = "org.eclipse.qvtd.qvtcore";
+	@NonNull String eCONTENT_TYPE = "org.eclipse.qvtd.qvtcore";
 
 	/**
 	 * The singleton instance of the package.
@@ -76,7 +77,7 @@ public interface QVTcorePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	QVTcorePackage eINSTANCE = org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl.init();
+	@SuppressWarnings("null")@NonNull QVTcorePackage eINSTANCE = org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.CoreModelImpl <em>Core Model</em>}' class.

@@ -21,8 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.qvtd.pivot.qvtcore.scoping.QVTcorePivotScoping;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcorePrettyPrintVisitor;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreSaver;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASResourceFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePivotStandaloneSetup;
 
@@ -44,9 +43,8 @@ public class QVTcorePivotStandaloneSetup //implements ISetup
 
 	public static void init() {
 		QVTcoreBasePivotStandaloneSetup.doSetup();
+		QVTcoreASResourceFactory.INSTANCE.getClass();
 		QVTcorePivotScoping.init();
-		QVTcorePrettyPrintVisitor.FACTORY.getClass();
-		QVTcoreSaver.FACTORY.getClass();
 		QVTcoreToStringVisitor.FACTORY.getClass();
 	}
 	

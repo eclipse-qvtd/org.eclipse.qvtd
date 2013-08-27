@@ -27,14 +27,10 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">
-      <!-- @generated qvticgmodel -->
-      <parser
-            contentTypeIdentifier="org.eclipse.qvtd.codegen.qvticgmodel"
-            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.content_parser">
       <!-- @generated qvticgmodel NOT -->
+      <!--parser
+            contentTypeIdentifier="org.eclipse.qvtd.codegen.qvticgmodel"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/-->
       <parser
             contentTypeIdentifier="org.eclipse.qvtd.codegen.qvticgmodel"
             class="org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactoryImpl"/>

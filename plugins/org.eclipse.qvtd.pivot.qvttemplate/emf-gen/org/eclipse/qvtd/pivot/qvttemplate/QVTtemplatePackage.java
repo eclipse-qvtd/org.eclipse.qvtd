@@ -63,6 +63,14 @@ public interface QVTtemplatePackage extends EPackage {
 	String eNS_PREFIX = "qvtt";
 
 	/**
+	 * The package content type ID.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eCONTENT_TYPE = "org.eclipse.qvtd.qvttemplate";
+
+	/**
 	 * The singleton instance of the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

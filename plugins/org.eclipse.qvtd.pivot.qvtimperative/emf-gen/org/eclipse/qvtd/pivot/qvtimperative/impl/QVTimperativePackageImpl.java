@@ -464,7 +464,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		   new String[] {
 			 "qvtb", "/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/",
 			 "qvtcb", "/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/"
-		   });	
+		   });
 	}
 
 	/**
@@ -479,8 +479,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		  (getVariablePredicate_TargetVariable(), 
 		   source, 
 		   new String[] {
-			 "body", "assignment"
-		   });	
+			 "body", "predicate"
+		   });
 	}
 
 } //QVTimperativePackageImpl

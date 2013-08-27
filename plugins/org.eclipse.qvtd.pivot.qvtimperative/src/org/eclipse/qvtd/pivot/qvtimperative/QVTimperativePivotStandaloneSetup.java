@@ -19,11 +19,12 @@ package org.eclipse.qvtd.pivot.qvtimperative;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.scoping.QVTimperativePivotScoping;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativePrettyPrintVisitor;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeSaver;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeToStringVisitor;
 
 import com.google.inject.Guice;
@@ -45,8 +46,7 @@ public class QVTimperativePivotStandaloneSetup
 	public static void init() {
 		QVTcoreBasePivotStandaloneSetup.doSetup();
 		QVTimperativePivotScoping.init();
-		QVTimperativePrettyPrintVisitor.FACTORY.getClass();
-		QVTimperativeSaver.FACTORY.getClass();
+		QVTimperativeASResourceFactory.INSTANCE.getClass();
 		QVTimperativeToStringVisitor.FACTORY.getClass();
 	}
 	
@@ -60,6 +60,21 @@ public class QVTimperativePivotStandaloneSetup
 		return injector;
 	}
 
+/*	private static final ContentHandler QVTI_CONTENT_HANDLER = new RootXMLContentHandlerImpl(
+		QVTimperativePackage.eCONTENT_TYPE,
+		new String[]{ASResource.FILE_EXTENSION},
+		RootXMLContentHandlerImpl.XMI_KIND, QVTimperativePackage.eNS_URI, null);
+
+	public static void initializeResourceFactory(@NonNull Resource.Factory.Registry resourceFactoryRegistry) {
+		Map<String, Object> contentTypeToFactoryMap = resourceFactoryRegistry.getContentTypeToFactoryMap();
+		if (!contentTypeToFactoryMap.containsKey(QVTimperativePackage.eCONTENT_TYPE))
+			contentTypeToFactoryMap.put(QVTimperativePackage.eCONTENT_TYPE, QVTimperativeASResourceFactory.INSTANCE);
+//		Map<String, Object> extensionToFactoryMap = resourceFactoryRegistry.getExtensionToFactoryMap();
+//		if (!extensionToFactoryMap.containsKey("qvtixmi"))
+//			extensionToFactoryMap.put("qvtixmi", QVTimperativeResourceFactoryImpl.INSTANCE);
+		MetaModelManager.installContentHandler(ContentHandler.Registry.NORMAL_PRIORITY, QVTI_CONTENT_HANDLER);
+	} */
+
 	public Injector createInjector() {
 		if (Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().remove("xmi");
@@ -72,12 +87,14 @@ public class QVTimperativePivotStandaloneSetup
 	public Injector createInjectorAndDoEMFRegistration() {
 		init();
 		// register default ePackages
-		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+		@SuppressWarnings("null")@NonNull Registry resourceFactoryRegistry = Resource.Factory.Registry.INSTANCE;
+		if (!resourceFactoryRegistry.getExtensionToFactoryMap().containsKey("ecore"))
+			resourceFactoryRegistry.getExtensionToFactoryMap().put(
 				"ecore", new org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl());
-		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+		if (!resourceFactoryRegistry.getExtensionToFactoryMap().containsKey("xmi"))
+			resourceFactoryRegistry.getExtensionToFactoryMap().put(
 				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
+//		initializeResourceFactory(resourceFactoryRegistry);
 		if (!EPackage.Registry.INSTANCE.containsKey(QVTimperativePackage.eNS_URI))
 			EPackage.Registry.INSTANCE.put(QVTimperativePackage.eNS_URI, QVTimperativePackage.eINSTANCE);
 

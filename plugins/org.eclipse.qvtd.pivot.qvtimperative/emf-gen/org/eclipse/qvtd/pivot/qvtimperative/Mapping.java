@@ -36,7 +36,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping()
- * @model
  * @generated
  */
 public interface Mapping extends AbstractMapping {
@@ -53,7 +52,6 @@ public interface Mapping extends AbstractMapping {
 	 * @return the value of the '<em>Mapping Call</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_MappingCall()
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getContext
-	 * @model opposite="context" containment="true"
 	 * @generated
 	 */
 	EList<MappingCall> getMappingCall();
@@ -61,7 +59,6 @@ public interface Mapping extends AbstractMapping {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" ordered="false"
 	 * @generated
 	 */
 	EList<Mapping> getAllMappings();

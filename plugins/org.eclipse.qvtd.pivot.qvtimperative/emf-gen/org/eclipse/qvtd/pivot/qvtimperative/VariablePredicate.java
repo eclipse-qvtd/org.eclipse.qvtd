@@ -35,7 +35,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getVariablePredicate()
- * @model
  * @generated
  */
 public interface VariablePredicate extends Predicate {
@@ -50,8 +49,6 @@ public interface VariablePredicate extends Predicate {
 	 * @return the value of the '<em>Target Variable</em>' reference.
 	 * @see #setTargetVariable(Variable)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getVariablePredicate_TargetVariable()
-	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='assignment'"
 	 * @generated
 	 */
 	Variable getTargetVariable();

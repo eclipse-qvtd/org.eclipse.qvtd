@@ -16,31 +16,15 @@ package org.eclipse.qvtd.pivot.qvttemplate.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
-import org.eclipse.ocl.examples.pivot.util.AbstractVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbasePrettyPrintVisitor;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
-import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor;
 
 public class QVTtemplatePrettyPrintVisitor extends QVTbasePrettyPrintVisitor implements QVTtemplateVisitor<Object>
 {	
-	private static final class Factory implements PrettyPrinter.Factory
-	{
-		private Factory() {
-			QVTbasePrettyPrintVisitor.FACTORY.getClass();
-			PrettyPrinter.addFactory(QVTtemplatePackage.eINSTANCE, this);
-		}
-
-		public @NonNull AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(@NonNull PrettyPrinter printer) {
-			return new QVTtemplatePrettyPrintVisitor(printer);
-		}
-	}
-
-	public static @NonNull PrettyPrinter.Factory FACTORY = new Factory();
-
 	public QVTtemplatePrettyPrintVisitor(@NonNull PrettyPrinter context) {
 		super(context);
 	}

@@ -104,8 +104,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		BaseCSResource xtextResource = (BaseCSResource) resourceSet.getResource(inputURI, true);
 		assert xtextResource != null;
 		assertNoResourceErrors("Load failed", xtextResource);
-		adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
-		Resource pivotResource = adapter.getPivotResource(xtextResource);
+		adapter = xtextResource.getCS2ASAdapter(null);
+		Resource pivotResource = adapter.getASResource(xtextResource);
 //		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
 		assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));

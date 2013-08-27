@@ -42,7 +42,6 @@ import org.eclipse.ocl.examples.pivot.Variable;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCallBinding()
- * @model
  * @generated
  */
 public interface MappingCallBinding extends EObject, Element {
@@ -62,7 +61,6 @@ public interface MappingCallBinding extends EObject, Element {
 	 * @see #setMappingCall(MappingCall)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCallBinding_MappingCall()
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getBinding
-	 * @model opposite="binding" transient="false"
 	 * @generated
 	 */
 	MappingCall getMappingCall();
@@ -91,7 +89,6 @@ public interface MappingCallBinding extends EObject, Element {
 	 * @return the value of the '<em>Bound Variable</em>' reference.
 	 * @see #setBoundVariable(Variable)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCallBinding_BoundVariable()
-	 * @model required="true"
 	 * @generated
 	 */
 	Variable getBoundVariable();
@@ -120,7 +117,6 @@ public interface MappingCallBinding extends EObject, Element {
 	 * @return the value of the '<em>Value</em>' containment reference.
 	 * @see #setValue(OCLExpression)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCallBinding_Value()
-	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	OCLExpression getValue();
@@ -146,7 +142,6 @@ public interface MappingCallBinding extends EObject, Element {
 	 * @return the value of the '<em>Is Loop</em>' attribute.
 	 * @see #setIsLoop(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCallBinding_IsLoop()
-	 * @model default="false" required="true"
 	 * @generated
 	 */
 	boolean isIsLoop();

@@ -36,7 +36,6 @@ import org.eclipse.ocl.examples.pivot.PropertyCallExp;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMiddlePropertyCallExp()
- * @model
  * @generated
  */
 public interface MiddlePropertyCallExp extends EObject, PropertyCallExp {
@@ -51,7 +50,6 @@ public interface MiddlePropertyCallExp extends EObject, PropertyCallExp {
 	 * @return the value of the '<em>Cache Index</em>' attribute.
 	 * @see #setCacheIndex(Integer)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMiddlePropertyCallExp_CacheIndex()
-	 * @model
 	 * @generated
 	 */
 	Integer getCacheIndex();

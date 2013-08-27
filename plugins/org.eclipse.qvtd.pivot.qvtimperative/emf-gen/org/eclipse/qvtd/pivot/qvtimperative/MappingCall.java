@@ -41,7 +41,6 @@ import org.eclipse.ocl.examples.pivot.ReferringElement;
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall()
- * @model
  * @generated
  */
 public interface MappingCall extends EObject, OCLExpression, ReferringElement {
@@ -59,7 +58,6 @@ public interface MappingCall extends EObject, OCLExpression, ReferringElement {
 	 * @return the value of the '<em>Referred Mapping</em>' reference.
 	 * @see #setReferredMapping(Mapping)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_ReferredMapping()
-	 * @model required="true"
 	 * @generated
 	 */
 	Mapping getReferredMapping();
@@ -90,7 +88,6 @@ public interface MappingCall extends EObject, OCLExpression, ReferringElement {
 	 * @return the value of the '<em>Binding</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_Binding()
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getMappingCall
-	 * @model opposite="mappingCall" containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<MappingCallBinding> getBinding();
@@ -111,7 +108,6 @@ public interface MappingCall extends EObject, OCLExpression, ReferringElement {
 	 * @see #setContext(Mapping)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_Context()
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingCall
-	 * @model opposite="mappingCall" required="true" transient="false"
 	 * @generated
 	 */
 	Mapping getContext();

@@ -2,9 +2,9 @@
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="&lt;copyright>&#xD;&#xA;&#xD;&#xA;Copyright (c) 2013 E.D.Willink and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;  E.D.Willink - Initial API and implementation&#xD;&#xA;&#xD;&#xA;&lt;/copyright>"
     modelDirectory="/org.eclipse.qvtd.pivot.qvtimperative/emf-gen" modelPluginID="org.eclipse.qvtd.pivot.qvtimperative"
-    modelName="QVTimperative" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
-    copyrightFields="false" usedGenPackages="../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel#//qvtcorebase">
-  <foreignModel>QVTimperative.ecore</foreignModel>
+    modelName="QVTimperative" suppressEMFModelTags="true" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" runtimeVersion="2.7" usedGenPackages="../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel#//qvtcorebase"
+    classNamePattern="">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
     <details key="Use Delegates" value="false"/>
     <details key="Use Null Annotations" value="true"/>
@@ -14,8 +14,9 @@
     <details key="Root Visitor Class" value="org.eclipse.ocl.examples.pivot.util.Visitor"/>
     <details key="Derived Visitor Class" value="org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor"/>
   </genAnnotations>
+  <foreignModel>QVTimperative.ecore</foreignModel>
   <genPackages prefix="QVTimperative" basePackage="org.eclipse.qvtd.pivot" disposableProviderFactory="true"
-      contentTypeIdentifier="org.eclipse.qvtd.qvtimperative" fileExtensions="qvtimperative"
+      contentTypeIdentifier="org.eclipse.qvtd.qvtimperative" fileExtensions="qvtias"
       ecorePackage="QVTimperative.ecore#/">
     <genClasses ecoreClass="QVTimperative.ecore#//ImperativeModel"/>
     <genClasses ecoreClass="QVTimperative.ecore#//Mapping">
@@ -32,6 +33,15 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingCallBinding/boundVariable"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingCallBinding/value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//MappingCallBinding/isLoop"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//MiddlePropertyAssignment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//MiddlePropertyAssignment/cacheIndex"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//MiddlePropertyCallExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//MiddlePropertyCallExp/cacheIndex"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//VariablePredicate">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//VariablePredicate/targetVariable"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

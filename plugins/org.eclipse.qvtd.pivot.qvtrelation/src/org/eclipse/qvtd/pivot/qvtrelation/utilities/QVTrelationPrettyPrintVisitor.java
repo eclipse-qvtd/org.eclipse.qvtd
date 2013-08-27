@@ -19,11 +19,9 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
-import org.eclipse.ocl.examples.pivot.util.AbstractVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
-import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -36,20 +34,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplatePrettyPrintVisito
 
 public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor implements QVTrelationVisitor<Object>
 {	
-	private static final class Factory implements PrettyPrinter.Factory
-	{
-		private Factory() {
-			QVTtemplatePrettyPrintVisitor.FACTORY.getClass();
-			PrettyPrinter.addFactory(QVTrelationPackage.eINSTANCE, this);
-		}
-
-		public @NonNull AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(@NonNull PrettyPrinter printer) {
-			return new QVTrelationPrettyPrintVisitor(printer);
-		}
-	}
-
-	public static @NonNull PrettyPrinter.Factory FACTORY = new Factory();
-
 	public QVTrelationPrettyPrintVisitor(@NonNull PrettyPrinter context) {
 		super(context);
 	}

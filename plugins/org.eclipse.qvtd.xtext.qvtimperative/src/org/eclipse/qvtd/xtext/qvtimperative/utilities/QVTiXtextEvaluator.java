@@ -6,7 +6,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -22,7 +22,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 public class QVTiXtextEvaluator extends QVTiPivotEvaluator
 {
 	
-	public static PivotResource pivotResource;
+	public static ASResource asResource;
 	
     public static @NonNull Transformation loadTransformation(@NonNull MetaModelManager metaModelManager, @NonNull URI transformationURI) throws IOException {
 		
@@ -32,9 +32,9 @@ public class QVTiXtextEvaluator extends QVTiPivotEvaluator
         if (xtextResource != null) {
     		CS2PivotResourceAdapter adapter = null;
     		try {
-    			adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
-    			pivotResource = (PivotResource)adapter.getPivotResource(xtextResource);
-    			for (EObject eContent : pivotResource.getContents()) {
+    			adapter = xtextResource.getCS2ASAdapter(null);
+    			asResource = adapter.getASResource(xtextResource);
+    			for (EObject eContent : asResource.getContents()) {
     				if (eContent instanceof ImperativeModel) {
     	    			for (EObject eObject : ((ImperativeModel)eContent).getNestedPackage()) {
     	    				if (eObject instanceof Transformation) {

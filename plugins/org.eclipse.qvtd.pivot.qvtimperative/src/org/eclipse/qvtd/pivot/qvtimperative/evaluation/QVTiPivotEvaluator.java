@@ -1,9 +1,11 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.evaluation.PivotEvaluationEnvironment;
@@ -157,6 +159,12 @@ public class QVTiPivotEvaluator
 	public void saveModels(@NonNull URI traceURI) {
 		this.saveModels();
 		modelManager.saveMiddleModel(traceURI);
+	}
+
+	public void saveTransformation(Map<?,?> options) throws IOException {
+    	XMLResource resource = (XMLResource) transformation.eResource();
+//    	new AS2ID().assignIds(resource.getResourceSet());
+		resource.save(options);
 	}
 
 	/**

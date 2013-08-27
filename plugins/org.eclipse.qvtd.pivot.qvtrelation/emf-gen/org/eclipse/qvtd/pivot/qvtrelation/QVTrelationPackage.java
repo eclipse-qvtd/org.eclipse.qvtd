@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 
@@ -45,7 +46,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "qvtrelation";
+	@NonNull String eNAME = "qvtrelation";
 
 	/**
 	 * The package namespace URI.
@@ -53,7 +54,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvt/0.9/QVTrelation";
+	@NonNull String eNS_URI = "http://www.eclipse.org/qvt/0.9/QVTrelation";
 
 	/**
 	 * The package namespace name.
@@ -61,7 +62,15 @@ public interface QVTrelationPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "qvtr";
+	@NonNull String eNS_PREFIX = "qvtr";
+
+	/**
+	 * The package content type ID.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@NonNull String eCONTENT_TYPE = "org.eclipse.qvtd.qvtrelation";
 
 	/**
 	 * The singleton instance of the package.
@@ -69,7 +78,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	QVTrelationPackage eINSTANCE = org.eclipse.qvtd.pivot.qvtrelation.impl.QVTrelationPackageImpl.init();
+	@SuppressWarnings("null")@NonNull QVTrelationPackage eINSTANCE = org.eclipse.qvtd.pivot.qvtrelation.impl.QVTrelationPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.DomainPatternImpl <em>Domain Pattern</em>}' class.

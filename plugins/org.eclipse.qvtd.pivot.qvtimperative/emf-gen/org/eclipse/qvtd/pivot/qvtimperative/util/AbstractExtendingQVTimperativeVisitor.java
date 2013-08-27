@@ -25,7 +25,7 @@ import org.eclipse.jdt.annotation.Nullable;
 /**
  * An AbstractExtendingQVTimperativeVisitor provides a default implementation for each
  * visitXxx method that delegates to the visitYyy method of the first
- * super class, (or transitively its first super class first super class
+ * super class, (or transitively its first super class' first super class
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */

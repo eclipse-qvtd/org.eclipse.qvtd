@@ -21,10 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePivotStandaloneSetup;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.scoping.QVTcoreBasePivotScoping;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBasePrettyPrintVisitor;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseSaver;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseToStringVisitor;
 
 import com.google.inject.Guice;
@@ -46,8 +43,6 @@ public class QVTcoreBasePivotStandaloneSetup
 	public static void init() {
 		QVTbasePivotStandaloneSetup.doSetup();
 		QVTcoreBasePivotScoping.init();
-		QVTcoreBasePrettyPrintVisitor.FACTORY.getClass();
-		QVTcoreBaseSaver.FACTORY.getClass();
 		QVTcoreBaseToStringVisitor.FACTORY.getClass();
 	}
 	
