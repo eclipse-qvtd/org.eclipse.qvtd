@@ -19,7 +19,7 @@ transformation UmlToRdbms(uml:umlMM, rdbms:rdbmsMM)
 	key rdbmsMM::Key {name, owner};
 	key rdbmsMM::ForeignKey {name, owner};
 
-	query PrimitiveTypeToSqlType(primitiveTpe:String):String;
+--	query PrimitiveTypeToSqlType(primitiveTpe:String):String;
 
 	top relation PackageToSchema
 	{

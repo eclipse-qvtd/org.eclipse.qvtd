@@ -23,11 +23,17 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Pattern;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.util.AbstractQVTbaseAS2MonikerVisitor;
 
 public class QVTbaseAS2MonikerVisitor extends AbstractQVTbaseAS2MonikerVisitor
 {
+
+	public static final @NonNull String MONIKER_PATTERN = "pattern";
+	public static final @NonNull String MONIKER_PREDICATE = "pred";
+
 	public QVTbaseAS2MonikerVisitor(@NonNull AS2Moniker context) {
 		super(context);
 	}	
@@ -36,6 +42,20 @@ public class QVTbaseAS2MonikerVisitor extends AbstractQVTbaseAS2MonikerVisitor
 	public @Nullable Object visitDomain(@NonNull Domain asDomain) {
 		context.appendParent(asDomain, MONIKER_SCOPE_SEPARATOR);
 		context.appendName(asDomain);
+		return true;
+	}
+
+	@Override
+	public @Nullable Object visitPattern(@NonNull Pattern object) {
+		context.appendParent(object, MONIKER_SCOPE_SEPARATOR);
+		context.append(MONIKER_PATTERN);
+		return true;
+	}	
+
+	@Override
+	public @Nullable Object visitPredicate(@NonNull Predicate object) {
+		context.appendParent(object, MONIKER_SCOPE_SEPARATOR);
+		context.append(MONIKER_PREDICATE);
 		return true;
 	}
 
