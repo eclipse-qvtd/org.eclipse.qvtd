@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -136,27 +137,31 @@ public class QVTiInterpreterTests extends LoadTestCase
 	        }
 	    }
 	}
-	
-//	public static interface Normalizer {
-//		void denormalize();
-//	}
-	
+		
 	/**
- * Assert same model.
- *
- * @param expectedResource the expected resource
- * @param actualResource the actual resource
- * @throws IOException Signals that an I/O exception has occurred.
- * @throws InterruptedException the interrupted exception
- */
-public static void assertSameModel(Resource expectedResource, Resource actualResource) throws IOException, InterruptedException {
-//		Set<Normalizer> normalizations = normalize(expectedResource);
+	 * Assert same model.
+	 *
+	 * @param expectedResource the expected resource
+	 * @param actualResource the actual resource
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws InterruptedException the interrupted exception
+	 */
+	public static void assertSameModel(Resource expectedResource, Resource actualResource) throws IOException, InterruptedException {
 		String expected = EmfFormatter.listToStr(expectedResource.getContents());
 		String actual = EmfFormatter.listToStr(actualResource.getContents());
 		assertEquals(expected, actual);
-//		for (Normalizer normalizer : normalizations) {
-//			normalizer.denormalize();
-//		}
+	}
+
+	protected static void assertLoadable(@NonNull URI asURI) {
+        ResourceSet asResourceSet = new ResourceSetImpl();
+        if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			OCLstdlib.install();
+	        MetaModelManager.initializeASResourceSet(asResourceSet);
+        }
+        Resource resource = asResourceSet.getResource(asURI, true);
+        EcoreUtil.resolveAll(resource);
+        assertNoUnresolvedProxies("Loading", resource);
+        assertNoResourceErrors("Loading", resource);
 	}
 	
 	/* (non-Javadoc)
@@ -197,6 +202,9 @@ public static void assertSameModel(Resource expectedResource, Resource actualRes
         testEvaluator.loadReference("lowerGraph", "Graph2GraphMinimalValidate.xmi");
         testEvaluator.test();
         testEvaluator.dispose();
+        
+        URI txURI = testEvaluator.getTransformation().eResource().getURI();
+        assertLoadable(txURI);
     }
 
     /*
@@ -218,33 +226,13 @@ public static void assertSameModel(Resource expectedResource, Resource actualRes
         testEvaluator.dispose();
         
         URI txURI = testEvaluator.getTransformation().eResource().getURI();
-        ResourceSet resourceSet = new ResourceSetImpl();
-        MetaModelManager.initializeASResourceSet(resourceSet);
-//        ASResourceFactoryRegistry.INSTANCE.configureResourceSet(resourceSet);
-//        QVTimperativePivotStandaloneSetup.initializeResourceFactory(resourceSet.getResourceFactoryRegistry());
-        Resource txResource = resourceSet.getResource(txURI, true);
-        assert ((ASResource)txResource).getASResourceFactory() instanceof QVTimperativeASResourceFactory;
-        EcoreUtil.resolveAll(txResource);
+        assertLoadable(txURI);
     }
+    
     @Test
     public void testGraph2GraphHierarchicalLoad() throws Exception {
-    	OCLstdlib.install();
-    	URI txURI = getProjectFileURI("Graph2GraphHierarchical" + "/"  + "Graph2GraphHierarchical.qvti");
-    	URI asURI = URI.createURI(txURI.toString() + "as");
-//    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(DomainUtil.nonNullState(metaModelManager), "Graph2GraphHierarchical", "Graph2GraphHierarchical.qvti");
-//    	testEvaluator.saveTransformation(null);
-//    	testEvaluator.loadModel("upperGraph", "../Graph2GraphMinimal/SimpleGraph.xmi");
-//        testEvaluator.createModel("lowerGraph", "Graph2GraphHierarchical.xmi");
-//       testEvaluator.loadReference("lowerGraph", "Graph2GraphHierarchicalValidate.xmi");
-//        testEvaluator.test();
-//        testEvaluator.dispose();
-        
-//        URI txURI = testEvaluator.getTransformation().eResource().getURI();
-        ResourceSet asResourceSet = new ResourceSetImpl();
-        MetaModelManager.initializeASResourceSet(asResourceSet);
-        Resource txResource = asResourceSet.getResource(asURI, true);
-        assert ((ASResource)txResource).getASResourceFactory() instanceof QVTimperativeASResourceFactory;
-        EcoreUtil.resolveAll(txResource);
+    	URI asURI = getProjectFileURI("Graph2GraphHierarchical" + "/"  + "Graph2GraphHierarchical.ref.qvtias");
+    	assertLoadable(asURI);
     }
 
     /**
@@ -261,6 +249,9 @@ public static void assertSameModel(Resource expectedResource, Resource actualRes
         testEvaluator.loadReference("hls", "HLSNodeValidate.xmi");
         testEvaluator.test();
         testEvaluator.dispose();
+        
+        URI txURI = testEvaluator.getTransformation().eResource().getURI();
+        assertLoadable(txURI);
     }
     
     /**
@@ -283,5 +274,8 @@ public static void assertSameModel(Resource expectedResource, Resource actualRes
         //testEvaluator.loadReference("rdbms", "SimpleRDBMSPeopleValidate.xmi");
         testEvaluator.test();
         testEvaluator.dispose();
+        
+        URI txURI = testEvaluator.getTransformation().eResource().getURI();
+// FIXME opposites        assertLoadable(txURI);
     }
 }

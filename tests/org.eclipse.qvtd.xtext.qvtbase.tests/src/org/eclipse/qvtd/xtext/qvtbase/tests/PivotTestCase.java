@@ -91,7 +91,7 @@ public class PivotTestCase extends TestCase
 		if (unresolvedProxies.size() > 0) {
 			StringBuilder s = new StringBuilder();
 			s.append(unresolvedProxies.size());
-			s.append(" ");	
+			s.append(" unresolved proxies in '" + resource.getURI() + "' ");	
 			s.append(message);
 			for (Map.Entry<EObject, Collection<Setting>> unresolvedProxy : unresolvedProxies.entrySet()) {
 				s.append("\n");	
