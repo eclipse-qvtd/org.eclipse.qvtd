@@ -27,13 +27,11 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
-import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
@@ -203,7 +201,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         testEvaluator.test();
         testEvaluator.dispose();
         
-        URI txURI = testEvaluator.getTransformation().eResource().getURI();
+        URI txURI = DomainUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
     }
 
@@ -225,7 +223,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         testEvaluator.test();
         testEvaluator.dispose();
         
-        URI txURI = testEvaluator.getTransformation().eResource().getURI();
+        URI txURI = DomainUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
     }
     
@@ -250,7 +248,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         testEvaluator.test();
         testEvaluator.dispose();
         
-        URI txURI = testEvaluator.getTransformation().eResource().getURI();
+        URI txURI = DomainUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
     }
     
@@ -275,7 +273,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         testEvaluator.test();
         testEvaluator.dispose();
         
-        URI txURI = testEvaluator.getTransformation().eResource().getURI();
-// FIXME opposites        assertLoadable(txURI);
+        URI txURI = DomainUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        assertLoadable(txURI);
     }
 }
