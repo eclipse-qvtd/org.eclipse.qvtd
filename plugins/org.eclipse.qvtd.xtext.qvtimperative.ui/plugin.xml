@@ -181,4 +181,27 @@
       </markerResolutionGenerator>
    </extension>
 
+	<extension point="org.eclipse.ui.menus">
+	  <menuContribution locationURI="popup:org.eclipse.ocl.examples.xtext.base.ui.Save?after=additions">
+	    <command commandId="org.eclipse.ocl.examples.xtext.base.ui.SaveASCommand"
+	      label="%MF_Save_AS">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.Editor.opened">
+                </reference>
+            </visibleWhen>
+	    </command>
+	  </menuContribution>
+	  <menuContribution locationURI="popup:org.eclipse.ocl.examples.xtext.base.ui.Save?after=additions">
+	    <command commandId="org.eclipse.ocl.examples.xtext.base.ui.SaveCSCommand"
+	      label="%MF_Save_CS">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.Editor.opened">
+                </reference>
+            </visibleWhen>
+	    </command>
+	  </menuContribution>
+	</extension>
+
 </plugin>
