@@ -1,0 +1,12 @@
+migrate CoreDomain
+	ignoring rule, typedModel, guardPattern, BottomPattern, name
+    when : original.name == "upperGraph" {
+	    
+	    
+	    migrated.isCheckable = false;
+	    migrated.isEnforceable = false;
+    }
+
+  
+operation oppositePattern() {
+} 

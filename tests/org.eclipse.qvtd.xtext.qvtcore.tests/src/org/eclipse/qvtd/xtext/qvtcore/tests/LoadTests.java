@@ -39,6 +39,10 @@ public class LoadTests extends LoadTestCase
 	public void testLoad_mini_qvtc() throws IOException, InterruptedException {
 		doLoad_Concrete("mini", "qvtc");
 	}	
+	
+	public void testLoad_UpperToLower_qvtc() throws IOException, InterruptedException {
+		doLoad_Concrete("UpperToLower", "qvtc");
+	}	
 
 	public void testLoad_uml2rdbms_qvtc() throws IOException, InterruptedException {
 		doLoad_Concrete("uml2rdbms", "qvtc");

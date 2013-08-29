@@ -50,6 +50,7 @@ map packageToSchemaLM in umlRdbms {
     
     /* M to M */
     
+    
     /* M to R */
     map packageToSchemaMR {
         p2s := p2s;

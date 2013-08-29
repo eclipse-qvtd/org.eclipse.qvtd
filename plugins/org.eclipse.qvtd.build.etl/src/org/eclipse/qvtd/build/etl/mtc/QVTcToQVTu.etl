@@ -96,10 +96,45 @@ rule BottomPattern
 	to ubp : QVTu!BottomPattern {
 		
 		ubp.variable ::= cbp.variable;
-		ubp.assigment ::= cbp.assignment;
+		ubp.assignment ::= cbp.assignment;
 		ubp.enforcementOperation ::= cbp.enforcementOperation;
 		ubp.realizedVariable ::= cbp.realizedVariable;
-		ubp.predicate ::= cgp.predicate;
+		ubp.predicate ::= cbp.predicate;
 	}
+
+rule Variable
+	transform cv : QVTc!Variable
+	to uv : QVTu!Variable {
 	
+		uv.name = cv.name;
+		uv.implicit = cv.implicit;
+		//uv.type = cv.type;		
+	}
+
+
+/* Remove all realize keywords from variables that are contained in mappings
+ * that reference the input domain */
+rule InputRealizedVariable
+	transform crv : QVTc!RealizedVariable
+	to urv : QVTu!RealizedVariable {
+		
+		// Input domain, realized variables dont have an opposite...
+		// so hard to get the pattern and then the domain...
+		//guard crv.
+		
+		
+	}
+
+rule Type
+	transform ct : QVTc!Type
+	to ut : QVTu!Type {
+	
+		ut.name = ct.name;
+		ut.superClass ::= ct.superClass; // Possible loop?
+		ut.instanceClassName = ct.instanceClassName;
+		// Do we need to transform the package?
+		// ut.package = ct.package;
+	}
+
+ 
 	

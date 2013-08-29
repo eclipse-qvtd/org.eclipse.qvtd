@@ -1,0 +1,63 @@
+import SimpleGraph : 'SimpleGraph.ecore'::simplegraph;
+import SimpleGraph2Graph : 'SimpleGraph2Graph.ecore'::simplegraph2graph;
+
+transformation copyGraph {
+	upperGraph imports SimpleGraph;
+	lowerGraph imports SimpleGraph;
+	imports SimpleGraph2Graph;
+}
+
+/* 
+ * Don't use realize keywords on the two initial domains indicates that both models must exist and at least have the root node defined?
+ */
+map graph2graph in copyGraph {
+	upperGraph() {
+		g1:Graph |
+	}
+	check enforce lowerGraph() {
+		/* Enforced domains should at least have one realized variable?*/
+		realize g2:Graph |
+	}
+	where () {
+		/* Although in the example is not realized, all middle model variables should be realized
+		 * or does the middle model is also expected to have at least the initial element? */
+		realize g2g:Graph2Graph |
+		g2g.graph1 := g1;
+		g2g.graph2 := g2;
+	}
+	map {
+		where () {
+			g2g.name := g1.name;
+			g2g.name := g2.name;
+			g1.name := g2g.name;
+			g2.name := g2g.name;
+		}
+	}
+}
+
+map node2node in copyGraph {
+	upperGraph(g1:Graph |) {
+		n1:Node |
+		n1.graph = g1;
+	}
+	check enforce lowerGraph(g2:Graph |) {
+		realize n2:Node |
+		n2.graph := g2;
+	}
+	where (g2g:Graph2Graph |
+			g2g.graph1 = g1;
+			g2g.graph2 = g2;) {
+		realize n2n:Node2Node |
+		n2n.owner := g2g;
+		n2n.node1 := n1;
+		n2n.node2 := n2;
+	}
+	map {
+		where () {
+			n2n.label := n1.label;
+			n2n.label := n2.label;
+			n1.label := n2n.label;
+			n2.label := n2n.label;
+		}
+	}
+}

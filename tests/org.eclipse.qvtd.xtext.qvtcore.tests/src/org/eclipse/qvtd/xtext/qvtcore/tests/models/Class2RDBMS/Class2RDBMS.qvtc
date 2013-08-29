@@ -264,7 +264,7 @@ map associationToForeignKey in umlRdbms refines flattening {
         owner : FromAttributeOwner opposites fromAttributes;
         leafs : Set(AttributeToColumn);
         -- uml
-        attribute : Attribute to uml;
+        attribute : Attribute;
     }
     abstract class ToColumn {
         -- rdbms
@@ -365,7 +365,7 @@ map attributeColumns in umlRdbms {
         realize a2c:AttributeToColumn |
         a2c.column := c;
         c2t.fromAttributes.leafs->includes(a2c);
-        default a2c.owner := c2t;
+        default a2c.owner := c2t;  -- Check, not always a2c are owned by c2t, it maybe a nla!
     }
     map {
         check enforce rdbms (ct:String |) {
