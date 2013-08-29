@@ -66,6 +66,10 @@ public class QVTbaseLabelProvider extends EssentialOCLLabelProvider
 		return DomainUtil.getSafeName(ele);
 	}
 
+	protected String text(FunctionParameter ele) {
+		return DomainUtil.getSafeName(ele);
+	}
+
 	protected String text(Rule ele) {
 		return DomainUtil.getSafeName(ele);
 	}
