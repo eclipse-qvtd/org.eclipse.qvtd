@@ -16,7 +16,12 @@ package org.eclipse.qvtd.xtext.qvtcore.tests;
 
 import java.io.IOException;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 
@@ -41,7 +46,25 @@ public class LoadTests extends LoadTestCase
 	}	
 	
 	public void testLoad_UpperToLower_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("UpperToLower", "qvtc");
+		Resource pivotResource = doLoad_Concrete("UpperToLower", "qvtc");
+		
+		// ======= Save AST ====
+		for (EObject eContent : pivotResource.getContents()) {
+			if (eContent instanceof CoreModel) {
+    			for (EObject eObject : ((CoreModel)eContent).getNestedPackage()) {
+    				if (eObject instanceof Transformation) {
+    					Transformation t = (Transformation)eObject;
+    					XMLResource resource = (XMLResource) t.eResource();
+    					org.eclipse.emf.common.util.URI u = resource.getURI();
+    					u.appendFileExtension(".qvtcas");
+    					resource.setURI(u);
+    					resource.save(null);
+    				}
+    			}
+			}
+		}					
+		// ===================
+		
 	}	
 
 	public void testLoad_uml2rdbms_qvtc() throws IOException, InterruptedException {

@@ -38,7 +38,7 @@ map graph2graph in copyGraph {
 map node2node in copyGraph {
 	enforce upperGraph(g1:Graph |) {
 		realize n1:Node |
-		n1.graph = g1;
+		n1.graph := g1;
 	}
 	check enforce lowerGraph(g2:Graph |) {
 		realize n2:Node |

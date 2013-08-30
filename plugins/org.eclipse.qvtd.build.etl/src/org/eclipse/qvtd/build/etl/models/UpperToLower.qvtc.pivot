@@ -4,211 +4,206 @@
     xmlns:qvtc="http://www.eclipse.org/qvt/0.9/QVTcore" xmlns:qvtcb="http://www.eclipse.org/qvt/0.9/QVTcoreBase"
     xsi:schemaLocation="http://www.eclipse.org/ocl/3.1.0/Pivot java://org.eclipse.ocl.examples.pivot.PivotPackage http://www.eclipse.org/qvt/0.9/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/0.9/QVTcore java://org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage http://www.eclipse.org/qvt/0.9/QVTcoreBase java://org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage"
     name="UpperToLower.qvtc" externalURI="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtcore.tests/bin/org/eclipse/qvtd/xtext/qvtcore/tests/models/UpperToLower.qvtc">
-  <nestedPackage xsi:type="qvtb:Transformation" name="copyGraph" >
-    <modelParameter name="upperGraph" usedPackage="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0"/>
-    <modelParameter name="lowerGraph" usedPackage="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0"/>
-    <modelParameter usedPackage="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0"/>
-    <rule xsi:type="qvtc:Mapping" name="graph2graph">
+  <nestedPackage xsi:type="qvtb:Transformation" xmi:id="T.copyGraph" name="copyGraph"
+      superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclElement">
+    <modelParameter xmi:id="_yXjkkBFhEeOhV_6T6r1Lag" name="upperGraph" usedPackage="SimpleGraph.ecore.oclas#P.simplegraph"/>
+    <modelParameter xmi:id="_yXjkkRFhEeOhV_6T6r1Lag" name="lowerGraph" usedPackage="SimpleGraph.ecore.oclas#P.simplegraph"/>
+    <modelParameter xmi:id="_yXjkkhFhEeOhV_6T6r1Lag" usedPackage="SimpleGraph2Graph.ecore.oclas#P.simplegraph2graph"/>
+    <rule xsi:type="qvtc:Mapping" xmi:id="_yXjkkxFhEeOhV_6T6r1Lag" name="graph2graph">
       <ownedComment body="Don't use realize keywords on the two initial domains indicates that both models must exist and at least have the root node defined?"/>
-      <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="false"
-          typedModel="#//@nestedPackage.0/@modelParameter.0">
+      <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="true"
+          typedModel="#_yXjkkBFhEeOhV_6T6r1Lag">
         <guardPattern/>
         <bottomPattern>
-          <variable name="g1" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"/>
+          <realizedVariable xmi:id="_yXjklBFhEeOhV_6T6r1Lag" name="g1" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
         </bottomPattern>
       </domain>
       <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true"
-          typedModel="#//@nestedPackage.0/@modelParameter.1">
+          typedModel="#_yXjkkRFhEeOhV_6T6r1Lag">
         <guardPattern/>
         <bottomPattern>
-          <realizedVariable name="g2" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3">
+          <realizedVariable xmi:id="_yXjklRFhEeOhV_6T6r1Lag" name="g2" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph">
             <ownedComment body="Enforced domains should at least have one realized variable?"/>
           </realizedVariable>
         </bottomPattern>
       </domain>
       <guardPattern/>
       <bottomPattern>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0/@ownedAttribute.0">
-          <value xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"
-              referredVariable="#//@nestedPackage.0/@rule.0/@domain.0/@bottomPattern/@variable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0"
-              referredVariable="#//@nestedPackage.0/@rule.0/@bottomPattern/@realizedVariable.0"/>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph1">
+          <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+              referredVariable="#_yXjklBFhEeOhV_6T6r1Lag"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+              referredVariable="#_yXjklhFhEeOhV_6T6r1Lag"/>
         </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0/@ownedAttribute.1">
-          <value xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"
-              referredVariable="#//@nestedPackage.0/@rule.0/@domain.1/@bottomPattern/@realizedVariable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0"
-              referredVariable="#//@nestedPackage.0/@rule.0/@bottomPattern/@realizedVariable.0"/>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph2">
+          <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+              referredVariable="#_yXjklRFhEeOhV_6T6r1Lag"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+              referredVariable="#_yXjklhFhEeOhV_6T6r1Lag"/>
         </assignment>
-        <realizedVariable name="g2g" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0">
+        <realizedVariable xmi:id="_yXjklhFhEeOhV_6T6r1Lag" name="g2g" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph">
           <ownedComment body="Although in the example is not realized, all middle model variables should be realized&#xA;or does the middle model is also expected to have at least the initial element?"/>
         </realizedVariable>
       </bottomPattern>
-      <local>
+      <local xmi:id="_yXjklxFhEeOhV_6T6r1Lag">
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0/@ownedAttribute.3">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib#//@nestedPackage.1/@ownedType.21"
-                referredProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3/@ownedAttribute.1">
-              <source xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"
-                  referredVariable="#//@nestedPackage.0/@rule.0/@domain.0/@bottomPattern/@variable.0"/>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
+              <source xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+                  referredVariable="#_yXjklBFhEeOhV_6T6r1Lag"/>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0"
-                referredVariable="#//@nestedPackage.0/@rule.0/@bottomPattern/@realizedVariable.0"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+                referredVariable="#_yXjklhFhEeOhV_6T6r1Lag"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0/@ownedAttribute.3">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib#//@nestedPackage.1/@ownedType.21"
-                referredProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3/@ownedAttribute.1">
-              <source xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"
-                  referredVariable="#//@nestedPackage.0/@rule.0/@domain.1/@bottomPattern/@realizedVariable.0"/>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
+              <source xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+                  referredVariable="#_yXjklRFhEeOhV_6T6r1Lag"/>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0"
-                referredVariable="#//@nestedPackage.0/@rule.0/@bottomPattern/@realizedVariable.0"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+                referredVariable="#_yXjklhFhEeOhV_6T6r1Lag"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3/@ownedAttribute.1">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib#//@nestedPackage.1/@ownedType.21"
-                referredProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0/@ownedAttribute.3">
-              <source xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0"
-                  referredVariable="#//@nestedPackage.0/@rule.0/@bottomPattern/@realizedVariable.0"/>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
+              <source xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+                  referredVariable="#_yXjklhFhEeOhV_6T6r1Lag"/>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"
-                referredVariable="#//@nestedPackage.0/@rule.0/@domain.0/@bottomPattern/@variable.0"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+                referredVariable="#_yXjklBFhEeOhV_6T6r1Lag"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3/@ownedAttribute.1">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib#//@nestedPackage.1/@ownedType.21"
-                referredProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0/@ownedAttribute.3">
-              <source xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0"
-                  referredVariable="#//@nestedPackage.0/@rule.0/@bottomPattern/@realizedVariable.0"/>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
+              <source xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+                  referredVariable="#_yXjklhFhEeOhV_6T6r1Lag"/>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"
-                referredVariable="#//@nestedPackage.0/@rule.0/@domain.1/@bottomPattern/@realizedVariable.0"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+                referredVariable="#_yXjklRFhEeOhV_6T6r1Lag"/>
           </assignment>
         </bottomPattern>
       </local>
     </rule>
-    <rule xsi:type="qvtc:Mapping" name="node2node">
-      <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="false"
-          typedModel="#//@nestedPackage.0/@modelParameter.0">
+    <rule xsi:type="qvtc:Mapping" xmi:id="_yXjkmBFhEeOhV_6T6r1Lag" name="node2node">
+      <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="true"
+          typedModel="#_yXjkkBFhEeOhV_6T6r1Lag">
         <guardPattern>
-          <variable name="g1" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"/>
+          <variable xmi:id="_yXjkmRFhEeOhV_6T6r1Lag" name="g1" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
         </guardPattern>
         <bottomPattern>
-          <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib#//@nestedPackage.1/@ownedType.18"
-                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib#//@nestedPackage.1/@ownedType.3/@ownedOperation.1">
-              <source xsi:type="pivot:PropertyCallExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"
-                  referredProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.2/@ownedAttribute.0">
-                <source xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.0"
-                    referredVariable="#//@nestedPackage.0/@rule.1/@domain.0/@bottomPattern/@variable.0"/>
-              </source>
-              <argument xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"
-                  referredVariable="#//@nestedPackage.0/@rule.1/@domain.0/@guardPattern/@variable.0"/>
-            </conditionExpression>
-          </predicate>
-          <variable name="n1" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.0"/>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
+            <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+                referredVariable="#_yXjkmRFhEeOhV_6T6r1Lag"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
+                referredVariable="#_yXjkmhFhEeOhV_6T6r1Lag"/>
+          </assignment>
+          <realizedVariable xmi:id="_yXjkmhFhEeOhV_6T6r1Lag" name="n1" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
         </bottomPattern>
       </domain>
       <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true"
-          typedModel="#//@nestedPackage.0/@modelParameter.1">
+          typedModel="#_yXjkkRFhEeOhV_6T6r1Lag">
         <guardPattern>
-          <variable name="g2" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"/>
+          <variable xmi:id="_yXjkmxFhEeOhV_6T6r1Lag" name="g2" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.2/@ownedAttribute.0">
-            <value xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"
-                referredVariable="#//@nestedPackage.0/@rule.1/@domain.1/@guardPattern/@variable.0"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.0"
-                referredVariable="#//@nestedPackage.0/@rule.1/@domain.1/@bottomPattern/@realizedVariable.0"/>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
+            <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+                referredVariable="#_yXjkmxFhEeOhV_6T6r1Lag"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
+                referredVariable="#_yXjknBFhEeOhV_6T6r1Lag"/>
           </assignment>
-          <realizedVariable name="n2" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.0"/>
+          <realizedVariable xmi:id="_yXjknBFhEeOhV_6T6r1Lag" name="n2" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
         </bottomPattern>
       </domain>
       <guardPattern>
         <predicate>
-          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib#//@nestedPackage.1/@ownedType.18"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib#//@nestedPackage.1/@ownedType.3/@ownedOperation.1">
-            <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"
-                referredProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0/@ownedAttribute.0">
-              <source xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0"
-                  referredVariable="#//@nestedPackage.0/@rule.1/@guardPattern/@variable.0"/>
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+            <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+                referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph1">
+              <source xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+                  referredVariable="#_yXkLoBFhEeOhV_6T6r1Lag"/>
             </source>
-            <argument xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"
-                referredVariable="#//@nestedPackage.0/@rule.1/@domain.0/@guardPattern/@variable.0"/>
+            <argument xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+                referredVariable="#_yXjkmRFhEeOhV_6T6r1Lag"/>
           </conditionExpression>
         </predicate>
         <predicate>
-          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib#//@nestedPackage.1/@ownedType.18"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib#//@nestedPackage.1/@ownedType.3/@ownedOperation.1">
-            <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"
-                referredProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0/@ownedAttribute.1">
-              <source xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0"
-                  referredVariable="#//@nestedPackage.0/@rule.1/@guardPattern/@variable.0"/>
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+            <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+                referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph2">
+              <source xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+                  referredVariable="#_yXkLoBFhEeOhV_6T6r1Lag"/>
             </source>
-            <argument xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.3"
-                referredVariable="#//@nestedPackage.0/@rule.1/@domain.1/@guardPattern/@variable.0"/>
+            <argument xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+                referredVariable="#_yXjkmxFhEeOhV_6T6r1Lag"/>
           </conditionExpression>
         </predicate>
-        <variable name="g2g" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0"/>
+        <variable xmi:id="_yXkLoBFhEeOhV_6T6r1Lag" name="g2g" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"/>
       </guardPattern>
       <bottomPattern>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.1/@ownedAttribute.0">
-          <value xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.0"
-              referredVariable="#//@nestedPackage.0/@rule.1/@guardPattern/@variable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.3"
-              referredVariable="#//@nestedPackage.0/@rule.1/@bottomPattern/@realizedVariable.0"/>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Element2Element.owner">
+          <value xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+              referredVariable="#_yXkLoBFhEeOhV_6T6r1Lag"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
+              referredVariable="#_yXkLoRFhEeOhV_6T6r1Lag"/>
         </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.3/@ownedAttribute.0">
-          <value xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.0"
-              referredVariable="#//@nestedPackage.0/@rule.1/@domain.0/@bottomPattern/@variable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.3"
-              referredVariable="#//@nestedPackage.0/@rule.1/@bottomPattern/@realizedVariable.0"/>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node1">
+          <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
+              referredVariable="#_yXjkmhFhEeOhV_6T6r1Lag"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
+              referredVariable="#_yXkLoRFhEeOhV_6T6r1Lag"/>
         </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.3/@ownedAttribute.1">
-          <value xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.0"
-              referredVariable="#//@nestedPackage.0/@rule.1/@domain.1/@bottomPattern/@realizedVariable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.3"
-              referredVariable="#//@nestedPackage.0/@rule.1/@bottomPattern/@realizedVariable.0"/>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node2">
+          <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
+              referredVariable="#_yXjknBFhEeOhV_6T6r1Lag"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
+              referredVariable="#_yXkLoRFhEeOhV_6T6r1Lag"/>
         </assignment>
-        <realizedVariable name="n2n" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.3"/>
+        <realizedVariable xmi:id="_yXkLoRFhEeOhV_6T6r1Lag" name="n2n" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
       </bottomPattern>
-      <local>
+      <local xmi:id="_yXkLohFhEeOhV_6T6r1Lag">
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.3/@ownedAttribute.2">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib#//@nestedPackage.1/@ownedType.21"
-                referredProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.0/@ownedAttribute.2">
-              <source xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.0"
-                  referredVariable="#//@nestedPackage.0/@rule.1/@domain.0/@bottomPattern/@variable.0"/>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
+              <source xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
+                  referredVariable="#_yXjkmhFhEeOhV_6T6r1Lag"/>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.3"
-                referredVariable="#//@nestedPackage.0/@rule.1/@bottomPattern/@realizedVariable.0"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
+                referredVariable="#_yXkLoRFhEeOhV_6T6r1Lag"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.3/@ownedAttribute.2">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib#//@nestedPackage.1/@ownedType.21"
-                referredProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.0/@ownedAttribute.2">
-              <source xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.0"
-                  referredVariable="#//@nestedPackage.0/@rule.1/@domain.1/@bottomPattern/@realizedVariable.0"/>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
+              <source xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
+                  referredVariable="#_yXjknBFhEeOhV_6T6r1Lag"/>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.3"
-                referredVariable="#//@nestedPackage.0/@rule.1/@bottomPattern/@realizedVariable.0"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
+                referredVariable="#_yXkLoRFhEeOhV_6T6r1Lag"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.0/@ownedAttribute.2">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib#//@nestedPackage.1/@ownedType.21"
-                referredProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.3/@ownedAttribute.2">
-              <source xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.3"
-                  referredVariable="#//@nestedPackage.0/@rule.1/@bottomPattern/@realizedVariable.0"/>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
+              <source xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
+                  referredVariable="#_yXkLoRFhEeOhV_6T6r1Lag"/>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.0"
-                referredVariable="#//@nestedPackage.0/@rule.1/@domain.0/@bottomPattern/@variable.0"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
+                referredVariable="#_yXjkmhFhEeOhV_6T6r1Lag"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.0/@ownedAttribute.2">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib#//@nestedPackage.1/@ownedType.21"
-                referredProperty="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.3/@ownedAttribute.2">
-              <source xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph2Graph.ecore#//@nestedPackage.0/@ownedType.3"
-                  referredVariable="#//@nestedPackage.0/@rule.1/@bottomPattern/@realizedVariable.0"/>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
+              <source xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
+                  referredVariable="#_yXkLoRFhEeOhV_6T6r1Lag"/>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="file:/C:/Users/hhoyos/Documents/GitHub/org.eclipse.qvtd/plugins/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/SimpleGraph.ecore#//@nestedPackage.0/@ownedType.0"
-                referredVariable="#//@nestedPackage.0/@rule.1/@domain.1/@bottomPattern/@realizedVariable.0"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
+                referredVariable="#_yXjknBFhEeOhV_6T6r1Lag"/>
           </assignment>
         </bottomPattern>
       </local>

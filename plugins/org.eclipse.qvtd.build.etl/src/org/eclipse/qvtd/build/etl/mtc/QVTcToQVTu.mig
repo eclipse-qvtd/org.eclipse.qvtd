@@ -1,12 +1,49 @@
+// Input Domain
 migrate CoreDomain
-	ignoring rule, typedModel, guardPattern, BottomPattern, name
     when : original.name == "upperGraph" {
-	    
 	    
 	    migrated.isCheckable = false;
 	    migrated.isEnforceable = false;
     }
 
-  
-operation oppositePattern() {
-} 
+// Core Domain
+migrate CoreDomain
+    when : original.name <> "upperGraph" {
+	    
+	    // TODO this should be global vars somehow
+	    var isCreate = new Boolean;
+	    isCreate = true;
+	    
+	    if (isCreate) {
+	        migrated.isCheckable = false;
+	    }
+    }
+
+// Make sure variables and predicates are contained in the pattern    
+migrate BottomPattern 
+    when : original.area.name == "upperGraph" {
+    migrated.variable = original.realizedVariable.equivalent();
+    for (a in  original.assignment) {
+        var p = a.equivalent();
+        p.conditionExpression = a.value;
+        migrated.predicate.add(p);
+    }
+    //migrated.predicate = ;
+    //migrated.predicate.conditionExpression = original.assignment.value;
+}
+    
+// retype Realized Variables to Variables    
+retype RealizedVariable to Variable
+    when : original.oppositeBottomPattern().area.name == "upperGraph"
+    
+// This is not so easy cause u need the value + targetPopertry and join it with
+// the slotExpression to create the value for the Predicate. We need somehow
+// to acces OCL to get the string representations, concadenate and then transform
+// from strin to OCLExpression?
+retype PropertyAssignment to Predicate
+    when : original.bottomPattern.area.name == "upperGraph"
+
+
+operation QVTc!RealizedVariable oppositeBottomPattern() : QVTc!BottomPattern  {
+  return QVTc!BottomPattern.all.selectOne(p |p.realizedVariable.includes(self)); }
+	 
