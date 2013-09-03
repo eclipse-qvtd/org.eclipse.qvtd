@@ -38,18 +38,7 @@ retype PropertyAssignment to Predicate
 
 migrate PropertyAssignment
     when : original.bottomPattern.area.name == "upperGraph" {
-    /*  PropertyAssignment
-            slot
-        target
-        value
-   
-        Predicate
-            conditionExp OperationCallExp (=)
-                source : PropertyCallExp
-                    source : slot
-                        referredProperty : target
-            argument : value
-    */
+    
         var exp = new QVTc!OperationCallExp;
         // It's an '=' operation 
         exp.referredOperation = new QVTc!Operation;
