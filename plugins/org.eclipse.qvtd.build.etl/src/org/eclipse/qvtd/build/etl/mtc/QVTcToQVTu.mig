@@ -24,25 +24,48 @@ migrate BottomPattern
     when : original.area.name == "upperGraph" {
     migrated.variable = original.realizedVariable.equivalent();
     for (a in  original.assignment) {
-        var p = a.equivalent();
-        p.conditionExpression = a.value;
-        migrated.predicate.add(p);
+        migrated.predicate.add(a.equivalent());
     }
     //migrated.predicate = ;
     //migrated.predicate.conditionExpression = original.assignment.value;
 }
     
-// retype Realized Variables to Variables    
 retype RealizedVariable to Variable
     when : original.oppositeBottomPattern().area.name == "upperGraph"
     
-// This is not so easy cause u need the value + targetPopertry and join it with
-// the slotExpression to create the value for the Predicate. We need somehow
-// to acces OCL to get the string representations, concadenate and then transform
-// from strin to OCLExpression?
 retype PropertyAssignment to Predicate
     when : original.bottomPattern.area.name == "upperGraph"
 
+migrate PropertyAssignment
+    when : original.bottomPattern.area.name == "upperGraph" {
+    /*  PropertyAssignment
+            slot
+        target
+        value
+   
+        Predicate
+            conditionExp OperationCallExp (=)
+                source : PropertyCallExp
+                    source : slot
+                        referredProperty : target
+            argument : value
+    */
+        var exp = new QVTc!OperationCallExp;
+        // It's an '=' operation 
+        exp.referredOperation = new QVTc!Operation;
+        exp.referredOperation.name = "=";
+        // The source is a PropertyCallExp
+        exp.source = new QVTc!PropertyCallExp;
+        // The property is the targetProperty
+        exp.source.referredProperty = original.targetProperty.equivalent();
+        // The source of the PropertyCallExp is the slotExpression
+        exp.source.source = original.slotExpression.equivalent();
+        // The argument is the value
+        var args : Set;
+        args.add(original.value.equivalent());
+        exp.argument = args;
+        migrated.conditionExpression = exp;    
+    }
 
 operation QVTc!RealizedVariable oppositeBottomPattern() : QVTc!BottomPattern  {
   return QVTc!BottomPattern.all.selectOne(p |p.realizedVariable.includes(self)); }
