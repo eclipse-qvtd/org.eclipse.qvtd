@@ -44,8 +44,7 @@ migrate PropertyAssignment
     
         var exp = new QVTc!OperationCallExp;
         // It's an '=' operation 
-        exp.referredOperation = new QVTc!Operation;
-        exp.referredOperation.name = "=";
+        exp.referredOperation = getOperationByName("=");
         // The source is a PropertyCallExp
         exp.source = new QVTc!PropertyCallExp;
         // The property is the targetProperty
@@ -61,19 +60,14 @@ migrate PropertyAssignment
 
 delete PropertyAssignment
     when {
-    
-        original.slotExpression.~cascadeDelete = true;
-        original.targetProperty.~cascadeDelete = true;
-        original.value.~cascadeDelete = true;
+        // TODO The slotExpression, referredProperty and value should be deleted to!    
         return not isInputDomain(original.bottomPattern.area)
         and (original.slotExpression.isTypeOf(QVTc!VariableExp)
             and original.slotExpression.referredVariable.oppositePattern().area.isTypeOf(QVTc!Mapping))
         and not original.value.isTypeOf(QVTc!VariableExp);
     }
 
-//delete OCLExpression when : original.~cascadeDelete
 
-//delete Property when : original.~cascadeDelete
 
 @chached
 operation isInputDomain(area : QVTc!Area) : Boolean {
@@ -95,7 +89,10 @@ operation QVTc!Variable oppositePattern() : QVTc!CorePattern  {
     }     
 }
 
-
+@cached
+operation getOperationByName(name : String) : oclStdLib!Operation {
+    return oclStdLib!Operation.all.selectOne(o | o.name == name);
+}
 
 
 
