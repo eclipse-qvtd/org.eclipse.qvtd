@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
@@ -177,6 +178,10 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		}
 		@SuppressWarnings("null")@NonNull String string = outputBuffer.toString();
 		return string;
+	}
+	
+	public @NonNull Pattern getRegexPattern(@NonNull String regex) {
+		return delegate.getRegexPattern(regex);
 	}
 
 	/**
