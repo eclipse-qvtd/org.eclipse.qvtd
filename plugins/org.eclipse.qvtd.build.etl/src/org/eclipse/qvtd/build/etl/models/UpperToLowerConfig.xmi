@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<qvtcconfig:Configuration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:qvtcconfig="http://www.eclipse.org/qvt/examples/0.1/QVTcConfig" inputDirection="//@transformation/@direction.0" outputDirection="//@transformation/@direction.1">
+<qvtcconfig:Configuration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:qvtcconfig="http://www.eclipse.org/qvt/examples/0.1/QVTcConfig" inputDirection="//@transformation/@direction.0" outputDirection="//@transformation/@direction.1" mode="enforcement" middle="//@transformation/@direction.2">
   <transformation name="copyGraph">
     <direction name="upperGraph" imports="//@transformation/@import.0"/>
     <direction name="lowerGraph" imports="//@transformation/@import.0"/>

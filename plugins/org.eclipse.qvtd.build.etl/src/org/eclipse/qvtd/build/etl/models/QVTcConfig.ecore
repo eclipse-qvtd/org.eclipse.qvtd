@@ -9,6 +9,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" eType="#//Mode"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" eType="#//Transformation"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="middle" eType="#//Direction"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Direction" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" eType="#//Import"/>

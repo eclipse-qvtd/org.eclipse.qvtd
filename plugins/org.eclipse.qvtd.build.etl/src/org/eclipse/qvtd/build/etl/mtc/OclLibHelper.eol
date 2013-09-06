@@ -1,0 +1,5 @@
+// =========  OCL Lib queries ================
+@cached
+operation getOperationByName(name : String) : oclStdLib!Operation {
+    return oclStdLib!Operation.all.selectOne(o | o.name == name);
+}

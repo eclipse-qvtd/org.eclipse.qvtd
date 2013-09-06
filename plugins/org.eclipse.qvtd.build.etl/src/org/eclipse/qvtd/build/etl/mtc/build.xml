@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<project default="main">
+    <property file="build.properties"/>
+	
+    <target name="loadModels">
+        <!-- OCL Library -->
+	    <epsilon.emf.loadModel
+		    name = "oclStdLib"
+		    metamodeluri = "http://www.eclipse.org/ocl/3.1.0/Pivot"
+            modeluri = "${oclLibURI}"
+            read="true"
+	    	store="false"/>
+    	<!-- QVTc Transformation -->
+		<epsilon.emf.loadModel
+    	   name = "QVTc"
+		   modelFile = "${qvtcas}" 
+           metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+           read="true" store="false"/>
+    	<!-- Configuration -->
+        <epsilon.emf.loadModel
+           name = "config"
+           modelFile = "${configuration}" 
+           metamodelFile = "${configurationMM}"
+           read="true" store="false"/>
+    	<!-- QVTu Transformation -->
+        <epsilon.emf.loadModel
+           name = "QVTu"
+           modelFile = "${qvtuas}" 
+           metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+           read="false" store="true"/>
+	</target>
+	
+	<target name ="prunning" depends="loadModels">
+		<epsilon.eol src="Pruning.eol" >
+			<model ref="QVTc"/>
+			<model ref="config"/>
+		</epsilon.eol>
+	</target>
+	
+	<target name="main" depends="loadModels">
+	    <epsilon.flock originalmodel="QVTc" migratedmodel="QVTu">
+	        <model ref="QVTc"/>
+	    	<model ref="QVTu"/>
+	    	<model ref="config"/>
+	    	<model ref="oclStdLib"/>
+		</epsilon.flock>
+	</target>
+	
+</project>

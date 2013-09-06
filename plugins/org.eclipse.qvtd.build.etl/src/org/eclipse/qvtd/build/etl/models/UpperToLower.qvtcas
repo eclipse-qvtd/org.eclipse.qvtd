@@ -6,23 +6,23 @@
     name="UpperToLower.qvtc" externalURI="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/models/UpperToLower.qvtc">
   <nestedPackage xsi:type="qvtb:Transformation" xmi:id="T.copyGraph" name="copyGraph"
       superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclElement">
-    <modelParameter xmi:id="_Fvw54BSYEeOruJhFCk5qMA" name="upperGraph" usedPackage="SimpleGraph.ecore.oclas#P.simplegraph"/>
-    <modelParameter xmi:id="_Fvw54RSYEeOruJhFCk5qMA" name="lowerGraph" usedPackage="SimpleGraph.ecore.oclas#P.simplegraph"/>
-    <modelParameter xmi:id="_Fvxg8BSYEeOruJhFCk5qMA" usedPackage="SimpleGraph2Graph.ecore.oclas#P.simplegraph2graph"/>
-    <rule xsi:type="qvtc:Mapping" xmi:id="_Fvxg8RSYEeOruJhFCk5qMA" name="graph2graph">
+    <modelParameter xmi:id="_PzNr8BYxEeOI_uG2htgxEQ" name="upperGraph" usedPackage="SimpleGraph.ecore.oclas#P.simplegraph"/>
+    <modelParameter xmi:id="_PzNr8RYxEeOI_uG2htgxEQ" name="lowerGraph" usedPackage="SimpleGraph.ecore.oclas#P.simplegraph"/>
+    <modelParameter xmi:id="_PzNr8hYxEeOI_uG2htgxEQ" usedPackage="SimpleGraph2Graph.ecore.oclas#P.simplegraph2graph"/>
+    <rule xsi:type="qvtc:Mapping" xmi:id="_PzNr8xYxEeOI_uG2htgxEQ" name="graph2graph">
       <ownedComment body="Don't use realize keywords on the two initial domains indicates that both models must exist and at least have the root node defined?"/>
       <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="true"
-          typedModel="#_Fvw54BSYEeOruJhFCk5qMA">
+          typedModel="#_PzNr8BYxEeOI_uG2htgxEQ">
         <guardPattern/>
         <bottomPattern>
-          <realizedVariable xmi:id="_Fvxg8hSYEeOruJhFCk5qMA" name="g1" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
+          <realizedVariable xmi:id="_PzNr9BYxEeOI_uG2htgxEQ" name="g1" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
         </bottomPattern>
       </domain>
       <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true"
-          typedModel="#_Fvw54RSYEeOruJhFCk5qMA">
+          typedModel="#_PzNr8RYxEeOI_uG2htgxEQ">
         <guardPattern/>
         <bottomPattern>
-          <realizedVariable xmi:id="_Fvxg8xSYEeOruJhFCk5qMA" name="g2" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph">
+          <realizedVariable xmi:id="_PzOTABYxEeOI_uG2htgxEQ" name="g2" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph">
             <ownedComment body="Enforced domains should at least have one realized variable?"/>
           </realizedVariable>
         </bottomPattern>
@@ -31,91 +31,91 @@
       <bottomPattern>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph1">
           <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-              referredVariable="#_Fvxg8hSYEeOruJhFCk5qMA"/>
+              referredVariable="#_PzNr9BYxEeOI_uG2htgxEQ"/>
           <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-              referredVariable="#_Fvxg9BSYEeOruJhFCk5qMA"/>
+              referredVariable="#_PzOTARYxEeOI_uG2htgxEQ"/>
         </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph2">
           <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-              referredVariable="#_Fvxg8xSYEeOruJhFCk5qMA"/>
+              referredVariable="#_PzOTABYxEeOI_uG2htgxEQ"/>
           <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-              referredVariable="#_Fvxg9BSYEeOruJhFCk5qMA"/>
+              referredVariable="#_PzOTARYxEeOI_uG2htgxEQ"/>
         </assignment>
-        <realizedVariable xmi:id="_Fvxg9BSYEeOruJhFCk5qMA" name="g2g" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph">
+        <realizedVariable xmi:id="_PzOTARYxEeOI_uG2htgxEQ" name="g2g" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph">
           <ownedComment body="Although in the example is not realized, all middle model variables should be realized&#xA;or does the middle model is also expected to have at least the initial element?"/>
         </realizedVariable>
       </bottomPattern>
-      <local xmi:id="_Fvxg9RSYEeOruJhFCk5qMA">
+      <local xmi:id="_PzOTAhYxEeOI_uG2htgxEQ">
         <guardPattern/>
         <bottomPattern>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
               <source xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-                  referredVariable="#_Fvxg8hSYEeOruJhFCk5qMA"/>
+                  referredVariable="#_PzNr9BYxEeOI_uG2htgxEQ"/>
             </value>
             <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                referredVariable="#_Fvxg9BSYEeOruJhFCk5qMA"/>
+                referredVariable="#_PzOTARYxEeOI_uG2htgxEQ"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
               <source xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-                  referredVariable="#_Fvxg8xSYEeOruJhFCk5qMA"/>
+                  referredVariable="#_PzOTABYxEeOI_uG2htgxEQ"/>
             </value>
             <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                referredVariable="#_Fvxg9BSYEeOruJhFCk5qMA"/>
+                referredVariable="#_PzOTARYxEeOI_uG2htgxEQ"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
               <source xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                  referredVariable="#_Fvxg9BSYEeOruJhFCk5qMA"/>
+                  referredVariable="#_PzOTARYxEeOI_uG2htgxEQ"/>
             </value>
             <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-                referredVariable="#_Fvxg8hSYEeOruJhFCk5qMA"/>
+                referredVariable="#_PzNr9BYxEeOI_uG2htgxEQ"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
               <source xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                  referredVariable="#_Fvxg9BSYEeOruJhFCk5qMA"/>
+                  referredVariable="#_PzOTARYxEeOI_uG2htgxEQ"/>
             </value>
             <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-                referredVariable="#_Fvxg8xSYEeOruJhFCk5qMA"/>
+                referredVariable="#_PzOTABYxEeOI_uG2htgxEQ"/>
           </assignment>
         </bottomPattern>
       </local>
     </rule>
-    <rule xsi:type="qvtc:Mapping" xmi:id="_Fvxg9hSYEeOruJhFCk5qMA" name="node2node">
+    <rule xsi:type="qvtc:Mapping" xmi:id="_PzOTAxYxEeOI_uG2htgxEQ" name="node2node">
       <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="true"
-          typedModel="#_Fvw54BSYEeOruJhFCk5qMA">
+          typedModel="#_PzNr8BYxEeOI_uG2htgxEQ">
         <guardPattern>
-          <variable xmi:id="_Fvxg9xSYEeOruJhFCk5qMA" name="g1" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
+          <variable xmi:id="_PzOTBBYxEeOI_uG2htgxEQ" name="g1" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
             <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-                referredVariable="#_Fvxg9xSYEeOruJhFCk5qMA"/>
+                referredVariable="#_PzOTBBYxEeOI_uG2htgxEQ"/>
             <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
-                referredVariable="#_Fvxg-BSYEeOruJhFCk5qMA"/>
+                referredVariable="#_PzOTBRYxEeOI_uG2htgxEQ"/>
           </assignment>
-          <realizedVariable xmi:id="_Fvxg-BSYEeOruJhFCk5qMA" name="n1" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
+          <realizedVariable xmi:id="_PzOTBRYxEeOI_uG2htgxEQ" name="n1" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
         </bottomPattern>
       </domain>
       <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true"
-          typedModel="#_Fvw54RSYEeOruJhFCk5qMA">
+          typedModel="#_PzNr8RYxEeOI_uG2htgxEQ">
         <guardPattern>
-          <variable xmi:id="_Fvxg-RSYEeOruJhFCk5qMA" name="g2" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
+          <variable xmi:id="_PzOTBhYxEeOI_uG2htgxEQ" name="g2" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
             <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-                referredVariable="#_Fvxg-RSYEeOruJhFCk5qMA"/>
+                referredVariable="#_PzOTBhYxEeOI_uG2htgxEQ"/>
             <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
-                referredVariable="#_Fvxg-hSYEeOruJhFCk5qMA"/>
+                referredVariable="#_PzOTBxYxEeOI_uG2htgxEQ"/>
           </assignment>
-          <realizedVariable xmi:id="_Fvxg-hSYEeOruJhFCk5qMA" name="n2" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
+          <realizedVariable xmi:id="_PzOTBxYxEeOI_uG2htgxEQ" name="n2" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
         </bottomPattern>
       </domain>
       <guardPattern>
@@ -125,10 +125,10 @@
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
                 referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph1">
               <source xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                  referredVariable="#_Fvxg-xSYEeOruJhFCk5qMA"/>
+                  referredVariable="#_PzOTCBYxEeOI_uG2htgxEQ"/>
             </source>
             <argument xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-                referredVariable="#_Fvxg9xSYEeOruJhFCk5qMA"/>
+                referredVariable="#_PzOTBBYxEeOI_uG2htgxEQ"/>
           </conditionExpression>
         </predicate>
         <predicate>
@@ -137,73 +137,73 @@
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
                 referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph2">
               <source xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                  referredVariable="#_Fvxg-xSYEeOruJhFCk5qMA"/>
+                  referredVariable="#_PzOTCBYxEeOI_uG2htgxEQ"/>
             </source>
             <argument xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-                referredVariable="#_Fvxg-RSYEeOruJhFCk5qMA"/>
+                referredVariable="#_PzOTBhYxEeOI_uG2htgxEQ"/>
           </conditionExpression>
         </predicate>
-        <variable xmi:id="_Fvxg-xSYEeOruJhFCk5qMA" name="g2g" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"/>
+        <variable xmi:id="_PzOTCBYxEeOI_uG2htgxEQ" name="g2g" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"/>
       </guardPattern>
       <bottomPattern>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Element2Element.owner">
           <value xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-              referredVariable="#_Fvxg-xSYEeOruJhFCk5qMA"/>
+              referredVariable="#_PzOTCBYxEeOI_uG2htgxEQ"/>
           <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-              referredVariable="#_Fvxg_BSYEeOruJhFCk5qMA"/>
+              referredVariable="#_PzO6EBYxEeOI_uG2htgxEQ"/>
         </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node1">
           <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
-              referredVariable="#_Fvxg-BSYEeOruJhFCk5qMA"/>
+              referredVariable="#_PzOTBRYxEeOI_uG2htgxEQ"/>
           <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-              referredVariable="#_Fvxg_BSYEeOruJhFCk5qMA"/>
+              referredVariable="#_PzO6EBYxEeOI_uG2htgxEQ"/>
         </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node2">
           <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
-              referredVariable="#_Fvxg-hSYEeOruJhFCk5qMA"/>
+              referredVariable="#_PzOTBxYxEeOI_uG2htgxEQ"/>
           <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-              referredVariable="#_Fvxg_BSYEeOruJhFCk5qMA"/>
+              referredVariable="#_PzO6EBYxEeOI_uG2htgxEQ"/>
         </assignment>
-        <realizedVariable xmi:id="_Fvxg_BSYEeOruJhFCk5qMA" name="n2n" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
+        <realizedVariable xmi:id="_PzO6EBYxEeOI_uG2htgxEQ" name="n2n" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
       </bottomPattern>
-      <local xmi:id="_Fvxg_RSYEeOruJhFCk5qMA">
+      <local xmi:id="_PzO6ERYxEeOI_uG2htgxEQ">
         <guardPattern/>
         <bottomPattern>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
               <source xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
-                  referredVariable="#_Fvxg-BSYEeOruJhFCk5qMA"/>
+                  referredVariable="#_PzOTBRYxEeOI_uG2htgxEQ"/>
             </value>
             <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                referredVariable="#_Fvxg_BSYEeOruJhFCk5qMA"/>
+                referredVariable="#_PzO6EBYxEeOI_uG2htgxEQ"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
               <source xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
-                  referredVariable="#_Fvxg-hSYEeOruJhFCk5qMA"/>
+                  referredVariable="#_PzOTBxYxEeOI_uG2htgxEQ"/>
             </value>
             <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                referredVariable="#_Fvxg_BSYEeOruJhFCk5qMA"/>
+                referredVariable="#_PzO6EBYxEeOI_uG2htgxEQ"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
               <source xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                  referredVariable="#_Fvxg_BSYEeOruJhFCk5qMA"/>
+                  referredVariable="#_PzO6EBYxEeOI_uG2htgxEQ"/>
             </value>
             <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
-                referredVariable="#_Fvxg-BSYEeOruJhFCk5qMA"/>
+                referredVariable="#_PzOTBRYxEeOI_uG2htgxEQ"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
               <source xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                  referredVariable="#_Fvxg_BSYEeOruJhFCk5qMA"/>
+                  referredVariable="#_PzO6EBYxEeOI_uG2htgxEQ"/>
             </value>
             <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
-                referredVariable="#_Fvxg-hSYEeOruJhFCk5qMA"/>
+                referredVariable="#_PzOTBxYxEeOI_uG2htgxEQ"/>
           </assignment>
         </bottomPattern>
       </local>

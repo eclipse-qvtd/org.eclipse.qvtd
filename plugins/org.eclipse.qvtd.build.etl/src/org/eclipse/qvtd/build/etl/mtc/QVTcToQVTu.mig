@@ -1,3 +1,14 @@
+import "Helpers.eol";
+import "OclLibHelper.eol";
+
+// Realized variables in the input domain are retyed into variables
+retype RealizedVariable to Variable
+    when : isInputDomain(original.oppositeBottomPattern().area)
+
+// Property assignments in the input domain are retyped to predicates   
+retype PropertyAssignment to Predicate
+    when : isInputDomain(original.bottomPattern.area)  
+
 // Input Domain
 migrate CoreDomain
     when : isInputDomain(original) {
@@ -11,15 +22,13 @@ migrate CoreDomain
 	    }
     }
 
-// Core Domain
+// Output Domain(s)
 migrate CoreDomain
     when : not isInputDomain(original) {
-	    
-	    // TODO this should be global vars somehow
-	    var isCreate = new Boolean;
-	    isCreate = true;
-	    
-	    if (isCreate) {
+        if (isCheckMode()) {
+            migrated.isEnforceable = false;
+        }
+	    if (isEnforceMode()) {
 	        migrated.isCheckable = false;
 	    }
     }
@@ -33,12 +42,6 @@ migrate BottomPattern
     }
 }
     
-retype RealizedVariable to Variable
-    when : isInputDomain(original.oppositeBottomPattern().area)
-   
-retype PropertyAssignment to Predicate
-    when : isInputDomain(original.bottomPattern.area)
-
 migrate PropertyAssignment
     when : isInputDomain(original.bottomPattern.area) {
     
@@ -57,43 +60,3 @@ migrate PropertyAssignment
         exp.argument = args;
         migrated.conditionExpression = exp;    
     }
-
-delete PropertyAssignment
-    when {
-        // TODO The slotExpression, referredProperty and value should be deleted to!    
-        return not isInputDomain(original.bottomPattern.area)
-        and (original.slotExpression.isTypeOf(QVTc!VariableExp)
-            and original.slotExpression.referredVariable.oppositePattern().area.isTypeOf(QVTc!Mapping))
-        and not original.value.isTypeOf(QVTc!VariableExp);
-    }
-
-
-
-@chached
-operation isInputDomain(area : QVTc!Area) : Boolean {
-    return config!Configuration.all.first().inputDirection.name == area.name;
-}
-
-@cached
-operation QVTc!RealizedVariable oppositeBottomPattern() : QVTc!BottomPattern  {
-    return QVTc!BottomPattern.all.selectOne(p |p.realizedVariable.includes(self)); }
-
-@cached
-operation QVTc!Variable oppositePattern() : QVTc!CorePattern  {
-    
-    if(self.isTypeOf(QVTc!Variable)) {
-        return QVTc!CorePattern.all.selectOne(p |p.variable.includes(self));
-    }
-    if (self.isTypeOf(QVTc!RealizedVariable)) {
-        return self.oppositeBottomPattern();
-    }     
-}
-
-@cached
-operation getOperationByName(name : String) : oclStdLib!Operation {
-    return oclStdLib!Operation.all.selectOne(o | o.name == name);
-}
-
-
-
-

@@ -1,0 +1,33 @@
+@chached
+operation isInputDomain(area : QVTc!Area) : Boolean {
+    return area.isTypeOf(QVTc!CoreDomain) and
+        config!Configuration.all.first().inputDirection.name == area.typedModel.name;
+}
+
+@chached
+operation isMiddleDomain(area : QVTc!Area) : Boolean {
+    return area.isTypeOf(QVTc!Mapping);
+}
+
+operation isCheckMode() : Boolean {
+    return config!Configuration.all.first().mode == config!Mode#checking;
+}
+
+operation isEnforceMode() : Boolean {
+    return config!Configuration.all.first().mode == config!Mode#enforcement;
+}
+
+@cached
+operation QVTc!RealizedVariable oppositeBottomPattern() : QVTc!BottomPattern  {
+    return QVTc!BottomPattern.all.selectOne(p |p.realizedVariable.includes(self)); }
+
+@cached
+operation QVTc!Variable oppositePattern() : QVTc!CorePattern  {
+    
+    if(self.isTypeOf(QVTc!Variable)) {
+        return QVTc!CorePattern.all.selectOne(p |p.variable.includes(self));
+    }
+    if (self.isTypeOf(QVTc!RealizedVariable)) {
+        return self.oppositeBottomPattern();
+    }     
+}
