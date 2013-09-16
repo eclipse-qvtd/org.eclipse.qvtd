@@ -17,4 +17,26 @@
             genModel="model/QVTtemplate.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated QVTtemplate -->
+      <parser
+            contentTypeIdentifier="org.eclipse.qvtd.qvttemplate"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <!-- @generated QVTtemplate -->
+      <content-type
+            base-type="org.eclipse.emf.ecore.xmi"
+            file-extensions="qvttas"
+            id="org.eclipse.qvtd.qvttemplate"
+            name="%_UI_QVTtemplate_content_type"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/0.9/QVTtemplate"/>
+            <parameter name="kind" value="xmi"/>
+         </describer>
+      </content-type>
+   </extension>
+
 </plugin>

@@ -20,7 +20,6 @@
 package	org.eclipse.qvtd.pivot.qvtimperative.util;
 
 import java.lang.Object;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.utilities.ASSaver;

@@ -11,22 +11,21 @@
 <plugin>
 
   <extension point="org.eclipse.team.core.fileTypes">
+    <!-- @generated QVTimperative NOT -->
     <fileTypes extension="qvtias" type="text" />
   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package uri="http://www.eclipse.org/qvt/0.9/QVTimperative"
-            class="org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
-            genModel="model/QVTimperative.genmodel"/>
-      <!-- preserve historical typo -->
-      <package uri="http://www.eclipse.org/qvt/0.9/QVTimperatve"
-            class="org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
-            genModel="model/QVTimperative.genmodel"/>
-   </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <parser type="qvtias"
             class="org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated QVTimperative -->
+      <package
+            uri="http://www.eclipse.org/qvt/0.9/QVTimperative"
+            class="org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
+            genModel="model/QVTimperative.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">

@@ -11,19 +11,21 @@
 <plugin>
 
   <extension point="org.eclipse.team.core.fileTypes">
+  <!-- @generated QVTcore NOT -->
     <fileTypes extension="qvtcas" type="text" />
   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
-            uri="http://www.eclipse.org/qvt/0.9/QVTcore"
-            class="org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage"
-            genModel="model/QVTcore.genmodel"/>
-   </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <parser type="qvtcas"
             class="org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASResourceFactory"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated QVTcore -->
+      <package
+            uri="http://www.eclipse.org/qvt/0.9/QVTcore"
+            class="org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage"
+            genModel="model/QVTcore.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">

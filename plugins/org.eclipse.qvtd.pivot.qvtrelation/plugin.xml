@@ -11,19 +11,21 @@
 <plugin>
 
   <extension point="org.eclipse.team.core.fileTypes">
+    <!-- @generated QVTrelation NOT -->
     <fileTypes extension="qvtras" type="text" />
   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
-            uri="http://www.eclipse.org/qvt/0.9/QVTrelation"
-            class="org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage"
-            genModel="model/QVTrelation.genmodel"/>
-   </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <parser type="qvtras"
             class="org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASResourceFactory"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated QVTrelation -->
+      <package
+            uri="http://www.eclipse.org/qvt/0.9/QVTrelation"
+            class="org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage"
+            genModel="model/QVTrelation.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">
