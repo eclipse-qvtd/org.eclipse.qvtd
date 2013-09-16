@@ -22,6 +22,8 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -29,6 +31,24 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 public class QVTbaseUtil
 {
+	public static <T extends NamedElement> void addAllNamedElements(@NonNull EnvironmentView environmentView, @NonNull Iterable<T> namedElements) {
+		String name = environmentView.getName();
+		if (name != null) {
+			for (T namedElement : namedElements) {
+				if ((namedElement != null) && name.equals(namedElement.getName())) {
+					environmentView.addElement(name, namedElement);
+				}
+			}
+		}
+		else {
+			for (T namedElement : namedElements) {
+				if (namedElement != null) {
+					environmentView.addNamedElement(namedElement);
+				}
+			}
+		}
+	}
+
 	public static @NonNull Set<org.eclipse.ocl.examples.pivot.Package> getAllUsedPackages(@NonNull Transformation transformation) {
 		Set<org.eclipse.ocl.examples.pivot.Package> allPackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
 		for (TypedModel typedModel : transformation.getModelParameter()) {

@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.attributes.PivotCSAttribution;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.QueryCS;
 
 public class QueryCSAttribution extends PivotCSAttribution
@@ -38,10 +39,8 @@ public class QueryCSAttribution extends PivotCSAttribution
 			environmentView.addNamedElements(pivot.getOwnedParameter());
 			Transformation transformation = (Transformation) pivot.eContainer();
 			if (transformation != null) {
-				environmentView.addAllOperations(transformation, false);
-				environmentView.addAllOperations(transformation, true);
-				environmentView.addAllProperties(transformation, false);
-				environmentView.addAllProperties(transformation, true);
+				QVTbaseUtil.addAllNamedElements(environmentView, transformation.getOwnedOperation());
+				QVTbaseUtil.addAllNamedElements(environmentView, transformation.getOwnedAttribute());
 			}
 		}
 //		EReference targetReference = scopeView.getTargetReference();

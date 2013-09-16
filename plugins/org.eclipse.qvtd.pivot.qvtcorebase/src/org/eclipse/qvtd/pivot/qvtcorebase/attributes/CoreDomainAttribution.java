@@ -23,6 +23,7 @@ import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 
 public class CoreDomainAttribution extends AbstractAttribution
@@ -43,8 +44,7 @@ public class CoreDomainAttribution extends AbstractAttribution
 			if (eContainer instanceof Transformation) {
 				Transformation transformation = (Transformation) eContainer;
 				environmentView.addNamedElements(transformation.getModelParameter());
-				environmentView.addAllOperations(transformation, false);
-				environmentView.addAllOperations(transformation, true);
+				QVTbaseUtil.addAllNamedElements(environmentView, transformation.getOwnedOperation());
 				break;
 			}
 		}

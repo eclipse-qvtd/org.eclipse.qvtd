@@ -756,7 +756,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 */
 	@Override
 	public Package getPackage() {
-		return this;
+		return getNestingPackage();
 	}
 
 	/**
