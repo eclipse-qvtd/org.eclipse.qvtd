@@ -119,7 +119,8 @@ public class hsv2hls extends AbstractTransformation
                 return false;
             }
             // creations
-            final @NonNull /*@Thrown*/ HSVNode2HLSNode middleRoot = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
+            final /*@Thrown*/ HSVNode2HLSNode middleRoot = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
+            assert middleRoot != null;
             modelObjects[2/*null*/].add(middleRoot);
             // assignments
             middleRoot.setHsv(hsvRoot);
@@ -169,7 +170,8 @@ public class hsv2hls extends AbstractTransformation
         try {
             // predicates
             // creations
-            final @NonNull /*@Thrown*/ HSVNode2HLSNode middleNode = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
+            final /*@Thrown*/ HSVNode2HLSNode middleNode = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
+            assert middleNode != null;
             modelObjects[2/*null*/].add(middleNode);
             // assignments
             middleNode.setParent(middleParent);
@@ -217,9 +219,9 @@ public class hsv2hls extends AbstractTransformation
         try {
             // predicates
             // creations
-            final @Nullable /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
-            modelObjects[1/*hls*/].add(hlsNode);
+            final /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
             assert hlsNode != null;
+            modelObjects[1/*hls*/].add(hlsNode);
             // assignments
             hlsNode.setParent(null);
             middleNode.setHls(hlsNode);
@@ -266,13 +268,13 @@ public class hsv2hls extends AbstractTransformation
         try {
             // predicates
             // creations
-            final @Nullable /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
-            modelObjects[1/*hls*/].add(hlsNode);
+            final /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
             assert hlsNode != null;
+            modelObjects[1/*hls*/].add(hlsNode);
             // assignments
             final @Nullable /*@Thrown*/ HSVNode2HLSNode parent = middleNode_0.getParent();
             if (parent == null) {
-                throw new InvalidValueException("Null source");
+                throw new InvalidValueException("Null source for \'HSV2HLS::HSVNode2HLSNode.hls\'");
             }
             final @Nullable /*@Thrown*/ HLSNode hls = parent.getHls();
             hlsNode.setParent(hls);

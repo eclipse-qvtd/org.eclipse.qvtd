@@ -343,6 +343,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 		js.append(createMethodName);
 		js.append("();\n");
 		//
+		js.append("assert ");
+		js.appendValueName(cgRealizedVariable);
+		js.append(" != null;\n");
+		//
 		doAddRealization(cgRealizedVariable);
 		return true;
 	}
@@ -407,9 +411,19 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 						js.append("return 0;\n");
 					}
 					else {			// FIXME Fudge for body-less functions
-						js.append("return ");
+						if (js.isUseNullAnnotations()) {
+							js.append("@SuppressWarnings(\"null\")");
+							js.appendIsRequired(true);
+							js.append(" ");
+						}
+						if (elementId != null) {
+							TypeDescriptor javaTypeDescriptor = context.getTypeDescriptor(elementId, false);
+							js.appendClassReference(javaTypeDescriptor);
+						}
+						js.append(" emptyList = ");
 						js.appendClassReference(Collections.class);
-						js.append(".EMPTY_LIST;\n");
+						js.append(".emptyList();\n");
+						js.append("return emptyList;\n");
 					}
 				js.popIndentation();
 				js.append("}\n");

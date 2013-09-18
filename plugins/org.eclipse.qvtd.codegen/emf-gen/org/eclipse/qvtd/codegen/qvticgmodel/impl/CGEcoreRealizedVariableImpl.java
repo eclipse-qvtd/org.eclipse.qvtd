@@ -162,8 +162,8 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	 * @generated
 	 */
 	@Override
-	public boolean isNonNull() {
-		return nonNull;
+	public boolean isAssertedNonNull() {
+		return true;
 	}
 
 } //CGEcoreRealizedVariableImpl

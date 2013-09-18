@@ -36,6 +36,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 
 public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVisitor<Object>
 {
@@ -87,7 +88,8 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 
 	public Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
 		if (cgMappingCallBinding.isRequired()) {
-			rewriteAsUnboxed(rewriteAsGuarded(cgMappingCallBinding.getValueOrValues()));
+			MappingCallBinding mappingCallBinding = (MappingCallBinding)cgMappingCallBinding.getAst();
+			rewriteAsUnboxed(rewriteAsGuarded(cgMappingCallBinding.getValueOrValues(), "binding for '" + mappingCallBinding.getMappingCall().getReferredMapping().getName() + "::" + mappingCallBinding.getBoundVariable().getName() + "'"));	// FIXME referred mapping
 		}
 		else {
 			rewriteAsUnboxed(cgMappingCallBinding.getValueOrValues());
