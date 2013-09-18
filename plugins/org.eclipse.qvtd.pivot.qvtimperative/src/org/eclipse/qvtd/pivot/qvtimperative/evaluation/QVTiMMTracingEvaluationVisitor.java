@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 // TODO Implement all this!!
 /**
  * The Class QVTiTracingEvaluationVisitor is a decorator visitor that prints
@@ -19,15 +21,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
  */
 public class QVTiMMTracingEvaluationVisitor extends QVTiAbstractTracingEvaluationVisitor
 {
-	
-	/** The indent level. */
-	private int indentLevel = 0;	
-
-	public QVTiMMTracingEvaluationVisitor(QVTiEvaluationVisitor decorated) {
+	public QVTiMMTracingEvaluationVisitor(@NonNull QVTiEvaluationVisitor decorated) {
 		super(decorated);
-		// TODO Auto-generated constructor stub
 	}
-
-	
-	
 }

@@ -50,8 +50,9 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 		return visitCGPropertyAssignment(cgEcorePropertyAssignment);
 	}
 
-	public Object visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable object) {
-		return visitCGRealizedVariable(object);
+	public Object visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable cgEcoreRealizedVariable) {
+		rewriteAsAssertNonNulled(cgEcoreRealizedVariable);
+		return visitCGRealizedVariable(cgEcoreRealizedVariable);
 	}
 
 	public Object visitCGFunction(@NonNull CGFunction cgFunction) {
@@ -85,6 +86,12 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	}
 
 	public Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
+		if (cgMappingCallBinding.isRequired()) {
+			rewriteAsUnboxed(rewriteAsGuarded(cgMappingCallBinding.getValueOrValues()));
+		}
+		else {
+			rewriteAsUnboxed(cgMappingCallBinding.getValueOrValues());
+		}
 		return visitCGValuedElement(cgMappingCallBinding);
 	}
 

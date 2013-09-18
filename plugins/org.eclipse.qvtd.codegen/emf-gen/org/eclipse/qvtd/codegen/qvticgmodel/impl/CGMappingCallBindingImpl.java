@@ -263,8 +263,8 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
-		return valueOrValues != null ? valueOrValues : this;
+	public boolean isBoxed() {
+		return (valueOrValues != null) && valueOrValues.isBoxed();
 	}
 
 	/**
@@ -272,8 +272,21 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 * @generated
 	 */
 	@Override
-	public boolean isBoxed() {
-		return (valueOrValues != null) && valueOrValues.isBoxed();
+	public boolean isCommonable() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		if (this == thatValue) {
+			return Boolean.TRUE;
+		}
+		else {
+			return Boolean.FALSE;
+		}
 	}
 
 	/**

@@ -157,4 +157,13 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGEcoreRealizedVariable(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isNonNull() {
+		return nonNull;
+	}
+
 } //CGEcoreRealizedVariableImpl

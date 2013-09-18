@@ -6,10 +6,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.jdt.annotation.NonNull;
 
 import test.middle.HSV2HLS.*;
 
@@ -98,7 +97,7 @@ public class HSV2HLSFactoryImpl extends EFactoryImpl implements HSV2HLSFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public HSVNode2HLSNode createHSVNode2HLSNode() {
+	public @NonNull HSVNode2HLSNode createHSVNode2HLSNode() {
 		HSVNode2HLSNodeImpl hsvNode2HLSNode = new HSVNode2HLSNodeImpl();
 		return hsvNode2HLSNode;
 	}

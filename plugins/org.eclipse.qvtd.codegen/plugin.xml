@@ -33,7 +33,7 @@
             class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/-->
       <parser
             contentTypeIdentifier="org.eclipse.qvtd.codegen.qvticgmodel"
-            class="org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactoryImpl"/>
+            class="org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory"/>
    </extension>
 
    <extension point="org.eclipse.core.contenttype.contentTypes">

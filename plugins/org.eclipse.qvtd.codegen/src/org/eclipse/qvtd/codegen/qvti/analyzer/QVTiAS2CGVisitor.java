@@ -111,8 +111,8 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	}
 
 	protected void createMappingCalls(@NonNull Mapping pMapping, @NonNull CGMappingExp cgMappingExp) {
-		for (MappingCall pMappingCall : pMapping.getMappingCall()) {
-			CGMappingCall cgMappingCall = doVisit(CGMappingCall.class, pMappingCall);
+		for (MappingCall asMappingCall : pMapping.getMappingCall()) {
+			CGMappingCall cgMappingCall = doVisit(CGMappingCall.class, asMappingCall);
 			cgMappingExp.getMappingCalls().add(cgMappingCall);
 		}
 	}
@@ -143,7 +143,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 					return o1.getName().compareTo(o2.getName());
 				}		
 			});
-		List<CGRealizedVariable> cgRealizedVariables = cgMappingExp.getRealizedVariables();
+		List<CGValuedElement> cgRealizedVariables = cgMappingExp.getRealizedVariables();
 		for (@SuppressWarnings("null")@NonNull RealizedVariable pRealizedVariable : pRealizedVariables) {
 			CGRealizedVariable cgVariable = getRealizedVariable(pRealizedVariable);
 			cgRealizedVariables.add(cgVariable);
@@ -234,32 +234,32 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 //		cgMappingExp.getBoundVariables().addAll(cgBoundVariables);
 		List<CGPredicate> cgGuardExpressions = cgMappingExp.getPredicates();
 		for (@SuppressWarnings("null")@NonNull GuardPattern pGuardPattern : guardPatterns) {
-			for (@SuppressWarnings("null")@NonNull Predicate pPredicate : pGuardPattern.getPredicate()) {
-				cgGuardExpressions.add(doVisit(CGPredicate.class, pPredicate));
+			for (@SuppressWarnings("null")@NonNull Predicate asPredicate : pGuardPattern.getPredicate()) {
+				cgGuardExpressions.add(doVisit(CGPredicate.class, asPredicate));
 			}
 		}
 	}
 
-	public @NonNull CGFunctionParameter getFunctionParameter(@NonNull FunctionParameter aParameter) {
-		CGFunctionParameter cgFunctionParameter = (CGFunctionParameter)getVariablesStack().getParameter(aParameter);
+	public @NonNull CGFunctionParameter getFunctionParameter(@NonNull FunctionParameter asFunctionParameter) {
+		CGFunctionParameter cgFunctionParameter = (CGFunctionParameter)getVariablesStack().getParameter(asFunctionParameter);
 		if (cgFunctionParameter == null) {
 			cgFunctionParameter = QVTiCGModelFactory.eINSTANCE.createCGFunctionParameter();
-			context.setNames(cgFunctionParameter, aParameter);
-			setAst(cgFunctionParameter, aParameter);
-			cgFunctionParameter.setTypeId(context.getTypeId(aParameter.getTypeId()));
-			addParameter(aParameter, cgFunctionParameter);
+			context.setNames(cgFunctionParameter, asFunctionParameter);
+			setAst(cgFunctionParameter, asFunctionParameter);
+			cgFunctionParameter.setTypeId(context.getTypeId(asFunctionParameter.getTypeId()));
+			addParameter(asFunctionParameter, cgFunctionParameter);
 		}
 		return cgFunctionParameter;
 	}
 
-	public @NonNull CGGuardVariable getGuardVariable(@NonNull Variable pParameter) {
-		CGGuardVariable cgGuardVariable = (CGGuardVariable) getVariablesStack().getParameter(pParameter);
+	public @NonNull CGGuardVariable getGuardVariable(@NonNull Variable asVariable) {
+		CGGuardVariable cgGuardVariable = (CGGuardVariable) getVariablesStack().getParameter(asVariable);
 			cgGuardVariable = QVTiCGModelFactory.eINSTANCE.createCGGuardVariable();
-			context.setNames(cgGuardVariable, pParameter);
-			setAst(cgGuardVariable, pParameter);
-			cgGuardVariable.setTypeId(context.getTypeId(pParameter.getTypeId()));
-			cgGuardVariable.setTypedModel(getTypedModel(pParameter));
-			addParameter(pParameter, cgGuardVariable);
+			context.setNames(cgGuardVariable, asVariable);
+			setAst(cgGuardVariable, asVariable);
+			cgGuardVariable.setTypeId(context.getTypeId(asVariable.getTypeId()));
+			cgGuardVariable.setTypedModel(getTypedModel(asVariable));
+			addParameter(asVariable, cgGuardVariable);
 		return cgGuardVariable;
 	}
 
@@ -286,15 +286,15 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 
 	protected @NonNull CGTypedModel getTypedModel(@NonNull Variable pVariable) {
 		Area pArea = DomainUtil.nonNullState(QVTcoreBaseUtil.getContainingArea(pVariable));
-		TypedModel pTypedModel = null;
+		TypedModel asTypedModel = null;
 		if (pArea instanceof Domain) {
-			pTypedModel = DomainUtil.nonNullState(((Domain)pArea).getTypedModel());
+			asTypedModel = DomainUtil.nonNullState(((Domain)pArea).getTypedModel());
 		}
 		else {
 			Transformation pTransformation = ((Mapping)pArea).getTransformation();
-			pTypedModel = DomainUtil.nonNullState(pTransformation.getModelParameter(null));
+			asTypedModel = DomainUtil.nonNullState(pTransformation.getModelParameter(null));
 		}
-		return DomainUtil.nonNullState(analyzer.getTypedModel(pTypedModel));
+		return DomainUtil.nonNullState(analyzer.getTypedModel(asTypedModel));
 	}
 
 	public @Nullable CGNamedElement visitAssignment(@NonNull Assignment object) {
@@ -325,16 +325,16 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return visiting(object);
 	}
 
-	public @Nullable CGNamedElement visitFunction(@NonNull Function pFunction) {
+	public @Nullable CGNamedElement visitFunction(@NonNull Function asFunction) {
 		CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
-		setAst(cgFunction, pFunction);
-		cgFunction.setRequired(pFunction.isRequired());
-		for (Parameter pParameter : pFunction.getOwnedParameter()) {
+		setAst(cgFunction, asFunction);
+		cgFunction.setRequired(asFunction.isRequired());
+		for (Parameter pParameter : asFunction.getOwnedParameter()) {
 			cgFunction.getParameters().add(doVisit(CGParameter.class, pParameter));
 		}
-		OpaqueExpression specification = pFunction.getBodyExpression();
+		OpaqueExpression specification = asFunction.getBodyExpression();
 		if (specification != null) {
-			ExpressionInOCL expressionInOCL = PivotUtil.getExpressionInOCL(pFunction, specification);
+			ExpressionInOCL expressionInOCL = PivotUtil.getExpressionInOCL(asFunction, specification);
 			if (expressionInOCL != null) {
 				Variable contextVariable = expressionInOCL.getContextVariable();
 				if (contextVariable != null) {
@@ -346,12 +346,12 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 				cgFunction.setBody(doVisit(CGValuedElement.class, expressionInOCL.getBodyExpression()));
 			}
 		}
-		analyzer.addFunction(pFunction, cgFunction);
+		analyzer.addFunction(asFunction, cgFunction);
 		return cgFunction;
 	}
 
-	public @Nullable CGNamedElement visitFunctionParameter(@NonNull FunctionParameter pFunctionParameter) {
-		return getFunctionParameter(pFunctionParameter);
+	public @Nullable CGNamedElement visitFunctionParameter(@NonNull FunctionParameter asFunctionParameter) {
+		return getFunctionParameter(asFunctionParameter);
 	}
 
 	public @Nullable CGNamedElement visitGuardPattern(@NonNull GuardPattern object) {
@@ -377,12 +377,12 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return cgMapping;
 	}
 
-	public @Nullable CGNamedElement visitMappingCall(@NonNull MappingCall pMappingCall) {
+	public @Nullable CGNamedElement visitMappingCall(@NonNull MappingCall asMappingCall) {
 		CGMappingCall cgMappingCall = QVTiCGModelFactory.eINSTANCE.createCGMappingCall();
-		setAst(cgMappingCall, pMappingCall);
+		setAst(cgMappingCall, asMappingCall);
 		List<CGMappingCallBinding> cgMappingCallBindings = new ArrayList<CGMappingCallBinding>();
-		for (MappingCallBinding pMappingCallBinding : pMappingCall.getBinding()) {
-			CGMappingCallBinding cgMappingCallBinding = doVisit(CGMappingCallBinding.class, pMappingCallBinding);
+		for (MappingCallBinding asMappingCallBinding : asMappingCall.getBinding()) {
+			CGMappingCallBinding cgMappingCallBinding = doVisit(CGMappingCallBinding.class, asMappingCallBinding);
 			cgMappingCallBindings.add(cgMappingCallBinding);
 		}
 		Collections.sort(cgMappingCallBindings, new Comparator<CGMappingCallBinding>()
@@ -397,28 +397,31 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return cgMappingCall;
 	}
 
-	public @Nullable CGNamedElement visitMappingCallBinding(@NonNull MappingCallBinding pMappingCallBinding) {
+	public @Nullable CGNamedElement visitMappingCallBinding(@NonNull MappingCallBinding asMappingCallBinding) {
+		Variable asBoundVariable = asMappingCallBinding.getBoundVariable();
 		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
-//		setPivot(cgMappingCallBinding, pMappingCallBinding);
-		cgMappingCallBinding.setName(pMappingCallBinding.getBoundVariable().getName());
-		cgMappingCallBinding.setLoop(pMappingCallBinding.isIsLoop());
-		cgMappingCallBinding.setValueOrValues(doVisit(CGValuedElement.class, pMappingCallBinding.getValue()));
-		cgMappingCallBinding.setTypeId(analyzer.getTypeId(pMappingCallBinding.getBoundVariable().getTypeId()));
-//		cgMappingCallBinding.setValueName(localnamepMappingCallBinding.getBoundVariable().getName());
+//		setPivot(cgMappingCallBinding, asMappingCallBinding);
+		cgMappingCallBinding.setName(asBoundVariable.getName());
+		cgMappingCallBinding.setAst(asMappingCallBinding);
+		cgMappingCallBinding.setRequired(asBoundVariable.isRequired());
+		cgMappingCallBinding.setLoop(asMappingCallBinding.isIsLoop());
+		cgMappingCallBinding.setValueOrValues(doVisit(CGValuedElement.class, asMappingCallBinding.getValue()));
+		cgMappingCallBinding.setTypeId(analyzer.getTypeId(asBoundVariable.getTypeId()));
+//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
 		return cgMappingCallBinding;
 	}
 
-	public @Nullable CGNamedElement visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment pPropertyAssignment) {
-//		Property asProperty = DomainUtil.nonNullModel(pPropertyAssignment.getTargetProperty());
+	public @Nullable CGNamedElement visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment asPropertyAssignment) {
+//		Property asProperty = DomainUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
 		CGMiddlePropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyAssignment();
-//		setPivot(cgPropertyAssignment, pPredicate);
-		cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, pPropertyAssignment.getSlotExpression()));
-		Property asProperty = pPropertyAssignment.getTargetProperty();
+//		setPivot(cgPropertyAssignment, asPredicate);
+		cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, asPropertyAssignment.getSlotExpression()));
+		Property asProperty = asPropertyAssignment.getTargetProperty();
 		cgPropertyAssignment.setReferredProperty(asProperty);
-//		cgPredicate.setName(pPredicate.getName());
+//		cgPredicate.setName(asPredicate.getName());
 		cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
-//		cgMappingCallBinding.setValueName(localnamepMappingCallBinding.getBoundVariable().getName());
-		cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, pPropertyAssignment.getValue()));
+//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+		cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asPropertyAssignment.getValue()));
 		EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getETarget();
 		if (eStructuralFeature != null) {
 			try {
@@ -430,8 +433,8 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return cgPropertyAssignment;
 	}
 
-	public @Nullable CGNamedElement visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp pPropertyCallExp) {
-		Property asProperty = DomainUtil.nonNullModel(pPropertyCallExp.getReferredProperty());
+	public @Nullable CGNamedElement visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp asMiddlePropertyCallExp) {
+		Property asProperty = DomainUtil.nonNullModel(asMiddlePropertyCallExp.getReferredProperty());
 		globalContext.addToMiddleProperty(DomainUtil.nonNullModel(asProperty.getOpposite()));
 //		LibraryProperty libraryProperty = metaModelManager.getImplementation(asProperty);
 		CGMiddlePropertyCallExp cgPropertyCallExp = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyCallExp();					
@@ -440,31 +443,31 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 //		cgPropertyCallExp = cgExecutorPropertyCallExp;
 //		cgPropertyCallExp.getDependsOn().add(cgExecutorProperty);
 		cgPropertyCallExp.setReferredProperty(asProperty.getOpposite());
-		setAst(cgPropertyCallExp, pPropertyCallExp);
+		setAst(cgPropertyCallExp, asMiddlePropertyCallExp);
 		cgPropertyCallExp.setRequired(asProperty.isRequired());
-		CGValuedElement cgSource = doVisit(CGValuedElement.class, pPropertyCallExp.getSource());
+		CGValuedElement cgSource = doVisit(CGValuedElement.class, asMiddlePropertyCallExp.getSource());
 		cgPropertyCallExp.setSource(cgSource);
 		return cgPropertyCallExp;
 	}
 
 	@Override
 	public @NonNull
-	CGValuedElement visitOperationCallExp(@NonNull OperationCallExp element) {
-		Operation pOperation = element.getReferredOperation();
+	CGValuedElement visitOperationCallExp(@NonNull OperationCallExp asOperationCallExp) {
+		Operation pOperation = asOperationCallExp.getReferredOperation();
 		if (pOperation instanceof Function) {
 			CGFunctionCallExp cgFunctionCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
 			cgFunctionCallExp.setReferredOperation(pOperation);
-			setAst(cgFunctionCallExp, element);
+			setAst(cgFunctionCallExp, asOperationCallExp);
 			cgFunctionCallExp.setRequired(pOperation.isRequired());
-			for (OCLExpression pArgument : element.getArgument()) {
+			for (OCLExpression pArgument : asOperationCallExp.getArgument()) {
 				CGValuedElement cgArgument = doVisit(CGValuedElement.class, pArgument);
 				cgFunctionCallExp.getArguments().add(cgArgument);
 			}
-//			cgOperationCallExp.setOperation(getOperation(element.getReferredOperation()));
+//			cgOperationCallExp.setOperation(getOperation(asOperationCallExp.getReferredOperation()));
 			return cgFunctionCallExp;
 		}
 		else {
-			return super.visitOperationCallExp(element);
+			return super.visitOperationCallExp(asOperationCallExp);
 		}
 	}
 
@@ -472,18 +475,18 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return visiting(object);
 	}
 
-	public @Nullable CGNamedElement visitPredicate(@NonNull Predicate pPredicate) {
+	public @Nullable CGNamedElement visitPredicate(@NonNull Predicate asPredicate) {
 		CGPredicate cgPredicate = QVTiCGModelFactory.eINSTANCE.createCGPredicate();
-//		setPivot(cgPredicate, pPredicate);
-//		cgPredicate.setName(pPredicate.getName());
+//		setPivot(cgPredicate, asPredicate);
+//		cgPredicate.setName(asPredicate.getName());
 		cgPredicate.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
-//		cgMappingCallBinding.setValueName(localnamepMappingCallBinding.getBoundVariable().getName());
-		cgPredicate.setConditionExpression(doVisit(CGValuedElement.class, pPredicate.getConditionExpression()));
+//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+		cgPredicate.setConditionExpression(doVisit(CGValuedElement.class, asPredicate.getConditionExpression()));
 		return cgPredicate;
 	}
 
-	public @Nullable CGNamedElement visitPropertyAssignment(@NonNull PropertyAssignment pPropertyAssignment) {
-		Property asTargetProperty = DomainUtil.nonNullModel(pPropertyAssignment.getTargetProperty());
+	public @Nullable CGNamedElement visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
+		Property asTargetProperty = DomainUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
 		LibraryProperty libraryProperty = metaModelManager.getImplementation(asTargetProperty);
 		CGPropertyAssignment cgPropertyAssignment = null;
 		if (isEcoreProperty(libraryProperty)) {
@@ -501,13 +504,13 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		if (cgPropertyAssignment == null) {
 			cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
 		}
-//		setPivot(cgPropertyAssignment, pPredicate);
-		cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, pPropertyAssignment.getSlotExpression()));
+//		setPivot(cgPropertyAssignment, asPredicate);
+		cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, asPropertyAssignment.getSlotExpression()));
 		cgPropertyAssignment.setReferredProperty(asTargetProperty);
-//		cgPredicate.setName(pPredicate.getName());
+//		cgPredicate.setName(asPredicate.getName());
 		cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
-//		cgMappingCallBinding.setValueName(localnamepMappingCallBinding.getBoundVariable().getName());
-		cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, pPropertyAssignment.getValue()));
+//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+		cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asPropertyAssignment.getValue()));
 
 		CGExecutorProperty cgExecutorProperty = context.createExecutorProperty(asTargetProperty);
 		cgPropertyAssignment.setExecutorProperty(cgExecutorProperty);
@@ -530,30 +533,30 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return visiting(object);
 	}
 
-	public @Nullable CGNamedElement visitTransformation(@NonNull Transformation element) {
+	public @Nullable CGNamedElement visitTransformation(@NonNull Transformation asTransformation) {
 		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
-		setAst(cgTransformation, element);
+		setAst(cgTransformation, asTransformation);
 		List<CGTypedModel> cgTypedModels = cgTransformation.getTypedModels();
-		for (TypedModel pTypedModel : element.getModelParameter()) {
-			CGTypedModel cgTypedModel = doVisit(CGTypedModel.class, pTypedModel);
+		for (TypedModel asTypedModel : asTransformation.getModelParameter()) {
+			CGTypedModel cgTypedModel = doVisit(CGTypedModel.class, asTypedModel);
 			cgTypedModel.setModelIndex(cgTypedModels.size());
 			cgTypedModels.add(cgTypedModel);
 		}
-		for (Rule asRule : element.getRule()) {
+		for (Rule asRule : asTransformation.getRule()) {
 			CGMapping cgMapping = doVisit(CGMapping.class, asRule);
 			cgTransformation.getMappings().add(cgMapping);
 		}
-		for (Operation asOperation : element.getOwnedOperation()) {
+		for (Operation asOperation : asTransformation.getOwnedOperation()) {
 			CGOperation cgOperation = doVisit(CGOperation.class, asOperation);
 			cgTransformation.getOperations().add(cgOperation);
 		}
 		return cgTransformation;
 	}
 
-	public @Nullable CGNamedElement visitTypedModel(@NonNull TypedModel pTypedModel) {
+	public @Nullable CGNamedElement visitTypedModel(@NonNull TypedModel asTypedModel) {
 		CGTypedModel cgTypedModel = QVTiCGModelFactory.eINSTANCE.createCGTypedModel();
-		setAst(cgTypedModel, pTypedModel);
-		analyzer.addTypedModel(pTypedModel, cgTypedModel);
+		setAst(cgTypedModel, asTypedModel);
+		analyzer.addTypedModel(asTypedModel, cgTypedModel);
 		return cgTypedModel;
 	}
 
@@ -561,23 +564,23 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return visiting(object);
 	}
 
-	public @Nullable CGNamedElement visitVariablePredicate(@NonNull VariablePredicate pPredicate) {
+	public @Nullable CGNamedElement visitVariablePredicate(@NonNull VariablePredicate asPredicate) {
 		CGVariablePredicate cgPredicate = QVTiCGModelFactory.eINSTANCE.createCGVariablePredicate();
-//		setPivot(cgPredicate, pPredicate);
-		cgPredicate.setAst(pPredicate);
-//		TypeId pivotTypeId = pPredicate.getTypeId();
+//		setPivot(cgPredicate, asPredicate);
+		cgPredicate.setAst(asPredicate);
+//		TypeId pivotTypeId = asPredicate.getTypeId();
 //		cgPredicate.setTypeId(context.getTypeId(pivotTypeId));
-		Variable targetVariable = pPredicate.getTargetVariable();
+		Variable targetVariable = asPredicate.getTargetVariable();
 		cgPredicate.setName(targetVariable.getName());
 		cgPredicate.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
-//		cgMappingCallBinding.setValueName(localnamepMappingCallBinding.getBoundVariable().getName());
-		OCLExpression conditionExpression = pPredicate.getConditionExpression();
+//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+		OCLExpression conditionExpression = asPredicate.getConditionExpression();
 		cgPredicate.setConditionExpression(doVisit(CGValuedElement.class, conditionExpression));
 //		analyzer.ge
 		CGVariable cgVariable = createCGVariable(targetVariable);
-		if (conditionExpression.isRequired()) {
-			cgVariable.setNonNull();
-		}
+//		if (conditionExpression.isRequired()) {
+//			cgVariable.setNonNull();
+//		}
 //		cgGuardVariable = QVTiCGModelFactory.eINSTANCE.createCGGuardVariable();
 //		context.setNames(cgGuardVariable, pParameter);
 //		setPivot(cgGuardVariable, pParameter);

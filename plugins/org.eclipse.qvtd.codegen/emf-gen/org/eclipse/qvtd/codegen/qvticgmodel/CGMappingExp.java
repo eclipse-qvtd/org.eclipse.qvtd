@@ -121,8 +121,7 @@ public interface CGMappingExp extends CGValuedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Realized Variables</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getMappingExp <em>Mapping Exp</em>}'.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Realized Variables</em>' containment reference list isn't clear,
@@ -131,10 +130,9 @@ public interface CGMappingExp extends CGValuedElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Realized Variables</em>' containment reference list.
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingExp_RealizedVariables()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getMappingExp
-	 * @model opposite="mappingExp" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	List<CGRealizedVariable> getRealizedVariables();
+	List<CGValuedElement> getRealizedVariables();
 
 } // CGMappingExp

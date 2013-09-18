@@ -151,8 +151,8 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 			return visitCGParameter(object);
 		}
 
-		public Boolean visitCGMapping(@NonNull CGMapping cgMapping) {
-			return true;
+		public Boolean visitCGMapping(@NonNull CGMapping object) {
+			return visitCGNamedElement(object);
 		}
 
 		public Boolean visitCGMappingCall(@NonNull CGMappingCall object) {

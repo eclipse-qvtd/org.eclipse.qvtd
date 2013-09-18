@@ -31,6 +31,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
+import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtils;
 
 /**
  * <!-- begin-user-doc -->
@@ -459,17 +460,16 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
-		return initValue != null ? initValue : this;
+	public boolean isBoxed() {
+		return (initValue != null) && initValue.isBoxed();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	@Override
-	public boolean isBoxed() {
-		return (initValue != null) && initValue.isBoxed();
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		return (getClass() == thatValue.getClass()) ? QVTiEquivalenceUtils.isEquivalent(this, (CGPropertyAssignment)thatValue) : null;
 	}
 
 	/**

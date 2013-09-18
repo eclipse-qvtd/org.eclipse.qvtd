@@ -10,6 +10,7 @@
 package cg;
 
 import java.util.List;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.AbstractTransformation;
@@ -19,8 +20,7 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import test.hls.HLSTree.HLSNode;
 import test.hls.HLSTree.HLSTreeFactory;
 import test.hls.HLSTree.HLSTreePackage;
@@ -44,9 +44,9 @@ import test.middle.HSV2HLS.HSVNode2HLSNode;
 @SuppressWarnings("nls")
 public class hsv2hls extends AbstractTransformation
 {
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree = IdManager.getNsURIPackageId("http://http://www.eclipse.org/qvt/examples/0.1/HLSTree", HLSTreePackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree = IdManager.getNsURIPackageId("http://http://www.eclipse.org/qvt/examples/0.1/HSVTree", HSVTreePackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS = IdManager.getNsURIPackageId("http://http://www.eclipse.org/qvt/examples/0.1/HSVtoHLS", HSV2HLSPackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree = IdManager.getNsURIPackageId("http://http://www.eclipse.org/qvt/examples/0.1/HLSTree", "hls", HLSTreePackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree = IdManager.getNsURIPackageId("http://http://www.eclipse.org/qvt/examples/0.1/HSVTree", "hsv", HSVTreePackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS = IdManager.getNsURIPackageId("http://http://www.eclipse.org/qvt/examples/0.1/HSVtoHLS", "hsv2hls", HSV2HLSPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_HLSNode = PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree.getClassId("HLSNode", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_HSVNode = PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree.getClassId("HSVNode", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_HSVNode2HLSNode = PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS.getClassId("HSVNode2HLSNode", 0);
@@ -58,7 +58,9 @@ public class hsv2hls extends AbstractTransformation
     }
     
     public boolean run() {
-        List<? extends HSVNode> LIST_hsvRoot = getObjectsByType(HSVNode.class, 0/*hsv*/, HSVTreePackage.Literals.HSV_NODE);
+        final EClass ECLASS_hsvRoot = HSVTreePackage.Literals.HSV_NODE;
+        assert ECLASS_hsvRoot != null;
+        List<? extends HSVNode> LIST_hsvRoot = getObjectsByType(HSVNode.class, 0/*hsv*/, ECLASS_hsvRoot);
         for (HSVNode hsvRoot : LIST_hsvRoot) {
             if (hsvRoot != null) {
                 HSV2MiddleRoot(hsvRoot);
@@ -109,27 +111,34 @@ public class hsv2hls extends AbstractTransformation
      * }
      */
     protected boolean HSV2MiddleRoot(final @NonNull /*@NonInvalid*/ HSVNode hsvRoot) {
-        final @SuppressWarnings("null")@NonNull /*@Thrown*/ HSVNode parent = hsvRoot.getParent();
-        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(parent, null);
-        if (eq != ValuesUtil.TRUE_VALUE) {
+        try {
+            // predicates
+            final @Nullable /*@Thrown*/ HSVNode parent = hsvRoot.getParent();
+            final /*@Thrown*/ boolean eq = parent == null;
+            if (!eq) {
+                return false;
+            }
+            // creations
+            final @NonNull /*@Thrown*/ HSVNode2HLSNode middleRoot = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
+            modelObjects[2/*null*/].add(middleRoot);
+            // assignments
+            middleRoot.setHsv(hsvRoot);
+            final @Nullable /*@Thrown*/ String name = hsvRoot.getName();
+            middleRoot.setName(name);
+            // mapping calls
+            final @Nullable /*@Thrown*/ List<HSVNode> children = hsvRoot.getChildren();
+            assert children != null;
+            for (Object hsvNode_0 : children) {
+                if (hsvNode_0 != null) {
+                    HSV2MiddleRecursion((HSVNode)hsvNode_0, middleRoot);
+                }
+            }
+            Middle2HLSRoot(middleRoot);
+            return true;
+        }
+        catch (Exception e) {
             return false;
         }
-        // creations
-        final @SuppressWarnings("null")@NonNull /*@Thrown*/ HSVNode2HLSNode middleRoot = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
-        modelObjects[2/*null*/].add(middleRoot);
-        // assignments
-        middleRoot.setHsv(hsvRoot);
-        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = hsvRoot.getName();
-        middleRoot.setName(name);
-        // mapping calls
-        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<HSVNode> children = hsvRoot.getChildren();
-        for (Object hsvNode_0 : children) {
-            if (hsvNode_0 != null) {
-                HSV2MiddleRecursion((HSVNode)hsvNode_0, middleRoot);
-            }
-        }
-        Middle2HLSRoot(middleRoot);
-        return true;
     }
     
     /**
@@ -158,16 +167,18 @@ public class hsv2hls extends AbstractTransformation
      */
     protected boolean HSV2MiddleRecursion(final @NonNull /*@NonInvalid*/ HSVNode hsvNode, final @NonNull /*@NonInvalid*/ HSVNode2HLSNode middleParent) {
         try {
+            // predicates
             // creations
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ HSVNode2HLSNode middleNode = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
+            final @NonNull /*@Thrown*/ HSVNode2HLSNode middleNode = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
             modelObjects[2/*null*/].add(middleNode);
             // assignments
             middleNode.setParent(middleParent);
             middleNode.setHsv(hsvNode);
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = hsvNode.getName();
+            final @Nullable /*@Thrown*/ String name = hsvNode.getName();
             middleNode.setName(name);
             // mapping calls
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<HSVNode> children = hsvNode.getChildren();
+            final @Nullable /*@Thrown*/ List<HSVNode> children = hsvNode.getChildren();
+            assert children != null;
             for (Object hsvNode_0 : children) {
                 if (hsvNode_0 != null) {
                     HSV2MiddleRecursion((HSVNode)hsvNode_0, middleNode);
@@ -204,16 +215,19 @@ public class hsv2hls extends AbstractTransformation
      */
     protected boolean Middle2HLSRoot(final @NonNull /*@NonInvalid*/ HSVNode2HLSNode middleNode) {
         try {
+            // predicates
             // creations
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
+            final @Nullable /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
             modelObjects[1/*hls*/].add(hlsNode);
+            assert hlsNode != null;
             // assignments
             hlsNode.setParent(null);
             middleNode.setHls(hlsNode);
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = middleNode.getName();
+            final @Nullable /*@Thrown*/ String name = middleNode.getName();
             hlsNode.setName(name);
             // mapping calls
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode.getChildren();
+            final @Nullable /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode.getChildren();
+            assert children != null;
             for (Object middleNode_1 : children) {
                 if (middleNode_1 != null) {
                     Middle2HLSRecursion((HSVNode2HLSNode)middleNode_1);
@@ -250,18 +264,24 @@ public class hsv2hls extends AbstractTransformation
      */
     protected boolean Middle2HLSRecursion(final @NonNull /*@NonInvalid*/ HSVNode2HLSNode middleNode_0) {
         try {
+            // predicates
             // creations
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
+            final @Nullable /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
             modelObjects[1/*hls*/].add(hlsNode);
+            assert hlsNode != null;
             // assignments
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ HSVNode2HLSNode parent = middleNode_0.getParent();
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ HLSNode hls = parent.getHls();
+            final @Nullable /*@Thrown*/ HSVNode2HLSNode parent = middleNode_0.getParent();
+            if (parent == null) {
+                throw new InvalidValueException("Null source");
+            }
+            final @Nullable /*@Thrown*/ HLSNode hls = parent.getHls();
             hlsNode.setParent(hls);
             middleNode_0.setHls(hlsNode);
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = middleNode_0.getName();
+            final @Nullable /*@Thrown*/ String name = middleNode_0.getName();
             hlsNode.setName(name);
             // mapping calls
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode_0.getChildren();
+            final @Nullable /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode_0.getChildren();
+            assert children != null;
             for (Object middleNode_1 : children) {
                 if (middleNode_1 != null) {
                     Middle2HLSRecursion((HSVNode2HLSNode)middleNode_1);

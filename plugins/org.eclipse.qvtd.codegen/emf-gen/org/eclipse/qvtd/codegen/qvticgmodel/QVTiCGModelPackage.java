@@ -592,22 +592,13 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_REALIZED_VARIABLE__EXECUTOR_TYPE = CGModelPackage.CG_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Exp</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REALIZED_VARIABLE__MAPPING_EXP = CGModelPackage.CG_VARIABLE_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Typed Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_REALIZED_VARIABLE__TYPED_MODEL = CGModelPackage.CG_VARIABLE_FEATURE_COUNT + 2;
+	int CG_REALIZED_VARIABLE__TYPED_MODEL = CGModelPackage.CG_VARIABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>CG Realized Variable</em>' class.
@@ -616,7 +607,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_REALIZED_VARIABLE_FEATURE_COUNT = CGModelPackage.CG_VARIABLE_FEATURE_COUNT + 3;
+	int CG_REALIZED_VARIABLE_FEATURE_COUNT = CGModelPackage.CG_VARIABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcoreRealizedVariableImpl <em>CG Ecore Realized Variable</em>}' class.
@@ -699,15 +690,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_REALIZED_VARIABLE__EXECUTOR_TYPE = CG_REALIZED_VARIABLE__EXECUTOR_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Mapping Exp</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_REALIZED_VARIABLE__MAPPING_EXP = CG_REALIZED_VARIABLE__MAPPING_EXP;
 
 	/**
 	 * The feature id for the '<em><b>Typed Model</b></em>' reference.
@@ -1905,6 +1887,33 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_TRANSFORMATION__INVARIANTS = CGModelPackage.CG_CLASS__INVARIANTS;
 
 	/**
+	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TRANSFORMATION__SUPER_TYPES = CGModelPackage.CG_CLASS__SUPER_TYPES;
+
+	/**
+	 * The feature id for the '<em><b>Interface</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TRANSFORMATION__INTERFACE = CGModelPackage.CG_CLASS__INTERFACE;
+
+	/**
+	 * The feature id for the '<em><b>Template Parameters</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TRANSFORMATION__TEMPLATE_PARAMETERS = CGModelPackage.CG_CLASS__TEMPLATE_PARAMETERS;
+
+	/**
 	 * The feature id for the '<em><b>Mappings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2513,17 +2522,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	EReference getCGRealizedVariable_ExecutorType();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getMappingExp <em>Mapping Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Mapping Exp</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getMappingExp()
-	 * @see #getCGRealizedVariable()
-	 * @generated
-	 */
-	EReference getCGRealizedVariable_MappingExp();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2989,14 +2987,6 @@ public interface QVTiCGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CG_REALIZED_VARIABLE__EXECUTOR_TYPE = eINSTANCE.getCGRealizedVariable_ExecutorType();
-
-		/**
-		 * The meta object literal for the '<em><b>Mapping Exp</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_REALIZED_VARIABLE__MAPPING_EXP = eINSTANCE.getCGRealizedVariable_MappingExp();
 
 	}
 

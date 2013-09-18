@@ -486,7 +486,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
     public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
         
         OCLExpression slotExp = propertyAssignment.getSlotExpression(); 
-        Area area = ((BottomPattern)propertyAssignment.eContainer()).getArea();
+//        Area area = ((BottomPattern)propertyAssignment.eContainer()).getArea();
         //if (area instanceof Mapping) {
         	// TODO Check this approach
         	//if (!(exp instanceof VariableExp)) {

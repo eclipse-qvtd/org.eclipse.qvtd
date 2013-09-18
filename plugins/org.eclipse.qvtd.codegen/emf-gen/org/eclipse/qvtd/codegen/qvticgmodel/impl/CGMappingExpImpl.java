@@ -21,10 +21,12 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -33,9 +35,9 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
+import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtils;
 
 /**
  * <!-- begin-user-doc -->
@@ -93,7 +95,7 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CGRealizedVariable> realizedVariables;
+	protected EList<CGValuedElement> realizedVariables;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -177,9 +179,9 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<CGRealizedVariable> getRealizedVariables() {
+	public List<CGValuedElement> getRealizedVariables() {
 		if (realizedVariables == null) {
-			realizedVariables = new EObjectContainmentWithInverseEList<CGRealizedVariable>(CGRealizedVariable.class, this, QVTiCGModelPackage.CG_MAPPING_EXP__REALIZED_VARIABLES, QVTiCGModelPackage.CG_REALIZED_VARIABLE__MAPPING_EXP);
+			realizedVariables = new EObjectContainmentEList<CGValuedElement>(CGValuedElement.class, this, QVTiCGModelPackage.CG_MAPPING_EXP__REALIZED_VARIABLES);
 		}
 		return realizedVariables;
 	}
@@ -199,8 +201,6 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMappingCalls()).basicAdd(otherEnd, msgs);
 			case QVTiCGModelPackage.CG_MAPPING_EXP__PREDICATES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPredicates()).basicAdd(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING_EXP__REALIZED_VARIABLES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRealizedVariables()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -273,7 +273,7 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 				return;
 			case QVTiCGModelPackage.CG_MAPPING_EXP__REALIZED_VARIABLES:
 				getRealizedVariables().clear();
-				getRealizedVariables().addAll((Collection<? extends CGRealizedVariable>)newValue);
+				getRealizedVariables().addAll((Collection<? extends CGValuedElement>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -354,6 +354,14 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	@Override
 	public boolean isBoxed() {
 		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		return (getClass() == thatValue.getClass()) ? QVTiEquivalenceUtils.isEquivalent(this, (CGMappingExp)thatValue) : null;
 	}
 
 	/**

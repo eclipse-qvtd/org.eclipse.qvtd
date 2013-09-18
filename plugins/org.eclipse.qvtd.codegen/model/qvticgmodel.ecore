@@ -68,7 +68,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="predicates" upperBound="-1"
         eType="#//CGPredicate" containment="true" resolveProxies="false" eOpposite="#//CGPredicate/mappingExp"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="realizedVariables" upperBound="-1"
-        eType="#//CGRealizedVariable" containment="true" resolveProxies="false" eOpposite="#//CGRealizedVariable/mappingExp"/>
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
+        containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGMiddlePropertyAssignment" eSuperTypes="#//CGEcorePropertyAssignment"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGMiddlePropertyCallExp" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGPropertyCallExp"/>
@@ -104,8 +105,6 @@
         <details key="documentation" value="The shared type."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingExp" lowerBound="1"
-        eType="#//CGMappingExp" resolveProxies="false" eOpposite="#//CGMappingExp/realizedVariables"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" lowerBound="1"
         eType="#//CGTypedModel" resolveProxies="false"/>
   </eClassifiers>

@@ -3,6 +3,7 @@
 package test.middle.HSV2HLS;
 
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +29,7 @@ public interface HSV2HLSFactory extends EFactory {
 	 * @return a new object of class '<em>HSV Node2 HLS Node</em>'.
 	 * @generated
 	 */
-	HSVNode2HLSNode createHSVNode2HLSNode();
+	@NonNull HSVNode2HLSNode createHSVNode2HLSNode();
 
 	/**
 	 * Returns the package supported by this factory.

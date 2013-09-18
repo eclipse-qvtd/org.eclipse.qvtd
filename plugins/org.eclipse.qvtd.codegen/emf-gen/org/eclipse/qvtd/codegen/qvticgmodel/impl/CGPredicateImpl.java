@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -368,6 +369,19 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 * @generated
 	 */
 	@Override
+	public @Nullable CGInvalid getInvalidValue() {
+		CGInvalid invalidValue = (conditionExpression != null) ? conditionExpression.getInvalidValue() : null;
+		if (invalidValue == null) {
+			invalidValue = (thenExpression != null) ? thenExpression.getInvalidValue() : null;
+		}
+		return invalidValue;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
 		return PredicatePlaces.createPredicatePlaces(element2place, this);
 	}
@@ -385,9 +399,22 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		if (this == thatValue) {
+			return Boolean.TRUE;
+		}
+		else {
+			return Boolean.FALSE;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean isFalse() {
-		return (conditionExpression != null) && conditionExpression.isConstant() && !conditionExpression.isTrue();
+		return ((conditionExpression != null) && conditionExpression.isFalse()) || ((thenExpression != null) && thenExpression.isFalse());
 	}
 
 	/**
@@ -404,17 +431,8 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 * @generated
 	 */
 	@Override
-	public boolean isInvalid() {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
 	public boolean isNonInvalid() {
-		return true;
+		return ((conditionExpression != null) && conditionExpression.isNonInvalid()) && ((thenExpression != null) && thenExpression.isNonInvalid());
 	}
 
 	/**
@@ -441,7 +459,7 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 */
 	@Override
 	public boolean isTrue() {
-		return (conditionExpression != null) && conditionExpression.isTrue();
+		return ((conditionExpression != null) && conditionExpression.isTrue()) && ((thenExpression != null) && thenExpression.isTrue());
 	}
 
 	/**
@@ -450,7 +468,7 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 */
 	@Override
 	public boolean isUnboxed() {
-		return false;
+		return true;
 	}
 
 } //CGPredicateImpl

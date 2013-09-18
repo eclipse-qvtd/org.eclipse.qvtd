@@ -48,6 +48,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
+import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
@@ -60,6 +61,7 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiDependencyVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiReferencesVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
+import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 /**
@@ -67,7 +69,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  * execute a QVTi transformation.
  */
 public class QVTiCodeGenerator extends JavaCodeGenerator
-{
+{	
 	protected final @NonNull QVTiAnalyzer cgAnalyzer;
 	protected final @NonNull Transformation transformation;
 	private/* @LazyNonNull */String javaSourceCode = null;
@@ -104,6 +106,11 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			.nonNullState(transformation.accept(pivot2CGVisitor));
 		cgPackage.getClasses().add(cgTransformation);
 		return cgPackage;
+	}
+
+	@Override
+	public @NonNull CGModelResourceFactory getCGResourceFactory() {
+		return QVTiCGModelResourceFactory.INSTANCE;
 	}
 
 	@Override

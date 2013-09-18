@@ -63,7 +63,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 
 	public static @NonNull QVTiCG2StringVisitor.Factory FACTORY = new MyFactory();
 
-	protected QVTiCG2StringVisitor() {}
+	public QVTiCG2StringVisitor() {}
 
 	@Nullable
 	public String visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
@@ -137,6 +137,8 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 
 	public @Nullable String visitCGPredicate(@NonNull CGPredicate cgPredicate) {
 		safeVisit(cgPredicate.getConditionExpression());
+		append(", ");
+		safeVisit(cgPredicate.getThenExpression());
 		return null;
 	}
 
@@ -145,7 +147,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 		append(".");
 		appendName(cgPropertyAssignment.getReferredProperty());
 		append(" := ");
-		safeVisit(cgPropertyAssignment.getValue());
+		safeVisit(cgPropertyAssignment.getInitValue());
 		return null;
 	}
 
@@ -171,6 +173,8 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 		appendName(cgVariablePredicate.getPredicateVariable());
 		append(" := ");
 		safeVisit(cgVariablePredicate.getConditionExpression());
+		append(", ");
+		safeVisit(cgVariablePredicate.getThenExpression());
 		return null;
 	}
 }

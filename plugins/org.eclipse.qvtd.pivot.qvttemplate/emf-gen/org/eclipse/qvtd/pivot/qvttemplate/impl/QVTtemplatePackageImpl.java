@@ -388,31 +388,31 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		   source, 
 		   new String[] {
 			 "body", "listContainer"
-		   });	
+		   });		
 		addAnnotation
 		  (getCollectionTemplateExp_Rest(), 
 		   source, 
 		   new String[] {
 			 "body", "matchingExp"
-		   });	
+		   });		
 		addAnnotation
 		  (getPropertyTemplateItem_ReferredProperty(), 
 		   source, 
 		   new String[] {
 			 "body", "propertyItem"
-		   });	
+		   });		
 		addAnnotation
 		  (getPropertyTemplateItem_Value(), 
 		   source, 
 		   new String[] {
 			 "body", "propertyItem"
-		   });	
+		   });		
 		addAnnotation
 		  (getTemplateExp_Where(), 
 		   source, 
 		   new String[] {
 			 "body", "owner"
-		   });
+		   });	
 	}
 
 } //QVTtemplatePackageImpl

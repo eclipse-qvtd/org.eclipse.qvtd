@@ -648,25 +648,25 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 		   source, 
 		   new String[] {
 			 "body", "valueAssignment"
-		   });	
+		   });		
 		addAnnotation
 		  (getPropertyAssignment_SlotExpression(), 
 		   source, 
 		   new String[] {
 			 "body", "slotAssignment"
-		   });	
+		   });		
 		addAnnotation
 		  (getPropertyAssignment_TargetProperty(), 
 		   source, 
 		   new String[] {
 			 "body", "assignment"
-		   });	
+		   });		
 		addAnnotation
 		  (getVariableAssignment_TargetVariable(), 
 		   source, 
 		   new String[] {
 			 "body", "assignment"
-		   });
+		   });	
 	}
 
 } //QVTcorePackageImpl
