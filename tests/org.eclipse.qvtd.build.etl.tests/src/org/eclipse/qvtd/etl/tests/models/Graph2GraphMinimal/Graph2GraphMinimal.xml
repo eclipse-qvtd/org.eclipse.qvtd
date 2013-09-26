@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <project default="main">
 	<!-- Default Properties -->
-	<property name="QVTcToQVTuPruning" location="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTuPruning.eol"/>
-	<property name="QVTcToQVTuFlock" location="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTu.mig"/>
-	<property name="dist"  location="dist"/>
-	
+	<property name="QVTcToQVTuPruning" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTuPruning.eol"/>
+	<property name="QVTcToQVTuFlock" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTu.mig"/>
+	<property name="OclLibURI" value="oclLibURI=platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas"/>
+		
 	<!-- Test Properties -->
 	<property file="build.properties"/>
     
@@ -13,7 +13,7 @@
 	    <epsilon.emf.loadModel
 		    name = "oclStdLib"
 		    metamodeluri = "http://www.eclipse.org/ocl/3.1.0/Pivot"
-            modeluri = "${oclLibURI}"
+            modeluri = "${OclLibURI}"
             read="true"
 	    	store="false"/>
     	<!-- QVTc Transformation -->
@@ -37,14 +37,14 @@
 	</target>
 	
 	<target name ="prunning" depends="loadModels">
-		<epsilon.eol src="${QVTcToQVTuPruning}" >
+		<epsilon.eol uri="${QVTcToQVTuPruning}" >
 			<model ref="QVTc"/>
 			<model ref="config"/>
 		</epsilon.eol>
 	</target>
 	
 	<target name="main" depends="loadModels">
-	    <epsilon.flock originalmodel="QVTc" migratedmodel="QVTu" src="${QVTcToQVTuPruning}">
+	    <epsilon.flock originalmodel="QVTc" migratedmodel="QVTu" uri="${QVTcToQVTuFlock}">
 	        <model ref="QVTc"/>
 	    	<model ref="QVTu"/>
 	    	<model ref="config"/>

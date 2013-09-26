@@ -62,7 +62,7 @@ migrate PropertyAssignment
     }
     
 migrate PropertyAssignment
-    when : isOutputDomain(original.bottomPattern.area) 
+    when : not isInputDomain(original.bottomPattern.area) 
         and isCheckMode()
         and original.isDefault {
     

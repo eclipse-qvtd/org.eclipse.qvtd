@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ASCII"?>
+<qvtcconfig:Configuration
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:qvtcconfig="http://www.eclipse.org/qvt/examples/0.1/QVTcConfig"
+    inputDirection="//@transformation/@direction.0"
+    outputDirection="//@transformation/@direction.1"
+    mode="enforcement"
+    middle="//@transformation/@direction.2">
+  <transformation
+      name="umlRdbms">
+    <direction
+        name="uml"
+        imports="//@transformation/@import.0"/>
+    <direction
+        name="rdbms"
+        imports="//@transformation/@import.1"/>
+    <direction
+        imports="//@transformation/@import.2"/>
+    <import
+        name="SimpleUML"
+        metamodel="SimpleUML.ecore"
+        package="simpleuml"/>
+    <import
+        name="SimpleRDBMS"
+        metamodel="SimpleRDBMS.ecore"
+        package="simplerdbms"/>
+    <import
+        name="UMLtoRDBMS"
+        metamodel="UMLtoRDBMS.ecore"
+        package="umltordbms"/>
+  </transformation>
+</qvtcconfig:Configuration>
