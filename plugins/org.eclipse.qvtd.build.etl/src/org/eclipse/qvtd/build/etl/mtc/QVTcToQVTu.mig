@@ -60,3 +60,12 @@ migrate PropertyAssignment
         exp.argument = args;
         migrated.conditionExpression = exp;    
     }
+    
+migrate PropertyAssignment
+    when : isOutputDomain(original.bottomPattern.area) 
+        and isCheckMode()
+        and original.isDefault {
+    
+    migrated.isDefault = false;
+    
+}
