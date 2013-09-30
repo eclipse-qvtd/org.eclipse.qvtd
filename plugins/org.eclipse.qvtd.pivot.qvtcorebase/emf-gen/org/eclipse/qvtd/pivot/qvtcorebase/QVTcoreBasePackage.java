@@ -109,6 +109,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	int ABSTRACT_MAPPING__OWNED_COMMENT = QVTbasePackage.RULE__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_MAPPING__IS_STATIC = QVTbasePackage.RULE__IS_STATIC;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -501,6 +510,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	int CORE_DOMAIN__OWNED_COMMENT = QVTbasePackage.DOMAIN__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_DOMAIN__IS_STATIC = QVTbasePackage.DOMAIN__IS_STATIC;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -827,6 +845,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @ordered
 	 */
 	int REALIZED_VARIABLE__OWNED_COMMENT = PivotPackage.VARIABLE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REALIZED_VARIABLE__IS_STATIC = PivotPackage.VARIABLE__IS_STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

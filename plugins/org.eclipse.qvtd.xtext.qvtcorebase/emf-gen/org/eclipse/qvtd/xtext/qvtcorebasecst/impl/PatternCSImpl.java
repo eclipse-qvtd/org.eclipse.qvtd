@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
+import org.eclipse.ocl.examples.xtext.base.basecs.impl.ModelElementCSImpl;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.PatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.QVTcoreBaseCSTPackage;

@@ -26,7 +26,7 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.PropertyCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TypedElement;
@@ -204,8 +204,8 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 				return createNavigationCallExpAdapter();
 			}
 			@Override
-			public Adapter casePropertyCallExp(PropertyCallExp object) {
-				return createPropertyCallExpAdapter();
+			public Adapter caseOppositePropertyCallExp(OppositePropertyCallExp object) {
+				return createOppositePropertyCallExpAdapter();
 			}
 			@Override
 			public Adapter casePredicate(Predicate object) {
@@ -582,16 +582,16 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.PropertyCallExp <em>Property Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.OppositePropertyCallExp <em>Opposite Property Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.PropertyCallExp
+	 * @see org.eclipse.ocl.examples.pivot.OppositePropertyCallExp
 	 * @generated
 	 */
-	public Adapter createPropertyCallExpAdapter() {
+	public Adapter createOppositePropertyCallExpAdapter() {
 		return null;
 	}
 

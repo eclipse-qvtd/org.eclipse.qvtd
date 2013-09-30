@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -72,9 +72,9 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecst.impl.AbstractMappingCSImpl <em>Abstract Mapping CS</em>}' class.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->S
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.AbstractMappingCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getAbstractMappingCS()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getAbstractMappingCS()
 	 * @generated
 	 */
 	int ABSTRACT_MAPPING_CS = 0;
@@ -86,7 +86,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS__LOGICAL_PARENT = BaseCSTPackage.NAMED_ELEMENT_CS__LOGICAL_PARENT;
+	int ABSTRACT_MAPPING_CS__LOGICAL_PARENT = BaseCSPackage.NAMED_ELEMENT_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -95,7 +95,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS__PIVOT = BaseCSTPackage.NAMED_ELEMENT_CS__PIVOT;
+	int ABSTRACT_MAPPING_CS__PIVOT = BaseCSPackage.NAMED_ELEMENT_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -104,7 +104,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS__OWNED_ANNOTATION = BaseCSTPackage.NAMED_ELEMENT_CS__OWNED_ANNOTATION;
+	int ABSTRACT_MAPPING_CS__OWNED_ANNOTATION = BaseCSPackage.NAMED_ELEMENT_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -113,7 +113,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS__ORIGINAL_XMI_ID = BaseCSTPackage.NAMED_ELEMENT_CS__ORIGINAL_XMI_ID;
+	int ABSTRACT_MAPPING_CS__ORIGINAL_XMI_ID = BaseCSPackage.NAMED_ELEMENT_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -122,7 +122,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS__CSI = BaseCSTPackage.NAMED_ELEMENT_CS__CSI;
+	int ABSTRACT_MAPPING_CS__CSI = BaseCSPackage.NAMED_ELEMENT_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -131,7 +131,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS__NAME = BaseCSTPackage.NAMED_ELEMENT_CS__NAME;
+	int ABSTRACT_MAPPING_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Domains</b></em>' containment reference list.
@@ -140,7 +140,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS__DOMAINS = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int ABSTRACT_MAPPING_CS__DOMAINS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>In</b></em>' reference.
@@ -149,7 +149,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS__IN = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int ABSTRACT_MAPPING_CS__IN = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Middle</b></em>' containment reference.
@@ -158,7 +158,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS__MIDDLE = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int ABSTRACT_MAPPING_CS__MIDDLE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Mapping CS</em>' class.
@@ -167,14 +167,14 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS_FEATURE_COUNT = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int ABSTRACT_MAPPING_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecst.impl.AreaCSImpl <em>Area CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.AreaCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getAreaCS()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getAreaCS()
 	 * @generated
 	 */
 	int AREA_CS = 1;
@@ -186,7 +186,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AREA_CS__LOGICAL_PARENT = BaseCSTPackage.NAMED_ELEMENT_CS__LOGICAL_PARENT;
+	int AREA_CS__LOGICAL_PARENT = BaseCSPackage.NAMED_ELEMENT_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -195,7 +195,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AREA_CS__PIVOT = BaseCSTPackage.NAMED_ELEMENT_CS__PIVOT;
+	int AREA_CS__PIVOT = BaseCSPackage.NAMED_ELEMENT_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -204,7 +204,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AREA_CS__OWNED_ANNOTATION = BaseCSTPackage.NAMED_ELEMENT_CS__OWNED_ANNOTATION;
+	int AREA_CS__OWNED_ANNOTATION = BaseCSPackage.NAMED_ELEMENT_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -213,7 +213,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AREA_CS__ORIGINAL_XMI_ID = BaseCSTPackage.NAMED_ELEMENT_CS__ORIGINAL_XMI_ID;
+	int AREA_CS__ORIGINAL_XMI_ID = BaseCSPackage.NAMED_ELEMENT_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -222,7 +222,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AREA_CS__CSI = BaseCSTPackage.NAMED_ELEMENT_CS__CSI;
+	int AREA_CS__CSI = BaseCSPackage.NAMED_ELEMENT_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -231,7 +231,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AREA_CS__NAME = BaseCSTPackage.NAMED_ELEMENT_CS__NAME;
+	int AREA_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Guard Pattern</b></em>' containment reference.
@@ -240,7 +240,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AREA_CS__GUARD_PATTERN = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int AREA_CS__GUARD_PATTERN = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Bottom Pattern</b></em>' containment reference.
@@ -249,7 +249,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AREA_CS__BOTTOM_PATTERN = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int AREA_CS__BOTTOM_PATTERN = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Area CS</em>' class.
@@ -258,14 +258,14 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AREA_CS_FEATURE_COUNT = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int AREA_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecst.impl.AssignmentCSImpl <em>Assignment CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.AssignmentCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getAssignmentCS()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getAssignmentCS()
 	 * @generated
 	 */
 	int ASSIGNMENT_CS = 2;
@@ -277,7 +277,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_CS__LOGICAL_PARENT = EssentialOCLCSTPackage.EXP_CS__LOGICAL_PARENT;
+	int ASSIGNMENT_CS__LOGICAL_PARENT = EssentialOCLCSPackage.EXP_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -286,7 +286,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_CS__PIVOT = EssentialOCLCSTPackage.EXP_CS__PIVOT;
+	int ASSIGNMENT_CS__PIVOT = EssentialOCLCSPackage.EXP_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -295,7 +295,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_CS__OWNED_ANNOTATION = EssentialOCLCSTPackage.EXP_CS__OWNED_ANNOTATION;
+	int ASSIGNMENT_CS__OWNED_ANNOTATION = EssentialOCLCSPackage.EXP_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -304,7 +304,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_CS__ORIGINAL_XMI_ID = EssentialOCLCSTPackage.EXP_CS__ORIGINAL_XMI_ID;
+	int ASSIGNMENT_CS__ORIGINAL_XMI_ID = EssentialOCLCSPackage.EXP_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -313,7 +313,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_CS__CSI = EssentialOCLCSTPackage.EXP_CS__CSI;
+	int ASSIGNMENT_CS__CSI = EssentialOCLCSPackage.EXP_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -322,7 +322,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_CS__PARENT = EssentialOCLCSTPackage.EXP_CS__PARENT;
+	int ASSIGNMENT_CS__PARENT = EssentialOCLCSPackage.EXP_CS__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Default</b></em>' attribute.
@@ -331,7 +331,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_CS__DEFAULT = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 0;
+	int ASSIGNMENT_CS__DEFAULT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -340,7 +340,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_CS__TARGET = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 1;
+	int ASSIGNMENT_CS__TARGET = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Initialiser</b></em>' containment reference.
@@ -349,7 +349,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_CS__INITIALISER = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 2;
+	int ASSIGNMENT_CS__INITIALISER = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Assignment CS</em>' class.
@@ -358,14 +358,14 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_CS_FEATURE_COUNT = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 3;
+	int ASSIGNMENT_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecst.impl.PatternCSImpl <em>Pattern CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.PatternCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getPatternCS()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getPatternCS()
 	 * @generated
 	 */
 	int PATTERN_CS = 9;
@@ -377,7 +377,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_CS__LOGICAL_PARENT = BaseCSTPackage.MODEL_ELEMENT_CS__LOGICAL_PARENT;
+	int PATTERN_CS__LOGICAL_PARENT = BaseCSPackage.MODEL_ELEMENT_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -386,7 +386,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_CS__PIVOT = BaseCSTPackage.MODEL_ELEMENT_CS__PIVOT;
+	int PATTERN_CS__PIVOT = BaseCSPackage.MODEL_ELEMENT_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -395,7 +395,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_CS__OWNED_ANNOTATION = BaseCSTPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATION;
+	int PATTERN_CS__OWNED_ANNOTATION = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -404,7 +404,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_CS__ORIGINAL_XMI_ID = BaseCSTPackage.MODEL_ELEMENT_CS__ORIGINAL_XMI_ID;
+	int PATTERN_CS__ORIGINAL_XMI_ID = BaseCSPackage.MODEL_ELEMENT_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -413,7 +413,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_CS__CSI = BaseCSTPackage.MODEL_ELEMENT_CS__CSI;
+	int PATTERN_CS__CSI = BaseCSPackage.MODEL_ELEMENT_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -422,7 +422,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_CS__CONSTRAINTS = BaseCSTPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+	int PATTERN_CS__CONSTRAINTS = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Unrealized Variables</b></em>' containment reference list.
@@ -431,7 +431,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_CS__UNREALIZED_VARIABLES = BaseCSTPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
+	int PATTERN_CS__UNREALIZED_VARIABLES = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Pattern CS</em>' class.
@@ -440,14 +440,14 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_CS_FEATURE_COUNT = BaseCSTPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
+	int PATTERN_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecst.impl.BottomPatternCSImpl <em>Bottom Pattern CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.BottomPatternCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getBottomPatternCS()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getBottomPatternCS()
 	 * @generated
 	 */
 	int BOTTOM_PATTERN_CS = 3;
@@ -547,7 +547,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.DirectionCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getDirectionCS()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getDirectionCS()
 	 * @generated
 	 */
 	int DIRECTION_CS = 4;
@@ -559,7 +559,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTION_CS__LOGICAL_PARENT = BaseCSTPackage.NAMED_ELEMENT_CS__LOGICAL_PARENT;
+	int DIRECTION_CS__LOGICAL_PARENT = BaseCSPackage.NAMED_ELEMENT_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -568,7 +568,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTION_CS__PIVOT = BaseCSTPackage.NAMED_ELEMENT_CS__PIVOT;
+	int DIRECTION_CS__PIVOT = BaseCSPackage.NAMED_ELEMENT_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -577,7 +577,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTION_CS__OWNED_ANNOTATION = BaseCSTPackage.NAMED_ELEMENT_CS__OWNED_ANNOTATION;
+	int DIRECTION_CS__OWNED_ANNOTATION = BaseCSPackage.NAMED_ELEMENT_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -586,7 +586,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTION_CS__ORIGINAL_XMI_ID = BaseCSTPackage.NAMED_ELEMENT_CS__ORIGINAL_XMI_ID;
+	int DIRECTION_CS__ORIGINAL_XMI_ID = BaseCSPackage.NAMED_ELEMENT_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -595,7 +595,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTION_CS__CSI = BaseCSTPackage.NAMED_ELEMENT_CS__CSI;
+	int DIRECTION_CS__CSI = BaseCSPackage.NAMED_ELEMENT_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -604,7 +604,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTION_CS__NAME = BaseCSTPackage.NAMED_ELEMENT_CS__NAME;
+	int DIRECTION_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Imports</b></em>' reference list.
@@ -613,7 +613,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTION_CS__IMPORTS = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int DIRECTION_CS__IMPORTS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Uses</b></em>' reference list.
@@ -622,7 +622,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTION_CS__USES = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int DIRECTION_CS__USES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Direction CS</em>' class.
@@ -631,14 +631,14 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTION_CS_FEATURE_COUNT = BaseCSTPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int DIRECTION_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecst.impl.DomainCSImpl <em>Domain CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.DomainCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getDomainCS()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getDomainCS()
 	 * @generated
 	 */
 	int DOMAIN_CS = 5;
@@ -756,7 +756,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.EnforcementOperationCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getEnforcementOperationCS()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getEnforcementOperationCS()
 	 * @generated
 	 */
 	int ENFORCEMENT_OPERATION_CS = 6;
@@ -768,7 +768,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENFORCEMENT_OPERATION_CS__LOGICAL_PARENT = BaseCSTPackage.MODEL_ELEMENT_CS__LOGICAL_PARENT;
+	int ENFORCEMENT_OPERATION_CS__LOGICAL_PARENT = BaseCSPackage.MODEL_ELEMENT_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -777,7 +777,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENFORCEMENT_OPERATION_CS__PIVOT = BaseCSTPackage.MODEL_ELEMENT_CS__PIVOT;
+	int ENFORCEMENT_OPERATION_CS__PIVOT = BaseCSPackage.MODEL_ELEMENT_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -786,7 +786,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENFORCEMENT_OPERATION_CS__OWNED_ANNOTATION = BaseCSTPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATION;
+	int ENFORCEMENT_OPERATION_CS__OWNED_ANNOTATION = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -795,7 +795,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENFORCEMENT_OPERATION_CS__ORIGINAL_XMI_ID = BaseCSTPackage.MODEL_ELEMENT_CS__ORIGINAL_XMI_ID;
+	int ENFORCEMENT_OPERATION_CS__ORIGINAL_XMI_ID = BaseCSPackage.MODEL_ELEMENT_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -804,7 +804,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENFORCEMENT_OPERATION_CS__CSI = BaseCSTPackage.MODEL_ELEMENT_CS__CSI;
+	int ENFORCEMENT_OPERATION_CS__CSI = BaseCSPackage.MODEL_ELEMENT_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Deletion</b></em>' attribute.
@@ -813,7 +813,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENFORCEMENT_OPERATION_CS__DELETION = BaseCSTPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+	int ENFORCEMENT_OPERATION_CS__DELETION = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Operation Call</b></em>' containment reference.
@@ -822,7 +822,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENFORCEMENT_OPERATION_CS__OPERATION_CALL = BaseCSTPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
+	int ENFORCEMENT_OPERATION_CS__OPERATION_CALL = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Enforcement Operation CS</em>' class.
@@ -831,14 +831,14 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENFORCEMENT_OPERATION_CS_FEATURE_COUNT = BaseCSTPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
+	int ENFORCEMENT_OPERATION_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecst.impl.GuardPatternCSImpl <em>Guard Pattern CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.GuardPatternCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getGuardPatternCS()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getGuardPatternCS()
 	 * @generated
 	 */
 	int GUARD_PATTERN_CS = 7;
@@ -920,7 +920,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.ParamDeclarationCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getParamDeclarationCS()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getParamDeclarationCS()
 	 * @generated
 	 */
 	int PARAM_DECLARATION_CS = 8;
@@ -932,7 +932,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_DECLARATION_CS__LOGICAL_PARENT = BaseCSTPackage.TYPED_ELEMENT_CS__LOGICAL_PARENT;
+	int PARAM_DECLARATION_CS__LOGICAL_PARENT = BaseCSPackage.TYPED_ELEMENT_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -941,7 +941,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_DECLARATION_CS__PIVOT = BaseCSTPackage.TYPED_ELEMENT_CS__PIVOT;
+	int PARAM_DECLARATION_CS__PIVOT = BaseCSPackage.TYPED_ELEMENT_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -950,7 +950,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_DECLARATION_CS__OWNED_ANNOTATION = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_ANNOTATION;
+	int PARAM_DECLARATION_CS__OWNED_ANNOTATION = BaseCSPackage.TYPED_ELEMENT_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -959,7 +959,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_DECLARATION_CS__ORIGINAL_XMI_ID = BaseCSTPackage.TYPED_ELEMENT_CS__ORIGINAL_XMI_ID;
+	int PARAM_DECLARATION_CS__ORIGINAL_XMI_ID = BaseCSPackage.TYPED_ELEMENT_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -968,7 +968,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_DECLARATION_CS__CSI = BaseCSTPackage.TYPED_ELEMENT_CS__CSI;
+	int PARAM_DECLARATION_CS__CSI = BaseCSPackage.TYPED_ELEMENT_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -977,7 +977,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_DECLARATION_CS__NAME = BaseCSTPackage.TYPED_ELEMENT_CS__NAME;
+	int PARAM_DECLARATION_CS__NAME = BaseCSPackage.TYPED_ELEMENT_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
@@ -986,7 +986,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_DECLARATION_CS__OWNED_TYPE = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_TYPE;
+	int PARAM_DECLARATION_CS__OWNED_TYPE = BaseCSPackage.TYPED_ELEMENT_CS__OWNED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
@@ -995,7 +995,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_DECLARATION_CS__QUALIFIER = BaseCSTPackage.TYPED_ELEMENT_CS__QUALIFIER;
+	int PARAM_DECLARATION_CS__QUALIFIER = BaseCSPackage.TYPED_ELEMENT_CS__QUALIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -1004,7 +1004,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_DECLARATION_CS__OPTIONAL = BaseCSTPackage.TYPED_ELEMENT_CS__OPTIONAL;
+	int PARAM_DECLARATION_CS__OPTIONAL = BaseCSPackage.TYPED_ELEMENT_CS__OPTIONAL;
 
 	/**
 	 * The number of structural features of the '<em>Param Declaration CS</em>' class.
@@ -1013,14 +1013,14 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_DECLARATION_CS_FEATURE_COUNT = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int PARAM_DECLARATION_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QueryCSImpl <em>Query CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QueryCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getQueryCS()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getQueryCS()
 	 * @generated
 	 */
 	int QUERY_CS = 10;
@@ -1032,7 +1032,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__LOGICAL_PARENT = BaseCSTPackage.TYPED_ELEMENT_CS__LOGICAL_PARENT;
+	int QUERY_CS__LOGICAL_PARENT = BaseCSPackage.TYPED_ELEMENT_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -1041,7 +1041,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__PIVOT = BaseCSTPackage.TYPED_ELEMENT_CS__PIVOT;
+	int QUERY_CS__PIVOT = BaseCSPackage.TYPED_ELEMENT_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -1050,7 +1050,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__OWNED_ANNOTATION = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_ANNOTATION;
+	int QUERY_CS__OWNED_ANNOTATION = BaseCSPackage.TYPED_ELEMENT_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -1059,7 +1059,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__ORIGINAL_XMI_ID = BaseCSTPackage.TYPED_ELEMENT_CS__ORIGINAL_XMI_ID;
+	int QUERY_CS__ORIGINAL_XMI_ID = BaseCSPackage.TYPED_ELEMENT_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1068,7 +1068,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__CSI = BaseCSTPackage.TYPED_ELEMENT_CS__CSI;
+	int QUERY_CS__CSI = BaseCSPackage.TYPED_ELEMENT_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1077,7 +1077,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__NAME = BaseCSTPackage.TYPED_ELEMENT_CS__NAME;
+	int QUERY_CS__NAME = BaseCSPackage.TYPED_ELEMENT_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
@@ -1086,7 +1086,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__OWNED_TYPE = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_TYPE;
+	int QUERY_CS__OWNED_TYPE = BaseCSPackage.TYPED_ELEMENT_CS__OWNED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
@@ -1095,7 +1095,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__QUALIFIER = BaseCSTPackage.TYPED_ELEMENT_CS__QUALIFIER;
+	int QUERY_CS__QUALIFIER = BaseCSPackage.TYPED_ELEMENT_CS__QUALIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -1104,7 +1104,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__OPTIONAL = BaseCSTPackage.TYPED_ELEMENT_CS__OPTIONAL;
+	int QUERY_CS__OPTIONAL = BaseCSPackage.TYPED_ELEMENT_CS__OPTIONAL;
 
 	/**
 	 * The feature id for the '<em><b>Path Name</b></em>' containment reference.
@@ -1113,7 +1113,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__PATH_NAME = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int QUERY_CS__PATH_NAME = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Transformation</b></em>' reference.
@@ -1122,7 +1122,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__TRANSFORMATION = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int QUERY_CS__TRANSFORMATION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Input Param Declaration</b></em>' containment reference list.
@@ -1131,7 +1131,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__INPUT_PARAM_DECLARATION = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int QUERY_CS__INPUT_PARAM_DECLARATION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1140,7 +1140,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__EXPRESSION = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int QUERY_CS__EXPRESSION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Query CS</em>' class.
@@ -1149,14 +1149,14 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS_FEATURE_COUNT = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 4;
+	int QUERY_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecst.impl.RealizeableVariableCSImpl <em>Realizeable Variable CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.RealizeableVariableCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getRealizeableVariableCS()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getRealizeableVariableCS()
 	 * @generated
 	 */
 	int REALIZEABLE_VARIABLE_CS = 11;
@@ -1168,7 +1168,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZEABLE_VARIABLE_CS__LOGICAL_PARENT = BaseCSTPackage.TYPED_ELEMENT_CS__LOGICAL_PARENT;
+	int REALIZEABLE_VARIABLE_CS__LOGICAL_PARENT = BaseCSPackage.TYPED_ELEMENT_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -1177,7 +1177,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZEABLE_VARIABLE_CS__PIVOT = BaseCSTPackage.TYPED_ELEMENT_CS__PIVOT;
+	int REALIZEABLE_VARIABLE_CS__PIVOT = BaseCSPackage.TYPED_ELEMENT_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -1186,7 +1186,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZEABLE_VARIABLE_CS__OWNED_ANNOTATION = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_ANNOTATION;
+	int REALIZEABLE_VARIABLE_CS__OWNED_ANNOTATION = BaseCSPackage.TYPED_ELEMENT_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -1195,7 +1195,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZEABLE_VARIABLE_CS__ORIGINAL_XMI_ID = BaseCSTPackage.TYPED_ELEMENT_CS__ORIGINAL_XMI_ID;
+	int REALIZEABLE_VARIABLE_CS__ORIGINAL_XMI_ID = BaseCSPackage.TYPED_ELEMENT_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1204,7 +1204,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZEABLE_VARIABLE_CS__CSI = BaseCSTPackage.TYPED_ELEMENT_CS__CSI;
+	int REALIZEABLE_VARIABLE_CS__CSI = BaseCSPackage.TYPED_ELEMENT_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1213,7 +1213,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZEABLE_VARIABLE_CS__NAME = BaseCSTPackage.TYPED_ELEMENT_CS__NAME;
+	int REALIZEABLE_VARIABLE_CS__NAME = BaseCSPackage.TYPED_ELEMENT_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
@@ -1222,7 +1222,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZEABLE_VARIABLE_CS__OWNED_TYPE = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_TYPE;
+	int REALIZEABLE_VARIABLE_CS__OWNED_TYPE = BaseCSPackage.TYPED_ELEMENT_CS__OWNED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
@@ -1231,7 +1231,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZEABLE_VARIABLE_CS__QUALIFIER = BaseCSTPackage.TYPED_ELEMENT_CS__QUALIFIER;
+	int REALIZEABLE_VARIABLE_CS__QUALIFIER = BaseCSPackage.TYPED_ELEMENT_CS__QUALIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -1240,7 +1240,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZEABLE_VARIABLE_CS__OPTIONAL = BaseCSTPackage.TYPED_ELEMENT_CS__OPTIONAL;
+	int REALIZEABLE_VARIABLE_CS__OPTIONAL = BaseCSPackage.TYPED_ELEMENT_CS__OPTIONAL;
 
 	/**
 	 * The number of structural features of the '<em>Realizeable Variable CS</em>' class.
@@ -1249,14 +1249,14 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZEABLE_VARIABLE_CS_FEATURE_COUNT = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int REALIZEABLE_VARIABLE_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecst.impl.RealizedVariableCSImpl <em>Realized Variable CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.RealizedVariableCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getRealizedVariableCS()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getRealizedVariableCS()
 	 * @generated
 	 */
 	int REALIZED_VARIABLE_CS = 12;
@@ -1356,7 +1356,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.TransformationCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getTransformationCS()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getTransformationCS()
 	 * @generated
 	 */
 	int TRANSFORMATION_CS = 13;
@@ -1368,7 +1368,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__LOGICAL_PARENT = BaseCSTPackage.PACKAGE_CS__LOGICAL_PARENT;
+	int TRANSFORMATION_CS__LOGICAL_PARENT = BaseCSPackage.PACKAGE_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -1377,7 +1377,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__PIVOT = BaseCSTPackage.PACKAGE_CS__PIVOT;
+	int TRANSFORMATION_CS__PIVOT = BaseCSPackage.PACKAGE_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -1386,7 +1386,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__OWNED_ANNOTATION = BaseCSTPackage.PACKAGE_CS__OWNED_ANNOTATION;
+	int TRANSFORMATION_CS__OWNED_ANNOTATION = BaseCSPackage.PACKAGE_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -1395,7 +1395,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__ORIGINAL_XMI_ID = BaseCSTPackage.PACKAGE_CS__ORIGINAL_XMI_ID;
+	int TRANSFORMATION_CS__ORIGINAL_XMI_ID = BaseCSPackage.PACKAGE_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1404,7 +1404,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__CSI = BaseCSTPackage.PACKAGE_CS__CSI;
+	int TRANSFORMATION_CS__CSI = BaseCSPackage.PACKAGE_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1413,7 +1413,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__NAME = BaseCSTPackage.PACKAGE_CS__NAME;
+	int TRANSFORMATION_CS__NAME = BaseCSPackage.PACKAGE_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
@@ -1422,7 +1422,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__OWNED_TYPE = BaseCSTPackage.PACKAGE_CS__OWNED_TYPE;
+	int TRANSFORMATION_CS__OWNED_TYPE = BaseCSPackage.PACKAGE_CS__OWNED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Nested Package</b></em>' containment reference list.
@@ -1431,7 +1431,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__OWNED_NESTED_PACKAGE = BaseCSTPackage.PACKAGE_CS__OWNED_NESTED_PACKAGE;
+	int TRANSFORMATION_CS__OWNED_NESTED_PACKAGE = BaseCSPackage.PACKAGE_CS__OWNED_NESTED_PACKAGE;
 
 	/**
 	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
@@ -1440,7 +1440,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__NS_PREFIX = BaseCSTPackage.PACKAGE_CS__NS_PREFIX;
+	int TRANSFORMATION_CS__NS_PREFIX = BaseCSPackage.PACKAGE_CS__NS_PREFIX;
 
 	/**
 	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
@@ -1449,7 +1449,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__NS_URI = BaseCSTPackage.PACKAGE_CS__NS_URI;
+	int TRANSFORMATION_CS__NS_URI = BaseCSPackage.PACKAGE_CS__NS_URI;
 
 	/**
 	 * The feature id for the '<em><b>Path Name</b></em>' containment reference.
@@ -1458,7 +1458,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__PATH_NAME = BaseCSTPackage.PACKAGE_CS_FEATURE_COUNT + 0;
+	int TRANSFORMATION_CS__PATH_NAME = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Package</b></em>' reference.
@@ -1467,7 +1467,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__PACKAGE = BaseCSTPackage.PACKAGE_CS_FEATURE_COUNT + 1;
+	int TRANSFORMATION_CS__PACKAGE = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Directions</b></em>' containment reference list.
@@ -1476,7 +1476,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__DIRECTIONS = BaseCSTPackage.PACKAGE_CS_FEATURE_COUNT + 2;
+	int TRANSFORMATION_CS__DIRECTIONS = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Transformation CS</em>' class.
@@ -1485,14 +1485,14 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS_FEATURE_COUNT = BaseCSTPackage.PACKAGE_CS_FEATURE_COUNT + 3;
+	int TRANSFORMATION_CS_FEATURE_COUNT = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecst.impl.UnrealizedVariableCSImpl <em>Unrealized Variable CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.UnrealizedVariableCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getUnrealizedVariableCS()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getUnrealizedVariableCS()
 	 * @generated
 	 */
 	int UNREALIZED_VARIABLE_CS = 14;
@@ -2051,7 +2051,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.AbstractMappingCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getAbstractMappingCS()
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getAbstractMappingCS()
 		 * @generated
 		 */
 		EClass ABSTRACT_MAPPING_CS = eINSTANCE.getAbstractMappingCS();
@@ -2085,7 +2085,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.AreaCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getAreaCS()
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getAreaCS()
 		 * @generated
 		 */
 		EClass AREA_CS = eINSTANCE.getAreaCS();
@@ -2111,7 +2111,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.AssignmentCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getAssignmentCS()
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getAssignmentCS()
 		 * @generated
 		 */
 		EClass ASSIGNMENT_CS = eINSTANCE.getAssignmentCS();
@@ -2145,7 +2145,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.BottomPatternCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getBottomPatternCS()
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getBottomPatternCS()
 		 * @generated
 		 */
 		EClass BOTTOM_PATTERN_CS = eINSTANCE.getBottomPatternCS();
@@ -2171,7 +2171,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.DirectionCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getDirectionCS()
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getDirectionCS()
 		 * @generated
 		 */
 		EClass DIRECTION_CS = eINSTANCE.getDirectionCS();
@@ -2197,7 +2197,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.DomainCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getDomainCS()
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getDomainCS()
 		 * @generated
 		 */
 		EClass DOMAIN_CS = eINSTANCE.getDomainCS();
@@ -2231,7 +2231,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.EnforcementOperationCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getEnforcementOperationCS()
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getEnforcementOperationCS()
 		 * @generated
 		 */
 		EClass ENFORCEMENT_OPERATION_CS = eINSTANCE.getEnforcementOperationCS();
@@ -2257,7 +2257,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.GuardPatternCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getGuardPatternCS()
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getGuardPatternCS()
 		 * @generated
 		 */
 		EClass GUARD_PATTERN_CS = eINSTANCE.getGuardPatternCS();
@@ -2267,7 +2267,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.ParamDeclarationCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getParamDeclarationCS()
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getParamDeclarationCS()
 		 * @generated
 		 */
 		EClass PARAM_DECLARATION_CS = eINSTANCE.getParamDeclarationCS();
@@ -2277,7 +2277,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.PatternCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getPatternCS()
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getPatternCS()
 		 * @generated
 		 */
 		EClass PATTERN_CS = eINSTANCE.getPatternCS();
@@ -2303,7 +2303,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QueryCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getQueryCS()
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getQueryCS()
 		 * @generated
 		 */
 		EClass QUERY_CS = eINSTANCE.getQueryCS();
@@ -2345,7 +2345,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.RealizeableVariableCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getRealizeableVariableCS()
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getRealizeableVariableCS()
 		 * @generated
 		 */
 		EClass REALIZEABLE_VARIABLE_CS = eINSTANCE.getRealizeableVariableCS();
@@ -2355,7 +2355,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.RealizedVariableCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getRealizedVariableCS()
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getRealizedVariableCS()
 		 * @generated
 		 */
 		EClass REALIZED_VARIABLE_CS = eINSTANCE.getRealizedVariableCS();
@@ -2365,7 +2365,7 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.TransformationCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getTransformationCS()
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getTransformationCS()
 		 * @generated
 		 */
 		EClass TRANSFORMATION_CS = eINSTANCE.getTransformationCS();
@@ -2399,11 +2399,11 @@ public interface QVTcoreBaseCSTPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.UnrealizedVariableCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSTPackageImpl#getUnrealizedVariableCS()
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecst.impl.QVTcoreBaseCSPackageImpl#getUnrealizedVariableCS()
 		 * @generated
 		 */
 		EClass UNREALIZED_VARIABLE_CS = eINSTANCE.getUnrealizedVariableCS();
 
 	}
 
-} //QVTcoreBaseCSTPackage
+} //QVTcoreBaseCSPackage

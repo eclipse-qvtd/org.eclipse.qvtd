@@ -23,7 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 
 /**
  */
-public interface DecorableQVTcoreBaseCSVisitor<R> extends QVTcoreBaseCSVisitor<R>, org.eclipse.ocl.examples.xtext.essentialocl.util.DecorableEssentialOCLCSVisitor<R>
+public interface DecorableQVTcoreBaseCSVisitor<R> extends QVTcoreBaseCSVisitor<R>, org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.DecorableEssentialOCLCSVisitor<R>
 {
-	void setUndecoratedVisitor(@NonNull org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor<R> visitor);
+	void setUndecoratedVisitor(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor<R> visitor);
 }

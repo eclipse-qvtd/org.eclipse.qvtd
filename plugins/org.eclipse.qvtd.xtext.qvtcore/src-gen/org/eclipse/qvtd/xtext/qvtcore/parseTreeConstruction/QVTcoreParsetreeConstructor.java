@@ -5145,7 +5145,7 @@ protected class UnnamedDomainCS_BottomPatternAssignment_2 extends AssignmentToke
 
 /************ begin Rule Model ****************
  *
- * //generate essentialOCLCST "http://www.eclipse.org/ocl/3.0.0/EssentialOCLCST"
+ * //generate essentialoclcs "http://www.eclipse.org/ocl/3.0.0/EssentialOCLCST"
  *  Model returns ContextCS:
  * 
  * 	ownedExpression=ExpCS;

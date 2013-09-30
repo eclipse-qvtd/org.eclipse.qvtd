@@ -16,8 +16,8 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelationcst;
 
-import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
 
 /**
  * <!-- begin-user-doc -->

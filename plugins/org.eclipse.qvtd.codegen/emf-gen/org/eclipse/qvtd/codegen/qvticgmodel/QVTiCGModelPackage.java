@@ -1650,7 +1650,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP__AST = CGModelPackage.CG_PROPERTY_CALL_EXP__AST;
+	int CG_MIDDLE_PROPERTY_CALL_EXP__AST = CGModelPackage.CG_OPPOSITE_PROPERTY_CALL_EXP__AST;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1659,7 +1659,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP__NAME = CGModelPackage.CG_PROPERTY_CALL_EXP__NAME;
+	int CG_MIDDLE_PROPERTY_CALL_EXP__NAME = CGModelPackage.CG_OPPOSITE_PROPERTY_CALL_EXP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1668,7 +1668,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP__TYPE_ID = CGModelPackage.CG_PROPERTY_CALL_EXP__TYPE_ID;
+	int CG_MIDDLE_PROPERTY_CALL_EXP__TYPE_ID = CGModelPackage.CG_OPPOSITE_PROPERTY_CALL_EXP__TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -1677,7 +1677,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP__REQUIRED = CGModelPackage.CG_PROPERTY_CALL_EXP__REQUIRED;
+	int CG_MIDDLE_PROPERTY_CALL_EXP__REQUIRED = CGModelPackage.CG_OPPOSITE_PROPERTY_CALL_EXP__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
@@ -1686,7 +1686,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP__DEPENDS_ON = CGModelPackage.CG_PROPERTY_CALL_EXP__DEPENDS_ON;
+	int CG_MIDDLE_PROPERTY_CALL_EXP__DEPENDS_ON = CGModelPackage.CG_OPPOSITE_PROPERTY_CALL_EXP__DEPENDS_ON;
 
 	/**
 	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
@@ -1695,7 +1695,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP__OWNS = CGModelPackage.CG_PROPERTY_CALL_EXP__OWNS;
+	int CG_MIDDLE_PROPERTY_CALL_EXP__OWNS = CGModelPackage.CG_OPPOSITE_PROPERTY_CALL_EXP__OWNS;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -1704,7 +1704,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP__INVALIDATING = CGModelPackage.CG_PROPERTY_CALL_EXP__INVALIDATING;
+	int CG_MIDDLE_PROPERTY_CALL_EXP__INVALIDATING = CGModelPackage.CG_OPPOSITE_PROPERTY_CALL_EXP__INVALIDATING;
 
 	/**
 	 * The feature id for the '<em><b>Validating</b></em>' attribute.
@@ -1713,7 +1713,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP__VALIDATING = CGModelPackage.CG_PROPERTY_CALL_EXP__VALIDATING;
+	int CG_MIDDLE_PROPERTY_CALL_EXP__VALIDATING = CGModelPackage.CG_OPPOSITE_PROPERTY_CALL_EXP__VALIDATING;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -1722,7 +1722,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP__SOURCE = CGModelPackage.CG_PROPERTY_CALL_EXP__SOURCE;
+	int CG_MIDDLE_PROPERTY_CALL_EXP__SOURCE = CGModelPackage.CG_OPPOSITE_PROPERTY_CALL_EXP__SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
@@ -1731,7 +1731,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP__REFERRED_PROPERTY = CGModelPackage.CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY;
+	int CG_MIDDLE_PROPERTY_CALL_EXP__REFERRED_PROPERTY = CGModelPackage.CG_OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY;
 
 	/**
 	 * The number of structural features of the '<em>CG Middle Property Call Exp</em>' class.
@@ -1740,7 +1740,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP_FEATURE_COUNT = CGModelPackage.CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
+	int CG_MIDDLE_PROPERTY_CALL_EXP_FEATURE_COUNT = CGModelPackage.CG_OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.

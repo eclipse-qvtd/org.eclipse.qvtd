@@ -17,7 +17,7 @@
 package org.eclipse.qvtd.xtext.qvtcorecst;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.TransformationCS;
 

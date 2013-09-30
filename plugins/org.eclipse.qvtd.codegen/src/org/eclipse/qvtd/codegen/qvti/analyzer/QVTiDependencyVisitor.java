@@ -89,7 +89,7 @@ public class QVTiDependencyVisitor extends JavaDependencyVisitor implements QVTi
 	}
 
 	public Object visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
-		return visitCGPropertyCallExp(object);
+		return visitCGOppositePropertyCallExp(object);
 	}
 
 	public Object visitCGPredicate(@NonNull CGPredicate object) {

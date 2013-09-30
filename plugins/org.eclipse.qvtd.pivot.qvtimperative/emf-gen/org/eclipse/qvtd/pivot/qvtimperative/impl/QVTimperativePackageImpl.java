@@ -409,7 +409,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		mappingCallEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
 		mappingCallBindingEClass.getESuperTypes().add(thePivotPackage.getElement());
 		middlePropertyAssignmentEClass.getESuperTypes().add(theQVTcoreBasePackage.getPropertyAssignment());
-		middlePropertyCallExpEClass.getESuperTypes().add(thePivotPackage.getPropertyCallExp());
+		middlePropertyCallExpEClass.getESuperTypes().add(thePivotPackage.getOppositePropertyCallExp());
 		variablePredicateEClass.getESuperTypes().add(theQVTbasePackage.getPredicate());
 
 		// Initialize classes and features; add operations and parameters
@@ -464,7 +464,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		   new String[] {
 			 "qvtb", "/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/",
 			 "qvtcb", "/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/"
-		   });	
+		   });
 	}
 
 	/**
@@ -480,7 +480,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		   source, 
 		   new String[] {
 			 "body", "predicate"
-		   });	
+		   });
 	}
 
 } //QVTimperativePackageImpl

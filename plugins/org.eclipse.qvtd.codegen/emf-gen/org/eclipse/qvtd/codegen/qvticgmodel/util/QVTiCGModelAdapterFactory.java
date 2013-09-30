@@ -22,10 +22,11 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
@@ -216,8 +217,12 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGParameterAdapter();
 			}
 			@Override
-			public Adapter caseCGPropertyCallExp(CGPropertyCallExp object) {
-				return createCGPropertyCallExpAdapter();
+			public Adapter caseCGNavigationCallExp(CGNavigationCallExp object) {
+				return createCGNavigationCallExpAdapter();
+			}
+			@Override
+			public Adapter caseCGOppositePropertyCallExp(CGOppositePropertyCallExp object) {
+				return createCGOppositePropertyCallExpAdapter();
 			}
 			@Override
 			public Adapter caseCGClass(CGClass object) {
@@ -622,16 +627,30 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp <em>CG Property Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp <em>CG Navigation Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp
 	 * @generated
 	 */
-	public Adapter createCGPropertyCallExpAdapter() {
+	public Adapter createCGNavigationCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp <em>CG Opposite Property Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp
+	 * @generated
+	 */
+	public Adapter createCGOppositePropertyCallExpAdapter() {
 		return null;
 	}
 

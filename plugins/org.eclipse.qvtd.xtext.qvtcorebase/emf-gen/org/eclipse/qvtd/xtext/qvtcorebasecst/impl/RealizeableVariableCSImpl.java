@@ -17,7 +17,7 @@
 package org.eclipse.qvtd.xtext.qvtcorebasecst.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.ocl.examples.xtext.base.baseCST.impl.TypedElementCSImpl;
+import org.eclipse.ocl.examples.xtext.base.basecs.impl.TypedElementCSImpl;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.QVTcoreBaseCSTPackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.RealizeableVariableCS;
 

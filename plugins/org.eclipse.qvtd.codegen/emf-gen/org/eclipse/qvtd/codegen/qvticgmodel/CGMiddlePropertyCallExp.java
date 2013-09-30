@@ -14,7 +14,7 @@
  */
 package org.eclipse.qvtd.codegen.qvticgmodel;
 
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,5 +26,5 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
  * @model
  * @generated
  */
-public interface CGMiddlePropertyCallExp extends CGPropertyCallExp {
+public interface CGMiddlePropertyCallExp extends CGOppositePropertyCallExp {
 } // CGMiddlePropertyCallExp

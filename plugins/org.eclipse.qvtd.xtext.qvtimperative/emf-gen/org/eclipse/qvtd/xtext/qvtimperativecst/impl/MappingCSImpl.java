@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.impl.AbstractMappingCSImpl;
 import org.eclipse.qvtd.xtext.qvtimperativecst.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecst.MappingCallCS;

@@ -837,7 +837,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		cgMappingCallBindingEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgMappingExpEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgMiddlePropertyAssignmentEClass.getESuperTypes().add(this.getCGEcorePropertyAssignment());
-		cgMiddlePropertyCallExpEClass.getESuperTypes().add(theCGModelPackage.getCGPropertyCallExp());
+		cgMiddlePropertyCallExpEClass.getESuperTypes().add(theCGModelPackage.getCGOppositePropertyCallExp());
 		cgPredicateEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgPropertyAssignmentEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgRealizedVariableEClass.getESuperTypes().add(theCGModelPackage.getCGVariable());
@@ -936,7 +936,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		   source, 
 		   new String[] {
 			 "ecore", "http://www.eclipse.org/emf/2002/Ecore#/"
-		   });	
+		   });
 	}
 
 } //QVTiCGModelPackageImpl

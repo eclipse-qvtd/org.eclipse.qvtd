@@ -127,7 +127,7 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 	}
 
 	public Object visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
-		return visitCGPropertyCallExp(object);
+		return visitCGOppositePropertyCallExp(object);
 	}
 
 	public Object visitCGPredicate(@NonNull CGPredicate object) {

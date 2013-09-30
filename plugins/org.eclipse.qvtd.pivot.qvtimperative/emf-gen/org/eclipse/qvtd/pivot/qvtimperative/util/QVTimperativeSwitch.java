@@ -25,7 +25,7 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.PropertyCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TypedElement;
@@ -163,9 +163,8 @@ public class QVTimperativeSwitch<T> extends Switch<T> {
 			case QVTimperativePackage.MIDDLE_PROPERTY_CALL_EXP: {
 				MiddlePropertyCallExp middlePropertyCallExp = (MiddlePropertyCallExp)theEObject;
 				T result = caseMiddlePropertyCallExp(middlePropertyCallExp);
-				if (result == null) result = casePropertyCallExp(middlePropertyCallExp);
+				if (result == null) result = caseOppositePropertyCallExp(middlePropertyCallExp);
 				if (result == null) result = caseNavigationCallExp(middlePropertyCallExp);
-				if (result == null) result = caseReferringElement(middlePropertyCallExp);
 				if (result == null) result = caseFeatureCallExp(middlePropertyCallExp);
 				if (result == null) result = caseCallExp(middlePropertyCallExp);
 				if (result == null) result = caseOCLExpression(middlePropertyCallExp);
@@ -566,17 +565,17 @@ public class QVTimperativeSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Property Call Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Opposite Property Call Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Property Call Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Opposite Property Call Exp</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePropertyCallExp(PropertyCallExp object) {
+	public T caseOppositePropertyCallExp(OppositePropertyCallExp object) {
 		return null;
 	}
 

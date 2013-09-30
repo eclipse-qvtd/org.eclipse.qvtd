@@ -19,7 +19,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.internal.impl.PropertyCallExpImpl;
+import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.internal.impl.OppositePropertyCallExpImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -38,7 +39,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  *
  * @generated
  */
-public class MiddlePropertyCallExpImpl extends PropertyCallExpImpl implements MiddlePropertyCallExp {
+public class MiddlePropertyCallExpImpl extends OppositePropertyCallExpImpl implements MiddlePropertyCallExp {
 	/**
 	 * The default value of the '{@link #getCacheIndex() <em>Cache Index</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -176,5 +177,17 @@ public class MiddlePropertyCallExpImpl extends PropertyCallExpImpl implements Mi
 	@Override
 	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTimperativeVisitor<?>)visitor).visitMiddlePropertyCallExp(this);
+	}
+
+	@Override
+	public Property getReferredProperty() {
+		// TODO Auto-generated method stub
+		return super.getReferredProperty();
+	}
+
+	@Override
+	public void setReferredProperty(Property newReferredProperty) {
+		// TODO Auto-generated method stub
+		super.setReferredProperty(newReferredProperty);
 	}
 } //MiddlePropertyCallExpImpl

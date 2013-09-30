@@ -132,7 +132,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 	}
 
 	public @Nullable String visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
-		return visitCGPropertyCallExp(object);
+		return visitCGOppositePropertyCallExp(object);
 	}
 
 	public @Nullable String visitCGPredicate(@NonNull CGPredicate cgPredicate) {

@@ -220,9 +220,6 @@ public class umlRdbms extends AbstractTransformation
             // predicates
             final @Nullable /*@Thrown*/ List<PackageElement> elements_0 = p.getElements();
             assert elements_0 != null;
-            if (elements_0 == null) {
-                throw new InvalidValueException("Null binding for \'booleanToBooleanLM::prim\'");
-            }
             // creations
             final /*@Thrown*/ PackageToSchema p2s = UmltordbmsFactory.eINSTANCE.createPackageToSchema();
             assert p2s != null;
@@ -232,7 +229,6 @@ public class umlRdbms extends AbstractTransformation
             final @Nullable /*@Thrown*/ String name = p.getName();
             p2s.setName(name);
             // mapping calls
-            assert elements_0 != null;
             for (Object prim_2 : elements_0) {
                 if (prim_2 != null) {
                     if (prim_2 instanceof PrimitiveDataType) {
@@ -240,7 +236,6 @@ public class umlRdbms extends AbstractTransformation
                     }
                 }
             }
-            assert elements_0 != null;
             for (Object prim_3 : elements_0) {
                 if (prim_3 != null) {
                     if (prim_3 instanceof PrimitiveDataType) {
@@ -248,7 +243,6 @@ public class umlRdbms extends AbstractTransformation
                     }
                 }
             }
-            assert elements_0 != null;
             for (Object prim_4 : elements_0) {
                 if (prim_4 != null) {
                     if (prim_4 instanceof PrimitiveDataType) {
@@ -256,7 +250,6 @@ public class umlRdbms extends AbstractTransformation
                     }
                 }
             }
-            assert elements_0 != null;
             for (Object c_4 : elements_0) {
                 if (c_4 != null) {
                     if (c_4 instanceof Class) {
@@ -264,7 +257,6 @@ public class umlRdbms extends AbstractTransformation
                     }
                 }
             }
-            assert elements_0 != null;
             for (Object a_2 : elements_0) {
                 if (a_2 != null) {
                     if (a_2 instanceof Association) {
@@ -323,9 +315,6 @@ public class umlRdbms extends AbstractTransformation
             // predicates
             final @Nullable /*@Thrown*/ List<PrimitiveToName> primitivesToNames_0 = p2s.getPrimitivesToNames();
             assert primitivesToNames_0 != null;
-            if (primitivesToNames_0 == null) {
-                throw new InvalidValueException("Null binding for \'booleanToBooleanMR::p2n\'");
-            }
             // creations
             final /*@Thrown*/ Schema s = SimplerdbmsFactory.eINSTANCE.createSchema();
             assert s != null;
@@ -334,19 +323,16 @@ public class umlRdbms extends AbstractTransformation
             p2s.setSchema(s);
             // mapping calls
             packageToSchemaMR_1(p2s, s);
-            assert primitivesToNames_0 != null;
             for (Object p2n_3 : primitivesToNames_0) {
                 if (p2n_3 != null) {
                     integerToNumberMR((PrimitiveToName)p2n_3, p2s);
                 }
             }
-            assert primitivesToNames_0 != null;
             for (Object p2n_4 : primitivesToNames_0) {
                 if (p2n_4 != null) {
                     booleanToBooleanMR((PrimitiveToName)p2n_4, p2s);
                 }
             }
-            assert primitivesToNames_0 != null;
             for (Object p2n_5 : primitivesToNames_0) {
                 if (p2n_5 != null) {
                     stringToVarcharMR((PrimitiveToName)p2n_5, p2s);
@@ -755,16 +741,13 @@ public class umlRdbms extends AbstractTransformation
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             final @Nullable /*@Thrown*/ List<Attribute> attributes_0 = c.getAttributes();
             assert attributes_0 != null;
-            final @Nullable /*@Thrown*/ OrderedSetValue BOXED_attributes_3 = attributes_0 == null ? null : idResolver.createOrderedSetOfAll(ORD_CLSSid_Attribute, attributes_0);
-            if (attributes_0 == null) {
-                throw new InvalidValueException("Null binding for \'classComplexAttributesLM::a\'");
-            }
+            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_attributes_3 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Attribute, attributes_0);
             @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValuesUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Classifier);
             @Nullable Iterator<?> ITERATOR__1_0 = BOXED_attributes_3.iterator();
             @NonNull /*@Thrown*/ SequenceValue collect_0;
             while (true) {
                 if (!ITERATOR__1_0.hasNext()) {
-                    collect_0 = (SequenceValue)accumulator;
+                    collect_0 = accumulator;
                     break;
                 }
                 @Nullable /*@NonInvalid*/ Attribute _1_0 = (Attribute)ITERATOR__1_0.next();
@@ -791,13 +774,11 @@ public class umlRdbms extends AbstractTransformation
             final @Nullable /*@Thrown*/ String name = c.getName();
             c2t.setName(name);
             // mapping calls
-            assert attributes_0 != null;
             for (Object a_2 : attributes_0) {
                 if (a_2 != null) {
                     classPrimitiveAttributesLM((Attribute)a_2, c, c2t);
                 }
             }
-            assert attributes_0 != null;
             for (Object a_3 : attributes_0) {
                 if (a_3 != null) {
                     classComplexAttributesLM((Attribute)a_3, c, c2t);
@@ -806,7 +787,6 @@ public class umlRdbms extends AbstractTransformation
             for (Object c_6 : UNBOXED_collect_0) {
                 if (c_6 != null) {
                     if (c_6 instanceof Class) {
-                        assert attributes_0 != null;
                         for (Object ca_2 : attributes_0) {
                             if (ca_2 != null) {
                                 complexAttributePrimitiveAttributesLM((Class)c_6, (Attribute)ca_2);
@@ -818,7 +798,6 @@ public class umlRdbms extends AbstractTransformation
             for (Object c_7 : UNBOXED_collect_0) {
                 if (c_7 != null) {
                     if (c_7 instanceof Class) {
-                        assert attributes_0 != null;
                         for (Object ca_3 : attributes_0) {
                             if (ca_3 != null) {
                                 complexAttributeComplexAttributesLM((Class)c_7, (Attribute)ca_3);
@@ -889,7 +868,7 @@ public class umlRdbms extends AbstractTransformation
             final @NonNull /*@NonInvalid*/ DomainType TYP_umltordbms_c_c_NonLeafAttribute_0 = idResolver.getType(CLSSid_NonLeafAttribute, null);
             final @Nullable /*@Thrown*/ List<FromAttribute> fromAttributes = c2t.getFromAttributes();
             assert fromAttributes != null;
-            final @Nullable /*@Thrown*/ SetValue BOXED_fromAttributes = fromAttributes == null ? null : idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
+            final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
             // creations
             final /*@Thrown*/ Table t = SimplerdbmsFactory.eINSTANCE.createTable();
             assert t != null;
@@ -917,7 +896,7 @@ public class umlRdbms extends AbstractTransformation
             @NonNull /*@Thrown*/ BagValue collect;
             while (true) {
                 if (!ITERATOR__1.hasNext()) {
-                    collect = (BagValue)accumulator;
+                    collect = accumulator;
                     break;
                 }
                 @Nullable /*@NonInvalid*/ NonLeafAttribute _1 = (NonLeafAttribute)ITERATOR__1.next();
@@ -929,7 +908,7 @@ public class umlRdbms extends AbstractTransformation
                 }
                 final @Nullable /*@Thrown*/ List<FromAttribute> fromAttributes_1 = _1.getFromAttributes();
                 assert fromAttributes_1 != null;
-                final @Nullable /*@Thrown*/ SetValue BOXED_fromAttributes_1 = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes_1);
+                final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes_1 = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes_1);
                 //
                 for (Object value : BOXED_fromAttributes_1.flatten().getElements()) {
                     accumulator.add(value);
@@ -1468,7 +1447,7 @@ public class umlRdbms extends AbstractTransformation
             fc.getForeignKeys().addAll(UNBOXED_OrderedSet);
             final @Nullable /*@Thrown*/ List<Column> column = rk_0.getColumn();
             assert column != null;
-            final @Nullable /*@Thrown*/ OrderedSetValue BOXED_column = idResolver.createOrderedSetOfAll(ORD_CLSSid_Column, column);
+            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_column = idResolver.createOrderedSetOfAll(ORD_CLSSid_Column, column);
             final @Nullable /*@Thrown*/ Column first = (Column)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_column);
             if (first == null) {
                 throw new InvalidValueException("Null source for \'simplerdbms::Column.type\'");
@@ -1652,13 +1631,13 @@ public class umlRdbms extends AbstractTransformation
             fa.setName(name);
             final @Nullable /*@Thrown*/ List<FromAttribute> fromAttributes = fao_0.getFromAttributes();
             assert fromAttributes != null;
-            final @Nullable /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
+            final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
             @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValuesUtil.createBagAccumulatorValue(BAG_CLSSid_AttributeToColumn);
             @Nullable Iterator<?> ITERATOR__1 = BOXED_fromAttributes.iterator();
             @NonNull /*@Thrown*/ BagValue collect;
             while (true) {
                 if (!ITERATOR__1.hasNext()) {
-                    collect = (BagValue)accumulator;
+                    collect = accumulator;
                     break;
                 }
                 @Nullable /*@NonInvalid*/ FromAttribute _1 = (FromAttribute)ITERATOR__1.next();
@@ -1670,7 +1649,7 @@ public class umlRdbms extends AbstractTransformation
                 }
                 final @Nullable /*@Thrown*/ List<AttributeToColumn> leafs = _1.getLeafs();
                 assert leafs != null;
-                final @Nullable /*@Thrown*/ SetValue BOXED_leafs = idResolver.createSetOfAll(SET_CLSSid_AttributeToColumn, leafs);
+                final @NonNull /*@Thrown*/ SetValue BOXED_leafs = idResolver.createSetOfAll(SET_CLSSid_AttributeToColumn, leafs);
                 //
                 for (Object value : BOXED_leafs.flatten().getElements()) {
                     accumulator.add(value);
@@ -1919,13 +1898,13 @@ public class umlRdbms extends AbstractTransformation
             fa.setOwner(fao_1_0);
             final @Nullable /*@Thrown*/ List<FromAttribute> fromAttributes = fao_1_0.getFromAttributes();
             assert fromAttributes != null;
-            final @Nullable /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
+            final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
             @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValuesUtil.createBagAccumulatorValue(BAG_CLSSid_AttributeToColumn);
             @Nullable Iterator<?> ITERATOR__1 = BOXED_fromAttributes.iterator();
             @NonNull /*@Thrown*/ BagValue collect;
             while (true) {
                 if (!ITERATOR__1.hasNext()) {
-                    collect = (BagValue)accumulator;
+                    collect = accumulator;
                     break;
                 }
                 @Nullable /*@NonInvalid*/ FromAttribute _1 = (FromAttribute)ITERATOR__1.next();
@@ -1937,7 +1916,7 @@ public class umlRdbms extends AbstractTransformation
                 }
                 final @Nullable /*@Thrown*/ List<AttributeToColumn> leafs = _1.getLeafs();
                 assert leafs != null;
-                final @Nullable /*@Thrown*/ SetValue BOXED_leafs = idResolver.createSetOfAll(SET_CLSSid_AttributeToColumn, leafs);
+                final @NonNull /*@Thrown*/ SetValue BOXED_leafs = idResolver.createSetOfAll(SET_CLSSid_AttributeToColumn, leafs);
                 //
                 for (Object value : BOXED_leafs.flatten().getElements()) {
                     accumulator.add(value);

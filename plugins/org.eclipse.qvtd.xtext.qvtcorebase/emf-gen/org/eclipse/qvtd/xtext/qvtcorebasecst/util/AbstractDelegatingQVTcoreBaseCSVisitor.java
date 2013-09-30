@@ -26,7 +26,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * An AbstractDelegatingQVTcoreBaseCSVisitor delegates all visits.
  */
 public abstract class AbstractDelegatingQVTcoreBaseCSVisitor<R, C, D extends QVTcoreBaseCSVisitor<R>>
-	extends org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractDelegatingEssentialOCLCSVisitor<R, C, D>
+	extends org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.AbstractDelegatingEssentialOCLCSVisitor<R, C, D>
 	implements QVTcoreBaseCSVisitor<R>
 {
 	protected AbstractDelegatingQVTcoreBaseCSVisitor(@NonNull D delegate, @NonNull C context) {
@@ -34,7 +34,7 @@ public abstract class AbstractDelegatingQVTcoreBaseCSVisitor<R, C, D extends QVT
 	}
 
 	@Override
-	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.xtext.base.util.VisitableCS visitable) {
+	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS visitable) {
 		return delegate.visiting(visitable);
 	}
 

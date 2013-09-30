@@ -18,7 +18,7 @@ package org.eclipse.qvtd.xtext.qvtrelationcst;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
 
 /**
  * <!-- begin-user-doc -->

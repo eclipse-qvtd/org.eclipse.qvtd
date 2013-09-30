@@ -17,7 +17,7 @@ package org.eclipse.qvtd.codegen.qvticgmodel.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGPropertyCallExpImpl;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOppositePropertyCallExpImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
@@ -32,7 +32,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  *
  * @generated
  */
-public class CGMiddlePropertyCallExpImpl extends CGPropertyCallExpImpl implements CGMiddlePropertyCallExp {
+public class CGMiddlePropertyCallExpImpl extends CGOppositePropertyCallExpImpl implements CGMiddlePropertyCallExp {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

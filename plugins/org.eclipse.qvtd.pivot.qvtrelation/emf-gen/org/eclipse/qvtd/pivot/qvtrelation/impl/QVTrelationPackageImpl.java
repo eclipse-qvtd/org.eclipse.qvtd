@@ -635,37 +635,37 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		   source, 
 		   new String[] {
 			 "body", "oppositeKey"
-		   });		
+		   });	
 		addAnnotation
 		  (getRelation_When(), 
 		   source, 
 		   new String[] {
 			 "body", "whenOwner"
-		   });		
+		   });	
 		addAnnotation
 		  (getRelation_Where(), 
 		   source, 
 		   new String[] {
 			 "body", "whereOwner"
-		   });		
+		   });	
 		addAnnotation
 		  (getRelationDomain_DefaultAssignment(), 
 		   source, 
 		   new String[] {
 			 "body", "owner"
-		   });		
+		   });	
 		addAnnotation
 		  (getRelationDomainAssignment_ValueExp(), 
 		   source, 
 		   new String[] {
 			 "body", "domainAssignment"
-		   });		
+		   });	
 		addAnnotation
 		  (getRelationDomainAssignment_Variable(), 
 		   source, 
 		   new String[] {
 			 "body", "domainAssignment"
-		   });	
+		   });
 	}
 
 } //QVTrelationPackageImpl

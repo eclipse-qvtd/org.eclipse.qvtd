@@ -16,8 +16,8 @@
  */
 package org.eclipse.qvtd.xtext.qvtcorebasecst;
 
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvocationExpCS;
 
 /**
  * <!-- begin-user-doc -->

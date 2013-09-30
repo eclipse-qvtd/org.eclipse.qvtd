@@ -434,15 +434,16 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	}
 
 	public @Nullable CGNamedElement visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp asMiddlePropertyCallExp) {
-		Property asProperty = DomainUtil.nonNullModel(asMiddlePropertyCallExp.getReferredProperty());
-		globalContext.addToMiddleProperty(DomainUtil.nonNullModel(asProperty.getOpposite()));
+		Property asOppositeProperty = DomainUtil.nonNullModel(asMiddlePropertyCallExp.getReferredProperty());
+		Property asProperty = DomainUtil.nonNullModel(asOppositeProperty.getOpposite());
+		globalContext.addToMiddleProperty(asOppositeProperty);
 //		LibraryProperty libraryProperty = metaModelManager.getImplementation(asProperty);
 		CGMiddlePropertyCallExp cgPropertyCallExp = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyCallExp();					
 //		CGExecutorProperty cgExecutorProperty = context.getExecutorProperty(asProperty);
 //		cgExecutorPropertyCallExp.setExecutorProperty(cgExecutorProperty);
 //		cgPropertyCallExp = cgExecutorPropertyCallExp;
 //		cgPropertyCallExp.getDependsOn().add(cgExecutorProperty);
-		cgPropertyCallExp.setReferredProperty(asProperty.getOpposite());
+		cgPropertyCallExp.setReferredProperty(asOppositeProperty);
 		setAst(cgPropertyCallExp, asMiddlePropertyCallExp);
 		cgPropertyCallExp.setRequired(asProperty.isRequired());
 		CGValuedElement cgSource = doVisit(CGValuedElement.class, asMiddlePropertyCallExp.getSource());

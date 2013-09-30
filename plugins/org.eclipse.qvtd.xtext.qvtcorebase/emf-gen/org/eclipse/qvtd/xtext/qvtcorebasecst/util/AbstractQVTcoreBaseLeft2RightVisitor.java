@@ -22,7 +22,7 @@ package	org.eclipse.qvtd.xtext.qvtcorebasecst.util;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLLeft2RightVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLCSLeft2RightVisitor;
 import org.eclipse.ocl.examples.pivot.Element;
 
 /**
@@ -33,7 +33,7 @@ import org.eclipse.ocl.examples.pivot.Element;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTcoreBaseLeft2RightVisitor
-	extends EssentialOCLLeft2RightVisitor
+	extends EssentialOCLCSLeft2RightVisitor
 	implements QVTcoreBaseCSVisitor<Element>
 {
 	/**

@@ -22,7 +22,7 @@ package	org.eclipse.qvtd.xtext.qvtrelationcst.util;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLCSContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 
 /**
@@ -33,7 +33,7 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTrelationContainmentVisitor
-	extends EssentialOCLContainmentVisitor
+	extends EssentialOCLCSContainmentVisitor
 	implements QVTrelationCSVisitor<Continuation<?>>
 {
 	/**

@@ -17,7 +17,7 @@
 package org.eclipse.qvtd.xtext.qvtimperativecst;
 
 import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 
 /**
  * <!-- begin-user-doc -->

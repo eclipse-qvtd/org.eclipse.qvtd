@@ -93,7 +93,7 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 		}
 
 		public @Nullable Set<CGVariable> visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
-			return visitCGPropertyCallExp(object);
+			return visitCGOppositePropertyCallExp(object);
 		}
 
 		public @Nullable Set<CGVariable> visitCGPredicate(@NonNull CGPredicate object) {
@@ -172,7 +172,7 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 		}
 
 		public Boolean visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
-			return visitCGPropertyCallExp(object);
+			return visitCGOppositePropertyCallExp(object);
 		}
 
 		public Boolean visitCGPredicate(@NonNull CGPredicate object) {

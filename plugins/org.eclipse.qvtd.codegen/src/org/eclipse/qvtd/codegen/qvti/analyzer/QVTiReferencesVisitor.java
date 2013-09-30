@@ -68,7 +68,7 @@ public class QVTiReferencesVisitor extends ReferencesVisitor implements QVTiCGMo
 	}
 
 	public @Nullable List<Object> visitCGMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp object) {
-		return visitCGPropertyCallExp(object);
+		return visitCGOppositePropertyCallExp(object);
 	}
 
 	public @Nullable List<Object> visitCGPredicate(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate object) {

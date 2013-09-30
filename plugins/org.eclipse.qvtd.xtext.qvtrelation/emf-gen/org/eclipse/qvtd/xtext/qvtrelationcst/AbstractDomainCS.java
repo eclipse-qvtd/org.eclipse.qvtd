@@ -17,7 +17,7 @@
 package org.eclipse.qvtd.xtext.qvtrelationcst;
 
 import org.eclipse.ocl.examples.domain.elements.Nameable;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +26,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
  *
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage#getAbstractDomainCS()
- * @model abstract="true" superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS org.eclipse.ocl.examples.pivot.Nameable"
+ * @model abstract="true" superTypes="org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS org.eclipse.ocl.examples.pivot.Nameable"
  * @generated
  */
 public interface AbstractDomainCS extends ModelElementCS, Nameable {

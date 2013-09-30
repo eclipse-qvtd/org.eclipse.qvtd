@@ -64,7 +64,7 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 	}
 
 	public @Nullable String visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp object) {
-		return visitPropertyCallExp(object);
+		return visitOppositePropertyCallExp(object);
 	}
 
 	public @Nullable String visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {

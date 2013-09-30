@@ -17,7 +17,7 @@
 package org.eclipse.qvtd.xtext.qvtrelationcst.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
+import org.eclipse.ocl.examples.xtext.base.basecs.impl.ModelElementCSImpl;
 import org.eclipse.qvtd.xtext.qvtrelationcst.AbstractDomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
 

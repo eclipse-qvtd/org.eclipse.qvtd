@@ -21,9 +21,9 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.OperatorCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.OperatorCS;
 import org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcst.TemplateCS;
 
@@ -236,7 +236,7 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ExpCS.class) {
 			switch (derivedFeatureID) {
-				case QVTrelationCSTPackage.TEMPLATE_CS__PARENT: return EssentialOCLCSTPackage.EXP_CS__PARENT;
+				case QVTrelationCSTPackage.TEMPLATE_CS__PARENT: return EssentialOCLCSPackage.EXP_CS__PARENT;
 				default: return -1;
 			}
 		}
@@ -252,7 +252,7 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ExpCS.class) {
 			switch (baseFeatureID) {
-				case EssentialOCLCSTPackage.EXP_CS__PARENT: return QVTrelationCSTPackage.TEMPLATE_CS__PARENT;
+				case EssentialOCLCSPackage.EXP_CS__PARENT: return QVTrelationCSTPackage.TEMPLATE_CS__PARENT;
 				default: return -1;
 			}
 		}

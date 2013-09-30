@@ -654,25 +654,25 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		   source, 
 		   new String[] {
 			 "body", "overriden"
-		   });		
+		   });	
 		addAnnotation
 		  (getRule_Overridden(), 
 		   source, 
 		   new String[] {
 			 "body", "overriden"
-		   });		
+		   });	
 		addAnnotation
 		  (getTransformation_Extends(), 
 		   source, 
 		   new String[] {
 			 "body", "extendedBy"
-		   });		
+		   });	
 		addAnnotation
 		  (getTypedModel_DependsOn(), 
 		   source, 
 		   new String[] {
 			 "body", "dependent"
-		   });	
+		   });
 	}
 
 } //QVTbasePackageImpl

@@ -15,7 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.PropertyCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,7 +38,7 @@ import org.eclipse.ocl.examples.pivot.PropertyCallExp;
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMiddlePropertyCallExp()
  * @generated
  */
-public interface MiddlePropertyCallExp extends EObject, PropertyCallExp {
+public interface MiddlePropertyCallExp extends EObject, OppositePropertyCallExp {
 	/**
 	 * Returns the value of the '<em><b>Cache Index</b></em>' attribute.
 	 * <!-- begin-user-doc -->

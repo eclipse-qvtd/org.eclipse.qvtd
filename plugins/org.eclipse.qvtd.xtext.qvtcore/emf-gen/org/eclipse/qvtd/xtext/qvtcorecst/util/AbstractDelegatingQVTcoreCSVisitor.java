@@ -34,7 +34,7 @@ public abstract class AbstractDelegatingQVTcoreCSVisitor<R, C, D extends QVTcore
 	}
 
 	@Override
-	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.xtext.base.util.VisitableCS visitable) {
+	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS visitable) {
 		return delegate.visiting(visitable);
 	}
 

@@ -17,7 +17,7 @@
 package org.eclipse.qvtd.xtext.qvtimperativecst;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 /**

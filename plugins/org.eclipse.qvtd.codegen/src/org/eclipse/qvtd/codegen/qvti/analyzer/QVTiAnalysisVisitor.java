@@ -102,7 +102,7 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 	}
 
 	public Object visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
-		return visitCGPropertyCallExp(object);
+		return visitCGOppositePropertyCallExp(object);
 	}
 
 	public Object visitCGPredicate(@NonNull CGPredicate object) {

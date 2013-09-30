@@ -66,7 +66,7 @@ public abstract class AbstractQVTimperativeAS2XMIidVisitor
 	}
 
 	public @Nullable Boolean visitMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp object) {
-		return visitPropertyCallExp(object);
+		return visitOppositePropertyCallExp(object);
 	}
 
 	public @Nullable Boolean visitVariablePredicate(@NonNull org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate object) {

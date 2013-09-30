@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.InvocationExpCSAttribution;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.OperationFilter;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvocationExpCS;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 
 public class RelationCallExpCSAttribution extends InvocationExpCSAttribution

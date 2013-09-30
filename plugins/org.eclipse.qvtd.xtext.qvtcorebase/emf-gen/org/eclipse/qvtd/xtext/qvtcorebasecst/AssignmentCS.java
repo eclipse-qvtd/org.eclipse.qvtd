@@ -14,7 +14,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtcorebasecst;
 
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 
 /**
  * <!-- begin-user-doc -->

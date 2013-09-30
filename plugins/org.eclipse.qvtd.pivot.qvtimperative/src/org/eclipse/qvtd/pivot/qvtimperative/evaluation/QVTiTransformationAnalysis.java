@@ -74,13 +74,10 @@ public class QVTiTransformationAnalysis
 			EObject eObject = tit.next();
 			if (eObject instanceof MiddlePropertyCallExp) {
 				MiddlePropertyCallExp middlePropertyCallExp = (MiddlePropertyCallExp)eObject;
-				Property unnavigableProperty = middlePropertyCallExp.getReferredProperty();
-				if (unnavigableProperty != null) {
-					Property navigableProperty = unnavigableProperty.getOpposite();
-					if (navigableProperty != null) {
-						int cacheIndex = getCacheIndex(navigableProperty);
-						middlePropertyCallExp.setCacheIndex(cacheIndex);
-					}
+				Property navigableProperty = middlePropertyCallExp.getReferredProperty();
+				if (navigableProperty != null) {
+					int cacheIndex = getCacheIndex(navigableProperty);
+					middlePropertyCallExp.setCacheIndex(cacheIndex);
 				}
 			}
 			else if (eObject instanceof MiddlePropertyAssignment) {

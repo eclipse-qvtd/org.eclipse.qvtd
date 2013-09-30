@@ -16,7 +16,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelationcst;
 
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedElementCS;
 
 /**
  * <!-- begin-user-doc -->

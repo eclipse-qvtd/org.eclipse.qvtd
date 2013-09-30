@@ -129,7 +129,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 	}
 
 	public Object visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp object) {
-		return visitPropertyCallExp(object);
+		return visitOppositePropertyCallExp(object);
 	}
 
 	@Override

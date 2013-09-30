@@ -217,35 +217,35 @@ public class QVTiModelManager implements DomainModelManager
 	}
 
 	/**
-		 * Implemented by subclasses to determine whether the specified element
-		 * is an instance of the specified class, according to the metamodel
-		 * semantics implemented by the environment that created this extent map.
-		 *
-		 * @param type the type
-		 * @param element a potential run-time (M0) instance of that class
-		 * @return <code>true</code> if this element is an instance of the given
-		 * class; <code>false</code> otherwise
-		 */
-		protected boolean isInstance(@NonNull DomainType requiredType, @NonNull EObject eObject) {
-			EClass eClass = eObject.eClass();
-			EPackage ePackage = eClass.getEPackage();
-			Type objectType = null;
-			if (ePackage == PivotPackage.eINSTANCE) {
-				String name = DomainUtil.nonNullEMF(eClass.getName());
-				objectType = metaModelManager.getPivotType(name);
-			}
-			else {
-				try {
-					objectType = metaModelManager.getPivotOf(Type.class,  eClass);
-				} catch (ParserException e) {
-	// FIXME				if (!generatedErrorMessage) {
-	//					generatedErrorMessage = true;
-	//					logger.error("Failed to load an '" + eClass.getName() + "'", e);
-	//				}
-				}
-			}
-		    return (objectType != null) && objectType.conformsTo(metaModelManager, requiredType);
+	 * Implemented by subclasses to determine whether the specified element
+	 * is an instance of the specified class, according to the metamodel
+	 * semantics implemented by the environment that created this extent map.
+	 *
+	 * @param type the type
+	 * @param element a potential run-time (M0) instance of that class
+	 * @return <code>true</code> if this element is an instance of the given
+	 * class; <code>false</code> otherwise
+	 */
+	protected boolean isInstance(@NonNull DomainType requiredType, @NonNull EObject eObject) {
+		EClass eClass = eObject.eClass();
+		EPackage ePackage = eClass.getEPackage();
+		Type objectType = null;
+		if (ePackage == PivotPackage.eINSTANCE) {
+			String name = DomainUtil.nonNullEMF(eClass.getName());
+			objectType = metaModelManager.getPivotType(name);
 		}
+		else {
+			try {
+				objectType = metaModelManager.getPivotOf(Type.class,  eClass);
+			} catch (ParserException e) {
+// FIXME				if (!generatedErrorMessage) {
+//					generatedErrorMessage = true;
+//					logger.error("Failed to load an '" + eClass.getName() + "'", e);
+//				}
+			}
+		}
+	    return (objectType != null) && objectType.conformsTo(metaModelManager, requiredType);
+	}
 	
 	public List<EObject> getTypeModelEObjectList(TypedModel model) {
 		

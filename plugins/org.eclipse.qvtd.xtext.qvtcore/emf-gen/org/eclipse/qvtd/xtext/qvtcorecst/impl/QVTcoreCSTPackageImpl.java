@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecst.QVTcoreBaseCSTPackage;
 import org.eclipse.qvtd.xtext.qvtcorecst.MappingCS;
@@ -241,7 +241,7 @@ public class QVTcoreCSTPackageImpl extends EPackageImpl implements QVTcoreCSTPac
 		// Obtain other dependent packages
 		QVTcoreBaseCSTPackage theQVTcoreBaseCSTPackage = (QVTcoreBaseCSTPackage)EPackage.Registry.INSTANCE.getEPackage(QVTcoreBaseCSTPackage.eNS_URI);
 		QVTcorePackage theQVTcorePackage = (QVTcorePackage)EPackage.Registry.INSTANCE.getEPackage(QVTcorePackage.eNS_URI);
-		BaseCSTPackage theBaseCSTPackage = (BaseCSTPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSTPackage.eNS_URI);
+		BaseCSPackage theBaseCSTPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
 
 		// Create type parameters
 

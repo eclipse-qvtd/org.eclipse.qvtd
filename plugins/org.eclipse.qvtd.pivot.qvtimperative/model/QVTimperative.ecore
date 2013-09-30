@@ -84,7 +84,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MiddlePropertyCallExp" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//PropertyCallExp">
+  <eClassifiers xsi:type="ecore:EClass" name="MiddlePropertyCallExp" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OppositePropertyCallExp">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A MiddlePropertyCallExp identifies a property call from the middle model.&#xA;It adds an additional feature to facilitate efficient access to a cache of&#xA;non-navigable outer-to-middle opposites."/>
     </eAnnotations>

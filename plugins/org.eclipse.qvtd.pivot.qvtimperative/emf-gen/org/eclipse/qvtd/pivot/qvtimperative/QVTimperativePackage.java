@@ -110,6 +110,15 @@ public interface QVTimperativePackage extends EPackage {
 	int IMPERATIVE_MODEL__OWNED_COMMENT = QVTbasePackage.BASE_MODEL__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_MODEL__IS_STATIC = QVTbasePackage.BASE_MODEL__IS_STATIC;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -208,6 +217,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING__OWNED_COMMENT = QVTcoreBasePackage.ABSTRACT_MAPPING__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING__IS_STATIC = QVTcoreBasePackage.ABSTRACT_MAPPING__IS_STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -326,6 +344,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_CALL__OWNED_COMMENT = PivotPackage.OCL_EXPRESSION__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__IS_STATIC = PivotPackage.OCL_EXPRESSION__IS_STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -580,7 +607,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP__EXTENSION = PivotPackage.PROPERTY_CALL_EXP__EXTENSION;
+	int MIDDLE_PROPERTY_CALL_EXP__EXTENSION = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__EXTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -589,7 +616,16 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP__OWNED_COMMENT = PivotPackage.PROPERTY_CALL_EXP__OWNED_COMMENT;
+	int MIDDLE_PROPERTY_CALL_EXP__OWNED_COMMENT = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIDDLE_PROPERTY_CALL_EXP__IS_STATIC = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__IS_STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -598,7 +634,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP__NAME = PivotPackage.PROPERTY_CALL_EXP__NAME;
+	int MIDDLE_PROPERTY_CALL_EXP__NAME = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -607,7 +643,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP__OWNED_ANNOTATION = PivotPackage.PROPERTY_CALL_EXP__OWNED_ANNOTATION;
+	int MIDDLE_PROPERTY_CALL_EXP__OWNED_ANNOTATION = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -616,7 +652,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP__IS_REQUIRED = PivotPackage.PROPERTY_CALL_EXP__IS_REQUIRED;
+	int MIDDLE_PROPERTY_CALL_EXP__IS_REQUIRED = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -625,7 +661,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP__TYPE = PivotPackage.PROPERTY_CALL_EXP__TYPE;
+	int MIDDLE_PROPERTY_CALL_EXP__TYPE = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
@@ -634,7 +670,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP__IMPLICIT = PivotPackage.PROPERTY_CALL_EXP__IMPLICIT;
+	int MIDDLE_PROPERTY_CALL_EXP__IMPLICIT = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__IMPLICIT;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -643,7 +679,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP__SOURCE = PivotPackage.PROPERTY_CALL_EXP__SOURCE;
+	int MIDDLE_PROPERTY_CALL_EXP__SOURCE = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Is Pre</b></em>' attribute.
@@ -652,7 +688,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP__IS_PRE = PivotPackage.PROPERTY_CALL_EXP__IS_PRE;
+	int MIDDLE_PROPERTY_CALL_EXP__IS_PRE = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__IS_PRE;
 
 	/**
 	 * The feature id for the '<em><b>Navigation Source</b></em>' reference.
@@ -661,7 +697,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP__NAVIGATION_SOURCE = PivotPackage.PROPERTY_CALL_EXP__NAVIGATION_SOURCE;
+	int MIDDLE_PROPERTY_CALL_EXP__NAVIGATION_SOURCE = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__NAVIGATION_SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' reference list.
@@ -670,7 +706,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP__QUALIFIER = PivotPackage.PROPERTY_CALL_EXP__QUALIFIER;
+	int MIDDLE_PROPERTY_CALL_EXP__QUALIFIER = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__QUALIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
@@ -679,7 +715,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP__REFERRED_PROPERTY = PivotPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY;
+	int MIDDLE_PROPERTY_CALL_EXP__REFERRED_PROPERTY = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY;
 
 	/**
 	 * The feature id for the '<em><b>Cache Index</b></em>' attribute.
@@ -688,7 +724,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP__CACHE_INDEX = PivotPackage.PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
+	int MIDDLE_PROPERTY_CALL_EXP__CACHE_INDEX = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Middle Property Call Exp</em>' class.
@@ -697,7 +733,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP_FEATURE_COUNT = PivotPackage.PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
+	int MIDDLE_PROPERTY_CALL_EXP_FEATURE_COUNT = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.VariablePredicateImpl <em>Variable Predicate</em>}' class.

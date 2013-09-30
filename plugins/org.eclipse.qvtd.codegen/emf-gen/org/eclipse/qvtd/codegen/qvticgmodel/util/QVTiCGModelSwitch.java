@@ -21,10 +21,11 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
@@ -237,7 +238,8 @@ public class QVTiCGModelSwitch<T> extends Switch<T> {
 			case QVTiCGModelPackage.CG_MIDDLE_PROPERTY_CALL_EXP: {
 				CGMiddlePropertyCallExp cgMiddlePropertyCallExp = (CGMiddlePropertyCallExp)theEObject;
 				T result = caseCGMiddlePropertyCallExp(cgMiddlePropertyCallExp);
-				if (result == null) result = caseCGPropertyCallExp(cgMiddlePropertyCallExp);
+				if (result == null) result = caseCGOppositePropertyCallExp(cgMiddlePropertyCallExp);
+				if (result == null) result = caseCGNavigationCallExp(cgMiddlePropertyCallExp);
 				if (result == null) result = caseCGCallExp(cgMiddlePropertyCallExp);
 				if (result == null) result = caseCGValuedElement(cgMiddlePropertyCallExp);
 				if (result == null) result = caseCGTypedElement(cgMiddlePropertyCallExp);
@@ -722,17 +724,32 @@ public class QVTiCGModelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>CG Property Call Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>CG Navigation Call Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>CG Property Call Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>CG Navigation Call Exp</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCGPropertyCallExp(CGPropertyCallExp object) {
+	public T caseCGNavigationCallExp(CGNavigationCallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Opposite Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Opposite Property Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGOppositePropertyCallExp(CGOppositePropertyCallExp object) {
 		return null;
 	}
 
