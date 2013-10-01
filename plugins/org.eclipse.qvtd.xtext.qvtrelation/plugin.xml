@@ -9,7 +9,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.eclipse.org/qvt/0.9/QVTrelationCST"
-            class="org.eclipse.qvtd.xtext.qvtrelationcst.QVTrelationCSTPackage"
+            class="org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.QVTrelationCSPackage"
             genModel="model/QVTrelationCST.genmodel"/>
    </extension>
 
@@ -20,7 +20,14 @@
             class="org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSTResourceFactoryImpl"/-->
       <parser
             type="qvtrcs"
-            class="org.eclipse.qvtd.xtext.qvtrelationcst.util.QVTrelationCSTResourceFactoryImpl"/>
+            class="org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.QVTrelationCSResourceFactoryImpl"/>
    </extension>
 
+null
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated QVTrelationCS -->
+      <parser
+            type="qvtr"
+            class="org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.QVTrelationCSResourceFactoryImpl"/>
+   </extension>
 </plugin>

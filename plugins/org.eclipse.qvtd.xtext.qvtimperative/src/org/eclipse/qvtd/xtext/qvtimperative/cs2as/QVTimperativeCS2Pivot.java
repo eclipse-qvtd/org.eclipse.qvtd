@@ -32,7 +32,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtcorebase.cs2as.QVTcoreBaseCS2Pivot;
-import org.eclipse.qvtd.xtext.qvtimperativecst.MappingCS;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
 
 public class QVTimperativeCS2Pivot extends QVTcoreBaseCS2Pivot
 {	
@@ -60,22 +60,22 @@ public class QVTimperativeCS2Pivot extends QVTcoreBaseCS2Pivot
 	}
 
 	@Override
-	protected @NonNull QVTimperativeContainmentVisitor createContainmentVisitor(@NonNull CS2PivotConversion converter) {
-		return new QVTimperativeContainmentVisitor(converter);
+	protected @NonNull QVTimperativeCSContainmentVisitor createContainmentVisitor(@NonNull CS2PivotConversion converter) {
+		return new QVTimperativeCSContainmentVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull QVTimperativeLeft2RightVisitor createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
-		return new QVTimperativeLeft2RightVisitor(converter);
+	protected @NonNull QVTimperativeCSLeft2RightVisitor createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
+		return new QVTimperativeCSLeft2RightVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull QVTimperativePostOrderVisitor createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
-		return new QVTimperativePostOrderVisitor(converter);
+	protected @NonNull QVTimperativeCSPostOrderVisitor createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
+		return new QVTimperativeCSPostOrderVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull QVTimperativePreOrderVisitor createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
-		return new QVTimperativePreOrderVisitor(converter);
+	protected @NonNull QVTimperativeCSPreOrderVisitor createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
+		return new QVTimperativeCSPreOrderVisitor(converter);
 	}
 }

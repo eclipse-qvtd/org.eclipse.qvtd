@@ -21,14 +21,14 @@ import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.PivotCSAttribution;
 import org.eclipse.qvtd.xtext.qvtimperative.attributes.MappingCSAttribution;
 import org.eclipse.qvtd.xtext.qvtimperative.attributes.MappingCallBindingCSAttribution;
-import org.eclipse.qvtd.xtext.qvtimperativecst.QVTimperativeCSTPackage;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage;
 
 public class QVTimperativeScoping
 {	
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
-		registry.put(QVTimperativeCSTPackage.Literals.MAPPING_CALL_BINDING_CS, MappingCallBindingCSAttribution.INSTANCE);
-		registry.put(QVTimperativeCSTPackage.Literals.MAPPING_CALL_CS, PivotCSAttribution.INSTANCE);
-		registry.put(QVTimperativeCSTPackage.Literals.MAPPING_CS, MappingCSAttribution.INSTANCE);	// Has no eContainer to lookup eContainer.
+		registry.put(QVTimperativeCSPackage.Literals.MAPPING_CALL_BINDING_CS, MappingCallBindingCSAttribution.INSTANCE);
+		registry.put(QVTimperativeCSPackage.Literals.MAPPING_CALL_CS, PivotCSAttribution.INSTANCE);
+		registry.put(QVTimperativeCSPackage.Literals.MAPPING_CS, MappingCSAttribution.INSTANCE);	// Has no eContainer to lookup eContainer.
 	}
 }

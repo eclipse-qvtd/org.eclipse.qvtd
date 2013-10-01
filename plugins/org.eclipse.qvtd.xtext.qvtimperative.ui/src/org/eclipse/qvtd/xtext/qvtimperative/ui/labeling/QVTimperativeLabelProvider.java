@@ -8,7 +8,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.xtext.qvtcorebase.ui.labeling.QVTcoreBaseLabelProvider;
-import org.eclipse.qvtd.xtext.qvtimperativecst.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.TopLevelCS;
 
 import com.google.inject.Inject;
 

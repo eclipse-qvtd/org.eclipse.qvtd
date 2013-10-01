@@ -12,7 +12,7 @@
  *
  * </copyright>
  * 
- * Run As->MWE2 Workflow to regenerate the Xtest CST models.
+ * Run As->MWE2 Workflow to regenerate the Xtext CS models.
  */
 module GenerateQVTdCSModels
 
@@ -34,44 +34,44 @@ Workflow {
     bean = UMLGenModelSetup { resourceSet = resourceSet }
     component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.xtext.qvtcorebase"
-    	modelName = "QVTcoreBaseCST"
-    	projectPrefix = "QVTcoreBase"
+    	modelName = "qvtcorebasecs"
+    	projectPrefix = "QVTcoreBaseCS"
     	superProjectName = "org.eclipse.ocl.examples.xtext.essentialocl"
-   		superModelName = "EssentialOCLCS"
-    	superProjectPrefix = "EssentialOCL"
-    	modelPackageName = "org.eclipse.qvtd.xtext.qvtcorebasecst"
-    	visitorPackageName = "org.eclipse.qvtd.xtext.qvtcorebasecst.util"
+   		superModelName = "essentialoclcs"
+    	superProjectPrefix = "EssentialOCLCS"
+    	modelPackageName = "org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs"
+    	visitorPackageName = "org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util"
     }
     component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.xtext.qvtimperative"
-    	modelName = "QVTimperativeCST"
-    	projectPrefix = "QVTimperative"
+    	modelName = "qvtimperativecs"
+    	projectPrefix = "QVTimperativeCS"
     	superProjectName = "org.eclipse.qvtd.xtext.qvtcorebase"
-   		superModelName = "QVTcoreBaseCST"
-    	superProjectPrefix = "QVTcoreBase"
-    	modelPackageName = "org.eclipse.qvtd.xtext.qvtimperativecst"
-    	visitorPackageName = "org.eclipse.qvtd.xtext.qvtimperativecst.util"
-    	superVisitorPackageName = "org.eclipse.qvtd.xtext.qvtcorebasecst.util"
+   		superModelName = "qvtcorebasecs"
+    	superProjectPrefix = "QVTcoreBaseCS"
+    	modelPackageName = "org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs"
+    	visitorPackageName = "org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util"
+    	superVisitorPackageName = "org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util"
     }
     component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.xtext.qvtcore"
-    	modelName = "QVTcoreCST"
-    	projectPrefix = "QVTcore"
+    	modelName = "qvtcorecs"
+    	projectPrefix = "QVTcoreCS"
     	superProjectName = "org.eclipse.qvtd.xtext.qvtcorebase"
-   		superModelName = "QVTcoreBaseCST"
-    	superProjectPrefix = "QVTcoreBase"
-    	modelPackageName = "org.eclipse.qvtd.xtext.qvtcorecst"
-    	visitorPackageName = "org.eclipse.qvtd.xtext.qvtcorecst.util"
-    	superVisitorPackageName = "org.eclipse.qvtd.xtext.qvtcorebasecst.util"
+   		superModelName = "qvtcorebasecs"
+    	superProjectPrefix = "QVTcoreBaseCS"
+    	modelPackageName = "org.eclipse.qvtd.xtext.qvtcore.qvtcorecs"
+    	visitorPackageName = "org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util"
+    	superVisitorPackageName = "org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util"
     }
     component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.xtext.qvtrelation"
-    	modelName = "QVTrelationCST"
-    	projectPrefix = "QVTrelation"
+    	modelName = "qvtrelationcs"
+    	projectPrefix = "QVTrelationCS"
     	superProjectName = "org.eclipse.ocl.examples.xtext.essentialocl"
-   		superModelName = "EssentialOCLCS"
-    	superProjectPrefix = "EssentialOCL"
-    	modelPackageName = "org.eclipse.qvtd.xtext.qvtrelationcst"
-    	visitorPackageName = "org.eclipse.qvtd.xtext.qvtrelationcst.util"
+   		superModelName = "essentialoclcs"
+    	superProjectPrefix = "EssentialOCLCS"
+    	modelPackageName = "org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs"
+    	visitorPackageName = "org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util"
     }
 }

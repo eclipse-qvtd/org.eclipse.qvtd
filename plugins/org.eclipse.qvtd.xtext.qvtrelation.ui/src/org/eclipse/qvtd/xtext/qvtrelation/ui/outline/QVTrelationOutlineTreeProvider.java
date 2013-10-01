@@ -7,9 +7,9 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.xtext.qvtbase.ui.outline.QVTbaseOutlineTreeProvider;
-import org.eclipse.qvtd.xtext.qvtrelationcst.PredicateCS;
-import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtrelationcst.VarDeclarationIdCS;
+import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.VarDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.VarDeclarationIdCS;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 
 /**

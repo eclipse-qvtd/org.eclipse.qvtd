@@ -25,10 +25,10 @@ import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.QVTimperativeEnvironmentUtil;
-import org.eclipse.qvtd.xtext.qvtimperativecst.MappingCS;
-import org.eclipse.qvtd.xtext.qvtimperativecst.MappingCallBindingCS;
-import org.eclipse.qvtd.xtext.qvtimperativecst.MappingCallCS;
-import org.eclipse.qvtd.xtext.qvtimperativecst.QVTimperativeCSTPackage;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallCS;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage;
 
 public class MappingCallBindingCSAttribution extends AbstractAttribution
 {
@@ -38,7 +38,7 @@ public class MappingCallBindingCSAttribution extends AbstractAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		MappingCallBindingCS csMappingCallBinding = (MappingCallBindingCS)target;
 		EStructuralFeature targetReference = environmentView.getReference();
-		if (targetReference == QVTimperativeCSTPackage.Literals.MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE) {
+		if (targetReference == QVTimperativeCSPackage.Literals.MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE) {
 			MappingCallCS mappingCall = csMappingCallBinding.getMappingCall();
 			if (mappingCall != null) {
 				Mapping mapping = mappingCall.getReferredMapping();

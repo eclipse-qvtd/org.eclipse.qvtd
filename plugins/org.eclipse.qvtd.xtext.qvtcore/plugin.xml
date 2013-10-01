@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.eclipse.org/qvt/0.9/QVTcoreCST"
-            class="org.eclipse.qvtd.xtext.qvtcorecst.QVTcoreCSTPackage"
+            class="org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.QVTcoreCSPackage"
             genModel="model/QVTcoreCST.genmodel"/>
    </extension>
 
@@ -24,7 +24,14 @@
             class="org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSTResourceFactoryImpl"/-->
       <parser
             type="qvtccs"
-            class="org.eclipse.qvtd.xtext.qvtcorecst.util.QVTcoreCSTResourceFactoryImpl"/>
+            class="org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util.QVTcoreCSResourceFactoryImpl"/>
    </extension>
 
+null
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated QVTcoreCS -->
+      <parser
+            type="qvtc"
+            class="org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util.QVTcoreCSResourceFactoryImpl"/>
+   </extension>
 </plugin>

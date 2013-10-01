@@ -15,13 +15,13 @@ Export-Package: org.eclipse.qvtd.xtext.qvtcore,
  org.eclipse.qvtd.xtext.qvtcore.parseTreeConstruction,
  org.eclipse.qvtd.xtext.qvtcore.parser.antlr,
  org.eclipse.qvtd.xtext.qvtcore.parser.antlr.internal,
+ org.eclipse.qvtd.xtext.qvtcore.qvtcorecs,
+ org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.impl,
+ org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util,
  org.eclipse.qvtd.xtext.qvtcore.scoping,
  org.eclipse.qvtd.xtext.qvtcore.services,
  org.eclipse.qvtd.xtext.qvtcore.utilities,
- org.eclipse.qvtd.xtext.qvtcore.validation,
- org.eclipse.qvtd.xtext.qvtcorecst,
- org.eclipse.qvtd.xtext.qvtcorecst.impl,
- org.eclipse.qvtd.xtext.qvtcorecst.util
+ org.eclipse.qvtd.xtext.qvtcore.validation
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.qvtd.pivot.qvtcore;visibility:=reexport,
  org.eclipse.qvtd.xtext.qvtcorebase;visibility:=reexport

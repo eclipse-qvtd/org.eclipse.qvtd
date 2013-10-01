@@ -36,7 +36,7 @@ Workflow {
     bean = StandaloneSetup {
 		platformUri = "${QVTimperativeRuntimeProject}/.."
    		scanClassPath = true
-		registerGeneratedEPackage = "org.eclipse.qvtd.xtext.qvtimperativecst.QVTimperativeCSTPackage"
+		registerGeneratedEPackage = "org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage"
 	}
 	
 	component = DirectoryCleaner {

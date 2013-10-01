@@ -25,7 +25,7 @@ import org.eclipse.ocl.examples.xtext.base.attributes.PivotCSAttribution;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.xtext.qvtcorebasecst.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QueryCS;
 
 public class QueryCSAttribution extends PivotCSAttribution
 {

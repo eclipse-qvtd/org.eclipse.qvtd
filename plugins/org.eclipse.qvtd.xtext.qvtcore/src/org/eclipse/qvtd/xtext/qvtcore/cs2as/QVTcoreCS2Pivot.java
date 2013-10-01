@@ -32,22 +32,22 @@ public class QVTcoreCS2Pivot extends QVTcoreBaseCS2Pivot
 	}
 
 	@Override
-	protected @NonNull QVTcoreContainmentVisitor createContainmentVisitor(@NonNull CS2PivotConversion converter) {
-		return new QVTcoreContainmentVisitor(converter);
+	protected @NonNull QVTcoreCSContainmentVisitor createContainmentVisitor(@NonNull CS2PivotConversion converter) {
+		return new QVTcoreCSContainmentVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull QVTcoreLeft2RightVisitor createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
-		return new QVTcoreLeft2RightVisitor(converter);
+	protected @NonNull QVTcoreCSLeft2RightVisitor createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
+		return new QVTcoreCSLeft2RightVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull QVTcorePostOrderVisitor createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
-		return new QVTcorePostOrderVisitor(converter);
+	protected @NonNull QVTcoreCSPostOrderVisitor createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
+		return new QVTcoreCSPostOrderVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull QVTcorePreOrderVisitor createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
-		return new QVTcorePreOrderVisitor(converter);
+	protected @NonNull QVTcoreCSPreOrderVisitor createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
+		return new QVTcoreCSPreOrderVisitor(converter);
 	}
 }

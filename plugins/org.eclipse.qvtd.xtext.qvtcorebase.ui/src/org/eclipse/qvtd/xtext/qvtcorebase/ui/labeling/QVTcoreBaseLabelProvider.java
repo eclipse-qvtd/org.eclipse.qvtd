@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtbase.ui.labeling.QVTbaseLabelProvider;
-import org.eclipse.qvtd.xtext.qvtcorebasecst.DomainCS;
+import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.DomainCS;
 
 import com.google.inject.Inject;
 

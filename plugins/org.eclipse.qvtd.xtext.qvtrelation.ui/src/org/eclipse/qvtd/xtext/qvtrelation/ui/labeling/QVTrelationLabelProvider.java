@@ -22,7 +22,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.xtext.qvtbase.ui.labeling.QVTbaseLabelProvider;
-import org.eclipse.qvtd.xtext.qvtrelationcst.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.TopLevelCS;
 
 import com.google.inject.Inject;
 
