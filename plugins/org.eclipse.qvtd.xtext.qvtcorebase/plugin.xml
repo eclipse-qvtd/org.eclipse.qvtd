@@ -10,7 +10,7 @@
 
 <plugin>
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated QVTcoreBaseCST -->
+      <!-- @generated QVTcoreBaseCS -->
       <package
             uri="http://www.eclipse.org/qvt/0.9/QVTcoreBaseCST"
             class="org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QVTcoreBaseCSPackage"
@@ -18,17 +18,10 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
-      <!-- @generated QVTcoreBaseCS -->
-      <parser
-            type="qvtcb"
-            class="org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util.QVTcoreBaseCSResourceFactoryImpl"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.extension_parser">
-      <!-- @generated QVTcoreBaseCST NOT-->
+      <!-- @generated QVTcoreBaseCS NOT-->
       <!--parser
             type="qvtcb"
-            class="org.eclipse.qvtd.xtext.qvtcorebasecst.util.QVTcoreBaseCSTResourceFactoryImpl"/-->
+            class="org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util.QVTcoreBaseCSTResourceFactoryImpl"/-->
       <parser
             type="qvtcbcs"
             class="org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util.QVTcoreBaseCSResourceFactoryImpl"/>
