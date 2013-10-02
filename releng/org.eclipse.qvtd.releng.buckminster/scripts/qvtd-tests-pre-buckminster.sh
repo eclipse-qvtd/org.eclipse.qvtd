@@ -59,6 +59,7 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "javadoc.base=MMT-QVTd.javadoc"
 	echo "version=0.11.0"
 	echo "downloads.area=/home/data/httpd/download.eclipse.org/mmt/qvtd"
+	echo "generateSourceReferences=true"
 
 
 } > buildroot/build.properties
