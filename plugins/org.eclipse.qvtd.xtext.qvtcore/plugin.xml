@@ -21,7 +21,7 @@
       <!-- @generated QVTcoreCS NOT-->
       <!--parser
             type="qvtc"
-            class="org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util.QVTcoreCSTResourceFactoryImpl"/-->
+            class="org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util.QVTcoreCSResourceFactoryImpl"/-->
       <parser
             type="qvtccs"
             class="org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util.QVTcoreCSResourceFactoryImpl"/>

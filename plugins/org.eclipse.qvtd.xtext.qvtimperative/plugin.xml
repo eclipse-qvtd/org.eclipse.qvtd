@@ -21,7 +21,7 @@
       <!-- @generated QVTimperativeCS NOT-->
       <!--parser
             type="qvti"
-            class="org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.QVTimperativeCSTResourceFactoryImpl"/-->
+            class="org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.QVTimperativeCSResourceFactoryImpl"/-->
       <parser
             type="qvtics"
             class="org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.QVTimperativeCSResourceFactoryImpl"/>
