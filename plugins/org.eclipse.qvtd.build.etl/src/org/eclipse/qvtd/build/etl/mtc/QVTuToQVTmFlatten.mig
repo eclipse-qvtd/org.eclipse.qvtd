@@ -1,0 +1,55 @@
+import "Helpers.eol";
+import "OclLibHelper.eol";
+
+/* The Flock migration performs a coarse migration, duplicate removal, type
+   specialization.
+*/
+
+// Refinned mappings
+migrate Mapping
+    when : original.refinement.isDefined() {
+        
+        migrated.refinement = null;
+        // Nested mappings with no domains
+        // TODO nested mappings should be a recursive search
+        var domainlessNestedMappings = orginal.refinement.local.select(nm | nm.domain.size() == 0);
+        migrated.local.addAll(domainlessNestedMappings);
+    }
+    
+// Refinned mapping's Patterns
+migrate CorePattern
+    when : original.area.isTypeOf(Mapping)
+            and original.area.refinement.isDefined() {
+        migrated.variable.add(original.refinement.variable);
+        migrated.predicate.add(original.refinement.predicate);
+    }
+
+migrate BottomPattern
+    when : original.area.isTypeOf(Mapping)
+            and original.area.refinement.isDefined() {
+        //migrated.variable.add(original.refinement.variable);
+        //migrated.predicate.add(original.refinement.predicate);
+        migrated.assignment.add(original.refinement.assignment);
+        migrated.enforcementOperation.add(original.refinement.enforcementOperation);
+        migrated.realizedVariables.add(original.refinement.realizedVariables);
+    }
+    
+// Refinned mapping's Domain's Patterns
+migrate CorePattern
+    when : original.area.isTypeOf(CoreDomain)
+            and original.area.rule.refinement.isDefined() {
+        migrated.variable.add(original.refinement.guardPattern.variable);
+        migrated.predicate.add(original.refinement.guardPattern.predicate);
+        
+    }
+
+migrate BottomPattern
+    when : original.area.isTypeOf(CoreDomain)
+            and original.area.rule.refinement.isDefined() {
+        //migrated.variable.add(original.refinement.variable);
+        //migrated.predicate.add(original.refinement.predicate);
+        migrated.assignment.add(original.refinement.assignment);
+        migrated.enforcementOperation.add(original.refinement.enforcementOperation);
+        migrated.realizedVariables.add(original.refinement.realizedVariables);
+        
+    }  

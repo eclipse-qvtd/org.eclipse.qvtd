@@ -1,0 +1,108 @@
+import "Helpers.eol";
+import "OclLibHelper.eol";
+
+// First merge so duplicates may appear
+mergeMiddlePatterns();
+removeDuplicateVariables();
+mergeVariablesWithKindOfTypes();
+
+// Check for duplicate variable declarations and leave only one.
+operation removeDuplicateVariables() {
+    // Variables
+    for (cp in QVTu!CorePattern.all) {
+        // Delete duplicate vars
+        var duplicates : Set();
+        for (v in cp.variable) {
+            if (cp.variable.excluding(v).one(v2 |
+                    v2.name == v.name and v2.type == v.type)) {
+                duplicates.add(v.name);
+                }
+        }
+        for (v in duplicates) {
+            cp.variable.remove(cp.variable.selectOne(v2 |
+                    v2.name == v));
+        }
+    }
+    // RealizedVariables
+    for (bp in QVTu!BottomPattern.all) {
+        // Delete duplicate vars
+        var duplicates : Set();
+        for (v in bp.realizedVariable) {
+            if (bp.realizedVariable.excluding(v).one(v2 |
+                    v2.name == v.name and v2.type == v.type)) {
+                duplicates.add(v.name);
+                }
+        }
+        for (v in duplicates) {
+            bp.realizedVariable.remove(bp.realizedVariable.selectOne(v2 |
+                    v2.name == v));
+        }
+    }
+}
+
+
+// Check for variable declarations with types in the same hierarchy and leave the
+// lowest (less abstract) one
+// TODO in the general case we could have multiple vars, not just pairs 
+operation mergeVariablesWithKindOfTypes() {
+    // Variables should have the same name and diffferent type
+    // Variables
+    for (cp in QVTu!CorePattern.all) {
+        // Duplicate vars
+        var duplicates : Set();
+        for (v in cp.variable) {
+            if (cp.variable.excluding(v).one(v2 | v2.name == v.name)) {
+                duplicates.add(v.name);
+            }
+        }
+        for (v in duplicates) {
+            var pairs = cp.variable.select(v2 |
+                    v2.name == v);
+            if (pairs.first().isKindOf(pairs.last().type())) {
+                // The first is the more concrete class, delete the last
+                cp.variable.remove(pairs.last());
+            } else if (pairs.last().isKindOf(pairs.first().type())) {
+                // The last is the more concrete class, delete the first
+                cp.variable.remove(pairs.first());
+            }
+        }
+    }
+    // RealizedVariables
+    for (bp in QVTu!BottomPattern.all) {
+        // Duplicate vars
+        var duplicates : Set();
+        for (v in cp.realizedVariable) {
+            if (bp.realizedVariable.excluding(v).one(v2 | v2.name == v.name)) {
+                duplicates.add(v.name);
+            }
+        }
+        for (v in duplicates) {
+            var pairs = bp.realizedVariable.select(v2 |
+                    v2.name == v);
+            if (pairs.first().isKindOf(pairs.last().type())) {
+                // The first is the more concrete class, delete the last
+                bp.realizedVariable.remove(pairs.last());
+            } else if (pairs.last().isKindOf(pairs.first().type())) {
+                // The last is the more concrete class, delete the first
+                bp.realizedVariable.remove(pairs.first());
+            }
+        }
+    }
+}
+
+// Merge nested mappings with no domains.
+operation mergeMiddlePatterns() {
+    for (m in QVTu!Mapping.all) {
+        var guardPatterns;
+        var bottomPatterns;
+        for (nm in m.local.select(nm | nm.domain.size() == 0)) {
+            guardPatterns.add(nm.guardPattern);
+            bottomPatterns.add(nm.bottomPattern);
+        }
+        m.local.remove(nm | nm.domain.size() == 0);
+        var nm : QVTu!Mapping;
+        nm.guardPattern = guardPatterns;
+        nm.bottomPattern = bottomPatterns;
+        m.local.add(nm);
+    }
+}
