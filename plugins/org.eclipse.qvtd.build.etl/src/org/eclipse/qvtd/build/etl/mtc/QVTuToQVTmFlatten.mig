@@ -53,3 +53,12 @@ migrate BottomPattern
         migrated.realizedVariables.add(original.refinement.realizedVariables);
         
     }  
+    
+// Move variable declarations and predicates in the input domain BottomPattern to the GuardPattern.
+migrate CoreDomain
+    when : isInputDomain(original) {
+        migrated.guardPattern.variable.addAll(original.bottomPattern.variable);
+        migrated.guardPattern.predicate.addAll(original.predicate.variable);
+        delete original.bottomPattern.variable;
+        delete original.guardPattern.predicate;
+    }

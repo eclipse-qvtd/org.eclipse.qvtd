@@ -1,3 +1,6 @@
+import "Helpers.eol";
+import "OclLibHelper.eol";
+
 // Realized variables in the input domain are retyed into variables
 retype RealizedVariable to Variable
     when : isInputDomain(original.oppositeBottomPattern().area)
@@ -65,9 +68,3 @@ migrate PropertyAssignment
     
     migrated.isDefault = false;
 }
-
-// Move variable declarations and predicates in the input domain BottomPattern to the GuardPattern.
-migrate Variable
-    when : original.oppositePattern().isTypeOf(BottomPattern) and isInputDomain(original.oppositePattern().area) {
-        migrated.
-    }
