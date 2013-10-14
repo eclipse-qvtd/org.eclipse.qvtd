@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<project default="UmlToRdbms">
+	
+    <target name="Graph2Minimal">
+		<ant antfile="ExecuteMtc.xml">
+            <property file="models/GraphToGraphMinimal/build.properties"/>
+        </ant>
+    </target>
+
+    <target name="UmlToRdbms" depends="Graph2Minimal">
+        <ant antfile="ExecuteMtc.xml">
+            <property file="models/UmlToRdbms/build.properties"/> 
+        </ant>
+    </target>
+</project>

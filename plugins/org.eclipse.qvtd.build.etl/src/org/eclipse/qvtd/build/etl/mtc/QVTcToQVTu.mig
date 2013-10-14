@@ -1,7 +1,7 @@
 import "Helpers.eol";
 import "OclLibHelper.eol";
 
-// Realized variables in the input domain are retyed into variables
+// Realized variables in the input domain are retyped into variables
 retype RealizedVariable to Variable
     when : isInputDomain(original.oppositeBottomPattern().area)
 

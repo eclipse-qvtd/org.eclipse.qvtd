@@ -5,8 +5,10 @@
 	<property name="QVTcToQVTuFlock" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTu.mig"/>
 	<property name="OclLibURI" value="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas"/>
 		
+	 
 	<!-- Test Properties -->
-	<property file="build.properties"/>
+	<!-- <property file="build.properties"/> 
+	   (loaded by each test) -->
     
     <target name="loadModels">
         <!-- OCL Library -->
@@ -43,7 +45,7 @@
 		</epsilon.eol>
 	</target>
 	
-	<target name="main" depends="loadModels">
+	<target name="main" depends="prunning">
 	    <epsilon.flock originalmodel="QVTc" migratedmodel="QVTu" uri="${QVTcToQVTuFlock}">
 	        <model ref="QVTc"/>
 	    	<model ref="QVTu"/>
