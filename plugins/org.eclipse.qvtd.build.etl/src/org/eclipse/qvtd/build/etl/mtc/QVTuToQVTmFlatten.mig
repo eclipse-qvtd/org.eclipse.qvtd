@@ -12,7 +12,7 @@ migrate Mapping
         migrated.refinement = null;
         // Nested mappings with no domains
         // TODO nested mappings should be a recursive search
-        var domainlessNestedMappings = orginal.refinement.local.select(nm | nm.domain.size() == 0);
+        var domainlessNestedMappings = original.refinement.local.select(nm | nm.domain.size() == 0);
         migrated.local.addAll(domainlessNestedMappings);
     }
     

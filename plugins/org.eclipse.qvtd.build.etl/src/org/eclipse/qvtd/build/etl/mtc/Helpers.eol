@@ -1,12 +1,12 @@
 @chached
-operation isInputDomain(area : QVTc!Area) : Boolean {
-    return area.isTypeOf(QVTc!CoreDomain) and
+operation isInputDomain(area : QVT!Area) : Boolean {
+    return area.isTypeOf(QVT!CoreDomain) and
         config!Configuration.all.first().inputDirection.name == area.typedModel.name;
 }
 
 @chached
-operation isMiddleDomain(area : QVTc!Area) : Boolean {
-    return area.isTypeOf(QVTc!Mapping);
+operation isMiddleDomain(area : QVT!Area) : Boolean {
+    return area.isTypeOf(QVT!Mapping);
 }
 
 operation isCheckMode() : Boolean {
@@ -18,16 +18,35 @@ operation isEnforceMode() : Boolean {
 }
 
 @cached
-operation QVTc!RealizedVariable oppositeBottomPattern() : QVTc!BottomPattern  {
-    return QVTc!BottomPattern.all.selectOne(p |p.realizedVariable.includes(self)); }
+operation QVT!RealizedVariable oppositeBottomPattern() : QVT!BottomPattern  {
+    return QVT!BottomPattern.all.selectOne(p |p.realizedVariable.includes(self)); }
 
 @cached
-operation QVTc!Variable oppositePattern() : QVTc!CorePattern  {
+operation QVT!Variable oppositePattern() : QVT!CorePattern  {
     
-    if(self.isTypeOf(QVTc!Variable)) {
-        return QVTc!CorePattern.all.selectOne(p |p.variable.includes(self));
+    if(self.isTypeOf(QVT!Variable)) {
+        return QVT!CorePattern.all.selectOne(p |p.variable.includes(self));
     }
-    if (self.isTypeOf(QVTc!RealizedVariable)) {
+    if (self.isTypeOf(QVT!RealizedVariable)) {
         return self.oppositeBottomPattern();
     }     
+}
+
+// How to find the domain of an OCL expression? It depends on the expression.. but it can get nasty
+@cached
+operation QVT!OCLExpression getArea() : QVT!Area {
+    //var area : QVT!Area;
+    if (self.isTypeOf(QVT!VariableExp)) {
+        return self.referredVariable.oppositePattern().area;
+    } else if (self.isKindOf(QVT!CallExp)) {
+        return self.source.getArea();
+    } else if (self.isTypeOf(QVT!IfExp)) {
+        return self.condition.getArea();
+    } else if (self.isKindOf(QVT!LiteralExp)) {
+        return null;
+    } else {
+        self.println();
+        throw "Error! Add getArea for " + self.type();
+    }
+    return null;
 }

@@ -1,6 +1,23 @@
 import "Helpers.eol";
 import "OclLibHelper.eol";
 
+
+// TODO Check that if the slot expression area is Null, the test is correct
+// Output domain to middle assignments are removed, iif the value expression
+// is not a variable
+@cascade
+delete PropertyAssignment
+    when : isMiddleDomain(original.slotExpression.getArea())
+        and not original.value.isTypeOf(QVTc!VariableExp)
+        and not isInputDomain(original.value.getArea())
+
+// Middle domian to input assigments are removed
+@cascade
+delete PropertyAssignment
+    when : isInputDomain(original.slotExpression.getArea())
+        and isMiddleDomain(original.value.getArea())
+
+
 // Realized variables in the input domain are retyped into variables
 retype RealizedVariable to Variable
     when : isInputDomain(original.oppositeBottomPattern().area)
@@ -15,11 +32,6 @@ migrate CoreDomain
 	    
 	    migrated.isCheckable = false;
 	    migrated.isEnforceable = false;
-	    // We need to know the bottom pattern of all RealizedVariables in 
-	    // the input domain
-	    for (rv in original.bottomPattern.realizedVariable) {
-	       rv.~bottomPattern = original.bottomPattern;
-	    }
     }
 
 // Output Domain(s)
@@ -36,10 +48,10 @@ migrate CoreDomain
 // Make sure variables and predicates are contained in the pattern    
 migrate BottomPattern 
     when : isInputDomain(original.area) {
-    migrated.variable = original.realizedVariable.equivalent();
-    for (a in  original.assignment) {
-        migrated.predicate.add(a.equivalent());
-    }
+	    migrated.variable.addAll(original.realizedVariable.equivalent());
+	    for (a in  original.assignment) {
+	        migrated.predicate.add(a.equivalent());
+	    }
 }
     
 migrate PropertyAssignment
@@ -67,4 +79,8 @@ migrate PropertyAssignment
         and original.isDefault {
     
     migrated.isDefault = false;
+}
+
+post {
+    "QVtc to QVTu done".println();
 }

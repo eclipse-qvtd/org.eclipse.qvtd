@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
-<project default="main">
+<project default="QvtuToQvtmFlattening">
 	<!-- Default Properties -->
+	<property name="OclLibURI" value="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas"/>
 	<property name="QVTcToQVTuPruning" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTuPruning.eol"/>
 	<property name="QVTcToQVTuFlock" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTu.mig"/>
-	<property name="OclLibURI" value="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas"/>
-		
-	 
-	<!-- Test Properties -->
-	<!-- <property file="build.properties"/> 
-	   (loaded by each test) -->
+	<property name="QVTuToQVTmFlatten" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTuToQVTmFlatten.mig"/>
+	
     
+	<!-- Create for each example/test -->
+	<property file="build.properties"/>
+	
     <target name="loadModels">
         <!-- OCL Library -->
 	    <epsilon.emf.loadModel
@@ -36,8 +36,15 @@
            modelFile = "${qvtuas}" 
            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
            read="false" store="true"/>
+    	<!-- QVTm Flatten Transformation -->
+        <epsilon.emf.loadModel
+           name = "QVTmFlatten"
+           modelFile = "${qvtmflattenas}" 
+           metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+           read="false" store="true"/>
 	</target>
 	
+	<!-- Prunning required til Epsilon SVN r2411 goes live -->
 	<target name ="prunning" depends="loadModels">
 		<epsilon.eol uri="${QVTcToQVTuPruning}" >
 			<model ref="QVTc"/>
@@ -45,7 +52,7 @@
 		</epsilon.eol>
 	</target>
 	
-	<target name="main" depends="prunning">
+	<target name="QvtcToQvtu" depends="prunning">
 	    <epsilon.flock originalmodel="QVTc" migratedmodel="QVTu" uri="${QVTcToQVTuFlock}">
 	        <model ref="QVTc"/>
 	    	<model ref="QVTu"/>
@@ -53,5 +60,14 @@
 	    	<model ref="oclStdLib"/>
 		</epsilon.flock>
 	</target>
+	
+	<target name="QvtuToQvtmFlattening" depends="QvtcToQvtu">
+        <epsilon.flock originalmodel="QVTu" migratedmodel="QVTmFlatten" uri="${QVTuToQVTmFlatten}">
+            <model ref="QVTu"/>
+            <model ref="QVTmFlatten"/>
+            <model ref="config"/>
+            <model ref="oclStdLib"/>
+        </epsilon.flock>
+    </target>
 	
 </project>

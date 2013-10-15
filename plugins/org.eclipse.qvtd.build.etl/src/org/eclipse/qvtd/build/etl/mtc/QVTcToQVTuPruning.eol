@@ -1,6 +1,7 @@
 import "Helpers.eol";
 
 main();
+("Prunning done").print();
 
 operation main() {
 	// Prune PropertyAssignment
