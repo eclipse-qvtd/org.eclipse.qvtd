@@ -80,7 +80,3 @@ migrate PropertyAssignment
     
     migrated.isDefault = false;
 }
-
-post {
-    "QVtc to QVTu done".println();
-}
