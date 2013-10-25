@@ -25,6 +25,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -32,6 +33,7 @@ import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -143,7 +145,14 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 			if (pKey != null) {
 				pKey.setIdentifies(csElement.getClassId());
 				PivotUtil.refreshList(pKey.getPart(), csElement.getPropertyIds());
-//				PivotUtil.refreshList(pKey.getOppositePart(), csElement.getPropertyId());
+				List<Property> oppositePart = new ArrayList<Property>();
+				for (PathNameCS oppositePropertyId : csElement.getOppositePropertyIds()) {
+					Element element = oppositePropertyId.getElement();
+					if (element instanceof Property) {
+						oppositePart.add((Property) element);
+					}
+				}
+				PivotUtil.refreshList(pKey.getOppositePart(), oppositePart);
 			}
 			return null;
 		}
@@ -335,6 +344,11 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	public Continuation<?> visitKeyDeclCS(@NonNull KeyDeclCS csElement) {
 		PathNameCS csPathName = DomainUtil.nonNullState(csElement.getPathName());
 		CS2Pivot.setElementType(csPathName, PivotPackage.Literals.CLASS, csElement, null);
+		for (PathNameCS csOppositePropertyId : csElement.getOppositePropertyIds()) {
+			if (csOppositePropertyId != null) {
+				CS2Pivot.setElementType(csOppositePropertyId, PivotPackage.Literals.PROPERTY, csElement, null);
+			}
+		}
 		@SuppressWarnings("unused")
 		Key pivotElement = context.refreshModelElement(Key.class, QVTrelationPackage.Literals.KEY, csElement);
 		return new KeyDeclContentContinuation(context, csElement);
@@ -415,6 +429,10 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 
 	@Override
 	public Continuation<?> visitPropertyTemplateCS(@NonNull PropertyTemplateCS csElement) {
+		PathNameCS csOppositePropertyId = csElement.getOppositePropertyId();
+		if (csOppositePropertyId != null) {
+			CS2Pivot.setElementType(csOppositePropertyId, PivotPackage.Literals.PROPERTY, csElement, null);
+		}
 		PropertyTemplateItem pivotElement = context.refreshModelElement(PropertyTemplateItem.class, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM, csElement);
 		if (pivotElement != null) {
 			ExpCS csExp = csElement.getExpression();

@@ -43,7 +43,10 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getCollectionTemplateCSAccess().getAlternatives_4_3(), "rule__CollectionTemplateCS__Alternatives_4_3");
 					put(grammarAccess.getDomainCSAccess().getAlternatives_0(), "rule__DomainCS__Alternatives_0");
 					put(grammarAccess.getElementTemplateCSAccess().getAlternatives(), "rule__ElementTemplateCS__Alternatives");
+					put(grammarAccess.getKeyDeclCSAccess().getAlternatives_3(), "rule__KeyDeclCS__Alternatives_3");
+					put(grammarAccess.getKeyDeclCSAccess().getAlternatives_4_1(), "rule__KeyDeclCS__Alternatives_4_1");
 					put(grammarAccess.getModelDeclCSAccess().getAlternatives_2(), "rule__ModelDeclCS__Alternatives_2");
+					put(grammarAccess.getPropertyTemplateCSAccess().getAlternatives_0(), "rule__PropertyTemplateCS__Alternatives_0");
 					put(grammarAccess.getQueryCSAccess().getAlternatives_7(), "rule__QueryCS__Alternatives_7");
 					put(grammarAccess.getRelationCSAccess().getAlternatives_6(), "rule__RelationCS__Alternatives_6");
 					put(grammarAccess.getTemplateCSAccess().getAlternatives_0(), "rule__TemplateCS__Alternatives_0");
@@ -84,7 +87,9 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDomainCSAccess().getGroup_5(), "rule__DomainCS__Group_5__0");
 					put(grammarAccess.getElementTemplateCSAccess().getGroup_1(), "rule__ElementTemplateCS__Group_1__0");
 					put(grammarAccess.getKeyDeclCSAccess().getGroup(), "rule__KeyDeclCS__Group__0");
+					put(grammarAccess.getKeyDeclCSAccess().getGroup_3_1(), "rule__KeyDeclCS__Group_3_1__0");
 					put(grammarAccess.getKeyDeclCSAccess().getGroup_4(), "rule__KeyDeclCS__Group_4__0");
+					put(grammarAccess.getKeyDeclCSAccess().getGroup_4_1_1(), "rule__KeyDeclCS__Group_4_1_1__0");
 					put(grammarAccess.getLibraryCSAccess().getGroup(), "rule__LibraryCS__Group__0");
 					put(grammarAccess.getModelDeclCSAccess().getGroup(), "rule__ModelDeclCS__Group__0");
 					put(grammarAccess.getModelDeclCSAccess().getGroup_2_1(), "rule__ModelDeclCS__Group_2_1__0");
@@ -96,6 +101,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPredicateCSAccess().getGroup(), "rule__PredicateCS__Group__0");
 					put(grammarAccess.getPrimitiveTypeDomainCSAccess().getGroup(), "rule__PrimitiveTypeDomainCS__Group__0");
 					put(grammarAccess.getPropertyTemplateCSAccess().getGroup(), "rule__PropertyTemplateCS__Group__0");
+					put(grammarAccess.getPropertyTemplateCSAccess().getGroup_0_1(), "rule__PropertyTemplateCS__Group_0_1__0");
 					put(grammarAccess.getQueryCSAccess().getGroup(), "rule__QueryCS__Group__0");
 					put(grammarAccess.getQueryCSAccess().getGroup_3(), "rule__QueryCS__Group_3__0");
 					put(grammarAccess.getQueryCSAccess().getGroup_3_1(), "rule__QueryCS__Group_3_1__0");
@@ -205,8 +211,10 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDomainPatternCSAccess().getTemplateAssignment(), "rule__DomainPatternCS__TemplateAssignment");
 					put(grammarAccess.getElementTemplateCSAccess().getNameAssignment_0(), "rule__ElementTemplateCS__NameAssignment_0");
 					put(grammarAccess.getKeyDeclCSAccess().getPathNameAssignment_1(), "rule__KeyDeclCS__PathNameAssignment_1");
-					put(grammarAccess.getKeyDeclCSAccess().getPropertyIdsAssignment_3(), "rule__KeyDeclCS__PropertyIdsAssignment_3");
-					put(grammarAccess.getKeyDeclCSAccess().getPropertyIdsAssignment_4_1(), "rule__KeyDeclCS__PropertyIdsAssignment_4_1");
+					put(grammarAccess.getKeyDeclCSAccess().getPropertyIdsAssignment_3_0(), "rule__KeyDeclCS__PropertyIdsAssignment_3_0");
+					put(grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsAssignment_3_1_2(), "rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_2");
+					put(grammarAccess.getKeyDeclCSAccess().getPropertyIdsAssignment_4_1_0(), "rule__KeyDeclCS__PropertyIdsAssignment_4_1_0");
+					put(grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsAssignment_4_1_1_2(), "rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_2");
 					put(grammarAccess.getLibraryCSAccess().getPackageAssignment_1(), "rule__LibraryCS__PackageAssignment_1");
 					put(grammarAccess.getModelDeclCSAccess().getNameAssignment_0(), "rule__ModelDeclCS__NameAssignment_0");
 					put(grammarAccess.getModelDeclCSAccess().getMetaModelIdsAssignment_2_0(), "rule__ModelDeclCS__MetaModelIdsAssignment_2_0");
@@ -221,7 +229,8 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPredicateCSAccess().getExprAssignment_0(), "rule__PredicateCS__ExprAssignment_0");
 					put(grammarAccess.getPrimitiveTypeDomainCSAccess().getNameAssignment_2(), "rule__PrimitiveTypeDomainCS__NameAssignment_2");
 					put(grammarAccess.getPrimitiveTypeDomainCSAccess().getTypeAssignment_4(), "rule__PrimitiveTypeDomainCS__TypeAssignment_4");
-					put(grammarAccess.getPropertyTemplateCSAccess().getPropertyIdAssignment_0(), "rule__PropertyTemplateCS__PropertyIdAssignment_0");
+					put(grammarAccess.getPropertyTemplateCSAccess().getPropertyIdAssignment_0_0(), "rule__PropertyTemplateCS__PropertyIdAssignment_0_0");
+					put(grammarAccess.getPropertyTemplateCSAccess().getOppositePropertyIdAssignment_0_1_2(), "rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_2");
 					put(grammarAccess.getPropertyTemplateCSAccess().getExpressionAssignment_2(), "rule__PropertyTemplateCS__ExpressionAssignment_2");
 					put(grammarAccess.getQueryCSAccess().getNameAssignment_1(), "rule__QueryCS__NameAssignment_1");
 					put(grammarAccess.getQueryCSAccess().getInputParamDeclarationsAssignment_3_0(), "rule__QueryCS__InputParamDeclarationsAssignment_3_0");

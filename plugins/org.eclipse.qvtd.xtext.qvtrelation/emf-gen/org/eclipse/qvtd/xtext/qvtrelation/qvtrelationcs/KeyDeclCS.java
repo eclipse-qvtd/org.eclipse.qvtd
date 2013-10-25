@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.KeyDeclCS#getPathName <em>Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.KeyDeclCS#getPropertyIds <em>Property Ids</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.KeyDeclCS#getOppositePropertyIds <em>Opposite Property Ids</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.KeyDeclCS#getClassId <em>Class Id</em>}</li>
  * </ul>
  * </p>
@@ -81,6 +82,22 @@ public interface KeyDeclCS extends ModelElementCS {
 	 * @generated
 	 */
 	EList<Property> getPropertyIds();
+
+	/**
+	 * Returns the value of the '<em><b>Opposite Property Ids</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Opposite Property Ids</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Opposite Property Ids</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.QVTrelationCSPackage#getKeyDeclCS_OppositePropertyIds()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<PathNameCS> getOppositePropertyIds();
 
 	/**
 	 * Returns the value of the '<em><b>Class Id</b></em>' reference.

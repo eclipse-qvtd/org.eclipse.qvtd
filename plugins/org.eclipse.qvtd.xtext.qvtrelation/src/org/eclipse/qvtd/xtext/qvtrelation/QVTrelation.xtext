@@ -48,7 +48,13 @@ DomainPatternCS: template=TemplateCS;
 
 ElementTemplateCS: name=UnrestrictedName | {ElementTemplateCS} '_';
 
-KeyDeclCS: 'key' pathName=PathNameCS '{' propertyIds+=[pivot::Property|UnrestrictedName] (',' propertyIds+=[pivot::Property|UnrestrictedName])* '}' ';';
+KeyDeclCS: 'key' pathName=PathNameCS '{'
+	(propertyIds+=[pivot::Property|UnrestrictedName]
+	| ('opposite' '(' oppositePropertyIds+=PathNameCS ')'))
+	(',' (propertyIds+=[pivot::Property|UnrestrictedName]
+	| ('opposite' '(' oppositePropertyIds+=PathNameCS ')'))
+	)* '}' ';'
+;
 
 LibraryCS returns base::LibraryCS:
 	'library' package=[pivot::Package|URI] ';';
@@ -66,7 +72,9 @@ PredicateCS: expr=ExpCS ';';
 
 PrimitiveTypeDomainCS: 'primitive' 'domain' name=UnrestrictedName ':' type=TypedRefCS ';';
 
-PropertyTemplateCS: propertyId=[pivot::Property|UnrestrictedName] '=' expression=ExpCSOrTemplateCS;
+PropertyTemplateCS: (propertyId=[pivot::Property|UnrestrictedName]
+	| ('opposite' '(' oppositePropertyId=PathNameCS ')'))
+	'=' expression=ExpCSOrTemplateCS;
 		
 QueryCS: 'query' name=UnrestrictedName 
             '(' (inputParamDeclarations+=ParamDeclarationCS (',' inputParamDeclarations+=ParamDeclarationCS)*)? ')'
@@ -138,6 +146,7 @@ UnrestrictedName returns ecore::EString:
 |   'import'
 |   'library'
 |   'key'
+|   'opposite'
 |   'overrides'
 |   'primitive'
 |   'query'

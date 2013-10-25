@@ -376,24 +376,40 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cPathNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cPathNamePathNameCSParserRuleCall_1_0 = (RuleCall)cPathNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cPropertyIdsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cPropertyIdsPropertyCrossReference_3_0 = (CrossReference)cPropertyIdsAssignment_3.eContents().get(0);
-		private final RuleCall cPropertyIdsPropertyUnrestrictedNameParserRuleCall_3_0_1 = (RuleCall)cPropertyIdsPropertyCrossReference_3_0.eContents().get(1);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Assignment cPropertyIdsAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
+		private final CrossReference cPropertyIdsPropertyCrossReference_3_0_0 = (CrossReference)cPropertyIdsAssignment_3_0.eContents().get(0);
+		private final RuleCall cPropertyIdsPropertyUnrestrictedNameParserRuleCall_3_0_0_1 = (RuleCall)cPropertyIdsPropertyCrossReference_3_0_0.eContents().get(1);
+		private final Group cGroup_3_1 = (Group)cAlternatives_3.eContents().get(1);
+		private final Keyword cOppositeKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_3_1_1 = (Keyword)cGroup_3_1.eContents().get(1);
+		private final Assignment cOppositePropertyIdsAssignment_3_1_2 = (Assignment)cGroup_3_1.eContents().get(2);
+		private final RuleCall cOppositePropertyIdsPathNameCSParserRuleCall_3_1_2_0 = (RuleCall)cOppositePropertyIdsAssignment_3_1_2.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3_1_3 = (Keyword)cGroup_3_1.eContents().get(3);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cPropertyIdsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final CrossReference cPropertyIdsPropertyCrossReference_4_1_0 = (CrossReference)cPropertyIdsAssignment_4_1.eContents().get(0);
-		private final RuleCall cPropertyIdsPropertyUnrestrictedNameParserRuleCall_4_1_0_1 = (RuleCall)cPropertyIdsPropertyCrossReference_4_1_0.eContents().get(1);
+		private final Alternatives cAlternatives_4_1 = (Alternatives)cGroup_4.eContents().get(1);
+		private final Assignment cPropertyIdsAssignment_4_1_0 = (Assignment)cAlternatives_4_1.eContents().get(0);
+		private final CrossReference cPropertyIdsPropertyCrossReference_4_1_0_0 = (CrossReference)cPropertyIdsAssignment_4_1_0.eContents().get(0);
+		private final RuleCall cPropertyIdsPropertyUnrestrictedNameParserRuleCall_4_1_0_0_1 = (RuleCall)cPropertyIdsPropertyCrossReference_4_1_0_0.eContents().get(1);
+		private final Group cGroup_4_1_1 = (Group)cAlternatives_4_1.eContents().get(1);
+		private final Keyword cOppositeKeyword_4_1_1_0 = (Keyword)cGroup_4_1_1.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_4_1_1_1 = (Keyword)cGroup_4_1_1.eContents().get(1);
+		private final Assignment cOppositePropertyIdsAssignment_4_1_1_2 = (Assignment)cGroup_4_1_1.eContents().get(2);
+		private final RuleCall cOppositePropertyIdsPathNameCSParserRuleCall_4_1_1_2_0 = (RuleCall)cOppositePropertyIdsAssignment_4_1_1_2.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_4_1_1_3 = (Keyword)cGroup_4_1_1.eContents().get(3);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//KeyDeclCS:
-		//	"key" pathName=PathNameCS "{" propertyIds+=[pivot::Property|UnrestrictedName] (","
-		//	propertyIds+=[pivot::Property|UnrestrictedName])* "}" ";";
+		//	"key" pathName=PathNameCS "{" (propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "("
+		//	oppositePropertyIds+=PathNameCS ")") ("," (propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "("
+		//	oppositePropertyIds+=PathNameCS ")"))* "}" ";";
 		public ParserRule getRule() { return rule; }
 
-		//"key" pathName=PathNameCS "{" propertyIds+=[pivot::Property|UnrestrictedName] (","
-		//propertyIds+=[pivot::Property|UnrestrictedName])* "}" ";"
+		//"key" pathName=PathNameCS "{" (propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "("
+		//oppositePropertyIds+=PathNameCS ")") ("," (propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "("
+		//oppositePropertyIds+=PathNameCS ")"))* "}" ";"
 		public Group getGroup() { return cGroup; }
 
 		//"key"
@@ -408,29 +424,71 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
+		//propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "(" oppositePropertyIds+=PathNameCS ")"
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+
 		//propertyIds+=[pivot::Property|UnrestrictedName]
-		public Assignment getPropertyIdsAssignment_3() { return cPropertyIdsAssignment_3; }
+		public Assignment getPropertyIdsAssignment_3_0() { return cPropertyIdsAssignment_3_0; }
 
 		//[pivot::Property|UnrestrictedName]
-		public CrossReference getPropertyIdsPropertyCrossReference_3_0() { return cPropertyIdsPropertyCrossReference_3_0; }
+		public CrossReference getPropertyIdsPropertyCrossReference_3_0_0() { return cPropertyIdsPropertyCrossReference_3_0_0; }
 
 		//UnrestrictedName
-		public RuleCall getPropertyIdsPropertyUnrestrictedNameParserRuleCall_3_0_1() { return cPropertyIdsPropertyUnrestrictedNameParserRuleCall_3_0_1; }
+		public RuleCall getPropertyIdsPropertyUnrestrictedNameParserRuleCall_3_0_0_1() { return cPropertyIdsPropertyUnrestrictedNameParserRuleCall_3_0_0_1; }
 
-		//("," propertyIds+=[pivot::Property|UnrestrictedName])*
+		//"opposite" "(" oppositePropertyIds+=PathNameCS ")"
+		public Group getGroup_3_1() { return cGroup_3_1; }
+
+		//"opposite"
+		public Keyword getOppositeKeyword_3_1_0() { return cOppositeKeyword_3_1_0; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_3_1_1() { return cLeftParenthesisKeyword_3_1_1; }
+
+		//oppositePropertyIds+=PathNameCS
+		public Assignment getOppositePropertyIdsAssignment_3_1_2() { return cOppositePropertyIdsAssignment_3_1_2; }
+
+		//PathNameCS
+		public RuleCall getOppositePropertyIdsPathNameCSParserRuleCall_3_1_2_0() { return cOppositePropertyIdsPathNameCSParserRuleCall_3_1_2_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_3_1_3() { return cRightParenthesisKeyword_3_1_3; }
+
+		//("," (propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "(" oppositePropertyIds+=PathNameCS ")"))*
 		public Group getGroup_4() { return cGroup_4; }
 
 		//","
 		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
 
+		//propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "(" oppositePropertyIds+=PathNameCS ")"
+		public Alternatives getAlternatives_4_1() { return cAlternatives_4_1; }
+
 		//propertyIds+=[pivot::Property|UnrestrictedName]
-		public Assignment getPropertyIdsAssignment_4_1() { return cPropertyIdsAssignment_4_1; }
+		public Assignment getPropertyIdsAssignment_4_1_0() { return cPropertyIdsAssignment_4_1_0; }
 
 		//[pivot::Property|UnrestrictedName]
-		public CrossReference getPropertyIdsPropertyCrossReference_4_1_0() { return cPropertyIdsPropertyCrossReference_4_1_0; }
+		public CrossReference getPropertyIdsPropertyCrossReference_4_1_0_0() { return cPropertyIdsPropertyCrossReference_4_1_0_0; }
 
 		//UnrestrictedName
-		public RuleCall getPropertyIdsPropertyUnrestrictedNameParserRuleCall_4_1_0_1() { return cPropertyIdsPropertyUnrestrictedNameParserRuleCall_4_1_0_1; }
+		public RuleCall getPropertyIdsPropertyUnrestrictedNameParserRuleCall_4_1_0_0_1() { return cPropertyIdsPropertyUnrestrictedNameParserRuleCall_4_1_0_0_1; }
+
+		//"opposite" "(" oppositePropertyIds+=PathNameCS ")"
+		public Group getGroup_4_1_1() { return cGroup_4_1_1; }
+
+		//"opposite"
+		public Keyword getOppositeKeyword_4_1_1_0() { return cOppositeKeyword_4_1_1_0; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_4_1_1_1() { return cLeftParenthesisKeyword_4_1_1_1; }
+
+		//oppositePropertyIds+=PathNameCS
+		public Assignment getOppositePropertyIdsAssignment_4_1_1_2() { return cOppositePropertyIdsAssignment_4_1_1_2; }
+
+		//PathNameCS
+		public RuleCall getOppositePropertyIdsPathNameCSParserRuleCall_4_1_1_2_0() { return cOppositePropertyIdsPathNameCSParserRuleCall_4_1_1_2_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_4_1_1_3() { return cRightParenthesisKeyword_4_1_1_3; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
@@ -731,28 +789,58 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	public class PropertyTemplateCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PropertyTemplateCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cPropertyIdAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference cPropertyIdPropertyCrossReference_0_0 = (CrossReference)cPropertyIdAssignment_0.eContents().get(0);
-		private final RuleCall cPropertyIdPropertyUnrestrictedNameParserRuleCall_0_0_1 = (RuleCall)cPropertyIdPropertyCrossReference_0_0.eContents().get(1);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final Assignment cPropertyIdAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
+		private final CrossReference cPropertyIdPropertyCrossReference_0_0_0 = (CrossReference)cPropertyIdAssignment_0_0.eContents().get(0);
+		private final RuleCall cPropertyIdPropertyUnrestrictedNameParserRuleCall_0_0_0_1 = (RuleCall)cPropertyIdPropertyCrossReference_0_0_0.eContents().get(1);
+		private final Group cGroup_0_1 = (Group)cAlternatives_0.eContents().get(1);
+		private final Keyword cOppositeKeyword_0_1_0 = (Keyword)cGroup_0_1.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_0_1_1 = (Keyword)cGroup_0_1.eContents().get(1);
+		private final Assignment cOppositePropertyIdAssignment_0_1_2 = (Assignment)cGroup_0_1.eContents().get(2);
+		private final RuleCall cOppositePropertyIdPathNameCSParserRuleCall_0_1_2_0 = (RuleCall)cOppositePropertyIdAssignment_0_1_2.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_0_1_3 = (Keyword)cGroup_0_1.eContents().get(3);
 		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cExpressionAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cExpressionExpCSOrTemplateCSParserRuleCall_2_0 = (RuleCall)cExpressionAssignment_2.eContents().get(0);
 		
 		//PropertyTemplateCS:
-		//	propertyId=[pivot::Property|UnrestrictedName] "=" expression=ExpCSOrTemplateCS;
+		//	(propertyId=[pivot::Property|UnrestrictedName] | "opposite" "(" oppositePropertyId=PathNameCS ")") "="
+		//	expression=ExpCSOrTemplateCS;
 		public ParserRule getRule() { return rule; }
 
-		//propertyId=[pivot::Property|UnrestrictedName] "=" expression=ExpCSOrTemplateCS
+		//(propertyId=[pivot::Property|UnrestrictedName] | "opposite" "(" oppositePropertyId=PathNameCS ")") "="
+		//expression=ExpCSOrTemplateCS
 		public Group getGroup() { return cGroup; }
 
+		//propertyId=[pivot::Property|UnrestrictedName] | "opposite" "(" oppositePropertyId=PathNameCS ")"
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
 		//propertyId=[pivot::Property|UnrestrictedName]
-		public Assignment getPropertyIdAssignment_0() { return cPropertyIdAssignment_0; }
+		public Assignment getPropertyIdAssignment_0_0() { return cPropertyIdAssignment_0_0; }
 
 		//[pivot::Property|UnrestrictedName]
-		public CrossReference getPropertyIdPropertyCrossReference_0_0() { return cPropertyIdPropertyCrossReference_0_0; }
+		public CrossReference getPropertyIdPropertyCrossReference_0_0_0() { return cPropertyIdPropertyCrossReference_0_0_0; }
 
 		//UnrestrictedName
-		public RuleCall getPropertyIdPropertyUnrestrictedNameParserRuleCall_0_0_1() { return cPropertyIdPropertyUnrestrictedNameParserRuleCall_0_0_1; }
+		public RuleCall getPropertyIdPropertyUnrestrictedNameParserRuleCall_0_0_0_1() { return cPropertyIdPropertyUnrestrictedNameParserRuleCall_0_0_0_1; }
+
+		//"opposite" "(" oppositePropertyId=PathNameCS ")"
+		public Group getGroup_0_1() { return cGroup_0_1; }
+
+		//"opposite"
+		public Keyword getOppositeKeyword_0_1_0() { return cOppositeKeyword_0_1_0; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_0_1_1() { return cLeftParenthesisKeyword_0_1_1; }
+
+		//oppositePropertyId=PathNameCS
+		public Assignment getOppositePropertyIdAssignment_0_1_2() { return cOppositePropertyIdAssignment_0_1_2; }
+
+		//PathNameCS
+		public RuleCall getOppositePropertyIdPathNameCSParserRuleCall_0_1_2_0() { return cOppositePropertyIdPathNameCSParserRuleCall_0_1_2_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_0_1_3() { return cRightParenthesisKeyword_0_1_3; }
 
 		//"="
 		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
@@ -1455,15 +1543,16 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cImportKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
 		private final Keyword cLibraryKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
 		private final Keyword cKeyKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
-		private final Keyword cOverridesKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
-		private final Keyword cPrimitiveKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
-		private final Keyword cQueryKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
-		private final Keyword cRelationKeyword_13 = (Keyword)cAlternatives.eContents().get(13);
-		private final Keyword cReplaceKeyword_14 = (Keyword)cAlternatives.eContents().get(14);
-		private final Keyword cTopKeyword_15 = (Keyword)cAlternatives.eContents().get(15);
-		private final Keyword cTransformationKeyword_16 = (Keyword)cAlternatives.eContents().get(16);
-		private final Keyword cWhenKeyword_17 = (Keyword)cAlternatives.eContents().get(17);
-		private final Keyword cWhereKeyword_18 = (Keyword)cAlternatives.eContents().get(18);
+		private final Keyword cOppositeKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
+		private final Keyword cOverridesKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
+		private final Keyword cPrimitiveKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
+		private final Keyword cQueryKeyword_13 = (Keyword)cAlternatives.eContents().get(13);
+		private final Keyword cRelationKeyword_14 = (Keyword)cAlternatives.eContents().get(14);
+		private final Keyword cReplaceKeyword_15 = (Keyword)cAlternatives.eContents().get(15);
+		private final Keyword cTopKeyword_16 = (Keyword)cAlternatives.eContents().get(16);
+		private final Keyword cTransformationKeyword_17 = (Keyword)cAlternatives.eContents().get(17);
+		private final Keyword cWhenKeyword_18 = (Keyword)cAlternatives.eContents().get(18);
+		private final Keyword cWhereKeyword_19 = (Keyword)cAlternatives.eContents().get(19);
 		
 		////ExpCS returns essentialocl::ExpCS:
 		// //	InfixedExpCS
@@ -1473,14 +1562,14 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName returns ecore::EString:
 		//	EssentialOCLUnrestrictedName //|   '_'
 		// | "checkonly" | "default_values" | "domain" | "enforce" | "extends" |
-		//	"implementedby" | "import" | "library" | "key" | "overrides" | "primitive" | "query" | "relation" | "replace" | "top"
-		//	| "transformation" | "when" | "where";
+		//	"implementedby" | "import" | "library" | "key" | "opposite" | "overrides" | "primitive" | "query" | "relation" |
+		//	"replace" | "top" | "transformation" | "when" | "where";
 		public ParserRule getRule() { return rule; }
 
 		//EssentialOCLUnrestrictedName //|   '_'
 		// | "checkonly" | "default_values" | "domain" | "enforce" | "extends" |
-		//"implementedby" | "import" | "library" | "key" | "overrides" | "primitive" | "query" | "relation" | "replace" | "top"
-		//| "transformation" | "when" | "where"
+		//"implementedby" | "import" | "library" | "key" | "opposite" | "overrides" | "primitive" | "query" | "relation" |
+		//"replace" | "top" | "transformation" | "when" | "where"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//EssentialOCLUnrestrictedName
@@ -1513,32 +1602,35 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//"key"
 		public Keyword getKeyKeyword_9() { return cKeyKeyword_9; }
 
+		//"opposite"
+		public Keyword getOppositeKeyword_10() { return cOppositeKeyword_10; }
+
 		//"overrides"
-		public Keyword getOverridesKeyword_10() { return cOverridesKeyword_10; }
+		public Keyword getOverridesKeyword_11() { return cOverridesKeyword_11; }
 
 		//"primitive"
-		public Keyword getPrimitiveKeyword_11() { return cPrimitiveKeyword_11; }
+		public Keyword getPrimitiveKeyword_12() { return cPrimitiveKeyword_12; }
 
 		//"query"
-		public Keyword getQueryKeyword_12() { return cQueryKeyword_12; }
+		public Keyword getQueryKeyword_13() { return cQueryKeyword_13; }
 
 		//"relation"
-		public Keyword getRelationKeyword_13() { return cRelationKeyword_13; }
+		public Keyword getRelationKeyword_14() { return cRelationKeyword_14; }
 
 		//"replace"
-		public Keyword getReplaceKeyword_14() { return cReplaceKeyword_14; }
+		public Keyword getReplaceKeyword_15() { return cReplaceKeyword_15; }
 
 		//"top"
-		public Keyword getTopKeyword_15() { return cTopKeyword_15; }
+		public Keyword getTopKeyword_16() { return cTopKeyword_16; }
 
 		//"transformation"
-		public Keyword getTransformationKeyword_16() { return cTransformationKeyword_16; }
+		public Keyword getTransformationKeyword_17() { return cTransformationKeyword_17; }
 
 		//"when"
-		public Keyword getWhenKeyword_17() { return cWhenKeyword_17; }
+		public Keyword getWhenKeyword_18() { return cWhenKeyword_18; }
 
 		//"where"
-		public Keyword getWhereKeyword_18() { return cWhereKeyword_18; }
+		public Keyword getWhereKeyword_19() { return cWhereKeyword_19; }
 	}
 	
 	
@@ -1676,8 +1768,9 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//KeyDeclCS:
-	//	"key" pathName=PathNameCS "{" propertyIds+=[pivot::Property|UnrestrictedName] (","
-	//	propertyIds+=[pivot::Property|UnrestrictedName])* "}" ";";
+	//	"key" pathName=PathNameCS "{" (propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "("
+	//	oppositePropertyIds+=PathNameCS ")") ("," (propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "("
+	//	oppositePropertyIds+=PathNameCS ")"))* "}" ";";
 	public KeyDeclCSElements getKeyDeclCSAccess() {
 		return (pKeyDeclCS != null) ? pKeyDeclCS : (pKeyDeclCS = new KeyDeclCSElements());
 	}
@@ -1749,7 +1842,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PropertyTemplateCS:
-	//	propertyId=[pivot::Property|UnrestrictedName] "=" expression=ExpCSOrTemplateCS;
+	//	(propertyId=[pivot::Property|UnrestrictedName] | "opposite" "(" oppositePropertyId=PathNameCS ")") "="
+	//	expression=ExpCSOrTemplateCS;
 	public PropertyTemplateCSElements getPropertyTemplateCSAccess() {
 		return (pPropertyTemplateCS != null) ? pPropertyTemplateCS : (pPropertyTemplateCS = new PropertyTemplateCSElements());
 	}
@@ -1912,8 +2006,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	//UnrestrictedName returns ecore::EString:
 	//	EssentialOCLUnrestrictedName //|   '_'
 	// | "checkonly" | "default_values" | "domain" | "enforce" | "extends" |
-	//	"implementedby" | "import" | "library" | "key" | "overrides" | "primitive" | "query" | "relation" | "replace" | "top"
-	//	| "transformation" | "when" | "where";
+	//	"implementedby" | "import" | "library" | "key" | "opposite" | "overrides" | "primitive" | "query" | "relation" |
+	//	"replace" | "top" | "transformation" | "when" | "where";
 	public UnrestrictedNameElements getUnrestrictedNameAccess() {
 		return (pUnrestrictedName != null) ? pUnrestrictedName : (pUnrestrictedName = new UnrestrictedNameElements());
 	}

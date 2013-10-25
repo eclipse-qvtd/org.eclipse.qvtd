@@ -24,7 +24,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -44,6 +46,7 @@ import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.QVTrelationCSVisito
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.KeyDeclCSImpl#getPathName <em>Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.KeyDeclCSImpl#getPropertyIds <em>Property Ids</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.KeyDeclCSImpl#getOppositePropertyIds <em>Opposite Property Ids</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.KeyDeclCSImpl#getClassId <em>Class Id</em>}</li>
  * </ul>
  * </p>
@@ -70,6 +73,16 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	 * @ordered
 	 */
 	protected EList<Property> propertyIds;
+
+	/**
+	 * The cached value of the '{@link #getOppositePropertyIds() <em>Opposite Property Ids</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOppositePropertyIds()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PathNameCS> oppositePropertyIds;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -150,11 +163,25 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<PathNameCS> getOppositePropertyIds() {
+		if (oppositePropertyIds == null) {
+			oppositePropertyIds = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTrelationCSPackage.KEY_DECL_CS__OPPOSITE_PROPERTY_IDS);
+		}
+		return oppositePropertyIds;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTrelationCSPackage.KEY_DECL_CS__PATH_NAME:
 				return basicSetPathName(null, msgs);
+			case QVTrelationCSPackage.KEY_DECL_CS__OPPOSITE_PROPERTY_IDS:
+				return ((InternalEList<?>)getOppositePropertyIds()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -171,6 +198,8 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 				return getPathName();
 			case QVTrelationCSPackage.KEY_DECL_CS__PROPERTY_IDS:
 				return getPropertyIds();
+			case QVTrelationCSPackage.KEY_DECL_CS__OPPOSITE_PROPERTY_IDS:
+				return getOppositePropertyIds();
 			case QVTrelationCSPackage.KEY_DECL_CS__CLASS_ID:
 				return getClassId();
 		}
@@ -193,6 +222,10 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 				getPropertyIds().clear();
 				getPropertyIds().addAll((Collection<? extends Property>)newValue);
 				return;
+			case QVTrelationCSPackage.KEY_DECL_CS__OPPOSITE_PROPERTY_IDS:
+				getOppositePropertyIds().clear();
+				getOppositePropertyIds().addAll((Collection<? extends PathNameCS>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -211,6 +244,9 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 			case QVTrelationCSPackage.KEY_DECL_CS__PROPERTY_IDS:
 				getPropertyIds().clear();
 				return;
+			case QVTrelationCSPackage.KEY_DECL_CS__OPPOSITE_PROPERTY_IDS:
+				getOppositePropertyIds().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -227,6 +263,8 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 				return pathName != null;
 			case QVTrelationCSPackage.KEY_DECL_CS__PROPERTY_IDS:
 				return propertyIds != null && !propertyIds.isEmpty();
+			case QVTrelationCSPackage.KEY_DECL_CS__OPPOSITE_PROPERTY_IDS:
+				return oppositePropertyIds != null && !oppositePropertyIds.isEmpty();
 			case QVTrelationCSPackage.KEY_DECL_CS__CLASS_ID:
 				return getClassId() != null;
 		}

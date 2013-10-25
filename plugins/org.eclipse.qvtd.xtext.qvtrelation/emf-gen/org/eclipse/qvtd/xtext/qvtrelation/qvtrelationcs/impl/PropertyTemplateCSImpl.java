@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
@@ -43,8 +44,8 @@ import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.QVTrelationCSVisito
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.PropertyTemplateCSImpl#getObjectTemplate <em>Object Template</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.PropertyTemplateCSImpl#getPropertyId <em>Property Id</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.PropertyTemplateCSImpl#getOppositePropertyId <em>Opposite Property Id</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.PropertyTemplateCSImpl#getExpression <em>Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.PropertyTemplateCSImpl#isOpposite <em>Opposite</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,6 +63,16 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	protected Property propertyId;
 
 	/**
+	 * The cached value of the '{@link #getOppositePropertyId() <em>Opposite Property Id</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOppositePropertyId()
+	 * @generated
+	 * @ordered
+	 */
+	protected PathNameCS oppositePropertyId;
+
+	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -70,26 +81,6 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * @ordered
 	 */
 	protected ExpCS expression;
-
-	/**
-	 * The default value of the '{@link #isOpposite() <em>Opposite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isOpposite()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean OPPOSITE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isOpposite() <em>Opposite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isOpposite()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean opposite = OPPOSITE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -194,6 +185,49 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public PathNameCS getOppositePropertyId() {
+		return oppositePropertyId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOppositePropertyId(PathNameCS newOppositePropertyId, NotificationChain msgs) {
+		PathNameCS oldOppositePropertyId = oppositePropertyId;
+		oppositePropertyId = newOppositePropertyId;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID, oldOppositePropertyId, newOppositePropertyId);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOppositePropertyId(PathNameCS newOppositePropertyId) {
+		if (newOppositePropertyId != oppositePropertyId) {
+			NotificationChain msgs = null;
+			if (oppositePropertyId != null)
+				msgs = ((InternalEObject)oppositePropertyId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID, null, msgs);
+			if (newOppositePropertyId != null)
+				msgs = ((InternalEObject)newOppositePropertyId).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID, null, msgs);
+			msgs = basicSetOppositePropertyId(newOppositePropertyId, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID, newOppositePropertyId, newOppositePropertyId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ExpCS getExpression() {
 		return expression;
 	}
@@ -237,37 +271,6 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isOpposite() {
-		return opposite;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOpposite(boolean newOpposite) {
-		boolean oldOpposite = opposite;
-		opposite = newOpposite;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE, oldOpposite, opposite));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -289,6 +292,8 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 		switch (featureID) {
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
 				return basicSetObjectTemplate(null, msgs);
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID:
+				return basicSetOppositePropertyId(null, msgs);
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__EXPRESSION:
 				return basicSetExpression(null, msgs);
 		}
@@ -322,10 +327,10 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				if (resolve) return getPropertyId();
 				return basicGetPropertyId();
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID:
+				return getOppositePropertyId();
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__EXPRESSION:
 				return getExpression();
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE:
-				return isOpposite();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -344,11 +349,11 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				setPropertyId((Property)newValue);
 				return;
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID:
+				setOppositePropertyId((PathNameCS)newValue);
+				return;
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__EXPRESSION:
 				setExpression((ExpCS)newValue);
-				return;
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE:
-				setOpposite((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -368,11 +373,11 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				setPropertyId((Property)null);
 				return;
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID:
+				setOppositePropertyId((PathNameCS)null);
+				return;
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__EXPRESSION:
 				setExpression((ExpCS)null);
-				return;
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE:
-				setOpposite(OPPOSITE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -390,10 +395,10 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 				return getObjectTemplate() != null;
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				return propertyId != null;
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID:
+				return oppositePropertyId != null;
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__EXPRESSION:
 				return expression != null;
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE:
-				return opposite != OPPOSITE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

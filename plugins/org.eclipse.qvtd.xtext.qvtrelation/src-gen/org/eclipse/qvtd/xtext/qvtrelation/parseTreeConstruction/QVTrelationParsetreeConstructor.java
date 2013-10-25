@@ -1659,13 +1659,15 @@ protected class ElementTemplateCS__Keyword_1_1 extends KeywordToken  {
 /************ begin Rule KeyDeclCS ****************
  *
  * KeyDeclCS:
- * 	"key" pathName=PathNameCS "{" propertyIds+=[pivot::Property|UnrestrictedName] (","
- * 	propertyIds+=[pivot::Property|UnrestrictedName])* "}" ";";
+ * 	"key" pathName=PathNameCS "{" (propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "("
+ * 	oppositePropertyIds+=PathNameCS ")") ("," (propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "("
+ * 	oppositePropertyIds+=PathNameCS ")"))* "}" ";";
  *
  **/
 
-// "key" pathName=PathNameCS "{" propertyIds+=[pivot::Property|UnrestrictedName] (","
-// propertyIds+=[pivot::Property|UnrestrictedName])* "}" ";"
+// "key" pathName=PathNameCS "{" (propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "("
+// oppositePropertyIds+=PathNameCS ")") ("," (propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "("
+// oppositePropertyIds+=PathNameCS ")"))* "}" ";"
 protected class KeyDeclCS_Group extends GroupToken {
 	
 	public KeyDeclCS_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1783,16 +1785,39 @@ protected class KeyDeclCS_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 
 }
 
-// propertyIds+=[pivot::Property|UnrestrictedName]
-protected class KeyDeclCS_PropertyIdsAssignment_3 extends AssignmentToken  {
+// propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "(" oppositePropertyIds+=PathNameCS ")"
+protected class KeyDeclCS_Alternatives_3 extends AlternativesToken {
+
+	public KeyDeclCS_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public KeyDeclCS_PropertyIdsAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getKeyDeclCSAccess().getAlternatives_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new KeyDeclCS_PropertyIdsAssignment_3_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new KeyDeclCS_Group_3_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// propertyIds+=[pivot::Property|UnrestrictedName]
+protected class KeyDeclCS_PropertyIdsAssignment_3_0 extends AssignmentToken  {
+	
+	public KeyDeclCS_PropertyIdsAssignment_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getKeyDeclCSAccess().getPropertyIdsAssignment_3();
+		return grammarAccess.getKeyDeclCSAccess().getPropertyIdsAssignment_3_0();
 	}
 
     @Override
@@ -1809,9 +1834,9 @@ protected class KeyDeclCS_PropertyIdsAssignment_3 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("propertyIds");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getKeyDeclCSAccess().getPropertyIdsPropertyCrossReference_3_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getKeyDeclCSAccess().getPropertyIdsPropertyCrossReference_3_0_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getKeyDeclCSAccess().getPropertyIdsPropertyCrossReference_3_0(); 
+				element = grammarAccess.getKeyDeclCSAccess().getPropertyIdsPropertyCrossReference_3_0_0(); 
 				return obj;
 			}
 		}
@@ -1820,7 +1845,143 @@ protected class KeyDeclCS_PropertyIdsAssignment_3 extends AssignmentToken  {
 
 }
 
-// ("," propertyIds+=[pivot::Property|UnrestrictedName])*
+// "opposite" "(" oppositePropertyIds+=PathNameCS ")"
+protected class KeyDeclCS_Group_3_1 extends GroupToken {
+	
+	public KeyDeclCS_Group_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getKeyDeclCSAccess().getGroup_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new KeyDeclCS_RightParenthesisKeyword_3_1_3(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "opposite"
+protected class KeyDeclCS_OppositeKeyword_3_1_0 extends KeywordToken  {
+	
+	public KeyDeclCS_OppositeKeyword_3_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getKeyDeclCSAccess().getOppositeKeyword_3_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new KeyDeclCS_LeftCurlyBracketKeyword_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "("
+protected class KeyDeclCS_LeftParenthesisKeyword_3_1_1 extends KeywordToken  {
+	
+	public KeyDeclCS_LeftParenthesisKeyword_3_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getKeyDeclCSAccess().getLeftParenthesisKeyword_3_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new KeyDeclCS_OppositeKeyword_3_1_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// oppositePropertyIds+=PathNameCS
+protected class KeyDeclCS_OppositePropertyIdsAssignment_3_1_2 extends AssignmentToken  {
+	
+	public KeyDeclCS_OppositePropertyIdsAssignment_3_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsAssignment_3_1_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new PathNameCS_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("oppositePropertyIds",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("oppositePropertyIds");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getPathNameCSRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsPathNameCSParserRuleCall_3_1_2_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new KeyDeclCS_LeftParenthesisKeyword_3_1_1(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// ")"
+protected class KeyDeclCS_RightParenthesisKeyword_3_1_3 extends KeywordToken  {
+	
+	public KeyDeclCS_RightParenthesisKeyword_3_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getKeyDeclCSAccess().getRightParenthesisKeyword_3_1_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new KeyDeclCS_OppositePropertyIdsAssignment_3_1_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
+
+// ("," (propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "(" oppositePropertyIds+=PathNameCS ")"))*
 protected class KeyDeclCS_Group_4 extends GroupToken {
 	
 	public KeyDeclCS_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1835,7 +1996,7 @@ protected class KeyDeclCS_Group_4 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new KeyDeclCS_PropertyIdsAssignment_4_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new KeyDeclCS_Alternatives_4_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1858,7 +2019,30 @@ protected class KeyDeclCS_CommaKeyword_4_0 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new KeyDeclCS_Group_4(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new KeyDeclCS_PropertyIdsAssignment_3(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new KeyDeclCS_Alternatives_3(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "(" oppositePropertyIds+=PathNameCS ")"
+protected class KeyDeclCS_Alternatives_4_1 extends AlternativesToken {
+
+	public KeyDeclCS_Alternatives_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getKeyDeclCSAccess().getAlternatives_4_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new KeyDeclCS_PropertyIdsAssignment_4_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new KeyDeclCS_Group_4_1_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -1866,15 +2050,15 @@ protected class KeyDeclCS_CommaKeyword_4_0 extends KeywordToken  {
 }
 
 // propertyIds+=[pivot::Property|UnrestrictedName]
-protected class KeyDeclCS_PropertyIdsAssignment_4_1 extends AssignmentToken  {
+protected class KeyDeclCS_PropertyIdsAssignment_4_1_0 extends AssignmentToken  {
 	
-	public KeyDeclCS_PropertyIdsAssignment_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public KeyDeclCS_PropertyIdsAssignment_4_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getKeyDeclCSAccess().getPropertyIdsAssignment_4_1();
+		return grammarAccess.getKeyDeclCSAccess().getPropertyIdsAssignment_4_1_0();
 	}
 
     @Override
@@ -1887,13 +2071,13 @@ protected class KeyDeclCS_PropertyIdsAssignment_4_1 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("propertyIds",false)) == null) return null;
+		if((value = eObjectConsumer.getConsumable("propertyIds",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("propertyIds");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getKeyDeclCSAccess().getPropertyIdsPropertyCrossReference_4_1_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getKeyDeclCSAccess().getPropertyIdsPropertyCrossReference_4_1_0_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getKeyDeclCSAccess().getPropertyIdsPropertyCrossReference_4_1_0(); 
+				element = grammarAccess.getKeyDeclCSAccess().getPropertyIdsPropertyCrossReference_4_1_0_0(); 
 				return obj;
 			}
 		}
@@ -1901,6 +2085,142 @@ protected class KeyDeclCS_PropertyIdsAssignment_4_1 extends AssignmentToken  {
 	}
 
 }
+
+// "opposite" "(" oppositePropertyIds+=PathNameCS ")"
+protected class KeyDeclCS_Group_4_1_1 extends GroupToken {
+	
+	public KeyDeclCS_Group_4_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getKeyDeclCSAccess().getGroup_4_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new KeyDeclCS_RightParenthesisKeyword_4_1_1_3(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "opposite"
+protected class KeyDeclCS_OppositeKeyword_4_1_1_0 extends KeywordToken  {
+	
+	public KeyDeclCS_OppositeKeyword_4_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getKeyDeclCSAccess().getOppositeKeyword_4_1_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new KeyDeclCS_CommaKeyword_4_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "("
+protected class KeyDeclCS_LeftParenthesisKeyword_4_1_1_1 extends KeywordToken  {
+	
+	public KeyDeclCS_LeftParenthesisKeyword_4_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getKeyDeclCSAccess().getLeftParenthesisKeyword_4_1_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new KeyDeclCS_OppositeKeyword_4_1_1_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// oppositePropertyIds+=PathNameCS
+protected class KeyDeclCS_OppositePropertyIdsAssignment_4_1_1_2 extends AssignmentToken  {
+	
+	public KeyDeclCS_OppositePropertyIdsAssignment_4_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsAssignment_4_1_1_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new PathNameCS_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("oppositePropertyIds",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("oppositePropertyIds");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getPathNameCSRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsPathNameCSParserRuleCall_4_1_1_2_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new KeyDeclCS_LeftParenthesisKeyword_4_1_1_1(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// ")"
+protected class KeyDeclCS_RightParenthesisKeyword_4_1_1_3 extends KeywordToken  {
+	
+	public KeyDeclCS_RightParenthesisKeyword_4_1_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getKeyDeclCSAccess().getRightParenthesisKeyword_4_1_1_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new KeyDeclCS_OppositePropertyIdsAssignment_4_1_1_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
 
 
 // "}"
@@ -1919,7 +2239,7 @@ protected class KeyDeclCS_RightCurlyBracketKeyword_5 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new KeyDeclCS_Group_4(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new KeyDeclCS_PropertyIdsAssignment_3(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new KeyDeclCS_Alternatives_3(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -3227,11 +3547,13 @@ protected class PrimitiveTypeDomainCS_SemicolonKeyword_5 extends KeywordToken  {
 /************ begin Rule PropertyTemplateCS ****************
  *
  * PropertyTemplateCS:
- * 	propertyId=[pivot::Property|UnrestrictedName] "=" expression=ExpCSOrTemplateCS;
+ * 	(propertyId=[pivot::Property|UnrestrictedName] | "opposite" "(" oppositePropertyId=PathNameCS ")") "="
+ * 	expression=ExpCSOrTemplateCS;
  *
  **/
 
-// propertyId=[pivot::Property|UnrestrictedName] "=" expression=ExpCSOrTemplateCS
+// (propertyId=[pivot::Property|UnrestrictedName] | "opposite" "(" oppositePropertyId=PathNameCS ")") "="
+// expression=ExpCSOrTemplateCS
 protected class PropertyTemplateCS_Group extends GroupToken {
 	
 	public PropertyTemplateCS_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3260,16 +3582,39 @@ protected class PropertyTemplateCS_Group extends GroupToken {
 
 }
 
-// propertyId=[pivot::Property|UnrestrictedName]
-protected class PropertyTemplateCS_PropertyIdAssignment_0 extends AssignmentToken  {
+// propertyId=[pivot::Property|UnrestrictedName] | "opposite" "(" oppositePropertyId=PathNameCS ")"
+protected class PropertyTemplateCS_Alternatives_0 extends AlternativesToken {
+
+	public PropertyTemplateCS_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public PropertyTemplateCS_PropertyIdAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getPropertyTemplateCSAccess().getAlternatives_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new PropertyTemplateCS_PropertyIdAssignment_0_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new PropertyTemplateCS_Group_0_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// propertyId=[pivot::Property|UnrestrictedName]
+protected class PropertyTemplateCS_PropertyIdAssignment_0_0 extends AssignmentToken  {
+	
+	public PropertyTemplateCS_PropertyIdAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getPropertyTemplateCSAccess().getPropertyIdAssignment_0();
+		return grammarAccess.getPropertyTemplateCSAccess().getPropertyIdAssignment_0_0();
 	}
 
     @Override
@@ -3285,9 +3630,9 @@ protected class PropertyTemplateCS_PropertyIdAssignment_0 extends AssignmentToke
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("propertyId");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getPropertyTemplateCSAccess().getPropertyIdPropertyCrossReference_0_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getPropertyTemplateCSAccess().getPropertyIdPropertyCrossReference_0_0_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getPropertyTemplateCSAccess().getPropertyIdPropertyCrossReference_0_0(); 
+				element = grammarAccess.getPropertyTemplateCSAccess().getPropertyIdPropertyCrossReference_0_0_0(); 
 				return obj;
 			}
 		}
@@ -3295,6 +3640,141 @@ protected class PropertyTemplateCS_PropertyIdAssignment_0 extends AssignmentToke
 	}
 
 }
+
+// "opposite" "(" oppositePropertyId=PathNameCS ")"
+protected class PropertyTemplateCS_Group_0_1 extends GroupToken {
+	
+	public PropertyTemplateCS_Group_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getPropertyTemplateCSAccess().getGroup_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new PropertyTemplateCS_RightParenthesisKeyword_0_1_3(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "opposite"
+protected class PropertyTemplateCS_OppositeKeyword_0_1_0 extends KeywordToken  {
+	
+	public PropertyTemplateCS_OppositeKeyword_0_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getPropertyTemplateCSAccess().getOppositeKeyword_0_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// "("
+protected class PropertyTemplateCS_LeftParenthesisKeyword_0_1_1 extends KeywordToken  {
+	
+	public PropertyTemplateCS_LeftParenthesisKeyword_0_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getPropertyTemplateCSAccess().getLeftParenthesisKeyword_0_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new PropertyTemplateCS_OppositeKeyword_0_1_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// oppositePropertyId=PathNameCS
+protected class PropertyTemplateCS_OppositePropertyIdAssignment_0_1_2 extends AssignmentToken  {
+	
+	public PropertyTemplateCS_OppositePropertyIdAssignment_0_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getPropertyTemplateCSAccess().getOppositePropertyIdAssignment_0_1_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new PathNameCS_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("oppositePropertyId",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("oppositePropertyId");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getPathNameCSRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getPropertyTemplateCSAccess().getOppositePropertyIdPathNameCSParserRuleCall_0_1_2_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new PropertyTemplateCS_LeftParenthesisKeyword_0_1_1(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// ")"
+protected class PropertyTemplateCS_RightParenthesisKeyword_0_1_3 extends KeywordToken  {
+	
+	public PropertyTemplateCS_RightParenthesisKeyword_0_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getPropertyTemplateCSAccess().getRightParenthesisKeyword_0_1_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new PropertyTemplateCS_OppositePropertyIdAssignment_0_1_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
 
 // "="
 protected class PropertyTemplateCS_EqualsSignKeyword_1 extends KeywordToken  {
@@ -3311,7 +3791,7 @@ protected class PropertyTemplateCS_EqualsSignKeyword_1 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PropertyTemplateCS_PropertyIdAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new PropertyTemplateCS_Alternatives_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}

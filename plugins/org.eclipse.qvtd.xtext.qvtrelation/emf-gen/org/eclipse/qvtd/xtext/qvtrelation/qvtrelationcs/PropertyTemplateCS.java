@@ -18,6 +18,7 @@ package org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs;
 
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 
 /**
@@ -30,8 +31,8 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PropertyTemplateCS#getObjectTemplate <em>Object Template</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PropertyTemplateCS#getPropertyId <em>Property Id</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PropertyTemplateCS#getOppositePropertyId <em>Opposite Property Id</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PropertyTemplateCS#getExpression <em>Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PropertyTemplateCS#isOpposite <em>Opposite</em>}</li>
  * </ul>
  * </p>
  *
@@ -95,6 +96,32 @@ public interface PropertyTemplateCS extends ModelElementCS {
 	void setPropertyId(Property value);
 
 	/**
+	 * Returns the value of the '<em><b>Opposite Property Id</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Opposite Property Id</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Opposite Property Id</em>' containment reference.
+	 * @see #setOppositePropertyId(PathNameCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.QVTrelationCSPackage#getPropertyTemplateCS_OppositePropertyId()
+	 * @model containment="true"
+	 * @generated
+	 */
+	PathNameCS getOppositePropertyId();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PropertyTemplateCS#getOppositePropertyId <em>Opposite Property Id</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Opposite Property Id</em>' containment reference.
+	 * @see #getOppositePropertyId()
+	 * @generated
+	 */
+	void setOppositePropertyId(PathNameCS value);
+
+	/**
 	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -119,32 +146,5 @@ public interface PropertyTemplateCS extends ModelElementCS {
 	 * @generated
 	 */
 	void setExpression(ExpCS value);
-
-	/**
-	 * Returns the value of the '<em><b>Opposite</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Opposite</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Opposite</em>' attribute.
-	 * @see #setOpposite(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.QVTrelationCSPackage#getPropertyTemplateCS_Opposite()
-	 * @model default="false"
-	 * @generated
-	 */
-	boolean isOpposite();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PropertyTemplateCS#isOpposite <em>Opposite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Opposite</em>' attribute.
-	 * @see #isOpposite()
-	 * @generated
-	 */
-	void setOpposite(boolean value);
 
 } // PropertyTemplateCS

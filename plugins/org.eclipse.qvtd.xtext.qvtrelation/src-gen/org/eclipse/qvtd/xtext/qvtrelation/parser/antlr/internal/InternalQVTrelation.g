@@ -667,29 +667,7 @@ ruleKeyDeclCS returns [EObject current=null]
     {
     	newLeafNode(otherlv_2, grammarAccess.getKeyDeclCSAccess().getLeftCurlyBracketKeyword_2());
     }
-(
-(
-		{ 
-		  /* */ 
-		}
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getKeyDeclCSRule());
-	        }
-        }
-		{ 
-	        newCompositeNode(grammarAccess.getKeyDeclCSAccess().getPropertyIdsPropertyCrossReference_3_0()); 
-	    }
-		ruleUnrestrictedName		{ 
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)(	otherlv_4=',' 
-    {
-    	newLeafNode(otherlv_4, grammarAccess.getKeyDeclCSAccess().getCommaKeyword_4_0());
-    }
-(
+((
 (
 		{ 
 		  /* */ 
@@ -700,20 +678,104 @@ ruleKeyDeclCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getKeyDeclCSAccess().getPropertyIdsPropertyCrossReference_4_1_0()); 
+	        newCompositeNode(grammarAccess.getKeyDeclCSAccess().getPropertyIdsPropertyCrossReference_3_0_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))*	otherlv_6='}' 
+)
+    |(	otherlv_4='opposite' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getKeyDeclCSAccess().getRightCurlyBracketKeyword_5());
+    	newLeafNode(otherlv_4, grammarAccess.getKeyDeclCSAccess().getOppositeKeyword_3_1_0());
     }
-	otherlv_7=';' 
+	otherlv_5='(' 
     {
-    	newLeafNode(otherlv_7, grammarAccess.getKeyDeclCSAccess().getSemicolonKeyword_6());
+    	newLeafNode(otherlv_5, grammarAccess.getKeyDeclCSAccess().getLeftParenthesisKeyword_3_1_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsPathNameCSParserRuleCall_3_1_2_0()); 
+	    }
+		lv_oppositePropertyIds_6_0=rulePathNameCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getKeyDeclCSRule());
+	        }
+       		add(
+       			$current, 
+       			"oppositePropertyIds",
+        		lv_oppositePropertyIds_6_0, 
+        		"PathNameCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_7=')' 
+    {
+    	newLeafNode(otherlv_7, grammarAccess.getKeyDeclCSAccess().getRightParenthesisKeyword_3_1_3());
+    }
+))(	otherlv_8=',' 
+    {
+    	newLeafNode(otherlv_8, grammarAccess.getKeyDeclCSAccess().getCommaKeyword_4_0());
+    }
+((
+(
+		{ 
+		  /* */ 
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getKeyDeclCSRule());
+	        }
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getKeyDeclCSAccess().getPropertyIdsPropertyCrossReference_4_1_0_0()); 
+	    }
+		ruleUnrestrictedName		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(	otherlv_10='opposite' 
+    {
+    	newLeafNode(otherlv_10, grammarAccess.getKeyDeclCSAccess().getOppositeKeyword_4_1_1_0());
+    }
+	otherlv_11='(' 
+    {
+    	newLeafNode(otherlv_11, grammarAccess.getKeyDeclCSAccess().getLeftParenthesisKeyword_4_1_1_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsPathNameCSParserRuleCall_4_1_1_2_0()); 
+	    }
+		lv_oppositePropertyIds_12_0=rulePathNameCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getKeyDeclCSRule());
+	        }
+       		add(
+       			$current, 
+       			"oppositePropertyIds",
+        		lv_oppositePropertyIds_12_0, 
+        		"PathNameCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_13=')' 
+    {
+    	newLeafNode(otherlv_13, grammarAccess.getKeyDeclCSAccess().getRightParenthesisKeyword_4_1_1_3());
+    }
+)))*	otherlv_14='}' 
+    {
+    	newLeafNode(otherlv_14, grammarAccess.getKeyDeclCSAccess().getRightCurlyBracketKeyword_5());
+    }
+	otherlv_15=';' 
+    {
+    	newLeafNode(otherlv_15, grammarAccess.getKeyDeclCSAccess().getSemicolonKeyword_6());
     }
 )
 ;
@@ -1179,7 +1241,7 @@ rulePropertyTemplateCS returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((
+(((
 (
 		{ 
 		  /* */ 
@@ -1190,30 +1252,61 @@ rulePropertyTemplateCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getPropertyTemplateCSAccess().getPropertyIdPropertyCrossReference_0_0()); 
+	        newCompositeNode(grammarAccess.getPropertyTemplateCSAccess().getPropertyIdPropertyCrossReference_0_0_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_1='=' 
+)
+    |(	otherlv_1='opposite' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getPropertyTemplateCSAccess().getEqualsSignKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getPropertyTemplateCSAccess().getOppositeKeyword_0_1_0());
+    }
+	otherlv_2='(' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getPropertyTemplateCSAccess().getLeftParenthesisKeyword_0_1_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getPropertyTemplateCSAccess().getOppositePropertyIdPathNameCSParserRuleCall_0_1_2_0()); 
+	    }
+		lv_oppositePropertyId_3_0=rulePathNameCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getPropertyTemplateCSRule());
+	        }
+       		set(
+       			$current, 
+       			"oppositePropertyId",
+        		lv_oppositePropertyId_3_0, 
+        		"PathNameCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_4=')' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getPropertyTemplateCSAccess().getRightParenthesisKeyword_0_1_3());
+    }
+))	otherlv_5='=' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getPropertyTemplateCSAccess().getEqualsSignKeyword_1());
     }
 (
 (
 		{ 
 	        newCompositeNode(grammarAccess.getPropertyTemplateCSAccess().getExpressionExpCSOrTemplateCSParserRuleCall_2_0()); 
 	    }
-		lv_expression_2_0=ruleExpCSOrTemplateCS		{
+		lv_expression_6_0=ruleExpCSOrTemplateCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPropertyTemplateCSRule());
 	        }
        		set(
        			$current, 
        			"expression",
-        		lv_expression_2_0, 
+        		lv_expression_6_0, 
         		"ExpCSOrTemplateCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -2389,66 +2482,73 @@ ruleUnrestrictedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRu
     }
 
     |
+	kw='opposite' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getOppositeKeyword_10()); 
+    }
+
+    |
 	kw='overrides' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getOverridesKeyword_10()); 
+        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getOverridesKeyword_11()); 
     }
 
     |
 	kw='primitive' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getPrimitiveKeyword_11()); 
+        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getPrimitiveKeyword_12()); 
     }
 
     |
 	kw='query' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getQueryKeyword_12()); 
+        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getQueryKeyword_13()); 
     }
 
     |
 	kw='relation' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getRelationKeyword_13()); 
+        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getRelationKeyword_14()); 
     }
 
     |
 	kw='replace' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getReplaceKeyword_14()); 
+        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getReplaceKeyword_15()); 
     }
 
     |
 	kw='top' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getTopKeyword_15()); 
+        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getTopKeyword_16()); 
     }
 
     |
 	kw='transformation' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getTransformationKeyword_16()); 
+        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getTransformationKeyword_17()); 
     }
 
     |
 	kw='when' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getWhenKeyword_17()); 
+        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getWhenKeyword_18()); 
     }
 
     |
 	kw='where' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getWhereKeyword_18()); 
+        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getWhereKeyword_19()); 
     }
 )
     ;

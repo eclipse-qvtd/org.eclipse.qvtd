@@ -479,8 +479,17 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKeyDeclCS_ClassId() {
+	public EReference getKeyDeclCS_OppositePropertyIds() {
 		return (EReference)keyDeclCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getKeyDeclCS_ClassId() {
+		return (EReference)keyDeclCSEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -605,7 +614,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPropertyTemplateCS_Expression() {
+	public EReference getPropertyTemplateCS_OppositePropertyId() {
 		return (EReference)propertyTemplateCSEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -614,8 +623,8 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPropertyTemplateCS_Opposite() {
-		return (EAttribute)propertyTemplateCSEClass.getEStructuralFeatures().get(3);
+	public EReference getPropertyTemplateCS_Expression() {
+		return (EReference)propertyTemplateCSEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -934,6 +943,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		keyDeclCSEClass = createEClass(KEY_DECL_CS);
 		createEReference(keyDeclCSEClass, KEY_DECL_CS__PATH_NAME);
 		createEReference(keyDeclCSEClass, KEY_DECL_CS__PROPERTY_IDS);
+		createEReference(keyDeclCSEClass, KEY_DECL_CS__OPPOSITE_PROPERTY_IDS);
 		createEReference(keyDeclCSEClass, KEY_DECL_CS__CLASS_ID);
 
 		modelDeclCSEClass = createEClass(MODEL_DECL_CS);
@@ -955,8 +965,8 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		propertyTemplateCSEClass = createEClass(PROPERTY_TEMPLATE_CS);
 		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE);
 		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__PROPERTY_ID);
+		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID);
 		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__EXPRESSION);
-		createEAttribute(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__OPPOSITE);
 
 		queryCSEClass = createEClass(QUERY_CS);
 		createEReference(queryCSEClass, QUERY_CS__INPUT_PARAM_DECLARATIONS);
@@ -1087,6 +1097,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		initEClass(keyDeclCSEClass, KeyDeclCS.class, "KeyDeclCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKeyDeclCS_PathName(), theBaseCSPackage.getPathNameCS(), null, "pathName", null, 0, 1, KeyDeclCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKeyDeclCS_PropertyIds(), thePivotPackage.getProperty(), null, "propertyIds", null, 0, -1, KeyDeclCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKeyDeclCS_OppositePropertyIds(), theBaseCSPackage.getPathNameCS(), null, "oppositePropertyIds", null, 0, -1, KeyDeclCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKeyDeclCS_ClassId(), thePivotPackage.getClass_(), null, "classId", null, 0, 1, KeyDeclCS.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelDeclCSEClass, ModelDeclCS.class, "ModelDeclCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1108,8 +1119,8 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		initEClass(propertyTemplateCSEClass, PropertyTemplateCS.class, "PropertyTemplateCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyTemplateCS_ObjectTemplate(), this.getObjectTemplateCS(), this.getObjectTemplateCS_PropertyTemplates(), "objectTemplate", null, 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyTemplateCS_PropertyId(), thePivotPackage.getProperty(), null, "propertyId", null, 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyTemplateCS_OppositePropertyId(), theBaseCSPackage.getPathNameCS(), null, "oppositePropertyId", null, 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyTemplateCS_Expression(), theEssentialOCLCSPackage.getExpCS(), null, "expression", null, 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPropertyTemplateCS_Opposite(), ecorePackage.getEBoolean(), "opposite", "false", 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(queryCSEClass, QueryCS.class, "QueryCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQueryCS_InputParamDeclarations(), this.getParamDeclarationCS(), null, "inputParamDeclarations", null, 0, -1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

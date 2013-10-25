@@ -84,8 +84,12 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 	    {
 	    	KeyDeclCSElements a = f.getKeyDeclCSAccess();
 			c.setNoSpace().after(a.getLeftCurlyBracketKeyword_2());
-			c.setNoSpace().around(a.getRightCurlyBracketKeyword_5());
+			c.setNoSpace().around(a.getLeftParenthesisKeyword_3_1_1());
+			c.setNoSpace().before(a.getRightParenthesisKeyword_3_1_3());
 			c.setNoSpace().before(a.getCommaKeyword_4_0());
+			c.setNoSpace().around(a.getLeftParenthesisKeyword_4_1_1_1());
+			c.setNoSpace().before(a.getRightParenthesisKeyword_4_1_1_3());
+			c.setNoSpace().around(a.getRightCurlyBracketKeyword_5());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_6());
 	    }
 	    {

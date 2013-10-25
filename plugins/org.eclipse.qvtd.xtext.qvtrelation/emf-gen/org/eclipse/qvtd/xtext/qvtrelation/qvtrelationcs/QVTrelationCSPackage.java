@@ -872,13 +872,22 @@ public interface QVTrelationCSPackage extends EPackage {
 	int KEY_DECL_CS__PROPERTY_IDS = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Opposite Property Ids</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_DECL_CS__OPPOSITE_PROPERTY_IDS = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Class Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEY_DECL_CS__CLASS_ID = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
+	int KEY_DECL_CS__CLASS_ID = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Key Decl CS</em>' class.
@@ -887,7 +896,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KEY_DECL_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 3;
+	int KEY_DECL_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.ModelDeclCSImpl <em>Model Decl CS</em>}' class.
@@ -1482,22 +1491,22 @@ public interface QVTrelationCSPackage extends EPackage {
 	int PROPERTY_TEMPLATE_CS__PROPERTY_ID = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Opposite Property Id</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_CS__EXPRESSION = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Opposite</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_TEMPLATE_CS__OPPOSITE = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 3;
+	int PROPERTY_TEMPLATE_CS__EXPRESSION = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Property Template CS</em>' class.
@@ -2505,6 +2514,17 @@ public interface QVTrelationCSPackage extends EPackage {
 	EReference getKeyDeclCS_PropertyIds();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.KeyDeclCS#getOppositePropertyIds <em>Opposite Property Ids</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Opposite Property Ids</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.KeyDeclCS#getOppositePropertyIds()
+	 * @see #getKeyDeclCS()
+	 * @generated
+	 */
+	EReference getKeyDeclCS_OppositePropertyIds();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.KeyDeclCS#getClassId <em>Class Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2652,6 +2672,17 @@ public interface QVTrelationCSPackage extends EPackage {
 	EReference getPropertyTemplateCS_PropertyId();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PropertyTemplateCS#getOppositePropertyId <em>Opposite Property Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Opposite Property Id</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PropertyTemplateCS#getOppositePropertyId()
+	 * @see #getPropertyTemplateCS()
+	 * @generated
+	 */
+	EReference getPropertyTemplateCS_OppositePropertyId();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PropertyTemplateCS#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2661,17 +2692,6 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPropertyTemplateCS_Expression();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PropertyTemplateCS#isOpposite <em>Opposite</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Opposite</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PropertyTemplateCS#isOpposite()
-	 * @see #getPropertyTemplateCS()
-	 * @generated
-	 */
-	EAttribute getPropertyTemplateCS_Opposite();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.QueryCS <em>Query CS</em>}'.
@@ -3188,6 +3208,14 @@ public interface QVTrelationCSPackage extends EPackage {
 		EReference KEY_DECL_CS__PROPERTY_IDS = eINSTANCE.getKeyDeclCS_PropertyIds();
 
 		/**
+		 * The meta object literal for the '<em><b>Opposite Property Ids</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KEY_DECL_CS__OPPOSITE_PROPERTY_IDS = eINSTANCE.getKeyDeclCS_OppositePropertyIds();
+
+		/**
 		 * The meta object literal for the '<em><b>Class Id</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3314,20 +3342,20 @@ public interface QVTrelationCSPackage extends EPackage {
 		EReference PROPERTY_TEMPLATE_CS__PROPERTY_ID = eINSTANCE.getPropertyTemplateCS_PropertyId();
 
 		/**
+		 * The meta object literal for the '<em><b>Opposite Property Id</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID = eINSTANCE.getPropertyTemplateCS_OppositePropertyId();
+
+		/**
 		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference PROPERTY_TEMPLATE_CS__EXPRESSION = eINSTANCE.getPropertyTemplateCS_Expression();
-
-		/**
-		 * The meta object literal for the '<em><b>Opposite</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PROPERTY_TEMPLATE_CS__OPPOSITE = eINSTANCE.getPropertyTemplateCS_Opposite();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.QueryCSImpl <em>Query CS</em>}' class.

@@ -37,6 +37,9 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyIds" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oppositePropertyIds" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#//PathNameCS"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classId" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Class"
         changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
   </eClassifiers>
@@ -62,10 +65,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="objectTemplate" eType="#//ObjectTemplateCS"
         resolveProxies="false" eOpposite="#//ObjectTemplateCS/propertyTemplates"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyId" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oppositePropertyId" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#//PathNameCS"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="opposite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QueryCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#//TypedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputParamDeclarations"

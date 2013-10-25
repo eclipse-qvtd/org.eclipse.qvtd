@@ -20,9 +20,12 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.CollectionType;
+import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
@@ -107,7 +110,19 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 		public BasicContinuation<?> execute() {
 			PropertyTemplateItem pivotElement = PivotUtil.getPivot(PropertyTemplateItem.class, csElement);
 			if (pivotElement != null) {
-				pivotElement.setReferredProperty(csElement.getPropertyId());
+				Property propertyId = csElement.getPropertyId();
+				if (propertyId != null) {
+					pivotElement.setReferredProperty(propertyId);
+					pivotElement.setIsOpposite(false);
+				}
+				else {
+					PathNameCS oppositePropertyId = csElement.getOppositePropertyId();
+					Element element = oppositePropertyId.getElement();
+					if (element instanceof Property) {
+						pivotElement.setReferredProperty((Property) element);
+						pivotElement.setIsOpposite(true);
+					}
+				}
 			}
 			return null;
 		}
