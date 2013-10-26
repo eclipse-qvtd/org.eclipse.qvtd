@@ -60,24 +60,24 @@
     </extension>
     <extension
             point="org.eclipse.ui.preferencePages">
-        <page
+        <!--page
             class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative"
             name="%MF_QVTimperative">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtimperative.ui.keyword_QVTimperative"/>
-        </page>
+        </page-->
         <page
-            category="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative"
+            category="org.eclipse.qvtd.preferences.SyntaxColoringPreferencePage"
             class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.coloring"
-            name="%MF_SyntaxColoring">
+            name="%MF_QVTimperative">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtimperative.ui.keyword_QVTimperative"/>
         </page>
         <page
-            category="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative"
+            category="org.eclipse.qvtd.preferences.TemplatePreferencePage"
             class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.templates"
-            name="%MF_Templates">
+            name="%MF_QVTimperative">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtimperative.ui.keyword_QVTimperative"/>
         </page>
     </extension>

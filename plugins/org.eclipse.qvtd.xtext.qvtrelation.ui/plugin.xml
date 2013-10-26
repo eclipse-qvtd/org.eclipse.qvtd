@@ -50,24 +50,24 @@
     </extension>
     <extension
             point="org.eclipse.ui.preferencePages">
-        <page
+        <!--page
             class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation"
             name="%MF_QVTrelation">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtrelation.ui.keyword_QVTrelation"/>
-        </page>
+        </page-->
         <page
-            category="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation"
+            category="org.eclipse.qvtd.preferences.SyntaxColoringPreferencePage"
             class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.coloring"
-            name="%MF_SyntaxColoring">
+            name="%MF_QVTrelation">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtrelation.ui.keyword_QVTrelation"/>
         </page>
         <page
-            category="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation"
+            category="org.eclipse.qvtd.preferences.TemplatePreferencePage"
             class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.templates"
-            name="%MF_Templates">
+            name="%MF_QVTrelation">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtrelation.ui.keyword_QVTrelation"/>
         </page>
     </extension>

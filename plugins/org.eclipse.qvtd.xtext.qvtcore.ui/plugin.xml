@@ -60,24 +60,24 @@
     </extension>
     <extension
             point="org.eclipse.ui.preferencePages">
-        <page
+        <!--page
             class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtcore.QVTcore"
             name="%MF_QVTcore">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtcore.ui.keyword_QVTcore"/>
-        </page>
+        </page-->
         <page
-            category="org.eclipse.qvtd.xtext.qvtcore.QVTcore"
+            category="org.eclipse.qvtd.preferences.SyntaxColoringPreferencePage"
             class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtcore.QVTcore.coloring"
-            name="Syntax Coloring">
+            name="%MF_QVTcore">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtcore.ui.keyword_QVTcore"/>
         </page>
         <page
-            category="org.eclipse.qvtd.xtext.qvtcore.QVTcore"
+            category="org.eclipse.qvtd.preferences.TemplatePreferencePage"
             class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.qvtd.xtext.qvtcore.QVTcore.templates"
-            name="%MF_Templates">
+            name="%MF_QVTcore">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtcore.ui.keyword_QVTcore"/>
         </page>
     </extension>
