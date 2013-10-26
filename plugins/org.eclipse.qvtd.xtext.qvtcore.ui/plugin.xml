@@ -12,7 +12,7 @@
               extensions="qvtc"
               icon="icons/QVTcModelFile.gif"
               id="org.eclipse.qvtd.xtext.qvtcore.QVTcore"
-              name="QVTcore Editor">
+              name="%MF_QVTcoreEditor">
         </editor>
     </extension>
     <extension
@@ -47,13 +47,23 @@
                 </with>        
             </and>
         </definition>
+        <definition id="org.eclipse.qvtd.xtext.qvtcore.QVTcore.XtextEditor.opened">
+            <and>
+                <reference definitionId="isXtextEditorActive"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.qvtd.xtext.qvtcore.QVTcore" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
     </extension>
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
             class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtcore.QVTcore"
-            name="QVTcore">
+            name="%MF_QVTcore">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtcore.ui.keyword_QVTcore"/>
         </page>
         <page
@@ -67,7 +77,7 @@
             category="org.eclipse.qvtd.xtext.qvtcore.QVTcore"
             class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.qvtd.xtext.qvtcore.QVTcore.templates"
-            name="Templates">
+            name="%MF_Templates">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtcore.ui.keyword_QVTcore"/>
         </page>
     </extension>
@@ -75,14 +85,14 @@
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.qvtd.xtext.qvtcore.ui.keyword_QVTcore"
-            label="QVTcore"/>
+            label="%MF_QVTcore"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
       <command
-            description="Trigger expensive validation"
+            description="%MF_TriggerExpensiveValidation"
             id="org.eclipse.qvtd.xtext.qvtcore.QVTcore.validate"
-            name="Validate">
+            name="%MF_Validate">
       </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
@@ -91,7 +101,7 @@
              <command
                  commandId="org.eclipse.qvtd.xtext.qvtcore.QVTcore.validate"
                  style="push"
-                 tooltip="Trigger expensive validation">
+                 tooltip="%MF_TriggerExpensiveValidation">
             <visibleWhen checkEnabled="false">
                 <reference
                     definitionId="org.eclipse.qvtd.xtext.qvtcore.QVTcore.Editor.opened">
@@ -139,6 +149,28 @@
     </extension>
 
 
+    <!-- marker definitions for org.eclipse.qvtd.xtext.qvtcore.QVTcore -->
+    <extension
+            id="qvtcore.check.fast"
+            name="%MF_Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="qvtcore.check.normal"
+            name="%MF_Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="qvtcore.check.expensive"
+            name="%MF_Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
 
 	<!-- Quick Outline -->
 	<extension
@@ -156,9 +188,9 @@
 	<extension
 		point="org.eclipse.ui.commands">
 		<command
-			description="Open the quick outline."
+			description="%MF_OpenQuickOutline"
 			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
-			name="Quick Outline">
+			name="%MF_QuickOutline">
 		</command>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
@@ -166,18 +198,39 @@
 			locationURI="popup:#TextEditorContext?after=group.open">
 			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
 				style="push"
-				tooltip="Open Quick Outline">
+				tooltip="MF_OpenQuickOutline">
 				<visibleWhen checkEnabled="false">
 					<reference definitionId="org.eclipse.qvtd.xtext.qvtcore.QVTcore.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
 	</extension>
-   <!-- quickfix marker resolution generator -->
+    <!-- quickfix marker resolution generator for org.eclipse.qvtd.xtext.qvtcore.QVTcore -->
    <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
-            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
+            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.qvtd.xtext.qvtcore.ui.qvtcore.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.qvtd.xtext.qvtcore.ui.qvtcore.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.qvtd.xtext.qvtcore.ui.qvtcore.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
       </markerResolutionGenerator>
    </extension>
 

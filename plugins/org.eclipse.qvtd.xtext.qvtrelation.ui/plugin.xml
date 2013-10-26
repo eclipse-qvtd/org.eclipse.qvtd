@@ -12,7 +12,7 @@
               extensions="qvtr"
               icon="icons/QVTrModelFile.gif"
               id="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation"
-              name="QVTrelation Editor">
+              name="%MF_QVTrelationEditor">
         </editor>
     </extension>
     <extension
@@ -53,21 +53,21 @@
         <page
             class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation"
-            name="QVTrelation">
+            name="%MF_QVTrelation">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtrelation.ui.keyword_QVTrelation"/>
         </page>
         <page
             category="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation"
             class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.coloring"
-            name="Syntax Coloring">
+            name="%MF_SyntaxColoring">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtrelation.ui.keyword_QVTrelation"/>
         </page>
         <page
             category="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation"
             class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.templates"
-            name="Templates">
+            name="%MF_Templates">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtrelation.ui.keyword_QVTrelation"/>
         </page>
     </extension>
@@ -76,7 +76,7 @@
         <page
             class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation"
-            name="QVTrelation">
+            name="%MF_QVTrelation">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtrelation.ui.keyword_QVTrelation"/>
             <enabledWhen>
 	            <adapt type="org.eclipse.core.resources.IProject"/>
@@ -88,14 +88,14 @@
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.qvtd.xtext.qvtrelation.ui.keyword_QVTrelation"
-            label="QVTrelation"/>
+            label="%MF_QVTrelation"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
       <command
-            description="Trigger expensive validation"
+            description="%MF_TriggerExpensiveValidation"
             id="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.validate"
-            name="Validate">
+            name="%MF_Validate">
       </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
@@ -104,7 +104,7 @@
              <command
                  commandId="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.validate"
                  style="push"
-                 tooltip="Trigger expensive validation">
+                 tooltip="%MF_TriggerExpensiveValidation">
             <visibleWhen checkEnabled="false">
                 <reference
                     definitionId="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.Editor.opened">
@@ -155,21 +155,21 @@
     <!-- marker definitions for org.eclipse.qvtd.xtext.qvtrelation.QVTrelation -->
     <extension
             id="qvtrelation.check.fast"
-            name="QVTrelation Problem"
+            name="%MF_Problem"
             point="org.eclipse.core.resources.markers">
         <super type="org.eclipse.xtext.ui.check.fast"/>
         <persistent value="true"/>
     </extension>
     <extension
             id="qvtrelation.check.normal"
-            name="QVTrelation Problem"
+            name="%MF_Problem"
             point="org.eclipse.core.resources.markers">
         <super type="org.eclipse.xtext.ui.check.normal"/>
         <persistent value="true"/>
     </extension>
     <extension
             id="qvtrelation.check.expensive"
-            name="QVTrelation Problem"
+            name="%MF_Problem"
             point="org.eclipse.core.resources.markers">
         <super type="org.eclipse.xtext.ui.check.expensive"/>
         <persistent value="true"/>
@@ -191,9 +191,9 @@
 	<extension
 		point="org.eclipse.ui.commands">
 		<command
-			description="Open the quick outline."
+			description="%MF_OpenQuickOutline"
 			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
-			name="Quick Outline">
+			name="%MF_QuickOutline">
 		</command>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
@@ -201,7 +201,7 @@
 			locationURI="popup:#TextEditorContext?after=group.open">
 			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
 				style="push"
-				tooltip="Open Quick Outline">
+				tooltip="MF_QuickOutline">
 				<visibleWhen checkEnabled="false">
 					<reference definitionId="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.Editor.opened"/>
 				</visibleWhen>

@@ -12,7 +12,7 @@
               extensions="qvti"
               icon="icons/QVTiModelFile.gif"
               id="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative"
-              name="QVTimperative Editor">
+              name="%MF_QVTimperativeEditor">
         </editor>
     </extension>
     <extension
@@ -47,27 +47,37 @@
                 </with>        
             </and>
         </definition>
+        <definition id="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.XtextEditor.opened">
+            <and>
+                <reference definitionId="isXtextEditorActive"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
     </extension>
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
             class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative"
-            name="QVTimperative">
+            name="%MF_QVTimperative">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtimperative.ui.keyword_QVTimperative"/>
         </page>
         <page
             category="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative"
             class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.coloring"
-            name="Syntax Coloring">
+            name="%MF_SyntaxColoring">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtimperative.ui.keyword_QVTimperative"/>
         </page>
         <page
             category="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative"
             class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.templates"
-            name="Templates">
+            name="%MF_Templates">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtimperative.ui.keyword_QVTimperative"/>
         </page>
     </extension>
@@ -75,14 +85,14 @@
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.qvtd.xtext.qvtimperative.ui.keyword_QVTimperative"
-            label="QVTimperative"/>
+            label="%MF_QVTimperative"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
       <command
-            description="Trigger expensive validation"
+            description="%MF_TriggerExpensiveValidation"
             id="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.validate"
-            name="Validate">
+            name="%MF_Validate">
       </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
@@ -91,7 +101,7 @@
              <command
                  commandId="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.validate"
                  style="push"
-                 tooltip="Trigger expensive validation">
+                 tooltip="%MF_TriggerExpensiveValidation">
             <visibleWhen checkEnabled="false">
                 <reference
                     definitionId="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.Editor.opened">
@@ -139,6 +149,28 @@
     </extension>
 
 
+    <!-- marker definitions for org.eclipse.qvtd.xtext.qvtimperative.QVTimperative -->
+    <extension
+            id="qvtimperative.check.fast"
+            name="%MF_Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="qvtimperative.check.normal"
+            name="%MF_Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="qvtimperative.check.expensive"
+            name="%MF_Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
 
 	<!-- Quick Outline -->
 	<extension
@@ -156,9 +188,9 @@
 	<extension
 		point="org.eclipse.ui.commands">
 		<command
-			description="Open the quick outline."
+			description="%MF_OpenQuickOutline"
 			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
-			name="Quick Outline">
+			name="%MF_QuickOutline">
 		</command>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
@@ -166,18 +198,39 @@
 			locationURI="popup:#TextEditorContext?after=group.open">
 			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
 				style="push"
-				tooltip="Open Quick Outline">
+				tooltip="%MF_QuickOutline">
 				<visibleWhen checkEnabled="false">
 					<reference definitionId="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
 	</extension>
-   <!-- quickfix marker resolution generator -->
+    <!-- quickfix marker resolution generator for org.eclipse.qvtd.xtext.qvtimperative.QVTimperative -->
    <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
-            class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
+            class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.qvtd.xtext.qvtimperative.ui.qvtimperative.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.qvtd.xtext.qvtimperative.ui.qvtimperative.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.qvtd.xtext.qvtimperative.ui.qvtimperative.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
       </markerResolutionGenerator>
    </extension>
 
