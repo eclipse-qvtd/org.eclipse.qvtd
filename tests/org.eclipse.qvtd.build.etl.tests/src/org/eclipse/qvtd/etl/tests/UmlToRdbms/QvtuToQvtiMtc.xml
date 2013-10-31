@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<project default="QvtuToQvtmFlattening">
+<project default="QvtuToQvtmPartition">
 	<!-- Default Properties -->
 	<property name="OclLibURI" value="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas"/>
 	<property name="QVTcToQVTuPruning" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTuPruning.eol"/>
 	<property name="QVTcToQVTuFlock" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTu.mig"/>
 	<property name="QVTuToQVTmFlatten" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTuToQVTmFlatten.mig"/>
-	
+	<property name="QVTuToQVTmPartition" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTuToQVTmPartition.etl"/>
     
 	<!-- Create for each example/test -->
 	<property file="build.properties"/>
@@ -38,6 +38,20 @@
             modelFile = "${qvtuas}" 
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="false" store="true"/>
+		<!-- QVTm Flatten  -->
+        <epsilon.emf.loadModel
+            name = "QVTmF"
+            aliases ="QVT"
+            modelFile = "${qvtmflattenas}" 
+            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+            read="false" store="true"/>
+		<!-- QVTm Partition  -->
+        <epsilon.emf.loadModel
+            name = "QVTmP"
+            aliases ="QVT"
+            modelFile = "${qvtmpartitionas}" 
+            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+            read="false" store="true"/>
     </target>
 	
 	<!-- Prunning required til Epsilon SVN r2411 goes live -->
@@ -56,38 +70,20 @@
 	    	<model ref="oclStdLib"/>
 		</epsilon.flock>
 	</target>
-	
-	<!-- Save QVTu, unload QVTc -->
-	<target name ="endQvtcToQvtu" depends="QvtcToQvtu">
-        <epsilon.disposeModel model="QVTc"/>
-		<epsilon.storeModel model="QVTu"/>
-		<epsilon.disposeModel model="QVTu"/>
-    </target>
-	
-	<target name="loadmodelsQVTu" depends="endQvtcToQvtu">
-		<!-- QVTu -->
-        <epsilon.emf.loadModel
-            name = "QVTu"
-            aliases ="QVT"
-            modelFile = "${qvtuas}" 
-            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
-            read="true" store="false"/>
-		<!-- QVTm Flatten  -->
-        <epsilon.emf.loadModel
-            name = "QVTmFlatten"
-            aliases ="QVT"
-            modelFile = "${qvtmflattenas}" 
-            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
-            read="false" store="true"/>
-	</target>
-	
-	<target name="QvtuToQvtmFlattening" depends="loadmodelsQVTu">
-        <epsilon.flock originalmodel="QVTu" migratedmodel="QVTmFlatten" uri="${QVTuToQVTmFlatten}">
+	<target name="QvtuToQvtmFlattening" depends="QvtcToQvtu">
+        <epsilon.flock originalmodel="QVTu" migratedmodel="QVTmF" uri="${QVTuToQVTmFlatten}">
             <model ref="QVTu"/>
-            <model ref="QVTmFlatten"/>
+            <model ref="QVTmF"/>
         	<model ref="config"/>
             <model ref="oclStdLib"/>
         </epsilon.flock>
     </target>
-	
+	<target name="QvtuToQvtmPartition" depends="QvtuToQvtmFlattening">
+		<epsilon.etl uri="${QVTuToQVTmPartition}">
+            <model ref="QVTmF"/>
+            <model ref="QVTmP"/>
+            <model ref="config"/>
+            <model ref="oclStdLib"/>
+	    </epsilon.etl>
+    </target>       
 </project>

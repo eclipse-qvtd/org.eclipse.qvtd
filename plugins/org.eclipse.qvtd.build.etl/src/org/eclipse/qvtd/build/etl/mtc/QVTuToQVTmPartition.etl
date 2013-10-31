@@ -1,0 +1,158 @@
+import "Helpers.eol";
+import "OclLibHelper.eol";
+
+pre {
+    var EmfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
+}
+
+rule CoreModel
+    transform mIn:QVTmF!CoreModel
+    to mOut:QVTmP!CoreModel {
+        mOut.name = mIn.name;
+        mOut.nestedPackage ::= mIn.nestedPackage;
+    }
+
+rule Transformation
+    transform tIn:QVTmF!Transformation
+    to tOut:QVTmP!Transformation {
+        
+        tOut.`rule` ::= tIn.`rule`;
+        for (mp in tIn.modelParameter) {
+            var mpc = EmfTool.getECoreUtil().copy(mp);
+            //QVTmP.resource.contents.add(mpc);
+            tOut.modelParameter.add(mpc);
+            mpc.println();
+        }
+    }
+    
+rule PartitionLM
+    transform mapping:QVTmF!Mapping
+    to mappingLM:QVTmP!Mapping, mappingMR:QVTmP!Mapping {
+        
+        // Only top mappings (named)
+        guard : mapping.name <> null
+        
+        mapping.println();
+        /* Create LM mapping */
+        mappingLM.name = mapping.name + "_LM";
+        // Copy DomainPatterns
+        mappingLM.guardPattern = EmfTool.getECoreUtil().copy(mapping.guardPattern);
+        mappingLM.bottomPattern = EmfTool.getECoreUtil().copy(mapping.bottomPattern);
+        // Remove predicates and assignments that reference variables in the output domain
+        for (gp in mappingLM.guardPattern) {
+            if (gp.predicate.size() > 0) {
+	            gp.predicate.removeAll(gp.offendingPredicates(true));
+	        }
+        }
+        for (bp in mappingLM.bottomPattern) {
+            if (bp.predicate.size() > 0) {
+                bp.predicate.removeAll(bp.offendingPredicates(true));
+            }
+            bp.assignment.println();
+            if (bp.assignment.size() > 0) {
+                bp.assignment.removeAll(bp.offendingAssignments(true));
+            }
+        }
+        // Copy Domains
+        for (d:QVT!Area in mapping.domain) {
+            if (isInputDomain(d)) {
+                var dc = EmfTool.getECoreUtil().copy(d);
+                mappingLM.domain.add(dc);
+            }
+        }
+        
+        /* Create MR mapping */
+        mappingMR.name = mapping.name + "_MR";
+        // Copy DomainPatterns
+        mappingMR.guardPattern = EmfTool.getECoreUtil().copy(mapping.guardPattern);
+        mappingMR.bottomPattern = EmfTool.getECoreUtil().copy(mapping.bottomPattern);
+        // Remove predicates and assignments that reference variables in the output domain
+        for (gp in mappingMR.guardPattern) {
+            if (gp.predicate.size() > 0) {
+                gp.predicate.removeAll(gp.offendingPredicates(false));
+            }
+            
+        }
+        for (bp in mappingLM.bottomPattern) {
+            if (bp.predicate.size() > 0) {
+                bp.predicate.removeAll(bp.offendingPredicates(true));
+            }
+            
+        }
+        for (d:QVT!Area in mapping.domain) {
+            if (not isInputDomain(d)) {
+                var dc = EmfTool.getECoreUtil().copy(d);
+                mappingMR.domain.add(dc);
+            }
+        }
+    }
+
+operation QVT!CorePattern offendingPredicates(output : Boolean) :  Set {
+    
+    var offending : Set;
+    for(p in self.predicate) {
+        // The output domain vars may be either in the argument or in the source
+        if (p.conditionExpression.source.isDefined()) {
+            if (output) {
+	            if (isOutputDomain(p.conditionExpression.source.getArea())) {
+	                offending.add(p);
+	                break;
+	            }
+            } else {
+                if (isInputDomain(p.conditionExpression.source.getArea())) {
+                    offending.add(p);
+                    break;
+                }
+            }
+        }
+        if (p.conditionExpression.argument.isDefined()) {
+            for (a in p.conditionExpression.argument) {
+                if (output) {
+	                if (isOutputDomain(a.getArea())) {
+	                    offending.add(p);
+	                    break;
+	                }
+	            } else {
+	                if (isInputDomain(a.getArea())) {
+                        offending.add(p);
+                        break;
+                    }
+	            }
+            }
+        }
+    }
+    return offending;
+}    
+
+operation QVT!BottomPattern offendingAssignments(output : Boolean) :  Set {
+    var offending : Set;
+    for (a in self.assignment) {
+        if (a.isTypeOf(QVT!PropertyAssignment)) {
+            if (output) {
+	            if (isOutputDomain(a.value.getArea()) or isOutputDomain(a.slotExpression.getArea())) {
+	                offending.add(a);
+	                break;
+	            }
+	        } else {
+	            if (isInputDomain(a.value.getArea()) or isInputDomain(a.slotExpression.getArea())) {
+	                offending.add(a);
+	                break;
+	            }
+	        }    
+        } else if (a.isTypeOf(QVT!VariableAssignment)) {
+	            if (output) {
+	                if (isOutputDomain(a.targetVariable.oppositePattern().area) or isOutputDomain(a.value.getArea())) {
+	                    offending.add(a);
+	                    break;
+	                }
+	            } else {
+	                if (isInputDomain(a.targetVariable.oppositePattern().area) or isInputDomain(a.value.getArea())) {
+	                    offending.add(a);
+	                    break;
+	                }
+	            }
+	        }    
+        }
+    return offending;
+}
+ 

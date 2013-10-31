@@ -9,6 +9,11 @@ operation isMiddleDomain(area : QVT!Area) : Boolean {
     return area.isTypeOf(QVT!Mapping);
 }
 
+@chached
+operation isOutputDomain(area : QVT!Area) : Boolean {
+    return not isInputDomain(area) and not isMiddleDomain(area);
+}
+
 operation isCheckMode() : Boolean {
     return config!Configuration.all.first().mode == config!Mode#checking;
 }
@@ -37,6 +42,10 @@ operation QVT!Variable oppositePattern() : QVT!CorePattern  {
 operation QVT!OCLExpression getArea() : QVT!Area {
     //var area : QVT!Area;
     if (self.isTypeOf(QVT!VariableExp)) {
+        // TODO Hack to deal with undefined variable types? Why is this happening
+        if (self.referredVariable.type() == null) {
+            return null;
+        }
         return self.referredVariable.oppositePattern().area;
     } else if (self.isKindOf(QVT!CallExp)) {
         return self.source.getArea();

@@ -5,6 +5,7 @@
 	<property name="QVTcToQVTuPruning" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTuPruning.eol"/>
 	<property name="QVTcToQVTuFlock" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTu.mig"/>
 	<property name="QVTuToQVTmFlatten" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTuToQVTmFlatten.mig"/>
+	<property name="QVTuToQVTmPartition" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTuToQVTmPartition.etl"/>
 	
     
 	<!-- Create for each example/test -->
@@ -40,9 +41,16 @@
             read="false" store="true"/>
         <!-- QVTm Flatten  -->
         <epsilon.emf.loadModel
-            name = "QVTmFlatten"
+            name = "QVTmF"
             aliases ="QVT"
             modelFile = "${qvtmflattenas}" 
+            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+            read="false" store="true"/>
+		<!-- QVTm Partition  -->
+        <epsilon.emf.loadModel
+            name = "QVTmP"
+            aliases ="QVT"
+            modelFile = "${qvtmpartitionas}" 
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="false" store="true"/>
     </target>
@@ -65,12 +73,21 @@
 	</target>
 	
 	<target name="QvtuToQvtmFlattening" depends="QvtcToQvtu">
-        <epsilon.flock originalmodel="QVTu" migratedmodel="QVTmFlatten" uri="${QVTuToQVTmFlatten}">
+        <epsilon.flock originalmodel="QVTu" migratedmodel="QVTmF" uri="${QVTuToQVTmFlatten}">
             <model ref="QVTu"/>
-            <model ref="QVTmFlatten"/>
+            <model ref="QVTmF"/>
             <model ref="config"/>
             <model ref="oclStdLib"/>
         </epsilon.flock>
     </target>
+		
+	<target name="QvtuToQvtmPartition" depends="QvtuToQvtmFlattening">
+		<epsilon.etl uri="${QVTuToQVTmPartition}">
+			<model ref="QVTmF"/>
+            <model ref="QVTmP"/>
+            <model ref="config"/>
+            <model ref="oclStdLib"/>
+		</epsilon.etl>
+    </target>		
 	
 </project>
