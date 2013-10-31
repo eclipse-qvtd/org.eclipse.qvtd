@@ -21,7 +21,6 @@ rule Transformation
             var mpc = EmfTool.getECoreUtil().copy(mp);
             //QVTmP.resource.contents.add(mpc);
             tOut.modelParameter.add(mpc);
-            mpc.println();
         }
     }
     
@@ -33,6 +32,7 @@ rule PartitionLM
         guard : mapping.name <> null
         
         mapping.println();
+        
         /* Create LM mapping */
         mappingLM.name = mapping.name + "_LM";
         // Copy DomainPatterns
@@ -48,18 +48,31 @@ rule PartitionLM
             if (bp.predicate.size() > 0) {
                 bp.predicate.removeAll(bp.offendingPredicates(true));
             }
-            bp.assignment.println();
             if (bp.assignment.size() > 0) {
                 bp.assignment.removeAll(bp.offendingAssignments(true));
             }
+            /* TODO are there any enforcement operations and realized Variables that must be removed? */
         }
-        // Copy Domains
+        // Copy Input Domains
         for (d:QVT!Area in mapping.domain) {
             if (isInputDomain(d)) {
                 var dc = EmfTool.getECoreUtil().copy(d);
                 mappingLM.domain.add(dc);
             }
         }
+        // No nested mappings are copied, only the nested mapping's bottom pattern predicates
+        // that refer to input domain variables (moved to the bottom pattern)
+        for (nm in mapping.local) {
+            for (bp in nm.bottomPattern) {
+                if (bp.assignment.size() > 0) {
+                    for (a in bp.offendingAssignments(false)) {
+	                    var ac = EmfTool.getECoreUtil().copy(a);
+                        mappingLM.bottomPattern.assignment.add(ac);
+	                }
+	            }
+            }
+        }
+        
         
         /* Create MR mapping */
         mappingMR.name = mapping.name + "_MR";
@@ -77,12 +90,30 @@ rule PartitionLM
             if (bp.predicate.size() > 0) {
                 bp.predicate.removeAll(bp.offendingPredicates(true));
             }
+            if (bp.assignment.size() > 0) {
+                bp.assignment.removeAll(bp.offendingAssignments(true));
+            }
+            /* TODO are there any enforcement operations and realized Variables that must be removed? */
             
         }
+        // Copy Output Domains
         for (d:QVT!Area in mapping.domain) {
-            if (not isInputDomain(d)) {
+            if (isOutputDomain(d)) {
                 var dc = EmfTool.getECoreUtil().copy(d);
                 mappingMR.domain.add(dc);
+            }
+        }
+        // Mested mappings are copied eliminating the nested mapping's bottom pattern predicates
+        // that refer to input domain variables
+        for (nm in mapping.local) {
+            var nmc = EmfTool.getECoreUtil().copy(nm);
+            mappingMR.local.add(nmc);
+        }
+        for (nm in mappingMR.local) {                      
+            for (bp in nm.bottomPattern) {
+                if (bp.assignment.size() > 0) {
+                    bp.assignment.removeAll(bp.offendingAssignments(false));
+                }
             }
         }
     }

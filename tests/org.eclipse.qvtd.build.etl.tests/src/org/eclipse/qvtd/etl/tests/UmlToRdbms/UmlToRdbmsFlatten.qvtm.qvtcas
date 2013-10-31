@@ -77,7 +77,7 @@
         <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
             typedModel="#_Iu0nIzV1EeOp_OQpyMwKcg">
           <guardPattern>
-            <variable xmi:id="_pBc2MEJIEeOd_JdW7SMTOw" name="p" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Package"/>
+            <variable xmi:id="_Fqk5IEJREeO7xrfXjwNcgg" name="p" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Package"/>
           </guardPattern>
           <bottomPattern>
             <variable xmi:id="_Iu1OMDV1EeOp_OQpyMwKcg" name="p" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Package"/>
@@ -153,14 +153,14 @@
                 <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Package"
                     referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace">
                   <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
-                      referredVariable="#_pBc2MUJIEeOd_JdW7SMTOw"/>
+                      referredVariable="#_Fqk5IUJREeO7xrfXjwNcgg"/>
                 </source>
                 <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Package"
-                    referredVariable="#_pBddQEJIEeOd_JdW7SMTOw"/>
+                    referredVariable="#_Fqk5IkJREeO7xrfXjwNcgg"/>
               </conditionExpression>
             </predicate>
             <variable xmi:id="_Iu1ONTV1EeOp_OQpyMwKcg" name="p" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Package"/>
-            <variable xmi:id="_pBc2MUJIEeOd_JdW7SMTOw" name="prim" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"/>
+            <variable xmi:id="_Fqk5IUJREeO7xrfXjwNcgg" name="prim" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"/>
           </guardPattern>
           <bottomPattern>
             <predicate>
@@ -256,13 +256,13 @@
                 <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                     referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
                   <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
-                      referredVariable="#_pBc2MUJIEeOd_JdW7SMTOw"/>
+                      referredVariable="#_Fqk5IUJREeO7xrfXjwNcgg"/>
                 </source>
                 <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                     stringSymbol="Integer"/>
               </conditionExpression>
             </predicate>
-            <variable xmi:id="_pBddQEJIEeOd_JdW7SMTOw" name="p" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Package"/>
+            <variable xmi:id="_Fqk5IkJREeO7xrfXjwNcgg" name="p" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Package"/>
           </guardPattern>
           <bottomPattern>
             <predicate>
@@ -283,7 +283,7 @@
             typedModel="#_Iu0nJDV1EeOp_OQpyMwKcg">
           <guardPattern/>
           <bottomPattern>
-            <variable xmi:id="_pBddQUJIEeOd_JdW7SMTOw" name="sqlType" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
+            <variable xmi:id="_Fqk5I0JREeO7xrfXjwNcgg" name="sqlType" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
             <assignment xsi:type="qvtcb:VariableAssignment" isDefault="false" targetVariable="#_Iu1ONzV1EeOp_OQpyMwKcg">
               <value xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                   stringSymbol="NUMBER"/>
@@ -297,36 +297,36 @@
               <source xsi:type="pivot:PropertyCallExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Package"
                   referredProperty="../../model/UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage">
                 <source xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
-                    referredVariable="#_pBddQkJIEeOd_JdW7SMTOw"/>
+                    referredVariable="#_Fqk5JEJREeO7xrfXjwNcgg"/>
               </source>
               <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Package"
-                  referredVariable="#_pBddQEJIEeOd_JdW7SMTOw"/>
+                  referredVariable="#_Fqk5IkJREeO7xrfXjwNcgg"/>
             </conditionExpression>
           </predicate>
-          <variable xmi:id="_pBddQkJIEeOd_JdW7SMTOw" name="p2s" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"/>
+          <variable xmi:id="_Fqk5JEJREeO7xrfXjwNcgg" name="p2s" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"/>
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.owner">
             <value xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
-                referredVariable="#_pBddQkJIEeOd_JdW7SMTOw"/>
+                referredVariable="#_Fqk5JEJREeO7xrfXjwNcgg"/>
             <slotExpression xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-                referredVariable="#_pBddQ0JIEeOd_JdW7SMTOw"/>
+                referredVariable="#_Fqk5JUJREeO7xrfXjwNcgg"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.primitive">
             <value xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
-                referredVariable="#_pBc2MUJIEeOd_JdW7SMTOw"/>
+                referredVariable="#_Fqk5IUJREeO7xrfXjwNcgg"/>
             <slotExpression xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-                referredVariable="#_pBddQ0JIEeOd_JdW7SMTOw"/>
+                referredVariable="#_Fqk5JUJREeO7xrfXjwNcgg"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.typeName">
             <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                referredVariable="#_pBddQUJIEeOd_JdW7SMTOw"/>
+                referredVariable="#_Fqk5I0JREeO7xrfXjwNcgg"/>
             <slotExpression xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-                referredVariable="#_pBddQ0JIEeOd_JdW7SMTOw"/>
+                referredVariable="#_Fqk5JUJREeO7xrfXjwNcgg"/>
           </assignment>
-          <realizedVariable xmi:id="_pBddQ0JIEeOd_JdW7SMTOw" name="p2n" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"/>
+          <realizedVariable xmi:id="_Fqk5JUJREeO7xrfXjwNcgg" name="p2n" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"/>
         </bottomPattern>
-        <local xmi:id="_pBddREJIEeOd_JdW7SMTOw">
+        <local xmi:id="_Fqk5JkJREeO7xrfXjwNcgg">
           <guardPattern/>
           <bottomPattern>
             <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.name">
@@ -337,16 +337,16 @@
                   <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                       referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
                     <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
-                        referredVariable="#_pBc2MUJIEeOd_JdW7SMTOw"/>
+                        referredVariable="#_Fqk5IUJREeO7xrfXjwNcgg"/>
                   </source>
                   <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                       stringSymbol="2"/>
                 </source>
                 <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                    referredVariable="#_pBddQUJIEeOd_JdW7SMTOw"/>
+                    referredVariable="#_Fqk5I0JREeO7xrfXjwNcgg"/>
               </value>
               <slotExpression xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-                  referredVariable="#_pBddQ0JIEeOd_JdW7SMTOw"/>
+                  referredVariable="#_Fqk5JUJREeO7xrfXjwNcgg"/>
             </assignment>
           </bottomPattern>
         </local>
@@ -361,7 +361,7 @@
                 <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                     referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
                   <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
-                      referredVariable="#_pBc2MUJIEeOd_JdW7SMTOw"/>
+                      referredVariable="#_Fqk5IUJREeO7xrfXjwNcgg"/>
                 </source>
                 <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                     stringSymbol="Boolean"/>
@@ -406,7 +406,7 @@
                 <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                     referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
                   <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
-                      referredVariable="#_pBc2MUJIEeOd_JdW7SMTOw"/>
+                      referredVariable="#_Fqk5IUJREeO7xrfXjwNcgg"/>
                 </source>
                 <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                     stringSymbol="String"/>
@@ -454,7 +454,7 @@
               <conditionExpression xsi:type="pivot:OperationCallExp" referredOperation="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas#o.ocl.Bag.%61%..ocl.OclSelf">
                 <source xsi:type="pivot:PropertyCallExp" referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
                   <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"
-                      referredVariable="#_pBddRUJIEeOd_JdW7SMTOw"/>
+                      referredVariable="#_Fqk5J0JREeO7xrfXjwNcgg"/>
                 </source>
                 <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                     stringSymbol="persistent"/>
@@ -464,14 +464,14 @@
               <conditionExpression xsi:type="pivot:OperationCallExp" referredOperation="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas#o.ocl.Bag.%61%..ocl.OclSelf">
                 <source xsi:type="pivot:PropertyCallExp" referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace">
                   <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"
-                      referredVariable="#_pBddRUJIEeOd_JdW7SMTOw"/>
+                      referredVariable="#_Fqk5J0JREeO7xrfXjwNcgg"/>
                 </source>
                 <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Package"
                     referredVariable="pivot:Variable UmlToRdbms.qvtu.qvtcas#_Iu2cUjV1EeOp_OQpyMwKcg"/>
               </conditionExpression>
             </predicate>
             <variable xmi:id="_Iu2cUjV1EeOp_OQpyMwKcg" name="p" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Package"/>
-            <variable xmi:id="_pBddRUJIEeOd_JdW7SMTOw" name="c" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"/>
+            <variable xmi:id="_Fqk5J0JREeO7xrfXjwNcgg" name="c" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"/>
           </guardPattern>
           <bottomPattern>
             <predicate>
@@ -735,19 +735,19 @@
             <predicate>
               <conditionExpression xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
                   referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Collection.includes..ocl.OclAny">
-                <source xsi:type="pivot:OperationCallExp" type="#_pBeEVkJIEeOd_JdW7SMTOw"
+                <source xsi:type="pivot:OperationCallExp" type="#_FqlgPkJREeO7xrfXjwNcgg"
                     referredOperation="UmlToRdbms.qvtu.qvtcas#o.umlRdbms.getAllForwards..simpleuml.Class">
                   <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"
                       referredVariable="pivot:Variable UmlToRdbms.qvtu.qvtcas#_Iu3DZTV1EeOp_OQpyMwKcg"/>
                 </source>
                 <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Association"
-                    referredVariable="#_pBddRkJIEeOd_JdW7SMTOw"/>
+                    referredVariable="#_Fqk5KEJREeO7xrfXjwNcgg"/>
               </conditionExpression>
             </predicate>
             <predicate>
               <conditionExpression xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
                   referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Collection.includes..ocl.OclAny">
-                <source xsi:type="pivot:OperationCallExp" type="#_pBeEV0JIEeOd_JdW7SMTOw"
+                <source xsi:type="pivot:OperationCallExp" type="#_FqlgP0JREeO7xrfXjwNcgg"
                     referredOperation="UmlToRdbms.qvtu.qvtcas#o.umlRdbms.getAllSupers..simpleuml.Class">
                   <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"
                       referredVariable="pivot:Variable UmlToRdbms.qvtu.qvtcas#_Iu3DZjV1EeOp_OQpyMwKcg"/>
@@ -755,7 +755,7 @@
                 <argument xsi:type="pivot:PropertyCallExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"
                     referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.Association.destination">
                   <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Association"
-                      referredVariable="#_pBddRkJIEeOd_JdW7SMTOw"/>
+                      referredVariable="#_Fqk5KEJREeO7xrfXjwNcgg"/>
                 </argument>
               </conditionExpression>
             </predicate>
@@ -763,7 +763,7 @@
               <conditionExpression xsi:type="pivot:OperationCallExp" referredOperation="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas#o.ocl.Bag.%61%..ocl.OclSelf">
                 <source xsi:type="pivot:PropertyCallExp" referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.Association.source">
                   <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Association"
-                      referredVariable="#_pBddRkJIEeOd_JdW7SMTOw"/>
+                      referredVariable="#_Fqk5KEJREeO7xrfXjwNcgg"/>
                 </source>
                 <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"
                     referredVariable="pivot:Variable UmlToRdbms.qvtu.qvtcas#_Iu3DZTV1EeOp_OQpyMwKcg"/>
@@ -773,7 +773,7 @@
               <conditionExpression xsi:type="pivot:OperationCallExp" referredOperation="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas#o.ocl.Bag.%61%..ocl.OclSelf">
                 <source xsi:type="pivot:PropertyCallExp" referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.Association.destination">
                   <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Association"
-                      referredVariable="#_pBddRkJIEeOd_JdW7SMTOw"/>
+                      referredVariable="#_Fqk5KEJREeO7xrfXjwNcgg"/>
                 </source>
                 <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"
                     referredVariable="pivot:Variable UmlToRdbms.qvtu.qvtcas#_Iu3DZjV1EeOp_OQpyMwKcg"/>
@@ -783,7 +783,7 @@
               <conditionExpression xsi:type="pivot:OperationCallExp" referredOperation="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas#o.ocl.Bag.%61%..ocl.OclSelf">
                 <source xsi:type="pivot:PropertyCallExp" referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace">
                   <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Association"
-                      referredVariable="#_pBddRkJIEeOd_JdW7SMTOw"/>
+                      referredVariable="#_Fqk5KEJREeO7xrfXjwNcgg"/>
                 </source>
                 <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Package"
                     referredVariable="pivot:Variable UmlToRdbms.qvtu.qvtcas#_Iu3DZDV1EeOp_OQpyMwKcg"/>
@@ -792,7 +792,7 @@
             <variable xmi:id="_Iu3DZDV1EeOp_OQpyMwKcg" name="p" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Package"/>
             <variable xmi:id="_Iu3DZTV1EeOp_OQpyMwKcg" name="sc" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"/>
             <variable xmi:id="_Iu3DZjV1EeOp_OQpyMwKcg" name="dc" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"/>
-            <variable xmi:id="_pBddRkJIEeOd_JdW7SMTOw" name="a" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Association"/>
+            <variable xmi:id="_Fqk5KEJREeO7xrfXjwNcgg" name="a" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Association"/>
           </guardPattern>
           <bottomPattern>
             <predicate>
@@ -1328,27 +1328,27 @@
             <predicate>
               <conditionExpression xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
                   referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Collection.includes..ocl.OclAny">
-                <source xsi:type="pivot:OperationCallExp" type="#_pBeEWEJIEeOd_JdW7SMTOw"
+                <source xsi:type="pivot:OperationCallExp" type="#_FqlgQEJREeO7xrfXjwNcgg"
                     referredOperation="UmlToRdbms.qvtu.qvtcas#o.umlRdbms.getAllAttributes..simpleuml.Class">
                   <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"
-                      referredVariable="#_pBddS0JIEeOd_JdW7SMTOw"/>
+                      referredVariable="#_FqlgNEJREeO7xrfXjwNcgg"/>
                 </source>
                 <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                    referredVariable="#_pBddR0JIEeOd_JdW7SMTOw"/>
+                    referredVariable="#_FqlgMEJREeO7xrfXjwNcgg"/>
               </conditionExpression>
             </predicate>
             <predicate>
               <conditionExpression xsi:type="pivot:OperationCallExp" referredOperation="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas#o.ocl.Bag.%61%..ocl.OclSelf">
                 <source xsi:type="pivot:PropertyCallExp" referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
                   <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                      referredVariable="#_pBddR0JIEeOd_JdW7SMTOw"/>
+                      referredVariable="#_FqlgMEJREeO7xrfXjwNcgg"/>
                 </source>
                 <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"
-                    referredVariable="#_pBddS0JIEeOd_JdW7SMTOw"/>
+                    referredVariable="#_FqlgNEJREeO7xrfXjwNcgg"/>
               </conditionExpression>
             </predicate>
             <variable xmi:id="_Iu4RgjV1EeOp_OQpyMwKcg" name="c" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"/>
-            <variable xmi:id="_pBddR0JIEeOd_JdW7SMTOw" name="a" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute"/>
+            <variable xmi:id="_FqlgMEJREeO7xrfXjwNcgg" name="a" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute"/>
           </guardPattern>
           <bottomPattern>
             <predicate>
@@ -1424,22 +1424,22 @@
             </conditionExpression>
           </predicate>
           <variable xmi:id="_Iu4RiDV1EeOp_OQpyMwKcg" name="fao" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"/>
-          <variable xmi:id="_pBddSEJIEeOd_JdW7SMTOw" name="fao" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"/>
+          <variable xmi:id="_FqlgMUJREeO7xrfXjwNcgg" name="fao" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"/>
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.attribute">
             <value xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                referredVariable="#_pBddR0JIEeOd_JdW7SMTOw"/>
+                referredVariable="#_FqlgMEJREeO7xrfXjwNcgg"/>
             <slotExpression xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-                referredVariable="#_pBddSUJIEeOd_JdW7SMTOw"/>
+                referredVariable="#_FqlgMkJREeO7xrfXjwNcgg"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
             <value xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
-                referredVariable="#_pBddSEJIEeOd_JdW7SMTOw"/>
+                referredVariable="#_FqlgMUJREeO7xrfXjwNcgg"/>
             <slotExpression xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-                referredVariable="#_pBddSUJIEeOd_JdW7SMTOw"/>
+                referredVariable="#_FqlgMkJREeO7xrfXjwNcgg"/>
           </assignment>
-          <realizedVariable xmi:id="_pBddSUJIEeOd_JdW7SMTOw" name="fa" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"/>
+          <realizedVariable xmi:id="_FqlgMkJREeO7xrfXjwNcgg" name="fa" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"/>
         </bottomPattern>
         <local xmi:id="_Iu4RiTV1EeOp_OQpyMwKcg">
           <guardPattern/>
@@ -1455,17 +1455,17 @@
             </assignment>
           </bottomPattern>
         </local>
-        <local xmi:id="_pBddSkJIEeOd_JdW7SMTOw">
+        <local xmi:id="_FqlgM0JREeO7xrfXjwNcgg">
           <guardPattern/>
           <bottomPattern>
             <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
               <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                   referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
                 <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                    referredVariable="#_pBddR0JIEeOd_JdW7SMTOw"/>
+                    referredVariable="#_FqlgMEJREeO7xrfXjwNcgg"/>
               </value>
               <slotExpression xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-                  referredVariable="#_pBddSUJIEeOd_JdW7SMTOw"/>
+                  referredVariable="#_FqlgMkJREeO7xrfXjwNcgg"/>
             </assignment>
           </bottomPattern>
         </local>
@@ -1478,14 +1478,14 @@
               <conditionExpression xsi:type="pivot:OperationCallExp" referredOperation="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas#o.ocl.Bag.%61%..ocl.OclSelf">
                 <source xsi:type="pivot:PropertyCallExp" referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.Attribute.type">
                   <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                      referredVariable="#_pBddR0JIEeOd_JdW7SMTOw"/>
+                      referredVariable="#_FqlgMEJREeO7xrfXjwNcgg"/>
                 </source>
                 <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
                     referredVariable="pivot:Variable UmlToRdbms.qvtu.qvtcas#_Iu44kDV1EeOp_OQpyMwKcg"/>
               </conditionExpression>
             </predicate>
             <variable xmi:id="_Iu44kDV1EeOp_OQpyMwKcg" name="t" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"/>
-            <variable xmi:id="_pBddS0JIEeOd_JdW7SMTOw" name="c" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"/>
+            <variable xmi:id="_FqlgNEJREeO7xrfXjwNcgg" name="c" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"/>
           </guardPattern>
           <bottomPattern>
             <predicate>
@@ -1580,7 +1580,7 @@
                 <source xsi:type="pivot:PropertyCallExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Classifier"
                     referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.Attribute.type">
                   <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                      referredVariable="#_pBddR0JIEeOd_JdW7SMTOw"/>
+                      referredVariable="#_FqlgMEJREeO7xrfXjwNcgg"/>
                 </source>
                 <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"
                     referredVariable="pivot:Variable UmlToRdbms.qvtu.qvtcas#_Iu44mTV1EeOp_OQpyMwKcg"/>
@@ -1620,10 +1620,10 @@
               <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"
                   referredProperty="../../model/UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass">
                 <source xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
-                    referredVariable="#_pBddTEJIEeOd_JdW7SMTOw"/>
+                    referredVariable="#_FqlgNUJREeO7xrfXjwNcgg"/>
               </source>
               <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"
-                  referredVariable="#_pBddS0JIEeOd_JdW7SMTOw"/>
+                  referredVariable="#_FqlgNEJREeO7xrfXjwNcgg"/>
             </conditionExpression>
           </predicate>
           <predicate>
@@ -1632,39 +1632,39 @@
               <source xsi:type="pivot:PropertyCallExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
                   referredProperty="../../model/UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.primitive">
                 <source xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-                    referredVariable="#_pBddTUJIEeOd_JdW7SMTOw"/>
+                    referredVariable="#_FqlgNkJREeO7xrfXjwNcgg"/>
               </source>
               <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
                   referredVariable="pivot:Variable UmlToRdbms.qvtu.qvtcas#_Iu44kDV1EeOp_OQpyMwKcg"/>
             </conditionExpression>
           </predicate>
-          <variable xmi:id="_pBddTEJIEeOd_JdW7SMTOw" name="fao" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"/>
-          <variable xmi:id="_pBddTUJIEeOd_JdW7SMTOw" name="p2n" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"/>
+          <variable xmi:id="_FqlgNUJREeO7xrfXjwNcgg" name="fao" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"/>
+          <variable xmi:id="_FqlgNkJREeO7xrfXjwNcgg" name="p2n" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"/>
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/UMLtoRDBMS.ecore.oclas#p.umltordbms.AttributeToColumn.type">
             <value xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-                referredVariable="#_pBddTUJIEeOd_JdW7SMTOw"/>
+                referredVariable="#_FqlgNkJREeO7xrfXjwNcgg"/>
             <slotExpression xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
-                referredVariable="#_pBddTkJIEeOd_JdW7SMTOw"/>
+                referredVariable="#_FqlgN0JREeO7xrfXjwNcgg"/>
           </assignment>
-          <realizedVariable xmi:id="_pBddTkJIEeOd_JdW7SMTOw" name="fa" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"/>
+          <realizedVariable xmi:id="_FqlgN0JREeO7xrfXjwNcgg" name="fa" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"/>
         </bottomPattern>
-        <local xmi:id="_pBeEUEJIEeOd_JdW7SMTOw">
+        <local xmi:id="_FqlgOEJREeO7xrfXjwNcgg">
           <guardPattern/>
           <bottomPattern>
             <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.name">
               <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                   referredProperty="../../model/SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
                 <source xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                    referredVariable="#_pBddR0JIEeOd_JdW7SMTOw"/>
+                    referredVariable="#_FqlgMEJREeO7xrfXjwNcgg"/>
               </value>
               <slotExpression xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-                  referredVariable="#_pBddSUJIEeOd_JdW7SMTOw"/>
+                  referredVariable="#_FqlgMkJREeO7xrfXjwNcgg"/>
             </assignment>
           </bottomPattern>
         </local>
-        <local xmi:id="_pBeEUUJIEeOd_JdW7SMTOw">
+        <local xmi:id="_FqlgOUJREeO7xrfXjwNcgg">
           <guardPattern/>
           <bottomPattern/>
         </local>
@@ -1672,9 +1672,9 @@
       <rule xsi:type="qvtc:Mapping" xmi:id="_Iu44nTV1EeOp_OQpyMwKcg" name="classComplexAttributes">
         <guardPattern/>
         <bottomPattern>
-          <realizedVariable xmi:id="_pBeEUkJIEeOd_JdW7SMTOw" name="fa" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"/>
+          <realizedVariable xmi:id="_FqlgOkJREeO7xrfXjwNcgg" name="fa" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"/>
         </bottomPattern>
-        <local xmi:id="_pBeEU0JIEeOd_JdW7SMTOw">
+        <local xmi:id="_FqlgO0JREeO7xrfXjwNcgg">
           <guardPattern/>
           <bottomPattern/>
         </local>
@@ -1687,16 +1687,16 @@
               <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute"
                   referredProperty="../../model/UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.attribute">
                 <source xsi:type="pivot:VariableExp" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"
-                    referredVariable="#_pBeEVEJIEeOd_JdW7SMTOw"/>
+                    referredVariable="#_FqlgPEJREeO7xrfXjwNcgg"/>
               </source>
               <argument xsi:type="pivot:VariableExp" type="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute"
                   referredVariable="pivot:Variable UmlToRdbms.qvtu.qvtcas#_Iu44lTV1EeOp_OQpyMwKcg"/>
             </conditionExpression>
           </predicate>
-          <variable xmi:id="_pBeEVEJIEeOd_JdW7SMTOw" name="fao" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"/>
+          <variable xmi:id="_FqlgPEJREeO7xrfXjwNcgg" name="fao" type="../../model/UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"/>
         </guardPattern>
         <bottomPattern/>
-        <local xmi:id="_pBeEVUJIEeOd_JdW7SMTOw">
+        <local xmi:id="_FqlgPUJREeO7xrfXjwNcgg">
           <guardPattern/>
           <bottomPattern/>
         </local>
@@ -2135,70 +2135,70 @@
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" xmi:id="_pBeEVkJIEeOd_JdW7SMTOw" name="Set"
-        superClass="#_pBeEWUJIEeOd_JdW7SMTOw #_pBeEWkJIEeOd_JdW7SMTOw" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Association">
+    <ownedType xsi:type="pivot:SetType" xmi:id="_FqlgPkJREeO7xrfXjwNcgg" name="Set"
+        superClass="#_FqlgQUJREeO7xrfXjwNcgg #_FqlgQkJREeO7xrfXjwNcgg" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Association">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
         <parameterSubstitution actual="pivot:Class ../../model/SimpleUML.ecore.oclas#T.simpleuml.Association"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" xmi:id="_pBeEV0JIEeOd_JdW7SMTOw" name="Set"
-        superClass="#_pBeEW0JIEeOd_JdW7SMTOw #_pBeEXEJIEeOd_JdW7SMTOw" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class">
+    <ownedType xsi:type="pivot:SetType" xmi:id="_FqlgP0JREeO7xrfXjwNcgg" name="Set"
+        superClass="#_FqlgQ0JREeO7xrfXjwNcgg #_FqmHQEJREeO7xrfXjwNcgg" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
         <parameterSubstitution actual="pivot:Class ../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" xmi:id="_pBeEWEJIEeOd_JdW7SMTOw" name="Set"
-        superClass="#_pBeEXUJIEeOd_JdW7SMTOw #_pBeEXkJIEeOd_JdW7SMTOw" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute">
+    <ownedType xsi:type="pivot:SetType" xmi:id="_FqlgQEJREeO7xrfXjwNcgg" name="Set"
+        superClass="#_FqmHQUJREeO7xrfXjwNcgg #_FqmHQkJREeO7xrfXjwNcgg" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
         <parameterSubstitution actual="pivot:Class ../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_pBeEWUJIEeOd_JdW7SMTOw" name="Bag"
-        superClass="#_pBeEX0JIEeOd_JdW7SMTOw" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Association">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_FqlgQUJREeO7xrfXjwNcgg" name="Bag"
+        superClass="#_FqmHQ0JREeO7xrfXjwNcgg" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Association">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Bag">
         <parameterSubstitution actual="pivot:Class ../../model/SimpleUML.ecore.oclas#T.simpleuml.Association"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_pBeEWkJIEeOd_JdW7SMTOw" name="UniqueCollection"
-        superClass="#_pBeEX0JIEeOd_JdW7SMTOw" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Association">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_FqlgQkJREeO7xrfXjwNcgg" name="UniqueCollection"
+        superClass="#_FqmHQ0JREeO7xrfXjwNcgg" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Association">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
         <parameterSubstitution actual="pivot:Class ../../model/SimpleUML.ecore.oclas#T.simpleuml.Association"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_pBeEW0JIEeOd_JdW7SMTOw" name="Bag"
-        superClass="#_pBeEYEJIEeOd_JdW7SMTOw" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_FqlgQ0JREeO7xrfXjwNcgg" name="Bag"
+        superClass="#_FqmHREJREeO7xrfXjwNcgg" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Bag">
         <parameterSubstitution actual="pivot:Class ../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_pBeEXEJIEeOd_JdW7SMTOw" name="UniqueCollection"
-        superClass="#_pBeEYEJIEeOd_JdW7SMTOw" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_FqmHQEJREeO7xrfXjwNcgg" name="UniqueCollection"
+        superClass="#_FqmHREJREeO7xrfXjwNcgg" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
         <parameterSubstitution actual="pivot:Class ../../model/SimpleUML.ecore.oclas#T.simpleuml.Class"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_pBeEXUJIEeOd_JdW7SMTOw" name="Bag"
-        superClass="#_pBeEYUJIEeOd_JdW7SMTOw" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_FqmHQUJREeO7xrfXjwNcgg" name="Bag"
+        superClass="#_FqmHRUJREeO7xrfXjwNcgg" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Bag">
         <parameterSubstitution actual="pivot:Class ../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_pBeEXkJIEeOd_JdW7SMTOw" name="UniqueCollection"
-        superClass="#_pBeEYUJIEeOd_JdW7SMTOw" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_FqmHQkJREeO7xrfXjwNcgg" name="UniqueCollection"
+        superClass="#_FqmHRUJREeO7xrfXjwNcgg" elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
         <parameterSubstitution actual="pivot:Class ../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_pBeEX0JIEeOd_JdW7SMTOw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_FqmHQ0JREeO7xrfXjwNcgg" name="Collection"
         superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"
         elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Association">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Collection">
@@ -2206,7 +2206,7 @@
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_pBeEYEJIEeOd_JdW7SMTOw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_FqmHREJREeO7xrfXjwNcgg" name="Collection"
         superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"
         elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Class">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Collection">
@@ -2214,7 +2214,7 @@
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_pBeEYUJIEeOd_JdW7SMTOw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_FqmHRUJREeO7xrfXjwNcgg" name="Collection"
         superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"
         elementType="../../model/SimpleUML.ecore.oclas#T.simpleuml.Attribute">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Collection">
