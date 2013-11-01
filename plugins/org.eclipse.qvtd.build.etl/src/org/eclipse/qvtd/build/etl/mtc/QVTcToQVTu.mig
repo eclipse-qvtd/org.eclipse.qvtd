@@ -48,6 +48,7 @@ migrate CoreDomain
 // Make sure variables and predicates are contained in the pattern    
 migrate BottomPattern 
     when : isInputDomain(original.area) {
+        
 	    migrated.variable.addAll(original.realizedVariable.equivalent());
 	    for (a in  original.assignment) {
 	        migrated.predicate.add(a.equivalent());

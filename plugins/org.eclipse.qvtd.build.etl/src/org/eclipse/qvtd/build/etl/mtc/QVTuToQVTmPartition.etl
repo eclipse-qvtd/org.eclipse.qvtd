@@ -175,11 +175,14 @@ rule BottomPatterns
         }
     }
     
-    //.assignemnt
+    // .assignemnt
     if (bp.assignment.size() > 0) {
+        bp.offendingAssignments(true).println("Off asg input ");
+        bp.assignment.excluding(bp.offendingAssignments(true)).println();
         for (a in bp.assignment.excluding(bp.offendingAssignments(true))) {
             lmbp.assignment.add(a.equivalent());
         }
+        bp.offendingAssignments(false).println("Off asg output ");
         for (a in bp.assignment.excluding(bp.offendingAssignments(false))) {
             mrbp.assignment.add(a.equivalent());
         }
@@ -287,7 +290,7 @@ operation QVT!CorePattern offendingPredicates(output : Boolean) :  Set {
     return offending;
 }    
 
-/*  Returns a set of assignments that don't match the specified (output) domain.
+/*  Returns a set of assignments that don't match the specified domain.
     params:
     output : Boolean    Indicates whether the output (true) or input (false)
                         domain is matched.    
