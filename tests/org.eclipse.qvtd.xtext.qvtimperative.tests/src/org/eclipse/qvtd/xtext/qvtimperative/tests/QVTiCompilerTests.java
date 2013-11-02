@@ -180,6 +180,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		OCLstdlibTables.LIBRARY.getClass();		// Ensure coherent initialization
 		metaModelManager = new MetaModelManager();
 		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
+		metaModelManager.configureLoadFirstStrategy();
 		Resource genResource = resourceSet.getResource(genModelURI, true);
 		for (EObject eObject : genResource.getContents()) {
 			if (eObject instanceof GenModel) {
