@@ -72,7 +72,6 @@ public interface Rule extends EObject, NamedElement {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getRule_Overrides()
 	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#getOverridden
 	 * @model opposite="overridden"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='overriden'"
 	 * @generated
 	 */
 	Rule getOverrides();

@@ -48,7 +48,7 @@ public interface Unit extends EObject, NamedElement {
 	 * @return the value of the '<em>Used Package</em>' reference.
 	 * @see #setUsedPackage(Namespace)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getUnit_UsedPackage()
-	 * @model ordered="false"
+	 * @model
 	 * @generated
 	 */
 	Namespace getUsedPackage();
