@@ -14,7 +14,7 @@
       <package
             uri="http://www.eclipse.org/qvt/0.9/QVTimperativeCST"
             class="org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage"
-            genModel="model/QVTimperativeCST.genmodel"/>
+            genModel="model/QVTimperativeCS.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
