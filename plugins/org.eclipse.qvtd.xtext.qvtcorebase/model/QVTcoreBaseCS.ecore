@@ -2,6 +2,12 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtcorebasecs" nsURI="http://www.eclipse.org/qvt/0.9/QVTcoreBaseCST"
     nsPrefix="qvtcbcs">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="basecs" value="../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#/"/>
+    <details key="essentialoclcs" value="../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.ecore#/"/>
+    <details key="qvtb" value="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/"/>
+    <details key="qvtcb" value="../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/"/>
+  </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractMappingCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#//NamedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="domains" upperBound="-1"
         eType="#//DomainCS" containment="true"/>

@@ -36,11 +36,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="domain" upperBound="-1"
         eType="#//Domain" containment="true" eOpposite="#//Domain/rule"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="overrides" eType="#//Rule"
-        eOpposite="#//Rule/overridden">
-      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
-        <details key="body" value="overriden"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+        eOpposite="#//Rule/overridden"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" eType="#//Transformation"
         transient="true" resolveProxies="false" eOpposite="#//Transformation/rule"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="overridden" ordered="false"
@@ -52,10 +48,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transformation" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Class ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Package">
     <eOperations name="getFunction" lowerBound="1" eType="#//Function">
-      <eParameters name="name" lowerBound="1" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      <eParameters name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="getModelParameter" lowerBound="1" eType="#//TypedModel">
-      <eParameters name="name" lowerBound="1" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      <eParameters name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTag" ordered="false"
         upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Annotation"
@@ -83,7 +79,6 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Unit" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="usedPackage" ordered="false"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Namespace"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usedPackage" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Namespace"/>
   </eClassifiers>
 </ecore:EPackage>
