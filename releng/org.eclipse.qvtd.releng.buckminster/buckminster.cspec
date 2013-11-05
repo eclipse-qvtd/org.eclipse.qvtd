@@ -26,10 +26,10 @@
                 <cs:property key="targets" value="setup.publisher"/>
             </cs:actorProperties>
         </cs:public>
-        <cs:public name="publish" actor="ant">
+        <cs:public name="publish.build" actor="ant">
             <cs:actorProperties>
                 <cs:property key="buildFile" value="promoter.ant"/>
-                <cs:property key="targets" value="publish"/>
+                <cs:property key="targets" value="publish.build"/>
             </cs:actorProperties>
         </cs:public>
     </cs:actions>
