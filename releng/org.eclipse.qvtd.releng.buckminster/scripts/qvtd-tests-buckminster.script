@@ -19,4 +19,5 @@ perform --properties "${checkout.location}/buildroot/build.properties" "-Dbuckmi
 perform --properties "${checkout.location}/buildroot/build.properties" "org.eclipse.qvtd.releng.buckminster:buckminster#setup.promoter"
 perform --properties "${checkout.location}/buildroot/build.properties" "org.eclipse.qvtd.releng.buckminster:buckminster#setup.publisher"
 
+perform --properties "${checkout.location}/buildroot/build.properties" "org.eclipse.qvtd.releng.buckminster:buckminster#publish"
 #perform --properties "${checkout.location}/buildroot/tagging.properties" "org.eclipse.FIXME.build#tag"
