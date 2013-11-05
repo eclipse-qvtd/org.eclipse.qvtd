@@ -30,6 +30,7 @@
             <cs:actorProperties>
                 <cs:property key="buildFile" value="promoter.ant"/>
                 <cs:property key="targets" value="publish.build"/>
+                <cs:property key="build.archives" value="/home/hudson/genie.modeling.mdt.ocl/.hudson/jobs/qvtd-luna/lastSuccessful/archive"/>
             </cs:actorProperties>
         </cs:public>
     </cs:actions>
