@@ -1,15 +1,16 @@
 import "Helpers.eol";
 import "OclLibHelper.eol";
 
+//var pivotUtil = new Native("org.eclipse.ocl.examples.pivot.utilities.PivotUtil");
 // First merge so duplicates may appear
-mergeMiddlePatterns();
+//mergeMiddlePatterns();
 removeDuplicateVariables();
 mergeVariablesWithKindOfTypes();
 
 // Check for duplicate variable declarations and leave only one.
 operation removeDuplicateVariables() {
     // Variables
-    for (cp in QVTu!CorePattern.all) {
+    for (cp in QVTmF!CorePattern.all) {
         // Delete duplicate vars
         var duplicates : Set();
         for (v in cp.variable) {
@@ -24,7 +25,7 @@ operation removeDuplicateVariables() {
         }
     }
     // RealizedVariables
-    for (bp in QVTu!BottomPattern.all) {
+    for (bp in QVTmF!BottomPattern.all) {
         // Delete duplicate vars
         var duplicates : Set();
         for (v in bp.realizedVariable) {
@@ -43,11 +44,10 @@ operation removeDuplicateVariables() {
 
 // Check for variable declarations with types in the same hierarchy and leave the
 // lowest (less abstract) one
-// TODO in the general case we could have multiple vars, not just pairs 
 operation mergeVariablesWithKindOfTypes() {
     // Variables should have the same name and diffferent type
     // Variables
-    for (cp in QVTu!CorePattern.all) {
+    for (cp in QVTmF!CorePattern.all) {
         // Duplicate vars
         var duplicates : Set();
         for (v in cp.variable) {
@@ -56,19 +56,42 @@ operation mergeVariablesWithKindOfTypes() {
             }
         }
         for (v in duplicates) {
+            // TODO in the general case we could have multiple vars, not just pairs 
             var pairs = cp.variable.select(v2 |
                     v2.name == v);
-            if (pairs.first().isKindOf(pairs.last().type())) {
+            
+            pairs.first().name.println("Var ");
+            pairs.first().id.println("Id ");
+            pairs.first().type().println("type() ");
+            pairs.first().type.println("var type ");
+            //Native("org.eclipse.ocl.examples.pivot.utilities.PivotUtil").getType(pairs.first()).println("OCL Type ");
+            
+            var x = new Native("org.eclipse.qvtd.etl.tests.EolToOclBridge");
+            x.test(pairs.first().type());
+            x.test2(pairs.first().type);
+             
+            pairs.first().type.getPackage().println(" ");
+            //pairs.first().type.getJavaClass().println("var type ");
+            pairs.first().type.name.println("var type.name ");
+            pairs.first().type.type().println("var type.type() ");
+            //Native("org.eclipse.ocl.examples.pivot.utilities.PivotUtil").getType(x).println("OCL Type ");
+            
+            pairs.first().type.getInstanceClassName().println("Name ");
+            pairs.first().type.getLocalSuperTypes().println("Type ");
+            pairs.last().type.getSuperClass().println("Type ");
+            
+            
+            if (pairs.first().type.isKindOf(pairs.last().type)) {
                 // The first is the more concrete class, delete the last
                 cp.variable.remove(pairs.last());
-            } else if (pairs.last().isKindOf(pairs.first().type())) {
+            } else if (pairs.last().type.isKindOf(pairs.first().type)) {
                 // The last is the more concrete class, delete the first
                 cp.variable.remove(pairs.first());
             }
         }
     }
     // RealizedVariables
-    for (bp in QVTu!BottomPattern.all) {
+    for (bp in QVTmF!BottomPattern.all) {
         // Duplicate vars
         var duplicates : Set();
         for (v in cp.realizedVariable) {
@@ -91,16 +114,17 @@ operation mergeVariablesWithKindOfTypes() {
 }
 
 // Merge nested mappings with no domains.
+/* REVISAR ESTO PQ TOCA HAVERLO POR CADA UNO DE LOS ELEMENTOS DEL PATTERN */
 operation mergeMiddlePatterns() {
-    for (m in QVTu!Mapping.all) {
-        var guardPatterns;
-        var bottomPatterns;
+    for (m in QVTmF!Mapping.all) {
+        var guardPatterns : Set;
+        var bottomPatterns : Set;
         for (nm in m.local.select(nm | nm.domain.size() == 0)) {
             guardPatterns.add(nm.guardPattern);
             bottomPatterns.add(nm.bottomPattern);
         }
         m.local.remove(nm | nm.domain.size() == 0);
-        var nm : QVTu!Mapping;
+        var nm : QVTmF!Mapping;
         nm.guardPattern = guardPatterns;
         nm.bottomPattern = bottomPatterns;
         m.local.add(nm);

@@ -16,13 +16,20 @@ rule Transformation
     transform tIn:QVTmF!Transformation
     to tOut:QVTmP!Transformation {
         
+        tOut.name = tIn.name;
         tOut.`rule` ::= tIn.`rule`;
-        for (mp in tIn.modelParameter) {
-            var mpc = EmfTool.getECoreUtil().copy(mp);
-            //QVTmP.resource.contents.add(mpc);
-            tOut.modelParameter.add(mpc);
-        }
+        tOut.modelParameter ::= tIn.modelParameter;
     }
+
+rule TypedModels
+    transform itm:QVTmF!TypedModel
+    to otm:QVTmF!TypedModel {
+        
+        otm.name = itm.name;
+        otm.usedPackage = itm.usedPackage.clone();
+        otm.dependsOn ::= itm.dependsOn;
+    }
+
     
 rule PartitionLM
     transform mapping:QVTmF!Mapping
@@ -36,36 +43,21 @@ rule PartitionLM
         /* Create LM mapping */
         mappingLM.name = mapping.name + "_LM";
         
-        // Copy DomainPatterns
-        //mappingLM.guardPattern = EmfTool.getECoreUtil().copy(mapping.guardPattern);
-        mappingLM.guardPattern = mapping.guardPattern.equivalents().first();
-        
-        //mappingLM.bottomPattern = EmfTool.getECoreUtil().copy(mapping.bottomPattern);
-        mappingLM.bottomPattern = mapping.bottomPattern.equivalents().first();
-        
-        // Remove predicates and assignments that reference variables in the output domain
-        /* 
-        for (gp in mappingLM.guardPattern) {
-            if (gp.predicate.size() > 0) {
-	            gp.predicate.removeAll(gp.offendingPredicates(true));
-	        }
-        }
-        for (bp in mappingLM.bottomPattern) {
-            if (bp.predicate.size() > 0) {
-                bp.predicate.removeAll(bp.offendingPredicates(true));
-            }
-            if (bp.assignment.size() > 0) {
-                bp.assignment.removeAll(bp.offendingAssignments(true));
-            }
-        }
-        */
         // Copy Input Domains
         for (d:QVT!Area in mapping.domain) {
             if (isInputDomain(d)) {
-                var dc = EmfTool.getECoreUtil().copy(d);
-                mappingLM.domain.add(dc);
+                mappingLM.domain.add(d.equivalent());
             }
         }
+        // MappingPatterns
+        mappingLM.guardPattern = mapping.guardPattern.equivalents().first();
+        mappingLM.bottomPattern = mapping.bottomPattern.equivalents().first();
+        
+        // Assignemnt variable resolution
+        for (a in mappingLM.bottomPattern.assignment) {
+            a.resolveVariables();
+        }
+        
         // No nested mappings are copied, only the nested mapping's bottom pattern predicates
         // that refer to input domain variables (moved to the bottom pattern)
         for (nm in mapping.local) {
@@ -82,34 +74,14 @@ rule PartitionLM
         
         /* Create MR mapping */
         mappingMR.name = mapping.name + "_MR";
-        // Copy DomainPatterns
-        //mappingMR.guardPattern = EmfTool.getECoreUtil().copy(mapping.guardPattern);
+        // DomainPatterns
         mappingMR.guardPattern = mapping.guardPattern.equivalents().last();
         mappingMR.bottomPattern = mapping.bottomPattern.equivalents().last();
         
-        // mappingMR.bottomPattern = EmfTool.getECoreUtil().copy(mapping.bottomPattern);
-        // Remove predicates and assignments that reference variables in the output domain
-        /* 
-        for (gp in mappingMR.guardPattern) {
-            if (gp.predicate.size() > 0) {
-                gp.predicate.removeAll(gp.offendingPredicates(false));
-            }
-            
-        }
-        for (bp in mappingLM.bottomPattern) {
-            if (bp.predicate.size() > 0) {
-                bp.predicate.removeAll(bp.offendingPredicates(false));
-            }
-            if (bp.assignment.size() > 0) {
-                bp.assignment.removeAll(bp.offendingAssignments(false));
-            }
-        }
-        */
         // Copy Output Domains
         for (d:QVT!Area in mapping.domain) {
             if (isOutputDomain(d)) {
-                var dc = EmfTool.getECoreUtil().copy(d);
-                mappingMR.domain.add(dc);
+                mappingMR.domain.add(d.equivalent());
             }
         }
         // Mested mappings are copied eliminating the nested mapping's bottom pattern predicates
@@ -127,6 +99,18 @@ rule PartitionLM
         }
     }
 
+rule Domains
+    transform id : QVTmF!CoreDomain
+    to od : QVTmP!CoreDomain {
+         
+         od.name = id.name;
+         od.isCheckable = id.isCheckable;
+         od.isEnforceable = od.isEnforceable;
+         od.typedModel ::= id.typedModel;
+         od.guardPattern ::= id.guardPattern;
+         od.bottomPattern ::= id.bottomPattern;
+    }
+
 @lazy
 rule GuardPatterns
     transform gp : QVTmF!GuardPattern
@@ -135,11 +119,11 @@ rule GuardPatterns
         // .predicate *
         if (gp.predicate.size() > 0) {
             // LM: Remove predicates and assignments that reference variables in the output domain
-            for (p in gp.predicate.excluding(gp.offendingPredicates(true))) {
+            for (p in gp.predicate.excludingAll(gp.offendingPredicates(true))) {
                 lmgp.predicate.add(p.equivalent());
             }
             // MR: Remove predicates and assignments that reference variables in the input domain
-            for (p in gp.predicate.excluding(gp.offendingPredicates(false))) {
+            for (p in gp.predicate.excludingAll(gp.offendingPredicates(false))) {
                 mrgp.predicate.add(p.equivalent());
             }
         }
@@ -163,35 +147,6 @@ rule BottomPatterns
     transform bp : QVTmF!BottomPattern
     to lmbp : QVTmP!BottomPattern, mrbp : QVTmP!BottomPattern {
     
-    // .predicate *
-    if (bp.predicate.size() > 0) {
-        // LM: Remove predicates and assignments that reference variables in the output domain
-        for (p in bp.predicate.excluding(bp.offendingPredicates(true))) {
-            lmbp.predicate.add(p.equivalent());
-        }
-        // MR: Remove predicates and assignments that reference variables in the input domain
-        for (p in bp.predicate.excluding(bp.offendingPredicates(false))) {
-            mrbp.predicate.add(p.equivalent());
-        }
-    }
-    
-    // .assignemnt
-    if (bp.assignment.size() > 0) {
-        bp.offendingAssignments(true).println("Off asg input ");
-        bp.assignment.excluding(bp.offendingAssignments(true)).println();
-        for (a in bp.assignment.excluding(bp.offendingAssignments(true))) {
-            lmbp.assignment.add(a.equivalent());
-        }
-        bp.offendingAssignments(false).println("Off asg output ");
-        for (a in bp.assignment.excluding(bp.offendingAssignments(false))) {
-            mrbp.assignment.add(a.equivalent());
-        }
-    }
-    
-    // .variable *
-    lmbp.variable = bp.variable.clone();
-    mrbp.variable = bp.variable.clone();
-    
     //.bindsTo *
     lmbp.bindsTo = bp.bindsTo.clone();
     mrbp.bindsTo = bp.bindsTo.clone();
@@ -200,9 +155,41 @@ rule BottomPatterns
     lmbp.ownedComment = bp.ownedComment.clone();
     mrbp.ownedComment = bp.ownedComment.clone();
     
+    // .variable * might have to 'transform' them so the OCL expressions are correctly updated....
+    // or find a way to replace all the OCL references...
+    lmbp.variable = bp.variable.clone();
+    mrbp.variable = bp.variable.clone();
+    
     //.realizedVariable
     lmbp.realizedVariable = bp.realizedVariable.clone();
     mrbp.variable.addAll(bp.realizedVariable.equivalent());
+    
+    // Remove predicates and assignments that reference variables in the other domain
+    // .predicate *
+    if (bp.predicate.size() > 0) {
+        // LM: Remove predicates and assignments that reference variables in the output domain
+        for (p in bp.predicate.excludingAll(bp.offendingPredicates(true))) {
+            lmbp.predicate.add(p.equivalent());
+        }
+        // MR: Remove predicates and assignments that reference variables in the input domain
+        for (p in bp.predicate.excludingAll(bp.offendingPredicates(false))) {
+            mrbp.predicate.add(p.equivalent());
+        }
+    }
+    
+    // .assignemnt
+    if (bp.assignment.size() > 0) {
+        // LM: Remove assignments and assignments that reference variables in the output domain
+        for (a in bp.assignment.excludingAll(bp.offendingAssignments(true))) {
+            lmbp.assignment.add(a.equivalent());
+        }
+        // MR: Remove assignments and assignments that reference variables in the input domain
+        for (a in bp.assignment.excludingAll(bp.offendingAssignments(false))) {
+            mrbp.assignment.add(a.equivalent());
+        }
+        
+    }
+
 }
 
 
@@ -230,10 +217,88 @@ rule PropertyAssignments
     to pa : QVTmP!PropertyAssignment {
         
         pa.isDefault = fa.isDefault;
-        pa.value = EmfTool.getECoreUtil().copy(fa.value);
         pa.targetProperty = EmfTool.getECoreUtil().copy(fa.targetProperty);
         pa.slotExpression = EmfTool.getECoreUtil().copy(fa.slotExpression);
+        pa.value = EmfTool.getECoreUtil().copy(fa.value);
     }  
+
+/* Fix variable references in property assignments */
+operation QVTmP!PropertyAssignment resolveVariables() {
+    
+    
+    // Refered Variables in the slot expression and value most be resolved so they are
+    // correctly resolved. We can limit lookup to the expression's context
+    // Domain bottom patterns context includes guard pattern
+    // Middle bottom patterns context includes domain bottom and guard pattern.
+    // In the reduced context a name search is suficient (does the EMF copy leave a trace?)
+    /* 
+    if (self.slotExpression.isTypeOf(QVT!VariableExp)) {
+        var rv = self.slotExpression.referredVariable;
+        self.slotExpression.println("Slot expression ")
+        rv.println();
+        self.bottomPattern.variable.includingAll(self.bottomPattern.realizedVariable).println();
+        var newVar = self.bottomPattern.variable.includingAll(self.bottomPattern.realizedVariable).select(v | v.name = rv.name).first();
+        if (newVar == null) {
+            rv.errln("No new variable found for: ");
+        } else {
+            self.slotExpression.referredVariable = newVar;
+        }
+        
+    } else {
+        self.slotExpression.type().errln("No implementation for finding target vars for this type: ");
+    }
+    */
+    self.value.println("Value ");
+    if (self.value.isTypeOf(QVT!VariableExp)) {
+        var rv = self.value.referredVariable;
+        var newVar = self.bottomPattern.variable.selectOne(v | v.name = rv.name);
+        newVar.println("newVar ");
+        if (newVar == null) {
+            newVar = self.bottomPattern.realizedVariable.selectOne(v | v.name = rv.name);
+            newVar.println("newVar ");
+            if (newVar == null) {
+	            newVar = self.bottomPattern.area.guardPattern.variable.selectOne(v | v.name = rv.name);
+	            newVar.println("newVar ");
+	            // Search in the domains
+	            self.bottomPattern.area.isTypeOf(QVT!Mapping).println();
+	            self.bottomPattern.area.println();
+	            if (newVar == null and self.bottomPattern.area.isTypeOf(QVT!Mapping)) {
+                    self.bottomPattern.area.domain.println();
+	                for (d in self.bottomPattern.area.domain) {
+	                    newVar = d.bottomPattern.variable.selectOne(v | v.name = rv.name);
+	                    newVar.println("newVar ");
+	                    if (newVar == null) {
+	                        newVar = self.bottomPattern.realizedVariable.selectOne(v | v.name = rv.name);
+	                        newVar.println("newVar ");
+	                        if (newVar == null) {
+	                          d.guardPattern.variable.println("Domain guard pat vars ");  
+	                          newVar = d.guardPattern.variable.selectOne(v | v.name = rv.name);
+	                          newVar.println("newVar ");
+	                          if (newVar <> null) {
+	                              break;
+	                          }
+	                        }
+	                    } else {
+	                      break;
+	                    }
+	                }
+	            }
+	        }
+        }
+        newVar.println();
+        if (newVar == null) {
+            rv.errln("No new variable found for: ");
+        } else {
+            self.value.referredVariable = newVar;
+        }
+        
+    } else {
+        self.value.type().errln("No implementation for finding target vars for this type: ");
+    }
+        
+    
+}
+
 
 // In the MR transform realize variables to variables in the Middle Patterns
 @lazy

@@ -15,7 +15,7 @@ migrate Mapping
         var domainlessNestedMappings = original.refinement.collect(r | r.local.select(nm | nm.domain.size() == 0));
         migrated.local.addAll(domainlessNestedMappings.flatten());
         // Add domains that are not merged (i.e. with different typeModels than the refining mapping)
-        
+        migrated.domain.addAll(original.refinement.collect(r | r.domain).flatten().select(d | original.domain.collect(d | d.name).flatten().excludes(d.name)));         
     }
     
 // Refinned mapping's Patterns
