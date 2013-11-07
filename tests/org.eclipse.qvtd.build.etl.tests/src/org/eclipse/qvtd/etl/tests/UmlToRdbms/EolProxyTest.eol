@@ -1,0 +1,4 @@
+var v = QVT!Mapping.all().selectOne(m | m.name == "classAttributes").guardPattern.variable.first();
+v.println();
+v.type().println();
+v.type.println();
