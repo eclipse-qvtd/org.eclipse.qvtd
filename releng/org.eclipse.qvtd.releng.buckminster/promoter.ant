@@ -182,6 +182,7 @@
 		<property name="packages.directory" location="${build.archives}/${packages.base}" />
 		<property name="testresults.directory" location="${build.archives}/${tests.base}" />
 		<property name="javadoc.directory" location="${build.archives}/${javadoc.base}" />
+		<property name="publisher.workspace" location="${publisher.workspace}" />
 
 		<property name="project.javadoc.directory" location="${downloads.area}/javadoc/${version}" />
 		<property name="build.drop.directory" location="${downloads.area}/downloads/drops/${version}/${saved.build.id}" />
