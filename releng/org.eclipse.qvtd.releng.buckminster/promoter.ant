@@ -100,10 +100,12 @@
 	</target>
 
 	<target name="-load.properties.as.is" unless="property.load.prefix">
+		<echo>-load.properties.as.is</echo>
 		<property file="${property.file.location}" />
 	</target>
 
 	<target name="-load.properties.with.prefix" if="property.load.prefix">
+		<echo>-load.properties.with.prefix</echo>
 		<property prefix="${property.load.prefix}" file="${property.file.location}" />
 	</target>
 
@@ -162,10 +164,12 @@
 	</target>
 
 	<target name="-check.property.file.location">
+		<echo>-check.property.file.location</echo>
 		<fail message="property.file.location property must be defined" unless="property.file.location" />
 	</target>
 
 	<target name="publish.build.from.framework" depends="-check.property.file.location,-load.properties">
+		<echo>publish.build.from.framework</echo>
 		<fail message="saved.build.id property must be defined">
 			<condition>
 				<not>
