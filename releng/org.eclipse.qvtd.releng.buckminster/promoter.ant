@@ -120,6 +120,7 @@
 		    <available file="${launcher.jar}" type="file"/>
 		  </condition>
 		<echo>launcherExists: ${launcherExists}</echo>
+		<echo>publisher.workspace: ${publisher.workspace}</echo>
 		<echo>ant.file: ${ant.file}</echo>
 		<java jvm="${java.executable}" jar="${launcher.jar}" fork="true" failonerror="true">
 			<syspropertyset>
