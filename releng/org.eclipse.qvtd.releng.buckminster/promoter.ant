@@ -118,7 +118,7 @@
 
 		
 		
-		<property name="publisher.workspace" location="${env.WORKSPACE}/publishroot/workspace" />
+		<property name="publisher.workspace" location="../../../publishroot/workspace" />
 
 		<delete dir="${publisher.workspace}" />
 		<mkdir dir="${publisher.workspace}" />
