@@ -52,12 +52,9 @@
 
 		<!-- default publisher root -->
 		<property name="publisher.root" location="${env.WORKSPACE}/publishroot" />
-		<property name="publisher.workspace" location="${publisher.root}/workspace" />
 
-		<delete dir="${publisher.workspace}" />
 		<delete dir="${publisher.root}" />
 		<mkdir dir="${publisher.root}" />
-		<mkdir dir="${publisher.workspace}" />
 
 		<copy tofile="${publisher.root}/publisher.ant" file="${ant.file}" />
 
@@ -118,6 +115,16 @@
 		</condition>
 		<!--tempfile property="publisher.workspace" prefix="workspace." destdir="${java.io.tmpdir}" /-->
 		<echo>java.executable: ${java.executable}</echo>
+
+		
+		
+		<property name="publisher.workspace" location="${env.WORKSPACE}/publishroot/workspace" />
+
+		<delete dir="${publisher.workspace}" />
+		<mkdir dir="${publisher.workspace}" />
+		
+		
+		
 		<echo>Used launcher: ${launcher.jar}</echo>
 		  <condition property="launcherExists"  value="TRUE" else="FALSE">
 		    <available file="${launcher.jar}" type="file"/>
@@ -182,7 +189,6 @@
 		<property name="packages.directory" location="${build.archives}/${packages.base}" />
 		<property name="testresults.directory" location="${build.archives}/${tests.base}" />
 		<property name="javadoc.directory" location="${build.archives}/${javadoc.base}" />
-		<property name="publisher.workspace" location="${publisher.workspace}" />
 
 		<property name="project.javadoc.directory" location="${downloads.area}/javadoc/${version}" />
 		<property name="build.drop.directory" location="${downloads.area}/downloads/drops/${version}/${saved.build.id}" />
