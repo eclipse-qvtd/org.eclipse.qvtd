@@ -52,9 +52,12 @@
 
 		<!-- default publisher root -->
 		<property name="publisher.root" location="${env.WORKSPACE}/publishroot" />
+		<property name="publisher.workspace" location="${publisher.root}/workspace" />
 
+		<delete dir="${publisher.workspace}" />
 		<delete dir="${publisher.root}" />
 		<mkdir dir="${publisher.root}" />
+		<mkdir dir="${publisher.workspace}" />
 
 		<copy tofile="${publisher.root}/publisher.ant" file="${ant.file}" />
 
@@ -113,7 +116,7 @@
 		<condition property="java.executable" value="${saved.java.home}/bin/java" else="java">
 			<isset property="saved.java.home" />
 		</condition>
-		<tempfile property="publisher.workspace" prefix="workspace." destdir="${java.io.tmpdir}" />
+		<!--tempfile property="publisher.workspace" prefix="workspace." destdir="${java.io.tmpdir}" /-->
 		<echo>java.executable: ${java.executable}</echo>
 		<echo>Used launcher: ${launcher.jar}</echo>
 		  <condition property="launcherExists"  value="TRUE" else="FALSE">
