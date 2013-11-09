@@ -114,7 +114,13 @@
 			<isset property="saved.java.home" />
 		</condition>
 		<tempfile property="publisher.workspace" prefix="workspace." destdir="${java.io.tmpdir}" />
+		<echo>java.executable: ${java.executable}</echo>
 		<echo>Used launcher: ${launcher.jar}</echo>
+		  <condition property="launcherExists"  value="TRUE" else="FALSE">
+		    <available file="${launcher.jar}" type="file"/>
+		  </condition>
+		<echo>launcherExists: ${launcherExists}</echo>
+		<echo>ant.file: ${ant.file}</echo>
 		<java jvm="${java.executable}" jar="${launcher.jar}" fork="true" failonerror="true">
 			<syspropertyset>
 				<propertyref builtin="commandline" />
