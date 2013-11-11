@@ -28,7 +28,7 @@
         </cs:public>
         <cs:public name="publish.build" actor="ant">
             <cs:actorProperties>
-                <cs:property key="buildFile" value="/home/hudson/genie.modeling.mdt.ocl/.hudson/jobs/qvtd-luna/ws/publishroot/publisher.ant"/>
+                <cs:property key="buildFile" value="/home/hudson/genie.modeling.mdt.ocl/.hudson/jobs/qvtd-luna/workspace/publishroot/publisher.ant"/>
                 <cs:property key="targets" value="publish.build"/>
             </cs:actorProperties>
             <cs:properties>
