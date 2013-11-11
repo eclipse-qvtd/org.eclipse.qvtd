@@ -26,7 +26,7 @@
                 <cs:property key="targets" value="setup.publisher"/>
             </cs:actorProperties>
         </cs:public>
-        <cs:public name="publish.build" actor="ant">
+        <!--cs:public name="publish.build" actor="ant">
             <cs:actorProperties>
                 <cs:property key="buildFile" value="/home/hudson/genie.modeling.mdt.ocl/.hudson/jobs/qvtd-luna/workspace/publishroot/publisher.ant"/>
                 <cs:property key="targets" value="publish.build"/>
@@ -34,6 +34,6 @@
             <cs:properties>
                 <cs:property key="build.archives" value="/home/hudson/genie.modeling.mdt.ocl/.hudson/jobs/qvtd-luna/workspace"/>
             </cs:properties>
-        </cs:public>
+        </cs:public-->
     </cs:actions>
 </cs:cspec>
