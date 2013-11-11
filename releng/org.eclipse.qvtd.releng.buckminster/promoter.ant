@@ -95,6 +95,9 @@
 		<property file="${publisher.properties.file.name}" />
 		<property name="property.file.location" location="${build.archives}/${promoter.properties.file.name}" />
 		<property name="property.load.prefix" value="saved." />
+		<!-- diagnostics -->
+		<property environment="env." />
+		<echoproperties destfile="${env.WORKSPACE}/all-publish.build.properties" />
 
 		<antcall target="publish.build.stage.2" inheritall="true" />
 	</target>

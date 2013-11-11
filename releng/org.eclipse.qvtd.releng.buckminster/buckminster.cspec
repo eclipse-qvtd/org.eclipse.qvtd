@@ -32,7 +32,7 @@
                 <cs:property key="targets" value="publish.build"/>
             </cs:actorProperties>
             <cs:properties>
-                <cs:property key="build.archives" value="/home/hudson/genie.modeling.mdt.ocl/.hudson/jobs/qvtd-luna/lastSuccessful/artifact"/>
+                <cs:property key="build.archives" value="/home/hudson/genie.modeling.mdt.ocl/.hudson/jobs/qvtd-luna/workspace"/>
             </cs:properties>
         </cs:public>
     </cs:actions>
