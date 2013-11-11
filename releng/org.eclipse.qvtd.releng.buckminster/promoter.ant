@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Promoter / Publisher" default="publish.build">
+	<echoproperties/>
 	<property name="promoter.properties.file.name" value="promote.properties" />
 	<property name="publisher.properties.file.name" value="publisher.properties" />
 
@@ -170,6 +171,7 @@
 
 	<target name="publish.build.from.framework" depends="-check.property.file.location,-load.properties">
 		<echo>publish.build.from.framework</echo>
+		<echoproperties/>
 		<fail message="saved.build.id property must be defined">
 			<condition>
 				<not>
