@@ -27,11 +27,10 @@
 			<entry key="must.publish.javadoc" value="${manage.javadoc}" />
 		</propertyfile>
 
-		<!-- diagnostics
+		<!-- diagnostics -->
 		<property environment="env." />
-		<echoproperties destfile="${promoter.setup.directory}/all.properties" />
-		-->
-		<echoproperties/>
+		<echoproperties destfile="${promoter.setup.directory}/all-setup.promoter.properties" />
+		
 	</target>
 
 	<target name="-locate.launcher.jar" unless="launcher.jar">
@@ -85,7 +84,10 @@
 				<propertyref name="build.root" />
 			</propertyset>
 		</echoproperties>
-		<echoproperties/>
+		
+		<!-- diagnostics -->
+		<property environment="env." />
+		<echoproperties destfile="${promoter.setup.directory}/all-setup.publisher.properties" />
 	</target>
 
 	<target name="publish.build">
