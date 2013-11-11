@@ -108,16 +108,18 @@
 	</target>
 
 	<target name="-load.properties.as.is" unless="property.load.prefix">
-		<echo>-load.properties.as.is</echo>
+		<echo>-load.properties.as.is:property.file.location = ${property.file.location}</echo>
 		<property file="${property.file.location}" />
 	</target>
 
 	<target name="-load.properties.with.prefix" if="property.load.prefix">
-		<echo>-load.properties.with.prefix</echo>
+		<echo>-load.properties.with.prefix:property.load.prefix+property.file.location = ${property.load.prefix}+${property.file.location}</echo>
 		<property prefix="${property.load.prefix}" file="${property.file.location}" />
 	</target>
 
-	<target name="-load.properties" depends="-load.properties.as.is,-load.properties.with.prefix" />
+	<target name="-load.properties" depends="-load.properties.as.is,-load.properties.with.prefix">
+		<echoproperties/>
+	</target>
 
 	<target name="publish.build.stage.2" depends="-setup.property.file.location,-load.properties,-locate.launcher.jar">
 		<condition property="java.executable" value="${saved.java.home}/bin/java" else="java">
@@ -184,6 +186,7 @@
 		<!-- diagnostics -->
 		<property environment="dbg.publish.build.from.framework." />
 		<echoproperties destfile="${dbg.publish.build.from.framework.WORKSPACE}/all-publish.build.from.framework.properties" />
+		<echoproperties/>
 
 		<fail message="saved.build.id property must be defined">
 			<condition>
