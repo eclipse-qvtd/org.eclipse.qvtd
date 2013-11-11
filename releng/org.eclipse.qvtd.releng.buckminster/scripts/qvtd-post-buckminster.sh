@@ -8,7 +8,5 @@ set
 echo cp MMT-QVTd.downloads /home/data/httpd/download.eclipse.org/mmt/qvtd/downloads/drops/0.11.0/
 echo cp MMT-QVTd.p2.repository /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/milestones/0.11.0
 
-ls /opt/public/common
-
-ant -f publishroot/publisher.ant -Dbuild.archives=publishroot &> qvtd-publishing-luna.log 
+/opt/public/common/apache-ant-1.8.1/bin/ant -f publishroot/publisher.ant -Dbuild.archives=publishroot &> qvtd-publishing-luna.log 
 
