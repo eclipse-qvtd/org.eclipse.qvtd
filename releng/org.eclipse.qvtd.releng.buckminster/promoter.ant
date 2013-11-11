@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Promoter / Publisher" default="publish.build">
-	<echoproperties/>
 	<property name="promoter.properties.file.name" value="promote.properties" />
 	<property name="publisher.properties.file.name" value="publisher.properties" />
 
@@ -27,10 +26,10 @@
 			<entry key="must.publish.javadoc" value="${manage.javadoc}" />
 		</propertyfile>
 
-		<!-- diagnostics -->
-		<property environment="dbg.setup.promoter." />
-		<echoproperties destfile="${dbg.setup.promoter.WORKSPACE}/all-setup.promoter.properties" />
-		
+		<!-- diagnostics
+		<property environment="env." />
+		<echoproperties destfile="${promoter.setup.directory}/all.properties" />
+		-->
 	</target>
 
 	<target name="-locate.launcher.jar" unless="launcher.jar">
@@ -84,10 +83,6 @@
 				<propertyref name="build.root" />
 			</propertyset>
 		</echoproperties>
-		
-		<!-- diagnostics -->
-		<property environment="dbg.setup.publisher." />
-		<echoproperties destfile="${dbg.setup.publisher.WORKSPACE}/all-setup.publisher.properties" />
 	</target>
 
 	<target name="publish.build">
@@ -95,9 +90,6 @@
 		<property file="${publisher.properties.file.name}" />
 		<property name="property.file.location" location="${build.archives}/${promoter.properties.file.name}" />
 		<property name="property.load.prefix" value="saved." />
-		<!-- diagnostics -->
-		<property environment="dbg.publish.build." />
-		<echoproperties destfile="${dbg.publish.build.WORKSPACE}/all-publish.build.properties" />
 
 		<antcall target="publish.build.stage.2" inheritall="true" />
 	</target>
@@ -108,46 +100,21 @@
 	</target>
 
 	<target name="-load.properties.as.is" unless="property.load.prefix">
-		<echo>-load.properties.as.is:property.file.location = ${property.file.location}</echo>
 		<property file="${property.file.location}" />
 	</target>
 
 	<target name="-load.properties.with.prefix" if="property.load.prefix">
-		<echo>-load.properties.with.prefix:property.load.prefix+property.file.location = ${property.load.prefix}+${property.file.location}</echo>
 		<property prefix="${property.load.prefix}" file="${property.file.location}" />
 	</target>
 
-	<target name="-load.properties" depends="-load.properties.as.is,-load.properties.with.prefix">
-		<echoproperties/>
-	</target>
+	<target name="-load.properties" depends="-load.properties.as.is,-load.properties.with.prefix" />
 
 	<target name="publish.build.stage.2" depends="-setup.property.file.location,-load.properties,-locate.launcher.jar">
 		<condition property="java.executable" value="${saved.java.home}/bin/java" else="java">
 			<isset property="saved.java.home" />
 		</condition>
-		<!--tempfile property="publisher.workspace" prefix="workspace." destdir="${java.io.tmpdir}" /-->
-		<echo>java.executable: ${java.executable}</echo>
-
-		
-		
-		<property name="publisher.workspace" location="../../../publishroot/workspace" />
-
-		<delete dir="${publisher.workspace}" />
-		<mkdir dir="${publisher.workspace}" />
-		
-		
-		
+		<tempfile property="publisher.workspace" prefix="workspace." destdir="${java.io.tmpdir}" />
 		<echo>Used launcher: ${launcher.jar}</echo>
-		  <condition property="launcherExists"  value="TRUE" else="FALSE">
-		    <available file="${launcher.jar}" type="file"/>
-		  </condition>
-		<echo>launcherExists: ${launcherExists}</echo>
-		<echo>publisher.workspace: ${publisher.workspace}</echo>
-		<echo>ant.file: ${ant.file}</echo>
-		<!-- diagnostics -->
-		<property environment="dbg.publish.build.stage.2." />
-		<echoproperties destfile="${dbg.publish.build.stage.2.WORKSPACE}/all-publish.build.stage.2.properties" />
-		
 		<java jvm="${java.executable}" jar="${launcher.jar}" fork="true" failonerror="true">
 			<syspropertyset>
 				<propertyref builtin="commandline" />
@@ -178,16 +145,10 @@
 	</target>
 
 	<target name="-check.property.file.location">
-		<echo>-check.property.file.location</echo>
 		<fail message="property.file.location property must be defined" unless="property.file.location" />
 	</target>
 
 	<target name="publish.build.from.framework" depends="-check.property.file.location,-load.properties">
-		<!-- diagnostics -->
-		<property environment="dbg.publish.build.from.framework." />
-		<echoproperties destfile="${dbg.publish.build.from.framework.WORKSPACE}/all-publish.build.from.framework.properties" />
-		<echoproperties/>
-
 		<fail message="saved.build.id property must be defined">
 			<condition>
 				<not>
@@ -215,20 +176,11 @@
 		<property name="project.javadoc.directory" location="${downloads.area}/javadoc/${version}" />
 		<property name="build.drop.directory" location="${downloads.area}/downloads/drops/${version}/${saved.build.id}" />
 		<available file="${build.drop.directory}" type="dir" property="alreadyPromoted" />
-
-		<!-- diagnostics -->
-		<property environment="dbg.publish.build.from.framework2." />
-		<echoproperties destfile="${dbg.publish.build.from.framework2.WORKSPACE}/all-publish.build.from.framework2.properties" />
-
 		<antcall target="publish" inheritall="true" />
 		<antcall target="echo-status" inheritall="true" />
 	</target>
 
 	<target name="publish" unless="alreadyPromoted">
-		<!-- diagnostics -->
-		<property environment="dbg.publish." />
-		<echoproperties destfile="${dbg.publish.WORKSPACE}/all-publish.properties" />
-
 		<!-- will fail if already exists -->
 		<mkdir dir="${build.drop.directory}" />
 
