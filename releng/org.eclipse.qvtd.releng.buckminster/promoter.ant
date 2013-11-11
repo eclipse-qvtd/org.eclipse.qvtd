@@ -28,8 +28,8 @@
 		</propertyfile>
 
 		<!-- diagnostics -->
-		<property environment="env." />
-		<echoproperties destfile="${env.WORKSPACE}/all-setup.promoter.properties" />
+		<property environment="dbg.setup.promoter." />
+		<echoproperties destfile="${dbg.setup.promoter.WORKSPACE}/all-setup.promoter.properties" />
 		
 	</target>
 
@@ -86,8 +86,8 @@
 		</echoproperties>
 		
 		<!-- diagnostics -->
-		<property environment="env." />
-		<echoproperties destfile="${env.WORKSPACE}/all-setup.publisher.properties" />
+		<property environment="dbg.setup.publisher." />
+		<echoproperties destfile="${dbg.setup.publisher.WORKSPACE}/all-setup.publisher.properties" />
 	</target>
 
 	<target name="publish.build">
@@ -96,8 +96,8 @@
 		<property name="property.file.location" location="${build.archives}/${promoter.properties.file.name}" />
 		<property name="property.load.prefix" value="saved." />
 		<!-- diagnostics -->
-		<property environment="env." />
-		<echoproperties destfile="${env.WORKSPACE}/all-publish.build.properties" />
+		<property environment="dbg.publish.build." />
+		<echoproperties destfile="${dbg.publish.build.WORKSPACE}/all-publish.build.properties" />
 
 		<antcall target="publish.build.stage.2" inheritall="true" />
 	</target>
@@ -142,6 +142,10 @@
 		<echo>launcherExists: ${launcherExists}</echo>
 		<echo>publisher.workspace: ${publisher.workspace}</echo>
 		<echo>ant.file: ${ant.file}</echo>
+		<!-- diagnostics -->
+		<property environment="dbg.publish.build.stage.2." />
+		<echoproperties destfile="${dbg.publish.build.stage.2.WORKSPACE}/all-publish.build.stage.2.properties" />
+		
 		<java jvm="${java.executable}" jar="${launcher.jar}" fork="true" failonerror="true">
 			<syspropertyset>
 				<propertyref builtin="commandline" />
@@ -177,6 +181,9 @@
 	</target>
 
 	<target name="publish.build.from.framework" depends="-check.property.file.location,-load.properties">
+		<!-- diagnostics -->
+		<property environment="dbg.publish.build.from.framework." />
+		<echoproperties destfile="${dbg.publish.build.from.framework.WORKSPACE}/all-publish.build.from.framework.properties" />
 		<echo>publish.build.from.framework</echo>
 		<echoproperties/>
 		<fail message="saved.build.id property must be defined">
