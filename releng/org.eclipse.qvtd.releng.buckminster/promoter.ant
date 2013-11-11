@@ -29,7 +29,7 @@
 
 		<!-- diagnostics -->
 		<property environment="env." />
-		<echoproperties destfile="${promoter.setup.directory}/all-setup.promoter.properties" />
+		<echoproperties destfile="${env.WORKSPACE}/all-setup.promoter.properties" />
 		
 	</target>
 
@@ -87,7 +87,7 @@
 		
 		<!-- diagnostics -->
 		<property environment="env." />
-		<echoproperties destfile="${promoter.setup.directory}/all-setup.publisher.properties" />
+		<echoproperties destfile="${env.WORKSPACE}/all-setup.publisher.properties" />
 	</target>
 
 	<target name="publish.build">
