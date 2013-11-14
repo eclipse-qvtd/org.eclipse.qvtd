@@ -1,2 +1,0 @@
-#qvtd publishing
-30 3 * * * ant -f /shared/jobs/qvtd-luna/lastSuccessful/archive/publishroot/publisher.ant -Dbuild.archives=/shared/jobs/qvtd-luna/lastSuccessful/archive &> logs/qvtd-publishing-luna.log 
