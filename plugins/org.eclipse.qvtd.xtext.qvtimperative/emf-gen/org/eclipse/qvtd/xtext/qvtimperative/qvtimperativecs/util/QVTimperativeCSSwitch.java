@@ -22,8 +22,7 @@ import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.NamespaceCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
@@ -134,12 +133,9 @@ public class QVTimperativeCSSwitch<T> extends Switch<T> {
 				TopLevelCS topLevelCS = (TopLevelCS)theEObject;
 				T result = caseTopLevelCS(topLevelCS);
 				if (result == null) result = caseRootPackageCS(topLevelCS);
-				if (result == null) result = casePackageCS(topLevelCS);
+				if (result == null) result = casePackageOwnerCS(topLevelCS);
 				if (result == null) result = caseRootCS(topLevelCS);
-				if (result == null) result = caseNamespaceCS(topLevelCS);
-				if (result == null) result = caseNamedElementCS(topLevelCS);
 				if (result == null) result = caseModelElementCS(topLevelCS);
-				if (result == null) result = caseNameable(topLevelCS);
 				if (result == null) result = casePivotableElementCS(topLevelCS);
 				if (result == null) result = caseElementCS(topLevelCS);
 				if (result == null) result = casePivotable(topLevelCS);
@@ -347,32 +343,17 @@ public class QVTimperativeCSSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Namespace CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Package Owner CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Namespace CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Package Owner CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNamespaceCS(NamespaceCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Package CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Package CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePackageCS(PackageCS object) {
+	public T casePackageOwnerCS(PackageOwnerCS object) {
 		return null;
 	}
 

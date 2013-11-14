@@ -25,8 +25,7 @@ import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.NamespaceCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
@@ -133,12 +132,8 @@ public class QVTcoreCSAdapterFactory extends AdapterFactoryImpl {
 				return createAbstractMappingCSAdapter();
 			}
 			@Override
-			public Adapter caseNamespaceCS(NamespaceCS object) {
-				return createNamespaceCSAdapter();
-			}
-			@Override
-			public Adapter casePackageCS(PackageCS object) {
-				return createPackageCSAdapter();
+			public Adapter casePackageOwnerCS(PackageOwnerCS object) {
+				return createPackageOwnerCSAdapter();
 			}
 			@Override
 			public Adapter caseRootCS(RootCS object) {
@@ -309,6 +304,20 @@ public class QVTcoreCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS <em>Package Owner CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS
+	 * @generated
+	 */
+	public Adapter createPackageOwnerCSAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.RootCS <em>Root CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -333,34 +342,6 @@ public class QVTcoreCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRootPackageCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.NamespaceCS <em>Namespace CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.base.basecs.NamespaceCS
-	 * @generated
-	 */
-	public Adapter createNamespaceCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.PackageCS <em>Package CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.base.basecs.PackageCS
-	 * @generated
-	 */
-	public Adapter createPackageCSAdapter() {
 		return null;
 	}
 

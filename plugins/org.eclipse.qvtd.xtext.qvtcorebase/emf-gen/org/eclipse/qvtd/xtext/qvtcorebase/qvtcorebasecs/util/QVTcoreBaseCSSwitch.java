@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.NamespaceCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
@@ -274,11 +275,12 @@ public class QVTcoreBaseCSSwitch<T> extends Switch<T> {
 				TransformationCS transformationCS = (TransformationCS)theEObject;
 				T result = caseTransformationCS(transformationCS);
 				if (result == null) result = casePackageCS(transformationCS);
+				if (result == null) result = casePackageOwnerCS(transformationCS);
 				if (result == null) result = caseNamespaceCS(transformationCS);
 				if (result == null) result = caseNamedElementCS(transformationCS);
 				if (result == null) result = caseModelElementCS(transformationCS);
-				if (result == null) result = caseNameable(transformationCS);
 				if (result == null) result = casePivotableElementCS(transformationCS);
+				if (result == null) result = caseNameable(transformationCS);
 				if (result == null) result = caseElementCS(transformationCS);
 				if (result == null) result = casePivotable(transformationCS);
 				if (result == null) result = caseVisitableCS(transformationCS);
@@ -661,6 +663,21 @@ public class QVTcoreBaseCSSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedElementCS(TypedElementCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Package Owner CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Package Owner CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePackageOwnerCS(PackageOwnerCS object) {
 		return null;
 	}
 

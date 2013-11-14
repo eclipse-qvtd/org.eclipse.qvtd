@@ -244,24 +244,6 @@ public interface QVTcoreCSPackage extends EPackage {
 	int TOP_LEVEL_CS__CSI = BaseCSPackage.ROOT_PACKAGE_CS__CSI;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOP_LEVEL_CS__NAME = BaseCSPackage.ROOT_PACKAGE_CS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOP_LEVEL_CS__OWNED_TYPE = BaseCSPackage.ROOT_PACKAGE_CS__OWNED_TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Owned Nested Package</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -269,24 +251,6 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int TOP_LEVEL_CS__OWNED_NESTED_PACKAGE = BaseCSPackage.ROOT_PACKAGE_CS__OWNED_NESTED_PACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOP_LEVEL_CS__NS_PREFIX = BaseCSPackage.ROOT_PACKAGE_CS__NS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOP_LEVEL_CS__NS_URI = BaseCSPackage.ROOT_PACKAGE_CS__NS_URI;
 
 	/**
 	 * The feature id for the '<em><b>Owned Import</b></em>' containment reference list.

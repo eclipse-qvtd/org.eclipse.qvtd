@@ -1408,6 +1408,15 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int TRANSFORMATION_CS__CSI = BaseCSPackage.PACKAGE_CS__CSI;
 
 	/**
+	 * The feature id for the '<em><b>Owned Nested Package</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_CS__OWNED_NESTED_PACKAGE = BaseCSPackage.PACKAGE_CS__OWNED_NESTED_PACKAGE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1424,15 +1433,6 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRANSFORMATION_CS__OWNED_TYPE = BaseCSPackage.PACKAGE_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Nested Package</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSFORMATION_CS__OWNED_NESTED_PACKAGE = BaseCSPackage.PACKAGE_CS__OWNED_NESTED_PACKAGE;
 
 	/**
 	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
