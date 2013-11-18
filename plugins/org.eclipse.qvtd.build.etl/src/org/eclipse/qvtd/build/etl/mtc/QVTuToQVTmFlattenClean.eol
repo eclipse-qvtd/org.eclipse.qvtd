@@ -59,30 +59,12 @@ operation mergeVariablesWithKindOfTypes() {
             // TODO in the general case we could have multiple vars, not just pairs 
             var pairs = cp.variable.select(v2 |
                     v2.name == v);
-            
-            pairs.first().name.println("Var ");
-            pairs.first().id.println("Id ");
-            pairs.first().type().println("type() ");
-            pairs.first().type.println("var type ");
-            pairs.first().type.type().println("var type.type() ");
-            //Native("org.eclipse.ocl.examples.pivot.utilities.PivotUtil").getType(pairs.first()).println("OCL Type ");
-            
+
+            pairs.first().type.println("pairs.first().type ");       
+            pairs.first().type.type().println("pairs.first().type.type() ");
             var x = new Native("org.eclipse.qvtd.etl.tests.EolToOclBridge");
-            x.test(pairs.first().type());
             x.test2(pairs.first().type);
-             
-            pairs.first().type.getPackage().println(" ");
-            //pairs.first().type.getJavaClass().println("var type ");
-            pairs.first().type.name.println("var type.name ");
-            pairs.first().type.type().println("var type.type() ");
-            //Native("org.eclipse.ocl.examples.pivot.utilities.PivotUtil").getType(x).println("OCL Type ");
             
-            pairs.first().type.getInstanceClassName().println("Name ");
-            pairs.first().type.getLocalSuperTypes().println("Type ");
-            pairs.last().type.getSuperClass().println("Type ");
-            
-            
-            /* 
             if (pairs.first().type.isKindOf(pairs.last().type)) {
                 // The first is the more concrete class, delete the last
                 cp.variable.remove(pairs.last());
@@ -90,7 +72,6 @@ operation mergeVariablesWithKindOfTypes() {
                 // The last is the more concrete class, delete the first
                 cp.variable.remove(pairs.first());
             }
-            */
         }
     }
     // RealizedVariables

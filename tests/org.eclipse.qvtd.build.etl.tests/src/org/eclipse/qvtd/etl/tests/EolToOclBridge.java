@@ -12,10 +12,9 @@ public class EolToOclBridge {
 		
 	}
 	
-	public void test2(TypeImpl c) {
+	public void test2(org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl c) {
 		
 		System.out.println("OclBridge 2 " + c);
 		System.out.println("OclBridge 2 " + c.getInstanceClassName());
 	}
-
 }
