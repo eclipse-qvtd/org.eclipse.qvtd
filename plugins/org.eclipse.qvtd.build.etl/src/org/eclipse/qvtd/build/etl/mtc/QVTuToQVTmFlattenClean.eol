@@ -64,6 +64,7 @@ operation mergeVariablesWithKindOfTypes() {
             pairs.first().id.println("Id ");
             pairs.first().type().println("type() ");
             pairs.first().type.println("var type ");
+            pairs.first().type.type().println("var type.type() ");
             //Native("org.eclipse.ocl.examples.pivot.utilities.PivotUtil").getType(pairs.first()).println("OCL Type ");
             
             var x = new Native("org.eclipse.qvtd.etl.tests.EolToOclBridge");
@@ -81,6 +82,7 @@ operation mergeVariablesWithKindOfTypes() {
             pairs.last().type.getSuperClass().println("Type ");
             
             
+            /* 
             if (pairs.first().type.isKindOf(pairs.last().type)) {
                 // The first is the more concrete class, delete the last
                 cp.variable.remove(pairs.last());
@@ -88,13 +90,14 @@ operation mergeVariablesWithKindOfTypes() {
                 // The last is the more concrete class, delete the first
                 cp.variable.remove(pairs.first());
             }
+            */
         }
     }
     // RealizedVariables
     for (bp in QVTmF!BottomPattern.all) {
         // Duplicate vars
         var duplicates : Set();
-        for (v in cp.realizedVariable) {
+        for (v in bp.realizedVariable) {
             if (bp.realizedVariable.excluding(v).one(v2 | v2.name == v.name)) {
                 duplicates.add(v.name);
             }

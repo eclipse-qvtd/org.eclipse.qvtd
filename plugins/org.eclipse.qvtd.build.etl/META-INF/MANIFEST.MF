@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Etl
-Bundle-SymbolicName: org.eclipse.qvtd.build.etl
+Bundle-SymbolicName: org.eclipse.qvtd.build.etl;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.qvtd.build.etl.Activator
 Require-Bundle: org.eclipse.ui,
@@ -10,6 +10,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.qvtd.pivot.qvtbase,
  org.eclipse.qvtd.pivot.qvtimperative,
  org.eclipse.qvtd.xtext.qvtbase.tests,
- org.eclipse.qvtd.pivot.qvtcore
+ org.eclipse.qvtd.pivot.qvtcore,
+ org.apache.ant;bundle-version="1.8.4"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
