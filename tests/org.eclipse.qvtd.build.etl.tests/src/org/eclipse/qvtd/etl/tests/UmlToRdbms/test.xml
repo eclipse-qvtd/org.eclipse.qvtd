@@ -2,12 +2,12 @@
 <project default="Test">
 	<!-- Create for each example/test -->
 	<property file="build.properties"/>
-
+	
 	<target name="PivotSetup">
 		   <PivotSetup/>
 	</target>
-
-	<target name="Test" >
+	
+	<target name="Test" depends="PivotSetup">
 		<epsilon.emf.loadModel
             name = "QVT"
             modelFile = "${qvtmflattenas}" 
