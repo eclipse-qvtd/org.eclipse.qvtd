@@ -51,27 +51,18 @@ operation mergeVariablesWithKindOfTypes() {
         // Duplicate vars
         var duplicates : Set();
         for (v in cp.variable) {
-            if (cp.variable.excluding(v).one(v2 | v2.name == v.name)) {
-                duplicates.add(v.name);
+            if (cp.variable.excluding(v).exludingAll(duplicates).one(v2 | v2.name == v.name)) {
+                duplicates.add(v);
             }
         }
         for (v in duplicates) {
             // TODO in the general case we could have multiple vars, not just pairs 
-            var pairs = cp.variable.select(v2 |
-                    v2.name == v);
-
-            pairs.first().type.println("pairs.first().type ");       
-            pairs.first().type.type().println("pairs.first().type.type() ");
+            var duplicate : Set() = cp.variable.select(v2 | v2.name == v.name);
+            duplicate.collect(d | d.type).println("pairs.first().type ");       
             var x = new Native("org.eclipse.qvtd.etl.tests.EolToOclBridge");
-            x.test2(pairs.first().type);
+            x.test2(duplicate.first().type);
             
-            if (pairs.first().type.isKindOf(pairs.last().type)) {
-                // The first is the more concrete class, delete the last
-                cp.variable.remove(pairs.last());
-            } else if (pairs.last().type.isKindOf(pairs.first().type)) {
-                // The last is the more concrete class, delete the first
-                cp.variable.remove(pairs.first());
-            }
+            
         }
     }
     // RealizedVariables

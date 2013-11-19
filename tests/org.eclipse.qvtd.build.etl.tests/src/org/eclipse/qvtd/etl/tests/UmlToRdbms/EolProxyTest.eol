@@ -1,4 +1,20 @@
-var v = QVT!Mapping.all().selectOne(m | m.name == "classAttributes").guardPattern.variable.first();
-v.println();
-v.type().println();
-v.type.println();
+var vars = QVT!Mapping.all().selectOne(m | m.name == "classAttributes").guardPattern.variable;
+vars.println();
+var x = new Native("org.eclipse.qvtd.etl.tests.EolToOclBridge");
+
+var duplicates : Set();
+for (v in vars) {
+    if (vars.excluding(v).one(v2 | v2.name == v.name)) {
+        duplicates.add(v);
+    }
+}
+duplicates.println("duplicates ");
+for (v in duplicates) {
+    // TODO in the general case we could have multiple vars, not just pairs 
+    var duplicate : Set() = duplicates.select(v2 | v2.name == v.name);
+    duplicate.collect(d | d.type).type().println("Set type ");     
+    duplicate.first().type().println("v type() ");
+    var x = new Native("org.eclipse.qvtd.etl.tests.EolToOclBridge");
+    x.test2(duplicate.first().type);
+    x.test3(duplicate);
+}

@@ -1,8 +1,11 @@
 package org.eclipse.qvtd.etl.tests;
 
 import org.eclipse.emf.ecore.impl.EClassImpl;
-import org.eclipse.ocl.examples.pivot.internal.impl.TypeImpl;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.pivot.internal.impl.TypedElementImpl;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.TreeSet;
 
 public class EolToOclBridge {
 	
@@ -16,5 +19,16 @@ public class EolToOclBridge {
 		
 		System.out.println("OclBridge 2 " + c);
 		System.out.println("OclBridge 2 " + c.getInstanceClassName());
+		System.out.println("OclBridge 2 " + c.getMetaTypeName());
+		System.out.println("OclBridge 2 " + c.eClass());
+		System.out.println("OclBridge 2 " + c.getSuperClass());
+	}
+	
+	public TypedElementImpl test3(org.eclipse.epsilon.eol.types.EolSet<TypedElementImpl> vars) {
+		
+		for(TypedElementImpl t : vars) {
+			System.out.println(t);
+		}
+		return null;
 	}
 }
