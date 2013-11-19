@@ -14,6 +14,9 @@ for (v in duplicates) {
     var duplicate : Set() = duplicates.select(v2 | v2.name == v.name);
     duplicate.collect(d | d.type).type().println("Set type ");     
     duplicate.first().type().println("v type() ");
+    duplicate.first().type.println("v type ");
+    duplicate.first().type.type().println("v type.type() ");
+    
     var x = new Native("org.eclipse.qvtd.etl.tests.EolToOclBridge");
     x.test2(duplicate.first().type);
     x.test3(duplicate);
