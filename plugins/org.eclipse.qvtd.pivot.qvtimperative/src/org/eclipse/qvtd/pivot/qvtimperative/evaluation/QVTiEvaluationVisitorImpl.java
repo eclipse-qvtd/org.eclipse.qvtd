@@ -78,7 +78,7 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
 	        	}
 	        	else {
 	        		// The MiddleGuardPattern should be empty in the root mapping, i.e. no need to find bindings
-	            	rule.accept(getUndecoratedVisitor());
+	            	rule.accept(undecoratedVisitor);
 	        	}
 			}
         }
@@ -87,7 +87,7 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
     @Override
     public @Nullable Object visitImperativeModel(@NonNull ImperativeModel imperativeModel) {
     	for (org.eclipse.ocl.examples.pivot.Package pkge : imperativeModel.getNestedPackage()) {
-    		pkge.accept(getUndecoratedVisitor());
+    		pkge.accept(undecoratedVisitor);
     	}
         return true;
     }

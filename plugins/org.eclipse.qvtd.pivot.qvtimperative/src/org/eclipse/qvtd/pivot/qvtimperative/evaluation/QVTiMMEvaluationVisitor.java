@@ -62,11 +62,11 @@ public class QVTiMMEvaluationVisitor extends QVTiEvaluationVisitorImpl
         if (area instanceof Mapping && ((Mapping)area).getDomain().size() == 0) {
             // What is the environment??
             for (Assignment assigment : bottomPattern.getAssignment()) {
-                assigment.accept(getUndecoratedVisitor());
+                assigment.accept(undecoratedVisitor);
             }
             // Probably enforcement operations must be called too
             for (EnforcementOperation enforceOp : bottomPattern.getEnforcementOperation()) {
-                enforceOp.accept(getUndecoratedVisitor());
+                enforceOp.accept(undecoratedVisitor);
             }
             return true;
         }

@@ -65,24 +65,24 @@ public class QVTiMREvaluationVisitor extends QVTiEvaluationVisitorImpl
         Area area = bottomPattern.getArea();
         if (area instanceof CoreDomain) {
             for (RealizedVariable rVar : bottomPattern.getRealizedVariable()) {
-                rVar.accept(getUndecoratedVisitor());
+                rVar.accept(undecoratedVisitor);
             }
             for (Assignment assigment : bottomPattern.getAssignment()) {
-                assigment.accept(getUndecoratedVisitor());
+                assigment.accept(undecoratedVisitor);
             }
             /* // Probably enforcement operations must be called too
             for (EnforcementOperation enforceOp : bottomPattern
                     .getEnforcementOperation()) {
-                enforceOp.accept(getUndecoratedVisitor());
+                enforceOp.accept(undecoratedVisitor);
             }*/
         }
         else if (area instanceof Mapping) {
             for (Assignment assigment : bottomPattern.getAssignment()) {
-                assigment.accept(getUndecoratedVisitor());
+                assigment.accept(undecoratedVisitor);
             }
             for (EnforcementOperation enforceOp : bottomPattern
                     .getEnforcementOperation()) {
-                enforceOp.accept(getUndecoratedVisitor());
+                enforceOp.accept(undecoratedVisitor);
             }
         }
         return null;
@@ -99,11 +99,11 @@ public class QVTiMREvaluationVisitor extends QVTiEvaluationVisitorImpl
 	public @Nullable Object visitCoreDomain(@NonNull CoreDomain coreDomain) {
         
     	/*// THERE SHULD BE NO GUARD PATTERN IN THE R CoreDomain
-        coreDomain.getGuardPattern().accept(getUndecoratedVisitor());
+        coreDomain.getGuardPattern().accept(undecoratedVisitor);
         */
-        Object result = coreDomain.getGuardPattern().accept(getUndecoratedVisitor());
+        Object result = coreDomain.getGuardPattern().accept(undecoratedVisitor);
         if (result == Boolean.TRUE) {
-        	coreDomain.getBottomPattern().accept(getUndecoratedVisitor());
+        	coreDomain.getBottomPattern().accept(undecoratedVisitor);
         }
         return result;
     }
@@ -121,18 +121,18 @@ public class QVTiMREvaluationVisitor extends QVTiEvaluationVisitorImpl
     	GuardPattern gp = mapping.getGuardPattern();
     	Object result = null;
     	if (gp != null) {
-    		result = gp.accept(getUndecoratedVisitor());
+    		result = gp.accept(undecoratedVisitor);
     		if (result == Boolean.TRUE) {
             	for (Domain domain : mapping.getDomain()) {
-                    result = domain.accept(getUndecoratedVisitor());
+                    result = domain.accept(undecoratedVisitor);
                 }
             	if (result == Boolean.TRUE) {
-            		mapping.getBottomPattern().accept(getUndecoratedVisitor());
+            		mapping.getBottomPattern().accept(undecoratedVisitor);
                 	for (MappingCall mappingCall : mapping.getMappingCall()) {
                 		Mapping calledMapping = DomainUtil.nonNullModel(mappingCall.getReferredMapping());
 	            		QVTiEvaluationVisitor nv = null;
                 		if (isMtoRMapping(calledMapping)) {
-	                		nv = ((QVTiEvaluationVisitor)getUndecoratedVisitor()).createNestedMRVisitor();
+	                		nv = ((QVTiEvaluationVisitor)undecoratedVisitor).createNestedMRVisitor();
 	                	} else {
 	                		// FIXME error
 	                	}

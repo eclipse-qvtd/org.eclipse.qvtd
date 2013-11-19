@@ -68,7 +68,7 @@ public class QVTiLMEvaluationVisitor extends QVTiEvaluationVisitorImpl
         Area area = bottomPattern.getArea();
         if (area instanceof CoreDomain) {
         	for (Predicate predicate : bottomPattern.getPredicate()) {
-        		result = predicate.accept(getUndecoratedVisitor());
+        		result = predicate.accept(undecoratedVisitor);
         		if (result != Boolean.TRUE) {
         			break;
         		}
@@ -80,14 +80,14 @@ public class QVTiLMEvaluationVisitor extends QVTiEvaluationVisitorImpl
         // middle model. Use the assignments to set values to their properties
         else if (area instanceof Mapping) {
             for (RealizedVariable rVar : bottomPattern.getRealizedVariable()) {
-                rVar.accept(getUndecoratedVisitor());
+                rVar.accept(undecoratedVisitor);
             }
             for (Assignment assigment : bottomPattern.getAssignment()) {
-                assigment.accept(getUndecoratedVisitor());
+                assigment.accept(undecoratedVisitor);
             }
             for (EnforcementOperation enforceOp : bottomPattern
                     .getEnforcementOperation()) {
-                enforceOp.accept(getUndecoratedVisitor());
+                enforceOp.accept(undecoratedVisitor);
             }
         }
         return result;
@@ -104,9 +104,9 @@ public class QVTiLMEvaluationVisitor extends QVTiEvaluationVisitorImpl
 	public @Nullable Object visitCoreDomain(@NonNull CoreDomain coreDomain) {
         
     	/* Bindings are set by the caller, just test the predicates */
-    	Object result = coreDomain.getGuardPattern().accept(getUndecoratedVisitor());
+    	Object result = coreDomain.getGuardPattern().accept(undecoratedVisitor);
     	if (result == Boolean.TRUE) {
-    		coreDomain.getBottomPattern().accept(getUndecoratedVisitor());
+    		coreDomain.getBottomPattern().accept(undecoratedVisitor);
     	}
     	return result;
         /* THERE SHOULD BE NO VARIABLES OR PREDICATES IN THE BottomPattern
@@ -114,7 +114,7 @@ public class QVTiLMEvaluationVisitor extends QVTiEvaluationVisitorImpl
             Variable var = entry.getKey();
             for (Object e : entry.getValue()) {
                 evaluationEnvironment.replace(var, e);
-                coreDomain.getBottomPattern().accept(getUndecoratedVisitor()); 
+                coreDomain.getBottomPattern().accept(undecoratedVisitor); 
             }
         }*/
     }
@@ -131,26 +131,26 @@ public class QVTiLMEvaluationVisitor extends QVTiEvaluationVisitorImpl
         }
     	Object result = false;
         for (Domain domain : mapping.getDomain()) {
-            result = domain.accept(getUndecoratedVisitor());
+            result = domain.accept(undecoratedVisitor);
         }
         GuardPattern gp = mapping.getGuardPattern();
         if (result == Boolean.TRUE) {
         	if (gp != null) {
-        		result = gp.accept(getUndecoratedVisitor());
+        		result = gp.accept(undecoratedVisitor);
         		if (result == Boolean.TRUE) {
-                	result = mapping.getBottomPattern().accept(getUndecoratedVisitor());
+                	result = mapping.getBottomPattern().accept(undecoratedVisitor);
                 	if (result == Boolean.TRUE) {
                 		for (MappingCall mappingCall : mapping.getMappingCall()) {
     	            		Mapping calledMapping = DomainUtil.nonNullModel(mappingCall.getReferredMapping());
     	            		QVTiEvaluationVisitor nv = null;
     	            		if (isLtoMMapping(calledMapping)) {
-    	            			nv =  ((QVTiEvaluationVisitor) getUndecoratedVisitor()).createNestedLMVisitor();
+    	            			nv =  ((QVTiEvaluationVisitor) undecoratedVisitor).createNestedLMVisitor();
     	            		}
     	                	else if (isMtoRMapping(calledMapping)) {
-    	                		nv = ((QVTiEvaluationVisitor)getUndecoratedVisitor()).createNestedMRVisitor();
+    	                		nv = ((QVTiEvaluationVisitor)undecoratedVisitor).createNestedMRVisitor();
     	                	}
     	                	else if (isMtoMMapping(calledMapping)) {
-    	                		nv = ((QVTiEvaluationVisitor)getUndecoratedVisitor()).createNestedMMVisitor();
+    	                		nv = ((QVTiEvaluationVisitor)undecoratedVisitor).createNestedMMVisitor();
     	                	} else {
     	                		// FIXME Error
     	                	}

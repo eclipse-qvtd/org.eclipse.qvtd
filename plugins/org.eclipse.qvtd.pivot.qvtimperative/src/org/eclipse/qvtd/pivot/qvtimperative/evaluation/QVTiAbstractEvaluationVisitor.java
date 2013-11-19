@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitorImpl;
 import org.eclipse.ocl.examples.pivot.manager.PivotIdResolver;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
@@ -151,7 +150,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 				//nestedEvaluationEnvironment.replace(boundVariable, value);
 				getEvaluationEnvironment().replace(boundVariable, value);
 				if (nestedDepth >= loopedVariables.size()) {
-					mapping.accept(getUndecoratedVisitor());
+					mapping.accept(undecoratedVisitor);
 					//nestedEvaluator.safeVisit(invokeMapping);
 				}
 				else {
@@ -293,7 +292,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	public @Nullable Object visitGuardPattern(@NonNull GuardPattern guardPattern) {
         for (Predicate predicate : guardPattern.getPredicate()) {
             // If the predicate is not true, the binding is not valid
-            Object result = predicate.accept(getUndecoratedVisitor());
+            Object result = predicate.accept(undecoratedVisitor);
             if (result != Boolean.TRUE) {
             	return false;
             }
@@ -325,7 +324,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 			Variable boundVariable = DomainUtil.nonNullModel(binding.getBoundVariable());
 			Object valueOrValues = null;
 			try {
-				valueOrValues = ((QVTiEvaluationVisitorDecorator)getUndecoratedVisitor()).safeVisit(binding.getValue());
+				valueOrValues = ((QVTiEvaluationVisitor)undecoratedVisitor).safeVisit(binding.getValue());
 			} catch (InvalidValueException ex) {
 				// There was an OCLVoid value being navigated or any other/similar OCL error
 				// evaluating the binding value
@@ -373,7 +372,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 		//	otherwise recurse over the boundVariables that need to loop.
 		//
 		if ((loopedValues == null) || (loopedVariables == null)) {
-			calledMapping.accept(getUndecoratedVisitor());
+			calledMapping.accept(undecoratedVisitor);
 		}
 		else {
 			doMappingCallRecursion(calledMapping, loopedVariables, loopedValues, 0);
@@ -451,8 +450,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	 */
 	public @Nullable Object visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp pPropertyCallExp) {
 		OCLExpression source = pPropertyCallExp.getSource();
-		EvaluationVisitor evaluationVisitor = getUndecoratedVisitor();
-		Object sourceValue = source != null ? evaluationVisitor.evaluate(source) : null;
+		Object sourceValue = source != null ? undecoratedVisitor.evaluate(source) : null;
 		if (sourceValue != null) {
 			Integer cacheIndex = DomainUtil.nonNullState(pPropertyCallExp.getCacheIndex());
 			Object middleOpposite = getModelManager().getMiddleOpposite(cacheIndex, sourceValue);
@@ -476,7 +474,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
         // Each predicate has a conditionExpression that is an OCLExpression
         OCLExpression exp = predicate.getConditionExpression();
         // The predicated is visited with a nested environment
-        Object expResult = exp.accept(getUndecoratedVisitor());
+        Object expResult = exp.accept(undecoratedVisitor);
         return expResult;
 	}
     
@@ -601,7 +599,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      */
     public @Nullable Object visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
     	Variable targetVariable = variableAssignment.getTargetVariable() ;
-		Object value = ((QVTiEvaluationVisitorDecorator)getUndecoratedVisitor()).safeVisit(variableAssignment.getValue());
+		Object value = ((QVTiEvaluationVisitor)undecoratedVisitor).safeVisit(variableAssignment.getValue());
 		// The variable had been added to the environment before the mapping call
 		if (targetVariable != null) {
 			evaluationEnvironment.replace(targetVariable, value);
@@ -613,7 +611,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
         PivotIdResolver idResolver = metaModelManager.getIdResolver();
         // Each predicate has a conditionExpression that is an OCLExpression
         OCLExpression exp = variablePredicate.getConditionExpression();
-		Object value = ((QVTiEvaluationVisitorDecorator)getUndecoratedVisitor()).safeVisit(exp);
+		Object value = ((QVTiEvaluationVisitor)undecoratedVisitor).safeVisit(exp);
         Variable variable = variablePredicate.getTargetVariable();
 		Type guardType = variable.getType();
 		DomainType valueType = idResolver.getDynamicTypeOf(value);
