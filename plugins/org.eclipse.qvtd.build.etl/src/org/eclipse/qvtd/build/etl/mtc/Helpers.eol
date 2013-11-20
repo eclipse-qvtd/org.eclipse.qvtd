@@ -6,14 +6,13 @@ operation isInputDomain(area : QVT!Area) : Boolean {
 
 @chached
 operation isMiddleDomain(area : QVT!Area) : Boolean {
-    return area.isTypeOf(QVT!Mapping);
+    return area.isTypeOf(QVT!Mapping) and area.name.size() > 0;
 }
 
 @chached
 operation isOutputDomain(area : QVT!Area) : Boolean {
     return area.isTypeOf(QVT!CoreDomain) and
         config!Configuration.all.first().outputDirection.collect(od | od.name).includes(area.typedModel.name);
-    //return not isInputDomain(area) and not isMiddleDomain(area);
 }
 
 operation isCheckMode() : Boolean {

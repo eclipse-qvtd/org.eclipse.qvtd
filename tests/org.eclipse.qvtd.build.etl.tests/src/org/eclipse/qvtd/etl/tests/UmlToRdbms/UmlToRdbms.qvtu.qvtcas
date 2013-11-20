@@ -1219,7 +1219,19 @@
       </bottomPattern>
       <local>
         <guardPattern/>
-        <bottomPattern/>
+        <bottomPattern>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.FromAttribute.leafs">
+            <value xsi:type="pivot:CollectionLiteralExp" type="#//@nestedPackage.1/@ownedType.13"
+                kind="Set">
+              <part xsi:type="pivot:CollectionItem" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AttributeToColumn">
+                <item xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AttributeToColumn"
+                    referredVariable="#//@nestedPackage.0/@rule.10/@bottomPattern/@realizedVariable.0"/>
+              </part>
+            </value>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AttributeToColumn"
+                referredVariable="#//@nestedPackage.0/@rule.10/@bottomPattern/@realizedVariable.0"/>
+          </assignment>
+        </bottomPattern>
       </local>
     </rule>
     <rule xsi:type="qvtc:Mapping" name="complexAttributeAttributes" refinement="#//@nestedPackage.0/@rule.8"
@@ -1261,7 +1273,30 @@
       <bottomPattern/>
       <local>
         <guardPattern/>
-        <bottomPattern/>
+        <bottomPattern>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.FromAttribute.name">
+            <value xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
+              <source xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
+                <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                    referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.FromAttribute.name">
+                  <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.NonLeafAttribute"
+                      referredVariable="#//@nestedPackage.0/@rule.11/@guardPattern/@variable.0"/>
+                </source>
+                <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                    stringSymbol="_"/>
+              </source>
+              <argument xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.UMLModelElement.name">
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"
+                    referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@bottomPattern/@variable.0"/>
+              </argument>
+            </value>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttribute"
+                referredVariable="#//@nestedPackage.0/@rule.8/@bottomPattern/@realizedVariable.0"/>
+          </assignment>
+        </bottomPattern>
       </local>
     </rule>
     <rule xsi:type="qvtc:Mapping" name="complexAttribute" refinement="#//@nestedPackage.0/@rule.8"
@@ -1292,7 +1327,20 @@
       </bottomPattern>
       <local>
         <guardPattern/>
-        <bottomPattern/>
+        <bottomPattern>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.FromAttribute.leafs">
+            <value xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.13"
+                referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.FromAttribute.leafs">
+              <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttribute"
+                  referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.FromAttributeOwner.fromAttributes">
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttributeOwner"
+                    referredVariable="#//@nestedPackage.0/@rule.8/@guardPattern/@variable.0"/>
+              </source>
+            </value>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.NonLeafAttribute"
+                referredVariable="#//@nestedPackage.0/@rule.12/@bottomPattern/@realizedVariable.0"/>
+          </assignment>
+        </bottomPattern>
       </local>
     </rule>
     <rule xsi:type="qvtc:Mapping" name="classPrimitiveAttributes" refinement="#//@nestedPackage.0/@rule.9 #//@nestedPackage.0/@rule.10">

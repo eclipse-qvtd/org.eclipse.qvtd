@@ -1,11 +1,11 @@
 import "Helpers.eol";
 import "OclLibHelper.eol";
 
-//var pivotUtil = new Native("org.eclipse.ocl.examples.pivot.utilities.PivotUtil");
-// First merge so duplicates may appear
-//mergeMiddlePatterns();
-removeDuplicateVariables();
-mergeVariablesWithKindOfTypes();
+/** Fix predicate VariableExp.referredVariable references
+  */
+operation fixPredicateVariableReferences() {
+}
+
 
 // Check for duplicate variable declarations and leave only one.
 operation removeDuplicateVariables() {
@@ -37,53 +37,6 @@ operation removeDuplicateVariables() {
         for (v in duplicates) {
             bp.realizedVariable.remove(bp.realizedVariable.selectOne(v2 |
                     v2.name == v));
-        }
-    }
-}
-
-
-// Check for variable declarations with types in the same hierarchy and leave the
-// lowest (less abstract) one
-operation mergeVariablesWithKindOfTypes() {
-    // Variables should have the same name and diffferent type
-    // Variables
-    for (cp in QVTmF!CorePattern.all) {
-        // Duplicate vars
-        var duplicates : Set();
-        for (v in cp.variable) {
-            if (cp.variable.excluding(v).exludingAll(duplicates).one(v2 | v2.name == v.name)) {
-                duplicates.add(v);
-            }
-        }
-        for (v in duplicates) {
-            // TODO in the general case we could have multiple vars, not just pairs 
-            var duplicate : Set() = cp.variable.select(v2 | v2.name == v.name);
-            duplicate.collect(d | d.type).println("pairs.first().type ");       
-            var x = new Native("org.eclipse.qvtd.etl.tests.EolToOclBridge");
-            x.test2(duplicate.first().type);
-            
-            
-        }
-    }
-    // RealizedVariables
-    for (bp in QVTmF!BottomPattern.all) {
-        // Duplicate vars
-        var duplicates : Set();
-        for (v in bp.realizedVariable) {
-            if (bp.realizedVariable.excluding(v).one(v2 | v2.name == v.name)) {
-                duplicates.add(v.name);
-            }
-        }
-        for (v in duplicates) {
-            var pairs = bp.realizedVariable.select(v2 |
-                    v2.name == v);
-            if (pairs.first().isKindOf(pairs.last().type())) {
-                // The first is the more concrete class, delete the last
-                bp.realizedVariable.remove(pairs.last());
-            } else if (pairs.last().isKindOf(pairs.first().type())) {
-                // The last is the more concrete class, delete the first
-                bp.realizedVariable.remove(pairs.first());
-            }
         }
     }
 }

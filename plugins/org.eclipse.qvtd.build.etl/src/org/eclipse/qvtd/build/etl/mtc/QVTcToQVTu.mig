@@ -7,9 +7,9 @@ import "OclLibHelper.eol";
 // is not a variable
 @cascade
 delete PropertyAssignment
-    when : isMiddleDomain(original.slotExpression.getArea())
+    when : isOutputDomain(original.value.getArea())
         and not original.value.isTypeOf(QVTc!VariableExp)
-        and not isInputDomain(original.value.getArea())
+        and isMiddleDomain(original.slotExpression.getArea())
 
 // Middle domian to input assigments are removed
 @cascade
@@ -36,7 +36,7 @@ migrate CoreDomain
 
 // Output Domain(s)
 migrate CoreDomain
-    when : not isInputDomain(original) {
+    when : isOutputDomain(original) {
         if (isCheckMode()) {
             migrated.isEnforceable = false;
         }
@@ -54,7 +54,7 @@ migrate BottomPattern
 	        migrated.predicate.add(a.equivalent());
 	    }
 }
-    
+
 migrate PropertyAssignment
     when : isInputDomain(original.bottomPattern.area) {
     
@@ -75,7 +75,7 @@ migrate PropertyAssignment
     }
     
 migrate PropertyAssignment
-    when : not isInputDomain(original.bottomPattern.area) 
+    when : isOutputDomain(original.bottomPattern.area) 
         and isCheckMode()
         and original.isDefault {
     

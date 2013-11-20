@@ -3,6 +3,7 @@ var duplicates : Bag();
 var x = new Native("org.eclipse.qvtd.build.etl.PivotUtil");
 
 vars.println("Vars ");
+vars.flatten().println("Vars ");
 
 for (v in vars) {
     if (vars.excludingAll(duplicates.flatten()).exists(v2 | v2.name == v.name)) {
@@ -11,7 +12,5 @@ for (v in vars) {
 }
 duplicates.println("duplicates ");
 for (v in duplicates) {
-    // TODO in the general case we could have multiple vars, not just pairs 
-   
     x.getLowestRankVariable(v).println();
 }

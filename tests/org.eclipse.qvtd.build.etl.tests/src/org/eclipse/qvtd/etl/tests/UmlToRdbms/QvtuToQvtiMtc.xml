@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project default="QvtuToQvtmPartition">
+<project default="QvtuToQvtmFlattening">
 	<!-- Default Properties -->
 	<property name="OclLibURI" value="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas"/>
 	<property name="QVTcToQVTuPruning" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTuPruning.eol"/>
