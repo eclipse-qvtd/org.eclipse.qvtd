@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.qvtd.debug;singleton:=true
+Bundle-Version: 0.11.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.filesystem,
+ org.eclipse.qvtd.xtext.qvtimperative,
+ org.eclipse.debug.core
+Export-Package: org.eclipse.qvtd.debug,
+ org.eclipse.qvtd.debug.launching
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.eclipse.qvtd.debug.QVTdDebugPlugin

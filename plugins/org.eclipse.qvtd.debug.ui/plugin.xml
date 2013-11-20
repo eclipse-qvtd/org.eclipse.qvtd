@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationDelegate"
+            icon="icons/QVTiModelFile.gif"
+            id="QVTi Debug"/>
+   </extension>
+   <extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="org.eclipse.qvtd.debug.ui.launching.LaunchConfigurationTabGroup"
+            description="Create a configuration to launch a QVTi transformation"
+            id="org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationTabGroup"
+            type="org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationDelegate"/>
+   </extension>
+
+</plugin>
