@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="org.eclipse.ant.core.antTasks">
-      <antTask
-            class="org.eclipse.qvtd.build.etl.ant.PivotSetup"
-            library="org.eclipse.qvtd.build.ant.jar"
-            name="PivotSetup">
-      </antTask>
+    <extension
+      point="org.eclipse.ant.core.antTasks">
+        <antTask
+          class="org.eclipse.qvtd.build.etl.ant.PivotSetup"
+          library="org.eclipse.qvtd.build.ant.jar"
+          name="PivotSetup">
+        </antTask>
+    </extension>
+    <extension
+      point="org.eclipse.epsilon.common.dt.tool">
+        <tool
+          class="org.eclipse.qvtd.build.etl.PivotUtil"
+          defaultName="PivotUtil">
+        </tool>
    </extension>
-
 </plugin>

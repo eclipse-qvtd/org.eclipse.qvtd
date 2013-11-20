@@ -11,6 +11,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.qvtd.pivot.qvtimperative,
  org.eclipse.qvtd.xtext.qvtbase.tests,
  org.eclipse.qvtd.pivot.qvtcore,
- org.apache.ant;bundle-version="1.8.4"
+ org.apache.ant;bundle-version="1.8.4",
+ org.eclipse.epsilon.eol.engine
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
