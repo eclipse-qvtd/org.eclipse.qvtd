@@ -1,0 +1,77 @@
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2013 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   E.D.Willink - Initial API and implementation
+ * 
+ * </copyright>
+ *
+ * This code is auto-generated
+ * from: org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.genmodel
+ *
+ * Do not edit it.
+ */
+package	org.eclipse.qvtd.pivot.qvtimperative.util;
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
+/**
+ * An AbstractWrappingQVTimperativeVisitor delegates all visits wrapping the delegation in a call to a preVisit function and a postVisit function.
+ */
+public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTimperativeVisitor<R>, P>
+	extends org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractWrappingQVTcoreBaseVisitor<R, C, D, P>
+	implements QVTimperativeVisitor<R>
+{
+	protected AbstractWrappingQVTimperativeVisitor(@NonNull D delegate, @NonNull C context) {
+		super(delegate, context);
+	}
+
+	public @Nullable R visitImperativeModel(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel object) {
+		P prologue = preVisit(object);
+		R result = delegate.visitImperativeModel(object);
+		return postVisit(object, prologue, result);
+	}
+
+	public @Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtimperative.Mapping object) {
+		P prologue = preVisit(object);
+		R result = delegate.visitMapping(object);
+		return postVisit(object, prologue, result);
+	}
+
+	public @Nullable R visitMappingCall(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCall object) {
+		P prologue = preVisit(object);
+		R result = delegate.visitMappingCall(object);
+		return postVisit(object, prologue, result);
+	}
+
+	public @Nullable R visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding object) {
+		P prologue = preVisit(object);
+		R result = delegate.visitMappingCallBinding(object);
+		return postVisit(object, prologue, result);
+	}
+
+	public @Nullable R visitMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment object) {
+		P prologue = preVisit(object);
+		R result = delegate.visitMiddlePropertyAssignment(object);
+		return postVisit(object, prologue, result);
+	}
+
+	public @Nullable R visitMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp object) {
+		P prologue = preVisit(object);
+		R result = delegate.visitMiddlePropertyCallExp(object);
+		return postVisit(object, prologue, result);
+	}
+
+	public @Nullable R visitVariablePredicate(@NonNull org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate object) {
+		P prologue = preVisit(object);
+		R result = delegate.visitVariablePredicate(object);
+		return postVisit(object, prologue, result);
+	}
+}
