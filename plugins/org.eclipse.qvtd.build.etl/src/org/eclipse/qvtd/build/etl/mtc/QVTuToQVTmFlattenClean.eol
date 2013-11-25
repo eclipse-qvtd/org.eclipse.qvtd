@@ -1,9 +1,127 @@
 import "Helpers.eol";
 import "OclLibHelper.eol";
 
-/** Fix predicate VariableExp.referredVariable references
+var x = new Native("org.eclipse.qvtd.build.etl.PivotUtil");
+var duplicates : Bag();
+
+// TODO this has to be optimized to reduce the number of visits!
+/* Normalize Variables and fix references */
+for (m in QVT!Mapping.all()) {    
+    // GuardPattern
+    for (gp in m.guardPattern) {
+        // Are there duplicate variables?
+        duplicates = findDuplicates(gp.variable);
+        for (d in duplicates) {
+            if (d <> null) {
+	            // Get lowest type rank variable
+	            var lv = x.getLowestRankVariable(d);
+	            lv.println("lv ");
+	            // Search for references to the variable in the predicates and assignments of the mapping
+	            m.fixVarReferences(lv);
+	            // After all references are fixed, clean the vars
+	            gp.variable.clear();
+	            gp.variable.add(lv);
+            }
+            
+        }
+    }
+    for (bp in m.bottomPattern) {
+        // Are there duplicate variables?
+        duplicates = findDuplicates(bp.variable);
+        for (d in duplicates) {
+            if (d <> null) {
+                // Get lowest type rank variable
+                var lv = x.getLowestRankVariable(d);
+                // Search for references to the variable in the predicates and assignments of the mapping
+                m.fixVarReferences(lv);
+                // After all references are fixed, clean the vars
+                bp.variable.clear();
+                bp.variable.add(lv);
+            }
+            
+        }
+        duplicates = findDuplicates(bp.realizedVariable);
+        for (d in duplicates) {
+            if (d <> null) {
+                // Get lowest type rank variable
+                var lv = x.getLowestRankVariable(d);
+                lv.println("lv ");
+                // Search for references to the variable in the predicates and assignments of the mapping
+                m.fixVarReferences(lv);
+                // After all references are fixed, clean the vars
+                bp.realizedVariable.clear();
+                bp.realizedVariable.add(lv);
+            }
+        }
+    }
+}
+
+operation QVT!Mapping fixVarReferences(v : QVT!Variable) {
+    for (gp in self.guardPattern) {
+        for (p in gp.predicate) {
+            p.conditionExpression.fixVarReferences(v);
+        }
+    }
+    for (bp in self.bottomPattern) {
+       for (p in bp.predicate) {
+           p.conditionExpression.fixVarReferences(v);
+       }
+       for (eo in bp.enforcementOperation) {
+           eo.operationCallExp.fixVarReferences(v);
+       }
+       for (a in bp.assignment) {
+           a.value.fixVarReferences(v);
+           if (a.isTypeOf(QVT!PropertyAssignment)) {
+               a.slotExpression.fixVarReferences(v);
+           }
+       }
+    }
+    // Nested Mappings
+    for (l in self.local) {
+        l.fixVarReferences(v);
+    }
+}
+
+
+// TODO Ask what OperationCallExp.argument is/works in QVT
+// TODO Ask what PropertyCallExp.qualifier is/works in QVT
+operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
+    if (self.isTypeOf(QVT!VariableExp)) {
+        if (self.referredVariable.name = v.name) {
+            v.println("Fixed a reference to v ");
+            self.referredVariable = v;
+        }
+    } else if (self.isKindOf(QVT!CallExp)) {
+        self.source.fixVarReferences(v);
+    } else if (self.isTypeOf(QVT!IfExp)) {
+        self.condition.fixVarReferences(v);
+        self.elseExpression.fixVarReferences(v);
+        self.thenExpression.fixVarReferences(v);
+    } else if (self.isTypeOf(QVT!CollectionLiteralExp)){
+        if (self.part.exists(p | p.name == v.name)) {
+            self.part.remove(self.part.select(p | p.name == v.name));
+            self.part.add(v);
+        }
+    } else {
+        self.println();
+        throw "Error! Add fixVarReference() for " + self.type();
+    }
+ } 
+
+/** Searches fir duplicate variables by name and returns a Bag of Sets, each set contains the set
+  * of variables with the same name.
   */
-operation fixPredicateVariableReferences() {
+operation findDuplicates(vars) : Bag {
+    //vars.println("findDuplicates ");
+    var duplicates : Bag();
+    for (v in vars) {
+	    // Variables should have the same name and diffferent type
+	    if (vars.excluding(v).excludingAll(duplicates.flatten()).exists(v2 | v2.name == v.name)) {
+	        duplicates.add(vars.select(v2 | v2.name == v.name).flatten());
+	    }
+	}
+	//duplicates.println("findDuplicates ");
+	return duplicates;
 }
 
 

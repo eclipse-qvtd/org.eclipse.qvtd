@@ -29,11 +29,8 @@ migrate GuardPattern
             
         // Get the set of GuardPatterns of the refined mappings
         var gps = original.area.refinement.collect(r | r.guardPattern).flatten();
-        // Add only non duplicate variables
-        var nonDuplicate = emfTool.getECoreUtil().copyAll(mergeVariablesWithKindOfTypes(migrated.variable.includingAll(gps.collect(gp | gp.variable).flatten())));
-        migrated.variable.clear();
-        migrated.variable.addAll(nonDuplicate);
         migrated.predicate.addAll(emfTool.getECoreUtil().copyAll(gps.collect(gp | gp.predicate).flatten()));
+        migrated.variable.addAll(emfTool.getECoreUtil().copyAll(gps.collect(gp | gp.variable).flatten()));
     }
     
 
@@ -43,16 +40,11 @@ migrate BottomPattern
 
         // Get the set of BottomPatterns of the refined mappings
         var bps = original.area.refinement.collect(r | r.bottomPattern).flatten();
-        var nonDuplicate = emfTool.getECoreUtil().copyAll(mergeVariablesWithKindOfTypes(migrated.variable.includingAll(bps.collect(bp | bp.variable).flatten())));
-        migrated.variable.clear();
-        migrated.variable.addAll(nonDuplicate);
-        nonDuplicate = emfTool.getECoreUtil().copyAll(mergeVariablesWithKindOfTypes(migrated.realizedVariable.includingAll(bps.collect(bp | bp.realizedVariable).flatten())));
-        migrated.realizedVariable.clear();
-        migrated.realizedVariable.addAll(nonDuplicate);
         migrated.predicate.addAll(bps.collect(bp | bp.predicate).flatten());     
         migrated.assignment.addAll(bps.collect(bp | bp.assignment).flatten());
         migrated.enforcementOperation.addAll(bps.collect(bp | bp.enforcementOperation).flatten());
-        
+        migrated.variable.addAll(emfTool.getECoreUtil().copyAll(bps.collect(bp | bp.variable).flatten()));
+        migrated.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(bps.collect(bp | bp.realizedVariable).flatten()));
     }
     
 // Refinned mapping's Domain's Patterns
@@ -62,12 +54,8 @@ migrate GuardPattern
     
         // Get the GuardPatterns of the refined mappings for a domain with the same typeModel
         var gps = original.area.rule.refinement.collect(r | r.domain).flatten().select(d | d.typedModel == original.area.typedModel).collect(r | r.guardPattern).flatten();
-        // Add only non duplicate variables
-        var nonDuplicate = emfTool.getECoreUtil().copyAll(mergeVariablesWithKindOfTypes(migrated.variable.includingAll(gps.collect(gp | gp.variable).flatten())));
-        migrated.variable.clear();
-        migrated.variable.addAll(nonDuplicate);
         migrated.predicate.addAll(gps.collect(gp | gp.predicate).flatten());
-        
+        migrated.variable.addAll(emfTool.getECoreUtil().copyAll(gps.collect(gp | gp.variable).flatten()));
     }
 
 migrate BottomPattern
@@ -76,16 +64,12 @@ migrate BottomPattern
         
         // Get the BottomPatterns of the refined mappings for a domain with the same typeModel
         var bps = original.area.rule.refinement.collect(r | r.domain).flatten().select(d | d.typedModel == original.area.typedModel).collect(r | r.bottomPattern).flatten();
-        var nonDuplicate = emfTool.getECoreUtil().copyAll(mergeVariablesWithKindOfTypes(migrated.variable.includingAll(bps.collect(bp | bp.variable).flatten())));
-        migrated.variable.clear();
-        migrated.variable.addAll(nonDuplicate);
-        nonDuplicate = emfTool.getECoreUtil().copyAll(mergeVariablesWithKindOfTypes(migrated.realizedVariable.includingAll(bps.collect(bp | bp.realizedVariable).flatten())));
-        migrated.realizedVariable.clear();
-        migrated.realizedVariable.addAll(nonDuplicate);
         migrated.predicate.addAll(bps.collect(bp | bp.predicate).flatten());
         migrated.assignment.addAll(bps.collect(bp | bp.assignment).flatten());
         migrated.enforcementOperation.addAll(bps.collect(bp | bp.enforcementOperation).flatten());
-
+        migrated.variable.addAll(emfTool.getECoreUtil().copyAll(bps.collect(bp | bp.variable).flatten()));
+        migrated.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(bps.collect(bp | bp.realizedVariable).flatten()));
+        
     }  
 
 // Move variable declarations and predicates in the input domain BottomPattern to the GuardPattern.
@@ -97,34 +81,3 @@ migrate CoreDomain
         migrated.guardPattern.predicate.addAll(migrated.bottomPattern.predicate);
     }
     
-/** Check for variable declarations with types in the same hierarchy and leave the
- *  lowest (less abstract) one
- */
-operation mergeVariablesWithKindOfTypes(vars) : Set  {
-    
-    //vars.println("Vars ");
-    if (vars.size() > 1) {
-        var duplicates : Bag();
-        var result : Set;
-        var x = new Native("org.eclipse.qvtd.build.etl.PivotUtil");
-        for (v in vars) {
-            // Variables should have the same name and diffferent type
-            if (vars.excludingAll(duplicates.flatten()).exists(v2 | v2.name == v.name)) {
-                duplicates.add(vars.select(v2 | v2.name == v.name).flatten());
-            }
-        }
-        //duplicates.println("duplicates ");
-        for (d in duplicates) {
-            if (d.size() > 1) {
-                result.add(x.getLowestRankVariable(d));
-            } else {
-                result.addAll(d);
-            }
-            
-            
-        }
-        return result;
-    } else {
-        return vars.asSet();
-    }    
-}    

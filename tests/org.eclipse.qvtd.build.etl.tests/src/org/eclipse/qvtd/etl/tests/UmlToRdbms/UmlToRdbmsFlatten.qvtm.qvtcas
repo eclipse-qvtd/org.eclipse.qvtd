@@ -689,39 +689,47 @@
                 referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
               <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Package"
                   referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.PackageElement.namespace">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                    referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.1"/>
               </source>
-              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Package"/>
+              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Package"
+                  referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.0"/>
             </conditionExpression>
           </predicate>
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" referredOperation="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas#o.ocl.Boolean.%61%..ocl.OclSelf">
               <source xsi:type="pivot:PropertyCallExp" referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.Association.source">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                    referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
               </source>
-              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                  referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.1"/>
             </conditionExpression>
           </predicate>
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" referredOperation="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas#o.ocl.Boolean.%61%..ocl.OclSelf">
               <source xsi:type="pivot:PropertyCallExp" referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.Association.destination">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                    referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
               </source>
-              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                  referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.2"/>
             </conditionExpression>
           </predicate>
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" referredOperation="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas#o.ocl.Boolean.%61%..ocl.OclSelf">
               <source xsi:type="pivot:PropertyCallExp" referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.PackageElement.namespace">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                    referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
               </source>
-              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Package"/>
+              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Package"
+                  referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.0"/>
             </conditionExpression>
           </predicate>
           <variable name="p" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Package"/>
+          <variable name="sc" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
           <variable name="dc" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
           <variable name="a" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
-          <variable name="sc" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
         </guardPattern>
         <bottomPattern/>
       </domain>
@@ -733,9 +741,11 @@
                 referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
               <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Schema"
                   referredProperty="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#p.simplerdbms.Table.schema">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"
+                    referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.1"/>
               </source>
-              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Schema"/>
+              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Schema"
+                  referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.0"/>
             </conditionExpression>
           </predicate>
           <predicate>
@@ -743,9 +753,11 @@
                 referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
               <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"
                   referredProperty="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#p.simplerdbms.Key.owner">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Key"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Key"
+                    referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.3"/>
               </source>
-              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"/>
+              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"
+                  referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.2"/>
             </conditionExpression>
           </predicate>
           <predicate>
@@ -753,16 +765,17 @@
                 referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%61%..ocl.OclSelf">
               <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                   referredProperty="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#p.simplerdbms.RModelElement.kind">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Key"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Key"
+                    referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.3"/>
               </source>
               <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                   stringSymbol="primary"/>
             </conditionExpression>
           </predicate>
-          <variable name="rk" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Key"/>
-          <variable name="dt" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"/>
-          <variable name="st" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"/>
           <variable name="s" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Schema"/>
+          <variable name="st" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"/>
+          <variable name="dt" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"/>
+          <variable name="rk" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Key"/>
         </guardPattern>
         <bottomPattern>
           <predicate>
@@ -770,34 +783,44 @@
                 referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Collection.includes..ocl.OclAny">
               <source xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.10"
                   referredProperty="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#p.simplerdbms.Column.foreignKeys">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Column"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Column"
+                    referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.1"/>
               </source>
-              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.ForeignKey"/>
+              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.ForeignKey"
+                  referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.0"/>
             </conditionExpression>
           </predicate>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#p.simplerdbms.ForeignKey.owner">
-            <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.ForeignKey"/>
+            <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.1"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.ForeignKey"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.0"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#p.simplerdbms.Column.owner">
-            <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Column"/>
+            <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.1"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Column"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.1"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#p.simplerdbms.ForeignKey.refersTo">
-            <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Key"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.ForeignKey"/>
+            <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Key"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.3"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.ForeignKey"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.0"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="true" targetProperty="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#p.simplerdbms.Column.foreignKeys">
             <value xsi:type="pivot:CollectionLiteralExp" type="#//@nestedPackage.1/@ownedType.11"
                 kind="Set">
               <part xsi:type="pivot:CollectionItem" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.ForeignKey">
-                <item xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.ForeignKey"/>
+                <item xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.ForeignKey"
+                    referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.0"/>
               </part>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Column"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Column"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.1"/>
           </assignment>
-          <realizedVariable name="fc" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Column"/>
           <realizedVariable name="fk" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.ForeignKey"/>
+          <realizedVariable name="fc" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Column"/>
         </bottomPattern>
       </domain>
       <guardPattern>
@@ -806,9 +829,11 @@
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PackageToSchema"
                 referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.ClassToTable.owner">
-              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"/>
+              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"
+                  referredVariable="#//@nestedPackage.0/@rule.7/@guardPattern/@variable.1"/>
             </source>
-            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PackageToSchema"/>
+            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PackageToSchema"
+                referredVariable="#//@nestedPackage.0/@rule.7/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
         <predicate>
@@ -816,9 +841,11 @@
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Package"
                 referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.PackageToSchema.umlPackage">
-              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PackageToSchema"/>
+              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PackageToSchema"
+                  referredVariable="#//@nestedPackage.0/@rule.7/@guardPattern/@variable.0"/>
             </source>
-            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Package"/>
+            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Package"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
         <predicate>
@@ -826,9 +853,11 @@
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Schema"
                 referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.PackageToSchema.schema">
-              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PackageToSchema"/>
+              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PackageToSchema"
+                  referredVariable="#//@nestedPackage.0/@rule.7/@guardPattern/@variable.0"/>
             </source>
-            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Schema"/>
+            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Schema"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
         <predicate>
@@ -836,9 +865,11 @@
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"
                 referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.ClassToTable.table">
-              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"/>
+              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"
+                  referredVariable="#//@nestedPackage.0/@rule.7/@guardPattern/@variable.1"/>
             </source>
-            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"/>
+            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.1"/>
           </conditionExpression>
         </predicate>
         <predicate>
@@ -846,9 +877,11 @@
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"
                 referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.ClassToTable.table">
-              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"/>
+              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"
+                  referredVariable="#//@nestedPackage.0/@rule.7/@guardPattern/@variable.2"/>
             </source>
-            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"/>
+            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Table"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.2"/>
           </conditionExpression>
         </predicate>
         <predicate>
@@ -856,9 +889,11 @@
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
                 referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.ClassToTable.umlClass">
-              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"/>
+              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"
+                  referredVariable="#//@nestedPackage.0/@rule.7/@guardPattern/@variable.1"/>
             </source>
-            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.1"/>
           </conditionExpression>
         </predicate>
         <predicate>
@@ -866,35 +901,47 @@
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
                 referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.ClassToTable.umlClass">
-              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"/>
+              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"
+                  referredVariable="#//@nestedPackage.0/@rule.7/@guardPattern/@variable.2"/>
             </source>
-            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.2"/>
           </conditionExpression>
         </predicate>
+        <variable name="p2s" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PackageToSchema"/>
         <variable name="sc2t" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"/>
         <variable name="dc2t" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"/>
-        <variable name="p2s" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PackageToSchema"/>
       </guardPattern>
       <bottomPattern>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.AssociationToForeignKey.owner">
-          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"/>
+          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"
+              referredVariable="#//@nestedPackage.0/@rule.7/@guardPattern/@variable.1"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"
+              referredVariable="#//@nestedPackage.0/@rule.7/@bottomPattern/@realizedVariable.0"/>
         </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.AssociationToForeignKey.referenced">
-          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"/>
+          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"
+              referredVariable="#//@nestedPackage.0/@rule.7/@guardPattern/@variable.2"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"
+              referredVariable="#//@nestedPackage.0/@rule.7/@bottomPattern/@realizedVariable.0"/>
         </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.AssociationToForeignKey.association">
-          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"/>
+          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+              referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"
+              referredVariable="#//@nestedPackage.0/@rule.7/@bottomPattern/@realizedVariable.0"/>
         </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.AssociationToForeignKey.foreignKey">
-          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.ForeignKey"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"/>
+          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.ForeignKey"
+              referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"
+              referredVariable="#//@nestedPackage.0/@rule.7/@bottomPattern/@realizedVariable.0"/>
         </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.ToColumn.column">
-          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Column"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"/>
+          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Column"
+              referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.1"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"
+              referredVariable="#//@nestedPackage.0/@rule.7/@bottomPattern/@realizedVariable.0"/>
         </assignment>
         <realizedVariable name="a2f" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"/>
       </bottomPattern>
@@ -910,17 +957,21 @@
                     referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                   <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
                       referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.Association.destination">
-                    <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                    <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                        referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
                   </source>
-                  <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+                  <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                      referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.2"/>
                 </source>
                 <argument xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
                     referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                   <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
                       referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.Association.source">
-                    <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                    <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                        referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
                   </source>
-                  <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+                  <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                      referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.1"/>
                 </argument>
               </condition>
               <elseExpression xsi:type="pivot:IfExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String">
@@ -931,17 +982,21 @@
                       referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%60%%62%..ocl.OclSelf">
                     <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
                         referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.Association.destination">
-                      <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                      <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                          referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
                     </source>
-                    <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+                    <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                        referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.2"/>
                   </source>
                   <argument xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
                       referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                     <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
                         referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.Association.source">
-                      <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                      <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                          referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
                     </source>
-                    <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+                    <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                        referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.1"/>
                   </argument>
                 </condition>
                 <elseExpression xsi:type="pivot:IfExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String">
@@ -952,17 +1007,21 @@
                         referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                       <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
                           referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.Association.destination">
-                        <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                        <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                            referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
                       </source>
-                      <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+                      <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                          referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.2"/>
                     </source>
                     <argument xsi:type="pivot:OperationCallExp" name="&lt;>" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
                         referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%60%%62%..ocl.OclSelf">
                       <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
                           referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.Association.source">
-                        <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                        <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                            referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
                       </source>
-                      <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+                      <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                          referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.1"/>
                     </argument>
                   </condition>
                   <elseExpression xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
@@ -976,7 +1035,8 @@
                           <source xsi:type="pivot:PropertyCallExp" isRequired="false"
                               type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                               referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.UMLModelElement.name">
-                            <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+                            <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                                referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.2"/>
                           </source>
                           <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                               stringSymbol="_"/>
@@ -984,7 +1044,8 @@
                         <argument xsi:type="pivot:PropertyCallExp" isRequired="false"
                             type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                             referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.UMLModelElement.name">
-                          <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                          <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                              referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
                         </argument>
                       </source>
                       <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
@@ -993,7 +1054,8 @@
                     <argument xsi:type="pivot:PropertyCallExp" isRequired="false"
                         type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                         referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.UMLModelElement.name">
-                      <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+                      <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                          referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.1"/>
                     </argument>
                   </elseExpression>
                   <thenExpression xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
@@ -1003,7 +1065,8 @@
                       <source xsi:type="pivot:PropertyCallExp" isRequired="false"
                           type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                           referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.UMLModelElement.name">
-                        <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                        <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                            referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
                       </source>
                       <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                           stringSymbol="_"/>
@@ -1011,7 +1074,8 @@
                     <argument xsi:type="pivot:PropertyCallExp" isRequired="false"
                         type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                         referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.UMLModelElement.name">
-                      <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+                      <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                          referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.1"/>
                     </argument>
                   </thenExpression>
                 </elseExpression>
@@ -1021,24 +1085,28 @@
                       referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
                     <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                         referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.UMLModelElement.name">
-                      <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+                      <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                          referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.2"/>
                     </source>
                     <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                         stringSymbol="_"/>
                   </source>
                   <argument xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                       referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.UMLModelElement.name">
-                    <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                    <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                        referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
                   </argument>
                 </thenExpression>
               </elseExpression>
               <thenExpression xsi:type="pivot:PropertyCallExp" isRequired="false"
                   type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                   referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.UMLModelElement.name">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                    referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
               </thenExpression>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"
+                referredVariable="#//@nestedPackage.0/@rule.7/@bottomPattern/@realizedVariable.0"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.UMLModelElement.name">
             <value xsi:type="pivot:IfExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String">
@@ -1049,50 +1117,61 @@
                     referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                   <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
                       referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.Association.destination">
-                    <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                    <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                        referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
                   </source>
-                  <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+                  <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                      referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.2"/>
                 </source>
                 <argument xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
                     referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                   <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
                       referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.Association.source">
-                    <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                    <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                        referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
                   </source>
-                  <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+                  <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                      referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.1"/>
                 </argument>
               </condition>
               <elseExpression xsi:type="pivot:PropertyCallExp" isRequired="false"
                   type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                   referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.UMLModelElement.name">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                    referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
               </elseExpression>
               <thenExpression xsi:type="pivot:PropertyCallExp" isRequired="false"
                   type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                   referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.AssociationToForeignKey.name">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"
+                    referredVariable="#//@nestedPackage.0/@rule.7/@bottomPattern/@realizedVariable.0"/>
               </thenExpression>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Association"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.3"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#p.simplerdbms.RModelElement.name">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.AssociationToForeignKey.name">
-              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"/>
+              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"
+                  referredVariable="#//@nestedPackage.0/@rule.7/@bottomPattern/@realizedVariable.0"/>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.ForeignKey"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.ForeignKey"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.0"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#p.simplerdbms.RModelElement.name">
             <value xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
               <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                   referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.AssociationToForeignKey.name">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AssociationToForeignKey"
+                    referredVariable="#//@nestedPackage.0/@rule.7/@bottomPattern/@realizedVariable.0"/>
               </source>
               <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                   stringSymbol="_tid"/>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Column"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Column"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.1"/>
           </assignment>
         </bottomPattern>
       </local>
@@ -1106,11 +1185,13 @@
                   referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Sequence.first">
                 <source xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.12"
                     referredProperty="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#p.simplerdbms.Key.column">
-                  <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Key"/>
+                  <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Key"
+                      referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.3"/>
                 </source>
               </source>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Column"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS.oclas#T.simplerdbms.Column"
+                referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.1"/>
           </assignment>
         </bottomPattern>
       </local>
@@ -1123,9 +1204,11 @@
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" referredOperation="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas#o.ocl.Boolean.%61%..ocl.OclSelf">
               <source xsi:type="pivot:PropertyCallExp" referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.Attribute.owner">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"
+                    referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@guardPattern/@variable.1"/>
               </source>
-              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                  referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@guardPattern/@variable.0"/>
             </conditionExpression>
           </predicate>
           <variable name="c" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
@@ -1138,12 +1221,16 @@
       </guardPattern>
       <bottomPattern>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.FromAttribute.attribute">
-          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttribute"/>
+          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"
+              referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@guardPattern/@variable.1"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.8/@bottomPattern/@realizedVariable.0"/>
         </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.FromAttribute.owner">
-          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttributeOwner"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttribute"/>
+          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttributeOwner"
+              referredVariable="#//@nestedPackage.0/@rule.8/@guardPattern/@variable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.8/@bottomPattern/@realizedVariable.0"/>
         </assignment>
         <realizedVariable name="fa" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttribute"/>
       </bottomPattern>
@@ -1153,9 +1240,11 @@
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.FromAttribute.kind">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.UMLModelElement.kind">
-              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"/>
+              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"
+                  referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@guardPattern/@variable.1"/>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttribute"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttribute"
+                referredVariable="#//@nestedPackage.0/@rule.8/@bottomPattern/@realizedVariable.0"/>
           </assignment>
         </bottomPattern>
       </local>
@@ -1186,9 +1275,11 @@
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
                 referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.ClassToTable.umlClass">
-              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"/>
+              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"
+                  referredVariable="#//@nestedPackage.0/@rule.9/@guardPattern/@variable.0"/>
             </source>
-            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
         <variable name="fao" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"/>
@@ -1202,7 +1293,7 @@
         </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.FromAttribute.owner">
           <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttributeOwner"
-              referredVariable="pivot:Variable UmlToRdbms.qvtu.qvtcas#//@nestedPackage.0/@rule.8/@guardPattern/@variable.0"/>
+              referredVariable="#//@nestedPackage.0/@rule.9/@guardPattern/@variable.0"/>
           <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttribute"
               referredVariable="qvtcb:RealizedVariable UmlToRdbms.qvtu.qvtcas#//@nestedPackage.0/@rule.8/@bottomPattern/@realizedVariable.0"/>
         </assignment>
@@ -1214,9 +1305,11 @@
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.FromAttribute.name">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.UMLModelElement.name">
-              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"/>
+              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"
+                  referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@guardPattern/@variable.1"/>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttribute"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttribute"
+                referredVariable="#//@nestedPackage.0/@rule.8/@bottomPattern/@realizedVariable.0"/>
           </assignment>
         </bottomPattern>
       </local>
@@ -1242,9 +1335,11 @@
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" referredOperation="platform:/resource/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas#o.ocl.Boolean.%61%..ocl.OclSelf">
               <source xsi:type="pivot:PropertyCallExp" referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.Attribute.type">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"
+                    referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@guardPattern/@variable.1"/>
               </source>
-              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.PrimitiveDataType"/>
+              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.PrimitiveDataType"
+                  referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.0"/>
             </conditionExpression>
           </predicate>
           <variable name="t" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.PrimitiveDataType"/>
@@ -1257,9 +1352,11 @@
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.PrimitiveDataType"
                 referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.PrimitiveToName.primitive">
-              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PrimitiveToName"/>
+              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PrimitiveToName"
+                  referredVariable="#//@nestedPackage.0/@rule.10/@guardPattern/@variable.0"/>
             </source>
-            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.PrimitiveDataType"/>
+            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.PrimitiveDataType"
+                referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
         <variable name="p2n" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PrimitiveToName"/>
@@ -1267,8 +1364,10 @@
       </guardPattern>
       <bottomPattern>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.AttributeToColumn.type">
-          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PrimitiveToName"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AttributeToColumn"/>
+          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PrimitiveToName"
+              referredVariable="#//@nestedPackage.0/@rule.10/@guardPattern/@variable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AttributeToColumn"
+              referredVariable="#//@nestedPackage.0/@rule.10/@bottomPattern/@realizedVariable.0"/>
         </assignment>
         <realizedVariable name="fa" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AttributeToColumn"/>
       </bottomPattern>
@@ -1279,10 +1378,12 @@
             <value xsi:type="pivot:CollectionLiteralExp" type="#//@nestedPackage.1/@ownedType.13"
                 kind="Set">
               <part xsi:type="pivot:CollectionItem" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AttributeToColumn">
-                <item xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AttributeToColumn"/>
+                <item xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AttributeToColumn"
+                    referredVariable="#//@nestedPackage.0/@rule.10/@bottomPattern/@realizedVariable.0"/>
               </part>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AttributeToColumn"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AttributeToColumn"
+                referredVariable="#//@nestedPackage.0/@rule.10/@bottomPattern/@realizedVariable.0"/>
           </assignment>
         </bottomPattern>
       </local>
@@ -1296,9 +1397,11 @@
                 referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
               <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Classifier"
                   referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.Attribute.type">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"
+                    referredVariable="#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.0"/>
               </source>
-              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                  referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@guardPattern/@variable.0"/>
             </conditionExpression>
           </predicate>
           <variable name="ca" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"/>
@@ -1311,9 +1414,11 @@
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"
                 referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.FromAttribute.attribute">
-              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.NonLeafAttribute"/>
+              <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.NonLeafAttribute"
+                  referredVariable="#//@nestedPackage.0/@rule.11/@guardPattern/@variable.0"/>
             </source>
-            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"/>
+            <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"
+                referredVariable="#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
         <variable name="fao" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.NonLeafAttribute"/>
@@ -1331,17 +1436,20 @@
                   referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
                 <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                     referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.FromAttribute.name">
-                  <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.NonLeafAttribute"/>
+                  <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.NonLeafAttribute"
+                      referredVariable="#//@nestedPackage.0/@rule.11/@guardPattern/@variable.0"/>
                 </source>
                 <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                     stringSymbol="_"/>
               </source>
               <argument xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                   referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.UMLModelElement.name">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"
+                    referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@guardPattern/@variable.1"/>
               </argument>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttribute"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttribute"
+                referredVariable="#//@nestedPackage.0/@rule.8/@bottomPattern/@realizedVariable.0"/>
           </assignment>
         </bottomPattern>
       </local>
@@ -1355,9 +1463,11 @@
                 referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
               <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Classifier"
                   referredProperty="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#p.simpleuml.Attribute.type">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Attribute"
+                    referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@guardPattern/@variable.1"/>
               </source>
-              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
+              <argument xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"
+                  referredVariable="#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.0"/>
             </conditionExpression>
           </predicate>
           <variable name="t" type="http://www.eclipse.org/qvt/examples/0.1/simpleUML.oclas#T.simpleuml.Class"/>
@@ -1378,10 +1488,12 @@
                 referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.FromAttribute.leafs">
               <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttribute"
                   referredProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.FromAttributeOwner.fromAttributes">
-                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttributeOwner"/>
+                <source xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.FromAttributeOwner"
+                    referredVariable="#//@nestedPackage.0/@rule.8/@guardPattern/@variable.0"/>
               </source>
             </value>
-            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.NonLeafAttribute"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.NonLeafAttribute"
+                referredVariable="#//@nestedPackage.0/@rule.12/@bottomPattern/@realizedVariable.0"/>
           </assignment>
         </bottomPattern>
       </local>
@@ -1430,8 +1542,8 @@
                 referredVariable="#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
-        <variable name="p2n" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PrimitiveToName"/>
         <variable name="fao" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.ClassToTable"/>
+        <variable name="p2n" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PrimitiveToName"/>
       </guardPattern>
       <bottomPattern>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#p.umltordbms.AttributeToColumn.type">
@@ -1575,8 +1687,8 @@
                 referredVariable="#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
-        <variable name="p2n" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PrimitiveToName"/>
         <variable name="fao" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.NonLeafAttribute"/>
+        <variable name="p2n" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.PrimitiveToName"/>
       </guardPattern>
       <bottomPattern>
         <realizedVariable name="fa" type="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS.oclas#T.umltordbms.AttributeToColumn"/>
