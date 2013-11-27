@@ -8,7 +8,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.evaluation.PivotEvaluationEnvironment;
+import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
@@ -69,7 +69,7 @@ public class QVTiPivotEvaluator
 	}
 
 	public Boolean execute() {
-        PivotEvaluationEnvironment evalEnv = envFactory.createEvaluationEnvironment();
+        EvaluationEnvironment evalEnv = envFactory.createEvaluationEnvironment();
         QVTiEvaluationVisitor visitor = new QVTiLMEvaluationVisitor(env, evalEnv, modelManager);
         if (isEvaluationTracingEnabled()) {
             // decorate the evaluation visitor with tracing support
