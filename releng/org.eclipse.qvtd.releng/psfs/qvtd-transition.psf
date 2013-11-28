@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.egit.core.GitProvider">
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,releng/org.eclipse.qvtd.build"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,doc/org.eclipse.qvtd.doc"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,features/org.eclipse.qvtd.doc-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,features/org.eclipse.qvtd.examples-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,features/org.eclipse.qvtd.license-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,features/org.eclipse.qvtd.master-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,releng/org.eclipse.qvtd.releng"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,releng/org.eclipse.qvtd.releng.buckminster"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,features/org.eclipse.qvtd.releng.build-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,features/org.eclipse.qvtd.tests-feature"/>
+</provider>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1370279628474_110" label="QVTd Releng" name="QVTd Releng">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.master-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.tests-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.doc-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.releng.build-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.examples-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.releng.buckminster" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.doc" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.license-feature" type="4"/>
+<item elementID="=org.eclipse.qvtd.build" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.releng" type="4"/>
+</workingSets>
+</psf>

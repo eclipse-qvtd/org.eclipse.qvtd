@@ -3,6 +3,8 @@
 <provider id="org.eclipse.egit.core.GitProvider">
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,plugins/org.eclipse.qvt"/>
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,releng/org.eclipse.qvtd.build"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,plugins/org.eclipse.qvtd.build.etl"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,tests/org.eclipse.qvtd.build.etl.tests"/>
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,plugins/org.eclipse.qvtd.codegen"/>
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,plugins/org.eclipse.qvtd.debug"/>
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,plugins/org.eclipse.qvtd.debug.ui"/>
@@ -74,8 +76,8 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.releng.buckminster" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.doc" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.license-feature" type="4"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.releng" type="4"/>
 <item elementID="=org.eclipse.qvtd.build" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.releng" type="4"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1370279576994_109" label="QVTd Tests" name="QVTd Tests">
 <item elementID="=org.eclipse.qvtd.xtext.qvtimperative.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -85,5 +87,9 @@
 <item elementID="=org.eclipse.qvtd.xtext.qvtbase.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.qvtd.examples.qvtrelation.reltocore" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.qvtd.xtext.qvtrelation.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1385624817309_116" label="QVTd Transition" name="QVTd Transition">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.build.etl" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.build.etl.tests" type="4"/>
 </workingSets>
 </psf>
