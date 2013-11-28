@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <psf version="2.0">
 <provider id="org.eclipse.egit.core.GitProvider">
-<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,releng/org.eclipse.qvtd.build"/>
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,plugins/org.eclipse.qvtd.codegen"/>
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,plugins/org.eclipse.qvtd.debug"/>
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,plugins/org.eclipse.qvtd.debug.ui"/>
@@ -24,7 +23,6 @@
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1361650363277_13" label="QVTd" name="QVTd">
 <item elementID="=org.eclipse.qvtd.xtext.qvtrelation.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.qvtd.xtext.qvtcorebase" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.qvtd.build" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.qvtd.xtext.qvtbase.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.qvtd.xtext.qvtcorebase.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.qvtd.pivot.qvtbase" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
