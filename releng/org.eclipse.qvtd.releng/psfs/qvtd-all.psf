@@ -2,6 +2,7 @@
 <psf version="2.0">
 <provider id="org.eclipse.egit.core.GitProvider">
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,plugins/org.eclipse.qvt"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,releng/org.eclipse.qvtd.build"/>
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,plugins/org.eclipse.qvtd.codegen"/>
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,plugins/org.eclipse.qvtd.debug"/>
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,plugins/org.eclipse.qvtd.debug.ui"/>
@@ -74,6 +75,7 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.doc" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.license-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvtd.releng" type="4"/>
+<item elementID="=org.eclipse.qvtd.build" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1370279576994_109" label="QVTd Tests" name="QVTd Tests">
 <item elementID="=org.eclipse.qvtd.xtext.qvtimperative.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
