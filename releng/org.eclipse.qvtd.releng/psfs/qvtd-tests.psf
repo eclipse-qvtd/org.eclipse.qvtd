@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.egit.core.GitProvider">
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,plugins/org.eclipse.qvt"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,examples/org.eclipse.qvtd.examples.qvtrelation.modelmorf"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,examples/org.eclipse.qvtd.examples.qvtrelation.reltocore"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,tests/org.eclipse.qvtd.xtext.qvtbase.tests"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,tests/org.eclipse.qvtd.xtext.qvtcore.tests"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,tests/org.eclipse.qvtd.xtext.qvtimperative.tests"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,tests/org.eclipse.qvtd.xtext.qvtrelation.tests"/>
+</provider>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1370279576994_109" label="QVTd Tests" name="QVTd Tests">
+<item elementID="=org.eclipse.qvtd.xtext.qvtimperative.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.qvt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.qvtd.xtext.qvtcore.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.qvtd.examples.qvtrelation.modelmorf" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.qvtd.xtext.qvtbase.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.qvtd.examples.qvtrelation.reltocore" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.qvtd.xtext.qvtrelation.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+</psf>
