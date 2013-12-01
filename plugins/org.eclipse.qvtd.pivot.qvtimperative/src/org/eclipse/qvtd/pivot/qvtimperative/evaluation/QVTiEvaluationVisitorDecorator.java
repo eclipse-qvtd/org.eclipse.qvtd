@@ -16,14 +16,11 @@ import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainLogger;
-import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.evaluation.AbstractEvaluationVisitorDecorator;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
@@ -71,98 +68,60 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	}
 
 	public void dispose() {}
-  
-    /**
-     * Obtains my delegate's environment.
-     */
-    @Override
-	public @NonNull Environment getEnvironment() {
-        return delegate.getEnvironment();
-    }
-
-    /**
-     * Obtains my delegate's evaluation environment.
-     */
-    @Override
-	public @NonNull EvaluationEnvironment getEvaluationEnvironment() {
-        return delegate.getEvaluationEnvironment();
-    }
-
-    /**
-     * Obtains my delegate's extent map.
-     */
-    @Override
-	public @NonNull DomainModelManager getModelManager() {
-        return delegate.getModelManager();
-    }
-
-    /**
-     * Delegates to my decorated visitor.
-     */
-	public void setUndecoratedVisitor(@NonNull QVTiEvaluationVisitor evaluationVisitor) {
-        delegate.setUndecoratedVisitor(evaluationVisitor);
-	}
 	
 	/**
      * Delegates to my decorated visitor.
      */
-	@Nullable public Object evaluate(@NonNull DomainExpression body) {
-		
+	public @Nullable Object evaluate(@NonNull DomainExpression body) {
 		return delegate.evaluate(body);
 	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-	@Nullable public Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
-		
+	public @Nullable Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
 		return delegate.evaluate(expressionInOCL);
 	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-	@NonNull public EvaluationVisitor getEvaluator() {
-		
+	public @NonNull EvaluationVisitor getEvaluator() {
 		return delegate.getEvaluator();
 	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-	@NonNull public MetaModelManager getMetaModelManager() {
-		
-		return delegate.getMetaModelManager();
-	}
-
-	/**
-     * Delegates to my decorated visitor.
-     */
-	@NonNull public DomainStandardLibrary getStandardLibrary() {
-		
-		return delegate.getStandardLibrary();
-	}
-
-	/**
-     * Delegates to my decorated visitor.
-     */
-	@NonNull public IdResolver getIdResolver() {
-
+	public @NonNull IdResolver getIdResolver() {
 		return delegate.getIdResolver();
 	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-	@Nullable public DomainLogger getLogger() {
-		
+	public @Nullable DomainLogger getLogger() {
 		return delegate.getLogger();
 	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-	@NonNull public DomainType getStaticTypeOf(@Nullable Object value) {
+	public @NonNull MetaModelManager getMetaModelManager() {
+		return delegate.getMetaModelManager();
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	public @NonNull DomainStandardLibrary getStandardLibrary() {
+		return delegate.getStandardLibrary();
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value) {
 		
 		return delegate.getStaticTypeOf(value);
 	}
@@ -170,18 +129,16 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-	@NonNull public DomainType getStaticTypeOf(@Nullable Object value,
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value,
 			@NonNull Object... values) {
-		
 		return delegate.getStaticTypeOf(value, values);
 	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-	@NonNull public DomainType getStaticTypeOf(@Nullable Object value,
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value,
 			@NonNull Iterable<?> values) {
-		
 		return delegate.getStaticTypeOf(value, values);
 	}
 
@@ -189,7 +146,6 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
      * Delegates to my decorated visitor.
      */
 	public boolean isCanceled() {
-		
 		return delegate.isCanceled();
 	}
 
@@ -197,7 +153,6 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
      * Delegates to my decorated visitor.
      */
 	public void setCanceled(boolean isCanceled) {
-		
 		delegate.setCanceled(isCanceled);
 	}
 
@@ -205,7 +160,6 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
      * Delegates to my decorated visitor.
      */
 	public void setLogger(@Nullable DomainLogger loger) {
-		
 		delegate.setLogger(loger);
 	}
 	

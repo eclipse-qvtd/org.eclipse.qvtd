@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.qvtd.debug.evaluator.IDebugEvaluationEnvironment;
@@ -533,6 +534,9 @@ public class VariableFinder
 		String envVarName = varTreePath[0];
 		Set<DomainTypedElement> variables = fEvalEnv.getVariables();
 		Object rootObj = DomainUtil.getNamedElement(variables, envVarName);
+		if (rootObj instanceof Variable) {
+			rootObj = fEvalEnv.getValueOf((DomainTypedElement)rootObj);
+		}
 		if (rootObj == null) { //&& !evalEnv.getNames().contains(envVarName)) {
 			rootObj = getModelParameterVariables(fEvalEnv).get(envVarName);
 			

@@ -50,13 +50,13 @@ public abstract class DebugQVTiEvaluationVisitor extends AbstractWrappingQVTimpe
 	public static final @NonNull TracingOption VM_RESPONSE = new TracingOption(QVTdDebugPlugin.PLUGIN_ID, "vmResponse");
 	
 	static {
-		LOCATION.setState(true);
+//		LOCATION.setState(true);
 //		PRE_VISIT.setState(true);
 //		POST_VISIT.setState(true);
-		VISITOR_STACK.setState(true);
-		VM_EVENT.setState(true);
-		VM_REQUEST.setState(true);
-		VM_RESPONSE.setState(true);
+//		VISITOR_STACK.setState(true);
+//		VM_EVENT.setState(true);
+//		VM_REQUEST.setState(true);
+//		VM_RESPONSE.setState(true);
 	}
 	
 	protected DebugQVTiEvaluationVisitor(@NonNull QVTiEvaluationVisitor nestedEvaluationVisitor) {
@@ -115,8 +115,8 @@ public abstract class DebugQVTiEvaluationVisitor extends AbstractWrappingQVTimpe
 
 //	@Override
 	protected void processDeferredTasks() {
-		IDebugEvaluationEnvironment evalEnv = getEvaluationEnvironment();
-		Transformation transformation = evalEnv.getTransformation();
+//		IDebugEvaluationEnvironment evalEnv = getEvaluationEnvironment();
+//		Transformation transformation = evalEnv.getTransformation();
 //		UnitLocation startLocation = newLocalLocation(evalEnv, transformation, ASTBindingHelper.getEndPosition(transformation));//, 0);
 //		try {
 //			pushLocation(startLocation);
@@ -271,10 +271,10 @@ public abstract class DebugQVTiEvaluationVisitor extends AbstractWrappingQVTimpe
     }
 
 	@Override
-	public Object visitVariable(Variable vd) {
+	public Object visitVariable(@NonNull Variable vd) {
 		Object result = super.visitVariable(vd);
 		Type declaredType = vd.getType();
-		String name = vd.getName();
+//		String name = vd.getName();
 		EvaluationEnvironment env = getEvaluationEnvironment();
 		env.replace(vd, declaredType);
 //		env.replace(name, env.getValueOf(name), declaredType);
