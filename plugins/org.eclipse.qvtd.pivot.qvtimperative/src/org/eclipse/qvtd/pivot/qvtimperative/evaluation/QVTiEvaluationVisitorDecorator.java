@@ -74,7 +74,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
      * Obtains my delegate's environment.
      */
     @Override
-	public Environment getEnvironment() {
+	public @NonNull Environment getEnvironment() {
         return delegate.getEnvironment();
     }
 
