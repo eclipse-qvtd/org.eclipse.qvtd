@@ -163,6 +163,11 @@ public abstract class AbstractQVTrelationUiModule extends DefaultUiModule {
 		return org.eclipse.ocl.examples.xtext.essentialocl.ui.model.BaseDocument.class;
 	}
 
+	// contributed by org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.XtextEditor> bindXtextEditor() {
+		return org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationEditor.class;
+	}
+
 	// contributed by org.eclipse.ocl.examples.build.fragments.MarkupHoverFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.hover.IEObjectHover> bindIEObjectHover() {
 		return org.eclipse.ocl.examples.xtext.markup.ui.hover.MarkupHover.class;
