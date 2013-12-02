@@ -163,6 +163,20 @@ public class MainTab extends AbstractLaunchConfigurationTab implements ModifyLis
 		return metaModelManager2;
 	}
 
+	protected String getDefaultPath(@NonNull Group group, String name) {
+		if (name != null) {
+			for (Control child : group.getChildren()) {
+				if (child instanceof ParameterRow) {
+					ParameterRow row = (ParameterRow)child;
+					if (name.equals(row.name.getText())) {
+						return row.path.getText();
+					}
+				}
+			}
+		}
+		return "";
+	}
+
 	public String getName() {
 		return "Main";
 	}
@@ -205,6 +219,8 @@ public class MainTab extends AbstractLaunchConfigurationTab implements ModifyLis
 		String txName = txPath.getText();
 		@SuppressWarnings("null")@NonNull URI txURI = URI.createURI(txName, true);
 		try {
+			@SuppressWarnings("null")@NonNull Group inputsGroup2 = inputsGroup;
+			@SuppressWarnings("null")@NonNull Group outputsGroup2 = outputsGroup;
 			QVTiXtextEvaluator xtextEvaluator = new QVTiXtextEvaluator(getMetaModelManager(), txURI);
 			Transformation transformation = xtextEvaluator.getTransformation();
 			Set<TypedModel> inputs = new HashSet<TypedModel>();
@@ -219,14 +235,15 @@ public class MainTab extends AbstractLaunchConfigurationTab implements ModifyLis
 							CoreDomain coreDomain = (CoreDomain)domain;
 							BottomPattern bottomPattern = coreDomain.getBottomPattern();
 							TypedModel typedModel = coreDomain.getTypedModel();
+							String name = typedModel.getName();
 							if (bottomPattern.getRealizedVariable().isEmpty()) {
 								if (inputs.add(typedModel)) {
-									inputMap.put(typedModel.getName(), "");
+									inputMap.put(name, getDefaultPath(inputsGroup2, name));
 								}
 							}
 							else {
 								if (outputs.add(typedModel)) {
-									outputMap.put(typedModel.getName(), "");
+									outputMap.put(name, getDefaultPath(outputsGroup2, name));
 								}
 							}
 						}
@@ -236,8 +253,6 @@ public class MainTab extends AbstractLaunchConfigurationTab implements ModifyLis
 			for (String key : outputMap.keySet()) {
 				inputMap.remove(key);
 			}
-			@SuppressWarnings("null")@NonNull Group inputsGroup2 = inputsGroup;
-			@SuppressWarnings("null")@NonNull Group outputsGroup2 = outputsGroup;
 			refreshParametersGroup(inputsGroup2, SWT.NONE, inputMap);
 			refreshParametersGroup(outputsGroup2, SWT.SAVE, outputMap);
 		}
