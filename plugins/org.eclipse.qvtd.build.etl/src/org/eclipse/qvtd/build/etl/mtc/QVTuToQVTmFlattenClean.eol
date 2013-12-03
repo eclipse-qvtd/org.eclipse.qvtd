@@ -7,34 +7,46 @@ var duplicates : Bag();
 // TODO this has to be optimized to reduce the number of visits!
 /* Normalize Variables and fix references */
 for (m in QVT!Mapping.all()) {    
+    m.traverseMapping();
+}
+
+operation QVT!Mapping traverseMapping() {
+    // Domains
+    for (d in self.domain) {
+        d.fixDuplicateVariables();
+    }
+    // Guard and Bottom Pattern
+    self.fixDuplicateVariables();
+    // Nested Mappings
+    for (l in self.local) {
+        l.traverseMapping();
+    }
+}
+
+operation QVT!Area fixDuplicateVariables() {
     // GuardPattern
-    for (gp in m.guardPattern) {
+    for (gp in self.guardPattern) {
         // Are there duplicate variables?
         duplicates = findDuplicates(gp.variable);
-        for (d in duplicates) {
-            if (d <> null) {
-	            // Get lowest type rank variable
-	            var lv = x.getLowestRankVariable(d);
-	            lv.println("lv ");
-	            // Search for references to the variable in the predicates and assignments of the mapping
-	            m.fixVarReferences(lv);
-	            // After all references are fixed, clean the vars
-	            gp.variable.clear();
-	            gp.variable.add(lv);
-            }
-            
-        }
-    }
-    for (bp in m.bottomPattern) {
-        // Are there duplicate variables?
-        duplicates = findDuplicates(bp.variable);
         for (d in duplicates) {
             if (d <> null) {
                 // Get lowest type rank variable
                 var lv = x.getLowestRankVariable(d);
                 // Search for references to the variable in the predicates and assignments of the mapping
-                m.fixVarReferences(lv);
+                self.fixVarReferences(lv);
                 // After all references are fixed, clean the vars
+                gp.variable.clear();
+                gp.variable.add(lv);
+            }
+        }
+    }
+    for (bp in self.bottomPattern) {
+        // Are there duplicate variables?
+        duplicates = findDuplicates(bp.variable);
+        for (d in duplicates) {
+            if (d <> null) {
+                var lv = x.getLowestRankVariable(d);
+                self.fixVarReferences(lv);
                 bp.variable.clear();
                 bp.variable.add(lv);
             }
@@ -43,38 +55,32 @@ for (m in QVT!Mapping.all()) {
         duplicates = findDuplicates(bp.realizedVariable);
         for (d in duplicates) {
             if (d <> null) {
-                // Get lowest type rank variable
                 var lv = x.getLowestRankVariable(d);
-                lv.println("lv ");
-                // Search for references to the variable in the predicates and assignments of the mapping
-                m.fixVarReferences(lv);
-                // After all references are fixed, clean the vars
+                self.fixVarReferences(lv);
                 bp.realizedVariable.clear();
                 bp.realizedVariable.add(lv);
             }
         }
-    }
+    }     
+    // Move variable declarations and predicates in the input domain BottomPattern to the GuardPattern.
+    if (self.isTypeOf(QVT!CoreDomain) and isInputDomain(self)) {
+        for (bp in self.bottomPattern) {
+            for (gp in self.guardPattern) {
+                gp.variable.addAll(bp.variable);
+            }
+        }
+    }   
 }
 
 operation QVT!Mapping fixVarReferences(v : QVT!Variable) {
+    for (d in self.domain) {
+        d.fixVarReferences(v);
+    }
     for (gp in self.guardPattern) {
-        for (p in gp.predicate) {
-            p.conditionExpression.fixVarReferences(v);
-        }
+        gp.fixVarReferences(v);
     }
     for (bp in self.bottomPattern) {
-       for (p in bp.predicate) {
-           p.conditionExpression.fixVarReferences(v);
-       }
-       for (eo in bp.enforcementOperation) {
-           eo.operationCallExp.fixVarReferences(v);
-       }
-       for (a in bp.assignment) {
-           a.value.fixVarReferences(v);
-           if (a.isTypeOf(QVT!PropertyAssignment)) {
-               a.slotExpression.fixVarReferences(v);
-           }
-       }
+        bp.fixVarReferences(v);
     }
     // Nested Mappings
     for (l in self.local) {
@@ -82,13 +88,46 @@ operation QVT!Mapping fixVarReferences(v : QVT!Variable) {
     }
 }
 
+operation QVT!CoreDomain fixVarReferences(v : QVT!Variable) {
+    for (gp in self.guardPattern) {
+        gp.fixVarReferences(v);
+    }
+    for (bp in self.bottomPattern) {
+        bp.fixVarReferences(v);
+    }
+}
 
-// TODO Ask what OperationCallExp.argument is/works in QVT
+
+operation QVT!GuardPattern fixVarReferences(v : QVT!Variable) {
+    for (p in self.predicate) {
+        p.conditionExpression.fixVarReferences(v);
+    }
+}
+
+operation QVT!BottomPattern fixVarReferences(v : QVT!Variable) {
+    for (p in self.predicate) {
+           p.conditionExpression.fixVarReferences(v);
+       }
+       for (eo in self.enforcementOperation) {
+           eo.operationCallExp.fixVarReferences(v);
+       }
+       for (a in self.assignment) {
+           a.value.fixVarReferences(v);
+           if (a.isTypeOf(QVT!PropertyAssignment)) {
+               a.slotExpression.fixVarReferences(v);
+           }
+       }
+}
+
+
+
+
+
 // TODO Ask what PropertyCallExp.qualifier is/works in QVT
 operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
     if (self.isTypeOf(QVT!VariableExp)) {
         if (self.referredVariable.name = v.name) {
-            v.println("Fixed a reference to v ");
+            //v.println("Fixed a reference to v ");
             self.referredVariable = v;
         }
     } else if (self.isKindOf(QVT!CallExp)) {
@@ -122,41 +161,6 @@ operation findDuplicates(vars) : Bag {
 	}
 	//duplicates.println("findDuplicates ");
 	return duplicates;
-}
-
-
-// Check for duplicate variable declarations and leave only one.
-operation removeDuplicateVariables() {
-    // Variables
-    for (cp in QVTmF!CorePattern.all) {
-        // Delete duplicate vars
-        var duplicates : Set();
-        for (v in cp.variable) {
-            if (cp.variable.excluding(v).one(v2 |
-                    v2.name == v.name and v2.type == v.type)) {
-                duplicates.add(v.name);
-                }
-        }
-        for (v in duplicates) {
-            cp.variable.remove(cp.variable.selectOne(v2 |
-                    v2.name == v));
-        }
-    }
-    // RealizedVariables
-    for (bp in QVTmF!BottomPattern.all) {
-        // Delete duplicate vars
-        var duplicates : Set();
-        for (v in bp.realizedVariable) {
-            if (bp.realizedVariable.excluding(v).one(v2 |
-                    v2.name == v.name and v2.type == v.type)) {
-                duplicates.add(v.name);
-                }
-        }
-        for (v in duplicates) {
-            bp.realizedVariable.remove(bp.realizedVariable.selectOne(v2 |
-                    v2.name == v));
-        }
-    }
 }
 
 // Merge nested mappings with no domains.

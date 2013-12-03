@@ -60,3 +60,94 @@ operation QVT!OCLExpression getArea() : QVT!Area {
     }
     return null;
 }
+
+operation QVT!OCLExpression findRreferencedVariables() : Set {
+    var varRefs : Set();
+    if (self.isTypeOf(QVT!VariableExp)) {
+        varRefs.add(self.referredVariable);
+    } else if (self.isTypeOf(QVT!OperationCallExp)) {
+        varRefs.addAll(self.source.findRreferencedVariables());
+        for (arg in self.argument) {
+            varRefs.addAll(arg.findRreferencedVariables());
+        }
+    } else if (self.isTypeOf(QVT!PropertyCallExp)) {
+        varRefs.addAll(self.source.findRreferencedVariables());
+    } else if (self.isTypeOf(QVT!IfExp)) {
+        varRefs.addAll(self.condition.findRreferencedVariables());
+        varRefs.addAll(self.elseExpression.findRreferencedVariables());
+        varRefs.addAll(self.thenExpression.findRreferencedVariables());
+    } else if (self.isTypeOf(QVT!CollectionLiteralExp)){
+        varRefs.addAll(self.part);
+    } else if (self.isKindOf(QVT!LiteralExp)) {
+      // Noting to add
+    } else {
+        self.println();
+        throw "Error! Add findRreferencedVariables() for " + self.type();
+    }
+    return varRefs;
+}
+
+// TODO Ask what PropertyCallExp.qualifier is/works in QVT
+operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
+    if (self.isTypeOf(QVT!VariableExp)) {
+        if (self.referredVariable.name = v.name) {
+            //v.println("Fixed a reference to v ");
+            self.referredVariable = v;
+        }
+    } else if (self.isTypeOf(QVT!OperationCallExp)) {
+        self.source.fixVarReferences(v);
+        for (arg in self.argument) {
+           arg.fixVarReferences(v);
+        }
+    } else if (self.isTypeOf(QVT!PropertyCallExp)) {
+        self.source.fixVarReferences(v);
+    } else if (self.isTypeOf(QVT!IfExp)) {
+        self.condition.fixVarReferences(v);
+        self.elseExpression.fixVarReferences(v);
+        self.thenExpression.fixVarReferences(v);
+    } else if (self.isTypeOf(QVT!CollectionLiteralExp)) {
+        if (self.part.exists(p | p.name == v.name)) {
+            self.part.remove(self.part.select(p | p.name == v.name));
+            self.part.add(v);
+        }
+    } else if (self.isKindOf(QVT!LiteralExp)) {
+      // Noting to fix
+    } else {
+        self.println();
+        throw "Error! Add fixVarReference() for " + self.type();
+    }
+ }
+ 
+/* Retype variables by searching variables with the same name in the
+ * refined guard patterns.
+ */  
+operation QVT!Variable retypeVar(refinedGuardPatterns : Collection) {
+    // Same names
+    //self.println("Retype vars " + refinedGuardPatterns.type() );
+    var refinedVars = refinedGuardPatterns.collect(
+                p | p.variable
+                ).flatten().select(
+                    v | v.name == self.name
+                    );
+    if (refinedVars.size() > 0) {
+        var lrv = x.getLowestRankVariable(refinedVars.including(self));
+        self.type = lrv.type;
+    }
+}
+ 
+
+operation getUnidirComment() : String {
+    var comment : String;
+    comment = "/* ";
+    /* Enforce uml to rdbms */
+    if (config!Configuration.all.first().mode == config!Mode#enforcement) {
+        comment = comment + "Enforce ";
+    } else {
+        comment = comment + "Check ";
+    }
+    comment = comment + config!Configuration.all.first().inputDirection.name + " to ";
+    comment = comment + config!Configuration.all.first().outputDirection.collect(d | d.name).concat(",") + " /*";
+    comment.println();
+    return comment; 
+}
+

@@ -1,37 +1,71 @@
 import "Helpers.eol";
 import "OclLibHelper.eol";
-//import "QVTuToQVTmFlattenClean.eol";
 
-/** The Flock migration performs a coarse migrationa, duplicate variable removal and predicate
- *  references fixing. 
- */
 pre {
     var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
+    var x = new Native("org.eclipse.qvtd.build.etl.PivotUtil");
 }
 
 // Refinned mappings
 migrate Mapping
     when : original.refinement.size() > 0 {
         
+        //original.println("Mapping ");
+        for (refined in original.refinement) {
+            // Nested mappings with no domains. Since many mappings can refine the same mapping
+            // get the equivalent and copy (create) them
+            migrated.local.addAll(emfTool.getECoreUtil().copyAll(refined.collect(r | r.local.select(nm | nm.domain.size() == 0)).flatten().equivalent()));
+            // Add a copy (create) domains that don't need to be merged (i.e. with different typeModels than the refining mapping)
+            migrated.domain.addAll(emfTool.getECoreUtil().copyAll(refined.collect(r | r.domain).flatten().select(d | original.domain.collect(d2 | d2.name).flatten().excludes(d.name)).equivalent()));
+        }
+        // Remove the refinements
         migrated.refinement = Set{};
-        // Nested mappings with no domains
-        // TODO nested mappings should be a recursive search
-        var domainlessNestedMappings = original.refinement.collect(r | r.local.select(nm | nm.domain.size() == 0));
-        migrated.local.addAll(domainlessNestedMappings.flatten());
-        // Add domains that are not merged (i.e. with different typeModels than the refining mapping)
-        migrated.domain.addAll(original.refinement.collect(r | r.domain).flatten().select(d | original.domain.collect(d | d.name).flatten().excludes(d.name)));         
     }
-    
+
 // Refinned mapping's Patterns
 migrate GuardPattern
     when : original.area.isTypeOf(QVTu!Mapping)
             and original.area.refinement.size() > 0 {
-            
-        // Get the set of GuardPatterns of the refined mappings
-        var gps = original.area.refinement.collect(r | r.guardPattern).flatten();
-        migrated.predicate.addAll(emfTool.getECoreUtil().copyAll(gps.collect(gp | gp.predicate).flatten()));
-        migrated.variable.addAll(emfTool.getECoreUtil().copyAll(gps.collect(gp | gp.variable).flatten()));
-    }
+        
+        //"GuardPattern".println();
+        // Variables. Search for variables in the refined mapping. Copy all variables that have
+        // different names as the local variables. If there is any with the same name, re-type it
+        var localVarNames = migrated.variable.collect(v | v.name);    
+        
+        // Refined Guard Patterns
+        var refinedGuardPatterns = original.area.refinement.collect(r | r.guardPattern);
+        for (localVar in migrated.variable) {
+            localVar.retypeVar(refinedGuardPatterns);
+        }
+        // Different names, straight copy 
+        migrated.variable.addAll(emfTool.getECoreUtil().copyAll(refinedGuardPatterns.collect(p | p.variable).flatten().select(v | not localVarNames.includes(v.name)).equivalent()));
+        //migrated.variable.println("Final vars ");
+        
+        // Predicates. Fix all predicate references
+        // Find all variable references.
+        for (predicate in migrated.predicate) {
+            //predicate.println("Predicate ");
+            var refVars = predicate.conditionExpression.findRreferencedVariables();
+            //refVars.println();
+            // Find variables and fix references
+            for (v in refVars) {
+                //v.println("Fixing ");
+                // MiddleGuard Pattern depends on domain guard patterns
+                var localV = migrated.variable.selectOne(lv | lv.name == v.name);
+                if (localV == null) {
+                    localV = migrated.area.domain.collect(d | d.guardPattern).collect(p | p.variable).flatten().selectOne(lv | lv.name == v.name);
+                }
+                if (localV == null) {
+                    localV = migrated.area.domain.collect(d | d.bottomPattern).collect(p | p.variable).flatten().selectOne(lv | lv.name == v.name);
+                }
+                if (localV == null) {
+                    throw "Error! not able to find a local reference for variable " + v + " in predicate " + predicate + "in GuardPattern of Mapping " + migrated.area;  
+                }
+                //localV.println("local ");
+                predicate.conditionExpression.fixVarReferences(localV);
+            }
+        }
+   }
     
 
 migrate BottomPattern
@@ -52,10 +86,45 @@ migrate GuardPattern
     when : original.area.isTypeOf(QVTu!CoreDomain)
             and original.area.rule.refinement.size() > 0 {
     
-        // Get the GuardPatterns of the refined mappings for a domain with the same typeModel
-        var gps = original.area.rule.refinement.collect(r | r.domain).flatten().select(d | d.typedModel == original.area.typedModel).collect(r | r.guardPattern).flatten();
-        migrated.predicate.addAll(gps.collect(gp | gp.predicate).flatten());
-        migrated.variable.addAll(emfTool.getECoreUtil().copyAll(gps.collect(gp | gp.variable).flatten()));
+        //"GuardPattern".println(original.area + " ");
+        // Variables. Search for variables in the refined mapping. Copy all variables that have
+        // different names as the local variables. If there is any with the same name, re-type it
+        var localVarNames = migrated.variable.collect(v | v.name);
+        
+        // Refined Guard Patterns
+        var refinedGuardPatterns = original.area.rule.refinement.collect(m | m.domain).flatten().select(d | d.typedModel == original.area.typedModel).collect(r | r.guardPattern);
+        for (localVar in migrated.variable) {
+            localVar.retypeVar(refinedGuardPatterns);
+        }
+        
+        // Different names, straight copy 
+        migrated.variable.addAll(emfTool.getECoreUtil().copyAll(refinedGuardPatterns.collect(p | p.variable).flatten().select(v | not localVarNames.includes(v.name)).equivalent()));
+        
+        // Predicates. Fix all predicate references
+        // Find all variable references.
+        for (predicate in migrated.predicate) {
+            //predicate.println("Predicate ");
+            var refVars = predicate.conditionExpression.findRreferencedVariables();
+            //refVars.println();
+            // Find variables and fix references
+            for (v in refVars) {
+                //v.println("Fixing ");
+                // MiddleGuard Pattern depends on domain guard patterns
+                var localV = migrated.variable.selectOne(lv | lv.name == v.name);
+                if (localV == null) {
+                    localV = migrated.area.guardPattern.variable.selectOne(lv | lv.name == v.name);
+                }
+                if (localV == null) {
+                    localV = migrated.area.bottomPattern.variable.selectOne(lv | lv.name == v.name);
+                }
+                if (localV == null) {
+                    throw "Error! not able to find a local reference for var " + v + " in predicate " + predicate + "in GuardPattern of Domain " + migrated.area;  
+                }
+                //localV.println("local ");
+                predicate.conditionExpression.fixVarReferences(localV);
+            }
+        }
+        
     }
 
 migrate BottomPattern
@@ -70,14 +139,4 @@ migrate BottomPattern
         migrated.variable.addAll(emfTool.getECoreUtil().copyAll(bps.collect(bp | bp.variable).flatten()));
         migrated.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(bps.collect(bp | bp.realizedVariable).flatten()));
         
-    }  
-
-// Move variable declarations and predicates in the input domain BottomPattern to the GuardPattern.
-migrate CoreDomain
-    when : isInputDomain(original) {
-
-        // Move after migration to preserve references
-        migrated.guardPattern.variable.addAll(migrated.bottomPattern.variable);
-        migrated.guardPattern.predicate.addAll(migrated.bottomPattern.predicate);
-    }
-    
+    } 

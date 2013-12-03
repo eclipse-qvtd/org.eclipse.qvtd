@@ -26,6 +26,12 @@ retype RealizedVariable to Variable
 retype PropertyAssignment to Predicate
     when : isInputDomain(original.bottomPattern.area)  
 
+migrate Transformation {
+    var comment : QVTc!Comment = new QVTc!Comment;
+    comment.body = getUnidirComment();
+    migrated.ownedComment.add(comment);
+}
+
 // Input Domain
 migrate CoreDomain
     when : isInputDomain(original) {
