@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.dynamic.Java5Facade;
+import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.domain.evaluation.AbstractTransformation;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
@@ -215,7 +215,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		String qualifiedName = cg.getQualifiedName();
 		String javaCodeSource = cg.generateClassFile();
 		try {
-			Class<?> txClass = Java5Facade.loadClass(qualifiedName, javaCodeSource);
+			Class<?> txClass = OCL2JavaFileObject.loadClass(qualifiedName, javaCodeSource);
 			return (Class<? extends AbstractTransformation>) txClass;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
