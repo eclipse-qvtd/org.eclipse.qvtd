@@ -299,13 +299,22 @@ public interface QVTrelationCSPackage extends EPackage {
 	int TEMPLATE_CS__PARENT = TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_CS__HAS_ERROR = TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Guard Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_CS__GUARD_EXPRESSION = TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 1;
+	int TEMPLATE_CS__GUARD_EXPRESSION = TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Template CS</em>' class.
@@ -314,7 +323,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_CS_FEATURE_COUNT = TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 2;
+	int TEMPLATE_CS_FEATURE_COUNT = TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.CollectionTemplateCSImpl <em>Collection Template CS</em>}' class.
@@ -397,6 +406,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLECTION_TEMPLATE_CS__PARENT = TEMPLATE_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_CS__HAS_ERROR = TEMPLATE_CS__HAS_ERROR;
 
 	/**
 	 * The feature id for the '<em><b>Guard Expression</b></em>' containment reference.
@@ -1061,6 +1079,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int OBJECT_TEMPLATE_CS__PARENT = TEMPLATE_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_CS__HAS_ERROR = TEMPLATE_CS__HAS_ERROR;
 
 	/**
 	 * The feature id for the '<em><b>Guard Expression</b></em>' containment reference.

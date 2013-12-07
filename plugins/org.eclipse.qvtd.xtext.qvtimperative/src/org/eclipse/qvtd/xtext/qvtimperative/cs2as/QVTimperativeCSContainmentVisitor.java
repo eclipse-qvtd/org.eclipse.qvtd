@@ -60,62 +60,56 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
-		Mapping pivotElement = refreshNamedElement(Mapping.class, QVTimperativePackage.Literals.MAPPING, csElement);
-		if (pivotElement != null) {
-			DomainCS csMiddle = csElement.getMiddle();
-			if (csMiddle != null) {
-				pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csMiddle.getBottomPattern()));
-				pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csMiddle.getGuardPattern()));
-			}
-			else {
-				BottomPattern bottomPattern = pivotElement.getBottomPattern();
-				if (bottomPattern == null) {
-					bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
-					bottomPattern.getAssignment().clear();
-					bottomPattern.getBindsTo().clear();
-					bottomPattern.getEnforcementOperation().clear();
-					bottomPattern.getPredicate().clear();
-					bottomPattern.getRealizedVariable().clear();
-					bottomPattern.getVariable().clear();
-					pivotElement.setBottomPattern(bottomPattern);
-				}
-				GuardPattern guardPattern = pivotElement.getGuardPattern();
-				if (guardPattern == null) {
-					guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
-					guardPattern.getBindsTo().clear();
-					guardPattern.getPredicate().clear();
-					guardPattern.getVariable().clear();
-					pivotElement.setGuardPattern(guardPattern);
-				}
-			}
-			context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getDomains());
-			context.refreshPivotList(MappingCall.class, pivotElement.getMappingCall(), csElement.getMappingCalls());
+		@NonNull Mapping pivotElement = refreshNamedElement(Mapping.class, QVTimperativePackage.Literals.MAPPING, csElement);
+		DomainCS csMiddle = csElement.getMiddle();
+		if (csMiddle != null) {
+			pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csMiddle.getBottomPattern()));
+			pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csMiddle.getGuardPattern()));
 		}
+		else {
+			BottomPattern bottomPattern = pivotElement.getBottomPattern();
+			if (bottomPattern == null) {
+				bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+				bottomPattern.getAssignment().clear();
+				bottomPattern.getBindsTo().clear();
+				bottomPattern.getEnforcementOperation().clear();
+				bottomPattern.getPredicate().clear();
+				bottomPattern.getRealizedVariable().clear();
+				bottomPattern.getVariable().clear();
+				pivotElement.setBottomPattern(bottomPattern);
+			}
+			GuardPattern guardPattern = pivotElement.getGuardPattern();
+			if (guardPattern == null) {
+				guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+				guardPattern.getBindsTo().clear();
+				guardPattern.getPredicate().clear();
+				guardPattern.getVariable().clear();
+				pivotElement.setGuardPattern(guardPattern);
+			}
+		}
+		context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getDomains());
+		context.refreshPivotList(MappingCall.class, pivotElement.getMappingCall(), csElement.getMappingCalls());
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitMappingCallCS(@NonNull MappingCallCS csElement) {
-		MappingCall pivotElement = context.refreshModelElement(MappingCall.class, QVTimperativePackage.Literals.MAPPING_CALL, csElement);
-		if (pivotElement != null) {
-			context.refreshPivotList(MappingCallBinding.class, pivotElement.getBinding(), csElement.getBindings());
-		}
+		@NonNull MappingCall pivotElement = context.refreshModelElement(MappingCall.class, QVTimperativePackage.Literals.MAPPING_CALL, csElement);
+		context.refreshPivotList(MappingCallBinding.class, pivotElement.getBinding(), csElement.getBindings());
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitMappingCallBindingCS(@NonNull MappingCallBindingCS csElement) {
-		MappingCallBinding pivotElement = context.refreshModelElement(MappingCallBinding.class, QVTimperativePackage.Literals.MAPPING_CALL_BINDING, csElement);
-		if (pivotElement != null) {
-			pivotElement.setIsLoop(csElement.isIsLoop());
-		}
+		@NonNull MappingCallBinding pivotElement = context.refreshModelElement(MappingCallBinding.class, QVTimperativePackage.Literals.MAPPING_CALL_BINDING, csElement);
+		pivotElement.setIsLoop(csElement.isIsLoop());
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitTopLevelCS(@NonNull TopLevelCS csElement) {
 		importPackages(csElement);
-		ImperativeModel pivotElement = refreshRoot(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, csElement);
+		@NonNull ImperativeModel pivotElement = refreshRoot(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, csElement);
 		List<TransformationCS> csTransformations = csElement.getTransformations();
 		List<Transformation> txList = new ArrayList<Transformation>(csTransformations.size());
 		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();
@@ -130,7 +124,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		}
 		//
 		Resource eResource = csElement.eResource();
-		if ((eResource != null) && (pivotElement != null)) {
+		if (eResource != null) {
 			context.installRootElement(eResource, pivotElement);		// Ensure containment viable for imported library type references
 //			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		}

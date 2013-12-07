@@ -35,6 +35,7 @@ import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.TemplateCS;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.TemplateCSImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.TemplateCSImpl#isHasError <em>Has Error</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.TemplateCSImpl#getGuardExpression <em>Guard Expression</em>}</li>
  * </ul>
  * </p>
@@ -51,6 +52,26 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	 * @ordered
 	 */
 	protected OperatorCS parent;
+
+	/**
+	 * The default value of the '{@link #isHasError() <em>Has Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHasError()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HAS_ERROR_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isHasError() <em>Has Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHasError()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hasError = HAS_ERROR_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getGuardExpression() <em>Guard Expression</em>}' containment reference.
@@ -107,6 +128,27 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isHasError() {
+		return hasError;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHasError(boolean newHasError) {
+		boolean oldHasError = hasError;
+		hasError = newHasError;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_CS__HAS_ERROR, oldHasError, hasError));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ExpCS getGuardExpression() {
 		return guardExpression;
 	}
@@ -151,6 +193,16 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION:
@@ -169,6 +221,8 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 		switch (featureID) {
 			case QVTrelationCSPackage.TEMPLATE_CS__PARENT:
 				return getParent();
+			case QVTrelationCSPackage.TEMPLATE_CS__HAS_ERROR:
+				return isHasError();
 			case QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION:
 				return getGuardExpression();
 		}
@@ -185,6 +239,9 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 		switch (featureID) {
 			case QVTrelationCSPackage.TEMPLATE_CS__PARENT:
 				setParent((OperatorCS)newValue);
+				return;
+			case QVTrelationCSPackage.TEMPLATE_CS__HAS_ERROR:
+				setHasError((Boolean)newValue);
 				return;
 			case QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION:
 				setGuardExpression((ExpCS)newValue);
@@ -204,6 +261,9 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 			case QVTrelationCSPackage.TEMPLATE_CS__PARENT:
 				setParent((OperatorCS)null);
 				return;
+			case QVTrelationCSPackage.TEMPLATE_CS__HAS_ERROR:
+				setHasError(HAS_ERROR_EDEFAULT);
+				return;
 			case QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION:
 				setGuardExpression((ExpCS)null);
 				return;
@@ -221,6 +281,8 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 		switch (featureID) {
 			case QVTrelationCSPackage.TEMPLATE_CS__PARENT:
 				return parent != null;
+			case QVTrelationCSPackage.TEMPLATE_CS__HAS_ERROR:
+				return hasError != HAS_ERROR_EDEFAULT;
 			case QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION:
 				return guardExpression != null;
 		}
@@ -237,6 +299,7 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 		if (baseClass == ExpCS.class) {
 			switch (derivedFeatureID) {
 				case QVTrelationCSPackage.TEMPLATE_CS__PARENT: return EssentialOCLCSPackage.EXP_CS__PARENT;
+				case QVTrelationCSPackage.TEMPLATE_CS__HAS_ERROR: return EssentialOCLCSPackage.EXP_CS__HAS_ERROR;
 				default: return -1;
 			}
 		}
@@ -253,6 +316,7 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 		if (baseClass == ExpCS.class) {
 			switch (baseFeatureID) {
 				case EssentialOCLCSPackage.EXP_CS__PARENT: return QVTrelationCSPackage.TEMPLATE_CS__PARENT;
+				case EssentialOCLCSPackage.EXP_CS__HAS_ERROR: return QVTrelationCSPackage.TEMPLATE_CS__HAS_ERROR;
 				default: return -1;
 			}
 		}

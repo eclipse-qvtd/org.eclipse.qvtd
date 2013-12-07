@@ -16,13 +16,10 @@
  */
 package org.eclipse.qvtd.xtext.qvtimperative.cs2as;
 
-import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
-import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NameExpCS;
@@ -35,57 +32,29 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 	public QVTimperativeCSLeft2RightVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
-	
-/*	@Override	// FIXME promote replication to OCL
-	protected @Nullable OCLExpression resolvePropertyCallExp(@NonNull NameExpCS csNameExp, @NonNull Property property) {
-		CallExp outerExpression = null;
-		OCLExpression source = resolveNavigationSource(csNameExp, property);
-		if (source != null) {
-			PropertyCallExp innerExpression = refreshPropertyCallExp(csNameExp, property);
-			if (innerExpression != null) {
-				innerExpression.setReferredProperty(property);
-				resolveAtPre(csNameExp, innerExpression);
-				Map<TemplateParameter, ParameterableElement> templateBindings = new HashMap<TemplateParameter, ParameterableElement>();
-				Type sourceType = source.getType();
-				if (sourceType != null) {
-					if (property.isStatic() && (sourceType instanceof Metaclass<?>)) {
-						sourceType = ((Metaclass<?>)sourceType).getInstanceType();
-					}
-					templateBindings.put(null, sourceType);		// Use the null key to pass OclSelf without creating an object
-				}
-				PivotUtil.getAllTemplateParameterSubstitutions(templateBindings, sourceType);
-				Type returnType = resolvePropertyReturnType(csNameExp, property, templateBindings);
-				context.setType(innerExpression, returnType, property.isRequired());
-				outerExpression = resolveNavigationFeature(csNameExp, source, property, innerExpression);
-				if (outerExpression != innerExpression) {
-					resolveOperationReturnType(outerExpression);
-				}
-			}
-		}
-		return outerExpression;
-	} */
 
 	@Override
-	protected Type resolvePropertyReturnType(@NonNull NameExpCS csNameExp, @NonNull Property property,
-			@NonNull Map<TemplateParameter, ParameterableElement> templateBindings) {
+	protected Type resolvePropertyReturnType(@NonNull OCLExpression sourceExp, @NonNull NameExpCS csNameExp, @NonNull Property property) {
 		Property oppositeProperty = property.getOpposite();
 		if (property.isImplicit() && (oppositeProperty != null) && QVTimperativeCS2Pivot.isMiddle(oppositeProperty.getOwningType(), csNameExp)) {
 			return oppositeProperty.getOwningType();
 		}
 		else {
-			return super.resolvePropertyReturnType(csNameExp, property, templateBindings);
+			return super.resolvePropertyReturnType(sourceExp, csNameExp, property);
 		}
 	}
 
 	@Override
-	protected OppositePropertyCallExp refreshOppositePropertyCallExp(@NonNull NameExpCS csNameExp, @NonNull Property property) {
+	protected @NonNull OppositePropertyCallExp refreshOppositePropertyCallExp(@NonNull NameExpCS csNameExp, @NonNull OCLExpression sourceExp, @NonNull Property property) {
 		Property oppositeProperty = property.getOpposite();
 		if (QVTimperativeCS2Pivot.isMiddle(oppositeProperty.getOwningType(), csNameExp)) {
-			return context.refreshModelElement(MiddlePropertyCallExp.class,
-				QVTimperativePackage.Literals.MIDDLE_PROPERTY_CALL_EXP, csNameExp);
+			MiddlePropertyCallExp callExp = context.refreshModelElement(MiddlePropertyCallExp.class, QVTimperativePackage.Literals.MIDDLE_PROPERTY_CALL_EXP, csNameExp);
+			callExp.setSource(sourceExp);			
+			callExp.setReferredProperty(property.getOpposite());
+			return callExp;
 		}
 		else {
-			return super.refreshOppositePropertyCallExp(csNameExp, property);
+			return super.refreshOppositePropertyCallExp(csNameExp, sourceExp, property);
 		}
 	}
 }

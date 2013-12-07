@@ -105,12 +105,10 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 
 	@Override
 	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
-		BottomPattern pBottomPattern = context.refreshModelElement(BottomPattern.class, QVTcoreBasePackage.Literals.BOTTOM_PATTERN, csElement);
-		if (pBottomPattern != null) {
-			context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getRealizedVariables());
-			context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getUnrealizedVariables());
-			context.refreshPivotList(EnforcementOperation.class, pBottomPattern.getEnforcementOperation(), csElement.getEnforcementOperations());
-		}
+		@NonNull BottomPattern pBottomPattern = context.refreshModelElement(BottomPattern.class, QVTcoreBasePackage.Literals.BOTTOM_PATTERN, csElement);
+		context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getRealizedVariables());
+		context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getUnrealizedVariables());
+		context.refreshPivotList(EnforcementOperation.class, pBottomPattern.getEnforcementOperation(), csElement.getEnforcementOperations());
 		return null;
 	}
 
@@ -126,13 +124,11 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 		if ((eContainer instanceof AbstractMappingCS) && (((AbstractMappingCS)eContainer).getMiddle() == csElement)) {
 			return null;
 		}
-		CoreDomain pivotElement = context.refreshModelElement(CoreDomain.class, QVTcoreBasePackage.Literals.CORE_DOMAIN, csElement);
-		if (pivotElement != null) {
-			pivotElement.setIsCheckable(csElement.isCheck());
-			pivotElement.setIsEnforceable(csElement.isEnforce());
-			pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csElement.getBottomPattern()));
-			pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csElement.getGuardPattern()));
-		}
+		@NonNull CoreDomain pivotElement = context.refreshModelElement(CoreDomain.class, QVTcoreBasePackage.Literals.CORE_DOMAIN, csElement);
+		pivotElement.setIsCheckable(csElement.isCheck());
+		pivotElement.setIsEnforceable(csElement.isEnforce());
+		pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csElement.getBottomPattern()));
+		pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csElement.getGuardPattern()));
 		return new DomainContentContinuation(context, csElement);
 	}
 
@@ -144,10 +140,8 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 
 	@Override
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
-		GuardPattern pGuardPattern = context.refreshModelElement(GuardPattern.class, QVTcoreBasePackage.Literals.GUARD_PATTERN, csElement);
-		if (pGuardPattern != null) {
-			context.refreshPivotList(Variable.class, pGuardPattern.getVariable(), csElement.getUnrealizedVariables());
-		}
+		@NonNull GuardPattern pGuardPattern = context.refreshModelElement(GuardPattern.class, QVTcoreBasePackage.Literals.GUARD_PATTERN, csElement);
+		context.refreshPivotList(Variable.class, pGuardPattern.getVariable(), csElement.getUnrealizedVariables());
 		return null;
 	}
 
@@ -163,11 +157,9 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 		if (pathName != null) {
 			CS2Pivot.setElementType(pathName, PivotPackage.Literals.NAMESPACE, csElement, null);
 		}
-		Function pivotElement = refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
-		if (pivotElement != null) {
-			pivotElement.setIsStatic(true);
-			context.refreshPivotList(FunctionParameter.class, pivotElement.getOwnedParameter(), csElement.getInputParamDeclaration());
-		}
+		@NonNull Function pivotElement = refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
+		pivotElement.setIsStatic(true);
+		context.refreshPivotList(FunctionParameter.class, pivotElement.getOwnedParameter(), csElement.getInputParamDeclaration());
 		return null;
 	}
 

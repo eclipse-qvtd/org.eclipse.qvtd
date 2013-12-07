@@ -326,6 +326,15 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int ASSIGNMENT_CS__PARENT = EssentialOCLCSPackage.EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT_CS__HAS_ERROR = EssentialOCLCSPackage.EXP_CS__HAS_ERROR;
+
+	/**
 	 * The feature id for the '<em><b>Default</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

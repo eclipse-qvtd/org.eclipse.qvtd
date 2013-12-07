@@ -60,44 +60,42 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 				context.addDiagnostic(csElement, "composed mapping must be unnamed");
 			}			
 		}
-		Mapping pivotElement = refreshNamedElement(Mapping.class, QVTcorePackage.Literals.MAPPING, csElement);
-		if (pivotElement != null) {
-			DomainCS csMiddle = csElement.getMiddle();
-			if (csMiddle != null) {
-				pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csMiddle.getBottomPattern()));
-				pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csMiddle.getGuardPattern()));
-			}
-			else {
-				BottomPattern bottomPattern = pivotElement.getBottomPattern();
-				if (bottomPattern == null) {
-					bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
-					bottomPattern.getAssignment().clear();
-					bottomPattern.getBindsTo().clear();
-					bottomPattern.getEnforcementOperation().clear();
-					bottomPattern.getPredicate().clear();
-					bottomPattern.getRealizedVariable().clear();
-					bottomPattern.getVariable().clear();
-					pivotElement.setBottomPattern(bottomPattern);
-				}
-				GuardPattern guardPattern = pivotElement.getGuardPattern();
-				if (guardPattern == null) {
-					guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
-					guardPattern.getBindsTo().clear();
-					guardPattern.getPredicate().clear();
-					guardPattern.getVariable().clear();
-					pivotElement.setGuardPattern(guardPattern);
-				}
-			}
-			context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getDomains());
-			context.refreshPivotList(Mapping.class, pivotElement.getLocal(), csElement.getComposedMappings());
+		@NonNull Mapping pivotElement = refreshNamedElement(Mapping.class, QVTcorePackage.Literals.MAPPING, csElement);
+		DomainCS csMiddle = csElement.getMiddle();
+		if (csMiddle != null) {
+			pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csMiddle.getBottomPattern()));
+			pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csMiddle.getGuardPattern()));
 		}
+		else {
+			BottomPattern bottomPattern = pivotElement.getBottomPattern();
+			if (bottomPattern == null) {
+				bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+				bottomPattern.getAssignment().clear();
+				bottomPattern.getBindsTo().clear();
+				bottomPattern.getEnforcementOperation().clear();
+				bottomPattern.getPredicate().clear();
+				bottomPattern.getRealizedVariable().clear();
+				bottomPattern.getVariable().clear();
+				pivotElement.setBottomPattern(bottomPattern);
+			}
+			GuardPattern guardPattern = pivotElement.getGuardPattern();
+			if (guardPattern == null) {
+				guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+				guardPattern.getBindsTo().clear();
+				guardPattern.getPredicate().clear();
+				guardPattern.getVariable().clear();
+				pivotElement.setGuardPattern(guardPattern);
+			}
+		}
+		context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getDomains());
+		context.refreshPivotList(Mapping.class, pivotElement.getLocal(), csElement.getComposedMappings());
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitTopLevelCS(@NonNull TopLevelCS csElement) {
 		importPackages(csElement);
-		CoreModel pivotElement = refreshRoot(CoreModel.class, QVTcorePackage.Literals.CORE_MODEL, csElement);
+		@NonNull CoreModel pivotElement = refreshRoot(CoreModel.class, QVTcorePackage.Literals.CORE_MODEL, csElement);
 		List<TransformationCS> csTransformations = csElement.getTransformations();
 		List<Transformation> txList = new ArrayList<Transformation>(csTransformations.size());
 		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();
@@ -112,7 +110,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		}
 		//
 		Resource eResource = csElement.eResource();
-		if ((eResource != null) && (pivotElement != null)) {
+		if (eResource != null) {
 			context.installRootElement(eResource, pivotElement);		// Ensure containment viable for imported library type references
 //			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		}

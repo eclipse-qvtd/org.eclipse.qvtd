@@ -54,7 +54,8 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 	}
 
 	public String visitRelation(@NonNull Relation object) {
-		return "Relation " + object.getName();
+		append("Relation " + object.getName());
+		return null;
 	}
 
 	public String visitRelationCallExp(@NonNull RelationCallExp object) {
@@ -63,7 +64,8 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 	}
 
 	public String visitRelationDomain(@NonNull RelationDomain object) {
-		return "RelationDomain " + object.getName();
+		append("RelationDomain " + object.getName());
+		return null;
 	}
 
 	public String visitRelationDomainAssignment(@NonNull RelationDomainAssignment object) {
@@ -77,10 +79,12 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 	}
 
 	public String visitRelationModel(@NonNull RelationModel object) {
-		return "RelationModel " + object.getName();
+		append("RelationModel " + object.getName());
+		return null;
 	}
 
 	public String visitRelationalTransformation(@NonNull RelationalTransformation object) {
-		return "RelationalTransformation " + object.getName();
+		append("RelationalTransformation " + object.getName());
+		return null;
 	}
 }

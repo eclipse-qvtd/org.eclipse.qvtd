@@ -62,22 +62,16 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 	}
 
 	protected @Nullable Assignment refreshPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull AssignmentCS csConstraint) {
-		PropertyAssignment propertyAssignment = context.refreshModelElement(PropertyAssignment.class,
+		@NonNull PropertyAssignment propertyAssignment = context.refreshModelElement(PropertyAssignment.class,
 			QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csConstraint);
-		if (propertyAssignment == null) {
-			return null;
-		}
 		propertyAssignment.setSlotExpression(propertyCallExp.getSource());
 		propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
 		return propertyAssignment;
 	}
 
 	protected @Nullable Assignment refreshVariableAssignment(@NonNull VariableExp variableExp, @NonNull AssignmentCS csConstraint) {
-		VariableAssignment variableAssignment = context.refreshModelElement(VariableAssignment.class,
+		@NonNull VariableAssignment variableAssignment = context.refreshModelElement(VariableAssignment.class,
 			QVTcoreBasePackage.Literals.VARIABLE_ASSIGNMENT, csConstraint);
-		if (variableAssignment == null) {
-			return null;
-		}
 		variableAssignment.setTargetVariable((Variable) variableExp.getReferredVariable());
 		return variableAssignment;
 	}
@@ -125,11 +119,9 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 					if (isDefault) {
 						context.addDiagnostic(csElement, "misplaced default ignored");
 					}
-					Predicate predicate = context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csConstraint);
-					if (predicate != null) {
-						predicate.setConditionExpression(target);
-						pPredicates.add(predicate);
-					}
+					@NonNull Predicate predicate = context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csConstraint);
+					predicate.setConditionExpression(target);
+					pPredicates.add(predicate);
 				}
 			}
 			PivotUtil.refreshList(pBottomPattern.getAssignment(), pAssignments);
@@ -178,11 +170,9 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 					}
 				}
 				else {
-					Predicate predicate = context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csConstraint);
-					if (predicate != null) {
-						predicate.setConditionExpression(target);
-						pPredicates.add(predicate);
-					}
+					@NonNull Predicate predicate = context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csConstraint);
+					predicate.setConditionExpression(target);
+					pPredicates.add(predicate);
 				}
 				if (csConstraint.isDefault()) {
 					context.addDiagnostic(csElement, "misplaced default ignored");

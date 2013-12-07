@@ -244,6 +244,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CALL_BINDING_CS__PARENT = EssentialOCLCSPackage.EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING_CS__HAS_ERROR = EssentialOCLCSPackage.EXP_CS__HAS_ERROR;
+
+	/**
 	 * The feature id for the '<em><b>Mapping Call</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

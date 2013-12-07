@@ -56,7 +56,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	protected @Nullable Assignment refreshPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull AssignmentCS csConstraint) {
-		PropertyAssignment propertyAssignment = null;
+		@NonNull PropertyAssignment propertyAssignment;
 		Property referredProperty = propertyCallExp.getReferredProperty();
 		Property oppositeProperty = referredProperty.getOpposite();
 		if ((oppositeProperty != null) && oppositeProperty.isImplicit() && QVTimperativeCS2Pivot.isMiddle(referredProperty.getOwningType(), csConstraint)) {
@@ -66,9 +66,6 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 		else {
 			propertyAssignment = context.refreshModelElement(PropertyAssignment.class,
 				QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csConstraint);
-		}
-		if (propertyAssignment == null) {
-			return null;
 		}
 		propertyAssignment.setSlotExpression(propertyCallExp.getSource());
 		propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
@@ -86,25 +83,21 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 				OCLExpression target = csTarget != null ? context.visitLeft2Right(OCLExpression.class, csTarget) : null;
 				if (csInitialiser != null) {
 					if (target instanceof VariableExp) {
-						VariablePredicate predicate = context.refreshModelElement(VariablePredicate.class, QVTimperativePackage.Literals.VARIABLE_PREDICATE, csConstraint);
-						if (predicate != null) {
-							Variable variable = (Variable) ((VariableExp)target).getReferredVariable();
-							OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
-							predicate.setConditionExpression(initialiser);
-							predicate.setTargetVariable(variable);
-							pPredicates.add(predicate);
-						}
+						@NonNull VariablePredicate predicate = context.refreshModelElement(VariablePredicate.class, QVTimperativePackage.Literals.VARIABLE_PREDICATE, csConstraint);
+						Variable variable = (Variable) ((VariableExp)target).getReferredVariable();
+						OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
+						predicate.setConditionExpression(initialiser);
+						predicate.setTargetVariable(variable);
+						pPredicates.add(predicate);
 					}
 					else if (target != null) {
 						context.addDiagnostic(csElement, "unrecognised Guard Constraint target " + target.eClass().getName());
 					}
 				}
 				else {
-					Predicate predicate = context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csConstraint);
-					if (predicate != null) {
-						predicate.setConditionExpression(target);
-						pPredicates.add(predicate);
-					}
+					@NonNull Predicate predicate = context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csConstraint);
+					predicate.setConditionExpression(target);
+					pPredicates.add(predicate);
 				}
 				if (csConstraint.isDefault()) {
 					context.addDiagnostic(csElement, "misplaced default ignored");
