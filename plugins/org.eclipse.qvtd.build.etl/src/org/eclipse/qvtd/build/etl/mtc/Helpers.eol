@@ -134,6 +134,23 @@ operation QVT!Variable retypeVar(refinedGuardPatterns : Collection) {
         self.type = lrv.type;
     }
 }
+
+/* Retype variables by searching variables with the same name in the
+ * refined guard patterns.
+ */  
+operation QVT!Variable retypeRealizedVar(refinedBottomPatterns : Collection) {
+    // Same names
+    //self.println("Retype vars " + refinedGuardPatterns.type() );
+    var refinedVars = refinedBottomPatterns.collect(
+                p | p.realizedVariable
+                ).flatten().select(
+                    v | v.name == self.name
+                    );
+    if (refinedVars.size() > 0) {
+        var lrv = x.getLowestRankVariable(refinedVars.including(self));
+        self.type = lrv.type;
+    }
+}
  
 
 operation getUnidirComment() : String {

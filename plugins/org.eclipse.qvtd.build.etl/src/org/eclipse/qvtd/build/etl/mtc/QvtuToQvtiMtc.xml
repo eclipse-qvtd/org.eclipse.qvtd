@@ -85,10 +85,10 @@
         	<model ref="config"/>
             <model ref="oclStdLib"/>
         </epsilon.flock>
-		<epsilon.eol uri="${QVTuToQVTmFlattenClean}">
+		<!-- <epsilon.eol uri="${QVTuToQVTmFlattenClean}">
 			<model ref="QVTmF"/>
 			<model ref="config"/>
-		</epsilon.eol>
+		</epsilon.eol> -->
 		<epsilon.disposeModel model="QVTu"/>
 		<epsilon.disposeModel model="QVTmF"/>
     </target>
