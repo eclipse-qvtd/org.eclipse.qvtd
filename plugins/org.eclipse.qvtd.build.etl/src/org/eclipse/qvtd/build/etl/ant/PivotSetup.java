@@ -10,18 +10,18 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 
 public class PivotSetup extends Task {
-	
-	private MetaModelManager metaModelManager;
-	protected ResourceSet resourceSet;
+    
+    private MetaModelManager metaModelManager;
+    protected ResourceSet resourceSet;
 
-	public void execute() throws BuildException {
-		
-		PivotStandaloneSetup.doSetup();
-		//metaModelManager = new MetaModelManager();
+    public void execute() throws BuildException {
+        
+        PivotStandaloneSetup.doSetup();
+        //metaModelManager = new MetaModelManager();
         //MetaModelManagerResourceSetAdapter.getAdapter(DomainUtil.nonNullState(resourceSet), metaModelManager);
-		//resourceSet = new ResourceSetImpl();
-		//MetaModelManager.initializeASResourceSet(resourceSet);
-		System.out.println("Pivot Setup done.");
+        //resourceSet = new ResourceSetImpl();
+        //MetaModelManager.initializeASResourceSet(resourceSet);
+        System.out.println("Pivot Setup done.");
         
     }
 
