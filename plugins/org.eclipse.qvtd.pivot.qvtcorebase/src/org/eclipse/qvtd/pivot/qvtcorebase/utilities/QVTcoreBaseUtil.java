@@ -18,8 +18,10 @@ package org.eclipse.qvtd.pivot.qvtcorebase.utilities;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
+import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 
 public class QVTcoreBaseUtil extends QVTbaseUtil
 {
@@ -30,5 +32,14 @@ public class QVTcoreBaseUtil extends QVTbaseUtil
 			}
 		}
 		return null;
+	}
+
+	public static @Nullable TypedModel getTypedModel(@Nullable Area area) {
+        if (area instanceof CoreDomain) {
+            return ((CoreDomain)area).getTypedModel();        // M to R
+        }
+        else {
+        	return null;
+        }
 	}
 }

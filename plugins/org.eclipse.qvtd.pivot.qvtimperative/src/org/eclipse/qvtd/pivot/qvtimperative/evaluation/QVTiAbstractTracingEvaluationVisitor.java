@@ -128,42 +128,6 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		QVTiAbstractTracingEvaluationVisitor.verboseLevel = verboseLevel;
 	}
 	
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorDecorator#createNestedLMVisitor()
-	 */
-	@Override
-	public @NonNull QVTiEvaluationVisitor createNestedLMVisitor() {
-		
-		logger.info("(Creating nested LM Visitor)");
-		QVTiLMTracingEvaluationVisitor decorator = new QVTiLMTracingEvaluationVisitor(
-				delegate.createNestedLMVisitor());
-		return decorator;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorDecorator#createNestedMMVisitor()
-	 */
-	@Override
-	public @NonNull QVTiEvaluationVisitor createNestedMMVisitor() {
-		
-		logger.info("(Creating nested MM Visitor)");
-		QVTiMMTracingEvaluationVisitor decorator = new QVTiMMTracingEvaluationVisitor(
-				delegate.createNestedMMVisitor());
-		return decorator;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorDecorator#createNestedMRVisitor()
-	 */
-	@Override
-	public @NonNull QVTiEvaluationVisitor createNestedMRVisitor() {
-		
-		logger.info("(Creating nested MR Visitor)");
-		QVTiMRTracingEvaluationVisitor decorator = new QVTiMRTracingEvaluationVisitor(
-				delegate.createNestedMRVisitor());
-		return decorator;
-	}
 	
 	/**
 	 * Gets the indent.

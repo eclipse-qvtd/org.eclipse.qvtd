@@ -196,6 +196,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(DomainUtil.nonNullState(metaModelManager), "Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("upperGraph", "SimpleGraph.xmi");
+        testEvaluator.createModel("middle", "Graph2Graph.xmi");
         testEvaluator.createModel("lowerGraph", "Graph2GraphMinimal.xmi");
         testEvaluator.loadReference("lowerGraph", "Graph2GraphMinimalValidate.xmi");
         testEvaluator.test();
@@ -218,6 +219,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(DomainUtil.nonNullState(metaModelManager), "Graph2GraphHierarchical", "Graph2GraphHierarchical.qvti");
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("upperGraph", "../Graph2GraphMinimal/SimpleGraph.xmi");
+        testEvaluator.createModel("middle", "Graph2Graph.xmi");
         testEvaluator.createModel("lowerGraph", "Graph2GraphHierarchical.xmi");
         testEvaluator.loadReference("lowerGraph", "Graph2GraphHierarchicalValidate.xmi");
         testEvaluator.test();
@@ -243,6 +245,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(DomainUtil.nonNullState(metaModelManager), "HSV2HLS", "HSV2HLS.qvti");
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("hsv", "HSVNode.xmi");
+        testEvaluator.createModel("middle", "HLS2HLSNode.xmi");
         testEvaluator.createModel("hls", "HLSNode.xmi");
         testEvaluator.loadReference("hls", "HLSNodeValidate.xmi");
         testEvaluator.test();
@@ -270,6 +273,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     	testEvaluator.saveTransformation(null);
         //assertNoValidationErrors("Pivot validation errors", testEvaluator.pivotResource.getContents().get(0));
         testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
+        testEvaluator.createModel("middle", "UML2RDBMS.xmi");
         testEvaluator.createModel("rdbms", "SimpleRDBMSPeople.xmi");
         //testEvaluator.loadReference("rdbms", "SimpleRDBMSPeopleValidate.xmi");
         testEvaluator.test();

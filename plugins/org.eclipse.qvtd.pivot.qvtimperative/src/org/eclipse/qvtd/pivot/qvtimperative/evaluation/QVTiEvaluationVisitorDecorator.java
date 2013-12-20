@@ -67,7 +67,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
      */
 	@Override
 	public @NonNull QVTiEvaluationVisitor createNestedEvaluator() {
-        return (QVTiEvaluationVisitor) delegate.createNestedEvaluator();
+        return delegate.createNestedEvaluator();
 	}
   
     /**
@@ -391,11 +391,4 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	public @Nullable Object visiting(@NonNull Visitable visitable) {
     	return delegate.visiting(visitable);
 	}
-    
-    public abstract @NonNull QVTiEvaluationVisitor createNestedLMVisitor();
-    
-    public abstract @NonNull QVTiEvaluationVisitor createNestedMMVisitor();
-    
-    public abstract @NonNull QVTiEvaluationVisitor createNestedMRVisitor();
-
 }

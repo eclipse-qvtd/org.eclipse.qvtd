@@ -10,7 +10,7 @@ transformation hsv2hls {
 	hls imports HLSTree;  --
 	-- hls imports "strict" HLSTree;  -- 
 	-- hls imports HLSTree{strict};   -- The model has to strictly conform to the HLSTree mm, without strict the model can have classes that match the name but not completely conform to the mm  
-	imports HSV2HLS;
+	middle imports HSV2HLS;
 }
 
 query hsv2hls::hls2rgb(color : HLSTree::HLS) : HSV2HLS::RGB;
@@ -20,9 +20,13 @@ query hsv2hls::rgb2hsv(color : HSV2HLS::RGB) : HSVTree::HSV;
 
 
 map HSV2MiddleRoot in hsv2hls {	-- Mapping root nodes L to M
-	hsv(hsvRoot : HSVNode | hsvRoot.parent = null;) { } 
-	where() {
-		realize middleRoot : HSVNode2HLSNode |
+	check hsv(hsvRoot : HSVNode) { } 
+	enforce middle() {
+		realize middleRoot : HSVNode2HLSNode
+	}
+	where(
+		hsvRoot.parent = null;
+	) {
 		middleRoot.hsv := hsvRoot;
 		middleRoot.name := hsvRoot.name;
 		--middleRoot.rgb := hsv2rgb(hsvRoot.hsv);
@@ -37,9 +41,11 @@ map HSV2MiddleRoot in hsv2hls {	-- Mapping root nodes L to M
 }
 
 map HSV2MiddleRecursion in hsv2hls { -- Mapping child nodes L to M
-	hsv(hsvNode : HSVNode | ) {}
-	where(middleParent : HSVNode2HLSNode | ) {
-		realize middleNode : HSVNode2HLSNode |
+	check hsv(hsvNode : HSVNode) {}
+	enforce middle(middleParent : HSVNode2HLSNode) {
+		realize middleNode : HSVNode2HLSNode
+	}
+	where() {
 		middleNode.parent := middleParent;
 		middleNode.hsv := hsvNode;
 		middleNode.name := hsvNode.name;
@@ -52,10 +58,11 @@ map HSV2MiddleRecursion in hsv2hls { -- Mapping child nodes L to M
 }
 
 map Middle2HLSRoot in hsv2hls { -- Mapping root nodes M to R
+	check middle(middleNode : HSVNode2HLSNode) {}
 	enforce hls() {
-		realize hlsNode : HLSNode |
+		realize hlsNode : HLSNode
 	}
-	where(middleNode : HSVNode2HLSNode |) {
+	where() {
 		hlsNode.parent := null;
 		middleNode.hls := hlsNode;
 		hlsNode.name := middleNode.name;
@@ -67,10 +74,11 @@ map Middle2HLSRoot in hsv2hls { -- Mapping root nodes M to R
 }
 
 map Middle2HLSRecursion in hsv2hls { -- Mapping child nodes M to R
+	check middle(middleNode : HSVNode2HLSNode) {}
 	enforce hls() {
-		realize hlsNode : HLSNode |
+		realize hlsNode : HLSNode
 	}
-	where(middleNode : HSVNode2HLSNode |) {
+	where() {
 		hlsNode.parent := middleNode.parent.hls;
 		middleNode.hls := hlsNode;
 		hlsNode.name := middleNode.name;

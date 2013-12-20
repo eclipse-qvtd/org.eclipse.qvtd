@@ -19,7 +19,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -48,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -93,34 +93,6 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
     @Override
 	public abstract @NonNull QVTiEvaluationVisitor createNestedEvaluator();
     
-    
-    /* (non-Javadoc)
-     * @see org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitor#createNestedLMVisitor()
-     */
-    public @NonNull QVTiEvaluationVisitor createNestedLMVisitor() {
-        EnvironmentFactory factory = environment.getFactory();
-        EvaluationEnvironment nestedEvaluationEnvironment = factory.createEvaluationEnvironment(evaluationEnvironment); 
-    	return new QVTiLMEvaluationVisitor(environment, nestedEvaluationEnvironment, getModelManager());
-    }
-    
-    /* (non-Javadoc)
-     * @see org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitor#createNestedMMVisitor()
-     */
-    public @NonNull QVTiEvaluationVisitor createNestedMMVisitor() {
-    	EnvironmentFactory factory = environment.getFactory();
-        EvaluationEnvironment nestedEvaluationEnvironment = factory.createEvaluationEnvironment(evaluationEnvironment); 
-    	return new QVTiMMEvaluationVisitor(environment, nestedEvaluationEnvironment, getModelManager());
-    }
-    
-    /* (non-Javadoc)
-     * @see org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitor#createNestedMRVisitor()
-     */
-    public @NonNull QVTiEvaluationVisitor createNestedMRVisitor() {
-    	EnvironmentFactory factory = environment.getFactory();
-        EvaluationEnvironment nestedEvaluationEnvironment = factory.createEvaluationEnvironment(evaluationEnvironment); 
-    	return new QVTiMREvaluationVisitor(environment, nestedEvaluationEnvironment, getModelManager());
-    }
-
 
     /**
      * Do mapping call recursion. Perform the recursion for the BoundVariable
@@ -547,22 +519,16 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      */
     public @Nullable Object visitRealizedVariable(@NonNull RealizedVariable realizedVariable) {
         
-        // Realized variables are in the mapping's bottom pattern
-        // and create elements in the middle model. The realized variables
+        // Realized variables are in the mapping's target bottom pattern
+        // and create elements in the target model. The realized variables
         // are being visited for each binding of variable in the mapping. 
         Area area = ((BottomPattern)realizedVariable.eContainer()).getArea();
         Object element =  realizedVariable.getType().createInstance();
-        TypedModel tm = QVTiModelManager.MIDDLE_MODEL;     // L to M
-        if (area instanceof CoreDomain) {
-            tm = ((CoreDomain)area).getTypedModel();        // M to R
-        }
+        TypedModel tm = QVTcoreBaseUtil.getTypedModel(area);
+        assert tm != null;
         ((QVTiModelManager)modelManager).addModelElement(tm, element);
         // Add the realize variable binding to the environment
-//        try {
-//            evaluationEnvironment.add(realizedVariable, element);
-//        } catch (IllegalArgumentException ex) {
-            evaluationEnvironment.replace(realizedVariable, element);
-//        }
+        evaluationEnvironment.replace(realizedVariable, element);
         return element;
     }
 

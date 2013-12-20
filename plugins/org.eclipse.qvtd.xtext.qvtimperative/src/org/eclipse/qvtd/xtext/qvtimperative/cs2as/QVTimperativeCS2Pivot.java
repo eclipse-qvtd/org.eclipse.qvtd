@@ -45,7 +45,7 @@ public class QVTimperativeCS2Pivot extends QVTcoreBaseCS2Pivot
 					Transformation transformation = QVTimperativeUtil.getContainingTransformation(mapping);
     	    		if (transformation != null) {
     	    			TypedModel middleModel = transformation.getModelParameter(null);
-    	    			if (middleModel.getUsedPackage().contains(areaPackage)) {
+    	    			if ((middleModel == null) || middleModel.getUsedPackage().contains(areaPackage)) {
     	    				return true;
     	    			}
     	    		}

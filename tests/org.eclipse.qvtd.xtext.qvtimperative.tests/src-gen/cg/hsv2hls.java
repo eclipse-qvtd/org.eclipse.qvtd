@@ -54,7 +54,7 @@ public class hsv2hls extends AbstractTransformation
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_HSVNode2HLSNode = TypeId.ORDERED_SET.getSpecializedId(CLSSid_HSVNode2HLSNode);
     
     public hsv2hls(final @NonNull DomainEvaluator evaluator) {
-        super(evaluator, new String[] {"hsv", "hls", ""});
+        super(evaluator, new String[] {"hsv", "hls", "middle"});
     }
     
     public boolean run() {
@@ -90,14 +90,18 @@ public class hsv2hls extends AbstractTransformation
      * map HSV2MiddleRoot in hsv2hls) {
      * hsv (hsvRoot : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSVTree.ecore#/'::HSVNode;
      *  |
-     * hsvRoot.parent =
-     *   null)
+     * )
      * { |
      * }
-     * where ( |
+     * middle ( |
      * )
      * {realize middleRoot : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSV2HLS.ecore#/'::HSVNode2HLSNode;
      *  |
+     * }
+     * where ( |
+     * hsvRoot.parent =
+     *   null)
+     * { |
      * middleRoot = hsvRoot;
      * middleRoot = hsvRoot.name;
      * }
@@ -121,7 +125,7 @@ public class hsv2hls extends AbstractTransformation
             // creations
             final /*@Thrown*/ HSVNode2HLSNode middleRoot = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
             assert middleRoot != null;
-            modelObjects[2/*null*/].add(middleRoot);
+            modelObjects[2/*middle*/].add(middleRoot);
             // assignments
             middleRoot.setHsv(hsvRoot);
             final @Nullable /*@Thrown*/ String name = hsvRoot.getName();
@@ -151,11 +155,15 @@ public class hsv2hls extends AbstractTransformation
      * )
      * { |
      * }
-     * where (middleParent : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSV2HLS.ecore#/'::HSVNode2HLSNode;
+     * middle (middleParent : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSV2HLS.ecore#/'::HSVNode2HLSNode;
      *  |
      * )
      * {realize middleNode : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSV2HLS.ecore#/'::HSVNode2HLSNode;
      *  |
+     * }
+     * where ( |
+     * )
+     * { |
      * middleNode = middleParent;
      * middleNode = hsvNode;
      * middleNode = hsvNode.name;
@@ -172,7 +180,7 @@ public class hsv2hls extends AbstractTransformation
             // creations
             final /*@Thrown*/ HSVNode2HLSNode middleNode = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
             assert middleNode != null;
-            modelObjects[2/*null*/].add(middleNode);
+            modelObjects[2/*middle*/].add(middleNode);
             // assignments
             middleNode.setParent(middleParent);
             middleNode.setHsv(hsvNode);
@@ -197,13 +205,17 @@ public class hsv2hls extends AbstractTransformation
      * 
      * map Middle2HLSRoot in hsv2hls) {
      * 
-     *   hls ( |
+     *   middle (middleNode : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSV2HLS.ecore#/'::HSVNode2HLSNode;
+     *  |
+     * )
+     * { |
+     * }
+     * hls ( |
      * )
      * {realize hlsNode : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HLSTree.ecore#/'::HLSNode;
      *  |
      * }
-     * where (middleNode : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSV2HLS.ecore#/'::HSVNode2HLSNode;
-     *  |
+     * where ( |
      * )
      * { |
      * hlsNode = null;
@@ -246,13 +258,17 @@ public class hsv2hls extends AbstractTransformation
      * 
      * map Middle2HLSRecursion in hsv2hls) {
      * 
-     *   hls ( |
+     *   middle (middleNode : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSV2HLS.ecore#/'::HSVNode2HLSNode;
+     *  |
+     * )
+     * { |
+     * }
+     * hls ( |
      * )
      * {realize hlsNode : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HLSTree.ecore#/'::HLSNode;
      *  |
      * }
-     * where (middleNode : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSV2HLS.ecore#/'::HSVNode2HLSNode;
-     *  |
+     * where ( |
      * )
      * { |
      * hlsNode = middleNode.parent.hls;

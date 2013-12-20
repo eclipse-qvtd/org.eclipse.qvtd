@@ -18,8 +18,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 public interface QVTiEvaluationVisitor extends QVTimperativeVisitor<Object>, EvaluationVisitor
 {
-	@NonNull QVTiEvaluationVisitor createNestedLMVisitor();
-	@NonNull QVTiEvaluationVisitor createNestedMMVisitor();
-	@NonNull QVTiEvaluationVisitor createNestedMRVisitor();
+	@NonNull QVTiEvaluationVisitor createNestedEvaluator();
 	Object safeVisit(@Nullable Visitable v);
 }

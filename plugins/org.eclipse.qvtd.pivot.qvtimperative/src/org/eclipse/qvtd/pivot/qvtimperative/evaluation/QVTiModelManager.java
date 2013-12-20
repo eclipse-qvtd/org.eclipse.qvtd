@@ -46,9 +46,6 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  */
 public class QVTiModelManager implements DomainModelManager
 {
-    /** The Constant MIDDLE_MODEL. */
-    public static final TypedModel MIDDLE_MODEL = null;
-    
 	protected final @NonNull MetaModelManager metaModelManager;
 	// TODO how to manage aliases?
 	/** Map a typed model to its resource (model). */
@@ -101,16 +98,13 @@ public class QVTiModelManager implements DomainModelManager
 	 * @param tm the TypeModel
 	 * @param element the element
 	 */
-	public void addModelElement(@Nullable TypedModel model, @NonNull Object element) {
+	public void addModelElement(@NonNull TypedModel model, @NonNull Object element) {
 	    
 	    EList<EObject> elements = null;
 	    if (modelElementsMap.containsKey(model)) {
 	        elements = modelElementsMap.get(model);
 	    } else {
-	        elements = new BasicEList<EObject>();
-	        if (model != MIDDLE_MODEL) {
-	            elements.addAll(modelResourceMap.get(model).getContents());
-	        }
+	        elements = new BasicEList<EObject>(modelResourceMap.get(model).getContents());
 	    }
 	    elements.add((EObject) element);
 	    modelElementsMap.put(model, elements);
@@ -149,20 +143,6 @@ public class QVTiModelManager implements DomainModelManager
 	 */
 	public Collection<Resource> getAllModelResources() {
 		return modelResourceMap.values();
-	}
-
-	/**
-	 * Gets the middle model.
-	 *
-	 * @return the middle model
-	 */
-	public Resource getMiddleModel() {
-		return modelResourceMap.get(MIDDLE_MODEL);
-	}
-	
-	public EList<EObject> getMiddleModelElements() {
-		
-		return modelElementsMap.get(MIDDLE_MODEL);
 	}
 
 	/**
@@ -264,28 +244,32 @@ public class QVTiModelManager implements DomainModelManager
         for (Map.Entry<TypedModel, Resource> entry : modelResourceMap.entrySet()) {
             Resource model = entry.getValue();
             TypedModel key = entry.getKey();
-            if (key != MIDDLE_MODEL) {      // Don't save the middle model
-                if (modelElementsMap.containsKey(key)) {       // Only save modified models
-                    // Move elements without container to the resource contents
-                    for (EObject e : modelElementsMap.get(key)) {
-                        if (e.eContainer() == null) {
-                            model.getContents().add(e);
-                        }
+            if (modelElementsMap.containsKey(key)) {       // Only save modified models
+                // Move elements without container to the resource contents
+                for (EObject e : modelElementsMap.get(key)) {
+                    if (e.eContainer() == null) {
+                        model.getContents().add(e);
                     }
-                    try{
-                        Map<Object, Object> options = new HashMap<Object, Object>();
-                        options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-                        model.save(options);
-                       }catch (IOException e) {
-                          e.printStackTrace();
-                       }
                 }
-            }    
+            }
+        }
+        for (Map.Entry<TypedModel, Resource> entry : modelResourceMap.entrySet()) {
+            Resource model = entry.getValue();
+            TypedModel key = entry.getKey();
+            if (modelElementsMap.containsKey(key)) {       // Only save modified models
+                try{
+                    Map<Object, Object> options = new HashMap<Object, Object>();
+                    options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+                    model.save(options);
+                   } catch (IOException e) {
+                      e.printStackTrace();
+                   }
+            }
         }
     }
 
     public void saveMiddleModel(@NonNull URI uri) {
-        Resource r = metaModelManager.getExternalResourceSet().createResource(uri);
+/*        Resource r = metaModelManager.getExternalResourceSet().createResource(uri);
         for (EObject e : modelElementsMap.get(MIDDLE_MODEL)) {
             if (e.eContainer() == null) {
                 r.getContents().add(e);
@@ -297,7 +281,7 @@ public class QVTiModelManager implements DomainModelManager
             r.save(options);
            } catch (IOException e) {
               e.printStackTrace();
-           }
+           } */
     }
 
 	/**

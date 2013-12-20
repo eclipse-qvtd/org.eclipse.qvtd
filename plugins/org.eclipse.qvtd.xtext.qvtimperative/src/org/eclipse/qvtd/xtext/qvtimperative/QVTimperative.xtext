@@ -23,6 +23,7 @@ import "http://www.eclipse.org/ocl/3.1.0/Pivot" as pivot
 import "http://www.eclipse.org/qvt/0.9/QVTbase" as qvtbase
 import "http://www.eclipse.org/qvt/0.9/QVTcoreBase" as qvtcorebase
 import "http://www.eclipse.org/qvt/0.9/QVTimperative" as qvtimperative
+import "http://www.eclipse.org/qvt/0.9/QVTcoreBaseCST"
 import "http://www.eclipse.org/qvt/0.9/QVTimperativeCST"
 
 TopLevelCS:
@@ -30,10 +31,51 @@ TopLevelCS:
 	(mappings+=MappingCS | transformations+=TransformationCS | queries+=QueryCS)*
 ;
 	
+DirectionCS: {DirectionCS} name=UnrestrictedName
+	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
+	('uses' uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (',' uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*)?
+;
+
 MappingCS: {MappingCS} 'map' name=UnrestrictedName ('in' in=[qvtbase::Transformation|UnrestrictedName])?
-	'{' domains+=NamedDomainCS* ('where' middle=UnnamedDomainCS)? mappingCalls+=MappingCallCS* '}';
+	'{' domains+=SourceDomainCS* domains+=TargetDomainCS* ('where' middle=MiddleDomainCS)? mappingCalls+=MappingCallCS* '}';
 	
 MappingCallCS: {MappingCallCS} 'map' referredMapping=[qvtimperative::Mapping|UnrestrictedName]
 	'{' bindings+=MappingCallBindingCS* '}';
 
 MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] (':='|isLoop?='<=') value=ExpCS ';';
+	
+SourceDomainCS returns DomainCS: check?='check' direction=[qvtbase::TypedModel|UnrestrictedName]
+	guardPattern=SourceGuardPatternCS bottomPattern=SourceBottomPatternCS
+;
+		
+SourceBottomPatternCS returns BottomPatternCS:
+	{BottomPatternCS} '{''}'
+;
+	
+SourceGuardPatternCS returns GuardPatternCS:
+	{GuardPatternCS} '(' (unrealizedVariables+=UnrealizedVariableCS (',' unrealizedVariables+=UnrealizedVariableCS)*)? ')'
+;
+	
+MiddleDomainCS returns DomainCS: {DomainCS} guardPattern=MiddleGuardPatternCS bottomPattern=MiddleBottomPatternCS;
+		
+MiddleBottomPatternCS returns BottomPatternCS:
+	{BottomPatternCS} '{' constraints+=AssignmentCS* '}'
+;
+	
+MiddleGuardPatternCS returns GuardPatternCS:
+	{GuardPatternCS} '(' constraints+=AssignmentCS* ')'
+;
+	
+TargetDomainCS returns DomainCS: enforce?='enforce' direction=[qvtbase::TypedModel|UnrestrictedName]
+	guardPattern=TargetGuardPatternCS bottomPattern=TargetBottomPatternCS
+;
+		
+TargetBottomPatternCS returns BottomPatternCS:
+	{BottomPatternCS} '{' ((unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS)
+		(',' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))*)?
+	'}'
+;
+	
+TargetGuardPatternCS returns GuardPatternCS:
+	{GuardPatternCS} '(' (unrealizedVariables+=UnrealizedVariableCS (',' unrealizedVariables+=UnrealizedVariableCS)*)? ')'
+;

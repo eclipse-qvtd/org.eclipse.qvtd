@@ -18,6 +18,7 @@ package org.eclipse.qvtd.xtext.qvtimperative.formatting;
 
 import org.eclipse.qvtd.xtext.qvtcorebase.formatting.QVTcoreBaseFormatter;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.DirectionCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallBindingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallCSElements;
@@ -34,6 +35,11 @@ import org.eclipse.xtext.formatting.impl.FormattingConfig;
  */
 public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 {
+	protected void configureDirectionCS(FormattingConfig c, DirectionCSElements a) {
+		c.setNoSpace().before(a.getCommaKeyword_2_2_0());
+		c.setNoSpace().before(a.getCommaKeyword_3_2_0());
+	}
+
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
 	    c.setAutoLinewrap(120);
@@ -72,10 +78,10 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 
 	    {
 	    	MappingCSElements a = f.getMappingCSAccess();
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_8());
-			setBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_8());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_9());
+			setBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_9());
 			c.setLinewrap(2).between(a.getDomainsAssignment_5(), a.getDomainsAssignment_5());
-			c.setLinewrap(2).before(a.getWhereKeyword_6_0());
+			c.setLinewrap(2).before(a.getWhereKeyword_7_0());
 	    }
 	    {
 	    	MappingCallCSElements a = f.getMappingCallCSAccess();
