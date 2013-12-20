@@ -11,9 +11,9 @@
 package org.eclipse.qvtd.debug.vm.protocol;
 
 
-public class VMResumeEvent extends VMEvent {
-	
-	private static final long serialVersionUID = -4560427827216251529L;
+public class VMResumeEvent extends VMEvent
+{
+	private static final long serialVersionUID = -2933844308738821594L;
 
 	public VMResumeEvent() {
 		super();

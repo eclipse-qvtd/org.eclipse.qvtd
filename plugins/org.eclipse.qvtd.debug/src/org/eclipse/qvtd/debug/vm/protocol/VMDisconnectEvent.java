@@ -12,9 +12,9 @@ package org.eclipse.qvtd.debug.vm.protocol;
 
 
 
-public class VMDisconnectEvent extends VMEvent {
-
-	private static final long serialVersionUID = 929573561207535393L;
+public class VMDisconnectEvent extends VMEvent
+{
+	private static final long serialVersionUID = 8802835267191523111L;
 
 	public VMDisconnectEvent() {
 		super();

@@ -8,12 +8,8 @@ public class QVTiRootEvaluationEnvironment extends QVTiEvaluationEnvironment
 {
     protected final @NonNull Transformation transformation;
 
-//    public QVTiRootEvaluationEnvironment(@NonNull MetaModelManager metaModelManager) {
-//		super(metaModelManager);
-//	}
-
-    public QVTiRootEvaluationEnvironment(@NonNull MetaModelManager metaModelManager, @NonNull Transformation transformation) {
-		super(metaModelManager);
+    public QVTiRootEvaluationEnvironment(@NonNull MetaModelManager metaModelManager, @NonNull QVTiModelManager modelManager, @NonNull Transformation transformation) {
+		super(metaModelManager, modelManager);
 		this.transformation = transformation;
 	}
 

@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.debug.utils.CompiledUnit;
@@ -40,7 +41,7 @@ public class VMBreakpointManager {
     long fPrivateBreakpointID = 0;
 
 
-	public VMBreakpointManager(@NonNull MetaModelManager metaModelManager, @NonNull CompiledUnit mainUnit) {
+	public VMBreakpointManager(@NonNull MetaModelManager metaModelManager, @Nullable CompiledUnit mainUnit) {
 		if(mainUnit == null) {
 			throw new IllegalArgumentException("null main unit"); //$NON-NLS-1$
 		}

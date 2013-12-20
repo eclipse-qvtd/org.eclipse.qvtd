@@ -13,10 +13,10 @@ package org.eclipse.qvtd.debug.vm.protocol;
 import java.io.Serializable;
 
 
-public class VMStackFrameRequest extends VMRequest implements Serializable {
+public class VMStackFrameRequest extends VMRequest implements Serializable
+{
+	private static final long serialVersionUID = 7494309845104435913L;
 
-	private static final long serialVersionUID = -870457096053189047L;
-	
 	public final long frameID;
 	
 	public final String variableURI;

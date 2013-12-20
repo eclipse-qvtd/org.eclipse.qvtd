@@ -12,10 +12,10 @@ package org.eclipse.qvtd.debug.vm.protocol;
 
 import java.io.Serializable;
 
-public class BreakpointData implements Serializable {
-	
-	private static final long serialVersionUID = -2199623960858987773L;
-	
+public class BreakpointData implements Serializable
+{
+	private static final long serialVersionUID = 2199378435188939811L;
+
 	public String condition;
 	public boolean conditionEnabled;
 	public boolean conditionSuspendOnTrue;

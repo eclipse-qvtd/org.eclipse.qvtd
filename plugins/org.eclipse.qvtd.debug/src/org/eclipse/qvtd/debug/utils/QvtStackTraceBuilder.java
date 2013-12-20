@@ -91,9 +91,9 @@ public class QvtStackTraceBuilder {
     	int resultOffset = getCurrentASTOffset(env);
 		
     	Transformation currentTransformation = env.getTransformation();
-    	if (currentTransformation == null) {
-    		throw new IllegalArgumentException("Currently executed model is not set in environment"); //$NON-NLS-1$
-    	}
+//    	if (currentTransformation == null) {
+//    		throw new IllegalArgumentException("Currently executed model is not set in environment"); //$NON-NLS-1$
+//    	}
     	
     	moduleName = currentTransformation.getName();
     	
@@ -115,8 +115,8 @@ public class QvtStackTraceBuilder {
 //    		}
 		}
 
-		IModuleSourceInfo sourceInfo = ASTBindingHelper.getModuleSourceBinding(module);
-		if(sourceInfo != null) {
+		IModuleSourceInfo sourceInfo = module != null ? ASTBindingHelper.getModuleSourceBinding(module) : null;
+		if (sourceInfo != null) {
 			URI uri = sourceInfo.getSourceURI();
 			unitName = uri.lastSegment();
 			if(resultOffset >= 0) {

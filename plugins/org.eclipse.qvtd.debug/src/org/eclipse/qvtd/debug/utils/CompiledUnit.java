@@ -14,6 +14,9 @@ public class CompiledUnit {
 	
 	private List<Root> modules = new ArrayList<Root>();
 
+	public CompiledUnit() {
+	}
+
 	public CompiledUnit(@NonNull Element element) {
 		modules.add(PivotUtil.getContainingRoot(element));
 	}

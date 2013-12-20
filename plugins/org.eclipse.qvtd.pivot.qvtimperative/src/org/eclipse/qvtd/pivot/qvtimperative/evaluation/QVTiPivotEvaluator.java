@@ -10,8 +10,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
@@ -25,7 +23,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 	protected final @NonNull MetaModelManager metaModelManager;
 	protected final @NonNull Transformation transformation;
 	protected final @NonNull QVTiEnvironmentFactory envFactory;
-	protected final @NonNull PivotEnvironment env;
+	protected final @NonNull QVTiEnvironment env;
 	protected final @NonNull QVTiModelManager modelManager;
     private EvaluationMonitor monitor = null;
     private boolean canceled = false;
@@ -89,8 +87,8 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 	}
 
 	public Boolean execute() {
-        IQVTiEvaluationEnvironment evalEnv = envFactory.createEvaluationEnvironment(transformation);
-        QVTiEvaluationVisitor visitor = envFactory.createEvaluationVisitor(env, evalEnv, modelManager);
+        IQVTiEvaluationEnvironment evalEnv = envFactory.createEvaluationEnvironment(modelManager, transformation);
+        QVTiEvaluationVisitor visitor = envFactory.createEvaluationVisitor(env, evalEnv);
         return (Boolean) transformation.accept(visitor);
 	}
 
@@ -101,11 +99,11 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
         return monitor != null ? monitor : this;
     }
 
-	public final @NonNull PivotEnvironment getEnvironment() {
+	public final @NonNull QVTiEnvironment getEnvironment() {
 		return env;
 	}
 
-	public final @NonNull PivotEnvironmentFactory getEnvironmentFactory() {
+	public final @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 		return envFactory;
 	}
 

@@ -16,15 +16,15 @@ import java.util.List;
 
 
 
-public class VMBreakpointRequest extends VMRequest {
+public class VMBreakpointRequest extends VMRequest
+{
+	private static final long serialVersionUID = -1085845926381930847L;
 
 	public static enum ActionKind {
 		ADD,
 		REMOVE,
 		CHANGE
 	}	
-	
-	private static final long serialVersionUID = -313847657694333827L;
 	
 	private final long fBreakpointID;
 	private final ActionKind actionKind;	

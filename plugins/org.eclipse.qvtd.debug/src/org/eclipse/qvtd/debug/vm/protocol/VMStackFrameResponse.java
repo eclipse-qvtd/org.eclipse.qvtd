@@ -11,14 +11,10 @@
 package org.eclipse.qvtd.debug.vm.protocol;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.debug.vm.VMStackFrame;
-import org.eclipse.qvtd.debug.vm.VMVariable;
 
-
-
-public class VMStackFrameResponse extends VMResponse {
-
-	private static final long serialVersionUID = 5164097654623010310L;
+public class VMStackFrameResponse extends VMResponse
+{
+	private static final long serialVersionUID = -731807514003839012L;
 
 	public final VMStackFrame[] frames;
 	public final VMVariable[] variables;

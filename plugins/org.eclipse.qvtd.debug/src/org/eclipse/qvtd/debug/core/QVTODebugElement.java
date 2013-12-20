@@ -24,6 +24,6 @@ public abstract class QVTODebugElement extends DebugElement {
 	}
 
 	public IQVTODebugTarget getQVTODebugTarget() {
-		return (QVTODebugTarget) getDebugTarget(); 
+		return (IQVTODebugTarget) getDebugTarget(); 
 	}	
 }

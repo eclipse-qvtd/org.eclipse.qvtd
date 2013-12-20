@@ -13,7 +13,7 @@ package org.eclipse.qvtd.debug.ui.pages;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.qvtd.debug.core.QVTOBreakpoint;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
-import org.eclipse.qvtd.debug.ui.actions.DebugUIMessages;
+import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;

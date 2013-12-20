@@ -10,9 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.vm.protocol;
 
-public class VMStartEvent extends VMEvent {
-
-	private static final long serialVersionUID = 4489918763664221834L;
+public class VMStartEvent extends VMEvent
+{
+	private static final long serialVersionUID = -3472484933976352536L;
 
 	public final boolean suspendOnStartup;
 	public final String mainModuleName;

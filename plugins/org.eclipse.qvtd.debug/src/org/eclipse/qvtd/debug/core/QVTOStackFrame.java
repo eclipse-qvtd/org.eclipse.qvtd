@@ -14,22 +14,23 @@ import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.debug.utils.QVTODebugCore;
-import org.eclipse.qvtd.debug.vm.VMLocation;
-import org.eclipse.qvtd.debug.vm.VMStackFrame;
-import org.eclipse.qvtd.debug.vm.VMVariable;
+import org.eclipse.qvtd.debug.vm.protocol.VMLocation;
 import org.eclipse.qvtd.debug.vm.protocol.VMResponse;
+import org.eclipse.qvtd.debug.vm.protocol.VMStackFrame;
 import org.eclipse.qvtd.debug.vm.protocol.VMStackFrameRequest;
 import org.eclipse.qvtd.debug.vm.protocol.VMStackFrameResponse;
+import org.eclipse.qvtd.debug.vm.protocol.VMVariable;
 
 public class QVTOStackFrame extends QVTODebugElement implements IStackFrame {
 
-	private final QVTOThread fThread;
-	private VMStackFrame fUnderlyingFrame;
+	private final @NonNull QVTOThread fThread;
+	private @NonNull VMStackFrame fUnderlyingFrame;
 	private boolean fDeferredExecution;
 	
 
-	public QVTOStackFrame(QVTOThread thread, VMStackFrame frame) {
+	public QVTOStackFrame(@NonNull QVTOThread thread, @NonNull VMStackFrame frame) {
 		super(thread.getQVTODebugTarget());
 		
 		if(thread == null || frame == null) {
@@ -40,7 +41,7 @@ public class QVTOStackFrame extends QVTODebugElement implements IStackFrame {
 		fUnderlyingFrame = frame;
 	}
 	
-	protected void setLocation(VMStackFrame frame) {
+	protected void setLocation(@NonNull VMStackFrame frame) {
 		if (frame == null) {
 			throw new IllegalArgumentException("null frame"); //$NON-NLS-1$
 		}
@@ -75,7 +76,11 @@ public class QVTOStackFrame extends QVTODebugElement implements IStackFrame {
 		Arrays.sort(allVars, new Comparator<IVariable>() {
 			public int compare(IVariable var1, IVariable var2) {
 				try {
-					return var1.getName().compareTo(var2.getName());
+					String n1 = var1.getName();
+					String n2 = var2.getName();
+					if (n1 == null) n1 = "";
+					if (n2 == null) n2 = "";
+					return n1.compareTo(n2);
 				} catch (DebugException e) {
 					QVTODebugCore.log(e);
 				}

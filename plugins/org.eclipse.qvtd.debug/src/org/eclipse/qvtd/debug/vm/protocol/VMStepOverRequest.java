@@ -11,9 +11,9 @@
 package org.eclipse.qvtd.debug.vm.protocol;
 
 
-public class VMStepOverRequest extends VMRequest {
-
-	private static final long serialVersionUID = 8830725078697996262L;
+public class VMStepOverRequest extends VMRequest
+{
+	private static final long serialVersionUID = 6552901136929707298L;
 
 	public VMStepOverRequest() {
 		super();

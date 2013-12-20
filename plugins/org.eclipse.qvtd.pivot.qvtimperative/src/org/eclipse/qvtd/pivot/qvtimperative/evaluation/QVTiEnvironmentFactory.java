@@ -28,25 +28,43 @@ public class QVTiEnvironmentFactory extends PivotEnvironmentFactory {
 	}
 
 	@Override
+	public @NonNull QVTiEnvironment createEnvironment() {
+		return new QVTiEnvironment(this, null);
+	}
+
+	@Override
+	public @NonNull QVTiEnvironment createEnvironment(@NonNull Environment parent) {
+		if (!(parent instanceof QVTiEnvironment)) {
+			throw new IllegalArgumentException("Parent environment must be a QVTi environment: " + parent); //$NON-NLS-1$
+		}
+		return new QVTiEnvironment((QVTiEnvironment) parent);
+	}
+
+	@Override
 	public @NonNull PivotEvaluationEnvironment createEvaluationEnvironment() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public @NonNull EvaluationEnvironment createEvaluationEnvironment(@NonNull EvaluationEnvironment parent) {
+	public @NonNull IQVTiEvaluationEnvironment createEvaluationEnvironment(@NonNull EvaluationEnvironment parent) {
 		return new QVTiNestedEvaluationEnvironment((IQVTiEvaluationEnvironment) parent);
 	}
 
-	public @NonNull IQVTiEvaluationEnvironment createEvaluationEnvironment(@NonNull Transformation transformation) {
-		return new QVTiRootEvaluationEnvironment(getMetaModelManager(), transformation);
+	public @NonNull IQVTiEvaluationEnvironment createEvaluationEnvironment(@NonNull QVTiModelManager modelManager, @NonNull Transformation transformation) {
+		return new QVTiRootEvaluationEnvironment(getMetaModelManager(), modelManager, transformation);
 	}
 
 	public @NonNull IQVTiEvaluationEnvironment createEvaluationEnvironment(@NonNull IQVTiEvaluationEnvironment parent, @NonNull NamedElement operation) {
 		return new QVTiNestedEvaluationEnvironment(parent);
 	}
 
-	public @NonNull QVTiEvaluationVisitor createEvaluationVisitor(@NonNull Environment env, @NonNull IQVTiEvaluationEnvironment evalEnv, @NonNull QVTiModelManager modelManager) {
-		QVTiEvaluationVisitor visitor = new QVTiEvaluationVisitorImpl(env, evalEnv, modelManager);
+	public @NonNull QVTiEvaluationVisitor createEvaluationVisitor(@NonNull QVTiEnvironment env, @NonNull IQVTiEvaluationEnvironment evalEnv) {
+		QVTiEvaluationVisitor visitor = new QVTiEvaluationVisitorImpl(env, evalEnv);
+        if (isEvaluationTracingEnabled()) {
+            // decorate the evaluation visitor with tracing support
+        	visitor = new QVTiTracingEvaluationVisitor(visitor);
+        	((QVTiTracingEvaluationVisitor)visitor).setVerboseLevel(QVTiTracingEvaluationVisitor.VERBOSE_LEVEL_HIGH);
+        }
 		return visitor;
 	}
 

@@ -10,26 +10,30 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.vm;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.qvtd.debug.evaluator.IDebugEvaluationEnvironment;
 
 public interface VMFrameExecutionContext {
 	
 	Type getOCLType(Property feature);
 	
-//	List<EStructuralFeature> getAllFeatures(EClass eClass);
+	List<EStructuralFeature> getAllFeatures(EClass eClass);
 	/**
 	 * TODO - 
 	 * Note: with derived properties may execute QVTO engine, throw QVTRuntimeException!!!
 	 * Should be evaluated at separate thread and QVTO Evaluator, to be interruptible
 	 */
-	Object getValue(Property feature, EObject target);
+	Object getValue(EStructuralFeature feature, EObject target);
 	
-	EvaluationEnvironment getEvalEnv();
+	IDebugEvaluationEnvironment getEvalEnv();
 	MetaModelManager getMetaModelManager();
 	DomainStandardLibrary getStandardLibrary();
 }

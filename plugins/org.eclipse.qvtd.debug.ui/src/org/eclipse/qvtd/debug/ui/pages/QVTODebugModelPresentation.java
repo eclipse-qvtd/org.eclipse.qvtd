@@ -8,7 +8,7 @@
  * Contributors:
  *     Radek Dvorak - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.debug.ui.actions;
+package org.eclipse.qvtd.debug.ui.pages;
 
 import java.text.MessageFormat;
 
@@ -34,6 +34,7 @@ import org.eclipse.qvtd.debug.core.QVTOThread;
 import org.eclipse.qvtd.debug.core.QVTOValue;
 import org.eclipse.qvtd.debug.core.QVTOVariable;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
+import org.eclipse.qvtd.debug.ui.actions.QVTODebugImages;
 import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.qvtd.debug.vm.protocol.VMLocation;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
@@ -54,6 +55,7 @@ public class QVTODebugModelPresentation implements IDebugModelPresentation, IDeb
 	}
 
     public Image getImage(Object element) {
+    	System.out.println("getImage: " + element.getClass().getSimpleName() + " " + element);
     	if (element instanceof QVTOStackFrame) {
         	QVTOStackFrame frame = (QVTOStackFrame) element;
     		VMLocation location = frame.getLocation();
@@ -67,17 +69,17 @@ public class QVTODebugModelPresentation implements IDebugModelPresentation, IDeb
         }
         else if(element instanceof QVTOVariable) {
     		QVTOVariable var = (QVTOVariable) element;
-    		if(var.isModelParameter()) {
+    		if (var.isModelParameter()) {
     			return QVTODebugImages.getImage(QVTODebugImages.MODEL_PARAMETER);
-    		} else if(var.isReference()) {
+    		} else if (var.isReference()) {
     			return QVTODebugImages.getImage(QVTODebugImages.REFERENCE);
-    		} else if(var.isAttribute()) {
+    		} else if (var.isAttribute()) {
     			return QVTODebugImages.getImage(QVTODebugImages.ATTRIBUTE);
-    		} else if(var.isIntermProperty()) {
+    		} else if (var.isIntermProperty()) {
     			return QVTODebugImages.getImage(QVTODebugImages.INTERM_PROPERTY);
-    		} else if(var.isLocalVariable()) {
+    		} else if (var.isLocalVariable()) {
     			return QVTODebugImages.getImage(QVTODebugImages.LOCAL_VARIABLE);
-    		} else if(var.isPredefinedVariable()) {
+    		} else if (var.isPredefinedVariable()) {
     			// TODO - add special case for this
     			try {
 					if("this".equals(var.getName())) { //$NON-NLS-1$
@@ -108,6 +110,7 @@ public class QVTODebugModelPresentation implements IDebugModelPresentation, IDeb
 	}
 
 	public String getText(Object element) {
+    	System.out.println("getImage: " + element.getClass().getSimpleName() + " " + element);
         if (element instanceof QVTOStackFrame) {
         	QVTOStackFrame frame = (QVTOStackFrame) element;
     		VMLocation location = frame.getLocation();
@@ -132,13 +135,12 @@ public class QVTODebugModelPresentation implements IDebugModelPresentation, IDeb
         	String state = thread.isSuspended() ? DebugUIMessages.QVTODebugModelPresentation_Suspended : DebugUIMessages.QVTODebugModelPresentation_Running;
         	return MessageFormat.format(DebugUIMessages.QVTODebugModelPresentation_ThreadLabel, name, state);
         } 
-        else if(element instanceof QVTODebugTarget) {
+        else if (element instanceof QVTODebugTarget) {
         	QVTODebugTarget debugTarget = (QVTODebugTarget) element;
 			String moduleName = debugTarget.getMainModuleName();
 			String launchConfigName = debugTarget.getLaunch().getLaunchConfiguration().getName();
 			return NLS.bind(DebugUIMessages.QVTODebugModelPresentation_TransformationLabel, moduleName, launchConfigName);
         }
-
         return null;
 	}
 

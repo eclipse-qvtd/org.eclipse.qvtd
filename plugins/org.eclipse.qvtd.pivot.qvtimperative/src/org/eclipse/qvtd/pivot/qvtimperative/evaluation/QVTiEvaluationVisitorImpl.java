@@ -18,11 +18,8 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.PivotIdResolver;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -53,20 +50,17 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
      *            the env
      * @param evalEnv
      *            the eval env
-     * @param modelManager
-     *            the model manager
      */
-    public QVTiEvaluationVisitorImpl(@NonNull Environment env,
-            @NonNull EvaluationEnvironment evalEnv,
-            @NonNull QVTiModelManager modelManager) {
-        super(env, evalEnv, modelManager);
+    public QVTiEvaluationVisitorImpl(@NonNull QVTiEnvironment env, @NonNull IQVTiEvaluationEnvironment evalEnv) {
+        super(env, evalEnv);
     }
 
     @Override
     public @NonNull QVTiEvaluationVisitor createNestedEvaluator() {
-        EnvironmentFactory factory = environment.getFactory();
-        EvaluationEnvironment nestedEvalEnv = factory.createEvaluationEnvironment(evaluationEnvironment);
-        QVTiEvaluationVisitorImpl ne = new QVTiEvaluationVisitorImpl(environment, nestedEvalEnv, getModelManager());
+    	QVTiEnvironment qvtEnvironment = getEnvironment();
+		QVTiEnvironmentFactory factory = qvtEnvironment.getFactory();
+        IQVTiEvaluationEnvironment nestedEvalEnv = factory.createEvaluationEnvironment(evaluationEnvironment);
+        QVTiEvaluationVisitorImpl ne = new QVTiEvaluationVisitorImpl(qvtEnvironment, nestedEvalEnv);
         return ne;
     }
 

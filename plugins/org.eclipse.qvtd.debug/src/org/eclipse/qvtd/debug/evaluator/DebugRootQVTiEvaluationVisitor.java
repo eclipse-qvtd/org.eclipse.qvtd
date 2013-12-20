@@ -20,9 +20,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.qvtd.debug.stubs.ASTBindingHelper;
@@ -35,19 +33,20 @@ import org.eclipse.qvtd.debug.vm.IQVTODebuggerShell;
 import org.eclipse.qvtd.debug.vm.UnitLocation;
 import org.eclipse.qvtd.debug.vm.VMBreakpoint;
 import org.eclipse.qvtd.debug.vm.VMBreakpointManager;
-import org.eclipse.qvtd.debug.vm.VMStackFrame;
+import org.eclipse.qvtd.debug.vm.VMUtils;
 import org.eclipse.qvtd.debug.vm.ValidBreakpointLocator;
 import org.eclipse.qvtd.debug.vm.protocol.VMRequest;
 import org.eclipse.qvtd.debug.vm.protocol.VMResumeEvent;
 import org.eclipse.qvtd.debug.vm.protocol.VMResumeRequest;
+import org.eclipse.qvtd.debug.vm.protocol.VMStackFrame;
 import org.eclipse.qvtd.debug.vm.protocol.VMStartEvent;
 import org.eclipse.qvtd.debug.vm.protocol.VMSuspendEvent;
 import org.eclipse.qvtd.debug.vm.protocol.VMSuspendRequest;
 import org.eclipse.qvtd.debug.vm.protocol.VMTerminateRequest;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationEnvironment;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironment;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorImpl;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager;
 
 public class DebugRootQVTiEvaluationVisitor extends DebugQVTiEvaluationVisitor
 {
@@ -59,8 +58,8 @@ public class DebugRootQVTiEvaluationVisitor extends DebugQVTiEvaluationVisitor
 	private int fCurrentStepMode;
 	private @NonNull Stack<DebugQVTiEvaluationVisitor> visitorStack = new Stack<DebugQVTiEvaluationVisitor>();
 
-	public DebugRootQVTiEvaluationVisitor(@NonNull Environment env, @NonNull IQVTiEvaluationEnvironment evalEnv, @NonNull QVTiModelManager modelManager, @NonNull Transformation transformation, IQVTODebuggerShell shell) {
-		super(new QVTiEvaluationVisitorImpl(env, evalEnv, modelManager));
+	public DebugRootQVTiEvaluationVisitor(@NonNull QVTiEnvironment env, @NonNull IQVTiEvaluationEnvironment evalEnv, @NonNull Transformation transformation, IQVTODebuggerShell shell) {
+		super(new QVTiEvaluationVisitorImpl(env, evalEnv));
 		fDebugShell = shell;
 		fBPM = shell.getBreakPointManager();
 		fIterateBPHelper = new IterateBreakpointHelper(fBPM);
@@ -94,7 +93,7 @@ public class DebugRootQVTiEvaluationVisitor extends DebugQVTiEvaluationVisitor
 
 	private VMSuspendEvent createVMSuspendEvent(int eventDetail) {
 		// build the VM stack frames
-		VMStackFrame[] vmStack = VMStackFrame.create(getLocationStack());		
+		VMStackFrame[] vmStack = VMUtils.createStackFrame(getLocationStack());		
 		assert vmStack.length > 0;
 		return new VMSuspendEvent(vmStack, eventDetail);
 	}
@@ -125,7 +124,7 @@ public class DebugRootQVTiEvaluationVisitor extends DebugQVTiEvaluationVisitor
 		}
 	}
 
-	public @Nullable UnitLocation getCurrentLocation() {
+	public @NonNull UnitLocation getCurrentLocation() {
 		DebugQVTiEvaluationVisitor currentVisitor = visitorStack.peek();
 		IDebugEvaluationEnvironment evaluationEnvironment = currentVisitor.getEvaluationEnvironment();
 		return evaluationEnvironment.getCurrentLocation();

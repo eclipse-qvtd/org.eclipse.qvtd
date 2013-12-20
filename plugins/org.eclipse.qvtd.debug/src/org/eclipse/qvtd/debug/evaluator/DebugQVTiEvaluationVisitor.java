@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainLogger;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -36,6 +35,7 @@ import org.eclipse.qvtd.debug.QVTdDebugPlugin;
 import org.eclipse.qvtd.debug.stubs.OperationCallResult;
 import org.eclipse.qvtd.debug.stubs.QvtInterruptedExecutionException;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironment;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractWrappingQVTimperativeVisitor;
 
@@ -60,7 +60,7 @@ public abstract class DebugQVTiEvaluationVisitor extends AbstractWrappingQVTimpe
 	}
 	
 	protected DebugQVTiEvaluationVisitor(@NonNull QVTiEvaluationVisitor nestedEvaluationVisitor) {
-		super(nestedEvaluationVisitor, null);
+		super(nestedEvaluationVisitor, new Object());
 		delegate.setUndecoratedVisitor(this);
 	}
 
@@ -79,8 +79,8 @@ public abstract class DebugQVTiEvaluationVisitor extends AbstractWrappingQVTimpe
 
 	public abstract int getDepth();
 
-	public @NonNull Environment getEnvironment() {
-		return delegate.getEnvironment();
+	public @NonNull QVTiEnvironment getEnvironment() {
+		return (QVTiEnvironment) delegate.getEnvironment();
 	}
 
 	public @NonNull IDebugEvaluationEnvironment getEvaluationEnvironment() {
@@ -158,7 +158,7 @@ public abstract class DebugQVTiEvaluationVisitor extends AbstractWrappingQVTimpe
 	} */
 
 	@Override
-	protected Object postVisit(@NonNull Visitable visitable, Object preState, Object result) {
+	protected Object postVisit(@NonNull Visitable visitable, @Nullable Object preState, @Nullable Object result) {
 		Element element = (Element)visitable;
 		IDebugEvaluationEnvironment evalEnv = getEvaluationEnvironment();
 		postVisit(evalEnv, element, preState);

@@ -12,7 +12,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiNestedEvaluationEnvir
 
 public class DebugNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvironment implements IDebugEvaluationEnvironment
 {
-	private @Nullable Element myCurrentIP;
+	private @NonNull Element myCurrentIP;
 	private NamedElement myOperation;
     private final int myStackDepth;
 	private final long id;
@@ -22,21 +22,22 @@ public class DebugNestedEvaluationEnvironment extends QVTiNestedEvaluationEnviro
 		myStackDepth = evaluationEnvironment.getDepth() + 1;
 		this.id = id;
 		this.myOperation = operation;
+		this.myCurrentIP = operation;
 	}
 
 	@Override
-	public @Nullable Element getCurrentIP() {
+	public @NonNull Element getCurrentIP() {
 		return myCurrentIP;
 	}
 
-	public @Nullable UnitLocation getCurrentLocation() {
-		if (myCurrentIP == null) {
-			return null;
-		}
-		else {
+	public @NonNull UnitLocation getCurrentLocation() {
+//		if (myCurrentIP == null) {
+//			return null;
+//		}
+//		else {
 			int offset = ASTBindingHelper.getStartPosition(myCurrentIP);
 			return new UnitLocation(offset, this, myCurrentIP); 
-		}
+//		}
 	}
 
 	@Override
@@ -60,12 +61,12 @@ public class DebugNestedEvaluationEnvironment extends QVTiNestedEvaluationEnviro
 	}
 
 	@Override
-	public @NonNull IDebugEvaluationEnvironment getParentEvaluationEnvironment() {
+	public @Nullable IDebugEvaluationEnvironment getParentEvaluationEnvironment() {
 		return (IDebugEvaluationEnvironment) super.getParentEvaluationEnvironment();
 	}
 
 	@Override
-	public DebugRootEvaluationEnvironment getRootEvaluationEnvironment() {
+	public @NonNull DebugRootEvaluationEnvironment getRootEvaluationEnvironment() {
 		return (DebugRootEvaluationEnvironment) rootEvaluationEnvironment;
 	}
 
@@ -77,7 +78,7 @@ public class DebugNestedEvaluationEnvironment extends QVTiNestedEvaluationEnviro
     	getRootEvaluationEnvironment().processDeferredTasks();
     }
 
-	public Element setCurrentIP(Element element) {
+	public @NonNull Element setCurrentIP(@NonNull Element element) {
 		Element prevValue = myCurrentIP;
 		myCurrentIP = element;
 		return prevValue;

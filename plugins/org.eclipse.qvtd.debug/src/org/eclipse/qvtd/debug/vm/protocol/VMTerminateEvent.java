@@ -10,9 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.vm.protocol;
 
-public class VMTerminateEvent extends VMEvent {
-
-	private static final long serialVersionUID = 8606236775842913079L;
+public class VMTerminateEvent extends VMEvent
+{
+	private static final long serialVersionUID = -3633050443752075260L;
 
 	private int fExitCode;
 

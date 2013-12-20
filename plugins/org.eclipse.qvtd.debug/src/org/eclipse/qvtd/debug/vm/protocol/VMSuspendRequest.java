@@ -11,9 +11,9 @@
 package org.eclipse.qvtd.debug.vm.protocol;
 
 
-public class VMSuspendRequest extends VMRequest {
-	
-	private static final long serialVersionUID = -5297559608628409741L;
+public class VMSuspendRequest extends VMRequest
+{
+	private static final long serialVersionUID = 4976429948394821130L;
 
 	public final int detail;
 	

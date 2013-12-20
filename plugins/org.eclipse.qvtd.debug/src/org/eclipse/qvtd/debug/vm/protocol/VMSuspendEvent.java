@@ -12,12 +12,10 @@ package org.eclipse.qvtd.debug.vm.protocol;
 
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.debug.vm.VMLocation;
-import org.eclipse.qvtd.debug.vm.VMStackFrame;
 
-public class VMSuspendEvent extends VMEvent {
-
-	private static final long serialVersionUID = -2117406291312177660L;
+public class VMSuspendEvent extends VMEvent
+{
+	private static final long serialVersionUID = 2494519177689939386L;
 
 	public static final int BREAKPOINT_CONDITION_ERR = DebugEvent.MODEL_SPECIFIC + 10;
 

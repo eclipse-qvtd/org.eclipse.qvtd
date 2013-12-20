@@ -11,6 +11,8 @@
 package org.eclipse.qvtd.debug.vm;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.debug.utils.CompiledUnit;
 
 public interface DebuggableExecutorAdapter {
@@ -20,7 +22,7 @@ public interface DebuggableExecutorAdapter {
 	 * 
 	 * @param debugShell
 	 */
-	void connect(IQVTODebuggerShell debugShell);
+	void connect(@NonNull IQVTODebuggerShell debugShell);
 
 	/**
 	 * Causes to run the executor behind this adapter
@@ -35,5 +37,5 @@ public interface DebuggableExecutorAdapter {
 	 * Gets the main compiled unit to be executed
 	 * @return the unit object
 	 */
-	CompiledUnit getUnit();	
+	@Nullable CompiledUnit getUnit();	
 }

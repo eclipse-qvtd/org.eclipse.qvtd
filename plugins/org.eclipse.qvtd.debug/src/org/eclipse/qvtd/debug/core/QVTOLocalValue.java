@@ -5,17 +5,17 @@ import java.util.List;
 
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IVariable;
-import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.qvtd.debug.vm.VMFrameExecutionContext;
-import org.eclipse.qvtd.debug.vm.VMVariable;
 import org.eclipse.qvtd.debug.vm.VariableFinder;
+import org.eclipse.qvtd.debug.vm.protocol.VMVariable;
 
 public class QVTOLocalValue extends QVTOValue {
 	
 	public static class LocalValue {
 		public Object valueObject;
-		public Type valueType;
+		public EClassifier valueType;
 	}
 	
 	public QVTOLocalValue(IQVTODebugTarget debugTarget, long frameID,

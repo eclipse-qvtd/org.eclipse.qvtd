@@ -8,16 +8,16 @@
  * Contributors:
  *     Radek Dvorak - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.debug.vm;
+package org.eclipse.qvtd.debug.vm.protocol;
 
 import java.io.Serializable;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-public class VMVariable implements Serializable {
-	
-	private static final long serialVersionUID = -7174716073141901340L;
-	
+public class VMVariable implements Serializable
+{
+	private static final long serialVersionUID = 1038270932235501034L;
+
 	public static final int LOCAL = 0;
 	public static final int ATTRIBUTE = 1;
 	public static final int REFERENCE = 2;
@@ -41,9 +41,9 @@ public class VMVariable implements Serializable {
 	
 	public String name;
 	public String variableURI;
-	public Value value;
+	public VMValue value;
 	public Object valueObject;
-	public Value.Type type;
+	public VMType type;
 	public int kind;
 	
 	public VMVariable() {

@@ -42,7 +42,7 @@ public class InternalTransformationExecutor
 	protected final @NonNull QVTiEnvironmentFactory envFactory;
 	private URI fURI;
 //	private EPackage.Registry fPackageRegistry;
-	private CompiledUnit fCompiledUnit;
+	private @Nullable CompiledUnit fCompiledUnit;
 	private ResourceSet fCompilationRs;
 	private ExecutionDiagnosticImpl fLoadDiagnostic;
 //	private Transformation fTransformation;
@@ -117,7 +117,7 @@ public class InternalTransformationExecutor
 	 * 
 	 * @return compiled unit or <code>null</code> if it failed to be obtained
 	 */
-	public CompiledUnit getUnit() {
+	public @Nullable CompiledUnit getUnit() {
 		loadTransformation();
 		return fCompiledUnit;
 	}	

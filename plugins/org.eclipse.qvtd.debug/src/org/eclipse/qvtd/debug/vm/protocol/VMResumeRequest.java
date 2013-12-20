@@ -11,10 +11,10 @@
 package org.eclipse.qvtd.debug.vm.protocol;
 
 
-public class VMResumeRequest extends VMRequest {
-	
-	private static final long serialVersionUID = 7434621076114466548L;
-	
+public class VMResumeRequest extends VMRequest
+{
+	private static final long serialVersionUID = -1713629869107116532L;
+
 	public final int detail;
 	
 	public VMResumeRequest(int detail) {

@@ -12,10 +12,10 @@ package org.eclipse.qvtd.debug.vm.protocol;
 
 import java.io.Serializable;
 
-public abstract class VMEvent implements Serializable {
+public abstract class VMEvent implements Serializable
+{
+	private static final long serialVersionUID = 7444073052177307234L;
 
-	private static final long serialVersionUID = -5348273910385930061L;
-	
 	protected VMEvent() {
 		super();
 	}

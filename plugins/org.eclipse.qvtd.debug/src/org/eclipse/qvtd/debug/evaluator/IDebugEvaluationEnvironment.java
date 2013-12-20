@@ -10,7 +10,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationEnvironmen
 public interface IDebugEvaluationEnvironment extends IQVTiEvaluationEnvironment
 {
 	@NonNull Element getCurrentIP();
-	@Nullable UnitLocation getCurrentLocation();
+	@NonNull UnitLocation getCurrentLocation();
 	int getDepth();
 	long getID();
 	@Nullable NamedElement getOperation();
@@ -18,6 +18,6 @@ public interface IDebugEvaluationEnvironment extends IQVTiEvaluationEnvironment
 	@NonNull DebugRootEvaluationEnvironment getRootEvaluationEnvironment();
 	boolean isDeferredExecution();
 	void processDeferredTasks();
-	Element setCurrentIP(Element element);
+	@NonNull Element setCurrentIP(@NonNull Element element);
 	void throwQVTException(@NonNull QvtRuntimeException qvtInterruptedExecutionException);
 }

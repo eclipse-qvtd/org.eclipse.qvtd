@@ -26,6 +26,7 @@ import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.qvtd.debug.core.QVTOBreakpoint;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
+import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.qvtd.debug.utils.QVTODebugCore;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
 import org.eclipse.ui.IWorkbenchPart;

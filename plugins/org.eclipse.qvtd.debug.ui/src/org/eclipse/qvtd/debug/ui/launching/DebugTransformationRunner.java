@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.debug.core.EvaluationContext;
 import org.eclipse.qvtd.debug.stubs.ExecutionDiagnostic;
 import org.eclipse.qvtd.debug.stubs.QVTODebugUtil;
@@ -89,7 +90,7 @@ public class DebugTransformationRunner extends TransformationRunner
 		return super.initialize();
 	}
 
-	public DebuggableExecutorAdapter createDebugableAdapter(final @NonNull EvaluationContext evaluationContext) {
+	public @NonNull DebuggableExecutorAdapter createDebugableAdapter(final @NonNull EvaluationContext evaluationContext) {
 		
 		return new DebuggableExecutorAdapter() {
 			public Diagnostic execute() throws IllegalStateException {
@@ -111,7 +112,7 @@ public class DebugTransformationRunner extends TransformationRunner
 				return execDiagnostic;
 			}
 
-			public CompiledUnit getUnit() {
+			public @Nullable CompiledUnit getUnit() {
 				return getExecutor().getUnit();
 			}
 			

@@ -11,10 +11,10 @@
 package org.eclipse.qvtd.debug.vm.protocol;
 
 
-public class NewBreakpointData extends BreakpointData {
-	
-	private static final long serialVersionUID = -2419723075497828896L;
-	
+public class NewBreakpointData extends BreakpointData
+{
+	private static final long serialVersionUID = -8614925057936040002L;
+
 	public long ID;
 	public int line = -1;
 	public String targetURI;

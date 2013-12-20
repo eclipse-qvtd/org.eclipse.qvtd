@@ -10,11 +10,10 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.debug.QVTdDebugPlugin;
 import org.eclipse.qvtd.debug.stubs.ASTBindingHelper;
-import org.eclipse.qvtd.debug.stubs.ModelParameterExtent;
 import org.eclipse.qvtd.debug.utils.QvtStackTraceBuilder;
-import org.eclipse.qvtd.debug.utils.Trace;
 import org.eclipse.qvtd.debug.vm.UnitLocation;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiRootEvaluationEnvironment;
 
 public class DebugRootEvaluationEnvironment extends QVTiRootEvaluationEnvironment implements IDebugEvaluationEnvironment
@@ -22,15 +21,15 @@ public class DebugRootEvaluationEnvironment extends QVTiRootEvaluationEnvironmen
 //	private IContext myContext;
 	private List<Runnable> myDeferredTasks;
 //    private EObjectEStructuralFeaturePair myLastAssignLvalue;	  
-    private ModelParameterExtent myUnboundExtent;
+//    private ModelParameterExtent myUnboundExtent;
     private boolean myIsDeferedExecution;
-    private QvtRuntimeException myException;
-    private Trace myTraces;
-	private @Nullable Element myCurrentIP;
+//    private QvtRuntimeException myException;
+//    private Trace myTraces;
+	private @NonNull Element myCurrentIP;
 	private final long id;
 
-    public DebugRootEvaluationEnvironment(@NonNull MetaModelManager metaModelManager, @NonNull Transformation transformation, long id) {
-		super(metaModelManager, transformation);
+    public DebugRootEvaluationEnvironment(@NonNull MetaModelManager metaModelManager, @NonNull QVTiModelManager modelManager, @NonNull Transformation transformation, long id) {
+		super(metaModelManager, modelManager, transformation);
 		myCurrentIP = transformation;
 		this.id = id;
 	}
@@ -41,18 +40,18 @@ public class DebugRootEvaluationEnvironment extends QVTiRootEvaluationEnvironmen
 //    }
 
 	@Override
-	public @Nullable Element getCurrentIP() {
+	public @NonNull Element getCurrentIP() {
 		return myCurrentIP;
 	}
 
-	public @Nullable UnitLocation getCurrentLocation() {
-		if (myCurrentIP == null) {
-			return null;
-		}
-		else {
+	public @NonNull UnitLocation getCurrentLocation() {
+//		if (myCurrentIP == null) {
+//			return null;
+//		}
+//		else {
 			int offset = ASTBindingHelper.getStartPosition(myCurrentIP);
 			return new UnitLocation(offset, this, myCurrentIP); 
-		}
+//		}
 	}
 
 	@Override
@@ -109,10 +108,10 @@ public class DebugRootEvaluationEnvironment extends QVTiRootEvaluationEnvironmen
 	}
 	
     protected void saveThrownException(@NonNull QvtRuntimeException exception) {
-    	myException = exception;
+//    	myException = exception;
     }
 
-	public Element setCurrentIP(Element element) {
+	public @NonNull Element setCurrentIP(@NonNull Element element) {
 		Element prevValue = myCurrentIP;
 		myCurrentIP = element;
 		return prevValue;

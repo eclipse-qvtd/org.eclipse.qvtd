@@ -12,6 +12,7 @@ package org.eclipse.qvtd.debug.vm;
 
 import java.io.IOException;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.debug.vm.protocol.VMEvent;
 import org.eclipse.qvtd.debug.vm.protocol.VMRequest;
 import org.eclipse.qvtd.debug.vm.protocol.VMResponse;
@@ -19,7 +20,7 @@ import org.eclipse.qvtd.debug.vm.protocol.VMResponse;
 
 public interface IQVTOVirtualMachineShell {
 	
-	VMResponse sendRequest(VMRequest request) throws IOException;
+	VMResponse sendRequest(@NonNull VMRequest request) throws IOException;
 	
 	VMEvent readVMEvent() throws IOException;
 

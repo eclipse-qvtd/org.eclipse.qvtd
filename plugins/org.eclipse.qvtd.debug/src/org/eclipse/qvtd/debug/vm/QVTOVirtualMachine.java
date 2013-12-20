@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -41,6 +42,7 @@ import org.eclipse.qvtd.debug.vm.protocol.VMDetailResponse;
 import org.eclipse.qvtd.debug.vm.protocol.VMEvent;
 import org.eclipse.qvtd.debug.vm.protocol.VMRequest;
 import org.eclipse.qvtd.debug.vm.protocol.VMResponse;
+import org.eclipse.qvtd.debug.vm.protocol.VMStackFrame;
 import org.eclipse.qvtd.debug.vm.protocol.VMStackFrameRequest;
 import org.eclipse.qvtd.debug.vm.protocol.VMStackFrameResponse;
 import org.eclipse.qvtd.debug.vm.protocol.VMStartEvent;
@@ -54,11 +56,11 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
 	private final BlockingQueue<VMEvent> fEvents = new ArrayBlockingQueue<VMEvent>(50);	
 		
 	protected final @NonNull MetaModelManager metaModelManager;
-	private IQVTODebuggerShell fDebuggerShell;
+	private final @NonNull IQVTODebuggerShell fDebuggerShell;
 	
-	private final VMBreakpointManager fBreakpointManager;
-	private @NonNull DebugRootQVTiEvaluationVisitor fInterpreter;
-	private DebuggableExecutorAdapter fExecutor;
+	private final @NonNull VMBreakpointManager fBreakpointManager;
+	private @Nullable DebugRootQVTiEvaluationVisitor fInterpreter;
+	private final @NonNull DebuggableExecutorAdapter fExecutor;
 
 	private boolean fRunning;
 	private boolean fTerminated;
@@ -67,10 +69,7 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
 	private final Object fLock = new Object();
 		
 	
-	public QVTOVirtualMachine(@NonNull MetaModelManager metaModelManager, DebuggableExecutorAdapter executorAdapter) {
-		if(executorAdapter == null) {
-			throw new IllegalArgumentException();
-		}
+	public QVTOVirtualMachine(@NonNull MetaModelManager metaModelManager, @NonNull DebuggableExecutorAdapter executorAdapter) {
 		this.metaModelManager = metaModelManager;
 		fExecutor = executorAdapter;
 		fDebuggerShell = new DebuggerShell();
@@ -90,7 +89,7 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
 		}
 	}
 	
-	public VMResponse sendRequest(VMRequest request) throws IOException {
+	public VMResponse sendRequest(@NonNull VMRequest request) throws IOException {
 		try {
 			if(request instanceof VMStartRequest) {
 				return start();
@@ -117,32 +116,34 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
 	}
 	
 	public IValue evaluate(String expressionText, QVTODebugTarget debugTarget, long frameID) throws CoreException {
-		if (fInterpreter == null) {
+		DebugRootQVTiEvaluationVisitor fInterpreter2 = fInterpreter;
+		if (fInterpreter2 == null) {
 			return null;
 		}
 
-		Element astNode = fInterpreter.getCurrentLocation().getElement();
+		Element astNode = fInterpreter2.getCurrentLocation().getElement();
         if (astNode == null) {
             return null;
         }
         
         ConditionChecker localChecker = new ConditionChecker(expressionText, astNode);
         LocalValue lv = new LocalValue();
-        lv.valueObject = localChecker.evaluate(fInterpreter);
+        lv.valueObject = localChecker.evaluate(fInterpreter2);
         lv.valueType = localChecker.getConditionType();
         
 		return new QVTOLocalValue(debugTarget, frameID, new String[] {expressionText}, lv, 
-				new UnitLocationExecutionContext(fInterpreter.getEnvironment(), fInterpreter.getEvaluationEnvironment()));
+				new UnitLocationExecutionContext(fInterpreter2.getEnvironment(), fInterpreter2.getEvaluationEnvironment()));
 	}
 
 	/**
 	 * @since 1.1
 	 */
 	public EvaluationEnvironment getEvaluationEnv() {
-		if (fInterpreter == null) {
+		DebugRootQVTiEvaluationVisitor fInterpreter2 = fInterpreter;
+		if (fInterpreter2 == null) {
 			return null;
 		}
-		return fInterpreter.getEvaluationEnvironment();
+		return fInterpreter2.getEvaluationEnvironment();
 	}
 	
 	private VMResponse start() {
@@ -169,9 +170,10 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
 	}	
 	
 	private VMResponse handleStackFrameRequest(VMStackFrameRequest request) {
-		if(fInterpreter != null) {
-			List<UnitLocation> locationStack = fInterpreter.getLocationStack();
-			VMStackFrame frame = VMStackFrame.createFrame(request.frameID, locationStack);
+		DebugRootQVTiEvaluationVisitor fInterpreter2 = fInterpreter;
+		if(fInterpreter2 != null) {
+			List<UnitLocation> locationStack = fInterpreter2.getLocationStack();
+			VMStackFrame frame = VMUtils.createStackFrame(request.frameID, locationStack);
 			VMStackFrameResponse response = new VMStackFrameResponse(frame);
 			if(!locationStack.isEmpty()) {
 				UnitLocation topLocation = locationStack.get(0);
@@ -229,18 +231,29 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
 	
 	private VMResponse handleValueDetailRequest(VMDetailRequest request) {
 		// FIXME - ensure VM is in SUSPEND state, otherwise report fError
-		UnitLocationExecutionContext context = new UnitLocationExecutionContext(
-				fInterpreter.getEnvironment(), fInterpreter.getCurrentLocation().getEvalEnv());
-		String detail = VariableFinder.computeDetail(request.getVariableURI(), context);		
-		return new VMDetailResponse(detail != null ? detail : ""); //$NON-NLS-1$
+		DebugRootQVTiEvaluationVisitor fInterpreter2 = fInterpreter;
+		if (fInterpreter2 != null) {
+			UnitLocationExecutionContext context = new UnitLocationExecutionContext(
+					fInterpreter2.getEnvironment(), fInterpreter2.getCurrentLocation().getEvalEnv());
+			String detail = VariableFinder.computeDetail(request.getVariableURI(), context);		
+			return new VMDetailResponse(detail != null ? detail : ""); //$NON-NLS-1$
+		}
+		else {
+			return null;
+		}
 	}
 	
 	private VMResponse handleVariableRequest(VMVariableRequest request) {
 		// FIXME - ensure VM is in SUSPEND state, otherwise report fError
-		UnitLocationExecutionContext context = new UnitLocationExecutionContext(
-				fInterpreter.getEnvironment(), fInterpreter.getCurrentLocation().getEvalEnv());
-		return VariableFinder.process(request, fInterpreter.getLocationStack(),
-				context);
+		DebugRootQVTiEvaluationVisitor fInterpreter2 = fInterpreter;
+		if (fInterpreter2 != null) {
+			UnitLocationExecutionContext context = new UnitLocationExecutionContext(fInterpreter2.getEnvironment(),
+					fInterpreter2.getCurrentLocation().getEvalEnv());
+			return VariableFinder.process(request, fInterpreter2.getLocationStack(), context);
+		}
+		else {
+			return null;
+		}
 	}
 	
 	private Runnable createVMRunnable() {

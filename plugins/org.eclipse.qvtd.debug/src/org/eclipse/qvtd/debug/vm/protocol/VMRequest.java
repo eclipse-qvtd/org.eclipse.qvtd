@@ -12,9 +12,9 @@ package org.eclipse.qvtd.debug.vm.protocol;
 
 import java.io.Serializable;
 
-public abstract class VMRequest implements Serializable {
-
-	private static final long serialVersionUID = -8941259899766191658L;
+public abstract class VMRequest implements Serializable
+{
+	private static final long serialVersionUID = 336624316734916662L;
 
 	protected VMRequest() {
 		super();

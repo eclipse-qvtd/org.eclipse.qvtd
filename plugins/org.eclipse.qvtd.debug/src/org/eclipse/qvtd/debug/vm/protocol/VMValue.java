@@ -8,52 +8,51 @@
  * Contributors:
  *     Radek Dvorak - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.debug.vm;
+package org.eclipse.qvtd.debug.vm.protocol;
 
 import java.io.Serializable;
 
-public class Value implements Serializable {
-	
-	public static class Type implements Serializable {		
-		private static final long serialVersionUID = 7495906714815485400L;		
-	
-		public static final int DATATYPE = 0;
-		public static final int EOBJECT = 1;		
-		public static final int COLLECTION = 2;
-		
-		public final String declaringType;
-		public final String actualType;
-		public final int kind;
-		
-		public Type(int kind, String actualType, String declaringType) {
-			this.kind = kind;
-			this.declaringType = declaringType;
-			this.actualType = actualType;
-		}		
-	}
+import org.eclipse.jdt.annotation.NonNull;
 
-	private static final long serialVersionUID = 6197087566347216082L;
-	
+public class VMValue implements Serializable
+{
+	private static final long serialVersionUID = 875965513717520820L;
+
 	public static final int PRIMITIVE = 0;		
 	public static final int OBJECT_REF = 1;
 	public static final int COLLECTION_REF = 2;
 	public static final int INVALID = 3;
+
+	public static @NonNull String toValueString(int status) {
+		switch (status) {
+		case PRIMITIVE: return "PRIMITIVE";
+		case OBJECT_REF: return "OBJECT_REF";
+		case COLLECTION_REF: return "COLLECTION_REF";
+		case INVALID: return "INVALID";
+		}
+		return "???";
+	}
 	
 	public final int kind;
 	public final Object value;
 	public final boolean hasVariables;
 	
-	public Value(int kind, String value) {
+	public VMValue(int kind, String value) {
 		this(kind, value, false);
 	}
 	
-	public Value(int kind, String value, boolean hasVariables) {
+	public VMValue(int kind, String value, boolean hasVariables) {
 		this.kind = kind;
 		this.value = value;
 		this.hasVariables = hasVariables;
 	}
 
-	public static Value invalid() {
-		return new Value(INVALID, "OclInvalid"); //$NON-NLS-1$
+	public static VMValue invalid() {
+		return new VMValue(INVALID, "OclInvalid"); //$NON-NLS-1$
 	}
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "(" + toValueString(kind) + ", " + value + ")";
+	}	
 }

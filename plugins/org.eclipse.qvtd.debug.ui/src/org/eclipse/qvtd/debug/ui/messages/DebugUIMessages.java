@@ -8,7 +8,7 @@
  * Contributors:
  *     Radek Dvorak - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.debug.ui.actions;
+package org.eclipse.qvtd.debug.ui.messages;
 
 import org.eclipse.osgi.util.NLS;
 

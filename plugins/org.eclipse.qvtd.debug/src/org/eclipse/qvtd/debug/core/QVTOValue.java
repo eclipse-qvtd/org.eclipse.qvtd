@@ -9,18 +9,18 @@ import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.qvtd.debug.vm.VMVariable;
-import org.eclipse.qvtd.debug.vm.Value;
 import org.eclipse.qvtd.debug.vm.protocol.VMDetailRequest;
 import org.eclipse.qvtd.debug.vm.protocol.VMDetailResponse;
 import org.eclipse.qvtd.debug.vm.protocol.VMResponse;
+import org.eclipse.qvtd.debug.vm.protocol.VMValue;
+import org.eclipse.qvtd.debug.vm.protocol.VMVariable;
 import org.eclipse.qvtd.debug.vm.protocol.VMVariableRequest;
 import org.eclipse.qvtd.debug.vm.protocol.VMVariableResponse;
 
 public class QVTOValue extends QVTODebugElement implements IValue {
 			
 	final VMVariable vmVar;
-	private Value vmValue;
+	private VMValue vmValue;
 	private long frameID;
 
 	QVTOValue(IQVTODebugTarget debugTarget, VMVariable vmVar, long frameID) {

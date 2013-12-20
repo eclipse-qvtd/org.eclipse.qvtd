@@ -12,9 +12,9 @@ package org.eclipse.qvtd.debug.vm.protocol;
 
 import org.eclipse.emf.common.util.URI;
 
-public class VMDetailRequest extends VMRequest {
-
-	private static final long serialVersionUID = -5178607839378495025L;
+public class VMDetailRequest extends VMRequest
+{
+	private static final long serialVersionUID = 2420598264493472446L;
 
 	private final String fVariableURI;
 	

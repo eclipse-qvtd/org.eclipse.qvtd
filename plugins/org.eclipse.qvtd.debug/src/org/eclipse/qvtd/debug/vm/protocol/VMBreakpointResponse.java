@@ -13,8 +13,9 @@ package org.eclipse.qvtd.debug.vm.protocol;
 import java.util.List;
 
 
-public class VMBreakpointResponse extends VMResponse {
-	private static final long serialVersionUID = -3465458653297749248L;
+public class VMBreakpointResponse extends VMResponse
+{
+	private static final long serialVersionUID = -8865684549088598599L;
 
 	private long[] fAddedBreakpointsIDs;
 	

@@ -31,7 +31,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeV
 public class ValidBreakpointLocator extends AbstractExtendingQVTimperativeVisitor<Boolean, CompiledUnit>
 {
 	private static final @NonNull ValidBreakpointLocator INSTANCE = new ValidBreakpointLocator();
+	@SuppressWarnings("null")
 	public static final @NonNull Boolean IS_START = Boolean.TRUE;
+	@SuppressWarnings("null")
 	public static final @NonNull Boolean IS_END = Boolean.FALSE;
 	
 	public static @NonNull List<Element> getBreakpointableElementsForLine(@NonNull CompiledUnit compiledModule, final LineNumberProvider lineNumbers, final int lineNumber) {
@@ -52,7 +54,7 @@ public class ValidBreakpointLocator extends AbstractExtendingQVTimperativeVisito
 	private final LineNumberProvider lineNumbers;
 
 	private ValidBreakpointLocator() {
-		super(null);
+		super(new CompiledUnit());
 		this.lineNumber = 0;
 		this.lineNumbers = null;
 	}

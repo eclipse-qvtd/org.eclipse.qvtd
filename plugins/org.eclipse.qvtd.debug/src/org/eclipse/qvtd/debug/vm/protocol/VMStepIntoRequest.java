@@ -10,9 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.vm.protocol;
 
-public class VMStepIntoRequest extends VMRequest {
-
-	private static final long serialVersionUID = -8667471915279186426L;
+public class VMStepIntoRequest extends VMRequest
+{
+	private static final long serialVersionUID = 1180324470610795669L;
 
 	public VMStepIntoRequest() {
 		super();

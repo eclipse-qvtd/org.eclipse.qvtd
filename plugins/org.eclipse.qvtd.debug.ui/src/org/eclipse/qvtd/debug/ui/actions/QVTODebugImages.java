@@ -10,11 +10,14 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.ui.actions;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.swt.graphics.Image;
 
-public class QVTODebugImages {
+public class QVTODebugImages
+{
+	private static final Logger logger = Logger.getLogger(QVTODebugImages.class);
 
 	public static final String CONDITIONAL_BPNT_ENABLED = "conditionalBreakpointEnabled"; //$NON-NLS-1$
 
@@ -46,7 +49,11 @@ public class QVTODebugImages {
 	}
 
 	public static Image getImage(String key) {
-		return fgImageRegistry.get(key);
+		Image image = fgImageRegistry.get(key);
+		if (image == null) {
+			logger.error("No image for '" + key + "'");
+		}
+		return image;
 	}
 
 }

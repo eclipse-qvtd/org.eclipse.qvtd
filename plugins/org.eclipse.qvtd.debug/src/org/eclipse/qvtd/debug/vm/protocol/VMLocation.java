@@ -8,7 +8,7 @@
  * Contributors:
  *     Radek Dvorak - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.debug.vm;
+package org.eclipse.qvtd.debug.vm.protocol;
 
 import java.io.Serializable;
 

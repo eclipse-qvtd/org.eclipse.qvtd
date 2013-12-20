@@ -14,9 +14,9 @@ import java.io.Serializable;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-public class VMResponse implements Serializable {
-	
-	private static final long serialVersionUID = -5622330458726111494L;
+public class VMResponse implements Serializable
+{
+	private static final long serialVersionUID = 8136163293629606805L;
 
 	public static final int STATUS_OK = 0;
 	public static final int STATUS_ERROR = 1;

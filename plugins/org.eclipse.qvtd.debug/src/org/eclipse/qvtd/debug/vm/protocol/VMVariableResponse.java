@@ -12,12 +12,10 @@ package org.eclipse.qvtd.debug.vm.protocol;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.debug.vm.VMVariable;
 
-
-public class VMVariableResponse extends VMResponse {
-	
-	private static final long serialVersionUID = 4349537265414257787L;
+public class VMVariableResponse extends VMResponse
+{
+	private static final long serialVersionUID = -8851333069785318138L;
 
 	public final @NonNull VMVariable variable;
 	public final @Nullable VMVariable[] childVariables;
@@ -36,13 +34,15 @@ public class VMVariableResponse extends VMResponse {
 		s.append(getClass().getSimpleName() + "(" + toStatusString(status));
 		s.append(", ");
 		s.append(variable);
-		if (childVariables != null) {
+		VMVariable[] childVariables2 = childVariables;
+		if (childVariables2 != null) {
 			s.append(", {");
-			for (int i = 0; i < childVariables.length; i++) {
+			for (int i = 0; i < childVariables2.length; i++) {
 				if (i > 0) {
 					s.append(",");
 				}
-				s.append(childVariables[i]);
+				s.append("\n\t");
+				s.append(childVariables2[i]);
 			}
 			s.append("}");
 		}

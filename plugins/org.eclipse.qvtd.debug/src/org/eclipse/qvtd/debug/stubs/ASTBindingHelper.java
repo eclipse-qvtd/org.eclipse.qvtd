@@ -16,12 +16,12 @@ public class ASTBindingHelper
 {
 	private static final class UnitLocation2 implements IModuleSourceInfo, LineNumberProvider		// FIXME Unify with UnitLocation/INode
 	{
-		private @NonNull Element asElement;
+//		private @NonNull Element asElement;
 		private @Nullable ModelElementCS csElement;
 		private @Nullable ICompositeNode node;
 		
 		private UnitLocation2(@NonNull Element asElement) {
-			this.asElement = asElement;
+//			this.asElement = asElement;
 			this.csElement = ElementUtil.getCsElement(asElement);
 			if (csElement != null) {
 				this.node = NodeModelUtils.getNode(csElement);
@@ -30,7 +30,8 @@ public class ASTBindingHelper
 		
 		@Override
 		public int getLineCount() {
-			return node != null ? node.getStartLine() : 0;
+			ICompositeNode node2 = node;
+			return node2 != null ? node2.getStartLine() : 0;
 		}
 
 		@Override
@@ -40,17 +41,18 @@ public class ASTBindingHelper
 
 		@Override
 		public int getLineNumber(int offset) {
-			if (node != null) {
-				int nodeOffset = node.getOffset();
+			ICompositeNode node2 = node;
+			if (node2 != null) {
+				int nodeOffset = node2.getOffset();
 				if (offset == nodeOffset) {
-					return node.getStartLine();
+					return node2.getStartLine();
 				}
-			}
-			ICompositeNode rootNode = node.getRootNode();
-			if (rootNode != null) {
-				ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, offset);
-				if (leafNode != null) {
-					return leafNode.getStartLine();
+				ICompositeNode rootNode = node2.getRootNode();
+				if (rootNode != null) {
+					ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, offset);
+					if (leafNode != null) {
+						return leafNode.getStartLine();
+					}
 				}
 			}
 			throw new UnsupportedOperationException();
@@ -63,7 +65,8 @@ public class ASTBindingHelper
 
 		@Override
 		public URI getSourceURI() {
-			return csElement != null ? csElement.eResource().getURI() : null;
+			ModelElementCS csElement2 = csElement;
+			return csElement2 != null ? csElement2.eResource().getURI() : null;
 		}
 	}
 

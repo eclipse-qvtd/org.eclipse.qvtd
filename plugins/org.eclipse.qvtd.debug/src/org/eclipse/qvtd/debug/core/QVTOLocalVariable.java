@@ -4,8 +4,8 @@ import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.qvtd.debug.core.QVTOLocalValue.LocalValue;
 import org.eclipse.qvtd.debug.vm.VMFrameExecutionContext;
-import org.eclipse.qvtd.debug.vm.VMVariable;
 import org.eclipse.qvtd.debug.vm.VariableFinder;
+import org.eclipse.qvtd.debug.vm.protocol.VMVariable;
 
 public class QVTOLocalVariable extends QVTOVariable {
 	QVTOLocalVariable(IQVTODebugTarget debugTarget, VMVariable vmVar, long frameID, VMFrameExecutionContext execContext) {

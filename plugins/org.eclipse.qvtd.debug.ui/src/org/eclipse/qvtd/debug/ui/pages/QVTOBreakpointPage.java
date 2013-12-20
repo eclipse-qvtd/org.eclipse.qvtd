@@ -24,7 +24,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.qvtd.debug.core.QVTOBreakpoint;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
-import org.eclipse.qvtd.debug.ui.actions.DebugUIMessages;
+import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;

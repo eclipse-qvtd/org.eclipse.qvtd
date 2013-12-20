@@ -1,6 +1,7 @@
 package org.eclipse.qvtd.debug.utils;
 
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationEnvironment;
 
 public class DebugUtils
 {
@@ -19,7 +20,7 @@ public class DebugUtils
 //		return 0;
 //	}
 
-	public static EvaluationEnvironment cloneEvaluationEnv(EvaluationEnvironment evaluationEnvironment) {
+	public static IQVTiEvaluationEnvironment cloneEvaluationEnv(IQVTiEvaluationEnvironment evaluationEnvironment) {
 		// TODO Auto-generated method stub
 		return null;
 	}

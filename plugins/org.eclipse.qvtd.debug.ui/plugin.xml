@@ -112,7 +112,7 @@
           
     <extension point="org.eclipse.debug.ui.debugModelPresentations">
        <debugModelPresentation id="org.eclipse.qvtd.debug"
-             class="org.eclipse.qvtd.debug.ui.actions.QVTODebugModelPresentation"/>
+             class="org.eclipse.qvtd.debug.ui.pages.QVTODebugModelPresentation"/>
     </extension>     
     
    <extension point="org.eclipse.debug.ui.debugModelContextBindings">
