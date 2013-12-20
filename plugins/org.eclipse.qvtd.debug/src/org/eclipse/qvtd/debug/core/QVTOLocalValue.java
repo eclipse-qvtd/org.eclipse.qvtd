@@ -6,8 +6,9 @@ import java.util.List;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
-import org.eclipse.qvtd.debug.vm.VMFrameExecutionContext;
+import org.eclipse.qvtd.debug.evaluator.IDebugEvaluationEnvironment;
 import org.eclipse.qvtd.debug.vm.VariableFinder;
 import org.eclipse.qvtd.debug.vm.protocol.VMVariable;
 
@@ -19,10 +20,10 @@ public class QVTOLocalValue extends QVTOValue {
 	}
 	
 	public QVTOLocalValue(IQVTODebugTarget debugTarget, long frameID,
-			String[] varPath, LocalValue evalResult, VMFrameExecutionContext execContext) {
-		super(debugTarget, createVmVar(varPath, evalResult, execContext.getEvalEnv()), frameID);
+			String[] varPath, LocalValue evalResult, @NonNull IDebugEvaluationEnvironment evaluationEnvironment) {
+		super(debugTarget, createVmVar(varPath, evalResult, evaluationEnvironment), frameID);
 		myFrameID = frameID;
-		myExecContext = execContext;
+		this.evaluationEnvironment = evaluationEnvironment;
 	}
 	
 	@Override
@@ -31,7 +32,7 @@ public class QVTOLocalValue extends QVTOValue {
 		List<IVariable> result = new ArrayList<IVariable>();
 		
 		for (VMVariable nextVar : variables) {
-			result.add(new QVTOLocalVariable(getQVTODebugTarget(), nextVar, myFrameID, myExecContext));
+			result.add(new QVTOLocalVariable(getQVTODebugTarget(), nextVar, myFrameID, evaluationEnvironment));
 		}					
 		
 		return result.toArray(new IVariable[result.size()]);
@@ -40,7 +41,7 @@ public class QVTOLocalValue extends QVTOValue {
 	@Override
 	protected List<VMVariable> requestVariables() throws DebugException {
 		List<VMVariable> vars = new ArrayList<VMVariable>();
-		new VariableFinder(myExecContext, true).collectChildVars(vmVar.valueObject,
+		new VariableFinder(evaluationEnvironment, true).collectChildVars(vmVar.valueObject,
 				VariableFinder.getVariablePath(VariableFinder.parseURI(vmVar.variableURI)), null, vars);
 		return vars;
 	}
@@ -56,5 +57,5 @@ public class QVTOLocalValue extends QVTOValue {
 	}
 
 	private final long myFrameID;
-	private final VMFrameExecutionContext myExecContext;
+	private final @NonNull IDebugEvaluationEnvironment evaluationEnvironment;
 }

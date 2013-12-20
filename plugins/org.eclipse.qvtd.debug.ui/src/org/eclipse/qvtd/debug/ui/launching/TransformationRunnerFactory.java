@@ -22,12 +22,12 @@ public class TransformationRunnerFactory {
 	
 	public EPackage.Registry packageRegistry;
 	
-	public QVTiEnvironmentFactory createEnvironmentFactory() {
+	public @NonNull QVTiEnvironmentFactory createEnvironmentFactory() {
 		EPackage.Registry registry = this.packageRegistry != null ? this.packageRegistry : EPackage.Registry.INSTANCE;
 		return new QVTiEnvironmentFactory(registry, new MetaModelManager());
 	}
 
-	public TransformationRunner createRunner(@NonNull EvaluationContext evaluationContext) throws DiagnosticException {
+	public @NonNull TransformationRunner createRunner(@NonNull EvaluationContext evaluationContext) throws DiagnosticException {
 		BasicDiagnostic diagnostic = QVTdDebugUIPlugin.createDiagnostic("Transformation runner problems");
 		
 		URI uri = null;
@@ -67,7 +67,7 @@ public class TransformationRunnerFactory {
 		return runner;
 	}
 	
-	protected TransformationRunner createRunner(@NonNull EvaluationContext evaluationContext, @NonNull QVTiEnvironmentFactory envFactory) {
+	protected @NonNull TransformationRunner createRunner(@NonNull EvaluationContext evaluationContext, @NonNull QVTiEnvironmentFactory envFactory) {
 		return new TransformationRunner(evaluationContext, envFactory);
 	}
 	

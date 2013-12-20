@@ -55,7 +55,7 @@ public class QVTODebugModelPresentation implements IDebugModelPresentation, IDeb
 	}
 
     public Image getImage(Object element) {
-    	System.out.println("getImage: " + element.getClass().getSimpleName() + " " + element);
+//    	System.out.println("getImage: " + element.getClass().getSimpleName() + " " + element);
     	if (element instanceof QVTOStackFrame) {
         	QVTOStackFrame frame = (QVTOStackFrame) element;
     		VMLocation location = frame.getLocation();
@@ -110,7 +110,7 @@ public class QVTODebugModelPresentation implements IDebugModelPresentation, IDeb
 	}
 
 	public String getText(Object element) {
-    	System.out.println("getImage: " + element.getClass().getSimpleName() + " " + element);
+//    	System.out.println("getText: " + element.getClass().getSimpleName() + " " + element);
         if (element instanceof QVTOStackFrame) {
         	QVTOStackFrame frame = (QVTOStackFrame) element;
     		VMLocation location = frame.getLocation();

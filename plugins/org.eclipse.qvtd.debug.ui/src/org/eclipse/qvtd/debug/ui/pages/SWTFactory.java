@@ -250,9 +250,9 @@ class SWTFactory {
 
 		/**
 		 * @see DialogPage#convertWidthInCharsToPixels
-		 */
+		 *
 		public int convertWidthInCharsToPixels(int chars) {
 			return Dialog.convertWidthInCharsToPixels(fFontMetrics, chars);
-		}
+		} */
 	}
 }

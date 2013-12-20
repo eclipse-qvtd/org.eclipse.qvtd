@@ -16,6 +16,8 @@ import org.eclipse.jdt.annotation.Nullable;
 
 public interface VMLocation extends Serializable {
 
+	int getCharEnd();
+	int getCharStart();
 	int getLineNum();
 
 	String getURI();

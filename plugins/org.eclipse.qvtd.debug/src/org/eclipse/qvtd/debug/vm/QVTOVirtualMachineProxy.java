@@ -14,6 +14,7 @@ import java.io.EOFException;
 import java.io.IOException;
 
 import org.eclipse.emf.common.util.Monitor;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.debug.vm.protocol.VMDisconnectEvent;
 import org.eclipse.qvtd.debug.vm.protocol.VMEvent;
 import org.eclipse.qvtd.debug.vm.protocol.VMRequest;
@@ -24,7 +25,7 @@ import org.eclipse.qvtd.debug.vm.protocol.VMTerminateRequest;
 
 public class QVTOVirtualMachineProxy implements IQVTOVirtualMachineShell {
 
-	private final VMRemoteClient fClient;
+	private final @NonNull VMRemoteClient fClient;
 	private final Object fRequestLock;
 	private final Object fEventLock;
 	
@@ -46,7 +47,7 @@ public class QVTOVirtualMachineProxy implements IQVTOVirtualMachineShell {
 		return !(fIsTerminated || fIsTerminating); 
 	}
 	
-	public VMResponse sendRequest(VMRequest request) throws IOException {
+	public VMResponse sendRequest(@NonNull VMRequest request) throws IOException {
 		synchronized (fRequestLock) {				
 			if(!isAvailable()) {
 				// FIXME report not available error

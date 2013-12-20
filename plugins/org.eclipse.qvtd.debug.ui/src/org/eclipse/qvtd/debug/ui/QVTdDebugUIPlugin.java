@@ -170,8 +170,7 @@ public class QVTdDebugUIPlugin extends AbstractUIPlugin {
 		try {
 			if (getDefault() != null) {
 				// Eclipse environment
-				getDefault().log(
-					new Status(severity, PLUGIN_ID, code, msg, throwable));
+				getDefault().log(new Status(severity, PLUGIN_ID, code, msg, throwable));
 			} else {
 				// not in the Eclipse environment
 				//if (shouldTrace()) {
@@ -287,7 +286,7 @@ public class QVTdDebugUIPlugin extends AbstractUIPlugin {
 	@Override
 	protected ImageRegistry createImageRegistry() {
 		ImageRegistry imageRegistry = super.createImageRegistry();
-//		imageRegistry.put(QVTODebugImages.LOCAL_VARIABLE, imageDescriptor("localvar_obj.gif")); //$NON-NLS-1$		
+		imageRegistry.put(QVTODebugImages.LOCAL_VARIABLE, imageDescriptor("localvar_obj.gif")); //$NON-NLS-1$		
 //		imageRegistry.put(QVTODebugImages.THIS_VARIABLE, imageDescriptor("thisvar_obj.gif")); //$NON-NLS-1$
 //		imageRegistry.put(QVTODebugImages.PREDEFINED_VARIABLE, imageDescriptor("predefvar_obj.gif")); //$NON-NLS-1$
 		imageRegistry.put(QVTODebugImages.MODEL_PARAMETER, imageDescriptor("modelpar_obj.gif")); //$NON-NLS-1$

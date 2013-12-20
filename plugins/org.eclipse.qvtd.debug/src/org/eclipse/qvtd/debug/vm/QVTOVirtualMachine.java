@@ -132,7 +132,7 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
         lv.valueType = localChecker.getConditionType();
         
 		return new QVTOLocalValue(debugTarget, frameID, new String[] {expressionText}, lv, 
-				new UnitLocationExecutionContext(fInterpreter2.getEnvironment(), fInterpreter2.getEvaluationEnvironment()));
+				fInterpreter2.getEvaluationEnvironment());
 	}
 
 	/**
@@ -171,16 +171,18 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
 	
 	private VMResponse handleStackFrameRequest(VMStackFrameRequest request) {
 		DebugRootQVTiEvaluationVisitor fInterpreter2 = fInterpreter;
-		if(fInterpreter2 != null) {
+		if (fInterpreter2 != null) {
 			List<UnitLocation> locationStack = fInterpreter2.getLocationStack();
 			VMStackFrame frame = VMUtils.createStackFrame(request.frameID, locationStack);
-			VMStackFrameResponse response = new VMStackFrameResponse(frame);
-			if(!locationStack.isEmpty()) {
-				UnitLocation topLocation = locationStack.get(0);
-		    	response.isDeferredExecution = topLocation.isDeferredExecution();
+			if (frame != null) {
+				VMStackFrameResponse response = new VMStackFrameResponse(frame);
+				if (!locationStack.isEmpty()) {
+					UnitLocation topLocation = locationStack.get(0);
+			    	response.isDeferredExecution = topLocation.isDeferredExecution();
+				}
+				return response;
 			}
 
-			return response;
 		}
 		
 		// FIXME
@@ -233,9 +235,7 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
 		// FIXME - ensure VM is in SUSPEND state, otherwise report fError
 		DebugRootQVTiEvaluationVisitor fInterpreter2 = fInterpreter;
 		if (fInterpreter2 != null) {
-			UnitLocationExecutionContext context = new UnitLocationExecutionContext(
-					fInterpreter2.getEnvironment(), fInterpreter2.getCurrentLocation().getEvalEnv());
-			String detail = VariableFinder.computeDetail(request.getVariableURI(), context);		
+			String detail = VariableFinder.computeDetail(request.getVariableURI(), fInterpreter2.getCurrentLocation().getEvalEnv());		
 			return new VMDetailResponse(detail != null ? detail : ""); //$NON-NLS-1$
 		}
 		else {
@@ -247,9 +247,7 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
 		// FIXME - ensure VM is in SUSPEND state, otherwise report fError
 		DebugRootQVTiEvaluationVisitor fInterpreter2 = fInterpreter;
 		if (fInterpreter2 != null) {
-			UnitLocationExecutionContext context = new UnitLocationExecutionContext(fInterpreter2.getEnvironment(),
-					fInterpreter2.getCurrentLocation().getEvalEnv());
-			return VariableFinder.process(request, fInterpreter2.getLocationStack(), context);
+			return VariableFinder.process(request, fInterpreter2.getLocationStack(), fInterpreter2.getCurrentLocation().getEvalEnv());
 		}
 		else {
 			return null;
@@ -305,7 +303,7 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
 			return fInterpreter != null;
 		}
 		
-		public void handleVMEvent(VMEvent event) {
+		public void handleVMEvent(@NonNull VMEvent event) {
 			if (DebugQVTiEvaluationVisitor.VM_EVENT.isActive()) {
 				DebugQVTiEvaluationVisitor.VM_EVENT.println("[" + Thread.currentThread().getName() + "] " + event.toString());
 			}
@@ -337,7 +335,7 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
 			}
 		}
 		
-		public VMRequest waitAndPopRequest(VMEvent suspend) throws InterruptedException {
+		public VMRequest waitAndPopRequest(@NonNull VMEvent suspend) throws InterruptedException {
 			// FIXME - should be locked to ensure none can really send a request until
 			// we deliver the event
 			handleVMEvent(suspend);

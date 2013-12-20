@@ -49,7 +49,7 @@ public class ValidBreakpointLocator extends AbstractExtendingQVTimperativeVisito
 		return element.accept(INSTANCE) == IS_START;
 	}
 	
-	private final List<Element> elements = new ArrayList<Element>();
+	private final @NonNull List<Element> elements = new ArrayList<Element>();
 	private final int lineNumber;
 	private final LineNumberProvider lineNumbers;
 
@@ -94,7 +94,8 @@ public class ValidBreakpointLocator extends AbstractExtendingQVTimperativeVisito
 			// already found, can't be spread across multiple modules
 			return elements;
 		}
-		return Collections.emptyList();
+		@SuppressWarnings("null")@NonNull List<Element> emptyList = Collections.emptyList();
+		return emptyList;
 	}
 	
 

@@ -36,19 +36,21 @@ public class UnitLocation {
 	} */
 	
 	private int fLineNum = UNDEF_LINE_NUM;
-	private final int fOffset;
+	private final int startPosition;
+	private final int endPosition;
 	private final int fDepth;	
 	
     private final Element fElement;
     private final Transformation fModule;    
     private final NamedElement fOperation;
-    private final IDebugEvaluationEnvironment fEvalEnv;    
+    private final @NonNull IDebugEvaluationEnvironment fEvalEnv;    
 	private IModuleSourceInfo fSrcInfo;
 	
-	public UnitLocation(int position, @NonNull IDebugEvaluationEnvironment evalEnv, @NonNull Element element) {
+	public UnitLocation(int startPosition, int endPosition, @NonNull IDebugEvaluationEnvironment evalEnv, @NonNull Element element) {
 		fEvalEnv = evalEnv;
 		fElement = element;
-		fOffset = position;
+		this.startPosition = startPosition;
+		this.endPosition = endPosition;
 		fDepth = evalEnv.getDepth();
 		fOperation = evalEnv.getOperation();
 		
@@ -80,15 +82,19 @@ public class UnitLocation {
         return fOperation;
     }
     
-	public IDebugEvaluationEnvironment getEvalEnv() {
+	public @NonNull IDebugEvaluationEnvironment getEvalEnv() {
 		return fEvalEnv;
 	} 
+	
+	public int getEndPosition() {
+		return endPosition;
+	}
 	
 	public int getLineNum() {
 		if(fLineNum == UNDEF_LINE_NUM) {
 			int newLine = -1;
-			if(fOffset >= 0) {
-				newLine = getSourceInfo().getLineNumberProvider().getLineNumber(fOffset);				
+			if (startPosition >= 0) {
+				newLine = getSourceInfo().getLineNumberProvider().getLineNumber(startPosition);				
 			}
 			
 			return fLineNum = newLine;
@@ -97,8 +103,8 @@ public class UnitLocation {
 		return fLineNum;
 	}
 	
-	public int getOffset() {
-		return fOffset;
+	public int getStartPosition() {
+		return startPosition;
 	}
 	
 	public int getStackDepth() {
@@ -114,7 +120,8 @@ public class UnitLocation {
     }
 	
     public boolean isTheSameLocation(UnitLocation location) {
-    	return (fEvalEnv == location.fEvalEnv) && (getLineNum() == location.getLineNum()) && (fOffset == location.fOffset);
+    	return (fEvalEnv == location.fEvalEnv) && (getLineNum() == location.getLineNum())
+    			&& (startPosition == location.startPosition) && (endPosition == location.endPosition);
     }
     
 	@Override
@@ -125,7 +132,7 @@ public class UnitLocation {
 		
 		UnitLocation location = (UnitLocation) another;
 		return this == location || 
-				(fOffset == location.fOffset
+				(startPosition == location.startPosition
 				&& fDepth == location.fDepth
 				&& fEvalEnv == location.fEvalEnv
 				&& fElement.equals(location.fElement));
@@ -134,7 +141,8 @@ public class UnitLocation {
 	@Override
 	public int hashCode() {
 		int hash = 17;
-		hash = 37 * hash + fOffset;
+		hash = 37 * hash + startPosition;
+		hash = 37 * hash + endPosition;
 		hash = 37 * hash + fDepth;		
 		hash = 37 * hash + fElement.hashCode();		
 		return hash;
@@ -142,7 +150,7 @@ public class UnitLocation {
 	
 	@Override
 	public String toString() {
-		return fModule.getName() + ":" + getLineNum() + ":" + fOffset  + ":" + fDepth; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return fModule.getName() + ":" + getLineNum() + ":" + startPosition  + ":" + fDepth; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	private IModuleSourceInfo getSourceInfo() {

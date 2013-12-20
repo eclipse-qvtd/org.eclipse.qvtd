@@ -22,6 +22,7 @@ public class VMValue implements Serializable
 	public static final int OBJECT_REF = 1;
 	public static final int COLLECTION_REF = 2;
 	public static final int INVALID = 3;
+	public static final int RESOURCE = 4;
 
 	public static @NonNull String toValueString(int status) {
 		switch (status) {
@@ -29,6 +30,7 @@ public class VMValue implements Serializable
 		case OBJECT_REF: return "OBJECT_REF";
 		case COLLECTION_REF: return "COLLECTION_REF";
 		case INVALID: return "INVALID";
+		case RESOURCE: return "RESOURCE";
 		}
 		return "???";
 	}

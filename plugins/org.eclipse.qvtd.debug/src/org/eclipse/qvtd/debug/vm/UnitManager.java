@@ -35,9 +35,6 @@ public class UnitManager
 	private Map<URI, UnitEntry> fUri2UnitMap;
 	
 	UnitManager(@NonNull MetaModelManager metaModelManager, @NonNull CompiledUnit mainUnit) {
-		if(mainUnit == null) {
-			throw new IllegalArgumentException("null main unit"); //$NON-NLS-1$
-		}
 		this.metaModelManager = metaModelManager;
 		fMainUnit = mainUnit;
 		try {
@@ -48,7 +45,7 @@ public class UnitManager
 		}
 	}	
 	
-	public CompiledUnit getMainUnit() {
+	public @NonNull CompiledUnit getMainUnit() {
 		return fMainUnit;
 	}
 	
@@ -83,7 +80,7 @@ public class UnitManager
     	return null;
     }	
 	
-	private Map<URI, UnitEntry> createURI2UnitMap(CompiledUnit mainUnit) throws IOException {
+	private @NonNull Map<URI, UnitEntry> createURI2UnitMap(CompiledUnit mainUnit) throws IOException {
 		HashSet<CompiledUnit> allUnits = new HashSet<CompiledUnit>();
 		allUnits.add(mainUnit);
 		QvtOperationalParserUtil.collectAllImports(mainUnit, allUnits);
@@ -103,15 +100,15 @@ public class UnitManager
 	    
     private static class UnitEntry implements LineNumberProvider {
     	
-        private final CompiledUnit fModule;  
-        private LineNumberProvider fProvider;    	
+        private final @NonNull CompiledUnit fModule;  
+        private final @NonNull LineNumberProvider fProvider;    	
 
-        public UnitEntry(CompiledUnit unit, LineNumberProvider lineNumberProvider) {
+        public UnitEntry(@NonNull CompiledUnit unit, @NonNull LineNumberProvider lineNumberProvider) {
             fModule = unit;
     		fProvider = lineNumberProvider;
         }
         
-        public CompiledUnit getCompiledModule() {
+        public @NonNull CompiledUnit getCompiledModule() {
             return fModule;
         }
         

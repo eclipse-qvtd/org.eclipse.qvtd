@@ -3,6 +3,7 @@ package org.eclipse.qvtd.debug.vm;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -14,7 +15,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 public class VMUtils
 {
-	public static VMStackFrame createStackFrame(long frameID, List<UnitLocation> stack) {	
+	public static @Nullable VMStackFrame createStackFrame(long frameID, List<UnitLocation> stack) {	
 		UnitLocation location = lookupEnvironmentByID(frameID, stack);
 		if (location != null) {
 			return createStackFrame(location);
@@ -51,7 +52,7 @@ public class VMUtils
 		
 		List<VMVariable> vars = VariableFinder.getVariables(evalEnv);
 		VMStackFrame vmStackFrame = new VMStackFrame(evalEnv.getID(), location.getURI().toString(), moduleName, 
-					operSignature, location.getLineNum(), vars.toArray(new VMVariable[vars.size()]));
+					operSignature, location.getLineNum(), location.getStartPosition(), location.getEndPosition(), vars.toArray(new VMVariable[vars.size()]));
 		return vmStackFrame;
 	}
 	

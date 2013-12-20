@@ -301,7 +301,7 @@ public class MainTab extends AbstractLaunchConfigurationTab implements ModifyLis
 
 	protected void refreshParametersGroup(@NonNull Group group, int style, Map<String, String> map) {
 		List<String> keys = new ArrayList<String>(map.keySet());
-		Collections.sort(keys);;
+		Collections.sort(keys);
 		Control[] children = group.getChildren();
 		int iMax = Math.min(children.length, keys.size());
 		int i = 0;

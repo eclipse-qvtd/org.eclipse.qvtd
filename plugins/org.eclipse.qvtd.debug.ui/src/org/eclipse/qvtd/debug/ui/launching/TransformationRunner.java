@@ -1,18 +1,10 @@
 package org.eclipse.qvtd.debug.ui.launching;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.osgi.util.NLS;
 import org.eclipse.qvtd.debug.core.EvaluationContext;
 import org.eclipse.qvtd.debug.stubs.ExecutionDiagnostic;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
@@ -160,7 +152,7 @@ public class TransformationRunner  {
 			ExecutionDiagnostic execDiagnostic = fExecutor.execute(evaluationContext); //, params);
 			handleExecution(execDiagnostic);
 			
-			Trace traces = fExecutor.fTraces;
+//			Trace traces = fExecutor.fTraces;
 			fExecutor.fTraces = null;
 
 			if(!isSuccess(execDiagnostic)) {
@@ -188,7 +180,7 @@ public class TransformationRunner  {
 		}			
 	}
 	
-	private Diagnostic saveTraces(Trace trace) { 
+/*	private Diagnostic saveTraces(Trace trace) { 
 		if(fTraceFileURI != null) {
 			Resource resource = new ResourceSetImpl().createResource(fTraceFileURI);
 			resource.getContents().add(trace);
@@ -204,7 +196,7 @@ public class TransformationRunner  {
 		}
 		
 		return Diagnostic.OK_INSTANCE;
-	}
+	} */
 	
 	/**
 	 * Successfully finished execution, no errors and user interruption 

@@ -31,6 +31,14 @@ public class VMStackFrame implements Serializable
 		private Loc(@NonNull VMStackFrame frame) {
 			this.frame = frame;
 		}
+		
+		public int getCharEnd() {
+			return frame.charEnd;
+		}
+		
+		public int getCharStart() {
+			return frame.charStart;
+		}
 	
 		/* (non-Javadoc)
 		 * @see org.eclipse.m2m.qvt.oml.debug.core.vm.VMLocation#getLineNum()
@@ -65,13 +73,15 @@ public class VMStackFrame implements Serializable
 	public long id;
 	private String uri;
 	private int lineNum;	
+	private int charStart;	
+	private int charEnd;	
 	public String module;
 	public String operationSignature;	
 	public @Nullable VMVariable[] visibleVariables;
 	
 	private transient VMLocation location;	
 	
-	public VMStackFrame(long id, String uri, String module, String operationSignature, int line, @Nullable VMVariable[] vars) {
+	public VMStackFrame(long id, String uri, String module, String operationSignature, int line, int startPosition, int endPosition, @Nullable VMVariable[] vars) {
 //		if(vars != null && (vars.length == 0 || Arrays.asList(vars).contains(null))) {
 //			throw new IllegalArgumentException();
 //		}
@@ -82,6 +92,8 @@ public class VMStackFrame implements Serializable
 		this.operationSignature = operationSignature;
 		this.visibleVariables = vars;
 		this.lineNum = line;
+		this.charStart = startPosition;
+		this.charEnd = endPosition;
 	}
 	
 	public synchronized @NonNull VMLocation getLocation() {
@@ -107,6 +119,7 @@ public class VMStackFrame implements Serializable
 		s.append(", ").append(uri);
 		s.append(":").append(module);
 		s.append(":").append(lineNum);
+		s.append(":").append(charStart);
 		s.append(", ").append(operationSignature);
 		VMVariable[] visibleVariables2 = visibleVariables;
 		if (visibleVariables2 != null) {

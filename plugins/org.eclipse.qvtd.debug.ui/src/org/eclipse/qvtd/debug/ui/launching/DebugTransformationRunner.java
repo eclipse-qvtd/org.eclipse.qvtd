@@ -116,7 +116,7 @@ public class DebugTransformationRunner extends TransformationRunner
 				return getExecutor().getUnit();
 			}
 			
-			public void connect(IQVTODebuggerShell debugShell) {
+			public void connect(@NonNull IQVTODebuggerShell debugShell) {
 				fDebugShell = debugShell;			
 			}			
 		};

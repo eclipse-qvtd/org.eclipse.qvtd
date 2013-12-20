@@ -72,14 +72,19 @@ public class DebugLaunchConfigurationDelegate extends AbstractLaunchConfiguratio
 	private EvaluationContext createEvaluationContext(ILaunchConfiguration configuration) throws CoreException {
 		EvaluationContext evaluationContext = new EvaluationContext();
 		String txName = configuration.getAttribute(TX_KEY, "");
-		evaluationContext.setTransformationURI(URI.createURI(txName, true));
+		@SuppressWarnings("null")@NonNull URI txURI = URI.createURI(txName, true);
+		evaluationContext.setTransformationURI(txURI);
 		final Map<String, String> inMap = configuration.getAttribute(IN_KEY, EMPTY_MAP);
 		for (Map.Entry<String, String> inEntry : inMap.entrySet()) {
-			evaluationContext.addInputURI(inEntry.getKey(), URI.createURI(inEntry.getValue(), true));
+			@SuppressWarnings("null")@NonNull String inKey = inEntry.getKey();
+			@SuppressWarnings("null")@NonNull URI inURI = URI.createURI(inEntry.getValue(), true);
+			evaluationContext.addInputURI(inKey, inURI);
 		}
 		final Map<String, String> outMap = configuration.getAttribute(OUT_KEY, EMPTY_MAP);
 		for (Map.Entry<String, String> outEntry : outMap.entrySet()) {
-			evaluationContext.addOutputURI(outEntry.getKey(), URI.createURI(outEntry.getValue(), true));
+			@SuppressWarnings("null")@NonNull String outKey = outEntry.getKey();
+			@SuppressWarnings("null")@NonNull URI outURI = URI.createURI(outEntry.getValue(), true);
+			evaluationContext.addOutputURI(outKey, outURI);
 		}
 		return evaluationContext;
 	}

@@ -227,10 +227,14 @@ public class InternalTransformationExecutor
 			QVTiXtextEvaluator xtextEvaluator2 = new QVTiXtextEvaluator(envFactory, DomainUtil.nonNullState(evaluationContext.getTransformationURI()));
 			xtextEvaluator = xtextEvaluator2;
 			for (Map.Entry<String, URI> inEntry : evaluationContext.getInputURIs().entrySet()) {
-				xtextEvaluator2.loadModel(inEntry.getKey(), inEntry.getValue(), null);
+				@SuppressWarnings("null")@NonNull String inKey = inEntry.getKey();
+				@SuppressWarnings("null")@NonNull URI inURI = inEntry.getValue();
+				xtextEvaluator2.loadModel(inKey, inURI, null);
 			}
 			for (Map.Entry<String, URI> outEntry : evaluationContext.getOutputURIs().entrySet()) {
-				xtextEvaluator2.createModel(outEntry.getKey(), outEntry.getValue(), null);
+				@SuppressWarnings("null")@NonNull String outKey = outEntry.getKey();
+				@SuppressWarnings("null")@NonNull URI outURI = outEntry.getValue();
+				xtextEvaluator2.createModel(outKey, outURI, null);
 			}
 			fCompiledUnit = new CompiledUnit(xtextEvaluator2.getTransformation());
 		} catch (Exception e) {

@@ -13,17 +13,17 @@ public class DebugRunnerFactory extends TransformationRunnerFactory {
 		super();
 	}
 
-	public QVTiEnvironmentFactory createEnvironmentFactory() {
+	public @NonNull QVTiEnvironmentFactory createEnvironmentFactory() {
 		EPackage.Registry registry = this.packageRegistry != null ? this.packageRegistry : EPackage.Registry.INSTANCE;
 		return new DebugQVTiEnvironmentFactory(registry, new MetaModelManager());
 	}
 	
-	protected TransformationRunner createRunner(@NonNull EvaluationContext evaluationContext, @NonNull QVTiEnvironmentFactory envFactory) {
+	protected @NonNull TransformationRunner createRunner(@NonNull EvaluationContext evaluationContext, @NonNull QVTiEnvironmentFactory envFactory) {
 		return new DebugTransformationRunner(evaluationContext, envFactory);
 	}
 
 	@Override
-	public DebugTransformationRunner createRunner(@NonNull EvaluationContext evaluationContext) throws DiagnosticException {
+	public @NonNull DebugTransformationRunner createRunner(@NonNull EvaluationContext evaluationContext) throws DiagnosticException {
 		return (DebugTransformationRunner) super.createRunner(evaluationContext);
 	}
 }

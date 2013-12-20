@@ -140,7 +140,7 @@ public class DebugRootQVTiEvaluationVisitor extends DebugQVTiEvaluationVisitor
 		IDebugEvaluationEnvironment leafEvaluationEnvironment = visitorStack.peek().getEvaluationEnvironment();
 		for (IDebugEvaluationEnvironment evaluationEnvironment = leafEvaluationEnvironment; evaluationEnvironment != null; evaluationEnvironment = evaluationEnvironment.getParentEvaluationEnvironment()) {
 			Element currentIP = evaluationEnvironment.getCurrentIP();
-			UnitLocation unitLocation = newLocalLocation(evaluationEnvironment, currentIP, ASTBindingHelper.getStartPosition(currentIP)); 
+			UnitLocation unitLocation = newLocalLocation(evaluationEnvironment, currentIP, ASTBindingHelper.getStartPosition(currentIP), ASTBindingHelper.getEndPosition(currentIP)); 
 			fLocationStack.add(unitLocation);
 		}
 		return fLocationStack;
@@ -250,8 +250,8 @@ public class DebugRootQVTiEvaluationVisitor extends DebugQVTiEvaluationVisitor
 		
 	}
 
-	private UnitLocation newLocalLocation(@NonNull IDebugEvaluationEnvironment evalEnv, @NonNull Element node, int offset) {//, int length) {
-		return new UnitLocation(offset, evalEnv, node);
+	private UnitLocation newLocalLocation(@NonNull IDebugEvaluationEnvironment evalEnv, @NonNull Element node, int startPosition, int endPosition) {//, int length) {
+		return new UnitLocation(startPosition, endPosition, evalEnv, node);
 	}
 
 	public void popVisitor(@NonNull DebugNestedQVTiEvaluationVisitor evaluationVisitor) {
@@ -265,19 +265,23 @@ public class DebugRootQVTiEvaluationVisitor extends DebugQVTiEvaluationVisitor
 	protected void postVisit(@NonNull IDebugEvaluationEnvironment evalEnv, @NonNull Element element, Object preState) {
 		if (element instanceof Transformation) {
 			// 
-		} else if (element instanceof Operation) {
-			UnitLocation endLocation = newLocalLocation(evalEnv, element, ASTBindingHelper.getEndPosition(element)); //, 1);
-			setCurrentLocation(element, endLocation, true);
-		} else if (element instanceof EStructuralFeature) {
-			// result = null;
-		} else if (element instanceof LoopExp) {
-			if (preState instanceof VMBreakpoint) {
-				fIterateBPHelper.removeIterateBreakpoint((VMBreakpoint) preState);
-			}
 		} else {
-			UnitLocation el = newLocalLocation(evalEnv, element, ASTBindingHelper.getEndPosition(element) - 1); //, 1);
-			
-			setCurrentLocation(element, el, true);
+			if (element instanceof Operation) {
+				int endPosition = ASTBindingHelper.getEndPosition(element);
+				UnitLocation endLocation = newLocalLocation(evalEnv, element, endPosition, endPosition); //, 1);
+				setCurrentLocation(element, endLocation, true);
+			} else if (element instanceof EStructuralFeature) {
+				// result = null;
+			} else if (element instanceof LoopExp) {
+				if (preState instanceof VMBreakpoint) {
+					fIterateBPHelper.removeIterateBreakpoint((VMBreakpoint) preState);
+				}
+			} else {
+				int endPosition = ASTBindingHelper.getEndPosition(element);
+				UnitLocation el = newLocalLocation(evalEnv, element, endPosition - 1, endPosition); //, 1);
+				
+				setCurrentLocation(element, el, true);
+			}
 		}
 	}
 
@@ -303,14 +307,14 @@ public class DebugRootQVTiEvaluationVisitor extends DebugQVTiEvaluationVisitor
 			}
 			
 		} else if (ValidBreakpointLocator.isBreakpointableElementStart(element)) {
-			UnitLocation startLocation = newLocalLocation(evalEnv, element, ASTBindingHelper.getStartPosition(element)); //, getNodeLength(element));
+			UnitLocation startLocation = newLocalLocation(evalEnv, element, ASTBindingHelper.getStartPosition(element), ASTBindingHelper.getEndPosition(element)); //, getNodeLength(element));
 
 			setCurrentLocation(element, startLocation, false);
 			// FIXME - review, should process the debug request in all cases
 			processDebugRequest(startLocation);
 
 		} else {
-			setCurrentLocation(element, newLocalLocation(evalEnv, element, ASTBindingHelper.getStartPosition(element)/*, getNodeLength(element)*/), false);
+			setCurrentLocation(element, newLocalLocation(evalEnv, element, ASTBindingHelper.getStartPosition(element), ASTBindingHelper.getEndPosition(element)/*, getNodeLength(element)*/), false);
 		}
 		return null; //result;
 	}
@@ -338,7 +342,7 @@ public class DebugRootQVTiEvaluationVisitor extends DebugQVTiEvaluationVisitor
 //		}
 
 		// do not change to position-less locations
-		if (newLocation.getOffset() < 0) {
+		if (newLocation.getStartPosition() < 0) {
 			return;
 		}
 

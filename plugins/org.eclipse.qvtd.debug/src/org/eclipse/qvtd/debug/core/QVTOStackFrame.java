@@ -106,13 +106,15 @@ public class QVTOStackFrame extends QVTODebugElement implements IStackFrame {
 
 	public int getCharStart() throws DebugException {		
 //		return getLocation().getElement().getStartPosition();
-		return -1;
+		return getLocation().getCharStart();
+//		return -1;
 	}
 
 	public int getCharEnd() throws DebugException {
 //		 int endPos = getLocation().getElement().getEndPosition();
 //		 return (endPos >= 0) ? endPos + 1 : -1;
-		return -1;
+		return getLocation().getCharEnd();
+//		return -1;
 	}
 
 	public String getName() throws DebugException {

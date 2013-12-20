@@ -28,17 +28,16 @@ import org.eclipse.qvtd.debug.vm.protocol.BreakpointData;
 import org.eclipse.qvtd.debug.vm.protocol.NewBreakpointData;
 
 
-public class VMBreakpointManager {
-    
-	private final Map<EObject, VMBreakpoint> fElement2Breakpoint;
-	
+public class VMBreakpointManager
+{
 	protected final @NonNull MetaModelManager metaModelManager;
-	private final UnitManager fUnitManager;
+	private final @NonNull UnitManager fUnitManager;
+	private final @NonNull Map<EObject, VMBreakpoint> fElement2Breakpoint = new HashMap<EObject, VMBreakpoint>();
 	
     // FIXME - Simulates an fBreakpointID that does not come from the VM client
     // based on the knowledge that marker long fBreakpointID is used (positive number)
 	// this one will be negative long
-    long fPrivateBreakpointID = 0;
+	private long fPrivateBreakpointID = 0;
 
 
 	public VMBreakpointManager(@NonNull MetaModelManager metaModelManager, @Nullable CompiledUnit mainUnit) {
@@ -47,20 +46,20 @@ public class VMBreakpointManager {
 		}
 		this.metaModelManager = metaModelManager;
 		fUnitManager = new UnitManager(metaModelManager, mainUnit);
-		fElement2Breakpoint = new HashMap<EObject, VMBreakpoint>();
 	}
 			
-	public UnitManager getUnitManager() {
+	public @NonNull UnitManager getUnitManager() {
 		return fUnitManager;
 	}
 	
-	public synchronized List<VMBreakpoint> getBreakpoints(Element e) {
+	@SuppressWarnings("null")
+	public synchronized @NonNull List<VMBreakpoint> getBreakpoints(Element e) {
 		VMBreakpoint breakpoint = fElement2Breakpoint.get(e);
 		return (breakpoint != null) ? Collections.singletonList(breakpoint) : Collections.<VMBreakpoint>emptyList();
 	}
 	
 	
-	public synchronized VMBreakpoint createBreakpoint(NewBreakpointData data) {
+	public synchronized @Nullable VMBreakpoint createBreakpoint(NewBreakpointData data) {
     	// FIXME - raise CoreEXxc... for invalid uris
     	URI uri = URI.createURI(data.targetURI);
     	
@@ -86,7 +85,7 @@ public class VMBreakpointManager {
     }
 
     
-    public synchronized VMBreakpoint createVMPrivateBreakpoint(URI unitURI, Element element, int line, boolean isTemporary) throws CoreException {
+    public synchronized @NonNull VMBreakpoint createVMPrivateBreakpoint(URI unitURI, Element element, int line, boolean isTemporary) throws CoreException {
         NewBreakpointData bpData = new NewBreakpointData();
         bpData.ID = --fPrivateBreakpointID;
         bpData.targetURI = unitURI.toString();
@@ -104,13 +103,15 @@ public class VMBreakpointManager {
     
 	public synchronized Element getBreakpointableElement(URI targetURI, int lineNumber) {
         LineNumberProvider lineNumberProvider = fUnitManager.getLineNumberProvider(targetURI);
-        if(lineNumberProvider == null) {
+        if (lineNumberProvider == null) {
         	return null;
         }
-        
 		CompiledUnit unit = fUnitManager.getCompiledModule(targetURI);
+        if (unit == null) {
+        	return null;
+        }
         List<Element> elements = ValidBreakpointLocator.getBreakpointableElementsForLine(unit, lineNumberProvider, lineNumber);
-        if(elements.isEmpty()) {
+        if (elements.isEmpty()) {
             return null;
         }
         
@@ -118,7 +119,7 @@ public class VMBreakpointManager {
     }
 	
 
-    public boolean removeBreakpoint(VMBreakpoint breakpoint) {
+    public boolean removeBreakpoint(@NonNull VMBreakpoint breakpoint) {
     	return removeBreakpoint(breakpoint.getID());
     }
 		

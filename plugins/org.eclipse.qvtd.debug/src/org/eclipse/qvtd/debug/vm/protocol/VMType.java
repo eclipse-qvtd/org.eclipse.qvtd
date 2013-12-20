@@ -21,12 +21,14 @@ public class VMType implements Serializable
 	public static final int DATATYPE = 0;
 	public static final int EOBJECT = 1;		
 	public static final int COLLECTION = 2;
+	public static final int RESOURCE = 3;
 
 	public static @NonNull String toTypeString(int status) {
 		switch (status) {
 		case DATATYPE: return "DATATYPE";
 		case EOBJECT: return "EOBJECT";
 		case COLLECTION: return "COLLECTION";
+		case RESOURCE: return "RESOURCE";
 		}
 		return "???";
 	}

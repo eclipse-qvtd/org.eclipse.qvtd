@@ -35,8 +35,9 @@ public class DebugNestedEvaluationEnvironment extends QVTiNestedEvaluationEnviro
 //			return null;
 //		}
 //		else {
-			int offset = ASTBindingHelper.getStartPosition(myCurrentIP);
-			return new UnitLocation(offset, this, myCurrentIP); 
+		int startPosition = ASTBindingHelper.getStartPosition(myCurrentIP);
+		int endPosition = ASTBindingHelper.getEndPosition(myCurrentIP);
+			return new UnitLocation(startPosition, endPosition, this, myCurrentIP); 
 //		}
 	}
 
