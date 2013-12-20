@@ -18,6 +18,7 @@ package org.eclipse.qvtd.xtext.qvtrelation.ui;
 
 import java.util.List;
 
+import org.eclipse.qvtd.xtext.qvtrelation.ui.internal.QVTrelationActivator;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
@@ -28,7 +29,10 @@ import com.google.common.collect.Multimap;
 /**
  * Use this class to register components to be used within the IDE.
  */
-public class QVTrelationUiModule extends org.eclipse.qvtd.xtext.qvtrelation.ui.AbstractQVTrelationUiModule {
+public class QVTrelationUiModule extends org.eclipse.qvtd.xtext.qvtrelation.ui.AbstractQVTrelationUiModule
+{
+	public static final String EDITOR_ID = QVTrelationActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTRELATION_QVTRELATION;
+
 	public QVTrelationUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}

@@ -18,6 +18,7 @@ package org.eclipse.qvtd.xtext.qvtcore.ui;
 
 import java.util.List;
 
+import org.eclipse.qvtd.xtext.qvtcore.ui.internal.QVTcoreActivator;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
@@ -28,7 +29,10 @@ import com.google.common.collect.Multimap;
 /**
  * Use this class to register components to be used within the IDE.
  */
-public class QVTcoreUiModule extends org.eclipse.qvtd.xtext.qvtcore.ui.AbstractQVTcoreUiModule {
+public class QVTcoreUiModule extends org.eclipse.qvtd.xtext.qvtcore.ui.AbstractQVTcoreUiModule
+{
+	public static final String EDITOR_ID = QVTcoreActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTCORE_QVTCORE;
+
 	public QVTcoreUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}

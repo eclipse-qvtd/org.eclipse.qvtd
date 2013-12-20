@@ -9,6 +9,11 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
+<<<<<<< Upstream, based on master
+=======
+ *
+ * </copyright>
+>>>>>>> f7af591 [wip] Line breakpoint editing works
  */
 package org.eclipse.qvtd.xtext.qvtimperative.ui;
 
