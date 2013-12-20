@@ -9,6 +9,7 @@ import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.qvtd.debug.utils.IModuleSourceInfo;
 import org.eclipse.qvtd.debug.utils.LineNumberProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 public class ASTBindingHelper
@@ -43,6 +44,13 @@ public class ASTBindingHelper
 				int nodeOffset = node.getOffset();
 				if (offset == nodeOffset) {
 					return node.getStartLine();
+				}
+			}
+			ICompositeNode rootNode = node.getRootNode();
+			if (rootNode != null) {
+				ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, offset);
+				if (leafNode != null) {
+					return leafNode.getStartLine();
 				}
 			}
 			throw new UnsupportedOperationException();

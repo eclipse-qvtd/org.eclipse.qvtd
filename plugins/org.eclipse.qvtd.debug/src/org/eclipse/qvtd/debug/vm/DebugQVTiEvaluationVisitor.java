@@ -642,4 +642,15 @@ public final class DebugQVTiEvaluationVisitor extends AbstractWrappingQVTimperat
 	public void setLogger(@Nullable DomainLogger logger) {
 		delegate.setLogger(logger);
 	}
+
+	@Override
+	public @Nullable Object visitTransformation(@NonNull Transformation object) {
+	    try {
+	    	pushedStack(getEvaluationEnvironment());
+			return super.visitTransformation(object);
+	    }
+	    finally {
+//	    	poppedStack();
+	    }
+	}
 }

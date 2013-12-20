@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.debug.stubs.QVTODebugUtil;
 import org.osgi.framework.BundleContext;
 
 public class QVTdDebugPlugin extends Plugin
@@ -124,9 +125,29 @@ public class QVTdDebugPlugin extends Plugin
 		super.stop(bundleContext);
 	}
 
-	public IFile resolveWorskpaceFile(URI unitURI) {
-		// TODO Auto-generated method stub
-		return null;
+	public IFile resolveWorskpaceFile(URI uri) {
+		IFile sourceFile = QVTODebugUtil.toFile(uri);
+
+/*		if(sourceFile == null && uri.isPlatformPlugin() && uri.segmentCount() > 2) {
+			Map<URI, URI> uriMap = getPlatformPluginMap();
+			
+			URI baseURI = uri.trimSegments(uri.segmentCount() - 2);
+
+			// key requires trailing slash
+			URI key = baseURI.appendSegment(""); //$NON-NLS-1$
+			URI mappedBaseURI = uriMap.get(key);
+			if(mappedBaseURI == null) {
+				mappedBaseURI = uriMap.get(baseURI);
+			}
+
+			if(mappedBaseURI != null) {
+				List<String> segmentsList = uri.segmentsList();				
+				segmentsList = segmentsList.subList(2, segmentsList.size());
+				URI mappedURI = mappedBaseURI.appendSegments(segmentsList.toArray(new String[segmentsList.size()]));			
+				sourceFile = QVTODebugUtil.toFile(mappedURI);
+			}
+		} */
+		return sourceFile;
 	}
 
 }

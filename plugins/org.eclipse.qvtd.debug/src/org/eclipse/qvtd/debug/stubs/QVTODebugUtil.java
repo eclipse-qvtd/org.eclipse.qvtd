@@ -21,11 +21,11 @@ public class QVTODebugUtil
 	}
 
 	public static IStatus createDebugError(String string, IOException e) {
-		throw new UnsupportedOperationException();
+		return QVTODebugCore.createStatus(IStatus.ERROR, string, e);
 	}
 
 	public static URI getResourceURI(IResource resource) {
-		throw new UnsupportedOperationException();
+		return URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
 	}
 
 	public static IFile toFile(URI uri) {

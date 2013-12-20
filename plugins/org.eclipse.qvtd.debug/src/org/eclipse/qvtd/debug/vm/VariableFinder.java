@@ -13,11 +13,14 @@ package org.eclipse.qvtd.debug.vm;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.qvtd.debug.stubs.ModelInstance;
 import org.eclipse.qvtd.debug.utils.DebugUtils;
@@ -425,21 +428,22 @@ public class VariableFinder {
 	static List<VMVariable> getVariables(EvaluationEnvironment evalEnv) {
 		List<VMVariable> result = new ArrayList<VMVariable>();
 
-/*		for (String varName : evalEnv.getNames()) {
+		for (DomainTypedElement variable : evalEnv.getVariables()) {
 			VMVariable var = new VMVariable();
+			String varName = variable.getName();
 			var.name = varName;
-			if (isPredefinedVar(varName, evalEnv)) {
-				var.kind = VMVariable.PREDEFINED_VAR;
-			}
+//			if (isPredefinedVar(varName, evalEnv)) {
+//				var.kind = VMVariable.PREDEFINED_VAR;
+//			}
 
-			Object value = evalEnv.getValueOf(varName);
-			Type declaredType = evalEnv.getTypeOf(varName);
+			Object value = evalEnv.getValueOf((VariableDeclaration) variable);
+			Type declaredType = (Type) variable.getType();
 			setValueAndType(var, value, declaredType, evalEnv);
 
 			result.add(var);
 		}
 		
-		Map<String, ModelInstance> modelParameterVariables = getModelParameterVariables(evalEnv);
+/*		Map<String, ModelInstance> modelParameterVariables = getModelParameterVariables(evalEnv);
 		for (String modelParam : modelParameterVariables.keySet()) {
 			ModelInstance model = modelParameterVariables.get(modelParam);
 			VMVariable var = new VMVariable();

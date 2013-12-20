@@ -27,6 +27,7 @@ public class DebugRootEvaluationEnvironment extends QVTiRootEvaluationEnvironmen
 
     public DebugRootEvaluationEnvironment(@NonNull MetaModelManager metaModelManager, @NonNull Transformation transformation) {
 		super(metaModelManager, transformation);
+		myCurrentIP = transformation;
 	}
 
 //    @Override
