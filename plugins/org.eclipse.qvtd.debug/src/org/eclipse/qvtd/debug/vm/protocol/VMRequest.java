@@ -19,4 +19,8 @@ public abstract class VMRequest implements Serializable {
 	protected VMRequest() {
 		super();
 	}
+	
+	public String toString() {
+		return getClass().getSimpleName() + "()";
+	}
 }

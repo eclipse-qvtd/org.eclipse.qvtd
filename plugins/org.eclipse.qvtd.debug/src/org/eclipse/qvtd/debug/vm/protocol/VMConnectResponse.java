@@ -28,6 +28,6 @@ public class VMConnectResponse extends VMResponse {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " event port: " + fEventPort;  //$NON-NLS-1$
+		return getClass().getSimpleName() + "(" + toStatusString(status) + ", " + fEventPort + ")";  //$NON-NLS-1$
 	}
 }

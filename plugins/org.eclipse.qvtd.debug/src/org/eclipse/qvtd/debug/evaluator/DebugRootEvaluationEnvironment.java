@@ -1,4 +1,4 @@
-package org.eclipse.qvtd.debug.utils;
+package org.eclipse.qvtd.debug.evaluator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +6,14 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.debug.QVTdDebugPlugin;
+import org.eclipse.qvtd.debug.stubs.ASTBindingHelper;
 import org.eclipse.qvtd.debug.stubs.ModelParameterExtent;
-import org.eclipse.qvtd.debug.stubs.QvtRuntimeException;
+import org.eclipse.qvtd.debug.utils.QvtStackTraceBuilder;
+import org.eclipse.qvtd.debug.utils.Trace;
+import org.eclipse.qvtd.debug.vm.UnitLocation;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiRootEvaluationEnvironment;
 
@@ -24,10 +27,12 @@ public class DebugRootEvaluationEnvironment extends QVTiRootEvaluationEnvironmen
     private QvtRuntimeException myException;
     private Trace myTraces;
 	private @Nullable Element myCurrentIP;
+	private final long id;
 
-    public DebugRootEvaluationEnvironment(@NonNull MetaModelManager metaModelManager, @NonNull Transformation transformation) {
+    public DebugRootEvaluationEnvironment(@NonNull MetaModelManager metaModelManager, @NonNull Transformation transformation, long id) {
 		super(metaModelManager, transformation);
 		myCurrentIP = transformation;
+		this.id = id;
 	}
 
 //    @Override
@@ -38,6 +43,16 @@ public class DebugRootEvaluationEnvironment extends QVTiRootEvaluationEnvironmen
 	@Override
 	public @Nullable Element getCurrentIP() {
 		return myCurrentIP;
+	}
+
+	public @Nullable UnitLocation getCurrentLocation() {
+		if (myCurrentIP == null) {
+			return null;
+		}
+		else {
+			int offset = ASTBindingHelper.getStartPosition(myCurrentIP);
+			return new UnitLocation(offset, this, myCurrentIP); 
+		}
 	}
 
 	@Override
@@ -51,17 +66,22 @@ public class DebugRootEvaluationEnvironment extends QVTiRootEvaluationEnvironmen
 //    }
 
 	@Override
-	public @Nullable Operation getOperation() {
+	public long getID() {
+		return id;
+	}
+
+	@Override
+	public @Nullable NamedElement getOperation() {
 		return null;
 	}
 
 	@Override
-	public DebugRootEvaluationEnvironment getParentEvaluationEnvironment() {
-		return this;
+	public @Nullable DebugRootEvaluationEnvironment getParentEvaluationEnvironment() {
+		return (DebugRootEvaluationEnvironment) super.getParentEvaluationEnvironment();
 	}
 
 	@Override
-	public DebugRootEvaluationEnvironment getRootEvaluationEnvironment() {
+	public @NonNull DebugRootEvaluationEnvironment getRootEvaluationEnvironment() {
 		return this;
 	}
 

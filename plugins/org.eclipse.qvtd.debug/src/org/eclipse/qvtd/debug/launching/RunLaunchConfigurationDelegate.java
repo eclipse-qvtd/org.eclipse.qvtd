@@ -28,7 +28,7 @@ import org.eclipse.debug.core.IStatusHandler;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.debug.QVTdDebugPlugin;
-import org.eclipse.qvtd.debug.stubs.QvtRuntimeException;
+import org.eclipse.qvtd.debug.evaluator.QvtRuntimeException;
 import org.eclipse.qvtd.debug.utils.MiscUtil;
 import org.eclipse.qvtd.debug.utils.ShallowProcess;
 import org.eclipse.qvtd.debug.utils.StreamsProxy;

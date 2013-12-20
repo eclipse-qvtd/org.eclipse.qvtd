@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Environment;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.PivotEvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -31,13 +32,17 @@ public class QVTiEnvironmentFactory extends PivotEnvironmentFactory {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public @NonNull EvaluationEnvironment createEvaluationEnvironment(@NonNull EvaluationEnvironment parent) {
+		return new QVTiNestedEvaluationEnvironment((IQVTiEvaluationEnvironment) parent);
+	}
+
 	public @NonNull IQVTiEvaluationEnvironment createEvaluationEnvironment(@NonNull Transformation transformation) {
 		return new QVTiRootEvaluationEnvironment(getMetaModelManager(), transformation);
 	}
 
-	@Override
-	public @NonNull IQVTiEvaluationEnvironment createEvaluationEnvironment(@NonNull EvaluationEnvironment parent) {
-		return new QVTiNestedEvaluationEnvironment((QVTiEvaluationEnvironment) parent);
+	public @NonNull IQVTiEvaluationEnvironment createEvaluationEnvironment(@NonNull IQVTiEvaluationEnvironment parent, @NonNull NamedElement operation) {
+		return new QVTiNestedEvaluationEnvironment(parent);
 	}
 
 	public @NonNull QVTiEvaluationVisitor createEvaluationVisitor(@NonNull Environment env, @NonNull IQVTiEvaluationEnvironment evalEnv, @NonNull QVTiModelManager modelManager) {

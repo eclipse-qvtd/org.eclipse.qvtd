@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtcorebase.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -44,14 +45,13 @@ public class QVTcoreBaseToStringVisitor extends QVTbaseToStringVisitor implement
 	}
 
 	public String visitBottomPattern(@NonNull BottomPattern object) {
-		append("BottomPattern ");
-//		appendName(object);
+		appendQualifiedName((NamedElement)object.getArea());
+		append("$Bottom");
 		return null;
 	}
 
 	public String visitCoreDomain(@NonNull CoreDomain object) {
-		append("core domain ");
-		appendName(object);
+		appendQualifiedName(object);
 		return null;
 	}
 
@@ -68,8 +68,8 @@ public class QVTcoreBaseToStringVisitor extends QVTbaseToStringVisitor implement
 	}
 
 	public String visitGuardPattern(@NonNull GuardPattern object) {
-		append("GuardPattern ");
-//		appendName(object);
+		appendQualifiedName((NamedElement)object.getArea());
+		append("$Guard");
 		return null;
 	}
 

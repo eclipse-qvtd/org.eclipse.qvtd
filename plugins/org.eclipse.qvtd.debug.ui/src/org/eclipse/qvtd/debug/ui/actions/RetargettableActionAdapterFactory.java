@@ -13,7 +13,6 @@ package org.eclipse.qvtd.debug.ui.actions;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.debug.ui.actions.IRunToLineTarget;
 import org.eclipse.debug.ui.actions.IToggleBreakpointsTarget;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
 
 /**

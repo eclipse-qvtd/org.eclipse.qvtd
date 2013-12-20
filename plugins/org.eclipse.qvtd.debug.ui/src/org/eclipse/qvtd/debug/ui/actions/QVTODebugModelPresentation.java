@@ -36,7 +36,6 @@ import org.eclipse.qvtd.debug.core.QVTOVariable;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.debug.vm.VMLocation;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
-import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeUiModule;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorInput;
@@ -54,7 +53,18 @@ public class QVTODebugModelPresentation implements IDebugModelPresentation, IDeb
 	}
 
     public Image getImage(Object element) {
-    	if(element instanceof QVTOVariable) {
+    	if (element instanceof QVTOStackFrame) {
+        	QVTOStackFrame frame = (QVTOStackFrame) element;
+    		VMLocation location = frame.getLocation();
+    		String operationSignature = location.getOperationSignature();
+            if (operationSignature != null) {
+    			return QVTODebugImages.getImage(QVTODebugImages.MAPPING);
+            }
+            else {
+    			return QVTODebugImages.getImage(QVTODebugImages.TRANSFORMATION);
+            } 
+        }
+        else if(element instanceof QVTOVariable) {
     		QVTOVariable var = (QVTOVariable) element;
     		if(var.isModelParameter()) {
     			return QVTODebugImages.getImage(QVTODebugImages.MODEL_PARAMETER);
@@ -97,17 +107,25 @@ public class QVTODebugModelPresentation implements IDebugModelPresentation, IDeb
 	}
 
 	public String getText(Object element) {
-        if(element instanceof QVTOStackFrame) {
+        if (element instanceof QVTOStackFrame) {
         	QVTOStackFrame frame = (QVTOStackFrame) element;
     		VMLocation location = frame.getLocation();
     		String source = frame.getUnitURI().lastSegment();
     		int line = frame.getLineNumber();
-            
-            String text = "<" + location.getModule() + ">::" + //$NON-NLS-1$ //$NON-NLS-2$
-            				location.getOperationSignature() + " - " + source + " : " + line; //$NON-NLS-1$ //$NON-NLS-2$
-            return text;
+            StringBuilder s = new StringBuilder();
+            s.append(location.getModule());
+            String operationSignature = location.getOperationSignature();
+            if (operationSignature != null) {
+            	s.append("::");
+            	s.append(operationSignature);
+            }
+        	s.append(" - ");
+        	s.append(source);
+        	s.append(":");
+        	s.append(line);
+            return s.toString();
         } 
-        else if(element instanceof QVTOThread) {
+        else if (element instanceof QVTOThread) {
         	QVTOThread thread = (QVTOThread) element;
         	String name = "main"; //$NON-NLS-1$
         	String state = thread.isSuspended() ? DebugUIMessages.QVTODebugModelPresentation_Suspended : DebugUIMessages.QVTODebugModelPresentation_Running;

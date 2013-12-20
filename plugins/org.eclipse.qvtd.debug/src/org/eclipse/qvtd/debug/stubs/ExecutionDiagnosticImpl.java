@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.qvtd.debug.evaluator.QvtRuntimeException;
 import org.eclipse.qvtd.debug.utils.ExecutionStackTraceElement;
 
 public class ExecutionDiagnosticImpl extends BasicDiagnostic implements ExecutionDiagnostic

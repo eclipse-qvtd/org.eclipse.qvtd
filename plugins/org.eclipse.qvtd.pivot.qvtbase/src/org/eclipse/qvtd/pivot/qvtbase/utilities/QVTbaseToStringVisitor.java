@@ -44,8 +44,7 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 	}
 
 	public String visitDomain(@NonNull Domain object) {
-		append("domain ");
-		appendName(object);
+		appendQualifiedName(object);
 		return null;
 	}
 
@@ -69,14 +68,12 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 	}
 
 	public String visitRule(@NonNull Rule object) {
-		append("rule ");
-		appendName(object);
+		appendQualifiedName(object);
 		return null;
 	}
 
 	public String visitTransformation(@NonNull Transformation object) {
-		append("transformation ");
-		appendName(object);
+		appendQualifiedName(object);
 		return null;
 	}
 

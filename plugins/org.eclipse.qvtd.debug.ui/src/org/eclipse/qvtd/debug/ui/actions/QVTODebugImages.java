@@ -35,6 +35,8 @@ public class QVTODebugImages {
 	public static final String LOCAL_VARIABLE = "localVariable"; //$NON-NLS-1$
 	
 	public static final String COLLECTION_ELEMENT = "collectionElement"; //$NON-NLS-1$
+	public static final String TRANSFORMATION = "Transformation"; //$NON-NLS-1$
+	public static final String MAPPING = "Mapping"; //$NON-NLS-1$
 	
 	private static ImageRegistry fgImageRegistry = QVTdDebugUIPlugin
 			.getDefault().getImageRegistry();

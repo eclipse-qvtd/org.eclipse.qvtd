@@ -33,7 +33,6 @@ public class VMVariableRequest extends VMRequest implements Serializable {
 	
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() +
-			": frameID:=" + frameID + " variableUri=" + variableURI; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$		
+		return getClass().getSimpleName() + "(" + frameID + "," + variableURI + ", " + includeChildVars + ")";
 	}
 }

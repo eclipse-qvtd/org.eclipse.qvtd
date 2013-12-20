@@ -19,5 +19,4 @@ public class VMDisconnectEvent extends VMEvent {
 	public VMDisconnectEvent() {
 		super();
 	}
-	
 }

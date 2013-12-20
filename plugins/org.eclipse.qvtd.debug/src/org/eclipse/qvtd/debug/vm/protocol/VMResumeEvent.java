@@ -18,5 +18,4 @@ public class VMResumeEvent extends VMEvent {
 	public VMResumeEvent() {
 		super();
 	}
-	
 }

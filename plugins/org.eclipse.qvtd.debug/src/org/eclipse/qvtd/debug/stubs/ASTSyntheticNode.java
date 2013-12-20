@@ -1,8 +1,5 @@
 package org.eclipse.qvtd.debug.stubs;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.Element;
-
 /**
  * @noimplement
  */

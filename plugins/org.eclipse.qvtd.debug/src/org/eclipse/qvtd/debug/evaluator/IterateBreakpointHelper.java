@@ -11,7 +11,7 @@
 /**
  * 
  */
-package org.eclipse.qvtd.debug.vm;
+package org.eclipse.qvtd.debug.evaluator;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +21,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.qvtd.debug.utils.QVTODebugCore;
+import org.eclipse.qvtd.debug.vm.UnitLocation;
+import org.eclipse.qvtd.debug.vm.VMBreakpoint;
+import org.eclipse.qvtd.debug.vm.VMBreakpointManager;
 
 class IterateBreakpointHelper {
 

@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.vm.protocol;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.debug.vm.VMStackFrame;
 import org.eclipse.qvtd.debug.vm.VMVariable;
 
@@ -23,16 +24,16 @@ public class VMStackFrameResponse extends VMResponse {
 	public final VMVariable[] variables;
 	public boolean isDeferredExecution;
 	
-	public VMStackFrameResponse(VMStackFrame frame) {
+	public VMStackFrameResponse(@NonNull VMStackFrame frame) {
 		this(new VMStackFrame[] { frame });
 	}
 
-	public VMStackFrameResponse(VMStackFrame[] frames) {
+	public VMStackFrameResponse(@NonNull VMStackFrame[] frames) {
 		this.frames = frames; 
 		this.variables = null;
 	}
 	
-	public VMStackFrameResponse(VMVariable[] variables) {
+	public VMStackFrameResponse(@NonNull VMVariable[] variables) {
 		this.variables = variables;
 		this.frames = null;
 	}
@@ -45,4 +46,32 @@ public class VMStackFrameResponse extends VMResponse {
 		return frames != null && frames.length > 0 ? frames[0] : null;
 	}
 	
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append(getClass().getSimpleName() + "(" + toStatusString(status));
+		if (frames != null) {
+			s.append(", {");
+			for (int i = 0; i < frames.length; i++) {
+				if (i > 0) {
+					s.append(",");
+				}
+				s.append("\n\t");
+				s.append(frames[i]);
+			}
+			s.append("}");
+		}
+		if (variables != null) {
+			s.append(", {");
+			for (int i = 0; i < variables.length; i++) {
+				if (i > 0) {
+					s.append(",");
+				}
+				s.append("\n\t");
+				s.append(variables[i]);
+			}
+			s.append("}");
+		}
+		s.append(", deferred = " + isDeferredExecution);
+		return s.toString();
+	}
 }

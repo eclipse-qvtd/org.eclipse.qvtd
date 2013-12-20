@@ -13,11 +13,10 @@ package org.eclipse.qvtd.debug.vm;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.qvtd.debug.evaluator.IDebugEvaluationEnvironment;
 import org.eclipse.qvtd.debug.stubs.ASTBindingHelper;
-import org.eclipse.qvtd.debug.utils.DebugUtils;
-import org.eclipse.qvtd.debug.utils.IDebugEvaluationEnvironment;
 import org.eclipse.qvtd.debug.utils.IModuleSourceInfo;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
@@ -25,7 +24,7 @@ public class UnitLocation {
 	
 	private static final int UNDEF_LINE_NUM = -2;
 	
-	private static int calcStackDepth(IDebugEvaluationEnvironment currentEvalEnv) {
+/*	private static int calcStackDepth(IDebugEvaluationEnvironment currentEvalEnv) {
 		// FIXME - move to core QVTO into EvaluationEnv
 		int depth = 0;
 		IDebugEvaluationEnvironment evalEnv = currentEvalEnv;
@@ -34,7 +33,7 @@ public class UnitLocation {
 			evalEnv = null; //EvaluationUtil.getAggregatingContext(evalEnv);
 		}
 		return depth;
-	}
+	} */
 	
 	private int fLineNum = UNDEF_LINE_NUM;
 	private final int fOffset;
@@ -42,7 +41,7 @@ public class UnitLocation {
 	
     private final Element fElement;
     private final Transformation fModule;    
-    private final Operation fOperation;
+    private final NamedElement fOperation;
     private final IDebugEvaluationEnvironment fEvalEnv;    
 	private IModuleSourceInfo fSrcInfo;
 	
@@ -50,8 +49,8 @@ public class UnitLocation {
 		fEvalEnv = evalEnv;
 		fElement = element;
 		fOffset = position;
-		fDepth = calcStackDepth(evalEnv);
-		fOperation = DebugUtils.getOperation(evalEnv);
+		fDepth = evalEnv.getDepth();
+		fOperation = evalEnv.getOperation();
 		
 		fModule = fEvalEnv.getTransformation();
 //		if (currentInstance != null) {
@@ -77,7 +76,7 @@ public class UnitLocation {
     	return fModule;
     }
     
-    public Operation getOperation() {
+    public NamedElement getOperation() {
         return fOperation;
     }
     
@@ -111,7 +110,11 @@ public class UnitLocation {
     }
 	
     public boolean isTheSameLine(UnitLocation location) {
-    	return fEvalEnv == location.fEvalEnv && getLineNum() == location.getLineNum();
+    	return (fEvalEnv == location.fEvalEnv) && (getLineNum() == location.getLineNum());
+    }
+	
+    public boolean isTheSameLocation(UnitLocation location) {
+    	return (fEvalEnv == location.fEvalEnv) && (getLineNum() == location.getLineNum()) && (fOffset == location.fOffset);
     }
     
 	@Override
@@ -139,8 +142,7 @@ public class UnitLocation {
 	
 	@Override
 	public String toString() {
-		return fModule.getName() + " - line:" + getLineNum() + //$NON-NLS-1$
-			" offset:" + fOffset  + " depth:" + fDepth + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return fModule.getName() + ":" + getLineNum() + ":" + fOffset  + ":" + fDepth; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	private IModuleSourceInfo getSourceInfo() {

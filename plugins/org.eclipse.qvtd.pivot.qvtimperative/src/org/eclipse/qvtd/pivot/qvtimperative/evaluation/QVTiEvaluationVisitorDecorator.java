@@ -69,6 +69,8 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	public @NonNull QVTiEvaluationVisitor createNestedEvaluator() {
         return delegate.createNestedEvaluator();
 	}
+
+	public void dispose() {}
   
     /**
      * Obtains my delegate's environment.

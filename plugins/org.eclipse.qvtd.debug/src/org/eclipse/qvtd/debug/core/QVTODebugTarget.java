@@ -28,6 +28,7 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.qvtd.debug.evaluator.DebugQVTiEvaluationVisitor;
 import org.eclipse.qvtd.debug.stubs.DebugOptions;
 import org.eclipse.qvtd.debug.stubs.QVTODebugUtil;
 import org.eclipse.qvtd.debug.utils.QVTODebugCore;
@@ -80,7 +81,7 @@ public class QVTODebugTarget extends QVTODebugElement implements IQVTODebugTarge
 		fEventListener.add(createVMEventListener());
 
 		EventDispatchJob dispatcher = new EventDispatchJob();
-		Thread eventDispatherThread = new Thread(dispatcher, "QVTd VM Event Dispatch"); //$NON-NLS-1$			
+		Thread eventDispatherThread = new Thread(dispatcher, "QVTi Debug"); //$NON-NLS-1$			
 		eventDispatherThread.setDaemon(true);
 		eventDispatherThread.start();
 
@@ -182,7 +183,11 @@ public class QVTODebugTarget extends QVTODebugElement implements IQVTODebugTarge
 
 	public VMResponse sendRequest(VMRequest request) throws DebugException {
 		try {
-			return fVM.sendRequest(request);
+			VMResponse response = fVM.sendRequest(request);
+			if (DebugQVTiEvaluationVisitor.VM_RESPONSE.isActive()) {
+				DebugQVTiEvaluationVisitor.VM_RESPONSE.println("[" + Thread.currentThread().getName() + "] " + response.toString());
+			}
+			return response;
 		} catch (IOException e) {
 			throw new DebugException(QVTODebugUtil.createDebugError(
 					"Send debug request failed", e));
@@ -506,7 +511,9 @@ public class QVTODebugTarget extends QVTODebugElement implements IQVTODebugTarge
 					fIsSuspended = false;
 					terminated();
 				} else if (event instanceof VMStartEvent) {					
-					started(((VMStartEvent) event).mainModuleName);
+					VMStartEvent startEvent = (VMStartEvent) event;
+					started(startEvent.mainModuleName);
+					fIsSuspended = false; //startEvent.suspendOnStartup;
 				}
 			}
 

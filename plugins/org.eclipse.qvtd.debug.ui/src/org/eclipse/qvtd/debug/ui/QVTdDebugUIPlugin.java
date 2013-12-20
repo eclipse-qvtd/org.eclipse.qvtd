@@ -22,15 +22,19 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.debug.ui.DebugUITools;
+import org.eclipse.debug.ui.IDebugUIConstants;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.jface.viewers.DecorationOverlayIcon;
+import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.qvtd.debug.ui.actions.DebugUIMessages;
+import org.eclipse.qvtd.debug.ui.actions.QVTODebugImages;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
-import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeUiModule;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -282,4 +286,44 @@ public class QVTdDebugUIPlugin extends AbstractUIPlugin {
 			}
 		}
 	}
+	
+	@Override
+	protected ImageRegistry createImageRegistry() {
+		ImageRegistry imageRegistry = super.createImageRegistry();
+		imageRegistry.put(QVTODebugImages.LOCAL_VARIABLE, imageDescriptor("localvar_obj.gif")); //$NON-NLS-1$		
+		imageRegistry.put(QVTODebugImages.THIS_VARIABLE, imageDescriptor("thisvar_obj.gif")); //$NON-NLS-1$
+		imageRegistry.put(QVTODebugImages.PREDEFINED_VARIABLE, imageDescriptor("predefvar_obj.gif")); //$NON-NLS-1$
+		imageRegistry.put(QVTODebugImages.MODEL_PARAMETER, imageDescriptor("modelpar_obj.gif")); //$NON-NLS-1$
+		imageRegistry.put(QVTODebugImages.ATTRIBUTE, imageDescriptor("attribute_obj.gif")); //$NON-NLS-1$
+		imageRegistry.put(QVTODebugImages.REFERENCE, imageDescriptor("reference_obj.gif")); //$NON-NLS-1$
+		imageRegistry.put(QVTODebugImages.COLLECTION_ELEMENT, imageDescriptor("index_element_obj.gif")); //$NON-NLS-1$
+		imageRegistry.put(QVTODebugImages.MAPPING, imageDescriptor("Mapping.gif")); //$NON-NLS-1$
+		imageRegistry.put(QVTODebugImages.TRANSFORMATION, imageDescriptor("Transformation.gif")); //$NON-NLS-1$
+		
+		imageRegistry.put(QVTODebugImages.INTERM_PROPERTY,				
+				overlayImage("intermprop_ovr.gif", //$NON-NLS-1$ 
+						imageRegistry.get(QVTODebugImages.ATTRIBUTE),
+						IDecoration.BOTTOM_RIGHT));		
+		
+		imageRegistry.put(QVTODebugImages.CONDITIONAL_BPNT_ENABLED,
+				overlayImage("conditional_ovr.gif", //$NON-NLS-1$ 
+						DebugUITools.getImage(IDebugUIConstants.IMG_OBJS_BREAKPOINT),
+						IDecoration.TOP_LEFT));
+		imageRegistry.put(QVTODebugImages.CONDITIONAL_BPNT_DISABLED,
+				overlayImage(
+						"conditional_ovr_disabled.gif", //$NON-NLS-1$
+						DebugUITools.getImage(IDebugUIConstants.IMG_OBJS_BREAKPOINT_DISABLED),
+						IDecoration.TOP_LEFT));
+
+		return imageRegistry;
+	}
+
+	private ImageDescriptor imageDescriptor(String imagePath) {
+		return imageDescriptorFromPlugin(PLUGIN_ID, "icons/" + imagePath); //$NON-NLS-1$
+	}
+	
+    private final ImageDescriptor overlayImage(String overImagePath, Image base, int quadrant) {
+        ImageDescriptor decorator = imageDescriptor(overImagePath);
+        return new DecorationOverlayIcon(base, decorator, quadrant);
+    }	
 }

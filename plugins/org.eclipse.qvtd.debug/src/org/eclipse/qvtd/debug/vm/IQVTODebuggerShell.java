@@ -11,20 +11,22 @@
 package org.eclipse.qvtd.debug.vm;
 
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.debug.evaluator.DebugRootQVTiEvaluationVisitor;
 import org.eclipse.qvtd.debug.vm.protocol.VMEvent;
 import org.eclipse.qvtd.debug.vm.protocol.VMRequest;
 
 public interface IQVTODebuggerShell {
 
-	void sessionStarted(DebugQVTiEvaluationVisitor evaluator);
+	void sessionStarted(@NonNull DebugRootQVTiEvaluationVisitor evaluator);
 	
 	VMRequest popRequest();
 
-	VMRequest waitAndPopRequest(VMEvent suspend) throws InterruptedException;
+	VMRequest waitAndPopRequest(@NonNull VMEvent suspend) throws InterruptedException;
 	
 	VMRequest peekRequest();
 	
-	void handleVMEvent(VMEvent event);	
+	void handleVMEvent(@NonNull VMEvent event);	
 
 	VMBreakpointManager getBreakPointManager();
 }

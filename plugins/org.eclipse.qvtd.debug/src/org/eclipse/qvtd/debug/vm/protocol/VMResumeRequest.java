@@ -21,4 +21,13 @@ public class VMResumeRequest extends VMRequest {
 		super();
 		this.detail = detail;
 	}
+	
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append(getClass().getSimpleName());
+		s.append("(");
+		VMSuspendEvent.toDetailString(s, detail);
+		s.append(")");
+		return s.toString();
+	}
 }

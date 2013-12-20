@@ -37,4 +37,18 @@ public class VMBreakpointResponse extends VMResponse {
 	public long[] getAddedBreakpointsIDs() {
 		return fAddedBreakpointsIDs != null ? fAddedBreakpointsIDs.clone() : new long[0];
 	}
+	
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append(getClass().getSimpleName() + "(" + toStatusString(status));
+		s.append(", {");
+		for (int i = 0; i < fAddedBreakpointsIDs.length; i++) {
+			if (i > 0) {
+				s.append(",");
+			}
+			s.append(fAddedBreakpointsIDs[i]);
+		}
+		s.append("}");
+		return s.toString();
+	}
 }

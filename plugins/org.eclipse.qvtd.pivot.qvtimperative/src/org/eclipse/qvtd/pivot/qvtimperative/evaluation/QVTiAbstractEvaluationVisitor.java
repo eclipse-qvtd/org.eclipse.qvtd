@@ -132,7 +132,12 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 		}
 	}
 
-    /* (non-Javadoc)
+	@Override
+	public @NonNull IQVTiEvaluationEnvironment getEvaluationEnvironment() {
+		return (IQVTiEvaluationEnvironment) super.getEvaluationEnvironment();
+	}
+
+	/* (non-Javadoc)
      * @see org.eclipse.ocl.examples.pivot.evaluation.AbstractEvaluationVisitor#getModelManager()
      */
     @Override
@@ -284,7 +289,6 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMappingCall(org.eclipse.qvtd.pivot.qvtimperative.MappingCall)
 	 */
 	public @Nullable Object visitMappingCall(@NonNull MappingCall mappingCall) {
-    	
     	Mapping calledMapping = DomainUtil.nonNullModel(mappingCall.getReferredMapping());
 		//
 		//	Initialise nested environment directly with the bound values for non-looped bindings,

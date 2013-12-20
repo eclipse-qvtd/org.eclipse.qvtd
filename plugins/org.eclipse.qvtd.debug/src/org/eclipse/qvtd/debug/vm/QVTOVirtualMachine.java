@@ -27,6 +27,8 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.debug.core.QVTODebugTarget;
 import org.eclipse.qvtd.debug.core.QVTOLocalValue;
 import org.eclipse.qvtd.debug.core.QVTOLocalValue.LocalValue;
+import org.eclipse.qvtd.debug.evaluator.DebugQVTiEvaluationVisitor;
+import org.eclipse.qvtd.debug.evaluator.DebugRootQVTiEvaluationVisitor;
 import org.eclipse.qvtd.debug.stubs.DebugOptions;
 import org.eclipse.qvtd.debug.utils.QVTODebugCore;
 import org.eclipse.qvtd.debug.vm.protocol.BreakpointData;
@@ -55,7 +57,7 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
 	private IQVTODebuggerShell fDebuggerShell;
 	
 	private final VMBreakpointManager fBreakpointManager;
-	private DebugQVTiEvaluationVisitor fInterpreter;
+	private @NonNull DebugRootQVTiEvaluationVisitor fInterpreter;
 	private DebuggableExecutorAdapter fExecutor;
 
 	private boolean fRunning;
@@ -144,7 +146,7 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
 	}
 	
 	private VMResponse start() {
-		Thread executorThread = new Thread(createVMRunnable());
+		Thread executorThread = new Thread(createVMRunnable(), "QVTi VM");
 		
 		synchronized (fStateMonitor) {
 			if(fRunning) {
@@ -282,7 +284,7 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
 			return QVTOVirtualMachine.this.fBreakpointManager;
 		}
 		
-		public void sessionStarted(DebugQVTiEvaluationVisitor evaluator) {
+		public void sessionStarted(@NonNull DebugRootQVTiEvaluationVisitor evaluator) {
 			fInterpreter = evaluator;
 		}
 		
@@ -291,6 +293,9 @@ public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {
 		}
 		
 		public void handleVMEvent(VMEvent event) {
+			if (DebugQVTiEvaluationVisitor.VM_EVENT.isActive()) {
+				DebugQVTiEvaluationVisitor.VM_EVENT.println("[" + Thread.currentThread().getName() + "] " + event.toString());
+			}
 			if(event instanceof VMStartEvent) {
 				// first start event
 				synchronized (fStateMonitor) {

@@ -12,6 +12,8 @@ package org.eclipse.qvtd.debug.vm;
 
 import java.io.Serializable;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 public interface VMLocation extends Serializable {
 
 	int getLineNum();
@@ -19,7 +21,6 @@ public interface VMLocation extends Serializable {
 	String getURI();
 
 	String getModule();
-
-	String getOperationSignature();
+	@Nullable String getOperationSignature();
 
 }

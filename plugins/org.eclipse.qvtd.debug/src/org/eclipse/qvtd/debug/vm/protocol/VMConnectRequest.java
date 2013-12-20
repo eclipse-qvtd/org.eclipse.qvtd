@@ -16,13 +16,7 @@ public class VMConnectRequest extends VMRequest {
 	
 	private static final long serialVersionUID = -1112681920766060737L;
 
-	
 	public VMConnectRequest() {
 		super();
-	}
-	
-	@Override
-	public String toString() {
-		return getClass().getSimpleName(); 
 	}
 }

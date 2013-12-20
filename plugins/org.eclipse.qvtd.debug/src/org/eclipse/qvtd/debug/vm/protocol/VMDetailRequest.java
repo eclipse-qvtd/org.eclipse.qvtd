@@ -32,7 +32,6 @@ public class VMDetailRequest extends VMRequest {
 	
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " variable=" + fVariableURI; //$NON-NLS-1$
+		return getClass().getSimpleName() + "(" + fVariableURI + ")"; //$NON-NLS-1$
 	}
-
 }

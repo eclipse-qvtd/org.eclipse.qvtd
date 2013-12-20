@@ -128,7 +128,6 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		QVTiAbstractTracingEvaluationVisitor.verboseLevel = verboseLevel;
 	}
 	
-	
 	/**
 	 * Gets the indent.
 	 *

@@ -12,12 +12,22 @@ package org.eclipse.qvtd.debug.vm.protocol;
 
 import java.io.Serializable;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 public class VMResponse implements Serializable {
 	
 	private static final long serialVersionUID = -5622330458726111494L;
 
 	public static final int STATUS_OK = 0;
 	public static final int STATUS_ERROR = 1;
+
+	public static @NonNull String toStatusString(int status) {
+		switch (status) {
+		case STATUS_OK: return "OK";
+		case STATUS_ERROR: return "ERROR";
+		}
+		return "???";
+	}
 	
 	public final int status;
 	
@@ -43,6 +53,6 @@ public class VMResponse implements Serializable {
 	
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " status: " + status;
+		return getClass().getSimpleName() + "(" + toStatusString(status) + ")";
 	}
 }

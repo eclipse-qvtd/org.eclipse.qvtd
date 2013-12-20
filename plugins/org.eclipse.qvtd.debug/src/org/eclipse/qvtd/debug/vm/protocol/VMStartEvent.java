@@ -21,4 +21,8 @@ public class VMStartEvent extends VMEvent {
 		this.suspendOnStartup = suspendOnStartup;
 		this.mainModuleName = mainModuleName;
 	}
+	
+	public String toString() {
+		return getClass().getSimpleName() + "(" + mainModuleName + ", suspendOnStartup=" + suspendOnStartup + ")";
+	}
 }

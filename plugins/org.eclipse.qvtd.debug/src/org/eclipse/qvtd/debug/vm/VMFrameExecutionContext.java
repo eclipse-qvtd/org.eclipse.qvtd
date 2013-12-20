@@ -15,6 +15,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public interface VMFrameExecutionContext {
 	
@@ -29,6 +30,6 @@ public interface VMFrameExecutionContext {
 	Object getValue(Property feature, EObject target);
 	
 	EvaluationEnvironment getEvalEnv();
-	
+	MetaModelManager getMetaModelManager();
 	DomainStandardLibrary getStandardLibrary();
 }

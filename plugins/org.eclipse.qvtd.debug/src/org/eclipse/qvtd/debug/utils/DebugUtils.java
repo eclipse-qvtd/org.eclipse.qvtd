@@ -1,8 +1,5 @@
 package org.eclipse.qvtd.debug.utils;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 
 public class DebugUtils
@@ -12,15 +9,15 @@ public class DebugUtils
 		return false;
 	}
 
-	public static Operation getOperation(EvaluationEnvironment evalEnv) {
+//	public static Operation getOperation(EvaluationEnvironment evalEnv) {
 		// TODO Auto-generated method stub
-		return null;
-	}
+//		return null;
+//	}
 
-	public static long getID(EvaluationEnvironment evalEnv) {
+//	public static long getID(EvaluationEnvironment evalEnv) {
 		// TODO Auto-generated method stub
-		return 0;
-	}
+//		return 0;
+//	}
 
 	public static EvaluationEnvironment cloneEvaluationEnv(EvaluationEnvironment evaluationEnvironment) {
 		// TODO Auto-generated method stub

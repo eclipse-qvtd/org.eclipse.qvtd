@@ -41,14 +41,13 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 	}
 
 	public @Nullable String visitMapping(@NonNull Mapping object) {
-		append("mapping ");
-		appendName(object);
+		appendQualifiedName(object);
 		return null;
 	}
 
 	public @Nullable String visitMappingCall(@NonNull MappingCall object) {
 		append("mappingCall ");
-		appendName(object.getReferredMapping());
+		appendQualifiedName(object.getReferredMapping());
 		return null;
 	}
 

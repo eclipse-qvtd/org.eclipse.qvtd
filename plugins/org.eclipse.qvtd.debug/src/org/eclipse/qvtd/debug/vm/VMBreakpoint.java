@@ -12,6 +12,7 @@ package org.eclipse.qvtd.debug.vm;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.qvtd.debug.evaluator.DebugQVTiEvaluationVisitor;
 import org.eclipse.qvtd.debug.vm.protocol.NewBreakpointData;
 
 

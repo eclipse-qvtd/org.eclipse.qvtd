@@ -6,11 +6,9 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.debug.stubs.QvtMessage;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 public class CompiledUnit {
 	

@@ -11,16 +11,18 @@
 package org.eclipse.qvtd.debug.vm;
 
 import java.io.Serializable;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
-import org.eclipse.qvtd.debug.utils.DebugUtils;
+import org.eclipse.qvtd.debug.evaluator.IDebugEvaluationEnvironment;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 public class VMStackFrame implements Serializable {
 	
@@ -70,14 +72,14 @@ public class VMStackFrame implements Serializable {
 	private int lineNum;	
 	public String module;
 	public String operationSignature;	
-	public VMVariable[] visibleVariables;
+	public @Nullable VMVariable[] visibleVariables;
 	
 	private transient VMLocation location;	
 	
-	private VMStackFrame(long id, String uri, String module, String operationSignature, int line, VMVariable[] vars) {
-		if(vars != null && (vars.length == 0 || Arrays.asList(vars).contains(null))) {
-			throw new IllegalArgumentException();
-		}
+	private VMStackFrame(long id, String uri, String module, String operationSignature, int line, @Nullable VMVariable[] vars) {
+//		if(vars != null && (vars.length == 0 || Arrays.asList(vars).contains(null))) {
+//			throw new IllegalArgumentException();
+//		}
 
 		this.id = id;
 		this.uri = uri;
@@ -116,21 +118,21 @@ public class VMStackFrame implements Serializable {
 	}
 	
 	public static VMStackFrame create(UnitLocation location, boolean includeVars) {
-		EvaluationEnvironment evalEnv = location.getEvalEnv();
+		IDebugEvaluationEnvironment evalEnv = location.getEvalEnv();
 		Type module = location.getModule();
 		String moduleName = (module != null) ? module.getName() : "<null>"; //$NON-NLS-1$
 		
-		Operation operation = location.getOperation();
+		NamedElement operation = location.getOperation();
 		String operSignature = (operation != null) ? getOperationSignature(operation)
-				: MessageFormat.format("<{0}>", moduleName); //$NON-NLS-1$
+				: null; //MessageFormat.format("<{0}>", moduleName); //$NON-NLS-1$
 		
 		List<VMVariable> vars = VariableFinder.getVariables(evalEnv);
-		VMStackFrame vmStackFrame = new VMStackFrame(DebugUtils.getID(evalEnv), location.getURI().toString(), moduleName, 
+		VMStackFrame vmStackFrame = new VMStackFrame(evalEnv.getID(), location.getURI().toString(), moduleName, 
 					operSignature, location.getLineNum(), vars.toArray(new VMVariable[vars.size()]));
 		return vmStackFrame;
 	}
 	
-	static VMStackFrame[] create(List<UnitLocation> stack) {
+	public static VMStackFrame[] create(List<UnitLocation> stack) {
 		List<VMStackFrame> result = new ArrayList<VMStackFrame>();
 		
 		int i = 0;
@@ -144,39 +146,72 @@ public class VMStackFrame implements Serializable {
 	
 	static UnitLocation lookupEnvironmentByID(long id, List<UnitLocation> stack) {
 		for (UnitLocation location : stack) {
-			org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment evalEnv = location.getEvalEnv();
-//			if(evalEnv instanceof DebugEvaluationEnvironment) {
-//				DebugEvaluationEnvironment debugEvalEnv = (DebugEvaluationEnvironment) evalEnv;
-//				if(debugEvalEnv.getID() == id) {
-//					return location;
-//				}
-//			}
+			IDebugEvaluationEnvironment evalEnv = location.getEvalEnv();
+			if (evalEnv.getID() == id) {
+				return location;
+			}
 		}
 
 		return null;
 	}
 	
-	private static String getOperationSignature(Operation operation) {
-        StringBuffer buf = new StringBuffer();
+	private static String getOperationSignature(NamedElement operation) {
+        StringBuilder buf = new StringBuilder();
 /*    	EClassifier ctxType = QvtOperationalParserUtil.getContextualType(operation);        
         if (ctxType != null) {
             buf.append(ctxType.getName()).append("::"); //$NON-NLS-1$            
-        }
+        } */
 
         buf.append(operation.getName());        
         buf.append('(');
-        
-        int i = 0, n = operation.getEParameters().size();
-        for (EParameter param : operation.getEParameters()) {
-            EClassifier type = param.getEType();
-            buf.append(type.getName());            
-            if (i+1 < n) {
-                buf.append(", "); //$NON-NLS-1$
-            }
-            ++i;
+        if (operation instanceof Operation) {
+	        boolean isFirst = true;;
+	        for (Parameter param : ((Operation)operation).getOwnedParameter()) {
+	            if (!isFirst) {
+	                buf.append(", ");
+	            }
+	            Type type = param.getType();
+	            buf.append(type.getName());            
+	            isFirst = false;
+	        }
         }
-        buf.append(')'); */
+        else if (operation instanceof Mapping) {
+/*	        boolean isFirst = true;;
+	        for (Variable param : ((Mapping)operation).getAllVariables()) {
+	            if (!isFirst) {
+	                buf.append(", ");
+	            }
+	            Type type = param.getType();
+	            buf.append(type.getName());            
+	            isFirst = false;
+	        } */
+        }
+        buf.append(')');
         
         return buf.toString();
     }
+	
+	@Override
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append(getClass().getSimpleName());
+		s.append("(").append(id);
+		s.append(", ").append(uri);
+		s.append(":").append(module);
+		s.append(":").append(lineNum);
+		s.append(", ").append(operationSignature);
+		if (visibleVariables != null) {
+			s.append(", {");
+			for (int i = 0; i < visibleVariables.length; i++) {
+				if (i > 0) {
+					s.append(",");
+				}
+				s.append("\n\t\t");
+				s.append(visibleVariables[i]);
+			}
+			s.append("}");
+		}
+		s.append(")");
+		return s.toString();
+	}
 }

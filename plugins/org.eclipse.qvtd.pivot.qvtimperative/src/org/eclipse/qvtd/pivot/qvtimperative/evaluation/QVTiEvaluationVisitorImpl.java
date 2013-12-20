@@ -70,23 +70,24 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
         return ne;
     }
 
-	private void doMappingCallRecursion(@NonNull Rule rule, @NonNull List<Variable> rootVariables,
+	public void dispose() {}
+
+	private static void doMappingCallRecursion(@NonNull QVTiEvaluationVisitor nv, @NonNull Rule rule, @NonNull List<Variable> rootVariables,
 			@NonNull List<List<Object>> rootBindings, int depth) {
 		int nextDepth = depth+1;
 		int maxDepth = rootVariables.size();
 		Variable var = rootVariables.get(depth);
 		Type guardType = var.getType();
-		PivotIdResolver idResolver = metaModelManager.getIdResolver();
+		PivotIdResolver idResolver = nv.getMetaModelManager().getIdResolver();
         for (Object binding : rootBindings.get(depth)) {
 			DomainType valueType = idResolver.getDynamicTypeOf(binding);
-			if ((guardType != null) && valueType.conformsTo(metaModelManager, guardType)) {
-	        	evaluationEnvironment.replace(var, binding);
+			if ((guardType != null) && valueType.conformsTo(nv.getMetaModelManager(), guardType)) {
+				nv.getEvaluationEnvironment().replace(var, binding);
 	        	if (nextDepth < maxDepth) {
-	        		doMappingCallRecursion(rule, rootVariables, rootBindings, nextDepth);
+	        		doMappingCallRecursion(nv, rule, rootVariables, rootBindings, nextDepth);
 	        	}
 	        	else {
-	        		// The MiddleGuardPattern should be empty in the root mapping, i.e. no need to find bindings
-	            	rule.accept(undecoratedVisitor);
+    	            rule.accept(nv);
 	        	}
 			}
         }
@@ -242,26 +243,32 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
 	@Override
     public @Nullable Object visitTransformation(@NonNull Transformation transformation) {
     	for (Rule rule : transformation.getRule()) {
-    		// Find bindings before invoking the mapping so all visitors are equal
-    		Map<Variable, List<Object>>  mappingBindings = new HashMap<Variable, List<Object>>();
-    		List<Variable> rootVariables = new ArrayList<Variable>();
-    		List<List<Object>> rootBindings = new ArrayList<List<Object>>();
-    		for (Domain domain : rule.getDomain()) {
-                CoreDomain coreDomain = (CoreDomain)domain;
-                TypedModel m = coreDomain.getTypedModel();
-				for (@SuppressWarnings("null")@NonNull Variable var : coreDomain.getGuardPattern().getVariable()) {
-                	evaluationEnvironment.add(var, null);
-                	rootVariables.add(var);
-                    Type varType = var.getType();
-					if (varType != null) {
-						List<Object> bindingValuesSet = ((QVTiModelManager)modelManager).getElementsByType(m, varType);
-	                	rootBindings.add(bindingValuesSet);
-	                    mappingBindings.put(var, bindingValuesSet);
-					}
-                }
-            }
-    		doMappingCallRecursion(rule, rootVariables, rootBindings, 0);
-    		break;		// FIXME ?? multiple rules
+    		QVTiEvaluationVisitor nv = ((QVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
+    		try {
+	    		// Find bindings before invoking the mapping so all visitors are equal
+	    		Map<Variable, List<Object>>  mappingBindings = new HashMap<Variable, List<Object>>();
+	    		List<Variable> rootVariables = new ArrayList<Variable>();
+	    		List<List<Object>> rootBindings = new ArrayList<List<Object>>();
+	    		for (Domain domain : rule.getDomain()) {
+	                CoreDomain coreDomain = (CoreDomain)domain;
+	                TypedModel m = coreDomain.getTypedModel();
+					for (@SuppressWarnings("null")@NonNull Variable var : coreDomain.getGuardPattern().getVariable()) {
+	                	nv.getEvaluationEnvironment().add(var, null);
+	                	rootVariables.add(var);
+	                    Type varType = var.getType();
+						if (varType != null) {
+							List<Object> bindingValuesSet = ((QVTiModelManager)modelManager).getElementsByType(m, varType);
+		                	rootBindings.add(bindingValuesSet);
+		                    mappingBindings.put(var, bindingValuesSet);
+						}
+	                }
+	            }
+	    		doMappingCallRecursion(nv, rule, rootVariables, rootBindings, 0);
+	    		break;		// FIXME ?? multiple rules
+    		}
+    		finally {
+    			nv.dispose();
+    		}
     	}
         return true;
     }

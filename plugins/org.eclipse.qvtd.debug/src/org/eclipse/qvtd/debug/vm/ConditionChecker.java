@@ -17,6 +17,7 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
+import org.eclipse.qvtd.debug.evaluator.DebugQVTiEvaluationVisitor;
 import org.eclipse.qvtd.debug.utils.DebugUtils;
 import org.eclipse.qvtd.debug.utils.QVTODebugCore;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorImpl;

@@ -1,6 +1,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.evaluation.PivotEvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
@@ -14,7 +15,7 @@ public abstract class QVTiEvaluationEnvironment extends PivotEvaluationEnvironme
 		super(evaluationEnvironment);
 	}
 
-	public IQVTiEvaluationEnvironment getParentEvaluationEnvironment() {
+	public @Nullable IQVTiEvaluationEnvironment getParentEvaluationEnvironment() {
 		return (IQVTiEvaluationEnvironment) parent;
 	}
 }

@@ -33,4 +33,8 @@ public class VMStackFrameRequest extends VMRequest implements Serializable {
 	public boolean rootVariablesRequest() {
 		return variableURI == null;
 	}
+	
+	public String toString() {
+		return getClass().getSimpleName() + "(" + frameID + ", " + variableURI + ")";
+	}
 }

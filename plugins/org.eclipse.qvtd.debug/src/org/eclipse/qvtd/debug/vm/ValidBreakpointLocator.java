@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.qvtd.debug.stubs.ASTBindingHelper;
 import org.eclipse.qvtd.debug.utils.CompiledUnit;
-import org.eclipse.qvtd.debug.utils.DebugUtils;
 import org.eclipse.qvtd.debug.utils.LineNumberProvider;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
 

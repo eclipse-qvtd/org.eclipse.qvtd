@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.debug.core.EvaluationContext;
 import org.eclipse.qvtd.debug.stubs.ExecutionDiagnostic;

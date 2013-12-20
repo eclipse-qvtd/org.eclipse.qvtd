@@ -1,28 +1,42 @@
-package org.eclipse.qvtd.debug.utils;
+package org.eclipse.qvtd.debug.evaluator;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.qvtd.debug.QVTdDebugPlugin;
-import org.eclipse.qvtd.debug.stubs.QvtRuntimeException;
+import org.eclipse.qvtd.debug.stubs.ASTBindingHelper;
+import org.eclipse.qvtd.debug.utils.QvtStackTraceBuilder;
+import org.eclipse.qvtd.debug.vm.UnitLocation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiNestedEvaluationEnvironment;
 
 public class DebugNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvironment implements IDebugEvaluationEnvironment
 {
 	private @Nullable Element myCurrentIP;
-	private Operation myOperation;
+	private NamedElement myOperation;
     private final int myStackDepth;
+	private final long id;
     
-	public DebugNestedEvaluationEnvironment(@NonNull IDebugEvaluationEnvironment evaluationEnvironment) {
+	public DebugNestedEvaluationEnvironment(@NonNull IDebugEvaluationEnvironment evaluationEnvironment, long id, @NonNull NamedElement operation) {
 		super(evaluationEnvironment);
 		myStackDepth = evaluationEnvironment.getDepth() + 1;
+		this.id = id;
+		this.myOperation = operation;
 	}
 
 	@Override
 	public @Nullable Element getCurrentIP() {
 		return myCurrentIP;
+	}
+
+	public @Nullable UnitLocation getCurrentLocation() {
+		if (myCurrentIP == null) {
+			return null;
+		}
+		else {
+			int offset = ASTBindingHelper.getStartPosition(myCurrentIP);
+			return new UnitLocation(offset, this, myCurrentIP); 
+		}
 	}
 
 	@Override
@@ -36,7 +50,12 @@ public class DebugNestedEvaluationEnvironment extends QVTiNestedEvaluationEnviro
 //    }
 
 	@Override
-	public @Nullable Operation getOperation() {
+	public long getID() {
+		return id;
+	}
+
+	@Override
+	public @Nullable NamedElement getOperation() {
 		return myOperation;
 	}
 

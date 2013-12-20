@@ -13,12 +13,14 @@ package org.eclipse.qvtd.debug.vm;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.pivot.CollectionType;
+import org.eclipse.ocl.examples.pivot.DataType;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
@@ -31,16 +33,16 @@ import org.eclipse.qvtd.debug.vm.protocol.VMVariableResponse;
 
 public class VariableFinder {
 
-//	private final VMFrameExecutionContext fFeatureAccessor;
-//	private final boolean fIsStoreValues;
+	private final VMFrameExecutionContext fFeatureAccessor;
+	private final boolean fIsStoreValues;
 	private VMVariable fTargetVar;
 	private Type fRootDeclaredType;
 	
 	
 
 	public VariableFinder(VMFrameExecutionContext featureAccessor, boolean isStoreValues) {
-//		fFeatureAccessor = featureAccessor;
-//		fIsStoreValues = isStoreValues;
+		fFeatureAccessor = featureAccessor;
+		fIsStoreValues = isStoreValues;
 	}
 	
 	public static String computeDetail(URI variableURI, UnitLocationExecutionContext frameContext) {
@@ -117,10 +119,28 @@ public class VariableFinder {
 
 	
 	private Object findStackObject(String[] varTreePath) {
-/*		EvaluationEnvironment evalEnv = fFeatureAccessor.getEvalEnv();		
+		EvaluationEnvironment evalEnv = fFeatureAccessor.getEvalEnv();		
 		String envVarName = varTreePath[0];
-		
-		Object rootObj = evalEnv.getValueOf(envVarName);
+		if (envVarName != null) {
+			for (DomainTypedElement variable : evalEnv.getVariables()) {
+				if (envVarName.equals(variable.getName())) {
+					fRootDeclaredType = (Type) variable.getType();
+					Object rootObj = evalEnv.getValueOf(variable);
+					if (rootObj != null) {
+						if (varTreePath.length == 1) {
+							// refers to environment variable only
+							String[] uri = new String[] { envVarName };
+							fTargetVar = createVariable(envVarName, VMVariable.LOCAL, fRootDeclaredType, rootObj, createURI(uri).toString());
+							return rootObj;
+						}
+						else {
+							return findChildObject(rootObj, fRootDeclaredType, varTreePath, 1);
+						}
+					}
+				}
+			}
+		}
+/*		Object rootObj = evalEnv.getValueOf(envVarName);
 		if(rootObj == null && !evalEnv.getNames().contains(envVarName)) {
 			rootObj = getModelParameterVariables(evalEnv).get(envVarName);
 			
@@ -143,7 +163,7 @@ public class VariableFinder {
 		return null;
 	}
 	
-/*	private Object findChildObject(Object parentObj, Type optParentDeclaredType, String[] varTreePath, int pathIndex) {
+	private Object findChildObject(Object parentObj, Type optParentDeclaredType, String[] varTreePath, int pathIndex) {
 		URI uri = createURI(varTreePath, pathIndex);
 		// FIXME - deduce the type from actual type, ensure null is not propagated
 		
@@ -151,14 +171,14 @@ public class VariableFinder {
 		Object nextObject = null;
 		Type nextDeclaredType = null;
 		
-		if(parentObj instanceof ModelInstance) {
-			parentObj = ((ModelInstance)parentObj).getExtent().getRootObjects();
-			nextDeclaredType = QvtOperationalStdLibrary.INSTANCE.getElementType();
-		}
+//		if(parentObj instanceof ModelInstance) {
+//			parentObj = ((ModelInstance)parentObj).getExtent().getRootObjects();
+//			nextDeclaredType = QvtOperationalStdLibrary.INSTANCE.getElementType();
+//		}
 		
 		if (parentObj instanceof EObject) {
 			EObject eObject = (EObject) parentObj;
-			Property eFeature = findFeature(varTreePath[pathIndex], eObject.eClass());
+			Property eFeature = findFeature(varTreePath[pathIndex], optParentDeclaredType); //eObject.eClass());
 			if (eFeature != null) {
 				Object value = this.fFeatureAccessor.getValue(eFeature, eObject);
 				childVar = createFeatureVar(eFeature, value, uri.toString());
@@ -189,9 +209,9 @@ public class VariableFinder {
 				nextDeclaredType = (Type) this.fFeatureAccessor.getStandardLibrary().getOclAnyType();
 			}
 
-			Object element = getElement(collection, elementIndex);
+			Object element = null; //getElement(collection, elementIndex);
 			
-			childVar = createCollectionElementVar(elementIndex, element, nextDeclaredType, uri.toString());
+			childVar = null; //createCollectionElementVar(elementIndex, element, nextDeclaredType, uri.toString());
 			nextObject = element;
 		}
 
@@ -209,23 +229,22 @@ public class VariableFinder {
 
 		this.fTargetVar = childVar;		
 		return nextObject;
-		return null;
-	} */
+	}
 	
-/*	private VMVariable createFeatureVar(Property feature, Object value, String uri) {
+	private VMVariable createFeatureVar(Property feature, Object value, String uri) {
 		String varName = feature.getName();
 		Type declaredType = fFeatureAccessor.getOCLType(feature);
 		
-		int kind = VMVariable.ATTRIBUTE;
-		if(feature instanceof EReference) {
-			kind = VMVariable.REFERENCE;
+		int kind = VMVariable.REFERENCE;
+		if (feature.getType() instanceof DataType) {
+			kind = VMVariable.ATTRIBUTE;
 		}
-		if (feature instanceof ContextualProperty) {
-			kind = VMVariable.INTERM_PROPERTY;
-		}
+//		if (feature instanceof ContextualProperty) {
+//			kind = VMVariable.INTERM_PROPERTY;
+//		}
 		
 		return createVariable(varName, kind, declaredType, value, uri);
-	} */
+	}
 	
 /*	private VMVariable createCollectionElementVar(int elementIndex, Object element, Type elementType, String uri) {
 		String varName = "[" + elementIndex + "]"; //$NON-NLS-1$ //$NON-NLS-2$
@@ -240,7 +259,7 @@ public class VariableFinder {
 	} */
 	
 	
-/*	private VMVariable createVariable(String varName, int kind,
+	private VMVariable createVariable(String varName, int kind,
 			Type declaredType, Object varObj, String uri) {
 		VMVariable result = new VMVariable();
 		result.name = String.valueOf(varName);
@@ -252,7 +271,7 @@ public class VariableFinder {
 			result.valueObject = varObj;
 		}
 		return result;
-	} */
+	}
 
 	public static URI parseURI(String variableURI) throws IllegalArgumentException {
 		return URI.createURI(variableURI);
@@ -387,11 +406,17 @@ public class VariableFinder {
 		return null;
 	} */
 
-/*	private Property findFeature(String featureRef, EClass actualTarget) {
+	private Property findFeature(String featureRef, Type actualTarget) {
 		String actualRef = featureRef.startsWith("+") ? featureRef.substring(1) : featureRef;
-		boolean isIntermediate = featureRef.length() != actualRef.length();
-		
-		int classIndex;
+//		boolean isIntermediate = featureRef.length() != actualRef.length();
+		Iterable<? extends DomainProperty> allProperties = fFeatureAccessor.getMetaModelManager().getAllProperties(actualTarget, false, featureRef);
+		for (DomainProperty property : allProperties) {
+			if (property instanceof Property) {
+				return (Property) property;
+			}
+		}
+		return null;
+/*		int classIndex;
 		String featureName;
 		try {
 			int delimiterPos = actualRef.indexOf('.');
@@ -405,25 +430,25 @@ public class VariableFinder {
 			throw new IllegalArgumentException("Illegal feature reference: " + featureRef);
 		}
 		
-		EClass featureOwner = selectEClass(actualTarget, classIndex);
+		Type featureOwner = selectEClass(actualTarget, classIndex);
 		if(featureOwner == null) {
 			return null;
-		}
+		} */
 		
-		if(!isIntermediate) {
-			return featureOwner.getEStructuralFeature(featureName);
-		}
+//		if(!isIntermediate) {
+//			return featureOwner.getEStructuralFeature(featureName);
+//		}
 		
-		EClass contextualPropMetaClass = ExpressionsPackage.eINSTANCE.getContextualProperty();
+//		EClass contextualPropMetaClass = ExpressionsPackage.eINSTANCE.getContextualProperty();
 		
-		for (EStructuralFeature feature : actualTarget.getEAllStructuralFeatures()) {					
-			if(feature.eClass() == contextualPropMetaClass && feature.equals(feature.getName())) {
-				return feature;
-			}
-		}
+//		for (EStructuralFeature feature : actualTarget.getEAllStructuralFeatures()) {					
+//			if(feature.eClass() == contextualPropMetaClass && feature.equals(feature.getName())) {
+//				return feature;
+//			}
+//		}
 		
-		return null;
-	} */
+//		return null;
+	}
 
 	static List<VMVariable> getVariables(EvaluationEnvironment evalEnv) {
 		List<VMVariable> result = new ArrayList<VMVariable>();

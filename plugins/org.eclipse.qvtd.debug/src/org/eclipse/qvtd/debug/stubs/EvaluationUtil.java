@@ -1,20 +1,6 @@
 package org.eclipse.qvtd.debug.stubs;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EParameter;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.qvtd.debug.utils.ZZDebugEvaluationEnvironment;
-import org.eclipse.qvtd.debug.utils.IDebugEvaluationEnvironment;
+import org.eclipse.qvtd.debug.evaluator.IDebugEvaluationEnvironment;
 
 /**
  * @author dvorak
@@ -169,7 +155,7 @@ public class EvaluationUtil {
 	} */
 		
 	public static IDebugEvaluationEnvironment getAggregatingContext(IDebugEvaluationEnvironment evalEnv) {
-		return evalEnv; //.getContext().getSessionData().getValue(AGGREGATING_ROOT_ENV);
+		return null;//evalEnv.getContext().getSessionData().getValue(AGGREGATING_ROOT_ENV);
 	}
 
 /*	public static ImperativeOperation getOverridingOperation(QvtOperationalEvaluationEnv evalEnv, ImperativeOperation operation) {

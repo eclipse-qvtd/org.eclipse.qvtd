@@ -16,7 +16,8 @@ import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
-import org.eclipse.qvtd.debug.utils.IDebugEvaluationEnvironment;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.qvtd.debug.evaluator.IDebugEvaluationEnvironment;
 
 public class UnitLocationExecutionContext implements VMFrameExecutionContext {
 
@@ -35,6 +36,10 @@ public class UnitLocationExecutionContext implements VMFrameExecutionContext {
 	public Type getOCLType(Property feature) {
 		return feature.getType();
 //		return fEnv.getUMLReflection().getOCLType(feature);
+	}
+	
+	public MetaModelManager getMetaModelManager() {	
+		return fEnv.getMetaModelManager();
 	}
 	
 	public DomainStandardLibrary getStandardLibrary() {	

@@ -6,17 +6,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
-import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.VariableExp;
+import org.eclipse.qvtd.debug.evaluator.IDebugEvaluationEnvironment;
 import org.eclipse.qvtd.debug.stubs.ASTBindingHelper;
 import org.eclipse.qvtd.debug.stubs.ASTSyntheticNode;
 import org.eclipse.qvtd.debug.stubs.ASTSyntheticNodeAccess;
 import org.eclipse.qvtd.debug.stubs.EvaluationUtil;
-import org.eclipse.qvtd.debug.stubs.QvtOperationalParserUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 /**
@@ -87,7 +86,7 @@ public class QvtStackTraceBuilder {
     	int lineNumber = UNKNOWN_LINE_NUM;    	
     	
     	Type module = null;
-    	Operation operation = env.getOperation();
+    	NamedElement operation = env.getOperation();
 
     	int resultOffset = getCurrentASTOffset(env);
 		
@@ -110,10 +109,10 @@ public class QvtStackTraceBuilder {
 	    	}
 		} else {
     		operName = operation.getName();	    		
-    		EClassifier contextType = QvtOperationalParserUtil.getContextualType(operation);
-    		if(contextType != null) {
-    			operName = contextType.getName() + "::" + operName;
-    		}
+//    		EClassifier contextType = QvtOperationalParserUtil.getContextualType(operation);
+//    		if(contextType != null) {
+//    			operName = contextType.getName() + "::" + operName;
+//    		}
 		}
 
 		IModuleSourceInfo sourceInfo = ASTBindingHelper.getModuleSourceBinding(module);

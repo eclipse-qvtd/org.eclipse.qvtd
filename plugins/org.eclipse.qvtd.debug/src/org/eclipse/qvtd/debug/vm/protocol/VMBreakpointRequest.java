@@ -61,7 +61,7 @@ public class VMBreakpointRequest extends VMRequest {
 	
 	@Override
 	public String toString() {	
-		return getClass().getSimpleName() + " fBreakpointID:" + fBreakpointID + " action:" + actionKind; //$NON-NLS-1$ //$NON-NLS-2$
+		return getClass().getSimpleName() + "(fBreakpointID:" + fBreakpointID + " action:" + actionKind + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	public static VMBreakpointRequest createRemove(long id) {

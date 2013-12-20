@@ -20,4 +20,7 @@ public abstract class VMEvent implements Serializable {
 		super();
 	}
 	
+	public String toString() {
+		return getClass().getSimpleName() + "()";
+	}
 }
