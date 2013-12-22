@@ -1,5 +1,23 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York, Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
 // =========  OCL Lib queries ================
 @cached
 operation getOperationByName(name : String) : oclStdLib!Operation {
+// Look for OclAny class first
+    
     return oclStdLib!Operation.all.selectOne(o | o.name == name);
+}
+
+@cached
+operation getTypeByName(name : String) : oclStdLib!PrimitiveType {
+    var t =  oclStdLib!PrimitiveType.all.selectOne(t | t.name == name);
+    return t;
 }
