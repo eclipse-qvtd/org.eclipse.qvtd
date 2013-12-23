@@ -79,14 +79,14 @@ migrate PropertyAssignment
         exp.referredOperation = getOperationByName("=");
         exp.name = "=";
         // The type is boolean
-        exp.type = getTypeByName("Boolean");
+        exp.type = exp.referredOperation.type;
         // The source is a PropertyCallExp
         exp.source = new QVTc!PropertyCallExp;
         // The property is the targetProperty
         exp.source.referredProperty = original.targetProperty.equivalent();
         // The source of the PropertyCallExp is the slotExpression
         exp.source.source = original.slotExpression.equivalent();
-        exp.source.type = original.value.type.equivalent();
+        exp.source.type = original.targetProperty.equivalent().type;
         // The argument is the value
         var args : Set;
         args.add(original.value.equivalent());

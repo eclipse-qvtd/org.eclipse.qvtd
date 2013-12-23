@@ -7,7 +7,7 @@
   <nestedPackage xsi:type="qvtb:Transformation" xmi:id="T.umlRdbms" name="umlRdbms"
       superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclElement">
     <ownedComment body="Enforce uml to rdbms"/>
-    <ownedComment body="/* Enforce uml to rdbms /*"/>
+    <ownedComment body="/* Enforce uml to rdbms */"/>
     <ownedOperation xsi:type="qvtb:Function" xmi:id="o.umlRdbms.getAllSupers..simpleuml.Class"
         isStatic="true" name="getAllSupers" type="#//@nestedPackage.1/@ownedType.0">
       <ownedParameter xsi:type="qvtb:FunctionParameter" xmi:id="p0o.umlRdbms.getAllSupers..simpleuml.Class"
@@ -1467,7 +1467,7 @@
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
+              <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Classifier"
                   referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type">
                 <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
                     referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@bottomPattern/@variable.0"/>
@@ -1762,7 +1762,7 @@
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
+              <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Classifier"
                   referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type">
                 <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
                     referredVariable="#//@nestedPackage.0/@rule.13/@domain.0/@bottomPattern/@variable.0"/>
@@ -1984,7 +1984,7 @@
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
+              <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Classifier"
                   referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type">
                 <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
                     referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@variable.0"/>

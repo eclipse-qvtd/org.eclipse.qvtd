@@ -14,8 +14,7 @@
 <project default="QvtuToQvtm">
 	<!-- Default Properties -->
 	<property name="OclLibURI" value="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas"/>
-	<property name="QVTcToQVTuPruning" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTuPruning.eol"/>
-	<property name="QVTcToQVTuFlock" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTu.mig"/>
+	<property name="QVTcToQVTu" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTu.mig"/>
 	<property name="QVTuToQVTm" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTuToQVTm.mig"/>
 	
 	<!-- Create for each example/test -->
@@ -56,7 +55,7 @@
             modelFile = "${qvtuas}" 
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="false" store="true"/>
-	    <epsilon.flock originalmodel="QVTc" migratedmodel="QVTu" uri="${QVTcToQVTuFlock}">
+	    <epsilon.flock originalmodel="QVTc" migratedmodel="QVTu" uri="${QVTcToQVTu}">
 	        <model ref="QVTc"/>
 	    	<model ref="QVTu"/>
 	    	<model ref="config"/>
@@ -78,10 +77,10 @@
         <epsilon.emf.loadModel
             name = "QVTmF"
             aliases ="QVT"
-            modelFile = "${qvtmflattenas}" 
+            modelFile = "${qvtmas}" 
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="false" store="true"/>
-        <epsilon.flock originalmodel="QVTu" migratedmodel="QVTmF" uri="${QVTuToQVTmFlatten}">
+        <epsilon.flock originalmodel="QVTu" migratedmodel="QVTmF" uri="${QVTuToQVTm}">
             <model ref="QVTu"/>
             <model ref="QVTmF"/>
         	<model ref="config"/>
@@ -96,7 +95,7 @@
         <epsilon.emf.loadModel
             name = "QVTmF"
             aliases ="QVT"
-            modelFile = "${qvtmflattenas}" 
+            modelFile = "${qvtmas}" 
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="true" store="false"/>
 		<!-- QVTm Partition  -->

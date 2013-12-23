@@ -19,7 +19,6 @@ pre {
 migrate Mapping
     when : original.refinement.size() > 0 {
         
-        original.println("Mapping ");
         for (refined in original.refinement) {
             // Nested mappings with no domains. Since many mappings can refine the same mapping
             // get the equivalent and copy (create) them
@@ -39,7 +38,6 @@ migrate GuardPattern
 	            return original.area.refinement.size() > 0;
 	         } 
 	     } {
-        "GuardPattern ".println(original.area + " ");
         // Variables. Search for variables in the refined mapping. Copy all variables that have
         // different names as the local variables. If there is any with the same name, re-type it
         var localVarNames = migrated.variable.collect(v | v.name); 
@@ -64,8 +62,7 @@ migrate BottomPattern
                return original.area.refinement.size() > 0;
             } 
          } {
-         
-        "BottomPattern ".println(original.area + " ");
+
         // Variables. Search for variables in the refined mapping. Copy all variables that have
         // different names as the local variables. If there is any with the same name, re-type it
         var localVarNames = migrated.variable.collect(v | v.name);    
