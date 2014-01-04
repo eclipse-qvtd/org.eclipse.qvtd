@@ -1,0 +1,121 @@
+import SimpleUML: '../UmlToRdbms/SimpleUML.ecore'::simpleuml;
+import UmlToUml: 'SimpleUmlToFlatUml.ecore'::simpleumltoflatuml;
+
+transformation hierarchyFlatenning {
+    origin imports SimpleUML;
+    final imports SimpleUML;
+    imports UmlToUml;
+}
+
+map UmlElementToUmlElement in hierarchyFlatenning {
+    origin () {
+        se:UMLModelElement |
+    }
+    enforce final () {
+        te:UMLModelElement |    
+    }
+    where () {
+        realize e2e:UmlModelElementT |
+        e2e.origin = se;
+        e2e.final = te;
+    }
+    map {
+        where () {
+            e2e.name := se.name;
+            se.name := e2e.name;
+            e2e.name := te.name;
+            te.name := e2e.name;
+            e2e.kind := se.kind;
+            se.kind := e2e.kind;
+            e2e.kind := te.kind;
+            te.kind := e2e.kind;
+        }
+    }
+}
+
+map PackageToPackage in hierarchyFlatenning refines UmlElementToUmlElement {
+    origin () {
+        sp:Package |
+    }
+    enforce final () {
+        realize tp:Package |
+    }
+    where () {
+        realize p2p:PackageT |
+    }
+}
+
+map ClassToClass in hierarchyFlatenning refines UmlElementToUmlElement {
+    origin (sp:Package |) {
+        sc:Class |
+        sc.namespace = sp;
+    }
+    enforce final (tp:Package |) {
+        realize tc:Class |
+        tc.namespace = tp;
+    }
+    where (p2p:PackageT |) {
+        realize c2c:ClassT |
+        c2c.origin := sc;
+        c2c.final := tc;
+    }
+}
+
+map AttributeToAttribute in hierarchyFlatenning refines UmlElementToUmlElement {
+    origin (sc:Class |) {
+        sa:Attribute |
+        sa.owner = sc;
+    }
+    enforce final (tc:Class |) {
+        realize ta:Attribute |
+        ta.owner := tc;
+    }
+    where (c2c:ClassT | c2c.origin = sc; c2c.final = tc;) {
+        realize a2a:AttributeT |
+        a2a.owner := c2c;
+    }
+    map {
+        where () {
+            a2a.type := sa.type;
+            sa.type := a2a.type;
+            a2a.type := ta.type;
+            ta.type = a2a.type;
+        }
+    }
+}
+
+query hierarchyFlatenning::getAllSupers(cls : SimpleUML::Class) : Set(SimpleUML::Class) {
+    cls.general->collect(gen | getAllSupers(gen))->including(cls)->asSet()
+}
+
+map ClassInheritance in hierarchyFlatenning {
+    origin (gc:Class | ) {
+        c:Class |
+        getAllSupers(c)->includes(gc);
+    }
+    map {
+        where (c2c:ClassT | c2c.origin = c;) {
+            realize ch:ClassTHierarchy |
+            ch.classT := c2c;
+            ch.general := gc;
+        }    
+    }
+    
+}
+
+map AttributeInheritance in hierarchyFlatenning {
+    origin (gc:Class |) {
+        sa:Attribute |
+        sa.owner = gc;
+    }
+    enforce final (tc:Class |) {
+        realize ta:Attribute |
+        ta.owner := tc;
+    }
+    where (c2c:ClassT, ch:ClassTHierarchy |
+            ch.general = gc;
+            ch.ClassT = c2c;
+            c2c.final = tc;
+    ) {
+    }
+} 
