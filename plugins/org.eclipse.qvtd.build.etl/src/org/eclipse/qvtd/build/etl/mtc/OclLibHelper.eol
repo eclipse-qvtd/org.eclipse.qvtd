@@ -9,11 +9,18 @@
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
 // =========  OCL Lib queries ================
+
+/**
+ * Returns the operation of the given name that belongs to the given type. 
+ * <p>
+ * The operation is @chached to improve performance.
+ *
+ * @param name the name of the operation
+ * @param owningType the type to which the operation belongs
+ */
 @cached
-operation getOperationByName(name : String) : oclStdLib!Operation {
-// Look for OclAny class first
-    
-    return oclStdLib!Operation.all.selectOne(o | o.name == name);
+operation getOperationByName(name : String, owningType : oclStdLib!Type) : oclStdLib!Operation {
+    return oclStdLib!Operation.all.selectOne(o | o.owningType == owningType and o.name == name);
 }
 
 @cached

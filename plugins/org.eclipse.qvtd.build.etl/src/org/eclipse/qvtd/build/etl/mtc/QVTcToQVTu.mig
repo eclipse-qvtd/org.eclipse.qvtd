@@ -75,8 +75,8 @@ migrate PropertyAssignment
     when : isInputDomain(original.bottomPattern.area) {
     
         var exp = new QVTc!OperationCallExp;
-        // It's an '=' operation 
-        exp.referredOperation = getOperationByName("=");
+        // It's an '=' operation. TODO, how to get the correct type?
+        exp.referredOperation = getOperationByName("=", oclStdLib!AnyType.all().selectOne(t | t.name == "OclAny"));
         exp.name = "=";
         // The type is boolean
         exp.type = exp.referredOperation.type;
