@@ -77,11 +77,13 @@
         name="body" upperBound="-1" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.OclExpression"
         containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.CatchExp.exception"
-        name="exception" upperBound="-1" eType="ecore:EClass EMOF.ecore#EMOF.Type">
+        name="exception" lowerBound="1" upperBound="-1" eType="ecore:EClass EMOF.ecore#EMOF.Type">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="tryExpression"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exceptionalVariableName"
+        eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.ComputeExp" name="ComputeExp"
       eSuperTypes="#ImperativeOCL.ImperativeExpression">
