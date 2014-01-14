@@ -175,6 +175,7 @@
         name="extent" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.InstantiationExp.instantiatedClass"
         name="instantiatedClass" lowerBound="1" eType="ecore:EClass EMOF.ecore#EMOF.Class"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredConstructor" eType="ecore:EClass QVTOperational.ecore#QVTOperational.ImperativeOperation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.ListLiteralExp" name="ListLiteralExp"
       eSuperTypes="EssentialOCL.ecore#EssentialOCL.LiteralExp">
