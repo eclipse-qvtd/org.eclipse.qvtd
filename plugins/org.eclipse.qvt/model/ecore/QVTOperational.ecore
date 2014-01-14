@@ -213,7 +213,7 @@
         name="body" lowerBound="1" eType="#QVTOperational.ConstructorBody" containment="true"
         resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ObjectExp.referredObject"
-        name="referredObject" lowerBound="1" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable">
+        name="referredObject" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="objectExpression"/>
       </eAnnotations>
