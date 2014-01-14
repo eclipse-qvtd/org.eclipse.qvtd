@@ -46,7 +46,11 @@
       eSuperTypes="QVTBase.ecore#QVTBase.Pattern">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.CorePattern.variable"
         name="variable" ordered="false" upperBound="-1" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable"
-        containment="true" resolveProxies="false"/>
+        containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="corePattern"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" xmi:id="QVTCore.EnforcementMode" name="EnforcementMode">
     <eLiterals xmi:id="QVTCore.EnforcementMode.Creation" name="Creation"/>
