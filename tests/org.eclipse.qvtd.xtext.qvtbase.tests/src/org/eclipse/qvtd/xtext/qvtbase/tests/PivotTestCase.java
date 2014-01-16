@@ -30,7 +30,6 @@ import junit.framework.TestCase;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -52,8 +51,6 @@ import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
-import org.eclipse.uml2.uml.profile.l2.L2Package;
-import org.eclipse.uml2.uml.resource.UML302UMLResource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
@@ -277,27 +274,5 @@ public class PivotTestCase extends TestCase
 		if (!noDebug) {
 			System.out.println(string);
 		}		
-	}
-
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-//		debugPrintln("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
-		EPackage.Registry.INSTANCE.put(UML302UMLResource.STANDARD_PROFILE_NS_URI, L2Package.eINSTANCE);
-	}
-
-	@Override
-	protected void tearDown() throws Exception {
-//		OCLstdlib.uninstall();	
-//		CompleteOCLStandaloneSetup.doTearDown();
-//		EssentialOCLStandaloneSetup.doTearDown();
-//		MarkupStandaloneSetup.doTearDown();
-//		OCLinEcoreStandaloneSetup.doTearDown();
-//		OCLstdlibStandaloneSetup.doTearDown();
-//		System.gc();
-//		System.runFinalization();
-//		MetaModelManagerResourceAdapter.INSTANCES.show();
-//		debugPrintln("==> Finish " + getName());
-		super.tearDown();
 	}
 }
