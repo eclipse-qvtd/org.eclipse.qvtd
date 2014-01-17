@@ -23,7 +23,6 @@ import java.util.Map;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -107,13 +106,13 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	{
 		public static OperationOrRuleFilter INSTANCE = new OperationOrRuleFilter();
 		
-		public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
-				@NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
+		public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull Object match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
+				@NonNull Object match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
 			return 0;
 		}
 
-		public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
-			return (eObject instanceof Operation) || (eObject instanceof Rule);
+		public boolean matches(@NonNull EnvironmentView environmentView, @NonNull Object object) {
+			return (object instanceof Operation) || (object instanceof Rule);
 		}
 	}
 
