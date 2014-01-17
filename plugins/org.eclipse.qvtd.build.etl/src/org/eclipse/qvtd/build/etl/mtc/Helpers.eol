@@ -60,6 +60,29 @@ operation isEnforceMode() : Boolean {
     return config!Configuration.all.first().mode == config!Mode#enforcement;
 }
 
+/** 
+ * Returns the tranformation of a mapping. Does a bottom up recursive search
+ */
+operation QVT!Mapping getTransforamtion() : QVT!Transformation {
+    if (self.transformation.isDefined()) {
+        return self.transformation;
+    } else if (self.context.isDefiend()) {
+        return self.context.getTransforamtion();
+    } else {
+        self.err("Cotextless mapping ");
+    }
+}
+
+/**
+ * Returns the typed model of a tranformation that corresponds to the middle
+ * model.
+ */
+operation QVT!Transformation getMiddleTypedModel() : QVT!TypedModel {
+
+    return self.modelParameter.selectOne(tm | tm.name = config!Configuration.all.first().middle.name);
+}
+
+
 /**
  * Returns the bottom pattern to which a realized variable belongs.
  * <p>

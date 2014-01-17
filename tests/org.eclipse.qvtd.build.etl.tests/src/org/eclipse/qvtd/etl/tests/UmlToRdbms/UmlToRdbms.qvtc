@@ -58,18 +58,13 @@ map primitiveToName in umlRdbms {
         prim.namespace = p;
     }
     check enforce rdbms () {
-        sqlType:String |
+        realize sqlType:String |
     }
     where (p2s:PackageToSchema | p2s.umlPackage = p;) {
         realize p2n:PrimitiveToName |
         p2n.owner := p2s;
         p2n.primitive := prim;
         p2n.typeName := sqlType;
-    }
-    map {
-        where () {
-            p2n.name := prim.name + '2' + sqlType;
-        }
     }
 }
 
@@ -80,6 +75,14 @@ map integerToNumber in umlRdbms refines primitiveToName {
     check enforce rdbms () {
         sqlType := 'NUMBER';
     }
+    where () {
+        realize p2n:IntegerToNumber |
+    }
+    map {
+        where () {
+            p2n.name := prim.name + '2' + 'NUMBER';
+        }
+    }
 }
 
 map booleanToBoolean in umlRdbms refines primitiveToName {
@@ -89,6 +92,14 @@ map booleanToBoolean in umlRdbms refines primitiveToName {
     check enforce rdbms () {
         sqlType := 'BOOLEAN';
     }
+    where () {
+        realize p2n:BooleanToBoolean |
+    }
+    map {
+        where () {
+            p2n.name := prim.name + '2' + 'BOOLEAN';
+        }
+    }
 }
 
 map stringToVarchar in umlRdbms refines primitiveToName {
@@ -97,6 +108,14 @@ map stringToVarchar in umlRdbms refines primitiveToName {
     }
     check enforce rdbms () {
         sqlType := 'VARCHAR';
+    }
+    where () {
+        realize p2n:StringToVarchar |
+    }
+    map {
+        where () {
+            p2n.name := prim.name + '2' + 'VARCHAR';
+        }
     }
 }
 
@@ -163,8 +182,8 @@ map classToTable in umlRdbms {
             pk.owner := t;
             pk.kind := 'primary';
             pc.owner := t;
-            pc.key->includes(pk);
-            default pc.key := Set(Key){pk};
+            pc.keys->includes(pk);
+            default pc.keys := Set(Key){pk};
             default pc.type := 'NUMBER';
         }
         where () {
@@ -360,7 +379,7 @@ map attributeColumns in umlRdbms {
     check enforce rdbms (t:Table |) {
         realize c:Column |
         c.owner := t;
-        c.key->size()=0;
+        c.keys->size()=0;
         c.foreignKeys->size()=0;
     }
     where (c2t:ClassToTable | c2t.table = t;) {

@@ -19,82 +19,130 @@ pre {
 migrate Mapping
     when : original.refinement.size() > 0 {
         
+        //original.println("Maping ");
         for (refined in original.refinement) {
+            //refined.println("refined ");
+            // For each domain in the refined mapping, if it doesn't exist, copy it. If it does exist, merge it.
+            // Domains added first so nested mappings can find them
+            for (d in refined.collect(r | r.domain).flatten()) {
+                if (not migrated.domain.exists(ed | ed.name == d.name)) {
+                    //d.println("Copy ");
+                    migrated.domain.add(emfTool.getECoreUtil().copy(d.equivalent()));
+                } else {
+                    //d.println("Merge ");
+                    var local = migrated.domain.selectOne(ed | ed.name == d.name);
+                    local.guardPattern.mergeGuardPatterns(d.equivalent().guardPattern);
+                    local.bottomPattern.mergeBottomPatterns(d.equivalent().bottomPattern);
+                }
+            }
+            // Merge middle patterns
+            migrated.guardPattern.mergeGuardPatterns(refined.equivalent().guardPattern);
+            migrated.bottomPattern.mergeBottomPatterns(refined.equivalent().bottomPattern);
+
             // Nested mappings with no domains. Since many mappings can refine the same mapping
-            // get the equivalent and copy (create) them
-            migrated.local.addAll(emfTool.getECoreUtil().copyAll(refined.collect(r | r.local.select(nm | nm.domain.size() == 0)).flatten().equivalent()));
-            // Add a copy (create) domains that don't need to be merged (i.e. with different typeModels than the refining mapping)
-            migrated.domain.addAll(emfTool.getECoreUtil().copyAll(refined.collect(r | r.domain).flatten().select(d | original.domain.collect(d2 | d2.name).flatten().excludes(d.name)).equivalent()));
+            // get the equivalent and copy (create) them. If the migrated mapping already has a nested mapping it has to be merged
+            for (m in refined.collect(r | r.local.select(nm | nm.domain.isEmpty())).flatten()) {
+                if (migrated.local.isEmpty()) {
+                    migrated.local.add(emfTool.getECoreUtil().copy(m.equivalent()));
+	            } else {
+	                var local = migrated.local.selectOne(m | m.domain.isEmpty());
+	                local.guardPattern.mergeGuardPatterns(m.equivalent().guardPattern);
+	                local.bottomPattern.mergeBottomPatterns(m.equivalent().bottomPattern);
+	            }
+            }
+            // TODO For nested mappings with domains Possibly a similar mapping with the same domains must be found
+        }
+        
+        // Fix references
+        migrated.guardPattern.fixPredicateVarReferences();
+        migrated.bottomPattern.fixPredicateVarReferences();
+        migrated.bottomPattern.fixOperationCallReferences();
+        migrated.bottomPattern.fixAssignmentVarReferences();
+        for (d in migrated.domain) {
+            d.guardPattern.fixPredicateVarReferences();
+            d.bottomPattern.fixPredicateVarReferences();
+            d.bottomPattern.fixOperationCallReferences();
+            d.bottomPattern.fixAssignmentVarReferences();
+        }
+        for (m in migrated.local) {
+            m.guardPattern.fixPredicateVarReferences();
+            m.bottomPattern.fixPredicateVarReferences();
+            m.bottomPattern.fixOperationCallReferences();
+            m.bottomPattern.fixAssignmentVarReferences();
         }
         // Remove the refinements
         migrated.refinement = Set{};
     }
 
-migrate GuardPattern
-    when {
-	         if (original.area.isTypeOf(QVTu!CoreDomain)) {
-	            return original.area.rule.refinement.size() > 0; 
-	         } else if (original.area.isTypeOf(QVTu!Mapping)) {
-	            return original.area.refinement.size() > 0;
-	         } 
-	     } {
-        // Variables. Search for variables in the refined mapping. Copy all variables that have
-        // different names as the local variables. If there is any with the same name, re-type it
-        var localVarNames = migrated.variable.collect(v | v.name); 
-        var refinedPatterns = migrated.getRefinedPatterns(original, "guard");
-        for (localVar in migrated.variable) {
-            localVar.retypeVar(refinedPatterns);
-        }
-        // Straight copy non-refined variables
-        migrated.variable.addAll(emfTool.getECoreUtil().copyAll(refinedPatterns.collect(p | p.variable).flatten().select(v | not localVarNames.includes(v.name)).equivalent()));
-        // Copy predicates
-        migrated.predicate.addAll(emfTool.getECoreUtil().copyAll(refinedPatterns.collect(p | p.predicate).flatten().equivalent()));
-        // Find all variable references.
-        migrated.fixPredicateVarReferences();
-   }
+/**
+ * Merge a GuardPattern with another one. This operation is to be used when
+ * flattening a mapping to compose domains and nested mappings.
+ */    
+operation QVT!GuardPattern mergeGuardPatterns(merge : QVT!GuardPattern) {
+
+    // Variables. Search for variables in the refined mapping. Copy all variables that have
+    // different names as the local variables. If there is any with the same name, re-type it
+    var localVarNames = self.variable.collect(v | v.name); 
     
-
-migrate BottomPattern
-    when {
-            if (original.area.isTypeOf(QVTu!CoreDomain)) {
-               return original.area.rule.refinement.size() > 0; 
-            } else if (original.area.isTypeOf(QVTu!Mapping)) {
-               return original.area.refinement.size() > 0;
-            } 
-         } {
-
-        // Variables. Search for variables in the refined mapping. Copy all variables that have
-        // different names as the local variables. If there is any with the same name, re-type it
-        var localVarNames = migrated.variable.collect(v | v.name);    
-        var refinedPatterns = migrated.getRefinedPatterns(original, "bottom");
-        for (localVar in migrated.variable) {
-            localVar.retypeVar(refinedPatterns);
-        }
-        // Straight copy non-refined variables
-        migrated.variable.addAll(emfTool.getECoreUtil().copyAll(refinedPatterns.collect(p | p.variable).flatten().select(v | not localVarNames.includes(v.name)).equivalent()));
-        // The same for realized variables
-        var localRealizedVarNames = migrated.realizedVariable.collect(v | v.name);
-        for (localVar in migrated.realizedVariable) {
-            localVar.retypeRealizedVar(refinedPatterns);
-        }
-        // Straight copy non-refined realized variables
-        migrated.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(refinedPatterns.collect(p | p.realizedVariable).flatten().select(v | not localRealizedVarNames.includes(v.name)).equivalent()));
-        
-        // Copy predicates
-        migrated.predicate.addAll(emfTool.getECoreUtil().copyAll(refinedPatterns.collect(p | p.predicate).flatten().equivalent()));
-        // Copy assignments
-        migrated.assignment.addAll(emfTool.getECoreUtil().copyAll(refinedPatterns.collect(p | p.assignment).flatten().equivalent()));
-        // Copy operations
-        migrated.enforcementOperation.addAll(emfTool.getECoreUtil().copyAll(refinedPatterns.collect(p | p.enforcementOperation).flatten().equivalent()));
-        // Find all variable references.
-        migrated.fixPredicateVarReferences();
-        // Fix references in operations
-        migrated.fixOperationCallReferences();
-        
+    // TODO this should be an OCL constraint: if mapping refines, and there is
+    // a variable with the same name, then its type should be the same or extend
+    // it
+    //var refinedPatterns = self.getRefinedPatterns(merge, "guard");
+    //refinedPatterns.println("refined patterns ");
+    //for (localVar in self.variable) {
+    //    localVar.retypeVar(refinedPatterns);
+    //}
+    
+    // Straight copy non-refined variables
+    self.variable.addAll(emfTool.getECoreUtil().copyAll(merge.variable.select(v | not localVarNames.includes(v.name))));
+    // Copy predicates
+    self.predicate.addAll(emfTool.getECoreUtil().copyAll(merge.predicate));
 }
 
+/**
+ * Merge a BottomPattern with another one. This operation is to be used when
+ * flattening a mapping to compose domains and nested mappings.
+ */    
+operation QVT!BottomPattern mergeBottomPatterns(merge : QVT!BottomPattern) {
+
+    // Variables. Search for variables in the refined mapping. Copy all variables that have
+    // different names as the local variables. If there is any with the same name, re-type it
+    var localVarNames = self.variable.collect(v | v.name);
+        
+    // Perhaps this shuold be done after all the refinements have been done
+    //var refinedPatterns = self.getRefinedPatterns(merge, "bottom");
+    //for (localVar in self.variable) {
+    //    localVar.retypeVar(refinedPatterns);
+    //}
+    
+    
+    // Straight copy non-refined variables
+    self.variable.addAll(emfTool.getECoreUtil().copyAll(merge.variable.select(v | not localVarNames.includes(v.name))));
+    
+    // The same for realized variables
+    var localRealizedVarNames = self.realizedVariable.collect(v | v.name);
+    
+    //for (localVar in self.realizedVariable) {
+    //    localVar.retypeRealizedVar(refinedPatterns);
+    //}
+    
+    // Straight copy non-refined realized variables
+    self.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(merge.realizedVariable.select(v | not localRealizedVarNames.includes(v.name))));
+    // Copy predicates
+    self.predicate.addAll(emfTool.getECoreUtil().copyAll(merge.predicate));
+    // Copy assignments
+    self.assignment.addAll(emfTool.getECoreUtil().copyAll(merge.assignment));
+    // Copy operations
+    self.enforcementOperation.addAll(emfTool.getECoreUtil().copyAll(merge.enforcementOperation));
+}
+
+/**
+ * Retruns a Collection of patterns related this pattern. The related patterns
+ * are searched in the orginial pattern and its refinement's areas.
+ */
 @cached
 operation QVT!CorePattern getRefinedPatterns(orig : QVT!CorePattern, pattern : String) : Collection {
+    
     var refinedAreas;
     if (orig.area.isTypeOf(QVT!Mapping)) {
         refinedAreas = orig.area.refinement;
@@ -108,29 +156,68 @@ operation QVT!CorePattern getRefinedPatterns(orig : QVT!CorePattern, pattern : S
     }
 }
 
+/**
+ * Finds all variables referenced in a Preicate.
+ */
 @cached
 operation QVT!Predicate findRreferencedVariables() : Collection {
     return self.conditionExpression.findRreferencedVariables();
 }
 
+/**
+ * Finds all variables referenced in a Pattern by finding all references in
+ * the pattern's predicates.
+ */
 @cached
-operation QVT!Variable findReferencesInPattern(pattern : QVT!CorePattern) {
-    if (pattern.isTypeOf(QVT!GuardPattern)) {
-        return pattern.variable.selectOne(lv | lv.name == self.name);
-    } else if (pattern.isTypeOf(QVT!BottomPattern)) {
-        return pattern.variable.includingAll(pattern.realizedVariable).selectOne(lv | lv.name == self.name);
-    }
+operation QVT!GuardPattern findReferencesInPattern(variable : QVT!TypedElement) {
+    
+    return self.variable.selectOne(lv | lv.name == variable.name);
 }
 
-operation QVT!Variable findReferencesInPatterns(patterns : Sequence) {
+@cached
+operation QVT!BottomPattern findReferencesInPattern(variable : QVT!TypedElement) {
+    
+    var name;
+    if (variable.isTypeOf(QVT!CollectionItem)) {
+        name = variable.item.asString();
+    } else {
+        name = variable.name;
+    }
+    return self.variable.includingAll(self.realizedVariable).selectOne(lv | lv.name == name);
+}
+
+/**
+ * Finds all variables referenced in a set of Pattern by finding all references
+ * each of the patterns.
+ */
+operation QVT!TypedElement findReferencesInPatterns(patterns : Sequence) {
     
     var targetVar = null;
     for (p in patterns) {
-        targetVar = self.findReferencesInPattern(p);
+        targetVar = p.findReferencesInPattern(self);
         if (targetVar <> null) {
            return targetVar;
         }
     }
+}
+
+operation QVT!Area getContextMappingPatterns() : Sequence {
+
+    var mapping;
+    if (self.isTypeOf(QVTu!CoreDomain)) {
+        mapping = self.rule;
+    } else if (self.isTypeOf(QVTu!Mapping)) {
+        mapping = self;
+    }
+    var searchPatterns = new Sequence;
+    if (mapping.context.isDefined()) {
+        searchPatterns.addAll(mapping.context.domain.collect(d | d.guardPattern).flatten());
+        searchPatterns.addAll(mapping.context.domain.collect(d | d.bottomPattern).flatten());
+        searchPatterns.add(mapping.context.guardPattern);
+        searchPatterns.add(mapping.context.bottomPattern);
+        searchPatterns.addAll(mapping.context.getContextMappingPatterns());
+    }
+    return searchPatterns;
 }
 
 operation QVT!GuardPattern fixPredicateVarReferences() {
@@ -147,11 +234,15 @@ operation QVT!GuardPattern fixPredicateVarReferences() {
                 if (self.area.isTypeOf(QVTu!CoreDomain)) {
                     // Domain guard patterns depend on guard patterns of domains with depending typed models
                     searchPatterns = self.area.rule.domain.select(d | d.typedModel.dependsOn.includes(self.area.typedModel)).collect(d | d.guardPattern).flatten();
-                    targetVar = v.findReferencesInPatterns(searchPatterns);
                 } else if (self.area.isTypeOf(QVTu!Mapping)) {
                     // 1. Mapping's domain guard patterns
                     searchPatterns = self.area.domain.collect(d | d.guardPattern).flatten();
-                    targetVar = v.findReferencesInPatterns(searchPatterns);
+                }
+                targetVar = v.findReferencesInPatterns(searchPatterns);
+                if (targetVar == null) {
+                    // Search in the context
+	                searchPatterns = self.area.getContextMappingPatterns();
+	                targetVar = v.findReferencesInPatterns(searchPatterns);
                 }
             }
             if (targetVar == null) {
@@ -169,6 +260,7 @@ operation QVT!GuardPattern fixPredicateVarReferences() {
 
 
 operation QVT!BottomPattern fixPredicateVarReferences() {
+    
     for (predicate in self.predicate) {
         //predicate.println("Predicate ");
         var refVars =  predicate.findRreferencedVariables();
@@ -189,6 +281,7 @@ operation QVT!BottomPattern fixPredicateVarReferences() {
                         searchPatterns = self.area.rule.domain.select(d | d.typedModel.dependsOn.includes(self.area.typedModel)).collect(d | d.bottomPattern).flatten();
                         targetVar = v.findReferencesInPatterns(searchPatterns); 
                     }
+                    
                 } else if (self.area.isTypeOf(QVTu!Mapping)) {
                     // 1. Guard Pattern of the Mapping
                     searchPatterns = self.area.guardPattern.asSet();
@@ -204,6 +297,11 @@ operation QVT!BottomPattern fixPredicateVarReferences() {
                         }
                     }
                 }
+                if (targetVar == null) {
+	                // Search in the context
+	                searchPatterns = self.area.getContextMappingPatterns();
+	                targetVar = v.findReferencesInPatterns(searchPatterns);
+	            }
             }
             if (targetVar == null) {
                 if (self.area.isTypeOf(QVTu!Mapping)) {
@@ -233,7 +331,7 @@ operation QVT!Assignment findRreferencedVariables() : Set {
 
 operation QVT!BottomPattern fixAssignmentVarReferences() {
     for (assignment in self.assignment) {
-        //predicate.println("Predicate ");
+        //assignment.println("Assignment ");
         var refVars =  assignment.findRreferencedVariables();
         //refVars.println("refVars ");
         // Find variables and fix references
@@ -246,7 +344,6 @@ operation QVT!BottomPattern fixAssignmentVarReferences() {
                 if (self.area.isTypeOf(QVTu!CoreDomain)) {
                     // 1. Guard Pattern of the Domain
                     searchPatterns = self.area.rule.domain.collect(d | d.guardPattern).flatten();
-                    searchPatterns.println();
                     targetVar = v.findReferencesInPatterns(searchPatterns); 
                     // 2. Bottom Pattern of domains with depending typed models
                     if (targetVar == null) {
@@ -255,7 +352,7 @@ operation QVT!BottomPattern fixAssignmentVarReferences() {
                     }
                 } else if (self.area.isTypeOf(QVTu!Mapping)) {
                     // 1. Guard Pattern of the Mapping
-                    searchPatterns = self.area.guardPattern.asSet();
+                    searchPatterns = self.area.guardPattern.asSequence();
                     targetVar = v.findReferencesInPatterns(searchPatterns); 
                     // 2. Mapping's domain bottom pattern
                     if (targetVar == null) {
@@ -268,6 +365,11 @@ operation QVT!BottomPattern fixAssignmentVarReferences() {
                         }
                     }
                 }
+                if (targetVar == null) {
+                    // Search in the context
+                    searchPatterns = self.area.getContextMappingPatterns();
+                    targetVar = v.findReferencesInPatterns(searchPatterns);
+                }
             }
             if (targetVar == null) {
                 if (self.area.isTypeOf(QVTu!Mapping)) {
@@ -278,11 +380,11 @@ operation QVT!BottomPattern fixAssignmentVarReferences() {
             }
             assignment.value.fixVarReferences(targetVar);
 		    if (assignment.isTypeOf(QVTu!PropertyAssignment)) {
-		      assignment.slotExpression.fixVarReferences(targetVar);
+                assignment.slotExpression.fixVarReferences(targetVar);
 		    } else if (assignment.isTypeOf(QVTu!VariableAssignment)) {
-		         if (self.targetVariable.name = targetVar.name) {
-		             self.targetVariable = targetVar;
-		         }
+		        if (assignment.targetVariable.name = targetVar.name) {
+		            assignment.targetVariable = targetVar;
+		        }
 		    }
         }
     }
@@ -312,7 +414,7 @@ operation QVT!BottomPattern fixOperationCallReferences() {
                     }
                 } else if (self.area.isTypeOf(QVTu!Mapping)) {
                     // 1. Guard Pattern of the Mapping
-                    searchPatterns = self.area.guardPattern.asSet();
+                    searchPatterns = self.area.guardPattern.asSequence();
                     targetVar = v.findReferencesInPatterns(searchPatterns); 
                     // 2. Mapping's domain bottom pattern
                     if (targetVar == null) {
@@ -324,6 +426,11 @@ operation QVT!BottomPattern fixOperationCallReferences() {
                             targetVar = v.findReferencesInPatterns(searchPatterns); 
                         }
                     }
+                }
+                if (targetVar == null) {
+                    // Search in the context
+                    searchPatterns = self.area.getContextMappingPatterns();
+                    targetVar = v.findReferencesInPatterns(searchPatterns);
                 }
             }
             if (targetVar == null) {
