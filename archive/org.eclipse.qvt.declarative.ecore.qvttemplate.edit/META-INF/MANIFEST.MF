@@ -11,5 +11,6 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.qvt.declarative.ecore.QVTTemplate.provider
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl.ecore.edit;visibility:=reexport,
- org.eclipse.qvt.declarative.ecore.qvttemplate;visibility:=reexport
+ org.eclipse.qvt.declarative.ecore.qvttemplate;visibility:=reexport,
+ org.eclipse.emf.ecore.edit
 Bundle-ActivationPolicy: lazy
