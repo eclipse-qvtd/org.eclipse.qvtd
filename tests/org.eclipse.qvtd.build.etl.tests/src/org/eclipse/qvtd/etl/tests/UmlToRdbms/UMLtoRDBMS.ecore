@@ -35,7 +35,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FromAttributeOwner" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="fromAttributes" ordered="false"
-        eType="#//FromAttribute" containment="true" eOpposite="#//FromAttribute/owner"/>
+        upperBound="-1" eType="#//FromAttribute" containment="true" eOpposite="#//FromAttribute/owner"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerToNumber" eSuperTypes="#//PrimitiveToName"/>
   <eClassifiers xsi:type="ecore:EClass" name="NonLeafAttribute" eSuperTypes="#//FromAttributeOwner #//FromAttribute"/>

@@ -1,0 +1,111 @@
+/**
+ * We are only interested in containemnet relations, so we only need to search
+ * EPackages and EClasses, all other nodes in the root can be safely ignored. 
+ * Note: Ed Merks suggests there should only be one EPackage per metamodel, but
+ * since this is not a requirement, we need to be safe
+ */
+
+var visited : Map;
+
+for (p in mm!EPackage.all().select(p | not p.eSuperPackage.isDefined())) {
+    // Add to tree
+    p.iterativeDFS();
+}
+
+
+/* ===========================================================================*/
+
+// Iterative Depth First Search of containment relations
+// Serch till no more elements are visited during three increments
+operation mm!EPackage iterativeDFS() {
+
+	var iterate = true;
+	var change = false;
+	var maxDepth : Integer;
+	var noChangeCount : Integer = 0;
+	
+	var parentNode = new tree!Node;
+    parentNode.data = self;
+    parentNode.elementName = self.name;
+    //parentNode.parent =  root;
+    
+	maxDepth = 1;
+    self.~visited = true;
+    
+    while (iterate) {
+        maxDepth.println("IterativeDFS ");
+        var preNodeCount = tree!Node.all().size();
+        change = false;
+        for (c in self.eClassifiers.select(c | c.isTypeOf(mm!EClass))) {
+            change = c.dfs(1, maxDepth, parentNode) or change;
+        }
+        //change = preNodeCount <> tree!Node.all().size();
+        //self.eSubpackages.includingAll().size().println();
+        //for (e in self.eSubpackages.includingAll(self.eClassifiers.select(c | c.isTypeOf(mm!EClass)))) {
+        //    change = e.dfs(1, maxDepth, n) and change;
+	    //}
+	    change.println("Change ");
+	    if (not change) {
+	       noChangeCount = noChangeCount + 1;
+	       if (noChangeCount > 3) {
+	           iterate = false;
+	       }
+	    }
+	    maxDepth = maxDepth + 1;
+	    if(maxDepth > 10) {
+	       iterate = false; // Safe ending
+	    }
+	    "".println("\n");   
+    }
+    
+    //for (c in self.eClassifiers.select(c | c.isTypeOf(mm!EClass))) {
+    //    c.iterativeDFS();
+    //}
+    
+}
+
+// Returns true if added
+operation mm!EClass dfs(depth, maxDepth, parentNode) : Boolean {
+    
+    var tabs = "";
+    for (i in Sequence{1..depth}) {
+        tabs = tabs + "\t";
+    } 
+    self.name.println(tabs + "dfs ");
+    //depth.println(tabs + "depth ");
+    
+    var change = false;
+    if (depth > maxDepth) {
+        "Max depth reached, do nothing".println(tabs);
+        
+    } else {
+        // If self is abstract, consider all subclasses at same depth (flattening)
+	    if (self.abstract) {
+	        "Abstract, do inheritance".println(tabs);
+	        for (sc in mm!EClass.all().select(c | c.eSuperTypes.includes(self))) {
+	            sc.dfs(depth, maxDepth, parentNode);
+	        }
+	    } else {
+	        // Add Node or get node
+	        var n;
+	        if (visited.containsKey(self)) {
+	            n = visited.get(self);
+	        } else { 
+	            n = new tree!Node;
+	            n.data = self;
+	            n.elementName = self.name;
+	            visited.put(self, n);
+	        }
+	        if (depth == maxDepth) {
+	            n.parent = parentNode;
+	            change = true;
+	        }
+	        // Navigate Containment
+	        for (sf in self.eStructuralFeatures.select(sf : mm!EReference | sf.containment)) {
+	            change = sf.eReferenceType.dfs(depth+1, maxDepth, n) or change;
+	        }
+	    }
+    }
+    return change;
+    
+}
