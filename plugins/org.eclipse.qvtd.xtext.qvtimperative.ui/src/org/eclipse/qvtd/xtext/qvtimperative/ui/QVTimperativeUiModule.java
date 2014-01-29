@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
 
@@ -40,5 +41,9 @@ public class QVTimperativeUiModule extends AbstractQVTimperativeUiModule
 	
 	public Class<? extends ParserBasedContentAssistContextFactory.StatefulFactory> bindStatefulFactory() {
 		return Bug382088Workaround.class;		// BUG 382088
+	}
+
+	public Class<? extends XtextEditor> bindXtextEditor() {
+		return QVTimperativeEditor.class;
 	}
 }

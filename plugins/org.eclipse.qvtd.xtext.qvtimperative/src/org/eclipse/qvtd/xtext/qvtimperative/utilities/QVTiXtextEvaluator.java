@@ -11,6 +11,7 @@ import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 
 /**
@@ -21,10 +22,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
  */
 public class QVTiXtextEvaluator extends QVTiPivotEvaluator
 {
-	
 	public static ASResource asResource;
 	
-    public static @NonNull Transformation loadTransformation(@NonNull MetaModelManager metaModelManager, @NonNull URI transformationURI) throws IOException {
+    public static @NonNull Transformation loadTransformation(@NonNull MetaModelManager metaModelManager, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
 		
 		// Load the transformation resource
         BaseCSResource xtextResource = null;
@@ -44,7 +44,7 @@ public class QVTiXtextEvaluator extends QVTiPivotEvaluator
     				}
     			}
     		} finally {
-    			if (adapter != null) {
+    			if (!keepDebug && (adapter != null)) {
     				adapter.dispose();
     			}
     		}
@@ -55,11 +55,11 @@ public class QVTiXtextEvaluator extends QVTiPivotEvaluator
         throw new IOException("There was an error loading the QVTi file. ");
 	}
     
-    
-    public QVTiXtextEvaluator(@NonNull MetaModelManager metaModelManager, @NonNull URI transformationURI) throws IOException {
-    	super(metaModelManager, loadTransformation(metaModelManager, transformationURI));
+    public QVTiXtextEvaluator(@NonNull QVTiEnvironmentFactory envFactory, @NonNull URI transformationURI) throws IOException {
+    	super(envFactory, loadTransformation(envFactory.getMetaModelManager(), transformationURI, envFactory.keepDebug()));
     }
     
-    
-	
+    public QVTiXtextEvaluator(@NonNull MetaModelManager metaModelManager, @NonNull URI transformationURI) throws IOException {
+    	super(metaModelManager, loadTransformation(metaModelManager, transformationURI, false));
+    }
 }

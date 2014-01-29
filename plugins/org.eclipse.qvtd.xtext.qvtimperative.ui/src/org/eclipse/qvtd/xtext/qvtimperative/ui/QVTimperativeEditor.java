@@ -9,6 +9,8 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
+ *
+ * </copyright>
  */
 package org.eclipse.qvtd.xtext.qvtimperative.ui;
 

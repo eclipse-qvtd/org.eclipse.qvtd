@@ -169,8 +169,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 			Collections.sort(sortedKeys);
 			for (String key : sortedKeys) {
 				Property property = key2property.get(key);
-				TypeDescriptor outerTypeDescriptor = context.getTypeDescriptor(property.getOwningType().getTypeId(), true);
-				TypeDescriptor middleTypeDescriptor = context.getTypeDescriptor(property.getType().getTypeId(), true);
+				TypeDescriptor outerTypeDescriptor = context.getBoxedDescriptor(property.getOwningType().getTypeId());
+				TypeDescriptor middleTypeDescriptor = context.getBoxedDescriptor(property.getType().getTypeId());
 				js.append("protected final ");
 				js.appendIsRequired(true);
 				js.append(" ");
@@ -366,7 +366,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 				js.append(" ");
 				ElementId elementId = cgFunction.getTypeId().getElementId();
 				if (elementId != null) {
-					TypeDescriptor javaTypeDescriptor = context.getTypeDescriptor(elementId, false);
+					TypeDescriptor javaTypeDescriptor = context.getUnboxedDescriptor(elementId);
 					js.appendClassReference(javaTypeDescriptor);
 				}
 				js.append(" ");
@@ -417,7 +417,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 							js.append(" ");
 						}
 						if (elementId != null) {
-							TypeDescriptor javaTypeDescriptor = context.getTypeDescriptor(elementId, false);
+							TypeDescriptor javaTypeDescriptor = context.getUnboxedDescriptor(elementId);
 							js.appendClassReference(javaTypeDescriptor);
 						}
 						js.append(" emptyList = ");
@@ -460,7 +460,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 			CGValuedElement argument = getExpression(cgArgument);
 			Parameter pParameter = pParameters.get(i);
 //			CGTypeId cgParameterTypeId = analyzer.getTypeId(pParameter.getTypeId());
-			TypeDescriptor parameterTypeDescriptor = context.getTypeDescriptor(pParameter.getTypeId(), false);
+			TypeDescriptor parameterTypeDescriptor = context.getUnboxedDescriptor(pParameter.getTypeId());
 			js.appendReferenceTo(parameterTypeDescriptor, argument);
 		}
 		js.append(");\n");
@@ -557,7 +557,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 					pivotTypeId = ((CollectionTypeId)pivotTypeId).getElementTypeId();
 				}
 				TypeDescriptor argumentTypeDescriptor = context.getTypeDescriptor(cgMappingCallBinding);
-				TypeDescriptor iteratorTypeDescriptor = context.getTypeDescriptor(DomainUtil.nonNullState(pivotTypeId), true);
+				TypeDescriptor iteratorTypeDescriptor = context.getBoxedDescriptor(DomainUtil.nonNullState(pivotTypeId));
 				if (!valueOrValues.isNonNull()) {
 					js.append("assert ");
 					js.appendValueName(valueOrValues);
@@ -618,7 +618,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 					pivotTypeId = ((CollectionTypeId)pivotTypeId).getElementTypeId();
 				}
 				TypeDescriptor argumentTypeDescriptor = context.getTypeDescriptor(cgMappingCallBinding);
-				TypeDescriptor iteratorTypeDescriptor = context.getTypeDescriptor(DomainUtil.nonNullState(pivotTypeId), true);
+				TypeDescriptor iteratorTypeDescriptor = context.getBoxedDescriptor(DomainUtil.nonNullState(pivotTypeId));
 				if (!argumentTypeDescriptor.isAssignableFrom(iteratorTypeDescriptor)) {
 					js.popIndentation();
 					js.append("}\n");

@@ -43,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -221,7 +222,8 @@ public class MainTab extends AbstractLaunchConfigurationTab implements ModifyLis
 		try {
 			@SuppressWarnings("null")@NonNull Group inputsGroup2 = inputsGroup;
 			@SuppressWarnings("null")@NonNull Group outputsGroup2 = outputsGroup;
-			QVTiXtextEvaluator xtextEvaluator = new QVTiXtextEvaluator(getMetaModelManager(), txURI);
+			QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(null, getMetaModelManager());
+			QVTiXtextEvaluator xtextEvaluator = new QVTiXtextEvaluator(envFactory, txURI);
 			Transformation transformation = xtextEvaluator.getTransformation();
 			Set<TypedModel> inputs = new HashSet<TypedModel>();
 			Set<TypedModel> outputs = new HashSet<TypedModel>();
@@ -299,7 +301,7 @@ public class MainTab extends AbstractLaunchConfigurationTab implements ModifyLis
 
 	protected void refreshParametersGroup(@NonNull Group group, int style, Map<String, String> map) {
 		List<String> keys = new ArrayList<String>(map.keySet());
-		Collections.sort(keys);;
+		Collections.sort(keys);
 		Control[] children = group.getChildren();
 		int iMax = Math.min(children.length, keys.size());
 		int i = 0;

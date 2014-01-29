@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -56,8 +55,8 @@ public class RelationCallExpCSAttribution extends InvocationExpCSAttribution
 		return new OperationFilter(type, targetElement)
 		{
 			@Override
-			public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
-				if (eObject instanceof Relation) {
+			public boolean matches(@NonNull EnvironmentView environmentView, @NonNull Object object) {
+				if (object instanceof Relation) {
 					if (iterators > 0) {
 						return false;
 					}
@@ -67,7 +66,7 @@ public class RelationCallExpCSAttribution extends InvocationExpCSAttribution
 					return true;
 				}
 				else {
-					return super.matches(environmentView, eObject);
+					return super.matches(environmentView, object);
 				}
 			}
 			

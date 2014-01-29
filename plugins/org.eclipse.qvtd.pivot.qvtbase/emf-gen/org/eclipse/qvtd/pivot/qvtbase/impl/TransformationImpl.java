@@ -209,7 +209,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<org.eclipse.ocl.examples.pivot.Package> getNestedPackage() {
+	@SuppressWarnings("null")
+	public @NonNull List<org.eclipse.ocl.examples.pivot.Package> getNestedPackage() {
 		if (nestedPackage == null) {
 			nestedPackage = new EObjectContainmentWithInverseEList<org.eclipse.ocl.examples.pivot.Package>(org.eclipse.ocl.examples.pivot.Package.class, this, QVTbasePackage.TRANSFORMATION__NESTED_PACKAGE, PivotPackage.PACKAGE__NESTING_PACKAGE);
 		}
@@ -304,7 +305,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<org.eclipse.ocl.examples.pivot.Package> getImportedPackage() {
+	@SuppressWarnings("null")
+	public @NonNull List<org.eclipse.ocl.examples.pivot.Package> getImportedPackage() {
 		if (importedPackage == null) {
 			importedPackage = new EObjectResolvingEList<org.eclipse.ocl.examples.pivot.Package>(org.eclipse.ocl.examples.pivot.Package.class, this, QVTbasePackage.TRANSFORMATION__IMPORTED_PACKAGE);
 		}
@@ -316,7 +318,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Type> getOwnedType() {
+	@SuppressWarnings("null")
+	public @NonNull List<Type> getOwnedType() {
 		if (ownedType == null) {
 			ownedType = new EObjectContainmentWithInverseEList<Type>(Type.class, this, QVTbasePackage.TRANSFORMATION__OWNED_TYPE, PivotPackage.TYPE__PACKAGE);
 		}
@@ -328,7 +331,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Annotation> getOwnedTag() {
+	@SuppressWarnings("null")
+	public @NonNull EList<Annotation> getOwnedTag() {
 		if (ownedTag == null) {
 			ownedTag = new EObjectContainmentEList<Annotation>(Annotation.class, this, QVTbasePackage.TRANSFORMATION__OWNED_TAG);
 		}
@@ -340,7 +344,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypedModel> getModelParameter() {
+	@SuppressWarnings("null")
+	public @NonNull EList<TypedModel> getModelParameter() {
 		if (modelParameter == null) {
 			modelParameter = new EObjectContainmentWithInverseEList<TypedModel>(TypedModel.class, this, QVTbasePackage.TRANSFORMATION__MODEL_PARAMETER, QVTbasePackage.TYPED_MODEL__TRANSFORMATION);
 		}
@@ -352,7 +357,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Rule> getRule() {
+	@SuppressWarnings("null")
+	public @NonNull EList<Rule> getRule() {
 		if (rule == null) {
 			rule = new EObjectContainmentWithInverseEList<Rule>(Rule.class, this, QVTbasePackage.TRANSFORMATION__RULE, QVTbasePackage.RULE__TRANSFORMATION);
 		}

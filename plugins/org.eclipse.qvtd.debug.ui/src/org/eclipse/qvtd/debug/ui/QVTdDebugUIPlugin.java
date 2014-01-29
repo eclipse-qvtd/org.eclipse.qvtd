@@ -19,10 +19,23 @@ import java.util.Collections;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.jface.viewers.DecorationOverlayIcon;
+import org.eclipse.qvtd.debug.ui.actions.QVTODebugImages;
+import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
+import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -32,7 +45,9 @@ import org.osgi.framework.BundleContext;
 public class QVTdDebugUIPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "xxx"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "org.eclipse.qvtd.debug.ui"; //$NON-NLS-1$
+	
+	public static final String DEBUG_EDITOR_ID  = QVTimperativeEditor.EDITOR_ID; //$NON-NLS-1$	
 
 	// The shared instance
 	private static QVTdDebugUIPlugin plugin;
@@ -118,4 +133,193 @@ public class QVTdDebugUIPlugin extends AbstractUIPlugin {
 		}
 		return imageDescriptorRegistry;
 	}
+	
+	public static BasicDiagnostic createDiagnostic(String message) {
+		return new BasicDiagnostic(Diagnostic.OK, PLUGIN_ID, 0, message, null);
+	}
+	
+	public static Diagnostic createErrorDiagnostic(String message, Throwable throwable) {
+		Object[] data = (throwable == null) ? null : new Object [] { throwable };
+		return new BasicDiagnostic(Diagnostic.ERROR,  PLUGIN_ID, 0, message, data);
+	}
+	
+	public static Diagnostic createWarnDiagnostic(String message) {
+		return new BasicDiagnostic(Diagnostic.ERROR,  PLUGIN_ID, 0, message, null);
+	}	
+
+	/**
+	 * Indicates that the given diagnostic is neither error or canceled.
+	 * 
+	 * @param diagnostic
+	 *            the diagnostic to test
+	 * @return <code>true</code> in case of success, <code>false</code>
+	 *         otherwise
+	 */
+	public static boolean isSuccess(Diagnostic diagnostic) {
+		int severity = diagnostic.getSeverity();
+		return severity != Diagnostic.ERROR && severity != Diagnostic.CANCEL;
+	}
+	
+	public static void log(int severity, int code, String message, Throwable throwable) {
+		//
+		// Status ctor requires a non-null message
+		String msg = message == null
+			? "" //$NON-NLS-1$
+			: message;
+
+		try {
+			if (getDefault() != null) {
+				// Eclipse environment
+				getDefault().log(new Status(severity, PLUGIN_ID, code, msg, throwable));
+			} else {
+				// not in the Eclipse environment
+				//if (shouldTrace()) {
+					switch (code) {
+						case Diagnostic.WARNING :
+							System.err.print("WARNING "); //$NON-NLS-1$
+							break;
+						case Diagnostic.ERROR :
+						case Diagnostic.CANCEL :
+							System.err.print("ERROR "); //$NON-NLS-1$
+							break;
+						default :
+							// don't output INFO or OK messages
+							return;
+					}
+
+					System.err.print(code);
+					System.err.print(": "); //$NON-NLS-1$
+					System.err.println(message);
+
+					if (throwable != null) {
+						throwable.printStackTrace(System.err);
+					}
+				//}
+			}
+		} catch (IllegalArgumentException iae) {
+			iae.printStackTrace();
+		}
+	}
+
+    public static void log(IStatus status) {
+    	QVTdDebugUIPlugin debugPlugin = getDefault();
+		if(debugPlugin != null) {
+			debugPlugin.getLog().log(status);
+    	}
+    } 
+
+    public static void log(Throwable e) {
+        log(new Status(IStatus.ERROR, PLUGIN_ID, "Exception caught", e)); //$NON-NLS-1$
+    }
+
+	public static final Display getStandardDisplay() {
+		Display display = Display.getCurrent();
+		if (display == null) {
+			display = Display.getDefault();
+		}
+		return display;
+	}
+
+	/**
+	 * Returns the active workbench window
+	 * 
+	 * @return the active workbench window
+	 */
+	public static IWorkbenchWindow getActiveWorkbenchWindow() {
+		return getDefault().getWorkbench().getActiveWorkbenchWindow();
+	}
+
+	/**
+	 * Returns the active workbench shell or <code>null</code> if none
+	 * 
+	 * @return the active workbench shell or <code>null</code> if none
+	 */
+	public static Shell getActiveWorkbenchShell() {
+		IWorkbenchWindow window = getActiveWorkbenchWindow();
+		if (window != null) {
+			return window.getShell();
+		}
+		return null;
+	}
+
+	public static IStatus createStatus(int severity, String message) {
+		return new Status(severity, PLUGIN_ID, 0, message, null);
+	}
+
+	public static IStatus createErrorStatus(String message) {
+		return createStatus(IStatus.ERROR, message);
+	}
+
+	public static void statusDialog(IStatus status) {
+		switch (status.getSeverity()) {
+		case IStatus.ERROR:
+			statusDialog(DebugUIMessages.StatusDialog_Error, status);
+			break;
+		case IStatus.WARNING:
+			statusDialog(DebugUIMessages.StatusDialog_Warning, status);
+			break;
+		case IStatus.INFO:
+			statusDialog(DebugUIMessages.StatusDialog_Information,
+					status);
+			break;
+		}
+	}
+
+	public static void statusDialog(String title, IStatus status) {
+		Shell shell = getActiveWorkbenchShell();
+		if (shell != null) {
+			switch (status.getSeverity()) {
+			case IStatus.ERROR:
+				ErrorDialog.openError(shell, title, null, status);
+				break;
+			case IStatus.WARNING:
+				MessageDialog.openWarning(shell, title, status.getMessage());
+				break;
+			case IStatus.INFO:
+				MessageDialog
+						.openInformation(shell, title, status.getMessage());
+				break;
+			}
+		}
+	}
+	
+	@Override
+	protected ImageRegistry createImageRegistry() {
+		ImageRegistry imageRegistry = super.createImageRegistry();
+		imageRegistry.put(QVTODebugImages.LOCAL_VARIABLE, imageDescriptor("localvar_obj.gif")); //$NON-NLS-1$		
+//		imageRegistry.put(QVTODebugImages.THIS_VARIABLE, imageDescriptor("thisvar_obj.gif")); //$NON-NLS-1$
+//		imageRegistry.put(QVTODebugImages.PREDEFINED_VARIABLE, imageDescriptor("predefvar_obj.gif")); //$NON-NLS-1$
+		imageRegistry.put(QVTODebugImages.MODEL_PARAMETER, imageDescriptor("modelpar_obj.gif")); //$NON-NLS-1$
+		imageRegistry.put(QVTODebugImages.ATTRIBUTE, imageDescriptor("attribute_obj.gif")); //$NON-NLS-1$
+		imageRegistry.put(QVTODebugImages.REFERENCE, imageDescriptor("reference_obj.gif")); //$NON-NLS-1$
+//		imageRegistry.put(QVTODebugImages.COLLECTION_ELEMENT, imageDescriptor("index_element_obj.gif")); //$NON-NLS-1$
+		imageRegistry.put(QVTODebugImages.MAPPING, imageDescriptor("Mapping.gif")); //$NON-NLS-1$
+		imageRegistry.put(QVTODebugImages.TRANSFORMATION, imageDescriptor("Transformation.gif")); //$NON-NLS-1$
+		
+/*		imageRegistry.put(QVTODebugImages.INTERM_PROPERTY,				
+				overlayImage("intermprop_ovr.gif", //$NON-NLS-1$ 
+						imageRegistry.get(QVTODebugImages.ATTRIBUTE),
+						IDecoration.BOTTOM_RIGHT));		
+		
+		imageRegistry.put(QVTODebugImages.CONDITIONAL_BPNT_ENABLED,
+				overlayImage("conditional_ovr.gif", //$NON-NLS-1$ 
+						DebugUITools.getImage(IDebugUIConstants.IMG_OBJS_BREAKPOINT),
+						IDecoration.TOP_LEFT));
+		imageRegistry.put(QVTODebugImages.CONDITIONAL_BPNT_DISABLED,
+				overlayImage(
+						"conditional_ovr_disabled.gif", //$NON-NLS-1$
+						DebugUITools.getImage(IDebugUIConstants.IMG_OBJS_BREAKPOINT_DISABLED),
+						IDecoration.TOP_LEFT));
+*/
+		return imageRegistry;
+	}
+
+	private ImageDescriptor imageDescriptor(String imagePath) {
+		return imageDescriptorFromPlugin(PLUGIN_ID, "icons/" + imagePath); //$NON-NLS-1$
+	}
+	
+    private final ImageDescriptor overlayImage(String overImagePath, Image base, int quadrant) {
+        ImageDescriptor decorator = imageDescriptor(overImagePath);
+        return new DecorationOverlayIcon(base, decorator, quadrant);
+    }	
 }

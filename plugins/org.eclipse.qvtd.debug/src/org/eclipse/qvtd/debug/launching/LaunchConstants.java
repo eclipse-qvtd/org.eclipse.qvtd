@@ -37,4 +37,11 @@ public interface LaunchConstants
 	 * ILaunchConfiguration Map<String,String> attribute for the output resource per output model name.
 	 */
 	public static final @NonNull String OUT_KEY = "out";
+
+
+
+//	String PREFIX = "org.eclipse.qvtd.debug.";  //$NON-NLS-1$
+//	String MODULE           = PREFIX + "module"; //$NON-NLS-1$
+
+
 }

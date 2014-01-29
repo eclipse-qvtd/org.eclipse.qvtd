@@ -18,11 +18,13 @@ import java.util.Map.Entry;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
@@ -32,6 +34,7 @@ import org.eclipse.ocl.examples.xtext.completeocl.validation.CompleteOCLEObjectV
 import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
@@ -47,6 +50,13 @@ import org.junit.Test;
  */
 public class QVTiInterpreterTests extends LoadTestCase
 {
+	private final class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
+	{
+		public MyQVTiEnvironmentFactory(@Nullable EPackage.Registry reg, @NonNull MetaModelManager metaModelManager) {
+			super(reg, metaModelManager);
+	    	setEvaluationTracingEnabled(true);
+		}
+	}
 	
 	/**
 	 * The Class MyQvtiEvaluator provides helper methods for loading and creating models used in the test
@@ -69,9 +79,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 		 * @throws IOException Signals that an I/O exception has occurred.
 		 */
 		public MyQvtiEvaluator(@NonNull MetaModelManager metaModelManager, @NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
-			super(metaModelManager, getProjectFileURI(fileNamePrefix + "/"  + transformationFileName));
+			super(new MyQVTiEnvironmentFactory(null, metaModelManager), getProjectFileURI(fileNamePrefix + "/"  + transformationFileName));
 			this.fileNamePrefix = fileNamePrefix + "/";
-	    	setEvaluationTracingEnabled(true);
 		}
 		
 		/**

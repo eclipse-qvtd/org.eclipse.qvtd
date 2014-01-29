@@ -7,11 +7,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
@@ -20,23 +18,34 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * and then saving the models.
  * @see QVTiXtextEvaluator
  */
-public class QVTiPivotEvaluator
+public class QVTiPivotEvaluator implements EvaluationMonitor
 {
 	protected final @NonNull MetaModelManager metaModelManager;
 	protected final @NonNull Transformation transformation;
-	protected final @NonNull PivotEnvironmentFactory envFactory;
-	protected final @NonNull PivotEnvironment env;
+	protected final @NonNull QVTiEnvironmentFactory envFactory;
+	protected final @NonNull QVTiEnvironment env;
 	protected final @NonNull QVTiModelManager modelManager;
-    private boolean traceEvaluation = false;
-    
+    private EvaluationMonitor monitor = null;
+    private boolean canceled = false;
+
+    public QVTiPivotEvaluator(@NonNull QVTiEnvironmentFactory envFactory, @NonNull Transformation transformation) {
+    	this.envFactory = envFactory;
+    	this.metaModelManager = envFactory.getMetaModelManager();
+    	this.transformation = transformation;
+    	this.env = envFactory.createEnvironment();
+    	QVTiTransformationAnalysis transformationAnalysis = envFactory.createTransformationAnalysis();
+    	transformationAnalysis.analyzeTransformation(transformation);
+    	this.modelManager = envFactory.createModelManager(transformationAnalysis);
+    }
+
     public QVTiPivotEvaluator(@NonNull MetaModelManager metaModelManager, @NonNull Transformation transformation) {
     	this.metaModelManager = metaModelManager;
     	this.transformation = transformation;
-    	this.envFactory = new PivotEnvironmentFactory(null, metaModelManager);
+    	this.envFactory = new QVTiEnvironmentFactory(null, metaModelManager);
     	this.env = envFactory.createEnvironment();
-    	QVTiTransformationAnalysis transformationAnalysis = new QVTiTransformationAnalysis(metaModelManager);
+    	QVTiTransformationAnalysis transformationAnalysis = envFactory.createTransformationAnalysis();
     	transformationAnalysis.analyzeTransformation(transformation);
-    	this.modelManager = new QVTiModelManager(transformationAnalysis);
+    	this.modelManager = envFactory.createModelManager(transformationAnalysis);
     }
 
 	/**
@@ -44,6 +53,15 @@ public class QVTiPivotEvaluator
 	 */
 	public void addModel(@NonNull TypedModel typedModel, @NonNull Resource resource) {
 		modelManager.addModel(typedModel, resource);
+	}
+
+	public void cancel() {
+		if (monitor != null) {
+			monitor.cancel();
+		}
+		else {
+			canceled = true;
+		}
 	}
 
 	/**
@@ -69,21 +87,23 @@ public class QVTiPivotEvaluator
 	}
 
 	public Boolean execute() {
-        EvaluationEnvironment evalEnv = envFactory.createEvaluationEnvironment();
-        QVTiEvaluationVisitor visitor = new QVTiEvaluationVisitorImpl(env, evalEnv, modelManager);
-        if (isEvaluationTracingEnabled()) {
-            // decorate the evaluation visitor with tracing support
-        	visitor = new QVTiTracingEvaluationVisitor(visitor);
-        	((QVTiTracingEvaluationVisitor)visitor).setVerboseLevel(QVTiTracingEvaluationVisitor.VERBOSE_LEVEL_HIGH);
-        }
+        IQVTiEvaluationEnvironment evalEnv = envFactory.createEvaluationEnvironment(modelManager, transformation);
+        QVTiEvaluationVisitor visitor = envFactory.createEvaluationVisitor(env, evalEnv);
         return (Boolean) transformation.accept(visitor);
 	}
 
-	public final @NonNull PivotEnvironment getEnvironment() {
+	/**
+	 * Return the EvaluationMonitor to which cancel()/isCanceled() are delegated or this if no delegate specified.
+	 */
+	public @NonNull EvaluationMonitor getEvaluationMonitor() {
+        return monitor != null ? monitor : this;
+    }
+
+	public final @NonNull QVTiEnvironment getEnvironment() {
 		return env;
 	}
 
-	public final @NonNull PivotEnvironmentFactory getEnvironmentFactory() {
+	public final @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 		return envFactory;
 	}
 
@@ -99,22 +119,9 @@ public class QVTiPivotEvaluator
 		return transformation;
 	}
 
-	/**
-     * Queries whether tracing of evaluation is enabled.  Tracing
-     * logs the progress of evaluation to the console, which may
-     * be of use in diagnosing problems.
-     * <p>
-     * In an Eclipse environment, tracing is also enabled by turning on the
-     * <tt>org.eclipse.ocl/debug/evaluation</tt> debug option. 
-     * </p>
-     * 
-     * @return whether evaluation tracing is enabled
-     * 
-     * @see #setEvaluationTracingEnabled(boolean)
-     */
-	public final boolean isEvaluationTracingEnabled() {
-        return traceEvaluation;
-    }
+	public boolean isCanceled() {
+		return canceled || ((monitor != null) && monitor.isCanceled());
+	}
 
 	/**
 	 * Loads the modelURI and binds it to the named TypedModel.
@@ -168,19 +175,9 @@ public class QVTiPivotEvaluator
 	}
 
 	/**
-     * Sets whether tracing of evaluation is enabled.  Tracing logs
-     * the progress of parsing to the console, which may be of use in diagnosing
-     * problems.
-     * <p>
-     * In an Eclipse environment, tracing is also enabled by turning on the
-     * <tt>org.eclipse.ocl/debug/evaluation</tt> debug option. 
-     * </p>
-     * 
-     * param b whether evaluation tracing is enabled
-     * 
-     * @see #isEvaluationTracingEnabled()
-     */
-    public void setEvaluationTracingEnabled(boolean b) {
-        traceEvaluation = b;
+	 * Specify an EvaluationMonitor to which cancel()/isCanceled() are delegated.
+	 */
+	public void setEvaluationMonitor(@Nullable EvaluationMonitor monitor) {
+        this.monitor = monitor;
     }
 }

@@ -18,13 +18,11 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitorImpl;
 import org.eclipse.ocl.examples.pivot.manager.PivotIdResolver;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
@@ -62,9 +60,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
  * 
  * @author Horacio Hoyos
  */
-public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImpl
-        implements QVTiEvaluationVisitor {
-
+public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImpl implements QVTiEvaluationVisitor
+{
 //	private static final Logger logger = Logger.getLogger(QVTiAbstractEvaluationVisitor.class);
         
     /**
@@ -72,12 +69,9 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      *
      * @param env The environment
      * @param evalEnv The evaluation environment
-     * @param modelManager The model manager
      */
-    public QVTiAbstractEvaluationVisitor(@NonNull Environment env,
-            @NonNull EvaluationEnvironment evalEnv,
-            @NonNull QVTiModelManager modelManager) {
-        super(env, evalEnv, modelManager);
+    public QVTiAbstractEvaluationVisitor(@NonNull QVTiEnvironment env, @NonNull IQVTiEvaluationEnvironment evalEnv) {
+        super(env, evalEnv, evalEnv.getModelManager());
     }
 
     /* (non-Javadoc)
@@ -92,7 +86,6 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      */
     @Override
 	public abstract @NonNull QVTiEvaluationVisitor createNestedEvaluator();
-    
 
     /**
      * Do mapping call recursion. Perform the recursion for the BoundVariable
@@ -132,7 +125,17 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 		}
 	}
 
-    /* (non-Javadoc)
+    @Override
+	public @NonNull QVTiEnvironment getEnvironment() {
+		return (QVTiEnvironment) super.getEnvironment();
+	}
+
+	@Override
+	public @NonNull IQVTiEvaluationEnvironment getEvaluationEnvironment() {
+		return (IQVTiEvaluationEnvironment) super.getEvaluationEnvironment();
+	}
+
+	/* (non-Javadoc)
      * @see org.eclipse.ocl.examples.pivot.evaluation.AbstractEvaluationVisitor#getModelManager()
      */
     @Override
@@ -284,7 +287,6 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMappingCall(org.eclipse.qvtd.pivot.qvtimperative.MappingCall)
 	 */
 	public @Nullable Object visitMappingCall(@NonNull MappingCall mappingCall) {
-    	
     	Mapping calledMapping = DomainUtil.nonNullModel(mappingCall.getReferredMapping());
 		//
 		//	Initialise nested environment directly with the bound values for non-looped bindings,
