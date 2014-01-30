@@ -95,8 +95,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationImplementation.inDirectionOf"
         name="inDirectionOf" lowerBound="1" eType="ecore:EClass QVTBase.ecore#QVTBase.TypedModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationImplementation.relation"
-        name="relation" eType="#QVTRelation.Relation" transient="true" resolveProxies="false"
-        eOpposite="#QVTRelation.Relation.operationalImpl"/>
+        name="relation" lowerBound="1" eType="#QVTRelation.Relation" transient="true"
+        resolveProxies="false" eOpposite="#QVTRelation.Relation.operationalImpl"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.RelationalTransformation"
       name="RelationalTransformation" eSuperTypes="QVTBase.ecore#QVTBase.Transformation">
