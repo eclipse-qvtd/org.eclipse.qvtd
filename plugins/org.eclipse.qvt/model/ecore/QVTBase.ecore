@@ -62,8 +62,8 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.modelParameter"
-        name="modelParameter" upperBound="-1" eType="#QVTBase.TypedModel" containment="true"
-        resolveProxies="false" eOpposite="#QVTBase.TypedModel.transformation"/>
+        name="modelParameter" ordered="false" upperBound="-1" eType="#QVTBase.TypedModel"
+        containment="true" resolveProxies="false" eOpposite="#QVTBase.TypedModel.transformation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTBase.Transformation.ownedTag"
         name="ownedTag" ordered="false" upperBound="-1" eType="ecore:EClass EMOF.ecore#EMOF.Tag"
         containment="true" resolveProxies="false"/>
