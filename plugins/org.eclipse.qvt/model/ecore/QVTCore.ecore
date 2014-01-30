@@ -59,8 +59,8 @@
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.EnforcementOperation" name="EnforcementOperation"
       eSuperTypes="EMOF.ecore#EMOF.Element">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.EnforcementOperation.bottomPattern"
-        name="bottomPattern" eType="#QVTCore.BottomPattern" transient="true" resolveProxies="false"
-        eOpposite="#QVTCore.BottomPattern.enforcementOperation"/>
+        name="bottomPattern" lowerBound="1" eType="#QVTCore.BottomPattern" transient="true"
+        resolveProxies="false" eOpposite="#QVTCore.BottomPattern.enforcementOperation"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTCore.EnforcementOperation.enforcementMode"
         name="enforcementMode" eType="#QVTCore.EnforcementMode"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.EnforcementOperation.operationCallExp"
