@@ -12,7 +12,11 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.CollectionTemplateExp.referredCollectionType"
-        name="referredCollectionType" lowerBound="1" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.CollectionType"/>
+        name="referredCollectionType" lowerBound="1" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.CollectionType">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="collectionTemplateExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.CollectionTemplateExp.rest"
         name="rest" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
@@ -26,7 +30,11 @@
         name="part" ordered="false" upperBound="-1" eType="#QVTTemplate.PropertyTemplateItem"
         containment="true" resolveProxies="false" eOpposite="#QVTTemplate.PropertyTemplateItem.objContainer"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.ObjectTemplateExp.referredClass"
-        name="referredClass" lowerBound="1" eType="ecore:EClass EMOF.ecore#EMOF.Class"/>
+        name="referredClass" lowerBound="1" eType="ecore:EClass EMOF.ecore#EMOF.Class">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="objectTemplateExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTTemplate.PropertyTemplateItem"
       name="PropertyTemplateItem" eSuperTypes="EMOF.ecore#EMOF.Element">
@@ -53,7 +61,11 @@
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTTemplate.TemplateExp" name="TemplateExp"
       abstract="true" eSuperTypes="EssentialOCL.ecore#EssentialOCL.LiteralExp">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.TemplateExp.bindsTo"
-        name="bindsTo" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable"/>
+        name="bindsTo" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="templateExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.TemplateExp.where"
         name="where" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.OclExpression"
         containment="true" resolveProxies="false">

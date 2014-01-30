@@ -6,11 +6,19 @@
       eSuperTypes="QVTBase.ecore#QVTBase.Pattern">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.DomainPattern.templateExpression"
         name="templateExpression" eType="ecore:EClass QVTTemplate.ecore#QVTTemplate.TemplateExp"
-        containment="true" resolveProxies="false"/>
+        containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="domainPattern"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.Key" name="Key" eSuperTypes="EMOF.ecore#EMOF.Element">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Key.identifies"
-        name="identifies" lowerBound="1" eType="ecore:EClass EMOF.ecore#EMOF.Class"/>
+        name="identifies" lowerBound="1" eType="ecore:EClass EMOF.ecore#EMOF.Class">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="key"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Key.oppositePart"
         name="oppositePart" ordered="false" upperBound="-1" eType="ecore:EClass EMOF.ecore#EMOF.Property">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
@@ -18,7 +26,11 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Key.part"
-        name="part" ordered="false" upperBound="-1" eType="ecore:EClass EMOF.ecore#EMOF.Property"/>
+        name="part" ordered="false" upperBound="-1" eType="ecore:EClass EMOF.ecore#EMOF.Property">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="key"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Key.transformation"
         name="transformation" eType="#QVTRelation.RelationalTransformation" transient="true"
         resolveProxies="false" eOpposite="#QVTRelation.RelationalTransformation.ownedKey"/>
@@ -34,7 +46,11 @@
         containment="true" resolveProxies="false" eOpposite="#QVTRelation.RelationImplementation.relation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Relation.variable"
         name="variable" ordered="false" upperBound="-1" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable"
-        containment="true" resolveProxies="false"/>
+        containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="variable"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Relation.when"
         name="when" eType="ecore:EClass QVTBase.ecore#QVTBase.Pattern" containment="true"
         resolveProxies="false">
@@ -54,9 +70,17 @@
       eSuperTypes="EssentialOCL.ecore#EssentialOCL.OclExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationCallExp.argument"
         name="argument" lowerBound="2" upperBound="-1" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.OclExpression"
-        containment="true" resolveProxies="false"/>
+        containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="relationCallExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationCallExp.referredRelation"
-        name="referredRelation" lowerBound="1" eType="#QVTRelation.Relation"/>
+        name="referredRelation" lowerBound="1" eType="#QVTRelation.Relation">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="relationCallExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.RelationDomain" name="RelationDomain"
       eSuperTypes="QVTBase.ecore#QVTBase.Domain">
@@ -68,9 +92,17 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomain.pattern"
-        name="pattern" eType="#QVTRelation.DomainPattern" containment="true" resolveProxies="false"/>
+        name="pattern" eType="#QVTRelation.DomainPattern" containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="relationDomain"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomain.rootVariable"
-        name="rootVariable" lowerBound="1" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable"/>
+        name="rootVariable" lowerBound="1" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="relationDomain"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.RelationDomainAssignment"
       name="RelationDomainAssignment" eSuperTypes="EMOF.ecore#EMOF.Element">
@@ -91,9 +123,17 @@
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.RelationImplementation"
       name="RelationImplementation" eSuperTypes="EMOF.ecore#EMOF.Element">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationImplementation.impl"
-        name="impl" lowerBound="1" eType="ecore:EClass EMOF.ecore#EMOF.Operation"/>
+        name="impl" lowerBound="1" eType="ecore:EClass EMOF.ecore#EMOF.Operation">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="relationImplementation"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationImplementation.inDirectionOf"
-        name="inDirectionOf" lowerBound="1" eType="ecore:EClass QVTBase.ecore#QVTBase.TypedModel"/>
+        name="inDirectionOf" lowerBound="1" eType="ecore:EClass QVTBase.ecore#QVTBase.TypedModel">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="relationImplementation"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationImplementation.relation"
         name="relation" lowerBound="1" eType="#QVTRelation.Relation" transient="true"
         resolveProxies="false" eOpposite="#QVTRelation.Relation.operationalImpl"/>

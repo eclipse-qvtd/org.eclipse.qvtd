@@ -9,7 +9,11 @@
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.ContextualProperty"
       name="ContextualProperty" eSuperTypes="EMOF.ecore#EMOF.Property">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ContextualProperty.context"
-        name="context" lowerBound="1" eType="ecore:EClass EMOF.ecore#EMOF.Class"/>
+        name="context" lowerBound="1" eType="ecore:EClass EMOF.ecore#EMOF.Class">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="contextualProperty"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ContextualProperty.initExpression"
         name="initExpression" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.OclExpression"
         containment="true" resolveProxies="false">
@@ -134,7 +138,11 @@
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.MappingParameter" name="MappingParameter"
       eSuperTypes="#QVTOperational.VarParameter">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingParameter.extent"
-        name="extent" eType="#QVTOperational.ModelParameter"/>
+        name="extent" eType="#QVTOperational.ModelParameter">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="mappingParameter"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.MappingParameter.referredDomain"
         name="referredDomain" eType="ecore:EClass QVTRelation.ecore#QVTRelation.RelationDomain">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
@@ -157,12 +165,20 @@
         name="conformanceKind" eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.String"
         defaultValueLiteral="effective"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ModelType.metamodel"
-        name="metamodel" lowerBound="1" upperBound="-1" eType="ecore:EClass EMOF.ecore#EMOF.Package"/>
+        name="metamodel" lowerBound="1" upperBound="-1" eType="ecore:EClass EMOF.ecore#EMOF.Package">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="modelType"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.Module" name="Module"
       eSuperTypes="EMOF.ecore#EMOF.Class EMOF.ecore#EMOF.Package">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.Module.configProperty"
-        name="configProperty" upperBound="-1" eType="ecore:EClass EMOF.ecore#EMOF.Property"/>
+        name="configProperty" upperBound="-1" eType="ecore:EClass EMOF.ecore#EMOF.Property">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="module"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.Module.entry"
         name="entry" eType="#QVTOperational.EntryOperation">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
@@ -189,12 +205,20 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.Module.usedModelType"
-        name="usedModelType" upperBound="-1" eType="#QVTOperational.ModelType"/>
+        name="usedModelType" upperBound="-1" eType="#QVTOperational.ModelType">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="module"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.ModuleImport" name="ModuleImport"
       eSuperTypes="EMOF.ecore#EMOF.Element">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ModuleImport.binding"
-        name="binding" upperBound="-1" eType="#QVTOperational.ModelType"/>
+        name="binding" upperBound="-1" eType="#QVTOperational.ModelType">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="moduleImport"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ModuleImport.importedModule"
         name="importedModule" lowerBound="1" eType="#QVTOperational.Module">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
@@ -211,7 +235,11 @@
       eSuperTypes="ImperativeOCL.ecore#ImperativeOCL.InstantiationExp">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ObjectExp.body"
         name="body" lowerBound="1" eType="#QVTOperational.ConstructorBody" containment="true"
-        resolveProxies="false"/>
+        resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="objectExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ObjectExp.referredObject"
         name="referredObject" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
@@ -278,7 +306,11 @@
       eSuperTypes="EssentialOCL.ecore#EssentialOCL.CallExp ImperativeOCL.ecore#ImperativeOCL.ImperativeExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ResolveExp.condition"
         name="condition" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.OclExpression"
-        containment="true" resolveProxies="false"/>
+        containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="resolveExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTOperational.ResolveExp.isDeferred"
         name="isDeferred" eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.Boolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTOperational.ResolveExp.isInverse"
@@ -287,7 +319,11 @@
         name="one" eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.Boolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ResolveExp.target"
         name="target" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable"
-        containment="true" resolveProxies="false"/>
+        containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="resolveExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.ResolveInExp" name="ResolveInExp"
       eSuperTypes="#QVTOperational.ResolveExp">

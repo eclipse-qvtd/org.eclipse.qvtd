@@ -29,7 +29,11 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.AssertExp.log"
-        name="log" eType="#ImperativeOCL.LogExp" containment="true" resolveProxies="false"/>
+        name="log" eType="#ImperativeOCL.LogExp" containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="logExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="ImperativeOCL.AssertExp.severity"
         name="severity" eType="#ImperativeOCL.SeverityKind" defaultValueLiteral="error"/>
   </eClassifiers>
@@ -75,7 +79,11 @@
       eSuperTypes="#ImperativeOCL.ImperativeExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.CatchExp.body"
         name="body" upperBound="-1" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.OclExpression"
-        containment="true" resolveProxies="false"/>
+        containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="catchExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.CatchExp.exception"
         name="exception" lowerBound="1" upperBound="-1" eType="ecore:EClass EMOF.ecore#EMOF.Type">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
@@ -174,11 +182,23 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.InstantiationExp.extent"
-        name="extent" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable"/>
+        name="extent" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="instantiationExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.InstantiationExp.instantiatedClass"
-        name="instantiatedClass" lowerBound="1" eType="ecore:EClass EMOF.ecore#EMOF.Class"/>
+        name="instantiatedClass" lowerBound="1" eType="ecore:EClass EMOF.ecore#EMOF.Class">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="instantiationExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initializationOperation"
-        eType="ecore:EClass EMOF.ecore#EMOF.Operation"/>
+        eType="ecore:EClass EMOF.ecore#EMOF.Operation">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="instantiationExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.ListLiteralExp" name="ListLiteralExp"
       eSuperTypes="EssentialOCL.ecore#EssentialOCL.LiteralExp">
@@ -206,7 +226,11 @@
       eSuperTypes="#ImperativeOCL.ImperativeExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.RaiseExp.argument"
         name="argument" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.OclExpression"
-        containment="true" resolveProxies="false"/>
+        containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="raiseExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.RaiseExp.exception"
         name="exception" lowerBound="1" eType="ecore:EClass EMOF.ecore#EMOF.Type">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
@@ -218,7 +242,11 @@
       eSuperTypes="#ImperativeOCL.ImperativeExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.ReturnExp.value"
         name="value" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.OclExpression"
-        containment="true" resolveProxies="false"/>
+        containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="returnExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" xmi:id="ImperativeOCL.SeverityKind" name="SeverityKind">
     <eLiterals xmi:id="ImperativeOCL.SeverityKind.error" name="error"/>
@@ -262,10 +290,18 @@
   <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.Typedef" name="Typedef"
       eSuperTypes="EMOF.ecore#EMOF.Class">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.Typedef.base"
-        name="base" lowerBound="1" eType="ecore:EClass EMOF.ecore#EMOF.Type"/>
+        name="base" lowerBound="1" eType="ecore:EClass EMOF.ecore#EMOF.Type">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="typedef"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.Typedef.condition"
         name="condition" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.OclExpression"
-        containment="true" resolveProxies="false"/>
+        containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="typedef"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.UnlinkExp" name="UnlinkExp"
       eSuperTypes="#ImperativeOCL.ImperativeExpression">
