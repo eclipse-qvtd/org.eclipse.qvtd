@@ -551,8 +551,8 @@ top relation InvokedRelationToMappingForChecking
       transformation = rt,
       isTopLevel = false,
       name = rn,
-      RelationCallExp = ri:RelationCallExp {
-         Predicate = p:Predicate {
+      relationCallExp = ri:RelationCallExp {
+         predicate = p:Predicate {
             pattern = pt:Pattern {
                whereOwner = ir:Relation {name = irn}
             }
@@ -642,8 +642,8 @@ top relation InvokedRelationToMappingForEnforcement
       transformation = rt,
       isTopLevel = false,
       name = rn,
-      RelationCallExp = ri:RelationCallExp {
-         Predicate = p:Predicate {
+      relationCallExp = ri:RelationCallExp {
+         predicate = p:Predicate {
             pattern = pt:Pattern {
                whereOwner = ir:Relation {name = irn}
             }
@@ -1387,7 +1387,7 @@ relation RDomainToMDBottomForEnforcementOfIdentityProp
             value = e:OclExpression {}
          }
       } {
-         c.Key.part->includes(pp)
+         c.key.part->includes(pp)
       }
       ++ _
    };
@@ -1425,7 +1425,7 @@ relation RDomainToMDBottomForEnforcementOfIdentityPropObject
             value = e:ObjectTemplateExp {bindsTo = tv:Variable{}}
          }
       } {
-         c.Key.part->includes(pp)
+         c.key.part->includes(pp)
       }
       ++ _
    };
@@ -1582,7 +1582,7 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
             value = e:OclExpression {}
          }
       } {
-         (not c.Key.part->includes(pp)) and (not e.oclIsKindOf(TemplateExp))
+         (not c.key.part->includes(pp)) and (not e.oclIsKindOf(TemplateExp))
       },
       rd:RelationDomain {
          pattern = rdp:DomainPattern {
@@ -1712,7 +1712,7 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropObject
                value = pte:ObjectTemplateExp {bindsTo = pv:Variable {}}
             }
          } {
-            not c.Key.part->includes(pp)
+            not c.key.part->includes(pp)
          }
          ++ _
       }
@@ -1900,7 +1900,7 @@ relation RDomainVarsToTraceClassProps
    domain relations rd:RelationDomain {
       rule = r:Relation{},
       pattern = dp:DomainPattern {
-         bindsTo = domainVars:Set(Variable) {dv:Variable {TemplateExp = te: TemplateExp{}}++_}
+         bindsTo = domainVars:Set(Variable) {dv:Variable {templateExp = te: TemplateExp{}}++_}
       }
    };
    enforce domain core mb:BottomPattern {
@@ -1926,7 +1926,7 @@ relation ROppositeDomainVarsToTraceClassProps
          r:Relation {},
          rd:RelationDomain {} ++ _
       },
-      domainVars:Set(Variable) {dv:Variable{TemplateExp = te:TemplateExp{}} ++ _}
+      domainVars:Set(Variable) {dv:Variable{templateExp = te:TemplateExp{}} ++ _}
       ++ _
    };
    enforce domain core mb:BottomPattern {
