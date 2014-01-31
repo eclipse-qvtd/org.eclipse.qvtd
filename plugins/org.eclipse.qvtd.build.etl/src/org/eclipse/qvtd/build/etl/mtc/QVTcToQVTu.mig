@@ -14,6 +14,7 @@ import "OclLibHelper.eol";
 // TODO Check that if the slot expression area is Null, the test is correct
 // Output domain to middle assignments are removed, iif the value expression
 // is not a variable
+// TODO Do we also have to migrate VariableAssignments?!?!?!
 @cascade
 delete PropertyAssignment
     when : isOutputDomain(original.value.getArea())
@@ -29,11 +30,34 @@ delete PropertyAssignment
 
 // Realized variables in the input domain are retyped into variables
 retype RealizedVariable to Variable
-    when : isInputDomain(original.oppositeBottomPattern().area)
+    when {
+        if (isInputDomain(original.oppositePattern().area)) {
+            return true;
+        } else {
+            if (isMiddleDomain(original.oppositePattern().area)) {
+                return original.oppositePattern().area.domain.size() > 0 and
+                       original.oppositePattern().area.domain.forAll(d | isOutputDomain(d));
+            } else {
+                return false;
+            }
+        }
+    }  
 
 // Property assignments in the input domain are retyped to predicates   
 retype PropertyAssignment to Predicate
-    when : isInputDomain(original.bottomPattern.area)  
+    when {
+        if (isInputDomain(original.bottomPattern.area)) {
+            return true;
+        } else {
+            if (isMiddleDomain(original.bottomPattern.area)) {
+                return original.bottomPattern.area.domain.size() > 0 and
+                       original.bottomPattern.area.domain.forAll(d | isOutputDomain(d)) and 
+                       original.findRreferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area));
+            } else {
+                return false;
+            }
+        }
+    }  
 
 migrate Transformation {
     var comment : QVTc!Comment = new QVTc!Comment;
@@ -63,16 +87,40 @@ migrate CoreDomain
 
 // Make sure variables and predicates are contained in the pattern    
 migrate BottomPattern 
-    when : isInputDomain(original.area) {
-        
+    when {
+        if (isInputDomain(original.area)) {
+            return true;
+        } else {
+            if (isMiddleDomain(original.area)) {
+                return original.area.domain.size() > 0 and
+                       original.area.domain.forAll(d | isOutputDomain(d));
+            } else {
+                return false;
+            }
+        }
+    } {
 	    migrated.variable.addAll(original.realizedVariable.equivalent());
-	    for (a in  original.assignment) {
-	        migrated.predicate.add(a.equivalent());
+	    for (a in original.assignment) {
+	        if (isInputDomain(original.area) or 
+	            a.findRreferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area))) {
+	               migrated.predicate.add(a.equivalent());
+	            }
 	    }
 }
 
 migrate PropertyAssignment
-    when : isInputDomain(original.bottomPattern.area) {
+    when {
+        if (isInputDomain(original.bottomPattern.area)) {
+            return true;
+        } else {
+            if (isMiddleDomain(original.bottomPattern.area)) {
+                return original.bottomPattern.area.domain.size() > 0 and
+                       original.bottomPattern.area.domain.forAll(d | isOutputDomain(d)) and 
+                       original.findRreferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area));
+            } else {
+                return false;
+            }
+        } }{
     
         var exp = new QVTc!OperationCallExp;
         // It's an '=' operation. TODO, how to get the correct type?
@@ -93,6 +141,8 @@ migrate PropertyAssignment
         exp.argument = args;
         migrated.conditionExpression = exp;    
     }
+
+
     
 migrate PropertyAssignment
     when : isOutputDomain(original.bottomPattern.area) 
@@ -101,3 +151,4 @@ migrate PropertyAssignment
     
     migrated.isDefault = false;
 }
+

@@ -66,7 +66,7 @@ operation isEnforceMode() : Boolean {
 operation QVT!Mapping getTransforamtion() : QVT!Transformation {
     if (self.transformation.isDefined()) {
         return self.transformation;
-    } else if (self.context.isDefiend()) {
+    } else if (self.context.isDefined()) {
         return self.context.getTransforamtion();
     } else {
         self.err("Cotextless mapping ");
@@ -82,16 +82,6 @@ operation QVT!Transformation getMiddleTypedModel() : QVT!TypedModel {
     return self.modelParameter.selectOne(tm | tm.name = config!Configuration.all.first().middle.name);
 }
 
-
-/**
- * Returns the bottom pattern to which a realized variable belongs.
- * <p>
- * The operation is @chached to improve performance.
- */
-@cached
-operation QVT!RealizedVariable oppositeBottomPattern() : QVT!BottomPattern  {
-    return QVT!BottomPattern.all.selectOne(p |p.realizedVariable.includes(self)); }
-
 /**
  * Returns the pattern to which a variable belongs.
  * <p>
@@ -102,10 +92,9 @@ operation QVT!Variable oppositePattern() : QVT!CorePattern  {
     
     if(self.isTypeOf(QVT!Variable)) {
         return QVT!CorePattern.all.selectOne(p |p.variable.includes(self));
+    } else if (self.isTypeOf(QVT!RealizedVariable)) {
+        return QVT!BottomPattern.all.selectOne(p |p.realizedVariable.includes(self));
     }
-    if (self.isTypeOf(QVT!RealizedVariable)) {
-        return self.oppositeBottomPattern();
-    }     
 }
 
 /**
@@ -138,6 +127,14 @@ operation QVT!OCLExpression getArea() : QVT!Area {
  * Returns the set of variables used in the OCL expression. 
  */
 operation QVT!OCLExpression findRreferencedVariables() : Set {
+    return self.findRreferencedVariables(Set{});
+}
+
+/**
+ * Returns the set of variables used in the OCL expression, ignoring the
+ * variables in the ignore set. Usefull for analyzing IteratorExp
+ */
+operation QVT!OCLExpression findRreferencedVariables(ignore : Set) : Set {
     var varRefs : Set();
     if (self.isTypeOf(QVT!VariableExp)) {
         varRefs.add(self.referredVariable);
@@ -152,15 +149,41 @@ operation QVT!OCLExpression findRreferencedVariables() : Set {
         varRefs.addAll(self.condition.findRreferencedVariables());
         varRefs.addAll(self.elseExpression.findRreferencedVariables());
         varRefs.addAll(self.thenExpression.findRreferencedVariables());
-    } else if (self.isTypeOf(QVT!CollectionLiteralExp)){
+    } else if (self.isTypeOf(QVT!CollectionLiteralExp)) {
         // TODO Check that it is a collection of variables. 
         // TODO what if it is a collection of collections or other OCL types?
-        varRefs.addAll(self.part);
+        for (p in self.part) {
+            if (p.isTypeOf(QVT!CollectionItem)) {
+                varRefs.addAll(p.item.findRreferencedVariables());
+            } else {
+                self.println();
+                throw "Error! Add findRreferencedVariables() for " + p.type() + " in collections";
+            }
+        }
+    } else if (self.isKindOf(QVT!IteratorExp)) {
+        // Ignore iterator variables
+        varRefs.addAll(self.body.findRreferencedVariables(self.iterator));
+        varRefs.addAll(self.source.findRreferencedVariables());
     } else if (self.isKindOf(QVT!LiteralExp)) {
       // Noting to add
     } else {
         self.println();
         throw "Error! Add findRreferencedVariables() for " + self.type();
+    }
+    return varRefs.excludingAll(ignore);
+}
+
+/**
+ * Returns the set of variables used in the assignemnt 
+ */
+operation QVT!Assignment findRreferencedVariables() : Set {
+    
+    var varRefs : Set();
+    varRefs = self.value.findRreferencedVariables();
+    if (self.isTypeOf(QVT!PropertyAssignment)) {
+        varRefs.addAll(self.slotExpression.findRreferencedVariables());
+    } else if (self.isTypeOf(QVT!VariableAssignment)) {
+        varRefs.add(self.targetVariable);
     }
     return varRefs;
 }
@@ -194,6 +217,9 @@ operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
         }
     } else if (self.isKindOf(QVT!LiteralExp)) {
       // Noting to fix
+    } else if (self.isKindOf(QVT!IteratorExp)) {
+        self.body.fixVarReferences(v);
+        self.source.fixVarReferences(v);
     } else {
         self.println();
         throw "Error! Add fixVarReference() for " + self.type();

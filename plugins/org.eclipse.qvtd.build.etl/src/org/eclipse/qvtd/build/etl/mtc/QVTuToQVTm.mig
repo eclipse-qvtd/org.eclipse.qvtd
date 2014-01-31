@@ -15,11 +15,77 @@ pre {
     var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
 }
 
+@cascade       
+delete Area
+    when : original.isTypeOf(QVT!Mapping)
+            and original.context.isDefined()
+            and (original.context.local.select(m | m.domain.isEmpty()).size() > 1)
+            and original.domain.isEmpty()
+
+/*
+@cascade       
+delete CorePattern
+    when : original.area.isTypeOf(QVT!Mapping)
+            and original.area.context.isDefined()
+            and (original.area.context.local.select(m | m.domain.isEmpty()).size() > 1)
+            and original.area.domain.isEmpty()
+
+@cascade      
+delete Assignment
+    when : original.bottomPattern.area.isTypeOf(QVT!Mapping)
+            and original.bottomPattern.area.context.isDefined()
+            and (original.bottomPattern.area.context.local.select(m | m.domain.isEmpty()).size() > 1)
+            and original.bottomPattern.area.domain.isEmpty()
+
+*/
+
+
+// Merge domainless local mappigns
+migrate Mapping
+    when : not original.context.isDefined()
+            and original.refinement.isEmpty()
+            and (original.local.select(m | m.domain.isEmpty()).size() > 1) {
+        
+        //original.println("ContextMapping ");
+        // Merge existing local mappings
+        var olm = original.local.select(m | m.domain.isEmpty());
+        var lm = new QVTm!Mapping;
+        lm.guardPattern = new QVTm!GuardPattern;
+        lm.bottomPattern = new QVTm!BottomPattern;
+        lm.bottomPattern.assignment.addAll(emfTool.getECoreUtil().copyAll(olm.collect(l | l.bottomPattern).flatten().collect(gp | gp.assignment).flatten()));
+        lm.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(olm.collect(l | l.bottomPattern).flatten().collect(gp | gp.realizedVariable).flatten()));
+        migrated.local.add(lm);
+        // Fix references
+        migrated.guardPattern.fixPredicateVarReferences();
+        migrated.bottomPattern.fixPredicateVarReferences();
+        migrated.bottomPattern.fixOperationCallReferences();
+        migrated.bottomPattern.fixAssignmentVarReferences();
+        for (m in migrated.local) {
+            m.guardPattern.fixPredicateVarReferences();
+            m.bottomPattern.fixPredicateVarReferences();
+            m.bottomPattern.fixOperationCallReferences();
+            m.bottomPattern.fixAssignmentVarReferences();
+        }
+        
+    }
+
+            
 // Refinned mappings
 migrate Mapping
     when : original.refinement.size() > 0 {
         
-        //original.println("Maping ");
+        //original.println("RefinnedMapping ");
+        // Merge domainless local mappings
+        var olm = original.local.select(m | m.domain.isEmpty());
+        if (olm.size() > 1) {
+            var lm = new QVTm!Mapping;
+            lm.guardPattern = new QVTm!GuardPattern;
+            lm.bottomPattern = new QVTm!BottomPattern;
+            lm.bottomPattern.assignment.addAll(emfTool.getECoreUtil().copyAll(olm.collect(l | l.bottomPattern).flatten().collect(gp | gp.assignment).flatten()));
+	        lm.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(olm.collect(l | l.bottomPattern).flatten().collect(gp | gp.realizedVariable).flatten()));
+	        migrated.local.add(lm);
+        }
+        
         for (refined in original.refinement) {
             //refined.println("refined ");
             // For each domain in the refined mapping, if it doesn't exist, copy it. If it does exist, merge it.
@@ -40,7 +106,8 @@ migrate Mapping
             migrated.bottomPattern.mergeBottomPatterns(refined.equivalent().bottomPattern);
 
             // Nested mappings with no domains. Since many mappings can refine the same mapping
-            // get the equivalent and copy (create) them. If the migrated mapping already has a nested mapping it has to be merged
+            // get the equivalent and copy (create) them. If the migrated mapping already has a
+            // nested mapping it has to be merged
             for (m in refined.collect(r | r.local.select(nm | nm.domain.isEmpty())).flatten()) {
                 if (migrated.local.isEmpty()) {
                     migrated.local.add(emfTool.getECoreUtil().copy(m.equivalent()));
@@ -50,7 +117,6 @@ migrate Mapping
 	                local.bottomPattern.mergeBottomPatterns(m.equivalent().bottomPattern);
 	            }
             }
-            // TODO For nested mappings with domains Possibly a similar mapping with the same domains must be found
         }
         
         // Fix references
@@ -169,32 +235,26 @@ operation QVT!Predicate findRreferencedVariables() : Collection {
  * the pattern's predicates.
  */
 @cached
-operation QVT!GuardPattern findReferencesInPattern(variable : QVT!TypedElement) {
+operation QVT!GuardPattern findVariable(variable : QVT!TypedElement) {
     
     return self.variable.selectOne(lv | lv.name == variable.name);
 }
 
 @cached
-operation QVT!BottomPattern findReferencesInPattern(variable : QVT!TypedElement) {
+operation QVT!BottomPattern findVariable(variable : QVT!TypedElement) {
     
-    var name;
-    if (variable.isTypeOf(QVT!CollectionItem)) {
-        name = variable.item.asString();
-    } else {
-        name = variable.name;
-    }
-    return self.variable.includingAll(self.realizedVariable).selectOne(lv | lv.name == name);
+    return self.variable.includingAll(self.realizedVariable).selectOne(lv | lv.name == variable.name);
 }
 
 /**
  * Finds all variables referenced in a set of Pattern by finding all references
  * each of the patterns.
  */
-operation QVT!TypedElement findReferencesInPatterns(patterns : Sequence) {
+operation QVT!Variable findReferencesInPatterns(patterns : Sequence) {
     
     var targetVar = null;
     for (p in patterns) {
-        targetVar = p.findReferencesInPattern(self);
+        targetVar = p.findVariable(self);
         if (targetVar <> null) {
            return targetVar;
         }
@@ -271,7 +331,7 @@ operation QVT!BottomPattern fixPredicateVarReferences() {
             // MiddleGuard Pattern depends on domain guard patterns
             var targetVar = v.findReferencesInPatterns(self.asSequence());
             if (targetVar == null) {
-                var searchPatterns;
+                var searchPatterns : Sequence;
                 if (self.area.isTypeOf(QVTu!CoreDomain)) {
                     // 1. Guard Pattern of the Domain
                     searchPatterns = self.area.rule.domain.collect(d | d.guardPattern).flatten();
@@ -284,7 +344,7 @@ operation QVT!BottomPattern fixPredicateVarReferences() {
                     
                 } else if (self.area.isTypeOf(QVTu!Mapping)) {
                     // 1. Guard Pattern of the Mapping
-                    searchPatterns = self.area.guardPattern.asSet();
+                    searchPatterns = self.area.guardPattern.asSequence();
                     targetVar = v.findReferencesInPatterns(searchPatterns); 
                     // 2. Mapping's domain bottom pattern
                     if (targetVar == null) {
@@ -310,24 +370,12 @@ operation QVT!BottomPattern fixPredicateVarReferences() {
                     throw "Error! not able to find a local reference for variable " + v + " in predicate " + predicate + "in BottomPattern of Domain " + self.area;  
                 }  
             }
-            //targetVar.println("local ");
             predicate.conditionExpression.fixVarReferences(targetVar);
         }
     }
 }
 
-@cached
-operation QVT!Assignment findRreferencedVariables() : Set {
-    
-    var varRefs : Set();
-    varRefs = self.value.findRreferencedVariables();
-    if (self.isTypeOf(QVTu!PropertyAssignment)) {
-        varRefs.addAll(self.slotExpression.findRreferencedVariables());
-    } else if (self.isTypeOf(QVTu!VariableAssignment)) {
-        varRefs.add(self.targetVariable);
-    }
-    return varRefs;
-}
+
 
 operation QVT!BottomPattern fixAssignmentVarReferences() {
     for (assignment in self.assignment) {

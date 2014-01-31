@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York, Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+
 /**
  * We are only interested in containemnet relations, so we only need to search
  * EPackages and EClasses, all other nodes in the root can be safely ignored. 
@@ -27,24 +38,20 @@ operation mm!EPackage iterativeDFS() {
 	var parentNode = new tree!Node;
     parentNode.data = self;
     parentNode.elementName = self.name;
-    //parentNode.parent =  root;
-    
 	maxDepth = 1;
-    self.~visited = true;
     
     while (iterate) {
-        maxDepth.println("IterativeDFS ");
+        //maxDepth.println("IterativeDFS ");
         var preNodeCount = tree!Node.all().size();
         change = false;
         for (c in self.eClassifiers.select(c | c.isTypeOf(mm!EClass))) {
             change = c.dfs(1, maxDepth, parentNode) or change;
         }
-        //change = preNodeCount <> tree!Node.all().size();
         //self.eSubpackages.includingAll().size().println();
         //for (e in self.eSubpackages.includingAll(self.eClassifiers.select(c | c.isTypeOf(mm!EClass)))) {
         //    change = e.dfs(1, maxDepth, n) and change;
 	    //}
-	    change.println("Change ");
+	    //change.println("Change ");
 	    if (not change) {
 	       noChangeCount = noChangeCount + 1;
 	       if (noChangeCount > 3) {
@@ -55,7 +62,7 @@ operation mm!EPackage iterativeDFS() {
 	    if(maxDepth > 10) {
 	       iterate = false; // Safe ending
 	    }
-	    "".println("\n");   
+	    //"".println("\n");   
     }
     
     //for (c in self.eClassifiers.select(c | c.isTypeOf(mm!EClass))) {
@@ -67,21 +74,21 @@ operation mm!EPackage iterativeDFS() {
 // Returns true if added
 operation mm!EClass dfs(depth, maxDepth, parentNode) : Boolean {
     
-    var tabs = "";
-    for (i in Sequence{1..depth}) {
-        tabs = tabs + "\t";
-    } 
-    self.name.println(tabs + "dfs ");
+    //var tabs = "";
+    //for (i in Sequence{1..depth}) {
+    //    tabs = tabs + "\t";
+    //} 
+    //self.name.println(tabs + "dfs ");
     //depth.println(tabs + "depth ");
     
     var change = false;
     if (depth > maxDepth) {
-        "Max depth reached, do nothing".println(tabs);
+        //"Max depth reached, do nothing".println(tabs);
         
     } else {
         // If self is abstract, consider all subclasses at same depth (flattening)
 	    if (self.abstract) {
-	        "Abstract, do inheritance".println(tabs);
+	        //"Abstract, do inheritance".println(tabs);
 	        for (sc in mm!EClass.all().select(c | c.eSuperTypes.includes(self))) {
 	            sc.dfs(depth, maxDepth, parentNode);
 	        }
@@ -107,5 +114,4 @@ operation mm!EClass dfs(depth, maxDepth, parentNode) : Boolean {
 	    }
     }
     return change;
-    
 }

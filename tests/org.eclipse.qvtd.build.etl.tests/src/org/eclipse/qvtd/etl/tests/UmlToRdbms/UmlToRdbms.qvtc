@@ -2,7 +2,6 @@ import SimpleUML: 'SimpleUML.ecore'::simpleuml;
 import SimpleRDBMS: 'SimpleRDBMS.ecore'::simplerdbms;
 import UMLtoRDBMS: 'UMLtoRDBMS.ecore'::umltordbms;
 
-/* Enforce uml to rdbms */
 transformation umlRdbms {
     uml imports SimpleUML;
     rdbms imports SimpleRDBMS;

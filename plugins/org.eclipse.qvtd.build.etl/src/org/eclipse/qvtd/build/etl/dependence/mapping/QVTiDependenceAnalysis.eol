@@ -1,0 +1,26 @@
+import "OCLExpressionAnalysis.eol";
+
+var varMap : Map; // (Variable, Node)
+
+for (m in qvti!Transformation.all().first().rule) {
+    m.println();
+    // Once the partition is done, this should only look for predicates in the guard patterns
+    for (p in m.guardPattern.predicate
+            .includingAll(m.domain.collect(d | d.guardPattern).flatten().collect(gp | gp.predicate).flatten())
+            .includingAll(m.domain.collect(d | d.bottomPattern).flatten().collect(gp | gp.predicate).flatten())) {
+            
+        if (p.conditionExpression.isSimpleAttributeNavigation()) {
+            // Does the predicate is single "domained", all variables belong to the same domain
+            if (p.conditionExpression.isSingleDomained()) {
+                // Find if the navigated property is a containment opposite.
+                p.conditionExpression.toString().println();
+                var prop = p.conditionExpression.getNavigatedProperty();
+            }
+        }
+    }
+}
+
+
+operation TypedModel getMetaModel() : EmfModel {
+    
+}
