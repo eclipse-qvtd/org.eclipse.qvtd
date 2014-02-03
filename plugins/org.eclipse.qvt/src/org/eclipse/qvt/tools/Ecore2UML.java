@@ -114,6 +114,7 @@ public class Ecore2UML {
 			}
 		}
 		for (Resource umlResource : umlResourceSet.getResources()) {
+			disorderNonCollections(umlResource);
 			nameAssociations(umlResource);
 			alphabeticize(umlResource);
 			assignIDs(umlResource);
@@ -125,6 +126,19 @@ public class Ecore2UML {
 			umlResource.save(saveOptions);
 		}
 		return;
+	}
+
+	public static void disorderNonCollections(Resource umlResource) {
+		for (Iterator<EObject> it = umlResource.getAllContents(); it.hasNext(); ) {
+			EObject eObject = it.next();
+			if (eObject instanceof Property) {
+				Property property = (Property) eObject;
+				if (property.getUpper() == 1) {
+					property.setIsOrdered(false);
+					property.setIsUnique(true);
+				}
+			}
+		}
 	}
 
 	public static void nameAssociations(Resource umlResource) {
