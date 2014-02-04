@@ -27,6 +27,9 @@ delete PropertyAssignment
     when : isInputDomain(original.slotExpression.getArea())
         and isMiddleDomain(original.value.getArea())
 
+@cascade
+delete Predicate
+    when : original.conditionExpression.findRreferencedVariables().forAll(v | isOutputDomain(v.oppositePattern().area))
 
 // Realized variables in the input domain are retyped into variables
 retype RealizedVariable to Variable

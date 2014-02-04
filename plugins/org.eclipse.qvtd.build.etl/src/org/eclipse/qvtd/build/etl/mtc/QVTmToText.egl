@@ -1,0 +1,33 @@
+[% for (i in qvtc!TypedModel.all()) { %]
+    [% for (p in i.usedPackage) { %]
+import [%=p.name.firstToUpperCase()%]: '[%=p.nsURI%]';
+    [% } %]
+[% } %]
+
+[% for (t in qvtc!Transformation.all()) { %]
+transformation [%=t.name %] {
+    [% for (mp in t.modelParameter) { %]
+    [%=mp.name%] imports [%=mp.usedPackage.collect(up | up.name.firstToUpperCase()).concat(",")%]; 
+    [% } %]
+}
+
+[% for (r in t.rule) { %]
+map [%=r.name%] in [%=t.name%] {
+[% for (d in r.domain) { %][%if (d.isCheckable) {%]check [%}if(d.isEnforceable){%]enforce [%}%][%=d.name%] ([%if (not d.guardPattern.variable.isEmpty()){%][%=d.guardPattern.variable.concat(", ") %] |[%}%]) {
+[%if (not d.bottomPattern.realizedVariable.isEmpty()){%][%=d.bottomPattern.realizedVariable.collect(rv | "realize "+ rv.name+":"+rv.type.name).concat(",")%] |[%}%]
+    }
+[%}%]
+    where ([%if (not r.guardPattern.variable.isEmpty()){%][%=r.guardPattern.variable.concat(", ") %] | [%}%]
+    [% for (p in r.guardPattern.predicate) { %]
+    [%=p.toString()%];
+    [%}%]
+    ) {
+    [% for (a in r.bottomPattern.assignment) { %]
+    [%=a.toString()%];
+    [%}%]
+    }
+}
+
+[% } %] 
+[% } %]
+
