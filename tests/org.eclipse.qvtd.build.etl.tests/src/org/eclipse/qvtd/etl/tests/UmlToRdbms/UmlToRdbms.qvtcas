@@ -6,7 +6,6 @@
     name="UmlToRdbms.qvtc" externalURI="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/etl/tests/UmlToRdbms/UmlToRdbms.qvtc">
   <nestedPackage xsi:type="qvtb:Transformation" xmi:id="T.umlRdbms" name="umlRdbms"
       superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclElement">
-    <ownedComment body="Enforce uml to rdbms"/>
     <ownedOperation xsi:type="qvtb:Function" xmi:id="o.umlRdbms.getAllSupers..simpleuml.Class"
         isStatic="true" name="getAllSupers" type="#//@nestedPackage.1/@ownedType.0">
       <ownedParameter xsi:type="qvtb:FunctionParameter" xmi:id="p0o.umlRdbms.getAllSupers..simpleuml.Class"
