@@ -87,11 +87,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="ImperativeOCL.CatchExp.exception"
         name="exception" lowerBound="1" upperBound="-1" eType="ecore:EClass EMOF.ecore#EMOF.Type">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
-        <details key="body" value="tryExpression"/>
+        <details key="body" value="catchExp"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exceptionalVariableName"
-        eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exceptionVariable" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable"
+        containment="true">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="catchExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="ImperativeOCL.ComputeExp" name="ComputeExp"
       eSuperTypes="#ImperativeOCL.ImperativeExpression">
