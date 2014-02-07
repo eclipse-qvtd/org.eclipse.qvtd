@@ -16,7 +16,8 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl;
-import org.eclipse.ocl.examples.pivot.internal.impl.TypedElementImpl;
+import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.TypedElement;
 
 
 /**
@@ -33,9 +34,9 @@ public class PivotUtil {
     * @param vars the variables
     * @return The lowest ranking variable
     */
-    public TypedElementImpl getLowestRankVariable(Set<TypedElementImpl> vars) {
+    public TypedElement getLowestRankVariable(Set<TypedElement> vars) {
 
-        return getLowestRankVariable(new ArrayList<TypedElementImpl>(vars));
+        return getLowestRankVariable(new ArrayList<TypedElement>(vars));
     }
 
     
@@ -46,9 +47,9 @@ public class PivotUtil {
      * @param vars the variables
      * @return The lowest rank variable
      */
-    public TypedElementImpl getLowestRankVariable(List<TypedElementImpl> vars) {
+    public TypedElement getLowestRankVariable(List<TypedElement> vars) {
 
-        TypedElementImpl min = vars.get(0);
+        TypedElement min = vars.get(0);
         EStructuralFeature typeFeat = min.eClass().getEStructuralFeature("type");
         ClassImpl minType = null;
         for(int i = 1; i < vars.size(); ++i) {
@@ -59,7 +60,7 @@ public class PivotUtil {
         }
         // Verify that the min is actually the min, i.e. all the other variables are superiors
         // in the hierarchy
-        for (TypedElementImpl var : vars) {
+        for (TypedElement var : vars) {
             if (!var.equals(min)) {
                 if (!((ClassImpl)min.eGet(typeFeat)).getSuperClass().contains(var.eGet(typeFeat))) {
                     // Error
@@ -68,6 +69,11 @@ public class PivotUtil {
             }
         }
         return min;
+    }
+    
+    // a.type is superType of b.type?
+    public Boolean isKindOf(Type typeA, Type typeB) {
+    	return typeA.equals(typeB) || typeA.getSuperClass().contains(typeB);
     }
 
 }

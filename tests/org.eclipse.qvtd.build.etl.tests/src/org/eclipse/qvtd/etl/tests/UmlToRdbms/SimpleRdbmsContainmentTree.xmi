@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
-<tree:Node xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:tree="http://www.eclipse.org/qvt/examples/0.1/Tree" elementName="simplerdbms">
-  <data xsi:type="ecore:EPackage" href="SimpleRDBMS.ecore#/"/>
+<tree:Node xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:tree="http://www.eclipse.org/qvt/examples/0.1/Tree" elementName="simplerdbms">
   <children elementName="Schema">
-    <data xsi:type="ecore:EClass" href="SimpleRDBMS.ecore#//Schema"/>
     <children elementName="Table">
-      <data xsi:type="ecore:EClass" href="SimpleRDBMS.ecore#//Table"/>
-      <children elementName="Column">
-        <data xsi:type="ecore:EClass" href="SimpleRDBMS.ecore#//Column"/>
-      </children>
-      <children elementName="Key">
-        <data xsi:type="ecore:EClass" href="SimpleRDBMS.ecore#//Key"/>
-      </children>
-      <children elementName="ForeignKey">
-        <data xsi:type="ecore:EClass" href="SimpleRDBMS.ecore#//ForeignKey"/>
-      </children>
+      <children elementName="Column"/>
+      <children elementName="Key"/>
+      <children elementName="ForeignKey"/>
     </children>
   </children>
+  <children elementName="String"/>
 </tree:Node>

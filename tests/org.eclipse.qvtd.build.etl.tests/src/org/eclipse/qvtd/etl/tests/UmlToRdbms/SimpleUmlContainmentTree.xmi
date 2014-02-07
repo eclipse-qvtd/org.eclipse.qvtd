@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="ASCII"?>
-<tree:Node xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:tree="http://www.eclipse.org/qvt/examples/0.1/Tree" elementName="simpleuml">
-  <data xsi:type="ecore:EPackage" href="SimpleUML.ecore#/"/>
+<tree:Node xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:tree="http://www.eclipse.org/qvt/examples/0.1/Tree" elementName="simpleuml">
   <children elementName="Package">
-    <data xsi:type="ecore:EClass" href="SimpleUML.ecore#//Package"/>
-    <children elementName="Association">
-      <data xsi:type="ecore:EClass" href="SimpleUML.ecore#//Association"/>
-    </children>
+    <children elementName="Association"/>
     <children elementName="Class">
-      <data xsi:type="ecore:EClass" href="SimpleUML.ecore#//Class"/>
-      <children elementName="Attribute">
-        <data xsi:type="ecore:EClass" href="SimpleUML.ecore#//Attribute"/>
-      </children>
+      <children elementName="Attribute"/>
     </children>
-    <children elementName="PrimitiveDataType">
-      <data xsi:type="ecore:EClass" href="SimpleUML.ecore#//PrimitiveDataType"/>
-    </children>
+    <children elementName="PrimitiveDataType"/>
   </children>
 </tree:Node>

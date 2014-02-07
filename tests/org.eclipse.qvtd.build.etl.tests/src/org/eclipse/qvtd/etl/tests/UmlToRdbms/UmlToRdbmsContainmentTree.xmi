@@ -1,66 +1,13 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:tree="http://www.eclipse.org/qvt/examples/0.1/Tree">
-  <tree:Node elementName="umltordbms">
-    <data xsi:type="ecore:EPackage" href="UMLtoRDBMS.ecore#/"/>
-    <children elementName="AttributeToColumn">
-      <data xsi:type="ecore:EClass" href="UMLtoRDBMS.ecore#//AttributeToColumn"/>
+<tree:Node xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:tree="http://www.eclipse.org/qvt/examples/0.1/Tree" elementName="umltordbms">
+  <children elementName="AttributeToColumn"/>
+  <children elementName="NonLeafAttribute"/>
+  <children elementName="PackageToSchema">
+    <children elementName="ClassToTable">
+      <children elementName="AssociationToForeignKey"/>
     </children>
-    <children elementName="NonLeafAttribute">
-      <data xsi:type="ecore:EClass" href="UMLtoRDBMS.ecore#//NonLeafAttribute"/>
-    </children>
-    <children elementName="PackageToSchema">
-      <data xsi:type="ecore:EClass" href="UMLtoRDBMS.ecore#//PackageToSchema"/>
-      <children elementName="ClassToTable">
-        <data xsi:type="ecore:EClass" href="UMLtoRDBMS.ecore#//ClassToTable"/>
-        <children elementName="AssociationToForeignKey">
-          <data xsi:type="ecore:EClass" href="UMLtoRDBMS.ecore#//AssociationToForeignKey"/>
-        </children>
-      </children>
-      <children elementName="BooleanToBoolean">
-        <data xsi:type="ecore:EClass" href="UMLtoRDBMS.ecore#//BooleanToBoolean"/>
-      </children>
-      <children elementName="IntegerToNumber">
-        <data xsi:type="ecore:EClass" href="UMLtoRDBMS.ecore#//IntegerToNumber"/>
-      </children>
-    </children>
-    <children elementName="StringToVarchar">
-      <data xsi:type="ecore:EClass" href="UMLtoRDBMS.ecore#//StringToVarchar"/>
-    </children>
-  </tree:Node>
-  <tree:Node elementName="simpleuml">
-    <data xsi:type="ecore:EPackage" href="SimpleUML.ecore#/"/>
-    <children elementName="Package">
-      <data xsi:type="ecore:EClass" href="SimpleUML.ecore#//Package"/>
-      <children elementName="Association">
-        <data xsi:type="ecore:EClass" href="SimpleUML.ecore#//Association"/>
-      </children>
-      <children elementName="Class">
-        <data xsi:type="ecore:EClass" href="SimpleUML.ecore#//Class"/>
-        <children elementName="Attribute">
-          <data xsi:type="ecore:EClass" href="SimpleUML.ecore#//Attribute"/>
-        </children>
-      </children>
-      <children elementName="PrimitiveDataType">
-        <data xsi:type="ecore:EClass" href="SimpleUML.ecore#//PrimitiveDataType"/>
-      </children>
-    </children>
-  </tree:Node>
-  <tree:Node elementName="simplerdbms">
-    <data xsi:type="ecore:EPackage" href="SimpleRDBMS.ecore#/"/>
-    <children elementName="Schema">
-      <data xsi:type="ecore:EClass" href="SimpleRDBMS.ecore#//Schema"/>
-      <children elementName="Table">
-        <data xsi:type="ecore:EClass" href="SimpleRDBMS.ecore#//Table"/>
-        <children elementName="Column">
-          <data xsi:type="ecore:EClass" href="SimpleRDBMS.ecore#//Column"/>
-        </children>
-        <children elementName="Key">
-          <data xsi:type="ecore:EClass" href="SimpleRDBMS.ecore#//Key"/>
-        </children>
-        <children elementName="ForeignKey">
-          <data xsi:type="ecore:EClass" href="SimpleRDBMS.ecore#//ForeignKey"/>
-        </children>
-      </children>
-    </children>
-  </tree:Node>
-</xmi:XMI>
+    <children elementName="BooleanToBoolean"/>
+    <children elementName="IntegerToNumber"/>
+    <children elementName="StringToVarchar"/>
+  </children>
+</tree:Node>

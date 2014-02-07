@@ -18,11 +18,10 @@
 
 var visited : Map;
 
-for (p in mm!EPackage.all().select(p | not p.eSuperPackage.isDefined())) {
-    // Add to tree
+for (p in mm!EPackage.all().first()) {
     p.iterativeDFS();
 }
-
+"Done".println();
 
 /* ===========================================================================*/
 
@@ -36,23 +35,17 @@ operation mm!EPackage iterativeDFS() {
 	var noChangeCount : Integer = 0;
 	
 	var parentNode = new tree!Node;
-    parentNode.data = self;
+    //parentNode.data = self;
     parentNode.elementName = self.name;
 	maxDepth = 1;
     
     while (iterate) {
         //maxDepth.println("IterativeDFS ");
-        var preNodeCount = tree!Node.all().size();
         change = false;
-        for (c in self.eClassifiers.select(c | c.isTypeOf(mm!EClass))) {
+        for (c in self.eClassifiers.select(c | c.isKindOf(mm!EClassifier))) {
             change = c.dfs(1, maxDepth, parentNode) or change;
         }
-        //self.eSubpackages.includingAll().size().println();
-        //for (e in self.eSubpackages.includingAll(self.eClassifiers.select(c | c.isTypeOf(mm!EClass)))) {
-        //    change = e.dfs(1, maxDepth, n) and change;
-	    //}
-	    //change.println("Change ");
-	    if (not change) {
+        if (not change) {
 	       noChangeCount = noChangeCount + 1;
 	       if (noChangeCount > 3) {
 	           iterate = false;
@@ -62,32 +55,19 @@ operation mm!EPackage iterativeDFS() {
 	    if(maxDepth > 10) {
 	       iterate = false; // Safe ending
 	    }
-	    //"".println("\n");   
+	       
     }
-    
-    //for (c in self.eClassifiers.select(c | c.isTypeOf(mm!EClass))) {
-    //    c.iterativeDFS();
-    //}
-    
 }
 
 // Returns true if added
-operation mm!EClass dfs(depth, maxDepth, parentNode) : Boolean {
+operation mm!EClassifier dfs(depth, maxDepth, parentNode) : Boolean {
     
-    //var tabs = "";
-    //for (i in Sequence{1..depth}) {
-    //    tabs = tabs + "\t";
-    //} 
-    //self.name.println(tabs + "dfs ");
-    //depth.println(tabs + "depth ");
     
     var change = false;
-    if (depth > maxDepth) {
-        //"Max depth reached, do nothing".println(tabs);
-        
-    } else {
+    //"Max depth reached, do nothing".println(tabs);
+    if (depth <= maxDepth) {
         // If self is abstract, consider all subclasses at same depth (flattening)
-	    if (self.abstract) {
+	    if (self.isTypeOf(mm!EClass) and self.abstract) {
 	        //"Abstract, do inheritance".println(tabs);
 	        for (sc in mm!EClass.all().select(c | c.eSuperTypes.includes(self))) {
 	            sc.dfs(depth, maxDepth, parentNode);
@@ -99,7 +79,8 @@ operation mm!EClass dfs(depth, maxDepth, parentNode) : Boolean {
 	            n = visited.get(self);
 	        } else { 
 	            n = new tree!Node;
-	            n.data = self;
+	            //n.data = self;
+	            //n.data.println();
 	            n.elementName = self.name;
 	            visited.put(self, n);
 	        }
@@ -107,9 +88,11 @@ operation mm!EClass dfs(depth, maxDepth, parentNode) : Boolean {
 	            n.parent = parentNode;
 	            change = true;
 	        }
-	        // Navigate Containment
-	        for (sf in self.eStructuralFeatures.select(sf : mm!EReference | sf.containment)) {
-	            change = sf.eReferenceType.dfs(depth+1, maxDepth, n) or change;
+	        if (self.isTypeOf(mm!EClass)) {
+	           // Navigate Containment
+	            for (sf in self.eStructuralFeatures.select(sf : mm!EReference | sf.containment)) {
+	                change = sf.eReferenceType.dfs(depth+1, maxDepth, n) or change;
+	            }
 	        }
 	    }
     }
