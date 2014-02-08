@@ -1037,13 +1037,13 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_FUNCTION_PARAMETER__INIT = CGModelPackage.CG_PARAMETER__INIT;
 
 	/**
-	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * The feature id for the '<em><b>Callable</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_FUNCTION_PARAMETER__OPERATION = CGModelPackage.CG_PARAMETER__OPERATION;
+	int CG_FUNCTION_PARAMETER__CALLABLE = CGModelPackage.CG_PARAMETER__CALLABLE;
 
 	/**
 	 * The feature id for the '<em><b>Function</b></em>' reference.
@@ -1137,13 +1137,13 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_GUARD_VARIABLE__INIT = CGModelPackage.CG_PARAMETER__INIT;
 
 	/**
-	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * The feature id for the '<em><b>Callable</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_VARIABLE__OPERATION = CGModelPackage.CG_PARAMETER__OPERATION;
+	int CG_GUARD_VARIABLE__CALLABLE = CGModelPackage.CG_PARAMETER__CALLABLE;
 
 	/**
 	 * The feature id for the '<em><b>Mapping</b></em>' container reference.
