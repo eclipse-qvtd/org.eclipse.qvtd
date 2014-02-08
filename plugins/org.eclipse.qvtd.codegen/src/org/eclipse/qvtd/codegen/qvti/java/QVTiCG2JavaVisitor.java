@@ -401,29 +401,35 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 						js.appendValueName(body);
 						js.append(";\n");
 					}
-					else if (cgFunction.getASTypeId() == TypeId.STRING) {			// FIXME Fudge for body-less functions
-						js.append("return \"\";\n");
-					}
-					else if (cgFunction.getASTypeId() == TypeId.REAL) {			// FIXME Fudge for body-less functions
-						js.append("return 0;\n");
-					}
-					else if (cgFunction.getASTypeId() == TypeId.INTEGER) {			// FIXME Fudge for body-less functions
-						js.append("return 0;\n");
-					}
-					else {			// FIXME Fudge for body-less functions
-						if (js.isUseNullAnnotations()) {
-							js.append("@SuppressWarnings(\"null\")");
-							js.appendIsRequired(true);
-							js.append(" ");
+					else {
+						TypeId asTypeId = cgFunction.getASTypeId();
+						if (asTypeId == TypeId.STRING) {			// FIXME Fudge for body-less functions
+							js.append("return \"\";\n");
 						}
-						if (elementId != null) {
-							TypeDescriptor javaTypeDescriptor = context.getUnboxedDescriptor(elementId);
-							js.appendClassReference(javaTypeDescriptor);
+						else if (asTypeId == TypeId.REAL) {			// FIXME Fudge for body-less functions
+							js.append("return 0;\n");
 						}
-						js.append(" emptyList = ");
-						js.appendClassReference(Collections.class);
-						js.append(".emptyList();\n");
-						js.append("return emptyList;\n");
+						else if (asTypeId == TypeId.INTEGER) {			// FIXME Fudge for body-less functions
+							js.append("return 0;\n");
+						}
+						else if (asTypeId instanceof CollectionTypeId) {			// FIXME Fudge for body-less functions
+							if (js.isUseNullAnnotations()) {
+								js.append("@SuppressWarnings(\"null\")");
+								js.appendIsRequired(true);
+								js.append(" ");
+							}
+							if (elementId != null) {
+								TypeDescriptor javaTypeDescriptor = context.getUnboxedDescriptor(elementId);
+								js.appendClassReference(javaTypeDescriptor);
+							}
+							js.append(" emptyList = ");
+							js.appendClassReference(Collections.class);
+							js.append(".emptyList();\n");
+							js.append("return emptyList;\n");
+						}
+						else {			// FIXME Fudge for body-less functions
+							js.append("return \"\";\n");
+						}
 					}
 				js.popIndentation();
 				js.append("}\n");
