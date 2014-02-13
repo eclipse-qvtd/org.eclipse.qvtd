@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCallable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
@@ -133,6 +134,7 @@ public class QVTiCGModelSwitch<T> extends Switch<T> {
 				CGFunction cgFunction = (CGFunction)theEObject;
 				T result = caseCGFunction(cgFunction);
 				if (result == null) result = caseCGOperation(cgFunction);
+				if (result == null) result = caseCGCallable(cgFunction);
 				if (result == null) result = caseCGValuedElement(cgFunction);
 				if (result == null) result = caseCGTypedElement(cgFunction);
 				if (result == null) result = caseCGNamedElement(cgFunction);
@@ -780,6 +782,21 @@ public class QVTiCGModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGVariable(CGVariable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Callable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Callable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGCallable(CGCallable object) {
 		return null;
 	}
 

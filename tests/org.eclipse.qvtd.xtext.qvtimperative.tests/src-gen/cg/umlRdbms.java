@@ -425,7 +425,7 @@ public class umlRdbms extends AbstractTransformation
         try {
             // predicates
             final @Nullable /*@Thrown*/ Package umlPackage = p2s_0.getUmlPackage();
-            final /*@Thrown*/ boolean eq = umlPackage == p_0;
+            final /*@Thrown*/ boolean eq = p_0.equals(umlPackage);
             if (!eq) {
                 return false;
             }
@@ -435,7 +435,7 @@ public class umlRdbms extends AbstractTransformation
                 return false;
             }
             final @Nullable /*@Thrown*/ Package namespace = prim.getNamespace();
-            final /*@Thrown*/ boolean eq_1 = namespace == p_0;
+            final /*@Thrown*/ boolean eq_1 = p_0.equals(namespace);
             if (!eq_1) {
                 return false;
             }
@@ -489,7 +489,7 @@ public class umlRdbms extends AbstractTransformation
                 return false;
             }
             final @Nullable /*@Thrown*/ PackageToSchema owner = p2n.getOwner();
-            final /*@Thrown*/ boolean eq_0 = owner == p2s_2;
+            final /*@Thrown*/ boolean eq_0 = p2s_2.equals(owner);
             if (!eq_0) {
                 return false;
             }
@@ -532,7 +532,7 @@ public class umlRdbms extends AbstractTransformation
         try {
             // predicates
             final @Nullable /*@Thrown*/ Package umlPackage = p2s_3.getUmlPackage();
-            final /*@Thrown*/ boolean eq = umlPackage == p_1;
+            final /*@Thrown*/ boolean eq = p_1.equals(umlPackage);
             if (!eq) {
                 return false;
             }
@@ -542,7 +542,7 @@ public class umlRdbms extends AbstractTransformation
                 return false;
             }
             final @Nullable /*@Thrown*/ Package namespace = prim_0.getNamespace();
-            final /*@Thrown*/ boolean eq_1 = namespace == p_1;
+            final /*@Thrown*/ boolean eq_1 = p_1.equals(namespace);
             if (!eq_1) {
                 return false;
             }
@@ -596,7 +596,7 @@ public class umlRdbms extends AbstractTransformation
                 return false;
             }
             final @Nullable /*@Thrown*/ PackageToSchema owner = p2n_0.getOwner();
-            final /*@Thrown*/ boolean eq_0 = owner == p2s_4;
+            final /*@Thrown*/ boolean eq_0 = p2s_4.equals(owner);
             if (!eq_0) {
                 return false;
             }
@@ -639,7 +639,7 @@ public class umlRdbms extends AbstractTransformation
         try {
             // predicates
             final @Nullable /*@Thrown*/ Package umlPackage = p2s_5.getUmlPackage();
-            final /*@Thrown*/ boolean eq = umlPackage == p_2;
+            final /*@Thrown*/ boolean eq = p_2.equals(umlPackage);
             if (!eq) {
                 return false;
             }
@@ -649,7 +649,7 @@ public class umlRdbms extends AbstractTransformation
                 return false;
             }
             final @Nullable /*@Thrown*/ Package namespace = prim_1.getNamespace();
-            final /*@Thrown*/ boolean eq_1 = namespace == p_2;
+            final /*@Thrown*/ boolean eq_1 = p_2.equals(namespace);
             if (!eq_1) {
                 return false;
             }
@@ -703,7 +703,7 @@ public class umlRdbms extends AbstractTransformation
                 return false;
             }
             final @Nullable /*@Thrown*/ PackageToSchema owner = p2n_1.getOwner();
-            final /*@Thrown*/ boolean eq_0 = owner == p2s_6;
+            final /*@Thrown*/ boolean eq_0 = p2s_6.equals(owner);
             if (!eq_0) {
                 return false;
             }
@@ -769,12 +769,12 @@ public class umlRdbms extends AbstractTransformation
                 return false;
             }
             final @Nullable /*@Thrown*/ Package namespace = c.getNamespace();
-            final /*@Thrown*/ boolean eq_0 = namespace == p_3;
+            final /*@Thrown*/ boolean eq_0 = p_3.equals(namespace);
             if (!eq_0) {
                 return false;
             }
             final @Nullable /*@Thrown*/ Package umlPackage = p2s_7.getUmlPackage();
-            final /*@Thrown*/ boolean eq_1 = umlPackage == p_3;
+            final /*@Thrown*/ boolean eq_1 = p_3.equals(umlPackage);
             if (!eq_1) {
                 return false;
             }
@@ -904,7 +904,7 @@ public class umlRdbms extends AbstractTransformation
         try {
             // predicates
             final @Nullable /*@Thrown*/ PackageToSchema owner = c2t.getOwner();
-            final /*@Thrown*/ boolean eq = owner == p2s_8;
+            final /*@Thrown*/ boolean eq = p2s_8.equals(owner);
             if (!eq) {
                 return false;
             }
@@ -1211,12 +1211,12 @@ public class umlRdbms extends AbstractTransformation
             final @Nullable /*@Thrown*/ Class destination = a.getDestination();
             final @Nullable /*@Thrown*/ Class dc = destination;
             final @Nullable /*@Thrown*/ Package namespace = a.getNamespace();
-            final /*@Thrown*/ boolean eq = namespace == p_4;
+            final /*@Thrown*/ boolean eq = p_4.equals(namespace);
             if (!eq) {
                 return false;
             }
             final @Nullable /*@Thrown*/ Package umlPackage = p2s_9.getUmlPackage();
-            final /*@Thrown*/ boolean eq_0 = umlPackage == p_4;
+            final /*@Thrown*/ boolean eq_0 = p_4.equals(umlPackage);
             if (!eq_0) {
                 return false;
             }
@@ -1237,7 +1237,7 @@ public class umlRdbms extends AbstractTransformation
                 throw (InvalidValueException)sc;
             }
             final @Nullable /*@Thrown*/ Package namespace_0 = sc.getNamespace();
-            final /*@Thrown*/ boolean eq_1 = namespace_0 == p_4;
+            final /*@Thrown*/ boolean eq_1 = p_4.equals(namespace_0);
             if (!eq_1) {
                 return false;
             }
@@ -1249,7 +1249,7 @@ public class umlRdbms extends AbstractTransformation
                 if (dc instanceof InvalidValueException) {
                     throw (InvalidValueException)dc;
                 }
-                final /*@Thrown*/ boolean self_0 = destination == dc;
+                final /*@Thrown*/ boolean self_0 = (destination != null) ? destination.equals(dc) : (dc == null);
                 CAUGHT_self_0 = self_0;
             }
             catch (Exception e) {
@@ -1260,7 +1260,7 @@ public class umlRdbms extends AbstractTransformation
                 if (sc instanceof InvalidValueException) {
                     throw (InvalidValueException)sc;
                 }
-                final /*@Thrown*/ boolean b = source == sc;
+                final /*@Thrown*/ boolean b = (source != null) ? source.equals(sc) : (sc == null);
                 CAUGHT_b = b;
             }
             catch (Exception e) {
@@ -1428,24 +1428,24 @@ public class umlRdbms extends AbstractTransformation
             final @Nullable /*@Thrown*/ ClassToTable ClassToTable = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(dt));
             final @Nullable /*@Thrown*/ ClassToTable dc2t = ClassToTable;
             final @Nullable /*@Thrown*/ Schema schema = p2s_10.getSchema();
-            final /*@Thrown*/ boolean eq = schema == s_0;
+            final /*@Thrown*/ boolean eq = s_0.equals(schema);
             if (!eq) {
                 return false;
             }
             final @Nullable /*@Thrown*/ Schema schema_0 = st.getSchema();
-            final /*@Thrown*/ boolean eq_0 = schema_0 == s_0;
+            final /*@Thrown*/ boolean eq_0 = s_0.equals(schema_0);
             if (!eq_0) {
                 return false;
             }
             final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(st));
             final @Nullable /*@Thrown*/ ClassToTable sc2t = ClassToTable_0;
             final @Nullable /*@Thrown*/ ClassToTable owner = a2f.getOwner();
-            final /*@Thrown*/ boolean eq_1 = owner == sc2t;
+            final /*@Thrown*/ boolean eq_1 = (owner != null) ? owner.equals(sc2t) : (sc2t == null);
             if (!eq_1) {
                 return false;
             }
             final @Nullable /*@Thrown*/ ClassToTable referenced = a2f.getReferenced();
-            final /*@Thrown*/ boolean eq_2 = referenced == dc2t;
+            final /*@Thrown*/ boolean eq_2 = (referenced != null) ? referenced.equals(dc2t) : (dc2t == null);
             if (!eq_2) {
                 return false;
             }
@@ -1610,12 +1610,12 @@ public class umlRdbms extends AbstractTransformation
         try {
             // predicates
             final @Nullable /*@Thrown*/ Class owner = a_0.getOwner();
-            final /*@Thrown*/ boolean eq = owner == c_0;
+            final /*@Thrown*/ boolean eq = c_0.equals(owner);
             if (!eq) {
                 return false;
             }
             final @Nullable /*@Thrown*/ Class umlClass = fao.getUmlClass();
-            final /*@Thrown*/ boolean eq_0 = umlClass == c_0;
+            final /*@Thrown*/ boolean eq_0 = c_0.equals(umlClass);
             if (!eq_0) {
                 return false;
             }
@@ -1688,12 +1688,12 @@ public class umlRdbms extends AbstractTransformation
         try {
             // predicates
             final @Nullable /*@Thrown*/ Class owner = a_1.getOwner();
-            final /*@Thrown*/ boolean eq = owner == c_1;
+            final /*@Thrown*/ boolean eq = c_1.equals(owner);
             if (!eq) {
                 return false;
             }
             final @Nullable /*@Thrown*/ Class umlClass = fao_0.getUmlClass();
-            final /*@Thrown*/ boolean eq_0 = umlClass == c_1;
+            final /*@Thrown*/ boolean eq_0 = c_1.equals(umlClass);
             if (!eq_0) {
                 return false;
             }
@@ -1789,7 +1789,7 @@ public class umlRdbms extends AbstractTransformation
             }
             final @Nullable /*@Thrown*/ NonLeafAttribute fao_2 = (NonLeafAttribute)FromAttribute;
             final @Nullable /*@Thrown*/ Classifier type = ca.getType();
-            final /*@Thrown*/ boolean eq = type == c_2;
+            final /*@Thrown*/ boolean eq = c_2.equals(type);
             if (!eq) {
                 return false;
             }
@@ -1924,7 +1924,7 @@ public class umlRdbms extends AbstractTransformation
             }
             final @Nullable /*@Thrown*/ NonLeafAttribute fao_2 = (NonLeafAttribute)FromAttribute;
             final @Nullable /*@Thrown*/ Classifier type = ca_0.getType();
-            final /*@Thrown*/ boolean eq = type == c_3;
+            final /*@Thrown*/ boolean eq = c_3.equals(type);
             if (!eq) {
                 return false;
             }
@@ -1982,7 +1982,7 @@ public class umlRdbms extends AbstractTransformation
         try {
             // predicates
             final @Nullable /*@Thrown*/ Class owner = a_1_1.getOwner();
-            final /*@Thrown*/ boolean eq = owner == c_1_1;
+            final /*@Thrown*/ boolean eq = c_1_1.equals(owner);
             if (!eq) {
                 return false;
             }
@@ -2088,7 +2088,7 @@ public class umlRdbms extends AbstractTransformation
         try {
             // predicates
             final @Nullable /*@Thrown*/ Table table = c2t_0.getTable();
-            final /*@Thrown*/ boolean eq = table == t;
+            final /*@Thrown*/ boolean eq = t.equals(table);
             if (!eq) {
                 return false;
             }
@@ -2185,7 +2185,7 @@ public class umlRdbms extends AbstractTransformation
         try {
             // predicates
             final @Nullable /*@Thrown*/ PrimitiveToName type = a2c_2.getType();
-            final /*@Thrown*/ boolean eq = type == p2n_2;
+            final /*@Thrown*/ boolean eq = p2n_2.equals(type);
             if (!eq) {
                 return false;
             }

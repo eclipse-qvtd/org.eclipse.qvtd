@@ -62,4 +62,22 @@ public class CGFunctionImpl extends CGOperationImpl implements CGFunction {
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGFunction(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isBoxed() {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUnboxed() {
+		return false;
+	}
+
 } //CGFunctionImpl

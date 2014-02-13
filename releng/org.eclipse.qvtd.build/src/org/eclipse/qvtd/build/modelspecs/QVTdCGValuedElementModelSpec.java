@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.qvtd.codegen.qvti.cse.PredicatePlaces;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
@@ -94,6 +95,8 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 		new QVTdCGValuedElementModelSpec(CGMiddlePropertyCallExp.class, null,			Box.FALSE, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new QVTdCGValuedElementModelSpec(CGPredicate.class, "conditionExpression",		Box.BIBOX, null     , LOG_PRED , Nul.NEVER, INV_PRED , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , CTL_PRED , null     , null     , Eq.SELF );
 		new QVTdCGValuedElementModelSpec(CGPropertyAssignment.class, "initValue",		Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , EQ_EQUIV);
+
+		new QVTdCGValuedElementModelSpec(CGFunction.class, null,						Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 
 		new QVTdCGValuedElementModelSpec(CGMapping.class, null,							Box.BIBOX, null     , null     , null     , null     , null     , null     , null     , Ct.TRUE , null     , null     , null     , Ctx.TRUE , Ctl.BODY , null     , null     , null    );
 		new QVTdCGValuedElementModelSpec(CGMappingExp.class, null,						Box.BIBOX, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , EQ_EQUIV);

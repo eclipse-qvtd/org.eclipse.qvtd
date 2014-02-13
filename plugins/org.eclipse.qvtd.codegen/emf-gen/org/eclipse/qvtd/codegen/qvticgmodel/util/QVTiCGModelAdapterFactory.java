@@ -19,6 +19,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCallable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
@@ -199,6 +200,10 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCGVariable(CGVariable object) {
 				return createCGVariableAdapter();
+			}
+			@Override
+			public Adapter caseCGCallable(CGCallable object) {
+				return createCGCallableAdapter();
 			}
 			@Override
 			public Adapter caseCGOperation(CGOperation object) {
@@ -679,6 +684,20 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGVariableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGCallable <em>CG Callable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGCallable
+	 * @generated
+	 */
+	public Adapter createCGCallableAdapter() {
 		return null;
 	}
 

@@ -38,7 +38,11 @@
         containment="true" resolveProxies="false" eOpposite="#QVTCore.EnforcementOperation.bottomPattern"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.BottomPattern.realizedVariable"
         name="realizedVariable" ordered="false" upperBound="-1" eType="#QVTCore.RealizedVariable"
-        containment="true" resolveProxies="false"/>
+        containment="true" resolveProxies="false" eOpposite="#//RealizedVariable/bottomPattern">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="bottomPattern"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.CoreDomain" name="CoreDomain"
       eSuperTypes="QVTBase.ecore#QVTBase.Domain #QVTCore.Area"/>
@@ -65,7 +69,11 @@
         name="enforcementMode" eType="#QVTCore.EnforcementMode"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.EnforcementOperation.operationCallExp"
         name="operationCallExp" lowerBound="1" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.OperationCallExp"
-        containment="true" resolveProxies="false"/>
+        containment="true" resolveProxies="false">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="enforcementOperation"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.GuardPattern" name="GuardPattern"
       eSuperTypes="#QVTCore.CorePattern">
@@ -104,7 +112,10 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.RealizedVariable" name="RealizedVariable"
-      eSuperTypes="EssentialOCL.ecore#EssentialOCL.Variable"/>
+      eSuperTypes="EssentialOCL.ecore#EssentialOCL.Variable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bottomPattern" lowerBound="1"
+        eType="#QVTCore.BottomPattern" transient="true" resolveProxies="false" eOpposite="#QVTCore.BottomPattern.realizedVariable"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTCore.VariableAssignment" name="VariableAssignment"
       eSuperTypes="#QVTCore.Assignment">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTCore.VariableAssignment.targetVariable"

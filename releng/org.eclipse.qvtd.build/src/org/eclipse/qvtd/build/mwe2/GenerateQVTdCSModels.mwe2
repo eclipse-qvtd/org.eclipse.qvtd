@@ -16,6 +16,7 @@
  */
 module GenerateQVTdCSModels
 
+import org.eclipse.ocl.examples.build.*
 import org.eclipse.ocl.examples.build.utilities.*
 import org.eclipse.ocl.examples.build.xtend.*
 import org.eclipse.emf.mwe.utils.*
