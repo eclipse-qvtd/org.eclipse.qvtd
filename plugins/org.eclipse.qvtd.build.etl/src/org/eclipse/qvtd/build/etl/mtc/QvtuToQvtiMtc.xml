@@ -33,7 +33,7 @@
         <!-- Configuration -->
         <epsilon.emf.loadModel
             name = "config"
-            modelFile = "${configuration}" 
+            modelFile = "${name}Config.xmi" 
             metamodelUri = "http://www.eclipse.org/qvt/examples/0.1/QVTcConfig"
             read="true" store="false"/>
     </target>
@@ -43,14 +43,14 @@
         <epsilon.emf.loadModel
             name = "QVTc"
             aliases ="QVT"
-            modelFile = "${qvtcas}" 
+            modelFile = "${name}.qvtcas" 
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="true" store="false"/>
         <!-- QVTu -->
         <epsilon.emf.loadModel
             name = "QVTu"
             aliases ="QVT"
-            modelFile = "${qvtuas}" 
+            modelFile = "${name}.qvtu.qvtcas" 
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="false" store="true"/>
 	    <epsilon.flock originalmodel="QVTc" migratedmodel="QVTu" uri="${QVTcToQVTu}">
@@ -68,14 +68,14 @@
         <epsilon.emf.loadModel
             name = "QVTu"
             aliases ="QVT"
-            modelFile = "${qvtuas}" 
+            modelFile = "${name}.qvtu.qvtcas" 
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="true" store="false"/>
 		<!-- QVTm Flatten  -->
         <epsilon.emf.loadModel
             name = "QVTm"
             aliases ="QVT"
-            modelFile = "${qvtmas}" 
+            modelFile = "${name}.qvtm.qvtcas" 
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="false" store="true"/>
         <epsilon.flock originalmodel="QVTu" migratedmodel="QVTm" uri="${QVTuToQVTm}">
@@ -88,19 +88,19 @@
 		<epsilon.disposeModel model="QVTm"/>
     </target>
 	
-	<target name="QvtmToQvtiPartition" depends="loadModels">
+	<target name="QvtmToQvtiPartition" depends="QvtuToQvtm">
 		<!-- QVTm Flatten  -->
         <epsilon.emf.loadModel
             name = "QVTm"
             aliases ="QVT"
-            modelFile = "${qvtmas}" 
+            modelFile = "${name}.qvtm.qvtcas" 
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="true" store="false"/>
 		<!-- QVTm Partition  -->
         <epsilon.emf.loadModel
             name = "QVTiP"
             aliases ="QVT"
-            modelFile = "${qvtipartitionas}" 
+            modelFile = "${name}Partition.qvtm.qvtcas"
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="false" store="true"/>
 		<epsilon.etl uri="${QVTmToQVTiPartition}">

@@ -6,6 +6,7 @@ var inputVarMap : Map;  // (mapping, Set{variable})
 var outputVarMap : Map; // (mapping, Set{realizedVariable})
 var nodeMap : Map;      // (mapping, graph!Node)
 
+var dataNodeMap : Map;      // (??, graph!Node)
 
 // 1. Inter-mapping dependencies
 var img = new imGraph!Graph;
@@ -62,19 +63,97 @@ var ddg = new ddGraph!Graph;
 var rootDd = new ddGraph!Node;
 rootDd.label = qvti!Transformation.all().first().name;
 ddg.element.add(rootDd);
+
+
+visitR(rTree!Node.all().select(n | not n.parent.isDefined()), ddg, rootDd);
+
+"Done".println();
+
+
+operation visitR(roots : Collection, ddg : ddGraph!Graph, rootDd : ddGraph!Node) {
+    for (root in roots) {
+        var gn = root.getGraphNode;
+        var e = new ddGraph!Edge;
+        e.source = rootDd;
+        e.target = gn;
+        ddg.element.add(e);
+        dfsR(root);
+    }
+}
+
+operation dfsR(rootNode : tree!Node) {
+    for (child in rootNode.children) {
+        outputVarDFS(child, outputVarMap);
+    }
+}
+
+operation outputVarDFS(node : tree!Node, outputVarMap : Map) {
+    // 1. Look for all mappings that have a realized variable of this Node Type
+    for (m in outputVarMap.keySet()) {
+        for (v in outputVarMap.get(m)) {
+            if (v.type == node.type) {
+                
+            }
+        }
+    }
+}
+
+
+//////
+
+operation qvti!Mapping getGraphNode() : ddGraph!Node  {
+    if (dataNodeMap.containsKey(self)) {
+        return dataNodeMap.get(self);
+    } else {
+        var gn = new ddGraph!Node;
+	    gn.label = self.name;
+	    gn.color = ddGraph!Color#orange;
+	    ddg.element.add(gn); 
+	    dataNodeMap.put(self, gn);
+    }
+}
+
+operation qvti!CoreDomain getGraphNode() : ddGraph!Node  {
+    if (dataNodeMap.containsKey(self)) {
+        return dataNodeMap.get(self);
+    } else {
+        var gn = new ddGraph!Node;
+        gn.label = self.name;
+        gn.color = ddGraph!Color#orange;
+        ddg.element.add(gn);
+        dataNodeMap.put(self, gn); 
+    }
+}
+
+operation rTree!Node getGraphNode() : ddGraph!Node  {
+    if (dataNodeMap.containsKey(self)) {
+        return dataNodeMap.get(self);
+    } else {
+        var gn = new ddGraph!Node;
+        gn.label = self.name;
+        gn.color = ddGraph!Color#orange;
+        ddg.element.add(gn); 
+        dataNodeMap.put(self, gn);
+    }
+}
+
+
 visitL(lTree!Node.all().select(n | not n.parent.isDefined()), ddg, rootDd);
 visitR(rTree!Node.all().select(n | not n.parent.isDefined()), ddg, rootDd);
-visitL(mTree!Node.all().select(n | not n.parent.isDefined()), ddg, rootDd);
-visitR(mTree!Node.all().select(n | not n.parent.isDefined()), ddg, rootDd);
+//visitL(mTree!Node.all().select(n | not n.parent.isDefined()), ddg, rootDd);
+//visitR(mTree!Node.all().select(n | not n.parent.isDefined()), ddg, rootDd);
 
-// Add the info to the graph with this info
+// Mix the containment tree info with the input and output information (taking
+// into consideration the containment relations between them)
 for (tn in tNodeMapping.keySet()) {
     var gn = new ddGraph!Node;
     gn.label = tn.elementName;
+    gn.color = ddGraph!Color#lightBlue;
     ddg.element.add(gn);
     for (m in tNodeMapping.get(tn)) {
         var gnM = new ddGraph!Node;
         gnM.label = m.name;
+        gnM.color = ddGraph!Color#orange;
         ddg.element.add(gnM);
         var e = new ddGraph!Edge;
         e.source = gn;
@@ -97,18 +176,7 @@ operation visitL(roots : Collection, ddg : ddGraph!Graph, rootDd : ddGraph!Node)
     }
 }
 
-operation visitR(roots : Collection, ddg : ddGraph!Graph, rootDd : ddGraph!Node) {
-    for (root in roots) {
-        var gn = new ddGraph!Node;
-        gn.label = root.elementName;
-        ddg.element.add(gn);
-        var e = new ddGraph!Edge;
-        e.source = rootDd;
-        e.target = gn;
-        ddg.element.add(e);
-        dfsR(root);
-    }
-}
+
 
 // Root nodes don't have mappings associated
 operation dfsL(rootNode : tree!Node) {
@@ -116,11 +184,7 @@ operation dfsL(rootNode : tree!Node) {
         depthSearchL(child, new Set, qvti!Transformation.all().first().rule);
     }
 }
-operation dfsR(rootNode : tree!Node) {
-    for (child in rootNode.children) {
-        depthSearchR(child, new Set, qvti!Transformation.all().first().rule);
-    }
-}
+
 
 operation depthSearchL(node : tree!Node, hierarchySpace : Collection, searchSpace : Collection) : Collection {
     // 1. Search for mappings in my hierarchy
@@ -142,6 +206,7 @@ operation depthSearchL(node : tree!Node, hierarchySpace : Collection, searchSpac
     tNodeMapping.put(node, hierarchyMapps);
     return unused;
 }
+
 operation depthSearchR(node : tree!Node, hierarchySpace : Collection, searchSpace : Collection) : Collection {
     // 1. Search for mappings in my hierarchy
     var hierarchyMapps = node.getRMapps(hierarchySpace);
@@ -183,15 +248,10 @@ operation qvti!Rule testMappingL(tNode : tree!Node) : Boolean {
             .includingAll(self.domain.collect(d | d.guardPattern).flatten().collect(gp | gp.predicate).flatten())
             .includingAll(self.domain.collect(d | d.bottomPattern).flatten().collect(gp | gp.predicate).flatten());
     if (prediactes.isEmpty()) {
-        self.println();
-        "No predicates".println();
-        inputVarMap.get(self).println();
         // The mapping has no predicates??
         // It must have only 1 input variable, and the variable must be
         // of he same type of the tree Node
         if (inputVarMap.get(self).size() == 1) {
-            inputVarMap.get(self).first().type.name.println("V type ");
-            tNode.elementName.println("Node type ");
             return inputVarMap.get(self).exists(v | v.type.name == tNode.elementName);
         }
     }
@@ -221,7 +281,7 @@ operation qvti!Rule testMappingL(tNode : tree!Node) : Boolean {
 // R type nodes are tested for assignments or single input realized vars
 operation qvti!Rule testMappingR(tNode : tree!Node) : Boolean {
     // Once the partition is done, this should only look for assignments in the R domain's bottom pattern
-    //self.println();
+    //self.name.println("testMappingR ");
     var assignments =  self.domain.select(d | d.isEnforceable).collect(d | d.bottomPattern).flatten().collect(gp | gp.assignment).flatten();
     if (assignments.isEmpty()) {
         // The bottom pattern has no predicates
@@ -280,33 +340,6 @@ operation createDomainTreeMappingDependence(roots : Collection, ddg : ddGraph!Gr
 }
 
 
-
-
-
-
-
-/* 
-for (r in qvti!Transformation.all().first().rule) {
-    r.name.println();
-    // Once the partition is done, this should only look for predicates in the guard patterns
-    for (p in r.guardPattern.predicate
-            .includingAll(r.domain.collect(d | d.guardPattern).flatten().collect(gp | gp.predicate).flatten())
-            .includingAll(r.domain.collect(d | d.bottomPattern).flatten().collect(gp | gp.predicate).flatten())) {
-            
-        if (p.conditionExpression.isSimpleAttributeNavigation()) {
-            // Does the predicate is single "domained", all variables belong to the same domain
-            if (p.conditionExpression.isSingleDomained()) {
-                
-                // Find if the navigated property is a containment opposite.
-                p.conditionExpression.toString().println();
-                var prop = p.conditionExpression.getNavigatedProperty();
-                prop.name.println();
-            }
-        }
-    }
-}
-
-*/
 operation TypedModel getMetaModel() : EmfModel {
     
 }

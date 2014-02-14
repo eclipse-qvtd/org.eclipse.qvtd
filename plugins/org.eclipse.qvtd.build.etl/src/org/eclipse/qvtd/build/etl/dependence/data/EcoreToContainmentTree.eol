@@ -36,7 +36,7 @@ operation mm!EPackage iterativeDFS() {
 	
 	var parentNode = new tree!Node;
     //parentNode.data = self;
-    parentNode.elementName = self.name;
+    parentNode.type = self.name;
 	maxDepth = 1;
     
     while (iterate) {
@@ -81,7 +81,7 @@ operation mm!EClassifier dfs(depth, maxDepth, parentNode) : Boolean {
 	            n = new tree!Node;
 	            //n.data = self;
 	            //n.data.println();
-	            n.elementName = self.name;
+	            n.type = self.name;
 	            visited.put(self, n);
 	        }
 	        if (depth == maxDepth) {

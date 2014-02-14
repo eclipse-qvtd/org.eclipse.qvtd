@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ASCII"?>
 <simplegraph:Graph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simplegraph="http://http://www.eclipse.org/qvt/examples/0.1/SimpleGraph" name="InterMapping">
-  <element xsi:type="simplegraph:Node" outgoing="//@element.24 //@element.25 //@element.26 //@element.27 //@element.29 //@element.36" label="packageToSchema_LM"/>
-  <element xsi:type="simplegraph:Node" outgoing="//@element.28 //@element.32" label="packageToSchema_MR"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.28 //@element.33" label="packageToSchema_MR"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.24 //@element.25 //@element.26 //@element.27 //@element.29 //@element.34" label="packageToSchema_LM"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.24" outgoing="//@element.44 //@element.51 //@element.56" label="primitiveToName_LM"/>
   <element xsi:type="simplegraph:Node" label="primitiveToName_MR"/>
-  <element xsi:type="simplegraph:Node" incoming="//@element.24" outgoing="//@element.43 //@element.49 //@element.55" label="primitiveToName_LM"/>
-  <element xsi:type="simplegraph:Node" incoming="//@element.25" outgoing="//@element.45 //@element.51 //@element.57" label="integerToNumber_LM"/>
   <element xsi:type="simplegraph:Node" label="integerToNumber_MR"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.25" outgoing="//@element.45 //@element.52 //@element.57" label="integerToNumber_LM"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.26" outgoing="//@element.42 //@element.49 //@element.54" label="booleanToBoolean_LM"/>
   <element xsi:type="simplegraph:Node" label="booleanToBoolean_MR"/>
-  <element xsi:type="simplegraph:Node" incoming="//@element.26" outgoing="//@element.44 //@element.50 //@element.56" label="booleanToBoolean_LM"/>
   <element xsi:type="simplegraph:Node" label="stringToVarchar_MR"/>
-  <element xsi:type="simplegraph:Node" incoming="//@element.27" outgoing="//@element.42 //@element.48 //@element.54" label="stringToVarchar_LM"/>
-  <element xsi:type="simplegraph:Node" incoming="//@element.28" outgoing="//@element.30 //@element.31 //@element.33 //@element.60" label="classToTable_MR"/>
-  <element xsi:type="simplegraph:Node" incoming="//@element.29" outgoing="//@element.34 //@element.35 //@element.37 //@element.39 //@element.40 //@element.47 //@element.52 //@element.53" label="classToTable_LM"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.27" outgoing="//@element.43 //@element.50 //@element.55" label="stringToVarchar_LM"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.28" outgoing="//@element.30 //@element.31 //@element.32 //@element.60" label="classToTable_MR"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.29" outgoing="//@element.35 //@element.36 //@element.37 //@element.39 //@element.40 //@element.47 //@element.48 //@element.53" label="classToTable_LM"/>
   <element xsi:type="simplegraph:Node" incoming="//@element.30 //@element.31 //@element.32 //@element.33" label="associationToForeignKey_MR"/>
   <element xsi:type="simplegraph:Node" incoming="//@element.34 //@element.35 //@element.36" label="associationToForeignKey_LM"/>
   <element xsi:type="simplegraph:Node" incoming="//@element.37 //@element.38" label="attributes_LM"/>
@@ -24,40 +24,40 @@
   <element xsi:type="simplegraph:Node" incoming="//@element.54 //@element.55 //@element.56 //@element.57 //@element.58" label="complexAttributePrimitiveAttributes_LM"/>
   <element xsi:type="simplegraph:Node" incoming="//@element.59" label="complexAttributeComplexAttributes_LM"/>
   <element xsi:type="simplegraph:Node" incoming="//@element.60" label="attributeColumns_MR"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.3" source="//@element.0"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.4" source="//@element.0"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.7" source="//@element.0"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.9" source="//@element.0"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.10" source="//@element.1"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.11" source="//@element.0"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.2" source="//@element.1"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.5" source="//@element.1"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.6" source="//@element.1"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.9" source="//@element.1"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.10" source="//@element.0"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.11" source="//@element.1"/>
   <element xsi:type="simplegraph:Edge" target="//@element.12" source="//@element.10"/>
   <element xsi:type="simplegraph:Edge" target="//@element.12" source="//@element.10"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.12" source="//@element.1"/>
   <element xsi:type="simplegraph:Edge" target="//@element.12" source="//@element.10"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.12" source="//@element.0"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.13" source="//@element.1"/>
   <element xsi:type="simplegraph:Edge" target="//@element.13" source="//@element.11"/>
   <element xsi:type="simplegraph:Edge" target="//@element.13" source="//@element.11"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.13" source="//@element.0"/>
   <element xsi:type="simplegraph:Edge" target="//@element.14" source="//@element.11"/>
   <element xsi:type="simplegraph:Edge" target="//@element.14" source="//@element.18"/>
   <element xsi:type="simplegraph:Edge" target="//@element.15" source="//@element.11"/>
   <element xsi:type="simplegraph:Edge" target="//@element.16" source="//@element.11"/>
   <element xsi:type="simplegraph:Edge" target="//@element.16" source="//@element.18"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.16" source="//@element.6"/>
   <element xsi:type="simplegraph:Edge" target="//@element.16" source="//@element.9"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.16" source="//@element.3"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.16" source="//@element.7"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.16" source="//@element.4"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.16" source="//@element.2"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.16" source="//@element.5"/>
   <element xsi:type="simplegraph:Edge" target="//@element.17" source="//@element.18"/>
   <element xsi:type="simplegraph:Edge" target="//@element.18" source="//@element.11"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.19" source="//@element.9"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.19" source="//@element.3"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.19" source="//@element.7"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.19" source="//@element.4"/>
   <element xsi:type="simplegraph:Edge" target="//@element.19" source="//@element.11"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.19" source="//@element.6"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.19" source="//@element.9"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.19" source="//@element.2"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.19" source="//@element.5"/>
   <element xsi:type="simplegraph:Edge" target="//@element.20" source="//@element.11"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.21" source="//@element.6"/>
   <element xsi:type="simplegraph:Edge" target="//@element.21" source="//@element.9"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.21" source="//@element.3"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.21" source="//@element.7"/>
-  <element xsi:type="simplegraph:Edge" target="//@element.21" source="//@element.4"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.21" source="//@element.2"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.21" source="//@element.5"/>
   <element xsi:type="simplegraph:Edge" target="//@element.21" source="//@element.18"/>
   <element xsi:type="simplegraph:Edge" target="//@element.22" source="//@element.18"/>
   <element xsi:type="simplegraph:Edge" target="//@element.23" source="//@element.10"/>
