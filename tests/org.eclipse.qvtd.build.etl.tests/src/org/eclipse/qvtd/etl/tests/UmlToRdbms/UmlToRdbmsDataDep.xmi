@@ -1,27 +1,197 @@
 <?xml version="1.0" encoding="ASCII"?>
 <simplegraph:Graph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simplegraph="http://http://www.eclipse.org/qvt/examples/0.1/SimpleGraph">
-  <element xsi:type="simplegraph:Node" label="classAttributes_LM"/>
-  <element xsi:type="simplegraph:Node" label="primitiveAttribute_LM"/>
-  <element xsi:type="simplegraph:Node" label="booleanToBoolean_MR"/>
-  <element xsi:type="simplegraph:Node" label="attributes_LM"/>
-  <element xsi:type="simplegraph:Node" label="booleanToBoolean_LM"/>
-  <element xsi:type="simplegraph:Node" label="stringToVarchar_LM"/>
-  <element xsi:type="simplegraph:Node" label="packageToSchema_MR"/>
-  <element xsi:type="simplegraph:Node" label="packageToSchema_LM"/>
-  <element xsi:type="simplegraph:Node" label="primitiveToName_MR"/>
-  <element xsi:type="simplegraph:Node" label="complexAttributeAttributes_LM"/>
-  <element xsi:type="simplegraph:Node" label="integerToNumber_MR"/>
-  <element xsi:type="simplegraph:Node" label="classToTable_LM"/>
-  <element xsi:type="simplegraph:Node" label="primitiveToName_LM"/>
-  <element xsi:type="simplegraph:Node" label="complexAttribute_LM"/>
-  <element xsi:type="simplegraph:Node" label="classPrimitiveAttributes_LM"/>
-  <element xsi:type="simplegraph:Node" label="stringToVarchar_MR"/>
-  <element xsi:type="simplegraph:Node" label="classToTable_MR"/>
-  <element xsi:type="simplegraph:Node" label="complexAttributeComplexAttributes_LM"/>
-  <element xsi:type="simplegraph:Node" label="attributeColumns_MR"/>
-  <element xsi:type="simplegraph:Node" label="associationToForeignKey_MR"/>
-  <element xsi:type="simplegraph:Node" label="classComplexAttributes_LM"/>
-  <element xsi:type="simplegraph:Node" label="complexAttributePrimitiveAttributes_LM"/>
-  <element xsi:type="simplegraph:Node" label="integerToNumber_LM"/>
-  <element xsi:type="simplegraph:Node" label="associationToForeignKey_LM"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.2 //@element.4" label="stringToVarchar_MR"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.2" label="PackageToSchema" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.0" source="//@element.1"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.4" label="StringToVarchar" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.0" source="//@element.3"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.7 //@element.9 //@element.11" label="integerToNumber_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.7" label="PackageToSchema" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.5" source="//@element.6"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.9" label="Package" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.5" source="//@element.8"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.11" label="PrimitiveDataType" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.5" source="//@element.10"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.14 //@element.16 //@element.18" label="booleanToBoolean_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.14" label="Package" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.12" source="//@element.13"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.16" label="PrimitiveDataType" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.12" source="//@element.15"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.18" label="PackageToSchema" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.12" source="//@element.17"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.21 //@element.23 //@element.25" label="classAttributes_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.21" label="ClassToTable" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.19" source="//@element.20"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.23" label="Attribute" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.19" source="//@element.22"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.25" label="Class" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.19" source="//@element.24"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.28 //@element.30 //@element.32" label="stringToVarchar_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.28" label="Package" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.26" source="//@element.27"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.30" label="PrimitiveDataType" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.26" source="//@element.29"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.32" label="PackageToSchema" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.26" source="//@element.31"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.35 //@element.37 //@element.39 //@element.41 //@element.43" label="primitiveAttribute_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.35" label="PrimitiveToName" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.33" source="//@element.34"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.37" label="Class" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.33" source="//@element.36"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.39" label="Attribute" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.33" source="//@element.38"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.41" label="FromAttributeOwner" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.33" source="//@element.40"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.43" label="PrimitiveDataType" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.33" source="//@element.42"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.46" label="packageToSchema_MR"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.46" label="PackageToSchema" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.44" source="//@element.45"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.49 //@element.51" label="primitiveToName_MR"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.49" label="PrimitiveToName" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.47" source="//@element.48"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.51" label="PackageToSchema" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.47" source="//@element.50"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.54 //@element.56 //@element.58" label="classToTable_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.54" label="Class" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.52" source="//@element.53"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.56" label="PackageToSchema" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.52" source="//@element.55"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.58" label="Package" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.52" source="//@element.57"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.61 //@element.63 //@element.65 //@element.67 //@element.69" label="complexAttributeComplexAttributes_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.61" label="Attribute" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.59" source="//@element.60"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.63" label="Class" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.59" source="//@element.62"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.65" label="NonLeafAttribute" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.59" source="//@element.64"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.67" label="Class" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.59" source="//@element.66"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.69" label="Attribute" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.59" source="//@element.68"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.72" label="packageToSchema_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.72" label="Package" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.70" source="//@element.71"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.75 //@element.77 //@element.79 //@element.81 //@element.83 //@element.85 //@element.87" label="associationToForeignKey_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.75" label="Package" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.73" source="//@element.74"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.77" label="PackageToSchema" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.73" source="//@element.76"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.79" label="ClassToTable" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.73" source="//@element.78"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.81" label="Class" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.73" source="//@element.80"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.83" label="Association" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.73" source="//@element.82"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.85" label="Class" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.73" source="//@element.84"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.87" label="ClassToTable" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.73" source="//@element.86"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.90 //@element.92 //@element.94 //@element.96 //@element.98 //@element.100 //@element.102 //@element.104" label="associationToForeignKey_MR"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.90" label="ClassToTable" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.88" source="//@element.89"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.92" label="Key" type="output"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.88" source="//@element.91"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.94" label="Schema" type="output"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.88" source="//@element.93"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.96" label="ClassToTable" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.88" source="//@element.95"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.98" label="Table" type="output"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.88" source="//@element.97"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.100" label="Table" type="output"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.88" source="//@element.99"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.102" label="PackageToSchema" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.88" source="//@element.101"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.104" label="AssociationToForeignKey" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.88" source="//@element.103"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.107 //@element.109" label="booleanToBoolean_MR"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.107" label="PackageToSchema" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.105" source="//@element.106"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.109" label="BooleanToBoolean" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.105" source="//@element.108"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.112 //@element.114 //@element.116 //@element.118" label="classComplexAttributes_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.112" label="Attribute" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.110" source="//@element.111"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.114" label="Class" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.110" source="//@element.113"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.116" label="Class" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.110" source="//@element.115"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.118" label="ClassToTable" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.110" source="//@element.117"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.121 //@element.123 //@element.125 //@element.127 //@element.129" label="classPrimitiveAttributes_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.121" label="Attribute" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.119" source="//@element.120"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.123" label="PrimitiveDataType" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.119" source="//@element.122"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.125" label="PrimitiveToName" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.119" source="//@element.124"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.127" label="Class" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.119" source="//@element.126"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.129" label="ClassToTable" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.119" source="//@element.128"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.132 //@element.134" label="integerToNumber_MR"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.132" label="PackageToSchema" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.130" source="//@element.131"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.134" label="IntegerToNumber" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.130" source="//@element.133"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.137 //@element.139 //@element.141 //@element.143" label="complexAttribute_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.137" label="Class" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.135" source="//@element.136"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.139" label="Class" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.135" source="//@element.138"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.141" label="Attribute" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.135" source="//@element.140"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.143" label="FromAttributeOwner" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.135" source="//@element.142"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.146 //@element.148 //@element.150" label="classToTable_MR"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.146" label="Schema" type="output"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.144" source="//@element.145"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.148" label="ClassToTable" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.144" source="//@element.147"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.150" label="PackageToSchema" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.144" source="//@element.149"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.153 //@element.155 //@element.157" label="attributes_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.153" label="Class" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.151" source="//@element.152"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.155" label="FromAttributeOwner" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.151" source="//@element.154"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.157" label="Attribute" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.151" source="//@element.156"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.160 //@element.162 //@element.164 //@element.166 //@element.168 //@element.170" label="complexAttributePrimitiveAttributes_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.160" label="PrimitiveToName" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.158" source="//@element.159"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.162" label="PrimitiveDataType" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.158" source="//@element.161"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.164" label="Attribute" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.158" source="//@element.163"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.166" label="Class" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.158" source="//@element.165"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.168" label="Attribute" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.158" source="//@element.167"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.170" label="NonLeafAttribute" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.158" source="//@element.169"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.173 //@element.175 //@element.177" label="primitiveToName_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.173" label="PrimitiveDataType" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.171" source="//@element.172"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.175" label="Package" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.171" source="//@element.174"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.177" label="PackageToSchema" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.171" source="//@element.176"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.180 //@element.182 //@element.184" label="attributeColumns_MR"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.180" label="AttributeToColumn" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.178" source="//@element.179"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.182" label="ClassToTable" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.178" source="//@element.181"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.184" label="Table" type="output"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.178" source="//@element.183"/>
+  <element xsi:type="simplegraph:Node" incoming="//@element.187 //@element.189 //@element.191 //@element.193" label="complexAttributeAttributes_LM"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.187" label="Class" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.185" source="//@element.186"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.189" label="NonLeafAttribute" type="middle"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.185" source="//@element.188"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.191" label="Attribute" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.185" source="//@element.190"/>
+  <element xsi:type="simplegraph:Node" outgoing="//@element.193" label="Attribute" type="input"/>
+  <element xsi:type="simplegraph:Edge" target="//@element.185" source="//@element.192"/>
 </simplegraph:Graph>

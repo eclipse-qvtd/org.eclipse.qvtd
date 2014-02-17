@@ -63,7 +63,7 @@
 		<epsilon.disposeModel model="QVTu"/>
 	</target>
 	
-	<target name="QvtuToQvtm" depends="QvtcToQvtu">
+	<target name="QvtuToQvtm" depends="loadModels">
 		 <!-- QVTu -->
         <epsilon.emf.loadModel
             name = "QVTu"
@@ -88,7 +88,7 @@
 		<epsilon.disposeModel model="QVTm"/>
     </target>
 	
-	<target name="QvtmToQvtiPartition" depends="QvtuToQvtm">
+	<target name="QvtmToQvtiPartition" depends="loadModels">
 		<!-- QVTm Flatten  -->
         <epsilon.emf.loadModel
             name = "QVTm"

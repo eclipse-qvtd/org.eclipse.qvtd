@@ -35,10 +35,10 @@ for (rB in qvti!Transformation.all().first().rule) {
     for (vB in inputVarMap.get(rB)) {
         //vB.name.println();
         // Search for compatible output vars (by type) in same side mappings (LM or MR))
-        for (rA in qvti!Transformation.all().first().rule.excluding(rB).select(
+        for (rA in qvti!Transformation.all().first().rule.excluding(rB)/* .select(
                 r | r.domain.collect(d | d.typedModel).flatten()
                     .includesAll(rB.domain.collect(d | d.typedModel).flatten())
-                )
+                )*/
             ) {
             for (vA in outputVarMap.get(rA)) {
                 if (x.isKindOf(vA.type, vB.type)) {
@@ -53,6 +53,68 @@ for (rB in qvti!Transformation.all().first().rule) {
     }
 }
 
+// 2. Mapping data dependendence
+var ddg = new ddGraph!Graph;
+
+for (r in qvti!Transformation.all().first().rule.select(r | not r.context.isDefined())) {
+    var mapN = new ddGraph!Node;
+    mapN.label = r.name;
+    ddg.element.add(mapN);
+    // a. Containment relations
+    // i) input-input
+    for (vA in inputVarMap.get(r)) {
+        var inputN = new ddGraph!Node;
+        inputN.label = vA.type.name;
+        if (vA.oppositePattern().area.name == "middle") {
+            inputN.type = ddGraph!NodeType#middle;    
+        } else if(isInputDomain(vA.oppositePattern().area)) {
+            inputN.type = ddGraph!NodeType#input;    
+        } else if(isOutputDomain(vA.oppositePattern().area)) {
+            inputN.type = ddGraph!NodeType#output;    
+        } 
+        ddg.element.add(inputN);
+        var e = new ddGraph!Edge;
+        e.source = inputN;
+        e.target = mapN;
+        e.type = ddGraph!EdgeType#input;   
+        ddg.element.add(e);       
+        for (vB in inputVarMap.get(r).excluding(vA)) {
+            if (vA.hasContainmentRelation(vB)) {
+                vB.name.println(vA.name + " contains ");
+            }
+        }
+    }
+}
+"Done".println();
+
+operation qvti!Variable hasContainmentRelation(varB : qvti!Variable) : Boolean {
+    // Containment is in the same domain
+    if (self.oppositePattern().area == varB.oppositePattern().area) {
+        // Fin predicates that only refer the two variables
+        if (self.oppositePattern().area.name == "middle" or isInputDomain(self.oppositePattern().area)) {
+            // Predicates are in the mapping guard pattern
+            for (p in self.oppositePattern().area.rule.guardPattern.predicate.select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
+                var refVars = p.conditionExpression.findRreferencedVariables(); 
+                // Are both vars
+                if (p.conditionExpression.findRreferencedVariables()
+                        .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
+                    // Find if the navigated property is a containment opposite.
+                    var prop = p.conditionExpression.getNavigatedProperty();
+                    if (prop.opposite.isDefined() and prop.opposite.isComposite()) {
+                        p.toString().println();
+                        return true;
+                    }
+                }
+            }
+        } else {
+            
+        }
+        
+    }
+    return false;
+}
+
+
 // 2. Data dependence graph.
 nodeMap.clear();
 // Do a dfs of the containment tree and find the mappings that are suitable of
@@ -64,15 +126,14 @@ var rootDd = new ddGraph!Node;
 rootDd.label = qvti!Transformation.all().first().name;
 ddg.element.add(rootDd);
 
-
 visitR(rTree!Node.all().select(n | not n.parent.isDefined()), ddg, rootDd);
 
-"Done".println();
+
 
 
 operation visitR(roots : Collection, ddg : ddGraph!Graph, rootDd : ddGraph!Node) {
     for (root in roots) {
-        var gn = root.getGraphNode;
+        var gn = root.getGraphNode();
         var e = new ddGraph!Edge;
         e.source = rootDd;
         e.target = gn;
@@ -106,7 +167,7 @@ operation qvti!Mapping getGraphNode() : ddGraph!Node  {
         return dataNodeMap.get(self);
     } else {
         var gn = new ddGraph!Node;
-	    gn.label = self.name;
+	    gn.label = self.type;
 	    gn.color = ddGraph!Color#orange;
 	    ddg.element.add(gn); 
 	    dataNodeMap.put(self, gn);
@@ -118,7 +179,7 @@ operation qvti!CoreDomain getGraphNode() : ddGraph!Node  {
         return dataNodeMap.get(self);
     } else {
         var gn = new ddGraph!Node;
-        gn.label = self.name;
+        gn.label = self.type;
         gn.color = ddGraph!Color#orange;
         ddg.element.add(gn);
         dataNodeMap.put(self, gn); 
@@ -130,7 +191,7 @@ operation rTree!Node getGraphNode() : ddGraph!Node  {
         return dataNodeMap.get(self);
     } else {
         var gn = new ddGraph!Node;
-        gn.label = self.name;
+        gn.label = self.type;
         gn.color = ddGraph!Color#orange;
         ddg.element.add(gn); 
         dataNodeMap.put(self, gn);
