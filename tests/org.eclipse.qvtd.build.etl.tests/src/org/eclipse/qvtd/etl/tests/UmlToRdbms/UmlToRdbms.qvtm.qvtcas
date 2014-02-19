@@ -1770,7 +1770,7 @@
             <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
                 referredVariable="#/0/@nestedPackage.0/@rule.13/@bottomPattern/@realizedVariable.0"/>
           </assignment>
-          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"/>
+          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"/>
         </bottomPattern>
         <local>
           <guardPattern/>
@@ -1891,7 +1891,7 @@
             <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
                 referredVariable="#/0/@nestedPackage.0/@rule.14/@bottomPattern/@realizedVariable.0"/>
           </assignment>
-          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"/>
+          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"/>
         </bottomPattern>
         <local>
           <guardPattern/>
@@ -2064,7 +2064,7 @@
             <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
                 referredVariable="#/0/@nestedPackage.0/@rule.15/@bottomPattern/@realizedVariable.0"/>
           </assignment>
-          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"/>
+          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"/>
         </bottomPattern>
         <local>
           <guardPattern/>
@@ -2223,7 +2223,7 @@
             <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
                 referredVariable="#/0/@nestedPackage.0/@rule.16/@bottomPattern/@realizedVariable.0"/>
           </assignment>
-          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"/>
+          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"/>
         </bottomPattern>
         <local>
           <guardPattern/>
@@ -2407,18 +2407,18 @@
         <local>
           <guardPattern/>
           <bottomPattern>
-            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.kind">
               <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                  referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.name">
+                  referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
                 <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
                     referredVariable="#/0/@nestedPackage.0/@rule.17/@bottomPattern/@variable.0"/>
               </value>
               <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
                   referredVariable="#/0/@nestedPackage.0/@rule.17/@domain.0/@bottomPattern/@realizedVariable.0"/>
             </assignment>
-            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.kind">
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
               <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                  referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
+                  referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.name">
                 <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
                     referredVariable="#/0/@nestedPackage.0/@rule.17/@bottomPattern/@variable.0"/>
               </value>
