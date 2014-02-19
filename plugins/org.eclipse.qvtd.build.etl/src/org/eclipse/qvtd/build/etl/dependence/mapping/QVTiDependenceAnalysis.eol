@@ -263,9 +263,9 @@ operation qvti!Variable hasMiddleRelation(varB : qvti!Variable) : Boolean {
                     .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
                 // Find if the navigated property is a containment opposite.
                 var prop = a.targetProperty;
-                a.toString().println("Assignment ");
-                self.println("var A ");
-                varB.println("var B ");
+                //a.toString().println("Assignment ");
+                //self.println("var A ");
+                //varB.println("var B ");
                 //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
                 //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
                 if (a.slotExpression.referredVariable == self and 
