@@ -299,9 +299,9 @@ operation QVT!GuardPattern fixPredicateVarReferences() {
             }
             if (targetVar == null) {
                 if (self.area.isTypeOf(QVT!Mapping)) {
-                    throw "Error! not able to find a local reference for variable " + v + " in predicate " + predicate + "in GuardPattern of Mapping " + self.area;  
+                    throw "Error! not able to find a local reference for variable " + v + " in predicate " + predicate + " in GuardPattern of Mapping " + self.area;  
                 } else if(self.area.isTypeOf(QVT!CoreDomain)) {
-                    throw "Error! not able to find a local reference for variable " + v + " in predicate " + predicate + "in GuardPattern of Domain " + self.area;  
+                    throw "Error! not able to find a local reference for variable " + v + " in predicate " + predicate + " in GuardPattern of Domain " + self.area;  
                 }  
             }
             //targetVar.println("local ");

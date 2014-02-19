@@ -74,7 +74,7 @@ rule Mapping
         for (local in m.local) {
             local.promoteMappings();
         }
-              
+        m.println();      
         if (m.domain.one(d | isInputDomain(d))) {
             // Create LM mapping
             var lmM = new QVTiP!Mapping;
@@ -366,7 +366,7 @@ rule MRDomain
          od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.variable));
          //od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.variable));
          if(id.`rule`.equivalents().isDefined()) {
-            id.`rule`.equivalents().flatten().selectOne(m | m.~side = "r").guardPattern.predicate.
+             id.`rule`.equivalents().flatten().selectOne(m | m.~side = "r").guardPattern.predicate.
                 addAll(id.guardPattern.predicate.includingAll(id.bottomPattern.predicate).equivalent());
          }
          od.bottomPattern = new QVTiP!BottomPattern;

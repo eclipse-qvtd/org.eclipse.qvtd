@@ -26,6 +26,7 @@ import "../../mtc/Helpers.eol";
         // 2. The Operation must be a OclAny "=", operation
         var eqOperation = getOperationByName("=", oclStdLib!AnyType.all().selectOne(t | t.name == "OclAny"));
         if (self.referredOperation == eqOperation) {
+            //"Is =".println();
             // The arguments must be 1: VariableExp
             if ( (self.argument.size() == 1) and self.argument.first().isTypeOf(QVT!VariableExp)) {
                 // The source must be a  PropertyCallExp
@@ -91,7 +92,21 @@ operation QVT!OCLExpression getNavigatedProperty() : QVT!Property {
         return self.source.referredProperty;
     }
 } 
- 
+
+// Only call if isSimpleAttributeNavigation returns true
+operation QVT!OCLExpression isArgumentVariable(v : QVT!Variable) : Boolean {
+    if (self.argument.first().isTypeOf(QVT!VariableExp) and self.argument.first().referredVariable == v) {
+        return true;
+    }
+    return false;
+}  
+
+operation QVT!OCLExpression isSourceVariable(v : QVT!Variable) : Boolean {
+    if (self.source.source.isTypeOf(QVT!VariableExp) and self.source.source.referredVariable == v) {
+        return true;
+    }
+    return false;
+} 
  
 operation OCLExpression containmentPredicate() : Boolean {
 

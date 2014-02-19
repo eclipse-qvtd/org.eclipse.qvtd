@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="simplegraph" nsURI="http://http://www.eclipse.org/qvt/examples/0.1/SimpleGraph"
-    nsPrefix="simplegraph">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="graph" nsURI="http://www.eclipse.org/qvt/examples/0.1/Graph"
+    nsPrefix="graph">
   <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
         eType="#//Edge" eOpposite="#//Edge/target"/>
@@ -22,8 +22,8 @@
         eOpposite="#//Graph/element"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Graph">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="element" upperBound="-1"
-        eType="#//Element" containment="true" eOpposite="#//Element/graph"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" unique="false"
+        upperBound="-1" eType="#//Element" containment="true" eOpposite="#//Element/graph"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EdgeType">
@@ -32,6 +32,7 @@
     <eLiterals name="middleContainment" value="2"/>
     <eLiterals name="inputContainment" value="3"/>
     <eLiterals name="outputContainment" value="4"/>
+    <eLiterals name="middleRelation" value="5"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="NodeType">
     <eLiterals name="mapping"/>
