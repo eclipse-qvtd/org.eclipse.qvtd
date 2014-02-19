@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="ASCII"?>
-<tree:Node xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:tree="http://www.eclipse.org/qvt/examples/0.1/Tree" type="umltordbms">
-  <children type="AttributeToColumn"/>
-  <children type="NonLeafAttribute"/>
-  <children type="PackageToSchema">
-    <children type="ClassToTable">
-      <children type="AssociationToForeignKey"/>
-    </children>
-    <children type="BooleanToBoolean"/>
-    <children type="IntegerToNumber"/>
-    <children type="StringToVarchar"/>
-  </children>
-</tree:Node>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:tree="http://www.eclipse.org/qvt/examples/0.1/Tree">
+  <tree:Node type="umltordbms" children="/7"/>
+  <tree:Node type="AttributeToColumn" parent="/5"/>
+  <tree:Node type="AssociationToForeignKey" parent="/4"/>
+  <tree:Node type="BooleanToBoolean" parent="/7"/>
+  <tree:Node type="ClassToTable" parent="/7" children="/2 /5"/>
+  <tree:Node type="NonLeafAttribute" parent="/4" children="/1"/>
+  <tree:Node type="IntegerToNumber" parent="/7"/>
+  <tree:Node type="PackageToSchema" parent="/0" children="/4 /3 /6 /8"/>
+  <tree:Node type="StringToVarchar" parent="/7"/>
+</xmi:XMI>

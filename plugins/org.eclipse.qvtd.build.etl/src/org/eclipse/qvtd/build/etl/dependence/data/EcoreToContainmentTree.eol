@@ -66,11 +66,14 @@ operation mm!EClassifier dfs(depth, maxDepth, parentNode) : Boolean {
     var change = false;
     //"Max depth reached, do nothing".println(tabs);
     if (depth <= maxDepth) {
+    	self.println("-".pad(depth, "\t",true));
         // If self is abstract, consider all subclasses at same depth (flattening)
 	    if (self.isTypeOf(mm!EClass) and self.abstract) {
 	        //"Abstract, do inheritance".println(tabs);
 	        for (sc in mm!EClass.all().select(c | c.eSuperTypes.includes(self))) {
-	            sc.dfs(depth, maxDepth, parentNode);
+	        	if (sc.name <> parentNode.type) {
+	        		sc.dfs(depth, maxDepth, parentNode);
+	        	}
 	        }
 	    } else {
 	        // Add Node or get node
@@ -79,7 +82,6 @@ operation mm!EClassifier dfs(depth, maxDepth, parentNode) : Boolean {
 	            n = visited.get(self);
 	        } else { 
 	            n = new tree!Node;
-	            //n.data = self;
 	            //n.data.println();
 	            n.type = self.name;
 	            visited.put(self, n);
@@ -89,12 +91,27 @@ operation mm!EClassifier dfs(depth, maxDepth, parentNode) : Boolean {
 	            change = true;
 	        }
 	        if (self.isTypeOf(mm!EClass)) {
-	           // Navigate Containment
-	            for (sf in self.eStructuralFeatures.select(sf : mm!EReference | sf.containment)) {
-	                change = sf.eReferenceType.dfs(depth+1, maxDepth, n) or change;
+	        	// Navigate Containment, mine and inherited
+	        	//self.println();
+	        	//self.eStructuralFeatures.select(sf : mm!EReference | sf.containment)
+	            //		.includingAll(self.getAllSuperTypes().collect(st | st.eStructuralFeatures.select(sf : mm!EReference | sf.containment)).flatten()).println();
+	            for (sf in self.eStructuralFeatures.select(sf : mm!EReference | sf.containment)
+	            		.includingAll(self.getAllSuperTypes().collect(st | st.eStructuralFeatures.select(sf : mm!EReference | sf.containment))).flatten()) {
+					change = sf.eReferenceType.dfs(depth+1, maxDepth, n) or change;
 	            }
 	        }
 	    }
     }
     return change;
+}
+
+
+operation mm!EClass getAllSuperTypes() : Set {
+	
+	var retVal : Set;
+	retVal.addAll(self.eSuperTypes);
+	for (st in self.eSuperTypes) {
+		retVal.addAll(st.getAllSuperTypes());
+	}
+	return retVal;
 }
