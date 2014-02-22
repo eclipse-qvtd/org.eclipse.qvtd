@@ -6,15 +6,15 @@
     </generalization>
     <ownedAttribute xmi:id="Domain.isCheckable" name="isCheckable" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1sIznEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Domain.isEnforceable" name="isEnforceable" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1sYznEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Domain.rule" name="rule" type="Rule" association="A_Domain.rule_Rule.domain"/>
     <ownedAttribute xmi:id="Domain.typedModel" name="typedModel" type="TypedModel" association="A_Domain.typedModel_domain">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1soznEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="Function" name="Function">
@@ -23,7 +23,7 @@
     </generalization>
     <ownedAttribute xmi:id="Function.queryExpression" name="queryExpression" aggregation="composite" association="A_Function.queryExpression_function">
       <type xmi:type="uml:Class" href="EssentialOCL.uml#OclExpression"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1s4znEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="FunctionParameter" name="FunctionParameter">
@@ -38,14 +38,14 @@
     <generalization xmi:id="G_Pattern_Element">
       <general xmi:type="uml:Class" href="EMOF.uml#Element"/>
     </generalization>
+    <ownedAttribute xmi:id="Pattern.predicate" name="predicate" type="Predicate" aggregation="composite" association="A_Pattern.predicate_Predicate.pattern">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedAttribute>
     <ownedAttribute xmi:id="Pattern.bindsTo" name="bindsTo" association="A_Pattern.bindsTo_pattern">
       <type xmi:type="uml:Class" href="EssentialOCL.uml#Variable"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1tIznEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G1U1tYznEeOqfrVI7b213A" value="*"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="Pattern.predicate" name="predicate" type="Predicate" aggregation="composite" association="A_Pattern.predicate_Predicate.pattern">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1toznEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G1U1t4znEeOqfrVI7b213A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="Predicate" name="Predicate">
@@ -62,14 +62,14 @@
       <general xmi:type="uml:Class" href="EMOF.uml#NamedElement"/>
     </generalization>
     <ownedAttribute xmi:id="Rule.domain" name="domain" type="Domain" isOrdered="true" aggregation="composite" association="A_Domain.rule_Rule.domain">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1uIznEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G1U1uYznEeOqfrVI7b213A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Rule.overrides" name="overrides" type="Rule" association="A_Rule.overrides_overridden">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1uoznEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Rule.transformation" name="transformation" type="Transformation" association="A_Rule.transformation_Transformation.rule">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1u4znEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="Transformation" name="Transformation">
@@ -80,20 +80,20 @@
       <general xmi:type="uml:Class" href="EMOF.uml#Package"/>
     </generalization>
     <ownedAttribute xmi:id="Transformation.extends" name="extends" type="Transformation" association="A_Transformation.extends_extendedBy">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1vIznEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Transformation.modelParameter" name="modelParameter" type="TypedModel" aggregation="composite" association="A_Transformation.modelParameter_TypedModel.transformation">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1vYznEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G1U1voznEeOqfrVI7b213A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Transformation.ownedTag" name="ownedTag" aggregation="composite" association="A_Transformation.ownedTag_transformation">
       <type xmi:type="uml:Class" href="EMOF.uml#Tag"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1v4znEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G1U1wIznEeOqfrVI7b213A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Transformation.rule" name="rule" type="Rule" aggregation="composite" association="A_Rule.transformation_Transformation.rule">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1wYznEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G1U1woznEeOqfrVI7b213A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="TypedModel" name="TypedModel">
@@ -101,68 +101,52 @@
       <general xmi:type="uml:Class" href="EMOF.uml#NamedElement"/>
     </generalization>
     <ownedAttribute xmi:id="TypedModel.dependsOn" name="dependsOn" type="TypedModel" association="A_TypedModel.dependsOn_dependent">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1w4znEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G1U1xIznEeOqfrVI7b213A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="TypedModel.transformation" name="transformation" type="Transformation" association="A_Transformation.modelParameter_TypedModel.transformation"/>
     <ownedAttribute xmi:id="TypedModel.usedPackage" name="usedPackage" association="A_TypedModel.usedPackage_typedModel">
       <type xmi:type="uml:Class" href="EMOF.uml#Package"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G1U1xYznEeOqfrVI7b213A" value="*"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Domain.rule_Rule.domain" name="A_Domain.rule_Rule.domain" memberEnd="Rule.domain Domain.rule"/>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Domain.typedModel_domain" name="A_Domain.typedModel_domain" memberEnd="Domain.typedModel A_Domain.typedModel_domain.domain">
-    <ownedEnd xmi:id="A_Domain.typedModel_domain.domain" name="domain" type="Domain" association="A_Domain.typedModel_domain">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1xoznEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G1U1x4znEeOqfrVI7b213A" value="*"/>
-    </ownedEnd>
+    <ownedEnd xmi:id="A_Domain.typedModel_domain.domain" name="domain" type="Domain" association="A_Domain.typedModel_domain"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_Function.queryExpression_function" name="A_Function.queryExpression_function" memberEnd="Function.queryExpression A_Function.queryExpression_function.function">
-    <ownedEnd xmi:id="A_Function.queryExpression_function.function" name="function" type="Function" association="A_Function.queryExpression_function">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1yIznEeOqfrVI7b213A"/>
-    </ownedEnd>
+  <packagedElement xmi:type="uml:Association" xmi:id="A_Function.queryExpression_function" name="A_Function.queryExpression_function"
+      memberEnd="Function.queryExpression A_Function.queryExpression_function.function">
+    <ownedEnd xmi:id="A_Function.queryExpression_function.function" name="function" type="Function" association="A_Function.queryExpression_function"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Pattern.bindsTo_pattern" name="A_Pattern.bindsTo_pattern" memberEnd="Pattern.bindsTo A_Pattern.bindsTo_pattern.pattern">
-    <ownedEnd xmi:id="A_Pattern.bindsTo_pattern.pattern" name="pattern" type="Pattern" association="A_Pattern.bindsTo_pattern">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1yYznEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G1U1yoznEeOqfrVI7b213A" value="*"/>
-    </ownedEnd>
+    <ownedEnd xmi:id="A_Pattern.bindsTo_pattern.pattern" name="pattern" type="Pattern" association="A_Pattern.bindsTo_pattern"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_Pattern.predicate_Predicate.pattern" name="A_Pattern.predicate_Predicate.pattern" memberEnd="Pattern.predicate Predicate.pattern"/>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_Predicate.conditionExpression_predicate" name="A_Predicate.conditionExpression_predicate" memberEnd="Predicate.conditionExpression A_Predicate.conditionExpression_predicate.predicate">
-    <ownedEnd xmi:id="A_Predicate.conditionExpression_predicate.predicate" name="predicate" type="Predicate" association="A_Predicate.conditionExpression_predicate">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1y4znEeOqfrVI7b213A"/>
-    </ownedEnd>
+  <packagedElement xmi:type="uml:Association" xmi:id="A_Pattern.predicate_Predicate.pattern" name="A_Pattern.predicate_Predicate.pattern"
+      memberEnd="Pattern.predicate Predicate.pattern"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="A_Predicate.conditionExpression_predicate" name="A_Predicate.conditionExpression_predicate"
+      memberEnd="Predicate.conditionExpression A_Predicate.conditionExpression_predicate.predicate">
+    <ownedEnd xmi:id="A_Predicate.conditionExpression_predicate.predicate" name="predicate" type="Predicate" association="A_Predicate.conditionExpression_predicate"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Rule.overrides_overridden" name="A_Rule.overrides_overridden" memberEnd="Rule.overrides A_Rule.overrides_overridden.overridden">
-    <ownedEnd xmi:id="A_Rule.overrides_overridden.overridden" name="overridden" type="Rule" association="A_Rule.overrides_overridden">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1zIznEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G1U1zYznEeOqfrVI7b213A" value="*"/>
-    </ownedEnd>
+    <ownedEnd xmi:id="A_Rule.overrides_overridden.overridden" name="overridden" type="Rule" association="A_Rule.overrides_overridden"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_Rule.transformation_Transformation.rule" name="A_Rule.transformation_Transformation.rule" memberEnd="Transformation.rule Rule.transformation"/>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_Transformation.extends_extendedBy" name="A_Transformation.extends_extendedBy" memberEnd="Transformation.extends A_Transformation.extends_extendedBy.extendedBy">
-    <ownedEnd xmi:id="A_Transformation.extends_extendedBy.extendedBy" name="extendedBy" type="Transformation" association="A_Transformation.extends_extendedBy">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U1zoznEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G1U1z4znEeOqfrVI7b213A" value="*"/>
-    </ownedEnd>
+  <packagedElement xmi:type="uml:Association" xmi:id="A_Rule.transformation_Transformation.rule" name="A_Rule.transformation_Transformation.rule"
+      memberEnd="Transformation.rule Rule.transformation"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="A_Transformation.extends_extendedBy" name="A_Transformation.extends_extendedBy"
+      memberEnd="Transformation.extends A_Transformation.extends_extendedBy.extendedBy">
+    <ownedEnd xmi:id="A_Transformation.extends_extendedBy.extendedBy" name="extendedBy" type="Transformation" association="A_Transformation.extends_extendedBy"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_Transformation.modelParameter_TypedModel.transformation" name="A_Transformation.modelParameter_TypedModel.transformation" memberEnd="Transformation.modelParameter TypedModel.transformation"/>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_Transformation.ownedTag_transformation" name="A_Transformation.ownedTag_transformation" memberEnd="Transformation.ownedTag A_Transformation.ownedTag_transformation.transformation">
-    <ownedEnd xmi:id="A_Transformation.ownedTag_transformation.transformation" name="transformation" type="Transformation" association="A_Transformation.ownedTag_transformation">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U10IznEeOqfrVI7b213A"/>
-    </ownedEnd>
+  <packagedElement xmi:type="uml:Association" xmi:id="A_Transformation.modelParameter_TypedModel.transformation" name="A_Transformation.modelParameter_TypedModel.transformation"
+      memberEnd="Transformation.modelParameter TypedModel.transformation"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="A_Transformation.ownedTag_transformation" name="A_Transformation.ownedTag_transformation"
+      memberEnd="Transformation.ownedTag A_Transformation.ownedTag_transformation.transformation">
+    <ownedEnd xmi:id="A_Transformation.ownedTag_transformation.transformation" name="transformation" type="Transformation" association="A_Transformation.ownedTag_transformation"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_TypedModel.dependsOn_dependent" name="A_TypedModel.dependsOn_dependent" memberEnd="TypedModel.dependsOn A_TypedModel.dependsOn_dependent.dependent">
-    <ownedEnd xmi:id="A_TypedModel.dependsOn_dependent.dependent" name="dependent" type="TypedModel" association="A_TypedModel.dependsOn_dependent">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U10YznEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G1U10oznEeOqfrVI7b213A" value="*"/>
-    </ownedEnd>
+    <ownedEnd xmi:id="A_TypedModel.dependsOn_dependent.dependent" name="dependent" type="TypedModel" association="A_TypedModel.dependsOn_dependent"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_TypedModel.usedPackage_typedModel" name="A_TypedModel.usedPackage_typedModel" memberEnd="TypedModel.usedPackage A_TypedModel.usedPackage_typedModel.typedModel">
-    <ownedEnd xmi:id="A_TypedModel.usedPackage_typedModel.typedModel" name="typedModel" type="TypedModel" association="A_TypedModel.usedPackage_typedModel">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G1U104znEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G1U11IznEeOqfrVI7b213A" value="*"/>
-    </ownedEnd>
+  <packagedElement xmi:type="uml:Association" xmi:id="A_TypedModel.usedPackage_typedModel" name="A_TypedModel.usedPackage_typedModel"
+      memberEnd="TypedModel.usedPackage A_TypedModel.usedPackage_typedModel.typedModel">
+    <ownedEnd xmi:id="A_TypedModel.usedPackage_typedModel.typedModel" name="typedModel" type="TypedModel" association="A_TypedModel.usedPackage_typedModel"/>
   </packagedElement>
 </uml:Model>

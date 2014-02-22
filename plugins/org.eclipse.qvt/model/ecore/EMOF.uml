@@ -4,33 +4,33 @@
     <generalization xmi:id="G_Class_Type" general="Type"/>
     <ownedAttribute xmi:id="Class.isAbstract" name="isAbstract" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY0IzlEeOqfrVI7b213A"/>
-      <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_fnqY0YzlEeOqfrVI7b213A">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <defaultValue xmi:type="uml:LiteralBoolean">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
       </defaultValue>
     </ownedAttribute>
     <ownedAttribute xmi:id="Class.ownedAttribute" name="ownedAttribute" type="Property" isOrdered="true" aggregation="composite" association="A_Class.ownedAttribute_Property.class">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY0ozlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqY04zlEeOqfrVI7b213A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Class.ownedOperation" name="ownedOperation" type="Operation" isOrdered="true" aggregation="composite" association="A_Class.ownedOperation_Operation.class">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY1IzlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqY1YzlEeOqfrVI7b213A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Class.superClass" name="superClass" type="Class" association="A_Class.superClass_class">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY1ozlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqY14zlEeOqfrVI7b213A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="Comment" name="Comment">
     <generalization xmi:id="G_Comment_Element" general="Element"/>
     <ownedAttribute xmi:id="Comment.annotatedElement" name="annotatedElement" type="NamedElement" association="A_Comment.annotatedElement_comment">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY2IzlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqY2YzlEeOqfrVI7b213A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Comment.body" name="body" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#String"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY2ozlEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="DataType" name="DataType">
@@ -39,89 +39,90 @@
   <packagedElement xmi:type="uml:Class" xmi:id="Element" name="Element" isAbstract="true">
     <generalization xmi:id="G_Element_Object" general="Object"/>
     <ownedAttribute xmi:id="Element.ownedComment" name="ownedComment" type="Comment" aggregation="composite" association="A_Element.ownedComment_owningElement">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY24zlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqY3IzlEeOqfrVI7b213A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
     <ownedOperation xmi:id="container" name="container" visibility="public">
       <ownedParameter xmi:id="container.$$null$$" type="Element" isOrdered="true" direction="return">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY3YzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="equals" name="equals" visibility="public">
       <ownedParameter xmi:id="equals.$$null$$" isOrdered="true" direction="return">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY3ozlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="equals.object" name="object" type="Object" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY34zlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="get" name="get" visibility="public">
       <ownedParameter xmi:id="get.$$null$$" type="Object" isOrdered="true" direction="return">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY4IzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="get.property" name="property" type="Property" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY4YzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="getMetaClass" name="getMetaClass" visibility="public">
       <ownedParameter xmi:id="getMetaClass.$$null$$" type="Class" isOrdered="true" direction="return">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY4ozlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="isSet" name="isSet" visibility="public">
       <ownedParameter xmi:id="isSet.$$null$$" isOrdered="true" direction="return">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY44zlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="isSet.property" name="property" type="Property" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY5IzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="set" name="set" visibility="public">
       <ownedParameter xmi:id="set.$$null$$" isOrdered="true" direction="return">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY5YzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="set.property" name="property" type="Property" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY5ozlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="set.object" name="object" type="Object" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY54zlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="unset" name="unset" visibility="public">
       <ownedParameter xmi:id="unset.$$null$$" isOrdered="true" direction="return">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY6IzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="unset.property" name="property" type="Property" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY6YzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="Enumeration" name="Enumeration">
     <generalization xmi:id="G_Enumeration_DataType" general="DataType"/>
-    <ownedAttribute xmi:id="Enumeration.ownedLiteral" name="ownedLiteral" type="EnumerationLiteral" isOrdered="true" aggregation="composite" association="A_Enumeration.ownedLiteral_EnumerationLiteral.enumeration">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY6ozlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqY64zlEeOqfrVI7b213A" value="*"/>
+    <ownedAttribute xmi:id="Enumeration.ownedLiteral" name="ownedLiteral" type="EnumerationLiteral" isOrdered="true" aggregation="composite"
+        association="A_Enumeration.ownedLiteral_EnumerationLiteral.enumeration">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="EnumerationLiteral" name="EnumerationLiteral">
     <generalization xmi:id="G_EnumerationLiteral_NamedElement" general="NamedElement"/>
     <ownedAttribute xmi:id="EnumerationLiteral.enumeration" name="enumeration" type="Enumeration" association="A_Enumeration.ownedLiteral_EnumerationLiteral.enumeration">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY7IzlEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="Extent" name="Extent">
     <generalization xmi:id="G_Extent_Object" general="Object"/>
     <ownedOperation xmi:id="elements" name="elements" visibility="public">
       <ownedParameter xmi:id="elements.$$null$$" type="ReflectiveSequence" isOrdered="true" direction="return">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY7YzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="useContainment" name="useContainment" visibility="public">
       <ownedParameter xmi:id="useContainment.$$null$$" isOrdered="true" direction="return">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY7ozlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
@@ -131,62 +132,62 @@
     <ownedOperation xmi:id="convertToString" name="convertToString" visibility="public">
       <ownedParameter xmi:id="convertToString.$$null$$" isOrdered="true" direction="return">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#String"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY74zlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="convertToString.dataType" name="dataType" type="DataType" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY8IzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="convertToString.object" name="object" type="Object" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY8YzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="create" name="create" visibility="public">
       <ownedParameter xmi:id="create.$$null$$" type="Element" isOrdered="true" direction="return">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY8ozlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="create.metaClass" name="metaClass" type="Class" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY84zlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="createFromString" name="createFromString" visibility="public">
       <ownedParameter xmi:id="createFromString.$$null$$" type="Object" isOrdered="true" direction="return">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY9IzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="createFromString.dataType" name="dataType" type="DataType" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY9YzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="createFromString.string" name="string" isOrdered="true">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#String"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY9ozlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="MultiplicityElement" name="MultiplicityElement" isAbstract="true">
     <ownedAttribute xmi:id="MultiplicityElement.isOrdered" name="isOrdered" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY94zlEeOqfrVI7b213A"/>
-      <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_fnqY-IzlEeOqfrVI7b213A">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <defaultValue xmi:type="uml:LiteralBoolean">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
       </defaultValue>
     </ownedAttribute>
     <ownedAttribute xmi:id="MultiplicityElement.isUnique" name="isUnique" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY-YzlEeOqfrVI7b213A"/>
-      <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_fnqY-ozlEeOqfrVI7b213A" value="true">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <defaultValue xmi:type="uml:LiteralBoolean" value="true">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
       </defaultValue>
     </ownedAttribute>
     <ownedAttribute xmi:id="MultiplicityElement.lower" name="lower" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Integer"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY-4zlEeOqfrVI7b213A"/>
-      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY_IzlEeOqfrVI7b213A" value="1">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <defaultValue xmi:type="uml:LiteralInteger" value="1">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Integer"/>
       </defaultValue>
     </ownedAttribute>
     <ownedAttribute xmi:id="MultiplicityElement.upper" name="upper" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#UnlimitedNatural"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY_YzlEeOqfrVI7b213A"/>
-      <defaultValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqY_ozlEeOqfrVI7b213A" value="1">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <defaultValue xmi:type="uml:LiteralUnlimitedNatural" value="1">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#UnlimitedNatural"/>
       </defaultValue>
     </ownedAttribute>
@@ -195,7 +196,7 @@
     <generalization xmi:id="G_NamedElement_Element" general="Element"/>
     <ownedAttribute xmi:id="NamedElement.name" name="name" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#String"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqY_4zlEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="Object" name="Object"/>
@@ -203,40 +204,41 @@
     <generalization xmi:id="G_Operation_TypedElement" general="TypedElement"/>
     <generalization xmi:id="G_Operation_MultiplicityElement" general="MultiplicityElement"/>
     <ownedAttribute xmi:id="Operation.class" name="class" type="Class" association="A_Class.ownedOperation_Operation.class">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZAIzlEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="Operation.ownedParameter" name="ownedParameter" type="Parameter" isOrdered="true" aggregation="composite" association="A_Operation.ownedParameter_Parameter.operation">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZAYzlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqZAozlEeOqfrVI7b213A" value="*"/>
+    <ownedAttribute xmi:id="Operation.ownedParameter" name="ownedParameter" type="Parameter" isOrdered="true" aggregation="composite"
+        association="A_Operation.ownedParameter_Parameter.operation">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Operation.raisedException" name="raisedException" type="Type" association="A_Operation.raisedException_operation">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZA4zlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqZBIzlEeOqfrVI7b213A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="Package" name="Package">
     <generalization xmi:id="G_Package_NamedElement" general="NamedElement"/>
     <ownedAttribute xmi:id="Package.nestedPackage" name="nestedPackage" type="Package" aggregation="composite" association="A_Package.nestedPackage_Package.nestingPackage">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZBYzlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqZBozlEeOqfrVI7b213A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Package.nestingPackage" name="nestingPackage" type="Package" association="A_Package.nestedPackage_Package.nestingPackage">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZB4zlEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Package.ownedType" name="ownedType" type="Type" aggregation="composite" association="A_Package.ownedType_Type.package">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZCIzlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqZCYzlEeOqfrVI7b213A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Package.uri" name="uri" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#String"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZCozlEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="Parameter" name="Parameter">
     <generalization xmi:id="G_Parameter_TypedElement" general="TypedElement"/>
     <generalization xmi:id="G_Parameter_MultiplicityElement" general="MultiplicityElement"/>
     <ownedAttribute xmi:id="Parameter.operation" name="operation" type="Operation" association="A_Operation.ownedParameter_Parameter.operation">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZC4zlEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="PrimitiveType" name="PrimitiveType">
@@ -246,39 +248,39 @@
     <generalization xmi:id="G_Property_TypedElement" general="TypedElement"/>
     <generalization xmi:id="G_Property_MultiplicityElement" general="MultiplicityElement"/>
     <ownedAttribute xmi:id="Property.class" name="class" type="Class" association="A_Class.ownedAttribute_Property.class">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZDIzlEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Property.default" name="default" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#String"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZDYzlEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Property.isComposite" name="isComposite" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZDozlEeOqfrVI7b213A"/>
-      <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_fnqZD4zlEeOqfrVI7b213A">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <defaultValue xmi:type="uml:LiteralBoolean">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
       </defaultValue>
     </ownedAttribute>
     <ownedAttribute xmi:id="Property.isDerived" name="isDerived" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZEIzlEeOqfrVI7b213A"/>
-      <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_fnqZEYzlEeOqfrVI7b213A">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <defaultValue xmi:type="uml:LiteralBoolean">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
       </defaultValue>
     </ownedAttribute>
     <ownedAttribute xmi:id="Property.isID" name="isID" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZEozlEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Property.isReadOnly" name="isReadOnly" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZE4zlEeOqfrVI7b213A"/>
-      <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_fnqZFIzlEeOqfrVI7b213A">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <defaultValue xmi:type="uml:LiteralBoolean">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
       </defaultValue>
     </ownedAttribute>
     <ownedAttribute xmi:id="Property.opposite" name="opposite" type="Property" association="A_Property.opposite_property">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZFYzlEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="ReflectiveCollection" name="ReflectiveCollection">
@@ -286,39 +288,39 @@
     <ownedOperation xmi:id="add" name="add" visibility="public">
       <ownedParameter xmi:id="add.$$null$$" isOrdered="true" direction="return">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZFozlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="add.object" name="object" type="Object" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZF4zlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="addAll" name="addAll" visibility="public">
       <ownedParameter xmi:id="addAll.$$null$$" isOrdered="true" direction="return">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZGIzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="addAll.objects" name="objects" type="ReflectiveSequence" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZGYzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="clear" name="clear" visibility="public">
       <ownedParameter xmi:id="clear.$$null$$" isOrdered="true" direction="return">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZGozlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="remove" name="remove" visibility="public">
       <ownedParameter xmi:id="remove.$$null$$" isOrdered="true" direction="return">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZG4zlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="remove.object" name="object" type="Object" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZHIzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="size" name="size" visibility="public">
       <ownedParameter xmi:id="size.$$null$$" isOrdered="true" direction="return">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Integer"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZHYzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
@@ -326,81 +328,81 @@
     <generalization xmi:id="G_ReflectiveSequence_ReflectiveCollection" general="ReflectiveCollection"/>
     <ownedOperation xmi:id="add" name="add" visibility="public">
       <ownedParameter xmi:id="add.$$null$$" isOrdered="true" direction="return">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZHozlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="add.index" name="index" isOrdered="true">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Integer"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZH4zlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="add.object" name="object" type="Object" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZIIzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="get" name="get" visibility="public">
       <ownedParameter xmi:id="get.$$null$$" type="Object" isOrdered="true" direction="return">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZIYzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="get.index" name="index" isOrdered="true">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Integer"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZIozlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="remove" name="remove" visibility="public">
       <ownedParameter xmi:id="remove.$$null$$" type="Object" isOrdered="true" direction="return">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZI4zlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="remove.index" name="index" isOrdered="true">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Integer"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZJIzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="set" name="set" visibility="public">
       <ownedParameter xmi:id="set.$$null$$" type="Object" isOrdered="true" direction="return">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZJYzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="set.index" name="index" isOrdered="true">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Integer"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZJozlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="set.object" name="object" type="Object" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZJ4zlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="Tag" name="Tag">
     <generalization xmi:id="G_Tag_Element" general="Element"/>
     <ownedAttribute xmi:id="Tag.element" name="element" type="Element" association="A_Tag.element_tag">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZKIzlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqZKYzlEeOqfrVI7b213A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Tag.name" name="name" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#String"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZKozlEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Tag.value" name="value" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#String"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZK4zlEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="Type" name="Type" isAbstract="true">
     <generalization xmi:id="G_Type_NamedElement" general="NamedElement"/>
     <ownedAttribute xmi:id="Type.package" name="package" type="Package" association="A_Package.ownedType_Type.package">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZLIzlEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
     <ownedOperation xmi:id="isInstance" name="isInstance" visibility="public">
       <ownedParameter xmi:id="isInstance.$$null$$" isOrdered="true" direction="return">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZLYzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="isInstance.object" name="object" type="Object" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZLozlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="TypedElement" name="TypedElement" isAbstract="true">
     <generalization xmi:id="G_TypedElement_NamedElement" general="NamedElement"/>
     <ownedAttribute xmi:id="TypedElement.type" name="type" type="Type" association="A_TypedElement.type_typedElement">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZL4zlEeOqfrVI7b213A"/>
+      <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="URIExtent" name="URIExtent">
@@ -408,79 +410,63 @@
     <ownedOperation xmi:id="contextURI" name="contextURI" visibility="public">
       <ownedParameter xmi:id="contextURI.$$null$$" isOrdered="true" direction="return">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#String"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZMIzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="element" name="element" visibility="public">
       <ownedParameter xmi:id="element.$$null$$" type="Element" isOrdered="true" direction="return">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZMYzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="element.uri" name="uri" isOrdered="true">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#String"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZMozlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="uri" name="uri" visibility="public">
       <ownedParameter xmi:id="uri.$$null$$" isOrdered="true" direction="return">
         <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#String"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZM4zlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
       <ownedParameter xmi:id="uri.element" name="element" type="Element" isOrdered="true">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZNIzlEeOqfrVI7b213A"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_Class.ownedAttribute_Property.class" name="A_Class.ownedAttribute_Property.class" memberEnd="Class.ownedAttribute Property.class"/>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_Class.ownedOperation_Operation.class" name="A_Class.ownedOperation_Operation.class" memberEnd="Class.ownedOperation Operation.class"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="A_Class.ownedAttribute_Property.class" name="A_Class.ownedAttribute_Property.class"
+      memberEnd="Class.ownedAttribute Property.class"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="A_Class.ownedOperation_Operation.class" name="A_Class.ownedOperation_Operation.class"
+      memberEnd="Class.ownedOperation Operation.class"/>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Class.superClass_class" name="A_Class.superClass_class" memberEnd="Class.superClass A_Class.superClass_class.class">
-    <ownedEnd xmi:id="A_Class.superClass_class.class" name="class" type="Class" association="A_Class.superClass_class">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZNYzlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqZNozlEeOqfrVI7b213A" value="*"/>
-    </ownedEnd>
+    <ownedEnd xmi:id="A_Class.superClass_class.class" name="class" type="Class" association="A_Class.superClass_class"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Comment.annotatedElement_comment" name="A_Comment.annotatedElement_comment" memberEnd="Comment.annotatedElement A_Comment.annotatedElement_comment.comment">
-    <ownedEnd xmi:id="A_Comment.annotatedElement_comment.comment" name="comment" type="Comment" association="A_Comment.annotatedElement_comment">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZN4zlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqZOIzlEeOqfrVI7b213A" value="*"/>
-    </ownedEnd>
+    <ownedEnd xmi:id="A_Comment.annotatedElement_comment.comment" name="comment" type="Comment" association="A_Comment.annotatedElement_comment"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_Element.ownedComment_owningElement" name="A_Element.ownedComment_owningElement" memberEnd="Element.ownedComment A_Element.ownedComment_owningElement.owningElement">
-    <ownedEnd xmi:id="A_Element.ownedComment_owningElement.owningElement" name="owningElement" type="Element" association="A_Element.ownedComment_owningElement">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZOYzlEeOqfrVI7b213A"/>
-    </ownedEnd>
+  <packagedElement xmi:type="uml:Association" xmi:id="A_Element.ownedComment_owningElement" name="A_Element.ownedComment_owningElement"
+      memberEnd="Element.ownedComment A_Element.ownedComment_owningElement.owningElement">
+    <ownedEnd xmi:id="A_Element.ownedComment_owningElement.owningElement" name="owningElement" type="Element" association="A_Element.ownedComment_owningElement"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_Enumeration.ownedLiteral_EnumerationLiteral.enumeration" name="A_Enumeration.ownedLiteral_EnumerationLiteral.enumeration" memberEnd="Enumeration.ownedLiteral EnumerationLiteral.enumeration"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="A_Enumeration.ownedLiteral_EnumerationLiteral.enumeration" name="A_Enumeration.ownedLiteral_EnumerationLiteral.enumeration"
+      memberEnd="Enumeration.ownedLiteral EnumerationLiteral.enumeration"/>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Factory.package_factory" name="A_Factory.package_factory" memberEnd="Factory.package A_Factory.package_factory.factory">
-    <ownedEnd xmi:id="A_Factory.package_factory.factory" name="factory" type="Factory" association="A_Factory.package_factory">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZOozlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqZO4zlEeOqfrVI7b213A" value="*"/>
-    </ownedEnd>
+    <ownedEnd xmi:id="A_Factory.package_factory.factory" name="factory" type="Factory" association="A_Factory.package_factory"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_Operation.ownedParameter_Parameter.operation" name="A_Operation.ownedParameter_Parameter.operation" memberEnd="Operation.ownedParameter Parameter.operation"/>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_Operation.raisedException_operation" name="A_Operation.raisedException_operation" memberEnd="Operation.raisedException A_Operation.raisedException_operation.operation">
-    <ownedEnd xmi:id="A_Operation.raisedException_operation.operation" name="operation" type="Operation" association="A_Operation.raisedException_operation">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZPIzlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqZPYzlEeOqfrVI7b213A" value="*"/>
-    </ownedEnd>
+  <packagedElement xmi:type="uml:Association" xmi:id="A_Operation.ownedParameter_Parameter.operation" name="A_Operation.ownedParameter_Parameter.operation"
+      memberEnd="Operation.ownedParameter Parameter.operation"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="A_Operation.raisedException_operation" name="A_Operation.raisedException_operation"
+      memberEnd="Operation.raisedException A_Operation.raisedException_operation.operation">
+    <ownedEnd xmi:id="A_Operation.raisedException_operation.operation" name="operation" type="Operation" association="A_Operation.raisedException_operation"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_Package.nestedPackage_Package.nestingPackage" name="A_Package.nestedPackage_Package.nestingPackage" memberEnd="Package.nestedPackage Package.nestingPackage"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="A_Package.nestedPackage_Package.nestingPackage" name="A_Package.nestedPackage_Package.nestingPackage"
+      memberEnd="Package.nestedPackage Package.nestingPackage"/>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Package.ownedType_Type.package" name="A_Package.ownedType_Type.package" memberEnd="Package.ownedType Type.package"/>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Property.opposite_property" name="A_Property.opposite_property" memberEnd="Property.opposite A_Property.opposite_property.property">
-    <ownedEnd xmi:id="A_Property.opposite_property.property" name="property" type="Property" association="A_Property.opposite_property">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZPozlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqZP4zlEeOqfrVI7b213A" value="*"/>
-    </ownedEnd>
+    <ownedEnd xmi:id="A_Property.opposite_property.property" name="property" type="Property" association="A_Property.opposite_property"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Tag.element_tag" name="A_Tag.element_tag" memberEnd="Tag.element A_Tag.element_tag.tag">
-    <ownedEnd xmi:id="A_Tag.element_tag.tag" name="tag" type="Tag" association="A_Tag.element_tag">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZQIzlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqZQYzlEeOqfrVI7b213A" value="*"/>
-    </ownedEnd>
+    <ownedEnd xmi:id="A_Tag.element_tag.tag" name="tag" type="Tag" association="A_Tag.element_tag"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_TypedElement.type_typedElement" name="A_TypedElement.type_typedElement" memberEnd="TypedElement.type A_TypedElement.type_typedElement.typedElement">
-    <ownedEnd xmi:id="A_TypedElement.type_typedElement.typedElement" name="typedElement" type="TypedElement" association="A_TypedElement.type_typedElement">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fnqZQozlEeOqfrVI7b213A"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fnqZQ4zlEeOqfrVI7b213A" value="*"/>
-    </ownedEnd>
+    <ownedEnd xmi:id="A_TypedElement.type_typedElement.typedElement" name="typedElement" type="TypedElement" association="A_TypedElement.type_typedElement"/>
   </packagedElement>
 </uml:Model>
