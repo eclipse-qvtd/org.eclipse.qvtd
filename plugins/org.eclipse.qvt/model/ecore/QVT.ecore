@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
-  <ecore:EPackage name="PrimitiveTypes" nsURI="http://schema.omg.org/spec/QVT/20120401/PrimitiveTypes" nsPrefix="primitivetypes">
+  <ecore:EPackage name="PrimitiveTypes" nsURI="http://schema.omg.org/spec/QVT/20140401/PrimitiveTypes" nsPrefix="primitivetypes">
     <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
     <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
     <eClassifiers xsi:type="ecore:EDataType" name="Real" instanceClassName="java.lang.Float"/>
     <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
     <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Integer"/>
   </ecore:EPackage>
-  <ecore:EPackage name="EMOF" nsURI="http://schema.omg.org/spec/QVT/20120401/EMOF" nsPrefix="emof">
+  <ecore:EPackage name="EMOF" nsURI="http://schema.omg.org/spec/QVT/20140401/EMOF" nsPrefix="emof">
     <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#/1/Type">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="#/0/Boolean" defaultValueLiteral="false"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1" eType="#/1/Property" containment="true" resolveProxies="false"
@@ -193,7 +193,7 @@
       </eOperations>
     </eClassifiers>
   </ecore:EPackage>
-  <ecore:EPackage name="EssentialOCL" nsURI="http://schema.omg.org/spec/QVT/20120401/EssentialOCL" nsPrefix="essentialocl">
+  <ecore:EPackage name="EssentialOCL" nsURI="http://schema.omg.org/spec/QVT/20140401/EssentialOCL" nsPrefix="essentialocl">
     <eClassifiers xsi:type="ecore:EClass" name="AnyType" eSuperTypes="#/1/Type"/>
     <eClassifiers xsi:type="ecore:EClass" name="BagType" eSuperTypes="#/2/CollectionType"/>
     <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteralExp" eSuperTypes="#/2/PrimitiveLiteralExp">
@@ -427,7 +427,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="VoidType" eSuperTypes="#/1/Type"/>
   </ecore:EPackage>
-  <ecore:EPackage name="QVTBase" nsURI="http://schema.omg.org/spec/QVT/120120401/QVTBase" nsPrefix="qvtbase">
+  <ecore:EPackage name="QVTBase" nsURI="http://schema.omg.org/spec/QVT/20140401/QVTBase" nsPrefix="qvtbase">
     <eClassifiers xsi:type="ecore:EClass" name="Domain" abstract="true" eSuperTypes="#/1/NamedElement">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCheckable" eType="#/0/Boolean"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforceable" eType="#/0/Boolean"/>
@@ -513,7 +513,7 @@
       </eStructuralFeatures>
     </eClassifiers>
   </ecore:EPackage>
-  <ecore:EPackage name="QVTCore" nsURI="http://schema.omg.org/spec/QVT/20120401/QVTCore" nsPrefix="qvtcore">
+  <ecore:EPackage name="QVTCore" nsURI="http://schema.omg.org/spec/QVT/20140401/QVTCore" nsPrefix="qvtcore">
     <eClassifiers xsi:type="ecore:EClass" name="Area" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EReference" name="bottomPattern" lowerBound="1" eType="#/4/BottomPattern" containment="true"
           resolveProxies="false" eOpposite="#/4/BottomPattern/area"/>
@@ -604,7 +604,7 @@
       </eStructuralFeatures>
     </eClassifiers>
   </ecore:EPackage>
-  <ecore:EPackage name="QVTTemplate" nsURI="http://schema.omg.org/spec/QVT/20120401/QVTTemplate" nsPrefix="qvttemplate">
+  <ecore:EPackage name="QVTTemplate" nsURI="http://schema.omg.org/spec/QVT/20140401/QVTTemplate" nsPrefix="qvttemplate">
     <eClassifiers xsi:type="ecore:EClass" name="CollectionTemplateExp" eSuperTypes="#/5/TemplateExp">
       <eStructuralFeatures xsi:type="ecore:EReference" name="member" ordered="false" upperBound="-1" eType="#/2/OclExpression" containment="true"
           resolveProxies="false">
@@ -660,7 +660,7 @@
       </eStructuralFeatures>
     </eClassifiers>
   </ecore:EPackage>
-  <ecore:EPackage name="QVTRelation" nsURI="http://schema.omg.org/spec/QVT/20120401/QVTRelation" nsPrefix="qvtrelation">
+  <ecore:EPackage name="QVTRelation" nsURI="http://schema.omg.org/spec/QVT/20140401/QVTRelation" nsPrefix="qvtrelation">
     <eClassifiers xsi:type="ecore:EClass" name="DomainPattern" eSuperTypes="#/3/Pattern">
       <eStructuralFeatures xsi:type="ecore:EReference" name="relationDomain" lowerBound="1" eType="#/6/RelationDomain" eOpposite="#/6/RelationDomain/pattern"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="templateExpression" eType="#/5/TemplateExp" containment="true" resolveProxies="false">
@@ -766,7 +766,7 @@
           resolveProxies="false" eOpposite="#/6/Key/transformation"/>
     </eClassifiers>
   </ecore:EPackage>
-  <ecore:EPackage name="ImperativeOCL" nsURI="http://schema.omg.org/spec/QVT/20120401/ImperativeOCL" nsPrefix="imperativeocl">
+  <ecore:EPackage name="ImperativeOCL" nsURI="http://schema.omg.org/spec/QVT/20140401/ImperativeOCL" nsPrefix="imperativeocl">
     <eClassifiers xsi:type="ecore:EClass" name="AltExp" eSuperTypes="#/7/ImperativeExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1" eType="#/2/OclExpression" containment="true" resolveProxies="false">
         <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
@@ -1019,7 +1019,7 @@
       </eStructuralFeatures>
     </eClassifiers>
   </ecore:EPackage>
-  <ecore:EPackage name="QVTOperational" nsURI="http://schema.omg.org/spec/QVT/20120401/QVTOperational" nsPrefix="qvtoperational">
+  <ecore:EPackage name="QVTOperational" nsURI="http://schema.omg.org/spec/QVT/20140401/QVTOperational" nsPrefix="qvtoperational">
     <eClassifiers xsi:type="ecore:EClass" name="Constructor" eSuperTypes="#/8/ImperativeOperation"/>
     <eClassifiers xsi:type="ecore:EClass" name="ConstructorBody" eSuperTypes="#/8/OperationBody"/>
     <eClassifiers xsi:type="ecore:EClass" name="ContextualProperty" eSuperTypes="#/1/Property">

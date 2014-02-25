@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:uml="http://www.omg.org/spec/UML/20131001" xmi:id="QVTRelation" name="QVTRelation" URI="http://schema.omg.org/spec/QVT/20120401/QVTRelation">
+    xmlns:uml="http://www.omg.org/spec/UML/20131001" xmi:id="QVTRelation" name="QVTRelation" URI="http://schema.omg.org/spec/QVT/20140401/QVTRelation">
   <packagedElement xsi:type="uml:Class" xmi:id="DomainPattern" name="DomainPattern">
     <generalization xmi:id="G_DomainPattern_Pattern">
       <general xsi:type="uml:Class" href="QVTBase.xmi#Pattern"/>
@@ -41,13 +41,13 @@
     <generalization xmi:id="G_Relation_Rule">
       <general xsi:type="uml:Class" href="QVTBase.xmi#Rule"/>
     </generalization>
-    <ownedAttribute xmi:id="Relation.operationalImpl" name="operationalImpl" type="RelationImplementation" aggregation="composite" association="A_Relation.operationalImpl_RelationImplementation.relation">
-      <lowerValue xsi:type="uml:LiteralInteger"/>
-      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
-    </ownedAttribute>
     <ownedAttribute xmi:id="Relation.isTopLevel" name="isTopLevel" visibility="public">
       <type xsi:type="uml:PrimitiveType" href="PrimitiveTypes.xmi#Boolean"/>
       <lowerValue xsi:type="uml:LiteralInteger"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="Relation.operationalImpl" name="operationalImpl" type="RelationImplementation" aggregation="composite" association="A_Relation.operationalImpl_RelationImplementation.relation">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="Relation.variable" name="variable" aggregation="composite" association="A_Relation.variable_relation">
       <type xsi:type="uml:Class" href="EssentialOCL.xmi#Variable"/>

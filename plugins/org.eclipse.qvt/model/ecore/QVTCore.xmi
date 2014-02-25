@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:uml="http://www.omg.org/spec/UML/20131001" xmi:id="QVTCore" name="QVTCore" URI="http://schema.omg.org/spec/QVT/20120401/QVTCore">
+    xmlns:uml="http://www.omg.org/spec/UML/20131001" xmi:id="QVTCore" name="QVTCore" URI="http://schema.omg.org/spec/QVT/20140401/QVTCore">
   <packagedElement xsi:type="uml:Enumeration" xmi:id="EnforcementMode" name="EnforcementMode">
     <ownedLiteral xmi:id="Creation" name="Creation" classifier="EnforcementMode"/>
     <ownedLiteral xmi:id="Deletion" name="Deletion" classifier="EnforcementMode"/>
@@ -40,10 +40,10 @@
     </ownedAttribute>
   </packagedElement>
   <packagedElement xsi:type="uml:Class" xmi:id="CoreDomain" name="CoreDomain">
+    <generalization xmi:id="G_CoreDomain_Area" general="Area"/>
     <generalization xmi:id="G_CoreDomain_Domain">
       <general xsi:type="uml:Class" href="QVTBase.xmi#Domain"/>
     </generalization>
-    <generalization xmi:id="G_CoreDomain_Area" general="Area"/>
   </packagedElement>
   <packagedElement xsi:type="uml:Class" xmi:id="CorePattern" name="CorePattern">
     <generalization xmi:id="G_CorePattern_Pattern">
@@ -72,10 +72,10 @@
     <ownedAttribute xmi:id="GuardPattern.area" name="area" type="Area" association="A_Area.guardPattern_GuardPattern.area"/>
   </packagedElement>
   <packagedElement xsi:type="uml:Class" xmi:id="Mapping" name="Mapping">
+    <generalization xmi:id="G_Mapping_Area" general="Area"/>
     <generalization xmi:id="G_Mapping_Rule">
       <general xsi:type="uml:Class" href="QVTBase.xmi#Rule"/>
     </generalization>
-    <generalization xmi:id="G_Mapping_Area" general="Area"/>
     <ownedAttribute xmi:id="Mapping.context" name="context" type="Mapping" association="A_Mapping.context_Mapping.local">
       <lowerValue xsi:type="uml:LiteralInteger"/>
     </ownedAttribute>

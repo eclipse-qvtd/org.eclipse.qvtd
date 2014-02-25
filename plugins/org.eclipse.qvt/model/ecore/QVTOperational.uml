@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="QVTOperational" name="QVTOperational" URI="http://schema.omg.org/spec/QVT/20120401/QVTOperational">
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="QVTOperational" name="QVTOperational" URI="http://schema.omg.org/spec/QVT/20140401/QVTOperational">
   <packagedElement xmi:type="uml:Enumeration" xmi:id="DirectionKind" name="DirectionKind">
     <ownedLiteral xmi:id="in" name="in"/>
     <ownedLiteral xmi:id="inout" name="inout"/>
@@ -42,11 +42,11 @@
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="ImperativeCallExp" name="ImperativeCallExp">
-    <generalization xmi:id="G_ImperativeCallExp_OperationCallExp">
-      <general xmi:type="uml:Class" href="EssentialOCL.uml#OperationCallExp"/>
-    </generalization>
     <generalization xmi:id="G_ImperativeCallExp_ImperativeExpression">
       <general xmi:type="uml:Class" href="ImperativeOCL.uml#ImperativeExpression"/>
+    </generalization>
+    <generalization xmi:id="G_ImperativeCallExp_OperationCallExp">
+      <general xmi:type="uml:Class" href="EssentialOCL.uml#OperationCallExp"/>
     </generalization>
     <ownedAttribute xmi:id="ImperativeCallExp.isVirtual" name="isVirtual" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
@@ -66,16 +66,16 @@
     <ownedAttribute xmi:id="ImperativeOperation.context" name="context" type="VarParameter" aggregation="composite" association="A_ImperativeOperation.context_VarParameter.ctxOwner">
       <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="ImperativeOperation.result" name="result" type="VarParameter" isOrdered="true" aggregation="composite" association="A_ImperativeOperation.result_VarParameter.resOwner">
-      <lowerValue xmi:type="uml:LiteralInteger"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
-    </ownedAttribute>
     <ownedAttribute xmi:id="ImperativeOperation.isBlackbox" name="isBlackbox" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.uml#Boolean"/>
       <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="ImperativeOperation.overridden" name="overridden" type="ImperativeOperation" association="A_ImperativeOperation.overridden_overriding">
       <lowerValue xmi:type="uml:LiteralInteger"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="ImperativeOperation.result" name="result" type="VarParameter" isOrdered="true" aggregation="composite" association="A_ImperativeOperation.result_VarParameter.resOwner">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="Library" name="Library">
@@ -306,11 +306,11 @@
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="VarParameter" name="VarParameter">
-    <generalization xmi:id="G_VarParameter_Variable">
-      <general xmi:type="uml:Class" href="EssentialOCL.uml#Variable"/>
-    </generalization>
     <generalization xmi:id="G_VarParameter_Parameter">
       <general xmi:type="uml:Class" href="EMOF.uml#Parameter"/>
+    </generalization>
+    <generalization xmi:id="G_VarParameter_Variable">
+      <general xmi:type="uml:Class" href="EssentialOCL.uml#Variable"/>
     </generalization>
     <ownedAttribute xmi:id="VarParameter.ctxOwner" name="ctxOwner" type="ImperativeOperation" association="A_ImperativeOperation.context_VarParameter.ctxOwner">
       <lowerValue xmi:type="uml:LiteralInteger"/>

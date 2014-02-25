@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:uml="http://www.omg.org/spec/UML/20131001" xmi:id="PrimitiveTypes" name="PrimitiveTypes" URI="http://schema.omg.org/spec/QVT/20120401/PrimitiveTypes">
+    xmlns:uml="http://www.omg.org/spec/UML/20131001" xmi:id="PrimitiveTypes" name="PrimitiveTypes" URI="http://schema.omg.org/spec/QVT/20140401/PrimitiveTypes">
   <packagedElement xsi:type="uml:PrimitiveType" xmi:id="Boolean" name="Boolean"/>
   <packagedElement xsi:type="uml:PrimitiveType" xmi:id="Integer" name="Integer"/>
   <packagedElement xsi:type="uml:PrimitiveType" xmi:id="Real" name="Real"/>

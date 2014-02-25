@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:uml="http://www.omg.org/spec/UML/20131001" xmi:id="QVTBase" name="QVTBase" URI="http://schema.omg.org/spec/QVT/120120401/QVTBase">
+    xmlns:uml="http://www.omg.org/spec/UML/20131001" xmi:id="QVTBase" name="QVTBase" URI="http://schema.omg.org/spec/QVT/20140401/QVTBase">
   <packagedElement xsi:type="uml:Class" xmi:id="Domain" name="Domain" isAbstract="true">
     <generalization xmi:id="G_Domain_NamedElement">
       <general xsi:type="uml:Class" href="EMOF.xmi#NamedElement"/>
@@ -28,23 +28,23 @@
     </ownedAttribute>
   </packagedElement>
   <packagedElement xsi:type="uml:Class" xmi:id="FunctionParameter" name="FunctionParameter">
-    <generalization xmi:id="G_FunctionParameter_Variable">
-      <general xsi:type="uml:Class" href="EssentialOCL.xmi#Variable"/>
-    </generalization>
     <generalization xmi:id="G_FunctionParameter_Parameter">
       <general xsi:type="uml:Class" href="EMOF.xmi#Parameter"/>
+    </generalization>
+    <generalization xmi:id="G_FunctionParameter_Variable">
+      <general xsi:type="uml:Class" href="EssentialOCL.xmi#Variable"/>
     </generalization>
   </packagedElement>
   <packagedElement xsi:type="uml:Class" xmi:id="Pattern" name="Pattern">
     <generalization xmi:id="G_Pattern_Element">
       <general xsi:type="uml:Class" href="EMOF.xmi#Element"/>
     </generalization>
-    <ownedAttribute xmi:id="Pattern.predicate" name="predicate" type="Predicate" aggregation="composite" association="A_Pattern.predicate_Predicate.pattern">
+    <ownedAttribute xmi:id="Pattern.bindsTo" name="bindsTo" association="A_Pattern.bindsTo_pattern">
+      <type xsi:type="uml:Class" href="EssentialOCL.xmi#Variable"/>
       <lowerValue xsi:type="uml:LiteralInteger"/>
       <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="Pattern.bindsTo" name="bindsTo" association="A_Pattern.bindsTo_pattern">
-      <type xsi:type="uml:Class" href="EssentialOCL.xmi#Variable"/>
+    <ownedAttribute xmi:id="Pattern.predicate" name="predicate" type="Predicate" aggregation="composite" association="A_Pattern.predicate_Predicate.pattern">
       <lowerValue xsi:type="uml:LiteralInteger"/>
       <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>

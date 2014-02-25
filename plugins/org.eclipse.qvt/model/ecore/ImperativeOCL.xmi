@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:uml="http://www.omg.org/spec/UML/20131001" xmi:id="ImperativeOCL" name="ImperativeOCL" URI="http://schema.omg.org/spec/QVT/20120401/ImperativeOCL">
+    xmlns:uml="http://www.omg.org/spec/UML/20131001" xmi:id="ImperativeOCL" name="ImperativeOCL" URI="http://schema.omg.org/spec/QVT/20140401/ImperativeOCL">
   <packagedElement xsi:type="uml:Enumeration" xmi:id="SeverityKind" name="SeverityKind">
     <ownedLiteral xmi:id="error" name="error" classifier="SeverityKind"/>
     <ownedLiteral xmi:id="warning" name="warning" classifier="SeverityKind"/>
@@ -102,10 +102,10 @@
     <ownedAttribute xmi:id="DictLiteralPart.key" name="key" aggregation="composite" association="A_DictLiteralPart.key_keyOwner">
       <type xsi:type="uml:Class" href="EssentialOCL.xmi#OclExpression"/>
     </ownedAttribute>
+    <ownedAttribute xmi:id="DictLiteralPart.partOwner" name="partOwner" type="DictLiteralExp" association="A_DictLiteralExp.part_DictLiteralPart.partOwner"/>
     <ownedAttribute xmi:id="DictLiteralPart.value" name="value" aggregation="composite" association="A_DictLiteralPart.value_valOwner">
       <type xsi:type="uml:Class" href="EssentialOCL.xmi#OclExpression"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="DictLiteralPart.partOwner" name="partOwner" type="DictLiteralExp" association="A_DictLiteralExp.part_DictLiteralPart.partOwner"/>
   </packagedElement>
   <packagedElement xsi:type="uml:Class" xmi:id="DictionaryType" name="DictionaryType">
     <generalization xmi:id="G_DictionaryType_CollectionType">
@@ -132,10 +132,10 @@
     </ownedAttribute>
   </packagedElement>
   <packagedElement xsi:type="uml:Class" xmi:id="ImperativeLoopExp" name="ImperativeLoopExp" isAbstract="true">
+    <generalization xmi:id="G_ImperativeLoopExp_ImperativeExpression" general="ImperativeExpression"/>
     <generalization xmi:id="G_ImperativeLoopExp_LoopExp">
       <general xsi:type="uml:Class" href="EssentialOCL.xmi#LoopExp"/>
     </generalization>
-    <generalization xmi:id="G_ImperativeLoopExp_ImperativeExpression" general="ImperativeExpression"/>
     <ownedAttribute xmi:id="ImperativeLoopExp.condition" name="condition" aggregation="composite" association="A_ImperativeLoopExp.condition_loopCondOwner">
       <type xsi:type="uml:Class" href="EssentialOCL.xmi#OclExpression"/>
       <lowerValue xsi:type="uml:LiteralInteger"/>
@@ -152,12 +152,12 @@
       <type xsi:type="uml:Class" href="EssentialOCL.xmi#Variable"/>
       <lowerValue xsi:type="uml:LiteralInteger"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="InstantiationExp.instantiatedClass" name="instantiatedClass" association="A_InstantiationExp.instantiatedClass_instantiationExp">
-      <type xsi:type="uml:Class" href="EMOF.xmi#Class"/>
-    </ownedAttribute>
     <ownedAttribute xmi:id="InstantiationExp.initializationOperation" name="initializationOperation" association="A_InstantiationExp.initializationOperation_instantiationExp">
       <type xsi:type="uml:Class" href="EMOF.xmi#Operation"/>
       <lowerValue xsi:type="uml:LiteralInteger"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="InstantiationExp.instantiatedClass" name="instantiatedClass" association="A_InstantiationExp.instantiatedClass_instantiationExp">
+      <type xsi:type="uml:Class" href="EMOF.xmi#Class"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xsi:type="uml:Class" xmi:id="ListLiteralExp" name="ListLiteralExp">
@@ -176,10 +176,10 @@
     </generalization>
   </packagedElement>
   <packagedElement xsi:type="uml:Class" xmi:id="LogExp" name="LogExp">
+    <generalization xmi:id="G_LogExp_ImperativeExpression" general="ImperativeExpression"/>
     <generalization xmi:id="G_LogExp_OperationCallExp">
       <general xsi:type="uml:Class" href="EssentialOCL.xmi#OperationCallExp"/>
     </generalization>
-    <generalization xmi:id="G_LogExp_ImperativeExpression" general="ImperativeExpression"/>
     <ownedAttribute xmi:id="LogExp.condition" name="condition" aggregation="composite" association="A_LogExp.condition_logOwner">
       <type xsi:type="uml:Class" href="EssentialOCL.xmi#OclExpression"/>
       <lowerValue xsi:type="uml:LiteralInteger"/>

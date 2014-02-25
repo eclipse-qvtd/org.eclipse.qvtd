@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="QVTTemplate" name="QVTTemplate" URI="http://schema.omg.org/spec/QVT/20120401/QVTTemplate">
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="QVTTemplate" name="QVTTemplate" URI="http://schema.omg.org/spec/QVT/20140401/QVTTemplate">
   <packagedElement xmi:type="uml:Class" xmi:id="CollectionTemplateExp" name="CollectionTemplateExp">
     <generalization xmi:id="G_CollectionTemplateExp_TemplateExp" general="TemplateExp"/>
     <ownedAttribute xmi:id="CollectionTemplateExp.member" name="member" aggregation="composite" association="A_CollectionTemplateExp.member_listContainer">
