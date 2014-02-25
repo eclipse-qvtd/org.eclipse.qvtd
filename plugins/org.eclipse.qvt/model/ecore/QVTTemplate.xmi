@@ -60,37 +60,58 @@
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_CollectionTemplateExp.member_listContainer" name="A_CollectionTemplateExp.member_listContainer"
       memberEnd="CollectionTemplateExp.member A_CollectionTemplateExp.member_listContainer.listContainer">
-    <ownedEnd xmi:id="A_CollectionTemplateExp.member_listContainer.listContainer" name="listContainer" type="CollectionTemplateExp" association="A_CollectionTemplateExp.member_listContainer"/>
+    <ownedEnd xmi:id="A_CollectionTemplateExp.member_listContainer.listContainer" name="listContainer" type="CollectionTemplateExp" association="A_CollectionTemplateExp.member_listContainer">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_CollectionTemplateExp.referredCollectionType_collectionTemplateExp" name="A_CollectionTemplateExp.referredCollectionType_collectionTemplateExp"
       memberEnd="CollectionTemplateExp.referredCollectionType A_CollectionTemplateExp.referredCollectionType_collectionTemplateExp.collectionTemplateExp">
     <ownedEnd xmi:id="A_CollectionTemplateExp.referredCollectionType_collectionTemplateExp.collectionTemplateExp" name="collectionTemplateExp"
-        type="CollectionTemplateExp" association="A_CollectionTemplateExp.referredCollectionType_collectionTemplateExp"/>
+        type="CollectionTemplateExp" association="A_CollectionTemplateExp.referredCollectionType_collectionTemplateExp">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_CollectionTemplateExp.rest_matchingExp" name="A_CollectionTemplateExp.rest_matchingExp"
       memberEnd="CollectionTemplateExp.rest A_CollectionTemplateExp.rest_matchingExp.matchingExp">
-    <ownedEnd xmi:id="A_CollectionTemplateExp.rest_matchingExp.matchingExp" name="matchingExp" type="CollectionTemplateExp" association="A_CollectionTemplateExp.rest_matchingExp"/>
+    <ownedEnd xmi:id="A_CollectionTemplateExp.rest_matchingExp.matchingExp" name="matchingExp" type="CollectionTemplateExp" association="A_CollectionTemplateExp.rest_matchingExp">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_ObjectTemplateExp.part_PropertyTemplateItem.objContainer" name="A_ObjectTemplateExp.part_PropertyTemplateItem.objContainer"
       memberEnd="ObjectTemplateExp.part PropertyTemplateItem.objContainer"/>
   <packagedElement xsi:type="uml:Association" xmi:id="A_ObjectTemplateExp.referredClass_objectTemplateExp" name="A_ObjectTemplateExp.referredClass_objectTemplateExp"
       memberEnd="ObjectTemplateExp.referredClass A_ObjectTemplateExp.referredClass_objectTemplateExp.objectTemplateExp">
     <ownedEnd xmi:id="A_ObjectTemplateExp.referredClass_objectTemplateExp.objectTemplateExp" name="objectTemplateExp" type="ObjectTemplateExp"
-        association="A_ObjectTemplateExp.referredClass_objectTemplateExp"/>
+        association="A_ObjectTemplateExp.referredClass_objectTemplateExp">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_PropertyTemplateItem.referredProperty_propertyItem" name="A_PropertyTemplateItem.referredProperty_propertyItem"
       memberEnd="PropertyTemplateItem.referredProperty A_PropertyTemplateItem.referredProperty_propertyItem.propertyItem">
     <ownedEnd xmi:id="A_PropertyTemplateItem.referredProperty_propertyItem.propertyItem" name="propertyItem" type="PropertyTemplateItem"
-        association="A_PropertyTemplateItem.referredProperty_propertyItem"/>
+        association="A_PropertyTemplateItem.referredProperty_propertyItem">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_PropertyTemplateItem.value_propertyItem" name="A_PropertyTemplateItem.value_propertyItem"
       memberEnd="PropertyTemplateItem.value A_PropertyTemplateItem.value_propertyItem.propertyItem">
-    <ownedEnd xmi:id="A_PropertyTemplateItem.value_propertyItem.propertyItem" name="propertyItem" type="PropertyTemplateItem" association="A_PropertyTemplateItem.value_propertyItem"/>
+    <ownedEnd xmi:id="A_PropertyTemplateItem.value_propertyItem.propertyItem" name="propertyItem" type="PropertyTemplateItem" association="A_PropertyTemplateItem.value_propertyItem">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_TemplateExp.bindsTo_templateExp" name="A_TemplateExp.bindsTo_templateExp" memberEnd="TemplateExp.bindsTo A_TemplateExp.bindsTo_templateExp.templateExp">
-    <ownedEnd xmi:id="A_TemplateExp.bindsTo_templateExp.templateExp" name="templateExp" type="TemplateExp" association="A_TemplateExp.bindsTo_templateExp"/>
+    <ownedEnd xmi:id="A_TemplateExp.bindsTo_templateExp.templateExp" name="templateExp" type="TemplateExp" association="A_TemplateExp.bindsTo_templateExp">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_TemplateExp.where_owner" name="A_TemplateExp.where_owner" memberEnd="TemplateExp.where A_TemplateExp.where_owner.owner">
-    <ownedEnd xmi:id="A_TemplateExp.where_owner.owner" name="owner" type="TemplateExp" association="A_TemplateExp.where_owner"/>
+    <ownedEnd xmi:id="A_TemplateExp.where_owner.owner" name="owner" type="TemplateExp" association="A_TemplateExp.where_owner">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
 </uml:Model>

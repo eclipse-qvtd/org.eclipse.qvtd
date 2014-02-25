@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="QVTRelation" name="QVTRelation" URI="http://schema.omg.org/spec/QVT/20140401/QVTRelation">
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="QVTRelation" name="QVTRelation" URI="http://schema.omg.org/spec/QVT/20140401/QVTRelation">
   <packagedElement xmi:type="uml:Class" xmi:id="DomainPattern" name="DomainPattern">
     <generalization xmi:id="G_DomainPattern_Pattern">
       <general xmi:type="uml:Class" href="QVTBase.uml#Pattern"/>
@@ -126,63 +126,99 @@
       memberEnd="RelationDomain.pattern DomainPattern.relationDomain"/>
   <packagedElement xmi:type="uml:Association" xmi:id="A_DomainPattern.templateExpression_domainPattern" name="A_DomainPattern.templateExpression_domainPattern"
       memberEnd="DomainPattern.templateExpression A_DomainPattern.templateExpression_domainPattern.domainPattern">
-    <ownedEnd xmi:id="A_DomainPattern.templateExpression_domainPattern.domainPattern" name="domainPattern" type="DomainPattern" association="A_DomainPattern.templateExpression_domainPattern"/>
+    <ownedEnd xmi:id="A_DomainPattern.templateExpression_domainPattern.domainPattern" name="domainPattern" type="DomainPattern" association="A_DomainPattern.templateExpression_domainPattern">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Key.identifies_key" name="A_Key.identifies_key" memberEnd="Key.identifies A_Key.identifies_key.key">
-    <ownedEnd xmi:id="A_Key.identifies_key.key" name="key" type="Key" association="A_Key.identifies_key"/>
+    <ownedEnd xmi:id="A_Key.identifies_key.key" name="key" type="Key" association="A_Key.identifies_key">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Key.oppositePart_oppKey" name="A_Key.oppositePart_oppKey" memberEnd="Key.oppositePart A_Key.oppositePart_oppKey.oppKey">
-    <ownedEnd xmi:id="A_Key.oppositePart_oppKey.oppKey" name="oppKey" type="Key" association="A_Key.oppositePart_oppKey"/>
+    <ownedEnd xmi:id="A_Key.oppositePart_oppKey.oppKey" name="oppKey" type="Key" association="A_Key.oppositePart_oppKey">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Key.part_key" name="A_Key.part_key" memberEnd="Key.part A_Key.part_key.key">
-    <ownedEnd xmi:id="A_Key.part_key.key" name="key" type="Key" association="A_Key.part_key"/>
+    <ownedEnd xmi:id="A_Key.part_key.key" name="key" type="Key" association="A_Key.part_key">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Key.transformation_RelationalTransformation.ownedKey" name="A_Key.transformation_RelationalTransformation.ownedKey"
       memberEnd="RelationalTransformation.ownedKey Key.transformation"/>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Relation.operationalImpl_RelationImplementation.relation" name="A_Relation.operationalImpl_RelationImplementation.relation"
       memberEnd="Relation.operationalImpl RelationImplementation.relation"/>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Relation.variable_relation" name="A_Relation.variable_relation" memberEnd="Relation.variable A_Relation.variable_relation.relation">
-    <ownedEnd xmi:id="A_Relation.variable_relation.relation" name="relation" type="Relation" association="A_Relation.variable_relation"/>
+    <ownedEnd xmi:id="A_Relation.variable_relation.relation" name="relation" type="Relation" association="A_Relation.variable_relation">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Relation.when_whenOwner" name="A_Relation.when_whenOwner" memberEnd="Relation.when A_Relation.when_whenOwner.whenOwner">
-    <ownedEnd xmi:id="A_Relation.when_whenOwner.whenOwner" name="whenOwner" type="Relation" association="A_Relation.when_whenOwner"/>
+    <ownedEnd xmi:id="A_Relation.when_whenOwner.whenOwner" name="whenOwner" type="Relation" association="A_Relation.when_whenOwner">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Relation.where_whereOwner" name="A_Relation.where_whereOwner" memberEnd="Relation.where A_Relation.where_whereOwner.whereOwner">
-    <ownedEnd xmi:id="A_Relation.where_whereOwner.whereOwner" name="whereOwner" type="Relation" association="A_Relation.where_whereOwner"/>
+    <ownedEnd xmi:id="A_Relation.where_whereOwner.whereOwner" name="whereOwner" type="Relation" association="A_Relation.where_whereOwner">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_RelationCallExp.argument_relationCallExp" name="A_RelationCallExp.argument_relationCallExp"
       memberEnd="RelationCallExp.argument A_RelationCallExp.argument_relationCallExp.relationCallExp">
-    <ownedEnd xmi:id="A_RelationCallExp.argument_relationCallExp.relationCallExp" name="relationCallExp" type="RelationCallExp" association="A_RelationCallExp.argument_relationCallExp"/>
+    <ownedEnd xmi:id="A_RelationCallExp.argument_relationCallExp.relationCallExp" name="relationCallExp" type="RelationCallExp" association="A_RelationCallExp.argument_relationCallExp">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_RelationCallExp.referredRelation_relationCallExp" name="A_RelationCallExp.referredRelation_relationCallExp"
       memberEnd="RelationCallExp.referredRelation A_RelationCallExp.referredRelation_relationCallExp.relationCallExp">
     <ownedEnd xmi:id="A_RelationCallExp.referredRelation_relationCallExp.relationCallExp" name="relationCallExp" type="RelationCallExp"
-        association="A_RelationCallExp.referredRelation_relationCallExp"/>
+        association="A_RelationCallExp.referredRelation_relationCallExp">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_RelationDomain.defaultAssignment_RelationDomainAssignment.owner" name="A_RelationDomain.defaultAssignment_RelationDomainAssignment.owner"
       memberEnd="RelationDomain.defaultAssignment RelationDomainAssignment.owner"/>
   <packagedElement xmi:type="uml:Association" xmi:id="A_RelationDomain.rootVariable_relationDomain" name="A_RelationDomain.rootVariable_relationDomain"
       memberEnd="RelationDomain.rootVariable A_RelationDomain.rootVariable_relationDomain.relationDomain">
-    <ownedEnd xmi:id="A_RelationDomain.rootVariable_relationDomain.relationDomain" name="relationDomain" type="RelationDomain" association="A_RelationDomain.rootVariable_relationDomain"/>
+    <ownedEnd xmi:id="A_RelationDomain.rootVariable_relationDomain.relationDomain" name="relationDomain" type="RelationDomain" association="A_RelationDomain.rootVariable_relationDomain">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_RelationDomainAssignment.valueExp_domainAssignment" name="A_RelationDomainAssignment.valueExp_domainAssignment"
       memberEnd="RelationDomainAssignment.valueExp A_RelationDomainAssignment.valueExp_domainAssignment.domainAssignment">
     <ownedEnd xmi:id="A_RelationDomainAssignment.valueExp_domainAssignment.domainAssignment" name="domainAssignment" type="RelationDomainAssignment"
-        association="A_RelationDomainAssignment.valueExp_domainAssignment"/>
+        association="A_RelationDomainAssignment.valueExp_domainAssignment">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_RelationDomainAssignment.variable_domainAssignment" name="A_RelationDomainAssignment.variable_domainAssignment"
       memberEnd="RelationDomainAssignment.variable A_RelationDomainAssignment.variable_domainAssignment.domainAssignment">
     <ownedEnd xmi:id="A_RelationDomainAssignment.variable_domainAssignment.domainAssignment" name="domainAssignment" type="RelationDomainAssignment"
-        association="A_RelationDomainAssignment.variable_domainAssignment"/>
+        association="A_RelationDomainAssignment.variable_domainAssignment">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_RelationImplementation.impl_relationImplementation" name="A_RelationImplementation.impl_relationImplementation"
       memberEnd="RelationImplementation.impl A_RelationImplementation.impl_relationImplementation.relationImplementation">
     <ownedEnd xmi:id="A_RelationImplementation.impl_relationImplementation.relationImplementation" name="relationImplementation" type="RelationImplementation"
-        association="A_RelationImplementation.impl_relationImplementation"/>
+        association="A_RelationImplementation.impl_relationImplementation">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_RelationImplementation.inDirectionOf_relationImplementation" name="A_RelationImplementation.inDirectionOf_relationImplementation"
       memberEnd="RelationImplementation.inDirectionOf A_RelationImplementation.inDirectionOf_relationImplementation.relationImplementation">
     <ownedEnd xmi:id="A_RelationImplementation.inDirectionOf_relationImplementation.relationImplementation" name="relationImplementation"
-        type="RelationImplementation" association="A_RelationImplementation.inDirectionOf_relationImplementation"/>
+        type="RelationImplementation" association="A_RelationImplementation.inDirectionOf_relationImplementation">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
 </uml:Model>

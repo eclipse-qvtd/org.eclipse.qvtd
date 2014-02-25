@@ -438,36 +438,59 @@
   <packagedElement xsi:type="uml:Association" xmi:id="A_Class.ownedOperation_Operation.class" name="A_Class.ownedOperation_Operation.class"
       memberEnd="Class.ownedOperation Operation.class"/>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Class.superClass_class" name="A_Class.superClass_class" memberEnd="Class.superClass A_Class.superClass_class.class">
-    <ownedEnd xmi:id="A_Class.superClass_class.class" name="class" type="Class" association="A_Class.superClass_class"/>
+    <ownedEnd xmi:id="A_Class.superClass_class.class" name="class" type="Class" association="A_Class.superClass_class">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Comment.annotatedElement_comment" name="A_Comment.annotatedElement_comment" memberEnd="Comment.annotatedElement A_Comment.annotatedElement_comment.comment">
-    <ownedEnd xmi:id="A_Comment.annotatedElement_comment.comment" name="comment" type="Comment" association="A_Comment.annotatedElement_comment"/>
+    <ownedEnd xmi:id="A_Comment.annotatedElement_comment.comment" name="comment" type="Comment" association="A_Comment.annotatedElement_comment">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Element.ownedComment_owningElement" name="A_Element.ownedComment_owningElement"
       memberEnd="Element.ownedComment A_Element.ownedComment_owningElement.owningElement">
-    <ownedEnd xmi:id="A_Element.ownedComment_owningElement.owningElement" name="owningElement" type="Element" association="A_Element.ownedComment_owningElement"/>
+    <ownedEnd xmi:id="A_Element.ownedComment_owningElement.owningElement" name="owningElement" type="Element" association="A_Element.ownedComment_owningElement">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Enumeration.ownedLiteral_EnumerationLiteral.enumeration" name="A_Enumeration.ownedLiteral_EnumerationLiteral.enumeration"
       memberEnd="Enumeration.ownedLiteral EnumerationLiteral.enumeration"/>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Factory.package_factory" name="A_Factory.package_factory" memberEnd="Factory.package A_Factory.package_factory.factory">
-    <ownedEnd xmi:id="A_Factory.package_factory.factory" name="factory" type="Factory" association="A_Factory.package_factory"/>
+    <ownedEnd xmi:id="A_Factory.package_factory.factory" name="factory" type="Factory" association="A_Factory.package_factory">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Operation.ownedParameter_Parameter.operation" name="A_Operation.ownedParameter_Parameter.operation"
       memberEnd="Operation.ownedParameter Parameter.operation"/>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Operation.raisedException_operation" name="A_Operation.raisedException_operation"
       memberEnd="Operation.raisedException A_Operation.raisedException_operation.operation">
-    <ownedEnd xmi:id="A_Operation.raisedException_operation.operation" name="operation" type="Operation" association="A_Operation.raisedException_operation"/>
+    <ownedEnd xmi:id="A_Operation.raisedException_operation.operation" name="operation" type="Operation" association="A_Operation.raisedException_operation">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Package.nestedPackage_Package.nestingPackage" name="A_Package.nestedPackage_Package.nestingPackage"
       memberEnd="Package.nestedPackage Package.nestingPackage"/>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Package.ownedType_Type.package" name="A_Package.ownedType_Type.package" memberEnd="Package.ownedType Type.package"/>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Property.opposite_property" name="A_Property.opposite_property" memberEnd="Property.opposite A_Property.opposite_property.property">
-    <ownedEnd xmi:id="A_Property.opposite_property.property" name="property" type="Property" association="A_Property.opposite_property"/>
+    <ownedEnd xmi:id="A_Property.opposite_property.property" name="property" type="Property" association="A_Property.opposite_property">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Tag.element_tag" name="A_Tag.element_tag" memberEnd="Tag.element A_Tag.element_tag.tag">
-    <ownedEnd xmi:id="A_Tag.element_tag.tag" name="tag" type="Tag" association="A_Tag.element_tag"/>
+    <ownedEnd xmi:id="A_Tag.element_tag.tag" name="tag" type="Tag" association="A_Tag.element_tag">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_TypedElement.type_typedElement" name="A_TypedElement.type_typedElement" memberEnd="TypedElement.type A_TypedElement.type_typedElement.typedElement">
-    <ownedEnd xmi:id="A_TypedElement.type_typedElement.typedElement" name="typedElement" type="TypedElement" association="A_TypedElement.type_typedElement"/>
+    <ownedEnd xmi:id="A_TypedElement.type_typedElement.typedElement" name="typedElement" type="TypedElement" association="A_TypedElement.type_typedElement">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
 </uml:Model>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="QVTCore" name="QVTCore" URI="http://schema.omg.org/spec/QVT/20140401/QVTCore">
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="QVTCore" name="QVTCore" URI="http://schema.omg.org/spec/QVT/20140401/QVTCore">
   <packagedElement xmi:type="uml:Enumeration" xmi:id="EnforcementMode" name="EnforcementMode">
     <ownedLiteral xmi:id="Creation" name="Creation"/>
     <ownedLiteral xmi:id="Deletion" name="Deletion"/>
@@ -119,19 +119,25 @@
   <packagedElement xmi:type="uml:Association" xmi:id="A_Assignment.bottomPattern_BottomPattern.assignment" name="A_Assignment.bottomPattern_BottomPattern.assignment"
       memberEnd="BottomPattern.assignment Assignment.bottomPattern"/>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Assignment.value_valueAssignment" name="A_Assignment.value_valueAssignment" memberEnd="Assignment.value A_Assignment.value_valueAssignment.valueAssignment">
-    <ownedEnd xmi:id="A_Assignment.value_valueAssignment.valueAssignment" name="valueAssignment" type="Assignment" association="A_Assignment.value_valueAssignment"/>
+    <ownedEnd xmi:id="A_Assignment.value_valueAssignment.valueAssignment" name="valueAssignment" type="Assignment" association="A_Assignment.value_valueAssignment">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_BottomPattern.enforcementOperation_EnforcementOperation.bottomPattern" name="A_BottomPattern.enforcementOperation_EnforcementOperation.bottomPattern"
       memberEnd="BottomPattern.enforcementOperation EnforcementOperation.bottomPattern"/>
   <packagedElement xmi:type="uml:Association" xmi:id="A_BottomPattern.realizedVariable_RealizedVariable.bottomPattern" name="A_BottomPattern.realizedVariable_RealizedVariable.bottomPattern"
       memberEnd="BottomPattern.realizedVariable RealizedVariable.bottomPattern"/>
   <packagedElement xmi:type="uml:Association" xmi:id="A_CorePattern.variable_corePattern" name="A_CorePattern.variable_corePattern" memberEnd="CorePattern.variable A_CorePattern.variable_corePattern.corePattern">
-    <ownedEnd xmi:id="A_CorePattern.variable_corePattern.corePattern" name="corePattern" type="CorePattern" association="A_CorePattern.variable_corePattern"/>
+    <ownedEnd xmi:id="A_CorePattern.variable_corePattern.corePattern" name="corePattern" type="CorePattern" association="A_CorePattern.variable_corePattern">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_EnforcementOperation.operationCallExp_enforcementOperation" name="A_EnforcementOperation.operationCallExp_enforcementOperation"
       memberEnd="EnforcementOperation.operationCallExp A_EnforcementOperation.operationCallExp_enforcementOperation.enforcementOperation">
     <ownedEnd xmi:id="A_EnforcementOperation.operationCallExp_enforcementOperation.enforcementOperation" name="enforcementOperation" type="EnforcementOperation"
-        association="A_EnforcementOperation.operationCallExp_enforcementOperation"/>
+        association="A_EnforcementOperation.operationCallExp_enforcementOperation">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Mapping.context_Mapping.local" name="A_Mapping.context_Mapping.local" memberEnd="Mapping.local Mapping.context"/>
   <packagedElement xmi:type="uml:Association" xmi:id="A_Mapping.refinement_Mapping.specification" name="A_Mapping.refinement_Mapping.specification"
@@ -139,14 +145,22 @@
   <packagedElement xmi:type="uml:Association" xmi:id="A_PropertyAssignment.slotExpression_slotAssignment" name="A_PropertyAssignment.slotExpression_slotAssignment"
       memberEnd="PropertyAssignment.slotExpression A_PropertyAssignment.slotExpression_slotAssignment.slotAssignment">
     <ownedEnd xmi:id="A_PropertyAssignment.slotExpression_slotAssignment.slotAssignment" name="slotAssignment" type="PropertyAssignment"
-        association="A_PropertyAssignment.slotExpression_slotAssignment"/>
+        association="A_PropertyAssignment.slotExpression_slotAssignment">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_PropertyAssignment.targetProperty_assignment" name="A_PropertyAssignment.targetProperty_assignment"
       memberEnd="PropertyAssignment.targetProperty A_PropertyAssignment.targetProperty_assignment.assignment">
-    <ownedEnd xmi:id="A_PropertyAssignment.targetProperty_assignment.assignment" name="assignment" type="PropertyAssignment" association="A_PropertyAssignment.targetProperty_assignment"/>
+    <ownedEnd xmi:id="A_PropertyAssignment.targetProperty_assignment.assignment" name="assignment" type="PropertyAssignment" association="A_PropertyAssignment.targetProperty_assignment">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="A_VariableAssignment.targetVariable_assignment" name="A_VariableAssignment.targetVariable_assignment"
       memberEnd="VariableAssignment.targetVariable A_VariableAssignment.targetVariable_assignment.assignment">
-    <ownedEnd xmi:id="A_VariableAssignment.targetVariable_assignment.assignment" name="assignment" type="VariableAssignment" association="A_VariableAssignment.targetVariable_assignment"/>
+    <ownedEnd xmi:id="A_VariableAssignment.targetVariable_assignment.assignment" name="assignment" type="VariableAssignment" association="A_VariableAssignment.targetVariable_assignment">
+      <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
 </uml:Model>

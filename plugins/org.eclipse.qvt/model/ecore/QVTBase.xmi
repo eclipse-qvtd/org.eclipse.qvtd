@@ -113,41 +113,65 @@
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Domain.rule_Rule.domain" name="A_Domain.rule_Rule.domain" memberEnd="Rule.domain Domain.rule"/>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Domain.typedModel_domain" name="A_Domain.typedModel_domain" memberEnd="Domain.typedModel A_Domain.typedModel_domain.domain">
-    <ownedEnd xmi:id="A_Domain.typedModel_domain.domain" name="domain" type="Domain" association="A_Domain.typedModel_domain"/>
+    <ownedEnd xmi:id="A_Domain.typedModel_domain.domain" name="domain" type="Domain" association="A_Domain.typedModel_domain">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Function.queryExpression_function" name="A_Function.queryExpression_function"
       memberEnd="Function.queryExpression A_Function.queryExpression_function.function">
-    <ownedEnd xmi:id="A_Function.queryExpression_function.function" name="function" type="Function" association="A_Function.queryExpression_function"/>
+    <ownedEnd xmi:id="A_Function.queryExpression_function.function" name="function" type="Function" association="A_Function.queryExpression_function">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Pattern.bindsTo_pattern" name="A_Pattern.bindsTo_pattern" memberEnd="Pattern.bindsTo A_Pattern.bindsTo_pattern.pattern">
-    <ownedEnd xmi:id="A_Pattern.bindsTo_pattern.pattern" name="pattern" type="Pattern" association="A_Pattern.bindsTo_pattern"/>
+    <ownedEnd xmi:id="A_Pattern.bindsTo_pattern.pattern" name="pattern" type="Pattern" association="A_Pattern.bindsTo_pattern">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Pattern.predicate_Predicate.pattern" name="A_Pattern.predicate_Predicate.pattern"
       memberEnd="Pattern.predicate Predicate.pattern"/>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Predicate.conditionExpression_predicate" name="A_Predicate.conditionExpression_predicate"
       memberEnd="Predicate.conditionExpression A_Predicate.conditionExpression_predicate.predicate">
-    <ownedEnd xmi:id="A_Predicate.conditionExpression_predicate.predicate" name="predicate" type="Predicate" association="A_Predicate.conditionExpression_predicate"/>
+    <ownedEnd xmi:id="A_Predicate.conditionExpression_predicate.predicate" name="predicate" type="Predicate" association="A_Predicate.conditionExpression_predicate">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Rule.overrides_overridden" name="A_Rule.overrides_overridden" memberEnd="Rule.overrides A_Rule.overrides_overridden.overridden">
-    <ownedEnd xmi:id="A_Rule.overrides_overridden.overridden" name="overridden" type="Rule" association="A_Rule.overrides_overridden"/>
+    <ownedEnd xmi:id="A_Rule.overrides_overridden.overridden" name="overridden" type="Rule" association="A_Rule.overrides_overridden">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Rule.transformation_Transformation.rule" name="A_Rule.transformation_Transformation.rule"
       memberEnd="Transformation.rule Rule.transformation"/>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Transformation.extends_extendedBy" name="A_Transformation.extends_extendedBy"
       memberEnd="Transformation.extends A_Transformation.extends_extendedBy.extendedBy">
-    <ownedEnd xmi:id="A_Transformation.extends_extendedBy.extendedBy" name="extendedBy" type="Transformation" association="A_Transformation.extends_extendedBy"/>
+    <ownedEnd xmi:id="A_Transformation.extends_extendedBy.extendedBy" name="extendedBy" type="Transformation" association="A_Transformation.extends_extendedBy">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Transformation.modelParameter_TypedModel.transformation" name="A_Transformation.modelParameter_TypedModel.transformation"
       memberEnd="Transformation.modelParameter TypedModel.transformation"/>
   <packagedElement xsi:type="uml:Association" xmi:id="A_Transformation.ownedTag_transformation" name="A_Transformation.ownedTag_transformation"
       memberEnd="Transformation.ownedTag A_Transformation.ownedTag_transformation.transformation">
-    <ownedEnd xmi:id="A_Transformation.ownedTag_transformation.transformation" name="transformation" type="Transformation" association="A_Transformation.ownedTag_transformation"/>
+    <ownedEnd xmi:id="A_Transformation.ownedTag_transformation.transformation" name="transformation" type="Transformation" association="A_Transformation.ownedTag_transformation">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_TypedModel.dependsOn_dependent" name="A_TypedModel.dependsOn_dependent" memberEnd="TypedModel.dependsOn A_TypedModel.dependsOn_dependent.dependent">
-    <ownedEnd xmi:id="A_TypedModel.dependsOn_dependent.dependent" name="dependent" type="TypedModel" association="A_TypedModel.dependsOn_dependent"/>
+    <ownedEnd xmi:id="A_TypedModel.dependsOn_dependent.dependent" name="dependent" type="TypedModel" association="A_TypedModel.dependsOn_dependent">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="A_TypedModel.usedPackage_typedModel" name="A_TypedModel.usedPackage_typedModel"
       memberEnd="TypedModel.usedPackage A_TypedModel.usedPackage_typedModel.typedModel">
-    <ownedEnd xmi:id="A_TypedModel.usedPackage_typedModel.typedModel" name="typedModel" type="TypedModel" association="A_TypedModel.usedPackage_typedModel"/>
+    <ownedEnd xmi:id="A_TypedModel.usedPackage_typedModel.typedModel" name="typedModel" type="TypedModel" association="A_TypedModel.usedPackage_typedModel">
+      <lowerValue xsi:type="uml:LiteralInteger"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+    </ownedEnd>
   </packagedElement>
 </uml:Model>
