@@ -32,12 +32,14 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Classifier;
+import org.eclipse.uml2.uml.Comment;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Generalization;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Operation;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Parameter;
+import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Type;
 import org.eclipse.uml2.uml.UMLPackage;
@@ -192,7 +194,7 @@ public class Ecore2UML {
 		EPackage flatEPackage = EcoreFactory.eINSTANCE.createEPackage();
 		flatEPackage.setName("FlatQVT");
 		flatEPackage.setNsPrefix("qvt");
-		flatEPackage.setNsURI("http://schema.omg.org/spec/QVT/20120401/FlatQVT");
+		flatEPackage.setNsURI("http://schema.omg.org/spec/QVT/20140401/FlatQVT");
 		flatEPackage.getEClassifiers().addAll(flattenedObjects);
 		flatResource.getContents().add(flatEPackage);
 		flatResource.save(saveOptions);
@@ -247,6 +249,12 @@ public class Ecore2UML {
 				listOfLists.add(package_.getNestedPackages());
 				listOfLists.add(package_.getOwnedTypes());
 			}
+			else if (eObject instanceof org.eclipse.uml2.uml.Class) {
+				org.eclipse.uml2.uml.Class class_ = (org.eclipse.uml2.uml.Class) eObject;
+				listOfLists.add(class_.getGenerals());
+				listOfLists.add(class_.getOwnedAttributes());
+				listOfLists.add(class_.getOwnedOperations());
+			}
 		}
 		for (List<? extends NamedElement> list : listOfLists) {
 			sortList(list);
@@ -276,6 +284,11 @@ public class Ecore2UML {
 		UMLSwitch<String> idAssigner = new UMLSwitch<String>() {
 
 			@Override
+			public String caseComment(Comment object) {
+				return "";
+			}
+
+			@Override
 			public String caseGeneralization(Generalization object) {
 				Classifier specific = object.getSpecific();
 				Classifier general = object.getGeneral();
@@ -285,17 +298,32 @@ public class Ecore2UML {
 
 			@Override
 			public String caseParameter(Parameter object) {
-				return doSwitch(object.getOperation()) + "." + safeNameOf(object);
+				if (object.getDirection() != ParameterDirectionKind.RETURN_LITERAL) {
+					return doSwitch(object.getOperation()) + "." + safeNameOf(object);
+				}
+				else {
+					return "";
+				}
 			}
 
 			@Override
 			public String caseOperation(Operation object) {
-				return super.caseOperation(object);
+				StringBuilder s = new StringBuilder();
+				s.append(doSwitch(object.getOwner()));
+				s.append(".");
+				s.append(safeNameOf(object));
+				for (Parameter parameter : object.getOwnedParameters()) {
+					if (parameter.getDirection() != ParameterDirectionKind.RETURN_LITERAL) {
+						s.append("_");
+						s.append(doSwitch(parameter.getType()));
+					}
+				}
+				return s.toString();
 			}
 
 			@Override
 			public String caseProperty(Property object) {
-				return /*object.getClass().getPackage().getName() + "." +*/ safeNameOf(object.getOwner()) + "." + safeNameOf(object);
+				return safeNameOf(object.getOwner()) + "." + safeNameOf(object);
 			}
 			
 			@Override
@@ -319,10 +347,20 @@ public class Ecore2UML {
 			}
 			
 		};
+		Map<String, EObject> assignedIds = new HashMap<String, EObject>();
 		for (Iterator<EObject> it = umlResource.getAllContents(); it.hasNext(); ) {
 			EObject eObject = it.next();
 			String id = idAssigner.doSwitch(eObject);
-			((XMLResource)umlResource).setID(eObject, id.length() > 0 ? id : null);
+			if (id.length() > 0) {
+				EObject oldEObject = assignedIds.put(id,  eObject);
+				if (oldEObject != null) {
+					throw new IllegalStateException(id + " already allocated to a " + oldEObject.eClass().getName());
+				}
+				((XMLResource)umlResource).setID(eObject, id);
+			}
+			else {
+				((XMLResource)umlResource).setID(eObject, null);
+			}
 		}
 	}
 
