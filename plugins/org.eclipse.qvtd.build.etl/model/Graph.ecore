@@ -33,7 +33,9 @@
     <eLiterals name="middleRelation" value="3"/>
     <eLiterals name="primaryInput" value="4" literal="input"/>
     <eLiterals name="derivedInput" value="5"/>
-    <eLiterals name="output" value="5"/>
+    <eLiterals name="output" value="6"/>
+    <eLiterals name="doublePrimaryInput" value="7"/>
+    <eLiterals name="doubleDerivedInput" value="8"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="NodeType">
     <eLiterals name="mapping"/>

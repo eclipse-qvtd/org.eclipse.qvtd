@@ -1770,7 +1770,7 @@
             <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
                 referredVariable="#/0/@nestedPackage.0/@rule.13/@bottomPattern/@realizedVariable.0"/>
           </assignment>
-          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"/>
+          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"/>
         </bottomPattern>
         <local>
           <guardPattern/>
@@ -1891,7 +1891,7 @@
             <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
                 referredVariable="#/0/@nestedPackage.0/@rule.14/@bottomPattern/@realizedVariable.0"/>
           </assignment>
-          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"/>
+          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"/>
         </bottomPattern>
         <local>
           <guardPattern/>
@@ -2064,7 +2064,7 @@
             <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
                 referredVariable="#/0/@nestedPackage.0/@rule.15/@bottomPattern/@realizedVariable.0"/>
           </assignment>
-          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"/>
+          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"/>
         </bottomPattern>
         <local>
           <guardPattern/>
@@ -2223,7 +2223,7 @@
             <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
                 referredVariable="#/0/@nestedPackage.0/@rule.16/@bottomPattern/@realizedVariable.0"/>
           </assignment>
-          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"/>
+          <realizedVariable name="fa" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"/>
         </bottomPattern>
         <local>
           <guardPattern/>

@@ -178,24 +178,18 @@ for (r in qvti!Transformation.all().first().rule.select(r | not r.context.isDefi
 // the least number of inputs
 var mdg = new mdGraph!Graph;
 var mergeMap : Map;  // (x, Node)
-  
+// Copy all the containment trees to the mdGraph
+importContainmentTree(mdg, lTree!Node.all(), mdGraph!NodeType#input, mdGraph!EdgeType#inputContainment);
+importContainmentTree(mdg, mTree!Node.all(), mdGraph!NodeType#middle, mdGraph!EdgeType#middleContainment);
+importContainmentTree(mdg, rTree!Node.all(), mdGraph!NodeType#output, mdGraph!EdgeType#outputContainment);
+
 for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sortBy(n | n.incoming.size())) {
-    
-    
     // If an output var is abstract (i.e., doesn't exist in any of the containment
     // trees) don't add the mapping to the merged graph. Input abstract variables
     // are allowed because searching for elements of a type returns elements of the
     // type and all its sub-types.
     var outputVarNodes = m.outgoing.collect(e | e.target).flatten();
-    
-    m.println("m" + loopCount + " ");
-    outputVarNodes.collect(n | n.label).println();
-    outputVarNodes.forAll(vN | lTree!Node.all().exists(n | n.type == vN.label)
-        or mTree!Node.all().exists(n | n.type == vN.label)
-        or rTree!Node.all().exists(n | n.type == vN.label)
-    ).println();
-
-    if (outputVarNodes.forAll(vN | lTree!Node.all().exists(n | n.type == vN.label)
+    if (not outputVarNodes.forAll(vN | lTree!Node.all().exists(n | n.type == vN.label)
             or mTree!Node.all().exists(n | n.type == vN.label)
             or rTree!Node.all().exists(n | n.type == vN.label))
             ) {
@@ -203,26 +197,169 @@ for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sort
         }
     
     var inputVarNodes = m.incoming.collect(e | e.source).flatten();
-    
-    // For each input variable, fin the corresponding type in the domain
-    // containment tree and make the connection.
-    
+    // For each input variable, find the corresponding type in the domain
+    // containment tree and make the connection. If the type is abstrac (does not 
+    // exist in the tree), connect it to all its subtypes.
+    //m.println("m" + loopCount + " ");
+    var mappingNode = getNodeForNode(mdg, m);
     for (vN in inputVarNodes) {
-        var typeNode : mdGraph!Node;
-        if (lTree!Node.all().one(n | n.type == vN.label)) {
-            typeNode = mdg.getNodeForNode(vN);
-        } else if (mTree!Node.all().one(n | n.type == vN.label)) {
-            typeNode = mdg.getNodeForNode(vN);
-        } else if (rTree!Node.all().one(n | n.type == vN.label)) {
-            typeNode = mdg.getNodeForNode(vN);
-        } else {
-            
+        var sources = lTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label)); 
+        if (sources.isEmpty()) {
+            sources = mTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
         }
+        if (sources.isEmpty()) {
+            sources = rTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
+        }
+        if (sources.isEmpty()) {
+            // Error. WE should never get here!
+            vN.errln("Not valid type found for: ");
+        }
+        for (s in sources) {
+            var e = new mdGraph!Edge;
+            // If there is another edge to the input, is a double input
+            if (mdGraph!Edge.all().exists(e | e.source == mergeMap.get(s) and e.target == mappingNode)) {
+                e.type = mdGraph!EdgeType#doublePrimaryInput;
+            } else {
+                e.type = mdGraph!EdgeType#primaryInput;
+            }
+            e.source = mergeMap.get(s);
+            e.target = mappingNode;
+            mdg.element.add(e);
+        }
+    }
+    for (vN in outputVarNodes) {
+        var targets = lTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label)); 
+        if (targets.isEmpty()) {
+            targets = mTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
+        }
+        if (targets.isEmpty()) {
+            targets = rTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
+        }
+        if (targets.isEmpty()) {
+            // Error. WE should never get here!
+            vN.errln("Not valid type found for: ");
+        }
+        for (t in targets) {
+            var e = new mdGraph!Edge;
+            e.type = mdGraph!EdgeType#output;
+            e.source = mappingNode;
+            e.target = mergeMap.get(t);
+            mdg.element.add(e);
+        }
+    }
+}
 
+//4. Reduced data dependencies
+var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
+var rdg = new rdGraph!Graph;
+// Analize the dependencies to identify which input variables can be derived from others
+// primaryInputs are only the ones that don't have a containment relation or a 
+// middle relation with other input vars
+mergeMap.clear();
+// Copy all the containment trees to the mdGraph
+importContainmentTree(rdg, lTree!Node.all(), mdGraph!NodeType#input, mdGraph!EdgeType#inputContainment);
+importContainmentTree(rdg, mTree!Node.all(), mdGraph!NodeType#middle, mdGraph!EdgeType#middleContainment);
+importContainmentTree(rdg, rTree!Node.all(), mdGraph!NodeType#output, mdGraph!EdgeType#outputContainment);
+
+for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sortBy(n | n.incoming.size())) {
+    // If an output var is abstract (i.e., doesn't exist in any of the containment
+    // trees) don't add the mapping to the merged graph. Input abstract variables
+    // are allowed because searching for elements of a type returns elements of the
+    // type and all its sub-types.
+    var outputVarNodes = m.outgoing.collect(e | e.target).flatten();
+    if (not outputVarNodes.forAll(vN | lTree!Node.all().exists(n | n.type == vN.label)
+            or mTree!Node.all().exists(n | n.type == vN.label)
+            or rTree!Node.all().exists(n | n.type == vN.label))
+            ) {
+            continue;
+        }
+    
+    var inputVarNodes = m.incoming.collect(e | e.source).flatten();
+    // For each input variable, find the corresponding type in the domain
+    // containment tree and make the connection. If the type is abstrac (does not 
+    // exist in the tree), connect it to all its subtypes.
+    //m.println("m" + loopCount + " ");
+    var mappingNode = getNodeForNode(rdg, m);
+    for (vN in inputVarNodes) {
+        var sources = lTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label)); 
+        if (sources.isEmpty()) {
+            sources = mTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
+        }
+        if (sources.isEmpty()) {
+            sources = rTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
+        }
+        if (sources.isEmpty()) {
+            // Error. WE should never get here!
+            vN.errln("Not valid type found for: ");
+        }
+        for (s in sources) {
+            var e = new rdGraph!Edge;
+            // If there is another edge to the input, is a double input
+            if (rdGraph!Edge.all().exists(e | e.source == mergeMap.get(s) and e.target == mappingNode)) {
+                if (rdGraph!Edge.all().select(e | e.source == mergeMap.get(s) and e.target == mappingNode)
+                        .exists(o | o.type == mdGraph!EdgeType#derivedInput)) {
+                    e.type = mdGraph!EdgeType#doubleDerivedInput;
+                } else {
+                    e.type = mdGraph!EdgeType#doublePrimaryInput;
+                }
+            } else {
+                // Differentiate between primary and derived
+                if (vN.outgoing.exists(o | inputVarNodes.includes(o.target))) {
+                    e.type = mdGraph!EdgeType#derivedInput;
+                } else {
+                    e.type = mdGraph!EdgeType#primaryInput;
+                }
+            }
+            e.source = mergeMap.get(s);
+            e.target = mappingNode;
+            rdg.element.add(e);
+        }
+    }
+    for (vN in outputVarNodes) {
+        var targets = lTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label)); 
+        if (targets.isEmpty()) {
+            targets = mTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
+        }
+        if (targets.isEmpty()) {
+            targets = rTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
+        }
+        if (targets.isEmpty()) {
+            // Error. WE should never get here!
+            vN.errln("Not valid type found for: ");
+        }
+        for (t in targets) {
+            var e = new rdGraph!Edge;
+            e.type = rdGraph!EdgeType#output;
+            e.source = mappingNode;
+            e.target = mergeMap.get(t);
+            rdg.element.add(e);
+        }
     }
 }
 
 "Done".println();
+
+/* ==================================================================== */
+
+operation importContainmentTree(graph, treeNodes, type, relation) {
+    for (tn in treeNodes) {
+        var n = graph.owningModel().createInstance("Node");
+        n.label = tn.type;
+        n.type = type;
+        mergeMap.put(tn, n);
+        graph.element.add(n);
+    }
+    // Edges
+    for (tn in treeNodes) {
+        for (c in tn.children) {
+            var e = graph.owningModel().createInstance("Edge");
+            e.type = relation;
+            e.source = mergeMap.get(tn);
+            e.target = mergeMap.get(c);
+            graph.element.add(e);
+        }
+    }  
+}
 
 operation qvti!Rule getInputVars() : Set {
     
@@ -247,21 +384,21 @@ operation qvti!Rule getOutputVars() : Set {
 }
 
 
-operation mdGraph!Graph getNodeForNode(x : ddGraph!Node) : mdGraph!Node {
+operation getNodeForNode(graph, x : ddGraph!Node) : mdd!Node {
     var n;
     if (mergeMap.containsKey(x)) {
         n = mergeMap.get(x);
     } else {
-        n = new mdGraph!Node;
+        n = graph.owningModel().createInstance("Node");
         n.label = x.label;
         switch (x.type) {
-	        case ddGraph!NodeType#mapping : n.type = mdGraph!NodeType#mapping;
-	        case ddGraph!NodeType#input : n.type = mdGraph!NodeType#input;
-	        case ddGraph!NodeType#middle : n.type = mdGraph!NodeType#middle;
-	        case ddGraph!NodeType#output : n.type = mdGraph!NodeType#output;
+	        case mdd!NodeType#mapping : n.type = mdGraph!NodeType#mapping;
+	        case mdd!NodeType#input : n.type = mdGraph!NodeType#input;
+	        case mdd!NodeType#middle : n.type = mdGraph!NodeType#middle;
+	        case mdd!NodeType#output : n.type = mdGraph!NodeType#output;
 	    }
         mergeMap.put(x, n);
-        self.element.add(n);
+        graph.element.add(n);
     }
     return n;
 }

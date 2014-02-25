@@ -240,10 +240,8 @@ operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
  *
  * @param patterns the patterns to look for variables with the same name 
  */  
-operation QVT!Variable retypeVar(patterns : Collection) {
-    var refinedVars = patterns.collect(
-                p | p.variable
-                ).flatten().select(
+operation QVT!Variable retypeVar(pattern : QVT!Pattern) {
+    var refinedVars = pattern.variable.select(
                     v | v.name == self.name
                     );
     if (refinedVars.size() > 0) {
@@ -259,10 +257,8 @@ operation QVT!Variable retypeVar(patterns : Collection) {
  *
  * @param patterns the patterns to look for variables with the same name 
  */  
-operation QVT!Variable retypeRealizedVar(bottomPatterns : Collection) {
-    var refinedVars = bottomPatterns.collect(
-                p | p.realizedVariable
-                ).flatten().select(
+operation QVT!Variable retypeRealizedVar(pattern : QVT!Pattern) {
+    var refinedVars = pattern.realizedVariable.select(
                     v | v.name == self.name
                     );
     if (refinedVars.size() > 0) {

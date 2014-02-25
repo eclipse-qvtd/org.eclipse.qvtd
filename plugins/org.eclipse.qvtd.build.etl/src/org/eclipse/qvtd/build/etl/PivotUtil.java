@@ -50,7 +50,7 @@ public class PivotUtil {
     public TypedElement getLowestRankVariable(List<TypedElement> vars) {
 
         TypedElement min = vars.get(0);
-        EStructuralFeature typeFeat = min.eClass().getEStructuralFeature("type");
+    	EStructuralFeature typeFeat = min.eClass().getEStructuralFeature("type");
         ClassImpl minType = null;
         for(int i = 1; i < vars.size(); ++i) {
             minType = (ClassImpl) min.eGet(typeFeat);
@@ -60,14 +60,14 @@ public class PivotUtil {
         }
         // Verify that the min is actually the min, i.e. all the other variables are superiors
         // in the hierarchy
-        for (TypedElement var : vars) {
+        /*for (TypedElement var : vars) {
             if (!var.equals(min)) {
                 if (!((ClassImpl)min.eGet(typeFeat)).getSuperClass().contains(var.eGet(typeFeat))) {
-                    // Error
+                	System.out.println("min is not min");
                     return null;
                 }
             }
-        }
+        }*/
         return min;
     }
     

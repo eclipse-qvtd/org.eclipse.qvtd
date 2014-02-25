@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:tree="http://www.eclipse.org/qvt/examples/0.1/Tree">
+  <tree:Node type="simplerdbms" children="/4 /6"/>
+  <tree:Node type="Column" parent="/5">
+    <superTypes>RModelElement</superTypes>
+  </tree:Node>
+  <tree:Node type="ForeignKey" parent="/5">
+    <superTypes>RModelElement</superTypes>
+  </tree:Node>
+  <tree:Node type="Key" parent="/5">
+    <superTypes>RModelElement</superTypes>
+  </tree:Node>
+  <tree:Node type="Schema" parent="/0" children="/5">
+    <superTypes>RModelElement</superTypes>
+  </tree:Node>
+  <tree:Node type="Table" parent="/4" children="/1 /3 /2">
+    <superTypes>RModelElement</superTypes>
+  </tree:Node>
+  <tree:Node type="String" parent="/0"/>
+</xmi:XMI>

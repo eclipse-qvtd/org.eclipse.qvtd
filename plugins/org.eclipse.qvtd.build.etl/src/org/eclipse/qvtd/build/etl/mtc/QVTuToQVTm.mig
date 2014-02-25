@@ -94,6 +94,7 @@ migrate Mapping
                 if (not migrated.domain.exists(ed | ed.name == d.name)) {
                     //d.println("Copy ");
                     migrated.domain.add(emfTool.getECoreUtil().copy(d.equivalent()));
+                    
                 } else {
                     //d.println("Merge ");
                     var local = migrated.domain.selectOne(ed | ed.name == d.name);
@@ -155,9 +156,9 @@ operation QVT!GuardPattern mergeGuardPatterns(merge : QVT!GuardPattern) {
     // it
     //var refinedPatterns = self.getRefinedPatterns(merge, "guard");
     //refinedPatterns.println("refined patterns ");
-    //for (localVar in self.variable) {
-    //    localVar.retypeVar(refinedPatterns);
-    //}
+    for (localVar in self.variable) {
+        localVar.retypeVar(merge);
+    }
     
     // Straight copy non-refined variables
     self.variable.addAll(emfTool.getECoreUtil().copyAll(merge.variable.select(v | not localVarNames.includes(v.name))));
@@ -177,9 +178,9 @@ operation QVT!BottomPattern mergeBottomPatterns(merge : QVT!BottomPattern) {
         
     // Perhaps this shuold be done after all the refinements have been done
     //var refinedPatterns = self.getRefinedPatterns(merge, "bottom");
-    //for (localVar in self.variable) {
-    //    localVar.retypeVar(refinedPatterns);
-    //}
+    for (localVar in self.variable) {
+        localVar.retypeVar(merge);
+    }
     
     
     // Straight copy non-refined variables
@@ -188,9 +189,9 @@ operation QVT!BottomPattern mergeBottomPatterns(merge : QVT!BottomPattern) {
     // The same for realized variables
     var localRealizedVarNames = self.realizedVariable.collect(v | v.name);
     
-    //for (localVar in self.realizedVariable) {
-    //    localVar.retypeRealizedVar(refinedPatterns);
-    //}
+    for (localVar in self.realizedVariable) {
+        localVar.retypeRealizedVar(merge);
+    }
     
     // Straight copy non-refined realized variables
     self.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(merge.realizedVariable.select(v | not localRealizedVarNames.includes(v.name))));

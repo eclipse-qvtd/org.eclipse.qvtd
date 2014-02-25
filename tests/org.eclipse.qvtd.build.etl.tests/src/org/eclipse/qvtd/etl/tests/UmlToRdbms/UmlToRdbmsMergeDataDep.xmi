@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="ASCII"?>
+<graph:Graph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:graph="http://www.eclipse.org/qvt/examples/0.1/Graph">
+  <element xsi:type="graph:Node" outgoing="//@element.6" label="simpleuml" type="input"/>
+  <element xsi:type="graph:Node" incoming="//@element.7" outgoing="//@element.94 //@element.101 //@element.115 //@element.117 //@element.129 //@element.137 //@element.146 //@element.147" label="Attribute" type="input"/>
+  <element xsi:type="graph:Node" incoming="//@element.8" outgoing="//@element.152" label="Association" type="input"/>
+  <element xsi:type="graph:Node" incoming="//@element.9" outgoing="//@element.7 //@element.85 //@element.93 //@element.96 //@element.102 //@element.103 //@element.116 //@element.119 //@element.128 //@element.132 //@element.145 //@element.151 //@element.155" label="Class" type="input"/>
+  <element xsi:type="graph:Node" incoming="//@element.10" outgoing="//@element.68 //@element.80 //@element.88 //@element.125 //@element.138 //@element.141" label="PrimitiveDataType" type="input"/>
+  <element xsi:type="graph:Node" incoming="//@element.6" outgoing="//@element.8 //@element.9 //@element.10 //@element.45 //@element.67 //@element.79 //@element.84 //@element.89 //@element.153" label="Package" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.5" source="//@element.0" type="inputContainment"/>
+  <element xsi:type="graph:Edge" target="//@element.1" source="//@element.3" type="inputContainment"/>
+  <element xsi:type="graph:Edge" target="//@element.2" source="//@element.5" type="inputContainment"/>
+  <element xsi:type="graph:Edge" target="//@element.3" source="//@element.5" type="inputContainment"/>
+  <element xsi:type="graph:Edge" target="//@element.4" source="//@element.5" type="inputContainment"/>
+  <element xsi:type="graph:Node" outgoing="//@element.20" label="umltordbms" type="middle"/>
+  <element xsi:type="graph:Node" incoming="//@element.23 //@element.130 //@element.139 //@element.149" outgoing="//@element.106" label="AttributeToColumn" type="middle"/>
+  <element xsi:type="graph:Node" incoming="//@element.21 //@element.158" outgoing="//@element.167" label="AssociationToForeignKey" type="middle"/>
+  <element xsi:type="graph:Node" incoming="//@element.25 //@element.91" outgoing="//@element.57 //@element.61 //@element.107 //@element.122 //@element.133 //@element.142" label="BooleanToBoolean" type="middle"/>
+  <element xsi:type="graph:Node" incoming="//@element.24 //@element.86" outgoing="//@element.21 //@element.22 //@element.72 //@element.95 //@element.99 //@element.110 //@element.126 //@element.136 //@element.156 //@element.157 //@element.160 //@element.163" label="ClassToTable" type="middle"/>
+  <element xsi:type="graph:Node" incoming="//@element.22 //@element.97 //@element.104 //@element.120" outgoing="//@element.23 //@element.100 //@element.118 //@element.127 //@element.148" label="NonLeafAttribute" type="middle"/>
+  <element xsi:type="graph:Node" incoming="//@element.26 //@element.81" outgoing="//@element.49 //@element.62 //@element.108 //@element.123 //@element.134 //@element.143" label="IntegerToNumber" type="middle"/>
+  <element xsi:type="graph:Node" incoming="//@element.20 //@element.46" outgoing="//@element.24 //@element.25 //@element.26 //@element.27 //@element.42 //@element.48 //@element.53 //@element.56 //@element.60 //@element.66 //@element.71 //@element.78 //@element.83 //@element.90 //@element.154 //@element.166" label="PackageToSchema" type="middle"/>
+  <element xsi:type="graph:Node" incoming="//@element.27 //@element.69" outgoing="//@element.52 //@element.63 //@element.109 //@element.124 //@element.135 //@element.144" label="StringToVarchar" type="middle"/>
+  <element xsi:type="graph:Edge" target="//@element.18" source="//@element.11"/>
+  <element xsi:type="graph:Edge" target="//@element.13" source="//@element.15"/>
+  <element xsi:type="graph:Edge" target="//@element.16" source="//@element.15"/>
+  <element xsi:type="graph:Edge" target="//@element.12" source="//@element.16"/>
+  <element xsi:type="graph:Edge" target="//@element.15" source="//@element.18"/>
+  <element xsi:type="graph:Edge" target="//@element.14" source="//@element.18"/>
+  <element xsi:type="graph:Edge" target="//@element.17" source="//@element.18"/>
+  <element xsi:type="graph:Edge" target="//@element.19" source="//@element.18"/>
+  <element xsi:type="graph:Node" outgoing="//@element.35 //@element.36" label="simplerdbms" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.38 //@element.74 //@element.113 //@element.169" label="Column" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.40 //@element.168" label="ForeignKey" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.39 //@element.76" outgoing="//@element.161" label="Key" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.35 //@element.43" outgoing="//@element.37 //@element.73 //@element.162" label="Schema" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.37 //@element.75" outgoing="//@element.38 //@element.39 //@element.40 //@element.111 //@element.164 //@element.165" label="Table" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.36 //@element.50 //@element.54 //@element.58 //@element.64" outgoing="//@element.112" label="String" type="output"/>
+  <element xsi:type="graph:Edge" target="//@element.32" source="//@element.28" type="outputContainment"/>
+  <element xsi:type="graph:Edge" target="//@element.34" source="//@element.28" type="outputContainment"/>
+  <element xsi:type="graph:Edge" target="//@element.33" source="//@element.32" type="outputContainment"/>
+  <element xsi:type="graph:Edge" target="//@element.29" source="//@element.33" type="outputContainment"/>
+  <element xsi:type="graph:Edge" target="//@element.31" source="//@element.33" type="outputContainment"/>
+  <element xsi:type="graph:Edge" target="//@element.30" source="//@element.33" type="outputContainment"/>
+  <element xsi:type="graph:Node" incoming="//@element.42" outgoing="//@element.43" label="packageToSchema_MR"/>
+  <element xsi:type="graph:Edge" target="//@element.41" source="//@element.18" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.32" source="//@element.41" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.45" outgoing="//@element.46" label="packageToSchema_LM"/>
+  <element xsi:type="graph:Edge" target="//@element.44" source="//@element.5" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.18" source="//@element.44" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.48 //@element.49" outgoing="//@element.50" label="integerToNumber_MR"/>
+  <element xsi:type="graph:Edge" target="//@element.47" source="//@element.18" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.47" source="//@element.17" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.34" source="//@element.47" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.52 //@element.53" outgoing="//@element.54" label="stringToVarchar_MR"/>
+  <element xsi:type="graph:Edge" target="//@element.51" source="//@element.19" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.51" source="//@element.18" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.34" source="//@element.51" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.56 //@element.57" outgoing="//@element.58" label="booleanToBoolean_MR"/>
+  <element xsi:type="graph:Edge" target="//@element.55" source="//@element.18" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.55" source="//@element.14" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.34" source="//@element.55" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.60 //@element.61 //@element.62 //@element.63" outgoing="//@element.64" label="primitiveToName_MR"/>
+  <element xsi:type="graph:Edge" target="//@element.59" source="//@element.18" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.59" source="//@element.14" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.59" source="//@element.17" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.59" source="//@element.19" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.34" source="//@element.59" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.66 //@element.67 //@element.68" outgoing="//@element.69" label="stringToVarchar_LM"/>
+  <element xsi:type="graph:Edge" target="//@element.65" source="//@element.18" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.65" source="//@element.5" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.65" source="//@element.4" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.19" source="//@element.65" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.71 //@element.72 //@element.73" outgoing="//@element.74 //@element.75 //@element.76" label="classToTable_MR"/>
+  <element xsi:type="graph:Edge" target="//@element.70" source="//@element.18" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.70" source="//@element.15" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.70" source="//@element.32" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.29" source="//@element.70" type="output"/>
+  <element xsi:type="graph:Edge" target="//@element.33" source="//@element.70" type="output"/>
+  <element xsi:type="graph:Edge" target="//@element.31" source="//@element.70" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.78 //@element.79 //@element.80" outgoing="//@element.81" label="integerToNumber_LM"/>
+  <element xsi:type="graph:Edge" target="//@element.77" source="//@element.18" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.77" source="//@element.5" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.77" source="//@element.4" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.17" source="//@element.77" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.83 //@element.84 //@element.85" outgoing="//@element.86" label="classToTable_LM"/>
+  <element xsi:type="graph:Edge" target="//@element.82" source="//@element.18" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.82" source="//@element.5" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.82" source="//@element.3" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.15" source="//@element.82" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.88 //@element.89 //@element.90" outgoing="//@element.91" label="booleanToBoolean_LM"/>
+  <element xsi:type="graph:Edge" target="//@element.87" source="//@element.4" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.87" source="//@element.5" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.87" source="//@element.18" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.14" source="//@element.87" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.93 //@element.94 //@element.95 //@element.96" outgoing="//@element.97" label="classComplexAttributes_LM"/>
+  <element xsi:type="graph:Edge" target="//@element.92" source="//@element.3" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.92" source="//@element.1" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.92" source="//@element.15" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.92" source="//@element.3" type="doublePrimaryInput"/>
+  <element xsi:type="graph:Edge" target="//@element.16" source="//@element.92" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.99 //@element.100 //@element.101 //@element.102 //@element.103" outgoing="//@element.104" label="complexAttribute_LM"/>
+  <element xsi:type="graph:Edge" target="//@element.98" source="//@element.15" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.98" source="//@element.16" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.98" source="//@element.1" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.98" source="//@element.3" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.98" source="//@element.3" type="doublePrimaryInput"/>
+  <element xsi:type="graph:Edge" target="//@element.16" source="//@element.98" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.106 //@element.107 //@element.108 //@element.109 //@element.110 //@element.111 //@element.112" outgoing="//@element.113" label="attributeColumns_MR"/>
+  <element xsi:type="graph:Edge" target="//@element.105" source="//@element.12" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.105" source="//@element.14" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.105" source="//@element.17" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.105" source="//@element.19" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.105" source="//@element.15" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.105" source="//@element.33" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.105" source="//@element.34" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.29" source="//@element.105" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.115 //@element.116 //@element.117 //@element.118 //@element.119" outgoing="//@element.120" label="complexAttributeComplexAttributes_LM"/>
+  <element xsi:type="graph:Edge" target="//@element.114" source="//@element.1" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.114" source="//@element.3" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.114" source="//@element.1" type="doublePrimaryInput"/>
+  <element xsi:type="graph:Edge" target="//@element.114" source="//@element.16" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.114" source="//@element.3" type="doublePrimaryInput"/>
+  <element xsi:type="graph:Edge" target="//@element.16" source="//@element.114" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.122 //@element.123 //@element.124 //@element.125 //@element.126 //@element.127 //@element.128 //@element.129" outgoing="//@element.130" label="primitiveAttribute_LM"/>
+  <element xsi:type="graph:Edge" target="//@element.121" source="//@element.14" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.121" source="//@element.17" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.121" source="//@element.19" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.121" source="//@element.4" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.121" source="//@element.15" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.121" source="//@element.16" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.121" source="//@element.3" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.121" source="//@element.1" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.12" source="//@element.121" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.132 //@element.133 //@element.134 //@element.135 //@element.136 //@element.137 //@element.138" outgoing="//@element.139" label="classPrimitiveAttributes_LM"/>
+  <element xsi:type="graph:Edge" target="//@element.131" source="//@element.3" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.131" source="//@element.14" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.131" source="//@element.17" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.131" source="//@element.19" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.131" source="//@element.15" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.131" source="//@element.1" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.131" source="//@element.4" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.12" source="//@element.131" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.141 //@element.142 //@element.143 //@element.144 //@element.145 //@element.146 //@element.147 //@element.148" outgoing="//@element.149" label="complexAttributePrimitiveAttributes_LM"/>
+  <element xsi:type="graph:Edge" target="//@element.140" source="//@element.4" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.140" source="//@element.14" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.140" source="//@element.17" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.140" source="//@element.19" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.140" source="//@element.3" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.140" source="//@element.1" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.140" source="//@element.1" type="doublePrimaryInput"/>
+  <element xsi:type="graph:Edge" target="//@element.140" source="//@element.16" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.12" source="//@element.140" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.151 //@element.152 //@element.153 //@element.154 //@element.155 //@element.156 //@element.157" outgoing="//@element.158" label="associationToForeignKey_LM"/>
+  <element xsi:type="graph:Edge" target="//@element.150" source="//@element.3" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.150" source="//@element.2" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.150" source="//@element.5" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.150" source="//@element.18" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.150" source="//@element.3" type="doublePrimaryInput"/>
+  <element xsi:type="graph:Edge" target="//@element.150" source="//@element.15" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.150" source="//@element.15" type="doublePrimaryInput"/>
+  <element xsi:type="graph:Edge" target="//@element.13" source="//@element.150" type="output"/>
+  <element xsi:type="graph:Node" incoming="//@element.160 //@element.161 //@element.162 //@element.163 //@element.164 //@element.165 //@element.166 //@element.167" outgoing="//@element.168 //@element.169" label="associationToForeignKey_MR"/>
+  <element xsi:type="graph:Edge" target="//@element.159" source="//@element.15" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.159" source="//@element.31" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.159" source="//@element.32" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.159" source="//@element.15" type="doublePrimaryInput"/>
+  <element xsi:type="graph:Edge" target="//@element.159" source="//@element.33" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.159" source="//@element.33" type="doublePrimaryInput"/>
+  <element xsi:type="graph:Edge" target="//@element.159" source="//@element.18" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.159" source="//@element.13" type="input"/>
+  <element xsi:type="graph:Edge" target="//@element.30" source="//@element.159" type="output"/>
+  <element xsi:type="graph:Edge" target="//@element.29" source="//@element.159" type="output"/>
+</graph:Graph>
