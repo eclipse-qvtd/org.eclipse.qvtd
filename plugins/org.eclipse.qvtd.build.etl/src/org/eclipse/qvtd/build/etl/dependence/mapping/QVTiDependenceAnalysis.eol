@@ -1,11 +1,29 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York, Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
 import "OCLExpressionAnalysis.eol";
 
-var varMap : Map;       // (Variable, tree!Node)
+/** The input models */
+// lTree    - Left containment tree
+// mTree    - Left containment tree
+// rTree    - Left containment tree
 
+/** The output models */
+// imGraph  - The inter-mapping dependence graph
+// ddGraph  - The data dependence graph
+// mdGraph  - The merged data dependece graph
+
+var varMap : Map;       // (Variable, tree!Node)
 var inputVarMap : Map;  // (mapping, Set{variable})
 var outputVarMap : Map; // (mapping, Set{realizedVariable})
 var nodeMap : Map;      // (mapping, graph!Node)
-
 var dataNodeMap : Map;      // (??, graph!Node)
 
 // 1. Inter-mapping dependencies
@@ -14,18 +32,15 @@ img.name = "InterMapping";
 // a. For each mapping get the set of input and out put vars.
 for (r in qvti!Transformation.all().first().rule) {
     //r.name.println();
-    inputVarMap.put(r, r.guardPattern.variable
-        .includingAll(r.domain.collect(d | d.guardPattern).flatten().collect(gp | gp.variable).flatten())
-        );
-    outputVarMap.put(r, r.bottomPattern.realizedVariable
-        .includingAll(r.domain.collect(d | d.bottomPattern).flatten().collect(bp | bp.realizedVariable).flatten()) 
-    );
-    // Craete the Graph Node
+    inputVarMap.put(r, r.getInputVars());
+    outputVarMap.put(r, r.getOutputVars());
+    // Craete a Graph Node for each mapping
     var n = new imGraph!Node;
     n.label = r.name;
     nodeMap.put(r, n);
     img.element.add(n);
 }
+
 // b. Create a directed graph in which an edge is created between a node
 // (mapping) A and B, if an input var in B has the same type as an output
 // var on A
@@ -61,7 +76,7 @@ for (r in qvti!Transformation.all().first().rule.select(r | not r.context.isDefi
     var mapN = new ddGraph!Node;
     mapN.label = r.name;
     ddg.element.add(mapN);
-    r.name.println();
+    //r.name.println();
     // a. Containment relations
     // i) input-input
     varMap.clear();
@@ -71,7 +86,7 @@ for (r in qvti!Transformation.all().first().rule.select(r | not r.context.isDefi
         var e = new ddGraph!Edge;
         e.source = inputN;
         e.target = mapN;
-        e.type = ddGraph!EdgeType#input;   
+        e.type = ddGraph!EdgeType#primaryInput;   
         ddg.element.add(e);       
         for (vB in inputVarMap.get(r).excluding(vA)) {
             //vB.println("vB ");
@@ -156,9 +171,101 @@ for (r in qvti!Transformation.all().first().rule.select(r | not r.context.isDefi
             }
         }
     }
-    
 }
+
+// 3. Merge Data dependencies
+// Visit the data dependence graph ir ordered mode: start with mappings with
+// the least number of inputs
+var mdg = new mdGraph!Graph;
+var mergeMap : Map;  // (x, Node)
+  
+for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sortBy(n | n.incoming.size())) {
+    
+    
+    // If an output var is abstract (i.e., doesn't exist in any of the containment
+    // trees) don't add the mapping to the merged graph. Input abstract variables
+    // are allowed because searching for elements of a type returns elements of the
+    // type and all its sub-types.
+    var outputVarNodes = m.outgoing.collect(e | e.target).flatten();
+    
+    m.println("m" + loopCount + " ");
+    outputVarNodes.collect(n | n.label).println();
+    outputVarNodes.forAll(vN | lTree!Node.all().exists(n | n.type == vN.label)
+        or mTree!Node.all().exists(n | n.type == vN.label)
+        or rTree!Node.all().exists(n | n.type == vN.label)
+    ).println();
+
+    if (outputVarNodes.forAll(vN | lTree!Node.all().exists(n | n.type == vN.label)
+            or mTree!Node.all().exists(n | n.type == vN.label)
+            or rTree!Node.all().exists(n | n.type == vN.label))
+            ) {
+            continue;
+        }
+    
+    var inputVarNodes = m.incoming.collect(e | e.source).flatten();
+    
+    // For each input variable, fin the corresponding type in the domain
+    // containment tree and make the connection.
+    
+    for (vN in inputVarNodes) {
+        var typeNode : mdGraph!Node;
+        if (lTree!Node.all().one(n | n.type == vN.label)) {
+            typeNode = mdg.getNodeForNode(vN);
+        } else if (mTree!Node.all().one(n | n.type == vN.label)) {
+            typeNode = mdg.getNodeForNode(vN);
+        } else if (rTree!Node.all().one(n | n.type == vN.label)) {
+            typeNode = mdg.getNodeForNode(vN);
+        } else {
+            
+        }
+
+    }
+}
+
 "Done".println();
+
+operation qvti!Rule getInputVars() : Set {
+    
+    var vars;
+    vars = self.guardPattern.variable
+        .includingAll(self.domain.collect(d | d.guardPattern).flatten().collect(gp | gp.variable).flatten());
+    for (l in self.local) {
+        vars = vars.includingAll(l.getInputVars());
+    }
+    return vars;
+}
+
+operation qvti!Rule getOutputVars() : Set {
+    
+    var vars;
+    vars = self.bottomPattern.realizedVariable
+        .includingAll(self.domain.collect(d | d.bottomPattern).flatten().collect(bp | bp.realizedVariable).flatten());
+    for (l in self.local) {
+        vars = vars.includingAll(l.getOutputVars());
+    }
+    return vars;
+}
+
+
+operation mdGraph!Graph getNodeForNode(x : ddGraph!Node) : mdGraph!Node {
+    var n;
+    if (mergeMap.containsKey(x)) {
+        n = mergeMap.get(x);
+    } else {
+        n = new mdGraph!Node;
+        n.label = x.label;
+        switch (x.type) {
+	        case ddGraph!NodeType#mapping : n.type = mdGraph!NodeType#mapping;
+	        case ddGraph!NodeType#input : n.type = mdGraph!NodeType#input;
+	        case ddGraph!NodeType#middle : n.type = mdGraph!NodeType#middle;
+	        case ddGraph!NodeType#output : n.type = mdGraph!NodeType#output;
+	    }
+        mergeMap.put(x, n);
+        self.element.add(n);
+    }
+    return n;
+}
+
 
 operation ddGraph!Graph getNodeForVar(v : QVT!Variable) : ddGraph!Node {
     var n;
@@ -263,9 +370,9 @@ operation qvti!Variable hasMiddleRelation(varB : qvti!Variable) : Boolean {
                     .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
                 // Find if the navigated property is a containment opposite.
                 var prop = a.targetProperty;
-                a.toString().println("Assignment ");
-                self.println("var A ");
-                varB.println("var B ");
+                //a.toString().println("Assignment ");
+                //self.println("var A ");
+                //varB.println("var B ");
                 //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
                 //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
                 if (a.slotExpression.referredVariable == self and 
@@ -279,22 +386,6 @@ operation qvti!Variable hasMiddleRelation(varB : qvti!Variable) : Boolean {
     }
     return false;
 }
-
-
-// 2. Data dependence graph.
-nodeMap.clear();
-// Do a dfs of the containment tree and find the mappings that are suitable of
-// invocation at each node of the tree
-var tNodeMapping : Map; // (tNode, Set {Mappings}) Mappings that can be invoked 
-
-var ddg = new ddGraph!Graph;
-var rootDd = new ddGraph!Node;
-rootDd.label = qvti!Transformation.all().first().name;
-ddg.element.add(rootDd);
-
-visitR(rTree!Node.all().select(n | not n.parent.isDefined()), ddg, rootDd);
-
-
 
 
 operation visitR(roots : Collection, ddg : ddGraph!Graph, rootDd : ddGraph!Node) {
@@ -364,31 +455,6 @@ operation rTree!Node getGraphNode() : ddGraph!Node  {
     }
 }
 
-
-visitL(lTree!Node.all().select(n | not n.parent.isDefined()), ddg, rootDd);
-visitR(rTree!Node.all().select(n | not n.parent.isDefined()), ddg, rootDd);
-//visitL(mTree!Node.all().select(n | not n.parent.isDefined()), ddg, rootDd);
-//visitR(mTree!Node.all().select(n | not n.parent.isDefined()), ddg, rootDd);
-
-// Mix the containment tree info with the input and output information (taking
-// into consideration the containment relations between them)
-for (tn in tNodeMapping.keySet()) {
-    var gn = new ddGraph!Node;
-    gn.label = tn.elementName;
-    gn.color = ddGraph!Color#lightBlue;
-    ddg.element.add(gn);
-    for (m in tNodeMapping.get(tn)) {
-        var gnM = new ddGraph!Node;
-        gnM.label = m.name;
-        gnM.color = ddGraph!Color#orange;
-        ddg.element.add(gnM);
-        var e = new ddGraph!Edge;
-        e.source = gn;
-        e.target = gnM;
-        ddg.element.add(e);
-    }
-}
-"Done".println();
 
 operation visitL(roots : Collection, ddg : ddGraph!Graph, rootDd : ddGraph!Node) {
     for (root in roots) {

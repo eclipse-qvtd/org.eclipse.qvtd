@@ -27,12 +27,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EdgeType">
-    <eLiterals name="input" literal="input"/>
-    <eLiterals name="output" value="1"/>
-    <eLiterals name="middleContainment" value="2"/>
-    <eLiterals name="inputContainment" value="3"/>
-    <eLiterals name="outputContainment" value="4"/>
-    <eLiterals name="middleRelation" value="5"/>
+    <eLiterals name="middleContainment"/>
+    <eLiterals name="inputContainment" value="1"/>
+    <eLiterals name="outputContainment" value="2"/>
+    <eLiterals name="middleRelation" value="3"/>
+    <eLiterals name="primaryInput" value="4" literal="input"/>
+    <eLiterals name="derivedInput" value="5"/>
+    <eLiterals name="output" value="5"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="NodeType">
     <eLiterals name="mapping"/>
