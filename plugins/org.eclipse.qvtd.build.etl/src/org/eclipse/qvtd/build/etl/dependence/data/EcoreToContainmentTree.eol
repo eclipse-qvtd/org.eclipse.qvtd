@@ -35,8 +35,8 @@ operation mm!EPackage iterativeDFS() {
 	var noChangeCount : Integer = 0;
 	
 	var parentNode = new tree!Node;
-    //parentNode.data = self;
-    parentNode.type = self.name;
+    
+    parentNode.EClassifierName = self.name;
 	maxDepth = 1;
     
     while (iterate) {
@@ -81,7 +81,7 @@ operation mm!EClassifier dfs(depth, maxDepth, parentNode) : Boolean {
 	        } else { 
 	            n = new tree!Node;
 	            //n.data.println();
-	            n.type = self.name;
+	            n.EClassifierName = self.name;
 	            if (self.isTypeOf(mm!EClass)) {
 	               n.superTypes = self.eSuperTypes.select(st | st.abstract).collect(st | st.name).flatten();
 	            }
