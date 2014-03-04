@@ -29,6 +29,7 @@ package org.eclipse.qvtd.codegen.qvti.java;
  * </copyright>
  */
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -181,7 +182,9 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	public void saveSourceFile(@NonNull String savePath) throws IOException {
 		String javaCodeSource = generateClassFile();
 		String qualifiedName = getQualifiedName();
-		String fileName = savePath + qualifiedName.replace('.', '/') + ".java";
+		String saveDir = savePath + qualifiedName.replace('.', '/');
+		String fileName = saveDir + ".java";
+		new File(saveDir).getParentFile().mkdirs();
 		Writer writer = new FileWriter(fileName);
 		writer.append(javaCodeSource);
 		writer.close();
