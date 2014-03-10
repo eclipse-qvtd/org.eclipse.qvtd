@@ -1,0 +1,215 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+import "../helpers/DataDependenceGraphHelpers.eol";
+
+/**
+ * Mapping Data Dependencies. A set of EOL operations to perform mapping data
+ * dependence analysis for a QVT transformation.
+ *
+ * @cond ddg  A data dependence graph
+ * @cond QVT  A QVTx AST model
+ * @cond config The QVT transformation configuration
+ */
+
+/**
+ * Analysis of the data dependencies of mappings. Creates a directed graph in
+ * which nodes are mappings and variable types. An edge is created between a
+ * Type and a mapping if there is either an input or output variable of the
+ * Type in the mapping. Additional edges are created bewteen Types to represent
+ * containment relations in the metamodel that owns the Type. Each mapping is
+ * analyzed individualy.
+ *
+ * @context QVT!Transformation  The transformation being analyzed
+ * @param graph The graph to populate
+ * @param inputVarMap   The map of mapings to input variables
+ * @param outputVarMap  The map of mapings to output variables
+ */
+operation QVT!Transformation mappingDataDependencies(graph : ddg!Graph, inputVarMap : Map, outputVarMap : Map) {
+    var ruleMap : Map;  //!< Cache nodes for mappings nodes (AST, graph!Node)
+    var varMap : Map;  //!< Cache nodes for mappings nodes (AST, graph!Node)
+    
+    for (r in self.rule.select(r | not r.context.isDefined())) {
+        var ruleNode = graph.getNodeForQvtAstNode(r, ruleMap);
+        varMap.clear();
+	    // Input variables relations
+	    for (vA in inputVarMap.get(r)) {
+	        //vA.println("vA ");
+	        var e = graph.owningModel().createInstance("Edge");
+	        var vaNode = graph.getNodeForQvtAstNode(vA, varMap); 
+	        e.source = vaNode;
+	        e.target = ruleNode;
+	        //e.type = graph.owningModel().getEnumerationValue("EdgeType", "primaryInput");
+	        e.type = ddg!EdgeType#primaryInput;   
+	        graph.element.add(e);       
+            vA.variableRelations(graph, inputVarMap.get(r).excluding(vA), varMap);
+	    }
+	    // Output variables relations
+	    for (vA in outputVarMap.get(r)) {
+	        //vA.println("vA ");
+	        var vaNode = graph.getNodeForQvtAstNode(vA, varMap);
+	        var e = graph.owningModel().createInstance("Edge");
+	        e.source = ruleNode;
+	        e.target = vaNode;
+	        e.type = ddg!EdgeType#output;   
+	        graph.element.add(e);       
+	        vA.variableRelations(graph, outputVarMap.get(r).excluding(vA), varMap);
+	    }
+	    // Input to Output variable relations
+	    for (vIn in inputVarMap.get(r)) {
+	        //vA.println("vA ");
+	        vIn.variableRelations(graph, outputVarMap.get(r), varMap);
+	    }
+	}
+}
+
+
+/**
+ * Merge the data dependencies of mappings. The merged dependencies takes into
+ * consideration the containment relations of variables (from the metamodels
+ * containment trees) and merges all the dependencies into a connected graph.
+ *
+ * @see mappingDataDependencies
+ * @context ddg!Graph  The data dependencies graph being merged
+ * @param mergeGraph The graph (merged) to populate
+ * @param containmentTrees   The map of domains (metamodels) and their containment trees
+ */
+operation ddg!Graph mergedMappingDataDependencies(mergeGraph : ddg!Graph, containmentTrees : Map) {
+    
+    // Import the tree nodes to the merged graph
+    var mergeMap : Map;  // //!< Cache nodes for nodes (AST, graph!Node)(x, Node)
+    for(key in containmentTrees.keySet()) {
+        mergeGraph.importContainmentTree(containmentTrees.get(key), key, mergeMap);
+    }
+    for (m in self.element.select(n | n.type == self.owningModel().getEnumerationValue("NodeType", "mapping")).sortBy(n | n.incoming.size())) {
+	    var outputVarNodes = m.outgoing.collect(e | e.target).flatten();
+	    var inputVarNodes = m.incoming.collect(e | e.source).flatten();
+	    
+	    // For each variable, find the corresponding type in the domain containment tree
+	    // and make the connection. For input variables, if the type is abstrac (does 
+	    //  not exist in the tree), connect it to all its subtypes.
+	    var mappingNode = mergeGraph.getNodeCopy(m, mergeMap);
+	    for (vN in inputVarNodes) {
+	        var sources : Collection;
+	        for(key in containmentTrees.keySet()) {
+		        sources = containmentTrees.get(key).select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label)); 
+		        if (not sources.isEmpty()) {
+                    break;
+		        }
+		    }
+	        if (sources.isEmpty()) {
+	            vN.errln("Not valid type found for: "); // Error. WE should never get here!
+	        }
+	        for (s in sources) {
+	            var e = mergeGraph.owningModel().createInstance("Edge");
+	            // If there is another edge to the input, is a double input
+	            if (mergeGraph.element.exists(e : ddg!Edge| e.source == mergeMap.get(s) and e.target == mappingNode)) {
+	                e.type = ddg!EdgeType#doublePrimaryInput;
+	            } else {
+	                e.type = ddg!EdgeType#primaryInput;
+	            }
+	            e.source = mergeMap.get(s);
+	            e.target = mappingNode;
+	            mergeGraph.element.add(e);
+	        }
+	    }
+	    for (vN in outputVarNodes) {
+	        var targets : Collection;
+	        for(key in containmentTrees.keySet()) {
+                targets = containmentTrees.get(key).select(n | (n.EClassifierName == vN.label)); 
+                if (not targets.isEmpty()) {
+                    break;
+                }
+            }
+	        if (targets.isEmpty()) {
+	            vN.errln("Not valid type found for: ");    // Error. WE should never get here!
+	        }
+	        for (t in targets) {
+	            var e = mergeGraph.owningModel().createInstance("Edge");
+	            e.type = ddg!EdgeType#output;
+	            e.source = mappingNode;
+	            e.target = mergeMap.get(t);
+	            mergeGraph.element.add(e);
+	        }
+	    }
+	}
+}
+
+/**
+ * Reduced [merged] data dependencies of mappings. The reduced dependencies
+ * takes the same considerations as the merged data dependencies and
+ * additionaly analyses the maping predicates to identfy variables that can be
+ * derived from non containment associations. 
+ *
+ * @see mergedMappingDataDependencies
+ * @context ddg!Graph  The data dependencies graph being merged
+ * @param mergeGraph The graph (merged) to populate
+ * @param containmentTrees   The map of domains (metamodels) and their containment trees
+ */
+operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph, containmentTrees : Map) {
+    // Import the tree nodes to the merged graph
+    var mergeMap : Map;  // //!< Cache nodes for nodes (AST, graph!Node)(x, Node)
+    for(key in containmentTrees.keySet()) {
+        mergeGraph.importContainmentTree(containmentTrees.get(key), key, mergeMap);
+    }
+    for (m in self.element.select(n | n.type == ddg!NodeType#mapping).sortBy(n | n.incoming.size())) {
+        var outputVarNodes = m.outgoing.collect(e | e.target).flatten();
+        var inputVarNodes = m.incoming.collect(e | e.source).flatten();
+        
+        // For each variable, find the corresponding type in the domain containment tree
+        // and make the connection. For input variables, if the type is abstrac (does 
+        //  not exist in the tree), connect it to all its subtypes.
+        var mappingNode = mergeGraph.getNodeCopy(m, mergeMap);
+        for (vN in inputVarNodes) {
+            var sources : Collection;
+            for(key in containmentTrees.keySet()) {
+                sources = containmentTrees.get(key).select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label)); 
+                if (not sources.isEmpty()) {
+                    break;
+                }
+            }
+            if (sources.isEmpty()) {
+                vN.errln("Not valid type found for: "); // Error. WE should never get here!
+            }
+            for (s in sources) {
+                var e = mergeGraph.owningModel().createInstance("Edge");
+                // If there is another edge to the input, is a double input
+                if (mergeGraph.element.exists(e | e.hasProperty("source") and e.source == mergeMap.get(s) and e.target == mappingNode)) {
+                    e.type = ddg!EdgeType#doublePrimaryInput;
+                } else {
+                    e.type = ddg!EdgeType#primaryInput;
+                }
+                e.source = mergeMap.get(s);
+                e.target = mappingNode;
+                mergeGraph.element.add(e);
+            }
+        }
+        for (vN in outputVarNodes) {
+            var targets : Collection;
+            for(key in containmentTrees.keySet()) {
+                targets = containmentTrees.get(key).select(n | (n.EClassifierName == vN.label)); 
+                if (not targets.isEmpty()) {
+                    break;
+                }
+            }
+            if (targets.isEmpty()) {
+                vN.errln("Not valid type found for: ");    // Error. WE should never get here!
+            }
+            for (t in targets) {
+                var e = mergeGraph.owningModel().createInstance("Edge");
+                e.type = ddg!EdgeType#output;
+                e.source = mappingNode;
+                e.target = mergeMap.get(t);
+                mergeGraph.element.add(e);
+            }
+        }
+    }
+}
+

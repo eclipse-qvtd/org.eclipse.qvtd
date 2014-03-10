@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 The University of York, Willink Transformations and others.
+ * Copyright (c) 2013 The University of York and Willink Transformations.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,12 +13,12 @@ import "OCLExpressionAnalysis.eol";
 /** The input models */
 // lTree    - Left containment tree
 // mTree    - Left containment tree
-// rTree    - Left containment tree
 
 /** The output models */
 // imGraph  - The inter-mapping dependence graph
 // ddGraph  - The data dependence graph
 // mdGraph  - The merged data dependece graph
+// rdGraph  - The reduced data dependece graph
 
 var varMap : Map;       // (Variable, tree!Node)
 var inputVarMap : Map;  // (mapping, Set{variable})
@@ -26,20 +26,17 @@ var outputVarMap : Map; // (mapping, Set{realizedVariable})
 var nodeMap : Map;      // (mapping, graph!Node)
 var dataNodeMap : Map;      // (??, graph!Node)
 
-// 1. Inter-mapping dependencies
-var img = new imGraph!Graph;
-img.name = "InterMapping";
-// a. For each mapping get the set of input and out put vars.
+// For each mapping get the set of input and out put vars.
 for (r in qvti!Transformation.all().first().rule) {
     //r.name.println();
     inputVarMap.put(r, r.getInputVars());
     outputVarMap.put(r, r.getOutputVars());
-    // Craete a Graph Node for each mapping
-    var n = new imGraph!Node;
-    n.label = r.name;
-    nodeMap.put(r, n);
-    img.element.add(n);
 }
+
+// 1. Inter-mapping dependencies
+var img = new imGraph!Graph;
+img.name = "InterMapping";
+qvti!Transformation.all().first().interMappingDependencies(img, inputVarMap, outputVarMap);
 
 // b. Create a directed graph in which an edge is created between a node
 // (mapping) A and B, if an input var in B has the same type as an output
@@ -75,8 +72,9 @@ var varMap : Map;   // (var, ddGraph!Node)
 for (r in qvti!Transformation.all().first().rule.select(r | not r.context.isDefined())) {
     var mapN = new ddGraph!Node;
     mapN.label = r.name;
+    //mapN.qvtAstNode = r;
     ddg.element.add(mapN);
-    //r.name.println();
+    r.name.println();
     // a. Containment relations
     // i) input-input
     varMap.clear();
@@ -181,7 +179,7 @@ var mergeMap : Map;  // (x, Node)
 // Copy all the containment trees to the mdGraph
 importContainmentTree(mdg, lTree!Node.all(), mdGraph!NodeType#input, mdGraph!EdgeType#inputContainment);
 importContainmentTree(mdg, mTree!Node.all(), mdGraph!NodeType#middle, mdGraph!EdgeType#middleContainment);
-importContainmentTree(mdg, rTree!Node.all(), mdGraph!NodeType#output, mdGraph!EdgeType#outputContainment);
+//importContainmentTree(mdg, rTree!Node.all(), mdGraph!NodeType#output, mdGraph!EdgeType#outputContainment);
 
 for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sortBy(n | n.incoming.size())) {
     // If an output var is abstract (i.e., doesn't exist in any of the containment
@@ -189,12 +187,7 @@ for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sort
     // are allowed because searching for elements of a type returns elements of the
     // type and all its sub-types.
     var outputVarNodes = m.outgoing.collect(e | e.target).flatten();
-    if (not outputVarNodes.forAll(vN | lTree!Node.all().exists(n | n.type == vN.label)
-            or mTree!Node.all().exists(n | n.type == vN.label)
-            or rTree!Node.all().exists(n | n.type == vN.label))
-            ) {
-            continue;
-        }
+    
     
     var inputVarNodes = m.incoming.collect(e | e.source).flatten();
     // For each input variable, find the corresponding type in the domain
@@ -203,16 +196,13 @@ for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sort
     //m.println("m" + loopCount + " ");
     var mappingNode = getNodeForNode(mdg, m);
     for (vN in inputVarNodes) {
-        var sources = lTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label)); 
+        var sources = lTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label)); 
         if (sources.isEmpty()) {
-            sources = mTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
-        }
-        if (sources.isEmpty()) {
-            sources = rTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
+            sources = mTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label));
         }
         if (sources.isEmpty()) {
             // Error. WE should never get here!
-            vN.errln("Not valid type found for: ");
+            vN.errln("Merge input Not valid type found for: ");
         }
         for (s in sources) {
             var e = new mdGraph!Edge;
@@ -228,16 +218,14 @@ for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sort
         }
     }
     for (vN in outputVarNodes) {
-        var targets = lTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label)); 
+        var targets = lTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label)); 
         if (targets.isEmpty()) {
-            targets = mTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
+            targets = mTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label));
         }
-        if (targets.isEmpty()) {
-            targets = rTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
-        }
+        
         if (targets.isEmpty()) {
             // Error. WE should never get here!
-            vN.errln("Not valid type found for: ");
+            vN.errln("Merge output Not valid type found for: ");
         }
         for (t in targets) {
             var e = new mdGraph!Edge;
@@ -249,6 +237,7 @@ for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sort
     }
 }
 
+
 //4. Reduced data dependencies
 var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
 var rdg = new rdGraph!Graph;
@@ -257,22 +246,24 @@ var rdg = new rdGraph!Graph;
 // middle relation with other input vars
 mergeMap.clear();
 // Copy all the containment trees to the mdGraph
-importContainmentTree(rdg, lTree!Node.all(), mdGraph!NodeType#input, mdGraph!EdgeType#inputContainment);
-importContainmentTree(rdg, mTree!Node.all(), mdGraph!NodeType#middle, mdGraph!EdgeType#middleContainment);
-importContainmentTree(rdg, rTree!Node.all(), mdGraph!NodeType#output, mdGraph!EdgeType#outputContainment);
+importContainmentTree(rdg, lTree!Node.all(), rdGraph!NodeType#input, rdGraph!EdgeType#inputContainment);
+importContainmentTree(rdg, mTree!Node.all(), rdGraph!NodeType#middle, rdGraph!EdgeType#middleContainment);
+//importContainmentTree(rdg, rTree!Node.all(), rdGraph!NodeType#output, rdGraph!EdgeType#outputContainment);
 
 for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sortBy(n | n.incoming.size())) {
     // If an output var is abstract (i.e., doesn't exist in any of the containment
     // trees) don't add the mapping to the merged graph. Input abstract variables
     // are allowed because searching for elements of a type returns elements of the
     // type and all its sub-types.
+    
     var outputVarNodes = m.outgoing.collect(e | e.target).flatten();
-    if (not outputVarNodes.forAll(vN | lTree!Node.all().exists(n | n.type == vN.label)
-            or mTree!Node.all().exists(n | n.type == vN.label)
-            or rTree!Node.all().exists(n | n.type == vN.label))
-            ) {
-            continue;
-        }
+    
+    //if (not outputVarNodes.forAll(vN | lTree!Node.all().exists(n | n.type == vN.label)
+    //       or mTree!Node.all().exists(n | n.type == vN.label)
+    //        or rTree!Node.all().exists(n | n.type == vN.label))
+    //        ) {
+    //        continue;
+    //    }
     
     var inputVarNodes = m.incoming.collect(e | e.source).flatten();
     // For each input variable, find the corresponding type in the domain
@@ -281,33 +272,48 @@ for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sort
     //m.println("m" + loopCount + " ");
     var mappingNode = getNodeForNode(rdg, m);
     for (vN in inputVarNodes) {
-        var sources = lTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label)); 
+        var sources = lTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label)); 
         if (sources.isEmpty()) {
-            sources = mTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
-        }
-        if (sources.isEmpty()) {
-            sources = rTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
+            sources = mTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label));
         }
         if (sources.isEmpty()) {
             // Error. WE should never get here!
-            vN.errln("Not valid type found for: ");
+            vN.errln("Reduced input Not valid type found for: ");
         }
         for (s in sources) {
             var e = new rdGraph!Edge;
-            // If there is another edge to the input, is a double input
+            var double : Boolean = false;   // If there is another edge to the input, is a double input
+            var derived : Boolean = false;
+            
+            // Identify derived input variables. Derived variables are variables that can be assigned
+            // from other variables, e.g. ownership or middle model reference
+            // 1. 1st candidates are variables that don't have outgoing edges to other variable (the
+            // same as if all the edges go to the  mapping)
+            //if (vN.outgoing.exists(o | o.target = m)) {
+            //    // 2. From these, look for any predicates that can help resolve them
+            //    var mapping = qvti!Mapping.all().selectOne(om | om.name == m.label );
+            //    // a. Get all the simple attribute navigation predicates
+            //    for (p in mapping.guardPattern.predicate.
+            //            includingAll(m.domain.collect(d | d.guardPattern).flatten()).
+            //                select(p | p.isSimpleAttributeNavigation() and p.isArgumentVariable())) {
+            //        //for (vN.outgoing.exists(o | o.target = m))
+            //    }
+            //} else {
+            //    derived = true;
+            // }
             if (rdGraph!Edge.all().exists(e | e.source == mergeMap.get(s) and e.target == mappingNode)) {
                 if (rdGraph!Edge.all().select(e | e.source == mergeMap.get(s) and e.target == mappingNode)
                         .exists(o | o.type == mdGraph!EdgeType#derivedInput)) {
-                    e.type = mdGraph!EdgeType#doubleDerivedInput;
+                    e.type = rdGraph!EdgeType#doubleDerivedInput;
                 } else {
-                    e.type = mdGraph!EdgeType#doublePrimaryInput;
+                    e.type = rdGraph!EdgeType#doublePrimaryInput;
                 }
             } else {
                 // Differentiate between primary and derived
                 if (vN.outgoing.exists(o | inputVarNodes.includes(o.target))) {
-                    e.type = mdGraph!EdgeType#derivedInput;
+                    e.type = rdGraph!EdgeType#derivedInput;
                 } else {
-                    e.type = mdGraph!EdgeType#primaryInput;
+                    e.type = rdGraph!EdgeType#primaryInput;
                 }
             }
             e.source = mergeMap.get(s);
@@ -316,16 +322,13 @@ for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sort
         }
     }
     for (vN in outputVarNodes) {
-        var targets = lTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label)); 
+        var targets = lTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label)); 
         if (targets.isEmpty()) {
-            targets = mTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
-        }
-        if (targets.isEmpty()) {
-            targets = rTree!Node.all().select(n | (n.type == vN.label) or n.superTypes.includes(vN.label));
+            targets = mTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label));
         }
         if (targets.isEmpty()) {
             // Error. WE should never get here!
-            vN.errln("Not valid type found for: ");
+            vN.errln("Reduced output Not valid type found for: ");
         }
         for (t in targets) {
             var e = new rdGraph!Edge;
@@ -344,7 +347,7 @@ for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sort
 operation importContainmentTree(graph, treeNodes, type, relation) {
     for (tn in treeNodes) {
         var n = graph.owningModel().createInstance("Node");
-        n.label = tn.type;
+        n.label = tn.EClassifierName;
         n.type = type;
         mergeMap.put(tn, n);
         graph.element.add(n);
@@ -359,28 +362,6 @@ operation importContainmentTree(graph, treeNodes, type, relation) {
             graph.element.add(e);
         }
     }  
-}
-
-operation qvti!Rule getInputVars() : Set {
-    
-    var vars;
-    vars = self.guardPattern.variable
-        .includingAll(self.domain.collect(d | d.guardPattern).flatten().collect(gp | gp.variable).flatten());
-    for (l in self.local) {
-        vars = vars.includingAll(l.getInputVars());
-    }
-    return vars;
-}
-
-operation qvti!Rule getOutputVars() : Set {
-    
-    var vars;
-    vars = self.bottomPattern.realizedVariable
-        .includingAll(self.domain.collect(d | d.bottomPattern).flatten().collect(bp | bp.realizedVariable).flatten());
-    for (l in self.local) {
-        vars = vars.includingAll(l.getOutputVars());
-    }
-    return vars;
 }
 
 
@@ -411,6 +392,7 @@ operation ddGraph!Graph getNodeForVar(v : QVT!Variable) : ddGraph!Node {
     } else {
         n = new ddGraph!Node;
         n.label = v.type.name;
+        //n.qvtAstNode = v;
         varMap.put(v, n);
         if (v.oppositePattern().area.name == "middle") {
             n.type = ddGraph!NodeType#middle;
@@ -562,6 +544,7 @@ operation qvti!Mapping getGraphNode() : ddGraph!Node  {
     } else {
         var gn = new ddGraph!Node;
 	    gn.label = self.type;
+	    //gn.qvtAstNode = self;
 	    gn.color = ddGraph!Color#orange;
 	    ddg.element.add(gn); 
 	    dataNodeMap.put(self, gn);
@@ -574,6 +557,7 @@ operation qvti!CoreDomain getGraphNode() : ddGraph!Node  {
     } else {
         var gn = new ddGraph!Node;
         gn.label = self.type;
+        //gn.qvtAstNode = self;
         gn.color = ddGraph!Color#orange;
         ddg.element.add(gn);
         dataNodeMap.put(self, gn); 

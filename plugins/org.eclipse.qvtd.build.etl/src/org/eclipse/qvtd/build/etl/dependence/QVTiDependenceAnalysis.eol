@@ -1,0 +1,453 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+import "OCLExpressionAnalysis.eol";
+import "InterMappingDependencies.eol";
+import "MappingDataDependencies.eol";
+
+/** The input models */
+// lTree    - Left containment tree
+// mTree    - Left containment tree
+// rTree    - Left containment tree
+
+/** The output models */
+// imGraph  - The inter-mapping dependence graph
+// ddGraph  - The data dependence graph
+// mdGraph  - The merged data dependece graph
+// rdGraph  - The reduced data dependece graph
+
+var varMap : Map;       // (Variable, tree!Node)
+var inputVarMap : Map;  // (mapping, Set{variable})
+var outputVarMap : Map; // (mapping, Set{realizedVariable})
+var nodeMap : Map;      // (mapping, graph!Node)
+var dataNodeMap : Map;      // (??, graph!Node)
+
+// For each mapping get the set of input and out put vars.
+for (r in qvti!Transformation.all().first().rule) {
+    //r.name.println();
+    inputVarMap.put(r, r.getInputVars());
+    outputVarMap.put(r, r.getOutputVars());
+}
+
+// 1. Inter-mapping dependencies
+var img = new imGraph!Graph;
+img.name = "InterMapping";
+qvti!Transformation.all().first().interMappingDependencies(img, inputVarMap, outputVarMap);
+
+
+
+// 2. Mapping data dependendence
+var mdd = new ddGraph!Graph;
+mdd.name = "MappingDataDependences";
+qvti!Transformation.all().first().mappingDataDependencies(mdd, inputVarMap, outputVarMap);
+
+
+// 3. Merge Data dependencies
+// Visit the data dependence graph ir ordered mode: start with mappings with
+// the least number of inputs
+var mdg = new mdGraph!Graph;
+// Create the map of containment trees from the config?
+var containmentTrees : Map;
+containmentTrees.put("l", lTree!Node.all());
+containmentTrees.put("m", mTree!Node.all());
+containmentTrees.put("r", rTree!Node.all());
+mdd.mergedMappingDataDependencies(mdg, containmentTrees);
+
+
+//4. Reduced data dependencies
+var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
+var rdg = new rdGraph!Graph;
+
+// Analize the dependencies to identify which input variables can be derived from others
+// primaryInputs are only the ones that don't have a containment relation or a 
+// middle relation with other input vars
+//mdd.reducedMergedMappingDataDependencies(rdg);
+
+/*
+for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sortBy(n | n.incoming.size())) {
+    // If an output var is abstract (i.e., doesn't exist in any of the containment
+    // trees) don't add the mapping to the merged graph. Input abstract variables
+    // are allowed because searching for elements of a type returns elements of the
+    // type and all its sub-types.
+    
+    var outputVarNodes = m.outgoing.collect(e | e.target).flatten();
+    
+    //if (not outputVarNodes.forAll(vN | lTree!Node.all().exists(n | n.type == vN.label)
+    //       or mTree!Node.all().exists(n | n.type == vN.label)
+    //        or rTree!Node.all().exists(n | n.type == vN.label))
+    //        ) {
+    //        continue;
+    //    }
+    
+    var inputVarNodes = m.incoming.collect(e | e.source).flatten();
+    // For each input variable, find the corresponding type in the domain
+    // containment tree and make the connection. If the type is abstrac (does not 
+    // exist in the tree), connect it to all its subtypes.
+    //m.println("m" + loopCount + " ");
+    var mappingNode = getNodeForNode(rdg, m);
+    for (vN in inputVarNodes) {
+        var sources = lTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label)); 
+        if (sources.isEmpty()) {
+            sources = mTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label));
+        }
+        if (sources.isEmpty()) {
+            sources = rTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label));
+        }
+        if (sources.isEmpty()) {
+            // Error. WE should never get here!
+            vN.errln("Not valid type found for: ");
+        }
+        for (s in sources) {
+            var e = new rdGraph!Edge;
+            var double : Boolean = false;   // If there is another edge to the input, is a double input
+            var derived : Boolean = false;
+            
+            // Identify derived input variables. Derived variables are variables that can be assigned
+            // from other variables, e.g. ownership or middle model reference
+             
+            // 1. 1st candidates are variables that don't have outgoing edges to other variable (the
+            // same as if all the edges go to the  mapping)
+            //if (vN.outgoing.exists(o | o.target = m)) {
+            //    // 2. From these, look for any predicates that can help resolve them
+            //    var mapping = qvti!Mapping.all().selectOne(om | om.name == m.label );
+            //    // a. Get all the simple attribute navigation predicates
+            //    for (p in mapping.guardPattern.predicate.
+            //           includingAll(m.domain.collect(d | d.guardPattern).flatten()).
+            //                select(p | p.isSimpleAttributeNavigation() and p.isArgumentVariable())) {
+            //        //for (vN.outgoing.exists(o | o.target = m))
+            //    }
+            //} else {
+            //    derived = true;
+            // }
+            
+            if (rdGraph!Edge.all().exists(e | e.source == mergeMap.get(s) and e.target == mappingNode)) {
+                if (rdGraph!Edge.all().select(e | e.source == mergeMap.get(s) and e.target == mappingNode)
+                        .exists(o | o.type == mdGraph!EdgeType#derivedInput)) {
+                    e.type = rdGraph!EdgeType#doubleDerivedInput;
+                } else {
+                    e.type = rdGraph!EdgeType#doublePrimaryInput;
+                }
+            } else {
+                // Differentiate between primary and derived
+                if (vN.outgoing.exists(o | inputVarNodes.includes(o.target))) {
+                    e.type = rdGraph!EdgeType#derivedInput;
+                } else {
+                    e.type = rdGraph!EdgeType#primaryInput;
+                }
+            }
+            e.source = mergeMap.get(s);
+            e.target = mappingNode;
+            rdg.element.add(e);
+        }
+    }
+    for (vN in outputVarNodes) {
+        var targets = lTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label)); 
+        if (targets.isEmpty()) {
+            targets = mTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label));
+        }
+        if (targets.isEmpty()) {
+            targets = rTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label));
+        }
+        if (targets.isEmpty()) {
+            // Error. WE should never get here!
+            vN.errln("Not valid type found for: ");
+        }
+        for (t in targets) {
+            var e = new rdGraph!Edge;
+            e.type = rdGraph!EdgeType#output;
+            e.source = mappingNode;
+            e.target = mergeMap.get(t);
+            rdg.element.add(e);
+        }
+    }
+}
+*/
+"Done".println();
+
+/* ==================================================================== */
+
+
+
+
+
+
+
+operation ddGraph!Graph getNodeForVar(v : QVT!Variable) : ddGraph!Node {
+    var n;
+    if (varMap.containsKey(v)) {
+        n = varMap.get(v);
+    } else {
+        n = new ddGraph!Node;
+        n.label = v.type.name;
+        n.qvtAstNode = v;
+        varMap.put(v, n);
+        if (v.oppositePattern().area.name == "middle") {
+            n.type = ddGraph!NodeType#middle;
+        } else if(isInputDomain(v.oppositePattern().area)) {
+            n.type = ddGraph!NodeType#input;
+        } else if(isOutputDomain(v.oppositePattern().area)) {
+            n.type = ddGraph!NodeType#output;        
+        } 
+        self.element.add(n);
+    }
+    return n;
+}
+
+
+operation visitR(roots : Collection, ddg : ddGraph!Graph, rootDd : ddGraph!Node) {
+    for (root in roots) {
+        var gn = root.getGraphNode();
+        var e = new ddGraph!Edge;
+        e.source = rootDd;
+        e.target = gn;
+        ddg.element.add(e);
+        dfsR(root);
+    }
+}
+
+operation dfsR(rootNode : tree!Node) {
+    for (child in rootNode.children) {
+        outputVarDFS(child, outputVarMap);
+    }
+}
+
+operation outputVarDFS(node : tree!Node, outputVarMap : Map) {
+    // 1. Look for all mappings that have a realized variable of this Node Type
+    for (m in outputVarMap.keySet()) {
+        for (v in outputVarMap.get(m)) {
+            if (v.type == node.type) {
+                
+            }
+        }
+    }
+}
+
+
+//////
+
+operation qvti!Mapping getGraphNode() : ddGraph!Node  {
+    if (dataNodeMap.containsKey(self)) {
+        return dataNodeMap.get(self);
+    } else {
+        var gn = new ddGraph!Node;
+	    gn.label = self.type;
+	    gn.qvtAstNode = self;
+	    gn.color = ddGraph!Color#orange;
+	    ddg.element.add(gn); 
+	    dataNodeMap.put(self, gn);
+    }
+}
+
+operation qvti!CoreDomain getGraphNode() : ddGraph!Node  {
+    if (dataNodeMap.containsKey(self)) {
+        return dataNodeMap.get(self);
+    } else {
+        var gn = new ddGraph!Node;
+        gn.label = self.type;
+        gn.qvtAstNode = self;
+        gn.color = ddGraph!Color#orange;
+        ddg.element.add(gn);
+        dataNodeMap.put(self, gn); 
+    }
+}
+
+operation rTree!Node getGraphNode() : ddGraph!Node  {
+    if (dataNodeMap.containsKey(self)) {
+        return dataNodeMap.get(self);
+    } else {
+        var gn = new ddGraph!Node;
+        gn.label = self.type;
+        gn.color = ddGraph!Color#orange;
+        ddg.element.add(gn); 
+        dataNodeMap.put(self, gn);
+    }
+}
+
+
+operation visitL(roots : Collection, ddg : ddGraph!Graph, rootDd : ddGraph!Node) {
+    for (root in roots) {
+        var gn = new ddGraph!Node;
+        gn.label = root.elementName;
+        ddg.element.add(gn);
+        var e = new ddGraph!Edge;
+        e.source = rootDd;
+        e.target = gn;
+        ddg.element.add(e);
+        dfsL(root);
+    }
+}
+
+
+
+// Root nodes don't have mappings associated
+operation dfsL(rootNode : tree!Node) {
+    for (child in rootNode.children) {
+        depthSearchL(child, new Set, qvti!Transformation.all().first().rule);
+    }
+}
+
+
+operation depthSearchL(node : tree!Node, hierarchySpace : Collection, searchSpace : Collection) : Collection {
+    // 1. Search for mappings in my hierarchy
+    var hierarchyMapps = node.getLMapps(hierarchySpace);
+    var unused = hierarchySpace.excludingAll(hierarchyMapps);
+    // 2. Search for mappings outside my hierarchy
+    var searchSpaceMapps = node.getLMapps(searchSpace);
+    // The new hierarchy is the old plus the new
+    hierarchyMapps = hierarchyMapps.includingAll(searchSpaceMapps);
+    // The seearch space can't contain the new hierarchy
+    searchSpace = searchSpace.excludingAll(hierarchyMapps);
+    // My children should look into my hierarchy and the rest;
+    for (child in node.children) {
+        hierarchyMapps = depthSearchL(child, hierarchyMapps, searchSpace);
+    }
+    if(tNodeMapping.containsKey(node)) {
+        hierarchyMapps = hierarchyMapps.includingAll(tNodeMapping.get(node));
+    }
+    tNodeMapping.put(node, hierarchyMapps);
+    return unused;
+}
+
+operation depthSearchR(node : tree!Node, hierarchySpace : Collection, searchSpace : Collection) : Collection {
+    // 1. Search for mappings in my hierarchy
+    var hierarchyMapps = node.getRMapps(hierarchySpace);
+    var unused = hierarchySpace.excludingAll(hierarchyMapps);
+    // 2. Search for mappings outside my hierarchy
+    var searchSpaceMapps = node.getRMapps(searchSpace);
+    // The new hierarchy is the old plus the new
+    hierarchyMapps = hierarchyMapps.includingAll(searchSpaceMapps);
+    // The seearch space can't contain the new hierarchy
+    searchSpace = searchSpace.excludingAll(hierarchyMapps);
+    // My children should look into my hierarchy and the rest;
+    for (child in node.children) {
+        hierarchyMapps = depthSearchR(child, hierarchyMapps, searchSpace);
+    }
+    if(tNodeMapping.containsKey(node)) {
+        hierarchyMapps = hierarchyMapps.includingAll(tNodeMapping.get(node));
+    }
+    tNodeMapping.put(node, hierarchyMapps);
+    return unused;
+}
+
+operation tree!Node getLMapps(mapps : Collection) : Collection {
+    // Find the predicates that use variables of the node's and its parent's type,
+    // and that are containment opposite tests
+    return mapps.select(m | m.testMappingL(self));    
+}
+
+operation tree!Node getRMapps(mapps : Collection) : Collection {
+    // Find the predicates that use variables of the node's and its parent's type,
+    // and that are containment opposite tests
+    return mapps.select(m | m.testMappingR(self));    
+}
+
+// L type nodes are tested for predicates or single input var 
+operation qvti!Rule testMappingL(tNode : tree!Node) : Boolean {
+    // Once the partition is done, this should only look for predicates in the guard patterns
+    
+    var prediactes =  self.guardPattern.predicate
+            .includingAll(self.domain.collect(d | d.guardPattern).flatten().collect(gp | gp.predicate).flatten())
+            .includingAll(self.domain.collect(d | d.bottomPattern).flatten().collect(gp | gp.predicate).flatten());
+    if (prediactes.isEmpty()) {
+        // The mapping has no predicates??
+        // It must have only 1 input variable, and the variable must be
+        // of he same type of the tree Node
+        if (inputVarMap.get(self).size() == 1) {
+            return inputVarMap.get(self).exists(v | v.type.name == tNode.elementName);
+        }
+    }
+    else {
+        for (p in prediactes) {
+            //p.conditionExpression.toString().println();
+            if (p.conditionExpression.isSimpleAttributeNavigation()) {
+                // Does the predicate is single "domained", all variables belong to the same domain
+                if (p.conditionExpression.isSingleDomained()) {
+                    // Are both the node's and its parent's type used in the predicate
+                    if (p.conditionExpression.findRreferencedVariables()
+                            .forAll(v | v.type.name == tNode.elementName or v.type.name == tNode.parent.elementName)) {
+                        // Find if the navigated property is a containment opposite.
+                        var prop = p.conditionExpression.getNavigatedProperty();
+                        if (prop.opposite.isDefined() and prop.opposite.isComposite()) {
+                            return true;
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    return false;
+}
+
+// R type nodes are tested for assignments or single input realized vars
+operation qvti!Rule testMappingR(tNode : tree!Node) : Boolean {
+    // Once the partition is done, this should only look for assignments in the R domain's bottom pattern
+    //self.name.println("testMappingR ");
+    var assignments =  self.domain.select(d | d.isEnforceable).collect(d | d.bottomPattern).flatten().collect(gp | gp.assignment).flatten();
+    if (assignments.isEmpty()) {
+        // The bottom pattern has no predicates
+        // It must have only 1 realize variable, and the variable must be
+        // of he same type of the tree Node
+        if (outputVarMap.get(self).size() == 1) {
+            return outputVarMap.get(self).exists(v | v.type.name == tNode.elementName);
+        }
+    }
+    else {
+        for (a in assignments) {
+            //a.toString().println();
+            if (a.isSimpleAttributeNavigation()) {
+                // Does the predicate is single "domained", all variables belong to the same domain
+                if (a.isSingleDomained()) {
+                    // Are both the node's and its parent's type used in the predicate
+                    if (a.findRreferencedVariables()
+                            .forAll(v | v.type.name == tNode.elementName or v.type.name == tNode.parent.elementName)) {
+                        // Find if the navigated property is a containment opposite.
+                        var prop = a.targetProperty;
+                        if (prop.opposite.isDefined() and prop.opposite.isComposite()) {
+                            // Check that there are none realized variables of my parent's type
+                            return not outputVarMap.get(self).exists(v | v.type.name == tNode.parent.elementName);
+                            //return true;
+                        }
+                    }
+                    
+                }
+            } else if (a.isPrimitiveVarAssignemnt()) {
+                if (isOutputDomain(a.targetVariable.oppositePattern().area)) {
+                    return a.targetVariable.type.name == tNode.elementName;   
+                }
+            }
+        }
+    }
+    return false;
+}
+
+
+// Create a Dada Dependence graph of just the mappings. 
+// For each node of a mm tree, craete a node for each mapping.
+// Create an Edge from this node, to the node created for the
+// maping of each of its nodes.
+
+operation createDomainTreeMappingDependence(roots : Collection, ddg : ddGraph!Graph, rootDd : ddGraph!Node) {
+    for (root in roots) {
+        var gn = new ddGraph!Node;
+        gn.label = root.elementName;
+        ddg.element.add(gn);
+        var e = new ddGraph!Edge;
+        e.source = rootDd;
+        e.target = gn;
+        ddg.element.add(e);
+        dfs(root);
+    }
+}
+
+
+operation TypedModel getMetaModel() : EmfModel {
+    
+}
