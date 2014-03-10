@@ -4,6 +4,7 @@
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,plugins/org.eclipse.qvt"/>
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,examples/org.eclipse.qvtd.examples.qvtrelation.modelmorf"/>
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,examples/org.eclipse.qvtd.examples.qvtrelation.reltocore"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,tests/org.eclipse.qvtd.all.tests"/>
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,tests/org.eclipse.qvtd.xtext.qvtbase.tests"/>
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,tests/org.eclipse.qvtd.xtext.qvtcore.tests"/>
 <project reference="1.0,git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git,master,tests/org.eclipse.qvtd.xtext.qvtimperative.tests"/>
@@ -14,6 +15,7 @@
 <item elementID="=org.eclipse.qvt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.qvtd.xtext.qvtcore.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.qvtd.examples.qvtrelation.modelmorf" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.qvtd.all.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.qvtd.xtext.qvtbase.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.qvtd.examples.qvtrelation.reltocore" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.qvtd.xtext.qvtrelation.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>

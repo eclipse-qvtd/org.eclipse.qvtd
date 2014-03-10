@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="PrimitiveTypes" name="PrimitiveTypes" URI="http://schema.omg.org/spec/QVT/20140401/PrimitiveTypes">
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="Boolean" name="Boolean"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="Integer" name="Integer"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="Real" name="Real"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="String" name="String"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="UnlimitedNatural" name="UnlimitedNatural"/>
+</uml:Model>
