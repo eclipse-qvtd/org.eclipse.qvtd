@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:tree="http://www.eclipse.org/qvt/examples/0.1/Tree">
-  <tree:Node type="simpleuml" children="/5"/>
-  <tree:Node type="Attribute" parent="/3">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree">
+  <eCoreContainemntTree:Node EClassifierName="simpleuml" children="/1 /2 /3 /4 /5"/>
+  <eCoreContainemntTree:Node EClassifierName="Attribute" parent="/0 /3">
     <superTypes>UMLModelElement</superTypes>
-  </tree:Node>
-  <tree:Node type="Association" parent="/5">
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassifierName="Association" parent="/0 /5">
     <superTypes>PackageElement</superTypes>
-  </tree:Node>
-  <tree:Node type="Class" parent="/5" children="/1">
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassifierName="Class" parent="/0 /5" children="/1">
     <superTypes>Classifier</superTypes>
-  </tree:Node>
-  <tree:Node type="PrimitiveDataType" parent="/5">
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassifierName="PrimitiveDataType" parent="/0 /5">
     <superTypes>Classifier</superTypes>
-  </tree:Node>
-  <tree:Node type="Package" parent="/0" children="/2 /3 /4">
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassifierName="Package" parent="/0" children="/2 /3 /4">
     <superTypes>UMLModelElement</superTypes>
-  </tree:Node>
+  </eCoreContainemntTree:Node>
 </xmi:XMI>

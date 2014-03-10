@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:tree="http://www.eclipse.org/qvt/examples/0.1/Tree">
-  <tree:Node type="umltordbms" children="/7"/>
-  <tree:Node type="AttributeToColumn" parent="/5">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree">
+  <eCoreContainemntTree:Node EClassifierName="umltordbms" children="/1 /2 /3 /4 /5 /6 /7 /8"/>
+  <eCoreContainemntTree:Node EClassifierName="AttributeToColumn" parent="/0 /4 /5">
     <superTypes>FromAttribute</superTypes>
     <superTypes>ToColumn</superTypes>
-  </tree:Node>
-  <tree:Node type="AssociationToForeignKey" parent="/4">
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassifierName="AssociationToForeignKey" parent="/0 /4">
     <superTypes>ToColumn</superTypes>
-  </tree:Node>
-  <tree:Node type="BooleanToBoolean" parent="/7">
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassifierName="BooleanToBoolean" parent="/0 /7">
     <superTypes>PrimitiveToName</superTypes>
-  </tree:Node>
-  <tree:Node type="ClassToTable" parent="/7" children="/2 /5">
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassifierName="ClassToTable" parent="/0 /7" children="/2 /1 /5">
     <superTypes>FromAttributeOwner</superTypes>
     <superTypes>ToColumn</superTypes>
-  </tree:Node>
-  <tree:Node type="NonLeafAttribute" parent="/4" children="/1">
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassifierName="NonLeafAttribute" parent="/0 /4 /5" children="/1 /5">
     <superTypes>FromAttributeOwner</superTypes>
     <superTypes>FromAttribute</superTypes>
-  </tree:Node>
-  <tree:Node type="IntegerToNumber" parent="/7">
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassifierName="IntegerToNumber" parent="/0 /7">
     <superTypes>PrimitiveToName</superTypes>
-  </tree:Node>
-  <tree:Node type="PackageToSchema" parent="/0" children="/4 /3 /6 /8"/>
-  <tree:Node type="StringToVarchar" parent="/7">
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassifierName="PackageToSchema" parent="/0" children="/4 /3 /6 /8"/>
+  <eCoreContainemntTree:Node EClassifierName="StringToVarchar" parent="/0 /7">
     <superTypes>PrimitiveToName</superTypes>
-  </tree:Node>
+  </eCoreContainemntTree:Node>
 </xmi:XMI>

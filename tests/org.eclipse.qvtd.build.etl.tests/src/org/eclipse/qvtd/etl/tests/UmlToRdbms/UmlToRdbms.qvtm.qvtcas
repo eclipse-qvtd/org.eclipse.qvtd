@@ -131,7 +131,7 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" name="primitiveToName">
+      <rule xsi:type="qvtc:Mapping" name="primitiveToName" specification="#/0/@nestedPackage.0/@rule.2 #/0/@nestedPackage.0/@rule.3 #/0/@nestedPackage.0/@rule.4">
         <ownedComment body="-- Primitive data type marshaling&#xA;class PrimitiveToName {&#xA;owner : PackageToSchema opposites primitivesToNames;&#xA;name : String;&#xA;-- uml&#xA;primitive : PrimitiveDataType;&#xA;-- rdbms&#xA;typeName : String;&#xA;}"/>
         <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
             typedModel="#/0/@nestedPackage.0/@modelParameter.0">
@@ -198,7 +198,7 @@
           <realizedVariable name="p2n" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"/>
         </bottomPattern>
       </rule>
-      <rule xsi:type="qvtc:Mapping" name="integerToNumber">
+      <rule xsi:type="qvtc:Mapping" name="integerToNumber" refinement="#/0/@nestedPackage.0/@rule.1">
         <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
             typedModel="#/0/@nestedPackage.0/@modelParameter.0">
           <guardPattern>
@@ -304,7 +304,7 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" name="booleanToBoolean">
+      <rule xsi:type="qvtc:Mapping" name="booleanToBoolean" refinement="#/0/@nestedPackage.0/@rule.1">
         <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
             typedModel="#/0/@nestedPackage.0/@modelParameter.0">
           <guardPattern>
@@ -410,7 +410,7 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" name="stringToVarchar">
+      <rule xsi:type="qvtc:Mapping" name="stringToVarchar" refinement="#/0/@nestedPackage.0/@rule.1">
         <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
             typedModel="#/0/@nestedPackage.0/@modelParameter.0">
           <guardPattern>
@@ -516,7 +516,7 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" name="flattening">
+      <rule xsi:type="qvtc:Mapping" name="flattening" specification="#/0/@nestedPackage.0/@rule.7 #/0/@nestedPackage.0/@rule.8">
         <guardPattern/>
         <bottomPattern/>
       </rule>
@@ -748,7 +748,7 @@
           </local>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" name="associationToForeignKey">
+      <rule xsi:type="qvtc:Mapping" name="associationToForeignKey" refinement="#/0/@nestedPackage.0/@rule.5">
         <ownedComment body="-- Association and ForeignKey mapping&#xA;class AssociationToForeignKey extends ToColumn {&#xA;referenced : ClassToTable;&#xA;owner : ClassToTable opposites associationToForeignKeys;&#xA;name : String;&#xA;-- uml&#xA;association : Association;&#xA;-- rdbms&#xA;foreignKey : ForeignKey;&#xA;}"/>
         <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
             typedModel="#/0/@nestedPackage.0/@modelParameter.0">
@@ -1012,21 +1012,6 @@
         <local>
           <guardPattern/>
           <bottomPattern>
-            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type">
-              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                  referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type">
-                <source xsi:type="pivot:OperationCallExp" isRequired="false" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
-                    referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OrderedCollection.first">
-                  <source xsi:type="pivot:PropertyCallExp" type="#/0/@nestedPackage.1/@ownedType.38"
-                      referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Key.column">
-                    <source xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"
-                        referredVariable="#/0/@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.3"/>
-                  </source>
-                </source>
-              </value>
-              <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
-                  referredVariable="#/0/@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.1"/>
-            </assignment>
             <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.name">
               <value xsi:type="pivot:IfExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String">
                 <condition xsi:type="pivot:OperationCallExp" name="and" isRequired="false"
@@ -1254,10 +1239,26 @@
               <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
                   referredVariable="#/0/@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.1"/>
             </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type">
+                <source xsi:type="pivot:OperationCallExp" isRequired="false" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
+                    referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OrderedCollection.first">
+                  <source xsi:type="pivot:PropertyCallExp" type="#/0/@nestedPackage.1/@ownedType.38"
+                      referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Key.column">
+                    <source xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"
+                        referredVariable="#/0/@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.3"/>
+                  </source>
+                </source>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
+                  referredVariable="#/0/@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.1"/>
+            </assignment>
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" name="attributes">
+      <rule xsi:type="qvtc:Mapping" name="attributes" refinement="#/0/@nestedPackage.0/@rule.5"
+          specification="#/0/@nestedPackage.0/@rule.9 #/0/@nestedPackage.0/@rule.10 #/0/@nestedPackage.0/@rule.11 #/0/@nestedPackage.0/@rule.12">
         <ownedComment body="-- attribute mapping&#xA;abstract class FromAttributeOwner {&#xA;composite fromAttributes : Set(FromAttribute) opposites owner;&#xA;}&#xA;abstract class FromAttribute {&#xA;name : String;&#xA;kind : String;&#xA;owner : FromAttributeOwner opposites fromAttributes;&#xA;leafs : Set(AttributeToColumn);&#xA;-- uml&#xA;attribute : Attribute;&#xA;}&#xA;abstract class ToColumn {&#xA;-- rdbms&#xA;column : Column;&#xA;}&#xA;class NonLeafAttribute extends FromAttributeOwner, FromAttribute {&#xA;leafs := fromAttributes.leafs;&#xA;}&#xA;class AttributeToColumn extends FromAttribute, ToColumn {&#xA;type : PrimitiveToName;&#xA;}"/>
         <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
             typedModel="#/0/@nestedPackage.0/@modelParameter.0">
@@ -1313,7 +1314,8 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" name="classAttributes">
+      <rule xsi:type="qvtc:Mapping" name="classAttributes" refinement="#/0/@nestedPackage.0/@rule.8"
+          specification="#/0/@nestedPackage.0/@rule.13 #/0/@nestedPackage.0/@rule.14">
         <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
             typedModel="#/0/@nestedPackage.0/@modelParameter.0">
           <guardPattern>
@@ -1389,7 +1391,8 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" name="primitiveAttribute">
+      <rule xsi:type="qvtc:Mapping" name="primitiveAttribute" refinement="#/0/@nestedPackage.0/@rule.8"
+          specification="#/0/@nestedPackage.0/@rule.13 #/0/@nestedPackage.0/@rule.15">
         <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
             typedModel="#/0/@nestedPackage.0/@modelParameter.0">
           <guardPattern>
@@ -1487,7 +1490,8 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" name="complexAttributeAttributes">
+      <rule xsi:type="qvtc:Mapping" name="complexAttributeAttributes" refinement="#/0/@nestedPackage.0/@rule.8"
+          specification="#/0/@nestedPackage.0/@rule.15 #/0/@nestedPackage.0/@rule.16">
         <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
             typedModel="#/0/@nestedPackage.0/@modelParameter.0">
           <guardPattern>
@@ -1589,7 +1593,8 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" name="complexAttribute">
+      <rule xsi:type="qvtc:Mapping" name="complexAttribute" refinement="#/0/@nestedPackage.0/@rule.8"
+          specification="#/0/@nestedPackage.0/@rule.14 #/0/@nestedPackage.0/@rule.16">
         <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
             typedModel="#/0/@nestedPackage.0/@modelParameter.0">
           <guardPattern>
@@ -1676,7 +1681,7 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" name="classPrimitiveAttributes">
+      <rule xsi:type="qvtc:Mapping" name="classPrimitiveAttributes" refinement="#/0/@nestedPackage.0/@rule.9 #/0/@nestedPackage.0/@rule.10">
         <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
             typedModel="#/0/@nestedPackage.0/@modelParameter.0">
           <guardPattern>
@@ -1816,7 +1821,7 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" name="classComplexAttributes">
+      <rule xsi:type="qvtc:Mapping" name="classComplexAttributes" refinement="#/0/@nestedPackage.0/@rule.9 #/0/@nestedPackage.0/@rule.12">
         <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
             typedModel="#/0/@nestedPackage.0/@modelParameter.0">
           <guardPattern>
@@ -1945,7 +1950,7 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" name="complexAttributePrimitiveAttributes">
+      <rule xsi:type="qvtc:Mapping" name="complexAttributePrimitiveAttributes" refinement="#/0/@nestedPackage.0/@rule.11 #/0/@nestedPackage.0/@rule.10">
         <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
             typedModel="#/0/@nestedPackage.0/@modelParameter.0">
           <guardPattern>
@@ -2123,7 +2128,7 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" name="complexAttributeComplexAttributes">
+      <rule xsi:type="qvtc:Mapping" name="complexAttributeComplexAttributes" refinement="#/0/@nestedPackage.0/@rule.11 #/0/@nestedPackage.0/@rule.12">
         <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
             typedModel="#/0/@nestedPackage.0/@modelParameter.0">
           <guardPattern>
