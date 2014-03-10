@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.emf.validation.validity.utilities.ComposedEValidator;
 import org.eclipse.ocl.examples.library.executor.ExecutorManager;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -66,6 +67,8 @@ import test.umltordbms.UmltordbmsPackage;
  */
 public class QVTiCompilerTests extends LoadTestCase
 {
+	@SuppressWarnings("unused")private static ComposedEValidator makeSureRequiredBundleIsLoaded = null;
+	
 	private static final class TxEvaluator extends ExecutorManager {
 		private TxEvaluator(@NonNull MetaModelManager metaModelManager) {
 			super(metaModelManager);
