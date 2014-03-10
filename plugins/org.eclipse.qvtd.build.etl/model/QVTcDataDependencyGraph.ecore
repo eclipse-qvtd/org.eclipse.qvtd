@@ -23,20 +23,23 @@
         eOpposite="#//Graph/element"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Graph">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="element" unique="false"
-        upperBound="-1" eType="#//Element" containment="true" eOpposite="#//Element/graph"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" upperBound="-1"
+        eType="#//Element" containment="true" eOpposite="#//Element/graph"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EdgeType">
-    <eLiterals name="middleContainment"/>
-    <eLiterals name="inputContainment" value="1"/>
-    <eLiterals name="outputContainment" value="2"/>
-    <eLiterals name="middleRelation" value="3"/>
-    <eLiterals name="primaryInput" value="4" literal="input"/>
-    <eLiterals name="derivedInput" value="5"/>
-    <eLiterals name="output" value="6"/>
-    <eLiterals name="doublePrimaryInput" value="7"/>
-    <eLiterals name="doubleDerivedInput" value="8"/>
+    <eLiterals name="middleCont"/>
+    <eLiterals name="inputCont" value="1"/>
+    <eLiterals name="outputCont" value="2"/>
+    <eLiterals name="middleContMany" value="3"/>
+    <eLiterals name="inputContMany" value="4"/>
+    <eLiterals name="outputContMany" value="5"/>
+    <eLiterals name="relation" value="6"/>
+    <eLiterals name="primaryInput" value="7"/>
+    <eLiterals name="derivedInput" value="8"/>
+    <eLiterals name="output" value="9"/>
+    <eLiterals name="doublePrimaryInput" value="10"/>
+    <eLiterals name="doubleDerivedInput" value="11"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="NodeType">
     <eLiterals name="mapping"/>

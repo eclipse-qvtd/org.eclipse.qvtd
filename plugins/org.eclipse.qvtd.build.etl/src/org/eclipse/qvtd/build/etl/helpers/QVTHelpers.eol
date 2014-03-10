@@ -571,6 +571,107 @@ operation QVT!Rule getOutputVars() : Set {
     //}
     return vars;
 }
+
+// self contains vB
+operation QVT!Variable hasContainmentRelation(varB : QVT!Variable) : Boolean {
+    // Containment is in the same domain
+    if (self.oppositePattern().area == varB.oppositePattern().area) {
+        // Fin predicates that only refer the two variables
+        for (p in self.oppositePattern().area.rule.guardPattern.predicate.select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
+            // Are both vars
+            if (p.conditionExpression.findRreferencedVariables()
+                    .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
+                // Find if the navigated property is a containment opposite.
+                var prop = p.conditionExpression.getNavigatedProperty();
+                //p.conditionExpression.toString().println("Predicate ");
+                //self.println("var A ");
+                //varB.println("var B ");
+                //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
+                //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
+                if (p.conditionExpression.isArgumentVariable(self) and 
+                    p.conditionExpression.isSourceVariable(varB) and prop.opposite.isDefined() and prop.opposite.isComposite()) {
+                    //p.conditionExpression.toString().println(self.name + " with " + varB.name + " in ");   
+                    return true;
+                }
+            }                
+        }
+        // Find assignments that only refer the two vars
+        var assignments;
+        if (isOutputDomain(self.oppositePattern().area)) {
+            assignments = self.oppositePattern().area.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation());
+        } else {
+            assignments = self.oppositePattern().area.rule.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation());
+        }
+        for (a in assignments) {
+            // Are both vars
+            if (a.findRreferencedVariables()
+                    .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
+                // Find if the navigated property is a containment opposite.
+                var prop = a.targetProperty;
+                //p.conditionExpression.toString().println("Predicate ");
+                //self.println("var A ");
+                //varB.println("var B ");
+                //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
+                //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
+                if (a.slotExpression.referredVariable == varB and 
+                    a.value.referredVariable == self and prop.opposite.isDefined() and prop.opposite.isComposite()) {
+                    //a.toString().println(self.name + " with " + varB.name + " in ");   
+                    return true;
+                }
+            }                
+        }
+        
+    }
+    return false;
+}
+
+// self is Middle and has a reference to vB
+operation qvti!Variable hasMiddleRelation(varB : qvti!Variable) : Boolean {
+    // self is Middle domain
+    if (self.oppositePattern().area.name == "middle" and varB.oppositePattern().area.name <> "middle") {
+        // Fin predicates that only refer the two variables
+        for (p in self.oppositePattern().area.rule.guardPattern.predicate.select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
+            // Are both vars
+            if (p.conditionExpression.findRreferencedVariables()
+                    .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
+                // Find if the navigated property is a containment opposite.
+                //p.conditionExpression.toString().println("Predicate ");
+                //self.println("var A ");
+                //varB.println("var B ");
+                //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
+                //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
+                var prop = p.conditionExpression.getNavigatedProperty();
+                if (p.conditionExpression.isArgumentVariable(varB) and 
+                    p.conditionExpression.isSourceVariable(self) and not prop.isComposite()) {
+                    //p.conditionExpression.toString().println(self.name + " with " + varB.name + "in ");   
+                    return true;
+                }
+            }                
+        }
+        // Find assignments that only refer the two vars
+        for (a in self.oppositePattern().area.rule.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation())) {
+            // Are both vars
+            if (a.findRreferencedVariables()
+                    .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
+                // Find if the navigated property is a containment opposite.
+                var prop = a.targetProperty;
+                //a.toString().println("Assignment ");
+                //self.println("var A ");
+                //varB.println("var B ");
+                //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
+                //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
+                if (a.slotExpression.referredVariable == self and 
+                    a.value.referredVariable == varB and not prop.isComposite()) {
+                    //a.toString().println(self.name + " with " + varB.name + " in ");   
+                    return true;
+                }
+            }                
+        }
+        
+    }
+    return false;
+}
+
  
 /**
  * Returns the comment added to state the direction in which the transformation

@@ -116,10 +116,7 @@ rule Mapping
 		    mM.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.realizedVariable));
 		    
 		    lmM.domain.add(mM);
-		    
 		    lmM.local.addAll(m.local.equivalent().select(m | m.~side = "l"));
-		    // Fix variable references in predicates and assignments!!!
-		    
 		    
         }
         if (m.domain.exists(d | isOutputDomain(d))) {
@@ -133,10 +130,11 @@ rule Mapping
 		    // We need guard patterns first to have a place to move variables and predicates from domains
 		    mrM.guardPattern = m.guardPattern.equivalent().selectOne(p | p.~side = "r");
             mrM.bottomPattern = m.bottomPattern.equivalent().selectOne(p | p.~side = "r");
-            // Copy the MM "to" predicates to the guard pattern
+            // MM assignements are transformed to predicates to the guard patter
             mrM.guardPattern.predicate.addAll(m.bottomPattern.assignment.select(
                 a | a.findRreferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area))
                 ).equivalent().select(a | a.isKindOf(QVTiP!Predicate)));
+
             
             // Add output domains
 		    mrM.domain.addAll(m.domain.select(d | isOutputDomain(d)).equivalent());

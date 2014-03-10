@@ -46,10 +46,12 @@ operation QVT!Transformation mappingDataDependencies(graph : ddg!Graph, inputVar
 	        var vaNode = graph.getNodeForQvtAstNode(vA, varMap); 
 	        e.source = vaNode;
 	        e.target = ruleNode;
-	        //e.type = graph.owningModel().getEnumerationValue("EdgeType", "primaryInput");
-	        e.type = ddg!EdgeType#primaryInput;   
-	        graph.element.add(e);       
+	        e.type = graph.owningModel().getEnumerationValue("EdgeType", "primaryInput");
+	        //e.type = ddg!EdgeType#primaryInput;   
+	        graph.element.add(e);   
             vA.variableRelations(graph, inputVarMap.get(r).excluding(vA), varMap);
+            if (r.name == "attributeColumns_MR") {
+            }
 	    }
 	    // Output variables relations
 	    for (vA in outputVarMap.get(r)) {
@@ -58,7 +60,8 @@ operation QVT!Transformation mappingDataDependencies(graph : ddg!Graph, inputVar
 	        var e = graph.owningModel().createInstance("Edge");
 	        e.source = ruleNode;
 	        e.target = vaNode;
-	        e.type = ddg!EdgeType#output;   
+	        e.type = graph.owningModel().getEnumerationValue("EdgeType", "output");
+	        //e.type = ddg!EdgeType#output;   
 	        graph.element.add(e);       
 	        vA.variableRelations(graph, outputVarMap.get(r).excluding(vA), varMap);
 	    }
@@ -111,9 +114,11 @@ operation ddg!Graph mergedMappingDataDependencies(mergeGraph : ddg!Graph, contai
 	            var e = mergeGraph.owningModel().createInstance("Edge");
 	            // If there is another edge to the input, is a double input
 	            if (mergeGraph.element.exists(e : ddg!Edge| e.source == mergeMap.get(s) and e.target == mappingNode)) {
-	                e.type = ddg!EdgeType#doublePrimaryInput;
+                    e.type = mergeGraph.owningModel().getEnumerationValue("EdgeType", "doublePrimaryInput");
+	                //e.type = ddg!EdgeType#doublePrimaryInput;
 	            } else {
-	                e.type = ddg!EdgeType#primaryInput;
+	                e.type = mergeGraph.owningModel().getEnumerationValue("EdgeType", "primaryInput");
+	                //e.type = ddg!EdgeType#primaryInput;
 	            }
 	            e.source = mergeMap.get(s);
 	            e.target = mappingNode;
@@ -133,7 +138,8 @@ operation ddg!Graph mergedMappingDataDependencies(mergeGraph : ddg!Graph, contai
 	        }
 	        for (t in targets) {
 	            var e = mergeGraph.owningModel().createInstance("Edge");
-	            e.type = ddg!EdgeType#output;
+	            e.type = mergeGraph.owningModel().getEnumerationValue("EdgeType", "output");
+	            //e.type = ddg!EdgeType#output;
 	            e.source = mappingNode;
 	            e.target = mergeMap.get(t);
 	            mergeGraph.element.add(e);
@@ -182,9 +188,11 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
                 var e = mergeGraph.owningModel().createInstance("Edge");
                 // If there is another edge to the input, is a double input
                 if (mergeGraph.element.exists(e | e.hasProperty("source") and e.source == mergeMap.get(s) and e.target == mappingNode)) {
-                    e.type = ddg!EdgeType#doublePrimaryInput;
+                    e.type = self.owningModel().getEnumerationValue("EdgeType", "doublePrimaryInput");
+                    //e.type = ddg!EdgeType#doublePrimaryInput;
                 } else {
-                    e.type = ddg!EdgeType#primaryInput;
+                    e.type = self.owningModel().getEnumerationValue("EdgeType", "primaryInput");
+                    //e.type = ddg!EdgeType#primaryInput;
                 }
                 e.source = mergeMap.get(s);
                 e.target = mappingNode;
@@ -204,7 +212,8 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
             }
             for (t in targets) {
                 var e = mergeGraph.owningModel().createInstance("Edge");
-                e.type = ddg!EdgeType#output;
+                e.type = self.owningModel().getEnumerationValue("EdgeType", "output");
+                //e.type = ddg!EdgeType#output;
                 e.source = mappingNode;
                 e.target = mergeMap.get(t);
                 mergeGraph.element.add(e);

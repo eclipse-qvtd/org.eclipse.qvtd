@@ -92,11 +92,25 @@ for (r in qvti!Transformation.all().first().rule.select(r | not r.context.isDefi
                 var inputN2 = ddg.getNodeForVar(vB);
                 var ce = new ddGraph!Edge;
                 if (vB.oppositePattern().area.name == "middle") {
-                    ce.type = ddGraph!EdgeType#middleContainment;    
+                    ce.type = ddGraph!EdgeType#middleCont;    
                 } else if(isInputDomain(vB.oppositePattern().area)) {
-                    ce.type = ddGraph!EdgeType#inputContainment;        
+                    ce.type = ddGraph!EdgeType#inputCont;        
                 } else if(isOutputDomain(vB.oppositePattern().area)) {
-                    ce.type = ddGraph!EdgeType#outputContainment;        
+                    ce.type = ddGraph!EdgeType#outputCont;     
+                }
+                ce.source = inputN;
+			    ce.target = inputN2;
+			    ddg.element.add(ce);
+            }
+            if (vA.hasContainmentRelation(vB)) {
+                var inputN2 = ddg.getNodeForVar(vB);
+                var ce = new ddGraph!Edge;
+                if (vB.oppositePattern().area.name == "middle") {
+                    ce.type = ddGraph!EdgeType#middleCont;    
+                } else if(isInputDomain(vB.oppositePattern().area)) {
+                    ce.type = ddGraph!EdgeType#inputCont;        
+                } else if(isOutputDomain(vB.oppositePattern().area)) {
+                    ce.type = ddGraph!EdgeType#outputCont;     
                 }
                 ce.source = inputN;
 			    ce.target = inputN2;
@@ -105,7 +119,7 @@ for (r in qvti!Transformation.all().first().rule.select(r | not r.context.isDefi
             if (vA.hasMiddleRelation(vB)) {
                 var inputN3 = ddg.getNodeForVar(vB);
                 var re = new ddGraph!Edge;
-                re.type = ddGraph!EdgeType#middleRelation;
+                re.type = ddGraph!EdgeType#relation;
                 re.source = inputN;
                 re.target = inputN3;
                 ddg.element.add(re);
@@ -127,11 +141,11 @@ for (r in qvti!Transformation.all().first().rule.select(r | not r.context.isDefi
                 var outputN2 = ddg.getNodeForVar(vB);
                 var ce = new ddGraph!Edge;
                 if (vB.oppositePattern().area.name == "middle") {
-                    ce.type = ddGraph!EdgeType#middleContainment;    
+                    ce.type = ddGraph!EdgeType#middleCont;    
                 } else if(isInputDomain(vB.oppositePattern().area)) {
-                    ce.type = ddGraph!EdgeType#inputContainment;        
+                    ce.type = ddGraph!EdgeType#inputCont;        
                 } else if(isOutputDomain(vB.oppositePattern().area)) {
-                    ce.type = ddGraph!EdgeType#outputContainment;        
+                    ce.type = ddGraph!EdgeType#outputCont;        
                 }
                 ce.source = outputN;
                 ce.target = outputN2;
@@ -149,11 +163,11 @@ for (r in qvti!Transformation.all().first().rule.select(r | not r.context.isDefi
                 var inputN2 = ddg.getNodeForVar(vOut);
                 var ce = new ddGraph!Edge;
                 if (vOut.oppositePattern().area.name == "middle") {
-                    ce.type = ddGraph!EdgeType#middleContainment;    
+                    ce.type = ddGraph!EdgeType#middleCont;    
                 } else if(isInputDomain(vOut.oppositePattern().area)) {
-                    ce.type = ddGraph!EdgeType#inputContainment;        
+                    ce.type = ddGraph!EdgeType#inputCont;        
                 } else if(isOutputDomain(vOut.oppositePattern().area)) {
-                    ce.type = ddGraph!EdgeType#outputContainment;        
+                    ce.type = ddGraph!EdgeType#outputCont;        
                 }
                 ce.source = inputN;
                 ce.target = inputN2;
@@ -177,9 +191,9 @@ for (r in qvti!Transformation.all().first().rule.select(r | not r.context.isDefi
 var mdg = new mdGraph!Graph;
 var mergeMap : Map;  // (x, Node)
 // Copy all the containment trees to the mdGraph
-importContainmentTree(mdg, lTree!Node.all(), mdGraph!NodeType#input, mdGraph!EdgeType#inputContainment);
-importContainmentTree(mdg, mTree!Node.all(), mdGraph!NodeType#middle, mdGraph!EdgeType#middleContainment);
-//importContainmentTree(mdg, rTree!Node.all(), mdGraph!NodeType#output, mdGraph!EdgeType#outputContainment);
+importContainmentTree(mdg, lTree!Node.all(), mdGraph!NodeType#input, mdGraph!EdgeType#inputCont);
+importContainmentTree(mdg, mTree!Node.all(), mdGraph!NodeType#middle, mdGraph!EdgeType#middleCont);
+//importContainmentTree(mdg, rTree!Node.all(), mdGraph!NodeType#output, mdGraph!EdgeType#outputCont);
 
 for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sortBy(n | n.incoming.size())) {
     // If an output var is abstract (i.e., doesn't exist in any of the containment
@@ -246,9 +260,9 @@ var rdg = new rdGraph!Graph;
 // middle relation with other input vars
 mergeMap.clear();
 // Copy all the containment trees to the mdGraph
-importContainmentTree(rdg, lTree!Node.all(), rdGraph!NodeType#input, rdGraph!EdgeType#inputContainment);
-importContainmentTree(rdg, mTree!Node.all(), rdGraph!NodeType#middle, rdGraph!EdgeType#middleContainment);
-//importContainmentTree(rdg, rTree!Node.all(), rdGraph!NodeType#output, rdGraph!EdgeType#outputContainment);
+importContainmentTree(rdg, lTree!Node.all(), rdGraph!NodeType#input, rdGraph!EdgeType#inputCont);
+importContainmentTree(rdg, mTree!Node.all(), rdGraph!NodeType#middle, rdGraph!EdgeType#middleCont);
+//importContainmentTree(rdg, rTree!Node.all(), rdGraph!NodeType#output, rdGraph!EdgeType#outputCont);
 
 for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sortBy(n | n.incoming.size())) {
     // If an output var is abstract (i.e., doesn't exist in any of the containment
@@ -404,106 +418,6 @@ operation ddGraph!Graph getNodeForVar(v : QVT!Variable) : ddGraph!Node {
         self.element.add(n);
     }
     return n;
-}
-
-// self contains vB
-operation qvti!Variable hasContainmentRelation(varB : qvti!Variable) : Boolean {
-    // Containment is in the same domain
-    if (self.oppositePattern().area == varB.oppositePattern().area) {
-        // Fin predicates that only refer the two variables
-        for (p in self.oppositePattern().area.rule.guardPattern.predicate.select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
-            // Are both vars
-            if (p.conditionExpression.findRreferencedVariables()
-                    .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
-                // Find if the navigated property is a containment opposite.
-                var prop = p.conditionExpression.getNavigatedProperty();
-                //p.conditionExpression.toString().println("Predicate ");
-                //self.println("var A ");
-                //varB.println("var B ");
-                //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
-                //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
-                if (p.conditionExpression.isArgumentVariable(self) and 
-                    p.conditionExpression.isSourceVariable(varB) and prop.opposite.isDefined() and prop.opposite.isComposite()) {
-                    //p.conditionExpression.toString().println(self.name + " with " + varB.name + " in ");   
-                    return true;
-                }
-            }                
-        }
-        // Find assignments that only refer the two vars
-        var assignments;
-        if (isOutputDomain(self.oppositePattern().area)) {
-            assignments = self.oppositePattern().area.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation());
-        } else {
-            assignments = self.oppositePattern().area.rule.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation());
-        }
-        for (a in assignments) {
-            // Are both vars
-            if (a.findRreferencedVariables()
-                    .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
-                // Find if the navigated property is a containment opposite.
-                var prop = a.targetProperty;
-                //p.conditionExpression.toString().println("Predicate ");
-                //self.println("var A ");
-                //varB.println("var B ");
-                //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
-                //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
-                if (a.slotExpression.referredVariable == varB and 
-                    a.value.referredVariable == self and prop.opposite.isDefined() and prop.opposite.isComposite()) {
-                    //a.toString().println(self.name + " with " + varB.name + " in ");   
-                    return true;
-                }
-            }                
-        }
-        
-    }
-    return false;
-}
-
-// self is Middle and has a reference to vB
-operation qvti!Variable hasMiddleRelation(varB : qvti!Variable) : Boolean {
-    // self is Middle domain
-    if (self.oppositePattern().area.name == "middle" and varB.oppositePattern().area.name <> "middle") {
-        // Fin predicates that only refer the two variables
-        for (p in self.oppositePattern().area.rule.guardPattern.predicate.select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
-            // Are both vars
-            if (p.conditionExpression.findRreferencedVariables()
-                    .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
-                // Find if the navigated property is a containment opposite.
-                //p.conditionExpression.toString().println("Predicate ");
-                //self.println("var A ");
-                //varB.println("var B ");
-                //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
-                //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
-                var prop = p.conditionExpression.getNavigatedProperty();
-                if (p.conditionExpression.isArgumentVariable(varB) and 
-                    p.conditionExpression.isSourceVariable(self) and not prop.isComposite()) {
-                    //p.conditionExpression.toString().println(self.name + " with " + varB.name + "in ");   
-                    return true;
-                }
-            }                
-        }
-        // Find assignments that only refer the two vars
-        for (a in self.oppositePattern().area.rule.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation())) {
-            // Are both vars
-            if (a.findRreferencedVariables()
-                    .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
-                // Find if the navigated property is a containment opposite.
-                var prop = a.targetProperty;
-                //a.toString().println("Assignment ");
-                //self.println("var A ");
-                //varB.println("var B ");
-                //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
-                //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
-                if (a.slotExpression.referredVariable == self and 
-                    a.value.referredVariable == varB and not prop.isComposite()) {
-                    //a.toString().println(self.name + " with " + varB.name + " in ");   
-                    return true;
-                }
-            }                
-        }
-        
-    }
-    return false;
 }
 
 
