@@ -10,7 +10,7 @@
       <package
             uri="http://www.eclipse.org/qvt/0.9/QVTrelationCST"
             class="org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.QVTrelationCSPackage"
-            genModel="model/QVTrelationCST.genmodel"/>
+            genModel="model/QVTrelationCS.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
