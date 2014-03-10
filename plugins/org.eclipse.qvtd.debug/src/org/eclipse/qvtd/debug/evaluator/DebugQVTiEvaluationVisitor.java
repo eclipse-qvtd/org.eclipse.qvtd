@@ -14,6 +14,7 @@ package org.eclipse.qvtd.debug.evaluator;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
@@ -85,6 +86,10 @@ public abstract class DebugQVTiEvaluationVisitor extends AbstractWrappingQVTimpe
 
 	public @NonNull IDebugEvaluationEnvironment getEvaluationEnvironment() {
 		return (IDebugEvaluationEnvironment) delegate.getEvaluationEnvironment();
+	}
+	
+	public @Nullable Monitor getMonitor() {
+		return delegate.getMonitor();
 	}
 	
 //	@Override
@@ -366,6 +371,10 @@ public abstract class DebugQVTiEvaluationVisitor extends AbstractWrappingQVTimpe
 	@Override
 	public void setLogger(@Nullable DomainLogger logger) {
 		delegate.setLogger(logger);
+	}
+
+	public void setMonitor(@Nullable Monitor monitor) {
+		delegate.setMonitor(monitor);
 	}
 
 	public abstract @NonNull DebugRootQVTiEvaluationVisitor getRootEvaluationVisitor();
