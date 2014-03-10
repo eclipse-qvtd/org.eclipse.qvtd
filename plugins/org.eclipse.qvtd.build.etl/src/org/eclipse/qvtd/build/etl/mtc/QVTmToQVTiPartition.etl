@@ -1,5 +1,5 @@
-import "Helpers.eol";
-import "OclLibHelper.eol";
+import "../helpers/QVTHelpers.eol";
+import "../helpers/OclLibHelper.eol";
 
 pre {
     var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
@@ -65,10 +65,20 @@ rule Mapping
     transform m:QVTm!Mapping
     to mappings : Set {
         
-        // Only mappings with guarded patterns
-        guard : not m.context.isDefined() or (m.context.isDefined() and (not m.guardPattern.variable.isEmpty()
+        // Only mappings with guarded patterns 
+        // and if all the output variables' types are not abstract 
+        // and its not refined
+        // TODO it is refined, and it has input variables of abstract type, and for some of the
+        // abstract type's subtypes there is not a specification with an input variable of these subtypes
+        // (in this case an additional predicate should be added to limit the scope to the unhandeled subtypes)
+        guard {
+            //m.println(); 
+            //m.getOutputVars().collect(v | v.type.isTypeOf().println();
+            
+            return (not m.context.isDefined() or (m.context.isDefined() and (not m.guardPattern.variable.isEmpty()
                 or not m.domain.collect(d | d.guardPattern.variable).flatten().isEmpty()
-                ))
+                ))) /*and m.getOutputVars().forAll(v | not v.type.`abstract`)*/ and m.specification.isEmpty();
+                }
 
         // Promote unguarded nested mappings
         for (local in m.local) {

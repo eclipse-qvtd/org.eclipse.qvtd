@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 The University of York, Willink Transformations and others.
+ * Copyright (c) 2013 The University of York and Willink Transformations.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,8 +8,8 @@
  * Contributors:
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
-import "Helpers.eol";
-import "OclLibHelper.eol";
+import "../helpers/QVTHelpers.eol";
+import "../helpers/OclLibHelper.eol";
 
 pre {
     var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
@@ -69,10 +69,11 @@ migrate Mapping
         
     }
 
-            
-// Refinned mappings
+// Refining mappings
 migrate Mapping
-    when : original.refinement.size() > 0 {
+    when : original.refinement.size() > 0  
+    {
+        
         
         //original.println("RefinnedMapping ");
         // Merge domainless local mappings
@@ -138,7 +139,8 @@ migrate Mapping
             m.bottomPattern.fixAssignmentVarReferences();
         }
         // Remove the refinements
-        migrated.refinement = Set{};
+        // Keep them so we can use the information later!!
+        // migrated.refinement = Set{};
     }
 
 /**
