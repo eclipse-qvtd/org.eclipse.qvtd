@@ -105,7 +105,7 @@ public class Ecore2UML {
 		UMLResourcesUtil.init(umlResourceSet);
 		for (Resource ecoreResource : new ArrayList<Resource>(ecoreResourceSet.getResources())) {	// Ignore any profiles that aappear
 			URI ecoreURI = ecoreResource.getURI();
-			URI umlURI = ecoreURI.trimFileExtension().appendFileExtension("uml");
+			URI umlURI = URI.createPlatformResourceURI("/org.eclipse.qvt/model/uml/" + ecoreURI.trimFileExtension().lastSegment() + ".uml", true);
 			Resource umlResource = umlResourceSet.createResource(umlURI);
 			for (EObject eObject : ecoreResource.getContents()) {
 				Element umlElement = ecore2umlConverter.get(eObject);
@@ -135,7 +135,7 @@ public class Ecore2UML {
 		ResourceSet xmiResourceSet = new ResourceSetImpl();
 		xmiResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		for (Resource umlResource : umlResourceSet.getResources()) {
-			URI xmiURI = umlResource.getURI().trimFileExtension().appendFileExtension("xmi");
+			URI xmiURI = URI.createPlatformResourceURI("/org.eclipse.qvt/model/xmi/" + umlResource.getURI().trimFileExtension().lastSegment() + ".xmi", true);
 			XMIResource xmiResource = (XMIResource) xmiResourceSet.createResource(xmiURI);
 		    xmiResource.setXMIVersion("20110701");
 			xmiResource.getContents().addAll(umlResource.getContents());
