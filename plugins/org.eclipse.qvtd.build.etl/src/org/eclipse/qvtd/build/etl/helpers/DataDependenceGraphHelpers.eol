@@ -70,101 +70,6 @@ operation ddg!Graph getNodeType(v : QVT!Variable) : Any {
 }
 
 
-// self contains vB
-operation QVT!Variable hasContainmentRelation(varB : QVT!Variable) : Boolean {
-    // Containment is in the same domain
-    if (self.oppositePattern().area == varB.oppositePattern().area) {
-        // Fin predicates that only refer the two variables
-        for (p in self.oppositePattern().area.rule.guardPattern.predicate.select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
-            // Are both vars
-            if (p.conditionExpression.findRreferencedVariables()
-                    .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
-                // Find if the navigated property is a containment opposite.
-                var prop = p.conditionExpression.getNavigatedProperty();
-                //p.conditionExpression.toString().println("Predicate ");
-                //self.println("var A ");
-                //varB.println("var B ");
-                //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
-                //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
-                if (p.conditionExpression.isArgumentVariable(self) and 
-                    p.conditionExpression.isSourceVariable(varB) and prop.opposite.isDefined() and prop.opposite.isComposite()) {
-                    //p.conditionExpression.toString().println(self.name + " with " + varB.name + " in ");   
-                    return true;
-                }
-            }                
-        }
-        // Find assignments that only refer the two vars
-        var assignments;
-        if (isOutputDomain(self.oppositePattern().area)) {
-            assignments = self.oppositePattern().area.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation());
-        } else {
-            assignments = self.oppositePattern().area.rule.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation());
-        }
-        for (a in assignments) {
-            // Are both vars
-            if (a.findRreferencedVariables()
-                    .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
-                // Find if the navigated property is a containment opposite.
-                var prop = a.targetProperty;
-                //p.conditionExpression.toString().println("Predicate ");
-                //self.println("var A ");
-                //varB.println("var B ");
-                //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
-                //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
-                if (a.slotExpression.referredVariable == varB and 
-                    a.value.referredVariable == self and prop.opposite.isDefined() and prop.opposite.isComposite()) {
-                    //a.toString().println(self.name + " with " + varB.name + " in ");   
-                    return true;
-                }
-            }                
-        }
-    }
-    return false;
-}
-
-// self has a reference to vB (non-containment, can be cross-domain)
-operation QVT!Variable hasRelation(varB : QVT!Variable) : Boolean {
-    // Fin predicates that only refer the two variables
-    for (p in self.oppositePattern().area.rule.guardPattern.predicate.select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
-        // Are both vars
-        if (p.conditionExpression.findRreferencedVariables()
-                .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
-            // Find if the navigated property is a containment opposite.
-            //p.conditionExpression.toString().println("Predicate ");
-            //self.println("var A ");
-            //varB.println("var B ");
-            //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
-            //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
-            var prop = p.conditionExpression.getNavigatedProperty();
-            if (p.conditionExpression.isArgumentVariable(varB) and 
-                p.conditionExpression.isSourceVariable(self) and not prop.isComposite()) {
-                //p.conditionExpression.toString().println(self.name + " with " + varB.name + "in ");   
-                return true;
-            }
-        }                
-    }
-    // Find assignments that only refer the two vars
-    for (a in self.oppositePattern().area.rule.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation())) {
-        // Are both vars
-        if (a.findRreferencedVariables()
-                .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
-            // Find if the navigated property is a containment opposite.
-            var prop = a.targetProperty;
-            //a.toString().println("Assignment ");
-            //self.println("var A ");
-            //varB.println("var B ");
-            //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
-            //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
-            if (a.slotExpression.referredVariable == self and 
-                a.value.referredVariable == varB and not prop.isComposite()) {
-                //a.toString().println(self.name + " with " + varB.name + " in ");   
-                return true;
-            }
-        }                
-    }
-    return false;
-}
-
 operation ddg!Graph getNodeForTreeNode(treeNode : tree!Node, nodeMap : Map, nodeType) : ddg!Node {
     var n;
     if (nodeMap.containsKey(treeNode)) {
@@ -218,26 +123,32 @@ operation QVT!Variable variableRelations(graph : ddg!Graph, vars : Set, varMap :
     for (vB in vars) {
         //vB.println("vB ");
         var vbNode = graph.getNodeForQvtAstNode(vB, varMap);
-        if (self.hasContainmentRelation(vB)) {
-            var ce = graph.owningModel().createInstance("Edge");
-            ce.source = vaNode;
-            ce.target = vbNode;
-            switch (vbNode.type) {
-                case(graph.owningModel().getEnumerationValue("NodeType", "middle")) :
-                    ce.type = graph.owningModel().getEnumerationValue("EdgeType", "middleCont");
-                case(graph.owningModel().getEnumerationValue("NodeType", "input")) :
-                    ce.type = graph.owningModel().getEnumerationValue("EdgeType", "inputCont");
-                case(graph.owningModel().getEnumerationValue("NodeType", "output")) :
-                    ce.type = graph.owningModel().getEnumerationValue("EdgeType", "outputCont");
-            }
-            graph.element.add(ce);
-        } else if (self.hasRelation(vB)) {
-            var re = graph.owningModel().createInstance("Edge");
-            re.source = vaNode;
-            re.target = vbNode;
-            re.type = graph.owningModel().getEnumerationValue("EdgeType", "relation");
-            //re.type = ddg!EdgeType#relation;
-            graph.element.add(re);
+        var relations = self.hasRelation(vB);
+        //composite -- true if the relation is a containment one     
+        //multiplicity -- true if the relation is multiple
+        //opposite
+        (not relations.isEmpty()).println("Have relation ");
+        if(not relations.isEmpty()) {
+           relations.println();
+           relations.at(0).println();
+           var e = graph.owningModel().createInstance("Edge");
+           e.source = vaNode;
+           e.target = vbNode;
+           if (relations.at(0)) {
+               switch (vbNode.type) {
+	               case(graph.owningModel().getEnumerationValue("NodeType", "middle")) :
+	                   e.type = graph.owningModel().getEnumerationValue("EdgeType", "middleCont");
+	               case(graph.owningModel().getEnumerationValue("NodeType", "input")) :
+	                   e.type = graph.owningModel().getEnumerationValue("EdgeType", "inputCont");
+	               case(graph.owningModel().getEnumerationValue("NodeType", "output")) :
+	                   e.type = graph.owningModel().getEnumerationValue("EdgeType", "outputCont");
+	           }
+           } else {
+               e.type = graph.owningModel().getEnumerationValue("EdgeType", "relation");
+           }
+           e.multiple = relations.at(1);
+           e.directed = relations.at(2);
+           graph.element.add(e);
         }
     }
 }
@@ -280,4 +191,94 @@ operation ddg!Graph importContainmentTree(treeNodes : Collection, treeType : Str
             self.element.add(e);
         }
     }  
+}
+
+
+/****o* org.eclipse.qvtd.build.etl/helpers/DataDependenceGraphHelpers/hasRelation
+  *  NAME
+  *    hasRelation -- Identify relations between variables
+  *  SYNOPSIS
+  *    relation =  var1.hasRelation(var2);
+  *  FUNCTION
+  *    Analysies the predicates and assignments of the mapping that contains the 
+  *   variables and returns the type of relation found. 
+  *  CONTEXT
+  *     QVT!Variable   
+  *  PARAMETERS
+  *    varB - variable to analyze relations against
+  *  RESULT
+  *    Sequence -- The sequence is empty if no relation was found 
+  *         * composite -- true if the relation is a containment one     
+  *         * multiplicity -- true if the relation is multiple
+  *         * opposite navigation - true if the relation has an opposite and if
+  *             the multiplicity of the opposite relation is 1. 
+  *  SEE ALSO
+  *
+  */
+operation QVT!Variable hasRelation(varB : QVT!Variable) : Sequence {
+    
+    var result : Sequence();
+    // Fin predicates that only refer the two variables
+    for (p in self.oppositePattern().area.rule.guardPattern.predicate
+            .includingAll(self.oppositePattern().area.rule.local.collect(l | l.guardPattern.predicate).flatten())
+            .select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
+        if (p.conditionExpression.findRreferencedVariables()
+                .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
+            self.println("var A ");
+            varB.println("var B ");
+            p.conditionExpression.toString().println("Predicate ");
+            var prop = p.conditionExpression.getNavigatedProperty();
+            // Expression in the form varB.prop = self
+            if (p.conditionExpression.isArgumentVariable(self) and 
+                            p.conditionExpression.isSourceVariable(varB)) {
+                if (prop.opposite.isDefined() and prop.opposite.isComposite()) {
+                    // Composition
+                    "Composition".println();   
+                    result.add(true);
+                    result.add(prop.opposite.isMany());
+                    result.add(prop.isMany());
+                }
+            } else if (p.conditionExpression.isArgumentVariable(varB) and 
+                            p.conditionExpression.isSourceVariable(self)) {
+                if (prop.opposite.isDefined() and not prop.opposite.isComposite()) {
+                    "Relation".println();
+                    result.add(false);
+                    result.add(prop.isMany());
+                    result.add(false);
+                }
+            }
+        }                
+    }
+    /*
+    // Find assignments that only refer the two vars
+    for (a in self.oppositePattern().area.rule.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation())) {
+        if (a.findRreferencedVariables()
+                .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
+            // Find if the navigated property
+            var prop = a.targetProperty;
+            // Only analyse expression in the form varB.prop := self
+            //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
+            //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
+            if (a.slotExpression.referredVariable == self and 
+                a.value.referredVariable == varB) {
+                if (prop.opposite.isDefined()) {
+                    // Composition
+                    //p.conditionExpression.toString().println(self.name + " with " + varB.name + " in ");   
+                    result.add(prop.opposite.isComposite());
+                    result.add(prop.opposite.isMany());
+                    result.add(prop.isMany());
+                } else {
+                    result.add(false);
+                    result.add(prop.isMany());
+                    result.add(false);
+                }
+                return result;
+            }
+        }       
+    //a.toString().println("Assignment ");
+    //self.println("var A ");
+    //varB.println("var B ");           
+    }
+*/
+    return result;
 }

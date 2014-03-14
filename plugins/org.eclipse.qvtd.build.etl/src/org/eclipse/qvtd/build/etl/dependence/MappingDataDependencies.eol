@@ -39,6 +39,7 @@ operation QVT!Transformation mappingDataDependencies(graph : ddg!Graph, inputVar
     for (r in self.rule.select(r | not r.context.isDefined())) {
         var ruleNode = graph.getNodeForQvtAstNode(r, ruleMap);
         varMap.clear();
+        r.println();
 	    // Input variables relations
 	    for (vA in inputVarMap.get(r)) {
 	        //vA.println("vA ");
@@ -50,10 +51,9 @@ operation QVT!Transformation mappingDataDependencies(graph : ddg!Graph, inputVar
 	        //e.type = ddg!EdgeType#primaryInput;   
 	        graph.element.add(e);   
             vA.variableRelations(graph, inputVarMap.get(r).excluding(vA), varMap);
-            if (r.name == "attributeColumns_MR") {
-            }
 	    }
 	    // Output variables relations
+	    /*
 	    for (vA in outputVarMap.get(r)) {
 	        //vA.println("vA ");
 	        var vaNode = graph.getNodeForQvtAstNode(vA, varMap);
@@ -65,11 +65,12 @@ operation QVT!Transformation mappingDataDependencies(graph : ddg!Graph, inputVar
 	        graph.element.add(e);       
 	        vA.variableRelations(graph, outputVarMap.get(r).excluding(vA), varMap);
 	    }
+        */
 	    // Input to Output variable relations
-	    for (vIn in inputVarMap.get(r)) {
-	        //vA.println("vA ");
-	        vIn.variableRelations(graph, outputVarMap.get(r), varMap);
-	    }
+	    //for (vIn in inputVarMap.get(r)) {
+	    //    //vA.println("vA ");
+	    //    vIn.variableRelations(graph, outputVarMap.get(r), varMap);
+	    //}
 	}
 }
 

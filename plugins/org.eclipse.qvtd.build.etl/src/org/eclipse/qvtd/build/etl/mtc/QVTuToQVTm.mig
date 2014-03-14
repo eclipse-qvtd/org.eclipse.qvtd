@@ -55,6 +55,7 @@ migrate Mapping
         lm.bottomPattern.assignment.addAll(emfTool.getECoreUtil().copyAll(olm.collect(l | l.bottomPattern).flatten().collect(gp | gp.assignment).flatten()));
         lm.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(olm.collect(l | l.bottomPattern).flatten().collect(gp | gp.realizedVariable).flatten()));
         migrated.local.add(lm);
+        
         // Fix references
         migrated.guardPattern.fixPredicateVarReferences();
         migrated.bottomPattern.fixPredicateVarReferences();

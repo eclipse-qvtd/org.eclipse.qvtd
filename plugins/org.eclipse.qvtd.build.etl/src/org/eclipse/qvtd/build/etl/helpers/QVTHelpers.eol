@@ -571,7 +571,7 @@ operation QVT!Rule getOutputVars() : Set {
     //}
     return vars;
 }
-
+ /* 
 // self contains vB
 operation QVT!Variable hasContainmentRelation(varB : QVT!Variable) : Boolean {
     // Containment is in the same domain
@@ -670,7 +670,7 @@ operation qvti!Variable hasMiddleRelation(varB : qvti!Variable) : Boolean {
         
     }
     return false;
-}
+}*/
 
  
 /**

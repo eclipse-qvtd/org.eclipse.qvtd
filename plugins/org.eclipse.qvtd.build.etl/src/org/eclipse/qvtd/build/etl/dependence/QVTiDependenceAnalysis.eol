@@ -62,8 +62,8 @@ mdd.mergedMappingDataDependencies(mdg, containmentTrees);
 
 
 //4. Reduced data dependencies
-var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
-var rdg = new rdGraph!Graph;
+//var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
+//var rdg = new rdGraph!Graph;
 
 // Analize the dependencies to identify which input variables can be derived from others
 // primaryInputs are only the ones that don't have a containment relation or a 
