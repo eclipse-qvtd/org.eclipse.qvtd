@@ -15,12 +15,12 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.debug.vm.protocol.VMDisconnectEvent;
-import org.eclipse.qvtd.debug.vm.protocol.VMEvent;
-import org.eclipse.qvtd.debug.vm.protocol.VMRequest;
-import org.eclipse.qvtd.debug.vm.protocol.VMResponse;
-import org.eclipse.qvtd.debug.vm.protocol.VMTerminateEvent;
-import org.eclipse.qvtd.debug.vm.protocol.VMTerminateRequest;
+import org.eclipse.ocl.examples.debug.vm.event.VMDisconnectEvent;
+import org.eclipse.ocl.examples.debug.vm.event.VMEvent;
+import org.eclipse.ocl.examples.debug.vm.event.VMTerminateEvent;
+import org.eclipse.ocl.examples.debug.vm.request.VMRequest;
+import org.eclipse.ocl.examples.debug.vm.request.VMTerminateRequest;
+import org.eclipse.ocl.examples.debug.vm.response.VMResponse;
 
 
 public class QVTOVirtualMachineProxy implements IQVTOVirtualMachineShell {

@@ -20,12 +20,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.debug.vm.data.BreakpointData;
+import org.eclipse.ocl.examples.debug.vm.data.NewBreakpointData;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.debug.utils.CompiledUnit;
 import org.eclipse.qvtd.debug.utils.LineNumberProvider;
-import org.eclipse.qvtd.debug.vm.protocol.BreakpointData;
-import org.eclipse.qvtd.debug.vm.protocol.NewBreakpointData;
 
 
 public class VMBreakpointManager

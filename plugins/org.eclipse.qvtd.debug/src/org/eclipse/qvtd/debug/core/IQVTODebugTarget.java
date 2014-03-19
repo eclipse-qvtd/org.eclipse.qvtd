@@ -2,9 +2,9 @@ package org.eclipse.qvtd.debug.core;
 
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IDebugTarget;
+import org.eclipse.ocl.examples.debug.vm.request.VMRequest;
+import org.eclipse.ocl.examples.debug.vm.response.VMResponse;
 import org.eclipse.qvtd.debug.vm.VMEventListener;
-import org.eclipse.qvtd.debug.vm.protocol.VMRequest;
-import org.eclipse.qvtd.debug.vm.protocol.VMResponse;
 
 interface IQVTODebugTarget extends IDebugTarget {
 

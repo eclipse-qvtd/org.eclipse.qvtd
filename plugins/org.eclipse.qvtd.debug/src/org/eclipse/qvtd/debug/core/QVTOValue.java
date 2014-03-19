@@ -9,13 +9,13 @@ import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.qvtd.debug.vm.protocol.VMDetailRequest;
-import org.eclipse.qvtd.debug.vm.protocol.VMDetailResponse;
-import org.eclipse.qvtd.debug.vm.protocol.VMResponse;
-import org.eclipse.qvtd.debug.vm.protocol.VMValue;
-import org.eclipse.qvtd.debug.vm.protocol.VMVariable;
-import org.eclipse.qvtd.debug.vm.protocol.VMVariableRequest;
-import org.eclipse.qvtd.debug.vm.protocol.VMVariableResponse;
+import org.eclipse.ocl.examples.debug.vm.data.VMValue;
+import org.eclipse.ocl.examples.debug.vm.data.VMVariable;
+import org.eclipse.ocl.examples.debug.vm.request.VMDetailRequest;
+import org.eclipse.ocl.examples.debug.vm.request.VMVariableRequest;
+import org.eclipse.ocl.examples.debug.vm.response.VMDetailResponse;
+import org.eclipse.ocl.examples.debug.vm.response.VMResponse;
+import org.eclipse.ocl.examples.debug.vm.response.VMVariableResponse;
 
 public class QVTOValue extends QVTODebugElement implements IValue {
 			

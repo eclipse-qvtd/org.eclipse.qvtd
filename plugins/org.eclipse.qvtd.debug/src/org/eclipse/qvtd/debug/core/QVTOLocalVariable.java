@@ -3,10 +3,10 @@ package org.eclipse.qvtd.debug.core;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.debug.vm.data.VMVariable;
 import org.eclipse.qvtd.debug.core.QVTOLocalValue.LocalValue;
 import org.eclipse.qvtd.debug.evaluator.IDebugEvaluationEnvironment;
 import org.eclipse.qvtd.debug.vm.VariableFinder;
-import org.eclipse.qvtd.debug.vm.protocol.VMVariable;
 
 public class QVTOLocalVariable extends QVTOVariable {
 	QVTOLocalVariable(IQVTODebugTarget debugTarget, VMVariable vmVar, long frameID, @NonNull IDebugEvaluationEnvironment evaluationEnvironment) {

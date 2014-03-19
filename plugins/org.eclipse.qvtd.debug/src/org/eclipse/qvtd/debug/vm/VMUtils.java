@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.debug.vm.data.VMStackFrame;
+import org.eclipse.ocl.examples.debug.vm.data.VMVariable;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.qvtd.debug.evaluator.IDebugEvaluationEnvironment;
-import org.eclipse.qvtd.debug.vm.protocol.VMStackFrame;
-import org.eclipse.qvtd.debug.vm.protocol.VMVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 public class VMUtils
@@ -47,7 +48,7 @@ public class VMUtils
 		String moduleName = (module != null) ? module.getName() : "<null>"; //$NON-NLS-1$
 		
 		NamedElement operation = location.getOperation();
-		String operSignature = (operation != null) ? getOperationSignature(operation)
+		String operSignature = (operation != null) ? getElementSignature(operation)
 				: null; //MessageFormat.format("<{0}>", moduleName); //$NON-NLS-1$
 		
 		List<VMVariable> vars = VariableFinder.getVariables(evalEnv);
@@ -56,7 +57,7 @@ public class VMUtils
 		return vmStackFrame;
 	}
 	
-	private static String getOperationSignature(NamedElement operation) {
+	private static String getElementSignature(NamedElement operation) {
         StringBuilder buf = new StringBuilder();
 /*    	EClassifier ctxType = QvtOperationalParserUtil.getContextualType(operation);        
         if (ctxType != null) {

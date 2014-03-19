@@ -15,11 +15,11 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.LineBreakpoint;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.ocl.examples.debug.vm.data.BreakpointData;
+import org.eclipse.ocl.examples.debug.vm.data.NewBreakpointData;
 import org.eclipse.qvtd.debug.QVTdDebugPlugin;
 import org.eclipse.qvtd.debug.stubs.QVTODebugUtil;
 import org.eclipse.qvtd.debug.utils.QVTODebugCore;
-import org.eclipse.qvtd.debug.vm.protocol.BreakpointData;
-import org.eclipse.qvtd.debug.vm.protocol.NewBreakpointData;
 
 
 public class QVTOBreakpoint extends LineBreakpoint {

@@ -11,11 +11,11 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStreamsProxy;
+import org.eclipse.ocl.examples.debug.vm.request.VMTerminateRequest;
 import org.eclipse.qvtd.debug.launching.LaunchConstants;
 import org.eclipse.qvtd.debug.stubs.QVTODebugUtil;
 import org.eclipse.qvtd.debug.utils.QVTODebugCore;
 import org.eclipse.qvtd.debug.vm.IQVTOVirtualMachineShell;
-import org.eclipse.qvtd.debug.vm.protocol.VMTerminateRequest;
 
 public class QVTOVirtualProcess extends PlatformObject implements IProcess {
 

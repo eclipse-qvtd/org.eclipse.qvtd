@@ -3,7 +3,7 @@ package org.eclipse.qvtd.debug.core;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
-import org.eclipse.qvtd.debug.vm.protocol.VMVariable;
+import org.eclipse.ocl.examples.debug.vm.data.VMVariable;
 
 public class QVTOVariable extends QVTODebugElement implements IVariable {
 	

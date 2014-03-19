@@ -27,11 +27,11 @@ public class QvtRuntimeException extends EvaluationHaltedException {
 		this(message,null);
 	}
 		
-	public QvtRuntimeException(Throwable cause) {
+	public QvtRuntimeException(Exception cause) {
 		this(null,cause);
 	}
 
-	public QvtRuntimeException(String message, Throwable cause) {
+	public QvtRuntimeException(String message, Exception cause) {
 		super(message, cause);
 	}	
 		

@@ -9,11 +9,11 @@ import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
+import org.eclipse.ocl.examples.debug.vm.data.VMStackFrame;
+import org.eclipse.ocl.examples.debug.vm.event.VMEvent;
+import org.eclipse.ocl.examples.debug.vm.event.VMSuspendEvent;
+import org.eclipse.ocl.examples.debug.vm.request.VMResumeRequest;
 import org.eclipse.qvtd.debug.vm.VMEventListener;
-import org.eclipse.qvtd.debug.vm.protocol.VMEvent;
-import org.eclipse.qvtd.debug.vm.protocol.VMResumeRequest;
-import org.eclipse.qvtd.debug.vm.protocol.VMStackFrame;
-import org.eclipse.qvtd.debug.vm.protocol.VMSuspendEvent;
 
 public class QVTOThread extends QVTODebugElement implements IThread, VMEventListener {
 

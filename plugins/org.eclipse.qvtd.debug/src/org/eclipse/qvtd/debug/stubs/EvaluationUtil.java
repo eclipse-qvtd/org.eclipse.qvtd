@@ -2,6 +2,7 @@ package org.eclipse.qvtd.debug.stubs;
 
 import org.eclipse.qvtd.debug.evaluator.IDebugEvaluationEnvironment;
 
+
 /**
  * @author dvorak
  */

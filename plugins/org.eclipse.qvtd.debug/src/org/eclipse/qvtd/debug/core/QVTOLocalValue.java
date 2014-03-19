@@ -7,10 +7,10 @@ import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.debug.vm.data.VMVariable;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.qvtd.debug.evaluator.IDebugEvaluationEnvironment;
 import org.eclipse.qvtd.debug.vm.VariableFinder;
-import org.eclipse.qvtd.debug.vm.protocol.VMVariable;
 
 public class QVTOLocalValue extends QVTOValue {
 	

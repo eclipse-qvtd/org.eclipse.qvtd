@@ -15,13 +15,13 @@ import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.debug.vm.data.VMLocation;
+import org.eclipse.ocl.examples.debug.vm.data.VMStackFrame;
+import org.eclipse.ocl.examples.debug.vm.data.VMVariable;
+import org.eclipse.ocl.examples.debug.vm.request.VMStackFrameRequest;
+import org.eclipse.ocl.examples.debug.vm.response.VMResponse;
+import org.eclipse.ocl.examples.debug.vm.response.VMStackFrameResponse;
 import org.eclipse.qvtd.debug.utils.QVTODebugCore;
-import org.eclipse.qvtd.debug.vm.protocol.VMLocation;
-import org.eclipse.qvtd.debug.vm.protocol.VMResponse;
-import org.eclipse.qvtd.debug.vm.protocol.VMStackFrame;
-import org.eclipse.qvtd.debug.vm.protocol.VMStackFrameRequest;
-import org.eclipse.qvtd.debug.vm.protocol.VMStackFrameResponse;
-import org.eclipse.qvtd.debug.vm.protocol.VMVariable;
 
 public class QVTOStackFrame extends QVTODebugElement implements IStackFrame {
 

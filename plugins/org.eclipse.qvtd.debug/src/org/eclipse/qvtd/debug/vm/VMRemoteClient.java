@@ -18,12 +18,12 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 import org.eclipse.emf.common.util.Monitor;
+import org.eclipse.ocl.examples.debug.vm.event.VMEvent;
+import org.eclipse.ocl.examples.debug.vm.request.VMConnectRequest;
+import org.eclipse.ocl.examples.debug.vm.request.VMRequest;
+import org.eclipse.ocl.examples.debug.vm.response.VMConnectResponse;
+import org.eclipse.ocl.examples.debug.vm.response.VMResponse;
 import org.eclipse.qvtd.debug.utils.SocketUtil;
-import org.eclipse.qvtd.debug.vm.protocol.VMConnectRequest;
-import org.eclipse.qvtd.debug.vm.protocol.VMConnectResponse;
-import org.eclipse.qvtd.debug.vm.protocol.VMEvent;
-import org.eclipse.qvtd.debug.vm.protocol.VMRequest;
-import org.eclipse.qvtd.debug.vm.protocol.VMResponse;
 
 
 class VMRemoteClient {

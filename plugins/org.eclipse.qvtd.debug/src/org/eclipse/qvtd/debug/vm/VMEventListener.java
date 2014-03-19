@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.vm;
 
-import org.eclipse.qvtd.debug.vm.protocol.VMEvent;
+import org.eclipse.ocl.examples.debug.vm.event.VMEvent;
 
 
 public interface VMEventListener {

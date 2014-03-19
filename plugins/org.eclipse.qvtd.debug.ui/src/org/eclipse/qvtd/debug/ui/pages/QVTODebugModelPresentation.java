@@ -26,17 +26,17 @@ import org.eclipse.debug.ui.IValueDetailListener;
 import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.ocl.examples.debug.core.QVTODebugTarget;
+import org.eclipse.ocl.examples.debug.core.QVTOStackFrame;
+import org.eclipse.ocl.examples.debug.core.QVTOThread;
+import org.eclipse.ocl.examples.debug.core.QVTOValue;
+import org.eclipse.ocl.examples.debug.core.QVTOVariable;
+import org.eclipse.ocl.examples.debug.vm.data.VMLocation;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.qvtd.debug.core.QVTOBreakpoint;
-import org.eclipse.qvtd.debug.core.QVTODebugTarget;
-import org.eclipse.qvtd.debug.core.QVTOStackFrame;
-import org.eclipse.qvtd.debug.core.QVTOThread;
-import org.eclipse.qvtd.debug.core.QVTOValue;
-import org.eclipse.qvtd.debug.core.QVTOVariable;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.debug.ui.actions.QVTODebugImages;
 import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
-import org.eclipse.qvtd.debug.vm.protocol.VMLocation;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
@@ -59,8 +59,8 @@ public class QVTODebugModelPresentation implements IDebugModelPresentation, IDeb
     	if (element instanceof QVTOStackFrame) {
         	QVTOStackFrame frame = (QVTOStackFrame) element;
     		VMLocation location = frame.getLocation();
-    		String operationSignature = location.getOperationSignature();
-            if (operationSignature != null) {
+    		String elementSignature = location.getElementSignature();
+            if (elementSignature != null) {
     			return QVTODebugImages.getImage(QVTODebugImages.MAPPING);
             }
             else {
@@ -118,10 +118,10 @@ public class QVTODebugModelPresentation implements IDebugModelPresentation, IDeb
     		int line = frame.getLineNumber();
             StringBuilder s = new StringBuilder();
             s.append(location.getModule());
-            String operationSignature = location.getOperationSignature();
-            if (operationSignature != null) {
+            String elementSignature = location.getElementSignature();
+            if (elementSignature != null) {
             	s.append("::");
-            	s.append(operationSignature);
+            	s.append(elementSignature);
             }
         	s.append(" - ");
         	s.append(source);

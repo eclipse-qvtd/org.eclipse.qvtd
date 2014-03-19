@@ -12,9 +12,9 @@ package org.eclipse.qvtd.debug.vm;
 
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.debug.vm.event.VMEvent;
+import org.eclipse.ocl.examples.debug.vm.request.VMRequest;
 import org.eclipse.qvtd.debug.evaluator.DebugRootQVTiEvaluationVisitor;
-import org.eclipse.qvtd.debug.vm.protocol.VMEvent;
-import org.eclipse.qvtd.debug.vm.protocol.VMRequest;
 
 public interface IQVTODebuggerShell {
 
