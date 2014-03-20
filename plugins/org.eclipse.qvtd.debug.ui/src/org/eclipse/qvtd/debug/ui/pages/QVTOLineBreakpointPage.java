@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.debug.ui.pages;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.qvtd.debug.core.QVTOBreakpoint;
+import org.eclipse.ocl.examples.debug.core.VMLineBreakpoint;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.swt.SWT;
@@ -34,7 +34,7 @@ public class QVTOLineBreakpointPage extends QVTOBreakpointPage {
     private Label fSuspendWhenLabel;
 
     protected void doStore() throws CoreException {
-        QVTOBreakpoint breakpoint= (QVTOBreakpoint) getBreakpoint();
+        VMLineBreakpoint breakpoint= (VMLineBreakpoint) getBreakpoint();
         super.doStore();
         if (fConditionEditor != null) {
             boolean enableCondition = fEnableConditionButton.getSelection();
@@ -54,7 +54,7 @@ public class QVTOLineBreakpointPage extends QVTOBreakpointPage {
 
     protected void createTypeSpecificLabels(Composite parent) {
         // Line number
-        QVTOBreakpoint breakpoint = (QVTOBreakpoint) getBreakpoint();
+        VMLineBreakpoint breakpoint = (VMLineBreakpoint) getBreakpoint();
         StringBuffer lineNumber = new StringBuffer(4);
         try {
             int lNumber = breakpoint.getLineNumber();
@@ -73,7 +73,7 @@ public class QVTOLineBreakpointPage extends QVTOBreakpointPage {
     
     protected void createTypeSpecificEditors(Composite parent) throws CoreException {
         setTitle(DebugUIMessages.QVTOLineBreakpointPage_LineBreakpoint);
-        QVTOBreakpoint breakpoint = (QVTOBreakpoint) getBreakpoint();
+        VMLineBreakpoint breakpoint = (VMLineBreakpoint) getBreakpoint();
         if (breakpoint.supportsCondition()) {
             createConditionEditor(parent);
         }
@@ -86,7 +86,7 @@ public class QVTOLineBreakpointPage extends QVTOBreakpointPage {
      * @throws CoreException if an exception occurs accessing the breakpoint
      */
     private void createConditionEditor(Composite parent) throws CoreException {
-        QVTOBreakpoint breakpoint = (QVTOBreakpoint) getBreakpoint();
+        VMLineBreakpoint breakpoint = (VMLineBreakpoint) getBreakpoint();
         String label = DebugUIMessages.QVTOLineBreakpointPage_EnableCondition; 
         
         Composite conditionComposite = SWTFactory.createGroup(parent, EMPTY_STRING, 1, 1, GridData.FILL_BOTH);

@@ -19,13 +19,13 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.debug.stubs.ASTBindingHelper;
+import org.eclipse.ocl.examples.debug.stubs.QvtOperationalParserUtil;
+import org.eclipse.ocl.examples.debug.utils.CompiledUnit;
+import org.eclipse.ocl.examples.debug.utils.IModuleSourceInfo;
+import org.eclipse.ocl.examples.debug.utils.LineNumberProvider;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.qvtd.debug.stubs.ASTBindingHelper;
-import org.eclipse.qvtd.debug.stubs.QvtOperationalParserUtil;
-import org.eclipse.qvtd.debug.utils.CompiledUnit;
-import org.eclipse.qvtd.debug.utils.IModuleSourceInfo;
-import org.eclipse.qvtd.debug.utils.LineNumberProvider;
-import org.eclipse.qvtd.debug.utils.QVTODebugCore;
+import org.eclipse.qvtd.debug.utils.QVTiDebugCore;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 public class UnitManager
@@ -41,7 +41,7 @@ public class UnitManager
 			fUri2UnitMap = createURI2UnitMap(mainUnit);
 		} catch (IOException e) {
 			fUri2UnitMap = Collections.emptyMap();			
-			QVTODebugCore.log(e);
+			QVTiDebugCore.log(e);
 		}
 	}	
 	

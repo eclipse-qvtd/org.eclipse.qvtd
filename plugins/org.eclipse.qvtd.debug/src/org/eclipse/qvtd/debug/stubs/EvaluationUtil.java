@@ -1,6 +1,6 @@
 package org.eclipse.qvtd.debug.stubs;
 
-import org.eclipse.qvtd.debug.evaluator.IDebugEvaluationEnvironment;
+import org.eclipse.qvtd.debug.evaluator.IQVTiVMEvaluationEnvironment;
 
 
 /**
@@ -155,7 +155,7 @@ public class EvaluationUtil {
 		return nestedContext;
 	} */
 		
-	public static IDebugEvaluationEnvironment getAggregatingContext(IDebugEvaluationEnvironment evalEnv) {
+	public static IQVTiVMEvaluationEnvironment getAggregatingContext(IQVTiVMEvaluationEnvironment evalEnv) {
 		return null;//evalEnv.getContext().getSessionData().getValue(AGGREGATING_ROOT_ENV);
 	}
 

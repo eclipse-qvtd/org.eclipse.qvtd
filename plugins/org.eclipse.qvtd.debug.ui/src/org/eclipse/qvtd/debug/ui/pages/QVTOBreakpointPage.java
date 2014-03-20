@@ -22,7 +22,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.DebugException;
-import org.eclipse.qvtd.debug.core.QVTOBreakpoint;
+import org.eclipse.ocl.examples.debug.core.VMLineBreakpoint;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.swt.SWT;
@@ -74,7 +74,7 @@ public class QVTOBreakpointPage extends PropertyPage {
     public boolean performOk() {
         IWorkspaceRunnable wr = new IWorkspaceRunnable() {
             public void run(IProgressMonitor monitor) throws CoreException {
-                QVTOBreakpoint breakpoint = getBreakpoint();
+                VMLineBreakpoint breakpoint = getBreakpoint();
                 boolean delOnCancel = breakpoint.getMarker().getAttribute(ATTR_DELETE_ON_CANCEL) != null;
                 if (delOnCancel) {
                     // if this breakpoint is being created, remove the "delete on cancel" attribute
@@ -132,7 +132,7 @@ public class QVTOBreakpointPage extends PropertyPage {
      * reduce the number of resource deltas.
      */
     protected void doStore() throws CoreException {
-        QVTOBreakpoint breakpoint = getBreakpoint();
+        VMLineBreakpoint breakpoint = getBreakpoint();
         storeHitCount(breakpoint);
         storeEnabled(breakpoint);
     }
@@ -143,7 +143,7 @@ public class QVTOBreakpointPage extends PropertyPage {
      * @throws CoreException if an exception occurs while setting
      *  the enabled state
      */
-    private void storeEnabled(QVTOBreakpoint breakpoint) throws CoreException {
+    private void storeEnabled(VMLineBreakpoint breakpoint) throws CoreException {
         breakpoint.setEnabled(fEnabledButton.getSelection());
     }
 
@@ -153,7 +153,7 @@ public class QVTOBreakpointPage extends PropertyPage {
      * @throws CoreException if an exception occurs while setting
      *  the hit count
      */
-    private void storeHitCount(QVTOBreakpoint breakpoint) throws CoreException {
+    private void storeHitCount(VMLineBreakpoint breakpoint) throws CoreException {
         int hitCount = -1;
         if (fHitCountButton.getSelection()) {
             try {
@@ -310,8 +310,8 @@ public class QVTOBreakpointPage extends PropertyPage {
      * Returns the breakpoint that this preference page configures
      * @return the breakpoint this page configures
      */
-    protected QVTOBreakpoint getBreakpoint() {
-        return (QVTOBreakpoint) getElement();
+    protected VMLineBreakpoint getBreakpoint() {
+        return (VMLineBreakpoint) getElement();
     }
     
     /**

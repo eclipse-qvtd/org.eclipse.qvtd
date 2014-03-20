@@ -2,8 +2,9 @@ package org.eclipse.qvtd.debug.ui.stubs;
 
 import java.util.List;
 
-import org.eclipse.qvtd.debug.utils.Log;
-import org.eclipse.qvtd.debug.utils.WriterLog;
+import org.eclipse.ocl.examples.debug.utils.Log;
+import org.eclipse.ocl.examples.debug.utils.WriterLog;
+import org.eclipse.qvtd.debug.launching.ExecutionContext;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EvaluationMonitor;
 
 public class ExecutionContextImpl implements ExecutionContext {

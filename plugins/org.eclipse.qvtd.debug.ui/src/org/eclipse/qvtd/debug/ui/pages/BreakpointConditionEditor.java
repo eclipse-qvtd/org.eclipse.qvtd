@@ -21,7 +21,7 @@ import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.TextViewerUndoManager;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
-import org.eclipse.qvtd.debug.core.QVTOBreakpoint;
+import org.eclipse.ocl.examples.debug.core.VMLineBreakpoint;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.swt.SWT;
@@ -40,7 +40,7 @@ public class BreakpointConditionEditor {
     private String fOldValue;
     private String fErrorMessage;
     private QVTOLineBreakpointPage fPage;
-    private QVTOBreakpoint fBreakpoint;
+    private VMLineBreakpoint fBreakpoint;
     private IHandlerService fHandlerService;
     private IHandler fHandler;
     private IHandlerActivation fActivation;
@@ -53,7 +53,7 @@ public class BreakpointConditionEditor {
      */
     public BreakpointConditionEditor(Composite parent, QVTOLineBreakpointPage page) {
         fPage = page;
-        fBreakpoint = (QVTOBreakpoint) fPage.getBreakpoint();
+        fBreakpoint = (VMLineBreakpoint) fPage.getBreakpoint();
         String condition = new String();
         try {
             condition = fBreakpoint.getCondition();

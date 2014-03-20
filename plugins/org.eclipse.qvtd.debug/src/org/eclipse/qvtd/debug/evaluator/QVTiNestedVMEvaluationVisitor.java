@@ -1,0 +1,60 @@
+/*******************************************************************************
+ * Copyright (c) 2009,2012 R.Dvorak and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Radek Dvorak - initial API and implementation
+ *     Christopher Gerking - bug 394498
+ *******************************************************************************/
+package org.eclipse.qvtd.debug.evaluator;
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.debug.evaluator.IVMEvaluationEnvironment;
+import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitor;
+
+public class QVTiNestedVMEvaluationVisitor extends QVTiVMEvaluationVisitor
+{
+	protected final @NonNull QVTiRootVMEvaluationVisitor root;
+	protected final @NonNull QVTiVMEvaluationVisitor parent;
+	protected final int depth;
+	
+	protected QVTiNestedVMEvaluationVisitor(@NonNull QVTiVMEvaluationVisitor parent, @NonNull QVTiEvaluationVisitor nestedEvaluationVisitor, @NonNull NamedElement operation) {
+		super(nestedEvaluationVisitor);
+		this.root = parent.getRootEvaluationVisitor();
+		this.parent = parent;
+		this.depth = parent.getDepth() + 1;
+		root.pushVisitor(this);
+	}
+
+	@Override
+	protected @Nullable Object badVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv,
+			@NonNull Element element, Object preState, @NonNull Throwable e) {
+		return root.badVisit(evalEnv, element, preState, e);
+	}
+
+	public void dispose() {
+		root.popVisitor(this);
+	}
+
+	public int getDepth() {
+		return depth;
+	}
+
+	public @NonNull QVTiRootVMEvaluationVisitor getRootEvaluationVisitor() {
+		return root;
+	}
+
+	protected void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, Object preState) {
+		root.postVisit(evalEnv, element, preState);
+	}
+
+	protected Object preVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element) {
+		return root.preVisit(evalEnv, element);
+	}
+}

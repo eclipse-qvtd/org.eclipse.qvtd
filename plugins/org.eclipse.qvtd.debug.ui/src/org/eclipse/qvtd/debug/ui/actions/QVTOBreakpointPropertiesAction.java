@@ -17,7 +17,7 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.window.IShellProvider;
-import org.eclipse.qvtd.debug.core.QVTOBreakpoint;
+import org.eclipse.ocl.examples.debug.core.VMLineBreakpoint;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
@@ -32,7 +32,7 @@ import org.eclipse.ui.dialogs.PropertyDialogAction;
 public class QVTOBreakpointPropertiesAction implements IObjectActionDelegate {
 
 	private IWorkbenchPart fPart;
-	private QVTOBreakpoint fBreakpoint;
+	private VMLineBreakpoint fBreakpoint;
 
 	/**
 	 * @see IActionDelegate#run(IAction)
@@ -80,8 +80,8 @@ public class QVTOBreakpointPropertiesAction implements IObjectActionDelegate {
 				return;
 			}
 			Object element = ss.getFirstElement();
-			if (element instanceof QVTOBreakpoint) {
-				setBreakpoint((QVTOBreakpoint) element);
+			if (element instanceof VMLineBreakpoint) {
+				setBreakpoint((VMLineBreakpoint) element);
 			} else {
 				setBreakpoint(null);
 			}
@@ -93,7 +93,7 @@ public class QVTOBreakpointPropertiesAction implements IObjectActionDelegate {
 	 * 
 	 * @param breakpoint
 	 */
-	public void setBreakpoint(QVTOBreakpoint breakpoint) {
+	public void setBreakpoint(VMLineBreakpoint breakpoint) {
 		fBreakpoint = breakpoint;
 	}
 

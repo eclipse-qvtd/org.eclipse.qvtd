@@ -16,11 +16,9 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.qvtd.debug.evaluator.DebugQVTiEvaluationVisitor;
-import org.eclipse.qvtd.debug.utils.DebugUtils;
-import org.eclipse.qvtd.debug.utils.QVTODebugCore;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationEnvironment;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorImpl;
+import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.qvtd.debug.evaluator.QVTiVMEvaluationVisitor;
+import org.eclipse.qvtd.debug.utils.QVTiDebugCore;
 
 public class ConditionChecker {
 
@@ -43,7 +41,7 @@ public class ConditionChecker {
 		fTargetASTElement = targetASTElement;
 	}
 		
-	public Object evaluate(DebugQVTiEvaluationVisitor mainEvaluator) throws CoreException {
+	public Object evaluate(QVTiVMEvaluationVisitor mainEvaluator) throws CoreException {
 		OCLExpression condition = null; //getConditionAST();
 		if (fConditionError != null) {
 			throw new CoreException(fConditionError);
@@ -51,18 +49,17 @@ public class ConditionChecker {
 		
 		assert condition != null;
 		// FIXME - use a watching thread to interrupt infinite loop execution
-		IQVTiEvaluationEnvironment evalEnv = DebugUtils.cloneEvaluationEnv(mainEvaluator.getEvaluationEnvironment());
-		QVTiEvaluationVisitorImpl dedicatedVisitor = new QVTiEvaluationVisitorImpl(mainEvaluator.getEnvironment(), evalEnv);
+		EvaluationVisitor dedicatedVisitor = mainEvaluator.getClonedEvaluator();
 
 		try {
 			return condition.accept(dedicatedVisitor);
 		} catch (Throwable e) {
-			throw new CoreException(QVTODebugCore.createError(
+			throw new CoreException(QVTiDebugCore.createError(
 					e.toString(), ERR_CODE_EVALUATION, e));
 		}
 	}
 
-	public boolean checkCondition(DebugQVTiEvaluationVisitor mainEvaluator) throws CoreException {
+	public boolean checkCondition(QVTiVMEvaluationVisitor mainEvaluator) throws CoreException {
 		return Boolean.TRUE.equals(evaluate(mainEvaluator));
 	}
 	

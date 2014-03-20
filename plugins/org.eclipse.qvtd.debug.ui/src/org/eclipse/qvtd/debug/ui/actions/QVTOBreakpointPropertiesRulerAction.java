@@ -17,7 +17,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.qvtd.debug.core.QVTOBreakpoint;
+import org.eclipse.ocl.examples.debug.core.VMLineBreakpoint;
 import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.ui.dialogs.PropertyDialogAction;
 import org.eclipse.ui.texteditor.ITextEditor;
@@ -57,7 +57,7 @@ public class QVTOBreakpointPropertiesRulerAction extends RulerBreakpointAction i
     public void update() {
         fBreakpoint = null;
         IBreakpoint breakpoint = getBreakpoint();
-        if (breakpoint != null && (breakpoint instanceof QVTOBreakpoint)) {
+        if (breakpoint != null && (breakpoint instanceof VMLineBreakpoint)) {
             fBreakpoint = breakpoint;
         }
         setEnabled(fBreakpoint != null);

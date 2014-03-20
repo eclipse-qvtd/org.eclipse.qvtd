@@ -18,14 +18,14 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.debug.stubs.ASTBindingHelper;
+import org.eclipse.ocl.examples.debug.utils.CompiledUnit;
+import org.eclipse.ocl.examples.debug.utils.LineNumberProvider;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
-import org.eclipse.qvtd.debug.stubs.ASTBindingHelper;
-import org.eclipse.qvtd.debug.utils.CompiledUnit;
-import org.eclipse.qvtd.debug.utils.LineNumberProvider;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
 
 public class ValidBreakpointLocator extends AbstractExtendingQVTimperativeVisitor<Boolean, CompiledUnit>

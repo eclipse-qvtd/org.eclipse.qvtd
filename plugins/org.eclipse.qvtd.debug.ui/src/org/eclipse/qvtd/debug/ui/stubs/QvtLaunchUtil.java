@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.qvtd.debug.launching.LaunchConstants;
+import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 
-public class QvtLaunchUtil implements LaunchConstants
+public class QvtLaunchUtil implements QVTiLaunchConstants
 {
 
 	public static List<TargetUriData> getTargetUris(ILaunchConfiguration configuration) {
