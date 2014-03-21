@@ -19,12 +19,12 @@ import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
-public class VMDebuggableRunner extends DebuggableRunner
+public class QVTiVMDebuggableRunner extends QVTiDebuggableRunner
 {
 	private IVMDebuggerShell fDebugShell;
 	private PrintWriter fErrorLog;
 	
-	public VMDebuggableRunner(@NonNull QVTiEvaluationContext evaluationContext, @NonNull QVTiEnvironmentFactory envFactory) {
+	public QVTiVMDebuggableRunner(@NonNull QVTiEvaluationContext evaluationContext, @NonNull QVTiEnvironmentFactory envFactory) {
 		super(evaluationContext, envFactory);
 		
 		fErrorLog = new PrintWriter(new OutputStream() {
@@ -33,13 +33,6 @@ public class VMDebuggableRunner extends DebuggableRunner
 				// do nothing I'm a <null> log
 			}
 		}, true);
-	}
-	
-	public void setErrorLog(PrintWriter errorLog) {
-		if(errorLog == null) {
-			throw new IllegalArgumentException();
-		}
-		this.fErrorLog = errorLog;
 	}
 	
 //	@Override
@@ -100,12 +93,12 @@ public class VMDebuggableRunner extends DebuggableRunner
 					throw new IllegalStateException("Executor not connected to debugger"); //$NON-NLS-1$
 				}
 
-				CompiledUnit mainUnit = VMDebuggableRunner.this.getExecutor().getUnit();
+				CompiledUnit mainUnit = QVTiVMDebuggableRunner.this.getExecutor().getUnit();
 				if (mainUnit != null) {
 					QVTODebugUtil.attachEnvironment(mainUnit);
 				}
 				
-				Diagnostic execDiagnostic = VMDebuggableRunner.this.execute(evaluationContext);
+				Diagnostic execDiagnostic = QVTiVMDebuggableRunner.this.execute(evaluationContext);
 				
 				if(execDiagnostic.getSeverity() != Diagnostic.OK) {
 					fErrorLog.println(execDiagnostic);
@@ -122,5 +115,12 @@ public class VMDebuggableRunner extends DebuggableRunner
 				fDebugShell = debugShell;			
 			}			
 		};
+	}
+	
+	public void setErrorLog(PrintWriter errorLog) {
+		if(errorLog == null) {
+			throw new IllegalArgumentException();
+		}
+		this.fErrorLog = errorLog;
 	}
 }

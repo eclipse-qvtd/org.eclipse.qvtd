@@ -29,10 +29,12 @@ import org.eclipse.ocl.examples.debug.stubs.DebugOptions;
 import org.eclipse.ocl.examples.debug.stubs.VMInterruptedExecutionException;
 import org.eclipse.ocl.examples.debug.utils.CompiledUnit;
 import org.eclipse.ocl.examples.debug.utils.QVTODebugCore;
+import org.eclipse.ocl.examples.debug.vm.ConditionChecker;
 import org.eclipse.ocl.examples.debug.vm.IVMDebuggerShell;
 import org.eclipse.ocl.examples.debug.vm.UnitLocation;
 import org.eclipse.ocl.examples.debug.vm.VMBreakpoint;
 import org.eclipse.ocl.examples.debug.vm.VMBreakpointManager;
+import org.eclipse.ocl.examples.debug.vm.ValidBreakpointLocator;
 import org.eclipse.ocl.examples.debug.vm.data.VMStackFrameData;
 import org.eclipse.ocl.examples.debug.vm.event.VMResumeEvent;
 import org.eclipse.ocl.examples.debug.vm.event.VMStartEvent;
@@ -44,9 +46,8 @@ import org.eclipse.ocl.examples.debug.vm.request.VMTerminateRequest;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.qvtd.debug.vm.ConditionChecker;
-import org.eclipse.qvtd.debug.vm.VMUtils;
-import org.eclipse.qvtd.debug.vm.ValidBreakpointLocator;
+import org.eclipse.qvtd.debug.launching.QVTiVMDebuggableRunner;
+import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironment;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorImpl;
@@ -111,7 +112,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 
 	private VMSuspendEvent createVMSuspendEvent(int eventDetail) {
 		// build the VM stack frames
-		VMStackFrameData[] vmStack = VMUtils.createStackFrame(getLocationStack());		
+		VMStackFrameData[] vmStack = QVTiVMVirtualMachine.createStackFrame(getLocationStack());		
 		assert vmStack.length > 0;
 		return new VMSuspendEvent(vmStack, eventDetail);
 	}
@@ -191,8 +192,9 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 //			return;
 //		}
 		
-		if(false == (!isElementEnd ? ValidBreakpointLocator.isBreakpointableElementStart(element) : 
-			ValidBreakpointLocator.isBreakpointableElementEnd(element))) {
+		ValidBreakpointLocator validbreakpointlocator = QVTiVMDebuggableRunner.validBreakpointLocator;
+		if(false == (!isElementEnd ? validbreakpointlocator.isBreakpointableElementStart(element) : 
+			validbreakpointlocator.isBreakpointableElementEnd(element))) {
 			return;
 		}
 		
@@ -329,7 +331,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 				return fIterateBPHelper.stepIterateElement(loop, topLocation);
 			}
 			
-		} else if (ValidBreakpointLocator.isBreakpointableElementStart(element)) {
+		} else if (QVTiVMDebuggableRunner.validBreakpointLocator.isBreakpointableElementStart(element)) {
 			UnitLocation startLocation = newLocalLocation(evalEnv, element, ASTBindingHelper.getStartPosition(element), ASTBindingHelper.getEndPosition(element)); //, getNodeLength(element));
 
 			setCurrentLocation(element, startLocation, false);

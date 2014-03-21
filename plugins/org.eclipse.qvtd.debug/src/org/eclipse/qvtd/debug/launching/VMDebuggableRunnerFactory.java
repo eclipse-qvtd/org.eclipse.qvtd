@@ -19,12 +19,12 @@ public class VMDebuggableRunnerFactory extends DebuggableRunnerFactory {
 		return new QVTiVMEnvironmentFactory(registry, new MetaModelManager());
 	}
 	
-	protected @NonNull DebuggableRunner createRunner(@NonNull QVTiEvaluationContext evaluationContext, @NonNull QVTiEnvironmentFactory envFactory) {
-		return new VMDebuggableRunner(evaluationContext, envFactory);
+	protected @NonNull QVTiDebuggableRunner createRunner(@NonNull QVTiEvaluationContext evaluationContext, @NonNull QVTiEnvironmentFactory envFactory) {
+		return new QVTiVMDebuggableRunner(evaluationContext, envFactory);
 	}
 
 	@Override
-	public @NonNull VMDebuggableRunner createRunner(@NonNull QVTiEvaluationContext evaluationContext) throws DiagnosticException {
-		return (VMDebuggableRunner) super.createRunner(evaluationContext);
+	public @NonNull QVTiVMDebuggableRunner createRunner(@NonNull QVTiEvaluationContext evaluationContext) throws DiagnosticException {
+		return (QVTiVMDebuggableRunner) super.createRunner(evaluationContext);
 	}
 }

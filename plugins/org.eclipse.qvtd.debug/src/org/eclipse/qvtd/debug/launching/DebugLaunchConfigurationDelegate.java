@@ -30,11 +30,11 @@ import org.eclipse.ocl.examples.debug.utils.StreamsProxy;
 import org.eclipse.ocl.examples.debug.utils.WriterLog;
 import org.eclipse.ocl.examples.debug.vm.DebuggableExecutorAdapter;
 import org.eclipse.ocl.examples.debug.vm.IVMVirtualMachineShell;
-import org.eclipse.ocl.examples.debug.vm.VMVirtualMachine;
 import org.eclipse.qvtd.debug.core.QVTiDebugTarget;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
 import org.eclipse.qvtd.debug.core.QVTiVirtualProcess;
 import org.eclipse.qvtd.debug.utils.QVTiDebugCore;
+import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;
 
 public class DebugLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements QVTiLaunchConstants
 {
@@ -48,7 +48,7 @@ public class DebugLaunchConfigurationDelegate extends LaunchConfigurationDelegat
 		StreamsProxy streamsProxy = new StreamsProxy();
 		evaluationContext.setLog(new WriterLog(streamsProxy.getOutputWriter(), true));
 			
-		VMDebuggableRunner runner = createRunner(evaluationContext);
+		QVTiVMDebuggableRunner runner = createRunner(evaluationContext);
 		runner.setErrorLog(new PrintWriter(streamsProxy.getErrWriter(), true));
 		
 		Diagnostic initDiagnostic = runner.initialize();
@@ -56,8 +56,7 @@ public class DebugLaunchConfigurationDelegate extends LaunchConfigurationDelegat
 			throw new CoreException(BasicDiagnostic.toIStatus(initDiagnostic));			
 		}
 		
-		DebuggableExecutorAdapter executable = runner.createDebugableAdapter(evaluationContext);
-		IVMVirtualMachineShell vm = new VMVirtualMachine(runner.getMetaModelManager(), executable);
+		IVMVirtualMachineShell vm = new QVTiVMVirtualMachine(runner, evaluationContext);
 		
 		QVTiVirtualProcess process = new QVTiVirtualProcess(launch, vm);
 		process.setStreamsProxy(streamsProxy);
@@ -102,7 +101,7 @@ public class DebugLaunchConfigurationDelegate extends LaunchConfigurationDelegat
 	} */
 	
 	
-	private VMDebuggableRunner createRunner(@NonNull QVTiEvaluationContext evaluationContext) throws CoreException {
+	private QVTiVMDebuggableRunner createRunner(@NonNull QVTiEvaluationContext evaluationContext) throws CoreException {
 		VMDebuggableRunnerFactory runnerFactory = new VMDebuggableRunnerFactory();
 
 		URI transformationURI = evaluationContext.getTransformationURI();

@@ -26,8 +26,8 @@ public class DebuggableRunnerFactory {
 		return new QVTiEnvironmentFactory(registry, new MetaModelManager());
 	}
 
-	public @NonNull DebuggableRunner createRunner(@NonNull QVTiEvaluationContext evaluationContext) throws DiagnosticException {
-		BasicDiagnostic diagnostic = DebuggableRunner.createDiagnostic("Transformation runner problems");
+	public @NonNull QVTiDebuggableRunner createRunner(@NonNull QVTiEvaluationContext evaluationContext) throws DiagnosticException {
+		BasicDiagnostic diagnostic = QVTiDebuggableRunner.createDiagnostic("Transformation runner problems");
 		
 		URI uri = null;
 //		try {
@@ -53,7 +53,7 @@ public class DebuggableRunnerFactory {
 			throw new DiagnosticException(diagnostic);
 		} */
 		
-		DebuggableRunner runner = createRunner(evaluationContext, createEnvironmentFactory());
+		QVTiDebuggableRunner runner = createRunner(evaluationContext, createEnvironmentFactory());
 		
 /*		if(traceFileURI != null) {
 			try {
@@ -66,8 +66,8 @@ public class DebuggableRunnerFactory {
 		return runner;
 	}
 	
-	protected @NonNull DebuggableRunner createRunner(@NonNull QVTiEvaluationContext evaluationContext, @NonNull QVTiEnvironmentFactory envFactory) {
-		return new DebuggableRunner(evaluationContext, envFactory);
+	protected @NonNull QVTiDebuggableRunner createRunner(@NonNull QVTiEvaluationContext evaluationContext, @NonNull QVTiEnvironmentFactory envFactory) {
+		return new QVTiDebuggableRunner(evaluationContext, envFactory);
 	}
 	
 /*	private URI toURI(String uriStr, String uriType) throws DiagnosticException {

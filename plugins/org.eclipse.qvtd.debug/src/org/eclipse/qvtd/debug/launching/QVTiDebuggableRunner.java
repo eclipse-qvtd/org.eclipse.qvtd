@@ -4,27 +4,24 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.debug.launching.VMDebuggableRunner;
 import org.eclipse.ocl.examples.debug.stubs.ExecutionDiagnostic;
 import org.eclipse.ocl.examples.debug.utils.Trace;
+import org.eclipse.ocl.examples.debug.vm.ValidBreakpointLocator;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
+import org.eclipse.qvtd.debug.vm.QVTiIsBreakpointableVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
-public class DebuggableRunner
+public class QVTiDebuggableRunner extends VMDebuggableRunner
 {
+	public static final @NonNull ValidBreakpointLocator validBreakpointLocator = new ValidBreakpointLocator(QVTiIsBreakpointableVisitor.INSTANCE);
+
 	public static BasicDiagnostic createDiagnostic(String message) {
 		return new BasicDiagnostic(Diagnostic.OK, QVTiDebugPlugin.PLUGIN_ID, 0, message, null);
-	}
-
-	/**
-	 * Successfully finished execution, no errors and user interruption 
-	 */
-	private static boolean isSuccess(Diagnostic diagnostic) {
-		int severity = diagnostic.getSeverity();
-		return severity != Diagnostic.ERROR && severity != Diagnostic.CANCEL;
 	}
 
 	protected static class Executor extends QVTiInternalDebuggableExecutor {
@@ -57,7 +54,7 @@ public class DebuggableRunner
 //	private ModelExtentHelper fExtentHelper;
 	
 	
-	public DebuggableRunner(@NonNull QVTiEvaluationContext evaluationContext, @NonNull QVTiEnvironmentFactory envFactory) {
+	public QVTiDebuggableRunner(@NonNull QVTiEvaluationContext evaluationContext, @NonNull QVTiEnvironmentFactory envFactory) {
 		
 //		if (transformationURI == null || modelParamURIs == null
 //				|| modelParamURIs.contains(null)) {
@@ -133,6 +130,11 @@ public class DebuggableRunner
 	
 	protected @NonNull PivotEnvironmentFactory getEnvFactory() {
 		return fExecutor.getEnvFactory(); 
+	}
+
+	@Override
+	public @NonNull ValidBreakpointLocator getValidBreakpointLocator() {
+		return validBreakpointLocator;
 	}
 	
 	protected void handleLoadTransformation(Diagnostic diagnostic) {

@@ -100,10 +100,10 @@
          <enabledWhen>
             <or>
                <instanceof
-                     value="org.eclipse.qvtd.debug.core.QVTOBreakpoint">
+                     value="org.eclipse.ocl.examples.debug.core.VMLineBreakpoint">
                </instanceof>
                <adapt
-                     type="org.eclipse.qvtd.debug.core.QVTOBreakpoint">
+                     type="org.eclipse.ocl.examples.debug.core.VMLineBreakpoint">
                </adapt>
             </or>
          </enabledWhen>
@@ -138,7 +138,7 @@
 
    <extension point="org.eclipse.debug.core.launchDelegates">
        <launchDelegate id="org.eclipse.qvtd.debug.ui.DebugLaunchDelegate"
-             delegate="org.eclipse.qvtd.debug.ui.launching.DebugLaunchConfigurationDelegate"
+             delegate="org.eclipse.qvtd.debug.launching.DebugLaunchConfigurationDelegate"
              modes="debug"
              name="QVTi Transformation Debug"
              sourceLocatorId="org.eclipse.qvtd.debug.srclookup.QVTiSourceLookupDirector"

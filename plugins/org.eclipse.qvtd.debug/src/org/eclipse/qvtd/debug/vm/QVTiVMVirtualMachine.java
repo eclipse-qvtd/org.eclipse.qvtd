@@ -3,29 +3,29 @@ package org.eclipse.qvtd.debug.vm;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.evaluator.IVMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.UnitLocation;
+import org.eclipse.ocl.examples.debug.vm.VMVirtualMachine;
 import org.eclipse.ocl.examples.debug.vm.VariableFinder;
 import org.eclipse.ocl.examples.debug.vm.data.VMStackFrameData;
 import org.eclipse.ocl.examples.debug.vm.data.VMVariableData;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
+import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
+import org.eclipse.qvtd.debug.launching.QVTiVMDebuggableRunner;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
-public class VMUtils
+public class QVTiVMVirtualMachine extends VMVirtualMachine
 {
-	public static @Nullable VMStackFrameData createStackFrame(long frameID, List<UnitLocation> stack) {	
-		UnitLocation location = lookupEnvironmentByID(frameID, stack);
-		if (location != null) {
-			return createStackFrame(location);
-		}
-
-		// invalid stack frame
-		return null;
+	public QVTiVMVirtualMachine(@NonNull QVTiVMDebuggableRunner runner, @NonNull QVTiEvaluationContext evaluationContext) {
+		super(runner, runner.createDebugableAdapter(evaluationContext));
 	}
 	
 	public static VMStackFrameData[] createStackFrame(List<UnitLocation> stack) {
@@ -40,11 +40,11 @@ public class VMUtils
 		return result.toArray(new VMStackFrameData[result.size()]);
 	}
 	
-	public static VMStackFrameData createStackFrame(UnitLocation location) {
+	public VMStackFrameData createStackFrame(@NonNull UnitLocation location) {
 		return createStackFrame(location, true);
 	}
 	
-	private static VMStackFrameData createStackFrame(UnitLocation location, boolean includeVars) {
+	private static @NonNull VMStackFrameData createStackFrame(@NonNull UnitLocation location, boolean includeVars) {
 		IVMEvaluationEnvironment<?> evalEnv = location.getEvalEnv();
 		Root module = location.getModule();
 		String moduleName = (module != null) ? module.getName() : "<null>"; //$NON-NLS-1$
@@ -58,6 +58,7 @@ public class VMUtils
 					operSignature, location.getLineNum(), location.getStartPosition(), location.getEndPosition(), vars.toArray(new VMVariableData[vars.size()]));
 		return vmStackFrame;
 	}
+	
 	
 	private static String getElementSignature(NamedElement operation) {
         StringBuilder buf = new StringBuilder();
@@ -94,15 +95,4 @@ public class VMUtils
         
         return buf.toString();
     }
-	
-	public static UnitLocation lookupEnvironmentByID(long id, List<UnitLocation> stack) {
-		for (UnitLocation location : stack) {
-			IVMEvaluationEnvironment<?> evalEnv = location.getEvalEnv();
-			if (evalEnv.getID() == id) {
-				return location;
-			}
-		}
-
-		return null;
-	}
 }
