@@ -5,7 +5,10 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.debug.launching.InternalDebuggableExecutor;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
+import org.eclipse.qvtd.debug.evaluator.QVTiXtextEvaluator2;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 
@@ -14,7 +17,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
  * 
  * @since 3.0
  */
-public class QVTiInternalDebuggableExecutor extends InternalDebuggableExecutor
+public class QVTiInternalDebuggableExecutor extends InternalDebuggableExecutor<Transformation>
 {
 	protected final @NonNull QVTiEvaluationContext evaluationContext;
 	
@@ -23,8 +26,8 @@ public class QVTiInternalDebuggableExecutor extends InternalDebuggableExecutor
 		this.evaluationContext = evaluationContext;
 	}
 
-	protected @NonNull QVTiXtextEvaluator createEvaluator() throws IOException {
-		QVTiXtextEvaluator evaluator = new QVTiXtextEvaluator((QVTiEnvironmentFactory) envFactory, evaluationContext.getTransformationURI());
+	protected @NonNull QVTiXtextEvaluator2 createEvaluator() throws IOException {
+		QVTiXtextEvaluator2 evaluator = new QVTiXtextEvaluator2((QVTiEnvironmentFactory) envFactory, evaluationContext.getTransformationURI());
 		for (Map.Entry<String, URI> inEntry : evaluationContext.getInputURIs().entrySet()) {
 			@SuppressWarnings("null")@NonNull String inKey = inEntry.getKey();
 			@SuppressWarnings("null")@NonNull URI inURI = inEntry.getValue();

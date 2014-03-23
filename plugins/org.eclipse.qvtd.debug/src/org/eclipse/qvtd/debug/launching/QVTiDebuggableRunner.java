@@ -4,7 +4,8 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.debug.launching.VMDebuggableRunner;
+import org.eclipse.ocl.examples.debug.launching.DebuggableRunner;
+import org.eclipse.ocl.examples.debug.launching.InternalDebuggableExecutor;
 import org.eclipse.ocl.examples.debug.stubs.ExecutionDiagnostic;
 import org.eclipse.ocl.examples.debug.utils.Trace;
 import org.eclipse.ocl.examples.debug.vm.ValidBreakpointLocator;
@@ -16,7 +17,7 @@ import org.eclipse.qvtd.debug.vm.QVTiIsBreakpointableVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
-public class QVTiDebuggableRunner extends VMDebuggableRunner
+public class QVTiDebuggableRunner extends DebuggableRunner
 {
 	public static final @NonNull ValidBreakpointLocator validBreakpointLocator = new ValidBreakpointLocator(QVTiIsBreakpointableVisitor.INSTANCE);
 
@@ -26,26 +27,19 @@ public class QVTiDebuggableRunner extends VMDebuggableRunner
 
 	protected static class Executor extends QVTiInternalDebuggableExecutor {
 		
-		Trace fTraces;
-		
 		public Executor(@NonNull QVTiEvaluationContext evaluationContext, @NonNull QVTiEnvironmentFactory envFactory) {
 			super(evaluationContext, envFactory);
 		}
 
-//		public Executor(@NonNull EvaluationContext evaluationContext) {
-//			super(evaluationContext);
-//		}
-
 		@Override
-		protected void handleExecutionTraces(Trace traces) {				
+		protected void handleExecutionTraces(@NonNull Trace traces) {				
 			super.handleExecutionTraces(traces);
-			fTraces = traces;
 		}
 
 	}
 		
 	private final URI fTransformationURI;	
-	private final Executor fExecutor;
+	private final InternalDebuggableExecutor<Transformation> fExecutor;
 //	private final List<URI> fModelParamURIs;
 	private URI fTraceFileURI;
 	
@@ -66,7 +60,7 @@ public class QVTiDebuggableRunner extends VMDebuggableRunner
 //		fModelParamURIs = modelParamURIs;
 	}
 	
-	protected InternalDebuggableExecutor getExecutor() {
+	protected InternalDebuggableExecutor<Transformation> getExecutor() {
 		return fExecutor;
 	};
 	
@@ -93,14 +87,14 @@ public class QVTiDebuggableRunner extends VMDebuggableRunner
 		
 		fDiagnostic = createDiagnostic("Transformation runner initiliaze");
 		
-		Diagnostic loadDiagnostic = fExecutor.loadTransformation();
+		Diagnostic loadDiagnostic = fExecutor.loadDebuggable();
 		if (!isSuccess(loadDiagnostic)) {
 			fDiagnostic.add(loadDiagnostic);
 		}
 
 		handleLoadTransformation(loadDiagnostic);
 		
-		Transformation transformation = fExecutor.getTransformation();
+		Transformation transformation = fExecutor.getDebuggable();
 		if (transformation == null) {
 			return fDiagnostic;
 		}
@@ -140,19 +134,6 @@ public class QVTiDebuggableRunner extends VMDebuggableRunner
 	protected void handleLoadTransformation(Diagnostic diagnostic) {
 		// do nothing
 	}	
-			
-	protected void handleLoadExtents(Diagnostic diagnostic) {
-		// do nothing
-	}	
-
-	protected void handleExecution(ExecutionDiagnostic execDiagnostic) {
-		// do nothing
-	}
-	
-	protected void handleSaveExtents(Diagnostic diagnostic) {
-		// do nothing
-	}		
-
 
 	public Diagnostic execute(@NonNull QVTiEvaluationContext evaluationContext) {
 		Diagnostic diagnostic = initialize();
@@ -168,7 +149,7 @@ public class QVTiDebuggableRunner extends VMDebuggableRunner
 			handleExecution(execDiagnostic);
 			
 //			Trace traces = fExecutor.fTraces;
-			fExecutor.fTraces = null;
+			fExecutor.resetTraces();
 
 			if(!isSuccess(execDiagnostic)) {
 				// skip saving any output

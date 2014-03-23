@@ -10,24 +10,17 @@ import org.eclipse.ocl.examples.debug.vm.VMVirtualMachine;
 import org.eclipse.ocl.examples.debug.vm.VariableFinder;
 import org.eclipse.ocl.examples.debug.vm.data.VMStackFrameData;
 import org.eclipse.ocl.examples.debug.vm.data.VMVariableData;
-import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
 import org.eclipse.qvtd.debug.launching.QVTiVMDebuggableRunner;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 public class QVTiVMVirtualMachine extends VMVirtualMachine
 {
-	public QVTiVMVirtualMachine(@NonNull QVTiVMDebuggableRunner runner, @NonNull QVTiEvaluationContext evaluationContext) {
-		super(runner, runner.createDebugableAdapter(evaluationContext));
-	}
-	
 	public static VMStackFrameData[] createStackFrame(List<UnitLocation> stack) {
 		List<VMStackFrameData> result = new ArrayList<VMStackFrameData>();
 		
@@ -95,4 +88,12 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
         
         return buf.toString();
     }
+	
+	public QVTiVMVirtualMachine(@NonNull QVTiVMDebuggableRunner runner, @NonNull QVTiEvaluationContext evaluationContext) {
+		super(runner, runner.createDebugableAdapter(evaluationContext));
+	}
+	
+	protected @NonNull String getVMThreadName() {
+		return "QVTi VM";
+	}	
 }

@@ -6,14 +6,13 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.debug.utils.Log;
+import org.eclipse.ocl.examples.debug.core.EvaluationContext;
 
-public class QVTiEvaluationContext
+public class QVTiEvaluationContext extends EvaluationContext
 {
 	private @NonNull URI transformationURI;
 	private @NonNull Map<String, URI> inputURIs = new HashMap<String, URI>();
 	private @NonNull Map<String, URI> outputURIs = new HashMap<String, URI>();
-	private @Nullable Log log;
 
 	public QVTiEvaluationContext(@NonNull URI transformationURI, @NonNull Map<String, URI> inputURIs, @NonNull Map<String, URI> outputURIs) {
 		this.transformationURI = transformationURI;
@@ -27,10 +26,6 @@ public class QVTiEvaluationContext
 
 	public @NonNull Map<String, URI> getInputURIs() {
 		return inputURIs;
-	}
-
-	public @Nullable Log getLog() {
-		return log;
 	}
 
 	public @Nullable URI getOutputURI(@NonNull String name) {
@@ -47,9 +42,5 @@ public class QVTiEvaluationContext
 
 	public @NonNull URI getTransformationURI() {
 		return transformationURI;
-	}
-
-	public void setLog(@NonNull Log log) {
-		this.log = log;
 	}
 }
