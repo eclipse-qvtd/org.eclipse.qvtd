@@ -61,7 +61,7 @@ public class DebugLaunchConfigurationDelegate extends LaunchConfigurationDelegat
 		QVTiVirtualProcess process = new QVTiVirtualProcess(launch, vm);
 		process.setStreamsProxy(streamsProxy);
 		
-		List<IFile> transformationWsFile = QVTODebugUtil.toFiles(runner.getTransformationURI());
+		List<IFile> transformationWsFile = QVTODebugUtil.toFiles(runner.getDebuggableURI());
 		if (!transformationWsFile.isEmpty()) {			
 			addSourceModificationListener(transformationWsFile.get(0), process);
 		}

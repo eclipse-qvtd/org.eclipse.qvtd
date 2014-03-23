@@ -48,7 +48,7 @@ public class QVTiVMDebuggableRunner extends QVTiDebuggableRunner
 	}
 	
 	@Override
-	protected void handleLoadTransformation(Diagnostic diagnostic) {
+	protected void handleLoadDebuggable(Diagnostic diagnostic) {
 	}
 	
 	protected void handleExecution(ExecutionDiagnostic execDiagnostic) {
