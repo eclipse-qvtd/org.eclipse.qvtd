@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
-import org.eclipse.ocl.examples.debug.OCLDebugPlugin;
 import org.eclipse.ocl.examples.debug.evaluator.IVMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.stubs.OperationCallResult;
 import org.eclipse.ocl.examples.debug.stubs.VMInterruptedExecutionException;

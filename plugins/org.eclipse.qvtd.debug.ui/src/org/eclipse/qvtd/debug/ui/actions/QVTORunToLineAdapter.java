@@ -27,6 +27,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ocl.examples.debug.core.VMDebugElement;
 import org.eclipse.ocl.examples.debug.core.VMLineBreakpoint;
 import org.eclipse.ocl.examples.debug.stubs.QVTODebugUtil;
+import org.eclipse.qvtd.debug.core.QVTiLineBreakpoint;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
@@ -66,7 +67,7 @@ public class QVTORunToLineAdapter implements IRunToLineTarget {
 		int lineNumber = textSelection.getStartLine() + 1;
 				
 		URI resourceURI = QVTODebugUtil.getResourceURI(file);
-		VMLineBreakpoint qvtBreakpoint = VMLineBreakpoint.createRunToLineBreakpoint(resourceURI, lineNumber);
+		VMLineBreakpoint qvtBreakpoint = QVTiLineBreakpoint.createRunToLineBreakpoint(resourceURI, lineNumber);
 
 		String invalidLocationMessage = DebugUIMessages.QVTORunToLineAdapter_invalidLocation;
 		IStatus verifyStatus = new BreakpointLocationVerifier((QVTimperativeEditor) textEditor, qvtBreakpoint,

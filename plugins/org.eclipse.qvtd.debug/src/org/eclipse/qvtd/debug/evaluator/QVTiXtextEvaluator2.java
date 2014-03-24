@@ -9,7 +9,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 
-public class QVTiXtextEvaluator2 extends QVTiXtextEvaluator implements XtextEvaluator<Transformation>
+public class QVTiXtextEvaluator2 extends QVTiXtextEvaluator implements XtextEvaluator
 {
 	public QVTiXtextEvaluator2(@NonNull QVTiEnvironmentFactory envFactory, @NonNull URI transformationURI) throws IOException {
 		super(envFactory, transformationURI);

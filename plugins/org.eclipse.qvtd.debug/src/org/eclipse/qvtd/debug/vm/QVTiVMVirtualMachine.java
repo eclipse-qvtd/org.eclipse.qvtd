@@ -17,6 +17,7 @@ import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
+import org.eclipse.qvtd.debug.utils.QVTiDebugCore;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 public class QVTiVMVirtualMachine extends VMVirtualMachine
@@ -89,11 +90,12 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
         return buf.toString();
     }
 	
-	public QVTiVMVirtualMachine(@NonNull DebuggableRunner<?> runner, @NonNull QVTiEvaluationContext evaluationContext) {
+	public QVTiVMVirtualMachine(@NonNull DebuggableRunner runner, @NonNull QVTiEvaluationContext evaluationContext) {
 		super(runner, runner.createDebugableAdapter(evaluationContext));
 	}
-	
-	protected @NonNull String getVMThreadName() {
-		return "QVTi VM";
+
+	@Override
+	public @NonNull QVTiDebugCore getDebugCore() {
+		return QVTiDebugCore.INSTANCE;
 	}	
 }

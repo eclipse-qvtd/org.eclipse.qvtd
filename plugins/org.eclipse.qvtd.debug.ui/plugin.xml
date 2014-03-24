@@ -100,10 +100,10 @@
          <enabledWhen>
             <or>
                <instanceof
-                     value="org.eclipse.ocl.examples.debug.core.VMLineBreakpoint">
+                     value="org.eclipse.qvtd.debug.core.QVTiLineBreakpoint">
                </instanceof>
                <adapt
-                     type="org.eclipse.ocl.examples.debug.core.VMLineBreakpoint">
+                     type="org.eclipse.qvtd.debug.core.QVTiLineBreakpoint">
                </adapt>
             </or>
          </enabledWhen>

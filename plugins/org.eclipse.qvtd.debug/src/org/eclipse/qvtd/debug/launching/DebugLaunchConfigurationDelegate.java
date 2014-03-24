@@ -39,7 +39,7 @@ import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;
 
 public class DebugLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements QVTiLaunchConstants
 {
-	public static final IStatus MODIFIED_SOURCE_STATUS = QVTiDebugCore.createError("", 300, null); //$NON-NLS-1$
+	public static final IStatus MODIFIED_SOURCE_STATUS = QVTiDebugCore.INSTANCE.createError("", 300, null); //$NON-NLS-1$
 	
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode,
@@ -49,7 +49,7 @@ public class DebugLaunchConfigurationDelegate extends LaunchConfigurationDelegat
 		StreamsProxy streamsProxy = new StreamsProxy();
 		evaluationContext.setLog(new WriterLog(streamsProxy.getOutputWriter(), true));
 			
-		DebuggableRunner<?> runner = createRunner(evaluationContext);
+		DebuggableRunner runner = createRunner(evaluationContext);
 		runner.setErrorLog(new PrintWriter(streamsProxy.getErrWriter(), true));
 		
 		Diagnostic initDiagnostic = runner.initialize();
@@ -102,7 +102,7 @@ public class DebugLaunchConfigurationDelegate extends LaunchConfigurationDelegat
 	} */
 	
 	
-	private DebuggableRunner<?> createRunner(@NonNull QVTiEvaluationContext evaluationContext) throws CoreException {
+	private DebuggableRunner createRunner(@NonNull QVTiEvaluationContext evaluationContext) throws CoreException {
 		URI transformationURI = evaluationContext.getTransformationURI();
 		String uri = transformationURI != null ? transformationURI.toString() : null;
 		EPackage.Registry packageRegistry = createPackageRegistry(uri);
@@ -120,7 +120,7 @@ public class DebugLaunchConfigurationDelegate extends LaunchConfigurationDelegat
 //		if (traceFile != null && traceFile.trim().length() != 0 && shouldGenerateTraceFile) {
 //			runnerFactory.traceFileURI = traceFile;
 //		}
-		QVTiVMDebuggableRunnerFactory runnerFactory = new QVTiVMDebuggableRunnerFactory(packageRegistry, uri, modelURIs, null);
+		QVTiDebuggableRunnerFactory runnerFactory = new QVTiDebuggableRunnerFactory(packageRegistry, uri, modelURIs, null);
 		
 		try {
 			return runnerFactory.createRunner(evaluationContext);

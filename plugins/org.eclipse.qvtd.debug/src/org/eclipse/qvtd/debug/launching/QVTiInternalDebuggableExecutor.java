@@ -9,7 +9,6 @@ import org.eclipse.ocl.examples.debug.launching.InternalDebuggableExecutor;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMEnvironmentFactory;
 import org.eclipse.qvtd.debug.evaluator.QVTiXtextEvaluator2;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
 /**
@@ -17,7 +16,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
  * 
  * @since 3.0
  */
-public class QVTiInternalDebuggableExecutor extends InternalDebuggableExecutor<Transformation>
+public class QVTiInternalDebuggableExecutor extends InternalDebuggableExecutor
 {
 	protected final @NonNull QVTiEvaluationContext evaluationContext;
 	

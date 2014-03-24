@@ -29,7 +29,7 @@ import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.osgi.util.NLS;
-import org.eclipse.qvtd.debug.launching.QVTiVMDebuggableRunnerFactory;
+import org.eclipse.qvtd.debug.launching.QVTiDebuggableRunnerFactory;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
 import org.eclipse.swt.widgets.Display;
@@ -140,7 +140,7 @@ class BreakpointLocationVerifier {
         	return QVTdDebugUIPlugin.createErrorStatus("Failed to obtain AST"); //$NON-NLS-1$
         }
 
-		List<Element> elements = QVTiVMDebuggableRunnerFactory.validBreakpointLocator
+		List<Element> elements = QVTiDebuggableRunnerFactory.validBreakpointLocator
 				.getBreakpointableElementsForLine(compilationUnit,
 						getLineNumberProvider(doc), lineNumber);                    	 
 		if(elements.isEmpty()) {

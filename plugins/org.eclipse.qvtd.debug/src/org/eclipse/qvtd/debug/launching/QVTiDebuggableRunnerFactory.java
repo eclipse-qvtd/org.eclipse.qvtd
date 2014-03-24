@@ -16,18 +16,17 @@ import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMEnvironmentFactory;
 import org.eclipse.qvtd.debug.vm.QVTiIsBreakpointableVisitor;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
-public class QVTiVMDebuggableRunnerFactory extends DebuggableRunnerFactory
+public class QVTiDebuggableRunnerFactory extends DebuggableRunnerFactory
 {
 	public static final @NonNull ValidBreakpointLocator validBreakpointLocator = new ValidBreakpointLocator(QVTiIsBreakpointableVisitor.INSTANCE);
 	
-	public QVTiVMDebuggableRunnerFactory(@NonNull EPackage.Registry packageRegistry, @NonNull String debuggableURI,
+	public QVTiDebuggableRunnerFactory(@NonNull EPackage.Registry packageRegistry, @NonNull String debuggableURI,
 			@NonNull List<String> modelURIs, @Nullable String traceFileURI) {
 		super(packageRegistry, debuggableURI, modelURIs, traceFileURI);
 	}
 
-	public @NonNull DebuggableRunner<?> createRunner(@NonNull QVTiEvaluationContext evaluationContext) throws DiagnosticException {
+	public @NonNull DebuggableRunner createRunner(@NonNull QVTiEvaluationContext evaluationContext) throws DiagnosticException {
 		BasicDiagnostic diagnostic = createDiagnostic("Transformation runner problems");
 		
 		URI uri = null;
@@ -55,7 +54,7 @@ public class QVTiVMDebuggableRunnerFactory extends DebuggableRunnerFactory
 		} */
 		MetaModelManager metaModelManager = evaluationContext.getMetaModelManager();
 		QVTiVMEnvironmentFactory environmentFactory = new QVTiVMEnvironmentFactory(packageRegistry, metaModelManager);
-		DebuggableRunner<?> runner = new DebuggableRunner<Transformation>(this, evaluationContext.getTransformationURI(), new QVTiInternalDebuggableExecutor(evaluationContext, environmentFactory));
+		DebuggableRunner runner = new DebuggableRunner(this, evaluationContext.getTransformationURI(), new QVTiInternalDebuggableExecutor(evaluationContext, environmentFactory));
 		
 /*		if(traceFileURI != null) {
 			try {
