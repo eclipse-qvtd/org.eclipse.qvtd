@@ -46,7 +46,7 @@ import org.eclipse.ocl.examples.debug.vm.request.VMTerminateRequest;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.qvtd.debug.launching.QVTiVMDebuggableRunner;
+import org.eclipse.qvtd.debug.launching.QVTiVMDebuggableRunnerFactory;
 import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironment;
@@ -192,7 +192,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 //			return;
 //		}
 		
-		ValidBreakpointLocator validbreakpointlocator = QVTiVMDebuggableRunner.validBreakpointLocator;
+		ValidBreakpointLocator validbreakpointlocator = QVTiVMDebuggableRunnerFactory.validBreakpointLocator;
 		if(false == (!isElementEnd ? validbreakpointlocator.isBreakpointableElementStart(element) : 
 			validbreakpointlocator.isBreakpointableElementEnd(element))) {
 			return;
@@ -331,7 +331,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 				return fIterateBPHelper.stepIterateElement(loop, topLocation);
 			}
 			
-		} else if (QVTiVMDebuggableRunner.validBreakpointLocator.isBreakpointableElementStart(element)) {
+		} else if (QVTiVMDebuggableRunnerFactory.validBreakpointLocator.isBreakpointableElementStart(element)) {
 			UnitLocation startLocation = newLocalLocation(evalEnv, element, ASTBindingHelper.getStartPosition(element), ASTBindingHelper.getEndPosition(element)); //, getNodeLength(element));
 
 			setCurrentLocation(element, startLocation, false);

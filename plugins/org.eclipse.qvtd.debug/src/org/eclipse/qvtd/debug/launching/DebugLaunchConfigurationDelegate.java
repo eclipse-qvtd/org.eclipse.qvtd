@@ -1,6 +1,7 @@
 package org.eclipse.qvtd.debug.launching;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,10 +26,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.debug.launching.DebuggableRunner;
 import org.eclipse.ocl.examples.debug.stubs.QVTODebugUtil;
 import org.eclipse.ocl.examples.debug.utils.StreamsProxy;
 import org.eclipse.ocl.examples.debug.utils.WriterLog;
-import org.eclipse.ocl.examples.debug.vm.DebuggableExecutorAdapter;
 import org.eclipse.ocl.examples.debug.vm.IVMVirtualMachineShell;
 import org.eclipse.qvtd.debug.core.QVTiDebugTarget;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
@@ -48,7 +49,7 @@ public class DebugLaunchConfigurationDelegate extends LaunchConfigurationDelegat
 		StreamsProxy streamsProxy = new StreamsProxy();
 		evaluationContext.setLog(new WriterLog(streamsProxy.getOutputWriter(), true));
 			
-		QVTiVMDebuggableRunner runner = createRunner(evaluationContext);
+		DebuggableRunner<?> runner = createRunner(evaluationContext);
 		runner.setErrorLog(new PrintWriter(streamsProxy.getErrWriter(), true));
 		
 		Diagnostic initDiagnostic = runner.initialize();
@@ -101,27 +102,25 @@ public class DebugLaunchConfigurationDelegate extends LaunchConfigurationDelegat
 	} */
 	
 	
-	private QVTiVMDebuggableRunner createRunner(@NonNull QVTiEvaluationContext evaluationContext) throws CoreException {
-		VMDebuggableRunnerFactory runnerFactory = new VMDebuggableRunnerFactory();
-
+	private DebuggableRunner<?> createRunner(@NonNull QVTiEvaluationContext evaluationContext) throws CoreException {
 		URI transformationURI = evaluationContext.getTransformationURI();
 		String uri = transformationURI != null ? transformationURI.toString() : null;
-		runnerFactory.transformationURI = uri;
-		runnerFactory.packageRegistry = createPackageRegistry(uri);
+		EPackage.Registry packageRegistry = createPackageRegistry(uri);
 		
-//		List<String> modelURIs = new ArrayList<String>();
+		List<String> modelURIs = new ArrayList<String>();
 //		for (TargetUriData uriData : QvtLaunchUtil.getTargetUris(configuration)) {
 //			modelURIs.add(uriData.getUriString());
 //		}
 		
 //		runnerFactory.modelParamURI = modelURIs;
 
-		URI traceFileURI = evaluationContext.getTraceFileURI();
-		String traceFile = traceFileURI != null ? traceFileURI.toString() : null;
-		boolean shouldGenerateTraceFile = false; //QvtLaunchUtil.shouldGenerateTraceFile(configuration);
-		if (traceFile != null && traceFile.trim().length() != 0 && shouldGenerateTraceFile) {
-			runnerFactory.traceFileURI = traceFile;
-		}
+//		URI traceFileURI = evaluationContext.getTraceFileURI();
+//		String traceFile = traceFileURI != null ? traceFileURI.toString() : null;
+//		boolean shouldGenerateTraceFile = false; //QvtLaunchUtil.shouldGenerateTraceFile(configuration);
+//		if (traceFile != null && traceFile.trim().length() != 0 && shouldGenerateTraceFile) {
+//			runnerFactory.traceFileURI = traceFile;
+//		}
+		QVTiVMDebuggableRunnerFactory runnerFactory = new QVTiVMDebuggableRunnerFactory(packageRegistry, uri, modelURIs, null);
 		
 		try {
 			return runnerFactory.createRunner(evaluationContext);

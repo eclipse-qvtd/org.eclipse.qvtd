@@ -7,10 +7,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.launching.InternalDebuggableExecutor;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
+import org.eclipse.qvtd.debug.evaluator.QVTiVMEnvironmentFactory;
 import org.eclipse.qvtd.debug.evaluator.QVTiXtextEvaluator2;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 
 /**
  * Internal transformation executor
@@ -21,7 +21,7 @@ public class QVTiInternalDebuggableExecutor extends InternalDebuggableExecutor<T
 {
 	protected final @NonNull QVTiEvaluationContext evaluationContext;
 	
-	public QVTiInternalDebuggableExecutor(@NonNull QVTiEvaluationContext evaluationContext, @NonNull QVTiEnvironmentFactory envFactory) {
+	public QVTiInternalDebuggableExecutor(@NonNull QVTiEvaluationContext evaluationContext, @NonNull QVTiVMEnvironmentFactory envFactory) {
 		super(envFactory, evaluationContext.getTransformationURI());
 		this.evaluationContext = evaluationContext;
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.evaluator.IVMEvaluationEnvironment;
+import org.eclipse.ocl.examples.debug.launching.DebuggableRunner;
 import org.eclipse.ocl.examples.debug.vm.UnitLocation;
 import org.eclipse.ocl.examples.debug.vm.VMVirtualMachine;
 import org.eclipse.ocl.examples.debug.vm.VariableFinder;
@@ -16,7 +17,6 @@ import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
-import org.eclipse.qvtd.debug.launching.QVTiVMDebuggableRunner;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 public class QVTiVMVirtualMachine extends VMVirtualMachine
@@ -89,7 +89,7 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
         return buf.toString();
     }
 	
-	public QVTiVMVirtualMachine(@NonNull QVTiVMDebuggableRunner runner, @NonNull QVTiEvaluationContext evaluationContext) {
+	public QVTiVMVirtualMachine(@NonNull DebuggableRunner<?> runner, @NonNull QVTiEvaluationContext evaluationContext) {
 		super(runner, runner.createDebugableAdapter(evaluationContext));
 	}
 	
