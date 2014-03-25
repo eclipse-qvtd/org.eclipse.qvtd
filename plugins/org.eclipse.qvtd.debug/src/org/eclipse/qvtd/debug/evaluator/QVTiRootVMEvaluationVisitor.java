@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.debug.stubs.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.stubs.DebugOptions;
 import org.eclipse.ocl.examples.debug.stubs.VMInterruptedExecutionException;
 import org.eclipse.ocl.examples.debug.utils.CompiledUnit;
-import org.eclipse.ocl.examples.debug.utils.QVTODebugCore;
 import org.eclipse.ocl.examples.debug.vm.ConditionChecker;
 import org.eclipse.ocl.examples.debug.vm.IVMDebuggerShell;
 import org.eclipse.ocl.examples.debug.vm.UnitLocation;
@@ -46,8 +45,8 @@ import org.eclipse.ocl.examples.debug.vm.request.VMTerminateRequest;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.launching.QVTiDebuggableRunnerFactory;
-import org.eclipse.qvtd.debug.utils.QVTiDebugCore;
 import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironment;
@@ -255,7 +254,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 					// suspend VM and wait for resolution by the debug client
 					suspendAndWaitForResume(location, suspendOnBpConditionErrr);
 				} else {
-					QVTODebugCore.log(e.getStatus());
+					QVTiDebugCore.INSTANCE.log(e.getStatus());
 				}
 				
 				continue;

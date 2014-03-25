@@ -4,7 +4,6 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.core.VMDebugTarget;
 import org.eclipse.ocl.examples.debug.vm.IVMVirtualMachineShell;
-import org.eclipse.qvtd.debug.utils.QVTiDebugCore;
 
 public class QVTiDebugTarget extends VMDebugTarget
 {

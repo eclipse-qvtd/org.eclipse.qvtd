@@ -9,21 +9,19 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.model.ITerminate;
-import org.eclipse.qvtd.debug.utils.QVTiDebugCore;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.debug.core.VMDebugCore;
 
-class SourceModificationListener implements IResourceChangeListener {
+class SourceModificationListener implements IResourceChangeListener
+{
+	protected final @NonNull VMDebugCore debugCore;
+	protected final @NonNull IFile fTransfFile;
+	protected final @NonNull ITerminate fTerminate;
 
-	private IFile fTransfFile;
-	private ITerminate fTerminate;
-
-	SourceModificationListener(IFile transformationFile,
-			ITerminate terminateable) {
-		if (transformationFile == null || terminateable == null) {
-			throw new IllegalArgumentException();
-		}
-
-		fTransfFile = transformationFile;
-		fTerminate = terminateable;
+	SourceModificationListener(@NonNull VMDebugCore debugCore, @NonNull IFile transformationFile, @NonNull ITerminate terminateable) {
+		this.debugCore = debugCore;
+		this.fTransfFile = transformationFile;
+		this.fTerminate = terminateable;
 	}
 
 	private boolean expired() {
@@ -70,7 +68,7 @@ class SourceModificationListener implements IResourceChangeListener {
 					}
 				});
 			} catch (CoreException e) {
-				QVTiDebugCore.log(e.getStatus());
+				debugCore.log(e.getStatus());
 			}
 		}
 

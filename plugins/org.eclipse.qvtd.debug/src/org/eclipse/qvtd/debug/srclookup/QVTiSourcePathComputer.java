@@ -15,7 +15,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.debug.srclookup.VMSourcePathComputer;
+import org.eclipse.ocl.examples.debug.vm.srclookup.VMSourcePathComputer;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 
 public class QVTiSourcePathComputer extends VMSourcePathComputer {

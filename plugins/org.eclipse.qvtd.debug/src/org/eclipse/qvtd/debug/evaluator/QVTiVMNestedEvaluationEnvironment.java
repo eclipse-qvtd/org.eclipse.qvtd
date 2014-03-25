@@ -5,6 +5,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.debug.core.VMDebugCore;
 import org.eclipse.ocl.examples.debug.evaluator.VMRuntimeException;
 import org.eclipse.ocl.examples.debug.stubs.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.utils.VMStackTraceBuilder;
@@ -50,6 +51,10 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 		int endPosition = ASTBindingHelper.getEndPosition(myCurrentIP);
 			return new UnitLocation(startPosition, endPosition, this, myCurrentIP); 
 //		}
+	}
+
+	public @NonNull VMDebugCore getDebugCore() {
+		return getRootEvaluationEnvironment().getDebugCore();
 	}
 
 	public @NonNull Transformation getDebuggableElement() {
@@ -114,7 +119,7 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 			getRootEvaluationEnvironment().saveThrownException(exception);
 			exception.setStackQvtTrace(new VMStackTraceBuilder(this).buildStackTrace());
 		} catch (Exception e) {
-			QVTiDebugPlugin.error("Failed to build QVT stack trace", e); //$NON-NLS-1$
+			getDebugCore().error("Failed to build QVT stack trace", e); //$NON-NLS-1$
 		}
 		
 		throw exception;

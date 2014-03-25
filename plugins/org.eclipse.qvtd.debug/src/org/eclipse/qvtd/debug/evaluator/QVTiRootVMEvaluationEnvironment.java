@@ -17,6 +17,7 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
+import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationEnvironment;
@@ -65,6 +66,10 @@ public class QVTiRootVMEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 		int endPosition = ASTBindingHelper.getEndPosition(myCurrentIP);
 			return new UnitLocation(startPosition, endPosition, this, myCurrentIP); 
 //		}
+	}
+
+	public @NonNull QVTiDebugCore getDebugCore() {
+		return QVTiDebugCore.INSTANCE;
 	}
 
 	@Override
@@ -175,7 +180,7 @@ public class QVTiRootVMEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 			saveThrownException(exception);
 			exception.setStackQvtTrace(new VMStackTraceBuilder(this).buildStackTrace());
 		} catch (Exception e) {
-			QVTiDebugPlugin.error("Failed to build QVT stack trace", e); //$NON-NLS-1$
+			getDebugCore().error("Failed to build QVT stack trace", e); //$NON-NLS-1$
 		}
 		
 		throw exception;

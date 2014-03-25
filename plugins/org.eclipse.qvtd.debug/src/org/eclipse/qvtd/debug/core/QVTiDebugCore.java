@@ -1,4 +1,4 @@
-package org.eclipse.qvtd.debug.utils;
+package org.eclipse.qvtd.debug.core;
 /*******************************************************************************
  * Copyright (c) 2009 R.Dvorak and others.
  * All rights reserved. This program and the accompanying materials
@@ -12,16 +12,17 @@ package org.eclipse.qvtd.debug.utils;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.ILog;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.debug.utils.QVTODebugCore;
-import org.eclipse.ocl.examples.debug.utils.Trace2;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.debug.core.VMDebugCore;
+import org.eclipse.ocl.examples.debug.utils.Trace;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
-import org.eclipse.qvtd.debug.core.QVTiLineBreakpoint;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class QVTiDebugCore extends QVTODebugCore
+public class QVTiDebugCore extends VMDebugCore
 {
 	public static final @NonNull QVTiDebugCore INSTANCE = new QVTiDebugCore();
 	
@@ -37,7 +38,7 @@ public class QVTiDebugCore extends QVTODebugCore
 	private static final @NonNull String METHODS_ENTERING = PLUGIN_ID + "/methods/entering"; //$NON-NLS-1$
 	private static final @NonNull String METHODS_EXITING = PLUGIN_ID + "/methods/exiting"; //$NON-NLS-1$
 	
-	public static @NonNull Trace2 TRACE = new Trace2(EXCEPTIONS_CATCHING, EXCEPTIONS_THROWING, METHODS_ENTERING, METHODS_EXITING);
+	public static @NonNull Trace TRACE = new Trace(EXCEPTIONS_CATCHING, EXCEPTIONS_THROWING, METHODS_ENTERING, METHODS_EXITING);
 
 	private QVTiDebugCore() {}
 
@@ -52,6 +53,11 @@ public class QVTiDebugCore extends QVTODebugCore
 	public @NonNull List<QVTiLineBreakpoint> getLineBreakpoints() {
 		return getQVTOBreakpoints(QVTiLineBreakpoint.class);
 	}
+
+    public @Nullable ILog getLog() {
+    	QVTiDebugPlugin debugPlugin = QVTiDebugPlugin.getDefault();
+		return debugPlugin != null ? debugPlugin.getLog() : null;
+    } 
 	
 	public @NonNull String getModelId() {
 		return MODEL_ID;
@@ -61,7 +67,7 @@ public class QVTiDebugCore extends QVTODebugCore
 		return PLUGIN_ID;
 	}
 
-	public @NonNull Trace2 getTrace() {
+	public @NonNull Trace getTrace() {
 		return TRACE;
 	}
 	

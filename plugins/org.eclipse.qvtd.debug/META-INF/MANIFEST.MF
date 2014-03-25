@@ -17,7 +17,6 @@ Export-Package: org.eclipse.qvtd.debug,
  org.eclipse.qvtd.debug.launching,
  org.eclipse.qvtd.debug.srclookup,
  org.eclipse.qvtd.debug.stubs,
- org.eclipse.qvtd.debug.utils,
  org.eclipse.qvtd.debug.vm
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.qvtd.debug.QVTiDebugPlugin

@@ -8,7 +8,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.launching.InternalDebuggableExecutor;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMEnvironmentFactory;
-import org.eclipse.qvtd.debug.evaluator.QVTiXtextEvaluator2;
+import org.eclipse.qvtd.debug.evaluator.QVTiVMEvaluator;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
 /**
@@ -25,8 +25,8 @@ public class QVTiInternalDebuggableExecutor extends InternalDebuggableExecutor
 		this.evaluationContext = evaluationContext;
 	}
 
-	protected @NonNull QVTiXtextEvaluator2 createEvaluator() throws IOException {
-		QVTiXtextEvaluator2 evaluator = new QVTiXtextEvaluator2((QVTiEnvironmentFactory) envFactory, evaluationContext.getTransformationURI());
+	protected @NonNull QVTiVMEvaluator createEvaluator() throws IOException {
+		QVTiVMEvaluator evaluator = new QVTiVMEvaluator((QVTiEnvironmentFactory) envFactory, evaluationContext.getTransformationURI());
 		for (Map.Entry<String, URI> inEntry : evaluationContext.getInputURIs().entrySet()) {
 			@SuppressWarnings("null")@NonNull String inKey = inEntry.getKey();
 			@SuppressWarnings("null")@NonNull URI inURI = inEntry.getValue();

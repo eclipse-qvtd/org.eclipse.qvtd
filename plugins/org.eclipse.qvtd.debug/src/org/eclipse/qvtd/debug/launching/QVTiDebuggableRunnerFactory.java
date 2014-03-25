@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.debug.core.EvaluationContext;
 import org.eclipse.ocl.examples.debug.launching.DebuggableRunner;
 import org.eclipse.ocl.examples.debug.launching.DebuggableRunnerFactory;
 import org.eclipse.ocl.examples.debug.vm.ValidBreakpointLocator;
@@ -26,12 +27,13 @@ public class QVTiDebuggableRunnerFactory extends DebuggableRunnerFactory
 		super(packageRegistry, debuggableURI, modelURIs, traceFileURI);
 	}
 
-	public @NonNull DebuggableRunner createRunner(@NonNull QVTiEvaluationContext evaluationContext) throws DiagnosticException {
+	public @NonNull DebuggableRunner createRunner(@NonNull EvaluationContext evaluationContext) throws DiagnosticException {
+		QVTiEvaluationContext qvtiEvaluationContext = (QVTiEvaluationContext)evaluationContext;
 		BasicDiagnostic diagnostic = createDiagnostic("Transformation runner problems");
 		
 		URI uri = null;
 //		try {
-			uri = evaluationContext.getTransformationURI(); //toURI(this.transformationURI, "transformation");
+			uri = qvtiEvaluationContext.getTransformationURI(); //toURI(this.transformationURI, "transformation");
 //		} catch(DiagnosticException e) {
 //			QVTdDebugUIPlugin.createDiagnostic("Transformation runner problems").add(e.getDiagnostic());
 //		}
@@ -54,7 +56,7 @@ public class QVTiDebuggableRunnerFactory extends DebuggableRunnerFactory
 		} */
 		MetaModelManager metaModelManager = evaluationContext.getMetaModelManager();
 		QVTiVMEnvironmentFactory environmentFactory = new QVTiVMEnvironmentFactory(packageRegistry, metaModelManager);
-		DebuggableRunner runner = new DebuggableRunner(this, evaluationContext.getTransformationURI(), new QVTiInternalDebuggableExecutor(evaluationContext, environmentFactory));
+		DebuggableRunner runner = new DebuggableRunner(this, qvtiEvaluationContext.getTransformationURI(), new QVTiInternalDebuggableExecutor(qvtiEvaluationContext, environmentFactory));
 		
 /*		if(traceFileURI != null) {
 			try {

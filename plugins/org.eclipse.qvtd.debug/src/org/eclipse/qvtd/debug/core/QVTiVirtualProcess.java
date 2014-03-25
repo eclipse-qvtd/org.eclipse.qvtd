@@ -7,7 +7,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.core.VMVirtualProcess;
 import org.eclipse.ocl.examples.debug.vm.IVMVirtualMachineShell;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
-import org.eclipse.qvtd.debug.utils.QVTiDebugCore;
 
 public class QVTiVirtualProcess extends VMVirtualProcess
 {
@@ -23,7 +22,7 @@ public class QVTiVirtualProcess extends VMVirtualProcess
 //				transformationURI = QvtLaunchUtil.getTransformationURI(configuration).toString();
 				transformationURI = configuration.getAttribute(QVTiLaunchConstants.TX_KEY, "");
 			} catch (CoreException e) {
-				QVTiDebugCore.log(e.getStatus());
+				QVTiDebugCore.INSTANCE.log(e.getStatus());
 			}
 		}
 		

@@ -29,6 +29,7 @@ import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.evaluator.VMRuntimeException;
 import org.eclipse.ocl.examples.debug.utils.MiscUtil;
 import org.eclipse.ocl.examples.debug.utils.SafeRunner;
@@ -36,6 +37,7 @@ import org.eclipse.ocl.examples.debug.utils.ShallowProcess;
 import org.eclipse.ocl.examples.debug.utils.StreamsProxy;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
+import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 
@@ -127,18 +129,18 @@ public class RunLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 								try {
 									statusHandler.handleStatus(actualStatus, configuration);
 								} catch (CoreException coreExc) {
-									QVTiDebugPlugin.getDefault().log(coreExc.getStatus());
+									getDebugCore().log(coreExc.getStatus());
 								}
 							}						
 							
-							QVTiDebugPlugin.error(e);							
+							getDebugCore().error(e);							
 						}
 					}
 					
 					try {
 						launch.terminate();
 					} catch (DebugException e) {
-						QVTiDebugPlugin.getDefault().log(e.getStatus());
+						getDebugCore().log(e.getStatus());
 					}
             	}
             }, "QVTi Run"); //$NON-NLS-1$
@@ -148,6 +150,10 @@ public class RunLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 		catch(Exception e) {
 			throw new CoreException(MiscUtil.makeErrorStatus(e));
 		}
+	}
+
+	protected @NonNull QVTiDebugCore getDebugCore() {
+		return QVTiDebugCore.INSTANCE;
 	}
 	
 /*	@Override

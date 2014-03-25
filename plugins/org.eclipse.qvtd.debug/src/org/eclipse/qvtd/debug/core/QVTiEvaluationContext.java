@@ -20,6 +20,10 @@ public class QVTiEvaluationContext extends EvaluationContext
 		this.outputURIs = outputURIs;
 	}
 
+	public @NonNull URI getDebuggableURI() {
+		return transformationURI;
+	}
+
 	public @Nullable URI getInputURI(@NonNull String name) {
 		return inputURIs.get(name);
 	}
