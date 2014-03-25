@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="ImperativeOCL" name="ImperativeOCL" URI="http://schema.omg.org/spec/QVT/20140401/ImperativeOCL">
+<uml:Package xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML"
+    xmi:id="ImperativeOCL" name="ImperativeOCL" URI="http://www.omg.org/spec/QVT/20140401/ImperativeOCL">
   <packagedElement xmi:type="uml:Enumeration" xmi:id="SeverityKind" name="SeverityKind">
     <ownedLiteral xmi:id="error" name="error"/>
     <ownedLiteral xmi:id="warning" name="warning"/>
@@ -482,4 +483,4 @@
       <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedEnd>
   </packagedElement>
-</uml:Model>
+</uml:Package>

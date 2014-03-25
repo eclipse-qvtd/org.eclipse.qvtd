@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="QVTRelation" name="QVTRelation" URI="http://schema.omg.org/spec/QVT/20140401/QVTRelation">
+<uml:Package xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML"
+    xmi:id="QVTRelation" name="QVTRelation" URI="http://www.omg.org/spec/QVT/20140401/QVTRelation">
   <packagedElement xmi:type="uml:Class" xmi:id="DomainPattern" name="DomainPattern">
     <generalization xmi:id="G_DomainPattern_Pattern">
       <general xmi:type="uml:Class" href="QVTBase.uml#Pattern"/>
@@ -221,4 +222,4 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedEnd>
   </packagedElement>
-</uml:Model>
+</uml:Package>

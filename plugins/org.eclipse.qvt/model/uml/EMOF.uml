@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="EMOF" name="EMOF" URI="http://schema.omg.org/spec/QVT/20140401/EMOF">
+<uml:Package xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML"
+    xmi:id="EMOF" name="EMOF" URI="http://www.omg.org/spec/QVT/20140401/EMOF">
   <packagedElement xmi:type="uml:Class" xmi:id="Class" name="Class">
     <generalization xmi:id="G_Class_Type" general="Type"/>
     <ownedAttribute xmi:id="Class.isAbstract" name="isAbstract" visibility="public">
@@ -492,4 +493,4 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedEnd>
   </packagedElement>
-</uml:Model>
+</uml:Package>

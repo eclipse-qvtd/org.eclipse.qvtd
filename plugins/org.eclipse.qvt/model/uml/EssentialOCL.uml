@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="EssentialOCL" name="EssentialOCL" URI="http://schema.omg.org/spec/QVT/20140401/EssentialOCL">
+<uml:Package xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML"
+    xmi:id="EssentialOCL" name="EssentialOCL" URI="http://www.omg.org/spec/QVT/20140401/EssentialOCL">
   <packagedElement xmi:type="uml:Enumeration" xmi:id="CollectionKind" name="CollectionKind">
     <ownedLiteral xmi:id="Set" name="Set"/>
     <ownedLiteral xmi:id="OrderedSet" name="OrderedSet"/>
@@ -439,4 +440,4 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedEnd>
   </packagedElement>
-</uml:Model>
+</uml:Package>
