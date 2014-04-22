@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.FeatureFilter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -51,7 +52,7 @@ public class KeyAttribution extends AbstractAttribution
 		}
 		org.eclipse.ocl.examples.pivot.Class identifies = targetElement.getIdentifies();
 		if (identifies != null) {
-			environmentView.addAllProperties(identifies, Boolean.FALSE);
+			environmentView.addAllProperties(identifies, FeatureFilter.SELECT_NON_STATIC);
 		}
 		return scopeView.getParent();
 	}

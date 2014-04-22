@@ -76,7 +76,7 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 	}
 
 	public @Nullable R visitTransformation(@NonNull org.eclipse.qvtd.pivot.qvtbase.Transformation object) {
- 		P prologue = preVisit(object);
+		P prologue = preVisit(object);
 		R result = delegate.visitTransformation(object);
 		return postVisit(object, prologue, result);
 	}

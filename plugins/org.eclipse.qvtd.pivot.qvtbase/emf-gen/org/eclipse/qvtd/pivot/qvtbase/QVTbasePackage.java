@@ -98,6 +98,15 @@ public interface QVTbasePackage extends EPackage {
 	int BASE_MODEL__EXTENSION = PivotPackage.ROOT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_MODEL__OWNED_ANNOTATION = PivotPackage.ROOT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -123,15 +132,6 @@ public interface QVTbasePackage extends EPackage {
 	 * @ordered
 	 */
 	int BASE_MODEL__NAME = PivotPackage.ROOT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BASE_MODEL__OWNED_ANNOTATION = PivotPackage.ROOT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
@@ -207,6 +207,15 @@ public interface QVTbasePackage extends EPackage {
 	int DOMAIN__EXTENSION = PivotPackage.NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN__OWNED_ANNOTATION = PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -232,15 +241,6 @@ public interface QVTbasePackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN__NAME = PivotPackage.NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN__OWNED_ANNOTATION = PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Checkable</b></em>' attribute.
@@ -307,6 +307,15 @@ public interface QVTbasePackage extends EPackage {
 	int FUNCTION__EXTENSION = PivotPackage.OPERATION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION__OWNED_ANNOTATION = PivotPackage.OPERATION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -332,15 +341,6 @@ public interface QVTbasePackage extends EPackage {
 	 * @ordered
 	 */
 	int FUNCTION__NAME = PivotPackage.OPERATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION__OWNED_ANNOTATION = PivotPackage.OPERATION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -569,6 +569,15 @@ public interface QVTbasePackage extends EPackage {
 	int FUNCTION_PARAMETER__EXTENSION = PivotPackage.PARAMETER__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_PARAMETER__OWNED_ANNOTATION = PivotPackage.PARAMETER__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -594,15 +603,6 @@ public interface QVTbasePackage extends EPackage {
 	 * @ordered
 	 */
 	int FUNCTION_PARAMETER__NAME = PivotPackage.PARAMETER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_PARAMETER__OWNED_ANNOTATION = PivotPackage.PARAMETER__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -687,6 +687,15 @@ public interface QVTbasePackage extends EPackage {
 	int PATTERN__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -740,6 +749,15 @@ public interface QVTbasePackage extends EPackage {
 	 * @ordered
 	 */
 	int PREDICATE__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -797,6 +815,15 @@ public interface QVTbasePackage extends EPackage {
 	int RULE__EXTENSION = PivotPackage.NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__OWNED_ANNOTATION = PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -822,15 +849,6 @@ public interface QVTbasePackage extends EPackage {
 	 * @ordered
 	 */
 	int RULE__NAME = PivotPackage.NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE__OWNED_ANNOTATION = PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Domain</b></em>' containment reference list.
@@ -897,6 +915,15 @@ public interface QVTbasePackage extends EPackage {
 	int TRANSFORMATION__EXTENSION = PivotPackage.CLASS__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION__OWNED_ANNOTATION = PivotPackage.CLASS__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -922,15 +949,6 @@ public interface QVTbasePackage extends EPackage {
 	 * @ordered
 	 */
 	int TRANSFORMATION__NAME = PivotPackage.CLASS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSFORMATION__OWNED_ANNOTATION = PivotPackage.CLASS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -976,6 +994,15 @@ public interface QVTbasePackage extends EPackage {
 	 * @ordered
 	 */
 	int TRANSFORMATION__TEMPLATE_PARAMETER = PivotPackage.CLASS__TEMPLATE_PARAMETER;
+
+	/**
+	 * The feature id for the '<em><b>Extended Bys</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION__EXTENDED_BYS = PivotPackage.CLASS__EXTENDED_BYS;
 
 	/**
 	 * The feature id for the '<em><b>Instance Class Name</b></em>' attribute.
@@ -1048,6 +1075,15 @@ public interface QVTbasePackage extends EPackage {
 	 * @ordered
 	 */
 	int TRANSFORMATION__IS_ABSTRACT = PivotPackage.CLASS__IS_ABSTRACT;
+
+	/**
+	 * The feature id for the '<em><b>Is Active</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION__IS_ACTIVE = PivotPackage.CLASS__IS_ACTIVE;
 
 	/**
 	 * The feature id for the '<em><b>Is Interface</b></em>' attribute.
@@ -1131,13 +1167,22 @@ public interface QVTbasePackage extends EPackage {
 	int TRANSFORMATION__OWNED_TYPE = PivotPackage.CLASS_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Profile Application</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION__PROFILE_APPLICATION = PivotPackage.CLASS_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__OWNED_TAG = PivotPackage.CLASS_FEATURE_COUNT + 6;
+	int TRANSFORMATION__OWNED_TAG = PivotPackage.CLASS_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Model Parameter</b></em>' containment reference list.
@@ -1146,7 +1191,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__MODEL_PARAMETER = PivotPackage.CLASS_FEATURE_COUNT + 7;
+	int TRANSFORMATION__MODEL_PARAMETER = PivotPackage.CLASS_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Rule</b></em>' containment reference list.
@@ -1155,7 +1200,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__RULE = PivotPackage.CLASS_FEATURE_COUNT + 8;
+	int TRANSFORMATION__RULE = PivotPackage.CLASS_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Extends</b></em>' reference.
@@ -1164,7 +1209,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__EXTENDS = PivotPackage.CLASS_FEATURE_COUNT + 9;
+	int TRANSFORMATION__EXTENDS = PivotPackage.CLASS_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Transformation</em>' class.
@@ -1173,7 +1218,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_FEATURE_COUNT = PivotPackage.CLASS_FEATURE_COUNT + 10;
+	int TRANSFORMATION_FEATURE_COUNT = PivotPackage.CLASS_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl <em>Typed Model</em>}' class.
@@ -1193,6 +1238,15 @@ public interface QVTbasePackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPED_MODEL__EXTENSION = PivotPackage.NAMED_ELEMENT__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_MODEL__OWNED_ANNOTATION = PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -1220,15 +1274,6 @@ public interface QVTbasePackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPED_MODEL__NAME = PivotPackage.NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPED_MODEL__OWNED_ANNOTATION = PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Transformation</b></em>' container reference.
@@ -1287,6 +1332,15 @@ public interface QVTbasePackage extends EPackage {
 	int UNIT__EXTENSION = PivotPackage.NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT__OWNED_ANNOTATION = PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1312,15 +1366,6 @@ public interface QVTbasePackage extends EPackage {
 	 * @ordered
 	 */
 	int UNIT__NAME = PivotPackage.NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNIT__OWNED_ANNOTATION = PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Used Package</b></em>' reference.
