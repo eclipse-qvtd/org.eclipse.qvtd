@@ -4,8 +4,8 @@
       label="QVTd Build Site (Incubation)"
       version="0.11.0.qualifier"
       provider-name="%providerName"
-      license-feature="org.eclipse.qvtd.license"
-      license-feature-version="1.0.0.qualifier">
+      license-feature="org.eclipse.license"
+      license-feature-version="0.0.0">
 
    <description>
       Single feature to drive the build for all other Eclipse QVTd features.
