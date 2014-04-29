@@ -20,7 +20,7 @@ import "../helpers/QVTHelpers.eol";
  // Determine if the OCLExpression is of the form 
  // varA.attribute = varB
  //
- operation QVT!OCLExpression isSimpleAttributeNavigation() : Boolean {
+operation QVT!OCLExpression isSimpleAttributeNavigation() : Boolean {
     // 1. The OCLExpression must be an operation call 
     if (self.isTypeOf(QVT!OperationCallExp)) {
         // 2. The Operation must be a OclAny "=", operation
@@ -40,12 +40,13 @@ import "../helpers/QVTHelpers.eol";
         }
     }
     return false;
- 
  }
+ 
+ 
  
 // Determine if the Assignemnts is of the form 
 // varA.attribute := varB 
- operation QVT!Assignment isSimpleAttributeNavigation() : Boolean {
+operation QVT!Assignment isSimpleAttributeNavigation() : Boolean {
     // 1. The Assignment must be an Attribute assignment 
     if (self.isTypeOf(QVT!PropertyAssignment)) {
         // 2. The slot operation must be a VariableExp
@@ -112,3 +113,9 @@ operation QVT!OCLExpression isSourceVariable(v : QVT!Variable) : Boolean {
 operation OCLExpression containmentPredicate() : Boolean {
 
 } 
+
+// Only invoke if ocl expression is simple attribute navigation
+operation QVT!OCLExpression getReferredProperty() : Any {
+    
+    return self.source.referredProperty;
+ }

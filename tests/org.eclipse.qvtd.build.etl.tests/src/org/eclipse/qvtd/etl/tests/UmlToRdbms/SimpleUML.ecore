@@ -35,8 +35,8 @@
         eType="#//PackageElement" containment="true" eOpposite="#//PackageElement/namespace"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageElement" abstract="true" eSuperTypes="#//UMLModelElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" eType="#//Package"
-        eOpposite="#//Package/elements"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" lowerBound="1"
+        eType="#//Package" eOpposite="#//Package/elements"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveDataType" eSuperTypes="#//Classifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="UMLModelElement" abstract="true">

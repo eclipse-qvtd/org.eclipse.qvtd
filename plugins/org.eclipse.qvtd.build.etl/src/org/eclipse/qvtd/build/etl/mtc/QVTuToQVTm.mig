@@ -74,8 +74,6 @@ migrate Mapping
 migrate Mapping
     when : original.refinement.size() > 0  
     {
-        
-        
         //original.println("RefinnedMapping ");
         // Merge domainless local mappings
         var olm = original.local.select(m | m.domain.isEmpty());

@@ -1,0 +1,71 @@
+# Example QVT-D.rc
+#
+items:
+    NAME
+	MODELS 
+    FUNCTION
+    SYNOPSIS
+    CONTEXT
+	PARAMETERS
+    RESULT
+    SEE ALSO
+ignore items:
+    HISTORY
+    BUGS
+item order:
+    FUNCTION
+    SYNOPSIS
+    INPUTS
+    OUTPUTS
+source items:
+    SYNOPSIS
+preformatted items:
+    INPUTS
+    OUTPUTS
+format items:
+    FUNCTION
+    SIDE EFFECTS
+options:
+    --src ./source
+    --doc ./doc
+    --html
+    --multidoc
+    --index
+    --tabsize 8
+headertypes:
+	s  "Scripts"		robo_scripts
+	o  "Operations"		robo_operations	
+ignore files:
+    README
+    CVS
+    *.bak
+    *~
+    "a test_*"
+accept files:
+    *.c
+    *.h
+    *.pl
+header markers:
+    /****
+    #****
+remark markers:
+    *
+    #
+end markers:
+    ****
+    #****
+header separate characters:
+    ,
+header ignore characters:
+    [
+remark begin markers:
+    /*
+remark end markers:
+    */
+source line comments:
+    //
+keywords:
+    if
+    do
+    while
+    for

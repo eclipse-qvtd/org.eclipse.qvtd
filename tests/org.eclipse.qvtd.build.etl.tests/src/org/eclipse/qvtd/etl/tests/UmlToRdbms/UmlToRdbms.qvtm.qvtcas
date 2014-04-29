@@ -1012,6 +1012,21 @@
         <local>
           <guardPattern/>
           <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type">
+                <source xsi:type="pivot:OperationCallExp" isRequired="false" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
+                    referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OrderedCollection.first">
+                  <source xsi:type="pivot:PropertyCallExp" type="#/0/@nestedPackage.1/@ownedType.38"
+                      referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Key.column">
+                    <source xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"
+                        referredVariable="#/0/@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.3"/>
+                  </source>
+                </source>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
+                  referredVariable="#/0/@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.1"/>
+            </assignment>
             <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.name">
               <value xsi:type="pivot:IfExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String">
                 <condition xsi:type="pivot:OperationCallExp" name="and" isRequired="false"
@@ -1235,21 +1250,6 @@
                 </source>
                 <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                     stringSymbol="_tid"/>
-              </value>
-              <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
-                  referredVariable="#/0/@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.1"/>
-            </assignment>
-            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type">
-              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                  referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type">
-                <source xsi:type="pivot:OperationCallExp" isRequired="false" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
-                    referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OrderedCollection.first">
-                  <source xsi:type="pivot:PropertyCallExp" type="#/0/@nestedPackage.1/@ownedType.38"
-                      referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Key.column">
-                    <source xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"
-                        referredVariable="#/0/@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.3"/>
-                  </source>
-                </source>
               </value>
               <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
                   referredVariable="#/0/@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.1"/>

@@ -1,2 +1,39 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI"/>
+<qVTcDataDependencyGraph:Graph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qVTcDataDependencyGraph="http://www.eclipse.org/qvt/examples/0.1/QVTcDataDependencyGraph">
+  <element xsi:type="qVTcDataDependencyGraph:Node" incoming="//@element.6" label="Column" type="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" incoming="//@element.8" label="ForeignKey" type="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" incoming="//@element.7" label="Key" type="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" outgoing="//@element.5" label="Schema" type="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" incoming="//@element.5" outgoing="//@element.6 //@element.7 //@element.8" label="Table" type="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.4" source="//@element.3" type="outputCont"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.0" source="//@element.4" type="outputCont"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.2" source="//@element.4" type="outputCont"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.1" source="//@element.4" type="outputCont"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" label="String" type="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" incoming="//@element.13" label="Attribute" type="input"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" incoming="//@element.16" label="Association" type="input"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" incoming="//@element.17" outgoing="//@element.13" label="Class" type="input"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.10" source="//@element.12" type="inputCont"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" incoming="//@element.18" label="PrimitiveDataType" type="input"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" outgoing="//@element.16 //@element.17 //@element.18" label="Package" type="input"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.11" source="//@element.15" type="inputCont"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.12" source="//@element.15" type="inputCont"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.14" source="//@element.15" type="inputCont"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" incoming="//@element.24 //@element.27" label="AttributeToColumn" type="middle"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" incoming="//@element.23" label="AssociationToForeignKey" type="middle"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" incoming="//@element.32" label="BooleanToBoolean" type="middle"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" incoming="//@element.31" outgoing="//@element.23 //@element.24 //@element.26" label="ClassToTable" type="middle"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.20" source="//@element.22"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.19" source="//@element.22"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" incoming="//@element.26 //@element.28" outgoing="//@element.27 //@element.28" label="NonLeafAttribute" type="middle"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.25" source="//@element.22"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.19" source="//@element.25"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.25" source="//@element.25"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" incoming="//@element.33" label="IntegerToNumber" type="middle"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" outgoing="//@element.31 //@element.32 //@element.33 //@element.35" label="PackageToSchema" type="middle"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.22" source="//@element.30"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.21" source="//@element.30"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.29" source="//@element.30"/>
+  <element xsi:type="qVTcDataDependencyGraph:Node" incoming="//@element.35" label="StringToVarchar" type="middle"/>
+  <element xsi:type="qVTcDataDependencyGraph:Edge" target="//@element.34" source="//@element.30"/>
+</qVTcDataDependencyGraph:Graph>

@@ -12,16 +12,31 @@ import "OCLExpressionAnalysis.eol";
 import "InterMappingDependencies.eol";
 import "MappingDataDependencies.eol";
 
-/** The input models */
-// lTree    - Left containment tree
-// mTree    - Left containment tree
-// rTree    - Left containment tree
 
-/** The output models */
-// imGraph  - The inter-mapping dependence graph
-// ddGraph  - The data dependence graph
-// mdGraph  - The merged data dependece graph
-// rdGraph  - The reduced data dependece graph
+/****s* org.eclipse.qvtd.build.etl/dependence/QVTiDependenceAnalysis
+ * NAME
+ *  QVTiDependenceAnalysis -- Perform data dependence analysis on a QVTm
+ *  (partitioned) transformation.
+ * MODELS
+ *  Required models to run the script:
+ *      - NAME      ALIASES METAMODEL               ROL SOD
+ *      - qvti      QVT     QVTCore                  X          The QVTm (partitioned) AST
+ *      - config            QVTcConfig               X          The transformation configuration
+ *      - ocllib            Pivot                    X          The OCL standard library (http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas)
+ *      - lTree     tree    ECoreContainmentTree     X          The left metamodel containment tree
+ *      - mTree     tree    ECoreContainmentTree     X          The middle metamodel containment tree
+ *      - rTree     tree    ECoreContainmentTree     X          The right metamodel containment tree
+ *      - imGraph   ddg     QVTcDataDependencyGraph      X      The inter-mapping dependence graph
+ *      - ddGraph   ddg     QVTcDataDependencyGraph      X      The data dependence graph
+ *      - mdGraph   ddg     QVTcDataDependencyGraph      X      The merged data dependece graph
+ *      - rdGraph   ddg     QVTcDataDependencyGraph      X      The reduced data dependece graph
+ *
+ * SEE ALSO
+ *    
+ ******
+ * You can use this space for remarks that should not be included
+ * in the documentation.
+ */
 
 var varMap : Map;       // (Variable, tree!Node)
 var inputVarMap : Map;  // (mapping, Set{variable})
@@ -40,8 +55,6 @@ for (r in qvti!Transformation.all().first().rule) {
 var img = new imGraph!Graph;
 img.name = "InterMapping";
 qvti!Transformation.all().first().interMappingDependencies(img, inputVarMap, outputVarMap);
-
-
 
 // 2. Mapping data dependendence
 var mdd = new ddGraph!Graph;
@@ -63,12 +76,12 @@ mdd.mergedMappingDataDependencies(mdg, containmentTrees);
 
 //4. Reduced data dependencies
 //var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
-//var rdg = new rdGraph!Graph;
+var rdg = new rdGraph!Graph;
 
 // Analize the dependencies to identify which input variables can be derived from others
 // primaryInputs are only the ones that don't have a containment relation or a 
 // middle relation with other input vars
-//mdd.reducedMergedMappingDataDependencies(rdg);
+mdd.reducedMergedMappingDataDependencies(rdg, containmentTrees);
 
 /*
 for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sortBy(n | n.incoming.size())) {

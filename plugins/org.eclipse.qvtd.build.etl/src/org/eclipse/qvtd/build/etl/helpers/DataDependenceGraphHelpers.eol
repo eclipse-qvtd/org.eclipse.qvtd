@@ -123,18 +123,13 @@ operation QVT!Variable variableRelations(graph : ddg!Graph, vars : Set, varMap :
     for (vB in vars) {
         //vB.println("vB ");
         var vbNode = graph.getNodeForQvtAstNode(vB, varMap);
-        var relations = self.hasRelation(vB);
-        //composite -- true if the relation is a containment one     
-        //multiplicity -- true if the relation is multiple
-        //opposite
-        (not relations.isEmpty()).println("Have relation ");
-        if(not relations.isEmpty()) {
-           relations.println();
-           relations.at(0).println();
+        var refProp = self.hasRelation(vB);
+        if(refProp <> null) {
            var e = graph.owningModel().createInstance("Edge");
            e.source = vaNode;
            e.target = vbNode;
-           if (relations.at(0)) {
+           e.referredProperty = refProp;
+           if (refProp.isContainer()) {
                switch (vbNode.type) {
 	               case(graph.owningModel().getEnumerationValue("NodeType", "middle")) :
 	                   e.type = graph.owningModel().getEnumerationValue("EdgeType", "middleCont");
@@ -146,8 +141,6 @@ operation QVT!Variable variableRelations(graph : ddg!Graph, vars : Set, varMap :
            } else {
                e.type = graph.owningModel().getEnumerationValue("EdgeType", "relation");
            }
-           e.multiple = relations.at(1);
-           e.directed = relations.at(2);
            graph.element.add(e);
         }
     }
@@ -207,78 +200,96 @@ operation ddg!Graph importContainmentTree(treeNodes : Collection, treeType : Str
   *  PARAMETERS
   *    varB - variable to analyze relations against
   *  RESULT
-  *    Sequence -- The sequence is empty if no relation was found 
-  *         * composite -- true if the relation is a containment one     
-  *         * multiplicity -- true if the relation is multiple
-  *         * opposite navigation - true if the relation has an opposite and if
-  *             the multiplicity of the opposite relation is 1. 
+  *    Any  - The EReference that relates the variables, null if not existant 
   *  SEE ALSO
   *
   */
-operation QVT!Variable hasRelation(varB : QVT!Variable) : Sequence {
+operation QVT!Variable hasRelation(varB : QVT!Variable) : Any {
     
-    var result : Sequence();
     // Fin predicates that only refer the two variables
     for (p in self.oppositePattern().area.rule.guardPattern.predicate
             .includingAll(self.oppositePattern().area.rule.local.collect(l | l.guardPattern.predicate).flatten())
             .select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
         if (p.conditionExpression.findRreferencedVariables()
                 .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
-            self.println("var A ");
-            varB.println("var B ");
-            p.conditionExpression.toString().println("Predicate ");
-            var prop = p.conditionExpression.getNavigatedProperty();
             // Expression in the form varB.prop = self
-            if (p.conditionExpression.isArgumentVariable(self) and 
-                            p.conditionExpression.isSourceVariable(varB)) {
-                if (prop.opposite.isDefined() and prop.opposite.isComposite()) {
-                    // Composition
-                    "Composition".println();   
-                    result.add(true);
-                    result.add(prop.opposite.isMany());
-                    result.add(prop.isMany());
-                }
-            } else if (p.conditionExpression.isArgumentVariable(varB) and 
+            if (p.conditionExpression.isArgumentVariable(varB) and 
                             p.conditionExpression.isSourceVariable(self)) {
-                if (prop.opposite.isDefined() and not prop.opposite.isComposite()) {
-                    "Relation".println();
-                    result.add(false);
-                    result.add(prop.isMany());
-                    result.add(false);
-                }
+                return p.conditionExpression.getReferredProperty();
+
             }
         }                
     }
-    /*
     // Find assignments that only refer the two vars
     for (a in self.oppositePattern().area.rule.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation())) {
         if (a.findRreferencedVariables()
                 .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
-            // Find if the navigated property
-            var prop = a.targetProperty;
             // Only analyse expression in the form varB.prop := self
-            //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
-            //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
             if (a.slotExpression.referredVariable == self and 
                 a.value.referredVariable == varB) {
-                if (prop.opposite.isDefined()) {
-                    // Composition
-                    //p.conditionExpression.toString().println(self.name + " with " + varB.name + " in ");   
-                    result.add(prop.opposite.isComposite());
-                    result.add(prop.opposite.isMany());
-                    result.add(prop.isMany());
-                } else {
-                    result.add(false);
-                    result.add(prop.isMany());
-                    result.add(false);
-                }
-                return result;
+                return a.targetProperty;
             }
-        }       
-    //a.toString().println("Assignment ");
-    //self.println("var A ");
-    //varB.println("var B ");           
+        }          
     }
-*/
-    return result;
+    return null;
+}
+
+/****o* org.eclipse.qvtd.build.etl/helpers/DataDependenceGraphHelpers/dfsDerivedVariables
+ * NAME
+ *  dfsDerivedVariables - Do a dfs vor derived variables. 
+ * SYNOPSIS
+ *   
+ * FUNCTION
+ *  Traverses the outgoing edges which has a type different from
+ *  ddg!EdgeType#primaryInput. There is no need to query opposite relations as
+ *  the outgoing relations are the only valid ones. 
+ * CONTEXT
+ *  ddg!Node   
+ * PARAMETERS
+ *  
+ * RESULT
+ *  A set of all the derived variables 
+ * SEE ALSO
+ *
+ */
+@cached
+operation ddg!Edge dfsDerivedVariables() : Set {
+    self.target.println("DFS ");
+    var derived = new Set;
+    
+    // Target's Outgoing
+    self.target.outgoing.select(e | e.type <> ddg!EdgeType#primaryInput).println("Outgoing ");
+    for (e in self.target.outgoing.select(e | e.type <> ddg!EdgeType#primaryInput)) {
+        derived.addAll(e.dfsDerivedVariables());
+        derived.add(e.target);
+    }
+    
+    // Target's Incoming 
+    self.target.incoming.excluding(self).println("Incoming ");
+    for (e in self.target.incoming.excluding(self)) {
+        // Is the relation navigable in the opposite direction?
+        // If the relation is 1..1 and non-containment, it is navigable (regardles of opposite multiplicity)
+        
+        // If the realtion is 0..1, the opposite must be 1..1 to be navigable
+        
+        
+        derived.addAll(e.dfsDerivedVariables());
+        derived.add(e.target);
+    }
+    
+    /*
+    for (e in self.incoming.select(e | e.type <> ddg!EdgeType#primaryInput)) {
+        e.referredProperty.hasNavigableOpposite().println(e + " ");
+    }
+    // Search outgoing relations
+    for (n in self.outgoing.collect(e | e.target).flatten()
+            .select(t | t.type <> ddg!NodeType#mapping)
+            .select(t | not t.incoming.exists(e | e.source.type == ddg!NodeType#mapping))
+            .excluding(self)) {
+        n.println("assoc ");
+        derived.addAll(n.dfsDerivedVariables());
+        derived.add(n);
+    }
+    */
+    return derived;
 }

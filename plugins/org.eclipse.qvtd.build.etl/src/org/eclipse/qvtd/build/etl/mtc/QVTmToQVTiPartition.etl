@@ -77,7 +77,7 @@ rule Mapping
             
             return (not m.context.isDefined() or (m.context.isDefined() and (not m.guardPattern.variable.isEmpty()
                 or not m.domain.collect(d | d.guardPattern.variable).flatten().isEmpty()
-                ))) /*and m.getOutputVars().forAll(v | not v.type.`abstract`)*/ and m.specification.isEmpty();
+                ))) and m.getOutputVars().forAll(v | not v.type.`abstract`) and m.specification.isEmpty();
                 }
 
         // Promote unguarded nested mappings
@@ -94,10 +94,20 @@ rule Mapping
 		    if (not m.context.isDefined()) {
 		        lmM.name = m.name + "_LM";
 		    }
-		    // We need guard patterns first to have a place to move variables and predicates from domains
-		    lmM.guardPattern = m.guardPattern.equivalent().selectOne(p | p.~side = "l");
-		    lmM.bottomPattern = m.bottomPattern.equivalent().selectOne(p | p.~side = "l");
-		    
+		    // We need the patterns to have a place to move variables and predicates from domains
+		    lmM.guardPattern = new QVTiP!GuardPattern;
+            lmM.guardPattern.predicate.addAll(emfTool.getECoreUtil().copyAll(m.guardPattern.predicate.select(
+                p | not p.conditionExpression.findRreferencedVariables().exists(v | isOutputDomain(v.oppositePattern().area))
+                )));
+            lmM.bottomPattern = new QVTiP!BottomPattern;
+            lmM.bottomPattern.assignment.addAll(m.bottomPattern.assignment.select(
+                a | not a.findRreferencedVariables().exists(v | isOutputDomain(v.oppositePattern().area))
+                ).equivalent().select(a | a.isKindOf(QVTiP!Assignment)));
+            // Move predicates to guard pattern
+            lmM.guardPattern.predicate.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.predicate.select(
+                p | not p.conditionExpression.findRreferencedVariables().exists(v | isOutputDomain(v.oppositePattern().area))
+                )));
+
 		    // Add input domain
 		    lmM.domain.add(m.domain.selectOne(d | isInputDomain(d)).equivalent());
 		    
@@ -109,15 +119,11 @@ rule Mapping
 		    mM.guardPattern = new QVTiP!GuardPattern;
 		    mM.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(m.guardPattern.variable));
 		    mM.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.variable));
-		    mM.guardPattern.predicate.addAll(m.bottomPattern.predicate.select(
-		            p | not p.conditionExpression.findRreferencedVariables().exists(v | isOutputDomain(v.oppositePattern().area))
-		            ).equivalent());
 		    mM.bottomPattern = new QVTiP!BottomPattern;
 		    mM.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.realizedVariable));
 		    
 		    lmM.domain.add(mM);
 		    lmM.local.addAll(m.local.equivalent().select(m | m.~side = "l"));
-		    
         }
         if (m.domain.exists(d | isOutputDomain(d))) {
             // Create MR mapping
@@ -128,18 +134,27 @@ rule Mapping
 		        mrM.name = m.name + "_MR";
 		    }
 		    // We need guard patterns first to have a place to move variables and predicates from domains
-		    mrM.guardPattern = m.guardPattern.equivalent().selectOne(p | p.~side = "r");
-            mrM.bottomPattern = m.bottomPattern.equivalent().selectOne(p | p.~side = "r");
-            // MM assignements are transformed to predicates to the guard pattern
+		    mrM.guardPattern = new QVTiP!GuardPattern;
+            mrM.guardPattern.predicate.addAll(emfTool.getECoreUtil().copyAll(m.guardPattern.predicate.select(
+                p | not p.conditionExpression.findRreferencedVariables().exists(v | isInputDomain(v.oppositePattern().area))
+                )));
+            mrM.bottomPattern = new QVTiP!BottomPattern;
+            mrM.bottomPattern.assignment.addAll(m.bottomPattern.assignment.select(
+                a | not a.findRreferencedVariables().exists(v | isInputDomain(v.oppositePattern().area))
+                    and not a.findRreferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area))
+                ).equivalent()
+                );
+            // Move predicates to guard pattern
+            mrM.guardPattern.predicate.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.predicate.select(
+                p | not p.conditionExpression.findRreferencedVariables().exists(v | isInputDomain(v.oppositePattern().area))
+                )));
+                
+            // MM assignements are transformed to predicates in the guard pattern
             mrM.guardPattern.predicate.addAll(m.bottomPattern.assignment.select(
                 a | a.findRreferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area))
                 ).equivalent().select(a | a.isKindOf(QVTiP!Predicate)));
-            // Move predicates from the bottom to the guard pattern
-            mrM.guardPattern.predicate.addAll(mrM.bottomPattern.predicate);
-            
             // Add output domains
 		    mrM.domain.addAll(m.domain.select(d | isOutputDomain(d)).equivalent());
-		    
 		    
 		    // Create Middle domain
 		    var mM : QVTiP!CoreDomain = new QVTiP!CoreDomain;
@@ -152,92 +167,9 @@ rule Mapping
 		    // RealizedVariables to Variables
 		    mM.guardPattern.variable.addAll(m.bottomPattern.realizedVariable.collect(rv | rv.copyToVariable()));
 		    mM.bottomPattern = new QVTiP!BottomPattern;
-		    //mM.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.realizedVariable));
 		    mrM.domain.add(mM);
 		    mrM.local.addAll(m.local.equivalent().select(m | m.~side = "r"));
-		    // Fix variable references in predicates and assignments!!!
         }
-        
-    }
-
-
-// Patterns
-rule MappingGuardPattern
-    transform igp : QVTm!GuardPattern
-    to patterns : Set {
-    
-    guard : igp.area.isTypeOf(QVTm!Mapping)
-            and (not igp.area.context.isDefined()
-                or (igp.area.context.isDefined()
-                    and (not igp.area.guardPattern.variable.isEmpty()
-                        or not igp.area.domain.collect(d | d.guardPattern.variable).flatten().isEmpty()
-                        )
-                    )
-                )
-        
-        if (igp.area.domain.one(d | isInputDomain(d))) {
-            var lgp = new QVTiP!GuardPattern;
-            patterns.add(lgp);
-            //igp.println("LMGuardPattern: ");
-            lgp.~side = "l";
-            lgp.predicate.addAll(igp.predicate.select(
-                p | not p.conditionExpression.findRreferencedVariables().exists(v | isOutputDomain(v.oppositePattern().area))
-                ).equivalent());
-        }
-        
-        if (igp.area.domain.exists(d | isOutputDomain(d))) {
-            var rgp = new QVTiP!GuardPattern;
-            patterns.add(rgp);
-            rgp.~side = "r";
-            rgp.predicate.addAll(igp.predicate.select(
-                p | not p.conditionExpression.findRreferencedVariables().exists(v | isInputDomain(v.oppositePattern().area))
-                ).equivalent());
-        }            
-    }    
-
-
-rule MappingBottomPattern
-    transform igp : QVTm!BottomPattern
-    to patterns : Set {
-    
-    guard : igp.area.isTypeOf(QVTm!Mapping)
-            and (not igp.area.context.isDefined() or (igp.area.context.isDefined() and (not igp.area.guardPattern.variable.isEmpty()
-                or not igp.area.domain.collect(d | d.guardPattern.variable).flatten().isEmpty()
-                )))
-        
-        if (igp.area.domain.one(d | isInputDomain(d))) {
-            var lbp = new QVTiP!BottomPattern;
-            patterns.add(lbp);
-            lbp.~side = "l";
-            lbp.predicate.addAll(igp.predicate.select(
-                p | not p.conditionExpression.findRreferencedVariables().exists(v | isOutputDomain(v.oppositePattern().area))
-                ).equivalent());
-            lbp.assignment.addAll(igp.assignment.select(
-                a | not a.findRreferencedVariables().exists(v | isOutputDomain(v.oppositePattern().area))
-                ).equivalent().select(a | a.isKindOf(QVTiP!Assignment)));
-        }
-        
-        if (igp.area.domain.exists(d | isOutputDomain(d))) {
-            var rbp = new QVTiP!BottomPattern;
-            patterns.add(rbp);
-            rbp.~side = "r";
-            rbp.predicate.addAll(igp.predicate.select(
-                p | not p.conditionExpression.findRreferencedVariables().exists(v | isInputDomain(v.oppositePattern().area))
-                ).equivalent());
-            rbp.assignment.addAll(igp.assignment.select(
-                a | not a.findRreferencedVariables().exists(v | isInputDomain(v.oppositePattern().area))
-                    and not a.findRreferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area))
-                ).equivalent()
-                );    
-        }  
-    }    
-
-rule Predicate
-    transform ip : QVTm!Predicate
-    to op : QVTiP!Predicate {
-        
-        op.ownedComment = emfTool.getECoreUtil().copyAll(ip.ownedComment);
-        op.conditionExpression = emfTool.getECoreUtil().copy(ip.conditionExpression);
     }
 
 @abstract
@@ -248,7 +180,8 @@ rule Assignment
         oa.isDefault = ia.isDefault;
         oa.value = emfTool.getECoreUtil().copy(ia.value);
     }    
-    
+
+@lazy    
 rule PropertyAssignment
     transform ia : QVTm!PropertyAssignment
     to oa : QVTiP!PropertyAssignment
@@ -259,7 +192,8 @@ rule PropertyAssignment
         oa.slotExpression =  emfTool.getECoreUtil().copy(ia.slotExpression);
         oa.targetProperty =  ia.targetProperty;
     }    
-    
+
+@lazy    
 rule VariableAssignment
     transform ia : QVTm!VariableAssignment
     to oa : QVTiP!VariableAssignment
@@ -273,7 +207,8 @@ rule VariableAssignment
 /** 
  * Middle model assignments are transformed into an assignment in LM and into
  * a predicate in MR. Predicates are only created for mappings with output domains.
- */     
+ */
+@lazy     
 rule MMPropertyAssignment
     transform ia : QVTm!PropertyAssignment
     to Assigdicate : Set {
@@ -293,7 +228,8 @@ rule MMPropertyAssignment
         }
         
     }    
-    
+
+@lazy    
 rule MMVariableAssignment
     transform ia : QVTm!VariableAssignment
     to Assigdicate : Set {
@@ -312,8 +248,7 @@ rule MMVariableAssignment
         }
     }     
 
-
-
+@lazy
 rule LMDomain
     transform id : QVTm!CoreDomain
     to od : QVTiP!CoreDomain {
@@ -337,11 +272,12 @@ rule LMDomain
          od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.variable));
          if(id.`rule`.equivalents().isDefined()) {
             id.`rule`.equivalents().flatten().selectOne(m | m.~side = "l").guardPattern.predicate.
-                addAll(id.guardPattern.predicate.includingAll(id.bottomPattern.predicate).equivalent());
+                addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.predicate.includingAll(id.bottomPattern.predicate)));
          }
          od.bottomPattern = new QVTiP!BottomPattern;
     }
 
+@lazy
 rule MRDomain
     transform id : QVTm!CoreDomain
     to od : QVTiP!CoreDomain {
@@ -365,7 +301,7 @@ rule MRDomain
          //od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.variable));
          if(id.`rule`.equivalents().isDefined()) {
              id.`rule`.equivalents().flatten().selectOne(m | m.~side = "r").guardPattern.predicate.
-                addAll(id.guardPattern.predicate.includingAll(id.bottomPattern.predicate).equivalent());
+                addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.predicate.includingAll(id.bottomPattern.predicate)));
          }
          od.bottomPattern = new QVTiP!BottomPattern;
          od.bottomPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.variable));

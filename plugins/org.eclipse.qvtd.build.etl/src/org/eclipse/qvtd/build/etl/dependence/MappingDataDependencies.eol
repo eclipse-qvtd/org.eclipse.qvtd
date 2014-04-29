@@ -39,7 +39,7 @@ operation QVT!Transformation mappingDataDependencies(graph : ddg!Graph, inputVar
     for (r in self.rule.select(r | not r.context.isDefined())) {
         var ruleNode = graph.getNodeForQvtAstNode(r, ruleMap);
         varMap.clear();
-        r.println();
+        //r.println();
 	    // Input variables relations
 	    for (vA in inputVarMap.get(r)) {
 	        //vA.println("vA ");
@@ -47,13 +47,12 @@ operation QVT!Transformation mappingDataDependencies(graph : ddg!Graph, inputVar
 	        var vaNode = graph.getNodeForQvtAstNode(vA, varMap); 
 	        e.source = vaNode;
 	        e.target = ruleNode;
-	        e.type = graph.owningModel().getEnumerationValue("EdgeType", "primaryInput");
-	        //e.type = ddg!EdgeType#primaryInput;   
+	        //e.type = graph.owningModel().getEnumerationValue("EdgeType", "primaryInput");
+	        e.type = ddg!EdgeType#primaryInput;   
 	        graph.element.add(e);   
             vA.variableRelations(graph, inputVarMap.get(r).excluding(vA), varMap);
 	    }
 	    // Output variables relations
-	    /*
 	    for (vA in outputVarMap.get(r)) {
 	        //vA.println("vA ");
 	        var vaNode = graph.getNodeForQvtAstNode(vA, varMap);
@@ -65,12 +64,11 @@ operation QVT!Transformation mappingDataDependencies(graph : ddg!Graph, inputVar
 	        graph.element.add(e);       
 	        vA.variableRelations(graph, outputVarMap.get(r).excluding(vA), varMap);
 	    }
-        */
-	    // Input to Output variable relations
-	    //for (vIn in inputVarMap.get(r)) {
-	    //    //vA.println("vA ");
-	    //    vIn.variableRelations(graph, outputVarMap.get(r), varMap);
-	    //}
+        // Input to Output variable relations
+	    for (vIn in inputVarMap.get(r)) {
+	        //vA.println("vA ");
+	        vIn.variableRelations(graph, outputVarMap.get(r), varMap);
+	    }
 	}
 }
 
@@ -115,11 +113,11 @@ operation ddg!Graph mergedMappingDataDependencies(mergeGraph : ddg!Graph, contai
 	            var e = mergeGraph.owningModel().createInstance("Edge");
 	            // If there is another edge to the input, is a double input
 	            if (mergeGraph.element.exists(e : ddg!Edge| e.source == mergeMap.get(s) and e.target == mappingNode)) {
-                    e.type = mergeGraph.owningModel().getEnumerationValue("EdgeType", "doublePrimaryInput");
-	                //e.type = ddg!EdgeType#doublePrimaryInput;
+                    //e.type = mergeGraph.owningModel().getEnumerationValue("EdgeType", "doublePrimaryInput");
+	                e.type = ddg!EdgeType#doublePrimaryInput;
 	            } else {
-	                e.type = mergeGraph.owningModel().getEnumerationValue("EdgeType", "primaryInput");
-	                //e.type = ddg!EdgeType#primaryInput;
+	                //e.type = mergeGraph.owningModel().getEnumerationValue("EdgeType", "primaryInput");
+	                e.type = ddg!EdgeType#primaryInput;
 	            }
 	            e.source = mergeMap.get(s);
 	            e.target = mappingNode;
@@ -139,8 +137,8 @@ operation ddg!Graph mergedMappingDataDependencies(mergeGraph : ddg!Graph, contai
 	        }
 	        for (t in targets) {
 	            var e = mergeGraph.owningModel().createInstance("Edge");
-	            e.type = mergeGraph.owningModel().getEnumerationValue("EdgeType", "output");
-	            //e.type = ddg!EdgeType#output;
+	            //e.type = mergeGraph.owningModel().getEnumerationValue("EdgeType", "output");
+	            e.type = ddg!EdgeType#output;
 	            e.source = mappingNode;
 	            e.target = mergeMap.get(t);
 	            mergeGraph.element.add(e);
@@ -153,7 +151,7 @@ operation ddg!Graph mergedMappingDataDependencies(mergeGraph : ddg!Graph, contai
  * Reduced [merged] data dependencies of mappings. The reduced dependencies
  * takes the same considerations as the merged data dependencies and
  * additionaly analyses the maping predicates to identfy variables that can be
- * derived from non containment associations. 
+ * derived from associations. 
  *
  * @see mergedMappingDataDependencies
  * @context ddg!Graph  The data dependencies graph being merged
@@ -164,62 +162,28 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
     // Import the tree nodes to the merged graph
     var mergeMap : Map;  // //!< Cache nodes for nodes (AST, graph!Node)(x, Node)
     for(key in containmentTrees.keySet()) {
-        mergeGraph.importContainmentTree(containmentTrees.get(key), key, mergeMap);
+        reduceGraph.importContainmentTree(containmentTrees.get(key), key, mergeMap);
     }
     for (m in self.element.select(n | n.type == ddg!NodeType#mapping).sortBy(n | n.incoming.size())) {
         var outputVarNodes = m.outgoing.collect(e | e.target).flatten();
         var inputVarNodes = m.incoming.collect(e | e.source).flatten();
-        
-        // For each variable, find the corresponding type in the domain containment tree
-        // and make the connection. For input variables, if the type is abstrac (does 
-        //  not exist in the tree), connect it to all its subtypes.
-        var mappingNode = mergeGraph.getNodeCopy(m, mergeMap);
+        m.label.println("Mapping ");
+        // For each input node, get the set of variables that can be derived from it.
+        var derivedVars = new Map;
+        var derived = new Set;
         for (vN in inputVarNodes) {
-            var sources : Collection;
-            for(key in containmentTrees.keySet()) {
-                sources = containmentTrees.get(key).select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label)); 
-                if (not sources.isEmpty()) {
-                    break;
-                }
-            }
-            if (sources.isEmpty()) {
-                vN.errln("Not valid type found for: "); // Error. WE should never get here!
-            }
-            for (s in sources) {
-                var e = mergeGraph.owningModel().createInstance("Edge");
-                // If there is another edge to the input, is a double input
-                if (mergeGraph.element.exists(e | e.hasProperty("source") and e.source == mergeMap.get(s) and e.target == mappingNode)) {
-                    e.type = self.owningModel().getEnumerationValue("EdgeType", "doublePrimaryInput");
-                    //e.type = ddg!EdgeType#doublePrimaryInput;
-                } else {
-                    e.type = self.owningModel().getEnumerationValue("EdgeType", "primaryInput");
-                    //e.type = ddg!EdgeType#primaryInput;
-                }
-                e.source = mergeMap.get(s);
-                e.target = mappingNode;
-                mergeGraph.element.add(e);
-            }
-        }
-        for (vN in outputVarNodes) {
-            var targets : Collection;
-            for(key in containmentTrees.keySet()) {
-                targets = containmentTrees.get(key).select(n | (n.EClassifierName == vN.label)); 
-                if (not targets.isEmpty()) {
-                    break;
-                }
-            }
-            if (targets.isEmpty()) {
-                vN.errln("Not valid type found for: ");    // Error. WE should never get here!
-            }
-            for (t in targets) {
-                var e = mergeGraph.owningModel().createInstance("Edge");
-                e.type = self.owningModel().getEnumerationValue("EdgeType", "output");
-                //e.type = ddg!EdgeType#output;
-                e.source = mappingNode;
-                e.target = mergeMap.get(t);
-                mergeGraph.element.add(e);
-            }
+            vN.println("vN ");
+            derived.clear();
+            // For each input var start the search only by its outgoing edges
+            // that don't have a mapping target
+            for (e in vN.outgoing.select(e | e.type <> ddg!EdgeType#primaryInput)) {
+                e.target.~visited = true;       // mark to avoid loops
+		        derived.addAll(e.dfsDerivedVariables());
+		        e.target.~visited = false;      // mark to avoid loops
+		        derived.add(e.target);
+		    }
+            derivedVars.put(vN, derived);
+            derivedVars.get(vN).println("set ");
         }
     }
 }
-
