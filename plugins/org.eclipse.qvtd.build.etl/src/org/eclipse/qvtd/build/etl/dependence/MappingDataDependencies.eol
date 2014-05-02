@@ -185,26 +185,38 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
         m.label.println("Mapping ");
         // For each input node, get the set of variables that can be derived from it.
         var derivedVars = new Map;
-        var derived = new Set;
         for (vN in inputVarNodes) {
-            derived.clear();
+            var derived = new Set;
 		    derived.addAll(vN.outgoing.select(e | inputVarNodes.includes(e.target)).collect(e | e.target));
 		    for (ie in vN.incoming) {
-                if (ie.referredProperty.getOpposite().isDefined()) {
-                    ie.referredProperty.getOpposite().println();
-                    ie.referredProperty.getOpposite().getType().println();
-                    ie.referredProperty.getOpposite().isMany().println("isMany ");
-                    ie.referredProperty.getOpposite().type().println();
-                    ie.referredProperty.getOpposite().getType().isKindOf(QVT!CollectionType).println("Opposte is collection ");
-                    if (not ie.referredProperty.getOpposite().isMany()) {
+                if (ie.referredProperty.getOpposite().isDefined() and not ie.referredProperty.getOpposite().isMany()) {
                         derived.add(ie.source);
+                }
+            }
+            derivedVars.put(vN, derived);
+        }
+        // No find the variable that provides the most derived variables = the union of 
+        // its derived variables and the ones that can be derived from them.
+        var derivedVarsUnion = new Map;
+        for (key in derivedVars.keySet()) {
+            var derivedUnion = new Set;
+            derivedUnion.addAll(derivedVars.get(key));
+            for (d in derivedVars.get(key)) {
+                for (du in derivedVars.get(d)) {
+                    if (du <> key) {
+                        derivedUnion.add(du);
                     }
                 }
-		    }
-            derivedVars.put(vN, derived);
-            derived.println(vN.label + " derivedVars: ");
+            }
+            derivedVarsUnion.put(key, derivedUnion);
         }
-        
+        // From the one with the most, find which are missing and create the appropriate
+        // edges between the vars and the mapping
+        for (key in derivedVars.keySet().sortBy(k | derivedVars.get(k).size()).invert()) {
+            var missing = inputVarNodes.excludingAll(derivedVars.get(key)).excluding(key);
+            key.println("key ");
+            missing.println("missing ");
+        }
     }
 }
 
