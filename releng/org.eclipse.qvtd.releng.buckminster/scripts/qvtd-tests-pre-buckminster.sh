@@ -15,7 +15,7 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 
 	echo
 	echo "# Define the Build ID (added by Hudson job definition)"
-	echo "build.id=${BUILD_TYPE}${COMPACT_BUILD_ID}"
+	echo "build.id=${COMPACT_BUILD_ID}"
 
 	echo
 	echo "# Define the timestamp to use for changed components (added by Hudson job definition)"

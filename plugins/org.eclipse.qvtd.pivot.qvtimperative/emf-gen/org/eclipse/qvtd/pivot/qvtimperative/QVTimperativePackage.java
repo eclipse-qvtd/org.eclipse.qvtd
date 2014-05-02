@@ -101,6 +101,15 @@ public interface QVTimperativePackage extends EPackage {
 	int IMPERATIVE_MODEL__EXTENSION = QVTbasePackage.BASE_MODEL__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_MODEL__OWNED_ANNOTATION = QVTbasePackage.BASE_MODEL__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -126,15 +135,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_MODEL__NAME = QVTbasePackage.BASE_MODEL__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_MODEL__OWNED_ANNOTATION = QVTbasePackage.BASE_MODEL__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
@@ -210,6 +210,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING__EXTENSION = QVTcoreBasePackage.ABSTRACT_MAPPING__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING__OWNED_ANNOTATION = QVTcoreBasePackage.ABSTRACT_MAPPING__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -235,15 +244,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING__NAME = QVTcoreBasePackage.ABSTRACT_MAPPING__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING__OWNED_ANNOTATION = QVTcoreBasePackage.ABSTRACT_MAPPING__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Domain</b></em>' containment reference list.
@@ -337,6 +337,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL__EXTENSION = PivotPackage.OCL_EXPRESSION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__OWNED_ANNOTATION = PivotPackage.OCL_EXPRESSION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -362,15 +371,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_CALL__NAME = PivotPackage.OCL_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL__OWNED_ANNOTATION = PivotPackage.OCL_EXPRESSION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -446,6 +446,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL_BINDING__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -517,6 +526,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MIDDLE_PROPERTY_ASSIGNMENT__EXTENSION = QVTcoreBasePackage.PROPERTY_ASSIGNMENT__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIDDLE_PROPERTY_ASSIGNMENT__OWNED_ANNOTATION = QVTcoreBasePackage.PROPERTY_ASSIGNMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -610,6 +628,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MIDDLE_PROPERTY_CALL_EXP__EXTENSION = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIDDLE_PROPERTY_CALL_EXP__OWNED_ANNOTATION = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -635,15 +662,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MIDDLE_PROPERTY_CALL_EXP__NAME = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MIDDLE_PROPERTY_CALL_EXP__OWNED_ANNOTATION = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -753,6 +771,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_PREDICATE__EXTENSION = QVTbasePackage.PREDICATE__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_PREDICATE__OWNED_ANNOTATION = QVTbasePackage.PREDICATE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.

@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
+import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
@@ -114,6 +115,13 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	public @Nullable Monitor getMonitor() {
+		return delegate.getMonitor();
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
 	public @NonNull DomainStandardLibrary getStandardLibrary() {
 		return delegate.getStandardLibrary();
 	}
@@ -159,8 +167,15 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-	public void setLogger(@Nullable DomainLogger loger) {
-		delegate.setLogger(loger);
+	public void setLogger(@Nullable DomainLogger logger) {
+		delegate.setLogger(logger);
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
+	public void setMonitor(@Nullable Monitor monitor) {
+		delegate.setMonitor(monitor);
 	}
 	
 	@Override

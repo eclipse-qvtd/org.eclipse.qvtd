@@ -14,7 +14,7 @@
       <package
             uri="http://www.eclipse.org/qvt/0.9/QVTcoreCST"
             class="org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.QVTcoreCSPackage"
-            genModel="model/QVTcoreCST.genmodel"/>
+            genModel="model/QVTcoreCS.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">

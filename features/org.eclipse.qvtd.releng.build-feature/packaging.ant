@@ -26,8 +26,27 @@
 		</condition>
 	</target>
 	
+	<target name="-define.category.qualifier">
+		<property name="incubation.qualifier" value="" />
+
+		<!-- if the build.alias is non-empty then use it in preference -->
+		<condition property="category.qualifier" value="${incubation.qualifier}-${build.alias}">
+			<and>
+				<isset property="build.alias" />
+				<length string="${build.alias}" when="greater" length="0" />
+			</and>
+		</condition>
+		<!-- otherwise use the build.id if defined, if not then fall back to an empty string -->
+		<condition property="category.qualifier" value="${incubation.qualifier}-${build.id}" else="${incubation.qualifier}">
+			<and>
+				<isset property="build.id" />
+				<length string="${build.id}" when="greater" length="0" />
+			</and>
+		</condition>
+	</target>
+	
 	<!-- Modify category xml (replace package qualifier) -->
-	<target name="-create.category.xml" depends="-define.package.qualifier">
+	<target name="-create.category.xml" depends="-define.category.qualifier">
 		<loadfile property="modifiedCategoryXml" srcFile="category.xml.template">
 			<filterchain>
 				<expandproperties />

@@ -1,6 +1,13 @@
 package org.eclipse.qvt.tools;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,21 +21,29 @@ import java.util.Set;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.BasicExtendedMetaData;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.XMLHelper;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.XMLSave;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Classifier;
@@ -42,8 +57,10 @@ import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Type;
+import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.ValueSpecification;
+import org.eclipse.uml2.uml.internal.resource.UMLSaveImpl;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 import org.eclipse.uml2.uml.util.UMLSwitch;
 import org.eclipse.uml2.uml.util.UMLUtil;
@@ -53,12 +70,88 @@ import org.eclipse.uml2.uml.util.UMLUtil;
  * @author Ed.Willink
  *
  */
+@SuppressWarnings("restriction")
 public class Ecore2UML {
 	
 	public static class MyConverter extends UMLUtil.Ecore2UMLConverter {
 		
 		public Element get(EObject eObject) {
 			return eModelElementToElementMap.get(eObject);
+		}
+
+		@Override	// Overridden to give Package not Model at root
+		public Object caseEPackage(EPackage ePackage) {
+			org.eclipse.uml2.uml.Package package_ = UMLFactory.eINSTANCE.createPackage();
+			eModelElementToElementMap.put(ePackage, package_);
+
+			if (!ePackages.contains(ePackage)) {
+				EPackage eSuperPackage = ePackage.getESuperPackage();
+
+				if (eSuperPackage != null) {
+					((org.eclipse.uml2.uml.Package) doSwitch(eSuperPackage))
+						.getNestedPackages().add(package_);
+				}
+			}
+
+			package_.setName(ePackage.getName());
+			package_.setURI(ePackage.getNsURI());
+
+			defaultCase(ePackage);
+
+			return package_;
+		}
+	}
+	
+	public static class MyXMIResourceFactoryImpl extends XMIResourceFactoryImpl
+	{
+		@Override
+		public Resource createResource(URI uri) {
+		    return new MyXMIResourceImpl(uri);
+		}
+		
+	}
+
+	public static class MyXMIResourceImpl extends XMIResourceImpl
+	{
+		public MyXMIResourceImpl(URI uri) {
+			super(uri);
+		}
+
+		@Override
+		protected XMLSave createXMLSave() {
+		    return new MyXMISaveImpl(createXMLHelper());
+		}
+
+		@Override
+		protected XMLSave createXMLSave(Map<?, ?> options) {
+		    if (options != null && Boolean.TRUE.equals(options.get(OPTION_SUPPRESS_XMI)))
+		    {
+		      return new MyXMISaveImpl(new XMLHelperImpl(this));
+		    }
+		    else
+		    {
+		      return super.createXMLSave(options);
+		    }
+		}
+	}
+	
+	public static class MyXMISaveImpl extends UMLSaveImpl
+	{
+		public MyXMISaveImpl(XMLHelper helper) {
+			super(helper);
+		}
+
+		@Override	// Overridden to give xmi:type for root objects
+		protected void saveElementID(EObject o) {
+			if (o.eContainer() == null) {
+				EClass eClass = o.eClass();
+				if (eClass instanceof EDataType) {
+					saveTypeAttribute((EDataType) eClass);
+				} else {
+					saveTypeAttribute(eClass);
+				}
+			}
+			super.saveElementID(o);
 		}
 	}
 
@@ -101,16 +194,23 @@ public class Ecore2UML {
 		convertOptions.put(UMLUtil.Ecore2UMLConverter.OPTION__XMI_IDENTIFIERS, UMLUtil.OPTION__IGNORE);
 		convertOptions.put(UMLUtil.Ecore2UMLConverter.OPTION__OPPOSITE_ROLE_NAMES, UMLUtil.OPTION__PROCESS);
 		ecore2umlConverter.convert(allEcoreObjects, convertOptions, null, null);
+		Map<Element,String> nsPrefixes = new HashMap<Element,String>();
 		ResourceSet umlResourceSet = new ResourceSetImpl();
 		UMLResourcesUtil.init(umlResourceSet);
-		for (Resource ecoreResource : new ArrayList<Resource>(ecoreResourceSet.getResources())) {	// Ignore any profiles that aappear
+		for (Resource ecoreResource : new ArrayList<Resource>(ecoreResourceSet.getResources())) {	// Ignore any profiles that appear
 			URI ecoreURI = ecoreResource.getURI();
-			URI umlURI = ecoreURI.trimFileExtension().appendFileExtension("uml");
+			URI umlURI = URI.createPlatformResourceURI("/org.eclipse.qvt/model/uml/" + ecoreURI.trimFileExtension().lastSegment() + ".uml", true);
 			Resource umlResource = umlResourceSet.createResource(umlURI);
 			for (EObject eObject : ecoreResource.getContents()) {
 				Element umlElement = ecore2umlConverter.get(eObject);
 				if (umlElement != null) {
 					umlResource.getContents().add(umlElement);
+				}
+				if (eObject instanceof EPackage) {
+					String nsPrefix = ((EPackage)eObject).getNsPrefix();
+					if (nsPrefix != null) {
+						nsPrefixes.put(umlElement, nsPrefix);
+					}
 				}
 			}
 		}
@@ -126,24 +226,55 @@ public class Ecore2UML {
 		Map<String, Object> saveOptions = new HashMap<String, Object>();
 		saveOptions.put(XMLResource.OPTION_LINE_WIDTH, 132);
 		saveOptions.put(XMLResource.OPTION_LINE_DELIMITER, "\n");
+		saveOptions.put(XMIResource.OPTION_USE_XMI_TYPE, Boolean.TRUE);
 		for (Resource umlResource : umlResourceSet.getResources()) {
 			umlResource.save(saveOptions);
 		}
+		EPackage mofPackage = EcoreFactory.eINSTANCE.createEPackage();
+		mofPackage.setName("mof");
+		mofPackage.setNsURI("http://www.omg.org/spec/MOF/20131001");
+		mofPackage.setNsPrefix("mofext");
+		EClass mofTag = EcoreFactory.eINSTANCE.createEClass();
+		mofTag.setName("Tag");
+		mofPackage.getEClassifiers().add(mofTag);
+		EAttribute tagName = EcoreFactory.eINSTANCE.createEAttribute();
+		tagName.setName("name");
+		tagName.setEType(EcorePackage.Literals.ESTRING);
+		mofTag.getEStructuralFeatures().add(tagName);
+		EAttribute tagValue = EcoreFactory.eINSTANCE.createEAttribute();
+		tagValue.setName("value");
+		tagValue.setEType(EcorePackage.Literals.ESTRING);
+		mofTag.getEStructuralFeatures().add(tagValue);
+		EReference tagElement = EcoreFactory.eINSTANCE.createEReference();
+		tagElement.setName("element");
+		tagElement.setEType(EcorePackage.Literals.EOBJECT);
+		mofTag.getEStructuralFeatures().add(tagElement);
 		//
 		//	Resave *.uml as *.xmi
 		//
 		ResourceSet xmiResourceSet = new ResourceSetImpl();
-		xmiResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+		xmiResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new MyXMIResourceFactoryImpl());
 		for (Resource umlResource : umlResourceSet.getResources()) {
-			URI xmiURI = umlResource.getURI().trimFileExtension().appendFileExtension("xmi");
+			URI xmiURI = URI.createPlatformResourceURI("/org.eclipse.qvt/model/xmi/" + umlResource.getURI().trimFileExtension().lastSegment() + ".xmi", true);
 			XMIResource xmiResource = (XMIResource) xmiResourceSet.createResource(xmiURI);
-		    xmiResource.setXMIVersion("20110701");
+		    xmiResource.setXMIVersion("20131001");
 			xmiResource.getContents().addAll(umlResource.getContents());
+			for (EObject eObject : new ArrayList<EObject>(xmiResource.getContents())) {
+				String nsPrefix = nsPrefixes.get(eObject);
+				if (nsPrefix != null) {
+					EObject tag = new DynamicEObjectImpl(mofTag);
+					tag.eSet(tagName, "org.omg.xmi.nsPrefix");
+					tag.eSet(tagValue, nsPrefix);
+					tag.eSet(tagElement, eObject);
+					xmiResource.getContents().add(tag);
+				}
+			}
 		}
 		for (Resource xmiResource : xmiResourceSet.getResources()) {
 			assignIDs(xmiResource);
 		}
 		Map<String, Object> xmiSaveOptions = new HashMap<String, Object>();
+		xmiSaveOptions.put(XMIResource.OPTION_USE_XMI_TYPE, Boolean.TRUE);
 		xmiSaveOptions.put(XMLResource.OPTION_LINE_WIDTH, 132);
 		xmiSaveOptions.put(XMLResource.OPTION_LINE_DELIMITER, "\n");
 		xmiSaveOptions.put(XMLResource.OPTION_EXTENDED_META_DATA, new BasicExtendedMetaData(xmiResourceSet.getPackageRegistry())
@@ -159,7 +290,19 @@ public class Ecore2UML {
 			}
 		});
 		for (Resource xmiResource : xmiResourceSet.getResources()) {
-			xmiResource.save(xmiSaveOptions);
+			// SAve intercepted to strip spurious post XMI 2.4 xmi:version
+			ByteArrayOutputStream s = new ByteArrayOutputStream();
+			xmiResource.save(s, xmiSaveOptions);
+			OutputStream os = xmiResourceSet.getURIConverter().createOutputStream(xmiResource.getURI());
+			Writer ow = new OutputStreamWriter(os);
+			ByteArrayInputStream is = new ByteArrayInputStream(s.toByteArray());
+			BufferedReader ir = new BufferedReader(new InputStreamReader(is));
+			for (String inLine = ir.readLine(); inLine != null; inLine = ir.readLine()) {
+				String outline = inLine.replace(" xmi:version=\"20131001\" ", " ");
+				ow.append(outline + "\n");
+			}
+			ow.close();
+			os.close();
 		}
 		//
 		//	Create QVT.ecore
@@ -194,7 +337,7 @@ public class Ecore2UML {
 		EPackage flatEPackage = EcoreFactory.eINSTANCE.createEPackage();
 		flatEPackage.setName("FlatQVT");
 		flatEPackage.setNsPrefix("qvt");
-		flatEPackage.setNsURI("http://schema.omg.org/spec/QVT/20140401/FlatQVT");
+		flatEPackage.setNsURI("http://www.omg.org/spec/QVT/20140401/FlatQVT");
 		flatEPackage.getEClassifiers().addAll(flattenedObjects);
 		flatResource.getContents().add(flatEPackage);
 		flatResource.save(saveOptions);
@@ -343,6 +486,9 @@ public class Ecore2UML {
 
 			@Override
 			public String defaultCase(EObject object) {
+				if (object instanceof DynamicEObjectImpl) {
+					return "";
+				}
 				return safeNameOf(object);
 			}
 			

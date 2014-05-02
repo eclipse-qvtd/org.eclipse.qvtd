@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="QVTCore" name="QVTCore" URI="http://schema.omg.org/spec/QVT/20140401/QVTCore">
+<uml:Package xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML"
+    xmi:id="QVTCore" name="QVTCore" URI="http://www.omg.org/spec/QVT/20140401/QVTCore">
   <packagedElement xmi:type="uml:Enumeration" xmi:id="EnforcementMode" name="EnforcementMode">
     <ownedLiteral xmi:id="Creation" name="Creation"/>
     <ownedLiteral xmi:id="Deletion" name="Deletion"/>
@@ -163,4 +164,4 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedEnd>
   </packagedElement>
-</uml:Model>
+</uml:Package>

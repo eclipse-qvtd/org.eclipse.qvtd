@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="QVTBase" name="QVTBase" URI="http://schema.omg.org/spec/QVT/20140401/QVTBase">
+<uml:Package xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML"
+    xmi:id="QVTBase" name="QVTBase" URI="http://www.omg.org/spec/QVT/20140401/QVTBase">
   <packagedElement xmi:type="uml:Class" xmi:id="Domain" name="Domain" isAbstract="true">
     <generalization xmi:id="G_Domain_NamedElement">
       <general xmi:type="uml:Class" href="EMOF.uml#NamedElement"/>
@@ -173,4 +174,4 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedEnd>
   </packagedElement>
-</uml:Model>
+</uml:Package>

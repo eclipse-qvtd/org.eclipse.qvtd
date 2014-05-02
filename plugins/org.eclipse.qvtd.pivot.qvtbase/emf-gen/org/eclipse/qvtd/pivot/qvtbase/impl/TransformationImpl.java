@@ -41,6 +41,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
+import org.eclipse.ocl.examples.pivot.ProfileApplication;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -64,6 +65,7 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getNsURI <em>Ns URI</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getOwnedType <em>Owned Type</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getProfileApplication <em>Profile Application</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getOwnedTag <em>Owned Tag</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getModelParameter <em>Model Parameter</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getRule <em>Rule</em>}</li>
@@ -144,6 +146,16 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @ordered
 	 */
 	protected EList<Type> ownedType;
+
+	/**
+	 * The cached value of the '{@link #getProfileApplication() <em>Profile Application</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProfileApplication()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ProfileApplication> profileApplication;
 
 	/**
 	 * The cached value of the '{@link #getOwnedTag() <em>Owned Tag</em>}' containment reference list.
@@ -332,6 +344,19 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @generated
 	 */
 	@SuppressWarnings("null")
+	public @NonNull List<ProfileApplication> getProfileApplication() {
+		if (profileApplication == null) {
+			profileApplication = new EObjectContainmentWithInverseEList<ProfileApplication>(ProfileApplication.class, this, QVTbasePackage.TRANSFORMATION__PROFILE_APPLICATION, PivotPackage.PROFILE_APPLICATION__APPLYING_PACKAGE);
+		}
+		return profileApplication;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("null")
 	public @NonNull EList<Annotation> getOwnedTag() {
 		if (ownedTag == null) {
 			ownedTag = new EObjectContainmentEList<Annotation>(Annotation.class, this, QVTbasePackage.TRANSFORMATION__OWNED_TAG);
@@ -431,6 +456,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return basicSetNestingPackage((org.eclipse.ocl.examples.pivot.Package)otherEnd, msgs);
 			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedType()).basicAdd(otherEnd, msgs);
+			case QVTbasePackage.TRANSFORMATION__PROFILE_APPLICATION:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getProfileApplication()).basicAdd(otherEnd, msgs);
 			case QVTbasePackage.TRANSFORMATION__MODEL_PARAMETER:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getModelParameter()).basicAdd(otherEnd, msgs);
 			case QVTbasePackage.TRANSFORMATION__RULE:
@@ -453,6 +480,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return basicSetNestingPackage(null, msgs);
 			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
 				return ((InternalEList<?>)getOwnedType()).basicRemove(otherEnd, msgs);
+			case QVTbasePackage.TRANSFORMATION__PROFILE_APPLICATION:
+				return ((InternalEList<?>)getProfileApplication()).basicRemove(otherEnd, msgs);
 			case QVTbasePackage.TRANSFORMATION__OWNED_TAG:
 				return ((InternalEList<?>)getOwnedTag()).basicRemove(otherEnd, msgs);
 			case QVTbasePackage.TRANSFORMATION__MODEL_PARAMETER:
@@ -497,6 +526,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return getNsURI();
 			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
 				return getOwnedType();
+			case QVTbasePackage.TRANSFORMATION__PROFILE_APPLICATION:
+				return getProfileApplication();
 			case QVTbasePackage.TRANSFORMATION__OWNED_TAG:
 				return getOwnedTag();
 			case QVTbasePackage.TRANSFORMATION__MODEL_PARAMETER:
@@ -539,6 +570,10 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
 				getOwnedType().clear();
 				getOwnedType().addAll((Collection<? extends Type>)newValue);
+				return;
+			case QVTbasePackage.TRANSFORMATION__PROFILE_APPLICATION:
+				getProfileApplication().clear();
+				getProfileApplication().addAll((Collection<? extends ProfileApplication>)newValue);
 				return;
 			case QVTbasePackage.TRANSFORMATION__OWNED_TAG:
 				getOwnedTag().clear();
@@ -585,6 +620,9 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
 				getOwnedType().clear();
 				return;
+			case QVTbasePackage.TRANSFORMATION__PROFILE_APPLICATION:
+				getProfileApplication().clear();
+				return;
 			case QVTbasePackage.TRANSFORMATION__OWNED_TAG:
 				getOwnedTag().clear();
 				return;
@@ -621,6 +659,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return NS_URI_EDEFAULT == null ? nsURI != null : !NS_URI_EDEFAULT.equals(nsURI);
 			case QVTbasePackage.TRANSFORMATION__OWNED_TYPE:
 				return ownedType != null && !ownedType.isEmpty();
+			case QVTbasePackage.TRANSFORMATION__PROFILE_APPLICATION:
+				return profileApplication != null && !profileApplication.isEmpty();
 			case QVTbasePackage.TRANSFORMATION__OWNED_TAG:
 				return ownedTag != null && !ownedTag.isEmpty();
 			case QVTbasePackage.TRANSFORMATION__MODEL_PARAMETER:
@@ -648,6 +688,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				case QVTbasePackage.TRANSFORMATION__NS_PREFIX: return PivotPackage.PACKAGE__NS_PREFIX;
 				case QVTbasePackage.TRANSFORMATION__NS_URI: return PivotPackage.PACKAGE__NS_URI;
 				case QVTbasePackage.TRANSFORMATION__OWNED_TYPE: return PivotPackage.PACKAGE__OWNED_TYPE;
+				case QVTbasePackage.TRANSFORMATION__PROFILE_APPLICATION: return PivotPackage.PACKAGE__PROFILE_APPLICATION;
 				default: return -1;
 			}
 		}
@@ -669,6 +710,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				case PivotPackage.PACKAGE__NS_PREFIX: return QVTbasePackage.TRANSFORMATION__NS_PREFIX;
 				case PivotPackage.PACKAGE__NS_URI: return QVTbasePackage.TRANSFORMATION__NS_URI;
 				case PivotPackage.PACKAGE__OWNED_TYPE: return QVTbasePackage.TRANSFORMATION__OWNED_TYPE;
+				case PivotPackage.PACKAGE__PROFILE_APPLICATION: return QVTbasePackage.TRANSFORMATION__PROFILE_APPLICATION;
 				default: return -1;
 			}
 		}
