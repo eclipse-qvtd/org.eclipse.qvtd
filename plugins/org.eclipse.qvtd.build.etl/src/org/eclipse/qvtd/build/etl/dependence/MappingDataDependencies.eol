@@ -147,16 +147,32 @@ operation ddg!Graph mergedMappingDataDependencies(mergeGraph : ddg!Graph, contai
 	}
 }
 
-/**
- * Reduced [merged] data dependencies of mappings. The reduced dependencies
- * takes the same considerations as the merged data dependencies and
- * additionaly analyses the maping predicates to identfy variables that can be
- * derived from associations. 
+/****o* org.eclipse.qvtd.build.etl/dependence/MappingDataDependencies/reducedMergedMappingDataDependencies
+ * NAME
+ *  reducedMergedMappingDataDependencies - Do a reduction of data dependencies
+ *  to identify derivable variables . 
+ * SYNOPSIS
+ *   
+ * FUNCTION
+ *  Reduced [merged] data dependencies of mappings. The reduced dependencies   
+ *  takes the same considerations as the merged data dependencies and 
+ *  additionally analyses the maping predicates to identfy variables that can 
+ *  be derived from other variables.
  *
- * @see mergedMappingDataDependencies
- * @context ddg!Graph  The data dependencies graph being merged
- * @param mergeGraph The graph (merged) to populate
- * @param containmentTrees   The map of domains (metamodels) and their containment trees
+ *  All outgoing edges in the data dependence graph are navigable, hence all
+ *  targets of such edges are derivable. For incoming edges, it is necesary to
+ *  analyze the relation represented by the edge and identify navigable
+ *  opposites (upper bound = 1).
+ * CONTEXT
+ *  ddg!Graph   The data dependence graph   
+ * PARAMETERS
+ *  reduceGraph The graph to populate
+ *  containmentTrees The containment trees of the candidate and middle meta-
+ *  models
+ * RESULT
+ *  A graph representing the reduced dependencies
+ * SEE ALSO
+ *
  */
 operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph, containmentTrees : Map) {
     // Import the tree nodes to the merged graph
@@ -165,25 +181,41 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
         reduceGraph.importContainmentTree(containmentTrees.get(key), key, mergeMap);
     }
     for (m in self.element.select(n | n.type == ddg!NodeType#mapping).sortBy(n | n.incoming.size())) {
-        var outputVarNodes = m.outgoing.collect(e | e.target).flatten();
         var inputVarNodes = m.incoming.collect(e | e.source).flatten();
         m.label.println("Mapping ");
         // For each input node, get the set of variables that can be derived from it.
         var derivedVars = new Map;
         var derived = new Set;
         for (vN in inputVarNodes) {
-            vN.println("vN ");
             derived.clear();
-            // For each input var start the search only by its outgoing edges
-            // that don't have a mapping target
-            for (e in vN.outgoing.select(e | e.type <> ddg!EdgeType#primaryInput)) {
-                e.target.~visited = true;       // mark to avoid loops
-		        derived.addAll(e.dfsDerivedVariables());
-		        e.target.~visited = false;      // mark to avoid loops
-		        derived.add(e.target);
+		    derived.addAll(vN.outgoing.select(e | inputVarNodes.includes(e.target)).collect(e | e.target));
+		    for (ie in vN.incoming) {
+                if (ie.referredProperty.getOpposite().isDefined()) {
+                    ie.referredProperty.getOpposite().println();
+                    ie.referredProperty.getOpposite().getType().println();
+                    ie.referredProperty.getOpposite().isMany().println("isMany ");
+                    ie.referredProperty.getOpposite().type().println();
+                    ie.referredProperty.getOpposite().getType().isKindOf(QVT!CollectionType).println("Opposte is collection ");
+                    if (not ie.referredProperty.getOpposite().isMany()) {
+                        derived.add(ie.source);
+                    }
+                }
 		    }
             derivedVars.put(vN, derived);
-            derivedVars.get(vN).println("set ");
+            derived.println(vN.label + " derivedVars: ");
         }
+        
     }
 }
+
+/*
+public boolean isMany() {
+        Type type = getType();
+        if (type instanceof CollectionType) {
+            CollectionType collectionType = (CollectionType)type;
+            IntegerValue upperValue = collectionType.getUpperValue();
+            return !(upperValue instanceof UnlimitedValue) && (upperValue.intValue() > 1);
+        }
+        return false;
+    }
+*/

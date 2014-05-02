@@ -236,7 +236,7 @@ operation QVT!Variable hasRelation(varB : QVT!Variable) : Any {
 
 /****o* org.eclipse.qvtd.build.etl/helpers/DataDependenceGraphHelpers/dfsDerivedVariables
  * NAME
- *  dfsDerivedVariables - Do a dfs vor derived variables. 
+ *  dfsDerivedVariables - Do a depth first search for derived variables. 
  * SYNOPSIS
  *   
  * FUNCTION
@@ -246,50 +246,20 @@ operation QVT!Variable hasRelation(varB : QVT!Variable) : Any {
  * CONTEXT
  *  ddg!Node   
  * PARAMETERS
- *  
+ *  varPool The set of variables we are looking for
  * RESULT
  *  A set of all the derived variables 
  * SEE ALSO
  *
  */
-@cached
-operation ddg!Edge dfsDerivedVariables() : Set {
-    self.target.println("DFS ");
+operation ddg!Node dfsDerivedVariables(varPool : Collection) : Set {
+    self.println("DFS ");
+    self.~visited = true;       // mark to avoid loops
     var derived = new Set;
     
-    // Target's Outgoing
-    self.target.outgoing.select(e | e.type <> ddg!EdgeType#primaryInput).println("Outgoing ");
-    for (e in self.target.outgoing.select(e | e.type <> ddg!EdgeType#primaryInput)) {
-        derived.addAll(e.dfsDerivedVariables());
-        derived.add(e.target);
-    }
-    
-    // Target's Incoming 
-    self.target.incoming.excluding(self).println("Incoming ");
-    for (e in self.target.incoming.excluding(self)) {
-        // Is the relation navigable in the opposite direction?
-        // If the relation is 1..1 and non-containment, it is navigable (regardles of opposite multiplicity)
-        
-        // If the realtion is 0..1, the opposite must be 1..1 to be navigable
-        
-        
-        derived.addAll(e.dfsDerivedVariables());
-        derived.add(e.target);
-    }
-    
-    /*
-    for (e in self.incoming.select(e | e.type <> ddg!EdgeType#primaryInput)) {
-        e.referredProperty.hasNavigableOpposite().println(e + " ");
-    }
-    // Search outgoing relations
-    for (n in self.outgoing.collect(e | e.target).flatten()
-            .select(t | t.type <> ddg!NodeType#mapping)
-            .select(t | not t.incoming.exists(e | e.source.type == ddg!NodeType#mapping))
-            .excluding(self)) {
-        n.println("assoc ");
-        derived.addAll(n.dfsDerivedVariables());
-        derived.add(n);
-    }
-    */
+    // Find all the edges that connect to variables in the pool, in the 
+    // data dependence graph, all outgoing edges are navigable
+    derived.addAll(self.outgoing.select(e | varPool.includes(e.target)).collect(e | e.target));
+    self.~visited = false;      // So it can be visited by other searches
     return derived;
 }
