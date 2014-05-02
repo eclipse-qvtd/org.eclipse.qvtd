@@ -212,10 +212,36 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
         }
         // From the one with the most, find which are missing and create the appropriate
         // edges between the vars and the mapping
+        var mappingNode = reduceGraph.getNodeCopy(m, mergeMap);
         for (key in derivedVars.keySet().sortBy(k | derivedVars.get(k).size()).invert()) {
             var missing = inputVarNodes.excludingAll(derivedVars.get(key)).excluding(key);
             key.println("key ");
             missing.println("missing ");
+            var e = reduceGraph.owningModel().createInstance("Edge");
+            // If there is another edge to the input, is a double input
+            if (reduceGraph.element.exists(e : ddg!Edge| e.source == mergeMap.get(key) and e.target == mappingNode)) {
+                e.type = ddg!EdgeType#doublePrimaryInput;
+            } else {
+                e.type = ddg!EdgeType#primaryInput;
+            }
+            e.source = mergeMap.get(key);
+            e.target = mappingNode;
+            reduceGraph.element.add(e);
+            for (d in derivedVars.get(key)) {
+                var e = reduceGraph.owningModel().createInstance("Edge");
+	            // If there is another edge to the input, is a double input
+	            if (reduceGraph.element.exists(e : ddg!Edge| e.source == mergeMap.get(d) and e.target == mappingNode)) {
+	                e.type = ddg!EdgeType#doubleDerivedInput;
+	            } else {
+	                e.type = ddg!EdgeType#derivedInput;
+	            }
+	            e.source = mergeMap.get(d);
+	            e.target = mappingNode;
+	            reduceGraph.element.add(e);
+            }
+            for (mis in missing) {
+                // Add them if not already added
+            }
         }
     }
 }
